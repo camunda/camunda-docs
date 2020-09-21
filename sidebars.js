@@ -28,7 +28,28 @@ module.exports = {
             ],
           },
         ],
-        "Cloud Console": ["product-manuals/cloud-console/overview"],
+        "Cloud Console": [
+          "product-manuals/cloud-console/overview",
+          {
+            "Manage your Cloud Account": [
+              "product-manuals/cloud-console/manage-cloud-account/create-camunda-cloud-account",
+              "product-manuals/cloud-console/manage-cloud-account/administrate-account",
+            ],
+          },
+          {
+            "Manage Clusters": [
+              "product-manuals/cloud-console/manage-clusters/create-cluster",
+              "product-manuals/cloud-console/manage-clusters/manage-client-connections",
+            ],
+          },
+          {
+            "Manage your Plan": [
+              "product-manuals/cloud-console/manage-plan/available-plans",
+              "product-manuals/cloud-console/manage-plan/trial-plan",
+              "product-manuals/cloud-console/manage-plan/professional-plan",
+            ],
+          },
+        ],
         Modeler: ["product-manuals/modeler/install-the-modeler"],
         "Zeebe Engine": [
           "product-manuals/zeebe/zeebe-the-workflow-engine-for-the-cloud-age",
