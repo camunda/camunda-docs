@@ -33,4 +33,4 @@ jobs:
           git config --global user.name "$GIT_USERNAME"
           echo "machine github.com login $GIT_USERNAME password $GITHUB_TOKEN" > ~/.netrc
           # Run docusaurus-publish
-          GIT_USER=$GIT_USERNAME USE_SSH=true npm run deploy
+          GIT_USER=$GIT_USERNAME npm run deploy
