@@ -9,26 +9,26 @@ For all requests include the access token for Cloud API into the Authorization h
 
 ### GET all Clusters
 
-`GET https://console.cloud.camunda.io/customer-api/clusters/`
+`GET https://api.cloud.camunda.io/clusters/`
 Returns detailed Data on all clusters of the Organization
 
 ### Get Cluster
 
-`GET https://console.cloud.camunda.io/customer-api/clusters/${uuid}`
+`GET https://api.cloud.camunda.io/clusters/${uuid}`
 Returns detailed Data of one cluster.
 
 ### Get Cluster creation parameters
 
-`GET https://console.cloud.camunda.io/customer-api/clusters/parameters`
+`GET https://api.cloud.camunda.io/clusters/parameters`
 Returns all options available to create a cluster.
 
 ### Delete Cluster
 
-`DELETE https://console.cloud.camunda.io/customer-api/clusters/${uuid}`
+`DELETE https://api.cloud.camunda.io/clusters/${uuid}`
 
 ### Create Cluster
 
-`POST https://console.cloud.camunda.io/customer-api/clusters/`
+`POST https://api.cloud.camunda.io/clusters/`
 With following JSON payload:
 
 ```json
@@ -45,22 +45,22 @@ With following JSON payload:
 
 ### Get all Zeebe Clients
 
-`GET https://console.cloud.camunda.io/customer-api/clusters/${clusterUuid}/clients/`
+`GET https://api.cloud.camunda.io/clusters/${clusterUuid}/clients/`
 List all Zeebe Clients
 
 ### Get Zeebe Client Details
 
-`GET https://console.cloud.camunda.io/customer-api/clusters/${clusterUuid}/clients/${clientId}`
+`GET https://api.cloud.camunda.io/clusters/${clusterUuid}/clients/${clientId}`
 Returns the all data needed to connect to a cluster
 
 ### Delete Zeebe Client
 
-`DELETE https://console.cloud.camunda.io/customer-api/clusters/${clusterUuid}/clients/${clientId}`
+`DELETE https://api.cloud.camunda.io/clusters/${clusterUuid}/clients/${clientId}`
 Delete a Zeebe Client
 
 ### Create Zeebe Client
 
-`POST https://console.cloud.camunda.io/customer-api/clusters/${clusterUuid}/clients/`
+`POST https://api.cloud.camunda.io/clusters/${clusterUuid}/clients/`
 With following JSON payload:
 
 ```json
