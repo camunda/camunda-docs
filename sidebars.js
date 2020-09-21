@@ -58,7 +58,15 @@ module.exports = {
         Tasklist: ["product-manuals/tasklist/overview"],
       },
     ],
-    Reference: ["reference/overview"],
+    Reference: [
+      "reference/overview",
+      {
+        "Console API": [
+          "reference/cloud-console-api/cloud-console-api-clients",
+          "reference/cloud-console-api/cloud-console-api-reference",
+        ],
+      },
+    ],
     Samples: ["samples/overview"],
   },
 };
