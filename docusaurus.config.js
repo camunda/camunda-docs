@@ -39,6 +39,12 @@ module.exports = {
           label: "Samples",
           position: "left",
         },
+        {
+          to: "contact",
+          activeBasePath: "contact",
+          label: "Contact",
+          position: "right",
+        },
         { href: "https://camunda.com/blog/", label: "Blog", position: "left" },
         {
           href: "https://camunda.io",
