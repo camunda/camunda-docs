@@ -56,3 +56,26 @@ Github Page available under [https://camunda-cloud.github.io/camunda-cloud-docum
 
 - Static images can be placed into [`static/img/`](./static/img/).
 - Images that will change with a new version have to be placed into `docs`. Best practice: add an `img` directory to each directory where it is needed.
+
+### Code Blocks / Selector
+
+Docusaurus supports [MDX](https://mdxjs.com/) that makes it easily possible to use code selectors for our docs. Two things need to be done:
+
+Import the needed libraries to the markdown file:
+
+```js
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+```
+
+Define code blocks:
+
+```html
+<Tabs defaultValue="cli" values={[ { label: 'CLI', value: 'cli', }, ] }>
+
+<TabItem value="cli">
+code
+</TabItem>
+
+</Tabs>
+```
