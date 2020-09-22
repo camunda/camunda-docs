@@ -63,7 +63,7 @@ camunda.operate:
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
+    # Url
     url: http://localhost:9200
 ```
 
@@ -109,10 +109,8 @@ camunda.operate:
   zeebeElasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # Url
+    url: http://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
