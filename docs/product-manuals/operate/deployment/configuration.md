@@ -63,7 +63,7 @@ camunda.operate:
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
+    # Url
     url: http://localhost:9200
 ```
 
@@ -98,6 +98,7 @@ Name | Description | Default value
 camunda.operate.zeebeElasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
 camunda.operate.zeebeElasticsearch.host | Hostname where Elasticsearch is running | localhost
 camunda.operate.zeebeElasticsearch.port | Port of Elasticsearch REST API | 9200
+camunda.operate.zeebeElasticsearch.url | URL of Zeebe Elasticsearch REST API | http://localhost:9200
 camunda.operate.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
 camunda.operate.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.operate.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
@@ -109,10 +110,8 @@ camunda.operate:
   zeebeElasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # Url
+    url: http://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
