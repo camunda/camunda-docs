@@ -74,7 +74,14 @@ module.exports = {
             "product-manuals/operate/userguide/operate-feedback-and-questions"
           ]
         }],
-        Tasklist: ["product-manuals/tasklist/overview"],
+        Tasklist: [{
+          "Deployment Guide": [
+            "product-manuals/tasklist/deployment/configuration",
+            "product-manuals/tasklist/deployment/authentication"
+          ],
+          "User Guide":[
+          ]
+        }]
       },
     ],
     Reference: [
