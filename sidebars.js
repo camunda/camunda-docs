@@ -27,6 +27,7 @@ module.exports = {
               "product-manuals/clients/nodejs/install-the-nodejs-client",
             ],
           },
+          "product-manuals/clients/build-your-own-client",
         ],
         "Cloud Console": [
           "product-manuals/cloud-console/overview",
@@ -40,6 +41,7 @@ module.exports = {
             "Manage Clusters": [
               "product-manuals/cloud-console/manage-clusters/create-cluster",
               "product-manuals/cloud-console/manage-clusters/manage-client-connections",
+              "reference/cloud-console-api/cloud-console-api-reference",
             ],
           },
           {
