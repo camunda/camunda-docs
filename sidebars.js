@@ -32,7 +32,7 @@ module.exports = {
           "product-manuals/cloud-console/overview",
           {
             "Manage your Cloud Account": [
-              "product-manuals/cloud-console/manage-cloud-account/create-camunda-cloud-account",
+              "guides/getting-started/create-camunda-cloud-account",
               "product-manuals/cloud-console/manage-cloud-account/administrate-account",
             ],
           },
