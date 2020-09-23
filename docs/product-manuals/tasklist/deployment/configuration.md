@@ -23,10 +23,15 @@ Tasklist stores and reads data in/from Elasticsearch.
 
 ### Settings to connect
 
+Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/setting-up-authentication.html) for elasticsearch.
+Set the appropriate username/password combination in the configuration to use it.
+
 Name | Description | Default value
 -----|-------------|--------------
 zeebe.tasklist.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
 zeebe.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
+zeebe.tasklist.elasticsearch.username | Username to access Elasticsearch REST API | -
+zeebe.tasklist.elasticsearch.password | Password to access Elasticsearch REST API | -
 
 ### A snippet from application.yml:
 
@@ -71,6 +76,8 @@ zeebe.tasklist.zeebeElasticsearch.clusterName | Cluster name of Elasticsearch | 
 zeebe.tasklist.zeebeElasticsearch.host | Hostname where Elasticsearch is running | localhost
 zeebe.tasklist.zeebeElasticsearch.port | Port of Elasticsearch REST API | 9200
 zeebe.tasklist.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
+zeebe.tasklist.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
+zeebe.tasklist.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
 
 ### A snippet from application.yml:
 
