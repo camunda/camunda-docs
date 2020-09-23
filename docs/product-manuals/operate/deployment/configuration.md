@@ -26,11 +26,14 @@ Operate stores and reads data in/from Elasticsearch.
 
 ### Settings to connect
 
+Either set `host` and `port` (deprecated) or `url` (recommended):
+
 Name | Description | Default value
 -----|-------------|--------------
 camunda.operate.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
 camunda.operate.elasticsearch.host | Hostname where Elasticsearch is running | localhost
 camunda.operate.elasticsearch.port | Port of Elasticsearch REST API | 9200
+camunda.operate.elasticsearch.url | Url of Elasticsearch REST API | http://localhost:9200
 
 ### A snippet from application.yml:
 
@@ -40,9 +43,7 @@ camunda.operate:
     # Cluster name
     clusterName: elasticsearch
     # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    url: http://localhost:9200
 ```
 
 ## Zeebe Broker Connection
