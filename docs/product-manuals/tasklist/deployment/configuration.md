@@ -26,8 +26,7 @@ Tasklist stores and reads data in/from Elasticsearch.
 Name | Description | Default value
 -----|-------------|--------------
 zeebe.tasklist.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
-zeebe.tasklist.elasticsearch.host | Hostname where Elasticsearch is running | localhost
-zeebe.tasklist.elasticsearch.port | Port of Elasticsearch REST API | 9200
+zeebe.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
 
 ### A snippet from application.yml:
 
@@ -36,10 +35,8 @@ zeebe.tasklist:
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # Url
+    url: http://localhost:9200
 ```
 
 ## Zeebe Broker Connection
