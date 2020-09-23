@@ -57,7 +57,23 @@ module.exports = {
         "Zeebe Engine": [
           "product-manuals/zeebe/zeebe-the-workflow-engine-for-the-cloud-age",
         ],
-        Operate: ["product-manuals/operate/overview"],
+        Operate: [{
+          "Deployment Guide": [
+            "product-manuals/operate/deployment/configuration",
+            "product-manuals/operate/deployment/data-retention",
+            "product-manuals/operate/deployment/schema-and-migration",
+            "product-manuals/operate/deployment/importer-and-archiver",
+            "product-manuals/operate/deployment/authentication"
+          ],
+          "User Guide":[
+            "product-manuals/operate/userguide/index",
+            "product-manuals/operate/userguide/install-and-start",
+            "product-manuals/operate/userguide/basic-operate-navigation",
+            "product-manuals/operate/userguide/resolve-incidents-update-variables",
+            "product-manuals/operate/userguide/selections-batch-operations",
+            "product-manuals/operate/userguide/operate-feedback-and-questions"
+          ]
+        }],
         Tasklist: ["product-manuals/tasklist/overview"],
       },
     ],
