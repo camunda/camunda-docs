@@ -75,10 +75,46 @@ import TabItem from "@theme/TabItem";
 Define code blocks:
 
 ```html
-<Tabs defaultValue="cli" values={[ { label: 'CLI', value: 'cli', }, ] }>
+<Tabs groupId="language" defaultValue="cli" values={[ { label: 'CLI', value: 'cli', }, ] }>
 
 <TabItem value="cli">
 code
+</TabItem>
+
+</Tabs>
+```
+
+Hint: `groupId="language"` sets the decision documentation-wide. Can also be used for other use cases like different Tabs for different operating systems.
+
+Template:
+
+```html
+<Tabs groupId="language" defaultValue="csharp" values={
+[
+{ label: 'C# / ASP.NET Core 3', value: 'csharp', },
+{ label: 'Go', value: 'go', },
+{ label: 'Java', value: 'java', },
+{ label: 'Java + Spring', value: 'javaspring', },
+{ label: 'Kotlin + Spring', value: 'kotlin', },
+{ label: 'NodeJS', value: 'nodejs', },
+] }>
+
+<TabItem value="csharp">
+</TabItem>
+
+<TabItem value="go">
+</TabItem>
+
+<TabItem value="java">
+</TabItem>
+
+<TabItem value="javaspring">
+</TabItem>
+
+<TabItem value="kotlin">
+</TabItem>
+
+<TabItem value="nodejs">
 </TabItem>
 
 </Tabs>
