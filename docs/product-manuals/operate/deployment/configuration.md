@@ -36,7 +36,7 @@ Name | Description | Default value
 camunda.operate.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
 camunda.operate.elasticsearch.host | Hostname where Elasticsearch is running | localhost
 camunda.operate.elasticsearch.port | Port of Elasticsearch REST API | 9200
-camunda.operate.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
+camunda.operate.elasticsearch.url | Url of Elasticsearch REST API | http://localhost:9200
 camunda.operate.elasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.operate.elasticsearch.password | Password to access Elasticsearch REST API | -
 
