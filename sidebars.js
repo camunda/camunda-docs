@@ -2,6 +2,7 @@ module.exports = {
   camundaCloud: {
     Guides: [
       "guides/introcution-to-camunda-cloud",
+      "guides/getting-started-with-camunda-cloud",
       {
         "Getting started with Camunda Cloud": [
           "guides/getting-started/create-camunda-cloud-account",
