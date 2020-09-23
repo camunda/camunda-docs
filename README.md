@@ -34,7 +34,7 @@ $ GIT_USER=<Your GitHub username> USE_SSH=true npm run deploy
 
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
 
-## Publish documentaton
+## Publish documentation
 
 Publishing the documentation works by adding a new semver tag (`x.y.z`). [This Github Workflow](./.github/workflows/publish.yaml) will be triggered to build and deploy the docs.
 

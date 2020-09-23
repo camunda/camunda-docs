@@ -45,7 +45,7 @@ module.exports = {
           label: "Contact",
           position: "right",
         },
-        { href: "https://camunda.com/blog/", label: "Blog", position: "left" },
+        { href: "https://zeebe.io/blog/", label: "Blog", position: "left" },
         {
           href: "https://camunda.io",
           label: "Cloud Console",
