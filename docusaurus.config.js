@@ -1,8 +1,10 @@
 module.exports = {
   title: "Camunda Cloud Docs",
   tagline: "Camunda Cloud, Zeebe, Operate, Tasklist",
-  url: "https://camunda-cloud.github.io",
-  baseUrl: "/camunda-cloud-documentation/",
+  // url: "https://camunda-cloud.github.io",
+  url: "https://docs.camunda.io",
+  // baseUrl: "/camunda-cloud-documentation/",
+  baseUrl: "/",
   onBrokenLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "camunda-cloud", // Usually your GitHub org/user name.
