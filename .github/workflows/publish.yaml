@@ -23,8 +23,6 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name:
-        run: echo docs.camunda.io > build/CNAME
       - name: Publish
         run: |
           # Configure git client
