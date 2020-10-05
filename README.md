@@ -40,6 +40,10 @@ Publishing the documentation works by adding a new semver tag (`x.y.z`). [This G
 
 Github Page available under [https://camunda-cloud.github.io/camunda-cloud-documentation/](https://camunda-cloud.github.io/camunda-cloud-documentation/).
 
+## Search by Algolia
+
+- API-Key and Index name is configured in `./docusaurus.config.js`.
+
 ## Documentation Guidelines
 
 ### PRs for every change
