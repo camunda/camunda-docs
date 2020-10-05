@@ -101,6 +101,11 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Camunda`,
     },
+    algolia: {
+      apiKey: "f1b2a46296ae374b7f5a5c627341c354",
+      indexName: "camunda",
+      searchParameters: {}, // Optional (if provided by Algolia)
+    },
   },
   presets: [
     [
