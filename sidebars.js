@@ -55,7 +55,48 @@ module.exports = {
         ],
         Modeler: ["product-manuals/modeler/install-the-modeler"],
         "Zeebe Engine": [
-          "product-manuals/zeebe/zeebe-the-workflow-engine-for-the-cloud-age",
+          "product-manuals/zeebe/zeebe-overview",
+          {
+            "Introduction": [
+              "product-manuals/zeebe/introduction/index",
+              "product-manuals/zeebe/introduction/what-is-zeebe",
+              "product-manuals/zeebe/introduction/install",
+              "product-manuals/zeebe/introduction/quickstart",
+              "product-manuals/zeebe/introduction/community-contributions",
+              "product-manuals/zeebe/introduction/get-help-get-involved",
+              "product-manuals/zeebe/introduction/release-cycle",
+            ],
+          },
+          {
+            "Basics": [
+              "product-manuals/zeebe/basics/index",
+              "product-manuals/zeebe/basics/architecture",
+              "product-manuals/zeebe/basics/workflows",
+              "product-manuals/zeebe/basics/job-workers",
+              "product-manuals/zeebe/basics/partitions",
+              "product-manuals/zeebe/basics/protocols",
+              "product-manuals/zeebe/basics/internal-processing",
+              "product-manuals/zeebe/basics/exporters",
+              "product-manuals/zeebe/basics/clustering",
+            ]
+          },
+          {
+            "Getting Started Tutorial": [
+              "product-manuals/zeebe/getting-started/index",
+              "product-manuals/zeebe/getting-started/tutorial-setup",
+              "product-manuals/zeebe/getting-started/create-a-workflow",
+              "product-manuals/zeebe/getting-started/deploy-a-workflow",
+              "product-manuals/zeebe/getting-started/create-workflow-instance",
+              "product-manuals/zeebe/getting-started/next-steps-resources",
+            ]
+          },
+          {
+            "BPMN Workflow": [
+              "product-manuals/zeebe/bpmn-workflows/bpmn-primer",
+              "product-manuals/zeebe/bpmn-workflows/bpmn-coverage",
+              "product-manuals/zeebe/bpmn-workflows/data-flow",
+            ]
+          }
         ],
         Operate: [{
           "Deployment Guide": [
