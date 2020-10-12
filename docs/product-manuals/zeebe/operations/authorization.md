@@ -1,4 +1,7 @@
-# Authorization
+---
+id: authorization
+title: "Authorization"
+---
 
 Zeebe clients also provide a way for users to modify gRPC call headers, namely to contain access tokens. Note that the gateway doesn't provide any way of validating these headers, so users must implement a reverse proxy with a gRPC interceptor to validate them.
 

@@ -198,6 +198,26 @@ module.exports = {
               }
             ]
           },
+          {
+            "Zeebe Operations": [
+              "product-manuals/zeebe/operations/index",
+              "product-manuals/zeebe/operations/configuration",
+              "product-manuals/zeebe/operations/resource-planning",
+              "product-manuals/zeebe/operations/network-ports",
+              "product-manuals/zeebe/operations/setting-up-a-cluster",
+              "product-manuals/zeebe/operations/metrics",
+              "product-manuals/zeebe/operations/kubernetes",
+              {
+                "Security": [
+                  "product-manuals/zeebe/operations/security",
+                  "product-manuals/zeebe/operations/authentication",
+                  "product-manuals/zeebe/operations/authorization",
+                ]
+              },
+              "product-manuals/zeebe/operations/health",
+              "product-manuals/zeebe/operations/backpressure",
+            ]
+          }
         ],
         Operate: [{
           "Deployment Guide": [

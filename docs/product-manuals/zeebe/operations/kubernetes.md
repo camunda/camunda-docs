@@ -1,4 +1,7 @@
-# Deploying to Kubernetes
+---
+id: kubernetes
+title: "Deploying to Kubernetes"
+---
 
 We recommend that you use Kubernetes when deploying Zeebe to production.
 
@@ -13,5 +16,5 @@ You will need to configure your Kubernetes cluster and modify this to suit the a
 ## Gateway
 Zeebe gateway is deployed as a stateless service.
 
-We support [Kubernetes startup and liveness probes](./health.md#gateway) for Zeebe gateway.
+We support [Kubernetes startup and liveness probes](health.md#gateway) for Zeebe gateway.
 

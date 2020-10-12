@@ -1,4 +1,7 @@
-# Health Status
+---
+id: health
+title: "Health Status"
+---
 
 ## Broker
 Zeebe broker exposes two http endpoints to query its health status.
@@ -31,7 +34,7 @@ If it is unhealthy, then it can mean three things:
  * **it is partially unhealthy**, could mean that one or more partitions is unhealthy, while the rest of them are able to process workflows
  * **it is completely dead**
 
-[Metrics](/operations/metrics.html) give more insight into which partition is healthy or unhealthy.
+[Metrics](metrics.md) give more insight into which partition is healthy or unhealthy.
 When a broker becomes unhealthy, it is recommended to check the logs to see what went wrong.
 
 
@@ -82,4 +85,4 @@ Each endpoint returns a status which can be one of
 If details are enabled (default) the response will also contain additional details.
 
 ### Customization
-Health indicators are set to sensible defaults. For specific use cases, it might be necessary to [customize health indicators](/appendix/gateway-health-probes.md).
+Health indicators are set to sensible defaults. For specific use cases, it might be necessary to [customize health indicators](../appendix/gateway-health-probes.md).

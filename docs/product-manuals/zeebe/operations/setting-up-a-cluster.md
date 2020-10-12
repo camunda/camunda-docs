@@ -1,4 +1,7 @@
-# Setting up a Zeebe Cluster
+---
+id: setting-up-a-cluster
+title: "Setting up a Zeebe Cluster"
+---
 
 To set up a cluster you need to adjust the `cluster` section
 in the Zeebe configuration file. Below is a snippet
@@ -58,7 +61,7 @@ In this example, we will set up a Zeebe cluster with
 five brokers. Each broker needs to get a unique node id.
 To scale well, we will bootstrap five partitions
 with a replication factor of three. For more information about this,
-please take a look into the [Clustering](/basics/clustering.html) section.
+please take a look into the [Clustering](../basics/clustering.md) section.
 
 The clustering setup will look like this:
 

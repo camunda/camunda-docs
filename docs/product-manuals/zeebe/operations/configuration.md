@@ -1,4 +1,7 @@
-# Configuration
+---
+id: configuration
+title: "Configuration"
+---
 
 Zeebe can be configured through:
  * configuration files,
@@ -22,8 +25,8 @@ The default configuration is located in `config/application.yaml`. This configur
 
 ## Configuration file templates
 We provide templates that contain all possible configuration settings, along with explanations for each setting:
-* [Broker Configuration Templates](/appendix/broker-config-template.md)
-* [Gateway Configuration Template](/appendix/gateway-config-template.md)
+* [Broker Configuration Templates](..//appendix/broker-config-template.md)
+* [Gateway Configuration Template](..//appendix/gateway-config-template.md)
 
 Note that these templates also include the corresponding environment variables to use for every setting.
 
@@ -160,4 +163,4 @@ curl 'http://localhost:9600/actuator/loggers/io.zeebe' -i -X POST -H 'Content-Ty
 Health probes are set to sensible defaults which cover common use cases.
 
 For specific use cases, it might be necessary to customize health probes:
-* [Gateway Health Probes](/appendix/gateway-health-probes.md)
+* [Gateway Health Probes](..//appendix/gateway-health-probes.md)

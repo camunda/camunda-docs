@@ -1,4 +1,7 @@
-# Resource Planning
+---
+id: resource-planning
+title: "Resoure Planning"
+---
 
 The short answer to “_what resources and configuration will I need to take Zeebe to production?_” is: it depends.
 
@@ -109,7 +112,7 @@ We make sure that event log segments are not deleted too early. No event log seg
 
 ### Snapshots
 
-The running state of the partition is captured periodically on the leader in a snapshot. By default, this period is every 15 minutes. This can be changed in the [configuration](/appendix/broker-config-template.md).
+The running state of the partition is captured periodically on the leader in a snapshot. By default, this period is every 15 minutes. This can be changed in the [configuration](../appendix/broker-config-template.md).
 
 A snapshot is a projection of all events that represent the current running state of the workflows running on the partition.  It contains all active data, for example, deployed workflows, active workflow instances, and not yet completed jobs.
 

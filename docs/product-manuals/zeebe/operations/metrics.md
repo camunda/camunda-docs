@@ -1,4 +1,7 @@
-# The Metrics
+---
+id: metrics
+title: "Metrics"
+---
 
 When operating a distributed system like Zeebe, it is important to put proper monitoring in place.
 To facilitate this, Zeebe exposes an extensive set of metrics.
@@ -28,7 +31,7 @@ zeebe_stream_processor_events_total{action="skipped",partition="1",} 2153.0
 
 ## Configuring Metrics
 
-The HTTP server to export the metrics can be configured in the [configuration file](/appendix/broker-config-template.md).
+The HTTP server to export the metrics can be configured in the [configuration file](../appendix/broker-config-template.md).
 
 ## Connecting Prometheus
 
