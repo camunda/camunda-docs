@@ -1,3 +1,8 @@
+---
+id: setup
+title: "Setting up the Zeebe Java Client"
+---
+
 # Setting up the Zeebe Java Client
 
 ## Prerequisites

@@ -1,4 +1,7 @@
-# Ruby
+---
+id: ruby
+title: "Ruby"
+---
 
 The Ruby client is maintained by [Christian Nicolai](https://github.com/cmur2).
 

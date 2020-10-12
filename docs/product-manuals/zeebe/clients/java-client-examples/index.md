@@ -1,6 +1,9 @@
-# Example Code using the Zeebe Java Client
+---
+id: index
+title: "Overview"
+---
 
-These examples are accessible in the [zeebe-io github repository](https://github.com/zeebe-io/zeebe/) at commit `{{commit}}`. [Link to browse code on github](https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples).
+These examples are accessible in the [zeebe-io github repository]((https://github.com/zeebe-io/zeebe/) at commit `{{commit}}`. [Link to browse code on github]((https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples).
 
 Instructions to access code locally:
 
@@ -14,19 +17,19 @@ Import the Maven project in the `samples` directory into your IDE to start hacki
 
 ## Workflow
 
-* [Deploy a Workflow](/clients/java-client-examples/workflow-deploy.html)
-* [Create a Workflow Instance](/clients/java-client-examples/workflow-instance-create.html)
-* [Create Workflow Instances Non-Blocking](/clients/java-client-examples/workflow-instance-create-nonblocking.html)
-* [Create a Workflow Instance and Await Result](/clients/java-client-examples/workflow-instance-create-with-result.html)
+* [Deploy a Workflow](workflow-deploy.md)
+* [Create a Workflow Instance](workflow-instance-create.md)
+* [Create Workflow Instances Non-Blocking](workflow-instance-create-nonblocking.md)
+* [Create a Workflow Instance and Await Result](workflow-instance-create-with-result.md)
 
 ## Job
 
-* [Open a Job Worker](/clients/java-client-examples/job-worker-open.html)
+* [Open a Job Worker](job-worker-open.md)
 
 ## Data
 
-* [Handle variables as POJO](/clients/java-client-examples/data-pojo.html)
+* [Handle variables as POJO](data-pojo.md)
 
 ## Cluster
 
-* [Request Cluster Topology](/clients/java-client-examples/cluster-topology-request.html)
+* [Request Cluster Topology](cluster-topology-request.md)

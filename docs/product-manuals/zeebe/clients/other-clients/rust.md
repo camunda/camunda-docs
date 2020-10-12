@@ -1,4 +1,7 @@
-# Rust
+---
+id: rust
+title: "Rust"
+---
 
 The Rust client, Zeebest, is maintained by [Mackenzie Clark](https://github.com/xmclark).
 

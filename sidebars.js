@@ -156,6 +156,48 @@ module.exports = {
               "product-manuals/zeebe/reference/exporters",
             ]
           },
+          {
+            "Zeebe Client Libraries": [
+              "product-manuals/zeebe/clients/index",
+              {
+                "Zeebe Java Client" : [
+                  "product-manuals/zeebe/clients/java-client/index",
+                  "product-manuals/zeebe/clients/java-client/setup",
+                  "product-manuals/zeebe/clients/java-client/get-started",
+                  "product-manuals/zeebe/clients/java-client/logging",
+                  "product-manuals/zeebe/clients/java-client/testing",
+                  {
+                    "Example Code using the Zeebe Java Client": [
+                      "product-manuals/zeebe/clients/java-client-examples/index",
+                      "product-manuals/zeebe/clients/java-client-examples/workflow-deploy",
+                      "product-manuals/zeebe/clients/java-client-examples/workflow-instance-create",
+                      "product-manuals/zeebe/clients/java-client-examples/workflow-instance-create-nonblocking",
+                      "product-manuals/zeebe/clients/java-client-examples/workflow-instance-create-with-result",
+                      "product-manuals/zeebe/clients/java-client-examples/job-worker-open",
+                      "product-manuals/zeebe/clients/java-client-examples/data-pojo",
+                      "product-manuals/zeebe/clients/java-client-examples/cluster-topology-request",
+                    ]
+                  }
+                ]
+              },
+              {
+                "Zeebe Go Client": [
+                  "product-manuals/zeebe/clients/go-client/index",
+                  "product-manuals/zeebe/clients/go-client/get-started",
+                ]
+              },
+              {
+                "Community Supported Clients": [
+                  "product-manuals/zeebe/clients/other-clients/index",
+                  "product-manuals/zeebe/clients/other-clients/c-sharp",
+                  "product-manuals/zeebe/clients/other-clients/javascript",
+                  "product-manuals/zeebe/clients/other-clients/python",
+                  "product-manuals/zeebe/clients/other-clients/ruby",
+                  "product-manuals/zeebe/clients/other-clients/rust",
+                ]
+              }
+            ]
+          },
         ],
         Operate: [{
           "Deployment Guide": [

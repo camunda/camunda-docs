@@ -1,4 +1,7 @@
-# Python
+---
+id: python
+title: "Python"
+---
 
 The Python client is maintained by [Stéphane Ludwig](https://gitlab.com/stephane.ludwig).
 

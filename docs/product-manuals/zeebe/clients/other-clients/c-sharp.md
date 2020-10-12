@@ -1,4 +1,7 @@
-# C#
+---
+id: c-sharp
+title: "C#"
+---
 
 The C# client is a community library maintained by [Christopher Zell](https://github.com/Zelldon).
 

@@ -1,4 +1,7 @@
-# JavaScript
+---
+id: javascript
+title: "JavaScript"
+---
 
 ## Zeebe Node
 

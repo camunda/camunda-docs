@@ -1,3 +1,7 @@
-# Zeebe Go Client
+---
+id: index
+title: "Overview"
+---
 
-* [Get Started](/clients/go-client/get-started.html)
+
+* [Get Started](get-started.md)
