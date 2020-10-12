@@ -134,6 +134,14 @@ module.exports = {
                 ]
               }
             ]
+          },
+          {
+            "YAML Workflows": [
+              "product-manuals/zeebe/yaml-workflows/index",
+              "product-manuals/zeebe/yaml-workflows/tasks",
+              "product-manuals/zeebe/yaml-workflows/control-flow",
+              "product-manuals/zeebe/yaml-workflows/data-flow",
+            ]
           }
         ],
         Operate: [{

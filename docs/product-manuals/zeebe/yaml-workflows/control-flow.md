@@ -1,4 +1,7 @@
-# Control Flow
+---
+id: control-flow
+title: "Control Flow"
+---
 
 *Control flow* is about the order in which tasks are executed. The YAML format provides tools to decide which task is executed when.
 
@@ -80,4 +83,4 @@ In the `switch` element, there is one `case` element per alternative to choose f
 
 ## Additional Resources
 
-* [Boolean Expression](/reference/expressions.html#boolean-expressions)
+* [Boolean Expression](../reference/expressions.md#boolean-expressions)

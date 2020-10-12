@@ -1,4 +1,7 @@
-# Data Flow
+---
+id: data-flow
+title: "Data Flow"
+---
 
 Zeebe carries custom data from task to task in form of variables. Variables are key-value-pairs and part of the workflow instance.
 
@@ -24,9 +27,9 @@ tasks:
       type: shipment-service
 ```
 
-Every mapping element has a `source` and a `target` element which must be a [variable expression](/reference/variables.html#access-variables).
+Every mapping element has a `source` and a `target` element which must be a [variable expression](../reference/variables.md#access-variables).
 
 ## Additional Resources
 
-* [Data Flow](/bpmn-workflows/data-flow.html)
-* [Variable Mappings](/reference/variables.html#inputoutput-variable-mappings)
+* [Data Flow](../bpmn-workflows/data-flow.md)
+* [Variable Mappings](../reference/variables.md#inputoutput-variable-mappings)
