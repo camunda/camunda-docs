@@ -1,5 +1,7 @@
-# Expressions
-
+---
+id: expressions
+title: "Expressions"
+---
 Expressions can be used to access variables and calculate values dynamically.
 
 The following attributes of BPMN elements **require** an expression:
@@ -64,7 +66,7 @@ order.customer.name
 
 Values can be compared using the following operators:
 
-<table style="width:100%">
+<table>
   <tr>
     <th>Operator</th>
     <th>Description</th>
@@ -168,7 +170,7 @@ More functions for string values are available as [built-in functions](https://c
 
 The following operators can be applied on temporal values:
 
-<table style="width:100%">
+<table>
   <tr>
     <th>Temporal Type</th>
     <th>Examples</th>

@@ -1,4 +1,7 @@
-# Incidents
+---
+id: incidents
+title: "Incidents"
+---
 
 In Zeebe, an incident represents a problem in a workflow execution. That means a workflow instance is stuck at some point and it needs an user interaction to resolve the problem.
 

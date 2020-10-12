@@ -1,4 +1,7 @@
-# gRPC API Reference
+---
+id: grpc
+title: "gRPC API Reference"
+---
 
 * [Error handling](#error-handling)
 * [Gateway service](#gateway-service)

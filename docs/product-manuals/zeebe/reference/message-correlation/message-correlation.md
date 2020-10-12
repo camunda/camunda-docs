@@ -1,12 +1,15 @@
-# Message Correlation
+---
+id: message-correlation
+title: "Message Correlation"
+---
 
 Message correlation describes how a message is correlated to a workflow instance. Messages can be correlated to the following elements:
 
-* [Message Start Events](/bpmn-workflows/message-events/message-events.md#message-start-events)
-* [Intermediate Message Catch Events](/bpmn-workflows/message-events/message-events.md#intermediate-message-catch-events)
-* [Message Boundary Events](/bpmn-workflows/message-events/message-events.md#message-boundary-events)
-* [Message Event Subprocesses](/bpmn-workflows/event-subprocesses/event-subprocesses.md)
-* [Receive Tasks](/bpmn-workflows/receive-tasks/receive-tasks.md)
+* [Message Start Events](../../bpmn-workflows/message-events/message-events.md#message-start-events)
+* [Intermediate Message Catch Events](../../bpmn-workflows/message-events/message-events.md#intermediate-message-catch-events)
+* [Message Boundary Events](../../bpmn-workflows/message-events/message-events.md#message-boundary-events)
+* [Message Event Subprocesses](../../bpmn-workflows/event-subprocesses/event-subprocesses.md)
+* [Receive Tasks](../../bpmn-workflows/receive-tasks/receive-tasks.md)
 
 ## Message Subscriptions
 

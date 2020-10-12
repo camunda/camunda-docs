@@ -142,7 +142,20 @@ module.exports = {
               "product-manuals/zeebe/yaml-workflows/control-flow",
               "product-manuals/zeebe/yaml-workflows/data-flow",
             ]
-          }
+          },
+          {
+            "Reference": [
+              "product-manuals/zeebe/reference/index",
+              "product-manuals/zeebe/reference/workflow-instance-creation",
+              "product-manuals/zeebe/reference/workflow-lifecycles",
+              "product-manuals/zeebe/reference/variables",
+              "product-manuals/zeebe/reference/expressions",
+              "product-manuals/zeebe/reference/message-correlation/message-correlation",
+              "product-manuals/zeebe/reference/incidents",
+              "product-manuals/zeebe/reference/grpc",
+              "product-manuals/zeebe/reference/exporters",
+            ]
+          },
         ],
         Operate: [{
           "Deployment Guide": [

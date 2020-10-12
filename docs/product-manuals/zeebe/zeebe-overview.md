@@ -5,11 +5,9 @@ title: "Zeebe: the Workflow engine for the Cloud Age"
 
 
 
-<!-- 
-<p style="text-align: center;">
-  <img src="zeebe-brand.svg" style="height: 100px;"/>
-</p>
--->
+
+<img src="/static/img/zeebe-brand.svg" height="100px" />
+
 
 ### Zeebe is a cloud-native workflow engine for microservices orchestration
 

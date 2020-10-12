@@ -1,4 +1,7 @@
-# Exporters
+---
+id: exporters
+title: "Exporters"
+---
 
 Regardless of how an exporter is loaded (whether through an external JAR or not),
 all exporters interact in the same way with the broker, which is defined by the
