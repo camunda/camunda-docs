@@ -227,7 +227,16 @@ module.exports = {
               "product-manuals/zeebe/kubernetes/zeebe-operator",
             ]
           },
-          "product-manuals/zeebe/appendix/glossary",
+          {
+            "Appendix": [
+              "product-manuals/zeebe/appendix/glossary",
+              "product-manuals/zeebe/appendix/broker-config-template",
+              "product-manuals/zeebe/appendix/gateway-config-template",
+              "product-manuals/zeebe/appendix/gateway-health-probes",
+              "product-manuals/zeebe/appendix/environment-variables",
+              "product-manuals/zeebe/appendix/deprecated-features",
+            ]
+          }          
         ],
         Operate: [{
           "Deployment Guide": [

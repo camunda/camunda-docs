@@ -37,7 +37,7 @@ A correlation is an attribute within a message which is used to match this messa
 ### Deployment
 A workflow cannot execute unless it is known by the broker.  Deployment is the process of pushing or deploying worklows to the broker.
 
-* [Getting Started Tutorial: Deploy a Workflow](getting-started/deploy-a-workflow.md)
+* [Getting Started Tutorial: Deploy a Workflow](../getting-started/deploy-a-workflow.md)
 
 ### Event
 An event represents a state change associated with an aspect of an executing workflow instance.  Events capture variable changes, state transition in workflow elements, etc.   An event will be represented by a timestamp, the variable name and variable value.  Events are stored in an append-only log.

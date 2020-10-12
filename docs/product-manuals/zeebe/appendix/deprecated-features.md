@@ -1,4 +1,7 @@
-# Deprecated Features
+---
+id: deprecated-features
+title: "Deprecated Features"
+---
 
 This section lists deprecated features.
 
