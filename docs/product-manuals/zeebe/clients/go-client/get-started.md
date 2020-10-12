@@ -358,7 +358,7 @@ func failJob(client worker.JobClient, job entities.Job) {
 }
 ```
 
-In this example we open a [job worker](../../basics/job-workersmd) for jobs of type `payment-service`.
+In this example we open a [job worker](../../basics/job-workers.md) for jobs of type `payment-service`.
 The job worker will repeatedly poll for new jobs of the type `payment-service` and activate them
 subsequently. Each activated job will then be passed to the job handler which implements the business
 logic of the job worker. The handler will then complete the job with its result or fail the job if

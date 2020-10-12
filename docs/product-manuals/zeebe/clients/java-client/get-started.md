@@ -31,7 +31,7 @@ One of the following:
 * [Zeebe Docker Configurations](https://github.com/zeebe-io/zeebe-docker-compose)
 
 (Not using Docker)
-* [Zeebe distribution](/introduction/install.html)
+* [Zeebe distribution](../../introduction/install.md)
 * [Zeebe Monitor](https://github.com/zeebe-io/zeebe-simple-monitor/releases)
 
 ## Start the broker

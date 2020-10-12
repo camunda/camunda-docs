@@ -5,7 +5,7 @@ title: "Open a Job Worker"
 
 ## Related Resources
 
-* [Job Worker Basics](/basics/job-workers.html)
+* [Job Worker Basics](../../basics/job-workers.md)
 
 ## Prerequisites
 

@@ -228,7 +228,7 @@ To continue working with Zeebe we recommend to get more familiar with the basic
 concepts of Zeebe, see the [Basics chapter](../basics/index.md) of the
 documentation.
 
-In the [BPMN Workflows chapter](../bpmn-workflows/index.md) you can find an
+In the [BPMN Workflows chapter](../bpmn-workflows/bpmn-primer.md) you can find an
 introduction to creating Workflows with BPMN.
 
 The documentation also provides getting started guides for implementing job

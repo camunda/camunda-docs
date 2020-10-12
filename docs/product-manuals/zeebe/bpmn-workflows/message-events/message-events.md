@@ -27,7 +27,7 @@ If the `correlationKey` of a message is empty then it will always create a new w
 
 When an intermediate message catch event is entered then a corresponding message subscription is created. The workflow instance stops at this point and waits until the message is correlated. When a message is correlated, the catch event gets completed and the workflow instance continues.
 
-> An alternative to intermediate message catch events are [receive tasks](receive-tasks/receive-tasks.md) which behaves the same but can be used together with boundary events.
+> An alternative to intermediate message catch events are [receive tasks](../receive-tasks/receive-tasks.md) which behaves the same but can be used together with boundary events.
 
 ## Message Boundary Events
 
@@ -177,7 +177,7 @@ Workflow instance records of an intermediate message catch event:
 </details>
 
 References:
-* [Message Correlation](../../reference/message-correlation.md)
+* [Message Correlation](../../reference/message-correlation/message-correlation.md)
 * [Expressions](../../reference/expressions.md)
 * [Variable Mappings](../../reference/variables.md#inputoutput-variable-mappings)
 * [Incidents](../../reference/incidents.md)

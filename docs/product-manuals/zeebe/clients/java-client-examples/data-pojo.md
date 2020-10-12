@@ -5,7 +5,7 @@ title: "Handle Variables as POJO"
 
 ## Related Resources
 
-* [Data Flow](/bpmn-workflows/data-flow.html)
+* [Data Flow](../../bpmn-workflows/data-flow.md)
 
 ## Prerequisites
 

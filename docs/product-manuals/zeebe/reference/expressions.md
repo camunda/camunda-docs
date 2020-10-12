@@ -5,16 +5,16 @@ title: "Expressions"
 Expressions can be used to access variables and calculate values dynamically.
 
 The following attributes of BPMN elements **require** an expression:
-* Sequence Flow on an Exclusive Gateway: [condition](/bpmn-workflows/exclusive-gateways/exclusive-gateways.html#conditions)
-* Message Catch Event / Receive Task: [correlation key](/bpmn-workflows/message-events/message-events.html#messages)
-* Multi-Instance Activity: [input collection](/bpmn-workflows/multi-instance/multi-instance.html#defining-the-collection-to-iterate-over), [output element](/bpmn-workflows/multi-instance/multi-instance.html#collecting-the-output)
-* Input/Output Variable Mappings: [source](/reference/variables.html#inputoutput-variable-mappings)
+* Sequence Flow on an Exclusive Gateway: [condition](../bpmn-workflows/exclusive-gateways/exclusive-gateways.md#conditions)
+* Message Catch Event / Receive Task: [correlation key](../bpmn-workflows/message-events/message-events.md#messages)
+* Multi-Instance Activity: [input collection](../bpmn-workflows/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](../bpmn-workflows/multi-instance/multi-instance.md#collecting-the-output)
+* Input/Output Variable Mappings: [source](../reference/variables.md#inputoutput-variable-mappings)
 
 Additionally, the following attributes of BPMN elements can define an expression **optionally** instead of a static value:
-* Timer Catch Event: [timer definition](/bpmn-workflows/timer-events/timer-events.html#timers)
-* Message Catch Event / Receive Task: [message name](/bpmn-workflows/message-events/message-events.html#messages)
-* Service Task: [job type](/bpmn-workflows/service-tasks/service-tasks.html#task-definition), [job retries](/bpmn-workflows/service-tasks/service-tasks.html#task-definition)
-* Call Activity: [process id](/bpmn-workflows/call-activities/call-activities.html#defining-the-called-workflow)
+* Timer Catch Event: [timer definition](../bpmn-workflows/timer-events/timer-events.md#timers)
+* Message Catch Event / Receive Task: [message name](../bpmn-workflows/message-events/message-events.md#messages)
+* Service Task: [job type](../bpmn-workflows/service-tasks/service-tasks.md#task-definition), [job retries]..(/bpmn-workflows/service-tasks/service-tasks.md#task-definition)
+* Call Activity: [process id](../bpmn-workflows/call-activities/call-activities.md#defining-the-called-workflow)
 
 ## Expressions vs. Static Values
 

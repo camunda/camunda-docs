@@ -102,7 +102,7 @@ By default, all message variables are merged into the workflow instance. This be
 </details>
 
 References:
-* [Message Correlation](../../reference/message-correlation.md)
+* [Message Correlation](../../reference/message-correlation/message-correlation.md)
 * [Expressions](../../reference/expressions.md)
 * [Variable Mappings](../../reference/variables.md#inputoutput-variable-mappings)
 * [Incidents](../../reference/incidents.md)

@@ -49,7 +49,7 @@ Some observations on the scaling of the factors above:
 - `totalSnapshotSize`: This factor scales with the number of in-flight workflows
 - `reserveForPartialSystemFailure`: This factor is supposed to be a reserve to account for partial system failure (e.g. loss of quorum inside Zeebe cluster, or loss of connection to external system). See the remainder of this document for a further discussion on the effects of partial system failure on Zeebe cluster and disk space provisioning.
 
-Many of the factors influencing above formula can be fine-tuned in the [configuration](/appendix/broker-config-template.md). The relevant configuration settings are:
+Many of the factors influencing above formula can be fine-tuned in the [configuration](../appendix/broker-config-template.md). The relevant configuration settings are:
 ```
 Config file
     zeebe:
