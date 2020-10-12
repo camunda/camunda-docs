@@ -1,4 +1,7 @@
-# Event Subprocess
+---
+id: event-subprocesses
+title: "Event Subprocess"
+---
 
 An event subprocess is a subprocess that is triggered by an event. It can be added globally to the process or locally inside an embedded subprocess.
 
@@ -6,9 +9,9 @@ An event subprocess is a subprocess that is triggered by an event. It can be add
 
 An event subprocess must have exactly one start event of one of the following types:
 
-* [Timer](/bpmn-workflows/timer-events/timer-events.html)
-* [Message](/bpmn-workflows/message-events/message-events.html)
-* [Error](/bpmn-workflows/error-events/error-events.html)
+* [Timer](../timer-events/timer-events.md)
+* [Message](../message-events/message-events.md)
+* [Error](../error-events/error-events.md)
 
 An event subprocess behaves like a boundary event but is inside the scope instead of being attached to the scope. Like a boundary event, the event subprocess can be interrupting or non-interrupting (indicated in BPMN by a solid or dashed border of the start event). The start event of the event subprocess can be triggered when its containing scope is activated.
 
@@ -135,6 +138,6 @@ By default, the local variables of the event subprocess are not propagated (i.e.
 </details>
 
 References:
-* [Embedded Subprocess](/bpmn-workflows/embedded-subprocesses/embedded-subprocesses.html)
-* [Variable Scopes](/reference/variables.html#variable-scopes)
+* [Embedded Subprocess](../embedded-subprocesses/embedded-subprocesses.md)
+* [Variable Scopes](../../reference/variables.md#variable-scopes)
 

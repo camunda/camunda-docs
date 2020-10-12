@@ -95,6 +95,44 @@ module.exports = {
               "product-manuals/zeebe/bpmn-workflows/bpmn-primer",
               "product-manuals/zeebe/bpmn-workflows/bpmn-coverage",
               "product-manuals/zeebe/bpmn-workflows/data-flow",
+              {
+                "Tasks": [
+                  "product-manuals/zeebe/bpmn-workflows/tasks",
+                  "product-manuals/zeebe/bpmn-workflows/service-tasks/service-tasks",
+                  "product-manuals/zeebe/bpmn-workflows/receive-tasks/receive-tasks",
+                ]
+              },
+              {
+                "Gateways": [
+                  "product-manuals/zeebe/bpmn-workflows/gateways",
+                  "product-manuals/zeebe/bpmn-workflows/exclusive-gateways/exclusive-gateways",
+                  "product-manuals/zeebe/bpmn-workflows/parallel-gateways/parallel-gateways",
+                  "product-manuals/zeebe/bpmn-workflows/event-based-gateways/event-based-gateways",
+                ]
+              },
+              {
+                "Events": [
+                  "product-manuals/zeebe/bpmn-workflows/events",
+                  "product-manuals/zeebe/bpmn-workflows/none-events/none-events",
+                  "product-manuals/zeebe/bpmn-workflows/message-events/message-events",
+                  "product-manuals/zeebe/bpmn-workflows/timer-events/timer-events",
+                  "product-manuals/zeebe/bpmn-workflows/error-events/error-events",
+                ]                
+              },
+              {
+                "Subprocesses": [
+                  "product-manuals/zeebe/bpmn-workflows/subprocesses",
+                  "product-manuals/zeebe/bpmn-workflows/embedded-subprocesses/embedded-subprocesses",
+                  "product-manuals/zeebe/bpmn-workflows/call-activities/call-activities",
+                  "product-manuals/zeebe/bpmn-workflows/event-subprocesses/event-subprocesses",
+                ]
+              },
+              {
+                "Markers": [
+                  "product-manuals/zeebe/bpmn-workflows/markers",
+                  "product-manuals/zeebe/bpmn-workflows/multi-instance/multi-instance",
+                ]
+              }
             ]
           }
         ],

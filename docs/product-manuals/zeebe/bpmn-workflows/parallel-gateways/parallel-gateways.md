@@ -1,4 +1,7 @@
-# Parallel Gateway
+---
+id: parallel-gateways
+title: "Parallel Gateway"
+---
 
 A parallel gateway (aka AND-gateway) allows to split the flow into concurrent paths.
 

@@ -1,5 +1,8 @@
-# Markers
+---
+id: markers
+title: "Overview"
+---
 
 Currently supported markers:
 
-* [Multi-Instance](/bpmn-workflows/multi-instance/multi-instance.html)
+* [Multi-Instance](multi-instance/multi-instance.md)

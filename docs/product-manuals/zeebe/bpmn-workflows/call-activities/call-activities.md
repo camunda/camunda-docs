@@ -1,6 +1,10 @@
-# Call Activities
+---
+id: call-activities
+title: "Call Activities"
+---
 
-A call activity (aka reusable subprocess) allows to call/invoke another workflow as part of this workflow. It is similar to an [embedded subprocess](/bpmn-workflows/embedded-subprocesses/embedded-subprocesses.html) but the workflow is externalized (i.e. stored as separated BPMN) and can be invoked by different workflows.
+
+A call activity (aka reusable subprocess) allows to call/invoke another workflow as part of this workflow. It is similar to an [embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md) but the workflow is externalized (i.e. stored as separated BPMN) and can be invoked by different workflows.
 
 ![call-activity](assets/call-activities-example.png)
 
@@ -14,7 +18,7 @@ A call activity must define the BPMN process id of the called workflow as `proce
 
 The new instance of the defined workflow will be created of its **latest version** - at the point when the call activity is activated.
 
-Usually, the `processId` is defined as a static value (e.g. `shipping-process`) but it can also be defined as [expression](/reference/expressions.html) (e.g. `= "shipping-" + tenantId`). The expression is evaluated on activating the call activity and must result in a `string`.
+Usually, the `processId` is defined as a static value (e.g. `shipping-process`) but it can also be defined as [expression](../../reference/expressions.md) (e.g. `= "shipping-" + tenantId`). The expression is evaluated on activating the call activity and must result in a `string`.
 
 ## Boundary Events
 
@@ -34,7 +38,7 @@ Input mappings can be used to create new local variables in the scope of the cal
 
 If the attribute `propagateAllChildVariables` is set (default: `true`) then all variables of the created workflow instance are propagated to the call activity. This behavior can be customized by defining output mappings at the call activity. The output mappings are applied on completing the call activity and only those variables that are defined in the output mappings are propagated.
 
-It is recommended to disable the attribute `propagateAllChildVariables` or define output mappings if the call activity is in a parallel flow (e.g. when it is marked as [parallel multi-instance](/bpmn-workflows/multi-instance/multi-instance.html#variable-mappings)). Otherwise, it can happen that variables are overridden accidentally when they are changed in the parallel flow.
+It is recommended to disable the attribute `propagateAllChildVariables` or define output mappings if the call activity is in a parallel flow (e.g. when it is marked as [parallel multi-instance](multi-instance/multi-instance.md#variable-mappings)). Otherwise, it can happen that variables are overridden accidentally when they are changed in the parallel flow.
 
 ## Additional Resources
 
@@ -120,6 +124,6 @@ The workflow instance records of the created workflow instance have a reference 
 </details>
 
 References:
-* [Expressions](/reference/expressions.html)
-* [Variable Scopes](/reference/variables.html#variable-scopes)
-* [Variable Mappings](/reference/variables.html#inputoutput-variable-mappings)
+* [Expressions](../../reference/expressions.md)
+* [Variable Scopes](../../reference/variables.md#variable-scopes)
+* [Variable Mappings](../../reference/variables.md#inputoutput-variable-mappings)

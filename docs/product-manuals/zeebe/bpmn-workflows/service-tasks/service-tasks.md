@@ -1,3 +1,8 @@
+---
+id: service-tasks
+title: "Service Tasks"
+---
+
 # Service Tasks
 
 A service task represents a work item in the workflow with a specific type.
@@ -14,7 +19,7 @@ A service task **must** have a `taskDefinition`. It specifies the **type of job*
 
 Optionally, a `taskDefinition` can specify the number of times the job is retried when a worker signals failure (default = 3).
 
-Usually, the job type and the job retries are defined as static values (e.g. `order-items`) but they can also be defined as [expressions](/reference/expressions.html) (e.g. `= "order-" + priorityGroup`). The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
+Usually, the job type and the job retries are defined as static values (e.g. `order-items`) but they can also be defined as [expressions](../../reference/expressions.md) (e.g. `= "order-" + priorityGroup`). The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
 
 ## Task Headers
 
@@ -101,7 +106,7 @@ Adding variable mappings:
 </details>
 
 References:
-* [Job Handling](/basics/job-workers.html)
-* [Expressions](/reference/expressions.html)
-* [Variable Mappings](/reference/variables.html#inputoutput-variable-mappings)
-* [Incidents](/reference/incidents.html)
+* [Job Handling](../../basics/job-workers.md)
+* [Expressions](../../reference/expressions.md)
+* [Variable Mappings](../../reference/variables.md#inputoutput-variable-mappings)
+* [Incidents](../../reference/incidents.md)

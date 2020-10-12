@@ -1,4 +1,7 @@
-# Exclusive Gateway
+---
+id: exclusive-gateways
+title: "Exclusive Gateway"
+---
 
 An exclusive gateway (aka XOR-gateway) allows to make a decision based on data (i.e. on workflow instance variables).
 
@@ -14,7 +17,7 @@ An exclusive gateway can also be used to **join** multiple incoming flows to one
 
 ## Conditions
 
-A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/reference/expressions.html#boolean-expressions) that can access the workflow instance variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
+A `conditionExpression` defines when a flow is taken. It is a [boolean expression](../../reference/expressions.md#boolean-expressions) that can access the workflow instance variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
 
 Multiple boolean values or comparisons can be combined as disjunction (`and`) or conjunction (`or`).
 
@@ -102,5 +105,5 @@ For example:
 </details>
 
 References:
-* [Expressions](/reference/expressions.html)
-* [Incidents](/reference/incidents.html)
+* [Expressions](../../reference/expressions.md)
+* [Incidents](../../reference/incidents.md)

@@ -1,4 +1,7 @@
-# Error Events
+---
+id: error-events
+title: "Error Events"
+---
 
 Error events are events which reference an error. They are used to handle business errors in a workflow.
 
@@ -24,7 +27,7 @@ In case the workflow instance is created via call activity, the error can also b
 
 ## Throwing the Error
 
-An error can be thrown from a **client command** while processing a job. See the [gRPC command](/reference/grpc.html#throwerror-rpc) for details.
+An error can be thrown from a **client command** while processing a job. See the [gRPC command](../../reference/grpc.md#throwerror-rpc) for details.
 
 Alternatively, an error can also be thrown inside a workflow using an error **end event**.
 
@@ -121,4 +124,4 @@ A business error is expected and is handled in the workflow. The workflow may ta
  </details>
 
 References:
-* [Incidents](/reference/incidents.html)
+* [Incidents](../../reference/incidents.md)

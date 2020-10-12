@@ -1,11 +1,14 @@
-# Events
+---
+id: events
+title: "Overview"
+---
 
 Currently supported events:
 
-* [None Events](/bpmn-workflows/none-events/none-events.html)
-* [Message Events](/bpmn-workflows/message-events/message-events.html)
-* [Timer Events](/bpmn-workflows/timer-events/timer-events.html)
-* [Error Events](/bpmn-workflows/error-events/error-events.html)
+* [None Events](none-events/none-events.md)
+* [Message Events](message-events/message-events.md)
+* [Timer Events](timer-events/timer-events.md)
+* [Error Events](error-events/error-events.md)
 
 ## Events in General
 

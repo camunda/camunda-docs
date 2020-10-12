@@ -1,4 +1,7 @@
-# Embedded Subprocess
+---
+id: embedded-subprocesses
+title: "Embedded Subprocess"
+---
 
 An embedded subprocess allows to group elements of the workflow.
 
@@ -91,4 +94,4 @@ By default, the local variables of the subprocess are not propagated (i.e. they 
 </details>
 
 References:
-* [Variable Mappings](/reference/variables.html#inputoutput-variable-mappings)
+* [Variable Mappings](../../reference/variables.md#inputoutput-variable-mappings)

@@ -1,5 +1,7 @@
-# None Events
-
+---
+id: none-events
+title: "None Events"
+---
 None events are unspecified events, also called ‘blank’ events.
 
 ![workflow](assets/none-events.png)

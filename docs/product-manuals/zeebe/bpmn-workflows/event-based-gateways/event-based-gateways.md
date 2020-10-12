@@ -1,4 +1,7 @@
-# Event-Based Gateway
+---
+id: event-based-gateways
+title: "Event-based Gateway"
+---
 
 An event-based gateway allows to make a decision based on events. 
 
@@ -95,5 +98,5 @@ When an event-based gateway is entered then the workflow instance waits at the g
 </details>
 
 References:
-* [Timer Events](/bpmn-workflows/timer-events/timer-events.html)
-* [Message Events](/bpmn-workflows/message-events/message-events.html)
+* [Timer Events](../timer-events/timer-events.md)
+* [Message Events](../message-events/message-events.md)
