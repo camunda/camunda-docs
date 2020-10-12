@@ -1,4 +1,7 @@
-# Zeebe on Kubernetes
+---
+id: index
+title: "Overview"
+---
 
 ![Zeebe on K8s](assets/zeebe-k8s-helm.png)
 
@@ -11,9 +14,9 @@ You are free to choose your Kubernetes provider, our Helm charts are not cloud p
 You can also join us in [Slack at:  https://zeebe-slack-invite.herokuapp.com/]( https://zeebe-slack-invite.herokuapp.com/)
 
 This document is divided in the following sections:
-- [Prerequisites](assets/prerequisites.html)
-- [Getting to know and Installing Zeebe Helm Charts](assets/installing-helm.html)
-- [Accessing Operate from outside our Kubernetes Cluster](assets/accessing-operate.html)
+- [Prerequisites](prerequisites.md)
+- [Getting to know and Installing Zeebe Helm Charts](installing-helm.md)
+- [Accessing Operate from outside our Kubernetes Cluster](accessing-operate.md)
 
 
 

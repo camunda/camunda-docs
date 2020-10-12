@@ -1,4 +1,8 @@
-## Zeebe Helm Charts
+---
+id: installing-helm
+title: "Zeebe Helm Charts"
+---
+
 
 [Helm](https://github.com/helm/helm) is a package manager for Kubernetes resources. Helm allows us to install a set of components by just referencing a package name and it allows us to override configurations to accommodate these packages to different scenarios. Helm also provide dependency management between  charts, meaning that charts can depend on other charts allowing us to aggregate a set of components together that can be installed with a single command. 
 

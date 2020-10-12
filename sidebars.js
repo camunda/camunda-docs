@@ -217,7 +217,17 @@ module.exports = {
               "product-manuals/zeebe/operations/health",
               "product-manuals/zeebe/operations/backpressure",
             ]
-          }
+          },
+          {
+            "Zeebe on Kubernetes": [
+              "product-manuals/zeebe/kubernetes/index",
+              "product-manuals/zeebe/kubernetes/prerequisites",
+              "product-manuals/zeebe/kubernetes/installing-helm",
+              "product-manuals/zeebe/kubernetes/accessing-operate",
+              "product-manuals/zeebe/kubernetes/zeebe-operator",
+            ]
+          },
+          "product-manuals/zeebe/appendix/glossary",
         ],
         Operate: [{
           "Deployment Guide": [

@@ -1,4 +1,8 @@
-### Accessing Operate from outside the cluster
+---
+id: accessing-operate
+title: "Accessing Operate from outside the cluster"
+---
+
 The **Zeebe Full Helm Charts** install an Ingress Controller. If this is deployed in a cloud provider (GKE, EKS, AKS, etc.), it should provision a `LoadBalancer` which will expose an External IP that can be used as the main entry point to access all the services/applications that are configured to have Ingress Routes. 
 
 > If you have your own Ingress Controller, you can use the child chart for installing a Zeebe Cluster, instead of using the Parent Chart. 

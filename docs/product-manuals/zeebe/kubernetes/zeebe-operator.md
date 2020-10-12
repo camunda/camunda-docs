@@ -1,4 +1,7 @@
-# Zeebe Operator (Experimental)
+---
+id: zeebe-operator
+title: "Zeebe Operator (Experimental)"
+---
 
 The Zeebe Kubernetes Operator was born out of the need to manage more than one single Zeebe Cluster running inside Kubernetes Clusters. Zeebe Clusters have their own lifecycle and in real implementations, the need to update, monitor and manage some of these cluster components while applications are running becomes challenging. The objective of the Zeebe k8s Operator is to simplify and natively integrate Zeebe with k8s, to solve operational burden and facilitate the creation and maintenance of a set of clusters. 
 
