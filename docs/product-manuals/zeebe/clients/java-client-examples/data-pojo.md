@@ -14,7 +14,7 @@ title: "Handle Variables as POJO"
 
 ## HandleVariablesAsPojo.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples/src/main/java/io/zeebe/example/data/HandleVariablesAsPojo.java)
+[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/data/HandleVariablesAsPojo.java)
 
 <!--
 ```java

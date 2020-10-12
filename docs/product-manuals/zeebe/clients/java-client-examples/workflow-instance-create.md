@@ -9,7 +9,7 @@ title: "Create a Workflow Instance"
 
 ## WorkflowInstanceCreator.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples/src/main/java/io/zeebe/example/workflow/WorkflowInstanceCreator.java)
+[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/workflow/WorkflowInstanceCreator.java)
 
 <!--
 ```java

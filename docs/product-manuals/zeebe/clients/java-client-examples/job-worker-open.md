@@ -15,7 +15,7 @@ title: "Open a Job Worker"
 
 ## JobWorkerCreator.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples/src/main/java/io/zeebe/example/job/JobWorkerCreator.java)
+[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/job/JobWorkerCreator.java)
 
 <!--
 ```java

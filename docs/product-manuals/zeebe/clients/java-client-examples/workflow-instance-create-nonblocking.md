@@ -10,7 +10,7 @@ title: "Create Workflow Instances Non-Blocking"
 
 ## NonBlockingWorkflowInstanceCreator.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples/src/main/java/io/zeebe/example/workflow/NonBlockingWorkflowInstanceCreator.java)
+[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/workflow/NonBlockingWorkflowInstanceCreator.java)
 
 <!--
 ```java

@@ -14,7 +14,7 @@ title: "Deploy a Workflow"
 
 ## WorkflowDeployer.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples/src/main/java/io/zeebe/example/workflow/WorkflowDeployer.java)
+[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/workflow/WorkflowDeployer.java)
 
 <!--
 ```java
@@ -24,7 +24,7 @@ title: "Deploy a Workflow"
 
 ## demoProcess.bpmn
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples/src/main/resources/demoProcess.bpmn)
+[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/resources/demoProcess.bpmn)
 
 Download the XML and save it in the Java classpath before running the example. Open the file with Zeebe Modeler for a graphical representation.
 

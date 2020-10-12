@@ -16,7 +16,7 @@ Shows which broker is leader and follower for which partition. Particularly usef
 
 ## TopologyViewer.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples/src/main/java/io/zeebe/example/cluster/TopologyViewer.java)
+[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/cluster/TopologyViewer.java)
 
 <!--
 ```java

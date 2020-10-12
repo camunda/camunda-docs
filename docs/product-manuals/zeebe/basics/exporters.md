@@ -27,7 +27,7 @@ produced from that point on.
 
 For more information, you can read the [reference information page](../reference/exporters.md),
 and you can find a reference implementation in the form of the Zeebe-maintained
-[ElasticSearch exporter](https://github.com/zeebe-io/zeebe/tree/{{commit}}/exporters/elasticsearch-exporter).
+[ElasticSearch exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
 
 
 The main impact exporters have on a Zeebe cluster is that they remove the burden

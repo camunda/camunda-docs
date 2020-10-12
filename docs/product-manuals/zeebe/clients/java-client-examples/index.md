@@ -3,13 +3,13 @@ id: index
 title: "Overview"
 ---
 
-These examples are accessible in the [zeebe-io github repository]((https://github.com/zeebe-io/zeebe/) at commit `{{commit}}`. [Link to browse code on github]((https://github.com/zeebe-io/zeebe/tree/{{commit}}/samples).
+These examples are accessible in the [zeebe-io github repository]((https://github.com/zeebe-io/zeebe/) at commit `develop`. [Link to browse code on github]((https://github.com/zeebe-io/zeebe/tree/develop/samples).
 
 Instructions to access code locally:
 
 ```
 git clone https://github.com/zeebe-io/zeebe.git
-git checkout {{commit}}
+git checkout develop
 cd zeebe/samples
 ```
 
