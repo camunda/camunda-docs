@@ -148,3 +148,8 @@ Template:
 
 </Tabs>
 ```
+
+### Source Files for Images and Videos
+Source files for images and videos can be put in:
+
+`./media-src/[subfolder according to do structure]/` 
