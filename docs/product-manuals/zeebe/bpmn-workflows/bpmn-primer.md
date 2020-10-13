@@ -3,6 +3,8 @@ id: bpmn-primer
 title: "BPMN Primer"
 ---
 
+import ReactPlayer from 'react-player'
+
 Business Process Model And Notation 2.0 (BPMN) is an industry standard for workflow modeling and execution. A BPMN workflow is an XML document that has a visual representation. For example, here is a BPMN workflow:
 
 ![workflow](assets/workflow.png)
@@ -132,9 +134,15 @@ A core concept of BPMN is a _sequence flow_ that defines the order in which step
 You can think of workflow execution as tokens running through the workflow model. When a workflow is started, a token is spawned at the beginning of the model. It advances with every completed step. When the token reaches the end of the workflow, it is consumed and the workflow instance ends. Zeebe's task is to drive the token and to make sure that the job workers are invoked whenever necessary.
 
 <center>
-<video autoplay muted loop height="200px">
-  <source src="./assets/sequenceflow.mp4" type="video/mp4" />
-</video>
+<ReactPlayer
+playing
+loop
+playsinline
+height="200px"
+url={[
+{src: './assets/sequenceflow.mp4', type: 'video/mp4'}
+]}
+/>
 </center>
 
 ### Tasks: Units of Work
@@ -142,7 +150,15 @@ You can think of workflow execution as tokens running through the workflow model
 The basic elements of BPMN workflows are _tasks_, atomic units of work that are composed to create a meaningful result. Whenever a token reaches a task, the token stops and Zeebe creates a job and notifies a registered worker to perform work. When that handler signals completion, then the token continues on the outgoing sequence flow.
 
 <center>
-<video src="./assets/tasks.mp4" autoplay muted loop height="300px"></video>
+<ReactPlayer
+playing
+loop
+playsinline
+height="300px"
+url={[
+{src: './assets/tasks.mp4', type: 'video/mp4'}
+]}
+/>
 </center>
 
 Choosing the granularity of a task is up to the person modeling the workflow. For example, the activity of processing an order can be modeled as a single _Process Order_ task, or as three individual tasks _Collect Money_, _Fetch Items_, _Ship Parcel_. If you use Zeebe to orchestrate microservices, one task can represent one microservice invocation.
@@ -156,13 +172,29 @@ Gateways are elements that route tokens in more complex patterns than plain sequ
 BPMN's _exclusive gateway_ chooses one sequence flow out of many based on data:
 
 <center>
-<video src="./assets/exclusive-gw.mp4" autoplay muted loop height="300px"></video>
+<ReactPlayer
+playing
+loop
+playsinline
+height="300px"
+url={[
+{src: './assets/exclusive-gw.mp4', type: 'video/mp4'}
+]}
+/>
 </center>
 
 BPMN's _parallel gateway_ generates new tokens by activating multiple sequence flows in parallel:
 
 <center>
-<video src="./assets/parallel-gw.mp4" autoplay muted loop height="300px"></video>
+<ReactPlayer
+playing
+loop
+playsinline
+height="300px"
+url={[
+{src: './assets/parallel-gw.mp4', type: 'video/mp4'}
+]}
+/>
 </center>
 
 See the [Gateways](gateways.md) section on which types of gateways are currently supported and how to use them.
@@ -172,7 +204,15 @@ See the [Gateways](gateways.md) section on which types of gateways are currently
 _Events_ in BPMN represent things that _happen_. A workflow can react to events (_catching_ event) as well as emit events (_throwing_ event). For example:
 
 <center>
-<video src="./assets/catch-event.mp4" autoplay muted loop height="200px"></video>
+<ReactPlayer
+playing
+loop
+playsinline
+height="300px"
+url={[
+{src: './assets/catch-event.mp4', type: 'video/mp4'}
+]}
+/>
 </center>
 
 The circle with the envelope symbol is a catching message event. It makes the token continue as soon as a message is received. The XML representation of the workflow contains the criteria for which kind of message triggers continuation.
