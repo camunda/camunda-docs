@@ -127,9 +127,7 @@ The best tool for modeling BPMN diagrams for Zeebe is the **Zeebe Modeler**.
 
 A core concept of BPMN is a _sequence flow_ that defines the order in which steps in the workflow happen. In BPMN's visual representation, a sequence flow is an arrow connecting two elements. The direction of the arrow indicates their order of execution.
 
-<center>
-<img src="./assets/sequenceflow.png" alt="workflow"/>
-</center>
+![](./assets/sequenceflow.png)
 
 You can think of workflow execution as tokens running through the workflow model. When a workflow is started, a token is spawned at the beginning of the model. It advances with every completed step. When the token reaches the end of the workflow, it is consumed and the workflow instance ends. Zeebe's task is to drive the token and to make sure that the job workers are invoked whenever necessary.
 
@@ -140,7 +138,7 @@ loop
 playsinline
 height="200px"
 url={[
-{src: './assets/sequenceflow.mp4', type: 'video/mp4'}
+{src: '/videos/sequenceflow.mp4', type: 'video/mp4'}
 ]}
 />
 </center>
@@ -156,7 +154,7 @@ loop
 playsinline
 height="300px"
 url={[
-{src: './assets/tasks.mp4', type: 'video/mp4'}
+{src: '/videos/tasks.mp4', type: 'video/mp4'}
 ]}
 />
 </center>
@@ -178,7 +176,7 @@ loop
 playsinline
 height="300px"
 url={[
-{src: './assets/exclusive-gw.mp4', type: 'video/mp4'}
+{src: '/videos/exclusive-gw.mp4', type: 'video/mp4'}
 ]}
 />
 </center>
@@ -192,7 +190,7 @@ loop
 playsinline
 height="300px"
 url={[
-{src: './assets/parallel-gw.mp4', type: 'video/mp4'}
+{src: '/videos/parallel-gw.mp4', type: 'video/mp4'}
 ]}
 />
 </center>
@@ -210,7 +208,7 @@ loop
 playsinline
 height="300px"
 url={[
-{src: './assets/catch-event.mp4', type: 'video/mp4'}
+{src: '/videos/catch-event.mp4', type: 'video/mp4'}
 ]}
 />
 </center>
