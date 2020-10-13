@@ -1,8 +1,4 @@
----
-id: configuration
-title: Configuration
----
-## Introduction
+# Introduction
 
 Tasklist is a Spring Boot application. That means all ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
 a Spring Boot application can be applied. By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist related settings are prefixed
@@ -15,25 +11,24 @@ with `zeebe.tasklist`. The following parts are configurable:
  * [Monitoring and health probes](#monitoring-and-health-probes)
  * [Logging configuration](#logging)
 
-## Configurations
+# Configurations
 
-## Elasticsearch
+# Elasticsearch
 
 Tasklist stores and reads data in/from Elasticsearch.
 
-### Settings to connect
-
+## Settings to connect
 Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/setting-up-authentication.html) for elasticsearch.
 Set the appropriate username/password combination in the configuration to use it.
 
 Name | Description | Default value
 -----|-------------|--------------
 zeebe.tasklist.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
-zeebe.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
+zeebe.tasklist.elasticsearch.url | URL of Elasticsearch REST API  | http://localhost:9200
 zeebe.tasklist.elasticsearch.username | Username to access Elasticsearch REST API | -
 zeebe.tasklist.elasticsearch.password | Password to access Elasticsearch REST API | -
 
-### A snippet from application.yml:
+## A snippet from application.yml:
 
 ```yaml
 zeebe.tasklist:
@@ -44,17 +39,17 @@ zeebe.tasklist:
     url: http://localhost:9200
 ```
 
-## Zeebe Broker Connection
+# Zeebe Broker Connection
 
 Tasklist needs a connection to Zeebe Broker to start the import.
 
-### Settings to connect
+## Settings to connect
 
 Name | Description | Default value
 -----|-------------|--------------
 zeebe.tasklist.zeebe.brokerContactPoint | Broker contact point to zeebe as hostname and port | localhost:26500
 
-### A snippet from application.yml:
+## A snippet from application.yml:
 
 ```yaml
 zeebe.tasklist:
@@ -63,38 +58,35 @@ zeebe.tasklist:
     brokerContactPoint: localhost:26500
 ```
 
-## Zeebe Elasticsearch Exporter
+# Zeebe Elasticsearch Exporter
 
 Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
 Therefore settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
 
-### Settings to connect and import:
+## Settings to connect and import:
 
 Name | Description | Default value
 -----|-------------|--------------
 zeebe.tasklist.zeebeElasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
-zeebe.tasklist.zeebeElasticsearch.host | Hostname where Elasticsearch is running | localhost
-zeebe.tasklist.zeebeElasticsearch.port | Port of Elasticsearch REST API | 9200
+zeebe.tasklist.zeebeElasticsearch.url | URL of Elasticsearch REST API| http://localhost:9200
 zeebe.tasklist.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
 zeebe.tasklist.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
 zeebe.tasklist.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
 
-### A snippet from application.yml:
+## A snippet from application.yml:
 
 ```yaml
 zeebe.tasklist:
   zeebeElasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # Url
+    url: http://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
 
-## Monitoring and health probes
+# Monitoring and health probes
 
 Tasklist includes [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready) inside, that
 provides number of monitoring possibilities., e.g. health check (http://localhost:8080/actuator/health) and metrics (http://localhost:8080/actuator/prometheus) endpoints.
@@ -116,11 +108,11 @@ With this configuration following endpoints are available for use out of the box
 
 ```<server>:8080/actuator/health/readiness``` Readiness probe
 
-### Example snippets to use Tasklist probes in Kubernetes:
+## Example snippets to use Tasklist probes in Kubernetes:
 
 For details to set Kubernetes probes parameters see: [Kubernetes configure probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes)
 
-#### Readiness probe as yaml config:
+### Readiness probe as yaml config:
 ```yaml
 readinessProbe:
      httpGet:
@@ -129,7 +121,7 @@ readinessProbe:
      initialDelaySeconds: 30
      periodSeconds: 30
 ```
-#### Liveness probe as yaml config:
+### Liveness probe as yaml config:
 ```yaml
 livenessProbe:
      httpGet:
@@ -139,7 +131,7 @@ livenessProbe:
      periodSeconds: 30
 ```
 
-## Logging
+# Logging
 
 Tasklist uses Log4j2 framework for logging. In distribution archive as well as inside a Docker image `config/log4j2.xml` logging configuration files is included,
 that can be further adjusted to your needs:
@@ -149,16 +141,13 @@ that can be further adjusted to your needs:
 <Configuration status="WARN" monitorInterval="30">
   <Properties>
     <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
-    <Property name="log.stackdriver.serviceName">${env:TASKLIST_LOG_STACKDRIVER_SERVICENAME:-tasklist}</Property>
-    <Property name="log.stackdriver.serviceVersion">${env:TASKLIST_LOG_STACKDRIVER_SERVICEVERSION:-}</Property>
   </Properties>
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT" follow="true">
       <PatternLayout pattern="${LOG_PATTERN}"/>
     </Console>
-    <Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
-      <StackdriverLayout serviceName="${log.stackdriver.serviceName}"
-        serviceVersion="${log.stackdriver.serviceVersion}" />
+	<Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
+      <StackdriverJSONLayout/>
     </Console>
   </Appenders>
   <Loggers>
@@ -170,9 +159,9 @@ that can be further adjusted to your needs:
 </Configuration>
 ```
 
-By default, Console log appender will be used.
+By default Console log appender will be used.
 
-#### JSON logging configuration
+### JSON logging configuration
 
 You can choose to output logs in JSON format (Stackdriver compatible). To enable it, define
 the environment variable ```TASKLIST_LOG_APPENDER``` like this:
@@ -181,7 +170,7 @@ the environment variable ```TASKLIST_LOG_APPENDER``` like this:
 TASKLIST_LOG_APPENDER=Stackdriver
 ```
 
-## An example of application.yml file
+# An example of application.yml file
 
 The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`config/application.yml`)
  and can be used to adjust Tasklist to your needs.
@@ -199,10 +188,8 @@ zeebe.tasklist:
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # Url
+    url: http://localhost:9200
   # Zeebe instance
   zeebe:
     # Broker contact point
@@ -211,10 +198,10 @@ zeebe.tasklist:
   zeebeElasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # Url
+    url: http://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
+
+
