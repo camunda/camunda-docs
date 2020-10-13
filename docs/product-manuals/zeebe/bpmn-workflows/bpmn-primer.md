@@ -102,9 +102,9 @@ Business Process Model And Notation 2.0 (BPMN) is an industry standard for workf
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
 ```
+
   </p>
 </details>
-
 
 This duality makes BPMN very powerful. The XML document contains all the necessary information to be interpreted by workflow engines and modeling tools like Zeebe. At the same time, the visual representation contains just enough information to be quickly understood by humans, even when they are non-technical people. The BPMN model is source code and documentation in one artifact.
 
@@ -114,36 +114,38 @@ The following is an introduction to BPMN 2.0, its elements and their execution s
 
 The best tool for modeling BPMN diagrams for Zeebe is the **Zeebe Modeler**.
 
-![overview](assets/zeebe-modeler.gif)
+![overview](./assets/zeebe-modeler.gif)
 
-* [Download page](https://github.com/zeebe-io/zeebe-modeler/releases)
-* [Source code repository](https://github.com/zeebe-io/zeebe-modeler)
+- [Download page](https://github.com/zeebe-io/zeebe-modeler/releases)
+- [Source code repository](https://github.com/zeebe-io/zeebe-modeler)
 
 ## BPMN Elements
 
 ### Sequence Flow: Controlling the Flow of Execution
 
-A core concept of BPMN is a *sequence flow* that defines the order in which steps in the workflow happen. In BPMN's visual representation, a sequence flow is an arrow connecting two elements. The direction of the arrow indicates their order of execution.
+A core concept of BPMN is a _sequence flow_ that defines the order in which steps in the workflow happen. In BPMN's visual representation, a sequence flow is an arrow connecting two elements. The direction of the arrow indicates their order of execution.
 
 <center>
-<img src="assets/sequenceflow.png" alt="workflow"/>
+<img src="./assets/sequenceflow.png" alt="workflow"/>
 </center>
 
 You can think of workflow execution as tokens running through the workflow model. When a workflow is started, a token is spawned at the beginning of the model. It advances with every completed step. When the token reaches the end of the workflow, it is consumed and the workflow instance ends. Zeebe's task is to drive the token and to make sure that the job workers are invoked whenever necessary.
 
 <center>
-<video src="assets/sequenceflow.mp4" autoplay muted loop height="200px"></video>
+<video autoplay muted loop height="200px">
+  <source src="./assets/sequenceflow.mp4" type="video/mp4" />
+</video>
 </center>
 
 ### Tasks: Units of Work
 
-The basic elements of BPMN workflows are *tasks*, atomic units of work that are composed to create a meaningful result. Whenever a token reaches a task, the token stops and Zeebe creates a job and notifies a registered worker to perform work. When that handler signals completion, then the token continues on the outgoing sequence flow.
+The basic elements of BPMN workflows are _tasks_, atomic units of work that are composed to create a meaningful result. Whenever a token reaches a task, the token stops and Zeebe creates a job and notifies a registered worker to perform work. When that handler signals completion, then the token continues on the outgoing sequence flow.
 
 <center>
-<video src="assets/tasks.mp4" autoplay muted loop height="300px"></video>
+<video src="./assets/tasks.mp4" autoplay muted loop height="300px"></video>
 </center>
 
-Choosing the granularity of a task is up to the person modeling the workflow. For example, the activity of processing an order can be modeled as a single *Process Order* task, or as three individual tasks *Collect Money*, *Fetch Items*, *Ship Parcel*. If you use Zeebe to orchestrate microservices, one task can represent one microservice invocation.
+Choosing the granularity of a task is up to the person modeling the workflow. For example, the activity of processing an order can be modeled as a single _Process Order_ task, or as three individual tasks _Collect Money_, _Fetch Items_, _Ship Parcel_. If you use Zeebe to orchestrate microservices, one task can represent one microservice invocation.
 
 See the [Tasks](tasks.md) section on which types of tasks are currently supported and how to use them.
 
@@ -151,26 +153,26 @@ See the [Tasks](tasks.md) section on which types of tasks are currently supporte
 
 Gateways are elements that route tokens in more complex patterns than plain sequence flow.
 
-BPMN's *exclusive gateway* chooses one sequence flow out of many based on data:
+BPMN's _exclusive gateway_ chooses one sequence flow out of many based on data:
 
 <center>
-<video src="assets/exclusive-gw.mp4" autoplay muted loop height="300px"></video>
+<video src="./assets/exclusive-gw.mp4" autoplay muted loop height="300px"></video>
 </center>
 
-BPMN's *parallel gateway* generates new tokens by activating multiple sequence flows in parallel:
+BPMN's _parallel gateway_ generates new tokens by activating multiple sequence flows in parallel:
 
 <center>
-<video src="assets/parallel-gw.mp4" autoplay muted loop height="300px"></video>
+<video src="./assets/parallel-gw.mp4" autoplay muted loop height="300px"></video>
 </center>
 
 See the [Gateways](gateways.md) section on which types of gateways are currently supported and how to use them.
 
 ### Events: Waiting for Something to Happen
 
-*Events* in BPMN represent things that *happen*. A workflow can react to events (*catching* event) as well as emit events (*throwing* event). For example:
+_Events_ in BPMN represent things that _happen_. A workflow can react to events (_catching_ event) as well as emit events (_throwing_ event). For example:
 
 <center>
-<video src="assets/catch-event.mp4" autoplay muted loop height="200px"></video>
+<video src="./assets/catch-event.mp4" autoplay muted loop height="200px"></video>
 </center>
 
 The circle with the envelope symbol is a catching message event. It makes the token continue as soon as a message is received. The XML representation of the workflow contains the criteria for which kind of message triggers continuation.
@@ -181,9 +183,9 @@ See the [Events](events.md) section on which types of events are currently suppo
 
 ### Sub Processes: Grouping Elements
 
-*Sub Processes* are element containers that allow defining common functionality. For example, we can attach an event to a sub process's border:
+_Sub Processes_ are element containers that allow defining common functionality. For example, we can attach an event to a sub process's border:
 
-![payload](assets/sub-process.gif)
+![payload](./assets/sub-process.gif)
 
 When the event is triggered, the sub process is interrupted regardless which of its elements is currently active.
 
@@ -191,7 +193,7 @@ See the [Sub Processes](subprocesses.md) section on which types of sub processes
 
 ## Additional Resources
 
-* [BPMN Specification](http://www.bpmn.org/)
-* [BPMN Tutorial](https://camunda.com/bpmn/)
-* [Full BPMN Reference](https://camunda.com/bpmn/reference/)
-* [BPMN Book](https://www.amazon.com/dp/1086302095/)
+- [BPMN Specification](http://www.bpmn.org/)
+- [BPMN Tutorial](https://camunda.com/bpmn/)
+- [Full BPMN Reference](https://camunda.com/bpmn/reference/)
+- [BPMN Book](https://www.amazon.com/dp/1086302095/)
