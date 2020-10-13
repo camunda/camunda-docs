@@ -33,6 +33,22 @@ zeebe.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localh
 zeebe.tasklist.elasticsearch.username | Username to access Elasticsearch REST API | -
 zeebe.tasklist.elasticsearch.password | Password to access Elasticsearch REST API | -
 
+### Settings for shards and replicas
+
+Tasklist creates the template with index settings named `tasklist-<version>_template` that Elasticsearch will use for all Tasklist indices.
+These settings can be changed.
+
+Following configuration parameters will define the settings:
+
+Name|Description|Default value
+----|-----------|--------------
+zeebe.tasklist.elasticsearch.numberOfShards| How many shards Elasticsearch uses for all Tasklist indices| 1
+zeebe.tasklist.elasticsearch.numberOfReplicas| How many replicas Elasticsearch uses for all Tasklist indices| 0
+
+These values are applied only on first startup of Tasklist or during version upgrade. After Tasklist 
+ELS schema is created, settings may be adjusted directly in ELS template and the new settings will be applied 
+to indices created after adjustment.
+
 ### A snippet from application.yml:
 
 ```yaml

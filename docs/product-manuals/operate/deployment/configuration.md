@@ -40,6 +40,22 @@ camunda.operate.elasticsearch.url | URL of Elasticsearch REST API | http://local
 camunda.operate.elasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.operate.elasticsearch.password | Password to access Elasticsearch REST API | -
 
+### Settings for shards and replicas
+
+Operate creates the template with index settings named `operate-<version>_template` that Elasticsearch will use for all Operate indices.
+These settings can be changed.
+
+Following configuration parameters will define the settings:
+
+Name|Description|Default value
+----|-----------|--------------
+camunda.operate.elasticsearch.numberOfShards| How many shards Elasticsearch uses for all Operate indices| 1
+camunda.operate.elasticsearch.numberOfReplicas| How many replicas Elasticsearch uses for all Operate indices| 0
+
+These values are applied only on first startup of Operate or during version upgrade. After Operate 
+ELS schema is created, settings may be adjusted directly in ELS template and the new settings will be applied 
+to indices created after adjustment.
+
 ### A snippet from application.yml:
 
 ```yaml
