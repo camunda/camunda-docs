@@ -65,6 +65,31 @@ All changes have to be done in a separate Branch. As soon as the changes are don
 - Static images can be placed into [`static/img/`](./static/img/).
 - Images that will change with a new version have to be placed into `docs`. Best practice: add an `img` directory to each directory where it is needed.
 
+### Videos
+
+- The regular `video` does not work in MDX.
+- Use the [react-video](https://www.npmjs.com/package/react-player) component in the following way:
+
+Import the component into corresponding Markdown file:
+
+```js
+import ReactPlayer from 'react-player'
+```
+
+Embed a video with the `react-video` component:
+
+```html
+<ReactPlayer
+playing
+loop
+playsinline
+height="200px"
+url={[
+{src: './video.mp4', type: 'video/mp4'}
+]}
+/>
+```
+
 ### Code Blocks / Selector
 
 Docusaurus supports [MDX](https://mdxjs.com/) that makes it easily possible to use code selectors for our docs. Two things need to be done:
