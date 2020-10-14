@@ -6,37 +6,47 @@ title: "BPMN Coverage"
 The following BPMN elements are currently implemented in Zeebe:
 
 ## Participants
-* Pool
+
+![participants](./elements/participants.svg)
 
 ## Subprocesses
 
-* [Embedded Subprocess](embedded-subprocesses/embedded-subprocesses.md)
-* [Call Activities](call-activities/call-activities.md)
-* [Event Subprocess](event-subprocesses/event-subprocesses.md)
+[![Embedded Subprocess](./elements/embedded-subprocess.svg)](embedded-subprocesses/embedded-subprocesses.md)
+[![Call Activity](./elements/call-activity.svg)](call-activities/call-activities.md)
+
+- [Embedded Subprocess](embedded-subprocesses/embedded-subprocesses.md)
+- [Call Activities](call-activities/call-activities.md)
+- [Event Subprocess](event-subprocesses/event-subprocesses.md)
 
 ## Tasks
 
-* [Service Tasks](service-tasks/service-tasks.md)
-* [Receive Tasks](receive-tasks/receive-tasks.md)
+- [Service Tasks](service-tasks/service-tasks.md)
+- [Receive Tasks](receive-tasks/receive-tasks.md)
 
 ## Gateways
 
-* [Exclusive Gateways](exclusive-gateways/exclusive-gateways.md)
-* [Parallel Gateways](parallel-gateways/parallel-gateways.md)
-* [Event-Based Gateways](event-based-gateways/event-based-gateways.md)
+- [Exclusive Gateways](exclusive-gateways/exclusive-gateways.md)
+- [Parallel Gateways](parallel-gateways/parallel-gateways.md)
+- [Event-Based Gateways](event-based-gateways/event-based-gateways.md)
 
 ## Markers
 
-* [Multi-Instance](multi-instance/multi-instance.md)
+- [Multi-Instance](multi-instance/multi-instance.md)
 
 ## Events
 
-* [None Events](none-events/none-events.md)
-* [Message Events](message-events/message-events.md)
-* [Timer Events](timer-events/timer-events.md)
-* [Error Events](error-events/error-events.md)
+| Type | Start | Start | Start | Intermediate | Intermediate | Intermediate | Intermediate | End |
 
-<!-- 
+|      | Normal                                 | Event Sub-Process | Event Sub-Process non-interrupt | Catch | Boundary | Boundary non-interrupt | Throw |     |
+| ---- | -------------------------------------- | ----------------- | ------------------------------- | ----- | -------- | ---------------------- | ----- | --- |
+| None | ![non event](./elements/non-event.svg) |                   |                                 |       |          |                        |       |     |
+
+- [None Events](none-events/none-events.md)
+- [Message Events](message-events/message-events.md)
+- [Timer Events](timer-events/timer-events.md)
+- [Error Events](error-events/error-events.md)
+
+<!--
 <div class="bpmn-symbols">
 
   <div>
