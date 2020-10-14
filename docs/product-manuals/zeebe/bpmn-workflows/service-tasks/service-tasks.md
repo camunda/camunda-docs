@@ -3,8 +3,6 @@ id: service-tasks
 title: "Service Tasks"
 ---
 
-# Service Tasks
-
 A service task represents a work item in the workflow with a specific type.
 
 ![workflow](../assets/order-process.png)
