@@ -216,6 +216,7 @@ module.exports = {
               },
               "product-manuals/zeebe/operations/health",
               "product-manuals/zeebe/operations/backpressure",
+              "product-manuals/zeebe/operations/disk-space",
             ]
           },
           {
