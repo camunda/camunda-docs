@@ -37,7 +37,7 @@ values={[
 ```bash
 curl --header "Content-Type: application/json" \
     --request POST \
-    --data '{"grant_type"="client_credentials", "audience"="api.cloud.camunda.io", "client_id"="XXX", "client_secret"="YYY"}' \
+    --data '{"grant_type":"client_credentials", "audience":"api.cloud.camunda.io", "client_id":"XXX", "client_secret":"YYY"}' \
     https://login.cloud.camunda.io/oauth/token
 ```
 
