@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 This section describes how to upgrade Zeebe to a new version.
 
 :::caution
-Currently, we are facing an [issue](https://github.com/zeebe-io/zeebe/issues/5581) that can corrupt the data when upgrading to a new version. The issue affects the reprocessing (i.e. rehydrating the data from the records on the log stream) and can be omitted by restoring the data from a snapshot. Please follow the recommended procedure to minimize the risk of losing data.
+Currently, we are facing an [issue](https://github.com/zeebe-io/zeebe/issues/5581) that can corrupt the data when upgrading to a new version. The issue affects the reprocessing (i.e. rehydrating the data from the records on the log stream) and can be omitted by restoring the data from a snapshot. Please follow the recommended procedure to minimize the risk of losing data. **This issue affects only users upgrading from a version lower than 0.24.4 to 0.24.4 or newer.**
 :::
 
 ## Rolling Upgrade
@@ -20,26 +20,33 @@ Zeebe is designed to allow a rolling upgrade of a cluster. The brokers can be up
 1. Continue with the next broker until all brokers are upgraded
 1. Upgrade the standalone gateways
 
-:::caution
-Because of current issue, it is not recommended to perform a rolling upgrade. Please follow the upgrade procedure instead.
+:::tip Helm Charts
+If you are using the Helm charts, simply update your values file and change the image tag to the new version you wish to upgrade to, then follow the [Helm upgrade guide](https://helm.sh/docs/helm/helm_upgrade/).
 :::
 
-## Upgrade Procedure
+:::caution
+If you are upgrading from a Zeebe version lower than 0.24.4, it is not recommended to perform a rolling upgrade. Please follow the recommended upgrade procedure instead.
+:::
 
-The following procedure describes how to upgrade a broker. If the cluster contains multiple brokers then these steps can be done for all brokers in parallel. Standalone gateways should be upgraded after all brokers in the cluster are upgraded to avoid mismatches in the protocol version.
+## Upgrade Procedure for Zeebe < 0.24.4
 
-Note that this procedure results in a downtime of the whole cluster. Currently, a rolling upgrade is not recommended to avoid that an upgraded broker do reprocessing and is affected by the issue.
+The following procedure describes how to upgrade a Zeebe broker pre 0.24.4. If the cluster contains multiple brokers then these steps can be done for all brokers in parallel. Standalone gateways should be upgraded after all brokers in the cluster are upgraded to avoid mismatches in the protocol version.
 
-> TODO: describe how to perform the upgrade on Kubernetes/Helm
+:::caution
+This procedure results in a downtime of the whole cluster.
+:::
+
+### Experimental: Detect Reprocessing Inconsistency
+
+With Zeebe 0.24.5 and 0.25.1 a new exterimental feature was introduced which detects inconsistency of the logstream on upgrade to mitigate the following issue.
+
+We recommend to enable it after upgrading Zeebe from a version lower than 0.24.4 to a version greater than or equal to 0.24.4 on the first run after the upgrade, as described in the update proceedure. You can enable it using the following environment variable:
+
+`ZEEBE_BROKER_EXPERIMENTAL_DETECTREPROCESSINGINCONSISTENCY="true"`
+
+After you verified that the upgrade was successful, we recommend to disable it again by removing the environment variable and restarting your brokers.
 
 ### Preparing the Upgrade
-
-<Tabs groupId="from-zeebe-version" defaultValue="since-0.24.4" values={[ 
-{ label: 'From version < 0.24.4', value: 'before-0.24.4', }, 
-{ label: 'From version >= 0.24.4', value: 'since-0.24.4', }, 
-] }>
-
-<TabItem value="before-0.24.4">
 
 1. Stop the workflow processing
     * Close all job workers
@@ -50,27 +57,32 @@ Note that this procedure results in a downtime of the whole cluster. Currently, 
     * Note that no snapshot is created if no processing happened since the last snapshot
 1. Make a backup of the `data` folder
 
-</TabItem>
-
-<TabItem value="since-0.24.4">
-
-The [Partitions Admin Endpoint](#partitions-admin-endpoint) can be used to query the status of the partitions and perform operations for the upgrade.
-
-1. Stop the workflow processing and trigger a snapshot creation
-    * Call the `prepareUpgrade` operation on the partitions endpoint
-    * Query the status of the partitions until the following conditions are met for all partitions:
-        * `processedPositionInSnapshot` is equal to `processedPosition`
-        * all followers (role: `FOLLOWER`) have the same `snapshotId` as the leader (role: `LEADER`)
-1. Make a backup of the `data` folder
-
-</TabItem>
-</Tabs>
-
 ### Performing the Upgrade
+
+<Tabs groupId="in-zeebe-version" defaultValue="inconsistency-detection-enabled" values={[ 
+{ label: 'With inconsistency detection', value: 'inconsistency-detection-enabled', }, 
+{ label: 'Without inconsistency detection', value: 'inconsistency-detection-disabled', }, 
+] }>
+
+<TabItem value="inconsistency-detection-enabled">
+
+1. Shut down the broker
+1. Replace the `/bin` and `/lib` folders with the versions of the new distribution
+1. Start up the broker with the experimental inconsistency detection enabled
+1. [Verify the upgrade](#verifying-the-upgrade)
+1. Restart the broker with experimental inconsistency detection disabled
+
+</TabItem>
+
+<TabItem value="inconsistency-detection-disabled">
 
 1. Shut down the broker
 1. Replace the `/bin` and `/lib` folders with the versions of the new distribution
 1. Start up the broker
+1. [Verify the upgrade](#verifying-the-upgrade)
+
+</TabItem>
+</Tabs>
 
 ### Verifying the Upgrade
 
@@ -165,25 +177,3 @@ The response contains all partitions of the broker mapped to the partition-id.
 
   </p>
 </details>
-
-### Trigger a Partition Operation
-
-An operation can be triggered using a `POST` request with an empty body. It is applied to all partitions of the broker. The following operations are available:
-* `prepareUpgrade`: combines `pauseProcessing` and `takeSnapshot`
-    ```
-    /actuator/partitions/prepareUpgrade
-    ```
-* `pauseProcessing`: stop the workflow processing
-    ```
-    /actuator/partitions/pauseProcessing
-    ```
-* `resumeProcessing`: start the workflow processing
-    ```
-    /actuator/partitions/resumeProcessing
-    ```
-* `takeSnapshot`: create a new snapshot
-    ```
-    /actuator/partitions/takeSnapshot
-    ```
-
-The response of the operation is the current status of the partitions. It is sent after the operation is triggered. It doesn't wait until the operation is performed.
