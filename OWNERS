@@ -1,0 +1,13 @@
+approvers:
+- camundacloud
+- operate
+- tasklist
+- zeebe
+
+reviewers:
+- camundacloud
+- devrel
+- operate
+- productmanagement
+- tasklist
+- zeebe
