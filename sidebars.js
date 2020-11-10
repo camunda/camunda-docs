@@ -117,7 +117,7 @@ module.exports = {
                   "product-manuals/zeebe/bpmn-workflows/message-events/message-events",
                   "product-manuals/zeebe/bpmn-workflows/timer-events/timer-events",
                   "product-manuals/zeebe/bpmn-workflows/error-events/error-events",
-                ]                
+                ]
               },
               {
                 "Subprocesses": [
@@ -217,6 +217,7 @@ module.exports = {
               "product-manuals/zeebe/operations/health",
               "product-manuals/zeebe/operations/backpressure",
               "product-manuals/zeebe/operations/disk-space",
+              "product-manuals/zeebe/operations/upgrade-zeebe",
             ]
           },
           {
@@ -237,7 +238,7 @@ module.exports = {
               "product-manuals/zeebe/appendix/environment-variables",
               "product-manuals/zeebe/appendix/deprecated-features",
             ]
-          }          
+          }
         ],
         Operate: [{
           "Deployment Guide": [
