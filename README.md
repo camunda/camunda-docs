@@ -2,6 +2,10 @@
 
 This documentation is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
 
+## Rights
+
+`OWNERS` files in various folders define who needs to approve changes within this folder. Approvers can approve a PR by adding the comment `/lgtm`.
+
 ## Setup
 
 ### Installation
