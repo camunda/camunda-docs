@@ -18,7 +18,7 @@ In Camunda Cloud you have two options how to design and deploy a workflow: the [
 
 
 <TabItem value='console'>
-Using the Console Modeler, workflows can be designed and deploy and new instances can be created directly from the console. You can find all your already created models in the Bpmn Diagrams-tab
+Using the Console Modeler, workflows can be designed and deploy and new instances can be created directly from the console. You can find all your already created models in the "BPMN Diagrams"-tab
 
 ![console-modeler](./img/cloud-modeler.png)
 

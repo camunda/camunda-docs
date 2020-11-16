@@ -11,6 +11,8 @@ In the upper right area you'll find the button _Create New Cluster_. Click on it
 
 ![cluster-creating](./img/cluster-overview-new-cluster-creating.png)
 
+For this Getting Started Tutorial, please just close the dialog that pops up after the create cluster dialog.
+
 The cluster is now being set up. During this phase, its state is _Creating_. After one or two minutes the cluster is ready for use and changes its state to _healthy_:
 
 ![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
