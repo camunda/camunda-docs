@@ -21,7 +21,7 @@ You can now use the "Save & Deploy" button to deploy the newly created process t
 
 ![console-modeler-deploy](./img/cloud-modeler-deploy.png)
 
-Deployment can take some seconds but you should get a confirmation for the successfull deployment.
+Deployment can take a few seconds, but you should get a confirmation for successfull deployment.
 
 ![console-modeler-deploy-successfull](./img/cloud-modeler-deploy-successfull.png)
 
@@ -29,7 +29,7 @@ You can now start a new process instance. For this example you can just start an
 
 ![console-modeler-start-instance](./img/cloud-modeler-start-instance.png)
 
-Once the instance is started you get a confirmation with a link to jump into operate directly.
+Once the instance is started, you'll get a confirmation with a link to jump into Operate directly.
 
 ![console-modeler-start-instance-done](./img/cloud-modeler-start-instance-done.png)
 
@@ -43,7 +43,7 @@ On the right side of the navigation menu there are buttons for deploying and sta
 
 ![zeebe-modeler-deploy](./img/zeebe-modeler-deploy.png)
 
-In the deployment dialog, the connection information must now be specified: ClusterId, ClientId and ClientSecret. Click Deploy to **deploy** the workflow now. Use the Play button from the navigation to **start a new instance**.
+In the deployment dialog, the connection information must now be specified: ClusterId, ClientId and ClientSecret. Click Deploy to **deploy** the workflow. Use the Play button from the navigation to **start a new instance**.
 
 </TabItem>
 </Tabs>
