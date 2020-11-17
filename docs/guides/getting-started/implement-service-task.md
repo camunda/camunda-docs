@@ -27,7 +27,7 @@ This workflow includes a Service Task and an XOR Gateway. Select the Service Tas
 
 Deploy the new workflow using the "Save & Deploy" button.
 
-Please make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
+Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
 
 </TabItem>
 
