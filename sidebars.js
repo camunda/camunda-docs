@@ -248,6 +248,13 @@ module.exports = {
               "product-manuals/operate/deployment/0.25/schema-and-migration",
               "product-manuals/operate/deployment/0.25/importer-and-archiver",
               "product-manuals/operate/deployment/0.25/authentication"
+            ]},{
+            "0.26": [
+              "product-manuals/operate/deployment/0.26/configuration",
+              "product-manuals/operate/deployment/0.26/data-retention",
+              "product-manuals/operate/deployment/0.26/schema-and-migration",
+              "product-manuals/operate/deployment/0.26/importer-and-archiver",
+              "product-manuals/operate/deployment/0.26/authentication"
             ]}
           ],
           "User Guide":[
