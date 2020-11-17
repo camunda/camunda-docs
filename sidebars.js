@@ -241,12 +241,14 @@ module.exports = {
           }
         ],
         Operate: [{
-          "Deployment Guide": [
-            "product-manuals/operate/deployment/configuration",
-            "product-manuals/operate/deployment/data-retention",
-            "product-manuals/operate/deployment/schema-and-migration",
-            "product-manuals/operate/deployment/importer-and-archiver",
-            "product-manuals/operate/deployment/authentication"
+          "Deployment Guide": [{
+            "0.25": [
+              "product-manuals/operate/deployment/0.25/configuration",
+              "product-manuals/operate/deployment/0.25/data-retention",
+              "product-manuals/operate/deployment/0.25/schema-and-migration",
+              "product-manuals/operate/deployment/0.25/importer-and-archiver",
+              "product-manuals/operate/deployment/0.25/authentication"
+            ]}
           ],
           "User Guide":[
             "product-manuals/operate/userguide/index",
