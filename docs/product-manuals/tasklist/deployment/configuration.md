@@ -9,6 +9,7 @@ a Spring Boot application can be applied. By default, the configuration for Task
 with `zeebe.tasklist`. The following parts are configurable:
 
  * [Webserver](#webserver)
+ * [GraphQL API Access](#graphql-api-access)
  * [Elasticsearch Connection](#elasticsearch)
  * [Zeebe Broker connection](#zeebe-broker-connection)
  * [Zeebe Elasticsearch Exporter](#zeebe-elasticsearch-exporter)
@@ -29,6 +30,25 @@ Example for environment variable:
 `SERVER_SERVLET_CONTEXT_PATH=/tasklist` 
 
 Default context-path is `/`
+
+## GraphQL API Access
+
+Tasklist provides a GraphQL API under the endpoint `/graphql`. Clients can access this API by using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+
+Tasklist server needs the following **settings** to validate the token:
+
+Setting|Description|Example
+-------|------------|--------
+zeebe.tasklist.client.audience| Tasklist tries to match this with `aud` in JWT | tasklist.camunda.io
+zeebe.tasklist.client.clusterId| Tasklist tries to match this with `scope` in JWT| cafe-0815-0235-a221-21cc6df91dc5
+spring.security.oauth2.resourceserver.jwt.issuer-uri| URI to get public keys for JWT validation| https://weblogin.cloud.company.com/
+
+The settings can be given in [application.yml](https://github.com/zeebe-io/zeebe-tasklist/blob/master/config/application.yml) (eg. `zeebe.tasklist.client.audience: tasklist.camunda.io`) or 
+as environment variables (eg. `ZEEBE_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`)
+
+The client needs to obtain JWT token and send it in each request to `graphql` in an authorization header as described above.
+
+<!-- TODO: describe or give a link how to obtain and use a access token (in userguide?) -->
 
 ## Elasticsearch
 
