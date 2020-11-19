@@ -3,7 +3,7 @@ id: setup-client-connection-credentials
 title: Setup Client connection credentials
 ---
 
-To create a new client you have to navigate into the Clients tab:
+To create a new client you have to navigate into the API tab:
 
 ![cluster-details](./img/cluster-detail-clients.png)
 

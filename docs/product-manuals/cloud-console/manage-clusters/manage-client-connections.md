@@ -20,7 +20,7 @@ The officially offered client libraries (as well as the node client) have alread
 
 ### Create a client
 
-To create a new client you have to navigate into the Clients tab:
+To create a new client you have to navigate into the API tab:
 
 ![cluster-details](./img/cluster-detail-clients.png)
 
