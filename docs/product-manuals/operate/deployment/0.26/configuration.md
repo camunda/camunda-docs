@@ -17,7 +17,6 @@ with `camunda.operate`. The following parts are configurable:
  * [Scaling Operate](importer-and-archiver.md)
  * [Monitoring possibilities](#monitoring-operate)
  * [Logging configuration](#logging)
- * [Probes](#probes)
 
 ## Configurations
 
@@ -60,7 +59,7 @@ camunda.operate:
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
+    # Url
     url: http://localhost:9200
 ```
 
@@ -85,7 +84,7 @@ camunda.operate:
 
 ## Zeebe Elasticsearch Exporter
 
-Operate imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/zeebe-io/zeebe/tree/{{commit}}/exporters/elasticsearch-exporter).
+Operate imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
 Therefore settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
 
 ### Settings to connect and import:
@@ -95,6 +94,7 @@ Name | Description | Default value
 camunda.operate.zeebeElasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
 camunda.operate.zeebeElasticsearch.host | Hostname where Elasticsearch is running | localhost
 camunda.operate.zeebeElasticsearch.port | Port of Elasticsearch REST API | 9200
+camunda.operate.zeebeElasticsearch.url | URL of Zeebe Elasticsearch REST API | http://localhost:9200
 camunda.operate.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
 camunda.operate.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.operate.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
@@ -106,10 +106,8 @@ camunda.operate:
   zeebeElasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # Url
+    url: localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
