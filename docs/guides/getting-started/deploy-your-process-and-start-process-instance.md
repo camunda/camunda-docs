@@ -45,7 +45,7 @@ On the right side of the navigation menu there are buttons for deploying and sta
 
 In the deployment dialog, the connection information must now be specified: Cluster Id, Client Id and Client Secret.
 
- Client Id and Cluster Id can be retrieved by clicking on the _View_ link on the Client in the _API_-Tab.
+ Client Id and Cluster Id can be retrieved by clicking on the _View_ link on the client in the _API_-Tab.
 
 
 ![cluster-details-created-client-view](./img/cluster-details-created-client-view.png)
