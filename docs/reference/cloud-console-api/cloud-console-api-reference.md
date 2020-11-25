@@ -51,7 +51,7 @@ List all Zeebe Clients
 ### Get Zeebe Client Details
 
 `GET https://api.cloud.camunda.io/clusters/${clusterUuid}/clients/${clientId}`
-Returns the all data needed to connect to a cluster
+Returns data needed to connect to a cluster
 
 ### Delete Zeebe Client
 
@@ -78,3 +78,5 @@ This returns:
   "clientSecret": string
 }
 ```
+
+Be aware the `clientSecret` is only returned on creation. `GET Client` calls do not return the `clientSecret`.
