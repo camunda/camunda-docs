@@ -7,7 +7,7 @@ To create a new client you have to navigate into the API tab:
 
 ![cluster-details](./img/cluster-detail-clients.png)
 
-Click on _Create New Client_-Button to create a new client, name your client accordingly. Make sure you select the Scope _Zeebe_ so the newly created client may access your zeebe-instance.
+Click on _Create New Client_-Button to create a new client and name your client accordingly. Make sure you select the Scope _Zeebe_ so the newly created client can access your zeebe-instance.
 
 ![create-client](./img/cluster-details-create-client.png)
 
