@@ -24,7 +24,7 @@ To create a new client you have to navigate into the API tab:
 
 ![cluster-details](../../../guides/getting-started/img/cluster-detail-clients.png)
 
-Click on _Create New Client_-Button to create a new client, name your client accordingly. 
+Click on _Create New Client_-Button to create a new client and name your client accordingly. 
 
 ![create-client](../../../guides/getting-started/img/cluster-details-create-client.png)
 
