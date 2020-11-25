@@ -43,7 +43,22 @@ On the right side of the navigation menu there are buttons for deploying and sta
 
 ![zeebe-modeler-deploy](./img/zeebe-modeler-deploy.png)
 
-In the deployment dialog, the connection information must now be specified: ClusterId, ClientId and ClientSecret. Click Deploy to **deploy** the workflow. Use the Play button from the navigation to **start a new instance**.
+In the deployment dialog, the connection information must now be specified: Cluster Id, Client Id and Client Secret.
+
+ Client Id and Cluster Id can be retrieved by clicking on the _View_ link on the client in the _API_-Tab.
+
+
+![cluster-details-created-client-view](./img/cluster-details-created-client-view.png)
+
+The Client Secret can be retrieve from the downloaded connection file:
+
+
+```bash
+grep SECRET  ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
+export ZEEBE_CLIENT_SECRET='zbzsZI_6UnCsH_CIo0lNUN8qGyvLJr9VrH77ewNm8Oq3elvhPvV7g.QmJGydzOLo' 
+```
+
+Click Deploy to **deploy** the workflow. Use the Play button from the navigation to **start a new instance**.
 
 </TabItem>
 </Tabs>
