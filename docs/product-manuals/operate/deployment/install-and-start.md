@@ -97,8 +97,8 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 After you sign in, you'll see an empty dashboard if you haven't yet deployed any workflows:
 
-![operate-dash-no-workflows](./img/Operate-Dashboard-No-Workflows.png)
+![operate-dash-no-workflows](../userguide/img/Operate-Dashboard-No-Workflows.png)
 
 If you _have_ deployed workflows or created workflow instances, you'll see those on your dashboard:
 
-![operate-dash-with-workflows](./img/Operate-Dashboard-Deployed-Workflow.png)
+![operate-dash-with-workflows](../userguide/img/Operate-Dashboard-Deployed-Workflow.png)
