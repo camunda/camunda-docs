@@ -29,7 +29,7 @@ npm i -g zbctl
 
 ## First connection
 
-After creating a client, export statements are displayed which set all necessary environment variables. If these are known to the system, a client can communicate directly with its own cluster in the cloud without further configuration.
+After creating a client and downloading the connection file, you will now need to source it to make it available in your environment. If these are known to the system, a client can communicate directly with its own cluster in the cloud without further configuration.
 
 <Tabs
 defaultValue="cli"
@@ -39,6 +39,10 @@ values={[
 }>
 
 <TabItem value="cli">
+
+```bash
+source ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
+```
 
 ```bash
 zbctl status
