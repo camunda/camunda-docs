@@ -29,7 +29,7 @@ Note that the Operate web UI is available by default at [http://localhost:8080](
 
 [Operate and Zeebe distributions are available for download on the same release page. ](https://github.com/zeebe-io/zeebe/releases) 
 
-Note that each version of Operate is compatible with a specific version of Zeebe. For example: Zeebe 0.18.0 and Operate-1.0.0-alpha11 are compatible. 
+Note that each version of Operate is compatible with a specific version of Zeebe. 
 
 On the Zeebe release page, compatible versions of Zeebe and Operate are grouped together. Please be sure to download and use compatible versions. This is handled for you if you use the Docker profile from our repository. 
 
@@ -37,7 +37,7 @@ On the Zeebe release page, compatible versions of Zeebe and Operate are grouped 
 
 Operate uses open-source Elasticsearch as its underlying data store, and so to run Operate, you need to download and run Elasticsearch. 
 
-Operate is currently compatible Elasticsearch 6.8.1. [You can download Elasticsearch here.](https://www.elastic.co/downloads/past-releases/elasticsearch-6-8-1) 
+Operate is currently compatible Elasticsearch 6.8.13. [You can download Elasticsearch here.](https://www.elastic.co/downloads/past-releases/elasticsearch-6-8-13) 
 
 ### Run Elasticsearch
 
@@ -97,8 +97,8 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 After you sign in, you'll see an empty dashboard if you haven't yet deployed any workflows:
 
-![operate-dash-no-workflows](../userguide/img/Operate-Dashboard-No-Workflows.png)
+![operate-dash-no-workflows](img/operate-dashboard-no-workflows_dark.png)
 
 If you _have_ deployed workflows or created workflow instances, you'll see those on your dashboard:
 
-![operate-dash-with-workflows](../userguide/img/Operate-Dashboard-Deployed-Workflow.png)
+![operate-dash-with-workflows](../img/operate-introduction_dark.png)
