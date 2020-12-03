@@ -18,26 +18,45 @@ module.exports = {
       },
       items: [
         {
-          to: "docs/guides/",
-          activeBasePath: "docs/guides/",
+          type: "docsVersionDropdown",
+          position: "left",
+          // dropdownActiveClassDisabled: true,
+          // dropdownItemsAfter: [
+          //   {
+          //     to: "/versions",
+          //     label: "All versions",
+          //   },
+          // ],
+        },
+        {
+          type: "doc",
+          docId: "guides/introcution-to-camunda-cloud",
+          // to: "docs/guides/",
+          // activeBasePath: "docs/guides/",
           label: "Guides",
           position: "left",
         },
         {
-          to: "docs/product-manuals/",
-          activeBasePath: "docs/product-manuals",
+          type: "doc",
+          docId: "product-manuals/overview",
+          // to: "docs/product-manuals/",
+          // activeBasePath: "docs/product-manuals",
           label: "Product Manuals",
           position: "left",
         },
         {
-          to: "docs/reference/",
-          activeBasePath: "docs/reference",
+          type: "doc",
+          docId: "reference/overview",
+          // to: "docs/reference/",
+          // activeBasePath: "docs/reference",
           label: "Reference",
           position: "left",
         },
         {
-          to: "docs/samples/",
-          activeBasePath: "docs/samples",
+          type: "doc",
+          docId: "samples/overview",
+          // to: "docs/samples/",
+          // activeBasePath: "docs/samples",
           label: "Samples",
           position: "left",
         },
@@ -116,6 +135,17 @@ module.exports = {
           // Please change this to your repo.
           editUrl:
             "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/",
+          // disableVersioning: isVersioningDisabled,
+          lastVersion: "current",
+          // onlyIncludeVersions:
+          //   !isVersioningDisabled && (isDev || isDeployPreview)
+          //     ? ["current", ...versions.slice(0, 2)]
+          //     : undefined,
+          versions: {
+            current: {
+              label: `latest`,
+            },
+          },
         },
         blog: {
           showReadingTime: true,

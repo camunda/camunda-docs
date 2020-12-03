@@ -1,6 +1,6 @@
 ---
-id: getting-started-with-camunda-cloud
-title: Getting started with Camunda Cloud
+id: setting-up-development-project
+title: Setting up your first Development Project
 ---
 
 import Tabs from "@theme/Tabs";
