@@ -1,5 +1,5 @@
-<div style="text-align: center;">
-<img src="./static/img/camunda-cloud-logo.png" style="width: 200px;"/>
+<div align="center">
+<img src="./static/img/camunda-cloud-logo.png" width="200px"/>
 
 <h1>Camunda Cloud Documentation</h1>
 <p>
