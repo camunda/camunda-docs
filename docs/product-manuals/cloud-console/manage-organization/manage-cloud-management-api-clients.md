@@ -18,7 +18,7 @@ A Client can have one or multiple of the following permissions:
 - Create Zeebe Clients (Create a Zeebe Client for a Cluster of the Organization)
 - Delete Zeebe Clients (Delete a Zeebe Client of a Cluster owned by the Organization)
 
-After a Cloud API Client is created, the Client Secret is only shown once! Please write it down somewhere save!
+After a Cloud Management API Client is created, the Client Secret is only shown once! You can also download a script that requests an Access Token with your credentials.
 
 To retrieve an access token for the Cloud Management API Client:
 
