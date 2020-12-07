@@ -215,33 +215,31 @@ module.exports = {
         },
       ],
       Operate: [
-        {
-          "Deployment Guide": [
-            "product-manuals/operate/deployment/configuration",
-            "product-manuals/operate/deployment/data-retention",
-            "product-manuals/operate/deployment/schema-and-migration",
-            "product-manuals/operate/deployment/importer-and-archiver",
-            "product-manuals/operate/deployment/authentication",
-          ],
-          "User Guide": [
-            "product-manuals/operate/userguide/index",
-            "product-manuals/operate/userguide/install-and-start",
-            "product-manuals/operate/userguide/basic-operate-navigation",
-            "product-manuals/operate/userguide/resolve-incidents-update-variables",
-            "product-manuals/operate/userguide/selections-batch-operations",
-            "product-manuals/operate/userguide/operate-feedback-and-questions",
-          ],
-        },
+         "product-manuals/operate/introduction",{
+            "User Guide":[
+              "product-manuals/operate/userguide/basic-operate-navigation",
+              "product-manuals/operate/userguide/resolve-incidents-update-variables",
+              "product-manuals/operate/userguide/selections-operations",
+              "product-manuals/operate/userguide/operate-feedback-and-questions"
+            ],
+            "Deployment Guide": [
+               "product-manuals/operate/deployment/install-and-start",
+               "product-manuals/operate/deployment/configuration",
+               "product-manuals/operate/deployment/data-retention",
+               "product-manuals/operate/deployment/schema-and-migration",
+               "product-manuals/operate/deployment/importer-and-archiver",
+               "product-manuals/operate/deployment/authentication"
+            ],
+         }
       ],
-      Tasklist: [
-        {
+      Tasklist: [{
           "Deployment Guide": [
             "product-manuals/tasklist/deployment/configuration",
-            "product-manuals/tasklist/deployment/authentication",
+            "product-manuals/tasklist/deployment/authentication"
           ],
-          "User Guide": [],
-        },
-      ],
+          "User Guide":[
+          ]
+      }]
     },
   ],
   Reference: [
