@@ -5,7 +5,7 @@ title: Selections & Operations
 
 In some cases, you’ll need to retry or cancel many workflow instances at once. Operate also supports this type of operation.
 
-Imagine a case where many workflow instances have an incident incident caused by the same issue. At some point, the underlying problem will have been resolved (for example, maybe a microservice was down for an extended period of time then was brought back up). 
+Imagine a case where many workflow instances have an incident caused by the same issue. At some point, the underlying problem will have been resolved (for example, maybe a microservice was down for an extended period of time then was brought back up). 
 
 But even though the underlying problem was resolved, the affected workflow instances are stuck until they’re “retried”.
 
