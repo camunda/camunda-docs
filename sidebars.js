@@ -27,25 +27,42 @@ module.exports = {
         "product-manuals/clients/build-your-own-client",
       ],
       "Cloud Console": [
-        "product-manuals/cloud-console/overview",
+        "product-manuals/cloud-console/introduction",
         {
-          "Manage your Cloud Account": [
-            "guides/getting-started/create-camunda-cloud-account",
-            "product-manuals/cloud-console/manage-cloud-account/administrate-account",
+          "Manage your Organization": [
+            "product-manuals/cloud-console/manage-organization/organization-settings",
+            "product-manuals/cloud-console/manage-organization/manage-users",
+            "product-manuals/cloud-console/manage-organization/view-organization-activity",
+            "product-manuals/cloud-console/manage-organization/manage-cloud-management-api-clients",
+            "product-manuals/cloud-console/manage-organization/update-billing-reservations",
+            "product-manuals/cloud-console/manage-organization/switch-organization",
           ],
         },
         {
           "Manage Clusters": [
             "product-manuals/cloud-console/manage-clusters/create-cluster",
-            "product-manuals/cloud-console/manage-clusters/manage-client-connections",
-            "reference/cloud-console-api/cloud-console-api-reference",
+            "product-manuals/cloud-console/manage-clusters/rename-cluster",
+            "product-manuals/cloud-console/manage-clusters/delete-cluster",
+            "product-manuals/cloud-console/manage-clusters/manage-api-clients",
           ],
         },
         {
           "Manage your Plan": [
             "product-manuals/cloud-console/manage-plan/available-plans",
             "product-manuals/cloud-console/manage-plan/trial-plan",
-            "product-manuals/cloud-console/manage-plan/professional-plan",
+            {
+              "Professional Plan": [
+                "product-manuals/cloud-console/manage-plan/professional-plan/overview",
+                "product-manuals/cloud-console/manage-plan/professional-plan/upgrade-to-professional-plan",
+                "product-manuals/cloud-console/manage-plan/professional-plan/billing-parameters",
+              ],
+            },
+          ],
+        },
+        {
+          Troubleshooting: [
+            "product-manuals/cloud-console/troubleshooting/common-pitfalls",
+            "product-manuals/cloud-console/troubleshooting/feedback-and-support",
           ],
         },
       ],
