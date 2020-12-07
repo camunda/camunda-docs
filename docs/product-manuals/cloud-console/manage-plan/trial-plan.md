@@ -9,4 +9,4 @@ In order to test drive Camunda Cloud, you can [sign up](https://accounts.cloud.c
 
 The trial plan is free and provides access to a single Zeebe Cluster to be used for development projects.
 
-In case you want to use Camunda Cloud in production we recommend switching to the [professional plan](./professional-plan.md).
+In case you want to use Camunda Cloud in production we recommend switching to the [professional plan](./professional-plan/overview.md).

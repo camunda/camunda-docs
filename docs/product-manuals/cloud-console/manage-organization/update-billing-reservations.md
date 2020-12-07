@@ -3,7 +3,7 @@ id: update-billing-reservations
 title: Update Billing Reservations
 ---
 
-This setting is only visible in the Professional Plan for Owners and Admins. More about it under [Professional Plan](../manage-plan/professional-plan.md).
+This setting is only visible in the Professional Plan for Owners and Admins. More about it under [Professional Plan](../manage-plan/professional-plan/overview.md).
 
 ## Managing Reservations
 
