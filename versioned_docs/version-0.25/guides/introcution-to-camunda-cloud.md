@@ -5,4 +5,4 @@ sidebar_label: Introduction to Camunda Cloud
 slug: /guides/
 ---
 
-0.26
+0.25
