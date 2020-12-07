@@ -1,6 +1,6 @@
 ---
-id: manage-client-connections
-title: Manage Client Connections
+id: manage-api-clients
+title: Manage API Clients
 ---
 
 To be able to interact with Zeebe in the cloud from the outside, every client application must authenticate itself. An OAuth Flow is used for authentication, which is shown below:
@@ -24,10 +24,9 @@ To create a new client you have to navigate into the API tab:
 
 ![cluster-details](../../../guides/getting-started/img/cluster-detail-clients.png)
 
-Click on _Create New Client_-Button to create a new client and name your client accordingly. 
+Click on _Create New Client_-Button to create a new client and name your client accordingly.
 
 ![create-client](../../../guides/getting-started/img/cluster-details-create-client.png)
-
 
 Make sure you keep the generated client credentials in a safe place - the Client Secret will not be shown again. For your convenience, you can also download the client information to your computer.
 
