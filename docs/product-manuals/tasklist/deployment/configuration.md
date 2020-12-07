@@ -8,6 +8,7 @@ Tasklist is a Spring Boot application. That means all ways to [configure](https:
 a Spring Boot application can be applied. By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist related settings are prefixed
 with `zeebe.tasklist`. The following parts are configurable:
 
+ * [Webserver](#webserver)
  * [Elasticsearch Connection](#elasticsearch)
  * [Zeebe Broker connection](#zeebe-broker-connection)
  * [Zeebe Elasticsearch Exporter](#zeebe-elasticsearch-exporter)
@@ -17,6 +18,17 @@ with `zeebe.tasklist`. The following parts are configurable:
 
 ## Configurations
 
+### Webserver
+
+Tasklist supports customizing the *context-path* by using default spring configuration.
+
+Example for `application.yml`:
+`server.servlet.context-path: /tasklist`
+
+Example for environment variable:
+`SERVER_SERVLET_CONTEXT_PATH=/tasklist`
+
+Default context-path is `/`
 ## Elasticsearch
 
 Tasklist stores and reads data in/from Elasticsearch.

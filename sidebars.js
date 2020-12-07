@@ -232,14 +232,18 @@ module.exports = {
             ],
          }
       ],
-      Tasklist: [{
-          "Deployment Guide": [
-            "product-manuals/tasklist/deployment/configuration",
-            "product-manuals/tasklist/deployment/authentication"
+      Tasklist: [
+      "product-manuals/tasklist/introduction",{
+          "User Guide": [
+            "product-manuals/tasklist/userguide/basic-navigation",
           ],
-          "User Guide":[
-          ]
-      }]
+          "Deployment Guide": [
+            "product-manuals/tasklist/deployment/install-and-start",
+            "product-manuals/tasklist/deployment/configuration",
+            "product-manuals/tasklist/deployment/authentication",
+          ],
+        },
+      ],
     },
   ],
   Reference: [
