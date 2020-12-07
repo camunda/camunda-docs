@@ -14,7 +14,7 @@ module.exports = {
       title: "Camunda Cloud Docs",
       logo: {
         alt: "Camunda Cloud Docs",
-        src: "img/camunda-cloud-logo.png",
+        src: "img/camunda-cloud-gradient.png",
       },
       items: [
         {
