@@ -244,7 +244,6 @@ module.exports = {
         },
         {
           Appendix: [
-            "product-manuals/zeebe/appendix/glossary",
             "product-manuals/zeebe/appendix/broker-config-template",
             "product-manuals/zeebe/appendix/gateway-config-template",
             "product-manuals/zeebe/appendix/gateway-health-probes",
@@ -291,6 +290,7 @@ module.exports = {
         "reference/cloud-console-api/cloud-console-api-reference",
       ],
     },
+    "reference/glossary",
   ],
   Samples: ["samples/overview"],
 };
