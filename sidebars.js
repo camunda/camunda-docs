@@ -77,7 +77,7 @@ module.exports = {
             "product-manuals/modeler/cloud-modeler/start-instance",
           ],
           "Zeebe Modeler": [
-            "product-manuals/modeler/zeebe-modeler/install-the-modeler",
+            "product-manuals/modeler/zeebe-modeler/install-the-zeebe-modeler",
             "product-manuals/modeler/zeebe-modeler/model-your-first-diagram",
             "product-manuals/modeler/zeebe-modeler/connect-to-camunda-cloud",
             "product-manuals/modeler/zeebe-modeler/deploy-to-cloud",
