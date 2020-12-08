@@ -11,7 +11,7 @@ module.exports = {
         "guides/getting-started/deploy-your-process-and-start-process-instance",
         "guides/getting-started/implement-service-task",
         "guides/getting-started/implement-decision-gateway",
-        "guides/getting-started/involve-humans",
+        // "guides/getting-started/involve-humans",
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
