@@ -23,3 +23,11 @@
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
+
+body{
+  font-family: IBM Plex Sans,-apple-system,blinkmacsystemfont,Segoe UI,roboto,oxygen-sans,ubuntu,cantarell,Helvetica Neue,sans-serif;
+}
+
+.alert--primary {
+  background-color: #14d890;
+}
