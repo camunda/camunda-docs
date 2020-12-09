@@ -235,7 +235,7 @@ module.exports = {
       Tasklist: [
       "product-manuals/tasklist/introduction",{
           "User Guide": [
-            "product-manuals/tasklist/userguide/basic-navigation",
+            "product-manuals/tasklist/userguide/overview",
           ],
           "Deployment Guide": [
             "product-manuals/tasklist/deployment/install-and-start",
