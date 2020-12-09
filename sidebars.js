@@ -11,7 +11,7 @@ module.exports = {
         "guides/getting-started/deploy-your-process-and-start-process-instance",
         "guides/getting-started/implement-service-task",
         "guides/getting-started/implement-decision-gateway",
-        "guides/getting-started/involve-humans",
+        // "guides/getting-started/involve-humans",
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
@@ -66,7 +66,25 @@ module.exports = {
           ],
         },
       ],
-      Modeler: ["product-manuals/modeler/install-the-modeler"],
+      Modeler: [
+        "product-manuals/modeler/overview",
+        {
+          "Cloud Modeler": [
+            "product-manuals/modeler/cloud-modeler/launch-cloud-modeler",
+            "product-manuals/modeler/cloud-modeler/model-your-first-diagram",
+            "product-manuals/modeler/cloud-modeler/import-diagram",
+            "product-manuals/modeler/cloud-modeler/save-and-deploy",
+            "product-manuals/modeler/cloud-modeler/start-instance",
+          ],
+          "Zeebe Modeler": [
+            "product-manuals/modeler/zeebe-modeler/install-the-zeebe-modeler",
+            "product-manuals/modeler/zeebe-modeler/model-your-first-diagram",
+            "product-manuals/modeler/zeebe-modeler/connect-to-camunda-cloud",
+            "product-manuals/modeler/zeebe-modeler/deploy-to-cloud",
+            "product-manuals/modeler/zeebe-modeler/start-instance",
+          ],
+        },
+      ],
       "Zeebe Engine": [
         "product-manuals/zeebe/zeebe-overview",
         {
