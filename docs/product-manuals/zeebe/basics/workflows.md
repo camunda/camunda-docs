@@ -3,9 +3,9 @@ id: workflows
 title: "Workflows"
 ---
 
-Workflows are flowchart-like blueprints that define the orchestration of *tasks*. Every task represents a piece of business logic such that the ordered execution produces a meaningful result.
+Workflows are flowchart-like blueprints that define the orchestration of _tasks_. Every task represents a piece of business logic such that the ordered execution produces a meaningful result.
 
-A *job worker* is your implementation of the business logic required to complete a task. A job worker must embed a Zeebe client library to communicate with the broker, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical three-tier application, as a \(lambda\) function, via command line tools, etc.
+A _job worker_ is your implementation of the business logic required to complete a task. A job worker must embed a Zeebe client library to communicate with the broker, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical three-tier application, as a \(lambda\) function, via command line tools, etc.
 
 Running a workflow then requires two steps: submitting the workflow to Zeebe and creating job workers that can request jobs from Zeebe and complete them.
 
@@ -52,10 +52,6 @@ The diamond shape with the "+" marker means that all outgoing paths are activate
 ## BPMN 2.0
 
 Zeebe uses [BPMN 2.0](http://www.bpmn.org/) for representing workflows. BPMN is an industry standard which is widely supported by different vendors and implementations. Using BPMN ensures that workflows can be interchanged between Zeebe and other workflow systems.
-
-## YAML Workflows
-
-In addition to BPMN 2.0, Zeebe supports a [YAML](http://yaml.org/) workflow format. It can be used to quickly write simple workflows in text. Unlike BPMN, it has no visual representation and is not standardized. Zeebe transforms YAML to BPMN on submission.
 
 ## BPMN Modeler
 
