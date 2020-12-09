@@ -20,62 +20,30 @@ module.exports = {
         {
           type: "docsVersionDropdown",
           position: "left",
-          // dropdownActiveClassDisabled: true,
-          // dropdownItemsAfter: [
-          //   {
-          //     to: "/versions",
-          //     label: "All versions",
-          //   },
-          // ],
         },
         {
           type: "doc",
           docId: "guides/introcution-to-camunda-cloud",
-          // to: "docs/guides/",
-          // activeBasePath: "docs/guides/",
           label: "Guides",
           position: "left",
         },
         {
           type: "doc",
           docId: "product-manuals/overview",
-          // to: "docs/product-manuals/",
-          // activeBasePath: "docs/product-manuals",
           label: "Product Manuals",
           position: "left",
         },
         {
           type: "doc",
           docId: "reference/overview",
-          // to: "docs/reference/",
-          // activeBasePath: "docs/reference",
           label: "Reference",
           position: "left",
         },
         {
           type: "doc",
           docId: "samples/overview",
-          // to: "docs/samples/",
-          // activeBasePath: "docs/samples",
           label: "Samples",
           position: "left",
-        },
-        {
-          to: "contact",
-          activeBasePath: "contact",
-          label: "Contact",
-          position: "right",
-        },
-        { href: "https://zeebe.io/blog/", label: "Blog", position: "left" },
-        {
-          href: "https://camunda.io",
-          label: "Cloud Console",
-          position: "right",
-        },
-        {
-          href: "https://github.com/camunda-cloud/camunda-cloud-docs",
-          label: "GitHub",
-          position: "right",
         },
       ],
     },
@@ -108,8 +76,16 @@ module.exports = {
           title: "More",
           items: [
             {
+              label: "Contact",
+              to: "contact",
+            },
+            {
+              label: "Cloud Console",
+              href: "https://camunda.io",
+            },
+            {
               label: "Blog",
-              href: "https://camunda.com/blog/",
+              href: "https://zeebe.io/blog/",
             },
             {
               label: "GitHub",
