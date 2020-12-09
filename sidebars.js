@@ -241,6 +241,7 @@ module.exports = {
             "product-manuals/tasklist/deployment/install-and-start",
             "product-manuals/tasklist/deployment/configuration",
             "product-manuals/tasklist/deployment/authentication",
+            "product-manuals/tasklist/deployment/api-client",
           ],
         },
       ],

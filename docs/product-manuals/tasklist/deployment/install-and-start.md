@@ -4,26 +4,26 @@ title: Install & Start Tasklist
 ---
 ## Running via Docker (Local Development)
 
-The easiest way to run Tasklist in development is with Docker. This gives you a consistent, reproducible environment and an out-of-the-box integrated experience for experimenting with Zeebe and Tasklist.
+You can use the Docker image `camunda/zeebe-tasklist:latest` to run Tasklist as container.
 
-To do this, you need [Docker Desktop](https://www.docker.com) installed on your development machine.
-
-The [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) repository contains an [Tasklist](https://github.com/zeebe-io/zeebe-docker-compose/tree/master/Tasklist) profile that starts a single Zeebe broker with Tasklist and all its dependencies. **See the README file in the repository for instructions to start Zeebe and Tasklist using Docker.**
-
-If you are using Docker, once you follow the instructions in the repository, skip ahead to the section ["Access the Tasklist Web Interface”](#access-the-Tasklist-web-interface).
-
-## Running with Kubernetes (Production)
-
-We will update this section after Tasklist is available for production use.
-
-Running Tasklist with Kubernetes will be recommended for production deployments.
-
+Please make sure to set appropriate settings described in [configuration](../deployment/configuration) section of deployment guide.
+Here an example configuration for *docker-compose*:
+```
+zeebe-tasklist:
+    container_name: zeebe-tasklist
+    image: camunda/zeebe-tasklist:latest
+    ports:
+        - 8080:8080
+    environment:
+        - zeebe.tasklist.elasticsearch.url=http://elasticsearch:9200
+        - zeebe.tasklist.zeebeElasticsearch.url=http://elasticsearch:9200
+        - zeebe.tasklist.zeebe.brokerContactPoint=zeebe:26500
+```
 ## Manual Configuration (Local Development)
 
-Here, we’ll walk you through how to download and run an Tasklist distribution manually, without using Docker.
+Here, we’ll walk you through how to download and run a Tasklist distribution manually, without using Docker.
 
 Note that the Tasklist web UI is available by default at [http://localhost:8080](http://localhost:8080), so please be sure this port is available.
-
 
 ### Download Tasklist and a compatible version of Zeebe.
 
@@ -56,12 +56,11 @@ You’ll know Elasticsearch has started successfully when you see a message simi
 
 ### Run Zeebe
 
-To run Zeebe, execute the following commands:
-
+To run Zeebe with Elasticsearch Exporter, execute the following commands:
 
 ```
 cd zeebe-broker-*
-./bin/broker
+ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME=io.zeebe.exporter.ElasticsearchExporter ./bin/broker
 ```
 
 
@@ -77,16 +76,16 @@ You’ll know Zeebe has started successfully when you see a message similar to:
 
 To run Tasklist, execute the following commands:
 
-`cd zeebe-tasklist-distro-0.26.0-*``
+`cd zeebe-tasklist*``
 
-bin/Tasklist
+./bin/tasklist
 
 You’ll know Tasklist has started successfully when you see messages similar to:
 
 ```
-DEBUG 1416 --- [       Thread-6] o.c.o.e.w.BatchOperationWriter           : 0 operations locked
-DEBUG 1416 --- [       Thread-4] o.c.o.z.ZeebeESImporter                  : Latest loaded position for alias [zeebe-record-deployment] and partitionId [0]: 0
-INFO 1416 --- [       Thread-4] o.c.o.z.ZeebeESImporter                  : Elasticsearch index for ValueType DEPLOYMENT was not found, alias zeebe-record-deployment. Skipping.
+2020-12-09 13:31:41.437  INFO 45899 --- [           main] i.z.t.ImportModuleConfiguration          : Starting module: importer
+2020-12-09 13:31:41.438  INFO 45899 --- [           main] i.z.t.ArchiverModuleConfiguration        : Starting module: archiver
+2020-12-09 13:31:41.555  INFO 45899 --- [           main] i.z.t.w.StartupBean                      : Tasklist Version: 0.26.0-alpha2
 ```
 
 ## Access the Tasklist Web Interface
@@ -95,6 +94,6 @@ The Tasklist web interface is available at [http://localhost:8080](http://localh
 
 The first screen you'll see is a sign-in page. Use the credentials `demo` / `demo` to sign in.
 
-If you _have_ deployed workflows or created workflow instances, you'll see those on your dashboard:
+If you already have some *User Tasks* in Zeebe you can see these on the left panel in the start screen:
 
-![Tasklist-dash-with-workflows](../img/tasklist-introduction_light.png)
+![tasklist-start-screen](../img/tasklist-start-screen_light.png)
