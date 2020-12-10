@@ -293,13 +293,9 @@ module.exports = {
     },
   ],
   Reference: [
-    "reference/overview",
-    {
-      "Console API": [
-        "reference/cloud-console-api/cloud-console-api-clients",
-        "reference/cloud-console-api/cloud-console-api-reference",
-      ],
-    },
+    "reference/overview",  
+    "reference/cloud-console-api-clients",
+    "reference/cloud-console-api-reference",
     "reference/glossary",
   ],
   Samples: ["samples/overview"],
