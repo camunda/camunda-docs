@@ -5,7 +5,7 @@ title: "Error Events"
 
 Error events are events which reference an error. They are used to handle business errors in a workflow.
 
- ![workflow](assets/error-events.png)
+![workflow](assets/error-events.png)
 
 An error indicates that some kind of business error has occurred which should be handled in the workflow, for example, by taking a different path to compensate the error.
 
@@ -27,11 +27,11 @@ In case the workflow instance is created via call activity, the error can also b
 
 ## Throwing the Error
 
-An error can be thrown from a **client command** while processing a job. See the [gRPC command](../../reference/grpc.md#throwerror-rpc) for details.
+An error can be thrown from a **client command** while processing a job. See the [gRPC command](../../../../reference/grpc.md#throwerror-rpc) for details.
 
 Alternatively, an error can also be thrown inside a workflow using an error **end event**.
 
- ![workflow](assets/error-throw-events.png)
+![workflow](assets/error-throw-events.png)
 
 ## Unhandled Errors
 
@@ -47,20 +47,20 @@ A technical error is usually unexpected and should not be handled in the workflo
 
 A business error is expected and is handled in the workflow. The workflow may take a different path to compensate the error or undo previous actions.
 
- ## Additional Resources
+## Additional Resources
 
  <details>
    <summary>XML representation</summary>
    <p>A boundary error event:
 
- ```xml
+```xml
 <bpmn:error id="invalid-credit-card-error" errorCode="Invalid Credit Card" />
 
 <bpmn:boundaryEvent id="invalid-credit-card" name="Invalid Credit Card" attachedToRef="collect-money">
-  <bpmn:errorEventDefinition errorRef="invalid-credit-card-error" />
+ <bpmn:errorEventDefinition errorRef="invalid-credit-card-error" />
 </bpmn:boundaryEvent>
 
- ```
+```
 
    </p>
  </details>
@@ -69,7 +69,8 @@ A business error is expected and is handled in the workflow. The workflow may ta
    <summary>Using the BPMN modeler</summary>
    <p>Adding an error boundary event:
 
- ![bpmn-modeler](assets/bpmn-modeler-error-events.gif)
+![bpmn-modeler](assets/bpmn-modeler-error-events.gif)
+
    </p>
  </details>
 
@@ -124,4 +125,5 @@ A business error is expected and is handled in the workflow. The workflow may ta
  </details>
 
 References:
-* [Incidents](../../reference/incidents.md)
+
+- [Incidents](../../reference/incidents.md)

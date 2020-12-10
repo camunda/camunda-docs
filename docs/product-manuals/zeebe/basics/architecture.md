@@ -3,24 +3,26 @@ id: architecture
 title: "Architecture"
 ---
 
-There are four main components in Zeebe's architecture: the client, the gateway, the broker, and the exporter.  
+There are four main components in Zeebe's architecture: the client, the gateway, the broker, and the exporter.
 
 ![zeebe-architecture](assets/zeebe-architecture.png)
 
 ## Client
 
 Clients are libraries that you embed in an application (e.g. a microservice that executes your business logic) to connect to a Zeebe cluster. Clients have two primary uses:
-* Carrying out business logic (starting workflow instances, publishing messages, working on tasks)
-* Handling operational issues (updating workflow instance variables, resolving incidents)
+
+- Carrying out business logic (starting workflow instances, publishing messages, working on tasks)
+- Handling operational issues (updating workflow instance variables, resolving incidents)
 
 More about Zeebe clients:
-* Clients connect to the Zeebe gateway via [gRPC](https://grpc.io), which uses http/2-based transport. To learn more about gRPC in Zeebe, check out the [gRPC section of the docs](../reference/grpc.md).
-* The Zeebe project includes officially-supported Java and Go clients, and gRPC makes it possible to generate clients in a range of different programming languages. [Community clients](https://awesome.zeebe.io) have been created in other languages, including C#, Ruby, and JavaScript.
-* Client applications can be scaled up and down completely separately from Zeebe--the Zeebe brokers do not execute any business logic.
+
+- Clients connect to the Zeebe gateway via [gRPC](https://grpc.io), which uses http/2-based transport. To learn more about gRPC in Zeebe, check out the [Zeebe Client gRPC API Reference](../../../reference/grpc.md).
+- The Zeebe project includes officially-supported Java and Go clients, and gRPC makes it possible to generate clients in a range of different programming languages. [Community clients](https://awesome.zeebe.io) have been created in other languages, including C#, Ruby, and JavaScript.
+- Client applications can be scaled up and down completely separately from Zeebe--the Zeebe brokers do not execute any business logic.
 
 ## Gateway
 
-The gateway, which proxies requests to brokers, serves as a single entry point to a Zeebe cluster. 
+The gateway, which proxies requests to brokers, serves as a single entry point to a Zeebe cluster.
 
 The gateway is stateless and sessionless, and gateways can be added as necessary for load balancing and high availability.
 
@@ -42,10 +44,10 @@ Brokers form a peer-to-peer network in which there is no single point of failure
 
 The exporter system provides an event stream of state changes within Zeebe. This data has many potential uses, including but not limited to:
 
-* Monitoring the current state of running workflow instances
+- Monitoring the current state of running workflow instances
 
-* Analysis of historic workflow data for auditing, business intelligence, etc
+- Analysis of historic workflow data for auditing, business intelligence, etc
 
-* Tracking [incidents](../reference/incidents.md) created by Zeebe
+- Tracking [incidents](../reference/incidents.md) created by Zeebe
 
 The exporter includes a simple API that you can use to stream data into a storage system of your choice. Zeebe includes an out-of-the-box [Elasticsearch exporter](https://github.com/zeebe-io/zeebe/tree/master/exporters/elasticsearch-exporter), and other [community-contributed exporters](https://awesome.zeebe.io) are also available.
