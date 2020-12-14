@@ -24,6 +24,7 @@ module.exports = {
         "product-manuals/concepts/what-is-camunda-cloud",
         "product-manuals/concepts/workflows",              
         "product-manuals/concepts/workflow-instance-creation",
+        "product-manuals/concepts/job-workers",        
         "product-manuals/concepts/variables",
         "product-manuals/concepts/expressions",
         "product-manuals/concepts/messages",
@@ -129,82 +130,86 @@ module.exports = {
       "Zeebe Engine": [
         "product-manuals/zeebe/zeebe-overview",
         {
-          Introduction: [
-            "product-manuals/zeebe/introduction/index",            
-            "product-manuals/zeebe/introduction/install",
-            "product-manuals/zeebe/introduction/quickstart",
-            "product-manuals/zeebe/introduction/community-contributions",
-            "product-manuals/zeebe/introduction/get-help-get-involved",
-            "product-manuals/zeebe/introduction/release-cycle",
+          "Technical Concepts": [
+            "product-manuals/zeebe/technical-concepts/index",
+            "product-manuals/zeebe/technical-concepts/architecture",
+            "product-manuals/zeebe/technical-concepts/partitions",
+            "product-manuals/zeebe/technical-concepts/protocols",
+            "product-manuals/zeebe/technical-concepts/internal-processing",
+            "product-manuals/zeebe/technical-concepts/clustering",
+            "product-manuals/zeebe/technical-concepts/workflow-lifecycles",            
           ],
         },
         {
-          Basics: [
-            "product-manuals/zeebe/basics/index",
-            "product-manuals/zeebe/basics/architecture",
-            "product-manuals/zeebe/basics/job-workers",
-            "product-manuals/zeebe/basics/partitions",
-            "product-manuals/zeebe/basics/protocols",
-            "product-manuals/zeebe/basics/internal-processing",
-            "product-manuals/zeebe/basics/exporters",
-            "product-manuals/zeebe/basics/clustering",
-          ],
-        },
-        {
-          "Getting Started Tutorial": [
-            "product-manuals/zeebe/getting-started/index",
-            "product-manuals/zeebe/getting-started/tutorial-setup",
-            "product-manuals/zeebe/getting-started/create-a-workflow",
-            "product-manuals/zeebe/getting-started/deploy-a-workflow",
-            "product-manuals/zeebe/getting-started/create-workflow-instance",
-            "product-manuals/zeebe/getting-started/next-steps-resources",
-          ],
-        },        
-        {
-          Reference: [
-            "product-manuals/zeebe/reference/index",
-            "product-manuals/zeebe/reference/workflow-lifecycles",
-            "product-manuals/zeebe/reference/exporters",
-          ],
-        },
-        {
-          "Zeebe Operations": [
-            "product-manuals/zeebe/operations/index",
-            "product-manuals/zeebe/operations/configuration",
-            "product-manuals/zeebe/operations/resource-planning",
-            "product-manuals/zeebe/operations/network-ports",
-            "product-manuals/zeebe/operations/setting-up-a-cluster",
-            "product-manuals/zeebe/operations/metrics",
-            "product-manuals/zeebe/operations/kubernetes",
+          "Deployment Guide": [
             {
-              Security: [
-                "product-manuals/zeebe/operations/security",
-                "product-manuals/zeebe/operations/authentication",
-                "product-manuals/zeebe/operations/authorization",
+              "Local Deployment": [
+                "product-manuals/zeebe/deployment-guide/local/install",
+                "product-manuals/zeebe/deployment-guide/local/quickstart",  
+                {
+                  "Getting Started Tutorial": [
+                    "product-manuals/zeebe/deployment-guide/local/getting-started/index",
+                    "product-manuals/zeebe/deployment-guide/local/getting-started/tutorial-setup",
+                    "product-manuals/zeebe/deployment-guide/local/getting-started/create-a-workflow",
+                    "product-manuals/zeebe/deployment-guide/local/getting-started/deploy-a-workflow",
+                    "product-manuals/zeebe/deployment-guide/local/getting-started/create-workflow-instance",
+                    "product-manuals/zeebe/deployment-guide/local/getting-started/next-steps-resources",
+                  ],
+                },   
+              ]
+            },            
+            {
+              "Kubernetes Deployment": [
+                "product-manuals/zeebe/deployment-guide/kubernetes/index",
+                "product-manuals/zeebe/deployment-guide/kubernetes/prerequisites",
+                "product-manuals/zeebe/deployment-guide/kubernetes/installing-helm",
+                "product-manuals/zeebe/deployment-guide/kubernetes/accessing-operate",
+                "product-manuals/zeebe/deployment-guide/kubernetes/zeebe-operator",
               ],
             },
-            "product-manuals/zeebe/operations/health",
-            "product-manuals/zeebe/operations/backpressure",
-            "product-manuals/zeebe/operations/disk-space",
-            "product-manuals/zeebe/operations/upgrade-zeebe",
-          ],
+            {
+              Configuration: [
+                "product-manuals/zeebe/deployment-guide/configuration/configuration",  
+                "product-manuals/zeebe/deployment-guide/configuration/broker-config-template",
+                "product-manuals/zeebe/deployment-guide/configuration/gateway-config-template",
+                "product-manuals/zeebe/deployment-guide/configuration/gateway-health-probes",
+                "product-manuals/zeebe/deployment-guide/configuration/environment-variables",                                                
+              ]
+            },
+            {
+              "Zeebe Operations": [
+                "product-manuals/zeebe/deployment-guide/operations/index",
+                "product-manuals/zeebe/deployment-guide/operations/resource-planning",
+                "product-manuals/zeebe/deployment-guide/operations/network-ports",
+                "product-manuals/zeebe/deployment-guide/operations/setting-up-a-cluster",
+                "product-manuals/zeebe/deployment-guide/operations/metrics",                             
+                "product-manuals/zeebe/deployment-guide/operations/health",
+                "product-manuals/zeebe/deployment-guide/operations/backpressure",
+                "product-manuals/zeebe/deployment-guide/operations/disk-space",
+                "product-manuals/zeebe/deployment-guide/operations/upgrade-zeebe",
+              ],
+            },
+            {
+              Security: [
+                "product-manuals/zeebe/deployment-guide/security/security",
+                "product-manuals/zeebe/deployment-guide/security/authentication",
+                "product-manuals/zeebe/deployment-guide/security/authorization",
+              ],
+            },
+          ]
         },
         {
-          "Zeebe on Kubernetes": [
-            "product-manuals/zeebe/kubernetes/index",
-            "product-manuals/zeebe/kubernetes/prerequisites",
-            "product-manuals/zeebe/kubernetes/installing-helm",
-            "product-manuals/zeebe/kubernetes/accessing-operate",
-            "product-manuals/zeebe/kubernetes/zeebe-operator",
-          ],
-        },
+          "Open Source Community": [
+            "product-manuals/zeebe/open-source/community-contributions",
+            "product-manuals/zeebe/open-source/get-help-get-involved",
+            "product-manuals/zeebe/open-source/release-cycle",
+            "product-manuals/zeebe/open-source/deprecated-features", 
+            "product-manuals/zeebe/open-source/exporters",        
+          ]
+        },              
         {
           Appendix: [
-            "product-manuals/zeebe/appendix/broker-config-template",
-            "product-manuals/zeebe/appendix/gateway-config-template",
-            "product-manuals/zeebe/appendix/gateway-health-probes",
-            "product-manuals/zeebe/appendix/environment-variables",
-            "product-manuals/zeebe/appendix/deprecated-features",
+
           ],
         },
       ],

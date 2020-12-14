@@ -7,8 +7,7 @@ Shows which broker is leader and follower for which partition. Particularly usef
 
 ## Related Resources
 
-- [Clustering Basics](../../zeebe/basics/clustering.md)
-- [Setting up a Cluster](../../zeebe/operations/setting-up-a-cluster.md)
+- [Clustering Basics](/product-manuals/zeebe/technical-concepts/clustering.md)
 
 ## Prerequisites
 

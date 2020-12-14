@@ -19,9 +19,11 @@ You will be guided through the following steps:
 ## Prerequisites
 
 - Go v1.13+ environment installed
-- [Zeebe distribution](../../zeebe/introduction/install.md)
+
+> TODO: adapto to cloud
+
+- [Zeebe distribution](/product-manuals/zeebe/deployment-guide/local/install.md)
 - [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases)
-- [Zeebe Monitor](https://github.com/zeebe-io/zeebe-simple-monitor/releases)
 
 Before you begin to setup your project please start the broker, i.e. by running the start up script
 `bin/broker` or `bin/broker.bat` in the distribution. Per default the broker is binding to the
@@ -354,7 +356,7 @@ func failJob(client worker.JobClient, job entities.Job) {
 }
 ```
 
-In this example we open a [job worker](../../zeebe/basics/job-workers.md) for jobs of type `payment-service`.
+In this example we open a [job worker](/product-manuals/concepts/job-workers.md) for jobs of type `payment-service`.
 The job worker will repeatedly poll for new jobs of the type `payment-service` and activate them
 subsequently. Each activated job will then be passed to the job handler which implements the business
 logic of the job worker. The handler will then complete the job with its result or fail the job if
@@ -381,5 +383,5 @@ Yay! You finished this tutorial and learned the basic usage of the Go client.
 
 Next steps:
 
-- Learn more about the [concepts behind Zeebe](../../zeebe/basics/index.md)
-- Learn more about [BPMN workflows](../../../reference/bpmn-workflows/bpmn-primer.md)
+- Learn more about the [concepts behind Zeebe](/product-manuals/concepts/what-is-camunda-cloud.md)
+- Learn more about [BPMN workflows](/reference/bpmn-workflows/bpmn-primer.md)

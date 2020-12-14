@@ -33,7 +33,7 @@ One of the following:
 
 (Not using Docker)
 
-- [Zeebe distribution](../../zeebe/introduction/install.md)
+- [Zeebe distribution](/product-manuals/zeebe/deployment-guide/local/install.md)
 - [Zeebe Monitor](https://github.com/zeebe-io/zeebe-simple-monitor/releases)
 
 ## Start the broker
@@ -399,9 +399,9 @@ Hurray! You finished this tutorial and learned the basic usage of the Java clien
 
 Next steps:
 
-- Learn more about the [concepts behind Zeebe](../../zeebe/basics/index.md)
-- Learn more about [BPMN workflows](../../../reference/bpmn-workflows/bpmn-primer.md)
+- Learn more about the [concepts behind Zeebe](/product-manuals/concepts/what-is-camunda-cloud.md)
+- Learn more about [BPMN workflows](/reference/bpmn-workflows/bpmn-primer.md)
 - Take a deeper look into the [Java client](index.md)
 
-[job worker]: ../../zeebe/basics/job-workers.html
+[job worker]: /product-manuals/concepts/job-workers.md
 [zeebe-docker-compose]: https://github.com/zeebe-io/zeebe-docker-compose

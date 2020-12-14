@@ -106,7 +106,7 @@ Adding variable mappings:
 
 References:
 
-- [Job Handling](/product-manuals/zeebe/basics/job-workers.md)
+- [Job Handling](/product-manuals/concepts/job-workers.md)
 - [Expressions](/product-manuals/concepts/expressions.md)
 - [Variable Mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
 - [Incidents](/product-manuals/concepts/incidents.md)

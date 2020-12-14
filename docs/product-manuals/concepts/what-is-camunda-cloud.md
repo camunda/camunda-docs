@@ -33,7 +33,7 @@ Camunda Cloud was designed to operate at very large scale, and to achieve this, 
 - **A language-agnostic client model**, making it possible to build a client in just about any programming language that an organization uses to build microservices.
 - **Operational ease-of-use** as a self-contained and self-sufficient system. Camunda Cloud does **not** require a cluster coordinator such as ZooKeeper. Because all nodes in a Camunda Cloud cluster are equal, it's relatively easy to scale, and it plays nicely with modern resource managers and container orchestrators such as [Docker](https://www.docker.com/), [Kubernetes](https://kubernetes.io/), and [DC/OS](https://dcos.io/). Zeebe CLI (Command Line Interface) allows you to script and automate management and operations tasks.
 
-You can learn more about these technical concepts [in the "Basics" section of the documentation](../zeebe/basics/index.md).
+You can learn more about these technical concepts [in the "Technical Concepts" section of the documentation](/product-manuals/zeebe/technical-concepts/index.md).
 
 ## Camunda Cloud is simple and lightweight
 

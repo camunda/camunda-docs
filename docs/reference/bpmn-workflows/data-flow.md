@@ -55,7 +55,7 @@ These type of problems can be avoided by:
 
 ## Additional Resources
 
-- [Job Handling](/product-manuals/zeebe/basics/job-workers.md)
+- [Job Handling](/product-manuals/concepts/job-workers.md)
 - [Variables](/product-manuals/concepts/variables.md)
 - [Input/Output Variable Mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
 - [Variable Scopes](/product-manuals/concepts/variables.md#variable-scopes)

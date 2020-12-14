@@ -5,7 +5,7 @@ title: "Open a Job Worker"
 
 ## Related Resources
 
-- [Job Worker Basics](../../zeebe/basics/job-workers.md)
+- [Job Worker Basics](/product-manuals/concepts/job-workers.md)
 
 ## Prerequisites
 

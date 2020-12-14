@@ -3,9 +3,7 @@ id: zeebe-overview
 title: "Zeebe: the Workflow engine for the Cloud Age"
 ---
 
-<img src="/img/zeebe-brand.svg" height="100px" />
-
-### Zeebe is a cloud-native workflow engine for microservices orchestration
+## Zeebe is a cloud-native workflow engine for microservices orchestration
 
 - Define workflows graphically in BPMN 2.0
 - Choose any gRPC-supported programming language
@@ -18,6 +16,4 @@ title: "Zeebe: the Workflow engine for the Cloud Age"
 
 **First Steps**
 
-- [Read up on Zeebe's core concepts](basics/index.md)
-- [Run Zeebe with Docker or download a distribution](introduction/install.md)
-- [Try the Getting Started tutorial](getting-started/index.md)
+- [Read up on Zeebe's core concepts](technical-concepts/index.md)
