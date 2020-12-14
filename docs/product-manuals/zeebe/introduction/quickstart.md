@@ -33,6 +33,7 @@ Inside the Zeebe directory you will find multiple directories.
 ```
 tree -d
 ```
+
 ```
 .
 ├── bin     - Binaries and start scripts of the distribution
@@ -48,6 +49,7 @@ To start a Zeebe broker use the `broker` or `broker.bat` file located in the
 ```
 ./bin/broker
 ```
+
 ```
 23:39:13.246 [] [main] INFO  io.zeebe.broker.system - Scheduler configuration: Threads{cpu-bound: 2, io-bound: 2}.
 23:39:13.270 [] [main] INFO  io.zeebe.broker.system - Version: X.Y.Z
@@ -61,11 +63,13 @@ To continue this guide open another terminal to execute commands using the
 Zeebe CLI `zbctl`.
 
 We can now check the status of the Zeebe broker.
+
 > **Note:** By default, the embedded gateway listens to a plaintext connection but the clients are configured to use TLS. Therefore, all `zbctl` commands in the quickstart will specify the `--insecure` flag.
 
 ```
 ./bin/zbctl --insecure status
 ```
+
 ```
 Cluster size: 1
 Partitions count: 1
@@ -77,7 +81,7 @@ Brokers:
 
 ## Step 3: Deploy a workflow
 
-A [workflow](../basics/workflows.md) is used to orchestrate loosely coupled job
+A [workflow](../../concepts/workflows.md) is used to orchestrate loosely coupled job
 workers and the flow of data between them.
 
 In this guide we will use an example process `order-process.bpmn`. You can
@@ -86,8 +90,8 @@ download it with the following link:
 
 ![order-process](assets/order-process.png)
 
-The process describes a sequential flow of three tasks *Collect Money*, *Fetch
-Items* and *Ship Parcel*. If you open the `order-process.bpmn` file in a text
+The process describes a sequential flow of three tasks _Collect Money_, _Fetch
+Items_ and _Ship Parcel_. If you open the `order-process.bpmn` file in a text
 editor you will see that every task has an attribute `type` defined in the XML
 which is later used as job type.
 
@@ -121,6 +125,7 @@ But first let's deploy the workflow to the Zeebe broker.
 ```
 ./bin/zbctl --insecure deploy order-process.bpmn
 ```
+
 ```
 {
   "key": 2251799813685250,
@@ -151,12 +156,14 @@ specify the initial data of the instance as variables when we start the instance
 
 > **Note:** Windows users who want to execute this command using cmd or Powershell
 > have to escape the variables differently.
+>
 > - cmd: `"{\"orderId\": 1234}"`
 > - Powershell: `'{"\"orderId"\": 1234}'`
 
 ```
 ./bin/zbctl --insecure create instance order-process --variables '{"orderId": 1234}'
 ```
+
 ```
 {
   "workflowKey": 2251799813685249,
@@ -193,6 +200,7 @@ each of the three task types from the workflow definition: `payment-service`,
 ./bin/zbctl --insecure create worker inventory-service --handler cat &
 ./bin/zbctl --insecure create worker shipment-service --handler cat &
 ```
+
 ```
 2019/06/06 20:54:36 Handler completed job 2251799813685257 with variables
 {"orderId":1234}
@@ -228,8 +236,8 @@ To continue working with Zeebe we recommend to get more familiar with the basic
 concepts of Zeebe, see the [Basics chapter](../basics/index.md) of the
 documentation.
 
-In the [BPMN Workflows chapter](../bpmn-workflows/bpmn-primer.md) you can find an
+In the [BPMN Workflows chapter](/reference/bpmn-workflows/bpmn-primer.md) you can find an
 introduction to creating Workflows with BPMN.
 
 The documentation also provides getting started guides for implementing job
-workers using [Java](../clients/java-client/index.md) or [Go](../clients/go-client/index.md).
+workers using [Java](/product-manuals/clients/java-client/index.md) or [Go](/product-manuals/clients/go-client/get-started.md).

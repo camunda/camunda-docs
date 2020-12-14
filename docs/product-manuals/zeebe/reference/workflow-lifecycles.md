@@ -23,7 +23,7 @@ Events which belongs to the same element instance (e.g. a task) have the same `k
 
 ## Example
 
-![order process](../bpmn-workflows/assets/workflow.png)
+![order process](assets/workflow.png)
 
 <table>
     <tr>

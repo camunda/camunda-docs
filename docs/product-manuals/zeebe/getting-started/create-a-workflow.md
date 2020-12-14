@@ -5,7 +5,7 @@ title: "Create a Workflow"
 
 _New to BPMN and want to learn more before moving forward? [This blog post](https://zeebe.io/blog/2018/08/bpmn-for-microservices-orchestration-a-primer-part-1/) helps to explain the standard and why it's a good fit for microservices orchestration._
 
-_In case you're already familiar with BPMN and how to create a BPMN model in Zeebe Modeler, you can find the finished model that we create during the tutorial here: [Zeebe Getting Started Tutorial Workflow Model](assets/order-process.bpmn)._ 
+_In case you're already familiar with BPMN and how to create a BPMN model in Zeebe Modeler, you can find the finished model that we create during the tutorial here: [Zeebe Getting Started Tutorial Workflow Model](assets/order-process.bpmn)._
 
 _If you're using the finished model we provide rather than building your own, you can also move ahead to [Deploy a Workflow](deploy-a-workflow.md)._
 
@@ -13,9 +13,9 @@ Zeebe Modeler is a desktop modeling tool that allows you to build and configure 
 
 We'll create an e-commerce order process as our example, and we'll model a workflow that consists of:
 
-*   Initiating a payment for an order
-*   Receiving a payment confirmation message from an external system
-*   Shipping the items in the order with or without insurance depending on order value
+- Initiating a payment for an order
+- Receiving a payment confirmation message from an external system
+- Shipping the items in the order with or without insurance depending on order value
 
 This is what your workflow model will look like when we're finished:
 
@@ -25,34 +25,27 @@ The payment task and shipping tasks are carried out by worker services that we'l
 
 To get started
 
-*   Open the Zeebe Modeler and create a new BPMN diagram.
-*   Save the model as `order-process.bpmn` in the top level of the Zeebe broker directory that you just downloaded. As a reminder, this directory is called `zeebe-broker-0.17.0`
+- Open the Zeebe Modeler and create a new BPMN diagram.
+- Save the model as `order-process.bpmn` in the top level of the Zeebe broker directory that you just downloaded. As a reminder, this directory is called `zeebe-broker-0.17.0`
 
 The first element in your model will be a Start Event, which should already be on the canvas when you open the Modeler.
 
 It's a BPMN best practice to label all elements in our model, so:
 
-
-
-*   Double-click on the Start Event
-*   Label it "Order Placed" to signify that our process will be initiated whenever a customer places an order
+- Double-click on the Start Event
+- Label it "Order Placed" to signify that our process will be initiated whenever a customer places an order
 
 Next, we need to add a Service Task:
 
-
-
-*   Click on the Start Event and select Task icon
-*   Label the newly created Task "Initiate Payment"
-*   Click the wrench icon and change the Task to a Service Task 
-
-
-
+- Click on the Start Event and select Task icon
+- Label the newly created Task "Initiate Payment"
+- Click the wrench icon and change the Task to a Service Task
 
 Next, we'll configure the "Initiate Payment" Service Task so that an external microservice can work on it:
 
-*   Click on the "Initiate Payment" task
-*   Expand the Properties panel on the right side of the screen if it's not already visible
-*   In the _Type_ field in the Properties panel, enter `initiate-payment`
+- Click on the "Initiate Payment" task
+- Expand the Properties panel on the right side of the screen if it's not already visible
+- In the _Type_ field in the Properties panel, enter `initiate-payment`
 
 This is what you should see in your Modeler now.
 
@@ -60,8 +53,8 @@ This is what you should see in your Modeler now.
 
 This _Type_ field represents the _job type_ in Zeebe. A couple of concepts that are important to understand at this point:
 
-*   A _job_ is simply a work item in a workflow that needs to be completed before a workflow instance can proceed to the next step. (_[See: Job Workers](../basics/job-workers.md)_)
-*   A _workflow instance_ is one running instance of a workflow model--in our case, an individual order to be fulfilled. (_[See: Workflows](../basics/workflows.md)_)
+- A _job_ is simply a work item in a workflow that needs to be completed before a workflow instance can proceed to the next step. (_[See: Job Workers](../basics/job-workers.md)_)
+- A _workflow instance_ is one running instance of a workflow model--in our case, an individual order to be fulfilled. (_[See: Workflows](../../concepts/workflows.md)_)
 
 For every workflow instance that arrives at the "Initiate Payment" Service Task, Zeebe will create a job with type `initiate-payment`. The external worker service responsible for payment processing--the so-called job worker--will poll Zeebe intermittently to ask if any jobs of type `initiate-payment` are available.
 
@@ -69,32 +62,27 @@ If a job is available for a given workflow instance, the worker will activate it
 
 Next, we'll add a Message Event to the workflow:
 
-
-*   Click on the "Initiate Payment" task on the Modeler
-*   Select the circular icon with a double line border
-*   Click on the wrench icon next to the newly created event
-*   Select the Message Intermediate Catch Event
-*   Double-click on the message event and label it "Payment Received"
+- Click on the "Initiate Payment" task on the Modeler
+- Select the circular icon with a double line border
+- Click on the wrench icon next to the newly created event
+- Select the Message Intermediate Catch Event
+- Double-click on the message event and label it "Payment Received"
 
 ![Message Event](assets/tutorial-3.2-modeler-message-event.png)
 
-
-
-We use message catch events in Zeebe when the workflow engine needs to receive a message from an external system before the workflow instance can advance. (_[See: Message Events](../bpmn-workflows/message-events/message-events.md)_)
+We use message catch events in Zeebe when the workflow engine needs to receive a message from an external system before the workflow instance can advance. (_[See: Message Events](/reference/bpmn-workflows/message-events/message-events.md)_)
 
 In the scenario we're modeling, we _initiate_ a payment with our Service Task, but we need to wait for some other external system to actually confirm that the payment was received. This confirmation comes in the form of a message that will be sent to Zeebe - asynchronously - by an external service.
 
 Messages received by Zeebe need to be correlated to specific workflow instances. To make this possible, we have some more configuring to do:
 
-*   Select the Message Event and make sure you're on the "General" tab of the Properties panel on the right side of the screen
-*   In the Properties panel, click the `+` icon to create a new message. You'll now see two fields in the Modeler that we'll use to correlate a message to a specific workflow instance: Message Name and Subscription Correlation Key.
-*   Let's give this message a self-explanatory name: `payment-received`.
+- Select the Message Event and make sure you're on the "General" tab of the Properties panel on the right side of the screen
+- In the Properties panel, click the `+` icon to create a new message. You'll now see two fields in the Modeler that we'll use to correlate a message to a specific workflow instance: Message Name and Subscription Correlation Key.
+- Let's give this message a self-explanatory name: `payment-received`.
 
 ![Add Message Name](assets/tutorial-3.3-add-message-name.png)
 
 When Zeebe receives a message, this name field lets us know _which message event in the workflow model_ the message is referring to.
-
-
 
 But how do we know which _specific workflow instance_--that is, which customer order--a message refers to? That's where Subscription Correlation Key comes in. The Subscription Correlation Key is a unique ID present in both the workflow instance payload and the message sent to Zeebe.
 
@@ -114,9 +102,9 @@ That means that when we create a workflow instance, we'll need to include order 
 
 First, let's take the necessary steps to configure our workflow model to make this decision. To add the gateway:
 
-*   Click on the Message Event you just created
-*   Select the Gateway (diamond-shaped) symbol - the Exclusive Gateway is the default when you add a new gateway to a model
-*   Double-click on the gateway and add a label "Order Value?" so that it's clear what we're using as our decision criteria
+- Click on the Message Event you just created
+- Select the Gateway (diamond-shaped) symbol - the Exclusive Gateway is the default when you add a new gateway to a model
+- Double-click on the gateway and add a label "Order Value?" so that it's clear what we're using as our decision criteria
 
 ![Add Exclusive Gateway to Model](assets/tutorial-3.5-add-xor-gateway.png)
 
@@ -126,72 +114,55 @@ We'll add two outgoing Sequence Flows from this Exclusive Gateway that lead to t
 
 Next, we need to:
 
-
-
-*   Select the gateway and add a new Service Task to the model.
-*   Label the task "Ship Without Insurance"
-*   Set the Type to `ship-without-insurance`
-
-
+- Select the gateway and add a new Service Task to the model.
+- Label the task "Ship Without Insurance"
+- Set the Type to `ship-without-insurance`
 
 ![Add No Insurance Service Task](assets/tutorial-3.7-no-insurance-task.png)
 
-
 Whenever we use an Exclusive Gateway, we want to be sure to set a default flow, which in this case will be shipping without insurance:
 
-
-
-*   Select the Sequence Flow you just created from the gateway to the "Ship Without Insurance" Service Task
-*   Click on the wrench icon
-*   Choose "Default Flow"
+- Select the Sequence Flow you just created from the gateway to the "Ship Without Insurance" Service Task
+- Click on the wrench icon
+- Choose "Default Flow"
 
 ![Add No Insurance Service Task](assets/tutorial-3.8-default-flow.png)
 
 Now we're ready to add a _second_ outgoing Sequence Flow and Service Task from the gateway:
 
-
-
-*   Select the gateway again
-*   Add another Service Task to the model
-*   Label it "Ship With Insurance"
-*   Set the type to `ship-with-insurance`
+- Select the gateway again
+- Add another Service Task to the model
+- Label it "Ship With Insurance"
+- Set the type to `ship-with-insurance`
 
 Next, we'll set a condition expression in the Sequence Flow leading to this "Ship With Insurance" Service Task:
 
-
-
-*   Click on the sequence flow and open the Properties panel
-*   Input the expression `= orderValue >= 100` in the "Condition expression" field in the Properties panel
-*   Double-click on the sequence flow to add a label "`>= $100"`
+- Click on the sequence flow and open the Properties panel
+- Input the expression `= orderValue >= 100` in the "Condition expression" field in the Properties panel
+- Double-click on the sequence flow to add a label "`>= $100"`
 
 ![Condition Expression](assets/tutorial-3.9-condition-expression.png)
 
 We're almost finished! To wrap things up, we'll:
 
-
-
-*   Select the "Ship Without Insurance" task
-*   Add another Exclusive Gateway to the model to merge the branches together again (a BPMN best practice in a model like this one).
-*   Select the "Ship With Insurance" task
-*   Add an outgoing sequence flow that connects to the second Exclusive Gateway you just created
+- Select the "Ship Without Insurance" task
+- Add another Exclusive Gateway to the model to merge the branches together again (a BPMN best practice in a model like this one).
+- Select the "Ship With Insurance" task
+- Add an outgoing sequence flow that connects to the second Exclusive Gateway you just created
 
 The only BPMN element we need to add is an End Event:
 
-
-
-*   Click on the second Exclusive Gateway
-*   Add an End Event
-*   Double-click on it to label it "Order Fulfilled"
+- Click on the second Exclusive Gateway
+- Add an End Event
+- Double-click on it to label it "Order Fulfilled"
 
 ![Condition Expression](assets/tutorial-3.10-end-event.png)
 
 Lastly, we'll change the process ID to something more descriptive than the default `Process_1` that you'll see in the Modeler:
 
-
-
-*   Click onto a blank part of the canvas
-*   Open the Properties panel
-*   Change the Id to `order-process`
+- Click onto a blank part of the canvas
+- Open the Properties panel
+- Change the Id to `order-process`
 
 Here's what you should see in the Modeler after these last few updates:
 

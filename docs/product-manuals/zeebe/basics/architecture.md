@@ -16,7 +16,7 @@ Clients are libraries that you embed in an application (e.g. a microservice that
 
 More about Zeebe clients:
 
-- Clients connect to the Zeebe gateway via [gRPC](https://grpc.io), which uses http/2-based transport. To learn more about gRPC in Zeebe, check out the [Zeebe API (gRPC)](../../../reference/grpc.md).
+- Clients connect to the Zeebe gateway via [gRPC](https://grpc.io), which uses http/2-based transport. To learn more about gRPC in Zeebe, check out the [Zeebe API (gRPC)](/reference/grpc.md).
 - The Zeebe project includes officially-supported Java and Go clients, and gRPC makes it possible to generate clients in a range of different programming languages. [Community clients](https://awesome.zeebe.io) have been created in other languages, including C#, Ruby, and JavaScript.
 - Client applications can be scaled up and down completely separately from Zeebe--the Zeebe brokers do not execute any business logic.
 
@@ -48,6 +48,6 @@ The exporter system provides an event stream of state changes within Zeebe. This
 
 - Analysis of historic workflow data for auditing, business intelligence, etc
 
-- Tracking [incidents](../reference/incidents.md) created by Zeebe
+- Tracking [incidents](/product-manuals/concepts/incidents.md) created by Zeebe
 
 The exporter includes a simple API that you can use to stream data into a storage system of your choice. Zeebe includes an out-of-the-box [Elasticsearch exporter](https://github.com/zeebe-io/zeebe/tree/master/exporters/elasticsearch-exporter), and other [community-contributed exporters](https://awesome.zeebe.io) are also available.
