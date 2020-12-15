@@ -127,22 +127,24 @@ module.exports = {
           ],
         },
       ],
-      "Zeebe Engine": [
+      Zeebe: [
         "product-manuals/zeebe/zeebe-overview",
         {
           "Technical Concepts": [
             "product-manuals/zeebe/technical-concepts/index",
             "product-manuals/zeebe/technical-concepts/architecture",
-            "product-manuals/zeebe/technical-concepts/partitions",
-            "product-manuals/zeebe/technical-concepts/protocols",
-            "product-manuals/zeebe/technical-concepts/internal-processing",
             "product-manuals/zeebe/technical-concepts/clustering",
+            "product-manuals/zeebe/technical-concepts/partitions",            
+            "product-manuals/zeebe/technical-concepts/internal-processing",            
             "product-manuals/zeebe/technical-concepts/workflow-lifecycles",            
+            "product-manuals/zeebe/technical-concepts/protocols",
+            "product-manuals/zeebe/technical-concepts/exporters",        
           ],
         },
         {
           "Deployment Guide": [
-            {
+            "product-manuals/zeebe/deployment-guide/index",  
+            {              
               "Local Deployment": [
                 "product-manuals/zeebe/deployment-guide/local/install",
                 "product-manuals/zeebe/deployment-guide/local/quickstart",  
@@ -204,7 +206,6 @@ module.exports = {
             "product-manuals/zeebe/open-source/get-help-get-involved",
             "product-manuals/zeebe/open-source/release-cycle",
             "product-manuals/zeebe/open-source/deprecated-features", 
-            "product-manuals/zeebe/open-source/exporters",        
           ]
         },              
         {

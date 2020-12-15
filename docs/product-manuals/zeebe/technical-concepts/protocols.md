@@ -15,36 +15,16 @@ If you’re new to gRPC, the [“What is gRPC”](https://grpc.io/docs/guides/in
 
 ## Why gRPC?
 
-gRPC has many nice features that make it a good fit for Zeebe. It:
+gRPC has many nice features that make it a good fit for Zeebe:
 
 - supports bi-directional streaming for opening a persistent connection and sending or receiving a stream of messages between client and server
 - uses the common http2 protocol by default
 - uses Protocol Buffers as an interface definition and data serialization mechanism–specifically, Zeebe uses proto3, which supports easy client generation in ten different programming languages
 
-## Supported clients
+## Supported Clients
 
 At the moment, Zeebe officially supports two gRPC clients: one in [Java](/product-manuals/clients/java-client/index.md), and one in [Golang](/product-manuals/clients/go-client/get-started.md).
 
-If Zeebe does not provide an officially-supported client in your target language, you can read the official [Quick Start](https://grpc.io/docs/quickstart/) page to find out how
-to create a very basic one.
+[Community clients](/product-manuals/clients/other-clients/index.md) have been created in other languages, including C#, Ruby, and JavaScript.
 
-You can find a list of existing clients in the [Awesome Zeebe repository](https://github.com/zeebe-io/awesome-zeebe#clients).
-Additionally, a [blog post](https://zeebe.io/blog/2018/11/grpc-generating-a-zeebe-python-client/) was published with a short tutorial on how to write a new client from scratch in Python.
-
-## Handling back-pressure
-
-When a broker receives a user request, it is written to the _event stream_ first (see section [Internal Processing](internal-processing.md) for details), and processed later by the stream processor.
-If the processing is slow or if there are many user requests in the stream, it might take too long for the processor to start processing the command.
-If the broker keeps accepting new requests from the user, the back log increases and the processing latency can grow beyond an acceptable time.
-To avoid such problems, Zeebe employs a back-pressure mechanism.
-When the broker receives more requests than it can process with an acceptable latency, it rejects some requests.
-
-The maximum rate of requests that can be processed by a broker depends on the processing capacity of the machine, the network latency, current load of the system and so on.
-Hence, there is no fixed limit configured in Zeebe for the maximum rate of requests it accepts.
-Instead, Zeebe uses an adaptive algorithm to dynamically determine the limit of the number of inflight requests (the requests that are accepted by the broker, but not yet processed).
-The inflight request count is incremented when a request is accepted and decremented when a response is sent back to the client.
-The broker rejects requests when the inflight request count reaches the limit.
-
-When the broker rejects requests due to back-pressure, the clients can retry them with an appropriate retry strategy.
-If the rejection rate is high, it indicates that the broker is constantly under high load.
-In that case, it is recommended to reduce the request rate.
+If there is no client in your target language yet, you can [build your own client](/product-manuals/clients/build-your-own-client.md) in a range of different programming languages.

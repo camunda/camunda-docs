@@ -5,7 +5,7 @@ title: "Workflow Lifecycles"
 
 In Zeebe, the workflow execution is represented internally by events of type `WorkflowInstance`. The events are written to the log stream and can be observed by an exporter.
 
-Each event is one step in a workflow instance. All events of one workflow instance have the same `workflowInstanceKey`.
+Each event is one step in a workflow instance lifecycle. All events of one workflow instance have the same `workflowInstanceKey`.
 
 Events which belongs to the same element instance (e.g. a task) have the same `key`. The element instances have different lifecycles depending on the type of element.
 

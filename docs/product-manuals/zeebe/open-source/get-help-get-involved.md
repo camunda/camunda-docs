@@ -26,9 +26,3 @@ Did you find a problem in Zeebe? Or do you have a suggestion for an improvement?
 You can create an issue in the Zeebe GitHub project to let us know.
 
 [Go to Issues in the Zeebe GitHub repository](https://github.com/zeebe-io/zeebe/issues)
-
-### Community Contributions
-
-We cover community contributions in a dedicated section of the docs.
-
-[Read the Zeebe docs entry about community contributions](community-contributions.md)
