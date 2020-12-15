@@ -1,0 +1,34 @@
+---
+id: user
+title: User
+---
+
+export const Tag = ({children, color}) => (
+<span
+style={{
+      backgroundColor: color,
+      borderRadius: '2px',
+      color: '#fff',
+      padding: '0.2rem',
+    }}>
+{children}
+</span>
+);
+
+Describes the user
+
+```graphql
+type User {
+  username: ID!
+  firstname: String
+  lastname: String
+}
+```
+
+### Fields
+
+#### `username` ([`ID!`](/docs/reference/tasklist-api/scalars/id))
+
+#### `firstname` ([`String`](/docs/reference/tasklist-api/scalars/string))
+
+#### `lastname` ([`String`](/docs/reference/tasklist-api/scalars/string))

@@ -64,9 +64,84 @@ If the authorization is successful, the authorization server sends back the acce
 
 ## Obtain GraphQL Schema
 
-To obtain the GraphQL schema you need to send a request to the endpoint with a GraphQL introspection query:
+To obtain the GraphQL schema you need to send a request to the endpoint with a GraphQL introspection query as described in https://graphql.org/learn/introspection/
 
-Here you can find how to introspect the GraphQL schema: https://graphql.org/learn/introspection/
+or you use the [generated API documentation](../../../reference/tasklist-api/schema)
 
+There are also a lot of tools to explore GraphQL API's like this: https://altair.sirmuel.design
 
-### Example Requests
+For example you want to know all about provided types:
+````graphql
+query {
+  __schema {
+    queryType {
+      fields {
+        name
+        type {
+          kind
+          ofType {
+            kind
+            name
+          }
+        }
+      }
+    }
+  }
+}
+```` 
+
+## Examples requests and responses
+
+### Get all tasks names
+Request:
+````graphql
+{"query":"{
+    tasks(query: {}) {
+        name
+    }
+  }"
+}
+````
+Response:
+```json
+{
+  "data": {
+    "tasks": [
+      {
+        "name": "Check payment"
+      },
+      {
+        "name": "Register the passenger"
+      }
+    ]
+  }
+}
+```
+
+### Get all tasks that are completed with id, name and state
+Request:
+```graphql
+{
+    "query" : "{
+        tasks(query: { state: COMPLETED }) {
+            id
+            name
+            taskState
+        }
+    }"
+}
+```
+Response:
+```json
+{
+  "data": {
+    "tasks": [
+      {
+        "id": "2251799813685728",
+        "name": "Check payment",
+        "taskState": "COMPLETED"
+      }
+    ]
+  }
+}
+```

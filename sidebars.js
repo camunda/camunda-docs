@@ -297,6 +297,7 @@ module.exports = {
         },
       ],
     },
+    require("./docs/reference/tasklist-api/sidebar-schema"),
     "reference/glossary",
   ],
   Samples: ["samples/overview"],
