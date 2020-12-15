@@ -5,13 +5,19 @@ title: "Workflows"
 
 Workflows are flowchart-like blueprints that define the orchestration of _tasks_. Every task represents a piece of business logic such that the ordered execution produces a meaningful result.
 
-A _job worker_ is your implementation of the business logic required to complete a task. A job worker must embed a Zeebe client library to communicate with the broker, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical three-tier application, as a \(lambda\) function, via command line tools, etc.
+A _job worker_ implements the business logic required to complete a task. A job worker must be able to communicate with Camunda Cloud, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical three-tier application, as a \(lambda\) function, via command line tools, etc.
 
-Running a workflow then requires two steps: submitting the workflow to Zeebe and creating job workers that can request jobs from Zeebe and complete them.
+Running a workflow then requires three steps:
+
+- Deploy a workflow to Camunda Cloud
+- Implement and register job workers for tasks in the worklfows
+- Create new instances of said workflow
+
+But let us not get ahead of ourselves. The very first step is to design the process.
 
 ## Sequences
 
-The simplest kind of workflow is an ordered sequence of tasks. Whenever workflow execution reaches a task, Zeebe creates a job that can be requested and completed by a job worker.
+The simplest kind of workflow is an ordered sequence of tasks. Whenever workflow execution reaches a task, Zeebe (the workflow engine inside Camunda Cloud) creates a job that can be requested and completed by a job worker.
 
 ![workflow-sequence](assets/order-process.png)
 
@@ -23,7 +29,7 @@ As Zeebe progresses from one task to the next in a workflow, it can move custom 
 
 ![data-flow](assets/workflow-data-flow.png)
 
-Every job worker can read the variables and modify them when completing a job so that data can be shared between different tasks in a workflow.
+Any job worker can read the variables and modify them when completing a job so that data can be shared between different tasks in a workflow.
 
 ## Data-based Conditions
 
@@ -31,7 +37,7 @@ Some workflows do not always execute the same tasks but need to choose different
 
 ![data-conditions](assets/workflows-data-based-conditions.png)
 
-The diamond shape with the "X" in the middle is an element indicating that the workflow decides to take one of many paths.
+The diamond shape with the "X" in the middle is an element indicating that the workflow decides to take one of several paths.
 
 ## Events
 
@@ -39,15 +45,15 @@ Events represent things that happen. A workflow can react to events (catching ev
 
 ![workflow](assets/workflow-events.png)
 
-There are different types of events such as message or timer.
+There are different types of events such as message, timer or error.
 
-## Fork / Join Concurrency
+## Parallel Execution
 
-In many cases, it is also useful to perform multiple tasks in parallel. This can be achieved with Fork / Join concurrency:
+In many cases, it is also useful to perform multiple tasks in parallel. This can be achieved with a parallel gateway:
 
 ![data-conditions](assets/workflows-parallel-gateway.png)
 
-The diamond shape with the "+" marker means that all outgoing paths are activated and all incoming paths are merged.
+The diamond shape with the "+" marker means that all outgoing paths are activated. The tasks on those paths can run in parallel. The order is only fulfilled after both tasks have completed.
 
 ## BPMN 2.0
 

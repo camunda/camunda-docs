@@ -23,12 +23,12 @@ module.exports = {
       Concepts: [
         "product-manuals/concepts/what-is-camunda-cloud",
         "product-manuals/concepts/workflows",              
-        "product-manuals/concepts/workflow-instance-creation",
         "product-manuals/concepts/job-workers",        
-        "product-manuals/concepts/variables",
-        "product-manuals/concepts/expressions",
+        "product-manuals/concepts/workflow-instance-creation",
         "product-manuals/concepts/messages",
-        "product-manuals/concepts/incidents",            
+        "product-manuals/concepts/incidents",   
+        "product-manuals/concepts/variables",
+        "product-manuals/concepts/expressions",         
       ],
       Clients: [
         "product-manuals/clients/overview",

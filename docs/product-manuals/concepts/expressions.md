@@ -21,13 +21,16 @@ Additionally, the following attributes of BPMN elements can define an expression
 
 ## Expressions vs. Static Values
 
-Some attributes of BPMN elements, like the timer definition of a timer catch event, can be defined either as a static value (e.g. `PT2H`) or as an expression (e.g. `= remaingTime`).
+Some attributes of BPMN elements, like the timer definition of a timer catch event, can be defined either:
 
-The value is identified as an expression if it starts with an **equal sign** `=` (i.e. the expression prefix). The text behind the equal sign is the actual expression. For example, `= remaingTime` defines the expression `remaingTime` that accesses a variable with the name `remaingTime`.
+- as an expression (e.g. `= remaingTime`), or
+- as a static value (e.g. `PT2H`).
 
-If the value doesn't have the prefix then it is used as static value. A static value is used either as a string (e.g. job type) or as a number (e.g. job retries). A string value must not be enclosed in quotes.
+Expressions always start with an _equal sign_ (e.g. `= order.amount > 100`). The text behind the equal sign is the actual expression (e.g. `order.amount > 100` checks whether the amount of the order is greater than 100).
 
-Note that an expression can also define a static value by using literals (e.g. `"foo"`, `21`, `true`, `[1,2,3]`, `{x: 22}`, etc.).
+If the element does not start with the prefix then it is used as a static value. A static value is used either as a string (e.g. job type) or as a number (e.g. job retries). A string value must not be enclosed in quotes.
+
+Note that an expression can also define a static value by using literals (e.g. `= "foo"`, `= 21`, `= true`, `= [1,2,3]`, `= {x: 22}`, etc.).
 
 ## The Expression Language
 
@@ -38,7 +41,7 @@ An expression is written in **FEEL** (Friendly Enough Expression Language). FEEL
 - Simple syntax designed for business professionals and developers
 - Three-valued logic (true, false, null)
 
-Zeebe integrates the [Feel-Scala](https://github.com/camunda/feel-scala) engine (version `1.12.x`) to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in the project's [documentation](https://camunda.github.io/feel-scala/1.12/).
+Camunda Cloud integrates the [Feel-Scala](https://github.com/camunda/feel-scala) engine (version `1.12.x`) to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in the project's [documentation](https://camunda.github.io/feel-scala/1.12/).
 
 ### Access Variables
 
@@ -113,8 +116,8 @@ Values can be compared using the following operators:
   </tr>
 
    <tr>
-    <td>between _ and _</td>
-    <td>same as <i>(x &#62;= _ and x &#60;= _)</i></td>
+    <td>between [X] and [Y]</td>
+    <td>same as <i>(v &#62;= [X] and v &#60;= [Y]])</i></td>
     <td>totalPrice between 10 and 25</td>
    </tr>
 
@@ -170,6 +173,19 @@ Any value can be transformed into a string value using the `string()` function.
 More functions for string values are available as [built-in functions](https://camunda.github.io/feel-scala/1.12/feel-built-in-functions#string-functions) (e.g. contains, matches, etc.).
 
 ### Temporal Expressions
+
+The current date and date-time can be accessed using the built-in functions `today()` and `now()`. In order to store the current date or date-time in a variable, it must be converted to a string using the built-in function `string()`.
+
+```feel
+now()
+// date and time("2020-04-06T15:30:00@UTC")
+
+today()
+// date("2020-04-06")
+
+string(today())
+// "2020-04-06"
+```
 
 The following operators can be applied on temporal values:
 
@@ -254,19 +270,6 @@ cycle(3, duration("PT1H"))
 
 cycle(duration("P7D"))
 // "R/P7D"
-```
-
-The current date and date-time can be accessed using the built-in functions `today()` and `now()`. In order to store the current date or date-time in a variable, it must be converted to a string using the built-in function `string()`.
-
-```feel
-now()
-// date and time("2020-04-06T15:30:00@UTC")
-
-today()
-// date("2020-04-06")
-
-string(today())
-// "2020-04-06"
 ```
 
 ### List Expressions
