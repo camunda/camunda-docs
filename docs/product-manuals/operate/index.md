@@ -1,5 +1,5 @@
 ---
-id: introduction
+id: index
 title: Introduction
 ---
 
@@ -18,7 +18,7 @@ dark: useBaseUrl('img/operate-introduction_dark.png'),
 -->
 In addition to providing visibility into active and completed workflow instances, Operate also makes it possible to carry out key operations such as resolving <!-- FIXME: [incidents](/reference/incidents.html) --> incidents and updating workflow instance variables.
 
-![operate-introduction](img/operate-introduction_dark.png)
+![operate-introduction](img/operate-introduction_light.png)
 
 In the [Operate User Guide](userguide/basic-operate-navigation) you can find out how to use it to monitor workflow instances and more features.
 

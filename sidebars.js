@@ -215,7 +215,7 @@ module.exports = {
         },
       ],
       Operate: [
-         "product-manuals/operate/introduction",{
+         "product-manuals/operate/index",{
             "User Guide":[
               "product-manuals/operate/userguide/basic-operate-navigation",
               "product-manuals/operate/userguide/resolve-incidents-update-variables",
