@@ -296,5 +296,4 @@ module.exports = {
     },
     "reference/glossary",
   ],
-  Samples: ["samples/overview"],
 };
