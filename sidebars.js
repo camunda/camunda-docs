@@ -295,5 +295,5 @@ module.exports = {
       ],
     },
     "reference/glossary",
-  ],
+  ]
 };
