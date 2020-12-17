@@ -232,14 +232,19 @@ module.exports = {
             ],
          }
       ],
-      Tasklist: [{
-          "Deployment Guide": [
-            "product-manuals/tasklist/deployment/configuration",
-            "product-manuals/tasklist/deployment/authentication"
+      Tasklist: [
+      "product-manuals/tasklist/introduction",{
+          "User Guide": [
+            "product-manuals/tasklist/userguide/overview",
           ],
-          "User Guide":[
-          ]
-      }]
+          "Deployment Guide": [
+            "product-manuals/tasklist/deployment/install-and-start",
+            "product-manuals/tasklist/deployment/configuration",
+            "product-manuals/tasklist/deployment/authentication",
+            "product-manuals/tasklist/deployment/api-client",
+          ],
+        },
+      ],
     },
   ],
   Reference: [
@@ -292,6 +297,7 @@ module.exports = {
         },
       ],
     },
+    require("./docs/reference/tasklist-api/sidebar-schema"),
     "reference/glossary",
   ],
   Samples: ["samples/overview"],
