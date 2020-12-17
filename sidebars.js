@@ -252,6 +252,7 @@ module.exports = {
     "reference/cloud-console-api-clients",
     "reference/cloud-console-api-reference",
     "reference/grpc",
+    require("./docs/reference/tasklist-api/sidebar-schema"),
     {
       "BPMN Workflow": [
         "reference/bpmn-workflows/bpmn-primer",
@@ -297,7 +298,7 @@ module.exports = {
         },
       ],
     },
-    require("./docs/reference/tasklist-api/sidebar-schema"),
+    require("./docs/reference/feel/sidebar-schema"),    
     "reference/glossary",
   ],
   Samples: ["samples/overview"],
