@@ -21,7 +21,7 @@ In order to resolve an incident, the user must identify and resolve the problem 
 
 If a job is failed and it has no more retries left then an incident is created. There can be different reasons why the job is failed, for example, the variables are not in the expected format, or a service is not available (e.g. a database).
 
-In case that it is caused by the variables, the user needs to update the variables of the workflow instance first. Then, the user needs to increase the remaining retries of the job and mark the incident as resolved. It is recommended to do this in [Operate](/product-manuals/operate/userguide/index.md).
+In case that it is caused by the variables, the user needs to update the variables of the workflow instance first. Then, the user needs to increase the remaining retries of the job and mark the incident as resolved. It is recommended to do this in [Operate](/product-manuals/operate/index.md).
 
 However, it is also possible to do this through the client API. Using the Java client, this could look like:
 
@@ -47,7 +47,7 @@ When the incident is resolved then the job can be activated by a worker again.
 
 If an incident is created while workflow execution and it is not related to a job, then it is usually related to the variables of the workflow instance. For example, an input or output variable mapping can't be applied.
 
-To resolve the incident, the user needs to update the variables first and then mark the incident as resolved. It is recommended to do this in [Operate](/product-manuals/operate/userguide/index.md).
+To resolve the incident, the user needs to update the variables first and then mark the incident as resolved. It is recommended to do this in [Operate](/product-manuals/operate/index.md).
 
 Using the Java client, this could look like:
 
