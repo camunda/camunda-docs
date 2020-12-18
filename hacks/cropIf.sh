@@ -11,7 +11,7 @@
 
 if [ "$#" -ne 7 ];
 	then 
-		echo "illegal number of parameters, expecting 6: file, sourceWidth, sourceHeight, cropTop, cropBottom, cropLeft, cropRight";
+		echo "illegal number of parameters, expecting 7: file, sourceWidth, sourceHeight, cropTop, cropBottom, cropLeft, cropRight";
 		exit 1
 fi
 file=$1
