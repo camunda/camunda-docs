@@ -60,7 +60,6 @@ module.exports = {
             "product-manuals/clients/other-clients/index",
             "product-manuals/clients/other-clients/c-sharp",
             "product-manuals/clients/other-clients/javascript",
-            "product-manuals/clients/other-clients/node-js",
             "product-manuals/clients/other-clients/python",
             "product-manuals/clients/other-clients/ruby",
             "product-manuals/clients/other-clients/rust",
