@@ -22,7 +22,7 @@ Community clients supplement the official clients. These clients have not been t
 
 - [Java](java-client/index.md)
 - [Go](go-client/get-started.md)
-- [CLI](cli-client.md)
+- [CLI](cli-client/index.md)
 
 ## Community Clients
 
