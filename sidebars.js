@@ -51,8 +51,13 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
+          "Go": [
+            "product-manuals/clients/go-client/index",
+            "product-manuals/clients/go-client/get-started",
+          ]
         },          
-        "product-manuals/clients/go-client/get-started",        
         "product-manuals/clients/cli-client",
         {
           "Community Clients": [
