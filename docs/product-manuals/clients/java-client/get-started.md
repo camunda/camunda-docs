@@ -1,52 +1,22 @@
 ---
 id: get-started
-title: "Get Started with the Java Client"
+title: "Java Client - Get Started Guide"
+sidebar_label: "Get Started Guide"
 ---
 
-In this tutorial, you will learn to use the Java client in a Java application to interact with Zeebe.
+In this tutorial, you will learn to use the Java client in a Java application to interact with Camunda Cloud.
 
-You will be guided through the following steps:
-
-- [Set up a project](#set-up-a-project)
-- [Model a workflow](#model-a-workflow)
-- [Deploy a workflow](#deploy-a-workflow)
-- [Create a workflow instance](#create-a-workflow-instance)
-- [Work on a job](#work-on-a-job)
-- [Work with data](#work-with-data)
-
-> You can find the complete source code, including the BPMN diagrams, on [GitHub](https://github.com/zeebe-io/zeebe-get-started-java-client).
-
-> You can watch a video walk-through of this guide on the [Zeebe YouTube channel here](https://www.youtube.com/watch?v=RV9_7Ct2j0g).
+You can find the complete source code, including the BPMN diagrams, on [GitHub](https://github.com/zeebe-io/zeebe-get-started-java-client).
 
 ## Prerequisites
 
-- Java 8
+- [Camunda Cloud Account](/guides/getting-started/create-camunda-cloud-account.md)
+- [Cluster](/guides/getting-started/create-cluster.md) and [Client Credentials](/guides/getting-started/setup-client-connection-credentials.md)
+- [Modeler](/guides/getting-started/model-your-first-process.md)
+- Java 8 or higher
 - [Apache Maven](https://maven.apache.org/)
-- [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases)
 
-One of the following:
-
-(Using Docker)
-
-- [Docker](http://www.docker.com)
-- [Zeebe Docker Configurations](https://github.com/zeebe-io/zeebe-docker-compose)
-
-(Not using Docker)
-
-- [Zeebe distribution](/product-manuals/zeebe/deployment-guide/local/install.md)
-- [Zeebe Monitor](https://github.com/zeebe-io/zeebe-simple-monitor/releases)
-
-## Start the broker
-
-Before you begin to setup your project, please start the broker.
-
-If you are using Docker with [zeebe-docker-compose], then change into the `simple-monitor` subdirectory, and run `docker-compose up`.
-
-If you are not using Docker, run the start up script `bin/broker` or `bin/broker.bat` in the distribution.
-
-By default, the broker binds to `localhost:26500`, which is used as contact point in this guide.
-
-## Set up a project
+## Set up a Project
 
 First, we need a Maven project.
 Create a new project using your IDE, or run the Maven command:
@@ -69,6 +39,17 @@ Add the Zeebe client library as dependency to the project's `pom.xml`:
 </dependency>
 ```
 
+Set the connection settings and client credentials as environment variables:
+
+```bash
+export ZEEBE_ADDRESS='[Zeebe API]'
+export ZEEBE_CLIENT_ID='[Client ID]'
+export ZEEBE_CLIENT_SECRET='[Client Secret]'
+export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
+```
+
+**Hint:** When you create client credentials in Camunda Cloud you have the option to download a file with above lines filled out for you.
+
 Create a main class and add the following lines to bootstrap the Zeebe client:
 
 ```java
@@ -80,15 +61,16 @@ public class App
 {
     public static void main(final String[] args)
     {
-        final ZeebeClient client = ZeebeClient.newClientBuilder()
-            // change the contact point if needed
-            .gatewayAddress("127.0.0.1:26500")
-            .usePlaintext()
-            .build();
+        final String gatewayAddress = System.getenv("ZEEBE_ADDRESS");
 
-        System.out.println("Connected.");
+        final ZeebeClient client =
+            ZeebeClient.newClientBuilder()
+                .gatewayAddress(gatewayAddress)
+                .build();
 
-        // ...
+        System.out.println("Connected");
+
+        ...
 
         client.close();
         System.out.println("Closed.");
@@ -101,7 +83,7 @@ Run the program:
 - If you use an IDE, you can just execute the main class, using your IDE.
 - Otherwise, you must build an executable JAR file with Maven and execute it.
 
-## Interlude: Build an executable JAR file
+### Build an Executable JAR File
 
 Add the Maven Shade plugin to your pom.xml:
 
@@ -133,7 +115,7 @@ Add the Maven Shade plugin to your pom.xml:
 
 Now run `mvn package`, and it will generate a JAR file in the `target` subdirectory. You can run this with `java -jar target/${JAR file}`.
 
-## Output of executing program
+### Output of Executing Program
 
 You should see the output:
 
@@ -143,21 +125,21 @@ Connected.
 Closed.
 ```
 
-## Model a workflow
+## Model a Workflow
 
 Now, we need a first workflow which can then be deployed.
 Later, we will extend the workflow with more functionality.
 
-Open the Zeebe Modeler and create a new BPMN diagram.
+Open the [modeler](/guides/getting-started/model-your-first-process.md) of your choice and create a new BPMN diagram.
 Add a start event and an end event to the diagram and connect the events.
 
 ![model-workflow-step-1](assets/order-process-simple.png)
 
-Set the id (the BPMN process id), and mark the diagram as executable.
+Set the **id** (the BPMN process id), and mark the diagram as **executable**.
 
 Save the diagram as `src/main/resources/order-process.bpmn` under the project's folder.
 
-## Deploy a workflow
+## Deploy a Workflow
 
 Next, we want to deploy the modeled workflow to the broker.
 
@@ -196,7 +178,7 @@ You should see the output:
 Workflow deployed. Version: 1
 ```
 
-## Create a workflow instance
+## Create a Workflow Instance
 
 Finally, we are ready to create a first instance of the deployed workflow.
 A workflow instance is created of a specific version of the workflow, which can be set on creation.
@@ -235,39 +217,38 @@ Run the program and verify that the workflow instance is created. You should see
 Workflow instance created. Key: 2113425532
 ```
 
-You did it! You want to see how the workflow instance is executed?
+You did it!
 
-If you are running with Docker, just open [http://localhost:8082](http://localhost:8082) in your browser.
+## See the Workflow in Action
 
-If you are running without Docker:
+You want to see how the workflow instance is executed?
 
-- Start the Zeebe Monitor using `java -jar zeebe-simple-monitor-app-*.jar`.
-- Open a web browser and go to <http://localhost:8080/>.
+1. Go to the cluster in Camunda Cloud and select it
+1. Click on the link to [Operate](/product-manuals/operate/userguide/basic-operate-navigation.md)
+1. Select the workflow _order process_
 
-In the Simple Monitor interface, you see the current state of the workflow instance.
-![zeebe-monitor-step-1](assets/java-get-started-monitor-1.gif)
+As you can see, a workflow instance has been started and finished.
 
-## Work on a job
+## Work on a Job
 
 Now we want to do some work within your workflow.
 First, add a few service jobs to the BPMN diagram and set the required attributes.
 Then extend your main class and create a job worker to process jobs which are created when the workflow instance reaches a service task.
 
-Open the BPMN diagram in the Zeebe Modeler.
+Open the BPMN diagram in the modeler.
 Insert a few service tasks between the start and the end event.
 
 ![model-workflow-step-2](assets/order-process.png)
 
 You need to set the type of each task, which identifies the nature of the work to be performed.
-Set the type of the first task to 'payment-service'.
 
-Set the type of the second task to 'fetcher-service'.
+- Set the **type** of the first task to `payment-service`.
+- Set the **type** of the second task to `fetcher-service`.
+- Set the **type** of the third task to `shipping-service`.
 
-Set the type of the third task to 'shipping-service'.
+Save the BPMN diagram to the same file. When you run the program again, the changed workflow will be deployed and a new version of the workflow will be created.
 
-Save the BPMN diagram and switch back to the main class.
-
-Add the following lines to create a job worker for the first jobs type:
+Switching back to the main class, add the following lines to create a job worker for the first jobs type:
 
 ```java
 package io.zeebe;
@@ -311,11 +292,9 @@ Run the program and verify that the job is processed. You should see the output:
 Collect money
 ```
 
-When you have a look at the Zeebe Monitor, then you can see that the workflow instance moved from the first service task to the next one:
+When you have a look at Operate, then you can see that the workflow instance moved from the first service task to the next one.
 
-![zeebe-monitor-step-2](assets/java-get-started-monitor-2.gif)
-
-## Work with data
+## Work with Data
 
 Usually, a workflow is more than just tasks, there is also a data flow. The worker gets the data from the workflow instance to do its work and send the result back to the workflow instance.
 
@@ -389,19 +368,16 @@ Process order: 31243
 Collect money: $46.50
 ```
 
-When we have a look at the Zeebe Monitor, then we can see that the variable `totalPrice` is set:
+When we have a look at the Operate, then we can see that the variable `totalPrice` is set.
 
-![zeebe-monitor-step-3](assets/java-get-started-monitor-3.gif)
+## Next Steps
 
-## What's next?
+From here there are several steps to take, depending on your preference:
 
-Hurray! You finished this tutorial and learned the basic usage of the Java client.
-
-Next steps:
-
-- Learn more about the [concepts behind Zeebe](/product-manuals/concepts/what-is-camunda-cloud.md)
-- Learn more about [BPMN workflows](/reference/bpmn-workflows/bpmn-primer.md)
-- Take a deeper look into the [Java client](index.md)
-
-[job worker]: /product-manuals/concepts/job-workers.md
-[zeebe-docker-compose]: https://github.com/zeebe-io/zeebe-docker-compose
+- Implement workers for the other two jobs to get the hang of it
+- Check out examples for use cases not covered here:
+  - [Create Workflow Instances Non-Blocking](../java-client-examples/workflow-instance-create-nonblocking.md)
+  - [Create a Workflow Instance and Await Result](../java-client-examples/workflow-instance-create-with-result.md)
+  - [Handle variables as POJO](../java-client-examples/data-pojo.md)
+- Learn how to [write tests](testing.md)
+- Learn more about [BPMN Workflows](/reference/bpmn-workflows/bpmn-primer.md) in general

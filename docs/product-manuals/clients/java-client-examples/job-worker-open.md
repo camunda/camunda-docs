@@ -17,8 +17,35 @@ title: "Open a Job Worker"
 
 [Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/job/JobWorkerCreator.java)
 
-<!--
 ```java
-{{#include ../../../../samples/src/main/java/io/zeebe/example/job/JobWorkerCreator.java}}
+        ...
+        final String jobType = "foo";
+
+        try (final ZeebeClient client = clientBuilder.build()) {
+
+            System.out.println("Opening job worker.");
+
+            try (final JobWorker workerRegistration =
+                client
+                    .newWorker()
+                    .jobType(jobType)
+                    .handler(new ExampleJobHandler())
+                    .timeout(Duration.ofSeconds(10))
+                    .open()) {
+                System.out.println("Job worker opened and receiving jobs.");
+
+                // run until System.in receives exit command
+                waitUntilSystemInput("exit");
+            }
+        }
+    }
+
+    private static class ExampleJobHandler implements JobHandler {
+        @Override
+        public void handle(final JobClient client, final ActivatedJob job) {
+            // here: business logic that is executed with every job
+            System.out.println(job);
+            client.newCompleteCommand(job.getKey()).send().join();
+        }
+    }
 ```
--->

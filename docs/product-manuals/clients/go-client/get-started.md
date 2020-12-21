@@ -229,7 +229,6 @@ Start the Zeebe Monitor using `java -jar zeebe-simple-monitor-app-*.jar`.
 Open a web browser and go to <http://localhost:8080/>.
 
 Here, you see the current state of the workflow instance.
-![zeebe-monitor-step-1](../java-client/assets/java-get-started-monitor-1.gif)
 
 ## Work on a task
 
@@ -363,8 +362,6 @@ logic of the job worker. The handler will then complete the job with its result 
 it encounters a problem while processing the job.
 
 When you have a look at the Zeebe Monitor, then you can see that the workflow instance moved from the first service task to the next one:
-
-![zeebe-monitor-step-2](../java-client/assets/java-get-started-monitor-2.gif)
 
 When you run the above example you should see similar output:
 

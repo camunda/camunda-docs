@@ -17,8 +17,19 @@ Shows which broker is leader and follower for which partition. Particularly usef
 
 [Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/cluster/TopologyViewer.java)
 
-<!--
 ```java
-{{#include ../../../../samples/src/main/java/io/zeebe/example/cluster/TopologyViewer.java}}
+final Topology topology = client.newTopologyRequest().send().join();
+
+System.out.println("Topology:");
+topology
+    .getBrokers()
+    .forEach(
+        b -> {
+        System.out.println("    " + b.getAddress());
+        b.getPartitions()
+            .forEach(
+                p ->
+                    System.out.println(
+                        "      " + p.getPartitionId() + " - " + p.getRole()));
+        });
 ```
--->
