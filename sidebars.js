@@ -33,7 +33,7 @@ module.exports = {
       Clients: [
         "product-manuals/clients/overview",
         {
-          "Java": [
+          "Java Client": [
             "product-manuals/clients/java-client/index",
             "product-manuals/clients/java-client/get-started",
             "product-manuals/clients/java-client/logging",
@@ -51,8 +51,13 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
+          "Go Client": [
+            "product-manuals/clients/go-client/index",
+            "product-manuals/clients/go-client/get-started",
+          ]
         },          
-        "product-manuals/clients/go-client/get-started",
         {
           "CLI Client": [
             "product-manuals/clients/cli-client/index",

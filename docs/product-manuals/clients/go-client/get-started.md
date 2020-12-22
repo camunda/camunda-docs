@@ -1,34 +1,19 @@
 ---
 id: get-started
-title: "Go Client"
+title: "Go Client - Get Started Guide"
+sidebar_label: "Get Started Guide"
 ---
 
-In this tutorial, you will learn to use the Go client in a Go application to interact with Zeebe.
+In this tutorial, you will learn to use the Go client in a Go application to interact with Camunda Cloud.
 
-You will be guided through the following steps:
-
-- [Set up a project](#set-up-a-project)
-- [Model a workflow](#model-a-workflow)
-- [Deploy a workflow](#deploy-a-workflow)
-- [Create a workflow instance](#create-a-workflow-instance)
-- [Work on a task](#work-on-a-task)
-- [Open a topic subscription](#open-a-topic-subscription)
-
-> You can find the complete source code, on [GitHub](https://github.com/zeebe-io/zeebe-get-started-go-client).
+You can find the complete source code on [GitHub](https://github.com/zeebe-io/zeebe-get-started-go-client).
 
 ## Prerequisites
 
+- [Camunda Cloud Account](/guides/getting-started/create-camunda-cloud-account.md)
+- [Cluster](/guides/getting-started/create-cluster.md) and [Client Credentials](/guides/getting-started/setup-client-connection-credentials.md)
+- [Modeler](/guides/getting-started/model-your-first-process.md)
 - Go v1.13+ environment installed
-
-> TODO: adapto to cloud
-
-- [Zeebe distribution](/product-manuals/zeebe/deployment-guide/local/install.md)
-- [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases)
-
-Before you begin to setup your project please start the broker, i.e. by running the start up script
-`bin/broker` or `bin/broker.bat` in the distribution. Per default the broker is binding to the
-address `localhost:26500`, which is used as contact point in this guide. In case your broker is
-available under another address please adjust the broker contact point when building the client.
 
 ## Set up a project
 
@@ -48,8 +33,19 @@ module github.com/zb-user/zb-example
 
 go 1.13
 
-require github.com/zeebe-io/zeebe/clients/go v0.24.1
+require github.com/zeebe-io/zeebe/clients/go v0.26.0
 ```
+
+Set the connection settings and client credentials as environment variables:
+
+```bash
+export ZEEBE_ADDRESS='[Zeebe API]'
+export ZEEBE_CLIENT_ID='[Client ID]'
+export ZEEBE_CLIENT_SECRET='[Client Secret]'
+export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
+```
+
+**Hint:** When you create client credentials in Camunda Cloud you have the option to download a file with the lines above filled out for you.
 
 Create a `main.go` file inside the module and add the following lines to bootstrap the Zeebe client:
 
@@ -61,14 +57,12 @@ import (
 	"fmt"
 	"github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
 	"github.com/zeebe-io/zeebe/clients/go/pkg/pb"
+	"os"
 )
-
-const BrokerAddr = "0.0.0.0:26500"
 
 func main() {
 	client, err := zbc.NewClient(&zbc.ClientConfig{
-      GatewayAddress:         BrokerAddr,
-      UsePlaintextConnection: true,
+		GatewayAddress: os.Getenv("ZEEBE_ADDRESS"),
 	})
 
 	if err != nil {
@@ -133,34 +127,13 @@ Next, we want to deploy the modeled workflow to the broker.
 The broker stores the workflow under its BPMN process id and assigns a version (i.e., the revision).
 
 ```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
-)
-
-const brokerAddr = "0.0.0.0:26500"
-
-func main() {
-	client, err := zbc.NewClient(&zbc.ClientConfig{
-      GatewayAddress:         brokerAddr,
-      UsePlaintextConnection: true,
-	})
-
-	if err != nil {
-		panic(err)
-	}
-
+	// After the client is created
 	ctx := context.Background()
 	response, err := client.NewDeployWorkflowCommand().AddResourceFile("order-process.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println(response.String())
-}
 ```
 
 Run the program and verify that the workflow is deployed successfully.
@@ -177,26 +150,6 @@ workflow instance is created of a specific version of the workflow, which can
 be set on creation.
 
 ```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
-)
-
-const brokerAddr = "0.0.0.0:26500"
-
-func main() {
-	client, err := zbc.NewClient(&zbc.ClientConfig{
-      GatewayAddress:         brokerAddr,
-      UsePlaintextConnection: true,
-	})
-
-	if err != nil {
-		panic(err)
-	}
-
 	// After the workflow is deployed.
 	variables := make(map[string]interface{})
 	variables["orderId"] = "31243"
@@ -207,13 +160,13 @@ func main() {
 	}
 
 	ctx := context.Background()
+
 	msg, err := request.Send(ctx)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println(msg.String())
-}
 ```
 
 Run the program and verify that the workflow instance is created. You should see the output:
@@ -222,13 +175,17 @@ Run the program and verify that the workflow instance is created. You should see
 workflowKey:2251799813686742 bpmnProcessId:"order-process" version:3 workflowInstanceKey:2251799813686744
 ```
 
-You did it! You want to see how the workflow instance is executed?
+You did it!
 
-Start the Zeebe Monitor using `java -jar zeebe-simple-monitor-app-*.jar`.
+## See the Workflow in Action
 
-Open a web browser and go to <http://localhost:8080/>.
+You want to see how the workflow instance is executed?
 
-Here, you see the current state of the workflow instance.
+1. Go to the cluster in Camunda Cloud and select it
+1. Click on the link to [Operate](/product-manuals/operate/userguide/basic-operate-navigation.md)
+1. Select the workflow _order process_
+
+As you can see, a workflow instance has been started and finished.
 
 ## Work on a task
 
@@ -245,8 +202,7 @@ Insert a few service tasks between the start and the end event.
 You need to set the type of each task, which identifies the nature of the work to be performed.
 Set the type of the first task to `payment-service`.
 
-Add the following lines to redeploy the modified process, then activate and
-complete a job of the first task type:
+The consolidated example looks as follows:
 
 ```go
 package main
@@ -258,24 +214,34 @@ import (
 	"github.com/zeebe-io/zeebe/clients/go/pkg/worker"
 	"github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
 	"log"
+	"os"
 )
 
-const BrokerAddr = "0.0.0.0:26500"
+const ZeebeAddr = "0.0.0.0:26500"
 
 var readyClose = make(chan struct{})
 
 func main() {
-	client, err := zbc.NewClient(&zbc.ClientConfig{
-		GatewayAddress:         BrokerAddr,
-		UsePlaintextConnection: true,
+	gatewayAddr := os.Getenv("ZEEBE_ADDRESS")
+	plainText:= false
+
+	if (gatewayAddr == "") {
+		gatewayAddr = ZeebeAddr
+		plainText = true
+	}
+
+	zbClient, err := zbc.NewClient(&zbc.ClientConfig{
+		GatewayAddress:         gatewayAddr,
+		UsePlaintextConnection: plainText,
 	})
+
 	if err != nil {
 		panic(err)
 	}
 
 	// deploy workflow
 	ctx := context.Background()
-	response, err := client.NewDeployWorkflowCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
+	response, err := zbClient.NewDeployWorkflowCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -286,7 +252,7 @@ func main() {
 	variables := make(map[string]interface{})
 	variables["orderId"] = "31243"
 
-	request, err := client.NewCreateInstanceCommand().BPMNProcessId("order-process-4").LatestVersion().VariablesFromMap(variables)
+	request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-4").LatestVersion().VariablesFromMap(variables)
 	if err != nil {
 		panic(err)
 	}
@@ -298,7 +264,7 @@ func main() {
 
 	fmt.Println(result.String())
 
-	jobWorker := client.NewJobWorker().JobType("payment-service").Handler(handleJob).Open()
+	jobWorker := zbClient.NewJobWorker().JobType("payment-service").Handler(handleJob).Open()
 
 	<-readyClose
 	jobWorker.Close()

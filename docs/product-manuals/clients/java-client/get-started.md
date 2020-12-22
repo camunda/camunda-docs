@@ -48,7 +48,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-**Hint:** When you create client credentials in Camunda Cloud you have the option to download a file with above lines filled out for you.
+**Hint:** When you create client credentials in Camunda Cloud you have the option to download a file with the lines above filled out for you.
 
 Create a main class and add the following lines to bootstrap the Zeebe client:
 
