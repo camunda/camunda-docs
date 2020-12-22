@@ -61,9 +61,9 @@ import (
 )
 
 func main() {
-    client, err := zbc.NewClient(&zbc.ClientConfig{
-        GatewayAddress: os.Getenv("ZEEBE_ADDRESS"),
-    })
+	client, err := zbc.NewClient(&zbc.ClientConfig{
+		GatewayAddress: os.Getenv("ZEEBE_ADDRESS"),
+	})
 
 	if err != nil {
 		panic(err)
@@ -127,14 +127,13 @@ Next, we want to deploy the modeled workflow to the broker.
 The broker stores the workflow under its BPMN process id and assigns a version (i.e., the revision).
 
 ```go
-// After the client is created
-ctx := context.Background()
-response, err := client.NewDeployWorkflowCommand().AddResourceFile("order-process.bpmn").Send(ctx)
-if err != nil {
-	panic(err)
-}
-
-fmt.Println(response.String())}
+	// After the client is created
+	ctx := context.Background()
+	response, err := client.NewDeployWorkflowCommand().AddResourceFile("order-process.bpmn").Send(ctx)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(response.String())
 ```
 
 Run the program and verify that the workflow is deployed successfully.
