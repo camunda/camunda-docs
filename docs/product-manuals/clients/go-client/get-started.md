@@ -33,7 +33,7 @@ module github.com/zb-user/zb-example
 
 go 1.13
 
-require github.com/zeebe-io/zeebe/clients/go v0.24.1
+require github.com/zeebe-io/zeebe/clients/go v0.26.0
 ```
 
 Set the connection settings and client credentials as environment variables:
@@ -150,22 +150,23 @@ workflow instance is created of a specific version of the workflow, which can
 be set on creation.
 
 ```go
-// After the workflow is deployed.
-variables := make(map[string]interface{})
-variables["orderId"] = "31243"
+	// After the workflow is deployed.
+	variables := make(map[string]interface{})
+	variables["orderId"] = "31243"
 
-request, err := client.NewCreateInstanceCommand().BPMNProcessId("order-process").LatestVersion().VariablesFromMap(variables)
-if err != nil {
-	panic(err)
-}
+	request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-2").LatestVersion().VariablesFromMap(variables)
+	if err != nil {
+		panic(err)
+	}
 
-ctx := context.Background()
-msg, err := request.Send(ctx)
-if err != nil {
-	panic(err)
-}
+	ctx := context.Background()
 
-fmt.Println(msg.String())
+	msg, err := request.Send(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(msg.String())
 ```
 
 Run the program and verify that the workflow instance is created. You should see the output:
@@ -201,13 +202,69 @@ Insert a few service tasks between the start and the end event.
 You need to set the type of each task, which identifies the nature of the work to be performed.
 Set the type of the first task to `payment-service`.
 
-Add the following lines to redeploy the modified process, then activate and
-complete a job of the first task type:
+The consolidated example looks as follows:
 
 ```go
-	...
-	//After instance is created
-	jobWorker := client.NewJobWorker().JobType("payment-service").Handler(handleJob).Open()
+package main
+
+import (
+	"context"
+	"fmt"
+	"github.com/zeebe-io/zeebe/clients/go/pkg/entities"
+	"github.com/zeebe-io/zeebe/clients/go/pkg/worker"
+	"github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
+	"log"
+	"os"
+)
+
+const ZeebeAddr = "0.0.0.0:26500"
+
+var readyClose = make(chan struct{})
+
+func main() {
+	gatewayAddr := os.Getenv("ZEEBE_ADDRESS")
+	plainText:= false
+
+	if (gatewayAddr == "") {
+		gatewayAddr = ZeebeAddr
+		plainText = true
+	}
+
+	zbClient, err := zbc.NewClient(&zbc.ClientConfig{
+		GatewayAddress:         gatewayAddr,
+		UsePlaintextConnection: plainText,
+	})
+
+	if err != nil {
+		panic(err)
+	}
+
+	// deploy workflow
+	ctx := context.Background()
+	response, err := zbClient.NewDeployWorkflowCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(response.String())
+
+	// create a new workflow instance
+	variables := make(map[string]interface{})
+	variables["orderId"] = "31243"
+
+	request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-4").LatestVersion().VariablesFromMap(variables)
+	if err != nil {
+		panic(err)
+	}
+
+	result, err := request.Send(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(result.String())
+
+	jobWorker := zbClient.NewJobWorker().JobType("payment-service").Handler(handleJob).Open()
 
 	<-readyClose
 	jobWorker.Close()

@@ -13,7 +13,7 @@ module github.com/zb-user/zb-example
 
 go 1.13
 
-require github.com/zeebe-io/zeebe/clients/go v0.24.1
+require github.com/zeebe-io/zeebe/clients/go v0.26.0
 ```
 
 ## Bootstrapping
