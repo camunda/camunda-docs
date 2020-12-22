@@ -257,7 +257,7 @@ module.exports = {
     "reference/grpc",
     require("./docs/reference/tasklist-api/sidebar-schema"),
     {
-      "BPMN Workflow": [
+      "BPMN Workflows": [
         "reference/bpmn-workflows/bpmn-primer",
         "reference/bpmn-workflows/bpmn-coverage",
         "reference/bpmn-workflows/data-flow",
@@ -301,7 +301,7 @@ module.exports = {
         },
       ],
     },
-    require("./docs/reference/feel/sidebar-schema"),    
+    require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
   ],
   Samples: ["samples/overview"],

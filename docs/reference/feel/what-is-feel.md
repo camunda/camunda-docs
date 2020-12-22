@@ -1,14 +1,13 @@
 ---
 id: what-is-feel
 title: What is FEEL?
-slug: /reference/
 ---
 
 FEEL (Friendly Enough Expression Language) is a part of the [DMN specification](http://www.omg.org/spec/DMN/) of the OMG. It is designed to write expressions for decision tables and literal expressions in a simple way what can easily understand by business professionals and developers.
 
 ## Unary Tests vs. Expression
 
-FEEL has two entry points: unary-tests and expressions. 
+FEEL has two entry points: unary-tests and expressions.
 
 ### Unary Tests
 
@@ -17,17 +16,17 @@ Unary-Tests can be used only for input entries of a decision table. They are a s
 Examples:
 
 ```js
-< 7                                                 
+< 7
 // input less than 7
 
-not(2,4)                                            
+not(2,4)
 // input is not 2 or 4
 
-[date("2015-09-17")..date("2015-09-19")]            
+[date("2015-09-17")..date("2015-09-19")]
 // input is between '2015-09-17' and '2015-09-19'
 
-<= duration("P1D")                                  
-// input is less or equal one day    
+<= duration("P1D")
+// input is less or equal one day
 ```
 
 ### Expression
@@ -37,13 +36,13 @@ Expressions can be used everywhere, e.g. in a decision table as input expression
 Examples:
 
 ```js
-applicant.monthly.income * 12                                           
+applicant.monthly.income * 12
 
-if applicant.maritalStatus in ("M","S") then "valid" else "not valid"    
+if applicant.maritalStatus in ("M","S") then "valid" else "not valid"
 
-sum( [applicant.monthly.repayments, applicant.monthly.expenses] )        
+sum( [applicant.monthly.repayments, applicant.monthly.expenses] )
 
-sum( credit_history[record_date > date("2011-01-01")].weight )           
+sum( credit_history[record_date > date("2011-01-01")].weight )
 
-some ch in credit_history satisfies ch.event = "bankruptcy"      
+some ch in credit_history satisfies ch.event = "bankruptcy"
 ```

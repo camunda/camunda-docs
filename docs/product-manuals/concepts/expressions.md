@@ -306,8 +306,6 @@ some x in [1,2,3] satisfies x > 2
 
 ### Invoke Functions
 
-FEEL defines a set of [built-in conversion functions](/reference/feel/builtin-functions/feel-built-in-functions-conversion.md) to convert values and to apply different operations on specific value types in addition to the operators.
-
 A function can be invoked by its name followed by the arguments. The arguments can be assigned to the function parameters either by their position or by defining the parameter names.
 
 ```feel
@@ -323,6 +321,16 @@ append(["a","b"], "c")
 contains(string: "foobar", match: "foo")
 // true
 ```
+
+FEEL defines several built-in functions:
+
+- [Conversion Functions](/reference/feel/builtin-functions/feel-built-in-functions-conversion.md)
+- [Boolean Functions](/reference/feel/builtin-functions/feel-built-in-functions-boolean.md)
+- [String Functions](/reference/feel/builtin-functions/feel-built-in-functions-string.md)
+- [Numeric Functions](/reference/feel/builtin-functions/feel-built-in-functions-numeric.md)
+- [List Functions](/reference/feel/builtin-functions/feel-built-in-functions-list.md)
+- [Context Functions](/reference/feel/builtin-functions/feel-built-in-functions-context.md)
+- [Temporal Functions](/reference/feel/builtin-functions/feel-built-in-functions-temporal.md)
 
 ## Additional Resources
 
