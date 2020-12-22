@@ -1,0 +1,65 @@
+---
+id: task
+title: Task
+---
+
+export const Tag = ({children, color}) => (
+<span
+style={{
+      backgroundColor: color,
+      borderRadius: '2px',
+      color: '#fff',
+      padding: '0.2rem',
+    }}>
+{children}
+</span>
+);
+
+Describes the User task
+
+```graphql
+type Task {
+  id: ID!
+  name: String!
+  workflowName: String!
+  creationTime: String!
+  completionTime: String
+  assignee: User
+  variables: [Variable!]
+  taskState: TaskState!
+}
+```
+
+### Fields
+
+#### `id` ([`ID!`](/docs/reference/tasklist-api/scalars/id))
+
+The unique identifier of the task
+
+#### `name` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+
+Name of the task
+
+#### `workflowName` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+
+Name of the workflow
+
+#### `creationTime` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+
+When was the task created
+
+#### `completionTime` ([`String`](/docs/reference/tasklist-api/scalars/string))
+
+When was the task completed
+
+#### `assignee` ([`User`](/docs/reference/tasklist-api/objects/user))
+
+Who is assigned to the task
+
+#### `variables` ([`[Variable!]`](/docs/reference/tasklist-api/objects/variable))
+
+Variables associated to the task
+
+#### `taskState` ([`TaskState!`](/docs/reference/tasklist-api/enums/task-state))
+
+State of the task

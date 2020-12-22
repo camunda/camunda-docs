@@ -1,6 +1,7 @@
 ---
 id: configuration
 title: "Configuration"
+sidebar_label: "Overview"
 ---
 
 Zeebe can be configured through:
@@ -24,16 +25,18 @@ The default configuration is located in `config/application.yaml`. This configur
 >
 > The default configuration is not suitable for a standalone gateway node. If you want to run a standalone gateway node, please have a look at `/config/gateway.yaml.template`
 
-## Configuration file templates
+## Configuration File Templates
 
 We provide templates that contain all possible configuration settings, along with explanations for each setting:
 
-- [Broker Configuration Templates](broker-config-template.md)
-- [Gateway Configuration Template](gateway-config-template.md)
+- [`config/application.yaml` Standalone Broker (with embedded gateway)](https://github.com/zeebe-io/zeebe/tree/develop/dist/src/main/config/application.yaml) - Default configuration containing only the most common configuration settings. Use this as the basis for a single broker deployment for test or development
+- [`config/broker.standalone.yaml.template` Standalone Broker (with embedded gateway)](https://github.com/zeebe-io/zeebe/tree/develop/dist/src/main/config/broker.standalone.yaml.template) - Complete configuration template for a standalone broker with embedded gateway. Use this as the basis for a single broker deployment for test or development
+- [`config/broker.yaml.template` Broker Node (without embedded gateway)](https://github.com/zeebe-io/zeebe/tree/develop/dist/src/main/config/broker.yaml.template) - Complete configuration template for a broker node without embedded gateway. Use this as the basis for deploying multiple broker nodes as part of a cluster
+- [`config/gateway.yaml.template`](https://github.com/zeebe-io/zeebe/tree/develop/dist/src/main/config/gateway.yaml.template) - Complete configuration template for a standalone gateway.
 
 Note that these templates also include the corresponding environment variables to use for every setting.
 
-## Editing the configuration
+## Editing the Configuration
 
 You can either start from scratch or start from the configuration templates listed above.
 
@@ -99,7 +102,7 @@ Details can be found in the Srping documentation.
 >
 > This will ensure that the defaults defined in the classpath resources will be used (unless explicitly overwritten by the configuration file you provide). If you omit the defaults defined in the classpath, some features may be disabled or will not be configured properly.
 
-## Verifying that configuration was applied
+## Verifying that Configuration was Applied
 
 To verify that the configuration was applied, start Zeebe and look at the log.
 
@@ -151,7 +154,7 @@ Zeebe uses Log4j2 framework for logging. In the distribution and the docker imag
 
 To enable Google Stackdriver compatible JSON logging you can set the environment variable `ZEEBE_LOG_APPENDER=Stackdriver` before starting Zeebe.
 
-### Default logging configuration
+### Default Logging Configuration
 
 - `config/log4j2.xml` (applied by default)
 

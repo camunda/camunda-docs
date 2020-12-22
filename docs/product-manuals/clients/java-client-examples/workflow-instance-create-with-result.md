@@ -3,7 +3,6 @@ id: workflow-instance-create-with-result
 title: "Create a Workflow Instance and Await Result"
 ---
 
-
 ## Prerequisites
 
 1. Running Zeebe broker with endpoint `localhost:26500` (default)
@@ -13,8 +12,19 @@ title: "Create a Workflow Instance and Await Result"
 
 [Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/workflow/WorkflowInstanceWithResultCreator.java)
 
-<!--
 ```java
-{{#include ../../../../samples/src/main/java/io/zeebe/example/workflow/WorkflowInstanceWithResultCreator.java}}
+final WorkflowInstanceResult workflowInstanceResult =
+    client
+        .newCreateInstanceCommand()
+        .bpmnProcessId(bpmnProcessId)
+        .latestVersion()
+        .withResult() // to await the completion of workflow execution and return result
+        .send()
+        .join();
+
+System.out.println(
+    "Workflow instance created with key: "
+        + workflowInstanceResult.getWorkflowInstanceKey()
+        + " and completed with results: "
+        + workflowInstanceResult.getVariables());
 ```
--->

@@ -55,7 +55,7 @@ cluster:
   clusterName: zeebe-cluster
 ```
 
-# Example
+## Example
 
 In this example, we will set up a Zeebe cluster with
 five brokers. Each broker needs to get a unique node id.
@@ -120,7 +120,7 @@ it is currently required that all nodes be specified as initial contact points. 
 for a broker to list itself as initial contact point, but it is safe to do so, and probably simpler
 to maintain.
 
-## Partitions bootstrapping
+## Partitions Bootstrapping
 
 On bootstrap, each node will create a partition matrix.
 

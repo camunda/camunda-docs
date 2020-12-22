@@ -16,11 +16,13 @@ title: "Deploy a Workflow"
 
 [Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/workflow/WorkflowDeployer.java)
 
-<!--
 ```java
-{{#include ../../../../samples/src/main/java/io/zeebe/example/workflow/WorkflowDeployer.java}}
+final DeploymentEvent deploymentEvent =
+        client.newDeployCommand()
+            .addResourceFromClasspath("demoProcess.bpmn")
+            .send()
+            .join();
 ```
--->
 
 ## demoProcess.bpmn
 

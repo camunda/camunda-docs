@@ -33,9 +33,8 @@ module.exports = {
       Clients: [
         "product-manuals/clients/overview",
         {
-          "Java": [
+          "Java Client": [
             "product-manuals/clients/java-client/index",
-            "product-manuals/clients/java-client/setup",
             "product-manuals/clients/java-client/get-started",
             "product-manuals/clients/java-client/logging",
             "product-manuals/clients/java-client/testing",
@@ -52,15 +51,24 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
+          "Go Client": [
+            "product-manuals/clients/go-client/index",
+            "product-manuals/clients/go-client/get-started",
+          ]
         },          
-        "product-manuals/clients/go-client/get-started",        
-        "product-manuals/clients/cli-client",
+        {
+          "CLI Client": [
+            "product-manuals/clients/cli-client/index",
+            "product-manuals/clients/cli-client/get-started"
+          ]
+        },                
         {
           "Community Clients": [
             "product-manuals/clients/other-clients/index",
             "product-manuals/clients/other-clients/c-sharp",
             "product-manuals/clients/other-clients/javascript",
-            "product-manuals/clients/other-clients/node-js",
             "product-manuals/clients/other-clients/python",
             "product-manuals/clients/other-clients/ruby",
             "product-manuals/clients/other-clients/rust",
@@ -145,41 +153,53 @@ module.exports = {
           "Deployment Guide": [
             "product-manuals/zeebe/deployment-guide/index",  
             {              
-              "Local Deployment": [
+              "Local Installation": [
                 "product-manuals/zeebe/deployment-guide/local/install",
                 "product-manuals/zeebe/deployment-guide/local/quickstart",  
-                {
-                  "Getting Started Tutorial": [
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/index",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/tutorial-setup",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/create-a-workflow",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/deploy-a-workflow",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/create-workflow-instance",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/next-steps-resources",
-                  ],
-                },   
               ]
-            },            
+            },              
+            "product-manuals/zeebe/deployment-guide/docker/install",
             {
               "Kubernetes Deployment": [
                 "product-manuals/zeebe/deployment-guide/kubernetes/index",
-                "product-manuals/zeebe/deployment-guide/kubernetes/prerequisites",
-                "product-manuals/zeebe/deployment-guide/kubernetes/installing-helm",
-                "product-manuals/zeebe/deployment-guide/kubernetes/accessing-operate",
-                "product-manuals/zeebe/deployment-guide/kubernetes/zeebe-operator",
+                {
+                  "Helm Charts": [
+                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/index",
+                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/prerequisites",
+                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/installing-helm",
+                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/accessing-operate",
+                  ]
+                },                
+                "product-manuals/zeebe/deployment-guide/kubernetes/operator/zeebe-operator",
               ],
             },
             {
+              "Getting Started Tutorial": [
+                "product-manuals/zeebe/deployment-guide/getting-started/index",
+                "product-manuals/zeebe/deployment-guide/getting-started/tutorial-setup",
+                "product-manuals/zeebe/deployment-guide/getting-started/create-a-workflow",
+                "product-manuals/zeebe/deployment-guide/getting-started/deploy-a-workflow",
+                "product-manuals/zeebe/deployment-guide/getting-started/create-workflow-instance",
+                "product-manuals/zeebe/deployment-guide/getting-started/next-steps-resources",
+              ],
+            },  
+            {
               Configuration: [
                 "product-manuals/zeebe/deployment-guide/configuration/configuration",  
-                "product-manuals/zeebe/deployment-guide/configuration/broker-config-template",
-                "product-manuals/zeebe/deployment-guide/configuration/gateway-config-template",
+                "product-manuals/zeebe/deployment-guide/configuration/logging",  
                 "product-manuals/zeebe/deployment-guide/configuration/gateway-health-probes",
                 "product-manuals/zeebe/deployment-guide/configuration/environment-variables",                                                
               ]
             },
             {
-              "Zeebe Operations": [
+              Security: [
+                "product-manuals/zeebe/deployment-guide/security/security",
+                "product-manuals/zeebe/deployment-guide/security/authentication",
+                "product-manuals/zeebe/deployment-guide/security/authorization",
+              ],
+            },
+            {
+              Operation: [
                 "product-manuals/zeebe/deployment-guide/operations/index",
                 "product-manuals/zeebe/deployment-guide/operations/resource-planning",
                 "product-manuals/zeebe/deployment-guide/operations/network-ports",
@@ -190,14 +210,7 @@ module.exports = {
                 "product-manuals/zeebe/deployment-guide/operations/disk-space",
                 "product-manuals/zeebe/deployment-guide/operations/upgrade-zeebe",
               ],
-            },
-            {
-              Security: [
-                "product-manuals/zeebe/deployment-guide/security/security",
-                "product-manuals/zeebe/deployment-guide/security/authentication",
-                "product-manuals/zeebe/deployment-guide/security/authorization",
-              ],
-            },
+            },            
           ]
         },
         {
@@ -215,31 +228,34 @@ module.exports = {
         },
       ],
       Operate: [
-        {
-          "Deployment Guide": [
-            "product-manuals/operate/deployment/configuration",
-            "product-manuals/operate/deployment/data-retention",
-            "product-manuals/operate/deployment/schema-and-migration",
-            "product-manuals/operate/deployment/importer-and-archiver",
-            "product-manuals/operate/deployment/authentication",
-          ],
-          "User Guide": [
-            "product-manuals/operate/userguide/index",
-            "product-manuals/operate/userguide/install-and-start",
-            "product-manuals/operate/userguide/basic-operate-navigation",
-            "product-manuals/operate/userguide/resolve-incidents-update-variables",
-            "product-manuals/operate/userguide/selections-batch-operations",
-            "product-manuals/operate/userguide/operate-feedback-and-questions",
-          ],
-        },
+         "product-manuals/operate/index",{
+            "User Guide":[
+              "product-manuals/operate/userguide/basic-operate-navigation",
+              "product-manuals/operate/userguide/resolve-incidents-update-variables",
+              "product-manuals/operate/userguide/selections-operations",
+              "product-manuals/operate/userguide/operate-feedback-and-questions"
+            ],
+            "Deployment Guide": [
+               "product-manuals/operate/deployment/install-and-start",
+               "product-manuals/operate/deployment/configuration",
+               "product-manuals/operate/deployment/data-retention",
+               "product-manuals/operate/deployment/schema-and-migration",
+               "product-manuals/operate/deployment/importer-and-archiver",
+               "product-manuals/operate/deployment/authentication"
+            ],
+         }
       ],
       Tasklist: [
-        {
+      "product-manuals/tasklist/introduction",{
+          "User Guide": [
+            "product-manuals/tasklist/userguide/overview",
+          ],
           "Deployment Guide": [
+            "product-manuals/tasklist/deployment/install-and-start",
             "product-manuals/tasklist/deployment/configuration",
             "product-manuals/tasklist/deployment/authentication",
+            "product-manuals/tasklist/deployment/api-client",
           ],
-          "User Guide": [],
         },
       ],
     },
@@ -249,8 +265,9 @@ module.exports = {
     "reference/cloud-console-api-clients",
     "reference/cloud-console-api-reference",
     "reference/grpc",
+    require("./docs/reference/tasklist-api/sidebar-schema"),
     {
-      "BPMN Workflow": [
+      "BPMN Workflows": [
         "reference/bpmn-workflows/bpmn-primer",
         "reference/bpmn-workflows/bpmn-coverage",
         "reference/bpmn-workflows/data-flow",
@@ -294,6 +311,7 @@ module.exports = {
         },
       ],
     },
+    require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
   ]
 };
