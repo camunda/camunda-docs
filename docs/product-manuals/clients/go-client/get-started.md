@@ -6,7 +6,7 @@ sidebar_label: "Get Started Guide"
 
 In this tutorial, you will learn to use the Go client in a Go application to interact with Camunda Cloud.
 
-You can find the complete source code, on [GitHub](https://github.com/zeebe-io/zeebe-get-started-go-client).
+You can find the complete source code on [GitHub](https://github.com/zeebe-io/zeebe-get-started-go-client).
 
 ## Prerequisites
 
@@ -154,7 +154,7 @@ be set on creation.
 	variables := make(map[string]interface{})
 	variables["orderId"] = "31243"
 
-	request, err := zbClient.NewCreateInstanceCommand().BPMNProcessId("order-process-2").LatestVersion().VariablesFromMap(variables)
+	request, err := client.NewCreateInstanceCommand().BPMNProcessId("order-process").LatestVersion().VariablesFromMap(variables)
 	if err != nil {
 		panic(err)
 	}
