@@ -30,7 +30,7 @@ zeebe_stream_processor_events_total{action="skipped",partition="1",} 2153.0
 
 ## Configuring Metrics
 
-The HTTP server to export the metrics can be configured in the [configuration file](../configuration/broker-config-template.md).
+The HTTP server to export the metrics can be configured in the [configuration file](../configuration/configuration.md).
 
 ## Connecting Prometheus
 

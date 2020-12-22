@@ -45,7 +45,7 @@ A correlation is an attribute within a message which is used to match this messa
 
 A workflow cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying worklows to the broker.
 
-- [Getting Started Tutorial: Deploy a Workflow](/product-manuals/zeebe/deployment-guide/local/getting-started/deploy-a-workflow.md)
+- [Getting Started Tutorial: Deploy a Workflow](/product-manuals/zeebe/deployment-guide/getting-started/deploy-a-workflow.md)
 
 ### Event
 

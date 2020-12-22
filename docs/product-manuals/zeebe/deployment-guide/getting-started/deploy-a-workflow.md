@@ -13,11 +13,13 @@ The answer is that Zeebe itself doesn't store historic data related to your work
 
 Elasticsearch is also what Camunda Operate uses to store data, so to run Operate, you need to enable the Elasticsearch exporter in Zeebe and run an instance of Elasticsearch. In this section and the next section of the tutorial, we'll use Operate to visualize what's going on in Zeebe with each step we take.
 
-If you are using Docker and [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) then follow the instructions in the README file in the `operate` directory of that repository to start Zeebe and Operate. Once you have done that, skip the following section, and continue from "Check the status of the broker".
+## Docker Compose
+
+If you are using Docker and [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) then follow the instructions in the README file in the `operate` directory of that repository to start Zeebe and Operate. Once you have done that, skip the following section, and continue from [Check the status of the broker](#check-the-status-of-the-broker).
 
 If you are using individual components, then you will need to manually configure and start components.
 
-## Manually configure and start Zeebe and Operate
+## Manually Configure and Start Zeebe and Operate
 
 _These instructions are for using separate components, and are not necessary when using Docker._
 
@@ -80,7 +82,7 @@ To confirm that Operate was started, go to [http://localhost:8080](http://localh
 
 You can leave this tab open as we'll be returning to it shortly.
 
-## Check the status of the broker
+## Check the Status of the Broker
 
 You can use the Zeebe CLI to check the status of your broker. Open a new Terminal window to run it.
 
@@ -122,6 +124,8 @@ Brokers:
 For all Zeebe-related operations moving forward, we'll be using Zeebe's command-line interface (CLI). In a real-world deployment, you likely wouldn't rely on the CLI to send messages or create job workers. Rather, you would embed Zeebe clients in worker microservices that connect to the Zeebe engine.
 
 But for the sake of keeping this guide simple (and language agnostic), we're going to use the CLI.
+
+## Deploy the Worklfow
 
 Next, we'll deploy our workflow model via the CLI. We'll deploy the workflow model we created in the previous section.
 

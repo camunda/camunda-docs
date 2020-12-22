@@ -14,7 +14,7 @@ Welcome to the Getting Started tutorial for Zeebe and Operate. In this tutorial,
 
 If this is your first time working with Zeebe, we expect this entire guide to take you 30-45 minutes to complete.
 
-If you're looking for a very fast (but less comprehensive) "first contact" experience, you might prefer the [Quickstart](../quickstart.md).
+If you're looking for a very fast (but less comprehensive) "first contact" experience, you might prefer the [Quickstart](../local/quickstart.md).
 
 The tutorial assumes you have some basic knowledge of what Zeebe is and what it's used for. If you're completely new to Zeebe, you might find it helpful to read through the ["What is Camunda Cloud?"](/product-manuals/concepts/what-is-camunda-cloud.md) docs article first.
 

@@ -153,41 +153,53 @@ module.exports = {
           "Deployment Guide": [
             "product-manuals/zeebe/deployment-guide/index",  
             {              
-              "Local Deployment": [
+              "Local Installation": [
                 "product-manuals/zeebe/deployment-guide/local/install",
                 "product-manuals/zeebe/deployment-guide/local/quickstart",  
-                {
-                  "Getting Started Tutorial": [
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/index",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/tutorial-setup",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/create-a-workflow",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/deploy-a-workflow",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/create-workflow-instance",
-                    "product-manuals/zeebe/deployment-guide/local/getting-started/next-steps-resources",
-                  ],
-                },   
               ]
-            },            
+            },              
+            "product-manuals/zeebe/deployment-guide/docker/install",
             {
               "Kubernetes Deployment": [
                 "product-manuals/zeebe/deployment-guide/kubernetes/index",
-                "product-manuals/zeebe/deployment-guide/kubernetes/prerequisites",
-                "product-manuals/zeebe/deployment-guide/kubernetes/installing-helm",
-                "product-manuals/zeebe/deployment-guide/kubernetes/accessing-operate",
-                "product-manuals/zeebe/deployment-guide/kubernetes/zeebe-operator",
+                {
+                  "Helm Charts": [
+                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/index",
+                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/prerequisites",
+                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/installing-helm",
+                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/accessing-operate",
+                  ]
+                },                
+                "product-manuals/zeebe/deployment-guide/kubernetes/operator/zeebe-operator",
               ],
             },
             {
+              "Getting Started Tutorial": [
+                "product-manuals/zeebe/deployment-guide/getting-started/index",
+                "product-manuals/zeebe/deployment-guide/getting-started/tutorial-setup",
+                "product-manuals/zeebe/deployment-guide/getting-started/create-a-workflow",
+                "product-manuals/zeebe/deployment-guide/getting-started/deploy-a-workflow",
+                "product-manuals/zeebe/deployment-guide/getting-started/create-workflow-instance",
+                "product-manuals/zeebe/deployment-guide/getting-started/next-steps-resources",
+              ],
+            },  
+            {
               Configuration: [
                 "product-manuals/zeebe/deployment-guide/configuration/configuration",  
-                "product-manuals/zeebe/deployment-guide/configuration/broker-config-template",
-                "product-manuals/zeebe/deployment-guide/configuration/gateway-config-template",
+                "product-manuals/zeebe/deployment-guide/configuration/logging",  
                 "product-manuals/zeebe/deployment-guide/configuration/gateway-health-probes",
                 "product-manuals/zeebe/deployment-guide/configuration/environment-variables",                                                
               ]
             },
             {
-              "Zeebe Operations": [
+              Security: [
+                "product-manuals/zeebe/deployment-guide/security/security",
+                "product-manuals/zeebe/deployment-guide/security/authentication",
+                "product-manuals/zeebe/deployment-guide/security/authorization",
+              ],
+            },
+            {
+              Operation: [
                 "product-manuals/zeebe/deployment-guide/operations/index",
                 "product-manuals/zeebe/deployment-guide/operations/resource-planning",
                 "product-manuals/zeebe/deployment-guide/operations/network-ports",
@@ -198,14 +210,7 @@ module.exports = {
                 "product-manuals/zeebe/deployment-guide/operations/disk-space",
                 "product-manuals/zeebe/deployment-guide/operations/upgrade-zeebe",
               ],
-            },
-            {
-              Security: [
-                "product-manuals/zeebe/deployment-guide/security/security",
-                "product-manuals/zeebe/deployment-guide/security/authentication",
-                "product-manuals/zeebe/deployment-guide/security/authorization",
-              ],
-            },
+            },            
           ]
         },
         {

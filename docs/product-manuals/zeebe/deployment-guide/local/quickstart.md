@@ -3,19 +3,8 @@ id: quickstart
 title: "Quickstart"
 ---
 
-This tutorial should help you to get to know the main concepts of Zeebe without
+This quick start guide introduces you the main concepts of Zeebe without
 the need to write a single line of code.
-
-1. [Download the Zeebe distribution](#step-1-download-the-zeebe-distribution)
-1. [Start the Zeebe broker](#step-2-start-the-zeebe-broker)
-1. [Deploy a workflow](#step-3-deploy-a-workflow)
-1. [Create a workflow instance](#step-4-create-a-workflow-instance)
-1. [Complete a workflow instance](#step-5-complete-a-workflow-instance)
-1. [Next steps](#next-steps)
-
-> **Note:** Some command examples might not work on Windows if you use cmd or
-> Powershell. For Windows users we recommend to use a bash-like shell, i.e. Git
-> Bash, Cygwin or MinGW for this guide.
 
 ## Step 1: Download the Zeebe distribution
 
@@ -27,6 +16,10 @@ Extract the archive and enter the Zeebe directory.
 tar -xzvf zeebe-distribution-X.Y.Z.tar.gz
 cd zeebe-broker-X.Y.Z/
 ```
+
+**Note:** Some command examples might not work on Windows if you use cmd or
+Powershell. For Windows users we recommend to use a bash-like shell, i.e. Git
+Bash, Cygwin or MinGW for this guide.
 
 Inside the Zeebe directory you will find multiple directories.
 
@@ -229,15 +222,3 @@ kill %1 %2 %3
 
 If you want to visualize the state of the workflow instances you can start the
 [Zeebe simple monitor](https://github.com/zeebe-io/zeebe-simple-monitor).
-
-## Next steps
-
-To continue working with Zeebe we recommend to get more familiar with the basic
-concepts of Zeebe, see the [Basics chapter](/product-manuals/zeebe/technical-concepts/index.md) of the
-documentation.
-
-In the [BPMN Workflows chapter](/reference/bpmn-workflows/bpmn-primer.md) you can find an
-introduction to creating Workflows with BPMN.
-
-The documentation also provides getting started guides for implementing job
-workers using [Java](/product-manuals/clients/java-client/index.md) or [Go](/product-manuals/clients/go-client/get-started.md).
