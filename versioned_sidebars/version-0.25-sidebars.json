@@ -835,11 +835,5 @@
         }
       ]
     }
-  ],
-  "version-0.25/Samples": [
-    {
-      "type": "doc",
-      "id": "version-0.25/samples/overview"
-    }
   ]
 }
