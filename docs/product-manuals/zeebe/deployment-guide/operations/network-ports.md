@@ -12,7 +12,7 @@ The gateway needs to receive communication on
 - `zeebe.gateway.network.port: 26500` from clients/workers, and
 - `zeebe.gateway.cluster.contactPoint: 127.0.0.1:26502` from brokers
 
-The relevant [configuration](../configuration/gateway-config-template.md) settings are:
+The relevant [configuration](../configuration/configuration.md) settings are:
 
 ```
 Config file
@@ -37,7 +37,7 @@ The broker needs to receive communication from the gateway and from other broker
 - `zeebe.broker.network.internalApi.port: 26502`: Inter-broker clustering using the Gossip and Raft protocols for partition replication, broker elections, topology sharing, and message subscriptions. This should be exposed to other brokers and the gateway.
 - `zeebe.broker.network.monitoringApi.port: 9600`: Metrics and Readiness Probe. Prometheus metrics are exported on the route `/metrics`. There is a readiness probe on `/ready`.
 
-The relevant [configuration](../configuration/broker-config-template.md) settings are:
+The relevant [configuration](../configuration/configuration.md) settings are:
 
 ```
 Config file

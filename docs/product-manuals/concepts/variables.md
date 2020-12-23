@@ -33,7 +33,7 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 
 Variable scopes define the _visibility_ of variables. The root scope is the workflow instance itself. Variables in this scope are visible everywhere in the workflow.
 
-When the workflow instance enters a sub process or an activity then a new scope is created. Activities in this scope can see all variables of this and of higher scopes (i.e. parent scopes). But activities outside of this scope can not see the variables which are defined in this scopes.
+When the workflow instance enters a sub process or an activity then a new scope is created. Activities in this scope can see all variables of this and of higher scopes (i.e. parent scopes). But activities outside of this scope can not see the variables which are defined in this scope.
 
 If a variable has the same name as a variable from a higher scope then it covers this variable. Activities in this scope see only the value of this variable and not the one from the higher scope.
 
@@ -85,26 +85,20 @@ Example:
 
 ![variable-mappings](assets/variable-mappings.png)
 
-<details>
-  <summary>XML representation</summary>
-  <p>
+**Input Mappings**
 
-```XML
-<serviceTask id="collectMoney" name="Collect Money">
-    <extensionElements>
-      <zeebe:ioMapping>
-        <zeebe:input source="= customer.name" target="sender"/>
-        <zeebe:input source="= customer.iban" target="iban"/>
-        <zeebe:input source="= totalPrice" target="price"/>
-        <zeebe:input source="= reference" target="orderId"/>
-        <zeebe:output source="= status" target="paymentStatus"/>
-       </zeebe:ioMapping>
-    </extensionElements>
-</serviceTask>
-```
+| Source          | Target      |
+| --------------- | ----------- |
+| `customer.name` | `sender`    |
+| `customer.iban` | `iban`      |
+| `totalPrice`    | `price`     |
+| `orderId`       | `reference` |
 
-  </p>
-</details>
+**Output Mapping**
+
+| Source   | Target          |
+| -------- | --------------- |
+| `status` | `paymentStatus` |
 
 ### Input Mappings
 
@@ -114,53 +108,11 @@ When an input mapping is applied then it creates a new **local variable** in the
 
 Examples:
 
-<table>
-  <tr>
-    <th>Workflow Instance Variables</th>
-    <th>Input Mappings</th>
-    <th>New Variables</th>
-  </tr>
-  <tr>
-    <td><pre>
-orderId: "order-123"</pre></td>
-    <td><pre>
-source: = orderId
-target: reference</pre></td>
-    <td><pre>
-reference: "order-123"</pre></td>
-  </tr>
-  <tr>
-    <td><pre>
-customer:&#123;"name": "John"&#125;</pre></td>
-    <td><pre>
-source: = customer.name
-target: sender</pre></td>
-    <td><pre>
-sender: "John"</pre></td>
-  </tr>
-  <tr>
-    <td><pre>
-customer: "John"
-iban: "DE456"</pre></td>
-    <td>
-      <pre>
-source: = customer
-target: sender.name
-
-source: = iban
-target: sender.iban
-
-</pre>
-</td>
-<td>
-<pre>
-sender: &#123;"name": "John",
-"iban": "DE456"&#125;
-
-  </pre>
-  </td>
-  </tr>
-</table>
+| Workflow Instance Variables            | Input Mappings                                                                                               | New Variables                               |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| `orderId: "order-123"`                 | **source:** `=orderId`<br/> **target:** `reference`                                                          | `reference: "order-123"`                    |
+| `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
+| `customer: "John"`<br/>`iban: "DE456"` | **source:** `=customer`<br/> **target:** `sender.name`<br/>**source:** `=iban`<br/>**target:** `sender.iban` | `sender: {"name": "John", "iban": "DE456"}` |
 
 ### Output Mappings
 
@@ -174,46 +126,8 @@ In case of a sub process, the behavior is different. There are no job/message va
 
 Examples:
 
-<table>
-  <tr>
-    <th>Job/Message Variables</th>
-    <th>Output Mappings</th>
-    <th>Workflow Instance Variables</th>
-  </tr>
-  <tr>
-    <td><pre>
-status: "Ok"</pre></td>
-    <td><pre>
-source: = status
-target: paymentStatus</pre></td>
-    <td><pre>
-paymentStatus: "OK"</pre></td>
-  </tr>
-  <tr>
-    <td><pre>
-result: &#123;"status": "Ok",
-  "transactionId": "t-789"&#125;</pre></td>
-    <td><pre>
-source: = result.status
-target: paymentStatus
-
-source: = result.transactionId
-target: transactionId
-
-</pre>
-</td>
-    <td><pre>
-paymentStatus: "Ok"
-transactionId: "t-789"</pre></td>
-  </tr>
-  <tr>
-  <td><pre>
-status: "Ok"
-transactionId: "t-789"</pre></td>
-    <td><pre>
-source: = transactionId
-target: order.transactionId</pre></td>
-    <td><pre>
-order: &#123;"transactionId": "t-789"&#125;</pre></td>
-  </tr>
-</table>
+| Job/Message Variables                                | Output Mappings                                                                                                                      | Workflow Instance Variables                        |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
+| `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
+| `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |

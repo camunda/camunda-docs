@@ -18,5 +18,5 @@ With Zeebe you can:
 **Next Steps**
 
 - Get familiar with [Technical Concepts](technical-concepts/index.md)
-- Learn more about local and cloud [Deployment Options](deployment-guide/index.md) (this chapter is not relevant if you want to use Zeebe as part of Camunda Cloud)
+- Learn more about alternative [Deployment Options](deployment-guide/index.md) (e.g. how to run Zeebe in a local Docker environment during development)
 - Explore [Community Contributions](open-source/community-contributions.md)

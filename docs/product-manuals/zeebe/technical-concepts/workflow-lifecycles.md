@@ -25,6 +25,7 @@ Events which belongs to the same element instance (e.g. a task) have the same `k
 
 ![order process](assets/workflow.png)
 
+Given the above workflow a successful execution will yield the following records in the commit log:
 <table>
     <tr>
         <th>Intent</th>
