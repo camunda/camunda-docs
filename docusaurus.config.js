@@ -23,7 +23,7 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "guides/introcution-to-camunda-cloud",
+          docId: "guides/introduction-to-camunda-cloud",
           label: "Guides",
           position: "left",
         },
