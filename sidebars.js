@@ -313,6 +313,5 @@ module.exports = {
     },
     require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
-  ],
-  Samples: ["samples/overview"],
+  ]
 };

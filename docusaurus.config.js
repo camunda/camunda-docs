@@ -39,12 +39,6 @@ module.exports = {
           label: "Reference",
           position: "left",
         },
-        {
-          type: "doc",
-          docId: "samples/overview",
-          label: "Samples",
-          position: "left",
-        },
       ],
     },
     footer: {
