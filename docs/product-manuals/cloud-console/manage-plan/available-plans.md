@@ -1,6 +1,6 @@
 ---
 id: available-plans
-title: Available Plans
+title: Available plans
 ---
 
 Camunda Cloud was released to the world as Beta in September 2019. In order to signup for Camunda Cloud, please go to [the signup page](https://accounts.cloud.camunda.io/signup).

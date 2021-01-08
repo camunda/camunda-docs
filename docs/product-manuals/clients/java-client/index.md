@@ -1,7 +1,7 @@
 ---
 id: index
-title: "Java Client"
-sidebar_label: "Quick Reference"
+title: "Java client"
+sidebar_label: "Quick reference"
 ---
 
 ## Dependencies
@@ -53,7 +53,7 @@ In Java code, instantiate the client as follows:
   }
 ```
 
-Let us go over this code snippet line by line:
+Let's go over this code snippet line by line:
 
 - First we declare a couple of variables to define the connection properties. These values can be taken from the connection info on the _Client Credentials_ page. Note that `clientSecret` is only visible when you create the client credentials.
 - Next we create the credentials provider for the OAuth protocol. This is needed to authenticate your client.
@@ -84,7 +84,7 @@ ZeebeClient client =
 
 ## Next Steps
 
-- [Get Started Guide](get-started.md) - Comprehensive tutorial that covers Zeebe Modeler, Operate and the Java client.
+- [Getting started guide](get-started.md) - Comprehensive tutorial that covers Zeebe Modeler, Operate and the Java client.
 - [Logging](logging.md) - Introduction on how to configure logging for Zeebe Client
-- [Writing Tests](testing.md) - Introduction to writing tests that use an embedded version of the workflow engine
+- [Writing tests](testing.md) - Introduction to writing tests that use an embedded version of the workflow engine
 - [Examples](../java-client-examples/index.md) - Collection of specific examples for different use cases

@@ -1,6 +1,6 @@
 ---
 id: deprecated-features
-title: "Deprecated Features"
+title: "Deprecated features"
 ---
 
 This section lists deprecated features.

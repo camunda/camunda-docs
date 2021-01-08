@@ -1,7 +1,7 @@
 ---
 id: index
-title: "Go Client"
-sidebar_label: "Quick Reference"
+title: "Go client"
+sidebar_label: "Quick reference"
 ---
 
 ## Dependencies
@@ -58,13 +58,13 @@ func main() {
 }
 ```
 
-Let us go over this code snippet line by line:
+Let's go over this code snippet line by line:
 
 - First we create the credentials provider for the OAuth protocol. This is needed to authenticate your client.
 - Next we create the client passing in the address of the cluster we want to connect to, as well as, the credentials provider from the step above.
 - Finally, we send a test request to verify that the connection was established.
 
-The values for these settings can be taken from the connection info on the _Client Credentials_ page. Note that `clientSecret` is only visible when you create the client credentials.
+The values for these settings can be taken from the connection info on the **Client Credentials** page. Note that `clientSecret` is only visible when you create the client credentials.
 
 Another, more compact, option is to pass in the connection settings via environment variables:
 

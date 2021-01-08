@@ -1,6 +1,6 @@
 ---
 id: importer-and-archiver
-title: Importer & Archiver
+title: Importer and archiver
 ---
 Operate consists of three modules:
  * **Webapp** - contains the UI and operation executor functionality

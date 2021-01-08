@@ -1,6 +1,6 @@
 ---
 id: resolve-incidents-update-variables
-title: Variables & Incidents
+title: Variables and incidents
 ---
 
 Every workflow instance created for the workflow model used in the Getting Started tutorial requires an `orderValue` so that the XOR gateway evaluation will happen properly. 
@@ -26,7 +26,7 @@ Let’s look at a case where `orderValue` is present but was set as a string, bu
 "orderValue\": \"99\"}'
 ```
 
-To advance the instance to our XOR gateway, we’ll quickly create a job worker to complete the “Initiate Payment” task: 
+To advance the instance to our XOR gateway, we’ll quickly create a job worker to complete the `Initiate Payment` task: 
 
 **Linux**
 
@@ -48,7 +48,7 @@ To advance the instance to our XOR gateway, we’ll quickly create a job worker 
 ./bin/zbctl.exe --insecure create worker initiate-payment --handler "findstr .*"
 ```
 
-And we’ll publish a message that will be correlated with the instance so we can advance past the “Payment Received” Intermediate Message Catch Event: 
+And we’ll publish a message that will be correlated with the instance so we can advance past the `Payment Received` intermediate message catch event: 
 
 **Linux**
 ```
@@ -95,7 +95,7 @@ You should now see that the incident has been resolved, and the workflow instanc
 
 ![operate-incident-resolved-instance-view](./img/operate-incident-resolved_light.png)
 
-If you’d like to complete the workflow instance, you can create a worker for the “Ship Without Insurance” task: 
+If you’d like to complete the workflow instance, you can create a worker for the `Ship Without Insurance` task: 
 
 **Linux**
 

@@ -1,16 +1,16 @@
 ---
 id: health
-title: "Health Status"
+title: "Health status"
 ---
 
 ## Broker
 
-Zeebe broker exposes two http endpoints to query its health status.
+Zeebe broker exposes two http endpoints to query its health status:
 
 - Ready check
 - Health check
 
-### Ready Check
+### Ready check
 
 Ready check endpoint is exposed via `http://{zeebe-broker}:{zeebe.broker.network.monitoringApi.port}/ready` (by default port 9600).
 This endpoint return an empty 204 response. If it is not ready, it will return a 503 error.
@@ -24,7 +24,7 @@ A ready check is useful, for example, to use as a `readinessProbe` in a kubernet
 Depending on the cluster configuration, restarting one pod before the previous one is ready might make the system unavailable because the quorum of replicas is not available.
 By configuring a `readinessProbe` that uses the ready check endpoint we can inform Kubernetes when it is safe to proceed with rolling update.
 
-### Health Check
+### Health check
 
 Health check endpoint is exposed via `http://{zeebe-broker}:{zeebe.broker.network.monitoringApi.port}/health` (by default port 9600).
 This endpoint return an empty 204 response if the broker is healthy. If it is not healthy, it will return a 503 error.
@@ -46,13 +46,13 @@ When a broker becomes unhealthy, it is recommended to check the logs to see what
 
 Zeebe gateway exposes three HTTP endpoints to query its health status:
 
-- Health Status - `http://{zeebe-gateway}:9600/health`
-- Startup Probe - `http://{zeebe-gateway}:9600/actuator/health/startup`
-- Liveness Probe - `http://{zeebe-gateway}:9600/actuator/health/liveness`
+- Health status - `http://{zeebe-gateway}:9600/health`
+- Startup probe - `http://{zeebe-gateway}:9600/actuator/health/startup`
+- Liveness probe - `http://{zeebe-gateway}:9600/actuator/health/liveness`
 
 (The default port can be changed in the configuration: `{zeebe.gateway.monitoring.port}`)
 
-### Health Status
+### Health status
 
 The gateway is healthy if it:
 
@@ -62,13 +62,13 @@ The gateway is healthy if it:
 - Is aware of other nodes in the cluster
 - Is aware of leaders for partitions
 
-### Startup Probe
+### Startup probe
 
 The gateway is started if it finished its boot sequence successfully and is ready to receive requests. It is no longer started when it initiated the shutdown sequence.
 
 The started probe can be used as Kubernetes startup probe.
 
-### Liveness Probe
+### Liveness probe
 
 The gateway is live if it:
 
@@ -80,7 +80,7 @@ The gateway is live if it:
 
 The liveness probe can be used as Kubernetes liveness probe.
 
-### Status Responses
+### Status responses
 
 Each endpoint returns a status which can be one of
 

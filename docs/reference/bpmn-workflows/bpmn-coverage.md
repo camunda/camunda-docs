@@ -1,6 +1,6 @@
 ---
 id: bpmn-coverage
-title: "BPMN Coverage"
+title: "BPMN coverage"
 ---
 
 The following BPMN elements are currently implemented in Zeebe:
@@ -10,31 +10,31 @@ The following BPMN elements are currently implemented in Zeebe:
 
 ## Subprocesses
 
-* [Embedded Subprocess](embedded-subprocesses/embedded-subprocesses.md)
-* [Call Activities](call-activities/call-activities.md)
-* [Event Subprocess](event-subprocesses/event-subprocesses.md)
+* [Embedded subprocess](embedded-subprocesses/embedded-subprocesses.md)
+* [Call activities](call-activities/call-activities.md)
+* [Event subprocess](event-subprocesses/event-subprocesses.md)
 
 ## Tasks
 
-* [Service Tasks](service-tasks/service-tasks.md)
-* [Receive Tasks](receive-tasks/receive-tasks.md)
+* [Service tasks](service-tasks/service-tasks.md)
+* [Receive tasks](receive-tasks/receive-tasks.md)
 
 ## Gateways
 
-* [Exclusive Gateways](exclusive-gateways/exclusive-gateways.md)
-* [Parallel Gateways](parallel-gateways/parallel-gateways.md)
-* [Event-Based Gateways](event-based-gateways/event-based-gateways.md)
+* [Exclusive gateways](exclusive-gateways/exclusive-gateways.md)
+* [Parallel gateways](parallel-gateways/parallel-gateways.md)
+* [Event-based gateways](event-based-gateways/event-based-gateways.md)
 
 ## Markers
 
-* [Multi-Instance](multi-instance/multi-instance.md)
+* [Multi-instance](multi-instance/multi-instance.md)
 
 ## Events
 
-* [None Events](none-events/none-events.md)
-* [Message Events](message-events/message-events.md)
-* [Timer Events](timer-events/timer-events.md)
-* [Error Events](error-events/error-events.md)
+* [None events](none-events/none-events.md)
+* [Message events](message-events/message-events.md)
+* [Timer events](timer-events/timer-events.md)
+* [Error events](error-events/error-events.md)
 
 <!-- 
 <div class="bpmn-symbols">

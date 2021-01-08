@@ -8,7 +8,7 @@ In this network, all brokers have the same responsibilities and there is no sing
 
 ![cluster](assets/cluster.png)
 
-## Gossip Membership Protocol
+## Gossip membership protocol
 
 Zeebe implements the [Gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol) to know which brokers are currently part of the cluster.
 
@@ -22,17 +22,17 @@ cluster:
 
 When a broker is connected to the cluster for the first time, it fetches the topology from the initial contact points and then starts gossiping with the other brokers. Brokers keep cluster topology locally across restarts.
 
-## Raft Consensus and Replication Protocol
+## Raft consensus and replication protocol
 
 To ensure fault tolerance, Zeebe replicates data across machines using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(computer_science)>).
 
-Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a _leader_ is determined by the raft protocol which takes in requests and performs all the processing. All other brokers are passive _followers_. When the leader becomes unavailable, the followers transparently select a new leader.
+Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a _leader_ is determined by the raft protocol which takes in requests and performs all of the processing. All other brokers are passive _followers_. When the leader becomes unavailable, the followers transparently select a new leader.
 
 Each broker in the cluster may be both leader and follower at the same time for different partitions. In an ideal world, this leads to client traffic distributed evenly across all brokers.
 
 ![cluster](assets/data-distribution.png)
 
-Note however, that there is no active load balancing across partitions. Each leader election for any partition is completely autonomous and independent of leader elections for other partitions. This may lead, in the worst case, to one node becoming the leader for all partitions. This is not a problem for fault tolerance as the guarantees of replication still hold. However, it may negatively impact throughput as all traffic hits one node.
+Note, however, that there is no active load balancing across partitions. Each leader election for any partition is completely autonomous and independent of leader elections for other partitions. This may lead, in the worst case, to one node becoming the leader for all partitions. This is not a problem for fault tolerance as the guarantees of replication still hold. However, it may negatively impact throughput as all traffic hits one node.
 
 ## Commit
 

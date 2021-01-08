@@ -1,11 +1,11 @@
 ---
 id: workflow-instance-creation
-title: "Workflow Instance Creation"
+title: "Workflow instance creation"
 ---
 
 Depending on the workflow definition, an instance of it can be created in the following ways
 
-- _create workflow instance_ commands
+- **CreateWorkflowInstance** commands
 - timer event handler
 - message event
 
@@ -14,10 +14,10 @@ Depending on the workflow definition, an instance of it can be created in the fo
 A workflow instance can be created by sending a command specifying the BPMN process id or the unique key of the workflow.
 There are two commands to create a workflow instance.
 
-### Create and Execute Asynchronously
+### Create and execute asynchronously
 
-A workflow that has a [none start event](/reference/bpmn-workflows/none-events/none-events.md#none-start-events) can be started explicitly using the command [CreateWorkflowInstance](/reference/grpc.md#createworkflowinstance-rpc).
-The command creates a new workflow instance and immediately responds with the workflow instance id. The execution of the workflow happens after the response is send.
+A workflow that has a [none start event](/reference/bpmn-workflows/none-events/none-events.md#none-start-events) can be started explicitly using **[CreateWorkflowInstance](/reference/grpc.md#createworkflowinstance-rpc)**.
+This command creates a new workflow instance and immediately responds with the workflow instance id. The execution of the workflow happens after the response is send.
 
 ![create-workflow](assets/create-workflow.png)
 
@@ -44,11 +44,11 @@ Response:
    </p>
  </details>
 
-### Create and Await Results
+### Create and await results
 
 Typically, workflow creation and execution are decoupled.
 However, there are use-cases that need to collect the results of a workflow when it's execution is completed.
-The [CreateWorkflowInstanceWithResult](/reference/grpc.md#createworkflowinstancewithresult-rpc) command allows you to “synchronously” execute workflows and receive the results via a set of variables. The response is sent when the workflow execution is completed.
+**[CreateWorkflowInstanceWithResult](/reference/grpc.md#createworkflowinstancewithresult-rpc)** allows you to “synchronously” execute workflows and receive the results via a set of variables. The response is sent when the workflow execution is completed.
 
 ![create-workflow](assets/create-workflow-with-result.png)
 

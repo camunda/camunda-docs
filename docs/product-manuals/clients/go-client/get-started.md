@@ -1,17 +1,17 @@
 ---
 id: get-started
-title: "Go Client - Get Started Guide"
-sidebar_label: "Get Started Guide"
+title: "Go client - Getting started guide"
+sidebar_label: "Getting started guide"
 ---
 
-In this tutorial, you will learn to use the Go client in a Go application to interact with Camunda Cloud.
+In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda Cloud.
 
 You can find the complete source code on [GitHub](https://github.com/zeebe-io/zeebe-get-started-go-client).
 
 ## Prerequisites
 
-- [Camunda Cloud Account](/guides/getting-started/create-camunda-cloud-account.md)
-- [Cluster](/guides/getting-started/create-cluster.md) and [Client Credentials](/guides/getting-started/setup-client-connection-credentials.md)
+- [Camunda Cloud account](/guides/getting-started/create-camunda-cloud-account.md)
+- [Cluster](/guides/getting-started/create-cluster.md) and [client credentials](/guides/getting-started/setup-client-connection-credentials.md)
 - [Modeler](/guides/getting-started/model-your-first-process.md)
 - Go v1.13+ environment installed
 
@@ -110,21 +110,23 @@ Broker 0.0.0.0 : 26501
 
 ## Model a workflow
 
-Now, we need a first workflow which can then be deployed.
-Later, we will extend the workflow with more functionality.
+Now, we need a simple workflow we can deploy. Later, we will extend the workflow with more functionality.
 
-Open the Zeebe Modeler and create a new BPMN diagram.
-Add a start event and an end event to the diagram and connect the events.
+Open the [modeler](/guides/getting-started/model-your-first-process.md) of your choice and create a new BPMN diagram.
+
+Add a start event named `Order Placed` and an end event named `Order Delivered` to the diagram and connect the events.
 
 ![model-workflow-step-1](assets/order-process-simple.png)
 
-Set the id to `order-process` (i.e., the BPMN process id) and mark the diagram
-as executable. Save the diagram in the project's source folder.
+Set the **id** (the BPMN process id), and mark the diagram as **executable**.
+
+Save the diagram as `src/main/resources/order-process.bpmn` under the project's folder.
 
 ## Deploy a workflow
 
 Next, we want to deploy the modeled workflow to the broker.
-The broker stores the workflow under its BPMN process id and assigns a version (i.e., the revision).
+
+The broker stores the workflow under its BPMN process id and assigns a version.
 
 ```go
 	// After the client is created
@@ -145,8 +147,9 @@ key:2251799813686743 workflows:<bpmnProcessId:"order-process" version:3 workflow
 
 ## Create a workflow instance
 
-Finally, we are ready to create a first instance of the deployed workflow. A
-workflow instance is created of a specific version of the workflow, which can
+We are ready to create a first instance of the deployed workflow.
+
+A workflow instance is created of a specific version of the workflow, which can
 be set on creation.
 
 ```go
@@ -177,7 +180,7 @@ workflowKey:2251799813686742 bpmnProcessId:"order-process" version:3 workflowIns
 
 You did it!
 
-## See the Workflow in Action
+## See the workflow in action
 
 You want to see how the workflow instance is executed?
 
@@ -189,18 +192,26 @@ As you can see, a workflow instance has been started and finished.
 
 ## Work on a task
 
-Now we want to do some work within your workflow. First, add a few service
+Now we want to do some work within our workflow. 
+
+First, add a few service
 tasks to the BPMN diagram and set the required attributes. Then extend your
 `main.go` file and activate a job which are created when the workflow instance
 reaches a service task.
 
-Open the BPMN diagram in the Zeebe Modeler.
-Insert a few service tasks between the start and the end event.
+Open the BPMN diagram in the modeler. Insert three service tasks between the start and the end event.
+
+- Name the first task `Collect Money`.
+- Name the second task `Fetch Items`.
+- Name the third task `Ship Parcel`.
 
 ![model-workflow-step-2](assets/order-process.png)
 
 You need to set the type of each task, which identifies the nature of the work to be performed.
-Set the type of the first task to `payment-service`.
+
+- Set the **type** of the first task to `payment-service`.
+- Set the **type** of the second task to `fetcher-service`.
+- Set the **type** of the third task to `shipping-service`.
 
 The consolidated example looks as follows:
 

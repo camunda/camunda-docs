@@ -1,6 +1,6 @@
 ---
 id: billing-parameters
-title: Billing Parameters
+title: Billing parameters
 ---
 
 :::note

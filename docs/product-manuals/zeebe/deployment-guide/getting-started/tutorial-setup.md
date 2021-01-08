@@ -1,9 +1,9 @@
 ---
 id: tutorial-setup
-title: "Tutorial Setup"
+title: "Tutorial setup"
 ---
 
-Welcome to the Getting Started tutorial for Zeebe and Operate. In this tutorial, we'll walk you through how to...
+Welcome to the Getting Started tutorial for Zeebe and Operate. In this tutorial, we'll walk you through how to:
 
 - Model a workflow using Zeebe Modeler
 - Deploy the workflow to Zeebe

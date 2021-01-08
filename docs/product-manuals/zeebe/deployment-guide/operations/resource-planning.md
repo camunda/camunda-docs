@@ -1,15 +1,15 @@
 ---
 id: resource-planning
-title: "Resoure Planning"
+title: "Resource planning"
 ---
 
 The short answer to “_what resources and configuration will I need to take Zeebe to production?_” is: it depends.
 
 While we cannot tell you exactly what you need - beyond _it depends_ - we can explain what depends, what it depends on, and how it depends on it.
 
-## Disk Space
+## Disk space
 
-All Brokers in a partition use disk space to store:
+All brokers in a partition use disk space to store:
 
 - The event log for each partition they participate in. By default, this is a minimum of _512MB_ for each partition, incrementing in 512MB segments. The event log is truncated on a given broker when data has been processed and successfully exported by all loaded exporters.
 - One periodic snapshots of the running state (in-flight data) of each partition (unbounded, based on in-flight work).
@@ -91,7 +91,7 @@ If you want to know where to look, by default this data is stored in
 If you do configure an exporter, make sure to monitor its availability and health, as well as the availability and health the exporter depends on.
 This is the Achilles' heel of the cluster. If data cannot be exported, it cannot be removed from the cluster and will accumulate on disk. See _Effect of exporters and external system failure_ further on in this document for an explanation and possible buffering strategies.
 
-### Event Log
+### Event log
 
 The event log for each partition is segmented. By default, the segment size is 512MB.
 

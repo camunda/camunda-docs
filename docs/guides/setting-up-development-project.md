@@ -1,6 +1,6 @@
 ---
 id: setting-up-development-project
-title: Setting up your first Development Project
+title: Setting up your first development project
 ---
 
 import Tabs from "@theme/Tabs";

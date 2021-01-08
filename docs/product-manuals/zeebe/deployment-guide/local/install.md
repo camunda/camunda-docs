@@ -1,6 +1,6 @@
 ---
 id: install
-title: "Local Installation"
+title: "Local installation"
 sidebar_label: "Install"
 ---
 
@@ -15,7 +15,7 @@ This page guides you through the initial installation of the Zeebe broker and Ze
   - Oracle Hotspot 11, or
   - Open JDK 11
 
-## Download a Distribution
+## Download a distribution
 
 You can always download the latest Zeebe release from the [Github release page](https://github.com/zeebe-io/zeebe/releases).
 

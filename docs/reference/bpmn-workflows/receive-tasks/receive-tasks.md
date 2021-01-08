@@ -1,6 +1,6 @@
 ---
 id: receive-tasks
-title: "Receive Tasks"
+title: "Receive tasks"
 ---
 
 Receive tasks are tasks which references a message. They are used to wait until a proper message is received.
@@ -23,11 +23,11 @@ The `correlationKey` is an expression that usually [accesses a variable](/produc
 
 In order to correlate a message to the receive task, the message is published with the defined name (e.g. `Money collected`) and the **value** of the `correlationKey` expression. For example, if the workflow instance has a variable `orderId` with value `"order-123"` then the message must be published with the correlation key `"order-123"`.
 
-## Variable Mappings
+## Variable mappings
 
 By default, all message variables are merged into the workflow instance. This behavior can be customized by defining an output mapping at the receive task.
 
-## Additional Resources
+## Additional resources
 
 <details>
   <summary>XML representation</summary>
@@ -104,7 +104,7 @@ By default, all message variables are merged into the workflow instance. This be
 
 References:
 
-- [Message Correlation](/product-manuals/concepts/messages.md)
+- [Message correlation](/product-manuals/concepts/messages.md)
 - [Expressions](/product-manuals/concepts/expressions.md)
-- [Variable Mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
 - [Incidents](/product-manuals/concepts/incidents.md)

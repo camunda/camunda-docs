@@ -1,13 +1,13 @@
 ---
 id: install-and-start
-title: Install & Start Tasklist
+title: Install and start Tasklist
 ---
-## Running via Docker (Local Development)
+## Running via Docker (local development)
 
 You can use the Docker image `camunda/zeebe-tasklist:latest` to run Tasklist as container.
 
 Please make sure to set appropriate settings described in [configuration](../deployment/configuration) section of deployment guide.
-Here an example configuration for *docker-compose*:
+Here an example configuration for `docker-compose`:
 ```
 zeebe-tasklist:
     container_name: zeebe-tasklist
@@ -19,7 +19,7 @@ zeebe-tasklist:
         - zeebe.tasklist.zeebeElasticsearch.url=http://elasticsearch:9200
         - zeebe.tasklist.zeebe.brokerContactPoint=zeebe:26500
 ```
-## Manual Configuration (Local Development)
+## Manual configuration (local development)
 
 Here, we’ll walk you through how to download and run a Tasklist distribution manually, without using Docker.
 
@@ -76,9 +76,10 @@ You’ll know Zeebe has started successfully when you see a message similar to:
 
 To run Tasklist, execute the following commands:
 
-`cd zeebe-tasklist*``
-
+```
+cd zeebe-tasklist*
 ./bin/tasklist
+```
 
 You’ll know Tasklist has started successfully when you see messages similar to:
 
@@ -88,12 +89,12 @@ You’ll know Tasklist has started successfully when you see messages similar to
 2020-12-09 13:31:41.555  INFO 45899 --- [           main] i.z.t.w.StartupBean                      : Tasklist Version: 0.26.0-alpha2
 ```
 
-## Access the Tasklist Web Interface
+## Access the Tasklist web interface
 
 The Tasklist web interface is available at [http://localhost:8080](http://localhost:8080).
 
 The first screen you'll see is a sign-in page. Use the credentials `demo` / `demo` to sign in.
 
-If you already have some *User Tasks* in Zeebe you can see these on the left panel in the start screen:
+If you already have some user tasks in Zeebe you can see these on the left panel in the start screen:
 
 ![tasklist-start-screen](../img/tasklist-start-screen_light.png)

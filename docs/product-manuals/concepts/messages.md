@@ -5,9 +5,9 @@ title: "Messages"
 
 Workflow instances can respond to incoming messages. Published messages need to be mapped onto a workflow instance. This step is called message correlation.
 
-## Message Subscriptions
+## Message subscriptions
 
-A message is not sent to a workflow instance directly. Instead, the message correlation is based on subscriptions that contains the **message name** and the **correlation key** (aka correlation value).
+A message is not sent to a workflow instance directly. Instead, the message correlation is based on subscriptions that contains the _message name_ and the _correlation key_ (aka correlation value).
 
 ![Message Correlation](assets/message-correlation.png)
 
@@ -28,7 +28,7 @@ zbctl publish message "Money collected" --correlationKey "order-123"
    </p>
  </details>
 
-## Message Buffering
+## Message buffering
 
 Messages can be buffered for a given time. Buffering can be useful in a situation when it is not guaranteed that the subscription is opened before the message is published.
 
@@ -49,7 +49,7 @@ zbctl publish message "Money collected" --correlationKey "order-123" --ttl 1h
    </p>
  </details>
 
-## Message Cardinality
+## Message cardinality
 
 A message is correlated only **once** to a workflow (based on the BPMN process id), across all versions of this workflow. If multiple subscriptions for the same workflow are opened (by multiple workflow instances or within one instance) then the message is correlated only to one of the subscriptions.
 
@@ -57,9 +57,9 @@ When subscriptions are opened for different workflows then the message is correl
 
 A message is **not** correlated to a message start event subscription if an instance of the workflow is active and was created by a message with the same correlation key. If the message is buffered then it can be correlated after the active instance is ended. Otherwise, it is discarded.
 
-## Message Uniqueness
+## Message uniqueness
 
-A message can have an optional _message id_ - a unique id to ensure that the message is published and processed only once (i.e. idempotency). The id can be any string, for example, a request id, a tracking number or the offset/position in a message queue.
+A message can have an optional message id - a unique id to ensure that the message is published and processed only once (i.e. idempotency). The id can be any string, for example, a request id, a tracking number or the offset/position in a message queue.
 
 A message is rejected and not correlated if a message with the same name, the same correlation key and the same id is already buffered. After the message is discarded from the buffer, a message with the same name, correlation key and id can be published again.
 
@@ -76,11 +76,11 @@ zbctl publish message "Money collected" --correlationKey "order-123" --messageId
    </p>
  </details>
 
-## Message Patterns
+## Message patterns
 
 The following patterns describe solutions to common problems what can be solved using the message correlation.
 
-### Message Aggregator
+### Message aggregator
 
 Problem: aggregate/collect multiple messages, map-reduce, batching
 
@@ -94,7 +94,7 @@ The first message creates a new workflow instance. The following messages are co
 
 When the instance is ended and messages with the same correlation key are not correlated yet then a new workflow instance is created.
 
-### Single Instance
+### Single instance
 
 Problem: create exactly one instance of a workflow
 

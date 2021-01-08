@@ -11,7 +11,7 @@ You have two possibilities to select a target. Besides a self-hosted solution yo
 
 ![deployment configuration](./img/deploy-diagram-camunda-cloud.png)
 
-Select **Camunda Cloud** to continue. For the communication you need the **ClusterId** of your cluster and the credentials (**ClientId**, **ClientSecret**) of your [API client](../../cloud-console/manage-clusters/manage-api-clients.md).
+Select **Camunda Cloud** to continue. For the communication you need the `Cluster Id` of your cluster and the credentials (`Client Id`, `Client Secret`) of your [API client](../../cloud-console/manage-clusters/manage-api-clients.md).
 
 ![deployment via camunda cloud](./img/deploy-diagram-camunda-cloud-remember.png)
 

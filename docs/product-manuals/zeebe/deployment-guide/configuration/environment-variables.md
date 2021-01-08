@@ -1,22 +1,22 @@
 ---
 id: environment-variables
-title: "Environment Variables"
+title: "Environment variables"
 ---
 
-## Environment Variables for Configuration
+## Environment variables for configuration
 
 The configuration can be provided as a file or through environment variables. Mixing both sources is also possible. In that case environment variables have precedence over the configuration settings in the configuration file.
 
 All available environment variables are documented in the [configuration file templates](configuration/#configuration-file-templates).
 
-## Environment Variables for Operators
+## Environment variables for operators
 
 The following environment variables are intended for operators:
 
 - `ZEEBE_LOG_LEVEL`: Sets the log level of the Zeebe Logger (default: `info`).
 - `ZEEBE_LOG_APPENDER`: Sets the console log appender (default: `Console`). We recommend using `Stackdriver` if Zeebe runs on Google Cloud Platform to output JSON formatted log messages
 
-## Environment Variables for Developers
+## Environment variables for developers
 
 The following environment variables are intended for developers:
 

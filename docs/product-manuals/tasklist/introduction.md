@@ -4,7 +4,7 @@ title: Introduction
 ---
 
 Tasklist is a tool for working with [User Tasks](https://docs.camunda.org/manual/7.8/reference/bpmn20/tasks/user-task/) in Zeebe.
-You can filter, claim and complete *User Tasks*.
+You can filter, claim and complete user tasks.
 
 <!--
 import ThemedImage from '@theme/ThemedImage';

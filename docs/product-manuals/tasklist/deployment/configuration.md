@@ -8,10 +8,10 @@ a Spring Boot application can be applied. By default, the configuration for Task
 with `zeebe.tasklist`. The following parts are configurable:
 
 * [Webserver](#webserver)
-* [GraphQL API Access](#graphql-api-access)
-* [Elasticsearch Connection](#elasticsearch)
+* [GraphQL API access](#graphql-api-access)
+* [Elasticsearch connection](#elasticsearch)
 * [Zeebe Broker connection](#zeebe-broker-connection)
-* [Zeebe Elasticsearch Exporter](#zeebe-elasticsearch-exporter)
+* [Zeebe Elasticsearch exporter](#zeebe-elasticsearch-exporter)
 * [Authentication](authentication.md)
 * [Monitoring and health probes](#monitoring-and-health-probes)
 * [Logging configuration](#logging)
@@ -28,7 +28,7 @@ Example for environment variable:
 
 Default context-path is `/`
 
-## GraphQL API Access
+## GraphQL API access
 
 Tasklist provides a GraphQL API under the endpoint `/graphql`. Clients can access this API by using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
@@ -90,7 +90,7 @@ zeebe.tasklist:
     url: http://localhost:9200
 ```
 
-## Zeebe Broker Connection
+## Zeebe broker connection
 
 Tasklist needs a connection to Zeebe Broker to start the import.
 
@@ -109,7 +109,7 @@ zeebe.tasklist:
     brokerContactPoint: localhost:26500
 ```
 
-## Zeebe Elasticsearch Exporter
+## Zeebe Elasticsearch exporter
 
 Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
 Therefore settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
@@ -139,7 +139,7 @@ zeebe.tasklist:
     prefix: zeebe-record
 ```
 
-## Monitoring and Health Probes
+## Monitoring and health probes
 
 Tasklist includes [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready) inside, that
 provides number of monitoring possibilities., e.g. health check (http://localhost:8080/actuator/health) and metrics (http://localhost:8080/actuator/prometheus) endpoints.

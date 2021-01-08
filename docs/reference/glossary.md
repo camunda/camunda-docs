@@ -27,31 +27,31 @@ A cluster represents a configuration of one or more brokers collaborating to exe
 
 A command represents an action to be taken or executed. Example commands include: deploy a workflow, execute a workflow, etc.
 
-- [Internal Processing](/product-manuals/zeebe/technical-concepts/internal-processing.md#events-and-commands)
+- [Internal processing](/product-manuals/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
 ### Correlation
 
 Correlation refers to the act of matching a message with an inflight workflow instance.
 
-- [Message Correlation](/product-manuals/concepts/messages.md)
+- [Message correlation](/product-manuals/concepts/messages.md)
 
 ### Correlation Key
 
 A correlation is an attribute within a message which is used to match this message against a certain variable within an inflight workflow instance. If the value of the correlation key matches the value of the variable within the workflow instance, the message is matched to this workflow instance.
 
-- [Message Correlation](/product-manuals/concepts/messages.md)
+- [Message correlation](/product-manuals/concepts/messages.md)
 
 ### Deployment
 
 A workflow cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying worklows to the broker.
 
-- [Getting Started Tutorial: Deploy a Workflow](/product-manuals/zeebe/deployment-guide/getting-started/deploy-a-workflow.md)
+- [Getting started tutorial: Deploy a workflow](/product-manuals/zeebe/deployment-guide/getting-started/deploy-a-workflow.md)
 
 ### Event
 
 An event represents a state change associated with an aspect of an executing workflow instance. Events capture variable changes, state transition in workflow elements, etc. An event will be represented by a timestamp, the variable name and variable value. Events are stored in an append-only log.
 
-- [Internal Processing](/product-manuals/zeebe/technical-concepts/internal-processing.md#events-and-commands)
+- [Internal processing](/product-manuals/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
 ### Exporter
 
@@ -83,19 +83,19 @@ A job represents a distinct unit of work within a business process. Service task
 jobs in your workflow and are identified by a unique id. A job has a type to allow specific job
 workers to find jobs that they can work on.
 
-- [Job Workers](/product-manuals/concepts/job-workers.md#what-is-a-job)
+- [Job workers](/product-manuals/concepts/job-workers.md#what-is-a-job)
 
-### Job Activation Timeout
+### Job activation timeout
 
 This is the amount of time the broker will wait for a complete or fail response from the job worker after a job has been submitted to the job worker for processing before it marks the job as available again for other job workers.
 
-- [Job Workers](/product-manuals/concepts/job-workers.md#requesting-jobs-from-the-broker)
+- [Job workers](/product-manuals/concepts/job-workers.md#requesting-jobs-from-the-broker)
 
-### Job Worker
+### Job worker
 
 A special type of client that polls for and executes available jobs. An uncompleted job prevents Zeebe from advancing workflow execution to the next step.
 
-- [Job Workers](/product-manuals/concepts/job-workers.md)
+- [Job workers](/product-manuals/concepts/job-workers.md)
 
 ### Leader
 
@@ -125,7 +125,7 @@ A partition represents a logical grouping of data in a Zeebe broker. This data i
 
 A record represents a command or an event. For example, a command to create a new workflow instance, or a state transition of an executing workflow instance representing an event at a given point in time would result to generation of a record. During the execution lifecycle of a workflow instance, numerous records will be generated to capture various commands and events generated. Records are stored in the log.
 
-- [Internal Processing](/product-manuals/zeebe/technical-concepts/internal-processing.md#events-and-commands)
+- [Internal processing](/product-manuals/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
 ### Replication
 
@@ -133,13 +133,13 @@ Replication is the act of copying data in a partition from a leader to its follo
 
 - [Clustering](/product-manuals/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
-### Replication Factor
+### Replication factor
 
 This is the number of times data in a partition will be copied and this depends on the number of brokers in a cluster. A cluster with one leader and two followers will have a replication factor of three, as data in each partition needs to have three copies.
 
 - [Clustering](/product-manuals/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
-### Request Timeout
+### Request timeout
 
 This is how long a client will wait for a response from the broker after the client has submitted a request. If a response is not received within the client request timeout, the client can consider the broker unreachable.
 
@@ -149,19 +149,19 @@ This is how long a client will wait for a response from the broker after the cli
 
 The state of all active workflows instances, (these are also known as inflight workflow instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a workflow. The size of a snapshot is affected by the size of the data. Size of the data depends on several factors including complexity of the model or business process, the size and quantity of variables in each workflow instance as well as the total number of executing workflow instances in a broker.
 
-- [Resource Planning](/product-manuals/zeebe/deployment-guide/operations/resource-planning.md#snapshots)
+- [Resource planning](/product-manuals/zeebe/deployment-guide/operations/resource-planning.md#snapshots)
 
 ### Segment
 
 The log consists of one or more _segments_. Each _segment_ is a file that contains an ordered sequence records. _Segments_ are deleted when the log is compacted.
 
-- [Resource Planning](/product-manuals/zeebe/deployment-guide/operations/resource-planning.md#event-log)
+- [Resource planning](/product-manuals/zeebe/deployment-guide/operations/resource-planning.md#event-log)
 
 ### Worker
 
 A worker executes a job. In the Zeebe nomenclature, these are also referred to as job workers.
 
-- [Job Workers](/product-manuals/concepts/job-workers.md)
+- [Job workers](/product-manuals/concepts/job-workers.md)
 
 ### Workflow
 
@@ -172,15 +172,15 @@ BPMN model.
 
 - [Workflows](/product-manuals/concepts/workflows.md)
 
-### Workflow Instance
+### Workflow instance
 
 While a workflow represents a defined sequence of distinct steps representing your business logic, a workflow instance represents a currently executing or completed workflow. For a single workflow, there could be many associated _workflow instances_ in various stages of their executing lifecycle. Workflow instances are identitied by workflow instance id. Executing workflows instances are also sometimes referred to as inflight workflows.
 
 - [Workflows](/product-manuals/concepts/workflows.md)
 
-### Workflow Instance Variable
+### Workflow instance variable
 
 A workflow instance variable represents the execution state (i.e data) of a workflow instance. These variables capture business process parameters which are input and output of various stages of the workflow instance and which also influence process flow execution.
 
 - [Variables](/product-manuals/concepts/variables.md)
-- [Data Flow](/reference/bpmn-workflows/data-flow.md)
+- [Data flow](/reference/bpmn-workflows/data-flow.md)

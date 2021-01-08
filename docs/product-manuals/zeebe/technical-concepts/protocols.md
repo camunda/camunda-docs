@@ -18,10 +18,10 @@ If you’re new to gRPC, the [“What is gRPC”](https://grpc.io/docs/guides/in
 gRPC has many nice features that make it a good fit for Zeebe:
 
 - supports bi-directional streaming for opening a persistent connection and sending or receiving a stream of messages between client and server
-- uses the common http2 protocol by default
+- uses the common HTTP/2 protocol by default
 - uses Protocol Buffers as an interface definition and data serialization mechanism–specifically, Zeebe uses proto3, which supports easy client generation in ten different programming languages
 
-## Supported Clients
+## Supported clients
 
 At the moment, Zeebe officially supports two gRPC clients: one in [Java](/product-manuals/clients/java-client/index.md), and one in [Golang](/product-manuals/clients/go-client/get-started.md).
 

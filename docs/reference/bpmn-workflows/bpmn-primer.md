@@ -1,6 +1,6 @@
 ---
 id: bpmn-primer
-title: "BPMN Primer"
+title: "BPMN primer"
 ---
 
 import ReactPlayer from 'react-player'
@@ -112,7 +112,7 @@ This duality makes BPMN very powerful. The XML document contains all the necessa
 
 The following is an introduction to BPMN 2.0, its elements and their execution semantics. It tries to briefly provide an intuitive understanding of BPMN's power but does not cover the entire feature set. For more exhaustive BPMN resources, see the [reference links](#additional-resources) at the end of this section.
 
-## Modeling BPMN Diagrams
+## Modeling BPMN diagrams
 
 The best tool for modeling BPMN diagrams for Zeebe is the **Zeebe Modeler**.
 
@@ -121,9 +121,9 @@ The best tool for modeling BPMN diagrams for Zeebe is the **Zeebe Modeler**.
 - [Download page](https://github.com/zeebe-io/zeebe-modeler/releases)
 - [Source code repository](https://github.com/zeebe-io/zeebe-modeler)
 
-## BPMN Elements
+## BPMN elements
 
-### Sequence Flow: Controlling the Flow of Execution
+### Sequence flow: Controlling the flow of execution
 
 A core concept of BPMN is a _sequence flow_ that defines the order in which steps in the workflow happen. In BPMN's visual representation, a sequence flow is an arrow connecting two elements. The direction of the arrow indicates their order of execution.
 
@@ -143,7 +143,7 @@ url={[
 />
 </center>
 
-### Tasks: Units of Work
+### Tasks: Units of work
 
 The basic elements of BPMN workflows are _tasks_, atomic units of work that are composed to create a meaningful result. Whenever a token reaches a task, the token stops and Zeebe creates a job and notifies a registered worker to perform work. When that handler signals completion, then the token continues on the outgoing sequence flow.
 
@@ -163,7 +163,7 @@ Choosing the granularity of a task is up to the person modeling the workflow. Fo
 
 See the [Tasks](tasks.md) section on which types of tasks are currently supported and how to use them.
 
-### Gateways: Steering Flow
+### Gateways: Steering flow
 
 Gateways are elements that route tokens in more complex patterns than plain sequence flow.
 
@@ -197,7 +197,7 @@ url={[
 
 See the [Gateways](gateways.md) section on which types of gateways are currently supported and how to use them.
 
-### Events: Waiting for Something to Happen
+### Events: Waiting for something to happen
 
 _Events_ in BPMN represent things that _happen_. A workflow can react to events (_catching_ event) as well as emit events (_throwing_ event). For example:
 
@@ -219,19 +219,19 @@ Events can be added to the workflow in various ways. Not only can they be used t
 
 See the [Events](events.md) section on which types of events are currently supported and how to use them.
 
-### Sub Processes: Grouping Elements
+### Subprocesses: Grouping Elements
 
-_Sub Processes_ are element containers that allow defining common functionality. For example, we can attach an event to a sub process's border:
+_Subprocesses_ are element containers that allow defining common functionality. For example, we can attach an event to a sub process's border:
 
 ![payload](./assets/sub-process.gif)
 
 When the event is triggered, the sub process is interrupted regardless which of its elements is currently active.
 
-See the [Sub Processes](subprocesses.md) section on which types of sub processes are currently supported and how to use them.
+See the [Subprocesses](subprocesses.md) section on which types of subprocesses are currently supported and how to use them.
 
-## Additional Resources
+## Additional resources
 
-- [BPMN Specification](http://www.bpmn.org/)
-- [BPMN Tutorial](https://camunda.com/bpmn/)
-- [Full BPMN Reference](https://camunda.com/bpmn/reference/)
-- [BPMN Book](https://www.amazon.com/dp/1086302095/)
+- [BPMN specification](http://www.bpmn.org/)
+- [BPMN tutorial](https://camunda.com/bpmn/)
+- [Full BPMN reference](https://camunda.com/bpmn/reference/)
+- [BPMN book](https://www.amazon.com/dp/1086302095/)

@@ -1,6 +1,6 @@
 ---
 id: install
-title: "Docker Container"
+title: "Docker container"
 ---
 
 This page guides you through the initial installation of the Zeebe broker and Zeebe Modeler for development purposes.
@@ -16,20 +16,20 @@ The easiest way to develop with Zeebe is using Docker. Using Docker provides you
   - Windows/MacOS (development only, not supported for production)
 - Docker
 
-### Docker Configurations for docker-compose
+### Docker configurations for docker-compose
 
 Docker configurations for starting Zeebe using `docker-compose` are available in the [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md) repository.
 
 This repository contains several pre-defined configuration options:
 
-- Single Node
-- Small Cluster with and without Gateway
-- Single Node with Operate
-- Single Node with Simple Monitor
+- Single node
+- Small cluster with and without gateway
+- Single node with Operate
+- Single node with simple monitor
 
 This allows you to start using complex configurations with a single command. Later you can tailor these configurations to your needs, when you are ready to delve to that level.
 
-Further instructions for using these configurations are in [the README.md in that repository](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md).
+Further instructions for using these configurations are in the [README](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md).
 
 ### Using Docker without docker-compose
 
@@ -41,7 +41,7 @@ docker run --name zeebe -p 26500-26502:26500-26502 camunda/zeebe:latest
 
 This will give you a a single broker node.
 
-#### Exposed Ports
+#### Exposed ports
 
 - `26500`: Gateway API
 - `26501`: Command API (gateway-to-broker)
@@ -63,9 +63,9 @@ variables to use for each configuration setting.
 
 Available environment variables:
 
-- `ZEEBE_LOG_LEVEL`: Sets the log level of the Zeebe Logger (default: `info`).
-- `ZEEBE_BROKER_NETWORK_HOST`: Sets the host address to bind to instead of the IP of the container.
-- `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`: Sets the contact points of other brokers in a cluster setup.
+- `ZEEBE_LOG_LEVEL` - sets the log level of the Zeebe Logger (default: `info`).
+- `ZEEBE_BROKER_NETWORK_HOST` - sets the host address to bind to instead of the IP of the container.
+- `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` - sets the contact points of other brokers in a cluster setup.
 
 ### Mac and Windows users
 

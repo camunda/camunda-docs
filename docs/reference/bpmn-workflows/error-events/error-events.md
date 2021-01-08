@@ -1,6 +1,6 @@
 ---
 id: error-events
-title: "Error Events"
+title: "Error events"
 ---
 
 Error events are events which reference an error. They are used to handle business errors in a workflow.
@@ -9,13 +9,13 @@ Error events are events which reference an error. They are used to handle busine
 
 An error indicates that some kind of business error has occurred which should be handled in the workflow, for example, by taking a different path to compensate the error.
 
-## Defining the Error
+## Defining the error
 
 An error can be referenced by one or more error events. It must define the `errorCode` (e.g. `Invalid Credit Card`) of the error.
 
 The `errorCode` is a `string` that must match to the error code that is sent by the client command or from the error end event.
 
-## Catching the Error
+## Catching the error
 
 An error can be caught using an error **boundary event** or an error **event subprocess**.
 
@@ -25,7 +25,7 @@ An error is caught by the first event in the scope hierarchy that matches the er
 
 In case the workflow instance is created via call activity, the error can also be caught in the calling parent workflow instance.
 
-## Throwing the Error
+## Throwing the error
 
 An error can be thrown from a **client command** while processing a job. See the [gRPC command](/reference/grpc.md#throwerror-rpc) for details.
 
@@ -33,13 +33,13 @@ Alternatively, an error can also be thrown inside a workflow using an error **en
 
 ![workflow](assets/error-throw-events.png)
 
-## Unhandled Errors
+## Unhandled errors
 
 When an error is triggered then it should be handled in the workflow. If it is not handled (e.g. unexpected error code) then an **incident** is raised to indicate the failure. The incident is attached to the corresponding service task of the processed job or the error end event.
 
 The incident can not be solved by the user because the failure is in the workflow itself that can not be changed to handle the error for this workflow instance.
 
-## Business Error vs. Technical Error
+## Business error vs. technical error
 
 While processing a job, two different types of errors can be occurred: a technical error (e.g. database connection interrupted) and a business error (e.g. invalid credit card).
 
@@ -47,7 +47,7 @@ A technical error is usually unexpected and should not be handled in the workflo
 
 A business error is expected and is handled in the workflow. The workflow may take a different path to compensate the error or undo previous actions.
 
-## Additional Resources
+## Additional resources
 
  <details>
    <summary>XML representation</summary>
@@ -75,7 +75,7 @@ A business error is expected and is handled in the workflow. The workflow may ta
  </details>
 
  <details>
-   <summary>Workflow Lifecycle</summary>
+   <summary>Workflow lifecycle</summary>
    <p>Workflow instance records of an error boundary event:
 
  <table>

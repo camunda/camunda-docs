@@ -3,7 +3,7 @@ id: start-instance
 title: Start a new process instance
 ---
 
-If a BPMN diagram was deployed via the Cloud Modeler you can start a new instance of this diagram. To do so, click the button **Start Instance**.
+If a BPMN diagram was deployed via the Cloud Modeler you can start a new instance of this diagram. To do so, click **Start Instance**.
 
 ![start instance](img/start-process-instance-variables.png)
 

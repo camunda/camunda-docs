@@ -1,12 +1,12 @@
 ---
 id: workflow-instance-create
-title: "Create a Workflow Instance"
+title: "Create a workflow instance"
 ---
 
 ## Prerequisites
 
 1. Running Zeebe broker with endpoint `localhost:26500` (default)
-1. Run the [Deploy a Workflow example](workflow-deploy.md)
+1. Run the [deploy a workflow example](workflow-deploy.md)
 
 ## WorkflowInstanceCreator.java
 

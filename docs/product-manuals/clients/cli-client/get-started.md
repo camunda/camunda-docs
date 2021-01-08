@@ -1,19 +1,19 @@
 ---
 id: get-started
-title: "CLI Client - Get Started Guide"
-sidebar_label: "Get Started Guide"
+title: "CLI client - Getting started guide"
+sidebar_label: "Getting started guide"
 ---
 
-In this tutorial, you will learn to use the CLI client _zbctl_ to interact with Camunda Cloud.
+In this tutorial, you will learn to use the CLI client `zbctl` to interact with Camunda Cloud.
 
 ## Prerequisites
 
-- [Camunda Cloud Account](/guides/getting-started/create-camunda-cloud-account.md)
-- [Cluster](/guides/getting-started/create-cluster.md) and [Client Credentials](/guides/getting-started/setup-client-connection-credentials.md)
+- [Camunda Cloud account](/guides/getting-started/create-camunda-cloud-account.md)
+- [Cluster](/guides/getting-started/create-cluster.md) and [client credentials](/guides/getting-started/setup-client-connection-credentials.md)
 - [Modeler](/guides/getting-started/model-your-first-process.md)
 - [NPM environment](https://www.npmjs.com/)
 
-## Set Up
+## Set up
 
 ### Installation
 
@@ -23,11 +23,11 @@ An installation can be done quickly via the package manager `npm`. The correspon
 npm i -g zbctl
 ```
 
-You can also download a binary for your Operating System from the [Zeebe GitHub Releases page](https://github.com/zeebe-io/zeebe/releases).
+You can also download a binary for your Operating System from the [Zeebe GitHub releases page](https://github.com/zeebe-io/zeebe/releases).
 
-### Connection Settings
+### Connection settings
 
-To use _zbctl_ it is recommended to define environment variables for the connection settings:
+To use `zbctl` it is recommended to define environment variables for the connection settings:
 
 ```bash
 export ZEEBE_ADDRESS='[Zeebe API]'
@@ -40,7 +40,7 @@ When you create client credentials in Camunda Cloud you have the option to downl
 
 Alternatively, use the [described flags](https://www.npmjs.com/package/zbctl#usage) (`--address`, `--clientId` and `--clientSecret`). with the zbctl commands.
 
-### Test Command
+### Test command
 
 Use this command to verify that everything is set up correctly:
 
@@ -48,7 +48,7 @@ Use this command to verify that everything is set up correctly:
 zbctl status
 ```
 
-As a result you will get a similar result:
+As a result you will get a similar response:
 
 ```bash
 Cluster size: 1
@@ -62,26 +62,26 @@ Brokers:
     Partition 2 : Leader
 ```
 
-## Advanced Workflow
+## Advanced workflow
 
 Use [this workflow model](./assets/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
 
 ![processId](./assets/zeebe-modeler-advanced-process-id.png)
 
-This workflow includes a Service Task and an XOR Gateway. Select the Service Task and fill in the properties. Set the task-type to 'test-worker'.
+This workflow includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
 
 ![workflow](./assets/zeebe-modeler-advanced.png)
 
 The worker will return a JSON object as a result, which is used to decide which path to take.
 Now, we can use the JSON object to route your process by filling in the condition expression on the two sequence flows after the XOR gateway.
 
-Use the following expression for the "Pong" sequence flow:
+Use the following conditional expression for the "Pong" sequence flow:
 
 ```bash
 =return="Pong"
 ```
 
-And for the Else Sequence flow:
+And for the else sequence flow:
 
 ```bash
 =return!="Pong"
@@ -154,7 +154,7 @@ Because the worker returns
 }
 ```
 
-the workflow ends in the upper end event.
+the workflow ends in the upper end event following the Ping sequence flow.
 
 Changing the worker to
 
@@ -162,7 +162,7 @@ Changing the worker to
 zbctl create worker test-worker --handler "echo {\"return\":\"...\"}"
 ```
 
-and creating a new instance leads to a second instance in Operate, which you'll see ending in the second end event:
+and creating a new instance leads to a second instance in Operate, which you'll see ending in the second end event following the else sequence flow:
 
 ![operate-instance](assets/operate-advanced-instances-other.png)
 

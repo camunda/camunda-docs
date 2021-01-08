@@ -3,30 +3,30 @@ id: cloud-console-api-reference
 title: Console API (REST)
 ---
 
-For all requests include the access token for Cloud API into the Authorization header: `authorization:Bearer ${TOKEN}` (see [Cloud Console API Clients](./cloud-console-api-clients.md))
+For all requests include the access token for Cloud API into the Authorization header: `authorization:Bearer ${TOKEN}` (see [Cloud Console API clients](./cloud-console-api-clients.md))
 
 ## Clusters
 
-### GET all Clusters
+### Get all clusters
 
 `GET https://api.cloud.camunda.io/clusters/`
-Returns detailed Data on all clusters of the Organization
+Returns detailed data on all clusters of the organization
 
-### Get Cluster
+### Get cluster
 
 `GET https://api.cloud.camunda.io/clusters/${uuid}`
-Returns detailed Data of one cluster.
+Returns detailed data of one cluster.
 
-### Get Cluster creation parameters
+### Get cluster creation parameters
 
 `GET https://api.cloud.camunda.io/clusters/parameters`
 Returns all options available to create a cluster.
 
-### Delete Cluster
+### Delete cluster
 
 `DELETE https://api.cloud.camunda.io/clusters/${uuid}`
 
-### Create Cluster
+### Create cluster
 
 `POST https://api.cloud.camunda.io/clusters/`
 With following JSON payload:
@@ -41,24 +41,24 @@ With following JSON payload:
 }
 ```
 
-## Zeebe Clients
+## Zeebe clients
 
-### Get all Zeebe Clients
+### Get all Zeebe clients
 
 `GET https://api.cloud.camunda.io/clusters/${clusterUuid}/clients/`
-List all Zeebe Clients
+List all Zeebe clients
 
-### Get Zeebe Client Details
+### Get Zeebe client details
 
 `GET https://api.cloud.camunda.io/clusters/${clusterUuid}/clients/${clientId}`
 Returns data needed to connect to a cluster
 
-### Delete Zeebe Client
+### Delete Zeebe client
 
 `DELETE https://api.cloud.camunda.io/clusters/${clusterUuid}/clients/${clientId}`
-Delete a Zeebe Client
+Delete a Zeebe client
 
-### Create Zeebe Client
+### Create Zeebe client
 
 `POST https://api.cloud.camunda.io/clusters/${clusterUuid}/clients/`
 With following JSON payload:

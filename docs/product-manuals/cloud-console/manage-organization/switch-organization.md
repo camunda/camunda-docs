@@ -1,6 +1,6 @@
 ---
 id: switch-organization
-title: Switch Organization
+title: Switch organization
 ---
 
 If a user is assigned to more than one organization, the organization can be changed in the menu of the navigation bar.

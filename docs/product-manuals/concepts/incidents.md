@@ -17,7 +17,7 @@ Note that incidents are not created when an unexpected exception (e.g. `NullPoin
 
 In order to resolve an incident, the user must identify and resolve the problem first. Then, the user marks the incident as resolved and thereby triggers to retry workflow execution. If the problem still exists then a new incident is created.
 
-### Resolving a Job-related Incident
+### Resolving a job-related incident
 
 If a job is failed and it has no more retries left then an incident is created. There can be different reasons why the job is failed, for example, the variables are not in the expected format, or a service is not available (e.g. a database).
 
@@ -43,7 +43,7 @@ client.newResolveIncidentCommand(incident.getKey())
 
 When the incident is resolved then the job can be activated by a worker again.
 
-### Resolving a Workflow Instance-related Incident
+### Resolving a workflow instance-related incident
 
 If an incident is created while workflow execution and it is not related to a job, then it is usually related to the variables of the workflow instance. For example, an input or output variable mapping can't be applied.
 

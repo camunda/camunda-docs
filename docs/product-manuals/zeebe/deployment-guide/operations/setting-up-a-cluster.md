@@ -1,11 +1,11 @@
 ---
 id: setting-up-a-cluster
-title: "Setting up a Zeebe Cluster"
+title: "Setting up a Zeebe cluster"
 ---
 
 To set up a cluster you need to adjust the `cluster` section
 in the Zeebe configuration file. Below is a snippet
-of the default Zeebe configuration file, it should be self-explanatory.
+of the default Zeebe configuration file:
 
 ```yaml
 ---
@@ -61,7 +61,7 @@ In this example, we will set up a Zeebe cluster with
 five brokers. Each broker needs to get a unique node id.
 To scale well, we will bootstrap five partitions
 with a replication factor of three. For more information about this,
-please take a look into the [Clustering](/product-manuals/zeebe/technical-concepts/clustering.md) section.
+please take a look into the [clustering](/product-manuals/zeebe/technical-concepts/clustering.md) section.
 
 The clustering setup will look like this:
 
@@ -120,7 +120,7 @@ it is currently required that all nodes be specified as initial contact points. 
 for a broker to list itself as initial contact point, but it is safe to do so, and probably simpler
 to maintain.
 
-## Partitions Bootstrapping
+## Partitions bootstrapping
 
 On bootstrap, each node will create a partition matrix.
 
@@ -200,7 +200,7 @@ each node knows exactly, which partitions it has
 to bootstrap and for which it will become the leader at first (this
 could change later, if the node needs to step down for example).
 
-## Keep Alive Intervals
+## Keep alive intervals
 
 It's possible to specify how often Zeebe clients should send keep alive pings. By default, the official Zeebe clients (Java and Go) send keep alive pings every 45 seconds. This interval can be configured through the clients' APIs and through the `ZEEBE_KEEP_ALIVE` environment variable. When configuring the clients with the environment variable, the time interval must be expressed a positive amount of milliseconds (e.g., 45000).
 

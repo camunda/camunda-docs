@@ -163,7 +163,7 @@ x.y = null;
 //           "y" is null, or "x" has no property "y"
 ```
 
-### Disjunction and Conjunction
+### Disjunction and conjunction
 
 Combine two boolean values.
 
@@ -195,13 +195,13 @@ false or null
 // null
 ```
 
-### If Expression
+### If expression
 
 ```js
 if (x < 5) then "low" else "high"
 ```
 
-### For Expressions
+### For expressions
 
 Iterate over a list and apply an expression (i.e. aka `map`). The result is again a list.
 
@@ -234,7 +234,7 @@ for x in 1..5 return x + sum(partial)
 // [1,3,7,15,31]
 ```
 
-### Some/Every Expression
+### Some/every expression
 
 Test if at least one element of the list satisfies the expression.
 
@@ -262,7 +262,7 @@ every x in [1,2], y in [2,3] satisfies x < y
 // false
 ```
 
-### Filter Expression
+### Filter expression
 
 Filter a list of elements by an expression. The expression can access the current element by `item`. The result is a list again.
 
@@ -314,9 +314,9 @@ The nested values of a specific key can be extracted by `.key`.
 // ["foo", "bar"]
 ```
 
-### Evaluate a Unary Tests
+### Evaluate a unary tests
 
-Evaluates a [unary-tests expression](feel-unary-tests) with the given value.
+Evaluates a [unary tests expression](feel-unary-tests) with the given value.
 
 ```js
 x in (2..4)
@@ -324,7 +324,7 @@ x in (2..4)
 x in < 3
 ```
 
-### Instance-Of Expression
+### Instance-Of expression
 
 Checks the type of the value.
 
@@ -354,7 +354,7 @@ A function (body) can be defined using `function(arguments) expression`. For exa
 }
 ```
 
-### Special Properties
+### Special properties
 
 Values of type date, time, date-time and duration have special properties to access their individual parts.
 

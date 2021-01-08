@@ -1,6 +1,6 @@
 ---
 id: testing
-title: "Writing Tests"
+title: "Writing tests"
 ---
 You can use the `zeebe-test` module to write JUnit tests for your job worker and BPMN workflow. It provides a JUnit rule to bootstrap the broker and some basic assertions.
 
@@ -16,7 +16,7 @@ Add `zeebe-test` as Maven test dependency to your project:
 </dependency>
 ```
 
-## Bootstrap the Broker
+## Bootstrap the broker
 
 Use the `ZeebeTestRule` in your test case to start an embedded broker. It contains a client which can be used to deploy a BPMN workflow or create an instance.
 

@@ -1,9 +1,9 @@
 ---
 id: feel-built-in-functions-string
-title: String Functions
+title: String functions
 ---
 
-## substring()
+## `substring()`
 
 * parameters:
   * `string`: string
@@ -19,7 +19,7 @@ substring("foobar",3,3)
 // "oba"
 ```
 
-## string length()
+## `string length()`
 
 * parameters:
   * `string`: string
@@ -30,7 +30,7 @@ string length("foo")
 // 3
 ```
 
-## upper case()
+## `upper case()`
 
 * parameters:
   * `string`: string
@@ -41,7 +41,7 @@ upper case("aBc4")
 // "ABC4"
 ```
 
-## lower case()
+## `lower case()`
 
 * parameters:
   * `string`: string
@@ -52,7 +52,7 @@ lower case("aBc4")
 // "abc4"
 ```
 
-## substring before()
+## `substring before()`
 
 * parameters:
   * `string`: string
@@ -64,7 +64,7 @@ substring before("foobar", "bar")
 // "foo"
 ```
 
-## substring after()
+## `substring after()`
 
 * parameters:
   * `string`: string
@@ -76,7 +76,7 @@ substring after("foobar", "ob")
 // "ar"
 ```
 
-## contains()
+## `contains()`
 
 * parameters:
   * `string`: string
@@ -88,7 +88,7 @@ contains("foobar", "of")
 // false
 ```
 
-## starts with()
+## `starts with()`
 
 * parameters:
   * `input`: string
@@ -100,7 +100,7 @@ starts with("foobar", "fo")
 // true
 ```
 
-## ends with()
+## `ends with()`
 
 * parameters:
   * `input`: string
@@ -112,7 +112,7 @@ ends with("foobar", "r")
 // true
 ```
 
-## matches()
+## `matches()`
 
 * parameters:
   * `input`: string
@@ -124,7 +124,7 @@ matches("foobar", "^fo*bar")
 // true
 ```
 
-## replace()
+## `replace()`
 
 * parameters:
   * `input`: string
@@ -141,7 +141,7 @@ replace("0123456789", "(\d{3})(\d{3})(\d{4})", "($1) $2-$3")
 // "(012) 345-6789"
 ```
 
-## split()
+## `split()`
 
 * parameters:
   * `string`: string

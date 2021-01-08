@@ -1,6 +1,6 @@
 ---
 id: deploy-a-workflow
-title: "Deploy a Workflow"
+title: "Deploy a workflow"
 ---
 
 _In this section, we're going to start up the Zeebe broker as well as Camunda Operate, a tool that gives you visibility into deployed workflows and running workflow instances and contains tooling for fixing problems in those workflow instances._
@@ -13,13 +13,13 @@ The answer is that Zeebe itself doesn't store historic data related to your work
 
 Elasticsearch is also what Camunda Operate uses to store data, so to run Operate, you need to enable the Elasticsearch exporter in Zeebe and run an instance of Elasticsearch. In this section and the next section of the tutorial, we'll use Operate to visualize what's going on in Zeebe with each step we take.
 
-## Docker Compose
+## Docker compose
 
-If you are using Docker and [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) then follow the instructions in the README file in the `operate` directory of that repository to start Zeebe and Operate. Once you have done that, skip the following section, and continue from [Check the status of the broker](#check-the-status-of-the-broker).
+If you are using Docker and [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) then follow the instructions in the README file in the `operate` directory of that repository to start Zeebe and Operate. Once you have done that, skip the following section, and continue from [check the status of the broker](#check-the-status-of-the-broker).
 
 If you are using individual components, then you will need to manually configure and start components.
 
-## Manually Configure and Start Zeebe and Operate
+## Manually configure and start Zeebe and Operate
 
 _These instructions are for using separate components, and are not necessary when using Docker._
 
@@ -82,7 +82,7 @@ To confirm that Operate was started, go to [http://localhost:8080](http://localh
 
 You can leave this tab open as we'll be returning to it shortly.
 
-## Check the Status of the Broker
+## Check the status of the broker
 
 You can use the Zeebe CLI to check the status of your broker. Open a new Terminal window to run it.
 
@@ -125,7 +125,7 @@ For all Zeebe-related operations moving forward, we'll be using Zeebe's command-
 
 But for the sake of keeping this guide simple (and language agnostic), we're going to use the CLI.
 
-## Deploy the Worklfow
+## Deploy the worklfow
 
 Next, we'll deploy our workflow model via the CLI. We'll deploy the workflow model we created in the previous section.
 
@@ -166,8 +166,8 @@ You should see a response like this one:
 Now we'll take a look at the Operate user interface:
 
 - Go to [http://localhost:8080](http://localhost:8080) and use the credentials `demo` / `demo` to access Operate
-- Click on the "Running Instances" option in the navigation bar at the top of the interface
-- Select the order-process workflow from the "Workflows" selector on the left side of the screen
+- Click on the `Running Instances` option in the navigation bar at the top of the interface
+- Select the `order-process` workflow from the **Workflows** selector on the left side of the screen
 
 You should see the workflow model we just deployed – the same model we built in the previous section. You won't see any workflow instances because we haven't created them yet, and that's exactly what we'll do in the next section.
 

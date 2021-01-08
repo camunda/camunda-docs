@@ -1,13 +1,13 @@
 ---
 id: cluster-topology-request
-title: "Request Cluster Topology"
+title: "Request cluster topology"
 ---
 
-Shows which broker is leader and follower for which partition. Particularly useful when you run a cluster with multiple Zeebe brokers.
+This example shows which broker is leader and follower for which partition. Particularly useful when you run a cluster with multiple Zeebe brokers.
 
-## Related Resources
+## Related resources
 
-- [Clustering Basics](/product-manuals/zeebe/technical-concepts/clustering.md)
+- [Clustering casics](/product-manuals/zeebe/technical-concepts/clustering.md)
 
 ## Prerequisites
 

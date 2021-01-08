@@ -34,7 +34,7 @@ Once data is not needed by Zeebe itself anymore, it will query its exporters to
 know if it can be safely deleted, and if so, will permanently erase it, thereby
 reducing disk usage.
 
-> **Note:**, if no exporters are configured at all, then Zeebe will automatically
+> **Note:** if no exporters are configured at all, then Zeebe will automatically
 > erase data when it is not necessary anymore. If you need historical data,
 > then you **need** to configure an exporter to stream records into your external
 > data warehouse.

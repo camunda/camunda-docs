@@ -1,6 +1,6 @@
 ---
 id: exclusive-gateways
-title: "Exclusive Gateway"
+title: "Exclusive gateway"
 ---
 
 An exclusive gateway (aka XOR-gateway) allows to make a decision based on data (i.e. on workflow instance variables).
@@ -33,7 +33,7 @@ For example:
 = valid and orderCount > 0
 ```
 
-## Additional Resources
+## Additional resources
 
 <details>
   <summary>XML representation</summary>
@@ -66,7 +66,7 @@ For example:
 </details>
 
 <details>
-  <summary>Workflow Lifecycle</summary>
+  <summary>Workflow lifecycle</summary>
   <p>Workflow instance records of an exclusive gateway:
 
 <table>

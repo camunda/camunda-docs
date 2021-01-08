@@ -1,6 +1,6 @@
 ---
 id: disk-space
-title: "Disk Space"
+title: "Disk space"
 ---
 
 Zeebe uses the local disk for storage of it's persistent data. Therefore if the Zeebe broker runs out of disk space the system is in an invalid state, as the broker cannot

@@ -12,7 +12,7 @@ This section describes how to upgrade Zeebe to a new version.
 Currently, we are facing an [issue](https://github.com/zeebe-io/zeebe/issues/5581) that can corrupt the data when upgrading to a new version. The issue affects the reprocessing (i.e. rehydrating the data from the records on the log stream) and can be omitted by restoring the data from a snapshot. Please follow the recommended procedure to minimize the risk of losing data. **This issue affects only users upgrading from a version lower than 0.24.4 to 0.24.4 or newer.**
 :::
 
-## Rolling Upgrade
+## Rolling upgrade
 
 Zeebe is designed to allow a rolling upgrade of a cluster. The brokers can be upgrade one after the other. The other brokers in the cluster continue processing until the whole upgrade is done.
 
@@ -28,7 +28,7 @@ If you are using the Helm charts, simply update your values file and change the 
 If you are upgrading from a Zeebe version lower than 0.24.4, it is not recommended to perform a rolling upgrade. Please follow the recommended upgrade procedure instead.
 :::
 
-## Upgrade Procedure for Zeebe < 0.24.4
+## Upgrade procedure for Zeebe < 0.24.4
 
 The following procedure describes how to upgrade a Zeebe broker pre 0.24.4. If the cluster contains multiple brokers then these steps can be done for all brokers in parallel. Standalone gateways should be upgraded after all brokers in the cluster are upgraded to avoid mismatches in the protocol version.
 
@@ -36,7 +36,7 @@ The following procedure describes how to upgrade a Zeebe broker pre 0.24.4. If t
 This procedure results in a downtime of the whole cluster.
 :::
 
-### Experimental: Detect Reprocessing Inconsistency
+### Experimental: Detect reprocessing inconsistency
 
 With Zeebe 0.24.5 and 0.25.1 a new exterimental feature was introduced which detects inconsistency of the logstream on upgrade to mitigate the following issue.
 
@@ -46,7 +46,7 @@ We recommend to enable it after upgrading Zeebe from a version lower than 0.24.4
 
 After you verified that the upgrade was successful, we recommend to disable it again by removing the environment variable and restarting your brokers.
 
-### Preparing the Upgrade
+### Preparing the upgrade
 
 1. Stop the workflow processing
     * Close all job workers
@@ -57,7 +57,7 @@ After you verified that the upgrade was successful, we recommend to disable it a
     * Note that no snapshot is created if no processing happened since the last snapshot
 1. Make a backup of the `data` folder
 
-### Performing the Upgrade
+### Performing the upgrade
 
 <Tabs groupId="in-zeebe-version" defaultValue="inconsistency-detection-enabled" values={[ 
 { label: 'With inconsistency detection', value: 'inconsistency-detection-enabled', }, 
@@ -84,7 +84,7 @@ After you verified that the upgrade was successful, we recommend to disable it a
 </TabItem>
 </Tabs>
 
-### Verifying the Upgrade
+### Verifying the upgrade
 
 The upgrade is successful if the following conditions are met:
 
@@ -120,7 +120,7 @@ io.zeebe.engine.processor.InconsistentReprocessingException: Reprocessing issue 
 
 In this case, the broker should be rolled back to the previous version and the backup should be restored. Ensure that the upgrade was prepared correctly. If it is still unclear why it was not successful then please contact the Zeebe team and ask for guidance.
 
-## Partitions Admin Endpoint
+## Partitions admin endpoint
 
 This endpoint allows querying the status of the partitions and performing operations to prepare an upgrade.
 
@@ -150,7 +150,7 @@ management.endpoint.partitions.enabled=false
 </TabItem>
 </Tabs>
 
-### Query the Partition Status
+### Query the partition status
 
 The status of the partitions can be queried by a `GET` request:
 ```

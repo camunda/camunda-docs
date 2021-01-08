@@ -1,18 +1,18 @@
 ---
 id: community-contributions
-title: "Community Contributions"
+title: "Community contributions"
 ---
 
-Zeebe is available as Open Source software on [GitHub](https://github.com/zeebe-io/zeebe).
+Zeebe is available as Open Source Software on [GitHub](https://github.com/zeebe-io/zeebe).
 
 Zeebe welcomes extensions and contributions from the community!
 
 We use [Awesome Zeebe](https://awesome.zeebe.io/) as a place to keep track of Zeebe ecosystem contributions, such as...
 
-- Clients
-- Workers
-- Exporters
-- Applications
+- clients
+- workers
+- exporters
+- applications
 
 ...along with other integrations such as Spring-Zeebe and the Apache Kafka connector.
 
@@ -22,7 +22,7 @@ If you're interested in contributing to the main Zeebe repository (vs. creating 
 
 **Next Steps**
 
-- [Get Help & Get Involved](get-help-get-involved.md)
-- Check out [community extensions.](https://awesome.zeebe.io/)
+- [Get help & get involved](get-help-get-involved.md)
+- Check out [community extensions](https://awesome.zeebe.io/)
 - Learn more about our [release cycle](release-cycle.md)
 - Avoid suprises by staying on top of [deprecated features](deprecated-features.md)

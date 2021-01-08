@@ -1,6 +1,6 @@
 ---
 id: call-activities
-title: "Call Activities"
+title: "Call activities"
 ---
 
 A call activity (aka reusable subprocess) allows to call/invoke another workflow as part of this workflow. It is similar to an [embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md) but the workflow is externalized (i.e. stored as separated BPMN) and can be invoked by different workflows.
@@ -11,7 +11,7 @@ When a call activity is entered then a new workflow instance of the referenced w
 
 When the created workflow instance is completed then the call activity is left and the outgoing sequence flow is taken.
 
-## Defining the Called Workflow
+## Defining the called workflow
 
 A call activity must define the BPMN process id of the called workflow as `processId`.
 
@@ -19,7 +19,7 @@ The new instance of the defined workflow will be created of its **latest version
 
 Usually, the `processId` is defined as a static value (e.g. `shipping-process`) but it can also be defined as [expression](/product-manuals/concepts/expressions.md) (e.g. `= "shipping-" + tenantId`). The expression is evaluated on activating the call activity and must result in a `string`.
 
-## Boundary Events
+## Boundary events
 
 ![call-activity-boundary-event](assets/call-activities-boundary-events.png)
 
@@ -29,7 +29,7 @@ When an interrupting boundary event is triggered then the call activity **and** 
 
 When an non-interrupting boundary event is triggered then the created workflow instance is not affected. The activities at the outgoing path have no access to the variables of the created workflow instance since they are bounded to the other workflow instance.
 
-## Variable Mappings
+## Variable mappings
 
 When the call activity is activated then **all variables** of the call activity scope are copied to the created workflow instance.
 
@@ -39,7 +39,7 @@ If the attribute `propagateAllChildVariables` is set (default: `true`) then all 
 
 It is recommended to disable the attribute `propagateAllChildVariables` or define output mappings if the call activity is in a parallel flow (e.g. when it is marked as [parallel multi-instance](../multi-instance/multi-instance.md#variable-mappings)). Otherwise, it can happen that variables are overridden accidentally when they are changed in the parallel flow.
 
-## Additional Resources
+## Additional resources
 
 <details>
   <summary>XML representation</summary>
@@ -66,7 +66,7 @@ It is recommended to disable the attribute `propagateAllChildVariables` or defin
 </details>
 
 <details>
-  <summary>Workflow Lifecycle</summary>
+  <summary>Workflow lifecycle</summary>
   <p>Workflow instance records of a call activity:
 
 <table>
@@ -125,5 +125,5 @@ The workflow instance records of the created workflow instance have a reference 
 References:
 
 - [Expressions](/product-manuals/concepts/expressions.md)
-- [Variable Scopes](/product-manuals/concepts/variables.md#variable-scopes)
-- [Variable Mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)
+- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)

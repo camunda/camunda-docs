@@ -1,6 +1,6 @@
 ---
 id: job-workers
-title: "Job Workers"
+title: "Job workers"
 ---
 
 A job worker is a service capable of performing a particular task in a workflow.
@@ -10,11 +10,11 @@ Each time such a task needs to be performed, this is represented by a job.
 A job has the following properties:
 
 - **Type**: Describes the work item and is defined in each task in the workflow. The type is referenced by workers to request the jobs they are able to perform.
-- **Custom Headers**: Additional static metadata that is defined in the workflow. Custom headers are used to configure reusable job workers (e.g. a _notify Slack_ worker might read out the Slack channel from its header).
+- **Custom headers**: Additional static metadata that is defined in the workflow. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header).
 - **Key**: Unique key to identify a job. The key is used to hand in the results of a job execution, or to report failures during job execution.
 - **Variables**: The contextual/business data of the workflow instance that is required by the worker to do its work.
 
-## Requesting Jobs
+## Requesting jobs
 
 Job workers request jobs of a certain type on a regular interval (i.e. polling). This interval and the number of jobs requested are configurable in the Zeebe client.
 
@@ -49,7 +49,7 @@ This is expensive in terms of resource usage, because both the worker and the se
 With _long polling_ a request will be kept open while no jobs are available.
 The request is completed when at least one job becomes available.
 
-### Job Queueing
+### Job queueing
 
 Zeebe decouples creation of jobs from performing the work on them. It is always possible to create jobs at the highest possible rate, regardless of whether or not there is a job worker available to work on them. This is possible because Zeebe queues jobs until workers request them.
 
@@ -57,7 +57,7 @@ This increases the resilience of the overall system. Camunda Cloud is highly ava
 
 It also insulates job workers against sudden bursts in traffic. Because workers request jobs, they have full control over the rate at which they take on new jobs.
 
-## Completing or Failing Jobs
+## Completing or failing jobs
 
 After working on an activated job, a job worker informs Camunda Cloud that the job has either _completed_ or _failed_.
 

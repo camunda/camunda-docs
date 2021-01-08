@@ -1,6 +1,6 @@
 ---
 id: event-subprocesses
-title: "Event Subprocess"
+title: "Event subprocess"
 ---
 
 An event subprocess is a subprocess that is triggered by an event. It can be added globally to the process or locally inside an embedded subprocess.
@@ -29,7 +29,7 @@ Input mappings can be used to create new local variables in the scope of the eve
 
 By default, the local variables of the event subprocess are not propagated (i.e. they are removed with the scope). This behavior can be customized by defining output mappings at the event subprocess. The output mappings are applied on completing the event subprocess.
 
-## Additional Resources
+## Additional resources
 
 <details>
   <summary>XML representation</summary>
@@ -58,7 +58,7 @@ By default, the local variables of the event subprocess are not propagated (i.e.
 </details>
 
 <details>
-  <summary>Workflow Lifecycle</summary>
+  <summary>Workflow lifecycle</summary>
   <p>Workflow instance records of an event subprocess with an interrupting timer start event:
 
 <table>
@@ -139,5 +139,5 @@ By default, the local variables of the event subprocess are not propagated (i.e.
 
 References:
 
-- [Embedded Subprocess](../embedded-subprocesses/embedded-subprocesses.md)
-- [Variable Scopes](/product-manuals/concepts/variables.md#variable-scopes)
+- [Embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md)
+- [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)

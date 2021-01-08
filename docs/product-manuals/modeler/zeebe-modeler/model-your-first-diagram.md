@@ -1,9 +1,9 @@
 ---
 id: model-your-first-diagram
-title: Model your first Diagram
+title: Model your first diagram
 ---
 
-After [downloading](./install-the-modeler.md), setting up and starting the Zeebe Modeler you can model your first BPMN diagram. Create a new BPMN diagram.
+After [downloading](./install-the-modeler.md), setting up, and starting the Zeebe Modeler, you can model your first BPMN diagram. Create a new BPMN diagram.
 
 ![empty application](./img/empty.png)
 
@@ -23,4 +23,4 @@ Each element has certain attributes that can be changed. The properties panel is
 
 ![properties panel](img/properties-panel.png)
 
-Once you have finished modeling and configuring your diagram, you can save it as BPMN or deploy it on a [Camunda Cloud Cluster](./connect-to-camunda-cloud.md) (of course you can also export the diagram as an image).
+Once you have finished modeling and configuring your diagram, you can save it as BPMN or deploy it on a [Camunda Cloud cluster](./connect-to-camunda-cloud.md) (of course you can also export the diagram as an image).

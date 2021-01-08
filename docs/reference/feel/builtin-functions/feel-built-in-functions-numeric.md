@@ -1,9 +1,9 @@
 ---
 id: feel-built-in-functions-numeric
-title: Numeric Functions
+title: Numeric functions
 ---
 
-## decimal()
+## `decimal()`
 
 Round the given number at the given scale using the given rounding mode. If no rounding mode is passed in then it uses `HALF_EVEN` as default. 
 
@@ -24,7 +24,7 @@ decimal(2.5, 0, "half_up")
 // 3
 ```
 
-## floor()
+## `floor()`
 
 * parameters:
   * `n`: number
@@ -38,7 +38,7 @@ floor(-1.5)
 // -2
 ```
 
-## ceiling()
+## `ceiling()`
 
 * parameters:
   * `n`: number
@@ -52,7 +52,7 @@ floor(-1.5)
 // -1
 ```
 
-## abs()
+## `abs()`
 
 * parameters:
   * `number`: number
@@ -66,7 +66,7 @@ abs(-10)
 // 10
 ```
 
-## modulo()
+## `modulo()`
 
 Returns the remainder of the division of dividend by divisor.
 
@@ -80,7 +80,7 @@ modulo(12, 5)
 // 2
 ```
 
-## sqrt()
+## `sqrt()`
 
 Returns the square root.
 
@@ -93,7 +93,7 @@ sqrt(16)
 // 4
 ```
 
-## log()
+## `log()`
 
 Returns the natural logarithm (base e) of the number.
 
@@ -106,7 +106,7 @@ log(10)
 // 2.302585092994046
 ```
 
-## exp()
+## `exp()`
 
 Returns the Euler’s number e raised to the power of number .
 
@@ -119,7 +119,7 @@ exp(5)
 // 148.4131591025766
 ```
 
-## odd()
+## `odd()`
 
 * parameters:
   * `number`: number
@@ -130,7 +130,7 @@ odd(5)
 // true
 ```
 
-## even()
+## `even()`
 
 * parameters:
   * `number`: number

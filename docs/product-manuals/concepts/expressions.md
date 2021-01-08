@@ -7,19 +7,19 @@ Expressions can be used to access variables and calculate values dynamically.
 
 The following attributes of BPMN elements **require** an expression:
 
-- Sequence Flow on an Exclusive Gateway: [condition](/reference/bpmn-workflows/exclusive-gateways/exclusive-gateways.md#conditions)
-- Message Catch Event / Receive Task: [correlation key](/reference/bpmn-workflows/message-events/message-events.md#messages)
-- Multi-Instance Activity: [input collection](/reference/bpmn-workflows/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/reference/bpmn-workflows/multi-instance/multi-instance.md#collecting-the-output)
-- Input/Output Variable Mappings: [source](variables.md#inputoutput-variable-mappings)
+- Sequence flow on an exclusive gateway: [condition](/reference/bpmn-workflows/exclusive-gateways/exclusive-gateways.md#conditions)
+- Message catch event / receive task: [correlation key](/reference/bpmn-workflows/message-events/message-events.md#messages)
+- Multi-instance activity: [input collection](/reference/bpmn-workflows/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/reference/bpmn-workflows/multi-instance/multi-instance.md#collecting-the-output)
+- Input/output variable mappings: [source](variables.md#inputoutput-variable-mappings)
 
 Additionally, the following attributes of BPMN elements can define an expression **optionally** instead of a static value:
 
-- Timer Catch Event: [timer definition](/reference/bpmn-workflows/timer-events/timer-events.md#timers)
-- Message Catch Event / Receive Task: [message name](/reference/bpmn-workflows/message-events/message-events.md#messages)
-- Service Task: [job type](/reference/bpmn-workflows/service-tasks/service-tasks.md#task-definition), [job retries]..(/bpmn-workflows/service-tasks/service-tasks.md#task-definition)
-- Call Activity: [process id](/reference/bpmn-workflows/call-activities/call-activities.md#defining-the-called-workflow)
+- Timer catch event: [timer definition](/reference/bpmn-workflows/timer-events/timer-events.md#timers)
+- Message catch event / receive task: [message name](/reference/bpmn-workflows/message-events/message-events.md#messages)
+- Service task: [job type](/reference/bpmn-workflows/service-tasks/service-tasks.md#task-definition), [job retries](/reference/bpmn-workflows/service-tasks/service-tasks.md#task-definition)
+- Call activity: [process id](/reference/bpmn-workflows/call-activities/call-activities.md#defining-the-called-workflow)
 
-## Expressions vs. Static Values
+## Expressions vs. static values
 
 Some attributes of BPMN elements, like the timer definition of a timer catch event, can be defined either:
 
@@ -32,7 +32,7 @@ If the element does not start with the prefix then it is used as a static value.
 
 Note that an expression can also define a static value by using literals (e.g. `= "foo"`, `= 21`, `= true`, `= [1,2,3]`, `= {x: 22}`, etc.).
 
-## The Expression Language
+## The expression language
 
 An expression is written in **FEEL** (Friendly Enough Expression Language). FEEL is part of the OMG's DMN (Decision Model and Notation) specification. It is designed to have the following properties:
 
@@ -41,9 +41,9 @@ An expression is written in **FEEL** (Friendly Enough Expression Language). FEEL
 - Simple syntax designed for business professionals and developers
 - Three-valued logic (true, false, null)
 
-Camunda Cloud integrates the [Feel-Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL Expressions](/reference/feel/what-is-feel.md).
+Camunda Cloud integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL Expressions](/reference/feel/what-is-feel.md).
 
-### Access Variables
+### Access variables
 
 A variable can be accessed by its name.
 
@@ -68,7 +68,7 @@ order.customer.name
 // "Paul"
 ```
 
-### Boolean Expressions
+### Boolean expressions
 
 Values can be compared using the following operators:
 

@@ -10,10 +10,10 @@ Zeebe exposes metrics over an embedded HTTP server.
 
 ## Types of metrics
 
-- **Counters**: a time series that records a growing count of some unit. Examples: number of bytes transmitted over the network, number of workflow instances started, ...
-- **Gauges**: a time series that records the current size of some unit. Examples: number of currently open client connections, current number of partitions, ...
+- **Counters**: a time series that records a growing count of some unit. Examples: number of bytes transmitted over the network, number of workflow instances started
+- **Gauges**: a time series that records the current size of some unit. Examples: number of currently open client connections, current number of partitions
 
-## Metrics Format
+## Metrics format
 
 Zeebe exposes metrics directly in Prometheus text format.
 The details of the format can be read in the [Prometheus documentation][prom-format].
@@ -28,7 +28,7 @@ zeebe_stream_processor_events_total{action="processed",partition="1",} 20320.0
 zeebe_stream_processor_events_total{action="skipped",partition="1",} 2153.0
 ```
 
-## Configuring Metrics
+## Configuring metrics
 
 The HTTP server to export the metrics can be configured in the [configuration file](../configuration/configuration.md).
 
@@ -48,7 +48,7 @@ Add the following entry to your `prometheus.yml`:
     - localhost: 9600
 ```
 
-## Available Metrics
+## Available metrics
 
 All Zeebe related metrics have a `zeebe_`-prefix.
 

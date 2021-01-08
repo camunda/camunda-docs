@@ -18,13 +18,13 @@ Camunda Cloud provides several offical clients based on this API. Official clien
 
 Community clients supplement the official clients. These clients have not been tested by Camunda.
 
-## Official Clients
+## Official clients
 
 - [Java](java-client/index.md)
 - [Go](go-client/get-started.md)
 - [CLI](cli-client/index.md)
 
-## Community Clients
+## Community clients
 
 - [C#](other-clients/c-sharp.md)
 - [JavaScript/NodeJS](other-clients/javascript.md)
@@ -32,11 +32,11 @@ Community clients supplement the official clients. These clients have not been t
 - [Ruby](other-clients/ruby.md)
 - [Rust](other-clients/rust.md)
 
-Finally, it is possible to [Build Your Own Client](build-your-own-client.md) in case none of the other options are suitable.
+Finally, it is possible to [build your own client](build-your-own-client.md) in case none of the other options are suitable.
 
-## Interacting with Other Components
+## Interacting with other components
 
-The clients mentioned above interact with Zeebe, which is the workflow engine integrated into Camunda Cloud.
+The clients mentioned above interact with Zeebe, the workflow engine integrated into Camunda Cloud.
 
 Other components in Camunda Cloud provide language-agnostic APIs, but no clients, to interact with them:
 

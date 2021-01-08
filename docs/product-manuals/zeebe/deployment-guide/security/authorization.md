@@ -5,11 +5,11 @@ title: "Authorization"
 
 Zeebe clients also provide a way for users to modify gRPC call headers, namely to contain access tokens. Note that the gateway doesn't provide any way of validating these headers, so users must implement a reverse proxy with a gRPC interceptor to validate them.
 
-Users can modify gRPC headers using Zeebe's built-in OAuthCredentialsProvider, which uses user-specified credentials to contact a OAuth authorization server. The authorization server should return an access token that is then appended to each gRPC request. Although, by default OAuthCredentialsProvider is configured with to use a Camunda Cloud authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/zeebe-io/zeebe/blob/develop/clients/java/src/main/java/io/zeebe/client/CredentialsProvider.java). In the following sections we will describe the CredentialsProvider interface as well as the built-in implementation.
+Users can modify gRPC headers using Zeebe's built-in `OAuthCredentialsProvider`, which uses user-specified credentials to contact a OAuth authorization server. The authorization server should return an access token that is then appended to each gRPC request. Although, by default `OAuthCredentialsProvider` is configured with to use a Camunda Cloud authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/zeebe-io/zeebe/blob/develop/clients/java/src/main/java/io/zeebe/client/CredentialsProvider.java). In the following sections we will describe the `CredentialsProvider` interface as well as the built-in implementation.
 
-## Credentials Provider
+## Credentials provider
 
-As previously mentioned, the CredentialProvider's purpose is to modify the gRPC headers with an authorization method such that a reverse proxy sitting in front of the gateway can validate them. The interface consists of an `applyCredentials` method and a `shouldRetryRequest` method. The first method is called for each gRPC call and takes a map of headers to which it should add credentials. The second method is called whenever a gRPC call fails and takes in the error that caused the failure which is then used to decide whether or not the request should be retried. The following sections implement simple custom provider in Java and Go.
+As previously mentioned, the `CredentialProvider`'s purpose is to modify the gRPC headers with an authorization method such that a reverse proxy sitting in front of the gateway can validate them. The interface consists of an `applyCredentials` method and a `shouldRetryRequest` method. The first method is called for each gRPC call and takes a map of headers to which it should add credentials. The second method is called whenever a gRPC call fails and takes in the error that caused the failure which is then used to decide whether or not the request should be retried. The following sections implement simple custom provider in Java and Go.
 
 ### Java
 
@@ -34,7 +34,7 @@ public class MyCredentialsProvider implements CredentialsProvider {
 }
 ```
 
-After implementing the CredentialsProvider, we can simply provide it when building a client:
+After implementing the `CredentialsProvider`, we can simply provide it when building a client:
 
 ```java
 public class SecureClient {
@@ -93,11 +93,11 @@ func main() {
 
 ## OAuthCredentialsProvider
 
-The OAuthCredentialsProvider requires the specification of a client ID and a client secret. These are then used to request an access token from an OAuth 2.0 authorization server through a [client credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4). By default, the authorization server is the one used by Camunda Cloud but any other can be used. Using the access token returned by the authorization server, the OAuthCredentialsProvider will add it to the gRPC headers of each request as a bearer token. Requests which fail with an `UNAUTHENTICATED` gRPC code are seamlessly retried if and only if a new access token can be obtained.
+The `OAuthCredentialsProvider` requires the specification of a client ID and a client secret. These are then used to request an access token from an OAuth 2.0 authorization server through a [client credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4). By default, the authorization server is the one used by Camunda Cloud but any other can be used. Using the access token returned by the authorization server, the `OAuthCredentialsProvider` will add it to the gRPC headers of each request as a bearer token. Requests which fail with an `UNAUTHENTICATED` gRPC code are seamlessly retried if and only if a new access token can be obtained.
 
 ### Java
 
-To use the Zeebe client with Camunda Cloud, first an OAuthCredentialsProvider has to be created and configured with the appropriate client credentials. The `audience` should be equivalent to the cluster endpoint without a port number.
+To use the Zeebe client with Camunda Cloud, first an `OAuthCredentialsProvider` has to be created and configured with the appropriate client credentials. The `audience` should be equivalent to the cluster endpoint without a port number.
 
 ``` java
 public class AuthorizedClient {
@@ -135,7 +135,7 @@ public class AuthorizedClient {
 }
 ```
 
-The client will create an OAuthCredentialProvider with the credentials specified through the environment variables and the audience will be extracted from the address specified through the ZeebeClientBuilder.
+The client will create an `OAuthCredentialProvider` with the credentials specified through the environment variables and the audience will be extracted from the address specified through the `ZeebeClientBuilder`.
 
 > **Note:** Zeebe's Java client will not prevent you from adding credentials to gRPC calls while using an insecure connection but you should be aware that doing so will expose your access token by transmiting it in plaintext.
 
@@ -210,9 +210,9 @@ func main() {
 > **Note:** Like the Java client, the Go client will not prevent you from adding credentials to gRPC calls while using an insecure connection but doing so will expose your access token.
 
 
-### Environment Variables
+### Environment variables
 
-Since there are several environment variables that can be used to configure an OAuthCredentialsProvider, we list them here along with their uses:
+Since there are several environment variables that can be used to configure an `OAuthCredentialsProvider`, we list them here along with their uses:
 
 * `ZEEBE_CLIENT_ID` - the client ID used to request an access token from the authorization server
 * `ZEEBE_CLIENT_SECRET` - the client secret used to request an access token from the authorization server

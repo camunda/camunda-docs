@@ -1,17 +1,17 @@
 ---
 id: job-worker-open
-title: "Open a Job Worker"
+title: "Open a job worker"
 ---
 
 ## Related Resources
 
-- [Job Worker Basics](/product-manuals/concepts/job-workers.md)
+- [Job worker basics](/product-manuals/concepts/job-workers.md)
 
 ## Prerequisites
 
 1. Running Zeebe broker with endpoint `localhost:26500` (default)
-1. Run the [Deploy a Workflow example](workflow-deploy.md)
-1. Run the [Create a Workflow Instance example](workflow-instance-create.md) a couple of times
+1. Run the [deploy a workflow example](workflow-deploy.md)
+1. Run the [create a workflow instance example](workflow-instance-create.md) a couple of times
 
 ## JobWorkerCreator.java
 

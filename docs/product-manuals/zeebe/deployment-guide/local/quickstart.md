@@ -3,8 +3,8 @@ id: quickstart
 title: "Quickstart"
 ---
 
-This quick start guide introduces you the main concepts of Zeebe without
-the need to write a single line of code.
+This quickstart guide introduces you the main concepts of Zeebe without
+the need to write a single line of code in 5 steps.
 
 ## Step 1: Download the Zeebe distribution
 

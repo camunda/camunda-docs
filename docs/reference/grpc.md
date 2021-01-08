@@ -9,12 +9,12 @@ title: "Zeebe API (gRPC)"
 
 The Zeebe Client gRPC API is exposed through a single gateway service.
 
-### ActivateJobs RPC
+### `ActivateJobs` RPC
 
 Iterates through all known partitions round-robin and activates up to the requested
 maximum and streams them back to the client as they are activated.
 
-#### Input: ActivateJobsRequest
+#### Input: `ActivateJobsRequest`
 
 ```protobuf
 message ActivateJobsRequest {
@@ -38,7 +38,7 @@ message ActivateJobsRequest {
 }
 ```
 
-#### Output: ActivateJobsResponse
+#### Output: `ActivateJobsResponse`
 
 ```protobuf
 message ActivateJobsResponse {
@@ -90,11 +90,11 @@ Returned if:
 - timeout less than 1 (ms)
 - amount is less than 1
 
-### CancelWorkflowInstance RPC
+### `CancelWorkflowInstance` RPC
 
 Cancels a running workflow instance
 
-#### Input: CancelWorkflowInstanceRequest
+#### Input: `CancelWorkflowInstanceRequest`
 
 ```protobuf
 message CancelWorkflowInstanceRequest {
@@ -104,7 +104,7 @@ message CancelWorkflowInstanceRequest {
 }
 ```
 
-#### Output: CancelWorkflowInstanceResponse
+#### Output: `CancelWorkflowInstanceResponse`
 
 ```protobuf
 message CancelWorkflowInstanceResponse {
@@ -120,11 +120,11 @@ Returned if:
 - no workflow instance exists with the given key. Note that since workflow instances
   are removed once their are finished, it could mean the instance did exist at some point.
 
-### CompleteJob RPC
+### `CompleteJob` RPC
 
 Completes a job with the given payload, which allows completing the associated service task.
 
-#### Input: CompleteJobRequest
+#### Input: `CompleteJobRequest`
 
 ```protobuf
 message CompleteJobRequest {
@@ -135,7 +135,7 @@ message CompleteJobRequest {
 }
 ```
 
-#### Output: CompleteJobResponse
+#### Output: `CompleteJobResponse`
 
 ```protobuf
 message CompleteJobResponse {
@@ -158,7 +158,7 @@ Returned if:
 - the job was marked as failed. In that case, the related incident must be resolved before
   the job can be activated again and completed.
 
-### CreateWorkflowInstance RPC
+### `CreateWorkflowInstance` RPC
 
 Creates and starts an instance of the specified workflow. The workflow definition to use
 to create the instance can be specified either using its unique key (as returned by
@@ -167,7 +167,7 @@ use the latest deployed version.
 
 Note that only workflows with none start events can be started through this command.
 
-#### Input: CreateWorkflowInstanceRequest
+#### Input: `CreateWorkflowInstanceRequest`
 
 ```protobuf
 message CreateWorkflowInstanceRequest {
@@ -187,7 +187,7 @@ message CreateWorkflowInstanceRequest {
 }
 ```
 
-#### Output: CreateWorkflowInstanceResponse
+#### Output: `CreateWorkflowInstanceResponse`
 
 ```protobuf
 message CreateWorkflowInstanceResponse {
@@ -204,14 +204,14 @@ message CreateWorkflowInstanceResponse {
 }
 ```
 
-### CreateWorkflowInstanceWithResult RPC
+### `CreateWorkflowInstanceWithResult` RPC
 
-Similar to `CreateWorkflowInstance RPC` , creates and starts an instance of the specified workflow.
-Unlike `CreateWorkflowInstance RPC`, the response is returned when the workflow is completed.
+Similar to `CreateWorkflowInstance` RPC , creates and starts an instance of the specified workflow.
+Unlike `CreateWorkflowInstance` RPC, the response is returned when the workflow is completed.
 
 Note that only workflows with none start events can be started through this command.
 
-#### Input: CreateWorkflowInstanceWithResultRequest
+#### Input: `CreateWorkflowInstanceWithResultRequest`
 
 ```protobuf
 message CreateWorkflowInstanceRequest {
@@ -223,7 +223,7 @@ message CreateWorkflowInstanceRequest {
 }
 ```
 
-#### Output: CreateWorkflowInstanceWithResultResponse
+#### Output: `CreateWorkflowInstanceWithResultResponse`
 
 ```protobuf
 message CreateWorkflowInstanceResponse {
@@ -266,12 +266,12 @@ Returned if:
 - the given variables argument is not a valid JSON document; it is expected to be a valid
   JSON document where the root node is an object.
 
-### DeployWorkflow RPC
+### `DeployWorkflow` RPC
 
 Deploys one or more workflows to Zeebe. Note that this is an atomic call,
 i.e. either all workflows are deployed, or none of them are.
 
-#### Input: DeployWorkflowRequest
+#### Input: `DeployWorkflowRequest`
 
 ```protobuf
 message DeployWorkflowRequest {
@@ -298,7 +298,7 @@ message WorkflowRequestObject {
 }
 ```
 
-#### Output: DeployWorkflowResponse
+#### Output: `DeployWorkflowResponse`
 
 ```protobuf
 message DeployWorkflowResponse {
@@ -334,14 +334,14 @@ Returned if:
   - the resource data is not deserializable (e.g. detected as BPMN, but it's broken XML)
   - the workflow is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
 
-### FailJob RPC
+### `FailJob` RPC
 
 Marks the job as failed; if the retries argument is positive, then the job will be immediately
 activatable again, and a worker could try again to process it. If it is zero or negative however,
 an incident will be raised, tagged with the given errorMessage, and the job will not be
 activatable until the incident is resolved.
 
-#### Input: FailJobRequest
+#### Input: `FailJobRequest`
 
 ```protobuf
 message FailJobRequest {
@@ -356,7 +356,7 @@ message FailJobRequest {
 }
 ```
 
-#### Output: FailJobResponse
+#### Output: `FailJobResponse`
 
 ```protobuf
 message FailJobResponse {
@@ -378,12 +378,12 @@ Returned if:
 - the job was not activated
 - the job is already in a failed state, i.e. ran out of retries
 
-### PublishMessage RPC
+### `PublishMessage` RPC
 
 Publishes a single message. Messages are published to specific partitions computed from their
 correlation keys.
 
-#### Input: Request
+#### Input: `PublishMessageRequest`
 
 ```protobuf
 message PublishMessageRequest {
@@ -402,7 +402,7 @@ message PublishMessageRequest {
 }
 ```
 
-#### Output: Response
+#### Output: `PublishMessageResponse`
 
 ```protobuf
 message PublishMessageResponse {
@@ -419,13 +419,13 @@ Returned if:
 
 - a message with the same ID was previously published (and is still alive)
 
-### ResolveIncident RPC
+### `ResolveIncident` RPC
 
 Resolves a given incident. This simply marks the incident as resolved; most likely a call to
 UpdateJobRetries or UpdateWorkflowInstancePayload will be necessary to actually resolve the
 problem, following by this call.
 
-#### Input: Request
+#### Input: `ResolveIncidentRequest`
 
 ```protobuf
 message ResolveIncidentRequest {
@@ -434,7 +434,7 @@ message ResolveIncidentRequest {
 }
 ```
 
-#### Output: Response
+#### Output: `ResolveIncidentResponse`
 
 ```protobuf
 message ResolveIncidentResponse {
@@ -449,11 +449,11 @@ Returned if:
 
 - no incident with the given key exists
 
-### SetVariables RPC
+### `SetVariables` RPC
 
 Updates all the variables of a particular scope (e.g. workflow instance, flow element instance) from the given JSON document.
 
-#### Input: Request
+#### Input: `SetVariablesRequest`
 
 ```protobuf
 message SetVariablesRequest {
@@ -475,7 +475,7 @@ message SetVariablesRequest {
 }
 ```
 
-#### Output: Response
+#### Output: `SetVariablesResponse`
 
 ```protobuf
 message SetVariablesResponse {
@@ -499,11 +499,11 @@ Returned if:
 - the given payload is not a valid JSON document; all payloads are expected to be
   valid JSON documents where the root node is an object.
 
-### ThrowError RPC
+### `ThrowError` RPC
 
 Throw an error to indicate that a business error is occurred while processing the job. The error is identified by an error code and is handled by an error catch event in the workflow with the same error code.
 
-#### Input: ThrowErrorRequest
+#### Input: `ThrowErrorRequest`
 
 ```protobuf
 message ThrowErrorRequest {
@@ -516,7 +516,7 @@ message ThrowErrorRequest {
 }
 ```
 
-#### Output: ThrowErrorResponse
+#### Output: `ThrowErrorResponse`
 
 ```protobuf
 message ThrowErrorResponse {
@@ -537,18 +537,18 @@ Returned if:
 
 - the job is already in a failed state, i.e. ran out of retries
 
-### Topology RPC
+### `Topology` RPC
 
 Obtains the current topology of the cluster the gateway is part of.
 
-#### Input: TopologyRequest
+#### Input: `TopologyRequest`
 
 ```protobuf
 message TopologyRequest {
 }
 ```
 
-#### Output: TopologyResponse
+#### Output: `TopologyResponse`
 
 ```protobuf
 message TopologyResponse {
@@ -603,12 +603,12 @@ message Partition {
 
 No specific errors
 
-### UpdateJobRetries RPC
+### `UpdateJobRetries` RPC
 
 Updates the number of retries a job has left. This is mostly useful for jobs that have run out of
 retries, should the underlying problem be solved.
 
-#### Input: Request
+#### Input: `UpdateJobRetriesRequest`
 
 ```protobuf
 message UpdateJobRetriesRequest {
@@ -619,7 +619,7 @@ message UpdateJobRetriesRequest {
 }
 ```
 
-#### Output: Response
+#### Output: `UpdateJobRetriesResponse`
 
 ```protobuf
 message UpdateJobRetriesResponse {

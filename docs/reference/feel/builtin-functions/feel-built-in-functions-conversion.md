@@ -1,11 +1,11 @@
 ---
 id: feel-built-in-functions-conversion
-title: Conversion Functions
+title: Conversion functions
 ---
 
 Convert a value into a different type.
 
-## date()
+## `date()`
 
 * parameters:
   * `from`: string / date-time
@@ -23,7 +23,7 @@ date(2012, 12, 25)
 // date("2012-12-25")
 ```
 
-## time()
+## `time()`
 
 * parameters:
   * `from`: string / date-time
@@ -45,7 +45,7 @@ time(14, 30, 0, duration("PT1H"))
 // time("15:30:00")
 ```
 
-## date and time()
+## `date and time()`
 
 * parameters:
   * `date`: date / date-time
@@ -64,7 +64,7 @@ date and time(birthday)
 // date and time("2018-04-29T009:30:00")
 ```
 
-## duration()
+## `duration()`
 
 * parameters:
   * `from`: string
@@ -78,7 +78,7 @@ duration(age)
 // duration("P32Y")
 ```
 
-## years and months duration()
+## `years and months duration()`
 
 * parameters:
   * `from`: date
@@ -90,7 +90,7 @@ years and months duration(date("2011-12-22"), date("2013-08-24"))
 // duration("P1Y8M")
 ```
 
-## number()
+## `number()`
 
 * parameters:
   * `from`: string
@@ -101,7 +101,7 @@ number("1500.5")
 // 1500.5
 ```
 
-## string()
+## `string()`
 
 * parameters:
   * `from`: any

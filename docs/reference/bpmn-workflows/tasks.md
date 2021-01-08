@@ -5,5 +5,5 @@ title: "Overview"
 
 Currently supported elements:
 
-* [Service Tasks](service-tasks/service-tasks.md)
-* [Receive Tasks](receive-tasks/receive-tasks.md)
+* [Service tasks](service-tasks/service-tasks.md)
+* [Receive tasks](receive-tasks/receive-tasks.md)

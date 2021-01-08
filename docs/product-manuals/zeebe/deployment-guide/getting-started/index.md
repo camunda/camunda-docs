@@ -1,13 +1,13 @@
 ---
 id: index
-title: "Getting Started Tutorial"
+title: "Getting started tutorial"
 sidebar_label: "Overview"
 ---
 
-We'll walk you through an end-to-end Zeebe example, including building and configuring a workflow model in Zeebe Modeler, deploying the model then creating and working on instances using the Zeebe Command Line Interface, and then seeing what's going on in a tool called Operate.
+We'll walk you through an end-to-end Zeebe example, including building and configuring a workflow model in Zeebe Modeler, deploying the model, creating and working on instances using the Zeebe Command Line Interface, and then seeing what's going on in a tool called Operate.
 
-1. [Tutorial Setup](tutorial-setup.md)
-1. [Create a Workflow](create-a-workflow.md)
-1. [Deploy a Workflow](deploy-a-workflow.md)
-1. [Create and Complete Instances](create-workflow-instance.md)
-1. [Next Steps and Resources](next-steps-resources.md)
+1. [Tutorial setup](tutorial-setup.md)
+1. [Create a workflow](create-a-workflow.md)
+1. [Deploy a workflow](deploy-a-workflow.md)
+1. [Create and complete instances](create-workflow-instance.md)
+1. [Next steps and resources](next-steps-resources.md)

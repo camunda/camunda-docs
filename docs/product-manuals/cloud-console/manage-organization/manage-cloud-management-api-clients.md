@@ -1,26 +1,26 @@
 ---
 id: manage-cloud-management-api-clients
-title: Manage Cloud Management API Clients
+title: Manage cloud management API clients
 ---
 
-To interact with Camunda Cloud programmatically, without using the Camunda Cloud frontend, you can create Cloud Management API Clients.
+To interact with Camunda Cloud programmatically, without using the Camunda Cloud UI, you can create Cloud Management API clients.
 
-Cloud Management API Clients are created for an Organization, and can access all Zeebe Clusters of this Organization.
+Cloud Management API clients are created for an organization, and can access all Zeebe clusters of this organization.
 
-You can manage clients in the organization settings under the tab Cloud Management API.
+You can manage clients in the organization settings under the tab `Cloud Management API`.
 
-A Client can have one or multiple of the following permissions:
+A client can have one or multiple of the following permissions:
 
-- Get Clusters (Retrieve information of all Clusters of the Organization)
-- Create Clusters (Create a cluster for the Organization)
-- Delete Clusters (Delete a cluster of the Organization)
-- Get Zeebe Clients (Retieve all Zeebe Clients of the Organization)
-- Create Zeebe Clients (Create a Zeebe Client for a Cluster of the Organization)
-- Delete Zeebe Clients (Delete a Zeebe Client of a Cluster owned by the Organization)
+- **Get clusters** - retrieve information of all clusters of the organization
+- **Create clusters** - create a cluster for the organization
+- **Delete clusters** - delete a cluster of the organization
+- **Get Zeebe clients** - retrieve all Zeebe clients of the organization
+- **Create Zeebe clients** - create a Zeebe client for a cluster of the organization
+- **Delete Zeebe clients** - delete a Zeebe client of a cluster owned by the organization
 
-After a Cloud Management API Client is created, the Client Secret is only shown once! You can also download a script that requests an Access Token with your credentials.
+After a Cloud Management API client is created, the `Client Secret` is only shown once! You can also download a script that requests an access roken with your credentials.
 
-To retrieve an access token for the Cloud Management API Client:
+To retrieve an access token for the Cloud Management API client:
 
 ```bash
 curl --header "Content-Type: application/json" \
@@ -31,7 +31,7 @@ curl --header "Content-Type: application/json" \
 
 :::note Please note
 
-- Access tokens have a validity period that can be found in the access token. After this time a new Access Token must be requested.
-- The Auth Service has a built-in rate limiting. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
+- Access tokens have a validity period that can be found in the access token. After this time a new access token must be requested.
+- The auth service has built-in rate limiting. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
 
 :::

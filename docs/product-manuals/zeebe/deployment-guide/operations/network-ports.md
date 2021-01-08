@@ -1,6 +1,6 @@
 ---
 id: network-ports
-title: "Network Ports"
+title: "Network ports"
 ---
 
 The broker cluster sits behind the gRPC Gateway, which handles all requests from clients/workers and forwards events to brokers.

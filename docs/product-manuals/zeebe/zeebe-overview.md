@@ -15,8 +15,8 @@ With Zeebe you can:
 - Export workflow data for monitoring and analysis
 - Engage with an active community
 
-**Next Steps**
+## Next Steps
 
-- Get familiar with [Technical Concepts](technical-concepts/index.md)
-- Learn more about alternative [Deployment Options](deployment-guide/index.md) (e.g. how to run Zeebe in a local Docker environment during development)
+- Get familiar with [technical concepts](technical-concepts/index.md)
+- Learn more about alternative [deployment options](deployment-guide/index.md) (e.g. how to run Zeebe in a local Docker environment during development)
 - Explore [Community Contributions](open-source/community-contributions.md)

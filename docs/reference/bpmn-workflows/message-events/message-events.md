@@ -1,6 +1,6 @@
 ---
 id: message-events
-title: "Message Events"
+title: "Message events"
 ---
 
 Message events are events which reference a message. They are used to wait until a proper message is received.
@@ -9,7 +9,7 @@ Message events are events which reference a message. They are used to wait until
 
 At the moment, messages can be published only externally by using one of the Zeebe clients.
 
-## Message Start Events
+## Message start events
 
 A workflow can have one or more message start events (besides other types of start events). Each of the message events must have a unique message name.
 
@@ -23,13 +23,13 @@ The `correlationKey` of a published message can be used to control the workflow 
 
 If the `correlationKey` of a message is empty then it will always create a new workflow instance and does not check if an instance is already active.
 
-## Intermediate Message Catch Events
+## Intermediate message catch events
 
 When an intermediate message catch event is entered then a corresponding message subscription is created. The workflow instance stops at this point and waits until the message is correlated. When a message is correlated, the catch event gets completed and the workflow instance continues.
 
 > An alternative to intermediate message catch events are [receive tasks](../receive-tasks/receive-tasks.md) which behaves the same but can be used together with boundary events.
 
-## Message Boundary Events
+## Message boundary events
 
 An activity can have one or more message boundary events. Each of the message events must have a unique message name.
 
@@ -45,11 +45,11 @@ The `correlationKey` is an expression that usually [accesses a variable](/produc
 
 In order to correlate a message to the message event, the message is published with the defined name (e.g. `Money collected`) and the **value** of the `correlationKey` expression. For example, if the workflow instance has a variable `orderId` with value `"order-123"` then the message must be published with the correlation key `"order-123"`.
 
-## Variable Mappings
+## Variable mappings
 
 By default, all message variables are merged into the workflow instance. This behavior can be customized by defining an output mapping at the message catch event.
 
-## Additional Resources
+## Additional resources
 
 <details>
   <summary>XML representation</summary>
@@ -99,7 +99,7 @@ A boundary message event:
 </details>
 
 <details>
-  <summary>Workflow Lifecycle</summary>
+  <summary>Workflow lifecycle</summary>
   <p>Workflow instance records of a message start event:
 
 <table>
@@ -180,7 +180,7 @@ Workflow instance records of an intermediate message catch event:
 
 References:
 
-- [Message Correlation](/product-manuals/concepts/messages.md)
+- [Message correlation](/product-manuals/concepts/messages.md)
 - [Expressions](/product-manuals/concepts/expressions.md)
-- [Variable Mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
 - [Incidents](/product-manuals/concepts/incidents.md)

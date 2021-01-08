@@ -17,7 +17,7 @@ If you want to make big changes to the configuration, we recommend to use a conf
 
 The configuration will be applied during startup of Zeebe. It is not possible to change the configuration at runtime.
 
-## Default Configuration
+## Default configuration
 
 The default configuration is located in `config/application.yaml`. This configuration contains the most common configuration settings for a standalone broker. It also lists the corresponding environment variable for each setting.
 
@@ -25,7 +25,7 @@ The default configuration is located in `config/application.yaml`. This configur
 >
 > The default configuration is not suitable for a standalone gateway node. If you want to run a standalone gateway node, please have a look at `/config/gateway.yaml.template`
 
-## Configuration File Templates
+## Configuration file templates
 
 We provide templates that contain all possible configuration settings, along with explanations for each setting:
 
@@ -36,7 +36,7 @@ We provide templates that contain all possible configuration settings, along wit
 
 Note that these templates also include the corresponding environment variables to use for every setting.
 
-## Editing the Configuration
+## Editing the configuration
 
 You can either start from scratch or start from the configuration templates listed above.
 
@@ -64,14 +64,14 @@ Uncommenting individual lines is a bit finicky, because YAML is sensitive to ind
 
 When it comes to editing individual settings two data types are worth mentioning:
 
-- Data Sizes (e.g. `logSegmentSize`)
+- Data size (e.g. `logSegmentSize`)
   - Human friendly format: `500MB` (or `KB, GB`)
   - Machine friendly format: size in bytes as long
-- Timeouts/Intervals (e.g. `requestTimeout`)
+- Timeouts/intervals (e.g. `requestTimeout`)
   - Human friendly format: `15s` (or `m, h`)
-  - Machine friendly format: either duration in milliseconds as long, or [ISO-8601 Duration](ttps://en.wikipedia.org/wiki/ISO_8601#Durations) format (e.g. `PT15S`)
+  - Machine friendly format: either duration in milliseconds as long, or [ISO-8601 duration](ttps://en.wikipedia.org/wiki/ISO_8601#Durations) format (e.g. `PT15S`)
 
-## Passing Configuration Files to Zeebe
+## Passing configuration files to Zeebe
 
 Rename the configuration file to `application.yaml` and place it in the following location:
 
@@ -79,7 +79,7 @@ Rename the configuration file to `application.yaml` and place it in the followin
 ./config/application.yaml
 ```
 
-_Other ways to specify the configuration file_
+### Other ways to specify the configuration file
 
 Zeebe uses Spring Boot for its configuration parsing. So all other ways to [configure a Spring Boot application](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config) should also work. In particular,
 you can use:
@@ -87,7 +87,7 @@ you can use:
 - `SPRING_CONFIG_ADDITIONAL_LOCATION` to specify an additional configuration file.
 - `SPRING_APPLICATION_JSON` to specify settings in JSON format.
 
-Details can be found in the Srping documentation.
+Details can be found in the Spring documentation.
 
 > **Note**
 >
@@ -102,7 +102,7 @@ Details can be found in the Srping documentation.
 >
 > This will ensure that the defaults defined in the classpath resources will be used (unless explicitly overwritten by the configuration file you provide). If you omit the defaults defined in the classpath, some features may be disabled or will not be configured properly.
 
-## Verifying that Configuration was Applied
+## Verifying configuration
 
 To verify that the configuration was applied, start Zeebe and look at the log.
 
@@ -154,7 +154,7 @@ Zeebe uses Log4j2 framework for logging. In the distribution and the docker imag
 
 To enable Google Stackdriver compatible JSON logging you can set the environment variable `ZEEBE_LOG_APPENDER=Stackdriver` before starting Zeebe.
 
-### Default Logging Configuration
+### Default logging configuration
 
 - `config/log4j2.xml` (applied by default)
 
@@ -173,10 +173,10 @@ Change `io.zeebe` to the required logger name and `debug` to required log level.
 curl 'http://localhost:9600/actuator/loggers/io.zeebe' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'
 ```
 
-## Health Probes
+## Health probes
 
 Health probes are set to sensible defaults which cover common use cases.
 
 For specific use cases, it might be necessary to customize health probes:
 
-- [Gateway Health Probes](gateway-health-probes.md)
+- [Gateway health probes](gateway-health-probes.md)

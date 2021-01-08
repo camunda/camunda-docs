@@ -1,9 +1,9 @@
 ---
 id: feel-built-in-functions-list
-title: List Functions
+title: List functions
 ---
 
-## list contains()
+## `list contains()`
 
 * parameters:
   * `list`: list
@@ -15,7 +15,7 @@ list contains([1,2,3], 2)
 // true
 ```
 
-## count()
+## `count()`
 
 * parameters:
   * `list`: list
@@ -26,7 +26,7 @@ count([1,2,3])
 // 3
 ```
 
-## min()
+## `min()`
 
 * parameters:
   * `list`: list of numbers
@@ -41,7 +41,7 @@ min(1,2,3)
 // 1
 ```
 
-## max()
+## `max()`
 
 * parameters:
   * `list`: list of numbers
@@ -56,7 +56,7 @@ min(1,2,3)
 // 3
 ```
 
-## sum()
+## `sum()`
 
 * parameters:
   * `list`: list of numbers
@@ -71,7 +71,7 @@ min(1,2,3)
 // 6
 ```
 
-## product()
+## `product()`
 
 * parameters:
   * `list`: list of numbers
@@ -86,7 +86,7 @@ product(2, 3, 4)
 // 24
 ```
 
-## mean()
+## `mean()`
 
 Returns the arithmetic mean (i.e. average).
 
@@ -103,7 +103,7 @@ mean(1,2,3)
 // 2
 ```
 
-## median()
+## `median()`
 
 Returns the median element of the list of numbers.
 
@@ -120,7 +120,7 @@ median([6, 1, 2, 3])
 // 2.5
 ```
 
-## stddev()
+## `stddev()`
 
 Returns the standard deviation.
 
@@ -137,7 +137,7 @@ stddev([2, 4, 7, 5])
 // 2.0816659994661326
 ```
 
-## mode()
+## `mode()`
 
 Returns the mode of the list of numbers.
 
@@ -154,7 +154,7 @@ mode([6, 1, 9, 6, 1])
 // [1, 6]
 ```
 
-## and() / all()
+## `and()` / `all()`
 
 * parameters:
   * `list`: list of booleans
@@ -169,7 +169,7 @@ and(false,null,true)
 // false
 ```
 
-## or() / any()
+## `or(`) / `any()`
 
 * parameters:
   * `list`: list of booleans
@@ -184,7 +184,7 @@ or(false,null,true)
 // true
 ```
 
-## sublist()
+## `sublist()`
 
 * parameters:
   * `list`: list
@@ -200,7 +200,7 @@ sublist([1,2,3], 1, 2)
 // [1,2]
 ```
 
-## append()
+## `append()`
 
 * parameters:
   * `list`: list
@@ -212,7 +212,7 @@ append([1], 2, 3)
 // [1,2,3]
 ```
 
-## concatenate()
+## `concatenate()`
 
 * parameters:
   * `lists`: lists as varargs
@@ -226,7 +226,7 @@ concatenate([1],[2],[3])
 // [1,2,3]
 ```
 
-## insert before()
+## `insert before()`
 
 * parameters:
   * `list`: list
@@ -239,7 +239,7 @@ insert before([1,3],1,2)
 // [1,2,3]
 ```
 
-## remove()
+## `remove()`
 
 * parameters:
   * `list`: list
@@ -251,7 +251,7 @@ remove([1,2,3], 2)
 // [1,3]
 ```
 
-## reverse()
+## `reverse()`
 
 * parameters:
   * `list`: list
@@ -262,7 +262,7 @@ reverse([1,2,3])
 // [3,2,1]
 ```
 
-## index of()
+## `index of()`
 
 * parameters:
   * `list`: list
@@ -274,7 +274,7 @@ index of([1,2,3,2],2)
 // [2,4]
 ```
 
-## union()
+## `union()`
 
 * parameters:
   * `lists`: lists as varargs
@@ -285,7 +285,7 @@ union([1,2],[2,3])
 // [1,2,3]
 ```
 
-## distinct values()
+## `distinct values()`
 
 * parameters:
   * `list`: list
@@ -296,7 +296,7 @@ distinct values([1,2,3,2,1])
 // [1,2,3]
 ```
 
-## flatten()
+## `flatten()`
 
 * parameters:
   * `list`: list
@@ -307,7 +307,7 @@ flatten([[1,2],[[3]], 4])
 // [1,2,3,4]
 ```
 
-## sort()
+## `sort()`
 
 * parameters:
   * `list`: list 

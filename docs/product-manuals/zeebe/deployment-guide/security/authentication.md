@@ -105,25 +105,25 @@ As in the Java client, you can use the `ZEEBE_INSECURE_CONNECTION` and `ZEEBE_CA
 
 ### zbctl
 
-To configure zbctl to use a path to a CA certificate:
+To configure `zbctl` to use a path to a CA certificate:
 
 ```
 ./zbctl --certPath /my/certificate/location <command> [arguments]
 ```
 
-To configure zbctl to disable TLS:
+To configure `zbctl` to disable TLS:
 
 ```
 ./zbctl --insecure <command> [arguments]
 ```
 
-Since zbctl is based on the Go client, setting the appropriate environment variables will override these parameters.
+Since `zbctl` is based on the Go client, setting the appropriate environment variables will override these parameters.
 
 ## Troubleshooting authentication issues
 
 Here we will describe a few ways that the clients and gateway could be misconfigured and what those errors look like. Hopefully, this will help you recognize these situations and provide you with an easy fix.
 
-### TLS is enabled in zbctl but disabled in the gateway
+### TLS is enabled in `zbctl` but disabled in the gateway
 
 The client will fail with the following error:
 
@@ -160,12 +160,12 @@ io.netty.handler.codec.http2.Http2Exception: HTTP/2 client preface string missin
   at java.lang.Thread.run(Thread.java:748)
 ```
 
-__Solution:__ Either enable TLS in the gateway as well or specify the `--insecure` flag when using zbctl.
+__Solution:__ Either enable TLS in the gateway as well or specify the `--insecure` flag when using `zbctl`.
 
 
-### TLS is disabled in zbctl but enabled for the gateway
+### TLS is disabled in `zbctl` but enabled for the gateway
 
-zbctl will fail with the following error:
+`zbctl` will fail with the following error:
 ```
 Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection closed
 ```
@@ -174,7 +174,7 @@ __Solution:__ Either enable TLS in the client by specifying a path to a certific
 
 ### TLS is enabled for both client and gateway but the CA certificate can't be found
 
-zbctl will fail with the following error:
+`zbctl` will fail with the following error:
 
 ```
 Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: authentication handshake failed: x509: certificate signed by unknown authority

@@ -1,6 +1,6 @@
 ---
 id: parallel-gateways
-title: "Parallel Gateway"
+title: "Parallel gateway"
 ---
 
 A parallel gateway (aka AND-gateway) allows to split the flow into concurrent paths.
@@ -41,7 +41,7 @@ The concurrent paths can be **joined** using a parallel gateway with multiple in
 </details>
 
 <details>
-  <summary>Workflow Lifecycle</summary>
+  <summary>Workflow lifecycle</summary>
   <p>Workflow instance records of a parallel gateway: 
 
 <table>

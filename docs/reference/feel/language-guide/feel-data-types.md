@@ -1,6 +1,6 @@
 ---
 id: feel-data-types
-title: Data Types
+title: Data types
 ---
 
 A value can have one of the following types.

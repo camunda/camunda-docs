@@ -1,6 +1,6 @@
 ---
 id: connect-to-your-cluster
-title: Connect to your Cluster
+title: Connect to your cluster
 ---
 
 ## Installation
@@ -23,7 +23,7 @@ source ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
 zbctl status
 ```
 
-As a result you will get a similar result:
+As a result you will get a similar response:
 
 ```bash
 Cluster size: 1

@@ -5,24 +5,24 @@ title: "Overview"
 
 Currently supported events:
 
-* [None Events](none-events/none-events.md)
-* [Message Events](message-events/message-events.md)
-* [Timer Events](timer-events/timer-events.md)
-* [Error Events](error-events/error-events.md)
+* [None events](none-events/none-events.md)
+* [Message events](message-events/message-events.md)
+* [Timer events](timer-events/timer-events.md)
+* [Error events](error-events/error-events.md)
 
-## Events in General
+## Events in general
 
 Events in BPMN can be __thrown__ (i.e. sent), or __caught__ (i.e. received), respectively referred to as *throw* or *catch* events, e.g. `message throw event`, `timer catch event`.
 
 Additionally, a distinction is made between start, intermediate, and end events:
 
-* Start events (catch events, as they can only react to something) are used to denote the beginning of a process or sub-process.
+* Start events (catch events, as they can only react to something) are used to denote the beginning of a process or subprocess.
 * End events (throw events, as they indicate something has happened) are used to denote the end of a particular sequence flow.
 * Intermediate events can be used to indicate that something has happened (i.e. intermediate throw events), or to wait and react to certain events (i.e. intermediate catch events).
 
 Intermediate catch events can be inserted into your process in two different contexts: normal flow, or attached to an activity, and are called boundary events.
 
-## Intermediate Events
+## Intermediate events
 In normal flow, an intermediate throw event will execute its event (e.g. send a message) once the token has reached it, and once done the token will continue to all outgoing sequence flows.
 
 An intermediate catch event, however, will stop the token, and wait until the event it is waiting for happens, at which execution will resume, and the token will move on.

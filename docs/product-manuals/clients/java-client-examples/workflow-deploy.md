@@ -1,12 +1,12 @@
 ---
 id: workflow-deploy
-title: "Deploy a Workflow"
+title: "Deploy a workflow"
 ---
 
-## Related Resources
+## Related resources
 
-- [Workflow Basics](/product-manuals/concepts/workflows.md)
-- [BPMN Introduction](/reference/bpmn-workflows/bpmn-primer.md)
+- [Workflow basics](/product-manuals/concepts/workflows.md)
+- [BPMN introduction](/reference/bpmn-workflows/bpmn-primer.md)
 
 ## Prerequisites
 

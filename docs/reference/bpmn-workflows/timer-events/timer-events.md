@@ -1,13 +1,13 @@
 ---
 id: timer-events
-title: "Timer Events"
+title: "Timer events"
 ---
 
 Timer events are events which are triggered by a defined timer.
 
 ![workflow](assets/timer-events.png)
 
-## Timer Start Events
+## Timer start events
 
 A workflow can have one or more timer start events (besides other types of start events). Each of the timer events must have either a **time date or time cycle** definition.
 
@@ -15,13 +15,13 @@ When a workflow is deployed then it schedules a timer for each timer start event
 
 When a timer is triggered then a new workflow instance is created and the corresponding timer start event is activated.
 
-## Intermediate Timer Catch Events
+## Intermediate timer catch events
 
 An intermediate timer catch event must have a **time duration** definition that defines when it is triggered.
 
 When an intermediate timer catch event is entered then a corresponding timer is scheduled. The workflow instance stops at this point and waits until the timer is triggered. When the timer is triggered, the catch event gets completed and the workflow instance continues.
 
-## Timer Boundary Events
+## Timer boundary events
 
 An interrupting timer boundary event must have a **time duration** definition. When the corresponding timer is triggered then the activity gets terminated. Interrupting timer boundary events is often used to model timeouts, for example, canceling the processing after 5 minutes and do something else.
 
@@ -38,7 +38,7 @@ A timer can be defined either as a static value (e.g. `PT3D`) or as an [expressi
 
 If the expression belongs to a timer start event of the workflow then it is evaluated on deploying the workflow. Otherwise, it is evaluated on activating the timer catch event. The evaluation must result either in a `string` that has the same ISO 8601 format as the static value or an equivalent temporal value (i.e. a date-time, a duration, or a cycle).
 
-### Time Date
+### Time date
 
 A specific point in time defined as ISO 8601 combined date and time representation. It must contain a timezone information, either `Z` for UTC or a zone offset. Optionally, it can contain a zone id.
 
@@ -46,7 +46,7 @@ A specific point in time defined as ISO 8601 combined date and time representati
 - `2019-10-02T08:09:40+02:00` - UTC plus 2 hours zone offset
 - `2019-10-02T08:09:40+02:00[Europe/Berlin]` - UTC plus 2 hours zone offset at Berlin
 
-### Time Duration
+### Time duration
 
 A duration defined as ISO 8601 durations format.
 
@@ -56,14 +56,14 @@ A duration defined as ISO 8601 durations format.
 
 If the duration is zero or negative then the timer will fire immediately.
 
-### Time Cycle
+### Time cycle
 
 A cycle defined as ISO 8601 repeating intervals format. It contains the duration and the number of repetitions. If the repetitions are not defined then the timer will be repeated infinitely until it is canceled.
 
 - `R5/PT10S` - every 10 seconds, up to 5 times
 - `R/P1D` - every day, infinitely
 
-## Additional Resources
+## Additional resources
 
 <details>
   <summary>XML representation</summary>
@@ -110,7 +110,7 @@ A non-interrupting boundary timer event with time cycle:
 </details>
 
 <details>
-  <summary>Workflow Lifecycle</summary>
+  <summary>Workflow lifecycle</summary>
   <p>Workflow instance records of a timer start event:
 
 <table>

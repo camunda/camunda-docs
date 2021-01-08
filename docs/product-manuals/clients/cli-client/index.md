@@ -1,7 +1,7 @@
 ---
 id: index
-title: CLI Client
-sidebar_label: "Quick Reference"
+title: CLI client
+sidebar_label: "Quick reference"
 ---
 
 `zbctl` is the command line interface to interact with Camunda Cloud. After installation, a connection can be tested immediately.
@@ -14,11 +14,11 @@ An installation can be done quickly via the package manager `npm`. The correspon
 npm i -g zbctl
 ```
 
-You can also download a binary for your Operating System from the [Zeebe GitHub Releases page](https://github.com/zeebe-io/zeebe/releases).
+You can also download a binary for your Operating System from the [Zeebe GitHub releases page](https://github.com/zeebe-io/zeebe/releases).
 
-## Connection Settings
+## Connection settings
 
-To use _zbctl_ it is recommended to define environment variables for the connection settings:
+To use `zbctl` it is recommended to define environment variables for the connection settings:
 
 ```bash
 export ZEEBE_ADDRESS='[Zeebe API]'

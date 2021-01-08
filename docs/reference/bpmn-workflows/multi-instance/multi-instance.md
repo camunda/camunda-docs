@@ -5,10 +5,10 @@ title: "Multi-Instance"
 
 The following activities can be marked as multi-instance:
 
-- [Service Tasks](../service-tasks/service-tasks.md)
-- [Receive Tasks](../receive-tasks/receive-tasks.md)
-- [Embedded Subprocesses](../embedded-subprocesses/embedded-subprocesses.md)
-- [Call Activities](../call-activities/call-activities.md)
+- [Service tasks](../service-tasks/service-tasks.md)
+- [Receive tasks](../receive-tasks/receive-tasks.md)
+- [Embedded subprocesses](../embedded-subprocesses/embedded-subprocesses.md)
+- [Call activities](../call-activities/call-activities.md)
 
 A multi-instance activity is executed multiple times - once for each element of a given collection (like a _foreach_ loop in a programming language).
 
@@ -18,7 +18,7 @@ On the execution level, a multi-instance activity has two parts: a **multi-insta
 
 When the activity is entered, the multi-instance body is activated and one instance for every element of the `inputCollection` is created (sequentially or in parallel). When all instances are completed, the body is completed and the activity is left.
 
-## Sequential vs. Parallel
+## Sequential vs. parallel
 
 A multi-instance activity is executed either sequentially or in parallel (default). In the BPMN, a sequential multi-instance activity is displayed with 3 horizontal lines at the bottom. A parallel one with 3 vertical lines.
 
@@ -30,7 +30,7 @@ In case of a **parallel** multi-instance activity, all instances are created whe
 
 ![parallel multi-instance](assets/multi-instance-parallel.png)
 
-## Defining the Collection to Iterate over
+## Defining the collection to iterate over
 
 A multi-instance activity **must** have an `inputCollection` expression that defines the collection to iterate over (e.g. `= items`). Usually, it [accesses a variable](/product-manuals/concepts/expressions.md#access-variables) of the workflow instance that holds the collection. The expression is evaluated on activating the multi-instance body. It must result in an `array` of any type (e.g. `["item-1", "item-2"]`).
 
@@ -38,7 +38,7 @@ In order to access the current element of the `inputCollection` value within the
 
 If the `inputCollection` value is **empty** then the multi-instance body is completed immediately and no instances are created. It behaves like the activity is skipped.
 
-## Collecting the Output
+## Collecting the output
 
 The output of a multi-instance activity (e.g. the result of a calculation) can be collected from the instances by defining the `outputCollection` **and** the `outputElement` expression.
 
@@ -50,7 +50,7 @@ When the instance is completed, the `outputElement` expression is evaluated and 
 
 If the `inputCollection` value is empty then an empty array is propagated as `outputCollection`.
 
-## Boundary Events
+## Boundary events
 
 ![multi-instance with boundary event](assets/multi-instance-boundary-event.png)
 
@@ -60,11 +60,11 @@ When an interrupting boundary event is triggered then the multi-instance body an
 
 When an non-interrupting boundary event is triggered then the instances are not affected. The activities at the outgoing path have no access to the local variables since they are bounded to the multi-instance activity.
 
-## Special Multi-Instance Variables
+## Special multi-instance variables
 
 Every instance has a local variable `loopCounter`. It holds the index in the `inputCollection` of this instance, starting with `1`.
 
-## Variable Mappings
+## Variable mappings
 
 Input and output variable mappings can be defined at the multi-instance activity. They are applied **on each instance** on activating and on completing.
 
@@ -92,7 +92,7 @@ source: =x
 target: output
 ```
 
-## Additional Resources
+## Additional resources
 
 <details>
   <summary>XML representation</summary>
@@ -123,7 +123,7 @@ target: output
 </details>
 
 <details>
-  <summary>Workflow Lifecycle</summary>
+  <summary>Workflow lifecycle</summary>
   <p>Workflow instance records of a parallel multi-instance service task:
 
 <table>
@@ -199,6 +199,6 @@ target: output
 
 References:
 
-- [Variable Scopes](/product-manuals/concepts/variables.md#variable-scopes)
+- [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)
 - [Expressions](/product-manuals/concepts/expressions.md)
-- [Variable Mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)

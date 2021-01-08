@@ -33,7 +33,7 @@ module.exports = {
       Clients: [
         "product-manuals/clients/overview",
         {
-          "Java Client": [
+          "Java client": [
             "product-manuals/clients/java-client/index",
             "product-manuals/clients/java-client/get-started",
             "product-manuals/clients/java-client/logging",
@@ -53,19 +53,19 @@ module.exports = {
           ],
         },
         {
-          "Go Client": [
+          "Go client": [
             "product-manuals/clients/go-client/index",
             "product-manuals/clients/go-client/get-started",
           ]
         },          
         {
-          "CLI Client": [
+          "CLI client": [
             "product-manuals/clients/cli-client/index",
             "product-manuals/clients/cli-client/get-started"
           ]
         },                
         {
-          "Community Clients": [
+          "Community clients": [
             "product-manuals/clients/other-clients/index",
             "product-manuals/clients/other-clients/c-sharp",
             "product-manuals/clients/other-clients/javascript",
@@ -79,7 +79,7 @@ module.exports = {
       "Cloud Console": [
         "product-manuals/cloud-console/introduction",
         {
-          "Manage your Organization": [
+          "Manage your organization": [
             "product-manuals/cloud-console/manage-organization/organization-settings",
             "product-manuals/cloud-console/manage-organization/manage-users",
             "product-manuals/cloud-console/manage-organization/view-organization-activity",
@@ -89,7 +89,7 @@ module.exports = {
           ],
         },
         {
-          "Manage Clusters": [
+          "Manage clusters": [
             "product-manuals/cloud-console/manage-clusters/create-cluster",
             "product-manuals/cloud-console/manage-clusters/rename-cluster",
             "product-manuals/cloud-console/manage-clusters/delete-cluster",
@@ -97,7 +97,7 @@ module.exports = {
           ],
         },
         {
-          "Manage your Plan": [
+          "Manage your plan": [
             "product-manuals/cloud-console/manage-plan/available-plans",
             "product-manuals/cloud-console/manage-plan/trial-plan",
             {
@@ -138,7 +138,7 @@ module.exports = {
       Zeebe: [
         "product-manuals/zeebe/zeebe-overview",
         {
-          "Technical Concepts": [
+          "Technical concepts": [
             "product-manuals/zeebe/technical-concepts/index",
             "product-manuals/zeebe/technical-concepts/architecture",
             "product-manuals/zeebe/technical-concepts/clustering",
@@ -150,20 +150,20 @@ module.exports = {
           ],
         },
         {
-          "Deployment Guide": [
+          "Deployment guide": [
             "product-manuals/zeebe/deployment-guide/index",  
             {              
-              "Local Installation": [
+              "Local installation": [
                 "product-manuals/zeebe/deployment-guide/local/install",
                 "product-manuals/zeebe/deployment-guide/local/quickstart",  
               ]
             },              
             "product-manuals/zeebe/deployment-guide/docker/install",
             {
-              "Kubernetes Deployment": [
+              "Kubernetes deployment": [
                 "product-manuals/zeebe/deployment-guide/kubernetes/index",
                 {
-                  "Helm Charts": [
+                  "Helm charts": [
                     "product-manuals/zeebe/deployment-guide/kubernetes/helm/index",
                     "product-manuals/zeebe/deployment-guide/kubernetes/helm/prerequisites",
                     "product-manuals/zeebe/deployment-guide/kubernetes/helm/installing-helm",
@@ -174,7 +174,7 @@ module.exports = {
               ],
             },
             {
-              "Getting Started Tutorial": [
+              "Getting started tutorial": [
                 "product-manuals/zeebe/deployment-guide/getting-started/index",
                 "product-manuals/zeebe/deployment-guide/getting-started/tutorial-setup",
                 "product-manuals/zeebe/deployment-guide/getting-started/create-a-workflow",
@@ -214,7 +214,7 @@ module.exports = {
           ]
         },
         {
-          "Open Source Community": [
+          "Open Source community": [
             "product-manuals/zeebe/open-source/community-contributions",
             "product-manuals/zeebe/open-source/get-help-get-involved",
             "product-manuals/zeebe/open-source/release-cycle",
@@ -229,13 +229,13 @@ module.exports = {
       ],
       Operate: [
          "product-manuals/operate/index",{
-            "User Guide":[
+            "User guide":[
               "product-manuals/operate/userguide/basic-operate-navigation",
               "product-manuals/operate/userguide/resolve-incidents-update-variables",
               "product-manuals/operate/userguide/selections-operations",
               "product-manuals/operate/userguide/operate-feedback-and-questions"
             ],
-            "Deployment Guide": [
+            "Deployment guide": [
                "product-manuals/operate/deployment/install-and-start",
                "product-manuals/operate/deployment/configuration",
                "product-manuals/operate/deployment/data-retention",
@@ -247,10 +247,10 @@ module.exports = {
       ],
       Tasklist: [
       "product-manuals/tasklist/introduction",{
-          "User Guide": [
+          "User guide": [
             "product-manuals/tasklist/userguide/overview",
           ],
-          "Deployment Guide": [
+          "Deployment guide": [
             "product-manuals/tasklist/deployment/install-and-start",
             "product-manuals/tasklist/deployment/configuration",
             "product-manuals/tasklist/deployment/authentication",
@@ -267,7 +267,7 @@ module.exports = {
     "reference/grpc",
     require("./docs/reference/tasklist-api/sidebar-schema"),
     {
-      "BPMN Workflows": [
+      "BPMN workflows": [
         "reference/bpmn-workflows/bpmn-primer",
         "reference/bpmn-workflows/bpmn-coverage",
         "reference/bpmn-workflows/data-flow",

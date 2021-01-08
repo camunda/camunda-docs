@@ -1,9 +1,9 @@
 ---
 id: feel-built-in-functions-context
-title: Context Functions
+title: Context functions
 ---
 
-## get value()
+## `get value()`
 
 Returns the value of the context entry with the given key.
 
@@ -17,7 +17,7 @@ get value({foo: 123}, "foo")
 // 123
 ```
 
-## get entries()
+## `get entries()`
 
 Returns the entries of the context as list of key-value-pairs.
 

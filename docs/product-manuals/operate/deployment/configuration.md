@@ -63,9 +63,9 @@ camunda.operate:
     url: http://localhost:9200
 ```
 
-## Zeebe Broker Connection
+## Zeebe broker connection
 
-Operate needs a connection to Zeebe Broker to start the import and to execute user operations.
+Operate needs a connection to Zeebe broker to start the import and to execute user operations.
 
 ### Settings to connect
 
@@ -82,7 +82,7 @@ camunda.operate:
     brokerContactPoint: localhost:26500
 ```
 
-## Zeebe Elasticsearch Exporter
+## Zeebe Elasticsearch exporter
 
 Operate imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
 Therefore settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
@@ -112,7 +112,7 @@ camunda.operate:
     prefix: zeebe-record
 ```
 
-## Operation Executor
+## Operation executor
 
 Operations are user operations like Cancellation of workflow instance(s) or Updating the variable value. Operations are executed in multi-threaded manner.
 

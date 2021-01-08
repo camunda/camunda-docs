@@ -1,6 +1,6 @@
 ---
 id: save-and-deploy
-title: Save and Deploy your Diagram
+title: Save and deploy your diagram
 ---
 
 Your BPMN diagram can be saved in your organizational context at any time. You have to differentiate between saving and deploying. If a diagram is only saved it has no effect on your cluster(s). It can be used by all members of your organization.
@@ -13,7 +13,7 @@ After you have created a cluster it must be ready to deploy a diagram.
 
 ![cluster creating](img/cluster-creating.png)
 
-As soon as the cluster is Healthy, the deployment is possible.
+As soon as the cluster is _Healthy_, the deployment is possible.
 
 ![save and deploy](img/save-and-deploy.png)
 

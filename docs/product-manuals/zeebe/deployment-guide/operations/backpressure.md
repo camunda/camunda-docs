@@ -3,13 +3,13 @@ id: backpressure
 title: "Backpressure"
 ---
 
-When a broker receives a client request, it is written to the _event stream_ first (see section [Internal Processing](../../technical-concepts/internal-processing.md) for details), and processed later by the stream processor.
+When a broker receives a client request, it is written to the _event stream_ first (see section [Internal processing](../../technical-concepts/internal-processing.md) for details), and processed later by the stream processor.
 If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command.
 If the broker keeps accepting new requests from the client, the back log increases and the processing latency can grow beyond an acceptable time.
 To avoid such problems, Zeebe employs a backpressure mechanism.
-When the broker receives more requests than it can process with an acceptable latency, it rejects some requests (see [Technical Error handling](/reference/grpc.md#technical-error-handling)).
+When the broker receives more requests than it can process with an acceptable latency, it rejects some requests (see [Technical error handling](/reference/grpc.md#technical-error-handling)).
 
-### Terminologies
+### Terminology
 
 - _RTT_ - The time between the request is accepted by the broker and the response to the request is sent back to the gateway.
 - _inflight count_ - The number of requests accepted by the broker but the response is not yet sent.
@@ -56,7 +56,7 @@ If gradient is less than 1, the limit is decreased otherwise the limit is increa
 
 Gradient2 is similar to Gradient, but instead of using observed minimum RTT as the base, it uses and exponentially smoothed average RTT.
 
-## Backpressure Tuning
+## Backpressure tuning
 
 The goal of backpressure is to keep the processing latency low.
 The processing latency is calculated as the time between the command is written to the event stream until it is processed.
@@ -80,14 +80,14 @@ but the processing latency may increase.
 When using "fixed limit", you can run the benchmark with different values for the limit.
 You can then determine a suitable value for a limit for which the processing latency (`zeebe_stream_processor_latency_bucket`) is within the desired latency.
 
-When using "AIMD", you can configure a _requestTimeout_ which corresponds to a desired latency.
-Note that during high load "AIMD" can lead to a processing latency two times more than the configured _requestTimeout_.
-It is also recommended to configure a _minLimit_ to prevent the limit from aggressively dropping during constant high load.
+When using "AIMD", you can configure a `requestTimeout` which corresponds to a desired latency.
+Note that during high load "AIMD" can lead to a processing latency two times more than the configured `requestTimeout`.
+It is also recommended to configure a `minLimit` to prevent the limit from aggressively dropping during constant high load.
 
-When using "Vegas", you cannot configure the backpressure to a desired latency.
+When using Vegas, you cannot configure the backpressure to a desired latency.
 Instead Vegas tries to keep the RTT as low as possible based on the observed minimum RTT.
 
-Similar to "Vegas", you cannot configure the desired latency in "Gradient" and "Gradient2".
+Similar to Vegas, you cannot configure the desired latency in Gradient and Gradient2.
 They calculated the limit based on the gradient of observed RTT from the expected RTT.
 Higher the value of _rttTolerance_, higher deviations are tolerated that results in higher values for limit.
 

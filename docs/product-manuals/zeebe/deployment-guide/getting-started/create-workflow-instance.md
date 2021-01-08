@@ -1,9 +1,9 @@
 ---
 id: create-workflow-instance
-title: "Create and Complete Workflow Instances"
+title: "Create and complete workflow instances"
 ---
 
-We're going to create 2 workflow instances for this tutorial: one with an order value less than $100 and one with an order value greater than or equal to $100 so that we can see our XOR Gateway in action.
+We're going to create 2 workflow instances for this tutorial: one with an order value less than $100 and one with an order value greater than or equal to $100 so that we can see our XOR gateway in action.
 
 Go back to the Terminal window where you deployed the workflow model and execute the following command.
 
@@ -50,7 +50,7 @@ You'll see a response like:
 ```
 
 
-This first workflow instance we just created represents a single customer order with orderId 1234 and orderValue 99 (or, $99).
+This first workflow instance we just created represents a single customer order with `orderId` 1234 and `orderValue` 99 (or, $99).
 
 In the same Terminal window, run the command:
 
@@ -79,9 +79,9 @@ In the same Terminal window, run the command:
 ```
 
 
-This second workflow instance we just created represents a single customer order with orderId 2345 and orderValue 100 (or, $100).
+This second workflow instance we just created represents a single customer order with `orderId` 2345 and `orderValue` 100 (or, $100).
 
-If you go back to the Operate UI and refresh the page, you should now see two workflow instances (the green badge) waiting at the Initiate Payment task.
+If you go back to the Operate UI and refresh the page, you should now see two workflow instances (the green badge) waiting at the `Initiate Payment` task.
 
 ![Workflow Instances in Operate](assets/tutorial-4.1-workflow-instances-first-task.png)
 
@@ -89,11 +89,11 @@ Note that the workflow instance can't move past this first task until we create 
 
 To make this point again: in a real-word use case, you probably won't manually create workflow instances using the Zeebe CLI. Rather, a workflow instance would be created programmatically in response to some business event, such as a message sent to Zeebe after a customer places an order. And instances might be created at very large scale if, for example, many customers were placing orders at the same time due to a sale. We're using the CLI here just for simplicity's sake.
 
-We have two instances currently waiting at our "Initiate Payment" task, which means that Zeebe has created two jobs with type `initiate-payment`.
+We have two instances currently waiting at our `Initiate Payment` task, which means that Zeebe has created two jobs with type `initiate-payment`.
 
-zbctl provides a command to spawn simple job workers using an external command or script. The job worker will receive the payload for every job as a JSON object on stdin and must also return its result as JSON object on stdout if it handled the job successfully.
+`zbctl` provides a command to spawn simple job workers using an external command or script. The job worker will receive the payload for every job as a JSON object on `stdin` and must also return its result as JSON object on `stdout` if it handled the job successfully.
 
-In this example, we'll also use the unix command cat which just outputs what it receives on stdin.
+In this example, we'll also use the unix command `cat` which just outputs what it receives on `stdin`.
 
 Open a new Terminal tab or window, change into the Zeebe broker directory, and use the following command to create a job worker that will work on the `initiate-payment` job.
 
@@ -138,13 +138,13 @@ Handler completed job 7 with payload {"orderId":"1234","orderValue":99}
 
 We can see that the job worker activated then completed the two available `initiate-payment` jobs. You can shut down the job worker if you'd like--you won't need it in the rest of the tutorial.
 
-Now go to the browser tab where you're running Operate. You should see that the workflow instances have advanced to the Intermediate Message Catch Event and are waiting there.
+Now go to the browser tab where you're running Operate. You should see that the workflow instances have advanced to the intermediate message catch event and are waiting there.
 
 ![Waiting at Message Event](assets/tutorial-4.2-waiting-at-message.png)
 
-The workflow instances will wait at the Intermediate Message Catch Event until a message is received by Zeebe and correlated to the instances. Messages can be published using Zeebe clients, and it's also possible for Zeebe to connect to a message queue such as Apache Kafka and correlate messages published there to workflow instances.
+The workflow instances will wait at the intermediate message catch event until a message is received by Zeebe and correlated to the instances. Messages can be published using Zeebe clients, and it's also possible for Zeebe to connect to a message queue such as Apache Kafka and correlate messages published there to workflow instances.
 
-zbctl also supports message publishing, so we'll continue to use it in our demo. Below is the command we'll use to publish and correlate a message. You'll see that we provide the message "Name" that we assigned to this message event in the Zeebe Modeler as well as the orderId that we included in the payload of the instance when we created it.
+`zbctl` also supports message publishing, so we'll continue to use it in our demo. Below is the command we'll use to publish and correlate a message. You'll see that we provide the message "Name" that we assigned to this message event in the Zeebe Modeler as well as the `orderId` that we included in the payload of the instance when we created it.
 
 Remember, `orderId` is the correlation key we set in the Modeler when configuring the message event. Zeebe requires both of these fields to be able to correlate a message to a workflow instance. Because we have two workflow instances with two distinct `orderId`, we'll need to publish two messages. Run these two commands one after the other:
 
@@ -175,7 +175,7 @@ Remember, `orderId` is the correlation key we set in the Modeler when configurin
 ```
 
 
-You won't see a response in your Terminal window, but if you refresh Operate, you should see that the messages were correlated successfully and that one workflow instance has advanced to the "Ship With Insurance" task and the other has advanced to the "Ship Without Insurance" task.
+You won't see a response in your Terminal window, but if you refresh Operate, you should see that the messages were correlated successfully and that one workflow instance has advanced to the `Ship With Insurance` task and the other has advanced to the `Ship Without Insurance` task.
 
 
 ![Waiting at Shipping Service Tasks](assets/tutorial-4.3-waiting-at-shipping.png)
@@ -219,11 +219,11 @@ Handler completed job 529 with payload {"orderId":"1234","orderValue":99}
 
 You can shut down this worker now.
 
-Select the "Finished Instances" checkbox in the bottom left of Operate, refresh the page, and voila! You'll see your first completed Zeebe workflow instance.
+Select the **Finished Instances** checkbox in the bottom left of Operate, refresh the page, and voila! You'll see your first completed Zeebe workflow instance.
 
 ![First Workflow Instance Complete](assets/tutorial-4.4-no-insurance-complete.png)
 
-Because the "Ship With Insurance" task has a different job type, we need to create a second worker that can take on this job.
+Because the `Ship With Insurance` task has a different job type, we need to create a second worker that can take on this job.
 
 **Linux**
 

@@ -1,8 +1,8 @@
 ---
 id: install-and-start
-title: Install & Start Operate
+title: Install and start Operate
 ---
-## Running via Docker (Local Development)
+## Running via Docker (local development)
 
 The easiest way to run Operate in development is with Docker. This gives you a consistent, reproducible environment and an out-of-the-box integrated experience for experimenting with Zeebe and Operate.
 
@@ -12,13 +12,13 @@ The [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) rep
 
 If you are using Docker, once you follow the instructions in the repository, skip ahead to the section ["Access the Operate Web Interface”](#access-the-operate-web-interface).
 
-## Running with Kubernetes (Production)
+## Running with Kubernetes (production)
 
 We will update this section after Operate is available for production use. 
 
 Running Operate with Kubernetes will be recommended for production deployments. 
 
-## Manual Configuration (Local Development)
+## Manual Configuration (local development)
 
 Here, we’ll walk you through how to download and run an Operate distribution manually, without using Docker. 
 
@@ -77,9 +77,10 @@ You’ll know Zeebe has started successfully when you see a message similar to:
 
 To run Operate, execute the following commands:
 
-`cd camunda-operate-distro-0.26.0-*``
-
+```
+cd camunda-operate-distro-0.26.0-*
 bin/operate
+```
 
 You’ll know Operate has started successfully when you see messages similar to:
 
@@ -89,7 +90,7 @@ DEBUG 1416 --- [       Thread-4] o.c.o.z.ZeebeESImporter                  : Late
 INFO 1416 --- [       Thread-4] o.c.o.z.ZeebeESImporter                  : Elasticsearch index for ValueType DEPLOYMENT was not found, alias zeebe-record-deployment. Skipping.
 ```
 
-## Access the Operate Web Interface
+## Access the Operate web interface
 
 The Operate web interface is available at [http://localhost:8080](http://localhost:8080). 
 

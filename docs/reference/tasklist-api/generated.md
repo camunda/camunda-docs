@@ -1,6 +1,6 @@
 ---
 id: schema
-title: GraphQL Schema
+title: GraphQL schema
 ---
 
 This documentation has been automatically generated from the GraphQL schema.

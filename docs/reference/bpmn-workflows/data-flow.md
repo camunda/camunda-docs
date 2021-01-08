@@ -1,6 +1,6 @@
 ---
 id: data-flow
-title: "Data Flow"
+title: "Data flow"
 ---
 
 Every BPMN workflow instance can have one or more variables. Variables are key-value-pairs and hold
@@ -10,7 +10,7 @@ a job is completed, and when a message is correlated.
 
 ![data-flow](assets/data-flow.png)
 
-## Job Workers
+## Job workers
 
 By default, a job worker gets all variables of a workflow instance. It can limit the data by
 providing a list of required variables as _fetchVariables_.
@@ -24,7 +24,7 @@ workflow instance.
 
 If the job worker expects the variables in a different format or under different names then the variables can be transformed by defining _input mappings_ in the workflow. _Output mappings_ can be used to transform the job variables before merging them into the workflow instance.
 
-## Variable Scopes vs. Token-Based Data
+## Variable scopes vs. token-based data
 
 A workflow can have concurrent paths, for example, when using a parallel gateway. When the execution reaches the parallel gateway then new tokens are spawned which execute the following paths concurrently.
 
@@ -53,9 +53,9 @@ These type of problems can be avoided by:
 - using output variable mappings to customize the variable propagation
 - using an embedded subprocess and input variable mappings to limit the visibility and propagation of variables
 
-## Additional Resources
+## Additional resources
 
-- [Job Handling](/product-manuals/concepts/job-workers.md)
+- [Job handling](/product-manuals/concepts/job-workers.md)
 - [Variables](/product-manuals/concepts/variables.md)
-- [Input/Output Variable Mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
-- [Variable Scopes](/product-manuals/concepts/variables.md#variable-scopes)
+- [Input/output variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)

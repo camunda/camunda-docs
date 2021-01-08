@@ -5,6 +5,6 @@ title: "Overview"
 
 Currently supported elements:
 
-* [Embedded Subprocess](embedded-subprocesses/embedded-subprocesses.md)
-* [Call Activities](call-activities/call-activities.md)
-* [Event Subprocess](event-subprocesses/event-subprocesses.md)
+* [Embedded subprocess](embedded-subprocesses/embedded-subprocesses.md)
+* [Call activities](call-activities/call-activities.md)
+* [Event subprocess](event-subprocesses/event-subprocesses.md)

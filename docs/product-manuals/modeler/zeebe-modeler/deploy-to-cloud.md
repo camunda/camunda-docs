@@ -1,6 +1,6 @@
 ---
 id: deploy-to-cloud
-title: Deploy to Cloud
+title: Deploy to Camunda Cloud
 ---
 
 Once you have established your [connection to Camunda Cloud](./connect-to-camunda-cloud.md) you can deploy your BPMN diagram via the deployment icon.

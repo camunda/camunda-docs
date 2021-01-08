@@ -1,12 +1,12 @@
 ---
 id: model-your-first-process
-title: Model your first Process
+title: Model your first process
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In Camunda Cloud you have two options to design and deploy a workflow: the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases) and the Console Modeler.
+In Camunda Cloud you have two options to design and deploy a workflow: the Console Modeler and the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases).
  
 
 <Tabs groupId="modeler" defaultValue="console" values={
@@ -18,20 +18,23 @@ In Camunda Cloud you have two options to design and deploy a workflow: the [Zeeb
 
 
 <TabItem value='console'>
-Using the Console Modeler, workflows can be designed and deployed, and new instances can be created directly from the console. You can find all your saved models under the "BPMN Diagrams" tab
+
+Using the Console Modeler, workflows can be designed and deployed, and new instances can be created directly from the console. 
+
+You can find all your saved models under the **BPMN Diagrams** tab
+
+Click **Create New Diagram**.
 
 ![console-modeler](./img/cloud-modeler.png)
 
-Just create a new diagram
+Give your diagram a name like `Getting Started`.
 
 ![console-modeler-new-diagram](./img/cloud-modeler-new-diagram.png)
 
-and give it a name
-
+The **Save** button should now appear for you to save your diagram.
 
 ![console-modeler-new-diagram](./img/cloud-modeler-new-diagram-with-name.png)
 
-The Save button should now appear.
 
 </TabItem>
 

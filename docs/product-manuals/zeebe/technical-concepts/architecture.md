@@ -7,30 +7,30 @@ There are four main components in Zeebe's architecture: client, gateway, brokers
 
 ![zeebe-architecture](assets/zeebe-architecture.png)
 
-In Camunda Cloud SaaS you will work exclusively with clients. Gateway, broker, and exporters are pre-configured to provide the service, but are not themselves accessible.
+In Camunda Cloud you will work exclusively with clients. Gateway, broker, and exporters are pre-configured to provide the service, but are not themselves accessible.
 
 In local or private cloud deployments, all components are relevant.
 
 ## Client
 
-Clients send commands to Zeebe:
+Clients send commands to Zeebe to:
 
-- Deploying Workflows
-- Carrying out business logic
-  - Starting Workflow Instances,
-  - Publishing Messages
-  - Activate Jobs
-  - Complete Job
-  - Fail Job
-- Handling operational issues
-  - Updating Workflow Instance Variables
-  - Resolving incidents
+- Deploy workflows
+- Carry out business logic
+  - Start workflow instances
+  - Publish messages
+  - Activate jobs
+  - Complete jobs
+  - Fail jobs
+- Handle operational issues
+  - Update workflow instance variables
+  - Resolve incidents
 
 Client applications can be scaled up and down completely separately from Zeebe - the Zeebe brokers do not execute any business logic.
 
 Clients are libraries that you embed in an application (e.g. a microservice that executes your business logic) to connect to a Zeebe cluster.
 
-Clients connect to the Zeebe gateway via [gRPC](https://grpc.io), which uses http/2-based transport. To learn more about gRPC in Zeebe, check out the [Zeebe API (gRPC)](/reference/grpc.md).
+Clients connect to the Zeebe gateway via [gRPC](https://grpc.io), which uses HTTP/2-based transport. To learn more about gRPC in Zeebe, check out the [Zeebe API (gRPC)](/reference/grpc.md).
 
 The Zeebe project includes officially-supported Java and Go clients. [Community clients](/product-manuals/clients/other-clients/index.md) have been created in other languages, including C#, Ruby, and JavaScript. The gRPC protocol makes it possible to [generate clients](/product-manuals/clients/build-your-own-client.md) in a range of different programming languages.
 

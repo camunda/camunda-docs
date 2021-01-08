@@ -1,6 +1,6 @@
 ---
 id: organization-settings
-title: Organization Settings
+title: Organization settings
 ---
 
 Organization settings can be accessed via the menu in the navigation bar.
@@ -9,8 +9,8 @@ Organization settings can be accessed via the menu in the navigation bar.
 
 ### Overview
 
-The overview provides a summary of the organization:
+The overview provides a summary of the organization including:
 
 - Organization name
-- Pricing Plan
+- Pricing plan
 - Owner of the organization
