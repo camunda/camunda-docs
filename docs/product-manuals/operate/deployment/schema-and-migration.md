@@ -1,11 +1,11 @@
 ---
 id: schema-and-migration
-title: Schema & Migration
+title: Schema and migration
 ---
 Operate stores data in Elasticsearch. On first start Operate will create all required indices and templates.
 
 * [Schema](#schema)
-* [Data Migration](#data-migration)
+* [Data migration](#data-migration)
 * [How to migrate](#how-to-migrate)
 * [Example for migrate in Kubernetes](#example-for-migrate-in-kubernetes)
 

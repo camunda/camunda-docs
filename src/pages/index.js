@@ -9,16 +9,15 @@ import styles from './styles.module.css';
 const features = [
   {
     title: 'Camunda Cloud',
-    imageUrl: 'img/camunda-cloud-logo.png',
+    imageUrl: 'img/camunda-cloud-gradient.png',
     description: (
-      <>
-        Camunda Cloud delivers a scalable, on-demand workflow platform
+      <>A  scalable, on-demand workflow platform
       </>
     ),
   },
   {
     title: 'Zeebe',
-    imageUrl: 'img/workflow-engine-on-gradient.png',
+    imageUrl: 'img/camunda-workflow-engine-gradient.png',
     description: (
       <>
         A workflow engine for microservices orchestration
@@ -27,7 +26,7 @@ const features = [
   },
   {
     title: 'Operate',
-    imageUrl: 'img/cockpit-on-gradient.png',
+    imageUrl: 'img/camunda-operate-gradient.png',
     description: (
       <>
         Visibility, Monitoring, and Management

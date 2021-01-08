@@ -1,44 +1,19 @@
 ---
 id: connect-to-your-cluster
-title: Connect to your Cluster
+title: Connect to your cluster
 ---
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 ## Installation
 
 Install the appropriate package.
 
-<Tabs
-defaultValue="cli"
-values={[
-{ label: 'CLI', value: 'cli', },
-]
-}>
-
-<TabItem value="cli">
-
 ```bash
 npm i -g zbctl
 ```
 
-</TabItem>
-
-</Tabs>
-
 ## First connection
 
 After creating a client and downloading the connection file, you will now need to source it to make it available in your environment. If these are known to the system, a client can communicate directly with its own cluster in the cloud without further configuration.
-
-<Tabs
-defaultValue="cli"
-values={[
-{ label: 'CLI', value: 'cli', },
-]
-}>
-
-<TabItem value="cli">
 
 ```bash
 source ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
@@ -48,11 +23,7 @@ source ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
 zbctl status
 ```
 
-</TabItem>
-
-</Tabs>
-
-As a result you will get a similar result:
+As a result you will get a similar response:
 
 ```bash
 Cluster size: 1
