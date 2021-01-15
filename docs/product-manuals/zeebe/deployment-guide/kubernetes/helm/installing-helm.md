@@ -7,7 +7,7 @@ title: "Zeebe Helm Charts"
 
 > Note that all the Helm Charts are provided as a Community effort, these charts are not part of the Zeebe or Camunda Cloud release process, hence not updated as regularly as other artifacts. You are encouraged to get involved, submit fixes and report issues if you find them. 
 
-As part of the Zeebe project, we are providing the following Zeebe Helm Charts: 
+The following Zeebe Helm Charts are currently available: 
 
 - **Zeebe Cluster Helm (zeebe-cluster-helm)** : Deploys a Zeebe Cluster with 3 brokers using the `camunda/zeebe` docker image. This Chart depends on ElasticSearch Helm Chart and optionally on Kibana Helm Chart. This chart is hosted in the following repository, where you can find more information about its configuration: [http://github.com/zeebe-io/zeebe-cluster-helm/](http://github.com/zeebe-io/zeebe-cluster-helm/)
 - **Zeebe Operate Helm (zeebe-operate-helm)**: Deploys Zeebe Operate which connects to an existing ElasticSearch. This chart source code can be located here: [http://github.com/zeebe-io/zeebe-operate-helm/](http://github.com/zeebe-io/zeebe-operate-helm/)
