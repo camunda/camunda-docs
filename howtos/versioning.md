@@ -61,7 +61,7 @@ presets: [
 
 This step usually happens after a release has been created. Technically, the current contents are frozen in `docs` and copied to `versioned_docs` with the corresponding version. The process can be triggered by this Docusraus command:
 
-``bash
+```bash
 npm run docusaurus docs:version 0.26
 
 ```
