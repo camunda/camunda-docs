@@ -2,16 +2,24 @@
 
 Proposed Editorial Style Guide: [Google Style Guide](https://developers.google.com/style)
 
-## Voice
+## Voice, capitalization, and sentence structure
 
 - Second person, active voice, American spelling & punctuation
-- Address the user as “you”.
+- Use sentence-case spelling in titles and headings
+- Oxford comma (ex. - this, that, and something else)
+- Address the user as “you”
 
-## Company & Product Names
+## Product Names, & Terminology
 
-- Camunda 
-- Camunda Cloud
-- Camunda BPM
+**Camunda Cloud** is made up of the following **components**
+- Cloud Modeler & Zeebe Modeler
+- Zeebe (Zeebe Engine is ok too)
+- Operate
+- Tasklist
+
+Operate and Tasklist may need to be qualified outside of Camunda Cloud context.
+
+Modelers must be qualified so as not to be confused with Cawemo or Camunda Modeler.
 
 ## Button names
 
@@ -29,10 +37,12 @@ Can use screenshot or icon in instructions.
 
 - All images should include alt text
 - If using a screenshot to show steps to fill out a UI, include text above or below the screenshot that include input text.
+- Crop browser toolbar from images
 
 ## Filenames
 
-Code font, lower case
+- Code font, lower case
+- 'codeStuff.txt`
 
 # Menu bar
 
