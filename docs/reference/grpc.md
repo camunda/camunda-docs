@@ -285,7 +285,7 @@ message WorkflowRequestObject {
     // using the file extension of the name field
     FILE = 0;
     BPMN = 1; // extension 'bpmn'
-    YAML = 2 [deprecated = true]; // extension 'yaml'; deprecated as of release 1.0
+    YAML = 2 [deprecated = true]; // extension 'yaml'; removed as of release 1.0
   }
 
   // the resource basename, e.g. myProcess.bpmn
