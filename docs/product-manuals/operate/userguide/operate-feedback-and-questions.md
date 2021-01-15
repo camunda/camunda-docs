@@ -1,6 +1,6 @@
 ---
 id: operate-feedback-and-questions
-title: Giving Feedback And Asking Questions
+title: Giving feedback and asking questions
 ---
 If you have questions or feedback about Operate, the [Zeebe user forum](https://forum.zeebe.io) is the best way to get in touch with us. Please use the “Operate” tag when you create a post.
 

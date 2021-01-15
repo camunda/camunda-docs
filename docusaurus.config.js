@@ -14,49 +14,30 @@ module.exports = {
       title: "Camunda Cloud Docs",
       logo: {
         alt: "Camunda Cloud Docs",
-        src: "img/camunda-cloud-logo.png",
+        src: "img/camunda-cloud-gradient.png",
       },
       items: [
         {
-          to: "docs/guides/",
-          activeBasePath: "docs/guides/",
+          type: "docsVersionDropdown",
+          position: "left",
+        },
+        {
+          type: "doc",
+          docId: "guides/introduction-to-camunda-cloud",
           label: "Guides",
           position: "left",
         },
         {
-          to: "docs/product-manuals/",
-          activeBasePath: "docs/product-manuals",
+          type: "doc",
+          docId: "product-manuals/overview",
           label: "Product Manuals",
           position: "left",
         },
         {
-          to: "docs/reference/",
-          activeBasePath: "docs/reference",
+          type: "doc",
+          docId: "reference/overview",
           label: "Reference",
           position: "left",
-        },
-        {
-          to: "docs/samples/",
-          activeBasePath: "docs/samples",
-          label: "Samples",
-          position: "left",
-        },
-        {
-          to: "contact",
-          activeBasePath: "contact",
-          label: "Contact",
-          position: "right",
-        },
-        { href: "https://zeebe.io/blog/", label: "Blog", position: "left" },
-        {
-          href: "https://camunda.io",
-          label: "Cloud Console",
-          position: "right",
-        },
-        {
-          href: "https://github.com/camunda-cloud/camunda-cloud-docs",
-          label: "GitHub",
-          position: "right",
         },
       ],
     },
@@ -89,8 +70,16 @@ module.exports = {
           title: "More",
           items: [
             {
+              label: "Contact",
+              to: "contact",
+            },
+            {
+              label: "Cloud Console",
+              href: "https://camunda.io",
+            },
+            {
               label: "Blog",
-              href: "https://camunda.com/blog/",
+              href: "https://zeebe.io/blog/",
             },
             {
               label: "GitHub",
@@ -106,6 +95,42 @@ module.exports = {
       indexName: "camunda",
       searchParameters: {}, // Optional (if provided by Algolia)
     },
+    // Disabling Dark Mode
+    // https://github.com/camunda-cloud/camunda-cloud-documentation/issues/125
+    //
+    colorMode: {
+      // "light" | "dark"
+      defaultMode: "light",
+
+      // Hides the switch in the navbar
+      // Useful if you want to support a single color mode
+      disableSwitch: true,
+
+      // Should we use the prefers-color-scheme media-query,
+      // using user system preferences, instead of the hardcoded defaultMode
+      respectPrefersColorScheme: false,
+
+      // Dark/light switch icon options
+      switchConfig: {
+        // Icon for the switch while in dark mode
+        darkIcon: "🌙",
+
+        // CSS to apply to dark icon,
+        // React inline style object
+        // see https://reactjs.org/docs/dom-elements.html#style
+        darkIconStyle: {
+          marginLeft: "2px",
+        },
+
+        // Unicode icons such as '\u2600' will work
+        // Unicode with 5 chars require brackets: '\u{1F602}'
+        lightIcon: "\u{1F602}",
+
+        lightIconStyle: {
+          marginLeft: "1px",
+        },
+      },
+    },
   },
   presets: [
     [
@@ -116,6 +141,17 @@ module.exports = {
           // Please change this to your repo.
           editUrl:
             "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/",
+          // disableVersioning: isVersioningDisabled,
+          lastVersion: "current",
+          // onlyIncludeVersions:
+          //   !isVersioningDisabled && (isDev || isDeployPreview)
+          //     ? ["current", ...versions.slice(0, 2)]
+          //     : undefined,
+          versions: {
+            current: {
+              label: `latest`,
+            },
+          },
         },
         blog: {
           showReadingTime: true,

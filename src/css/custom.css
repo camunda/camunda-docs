@@ -7,13 +7,13 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #EB256D;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-primary: #FF1F00;
+  --ifm-color-primary-dark: #FF3800;
+  --ifm-color-primary-darker: #FF4700;
+  --ifm-color-primary-darkest: #FF5400;
+  --ifm-color-primary-light: #FF7000;
+  --ifm-color-primary-lighter: #FF7D00;
+  --ifm-color-primary-lightest: #FF8B00;
   --ifm-code-font-size: 95%;
 }
 
@@ -22,4 +22,12 @@
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+body{
+  font-family: IBM Plex Sans,-apple-system,blinkmacsystemfont,Segoe UI,roboto,oxygen-sans,ubuntu,cantarell,Helvetica Neue,sans-serif;
+}
+
+.alert--primary {
+  background-color: #14d890;
 }

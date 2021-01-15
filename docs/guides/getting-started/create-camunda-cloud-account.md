@@ -1,6 +1,6 @@
 ---
 id: create-camunda-cloud-account
-title: Create Camunda Cloud Account
+title: Create Camunda Cloud account
 ---
 
 ## Sign up for Camunda Cloud

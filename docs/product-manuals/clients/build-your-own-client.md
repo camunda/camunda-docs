@@ -1,6 +1,6 @@
 ---
 id: build-your-own-client
-title: Build your own Client
+title: Build your own client
 ---
 
 If you're using a technology for which there is no library yet, you can easily implement your own client.
@@ -13,7 +13,7 @@ See these two blog posts about creating a client:
 There are two essential steps:
 
 1. Authentication via OAuth
-2. GRPC handling
+2. gRPC handling
 
 ## Authentication via OAuth
 
@@ -37,7 +37,7 @@ curl -s --request POST \
   --data "{\"client_id\":\"${ZEEBE_CLIENT_ID}\",\"client_secret\":\"${ZEEBE_CLIENT_SECRET}\",\"audience\":\"zeebe.camunda.io\",\"grant_type\":\"client_credentials\"}"
 ```
 
-You'll receive an Access Token in the following format:
+You'll receive an access token in the following format:
 
 ```json
 {
@@ -50,11 +50,11 @@ You'll receive an Access Token in the following format:
 
 This token is valid for 86400 seconds (24 hours). Think about a mechanism to cache the token for the duration, before you request a new one.
 
-## GRPC handling
+## gRPC handling
 
-For GRPC handling you need a GRPC library, which you have to find for your technology stack.
+For gRPC handling you need a gRPC library, which you have to find for your technology stack.
 
-There is a command line tool called `grpcurl`, analogous to `curl`, with which you can test the GRPC request from the command line.
+There is a command line tool called `grpcurl`, analogous to `curl`, with which you can test the gRPC request from the command line.
 
 Install [grpcurl](https://github.com/fullstorydev/grpcurl) (for example, by using npm):
 
@@ -71,19 +71,19 @@ export ACCESS_TOKEN=$(curl -s --request POST \
   --data "{\"client_id\":\"${ZEEBE_CLIENT_ID}\",\"client_secret\":\"${ZEEBE_CLIENT_SECRET}\",\"audience\":\"zeebe.camunda.io\",\"grant_type\":\"client_credentials\"}" | sed 's/.*access_token":"\([^"]*\)".*/\1/' )
 ```
 
-For the GRPC call you now need a proto buffer file (you can find it in the [zeebe.io repository](https://raw.githubusercontent.com/zeebe-io/zeebe/master/gateway-protocol/src/main/proto/gateway.proto)):
+For the gRPC call you now need a proto buffer file (you can find it in the [zeebe.io repository](https://raw.githubusercontent.com/zeebe-io/zeebe/master/gateway-protocol/src/main/proto/gateway.proto)):
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/zeebe-io/zeebe/master/gateway-protocol/src/main/proto/gateway.proto > /tmp/gateway.proto
 ```
 
-Copy the Cluster Id of your Zeebe cluster (you can find it on the cluster detail view). Now you have all data together to execute the GRPC call and get the status (change the cluster id variable with your own cluster id):
+Copy the `cluster id` of your Zeebe cluster (you can find it on the cluster detail view). Now you have all data together to execute the gRPC call and get the status (change the `cluster id` variable with your own `cluster id`):
 
 ```bash
 grpcurl -H "Authorization: Bearer ${ACCESS_TOKEN}" -v -import-path /tmp -proto /tmp/gateway.proto $CLUSTER_ID.zeebe.camunda.io:443 gateway_protocol.Gateway/Topology
 ```
 
-You should now get a similar result:
+You should now get a similar response:
 
 ```bash
 Resolved method descriptor:

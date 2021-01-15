@@ -1,17 +1,17 @@
 ---
 id: setup-client-connection-credentials
-title: Setup Client connection credentials
+title: Setup client connection credentials
 ---
 
 To create a new client you have to navigate into the API tab:
 
 ![cluster-details](./img/cluster-detail-clients.png)
 
-Click on _Create New Client_-Button to create a new client and name your client accordingly. Make sure you select the Scope _Zeebe_ so the newly created client can access your zeebe-instance.
+Click **Create New Client** to create a new client and name your client accordingly. Select **Zeebe** so the newly created client can access your Zeebe instance.
 
 ![create-client](./img/cluster-details-create-client.png)
 
-Make sure you keep the generated client credentials in a safe place - the Client Secret will not be shown again. For your convenience, you can also download the client information to your computer.
+Make sure you keep the generated client credentials in a safe place - the **Client Secret** will not be shown again. For your convenience, you can also download the client information to your computer.
 
 ![created-client](./img/cluster-details-created-client.png)
 
