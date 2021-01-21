@@ -11,7 +11,7 @@ While we cannot tell you exactly what you need - beyond _it depends_ - we can ex
 
 All brokers in a partition use disk space to store:
 
-- The event log for each partition they participate in. By default, this is a minimum of _512MB_ for each partition, incrementing in 512MB segments. The event log is truncated on a given broker when data has been processed and successfully exported by all loaded exporters.
+- The event log for each partition they participate in. By default, this is a minimum of _128MB_ for each partition, incrementing in 128MB segments. The event log is truncated on a given broker when data has been processed and successfully exported by all loaded exporters.
 - One periodic snapshots of the running state (in-flight data) of each partition (unbounded, based on in-flight work).
 
 Additionally, the leader of a partition also uses disk space to store:
@@ -58,7 +58,7 @@ Config file
     zeebe:
       broker:
         data:
-          logSegmentSize: 512MB
+          logSegmentSize: 128MB
           snapshotPeriod: 15m
         cluster:
           partitionsCount: 1
@@ -66,7 +66,7 @@ Config file
           clusterSize: 1
 
 Environment Variables
-  ZEEBE_BROKER_DATA_LOGSEGMENTSIZE = 512MB
+  ZEEBE_BROKER_DATA_LOGSEGMENTSIZE = 128MB
   ZEEBE_BROKER_DATA_SNAPSHOTPERIOD = 15m
   ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT = 1
   ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR = 1
@@ -93,7 +93,7 @@ This is the Achilles' heel of the cluster. If data cannot be exported, it cannot
 
 ### Event log
 
-The event log for each partition is segmented. By default, the segment size is 512MB.
+The event log for each partition is segmented. By default, the segment size is 128MB.
 
 The event log will grow over time, unless and until individual event log segments are deleted.
 
