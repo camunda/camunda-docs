@@ -9,7 +9,6 @@ module.exports = {
   favicon: "img/favicon.ico",
   organizationName: "camunda-cloud", // Usually your GitHub org/user name.
   projectName: "camunda-cloud-documentation", // Usually your repo name.
-  plugins: ["@docusaurus/plugin-google-analytics"],
   themeConfig: {
     navbar: {
       title: "Camunda Cloud Docs",
