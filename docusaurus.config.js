@@ -9,6 +9,7 @@ module.exports = {
   favicon: "img/favicon.ico",
   organizationName: "camunda-cloud", // Usually your GitHub org/user name.
   projectName: "camunda-cloud-documentation", // Usually your repo name.
+  plugins: ["@docusaurus/plugin-google-analytics"],
   themeConfig: {
     navbar: {
       title: "Camunda Cloud Docs",
@@ -94,6 +95,11 @@ module.exports = {
       apiKey: "f1b2a46296ae374b7f5a5c627341c354",
       indexName: "camunda",
       searchParameters: {}, // Optional (if provided by Algolia)
+    },
+    googleAnalytics: {
+      trackingID: "insert tracking id here", // https://v2.docusaurus.io/docs/api/plugins/@docusaurus/plugin-google-analytics/
+      // Optional fields.
+      anonymizeIP: true, // Should IPs be anonymized?
     },
     // Disabling Dark Mode
     // https://github.com/camunda-cloud/camunda-cloud-documentation/issues/125
