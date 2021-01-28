@@ -73,7 +73,7 @@ kubectl get pods -n <Zeebe_Cluster_Name> -w
 
 The next video show these commands in action along with the installation of the Zeebe Kubernetes Operator:
 
-![Intro video](https://www.youtube.com/watch?v=U-crhMfuJgY)
+[![](./assets/zeebe-operator-video.png)](https://www.youtube.com/watch?v=U-crhMfuJgY)
 
 
 ## Technical details and dependencies
