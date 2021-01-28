@@ -16,7 +16,6 @@ The Zeebe Kubernetes Operator can be installed using Helm, as it is provided as 
 
 The following steps will guide you to install the Operator with Helm3  (which is the default version now)
 
-This will also work if you have correctly installed Helm2 in your cluster with tiller.
 Add the Zeebe Helm repository:
 
 ```
