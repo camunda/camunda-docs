@@ -4,6 +4,7 @@ aliases:
   - colrad
   - ultraschuppi
   - urbanisierung
+  - menski
   devrel:
   - jwulf
   - akeller
@@ -13,8 +14,8 @@ aliases:
   - ralfpuchert
   - sdorokhova
   - vsgoulart
+  - menski
   productmanagement:
-  - diznik
   - charley-mann
   tasklist:
   - huygur
@@ -22,6 +23,7 @@ aliases:
   - ralfpuchert
   - sdorokhova
   - vsgoulart
+  - menski
   zeebe:
   - Zelldon
   - npepinpe
@@ -30,3 +32,4 @@ aliases:
   - pihme
   - saig0
   - korthout
+  - menski
