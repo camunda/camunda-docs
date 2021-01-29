@@ -59,7 +59,7 @@ Config file
       broker:
         data:
           logSegmentSize: 128MB
-          snapshotPeriod: 15m
+          snapshotPeriod: 5m
         cluster:
           partitionsCount: 1
           replicationFactor: 1
