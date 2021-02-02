@@ -349,6 +349,7 @@ workflowKey:2251799813686750 bpmnProcessId:"order-process" version:4 workflowIns
 2019/06/06 20:59:50 Complete job 2251799813686760 of type payment-service
 2019/06/06 20:59:50 Processing order: 31243
 2019/06/06 20:59:50 Collect money using payment method: VISA
+2019/06/06 20:59:50 Successfully completed job
 ```
 
 ## What's next?
