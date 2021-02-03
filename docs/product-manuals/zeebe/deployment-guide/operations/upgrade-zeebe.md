@@ -52,7 +52,7 @@ After you verified that the upgrade was successful, we recommend to disable it a
     * Close all job workers
     * Interrupt the incoming connections to avoid user commands
 1. Wait until a snapshot is created for all partitions
-    * By default, a snapshot is created every 15 minutes
+    * By default, a snapshot is created every 5 minutes
     * Verify that a snapshot is created by looking at the [Metric](metrics.md) `zeebe_snapshot_count` on the leader and the followers
     * Note that no snapshot is created if no processing happened since the last snapshot
 1. Make a backup of the `data` folder
