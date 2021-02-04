@@ -14,6 +14,17 @@ All changes have to be done in a separate Branch. As soon as the changes are don
 1. Select the corresponding directory
 2. Add the document id to [`sidebars.js`](./sidebars.js)
 
-## Rights
+## Review Process
 
-`OWNERS` files in various folders define who needs to approve changes within this folder. Approvers can approve a PR by adding the comment `/lgtm`.
+After the proprosed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representives, and they will take care of delegating the issue:
+
+- Cloud: @urbanisierung
+- Zeebe: @pihme
+- Operate/Tasklist: @ralfpuchert
+- DevRel: @akeller
+- Product Management: @felix-mueller
+- Fallback: @menski
+
+In case you don't know who to assign choose @menski and he will delegate.
+
+As a reviewer feel free to merge any PR which you feel comfortable with after your review. If you have questions, concerns, or feel that you are not the right person to review the PR please make this transparent to the PR author so they can clarify this.
