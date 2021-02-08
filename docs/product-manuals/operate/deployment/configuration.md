@@ -73,6 +73,8 @@ Name | Description | Default value
 -----|-------------|--------------
 camunda.operate.zeebe.brokerContactPoint | Broker contact point to zeebe as hostname and port | localhost:26500
 
+__Currently Operate does not support TLS communication with Zeebe__
+
 ### A snippet from application.yml:
 
 ```yaml
