@@ -68,4 +68,5 @@ After working on an activated job, a job worker should inform Camunda Cloud that
 
 If the job is not completed or failed within the configured job activation timeout, Zeebe will reassign the job to another job worker. This does not affect the number of _remaining retries_.
 
-A timeout may lead to two workers working on the same job at the same time. In this case, the first _complete job_ command will win, and the second _complete job_ command will be rejected with an error.
+
+A timeout may lead to two different workers working on the same job, possibly at the same time. If this happens, only one worker will successfully complete the job. The other _complete job_ command will be rejected with a 'NOT FOUND' error. The fact that jobs may be worked on more than once means that Zeebe is an at-least once system with respect to job delivery and that worker code must be idempotent. In other words, workers __must__ deal with jobs in a way that allows the code to be executed more than once for the same job while preserving the expected application state.
