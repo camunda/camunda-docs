@@ -124,12 +124,12 @@ Given the above workflow a successful execution will yield the following records
     </tr>
     <tr>
         <td>ELEMENT_COMPLETING</td>
-        <td>order-placed</td>
+        <td>order-process</td>
         <td>process</td>
     </tr>
     <tr>
         <td>ELEMENT_COMPLETED</td>
-        <td>order-placed</td>
+        <td>order-process</td>
         <td>process</td>
     </tr>
 </table>
