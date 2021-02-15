@@ -1,6 +1,5 @@
 <div align="center">
 <img src="./static/img/camunda-cloud-gradient.png" width="200px"/>
-
 <h1>Camunda Cloud Documentation</h1>
 <p>
 This repository contains the Camunda Cloud documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
