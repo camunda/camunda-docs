@@ -57,6 +57,7 @@ module.exports = {
       items: [
         "reference/tasklist-api/scalars/boolean",
         "reference/tasklist-api/scalars/id",
+        "reference/tasklist-api/scalars/int",
         "reference/tasklist-api/scalars/string",
       ],
     },
