@@ -15,7 +15,7 @@ style={{
 </span>
 );
 
-Describes the User task
+Describes the User task.
 
 ```graphql
 type Task {
@@ -27,6 +27,7 @@ type Task {
   assignee: User
   variables: [Variable!]
   taskState: TaskState!
+  sortValues: [String!]
 }
 ```
 
@@ -63,3 +64,7 @@ Variables associated to the task
 #### `taskState` ([`TaskState!`](/docs/reference/tasklist-api/enums/task-state))
 
 State of the task
+
+#### `sortValues` ([`[String!]`](/docs/reference/tasklist-api/scalars/string))
+
+Array of values to be copied into `TaskQuery` to request for next or previous page of tasks.
