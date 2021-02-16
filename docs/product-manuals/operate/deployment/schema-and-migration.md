@@ -12,6 +12,7 @@ Operate stores data in Elasticsearch. On first start Operate will create all req
 ## Schema
 
 Operate uses several Elasticsearch indices that are mostly created by using templates.
+Each index has its own version of schema. That means the version reflected in indices names are *not* the version of Operate.
 
 Index names follow the defined pattern:
 ```
@@ -19,7 +20,7 @@ operate-{datatype}-{schemaversion}_[{date}]
 
 ```
 where `datatype` defines which data is stored in the index, e.g. `user`, `variable` etc.,
-`schemaversion` represents version of Operate,
+`schemaversion` represents the index schema version
 `date` represents finished date of archived data (see [Data retention](data-retention.md)).
 
 Knowing index name pattern, it is possible to customize index settings by creating Elasticsearch templates ([Example of an index template](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-templates.html))
@@ -48,7 +49,7 @@ version of Operate to another, migration of data must be performed. Operate dist
 The migration uses Elasticsearch [processors](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/ingest-processors.html) and [pipelines](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/pipeline.html) to reindex the data.
 
 Each version of Operate delivers set of migration steps needed to be applied for corresponding version of Operate.
-When upgrading from one version to another necessary migration steps constitute the so-called migration plan.
+When upgrading from one version to another, necessary migration steps constitute the so-called migration plan.
 All known migration steps (both applied and not) are persisted in dedicated Elasticsearch index: `operate-migration-steps-repository`.
 
 
@@ -62,10 +63,10 @@ configuration (```<operate_home>/config/application.yml```).
 Execute ```<operate_home>/bin/migrate``` (or ```<operate_home>/bin/migrate.bat``` for Windows).
 
 What is expected to happen:
-* Elasticsearch schema of new version is created
-* previous version is detected
-* migration plan is built and executed reindexing data for each index
-* old indices are deleted
+* Elasticsearch indices will be created if they don't exist.
+* if previous versions of indices are existing a migration plan will be build.
+* migration plan for each index that has previous versions will be executed.
+* previous indices will be deleted
 
 All known migration steps with metadata will be stored in `operate-migration-steps-repository` index.
 
@@ -77,7 +78,7 @@ All known migration steps with metadata will be stored in `operate-migration-ste
 #### Migrate by using built-in automatic upgrade
 
 When running newer version of Operate against older schema, it will perform data migration on startup.
-The migration will happen when exactly ONE previous schema version was detected.
+The migration will happen when exactly ONE previous schema version of the indices were detected.
 
 #### Further notes
 
@@ -93,11 +94,17 @@ It can be disabled by setting the configuration key:
 
 `camunda.operate.migration.migrationEnabled = false`
 
-You can specify previous ("source") version with the configuration key:
+Migration settings that controls the duration:
 
-`camunda.operate.migration.sourceVersion=0.23.0`
+You can set the batch size for reindex the documents. This can reduce the time that is needed by migration to reindex the data.
+Small document size = big batch size, big document size = small batch size.
 
-If no *sourceVersion* is defined Operate tries to detect it from Elasticsearch indices.
+`camunda.operate.migration.reindexBatchSize = 5000` (Between 1 and 10.000, Default: 5.000)
+
+In how many slices should the reindex be divided. For each shard that is used by the index you normally use a slice.
+Elasticsearch decides how many slices will be used if the value is set to 0 (automatic).
+
+`camunda.operate.migration.slices = 0` - Must be positive. Default is 0 (automatic). 
 
 
 #### Example for migrate in Kubernetes
@@ -114,11 +121,11 @@ The following snippet of a pod description for Kubernetes shows the usage of `mi
 spec:
    initContainers:
      - name: migration
-       image: camunda/operate:0.24.0
+       image: camunda/operate:1.0.0
        command: ['/bin/sh','/usr/local/operate/bin/migrate']
    containers:
      - name: operate
-       image: camunda/operate:0.24.0
+       image: camunda/operate:1.0.0
        env:
 ...
 ```
