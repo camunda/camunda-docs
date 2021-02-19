@@ -17,15 +17,15 @@ import TabItem from "@theme/TabItem";
 
 You can now use the **Save & Deploy** option in the **Deployment** menue to deploy the newly created process to your cluster.
 
-![console-modeler-deploy](./img/cloud-modeler-deploy.png)
+![console-modeler-deploy](../../product-manuals/modeler/cloud-modeler/img/save-and-deploy.png)
 
 Deployment can take a few seconds, but you should get a confirmation for successful deployment.
 
-![console-modeler-deploy-successfull](./img/cloud-modeler-deploy-successfull.png)
+![console-modeler-deploy-successfull](../../product-manuals/modeler/cloud-modeler/img/save-and-deploy-successful.png)
 
 You can now start a new process instance. For this example you can just start an instance with an empty payload.
 
-![console-modeler-start-instance](./img/cloud-modeler-start-instance.png)
+![console-modeler-start-instance](../../product-manuals/modeler/cloud-modeler/img/start-process-instance-variables.png)
 
 Once the instance is started, you'll get a confirmation with a button to open Operate.
 
