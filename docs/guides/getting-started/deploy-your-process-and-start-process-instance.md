@@ -3,21 +3,19 @@ id: deploy-your-process-and-start-process-instance
 title: Deploy and start your process instance
 ---
 
-
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 <Tabs groupId="modeler" defaultValue="console" values={
-    [
-        {label: 'Console Modeler', value: 'console', },
-        {label: 'Zeebe Modeler', value: 'desktop', },
-    ]
+[
+{label: 'Console Modeler', value: 'console', },
+{label: 'Zeebe Modeler', value: 'desktop', },
+]
 }>
-
 
 <TabItem value='console'>
 
-You can now use the **Save & Deploy** button to deploy the newly created process to your cluster.
+You can now use the **Save & Deploy** option in the **Deployment** menue to deploy the newly created process to your cluster.
 
 ![console-modeler-deploy](./img/cloud-modeler-deploy.png)
 
@@ -33,9 +31,7 @@ Once the instance is started, you'll get a confirmation with a button to open Op
 
 ![console-modeler-start-instance-done](./img/cloud-modeler-start-instance-done.png)
 
-
 </TabItem>
-
 
 <TabItem value='desktop'>
 
@@ -47,15 +43,13 @@ In the deployment dialog, the connection information must now be specified: `Clu
 
 `Client Id` and `Cluster Id` can be retrieved by clicking on **View** on the client in the **API** tab.
 
-
 ![cluster-details-created-client-view](./img/cluster-details-created-client-view.png)
 
 The `Client Secret` can be retrieved from the downloaded connection file:
 
-
 ```bash
 grep SECRET  ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
-export ZEEBE_CLIENT_SECRET='zbzsZI_6UnCsH_CIo0lNUN8qGyvLJr9VrH77ewNm8Oq3elvhPvV7g.QmJGydzOLo' 
+export ZEEBE_CLIENT_SECRET='zbzsZI_6UnCsH_CIo0lNUN8qGyvLJr9VrH77ewNm8Oq3elvhPvV7g.QmJGydzOLo'
 ```
 
 Click **Deploy** to deploy the workflow. Use **Play** from the navigation to start a new instance.
