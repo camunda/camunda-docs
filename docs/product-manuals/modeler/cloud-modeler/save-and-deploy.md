@@ -16,7 +16,3 @@ After you have created a cluster it must be ready to deploy a diagram.
 As soon as the cluster is _Healthy_, the deployment is possible.
 
 ![save and deploy](img/save-and-deploy.png)
-
-After a successful deployment you can [start a new instance](./start-instance.md).
-
-![start process instance](img/start-process-instance.png)

@@ -27,9 +27,9 @@ You can now start a new process instance. For this example you can just start an
 
 ![console-modeler-start-instance](../../product-manuals/modeler/cloud-modeler/img/start-process-instance-variables.png)
 
-Once the instance is started, you'll get a confirmation with a button to open Operate.
+Once the instance is started, you'll get a confirmation with a link to open Operate.
 
-![console-modeler-start-instance-done](./img/cloud-modeler-start-instance-done.png)
+![console-modeler-start-instance-done](../../product-manuals/modeler/cloud-modeler/img/start-process-instance-done.png)
 
 </TabItem>
 
