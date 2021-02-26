@@ -118,6 +118,7 @@ module.exports = {
             "product-manuals/modeler/cloud-modeler/import-diagram",
             "product-manuals/modeler/cloud-modeler/save-and-deploy",
             "product-manuals/modeler/cloud-modeler/start-instance",
+            "product-manuals/modeler/cloud-modeler/model-overview",
           ],
           "Zeebe Modeler": [
             "product-manuals/modeler/zeebe-modeler/install-the-zeebe-modeler",
