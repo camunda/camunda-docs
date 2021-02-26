@@ -17,7 +17,7 @@ The **Sign Up** screen appears:
 
 Fill in the form and submit or signup using the social signup buttons.
 
-If you choose for the form, you'll receive a confirmation e-mail. Click on the link to verify your e-mail address and set your password.
+If you choose the form, you'll receive a confirmation e-mail. Click on the link to verify your e-mail address and set your password.
 
 ## Login to your Camunda Cloud account
 
