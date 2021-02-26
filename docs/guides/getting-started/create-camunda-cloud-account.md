@@ -13,14 +13,16 @@ The **Sign Up** screen appears:
 
 ![signup](./img/signup.png)
 
-### Fill in the form and submit
+### Create an account
 
-After you've filled in and sent the form, you'll receive a confirmation e-mail. Click on the link to verify your e-mail address and set your password.
+Fill in the form and submit or signup using the social signup buttons.
+
+If you choose for the form, you'll receive a confirmation e-mail. Click on the link to verify your e-mail address and set your password.
 
 ## Login to your Camunda Cloud account
 
 ### Visit [https://camunda.io](https://camunda.io)
 
-Log in with your e-mail address and password:
+Log in with your e-mail address and password you used in the previous form or use the social loggin buttons.
 
 ![login](./img/login.png)
