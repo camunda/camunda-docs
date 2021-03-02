@@ -17,7 +17,7 @@ Use [This workflow model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for th
 
 <TabItem value='console'>
 
-Use the "Import Diagram" button to inject the BPMN-model you just downloaded into the diagram
+Use the "Import New Diagram" button to inject the BPMN-model you just downloaded into the diagram
 
 ![processId-cloud](./img/cloud-modeler-advanced-process-id.png)
 

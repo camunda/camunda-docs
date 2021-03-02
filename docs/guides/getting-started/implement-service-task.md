@@ -17,7 +17,9 @@ Use [this workflow model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for th
 
 <TabItem value='console'>
 
-Click **Import Diagram** to inject the BPMN-model you just downloaded into the diagram.
+Click **Import New Diagram** in the context menu to inject the BPMN-model you just downloaded into the diagram.
+
+![import](../../product-manuals/modeler/cloud-modeler/img/cloud-modeler-import.png)
 
 ![processId-cloud](./img/cloud-modeler-advanced-process-id.png)
 
@@ -25,7 +27,7 @@ This workflow includes a service task and an XOR gateway. Select the service tas
 
 ![workflow-cloud](./img/cloud-modeler-advanced.png)
 
-Deploy the new workflow using the **Save & Deploy** button.
+Deploy the new workflow using the **Save & Deploy** option in the **Deployment** menu.
 
 Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
 
