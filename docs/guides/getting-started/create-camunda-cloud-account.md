@@ -19,6 +19,8 @@ Fill in the form and submit or signup using the social signup buttons.
 
 If you choose the form, you'll receive a confirmation e-mail. Click on the link to verify your e-mail address and set your password.
 
+If you choose creating an account through the social signup button, you get redirected to Console directly.
+
 ## Login to your Camunda Cloud account
 
 ### Visit [https://camunda.io](https://camunda.io)
