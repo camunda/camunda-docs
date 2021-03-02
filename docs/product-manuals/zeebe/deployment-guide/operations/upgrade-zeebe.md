@@ -48,7 +48,7 @@ After you verified that the upgrade was successful, we recommend to disable it a
 
 ### Preparing the upgrade
 
-1. Stop the workflow processing
+1. Stop the process processing
     * Close all job workers
     * Interrupt the incoming connections to avoid user commands
 1. Wait until a snapshot is created for all partitions
@@ -105,14 +105,14 @@ io.zeebe.engine.processor.InconsistentReprocessingException: Reprocessing issue 
   Restore the data from a backup and follow the recommended upgrade procedure. [cause:
   "The key of the record on the log stream doesn't match to the record from reprocessing.",
   log-stream-record: {"partitionId":1,"value":{"version":1,"bpmnProcessId":"parallel-tasks",
-  "workflowKey":2251799813685249,"parentElementInstanceKey":-1,"parentWorkflowInstanceKey":-1,
+  "processKey":2251799813685249,"parentElementInstanceKey":-1,"parentProcessInstanceKey":-1,
   "bpmnElementType":"PARALLEL_GATEWAY","flowScopeKey":2251799813685251,
-  "elementId":"ExclusiveGateway_0tkgnd5","workflowInstanceKey":2251799813685251},
-  "key":2251799813685256,"sourceRecordPosition":4294997784,"valueType":"WORKFLOW_INSTANCE",
+  "elementId":"ExclusiveGateway_0tkgnd5","processInstanceKey":2251799813685251},
+  "key":2251799813685256,"sourceRecordPosition":4294997784,"valueType":"PROCESS_INSTANCE",
   "timestamp":1601025180728,"recordType":"EVENT","intent":"ELEMENT_ACTIVATING",
   "rejectionType":"NULL_VAL","rejectionReason":"","position":4294998112},
   reprocessing-record: {key=2251799813685255, sourceRecordPosition=4294997784,
-  intent=WorkflowInstanceIntent:ELEMENT_ACTIVATING, recordType=EVENT}]
+  intent=ProcessInstanceIntent:ELEMENT_ACTIVATING, recordType=EVENT}]
 ```
 
   </p>

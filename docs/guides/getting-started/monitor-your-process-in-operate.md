@@ -10,7 +10,7 @@ Camunda Cloud offers Operate to monitor your process instances. An entry point c
 
 ![operate-dashboard](./img/operate-dashboard.png)
 
-By selecting the deployed workflow you will see a list of instances that can be filtered:
+By selecting the deployed process you will see a list of instances that can be filtered:
 
 ![operate-instances](./img/operate-advanced-instances-pong.png)
 
@@ -22,7 +22,7 @@ Because [the started worker](./implement-service-task.md) returns
 }
 ```
 
-the workflow ends in the upper end event following the Ping sequence flow.
+the process ends in the upper end event following the Ping sequence flow.
 
 Changing the worker to
 
@@ -34,7 +34,7 @@ and creating a new instance leads to a second instance in Operate, which you'll 
 
 ![operate-instance](./img/operate-advanced-instances-other.png)
 
-As a next step you can now connect both workers in parallel and create more workflow instances:
+As a next step you can now connect both workers in parallel and create more process instances:
 
 ```bash
 while true; do zbctl create instance camunda-cloud-quick-start-advanced; sleep 1; done

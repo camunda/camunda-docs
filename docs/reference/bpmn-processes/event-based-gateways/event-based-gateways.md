@@ -5,11 +5,11 @@ title: "Event-based gateway"
 
 An event-based gateway allows to make a decision based on events. 
 
-![workflow](assets/event-based-gateway.png)
+![process](assets/event-based-gateway.png)
 
 An event-based gateway must have at least two outgoing sequence flows. Each sequence flow must to be connected to an intermediate catch event of type **timer or message**.
 
-When an event-based gateway is entered then the workflow instance waits at the gateway until one of the events is triggered. When the first event is triggered then the outgoing sequence flow of this event is taken. No other events of the gateway can be triggered afterward.
+When an event-based gateway is entered then the process instance waits at the gateway until one of the events is triggered. When the first event is triggered then the outgoing sequence flow of this event is taken. No other events of the gateway can be triggered afterward.
 
 ## Additional resources
 
@@ -48,8 +48,8 @@ When an event-based gateway is entered then the workflow instance waits at the g
 </details>
 
 <details>
-  <summary>Workflow lifecycle</summary>
-  <p>Workflow instance records of an event-based gateway: 
+  <summary>Process lifecycle</summary>
+  <p>Process instance records of an event-based gateway: 
 
 <table>
     <tr>

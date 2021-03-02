@@ -32,7 +32,7 @@ In case of a **parallel** multi-instance activity, all instances are created whe
 
 ## Defining the collection to iterate over
 
-A multi-instance activity **must** have an `inputCollection` expression that defines the collection to iterate over (e.g. `= items`). Usually, it [accesses a variable](/product-manuals/concepts/expressions.md#access-variables) of the workflow instance that holds the collection. The expression is evaluated on activating the multi-instance body. It must result in an `array` of any type (e.g. `["item-1", "item-2"]`).
+A multi-instance activity **must** have an `inputCollection` expression that defines the collection to iterate over (e.g. `= items`). Usually, it [accesses a variable](/product-manuals/concepts/expressions.md#access-variables) of the process instance that holds the collection. The expression is evaluated on activating the multi-instance body. It must result in an `array` of any type (e.g. `["item-1", "item-2"]`).
 
 In order to access the current element of the `inputCollection` value within the instance, the multi-instance activity can define the `inputElement` variable (e.g. `item`). The element is stored as a local variable of the instance under the given name.
 
@@ -68,15 +68,15 @@ Every instance has a local variable `loopCounter`. It holds the index in the `in
 
 Input and output variable mappings can be defined at the multi-instance activity. They are applied **on each instance** on activating and on completing.
 
-The input mappings can be used to create new local variables in the scope of an instance. These variables are only visible within the instance. It is a way to restrict the **visibility** of variables. By default, new variables (e.g. provided by a job worker) are created in the scope of the workflow instance and are visible to all instances of the multi-instance activity as well as outside of it. In case of a parallel multi-instance activity, this can lead to variables that are modified by multiple instances and result in race conditions. If a variable is defined as local variable, then it is not propagated to a parent or the workflow instance scope and can't be modified outside of the instance.
+The input mappings can be used to create new local variables in the scope of an instance. These variables are only visible within the instance. It is a way to restrict the **visibility** of variables. By default, new variables (e.g. provided by a job worker) are created in the scope of the process instance and are visible to all instances of the multi-instance activity as well as outside of it. In case of a parallel multi-instance activity, this can lead to variables that are modified by multiple instances and result in race conditions. If a variable is defined as local variable, then it is not propagated to a parent or the process instance scope and can't be modified outside of the instance.
 
 The input mappings can access the local variables of the instance (e.g. `inputElement`, `loopCounter`). For example, to extract parts of the `inputElement` variable and apply them to separate variables.
 
 The output mappings can be used to update the `outputElement` variable. For example, to extract a part of the job variables.
 
 **Example:** say we have a call activity that is marked as a parallel multi-instance. When the
-called workflow instance completes, its variables get [merged](/product-manuals/concepts/variables.md#variable-propagation)
-into the call activity's workflow instance. Its result is collected in the output collection
+called process instance completes, its variables get [merged](/product-manuals/concepts/variables.md#variable-propagation)
+into the call activity's process instance. Its result is collected in the output collection
 variable, but this has become a race condition where each completed child instance again overwrites
 this same variable. We end up with a corrupted output collection. An output mapping can used to
 overcome this, because it restricts which variables get merged. In the case that:
@@ -123,8 +123,8 @@ target: output
 </details>
 
 <details>
-  <summary>Workflow lifecycle</summary>
-  <p>Workflow instance records of a parallel multi-instance service task:
+  <summary>Process lifecycle</summary>
+  <p>Process instance records of a parallel multi-instance service task:
 
 <table>
     <tr>

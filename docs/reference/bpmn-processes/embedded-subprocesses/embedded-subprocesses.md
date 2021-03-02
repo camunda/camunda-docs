@@ -3,7 +3,7 @@ id: embedded-subprocesses
 title: "Embedded subprocess"
 ---
 
-An embedded subprocess allows to group elements of the workflow.
+An embedded subprocess allows to group elements of the process.
 
 ![embedded-subprocess](assets/embedded-subprocess.png)
 
@@ -45,8 +45,8 @@ By default, the local variables of the subprocess are not propagated (i.e. they 
 </details>
 
 <details>
-  <summary>Workflow lifecycle</summary>
-  <p>Workflow instance records of an embedded subprocess:
+  <summary>Process lifecycle</summary>
+  <p>Process instance records of an embedded subprocess:
 
 <table>
     <tr>

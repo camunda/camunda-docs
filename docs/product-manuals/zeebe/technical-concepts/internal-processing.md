@@ -7,13 +7,13 @@ Internally, Zeebe is implemented as a collection of _stream processors_ working 
 
 - Command protocol \(request-response\),
 - Record export \(streaming\),
-- Workflow evaluation \(asynchronous background tasks\)
+- Process evaluation \(asynchronous background tasks\)
 
 Record export solves the history problem - the stream provides exactly the kind of exhaustive audit log that a workflow engine needs to produce.
 
 ## State machines
 
-Zeebe manages stateful entities: jobs, workflows, etc. Internally, these entities are implemented as _state machines_ managed by a stream processor.
+Zeebe manages stateful entities: jobs, processes, etc. Internally, these entities are implemented as _state machines_ managed by a stream processor.
 
 The concept of the state machine pattern is simple. An instance of a state machine is always in one of several logical states. From each state, a set of transitions defines the next possible states. Transitioning into a new state may produce outputs/side effects.
 
@@ -29,7 +29,7 @@ Every state change in a state machine is called an _event_. Zeebe publishes ever
 
 State changes can be requested by submitting a _command_. A Zeebe broker receives commands from two sources:
 
-- Clients send commands remotely. Examples: Deploying workflows, starting workflow instances, creating and completing jobs, etc.
+- Clients send commands remotely. Examples: Deploying processes, starting process instances, creating and completing jobs, etc.
 - The broker itself generates commands. Examples: Locking a job for exclusive processing by a worker, etc.
 
 Once received, a command is published as a record on the addressed stream.
@@ -50,7 +50,7 @@ For example, processing the _Create Job_ command produces the event _Job Created
 
 A state change which occurred in one entity can automatically trigger a command for another entity. 
 
-For example, when a job is completed, the corresponding workflow instance shall continue with the next step. Thus, the Event _Job Completed_ triggers the command _Complete Activity_.
+For example, when a job is completed, the corresponding process instance shall continue with the next step. Thus, the Event _Job Completed_ triggers the command _Complete Activity_.
 
 ## Handling back-pressure
 

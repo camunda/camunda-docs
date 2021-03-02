@@ -1,20 +1,20 @@
 ---
-id: workflow-deploy
-title: "Deploy a workflow"
+id: process-deploy
+title: "Deploy a process"
 ---
 
 ## Related resources
 
-- [Workflow basics](/product-manuals/concepts/workflows.md)
-- [BPMN introduction](/reference/bpmn-workflows/bpmn-primer.md)
+- [Process basics](/product-manuals/concepts/processes.md)
+- [BPMN introduction](/reference/bpmn-processes/bpmn-primer.md)
 
 ## Prerequisites
 
 1. Running Zeebe broker with endpoint `localhost:26500` (default)
 
-## WorkflowDeployer.java
+## ProcessDeployer.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/workflow/WorkflowDeployer.java)
+[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/process/ProcessDeployer.java)
 
 ```java
 final DeploymentEvent deploymentEvent =

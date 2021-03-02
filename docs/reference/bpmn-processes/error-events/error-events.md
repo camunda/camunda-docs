@@ -3,11 +3,11 @@ id: error-events
 title: "Error events"
 ---
 
-Error events are events which reference an error. They are used to handle business errors in a workflow.
+Error events are events which reference an error. They are used to handle business errors in a process.
 
-![workflow](assets/error-events.png)
+![process](assets/error-events.png)
 
-An error indicates that some kind of business error has occurred which should be handled in the workflow, for example, by taking a different path to compensate the error.
+An error indicates that some kind of business error has occurred which should be handled in the process, for example, by taking a different path to compensate the error.
 
 ## Defining the error
 
@@ -19,33 +19,33 @@ The `errorCode` is a `string` that must match to the error code that is sent by 
 
 An error can be caught using an error **boundary event** or an error **event subprocess**.
 
-The boundary event or the event subprocess must be interrupting. When the error is caught then the service task gets terminated and the boundary event or event subprocess gets activated. That means the workflow instance continues where the error is caught instead of following the regular path.
+The boundary event or the event subprocess must be interrupting. When the error is caught then the service task gets terminated and the boundary event or event subprocess gets activated. That means the process instance continues where the error is caught instead of following the regular path.
 
-An error is caught by the first event in the scope hierarchy that matches the error code. If the error is thrown form a service task then it can be caught by an attached boundary event. If the task has no boundary event or the error code does not match then the error is propagated to the parent or root scope of the workflow instance.
+An error is caught by the first event in the scope hierarchy that matches the error code. If the error is thrown form a service task then it can be caught by an attached boundary event. If the task has no boundary event or the error code does not match then the error is propagated to the parent or root scope of the process instance.
 
-In case the workflow instance is created via call activity, the error can also be caught in the calling parent workflow instance.
+In case the process instance is created via call activity, the error can also be caught in the calling parent process instance.
 
 ## Throwing the error
 
 An error can be thrown from a **client command** while processing a job. See the [gRPC command](/reference/grpc.md#throwerror-rpc) for details.
 
-Alternatively, an error can also be thrown inside a workflow using an error **end event**.
+Alternatively, an error can also be thrown inside a process using an error **end event**.
 
-![workflow](assets/error-throw-events.png)
+![process](assets/error-throw-events.png)
 
 ## Unhandled errors
 
-When an error is triggered then it should be handled in the workflow. If it is not handled (e.g. unexpected error code) then an **incident** is raised to indicate the failure. The incident is attached to the corresponding service task of the processed job or the error end event.
+When an error is triggered then it should be handled in the process. If it is not handled (e.g. unexpected error code) then an **incident** is raised to indicate the failure. The incident is attached to the corresponding service task of the processed job or the error end event.
 
-The incident can not be solved by the user because the failure is in the workflow itself that can not be changed to handle the error for this workflow instance.
+The incident can not be solved by the user because the failure is in the process itself that can not be changed to handle the error for this process instance.
 
 ## Business error vs. technical error
 
 While processing a job, two different types of errors can be occurred: a technical error (e.g. database connection interrupted) and a business error (e.g. invalid credit card).
 
-A technical error is usually unexpected and should not be handled in the workflow. The error may disappear when the job is retried, or an incident is created to indicate that an user interaction is required.
+A technical error is usually unexpected and should not be handled in the process. The error may disappear when the job is retried, or an incident is created to indicate that an user interaction is required.
 
-A business error is expected and is handled in the workflow. The workflow may take a different path to compensate the error or undo previous actions.
+A business error is expected and is handled in the process. The process may take a different path to compensate the error or undo previous actions.
 
 ## Additional resources
 
@@ -75,8 +75,8 @@ A business error is expected and is handled in the workflow. The workflow may ta
  </details>
 
  <details>
-   <summary>Workflow lifecycle</summary>
-   <p>Workflow instance records of an error boundary event:
+   <summary>Process lifecycle</summary>
+   <p>Process instance records of an error boundary event:
 
  <table>
      <tr>

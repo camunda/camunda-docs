@@ -45,7 +45,7 @@ A correlation is an attribute within a message which is used to match this messa
 
 A process cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying processes to the broker.
 
-- [Getting started tutorial: Deploy a workflow](/product-manuals/zeebe/deployment-guide/getting-started/deploy-a-workflow.md)
+- [Getting started tutorial: Deploy a process](/product-manuals/zeebe/deployment-guide/getting-started/deploy-a-process.md)
 
 ### Event
 
@@ -128,20 +128,20 @@ process could be an e-commerce shopping experience, onboarding a new employee, e
 process are identified by a unique process id. The process is usually also referred to as the
 BPMN model.
 
-- [Workflows](/product-manuals/concepts/workflows.md)
+- [Processes](/product-manuals/concepts/processes.md)
 
 ### Process instance
 
 While a process represents a defined sequence of distinct steps representing your business logic, a process instance represents a currently executing or completed process. For a single process, there could be many associated _process instances_ in various stages of their executing lifecycle. Process instances are identitied by process instance ids. Executing process instances are also sometimes referred to as inflight processes.
 
-- [Workflows](/product-manuals/concepts/workflows.md)
+- [Processes](/product-manuals/concepts/processes.md)
 
 ### Process instance variable
 
 A process instance variable represents the execution state (i.e data) of a process instance. These variables capture business process parameters which are input and output of various stages of the process instance and which also influence process flow execution.
 
 - [Variables](/product-manuals/concepts/variables.md)
-- [Data flow](/reference/bpmn-workflows/data-flow.md)
+- [Data flow](/reference/bpmn-processes/data-flow.md)
 
 
 ### Record

@@ -1,19 +1,19 @@
 ---
-id: workflow-instance-create
-title: "Create a workflow instance"
+id: process-instance-create
+title: "Create a process instance"
 ---
 
 ## Prerequisites
 
 1. Running Zeebe broker with endpoint `localhost:26500` (default)
-1. Run the [deploy a workflow example](workflow-deploy.md)
+1. Run the [deploy a process example](process-deploy.md)
 
-## WorkflowInstanceCreator.java
+## ProcessInstanceCreator.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/workflow/WorkflowInstanceCreator.java)
+[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/process/ProcessInstanceCreator.java)
 
 ```java
-final WorkflowInstanceEvent workflowInstanceEvent =
+final ProcessInstanceEvent processInstanceEvent =
     client
         .newCreateInstanceCommand()
         .bpmnProcessId(bpmnProcessId)

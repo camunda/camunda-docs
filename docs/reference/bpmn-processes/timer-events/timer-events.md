@@ -5,21 +5,21 @@ title: "Timer events"
 
 Timer events are events which are triggered by a defined timer.
 
-![workflow](assets/timer-events.png)
+![process](assets/timer-events.png)
 
 ## Timer start events
 
-A workflow can have one or more timer start events (besides other types of start events). Each of the timer events must have either a **time date or time cycle** definition.
+A process can have one or more timer start events (besides other types of start events). Each of the timer events must have either a **time date or time cycle** definition.
 
-When a workflow is deployed then it schedules a timer for each timer start event. Scheduled timers of the previous version of the workflow (based on the BPMN process id) are canceled.
+When a process is deployed then it schedules a timer for each timer start event. Scheduled timers of the previous version of the process (based on the BPMN process id) are canceled.
 
-When a timer is triggered then a new workflow instance is created and the corresponding timer start event is activated.
+When a timer is triggered then a new process instance is created and the corresponding timer start event is activated.
 
 ## Intermediate timer catch events
 
 An intermediate timer catch event must have a **time duration** definition that defines when it is triggered.
 
-When an intermediate timer catch event is entered then a corresponding timer is scheduled. The workflow instance stops at this point and waits until the timer is triggered. When the timer is triggered, the catch event gets completed and the workflow instance continues.
+When an intermediate timer catch event is entered then a corresponding timer is scheduled. The process instance stops at this point and waits until the timer is triggered. When the timer is triggered, the catch event gets completed and the process instance continues.
 
 ## Timer boundary events
 
@@ -36,7 +36,7 @@ A timer can be defined either as a static value (e.g. `PT3D`) or as an [expressi
 - [access a variable](/product-manuals/concepts/expressions.md#access-variables) (e.g. `= remainingTime`)
 - [using temporal values](/product-manuals/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`)
 
-If the expression belongs to a timer start event of the workflow then it is evaluated on deploying the workflow. Otherwise, it is evaluated on activating the timer catch event. The evaluation must result either in a `string` that has the same ISO 8601 format as the static value or an equivalent temporal value (i.e. a date-time, a duration, or a cycle).
+If the expression belongs to a timer start event of the process then it is evaluated on deploying the process. Otherwise, it is evaluated on activating the timer catch event. The evaluation must result either in a `string` that has the same ISO 8601 format as the static value or an equivalent temporal value (i.e. a date-time, a duration, or a cycle).
 
 ### Time date
 
@@ -110,8 +110,8 @@ A non-interrupting boundary timer event with time cycle:
 </details>
 
 <details>
-  <summary>Workflow lifecycle</summary>
-  <p>Workflow instance records of a timer start event:
+  <summary>Process lifecycle</summary>
+  <p>Process instance records of a timer start event:
 
 <table>
     <tr>
@@ -146,7 +146,7 @@ A non-interrupting boundary timer event with time cycle:
     </tr>
 </table>
 
-Workflow instance records of an intermediate timer catch event:
+Process instance records of an intermediate timer catch event:
 
 <table>
     <tr>

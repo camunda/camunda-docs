@@ -3,13 +3,13 @@ id: exclusive-gateways
 title: "Exclusive gateway"
 ---
 
-An exclusive gateway (aka XOR-gateway) allows to make a decision based on data (i.e. on workflow instance variables).
+An exclusive gateway (aka XOR-gateway) allows to make a decision based on data (i.e. on process instance variables).
 
-![workflow](assets/exclusive-gateway.png)
+![process](assets/exclusive-gateway.png)
 
 If an exclusive gateway has multiple outgoing sequence flows then all sequence flows, except one, **must** have a `conditionExpression` to define when the flow is taken. The gateway can have one sequence flow without `conditionExpression` which must be defined as the default flow.
 
-When an exclusive gateway is entered then the `conditionExpression`s are evaluated. The workflow instance takes the first sequence flow that condition is fulfilled.
+When an exclusive gateway is entered then the `conditionExpression`s are evaluated. The process instance takes the first sequence flow that condition is fulfilled.
 
 If no condition is fulfilled then it takes the **default flow** of the gateway. In case the gateway has no default flow, an incident is created.
 
@@ -17,7 +17,7 @@ An exclusive gateway can also be used to **join** multiple incoming flows to one
 
 ## Conditions
 
-A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/product-manuals/concepts/expressions.md#boolean-expressions) that can access the workflow instance variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
+A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/product-manuals/concepts/expressions.md#boolean-expressions) that can access the process instance variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
 
 Multiple boolean values or comparisons can be combined as disjunction (`and`) or conjunction (`or`).
 
@@ -66,8 +66,8 @@ For example:
 </details>
 
 <details>
-  <summary>Workflow lifecycle</summary>
-  <p>Workflow instance records of an exclusive gateway:
+  <summary>Process lifecycle</summary>
+  <p>Process instance records of an exclusive gateway:
 
 <table>
     <tr>

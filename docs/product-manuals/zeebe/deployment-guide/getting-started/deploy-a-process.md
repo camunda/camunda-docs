@@ -1,15 +1,15 @@
 ---
-id: deploy-a-workflow
-title: "Deploy a workflow"
+id: deploy-a-process
+title: "Deploy a process"
 ---
 
-_In this section, we're going to start up the Zeebe broker as well as Camunda Operate, a tool that gives you visibility into deployed workflows and running workflow instances and contains tooling for fixing problems in those workflow instances._
+_In this section, we're going to start up the Zeebe broker as well as Camunda Operate, a tool that gives you visibility into deployed processes and running process instances and contains tooling for fixing problems in those process instances._
 
 _We offer Operate free of charge for unrestricted **non-production** use because we think it's a great tool for getting familiar with Zeebe and building initial proofs-of-concept. And at this time, Operate is available for non-production use only. In the future, we'll offer an Operate enterprise license that allows for production use, too._
 
 Before we run the Zeebe broker, we need to configure an Elasticsearch exporter in the Zeebe configuration file. Which leads to the question: what's an exporter, and why is Elasticsearch a part of this tutorial?
 
-The answer is that Zeebe itself doesn't store historic data related to your workflow instances. If you want to keep this data for auditing or for analysis, you need to export to another storage system. Zeebe _does_ provide an easy-to-use exporter interface, and it also offers an Elasticsearch exporter out of the box. (_[See: Exporters](/product-manuals/zeebe/open-source/exporters.md)_)
+The answer is that Zeebe itself doesn't store historic data related to your process instances. If you want to keep this data for auditing or for analysis, you need to export to another storage system. Zeebe _does_ provide an easy-to-use exporter interface, and it also offers an Elasticsearch exporter out of the box. (_[See: Exporters](/product-manuals/zeebe/open-source/exporters.md)_)
 
 Elasticsearch is also what Camunda Operate uses to store data, so to run Operate, you need to enable the Elasticsearch exporter in Zeebe and run an instance of Elasticsearch. In this section and the next section of the tutorial, we'll use Operate to visualize what's going on in Zeebe with each step we take.
 
@@ -127,7 +127,7 @@ But for the sake of keeping this guide simple (and language agnostic), we're goi
 
 ## Deploy the worklfow
 
-Next, we'll deploy our workflow model via the CLI. We'll deploy the workflow model we created in the previous section.
+Next, we'll deploy our process model via the CLI. We'll deploy the process model we created in the previous section.
 
 **Linux**
 
@@ -152,11 +152,11 @@ You should see a response like this one:
 ```
 {
   "key": 2,
-  "workflows": [
+  "processes": [
     {
       "bpmnProcessId": "order-process",
       "version": 1,
-      "workflowKey": 1,
+      "processKey": 1,
       "resourceName": "order-process.bpmn"
     }
   ]
@@ -167,8 +167,8 @@ Now we'll take a look at the Operate user interface:
 
 - Go to [http://localhost:8080](http://localhost:8080) and use the credentials `demo` / `demo` to access Operate
 - Click on the `Running Instances` option in the navigation bar at the top of the interface
-- Select the `order-process` workflow from the **Workflows** selector on the left side of the screen
+- Select the `order-process` process from the **Processes** selector on the left side of the screen
 
-You should see the workflow model we just deployed – the same model we built in the previous section. You won't see any workflow instances because we haven't created them yet, and that's exactly what we'll do in the next section.
+You should see the process model we just deployed – the same model we built in the previous section. You won't see any process instances because we haven't created them yet, and that's exactly what we'll do in the next section.
 
-![Workflow in Operate](assets/tutorial-4.0-workflow-in-operate.png)
+![Process in Operate](assets/tutorial-4.0-process-in-operate.png)

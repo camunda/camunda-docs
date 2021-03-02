@@ -40,8 +40,8 @@ zbctl [options] [command]
 ```
 zbctl is command line interface designed to create and read resources inside zeebe broker.
 It is designed for regular maintenance jobs such as:
-        * deploying workflows,
-        * creating jobs and workflow instances
+        * deploying processes,
+        * creating jobs and process instances
         * activating, completing or failing jobs
         * update variables and retries
         * view cluster status
@@ -54,7 +54,7 @@ Available Commands:
   cancel      Cancel resource
   complete    Complete a resource
   create      Create resources
-  deploy      Creates new workflow defined by provided BPMN file as workflowPath
+  deploy      Creates new process defined by provided BPMN file as processPath
   fail        Fail a resource
   generate    Generate documentation
   help        Help about any command

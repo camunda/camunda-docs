@@ -5,9 +5,9 @@ title: "BPMN primer"
 
 import ReactPlayer from 'react-player'
 
-Business Process Model And Notation 2.0 (BPMN) is an industry standard for workflow modeling and execution. A BPMN workflow is an XML document that has a visual representation. For example, here is a BPMN workflow:
+Business Process Model And Notation 2.0 (BPMN) is an industry standard for process modeling and execution. A BPMN process is an XML document that has a visual representation. For example, here is a BPMN process:
 
-![workflow](assets/workflow.png)
+![process](assets/process.png)
 
 <details>
   <summary>The corresponding XML</summary>
@@ -125,11 +125,11 @@ The best tool for modeling BPMN diagrams for Zeebe is the **Zeebe Modeler**.
 
 ### Sequence flow: Controlling the flow of execution
 
-A core concept of BPMN is a _sequence flow_ that defines the order in which steps in the workflow happen. In BPMN's visual representation, a sequence flow is an arrow connecting two elements. The direction of the arrow indicates their order of execution.
+A core concept of BPMN is a _sequence flow_ that defines the order in which steps in the process happen. In BPMN's visual representation, a sequence flow is an arrow connecting two elements. The direction of the arrow indicates their order of execution.
 
 ![](./assets/sequenceflow.png)
 
-You can think of workflow execution as tokens running through the workflow model. When a workflow is started, a token is spawned at the beginning of the model. It advances with every completed step. When the token reaches the end of the workflow, it is consumed and the workflow instance ends. Zeebe's task is to drive the token and to make sure that the job workers are invoked whenever necessary.
+You can think of process execution as tokens running through the process model. When a process is started, a token is spawned at the beginning of the model. It advances with every completed step. When the token reaches the end of the process, it is consumed and the process instance ends. Zeebe's task is to drive the token and to make sure that the job workers are invoked whenever necessary.
 
 <center>
 <ReactPlayer
@@ -145,7 +145,7 @@ url={[
 
 ### Tasks: Units of work
 
-The basic elements of BPMN workflows are _tasks_, atomic units of work that are composed to create a meaningful result. Whenever a token reaches a task, the token stops and Zeebe creates a job and notifies a registered worker to perform work. When that handler signals completion, then the token continues on the outgoing sequence flow.
+The basic elements of BPMN processes are _tasks_, atomic units of work that are composed to create a meaningful result. Whenever a token reaches a task, the token stops and Zeebe creates a job and notifies a registered worker to perform work. When that handler signals completion, then the token continues on the outgoing sequence flow.
 
 <center>
 <ReactPlayer
@@ -159,7 +159,7 @@ url={[
 />
 </center>
 
-Choosing the granularity of a task is up to the person modeling the workflow. For example, the activity of processing an order can be modeled as a single _Process Order_ task, or as three individual tasks _Collect Money_, _Fetch Items_, _Ship Parcel_. If you use Zeebe to orchestrate microservices, one task can represent one microservice invocation.
+Choosing the granularity of a task is up to the person modeling the process. For example, the activity of processing an order can be modeled as a single _Process Order_ task, or as three individual tasks _Collect Money_, _Fetch Items_, _Ship Parcel_. If you use Zeebe to orchestrate microservices, one task can represent one microservice invocation.
 
 See the [Tasks](tasks.md) section on which types of tasks are currently supported and how to use them.
 
@@ -199,7 +199,7 @@ See the [Gateways](gateways.md) section on which types of gateways are currently
 
 ### Events: Waiting for something to happen
 
-_Events_ in BPMN represent things that _happen_. A workflow can react to events (_catching_ event) as well as emit events (_throwing_ event). For example:
+_Events_ in BPMN represent things that _happen_. A process can react to events (_catching_ event) as well as emit events (_throwing_ event). For example:
 
 <center>
 <ReactPlayer
@@ -213,9 +213,9 @@ url={[
 />
 </center>
 
-The circle with the envelope symbol is a catching message event. It makes the token continue as soon as a message is received. The XML representation of the workflow contains the criteria for which kind of message triggers continuation.
+The circle with the envelope symbol is a catching message event. It makes the token continue as soon as a message is received. The XML representation of the process contains the criteria for which kind of message triggers continuation.
 
-Events can be added to the workflow in various ways. Not only can they be used to make a token wait at a certain point, but also for interrupting a token's progress.
+Events can be added to the process in various ways. Not only can they be used to make a token wait at a certain point, but also for interrupting a token's progress.
 
 See the [Events](events.md) section on which types of events are currently supported and how to use them.
 

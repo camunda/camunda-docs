@@ -5,13 +5,13 @@ title: "Parallel gateway"
 
 A parallel gateway (aka AND-gateway) allows to split the flow into concurrent paths.
 
-![workflow](assets/parallel-gateways.png)
+![process](assets/parallel-gateways.png)
 
 When a parallel gateway with multiple outgoing sequence flows is entered then all flows are taken. The paths are executed **concurrently** and independently. 
 
-The concurrent paths can be **joined** using a parallel gateway with multiple incoming sequence flows. The workflow instance waits at the parallel gateway until each incoming sequence is taken.
+The concurrent paths can be **joined** using a parallel gateway with multiple incoming sequence flows. The process instance waits at the parallel gateway until each incoming sequence is taken.
 
-> Note the outgoing paths of the parallel gateway are executed concurrently - and not parallel in the sense of parallel threads. All records of a workflow instance are written to the same partition (single stream processor).  
+> Note the outgoing paths of the parallel gateway are executed concurrently - and not parallel in the sense of parallel threads. All records of a process instance are written to the same partition (single stream processor).  
 
 ## Additional Resources
 
@@ -41,8 +41,8 @@ The concurrent paths can be **joined** using a parallel gateway with multiple in
 </details>
 
 <details>
-  <summary>Workflow lifecycle</summary>
-  <p>Workflow instance records of a parallel gateway: 
+  <summary>Process lifecycle</summary>
+  <p>Process instance records of a parallel gateway: 
 
 <table>
     <tr>

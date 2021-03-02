@@ -1019,7 +1019,7 @@ public async Task<IDeployResponse> Deploy(string modelFilename)
 {
     var filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "Resources", modelFilename);
     var deployment = await _client.NewDeployCommand().AddResourceFile(filename).Send();
-    var res = deployment.Workflows[0];
+    var res = deployment.Processes[0];
     _logger.LogInformation("Deployed BPMN Model: " + res?.BpmnProcessId +
                 " v." + res?.Version);
     return deployment;
@@ -1060,7 +1060,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 ```go
 func deploy (zbClient zbc.Client) {
 	ctx := context.Background()
-	response, err := zbClient.NewDeployWorkflowCommand().AddResourceFile("test-process.bpmn").Send(ctx)
+	response, err := zbClient.NewDeployProcessCommand().AddResourceFile("test-process.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -1085,7 +1085,7 @@ You will see the deployment response:
 ```
 2020/07/29 06:23:07 Broker zeebe-0.zeebe-broker-service.aae86771-0906-4186-8d82-e228097e1ef7-zeebe.svc.cluster.local : 26501
 2020/07/29 06:23:07   Partition 1 : Leader
-2020/07/29 06:23:08 key:2251799813685251 workflows:<bpmnProcessId:"test-process" version:1 workflowKey:2251799813685249 resourceName:"test-process.bpmn" >
+2020/07/29 06:23:08 key:2251799813685251 processes:<bpmnProcessId:"test-process" version:1 processKey:2251799813685249 resourceName:"test-process.bpmn" >
 ```
 
 </TabItem>
@@ -1141,7 +1141,7 @@ require("dotenv").config();
 async function main() {
   const zbc = new ZBClient();
   const filename = path.join(__dirname, "..", "bpmn", "test-process");
-  const res = await zbc.deployWorkflow(filename);
+  const res = await zbc.deployProcess(filename);
   console.log(res);
 }
 
@@ -1156,11 +1156,11 @@ You will see output similar to this:
 01:37:30.710 | zeebe |  INFO: Authenticating client with Camunda Cloud...
 01:37:36.466 | zeebe |  INFO: Established encrypted connection to Camunda Cloud.
 {
-  workflows: [
+  processes: [
     {
       bpmnProcessId: 'test-process',
       version: 1,
-      workflowKey: '2251799813687791',
+      processKey: '2251799813687791',
       resourceName: 'test-process.bpmn'
     }
   ],
@@ -1168,13 +1168,13 @@ You will see output similar to this:
 }
 ```
 
-The workflow is now deployed to the cluster.
+The process is now deployed to the cluster.
 
 </TabItem>
 
 </Tabs>
 
-## Start a Workflow Instance
+## Start a Process Instance
 
 <Tabs groupId="language" defaultValue="csharp" values={
 [
@@ -1189,7 +1189,7 @@ The workflow is now deployed to the cluster.
 
 [Video Link](https://youtu.be/a-0BtrRY4M4?t=1816)
 
-We will create a controller route at `/start` that will start a new instance of the workflow.
+We will create a controller route at `/start` that will start a new instance of the process.
 
 - Add fastJSON to the project:
 
@@ -1197,12 +1197,12 @@ We will create a controller route at `/start` that will start a new instance of 
 dotnet add package fastJSON
 ```
 
-- Edit `Services/ZeebeService.cs` and add a `StartWorkflowInstance` method:
+- Edit `Services/ZeebeService.cs` and add a `StartProcessInstance` method:
 
 ```c#
-public async Task<String> StartWorkflowInstance(string bpmProcessId)
+public async Task<String> StartProcessInstance(string bpmProcessId)
 {
-    var instance = await _client.NewCreateWorkflowInstanceCommand()
+    var instance = await _client.NewCreateProcessInstanceCommand()
             .BpmnProcessId(bpmProcessId)
             .LatestVersion()
             .Send();
@@ -1218,12 +1218,12 @@ public interface IZeebeService
 {
     public Task<IDeployResponse> Deploy(string modelFile);
     public Task<ITopology> Status();
-    public Task<String> StartWorkflowInstance(string bpmProcessId);
+    public Task<String> StartProcessInstance(string bpmProcessId);
 }
 ```
 
 - Edit `Controllers/ZeebeController.cs`, and add a REST method to start an instance
-  of the workflow:
+  of the process:
 
 ```c#
 // ...
@@ -1232,9 +1232,9 @@ public class ZeebeController : Controller
 
     [Route("/start")]
     [HttpGet]
-    public async Task<string> StartWorkflowInstance()
+    public async Task<string> StartProcessInstance()
     {
-        var instance = await _zeebeService.StartWorkflowInstance("test-process");
+        var instance = await _zeebeService.StartProcessInstance("test-process");
         return instance;
     }
 }
@@ -1247,10 +1247,10 @@ public class ZeebeController : Controller
 You will see output similar to the following:
 
 ```
-{"$types":{"Zeebe.Client.Impl.Responses.WorkflowInstanceResponse, Client, Version=0.16.1.0, Culture=neutral, PublicKeyToken=null":"1"},"$type":"1","WorkflowKey":2251799813685454,"BpmnProcessId":"test-process","Version":3,"WorkflowInstanceKey":2251799813686273}
+{"$types":{"Zeebe.Client.Impl.Responses.ProcessInstanceResponse, Client, Version=0.16.1.0, Culture=neutral, PublicKeyToken=null":"1"},"$type":"1","ProcessKey":2251799813685454,"BpmnProcessId":"test-process","Version":3,"ProcessInstanceKey":2251799813686273}
 ```
 
-A workflow instance has been started. Let's view it in Operate.
+A process instance has been started. Let's view it in Operate.
 
 </TabItem>
 
@@ -1301,10 +1301,10 @@ func main() {
 You will see output similar to the following:
 
 ```
-workflowKey:2251799813685249 bpmnProcessId:"test-process" version:1 workflowInstanceKey:2251799813685257
+processKey:2251799813685249 bpmnProcessId:"test-process" version:1 processInstanceKey:2251799813685257
 ```
 
-A workflow instance has been started. Let's view it in Operate.
+A process instance has been started. Let's view it in Operate.
 
 </TabItem>
 
@@ -1316,7 +1316,7 @@ A workflow instance has been started. Let's view it in Operate.
 [Video Link](https://youtu.be/7vBxJmXD3Js?t=1093)
 
 - Edit the `src/main/java/io.camunda/CloudStarterApplication.java` file, and add a REST method to start an instance
-  of the workflow:
+  of the process:
 
 ```java
 // ...
@@ -1324,14 +1324,14 @@ public class CloudStarterApplication {
     // ...
 
     @GetMapping("/start")
-    public String startWorkflowInstance() {
-        WorkflowInstanceEvent workflowInstanceEvent = client
+    public String startProcessInstance() {
+        ProcessInstanceEvent processInstanceEvent = client
             .newCreateInstanceCommand()
             .bpmnProcessId("test-process")
             .latestVersion()
             .send()
             .join();
-        return workflowInstanceEvent.toString();
+        return processInstanceEvent.toString();
     }
 }
 ```
@@ -1343,10 +1343,10 @@ public class CloudStarterApplication {
 You will see output similar to the following:
 
 ```
-CreateWorkflowInstanceResponseImpl{workflowKey=2251799813685249, bpmnProcessId='test-process', version=1, workflowInstanceKey=2251799813698314}
+CreateProcessInstanceResponseImpl{processKey=2251799813685249, bpmnProcessId='test-process', version=1, processInstanceKey=2251799813698314}
 ```
 
-A workflow instance has been started. Let's view it in Operate.
+A process instance has been started. Let's view it in Operate.
 
 </TabItem>
 
@@ -1355,7 +1355,7 @@ A workflow instance has been started. Let's view it in Operate.
 [Video Link](https://youtu.be/TFDSv8YAazI?t=823)
 
 - Edit the `src/main/kotlin/io.camunda/CloudStarterApplication.kt` file, and add a REST method to start an instance
-  of the workflow:
+  of the process:
 
 ```kotlin
 // ...
@@ -1363,14 +1363,14 @@ class CloudStarterApplication {
     // ...
 
 	@GetMapping("/start")
-	fun startWorkflowInstance(): String? {
-		val workflowInstanceEvent = client!!
+	fun startProcessInstance(): String? {
+		val processInstanceEvent = client!!
 				.newCreateInstanceCommand()
 				.bpmnProcessId("test-process")
 				.latestVersion()
 				.send()
 				.join()
-		return workflowInstanceEvent.toString()
+		return processInstanceEvent.toString()
 	}
 }
 ```
@@ -1382,10 +1382,10 @@ class CloudStarterApplication {
 You will see output similar to the following:
 
 ```
-CreateWorkflowInstanceResponseImpl{workflowKey=2251799813685249, bpmnProcessId='test-process', version=1, workflowInstanceKey=2251799813698314}
+CreateProcessInstanceResponseImpl{processKey=2251799813685249, bpmnProcessId='test-process', version=1, processInstanceKey=2251799813698314}
 ```
 
-A workflow instance has been started. Let's view it in Operate.
+A process instance has been started. Let's view it in Operate.
 
 </TabItem>
 
@@ -1403,8 +1403,8 @@ require("dotenv").config();
 async function main() {
   const zbc = new ZBClient();
   const file = path.join(__dirname, "..", "bpmn", "test-process.bpmn");
-  await zbc.deployWorkflow(file);
-  const res = await zbc.createWorkflowInstance("test-process", {});
+  await zbc.deployProcess(file);
+  const res = await zbc.createProcessInstance("test-process", {});
   console.log(res);
 }
 
@@ -1419,20 +1419,20 @@ You will see output similar to:
 02:00:20.689 | zeebe |  INFO: Authenticating client with Camunda Cloud...
 02:00:23.769 | zeebe |  INFO: Established encrypted connection to Camunda Cloud.
 {
-  workflowKey: '2251799813687791',
+  processKey: '2251799813687791',
   bpmnProcessId: 'test-process',
   version: 1,
-  workflowInstanceKey: '2251799813688442'
+  processInstanceKey: '2251799813688442'
 }
 ```
 
-A workflow instance has been started. Let's view it in Operate.
+A process instance has been started. Let's view it in Operate.
 
 </TabItem>
 
 </Tabs>
 
-## View a Workflow Instance in Operate
+## View a Process Instance in Operate
 
 <Tabs groupId="language" defaultValue="csharp" values={
 [
@@ -1479,8 +1479,8 @@ A workflow instance has been started. Let's view it in Operate.
 </Tabs>
 
 - Go to your cluster in the [Camunda Cloud Console](https://camunda.io).
-- In the cluster detail view, click on "_View Workflow Instances in Camunda Operate_".
-- In the "_Instances by Workflow_" column, click on "_Test Process - 1 Instance in 1 Version_".
+- In the cluster detail view, click on "_View Process Instances in Camunda Operate_".
+- In the "_Instances by Process_" column, click on "_Test Process - 1 Instance in 1 Version_".
 - Click the Instance Id to open the instance.
 - You will see the token is stopped at the "_Get Time_" task.
 
@@ -1552,7 +1552,7 @@ public interface IZeebeService
 {
     public Task<IDeployResponse> Deploy(string modelFile);
     public Task<ITopology> Status();
-    public Task<string> StartWorkflowInstance(string bpmProcessId);
+    public Task<string> StartProcessInstance(string bpmProcessId);
     public void StartWorkers();
 }
 ```
@@ -1576,14 +1576,14 @@ You will see output similar to:
 
 ```
 2020-07-16 20:34:25.4971 | DEBUG | Zeebe.Client.Impl.Worker.JobWorker | Job worker (get-time) activated 1 of 5 successfully.
-2020-07-16 20:34:25.4971 | INFO | Cloudstarter.Services.ZeebeService | Received job: Key: 2251799813686173, Type: get-time, WorkflowInstanceKey: 2251799813686168, BpmnProcessId: test-process, WorkflowDefinitionVersion: 3, WorkflowKey: 2251799813685454, ElementId: Activity_1ucrvca, ElementInstanceKey: 2251799813686172, Worker: get-time, Retries: 3, Deadline: 07/16/2020 20:34:35, Variables: {}, CustomHeaders: {}
+2020-07-16 20:34:25.4971 | INFO | Cloudstarter.Services.ZeebeService | Received job: Key: 2251799813686173, Type: get-time, ProcessInstanceKey: 2251799813686168, BpmnProcessId: test-process, ProcessDefinitionVersion: 3, ProcessKey: 2251799813685454, ElementId: Activity_1ucrvca, ElementInstanceKey: 2251799813686172, Worker: get-time, Retries: 3, Deadline: 07/16/2020 20:34:35, Variables: {}, CustomHeaders: {}
 ```
 
-- Go back to Operate. You will see that the workflow instance is gone.
+- Go back to Operate. You will see that the process instance is gone.
 - Click on "Running Instances".
 - In the filter on the left, select "_Finished Instances_".
 
-You will see the completed workflow instance.
+You will see the completed process instance.
 
 </TabItem>
 
@@ -1626,11 +1626,11 @@ You will see output similar to:
 2020/07/29 23:48:15 {{2251799813685262 get-time 2251799813685257 test-process 1 2251799813685249 Activity_1ucrvca 2251799813685261 {} default 3 1596023595126 {} {} [] 0}}
 ```
 
-- Go back to Operate. You will see that the workflow instance is gone.
+- Go back to Operate. You will see that the process instance is gone.
 - Click on "Running Instances".
 - In the filter on the left, select "_Finished Instances_".
 
-You will see the completed workflow instance.
+You will see the completed process instance.
 
 </TabItem>
 
@@ -1644,7 +1644,7 @@ You will see the completed workflow instance.
 We will create a worker program that logs out the job metadata, and completes the job with success.
 
 - Edit the `src/main/java/io.camunda/CloudStarterApplication.java` file, and add a REST method to start an instance
-  of the workflow:
+  of the process:
 
 ```java
 // ...
@@ -1667,14 +1667,14 @@ You will see output similar to:
 
 ```
 2020-06-29 09:33:40.420  INFO 5801 --- [ault-executor-1] io.zeebe.client.job.poller               : Activated 1 jobs for worker whatever and job type get-time
-2020-06-29 09:33:40.437  INFO 5801 --- [pool-2-thread-1] i.c.c.CloudStarterApplication            : {"key":2251799813698319,"type":"get-time","customHeaders":{},"workflowInstanceKey":2251799813698314,"bpmnProcessId":"test-process","workflowDefinitionVersion":1,"workflowKey":2251799813685249,"elementId":"Activity_1ucrvca","elementInstanceKey":2251799813698318,"worker":"whatever","retries":3,"deadline":1593380320176,"variables":"{}","variablesAsMap":{}}
+2020-06-29 09:33:40.437  INFO 5801 --- [pool-2-thread-1] i.c.c.CloudStarterApplication            : {"key":2251799813698319,"type":"get-time","customHeaders":{},"processInstanceKey":2251799813698314,"bpmnProcessId":"test-process","processDefinitionVersion":1,"processKey":2251799813685249,"elementId":"Activity_1ucrvca","elementInstanceKey":2251799813698318,"worker":"whatever","retries":3,"deadline":1593380320176,"variables":"{}","variablesAsMap":{}}
 ```
 
-- Go back to Operate. You will see that the workflow instance is gone.
+- Go back to Operate. You will see that the process instance is gone.
 - Click on "Running Instances".
 - In the filter on the left, select "_Finished Instances_".
 
-You will see the completed workflow instance.
+You will see the completed process instance.
 
 </TabItem>
 
@@ -1685,7 +1685,7 @@ You will see the completed workflow instance.
 We will create a worker program that logs out the job metadata, and completes the job with success.
 
 - Edit the `src/main/kotlin/io.camunda/CloudStarterApplication.kt` file, and add a REST method to start an instance
-  of the workflow:
+  of the process:
 
 ```kotlin
 // ...
@@ -1708,14 +1708,14 @@ You will see output similar to:
 
 ```
 2020-06-29 09:33:40.420  INFO 5801 --- [ault-executor-1] io.zeebe.client.job.poller               : Activated 1 jobs for worker whatever and job type get-time
-2020-06-29 09:33:40.437  INFO 5801 --- [pool-2-thread-1] i.c.c.CloudStarterApplication            : {"key":2251799813698319,"type":"get-time","customHeaders":{},"workflowInstanceKey":2251799813698314,"bpmnProcessId":"test-process","workflowDefinitionVersion":1,"workflowKey":2251799813685249,"elementId":"Activity_1ucrvca","elementInstanceKey":2251799813698318,"worker":"whatever","retries":3,"deadline":1593380320176,"variables":"{}","variablesAsMap":{}}
+2020-06-29 09:33:40.437  INFO 5801 --- [pool-2-thread-1] i.c.c.CloudStarterApplication            : {"key":2251799813698319,"type":"get-time","customHeaders":{},"processInstanceKey":2251799813698314,"bpmnProcessId":"test-process","processDefinitionVersion":1,"processKey":2251799813685249,"elementId":"Activity_1ucrvca","elementInstanceKey":2251799813698318,"worker":"whatever","retries":3,"deadline":1593380320176,"variables":"{}","variablesAsMap":{}}
 ```
 
-- Go back to Operate. You will see that the workflow instance is gone.
+- Go back to Operate. You will see that the process instance is gone.
 - Click on "Running Instances".
 - In the filter on the left, select "_Finished Instances_".
 
-You will see the completed workflow instance.
+You will see the completed process instance.
 
 </TabItem>
 
@@ -1747,10 +1747,10 @@ You will see output similar to:
 {
   "key": "2251799813688447",
   "type": "get-time",
-  "workflowInstanceKey": "2251799813688442",
+  "processInstanceKey": "2251799813688442",
   "bpmnProcessId": "test-process",
-  "workflowDefinitionVersion": 1,
-  "workflowKey": "2251799813687791",
+  "processDefinitionVersion": 1,
+  "processKey": "2251799813687791",
   "elementId": "Activity_18gdgop",
   "elementInstanceKey": "2251799813688446",
   "customHeaders": {},
@@ -1761,17 +1761,17 @@ You will see output similar to:
 }
 ```
 
-- Go back to Operate. You will see that the workflow instance is gone.
+- Go back to Operate. You will see that the process instance is gone.
 - Click on "Running Instances".
 - In the filter on the left, select "_Finished Instances_".
 
-You will see the completed workflow instance.
+You will see the completed process instance.
 
 </TabItem>
 
 </Tabs>
 
-## Create and Await the Outcome of a Workflow Instance
+## Create and Await the Outcome of a Process Instance
 
 <Tabs groupId="language" defaultValue="csharp" values={
 [
@@ -1786,15 +1786,15 @@ You will see the completed workflow instance.
 
 [Video link](https://youtu.be/a-0BtrRY4M4?t=2428)
 
-We will now create the workflow instance, and get the final outcome in the calling code.
+We will now create the process instance, and get the final outcome in the calling code.
 
-- Edit the `ZeebeService.cs` file, and edit the `StartWorkflowInstance` method, to make it look like this:
+- Edit the `ZeebeService.cs` file, and edit the `StartProcessInstance` method, to make it look like this:
 
 ```c#
 // ...
-public async Task<String> StartWorkflowInstance(string bpmProcessId)
+public async Task<String> StartProcessInstance(string bpmProcessId)
 {
-    var instance = await _client.NewCreateWorkflowInstanceCommand()
+    var instance = await _client.NewCreateProcessInstanceCommand()
                 .BpmnProcessId(bpmProcessId)
                 .LatestVersion()
                 .WithResult()
@@ -1811,7 +1811,7 @@ public async Task<String> StartWorkflowInstance(string bpmProcessId)
 You will see output similar to the following:
 
 ```
-{"$types":{"Zeebe.Client.Impl.Responses.WorkflowInstanceResultResponse, Client, Version=0.16.1.0, Culture=neutral, PublicKeyToken=null":"1"},"$type":"1","WorkflowKey":2251799813686366,"BpmnProcessId":"test-process","Version":4,"WorkflowInstanceKey":2251799813686409,"Variables":"{}"}
+{"$types":{"Zeebe.Client.Impl.Responses.ProcessInstanceResultResponse, Client, Version=0.16.1.0, Culture=neutral, PublicKeyToken=null":"1"},"$type":"1","ProcessKey":2251799813686366,"BpmnProcessId":"test-process","Version":4,"ProcessInstanceKey":2251799813686409,"Variables":"{}"}
 ```
 
 </TabItem>
@@ -1820,7 +1820,7 @@ You will see output similar to the following:
 
 [Video Link](https://youtu.be/_GQuqEwzWKM?t=1302)
 
-We will now create the workflow instance, and get the final outcome in the calling code.
+We will now create the process instance, and get the final outcome in the calling code.
 
 - Edit the `createStartHandler` function in the `main.go` file, and make the following change:
 
@@ -1837,7 +1837,7 @@ request, err := client.NewCreateInstanceCommand().BPMNProcessId("test-process").
 You will see output similar to the following:
 
 ```
-workflowKey:2251799813685249 bpmnProcessId:"test-process" version:1 workflowInstanceKey:2251799813689873 variables:"{}"
+processKey:2251799813685249 bpmnProcessId:"test-process" version:1 processInstanceKey:2251799813689873 variables:"{}"
 ```
 
 </TabItem>
@@ -1849,9 +1849,9 @@ workflowKey:2251799813685249 bpmnProcessId:"test-process" version:1 workflowInst
 
 [Video Link](https://youtu.be/7vBxJmXD3Js?t=1616)
 
-We will now create the workflow instance, and get the final outcome in the calling code.
+We will now create the process instance, and get the final outcome in the calling code.
 
-- Edit the `src/main/java/io.camunda/CloudStarterApplication.java` file, and edit the `startWorkflowInstance` method,
+- Edit the `src/main/java/io.camunda/CloudStarterApplication.java` file, and edit the `startProcessInstance` method,
   to make it look like this:
 
 ```java
@@ -1860,15 +1860,15 @@ public class CloudStarterApplication {
     // ...
 
     @GetMapping("/start")
-    public String startWorkflowInstance() {
-		WorkflowInstanceResult workflowInstanceResult = client
+    public String startProcessInstance() {
+		ProcessInstanceResult processInstanceResult = client
             .newCreateInstanceCommand()
             .bpmnProcessId("test-process")
             .latestVersion()
             .withResult()
             .send()
             .join();
-		return workflowInstanceResult.toString();
+		return processInstanceResult.toString();
     }
 }
 ```
@@ -1880,7 +1880,7 @@ public class CloudStarterApplication {
 You will see output similar to the following:
 
 ```
-CreateWorkflowInstanceWithResultResponseImpl{workflowKey=2251799813685249, bpmnProcessId='test-process', version=1, workflowInstanceKey=2251799813698527, variables='{}'}
+CreateProcessInstanceWithResultResponseImpl{processKey=2251799813685249, bpmnProcessId='test-process', version=1, processInstanceKey=2251799813698527, variables='{}'}
 ```
 
 </TabItem>
@@ -1889,9 +1889,9 @@ CreateWorkflowInstanceWithResultResponseImpl{workflowKey=2251799813685249, bpmnP
 
 [Video Link](https://youtu.be/TFDSv8YAazI?t=1428)
 
-We will now create the workflow instance, and get the final outcome in the calling code.
+We will now create the process instance, and get the final outcome in the calling code.
 
-- Edit the `src/main/kotlin/io.camunda/CloudStarterApplication.kt` file, and edit the `startWorkflowInstance` method,
+- Edit the `src/main/kotlin/io.camunda/CloudStarterApplication.kt` file, and edit the `startProcessInstance` method,
   to make it look like this:
 
 ```kotlin
@@ -1900,15 +1900,15 @@ class CloudStarterApplication {
     // ...
 
    	@GetMapping("/start")
-   	fun startWorkflowInstance(): String? {
-   		val workflowInstanceEventWithResult = client!!
+   	fun startProcessInstance(): String? {
+   		val processInstanceEventWithResult = client!!
    				.newCreateInstanceCommand()
    				.bpmnProcessId("test-process")
    				.latestVersion()
    				.withResult()
    				.send()
    				.join()
-   		return workflowInstanceEventWithResult.toString()
+   		return processInstanceEventWithResult.toString()
    	}
 }
 ```
@@ -1920,14 +1920,14 @@ class CloudStarterApplication {
 You will see output similar to the following:
 
 ```
-CreateWorkflowInstanceWithResultResponseImpl{workflowKey=2251799813685249, bpmnProcessId='test-process', version=1, workflowInstanceKey=2251799813698527, variables='{}'}
+CreateProcessInstanceWithResultResponseImpl{processKey=2251799813685249, bpmnProcessId='test-process', version=1, processInstanceKey=2251799813698527, variables='{}'}
 ```
 
 </TabItem>
 
 <TabItem value="nodejs">
 
-We will now create the workflow instance, and get the final outcome in the calling code.
+We will now create the process instance, and get the final outcome in the calling code.
 
 - Keep the worker program running in one terminal.
 - Edit the `src/app.ts` file, and make it look like this:
@@ -1940,8 +1940,8 @@ require("dotenv").config();
 async function main() {
   const zbc = new ZBClient();
   const file = path.join(__dirname, "..", "bpmn", "test-process.bpmn");
-  await zbc.deployWorkflow(file);
-  const res = await zbc.createWorkflowInstanceWithResult("test-process", {});
+  await zbc.deployProcess(file);
+  const res = await zbc.createProcessInstanceWithResult("test-process", {});
   console.log(res);
 }
 
@@ -1954,10 +1954,10 @@ You will see your worker log out the job as it serves it, and your program will 
 
 ```json
 {
-  "workflowKey": "2251799813688541",
+  "processKey": "2251799813688541",
   "bpmnProcessId": "test-process",
   "version": 1,
-  "workflowInstanceKey": "2251799813688543",
+  "processInstanceKey": "2251799813688543",
   "variables": {}
 }
 ```
@@ -2014,7 +2014,7 @@ public void CreateGetTimeWorker()
 You will see output similar to the following:
 
 ```
-{"$types":{"Zeebe.Client.Impl.Responses.WorkflowInstanceResultResponse, Client, Version=0.16.1.0, Culture=neutral, PublicKeyToken=null":"1"},"$type":"1","WorkflowKey":2251799813686366,"BpmnProcessId":"test-process","Version":4,"WorkflowInstanceKey":2251799813686463,"Variables":"{\"time\":{\"time\":\"Thu, 16 Jul 2020 10:26:13 GMT\",\"hour\":10,\"minute\":26,\"second\":13,\"day\":4,\"month\":6,\"year\":2020}}"}
+{"$types":{"Zeebe.Client.Impl.Responses.ProcessInstanceResultResponse, Client, Version=0.16.1.0, Culture=neutral, PublicKeyToken=null":"1"},"$type":"1","ProcessKey":2251799813686366,"BpmnProcessId":"test-process","Version":4,"ProcessInstanceKey":2251799813686463,"Variables":"{\"time\":{\"time\":\"Thu, 16 Jul 2020 10:26:13 GMT\",\"hour\":10,\"minute\":26,\"second\":13,\"day\":4,\"month\":6,\"year\":2020}}"}
 ```
 
 </TabItem>
@@ -2079,7 +2079,7 @@ func handleGetTime(client worker.JobClient, job entities.Job) {
 You will see output similar to the following:
 
 ```
-workflowKey:2251799813685249 bpmnProcessId:"test-process" version:1 workflowInstanceKey:2251799813693481
+processKey:2251799813685249 bpmnProcessId:"test-process" version:1 processInstanceKey:2251799813693481
 variables:"{\"time\":{\"time\":\"Thu, 30 Jul 2020 13:33:13 GMT\",\"hour\":13,\"minute\":33,\"second\":13,\"day\":4,\"month\":6,\"year\":2020}}"
 ```
 
@@ -2120,7 +2120,7 @@ public class CloudStarterApplication {
 You will see output similar to the following:
 
 ```
-CreateWorkflowInstanceWithResultResponseImpl{workflowKey=2251799813685249, bpmnProcessId='test-process', version=1, workflowInstanceKey=2251799813698527, variables='{"time":{"time":"Sun, 28 Jun 2020 21:49:48 GMT","hour":21,"minute":49,"second":48,"day":0,"month":5,"year":2020}}'}
+CreateProcessInstanceWithResultResponseImpl{processKey=2251799813685249, bpmnProcessId='test-process', version=1, processInstanceKey=2251799813698527, variables='{"time":{"time":"Sun, 28 Jun 2020 21:49:48 GMT","hour":21,"minute":49,"second":48,"day":0,"month":5,"year":2020}}'}
 ```
 
 </TabItem>
@@ -2158,7 +2158,7 @@ class CloudStarterApplication {
 You will see output similar to the following:
 
 ```
-CreateWorkflowInstanceWithResultResponseImpl{workflowKey=2251799813685249, bpmnProcessId='test-process', version=1, workflowInstanceKey=2251799813698527, variables='{"time":{"time":"Sun, 28 Jun 2020 21:49:48 GMT","hour":21,"minute":49,"second":48,"day":0,"month":5,"year":2020}}'}
+CreateProcessInstanceWithResultResponseImpl{processKey=2251799813685249, bpmnProcessId='test-process', version=1, processInstanceKey=2251799813698527, variables='{"time":{"time":"Sun, 28 Jun 2020 21:49:48 GMT","hour":21,"minute":49,"second":48,"day":0,"month":5,"year":2020}}'}
 ```
 
 </TabItem>
@@ -2199,10 +2199,10 @@ You will see output similar to the following:
 
 ```json
 {
-  "workflowKey": "2251799813688541",
+  "processKey": "2251799813688541",
   "bpmnProcessId": "test-process",
   "version": 1,
-  "workflowInstanceKey": "2251799813688598",
+  "processInstanceKey": "2251799813688598",
   "variables": {
     "time": {
       "time": "Sun, 21 Jun 2020 15:08:22 GMT",
@@ -2306,7 +2306,7 @@ It should look like this:
 
 [Video link](https://youtu.be/a-0BtrRY4M4?t=2973)
 
-We will create a second worker that combines the value of a custom header with the value of a variable in the workflow.
+We will create a second worker that combines the value of a custom header with the value of a variable in the process.
 
 - Edit the `ZeebeService.cs` file and create a couple of DTO classes to aid with deserialization of the job:
 
@@ -2353,13 +2353,13 @@ public void StartWorkers()
 }
 ```
 
-- Edit the `startWorkflowInstance` method, and pass in a variable `name` when you create the workflow:
+- Edit the `startProcessInstance` method, and pass in a variable `name` when you create the process:
 
 ```c#
 // ...
-public async Task<String> StartWorkflowInstance(string bpmProcessId)
+public async Task<String> StartProcessInstance(string bpmProcessId)
 {
-    var instance = await _client.NewCreateWorkflowInstanceCommand()
+    var instance = await _client.NewCreateProcessInstanceCommand()
         .BpmnProcessId(bpmProcessId)
         .LatestVersion()
         .Variables("{\"name\": \"Josh Wulf\"}")
@@ -2378,7 +2378,7 @@ You can change the variable `name` value to your own name (or derive it from the
 You will see output similar to the following:
 
 ```
-{"$types":{"Zeebe.Client.Impl.Responses.WorkflowInstanceResultResponse, Client, Version=0.16.1.0, Culture=neutral, PublicKeyToken=null":"1"},"$type":"1","WorkflowKey":2251799813686683,"BpmnProcessId":"test-process","Version":5,"WorkflowInstanceKey":2251799813687157,"Variables":"{\"say\":\"Good Afternoon Josh Wulf\",\"name\":\"Josh Wulf\",\"time\":{\"time\":\"Thu, 16 Jul 2020 12:45:33 GMT\",\"hour\":12,\"minute\":45,\"second\":33,\"day\":4,\"month\":6,\"year\":2020}}"}
+{"$types":{"Zeebe.Client.Impl.Responses.ProcessInstanceResultResponse, Client, Version=0.16.1.0, Culture=neutral, PublicKeyToken=null":"1"},"$type":"1","ProcessKey":2251799813686683,"BpmnProcessId":"test-process","Version":5,"ProcessInstanceKey":2251799813687157,"Variables":"{\"say\":\"Good Afternoon Josh Wulf\",\"name\":\"Josh Wulf\",\"time\":{\"time\":\"Thu, 16 Jul 2020 12:45:33 GMT\",\"hour\":12,\"minute\":45,\"second\":33,\"day\":4,\"month\":6,\"year\":2020}}"}
 ```
 
 </TabItem>
@@ -2387,7 +2387,7 @@ You will see output similar to the following:
 
 [Video link](https://youtu.be/_GQuqEwzWKM?t=1931)
 
-We will create a second worker that takes the custom header and applies it to the variables in the workflow.
+We will create a second worker that takes the custom header and applies it to the variables in the process.
 
 - Edit the `main.go` file, and add structs for the new worker's request and response payloads:
 
@@ -2430,7 +2430,7 @@ func handleMakeGreeting(client worker.JobClient, job entities.Job) {
 / ...
 ```
 
-- Edit the `startWorkflowInstance` method, and make it look like this:
+- Edit the `startProcessInstance` method, and make it look like this:
 
 ```go
 type InitialVariables struct {
@@ -2473,7 +2473,7 @@ Good Morning Josh Wulf
 
 [Video link](https://youtu.be/7vBxJmXD3Js?t=2399)
 
-We will create a second worker that takes the custom header and applies it to the variables in the workflow.
+We will create a second worker that takes the custom header and applies it to the variables in the process.
 
 - Edit the `src/main/java/io.camunda/CloudStarterApplication.java` file, and add the `handleMakeGreeting` method,
   to make it look like this:
@@ -2497,15 +2497,15 @@ public class CloudStarterApplication {
 }
 ```
 
-- Edit the `startWorkflowInstance` method, and make it look like this:
+- Edit the `startProcessInstance` method, and make it look like this:
 
 ```java
 // ...
 public class CloudStarterApplication {
     // ...
     @GetMapping("/start")
-    public String startWorkflowInstance() {
-        WorkflowInstanceResult workflowInstanceResult = client
+    public String startProcessInstance() {
+        ProcessInstanceResult processInstanceResult = client
                 .newCreateInstanceCommand()
                 .bpmnProcessId("test-process")
                 .latestVersion()
@@ -2513,7 +2513,7 @@ public class CloudStarterApplication {
                 .withResult()
                 .send()
                 .join();
-        return (String) workflowInstanceResult
+        return (String) processInstanceResult
                 .getVariablesAsMap()
                 .getOrDefault("say", "Error: No greeting returned");
     }
@@ -2537,7 +2537,7 @@ Good Morning Josh Wulf
 
 [Video link](https://youtu.be/TFDSv8YAazI?t=2080)
 
-We will create a second worker that takes the custom header and applies it to the variables in the workflow.
+We will create a second worker that takes the custom header and applies it to the variables in the process.
 
 - Edit the `src/main/kotlin/io.camunda/CloudStarterApplication.kt` file, and add the `handleMakeGreeting` method,
   to make it look like this:
@@ -2561,15 +2561,15 @@ class CloudStarterApplication {
 }
 ```
 
-- Edit the `startWorkflowInstance` method, and make it look like this:
+- Edit the `startProcessInstance` method, and make it look like this:
 
 ```kotlin
 // ...
 class CloudStarterApplication {
     // ...
 	@GetMapping("/start")
-	fun startWorkflowInstance(): String? {
-		val workflowInstanceResult = client!!
+	fun startProcessInstance(): String? {
+		val processInstanceResult = client!!
 				.newCreateInstanceCommand()
 				.bpmnProcessId("test-process")
 				.latestVersion()
@@ -2577,7 +2577,7 @@ class CloudStarterApplication {
 				.withResult()
 				.send()
 				.join()
-		return workflowInstanceResult
+		return processInstanceResult
 				.variablesAsMap
 				.getOrDefault("say", "Error: No greeting returned") as String?
 	}
@@ -2601,7 +2601,7 @@ Good Morning Josh Wulf
 
 [Video link](https://youtu.be/AOj64vzEZ_8?t=2081)
 
-We will create a second worker that takes the custom header and applies it to the variables in the workflow.
+We will create a second worker that takes the custom header and applies it to the variables in the process.
 
 - Stop the worker running.
 - Edit the file `src/worker.ts`, and make it look like this:
@@ -2640,8 +2640,8 @@ require("dotenv").config();
 async function main() {
   const zbc = new ZBClient();
   const file = path.join(__dirname, "..", "bpmn", "test-process.bpmn");
-  await zbc.deployWorkflow(file);
-  const res = await zbc.createWorkflowInstanceWithResult("test-process", {
+  await zbc.deployProcess(file);
+  const res = await zbc.createProcessInstanceWithResult("test-process", {
     name: "Josh Wulf",
   });
   console.log("Process Instance (Complete)", res.variables.say);

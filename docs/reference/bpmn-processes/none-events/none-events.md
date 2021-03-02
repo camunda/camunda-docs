@@ -4,17 +4,17 @@ title: "None events"
 ---
 None events are unspecified events, also called ‘blank’ events.
 
-![workflow](assets/none-events.png)
+![process](assets/none-events.png)
 
 ## None start events
 
-A workflow can have at most one none start event (besides other types of start events).
+A process can have at most one none start event (besides other types of start events).
 
-A none start event is where the workflow instance or a subprocess starts when the workflow or the subprocess is activated.
+A none start event is where the process instance or a subprocess starts when the process or the subprocess is activated.
 
 ## None end events
 
-A workflow or subprocess can have multiple none end events. When a none end event is entered then the current execution path ends. If the workflow instance or subprocess has no more active execution paths then it is completed.
+A process or subprocess can have multiple none end events. When a none end event is entered then the current execution path ends. If the process instance or subprocess has no more active execution paths then it is completed.
 
 If an activity has no outgoing sequence flow then it behaves the same as it would be connected to a none end event. When the activity is completed then the current execution path ends.
 
@@ -49,8 +49,8 @@ Adding a none end event:
 </details>
 
 <details>
-  <summary>Workflow lifecycle</summary>
-  <p>Workflow instance records of a none start event: 
+  <summary>Process lifecycle</summary>
+  <p>Process instance records of a none start event: 
 
 <table>
     <tr>
@@ -80,7 +80,7 @@ Adding a none end event:
     </tr>
 </table>
 
-Workflow instance records of a none end event: 
+Process instance records of a none end event: 
 
 <table>
     <tr>

@@ -58,8 +58,8 @@ By default, the local variables of the event subprocess are not propagated (i.e.
 </details>
 
 <details>
-  <summary>Workflow lifecycle</summary>
-  <p>Workflow instance records of an event subprocess with an interrupting timer start event:
+  <summary>Process lifecycle</summary>
+  <p>Process instance records of an event subprocess with an interrupting timer start event:
 
 <table>
     <tr>

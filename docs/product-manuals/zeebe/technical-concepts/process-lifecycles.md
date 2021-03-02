@@ -1,11 +1,11 @@
 ---
-id: workflow-lifecycles
-title: "Workflow lifecycles"
+id: process-lifecycles
+title: "Process lifecycles"
 ---
 
-In Zeebe, the workflow execution is represented internally by events of type `WorkflowInstance`. The events are written to the log stream and can be observed by an exporter.
+In Zeebe, the process execution is represented internally by events of type `ProcessInstance`. The events are written to the log stream and can be observed by an exporter.
 
-Each event is one step in a workflow instance lifecycle. All events of one workflow instance have the same `workflowInstanceKey`.
+Each event is one step in a process instance lifecycle. All events of one process instance have the same `processInstanceKey`.
 
 Events which belongs to the same element instance (e.g. a task) have the same `key`. The element instances have different lifecycles depending on the type of element.
 
@@ -23,9 +23,9 @@ Events which belongs to the same element instance (e.g. a task) have the same `k
 
 ## Example
 
-![order process](assets/workflow.png)
+![order process](assets/process.png)
 
-Given the above workflow a successful execution will yield the following records in the commit log:
+Given the above process a successful execution will yield the following records in the commit log:
 <table>
     <tr>
         <th>Intent</th>
