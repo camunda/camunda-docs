@@ -7,17 +7,17 @@ We provide a few different public-facing Zeebe support and feedback channels so 
 
 ### Zeebe user forum
 
-The best place to ask questions about Zeebe and to troubleshoot issues is the Zeebe user forum.
+The best place to ask questions about Zeebe and to troubleshoot issues is the forum.
 
 The Zeebe team monitors the forum closely, and we do our best to respond to all questions in a timely manner.
 
-[Go to the Zeebe user forum](https://forum.zeebe.io)
+[Go to the forum](https://forum.zeebe.io)
 
 ### Public Slack group
 
-There is a public Zeebe Slack group where you can ask one-off questions, share community contributions, and connect with other Zeebe users.
+There is a public Slack group where you can ask one-off questions, share community contributions, and connect with other Zeebe users.
 
-[Join the Zeebe Slack group](https://zeebe-slack-invite.herokuapp.com/)
+[Join the Slack group](https://zeebe-slack-invite.herokuapp.com/)
 
 ### Create an issue in GitHub
 
