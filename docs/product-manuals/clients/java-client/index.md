@@ -85,6 +85,7 @@ ZeebeClient client =
 ## Next Steps
 
 - [Getting started guide](get-started.md) - Comprehensive tutorial that covers Zeebe Modeler, Operate and the Java client.
-- [Logging](logging.md) - Introduction on how to configure logging for Zeebe Client
+- [Job worker](job-worker.md) - Introduction to the Java client's job worker
+- [Logging](logging.md) - Introduction on how to configure logging for Zeebe client
 - [Writing tests](testing.md) - Introduction to writing tests that use an embedded version of the workflow engine
 - [Examples](../java-client-examples/index.md) - Collection of specific examples for different use cases
