@@ -385,3 +385,4 @@ From here there are several steps to take, depending on your preference:
   - [Handle variables as POJO](../java-client-examples/data-pojo.md)
 - Learn how to [write tests](testing.md)
 - Learn more about [BPMN workflows](/reference/bpmn-workflows/bpmn-primer.md) in general
+- Learn more about the Java client's [job worker](job-worker.md)
