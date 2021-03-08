@@ -21,7 +21,7 @@ Describes the User task
 type Task {
   id: ID!
   name: String!
-  workflowName: String!
+  processName: String!
   creationTime: String!
   completionTime: String
   assignee: User
@@ -40,9 +40,9 @@ The unique identifier of the task
 
 Name of the task
 
-#### `workflowName` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+#### `processName` ([`String!`](/docs/reference/tasklist-api/scalars/string))
 
-Name of the workflow
+Name of the process
 
 #### `creationTime` ([`String!`](/docs/reference/tasklist-api/scalars/string))
 

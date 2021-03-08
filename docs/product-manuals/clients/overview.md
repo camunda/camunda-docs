@@ -6,11 +6,11 @@ sidebar_label: "Overview"
 
 Clients allow applications to do the following things:
 
-- Deploy workflows
-- Start/cancel workflow instances
+- Deploy processes
+- Start/cancel process instances
 - Activate jobs, work on those jobs and subsequently complete/fail jobs
 - Publish messages
-- Update workflow instance variables and resolve incidents
+- Update process instance variables and resolve incidents
 
 Clients connect to Camunda Cloud via [gRPC](https://grpc.io), which is a high-performance, open source universal RPC protocol.
 

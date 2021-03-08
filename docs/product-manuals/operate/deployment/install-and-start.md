@@ -96,10 +96,10 @@ The Operate web interface is available at [http://localhost:8080](http://localho
 
 The first screen you'll see is a sign-in page. Use the credentials `demo` / `demo` to sign in. 
 
-After you sign in, you'll see an empty dashboard if you haven't yet deployed any workflows:
+After you sign in, you'll see an empty dashboard if you haven't yet deployed any processes:
 
-![operate-dash-no-workflows](img/operate-dashboard-no-workflows_light.png)
+![operate-dash-no-processes](img/operate-dashboard-no-processes_light.png)
 
-If you _have_ deployed workflows or created workflow instances, you'll see those on your dashboard:
+If you _have_ deployed processes or created process instances, you'll see those on your dashboard:
 
-![operate-dash-with-workflows](../img/operate-introduction_light.png)
+![operate-dash-with-processes](../img/operate-introduction_light.png)

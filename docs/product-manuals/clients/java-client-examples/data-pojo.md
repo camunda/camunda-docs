@@ -5,12 +5,12 @@ title: "Handle variables as POJO"
 
 ## Related Resources
 
-- [Data flow](../../../reference/bpmn-workflows/data-flow.md)
+- [Data flow](../../../reference/bpmn-processes/data-flow.md)
 
 ## Prerequisites
 
 1. Running Zeebe broker with endpoint `localhost:26500` (default)
-1. Run the [deploy a workflow example](workflow-deploy.md)
+1. Run the [deploy a process example](process-deploy.md)
 
 ## HandleVariablesAsPojo.java
 

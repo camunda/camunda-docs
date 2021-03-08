@@ -72,9 +72,9 @@ Brokers:
     Partition 1 : Leader
 ```
 
-## Step 3: Deploy a workflow
+## Step 3: Deploy a process
 
-A [workflow](/product-manuals/concepts/workflows.md) is used to orchestrate loosely coupled job
+A [process](/product-manuals/concepts/processes.md) is used to orchestrate loosely coupled job
 workers and the flow of data between them.
 
 In this guide we will use an example process `order-process.bpmn`. You can
@@ -110,10 +110,10 @@ which is later used as job type.
 <!-- [...] -->
 ```
 
-To complete an instance of this workflow we would need to activate and complete one job for each of
+To complete an instance of this process we would need to activate and complete one job for each of
 the types `payment-service`, `inventory-service` and `shipment-service`.
 
-But first let's deploy the workflow to the Zeebe broker.
+But first let's deploy the process to the Zeebe broker.
 
 ```
 ./bin/zbctl --insecure deploy order-process.bpmn
@@ -122,21 +122,21 @@ But first let's deploy the workflow to the Zeebe broker.
 ```
 {
   "key": 2251799813685250,
-  "workflows": [
+  "processes": [
     {
       "bpmnProcessId": "order-process",
       "version": 1,
-      "workflowKey": 2251799813685249,
+      "processKey": 2251799813685249,
       "resourceName": "order-process.bpmn"
     }
   ]
 }
 ```
 
-## Step 4: Create a workflow instance
+## Step 4: Create a process instance
 
-After the workflow is deployed we can create new instances of it. Every
-instance of a workflow is a single execution of the workflow. To create a new
+After the process is deployed we can create new instances of it. Every
+instance of a process is a single execution of the process. To create a new
 instance we have to specify the process ID from the BPMN file, in
 our case the ID is `order-process` as defined in the `order-process.bpmn`:
 
@@ -144,7 +144,7 @@ our case the ID is `order-process` as defined in the `order-process.bpmn`:
 <bpmn:process id="order-process" isExecutable="true">
 ```
 
-Every instance of a workflow normally processes some kind of data. We can
+Every instance of a process normally processes some kind of data. We can
 specify the initial data of the instance as variables when we start the instance.
 
 > **Note:** Windows users who want to execute this command using cmd or Powershell
@@ -159,29 +159,29 @@ specify the initial data of the instance as variables when we start the instance
 
 ```
 {
-  "workflowKey": 2251799813685249,
+  "processKey": 2251799813685249,
   "bpmnProcessId": "order-process",
   "version": 1,
-  "workflowInstanceKey": 2251799813685251
+  "processInstanceKey": 2251799813685251
 }
 ```
 
-## Step 5: Complete a workflow instance
+## Step 5: Complete a process instance
 
 To complete the instance all three tasks have to be executed. In Zeebe a job is
-created for every task which is reached during workflow instance execution. In
+created for every task which is reached during process instance execution. In
 order to finish a job and thereby the corresponding task it has to be activated
 and completed by a [job worker](/product-manuals/concepts/job-workers.md). A job worker is a
 long living process which repeatedly tries to activate jobs for a given job
 type and completes them after executing its business logic. The `zbctl` also
 provides a command to spawn simple job workers using an external command or
-script. The job worker will receive for every job the workflow instance variables as JSON object on
+script. The job worker will receive for every job the process instance variables as JSON object on
 `stdin` and has to return its result also as JSON object on `stdout` if it
 handled the job successfully.
 
 In this example we use the unix command `cat` which just outputs what it receives
-on `stdin`. To complete a workflow instance we now have to create a job worker for
-each of the three task types from the workflow definition: `payment-service`,
+on `stdin`. To complete a process instance we now have to create a job worker for
+each of the three task types from the process definition: `payment-service`,
 `inventory-service` and `shipment-service`.
 
 > **Note:** For Windows users this command does not work with cmd as the `cat`
@@ -208,7 +208,7 @@ each of the three task types from the workflow definition: `payment-service`,
 ```
 
 After the job workers are running in the background we can create more instances
-of our workflow to observe how the workers will complete them.
+of our process to observe how the workers will complete them.
 
 ```
 ./bin/zbctl --insecure create instance order-process --variables '{"orderId": 12345}'
@@ -220,5 +220,5 @@ To close all job workers use the `kill` command to stop the background processes
 kill %1 %2 %3
 ```
 
-If you want to visualize the state of the workflow instances you can start the
+If you want to visualize the state of the process instances you can start the
 [Zeebe simple monitor](https://github.com/zeebe-io/zeebe-simple-monitor).
