@@ -5,7 +5,7 @@ title: "Get help & get involved"
 
 We provide a few different public-facing Zeebe support and feedback channels so that users can ask questions, report problems, and make contributions.
 
-### Zeebe user forum
+### Camunda Cloud user forum
 
 The best place to ask questions about Zeebe and to troubleshoot issues is the forum.
 
