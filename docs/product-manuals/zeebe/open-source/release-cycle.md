@@ -57,14 +57,14 @@ principles](https://github.com/cncf/toc/blob/master/DEFINITION.md), and we want
 Zeebe to be the workflow engine for important, emerging use cases running on
 modern software architectures.
 
-But even with a best-in-class architecture, operating a distributed workflow
+But even with a best-in-class architecture, operating a distributed process
 engine 24x7 can be challenging and time consuming. We've heard from a number of
 users who would be happy to have us run Zeebe and Operate on their behalf.
 
 With that in mind, we have a dedicated team–additional to the Zeebe core
 engineering team building the workflow engine–currently working the first
 iteration of Camunda Cloud, where we'll offer Zeebe and Operate as a cloud
-service. This will be the first-ever cloud workflow service offered by Camunda,
+service. This will be the first-ever cloud process service offered by Camunda,
 and we're really excited for what's ahead.
 
 If you'd like to be notified when we open up a beta program for Camunda Cloud,

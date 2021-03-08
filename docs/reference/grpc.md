@@ -53,18 +53,18 @@ message ActivatedJob {
   int64 key = 1;
   // the type of the job (should match what was requested)
   string type = 2;
-  // the job's workflow instance key
-  int64 workflowInstanceKey = 3;
-  // the bpmn process ID of the job workflow definition
+  // the job's process instance key
+  int64 processInstanceKey = 3;
+  // the bpmn process ID of the job process definition
   string bpmnProcessId = 4;
-  // the version of the job workflow definition
-  int32 workflowDefinitionVersion = 5;
-  // the key of the job workflow definition
-  int64 workflowKey = 6;
+  // the version of the job process definition
+  int32 processDefinitionVersion = 5;
+  // the key of the job process definition
+  int64 processKey = 6;
   // the associated task element ID
   string elementId = 7;
   // the unique key identifying the associated task, unique within the scope of the
-  // workflow instance
+  // process instance
   int64 elementInstanceKey = 8;
   // a set of custom headers defined during modelling; returned as a serialized
   // JSON document
@@ -92,24 +92,24 @@ Returned if:
 - timeout less than 1 (ms)
 - amount is less than 1
 
-### `CancelWorkflowInstance` RPC
+### `CancelProcessInstance` RPC
 
-Cancels a running workflow instance
+Cancels a running process instance
 
-#### Input: `CancelWorkflowInstanceRequest`
+#### Input: `CancelProcessInstanceRequest`
 
 ```protobuf
-message CancelWorkflowInstanceRequest {
-  // the workflow instance key (as, for example, obtained from
-  // CreateWorkflowInstanceResponse)
-  int64 workflowInstanceKey = 1;
+message CancelProcessInstanceRequest {
+  // the process instance key (as, for example, obtained from
+  // CreateProcessInstanceResponse)
+  int64 processInstanceKey = 1;
 }
 ```
 
-#### Output: `CancelWorkflowInstanceResponse`
+#### Output: `CancelProcessInstanceResponse`
 
 ```protobuf
-message CancelWorkflowInstanceResponse {
+message CancelProcessInstanceResponse {
 }
 ```
 
@@ -119,7 +119,7 @@ message CancelWorkflowInstanceResponse {
 
 Returned if:
 
-- no workflow instance exists with the given key. Note that since workflow instances
+- no process instance exists with the given key. Note that since process instances
   are removed once their are finished, it could mean the instance did exist at some point.
 
 ### `CompleteJob` RPC
@@ -160,28 +160,28 @@ Returned if:
 - the job was marked as failed. In that case, the related incident must be resolved before
   the job can be activated again and completed.
 
-### `CreateWorkflowInstance` RPC
+### `CreateProcessInstance` RPC
 
-Creates and starts an instance of the specified workflow. The workflow definition to use
+Creates and starts an instance of the specified process. The process definition to use
 to create the instance can be specified either using its unique key (as returned by
-DeployWorkflow), or using the BPMN process ID and a version. Pass -1 as the version to
+DeployProcess), or using the BPMN process ID and a version. Pass -1 as the version to
 use the latest deployed version.
 
-Note that only workflows with none start events can be started through this command.
+Note that only processes with none start events can be started through this command.
 
-#### Input: `CreateWorkflowInstanceRequest`
+#### Input: `CreateProcessInstanceRequest`
 
 ```protobuf
-message CreateWorkflowInstanceRequest {
-  // the unique key identifying the workflow definition (e.g. returned from a workflow
-  // in the DeployWorkflowResponse message)
-  int64 workflowKey = 1;
-  // the BPMN process ID of the workflow definition
+message CreateProcessInstanceRequest {
+  // the unique key identifying the process definition (e.g. returned from a process
+  // in the DeployProcessResponse message)
+  int64 processKey = 1;
+  // the BPMN process ID of the process definition
   string bpmnProcessId = 2;
   // the version of the process; set to -1 to use the latest version
   int32 version = 3;
   // JSON document that will instantiate the variables for the root variable scope of the
-  // workflow instance; it must be a JSON object, as variables will be mapped in a
+  // process instance; it must be a JSON object, as variables will be mapped in a
   // key-value fashion. e.g. { "a": 1, "b": 2 } will create two variables, named "a" and
   // "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
   // valid argument, as the root of the JSON document is an array and not an object.
@@ -189,56 +189,56 @@ message CreateWorkflowInstanceRequest {
 }
 ```
 
-#### Output: `CreateWorkflowInstanceResponse`
+#### Output: `CreateProcessInstanceResponse`
 
 ```protobuf
-message CreateWorkflowInstanceResponse {
-  // the key of the workflow definition which was used to create the workflow instance
-  int64 workflowKey = 1;
-  // the BPMN process ID of the workflow definition which was used to create the workflow
+message CreateProcessInstanceResponse {
+  // the key of the process definition which was used to create the process instance
+  int64 processKey = 1;
+  // the BPMN process ID of the process definition which was used to create the process
   // instance
   string bpmnProcessId = 2;
-  // the version of the workflow definition which was used to create the workflow instance
+  // the version of the process definition which was used to create the process instance
   int32 version = 3;
-  // the unique identifier of the created workflow instance; to be used wherever a request
-  // needs a workflow instance key (e.g. CancelWorkflowInstanceRequest)
-  int64 workflowInstanceKey = 4;
+  // the unique identifier of the created process instance; to be used wherever a request
+  // needs a process instance key (e.g. CancelProcessInstanceRequest)
+  int64 processInstanceKey = 4;
 }
 ```
 
-### `CreateWorkflowInstanceWithResult` RPC
+### `CreateProcessInstanceWithResult` RPC
 
-Similar to `CreateWorkflowInstance` RPC , creates and starts an instance of the specified workflow.
-Unlike `CreateWorkflowInstance` RPC, the response is returned when the workflow is completed.
+Similar to `CreateProcessInstance` RPC , creates and starts an instance of the specified process.
+Unlike `CreateProcessInstance` RPC, the response is returned when the process is completed.
 
-Note that only workflows with none start events can be started through this command.
+Note that only processes with none start events can be started through this command.
 
-#### Input: `CreateWorkflowInstanceWithResultRequest`
+#### Input: `CreateProcessInstanceWithResultRequest`
 
 ```protobuf
-message CreateWorkflowInstanceRequest {
-   CreateWorkflowInstanceRequest request = 1;
-   // timeout (in ms). the request will be closed if the workflow is not completed before
+message CreateProcessInstanceRequest {
+   CreateProcessInstanceRequest request = 1;
+   // timeout (in ms). the request will be closed if the process is not completed before
    // the requestTimeout.
    // if requestTimeout = 0, uses the generic requestTimeout configured in the gateway.
    int64 requestTimeout = 2;
 }
 ```
 
-#### Output: `CreateWorkflowInstanceWithResultResponse`
+#### Output: `CreateProcessInstanceWithResultResponse`
 
 ```protobuf
-message CreateWorkflowInstanceResponse {
-  // the key of the workflow definition which was used to create the workflow instance
-  int64 workflowKey = 1;
-  // the BPMN process ID of the workflow definition which was used to create the workflow
+message CreateProcessInstanceResponse {
+  // the key of the process definition which was used to create the process instance
+  int64 processKey = 1;
+  // the BPMN process ID of the process definition which was used to create the process
   // instance
   string bpmnProcessId = 2;
-  // the version of the workflow definition which was used to create the workflow instance
+  // the version of the process definition which was used to create the process instance
   int32 version = 3;
-  // the unique identifier of the created workflow instance; to be used wherever a request
-  // needs a workflow instance key (e.g. CancelWorkflowInstanceRequest)
-  int64 workflowInstanceKey = 4;
+  // the unique identifier of the created process instance; to be used wherever a request
+  // needs a process instance key (e.g. CancelProcessInstanceRequest)
+  int64 processInstanceKey = 4;
   // consisting of all visible variables to the root scope
   string variables = 5;
 }
@@ -250,15 +250,15 @@ message CreateWorkflowInstanceResponse {
 
 Returned if:
 
-- no workflow with the given key exists (if workflowKey was given)
-- no workflow with the given process ID exists (if bpmnProcessId was given but version was -1)
-- no workflow with the given process ID and version exists (if both bpmnProcessId and version were given)
+- no process with the given key exists (if processKey was given)
+- no process with the given process ID exists (if bpmnProcessId was given but version was -1)
+- no process with the given process ID and version exists (if both bpmnProcessId and version were given)
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
-- the workflow definition does not contain a none start event; only workflows with none
+- the process definition does not contain a none start event; only processes with none
   start event can be started manually.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
@@ -268,20 +268,20 @@ Returned if:
 - the given variables argument is not a valid JSON document; it is expected to be a valid
   JSON document where the root node is an object.
 
-### `DeployWorkflow` RPC
+### `DeployProcess` RPC
 
-Deploys one or more workflows to Zeebe. Note that this is an atomic call,
-i.e. either all workflows are deployed, or none of them are.
+Deploys one or more processes to Zeebe. Note that this is an atomic call,
+i.e. either all processes are deployed, or none of them are.
 
-#### Input: `DeployWorkflowRequest`
+#### Input: `DeployProcessRequest`
 
 ```protobuf
-message DeployWorkflowRequest {
-  // List of workflow resources to deploy
-  repeated WorkflowRequestObject workflows = 1;
+message DeployProcessRequest {
+  // List of process resources to deploy
+  repeated ProcessRequestObject processes = 1;
 }
 
-message WorkflowRequestObject {
+message ProcessRequestObject {
   enum ResourceType {
     // FILE type means the gateway will try to detect the resource type
     // using the file extension of the name field
@@ -302,25 +302,25 @@ message WorkflowRequestObject {
 }
 ```
 
-#### Output: `DeployWorkflowResponse`
+#### Output: `DeployProcessResponse`
 
 ```protobuf
-message DeployWorkflowResponse {
+message DeployProcessResponse {
   // the unique key identifying the deployment
   int64 key = 1;
-  // a list of deployed workflows
-  repeated WorkflowMetadata workflows = 2;
+  // a list of deployed processes
+  repeated ProcessMetadata processes = 2;
 }
 
-message WorkflowMetadata {
+message ProcessMetadata {
   // the bpmn process ID, as parsed during deployment; together with the version forms a
-  // unique identifier for a specific workflow definition
+  // unique identifier for a specific process definition
   string bpmnProcessId = 1;
   // the assigned process version
   int32 version = 2;
-  // the assigned key, which acts as a unique identifier for this workflow
-  int64 workflowKey = 3;
-  // the resource name (see: WorkflowRequestObject.name) from which this workflow was
+  // the assigned key, which acts as a unique identifier for this process
+  int64 processKey = 3;
+  // the resource name (see: ProcessRequestObject.name) from which this process was
   // parsed
   string resourceName = 4;
 }
@@ -336,7 +336,7 @@ Returned if:
 - if at least one resource is invalid. A resource is considered invalid if:
   - it is not a BPMN or YAML file (currently detected through the file extension)
   - the resource data is not deserializable (e.g. detected as BPMN, but it's broken XML)
-  - the workflow is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
+  - the process is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
 
 ### `FailJob` RPC
 
@@ -426,7 +426,7 @@ Returned if:
 ### `ResolveIncident` RPC
 
 Resolves a given incident. This simply marks the incident as resolved; most likely a call to
-UpdateJobRetries or UpdateWorkflowInstancePayload will be necessary to actually resolve the
+UpdateJobRetries or UpdateProcessInstancePayload will be necessary to actually resolve the
 problem, following by this call.
 
 #### Input: `ResolveIncidentRequest`
@@ -455,13 +455,13 @@ Returned if:
 
 ### `SetVariables` RPC
 
-Updates all the variables of a particular scope (e.g. workflow instance, flow element instance) from the given JSON document.
+Updates all the variables of a particular scope (e.g. process instance, flow element instance) from the given JSON document.
 
 #### Input: `SetVariablesRequest`
 
 ```protobuf
 message SetVariablesRequest {
-  // the unique identifier of a particular element; can be the workflow instance key (as
+  // the unique identifier of a particular element; can be the process instance key (as
   // obtained during instance creation), or a given element, such as a service task (see
   // elementInstanceKey on the job message)
   int64 elementInstanceKey = 1;
@@ -505,7 +505,7 @@ Returned if:
 
 ### `ThrowError` RPC
 
-Throw an error to indicate that a business error is occurred while processing the job. The error is identified by an error code and is handled by an error catch event in the workflow with the same error code.
+Throw an error to indicate that a business error is occurred while processing the job. The error is identified by an error code and is handled by an error catch event in the process with the same error code.
 
 #### Input: `ThrowErrorRequest`
 

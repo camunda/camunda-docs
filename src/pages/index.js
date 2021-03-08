@@ -11,7 +11,7 @@ const features = [
     title: 'Camunda Cloud',
     imageUrl: 'img/camunda-cloud-gradient.png',
     description: (
-      <>A  scalable, on-demand workflow platform
+      <>A  scalable, on-demand process platform
       </>
     ),
   },

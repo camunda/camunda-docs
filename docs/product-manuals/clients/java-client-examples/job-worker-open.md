@@ -10,8 +10,8 @@ title: "Open a job worker"
 ## Prerequisites
 
 1. Running Zeebe broker with endpoint `localhost:26500` (default)
-1. Run the [deploy a workflow example](workflow-deploy.md)
-1. Run the [create a workflow instance example](workflow-instance-create.md) a couple of times
+1. Run the [deploy a process example](process-deploy.md)
+1. Run the [create a process instance example](process-instance-create.md) a couple of times
 
 ## JobWorkerCreator.java
 

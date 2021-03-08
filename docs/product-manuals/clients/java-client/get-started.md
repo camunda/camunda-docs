@@ -125,25 +125,25 @@ Connected.
 Closed.
 ```
 
-## Model a workflow
+## Model a process
 
-Now, we need a simple workflow we can deploy. Later, we will extend the workflow with more functionality.
+Now, we need a simple process we can deploy. Later, we will extend the process with more functionality.
 
 Open the [modeler](/guides/getting-started/model-your-first-process.md) of your choice and create a new BPMN diagram.
 
 Add a start event named `Order Placed` and an end event named `Order Delivered` to the diagram and connect the events.
 
-![model-workflow-step-1](assets/order-process-simple.png)
+![model-process-step-1](assets/order-process-simple.png)
 
 Set the **id** (the BPMN process id), and mark the diagram as **executable**.
 
 Save the diagram as `src/main/resources/order-process.bpmn` under the project's folder.
 
-## Deploy a workflow
+## Deploy a process
 
-Next, we want to deploy the modeled workflow to the broker.
+Next, we want to deploy the modeled process to the broker.
 
-The broker stores the workflow under its BPMN process id and assigns a version.
+The broker stores the process under its BPMN process id and assigns a version.
 
 Add the following deploy command to the main class:
 
@@ -163,78 +163,78 @@ public class Application
             .send()
             .join();
 
-        final int version = deployment.getWorkflows().get(0).getVersion();
-        System.out.println("Workflow deployed. Version: " + version);
+        final int version = deployment.getProcesses().get(0).getVersion();
+        System.out.println("Process deployed. Version: " + version);
 
         // ...
     }
 }
 ```
 
-Run the program and verify that the workflow is deployed successfully.
+Run the program and verify that the process is deployed successfully.
 You should see the output:
 
 ```
-Workflow deployed. Version: 1
+Process deployed. Version: 1
 ```
 
-## Create a workflow instance
+## Create a process instance
 
-We are ready to create our first instance of the deployed workflow. 
+We are ready to create our first instance of the deployed process. 
 
-A workflow instance is created from a specific version of the workflow, which can be set on creation.
+A process instance is created from a specific version of the process, which can be set on creation.
 
 Add the following create command to the main class:
 
 ```java
 package io.zeebe;
 
-import io.zeebe.client.api.response.WorkflowInstanceEvent;
+import io.zeebe.client.api.response.ProcessInstanceEvent;
 
 public class Application
 {
     public static void main(final String[] args)
     {
-        // after the workflow is deployed
+        // after the process is deployed
 
-        final WorkflowInstanceEvent wfInstance = client.newCreateInstanceCommand()
+        final ProcessInstanceEvent wfInstance = client.newCreateInstanceCommand()
             .bpmnProcessId("order-process")
             .latestVersion()
             .send()
             .join();
 
-        final long workflowInstanceKey = wfInstance.getWorkflowInstanceKey();
+        final long processInstanceKey = wfInstance.getProcessInstanceKey();
 
-        System.out.println("Workflow instance created. Key: " + workflowInstanceKey);
+        System.out.println("Process instance created. Key: " + processInstanceKey);
 
         // ...
     }
 }
 ```
 
-Run the program and verify that the workflow instance is created. You should see the output:
+Run the program and verify that the process instance is created. You should see the output:
 
 ```
-Workflow instance created. Key: 2113425532
+Process instance created. Key: 2113425532
 ```
 
 You did it!
 
-## See the workflow in action
+## See the process in action
 
-You want to see how the workflow instance is executed?
+You want to see how the process instance is executed?
 
 1. Go to the cluster in Camunda Cloud and select it
 1. Click on the link to [Operate](/product-manuals/operate/userguide/basic-operate-navigation.md)
-1. Select the workflow _order process_
+1. Select the process _order process_
 
-As you can see, a workflow instance has been started and finished.
+As you can see, a process instance has been started and finished.
 
 ## Work on a job
 
-Now we want to do some work within our workflow.
+Now we want to do some work within our process.
 
-First, add a few service jobs to the BPMN diagram and set the required attributes. Then extend your main class and create a job worker to process jobs which are created when the workflow instance reaches a service task.
+First, add a few service jobs to the BPMN diagram and set the required attributes. Then extend your main class and create a job worker to process jobs which are created when the process instance reaches a service task.
 
 Open the BPMN diagram in the modeler. Insert three service tasks between the start and the end event.
 
@@ -242,7 +242,7 @@ Open the BPMN diagram in the modeler. Insert three service tasks between the sta
 - Name the second task `Fetch Items`.
 - Name the third task `Ship Parcel`.
 
-![model-workflow-step-2](assets/order-process.png)
+![model-process-step-2](assets/order-process.png)
 
 You need to set the type of each task, which identifies the nature of the work to be performed.
 
@@ -250,7 +250,7 @@ You need to set the type of each task, which identifies the nature of the work t
 - Set the **type** of the second task to `fetcher-service`.
 - Set the **type** of the third task to `shipping-service`.
 
-Save the BPMN diagram to the same file. When you run the program again, the changed workflow will be deployed and a new version of the workflow will be created.
+Save the BPMN diagram to the same file. When you run the program again, the changed process will be deployed and a new version of the process will be created.
 
 Switching back to the main class, add the following lines to create a job worker for the first jobs type:
 
@@ -263,7 +263,7 @@ public class App
 {
     public static void main(final String[] args)
     {
-        // after the workflow instance is created
+        // after the process instance is created
 
         try(final JobWorker jobWorker = client.newWorker()) {
             jobWorker.jobType("payment-service")
@@ -296,15 +296,15 @@ Run the program and verify that the job is processed. You should see the output:
 Collect money
 ```
 
-Looking at Operate, you can see that the workflow instance moved from the first service task to the next one.
+Looking at Operate, you can see that the process instance moved from the first service task to the next one.
 
 ## Work with data
 
-Usually, a workflow is more than just tasks, there is also a data flow. The worker gets the data from the workflow instance to do its work and send the result back to the workflow instance.
+Usually, a process is more than just tasks, there is also a data flow. The worker gets the data from the process instance to do its work and send the result back to the process instance.
 
-In Zeebe, the data is stored as key-value-pairs in the form of variables. Variables can be set when the workflow instance is created. Within the workflow, variables can be read and modified by workers.
+In Zeebe, the data is stored as key-value-pairs in the form of variables. Variables can be set when the process instance is created. Within the process, variables can be read and modified by workers.
 
-In our example, we want to create a workflow instance with the following variables:
+In our example, we want to create a process instance with the following variables:
 
 ```json
 "orderId": 31243
@@ -313,7 +313,7 @@ In our example, we want to create a workflow instance with the following variabl
 
 The first task should read `orderId` as input and return `totalPrice` as result.
 
-Modify the workflow instance create command and pass the data as variables. Also, modify the job worker to read the job variables and complete the job with a result.
+Modify the process instance create command and pass the data as variables. Also, modify the job worker to read the job variables and complete the job with a result.
 
 ```java
 package io.zeebe;
@@ -322,13 +322,13 @@ public class App
 {
     public static void main(final String[] args)
     {
-        // after the workflow is deployed
+        // after the process is deployed
 
         final Map<String, Object> data = new HashMap<>();
         data.put("orderId", 31243);
         data.put("orderItems", Arrays.asList(435, 182, 376));
 
-        final WorkflowInstanceEvent wfInstance = client.newCreateInstanceCommand()
+        final ProcessInstanceEvent wfInstance = client.newCreateInstanceCommand()
             .bpmnProcessId("order-process")
             .latestVersion()
             .variables(data)
@@ -380,9 +380,9 @@ From here there are several steps to take, depending on your preference:
 
 - Implement workers for the other two jobs to get the hang of it
 - Check out examples for use cases not covered here:
-  - [Create non-blocking workflow instances](../java-client-examples/workflow-instance-create-nonblocking.md)
-  - [Create a workflow instance with results](../java-client-examples/workflow-instance-create-with-result.md)
+  - [Create non-blocking process instances](../java-client-examples/process-instance-create-nonblocking.md)
+  - [Create a process instance with results](../java-client-examples/process-instance-create-with-result.md)
   - [Handle variables as POJO](../java-client-examples/data-pojo.md)
 - Learn how to [write tests](testing.md)
-- Learn more about [BPMN workflows](/reference/bpmn-workflows/bpmn-primer.md) in general
+- Learn more about [BPMN processes](/reference/bpmn-processes/bpmn-primer.md) in general
 - Learn more about the Java client's [job worker](job-worker.md)
