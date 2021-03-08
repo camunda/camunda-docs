@@ -12,6 +12,6 @@ Putting the documentation online happens automatically. The source is always `Ma
 4. Fill out the form: Tag version (semver: 'x.y.z'), Release title, Description
 5. Click on _Publish release_
 
-Technically [this Github Workflow](./.github/workflows/publish.yaml) will be triggered by the Release to build and deploy the docs.
+Technically [this Github Process](./.github/processes/publish.yaml) will be triggered by the Release to build and deploy the docs.
 
 You can observe the progress of the Build under [https://github.com/camunda-cloud/camunda-cloud-documentation/actions](https://github.com/camunda-cloud/camunda-cloud-documentation/actions).

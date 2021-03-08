@@ -32,11 +32,11 @@ A broker is never healthy before it is ready.
 Unlike ready check, a broker can become unhealthy after it is healthy.
 Hence it gives a better status of a running broker.
 
-A broker is healthy, when it can process workflows, accepts commands, and perform all its expected tasks.
+A broker is healthy, when it can process processes, accepts commands, and perform all its expected tasks.
 If it is unhealthy, then it can mean three things:
 
 - **it is only temporarily unhealthy**, e.g. due to environmental circumstances such as temporary I/O issues
-- **it is partially unhealthy**, could mean that one or more partitions is unhealthy, while the rest of them are able to process workflows
+- **it is partially unhealthy**, could mean that one or more partitions is unhealthy, while the rest of them are able to process processes
 - **it is completely dead**
 
 [Metrics](metrics.md) give more insight into which partition is healthy or unhealthy.

@@ -11,6 +11,6 @@ This section contains general reference material for Camunda Cloud, including AP
 - [Console API (REST)](cloud-console-api-reference.md)
 - [Zeebe API (gRPC)](grpc.md)
 - [Tasklist API (GraphQL)](tasklist-api/generated.md)
-- [BPMN workflows](bpmn-workflows/bpmn-primer.md)
+- [BPMN processes](bpmn-processes/bpmn-primer.md)
 - [FEEL expressions](feel/what-is-feel.md)
 - [Glossary](glossary.md)

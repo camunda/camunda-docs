@@ -10,7 +10,7 @@ Zeebe exposes metrics over an embedded HTTP server.
 
 ## Types of metrics
 
-- **Counters**: a time series that records a growing count of some unit. Examples: number of bytes transmitted over the network, number of workflow instances started
+- **Counters**: a time series that records a growing count of some unit. Examples: number of bytes transmitted over the network, number of process instances started
 - **Gauges**: a time series that records the current size of some unit. Examples: number of currently open client connections, current number of partitions
 
 ## Metrics format
@@ -56,16 +56,16 @@ Most metrics have the following common label:
 
 - `partition`: cluster-unique id of the partition
 
-**Metrics related to workflow processing:**
+**Metrics related to process processing:**
 
 - `zeebe_stream_processor_events_total`: The number of events processed by the stream processor.
   The `action` label separates processed, skipped and written events.
 - `zeebe_exporter_events_total`: The number of events processed by the exporter processor.
   The `action` label separates exported and skipped events.
-- `zeebe_element_instance_events_total`: The number of occurred workflow element instance events.
+- `zeebe_element_instance_events_total`: The number of occurred process element instance events.
   The `action` label separates the number of activated, completed and terminated elements.
   The `type` label separates different BPMN element types.
-- `zeebe_running_workflow_instances_total`: The number of currently running workflow instances, i.e.
+- `zeebe_running_process_instances_total`: The number of currently running process instances, i.e.
   not completed or terminated.
 - `zeebe_job_events_total`: The number of job events. The `action` label separates the number of
   created, activated, timed out, completed, failed and canceled jobs.

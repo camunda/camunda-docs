@@ -15,15 +15,15 @@ In local or private cloud deployments, all components are relevant.
 
 Clients send commands to Zeebe to:
 
-- Deploy workflows
+- Deploy processes
 - Carry out business logic
-  - Start workflow instances
+  - Start process instances
   - Publish messages
   - Activate jobs
   - Complete jobs
   - Fail jobs
 - Handle operational issues
-  - Update workflow instance variables
+  - Update process instance variables
   - Resolve incidents
 
 Client applications can be scaled up and down completely separately from Zeebe - the Zeebe brokers do not execute any business logic.
@@ -46,14 +46,14 @@ The gateway is stateless and sessionless, and gateways can be added as necessary
 
 ## Broker
 
-The Zeebe broker is the distributed workflow engine that keeps state of active workflow instances.
+The Zeebe broker is the distributed workflow engine that keeps state of active process instances.
 
 Brokers can be partitioned for horizontal scalability and replicated for fault tolerance. A Zeebe deployment will often consist of more than one broker.
 
 It's important to note that no application business logic lives in the broker. Its only responsibilities are:
 
 - Processing commands sent by clients
-- Storing and managing the state of active workflow instances
+- Storing and managing the state of active process instances
 - Assigning jobs to job workers
 
 Brokers form a peer-to-peer network in which there is no single point of failure. This is possible because all brokers perform the same kind of tasks and the responsibilities of an unavailable broker are transparently reassigned in the network.
@@ -62,8 +62,8 @@ Brokers form a peer-to-peer network in which there is no single point of failure
 
 The exporter system provides an event stream of state changes within Zeebe. This data has many potential uses, including but not limited to:
 
-- Monitoring the current state of running workflow instances
-- Analysis of historic workflow data for auditing, business intelligence, etc
+- Monitoring the current state of running process instances
+- Analysis of historic process data for auditing, business intelligence, etc
 - Tracking [incidents](/product-manuals/concepts/incidents.md) created by Zeebe
 
 The exporter includes a simple API that you can use to stream data into a storage system of your choice. Zeebe includes an out-of-the-box [Elasticsearch exporter](https://github.com/zeebe-io/zeebe/tree/master/exporters/elasticsearch-exporter), and other [community-contributed exporters](https://awesome.zeebe.io) are also available.

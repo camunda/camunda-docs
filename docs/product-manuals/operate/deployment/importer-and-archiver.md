@@ -5,7 +5,7 @@ title: Importer and archiver
 Operate consists of three modules:
  * **Webapp** - contains the UI and operation executor functionality
  * **Importer** - is responsible for importing data from Zeebe 
- * **Archiver** - is responsible for archiving "old" data (finished workflow instances and user operations) (see [Data retention](data-retention.md)).
+ * **Archiver** - is responsible for archiving "old" data (finished process instances and user operations) (see [Data retention](data-retention.md)).
  
 Modules can be run together or separately in any combination and can be scaled. When you run Operate instance, by default, all modules are enabled. 
 To disable them you can use following configuration parameters:
