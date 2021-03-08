@@ -16,12 +16,12 @@ cd zeebe/samples
 
 Import the Maven project in the `samples` directory into your IDE to start hacking.
 
-## Workflow
+## Process
 
-- [Deploy a workflow](workflow-deploy.md)
-- [Create a workflow instance](workflow-instance-create.md)
-- [Create non-blocking workflow instances](workflow-instance-create-nonblocking.md)
-- [Create a Workflow Instance with Results](workflow-instance-create-with-result.md)
+- [Deploy a process](process-deploy.md)
+- [Create a process instance](process-instance-create.md)
+- [Create non-blocking process instances](process-instance-create-nonblocking.md)
+- [Create a Process Instance with Results](process-instance-create-with-result.md)
 
 ## Job
 

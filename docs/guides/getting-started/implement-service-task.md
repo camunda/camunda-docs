@@ -6,7 +6,7 @@ title: Implement a service task
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Use [this workflow model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
+Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
 
 <Tabs groupId="modeler" defaultValue="console" values={
 [
@@ -23,11 +23,11 @@ Click **Import New Diagram** in the context menu to inject the BPMN-model you ju
 
 ![processId-cloud](./img/cloud-modeler-advanced-process-id.png)
 
-This workflow includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
+This process includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
 
-![workflow-cloud](./img/cloud-modeler-advanced.png)
+![process-cloud](./img/cloud-modeler-advanced.png)
 
-Deploy the new workflow using the **Save & Deploy** option in the **Deployment** menu.
+Deploy the new process using the **Save & Deploy** option in the **Deployment** menu.
 
 Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
 
@@ -37,11 +37,11 @@ Make sure you have [created a client](./setup-client-connection-credentials.md) 
 
 ![processId](./img/zeebe-modeler-advanced-process-id.png)
 
-This workflow includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
+This process includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
 
-![workflow](./img/zeebe-modeler-advanced.png)
+![process](./img/zeebe-modeler-advanced.png)
 
-Deploy the new workflow.
+Deploy the new process.
 
 </TabItem>
 </Tabs>

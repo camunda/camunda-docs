@@ -35,7 +35,7 @@ Once the instance is started, you'll get a confirmation with a link to open Oper
 
 <TabItem value='desktop'>
 
-On the right side of the navigation menu there are buttons for deploying and starting workflows.
+On the right side of the navigation menu there are buttons for deploying and starting processes.
 
 ![zeebe-modeler-deploy](./img/zeebe-modeler-deploy.png)
 
@@ -52,7 +52,7 @@ grep SECRET  ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
 export ZEEBE_CLIENT_SECRET='zbzsZI_6UnCsH_CIo0lNUN8qGyvLJr9VrH77ewNm8Oq3elvhPvV7g.QmJGydzOLo'
 ```
 
-Click **Deploy** to deploy the workflow. Use **Play** from the navigation to start a new instance.
+Click **Deploy** to deploy the process. Use **Play** from the navigation to start a new instance.
 
 </TabItem>
 </Tabs>

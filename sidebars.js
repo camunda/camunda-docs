@@ -22,9 +22,9 @@ module.exports = {
     {
       Concepts: [
         "product-manuals/concepts/what-is-camunda-cloud",
-        "product-manuals/concepts/workflows",              
+        "product-manuals/concepts/processes",              
         "product-manuals/concepts/job-workers",        
-        "product-manuals/concepts/workflow-instance-creation",
+        "product-manuals/concepts/process-instance-creation",
         "product-manuals/concepts/messages",
         "product-manuals/concepts/incidents",   
         "product-manuals/concepts/variables",
@@ -41,10 +41,10 @@ module.exports = {
             {
               "Examples": [
                 "product-manuals/clients/java-client-examples/index",
-                "product-manuals/clients/java-client-examples/workflow-deploy",
-                "product-manuals/clients/java-client-examples/workflow-instance-create",
-                "product-manuals/clients/java-client-examples/workflow-instance-create-nonblocking",
-                "product-manuals/clients/java-client-examples/workflow-instance-create-with-result",
+                "product-manuals/clients/java-client-examples/process-deploy",
+                "product-manuals/clients/java-client-examples/process-instance-create",
+                "product-manuals/clients/java-client-examples/process-instance-create-nonblocking",
+                "product-manuals/clients/java-client-examples/process-instance-create-with-result",
                 "product-manuals/clients/java-client-examples/job-worker-open",
                 "product-manuals/clients/java-client-examples/data-pojo",
                 "product-manuals/clients/java-client-examples/cluster-topology-request",
@@ -145,7 +145,7 @@ module.exports = {
             "product-manuals/zeebe/technical-concepts/clustering",
             "product-manuals/zeebe/technical-concepts/partitions",            
             "product-manuals/zeebe/technical-concepts/internal-processing",            
-            "product-manuals/zeebe/technical-concepts/workflow-lifecycles",            
+            "product-manuals/zeebe/technical-concepts/process-lifecycles",            
             "product-manuals/zeebe/technical-concepts/protocols",
             "product-manuals/zeebe/technical-concepts/exporters",        
           ],
@@ -178,9 +178,9 @@ module.exports = {
               "Getting started tutorial": [
                 "product-manuals/zeebe/deployment-guide/getting-started/index",
                 "product-manuals/zeebe/deployment-guide/getting-started/tutorial-setup",
-                "product-manuals/zeebe/deployment-guide/getting-started/create-a-workflow",
-                "product-manuals/zeebe/deployment-guide/getting-started/deploy-a-workflow",
-                "product-manuals/zeebe/deployment-guide/getting-started/create-workflow-instance",
+                "product-manuals/zeebe/deployment-guide/getting-started/create-a-process",
+                "product-manuals/zeebe/deployment-guide/getting-started/deploy-a-process",
+                "product-manuals/zeebe/deployment-guide/getting-started/create-process-instance",
                 "product-manuals/zeebe/deployment-guide/getting-started/next-steps-resources",
               ],
             },  
@@ -268,46 +268,46 @@ module.exports = {
     "reference/grpc",
     require("./docs/reference/tasklist-api/sidebar-schema"),
     {
-      "BPMN workflows": [
-        "reference/bpmn-workflows/bpmn-primer",
-        "reference/bpmn-workflows/bpmn-coverage",
-        "reference/bpmn-workflows/data-flow",
+      "BPMN processes": [
+        "reference/bpmn-processes/bpmn-primer",
+        "reference/bpmn-processes/bpmn-coverage",
+        "reference/bpmn-processes/data-flow",
         {
           Tasks: [
-            "reference/bpmn-workflows/tasks",
-            "reference/bpmn-workflows/service-tasks/service-tasks",
-            "reference/bpmn-workflows/receive-tasks/receive-tasks",
+            "reference/bpmn-processes/tasks",
+            "reference/bpmn-processes/service-tasks/service-tasks",
+            "reference/bpmn-processes/receive-tasks/receive-tasks",
           ],
         },
         {
           Gateways: [
-            "reference/bpmn-workflows/gateways",
-            "reference/bpmn-workflows/exclusive-gateways/exclusive-gateways",
-            "reference/bpmn-workflows/parallel-gateways/parallel-gateways",
-            "reference/bpmn-workflows/event-based-gateways/event-based-gateways",
+            "reference/bpmn-processes/gateways",
+            "reference/bpmn-processes/exclusive-gateways/exclusive-gateways",
+            "reference/bpmn-processes/parallel-gateways/parallel-gateways",
+            "reference/bpmn-processes/event-based-gateways/event-based-gateways",
           ],
         },
         {
           Events: [
-            "reference/bpmn-workflows/events",
-            "reference/bpmn-workflows/none-events/none-events",
-            "reference/bpmn-workflows/message-events/message-events",
-            "reference/bpmn-workflows/timer-events/timer-events",
-            "reference/bpmn-workflows/error-events/error-events",
+            "reference/bpmn-processes/events",
+            "reference/bpmn-processes/none-events/none-events",
+            "reference/bpmn-processes/message-events/message-events",
+            "reference/bpmn-processes/timer-events/timer-events",
+            "reference/bpmn-processes/error-events/error-events",
           ],
         },
         {
           Subprocesses: [
-            "reference/bpmn-workflows/subprocesses",
-            "reference/bpmn-workflows/embedded-subprocesses/embedded-subprocesses",
-            "reference/bpmn-workflows/call-activities/call-activities",
-            "reference/bpmn-workflows/event-subprocesses/event-subprocesses",
+            "reference/bpmn-processes/subprocesses",
+            "reference/bpmn-processes/embedded-subprocesses/embedded-subprocesses",
+            "reference/bpmn-processes/call-activities/call-activities",
+            "reference/bpmn-processes/event-subprocesses/event-subprocesses",
           ],
         },
         {
           Markers: [
-            "reference/bpmn-workflows/markers",
-            "reference/bpmn-workflows/multi-instance/multi-instance",
+            "reference/bpmn-processes/markers",
+            "reference/bpmn-processes/multi-instance/multi-instance",
           ],
         },
       ],

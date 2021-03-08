@@ -2,7 +2,7 @@
 id: testing
 title: "Writing tests"
 ---
-You can use the `zeebe-test` module to write JUnit tests for your job worker and BPMN workflow. It provides a JUnit rule to bootstrap the broker and some basic assertions.
+You can use the `zeebe-test` module to write JUnit tests for your job worker and BPMN process. It provides a JUnit rule to bootstrap the broker and some basic assertions.
 
 ## Usage in a Maven project
 
@@ -18,11 +18,11 @@ Add `zeebe-test` as Maven test dependency to your project:
 
 ## Bootstrap the broker
 
-Use the `ZeebeTestRule` in your test case to start an embedded broker. It contains a client which can be used to deploy a BPMN workflow or create an instance.
+Use the `ZeebeTestRule` in your test case to start an embedded broker. It contains a client which can be used to deploy a BPMN process or create an instance.
 
 ```java
 import io.zeebe.client.ZeebeClient;
-import io.zeebe.client.api.response.WorkflowInstanceEvent;
+import io.zeebe.client.api.response.ProcessInstanceEvent;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class MyTest {
         .send()
         .join();
 
-    final WorkflowInstanceEvent workflowInstance =
+    final ProcessInstanceEvent processInstance =
         client
             .newCreateInstanceCommand()
             .bpmnProcessId("process")
@@ -59,9 +59,9 @@ public class MyTest {
 The `ZeebeTestRule` provides also some basic assertions in AssertJ style. The entry point of the assertions is `ZeebeTestRule.assertThat(...)`.
 
 ```java
-final WorkflowInstanceEvent workflowInstance = ...
+final ProcessInstanceEvent processInstance = ...
 
-ZeebeTestRule.assertThat(workflowInstance)
+ZeebeTestRule.assertThat(processInstance)
     .isEnded()
     .hasPassed("start", "task", "end")
     .hasVariable("result", 21.0);

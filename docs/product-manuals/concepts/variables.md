@@ -3,7 +3,7 @@ id: variables
 title: "Variables"
 ---
 
-Variables are part of a workflow instance and represent the data of the instance. A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
+Variables are part of a process instance and represent the data of the instance. A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
 
 ## Variable names
 
@@ -31,9 +31,9 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 
 ## Variable scopes
 
-Variable scopes define the _visibility_ of variables. The root scope is the workflow instance itself. Variables in this scope are visible everywhere in the workflow.
+Variable scopes define the _visibility_ of variables. The root scope is the process instance itself. Variables in this scope are visible everywhere in the process.
 
-When the workflow instance enters a subprocess or an activity then a new scope is created. Activities in this scope can see all variables of this and of higher scopes (i.e. parent scopes). But activities outside of this scope can not see the variables which are defined in this scope.
+When the process instance enters a subprocess or an activity then a new scope is created. Activities in this scope can see all variables of this and of higher scopes (i.e. parent scopes). But activities outside of this scope can not see the variables which are defined in this scope.
 
 If a variable has the same name as a variable from a higher scope then it covers this variable. Activities in this scope see only the value of this variable and not the one from the higher scope.
 
@@ -43,7 +43,7 @@ Example:
 
 ![variable-scopes](assets/variable-scopes.png)
 
-This workflow instance has the following variables:
+This process instance has the following variables:
 
 - `a` and `b` are defined on the root scope and can be seen by _Task A_, _Task B_, and _Task C_.
 - `c` is defined in the sub process scope and can be seen by _Task A_ and _Task B_.
@@ -51,7 +51,7 @@ This workflow instance has the following variables:
 
 ### Variable propagation
 
-When variables are merged into a workflow instance (e.g. on job completion, on message correlation) then each variable is propagated from the scope of the activity to its higher scopes.
+When variables are merged into a process instance (e.g. on job completion, on message correlation) then each variable is propagated from the scope of the activity to its higher scopes.
 
 The propagation ends when a scope contains a variable with the same name. In this case, the variable value is updated.
 
@@ -71,11 +71,11 @@ In order to deactivate the variable propagation, the variables are set as _local
 
 ## Input/output variable mappings
 
-Input/output variable mappings can be used to create new variables or customize how variables are merged into the workflow instance.
+Input/output variable mappings can be used to create new variables or customize how variables are merged into the process instance.
 
-Variable mappings are defined in the workflow as extension elements under `ioMapping`. Every variable mapping has a `source` and a `target` expression.
+Variable mappings are defined in the process as extension elements under `ioMapping`. Every variable mapping has a `source` and a `target` expression.
 
-The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](expressions.md#access-variables) of the workflow instance that holds the value. If the variable or the nested property doesn't exist then an [incident](incidents.md) is created.
+The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](expressions.md#access-variables) of the process instance that holds the value. If the variable or the nested property doesn't exist then an [incident](incidents.md) is created.
 
 The `target` expression defines **where** the value of the `source` expression is stored. It can reference a variable by its name or a nested property of a variable. If the variable or the nested property doesn't exist then it is created.
 
@@ -108,7 +108,7 @@ When an input mapping is applied then it creates a new **local variable** in the
 
 Examples:
 
-| Workflow instance variables            | Input mappings                                                                                               | New variables                               |
+| Process instance variables            | Input mappings                                                                                               | New variables                               |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
 | `orderId: "order-123"`                 | **source:** `=orderId`<br/> **target:** `reference`                                                          | `reference: "order-123"`                    |
 | `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
@@ -116,17 +116,17 @@ Examples:
 
 ### Output mappings
 
-Output mappings can be used to customize how job/message variables are merged into the workflow instance. They can be defined on service tasks, receive tasks, message catch events and subprocesses.
+Output mappings can be used to customize how job/message variables are merged into the process instance. They can be defined on service tasks, receive tasks, message catch events and subprocesses.
 
 If **one or more** output mappings are defined then the job/message variables are set as _local variables_ in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable then the variable is not merged.
 
-If **no** output mappings are defined then all job/message variables are merged into the workflow instance.
+If **no** output mappings are defined then all job/message variables are merged into the process instance.
 
 In case of a subprocess, the behavior is different. There are no job/message variables to be merged. But output mappings can be used to propagate _local variables_ of the subprocess to higher scopes. By default, all _local variables_ are removed when the scope is left.
 
 Examples:
 
-| Job/message variables                                | Output mappings                                                                                                                      | Workflow instance variables                        |
+| Job/message variables                                | Output mappings                                                                                                                      | Process instance variables                        |
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
 | `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |

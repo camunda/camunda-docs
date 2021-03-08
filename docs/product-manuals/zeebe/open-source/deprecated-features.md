@@ -24,4 +24,4 @@ In terms of specifying values, there were two minor changes:
 
 ## Removed in 1.0
 
-The support for yaml workflows was removed as of release 1.0. The `resourceType` in Deployment record and Workflow grpc request are deprecated, they will always contain `BPMN` as value.
+The support for yaml processes was removed as of release 1.0. The `resourceType` in Deployment record and Process grpc request are deprecated, they will always contain `BPMN` as value.

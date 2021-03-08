@@ -48,7 +48,7 @@ eventLogSize = [event log size for duration of snapshotPeriod]
 Some observations on the scaling of the factors above:
 
 - `eventLogSize`: This factor scales with the throughput of your system
-- `totalSnapshotSize`: This factor scales with the number of in-flight workflows
+- `totalSnapshotSize`: This factor scales with the number of in-flight processes
 - `reserveForPartialSystemFailure`: This factor is supposed to be a reserve to account for partial system failure (e.g. loss of quorum inside Zeebe cluster, or loss of connection to external system). See the remainder of this document for a further discussion on the effects of partial system failure on Zeebe cluster and disk space provisioning.
 
 Many of the factors influencing above formula can be fine-tuned in the [configuration](../configuration/configuration.md). The relevant configuration settings are:
@@ -78,7 +78,7 @@ Other factors can be observed in a production-like system with representative th
 If you want to know where to look, by default this data is stored in
 
 - `segments` - the data of the log split into segments. The log is only appended - its data can be deleted when it becomes part of a new snapshot.
-- `state` - the active state. Deployed workflows, active workflow instances, etc. Completed workflow instances or jobs are removed.
+- `state` - the active state. Deployed processes, active process instances, etc. Completed process instances or jobs are removed.
 - `snapshot` - a state at a certain point in time
 
 > **Pitfalls**
@@ -120,7 +120,7 @@ We make sure that event log segments are not deleted too early. No event log seg
 
 The running state of the partition is captured periodically on the leader in a snapshot. By default, this period is every 5 minutes. This can be changed in the [configuration](../configuration/configuration.md).
 
-A snapshot is a projection of all events that represent the current running state of the workflows running on the partition. It contains all active data, for example, deployed workflows, active workflow instances, and not yet completed jobs.
+A snapshot is a projection of all events that represent the current running state of the processes running on the partition. It contains all active data, for example, deployed processes, active process instances, and not yet completed jobs.
 
 When the broker has written a new snapshot, it deletes all data on the log which was written before the latest snapshot.
 

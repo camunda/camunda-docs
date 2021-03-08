@@ -114,7 +114,7 @@ camunda.operate:
 
 ## Operation executor
 
-Operations are user operations like Cancellation of workflow instance(s) or Updating the variable value. Operations are executed in multi-threaded manner.
+Operations are user operations like Cancellation of process instance(s) or Updating the variable value. Operations are executed in multi-threaded manner.
 
 Name | Description | Default value
 -----|-------------|--------------

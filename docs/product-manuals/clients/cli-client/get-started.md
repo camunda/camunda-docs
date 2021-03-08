@@ -62,15 +62,15 @@ Brokers:
     Partition 2 : Leader
 ```
 
-## Advanced workflow
+## Advanced process
 
-Use [this workflow model](./assets/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
+Use [this process model](./assets/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
 
 ![processId](./assets/zeebe-modeler-advanced-process-id.png)
 
-This workflow includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
+This process includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
 
-![workflow](./assets/zeebe-modeler-advanced.png)
+![process](./assets/zeebe-modeler-advanced.png)
 
 The worker will return a JSON object as a result, which is used to decide which path to take.
 Now, we can use the JSON object to route your process by filling in the condition expression on the two sequence flows after the XOR gateway.
@@ -89,9 +89,9 @@ And for the else sequence flow:
 
 ![sequenceflows](./assets/zeebe-modeler-advanced-sequence-flows.png)
 
-## Deploy a Workflow
+## Deploy a Process
 
-Now you can deploy the [workflow](./assets/gettingstarted_quickstart_advanced.bpmn). Navigate to the folder, where you saved your workflow.
+Now you can deploy the [process](./assets/gettingstarted_quickstart_advanced.bpmn). Navigate to the folder, where you saved your process.
 
 ```bash
 zbctl deploy gettingstarted_quickstart_advanced.bpmn
@@ -102,11 +102,11 @@ If the deployment is successful you'll get the following output:
 ```bash
 {
   "key": 2251799813685493,
-  "workflows": [
+  "processes": [
     {
       "bpmnProcessId": "camunda-cloud-quick-start-advanced",
       "version": 1,
-      "workflowKey": 2251799813685492,
+      "processKey": 2251799813685492,
       "resourceName": "gettingstarted_quickstart_advanced.bpmn"
     }
   ]
@@ -117,7 +117,7 @@ Important here is the `bpmnProcessId`, which you'll need for creating a new inst
 
 ## Register a worker
 
-The workflow uses the worker with the type `test-worker`. Register a new one by using the following command:
+The process uses the worker with the type `test-worker`. Register a new one by using the following command:
 
 ```bash
 zbctl create worker test-worker --handler "echo {\"return\":\"Pong\"}"
@@ -131,18 +131,18 @@ You can start a new instance with a single command:
 zbctl create instance camunda-cloud-quick-start-advanced
 ```
 
-As a result, you'll get the following output, which contains, among others, the `workflowInstanceKey`:
+As a result, you'll get the following output, which contains, among others, the `processInstanceKey`:
 
 ```bash
 {
-  "workflowKey": 2251799813685492,
+  "processKey": 2251799813685492,
   "bpmnProcessId": "camunda-cloud-quick-start-advanced",
   "version": 1,
-  "workflowInstanceKey": 2251799813685560
+  "processInstanceKey": 2251799813685560
 }
 ```
 
-Navigate to Operate to monitor the workflow instance.
+Navigate to Operate to monitor the process instance.
 
 ![operate-instances](assets/operate-advanced-instances-pong.png)
 
@@ -154,7 +154,7 @@ Because the worker returns
 }
 ```
 
-the workflow ends in the upper end event following the Ping sequence flow.
+the process ends in the upper end event following the Ping sequence flow.
 
 Changing the worker to
 
@@ -166,7 +166,7 @@ and creating a new instance leads to a second instance in Operate, which you'll 
 
 ![operate-instance](assets/operate-advanced-instances-other.png)
 
-As a next step you can now connect both workers in parallel and create more workflow instances:
+As a next step you can now connect both workers in parallel and create more process instances:
 
 ```bash
 while true; do zbctl create instance camunda-cloud-quick-start-advanced; sleep 1; done
