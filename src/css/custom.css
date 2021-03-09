@@ -31,3 +31,18 @@ body{
 .alert--primary {
   background-color: #14d890;
 }
+
+.hero--primary {
+  background-image: url("/static/img/Camunda_Master_Colours_RGB.png");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.button--hero {
+  background-color: #fff;
+}
+
+.button--hero:hover {
+  background-color: #e6e7e8;
+}

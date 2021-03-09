@@ -56,7 +56,7 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="Guides, product manuals and reference for the components of Camunda Cloud.">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
@@ -64,7 +64,7 @@ function Home() {
           <div className={styles.buttons}>
             <Link
               className={clsx(
-                'button button--outline button--secondary button--lg',
+                'button button--outline button--secondary button--lg button--hero',
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/guides/')}>
