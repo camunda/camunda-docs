@@ -1,9 +1,9 @@
 ---
 id: feel-built-in-functions-temporal
-title: Temporal functions
+title: Temporal Functions
 ---
 
-## `now()`
+## now()
 
 Returns the current date and time including the timezone.
 
@@ -15,7 +15,7 @@ now()
 // date and time("2020-07-31T14:27:30@Europe/Berlin")
 ```
 
-## `today()`
+## today()
 
 Returns the current date.
 
@@ -27,7 +27,7 @@ today()
 // date("2020-07-31")
 ```
 
-## `day of week()`
+## day of week()
 
 Returns the day of the week according to the Gregorian calendar. Note that it returns always the english name of the day.
 
@@ -40,7 +40,7 @@ day of week(date("2019-09-17"))
 // "Tuesday"
 ```
 
-## `day of year()`
+## day of year()
 
 Returns the Gregorian number of the day within the year.
 
@@ -53,7 +53,7 @@ day of year(date("2019-09-17"))
 // 260
 ```
 
-## `week of year()`
+## week of year()
 
 Returns the Gregorian number of the week within the year, according to ISO 8601.
 
@@ -66,7 +66,7 @@ week of year(date("2019-09-17"))
 // 38
 ```
 
-## `month of year()`
+## month of year()
 
 Returns the month of the week according to the Gregorian calendar. Note that it returns always the english name of the month.
 
