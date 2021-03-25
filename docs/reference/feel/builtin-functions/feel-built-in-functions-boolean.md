@@ -1,9 +1,9 @@
 ---
 id: feel-built-in-functions-boolean
-title: Boolean functions
+title: Boolean Functions
 ---
 
-## `not()`
+## not()
 
 * parameters:
   * `negand`: boolean
@@ -14,7 +14,7 @@ not(true)
 // false
 ```
 
-## `is defined()`
+## is defined()
 
 Checks if a given value is defined or not. A value is defined if it exists, and it is an instance of one of the FEEL data types including `null`.
 
