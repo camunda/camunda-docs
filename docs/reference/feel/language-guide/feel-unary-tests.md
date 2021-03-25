@@ -1,13 +1,13 @@
 ---
 id: feel-unary-tests
-title: Unary tests
+title: Unary-Tests
 ---
 
-Unary tests can be used only for input entries of a decision table. They are a special kind of expression with additional operators. The operators get the value of the input expression implicitly as the first argument. 
+Unary-Tests can be used only for input entries of a decision table. They are a special kind of expression with additional operators. The operators get the value of the input expression implicitly as the first argument. 
 
 The result of the expression must be either `true` or `false`.
 
-A unary test expression is `true` if one of the following conditions is fulfilled:
+An unary-tests expression is `true` if one of the following conditions is fulfilled:
 * the expression evaluates to `true` when the input value is applied to it
 * the expression evaluates to a list and the input value is equal to at least one of the values in that list
 * the expression evaluates to a value and the input value is equal to that value 
