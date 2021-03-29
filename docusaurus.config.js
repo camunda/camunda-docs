@@ -83,7 +83,8 @@ module.exports = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/camunda-cloud/camunda-cloud-docs",
+              href:
+                "https://github.com/camunda-cloud/camunda-cloud-documentation",
             },
           ],
         },
