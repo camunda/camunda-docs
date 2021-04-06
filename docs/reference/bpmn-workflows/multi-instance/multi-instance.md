@@ -100,9 +100,9 @@ target: output
 
 ```xml
 <bpmn:serviceTask id="task-A" name="A">
-  <bpmn:multiInstanceLoopCharacteristics>
+  <bpmn:multiInstanceLoopCharacteristics isSequential="true">
     <bpmn:extensionElements>
-      <zeebe:loopCharacteristics isSequential="true"
+      <zeebe:loopCharacteristics 
           inputCollection="= items" inputElement="item"
           outputCollection="results" outputElement="= result" />
     </bpmn:extensionElements>
