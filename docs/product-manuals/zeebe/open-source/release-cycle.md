@@ -4,7 +4,7 @@ title: "Release cycle"
 ---
 ### Release cycle
 
-The Zeebe project follows the [semantic version](https://semver.org/) schema,
+The Zeebe project follows the [Semantic Versioning standard](https://semver.org/),
 which defines a version number using the `MAJOR.MINOR.PATCH` pattern.
 
 - `MAJOR` version can make incompatible API changes
