@@ -29,6 +29,6 @@ The following table illustrates the rights of each role:
 | Billing: Request paid plan   | X     | X     |        |
 | Users: Manage admins         | X     |       |        |
 
-Users are invited to a Camunda Cloud organization via their email address, which must be accepted by the user. As long as the invitation has not been accepted, the user remains in the 'Pending' state.
+Users are invited to a Camunda Cloud organization via their e-mail address, which must be accepted by the user. As long as the invitation has not been accepted, the user remains in the 'Pending' state.
 
-People can also be invited to an organization that does not yet have a Camunda Cloud account. In this case the invited person must first create a Camunda Cloud account and then gain access to the organization.
+People can also be invited to an organization that does not yet have a Camunda Cloud account. In this case the invited person must first create a Camunda Cloud account and can then gain access to the organization.
