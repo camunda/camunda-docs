@@ -21,7 +21,7 @@ Workflows are created and parameterized with the [Zeebe Modeler](https://github.
 
 ## Outlook
 
-In future, the following products will also become part of Camunda Cloud:
+In the future, the following products will also become part of Camunda Cloud:
 
 * Cawemo: collaborative modeling of workflows. Cawemo can already be used independently, but has no link to Camunda Cloud yet.
 * Tasklist and Optimize: Similar to the products for Camunda BPM, there will be a version in the cloud that works with Zeebe.
