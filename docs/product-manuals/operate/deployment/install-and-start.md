@@ -78,7 +78,7 @@ You’ll know Zeebe has started successfully when you see a message similar to:
 To run Operate, execute the following commands:
 
 ```
-cd camunda-operate-distro-0.26.0-*
+cd camunda-operate-distro-1.0.0-*
 bin/operate
 ```
 
