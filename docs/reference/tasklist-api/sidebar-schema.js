@@ -1,11 +1,12 @@
 module.exports = {
-  "Tasklist API": [
+  "Tasklist API (GraphQL)": [
     { type: "doc", id: "reference/tasklist-api/schema" },
     {
       type: "category",
       label: "Queries",
       items: [
         "reference/tasklist-api/queries/current-user",
+        "reference/tasklist-api/queries/form",
         "reference/tasklist-api/queries/task",
         "reference/tasklist-api/queries/tasks",
       ],
@@ -33,6 +34,7 @@ module.exports = {
       type: "category",
       label: "Objects",
       items: [
+        "reference/tasklist-api/objects/form",
         "reference/tasklist-api/objects/task",
         "reference/tasklist-api/objects/user",
         "reference/tasklist-api/objects/variable",

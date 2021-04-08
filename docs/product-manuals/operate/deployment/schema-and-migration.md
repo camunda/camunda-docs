@@ -40,7 +40,7 @@ PUT _template/template_operate
 
 ## Data migration
 
-Version of Operate is reflected in Elasticsearch object names, e.g. `operate-user-0.24.0_` index contains user data for Operate 0.24.0. When upgrading from one
+Version of Operate is reflected in Elasticsearch object names, e.g. `operate-user-1.0.0_` index contains user data for Operate 1.0.0. When upgrading from one
 version of Operate to another, migration of data must be performed. Operate distribution provides an application to perform data migration from previous versions.
 
 
@@ -63,7 +63,7 @@ configuration (```<operate_home>/config/application.yml```).
 Execute ```<operate_home>/bin/migrate``` (or ```<operate_home>/bin/migrate.bat``` for Windows).
 
 What is expected to happen:
-* Elasticsearch indices will be created if they don't exist.
+* Elasticsearch's indices will be created if they don't exist.
 * if previous versions of indices are existing a migration plan will be build.
 * migration plan for each index that has previous versions will be executed.
 * previous indices will be deleted
@@ -77,7 +77,7 @@ All known migration steps with metadata will be stored in `operate-migration-ste
 
 #### Migrate by using built-in automatic upgrade
 
-When running newer version of Operate against older schema, it will perform data migration on startup.
+When running newer version of Operate against older schema, it will perform data migration on a startup.
 The migration will happen when exactly ONE previous schema version of the indices were detected.
 
 #### Further notes
