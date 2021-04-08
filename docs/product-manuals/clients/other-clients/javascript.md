@@ -7,10 +7,9 @@ title: "JavaScript/NodeJS"
 
 The Zeebe Node client is maintained by [Josh Wulf](https://github.com/jwulf). It can be used to create Node.js applications.
 
-- [Source code](https://github.com/creditsenseau/zeebe-client-node-js)
+- [Source code](https://github.com/camunda-community-hub/zeebe-client-node-js)
 - [NPM package](https://www.npmjs.com/package/zeebe-node)
-- [User Guide](http://zeebe.joshwulf.com/)
-- [API docs](https://creditsenseau.github.io/zeebe-client-node-js/)
+- [User Guide](https://github.com/camunda-community-hub/zeebe-client-node-js)
 
 ## NestJS client
 
