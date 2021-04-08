@@ -26,6 +26,7 @@ Events which belongs to the same element instance (e.g. a task) have the same `k
 ![order process](assets/workflow.png)
 
 Given the above workflow a successful execution will yield the following records in the commit log:
+
 <table>
     <tr>
         <th>Intent</th>
@@ -124,12 +125,12 @@ Given the above workflow a successful execution will yield the following records
     </tr>
     <tr>
         <td>ELEMENT_COMPLETING</td>
-        <td>order-placed</td>
+        <td>order-process</td>
         <td>process</td>
     </tr>
     <tr>
         <td>ELEMENT_COMPLETED</td>
-        <td>order-placed</td>
+        <td>order-process</td>
         <td>process</td>
     </tr>
 </table>
