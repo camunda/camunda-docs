@@ -1,6 +1,6 @@
 ---
-id: task
-title: task
+id: form
+title: form
 ---
 
 export const Tag = ({children, color}) => (
@@ -15,12 +15,13 @@ style={{
 </span>
 );
 
-Get one task by id. Returns task or error when task does not exist.
+Get task form by id and processDefinitionId
 
 ```graphql
-task(
+form(
   id: String!
-): Task!
+  processDefinitionId: String!
+): Form
 
 ```
 
@@ -28,8 +29,10 @@ task(
 
 #### `id` ([`String!`](/docs/reference/tasklist-api/scalars/string))
 
+#### `processDefinitionId` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+
 ### Type
 
-#### [`Task`](/docs/reference/tasklist-api/objects/task)
+#### [`Form`](/docs/reference/tasklist-api/objects/form)
 
-Describes the User task.
+Describes task embedded form

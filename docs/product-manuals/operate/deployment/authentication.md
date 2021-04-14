@@ -7,7 +7,7 @@ title: Authentication
 Operate provides three ways for authentication:
 
 1. Authenticate with user information stored in [Elasticsearch](#user-in-elasticsearch)
-2. Authenticate via [Auth0 Single Sign-On provider](#auth0-single-sign-on)
+2. Authenticate via [Camunda Cloud Single Sign-On](#camunda-cloud-single-sign-on)
 3. Authenticate via [Lightweight Directory Access Protocol (LDAP)](#ldap)
 
 By default user storage in Elasticsearch is enabled.
@@ -29,9 +29,10 @@ By default one user with **username**/**password** `demo`/`demo` will be created
 
 More users can be added directly to Elasticsearch, to the index `operate-user-<version>_`. Password must be encoded with BCrypt strong hashing function.
 
-## Auth0 Single Sign-On
+## Camunda Cloud Single Sign-On
 
-Currently Operate supports Auth0.com implementation of Single Sign-On.
+Currently Operate supports Single Sign On in Camunda Cloud environment. Camunda Cloud takes care of the configuration of Operate for Single Sign On,
+so you don't need normally to adjust following subsections.
 
 ### Enable Single Sign-On
 
