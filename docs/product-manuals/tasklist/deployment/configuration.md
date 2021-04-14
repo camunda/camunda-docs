@@ -100,6 +100,8 @@ Name | Description | Default value
 -----|-------------|--------------
 zeebe.tasklist.zeebe.brokerContactPoint | Broker contact point to zeebe as hostname and port | localhost:26500
 
+__Currently Operate does not support TLS communication with Zeebe__
+
 ### A snippet from application.yml:
 
 ```yaml
@@ -112,7 +114,7 @@ zeebe.tasklist:
 ## Zeebe Elasticsearch exporter
 
 Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
-Therefore settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
+Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
 
 ### Settings to connect and import:
 
@@ -120,8 +122,6 @@ Name | Description | Default value
 -----|-------------|--------------
 zeebe.tasklist.zeebeElasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
 zeebe.tasklist.zeebeElasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
-zeebe.tasklist.zeebeElasticsearch.host | Hostname where Elasticsearch is running | localhost
-zeebe.tasklist.zeebeElasticsearch.port | Port of Elasticsearch REST API | 9200
 zeebe.tasklist.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
 zeebe.tasklist.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
 zeebe.tasklist.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
@@ -134,7 +134,7 @@ zeebe.tasklist:
     # Cluster name
     clusterName: elasticsearch
     # Url
-    url: localhost:9200
+    url: http://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
@@ -244,10 +244,8 @@ zeebe.tasklist:
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # url
+    url: http://localhost:9200
   # Zeebe instance
   zeebe:
     # Broker contact point
@@ -256,10 +254,8 @@ zeebe.tasklist:
   zeebeElasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # url
+    url: http://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
