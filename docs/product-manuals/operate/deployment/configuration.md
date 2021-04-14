@@ -73,6 +73,8 @@ Name | Description | Default value
 -----|-------------|--------------
 camunda.operate.zeebe.brokerContactPoint | Broker contact point to zeebe as hostname and port | localhost:26500
 
+__Currently Operate does not support TLS communication with Zeebe__
+
 ### A snippet from application.yml:
 
 ```yaml
@@ -85,7 +87,7 @@ camunda.operate:
 ## Zeebe Elasticsearch exporter
 
 Operate imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
-Therefore settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
+Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
 
 ### Settings to connect and import:
 
@@ -153,7 +155,7 @@ With this configuration following endpoints are available for use out of the box
 
 ### Versions before 0.25.0
 
-In versions before 0.25.0 management endpoints look differently, therefore we recommend to reconfigure for next versions.
+In versions before 0.25.0 management endpoints look differently, therefore we recommend reconfiguring for next versions.
 
 |Name|Before 0.25.0| Starting with 0.25.0|
 |----|-------------|--------|
@@ -188,7 +190,7 @@ that can be further adjusted to your needs:
 </Configuration>
 ```
 
-By default Console log appender will be used.
+By default, Console log appender will be used.
 
 #### JSON logging configuration
 

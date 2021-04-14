@@ -12,6 +12,7 @@ Operate stores data in Elasticsearch. On first start Operate will create all req
 ## Schema
 
 Operate uses several Elasticsearch indices that are mostly created by using templates.
+Each index has its own version of schema. That means the version reflected in index name is *not* the version of Operate.
 
 Index names follow the defined pattern:
 ```
@@ -19,7 +20,7 @@ operate-{datatype}-{schemaversion}_[{date}]
 
 ```
 where `datatype` defines which data is stored in the index, e.g. `user`, `variable` etc.,
-`schemaversion` represents version of Operate,
+`schemaversion` represents the index schema version,
 `date` represents finished date of archived data (see [Data retention](data-retention.md)).
 
 Knowing index name pattern, it is possible to customize index settings by creating Elasticsearch templates ([Example of an index template](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-templates.html))
@@ -39,8 +40,8 @@ PUT _template/template_operate
 
 ## Data migration
 
-Version of Operate is reflected in Elasticsearch object names, e.g. `operate-user-0.24.0_` index contains user data for Operate 0.24.0. When upgrading from one
-version of Operate to another, migration of data must be performed. Operate distribution provides an application to perform data migration from previous versions.
+Version of Operate is reflected in Elasticsearch object names, e.g. `operate-user-1.0.0_` index contains user data for Operate 1.0.0. When upgrading from one
+version of Operate to another, migration of data must be performed. Operate distribution provides an application to perform data migration from older versions.
 
 
 ### Concept
@@ -48,7 +49,7 @@ version of Operate to another, migration of data must be performed. Operate dist
 The migration uses Elasticsearch [processors](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/ingest-processors.html) and [pipelines](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/pipeline.html) to reindex the data.
 
 Each version of Operate delivers set of migration steps needed to be applied for corresponding version of Operate.
-When upgrading from one version to another necessary migration steps constitute the so-called migration plan.
+When upgrading from one version to another, necessary migration steps constitute the so-called migration plan.
 All known migration steps (both applied and not) are persisted in dedicated Elasticsearch index: `operate-migration-steps-repository`.
 
 
@@ -62,10 +63,10 @@ configuration (```<operate_home>/config/application.yml```).
 Execute ```<operate_home>/bin/migrate``` (or ```<operate_home>/bin/migrate.bat``` for Windows).
 
 What is expected to happen:
-* Elasticsearch schema of new version is created
-* previous version is detected
-* migration plan is built and executed reindexing data for each index
-* old indices are deleted
+* new Elasticsearch indices will be created, if they don't exist.
+* if older version for some or all indices exists, the migration plan will be built.
+* for each index that has older version, migration plan will be executed.
+* older indices will be deleted.
 
 All known migration steps with metadata will be stored in `operate-migration-steps-repository` index.
 
@@ -76,8 +77,9 @@ All known migration steps with metadata will be stored in `operate-migration-ste
 
 #### Migrate by using built-in automatic upgrade
 
-When running newer version of Operate against older schema, it will perform data migration on startup.
-The migration will happen when exactly ONE previous schema version was detected.
+When running newer version of Operate against older schema, it will perform data migration on a startup.
+The migration will happen for every index, for which it detects exactly ONE older version. Migration will fail, 
+if it detects more than one older versions of some index. 
 
 #### Further notes
 
@@ -93,14 +95,20 @@ It can be disabled by setting the configuration key:
 
 `camunda.operate.migration.migrationEnabled = false`
 
-You can specify previous ("source") version with the configuration key:
+The following migration settings may affect the duration of migration process:
 
-`camunda.operate.migration.sourceVersion=0.23.0`
+1. You can set the batch size for reindex of the documents. This can reduce the time needed to reindex the data.
+Small document size = big batch size, big document size = small batch size.
 
-If no *sourceVersion* is defined Operate tries to detect it from Elasticsearch indices.
+`camunda.operate.migration.reindexBatchSize = 5000` (Between 1 and 10.000, Default: 5.000)
+
+2. In how many slices should the reindex be divided. For each shard that is used by the index you normally use a slice.
+Elasticsearch decides how many slices will be used if the value is set to 0 (automatic).
+
+`camunda.operate.migration.slices = 0` - Must be positive. Default is 0 (automatic). 
 
 
-#### Example for migrate in Kubernetes
+#### Example for migration in Kubernetes
 
 To ensure that the migration will be executed *before* Operate will be started you can use
 the [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) feature of Kubernetes. It makes sure that the 'main' container will only be started
@@ -114,11 +122,11 @@ The following snippet of a pod description for Kubernetes shows the usage of `mi
 spec:
    initContainers:
      - name: migration
-       image: camunda/operate:0.24.0
+       image: camunda/operate:1.0.0
        command: ['/bin/sh','/usr/local/operate/bin/migrate']
    containers:
      - name: operate
-       image: camunda/operate:0.24.0
+       image: camunda/operate:1.0.0
        env:
 ...
 ```
