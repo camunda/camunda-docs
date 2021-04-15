@@ -211,7 +211,7 @@ module.exports = {
           "Open Source community": [
             "product-manuals/zeebe/open-source/community-contributions",
             "product-manuals/zeebe/open-source/get-help-get-involved",
-            "product-manuals/zeebe/open-source/release-cycle",
+            //"product-manuals/zeebe/open-source/release-cycle",
             "product-manuals/zeebe/open-source/deprecated-features", 
           ]
         },              
@@ -307,5 +307,8 @@ module.exports = {
     },
     require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
+    "reference/release-cycle",
+    "reference/licenses",
+    "reference/notices",
   ]
 };

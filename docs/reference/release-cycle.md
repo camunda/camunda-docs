@@ -4,15 +4,15 @@ title: "Release cycle"
 ---
 ### Release cycle
 
-The Zeebe project follows the [Semantic Versioning standard](https://semver.org/),
+Components of Camunda Cloud follow the [Semantic Versioning standard](https://semver.org/),
 which defines a version number using the `MAJOR.MINOR.PATCH` pattern.
 
 - `MAJOR` version can make incompatible API changes
 - `MINOR` version can add functionality in a backwards compatible manner
 - `PATCH` version can make backwards compatible bug fixes.
 
-The Zeebe team strives to release:
-- A new minor version of Zeebe every three months
+The Camunda Cloud team strives to release:
+- A new minor version of the Camunda Cloud components every three months
 - In between minor versions, two alpha releases (to preview the upcoming minor version)
 
 At the time of writing, Zeebe supports the last two released minor versions with
@@ -50,23 +50,4 @@ and if possible, to provide a migration path if we do need to make such a change
 - **Operate Browser App** - requires the latest version of Chrome, Firefox or
   Edge on Windows, MacOS and Linux
 
-### Camunda Cloud
-
-Zeebe is built according to [cloud-native
-principles](https://github.com/cncf/toc/blob/master/DEFINITION.md), and we want
-Zeebe to be the workflow engine for important, emerging use cases running on
-modern software architectures.
-
-But even with a best-in-class architecture, operating a distributed workflow
-engine 24x7 can be challenging and time consuming. We've heard from a number of
-users who would be happy to have us run Zeebe and Operate on their behalf.
-
-With that in mind, we have a dedicated team–additional to the Zeebe core
-engineering team building the workflow engine–currently working the first
-iteration of Camunda Cloud, where we'll offer Zeebe and Operate as a cloud
-service. This will be the first-ever cloud workflow service offered by Camunda,
-and we're really excited for what's ahead.
-
-If you'd like to be notified when we open up a beta program for Camunda Cloud,
-you can [sign up here](https://camunda.com/products/cloud/).
 
