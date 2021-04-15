@@ -61,6 +61,18 @@ module.exports = {
               label: "Introduction",
               to: "docs/guides",
             },
+            {
+              label: "Licenses",
+              to: "docs/reference/licenses",
+            },
+            {
+              label: "Notices",
+              to: "docs/reference/notices",
+            },
+            {
+              label: "Release cycle",
+              to: "docs/reference/release-cycle",
+            },
           ],
         },
         {
@@ -73,6 +85,11 @@ module.exports = {
             {
               label: "Twitter",
               href: "https://twitter.com/camunda",
+            },
+            {
+              label: "GitHub",
+              href:
+                "https://github.com/camunda-cloud/camunda-cloud-documentation",
             },
           ],
         },
