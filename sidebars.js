@@ -94,6 +94,7 @@ module.exports = {
             "product-manuals/cloud-console/manage-clusters/rename-cluster",
             "product-manuals/cloud-console/manage-clusters/delete-cluster",
             "product-manuals/cloud-console/manage-clusters/manage-api-clients",
+            "product-manuals/cloud-console/manage-clusters/manage-alerts",
           ],
         },
         {
