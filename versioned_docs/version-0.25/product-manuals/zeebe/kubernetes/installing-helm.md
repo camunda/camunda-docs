@@ -31,9 +31,9 @@ This install Helm server side components in your cluster and it will enable the 
 
 ### Add Zeebe Helm Repository
 
-The next step is to add the Zeebe official Helm Chart repository to your installation. Once this is done, Helm will be able to fetch and install Charts hosted in [http://helm.zeebe.io](http://helm.zeebe.io).
+The next step is to add the Zeebe official Helm Chart repository to your installation. Once this is done, Helm will be able to fetch and install Charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
 ```
-> helm repo add zeebe https://helm.zeebe.io
+> helm repo add zeebe https://helm.camunda.io
 > helm repo update
 ```
 

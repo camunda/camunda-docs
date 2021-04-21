@@ -9,15 +9,15 @@ title: "Zeebe Helm Charts"
 
 The following Zeebe Helm Charts are currently available: 
 
-- **Zeebe Cluster Helm (zeebe-cluster-helm)** : Deploys a Zeebe Cluster with 3 brokers using the `camunda/zeebe` docker image. This Chart depends on ElasticSearch Helm Chart and optionally on Kibana Helm Chart. This chart is hosted in the following repository, where you can find more information about its configuration: [http://github.com/zeebe-io/zeebe-cluster-helm/](http://github.com/zeebe-io/zeebe-cluster-helm/)
-- **Zeebe Operate Helm (zeebe-operate-helm)**: Deploys Zeebe Operate which connects to an existing ElasticSearch. This chart source code can be located here: [http://github.com/zeebe-io/zeebe-operate-helm/](http://github.com/zeebe-io/zeebe-operate-helm/)
-- **Zeebe Full Helm (zeebe-full-helm)** (Parent): Deploys a Zeebe Cluster + Operate + Ingress Controller. This parent chart can be located here: [http://github.com/zeebe-io/zeebe-full-helm/](http://github.com/zeebe-io/zeebe-full-helm/)
+- **Zeebe Cluster Helm (zeebe-cluster-helm)** : Deploys a Zeebe Cluster with 3 brokers using the `camunda/zeebe` docker image. This Chart depends on ElasticSearch Helm Chart and optionally on Kibana Helm Chart. This chart is hosted in the following repository, where you can find more information about its configuration: [http://github.com/camunda-community-hub/zeebe-cluster-helm/](http://github.com/camunda-community-hub/zeebe-cluster-helm/)
+- **Zeebe Operate Helm (zeebe-operate-helm)**: Deploys Zeebe Operate which connects to an existing ElasticSearch. This chart source code can be located here: [http://github.com/camunda-community-hub/zeebe-operate-helm/](http://github.com/camunda-community-hub/zeebe-operate-helm/)
+- **Zeebe Full Helm (zeebe-full-helm)** (Parent): Deploys a Zeebe Cluster + Operate + Ingress Controller. This parent chart can be located here: [http://github.com/camunda-community-hub/zeebe-full-helm/](http://github.com/camunda-community-hub/zeebe-full-helm/)
 
-- **Zeebe TaskList Helm (zeebe-tasklist-helm)** (Experimental): Deploys a Task List component to deal with User Tasks. This chart source code can be located here: [http://github.com/zeebe-io/zeebe-tasklist-helm/](http://github.com/zeebe-io/zeebe-tasklist-helm/)
+- **Zeebe TaskList Helm (zeebe-tasklist-helm)** (Experimental): Deploys a Task List component to deal with User Tasks. This chart source code can be located here: [http://github.com/camunda-community-hub/zeebe-tasklist-helm/](http://github.com/camunda-community-hub/zeebe-tasklist-helm/)
 
-- **Zeebe ZeeQS Helm (zeebe-zeeqs-helm)** (Experimental) Deploys a ZeeQS component that provides a Graphql interface to consume Zeebe Process data. This component requires the Hazelcast Exporter configured in the Zeebe Brokers. This chart source code can be located here: [http://github.com/zeebe-io/zeebe-zeeqs-helm/](http://github.com/zeebe-io/zeebe-zeeqs-helm/)
+- **Zeebe ZeeQS Helm (zeebe-zeeqs-helm)** (Experimental) Deploys a ZeeQS component that provides a Graphql interface to consume Zeebe Process data. This component requires the Hazelcast Exporter configured in the Zeebe Brokers. This chart source code can be located here: [http://github.com/camunda-community-hub/zeebe-zeeqs-helm/](http://github.com/camunda-community-hub/zeebe-zeeqs-helm/)
 
-- **Zeebe Kubernetes Operator Helm (zeebe-operator)** (Experimental) Deploys the Zeebe Kubernetes Operator. The Zeebe Operator allows you to declarative provision Zeebe Clusters by interacting with the `kubectl` command-line. This chart source code can be located here: [http://github.com/zeebe-io/zeebe-operator/](http://github.com/zeebe-io/zeebe-operator/)
+- **Zeebe Kubernetes Operator Helm (zeebe-operator)** (Experimental) Deploys the Zeebe Kubernetes Operator. The Zeebe Operator allows you to declarative provision Zeebe Clusters by interacting with the `kubectl` command-line. This chart source code can be located here: [http://github.com/camunda-community-hub/zeebe-operator/](http://github.com/camunda-community-hub/zeebe-operator/)
 
 - **Zeebe CloudEvents Router Helm (zeebe-cloud-events-router)** (Experimental) Deploys the Zeebe CloudEvents Router. This component provides [CloudEvents](http://cloudevents.io) Router to emit and consume CloudEvents from your processes running in Zeebe.
 
@@ -27,9 +27,9 @@ When installing the `zeebe-full-helm` chart all the components marked in green a
 
 ### Add Zeebe Helm Repository
 
-The next step is to add the Zeebe official Helm Chart repository to your installation. Once this is done, Helm will be able to fetch and install Charts hosted in [http://helm.zeebe.io](http://helm.zeebe.io).
+The next step is to add the Zeebe official Helm Chart repository to your installation. Once this is done, Helm will be able to fetch and install Charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
 ```
-> helm repo add zeebe https://helm.zeebe.io
+> helm repo add zeebe https://helm.camunda.io
 > helm repo update
 ```
 
@@ -41,11 +41,7 @@ Once this is done, we are ready to install any of the Helm Charts hosted in the 
 In this section we are going to install all the available Zeebe components inside a Kubernetes Cluster. Notice that this Kubernetes cluster can have already running services and Zeebe is going to installed just as another set of services. 
 
 ```
-<<<<<<< HEAD:versioned_docs/version-0.25/product-manuals/zeebe/kubernetes/installing-helm.md
-> helm install --name <RELEASE NAME> zeebe/zeebe-full
-=======
 > helm install <RELEASE NAME> zeebe/zeebe-full-helm
->>>>>>> updating zeebe helm charts section in the docs:docs/product-manuals/zeebe/kubernetes/installing-helm.md
 ```
 
 > Note: change &gt;RELEASE NAME&lt; with a name of your choice
