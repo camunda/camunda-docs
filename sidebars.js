@@ -259,6 +259,10 @@ module.exports = {
             "product-manuals/tasklist/deployment/authentication",
             "product-manuals/tasklist/deployment/api-client",
           ],
+          "Third-Party Libraries": [
+            "product-manuals/tasklist/third-party-libraries/tasklist-backend-dependencies",
+            "product-manuals/tasklist/third-party-libraries/tasklist-frontend-dependencies"
+          ],
         },
       ],
     },
