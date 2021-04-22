@@ -216,6 +216,11 @@ module.exports = {
           ]
         },              
         {
+            "Third-Party Libraries": [
+               "product-manuals/zeebe/third-party-libraries/zeebe-dependencies",
+            ]
+        },
+        {
           Appendix: [
 
           ],
@@ -236,6 +241,10 @@ module.exports = {
                "product-manuals/operate/deployment/schema-and-migration",
                "product-manuals/operate/deployment/importer-and-archiver",
                "product-manuals/operate/deployment/authentication"
+            ],
+            "Third-Party Libraries": [
+               "product-manuals/operate/third-party-libraries/operate-backend-dependencies",
+               "product-manuals/operate/third-party-libraries/operate-frontend-dependencies"
             ],
          }
       ],
