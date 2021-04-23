@@ -46,11 +46,14 @@ A stream processor reads the record stream sequentially and interprets the comma
 
 For example, processing the _Create Job_ command produces the event _Job Created_.
 
-## Command triggers
+## Driving the engine
 
-A state change which occurred in one entity can automatically trigger a command for another entity. 
+As a workflow engine, Zeebe needs to continuously drive the execution of its processes.
+It achieves this by also writing follow-up commands to the stream as part of the processing of other commands.
 
-For example, when a job is completed, the corresponding process instance shall continue with the next step. Thus, the Event _Job Completed_ triggers the command _Complete Activity_.
+For example, when the _Complete Job_ command is processed, it does not just complete the job.
+It also writes the _Complete Activity_ command for the corresponding service task.
+This command can in turn be processed, completing the service task and driving the execution of the process instance to the next step.
 
 ## Handling back-pressure
 
