@@ -5,7 +5,7 @@ title: "Zeebe API (gRPC)"
 
 [Zeebe](../product-manuals/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
 
-> **Note:** This specification still contains references to YAML workflows. This is a [deprecated feature](../product-manuals/zeebe/open-source/deprecated-features.md) and will be removed at some point
+> **Note:** This specification still contains references to YAML workflows. This is a [deprecated feature](deprecated-features.md) and will be removed at some point
 
 ## Gateway Service
 
