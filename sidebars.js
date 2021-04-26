@@ -212,7 +212,7 @@ module.exports = {
             "product-manuals/zeebe/open-source/community-contributions",
             "product-manuals/zeebe/open-source/get-help-get-involved",
             //"product-manuals/zeebe/open-source/release-cycle",
-            "product-manuals/zeebe/open-source/deprecated-features", 
+            //"product-manuals/zeebe/open-source/deprecated-features", 
           ]
         },              
         {
@@ -308,6 +308,7 @@ module.exports = {
     require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
     "reference/release-cycle",
+    "reference/deprecated-features",
     "reference/licenses",
     "reference/notices",
   ]
