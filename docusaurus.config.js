@@ -53,6 +53,11 @@ module.exports = {
     },
     footer: {
       style: "dark",
+      logo: {
+        alt: "Camunda.com",
+        src: "img/logo-light.svg",
+        href: "https://camunda.com"
+      },
       links: [
         {
           title: "Docs",
