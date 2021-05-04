@@ -20,18 +20,6 @@ patch releases. Patch releases are offered on a best effort basis for the
 currently supported versions.
 
 
-### Breaking changes before Zeebe 1.0
-
-Given how early we are in the Zeebe journey, we're not ready to make it a 1.0
-release, and we want it to be transparent that this was a deliberate decision.
-If we do end up having to make breaking API changes, we'd rather do so before
-we get to 1.0 and not by moving to 2.0 just a few months after a 1.0 release.
-
-Of course, even in Zeebe's pre-1.0 state, we'll always make our best effort to
-avoid breaking changes, to communicate early and often about planned changes,
-and if possible, to provide a migration path if we do need to make such a change.
-
-
 ### Supported environments
 
 
