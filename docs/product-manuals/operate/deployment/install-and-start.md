@@ -27,7 +27,7 @@ Note that the Operate web UI is available by default at [http://localhost:8080](
 
 ### Download Operate and a compatible version of Zeebe.
 
-[Operate and Zeebe distributions are available for download on the same release page. ](https://github.com/zeebe-io/zeebe/releases) 
+[Operate and Zeebe distributions are available for download on the same release page. ](https://github.com/camunda-cloud/zeebe/releases) 
 
 Note that each version of Operate is compatible with a specific version of Zeebe. 
 

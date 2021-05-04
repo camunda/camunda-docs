@@ -4,8 +4,8 @@ title: Configuration
 ---
 ## Introduction
 
-Operate is a Spring Boot application. That means all ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
-a Spring Boot application can be applied. By default the configuration for Operate is stored in a YAML file `application.yml`. All Operate related settings are prefixed
+Operate is a Spring Boot application. That means all provided ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
+a Spring Boot application can be applied. By default, the configuration for Operate is stored in a YAML file `application.yml`. All Operate related settings are prefixed
 with `camunda.operate`. The following parts are configurable:
 
 * [Webserver](#webserver)
@@ -38,7 +38,7 @@ Operate stores and reads data in/from Elasticsearch.
 
 ### Settings to connect
 
-Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/setting-up-authentication.html) for elasticsearch.
+Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for elasticsearch.
 Set the appropriate username/password combination in the configuration to use it.
 
 Either set `host` and `port` (deprecated) or `url` (recommended)
@@ -46,8 +46,6 @@ Either set `host` and `port` (deprecated) or `url` (recommended)
 Name | Description | Default value
 -----|-------------|--------------
 camunda.operate.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
-camunda.operate.elasticsearch.host | Hostname where Elasticsearch is running | localhost
-camunda.operate.elasticsearch.port | Port of Elasticsearch REST API | 9200
 camunda.operate.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
 camunda.operate.elasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.operate.elasticsearch.password | Password to access Elasticsearch REST API | -
@@ -71,7 +69,7 @@ Operate needs a connection to Zeebe broker to start the import and to execute us
 
 Name | Description | Default value
 -----|-------------|--------------
-camunda.operate.zeebe.brokerContactPoint | Broker contact point to zeebe as hostname and port | localhost:26500
+camunda.operate.zeebe.gatewayAddress | Gateway address that point to zeebe as hostname and port | localhost:26500
 
 __Currently Operate does not support TLS communication with Zeebe__
 
@@ -80,13 +78,13 @@ __Currently Operate does not support TLS communication with Zeebe__
 ```yaml
 camunda.operate:
   zeebe:
-    # Broker contact point
-    brokerContactPoint: localhost:26500
+    # Gateway host and port
+    gatewayAddress: localhost:26500
 ```
 
 ## Zeebe Elasticsearch exporter
 
-Operate imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
+Operate imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
 Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
 
 ### Settings to connect and import:
@@ -94,8 +92,6 @@ Therefore, settings for this Elasticsearch connection must be defined and must c
 Name | Description | Default value
 -----|-------------|--------------
 camunda.operate.zeebeElasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
-camunda.operate.zeebeElasticsearch.host | Hostname where Elasticsearch is running | localhost
-camunda.operate.zeebeElasticsearch.port | Port of Elasticsearch REST API | 9200
 camunda.operate.zeebeElasticsearch.url | URL of Zeebe Elasticsearch REST API | http://localhost:9200
 camunda.operate.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
 camunda.operate.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
@@ -109,7 +105,7 @@ camunda.operate:
     # Cluster name
     clusterName: elasticsearch
     # Url
-    url: localhost:9200
+    url: http://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
@@ -137,11 +133,14 @@ provides number of monitoring possibilities.
 
 Operate uses following Actuator configuration by default:
 ```yaml
-# enable health check and metrics endpoints
-management.endpoints.web.exposure.include: health,prometheus
+# Disable default health indicators
+# https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-health-indicators
+management.health.defaults.enabled: false
 # enable Kubernetes health groups:
 # https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-kubernetes-probes
 management.health.probes.enabled: true
+# enable health check, metrics and loggers endpoints
+management.endpoints.web.exposure.include: health,prometheus,loggers
 ```
 
 With this configuration following endpoints are available for use out of the box:
@@ -151,7 +150,6 @@ With this configuration following endpoints are available for use out of the box
 ```<server>:8080/actuator/health/liveness``` Liveness probe
 
 ```<server>:8080/actuator/health/readiness``` Readiness probe
-
 
 ### Versions before 0.25.0
 
@@ -201,6 +199,19 @@ the environment variable ```OPERATE_LOG_APPENDER``` like this:
 OPERATE_LOG_APPENDER=Stackdriver
 ```
 
+### Change logging level at runtime
+
+Operate supports the default scheme for changing logging levels as provided by [Spring Boot](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers)
+
+The log level for Operate can be changed by following the [Setting a Log Level](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers-setting-level) section.
+
+#### Set all Operate loggers to DEBUG:
+```shell
+curl 'http://localhost:8080/actuator/loggers/org.camunda.operate' -i -X POST \
+-H 'Content-Type: application/json' \
+-d '{"configuredLevel":"debug"}'
+```
+
 ## An example of application.yml file
 
 The following snippet represents the default Operate configuration, which is shipped with the distribution. It can be found inside the `config` folder (`config/application.yml`)
@@ -219,22 +230,18 @@ camunda.operate:
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # Url
+    url: http://localhost:9200
   # Zeebe instance
   zeebe:
-    # Broker contact point
-    brokerContactPoint: localhost:26500
+    # Gateway address to zeebe
+    gatewayAddress: localhost:26500
   # ELS instance to export Zeebe data to
   zeebeElasticsearch:
     # Cluster name
     clusterName: elasticsearch
-    # Host
-    host: localhost
-    # Transport port
-    port: 9200
+    # url
+    url: http://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```

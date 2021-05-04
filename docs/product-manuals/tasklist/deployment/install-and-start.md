@@ -17,7 +17,7 @@ zeebe-tasklist:
     environment:
         - zeebe.tasklist.elasticsearch.url=http://elasticsearch:9200
         - zeebe.tasklist.zeebeElasticsearch.url=http://elasticsearch:9200
-        - zeebe.tasklist.zeebe.brokerContactPoint=zeebe:26500
+        - zeebe.tasklist.zeebe.gatewayAddress=zeebe:26500
 ```
 ## Manual configuration (local development)
 
@@ -27,7 +27,7 @@ Note that the Tasklist web UI is available by default at [http://localhost:8080]
 
 ### Download Tasklist and a compatible version of Zeebe.
 
-[Tasklist and Zeebe distributions are available for download on the same release page. ](https://github.com/zeebe-io/zeebe/releases)
+[Tasklist and Zeebe distributions are available for download on the same release page. ](https://github.com/camunda-cloud/zeebe/releases)
 
 Note that each version of Tasklist is compatible with a specific version of Zeebe.
 
@@ -37,7 +37,7 @@ On the Zeebe release page, compatible versions of Zeebe and Tasklist are grouped
 
 Tasklist uses open-source Elasticsearch as its underlying data store, and so to run Tasklist, you need to download and run Elasticsearch.
 
-Tasklist is currently compatible to Elasticsearch 6.8.14. [You can download Elasticsearch here.](https://www.elastic.co/downloads/past-releases/elasticsearch-6-8-14)
+Tasklist is currently compatible to Elasticsearch 7.12.1 [You can download Elasticsearch here.](https://www.elastic.co/downloads/past-releases/elasticsearch-7-12-1)
 
 ### Run Elasticsearch
 
@@ -60,7 +60,7 @@ To run Zeebe with Elasticsearch Exporter, execute the following commands:
 
 ```
 cd zeebe-broker-*
-ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME=io.zeebe.exporter.ElasticsearchExporter ./bin/broker
+ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME=io.camunda.zeebe.exporter.ElasticsearchExporter ./bin/broker
 ```
 
 
@@ -69,7 +69,7 @@ You’ll know Zeebe has started successfully when you see a message similar to:
 
 ```
 [partition-0] [0.0.0.0:26501-zb-actors-0] INFO  io.zeebe.raft - Joined raft in term 0
-[exporter] [0.0.0.0:26501-zb-actors-1] INFO  io.zeebe.broker.exporter.elasticsearch - Exporter opened
+[exporter] [0.0.0.0:26501-zb-actors-1] INFO  io.camunda.zeebe.broker.exporter.elasticsearch - Exporter opened
 ```
 
 ### Run Tasklist
@@ -86,7 +86,7 @@ You’ll know Tasklist has started successfully when you see messages similar to
 ```
 2020-12-09 13:31:41.437  INFO 45899 --- [           main] i.z.t.ImportModuleConfiguration          : Starting module: importer
 2020-12-09 13:31:41.438  INFO 45899 --- [           main] i.z.t.ArchiverModuleConfiguration        : Starting module: archiver
-2020-12-09 13:31:41.555  INFO 45899 --- [           main] i.z.t.w.StartupBean                      : Tasklist Version: 0.26.0-alpha2
+2020-12-09 13:31:41.555  INFO 45899 --- [           main] i.z.t.w.StartupBean                      : Tasklist Version: 1.0.0
 ```
 
 ## Access the Tasklist web interface
