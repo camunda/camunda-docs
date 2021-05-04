@@ -24,5 +24,5 @@ If you're interested in contributing to the main Zeebe repository (vs. creating 
 
 - [Get help & get involved](get-help-get-involved.md)
 - Check out [community extensions](https://awesome.zeebe.io/)
-- Learn more about our [release cycle](reference/release-cycle.md)
+- Learn more about our [release policy](reference/release-policy.md)
 - Avoid suprises by staying on top of [deprecated features](reference/deprecated-features.md)
