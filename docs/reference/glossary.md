@@ -5,6 +5,10 @@ title: "Glossary"
 
 This section defines commonly used terminology referenced within the documentation.
 
+### Bridge
+
+Synonym to "[connector](#connector)"
+
 ### Broker
 
 A broker is an instance of a Zeebe installation which executes workflows and manages workflow state. A single broker will be installed on a single machine.
@@ -28,6 +32,10 @@ A cluster represents a configuration of one or more brokers collaborating to exe
 A command represents an action to be taken or executed. Example commands include: deploy a workflow, execute a workflow, etc.
 
 - [Internal processing](/product-manuals/zeebe/technical-concepts/internal-processing.md#events-and-commands)
+
+### Connector
+
+A piece of software that connects the workflow engine with some other system or infrastructure. The connector might be uni or bidirectional and possibly includes a [job worker](#job-worker). The boundary between connectors and job workers can be fuzzy, but in general connectors connect to other active pieces of software. For example, a 'DMN connector' might connect to a managed DMN Engine, while a 'DMN worker' will use a DMN library to directly execute decisions.
 
 ### Correlation
 
