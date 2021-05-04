@@ -325,7 +325,8 @@ module.exports = {
     "reference/glossary",
     //"reference/release-cycle",
     "reference/release-policy",
-    "reference/deprecated-features",
+    //"reference/deprecated-features",
+    "reference/announcements",
     "reference/licenses",
     "reference/notices",
   ]
