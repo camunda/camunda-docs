@@ -1,8 +1,8 @@
 ---
-id: release-cycle
-title: "Release cycle"
+id: release-policy
+title: "Release policy"
 ---
-### Release cycle
+### Release policy
 
 Components of Camunda Cloud follow the [Semantic Versioning standard](https://semver.org/),
 which defines a version number using the `MAJOR.MINOR.PATCH` pattern.
