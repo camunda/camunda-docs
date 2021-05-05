@@ -663,4 +663,19 @@ Process Instance (Complete) Good Afternoon Josh Wulf
 
 ## Profit!
 
-Congratulations. You've completed the Getting Started Guide for Camunda Cloud.
+Congratulations! You've completed the Getting Started Guide for Camunda Cloud.
+
+## Next Steps
+
+<Tabs groupId="language" defaultValue="nodejs" values={
+[
+{ label: 'NodeJS', value: 'nodejs', },
+{ label: 'Java', value: 'java' },
+] }>
+
+<TabItem value="nodejs">
+The [Camunda Cloud Starter for Node.js](https://github.com/camunda-community-hub/camunda-cloud-starter-node) repository in the Camunda Community Hub contains further examples.
+</TabItem>
+<TabItem value="java">
+</TabItem>
+</Tabs>
