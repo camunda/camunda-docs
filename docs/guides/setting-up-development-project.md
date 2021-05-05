@@ -14,7 +14,7 @@ import TabItem from "@theme/TabItem";
 
 <TabItem value="nodejs">
 
-The [Zeebe Node Client](https://github.com/creditsenseau/zeebe-client-node-js) allows you to build Node.js applications that connect to Camunda Cloud.
+The [Zeebe Node Client](https://github.com/camunda-community-hub/zeebe-client-node-js) allows you to build Node.js applications that connect to Camunda Cloud.
 
 </TabItem>
 
