@@ -327,6 +327,7 @@ module.exports = {
     "reference/release-policy",
     //"reference/deprecated-features",
     "reference/announcements",
+    "reference/supported-environments",
     "reference/licenses",
     "reference/notices",
   ]
