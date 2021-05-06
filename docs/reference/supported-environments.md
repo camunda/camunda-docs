@@ -1,5 +1,5 @@
 ---
-id: announcements
+id: supported-environments
 title: "Supported Environments"
 ---
 
