@@ -1,6 +1,6 @@
 ---
 id: supported-environments
-title: "Supported Environments"
+title: "Supported environments"
 ---
 
 
