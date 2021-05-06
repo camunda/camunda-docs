@@ -7,13 +7,13 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #FF1F00;
-  --ifm-color-primary-dark: #FF3800;
-  --ifm-color-primary-darker: #FF4700;
-  --ifm-color-primary-darkest: #FF5400;
-  --ifm-color-primary-light: #FF7000;
-  --ifm-color-primary-lighter: #FF7D00;
-  --ifm-color-primary-lightest: #FF8B00;
+  --ifm-color-primary: #ff1f00;
+  --ifm-color-primary-dark: #ff3800;
+  --ifm-color-primary-darker: #ff4700;
+  --ifm-color-primary-darkest: #ff5400;
+  --ifm-color-primary-light: #ff7000;
+  --ifm-color-primary-lighter: #ff7d00;
+  --ifm-color-primary-lightest: #ff8b00;
   --ifm-code-font-size: 95%;
 }
 
@@ -24,10 +24,37 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-body{
-  font-family: IBM Plex Sans,-apple-system,blinkmacsystemfont,Segoe UI,roboto,oxygen-sans,ubuntu,cantarell,Helvetica Neue,sans-serif;
+body {
+  font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI,
+    roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
 }
 
 .alert--primary {
   background-color: #14d890;
+}
+
+/* Osano Styles  */
+
+.osano-cm-widget svg {
+  display: none;
+}
+.osano-cm-widget svg {
+  display: none;
+}
+.osano-cm-widget:focus,
+.osano-cm-widget:hover {
+  opacity: 1;
+  transform: none;
+}
+.osano-cm-widget:active {
+  transform: translateY(1px);
+}
+.osano-cm-link {
+  color: #002f66 !important;
+}
+.osano-cm-close {
+  background: transparent !important;
+}
+.osano-cm-view--type_consent .osano-cm-list-item:nth-child(5) {
+  display: none;
 }

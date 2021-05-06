@@ -1,0 +1,41 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.footerLogoLink {
+  opacity: 0.5;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.footerLogoLink:hover {
+  opacity: 1;
+}
+
+/* Osano Styles  */
+
+.osano-cm-widget svg {
+  display: none;
+}
+.osano-cm-widget svg {
+  display: none;
+}
+.osano-cm-widget:focus,
+.osano-cm-widget:hover {
+  opacity: 1;
+  transform: none;
+}
+.osano-cm-widget:active {
+  transform: translateY(1px);
+}
+.osano-cm-link {
+  color: #002f66 !important;
+}
+.osano-cm-close {
+  background: transparent !important;
+}
+.osano-cm-view--type_consent .osano-cm-list-item:nth-child(5) {
+  display: none;
+}
