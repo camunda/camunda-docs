@@ -95,6 +95,10 @@ module.exports = {
               label: "GitHub",
               href: "https://github.com/camunda-cloud/camunda-cloud-docs",
             },
+            {
+              label: "Privacy Statement",
+              href: "https://camunda.com/legal/privacy/",
+            },
           ],
         },
       ],
