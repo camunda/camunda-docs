@@ -4,20 +4,20 @@ title: Install and start Tasklist
 ---
 ## Running via Docker (local development)
 
-You can use the Docker image `camunda/zeebe-tasklist:latest` to run Tasklist as container.
+You can use the Docker image `camunda/tasklist:latest` to run Tasklist as container.
 
 Please make sure to set appropriate settings described in [configuration](../deployment/configuration) section of deployment guide.
 Here an example configuration for `docker-compose`:
 ```
-zeebe-tasklist:
-    container_name: zeebe-tasklist
-    image: camunda/zeebe-tasklist:latest
+tasklist:
+    container_name: tasklist
+    image: camunda/tasklist:latest
     ports:
         - 8080:8080
     environment:
-        - zeebe.tasklist.elasticsearch.url=http://elasticsearch:9200
-        - zeebe.tasklist.zeebeElasticsearch.url=http://elasticsearch:9200
-        - zeebe.tasklist.zeebe.gatewayAddress=zeebe:26500
+        - camunda.tasklist.elasticsearch.url=http://elasticsearch:9200
+        - camunda.tasklist.zeebeElasticsearch.url=http://elasticsearch:9200
+        - camunda.tasklist.zeebe.gatewayAddress=zeebe:26500
 ```
 ## Manual configuration (local development)
 
