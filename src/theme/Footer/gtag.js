@@ -5,7 +5,7 @@ function googleanalytics() {
       dataLayer.push(arguments);
     }
     gtag("js", new Date());
-    gtag("config", "G-G9VC5S5W87");
+    gtag("config", "G-G9VC5S5W87", { 'anonymize_ip': true });
   }
 }
 
