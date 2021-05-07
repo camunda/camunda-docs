@@ -11,7 +11,7 @@ This setting is only visible in the Professional Plan for owners and admins.
 
 Once signed up for the Professional Plan, you have access to the **Billing** page.
 
-The left side of the page shows the number of started process instances in the current period. On the right-hand side is the hardware specification of the reservable hardware packages of a cluster. Additionally it is shown how many packages are included and how many additional packages are reserved.
+In the upper part, the created process instances from the current period are displayed. On the bottom left there is a history of the metrics on a monthly basis. On the right side you can see how many hardware packages are included and you can change the reservations for additional hardware packages.
 
 Reservations control how many clusters you can deploy. Increasing the number of reservations allows you to deploy more clusters, decreasing the number of reservations does the opposite.
 
