@@ -6,7 +6,7 @@ title: Model your first process
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In Camunda Cloud you have two options to design and deploy a process: the Console Modeler and the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases).
+In Camunda Cloud you have two options to design and deploy a workflow: the Console Modeler and the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases).
 
 <Tabs groupId="modeler" defaultValue="console" values={
 [
@@ -17,7 +17,7 @@ In Camunda Cloud you have two options to design and deploy a process: the Consol
 
 <TabItem value='console'>
 
-Using the Console Modeler, processes can be designed and deployed, and new instances can be created directly from the console.
+Using the Console Modeler, workflows can be designed and deployed, and new instances can be created directly from the console.
 
 You can find all your saved models under the **BPMN Diagrams** tab
 

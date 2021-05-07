@@ -58,3 +58,18 @@ body {
 .osano-cm-view--type_consent .osano-cm-list-item:nth-child(5) {
   display: none;
 }
+
+.hero--primary {
+  background-image: url("/img/Camunda_Master_Colours_RGB.png");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.button--hero {
+  background-color: #fff;
+}
+
+.button--hero:hover {
+  background-color: #e6e7e8;
+}

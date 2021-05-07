@@ -99,14 +99,7 @@ module.exports = {
         {
           "Manage your plan": [
             "product-manuals/cloud-console/manage-plan/available-plans",
-            "product-manuals/cloud-console/manage-plan/trial-plan",
-            {
-              "Professional Plan": [
-                "product-manuals/cloud-console/manage-plan/professional-plan/overview",
-                "product-manuals/cloud-console/manage-plan/professional-plan/upgrade-to-professional-plan",
-                "product-manuals/cloud-console/manage-plan/professional-plan/billing-parameters",
-              ],
-            },
+            "product-manuals/cloud-console/manage-plan/upgrade-to-professional-plan",
           ],
         },
         {
@@ -223,6 +216,11 @@ module.exports = {
           ]
         },              
         {
+            "Third-Party Libraries": [
+               "product-manuals/zeebe/third-party-libraries/zeebe-dependencies",
+            ]
+        },
+        {
           Appendix: [
 
           ],
@@ -244,6 +242,10 @@ module.exports = {
                "product-manuals/operate/deployment/importer-and-archiver",
                "product-manuals/operate/deployment/authentication"
             ],
+            "Third-Party Libraries": [
+               "product-manuals/operate/third-party-libraries/operate-backend-dependencies",
+               "product-manuals/operate/third-party-libraries/operate-frontend-dependencies"
+            ],
          }
       ],
       Tasklist: [
@@ -256,6 +258,10 @@ module.exports = {
             "product-manuals/tasklist/deployment/configuration",
             "product-manuals/tasklist/deployment/authentication",
             "product-manuals/tasklist/deployment/api-client",
+          ],
+          "Third-Party Libraries": [
+            "product-manuals/tasklist/third-party-libraries/tasklist-backend-dependencies",
+            "product-manuals/tasklist/third-party-libraries/tasklist-frontend-dependencies"
           ],
         },
       ],

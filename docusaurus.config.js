@@ -93,7 +93,8 @@ module.exports = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/camunda-cloud/camunda-cloud-docs",
+              href:
+                "https://github.com/camunda-cloud/camunda-cloud-documentation",
             },
             {
               label: "Privacy Statement",
@@ -175,6 +176,12 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
+        },
+        sitemap: {
+          cacheTime: 600 * 1000, // 600 sec - cache purge period
+          changefreq: "weekly",
+          priority: 0.5,
+          trailingSlash: false,
         },
       },
     ],

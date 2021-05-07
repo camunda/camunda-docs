@@ -5,7 +5,7 @@ title: "Zeebe Operator (Experimental)"
 
 The Zeebe Kubernetes Operator was born out of the need to manage more than one single Zeebe cluster running inside Kubernetes clusters. Zeebe clusters have their own lifecycle and in real implementations, the need to update, monitor, and manage some of these cluster components while applications are running becomes challenging. The objective of the Zeebe Kubernetes Operator is to simplify and natively integrate Zeebe with Kubernetes, to solve operational burden and facilitate the creation and maintenance of a set of clusters. 
 
-This operator has been built with Kubernetes Helm in mind, meaning that at the end of the day, this operator will be in charge of managing [Helm charts](https://github.com/helm/helm). If you are not familiar with Helm, Helm is a package manager for Kubernetes, which help us to package and distribute Kubernetes manifest. Helm also deals with installing, labeling and dependency management between packages (charts). Because we have Zeebe Helm packages already here: [http://helm.zeebe.io](http://helm.zeebe.io) which are automatically versioned and released, the Zeebe Kubernetes Operator will use these charts to create and manage new clusters and other related components. 
+This operator has been built with Kubernetes Helm in mind, meaning that at the end of the day, this operator will be in charge of managing [Helm charts](https://github.com/helm/helm). If you are not familiar with Helm, Helm is a package manager for Kubernetes, which help us to package and distribute Kubernetes manifest. Helm also deals with installing, labeling and dependency management between packages (charts). Because we have Zeebe Helm packages already here: [http://helm.camunda.io](http://helm.camunda.io) which are automatically versioned and released, the Zeebe Kubernetes Operator will use these charts to create and manage new clusters and other related components. 
 
 
 Because we are in Kubernetes realms we need to provide a declarative way of stating that we want a new Zeebe cluster to be provisioned. For this reason, the ZeebeCluster Custom Resource Definition (CRD) is introduced. This resource contains all the information needed to provision a cluster and it will also reflect the current cluster status. The Zeebe Kubernetes Operator is built to monitor ZeebeCluster resources and interact with the Kubernetes APIs under the hood to make sure that the Zeebe cluster is provisioned, upgraded or deleted correctly.
@@ -16,11 +16,10 @@ The Zeebe Kubernetes Operator can be installed using Helm, as it is provided as 
 
 The following steps will guide you to install the Operator with Helm3  (which is the default version now)
 
-This will also work if you have correctly installed Helm2 in your cluster with tiller.
 Add the Zeebe Helm repository:
 
 ```
-helm repo add zeebe https://helm.zeebe.io
+helm repo add zeebe https://helm.camunda.io
 helm repo update
 ```
 
@@ -73,14 +72,14 @@ kubectl get pods -n <Zeebe_Cluster_Name> -w
 
 The next video show these commands in action along with the installation of the Zeebe Kubernetes Operator:
 
-![Intro video](https://www.youtube.com/watch?v=U-crhMfuJgY)
+[![](./assets/zeebe-operator-video.png)](https://www.youtube.com/watch?v=U-crhMfuJgY)
 
 
 ## Technical details and dependencies
 
 This Kubernetes Operator was built using KubeBuilder V2.1+, Tekton 0.8.0+ and Helm 3.
 
-The Operator Defines currently 1 CRD (Custom Resource Definition): `ZeebeCluster`, but in future versions, new types will be defined for other components such as Zeebe Operate and workers.  The ZeebeCluster resource represent a low-level resource which will instantiate a Zeebe cluster based on predefined parameters. This low-level resource definition can be used to define the cluster topology and HA configurations.
+The Operator defines currently 1 CRD (Custom Resource Definition): `ZeebeCluster`, but in future versions, new types will be defined for other components such as Zeebe Operate and workers.  The ZeebeCluster resource represent a low-level resource which will instantiate a Zeebe cluster based on predefined parameters. This low-level resource definition can be used to define the cluster topology and HA configurations.
 
 The Zeebe Kubernetes Operator was built using the [kubebuilder framework](https://github.com/kubernetes-sigs/kubebuilder) for writing the controller’s logic and scaffolding the CRD type. Internally it does interact with [Tekton Pipelines](https://github.com/tektoncd/pipeline) in order to install and manage Zeebe Helm charts.  The project itself is being built, released and tested using [Jenkins X](https://jenkins-x.io/). This leads to some changes in how KubeBuilder’s project is structured, as in its current shape the project is not organised in a way that is easy to create a Helm chart out of it.
 
