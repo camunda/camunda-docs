@@ -34,7 +34,7 @@ The [Zeebe Node Client](https://github.com/camunda-community-hub/zeebe-client-no
 <TabItem value="nodejs">
 
 - [Node.js](https://nodejs.org)
-- [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases)
+- [Camunda Modeler](https://camunda.com/download/modeler/)
 
 </TabItem>
 
@@ -218,9 +218,8 @@ You will see output like this:
 </TabItem>
 </Tabs>
 
-- Download and install the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases).
-- Open Zeebe Modeler and create a new BPMN Diagram.
-- Create a new BPMN diagram.
+- Download and install the [Camunda Modeler](https://camunda.com/download/modeler/).
+- Open Camunda Modeler and create a new BPMN Diagram for Camunda Cloud.
 - Add a StartEvent, an EndEvent, and a Task.
 - Click on the Task, click on the little spanner/wrench icon, and select "Service Task".
 - Set the _Name_ of the Service Task to `Get Time`, and the _Type_ to `get-time`.
