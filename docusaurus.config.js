@@ -86,6 +86,13 @@ module.exports = {
               href:
                 "https://github.com/camunda-cloud/camunda-cloud-documentation",
             },
+            {
+              label: "Privacy Statement",
+              href: "https://camunda.com/legal/privacy/",
+            },
+            {
+              html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
+            },
           ],
         },
       ],
