@@ -14,6 +14,6 @@ The Camunda Cloud team strives to release:
 - A new minor version of the Camunda Cloud components every three months
 - In between minor versions, two alpha releases (to preview the upcoming minor version)
 
-At the time of writing, Zeebe supports the last two released minor versions with
+Camunda Cloud supports the last two released minor versions with
 patch releases. Patch releases are offered on a best effort basis for the
 currently supported versions.
