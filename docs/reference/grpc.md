@@ -90,7 +90,7 @@ Returned if:
 - type is blank (empty string, null)
 - worker is blank (empty string, null)
 - timeout less than 1 (ms)
-- amount is less than 1
+- maxJobsToActivate is less than 1
 
 ### `CancelProcessInstance` RPC
 
