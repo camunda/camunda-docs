@@ -48,6 +48,11 @@ body {
   background-color: #e6e7e8;
 }
 
+.osano-footer-link-docu {
+  color: var(--ifm-color-link-footer);
+
+}
+
 /* Osano Styles  */
 
 .osano-cm-widget svg {

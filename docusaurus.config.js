@@ -91,7 +91,7 @@ module.exports = {
               href: "https://camunda.com/legal/privacy/",
             },
             {
-              html: `<a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
+              html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
             },
           ],
         },
