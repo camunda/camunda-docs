@@ -17,7 +17,7 @@ Reservations control how many clusters you can deploy. Increasing the number of 
 
 You can access the **Billing** page by selecting the menu entry **Organization Settings** from the Camunda Cloud Console navigation bar.
 
-![reserved-clusters-overview](./img/early-access-reserved-clusters-overview.png)
+![billing-overview](./img/billing-overview.png)
 
 ### Edit reservations
 
