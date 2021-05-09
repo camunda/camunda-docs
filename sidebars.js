@@ -253,6 +253,7 @@ module.exports = {
       "product-manuals/tasklist/introduction",{
           "User guide": [
             "product-manuals/tasklist/userguide/overview",
+            "product-manuals/tasklist/userguide/camunda-forms",
           ],
           "Deployment guide": [
             "product-manuals/tasklist/deployment/install-and-start",
