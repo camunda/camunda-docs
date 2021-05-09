@@ -284,6 +284,7 @@ module.exports = {
           Tasks: [
             "reference/bpmn-processes/tasks",
             "reference/bpmn-processes/service-tasks/service-tasks",
+            "reference/bpmn-processes/user-tasks/user-tasks",
             "reference/bpmn-processes/receive-tasks/receive-tasks",
           ],
         },
