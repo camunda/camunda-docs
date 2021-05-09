@@ -41,9 +41,8 @@ It is recommended to disable the attribute `propagateAllChildVariables` or defin
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>A call activity with static process id:
+### XML Representation
+A call activity with static process id:
 
 ```xml
 <bpmn:callActivity id="task-A" name="A">
@@ -53,76 +52,7 @@ It is recommended to disable the attribute `propagateAllChildVariables` or defin
 </bpmn:callActivity>
 ```
 
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding a call activity with static process id:
-
-![call-activity](assets/bpmn-modeler-call-activity.gif)
-
-  </p>
-</details>
-
-<details>
-  <summary>Process lifecycle</summary>
-  <p>Process instance records of a call activity:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>task-a</td>
-        <td>CALL_ACTIVITY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>task-a</td>
-        <td>CALL_ACTIVITY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>child-process-id</td>
-        <td>PROCESS</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>child-process-id</td>
-        <td>PROCESS</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>child-process-id</td>
-        <td>PROCESS</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>task-a</td>
-        <td>CALL_ACTIVITY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>task-a</td>
-        <td>CALL_ACTIVITY</td>
-    </tr>
-</table>
-
-The process instance records of the created process instance have a reference to its parent process instance (`parentProcessInstanceKey`) and the element instance of the call activity (`parentElementInstanceKey`).
-
-  </p>
-</details>
-
-References:
+### References
 
 - [Expressions](/product-manuals/concepts/expressions.md)
 - [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)

@@ -31,9 +31,8 @@ By default, the local variables of the event subprocess are not propagated (i.e.
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>An event subprocess with an interrupting timer start event:
+### XML Representation
+An event subprocess with an interrupting timer start event:
 
 ```xml
 <bpmn:subProcess id="compensate-subprocess" triggeredByEvent="true">
@@ -45,99 +44,7 @@ By default, the local variables of the event subprocess are not propagated (i.e.
 </bpmn:subProcess>
 ```
 
-  </p>
-</details>
-
-<details>
-	<summary>Using the BPMN modeler</summary>
-  <p>Adding an event subprocess with an interrupting timer start event:
-
-![event-subprocess](assets/zeebe-modeler-event-subprocess.gif)
-
-  </p>
-</details>
-
-<details>
-  <summary>Process lifecycle</summary>
-  <p>Process instance records of an event subprocess with an interrupting timer start event:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-		<tr>
-				<td>EVENT_OCCURRED</td>
-				<td>five-minutes</td>
-				<td>START_EVENT</td>
-		</tr>
-		<tr>
-				<td>ELEMENT_TERMINATING</td>
-				<td>fetch-item</td>
-				<td>SERVICE_TASK</td>
-		</tr>
-		<tr>
-				<td>...</td>
-				<td>...</td>
-				<td>...</td>
-		</tr>
-		<tr>
-				<td>ELEMENT_TERMINATED</td>
-				<td>fetch-item</td>
-				<td>SERVICE_TASK</td>
-		</tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>compensate-subprocess</td>
-        <td>SUB_PROCESS</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>compensate-subprocess</td>
-        <td>SUB_PROCESS</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>five-minutes</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>order-cancelled</td>
-        <td>END_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>compensate-subprocess</td>
-        <td>SUB_PROCESS</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>compensate-subprocess</td>
-        <td>SUB_PROCESS</td>
-    </tr>
-		<tr>
-				<td>ELEMENT_COMPLETING</td>
-				<td>order-process</td>
-				<td>PROCESS</td>
-		</tr>
-		<tr>
-				<td>ELEMENT_COMPLETED</td>
-				<td>order-process</td>
-				<td>PROCESS</td>
-		</tr>
-</table>
-
-  </p>
-</details>
-
-References:
+### References
 
 - [Embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md)
 - [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)

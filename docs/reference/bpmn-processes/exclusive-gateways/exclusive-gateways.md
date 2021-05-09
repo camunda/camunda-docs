@@ -35,9 +35,8 @@ For example:
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>An exclusive gateway with two outgoing sequence flows:
+### XML Representation
+An exclusive gateway with two outgoing sequence flows:
 
 ```xml
 <bpmn:exclusiveGateway id="exclusiveGateway" default="else" />
@@ -53,59 +52,7 @@ For example:
   sourceRef="exclusiveGateway" targetRef="shipParcel" />
 ```
 
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding an exclusive gateway with two outgoing sequence flows:
-
-![exclusive-gateway](assets/exclusive-gateway.gif)
-
-  </p>
-</details>
-
-<details>
-  <summary>Process lifecycle</summary>
-  <p>Process instance records of an exclusive gateway:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>shipping-gateway</td>
-        <td>EXCLUSIVE_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>shipping-gateway</td>
-        <td>EXCLUSIVE_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>shipping-gateway</td>
-        <td>EXCLUSIVE_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>shipping-gateway</td>
-        <td>EXCLUSIVE_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>SEQUENCE_FLOW_TAKEN</td>
-        <td>priceGreaterThan100</td>
-        <td>SEQUENCE_FLOW</td>
-    </tr>
-</table>
-
-  </p>
-</details>
-
-References:
+### References
 
 - [Expressions](/product-manuals/concepts/expressions.md)
 - [Incidents](/product-manuals/concepts/incidents.md)

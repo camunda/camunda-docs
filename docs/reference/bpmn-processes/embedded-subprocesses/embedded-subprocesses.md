@@ -21,9 +21,8 @@ By default, the local variables of the subprocess are not propagated (i.e. they 
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>An embedded subprocess with a start event:
+### XML Representation
+An embedded subprocess with a start event:
 
 ```xml
 <bpmn:subProcess id="process-order" name="Process Order">
@@ -32,68 +31,6 @@ By default, the local variables of the subprocess are not propagated (i.e. they 
 </bpmn:subProcess>
 ```
 
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding an embedded subprocess:
-
-![event-based-gateway](assets/embedded-subprocess.gif)
-
-  </p>
-</details>
-
-<details>
-  <summary>Process lifecycle</summary>
-  <p>Process instance records of an embedded subprocess:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>    
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>process-order</td>
-        <td>SUB_PROCESS</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>process-order</td>
-        <td>SUB_PROCESS</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>order-placed</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>items-fetched</td>
-        <td>END_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>process-order</td>
-        <td>SUB_PROCESS</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>process-order</td>
-        <td>SUB_PROCESS</td>
-    </tr>
-</table>
-
-  </p>
-</details>
-
-References:
+### References
 
 - [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
