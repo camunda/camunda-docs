@@ -889,7 +889,7 @@ You will see output like this:
 { label: 'C# / ASP.NET Core 3', value: 'csharp', },
 { label: 'Go', value: 'go', },
 { label: 'Java + Spring', value: 'javaspring', },
-{ label: 'Kotling + Spring', value: 'kotlin', },
+{ label: 'Kotlin + Spring', value: 'kotlin', },
 { label: 'NodeJS', value: 'nodejs', },
 ] }>
 
@@ -946,7 +946,7 @@ It should look like this:
 { label: 'C# / ASP.NET Core 3', value: 'csharp', },
 { label: 'Go', value: 'go', },
 { label: 'Java + Spring', value: 'javaspring', },
-{ label: 'Kotling + Spring', value: 'kotlin', },
+{ label: 'Kotlin + Spring', value: 'kotlin', },
 { label: 'NodeJS', value: 'nodejs', },
 ] }>
 
@@ -1439,7 +1439,7 @@ A workflow instance has been started. Let's view it in Operate.
 { label: 'C# / ASP.NET Core 3', value: 'csharp', },
 { label: 'Go', value: 'go', },
 { label: 'Java + Spring', value: 'javaspring', },
-{ label: 'Kotling + Spring', value: 'kotlin', },
+{ label: 'Kotlin + Spring', value: 'kotlin', },
 { label: 'NodeJS', value: 'nodejs', },
 ] }>
 
