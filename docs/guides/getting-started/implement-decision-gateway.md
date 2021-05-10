@@ -23,7 +23,7 @@ And for the else sequence flow:
 <Tabs groupId="modeler" defaultValue="console" values={
     [
         {label: 'Console Modeler', value: 'console', },
-        {label: 'Zeebe Modeler', value: 'desktop', },
+        {label: 'Camunda Modeler', value: 'desktop', },
     ]
 }>
 

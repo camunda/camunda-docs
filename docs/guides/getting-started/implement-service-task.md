@@ -11,7 +11,7 @@ Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the
 <Tabs groupId="modeler" defaultValue="console" values={
 [
 {label: 'Console Modeler', value: 'console', },
-{label: 'Zeebe Modeler', value: 'desktop', },
+{label: 'Camunda Modeler', value: 'desktop', },
 ]
 }>
 
