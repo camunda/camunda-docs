@@ -21,10 +21,10 @@ And for the else sequence flow:
 ```
 
 <Tabs groupId="modeler" defaultValue="console" values={
-    [
-        {label: 'Console Modeler', value: 'console', },
-        {label: 'Zeebe Modeler', value: 'desktop', },
-    ]
+[
+{label: 'Cloud Modeler', value: 'console', },
+{label: 'Zeebe Modeler', value: 'desktop', },
+]
 }>
 
 <TabItem value='console'>
@@ -32,7 +32,6 @@ And for the else sequence flow:
 ![sequenceflows-cloud](./img/cloud-modeler-advanced-sequence-flows.png)
 
 </TabItem>
-
 
 <TabItem value='desktop'>
 
