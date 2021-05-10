@@ -11,7 +11,8 @@ You can find the complete source code, including the BPMN diagrams, on [GitHub](
 ## Prerequisites
 
 - [Camunda Cloud account](/guides/getting-started/create-camunda-cloud-account.md)
-- [Cluster](/guides/getting-started/overview.md) and [client credentials](/guides/getting-started/setup-client-connection-credentials.md)
+- [Cluster](/guides/getting-started/create-camunda-cloud-account.md)
+- [Client credentials](/guides/getting-started/setup-client-connection-credentials.md)
 - [Modeler](/guides/getting-started/model-your-first-process.md)
 - Java 8 or higher
 - [Apache Maven](https://maven.apache.org/)
