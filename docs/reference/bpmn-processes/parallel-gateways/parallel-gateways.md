@@ -15,9 +15,8 @@ The concurrent paths can be **joined** using a parallel gateway with multiple in
 
 ## Additional Resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>A parallel gateway with two outgoing sequence flows:
+### XML Representation
+A parallel gateway with two outgoing sequence flows:
 
 ```xml
 <bpmn:parallelGateway id="split" />
@@ -28,100 +27,3 @@ The concurrent paths can be **joined** using a parallel gateway with multiple in
 <bpmn:sequenceFlow id="to-process-payment" sourceRef="split" 
   targetRef="processPayment" />
 ```
-
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding a parallel gateway with two outgoing sequence flows:
-
-![parallel-gateway](assets/parallel-gateway.gif) 
-  </p>
-</details>
-
-<details>
-  <summary>Process lifecycle</summary>
-  <p>Process instance records of a parallel gateway: 
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>    
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>split</td>
-        <td>PARALLEL_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>split</td>
-        <td>PARALLEL_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>split</td>
-        <td>PARALLEL_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>split</td>
-        <td>PARALLEL_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>SEQUENCE_FLOW_TAKEN</td>
-        <td>to-ship-parcel</td>
-        <td>SEQUENCE_FLOW</td>
-    </tr>
-    <tr>
-        <td>SEQUENCE_FLOW_TAKEN</td>
-        <td>to-process-payment</td>
-        <td>SEQUENCE_FLOW</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>SEQUENCE_FLOW_TAKEN</td>
-        <td>to-join-1</td>
-        <td>SEQUENCE_FLOW</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>SEQUENCE_FLOW_TAKEN</td>
-        <td>to-join-2</td>
-        <td>SEQUENCE_FLOW</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>join</td>
-        <td>PARALLEL_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>join</td>
-        <td>PARALLEL_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>join</td>
-        <td>PARALLEL_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>join</td>
-        <td>PARALLEL_GATEWAY</td>
-    </tr>    
-</table>
-
-  </p>
-</details>
-

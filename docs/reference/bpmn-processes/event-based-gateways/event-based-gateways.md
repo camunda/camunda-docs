@@ -13,9 +13,8 @@ When an event-based gateway is entered then the process instance waits at the ga
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>An event-based gateway with two outgoing sequence flows:
+### XML Representation
+An event-based gateway with two outgoing sequence flows:
 
 ```xml
 <bpmn:eventBasedGateway id="gateway" />
@@ -36,67 +35,6 @@ When an event-based gateway is entered then the process instance waits at the ga
 </bpmn:intermediateCatchEvent>
 ```
 
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding an event-based gateway with two outgoing sequence flows:
-
-![event-based-gateway](assets/event-based-gateway.gif) 
-  </p>
-</details>
-
-<details>
-  <summary>Process lifecycle</summary>
-  <p>Process instance records of an event-based gateway: 
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>    
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>gateway</td>
-        <td>EVENT_BASED_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>gateway</td>
-        <td>EVENT_BASED_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>EVENT_OCCURRED</td>
-        <td>gateway</td>
-        <td>EVENT_BASED_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>gateway</td>
-        <td>EVENT_BASED_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>gateway</td>
-        <td>EVENT_BASED_GATEWAY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>payment-details-updated</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-</table>
-
-  </p>
-</details>
-
-References:
+### References
 * [Timer events](../timer-events/timer-events.md)
 * [Message events](../message-events/message-events.md)

@@ -31,9 +31,8 @@ Input mappings can be used to transform the variables into a format that is acce
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>A service task with a custom header:
+### XML Representation
+A service task with a custom header:
 
 ```xml
 <bpmn:serviceTask id="collect-money" name="Collect Money">
@@ -46,65 +45,7 @@ Input mappings can be used to transform the variables into a format that is acce
 </bpmn:serviceTask>
 ```
 
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding a service task:
-
-![service-task](assets/service-task.gif)
-
-Adding custom headers:
-![task-headers](assets/task-headers.gif)
-
-Adding variable mappings:
-![variable-mappings](assets/variable-mappings.gif)
-
-  </p>
-</details>
-
-<details>
-  <summary>Process Lifecycle</summary>
-  <p>Process instance records of a service task:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>collect-money</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>collect-money</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>collect-money</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>collect-money</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-</table>
-
-  </p>
-</details>
-
-References:
+### References
 
 - [Job handling](/product-manuals/concepts/job-workers.md)
 - [Expressions](/product-manuals/concepts/expressions.md)

@@ -65,9 +65,8 @@ A cycle defined as ISO 8601 repeating intervals format. It contains the duration
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>A timer start event with time date:
+### XML Representation
+A timer start event with time date:
 
 ```xml
  <bpmn:startEvent id="release-date">
@@ -97,99 +96,7 @@ A non-interrupting boundary timer event with time cycle:
 </bpmn:boundaryEvent>
 ```
 
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding an interrupting timer boundary event:
-
-![message-event](assets/interrupting-timer-event.gif)
-
-  </p>
-</details>
-
-<details>
-  <summary>Process lifecycle</summary>
-  <p>Process instance records of a timer start event:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-    <tr>
-        <td>EVENT_OCCURRED</td>
-        <td>release-date</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>release-date</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>release-date</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>release-date</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>release-date</td>
-        <td>START_EVENT</td>
-    </tr>
-</table>
-
-Process instance records of an intermediate timer catch event:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>coffee-break</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>coffee-break</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>EVENT_OCCURRED</td>
-        <td>coffee-break</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>coffee-break</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>coffee-break</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-</table>
-
-  </p>
-</details>
-
-References:
+### References
 
 - [Expressions](/product-manuals/concepts/expressions.md)
 - [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)

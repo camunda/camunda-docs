@@ -94,9 +94,8 @@ target: output
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>A sequential multi-instance service task:
+### XML Representation
+A sequential multi-instance service task:
 
 ```xml
 <bpmn:serviceTask id="task-A" name="A">
@@ -110,94 +109,7 @@ target: output
 </bpmn:serviceTask>
 ```
 
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding the parallel multi-instance marker to a service task:
-
-![multi-instance](assets/bpmn-modeler-multi-instance.gif)
-
-  </p>
-</details>
-
-<details>
-  <summary>Process lifecycle</summary>
-  <p>Process instance records of a parallel multi-instance service task:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>task-a</td>
-        <td>MULTI_INSTANCE_BODY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>task-a</td>
-        <td>MULTI_INSTANCE_BODY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>task-a</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>task-a</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>task-a</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>task-a</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>task-a</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>task-a</td>
-        <td>SERVICE_TASK</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>task-a</td>
-        <td>MULTI_INSTANCE_BODY</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>task-a</td>
-        <td>MULTI_INSTANCE_BODY</td>
-    </tr>
-</table>
-
-  </p>
-</details>
-
-References:
+### References
 
 - [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)
 - [Expressions](/product-manuals/concepts/expressions.md)
