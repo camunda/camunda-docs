@@ -70,7 +70,7 @@ or you use the [generated API documentation](../../../reference/tasklist-api/sch
 
 There are also a lot of tools to explore GraphQL API's like this: https://altair.sirmuel.design
 
-For example you want to know all about provided types:
+For example, you want to know all about provided types:
 ````graphql
 query {
   __schema {

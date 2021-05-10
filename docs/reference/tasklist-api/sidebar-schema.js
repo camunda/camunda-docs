@@ -9,6 +9,7 @@ module.exports = {
         "reference/tasklist-api/queries/form",
         "reference/tasklist-api/queries/task",
         "reference/tasklist-api/queries/tasks",
+        "reference/tasklist-api/queries/variables",
       ],
     },
     {
