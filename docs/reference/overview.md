@@ -16,7 +16,7 @@ This section contains general reference material for Camunda Cloud, including AP
 ## Security, support, & license information
 - [Announcements](announcements.md)
 - [Licenses](licenses.md)
-- [Notices](notices.md)
+- [Security notices](notices.md)
 - [Release policy](release-policy.md)
 - [Supported environments](supported-environments.md)
 

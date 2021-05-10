@@ -1,6 +1,6 @@
 ---
 id: notices
-title: "Notices"
+title: "Security notices"
 ---
 
 ## Security notices
