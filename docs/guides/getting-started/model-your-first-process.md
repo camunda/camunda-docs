@@ -6,12 +6,12 @@ title: Model your first process
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In Camunda Cloud you have two options to design and deploy a process: the Cloud Modeler and the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases).
+In Camunda Cloud you have two options to design and deploy a process: the Console Modeler and the [Camunda Modeler](https://camunda.com/download/modeler/).
 
 <Tabs groupId="modeler" defaultValue="console" values={
 [
-{label: 'Cloud Modeler', value: 'console', },
-{label: 'Zeebe Modeler', value: 'desktop', },
+{label: 'Console Modeler', value: 'console', },
+{label: 'Camunda Modeler', value: 'desktop', },
 ]
 }>
 
@@ -37,7 +37,7 @@ The **Save** button should now appear for you to save your diagram.
 
 <TabItem value='desktop'>
 
-Using the Zeebe Modeler, processes can be designed and deployed, and new instances can be created.
+Using the Camunda Modeler, processes can be designed and deployed, and new instances can be created.
 
 Design a simple process with one start event and one end event or download this [BPMN model](./bpmn/gettingstarted_quickstart.bpmn).
 

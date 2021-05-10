@@ -21,10 +21,10 @@ And for the else sequence flow:
 ```
 
 <Tabs groupId="modeler" defaultValue="console" values={
-[
-{label: 'Cloud Modeler', value: 'console', },
-{label: 'Zeebe Modeler', value: 'desktop', },
-]
+    [
+        {label: 'Console Modeler', value: 'console', },
+        {label: 'Camunda Modeler', value: 'desktop', },
+    ]
 }>
 
 <TabItem value='console'>
