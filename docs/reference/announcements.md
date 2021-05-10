@@ -1,9 +1,8 @@
 ---
-id: deprecated-features
-title: "Deprecated features"
+id: announcements
+title: "Announcements"
 ---
 
-This section lists deprecated features.
 
 ## Deprecated in 0.26.0
 

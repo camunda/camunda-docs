@@ -53,6 +53,11 @@ module.exports = {
     },
     footer: {
       style: "dark",
+      logo: {
+        alt: "Camunda.com",
+        src: "img/logo-light.svg",
+        href: "https://camunda.com"
+      },
       links: [
         {
           title: "Docs",
@@ -60,6 +65,18 @@ module.exports = {
             {
               label: "Introduction",
               to: "docs/guides",
+            },
+            {
+              label: "Licenses",
+              to: "docs/reference/licenses",
+            },
+            {
+              label: "Notices",
+              to: "docs/reference/notices",
+            },
+            {
+              label: "Release cycle",
+              to: "docs/reference/release-policy",
             },
           ],
         },
@@ -73,6 +90,11 @@ module.exports = {
             {
               label: "Twitter",
               href: "https://twitter.com/camunda",
+            },
+            {
+              label: "GitHub",
+              href:
+                "https://github.com/camunda-cloud/camunda-cloud-documentation",
             },
           ],
         },
@@ -95,6 +117,13 @@ module.exports = {
               label: "GitHub",
               href:
                 "https://github.com/camunda-cloud/camunda-cloud-documentation",
+            },
+            {
+              label: "Privacy Statement",
+              href: "https://camunda.com/legal/privacy/",
+            },
+            {
+              html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
             },
           ],
         },
