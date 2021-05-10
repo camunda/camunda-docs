@@ -12,7 +12,7 @@ Proposed Editorial Style Guide: [Google Style Guide](https://developers.google.c
 ## Product Names, & Terminology
 
 **Camunda Cloud** is made up of the following **components**
-- Cloud Modeler & Zeebe Modeler
+- Cloud Modeler & Camunda Modeler
 - Zeebe (Zeebe Engine is ok too)
 - Operate
 - Tasklist

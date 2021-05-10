@@ -89,14 +89,14 @@ Watch a [video tutorial on YouTube](https://youtu.be/AOj64vzEZ_8) walking throug
 
 <TabItem value="csharp">
 
-- [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases)
+- [Camunda Modeler](https://camunda.com/download/modeler/)
 
 </TabItem>
 
 <TabItem value="go">
 
 - [Go 1.13+](https://golang.org/dl/)
-- [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases)
+- [Camunda Modeler](https://camunda.com/download/modeler/)
 
 </TabItem>
 
@@ -105,20 +105,20 @@ Watch a [video tutorial on YouTube](https://youtu.be/AOj64vzEZ_8) walking throug
 
 <TabItem value="javaspring">
 
-- [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases)
+- [Camunda Modeler](https://camunda.com/download/modeler/)
 
 </TabItem>
 
 <TabItem value="kotlin">
 
-- [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases)
+- [Camunda Modeler](https://camunda.com/download/modeler/)
 
 </TabItem>
 
 <TabItem value="nodejs">
 
 - [Node.js](https://nodejs.org)
-- [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases)
+- [Camunda Modeler](https://camunda.com/download/modeler/)
 
 </TabItem>
 
@@ -928,8 +928,8 @@ You will see output like this:
 
 </Tabs>
 
-- Download and install the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler/releases).
-- Open Zeebe Modeler and create a new BPMN Diagram.
+- Download and install the [Camunda Modeler](https://camunda.com/download/modeler/).
+- Open Camunda Modeler and create a new BPMN Diagram.
 - Create a new BPMN diagram.
 - Add a StartEvent, an EndEvent, and a Task.
 - Click on the Task, click on the little spanner/wrench icon, and select "Service Task".
@@ -2269,7 +2269,7 @@ You will see output similar to the following:
 
 We will edit the model to add a Conditional Gateway.
 
-- Open the BPMN model file `bpmn/test-process.bpmn` in the Zeebe Modeler.
+- Open the BPMN model file `bpmn/test-process.bpmn` in the Camunda Modeler.
 - Drop a Gateway between the Service Task and the End event.
 - Add two Service Tasks after the Gateway.
 - In one, set the _Name_ to `Before noon` and the _Type_ to `make-greeting`.
