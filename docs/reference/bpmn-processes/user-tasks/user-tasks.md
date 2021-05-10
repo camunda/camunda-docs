@@ -65,9 +65,7 @@ A user task with a user task form:
 
 - [Tasklist]
 - [Job handling](/product-manuals/concepts/job-workers.md)
-- [Expressions](/product-manuals/concepts/expressions.md)
 - [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
-- [Incidents](/product-manuals/concepts/incidents.md)
 
 
 
