@@ -3,9 +3,9 @@ id: configuration
 title: Configuration
 ---
 
-Tasklist is a Spring Boot application. That means all ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
+Tasklist is a Spring Boot application. That means all provided ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
 a Spring Boot application can be applied. By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist related settings are prefixed
-with `zeebe.tasklist`. The following parts are configurable:
+with `camunda.tasklist`. The following parts are configurable:
 
 * [Webserver](#webserver)
 * [GraphQL API access](#graphql-api-access)
@@ -18,7 +18,7 @@ with `zeebe.tasklist`. The following parts are configurable:
 
 ## Webserver
 
-Tasklist supports customizing the *context-path* by using default spring configuration.
+Tasklist supports customizing the *context-path* by using default Spring configuration.
 
 Example for `application.yml`:
 `server.servlet.context-path: /tasklist`
@@ -36,14 +36,14 @@ Tasklist server needs the following **settings** to validate the token:
 
 Setting|Description|Example
 -------|------------|--------
-zeebe.tasklist.client.audience| Tasklist tries to match this with `aud` in JWT | tasklist.camunda.io
-zeebe.tasklist.client.clusterId| Tasklist tries to match this with `scope` in JWT| cafe-0815-0235-a221-21cc6df91dc5
+camunda.tasklist.client.audience| Tasklist tries to match this with `aud` in JWT | tasklist.camunda.io
+camunda.tasklist.client.clusterId| Tasklist tries to match this with `scope` in JWT| cafe-0815-0235-a221-21cc6df91dc5
 spring.security.oauth2.resourceserver.jwt.jwk-set-uri (recommended) | Complete URI to get public keys for JWT validation | https://weblogin.cloud.company.com/.well-known/jwks.json
 *OR* | |
 spring.security.oauth2.resourceserver.jwt.issuer-uri| URI to get public keys for JWT validation| https://weblogin.cloud.company.com/
 
-The settings can be given in [application.yml](https://github.com/zeebe-io/zeebe-tasklist/blob/master/config/application.yml) (eg. `zeebe.tasklist.client.audience: tasklist.camunda.io`) or
-as environment variables (eg. `ZEEBE_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`)
+The settings can be given in [application.yml](https://github.com/camunda-cloud/tasklist/blob/master/config/application.yml) (eg. `camunda.tasklist.client.audience: tasklist.camunda.io`) or
+as environment variables (eg. `CAMUNDA_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`)
 
 The [API client](api-client.md) needs to obtain JWT token and send it in each request to `graphql` in an authorization header as described above.
 
@@ -53,15 +53,15 @@ Tasklist stores and reads data in/from Elasticsearch.
 
 ### Settings to connect
 
-Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/setting-up-authentication.html) for elasticsearch.
+Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for elasticsearch.
 Set the appropriate username/password combination in the configuration to use it.
 
 Name | Description | Default value
 -----|-------------|--------------
-zeebe.tasklist.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
-zeebe.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
-zeebe.tasklist.elasticsearch.username | Username to access Elasticsearch REST API | -
-zeebe.tasklist.elasticsearch.password | Password to access Elasticsearch REST API | -
+camunda.tasklist.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
+camunda.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
+camunda.tasklist.elasticsearch.username | Username to access Elasticsearch REST API | -
+camunda.tasklist.elasticsearch.password | Password to access Elasticsearch REST API | -
 
 ### Settings for shards and replicas
 
@@ -72,17 +72,17 @@ Following configuration parameters will define the settings:
 
 Name|Description|Default value
 ----|-----------|--------------
-zeebe.tasklist.elasticsearch.numberOfShards| How many shards Elasticsearch uses for all Tasklist indices| 1
-zeebe.tasklist.elasticsearch.numberOfReplicas| How many replicas Elasticsearch uses for all Tasklist indices| 0
+camunda.tasklist.elasticsearch.numberOfShards| How many shards Elasticsearch uses for all Tasklist indices| 1
+camunda.tasklist.elasticsearch.numberOfReplicas| How many replicas Elasticsearch uses for all Tasklist indices| 0
 
 These values are applied only on first startup of Tasklist or during version upgrade. After Tasklist
-ELS schema is created, settings may be adjusted directly in ELS template and the new settings will be applied
+ELS schema is created, settings may be adjusted directly in ELS template, and the new settings will be applied
 to indices created after adjustment.
 
 ### A snippet from application.yml:
 
 ```yaml
-zeebe.tasklist:
+camunda.tasklist:
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
@@ -98,38 +98,38 @@ Tasklist needs a connection to Zeebe Broker to start the import.
 
 Name | Description | Default value
 -----|-------------|--------------
-zeebe.tasklist.zeebe.brokerContactPoint | Broker contact point to zeebe as hostname and port | localhost:26500
+camunda.tasklist.zeebe.gatewayAddress | Gateway address point to zeebe as hostname and port | localhost:26500
 
-__Currently Operate does not support TLS communication with Zeebe__
+__Currently Tasklist does not support TLS communication with Zeebe__
 
 ### A snippet from application.yml:
 
 ```yaml
-zeebe.tasklist:
+camunda.tasklist:
   zeebe:
-    # Broker contact point
-    brokerContactPoint: localhost:26500
+    # Gateway address
+    gatewayAddress: localhost:26500
 ```
 
 ## Zeebe Elasticsearch exporter
 
-Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
+Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
 Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
 
 ### Settings to connect and import:
 
 Name | Description | Default value
 -----|-------------|--------------
-zeebe.tasklist.zeebeElasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
-zeebe.tasklist.zeebeElasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
-zeebe.tasklist.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
-zeebe.tasklist.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
-zeebe.tasklist.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
+camunda.tasklist.zeebeElasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
+camunda.tasklist.zeebeElasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
+camunda.tasklist.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
+camunda.tasklist.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
+camunda.tasklist.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
 
 ### A snippet from application.yml:
 
 ```yaml
-zeebe.tasklist:
+camunda.tasklist:
   zeebeElasticsearch:
     # Cluster name
     clusterName: elasticsearch
@@ -146,8 +146,11 @@ provides number of monitoring possibilities., e.g. health check (http://localhos
 
 Tasklist uses following Actuator configuration by default:
 ```yaml
-# enable health check and metrics endpoints
-management.endpoints.web.exposure.include: health,prometheus
+# disable default health indicators:
+# https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-health-indicators
+management.health.defaults.enabled: false
+# enable health check, metrics and loggers endpoints
+management.endpoints.web.exposure.include: health,prometheus,loggers
 # enable Kubernetes health groups:
 # https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-kubernetes-probes
 management.health.probes.enabled: true
@@ -207,7 +210,7 @@ that can be further adjusted to your needs:
     </Console>
   </Appenders>
   <Loggers>
-    <Logger name="io.zeebe.tasklist" level="info" />
+    <Logger name="io.camunda.tasklist" level="info" />
     <Root level="info">
       <AppenderRef ref="${env:TASKLIST_LOG_APPENDER:-Console}"/>
     </Root>
@@ -226,6 +229,19 @@ the environment variable ```TASKLIST_LOG_APPENDER``` like this:
 TASKLIST_LOG_APPENDER=Stackdriver
 ```
 
+### Change logging level at runtime
+
+Tasklist supports the default scheme for changing logging levels as provided by [Spring Boot](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers)
+
+The log level for Tasklist can be changed by following the [Setting a Log Level](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers-setting-level) section.
+
+#### Set all Tasklist loggers to DEBUG:
+```shell
+curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
+-H 'Content-Type: application/json' \
+-d '{"configuredLevel":"debug"}'
+```
+
 ## An example of application.yml file
 
 The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`config/application.yml`)
@@ -234,7 +250,7 @@ and can be used to adjust Tasklist to your needs.
 ```yaml
 # Tasklist configuration file
 
-zeebe.tasklist:
+camunda.tasklist:
   # Set Tasklist username and password.
   # If user with <username> does not exists it will be created.
   # Default: demo/demo
@@ -248,8 +264,8 @@ zeebe.tasklist:
     url: http://localhost:9200
   # Zeebe instance
   zeebe:
-    # Broker contact point
-    brokerContactPoint: localhost:26500
+    # Gateway address
+    gatewayAddress: localhost:26500
   # ELS instance to export Zeebe data to
   zeebeElasticsearch:
     # Cluster name

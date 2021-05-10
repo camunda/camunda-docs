@@ -4,20 +4,19 @@ title: Install and start Operate
 ---
 ## Running via Docker (local development)
 
-The easiest way to run Operate in development is with Docker. This gives you a consistent, reproducible environment and an out-of-the-box integrated experience for experimenting with Zeebe and Operate.
-
-To do this, you need [Docker Desktop](https://www.docker.com) installed on your development machine.
-
-The [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) repository contains an [operate](https://github.com/zeebe-io/zeebe-docker-compose/tree/master/operate) profile that starts a single Zeebe broker with Operate and all its dependencies. **See the README file in the repository for instructions to start Zeebe and Operate using Docker.**
-
-If you are using Docker, once you follow the instructions in the repository, skip ahead to the section ["Access the Operate Web Interface”](#access-the-operate-web-interface).
-
-## Running with Kubernetes (production)
-
-We will update this section after Operate is available for production use. 
-
-Running Operate with Kubernetes will be recommended for production deployments. 
-
+You can use the Docker image `camunda/operate:latest` to run Operate as container.
+Please make sure to set appropriate settings described in [configuration](../deployment/configuration) section of deployment guide. Here an example configuration for `docker-compose`:
+```
+operate:
+    container_name: operate
+    image: camunda/operate:latest
+    ports:
+        - 8080:8080
+    environment:
+        - camunda.operate.elasticsearch.url=http://elasticsearch:9200
+        - camunda.operate.zeebeElasticsearch.url=http://elasticsearch:9200
+        - camunda.operate.zeebe.gatewayAddress=zeebe:26500
+```
 ## Manual Configuration (local development)
 
 Here, we’ll walk you through how to download and run an Operate distribution manually, without using Docker. 
@@ -27,7 +26,7 @@ Note that the Operate web UI is available by default at [http://localhost:8080](
 
 ### Download Operate and a compatible version of Zeebe.
 
-[Operate and Zeebe distributions are available for download on the same release page. ](https://github.com/zeebe-io/zeebe/releases) 
+[Operate and Zeebe distributions are available for download on the same release page. ](https://github.com/camunda-cloud/zeebe/releases) 
 
 Note that each version of Operate is compatible with a specific version of Zeebe. 
 
@@ -37,7 +36,7 @@ On the Zeebe release page, compatible versions of Zeebe and Operate are grouped 
 
 Operate uses open-source Elasticsearch as its underlying data store, and so to run Operate, you need to download and run Elasticsearch. 
 
-Operate is currently compatible to Elasticsearch 6.8.14. [You can download Elasticsearch here.](https://www.elastic.co/downloads/past-releases/elasticsearch-6-8-14) 
+Operate is currently compatible to Elasticsearch 7.12.1 [You can download Elasticsearch here.](https://www.elastic.co/downloads/past-releases/elasticsearch-7-12-1) 
 
 ### Run Elasticsearch
 
@@ -61,7 +60,7 @@ To run Zeebe, execute the following commands:
 
 ```
 cd zeebe-broker-*
-./bin/broker
+ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME=io.camunda.zeebe.exporter.ElasticsearchExporter ./bin/broker
 ```
 
 
