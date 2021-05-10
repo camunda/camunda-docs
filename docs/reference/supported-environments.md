@@ -16,6 +16,6 @@ title: "Supported environments"
 ## Camunda Operate
 
 - **Operate Web App/Importer/Archiver** - the server components of Camunda
-  Operate require OpenJDK 11+ and Elasticsearch 6.8.x
+  Operate require OpenJDK 11+ and Elasticsearch 7.12.x
 - **Operate Browser App** - requires the latest version of Chrome, Firefox or
   Edge on Windows, MacOS and Linux
