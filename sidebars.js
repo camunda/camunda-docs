@@ -268,7 +268,8 @@ module.exports = {
     },
   ],
   Reference: [
-    "reference/overview",  
+    "reference/overview",
+    "reference/public-api",
     "reference/cloud-console-api-clients",
     "reference/cloud-console-api-reference",
     "reference/grpc",
