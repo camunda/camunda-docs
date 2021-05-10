@@ -19,7 +19,7 @@ instance continues.
 
 ## User Task Forms
 
-User tasks supports specifing a `formKey` attribute, using the
+User tasks support specifying a `formKey` attribute, using the
 `zeebe:formDefinition` extension element. The form key can be used to specify
 and identifier to associate a form to the user task. [Tasklist] supports
 embedded [Camunda Forms](/product-manuals/tasklist/userguide/camunda-forms.md),
