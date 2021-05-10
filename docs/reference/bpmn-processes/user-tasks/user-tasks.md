@@ -6,7 +6,7 @@ title: "User tasks"
 A user task is used to model work that needs to be done by a human actor. When
 the process execution arrives at such a user task, a new job similar to a
 [service task](../service-tasks/service-tasks) is created. The process instance
-stops at this point and waits until the task is completed.
+stops at this point and waits until the job is completed.
 
 ![user-task](assets/user-task.png)
 
