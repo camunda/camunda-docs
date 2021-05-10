@@ -33,7 +33,6 @@ And for the else sequence flow:
 
 </TabItem>
 
-
 <TabItem value='desktop'>
 
 ![sequenceflows](./img/zeebe-modeler-advanced-sequence-flows.png)

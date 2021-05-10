@@ -1,8 +1,6 @@
 ---
 ---
 
-After login you'll see the console overview page. Since you haven't created a cluster, the overview will be empty.
-
 ![cluster-creating](./img/cluster-overview-empty.png)
 
 In the upper right area you'll find the button **Create New Cluster**.

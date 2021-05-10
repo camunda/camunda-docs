@@ -11,7 +11,7 @@ You can find the complete source code on [GitHub](https://github.com/zeebe-io/ze
 ## Prerequisites
 
 - [Camunda Cloud account](/guides/getting-started/create-camunda-cloud-account.md)
-- [Cluster](/guides/getting-started/create-cluster.md) and [client credentials](/guides/getting-started/setup-client-connection-credentials.md)
+- [Cluster](/guides/getting-started/overview.md) and [client credentials](/guides/getting-started/setup-client-connection-credentials.md)
 - [Modeler](/guides/getting-started/model-your-first-process.md)
 - Go v1.13+ environment installed
 
@@ -192,7 +192,7 @@ As you can see, a process instance has been started and finished.
 
 ## Work on a task
 
-Now we want to do some work within our process. 
+Now we want to do some work within our process.
 
 First, add a few service
 tasks to the BPMN diagram and set the required attributes. Then extend your

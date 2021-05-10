@@ -7,7 +7,7 @@ title: Create Camunda Cloud account
 
 Create a Camunda Cloud account for yourself, so that you can create clusters, deploy processes and create a new instance.
 
-### Visit [https://accounts.cloud.camunda.io/signup](https://accounts.cloud.camunda.io/signup)
+### Visit [https://camunda.io/signup](https://camunda.io/signup)
 
 The **Sign Up** screen appears:
 
