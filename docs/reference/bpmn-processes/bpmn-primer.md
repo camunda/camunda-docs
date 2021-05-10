@@ -15,7 +15,7 @@ Business Process Model And Notation 2.0 (BPMN) is an industry standard for proce
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.1.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="0.1.0">
   <bpmn:process id="Process_1" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" name="Order Placed">
       <bpmn:outgoing>SequenceFlow_1bq1azi</bpmn:outgoing>
@@ -114,12 +114,12 @@ The following is an introduction to BPMN 2.0, its elements and their execution s
 
 ## Modeling BPMN diagrams
 
-The best tool for modeling BPMN diagrams for Zeebe is the **Zeebe Modeler**.
+The best tool for modeling BPMN diagrams for Zeebe is the **Camunda Modeler**.
 
-![overview](./assets/zeebe-modeler.gif)
+![overview](./assets/modeler.gif)
 
-- [Download page](https://github.com/zeebe-io/zeebe-modeler/releases)
-- [Source code repository](https://github.com/zeebe-io/zeebe-modeler)
+- [Download page](https://camunda.com/download/modeler/)
+- [Source code repository](https://github.com/camunda/camunda-modeler)
 
 ## BPMN elements
 

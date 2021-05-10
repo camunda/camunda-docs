@@ -14,7 +14,7 @@ You also need a Kubernetes Cluster, here you have several options:
 > Notice that you can use free trials from different cloud providers to create Kubernetes cluster to test Zeebe in the cloud. 
 
 Optional tools related to [Zeebe](http://zeebe.io)
-- Zeebe Modeler: to model/modify business processes [Zeebe Modeler releases](https://github.com/zeebe-io/zeebe-modeler/releases)
+- Camunda Modeler: to model/modify business processes [Camunda Modeler releases](https://camunda.com/download/modeler/)
 - Zeebe CTL(`zbctl`): command line tool to interact with a Zeebe cluster (local/remote). You can get the `zbctl` tool from the official [Zeebe release page](https://github.com/zeebe-io/zeebe/releases)
 
 

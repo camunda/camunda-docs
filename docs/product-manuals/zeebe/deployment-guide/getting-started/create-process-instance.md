@@ -144,7 +144,7 @@ Now go to the browser tab where you're running Operate. You should see that the 
 
 The process instances will wait at the intermediate message catch event until a message is received by Zeebe and correlated to the instances. Messages can be published using Zeebe clients, and it's also possible for Zeebe to connect to a message queue such as Apache Kafka and correlate messages published there to process instances.
 
-`zbctl` also supports message publishing, so we'll continue to use it in our demo. Below is the command we'll use to publish and correlate a message. You'll see that we provide the message "Name" that we assigned to this message event in the Zeebe Modeler as well as the `orderId` that we included in the payload of the instance when we created it.
+`zbctl` also supports message publishing, so we'll continue to use it in our demo. Below is the command we'll use to publish and correlate a message. You'll see that we provide the message "Name" that we assigned to this message event in the Camunda Modeler as well as the `orderId` that we included in the payload of the instance when we created it.
 
 Remember, `orderId` is the correlation key we set in the Modeler when configuring the message event. Zeebe requires both of these fields to be able to correlate a message to a process instance. Because we have two process instances with two distinct `orderId`, we'll need to publish two messages. Run these two commands one after the other:
 

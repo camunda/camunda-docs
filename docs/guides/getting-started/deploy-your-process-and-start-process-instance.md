@@ -8,8 +8,8 @@ import TabItem from "@theme/TabItem";
 
 <Tabs groupId="modeler" defaultValue="console" values={
 [
-{label: 'Cloud Modeler', value: 'console', },
-{label: 'Zeebe Modeler', value: 'desktop', },
+{label: 'Console Modeler', value: 'console', },
+{label: 'Camunda Modeler', value: 'desktop', },
 ]
 }>
 
