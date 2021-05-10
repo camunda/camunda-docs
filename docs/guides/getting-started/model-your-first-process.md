@@ -17,9 +17,9 @@ In Camunda Cloud you have two options to design and deploy a process: the Consol
 
 <TabItem value='console'>
 
-Using the Console Modeler, processes can be designed and deployed, and new instances can be created directly from the console.
+Using the Cloud Modeler, processes can be designed and deployed, and new instances can be created directly from the console.
 
-You can find all your saved models under the **BPMN Diagrams** tab
+You can find all your saved models under the **Diagrams** tab
 
 Click **Create New Diagram**.
 
