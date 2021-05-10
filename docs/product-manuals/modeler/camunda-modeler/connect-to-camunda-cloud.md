@@ -3,7 +3,7 @@ id: connect-to-camunda-cloud
 title: Connect to Camunda Cloud
 ---
 
-The Zeebe Modeler can communicate directly with Camunda Cloud. Click on the deployment icon:
+The Camunda Modeler can communicate directly with Camunda Cloud. Click on the deployment icon:
 
 ![deployment icon](./img/deploy-icon.png)
 

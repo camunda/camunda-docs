@@ -4,7 +4,7 @@ title: "Local installation"
 sidebar_label: "Install"
 ---
 
-This page guides you through the initial installation of the Zeebe broker and Zeebe Modeler for development purposes.
+This page guides you through the initial installation of the Zeebe broker and Camunda Modeler for development purposes.
 
 ## Prerequisites
 
@@ -37,8 +37,8 @@ bash
 23:39:13.273 [] [main] INFO  io.zeebe.broker.system - Starting broker with configuration {
 ```
 
-## Install the Zeebe Modeler
+## Install the Camunda Modeler
 
-The Zeebe Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe.
+The Camunda Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe.
 
-[You can download the most recent Zeebe Modeler release here.](https://github.com/zeebe-io/zeebe-modeler/releases)
+[You can download the most recent Camunda Modeler release here.](https://camunda.com/download/modeler/)

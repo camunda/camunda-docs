@@ -3,7 +3,7 @@ id: model-your-first-diagram
 title: Model your first diagram
 ---
 
-After [downloading](./install-the-modeler.md), setting up, and starting the Zeebe Modeler, you can model your first BPMN diagram. Create a new BPMN diagram.
+After [downloading](./install-the-modeler.md), setting up, and starting the Camunda Modeler, you can model your first BPMN diagram. Create a new BPMN diagram.
 
 ![empty application](./img/empty.png)
 
