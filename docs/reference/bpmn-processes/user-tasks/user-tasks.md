@@ -12,7 +12,7 @@ stops at this point and waits until the job is completed.
 
 Applications like [Tasklist] can be used by humans to complete these tasks.
 Alternative a job worker can subscribe to the job type
-`io.camunda.zeebe:userTask` to complete the job manully.
+`io.camunda.zeebe:userTask` to complete the job manually.
 
 When the job is completed, the user task gets completed and the process
 instance continues.
