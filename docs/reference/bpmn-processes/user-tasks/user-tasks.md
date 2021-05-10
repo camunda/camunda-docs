@@ -29,7 +29,7 @@ extension element of the process element.
 ## Variable mappings
 
 By default, all job variables are merged into the process instance. This
-behavior can be customized by defining an output mapping at the service task.
+behavior can be customized by defining an output mapping at the user task.
 
 Input mappings can be used to transform the variables into a format that is
 accepted by the job worker.
