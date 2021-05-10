@@ -1,7 +1,7 @@
 ---
 id: create-camunda-cloud-account
 title: Sign up & log in
-slug: /getting-started/
+slug: /guides/getting-started/
 ---
 
 ## Sign up for Camunda Cloud
