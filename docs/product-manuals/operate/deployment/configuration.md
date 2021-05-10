@@ -180,7 +180,7 @@ that can be further adjusted to your needs:
     </Console>
   </Appenders>
   <Loggers>
-    <Logger name="org.camunda.operate" level="info" />
+    <Logger name="io.camunda.operate" level="info" />
     <Root level="info">
       <AppenderRef ref="${env:OPERATE_LOG_APPENDER:-Console}"/>
     </Root>
@@ -201,13 +201,13 @@ OPERATE_LOG_APPENDER=Stackdriver
 
 ### Change logging level at runtime
 
-Operate supports the default scheme for changing logging levels as provided by [Spring Boot](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers)
+Operate supports the default scheme for changing logging levels as provided by [Spring Boot](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers).
 
 The log level for Operate can be changed by following the [Setting a Log Level](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers-setting-level) section.
 
 #### Set all Operate loggers to DEBUG:
 ```shell
-curl 'http://localhost:8080/actuator/loggers/org.camunda.operate' -i -X POST \
+curl 'http://localhost:8080/actuator/loggers/io.camunda.operate' -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"configuredLevel":"debug"}'
 ```
