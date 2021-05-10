@@ -17,6 +17,7 @@ The following BPMN elements are currently implemented in Zeebe:
 ## Tasks
 
 * [Service tasks](service-tasks/service-tasks.md)
+* [User tasks](user-tasks/user-tasks.md)
 * [Receive tasks](receive-tasks/receive-tasks.md)
 
 ## Gateways
