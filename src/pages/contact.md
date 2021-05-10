@@ -15,6 +15,6 @@ There are various channels where you can reach us.
 
 - For **security-related issues**, please review our [Security notices](../../docs/reference/notices) for the most up-to-date information on known issues and steps to report a vulnerability so we can solve the problem as quickly as possible. Do not use GitHub for security-related issues.
 
-- **Feedback and Support** can be submitted or requested via the corresponding entry in the [Cloud Console navigation menu](../../docs/product-manuals/cloud-console/troubleshooting/feedback-and-support). 
+- **Feedback and Support** can be submitted or requested via JIRA for subscription or enterprise customers in the Support project. Otherwise, please use the [Camunda Cloud community forum](https://forum.camunda.io/). For more information about Enterprise support and additional support resources please see [Enterprise Support](https://camunda.com/support/).
 
 - For sales inquiries or anything not listed above, please use our [Contact Us](https://camunda.com/contact/) form. 
