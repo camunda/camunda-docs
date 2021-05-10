@@ -114,11 +114,6 @@ module.exports = {
               href: "https://zeebe.io/blog/",
             },
             {
-              label: "GitHub",
-              href:
-                "https://github.com/camunda-cloud/camunda-cloud-documentation",
-            },
-            {
               label: "Privacy Statement",
               href: "https://camunda.com/legal/privacy/",
             },
