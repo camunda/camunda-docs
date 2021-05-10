@@ -49,9 +49,8 @@ A business error is expected and is handled in the process. The process may take
 
 ## Additional resources
 
- <details>
-   <summary>XML representation</summary>
-   <p>A boundary error event:
+ ### XML Representation
+A boundary error event:
 
 ```xml
 <bpmn:error id="invalid-credit-card-error" errorCode="Invalid Credit Card" />
@@ -62,68 +61,6 @@ A business error is expected and is handled in the process. The process may take
 
 ```
 
-   </p>
- </details>
-
- <details>
-   <summary>Using the BPMN modeler</summary>
-   <p>Adding an error boundary event:
-
-![bpmn-modeler](assets/bpmn-modeler-error-events.gif)
-
-   </p>
- </details>
-
- <details>
-   <summary>Process lifecycle</summary>
-   <p>Process instance records of an error boundary event:
-
- <table>
-     <tr>
-         <th>Intent</th>
-         <th>Element Id</th>
-         <th>Element Type</th>
-     </tr>
-     <tr>
-         <td>EVENT_OCCURRED</td>
-         <td>collect-money</td>
-         <td>SERVICE_TASK</td>
-     </tr>
-     <tr>
-       <td>ELEMENT_TERMINATING</td>
-       <td>collect-money</td>
-       <td>SERVICE_TASK</td>
-     </tr>
-     <tr>
-        <td>ELEMENT_TERMINATED</td>
-        <td>collect-money</td>
-        <td>SERVICE_TASK</td>
-      </tr>
-      <tr>
-         <td>ELEMENT_ACTIVATING</td>
-         <td>invalid-credit-card</td>
-         <td>BOUNDARY_EVENT</td>
-     </tr>
-     <tr>
-         <td>ELEMENT_ACTIVATED</td>
-         <td>invalid-credit-card</td>
-         <td>BOUNDARY_EVENT</td>
-     </tr>
-     <tr>
-         <td>ELEMENT_COMPLETING</td>
-         <td>invalid-credit-card</td>
-         <td>BOUNDARY_EVENT</td>
-     </tr>
-     <tr>
-         <td>ELEMENT_COMPLETED</td>
-         <td>invalid-credit-card</td>
-         <td>BOUNDARY_EVENT</td>
-     </tr>
- </table>
-
-   </p>
- </details>
-
-References:
+### References
 
 - [Incidents](/product-manuals/concepts/incidents.md)

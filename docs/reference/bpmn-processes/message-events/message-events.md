@@ -51,9 +51,8 @@ By default, all message variables are merged into the process instance. This beh
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>A message start event with message definition:
+### XML Representation
+A message start event with message definition:
 
 ```xml
 <bpmn:message id="Message_0z0aft4" name="order-placed" />
@@ -86,99 +85,7 @@ A boundary message event:
 </bpmn:boundaryEvent>
 ```
 
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding an intermediate message catch event:
-
-![message-event](assets/message-event.gif)
-
-  </p>
-</details>
-
-<details>
-  <summary>Process lifecycle</summary>
-  <p>Process instance records of a message start event:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-    <tr>
-        <td>EVENT_OCCURRED</td>
-        <td>order-placed</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>order-placed</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>order-placed</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>order-placed</td>
-        <td>START_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>order-placed</td>
-        <td>START_EVENT</td>
-    </tr>
-</table>
-
-Process instance records of an intermediate message catch event:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>order-delivered</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>order-delivered</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>EVENT_OCCURRED</td>
-        <td>money-collected</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>money-collected</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>money-collected</td>
-        <td>INTERMEDIATE_CATCH_EVENT</td>
-    </tr>
-</table>
-
-  </p>
-</details>
-
-References:
+### References
 
 - [Message correlation](/product-manuals/concepts/messages.md)
 - [Expressions](/product-manuals/concepts/expressions.md)

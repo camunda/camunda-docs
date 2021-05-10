@@ -29,9 +29,8 @@ By default, all message variables are merged into the process instance. This beh
 
 ## Additional resources
 
-<details>
-  <summary>XML representation</summary>
-  <p>A receive task with message definition:
+### XML Representation
+A receive task with message definition:
 
 ```xml
 <bpmn:message id="Message_1iz5qtq" name="Money collected">
@@ -45,64 +44,7 @@ By default, all message variables are merged into the process instance. This beh
 </bpmn:receiveTask>
 ```
 
-  </p>
-</details>
-
-<details>
-  <summary>Using the BPMN modeler</summary>
-  <p>Adding a receive task with message:
-
-![receive-task](assets/receive-task.gif)
-
-  </p>
-</details>
-
-<details>
-  <summary>Process Lifecycle</summary>
-  <p>Process instance records of a receive task:
-
-<table>
-    <tr>
-        <th>Intent</th>
-        <th>Element Id</th>
-        <th>Element Type</th>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATING</td>
-        <td>money-collected</td>
-        <td>RECEIVE_TASK</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_ACTIVATED</td>
-        <td>money-collected</td>
-        <td>RECEIVE_TASK</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    <tr>
-        <td>EVENT_OCCURRED</td>
-        <td>money-collected</td>
-        <td>RECEIVE_TASK</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETING</td>
-        <td>money-collected</td>
-        <td>RECEIVE_TASK</td>
-    </tr>
-    <tr>
-        <td>ELEMENT_COMPLETED</td>
-        <td>money-collected</td>
-        <td>RECEIVE_TASK</td>
-    </tr>
-</table>
-
-  </p>
-</details>
-
-References:
+### References
 
 - [Message correlation](/product-manuals/concepts/messages.md)
 - [Expressions](/product-manuals/concepts/expressions.md)
