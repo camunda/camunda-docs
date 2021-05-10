@@ -3,7 +3,7 @@ id: install
 title: "Docker container"
 ---
 
-This page guides you through the initial installation of the Zeebe broker and Zeebe Modeler for development purposes.
+This page guides you through the initial installation of the Zeebe broker and Camunda Modeler for development purposes.
 
 ## Using Docker
 
@@ -141,8 +141,8 @@ Verify that you can connect to Zeebe:
 telnet 192.168.99.100 26500
 ```
 
-## Install the Zeebe Modeler
+## Install the Camunda Modeler
 
-The Zeebe Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe.
+The Camunda Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe.
 
-[You can download the most recent Zeebe Modeler release here.](https://github.com/zeebe-io/zeebe-modeler/releases)
+[You can download the most recent Camunda Modeler release here.](https://camunda.com/download/modeler/)

@@ -121,12 +121,12 @@ module.exports = {
             "product-manuals/modeler/cloud-modeler/start-instance",
             "product-manuals/modeler/cloud-modeler/model-overview",
           ],
-          "Zeebe Modeler": [
-            "product-manuals/modeler/zeebe-modeler/install-the-zeebe-modeler",
-            "product-manuals/modeler/zeebe-modeler/model-your-first-diagram",
-            "product-manuals/modeler/zeebe-modeler/connect-to-camunda-cloud",
-            "product-manuals/modeler/zeebe-modeler/deploy-to-cloud",
-            "product-manuals/modeler/zeebe-modeler/start-instance",
+          "Camunda Modeler": [
+            "product-manuals/modeler/camunda-modeler/install-the-modeler",
+            "product-manuals/modeler/camunda-modeler/model-your-first-diagram",
+            "product-manuals/modeler/camunda-modeler/connect-to-camunda-cloud",
+            "product-manuals/modeler/camunda-modeler/deploy-to-cloud",
+            "product-manuals/modeler/camunda-modeler/start-instance",
           ],
         },
       ],
