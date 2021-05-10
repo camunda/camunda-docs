@@ -15,19 +15,25 @@ module.exports = {
       ],
     },
     "guides/setting-up-development-project",
+    {
+        "Update Guide": [
+            "guides/update-guide/introduction",
+            "guides/update-guide/026-to-100",
+        ]
+	}
   ],
   "Product Manuals": [
     "product-manuals/overview",
     {
       Concepts: [
         "product-manuals/concepts/what-is-camunda-cloud",
-        "product-manuals/concepts/processes",              
-        "product-manuals/concepts/job-workers",        
+        "product-manuals/concepts/processes",
+        "product-manuals/concepts/job-workers",
         "product-manuals/concepts/process-instance-creation",
         "product-manuals/concepts/messages",
-        "product-manuals/concepts/incidents",   
+        "product-manuals/concepts/incidents",
         "product-manuals/concepts/variables",
-        "product-manuals/concepts/expressions",         
+        "product-manuals/concepts/expressions",
       ],
       Clients: [
         "product-manuals/clients/overview",
@@ -55,13 +61,13 @@ module.exports = {
             "product-manuals/clients/go-client/index",
             "product-manuals/clients/go-client/get-started",
           ]
-        },          
+        },
         {
           "CLI client": [
             "product-manuals/clients/cli-client/index",
             "product-manuals/clients/cli-client/get-started"
           ]
-        },                
+        },
         {
           "Community clients": [
             "product-manuals/clients/other-clients/index",
@@ -135,22 +141,22 @@ module.exports = {
             "product-manuals/zeebe/technical-concepts/index",
             "product-manuals/zeebe/technical-concepts/architecture",
             "product-manuals/zeebe/technical-concepts/clustering",
-            "product-manuals/zeebe/technical-concepts/partitions",            
-            "product-manuals/zeebe/technical-concepts/internal-processing",            
-            "product-manuals/zeebe/technical-concepts/process-lifecycles",            
+            "product-manuals/zeebe/technical-concepts/partitions",
+            "product-manuals/zeebe/technical-concepts/internal-processing",
+            "product-manuals/zeebe/technical-concepts/process-lifecycles",
             "product-manuals/zeebe/technical-concepts/protocols",
-            "product-manuals/zeebe/technical-concepts/exporters",        
+            "product-manuals/zeebe/technical-concepts/exporters",
           ],
         },
         {
           "Deployment guide": [
-            "product-manuals/zeebe/deployment-guide/index",  
-            {              
+            "product-manuals/zeebe/deployment-guide/index",
+            {
               "Local installation": [
                 "product-manuals/zeebe/deployment-guide/local/install",
-                "product-manuals/zeebe/deployment-guide/local/quickstart",  
+                "product-manuals/zeebe/deployment-guide/local/quickstart",
               ]
-            },              
+            },
             "product-manuals/zeebe/deployment-guide/docker/install",
             {
               "Kubernetes deployment": [
@@ -162,7 +168,7 @@ module.exports = {
                     "product-manuals/zeebe/deployment-guide/kubernetes/helm/installing-helm",
                     "product-manuals/zeebe/deployment-guide/kubernetes/helm/accessing-operate",
                   ]
-                },                
+                },
                 "product-manuals/zeebe/deployment-guide/kubernetes/operator/zeebe-operator",
               ],
             },
@@ -175,13 +181,13 @@ module.exports = {
                 "product-manuals/zeebe/deployment-guide/getting-started/create-process-instance",
                 "product-manuals/zeebe/deployment-guide/getting-started/next-steps-resources",
               ],
-            },  
+            },
             {
               Configuration: [
-                "product-manuals/zeebe/deployment-guide/configuration/configuration",  
-                "product-manuals/zeebe/deployment-guide/configuration/logging",  
+                "product-manuals/zeebe/deployment-guide/configuration/configuration",
+                "product-manuals/zeebe/deployment-guide/configuration/logging",
                 "product-manuals/zeebe/deployment-guide/configuration/gateway-health-probes",
-                "product-manuals/zeebe/deployment-guide/configuration/environment-variables",                                                
+                "product-manuals/zeebe/deployment-guide/configuration/environment-variables",
               ]
             },
             {
@@ -197,13 +203,13 @@ module.exports = {
                 "product-manuals/zeebe/deployment-guide/operations/resource-planning",
                 "product-manuals/zeebe/deployment-guide/operations/network-ports",
                 "product-manuals/zeebe/deployment-guide/operations/setting-up-a-cluster",
-                "product-manuals/zeebe/deployment-guide/operations/metrics",                             
+                "product-manuals/zeebe/deployment-guide/operations/metrics",
                 "product-manuals/zeebe/deployment-guide/operations/health",
                 "product-manuals/zeebe/deployment-guide/operations/backpressure",
                 "product-manuals/zeebe/deployment-guide/operations/disk-space",
                 "product-manuals/zeebe/deployment-guide/operations/upgrade-zeebe",
               ],
-            },            
+            },
           ]
         },
         {
@@ -211,7 +217,7 @@ module.exports = {
             "product-manuals/zeebe/open-source/community-contributions",
             "product-manuals/zeebe/open-source/get-help-get-involved",
           ]
-        },              
+        },
         {
             "Third-Party Libraries": [
                "product-manuals/zeebe/third-party-libraries/zeebe-dependencies",
@@ -323,7 +329,7 @@ module.exports = {
     "reference/announcements",
     "reference/licenses",
     "reference/notices",
-    "reference/release-policy",   
+    "reference/release-policy",
     "reference/supported-environments",
   ]
 };
