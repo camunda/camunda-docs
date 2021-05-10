@@ -1,6 +1,7 @@
 ---
 id: create-camunda-cloud-account
-title: Create Camunda Cloud account
+title: Sign up & log in
+slug: /getting-started/
 ---
 
 ## Sign up for Camunda Cloud
@@ -28,3 +29,12 @@ If you choose creating an account through the social signup button, you get redi
 Log in with your e-mail address and password you used in the previous form or use the social login buttons.
 
 ![login](./img/login.png)
+
+After login you'll see the console overview page. This is the central place to manage your clusters and the diagrams and forms you want to deploy to Camunda Cloud.
+
+For your convenience we have already created a Test-Cluster for you.
+
+![overview-gse](./img/cluster-overview-gse.png)
+
+You can either now get the guided tour through Camunda Cloud using the **Get Started** Button, work through the [Get Started repo](https://github.com/camunda-cloud/camunda-cloud-get-started), or continue following the documentation.
+
