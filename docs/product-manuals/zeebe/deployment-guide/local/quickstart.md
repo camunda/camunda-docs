@@ -44,9 +44,9 @@ To start a Zeebe broker use the `broker` or `broker.bat` file located in the
 ```
 
 ```
-23:39:13.246 [] [main] INFO  io.zeebe.broker.system - Scheduler configuration: Threads{cpu-bound: 2, io-bound: 2}.
-23:39:13.270 [] [main] INFO  io.zeebe.broker.system - Version: X.Y.Z
-23:39:13.273 [] [main] INFO  io.zeebe.broker.system - Starting broker with configuration {
+23:39:13.246 [] [main] INFO  io.camunda.zeebe.broker.system - Scheduler configuration: Threads{cpu-bound: 2, io-bound: 2}.
+23:39:13.270 [] [main] INFO  io.camunda.zeebe.broker.system - Version: X.Y.Z
+23:39:13.273 [] [main] INFO  io.camunda.zeebe.broker.system - Starting broker with configuration {
 ```
 
 You will see some output which contains the version of the broker and

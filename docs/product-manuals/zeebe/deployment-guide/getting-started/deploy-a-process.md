@@ -30,7 +30,7 @@ zeebe:
   broker:
     exporters:
       elasticsearch:
-        className: io.zeebe.exporter.ElasticsearchExporter
+        className: io.camunda.zeebe.exporter.ElasticsearchExporter
 ```
 
 These settings enable the Zeebe Elasticsearch exporter.

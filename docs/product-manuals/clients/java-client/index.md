@@ -10,7 +10,7 @@ To use the Java client library, declare the following Maven dependency in your p
 
 ```xml
 <dependency>
-  <groupId>io.zeebe</groupId>
+  <groupId>io.camunda</groupId>
   <artifactId>zeebe-client-java</artifactId>
   <version>${zeebe.version}</version>
 </dependency>
@@ -19,10 +19,10 @@ To use the Java client library, declare the following Maven dependency in your p
 If you are using Gradle, declare the following:
 
 ```groovy
-implementation 'io.zeebe:zeebe-client-java:${zeebe.version}'
+implementation 'io.camunda:zeebe-client-java:${zeebe.version}'
 ```
 
-Use the latest released version from [Maven Central](https://search.maven.org/artifact/io.zeebe/zeebe-client-java).
+Use the latest released version from [Maven Central](https://search.maven.org/artifact/io.camunda/zeebe-client-java).
 
 ## Bootstrapping
 
@@ -60,7 +60,7 @@ Let's go over this code snippet line by line:
 - Next we create the client passing in the address of the cluster we want to connect to as well as the credentials provider from the step above.
 - Finally, we send a test request to verify that the connection was established.
 
-See `io.zeebe.client.ZeebeClientBuilder` for a description of all available configuration properties.
+See `io.camunda.zeebe.client.ZeebeClientBuilder` for a description of all available configuration properties.
 
 Another, more compact, option is to pass in the connection settings via environment variables:
 

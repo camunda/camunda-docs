@@ -22,9 +22,9 @@ New configuration:
 ```yaml
 exporters:
   elasticsearch:
-    className: io.zeebe.exporter.ElasticsearchExporter
+    className: io.camunda.zeebe.exporter.ElasticsearchExporter
   debughttp:
-    className: io.zeebe.broker.exporter.debug.DebugHttpExporter
+    className: io.camunda.zeebe.broker.exporter.debug.DebugHttpExporter
 ```
 
 In terms of specifying values, there were two minor changes:

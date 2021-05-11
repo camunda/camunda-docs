@@ -10,7 +10,7 @@ Add `zeebe-test` as Maven test dependency to your project:
 
 ```xml
 <dependency>
-  <groupId>io.zeebe</groupId>
+  <groupId>io.camunda</groupId>
   <artifactId>zeebe-test</artifactId>
   <scope>test</scope>
 </dependency>
@@ -21,8 +21,8 @@ Add `zeebe-test` as Maven test dependency to your project:
 Use the `ZeebeTestRule` in your test case to start an embedded broker. It contains a client which can be used to deploy a BPMN process or create an instance.
 
 ```java
-import io.zeebe.client.ZeebeClient;
-import io.zeebe.client.api.response.ProcessInstanceEvent;
+import io.camunda.zeebe.client.ZeebeClient;
+import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

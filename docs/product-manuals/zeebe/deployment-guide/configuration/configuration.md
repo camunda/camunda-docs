@@ -109,7 +109,7 @@ To verify that the configuration was applied, start Zeebe and look at the log.
 If the configuration could be read, Zeebe will log out the effective configuration during startup:
 
 ```
-17:13:13.120 [] [main] INFO  io.zeebe.broker.system - Starting broker 0 with configuration {
+17:13:13.120 [] [main] INFO  io.camunda.zeebe.broker.system - Starting broker 0 with configuration {
   "network": {
     "host": "0.0.0.0",
     "portOffset": 0,
@@ -167,10 +167,10 @@ To enable Google Stackdriver compatible JSON logging you can set the environment
 Zeebe brokers expose a [Spring Boot Actuators web endpoint](https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#loggers)
 for configuring loggers dynamically.
 To change the log level of a logger make a `POST` request to the `/actuator/loggers/{logger.name}` endpoint as shown in the example below.
-Change `io.zeebe` to the required logger name and `debug` to required log level.
+Change `io.camunda.zeebe` to the required logger name and `debug` to required log level.
 
 ```
-curl 'http://localhost:9600/actuator/loggers/io.zeebe' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'
+curl 'http://localhost:9600/actuator/loggers/io.camunda.zeebe' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'
 ```
 
 ## Health probes

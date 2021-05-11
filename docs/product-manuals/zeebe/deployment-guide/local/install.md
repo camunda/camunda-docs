@@ -32,9 +32,9 @@ Once the Zeebe broker has started, it should produce the following output:
 
 ```
 bash
-23:39:13.246 [] [main] INFO  io.zeebe.broker.system - Scheduler configuration: Threads{cpu-bound: 2, io-bound: 2}.
-23:39:13.270 [] [main] INFO  io.zeebe.broker.system - Version: X.Y.Z
-23:39:13.273 [] [main] INFO  io.zeebe.broker.system - Starting broker with configuration {
+23:39:13.246 [] [main] INFO  io.camunda.zeebe.broker.system - Scheduler configuration: Threads{cpu-bound: 2, io-bound: 2}.
+23:39:13.270 [] [main] INFO  io.camunda.zeebe.broker.system - Version: X.Y.Z
+23:39:13.273 [] [main] INFO  io.camunda.zeebe.broker.system - Starting broker with configuration {
 ```
 
 ## Install the Camunda Modeler

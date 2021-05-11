@@ -48,7 +48,7 @@ To enable Google Stackdriver compatible JSON logging you can set the environment
   </Appenders>
 
   <Loggers>
-    <Logger name="io.zeebe" level="${env:ZEEBE_LOG_LEVEL:-info}"/>
+    <Logger name="io.camunda.zeebe" level="${env:ZEEBE_LOG_LEVEL:-info}"/>
 
     <Logger name="io.atomix" level="${env:ATOMIX_LOG_LEVEL:-warn}"/>
 
@@ -68,8 +68,8 @@ To enable Google Stackdriver compatible JSON logging you can set the environment
 Zeebe brokers expose a [Spring Boot Actuators web endpoint](https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#loggers)
 for configuring loggers dynamically.
 To change the log level of a logger make a `POST` request to the `/actuator/loggers/{logger.name}` endpoint as shown in the example below.
-Change `io.zeebe` to the required logger name and `debug` to required log level.
+Change `io.camunda.zeebe` to the required logger name and `debug` to required log level.
 
 ```
-curl 'http://localhost:9600/actuator/loggers/io.zeebe' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'
+curl 'http://localhost:9600/actuator/loggers/io.camunda.zeebe' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'
 ```
