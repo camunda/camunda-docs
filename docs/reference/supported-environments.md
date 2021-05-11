@@ -19,3 +19,10 @@ title: "Supported environments"
   Operate require OpenJDK 11+ and Elasticsearch 7.12.x
 - **Operate Browser App** - requires the latest version of Chrome, Firefox or
   Edge on Windows, MacOS and Linux
+  
+## Camunda Tasklist
+
+- **Tasklist Web App/Importer/Archiver** - the server components of Camunda
+  Tasklist require OpenJDK 11+ and Elasticsearch 7.12.x
+- **Tasklist Browser App** - requires the latest version of Chrome, Firefox or
+  Edge on Windows, MacOS and Linux
