@@ -1,0 +1,35 @@
+---
+id: claim-task
+title: claimTask
+---
+
+export const Tag = ({children, color}) => (
+<span
+style={{
+      backgroundColor: color,
+      borderRadius: '2px',
+      color: '#fff',
+      padding: '0.2rem',
+    }}>
+{children}
+</span>
+);
+
+Claim a task with taskId to currently logged in user. Returns the task.
+
+```graphql
+claimTask(
+  taskId: String!
+): Task!
+
+```
+
+### Arguments
+
+#### `taskId` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+
+### Type
+
+#### [`Task`](/docs/reference/tasklist-api/objects/task)
+
+Describes the User task.

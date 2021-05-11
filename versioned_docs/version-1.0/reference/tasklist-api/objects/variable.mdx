@@ -1,0 +1,31 @@
+---
+id: variable
+title: Variable
+---
+
+export const Tag = ({children, color}) => (
+<span
+style={{
+      backgroundColor: color,
+      borderRadius: '2px',
+      color: '#fff',
+      padding: '0.2rem',
+    }}>
+{children}
+</span>
+);
+
+Variable used in task.
+
+```graphql
+type Variable {
+  name: String!
+  value: String!
+}
+```
+
+### Fields
+
+#### `name` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+
+#### `value` ([`String!`](/docs/reference/tasklist-api/scalars/string))

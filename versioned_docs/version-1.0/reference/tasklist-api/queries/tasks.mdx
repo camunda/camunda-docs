@@ -1,0 +1,35 @@
+---
+id: tasks
+title: tasks
+---
+
+export const Tag = ({children, color}) => (
+<span
+style={{
+      backgroundColor: color,
+      borderRadius: '2px',
+      color: '#fff',
+      padding: '0.2rem',
+    }}>
+{children}
+</span>
+);
+
+Get list of tasks based on `TaskQuery`.
+
+```graphql
+tasks(
+  query: TaskQuery!
+): [Task!]!
+
+```
+
+### Arguments
+
+#### `query` ([`TaskQuery!`](/docs/reference/tasklist-api/inputs/task-query))
+
+### Type
+
+#### [`Task`](/docs/reference/tasklist-api/objects/task)
+
+Describes the User task.
