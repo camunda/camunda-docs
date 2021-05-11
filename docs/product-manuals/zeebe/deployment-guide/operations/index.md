@@ -13,4 +13,4 @@ This chapter covers topics relevant for anyone who wants to operate Zeebe in pro
 - [Health status](health.md) - Lists available high level health and liveness probes.
 - [Backpressure](backpressure.md) - Discusses the backpressure mechanism used by Zeebe brokers.
 - [Disk space](disk-space.md) - Explains how to set limits for the amount of free disk space. Once these limits are undercut, Zeebe will degrade gracefully to allow the operations team to provide more disk space.
-- [Upgrade zeebe](upgrade-zeebe.md) - Contains information on how to perform a rolling upgrade.
+- [Update zeebe](update-zeebe.md) - Contains information on how to perform a rolling upgrade.

@@ -207,7 +207,7 @@ module.exports = {
                 "product-manuals/zeebe/deployment-guide/operations/health",
                 "product-manuals/zeebe/deployment-guide/operations/backpressure",
                 "product-manuals/zeebe/deployment-guide/operations/disk-space",
-                "product-manuals/zeebe/deployment-guide/operations/upgrade-zeebe",
+                "product-manuals/zeebe/deployment-guide/operations/update-zeebe",
               ],
             },
           ]
