@@ -34,7 +34,6 @@ module.exports = {
         {
           "Java client": [
             "product-manuals/clients/java-client/index",
-            "product-manuals/clients/java-client/get-started",
             "product-manuals/clients/java-client/logging",
             "product-manuals/clients/java-client/testing",
             {
