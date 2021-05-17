@@ -118,7 +118,11 @@ function Footer() {
           </div>
         )}
       </div>
-      
+      <Head>
+        {/* Osano (Consent) */}
+        <script src="https://cmp.osano.com/16CVvwSNKHi9t1grQ/2ce963c0-31c9-4b54-b052-d66a2a948ccc/osano.js"></script>
+        {/* Global site tag (gtag.js) - Google Analytics */}
+      </Head>
     </footer>
   );
 }
