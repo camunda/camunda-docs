@@ -9,7 +9,6 @@ import clsx from "clsx";
 import Head from "@docusaurus/Head";
 import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
-import googleanalytics from "./gtag";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
 
@@ -122,6 +121,11 @@ function Footer() {
         {/* Osano (Consent) */}
         <script src="https://cmp.osano.com/16CVvwSNKHi9t1grQ/2ce963c0-31c9-4b54-b052-d66a2a948ccc/osano.js"></script>
         {/* Global site tag (gtag.js) - Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-KQGNSTS"
+        ></script>
+        
       </Head>
     </footer>
   );
