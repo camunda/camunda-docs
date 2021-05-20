@@ -3,8 +3,8 @@ id: rust
 title: "Rust"
 ---
 
-The Rust client, Zeebest, is maintained by [Mackenzie Clark](https://github.com/xmclark).
+The Rust client, Zeebest, was previously maintained by [Mackenzie Clark](https://github.com/xmclark), and is currently seeking a new Maintainer!
 
-* [Source code](https://github.com/xmclark/zeebest)
+* [Source code](https://github.com/camunda-community-hub/zeebest)
 * [Rust crate](https://docs.rs/zeebest/0.20.0/zeebest/)
 * [Podcast interview with Mackenzie Clark](https://zeebe.buzzsprout.com/454051/1478953-zeebe-and-rust-interview-with-mackenzie-clark)
