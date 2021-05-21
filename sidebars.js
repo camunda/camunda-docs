@@ -40,6 +40,7 @@ module.exports = {
         {
           "Java client": [
             "product-manuals/clients/java-client/index",
+            "product-manuals/clients/java-client/job-worker",
             "product-manuals/clients/java-client/logging",
             "product-manuals/clients/java-client/testing",
             {
