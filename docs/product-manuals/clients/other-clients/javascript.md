@@ -15,7 +15,7 @@ The Zeebe Node client is maintained by [Josh Wulf](https://github.com/jwulf). It
 
 The NestJS client is maintained by [Dan Shapir](https://github.com/danshapir). It is a microservice transport that integrates Zeebe with the [NestJS](https://nestjs.com/) framework.
 
-- [Source code](https://github.com/camunda-community-hub/nestjs-zeebe#readme)
+- [Source code](https://github.com/camunda-community-hub/nestjs-zeebe)
 - [NPM package](https://www.npmjs.com/package/@payk/nestjs-zeebe)
 - [Podcast interview with Dan Shapir](https://zeebe.buzzsprout.com/454051/1989112-zeebe-and-nestjs)
 
