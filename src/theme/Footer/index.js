@@ -11,6 +11,7 @@ import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
+import googletagmanager from "./gtm";
 
 function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }) {
   const toUrl = useBaseUrl(to);
@@ -120,12 +121,12 @@ function Footer() {
       <Head>
         {/* Osano (Consent) */}
         <script src="https://cmp.osano.com/16CVvwSNKHi9t1grQ/2ce963c0-31c9-4b54-b052-d66a2a948ccc/osano.js"></script>
-        {/* Global site tag (gtag.js) - Google Analytics */}
+        {/* Global site tag (gtm.js) - Google Analytics */}
         <script
           async
           src="https://www.googletagmanager.com/gtm.js?id=GTM-KQGNSTS"
         ></script>
-        
+        {googletagmanager()}
       </Head>
     </footer>
   );
