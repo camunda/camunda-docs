@@ -11,13 +11,13 @@ In [the last section](./implement-service-task.md) we connected a worker that wi
 Use the following conditional expression for the "Pong" sequence flow:
 
 ```bash
-=return="Pong"
+= return = "Pong"
 ```
 
 And for the else sequence flow:
 
 ```bash
-=return!="Pong"
+= return != "Pong"
 ```
 
 <Tabs groupId="modeler" defaultValue="console" values={
