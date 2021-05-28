@@ -18,6 +18,12 @@ module.exports = {
 //        linkRoot: "/docs/"
 //      },
 //    ],
+      [
+        require.resolve('docusaurus-gtm-plugin'),
+        {
+         id: 'GTM-KQGNSTS', // GTM Container ID
+        }
+      ]
     ],
   themeConfig: {
     navbar: {
