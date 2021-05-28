@@ -39,4 +39,3 @@ The backoff strategy is especially useful for dealing with the `GRPC_STATUS_RESO
 This error code indicates the Zeebe cluster is currently under too much load and has decided to reject this request.
 By backing off, the job worker helps Zeebe by reducing the load.
 Note, that Zeebe's [backpressure mechanism](../../zeebe/deployment-guide/operations/backpressure) can also be configured.
-
