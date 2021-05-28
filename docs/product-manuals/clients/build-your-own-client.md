@@ -7,8 +7,8 @@ If you're using a technology for which there is no library yet, you can easily i
 
 See these two blog posts about creating a client:
 
-- [Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial](https://zeebe.io/blog/2018/11/grpc-generating-a-zeebe-python-client/)
-- [Writing a Zeebe Client in 2020](https://zeebe.io/blog/2020/06/zeebe-client-2020/)
+- [Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial](https://camunda.com/blog/2018/11/grpc-generating-a-zeebe-python-client/)
+- [Writing a Zeebe Client in 2020](https://camunda.com/blog/2020/06/zeebe-client-2020/)
 
 There are two essential steps:
 
@@ -71,10 +71,10 @@ export ACCESS_TOKEN=$(curl -s --request POST \
   --data "{\"client_id\":\"${ZEEBE_CLIENT_ID}\",\"client_secret\":\"${ZEEBE_CLIENT_SECRET}\",\"audience\":\"zeebe.camunda.io\",\"grant_type\":\"client_credentials\"}" | sed 's/.*access_token":"\([^"]*\)".*/\1/' )
 ```
 
-For the gRPC call you now need a proto buffer file (you can find it in the [zeebe.io repository](https://raw.githubusercontent.com/zeebe-io/zeebe/master/gateway-protocol/src/main/proto/gateway.proto)):
+For the gRPC call you now need a proto buffer file (you can find it in the [zeebe.io repository](https://raw.githubusercontent.com/camunda-cloud/zeebe/develop/gateway-protocol/src/main/proto/gateway.proto)):
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/zeebe-io/zeebe/master/gateway-protocol/src/main/proto/gateway.proto > /tmp/gateway.proto
+curl -sSL https://raw.githubusercontent.com/camunda-cloud/zeebe/develop/gateway-protocol/src/main/proto/gateway.proto > /tmp/gateway.proto
 ```
 
 Copy the `cluster id` of your Zeebe cluster (you can find it on the cluster detail view). Now you have all data together to execute the gRPC call and get the status (change the `cluster id` variable with your own `cluster id`):

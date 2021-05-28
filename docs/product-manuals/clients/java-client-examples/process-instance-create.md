@@ -10,7 +10,7 @@ title: "Create a process instance"
 
 ## ProcessInstanceCreator.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/process/ProcessInstanceCreator.java)
+[Source on github](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/process/ProcessInstanceCreator.java)
 
 ```java
 final ProcessInstanceEvent processInstanceEvent =

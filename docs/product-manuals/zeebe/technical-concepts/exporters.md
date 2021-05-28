@@ -15,7 +15,7 @@ An **exporter** provides a single entry point to process every record that is
 written on a stream.
 
 - Persist historical data by pushing it to an external data warehouse
-- Export records to a visualization tool (e.g. [zeebe-simple-monitor](https://github.com/zeebe-io/zeebe-simple-monitor/))
+- Export records to a visualization tool (e.g. [zeebe-simple-monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor))
 
 Zeebe will only load exporters which are configured through the main Zeebe YAML
 configuration file.
@@ -25,7 +25,7 @@ will start receiving records. Note that it is only guaranteed to see records
 produced from that point on.
 
 You can find a reference implementation in the form of the Zeebe-maintained
-[ElasticSearch exporter](https://github.com/zeebe-io/zeebe/tree/develop/exporters/elasticsearch-exporter).
+[ElasticSearch exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
 
 The main impact exporters have on a Zeebe cluster is that they remove the burden
 of persisting data indefinitely.
@@ -41,7 +41,7 @@ reducing disk usage.
 
 Regardless of how an exporter is loaded (whether through an external JAR or not),
 all exporters interact in the same way with the broker, which is defined by the
-[Exporter interface](https://github.com/zeebe-io/zeebe/tree/develop/exporter-api/src/main/java/io/zeebe/exporter/api/Exporter.java).
+[Exporter interface](https://github.com/camunda-cloud/zeebe/tree/develop/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
 
 ## Loading
 
@@ -76,7 +76,7 @@ heavy work during instantiation/configuration.
 
 Exporter specific configuration is handled through the exporter's `[exporters.args]`
 nested map. This provides a simple `Map<String, Object>` which is passed directly
-in form of a [Configuration](https://github.com/zeebe-io/zeebe/tree/develop/exporter-api/src/main/java/io/zeebe/exporter/api/context/Configuration.java)
+in form of a [Configuration](https://github.com/camunda-cloud/zeebe/tree/develop/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Configuration.java)
 object when the broker calls the `Exporter#configure(Configuration)` method.
 
 Configuration occurs at two different phases: during the broker startup phase, and
@@ -87,7 +87,7 @@ once every time a leader is elected for a partition.
 At any given point, there is exactly one leader
 node for a given partition. Whenever a node becomes the leader for a partition, one
 of the things it will do is run an instance of an
-[exporter stream processor](https://github.com/zeebe-io/zeebe/tree/develop/broker/src/main/java/io/zeebe/broker/exporter/stream/ExporterDirector.java).
+[exporter stream processor](https://github.com/camunda-cloud/zeebe/tree/develop/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).
 
 This stream processor will create exactly one instance of each configured exporter,
 and forward every record written on the stream to each of these in turn.

@@ -15,7 +15,7 @@ title: "Open a job worker"
 
 ## JobWorkerCreator.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/job/JobWorkerCreator.java)
+[Source on github](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/job/JobWorkerCreator.java)
 
 ```java
         ...

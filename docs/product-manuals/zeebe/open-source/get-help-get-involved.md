@@ -11,7 +11,7 @@ The best place to ask questions about Zeebe and to troubleshoot issues is the fo
 
 The Zeebe team monitors the forum closely, and we do our best to respond to all questions in a timely manner.
 
-[Go to the forum](https://forum.zeebe.io)
+[Go to the forum](https://forum.camunda.io)
 
 ### Public Slack group
 
@@ -25,4 +25,4 @@ Did you find a problem in Zeebe? Or do you have a suggestion for an improvement?
 
 You can create an issue in the Zeebe GitHub project to let us know.
 
-[Go to issues in the Zeebe GitHub repository](https://github.com/zeebe-io/zeebe/issues)
+[Go to issues in the Zeebe GitHub repository](https://github.com/camunda-cloud/zeebe/issues)

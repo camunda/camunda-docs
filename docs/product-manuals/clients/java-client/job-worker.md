@@ -32,7 +32,7 @@ This gives a Zeebe cluster some time to recover from a failure.
 In some cases, you may want to configure this backoff strategy to better fit your situation.
 
 The retry delay (i.e. the time the job worker waits after an error before the next poll for new jobs) is provided by the [`BackoffSupplier`](https://github.com/camunda-cloud/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/api/worker/BackoffSupplier.java).
-You can replace it using the `.backoffSupplier()` method on the [`JobWorkerBuilder`](https://github.com/zeebe-io/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/api/worker/JobWorkerBuilderStep1.java).
+You can replace it using the `.backoffSupplier()` method on the [`JobWorkerBuilder`](https://github.com/camunda-cloud/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/api/worker/JobWorkerBuilderStep1.java).
 By default, the job worker uses an exponential backoff implementation, which can you can configure using `BackoffSupplier.newBackoffBuilder()`.
 
 The backoff strategy is especially useful for dealing with the `GRPC_STATUS_RESOURCE_EXHAUSTED` error response (see [gRPC Technical Error Handling](../../../reference/grpc#technical-error-handling)).
