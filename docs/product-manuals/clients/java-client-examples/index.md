@@ -4,7 +4,7 @@ title: "Java examples"
 sidebar_label: "Overview"
 ---
 
-These examples are accessible in the [zeebe github repository](https://github.com/zeebe-io/zeebe/) on the [develop branch](https://github.com/zeebe-io/zeebe/tree/develop/samples).
+These examples are accessible in the [zeebe github repository](https://github.com/camunda-cloud/zeebe/) on the [develop branch](https://github.com/camunda-cloud/zeebe/tree/develop/samples).
 
 Instructions to access code locally:
 

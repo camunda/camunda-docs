@@ -23,14 +23,14 @@ Below are the components you'll use in the tutorial. The easiest way to run them
 You can also download the full distributions for these components, instead of running them with Docker.
 
 1.  [Camunda Modeler](https://camunda.com/download/modeler/): A desktop modeling tool that we'll use to create and configure our process before we deploy it to Zeebe.
-1.  [Zeebe Distribution](https://github.com/zeebe-io/zeebe/releases/tag/0.20.0): The Zeebe distribution contains the workflow engine where we'll deploy our process model; the engine is also responsible for managing the state of active process instances. Included in the distro is the Zeebe CLI, which we'll use throughout the tutorial. Please use Zeebe 0.20.0.
-1.  [Camunda Operate](https://github.com/zeebe-io/zeebe/releases/tag/0.20.0): An operations tool for monitoring and troubleshooting live process instances in Zeebe. Operate is currently available for free and unrestricted _non-production use_.
+1.  [Zeebe Distribution](https://github.com/camunda-cloud/zeebe/releases/tag/0.20.0): The Zeebe distribution contains the workflow engine where we'll deploy our process model; the engine is also responsible for managing the state of active process instances. Included in the distro is the Zeebe CLI, which we'll use throughout the tutorial. Please use Zeebe 0.20.0.
+1.  [Camunda Operate](https://github.com/camunda-cloud/zeebe/releases/tag/0.20.0): An operations tool for monitoring and troubleshooting live process instances in Zeebe. Operate is currently available for free and unrestricted _non-production use_.
 1.  [Elasticsearch 6.8.0](https://www.elastic.co/downloads/past-releases/elasticsearch-6-8-0): An open-source distributed datastore that can connect to Zeebe to store process data for auditing, visualization, analysis, etc. Camunda Operate uses Elasticsearch as its underlying datastore, which is why you need to download Elasticsearch to complete this tutorial. Operate and Zeebe are compatible with Elasticsearch 6.8.0.
 
 In case you're already familiar with BPMN and how to create a BPMN model in Camunda Modeler, you can find the finished model that we create during the tutorial here: [Zeebe Getting Started Tutorial Process Model](assets/order-process.bpmn).
 
 If you're using the finished model we provide rather than building your own, you can also move ahead to [section 3.3: Deploy a Process](deploy-a-process.md).
 
-And if you have questions or feedback about the tutorial, we encourage you to visit the [Zeebe user forum](https://forum.zeebe.io) and ask a question.
+And if you have questions or feedback about the tutorial, we encourage you to visit the [Camunda Cloud user forum](https://forum.camunda.io) and ask a question.
 
 There's a "Getting Started" category for topics that you can use when you ask your question or give feedback.

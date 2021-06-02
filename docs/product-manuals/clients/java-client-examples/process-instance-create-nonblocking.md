@@ -10,7 +10,7 @@ title: "Create non-blocking process instances"
 
 ## NonBlockingProcessInstanceCreator.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/process/NonBlockingProcessInstanceCreator.java)
+[Source on github](https://github.com/camunda-cloud/zeebe/blob/develop/samples/src/main/java/io/camunda/zeebe/example/process/NonBlockingProcessInstanceCreator.java)
 
 ```java
 long instancesCreating = 0;

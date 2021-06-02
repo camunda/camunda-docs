@@ -14,7 +14,7 @@ title: "Deploy a process"
 
 ## ProcessDeployer.java
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/java/io/zeebe/example/process/ProcessDeployer.java)
+[Source on github](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/process/ProcessDeployer.java)
 
 ```java
 final DeploymentEvent deploymentEvent =
@@ -26,7 +26,7 @@ final DeploymentEvent deploymentEvent =
 
 ## demoProcess.bpmn
 
-[Source on github](https://github.com/zeebe-io/zeebe/tree/develop/samples/src/main/resources/demoProcess.bpmn)
+[Source on github](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/resources/demoProcess.bpmn)
 
 Download the XML and save it in the Java classpath before running the example. Open the file with Camunda Modeler for a graphical representation.
 

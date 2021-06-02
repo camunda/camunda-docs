@@ -14,7 +14,7 @@ An installation can be done quickly via the package manager `npm`. The correspon
 npm i -g zbctl
 ```
 
-You can also download a binary for your Operating System from the [Zeebe GitHub releases page](https://github.com/zeebe-io/zeebe/releases).
+You can also download a binary for your Operating System from the [Zeebe GitHub releases page](https://github.com/camunda-cloud/zeebe/releases).
 
 ## Connection settings
 

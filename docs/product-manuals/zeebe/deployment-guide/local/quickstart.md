@@ -8,7 +8,7 @@ the need to write a single line of code in 5 steps.
 
 ## Step 1: Download the Zeebe distribution
 
-You can download the latest distribution from the [Zeebe release page](https://github.com/zeebe-io/zeebe/releases).
+You can download the latest distribution from the [Zeebe release page](https://github.com/camunda-cloud/zeebe/releases).
 
 Extract the archive and enter the Zeebe directory.
 
@@ -221,4 +221,4 @@ kill %1 %2 %3
 ```
 
 If you want to visualize the state of the process instances you can start the
-[Zeebe simple monitor](https://github.com/zeebe-io/zeebe-simple-monitor).
+[Zeebe simple monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), a community maintained project.

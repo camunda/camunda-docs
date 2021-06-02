@@ -5,7 +5,7 @@ title: "Authorization"
 
 Zeebe clients also provide a way for users to modify gRPC call headers, namely to contain access tokens. Note that the gateway doesn't provide any way of validating these headers, so users must implement a reverse proxy with a gRPC interceptor to validate them.
 
-Users can modify gRPC headers using Zeebe's built-in `OAuthCredentialsProvider`, which uses user-specified credentials to contact a OAuth authorization server. The authorization server should return an access token that is then appended to each gRPC request. Although, by default `OAuthCredentialsProvider` is configured with to use a Camunda Cloud authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/zeebe-io/zeebe/blob/develop/clients/java/src/main/java/io/zeebe/client/CredentialsProvider.java). In the following sections we will describe the `CredentialsProvider` interface as well as the built-in implementation.
+Users can modify gRPC headers using Zeebe's built-in `OAuthCredentialsProvider`, which uses user-specified credentials to contact a OAuth authorization server. The authorization server should return an access token that is then appended to each gRPC request. Although, by default `OAuthCredentialsProvider` is configured with to use a Camunda Cloud authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/camunda-cloud/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/CredentialsProvider.java). In the following sections we will describe the `CredentialsProvider` interface as well as the built-in implementation.
 
 ## Credentials provider
 
