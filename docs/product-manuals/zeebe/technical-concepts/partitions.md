@@ -37,6 +37,48 @@ A partition is a persistent append-only event stream. Initially, a partition is 
 
 For fault tolerance, data in a partition is replicated from the _leader_ of the partition to its _followers_. Followers are other Zeebe broker nodes that maintain a copy of the partition without performing event processing.
 
+## Partition Distribution
+
+If no other configuration is specified, partitions are distributed in a guaranteed round-robin fashion across all brokers in the cluster, considering the number of nodes, number of partitions, and the replication factor. For example, the first partition will always be hosted by the first node, plus the following nodes based on the replication factor. The second partition will be hosted on the second node and the following to fulfill the replication factor.
+
+As an example the following partition schemes are guaranteed
+
+### Example 1
+
+#### Context
+
+- Number of Nodes: 4
+- Number of Partitions: 7
+- Replication Factor: 3
+
+#### Partition Layout
+
+|             | Node 1 | Node 2 | Node 3 | Node 4 |
+| -----------:|:------:|:------:|:------:|:------:|
+| Partition 1 | X      | X      | X      |        |
+| Partition 2 |        | X      | X      | X      |
+| Partition 3 | X      |        | X      | X      |
+| Partition 4 |        |        |        | X      |
+| Partition 5 | X      | X      | X      |        |
+| Partition 6 |        | X      | X      | X      |
+| Partition 7 | X      |        | X      | X      |
+
+### Example 2
+
+#### Context
+
+- Number of Nodes: 5
+- Number of Partitions: 3
+- Replication Factor: 3
+
+#### Partition Layout
+
+|             | Node 1 | Node 2 | Node 3 | Node 4 | Node 5 |
+| -----------:|:------:|:------:|:------:|:------:|:------:|
+| Partition 1 | X      | X      | X      |        |        |
+| Partition 2 |        | X      | X      | X      |        |
+| Partition 3 |        |        | X      | X      | X      |
+
 ## Recommendations
 
 Choosing the number of partitions depends on the use case, workload, and cluster setup. Here are some rules of thumb:
