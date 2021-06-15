@@ -1,6 +1,6 @@
 ---
 id: message-correlation
-title: Getting Started with Message Correlation
+title: Message Correlation
 ---
 
 Message correlation is a powerful feature in Zeebe. It allows you to target a running workflow with a state update from an external system asynchronously. 

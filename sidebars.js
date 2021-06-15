@@ -15,6 +15,7 @@ module.exports = {
       ],
     },
     "guides/setting-up-development-project",
+    "guides/message-correlation",
     {
         "Update Guide": [
             "guides/update-guide/introduction",
