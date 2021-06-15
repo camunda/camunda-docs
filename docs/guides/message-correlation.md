@@ -7,7 +7,7 @@ Message correlation is a powerful feature in Zeebe. It allows you to target a ru
 
 This tutorial uses the JavaScript client, but it serves to illustrate message correlation concepts that are applicable to all language clients.
 
-We will use [Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor) to inspect the running workflow state. Simple Monitor is a community-supported tool, and is not designed to be used in production - however, it useful during development.
+We will use [Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor) to inspect the running workflow state. Simple Monitor is a community-supported tool, and is not designed to be used in production - however, it is useful during development.
 
 ## Workflow
 
