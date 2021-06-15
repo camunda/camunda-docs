@@ -3,9 +3,9 @@ id: message-correlation
 title: Message Correlation
 ---
 
-Message correlation is a powerful feature in Zeebe. It allows you to target a running workflow with a state update from an external system asynchronously. 
+Message correlation is a powerful feature in Camunda Cloud. It allows you to target a running workflow with a state update from an external system asynchronously. 
 
-This tutorial uses the JavaScript client, but it serves to illustrate message correlation concepts that are applicable to all language clients.
+This tutorial uses the [Node.js client](https://github.com/camunda-community-hub/zeebe-client-node-js), but it serves to illustrate message correlation concepts that are applicable to all language clients.
 
 We will use [Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor) to inspect the running workflow state. Simple Monitor is a community-supported tool, and is not designed to be used in production - however, it is useful during development.
 
@@ -148,6 +148,6 @@ A couple of common gotchas:
 
 ## Summary
 
-Message Correlation is a powerful feature in Zeebe. Knowing how messages are correlated, and how and when the message subscription is created is important to design systems that perform as expected.
+Message Correlation is a powerful feature in Camunda Cloud. Knowing how messages are correlated, and how and when the message subscription is created is important to design systems that perform as expected.
 
-And Simple Monitor is a useful tool for inspecting the behavior of a Zeebe system to figure out what is happening during development.
+And Simple Monitor is a useful tool for inspecting the behavior of a local Camunda Cloud system to figure out what is happening during development.
