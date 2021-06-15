@@ -10,21 +10,21 @@ module.exports = {
   organizationName: "camunda-cloud", // Usually your GitHub org/user name.
   projectName: "camunda-cloud-documentation", // Usually your repo name.
   plugins: [
-//    ["@edno/docusaurus2-graphql-doc-generator",
-//      {
-//        schema: "http://localhost:8080/tasklist/graphql",
-//        rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-//        baseURL: "reference/tasklist-api",
-//        linkRoot: "/docs/"
-//      },
-//    ],
-      [
-        require.resolve('docusaurus-gtm-plugin'),
-        {
-         id: 'GTM-KQGNSTS', // GTM Container ID
-        }
-      ]
+    //    ["@edno/docusaurus2-graphql-doc-generator",
+    //      {
+    //        schema: "http://localhost:8080/tasklist/graphql",
+    //        rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
+    //        baseURL: "reference/tasklist-api",
+    //        linkRoot: "/docs/"
+    //      },
+    //    ],
+    [
+      require.resolve("docusaurus-gtm-plugin"),
+      {
+        id: "GTM-KQGNSTS", // GTM Container ID
+      },
     ],
+  ],
   themeConfig: {
     navbar: {
       title: "Camunda Cloud Docs",
@@ -62,7 +62,7 @@ module.exports = {
       logo: {
         alt: "Camunda.com",
         src: "img/logo-light.svg",
-        href: "https://camunda.com"
+        href: "https://camunda.com",
       },
       links: [
         {
@@ -99,8 +99,7 @@ module.exports = {
             },
             {
               label: "GitHub",
-              href:
-                "https://github.com/camunda-cloud/camunda-cloud-documentation",
+              href: "https://github.com/camunda-cloud/camunda-cloud-documentation",
             },
           ],
         },
@@ -114,6 +113,10 @@ module.exports = {
             {
               label: "Cloud Console",
               href: "https://camunda.io",
+            },
+            {
+              label: "Status",
+              href: "https://status.camunda.io",
             },
             {
               label: "Blog",

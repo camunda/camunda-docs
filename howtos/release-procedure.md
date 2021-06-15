@@ -6,11 +6,11 @@ The complete documentation is fully versioned. This means that there will be no 
 
 ## Roles
 
-PM = Product Manager
-DEVEX = Developer Experience
-PT = Product Team (Zeebe/Operate/Tasklist/Cloud Console/..)
-RM = Release Manager
-AUTO = Automated task
+- PM = Product Manager
+- DEVEX = Developer Experience
+- PT = Product Team (Zeebe/Operate/Tasklist/Cloud Console/..)
+- RM = Release Manager
+- AUTO = Automated task
 
 ## Perform a Minor Release (MR)
 
