@@ -18,22 +18,6 @@ Please note:
 
 The officially offered client libraries (as well as the node client) have already integrated the auth routine and take care of obtaining and refreshing an access token and make use of a local cache.
 
-### Create a client
+import CreateClient from '../../../guides/getting-started/create-client-include.md'
 
-To create a new client you have to navigate into the `API` tab:
-
-![cluster-details](../../../guides/getting-started/img/cluster-detail-clients.png)
-
-Click **Create New Client** to create a new client and name your client accordingly.
-
-![create-client](../../../guides/getting-started/img/cluster-details-create-client.png)
-
-Make sure you keep the generated client credentials in a safe place - the **client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
-
-![created-client](../../../guides/getting-started/img/cluster-details-created-client.png)
-
-The downloaded file contains all necessary information to later on communicate with your zeebe instance:
-
-- `ZEEBE_ADDRESS`: address where your cluster can be reached.
-- `ZEEBE_CLIENT_ID` and `ZEEBE_CLIENT_SECRET`: credentials to request a new access token.
-- `ZEEBE_AUTHORIZATION_SERVER_URL`: a new token can be requested at this address, using the
+<CreateClient/>
