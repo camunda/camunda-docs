@@ -133,7 +133,7 @@ You will see that the message is correlated to the workflow instance, even thoug
 
 A couple of common gotchas:
 
-- The `correlationKey` in the BPMN message definition is the name of the workflow variable to match against. The `correlationKey` in the message is the concrete value to match against that variable in the workflow instance. Arguably, it might be more appropriately named `correlationValue` to make this distinction clearer. There is [a GitHub issue](https://github.com/zeebe-io/zeebe/issues/2718) around that - feel free to add your feedback.
+- The `correlationKey` in the BPMN message definition is the name of the workflow variable to match against. The `correlationKey` in the message is the concrete value to match against that variable in the workflow instance. 
 
  - An important thing to know is that the message subscription _is not updated after it is opened_. That is not an issue in the case of a message catch event, however for boundary message events (both interrupting and non-interrupting) the subscription is opened _as soon as the token enters the bounding subprocess_. If any service task modifies the `orderId` value inside the subprocess, the subscription will not be updated.  
  
