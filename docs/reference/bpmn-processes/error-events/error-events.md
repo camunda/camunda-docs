@@ -19,7 +19,8 @@ The `errorCode` is a `string` that must match to the error code that is sent by 
 
 ## Throwing the error
 
-An error can be thrown from a **client command** while processing a job.
+You can throw an error from a **client command** while processing a job.
+In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers.
 See the [gRPC command](/reference/grpc.md#throwerror-rpc) for details.
 
 Alternatively, an error can also be thrown inside a process using an error **end event**.
@@ -28,7 +29,7 @@ Alternatively, an error can also be thrown inside a process using an error **end
 
 ## Catching the error
 
-An error can be caught using an error **boundary event** or an error **event subprocess**.
+A thrown error can be caught using an error **boundary event** or an error **event subprocess**.
 
 The boundary event or the event subprocess must be interrupting.
 When the error is caught then the service task gets terminated and the boundary event or event subprocess gets activated.
@@ -42,11 +43,14 @@ In case the process instance is created via call activity, the error can also be
 
 ## Unhandled errors
 
-When an error is triggered then it should be handled in the process.
-If it is not handled (e.g. unexpected error code) then an **incident** is raised to indicate the failure.
-The incident is attached to the corresponding service task of the processed job or the error end event.
+When an error is thrown then it should be handled in the process.
+If it is not handled (e.g. unexpected error code), then an **incident** is raised to indicate the failure.
+The incident is attached to the corresponding element where the error was thrown, i.e. the service task of the processed job or the error end event.
 
-The incident can not be solved by the user because the failure is in the process itself that can not be changed to handle the error for this process instance.
+When you resolve the incident attached to a service task, it will re-enable the job and allow it to be activated and completed by a job worker once again.
+
+The incident attached to an error end event cannot be resolved by a user because the failure is in the process itself.
+The process cannot be changed to handle the error for this process instance.
 
 ## Business error vs. technical error
 
