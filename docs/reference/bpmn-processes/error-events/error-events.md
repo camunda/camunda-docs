@@ -36,7 +36,7 @@ When the error is caught then the service task gets terminated and the boundary 
 That means the process instance continues where the error is caught instead of following the regular path.
 
 An error is caught by the first event in the scope hierarchy that matches the error code.
-If the error is thrown form a service task then it can be caught by an attached boundary event.
+If the error is thrown from a service task then it can be caught by an attached boundary event.
 If the task has no boundary event or the error code does not match then the error is propagated to the parent or root scope of the process instance.
 
 In case the process instance is created via call activity, the error can also be caught in the calling parent process instance.
