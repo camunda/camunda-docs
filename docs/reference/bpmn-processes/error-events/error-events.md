@@ -17,6 +17,15 @@ It must define the `errorCode` (e.g. `Invalid Credit Card`) of the error.
 
 The `errorCode` is a `string` that must match to the error code that is sent by the client command or from the error end event.
 
+## Throwing the error
+
+An error can be thrown from a **client command** while processing a job.
+See the [gRPC command](/reference/grpc.md#throwerror-rpc) for details.
+
+Alternatively, an error can also be thrown inside a process using an error **end event**.
+
+![process](assets/error-throw-events.png)
+
 ## Catching the error
 
 An error can be caught using an error **boundary event** or an error **event subprocess**.
@@ -30,15 +39,6 @@ If the error is thrown form a service task then it can be caught by an attached 
 If the task has no boundary event or the error code does not match then the error is propagated to the parent or root scope of the process instance.
 
 In case the process instance is created via call activity, the error can also be caught in the calling parent process instance.
-
-## Throwing the error
-
-An error can be thrown from a **client command** while processing a job.
-See the [gRPC command](/reference/grpc.md#throwerror-rpc) for details.
-
-Alternatively, an error can also be thrown inside a process using an error **end event**.
-
-![process](assets/error-throw-events.png)
 
 ## Unhandled errors
 
