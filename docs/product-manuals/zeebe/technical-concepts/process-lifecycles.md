@@ -103,12 +103,12 @@ Given the above process a successful execution will yield the following records 
         <td>sequence flow</td>
     </tr>
     <tr>
-        <td>EVENT_ACTIVATING</td>
+        <td>ELEMENT_ACTIVATING</td>
         <td>order-delivered</td>
         <td>end event</td>
     </tr>
     <tr>
-        <td>EVENT_ACTIVATED</td>
+        <td>ELEMENT_ACTIVATED</td>
         <td>order-delivered</td>
         <td>end event</td>
     </tr>
