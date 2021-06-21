@@ -272,6 +272,7 @@ module.exports = {
         },
       ],
     },
+      "product-manuals/best-practices",
   ],
   Reference: [
     "reference/overview",

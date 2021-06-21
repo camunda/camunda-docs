@@ -13,3 +13,6 @@ This chapter gives an overview of Zeebe's underlying technical concepts:
 - [Process lifecycles](process-lifecycles.md) - expands on the event processing concept and goes into more detail regarding the lifecycles of selected process elements
 - [Protocols](protocols.md) - explains how external clients communicate with Zeebe
 - [Exporters](exporters.md) - discusses the extension point to add additional processing logic for each record in the event stream
+
+
+In addition to these sections, you may also be interested in Camunda Cloud [Best Practices](././product-manuals/best-practices.md).
