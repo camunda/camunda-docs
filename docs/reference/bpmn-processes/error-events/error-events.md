@@ -54,12 +54,12 @@ The process cannot be changed to handle the error for this process instance.
 
 ## Business error vs. technical error
 
-While processing a job, two different types of errors can be occurred: a technical error (e.g. database connection interrupted) and a business error (e.g. invalid credit card).
+While processing a job, two different types of errors can occur: a technical error (e.g. database connection interrupted) or a business error (e.g. invalid credit card).
 
 A technical error is usually unexpected and should not be handled in the process.
-The error may disappear when the job is retried, or an incident is created to indicate that an user interaction is required.
+The error may disappear when the job is retried, or an incident is created to indicate that a user interaction is required.
 
-A business error is expected and is handled in the process.
+A business error is expected and should be handled in the process.
 The process may take a different path to compensate the error or undo previous actions.
 
 ## Additional resources
