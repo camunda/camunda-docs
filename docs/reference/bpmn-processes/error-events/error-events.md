@@ -3,12 +3,11 @@ id: error-events
 title: "Error events"
 ---
 
-Error events are events which reference an error.
-They are used to handle business errors in a process.
+In process automation, you may have to deal with errors related to the process, also known as business errors.
+Some examples of business errors are: an invalid credit card used as default payment method to collect money, or cancelling an order after it was already payed for.
+In case of a business error, you may need to take a different path than usual or compensate for the error.
 
 ![process](assets/error-events.png)
-
-An error indicates that some kind of business error has occurred which should be handled in the process, for example, by taking a different path to compensate the error.
 
 ## Defining the error
 
