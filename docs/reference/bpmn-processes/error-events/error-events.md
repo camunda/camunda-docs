@@ -11,10 +11,13 @@ In case of a business error, you may need to take a different path than usual or
 
 ## Defining the error
 
+In BPMN, business errors are represented as errors and error events.
+Errors define the possible errors that can occur.
+Error events are elements in the process that refer to the defined errors.
 An error can be referenced by one or more error events.
-It must define the `errorCode` (e.g. `Invalid Credit Card`) of the error.
 
-The `errorCode` is a `string` that must match to the error code that is sent by the client command or from the error end event.
+An error must define an `errorCode` (e.g. `Invalid Credit Card`).
+The `errorCode` is a `string` that is used to match a thrown error to the error catch events.
 
 ## Throwing the error
 
