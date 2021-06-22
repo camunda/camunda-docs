@@ -3,7 +3,7 @@ id: error-events
 title: "Error events"
 ---
 
-In process automation, you may have to deal with errors related to the process, also known as business errors.
+In process automation, you may have to handle with errors related to the process, also known as business errors.
 Some examples of business errors are: an invalid credit card used as default payment method to collect money, or cancelling an order after it was already payed for.
 In case of a business error, you may need to take a different path than usual or compensate for the error.
 
@@ -31,17 +31,19 @@ See the [gRPC command](/reference/grpc.md#throwerror-rpc) for details.
 
 ## Catching the error
 
-A thrown error can be caught using an error **boundary event** or an error **event subprocess**.
+A thrown error can be caught by an error catch event.
+Specifically, using an error **boundary event** or an error **event subprocess**.
 
-The boundary event or the event subprocess must be interrupting.
-When the error is caught then the service task gets terminated and the boundary event or event subprocess gets activated.
-That means the process instance continues where the error is caught instead of following the regular path.
-
+Starting at the scope where the error was thrown, the error code is matched against the attached error boundary events and error event sub processes at that level.
 An error is caught by the first event in the scope hierarchy that matches the error code.
-If the error is thrown from a service task then it can be caught by an attached boundary event.
-If the task has no boundary event or the error code does not match then the error is propagated to the parent or root scope of the process instance.
-
+At each scope, the error is propagated to the parent scope if it is not yet caught.
 In case the process instance is created via call activity, the error can also be caught in the calling parent process instance.
+
+Error boundary events and error event subprocesses must be interrupting.
+This means the process instance will not continue along the regular path when the error was caught.
+Instead, it continues where the error is caught, to handle the error.
+If the error is thrown for a job, then the associated task gets terminated before the error gets handled.
+To handle the error, the error boundary event or error event subprocess gets activated.
 
 ## Unhandled errors
 
