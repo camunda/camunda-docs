@@ -20,14 +20,14 @@ An error must define an `errorCode` (e.g. `Invalid Credit Card`).
 The `errorCode` is a `string` that is used to match a thrown error to the error catch events.
 
 ## Throwing the error
-
-You can throw an error from a **client command** while processing a job.
-In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers.
-See the [gRPC command](/reference/grpc.md#throwerror-rpc) for details.
-
-Alternatively, an error can also be thrown inside a process using an error **end event**.
+An error can be thrown from within the process using an error **end event**.
 
 ![process](assets/error-throw-events.png)
+
+Alternatively, you can inform Zeebe that a business error has occurred using a **client command**.
+As a client command an error can be thrown only while processing a job.
+In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers.
+See the [gRPC command](/reference/grpc.md#throwerror-rpc) for details.
 
 ## Catching the error
 
