@@ -47,11 +47,11 @@ To handle the error, the error boundary event or error event subprocess gets act
 
 ## Unhandled errors
 
-When an error is thrown then it should be handled in the process.
+When an error is thrown then it should be caught and handled in the process.
 If it is not handled (e.g. unexpected error code), then an **incident** is raised to indicate the failure.
-The incident is attached to the corresponding element where the error was thrown, i.e. the service task of the processed job or the error end event.
+The incident is attached to the corresponding element where the error was thrown, i.e. the task of the processed job or the error end event.
 
-When you resolve the incident attached to a service task, it will re-enable the job and allow it to be activated and completed by a job worker once again.
+When you resolve the incident attached to a task, it will re-enable the job and allow it to be activated and completed by a job worker once again.
 
 The incident attached to an error end event cannot be resolved by a user because the failure is in the process itself.
 The process cannot be changed to handle the error for this process instance.
