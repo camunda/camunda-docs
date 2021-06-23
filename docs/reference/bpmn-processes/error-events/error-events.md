@@ -51,7 +51,7 @@ When an error is thrown then it should be caught.
 If it is not caught, then an **incident** (i.e. `Unhandled error event`) is raised to indicate the failure.
 The incident is attached to the corresponding element where the error was thrown, i.e. the task of the processed job or the error end event.
 
-When you resolve the incident attached to a task, it will re-enable the job and allow it to be activated and completed by a job worker once again.
+When you resolve the incident attached to a task, it will ignore the error, re-enable the job and allow it to be activated and completed by a job worker once again.
 
 The incident attached to an error end event cannot be resolved by a user because the failure is in the process itself.
 The process cannot be changed to catch the error for this process instance.
