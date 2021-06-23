@@ -3,7 +3,7 @@ id: error-events
 title: "Error events"
 ---
 
-In process automation, you may have to handle with errors related to the process, also known as business errors.
+In process automation, you may have to deal with errors related to the process, also known as business errors.
 Some examples of business errors are: an invalid credit card used as default payment method to collect money, or cancelling an order after it was already payed for.
 In case of a business error, you may need to take a different path than usual or compensate for the error.
 
@@ -25,7 +25,7 @@ An error can be thrown from within the process using an error **end event**.
 ![process](assets/error-throw-events.png)
 
 Alternatively, you can inform Zeebe that a business error has occurred using a **client command**.
-As a client command an error can be thrown only while processing a job.
+This throw error client command can only be used while processing a job.
 In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers.
 See the [gRPC command](/reference/grpc.md#throwerror-rpc) for details.
 
@@ -36,7 +36,7 @@ Specifically, using an error **boundary event** or an error **event subprocess**
 
 Starting at the scope where the error was thrown, the error code is matched against the attached error boundary events and error event sub processes at that level.
 An error is caught by the first event in the scope hierarchy that matches the error code.
-At each scope, the error is propagated to the parent scope if it is not yet caught.
+At each scope, the error is either caught, or it is propagated to the parent scope.
 In case the process instance is created via call activity, the error can also be caught in the calling parent process instance.
 
 Error boundary events and error event subprocesses must be interrupting.
