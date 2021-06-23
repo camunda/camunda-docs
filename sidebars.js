@@ -271,6 +271,14 @@ module.exports = {
           ],
         },
       ],
+      IAM: [
+      "product-manuals/iam/overview", {
+          "Third-Party Libraries": [
+            "product-manuals/iam/third-party-libraries/backend-third-party-libraries",
+            "product-manuals/iam/third-party-libraries/frontend-third-party-libraries"
+          ],
+        },
+      ],
     },
       "product-manuals/best-practices",
   ],
