@@ -27,7 +27,7 @@ This process includes a service task and an XOR gateway. Select the service task
 
 ![process-cloud](./img/cloud-modeler-advanced.png)
 
-Deploy the new process using the **Save & Deploy** option in the **Deployment** menu.
+Deploy the new process using the **Save & Deploy** option in the **Execute** menu.
 
 Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
 
