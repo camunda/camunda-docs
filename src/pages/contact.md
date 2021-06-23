@@ -7,7 +7,7 @@ description: Contact Camunda
 
 There are various channels where you can reach us.
 
-- We encourage everyone to participate in our **community** via the [Camunda Cloud community forum](https://forum.camunda.io/) or [Slack](https://camunda-cloud.slack.com/), where you can exchange ideas with other Zeebe and Camunda Cloud users, as well as the product developers.
+- We encourage everyone to participate in our **community** via the [Camunda Cloud community forum](https://forum.camunda.io/) or [Slack](https://camunda-cloud.slack.com/), where you can exchange ideas with other Zeebe and Camunda Cloud users, as well as the product developers. If you are joining our Slack for the first time, you will need to get an [invite](https://zeebe-slack-invite.herokuapp.com/) first.
 
 - If you find a **bug**, please open an issue in this [repository](https://github.com/camunda-cloud/issues). The bugs have a default template, so please describe what doesn't work in detail.
 
