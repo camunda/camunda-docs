@@ -15,7 +15,7 @@ import TabItem from "@theme/TabItem";
 
 <TabItem value='console'>
 
-You can now use the **Save & Deploy** option in the **Deployment** menu to deploy the newly created process to your cluster.
+You can now use the **Save & Deploy** option in the **Execute** menu to deploy the newly created process to your cluster.
 
 ![console-modeler-deploy](../../product-manuals/modeler/cloud-modeler/img/save-and-deploy.png)
 
