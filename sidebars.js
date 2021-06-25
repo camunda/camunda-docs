@@ -292,6 +292,9 @@ module.exports = {
             "reference/bpmn-processes/service-tasks/service-tasks",
             "reference/bpmn-processes/user-tasks/user-tasks",
             "reference/bpmn-processes/receive-tasks/receive-tasks",
+            "reference/bpmn-processes/business-rule-tasks/business-rule-tasks",
+            "reference/bpmn-processes/script-tasks/script-tasks",
+            "reference/bpmn-processes/send-tasks/send-tasks",
           ],
         },
         {
