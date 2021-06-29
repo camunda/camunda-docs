@@ -70,14 +70,14 @@ import ReceiveTaskInstantiatedSvg from './assets/bpmn-symbols/receive-task-insta
     <a href="receive-tasks/receive-tasks">
         <ReceiveTaskSvg className="implemented" />
     </a>    
-    <a href="#">
-        <SendTaskSvg />
+      <a href="send-tasks/send-tasks">
+        <SendTaskSvg className="implemented" />
     </a>    
-    <a href="#">
-        <BusinessRuleTaskSvg />
+    <a href="business-rule-tasks/business-rule-tasks">
+        <BusinessRuleTaskSvg className="implemented" />
     </a>    
-    <a href="#">
-        <ScriptTaskSvg />
+    <a href="script-tasks/script-tasks">
+        <ScriptTaskSvg className="implemented" />
     </a>    
     <a href="#">
         <ManualTaskSvg />
