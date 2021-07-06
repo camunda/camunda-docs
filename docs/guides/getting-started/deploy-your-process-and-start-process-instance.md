@@ -3,6 +3,11 @@ id: deploy-your-process-and-start-process-instance
 title: Deploy and start your process instance
 ---
 
+:::note
+
+BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot run a BPMN diagram modeled for Camunda Platform in Camunda Cloud, or vice versa, at this time.
+:::
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
