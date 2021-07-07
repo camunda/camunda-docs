@@ -14,6 +14,6 @@ This section contains product manual content for each product in Camunda Cloud, 
 - [Zeebe Engine](zeebe/zeebe-overview) - Complete documentation for Zeebe. 
 - [Operate](operate/index.md) - User and deployment guide for Operate.
 - [Tasklist](tasklist/deployment/configuration) - Deployment guide for Tasklist.
-- [IAM](iam/overview.md) - Documentation covering the IAM offering
+- [IAM](iam/overview.md) - Documentation covering the IAM offering.
 
 While Camunda Cloud is cloud-first, applicable sections, like Zeebe Engine, include on-prem operation steps.
