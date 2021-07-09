@@ -19,7 +19,11 @@ With Zeebe you can:
 
 For documentation on deploying Zeebe as part of Camunda Cloud Self-Managed, please refer to the [deployment guide](deployment-guide/index).
 
-Paid support for Zeebe is only offered through Camunda Cloud or Camunda Cloud Self-Managed. Regardless of how you are working with Zeebe and Camunda Cloud, you can always find support through the [community](open-source/get-help-get-involved.md).
+## Enterprise Support for Zeebe
+
+Paid support for Zeebe is available via either Camunda Cloud Professional or Camunda Cloud Enterprise. Customers can choose either plan based on their process automation requirements. Camunda Cloud Enterprise customers also have the option of on-premises or private cloud deployment. 
+
+Additionally, regardless of how you are working with Zeebe and Camunda Cloud, you can always find support through the [community](open-source/get-help-get-involved.md).
 
 
 ## Next Steps
