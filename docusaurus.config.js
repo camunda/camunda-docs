@@ -9,6 +9,7 @@ module.exports = {
   favicon: "img/favicon.ico",
   organizationName: "camunda-cloud", // Usually your GitHub org/user name.
   projectName: "camunda-cloud-documentation", // Usually your repo name.
+  trailingSlash: false,
   plugins: [
     //    ["@edno/docusaurus2-graphql-doc-generator",
     //      {
