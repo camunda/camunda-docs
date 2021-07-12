@@ -12,3 +12,7 @@ There is a dedicated update guide for each version:
 ### [0.26 to 1.0](026-to-100)
 
 Update from 0.26.x to 1.0.0
+
+### [1.0 to 1.1](100-to-110)
+
+Update from 1.0.x to 1.1.0
