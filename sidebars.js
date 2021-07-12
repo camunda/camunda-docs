@@ -271,6 +271,14 @@ module.exports = {
           ],
         },
       ],
+      IAM: [
+      "product-manuals/iam/overview", {
+          "Third-Party Libraries": [
+            "product-manuals/iam/third-party-libraries/backend-third-party-libraries",
+            "product-manuals/iam/third-party-libraries/frontend-third-party-libraries"
+          ],
+        },
+      ],
     },
       "product-manuals/best-practices",
   ],
@@ -292,6 +300,9 @@ module.exports = {
             "reference/bpmn-processes/service-tasks/service-tasks",
             "reference/bpmn-processes/user-tasks/user-tasks",
             "reference/bpmn-processes/receive-tasks/receive-tasks",
+            "reference/bpmn-processes/business-rule-tasks/business-rule-tasks",
+            "reference/bpmn-processes/script-tasks/script-tasks",
+            "reference/bpmn-processes/send-tasks/send-tasks",
           ],
         },
         {

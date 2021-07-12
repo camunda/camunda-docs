@@ -505,7 +505,7 @@ Returned if:
 
 ### `ThrowError` RPC
 
-Throw an error to indicate that a business error is occurred while processing the job. The error is identified by an error code and is handled by an error catch event in the process with the same error code.
+Throw an error to indicate that a business error has occurred while processing the job. The error is identified by an error code and is caught by an error catch event with the same error code.
 
 #### Input: `ThrowErrorRequest`
 

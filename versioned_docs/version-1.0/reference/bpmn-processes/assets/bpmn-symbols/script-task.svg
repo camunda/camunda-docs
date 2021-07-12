@@ -1,0 +1,7 @@
+<svg height="90" version="1.1" width="110" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative; left: -0.75px;">
+  <rect x="5" y="5" width="100" height="80" r="5" rx="5" ry="5" fill="#ffffff" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" style="stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 1;"></rect>
+  <text x="55" y="45" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#333333" style="text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, Helvetica, sans-serif;" font-size="12px" font-family="Arial, Helvetica, sans-serif">
+    <tspan dy="4">Script Task</tspan>
+  </text>
+  <path fill="#ffffff" stroke="#333333" d="M6.402,0.5H20.902C20.902,0.5,15.069,3.333,15.069,6.083S19.486,12.083,19.486,15.25S15.319,20.333,15.319,20.333H0.235C0.235,20.333,5.235,17.665999999999997,5.235,15.332999999999998S0.6520000000000001,8.582999999999998,0.6520000000000001,6.082999999999998S6.402,0.5,6.402,0.5ZM3.5,4.5L13.5,4.5M3.8,8.5L13.8,8.5M6.3,12.5L16.3,12.5M6.5,16.5L16.5,16.5" stroke-width="1.6666666666666667" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" transform="matrix(0.6,0,0,0.6,9.2274,9.1666)" style="stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 1;"></path>
+</svg>

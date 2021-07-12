@@ -76,4 +76,30 @@ body {
   div.osano-cm-info__info-views.osano-cm-info-views.osano-cm-info-views--position_0 > div > ul > li:last-of-type {
       display: none;
   }
-  
+
+/* style SVG images of the BPMN coverage page */
+svg.implemented [fill="#333"]{
+  fill:#df8a13
+}
+
+svg.implemented [stroke="#333"]{
+  stroke:#df8a13
+}
+
+svg.implemented:hover [fill="#333"]{
+  fill:#14d890;
+}
+
+svg.implemented:hover [stroke="#333"]{
+  stroke:#14d890;
+}
+
+.bpmn-symbol-container a {
+  padding-right: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.bpmn-coverage-event-table td {
+  text-align: center;
+}
