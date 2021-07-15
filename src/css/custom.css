@@ -79,11 +79,11 @@ body {
 
 /* style SVG images of the BPMN coverage page */
 svg.implemented [fill="#333"]{
-  fill:#df8a13
+  fill:#11c399
 }
 
 svg.implemented [stroke="#333"]{
-  stroke:#df8a13
+  stroke:#11c399
 }
 
 svg.implemented:hover [fill="#333"]{

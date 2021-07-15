@@ -9,7 +9,7 @@ export const Highlight = ({children, color}) => (
 </span>
 );
 
-The following BPMN elements in <Highlight color="#df8a13">orange</Highlight> are supported. Click on
+The following BPMN elements in <Highlight color="#11c399">green</Highlight> are supported. Click on
 an element to navigate to the documentation.
 
 ## Participants
