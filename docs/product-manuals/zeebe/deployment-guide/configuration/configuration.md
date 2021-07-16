@@ -190,7 +190,7 @@ setting found there may or may not be dropped in any minor version.
 These settings are there primarily for incubating features and/or very advanced settings for which the team has not found
 a good general default configuration. Once one is found, or the incubating feature is promoted, the setting(s) may be moved
 into a different section. Only at that point do they fall under the same backwards compatibility guarantees as the rest of
-the project.
+the project. We may choose to drop support for specific experimental configurations in any minor version update.
 
 Most users should not have to change anything in this section to get a good experience. However, if you have a unique set up, or 
 simply wish to try out new experimental features, it can be worth investigating these (ideally with the guidance of the Zeebe community).
