@@ -188,7 +188,7 @@ This section refers to settings which are potentially not backwards compatible -
 setting found there may or may not be dropped in any minor version.
 
 These settings are there primarily for incubating features and/or very advanced settings for which the team has not found
-a good general default configuration. Once one is found, or the incubating feature is promoted, the setting(s) will be moved
+a good general default configuration. Once one is found, or the incubating feature is promoted, the setting(s) may be moved
 into a different section. Only at that point do they fall under the same backwards compatibility guarantees as the rest of
 the project.
 
