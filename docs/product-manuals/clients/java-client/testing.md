@@ -2,11 +2,11 @@
 id: testing
 title: "Writing tests"
 ---
-You can use the `zeebe-test` module to write JUnit tests for your job worker and BPMN process. It provides a JUnit rule to bootstrap the broker and some basic assertions.
+You can use the `zeebe-test` module to write JUnit tests for your job worker and BPMN process. This provides a JUnit rule to bootstrap the broker and some basic assertions.
 
 ## Usage in a Maven project
 
-Add `zeebe-test` as Maven test dependency to your project:
+Add `zeebe-test` as a Maven test dependency to your project:
 
 ```xml
 <dependency>
@@ -18,7 +18,7 @@ Add `zeebe-test` as Maven test dependency to your project:
 
 ## Bootstrap the broker
 
-Use the `ZeebeTestRule` in your test case to start an embedded broker. It contains a client which can be used to deploy a BPMN process or create an instance.
+Use the `ZeebeTestRule` in your test case to start an embedded broker. This contains a client which can be used to deploy a BPMN process or create an instance.
 
 ```java
 import io.camunda.zeebe.client.ZeebeClient;
@@ -56,7 +56,7 @@ public class MyTest {
 
 ## Verify the Result
 
-The `ZeebeTestRule` provides also some basic assertions in AssertJ style. The entry point of the assertions is `ZeebeTestRule.assertThat(...)`.
+The `ZeebeTestRule` also provides some basic assertions in AssertJ style. The entry point of the assertions is `ZeebeTestRule.assertThat(...)`.
 
 ```java
 final ProcessInstanceEvent processInstance = ...

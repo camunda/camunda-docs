@@ -60,13 +60,13 @@ func main() {
 
 Let's go over this code snippet line by line:
 
-- First we create the credentials provider for the OAuth protocol. This is needed to authenticate your client.
-- Next we create the client passing in the address of the cluster we want to connect to, as well as, the credentials provider from the step above.
-- Finally, we send a test request to verify that the connection was established.
+1. First, we create the credentials provider for the OAuth protocol. This is needed to authenticate your client.
+2. Next, we create the client by passing in the address of the cluster we want to connect to and the credentials provider from the step above.
+3. Finally, we send a test request to verify the connection was established.
 
-The values for these settings can be taken from the connection info on the **Client Credentials** page. Note that `clientSecret` is only visible when you create the client credentials.
+The values for these settings can be taken from the connection information on the **Client Credentials** page. Note that `clientSecret` is only visible when you create the client credentials.
 
-Another, more compact, option is to pass in the connection settings via environment variables:
+Another—more compact—option is to pass in the connection settings via environment variables:
 
 ```bash
 export ZEEBE_ADDRESS='[Zeebe API]'
@@ -75,7 +75,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When you create client credentials in Camunda Cloud you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
 
 Given these environment variables, you can instantiate the client as follows:
 

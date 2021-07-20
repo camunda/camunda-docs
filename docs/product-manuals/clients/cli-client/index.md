@@ -18,7 +18,7 @@ You can also download a binary for your Operating System from the [Zeebe GitHub 
 
 ## Connection settings
 
-To use `zbctl` it is recommended to define environment variables for the connection settings:
+To use `zbctl`, it is recommended to define environment variables for the connection settings:
 
 ```bash
 export ZEEBE_ADDRESS='[Zeebe API]'
@@ -27,9 +27,9 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When you create client credentials in Camunda Cloud you have the option to download a file with above lines filled out for you.
+When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
 
-Alternatively, use the [described flags](https://www.npmjs.com/package/zbctl#usage) (`--address`, `--clientId` and `--clientSecret`). with the zbctl commands.
+Alternatively, use the [described flags](https://www.npmjs.com/package/zbctl#usage) (`--address`, `--clientId`, and `--clientSecret`) with the `zbctl` commands.
 
 ## Usage
 
@@ -38,13 +38,13 @@ zbctl [options] [command]
 ```
 
 ```
-zbctl is command line interface designed to create and read resources inside zeebe broker.
-It is designed for regular maintenance jobs such as:
-        * deploying processes,
-        * creating jobs and process instances
-        * activating, completing or failing jobs
-        * update variables and retries
-        * view cluster status
+zbctl is command line interface designed to create and read resources inside Zeebe broker.
+It is designed for regular maintenance jobs, such as:
+        * Deploying processes
+        * Creating jobs and process instances
+        * Activating, completing, or failing jobs
+        * Updating variables and retries
+        * Viewing cluster status
 
 Usage:
   zbctl [command]

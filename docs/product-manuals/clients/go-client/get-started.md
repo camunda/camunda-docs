@@ -18,8 +18,9 @@ You can find the complete source code on [GitHub](https://github.com/zeebe-io/ze
 
 ## Set up a project
 
-First, we need a new Go project.
-Create a new project using your IDE, or create new Go module with:
+First, we need a new Go project. To do this, complete the following steps:
+
+1. Create a new project using your IDE, or create a new Go module with the following command:
 
 ```
 mkdir -p $GOPATH/src/github.com/zb-user/zb-example
@@ -27,7 +28,7 @@ cd $GOPATH/src/github.com/zb-user/zb-example
 go mod init
 ```
 
-To use the Zeebe Go client library, add the following dependency to your `go.mod`:
+2. To use the Zeebe Go client library, add the following dependency to your `go.mod`:
 
 ```
 module github.com/zb-user/zb-example
@@ -37,7 +38,7 @@ go 1.13
 require github.com/zeebe-io/zeebe/clients/go v0.26.0
 ```
 
-Set the connection settings and client credentials as environment variables:
+3. Set the connection settings and client credentials as environment variables:
 
 ```bash
 export ZEEBE_ADDRESS='[Zeebe API]'
@@ -46,9 +47,9 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-**Hint:** When you create client credentials in Camunda Cloud you have the option to download a file with the lines above filled out for you.
+**Hint:** When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
 
-Create a `main.go` file inside the module and add the following lines to bootstrap the Zeebe client:
+4. Create a `main.go` file inside the module and add the following lines to bootstrap the Zeebe client:
 
 ```go
 package main
@@ -96,13 +97,13 @@ func roleToString(role pb.Partition_PartitionBrokerRole) string {
 }
 ```
 
-Run the program.
+5. Run the program.
 
 ```bash
 go run main.go
 ```
 
-You should see similar output:
+You should see a similar output:
 
 ```
 Broker 0.0.0.0 : 26501
@@ -111,17 +112,17 @@ Broker 0.0.0.0 : 26501
 
 ## Model a process
 
-Now, we need a simple process we can deploy. Later, we will extend the process with more functionality.
+Now, we need a simple process we can deploy. Later, we will extend the process with more functionality. For now, follow the steps below:
 
-Open the [modeler](/guides/getting-started/model-your-first-process.md) of your choice and create a new BPMN diagram.
+1. Open the [modeler](/guides/getting-started/model-your-first-process.md) of your choice and create a new BPMN diagram.
 
-Add a start event named `Order Placed` and an end event named `Order Delivered` to the diagram and connect the events.
+2. Add a start event named `Order Placed` and an end event named `Order Delivered` to the diagram. Then, connect the events.
 
 ![model-process-step-1](assets/order-process-simple.png)
 
-Set the **id** (the BPMN process id), and mark the diagram as **executable**.
+3. Set the **id** (the BPMN process id), and mark the diagram as **executable**.
 
-Save the diagram as `src/main/resources/order-process.bpmn` under the project's folder.
+4. Save the diagram as `src/main/resources/order-process.bpmn` under the project's folder.
 
 ## Deploy a process
 
@@ -139,8 +140,9 @@ The broker stores the process under its BPMN process id and assigns a version.
 	fmt.Println(response.String())
 ```
 
-Run the program and verify that the process is deployed successfully.
-You should see similar the output:
+Run the program and verify the process deployed successfully.
+
+You should see a similar output:
 
 ```
 key:2251799813686743 processes:<bpmnProcessId:"order-process" version:3 processKey:2251799813686742 resourceName:"order-process.bpmn" >
@@ -148,10 +150,9 @@ key:2251799813686743 processes:<bpmnProcessId:"order-process" version:3 processK
 
 ## Create a process instance
 
-We are ready to create a first instance of the deployed process.
+We are ready to create our first instance of the deployed process.
 
-A process instance is created of a specific version of the process, which can
-be set on creation.
+A process instance is created by a specific version of the process, which can be set on creation.
 
 ```go
 	// After the process is deployed.
@@ -173,7 +174,7 @@ be set on creation.
 	fmt.Println(msg.String())
 ```
 
-Run the program and verify that the process instance is created. You should see the output:
+Run the program and verify the process instance is created. You should see an output similar to below:
 
 ```
 processKey:2251799813686742 bpmnProcessId:"order-process" version:3 processInstanceKey:2251799813686744
@@ -183,24 +184,23 @@ You did it!
 
 ## See the process in action
 
-You want to see how the process instance is executed?
+Want to see how the process instance is executed? Follow the steps below:
 
-1. Go to the cluster in Camunda Cloud and select it
-1. Click on the link to [Operate](/product-manuals/operate/userguide/basic-operate-navigation.md)
-1. Select the process _order process_
+1. Go to the cluster in Camunda Cloud and select it.
+1. Click on the link to [Operate](/product-manuals/operate/userguide/basic-operate-navigation.md).
+1. Select the process **order process**.
 
 As you can see, a process instance has been started and finished.
 
 ## Work on a task
 
-Now we want to do some work within our process.
+Now we want to do some work within our process. Follow the steps below:
 
-First, add a few service
-tasks to the BPMN diagram and set the required attributes. Then extend your
-`main.go` file and activate a job which are created when the process instance
-reaches a service task.
+1. Add a few service tasks to the BPMN diagram and set the required attributes.
 
-Open the BPMN diagram in the modeler. Insert three service tasks between the start and the end event.
+2. Extend your `main.go` file and activate a job. These are created when the process instance reaches a service task.
+
+3. Open the BPMN diagram in the modeler. Insert three service tasks between the start and the end event.
 
 - Name the first task `Collect Money`.
 - Name the second task `Fetch Items`.
@@ -208,7 +208,7 @@ Open the BPMN diagram in the modeler. Insert three service tasks between the sta
 
 ![model-process-step-2](assets/order-process.png)
 
-You need to set the type of each task, which identifies the nature of the work to be performed.
+4. Set the type of each task, which identifies the nature of the work to be performed.
 
 - Set the **type** of the first task to `payment-service`.
 - Set the **type** of the second task to `fetcher-service`.
@@ -333,15 +333,17 @@ func failJob(client worker.JobClient, job entities.Job) {
 }
 ```
 
-In this example we open a [job worker](/product-manuals/concepts/job-workers.md) for jobs of type `payment-service`.
-The job worker will repeatedly poll for new jobs of the type `payment-service` and activate them
-subsequently. Each activated job will then be passed to the job handler which implements the business
-logic of the job worker. The handler will then complete the job with its result or fail the job if
+In this example, we open a [job worker](/product-manuals/concepts/job-workers.md) for jobs of type `payment-service`.
+
+The job worker will repeatedly poll for new jobs of the type `payment-service` and activate them subsequently. Each activated job will then be passed to the job handler, which implements the business
+logic of the job worker.
+
+The handler will then complete the job with its result or fail the job if
 it encounters a problem while processing the job.
 
-When you have a look at the Zeebe Monitor, then you can see that the process instance moved from the first service task to the next one:
+When observing the Zeebe Monitor, you can see the process instance moved from the first service task to the next one.
 
-When you run the above example you should see similar output:
+When you run the example above, you should see a similar output to the following:
 
 ```
 key:2251799813686751 processes:<bpmnProcessId:"order-process" version:4 processKey:2251799813686750 resourceName:"order-process.bpmn" >
@@ -359,5 +361,5 @@ Yay! You finished this tutorial and learned the basic usage of the Go client.
 
 Next steps:
 
-- Learn more about the [concepts behind Zeebe](/product-manuals/concepts/what-is-camunda-cloud.md)
-- Learn more about [BPMN processes](/reference/bpmn-processes/bpmn-primer.md)
+- Learn more about the [concepts behind Zeebe](/product-manuals/concepts/what-is-camunda-cloud.md).
+- Learn more about [BPMN processes](/reference/bpmn-processes/bpmn-primer.md).

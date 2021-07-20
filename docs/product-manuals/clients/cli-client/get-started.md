@@ -28,7 +28,7 @@ You can also download a binary for your Operating System from the [Zeebe GitHub 
 
 ### Connection settings
 
-To use `zbctl` it is recommended to define environment variables for the connection settings:
+To use `zbctl`, it is recommended to define environment variables for the connection settings:
 
 ```bash
 export ZEEBE_ADDRESS='[Zeebe API]'
@@ -37,19 +37,19 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When you create client credentials in Camunda Cloud you have the option to download a file with above lines filled out for you.
+When creating client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
 
-Alternatively, use the [described flags](https://www.npmjs.com/package/zbctl#usage) (`--address`, `--clientId` and `--clientSecret`). with the zbctl commands.
+Alternatively, use the [described flags](https://www.npmjs.com/package/zbctl#usage) (`--address`, `--clientId`, and `--clientSecret`) with the `zbctl` commands.
 
 ### Test command
 
-Use this command to verify that everything is set up correctly:
+Use the following command to verify everything is set up correctly:
 
 ```bash
 zbctl status
 ```
 
-As a result you will get a similar response:
+As a result, you should receive a similar response:
 
 ```bash
 Cluster size: 1
@@ -69,20 +69,21 @@ Use [this process model](./assets/gettingstarted_quickstart_advanced.bpmn) for t
 
 ![processId](./assets/zeebe-modeler-advanced-process-id.png)
 
-This process includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
+This process includes a Service Task and an XOR gateway. Select the Service Task and fill in the properties. Set the **Type** to `test-worker`.
 
 ![process](./assets/zeebe-modeler-advanced.png)
 
 The worker will return a JSON object as a result, which is used to decide which path to take.
+
 Now, we can use the JSON object to route your process by filling in the condition expression on the two sequence flows after the XOR gateway.
 
-Use the following conditional expression for the "Pong" sequence flow:
+Use the following conditional expression for the **Pong** sequence flow:
 
 ```bash
 =return="Pong"
 ```
 
-And for the else sequence flow:
+Use the following conditional expression for the **else** sequence flow:
 
 ```bash
 =return!="Pong"
@@ -90,15 +91,15 @@ And for the else sequence flow:
 
 ![sequenceflows](./assets/zeebe-modeler-advanced-sequence-flows.png)
 
-## Deploy a Process
+## Deploy a process
 
-Now you can deploy the [process](./assets/gettingstarted_quickstart_advanced.bpmn). Navigate to the folder, where you saved your process.
+Now, you can deploy the [process](./assets/gettingstarted_quickstart_advanced.bpmn). Navigate to the folder where you saved your process.
 
 ```bash
 zbctl deploy gettingstarted_quickstart_advanced.bpmn
 ```
 
-If the deployment is successful you'll get the following output:
+If the deployment is successful, you'll get the following output:
 
 ```bash
 {
@@ -114,7 +115,7 @@ If the deployment is successful you'll get the following output:
 }
 ```
 
-Important here is the `bpmnProcessId`, which you'll need for creating a new instance.
+**IMPORTANT**: You will need the `bpmnProcessId` to create a new instance.
 
 ## Register a worker
 
@@ -132,7 +133,7 @@ You can start a new instance with a single command:
 zbctl create instance camunda-cloud-quick-start-advanced
 ```
 
-As a result, you'll get the following output, which contains, among others, the `processInstanceKey`:
+As a result, you'll get the following output. This output will contain—among others—the `processInstanceKey`:
 
 ```bash
 {
@@ -143,11 +144,11 @@ As a result, you'll get the following output, which contains, among others, the 
 }
 ```
 
-Navigate to Operate to monitor the process instance.
+Navigate to **Operate** to monitor the process instance.
 
 ![operate-instances](assets/operate-advanced-instances-pong.png)
 
-Because the worker returns
+Because the worker returns the following output, the process ends in the upper end event following the **Ping** sequence flow:
 
 ```json
 {
@@ -155,24 +156,22 @@ Because the worker returns
 }
 ```
 
-the process ends in the upper end event following the Ping sequence flow.
-
-Changing the worker to
+This will change the worker to the following:
 
 ```bash
 zbctl create worker test-worker --handler "echo {\"return\":\"...\"}"
 ```
 
-and creating a new instance leads to a second instance in Operate, which you'll see ending in the second end event following the else sequence flow:
+Creating a new instance leads to a second instance in **Operate**, which you'll see ending in the second end event following the **else** sequence flow:
 
 ![operate-instance](assets/operate-advanced-instances-other.png)
 
-As a next step you can now connect both workers in parallel and create more process instances:
+Next, you can connect both workers in parallel and create more process instances:
 
 ```bash
 while true; do zbctl create instance camunda-cloud-quick-start-advanced; sleep 1; done
 ```
 
-In Operate you will see instances ending in both end events depending on which worker picked up the job.
+In **Operate**, you will see instances ending in both end events depending on which worker picked up the job.
 
 ![operate-instances](assets/operate-advanced-instances.png)

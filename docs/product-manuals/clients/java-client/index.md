@@ -55,14 +55,16 @@ In Java code, instantiate the client as follows:
 
 Let's go over this code snippet line by line:
 
-- First we declare a couple of variables to define the connection properties. These values can be taken from the connection info on the _Client Credentials_ page. Note that `clientSecret` is only visible when you create the client credentials.
-- Next we create the credentials provider for the OAuth protocol. This is needed to authenticate your client.
-- Next we create the client passing in the address of the cluster we want to connect to as well as the credentials provider from the step above.
-- Finally, we send a test request to verify that the connection was established.
+1. First, we declare a few variables to define the connection properties. These values can be taken from the connection information on the **Client Credentials** page. Note that `clientSecret` is only visible when you create the client credentials.
+2. Next, we create the credentials provider for the OAuth protocol. This is needed to authenticate your client.
+3. Next, we create the client by passing in the address of the cluster we want to connect to and the credentials provider from the step above.
+4. Finally, we send a test request to verify the connection was established.
 
-See `io.camunda.zeebe.client.ZeebeClientBuilder` for a description of all available configuration properties.
+See **io.camunda.zeebe.client.ZeebeClientBuilder** for a description of all available configuration properties.
 
-Another, more compact, option is to pass in the connection settings via environment variables:
+[//]:# (Can we link to the location above?)
+
+Another—more compact—option is to pass in the connection settings via environment variables:
 
 ```bash
 export ZEEBE_ADDRESS='[Zeebe API]'
@@ -71,7 +73,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When you create client credentials in Camunda Cloud you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
 
 Given these environment variables, you can instantiate the client as follows:
 
@@ -84,8 +86,8 @@ ZeebeClient client =
 
 ## Next Steps
 
-- [Getting started guide](https://github.com/camunda-cloud/camunda-cloud-get-started) - Comprehensive tutorial that covers Camunda Modeler, Operate and the Java client.
-- [Job worker](job-worker.md) - Introduction to the Java client's job worker
-- [Logging](logging.md) - Introduction on how to configure logging for Zeebe client
-- [Writing tests](testing.md) - Introduction to writing tests that use an embedded version of the workflow engine
-- [Examples](../java-client-examples/index.md) - Collection of specific examples for different use cases
+- [Getting Started Guide](https://github.com/camunda-cloud/camunda-cloud-get-started): A comprehensive tutorial that covers Camunda Modeler, Operate, and the Java client.
+- [Job Worker](job-worker.md): An introduction to the Java client's job worker.
+- [Logging](logging.md): An introduction to configuring logging for a Zeebe client.
+- [Writing Tests](testing.md): An introduction to writing tests that use an embedded version of the workflow engine.
+- [Examples](../java-client-examples/index.md): A collection of specific examples for different use cases.
