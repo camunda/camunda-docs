@@ -6,11 +6,11 @@ title: "Create non-blocking process instances"
 ## Prerequisites
 
 1. Running Zeebe broker with endpoint `localhost:26500` (default)
-1. Run the [deploy a process example](process-deploy.md)
+1. Run the [deploy a process example](process-deploy.md).
 
 ## NonBlockingProcessInstanceCreator.java
 
-[Source on github](https://github.com/camunda-cloud/zeebe/blob/develop/samples/src/main/java/io/camunda/zeebe/example/process/NonBlockingProcessInstanceCreator.java)
+[Source on GitHub](https://github.com/camunda-cloud/zeebe/blob/develop/samples/src/main/java/io/camunda/zeebe/example/process/NonBlockingProcessInstanceCreator.java)
 
 ```java
 long instancesCreating = 0;

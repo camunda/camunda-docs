@@ -9,7 +9,7 @@ The Zeebe Node client is maintained by [Josh Wulf](https://github.com/jwulf). It
 
 - [Source code](https://github.com/camunda-community-hub/zeebe-client-node-js)
 - [NPM package](https://www.npmjs.com/package/zeebe-node)
-- [User Guide](https://github.com/camunda-community-hub/zeebe-client-node-js)
+- [User guide](https://github.com/camunda-community-hub/zeebe-client-node-js)
 
 ## NestJS client
 
@@ -26,17 +26,17 @@ The [Node-RED](https://nodered.org/) Zeebe client is maintained by [Patrick Dehn
 - [Source code](https://github.com/camunda-community-hub/node-red-contrib-zeebe)
 - [NPM package](https://www.npmjs.com/package/node-red-contrib-zeebe)
 
-## Workit Zeebe Client
+## Workit Zeebe client
 
-The Workit Zeebe client is maintained by [Olivier Albertini](https://github.com/OlivierAlbertini). It allows you to run the same application code against Zeebe or the Camunda engine, based on configuration settings.
+The Workit Zeebe client is maintained by [Olivier Albertini](https://github.com/OlivierAlbertini). It allows you to run the same application code against Zeebe or the Camunda engine based on configuration settings.
 
 - [Source code](https://github.com/VilledeMontreal/workit)
 - [NPM package](https://www.npmjs.com/package/workit-zeebe-client)
 - [API docs](https://villedemontreal.github.io/workit/)
 
-## Zeebe ElasticSearch client
+## Zeebe Elasticsearch client
 
-The Zeebe ElasticSearch client is maintained by [Olivier Albertini](https://github.com/OlivierAlbertini). It provides an API for querying Zeebe's ElasticSearch export.
+The Zeebe Elasticsearch client is maintained by [Olivier Albertini](https://github.com/OlivierAlbertini). It provides an API for querying Zeebe's Elasticsearch export.
 
 - [Source](https://github.com/VilledeMontreal/workit/tree/master/packages/zeebe-elasticsearch-client)
-- [NPM Package](https://www.npmjs.com/package/zeebe-elasticsearch-client)
+- [NPM package](https://www.npmjs.com/package/zeebe-elasticsearch-client)

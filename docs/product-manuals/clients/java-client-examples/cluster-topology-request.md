@@ -3,7 +3,7 @@ id: cluster-topology-request
 title: "Request cluster topology"
 ---
 
-This example shows which broker is leader and follower for which partition. Particularly useful when you run a cluster with multiple Zeebe brokers.
+This example shows which broker is leader and follower for which partition. This is particularly useful when you run a cluster with multiple Zeebe brokers.
 
 ## Related resources
 
@@ -15,7 +15,7 @@ This example shows which broker is leader and follower for which partition. Part
 
 ## TopologyViewer.java
 
-[Source on github](https://github.com/camunda-cloud/zeebe/blob/develop/samples/src/main/java/io/camunda/zeebe/example/cluster/TopologyViewer.java)
+[Source on GitHub](https://github.com/camunda-cloud/zeebe/blob/develop/samples/src/main/java/io/camunda/zeebe/example/cluster/TopologyViewer.java)
 
 ```java
 final Topology topology = client.newTopologyRequest().send().join();

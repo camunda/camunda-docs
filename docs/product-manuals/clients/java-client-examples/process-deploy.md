@@ -5,8 +5,8 @@ title: "Deploy a process"
 
 ## Related resources
 
-- [Process basics](/product-manuals/concepts/processes.md)
-- [BPMN introduction](/reference/bpmn-processes/bpmn-primer.md)
+- [Process Basics](/product-manuals/concepts/processes.md)
+- [BPMN Introduction](/reference/bpmn-processes/bpmn-primer.md)
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ title: "Deploy a process"
 
 ## ProcessDeployer.java
 
-[Source on github](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/process/ProcessDeployer.java)
+[Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/process/ProcessDeployer.java)
 
 ```java
 final DeploymentEvent deploymentEvent =
@@ -26,7 +26,7 @@ final DeploymentEvent deploymentEvent =
 
 ## demoProcess.bpmn
 
-[Source on github](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/resources/demoProcess.bpmn)
+[Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/resources/demoProcess.bpmn)
 
 Download the XML and save it in the Java classpath before running the example. Open the file with Camunda Modeler for a graphical representation.
 

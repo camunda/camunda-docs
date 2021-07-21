@@ -4,7 +4,7 @@ title: "Java examples"
 sidebar_label: "Overview"
 ---
 
-These examples are accessible in the [zeebe github repository](https://github.com/camunda-cloud/zeebe/) on the [develop branch](https://github.com/camunda-cloud/zeebe/tree/develop/samples).
+These examples are accessible in the [Zeebe GitHub repository](https://github.com/camunda-cloud/zeebe/) on the [develop branch](https://github.com/camunda-cloud/zeebe/tree/develop/samples).
 
 Instructions to access code locally:
 
@@ -18,14 +18,14 @@ Import the Maven project in the `samples` directory into your IDE to start hacki
 
 ## Process
 
-- [Deploy a process](process-deploy.md)
-- [Create a process instance](process-instance-create.md)
-- [Create non-blocking process instances](process-instance-create-nonblocking.md)
+- [Deploy a Process](process-deploy.md)
+- [Create a Process Instance](process-instance-create.md)
+- [Create Non-Blocking Process Instances](process-instance-create-nonblocking.md)
 - [Create a Process Instance with Results](process-instance-create-with-result.md)
 
 ## Job
 
-- [Open a job worker](job-worker-open.md)
+- [Open a Job Worker](job-worker-open.md)
 
 ## Data
 
@@ -33,4 +33,4 @@ Import the Maven project in the `samples` directory into your IDE to start hacki
 
 ## Cluster
 
-- [Request cluster topology](cluster-topology-request.md)
+- [Request Cluster Topology](cluster-topology-request.md)
