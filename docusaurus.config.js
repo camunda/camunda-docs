@@ -121,7 +121,7 @@ module.exports = {
             },
             {
               label: "Blog",
-              href: "https://zeebe.io/blog/",
+              href: "https://camunda.com/blog/category/camunda-cloud/",
             },
             {
               label: "Privacy Statement",
