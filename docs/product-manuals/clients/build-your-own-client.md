@@ -17,7 +17,7 @@ There are two essential steps:
 
 ## Authentication via OAuth
 
-OAuth is a standard authentication procedure. For an access token, you execute a POST request to the Auth URL with the following payload:
+OAuth is a standard authentication procedure. For an access token, execute a POST request to the Auth URL with the following payload:
 
 ```json
 {
