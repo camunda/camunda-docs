@@ -24,6 +24,10 @@ implementation 'io.camunda:zeebe-client-java:${zeebe.version}'
 
 Use the latest released version from [Maven Central](https://search.maven.org/artifact/io.camunda/zeebe-client-java).
 
+## Spring Integration
+
+If you build a Spring or Spring Boot application, you might want to use [Spring Zeebe](../other-clients/spring) instead of handling the lifecycle and configuration of the Java client yourself (as described in the following paragraphs). 
+
 ## Bootstrapping
 
 In Java code, instantiate the client as follows:

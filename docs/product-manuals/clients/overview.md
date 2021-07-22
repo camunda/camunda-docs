@@ -31,6 +31,7 @@ Community clients supplement the official clients. These clients have not been t
 - [Python](other-clients/python.md)
 - [Ruby](other-clients/ruby.md)
 - [Rust](other-clients/rust.md)
+- [Spring](other-clients/spring.md)
 
 Finally, it is possible to [build your own client](build-your-own-client.md) in case none of the other options are suitable.
 
