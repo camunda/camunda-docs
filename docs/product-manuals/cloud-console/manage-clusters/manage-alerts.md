@@ -30,16 +30,24 @@ You can only have one `Email` alert per Cluster but you can create multiple `Web
 
 Webhook alerts contain a JSON body with following structure:
 
-```
+```json
 {
-    operateUrl: string, // direct link to the incident in operate
-    processInstanceId: string // id of the failed process,
-    errorMessage: string, // error message as seen in operate
-    errorType: string, // error type
-    flowNodeId: string, // id of the flow node that created the error
-    jobKey: string, // key of the failed job
-    creationTime: string, // the time when the error was created
-    processName: string, // name of the failed process
-    processVersion: number, // version number of the failed process
+    "clusterName": "cluster-name",
+    "clusterId": "88d32bfc-4f8e-4dd3-9ae2-adfee281e223",
+    "operateBaseUrl": "https://console.cloud.camunda.io/org/2b3bc239-ad5b-4eef-80e0-6ef5139ed66a/cluster/88d32bfc-4f8e-4dd3-9ae2-adfee281e223/operate",
+    "clusterUrl": "https://console.cloud.camunda.io/org/2b3bc239-ad5b-4eef-80e0-6ef5139ed66a/cluster/88d32bfc-4f8e-4dd3-9ae2-adfee281e223",
+    "alerts": [
+        {
+            "operateUrl": "https://console.cloud.camunda.io/org/2b3bc239-ad5b-4eef-80e0-6ef5139ed66a/cluster/88d32bfc-4f8e-4dd3-9ae2-adfee281e223/operate/#/instances/2251799829404548",
+            "processInstanceId": "1234567890123456",
+            "errorMessage": "something went wrong",
+            "errorType": "JOB_NO_RETRIES",
+            "flowNodeId": "node-id",
+            "jobKey": 1234567890123456,
+            "creationTime": "2021-07-22T08:00:00.000+0000",
+            "processName": "process-name",
+            "processVersion": 1
+        }
+    ]
 }
 ```
