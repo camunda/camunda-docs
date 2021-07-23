@@ -8,35 +8,35 @@ Expressions can be used to access variables and calculate values dynamically.
 The following attributes of BPMN elements **require** an expression:
 
 - Sequence flow on an exclusive gateway: [condition](/reference/bpmn-processes/exclusive-gateways/exclusive-gateways.md#conditions)
-- Message catch event / receive task: [correlation key](/reference/bpmn-processes/message-events/message-events.md#messages)
+- Message catch event/receive task: [correlation key](/reference/bpmn-processes/message-events/message-events.md#messages)
 - Multi-instance activity: [input collection](/reference/bpmn-processes/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/reference/bpmn-processes/multi-instance/multi-instance.md#collecting-the-output)
 - Input/output variable mappings: [source](variables.md#inputoutput-variable-mappings)
 
-Additionally, the following attributes of BPMN elements can define an expression **optionally** instead of a static value:
+Additionally, the following attributes of BPMN elements can define an expression **optionally**, instead of a static value:
 
 - Timer catch event: [timer definition](/reference/bpmn-processes/timer-events/timer-events.md#timers)
-- Message catch event / receive task: [message name](/reference/bpmn-processes/message-events/message-events.md#messages)
+- Message catch event/receive task: [message name](/reference/bpmn-processes/message-events/message-events.md#messages)
 - Service task: [job type](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition), [job retries](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition)
 - Call activity: [process id](/reference/bpmn-processes/call-activities/call-activities.md#defining-the-called-process)
 
 ## Expressions vs. static values
 
-Some attributes of BPMN elements, like the timer definition of a timer catch event, can be defined either:
+Some attributes of BPMN elements—like the timer definition of a timer catch event—can be defined in one of two ways:
 
-- as an expression (e.g. `= remaingTime`), or
-- as a static value (e.g. `PT2H`).
+- As an expression (e.g. `= remaingTime`)
+- As a static value (e.g. `PT2H`)
 
-Expressions always start with an _equal sign_ (e.g. `= order.amount > 100`). The text behind the equal sign is the actual expression (e.g. `order.amount > 100` checks whether the amount of the order is greater than 100).
+Expressions always start with an _equal sign_ (e.g. `= order.amount > 100`). The text following the equal sign is the actual expression (e.g. `order.amount > 100` checks whether the amount of the order is greater than 100).
 
-If the element does not start with the prefix then it is used as a static value. A static value is used either as a string (e.g. job type) or as a number (e.g. job retries). A string value must not be enclosed in quotes.
+If the element does not start with the prefix, it is used as a static value. A static value is used either as a string (e.g. job type) or as a number (e.g. job retries). A string value must not be enclosed in quotes.
 
-Note that an expression can also define a static value by using literals (e.g. `= "foo"`, `= 21`, `= true`, `= [1,2,3]`, `= {x: 22}`, etc.).
+**NOTE**: An expression can also define a static value by using literals (e.g. `= "foo"`, `= 21`, `= true`, `= [1,2,3]`, `= {x: 22}`, etc.)
 
 ## The expression language
 
 An expression is written in **FEEL** (Friendly Enough Expression Language). FEEL is part of the OMG's DMN (Decision Model and Notation) specification. It is designed to have the following properties:
 
-- Side-effect free
+- Free of side effects
 - Simple data model with JSON-like object types: numbers, dates, strings, lists, and contexts
 - Simple syntax designed for business professionals and developers
 - Three-valued logic (true, false, null)
@@ -45,7 +45,7 @@ Camunda Cloud integrates the [FEEL Scala](https://github.com/camunda/feel-scala)
 
 ### Access variables
 
-A variable can be accessed by its name.
+A variable can be accessed by its name:
 
 ```feel
 owner
@@ -58,7 +58,7 @@ items
 // ["item-1", "item-2", "item-3"]
 ```
 
-If a variable is a JSON document/object then it is handled as a FEEL context. A property of the context (aka nested variable property) can be accessed by `.` (a dot) and the property name.
+If a variable is a JSON document/object, it is handled as a FEEL context. A property of the context (e.g. nested variable property) can be accessed by `.` (a dot) and the property name:
 
 ```feel
 order.id
@@ -123,7 +123,7 @@ Values can be compared using the following operators:
 
 </table>
 
-Multiple boolean values can be combined as disjunction (`and`) or conjunction (`or`).
+Multiple boolean values can be combined as disjunction (`and`) or conjunction (`or`):
 
 ```feel
 orderCount >= 5 and orderCount < 15
@@ -131,9 +131,9 @@ orderCount >= 5 and orderCount < 15
 orderCount > 15 or totalPrice > 50
 ```
 
-### Null Checks
+### Null checks
 
-If a variable or a nested property can be `null` then it can be compared to the `null` value. Comparing `null` to a value different from `null` results in `false`.
+If a variable or nested property can be `null`, it can be compared to the `null` value. Comparing `null` to a value different from `null` results in `false`.
 
 ```feel
 order = null
@@ -154,7 +154,7 @@ is defined(order.id)
 // false - if "order" doesn't exist or it has no property "id"
 ```
 
-### String Expressions
+### String expressions
 
 A string value must be enclosed in double quotes. Multiple string values can be concatenated using the `+` operator.
 
@@ -170,11 +170,11 @@ Any value can be transformed into a string value using the `string()` function.
 // "order-123"
 ```
 
-More functions for string values are available as [built-in String functions](/reference/feel/builtin-functions/feel-built-in-functions-string.md) (e.g. contains, matches, etc.).
+More functions for string values are available as [built-in string functions](/reference/feel/builtin-functions/feel-built-in-functions-string.md) (e.g. contains, matches, etc.).
 
-### Temporal Expressions
+### Temporal expressions
 
-The current date and date-time can be accessed using the built-in functions `today()` and `now()`. In order to store the current date or date-time in a variable, it must be converted to a string using the built-in function `string()`.
+The current date and date-time can be accessed using the built-in functions `today()` and `now()`. To store the current date or date-time in a variable, convert it to a string using the built-in function `string()`.
 
 ```feel
 now()
@@ -262,7 +262,11 @@ The following operators can be applied on temporal values:
 
 A temporal value can be compared in a boolean expression with another temporal value of the same type.
 
-The `cycle` type is different from the other temporal types because it is not supported in the FEEL type system. Instead, it is defined as a function that returns the definition of the cycle as a string in the ISO 8601 format of a recurring time interval. The function expects two arguments: the number of repetitions and the recurring interval as duration. If the first argument is `null` or not passed in then the interval is unbounded (i.e. infinitely repeated).
+The `cycle` type is different from the other temporal types because it is not supported in the FEEL type system.
+
+Instead, the `cycle` type is defined as a function that returns the definition of the cycle as a string in the ISO 8601 format of a recurring time interval.
+
+The function expects two arguments: the number of repetitions, and the recurring interval as duration. If the first argument is `null` or not passed in, the interval is unbounded (i.e. infinitely repeated).
 
 ```feel
 cycle(3, duration("PT1H"))
@@ -272,9 +276,11 @@ cycle(duration("P7D"))
 // "R/P7D"
 ```
 
-### List Expressions
+### List expressions
 
-An element of a list can be accessed by its index. The index starts at `1` with the first element (**not** at `0`). A negative index starts at the end by `-1`. If the index is out of the range of the list then `null` is returned instead.
+An element of a list can be accessed by its index. The index starts at `1` with the first element (**not** at `0`).
+
+A negative index starts at the end by `-1`. If the index is out of the range of the list,`null` is returned instead:
 
 ```feel
 ["a","b","c"][1]
@@ -287,14 +293,16 @@ An element of a list can be accessed by its index. The index starts at `1` with 
 // "c"
 ```
 
-A list value can be filtered using a boolean expression. The result is a list of elements that fulfill the condition. The current element in the condition is assigned to the variable `item`.
+A list value can be filtered using a boolean expression. The result is a list of elements that fulfill the condition.
+
+The current element in the condition is assigned to the variable `item`:
 
 ```feel
 [1,2,3,4][item > 2]
 // [3,4]
 ```
 
-The operators `every` and `some` can be used to test if all elements or at least one element of a list fulfill a given condition.
+The operators `every` and `some` can be used to test if all elements or at least one element of a list fulfill a given condition:
 
 ```feel
 every x in [1,2,3] satisfies x >= 2
@@ -304,9 +312,9 @@ some x in [1,2,3] satisfies x > 2
 // true
 ```
 
-### Invoke Functions
+### Invoke functions
 
-A function can be invoked by its name followed by the arguments. The arguments can be assigned to the function parameters either by their position or by defining the parameter names.
+A function can be invoked by its name followed by the arguments. The arguments can be assigned to the function parameters either by their position or by defining the parameter names:
 
 ```feel
 floor(1.5)
@@ -332,7 +340,7 @@ FEEL defines several built-in functions:
 - [Context Functions](/reference/feel/builtin-functions/feel-built-in-functions-context.md)
 - [Temporal Functions](/reference/feel/builtin-functions/feel-built-in-functions-temporal.md)
 
-## Additional Resources
+## Additional resources
 
 - [FEEL](/reference/feel/what-is-feel.md)
 - [FEEL Data Types](/reference/feel/language-guide/feel-data-types.md)
