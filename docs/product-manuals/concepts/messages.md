@@ -7,11 +7,11 @@ Process instances can respond to incoming messages. Published messages must be m
 
 ## Message subscriptions
 
-A message is not sent to a process instance directly. Instead, the message correlation is based on subscriptions that contain the `message name` and the `correlation key` (also known as the correlation value.)
+A message is not sent to a process instance directly. Instead, the message correlation is based on subscriptions that contain the `message name` and the `correlation key` (also known as the correlation value).
 
 ![Message Correlation](assets/message-correlation.png)
 
-A subscription is opened when a process instance awaits a message, for example, when entering a message catch event. The message name is defined either statically in the process (e.g. `Money collected`) or dynamically as an expression. The correlation key is defined dynamically as an expression (e.g. `= orderId`.) The expressions are evaluated on activating the message catch event. The results of the evaluations are used as message name and as correlation key of the subscription (e.g. `"order-123"`.)
+A subscription is opened when a process instance awaits a message, for example, when entering a message catch event. The message name is defined either statically in the process (e.g. `Money collected`) or dynamically as an expression. The correlation key is defined dynamically as an expression (e.g. `= orderId`). The expressions are evaluated on activating the message catch event. The results of the evaluations are used as message name and as correlation key of the subscription (e.g. `"order-123"`).
 
 When a message is published and the message name and correlation key match to a subscription, the message is correlated to the corresponding process instance. If no proper subscription is opened, the message is discarded.
 
@@ -32,9 +32,9 @@ zbctl publish message "Money collected" --correlationKey "order-123"
 
 Messages can be buffered for a given time. Buffering can be useful in a situation when it is not guaranteed the subscription is opened before the message is published.
 
-A message has a _time-to-live_ (TTL) which specifies for how long it is buffered. Within this time, the message can be correlated to a process instance.
+A message has a **time-to-live** (**TTL**) which specifies for how long it's buffered. Within this time, the message can be correlated to a process instance.
 
-When a subscription is opened, it polls the buffer for a proper message. If a proper message exists, it is correlated to the corresponding process instance. In case multiple messages match to the subscription, the first published message is correlated (like a FIFO queue.)
+When a subscription is opened, it polls the buffer for a proper message. If a proper message exists, it is correlated to the corresponding process instance. In case multiple messages match to the subscription, the first published message is correlated (like a FIFO queue).
 
 The buffering of a message is disabled when its TTL is set to zero. If no proper subscription is open, the message is discarded.
 
@@ -59,7 +59,7 @@ A message is **not** correlated to a message start event subscription if an inst
 
 ## Message uniqueness
 
-A message can have an optional message id — a unique id to ensure the message is published and processed only once (i.e. idempotency.) The id can be any string, for example, a request id, a tracking number, or the offset/position in a message queue.
+A message can have an optional message id — a unique id to ensure the message is published and processed only once (i.e. idempotency). The id can be any string, for example, a request id, a tracking number, or the offset/position in a message queue.
 
 A message is rejected and not correlated if a message with the same name, the same correlation key, and the same id is already buffered. After the message is discarded from the buffer, a message with the same name, correlation key, and id can be published again.
 
@@ -78,7 +78,7 @@ zbctl publish message "Money collected" --correlationKey "order-123" --messageId
 
 ## Message patterns
 
-The following patterns describe solutions to common problems what can be solved using message correlation.
+The following patterns describe solutions for common problems tha can be solved using message correlation.
 
 ### Message aggregator
 
@@ -92,11 +92,11 @@ The messages are published with a TTL > 0 and a correlation key that groups the 
 
 The first message creates a new process instance. The following messages are correlated to the same process instance if they have the same correlation key.
 
-When the instance is ended and messages with the same correlation key are not correlated yet, a new process instance is created.
+When the instance ends and messages with the same correlation key are not correlated yet, a new process instance is created.
 
 ### Single instance
 
-**Problem**: create exactly one instance of a process
+**Problem**: Create exactly one instance of a process
 
 **Solution**:
 

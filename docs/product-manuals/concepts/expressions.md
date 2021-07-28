@@ -26,7 +26,7 @@ Some attributes of BPMN elements—like the timer definition of a timer catch ev
 - As an expression (e.g. `= remaingTime`)
 - As a static value (e.g. `PT2H`)
 
-Expressions always start with an _equal sign_ (e.g. `= order.amount > 100`). The text following the equal sign is the actual expression (e.g. `order.amount > 100` checks whether the amount of the order is greater than 100).
+Expressions always start with an **equal sign** (**=**). For example, `= order.amount > 100`. The text following the equal sign is the actual expression. For example, `order.amount > 100` checks if the amount of the order is greater than 100.
 
 If the element does not start with the prefix, it is used as a static value. A static value is used either as a string (e.g. job type) or as a number (e.g. job retries). A string value must not be enclosed in quotes.
 
@@ -41,7 +41,7 @@ An expression is written in **FEEL** (Friendly Enough Expression Language). FEEL
 - Simple syntax designed for business professionals and developers
 - Three-valued logic (true, false, null)
 
-Camunda Cloud integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL Expressions](/reference/feel/what-is-feel.md).
+Camunda Cloud integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL expressions](/reference/feel/what-is-feel.md).
 
 ### Access variables
 
@@ -58,7 +58,7 @@ items
 // ["item-1", "item-2", "item-3"]
 ```
 
-If a variable is a JSON document/object, it is handled as a FEEL context. A property of the context (e.g. nested variable property) can be accessed by `.` (a dot) and the property name:
+If a variable is a JSON document/object, it is handled as a FEEL context. A property of the context (e.g. nested variable property) can be accessed by a period (`.`) and the property name:
 
 ```feel
 order.id
@@ -332,17 +332,17 @@ contains(string: "foobar", match: "foo")
 
 FEEL defines several built-in functions:
 
-- [Conversion Functions](/reference/feel/builtin-functions/feel-built-in-functions-conversion.md)
-- [Boolean Functions](/reference/feel/builtin-functions/feel-built-in-functions-boolean.md)
-- [String Functions](/reference/feel/builtin-functions/feel-built-in-functions-string.md)
-- [Numeric Functions](/reference/feel/builtin-functions/feel-built-in-functions-numeric.md)
-- [List Functions](/reference/feel/builtin-functions/feel-built-in-functions-list.md)
-- [Context Functions](/reference/feel/builtin-functions/feel-built-in-functions-context.md)
-- [Temporal Functions](/reference/feel/builtin-functions/feel-built-in-functions-temporal.md)
+- [Conversion functions](/reference/feel/builtin-functions/feel-built-in-functions-conversion.md)
+- [Boolean functions](/reference/feel/builtin-functions/feel-built-in-functions-boolean.md)
+- [String functions](/reference/feel/builtin-functions/feel-built-in-functions-string.md)
+- [Numeric functions](/reference/feel/builtin-functions/feel-built-in-functions-numeric.md)
+- [List functions](/reference/feel/builtin-functions/feel-built-in-functions-list.md)
+- [Context functions](/reference/feel/builtin-functions/feel-built-in-functions-context.md)
+- [Temporal functions](/reference/feel/builtin-functions/feel-built-in-functions-temporal.md)
 
 ## Additional resources
 
 - [FEEL](/reference/feel/what-is-feel.md)
-- [FEEL Data Types](/reference/feel/language-guide/feel-data-types.md)
-- [FEEL Expressions](/reference/feel/language-guide/feel-expression.md)
-- [DMN Specification](https://www.omg.org/spec/DMN/About-DMN/)
+- [FEEL data types](/reference/feel/language-guide/feel-data-types.md)
+- [FEEL expressions](/reference/feel/language-guide/feel-expression.md)
+- [DMN specification](https://www.omg.org/spec/DMN/About-DMN/)

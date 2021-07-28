@@ -51,7 +51,7 @@ When the incident is resolved, the job can be activated by a worker again.
 
 ### Resolving a process instance-related incident
 
-If an incident is created during process execution and it is not related to a job, the incident is usually related to the variables of the process instance. For example, an input or output variable mapping can't be applied.
+If an incident is created during process execution and it's not related to a job, the incident is usually related to the variables of the process instance. For example, an input or output variable mapping can't be applied.
 
 To resolve the incident, update the variables and mark the incident as resolved.
 

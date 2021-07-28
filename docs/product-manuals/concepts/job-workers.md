@@ -10,9 +10,9 @@ Each time such a task needs to be performed, this is represented by a job.
 A job has the following properties:
 
 - **Type**: Describes the work item and is defined in each task in the process. The type is referenced by workers to request the jobs they are able to perform.
-- **Custom headers**: Additional static metadata that is defined in the process. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header).
+- **Custom headers**: Additional static metadata that is defined in the process. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header.)
 - **Key**: Unique key to identify a job. The key is used to hand in the results of a job execution, or to report failures during job execution.
-- **Variables**: The contextual/business data of the process instance that is required by the worker to do its work.
+- **Variables**: The contextual/business data of the process instance required by the worker to do its work.
 
 ## Requesting jobs
 
@@ -45,9 +45,9 @@ Ordinarily, a request for jobs can be completed immediately when no jobs are ava
 
 To find a job to work on, the worker now needs to poll again for available jobs. This leads to workers repeatedly sending requests until a job is available.
 
-This is expensive in terms of resource usage, because both the worker and the server are performing a lot of unproductive work. Zeebe supports _long polling_ for available jobs to better utilize resources.
+This is expensive in terms of resource usage, because both the worker and the server are performing a lot of unproductive work. Zeebe supports **long polling** for available jobs to better utilize resources.
 
-With _long polling_, a request will be kept open while no jobs are available. The request is completed when at least one job becomes available.
+With **long polling**, a request will be kept open while no jobs are available. The request is completed when at least one job becomes available.
 
 ### Job queueing
 
@@ -70,6 +70,6 @@ After working on an activated job, a job worker should inform Camunda Cloud that
 
 If the job is not completed or failed within the configured job activation timeout, Zeebe will reassign the job to another job worker. This does not affect the number of `remaining retries`.
 
-A timeout may lead to two different workers working on the same job, possibly at the same time. If this happens, only one worker will successfully complete the job. The other `complete job` command will be rejected with a `NOT FOUND` error.
+A timeout may lead to two different workers working on the same job, possibly at the same time. If this occurs, only one worker will successfully complete the job. The other `complete job` command will be rejected with a `NOT FOUND` error.
 
 The fact that jobs may be worked on more than once means that Zeebe is an "at least once" system with respect to job delivery and that worker code must be idempotent. In other words, workers __must__ deal with jobs in a way that allows the code to be executed more than once for the same job, all while preserving the expected application state.
