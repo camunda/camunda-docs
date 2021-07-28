@@ -14,7 +14,7 @@ An installation can be done quickly via the package manager `npm`. The correspon
 npm i -g zbctl
 ```
 
-You can also download a binary for your Operating System from the [Zeebe GitHub releases page](https://github.com/camunda-cloud/zeebe/releases).
+You can also download a binary for your operating system from the [Zeebe GitHub releases page](https://github.com/camunda-cloud/zeebe/releases).
 
 ## Connection settings
 
@@ -38,7 +38,7 @@ zbctl [options] [command]
 ```
 
 ```
-zbctl is command line interface designed to create and read resources inside Zeebe broker.
+zbctl is command line interface designed to create and read resources inside the Zeebe broker.
 It is designed for regular maintenance jobs, such as:
         * Deploying processes
         * Creating jobs and process instances

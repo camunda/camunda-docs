@@ -55,16 +55,14 @@ In Java code, instantiate the client as follows:
 
 Let's go over this code snippet line by line:
 
-1. First, we declare a few variables to define the connection properties. These values can be taken from the connection information on the **Client Credentials** page. Note that `clientSecret` is only visible when you create the client credentials.
-2. Next, we create the credentials provider for the OAuth protocol. This is needed to authenticate your client.
-3. Next, we create the client by passing in the address of the cluster we want to connect to and the credentials provider from the step above.
-4. Finally, we send a test request to verify the connection was established.
+1. Declare a few variables to define the connection properties. These values can be taken from the connection information on the **Client Credentials** page. Note that `clientSecret` is only visible when you create the client credentials.
+2. Create the credentials provider for the OAuth protocol. This is needed to authenticate your client.
+3. Create the client by passing in the address of the cluster we want to connect to and the credentials provider from the step above.
+4. Send a test request to verify the connection was established.
 
-See **io.camunda.zeebe.client.ZeebeClientBuilder** for a description of all available configuration properties.
+See [io.camunda.zeebe.client.ZeebeClientBuilder](https://javadoc.io/doc/io.zeebe/zeebe-client-java/latest/io/zeebe/client/ZeebeClientBuilder.html) for a description of all available configuration properties.
 
-[//]:# (Can we link to the location above?)
-
-Another—more compact—option is to pass in the connection settings via environment variables:
+Another (more compact) option is to pass in the connection settings via environment variables:
 
 ```bash
 export ZEEBE_ADDRESS='[Zeebe API]'
@@ -84,10 +82,13 @@ ZeebeClient client =
         .build();
 ```
 
-## Next Steps
+## Next steps
 
 - [Getting Started Guide](https://github.com/camunda-cloud/camunda-cloud-get-started): A comprehensive tutorial that covers Camunda Modeler, Operate, and the Java client.
-- [Job Worker](job-worker.md): An introduction to the Java client's job worker.
+
+[//]:# (Should we link to the desktop browser version of the gettin started guide here?)
+
+- [Job worker](job-worker.md): An introduction to the Java client's job worker.
 - [Logging](logging.md): An introduction to configuring logging for a Zeebe client.
-- [Writing Tests](testing.md): An introduction to writing tests that use an embedded version of the workflow engine.
+- [Writing tests](testing.md): An introduction to writing tests that use an embedded version of the workflow engine.
 - [Examples](../java-client-examples/index.md): A collection of specific examples for different use cases.

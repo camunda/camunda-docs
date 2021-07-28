@@ -5,12 +5,12 @@ title: "Deploy a process"
 
 ## Related resources
 
-- [Process Basics](/product-manuals/concepts/processes.md)
-- [BPMN Introduction](/reference/bpmn-processes/bpmn-primer.md)
+- [Process basics](/product-manuals/concepts/processes.md)
+- [BPMN introduction](/reference/bpmn-processes/bpmn-primer.md)
 
 ## Prerequisites
 
-1. Running Zeebe broker with endpoint `localhost:26500` (default)
+1. Run the Zeebe broker with endpoint `localhost:26500` (default).
 
 ## ProcessDeployer.java
 

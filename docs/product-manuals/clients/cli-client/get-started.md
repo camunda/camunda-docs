@@ -24,7 +24,7 @@ An installation can be done quickly via the package manager `npm`. The correspon
 npm i -g zbctl
 ```
 
-You can also download a binary for your Operating System from the [Zeebe GitHub releases page](https://github.com/camunda-cloud/zeebe/releases).
+You can also download a binary for your operating system from the [Zeebe GitHub releases page](https://github.com/camunda-cloud/zeebe/releases).
 
 ### Connection settings
 
@@ -69,7 +69,7 @@ Use [this process model](./assets/gettingstarted_quickstart_advanced.bpmn) for t
 
 ![processId](./assets/zeebe-modeler-advanced-process-id.png)
 
-This process includes a Service Task and an XOR gateway. Select the Service Task and fill in the properties. Set the **Type** to `test-worker`.
+This process includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
 
 ![process](./assets/zeebe-modeler-advanced.png)
 
@@ -115,7 +115,9 @@ If the deployment is successful, you'll get the following output:
 }
 ```
 
-**IMPORTANT**: You will need the `bpmnProcessId` to create a new instance.
+:::note
+You will need the `bpmnProcessId` to create a new instance.
+:::
 
 ## Register a worker
 
@@ -172,6 +174,6 @@ Next, you can connect both workers in parallel and create more process instances
 while true; do zbctl create instance camunda-cloud-quick-start-advanced; sleep 1; done
 ```
 
-In **Operate**, you will see instances ending in both end events depending on which worker picked up the job.
+In **Operate**, you'll see instances ending in both end events depending on which worker picked up the job.
 
 ![operate-instances](assets/operate-advanced-instances.png)

@@ -5,7 +5,7 @@ title: "Create a process instance with results"
 
 ## Prerequisites
 
-1. Running Zeebe broker with endpoint `localhost:26500` (default)
+1. Run the Zeebe broker with endpoint `localhost:26500` (default).
 1. Run the [deploy a process example](process-deploy.md). Deploy [`demoProcessSingleTask.bpmn`](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/resources/demoProcessSingleTask.bpmn) instead of `demoProcess.bpmn`.
 
 ## ProcessInstanceWithResultCreator.java

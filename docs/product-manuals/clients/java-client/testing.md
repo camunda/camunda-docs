@@ -54,7 +54,7 @@ public class MyTest {
 }
 ```
 
-## Verify the Result
+## Verify the result
 
 The `ZeebeTestRule` also provides some basic assertions in AssertJ style. The entry point of the assertions is `ZeebeTestRule.assertThat(...)`.
 

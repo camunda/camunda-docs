@@ -18,14 +18,14 @@ Import the Maven project in the `samples` directory into your IDE to start hacki
 
 ## Process
 
-- [Deploy a Process](process-deploy.md)
-- [Create a Process Instance](process-instance-create.md)
-- [Create Non-Blocking Process Instances](process-instance-create-nonblocking.md)
-- [Create a Process Instance with Results](process-instance-create-with-result.md)
+- [Deploy a process](process-deploy.md)
+- [Create a process instance](process-instance-create.md)
+- [Create non-blocking process instances](process-instance-create-nonblocking.md)
+- [Create a process instance with results](process-instance-create-with-result.md)
 
 ## Job
 
-- [Open a Job Worker](job-worker-open.md)
+- [Open a job worker](job-worker-open.md)
 
 ## Data
 
@@ -33,4 +33,4 @@ Import the Maven project in the `samples` directory into your IDE to start hacki
 
 ## Cluster
 
-- [Request Cluster Topology](cluster-topology-request.md)
+- [Request cluster topology](cluster-topology-request.md)

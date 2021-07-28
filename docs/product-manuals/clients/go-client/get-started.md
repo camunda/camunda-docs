@@ -47,7 +47,9 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-**Hint:** When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
+:::note
+When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
+:::
 
 4. Create a `main.go` file inside the module and add the following lines to bootstrap the Zeebe client:
 
@@ -194,7 +196,7 @@ As you can see, a process instance has been started and finished.
 
 ## Work on a task
 
-Now we want to do some work within our process. Follow the steps below:
+Now, we want to do some work within our process. Follow the steps below:
 
 1. Add a few service tasks to the BPMN diagram and set the required attributes.
 
@@ -208,7 +210,7 @@ Now we want to do some work within our process. Follow the steps below:
 
 ![model-process-step-2](assets/order-process.png)
 
-4. Set the type of each task, which identifies the nature of the work to be performed.
+4. Set the **type** of each task, which identifies the nature of the work to be performed.
 
 - Set the **type** of the first task to `payment-service`.
 - Set the **type** of the second task to `fetcher-service`.
@@ -335,8 +337,7 @@ func failJob(client worker.JobClient, job entities.Job) {
 
 In this example, we open a [job worker](/product-manuals/concepts/job-workers.md) for jobs of type `payment-service`.
 
-The job worker will repeatedly poll for new jobs of the type `payment-service` and activate them subsequently. Each activated job will then be passed to the job handler, which implements the business
-logic of the job worker.
+The job worker will repeatedly poll for new jobs of the type `payment-service` and activate them subsequently. Each activated job will then be passed to the job handler, which implements the business logic of the job worker.
 
 The handler will then complete the job with its result or fail the job if
 it encounters a problem while processing the job.

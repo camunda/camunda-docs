@@ -5,7 +5,7 @@ title: "Create non-blocking process instances"
 
 ## Prerequisites
 
-1. Running Zeebe broker with endpoint `localhost:26500` (default)
+1. Run the Zeebe broker with endpoint `localhost:26500` (default).
 1. Run the [deploy a process example](process-deploy.md).
 
 ## NonBlockingProcessInstanceCreator.java

@@ -5,11 +5,11 @@ title: "Open a job worker"
 
 ## Related resources
 
-- [Job Worker Basics](/product-manuals/concepts/job-workers.md)
+- [Job worker basics](/product-manuals/concepts/job-workers.md)
 
 ## Prerequisites
 
-- Running Zeebe broker with endpoint `localhost:26500` (default)
+- Run the Zeebe broker with endpoint `localhost:26500` (default).
 - Run the [deploy a process example](process-deploy.md).
 - Run the [create a process instance example](process-instance-create.md) a few times.
 
