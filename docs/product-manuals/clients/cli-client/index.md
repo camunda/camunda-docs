@@ -38,7 +38,7 @@ zbctl [options] [command]
 ```
 
 ```
-zbctl is command line interface designed to create and read resources inside the Zeebe broker.
+zbctl is a command line interface designed to create and read resources inside the Zeebe broker.
 It is designed for regular maintenance jobs, such as:
         * Deploying processes
         * Creating jobs and process instances
