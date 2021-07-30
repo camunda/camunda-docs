@@ -27,7 +27,7 @@ Camunda Cloud addresses these challenges and provides:
 
 ## What are its core quality attributes?
 
-Camunda Cloud is designed to operate on very large scale. To achieve this, it provides:
+Camunda Cloud is designed to operate on a very large scale. To achieve this, it provides:
 
 - **Horizontal scalability** and no dependence on an external database; Zeebe (the workflow engine inside Camunda Cloud) writes data directly to the filesystem on the same servers where it is deployed. Zeebe makes it simple to distribute processing across a cluster of machines to deliver high throughput.
 - **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda Cloud can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action.
