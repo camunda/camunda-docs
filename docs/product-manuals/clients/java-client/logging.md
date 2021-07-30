@@ -3,7 +3,7 @@ id: logging
 title: "Logging"
 ---
 
-The client uses SLF4J for logging. It logs useful things, such as exception stack traces when a job handler fails execution. Using the SLF4J API, any SLF4J implementation can be plugged in. The following example uses Log4J 2.
+The client uses SLF4J for logging useful notes, such as exception stack traces when a job handler fails execution. Using the SLF4J API, any SLF4J implementation can be plugged in. The following example uses Log4J 2.
 
 ## Maven dependencies
 
@@ -23,7 +23,9 @@ The client uses SLF4J for logging. It logs useful things, such as exception stac
 
 ## Configuration
 
-Add a file called `log4j2.xml` to the classpath of your application. Add the following content:
+First, add a file called `log4j2.xml` to the classpath of your application.
+
+Then, add the following content:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

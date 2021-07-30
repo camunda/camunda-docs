@@ -3,18 +3,18 @@ id: data-pojo
 title: "Handle variables as POJO"
 ---
 
-## Related Resources
+## Related resources
 
 - [Data flow](../../../reference/bpmn-processes/data-flow.md)
 
 ## Prerequisites
 
-1. Running Zeebe broker with endpoint `localhost:26500` (default)
-1. Run the [deploy a process example](process-deploy.md)
+1. Run the Zeebe broker with endpoint `localhost:26500` (default).
+1. Run the [deploy a process example](process-deploy.md).
 
 ## HandleVariablesAsPojo.java
 
-[Source on github](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/data/HandleVariablesAsPojo.java)
+[Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/data/HandleVariablesAsPojo.java)
 
 ```java
     ...

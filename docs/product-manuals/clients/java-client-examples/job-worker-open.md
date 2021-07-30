@@ -3,19 +3,19 @@ id: job-worker-open
 title: "Open a job worker"
 ---
 
-## Related Resources
+## Related resources
 
 - [Job worker basics](/product-manuals/concepts/job-workers.md)
 
 ## Prerequisites
 
-1. Running Zeebe broker with endpoint `localhost:26500` (default)
-1. Run the [deploy a process example](process-deploy.md)
-1. Run the [create a process instance example](process-instance-create.md) a couple of times
+- Run the Zeebe broker with endpoint `localhost:26500` (default).
+- Run the [deploy a process example](process-deploy.md).
+- Run the [create a process instance example](process-instance-create.md) a few times.
 
 ## JobWorkerCreator.java
 
-[Source on github](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/job/JobWorkerCreator.java)
+[Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/job/JobWorkerCreator.java)
 
 ```java
         ...

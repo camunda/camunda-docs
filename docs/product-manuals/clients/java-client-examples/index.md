@@ -4,7 +4,7 @@ title: "Java examples"
 sidebar_label: "Overview"
 ---
 
-These examples are accessible in the [zeebe github repository](https://github.com/camunda-cloud/zeebe/) on the [develop branch](https://github.com/camunda-cloud/zeebe/tree/develop/samples).
+These examples are accessible in the [Zeebe GitHub repository](https://github.com/camunda-cloud/zeebe/) on the [develop branch](https://github.com/camunda-cloud/zeebe/tree/develop/samples).
 
 Instructions to access code locally:
 
@@ -21,7 +21,7 @@ Import the Maven project in the `samples` directory into your IDE to start hacki
 - [Deploy a process](process-deploy.md)
 - [Create a process instance](process-instance-create.md)
 - [Create non-blocking process instances](process-instance-create-nonblocking.md)
-- [Create a Process Instance with Results](process-instance-create-with-result.md)
+- [Create a process instance with results](process-instance-create-with-result.md)
 
 ## Job
 
