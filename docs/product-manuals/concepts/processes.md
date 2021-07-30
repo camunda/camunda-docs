@@ -35,12 +35,14 @@ You can think of Zeebe's process orchestration as a state machine, taking the fo
 
 1. A process instance reaches a task, and Zeebe creates a job that can be requested by a worker.
 2. Zeebe waits for the worker to request a job and complete the work.
-3. Once the work is completed, the flow continues to the next step.
+3. Once the work is complete, the flow continues to the next step.
 4. If the worker fails to complete the work, the process remains at the current step, and the job could be retried until it's successfully completed.
 
 ## Data flow
 
 As Zeebe progresses from one task to the next in a process, it can move custom data in the form of variables. Variables are key-value-pairs and part of the process instance.
+
+[//]:# (Do we need hyphens between key-value-pairs?)
 
 ![data-flow](assets/process-data-flow.png)
 
@@ -52,19 +54,19 @@ Some processes don't always execute the same tasks, and instead need to choose d
 
 ![data-conditions](assets/processes-data-based-conditions.png)
 
-The diamond shape with the **X** in the middle is an element indicating the process decides to take one of several paths.
+The diamond shape with the **X** in the middle is an element indicating the process can take one of several paths.
 
 ## Events
 
-Events represent things that happen. A process can react to events (catching event) and can emit events (throwing event). For example:
+Events represent things that happen. A process can react to events (catching event) and can emit events (throwing event).
 
 ![process](assets/process-events.png)
 
-There are different types of events such as a message, timer, or error.
+There are different types of events, such as a message, timer, or error.
 
 ## Parallel execution
 
-In many cases, it is also useful to perform multiple tasks in parallel. This can be achieved with a parallel gateway:
+In many cases, it's also useful to perform multiple tasks in parallel. This can be achieved with a parallel gateway:
 
 ![data-conditions](assets/processes-parallel-gateway.png)
 

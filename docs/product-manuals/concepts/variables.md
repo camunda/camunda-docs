@@ -7,7 +7,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 ## Variable names
 
-The name of a variable can be any alphanumeric string including the `_` symbol. For a combination of words, it is recommended to use the `camelCase` or the `snake_case` format. The `kebab-case` format is not allowed because it contains the operator `-`.
+The name of a variable can be any alphanumeric string including the `_` symbol. For a combination of words, it's recommended to use the `camelCase` or the `snake_case` format. The `kebab-case` format is not allowed because it contains the operator `-`.
 
 When accessing a variable in an expression, keep in mind the variable name is case-sensitive.
 
@@ -53,7 +53,7 @@ When variables are merged into a process instance (e.g. on job completion, on me
 
 The propagation ends when a scope contains a variable with the same name. In this case, the variable value is updated.
 
-If no scope contains this variable, it is created as a new variable in the root scope.
+If no scope contains this variable, it's created as a new variable in the root scope.
 
 ![variable-propagation](assets/variable-propagation.png)
 
@@ -73,9 +73,9 @@ Variable mappings are defined in the process as extension elements under `ioMapp
 
 The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](expressions.md#access-variables) of the process instance that holds the value. If the variable or the nested property doesn't exist, an [incident](incidents.md) is created.
 
-The `target` expression defines **where** the value of the `source` expression is stored. It can reference a variable by its name or a nested property of a variable. If the variable or the nested property doesn't exist, it is created.
+The `target` expression defines **where** the value of the `source` expression is stored. It can reference a variable by its name or a nested property of a variable. If the variable or the nested property doesn't exist, it's created.
 
-Variable mappings are evaluated in the defined order. So, a `source` expression can access the target variable of a previous mapping.
+Variable mappings are evaluated in the defined order. Therefore, a `source` expression can access the target variable of a previous mapping.
 
 ![variable-mappings](assets/variable-mappings.png)
 
@@ -116,7 +116,7 @@ If **one or more** output mappings are defined, the job/message variables are se
 
 If **no** output mappings are defined, all job/message variables are merged into the process instance.
 
-In case of a subprocess, the behavior is different. There are no job/message variables to be merged. However, output mappings can be used to propagate _local variables_ of the subprocess to higher scopes. By default, all _local variables_ are removed when the scope is left.
+In the case of a subprocess, the behavior is different. There are no job/message variables to be merged. However, output mappings can be used to propagate _local variables_ of the subprocess to higher scopes. By default, all _local variables_ are removed when the scope is left.
 
 Examples:
 

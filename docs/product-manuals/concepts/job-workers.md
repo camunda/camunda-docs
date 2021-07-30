@@ -18,7 +18,7 @@ A job has the following properties:
 
 Job workers request jobs of a certain type on a regular interval (i.e. polling). This interval and the number of jobs requested are configurable in the Zeebe client.
 
-If one or more jobs of the requested type are available, then Zeebe (the workflow engine inside Camunda Cloud) will stream activated jobs to the worker. Upon receiving jobs, a worker performs them and sends back a `complete` or `fail` command for each job, depending on if the job could be completed successfully.
+If one or more jobs of the requested type are available, Zeebe (the workflow engine inside Camunda Cloud) will stream activated jobs to the worker. Upon receiving jobs, a worker performs them and sends back a `complete` or `fail` command for each job, depending on if the job could be completed successfully.
 
 For example, the following process might generate three different types of jobs: `process-payment`, `fetch-items`, and `ship-parcel`:
 
@@ -43,7 +43,7 @@ On requesting jobs, the following properties can be set:
 
 Ordinarily, a request for jobs can be completed immediately when no jobs are available.
 
-To find a job to work on, the worker now needs to poll again for available jobs. This leads to workers repeatedly sending requests until a job is available.
+To find a job to work on, the worker must poll again for available jobs. This leads to workers repeatedly sending requests until a job is available.
 
 This is expensive in terms of resource usage, because both the worker and the server are performing a lot of unproductive work. Zeebe supports **long polling** for available jobs to better utilize resources.
 
@@ -55,21 +55,21 @@ Zeebe decouples creation of jobs from performing the work on them. It is always 
 
 This increases the resilience of the overall system. Camunda Cloud is highly available so job workers don't have to be highly available. Zeebe queues all jobs during any job worker outages, and progress will resume as soon as workers come back online.
 
-It also insulates job workers against sudden bursts in traffic. Because workers request jobs, they have full control over the rate at which they take on new jobs.
+This also insulates job workers against sudden bursts in traffic. Because workers request jobs, they have full control over the rate at which they take on new jobs.
 
 ## Completing or failing jobs
 
-After working on an activated job, a job worker should inform Camunda Cloud that the job has either `completed` or `failed`.
+After working on an activated job, a job worker informs Camunda Cloud that the job has either `completed` or `failed`.
 
-- When the job worker completes its work, it sends a `complete job` command along with any variables, which in turn will be merged into the process instance. This is how the job worker exposes the results of its work.
-- If the job worker could not successfully complete its work, it will send a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker. 
-    - If `remaining retries` is greather than zero, the job will be retried and reassigned. 
-    - If `remaining retries` is zero or negative, an incident will be raised and the job will not be retried until the incident is resolved.
+- When the job worker completes its work, it sends a `complete job` command along with any variables, which in turn is merged into the process instance. This is how the job worker exposes the results of its work.
+- If the job worker can not successfully complete its work, it sends a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker. 
+    - If `remaining retries` is greather than zero, the job is retried and reassigned. 
+    - If `remaining retries` is zero or negative, an incident is raised and the job is not retried until the incident is resolved.
 
 ## Timeouts
 
-If the job is not completed or failed within the configured job activation timeout, Zeebe will reassign the job to another job worker. This does not affect the number of `remaining retries`.
+If the job is not completed or failed within the configured job activation timeout, Zeebe reassigns the job to another job worker. This does not affect the number of `remaining retries`.
 
-A timeout may lead to two different workers working on the same job, possibly at the same time. If this occurs, only one worker will successfully complete the job. The other `complete job` command will be rejected with a `NOT FOUND` error.
+A timeout may lead to two different workers working on the same job, possibly at the same time. If this occurs, only one worker successfully completes the job. The other `complete job` command is rejected with a `NOT FOUND` error.
 
 The fact that jobs may be worked on more than once means that Zeebe is an "at least once" system with respect to job delivery and that worker code must be idempotent. In other words, workers __must__ deal with jobs in a way that allows the code to be executed more than once for the same job, all while preserving the expected application state.

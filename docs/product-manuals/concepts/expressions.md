@@ -5,14 +5,14 @@ title: "Expressions"
 
 Expressions can be used to access variables and calculate values dynamically.
 
-The following attributes of BPMN elements **require** an expression:
+The following attributes of BPMN elements *require* an expression:
 
 - Sequence flow on an exclusive gateway: [condition](/reference/bpmn-processes/exclusive-gateways/exclusive-gateways.md#conditions)
 - Message catch event/receive task: [correlation key](/reference/bpmn-processes/message-events/message-events.md#messages)
 - Multi-instance activity: [input collection](/reference/bpmn-processes/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/reference/bpmn-processes/multi-instance/multi-instance.md#collecting-the-output)
 - Input/output variable mappings: [source](variables.md#inputoutput-variable-mappings)
 
-Additionally, the following attributes of BPMN elements can define an expression **optionally**, instead of a static value:
+Additionally, the following attributes of BPMN elements can define an expression *optionally*, instead of a static value:
 
 - Timer catch event: [timer definition](/reference/bpmn-processes/timer-events/timer-events.md#timers)
 - Message catch event/receive task: [message name](/reference/bpmn-processes/message-events/message-events.md#messages)
@@ -278,7 +278,7 @@ cycle(duration("P7D"))
 
 ### List expressions
 
-An element of a list can be accessed by its index. The index starts at `1` with the first element (**not** at `0`).
+An element of a list can be accessed by its index. The index starts at `1` with the first element (*not* at `0`).
 
 A negative index starts at the end by `-1`. If the index is out of the range of the list,`null` is returned instead:
 
@@ -293,7 +293,7 @@ A negative index starts at the end by `-1`. If the index is out of the range of 
 // "c"
 ```
 
-A list value can be filtered using a boolean expression. The result is a list of elements that fulfill the condition.
+A list value can be filtered using a boolean expression; the result is a list of elements that fulfill the condition.
 
 The current element in the condition is assigned to the variable `item`:
 

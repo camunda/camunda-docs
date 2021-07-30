@@ -15,7 +15,7 @@ Incidents are created in different situations, including the following:
 
 ## Resolving
 
-To resolve an incident, the user completes the following steps:
+To resolve an incident, complete the following steps:
 
 1. Identify and resolve the problem.
 2. Mark the incident as resolved, triggering retry process execution.
@@ -25,7 +25,11 @@ To resolve an incident, the user completes the following steps:
 
 If a job fails and has no retries remaining, an incident is created. There are many different reasons why the job may have failed. For example, the variables may not be in the expected format, or a service is not available (e.g. a database).
 
-If the variables are causing the incident, update the variables of the process instance. Then, increase the remaining retries of the job and mark the incident as resolved. 
+If the variables are causing the incident, complete the following steps:
+
+1. Update the variables of the process instance.
+2. Increase the remaining retries of the job.
+3. Mark the incident as resolved. 
 
 **NOTE**: It's recommended you complete these tasks in [Operate](/product-manuals/operate/index.md).
 
