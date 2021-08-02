@@ -71,6 +71,13 @@ function Home() {
               Get Started
             </Link>
           </div>
+          <div>
+            <Link
+              className={clsx('sign-up-link')}
+              to="https://camunda.io">
+              Or sign up!
+            </Link>
+          </div>
         </div>
       </header>
       <main>
