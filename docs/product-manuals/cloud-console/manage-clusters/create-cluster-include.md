@@ -1,6 +1,8 @@
 ---
 ---
 
+[//]:# (Do we need an id and title above?)
+
 ![cluster-creating](./img/cluster-overview-empty.png)
 
 In the upper right area you'll find the button **Create New Cluster**.
