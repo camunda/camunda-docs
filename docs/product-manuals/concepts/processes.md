@@ -3,25 +3,25 @@ id: processes
 title: "Processes"
 ---
 
-Processes are flowchart-like blueprints that define the orchestration of _tasks_. Every task represents a piece of business logic such that the ordered execution produces a meaningful result.
+Processes are flowchart-like blueprints that define the orchestration of **tasks**. Every task represents a piece of business logic so the ordered execution produces a meaningful result.
 
-A _job worker_ implements the business logic required to complete a task. A job worker must be able to communicate with Camunda Cloud, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical three-tier application, as a \(lambda\) function, via command line tools, etc.
+A **job worker** implements the business logic required to complete a task. A job worker must be able to communicate with Camunda Cloud, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
 
-Running a process then requires three steps:
+Running a process requires three steps:
 
-- Deploy a process to Camunda Cloud
-- Implement and register job workers for tasks in the worklfows
-- Create new instances of said process
+1. Deploy a process to Camunda Cloud.
+2. Implement and register job workers for tasks in the workflows.
+3. Create new instances of said process.
 
-But let us not get ahead of ourselves. The very first step is to design the process.
+Let's not get ahead of ourselves; the very first step is to design the process.
 
 ## BPMN 2.0
 
-Zeebe uses [BPMN 2.0](http://www.bpmn.org/) for representing processes. BPMN is an industry standard which is widely supported by different vendors and implementations. Using BPMN ensures that processes can be interchanged between Zeebe and other process systems.
+Zeebe uses [BPMN 2.0](http://www.bpmn.org/) to represent processes. BPMN is an industry standard widely supported by different vendors and implementations. Using BPMN ensures processes can be interchanged between Zeebe and other process systems.
 
 ## BPMN modeler
 
-Zeebe provides a free and open-source BPMN modeling tool to create BPMN diagrams and configure their technical properties. The modeler is a desktop application based on the [bpmn.io](https://bpmn.io) open source project.
+Zeebe provides a free and open-source BPMN modeling tool to create BPMN diagrams and configure their technical properties. The modeler is a desktop application based on the [bpmn.io](https://bpmn.io) open-source project.
 
 Camunda Modeler can be [downloaded from GitHub](https://camunda.com/download/modeler/).
 
@@ -31,36 +31,43 @@ The simplest kind of process is an ordered sequence of tasks. Whenever process e
 
 ![process-sequence](assets/order-process.png)
 
-You can think of Zeebe's process orchestration as a state machine. A process instance reaches a task, and Zeebe creates a job that can be requested by a worker. Zeebe then waits for the worker to request a job and complete the work. Once the work is completed, the flow continues to the next step. If the worker fails to complete the work, the process remains at the current step, and the job could be retried until it's successfully completed.
+You can think of Zeebe's process orchestration as a state machine, taking the following steps:
+
+1. A process instance reaches a task, and Zeebe creates a job that can be requested by a worker.
+2. Zeebe waits for the worker to request a job and complete the work.
+3. Once the work is complete, the flow continues to the next step.
+4. If the worker fails to complete the work, the process remains at the current step, and the job could be retried until it's successfully completed.
 
 ## Data flow
 
 As Zeebe progresses from one task to the next in a process, it can move custom data in the form of variables. Variables are key-value-pairs and part of the process instance.
 
+[//]:# (Do we need hyphens between key-value-pairs?)
+
 ![data-flow](assets/process-data-flow.png)
 
-Any job worker can read the variables and modify them when completing a job so that data can be shared between different tasks in a process.
+Any job worker can read the variables and modify them when completing a job so data can be shared between different tasks in a process.
 
 ## Data-based conditions
 
-Some processes do not always execute the same tasks but need to choose different tasks based on variables and conditions:
+Some processes don't always execute the same tasks, and instead need to choose different tasks based on variables and conditions:
 
 ![data-conditions](assets/processes-data-based-conditions.png)
 
-The diamond shape with the "X" in the middle is an element indicating that the process decides to take one of several paths.
+The diamond shape with the **X** in the middle is an element indicating the process can take one of several paths.
 
 ## Events
 
-Events represent things that happen. A process can react to events (catching event) and can emit events (throwing event). For example:
+Events represent things that happen. A process can react to events (catching event) and can emit events (throwing event).
 
 ![process](assets/process-events.png)
 
-There are different types of events such as message, timer or error.
+There are different types of events, such as a message, timer, or error.
 
 ## Parallel execution
 
-In many cases, it is also useful to perform multiple tasks in parallel. This can be achieved with a parallel gateway:
+In many cases, it's also useful to perform multiple tasks in parallel. This can be achieved with a parallel gateway:
 
 ![data-conditions](assets/processes-parallel-gateway.png)
 
-The diamond shape with the "+" marker means that all outgoing paths are activated. The tasks on those paths can run in parallel. The order is only fulfilled after both tasks have completed.
+The diamond shape with the **+** marker means all outgoing paths are activated. The tasks on those paths can run in parallel. The order is only fulfilled after both tasks have completed.
