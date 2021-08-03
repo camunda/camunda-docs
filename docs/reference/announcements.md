@@ -1,6 +1,7 @@
 ---
 id: announcements
 title: "Announcements"
+description: "Important announcements including deprecation & removal notices"
 ---
 
 ## Removed in 1.0
