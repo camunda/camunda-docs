@@ -1,13 +1,13 @@
 ---
 id: manage-cloud-management-api-clients
-title: Manage cloud management API clients
+title: Manage Cloud Management API clients
 ---
 
-To interact with Camunda Cloud programmatically, without using the Camunda Cloud UI, you can create Cloud Management API clients.
+To interact with Camunda Cloud programmatically without using the Camunda Cloud UI, you can create Cloud Management API clients.
 
 Cloud Management API clients are created for an organization, and can access all Zeebe clusters of this organization.
 
-You can manage clients in the organization settings under the tab **Cloud Management API**.
+You can manage clients in the organization settings under the **Cloud Management API** tab.
 
 A client can have one or multiple of the following permissions:
 
@@ -19,7 +19,7 @@ A client can have one or multiple of the following permissions:
 - **Delete Zeebe clients**: Delete a Zeebe client of a cluster owned by the organization.
 
 :::note
-After a Cloud Management API client is created, the `Client Secret` is only shown once! You can also download a script that requests an access roken with your credentials.
+After a Cloud Management API client is created, the `Client Secret` is only shown once! You can also download a script that requests an access token with your credentials.
 :::
 
 To retrieve an access token for the Cloud Management API client, execute the following command:

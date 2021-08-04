@@ -13,9 +13,9 @@ If several users need access to the same Zeebe cluster, all users can be assigne
 
 Under this setting, members of the current organization can be managed. A user can have one of the following roles:
 
-- Owner: Owner of the organization (currently limited to one user, cannot be changed by the user.)
-- Admin: Restricted rights for user management.
-- Member: Can manage Zeebe Clusters and Client and use Operate.
+- **Owner**: Owner of the organization (currently limited to one user and cannot be changed by the user.)
+- **Admin**: Restricted rights for user management.
+- **Member**: Can manage Zeebe Clusters, Client, and use Operate.
 
 The following table illustrates the rights of each role:
 
@@ -33,4 +33,4 @@ Users are invited to a Camunda Cloud organization via their email address, which
 
 People can also be invited to an organization that does not yet have a Camunda Cloud account. In this case, the invited individual must first create a Camunda Cloud account, and can then gain access to the organization.
 
-[//]:# (Are we trying to say above that people can be invited to an organization with a Camunda Cloud account even if the invited person doesn't have one? If this is the case, I'd say "People who do not yet have a Camunda Cloud account can also be invited to an organization.")
+[//]:# (Are we trying to say above that people can be invited to an organization with a Camunda Cloud account even if the invited person doesn't have an account? If this is the case, I'd say "People who do not yet have a Camunda Cloud account can also be invited to an organization.")

@@ -3,7 +3,7 @@ id: manage-alerts
 title: Manage alerts
 ---
 
-Camunda Cloud allows you to be notified when process instances stop with an error.
+Camunda Cloud can notify you when process instances stop with an error.
 
 There are two forms of notification:
 

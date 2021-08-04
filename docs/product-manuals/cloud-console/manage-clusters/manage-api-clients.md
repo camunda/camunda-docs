@@ -3,7 +3,7 @@ id: manage-api-clients
 title: Manage API clients
 ---
 
-To interact with Zeebe in the cloud from the outside, every client application must authenticate itself. An OAuth Flow is used for authentication:
+To interact with Zeebe in the cloud from the outside, every client application must authenticate itself. An **OAuth Flow** is used for authentication:
 
 ![auth-flow](./img/client-auth.png)
 
@@ -18,7 +18,8 @@ Access tokens have a validity period that can be found in the access token. Afte
 :::note
 The auth service has a built-in rate limit. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
 
-The officially offered client libraries (as well as the node client) have already integrated the auth routine and handle obtaining and refreshing an access token, and make use of a local cache.
+The officially offered client libraries (as well as the node client) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
+:::
 
 ### Create a client
 
