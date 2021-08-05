@@ -41,6 +41,4 @@ The downloaded file contains all necessary information to communicate with your 
 
 - `ZEEBE_ADDRESS`: Address where your cluster can be reached.
 - `ZEEBE_CLIENT_ID` and `ZEEBE_CLIENT_SECRET`: Credentials to request a new access token.
-- `ZEEBE_AUTHORIZATION_SERVER_URL`: A new token can be requested at this address, using the
-
-[//]:# (Looks like this doc cuts off. How should we finish the sentence?)
+- `ZEEBE_AUTHORIZATION_SERVER_URL`: A new token can be requested at this address.

@@ -31,6 +31,4 @@ The following table illustrates the rights of each role:
 
 Users are invited to a Camunda Cloud organization via their email address, which must be accepted by the user. As long as the invitation has not been accepted, the user remains in the `Pending` state.
 
-People can also be invited to an organization that does not yet have a Camunda Cloud account. In this case, the invited individual must first create a Camunda Cloud account, and can then gain access to the organization.
-
-[//]:# (Are we trying to say above that people can be invited to an organization with a Camunda Cloud account even if the invited person doesn't have an account? If this is the case, I'd say "People who do not yet have a Camunda Cloud account can also be invited to an organization.")
+People who do not yet have a Camunda Cloud account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda Cloud account.
