@@ -10,6 +10,7 @@ const features = [
   {
     title: 'Camunda Cloud',
     imageUrl: 'img/camunda-cloud-gradient.png',
+    url: 'https://docs.camunda.io/docs/product-manuals/concepts/what-is-camunda-cloud',
     description: (
       <>A  scalable, on-demand process platform
       </>
@@ -18,6 +19,7 @@ const features = [
   {
     title: 'Zeebe',
     imageUrl: 'img/camunda-workflow-engine-gradient.png',
+    url: 'https://docs.camunda.io/docs/product-manuals/zeebe/zeebe-overview',
     description: (
       <>
         A workflow engine for microservices orchestration
@@ -27,6 +29,7 @@ const features = [
   {
     title: 'Operate',
     imageUrl: 'img/camunda-operate-gradient.png',
+    url: 'https://docs.camunda.io/docs/product-manuals/operate/index',
     description: (
       <>
         Visibility, Monitoring, and Management
@@ -35,18 +38,20 @@ const features = [
   },
 ];
 
-function Feature({imageUrl, title, description}) {
+function Feature({imageUrl, url, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={clsx('col col--4', styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
-        </div>
-      )}
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
+      <div className={clsx('col col--4', styles.feature)}>
+        {imgUrl && (
+          <div className="text--center">
+            <a href={url}>
+              <img className={styles.featureImage} src={imgUrl} alt={title} />
+            </a>
+          </div>
+        )}
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </div>
   );
 }
 
@@ -69,6 +74,13 @@ function Home() {
               )}
               to={useBaseUrl('docs/guides/')}>
               Get Started
+            </Link>
+          </div>
+          <div>
+            <Link
+              className={clsx('sign-up-link')}
+              to="https://camunda.io">
+              Or sign up!
             </Link>
           </div>
         </div>

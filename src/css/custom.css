@@ -48,6 +48,14 @@ body {
   background-color: #e6e7e8;
 }
 
+.sign-up-link {
+  color: #D1D3D4;
+}
+
+.sign-up-link:hover {
+  color: #14d890;
+}
+
 .osano-footer-link-docu {
   color: var(--ifm-color-link-footer);
 
