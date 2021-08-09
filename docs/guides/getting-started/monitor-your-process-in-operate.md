@@ -6,7 +6,11 @@ title: Monitor your process in Operate
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Camunda Cloud offers Operate to monitor your process instances. An entry point can be found in the cluster details.
+Camunda Cloud offers Operate to monitor your process instances.
+
+:::note
+An entry point can be found in the cluster details.
+:::
 
 ![operate-dashboard](./img/operate-dashboard.png)
 

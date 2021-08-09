@@ -6,7 +6,9 @@ title: Implement a decision gateway
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In [the last section](./implement-service-task.md) we connected a worker that will return a JSON object, which is used to decide which path to take in the process. Now, we can use the JSON object to route your process by filling in the condition expression on the two sequence flows after the XOR gateway.
+Using the JSON object, let's route your process.
+
+In [the last section](./implement-service-task.md), we connected a worker that will return a JSON object, which is used to decide which path to take in the process. Now, we can use the JSON object to route your process by filling in the condition expression on the two sequence flows after the XOR gateway.
 
 Use the following conditional expression for the "Pong" sequence flow:
 

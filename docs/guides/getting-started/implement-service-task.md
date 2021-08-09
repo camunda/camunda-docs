@@ -6,6 +6,8 @@ title: Implement a service task
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+Let's implement a service task to connect workers.
+
 Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
 
 <Tabs groupId="modeler" defaultValue="console" values={
