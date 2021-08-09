@@ -3,6 +3,8 @@ id: delete-cluster
 title: Delete your cluster
 ---
 
+Follow these simple instructions to remove your cluster permanently.
+
 :::danger
 This action cannot be undone!
 :::

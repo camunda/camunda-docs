@@ -3,6 +3,8 @@ id: job-worker
 title: "Job worker"
 ---
 
+Let's take a deeper look at job workers to handle jobs.
+
 ## Related resources
 
 - [Job worker basics](/product-manuals/concepts/job-workers.md)

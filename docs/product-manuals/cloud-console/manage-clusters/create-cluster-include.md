@@ -1,6 +1,8 @@
 ---
 ---
 
+Let's take a closer look at creating clusters and viewing their details.
+
 ![cluster-creating](./img/cluster-overview-empty.png)
 
 In the upper right area you'll find the button **Create New Cluster**.

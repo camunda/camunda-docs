@@ -3,6 +3,8 @@ id: data-pojo
 title: "Handle variables as POJO"
 ---
 
+Let's analyze the prerequisites and code to handle variables as POJO.
+
 ## Related resources
 
 - [Data flow](../../../reference/bpmn-processes/data-flow.md)

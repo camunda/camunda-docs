@@ -4,6 +4,8 @@ title: "Java client"
 sidebar_label: "Quick reference"
 ---
 
+Here, we'll look a quick overview of the Java client and next steps.
+
 ## Dependencies
 
 To use the Java client library, declare the following Maven dependency in your project:

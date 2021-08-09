@@ -3,6 +3,8 @@ id: process-instance-create
 title: "Create a process instance"
 ---
 
+Let's dive deeper into Zeebe and Java to create a process instance.
+
 ## Prerequisites
 
 1. Run the Zeebe broker with endpoint `localhost:26500` (default).

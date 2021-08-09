@@ -3,6 +3,8 @@ id: process-deploy
 title: "Deploy a process"
 ---
 
+Let's analyze the prerequisites and code to deploy a process using Java.
+
 ## Related resources
 
 - [Process basics](/product-manuals/concepts/processes.md)

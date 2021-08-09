@@ -3,6 +3,8 @@ id: process-instance-create-with-result
 title: "Create a process instance with results"
 ---
 
+Let's analyze the prerequisites and code to create a process instance with real results.
+
 ## Prerequisites
 
 1. Run the Zeebe broker with endpoint `localhost:26500` (default).

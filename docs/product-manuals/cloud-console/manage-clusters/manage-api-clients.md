@@ -3,6 +3,8 @@ id: manage-api-clients
 title: Manage API clients
 ---
 
+Let's create a client and manage our API clients.
+
 To be able to interact with Zeebe in the cloud from the outside, every client application must authenticate itself. An OAuth Flow is used for authentication, which is shown below:
 
 ![auth-flow](./img/client-auth.png)

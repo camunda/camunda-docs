@@ -4,6 +4,7 @@ title: Manage alerts
 ---
 
 Camunda Cloud allows you to get notified when Process Instances stop with an error.
+
 There are two types of reporting,
 
 - By mail to the email address of your user accounts

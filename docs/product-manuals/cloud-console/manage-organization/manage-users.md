@@ -3,6 +3,8 @@ id: manage-users
 title: Manage users of your organization
 ---
 
+Let's take a closer look at the rights and responsibilities of users in your organization.
+
 ## General rights concept
 
 When a user signs up to Camunda Cloud, they receive a personal organization. Clusters that the user creates in this organization are assigned to this organization.

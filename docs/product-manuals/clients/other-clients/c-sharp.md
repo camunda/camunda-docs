@@ -3,6 +3,8 @@ id: c-sharp
 title: "C#"
 ---
 
+Take a deeper look at the source code, Nuget package, and API docs alongside C#.
+
 The C# client is a community library maintained by [Christopher Zell](https://github.com/Zelldon).
 
 * [Source code](https://github.com/camunda-community-hub/zeebe-client-csharp)

@@ -3,6 +3,8 @@ id: javascript
 title: "JavaScript/NodeJS"
 ---
 
+Take a deeper look at the source code, Nuget package, and API docs alongside JavaScript and Node.js.
+
 ## Zeebe Node
 
 The Zeebe Node client is maintained by [Josh Wulf](https://github.com/jwulf). It can be used to create Node.js applications.

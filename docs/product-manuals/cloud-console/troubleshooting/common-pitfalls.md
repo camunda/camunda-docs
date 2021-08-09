@@ -3,6 +3,8 @@ id: common-pitfalls
 title: Common Pitfalls
 ---
 
+Let's take a closer look at common issues and resolutions.
+
 If you have a problem, you can always use the [feedback form](./feedback-and-support.md).
 
 ## The button to create new clusters is disabled

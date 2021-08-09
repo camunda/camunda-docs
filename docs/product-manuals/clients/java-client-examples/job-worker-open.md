@@ -3,6 +3,8 @@ id: job-worker-open
 title: "Open a job worker"
 ---
 
+Let's analyze the prerequisites and code to open a job worker..
+
 ## Related resources
 
 - [Job worker basics](/product-manuals/concepts/job-workers.md)

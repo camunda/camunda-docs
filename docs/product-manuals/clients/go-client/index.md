@@ -4,6 +4,8 @@ title: "Go client"
 sidebar_label: "Quick reference"
 ---
 
+Here, we'll show you how to instantiate the client.
+
 ## Dependencies
 
 To use the Zeebe Go client library, add the following dependency to your `go.mod`:
