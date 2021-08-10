@@ -4,6 +4,8 @@ title: "Configuration"
 sidebar_label: "Overview"
 ---
 
+Let's analyze how to configure Zeebe.
+
 Zeebe can be configured through:
 
 - configuration files,

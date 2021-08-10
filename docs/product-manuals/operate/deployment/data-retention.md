@@ -2,6 +2,9 @@
 id: data-retention
 title: Data retention
 ---
+
+Let's take a closer look at how Operate stores and archives data.
+
 ## How the data is stored and archived
 
 Operate imports data from Zeebe and stores it in Elasticsearch indices with defined prefix (default: `operate`). Specifically:

@@ -3,7 +3,9 @@ id: model-your-first-diagram
 title: Model your first diagram
 ---
 
-After you have created a new BPMN diagram you can start modeling it. We have preconfigured a very simple diagram - it consists of a start and end event and does not need to be configured further to be deployed. Of course you can add more elements and configure the different events.
+After you have created a new BPMN diagram you can start modeling it.
+
+We have preconfigured a very simple diagram - it consists of a start and end event and does not need to be configured further to be deployed. Of course you can add more elements and configure the different events.
 
 ![new bpmn diagram](img/cloud-modeler-new-diagram.png)
 

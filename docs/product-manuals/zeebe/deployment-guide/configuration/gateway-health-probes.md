@@ -3,6 +3,8 @@ id: gateway-health-probes
 title: "Gateway health probes"
 ---
 
+This section outlines health status, probes, and responsiveness.
+
 The health status for a standalone gateway is available at `{zeebe-gateway}:8080/actuator/health`
 
 The following health indicators are enabled by default

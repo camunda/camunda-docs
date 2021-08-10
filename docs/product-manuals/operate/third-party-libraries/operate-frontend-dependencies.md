@@ -3,6 +3,8 @@ id: operate-frontend-dependencies
 title: Frontend Dependencies
 ---
 
+Let's take a closer look at Operate's frontend dependencies.
+
 * @babel/code-frame (Version: 7.12.13, License: [MIT](https://opensource.org/licenses/MIT))
 * @babel/generator (Version: 7.13.9, License: [MIT](https://opensource.org/licenses/MIT))
 * @babel/helper-annotate-as-pure (Version: 7.12.13, License: [MIT](https://opensource.org/licenses/MIT))

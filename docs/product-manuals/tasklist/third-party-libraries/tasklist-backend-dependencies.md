@@ -3,6 +3,8 @@ id: tasklist-backend-dependencies
 title: Backend Dependencies
 ---
 
+Let's take a closer look at the backend dependencies within Tasklist.
+
 * auth0 (Version: 1.28.0, License: [MIT](https://opensource.org/licenses/MIT))
 * java-jwt (Version: 3.13.0, License: [MIT](https://opensource.org/licenses/MIT))
 * jwks-rsa (Version: 0.15.0, License: [MIT](https://opensource.org/licenses/MIT))

@@ -4,8 +4,9 @@ title: "Setting up a Zeebe cluster"
 ---
 
 To set up a cluster you need to adjust the `cluster` section
-in the Zeebe configuration file. Below is a snippet
-of the default Zeebe configuration file:
+in the Zeebe configuration file.
+
+Below is a snippet of the default Zeebe configuration file:
 
 ```yaml
 ---

@@ -2,7 +2,8 @@
 id: authentication
 title: Authentication
 ---
-## Introduction
+
+Let's take a closer look at the authentication methods of Tasklist.
 
 Tasklist provides two ways for authentication:
 

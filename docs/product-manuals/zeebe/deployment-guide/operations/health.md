@@ -3,6 +3,8 @@ id: health
 title: "Health status"
 ---
 
+This document analyzes health status checks and responses.
+
 ## Broker
 
 Zeebe broker exposes two http endpoints to query its health status:

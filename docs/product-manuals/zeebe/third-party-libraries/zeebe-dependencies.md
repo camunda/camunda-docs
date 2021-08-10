@@ -3,6 +3,8 @@ id: zeebe-dependencies
 title: Dependencies
 ---
 
+This document outlines the dependencies involved in Zeebe.
+
 * kryo (Version: 4.0.2, License: [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause))
 * minlog (Version: 1.3.1, License: [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause))
 * reflectasm (Version: 1.11.3, License: [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause))

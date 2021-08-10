@@ -4,6 +4,8 @@ title: "Security"
 sidebar_label: "Overview"
 ---
 
+This document analyzes Zeebe's security features.
+
 Zeebe supports two security features that you should be aware of:
 
 - **[Authentication](authentication)** - allows you to secure communication between clients and gateways;

@@ -3,6 +3,8 @@ id: tasklist-frontend-dependencies
 title: Frontend Dependencies
 ---
 
+Let's take a closer look at the frontend dependencies within Tasklist.
+
 * @apollo/client (Version: 3.3.12, License: [MIT](https://opensource.org/licenses/MIT))
 * @babel/runtime (Version: 7.13.10, License: [MIT](https://opensource.org/licenses/MIT))
 * @camunda-cloud/common-ui-react (Version: 0.0.14, License: [Apache-2.0](https://opensource.org/licenses/Apache-2.0))
