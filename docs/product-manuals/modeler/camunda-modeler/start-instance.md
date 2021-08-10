@@ -3,7 +3,7 @@ id: start-instance
 title: Start a new process instance
 ---
 
-Once you have established your [connection to Camunda Cloud](./connect-to-camunda-cloud.md), you can start a new instance of your BPMN diagram via the play icon:
+Once you establish your [connection to Camunda Cloud](./connect-to-camunda-cloud.md), you can start a new instance of your BPMN diagram via the play icon:
 
 ![start instance icon](./img/start-instance-icon.png)
 

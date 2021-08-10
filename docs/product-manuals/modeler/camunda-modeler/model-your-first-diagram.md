@@ -3,7 +3,7 @@ id: model-your-first-diagram
 title: Model your first diagram
 ---
 
-After [downloading](./install-the-modeler.md), setting up, and starting the Camunda Modeler, you can model your first BPMN diagram. Follow the steps below:
+After [downloading](./install-the-modeler.md), setting up, and starting Camunda Modeler, you can model your first BPMN diagram. Follow the steps below:
 
 1. Create a new BPMN diagram:
 
@@ -13,7 +13,7 @@ After [downloading](./install-the-modeler.md), setting up, and starting the Camu
 
 ![new diagram](./img/new-diagram.png)
 
-As with the [Cloud Modeler](../cloud-modeler/model-your-first-diagram.md), you can now add new elements.
+As with [Cloud Modeler](../cloud-modeler/model-your-first-diagram.md), you can now add new elements.
 
 3. On the left side of the screen you will find the element palette supported by the engine. Drag and drop the elements into the diagram:
 
@@ -23,8 +23,8 @@ Elements that support different types can be reconfigured by clicking on the cor
 
 ![task configuration](img/element-configuration.png)
 
-4. Each element has certain attributes that can be changed. The properties panel is located on the right side of the page:
+4. Each element has adjustable attributes. Use the properties panel on the right side of the page:
 
 ![properties panel](img/properties-panel.png)
 
-5. Once you have finished modeling and configuring your diagram, save it as BPMN or deploy it on a [Camunda Cloud cluster](./connect-to-camunda-cloud.md). You can also export the diagram as an image.
+5. Once you finish modeling and configuring your diagram, save it as BPMN or deploy it on a [Camunda Cloud cluster](./connect-to-camunda-cloud.md). You can also export the diagram as an image.
