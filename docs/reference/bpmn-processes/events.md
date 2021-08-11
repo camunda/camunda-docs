@@ -3,6 +3,8 @@ id: events
 title: "Overview"
 ---
 
+This document outlines an overview of general events, intermediate events, and boundary events.
+
 Currently supported events:
 
 * [None events](none-events/none-events.md)

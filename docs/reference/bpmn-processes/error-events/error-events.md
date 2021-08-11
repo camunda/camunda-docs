@@ -4,6 +4,7 @@ title: "Error events"
 ---
 
 In process automation, you may have to deal with errors related to the process, also known as business errors.
+
 Some examples of business errors are: an invalid credit card used as default payment method to collect money, or cancelling an order after it was already payed for.
 In case of a business error, you may need to take a different path than usual or compensate for the error.
 

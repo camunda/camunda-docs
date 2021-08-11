@@ -3,6 +3,8 @@ id: feel-built-in-functions-list
 title: List Functions
 ---
 
+This document outlines built-in list functions and examples.
+
 ## list contains()
 
 * parameters:

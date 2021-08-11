@@ -3,6 +3,8 @@ id: feel-built-in-functions-temporal
 title: Temporal Functions
 ---
 
+This document outlines built-in temporal functions and examples.
+
 ## now()
 
 Returns the current date and time including the timezone.

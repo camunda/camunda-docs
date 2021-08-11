@@ -4,6 +4,8 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+This document outlines the latest announcements and updates on removals or deprecations.
+
 ## Removed in 1.0
 
 The support for yaml processes was removed as of release 1.0. The `resourceType` in Deployment record and Process grpc request are deprecated, they will always contain `BPMN` as value.

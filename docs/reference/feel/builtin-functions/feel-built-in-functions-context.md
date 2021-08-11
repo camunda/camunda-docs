@@ -3,6 +3,8 @@ id: feel-built-in-functions-context
 title: Context Functions
 ---
 
+This document outlines context functions and a few examples.
+
 ## get value()
 
 Returns the value of the context entry with the given key.

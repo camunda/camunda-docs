@@ -3,14 +3,14 @@ id: multi-instance
 title: "Multi-Instance"
 ---
 
+A multi-instance activity is executed multiple times - once for each element of a given collection (like a _foreach_ loop in a programming language).
+
 The following activities can be marked as multi-instance:
 
 - [Service tasks](../service-tasks/service-tasks.md)
 - [Receive tasks](../receive-tasks/receive-tasks.md)
 - [Embedded subprocesses](../embedded-subprocesses/embedded-subprocesses.md)
 - [Call activities](../call-activities/call-activities.md)
-
-A multi-instance activity is executed multiple times - once for each element of a given collection (like a _foreach_ loop in a programming language).
 
 ![multi-instance](assets/multi-instance-example.png)
 

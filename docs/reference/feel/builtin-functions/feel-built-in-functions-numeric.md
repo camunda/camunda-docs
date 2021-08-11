@@ -3,6 +3,8 @@ id: feel-built-in-functions-numeric
 title: Numeric Functions
 ---
 
+This document outlines built-in numeric functions and examples.
+
 ## decimal()
 
 Round the given number at the given scale using the given rounding mode. If no rounding mode is passed in then it uses `HALF_EVEN` as default. 

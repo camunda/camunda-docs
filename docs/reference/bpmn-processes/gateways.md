@@ -3,6 +3,8 @@ id: gateways
 title: "Overview"
 ---
 
+This document outlines an overview of general events.
+
 Currently supported elements:
 
 * [Exclusive gateways](exclusive-gateways/exclusive-gateways.md)

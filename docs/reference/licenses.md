@@ -3,6 +3,7 @@ id: licenses
 title: "Licenses"
 description: "Licensing information for components of Camunda Cloud"
 ---
+
 ## Licensing
 
 This page contains licensing information for all components of Camunda Cloud.

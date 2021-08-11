@@ -3,6 +3,8 @@ id: feel-data-types
 title: Data Types
 ---
 
+This document outlines data types, including null, number, string, boolean, and more.
+
 A value can have one of the following types.
 
 ### Null

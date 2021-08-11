@@ -3,6 +3,8 @@ id: feel-built-in-functions-string
 title: String Functions
 ---
 
+This document outlines built-in string functions and examples.
+
 ## substring()
 
 * parameters:

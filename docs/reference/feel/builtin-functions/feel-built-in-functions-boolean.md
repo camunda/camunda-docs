@@ -3,6 +3,8 @@ id: feel-built-in-functions-boolean
 title: Boolean Functions
 ---
 
+This document outlines current boolean functions and a few examples.
+
 ## not()
 
 * parameters:
