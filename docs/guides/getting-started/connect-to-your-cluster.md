@@ -3,6 +3,8 @@ id: connect-to-your-cluster
 title: Connect to your cluster
 ---
 
+Let's learn more about installing and communicating with clusters.
+
 ## Installation
 
 Install the appropriate package.
