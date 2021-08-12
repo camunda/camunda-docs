@@ -1,9 +1,8 @@
 ---
 id: gateways
 title: "Overview"
+description: "This document outlines an overview of general events."
 ---
-
-This document outlines an overview of general events.
 
 Currently supported elements:
 

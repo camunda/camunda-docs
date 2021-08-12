@@ -1,9 +1,8 @@
 ---
 id: notices
 title: "Security notices"
+description: "Let's take a closer look at security notices, reporting vulnerabilities, and addiitonal security information."
 ---
-
-Let's take a closer look at security notices, reporting vulnerabilities, and addiitonal security information.
 
 ## Security notices
 

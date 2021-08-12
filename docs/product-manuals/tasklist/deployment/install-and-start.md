@@ -1,9 +1,8 @@
 ---
 id: install-and-start
 title: Install and start Tasklist
+description: "Let's get started with Tasklist by installing and running with these simple methods."
 ---
-
-Let's get started with Tasklist by installing and running with these simple methods.
 
 ## Running via Docker (local development)
 

@@ -1,9 +1,8 @@
 ---
 id: feel-built-in-functions-temporal
 title: Temporal Functions
+description: "This document outlines built-in temporal functions and examples."
 ---
-
-This document outlines built-in temporal functions and examples.
 
 ## now()
 

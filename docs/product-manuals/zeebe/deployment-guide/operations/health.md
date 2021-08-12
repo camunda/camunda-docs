@@ -1,9 +1,8 @@
 ---
 id: health
 title: "Health status"
+description: "This document analyzes health status checks and responses."
 ---
-
-This document analyzes health status checks and responses.
 
 ## Broker
 

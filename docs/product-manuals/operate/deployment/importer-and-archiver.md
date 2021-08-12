@@ -1,9 +1,8 @@
 ---
 id: importer-and-archiver
 title: Importer and archiver
+description: "Let's analyze how Operate is organized by modules to import and archive data."
 ---
-
-Let's analyze how Operate is organized by modules to import and archive data.
 
 Operate consists of three modules:
  * **Webapp** - contains the UI and operation executor functionality

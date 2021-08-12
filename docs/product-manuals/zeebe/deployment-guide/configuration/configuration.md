@@ -2,9 +2,8 @@
 id: configuration
 title: "Configuration"
 sidebar_label: "Overview"
+description: "Let's analyze how to configure Zeebe."
 ---
-
-Let's analyze how to configure Zeebe.
 
 Zeebe can be configured through:
 

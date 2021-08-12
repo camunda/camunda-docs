@@ -2,9 +2,8 @@
 id: index
 title: "Go client"
 sidebar_label: "Quick reference"
+description: "Here, we'll show you how to instantiate the client."
 ---
-
-Here, we'll show you how to instantiate the client.
 
 ## Dependencies
 

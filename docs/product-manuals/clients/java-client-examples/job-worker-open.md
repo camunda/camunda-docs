@@ -1,9 +1,8 @@
 ---
 id: job-worker-open
 title: "Open a job worker"
+description: "Let's analyze the prerequisites and code to open a job worker."
 ---
-
-Let's analyze the prerequisites and code to open a job worker..
 
 ## Related resources
 

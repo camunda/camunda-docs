@@ -1,9 +1,8 @@
 ---
 id: feel-built-in-functions-context
 title: Context Functions
+description: "This document outlines context functions and a few examples."
 ---
-
-This document outlines context functions and a few examples.
 
 ## get value()
 

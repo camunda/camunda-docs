@@ -1,9 +1,8 @@
 ---
 id: authentication
 title: Authentication
+description: "Let's take a closer look at how Operate authenticates for use."
 ---
-
-Let's take a closer look at how Operate authenticates for use.
 
 Operate provides three ways for authentication:
 

@@ -1,9 +1,8 @@
 ---
 id: environment-variables
 title: "Environment variables"
+description: "Let's take a closer look at the environment variables for configuration, operators, and developers."
 ---
-
-Let's take a closer look at the environment variables for configuration, operators, and developers.
 
 ## Environment variables for configuration
 

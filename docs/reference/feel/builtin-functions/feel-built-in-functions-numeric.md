@@ -1,9 +1,8 @@
 ---
 id: feel-built-in-functions-numeric
 title: Numeric Functions
+description: "This document outlines built-in numeric functions and examples."
 ---
-
-This document outlines built-in numeric functions and examples.
 
 ## decimal()
 

@@ -3,8 +3,7 @@ id: exporters
 title: "Exporters"
 ---
 
-As Zeebe processes jobs and processes, or performs internal maintenance (e.g.
-raft failover), it will generate an ordered stream of records.
+As Zeebe processes jobs and processes, or performs internal maintenance (e.g. raft failover), it will generate an ordered stream of records.
 
 ![record-stream](assets/exporters-stream.png)
 

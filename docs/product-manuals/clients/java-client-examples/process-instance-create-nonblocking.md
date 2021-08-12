@@ -1,9 +1,8 @@
 ---
 id: process-instance-create-nonblocking
 title: "Create non-blocking process instances"
+description: "Let's analyze the prerequisites and code to create non-blocking process instances with Java."
 ---
-
-Let's analyze the prerequisites and code to create non-blocking process instances with Java.
 
 ## Prerequisites
 

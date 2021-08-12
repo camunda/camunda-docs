@@ -1,9 +1,8 @@
 ---
 id: data-retention
 title: Data retention
+description: "Let's take a closer look at how Operate stores and archives data."
 ---
-
-Let's take a closer look at how Operate stores and archives data.
 
 ## How the data is stored and archived
 

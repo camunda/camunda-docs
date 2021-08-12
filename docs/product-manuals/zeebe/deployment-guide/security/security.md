@@ -2,9 +2,8 @@
 id: security
 title: "Security"
 sidebar_label: "Overview"
+description: "This document analyzes Zeebe's security features."
 ---
-
-This document analyzes Zeebe's security features.
 
 Zeebe supports two security features that you should be aware of:
 

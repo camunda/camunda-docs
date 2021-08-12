@@ -1,9 +1,8 @@
 ---
 id: update-billing-reservations
 title: Update billing reservations
+description: "Let's manage our hardware packages and edit reservations."
 ---
-
-Let's manage our hardware packages and edit reservations.
 
 :::note
 This setting is only visible in the Professional Plan for owners and admins.

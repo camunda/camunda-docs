@@ -1,9 +1,8 @@
 ---
 id: supported-environments
 title: "Supported environments"
+description: "Let's take a closer look at supported environments alongside Zeebe, Operate, and Tasklist."
 ---
-
-Let's take a closer look at supported environments alongside Zeebe, Operate, and Tasklist.
 
 ## Zeebe
 

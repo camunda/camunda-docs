@@ -1,9 +1,8 @@
 ---
 id: backpressure
 title: "Backpressure"
+description: "This document outlines an overview of backpressure and its accompanying assets."
 ---
-
-This document outlines an overview of backpressure and its accompanying assets.
 
 When a broker receives a client request, it is written to the _event stream_ first (see section [Internal processing](../../technical-concepts/internal-processing.md) for details), and processed later by the stream processor.
 If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command.

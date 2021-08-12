@@ -1,9 +1,8 @@
 ---
 id: ruby
 title: "Ruby"
+description: "Take a deeper look at the source code and Ruby gem alongside Ruby."
 ---
-
-Take a deeper look at the source code and Ruby gem alongside Ruby.
 
 The Ruby client is maintained by [Christian Nicolai](https://github.com/cmur2).
 

@@ -2,9 +2,8 @@
 id: overview
 title: "Clients"
 sidebar_label: "Overview"
+description: "Let's take a closer look at the capabilities of various clients."
 ---
-
-Let's take a closer look at the capabilities of various clients.
 
 Clients allow applications to do the following:
 

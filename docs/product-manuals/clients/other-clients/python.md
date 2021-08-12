@@ -1,9 +1,8 @@
 ---
 id: python
 title: "Python"
+description: "Take a deeper look at the source code and pip package alongside Python."
 ---
-
-Take a deeper look at the source code and pip package alongside Python.
 
 The Python client is maintained by [Stéphane Ludwig](https://gitlab.com/stephane.ludwig).
 

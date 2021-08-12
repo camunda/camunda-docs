@@ -1,12 +1,11 @@
 ---
 id: implement-service-task
 title: Implement a service task
+description: "Let's implement a service task to connect workers."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-Let's implement a service task to connect workers.
 
 Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
 

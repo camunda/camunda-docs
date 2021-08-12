@@ -1,9 +1,8 @@
 ---
 id: rust
 title: "Rust"
+description: "Take a deeper look at the source code, Rust crate, and a podcast interview alongside Rust."
 ---
-
-Take a deeper look at the source code, Rust crate, and a podcast interview alongside Rust.
 
 The Rust client, Zeebest, was previously maintained by [Mackenzie Clark](https://github.com/xmclark), and is currently seeking a new Maintainer!
 

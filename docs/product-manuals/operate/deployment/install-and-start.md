@@ -1,9 +1,8 @@
 ---
 id: install-and-start
 title: Install and start Operate
+description: "Let's get started with Operate with these simple installation steps."
 ---
-
-Let's get started with Operate with these simple installation steps.
 
 ## Running via Docker (local development)
 

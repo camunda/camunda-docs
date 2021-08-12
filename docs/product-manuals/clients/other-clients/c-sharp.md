@@ -1,9 +1,8 @@
 ---
 id: c-sharp
 title: "C#"
+description: "Take a deeper look at the source code, Nuget package, and API docs alongside C#."
 ---
-
-Take a deeper look at the source code, Nuget package, and API docs alongside C#.
 
 The C# client is a community library maintained by [Christopher Zell](https://github.com/Zelldon).
 

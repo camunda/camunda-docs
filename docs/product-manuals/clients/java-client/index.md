@@ -2,9 +2,8 @@
 id: index
 title: "Java client"
 sidebar_label: "Quick reference"
+description: "Here, we'll look a quick overview of the Java client and next steps."
 ---
-
-Here, we'll look a quick overview of the Java client and next steps.
 
 ## Dependencies
 

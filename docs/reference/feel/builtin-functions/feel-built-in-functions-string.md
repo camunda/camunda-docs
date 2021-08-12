@@ -1,9 +1,8 @@
 ---
 id: feel-built-in-functions-string
 title: String Functions
+description: "This document outlines built-in string functions and examples."
 ---
-
-This document outlines built-in string functions and examples.
 
 ## substring()
 

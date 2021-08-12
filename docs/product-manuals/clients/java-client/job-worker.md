@@ -1,9 +1,8 @@
 ---
 id: job-worker
 title: "Job worker"
+description: "Let's take a deeper look at job workers to handle jobs."
 ---
-
-Let's take a deeper look at job workers to handle jobs.
 
 ## Related resources
 

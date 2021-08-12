@@ -1,9 +1,8 @@
 ---
 id: feel-built-in-functions-boolean
 title: Boolean Functions
+description: "This document outlines current boolean functions and a few examples."
 ---
-
-This document outlines current boolean functions and a few examples.
 
 ## not()
 

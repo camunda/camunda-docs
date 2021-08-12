@@ -1,9 +1,8 @@
 ---
 id: create-a-process
 title: "Create a process"
+description: "This document demonstrates quick resources and steps to guide you through creating a process."
 ---
-
-This document demonstrates quick resources and steps to guide you through creating a process.
 
 _New to BPMN and want to learn more before moving forward? [This blog post](https://zeebe.io/blog/2018/08/bpmn-for-microservices-orchestration-a-primer-part-1/) helps to explain the standard and why it's a good fit for microservices orchestration._
 
