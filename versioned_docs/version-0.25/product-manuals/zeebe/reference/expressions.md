@@ -13,7 +13,7 @@ The following attributes of BPMN elements **require** an expression:
 Additionally, the following attributes of BPMN elements can define an expression **optionally** instead of a static value:
 * Timer Catch Event: [timer definition](../bpmn-workflows/timer-events/timer-events.md#timers)
 * Message Catch Event / Receive Task: [message name](../bpmn-workflows/message-events/message-events.md#messages)
-* Service Task: [job type](../bpmn-workflows/service-tasks/service-tasks.md#task-definition), [job retries]..(/bpmn-workflows/service-tasks/service-tasks.md#task-definition)
+* Service Task: [job type](../bpmn-workflows/service-tasks/service-tasks.md#task-definition), [job retries](../bpmn-workflows/service-tasks/service-tasks.md#task-definition)
 * Call Activity: [process id](../bpmn-workflows/call-activities/call-activities.md#defining-the-called-workflow)
 
 ## Expressions vs. Static Values
@@ -35,7 +35,7 @@ An expression is written in **FEEL** (Friendly Enough Expression Language). FEEL
 * Simple syntax designed for business professionals and developers
 * Three-valued logic (true, false, null)
 
-Zeebe integrates the [Feel-Scala](https://github.com/camunda/feel-scala) engine (version `1.12.x`) to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in the project's [documentation](https://camunda.github.io/feel-scala/1.12/).
+Zeebe integrates the [Feel-Scala](https://github.com/camunda/feel-scala) engine (version `1.12.x`) to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in the project's [documentation](https://camunda.github.io/feel-scala/docs/reference/).
 
 ### Access Variables
 
