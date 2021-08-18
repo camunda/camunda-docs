@@ -29,7 +29,7 @@ today()
 
 ## day of week()
 
-Returns the day of the week according to the Gregorian calendar. Note that it returns always the english name of the day.
+Returns the day of the week according to the Gregorian calendar. Note that it returns always the English name of the day.
 
 * parameters: 
   * `date`: date/date-time
@@ -68,7 +68,7 @@ week of year(date("2019-09-17"))
 
 ## month of year()
 
-Returns the month of the week according to the Gregorian calendar. Note that it returns always the english name of the month.
+Returns the month of the week according to the Gregorian calendar. Note that it returns always the English name of the month.
 
 * parameters: 
   * `date`: date/date-time

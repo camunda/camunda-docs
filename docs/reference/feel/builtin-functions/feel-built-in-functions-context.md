@@ -19,7 +19,7 @@ get value({foo: 123}, "foo")
 
 ## get entries()
 
-Returns the entries of the context as list of key-value-pairs.
+Returns the entries of the context as a list of key-value-pairs.
 
 * parameters:
   * `context`: context

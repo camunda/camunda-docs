@@ -3,13 +3,13 @@ id: what-is-feel
 title: What is FEEL?
 ---
 
-FEEL (Friendly Enough Expression Language) is a part of the [DMN specification](http://www.omg.org/spec/DMN/) of the OMG. It is designed to write expressions for decision tables and literal expressions in a simple way what can easily understand by business professionals and developers.
+Friendly Enough Expression Language (FEEL) is a part of the [DMN specification](http://www.omg.org/spec/DMN/) of the OMG. It is designed to write expressions for decision tables and literal expressions in a simple way that is easily understood by business professionals and developers.
 
-## Unary Tests vs. Expression
+## Unary tests vs. expression
 
 FEEL has two entry points: unary-tests and expressions. 
 
-### Unary Tests
+### Unary tests
 
 Unary-Tests can be used only for input entries of a decision table. They are a special kind of expression with a different grammar. The expression gets the value of the input expression implicitly as the first argument. The result of the expression must be either `true` or `false`.
 
@@ -31,7 +31,7 @@ not(2,4)
 
 ### Expression
 
-Expressions can be used everywhere, e.g. in a decision table as input expression or output entry. An expression takes no implicit arguments like unary-tests.
+Expressions can be used everywhere (e.g. in a decision table as input expression or output entry). An expression takes no implicit arguments like unary-tests.
 
 Examples:
 
