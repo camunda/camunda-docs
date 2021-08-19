@@ -108,10 +108,6 @@ module.exports = {
           title: "More",
           items: [
             {
-              label: "Contact",
-              to: "contact",
-            },
-            {
               label: "Cloud Console",
               href: "https://camunda.io",
             },
@@ -120,9 +116,18 @@ module.exports = {
               href: "https://status.camunda.io",
             },
             {
+              label: "Contact",
+              to: "contact",
+            },
+            {
               label: "Blog",
               href: "https://camunda.com/blog/category/camunda-cloud/",
             },
+          ],
+        },
+        {
+          title: "Legal",
+          items: [
             {
               label: "Privacy Statement",
               href: "https://camunda.com/legal/privacy/",

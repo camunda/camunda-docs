@@ -3,7 +3,7 @@ id: import-diagram
 title: Import diagram
 ---
 
-In the Cloud Modeler you can import a BPMN diagram at any time.
+You can import a BPMN diagram at any time with Cloud Modeler. 
 
 To do so, click **Import New Diagram** in the context menu.
 
