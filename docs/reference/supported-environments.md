@@ -5,8 +5,7 @@ title: "Supported environments"
 
 ## Zeebe
 
-- **Zeebe Broker/Gateway**: The cluster components of Zeebe require OpenJDK 11+.
-  and optional if the Elasticsearch exporter is used Elasticsearch 7.12.x.
+- **Zeebe Broker/Gateway**: The cluster components of Zeebe require OpenJDK 11+ and optional if the Elasticsearch exporter is used Elasticsearch 7.12.x.
 - **Zeebe Java Client**: The Java client for Zeebe requires OpenJDK 8+.
 - **Zeebe Go Client**: The Go client for Zeebe requires Go 1.13+.
 - **zbctl**: The Zeebe CLI supports latest versions of Windows, MacOS, and Linux.

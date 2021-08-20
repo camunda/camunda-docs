@@ -15,7 +15,7 @@ semantics for the model.
 
 When a process instance enters a script task, it creates a corresponding job and waits for its
 completion. A job worker should request jobs of this job type and process them. When the job is
-completed, the process instance continues.
+complete, the process instance continues.
 
 :::info 
 
@@ -36,7 +36,6 @@ variables passed to the job worker, or to customize how the variables of the job
 in the process instance.
 
 ## Additional resources
-
 
 :::tip Community Extension
 

@@ -42,6 +42,7 @@ It's recommended to disable the attribute `propagateAllChildVariables` or define
 ## Additional resources
 
 ### XML representation
+
 A call activity with static process id:
 
 ```xml

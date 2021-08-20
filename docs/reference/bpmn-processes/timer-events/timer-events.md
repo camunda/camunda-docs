@@ -23,11 +23,11 @@ When an intermediate timer catch event is entered, a corresponding timer is sche
 
 ## Timer boundary events
 
-An interrupting timer boundary event must have a time duration definition. When the corresponding timer is triggered, the activity is terminated. Interrupting timer boundary events is often used to model timeouts; for example, canceling the processing after five minutes and do something else.
+An interrupting timer boundary event must have a time duration definition. When the corresponding timer is triggered, the activity is terminated. Interrupting timer boundary events are often used to model timeouts; for example, canceling the processing after five minutes and doing something else.
 
 A non-interrupting timer boundary event must have either a time duration or time cycle definition. When the activity is entered, it schedules a corresponding timer. If the timer is triggered and defined as time cycle with repetitions > 0, it schedules the timer again until the defined number of repetitions is reached. 
 
-Non-interrupting timer boundary events are often used to model notifications; for example, contacting the support if the processing takes longer than one hour.
+Non-interrupting timer boundary events are often used to model notifications; for example, contacting the support if the processing takes longer than an hour.
 
 ## Timers
 

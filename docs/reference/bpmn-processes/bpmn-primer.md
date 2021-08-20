@@ -110,11 +110,11 @@ Business Process Model And Notation 2.0 (BPMN) is an industry standard for proce
 
 This duality makes BPMN very powerful. The XML document contains all the necessary information to be interpreted by workflow engines and modeling tools like Zeebe. At the same time, the visual representation contains just enough information to be quickly understood by humans, even when they are non-technical people. The BPMN model is source code and documentation in one artifact.
 
-The following is an introduction to BPMN 2.0, its elements and their execution semantics. It tries to briefly provide an intuitive understanding of BPMN's power but does not cover the entire feature set. For more exhaustive BPMN resources, see the [reference links](#additional-resources) at the end of this section.
+The following is an introduction to BPMN 2.0, its elements, and their execution semantics. It tries to briefly provide an intuitive understanding of BPMN's power, but does not cover the entire feature set. For more exhaustive BPMN resources, see the [reference links](#additional-resources) at the end of this section.
 
 ## Modeling BPMN diagrams
 
-The best tool for modeling BPMN diagrams for Zeebe is the **Camunda Modeler**.
+The best tool for modeling BPMN diagrams for Zeebe is **Camunda Modeler**.
 
 ![overview](./assets/modeler.gif)
 
@@ -129,7 +129,7 @@ A core concept of BPMN is a _sequence flow_ that defines the order in which step
 
 ![](./assets/sequenceflow.png)
 
-You can think of process execution as tokens running through the process model. When a process is started, a token is spawned at the beginning of the model. It advances with every completed step. When the token reaches the end of the process, it is consumed and the process instance ends. Zeebe's task is to drive the token and to make sure that the job workers are invoked whenever necessary.
+You can think of process execution as tokens running through the process model. When a process is started, a token is spawned at the beginning of the model. It advances with every completed step. When the token reaches the end of the process, it is consumed and the process instance ends. Zeebe's task is to drive the token and to make sure the job workers are invoked whenever necessary.
 
 <center>
 <ReactPlayer
@@ -145,7 +145,7 @@ url={[
 
 ### Tasks: Units of work
 
-The basic elements of BPMN processes are _tasks_, atomic units of work that are composed to create a meaningful result. Whenever a token reaches a task, the token stops and Zeebe creates a job and notifies a registered worker to perform work. When that handler signals completion, then the token continues on the outgoing sequence flow.
+The basic elements of BPMN processes are tasks; these are atomic units of work composed to create a meaningful result. Whenever a token reaches a task, the token stops and Zeebe creates a job and notifies a registered worker to perform work. When that handler signals completion, the token continues on the outgoing sequence flow.
 
 <center>
 <ReactPlayer
@@ -167,7 +167,7 @@ See the [Tasks](tasks.md) section on which types of tasks are currently supporte
 
 Gateways are elements that route tokens in more complex patterns than plain sequence flow.
 
-BPMN's _exclusive gateway_ chooses one sequence flow out of many based on data:
+BPMN's **exclusive gateway** chooses one sequence flow out of many based on data:
 
 <center>
 <ReactPlayer
@@ -181,7 +181,7 @@ url={[
 />
 </center>
 
-BPMN's _parallel gateway_ generates new tokens by activating multiple sequence flows in parallel:
+BPMN's **parallel gateway** generates new tokens by activating multiple sequence flows in parallel:
 
 <center>
 <ReactPlayer
@@ -199,7 +199,7 @@ See the [Gateways](gateways.md) section on which types of gateways are currently
 
 ### Events: Waiting for something to happen
 
-_Events_ in BPMN represent things that _happen_. A process can react to events (_catching_ event) as well as emit events (_throwing_ event). For example:
+**Events** in BPMN represent things that _happen_. A process can react to events (_catching_ event) as well as emit events (_throwing_ event). For example:
 
 <center>
 <ReactPlayer
@@ -219,9 +219,9 @@ Events can be added to the process in various ways. Not only can they be used to
 
 See the [Events](events.md) section on which types of events are currently supported and how to use them.
 
-### Subprocesses: Grouping Elements
+### Subprocesses: Grouping elements
 
-_Subprocesses_ are element containers that allow defining common functionality. For example, we can attach an event to a sub process's border:
+**Subprocesses** are element containers that allow defining common functionality. For example, we can attach an event to a sub process's border:
 
 ![payload](./assets/sub-process.gif)
 

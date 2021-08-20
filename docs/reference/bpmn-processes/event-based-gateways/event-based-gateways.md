@@ -14,6 +14,7 @@ When an event-based gateway is entered, the process instance waits at the gatewa
 ## Additional resources
 
 ### XML representation
+
 An event-based gateway with two outgoing sequence flows:
 
 ```xml
@@ -36,5 +37,6 @@ An event-based gateway with two outgoing sequence flows:
 ```
 
 ### References
+
 * [Timer events](../timer-events/timer-events.md)
 * [Message events](../message-events/message-events.md)

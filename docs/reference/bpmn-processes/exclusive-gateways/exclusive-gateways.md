@@ -7,7 +7,7 @@ An exclusive gateway (or XOR-gateway) allows to make a decision based on data (i
 
 ![process](assets/exclusive-gateway.png)
 
-If an exclusive gateway has multiple outgoing sequence flows, all sequence flows except one, **must** have a `conditionExpression` to define when the flow is taken. The gateway can have one sequence flow without `conditionExpression`, which must be defined as the default flow.
+If an exclusive gateway has multiple outgoing sequence flows, all sequence flows except one must have a `conditionExpression` to define when the flow is taken. The gateway can have one sequence flow without `conditionExpression`, which must be defined as the default flow.
 
 When an exclusive gateway is entered, the `conditionExpression` is evaluated. The process instance takes the first sequence flow where the condition is fulfilled.
 

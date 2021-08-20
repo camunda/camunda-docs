@@ -8,6 +8,7 @@ slug: /reference/
 This section contains general reference material for Camunda Cloud, including API references.
 
 ## APIs
+
 - [Public API](public-api.md)
 - [Console API clients](cloud-console-api-clients.md)
 - [Console API (REST)](cloud-console-api-reference.md)
@@ -15,6 +16,7 @@ This section contains general reference material for Camunda Cloud, including AP
 - [Tasklist API (GraphQL)](tasklist-api/generated.md)
 
 ## Security, support, & license information
+
 - [Announcements](announcements.md)
 - [Licenses](licenses.md)
 - [Security notices](notices.md)
@@ -23,6 +25,7 @@ This section contains general reference material for Camunda Cloud, including AP
 - [Supported environments](supported-environments.md)
 
 ## Additional resources
+
 - [BPMN processes](bpmn-processes/bpmn-primer.md)
 - [FEEL expressions](feel/what-is-feel.md)
 - [Glossary](glossary.md)

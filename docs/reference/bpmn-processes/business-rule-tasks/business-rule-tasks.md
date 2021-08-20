@@ -27,7 +27,7 @@ Jobs for business rule tasks are not processed by Zeebe itself. To process them,
 ## Defining a task
 
 A business rule task must define a [job type](../service-tasks/service-tasks#task-definition). This
-specifies the type of job that workers should subscribe to (e.g. DMN).
+specifies the type of job workers should subscribe to (e.g. DMN).
 
 Use [task headers](../service-tasks/service-tasks#task-headers) to pass static parameters to the job
 worker (e.g. the key of the decision to evaluate).
@@ -38,16 +38,16 @@ in the process instance.
 
 ## Additional resources
 
-
 :::tip Community Extension
 
 Take a look at the [Zeebe DMN Worker](https://github.com/camunda-community-hub/zeebe-dmn-worker).
-It's a community extension that provides a job worker to evaluate DMN decisions. You can run it, or
+It's a community extension providing a job worker to evaluate DMN decisions. You can run it, or
 use it as a blueprint for your own job worker.
 
 :::
 
 ### XML representation
+
 A business rule task with a custom header:
 
 ```xml

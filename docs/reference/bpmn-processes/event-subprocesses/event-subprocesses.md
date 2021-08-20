@@ -32,6 +32,7 @@ By default, the local variables of the event subprocess are not propagated (i.e.
 ## Additional resources
 
 ### XML representation
+
 An event subprocess with an interrupting timer start event:
 
 ```xml

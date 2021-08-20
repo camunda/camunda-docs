@@ -19,6 +19,7 @@ In BPMN, business errors are represented as errors and error events. **Errors** 
 An error must define an `errorCode` (e.g. `Invalid Credit Card`). The `errorCode` is a `string` used to match a thrown error to the error catch events.
 
 ## Throwing the error
+
 An error can be thrown from within the process using an error **end event**.
 
 ![process](assets/error-throw-events.png)

@@ -15,7 +15,6 @@ Example: Update from version `1.0.x` to `1.1.y` will not break the public API.
 To learn more about our release cycle, refer to our [release
 policy](/reference/release-policy.md).
 
-
 ## Definition of public API
 
 Camunda Cloud public API is limited to the following items:
