@@ -86,3 +86,93 @@ Choosing the number of partitions depends on the use case, workload, and cluster
 - For testing and early development, start with a single partition. Note that Zeebe's process processing is highly optimized for efficiency, so a single partition can already handle high event loads.
 - With a single Zeebe broker, a single partition is mostly enough. However, if the node has many cores and the broker is configured to use them, then more partitions can increase the total throughput (~ 2 threads per partition).
 - Base your decisions on data. Simulate the expected workload, measure, and compare the performance of different partition setups.
+
+### Experimental feature: fixed partitioning
+
+Starting with 1.2.0, there is a new experimental configuration options which lets you manually specify a fixed partitioning scheme. This means you can manually configure which partitions belong to which brokers.
+
+The partitioning scheme is controlled via a new configuration option under `zeebe.broker.experimental.partitioning`, more specifically `zeebe.broker.experimental.partitioning.scheme`. This option currently takes the following values:
+
+- `ROUND_ROBIN`: when set, this will apply the round robin partition distribution, which corresponds to the distribution explain above on this page. _This is the default option, and requires no extra configuration if you want to use it._
+- `FIXED`: when set, this will apply a manually configured partition distribution, which is configured separately.
+
+In order to use the `FIXED` partitioning scheme, _you must provide an exhaustive map of all partitions to a set of brokers_. This is achieved via the `zeebe.broker.experimental.partitioning.fixed` configuration option. Here is an example for a cluster of `5` brokers, `3` partitions, and a replication factor of `3`.
+
+```yaml
+partitioning:
+  scheme: FIXED
+  fixed:
+    - partitionId: 1
+      nodes:
+        - nodeId: 0
+        - nodeId: 2
+        - nodeId: 4
+    - partitionId: 2
+      nodes:
+        - nodeId: 1
+        - nodeId: 3
+        - nodeId: 4
+    - partitionId: 3
+      nodes:
+        - nodeId: 0
+        - nodeId: 2
+        - nodeId: 3
+```
+
+This configuration will produce the following distribution:
+
+|             | Node 0 | Node 1 | Node 2 | Node 3 | Node 4 |
+| -----------:|:------:|:------:|:------:|:------:|:------:|
+| Partition 1 | X      |        | X      |        | X      |
+| Partition 2 |        | X      |        | X      | X      |
+| Partition 3 | X      |        | X      | X      |        |
+
+#### Validation
+
+Each broker will perform sanity checks on the `FIXED` configuration provided. Namely, the configuration must uphold the following conditions:
+
+- All partitions _must be explicitly configured_
+- All partitions configured must have valid IDs, i.e. between 1 and `zeebe.broker.cluster.partitionsCount`
+- All partitions must configure exactly the replicas count, i.e. `zeebe.broker.cluster.replicationFactor`
+- All nodes configured for a partition have a valid node ID, i.e. between 0 and `zeebe.broker.cluster.clusterSize - 1`.
+- If priority election is enabled, then all priorities configured for a partition are different
+
+The broker will fail to start if any of these conditions are not met.
+
+#### Priority election
+
+If you're using the experimental priority election feature, then you must also manually specify the priorities of each brokers. In fact, the broker will fail to start if the nodes do not have different priorities, as otherwise you could get into lengthy election loops. The target priority for a partition will thus be whatever is the highest configured priority for one of its nodes.
+
+Here is the same example configuration as above but this time with priorities configured:
+
+```yaml
+partitioning:
+  scheme: FIXED
+  fixed:
+    - partitionId: 1
+      nodes:
+        - nodeId: 0
+          priority: 1
+        - nodeId: 2
+          priority: 2
+        - nodeId: 4
+          priority: 3
+    - partitionId: 2
+      nodes:
+        - nodeId: 1
+          priority: 1
+        - nodeId: 3
+          priority: 3
+        - nodeId: 4
+          priority: 2
+    - partitionId: 3
+      nodes:
+        - nodeId: 0
+          priority: 3
+        - nodeId: 2
+          priority: 2
+        - nodeId: 3
+          priority: 1
+```
+
+Note that the only condition is that the priorities for the nodes of a given partition must be different from each other. We recommend however that you use a simple monotonic increase from 1 to the partition count, as shown above.
