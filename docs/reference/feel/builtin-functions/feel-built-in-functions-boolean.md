@@ -17,9 +17,9 @@ not(true)
 
 ## is defined()
 
-Checks if a given value is defined or not. A value is defined if it exists, and it is an instance of one of the FEEL data types including `null`.
+Checks if a given value is defined. A value is defined if it exists, and it is an instance of one of the FEEL data types including `null`.
 
-The function can be used to check if a variable, or a context entry (e.g. a property of a variable) exists. It allows differentiating between a variable that is `null` and a value that doesn't exist.   
+The function can be used to check if a variable or a context entry (e.g. a property of a variable) exists. It allows differentiating between a `null` variable and a value that doesn't exist.   
 
 * parameters:
   * `value`: any

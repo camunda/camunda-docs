@@ -3,23 +3,23 @@ id: send-tasks
 title: "Send tasks"
 ---
 
-A send task is used to model the publication of a message to an external system, for example, to a
+A send task is used to model the publication of a message to an external system; for example, to a
 Kafka topic.
 
 ![task](assets/send-task.png)
 
-Send tasks behave **exactly** like [service tasks](../service-tasks/service-tasks.md). Both task
+Send tasks behave exactly like [service tasks](../service-tasks/service-tasks.md). Both task
 types are based on jobs and [job workers](../../../product-manuals/concepts/job-workers.md). The
 differences between these task types are the visual representation (i.e. the task marker) and the
 semantics for the model.
 
-When a process instance enters a send task then it creates a corresponding job and wait for its
+When a process instance enters a send task, it creates a corresponding job and waits for its
 completion. A job worker should request jobs of this job type and process them. When the job is
-completed then the process instance continues.
+complete, the process instance continues.
 
 :::info 
 
-Jobs for send tasks are not processed by Zeebe itself. In order to process them, you need to provide
+Jobs for send tasks are not processed by Zeebe itself. To process them, provide
 a job worker.
 
 :::
@@ -33,22 +33,21 @@ Use [task headers](../service-tasks/service-tasks#task-headers) to pass static p
 worker (e.g. the name of the topic to publish the message to).
 
 Define [variable mappings](../service-tasks/service-tasks#variable-mappings) to transform the
-variables that are passed to the job worker, or to customize how the variables of the job are merged
+variables tpassed to the job worker, or to customize how the variables of the job merge
 in the process instance.
 
 ## Additional resources
 
-
 :::tip Community Extension
 
-Have a look at
-the [Kafka Connect Zeebe](https://github.com/camunda-community-hub/kafka-connect-zeebe). It's a
+Review the [Kafka Connect Zeebe](https://github.com/camunda-community-hub/kafka-connect-zeebe). It's a
 community extension that provides a job worker to publish messages to a Kafka topic. You can run it,
 or use it as a blueprint for your own job worker.
 
 :::
 
-### XML Representation
+### XML representation
+
 A script task with a custom header:
 
 ```xml

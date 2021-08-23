@@ -3,17 +3,17 @@ id: exclusive-gateways
 title: "Exclusive gateway"
 ---
 
-An exclusive gateway (aka XOR-gateway) allows to make a decision based on data (i.e. on process instance variables).
+An exclusive gateway (or XOR-gateway) allows to make a decision based on data (i.e. on process instance variables).
 
 ![process](assets/exclusive-gateway.png)
 
-If an exclusive gateway has multiple outgoing sequence flows then all sequence flows, except one, **must** have a `conditionExpression` to define when the flow is taken. The gateway can have one sequence flow without `conditionExpression` which must be defined as the default flow.
+If an exclusive gateway has multiple outgoing sequence flows, all sequence flows except one must have a `conditionExpression` to define when the flow is taken. The gateway can have one sequence flow without `conditionExpression`, which must be defined as the default flow.
 
-When an exclusive gateway is entered then the `conditionExpression`s are evaluated. The process instance takes the first sequence flow that condition is fulfilled.
+When an exclusive gateway is entered, the `conditionExpression` is evaluated. The process instance takes the first sequence flow where the condition is fulfilled.
 
-If no condition is fulfilled then it takes the **default flow** of the gateway. In case the gateway has no default flow, an incident is created.
+If no condition is fulfilled, it takes the **default flow** of the gateway. If the gateway has no default flow, an incident is created.
 
-An exclusive gateway can also be used to **join** multiple incoming flows to one, in order to improve the readability of the BPMN. A joining gateway has a pass-through semantic. It doesn't merge the incoming concurrent flows like a parallel gateway.
+An exclusive gateway can also be used to join multiple incoming flows together and improve the readability of the BPMN. A joining gateway has a pass-through semantic and doesn't merge the incoming concurrent flows like a parallel gateway.
 
 ## Conditions
 
@@ -35,7 +35,8 @@ For example:
 
 ## Additional resources
 
-### XML Representation
+### XML representation
+
 An exclusive gateway with two outgoing sequence flows:
 
 ```xml

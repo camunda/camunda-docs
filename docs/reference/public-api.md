@@ -5,16 +5,17 @@ title: "Public API"
 
 Camunda Cloud provides a public API. This section covers the definition of the public API and backwards compatibility for version updates.
 
-## Backwards Compatibility for Public API
+## Backwards compatibility for public API
 
 Camunda Cloud versioning scheme follows the `MAJOR.MINOR.PATCH` pattern put forward by [Semantic Versioning](https://semver.org/). Camunda Cloud will
-maintain public API backwards compatibility for `MINOR` version updates. Example: Update from version `1.0.x` to `1.1.y` will not break the public API.
+maintain public API backwards compatibility for `MINOR` version updates.
 
-To learn more about our release cycle, please refer to our [release
+Example: Update from version `1.0.x` to `1.1.y` will not break the public API.
+
+To learn more about our release cycle, refer to our [release
 policy](/reference/release-policy.md).
 
-
-## Definition of Public API
+## Definition of public API
 
 Camunda Cloud public API is limited to the following items:
 
@@ -24,9 +25,9 @@ All non-implementation Java packages (package name does not contain `impl`) of t
 
 - `io.camunda:zeebe-client-java`
 
+## Other APIs and client
 
-## Other APIs and Client
-
-Although we cannot guarentee backwards comptability of others APIs and Clients 
-at this moment of time, we aim to offer backwards compatibility still on a best
+Although we cannot currently guarantee backwards comptability of other APIs and clients, we aim to offer backwards compatibility still on a best
 effort basis.
+
+[//]:# (Thoughts on a better way to word the sentence above?)

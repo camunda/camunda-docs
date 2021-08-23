@@ -9,11 +9,12 @@ An event-based gateway allows to make a decision based on events.
 
 An event-based gateway must have at least two outgoing sequence flows. Each sequence flow must to be connected to an intermediate catch event of type **timer or message**.
 
-When an event-based gateway is entered then the process instance waits at the gateway until one of the events is triggered. When the first event is triggered then the outgoing sequence flow of this event is taken. No other events of the gateway can be triggered afterward.
+When an event-based gateway is entered, the process instance waits at the gateway until one of the events is triggered. When the first event is triggered, the outgoing sequence flow of this event is taken. No other events of the gateway can be triggered afterward.
 
 ## Additional resources
 
-### XML Representation
+### XML representation
+
 An event-based gateway with two outgoing sequence flows:
 
 ```xml
@@ -36,5 +37,6 @@ An event-based gateway with two outgoing sequence flows:
 ```
 
 ### References
+
 * [Timer events](../timer-events/timer-events.md)
 * [Message events](../message-events/message-events.md)

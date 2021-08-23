@@ -5,16 +5,18 @@ title: "Zeebe API (gRPC)"
 
 [Zeebe](../product-manuals/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
 
-> **Note:** This specification still contains references to YAML workflows. This is a [deprecated feature](announcements.md) and will be removed at some point
+:::note
+This specification still contains references to YAML workflows. This is a [deprecated feature](announcements.md) and will eventually be removed.
+:::
 
-## Gateway Service
+## Gateway service
 
 The Zeebe Client gRPC API is exposed through a single gateway service.
 
 ### `ActivateJobs` RPC
 
-Iterates through all known partitions round-robin and activates up to the requested
-maximum and streams them back to the client as they are activated.
+Iterates through all known partitions round-robin, activates up to the requested
+maximum, and streams them back to the client as they are activated.
 
 #### Input: `ActivateJobsRequest`
 
@@ -94,7 +96,7 @@ Returned if:
 
 ### `CancelProcessInstance` RPC
 
-Cancels a running process instance
+Cancels a running process instance.
 
 #### Input: `CancelProcessInstanceRequest`
 
@@ -119,8 +121,7 @@ message CancelProcessInstanceResponse {
 
 Returned if:
 
-- no process instance exists with the given key. Note that since process instances
-  are removed once their are finished, it could mean the instance did exist at some point.
+- No process instance exists with the given key. Note that since process instances are removed once they are finished, it could mean the instance did exist at some point.
 
 ### `CompleteJob` RPC
 
@@ -150,15 +151,13 @@ message CompleteJobResponse {
 
 Returned if:
 
-- no job exists with the given job key. Note that since jobs are removed once completed,
-  it could be that this job did exist at some point.
+- No job exists with the given job key. Note that since jobs are removed once completed, it could be that this job did exist at some point.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
-- the job was marked as failed. In that case, the related incident must be resolved before
-  the job can be activated again and completed.
+- The job was marked as failed. In that case, the related incident must be resolved before the job can be activated again and completed.
 
 ### `CreateProcessInstance` RPC
 
@@ -167,7 +166,9 @@ to create the instance can be specified either using its unique key (as returned
 DeployProcess), or using the BPMN process ID and a version. Pass -1 as the version to
 use the latest deployed version.
 
-Note that only processes with none start events can be started through this command.
+:::note
+Only processes with none start events can be started through this command.
+:::
 
 #### Input: `CreateProcessInstanceRequest`
 
@@ -208,10 +209,12 @@ message CreateProcessInstanceResponse {
 
 ### `CreateProcessInstanceWithResult` RPC
 
-Similar to `CreateProcessInstance` RPC , creates and starts an instance of the specified process.
+Similar to `CreateProcessInstance` RPC, creates and starts an instance of the specified process.
 Unlike `CreateProcessInstance` RPC, the response is returned when the process is completed.
 
-Note that only processes with none start events can be started through this command.
+:::note
+Only processes with none start events can be started through this command.
+:::
 
 #### Input: `CreateProcessInstanceWithResultRequest`
 
@@ -250,22 +253,22 @@ message CreateProcessInstanceResponse {
 
 Returned if:
 
-- no process with the given key exists (if processKey was given)
-- no process with the given process ID exists (if bpmnProcessId was given but version was -1)
-- no process with the given process ID and version exists (if both bpmnProcessId and version were given)
+- No process with the given key exists (if processKey was given).
+- No process with the given process ID exists (if bpmnProcessId was given but version was -1).
+- No process with the given process ID and version exists (if both bpmnProcessId and version were given).
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
-- the process definition does not contain a none start event; only processes with none
+- The process definition does not contain a none start event; only processes with none
   start event can be started manually.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
-- the given variables argument is not a valid JSON document; it is expected to be a valid
+- The given variables argument is not a valid JSON document; it is expected to be a valid
   JSON document where the root node is an object.
 
 ### `DeployProcess` RPC
@@ -332,18 +335,17 @@ message ProcessMetadata {
 
 Returned if:
 
-- no resources given.
-- if at least one resource is invalid. A resource is considered invalid if:
-  - it is not a BPMN or YAML file (currently detected through the file extension)
-  - the resource data is not deserializable (e.g. detected as BPMN, but it's broken XML)
-  - the process is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
+- No resources given.
+- At least one resource is invalid. A resource is considered invalid if:
+  - It is not a BPMN or YAML file (currently detected through the file extension).
+  - The resource data is not deserializable (e.g. detected as BPMN, but it's broken XML).
+  - The process is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task.)
 
 ### `FailJob` RPC
 
-Marks the job as failed; if the retries argument is positive, then the job will be immediately
-activatable again, and a worker could try again to process it. If it is zero or negative however,
-an incident will be raised, tagged with the given errorMessage, and the job will not be
-activatable until the incident is resolved.
+Marks the job as failed; if the retries argument is positive, the job is immediately
+activatable again, and a worker could try again to process it. If it is zero or negative,
+an incident is raised, tagged with the given errorMessage, and the job is not activatable until the incident is resolved.
 
 #### Input: `FailJobRequest`
 
@@ -373,14 +375,14 @@ message FailJobResponse {
 
 Returned if:
 
-- no job was found with the given key
+- No job was found with the given key.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
-- the job was not activated
-- the job is already in a failed state, i.e. ran out of retries
+- The job was not activated.
+- The job is already in a failed state, i.e. ran out of retries.
 
 ### `PublishMessage` RPC
 
@@ -421,13 +423,13 @@ message PublishMessageResponse {
 
 Returned if:
 
-- a message with the same ID was previously published (and is still alive)
+- A message with the same ID was previously published (and is still alive).
 
 ### `ResolveIncident` RPC
 
 Resolves a given incident. This simply marks the incident as resolved; most likely a call to
 UpdateJobRetries or UpdateProcessInstancePayload will be necessary to actually resolve the
-problem, following by this call.
+problem, followed by this call.
 
 #### Input: `ResolveIncidentRequest`
 
@@ -451,7 +453,7 @@ message ResolveIncidentResponse {
 
 Returned if:
 
-- no incident with the given key exists
+- No incident with the given key exists.
 
 ### `SetVariables` RPC
 
@@ -494,13 +496,13 @@ message SetVariablesResponse {
 
 Returned if:
 
-- no element with the given `elementInstanceKey` was exists
+- No element with the given `elementInstanceKey` exists.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
-- the given payload is not a valid JSON document; all payloads are expected to be
+- The given payload is not a valid JSON document; all payloads are expected to be
   valid JSON documents where the root node is an object.
 
 ### `ThrowError` RPC
@@ -533,13 +535,13 @@ message ThrowErrorResponse {
 
 Returned if:
 
-- no job was found with the given key
+- No job was found with the given key.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
-- the job is already in a failed state, i.e. ran out of retries
+- The job is already in a failed state, i.e. ran out of retries.
 
 ### `Topology` RPC
 
@@ -605,7 +607,7 @@ message Partition {
 
 #### Errors
 
-No specific errors
+No specific errors.
 
 ### `UpdateJobRetries` RPC
 
@@ -636,36 +638,36 @@ message UpdateJobRetriesResponse {
 
 Returned if:
 
-- no job exists with the given key
+- No job exists with the given key.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
-- retries is not greater than 0
+- Retries is not greater than 0.
 
-## Technical Error Handling
+## Technical error handling
 
 In the documentation above, the documented errors are business logic errors.
-These are errors which are a result of request processing logic, and not serialization, network, or
+These errors are a result of request processing logic, and not serialization, network, or
 other more general errors. These error are described in this sections.
 
 The gRPC API for Zeebe is exposed through an API gateway, which acts as a proxy
-for the cluster. Generally, this means that the clients execute a remote call on the gateway,
-which is then translated to special binary protocol that the gateway uses to
+for the cluster. Generally, this means the clients execute a remote call on the gateway,
+which is then translated to special binary protocol the gateway uses to
 communicate with nodes in the cluster. The nodes in the cluster are called brokers.
 
 Technical errors which occur between gateway and brokers (e.g. the gateway cannot deserialize the broker response,
 the broker is unavailable, etc.) are reported to the client using the following error codes:
 
-- `GRPC_STATUS_RESOURCE_EXHAUSTED`: when a broker receives more requests than it can handle, it signals back-pressure and rejects requests with this error code.
+- `GRPC_STATUS_RESOURCE_EXHAUSTED`: When a broker receives more requests than it can handle, it signals back-pressure and rejects requests with this error code.
   - In this case, it is possible to retry the requests with an appropriate retry strategy.
-  - If you receive many such errors within a small time period, it indicates that the broker is constantly under high load.
+  - If you receive many such errors within a small time period, it indicates the broker is constantly under high load.
   - It is recommended to reduce the rate of requests.
     When back-pressure is active, the broker may reject any request except _CompleteJob_ RPC and _FailJob_ RPC.
   - These requests are white-listed for back-pressure and are always accepted by the broker even if it is receiving requests above its limits.
-- `GRPC_STATUS_UNAVAILABLE`: if the gateway itself is in an invalid state (e.g. out of memory)
-- `GRPC_STATUS_INTERNAL`: for any other internal errors that occurred between the gateway and the broker.
+- `GRPC_STATUS_UNAVAILABLE`: If the gateway itself is in an invalid state (e.g. out of memory).
+- `GRPC_STATUS_INTERNAL`: For any other internal errors that occurred between the gateway and the broker.
 
 This behavior applies to every request. In these cases, the client should retry
 with an appropriate retry policy (e.g. a combination of exponential backoff or jitter wrapped

@@ -15,7 +15,7 @@ null
 "valid"
 ```
 
-### Path Expression
+### Path expression
 
 Access a value by its name/path. For example, a given variable from the input/context.
 
@@ -23,7 +23,7 @@ Access a value by its name/path. For example, a given variable from the input/co
 x + y
 ```
 
-If the value is a context (or data object/POJO) then the inner values can be accessed by `context.key`.
+If the value is a context (or data object/POJO,) the inner values can be accessed by `context.key`.
 
 ```js
 x.y
@@ -53,7 +53,7 @@ Inside a context, the previous values can be accessed.
 }
 ```
 
-If the name or path contains any special character (e.g. whitespace, dash, etc.) then the name needs to be wrapped into single backquotes/backtick `` `foo bar` ``.
+If the name or path contains any special character (e.g. whitespace, dash, etc.,) the name needs to be wrapped into single backquotes/backtick `` `foo bar` ``.
 
 ```js
 `name with whitespace`.`name+operator`
@@ -61,7 +61,7 @@ If the name or path contains any special character (e.g. whitespace, dash, etc.)
 
 ### Addition
 
-* supported types: number, string, day-time-duration, year-month-duration
+* Supported types: number, string, day-time-duration, year-month-duration
 
 ```js
 2 + 3
@@ -76,7 +76,7 @@ duration("P1D") + duration("PT6H")
 
 ### Subtraction 
 
-* supported types: number, time, date-time, day-time-duration, year-month-duration
+* Supported types: number, time, date-time, day-time-duration, year-month-duration
 
 ```js
 5 - 3
@@ -91,7 +91,7 @@ time("10:30:00") - duration("PT1H")
 
 ### Multiplication
 
-* supported types: number, day-time-duration, year-month-duration
+* Supported types: number, day-time-duration, year-month-duration
 
 ```js
 5 * 3        
@@ -103,7 +103,7 @@ time("10:30:00") - duration("PT1H")
 
 ### Division 
 
-* supported types: number, day-time-duration, year-month-duration
+* Supported types: number, day-time-duration, year-month-duration
 
 ```js
 6 / 2  
@@ -118,7 +118,7 @@ duration("P1Y") / duration("P1M")
 
 ### Exponentiation 
 
-* supported types: number
+* Supported types: number
 
 ```js
 2 ** 3   
@@ -138,14 +138,14 @@ duration("P1Y") / duration("P1M")
 | between | `between _ and _` | `x between 3 and 9` |
 
 The operators less than, greater than, and between are only supported for: 
-  * number
-  * date
-  * time
-  * date-time
-  * year-month-duration
-  * day-time-duration 
+  * Number
+  * Date
+  * Time
+  * Date-time
+  * Year-month-duration
+  * Day-time-duration 
   
-Any value can be compared with `null` to check if it is equal to `null`, or if it exists. Comparing `null` to a value different from `null` results in `false`. It returns `true` if the value, or the context entry (e.g. the property of a variable) is `null` or doesn't exist. The built-in function [is defined()](../builtin-functions/feel-built-in-functions-boolean.md#is-defined) can be used to differentiate between a value that is `null` and a value that doesn't exist. 
+Any value can be compared with `null` to check if it's equal to `null` or if it exists. Comparing `null` to a value different from `null` results in `false`. It returns `true` if the value, or the context entry (e.g. the property of a variable) is `null` or doesn't exist. The built-in function [is defined()](../builtin-functions/feel-built-in-functions-boolean.md#is-defined) can be used to differentiate between a `null` value and a value that doesn't exist. 
 
 ```js
 null = null
@@ -162,7 +162,7 @@ x.y = null
 //           "y" is null, or "x" has no property "y" 
 ```  
 
-### Disjunction and Conjunction
+### Disjunction and conjunction
 
 Combine two boolean values.
 
@@ -194,13 +194,13 @@ false or null
 // null
 ```
 
-### If Expression
+### If expression
 
 ```js
 if (x < 5) then "low" else "high"
 ```
 
-### For Expressions
+### For expressions
 
 Iterate over a list and apply an expression (i.e. aka `map`). The result is again a list.
 
@@ -233,7 +233,7 @@ for x in 1..5 return x + sum(partial)
 // [1,3,7,15,31]
 ```
 
-### Some/Every Expression
+### Some/every expression
 
 Test if at least one element of the list satisfies the expression.
 
@@ -261,7 +261,7 @@ every x in [1,2], y in [2,3] satisfies x < y
 // false
 ```
 
-### Filter Expression
+### Filter expression
 
 Filter a list of elements by an expression. The expression can access the current element by `item`. The result is a list again.
 
@@ -289,7 +289,7 @@ An element of a list can be accessed by its index. The index starts at `1`. A ne
 // null
 ```
 
-If the elements are contextes then the nested value of the current element can be accessed directly by its name.
+If the elements are contextes, the nested value of the current element can be accessed directly by its name.
 
 ```js
 [ {a: "foo", b: 5},  {a: "bar", b: 10} ][b > 7] 
@@ -303,7 +303,7 @@ The nested values of a specific key can be extracted by `.key`.
 // ["foo", "bar"]
 ```
 
-### Evaluate a Unary Tests
+### Evaluate an enary test
 
 Evaluates a [unary-tests expression](feel-unary-tests) with the given value. 
 
@@ -313,7 +313,7 @@ x in (2..4)
 x in < 3
 ```
 
-### Instance-Of Expression
+### Instance-of expression
 
 Checks the type of the value.
 
@@ -343,9 +343,9 @@ A function (body) can be defined using `function(arguments) expression`. For exa
 }
 ```
 
-### Special Properties
+### Special properties
 
-Values of type date, time, date-time and duration have special properties to access their individual parts.
+Values of type date, time, date-time, and duration have special properties to access their individual parts.
 
 ```js
 date("2017-03-10").year                   

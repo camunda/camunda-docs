@@ -8,7 +8,7 @@ A value can have one of the following types.
 
 ### Null
 
-Nothing, null or nil (i.e. the value is not present).
+Nothing, null, or nil (i.e. the value is not present).
 
 Some operations/functions return `null` if an argument in not valid or types doesn't match.
 
@@ -96,7 +96,7 @@ date and time("2015-09-18T10:31:10@Europe/Paris")
 
 ### Day-Time-Duration
 
-A duration based on seconds. It can contain days, hours, minutes and seconds.
+A duration based on seconds. It can contain days, hours, minutes, and seconds.
 
 * Format: `PxDTxHxMxS`
 * Java Type: `java.time.Duration`
