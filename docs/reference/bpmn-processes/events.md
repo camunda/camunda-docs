@@ -1,6 +1,7 @@
 ---
 id: events
 title: "Overview"
+description: "This document outlines an overview of general events, intermediate events, and boundary events."
 ---
 
 Currently supported events:

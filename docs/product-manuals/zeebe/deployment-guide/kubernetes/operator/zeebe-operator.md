@@ -3,7 +3,9 @@ id: zeebe-operator
 title: "Zeebe Operator (Experimental)"
 ---
 
-The Zeebe Kubernetes Operator was born out of the need to manage more than one single Zeebe cluster running inside Kubernetes clusters. Zeebe clusters have their own lifecycle and in real implementations, the need to update, monitor, and manage some of these cluster components while applications are running becomes challenging. The objective of the Zeebe Kubernetes Operator is to simplify and natively integrate Zeebe with Kubernetes, to solve operational burden and facilitate the creation and maintenance of a set of clusters. 
+The Zeebe Kubernetes Operator was born out of the need to manage more than one single Zeebe cluster running inside Kubernetes clusters. Zeebe clusters have their own lifecycle and in real implementations, the need to update, monitor, and manage some of these cluster components while applications are running becomes challenging.
+
+The objective of the Zeebe Kubernetes Operator is to simplify and natively integrate Zeebe with Kubernetes, to solve operational burden and facilitate the creation and maintenance of a set of clusters. 
 
 This operator has been built with Kubernetes Helm in mind, meaning that at the end of the day, this operator will be in charge of managing [Helm charts](https://github.com/helm/helm). If you are not familiar with Helm, Helm is a package manager for Kubernetes, which help us to package and distribute Kubernetes manifest. Helm also deals with installing, labeling and dependency management between packages (charts). Because we have Zeebe Helm packages already here: [http://helm.camunda.io](http://helm.camunda.io) which are automatically versioned and released, the Zeebe Kubernetes Operator will use these charts to create and manage new clusters and other related components. 
 

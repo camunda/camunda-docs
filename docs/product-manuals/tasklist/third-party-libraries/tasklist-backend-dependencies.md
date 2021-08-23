@@ -1,6 +1,7 @@
 ---
 id: tasklist-backend-dependencies
 title: Backend Dependencies
+description: "Let's take a closer look at the backend dependencies within Tasklist."
 ---
 
 * auth0 (Version: 1.28.0, License: [MIT](https://opensource.org/licenses/MIT))

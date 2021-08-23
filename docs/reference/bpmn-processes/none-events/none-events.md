@@ -2,7 +2,8 @@
 id: none-events
 title: "None events"
 ---
-None events are unspecified events, also called blank events.
+
+None events are unspecified events, also called "blank" events.
 
 ![process](assets/none-events.png)
 

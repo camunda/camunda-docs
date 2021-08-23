@@ -7,7 +7,7 @@ slug: /guides/
 
 :::note 
 
-Looking for a hands-on intro? Sign up for [Camunda Cloud](https://camunda.io) to walkthrough our Getting Started Experience to see all the components of Camunda Cloud.
+Looking for a hands-on intro? Sign up for [Camunda Cloud](https://camunda.io) to experience the Product Walkthrough and see all the components of Camunda Cloud.
 
 :::
 

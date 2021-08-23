@@ -1,12 +1,11 @@
 ---
 id: update-zeebe
 title: "Update Zeebe"
+description: "This section describes how to update Zeebe to a new version."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-
-This section describes how to update Zeebe to a new version.
 
 ## Update
 

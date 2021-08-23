@@ -1,6 +1,7 @@
 ---
 id: process-instance-create
 title: "Create a process instance"
+description: "Let's dive deeper into Zeebe and Java to create a process instance."
 ---
 
 ## Prerequisites

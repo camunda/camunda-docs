@@ -3,8 +3,7 @@ id: release-policy
 title: "Release policy"
 ---
 
-Components of Camunda Cloud follow the [Semantic Versioning standard](https://semver.org/),
-which defines a version number using the `MAJOR.MINOR.PATCH` pattern.
+Components of Camunda Cloud follow the [Semantic Versioning standard](https://semver.org/), which defines a version number using the `MAJOR.MINOR.PATCH` pattern.
 
 - `MAJOR` version can make incompatible API changes.
 - `MINOR` version can add functionality in a backwards compatible manner.

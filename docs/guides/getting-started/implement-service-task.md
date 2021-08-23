@@ -1,6 +1,7 @@
 ---
 id: implement-service-task
 title: Implement a service task
+description: "Let's implement a service task to connect workers."
 ---
 
 import Tabs from '@theme/Tabs';

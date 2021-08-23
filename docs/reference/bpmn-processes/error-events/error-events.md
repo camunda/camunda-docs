@@ -3,7 +3,9 @@ id: error-events
 title: "Error events"
 ---
 
-In process automation, you may encounter errors related to the process, also known as business errors. These business errors may include the following:
+In process automation, you may encounter errors related to the process, also known as business errors. 
+
+These business errors may include the following:
 
 - An invalid credit card was used as the default payment method to collect money.
 - An order was canceled after it was already paid for.
