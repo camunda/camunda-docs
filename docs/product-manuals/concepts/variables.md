@@ -3,7 +3,9 @@ id: variables
 title: "Variables"
 ---
 
-Variables are part of a process instance and represent the data of the instance. A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
+Variables are part of a process instance and represent the data of the instance.
+
+A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
 
 ## Variable names
 

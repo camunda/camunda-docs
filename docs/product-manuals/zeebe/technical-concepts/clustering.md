@@ -4,6 +4,7 @@ title: "Clustering"
 ---
 
 Zeebe can operate as a cluster of brokers, forming a peer-to-peer network.
+
 In this network, all brokers have the same responsibilities and there is no single point of failure.
 
 ![cluster](assets/cluster.png)

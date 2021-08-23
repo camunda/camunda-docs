@@ -1,8 +1,12 @@
 ---
 id: announcements
 title: "Announcements"
+description: "Important announcements including deprecation & removal notices"
 ---
 
+## Removed in 1.0
+
+The support for yaml processes was removed as of release 1.0. The `resourceType` in Deployment record and Process grpc request are deprecated, they will always contain `BPMN` as value.
 
 ## Deprecated in 0.26.0
 
@@ -31,7 +35,3 @@ In terms of specifying values, there were two minor changes:
 
 - Memory sizes are now specified like this: `512MB` (old way: `512M`)
 - Durations, e.g. timeouts, can now also be given in ISO-8601 Durations format. However you can still use the established way and specify a timeout of `30s`
-
-## Removed in 1.0
-
-The support for yaml processes was removed as of release 1.0. The `resourceType` in Deployment record and Process grpc request are deprecated, they will always contain `BPMN` as value.

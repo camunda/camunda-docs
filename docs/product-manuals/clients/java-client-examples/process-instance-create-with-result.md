@@ -1,6 +1,7 @@
 ---
 id: process-instance-create-with-result
 title: "Create a process instance with results"
+description: "Let's analyze the prerequisites and code to create a process instance with real results."
 ---
 
 ## Prerequisites

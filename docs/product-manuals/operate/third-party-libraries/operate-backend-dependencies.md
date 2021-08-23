@@ -1,6 +1,7 @@
 ---
 id: operate-backend-dependencies
 title: Backend Dependencies
+description: "Let's take a closer look at Operate's backend dependencies."
 ---
 
 * auth0 (Version: 1.28.0, License: [MIT](https://opensource.org/licenses/MIT))

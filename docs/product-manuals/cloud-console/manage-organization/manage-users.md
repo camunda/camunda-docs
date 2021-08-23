@@ -1,6 +1,7 @@
 ---
 id: manage-users
 title: Manage users of your organization
+description: "Let's take a closer look at the rights and responsibilities of users in your organization."
 ---
 
 ## General rights concept

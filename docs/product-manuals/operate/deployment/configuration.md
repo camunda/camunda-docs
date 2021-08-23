@@ -2,10 +2,11 @@
 id: configuration
 title: Configuration
 ---
-## Introduction
 
 Operate is a Spring Boot application. That means all provided ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
-a Spring Boot application can be applied. By default, the configuration for Operate is stored in a YAML file `application.yml`. All Operate related settings are prefixed
+a Spring Boot application can be applied.
+
+By default, the configuration for Operate is stored in a YAML file `application.yml`. All Operate related settings are prefixed
 with `camunda.operate`. The following parts are configurable:
 
 * [Webserver](#webserver)

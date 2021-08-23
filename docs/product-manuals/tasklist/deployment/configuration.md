@@ -4,7 +4,9 @@ title: Configuration
 ---
 
 Tasklist is a Spring Boot application. That means all provided ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
-a Spring Boot application can be applied. By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist related settings are prefixed
+a Spring Boot application can be applied.
+
+By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist related settings are prefixed
 with `camunda.tasklist`. The following parts are configurable:
 
 * [Webserver](#webserver)

@@ -1,6 +1,7 @@
 ---
 id: camunda-forms
 title: Camunda Forms
+description: "Let's learn about Camunda Forms, how to use them, how to model them with a diagram, and deploying."
 ---
 
 ## What are Camunda Forms?

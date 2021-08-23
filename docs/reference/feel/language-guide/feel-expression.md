@@ -3,7 +3,7 @@ id: feel-expression
 title: Expressions
 ---
 
-An expression can contain literals, operators and function calls.
+An expression can contain literals, operators, and function calls.
 
 ### Literal
 

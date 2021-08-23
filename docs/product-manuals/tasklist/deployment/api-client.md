@@ -1,6 +1,7 @@
 ---
 id: api-client
 title: API Client
+description: "Let's take a closer look at the endpoint, authentication, access token, and API usage within Tasklist."
 ---
 
 ## Endpoint

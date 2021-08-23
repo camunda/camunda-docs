@@ -1,6 +1,7 @@
 ---
 id: process-deploy
 title: "Deploy a process"
+description: "Let's analyze the prerequisites and code to deploy a process using Java."
 ---
 
 ## Related resources

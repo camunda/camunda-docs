@@ -4,9 +4,11 @@ title: "Helm charts"
 sidebar_label: "Overview"
 ---
 
+This section covers the fundamentals of how to run Zeebe in Kubernetes.
+
 ![Zeebe on K8s](assets/zeebe-k8s-helm.png)
 
-This section covers the fundamentals of how to run Zeebe in Kubernetes. There are several alternatives on how to deploy applications to a Kubernetes cluster, but the following sections are using Helm charts to deploy a set of components into your cluster.
+There are several alternatives on how to deploy applications to a Kubernetes cluster, but the following sections are using Helm charts to deploy a set of components into your cluster.
 
 Helm allows you to choose exactly what chart (set of components) do you want to install and how these components needs to be configured. These Helm charts are continuously being improved and released to the [Zeebe Helm Chart Repository](http://helm.camunda.io)
 

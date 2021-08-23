@@ -1,6 +1,7 @@
 ---
 id: data-pojo
 title: "Handle variables as POJO"
+description: "Let's analyze the prerequisites and code to handle variables as POJO."
 ---
 
 ## Related resources
