@@ -1,6 +1,7 @@
 ---
 id: delete-cluster
 title: Delete your cluster
+description: "Follow these simple instructions to remove your cluster permanently."
 ---
 
 :::danger

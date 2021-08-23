@@ -1,6 +1,7 @@
 ---
 id: tasklist-frontend-dependencies
 title: Frontend Dependencies
+description: "Let's take a closer look at the frontend dependencies within Tasklist."
 ---
 
 * @apollo/client (Version: 3.3.12, License: [MIT](https://opensource.org/licenses/MIT))

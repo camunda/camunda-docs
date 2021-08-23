@@ -3,7 +3,6 @@ id: introduction
 title: Introduction
 ---
 
-
 These documents guide you through the process of updating your Camunda Cloud
 application or server installation from one Camunda Cloud version to the other.
 

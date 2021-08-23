@@ -1,6 +1,7 @@
 ---
 id: update-billing-reservations
 title: Update billing reservations
+description: "Let's manage our hardware packages and edit reservations."
 ---
 
 :::note

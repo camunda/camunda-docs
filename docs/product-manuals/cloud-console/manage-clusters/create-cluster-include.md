@@ -1,6 +1,8 @@
 ---
 ---
 
+Let's take a closer look at creating clusters and viewing their details.
+
 [//]:# (Do we need an id and title above?)
 
 ![cluster-creating](./img/cluster-overview-empty.png)

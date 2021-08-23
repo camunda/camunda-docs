@@ -3,10 +3,7 @@ id: data-flow
 title: "Data flow"
 ---
 
-Every BPMN process instance can have one or more variables. Variables are key-value-pairs and hold
-the contextual data of the process instance that is required by job workers to do their work or to
-decide which sequence flows to take. They can be provided when a process instance is created, when
-a job is completed, and when a message is correlated.
+Every BPMN process instance can have one or more variables. Variables are key-value-pairs and hold the contextual data of the process instance that is required by job workers to do their work or to decide which sequence flows to take. They can be provided when a process instance is created, when a job is completed, and when a message is correlated.
 
 ![data-flow](assets/data-flow.png)
 

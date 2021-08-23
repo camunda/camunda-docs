@@ -1,6 +1,7 @@
 ---
 id: internal-processing
 title: "Internal processing"
+description: "This document analyzes the state machines, events and commands, stateful stream processing, driving the engine, and handling backpressure within Zeebe."
 ---
 
 Internally, Zeebe is implemented as a collection of _stream processors_ working on record streams \(partitions\). The stream processing model is used since it is a unified approach to provide:

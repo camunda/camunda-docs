@@ -1,6 +1,7 @@
 ---
 id: prerequisites
 title: "Prerequisites"
+description: "This document outlines the prerequisites necessary to get started."
 ---
 
 In order to use Kubernetes you need to have the following tools installed in your local environment: 

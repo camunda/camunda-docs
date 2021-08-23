@@ -3,8 +3,7 @@ id: disk-space
 title: "Disk space"
 ---
 
-Zeebe uses the local disk for storage of it's persistent data. Therefore if the Zeebe broker runs out of disk space the system is in an invalid state, as the broker cannot
-update it's state.
+Zeebe uses the local disk for storage of it's persistent data. Therefore if the Zeebe broker runs out of disk space the system is in an invalid state, as the broker cannot update its state.
 
 To prevent the system to end in an unrecoverable state Zeebe expects a minimum size of free disk space available. If this limit is violated the broker will reject new
 requests, to allow the operations team to free more disk space and the broker to continue to update it's state.

@@ -1,7 +1,9 @@
 ---
 id: install-and-start
 title: Install and start Operate
+description: "Let's get started with Operate with these simple installation steps."
 ---
+
 ## Running via Docker (local development)
 
 You can use the Docker image `camunda/operate:latest` to run Operate as container.

@@ -1,6 +1,7 @@
 ---
 id: common-pitfalls
 title: Common pitfalls
+description: "Let's take a closer look at common issues and resolutions."
 ---
 
 If you have a problem, use the [feedback form](./feedback-and-support.md).

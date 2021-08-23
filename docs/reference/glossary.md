@@ -1,9 +1,8 @@
 ---
 id: glossary
 title: "Glossary"
+description: "This section defines commonly used terminology referenced within the documentation."
 ---
-
-This section defines commonly used terminology referenced within the documentation.
 
 ### Bridge
 

@@ -1,6 +1,7 @@
 ---
 id: zeebe-dependencies
 title: Dependencies
+description: "This document outlines the dependencies involved in Zeebe."
 ---
 
 * kryo (Version: 4.0.2, License: [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause))

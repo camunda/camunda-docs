@@ -3,7 +3,9 @@ id: process-instance-creation
 title: "Process instance creation"
 ---
 
-Depending on the process definition, an instance of it can be created in the following ways:
+Depending on the process definition, an instance of it can be created in several ways.
+
+At Camunda, this includes the following:
 
 - `CreateProcessInstance` commands
 - Timer event handler

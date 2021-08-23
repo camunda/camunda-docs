@@ -4,6 +4,7 @@ title: "Metrics"
 ---
 
 When operating a distributed system like Zeebe, it is important to put proper monitoring in place.
+
 To facilitate this, Zeebe exposes an extensive set of metrics.
 
 Zeebe exposes metrics over an embedded HTTP server.

@@ -1,6 +1,7 @@
 ---
 id: javascript
 title: "JavaScript/NodeJS"
+description: "Take a deeper look at the source code, Nuget package, and API docs alongside JavaScript and Node.js."
 ---
 
 ## Zeebe Node

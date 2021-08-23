@@ -3,7 +3,9 @@ id: processes
 title: "Processes"
 ---
 
-Processes are flowchart-like blueprints that define the orchestration of **tasks**. Every task represents a piece of business logic so the ordered execution produces a meaningful result.
+Processes are flowchart-like blueprints that define the orchestration of **tasks**. 
+
+Every task represents a piece of business logic so the ordered execution produces a meaningful result.
 
 A **job worker** implements the business logic required to complete a task. A job worker must be able to communicate with Camunda Cloud, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
 
