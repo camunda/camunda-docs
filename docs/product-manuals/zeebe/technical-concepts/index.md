@@ -8,11 +8,11 @@ This chapter gives an overview of Zeebe's underlying technical concepts.
 
 - [Architecture](architecture.md) - introduces you to the internal components of Zeebe, as well as, interfaces for external systems to interact with Zeebe.
 - [Clustering](clustering.md) - discusses the internal structure and properties of a Zeebe cluster.
-- [Partitions](partitions.md) - sheds light on how Zeebe achives horizontal sclability
-- [Internal processing](internal-processing.md) - explains the basics of Zeebe's event processing
-- [Process lifecycles](process-lifecycles.md) - expands on the event processing concept and goes into more detail regarding the lifecycles of selected process elements
-- [Protocols](protocols.md) - explains how external clients communicate with Zeebe
-- [Exporters](exporters.md) - discusses the extension point to add additional processing logic for each record in the event stream
+- [Partitions](partitions.md) - sheds light on how Zeebe achives horizontal scalability.
+- [Internal processing](internal-processing.md) - explains the basics of Zeebe's event processing.
+- [Process lifecycles](process-lifecycles.md) - expands on the event processing concept and goes into more detail regarding the lifecycles of selected process elements.
+- [Protocols](protocols.md) - explains how external clients communicate with Zeebe.
+- [Exporters](exporters.md) - discusses the extension point to add additional processing logic for each record in the event stream.
 
 
 In addition to these sections, you may also be interested in Camunda Cloud [Best Practices](././product-manuals/best-practices.md).
