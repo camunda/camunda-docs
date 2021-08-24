@@ -67,7 +67,9 @@ Available environment variables:
 - `ZEEBE_BROKER_NETWORK_HOST` - sets the host address to bind to instead of the IP of the container.
 - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` - sets the contact points of other brokers in a cluster setup.
 
-## Install the Camunda Modeler
+## Next steps
+
+As a next step, you can install Camunda Modeler.
 
 The Camunda Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe.
 
