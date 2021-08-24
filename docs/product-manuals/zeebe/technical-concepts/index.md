@@ -8,7 +8,7 @@ This chapter gives an overview of Zeebe's underlying technical concepts.
 
 - [Architecture](architecture.md) - introduces you to the internal components of Zeebe, as well as, interfaces for external systems to interact with Zeebe.
 - [Clustering](clustering.md) - discusses the internal structure and properties of a Zeebe cluster.
-- [Partitions](partitions.md) - sheds light on how Zeebe achives horizontal scalability.
+- [Partitions](partitions.md) - sheds light on how Zeebe achieves horizontal scalability.
 - [Internal processing](internal-processing.md) - explains the basics of Zeebe's event processing.
 - [Process lifecycles](process-lifecycles.md) - expands on the event processing concept and goes into more detail regarding the lifecycles of selected process elements.
 - [Protocols](protocols.md) - explains how external clients communicate with Zeebe.
