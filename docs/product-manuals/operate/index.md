@@ -16,11 +16,12 @@ dark: useBaseUrl('img/operate-introduction_dark.png'),
 }}
 />;
 -->
+
 In addition to providing visibility into active and completed process instances, Operate also makes it possible to carry out key operations such as resolving <!-- FIXME: [incidents](/reference/incidents.html) --> incidents and updating process instance variables.
 
 ![operate-introduction](img/operate-introduction_light.png)
 
-In the [Operate User Guide](userguide/basic-operate-navigation) you can find out how to use it to monitor process instances and more features.
+In the [Operate User Guide](userguide/basic-operate-navigation), learn how to use it to monitor process instances and more features.
 
 In the [Operate Deployment Guide](deployment/install-and-start) you can walk through how to install and run Operate. 
 
