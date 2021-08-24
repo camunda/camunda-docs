@@ -3,15 +3,15 @@ id: install
 title: "Docker container"
 ---
 
-This page guides you through the initial installation of the Zeebe broker and Camunda Modeler for development purposes.
+This page guides you through the initial installation of the Zeebe broker and next steps for development purposes.
 
 ## Using Docker
 
-The easiest way to develop with Zeebe is using Docker. Using Docker provides you with a consistent environment, and we recommend it for development.
+The easiest way to develop with Zeebe is using Docker. Docker provides a consistent environment we recommend for development.
 
 ### Prerequisites
 
-- Operating System:
+- Operating system:
   - Linux
   - Windows/MacOS (development only, not supported for production)
 - Docker
@@ -27,7 +27,7 @@ This repository contains several pre-defined configuration options:
 - Single node with Operate
 - Single node with simple monitor
 
-This allows you to start using complex configurations with a single command. Later you can tailor these configurations to your needs, when you are ready to delve to that level.
+This allows you to start using complex configurations with a single command. You can tailor these configurations to your needs whenever you'd like.
 
 Further instructions for using these configurations are in the [README](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md).
 
@@ -57,8 +57,8 @@ all data which should be persisted.
 The Zeebe configuration is located at `/usr/local/zeebe/config/application.yaml`.
 The logging configuration is located at `/usr/local/zeebe/config/log4j2.xml`.
 
-The configuration of the docker image can also be changed by using environment
-variables. The configuration template files also contains information on the environment
+The configuration of the Docker image can also be changed using environment
+variables. The configuration template file also contains information on the environment
 variables to use for each configuration setting.
 
 Available environment variables:
@@ -71,6 +71,6 @@ Available environment variables:
 
 As a next step, you can install Camunda Modeler.
 
-The Camunda Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe.
+Camunda Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe. This application gives developers powerful features to design and deploy automated processes, human workflows, decision tables, and decision requirement diagrams using the globally-recognized [BPMN](https://camunda.com/bpmn/) and [DMN](https://camunda.com/dmn/) standards.
 
-[You can download the most recent Camunda Modeler release here.](https://camunda.com/download/modeler/)
+Get started with Camunda Modeler using our [installation guide](https://docs.camunda.io/docs/product-manuals/modeler/camunda-modeler/install-the-modeler).
