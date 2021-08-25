@@ -32,7 +32,7 @@ More users can be added directly to Elasticsearch via the index `operate-user-<v
 
 ## Camunda Cloud single sign-on
 
-Currently, Operate supports Single Sign On (SSO) in the Camunda Cloud environment. Camunda Cloud takes care of the configuration of Operate for SSO, so you don't need to normally adjust following subsections.
+Currently, Operate supports single sign-on (SSO) in the Camunda Cloud environment. Camunda Cloud takes care of the configuration of Operate for SSO, so you don't need to normally adjust following subsections.
 
 ### Enable SSO
 
@@ -46,7 +46,7 @@ export SPRING_PROFILES_ACTIVE=sso-auth
 
 ### Configure SSO
 
-SSO requires all of the following parameters:
+SSO requires the following parameters:
 
 Parameter name | Description
 --------------|-------------
@@ -100,7 +100,7 @@ The following parameters for a connection to a LDAP server should be given:
 For **active directory**-based LDAP server, the following parameters should be given:
 
 :::note
-The Active Directory configuration will be applied only when `camunda.operate.ldap.domain` is given.
+The active directory configuration will be applied only when `camunda.operate.ldap.domain` is given.
 :::
 
  Parameter name | Description | Required |
