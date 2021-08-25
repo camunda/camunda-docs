@@ -3,6 +3,9 @@ id: create-process-instance
 title: "Create and complete process instances"
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 We're going to create 2 process instances for this tutorial: one with an order value less than $100 and one with an order value greater than or equal to $100 so that we can see our XOR gateway in action.
 
 Go back to the Terminal window where you deployed the process model and execute the following command.
@@ -12,30 +15,39 @@ Go back to the Terminal window where you deployed the process model and execute 
 > - cmd: `"{\"orderId\": 1234}"`
 > - Powershell: `'{"\"orderId"\": 1234}'`
 
-**Linux**
+<Tabs groupId="OS" defaultValue="linux" values={
+[
+{label: 'Linux', value: 'linux', },
+{label: 'MacOS', value: 'macos', },
+{label: 'Windows', value: 'windows', },
+]
+}>
 
+<TabItem value='linux'>
 
 ```
 ./bin/zbctl --insecure create instance order-process --variables '{"orderId": "1234", "orderValue":99}'
 ```
 
+</TabItem>
 
-**Mac**
+<TabItem value='macos'>
 
 
 ```
 ./bin/zbctl.darwin --insecure create instance order-process --variables '{"orderId": "1234", "orderValue":99}'
 ```
+</TabItem>
 
-
-**Windows (Powershell)**
+<TabItem value='windows'>
 
 
 ```
 ./bin/zbctl.exe --insecure create instance order-process --variables '{\"orderId\": \"1234\", \
 "orderValue\":99}'
 ```
-
+</TabItem>
+</Tabs>
 
 You'll see a response like:
 
