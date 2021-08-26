@@ -3,7 +3,7 @@ id: resolve-incidents-update-variables
 title: Variables and incidents
 ---
 
-Every process instance created for the process model used in the Getting started tutorial requires an `orderValue` so the XOR gateway evaluation will happen properly. 
+Every process instance created for the process model used in the getting started tutorial requires an `orderValue` so the XOR gateway evaluation will happen properly. 
 
 Let’s look at a case where `orderValue` is present and was set as a string, but our `order-process.bpmn` model requires an integer to properly evaluate the `orderValue` and route the instance. 
 
@@ -34,13 +34,11 @@ To advance the instance to our XOR gateway, we’ll quickly create a job worker 
 ./bin/zbctl --insecure create worker initiate-payment --handler cat
 ```
 
-
 **Mac**
 
 ```
 ./bin/zbctl.darwin --insecure create worker initiate-payment --handler cat
 ```
-
 
 **Windows (Powershell)**
 
@@ -67,7 +65,7 @@ We’ll publish a message that will be correlated with the instance so we can ad
 ./bin/zbctl.exe --insecure publish message "payment-received" --correlationKey="1234"
 ```
 
-In the Operate interface, you should now see the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that needs to be fixed before the process instance can progress to the next step.
+In the Operate interface, you should now see the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
 ![operate-incident-process-view](./img/operate-process-view-incident_light.png)
 
@@ -77,7 +75,7 @@ When we inspect the process instance, we can see exactly what our incident is: `
 
 ![operate-incident-instance-view](./img/operate-view-instance-incident_light.png)
 
-To resolve this incident, we need to edit the `orderValue` variable so it’s an integer. To do so, take the following steps:
+To resolve this incident, we must edit the `orderValue` variable so it’s an integer. To do so, take the following steps:
 
 1. Click on the edit icon next to the variable you’d like to edit. 
 
@@ -86,7 +84,7 @@ To resolve this incident, we need to edit the `orderValue` variable so it’s an
 2. Edit the variable by removing the quotation marks from the `orderValue` value.
 3. Click the checkmark icon to save the change. 
 
-We were able to solve this particular problem by _editing_ a variable, but it’s worth noting that you can also _add_ a variable if a variable is missing from a process instance altogether. 
+We were able to solve this particular problem by _editing_ a variable, but it’s worth noting you can also _add_ a variable if a variable is missing from a process instance altogether. 
 
 ![operate-incident-save-variable-edit](./img/operate-view-instance-save-var-edit_light.png)
 
@@ -98,7 +96,7 @@ You should now see the incident has been resolved, and the process instance has 
 
 ![operate-incident-resolved-instance-view](./img/operate-incident-resolved_light.png)
 
-If you’d like to complete the process instance, you can create a worker for the `Ship Without Insurance` task: 
+If you’d like to complete the process instance, create a worker for the `Ship Without Insurance` task: 
 
 **Linux**
 

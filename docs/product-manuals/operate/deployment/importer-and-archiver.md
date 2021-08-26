@@ -78,8 +78,8 @@ You can further parallelize archiver and/or importer within one node using the f
 
 Configuration parameter | Description | Default value
 -----|-------------|--------------
-camunda.operate.archiver.threadsCount | Number of threads, in which data will be archived. | 1
-camunda.operate.importer.threadsCount | Number of threads, in which data will be imported. | 3
+camunda.operate.archiver.threadsCount | Number of threads in which data will be archived. | 1
+camunda.operate.importer.threadsCount | Number of threads in which data will be imported. | 3
 
 :::note
 Parallelization of import and archiving within one node will also happen based on Zeebe partitions, meaning only configurations with (number of nodes) * (threadsCount) <= (total number of Zeebe partitions) will make sense. Too many threads and nodes will still work, but some of them will be idle.

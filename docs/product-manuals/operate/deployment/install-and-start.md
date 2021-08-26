@@ -24,10 +24,11 @@ operate:
 
 ## Manual configuration (local development)
 
-Here, we’ll walk you through how to download and run an Operate distribution manually, without using Docker. 
+Here, we’ll walk you through how to download and run an Operate distribution manually without using Docker. 
 
 :::note
-The Operate web UI is available by default at [http://localhost:8080](http://localhost:8080). Ensure this port is available. 
+The Operate web UI is available by default at [http://localhost:8080](http://localhost:8080). Ensure this port is available.
+:::
 
 ### Download Operate and a compatible version of Zeebe
 
@@ -41,7 +42,7 @@ On the Zeebe release page, compatible versions of Zeebe and Operate are grouped 
 
 ### Download Elasticsearch
 
-Operate uses open-source Elasticsearch as its underlying data store. Therefore to run Operate, you need to download and run Elasticsearch. 
+Operate uses open-source Elasticsearch as its underlying data store. Therefore to run Operate, you must download and run Elasticsearch. 
 
 Operate is currently compatible with Elasticsearch 7.12.1. Download Elasticsearch [here](https://www.elastic.co/downloads/past-releases/elasticsearch-7-12-1).
 

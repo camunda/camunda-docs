@@ -2,7 +2,7 @@
 id: schema-and-migration
 title: Schema and migration
 ---
-Operate stores data in Elasticsearch. On first start, Operate will create all required indices and templates.
+Operate stores data in Elasticsearch. On first start, Operate creates all required indices and templates.
 
 * [Schema](#schema)
 * [Data migration](#data-migration)
@@ -54,7 +54,7 @@ The migration uses Elasticsearch [processors](https://www.elastic.co/guide/en/el
 Each version of Operate delivers a set of migration steps which need to be applied for a corresponding version of Operate.
 
 When upgrading from one version to another, necessary migration steps constitute the so-called migration plan.
-All known migration steps (both applied and not) are persisted in dedicated Elasticsearch index: `operate-migration-steps-repository`.
+All known migration steps (both applied and not) are persisted in the dedicated Elasticsearch index: `operate-migration-steps-repository`.
 
 ### How to migrate
 
@@ -66,15 +66,15 @@ Execute ```<operate_home>/bin/migrate``` (or ```<operate_home>/bin/migrate.bat``
 
 What is expected to happen:
 
-* New Elasticsearch indices will be created if they don't exist.
-* If an older version for some or all indices exists, the migration plan will be built.
-* For each index with an older version, the migration plan will be executed.
-* Older indices will be deleted.
+* New Elasticsearch indices are created if they don't exist.
+* If an older version for some or all indices exists, the migration plan is built.
+* For each index with an older version, the migration plan is executed.
+* Older indices are deleted.
 
-All known migration steps with metadata will be stored in the `operate-migration-steps-repository` index.
+All known migration steps with metadata are stored in the `operate-migration-steps-repository` index.
 
 :::note
-The old indices will be deleted **only** after successful migration. This might require more disk space during the migration process.
+The old indices are deleted *only* after successful migration. This might require more disk space during the migration process.
 :::
 
 :::note
@@ -83,12 +83,12 @@ Take care of data backup before performing migration.
 
 #### Migrate by using built-in automatic upgrade
 
-When running a newer version of Operate against an older schema, it will perform data migration on a startup.
-The migration will happen for every index, for which it detects exactly **one** older version. Migration will fail if it detects more than one older version of some index. 
+When running a newer version of Operate against an older schema, it performs data migration on a startup.
+The migration happens for every index, for which it detects exactly **one** older version. Migration fails if it detects more than one older version of some index. 
 
 #### Further notes
 
-* If migration fails, you can retry it. All applied steps are stored and only those steps will be applied that haven't been executed yet.
+* If migration fails, you can retry it. All applied steps are stored and only those steps are applied that haven't been executed yet.
 * Operate should not be running while migration is happening.
 * In the case version upgrade is performed in the cluster with several Operate nodes, only one node ([Webapp module](importer-and-archiver.md)) must execute data migration. The others must be stopped and started only after migration is fully finished.
 

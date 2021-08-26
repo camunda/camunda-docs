@@ -3,10 +3,10 @@ id: configuration
 title: Configuration
 ---
 
-Operate is a Spring Boot application. This means all provided ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
+Operate is a Spring Boot application. This means every way to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
 a Spring Boot application can be applied.
 
-By default, the configuration for Operate is stored in a YAML file `application.yml`. All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
+By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
 
 * [Webserver](#webserver)
 * [Elasticsearch connection](#elasticsearch)
@@ -22,7 +22,7 @@ By default, the configuration for Operate is stored in a YAML file `application.
 
 ### Webserver
 
-Operate supports customizing the **context-path** using default spring configuration.
+Operate supports customizing the **context-path** using default Spring configuration.
 
 Example for `application.yml`:
 `server.servlet.context-path: /operate`
@@ -30,7 +30,7 @@ Example for `application.yml`:
 Example for environment variable:
 `SERVER_SERVLET_CONTEXT_PATH=/operate`
 
-Default context-path is `/`.
+The default context-path is `/`.
 
 ### Elasticsearch
 
@@ -46,7 +46,7 @@ Either set `host` and `port` (deprecated) or `url` (recommended).
 
 Name | Description | Default value
 -----|-------------|--------------
-camunda.operate.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
+camunda.operate.elasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
 camunda.operate.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
 camunda.operate.elasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.operate.elasticsearch.password | Password to access Elasticsearch REST API | -
@@ -64,13 +64,13 @@ camunda.operate:
 
 ## Zeebe broker connection
 
-Operate needs a connection to the Zeebe broker to start the import and to execute user operations.
+Operate needs a connection to the Zeebe Broker to start the import and execute user operations.
 
 ### Settings to connect
 
 Name | Description | Default value
 -----|-------------|--------------
-camunda.operate.zeebe.gatewayAddress | Gateway address that point to Zeebe as hostname and port | localhost:26500
+camunda.operate.zeebe.gatewayAddress | Gateway address that points to Zeebe as hostname and port. | localhost:26500
 
 :::note
 Currently, Operate does not support TLS communication with Zeebe.
@@ -87,7 +87,7 @@ camunda.operate:
 
 ## Zeebe Elasticsearch exporter
 
-Operate imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
+Operate imports data from Elasticsearch indices created and filled in by the [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
 
 Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on the Zeebe side.
 
@@ -118,11 +118,13 @@ camunda.operate:
 
 ## Operation executor
 
-Operations are user operations like Cancellation of process instance(s) or Updating the variable value. Operations are executed in multi-threaded manner.
+Operations are user operations, like cancellation of process instance(s) or updating the variable value. 
+
+Operations are executed in a multi-threaded manner.
 
 Name | Description | Default value
 -----|-------------|--------------
-camunda.operate.operationExecutor.threadsCount| How many threads should be used | 3
+camunda.operate.operationExecutor.threadsCount| How many threads should be used. | 3
 
 ### A snippet from application.yml
 
@@ -168,7 +170,7 @@ In versions before 0.25.0, management endpoints look different. Therefore, we re
 
 ## Logging
 
-Operate uses Log4j2 framework for logging. In the distribution archive as well as inside a Docker image, `config/log4j2.xml` logging configuration files are included and can be further adjusted to your needs:
+Operate uses the Log4j2 framework for logging. In the distribution archive, as well as inside a Docker image, `config/log4j2.xml` logging configuration files are included and can be further adjusted to your needs:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -194,6 +196,8 @@ Operate uses Log4j2 framework for logging. In the distribution archive as well a
 ```
 
 By default, Console log appender will be used.
+
+[//]:# (Do you mean ConsoleAppender above?)
 
 #### JSON logging configuration
 
