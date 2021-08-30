@@ -6,37 +6,41 @@ description: "Let's take a closer look at the endpoint, authentication, access t
 
 ## Endpoint
 
-Tasklist provides an GraphQL API at endpoint `/graphql`.
+Tasklist provides a GraphQL API at endpoint `/graphql`.
 
 ## Authentication
 
-To access the API endpoint you need an access token. 
-Your client needs to send a header in each request: 
+To access the API endpoint, you need an access token. 
+
+Your client must send a header in each request: 
 
 `Authorization: Bearer <Token>`
 
-For example send a request by using *curl*:
+For example, send a request using *curl*:
+
+[//]:# (How is curl normally written? Curl? or cURL, or CURL?)
 
 ```shell
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){name}}"}' http://localhost:8080/graphql
 ```
+
 ### How to obtain the access token
 
-You need to obtain a token for using the Tasklist API. When you create a Tasklist [client](../../../guides/getting-started/setup-client-connection-credentials.md) 
-you will get all the information you need to connect to Tasklist.
+You must obtain a token to use the Tasklist API. When you create a Tasklist [client](../../../guides/getting-started/setup-client-connection-credentials.md), you will get all the information you need to connect to Tasklist.
 
-See also [Build your own client](../../../product-manuals/clients/build-your-own-client.md)
+Also see our guide on [building your own client](../../../product-manuals/clients/build-your-own-client.md).
 
-Following settings are needed:
+The following settings are needed:
 
 Name | Description | Default value
 -----|-------------|--------------
-client id |Name of your registered client | -
-client secret|Password for your registered client | -
-audience | Permission name, if not given use default value| `tasklist.camunda.io`
+client id | Name of your registered client | -
+client secret | Password for your registered client | -
+audience | Permission name, if not given use default value | `tasklist.camunda.io`
 authorization server url | Token issuer server | -
 
-You send a token issue POST request to the authorization server with the content:
+You send a token issue POST request to the authorization server with the following content:
+
 ```json
 {
   "client_id": "<client-id>", 
@@ -46,13 +50,13 @@ You send a token issue POST request to the authorization server with the content
 }
 ```
 
-An example with *curl*:
+See the following example with *curl*:
 
 ```shell
 curl -X POST --header 'content-type: application/json' --data '{"client_id": "<client-id>", "client_secret":"<client-secret>","audience":"<audience>","grant_type":"client_credentials"}' https://<authorization server url>
 ```
 
-If the authorization is successful, the authorization server sends back the access token, when it expires, scope and type:
+If the authorization is successful, the authorization server sends back the access token, when it expires, scope, and type:
 
 ````json
 {
@@ -63,15 +67,14 @@ If the authorization is successful, the authorization server sends back the acce
 }
 ````
 
-## Obtain GraphQL Schema
+## Obtain GraphQL schema
 
-To obtain the GraphQL schema you need to send a request to the endpoint with a GraphQL introspection query as described in https://graphql.org/learn/introspection/
+To obtain the GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described in [here](https://graphql.org/learn/introspection/) or use the [generated API documentation](../../../reference/tasklist-api/schema).
 
-or you use the [generated API documentation](../../../reference/tasklist-api/schema)
-
-There are also a lot of tools to explore GraphQL API's like this: https://altair.sirmuel.design
+There are also several tools to explore GraphQL APIs [here](https://altair.sirmuel.design).
 
 For example, you want to know all about provided types:
+
 ````graphql
 query {
   __schema {
@@ -91,10 +94,12 @@ query {
 }
 ```` 
 
-## Examples requests and responses
+## Example requests and responses
 
 ### Get all tasks names
+
 Request:
+
 ````graphql
 {"query":"{
     tasks(query: {}) {
@@ -103,7 +108,9 @@ Request:
   }"
 }
 ````
+
 Response:
+
 ```json
 {
   "data": {
@@ -119,8 +126,10 @@ Response:
 }
 ```
 
-### Get all tasks that are completed with id, name and state
+### Get all tasks completed with id, name, and state
+
 Request:
+
 ```graphql
 {
     "query" : "{
@@ -132,7 +141,9 @@ Request:
     }"
 }
 ```
+
 Response:
+
 ```json
 {
   "data": {
