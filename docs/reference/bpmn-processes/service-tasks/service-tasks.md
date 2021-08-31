@@ -48,7 +48,7 @@ A service task with a custom header:
 
 ## Next steps
 
-Learn more about the concept of job types and how to set up a job worker via our guide [here](/product-manuals/concepts/job-workers.md).
+Learn more about the concept of job types and how to set up a job worker via our [manual on job workers](/product-manuals/concepts/job-workers.md).
 
 ### References
 
