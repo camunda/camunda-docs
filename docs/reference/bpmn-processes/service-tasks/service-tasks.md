@@ -17,7 +17,7 @@ A service task must have a `taskDefinition`. This specifies the type of job work
 
 Optionally, a `taskDefinition` can specify the number of times the job is retried when a worker signals failure (default = 3).
 
-Usually, the job type and the job retries are defined as static values (e.g. `order-items`) but they can also be defined as [expressions](/product-manuals/concepts/expressions.md) (e.g. `= "order-" + priorityGroup`). The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
+Typically, the job type and the job retries are defined as static values (e.g. `order-items`) but they can also be defined as [expressions](/product-manuals/concepts/expressions.md) (e.g. `= "order-" + priorityGroup`). The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
 
 ## Task headers
 
