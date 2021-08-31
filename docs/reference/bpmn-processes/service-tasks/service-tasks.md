@@ -27,7 +27,7 @@ A service task can define an arbitrary number of `taskHeaders`. They are static 
 
 By default, all job variables merge into the process instance. This behavior can be customized by defining an output mapping at the service task.
 
-Input mappings can be used to transform the variables into a format accepted by the job worker.
+Input mappings can be used to transform the variables into a format accepted by the [job worker](/product-manuals/concepts/job-workers.md).
 
 ## Additional resources
 
@@ -45,6 +45,10 @@ A service task with a custom header:
   </bpmn:extensionElements>
 </bpmn:serviceTask>
 ```
+
+## Next steps
+
+Learn more about the concept of job types and how to set up a job worker via our guide [here](/product-manuals/concepts/job-workers.md).
 
 ### References
 
