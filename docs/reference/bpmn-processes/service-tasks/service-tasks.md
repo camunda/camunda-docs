@@ -9,7 +9,7 @@ A service task represents a work item in the process with a specific type.
 
 When a service task is entered, a corresponding job is created. The process instance stops at this point and waits until the job is complete.
 
-A worker can subscribe to the job type, process the jobs, and complete them using one of the Zeebe clients. When the job is complete, the service task is completed and the process instance continues.
+A [job worker](/product-manuals/concepts/job-workers.md) can subscribe to the job type, process the jobs, and complete them using one of the Zeebe clients. When the job is complete, the service task is completed and the process instance continues.
 
 ## Task definition
 
@@ -27,7 +27,7 @@ A service task can define an arbitrary number of `taskHeaders`. They are static 
 
 By default, all job variables merge into the process instance. This behavior can be customized by defining an output mapping at the service task.
 
-Input mappings can be used to transform the variables into a format accepted by the [job worker](/product-manuals/concepts/job-workers.md).
+Input mappings can be used to transform the variables into a format accepted by the job worker.
 
 ## Additional resources
 
