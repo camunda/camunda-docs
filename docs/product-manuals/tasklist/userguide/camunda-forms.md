@@ -6,7 +6,7 @@ description: "Let's learn about Camunda Forms, how to use them, how to model the
 
 ## What are Camunda Forms?
 
-Camunda Forms are one way to handle a user task on Tasklist. These forms can be created in Camunda Modeler, where they can also be embedded in the BPMN file with your diagram, and then assign a form to a user task.
+Camunda Forms are one way to handle a user task on Tasklist. These forms can be created in Camunda Modeler, where they can also be embedded in the BPMN file with your diagram. You can then assign a form to a user task.
 
 After deploying a diagram with an embedded form, Tasklist imports this form schema and uses it to render the form on every task assigned to it.
 

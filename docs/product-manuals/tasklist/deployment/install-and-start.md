@@ -34,7 +34,7 @@ Here, we’ll walk you through how to download and run a Tasklist distribution m
 The Tasklist web UI is available by default at [http://localhost:8080](http://localhost:8080). Ensure this port is available.
 :::
 
-### Download Tasklist and a compatible version of Zeebe.
+### Download Tasklist and a compatible version of Zeebe
 
 Tasklist and Zeebe distributions are available for download on the same [release page](https://github.com/camunda-cloud/zeebe/releases).
 

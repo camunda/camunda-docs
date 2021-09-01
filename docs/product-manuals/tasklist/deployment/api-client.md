@@ -26,9 +26,9 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKE
 
 ### How to obtain the access token
 
-You must obtain a token to use the Tasklist API. When you create a Tasklist [client](../../../guides/getting-started/setup-client-connection-credentials.md), you will get all the information you need to connect to Tasklist.
+You must obtain a token to use the Tasklist API. When you create a Tasklist [client](../../../guides/getting-started/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
 
-Also see our guide on [building your own client](../../../product-manuals/clients/build-your-own-client.md).
+See our guide on [building your own client](../../../product-manuals/clients/build-your-own-client.md).
 
 The following settings are needed:
 
@@ -69,11 +69,11 @@ If the authorization is successful, the authorization server sends back the acce
 
 ## Obtain GraphQL schema
 
-To obtain the GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described in [here](https://graphql.org/learn/introspection/) or use the [generated API documentation](../../../reference/tasklist-api/schema).
+To obtain the GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](../../../reference/tasklist-api/schema).
 
 There are also several tools to explore GraphQL APIs [here](https://altair.sirmuel.design).
 
-For example, you want to know all about provided types:
+For example, you want to know about provided types:
 
 ````graphql
 query {

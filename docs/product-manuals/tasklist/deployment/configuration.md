@@ -3,8 +3,7 @@ id: configuration
 title: Configuration
 ---
 
-Tasklist is a Spring Boot application. This means all provided ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
-a Spring Boot application can be applied.
+Tasklist is a Spring Boot application. This means all provided ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config) a Spring Boot application can be applied.
 
 By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist-related settings are prefixed with `camunda.tasklist`. The following components are configurable:
 
@@ -43,8 +42,7 @@ spring.security.oauth2.resourceserver.jwt.jwk-set-uri (recommended) | Complete U
 *OR* | |
 spring.security.oauth2.resourceserver.jwt.issuer-uri| URI to get public keys for JWT validation.| https://weblogin.cloud.company.com/
 
-The settings can be given in [application.yml](https://github.com/camunda-cloud/tasklist/blob/master/config/application.yml) (eg. `camunda.tasklist.client.audience: tasklist.camunda.io`) or
-as environment variables (eg. `CAMUNDA_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`).
+The settings can be given in [application.yml](https://github.com/camunda-cloud/tasklist/blob/master/config/application.yml) (eg. `camunda.tasklist.client.audience: tasklist.camunda.io`) or as environment variables (eg. `CAMUNDA_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`).
 
 The [API client](api-client.md) must obtain the JWT token and send it in each request to `graphql` in an authorization header as described above.
 
@@ -169,7 +167,7 @@ With this configuration, the following endpoints are available for use out of th
 
 ### Example snippets to use Tasklist probes in Kubernetes
 
-For details to set Kubernetes probes parameters, ses [Kubernetes configure probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes).
+For details to set Kubernetes probes parameters, see [Kubernetes configure probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes).
 
 #### Readiness probe as yaml config
 
@@ -194,7 +192,7 @@ livenessProbe:
 
 ## Logging
 
-Tasklist uses Log4j2 framework for logging. In the distribution archive as well as inside a Docker image `config/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
+Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image `config/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

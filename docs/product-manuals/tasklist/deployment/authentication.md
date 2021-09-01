@@ -4,10 +4,10 @@ title: Authentication
 description: "Let's take a closer look at the authentication methods of Tasklist."
 ---
 
-Tasklist provides two ways for authentication:
+Tasklist provides two ways to authenticate:
 
-1. Authenticate with user information stored in [Elasticsearch](#user-in-elasticsearch)
-2. Authenticate via [Camunda Cloud Single Sign-On](#camunda-cloud-single-sign-on)
+1. User information stored in [Elasticsearch](#user-in-elasticsearch)
+2. [Camunda Cloud Single Sign-On](#camunda-cloud-single-sign-on)
 
 By default, user storage in Elasticsearch is enabled.
 
@@ -47,9 +47,9 @@ export SPRING_PROFILES_ACTIVE=sso-auth
 
 SSO requires the following parameters:
 
-Parametername |Description
+Parametername | Description
 --------------|-------------
-camunda.tasklist.auth0.domain | Defines the domain which the user sees.
+camunda.tasklist.auth0.domain | Defines the domain the user sees.
 camunda.tasklist.auth0.backendDomain | Defines the domain which provides user information.
 camunda.tasklist.auth0.clientId | Similar to a username for the application.
 camunda.tasklist.auth0.clientSecret | Similar to a password for the application.

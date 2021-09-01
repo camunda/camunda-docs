@@ -9,7 +9,7 @@ Tasklist shows you all user tasks that appeared in processes; those processes ar
 
 User tasks need an interaction from the user. This can be updating, adding variables, filling out a Camunda Form, or simply completion of the task. The user must first claim a task or unclaim an already claimed task.
 
-If the user has claimed a task, the task is completable. Different task status filters help the user choose the desired task.
+If the user claimed a task, the task is completable. Different task status filters help the user choose the desired task.
 
 ## Example use case 
 
