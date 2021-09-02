@@ -1,0 +1,34 @@
+name: publish-stage
+
+on:
+  push:
+    branches:
+      - "master"
+    tags-ignore:
+      - "*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install Dependencies
+        run: npm ci
+      - name: Disable Indexing
+        run: "sed -i 's/noIndex: false/noIndex: true/g' docusaurus.config.js"
+      - name: Update URL
+        run: "sed -i 's!url: \"https://docs.camunda.io\"!url: \"https://stage.docs.camunda.io\"!g' docusaurus.config.js"
+      - name: Build
+        run: npm run build
+      - name: Publish
+        uses: burnett01/rsync-deployments@5.1
+        with:
+          switches: -avzr --delete
+          path: build/
+          remote_path: ${{ secrets.PUBLISH_STAGE_PATH }}
+          remote_host: ${{ secrets.PUBLISH_STAGE_HOST }}
+          remote_user: ${{ secrets.PUBLISH_STAGE_USER }}
+          remote_key: ${{ secrets.PUBLISH_STAGE_KEY }}
