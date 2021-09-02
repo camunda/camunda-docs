@@ -1,0 +1,28 @@
+name: publish-prod
+
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Publish
+        uses: burnett01/rsync-deployments@5.1
+        with:
+          switches: -avzr --delete
+          path: build/
+          remote_path: ${{ secrets.PUBLISH_PROD_PATH }}
+          remote_host: ${{ secrets.PUBLISH_PROD_HOST }}
+          remote_user: ${{ secrets.PUBLISH_PROD_USER }}
+          remote_key: ${{ secrets.PUBLISH_PROD_KEY }}

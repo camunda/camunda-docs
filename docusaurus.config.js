@@ -10,6 +10,8 @@ module.exports = {
   organizationName: "camunda-cloud", // Usually your GitHub org/user name.
   projectName: "camunda-cloud-documentation", // Usually your repo name.
   trailingSlash: false,
+  // do not delete the following 'noIndex' line as it is modified for staging
+  noIndex: false,
   plugins: [
     //    ["@edno/docusaurus2-graphql-doc-generator",
     //      {
