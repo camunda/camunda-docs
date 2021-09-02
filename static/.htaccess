@@ -1,0 +1,9 @@
+# Redirect to https
+RewriteEngine on
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
+
+# Disable directory listing
+Options -Indexes
+
+# Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
