@@ -96,7 +96,7 @@ The partitioning scheme is controlled via a new configuration option under `zeeb
 - `ROUND_ROBIN`: when set, this will apply the round robin partition distribution, which corresponds to the distribution explain above on this page. _This is the default option, and requires no extra configuration if you want to use it._
 - `FIXED`: when set, this will apply a manually configured partition distribution, which is configured separately.
 
-In order to use the `FIXED` partitioning scheme, _you must provide an exhaustive map of all partitions to a set of brokers_. This is achieved via the `zeebe.broker.experimental.partitioning.fixed` configuration option. Here is an example for a cluster of `5` brokers, `3` partitions, and a replication factor of `3`.
+To use the `FIXED` partitioning scheme, _you must provide an exhaustive map of all partitions to a set of brokers_. This is achieved via the `zeebe.broker.experimental.partitioning.fixed` configuration option. Here is an example for a cluster of `5` brokers, `3` partitions, and a replication factor of `3`.
 
 ```yaml
 partitioning:
