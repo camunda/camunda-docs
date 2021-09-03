@@ -89,7 +89,7 @@ Choosing the number of partitions depends on the use case, workload, and cluster
 
 ### Experimental feature: fixed partitioning
 
-Starting with 1.2.0, there is a new experimental configuration options which lets you manually specify a fixed partitioning scheme. This means you can manually configure which partitions belong to which brokers.
+Starting with 1.2.0, there is a new experimental configuration option which lets you specify a fixed partitioning scheme. This means you can manually configure which partitions belong to which brokers.
 
 The partitioning scheme is controlled via a new configuration option under `zeebe.broker.experimental.partitioning`, more specifically `zeebe.broker.experimental.partitioning.scheme`. This option currently takes the following values:
 
