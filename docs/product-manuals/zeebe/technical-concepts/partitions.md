@@ -175,4 +175,4 @@ partitioning:
           priority: 1
 ```
 
-Note that the only condition is that the priorities for the nodes of a given partition must be different from each other. We recommend however that you use a simple monotonic increase from 1 to the partition count, as shown above.
+Note that the only condition is that the priorities for the nodes of a given partition must be different from each other. We recommend however that you use a simple monotonic increase from 1 to the replica count, as shown above.
