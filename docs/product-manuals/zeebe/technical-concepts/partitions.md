@@ -141,7 +141,7 @@ The broker will fail to start if any of these conditions are not met.
 
 #### Priority election
 
-If you're using the experimental priority election feature, then you must also manually specify the priorities of each brokers. In fact, the broker will fail to start if the nodes do not have different priorities, as otherwise you could get into lengthy election loops. The target priority for a partition will thus be whatever is the highest configured priority for one of its nodes.
+If you're using the experimental priority election feature, then you must also specify the priorities of each brokers. In fact, the broker will fail to start if the nodes do not have different priorities, as otherwise you could get into lengthy election loops.
 
 Here is the same example configuration as above but this time with priorities configured:
 
