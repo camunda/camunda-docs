@@ -3,14 +3,13 @@ id: configuration
 title: Configuration
 ---
 
-Operate is a Spring Boot application. That means all provided ways to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
+Operate is a Spring Boot application. This means every way to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
 a Spring Boot application can be applied.
 
-By default, the configuration for Operate is stored in a YAML file `application.yml`. All Operate related settings are prefixed
-with `camunda.operate`. The following parts are configurable:
+By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
 
 * [Webserver](#webserver)
-* [Elasticsearch Connection](#elasticsearch)
+* [Elasticsearch connection](#elasticsearch)
 * [Zeebe Broker connection](#zeebe-broker-connection)
 * [Zeebe Elasticsearch Exporter](#zeebe-elasticsearch-exporter)
 * [Operation Executor](#operation-executor)
@@ -23,7 +22,7 @@ with `camunda.operate`. The following parts are configurable:
 
 ### Webserver
 
-Operate supports customizing the *context-path* by using default spring configuration.
+Operate supports customizing the **context-path** using default Spring configuration.
 
 Example for `application.yml`:
 `server.servlet.context-path: /operate`
@@ -31,7 +30,7 @@ Example for `application.yml`:
 Example for environment variable:
 `SERVER_SERVLET_CONTEXT_PATH=/operate`
 
-Default context-path is `/`
+The default context-path is `/`.
 
 ### Elasticsearch
 
@@ -39,19 +38,20 @@ Operate stores and reads data in/from Elasticsearch.
 
 ### Settings to connect
 
-Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for elasticsearch.
+Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch.
+
 Set the appropriate username/password combination in the configuration to use it.
 
-Either set `host` and `port` (deprecated) or `url` (recommended)
+Either set `host` and `port` (deprecated) or `url` (recommended).
 
 Name | Description | Default value
 -----|-------------|--------------
-camunda.operate.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
+camunda.operate.elasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
 camunda.operate.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
 camunda.operate.elasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.operate.elasticsearch.password | Password to access Elasticsearch REST API | -
 
-### A snippet from application.yml:
+### A snippet from application.yml
 
 ```yaml
 camunda.operate:
@@ -64,17 +64,19 @@ camunda.operate:
 
 ## Zeebe broker connection
 
-Operate needs a connection to Zeebe broker to start the import and to execute user operations.
+Operate needs a connection to the Zeebe Broker to start the import and execute user operations.
 
 ### Settings to connect
 
 Name | Description | Default value
 -----|-------------|--------------
-camunda.operate.zeebe.gatewayAddress | Gateway address that point to zeebe as hostname and port | localhost:26500
+camunda.operate.zeebe.gatewayAddress | Gateway address that points to Zeebe as hostname and port. | localhost:26500
 
-__Currently Operate does not support TLS communication with Zeebe__
+:::note
+Currently, Operate does not support TLS communication with Zeebe.
+:::
 
-### A snippet from application.yml:
+### A snippet from application.yml
 
 ```yaml
 camunda.operate:
@@ -85,10 +87,11 @@ camunda.operate:
 
 ## Zeebe Elasticsearch exporter
 
-Operate imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
-Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on Zeebe side.
+Operate imports data from Elasticsearch indices created and filled in by the [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
 
-### Settings to connect and import:
+Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on the Zeebe side.
+
+### Settings to connect and import
 
 Name | Description | Default value
 -----|-------------|--------------
@@ -113,11 +116,13 @@ camunda.operate:
 
 ## Operation executor
 
-Operations are user operations like Cancellation of process instance(s) or Updating the variable value. Operations are executed in multi-threaded manner.
+Operations are user operations, like cancellation of process instance(s) or updating the variable value. 
+
+Operations are executed in a multi-threaded manner.
 
 Name | Description | Default value
 -----|-------------|--------------
-camunda.operate.operationExecutor.threadsCount| How many threads should be used | 3
+camunda.operate.operationExecutor.threadsCount| How many threads should be used. | 3
 
 ### A snippet from application.yml
 
@@ -129,10 +134,10 @@ camunda.operate:
 
 ## Monitoring Operate
 
-Operate includes [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready) inside, that
-provides number of monitoring possibilities.
+Operate includes [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready) inside. This provides the number of monitoring possibilities.
 
-Operate uses following Actuator configuration by default:
+Operate uses the following Actuator configuration by default:
+
 ```yaml
 # Disable default health indicators
 # https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-health-indicators
@@ -144,7 +149,7 @@ management.health.probes.enabled: true
 management.endpoints.web.exposure.include: health,prometheus,loggers
 ```
 
-With this configuration following endpoints are available for use out of the box:
+With this configuration, the following endpoints are available for use out of the box:
 
 ```<server>:8080/actuator/prometheus``` Prometheus metrics
 
@@ -154,7 +159,7 @@ With this configuration following endpoints are available for use out of the box
 
 ### Versions before 0.25.0
 
-In versions before 0.25.0 management endpoints look differently, therefore we recommend reconfiguring for next versions.
+In versions before 0.25.0, management endpoints look different. Therefore, we recommend reconfiguring for next versions.
 
 |Name|Before 0.25.0| Starting with 0.25.0|
 |----|-------------|--------|
@@ -163,8 +168,7 @@ In versions before 0.25.0 management endpoints look differently, therefore we re
 
 ## Logging
 
-Operate uses Log4j2 framework for logging. In distribution archive as well as inside a Docker image `config/log4j2.xml` logging configuration files is included,
-that can be further adjusted to your needs:
+Operate uses the Log4j2 framework for logging. In the distribution archive, as well as inside a Docker image, `config/log4j2.xml` logging configuration files are included and can be further adjusted to your needs:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -189,7 +193,7 @@ that can be further adjusted to your needs:
 </Configuration>
 ```
 
-By default, Console log appender will be used.
+By default, `ConsoleAppender` is used.
 
 #### JSON logging configuration
 
@@ -206,7 +210,8 @@ Operate supports the default scheme for changing logging levels as provided by [
 
 The log level for Operate can be changed by following the [Setting a Log Level](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers-setting-level) section.
 
-#### Set all Operate loggers to DEBUG:
+#### Set all Operate loggers to DEBUG
+
 ```shell
 curl 'http://localhost:8080/actuator/loggers/io.camunda.operate' -i -X POST \
 -H 'Content-Type: application/json' \
@@ -215,8 +220,7 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.operate' -i -X POST \
 
 ## An example of application.yml file
 
-The following snippet represents the default Operate configuration, which is shipped with the distribution. It can be found inside the `config` folder (`config/application.yml`)
-and can be used to adjust Operate to your needs.
+The following snippet represents the default Operate configuration, which is shipped with the distribution. This can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Operate to your needs.
 
 ```yaml
 # Operate configuration file

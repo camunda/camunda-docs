@@ -4,18 +4,19 @@ title: Authentication
 description: "Let's take a closer look at how Operate authenticates for use."
 ---
 
-Operate provides three ways for authentication:
+Operate provides three ways to authenticate:
 
-1. Authenticate with user information stored in [Elasticsearch](#user-in-elasticsearch)
-2. Authenticate via [Camunda Cloud Single Sign-On](#camunda-cloud-single-sign-on)
-3. Authenticate via [Lightweight Directory Access Protocol (LDAP)](#ldap)
+1. User information stored in [Elasticsearch](#user-in-elasticsearch).
+2. [Camunda Cloud single sign-on](#camunda-cloud-single-sign-on).
+3. [Lightweight Directory Access Protocol (LDAP)](#ldap).
 
-By default user storage in Elasticsearch is enabled.
+By default, user storage in Elasticsearch is enabled.
 
 ## User in Elasticsearch
 
-In this mode the user authenticates with username and password, that are stored in Elasticsearch.
-**username** and **password** for one user may be set in application.yml:
+In this mode, the user authenticates with a username and password stored in Elasticsearch.
+
+The **Username** and **password** for one user may be set in `application.yml`:
 
 ```
 camunda.operate:
@@ -23,40 +24,40 @@ camunda.operate:
   password: aPassword
 ```
 
-On Operate startup the user will be created if not existed before.
+On startup of Operate, the user is created if they did not exist before.
 
-By default one user with **username**/**password** `demo`/`demo` will be created.
+By default, one user with **username**/**password** `demo`/`demo` is created.
 
-More users can be added directly to Elasticsearch, to the index `operate-user-<version>_`. Password must be encoded with BCrypt strong hashing function.
+Add more users directly to Elasticsearch via the index `operate-user-<version>_`. The password must be encoded with a strong `bcrypt` hashing function.
 
-## Camunda Cloud Single Sign-On
+## Camunda Cloud single sign-on
 
-Currently Operate supports Single Sign On in Camunda Cloud environment. Camunda Cloud takes care of the configuration of Operate for Single Sign On,
-so you don't need normally to adjust following subsections.
+Currently, Operate supports single sign-on (SSO) in the Camunda Cloud environment. Camunda Cloud handles the configuration of Operate for SSO, so you don't need to normally adjust the following subsections.
 
-### Enable Single Sign-On
+### Enable SSO
 
-Single Sign-On may be enabled only by setting [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `sso-auth`
+SSO can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `sso-auth`.
 
-Example for setting spring profile as environmental variable:
+See the following example:
+
 ```
 export SPRING_PROFILES_ACTIVE=sso-auth
 ```
 
-### Configure Single Sign-On
+### Configure SSO
 
-Single Sign-On needs following parameters (all are mandatory):
+SSO requires the following parameters:
 
-Parametername |Description
+Parameter name | Description
 --------------|-------------
-camunda.operate.auth0.domain | Defines the domain which the user sees
-camunda.operate.auth0.backendDomain | Defines the domain which provides user information
-camunda.operate.auth0.clientId | It's like an user name for the application
-camunda.operate.auth0.clientSecret | It's like a password for the application
-camunda.operate.auth0.claimName | The claim that will be checked by Operate. It's like a permission name
-camunda.operate.auth0.organization | The given organization should be contained in value of claim name
+camunda.operate.auth0.domain | Defines the domain the user sees.
+camunda.operate.auth0.backendDomain | Defines the domain which provides user information.
+camunda.operate.auth0.clientId | Similar to a username for the application.
+camunda.operate.auth0.clientSecret | Similar to a password for the application.
+camunda.operate.auth0.claimName | The claim checked by Operate. Similar to a permission name.
+camunda.operate.auth0.organization | The given organization should be contained in the value of the claim name.
 
-Example for setting parameters as environment variables:
+See the following example for setting parameters as environment variables:
 
 ```
 export CAMUNDA_OPERATE_AUTH0_DOMAIN=A_DOMAIN
@@ -66,39 +67,46 @@ export CAMUNDA_OPERATE_AUTH0_CLIENTSECRET=A_SECRET
 export CAMUNDA_OPERATE_AUTH0_CLAIMNAME=A_CLAIM
 export CAMUNDA_OPERATE_AUTH0_ORGANIZATION=AN_ORGANIZATION
 ```
+
 ## LDAP
 
 ### Enable LDAP
 
-LDAP can be enabled only by setting [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `ldap-auth`
+LDAP can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `ldap-auth`.
 
-Example for setting spring profile as environmental variable:
+See the following example for setting the Spring profile as an environmental variable:
+
 ```
 export SPRING_PROFILES_ACTIVE=ldap-auth
 ```
 
 ### Configuration of LDAP
+
 A user can authenticate via LDAP.
-Following parameters for a connection to a LDAP server should be given:
 
- Parametername |Description | Example| Required
+The following parameters for connection to an LDAP server should be given:
+
+ Parameter name | Description | Example | Required
  --------------|------------|---------|--------
- camunda.operate.ldap.url | URL to a LDAP Server | ldaps://camunda.com/ | yes
- camunda.operate.ldap.baseDn| Base domain name | dc=camunda,dc=com| yes
- camunda.operate.ldap.managerDn| Manager domain, is used by Operate to login into LDAP Server to retrieve user informations | cn=admin,dc=camunda,dc=com| yes
- camunda.operate.ldap.managerPassword| Password for manager| |yes
- camunda.operate.ldap.userSearchFilter| Filter to retrieve user info, The pattern '{0}' will be replaced by given username in login form| {0} | no, Default is {0}
- camunda.operate.ldap.userSearchBase| Starting point for search| ou=Support,dc=camunda,dc=com| no
+ camunda.operate.ldap.url | URL to an LDAP Server | ldaps://camunda.com/ | Yes
+ camunda.operate.ldap.baseDn| Base domain name | dc=camunda,dc=com| Yes
+ camunda.operate.ldap.managerDn| Manager domain used by Operate to log into LDAP server to retrieve user information | cn=admin,dc=camunda,dc=com| Yes
+ camunda.operate.ldap.managerPassword| Password for manager| | Yes
+ camunda.operate.ldap.userSearchFilter| Filter to retrieve user info. The pattern '{0}' is replaced by the given username in the login form. | {0} | No, default is {0}
+ camunda.operate.ldap.userSearchBase| Starting point for search | ou=Support,dc=camunda,dc=com | No
 
-### Configuration of Active Directory based LDAP
-For **Active Directory** based LDAP server following parameters should  be given:
+### Configuration of active directory-based LDAP
 
-Note: Only when `camunda.operate.ldap.domain` is given, the Active Directory configuration will be applied.
+For an **active directory**-based LDAP server, the following parameters should be given:
 
- Parametername |Description |  Required
+:::note
+The active directory configuration will only be applied when `camunda.operate.ldap.domain` is given.
+:::
+
+ Parameter name | Description | Required |
  --------------|------------|---------
- camunda.operate.ldap.url | URL to a Active Directory LDAP Server |  yes
- camunda.operate.ldap.domain| Domain | yes
- camunda.operate.ldap.baseDn| Root domain name | no
- camunda.operate.ldap.userSearchFilter| Is used as search filter | no
+ camunda.operate.ldap.url | URL to an active directory LDAP server | Yes
+ camunda.operate.ldap.domain| Domain | Yes
+ camunda.operate.ldap.baseDn| Root domain name | No
+ camunda.operate.ldap.userSearchFilter| Used as a search filter | No
 

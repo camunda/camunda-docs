@@ -5,5 +5,5 @@ title: Giving feedback and asking questions
 
 Have questions or feedback about Operate?
 
-Contact us at [Camunda Cloud Contact](/contact)
+Contact us at [Camunda Cloud Contact](/contact).
 
