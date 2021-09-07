@@ -6,7 +6,7 @@ title: Model your first process
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In Camunda Cloud you have two options to design and deploy a process: the Console Modeler and the [Camunda Modeler](https://camunda.com/download/modeler/).
+In Camunda Cloud, you have two options to design and deploy a process: Console Modeler and [Camunda Modeler](https://camunda.com/download/modeler/).
 
 <Tabs groupId="modeler" defaultValue="console" values={
 [
@@ -17,19 +17,19 @@ In Camunda Cloud you have two options to design and deploy a process: the Consol
 
 <TabItem value='console'>
 
-Using the Cloud Modeler, processes can be designed and deployed, and new instances can be created directly from the console.
+Using Cloud Modeler, processes can be designed and deployed, and new instances can be created directly from the console. Take the following steps:
 
-You can find all your saved models under the **Diagrams** tab
+1. Find all your saved models under the **Diagrams** tab.
 
-Click **Create New Diagram**.
+2. Click **Create New Diagram**.
 
 ![console-modeler](../../product-manuals/modeler/cloud-modeler/img/bpmn-diagrams-overview.png)
 
-Give your diagram a name like `Getting Started`.
+3. Give your diagram a name like `Getting Started`.
 
 ![console-modeler-new-diagram](../../product-manuals/modeler/cloud-modeler/img/cloud-modeler-new-diagram.png)
 
-The **Save** button should now appear for you to save your diagram.
+4. The **Save** button should now appear. Save your diagram.
 
 ![console-modeler-new-diagram](../../product-manuals/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-name.png)
 
@@ -37,7 +37,7 @@ The **Save** button should now appear for you to save your diagram.
 
 <TabItem value='desktop'>
 
-Using the Camunda Modeler, processes can be designed and deployed, and new instances can be created.
+Using Camunda Modeler, processes can be designed and deployed, and new instances can be created.
 
 Design a simple process with one start event and one end event or download this [BPMN model](./bpmn/gettingstarted_quickstart.bpmn).
 
