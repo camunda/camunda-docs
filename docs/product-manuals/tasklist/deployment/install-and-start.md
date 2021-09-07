@@ -6,10 +6,14 @@ description: "Let's get started with Tasklist by installing and running with the
 
 ## Running via Docker (local development)
 
-You can use the Docker image `camunda/tasklist:latest` to run Tasklist as container.
+You can use the Docker image `camunda/tasklist:latest` to run Tasklist as a container.
 
-Please make sure to set appropriate settings described in [configuration](../deployment/configuration) section of deployment guide.
-Here an example configuration for `docker-compose`:
+:::note
+Configure the appropriate settings described in the [configuration](../deployment/configuration) section of this deployment guide.
+:::
+
+See the following example of configuration for `docker-compose`:
+
 ```
 tasklist:
     container_name: tasklist
@@ -21,25 +25,30 @@ tasklist:
         - camunda.tasklist.zeebeElasticsearch.url=http://elasticsearch:9200
         - camunda.tasklist.zeebe.gatewayAddress=zeebe:26500
 ```
+
 ## Manual configuration (local development)
 
 Here, we’ll walk you through how to download and run a Tasklist distribution manually, without using Docker.
 
-Note that the Tasklist web UI is available by default at [http://localhost:8080](http://localhost:8080), so please be sure this port is available.
+:::note
+The Tasklist web UI is available by default at [http://localhost:8080](http://localhost:8080). Ensure this port is available.
+:::
 
-### Download Tasklist and a compatible version of Zeebe.
+### Download Tasklist and a compatible version of Zeebe
 
-[Tasklist and Zeebe distributions are available for download on the same release page. ](https://github.com/camunda-cloud/zeebe/releases)
+Tasklist and Zeebe distributions are available for download on the same [release page](https://github.com/camunda-cloud/zeebe/releases).
 
-Note that each version of Tasklist is compatible with a specific version of Zeebe.
+:::note
+Each version of Tasklist is compatible with a specific version of Zeebe.
+:::
 
-On the Zeebe release page, compatible versions of Zeebe and Tasklist are grouped together. Please be sure to download and use compatible versions. This is handled for you if you use the Docker profile from our repository.
+On the Zeebe release page, compatible versions of Zeebe and Tasklist are grouped together. Ensure you download and use compatible versions. This is handled for you if you use the Docker profile from our repository.
 
 ### Download Elasticsearch
 
-Tasklist uses open-source Elasticsearch as its underlying data store, and so to run Tasklist, you need to download and run Elasticsearch.
+Tasklist uses open-source Elasticsearch as its underlying data store. Therefore to run Tasklist, download and run Elasticsearch.
 
-Tasklist is currently compatible to Elasticsearch 7.12.1 [You can download Elasticsearch here.](https://www.elastic.co/downloads/past-releases/elasticsearch-7-12-1)
+Tasklist is currently compatible with Elasticsearch 7.12.1. Download Elasticsearch [here](https://www.elastic.co/downloads/past-releases/elasticsearch-7-12-1).
 
 ### Run Elasticsearch
 
@@ -50,7 +59,7 @@ cd elasticsearch-*
 bin/elasticearch
 ```
 
-You’ll know Elasticsearch has started successfully when you see a message similar to:
+You’ll know Elasticsearch has started successfully when you see a message similar to the following:
 
 ```
 [INFO ][o.e.l.LicenseService     ] [-IbqP-o] license [72038058-e8ae-4c71-81a1-e9727f2b81c7] mode [basic] - valid
@@ -65,9 +74,7 @@ cd zeebe-broker-*
 ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME=io.camunda.zeebe.exporter.ElasticsearchExporter ./bin/broker
 ```
 
-
-You’ll know Zeebe has started successfully when you see a message similar to:
-
+You’ll know Zeebe has started successfully when you see a message similar to the following:
 
 ```
 [partition-0] [0.0.0.0:26501-zb-actors-0] INFO  io.camunda.zeebe.raft - Joined raft in term 0
@@ -83,7 +90,7 @@ cd zeebe-tasklist*
 ./bin/tasklist
 ```
 
-You’ll know Tasklist has started successfully when you see messages similar to:
+You’ll know Tasklist has started successfully when you see messages similar to the following:
 
 ```
 2020-12-09 13:31:41.437  INFO 45899 --- [           main] i.z.t.ImportModuleConfiguration          : Starting module: importer
@@ -97,6 +104,6 @@ The Tasklist web interface is available at [http://localhost:8080](http://localh
 
 The first screen you'll see is a sign-in page. Use the credentials `demo` / `demo` to sign in.
 
-If you already have some user tasks in Zeebe you can see these on the left panel in the start screen:
+If you've already developed user tasks in Zeebe, you can see these on the left panel on the start screen:
 
 ![tasklist-start-screen](../img/tasklist-start-screen_light.png)

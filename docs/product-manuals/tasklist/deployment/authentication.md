@@ -4,17 +4,18 @@ title: Authentication
 description: "Let's take a closer look at the authentication methods of Tasklist."
 ---
 
-Tasklist provides two ways for authentication:
+Tasklist provides two ways to authenticate:
 
-1. Authenticate with user information stored in [Elasticsearch](#user-in-elasticsearch)
-2. Authenticate via [Camunda Cloud Single Sign-On](#camunda-cloud-single-sign-on)
+1. User information stored in [Elasticsearch](#user-in-elasticsearch)
+2. [Camunda Cloud Single Sign-On](#camunda-cloud-single-sign-on)
 
 By default, user storage in Elasticsearch is enabled.
 
 ## User in Elasticsearch
 
-In this mode the user authenticates with username and password, that are stored in Elasticsearch.
-**username** and **password** for one user may be set in application.yml:
+In this mode, the user authenticates with a username and password stored in Elasticsearch.
+
+The **username** and **password** for one user may be set in application.yml:
 
 ```
 camunda.tasklist:
@@ -22,40 +23,40 @@ camunda.tasklist:
   password: aPassword
 ```
 
-On Tasklist startup the user will be created if not existed before.
+On Tasklist startup, the user is created if they did not exist before.
 
-By default, one user with **username**/**password** `demo`/`demo` will be created.
+By default, one user with **username**/**password** `demo`/`demo` is created.
 
-More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. Password must be encoded with BCrypt strong hashing function.
+More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. The password must be encoded with a strong BCrypt hashing function.
 
 ## Camunda Cloud Single Sign-On
 
-Currently, Tasklist supports Single Sign On in Camunda Cloud environment. Camunda Cloud takes care of the configuration of Tasklist for Single Sign On,
-so you don't need normally to adjust following subsections.
+Currently, Tasklist supports Single Sign-On (SSO) in the Camunda Cloud environment. Camunda Cloud handles the configuration of Tasklist for SSO, so normally you don't need to adjust the following subsections.
 
 ### Enable Single Sign-On
 
-Single Sign-On may be enabled only by setting [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `sso-auth`
+SSO may be enabled only by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `sso-auth`.
 
-Example for setting spring profile as environmental variable:
+See the following example to set your Spring profile as an environmental variable:
+
 ```
 export SPRING_PROFILES_ACTIVE=sso-auth
 ```
 
 ### Configure Single Sign-On
 
-Single Sign-On needs following parameters (all are mandatory):
+SSO requires the following parameters:
 
-Parametername |Description
+Parametername | Description
 --------------|-------------
-camunda.tasklist.auth0.domain | Defines the domain which the user sees
-camunda.tasklist.auth0.backendDomain | Defines the domain which provides user information
-camunda.tasklist.auth0.clientId | It's like an user name for the application
-camunda.tasklist.auth0.clientSecret | It's like a password for the application
-camunda.tasklist.auth0.claimName | The claim that will be checked by Tasklist. It's like a permission name
-camunda.tasklist.auth0.organization | The given organization should be contained in value of claim name
+camunda.tasklist.auth0.domain | Defines the domain the user sees.
+camunda.tasklist.auth0.backendDomain | Defines the domain which provides user information.
+camunda.tasklist.auth0.clientId | Similar to a username for the application.
+camunda.tasklist.auth0.clientSecret | Similar to a password for the application.
+camunda.tasklist.auth0.claimName | The claim checked by Tasklist. Similar to a permission name.
+camunda.tasklist.auth0.organization | The given organization should be contained in the value of the claim name.
 
-Example for setting parameters as environment variables:
+See the following example for setting parameters as environment variables:
 
 ```
 export CAMUNDA_TASKLIST_AUTH0_DOMAIN=A_DOMAIN
