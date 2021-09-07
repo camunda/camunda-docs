@@ -7,9 +7,9 @@ A service task represents a work item in the process with a specific type.
 
 ![process](../assets/order-process.png)
 
-When a service task is entered, a corresponding job is created. The process instance stops at this point and waits until the job is complete.
+When a service task is entered, a corresponding job is created. The process instance stops here and waits until the job is complete.
 
-A worker can subscribe to the job type, process the jobs, and complete them using one of the Zeebe clients. When the job is complete, the service task is completed and the process instance continues.
+A [job worker](/product-manuals/concepts/job-workers.md) can subscribe to the job type, process the jobs, and complete them using one of the Zeebe clients. When the job is complete, the service task is completed and the process instance continues.
 
 ## Task definition
 
@@ -17,7 +17,7 @@ A service task must have a `taskDefinition`. This specifies the type of job work
 
 Optionally, a `taskDefinition` can specify the number of times the job is retried when a worker signals failure (default = 3).
 
-Usually, the job type and the job retries are defined as static values (e.g. `order-items`) but they can also be defined as [expressions](/product-manuals/concepts/expressions.md) (e.g. `= "order-" + priorityGroup`). The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
+Typically, the job type and the job retries are defined as static values (e.g. `order-items`) but they can also be defined as [expressions](/product-manuals/concepts/expressions.md) (e.g. `= "order-" + priorityGroup`). The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
 
 ## Task headers
 
@@ -45,6 +45,10 @@ A service task with a custom header:
   </bpmn:extensionElements>
 </bpmn:serviceTask>
 ```
+
+## Next steps
+
+Learn more about the concept of job types and how to set up a job worker via our [manual on job workers](/product-manuals/concepts/job-workers.md).
 
 ### References
 
