@@ -91,8 +91,6 @@ Operate imports data from Elasticsearch indices created and filled in by the [Ze
 
 Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on the Zeebe side.
 
-[//]:# (Do you mean instances in place of "indices" above?)
-
 ### Settings to connect and import
 
 Name | Description | Default value
@@ -195,9 +193,7 @@ Operate uses the Log4j2 framework for logging. In the distribution archive, as w
 </Configuration>
 ```
 
-By default, Console log appender will be used.
-
-[//]:# (Do you mean ConsoleAppender above?)
+By default, `ConsoleAppender` is used.
 
 #### JSON logging configuration
 

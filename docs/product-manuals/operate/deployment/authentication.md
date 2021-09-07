@@ -28,7 +28,7 @@ On startup of Operate, the user is created if they did not exist before.
 
 By default, one user with **username**/**password** `demo`/`demo` is created.
 
-Add more users directly to Elasticsearch via the index `operate-user-<version>_`. The password must be encoded with a strong bcrypt hashing function.
+Add more users directly to Elasticsearch via the index `operate-user-<version>_`. The password must be encoded with a strong `bcrypt` hashing function.
 
 ## Camunda Cloud single sign-on
 
