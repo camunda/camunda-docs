@@ -18,8 +18,6 @@ Your client must send a header in each request:
 
 For example, send a request using *curl*:
 
-[//]:# (How is curl normally written? Curl? or cURL, or CURL?)
-
 ```shell
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){name}}"}' http://localhost:8080/graphql
 ```
