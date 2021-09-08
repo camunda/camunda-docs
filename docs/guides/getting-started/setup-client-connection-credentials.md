@@ -13,7 +13,7 @@ To create a new client, take the following steps:
 
 2. Click **Create New Client** to create a new client and name your client accordingly.
 
-3. Select **Zeebe** so the newly created client can access your Zeebe instance.
+3. Select **Zeebe** so the newly-created client can access your Zeebe instance.
 
 ![create-client](./img/cluster-details-create-client.png)
 

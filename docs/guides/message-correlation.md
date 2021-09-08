@@ -15,7 +15,7 @@ Here is a basic example from [the Camunda Cloud documentation](https://docs.camu
 
 ![message correlation workflow](img/message-correlation-workflow.png)
 
-Use [Camunda Modeler](https://camunda.com/download/modeler/) to open the [test-messaging](https://github.com/jwulf/zeebe-message-correlation/bpmn/test-messaging.bpmn) file in [this project](https://github.com/jwulf/zeebe-message-correlation).
+Use [Camunda Modeler](https://camunda.com/download/modeler/) to open the [test-messaging](https://github.com/jwulf/zeebe-message-correlation/bpmn/test-messaging.bpmn) file in [this GitHub project](https://github.com/jwulf/zeebe-message-correlation).
 
 Click on the intermediate message catch event to see how it is configured:
 
@@ -112,9 +112,9 @@ The **Message Subscriptions** tab now reports that the message was correlated:
 
 ## Message buffering
 
-Messages are buffered on the broker, so your external systems can emit messages before your process arrives at the catch event. The amount of time that a message is buffered is configured when publishing the message from the client library.
+Messages are buffered on the broker, so your external systems can emit messages before your process arrives at the catch event. The amount of time a message is buffered is configured when publishing the message from the client library.
 
-For example, to send a message that is buffered for 10 minutes with the JavaScript client:
+For example, to send a message buffered for 10 minutes with the JavaScript client:
 
 ```typescript
   zbc.publishMessage({
@@ -146,7 +146,7 @@ ts-node send-message.ts
 ts-node start-workflow.ts
 ```
 
-Note that the message is correlated to the workflow instance, eventhough it arrived before the workflow instance was started.
+Note that the message is correlated to the workflow instance, even though it arrived before the workflow instance was started.
 
 ## Common mistakes
 
@@ -160,8 +160,7 @@ A couple of common gotchas:
  
  ![not correlating](img/message-correlation-not-like-this.png)
  
- 
- If you need a boundary message event correlated on a value that is modified somewhere in your process, put the boundary message event in a subprocess after the task that sets the variable. The message subscription for the boundary message event will be opened when the token enters the subprocess, with the current variable value.
+ If you need a boundary message event correlated on a value modified somewhere in your process, put the boundary message event in a subprocess after the task that sets the variable. The message subscription for the boundary message event will open when the token enters the subprocess, with the current variable value.
 
  ![correlating](img/message-correlation-like-this.png)
 

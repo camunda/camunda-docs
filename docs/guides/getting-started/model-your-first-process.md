@@ -17,9 +17,9 @@ In Camunda Cloud, you have two options to design and deploy a process: Console M
 
 <TabItem value='console'>
 
-Using Cloud Modeler, processes can be designed and deployed, and new instances can be created directly from the console. Take the following steps:
+Using Cloud Modeler, processes are designed and deployed, and new instances are created directly from the console. Take the following steps:
 
-1. Find all your saved models under the **Diagrams** tab.
+1. Find your saved models under the **Diagrams** tab.
 
 2. Click **Create New Diagram**.
 
@@ -37,9 +37,9 @@ Using Cloud Modeler, processes can be designed and deployed, and new instances c
 
 <TabItem value='desktop'>
 
-Using Camunda Modeler, processes can be designed and deployed, and new instances can be created.
+Using Camunda Modeler, processes are designed and deployed, and new instances are created.
 
-Design a simple process with one start event and one end event or download this [BPMN model](./bpmn/gettingstarted_quickstart.bpmn).
+Design a simple process with one start event and one end event, or download this [BPMN model](./bpmn/gettingstarted_quickstart.bpmn).
 
 ![zeebe-modeler](./img/zeebe-modeler.png)
 </TabItem>

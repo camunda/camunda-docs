@@ -28,11 +28,11 @@ Deployment can take a few seconds, but you should get a confirmation for success
 
 ![console-modeler-deploy-successfull](../../product-manuals/modeler/cloud-modeler/img/save-and-deploy-successful.png)
 
-You can now start a new process instance. For this example, you can just start an instance with an empty payload.
+You can now start a new process instance. For this example, you can start an instance with an empty payload.
 
 ![console-modeler-start-instance](../../product-manuals/modeler/cloud-modeler/img/start-process-instance-variables.png)
 
-Once the instance is started, you'll get a confirmation with a link to open Operate.
+Once the instance is started, you'll receive a confirmation with a link to open Operate.
 
 ![console-modeler-start-instance-done](../../product-manuals/modeler/cloud-modeler/img/start-process-instance-done.png)
 
