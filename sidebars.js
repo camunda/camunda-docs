@@ -22,7 +22,8 @@ module.exports = {
             "guides/update-guide/026-to-100",
             "guides/update-guide/100-to-110",
         ]
-	}
+	  },
+    "guides/migrating-from-Camunda-Platform",
   ],
   "Product Manuals": [
     "product-manuals/overview",
