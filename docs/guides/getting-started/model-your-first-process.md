@@ -23,15 +23,15 @@ You can find all your saved models under the **Diagrams** tab
 
 Click **Create New Diagram**.
 
-![console-modeler](../../product-manuals/modeler/cloud-modeler/img/bpmn-diagrams-overview.png)
+![console-modeler](../../components/modeler/cloud-modeler/img/bpmn-diagrams-overview.png)
 
 Give your diagram a name like `Getting Started`.
 
-![console-modeler-new-diagram](../../product-manuals/modeler/cloud-modeler/img/cloud-modeler-new-diagram.png)
+![console-modeler-new-diagram](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram.png)
 
 The **Save** button should now appear for you to save your diagram.
 
-![console-modeler-new-diagram](../../product-manuals/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-name.png)
+![console-modeler-new-diagram](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-name.png)
 
 </TabItem>
 

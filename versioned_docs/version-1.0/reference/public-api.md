@@ -18,7 +18,7 @@ policy](/reference/release-policy.md).
 
 Camunda Cloud public API is limited to the following items:
 
-### [Zeebe Client Java API](/product-manuals/clients/java-client/index.md)
+### [Zeebe Client Java API](/components/clients/java-client/index.md)
 
 All non-implementation Java packages (package name does not contain `impl`) of the following maven modules.
 

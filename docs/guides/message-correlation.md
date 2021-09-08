@@ -11,7 +11,7 @@ We will use [Simple Monitor](https://github.com/camunda-community-hub/zeebe-simp
 
 ## Workflow
 
-Here is the basic example from [the Camunda Cloud documentation](https://docs.camunda.io/docs/product-manuals/concepts/messages):
+Here is the basic example from [the Camunda Cloud documentation](https://docs.camunda.io/docs/components/concepts/messages):
 
 ![](img/message-correlation-workflow.png)
 

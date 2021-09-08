@@ -34,4 +34,4 @@ An embedded subprocess with a start event:
 
 ### References
 
-- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)

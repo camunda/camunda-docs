@@ -33,10 +33,10 @@ Non-interrupting timer boundary events are often used to model notifications; fo
 
 Timers must be defined by providing either a date, a duration, or a cycle.
 
-A timer can be defined either as a static value (e.g. `PT3D`) or as an [expression](/product-manuals/concepts/expressions.md). There are two common ways to use an expression:
+A timer can be defined either as a static value (e.g. `PT3D`) or as an [expression](/components/concepts/expressions.md). There are two common ways to use an expression:
 
-- [Access a variable](/product-manuals/concepts/expressions.md#access-variables) (e.g. `= remainingTime`)
-- [Use temporal values](/product-manuals/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`)
+- [Access a variable](/components/concepts/expressions.md#access-variables) (e.g. `= remainingTime`)
+- [Use temporal values](/components/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`)
 
 If the expression belongs to a timer start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the timer catch event. The evaluation must result in either a `string` that has the same ISO 8601 format as the static value, or an equivalent temporal value (i.e. a date-time, a duration, or a cycle).
 
@@ -101,5 +101,5 @@ A non-interrupting boundary timer event with time cycle:
 
 ### References
 
-- [Expressions](/product-manuals/concepts/expressions.md)
+- [Expressions](/components/concepts/expressions.md)
 - [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)

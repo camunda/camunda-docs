@@ -22,7 +22,7 @@ instance continues.
 User tasks support specifying a `formKey` attribute, using the
 `zeebe:formDefinition` extension element. The form key can be used to specify
 an identifier to associate a form to the user task. [Tasklist] supports
-embedded [Camunda Forms](/product-manuals/tasklist/userguide/camunda-forms.md),
+embedded [Camunda Forms](/components/tasklist/userguide/camunda-forms.md),
 these can be embedded into the BPMN process XML as a `zeebe:UserTaskForm`
 extension element of the process element.
 
@@ -64,9 +64,9 @@ A user task with a user task form:
 ### References
 
 - [Tasklist]
-- [Job handling](/product-manuals/concepts/job-workers.md)
-- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Job handling](/components/concepts/job-workers.md)
+- [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
 
 
 
-[Tasklist]: /product-manuals/tasklist/introduction.md
+[Tasklist]: /components/tasklist/introduction.md
