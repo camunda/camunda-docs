@@ -27,13 +27,92 @@ In general, **data** *cannot* yet be migrated to Camunda Cloud.
 
 * **History data:** *Historic data cannot be migrated*.
 
-Let's now explore migration steps for your development artifacts in more detail.
+
+
+### Conceptual Differences
+
+Before diving into concrete steps how to migrate your models and code, let's foster your understanding of important conceptual differences between the products. And no worries, after this section we will really dive into a very concrete how-to.
+
+Note that this section does not compare Camunda Platform with Camunda Cloud, but rather lists aspects that are important to know when planning your migration.
+
+
+#### No Embedded Engine in Cloud
+
+Camunda Platform allows to embed the workflow engine intself as a library into your application. This means, that both run in the same JVM, share thread pools, and even can use the same datasource and transaction manager.
+
+The workflow engine in Camunda Cloud is always a remote ressource for your application, the embedded engine mode is not supported.
+
+![](img/architecture-spring-boot.png)
+
+This has two main implications:
+
+1. **Transaction integration**: Camunda Platform can share transaction with the application, actually it can even share the same database, so transactions are even shared on the database level, allowing rollbacks according to ACID (Atomic, Consistent, Isolated, Durable) semantics. This is not possible in Camunda Cloud, as the workflow engine is always a remote resource. If you leveraged this transaction capabilities you need to analyze the effect of removing it, which can result in change effort (e.g. by [introducing compensation activities](https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b)).
+
+2. **Invoking code**: Running in the same Java application allows to execute Java code of the application at nearly all places in the workflow engine. This is not only used for glue code or delegation code (described later in this guide), but also for [Task Listeners](x), [Execution Listeners](x), [Process Engine Plugins](x)  or even very invasive hacks around the core workflow engine. All of this is not possible in Camunda Cloud, which means you need to do things in your client code (e.g. transforming data on the fly) use normal service tasks (instead of former listeners that were hidden in the diagram). One additional workaround migh be to use [exporters](x) which are only available for self-managed Zeebe instances.
+
+
+
+#### No Process Engine Plugins in Cloud
+
+
+[Process Engine Plugins](x) are not available in Camunda Cloud, as such plugins can massively change the behavior or even harm the stabilty of the engine. 
+
+Some use cases might be supported via [exporters](x). Note that exporters are only available for self-managed Zeebe clusters.
+
+
+#### Different Data Types 
+
+In Camunda Platform you could store different data types, including serialized Java objects. Camunda Platform only allows to store primary data types or JSON as process variables. This might require some additional data mapping in your code when you set or get process variables.
+
+Camunda Platform further provided [Camunda Spin](https://docs.camunda.org/manual/latest/reference/spin/) to ease XML and JSON handling. This is not available with Camunda Cloud and you ideally migrate to your own data transformation logic you can fully control.
+
+To migrate existing process solutions that heavily use Camunda Spin, you can still add the Camunda Spin library to your application and manually use its API to do the same data transformation that where done under the hood in Camunda Platform.
+
+
+#### Expression Language
+
+Camunda Platform used [JUEL (Java Unified Expression Language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/) as expression language. In the embedded engine scneario, expressions can even read into beans (Java object instances) in the application.
+
+Camunda Cloud uses [FEEL (Friendly-Enough Expression Language](https://docs.camunda.io/docs/reference/feel/what-is-feel) and expressions can only access the process instance data and variables.
+
+Most expressions can be simply converted (see [this community extension](x) as a good starting point), some might need to be completly rewritten or require, that you extract required logic to a former service task that make the results available as normal process variable.
+
+
+
+#### Different Connector Infrastructure
+
+Camunda Platform provided a handful of [connectors](x). These are not supported in Camunda Cloud, as Camunda Cloud aims to create a much more powerful connector infrastructure. 
+
+If you need to migrate existing connectors you need to create a small bridging layer to invoke these connectors via some own [workers](x).
+
+
+
+
+
+
+### Migration Tooling
+
+Let's come back to doing a hands-on migration. There is the [Camunda Platform To Cloud Migration Tooling](https://github.com/berndruecker/camunda-platform-to-cloud-migration) available as community extension. This project contains two components:
+
+1. [A Camunda Modeler plugin to convert BPMN models from Camunda Platform to Camunda Cloud](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-modeler-plugin-platform-to-cloud-converter). This maps possible BPMN elements and technical attributes into Camunda Cloud format and gives you warnings, where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model convertion definitely requires manual supervision.
+
+
+2. [The Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter) - a library that provides a worker to hook in Camunda-Platform-based glue code. For example, it can invoke existing JavaDelegate classes.
+
+In essence, this tooling implements some details described in the next sections, and we hope you find it helful.
+
 
 
 
 ## Migrating Your Application
 
-Let's explore the basic switch to Camunda Cloud by looking at different common architectures possible with Camunda Platform.
+Let's explore the basic switch to Camunda Cloud by first looking at a concrete example before diving into different common architectures with Camunda Platform.
+
+### First Example
+
+You can find a complete Java Spring Boot example, showing the Camunda Platform process models and code alongside the Camunda Cloud process model and code in the formerly mentioned community extension: [Camunda Platform to Cloud Example](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/example). 
+
+TODO: Write Readme
 
 
 ### Java and Spring Boot
@@ -80,45 +159,6 @@ When you run your application in NodeJS or C# you basically exchange one remote 
 
 
 
-## Architecture Considerations
-
-### Adjusting Your Source Code
-
-In general, the API did change completely, so you need to adjust your code.
-
-* Client API
-* Service tasks
-
-
-### Concepts That Differ In Camunda Cloud
-
-* Listeners
-
-Not supported in Zeebe
-some use cases might be able to implement in the client (Q: do we need an example?)
-some use cases might be able to implement via exporters (Q: do we need an example?)
-
-
-* Process Engine Plugisn
-
-Will not work, need to be revisited
-Some use cases might be able to support via exporters in Zeebe (Event Streaming…)
-
-
-* Spin and data formats
-
-You can easily use primary data types and json
-If you use Java classes they might be mapped to JSON or XML. You can still use this but have to do the mapping yourself, probably using:
-Java -> JSON / Jackson
-Java -> XML / JAXB
-Binary data / blobs
-
-
-* Transaction Integration
-
-Is quite different. Camunda runs in the same transaction of Spring Boot as the application. If both share the same database, it is even a real joined transaction, that can be rolled back in case of errors. This is not possible in Zeebe.
-
-* Connectors
 
 
 
@@ -127,34 +167,32 @@ Is quite different. Camunda runs in the same transaction of Spring Boot as the a
 
 
 
-## Migration Tooling
 
-This applies to clients talking to the workflow engine (e.g. to start process instances), but also to glue code (e.g. connected to service tasks) as external task workers from Camunda Platform need to be changed to job workers in Camunda Cloud. If you are in Java and used the Camunda Platform Java Client, you can leverage [the Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter), which removes some manual work for code changed. Note, that this will not completly automate this step.
+## Adjusting Your Source Code
 
+Camunda Cloud has a different API than Camunda Cloud, which means you have to adjust
 
- BPMN models can be semi-automatically converted using [the Camunda Platform To Cloud Converter Modeler Plugin](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-modeler-plugin-platform-to-cloud-converter). Note that some elements or attributes are either not supported or behave slightly different in Camunda Cloud, so the convertion will require manual supervision.
+* Usage of the Client API (e.g. to start process instances)
+* Implementation of [service tasks](https://docs.camunda.org/manual/7.15/reference/bpmn20/tasks/service-task/), which in Camunda Platform can mean
+  * Attached Java code that is called by the engine
+  * External Tasks, where workers subscribe to the engine.
 
-
-
-
-
-## Service Tasks And Glue Code
-
-One of the biggerst 
-
-![Service Task](../reference/bpmn-processes/assets/bpmn-symbols/service-task.svg)
-
-[Service Tasks used with Camunda Platform](https://docs.camunda.org/manual/7.15/reference/bpmn20/tasks/service-task/) can
-
-* Attach Java glue code that is called by the engine. 
-* Use External Tasks, where workers subscribe to the engine.
-
-In Camunda Cloud, you always have external workers that subscribe to the engine, which is why code that uses External Tasks is generally easier to migrate.
+Let's explore these three cases next.
 
 
-### Attached Java Code
 
-There are three ways to implement this marked by different attributes in the BPMN model:
+### Client API
+
+The API to talk to the engine (e.g. to start process instances, subscribe to tasks or complete them) changed with Camunda Cloud. Some parts (like Query-capabilities or Human Task Management) moved into a different API. This means that you have to adjust all your code that uses the process engine API.
+
+If this affects big parts of your code base, you could write a small abstraction layer implementing the Camunda Platform API delegating to Camunda Cloud, probably marking unavailable methods as deprecated. We are happy to welcome community extensions providing this.
+
+
+
+
+### Service Tasks With Attached Java Coode (Java Delegates)
+
+There are three ways to attach Java code to services tasks in the BPMN model, using different attributes in the BPMN XML:
 
 * Specifying a class that implements a JavaDelegate or ActivityBehavior: ```camunda:class```
 * Evaluating an expression that resolves to a delegation object: ```camunda:delegateExpression```
@@ -182,15 +220,19 @@ Note that some attributes cannot be migrated:
 
 
 
-### External Tasks
 
-External Tasks in Camunda Platform also used a worker, like in Camunda Cloud. So the ```external task topic``` is directly translated in a ```task type name``` in Camunda Cloud. This means, you have to migrate your existing external task worker to a Zeebe worker.
 
-If you developed your Camunda Platform external task worker using [the Java client](https://github.com/camunda/camunda-bpm-platform/tree/master/clients/java), you can use [Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter) to adapt your worker code. 
+### Service Tasks As External Tasks
+
+External Tasks in Camunda Platform also used a worker, like in Camunda Cloud, which means these tasks are generally easier to migrate. 
+
+The ```external task topic``` is directly translated in a ```task type name``` in Camunda Cloud. This means, you have to migrate your existing external task worker to a Zeebe worker.
+
+If you used [the Java client](https://github.com/camunda/camunda-bpm-platform/tree/master/clients/java) to implement your Camunda Platform worker, you can use [Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter) to adapt your worker code. 
 
 
 The following attributes/elements are migrated:
-* ```camunda:topic```
+* ```camunda:topic``` gets ```zeebe:taskDefinition type```
 
 
 The following attributes/elements cannot be migrated:
@@ -198,52 +240,44 @@ The following attributes/elements cannot be migrated:
 
 
 
-### Connectors
 
-Connectors cannot be migrated at this moment. You need to look at what connectors you are using and decide for your migration strategy.
 
-The following attributes/elements cannot be migrated:
+### Notes on Service Tasks
 
-* ```camunda:connector```
+Service tasks using ```camunda:type``` cannot be migrated.
 
-### General Configuration for Service Tasks
+Service tasks using ```camunda:connector``` cannot be migrated.
 
-Field Injection
 
-* ```camunda:field``` (TODO)
+#### Field Injection
+
+```camunda:field``` (TODO)
 
 
 TODO: Check https://docs.camunda.org/manual/7.15/user-guide/process-engine/delegation-code/#field-injection - especially value setting & Expression Language
 
 
+#### IO
 Todo / To Check:
 * ```camunda:inputOutput``` (TODO)
+
+#### ErrorEventDefinition
+
 * ```camunda:errorEventDefinition``` (TODO)
 
-The following attributes/elements cannot be migrated:
-* ```camunda:type```
-
-
-
-## Expression Language
-
-
-
-## Human Task Management And Forms
 
 
 
 
+## Adjusting Your BPMN models
 
-
-
-## BPMN Overview
+Let's explore the various changes required in your BPMN models to migrate them from Camunda Platform to Camunda Cloud.
 
 ### Service Tasks
 
 ![Service Task](../reference/bpmn-processes/assets/bpmn-symbols/service-task.svg)
 
-Migrating a service task was described in the section about delegation code above.
+Migrating a service task was described in the section above.
 
 ### Send Tasks
 
@@ -252,6 +286,21 @@ Migrating a service task was described in the section about delegation code abov
 In both engines, a send task has the same behavior as a service task - so please refer to the details above. A send task is migrated exactly like a service task.
 
 
+
+### Gateways
+
+Gateways rarely need migration, the relevant configuration is mostly in the expressions on outgoing sequence flows. 
+
+### Expressions
+
+Expressions need to be in [FEEL (frienfly-enough expression language)](x) instead of [JUEL (Java unified expression language)](x).
+
+Migrating simple expressions is doable (as you can see in [these test cases](https://github.com/berndruecker/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.test.js)), but not all expressions can be automatically converted.
+
+The following concepts are especially not possible:
+
+* Calling out to functiol Java code using beans in expressions
+* Registering custom function definitions
 
 
 
@@ -284,6 +333,8 @@ Todo / To Check:
 * ```camunda:inputOutput``` (TODO)
 
 
+#### Forms
+
 TODO: Forms?
 
 
@@ -292,19 +343,29 @@ TODO: Forms?
 
 ![Business Rule Task](../reference/bpmn-processes/assets/bpmn-symbols/business-rule-task.svg)
 
-```
-DecisionService decisionService = BpmPlatform.getDefaultProcessEngine()
-					.getDecisionService();
-				DmnDecisionResult decisionResult = decisionService.evaluateDecisionByKey(decisionRef)
-					.variables(job.getVariablesAsMap())
-					.evaluate();
+In Camunda Platform, the Camunda DMN engine is directly integrated into the platform. This is (not yet) the case for Camunda Cloud, but you can use the [https://github.com/camunda-community-hub/zeebe-dmn-worker](Zeebe DMN Worker) provided as community extension, which can process your existing DMN models.
 
-				// TODO: implement other result mappings
-				DmnDecisionResultEntries singleResult = decisionResult.getSingleResult();
-				resultPayload = new HashMap<>();
-				String resultVariableName = (String) jobHeaders.get("resultVariable");
-				resultPayload.put(resultVariableName, singleResult.getEntryMap());
-```
+The task definition type is set to ```DMN``` and the ```camunda:decisionRef``` is moved to task header attribute for this worker.
+
+The following attributes are not yet supported. If you need these, you need to adjust the Zeebe DMN worker or wait for DMN to land in Camunda Cloud as first-class citizen:
+
+* ```camunda:decisionRefBinding```, ```camunda:decisionRefVersion``` and ```camunda:decisionRefVersionTag```(always the latest version is used )
+* ```camunda:mapDecisionResult``` (no mapping happens)
+* ```camunda:resultVariable``` (result is always mapped to variable 'result' and can be copied or unwrapped using ioMapping).
+* ```camunda:decisionRefTenantId```
+
+Of course, you can also build your own DMN worker, probably inspired the above mentioned community extension.
+
+Furthermore, the business rule task can also be used like a service task in Camunda Platform, basically to allow to also integrate third-party rule engines. So the following attributes can also be migrated as described with the service task migration above: ```camunda:class```, ```camunda:delegateExpression```, ```camunda:expression```, or ```camunda:topic```.
+
+The following attributes/elements cannot be migrated:
+* ```camunda:asyncBefore```, ```camunda:asyncBefore```, ```camunda:asyncAfter```, ```camunda:exclusive```, ```camunda:failedJobRetryTimeCycle``` and ```camunda:jobPriority```
+* ```camunda:type``` and ```camunda:taskPriority```
+* ```camunda:connector```
+
+
+
+TODO: camunda:field, camunda:inputOutput
 
 
 
@@ -313,7 +374,8 @@ DecisionService decisionService = BpmPlatform.getDefaultProcessEngine()
 ![Send Task](../reference/bpmn-processes/assets/bpmn-symbols/call-activity.svg)
 
 Call activities are generally supported in Zeebe. The following attributes/elements can be migrated:
-* ```camunda:calledElement``` --> zeebe:calledElement
+
+* ```camunda:calledElement``` will be converted into zeebe:calledElement
 
 The following attributes/elements cannot be migrated:
 * ```camunda:calledElementBinding```: Currently Zeebe always assumes 'late' binding
@@ -328,8 +390,6 @@ The following attributes/elements cannot be migrated:
 TODO: inputOutput
 
 
-
-### Message Receive Events And Receive Tasks
 
 ### Script Task
 
@@ -353,19 +413,38 @@ TODO: inputOutput
 
 
 
-### Gateways & Expression Language
+
+
+
+### Message Receive Events And Receive Tasks
+
+Message correlation works slightly different in the two products:
+
+* Camunda Platform simply waits for a message, and the code implementing that the message is received queries for the right process instance that message will be correlated to. If no process instance is ready-to-receive that message, an exception is raised.
+
+* Camunda Cloud creates a message subscription for a waiting process instance. This subscription requires a value for a ```correlationKey``` to be generated at this moment. The code receiving an external message now correlates using that value of the ```correlationKey```.
+
+This means, that you definitely have to look at all message receive events or receive tasks in your model to define a reasonable ```correlationKey```. You also need to adjust your code accordingly.
+
+
 
 
 ### Multiple Instance Markers
 
-
-
-### Unsupported Attributes (?)
-
-* Asynchronous Continouations
-
+TODO
 
 
 
 
 ## Summary
+
+In this guide you could get a better understanding of what migration from Camunda Platform to Camunda Cloud means. Specifically this guide
+
+* explained differences in application architecture
+* clarified that process models and code can generally be migrated, whereas runtime and history data cannot
+* showed that migration can be very simple for some models, but also marked limitations, where migration might get very complicated
+* noted that you need to adjust code that uses the workflow engine API
+* explained how you might be able to re-use glue code
+* introduced some community extensions that can help with migration
+
+We are watching customer migration projects closely and will update this guide in the future.
