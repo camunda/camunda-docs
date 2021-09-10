@@ -5,7 +5,7 @@ title: Deploy and start your process instance
 
 :::note
 
-BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot run a BPMN diagram modeled for Camunda Platform in Camunda Cloud, or vice versa, at this time.
+BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot currently run a BPMN diagram modeled for Camunda Platform in Camunda Cloud, or vice versa.
 :::
 
 import Tabs from "@theme/Tabs";
@@ -20,7 +20,7 @@ import TabItem from "@theme/TabItem";
 
 <TabItem value='console'>
 
-You can now use the **Save & Deploy** option in the **Execute** menu to deploy the newly created process to your cluster.
+You can now use the **Save & Deploy** option in the **Execute** menu to deploy the newly-created process to your cluster.
 
 ![console-modeler-deploy](../../components/modeler/cloud-modeler/img/save-and-deploy.png)
 
@@ -28,11 +28,11 @@ Deployment can take a few seconds, but you should get a confirmation for success
 
 ![console-modeler-deploy-successfull](../../components/modeler/cloud-modeler/img/save-and-deploy-successful.png)
 
-You can now start a new process instance. For this example you can just start an instance with an empty payload.
+You can now start a new process instance. For this example, you can start an instance with an empty payload.
 
 ![console-modeler-start-instance](../../components/modeler/cloud-modeler/img/start-process-instance-variables.png)
 
-Once the instance is started, you'll get a confirmation with a link to open Operate.
+Once the instance is started, you'll receive a confirmation with a link to open Operate.
 
 ![console-modeler-start-instance-done](../../components/modeler/cloud-modeler/img/start-process-instance-done.png)
 
@@ -40,11 +40,13 @@ Once the instance is started, you'll get a confirmation with a link to open Oper
 
 <TabItem value='desktop'>
 
-On the right side of the navigation menu there are buttons for deploying and starting processes.
+Take the following steps:
+
+1. On the right side of the navigation menu, note the buttons for deploying and starting processes.
 
 ![zeebe-modeler-deploy](./img/zeebe-modeler-deploy.png)
 
-In the deployment dialog, the connection information must now be specified: `Cluster Id`, `Client Id` and `Client Secret`.
+2. In the deployment dialog, the connection information must now be specified: `Cluster Id`, `Client Id`, and `Client Secret`.
 
 `Client Id` and `Cluster Id` can be retrieved by clicking on **View** on the client in the **API** tab.
 
@@ -57,7 +59,7 @@ grep SECRET  ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
 export ZEEBE_CLIENT_SECRET='zbzsZI_6UnCsH_CIo0lNUN8qGyvLJr9VrH77ewNm8Oq3elvhPvV7g.QmJGydzOLo'
 ```
 
-Click **Deploy** to deploy the process. Use **Play** from the navigation to start a new instance.
+3. Click **Deploy** to deploy the process. Use **Play** from the navigation to start a new instance.
 
 </TabItem>
 </Tabs>
