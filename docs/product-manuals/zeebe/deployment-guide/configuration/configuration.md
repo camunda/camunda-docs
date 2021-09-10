@@ -5,7 +5,7 @@ sidebar_label: "Overview"
 description: "Let's analyze how to configure Zeebe."
 ---
 
-Zeebe can be configured through:
+Zeebe can be configured through the following:
 
 - configuration files,
 - environment variables,
