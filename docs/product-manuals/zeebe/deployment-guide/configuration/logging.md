@@ -3,11 +3,11 @@ id: logging
 title: "Logging"
 ---
 
-Zeebe uses Log4j2 framework for logging. In the distribution and the docker image you can find the default log configuration file in `config/log4j2.xml`.
+Zeebe uses Log4j2 framework for logging. In the distribution and the docker image, find the default log configuration file in `config/log4j2.xml`.
 
 ## Google Stackdriver (JSON) logging
 
-To enable Google Stackdriver compatible JSON logging you can set the environment variable `ZEEBE_LOG_APPENDER=Stackdriver` before starting Zeebe.
+To enable Google Stackdriver compatible JSON logging, set the environment variable `ZEEBE_LOG_APPENDER=Stackdriver` before starting Zeebe.
 
 ## Default logging configuration
 
@@ -65,9 +65,8 @@ To enable Google Stackdriver compatible JSON logging you can set the environment
 
 ## Change log level dynamically
 
-Zeebe brokers expose a [Spring Boot Actuators web endpoint](https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#loggers)
-for configuring loggers dynamically.
-To change the log level of a logger make a `POST` request to the `/actuator/loggers/{logger.name}` endpoint as shown in the example below.
+Zeebe brokers expose a [Spring Boot Actuators web endpoint](https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#loggers) for configuring loggers dynamically.
+To change the log level of a logger, make a `POST` request to the `/actuator/loggers/{logger.name}` endpoint as shown in the example below.
 Change `io.camunda.zeebe` to the required logger name and `debug` to required log level.
 
 ```
