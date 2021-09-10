@@ -6,32 +6,32 @@ slug: /guides/getting-started/
 
 ## Sign up for Camunda Cloud
 
-Create a Camunda Cloud account for yourself, so that you can create clusters, deploy processes and create a new instance.
+Create a Camunda Cloud account so you can create clusters, deploy processes, and create a new instance.
 
 ### Visit [https://camunda.io/signup](https://camunda.io/signup)
 
-The **Sign Up** screen appears:
+Visit [https://camunda.io/signup](https://camunda.io/signup) and view the **Sign Up** screen:
 
 ![signup](./img/signup.png)
 
 ### Create an account
 
-Fill in the form and submit or signup using the social signup buttons.
+Fill out the form and submit, or sign up using the social sign up buttons like Google or GitHub.
 
-If you choose the form, you'll receive a confirmation e-mail. Click on the link to verify your e-mail address and set your password.
+If you fill out the form, you'll receive a confirmation email. Click on the link to verify your email address and set your password.
 
-If you choose creating an account through the social signup button, you get redirected to Console directly.
+If you choose to create an account through the social sign up buttons, you'll be redirected to Console directly.
 
-## Login to your Camunda Cloud account
+## Log in to your Camunda Cloud account
 
 ### Visit [https://camunda.io](https://camunda.io)
 
-Log in with your e-mail address and password you used in the previous form or use the social login buttons.
+Log in with the email address and password you used in the previous form, or use the social login buttons.
 
 ![login](./img/login.png)
 
-After login you'll see the console overview page. This is the central place to manage your clusters and the diagrams and forms you want to deploy to Camunda Cloud.
+After login, you'll see the console overview page. This is the central place to manage your clusters, and the diagrams and forms you want to deploy to Camunda Cloud.
 
 ![overview-gse](./img/home.png)
 
-You can now get the guided tour through Camunda Cloud using the **Product Walkthrough** Button.
+You can now take a guided tour through Camunda Cloud using the **Product Walkthrough** button.

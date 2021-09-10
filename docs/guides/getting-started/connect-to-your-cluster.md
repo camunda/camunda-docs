@@ -24,7 +24,7 @@ source ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
 zbctl status
 ```
 
-As a result you will get a similar response:
+As a result, you will get a similar response:
 
 ```bash
 Cluster size: 1

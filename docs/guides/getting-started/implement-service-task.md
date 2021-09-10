@@ -18,19 +18,24 @@ Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the
 
 <TabItem value='console'>
 
-Click **Import New Diagram** in the context menu to inject the BPMN-model you just downloaded into the diagram.
+Take the following steps:
+
+1. Click **Import New Diagram** in the context menu to inject the BPMN-model you downloaded into the diagram.
 
 ![import](../../product-manuals/modeler/cloud-modeler/img/import-diagram.png)
 
 ![processId-cloud](./img/cloud-modeler-advanced-process-id.png)
 
-This process includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
+This process includes a service task and an XOR gateway. 
+
+2. Select the service task and fill in the properties. 
+3. Set the **Type** to `test-worker`.
 
 ![process-cloud](./img/cloud-modeler-advanced.png)
 
-Deploy the new process using the **Save & Deploy** option in the **Execute** menu.
+4. Deploy the new process using the **Save & Deploy** option in the **Execute** menu.
 
-Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
+5. Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
 
 </TabItem>
 
@@ -38,16 +43,17 @@ Make sure you have [created a client](./setup-client-connection-credentials.md) 
 
 ![processId](./img/zeebe-modeler-advanced-process-id.png)
 
-This process includes a service task and an XOR gateway. Select the service task and fill in the properties. Set the **Type** to `test-worker`.
+6. This process includes a service task and an XOR gateway. Select the service task and fill in the properties.
+7. Set the **Type** to `test-worker`.
 
 ![process](./img/zeebe-modeler-advanced.png)
 
-Deploy the new process.
+8. Deploy the new process.
 
 </TabItem>
 </Tabs>
 
-Now you can connect a worker for the configured service task:
+Now, you can connect a worker for the configured service task:
 
 ```bash
 zbctl create worker test-worker --handler "echo {\"return\":\"Pong\"}"

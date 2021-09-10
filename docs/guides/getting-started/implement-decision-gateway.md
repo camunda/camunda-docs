@@ -41,4 +41,4 @@ And for the else sequence flow:
 </TabItem>
 </Tabs>
 
-Deploy the updated process again so the specified decisions in the gateway will be used.
+Deploy the updated process again so the specified decisions in the gateway are used.
