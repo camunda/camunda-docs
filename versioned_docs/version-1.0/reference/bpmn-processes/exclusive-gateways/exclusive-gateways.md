@@ -17,7 +17,7 @@ An exclusive gateway can also be used to **join** multiple incoming flows to one
 
 ## Conditions
 
-A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/product-manuals/concepts/expressions.md#boolean-expressions) that can access the process instance variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
+A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/components/concepts/expressions.md#boolean-expressions) that can access the process instance variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
 
 Multiple boolean values or comparisons can be combined as disjunction (`and`) or conjunction (`or`).
 
@@ -54,5 +54,5 @@ An exclusive gateway with two outgoing sequence flows:
 
 ### References
 
-- [Expressions](/product-manuals/concepts/expressions.md)
-- [Incidents](/product-manuals/concepts/incidents.md)
+- [Expressions](/components/concepts/expressions.md)
+- [Incidents](/components/concepts/incidents.md)

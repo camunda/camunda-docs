@@ -126,4 +126,4 @@ A business error is expected and is handled in the workflow. The workflow may ta
 
 References:
 
-- [Incidents](/product-manuals/concepts/incidents.md)
+- [Incidents](/components/concepts/incidents.md)

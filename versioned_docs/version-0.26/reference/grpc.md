@@ -3,7 +3,7 @@ id: grpc
 title: "Zeebe API (gRPC)"
 ---
 
-[Zeebe](../product-manuals/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
+[Zeebe](../components/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
 
 ## Gateway Service
 

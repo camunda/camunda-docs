@@ -43,9 +43,9 @@ When the activity is entered, it creates a corresponding message subscription fo
 
 A message can be referenced by one or more message events. It must define the name of the message (e.g. `Money collected`) and the `correlationKey` expression (e.g. `= orderId`). If the message is only referenced by message start events, the `correlationKey` is not required.
 
-Usually, the name of the message is defined as a static value (e.g. `order canceled`), but it can also be defined as [expression](/product-manuals/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). If the expression belongs to a message start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the message event. The evaluation must result in a `string`.
+Usually, the name of the message is defined as a static value (e.g. `order canceled`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). If the expression belongs to a message start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the message event. The evaluation must result in a `string`.
 
-The `correlationKey` is an expression that usually [accesses a variable](/product-manuals/concepts/expressions.md#access-variables) of the process instance that holds the correlation key of the message. The expression is evaluated on activating the message event and must result either in a `string` or in a `number`.
+The `correlationKey` is an expression that usually [accesses a variable](/components/concepts/expressions.md#access-variables) of the process instance that holds the correlation key of the message. The expression is evaluated on activating the message event and must result either in a `string` or in a `number`.
 
 To correlate a message to the message event, the message is published with the defined name (e.g. `Money collected`) and the **value** of the `correlationKey` expression. For example, if the process instance has a variable `orderId` with value `"order-123"`, the message must be published with the correlation key `"order-123"`.
 
@@ -92,7 +92,7 @@ A boundary message event:
 
 ### References
 
-- [Message correlation](/product-manuals/concepts/messages.md)
-- [Expressions](/product-manuals/concepts/expressions.md)
-- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
-- [Incidents](/product-manuals/concepts/incidents.md)
+- [Message correlation](/components/concepts/messages.md)
+- [Expressions](/components/concepts/expressions.md)
+- [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+- [Incidents](/components/concepts/incidents.md)

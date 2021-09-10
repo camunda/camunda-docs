@@ -24,206 +24,206 @@ module.exports = {
         ]
 	}
   ],
-  "Product Manuals": [
-    "product-manuals/overview",
+  "Components": [
+    "components/overview",
     {
       Concepts: [
-        "product-manuals/concepts/what-is-camunda-cloud",
-        "product-manuals/concepts/processes",
-        "product-manuals/concepts/job-workers",
-        "product-manuals/concepts/process-instance-creation",
-        "product-manuals/concepts/messages",
-        "product-manuals/concepts/incidents",
-        "product-manuals/concepts/variables",
-        "product-manuals/concepts/expressions",
+        "components/concepts/what-is-camunda-cloud",
+        "components/concepts/processes",
+        "components/concepts/job-workers",
+        "components/concepts/process-instance-creation",
+        "components/concepts/messages",
+        "components/concepts/incidents",
+        "components/concepts/variables",
+        "components/concepts/expressions",
       ],
       Clients: [
-        "product-manuals/clients/overview",
+        "components/clients/overview",
         {
           "Java client": [
-            "product-manuals/clients/java-client/index",
-            "product-manuals/clients/java-client/job-worker",
-            "product-manuals/clients/java-client/logging",
-            "product-manuals/clients/java-client/testing",
+            "components/clients/java-client/index",
+            "components/clients/java-client/job-worker",
+            "components/clients/java-client/logging",
+            "components/clients/java-client/testing",
             {
               "Examples": [
-                "product-manuals/clients/java-client-examples/index",
-                "product-manuals/clients/java-client-examples/process-deploy",
-                "product-manuals/clients/java-client-examples/process-instance-create",
-                "product-manuals/clients/java-client-examples/process-instance-create-nonblocking",
-                "product-manuals/clients/java-client-examples/process-instance-create-with-result",
-                "product-manuals/clients/java-client-examples/job-worker-open",
-                "product-manuals/clients/java-client-examples/data-pojo",
-                "product-manuals/clients/java-client-examples/cluster-topology-request",
+                "components/clients/java-client-examples/index",
+                "components/clients/java-client-examples/process-deploy",
+                "components/clients/java-client-examples/process-instance-create",
+                "components/clients/java-client-examples/process-instance-create-nonblocking",
+                "components/clients/java-client-examples/process-instance-create-with-result",
+                "components/clients/java-client-examples/job-worker-open",
+                "components/clients/java-client-examples/data-pojo",
+                "components/clients/java-client-examples/cluster-topology-request",
               ],
             },
           ],
         },
         {
           "Go client": [
-            "product-manuals/clients/go-client/index",
-            "product-manuals/clients/go-client/get-started",
+            "components/clients/go-client/index",
+            "components/clients/go-client/get-started",
           ]
         },
         {
           "CLI client": [
-            "product-manuals/clients/cli-client/index",
-            "product-manuals/clients/cli-client/get-started"
+            "components/clients/cli-client/index",
+            "components/clients/cli-client/get-started"
           ]
         },
         {
           "Community clients": [
-            "product-manuals/clients/other-clients/index",
-            "product-manuals/clients/other-clients/c-sharp",
-            "product-manuals/clients/other-clients/javascript",
-            "product-manuals/clients/other-clients/python",
-            "product-manuals/clients/other-clients/ruby",
-            "product-manuals/clients/other-clients/rust",
+            "components/clients/other-clients/index",
+            "components/clients/other-clients/c-sharp",
+            "components/clients/other-clients/javascript",
+            "components/clients/other-clients/python",
+            "components/clients/other-clients/ruby",
+            "components/clients/other-clients/rust",
           ],
         },
-        "product-manuals/clients/build-your-own-client",
+        "components/clients/build-your-own-client",
       ],
       "Cloud Console": [
-        "product-manuals/cloud-console/introduction",
+        "components/cloud-console/introduction",
         {
           "Manage your organization": [
-            "product-manuals/cloud-console/manage-organization/organization-settings",
-            "product-manuals/cloud-console/manage-organization/manage-users",
-            "product-manuals/cloud-console/manage-organization/view-organization-activity",
-            "product-manuals/cloud-console/manage-organization/manage-cloud-management-api-clients",
-            "product-manuals/cloud-console/manage-organization/update-billing-reservations",
-            "product-manuals/cloud-console/manage-organization/switch-organization",
+            "components/cloud-console/manage-organization/organization-settings",
+            "components/cloud-console/manage-organization/manage-users",
+            "components/cloud-console/manage-organization/view-organization-activity",
+            "components/cloud-console/manage-organization/manage-cloud-management-api-clients",
+            "components/cloud-console/manage-organization/update-billing-reservations",
+            "components/cloud-console/manage-organization/switch-organization",
           ],
         },
         {
           "Manage clusters": [
-            "product-manuals/cloud-console/manage-clusters/create-cluster",
-            "product-manuals/cloud-console/manage-clusters/rename-cluster",
-            "product-manuals/cloud-console/manage-clusters/delete-cluster",
-            "product-manuals/cloud-console/manage-clusters/manage-api-clients",
-            "product-manuals/cloud-console/manage-clusters/manage-alerts",
+            "components/cloud-console/manage-clusters/create-cluster",
+            "components/cloud-console/manage-clusters/rename-cluster",
+            "components/cloud-console/manage-clusters/delete-cluster",
+            "components/cloud-console/manage-clusters/manage-api-clients",
+            "components/cloud-console/manage-clusters/manage-alerts",
           ],
         },
         {
           "Manage your plan": [
-            "product-manuals/cloud-console/manage-plan/available-plans",
-            "product-manuals/cloud-console/manage-plan/upgrade-to-professional-plan",
+            "components/cloud-console/manage-plan/available-plans",
+            "components/cloud-console/manage-plan/upgrade-to-professional-plan",
           ],
         },
         {
           Troubleshooting: [
-            "product-manuals/cloud-console/troubleshooting/common-pitfalls",
-            "product-manuals/cloud-console/troubleshooting/feedback-and-support",
+            "components/cloud-console/troubleshooting/common-pitfalls",
+            "components/cloud-console/troubleshooting/feedback-and-support",
           ],
         },
       ],
       Modeler: [
-        "product-manuals/modeler/overview",
+        "components/modeler/overview",
         {
           "Cloud Modeler": [
-            "product-manuals/modeler/cloud-modeler/launch-cloud-modeler",
-            "product-manuals/modeler/cloud-modeler/model-your-first-diagram",
-            "product-manuals/modeler/cloud-modeler/import-diagram",
-            "product-manuals/modeler/cloud-modeler/save-and-deploy",
-            "product-manuals/modeler/cloud-modeler/start-instance",
-            "product-manuals/modeler/cloud-modeler/model-overview",
+            "components/modeler/cloud-modeler/launch-cloud-modeler",
+            "components/modeler/cloud-modeler/model-your-first-diagram",
+            "components/modeler/cloud-modeler/import-diagram",
+            "components/modeler/cloud-modeler/save-and-deploy",
+            "components/modeler/cloud-modeler/start-instance",
+            "components/modeler/cloud-modeler/model-overview",
           ],
           "Camunda Modeler": [
-            "product-manuals/modeler/camunda-modeler/install-the-modeler",
-            "product-manuals/modeler/camunda-modeler/model-your-first-diagram",
-            "product-manuals/modeler/camunda-modeler/connect-to-camunda-cloud",
-            "product-manuals/modeler/camunda-modeler/deploy-to-cloud",
-            "product-manuals/modeler/camunda-modeler/start-instance",
+            "components/modeler/camunda-modeler/install-the-modeler",
+            "components/modeler/camunda-modeler/model-your-first-diagram",
+            "components/modeler/camunda-modeler/connect-to-camunda-cloud",
+            "components/modeler/camunda-modeler/deploy-to-cloud",
+            "components/modeler/camunda-modeler/start-instance",
           ],
         },
       ],
       Zeebe: [
-        "product-manuals/zeebe/zeebe-overview",
+        "components/zeebe/zeebe-overview",
         {
           "Technical concepts": [
-            "product-manuals/zeebe/technical-concepts/index",
-            "product-manuals/zeebe/technical-concepts/architecture",
-            "product-manuals/zeebe/technical-concepts/clustering",
-            "product-manuals/zeebe/technical-concepts/partitions",
-            "product-manuals/zeebe/technical-concepts/internal-processing",
-            "product-manuals/zeebe/technical-concepts/process-lifecycles",
-            "product-manuals/zeebe/technical-concepts/protocols",
-            "product-manuals/zeebe/technical-concepts/exporters",
+            "components/zeebe/technical-concepts/index",
+            "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/partitions",
+            "components/zeebe/technical-concepts/internal-processing",
+            "components/zeebe/technical-concepts/process-lifecycles",
+            "components/zeebe/technical-concepts/protocols",
+            "components/zeebe/technical-concepts/exporters",
           ],
         },
         {
           "Deployment guide": [
-            "product-manuals/zeebe/deployment-guide/index",
+            "components/zeebe/deployment-guide/index",
             {
               "Local installation": [
-                "product-manuals/zeebe/deployment-guide/local/install",
-                "product-manuals/zeebe/deployment-guide/local/quickstart",
+                "components/zeebe/deployment-guide/local/install",
+                "components/zeebe/deployment-guide/local/quickstart",
               ]
             },
-            "product-manuals/zeebe/deployment-guide/docker/install",
+            "components/zeebe/deployment-guide/docker/install",
             {
               "Kubernetes deployment": [
-                "product-manuals/zeebe/deployment-guide/kubernetes/index",
+                "components/zeebe/deployment-guide/kubernetes/index",
                 {
                   "Helm charts": [
-                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/index",
-                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/prerequisites",
-                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/installing-helm",
-                    "product-manuals/zeebe/deployment-guide/kubernetes/helm/accessing-operate",
+                    "components/zeebe/deployment-guide/kubernetes/helm/index",
+                    "components/zeebe/deployment-guide/kubernetes/helm/prerequisites",
+                    "components/zeebe/deployment-guide/kubernetes/helm/installing-helm",
+                    "components/zeebe/deployment-guide/kubernetes/helm/accessing-operate",
                   ]
                 },
-                "product-manuals/zeebe/deployment-guide/kubernetes/operator/zeebe-operator",
+                "components/zeebe/deployment-guide/kubernetes/operator/zeebe-operator",
               ],
             },
             {
               "Getting started tutorial": [
-                "product-manuals/zeebe/deployment-guide/getting-started/index",
-                "product-manuals/zeebe/deployment-guide/getting-started/tutorial-setup",
-                "product-manuals/zeebe/deployment-guide/getting-started/create-a-process",
-                "product-manuals/zeebe/deployment-guide/getting-started/deploy-a-process",
-                "product-manuals/zeebe/deployment-guide/getting-started/create-process-instance",
-                "product-manuals/zeebe/deployment-guide/getting-started/next-steps-resources",
+                "components/zeebe/deployment-guide/getting-started/index",
+                "components/zeebe/deployment-guide/getting-started/tutorial-setup",
+                "components/zeebe/deployment-guide/getting-started/create-a-process",
+                "components/zeebe/deployment-guide/getting-started/deploy-a-process",
+                "components/zeebe/deployment-guide/getting-started/create-process-instance",
+                "components/zeebe/deployment-guide/getting-started/next-steps-resources",
               ],
             },
             {
               Configuration: [
-                "product-manuals/zeebe/deployment-guide/configuration/configuration",
-                "product-manuals/zeebe/deployment-guide/configuration/logging",
-                "product-manuals/zeebe/deployment-guide/configuration/gateway-health-probes",
-                "product-manuals/zeebe/deployment-guide/configuration/environment-variables",
+                "components/zeebe/deployment-guide/configuration/configuration",
+                "components/zeebe/deployment-guide/configuration/logging",
+                "components/zeebe/deployment-guide/configuration/gateway-health-probes",
+                "components/zeebe/deployment-guide/configuration/environment-variables",
               ]
             },
             {
               Security: [
-                "product-manuals/zeebe/deployment-guide/security/security",
-                "product-manuals/zeebe/deployment-guide/security/authentication",
-                "product-manuals/zeebe/deployment-guide/security/authorization",
+                "components/zeebe/deployment-guide/security/security",
+                "components/zeebe/deployment-guide/security/authentication",
+                "components/zeebe/deployment-guide/security/authorization",
               ],
             },
             {
               Operation: [
-                "product-manuals/zeebe/deployment-guide/operations/index",
-                "product-manuals/zeebe/deployment-guide/operations/resource-planning",
-                "product-manuals/zeebe/deployment-guide/operations/network-ports",
-                "product-manuals/zeebe/deployment-guide/operations/setting-up-a-cluster",
-                "product-manuals/zeebe/deployment-guide/operations/metrics",
-                "product-manuals/zeebe/deployment-guide/operations/health",
-                "product-manuals/zeebe/deployment-guide/operations/backpressure",
-                "product-manuals/zeebe/deployment-guide/operations/disk-space",
-                "product-manuals/zeebe/deployment-guide/operations/update-zeebe",
+                "components/zeebe/deployment-guide/operations/index",
+                "components/zeebe/deployment-guide/operations/resource-planning",
+                "components/zeebe/deployment-guide/operations/network-ports",
+                "components/zeebe/deployment-guide/operations/setting-up-a-cluster",
+                "components/zeebe/deployment-guide/operations/metrics",
+                "components/zeebe/deployment-guide/operations/health",
+                "components/zeebe/deployment-guide/operations/backpressure",
+                "components/zeebe/deployment-guide/operations/disk-space",
+                "components/zeebe/deployment-guide/operations/update-zeebe",
               ],
             },
           ]
         },
         {
           "Open Source community": [
-            "product-manuals/zeebe/open-source/community-contributions",
-            "product-manuals/zeebe/open-source/get-help-get-involved",
+            "components/zeebe/open-source/community-contributions",
+            "components/zeebe/open-source/get-help-get-involved",
           ]
         },
         {
             "Third-Party Libraries": [
-               "product-manuals/zeebe/third-party-libraries/zeebe-dependencies",
+               "components/zeebe/third-party-libraries/zeebe-dependencies",
             ]
         },
         {
@@ -233,55 +233,55 @@ module.exports = {
         },
       ],
       Operate: [
-         "product-manuals/operate/index",{
+         "components/operate/index",{
             "User guide":[
-              "product-manuals/operate/userguide/basic-operate-navigation",
-              "product-manuals/operate/userguide/resolve-incidents-update-variables",
-              "product-manuals/operate/userguide/selections-operations",
-              "product-manuals/operate/userguide/operate-feedback-and-questions"
+              "components/operate/userguide/basic-operate-navigation",
+              "components/operate/userguide/resolve-incidents-update-variables",
+              "components/operate/userguide/selections-operations",
+              "components/operate/userguide/operate-feedback-and-questions"
             ],
             "Deployment guide": [
-               "product-manuals/operate/deployment/install-and-start",
-               "product-manuals/operate/deployment/configuration",
-               "product-manuals/operate/deployment/data-retention",
-               "product-manuals/operate/deployment/schema-and-migration",
-               "product-manuals/operate/deployment/importer-and-archiver",
-               "product-manuals/operate/deployment/authentication"
+               "components/operate/deployment/install-and-start",
+               "components/operate/deployment/configuration",
+               "components/operate/deployment/data-retention",
+               "components/operate/deployment/schema-and-migration",
+               "components/operate/deployment/importer-and-archiver",
+               "components/operate/deployment/authentication"
             ],
             "Third-Party Libraries": [
-               "product-manuals/operate/third-party-libraries/operate-backend-dependencies",
-               "product-manuals/operate/third-party-libraries/operate-frontend-dependencies"
+               "components/operate/third-party-libraries/operate-backend-dependencies",
+               "components/operate/third-party-libraries/operate-frontend-dependencies"
             ],
          }
       ],
       Tasklist: [
-      "product-manuals/tasklist/introduction",{
+      "components/tasklist/introduction",{
           "User guide": [
-            "product-manuals/tasklist/userguide/overview",
-            "product-manuals/tasklist/userguide/camunda-forms",
+            "components/tasklist/userguide/overview",
+            "components/tasklist/userguide/camunda-forms",
           ],
           "Deployment guide": [
-            "product-manuals/tasklist/deployment/install-and-start",
-            "product-manuals/tasklist/deployment/configuration",
-            "product-manuals/tasklist/deployment/authentication",
-            "product-manuals/tasklist/deployment/api-client",
+            "components/tasklist/deployment/install-and-start",
+            "components/tasklist/deployment/configuration",
+            "components/tasklist/deployment/authentication",
+            "components/tasklist/deployment/api-client",
           ],
           "Third-Party Libraries": [
-            "product-manuals/tasklist/third-party-libraries/tasklist-backend-dependencies",
-            "product-manuals/tasklist/third-party-libraries/tasklist-frontend-dependencies"
+            "components/tasklist/third-party-libraries/tasklist-backend-dependencies",
+            "components/tasklist/third-party-libraries/tasklist-frontend-dependencies"
           ],
         },
       ],
       IAM: [
-      "product-manuals/iam/overview", {
+      "components/iam/overview", {
           "Third-Party Libraries": [
-            "product-manuals/iam/third-party-libraries/backend-third-party-libraries",
-            "product-manuals/iam/third-party-libraries/frontend-third-party-libraries"
+            "components/iam/third-party-libraries/backend-third-party-libraries",
+            "components/iam/third-party-libraries/frontend-third-party-libraries"
           ],
         },
       ],
     },
-      "product-manuals/best-practices",
+      "components/best-practices",
   ],
   Reference: [
     "reference/overview",

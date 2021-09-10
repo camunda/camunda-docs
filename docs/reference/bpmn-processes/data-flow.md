@@ -16,7 +16,7 @@ providing a list of required variables as **fetchVariables**.
 
 The worker uses the variables to do its work. When the work is done, it completes the job. If the
 result of the work is needed by follow-up tasks, the worker sets the variables while completing
-the job. These variables [merge](/product-manuals/concepts/variables.md#variable-propagation) into the
+the job. These variables [merge](/components/concepts/variables.md#variable-propagation) into the
 process instance.
 
 ![job-worker](assets/data-flow-job-worker.png)
@@ -42,7 +42,7 @@ are altered by one activity, it might also be accessed and altered by another at
 conditions can occur in such processes.
 
 We recommend taking care when writing variables in a parallel flow. Make sure the variables are
-written to the correct [variable scope](/product-manuals/concepts/variables.md#variable-scopes) using variable
+written to the correct [variable scope](/components/concepts/variables.md#variable-scopes) using variable
 mappings and make sure to complete jobs and publish messages only with the minimum required
 variables.
 
@@ -54,7 +54,7 @@ These type of problems can be avoided by:
 
 ## Additional resources
 
-- [Job handling](/product-manuals/concepts/job-workers.md)
-- [Variables](/product-manuals/concepts/variables.md)
-- [Input/output variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
-- [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)
+- [Job handling](/components/concepts/job-workers.md)
+- [Variables](/components/concepts/variables.md)
+- [Input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+- [Variable scopes](/components/concepts/variables.md#variable-scopes)

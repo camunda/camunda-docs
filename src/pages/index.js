@@ -10,7 +10,7 @@ const features = [
   {
     title: 'Camunda Cloud',
     imageUrl: 'img/camunda-cloud-gradient.png',
-    url: 'https://docs.camunda.io/docs/product-manuals/concepts/what-is-camunda-cloud',
+    url: 'https://docs.camunda.io/docs/components/concepts/what-is-camunda-cloud',
     description: (
       <>A  scalable, on-demand process platform
       </>
@@ -19,7 +19,7 @@ const features = [
   {
     title: 'Zeebe',
     imageUrl: 'img/camunda-workflow-engine-gradient.png',
-    url: 'https://docs.camunda.io/docs/product-manuals/zeebe/zeebe-overview',
+    url: 'https://docs.camunda.io/docs/components/zeebe/zeebe-overview',
     description: (
       <>
         A workflow engine for microservices orchestration
@@ -29,7 +29,7 @@ const features = [
   {
     title: 'Operate',
     imageUrl: 'img/camunda-operate-gradient.png',
-    url: 'https://docs.camunda.io/docs/product-manuals/operate/index',
+    url: 'https://docs.camunda.io/docs/components/operate/index',
     description: (
       <>
         Visibility, Monitoring, and Management

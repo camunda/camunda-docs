@@ -22,7 +22,7 @@ Take the following steps:
 
 1. Click **Import New Diagram** in the context menu to inject the BPMN-model you downloaded into the diagram.
 
-![import](../../product-manuals/modeler/cloud-modeler/img/import-diagram.png)
+![import](../../components/modeler/cloud-modeler/img/import-diagram.png)
 
 ![processId-cloud](./img/cloud-modeler-advanced-process-id.png)
 

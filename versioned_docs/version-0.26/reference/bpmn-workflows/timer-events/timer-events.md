@@ -31,10 +31,10 @@ An non-interrupting timer boundary event must have either a **time duration or t
 
 Timers must be defined by providing either a date, a duration, or a cycle.
 
-A timer can be defined either as a static value (e.g. `PT3D`) or as an [expression](/product-manuals/concepts/expressions.md). There are two common ways for using an expression:
+A timer can be defined either as a static value (e.g. `PT3D`) or as an [expression](/components/concepts/expressions.md). There are two common ways for using an expression:
 
-- [access a variable](/product-manuals/concepts/expressions.md#access-variables) (e.g. `= remainingTime`)
-- [using temporal values](/product-manuals/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`)
+- [access a variable](/components/concepts/expressions.md#access-variables) (e.g. `= remainingTime`)
+- [using temporal values](/components/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`)
 
 If the expression belongs to a timer start event of the workflow then it is evaluated on deploying the workflow. Otherwise, it is evaluated on activating the timer catch event. The evaluation must result either in a `string` that has the same ISO 8601 format as the static value or an equivalent temporal value (i.e. a date-time, a duration, or a cycle).
 
@@ -191,5 +191,5 @@ Workflow instance records of an intermediate timer catch event:
 
 References:
 
-- [Expressions](/product-manuals/concepts/expressions.md)
+- [Expressions](/components/concepts/expressions.md)
 - [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)

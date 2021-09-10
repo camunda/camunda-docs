@@ -52,10 +52,10 @@
       "id": "version-0.26/guides/setting-up-development-project"
     }
   ],
-  "version-0.26/Product Manuals": [
+  "version-0.26/Components": [
     {
       "type": "doc",
-      "id": "version-0.26/product-manuals/overview"
+      "id": "version-0.26/components/overview"
     },
     {
       "collapsed": true,
@@ -64,35 +64,35 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/concepts/what-is-camunda-cloud"
+          "id": "version-0.26/components/concepts/what-is-camunda-cloud"
         },
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/concepts/workflows"
+          "id": "version-0.26/components/concepts/workflows"
         },
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/concepts/job-workers"
+          "id": "version-0.26/components/concepts/job-workers"
         },
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/concepts/workflow-instance-creation"
+          "id": "version-0.26/components/concepts/workflow-instance-creation"
         },
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/concepts/messages"
+          "id": "version-0.26/components/concepts/messages"
         },
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/concepts/incidents"
+          "id": "version-0.26/components/concepts/incidents"
         },
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/concepts/variables"
+          "id": "version-0.26/components/concepts/variables"
         },
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/concepts/expressions"
+          "id": "version-0.26/components/concepts/expressions"
         }
       ]
     },
@@ -103,7 +103,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/clients/overview"
+          "id": "version-0.26/components/clients/overview"
         },
         {
           "collapsed": true,
@@ -112,19 +112,19 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/java-client/index"
+              "id": "version-0.26/components/clients/java-client/index"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/java-client/get-started"
+              "id": "version-0.26/components/clients/java-client/get-started"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/java-client/logging"
+              "id": "version-0.26/components/clients/java-client/logging"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/java-client/testing"
+              "id": "version-0.26/components/clients/java-client/testing"
             },
             {
               "collapsed": true,
@@ -133,35 +133,35 @@
               "items": [
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/clients/java-client-examples/index"
+                  "id": "version-0.26/components/clients/java-client-examples/index"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/clients/java-client-examples/workflow-deploy"
+                  "id": "version-0.26/components/clients/java-client-examples/workflow-deploy"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/clients/java-client-examples/workflow-instance-create"
+                  "id": "version-0.26/components/clients/java-client-examples/workflow-instance-create"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/clients/java-client-examples/workflow-instance-create-nonblocking"
+                  "id": "version-0.26/components/clients/java-client-examples/workflow-instance-create-nonblocking"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/clients/java-client-examples/workflow-instance-create-with-result"
+                  "id": "version-0.26/components/clients/java-client-examples/workflow-instance-create-with-result"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/clients/java-client-examples/job-worker-open"
+                  "id": "version-0.26/components/clients/java-client-examples/job-worker-open"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/clients/java-client-examples/data-pojo"
+                  "id": "version-0.26/components/clients/java-client-examples/data-pojo"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/clients/java-client-examples/cluster-topology-request"
+                  "id": "version-0.26/components/clients/java-client-examples/cluster-topology-request"
                 }
               ]
             }
@@ -174,11 +174,11 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/go-client/index"
+              "id": "version-0.26/components/clients/go-client/index"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/go-client/get-started"
+              "id": "version-0.26/components/clients/go-client/get-started"
             }
           ]
         },
@@ -189,11 +189,11 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/cli-client/index"
+              "id": "version-0.26/components/clients/cli-client/index"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/cli-client/get-started"
+              "id": "version-0.26/components/clients/cli-client/get-started"
             }
           ]
         },
@@ -204,33 +204,33 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/other-clients/index"
+              "id": "version-0.26/components/clients/other-clients/index"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/other-clients/c-sharp"
+              "id": "version-0.26/components/clients/other-clients/c-sharp"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/other-clients/javascript"
+              "id": "version-0.26/components/clients/other-clients/javascript"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/other-clients/python"
+              "id": "version-0.26/components/clients/other-clients/python"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/other-clients/ruby"
+              "id": "version-0.26/components/clients/other-clients/ruby"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/clients/other-clients/rust"
+              "id": "version-0.26/components/clients/other-clients/rust"
             }
           ]
         },
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/clients/build-your-own-client"
+          "id": "version-0.26/components/clients/build-your-own-client"
         }
       ]
     },
@@ -241,7 +241,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/cloud-console/introduction"
+          "id": "version-0.26/components/cloud-console/introduction"
         },
         {
           "collapsed": true,
@@ -250,27 +250,27 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-organization/organization-settings"
+              "id": "version-0.26/components/cloud-console/manage-organization/organization-settings"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-organization/manage-users"
+              "id": "version-0.26/components/cloud-console/manage-organization/manage-users"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-organization/view-organization-activity"
+              "id": "version-0.26/components/cloud-console/manage-organization/view-organization-activity"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-organization/manage-cloud-management-api-clients"
+              "id": "version-0.26/components/cloud-console/manage-organization/manage-cloud-management-api-clients"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-organization/update-billing-reservations"
+              "id": "version-0.26/components/cloud-console/manage-organization/update-billing-reservations"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-organization/switch-organization"
+              "id": "version-0.26/components/cloud-console/manage-organization/switch-organization"
             }
           ]
         },
@@ -281,19 +281,19 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-clusters/create-cluster"
+              "id": "version-0.26/components/cloud-console/manage-clusters/create-cluster"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-clusters/rename-cluster"
+              "id": "version-0.26/components/cloud-console/manage-clusters/rename-cluster"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-clusters/delete-cluster"
+              "id": "version-0.26/components/cloud-console/manage-clusters/delete-cluster"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-clusters/manage-api-clients"
+              "id": "version-0.26/components/cloud-console/manage-clusters/manage-api-clients"
             }
           ]
         },
@@ -304,11 +304,11 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-plan/available-plans"
+              "id": "version-0.26/components/cloud-console/manage-plan/available-plans"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/manage-plan/trial-plan"
+              "id": "version-0.26/components/cloud-console/manage-plan/trial-plan"
             },
             {
               "collapsed": true,
@@ -317,15 +317,15 @@
               "items": [
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/cloud-console/manage-plan/professional-plan/overview"
+                  "id": "version-0.26/components/cloud-console/manage-plan/professional-plan/overview"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/cloud-console/manage-plan/professional-plan/upgrade-to-professional-plan"
+                  "id": "version-0.26/components/cloud-console/manage-plan/professional-plan/upgrade-to-professional-plan"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/cloud-console/manage-plan/professional-plan/billing-parameters"
+                  "id": "version-0.26/components/cloud-console/manage-plan/professional-plan/billing-parameters"
                 }
               ]
             }
@@ -338,11 +338,11 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/troubleshooting/common-pitfalls"
+              "id": "version-0.26/components/cloud-console/troubleshooting/common-pitfalls"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/cloud-console/troubleshooting/feedback-and-support"
+              "id": "version-0.26/components/cloud-console/troubleshooting/feedback-and-support"
             }
           ]
         }
@@ -355,7 +355,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/modeler/overview"
+          "id": "version-0.26/components/modeler/overview"
         },
         {
           "collapsed": true,
@@ -364,23 +364,23 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/cloud-modeler/launch-cloud-modeler"
+              "id": "version-0.26/components/modeler/cloud-modeler/launch-cloud-modeler"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/cloud-modeler/model-your-first-diagram"
+              "id": "version-0.26/components/modeler/cloud-modeler/model-your-first-diagram"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/cloud-modeler/import-diagram"
+              "id": "version-0.26/components/modeler/cloud-modeler/import-diagram"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/cloud-modeler/save-and-deploy"
+              "id": "version-0.26/components/modeler/cloud-modeler/save-and-deploy"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/cloud-modeler/start-instance"
+              "id": "version-0.26/components/modeler/cloud-modeler/start-instance"
             }
           ]
         },
@@ -391,23 +391,23 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/zeebe-modeler/install-the-zeebe-modeler"
+              "id": "version-0.26/components/modeler/zeebe-modeler/install-the-zeebe-modeler"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/zeebe-modeler/model-your-first-diagram"
+              "id": "version-0.26/components/modeler/zeebe-modeler/model-your-first-diagram"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/zeebe-modeler/connect-to-camunda-cloud"
+              "id": "version-0.26/components/modeler/zeebe-modeler/connect-to-camunda-cloud"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/zeebe-modeler/deploy-to-cloud"
+              "id": "version-0.26/components/modeler/zeebe-modeler/deploy-to-cloud"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/modeler/zeebe-modeler/start-instance"
+              "id": "version-0.26/components/modeler/zeebe-modeler/start-instance"
             }
           ]
         }
@@ -420,7 +420,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/zeebe/zeebe-overview"
+          "id": "version-0.26/components/zeebe/zeebe-overview"
         },
         {
           "collapsed": true,
@@ -429,35 +429,35 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/technical-concepts/index"
+              "id": "version-0.26/components/zeebe/technical-concepts/index"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/technical-concepts/architecture"
+              "id": "version-0.26/components/zeebe/technical-concepts/architecture"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/technical-concepts/clustering"
+              "id": "version-0.26/components/zeebe/technical-concepts/clustering"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/technical-concepts/partitions"
+              "id": "version-0.26/components/zeebe/technical-concepts/partitions"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/technical-concepts/internal-processing"
+              "id": "version-0.26/components/zeebe/technical-concepts/internal-processing"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/technical-concepts/workflow-lifecycles"
+              "id": "version-0.26/components/zeebe/technical-concepts/workflow-lifecycles"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/technical-concepts/protocols"
+              "id": "version-0.26/components/zeebe/technical-concepts/protocols"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/technical-concepts/exporters"
+              "id": "version-0.26/components/zeebe/technical-concepts/exporters"
             }
           ]
         },
@@ -468,7 +468,7 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/deployment-guide/index"
+              "id": "version-0.26/components/zeebe/deployment-guide/index"
             },
             {
               "collapsed": true,
@@ -477,17 +477,17 @@
               "items": [
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/local/install"
+                  "id": "version-0.26/components/zeebe/deployment-guide/local/install"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/local/quickstart"
+                  "id": "version-0.26/components/zeebe/deployment-guide/local/quickstart"
                 }
               ]
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/deployment-guide/docker/install"
+              "id": "version-0.26/components/zeebe/deployment-guide/docker/install"
             },
             {
               "collapsed": true,
@@ -496,7 +496,7 @@
               "items": [
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/kubernetes/index"
+                  "id": "version-0.26/components/zeebe/deployment-guide/kubernetes/index"
                 },
                 {
                   "collapsed": true,
@@ -505,25 +505,25 @@
                   "items": [
                     {
                       "type": "doc",
-                      "id": "version-0.26/product-manuals/zeebe/deployment-guide/kubernetes/helm/index"
+                      "id": "version-0.26/components/zeebe/deployment-guide/kubernetes/helm/index"
                     },
                     {
                       "type": "doc",
-                      "id": "version-0.26/product-manuals/zeebe/deployment-guide/kubernetes/helm/prerequisites"
+                      "id": "version-0.26/components/zeebe/deployment-guide/kubernetes/helm/prerequisites"
                     },
                     {
                       "type": "doc",
-                      "id": "version-0.26/product-manuals/zeebe/deployment-guide/kubernetes/helm/installing-helm"
+                      "id": "version-0.26/components/zeebe/deployment-guide/kubernetes/helm/installing-helm"
                     },
                     {
                       "type": "doc",
-                      "id": "version-0.26/product-manuals/zeebe/deployment-guide/kubernetes/helm/accessing-operate"
+                      "id": "version-0.26/components/zeebe/deployment-guide/kubernetes/helm/accessing-operate"
                     }
                   ]
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/kubernetes/operator/zeebe-operator"
+                  "id": "version-0.26/components/zeebe/deployment-guide/kubernetes/operator/zeebe-operator"
                 }
               ]
             },
@@ -534,27 +534,27 @@
               "items": [
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/getting-started/index"
+                  "id": "version-0.26/components/zeebe/deployment-guide/getting-started/index"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/getting-started/tutorial-setup"
+                  "id": "version-0.26/components/zeebe/deployment-guide/getting-started/tutorial-setup"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/getting-started/create-a-workflow"
+                  "id": "version-0.26/components/zeebe/deployment-guide/getting-started/create-a-workflow"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/getting-started/deploy-a-workflow"
+                  "id": "version-0.26/components/zeebe/deployment-guide/getting-started/deploy-a-workflow"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/getting-started/create-workflow-instance"
+                  "id": "version-0.26/components/zeebe/deployment-guide/getting-started/create-workflow-instance"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/getting-started/next-steps-resources"
+                  "id": "version-0.26/components/zeebe/deployment-guide/getting-started/next-steps-resources"
                 }
               ]
             },
@@ -565,19 +565,19 @@
               "items": [
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/configuration/configuration"
+                  "id": "version-0.26/components/zeebe/deployment-guide/configuration/configuration"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/configuration/logging"
+                  "id": "version-0.26/components/zeebe/deployment-guide/configuration/logging"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/configuration/gateway-health-probes"
+                  "id": "version-0.26/components/zeebe/deployment-guide/configuration/gateway-health-probes"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/configuration/environment-variables"
+                  "id": "version-0.26/components/zeebe/deployment-guide/configuration/environment-variables"
                 }
               ]
             },
@@ -588,15 +588,15 @@
               "items": [
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/security/security"
+                  "id": "version-0.26/components/zeebe/deployment-guide/security/security"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/security/authentication"
+                  "id": "version-0.26/components/zeebe/deployment-guide/security/authentication"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/security/authorization"
+                  "id": "version-0.26/components/zeebe/deployment-guide/security/authorization"
                 }
               ]
             },
@@ -607,39 +607,39 @@
               "items": [
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/operations/index"
+                  "id": "version-0.26/components/zeebe/deployment-guide/operations/index"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/operations/resource-planning"
+                  "id": "version-0.26/components/zeebe/deployment-guide/operations/resource-planning"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/operations/network-ports"
+                  "id": "version-0.26/components/zeebe/deployment-guide/operations/network-ports"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/operations/setting-up-a-cluster"
+                  "id": "version-0.26/components/zeebe/deployment-guide/operations/setting-up-a-cluster"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/operations/metrics"
+                  "id": "version-0.26/components/zeebe/deployment-guide/operations/metrics"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/operations/health"
+                  "id": "version-0.26/components/zeebe/deployment-guide/operations/health"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/operations/backpressure"
+                  "id": "version-0.26/components/zeebe/deployment-guide/operations/backpressure"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/operations/disk-space"
+                  "id": "version-0.26/components/zeebe/deployment-guide/operations/disk-space"
                 },
                 {
                   "type": "doc",
-                  "id": "version-0.26/product-manuals/zeebe/deployment-guide/operations/upgrade-zeebe"
+                  "id": "version-0.26/components/zeebe/deployment-guide/operations/upgrade-zeebe"
                 }
               ]
             }
@@ -652,19 +652,19 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/open-source/community-contributions"
+              "id": "version-0.26/components/zeebe/open-source/community-contributions"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/open-source/get-help-get-involved"
+              "id": "version-0.26/components/zeebe/open-source/get-help-get-involved"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/open-source/release-cycle"
+              "id": "version-0.26/components/zeebe/open-source/release-cycle"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/zeebe/open-source/deprecated-features"
+              "id": "version-0.26/components/zeebe/open-source/deprecated-features"
             }
           ]
         },
@@ -683,7 +683,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/operate/index"
+          "id": "version-0.26/components/operate/index"
         },
         {
           "collapsed": true,
@@ -692,19 +692,19 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/userguide/basic-operate-navigation"
+              "id": "version-0.26/components/operate/userguide/basic-operate-navigation"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/userguide/resolve-incidents-update-variables"
+              "id": "version-0.26/components/operate/userguide/resolve-incidents-update-variables"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/userguide/selections-operations"
+              "id": "version-0.26/components/operate/userguide/selections-operations"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/userguide/operate-feedback-and-questions"
+              "id": "version-0.26/components/operate/userguide/operate-feedback-and-questions"
             }
           ]
         },
@@ -715,27 +715,27 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/deployment/install-and-start"
+              "id": "version-0.26/components/operate/deployment/install-and-start"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/deployment/configuration"
+              "id": "version-0.26/components/operate/deployment/configuration"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/deployment/data-retention"
+              "id": "version-0.26/components/operate/deployment/data-retention"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/deployment/schema-and-migration"
+              "id": "version-0.26/components/operate/deployment/schema-and-migration"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/deployment/importer-and-archiver"
+              "id": "version-0.26/components/operate/deployment/importer-and-archiver"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/operate/deployment/authentication"
+              "id": "version-0.26/components/operate/deployment/authentication"
             }
           ]
         }
@@ -748,7 +748,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-0.26/product-manuals/tasklist/introduction"
+          "id": "version-0.26/components/tasklist/introduction"
         },
         {
           "collapsed": true,
@@ -757,7 +757,7 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/tasklist/userguide/overview"
+              "id": "version-0.26/components/tasklist/userguide/overview"
             }
           ]
         },
@@ -768,19 +768,19 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/tasklist/deployment/install-and-start"
+              "id": "version-0.26/components/tasklist/deployment/install-and-start"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/tasklist/deployment/configuration"
+              "id": "version-0.26/components/tasklist/deployment/configuration"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/tasklist/deployment/authentication"
+              "id": "version-0.26/components/tasklist/deployment/authentication"
             },
             {
               "type": "doc",
-              "id": "version-0.26/product-manuals/tasklist/deployment/api-client"
+              "id": "version-0.26/components/tasklist/deployment/api-client"
             }
           ]
         }
