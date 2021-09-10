@@ -22,4 +22,4 @@ Camunda Cloud is comprised of four components:
 
 Camunda Cloud can be used with Camunda Modeler, and soon, Optimize and Cawemo. 
 
-In this section of the Camunda Cloud documentation, you'll find guides for getting started with Camunda Cloud. For more conceptual information on Camunda Cloud, see [What is Camunda Cloud](product-manuals/concepts/what-is-camunda-cloud.md).
+In this section of the Camunda Cloud documentation, you'll find guides for getting started with Camunda Cloud. For more conceptual information on Camunda Cloud, see [What is Camunda Cloud](components/concepts/what-is-camunda-cloud.md).
