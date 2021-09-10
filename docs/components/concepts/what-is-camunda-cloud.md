@@ -17,8 +17,6 @@ A company’s end-to-end processes almost always span more than one microservice
 
 These end-to-end processes are mission critical, yet the processes themselves are rarely modeled and monitored. Often, the flow of events through different microservices is not as transparent as it should be.
 
-[//]:# (Changed "opaque" in th sentence above to something a little more descriptive. Do you prefer the former or the latter?)
-
 Camunda Cloud addresses these challenges and provides:
 
 1. **Visibility** into the state of a company’s end-to-end processes, including the number of in-flight processes, average process duration, current errors within a process, and more.
