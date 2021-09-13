@@ -19,6 +19,12 @@ A process or subprocess can have multiple none end events. When a none end event
 
 If an activity has no outgoing sequence flow, it behaves the same as it would be connected to a none end event. When the activity is completed, the current execution path ends.
 
+## Intermediate None Event (throwing)
+
+None events can be used to indicate some state achieved in the process. 
+
+The engine itself doesn't do anything in the event, it just passes through it.
+
 ## Additional resources
 
 ### XML representation
