@@ -4,7 +4,7 @@ title: "Prerequisites"
 description: "This document outlines the prerequisites necessary to get started."
 ---
 
-To use Kubernetes, you need to have the following tools installed in your local environment:
+To use Kubernetes, you must have the following tools installed in your local environment:
 
 - `kubectl`: Kubernetes Control CLI tool, installed and connected to your cluster
 - `helm`: Kubernetes Helm CLI tool

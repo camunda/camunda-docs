@@ -43,7 +43,7 @@ In this section, we will install all the available Zeebe components inside a Kub
 ```
 
 :::note
-change &gt;RELEASE NAME&lt; with a name of your choice.
+Change &gt;RELEASE NAME&lt; with a name of your choice.
 :::
 
 :::note

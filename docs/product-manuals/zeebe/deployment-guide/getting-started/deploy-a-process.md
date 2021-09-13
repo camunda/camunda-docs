@@ -3,9 +3,11 @@ id: deploy-a-process
 title: "Deploy a process"
 ---
 
-_In this section, we're going to start up the Zeebe broker as well as Camunda Operate, a tool that gives you visibility into deployed processes and running process instances and contains tooling for fixing problems in those process instances._
+In this section, we'll start up the Zeebe broker and Camunda Operate—a tool that gives you visibility into deployed processes and running process instances, and contains tooling for fixing problems in those process instances.
 
-_We offer Operate free of charge for unrestricted **non-production** use because we think it's a great tool for getting familiar with Zeebe and building initial proofs-of-concept. And at this time, Operate is available for non-production use only. In the future, we'll offer an Operate enterprise license that allows for production use, too._
+:::note
+We offer Operate free of charge for unrestricted **non-production** use only because we think it's a great tool for getting familiar with Zeebe and building initial proofs-of-concept. In the future, we'll offer an Operate enterprise license that allows for production use, too.
+:::
 
 Before we run the Zeebe broker, we need to configure an Elasticsearch exporter in the Zeebe configuration file. Which leads to the question: what's an exporter, and why is Elasticsearch a part of this tutorial?
 
@@ -15,15 +17,19 @@ Elasticsearch is also what Camunda Operate uses to store data, so to run Operate
 
 ## Docker compose
 
-If you are using Docker and [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) then follow the instructions in the README file in the `operate` directory of that repository to start Zeebe and Operate. Once you have done that, skip the following section, and continue from [check the status of the broker](#check-the-status-of-the-broker).
+If you are using Docker and [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose), follow the instructions in the README file in the `operate` directory of that repository to start Zeebe and Operate. Then, you can skip the following section, and continue from [check the status of the broker](#check-the-status-of-the-broker).
 
-If you are using individual components, then you will need to manually configure and start components.
+If you are using individual components, you'll need to manually configure and start components.
 
 ## Manually configure and start Zeebe and Operate
 
-_These instructions are for using separate components, and are not necessary when using Docker._
+:::note
+These instructions are for using separate components, and are not necessary when using Docker.
+:::
 
-First, copy the following lines into a new file `getting-started.yaml` file (in the `config` directory of the Zeebe broker).
+Take the following steps:
+
+1. Copy the following lines into a new file `getting-started.yaml` file (in the `config` directory of the Zeebe broker).
 
 ```
 zeebe:
@@ -35,11 +41,11 @@ zeebe:
 
 These settings enable the Zeebe Elasticsearch exporter.
 
-> **Note:** Some command examples might not work on Windows if you use cmd or
-> Powershell. For Windows users we recommend to use a bash-like shell, i.e. Git
-> Bash, Cygwin or MinGW for this guide.
+:::note
+Some command examples might not work on Windows if you use cmd or Powershell. For Windows users, we recommend using a bash-like shell such as Git Bash, Cygwin, or MinGW for this guide.
+:::
 
-Next, open Terminal or another command line tool and start up Elasticsearch.
+2. Open Terminal or another command line tool and start up Elasticsearch.
 
 ```
 cd elasticsearch-6.7.0
@@ -57,26 +63,26 @@ bin/elasticsearch
 bin\elasticsearch.bat
 ```
 
-You'll know that startup was successful when you see something like:
+You'll know startup was successful when you see something like the following:
 
 ```
 [2019-04-05T10:26:22,288][INFO ][o.e.n.Node ] [oy0juRR] started
 ```
 
-Then start the Zeebe broker in another Terminal window.
+3. Start the Zeebe broker in another Terminal window.
 
 ```
 ./bin/broker --spring.config.location=file:./config/getting-started.yaml
 ```
 
-And finally, start Operate in yet another Terminal window. Note that you'll need port 8080 in order to run Operate and access the UI, so be sure to check that it's available.
+4. Start Operate in another Terminal window. Note that you'll need port 8080 to run Operate and access the UI, so be sure to check it's available.
 
 ```
 cd camunda-operate-distro-1.0.0-RC2
 bin/operate
 ```
 
-To confirm that Operate was started, go to [http://localhost:8080](http://localhost:8080). You should see the following:
+To confirm Operate was started, go to [http://localhost:8080](http://localhost:8080). You should see the following:
 
 ![Zeebe Configuration File](assets/Operate-Login-Page.png)
 
@@ -88,7 +94,7 @@ You can use the Zeebe CLI to check the status of your broker. Open a new Termina
 
 If you are using Docker, change into the `zeebe-docker-compose` directory.
 
-If you are using separate components, then change into the Zeebe broker directory.
+If you are using separate components, change into the Zeebe broker directory.
 
 Run the following:
 
@@ -121,9 +127,9 @@ Brokers:
     Partition 0 : Leader
 ```
 
-For all Zeebe-related operations moving forward, we'll be using Zeebe's command-line interface (CLI). In a real-world deployment, you likely wouldn't rely on the CLI to send messages or create job workers. Rather, you would embed Zeebe clients in worker microservices that connect to the Zeebe engine.
+For all Zeebe-related operations moving forward, we'll use Zeebe's command-line interface (CLI). In a real-world deployment, you likely wouldn't rely on the CLI to send messages or create job workers. Rather, you would embed Zeebe clients in worker microservices that connect to the Zeebe engine.
 
-But for the sake of keeping this guide simple (and language agnostic), we're going to use the CLI.
+For the sake of keeping this guide simple (and language agnostic), we're going to use the CLI.
 
 ## Deploy the worklfow
 
@@ -163,11 +169,11 @@ You should see a response like this one:
 }
 ```
 
-Now we'll take a look at the Operate user interface:
+Now, we'll take a look at the Operate user interface:
 
-- Go to [http://localhost:8080](http://localhost:8080) and use the credentials `demo` / `demo` to access Operate
-- Click on the `Running Instances` option in the navigation bar at the top of the interface
-- Select the `order-process` process from the **Processes** selector on the left side of the screen
+1. Go to [http://localhost:8080](http://localhost:8080) and use the credentials `demo` / `demo` to access Operate.
+2. Click on the `Running Instances` option in the navigation bar at the top of the interface.
+3. Select the `order-process` process from the **Processes** selector on the left side of the screen.
 
 You should see the process model we just deployed – the same model we built in the previous section. You won't see any process instances because we haven't created them yet, and that's exactly what we'll do in the next section.
 
