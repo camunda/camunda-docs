@@ -80,8 +80,8 @@ import ReceiveTaskInstantiatedSvg from './assets/bpmn-symbols/receive-task-insta
     <a href="script-tasks/script-tasks">
         <ScriptTaskSvg className="implemented" />
     </a>    
-    <a href="#">
-        <ManualTaskSvg />
+    <a href="manual-tasks/manual-tasks">
+        <ManualTaskSvg className="implemented"/>
     </a>    
     <a href="#">
         <ReceiveTaskInstantiatedSvg />
