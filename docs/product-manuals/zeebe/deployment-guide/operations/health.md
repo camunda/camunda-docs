@@ -15,12 +15,12 @@ Zeebe broker exposes two http endpoints to query its health status:
 ### Startup check
 
 Startup check endpoint is exposed via `http://{zeebe-broker}:{zeebe.broker.network.monitoringApi.port}/startup` (by default port 9600).
-This endpoint return an empty 204 response. If it is not ready, it will return a 503 error.
+This endpoint returns an empty 204 response. If it is not ready, it will return a 503 error.
 
 A broker has successfully started when:
 1. The broker has found other brokers in the cluster.
 1. All partitions owned by this broker have started and participate in replication.
-2. Other necessary services has started.
+2. Other necessary services have started.
 
 A successful startup does not mean the broker is ready to process requests.
 The broker is ready only after startup has successfully completed.
@@ -28,34 +28,34 @@ The broker is ready only after startup has successfully completed.
 ### Ready check
 
 Ready check endpoint is exposed via `http://{zeebe-broker}:{zeebe.broker.network.monitoringApi.port}/ready` (by default port 9600).
-This endpoint return an empty 204 response. If it is not ready, it will return a 503 error.
+This endpoint returns an empty 204 response. If it is not ready, it will return a 503 error.
 
-A broker is ready when it has installed all necessary services to start processing in all partitions.
-A broker is ready doesn't mean that it is the leader for the partitions.
-It only means that it is participating in the replication and can be either a leader or a follower of all the partitions that is assigned to it.
-Once it is ready it will never become unready again.
+A broker is ready when it installs all necessary services to start processing in all partitions.
+If a broker is ready, it doesn't mean it's the leader for the partitions.
+It means it is participating in the replication and can be either a leader or a follower of all the partitions that are assigned to it.
+Once it is ready, it never becomes unready again.
 
-A ready check is useful, for example, to use as a `readinessProbe` in a kubernetes configuration to control when a pod can be restarted for rolling upgrade.
+A ready check is useful, for example, to use as a `readinessProbe` in a Kubernetes configuration to control when a pod can be restarted for rolling upgrade.
 Depending on the cluster configuration, restarting one pod before the previous one is ready might make the system unavailable because the quorum of replicas is not available.
-By configuring a `readinessProbe` that uses the ready check endpoint we can inform Kubernetes when it is safe to proceed with rolling update.
+By configuring a `readinessProbe` that uses the ready check endpoint, we can inform Kubernetes when it is safe to proceed with the rolling update.
 
 ### Health check
 
 Health check endpoint is exposed via `http://{zeebe-broker}:{zeebe.broker.network.monitoringApi.port}/health` (by default port 9600).
-This endpoint return an empty 204 response if the broker is healthy. If it is not healthy, it will return a 503 error.
+This endpoint returns an empty 204 response if the broker is healthy. If it is not healthy, it will return a 503 error.
 A broker is never healthy before it is ready.
 Unlike ready check, a broker can become unhealthy after it is healthy.
-Hence it gives a better status of a running broker.
+Hence, it gives a better status of a running broker.
 
-A broker is healthy, when it can process processes, accepts commands, and perform all its expected tasks.
-If it is unhealthy, then it can mean three things:
+A broker is healthy when it can process processes, accept commands, and perform all its expected tasks.
+If it is unhealthy, it may mean three things:
 
-- **it is only temporarily unhealthy**, e.g. due to environmental circumstances such as temporary I/O issues
-- **it is partially unhealthy**, could mean that one or more partitions is unhealthy, while the rest of them are able to process processes
-- **it is completely dead**
+- **It is only temporarily unhealthy**: For example, due to environmental circumstances such as temporary I/O issues.
+- **It is partially unhealthy**: One or more partitions could be unhealthy, while the rest of them are able to process processes.
+- **It is completely dead**
 
 [Metrics](metrics.md) give more insight into which partition is healthy or unhealthy.
-When a broker becomes unhealthy, it is recommended to check the logs to see what went wrong.
+When a broker becomes unhealthy, it's recommended to check the logs to see what went wrong.
 
 ## Gateway
 
@@ -79,7 +79,7 @@ The gateway is healthy if it:
 
 ### Startup probe
 
-The gateway is started if it finished its boot sequence successfully and is ready to receive requests. It is no longer started when it initiated the shutdown sequence.
+The gateway starts if it finished its boot sequence successfully and is ready to receive requests. It no longer starts when it initiates the shutdown sequence.
 
 The started probe can be used as Kubernetes startup probe.
 
@@ -90,21 +90,21 @@ The gateway is live if it:
 - Started successfully
 - Has a minimal amount of free memory and disk space to work with
 - Is able to respond to requests within a defined timeout, or misses the timeout for less than 10 minutes
-- Is aware of other nodes in the cluster, or lost awareness of other nodes for less than 5 minutes
-- Is aware of leaders for partitions, or lost awareness of partition leaders for less than 5 minutes
+- Is aware of other nodes in the cluster, or lost awareness of other nodes for less than five minutes
+- Is aware of leaders for partitions, or lost awareness of partition leaders for less than five minutes
 
 The liveness probe can be used as Kubernetes liveness probe.
 
 ### Status responses
 
-Each endpoint returns a status which can be one of
+Each endpoint returns a status which can be one of the following:
 
 - `UNKNWON` (HTTP status code 200)
 - `UP` (HTTP status code 200)
 - `DOWN` (HTTP status code 503)
 - `OUT_OF_SERVICE` (HTTP status code 503)
 
-If details are enabled (default) the response will also contain additional details.
+If details are enabled (default), the response will also contain additional details.
 
 ### Customization
 

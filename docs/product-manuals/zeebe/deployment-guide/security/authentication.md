@@ -22,19 +22,21 @@ Transport layer security in the gateway is disabled by default. This means that 
     privateKeyPath:
 ```
 
-`enabled` should be either `true` or `false`, where true will enable TLS authentication between client and gateway, and false will disable it. `certificateChainPath` and `privateKeyPath` are used to configure the certificate with which the server will authenticate itself. `certificateChainPath` should be a file path pointing to a certificate chain in PEM format representing the server's certificate, and `privateKeyPath` a file path pointing to the certificate's PKCS8 private key, also in PEM format.
+`enabled` should be either `true` or `false`, where true will enable TLS authentication between client and gateway, and false will disable it. `certificateChainPath` and `privateKeyPath` are used to configure the certificate with which the server will authenticate itself. `certificateChainPath` should be a file path pointing to a certificate chain in PEM format representing the server's certificate, and `privateKeyPath` is a file path pointing to the certificate's PKCS8 private key, also in PEM format.
 
 Additionally, as you can see in the configuration file, each value can also be configured through an environment variable. The environment variable to use again depends on whether you are using a standalone gateway or an embedded gateway.
 
 ## Clients
 
-Unlike the gateway, TLS is enabled by default in all of Zeebe's supported clients. The following sections will show how to disable or properly configure each client.
+Unlike the gateway, TLS is enabled by default in all of Zeebe's supported clients. The following sections show how to disable or properly configure each client.
 
-> **Note:** Disabling TLS should only be done for testing or development. During production deployments, clients and gateways should be properly configured to establish secure connections.
+:::note
+Disabling TLS should only be done for testing or development. During production deployments, clients and gateways should be properly configured to establish secure connections.
+:::
 
 ### Java
 
-Without any configuration, the client will look in system's certificate store for a CA certificate with which to validate the gateway's certificate chain. If you wish to use TLS without having to install a certificate in client's system, you can specify a CA certificate:
+Without any configuration, the client looks in the system's certificate store for a CA certificate with which to validate the gateway's certificate chain. If you wish to use TLS without having to install a certificate in client's system, you can specify a CA certificate:
 
 
 ```java
@@ -46,9 +48,9 @@ public class SecureClient {
     }
 }
 ```
-Alternatively, you can use the `ZEEBE_CA_CERTIFICATE_PATH` environment variable to override the code configuration.
+Alternatively, use the `ZEEBE_CA_CERTIFICATE_PATH` environment variable to override the code configuration.
 
-In order to disable TLS in a Java client, you can use the `.usePlaintext()` option:
+To disable TLS in a Java client, use the `.usePlaintext()` option:
 
 ```java
 public class InsecureClient {
@@ -60,11 +62,11 @@ public class InsecureClient {
 }
 ```
 
-Alternatively, you can use the `ZEEBE_INSECURE_CONNECTION` environment variable to override the code configuration. To enable an insecure connection, you can it to "true". To use a secure connection, you can set it any non-empty value other than "true". Setting the environment variable to an empty string is equivalent to unsetting it.
+Alternatively, use the `ZEEBE_INSECURE_CONNECTION` environment variable to override the code configuration. To enable an insecure connection, set it to **true**. To use a secure connection, set it to any non-empty value other than **true**. Setting the environment variable to an empty string is equivalent to unsetting it.
 
 ### Go
 
-Similarly to the Java client, if no CA certificate is specified then the client will look in the default location for a CA certificate with which to validate the gateway's certificate chain. It's also possible to specify a path to a CA certificate in the Go client:
+Similarly to the Java client, if no CA certificate is specified, the client will look in the default location for a CA certificate with which to validate the gateway's certificate chain. It's also possible to specify a path to a CA certificate in the Go client:
 
 ```go
 package test
@@ -82,7 +84,7 @@ func main() {
 	// ...
 }
 ```
-To disable TLS, you can simply do:
+To disable TLS, execute the following:
 
 ```go
 package test
@@ -121,7 +123,7 @@ Since `zbctl` is based on the Go client, setting the appropriate environment var
 
 ## Troubleshooting authentication issues
 
-Here we will describe a few ways that the clients and gateway could be misconfigured and what those errors look like. Hopefully, this will help you recognize these situations and provide you with an easy fix.
+Here we will describe a few ways the clients and gateway could be misconfigured and what those errors look like. Hopefully, this will help you recognize these situations and provide an easy fix.
 
 ### TLS is enabled in `zbctl` but disabled in the gateway
 
@@ -131,7 +133,7 @@ The client will fail with the following error:
 Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: authentication handshake failed: tls: first record does not look like a TLS handshake"
 ```
 
-And the following error will be logged by Netty in the gateway:
+The following error will be logged by Netty in the gateway:
 
 ```
 Aug 06, 2019 4:23:22 PM io.grpc.netty.NettyServerTransport notifyTerminated
@@ -166,6 +168,7 @@ __Solution:__ Either enable TLS in the gateway as well or specify the `--insecur
 ### TLS is disabled in `zbctl` but enabled for the gateway
 
 `zbctl` will fail with the following error:
+
 ```
 Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection closed
 ```

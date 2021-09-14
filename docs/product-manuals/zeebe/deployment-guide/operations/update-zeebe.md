@@ -9,21 +9,19 @@ import TabItem from "@theme/TabItem";
 
 ## Update
 
-Please see the [update guide](/guides/update-guide/introduction.md) for specific
-instructions per Zeebe version.
+See the [update guide](/guides/update-guide/introduction.md) for specific instructions per Zeebe version.
 
-To update a Zeebe cluster we recommend to follow these steps:
+To update a Zeebe cluster, take the following steps:
 
-1. Shutdown all Zeebe brokers and other components of the system
+1. Shut down all Zeebe brokers and other components of the system.
 1. Take a filesystem snapshot of you Zeebe broker `data` folder and
-   Elasticsearch `data` folder if used
-1. Update all Zeebe brokers and gateways to the new version
-1. Restart the system components
+   Elasticsearch `data` folder if used.
+1. Update all Zeebe brokers and gateways to the new version.
+1. Restart the system components.
 
 ## Partitions admin endpoint
 
 This endpoint allows querying the status of the partitions and performing operations to prepare an upgrade.
-
 
 The endpoint is available under `http://{zeebe-broker}:{zeebe.broker.network.monitoringApi.port}/actuator/partitions` (default port: `9600`).
 
@@ -35,7 +33,7 @@ management.endpoint.partitions.enabled=false
 
 ### Query the partition status
 
-The status of the partitions can be queried by a `GET` request:
+The status of the partitions can be queried with a `GET` request:
 ```
 /actuator/partitions
 ```
