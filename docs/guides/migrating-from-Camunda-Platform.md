@@ -453,6 +453,22 @@ The ```bpmn message name``` is used in both products and doesn't need migration.
 
 
 
+## Prepare For Smooth Migrations
+
+Whenever you build a process solution using Camunda Platform, you can follow these recommendation to create a process solution that will be easier to migrate later on:
+
+* Use Java, Maven, and Spring Boot
+* Separate your business logic from Camunda API
+* Use external tasks
+* Stick to basic usage of public API (no engine plugins or extensions)
+* Don't expose Camunda APIs (REST or Java) to front end apps
+* Use primitive variable types or JSON payloads only (no XML or serialized Java objects)
+* Use JSONPath on JSON payloads (translates easier to FEEL)
+* Stick to [BPMN elements supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage)
+* Use [FEEL as script language in BPMN](https://camunda.github.io/feel-scala/docs/reference/developer-guide/bootstrapping#use-as-script-engine), e.g. on Gateways
+* Use Camunda Forms (JSON)
+
+
 ## Open Issues
 
 As described earlier in this section, migration is an ongoing topic and this guide is far from being complete. There are open issues:
