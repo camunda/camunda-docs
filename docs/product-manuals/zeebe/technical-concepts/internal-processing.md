@@ -10,7 +10,7 @@ Internally, Zeebe is implemented as a collection of _stream processors_ working 
 - Record export \(streaming\),
 - Process evaluation \(asynchronous background tasks\)
 
-Record export solves the history problem - the stream provides exactly the kind of exhaustive audit log that a workflow engine needs to produce.
+Record export solves the history problem and the stream provides exactly the kind of exhaustive audit log a workflow engine needs to produce.
 
 ## State machines
 
@@ -31,7 +31,7 @@ Every state change in a state machine is called an _event_. Zeebe publishes ever
 State changes can be requested by submitting a _command_. A Zeebe broker receives commands from two sources:
 
 - Clients send commands remotely. Examples: Deploying processes, starting process instances, creating and completing jobs, etc.
-- The broker itself generates commands. Examples: Locking a job for exclusive processing by a worker, etc.
+- The broker itself generates commands. For example, locking a job for exclusive processing by a worker.
 
 Once received, a command is published as a record on the addressed stream.
 
@@ -45,15 +45,14 @@ A stream processor reads the record stream sequentially and interprets the comma
 1. If the command is not applicable, reject it. If it was sent by a client, send an error reply/response.
 1. Publish an event reporting the entity's new state.
 
-For example, processing the _Create Job_ command produces the event _Job Created_.
+For example, processing the **Create Job** command produces the event **Job Created**.
 
 ## Driving the engine
 
 As a workflow engine, Zeebe needs to continuously drive the execution of its processes.
 It achieves this by also writing follow-up commands to the stream as part of the processing of other commands.
 
-For example, when the _Complete Job_ command is processed, it does not just complete the job.
-It also writes the _Complete Activity_ command for the corresponding service task.
+For example, when the **Complete Job** command is processed, it does not just complete the job; it also writes the **Complete Activity** command for the corresponding service task.
 This command can in turn be processed, completing the service task and driving the execution of the process instance to the next step.
 
 ## Handling back-pressure
@@ -67,7 +66,7 @@ When the broker receives more requests than it can process with an acceptable la
 The maximum rate of requests that can be processed by a broker depends on the processing capacity of the machine, the network latency, current load of the system and so on.
 Hence, there is no fixed limit configured in Zeebe for the maximum rate of requests it accepts.
 Instead, Zeebe uses an adaptive algorithm to dynamically determine the limit of the number of inflight requests (the requests that are accepted by the broker, but not yet processed).
-The inflight request count is incremented when a request is accepted and decremented when a response is sent back to the client.
+The inflight request count is incremented when a request is accepted, and decremented when a response is sent back to the client.
 The broker rejects requests when the inflight request count reaches the limit.
 
 When the broker rejects requests due to back-pressure, the clients can retry them with an appropriate retry strategy.

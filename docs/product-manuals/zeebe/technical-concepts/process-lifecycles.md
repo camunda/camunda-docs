@@ -7,7 +7,7 @@ In Zeebe, the process execution is represented internally by events of type `Pro
 
 Each event is one step in a process instance lifecycle. All events of one process instance have the same `processInstanceKey`.
 
-Events which belongs to the same element instance (e.g. a task) have the same `key`. The element instances have different lifecycles depending on the type of element.
+Events which belong to the same element instance (e.g. a task) have the same `key`. The element instances have different lifecycles depending on the type of element.
 
 ## (Sub-)Process/Activity/Gateway lifecycle
 
@@ -25,7 +25,8 @@ Events which belongs to the same element instance (e.g. a task) have the same `k
 
 ![order process](assets/process.png)
 
-Given the above process a successful execution will yield the following records in the commit log:
+Given the above process, a successful execution yields the following records in the commit log:
+
 <table>
     <tr>
         <th>Intent</th>

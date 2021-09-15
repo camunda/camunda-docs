@@ -11,7 +11,7 @@ Find our Camunda Cloud and BMPN-focused material below:
 
 * [Drafting Your Camunda Cloud Architecture: Connecting The Workflow Engine With Your World](https://blog.bernd-ruecker.com/drafting-your-camunda-cloud-architecture-connecting-the-workflow-engine-with-your-world-3d94e8d404d6)
 * [Service Integration Patterns With BPMN And Camunda Cloud](https://blog.bernd-ruecker.com/service-integration-patterns-with-bpmn-and-camunda-cloud-53b0f458e49)
-* [Writing Good Workers For Camunda Cloud ](https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862)
+* [Writing Good Workers For Camunda Cloud](https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862)
 
 ## Camunda's Best Practices hub
 
