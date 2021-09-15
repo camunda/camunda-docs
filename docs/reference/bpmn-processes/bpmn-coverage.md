@@ -281,8 +281,8 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
         <td></td>
         <td></td>
         <td>
-            <a href="#">
-                <NoneThrowEventSvg />
+            <a href="none-events/none-events">
+                <NoneThrowEventSvg className="implemented" />
             </a>
         </td>
         <td>
