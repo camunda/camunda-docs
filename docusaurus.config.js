@@ -9,7 +9,7 @@ module.exports = {
   favicon: "img/favicon.ico",
   organizationName: "camunda-cloud", // Usually your GitHub org/user name.
   projectName: "camunda-cloud-documentation", // Usually your repo name.
-  trailingSlash: false,
+  trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
   plugins: [

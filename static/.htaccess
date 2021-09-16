@@ -7,5 +7,5 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 Options -Indexes
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
-RewriteRule docs/product-manuals/(.*) docs/components/$1
-RewriteRule docs/product-manuals docs/components
+RewriteRule ^docs/product-manuals/(.*)$ /docs/components/$1 [R=301,L]
+RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
