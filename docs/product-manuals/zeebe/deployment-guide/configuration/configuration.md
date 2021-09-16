@@ -13,8 +13,9 @@ Zeebe can be configured through the following:
 
 If both configuration files and environment variables are present, environment variables overwrite settings in configuration files.
 
-If you want to make small changes to the configuration, we recommend using environment variables.
-If you want to make big changes to the configuration, we recommend using a configuration file.
+To make small changes to the configuration, we recommend using environment variables.
+
+To make big changes to the configuration, we recommend using a configuration file.
 
 The configuration is applied during startup of Zeebe. It is not possible to change the configuration at runtime.
 
