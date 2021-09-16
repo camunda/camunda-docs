@@ -48,4 +48,4 @@ An event subprocess with an interrupting timer start event:
 ### References
 
 - [Embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md)
-- [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)
+- [Variable scopes](/components/concepts/variables.md#variable-scopes)

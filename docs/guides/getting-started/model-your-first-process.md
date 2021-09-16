@@ -23,15 +23,15 @@ Using Cloud Modeler, processes are designed and deployed, and new instances are 
 
 2. Click **Create New Diagram**.
 
-![console-modeler](../../product-manuals/modeler/cloud-modeler/img/bpmn-diagrams-overview.png)
+![console-modeler](../../components/modeler/cloud-modeler/img/bpmn-diagrams-overview.png)
 
 3. Give your diagram a name like `Getting Started`.
 
-![console-modeler-new-diagram](../../product-manuals/modeler/cloud-modeler/img/cloud-modeler-new-diagram.png)
+![console-modeler-new-diagram](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram.png)
 
 4. The **Save** button should now appear. Save your diagram.
 
-![console-modeler-new-diagram](../../product-manuals/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-name.png)
+![console-modeler-new-diagram](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-name.png)
 
 </TabItem>
 

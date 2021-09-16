@@ -9,7 +9,7 @@ A service task represents a work item in the process with a specific type.
 
 When a service task is entered, a corresponding job is created. The process instance stops here and waits until the job is complete.
 
-A [job worker](/product-manuals/concepts/job-workers.md) can subscribe to the job type, process the jobs, and complete them using one of the Zeebe clients. When the job is complete, the service task is completed and the process instance continues.
+A [job worker](/components/concepts/job-workers.md) can subscribe to the job type, process the jobs, and complete them using one of the Zeebe clients. When the job is complete, the service task is completed and the process instance continues.
 
 ## Task definition
 
@@ -17,7 +17,7 @@ A service task must have a `taskDefinition`. This specifies the type of job work
 
 Optionally, a `taskDefinition` can specify the number of times the job is retried when a worker signals failure (default = 3).
 
-Typically, the job type and the job retries are defined as static values (e.g. `order-items`) but they can also be defined as [expressions](/product-manuals/concepts/expressions.md) (e.g. `= "order-" + priorityGroup`). The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
+Typically, the job type and the job retries are defined as static values (e.g. `order-items`) but they can also be defined as [expressions](/components/concepts/expressions.md) (e.g. `= "order-" + priorityGroup`). The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
 
 ## Task headers
 
@@ -48,11 +48,11 @@ A service task with a custom header:
 
 ## Next steps
 
-Learn more about the concept of job types and how to set up a job worker via our [manual on job workers](/product-manuals/concepts/job-workers.md).
+Learn more about the concept of job types and how to set up a job worker via our [manual on job workers](/components/concepts/job-workers.md).
 
 ### References
 
-- [Job handling](/product-manuals/concepts/job-workers.md)
-- [Expressions](/product-manuals/concepts/expressions.md)
-- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
-- [Incidents](/product-manuals/concepts/incidents.md)
+- [Job handling](/components/concepts/job-workers.md)
+- [Expressions](/components/concepts/expressions.md)
+- [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+- [Incidents](/components/concepts/incidents.md)

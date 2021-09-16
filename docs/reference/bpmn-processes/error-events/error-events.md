@@ -80,4 +80,4 @@ A boundary error event:
 
 ### References
 
-- [Incidents](/product-manuals/concepts/incidents.md)
+- [Incidents](/components/concepts/incidents.md)

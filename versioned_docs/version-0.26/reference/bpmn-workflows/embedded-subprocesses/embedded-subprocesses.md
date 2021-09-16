@@ -96,4 +96,4 @@ By default, the local variables of the subprocess are not propagated (i.e. they 
 
 References:
 
-- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)

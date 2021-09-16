@@ -48,8 +48,8 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "product-manuals/overview",
-          label: "Product Manuals",
+          docId: "components/overview",
+          label: "Components",
           position: "left",
         },
         {

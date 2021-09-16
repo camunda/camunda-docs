@@ -34,7 +34,7 @@ In case of a **parallel** multi-instance activity, all instances are created whe
 
 ## Defining the collection to iterate over
 
-A multi-instance activity must have an `inputCollection` expression that defines the collection to iterate over (e.g. `= items`). Usually, it [accesses a variable](/product-manuals/concepts/expressions.md#access-variables) of the process instance that holds the collection. The expression is evaluated on activating the multi-instance body. It must result in an `array` of any type (e.g. `["item-1", "item-2"]`).
+A multi-instance activity must have an `inputCollection` expression that defines the collection to iterate over (e.g. `= items`). Usually, it [accesses a variable](/components/concepts/expressions.md#access-variables) of the process instance that holds the collection. The expression is evaluated on activating the multi-instance body. It must result in an `array` of any type (e.g. `["item-1", "item-2"]`).
 
 To access the current element of the `inputCollection` value within the instance, the multi-instance activity can define the `inputElement` variable (e.g. `item`). The element is stored as a local variable of the instance under the given name.
 
@@ -46,7 +46,7 @@ The output of a multi-instance activity (e.g. the result of a calculation) can b
 
 `outputCollection` defines the name of the variable under which the collected output is stored (e.g. `results`). It is created as a local variable of the multi-instance body and is updated when an instance is completed. When the multi-instance body is completed, the variable is propagated to its parent scope.
 
-`outputElement` is an expression that defines the output of the instance (e.g. `= result`). Usually, it [accesses a variable](/product-manuals/concepts/expressions.md#access-variables) of the instance that holds the output value. If the expression only accesses a variable or a nested property, it's created as a **local variable** of the instance. This variable should be updated with the output value; for example, by a job worker providing a variable with the name `result`. Since the variable is defined as a local variable, it is not propagated to its parent scope and is only visible within the instance.
+`outputElement` is an expression that defines the output of the instance (e.g. `= result`). Usually, it [accesses a variable](/components/concepts/expressions.md#access-variables) of the instance that holds the output value. If the expression only accesses a variable or a nested property, it's created as a **local variable** of the instance. This variable should be updated with the output value; for example, by a job worker providing a variable with the name `result`. Since the variable is defined as a local variable, it is not propagated to its parent scope and is only visible within the instance.
 
 When the instance is completed, the `outputElement` expression is evaluated and the result is inserted into the `outputCollection` at the same index as the `inputElement` of the `inputCollection`. Therefore, the order of the `outputCollection` is determined and matches to the `inputCollection`, even for parallel multi-instance activities. If the `outputElement` variable is not updated, `null` is inserted instead.
 
@@ -78,7 +78,7 @@ The input mappings can access the local variables of the instance (e.g. `inputEl
 
 The output mappings can be used to update the `outputElement` variable; for example, to extract a part of the job variables.
 
-**Example:** We have a call activity marked as a parallel multi-instance. When the called process instance completes, its variables are [merged](/product-manuals/concepts/variables.md#variable-propagation) into the call activity's process instance. Its result is collected in the output collection variable, but this has become a race condition where each completed child instance again overwrites this same variable. We end up with a corrupted output collection. An output mapping can be used to overcome this, because it restricts which variables are merged. In the case of:
+**Example:** We have a call activity marked as a parallel multi-instance. When the called process instance completes, its variables are [merged](/components/concepts/variables.md#variable-propagation) into the call activity's process instance. Its result is collected in the output collection variable, but this has become a race condition where each completed child instance again overwrites this same variable. We end up with a corrupted output collection. An output mapping can be used to overcome this, because it restricts which variables are merged. In the case of:
 
 - Parallel multi-instance call activity
 - Multi-instance output element: `=output`
@@ -111,6 +111,6 @@ A sequential multi-instance service task:
 
 ### References
 
-- [Variable scopes](/product-manuals/concepts/variables.md#variable-scopes)
-- [Expressions](/product-manuals/concepts/expressions.md)
-- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Variable scopes](/components/concepts/variables.md#variable-scopes)
+- [Expressions](/components/concepts/expressions.md)
+- [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)

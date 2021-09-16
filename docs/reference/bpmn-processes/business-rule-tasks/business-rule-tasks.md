@@ -9,7 +9,7 @@ modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 ![task](assets/business-rule-task.png)
 
 Business rule tasks behave exactly like [service tasks](../service-tasks/service-tasks.md). Both
-task types are based on jobs and [job workers](../../../product-manuals/concepts/job-workers.md).
+task types are based on jobs and [job workers](../../../components/concepts/job-workers.md).
 
 The differences between these task types are the visual representation (i.e. the task marker) and
 the semantics for the model.
@@ -63,5 +63,5 @@ A business rule task with a custom header:
 
 ### References
 
-- [Job handling](/product-manuals/concepts/job-workers.md)
-- [Variable mappings](/product-manuals/concepts/variables.md#inputoutput-variable-mappings)
+- [Job handling](/components/concepts/job-workers.md)
+- [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
