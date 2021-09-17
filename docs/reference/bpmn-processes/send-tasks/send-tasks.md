@@ -8,7 +8,7 @@ Kafka topic.
 
 ![task](assets/send-task.png)
 
-Send tasks behave exactly like [service tasks](../service-tasks/service-tasks.md). Both task
+Send tasks behave exactly like [service tasks](../../service-tasks/service-tasks). Both task
 types are based on jobs and [job workers](../../../components/concepts/job-workers.md). The
 differences between these task types are the visual representation (i.e. the task marker) and the
 semantics for the model.
@@ -17,7 +17,7 @@ When a process instance enters a send task, it creates a corresponding job and w
 completion. A job worker should request jobs of this job type and process them. When the job is
 complete, the process instance continues.
 
-:::info 
+:::info
 
 Jobs for send tasks are not processed by Zeebe itself. To process them, provide
 a job worker.
@@ -26,13 +26,13 @@ a job worker.
 
 ## Defining a task
 
-A send task must define a [job type](../service-tasks/service-tasks#task-definition). It specifies
+A send task must define a [job type](../../service-tasks/service-tasks#task-definition). It specifies
 the type of job that workers should subscribe to (e.g. `kafka`).
 
-Use [task headers](../service-tasks/service-tasks#task-headers) to pass static parameters to the job
+Use [task headers](../../service-tasks/service-tasks#task-headers) to pass static parameters to the job
 worker (e.g. the name of the topic to publish the message to).
 
-Define [variable mappings](../service-tasks/service-tasks#variable-mappings) to transform the
+Define [variable mappings](../../service-tasks/service-tasks#variable-mappings) to transform the
 variables tpassed to the job worker, or to customize how the variables of the job merge
 in the process instance.
 

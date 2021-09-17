@@ -3,14 +3,14 @@ id: feel-unary-tests
 title: Unary tests
 ---
 
-Unary tests can be used only for input entries of a decision table. They are a special kind of expression with additional operators. The operators get the value of the input expression implicitly as the first argument. 
+Unary tests can be used only for input entries of a decision table. They are a special kind of expression with additional operators. The operators get the value of the input expression implicitly as the first argument.
 
 The result of the expression must be either `true` or `false`.
 
 A unary test expression is `true` if one of the following conditions is fulfilled:
 * the expression evaluates to `true` when the input value is applied to it
 * the expression evaluates to a list and the input value is equal to at least one of the values in that list
-* the expression evaluates to a value and the input value is equal to that value 
+* the expression evaluates to a value and the input value is equal to that value
 
 ### Comparison
 
@@ -24,13 +24,13 @@ Compare the input value to `x`.
 | greater than | `>` | `> 10` |
 | greater than or equal | `>=` | `>= 10` |
 
-* less than/greater than are only supported for: 
+* less than/greater than are only supported for:
   * number
   * date
   * time
   * date-time
   * year-month-duration
-  * day-time-duration 
+  * day-time-duration
 
 ### Interval
 
@@ -69,13 +69,13 @@ Test if the expression is `false`.
 not("valid")
 // input != "valid"
 
-not(2, 3)             
-// input != 2 and input != 3 
+not(2, 3)
+// input != 2 and input != 3
 ```
 
 ### Expression
 
-It is also possible to use a boolean [expression](feel-expression) instead of an operator. For example, invoking a built-in function.
+It is also possible to use a boolean [expression](../feel-expression) instead of an operator. For example, invoking a built-in function.
 
 The input value can be accessed by the special variable `?`.
 

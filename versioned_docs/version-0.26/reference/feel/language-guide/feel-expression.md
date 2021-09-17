@@ -316,7 +316,7 @@ The nested values of a specific key can be extracted by `.key`.
 
 ### Evaluate a unary tests
 
-Evaluates a [unary tests expression](feel-unary-tests) with the given value.
+Evaluates a [unary tests expression](../feel-unary-tests) with the given value.
 
 ```js
 x in (2..4)

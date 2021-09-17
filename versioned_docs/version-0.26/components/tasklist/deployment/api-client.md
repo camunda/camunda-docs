@@ -9,8 +9,8 @@ Tasklist provides an GraphQL API at endpoint `/graphql`.
 
 ## Authentication
 
-To access the API endpoint you need an access token. 
-Your client needs to send a header in each request: 
+To access the API endpoint you need an access token.
+Your client needs to send a header in each request:
 
 `Authorization: Bearer <Token>`
 
@@ -21,7 +21,7 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKE
 ```
 ### How to obtain the access token
 
-You need to obtain a token for using the Tasklist API. When you create a Tasklist [client](../../../guides/getting-started/setup-client-connection-credentials.md) 
+You need to obtain a token for using the Tasklist API. When you create a Tasklist [client](../../../guides/getting-started/setup-client-connection-credentials.md)
 you will get all the information you need to connect to Tasklist.
 
 See also [Build your own client](../../../components/clients/build-your-own-client.md)
@@ -38,7 +38,7 @@ authorization server url | Token issuer server | -
 You send a token issue POST request to the authorization server with the content:
 ```json
 {
-  "client_id": "<client-id>", 
+  "client_id": "<client-id>",
   "client_secret":"<client-secret>",
   "audience":"<audience>",
   "grant_type":"client_credentials"
@@ -66,7 +66,7 @@ If the authorization is successful, the authorization server sends back the acce
 
 To obtain the GraphQL schema you need to send a request to the endpoint with a GraphQL introspection query as described in https://graphql.org/learn/introspection/
 
-or you use the [generated API documentation](../../../reference/tasklist-api/schema)
+or you use the [generated API documentation](../../../../reference/tasklist-api/schema)
 
 There are also a lot of tools to explore GraphQL API's like this: https://altair.sirmuel.design
 
@@ -88,7 +88,7 @@ query {
     }
   }
 }
-```` 
+````
 
 ## Examples requests and responses
 

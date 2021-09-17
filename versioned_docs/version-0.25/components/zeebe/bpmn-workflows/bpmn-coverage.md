@@ -20,7 +20,7 @@ import LaneSvg from './assets/bpmn-symbols/lane.svg';
 <div className="bpmn-symbol-container">
     <a href="#">
         <PoolSvg className="implemented" />
-    </a>    
+    </a>
     <a href="#">
         <LaneSvg />
     </a>
@@ -34,13 +34,13 @@ import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
 import TransactionalSubprocessSvg from './assets/bpmn-symbols/transactional-subprocess.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="embedded-subprocesses/embedded-subprocesses">
+    <a href="../embedded-subprocesses/embedded-subprocesses">
         <EmbeddedSubprocessSvg className="implemented" />
     </a>
-    <a href="call-activities/call-activities">
+    <a href="../call-activities/call-activities">
         <CallActivitySvg className="implemented" />
     </a>
-    <a href="event-subprocesses/event-subprocesses">
+    <a href="../event-subprocesses/event-subprocesses">
         <EventSubprocessSvg className="implemented" />
     </a>
     <a href="#">
@@ -61,30 +61,30 @@ import UndefinedTaskSvg from './assets/bpmn-symbols/undefined-task.svg'
 import ReceiveTaskInstantiatedSvg from './assets/bpmn-symbols/receive-task-instantiated.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="service-tasks/service-tasks">
+    <a href="../service-tasks/service-tasks">
         <ServiceTaskSvg className="implemented" />
-    </a>    
+    </a>
     <a href="#">
         <UserTaskSvg />
-    </a>    
-    <a href="receive-tasks/receive-tasks">
+    </a>
+    <a href="../receive-tasks/receive-tasks">
         <ReceiveTaskSvg className="implemented" />
-    </a>    
+    </a>
     <a href="#">
         <SendTaskSvg />
-    </a>    
+    </a>
     <a href="#">
         <BusinessRuleTaskSvg />
-    </a>    
+    </a>
     <a href="#">
         <ScriptTaskSvg />
-    </a>    
+    </a>
     <a href="#">
         <ManualTaskSvg />
-    </a>    
+    </a>
     <a href="#">
         <ReceiveTaskInstantiatedSvg />
-    </a>    
+    </a>
     <a href="#">
         <UndefinedTaskSvg />
     </a>
@@ -99,18 +99,18 @@ import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
 import ComplexGatewaySvg from './assets/bpmn-symbols/complex-gateway.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="exclusive-gateways/exclusive-gateways">
+    <a href="../exclusive-gateways/exclusive-gateways">
         <ExclusiveGatewaySvg className="implemented" />
-    </a>    
-    <a href="parallel-gateways/parallel-gateways">
+    </a>
+    <a href="../parallel-gateways/parallel-gateways">
         <ParallelGatewaySvg className="implemented" />
-    </a>    
-    <a href="event-based-gateways/event-based-gateways">
+    </a>
+    <a href="../event-based-gateways/event-based-gateways">
         <EventBasedGatewaySvg className="implemented" />
-    </a>    
+    </a>
     <a href="#">
         <InclusiveGatewaySvg />
-    </a>    
+    </a>
     <a href="#">
         <ComplexGatewaySvg />
     </a>
@@ -124,15 +124,15 @@ import LoopSvg from './assets/bpmn-symbols/loop.svg'
 import CompensationSvg from './assets/bpmn-symbols/compensation.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="multi-instance/multi-instance">
+    <a href="../multi-instance/multi-instance">
         <MultiInstanceParallelSvg className="implemented" />
-    </a>    
-    <a href="multi-instance/multi-instance">
+    </a>
+    <a href="../multi-instance/multi-instance">
         <MultiInstanceSequentialSvg className="implemented" />
-    </a>    
+    </a>
     <a href="#">
         <LoopSvg />
-    </a>    
+    </a>
     <a href="#">
         <CompensationSvg />
     </a>
@@ -146,7 +146,7 @@ import DataStoreSvg from './assets/bpmn-symbols/data-store.svg'
 <div className="bpmn-symbol-container">
     <a href="#">
         <DataObjectSvg />
-    </a>    
+    </a>
     <a href="#">
         <DataStoreSvg />
     </a>
@@ -160,7 +160,7 @@ import GroupSvg from './assets/bpmn-symbols/group.svg'
 <div className="bpmn-symbol-container">
     <a href="#">
         <AnnotationSvg className="implemented" />
-    </a>    
+    </a>
     <a href="#">
         <GroupSvg className="implemented" />
     </a>
@@ -267,10 +267,10 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
   <tbody>
     <tr>
         <td>
-            <a href="none-events/none-events">None</a>        
+            <a href="../none-events/none-events">None</a>
         </td>
         <td>
-            <a href="none-events/none-events">
+            <a href="../none-events/none-events">
                 <NoneStartEventSvg className="implemented" />
             </a>
         </td>
@@ -285,42 +285,42 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
             </a>
         </td>
         <td>
-            <a href="none-events/none-events">
+            <a href="../none-events/none-events">
                 <NoneEndEventSvg className="implemented" />
             </a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="message-events/message-events">Message</a>        
+            <a href="../message-events/message-events">Message</a>
         </td>
         <td>
-            <a href="message-events/message-events">
+            <a href="../message-events/message-events">
                 <MessageStartEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="message-events/message-events">
+            <a href="../message-events/message-events">
                 <MessageEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="message-events/message-events">
+            <a href="../message-events/message-events">
                 <MessageEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="message-events/message-events">
+            <a href="../message-events/message-events">
                 <MessageCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="message-events/message-events">
+            <a href="../message-events/message-events">
                 <MessageBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="message-events/message-events">
+            <a href="../message-events/message-events">
                 <MessageBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
@@ -337,35 +337,35 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            <a href="timer-events/timer-events">Timer</a>        
+            <a href="../timer-events/timer-events">Timer</a>
         </td>
         <td>
-            <a href="timer-events/timer-events">
+            <a href="../timer-events/timer-events">
                 <TimerStartEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="timer-events/timer-events">
+            <a href="../timer-events/timer-events">
                 <TimerEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="timer-events/timer-events">
+            <a href="../timer-events/timer-events">
                 <TimerEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="timer-events/timer-events">
+            <a href="../timer-events/timer-events">
                 <TimerCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="timer-events/timer-events">
+            <a href="../timer-events/timer-events">
                 <TimerBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="timer-events/timer-events">
+            <a href="../timer-events/timer-events">
                 <TimerBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
@@ -374,32 +374,32 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            <a href="error-events/error-events">Error</a>        
+            <a href="../error-events/error-events">Error</a>
         </td>
         <td></td>
         <td>
-            <a href="error-events/error-events">
+            <a href="../error-events/error-events">
                 <ErrorEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td></td>
         <td>
-            <a href="error-events/error-events">
+            <a href="../error-events/error-events">
                 <ErrorBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td></td>
         <td>
-            <a href="error-events/error-events">
+            <a href="../error-events/error-events">
                 <ErrorEndEventSvg className="implemented" />
             </a>
         </td>
     </tr>
     <tr>
         <td>
-            Signal        
+            Signal
         </td>
         <td>
             <a href="#">
@@ -444,7 +444,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Conditional        
+            Conditional
         </td>
         <td>
             <a href="#">
@@ -481,7 +481,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Escalation        
+            Escalation
         </td>
         <td></td>
         <td>
@@ -518,7 +518,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Compensation        
+            Compensation
         </td>
         <td></td>
         <td>
@@ -547,7 +547,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Cancel        
+            Cancel
         </td>
         <td></td>
         <td></td>
@@ -568,7 +568,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Termination        
+            Termination
         </td>
         <td></td>
         <td></td>
@@ -585,7 +585,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Link        
+            Link
         </td>
         <td></td>
         <td></td>
@@ -606,7 +606,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Multiple        
+            Multiple
         </td>
         <td>
             <a href="#">
@@ -651,7 +651,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Multiple Parallel        
+            Multiple Parallel
         </td>
         <td>
             <a href="#">
