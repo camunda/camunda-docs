@@ -11,7 +11,7 @@ Please note the following important considerations:
 
 2. **It is not necessarily recommended to migrate from Camunda Platform to Camunda Cloud**. Camunda Platform is a great product with existing support; there is no need to migrate existing solutions unless you have a good reason to (e.g. run it on SaaS, certain requirements on scalability or fault-tolerance, etc.) Therefore, we view migration more as an exception than a rule. Still, knowing the basic steps of migration can be helpful in building solutions with Camunda Platform, that will make migration easier in the future if necessary.
 
-Planning to migrate your project? [Talk to us](https://camunda.com/contact/) so we can help where needed.
+Planning to migrate your project? [Talk to us](https://docs.camunda.io/contact/) so we can help where needed.
 
 ## Migration overview
 
@@ -384,7 +384,7 @@ As described earlier in this guide, migration is an ongoing topic and this guide
 
 And even more. 
 
-Please [reach out to us](https://camunda.com/contact/) to discuss your specific migration use case.
+Please [reach out to us](https://docs.camunda.io/contact/) to discuss your specific migration use case.
 
 ## Summary
 
