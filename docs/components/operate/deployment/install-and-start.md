@@ -8,7 +8,7 @@ description: "Let's get started with Operate with these simple installation step
 
 You can use the Docker image `camunda/operate:latest` to run Operate as a container.
 
-Ensure you set the appropriate settings described in the [configuration](../deployment/configuration) section of the deployment guide. See an example configuration for `docker-compose` below:
+Ensure you set the appropriate settings described in the [configuration](../configuration) section of the deployment guide. See an example configuration for `docker-compose` below:
 
 ```
 operate:
@@ -24,7 +24,7 @@ operate:
 
 ## Manual configuration (local development)
 
-Here, we’ll walk you through how to download and run an Operate distribution manually without using Docker. 
+Here, we’ll walk you through how to download and run an Operate distribution manually without using Docker.
 
 :::note
 The Operate web UI is available by default at [http://localhost:8080](http://localhost:8080). Ensure this port is available.
@@ -38,11 +38,11 @@ Operate and Zeebe distributions are available for download on the same [release 
 Each version of Operate is compatible with a specific version of Zeebe.
 :::
 
-On the Zeebe release page, compatible versions of Zeebe and Operate are grouped together. Ensure you download and use compatible versions. This is handled for you if you use the Docker profile from our repository. 
+On the Zeebe release page, compatible versions of Zeebe and Operate are grouped together. Ensure you download and use compatible versions. This is handled for you if you use the Docker profile from our repository.
 
 ### Download Elasticsearch
 
-Operate uses open-source Elasticsearch as its underlying data store. Therefore to run Operate, you must download and run Elasticsearch. 
+Operate uses open-source Elasticsearch as its underlying data store. Therefore to run Operate, you must download and run Elasticsearch.
 
 Operate is currently compatible with Elasticsearch 7.12.1. Download Elasticsearch [here](https://www.elastic.co/downloads/past-releases/elasticsearch-7-12-1).
 
@@ -61,7 +61,7 @@ You’ll know Elasticsearch has started successfully when you see a message simi
 [INFO ][o.e.l.LicenseService     ] [-IbqP-o] license [72038058-e8ae-4c71-81a1-e9727f2b81c7] mode [basic] - valid
 ```
 
-### Run Zeebe 
+### Run Zeebe
 
 To run Zeebe, execute the following command:
 
@@ -97,9 +97,9 @@ INFO 1416 --- [       Thread-4] o.c.o.z.ZeebeESImporter                  : Elast
 
 ## Access the Operate web interface
 
-The Operate web interface is available at [http://localhost:8080](http://localhost:8080). 
+The Operate web interface is available at [http://localhost:8080](http://localhost:8080).
 
-The first screen you'll see is a sign-in page. Use the credentials `demo` / `demo` to sign in. 
+The first screen you'll see is a sign-in page. Use the credentials `demo` / `demo` to sign in.
 
 After you sign in, you'll see an empty dashboard if you haven't yet deployed any processes:
 

@@ -6,7 +6,7 @@ title: Install and start Tasklist
 
 You can use the Docker image `camunda/tasklist:latest` to run Tasklist as container.
 
-Please make sure to set appropriate settings described in [configuration](../deployment/configuration) section of deployment guide.
+Please make sure to set appropriate settings described in [configuration](../../deployment/configuration) section of deployment guide.
 Here an example configuration for `docker-compose`:
 ```
 tasklist:

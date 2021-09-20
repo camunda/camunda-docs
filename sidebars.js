@@ -304,6 +304,7 @@ module.exports = {
             "reference/bpmn-processes/business-rule-tasks/business-rule-tasks",
             "reference/bpmn-processes/script-tasks/script-tasks",
             "reference/bpmn-processes/send-tasks/send-tasks",
+            "reference/bpmn-processes/manual-tasks/manual-tasks"
           ],
         },
         {

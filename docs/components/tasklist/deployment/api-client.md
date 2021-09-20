@@ -10,9 +10,9 @@ Tasklist provides a GraphQL API at endpoint `/graphql`.
 
 ## Authentication
 
-To access the API endpoint, you need an access token. 
+To access the API endpoint, you need an access token.
 
-Your client must send a header in each request: 
+Your client must send a header in each request:
 
 `Authorization: Bearer <Token>`
 
@@ -41,7 +41,7 @@ You send a token issue POST request to the authorization server with the followi
 
 ```json
 {
-  "client_id": "<client-id>", 
+  "client_id": "<client-id>",
   "client_secret":"<client-secret>",
   "audience":"<audience>",
   "grant_type":"client_credentials"
@@ -67,7 +67,7 @@ If the authorization is successful, the authorization server sends back the acce
 
 ## Obtain GraphQL schema
 
-To obtain the GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](../../../reference/tasklist-api/schema).
+To obtain the GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](../../../../reference/tasklist-api/schema).
 
 There are also several tools to explore GraphQL APIs [here](https://altair.sirmuel.design).
 
@@ -90,7 +90,7 @@ query {
     }
   }
 }
-```` 
+````
 
 ## Example requests and responses
 

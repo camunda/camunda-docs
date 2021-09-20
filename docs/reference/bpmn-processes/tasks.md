@@ -12,3 +12,4 @@ Currently supported elements:
 * [Business rule tasks](business-rule-tasks/business-rule-tasks.md)
 * [Script tasks](script-tasks/script-tasks.md)
 * [Send tasks](send-tasks/send-tasks.md)
+* [Manual tasks](manual-tasks/manual-tasks.md)

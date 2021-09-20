@@ -79,7 +79,7 @@ function Home() {
           <div>
             <Link
               className={clsx('sign-up-link')}
-              to="https://camunda.io">
+              to="https://camunda.io/signup">
               Or sign up!
             </Link>
           </div>
