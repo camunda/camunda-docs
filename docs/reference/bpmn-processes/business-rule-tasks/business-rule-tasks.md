@@ -8,7 +8,7 @@ modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 
 ![task](assets/business-rule-task.png)
 
-Business rule tasks behave exactly like [service tasks](../service-tasks/service-tasks.md). Both
+Business rule tasks behave exactly like [service tasks](../../service-tasks/service-tasks). Both
 task types are based on jobs and [job workers](../../../components/concepts/job-workers.md).
 
 The differences between these task types are the visual representation (i.e. the task marker) and
@@ -18,7 +18,7 @@ When a process instance enters a business rule task, it creates a corresponding 
 its completion. A job worker should request jobs of this job type and process them. When the job is
 completed, the process instance continues.
 
-:::info 
+:::info
 
 Jobs for business rule tasks are not processed by Zeebe itself. To process them, you must provide a job worker.
 
@@ -26,13 +26,13 @@ Jobs for business rule tasks are not processed by Zeebe itself. To process them,
 
 ## Defining a task
 
-A business rule task must define a [job type](../service-tasks/service-tasks#task-definition). This
+A business rule task must define a [job type](../../service-tasks/service-tasks#task-definition). This
 specifies the type of job workers should subscribe to (e.g. DMN).
 
-Use [task headers](../service-tasks/service-tasks#task-headers) to pass static parameters to the job
+Use [task headers](../../service-tasks/service-tasks#task-headers) to pass static parameters to the job
 worker (e.g. the key of the decision to evaluate).
 
-Define [variable mappings](../service-tasks/service-tasks#variable-mappings) to transform the
+Define [variable mappings](../../service-tasks/service-tasks#variable-mappings) to transform the
 variables passed to the job worker, or to customize how the variables of the job are merged
 in the process instance.
 

@@ -74,7 +74,7 @@ duration("P1D") + duration("PT6H")
 // duration("P1DT6H")
 ```
 
-### Subtraction 
+### Subtraction
 
 * supported types: number, time, date-time, day-time-duration, year-month-duration
 
@@ -85,7 +85,7 @@ duration("P1D") + duration("PT6H")
 time("10:30:00") - time("09:00:00")
 // duration("PT1H30M")
 
-time("10:30:00") - duration("PT1H") 
+time("10:30:00") - duration("PT1H")
 // time("09:30:00")
 ```
 
@@ -94,34 +94,34 @@ time("10:30:00") - duration("PT1H")
 * supported types: number, day-time-duration, year-month-duration
 
 ```js
-5 * 3        
+5 * 3
 // 15
 
-3 * duration("P2Y")      
-// duration("P6Y") 
+3 * duration("P2Y")
+// duration("P6Y")
 ```
 
-### Division 
+### Division
 
 * supported types: number, day-time-duration, year-month-duration
 
 ```js
-6 / 2  
+6 / 2
 // 3
 
-duration("P1Y") / 2 
+duration("P1Y") / 2
 // duration("P6M")
 
 duration("P1Y") / duration("P1M")
 // 12
 ```
 
-### Exponentiation 
+### Exponentiation
 
 * supported types: number
 
 ```js
-2 ** 3   
+2 ** 3
 // 8
 ```
 
@@ -137,15 +137,15 @@ duration("P1Y") / duration("P1M")
 | greater than or equal | `>=` | `>= 10` |
 | between | `between _ and _` | `x between 3 and 9` |
 
-The operators less than, greater than, and between are only supported for: 
+The operators less than, greater than, and between are only supported for:
   * number
   * date
   * time
   * date-time
   * year-month-duration
-  * day-time-duration 
-  
-Any value can be compared with `null` to check if it is equal to `null`, or if it exists. Comparing `null` to a value different from `null` results in `false`. It returns `true` if the value, or the context entry (e.g. the property of a variable) is `null` or doesn't exist. The built-in function [is defined()](../builtin-functions/feel-built-in-functions-boolean.md#is-defined) can be used to differentiate between a value that is `null` and a value that doesn't exist. 
+  * day-time-duration
+
+Any value can be compared with `null` to check if it is equal to `null`, or if it exists. Comparing `null` to a value different from `null` results in `false`. It returns `true` if the value, or the context entry (e.g. the property of a variable) is `null` or doesn't exist. The built-in function [is defined()](../builtin-functions/feel-built-in-functions-boolean.md#is-defined) can be used to differentiate between a value that is `null` and a value that doesn't exist.
 
 ```js
 null = null
@@ -158,22 +158,22 @@ x = null
 // true - if "x" is null or doesn't exist
 
 x.y = null
-// true - if "x" is null, "x" doesn't exist, 
-//           "y" is null, or "x" has no property "y" 
-```  
+// true - if "x" is null, "x" doesn't exist,
+//           "y" is null, or "x" has no property "y"
+```
 
 ### Disjunction and Conjunction
 
 Combine two boolean values.
 
 ```js
-true and true   
+true and true
 // true
 
-true and false        
+true and false
 // false
 
-true and null        
+true and null
 // null
 
 false and null
@@ -181,16 +181,16 @@ false and null
 ```
 
 ```js
-true or false   
+true or false
 // true
 
-false or false  
+false or false
 // false
 
-true or null   
+true or null
 // true
 
-false or null  
+false or null
 // null
 ```
 
@@ -205,31 +205,31 @@ if (x < 5) then "low" else "high"
 Iterate over a list and apply an expression (i.e. aka `map`). The result is again a list.
 
 ```js
-for x in [1,2] return x * 2 
+for x in [1,2] return x * 2
 // [2,4]
 ```
 
 Iterate over multiple lists.
 
 ```js
-for x in [1,2], y in [3,4] return x * y  
+for x in [1,2], y in [3,4] return x * y
 // [3,4,6,8]
 ```
 
 Iterate over a range - forward or backward.
 
 ```js
-for x in 1..3 return x * 2                  
+for x in 1..3 return x * 2
 // [2,4,6]
 
-for x in 3..1 return x * 2       
+for x in 3..1 return x * 2
 // [6,4,2]
 ```
 
-The previous results of the iterator can be accessed by the variable `partial`. 
+The previous results of the iterator can be accessed by the variable `partial`.
 
 ```js
-for x in 1..5 return x + sum(partial)       
+for x in 1..5 return x + sum(partial)
 // [1,3,7,15,31]
 ```
 
@@ -238,26 +238,26 @@ for x in 1..5 return x + sum(partial)
 Test if at least one element of the list satisfies the expression.
 
 ```js
-some x in [1,2,3] satisfies x > 2         
+some x in [1,2,3] satisfies x > 2
 // true
 
-some x in [1,2,3] satisfies x > 3   
+some x in [1,2,3] satisfies x > 3
 // false
 
-some x in [1,2], y in [2,3] satisfies x < y  
+some x in [1,2], y in [2,3] satisfies x < y
 // true
 ```
 
 Test if all elements of the list satisfies the expression.
 
 ```js
-every x in [1,2,3] satisfies x >= 1   
+every x in [1,2,3] satisfies x >= 1
 // true
 
-every x in [1,2,3] satisfies x >= 2     
+every x in [1,2,3] satisfies x >= 2
 // false
 
-every x in [1,2], y in [2,3] satisfies x < y 
+every x in [1,2], y in [2,3] satisfies x < y
 // false
 ```
 
@@ -266,46 +266,46 @@ every x in [1,2], y in [2,3] satisfies x < y
 Filter a list of elements by an expression. The expression can access the current element by `item`. The result is a list again.
 
 ```js
-[1,2,3,4][item > 2]   
+[1,2,3,4][item > 2]
 // [3,4]
 ```
 
 An element of a list can be accessed by its index. The index starts at `1`. A negative index starts at the end by `-1`.
 
 ```js
-[1,2,3,4][1]           
+[1,2,3,4][1]
 // 1
 
-[1,2,3,4][4]                                   
+[1,2,3,4][4]
 // 4
 
-[1,2,3,4][-1]                                  
+[1,2,3,4][-1]
 // 4
 
-[1,2,3,4][-2]                                  
+[1,2,3,4][-2]
 // 3
 
-[1,2,3,4][5]                                   
+[1,2,3,4][5]
 // null
 ```
 
 If the elements are contextes then the nested value of the current element can be accessed directly by its name.
 
 ```js
-[ {a: "foo", b: 5},  {a: "bar", b: 10} ][b > 7] 
+[ {a: "foo", b: 5},  {a: "bar", b: 10} ][b > 7]
 // {a : "bar", b: 10}
 ```
 
 The nested values of a specific key can be extracted by `.key`.
 
 ```js
-[ {a : "foo", b: 5 }, {a: "bar", b: 10} ].a     
+[ {a : "foo", b: 5 }, {a: "bar", b: 10} ].a
 // ["foo", "bar"]
 ```
 
 ### Evaluate a Unary Tests
 
-Evaluates a [unary-tests expression](feel-unary-tests) with the given value. 
+Evaluates a [unary-tests expression](../feel-unary-tests) with the given value.
 
 ```js
 x in (2..4)
@@ -318,10 +318,10 @@ x in < 3
 Checks the type of the value.
 
 ```js
-"foo" instance of number                      
+"foo" instance of number
 // false
 
-"bar" instance of string                            
+"bar" instance of string
 // true
 ```
 
@@ -335,7 +335,7 @@ add(1,2)
 add(x:1, y:2)
 ```
 
-A function (body) can be defined using `function(arguments) expression`. For example, inside a context. 
+A function (body) can be defined using `function(arguments) expression`. For example, inside a context.
 
 ```js
 {
@@ -348,15 +348,15 @@ A function (body) can be defined using `function(arguments) expression`. For exa
 Values of type date, time, date-time and duration have special properties to access their individual parts.
 
 ```js
-date("2017-03-10").year                   
-date("2017-03-10").month                
+date("2017-03-10").year
+date("2017-03-10").month
 date("2017-03-10").day
 date("2017-03-10").weekday
 
-time("11:45:30+02:00").hour            
-time("11:45:30+02:00").minute         
-time("11:45:30+02:00").second        
-time("11:45:30+02:00").time offset   
+time("11:45:30+02:00").hour
+time("11:45:30+02:00").minute
+time("11:45:30+02:00").second
+time("11:45:30+02:00").time offset
 
 date and time("2017-03-10T11:45:30+02:00").year
 date and time("2017-03-10T11:45:30+02:00").month
@@ -368,11 +368,11 @@ date and time("2017-03-10T11:45:30+02:00").second
 date and time("2017-03-10T11:45:30+02:00").time offset
 date and time("2017-03-10T11:45:30+02:00").timezone
 
-duration("P2Y3M").years                  
-duration("P2Y3M").months               
+duration("P2Y3M").years
+duration("P2Y3M").months
 
-duration("P1DT2H10M30S").days      
-duration("P1DT2H10M30S").hours     
-duration("P1DT2H10M30S").minutes 
-duration("P1DT2H10M30S").seconds 
+duration("P1DT2H10M30S").days
+duration("P1DT2H10M30S").hours
+duration("P1DT2H10M30S").minutes
+duration("P1DT2H10M30S").seconds
 ```
