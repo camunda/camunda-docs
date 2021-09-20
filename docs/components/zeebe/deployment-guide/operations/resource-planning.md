@@ -81,7 +81,7 @@ By default, this data is stored in the following:
 
 > **Pitfalls**
 >
-> To avoid exploding your disk space usage, here are a few pitfalls to avoid:
+> To avoid exceeding your disk space, here are a few pitfalls to avoid:
 >
 > - Do not create a high number of snapshots with a long period between them.
 > - Do not configure an exporter which does not not advance its record position (such as the Debug Exporter).

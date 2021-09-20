@@ -94,7 +94,7 @@ set by the exporter itself once it can guarantee a record has been successfully
 updated.
 
 :::note
-Although Zeebe tries to reduce the amount of duplicate records an exporter has to handle, it is likely that it will have to. Therefore, it is necessary that export operations be idempotent. This can be implemented either in the exporter itself, but if it exports to an external system, it is recommended you perform deduplication there to reduce the load on Zeebe itself. Refer to the exporter-specific documentation for how this is meant to be achieved.
+It's best to reduce the amount of duplicate records an exporter handles alongside Zeebe. Exporters are called at least once for the records to export, which means they may be called more than once for any given record. We recommend performing deduplication based on the unique record key to reduce the load on Zeebe.
 :::
 
 ### Error handling
