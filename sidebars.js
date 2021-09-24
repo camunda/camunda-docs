@@ -273,7 +273,7 @@ module.exports = {
         },
       ],
       IAM: [
-      "components/iam/overview", {
+      "components/iam/what-is-iam", {
           "Third-Party Libraries": [
             "components/iam/third-party-libraries/backend-third-party-libraries",
             "components/iam/third-party-libraries/frontend-third-party-libraries"
