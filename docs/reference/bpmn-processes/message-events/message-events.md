@@ -27,7 +27,7 @@ If the `correlationKey` of a message is empty, it creates a new process instance
 
 When an intermediate message catch event is entered, a corresponding message subscription is created. The process instance stops at this point and waits until the message is correlated. When a message is correlated, the catch event is completed and the process instance continues.
 
-:::note
+:::info
 An alternative to intermediate message catch events are [receive tasks](../receive-tasks/receive-tasks.md), which behaves the same but can be used together with boundary events.
 :::
 

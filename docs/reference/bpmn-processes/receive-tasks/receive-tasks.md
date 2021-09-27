@@ -11,7 +11,7 @@ When a receive task is entered, a corresponding message subscription is created.
 
 A message can be published using one of the Zeebe clients. When the message is correlated, the receive task is completed and the process instance continues.
 
-:::note
+:::info
 An alternative way to receive tasks are [message intermediate catch events](../../bpmn-processes/message-events/message-events.md), which behave the same but can be used together with event-based gateways.
 :::
 
