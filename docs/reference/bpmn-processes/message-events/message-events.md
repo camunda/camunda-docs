@@ -7,8 +7,6 @@ Message events are events which reference a message; they are used to wait until
 
 ![process](assets/message-events.png)
 
-Currently, messages can be published only externally by using one of the Zeebe clients.
-
 ## Message start events
 
 A process can have one or more message start events (besides other types of start events). Each of the message events must have a unique message name.
@@ -48,6 +46,31 @@ Usually, the name of the message is defined as a static value (e.g. `order cance
 The `correlationKey` is an expression that usually [accesses a variable](/components/concepts/expressions.md#access-variables) of the process instance that holds the correlation key of the message. The expression is evaluated on activating the message event and must result either in a `string` or in a `number`.
 
 To correlate a message to the message event, the message is published with the defined name (e.g. `Money collected`) and the **value** of the `correlationKey` expression. For example, if the process instance has a variable `orderId` with value `"order-123"`, the message must be published with the correlation key `"order-123"`.
+
+## Message throw events
+
+A process can contain intermediate message throw events or message end events to model the
+publication of a message to an external system, for example, to a Kafka topic.
+
+At the moment, intermediate message throw events and message end events behave exactly
+like [service tasks](../service-tasks/service-tasks.md) or [send tasks](../send-tasks/send-tasks.md)
+, and have the same job-related properties (e.g. job type, custom headers, etc.). The message throw
+events and the tasks are based on jobs
+and [job workers](../../../components/concepts/job-workers.md). The differences between the message
+throw events and the tasks are the visual representation and the semantics for the model. Read more
+about the job properties [here](../send-tasks/send-tasks.md#defining-a-task).
+
+When a process instance enters a message throw event, it creates a corresponding job and waits for
+its completion. A job worker should request jobs of this job type and process them. When the job is
+complete, the process instance continues or completes if it is a message end event.
+
+:::info
+
+Message throw events are not processed by Zeebe itself (i.e. to correlate a message to a message
+catch event). Instead, it creates jobs with the defined job type. To process them, provide a job
+worker.
+
+:::
 
 ## Variable mappings
 
