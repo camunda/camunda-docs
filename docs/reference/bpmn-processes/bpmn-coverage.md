@@ -326,13 +326,13 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
             </a>
         </td>
         <td>
-            <a href="#">
-                <MessageThrowEventSvg />
+            <a href="../message-events/message-events">
+                <MessageThrowEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <MessageEndEventSvg />
+            <a href="../message-events/message-events">
+                <MessageEndEventSvg className="implemented" />
             </a>
         </td>
     </tr>
