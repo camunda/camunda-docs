@@ -283,7 +283,17 @@ module.exports = {
       ],
       IAM: [
         "components/iam/what-is-iam",
-        {
+          {
+            "Getting started": [
+              {
+                "Running IAM with Docker": [
+                  "components/iam/getting-started/docker/setup-environment",
+                  "components/iam/getting-started/docker/start-iam",
+                  "components/iam/getting-started/docker/accessing-the-ui",
+                ]
+              }
+            ],
+          }, {
           "Third-Party Libraries": [
             "components/iam/third-party-libraries/backend-third-party-libraries",
             "components/iam/third-party-libraries/frontend-third-party-libraries",
