@@ -7,8 +7,6 @@ Message events are events which reference a message; they are used to wait until
 
 ![process](assets/message-events.png)
 
-Currently, messages can be published only externally by using one of the Zeebe clients.
-
 ## Message start events
 
 A process can have one or more message start events (besides other types of start events). Each of the message events must have a unique message name.
@@ -29,7 +27,7 @@ If the `correlationKey` of a message is empty, it creates a new process instance
 
 When an intermediate message catch event is entered, a corresponding message subscription is created. The process instance stops at this point and waits until the message is correlated. When a message is correlated, the catch event is completed and the process instance continues.
 
-:::note
+:::info
 An alternative to intermediate message catch events are [receive tasks](../receive-tasks/receive-tasks.md), which behaves the same but can be used together with boundary events.
 :::
 
@@ -38,6 +36,31 @@ An alternative to intermediate message catch events are [receive tasks](../recei
 An activity can have one or more message boundary events. Each of the message events must have a unique message name.
 
 When the activity is entered, it creates a corresponding message subscription for each boundary message event. If a non-interrupting boundary event is triggered, the activity is not terminated and multiple messages can be correlated.
+
+## Message throw events
+
+A process can contain intermediate message throw events or message end events to model the
+publication of a message to an external system, for example, to a Kafka topic.
+
+At the moment, intermediate message throw events and message end events behave exactly
+like [service tasks](../service-tasks/service-tasks.md) or [send tasks](../send-tasks/send-tasks.md)
+, and have the same job-related properties (e.g. job type, custom headers, etc.). The message throw
+events and the tasks are based on jobs
+and [job workers](../../../components/concepts/job-workers.md). The differences between the message
+throw events and the tasks are the visual representation and the semantics for the model. Read more
+about the job properties [here](../../../components/concepts/job-workers.md).
+
+When a process instance enters a message throw event, it creates a corresponding job and waits for
+its completion. A job worker should request jobs of this job type and process them. When the job is
+complete, the process instance continues or completes if it is a message end event.
+
+:::info
+
+Message throw events are not processed by Zeebe itself (i.e. to correlate a message to a message
+catch event). Instead, it creates jobs with the defined job type. To process them, provide a job
+worker.
+
+:::
 
 ## Messages
 
@@ -96,3 +119,4 @@ A boundary message event:
 - [Expressions](/components/concepts/expressions.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
 - [Incidents](/components/concepts/incidents.md)
+- [Job handling](/components/concepts/job-workers.md)
