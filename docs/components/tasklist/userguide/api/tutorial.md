@@ -101,7 +101,6 @@ export class TaskDto {
   processDefinitionId: string;
   taskDefinitionId: string;
 }
-}
 ```
 
 We can implement the requests, for that we need to define the Tasklist API query and define the methods on the service:
