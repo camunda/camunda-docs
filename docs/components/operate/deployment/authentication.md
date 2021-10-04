@@ -16,17 +16,31 @@ By default, user storage in Elasticsearch is enabled.
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
 
-The **Username** and **password** for one user may be set in `application.yml`:
+The **Userid** , **displayName**, **password** and **roles** for one user may be set in `application.yml`:
 
 ```
 camunda.operate:
-  username: anUser
+  userId: anUserId
+  displayName: nameShownInWebpage
   password: aPassword
+  roles:
+    - OWNER
+    - USER
 ```
+
+Currently, only `OWNER` and/or `USER` roles are available.
+
+### Roles for users
+Name | Description 
+-----|-------------
+OWNER| Full access 
+USER | Read only access
 
 On startup of Operate, the user is created if they did not exist before.
 
-By default, one user with **username**/**password** `demo`/`demo` is created.
+By default, two users are created:
+* Role `OWNER` with **userId**/**displayName**/**password** `demo`/`demo`/`demo`.
+* Role `USER` with **userId**/**displayName**/**password** `view`/`view`/`view`.
 
 Add more users directly to Elasticsearch via the index `operate-user-<version>_`. The password must be encoded with a strong `bcrypt` hashing function.
 
