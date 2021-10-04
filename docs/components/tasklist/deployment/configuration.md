@@ -54,12 +54,25 @@ Tasklist stores and reads data in/from Elasticsearch.
 
 Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch. Set the appropriate username/password combination in the configuration to use it.
 
+#### Settings to connect to a secured Elasticsearch instance
+To connect to a secured (https) Elasticsearch instance you need normally only set the url protocol
+part to `https` instead of `http`. A secured Elasticsearch instance needs also `username` and `password`.
+The other ssl settings should only be used in case of connection problems, for example disable
+host verification.
+
+:::note
+You may need to import the certificate into JVM runtime.
+:::
+
 Name | Description | Default value
 -----|-------------|--------------
 camunda.tasklist.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
 camunda.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
 camunda.tasklist.elasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.tasklist.elasticsearch.password | Password to access Elasticsearch REST API | -
+camunda.tasklist.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -
+camunda.tasklist.elasticsearch.ssl.selfSigned | Certificate was self signed | false
+camunda.tasklist.elasticsearch.ssl.verifyHostname | Should the hostname be validated | false
 
 ### Settings for shards and replicas
 
@@ -84,7 +97,9 @@ camunda.tasklist:
     # Cluster name
     clusterName: elasticsearch
     # Url
-    url: http://localhost:9200
+    url: https://localhost:9200
+    ssl:
+      selfSigned: true
 ```
 
 ## Zeebe broker connection
@@ -117,6 +132,7 @@ Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe
 Therefore, settings for this Elasticsearch connection must be defined and correspond to the settings on the Zeebe side.
 
 ### Settings to connect and import
+See also [Settings to connect to a secured elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
 
 Name | Description | Default value
 -----|-------------|--------------
@@ -125,6 +141,9 @@ camunda.tasklist.zeebeElasticsearch.url | URL of Elasticsearch REST API | http:/
 camunda.tasklist.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
 camunda.tasklist.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.tasklist.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
+camunda.tasklist.zeebeElasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -
+camunda.tasklist.zeebeElasticsearch.ssl.selfSigned | Certificate was self signed | false
+camunda.tasklist.zeebeElasticsearch.ssl.verifyHostname | Should the hostname be validated | false
 
 ### A snippet from application.yml
 
@@ -134,7 +153,7 @@ camunda.tasklist:
     # Cluster name
     clusterName: elasticsearch
     # Url
-    url: http://localhost:9200
+    url: https://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
