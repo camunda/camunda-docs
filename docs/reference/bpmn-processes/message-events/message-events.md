@@ -37,16 +37,6 @@ An activity can have one or more message boundary events. Each of the message ev
 
 When the activity is entered, it creates a corresponding message subscription for each boundary message event. If a non-interrupting boundary event is triggered, the activity is not terminated and multiple messages can be correlated.
 
-## Messages
-
-A message can be referenced by one or more message events. It must define the name of the message (e.g. `Money collected`) and the `correlationKey` expression (e.g. `= orderId`). If the message is only referenced by message start events, the `correlationKey` is not required.
-
-Usually, the name of the message is defined as a static value (e.g. `order canceled`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). If the expression belongs to a message start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the message event. The evaluation must result in a `string`.
-
-The `correlationKey` is an expression that usually [accesses a variable](/components/concepts/expressions.md#access-variables) of the process instance that holds the correlation key of the message. The expression is evaluated on activating the message event and must result either in a `string` or in a `number`.
-
-To correlate a message to the message event, the message is published with the defined name (e.g. `Money collected`) and the **value** of the `correlationKey` expression. For example, if the process instance has a variable `orderId` with value `"order-123"`, the message must be published with the correlation key `"order-123"`.
-
 ## Message throw events
 
 A process can contain intermediate message throw events or message end events to model the
@@ -58,7 +48,7 @@ like [service tasks](../service-tasks/service-tasks.md) or [send tasks](../send-
 events and the tasks are based on jobs
 and [job workers](../../../components/concepts/job-workers.md). The differences between the message
 throw events and the tasks are the visual representation and the semantics for the model. Read more
-about the job properties [here](../send-tasks/send-tasks.md#defining-a-task).
+about the job properties [here](../../../components/concepts/job-workers.md).
 
 When a process instance enters a message throw event, it creates a corresponding job and waits for
 its completion. A job worker should request jobs of this job type and process them. When the job is
@@ -71,6 +61,16 @@ catch event). Instead, it creates jobs with the defined job type. To process the
 worker.
 
 :::
+
+## Messages
+
+A message can be referenced by one or more message events. It must define the name of the message (e.g. `Money collected`) and the `correlationKey` expression (e.g. `= orderId`). If the message is only referenced by message start events, the `correlationKey` is not required.
+
+Usually, the name of the message is defined as a static value (e.g. `order canceled`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). If the expression belongs to a message start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the message event. The evaluation must result in a `string`.
+
+The `correlationKey` is an expression that usually [accesses a variable](/components/concepts/expressions.md#access-variables) of the process instance that holds the correlation key of the message. The expression is evaluated on activating the message event and must result either in a `string` or in a `number`.
+
+To correlate a message to the message event, the message is published with the defined name (e.g. `Money collected`) and the **value** of the `correlationKey` expression. For example, if the process instance has a variable `orderId` with value `"order-123"`, the message must be published with the correlation key `"order-123"`.
 
 ## Variable mappings
 
@@ -119,3 +119,4 @@ A boundary message event:
 - [Expressions](/components/concepts/expressions.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
 - [Incidents](/components/concepts/incidents.md)
+- [Job handling](/components/concepts/job-workers.md)
