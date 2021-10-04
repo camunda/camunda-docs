@@ -9,6 +9,7 @@ Operate provides three ways to authenticate:
 1. User information stored in [Elasticsearch](#user-in-elasticsearch).
 2. [Camunda Cloud single sign-on](#camunda-cloud-single-sign-on).
 3. [Lightweight Directory Access Protocol (LDAP)](#ldap).
+4. [IAM Authentication and Authorization](#iam)
 
 By default, user storage in Elasticsearch is enabled.
 
@@ -124,3 +125,26 @@ The active directory configuration will only be applied when `camunda.operate.ld
  camunda.operate.ldap.baseDn| Root domain name | No
  camunda.operate.ldap.userSearchFilter| Used as a search filter | No
 
+## IAM
+
+[IAM](/docs/components/iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+
+### Enable IAM
+
+IAM can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `iam-auth`.
+
+See the following example:
+
+```
+export SPRING_PROFILES_ACTIVE=iam-auth
+```
+
+### Configure IAM
+IAM requires the following parameters:
+
+Parameter name | Description | Example value
+---------------|-------------|---------------
+camunda.operate.iam.issuer | Name/ID of issuer | http://app.iam.localhost
+camunda.operate.iam.issuerUrl | Url of issuer (IAM) | http://app.iam.localhost
+camunda.operate.iam.clientId | Similar to a username for the application | operate
+camunda.operate.iam.clientSecret | Similar to a password for the application. | XALaRPl...s7dL7

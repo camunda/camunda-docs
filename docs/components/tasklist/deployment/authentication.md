@@ -71,3 +71,27 @@ export CAMUNDA_TASKLIST_AUTH0_CLIENTSECRET=A_SECRET
 export CAMUNDA_TASKLIST_AUTH0_CLAIMNAME=A_CLAIM
 export CAMUNDA_TASKLIST_AUTH0_ORGANIZATION=AN_ORGANIZATION
 ```
+
+## IAM
+
+[IAM](/docs/components/iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+
+### Enable IAM
+
+IAM can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `iam-auth`.
+
+See the following example:
+
+```
+export SPRING_PROFILES_ACTIVE=iam-auth
+```
+
+### Configure IAM
+IAM requires the following parameters:
+
+Parameter name | Description | Example value
+---------------|-------------|---------------
+camunda.tasklist.iam.issuer | Name/ID of issuer | http://app.iam.localhost
+camunda.tasklist.iam.issuerUrl | Url of issuer (IAM) | http://app.iam.localhost
+camunda.tasklist.iam.clientId | Similar to a username for the application | tasklist
+camunda.tasklist.iam.clientSecret | Similar to a password for the application. | XALaRPl...s7dL7
