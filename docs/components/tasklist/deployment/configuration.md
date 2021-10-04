@@ -66,6 +66,7 @@ You may need to import the certificate into JVM runtime.
 
 Name | Description | Default value
 -----|-------------|--------------
+camunda.tasklist.elasticsearch.indexPrefix | Prefix for index names | tasklist 
 camunda.tasklist.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
 camunda.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
 camunda.tasklist.elasticsearch.username | Username to access Elasticsearch REST API | -

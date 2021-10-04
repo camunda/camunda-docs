@@ -57,6 +57,7 @@ Either set `host` and `port` (deprecated) or `url` (recommended).
 
 Name | Description | Default value
 -----|-------------|--------------
+camunda.operate.elasticsearch.indexPrefix| Prefix for index names | operate
 camunda.operate.elasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
 camunda.operate.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
 camunda.operate.elasticsearch.username | Username to access Elasticsearch REST API | -

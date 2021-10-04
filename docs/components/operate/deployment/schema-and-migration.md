@@ -18,11 +18,11 @@ Each index has its own version of schema. This means the version reflected in th
 Index names follow the defined pattern below:
 
 ```
-operate-{datatype}-{schemaversion}_[{date}]
+{operate-index-prefix}-{datatype}-{schemaversion}_[{date}]
 
 ```
 
-Here, `datatype` defines which data is stored in the index (e.g. `user`, `variable` etc.,) `schemaversion` represents the index schema version, and `date` represents the finished date of the archived data. See [Data retention](data-retention.md).
+Here, `operate-index-prefix` defines the prefix for index name (default `operate`), `datatype` defines which data is stored in the index (e.g. `user`, `variable` etc.,) `schemaversion` represents the index schema version, and `date` represents the finished date of the archived data. See [Data retention](data-retention.md).
 
 Knowing the index name pattern, it's possible to customize index settings by creating Elasticsearch templates. See an [example of an index template](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-templates.html).
 
