@@ -25,11 +25,12 @@ Using Cloud Modeler, processes are designed and deployed, and new instances are 
 
 ![console-modeler](../../components/modeler/cloud-modeler/img/bpmn-diagrams-overview.png)
 
-3. Give your diagram a name like `Getting Started`.
+3. Add an **EndEvent** to create a valid BPMN diagram.
 
-![console-modeler-new-diagram](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram.png)
+![console-modeler-new-diagram-with-end-event](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-end-event.png)
+![console-modeler-new-diagram-with-end-event](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-end-event2.png)
 
-4. The **Save** button should now appear. Save your diagram.
+4. Press the **Save** button to save your diagram.
 
 ![console-modeler-new-diagram](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-name.png)
 
