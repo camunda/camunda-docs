@@ -11,22 +11,22 @@ User tasks need an interaction from the user. This can be updating, adding varia
 
 If the user claimed a task, the task is completable. Different task status filters help the user choose the desired task.
 
-## Example use case 
+## Example use case
 
 If you've successfully logged in, you'll see a screen similar to the following:
 
-![tasklist-start-screen](../img/tasklist-start-screen_light.png)
+![tasklist-start-screen](../../img/tasklist-start-screen_light.png)
 
 On the left side of the screen, you can see tasks. On the right side of the screen, you can see details of the current selected task.
 
 Change the list of tasks by applying filters. You can also collapse and expand the task list.
 
-You can choose which tasks you want to see: 
+You can choose which tasks you want to see:
 
-* All open
-* Claimed by me
-* Unclaimed
-* Completed
+- All open
+- Claimed by me
+- Unclaimed
+- Completed
 
 Initially, we have no **Claimed by me** tasks.
 

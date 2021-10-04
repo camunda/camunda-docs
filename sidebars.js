@@ -256,16 +256,24 @@ module.exports = {
          }
       ],
       Tasklist: [
-      "components/tasklist/introduction",{
+        "components/tasklist/introduction",
+        {
           "User guide": [
-            "components/tasklist/userguide/overview",
-            "components/tasklist/userguide/camunda-forms",
+            {
+              "API mode": [
+                "components/tasklist/userguide/api/overview",
+                "components/tasklist/userguide/api/tutorial",
+              ],
+              "User interface mode": [
+                "components/tasklist/userguide/user-interface/overview",
+                "components/tasklist/userguide/user-interface/camunda-forms",
+              ],
+            },
           ],
           "Deployment guide": [
             "components/tasklist/deployment/install-and-start",
             "components/tasklist/deployment/configuration",
             "components/tasklist/deployment/authentication",
-            "components/tasklist/deployment/api-client",
           ],
           "Third-Party Libraries": [
             "components/tasklist/third-party-libraries/tasklist-backend-dependencies",
