@@ -78,7 +78,7 @@ export class TasklistService {
 }
 ```
 
-Now were ready to make requests to the API, but first let's define a DTO with the shape of the tasks were going to request. For that we can create a file in `tasklist/dto/task.dto.ts`. There we can define the DTO like:
+Now were ready to make requests to the API, but first let's define a Data Transfer Object, or DTO, with the shape of the tasks were going to request. For that we can create a file in `tasklist/dto/task.dto.ts`. There we can define the DTO like:
 
 ```ts
 type Variable = {
