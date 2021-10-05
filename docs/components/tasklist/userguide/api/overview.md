@@ -69,7 +69,7 @@ If the authorization is successful, the authorization server sends back the acce
 
 ## Obtaining the Tasklist schema
 
-To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](../../../../../reference/tasklist-api/schema).
+To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](../../../../../reference/tasklist-api/).
 
 There are also several tools to explore GraphQL APIs [here](https://altair.sirmuel.design).
 
