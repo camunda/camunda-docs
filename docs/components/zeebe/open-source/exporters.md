@@ -94,7 +94,7 @@ set by the exporter itself once it can guarantee a record has been successfully
 updated.
 
 :::note
-It's best to reduce the amount of duplicate records an exporter handles alongside Zeebe. Exporters are called at least once for the records to export, which means they may be called more than once for any given record. We recommend performing deduplication based on the unique record key to reduce the load on Zeebe.
+Zeebe exports with at least once semantics, so you will have to deal with duplicates. It's best to reduce the amount of duplicate records an exporter handles alongside Zeebe, doing as little as possible in the exporter to reduce the load on the broker. We recommend performing deduplication based on the unique record key. We also recommend refraining from blocking, given blocking on the actor threads entirely, which may have a large impact on the system.
 :::
 
 ### Error handling
