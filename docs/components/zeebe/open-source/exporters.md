@@ -94,7 +94,7 @@ set by the exporter itself once it can guarantee a record has been successfully
 updated.
 
 :::note
-Zeebe exports with at least once semantics, so you will have to deal with duplicates. It's best to reduce the amount of duplicate records an exporter handles alongside Zeebe, doing as little as possible in the exporter to reduce the load on the broker. We recommend performing deduplication based on the unique record key. We also recommend refraining from blocking, given blocking on the actor threads entirely, which may have a large impact on the system.
+Zeebe exports with at least once semantics, so you will have to deal with duplicates. It's best to reduce the amount of duplicate records an exporter handles alongside Zeebe, doing as little as possible in the exporter to reduce the load on the broker. We recommend performing deduplication in your target system. Deduplication can be performed based on the position and partition ID. Not all records have keys, but every record has a partition ID, and a unique position relative to that partition. We also recommend refraining from blocking, given blocking on the actor threads entirely, which may have a large impact on the system.
 :::
 
 ### Error handling
