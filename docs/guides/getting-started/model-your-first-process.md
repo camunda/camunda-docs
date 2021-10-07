@@ -30,7 +30,7 @@ Using Cloud Modeler, processes are designed and deployed, and new instances are 
 ![console-modeler-new-diagram-with-end-event](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-end-event.png)
 ![console-modeler-new-diagram-with-end-event](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-end-event2.png)
 
-4. Press the **Save** button to save your diagram.
+4. To save your diagram, click **Save**.
 
 ![console-modeler-new-diagram](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-name.png)
 

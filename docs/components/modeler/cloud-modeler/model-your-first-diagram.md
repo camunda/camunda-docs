@@ -3,7 +3,7 @@ id: model-your-first-diagram
 title: Model your first diagram
 ---
 
-After you created a BPMN diagram, you can start modeling it.
+After you've created a BPMN diagram, you can start modeling it.
 
 We've preconfigured a simple diagram consisting of a start event. To convert it to something meaningful, append a **Task** to it and afterwards append an **EndEvent**:
 
