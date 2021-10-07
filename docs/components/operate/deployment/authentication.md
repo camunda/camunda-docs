@@ -17,7 +17,7 @@ By default, user storage in Elasticsearch is enabled.
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
 
-The **Userid** , **displayName**, **password** and **roles** for one user may be set in `application.yml`:
+The **Userid** , **displayName**, **password**, and **roles** for one user may be set in `application.yml`:
 
 ```
 camunda.operate:
