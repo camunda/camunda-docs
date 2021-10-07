@@ -3,13 +3,12 @@ id: model-your-first-diagram
 title: Model your first diagram
 ---
 
-After you create a BPMN diagram, you can start modeling it.
+After you've created a BPMN diagram, you can start modeling it.
 
-We've preconfigured a simple diagram consisting of a start and end event. Though you don't need to configure the diagram further to deploy, you can add more elements and configure the different events to your liking.
+We've preconfigured a simple diagram consisting of a start event. To convert it to something meaningful, append a **Task** to it and afterwards append an **EndEvent**:
 
-![new bpmn diagram](img/cloud-modeler-new-diagram.png)
-
-On the left side of the page, you'll find the element palette supported by the engine. You can drag and drop the elements into the diagram.
+![add task](img/cloud-modeler-add-task.png)
+![add task](img/cloud-modeler-add-endevent.png)
 
 Each element has adjustable attributes. Use the properties panel on the right side of the page.
 
