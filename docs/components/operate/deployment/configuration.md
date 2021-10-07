@@ -109,7 +109,7 @@ Operate imports data from Elasticsearch indices created and filled in by the [Ze
 Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on the Zeebe side.
 
 ### Settings to connect and import
-See also [Settings to connect to a secured elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
+See also [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
 
 Name | Description | Default value
 -----|-------------|--------------
