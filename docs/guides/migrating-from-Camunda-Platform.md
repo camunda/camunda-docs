@@ -29,7 +29,7 @@ In general, **development artifacts** *can* be migrated:
 
 * **Architecture:** The different architecture of the core workflow engine might require *changes in your architecture* (e.g. if you used the embedded engine approach). Furthermore, certain concepts of Camunda Platform are no longer possible (like hooking in Java code at various places, or control transactional behavior with asynchronous continuations) which might lead to *changes in your model and code*.
 
-In general, **worklow engine data** *cannot* yet be migrated to Camunda Cloud.
+In general, **workflow engine data** *cannot* yet be migrated to Camunda Cloud.
 
 * **Runtime data:** Running process instances of Camunda Platform are stored in the Camunda Platform database. *Runtime data cannot be migrated* to Camunda Cloud. A possible workaround is to create a process model on Camunda Cloud solely used for migration to bring process instances to their respective wait state as described in [How to migrate to Camunda](https://page.camunda.com/wp-how-to-migrate-to-camunda).
 
