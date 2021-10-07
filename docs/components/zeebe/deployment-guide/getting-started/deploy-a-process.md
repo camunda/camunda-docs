@@ -3,7 +3,8 @@ id: deploy-a-process
 title: "Deploy a process"
 ---
 
-_In this section, we're going to start up the Zeebe broker as well as Camunda Operate, a tool that gives you visibility into deployed processes and running process instances and contains tooling for fixing problems in those process instances._
+
+_In this section, we'll start up the Zeebe broker - the underlying worklfow execution engine - and Operate - a tool that gives you visibility into deployed processes and running process instances, and contains tooling for fixing problems in those process instances._
 
 _We offer Operate free of charge for unrestricted **non-production** use because we think it's a great tool for getting familiar with Zeebe and building initial proofs-of-concept. And at this time, Operate is available for non-production use only. In the future, we'll offer an Operate enterprise license that allows for production use, too._
 

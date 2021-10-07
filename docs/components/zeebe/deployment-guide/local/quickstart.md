@@ -3,7 +3,7 @@ id: quickstart
 title: "Quickstart"
 ---
 
-This quickstart guide introduces you the main concepts of Zeebe without the need to write a single line of code in 5 steps.
+This quickstart guide introduces you the main concepts of Zeebe in five steps without the need to write a single line of code.
 
 ## Step 1: Download the Zeebe distribution
 
@@ -16,11 +16,13 @@ tar -xzvf zeebe-distribution-X.Y.Z.tar.gz
 cd zeebe-broker-X.Y.Z/
 ```
 
-**Note:** Some command examples might not work on Windows if you use cmd or
-Powershell. For Windows users we recommend to use a bash-like shell, i.e. Git
+:::note
+Some command examples might not work on Windows if you use cmd or
+Powershell. For Windows users, we recommend using a bash-like shell, i.e. Git
 Bash, Cygwin or MinGW for this guide.
+:::
 
-Inside the Zeebe directory you will find multiple directories.
+Inside the Zeebe directory, you'll find multiple directories:
 
 ```
 tree -d
@@ -35,7 +37,7 @@ tree -d
 
 ## Step 2: Start the Zeebe broker
 
-To start a Zeebe broker use the `broker` or `broker.bat` file located in the
+To start a Zeebe broker, use the `broker` or `broker.bat` file located in the
 `bin/` folder.
 
 ```
@@ -51,12 +53,14 @@ To start a Zeebe broker use the `broker` or `broker.bat` file located in the
 You will see some output which contains the version of the broker and
 configuration parameters like directory locations and API socket addresses.
 
-To continue this guide open another terminal to execute commands using the
+To continue this guide, open another terminal to execute commands using the
 Zeebe CLI `zbctl`.
 
 We can now check the status of the Zeebe broker.
 
-> **Note:** By default, the embedded gateway listens to a plaintext connection but the clients are configured to use TLS. Therefore, all `zbctl` commands in the quickstart will specify the `--insecure` flag.
+:::note
+By default, the embedded gateway listens to a plaintext connection but the clients are configured to use TLS. Therefore, all `zbctl` commands in the quickstart will specify the `--insecure` flag.
+:::
 
 ```
 ./bin/zbctl --insecure status
@@ -76,16 +80,13 @@ Brokers:
 A [process](/components/concepts/processes.md) is used to orchestrate loosely coupled job
 workers and the flow of data between them.
 
-In this guide we will use an example process `order-process.bpmn`. You can
+In this guide, we'll use an example process `order-process.bpmn`. You can
 download it with the following link:
 [order-process.bpmn](assets/order-process.bpmn).
 
 ![order-process](assets/order-process.png)
 
-The process describes a sequential flow of three tasks _Collect Money_, _Fetch
-Items_ and _Ship Parcel_. If you open the `order-process.bpmn` file in a text
-editor you will see that every task has an attribute `type` defined in the XML
-which is later used as job type.
+The process describes a sequential flow of three tasks **Collect Money**, **Fetch Items**, and **Ship Parcel**. If you open the `order-process.bpmn` file in a text editor, you'll see every task has an attribute `type` defined in the XML which is later used as job type.
 
 ```
 <!-- [...] -->
@@ -109,10 +110,10 @@ which is later used as job type.
 <!-- [...] -->
 ```
 
-To complete an instance of this process we would need to activate and complete one job for each of
-the types `payment-service`, `inventory-service` and `shipment-service`.
+To complete an instance of this process, we need to activate and complete one job for each of
+the types `payment-service`, `inventory-service`, and `shipment-service`.
 
-But first let's deploy the process to the Zeebe broker.
+First, let's deploy the process to the Zeebe broker.
 
 ```
 ./bin/zbctl --insecure deploy order-process.bpmn
@@ -134,10 +135,10 @@ But first let's deploy the process to the Zeebe broker.
 
 ## Step 4: Create a process instance
 
-After the process is deployed we can create new instances of it. Every
+After the process is deployed, we can create a new instances of it. Every
 instance of a process is a single execution of the process. To create a new
-instance we have to specify the process ID from the BPMN file, in
-our case the ID is `order-process` as defined in the `order-process.bpmn`:
+instance, we must specify the process ID from the BPMN file. In
+our case, the ID is `order-process` as defined in the `order-process.bpmn`:
 
 ```
 <bpmn:process id="order-process" isExecutable="true">
@@ -167,25 +168,25 @@ specify the initial data of the instance as variables when we start the instance
 
 ## Step 5: Complete a process instance
 
-To complete the instance all three tasks have to be executed. In Zeebe a job is
-created for every task which is reached during process instance execution. In
-order to finish a job and thereby the corresponding task it has to be activated
-and completed by a [job worker](/components/concepts/job-workers.md). A job worker is a
-long living process which repeatedly tries to activate jobs for a given job
-type and completes them after executing its business logic. The `zbctl` also
-provides a command to spawn simple job workers using an external command or
-script. The job worker will receive for every job the process instance variables as JSON object on
-`stdin` and has to return its result also as JSON object on `stdout` if it
+To complete the instance, all three tasks must be executed. In Zeebe, a job is
+created for every task which is reached during process instance execution. To finish a job and thereby the corresponding task, must be activated
+and completed by a [job worker](/components/concepts/job-workers.md).
+
+A job worker is a long-living process which repeatedly tries to activate jobs for a given job type and completes them after executing its business logic. The `zbctl` also provides a command to spawn simple job workers using an external command or
+script. 
+
+The job worker receives for every job the process instance variables as JSON object on
+`stdin` and has to return its result also as a JSON object on `stdout` if it
 handled the job successfully.
 
-In this example we use the unix command `cat` which just outputs what it receives
-on `stdin`. To complete a process instance we now have to create a job worker for
+In this example, we use the unix command `cat`, which outputs what it receives
+on `stdin`. To complete a process instance we now must create a job worker for
 each of the three task types from the process definition: `payment-service`,
-`inventory-service` and `shipment-service`.
+`inventory-service`. and `shipment-service`.
 
-> **Note:** For Windows users this command does not work with cmd as the `cat`
-> command does not exist. We recommend to use Powershell or a bash-like shell
-> to execute this command.
+:::note
+For Windows users, this command does not work with cmd as the `cat` command does not exist. We recommend using Powershell or a bash-like shell to execute this command.
+:::
 
 ```
 ./bin/zbctl --insecure create worker payment-service --handler cat &
@@ -206,18 +207,18 @@ each of the three task types from the process definition: `payment-service`,
 {"orderId":1234}
 ```
 
-After the job workers are running in the background we can create more instances
+After the job workers are running in the background, we can create more instances
 of our process to observe how the workers will complete them.
 
 ```
 ./bin/zbctl --insecure create instance order-process --variables '{"orderId": 12345}'
 ```
 
-To close all job workers use the `kill` command to stop the background processes.
+To close all job workers, use the `kill` command to stop the background processes.
 
 ```
 kill %1 %2 %3
 ```
 
-If you want to visualize the state of the process instances you can start the
+To visualize the state of the process instances, start the
 [Zeebe simple monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), a community maintained project.

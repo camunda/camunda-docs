@@ -12,14 +12,14 @@ Beyond Java and Go, it's possible to create clients for Zeebe in a range of othe
 
 The [Zeebe docs](/) (where this tutorial is located) contain resources to help you move your Zeebe project forward.
 
-If you have questions, you can get in touch with us via the:
+[//]:# (Could be a better way to word the sentence above. Perhaps "These Zeebe docs contain resources to help move your Zeebe project forward.")
+
+Please reach out if we can help you! We're here to offer support. If you have questions, get in touch with us via the:
 
 - [User forum](https://forum.camunda.io/)
 - [Public Slack channel](https://zeebe-slack-invite.herokuapp.com/)
 - [GitHub issue tracker](https://github.com/camunda-cloud/zeebe/issues)
 
-Please reach out if we can help you! We're here to offer support.
-
 Lastly, we do a lot of writing about project news along with an occasional deep dive into the product in the [Camunda Cloud blog](https://camunda.com/blog/).
 
-Thanks so much for working through this tutorial with us. We're really glad you're here, and we're happy to welcome you to the Zeebe community!
+Thank you for working through this tutorial with us. We're really glad you're here, and we're happy to welcome you to the Zeebe community!

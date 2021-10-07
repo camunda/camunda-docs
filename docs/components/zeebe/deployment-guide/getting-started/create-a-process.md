@@ -36,18 +36,18 @@ This is what your process model will look like when we're finished:
 
 ![Getting Started Process Model](assets/tutorial-3.0-complete-process.png)
 
-The payment task and shipping tasks are carried out by worker services we'll connect to the workflow engine. The **Payment Received** message will be published to Zeebe by an external system, and Zeebe will then correlate the message to a process instance.
+The payment task and shipping tasks are carried out by worker services we'll connect to the workflow engine. The **Payment Received** message is published to Zeebe by an external system, and Zeebe correlates the message to a process instance.
 
 ### Getting started
 
 To get started, take the following steps:
 
 1. Open Camunda Modeler and create a new BPMN diagram.
-2. Save the model as `order-process.bpmn` in the top level of the Zeebe broker directory that you just downloaded. As a reminder, this directory is called `zeebe-broker-0.17.0`
+2. Save the model as `order-process.bpmn` in the top level of the Zeebe broker directory you just downloaded. As a reminder, this directory is called `zeebe-broker-0.17.0`.
 
-The first element in your model will be a start event, which should already be on the canvas when you open Modeler.
+The first element in your model is a start event, which should already be on the canvas when you open Modeler.
 
-3. It's a BPMN best practice to label all elements in our model, so double-click on the start event and label it `Order Placed` to signify that our process will be initiated whenever a customer places an order
+3. It's a BPMN best practice to label all elements in our model, so double-click the start event and label it `Order Placed` to signify that our process is initiated whenever a customer places an order.
 
 ### Adding a service task
 
@@ -73,12 +73,12 @@ This **Type** field represents the **job type** in Zeebe.
 
 See a few concepts important to understand at this point below:
 
-- A **job** is simply a work item in a process that needs to be completed before a process instance can proceed to the next step. ([See: Job Workers](/components/concepts/job-workers.md))
-- A **process instance** is one running instance of a process model—in our case, this is an individual order to be fulfilled. ([See: Processes](/components/concepts/processes.md))
+- A **job** is simply a work item in a process that must be completed before a process instance can proceed to the next step. ([See: Job Workers](/components/concepts/job-workers.md))
+- A **process instance** is one running instance of a process model. In our case, this is an individual order to be fulfilled. ([See: Processes](/components/concepts/processes.md))
 
-For every process instance that arrives at the **Initiate Payment** service task, Zeebe will create a job with type `initiate-payment`. The external worker service responsible for payment processing—the so-called job worker—will poll Zeebe intermittently to ask if any jobs of type `initiate-payment` are available.
+For every process instance that arrives at the **Initiate Payment** service task, Zeebe creates a job with type `initiate-payment`. The external worker service responsible for payment processing (the so-called job worker) polls Zeebe intermittently to ask if any jobs of type `initiate-payment` are available.
 
-If a job is available for a given process instance, the worker will activate it, complete it, and notify Zeebe. Zeebe will then advance that process instance to the next step in the process.
+If a job is available for a given process instance, the worker activates it, completes it, and notifies Zeebe. Zeebe then advances that process instance to the next step in the process.
 
 ### Adding a message event to the process
 
@@ -94,11 +94,11 @@ Next, we'll add a message event to the process. Take the following steps:
 
 We use message catch events in Zeebe when the workflow engine needs to receive a message from an external system before the process instance can advance. (_[See: Message Events](/reference/bpmn-processes/message-events/message-events.md)_)
 
-In the scenario we're modeling, we _initiate_ a payment with our service task, but we need to wait for some other external system to actually confirm the payment was received. This confirmation comes in the form of a message that will be sent to Zeebe (asynchronously) by an external service.
+In the scenario we're modeling, we _initiate_ a payment with our service task, but we need to wait for some other external system to confirm the payment was received. This confirmation comes in the form of a message that is sent to Zeebe (asynchronously) by an external service.
 
 ### Correlating the message to process instances
 
-Messages received by Zeebe need to be correlated to specific process instances. To make this possible, we have some more configuring to do. Take the following steps:
+Messages received by Zeebe must be correlated to specific process instances. To make this possible, we have some more configuring to do. Take the following steps:
 
 1. Select the message event and make sure you're on the **General** tab of the properties panel on the right side of the screen.
 2. In the **Properties** panel, click the **+** icon to create a new message. You'll now see two fields in Modeler that we'll use to correlate a message to a specific process instance: message name and subscription correlation key.
@@ -125,7 +125,7 @@ Here's what you should see in Modeler:
 
 Next, we'll add an exclusive (XOR) gateway to our process model. The exclusive gateway is used to make a data-based decision about which path a process instance should follow. In this case, we want to ship items _with_ insurance if total order value is greater than or equal to $100 and ship _without_ insurance otherwise.
 
-That means when we create a process instance, we'll need to include order value as an instance variable. But we'll come to that later.
+That means when we create a process instance, we'll need to include order value as an instance variable. We'll come to this later.
 
 First, let's take the necessary steps to configure our process model to make this decision. To add the gateway, take the following steps:
 
