@@ -27,14 +27,8 @@ services:
     ports:
       - 8080:8080
     environment:
+      DEFAULT_CLIENT_CREATE: "false"
       IAM_CLIENT_SECRET: [a random 32 char alphanumeric string]
-
-      CLIENTS_0_BASE_URL: http://localhost:18085
-      CLIENTS_0_CLIENT_ID: test-client
-      CLIENTS_0_NAME: Test Client
-      CLIENTS_0_LOGOUT_URL: http://localhost:18085/logout_callback
-      CLIENTS_0_CLIENT_SECRET: [a random 32 char alphanumeric string]
-
       ENFORCE_HTTPS: "false"
 ```
 
@@ -101,16 +95,9 @@ services:
       - 8080:8080
     environment:
       IAM_CLIENT_SECRET: [a random 32 char alphanumeric string]
-
-      CLIENTS_0_BASE_URL: http://localhost:18085
-      CLIENTS_0_CLIENT_ID: test-client
-      CLIENTS_0_NAME: Test Client
-      CLIENTS_0_LOGOUT_URL: http://localhost:18085/logout_callback
-      CLIENTS_0_CLIENT_SECRET: [a random 32 char alphanumeric string]
-
       FEATURE_USER_MANAGEMENT: "true"
       ENFORCE_HTTPS: "false"
-
+      DEFAULT_CLIENT_CREATE: "false"
       DB_URL: jdbc:postgresql://database:5432/iam
       DB_PASSWORD: [the password you entered for `database.POSTGRES_PASSWORD`]
 
