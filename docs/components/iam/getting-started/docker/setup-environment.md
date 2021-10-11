@@ -94,10 +94,10 @@ services:
     ports:
       - 8080:8080
     environment:
-      IAM_CLIENT_SECRET: [a random 32 char alphanumeric string]
-      FEATURE_USER_MANAGEMENT: "true"
-      ENFORCE_HTTPS: "false"
       DEFAULT_CLIENT_CREATE: "false"
+      IAM_CLIENT_SECRET: [a random 32 char alphanumeric string]
+      ENFORCE_HTTPS: "false"
+      FEATURE_USER_MANAGEMENT: "true"
       DB_URL: jdbc:postgresql://database:5432/iam
       DB_PASSWORD: [the password you entered for `database.POSTGRES_PASSWORD`]
 

@@ -4,27 +4,30 @@ title: "Configuration variables"
 sidebar_label: "Configuration variables"
 ---
 
+As IAM is a Spring Boot application you are able to use the standard Spring [configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
+methods.
+
 ### Feature control
 
-Name | Description | Default value
+Environment variable | Description | Default value
 -----|-------------|--------------
-feature.ldap | Toggle LDAP support within IAM | false
+FEATURE_LDAP | Toggle LDAP support within IAM | false
 
 ### LDAP 
 
-All LDAP properties are prefixed with `ldap.`
+All LDAP properties are prefixed with `LDAP_`
 
-Name | Description | Default value
+Environment variable | Description | Default value
 -----|-------------|--------------
-default-username | The username of a default user to initialize IAM with |  -
-server-url | The URL at which the LDAP server is reachable |  -
-domain | The domain of an Active Directory (AD) LDAP server. (Only to be set if AD is used) |  -
-manager-dn | The credentials for binding the Camunda Account service to the LDAP server. (Must be empty if connecting to an AD server) |  -
-manager-password | The credentials for binding the Camunda Account service to the LDAP server. (Must be empty if connecting to an AD server) |  -
-base-dn | The start location for LDAP search. If AD is used and this property is empty, this property is determined from configured domain. |  -
-user-search-base | The start location for user search. Relative to base-dn. (Must be empty if AD is used) |  -
-user-search-filter | A filter to restrict the group of users to search in |  -
-uuid-attribute | The attribute names used on the LDAP server. Must be set to an attribute holding a universally unique identifier (UUID) of a user. |  -
-user-first-name-attribute | Used to build the full name of the user |  -
-user-last-name-attribute | Used to build the full name of the user |  -
-user-email-attribute | Used to determine a user's email address that is also used for log in |  -
+DEFAULT_USERNAME | The username of a default user to initialize IAM with |  -
+SERVER_URL | The URL at which the LDAP server is reachable |  -
+DOMAIN | The domain of an Active Directory (AD) LDAP server. (Only to be set if AD is used) |  -
+MANAGER_DN | The credentials for binding the Camunda Account service to the LDAP server. (Must be empty if connecting to an AD server) |  -
+MANAGER_PASSWORD | The credentials for binding the Camunda Account service to the LDAP server. (Must be empty if connecting to an AD server) |  -
+BASE_DN | The start location for LDAP search. If AD is used and this property is empty, this property is determined from configured domain. |  -
+USER_SEARCH_BASE | The start location for user search. Relative to base-dn. (Must be empty if AD is used) |  -
+USER_SEARCH_FILTER | A filter to restrict the group of users to search in |  -
+UUID_ATTRIBUTE | The attribute names used on the LDAP server. Must be set to an attribute holding a universally unique identifier (UUID) of a user. |  -
+USER_FIRST_NAME_ATTRIBUTE | Used to build the full name of the user |  -
+USER_LAST_NAME_ATTRIBUTE | Used to build the full name of the user |  -
+USER_EMAIL_ATTRIBUTE | Used to determine a user's email address that is also used for log in |  -
