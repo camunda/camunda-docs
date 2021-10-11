@@ -1,6 +1,8 @@
 ---
 id: schema
+slug: /reference/tasklist-api
 title: Schema Documentation
+sidebar_position: 1
 ---
 
 This documentation has been automatically generated from the GraphQL schema.
@@ -10,4 +12,4 @@ Use the docs in the sidebar to find out how to use the schema:
 - **Allowed operations**: queries and mutations.
 - **Schema-defined types**: scalars, objects, enums, interfaces, unions, and input objects.
 
-<small><i>Generated on May 04, 2021 at 4:26:36 PM.</i></small>
+<small><i>Generated on October 05, 2021 at 11:08:36 AM.</i></small>

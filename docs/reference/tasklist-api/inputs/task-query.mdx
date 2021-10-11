@@ -3,18 +3,6 @@ id: task-query
 title: TaskQuery
 ---
 
-export const Tag = ({children, color}) => (
-<span
-style={{
-      backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}>
-{children}
-</span>
-);
-
 Task query - query to get one page of tasks.
 
 ```graphql
@@ -23,6 +11,7 @@ type TaskQuery {
   assigned: Boolean
   assignee: String
   pageSize: Int
+  taskDefinitionId: String
   searchAfter: [String!]
   searchAfterOrEqual: [String!]
   searchBefore: [String!]
@@ -47,6 +36,10 @@ Who is assigned to the tasks?
 #### `pageSize` ([`Int`](/docs/reference/tasklist-api/scalars/int))
 
 Size of tasks page (default: 50).
+
+#### `taskDefinitionId` ([`String`](/docs/reference/tasklist-api/scalars/string))
+
+Task definition ID - what's the BPMN flow node?
 
 #### `searchAfter` ([`[String!]`](/docs/reference/tasklist-api/scalars/string))
 

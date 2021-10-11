@@ -15,17 +15,22 @@ By default, user storage in Elasticsearch is enabled.
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
 
-The **username** and **password** for one user may be set in application.yml:
+The **username**, **password** and **roles** for one user may be set in application.yml:
 
 ```
 camunda.tasklist:
   username: anUser
   password: aPassword
+  roles:
+    - OWNER
+    - USER
 ```
 
 On Tasklist startup, the user is created if they did not exist before.
 
-By default, one user with **username**/**password** `demo`/`demo` is created.
+By default, two users are created:
+* Role `OWNER` with **userId**/**displayName**/**password** `demo`/`demo`/`demo`.
+* Role `USER` with **userId**/**displayName**/**password** `view`/`view`/`view`.
 
 More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. The password must be encoded with a strong BCrypt hashing function.
 
@@ -66,3 +71,27 @@ export CAMUNDA_TASKLIST_AUTH0_CLIENTSECRET=A_SECRET
 export CAMUNDA_TASKLIST_AUTH0_CLAIMNAME=A_CLAIM
 export CAMUNDA_TASKLIST_AUTH0_ORGANIZATION=AN_ORGANIZATION
 ```
+
+## IAM
+
+[IAM](/docs/components/iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+
+### Enable IAM
+
+IAM can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `iam-auth`.
+
+See the following example:
+
+```
+export SPRING_PROFILES_ACTIVE=iam-auth
+```
+
+### Configure IAM
+IAM requires the following parameters:
+
+Parameter name | Description | Example value
+---------------|-------------|---------------
+camunda.tasklist.iam.issuer | Name/ID of issuer | http://app.iam.localhost
+camunda.tasklist.iam.issuerUrl | Url of issuer (IAM) | http://app.iam.localhost
+camunda.tasklist.iam.clientId | Similar to a username for the application | tasklist
+camunda.tasklist.iam.clientSecret | Similar to a password for the application. | XALaRPl...s7dL7
