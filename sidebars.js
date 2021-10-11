@@ -294,6 +294,10 @@ module.exports = {
               }
             ],
           }, {
+            "Deployment": [
+              "components/iam/deployment/configuration-variables",
+            ],
+          }, {
           "Third-Party Libraries": [
             "components/iam/third-party-libraries/backend-third-party-libraries",
             "components/iam/third-party-libraries/frontend-third-party-libraries",
