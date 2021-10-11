@@ -5,22 +5,25 @@ sidebar_label: "Step 2: Start IAM"
 ---
 
 ### Starting the containers
-To start the containers we can use a couple of methods, you may have Docker support within your IDE, if so please consult their documentation on run configurations.
-If you are using the command line you can use the following global command:
+
+There are several methods to start the containers. If you have Docker support within your IDE, consult their documentation on run configurations.
+
+If you are using the command line, use the following global command:
 
 ```shell
 docker compose -f /path/to/your/docker-compose.yml up -d
 ```
 :::note
-If you are using Docker Compose V1 you can use the command docker-compose
+If you are using Docker Compose V1, you can use the command `docker-compose`.
 :::
 
-This command will start the `iam` and `database` services, the health of the services can be checked with:
+This command starts the `iam` and `database` services. The health of the services can be checked with the following command:
+
 ```shell
 docker ps
 ```
 
-Your output should look similar to:
+Your output should look similar to the following:
 
 ```text
 CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                    PORTS                     NAMES
@@ -29,8 +32,9 @@ a2174c3fe0e9   postgres:13.3-alpine "docker-entrypoint.s…"   42 seconds ago   
 ```
 
 :::tip
-If the container for the IAM application does not remain healthy, you can use the `CONTAINER ID` to check the logs by running `docker logs <COMTAINER_ID>`
+If the container for the IAM application does not remain healthy, you can use the `CONTAINER ID` to check the logs by running `docker logs <COMTAINER_ID>`.
 :::
 
 ### Conclusion
-Congratulations! You've now started the IAM application, lets move on to logging in. 
+
+Congratulations! You've now started the IAM application. Let's move on to logging in.

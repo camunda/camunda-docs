@@ -4,19 +4,22 @@ title: "Setup environment"
 sidebar_label: "Step 1: Setup environment"
 ---
 
-In this part of the tutorial, we will show you how you can use containerization to run the IAM application on your machine. We will assume that you 
-have a basic understanding of Docker Compose. 
+In this part of the tutorial, we'll show you how you can use containerization to run the IAM application on your machine. Here, it is assumed you have a basic understanding of Docker Compose. 
 
 :::tip
 Not sure what Docker Compose is? Check out Docker's [Overview of Docker Compose](https://docs.docker.com/compose/) guide.
 :::
 
 ### Prerequisites
+
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Configuration
-Navigate to a directory of your choice, and create a `docker-compose.yml` file containing the following starting structure:
+
+To configure, take the following steps:
+
+1. Navigate to a directory of your choice and create a `docker-compose.yml` file containing the following starting structure:
 
 ```yaml
 version: "3.6"
@@ -33,10 +36,10 @@ services:
 ```
 
 :::note
-Here we set `ENFORCE_HTTPS` to false, so we can use localhost. We would recommend removing this option prior to production use.
+Here, we set `ENFORCE_HTTPS` to **false** so we can use localhost. We recommend removing this option prior to production use.
 :::
 
-IAM requires a database to function, let's add a database service to our docker-compose.yml file:
+2. IAM requires a database to function. Add a database service to your docker-compose.yml file:
 
 ```yaml
 database:
@@ -53,33 +56,34 @@ database:
 ```
 
 :::caution
-The IAM application currently only supports PostgreSQL 12+
-:::
-:::caution
-The IAM application generates an encryption key per start, this means the database needs to be recreated each time.
+The IAM application currently only supports PostgreSQL 12+.
 :::
 
-We will also need to add new entries to the `services.iam.environment` section to tell IAM where the database is located and the password for access:
+:::caution
+The IAM application generates an encryption key per start. This means the database must be recreated each time.
+:::
+
+3. We'll also need to add new entries to the `services.iam.environment` section to tell IAM where the database is located, and the password for access:
 
 ```yaml
   DB_PASSWORD: [the password you entered for `database.POSTGRES_PASSWORD`]
   DB_URL: jdbc:postgresql://database:5432/iam
 ```
 
-Next, we will tell Docker Compose that the `iam` service is dependent on the `database` service by adding the following lines under `services.iam`
+4. Let's tell Docker Compose that the `iam` service is dependent on the `database` service by adding the following lines under `services.iam`:
 
 ```yaml
     depends_on:
       - database
 ```
 
-And finally, we'll add an override to enable the user management functionality. To do this, add the following line to the `services.iam.environment` section:
+5. Add an override to enable the user management functionality. To do this, add the following line to the `services.iam.environment` section:
 
 ```yaml
   FEATURE_USER_MANAGEMENT: "true"
 ```
 
-Your `docker-compose.yml` file should now look like this
+Your `docker-compose.yml` file should now look like this:
 
 <details><summary>Show complete Docker Compose file</summary>
 
@@ -117,4 +121,5 @@ services:
 </details>
 
 ### Conclusion
-Now we have configured the containers for the IAM application, and the supporting database, let's move onto starting the services.
+
+Now that we've configured the containers for the IAM application and the supporting database, let's start the services.
