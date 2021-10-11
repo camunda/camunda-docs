@@ -17,15 +17,15 @@ module.exports = {
     "guides/setting-up-development-project",
     "guides/message-correlation",
     {
-        "Update Guide": [
-            "guides/update-guide/introduction",
-            "guides/update-guide/026-to-100",
-            "guides/update-guide/100-to-110",
-        ]
-	  },
+      "Update Guide": [
+        "guides/update-guide/introduction",
+        "guides/update-guide/026-to-100",
+        "guides/update-guide/100-to-110",
+      ],
+    },
     "guides/migrating-from-Camunda-Platform",
   ],
-  "Components": [
+  Components: [
     "components/overview",
     {
       Concepts: [
@@ -47,7 +47,7 @@ module.exports = {
             "components/clients/java-client/logging",
             "components/clients/java-client/testing",
             {
-              "Examples": [
+              Examples: [
                 "components/clients/java-client-examples/index",
                 "components/clients/java-client-examples/process-deploy",
                 "components/clients/java-client-examples/process-instance-create",
@@ -64,13 +64,13 @@ module.exports = {
           "Go client": [
             "components/clients/go-client/index",
             "components/clients/go-client/get-started",
-          ]
+          ],
         },
         {
           "CLI client": [
             "components/clients/cli-client/index",
-            "components/clients/cli-client/get-started"
-          ]
+            "components/clients/cli-client/get-started",
+          ],
         },
         {
           "Community clients": [
@@ -159,7 +159,7 @@ module.exports = {
               "Local installation": [
                 "components/zeebe/deployment-guide/local/install",
                 "components/zeebe/deployment-guide/local/quickstart",
-              ]
+              ],
             },
             "components/zeebe/deployment-guide/docker/install",
             {
@@ -171,7 +171,7 @@ module.exports = {
                     "components/zeebe/deployment-guide/kubernetes/helm/prerequisites",
                     "components/zeebe/deployment-guide/kubernetes/helm/installing-helm",
                     "components/zeebe/deployment-guide/kubernetes/helm/accessing-operate",
-                  ]
+                  ],
                 },
                 "components/zeebe/deployment-guide/kubernetes/operator/zeebe-operator",
               ],
@@ -192,7 +192,7 @@ module.exports = {
                 "components/zeebe/deployment-guide/configuration/logging",
                 "components/zeebe/deployment-guide/configuration/gateway-health-probes",
                 "components/zeebe/deployment-guide/configuration/environment-variables",
-              ]
+              ],
             },
             {
               Security: [
@@ -214,46 +214,46 @@ module.exports = {
                 "components/zeebe/deployment-guide/operations/update-zeebe",
               ],
             },
-          ]
+          ],
         },
         {
           "Open Source community": [
             "components/zeebe/open-source/community-contributions",
             "components/zeebe/open-source/get-help-get-involved",
-          ]
-        },
-        {
-            "Third-Party Libraries": [
-               "components/zeebe/third-party-libraries/zeebe-dependencies",
-            ]
-        },
-        {
-          Appendix: [
-
           ],
+        },
+        {
+          "Third-Party Libraries": [
+            "components/zeebe/third-party-libraries/zeebe-dependencies",
+          ],
+        },
+        {
+          Appendix: [],
         },
       ],
       Operate: [
-         "components/operate/index",{
-            "User guide":[
-              "components/operate/userguide/basic-operate-navigation",
-              "components/operate/userguide/resolve-incidents-update-variables",
-              "components/operate/userguide/selections-operations",
-              "components/operate/userguide/operate-feedback-and-questions"
-            ],
-            "Deployment guide": [
-               "components/operate/deployment/install-and-start",
-               "components/operate/deployment/configuration",
-               "components/operate/deployment/data-retention",
-               "components/operate/deployment/schema-and-migration",
-               "components/operate/deployment/importer-and-archiver",
-               "components/operate/deployment/authentication"
-            ],
-            "Third-Party Libraries": [
-               "components/operate/third-party-libraries/operate-backend-dependencies",
-               "components/operate/third-party-libraries/operate-frontend-dependencies"
-            ],
-         }
+        "components/operate/index",
+        {
+          "User guide": [
+            "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/resolve-incidents-update-variables",
+            "components/operate/userguide/selections-operations",
+            "components/operate/userguide/delete-finished-instances",
+            "components/operate/userguide/operate-feedback-and-questions",
+          ],
+          "Deployment guide": [
+            "components/operate/deployment/install-and-start",
+            "components/operate/deployment/configuration",
+            "components/operate/deployment/data-retention",
+            "components/operate/deployment/schema-and-migration",
+            "components/operate/deployment/importer-and-archiver",
+            "components/operate/deployment/authentication",
+          ],
+          "Third-Party Libraries": [
+            "components/operate/third-party-libraries/operate-backend-dependencies",
+            "components/operate/third-party-libraries/operate-frontend-dependencies",
+          ],
+        },
       ],
       Tasklist: [
         "components/tasklist/introduction",
@@ -277,20 +277,21 @@ module.exports = {
           ],
           "Third-Party Libraries": [
             "components/tasklist/third-party-libraries/tasklist-backend-dependencies",
-            "components/tasklist/third-party-libraries/tasklist-frontend-dependencies"
+            "components/tasklist/third-party-libraries/tasklist-frontend-dependencies",
           ],
         },
       ],
       IAM: [
-      "components/iam/what-is-iam", {
+        "components/iam/what-is-iam",
+        {
           "Third-Party Libraries": [
             "components/iam/third-party-libraries/backend-third-party-libraries",
-            "components/iam/third-party-libraries/frontend-third-party-libraries"
+            "components/iam/third-party-libraries/frontend-third-party-libraries",
           ],
         },
       ],
     },
-      "components/best-practices",
+    "components/best-practices",
   ],
   Reference: [
     "reference/overview",
@@ -313,7 +314,7 @@ module.exports = {
             "reference/bpmn-processes/business-rule-tasks/business-rule-tasks",
             "reference/bpmn-processes/script-tasks/script-tasks",
             "reference/bpmn-processes/send-tasks/send-tasks",
-            "reference/bpmn-processes/manual-tasks/manual-tasks"
+            "reference/bpmn-processes/manual-tasks/manual-tasks",
           ],
         },
         {
@@ -356,5 +357,5 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/supported-environments",
-  ]
+  ],
 };
