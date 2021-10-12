@@ -81,6 +81,7 @@ module.exports = {
             "components/clients/other-clients/python",
             "components/clients/other-clients/ruby",
             "components/clients/other-clients/rust",
+            "components/clients/other-clients/spring",
           ],
         },
         "components/clients/build-your-own-client",

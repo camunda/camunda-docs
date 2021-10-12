@@ -3,7 +3,7 @@ id: spring
 title: "Spring"
 ---
 
-The Spring integration is a community extension that allows you to leverage Zeebe within your Spring or Spring Boot environment easily.
+The Spring integration is a community extension that allows you to easily leverage Zeebe within your Spring or Spring Boot environment.
 
 Essentially, Spring provides a wrapper around the [Zeebe Java Client](../../java-client/index).
 
