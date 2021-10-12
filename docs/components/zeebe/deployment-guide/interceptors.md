@@ -12,7 +12,10 @@ load arbitrary interceptors into the gateway. Some typical examples of what you
 can accomplish with this include:
 
 - enforcing custom authorization rules on incoming calls
-- monitoring and logging of incoming calls
+- monitoring and logging of incoming calls  (e.g.
+  https://github.com/grpc-ecosystem/java-grpc-prometheus)
+- distributed tracing (e.g.
+  https://github.com/open-telemetry/opentelemetry-java-instrumentation)
 
 ## Implementing an interceptor
 For the communication between client and gateway, Zeebe uses the gRPC
@@ -31,6 +34,8 @@ example. Other ServerInterceptor examples can be found in the official grpc-java
 [examples](https://github.com/grpc/grpc-java/tree/v1.41.0/examples).
 
 ```java
+package io.camunda.zeebe.example;
+
 import io.grpc.ForwardingServerCallListener.SimpleForwardingServerCallListener;
 import io.grpc.Metadata;
 import io.grpc.ServerCall;
@@ -64,6 +69,12 @@ public final class LoggingInterceptor implements ServerInterceptor {
   }
 }
 ```
+
+This example interceptor will log `"intercepted a call"` at `TRACE` level for
+each incoming call it intercepted. This specific interceptor always dispatches
+all incoming calls to the target broker, but it would also be possible to stop
+the message from interception by other interceptors and even to block it from
+dispatch to the broker.
 
 ## Packaging an interceptor
 Next, you need to package the interceptor class into a fat JAR. Such a JAR must
@@ -100,7 +111,9 @@ interceptor, you need to provide your gateway with:
 - an interception order index
 - an identifier to identify this specific interceptor
 - where to find the JAR with the interceptor class
-- the fully qualified name of the interceptor class
+- the [fully qualified
+  name](https://docs.oracle.com/javase/specs/jls/se17/html/jls-6.html#jls-6.7)
+  of the interceptor class, e.g. `com.acme.ExampleInterceptor`
 
 Let's continue with the LoggingInterceptor example. We can provide these
 [configurations](components/zeebe/deployment-guide/configuration/configuration.md)
@@ -118,30 +131,36 @@ zeebe:
     # allows specifying multiple interceptors
     interceptors:
 
-      # determines the interception order
-      0:
-        # identifier, can be used for debugging
+      - # identifier, can be used for debugging
         id: logging-interceptor
 
         # name of our ServerInterceptor implementation
         # this must be the fully qualified name of the class
-        className: LoggingInterceptor
+        className: io.camunda.zeebe.example.LoggingInterceptor
 
         # path to the fat JAR, can be absolute or relative
         jarPath: /tmp/LoggingInterceptor.jar
 
-      # you can add additional interceptors by numbering them
-      1:
-        ...
+      # you can add additional interceptors by listing them
+      - id: ...
+        className: ...
+        jarPath: ...
 ```
 
 Note, that multiple interceptors can be configured (i.e.
 `zeebe.gateway.interceptors` expects a list of interceptor configurations). The
-interception order index determines the order in which a call is intercepted by
-the different interceptors. Interceptors with a lower index always wrap an
-interceptor with a higher index. The interceptor at index 0 is thus the
-outermost interceptor. In other words, calls are intercepted first by the
-interceptor at index 0, followed by the interceptor at index 1, etc.
+listing order determines the order in which a call is intercepted by the
+different interceptors. The first interceptor in the list wraps the second, etc.
+The first interceptor is thus the outermost interceptor. In other words, calls
+are intercepted first by the first listed interceptor, followed by the second
+listed interceptor, etc.
+
+This configuration can also be provided using environment variables. You'll need
+to provide an index for the interceptor in the variable name, to distinguish the
+ordering of the different interceptors. For example, to configure the
+`className` of the first interceptor use:
+`zeebe_gateway_interceptors_0_className`. Likewise, a second interceptor's
+`jarPath` can be configured using `zeebe_gateway_interceptors_1_jarPath`.
 
 ## Troubleshooting
 Here we describe a few common errors. Hopefully, this will help you recognize
@@ -161,7 +180,7 @@ not be found. Make sure you've configured the `className` correctly in the
 Something went wrong trying to load your interceptor. Make sure your [JAR is
 packaged](#packaging-an-interceptor) correctly, i.e. it contains all runtime
 dependencies and specifies them in the manifest file's classpath. The exception
-should provide a clear description, but generally we distinquish the following
+should provide a clear description, but generally we distinguish the following
 common cases:
 - unable to instantiate your class: make sure your class adheres to the
   [requirements described above](#implementing-an-interceptor).
