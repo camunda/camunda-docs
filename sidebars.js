@@ -309,6 +309,9 @@ module.exports = {
     },
     "components/best-practices",
   ],
+  "APIs & Clients": [
+    "apis-clients/overview",
+  ],
   Reference: [
     "reference/overview",
     "reference/public-api",

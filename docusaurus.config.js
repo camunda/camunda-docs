@@ -54,6 +54,12 @@ module.exports = {
         },
         {
           type: "doc",
+          docId: "apis-clients/overview",
+          label: "APIs & Clients",
+          position: "left",
+        },
+        {
+          type: "doc",
           docId: "reference/overview",
           label: "Reference",
           position: "left",
