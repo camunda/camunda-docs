@@ -1,0 +1,35 @@
+---
+id: task
+title: task
+---
+
+export const Tag = ({children, color}) => (
+<span
+style={{
+      backgroundColor: color,
+      borderRadius: '2px',
+      color: '#fff',
+      padding: '0.2rem',
+    }}>
+{children}
+</span>
+);
+
+Get one task by id. Returns task or error when task does not exist.
+
+```graphql
+task(
+  id: String!
+): Task!
+
+```
+
+### Arguments
+
+#### `id` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+
+### Type
+
+#### [`Task`](/docs/reference/tasklist-api/objects/task)
+
+Describes the User task.

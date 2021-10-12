@@ -1,0 +1,38 @@
+---
+id: form
+title: form
+---
+
+export const Tag = ({children, color}) => (
+<span
+style={{
+      backgroundColor: color,
+      borderRadius: '2px',
+      color: '#fff',
+      padding: '0.2rem',
+    }}>
+{children}
+</span>
+);
+
+Get task form by id and processDefinitionId
+
+```graphql
+form(
+  id: String!
+  processDefinitionId: String!
+): Form
+
+```
+
+### Arguments
+
+#### `id` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+
+#### `processDefinitionId` ([`String!`](/docs/reference/tasklist-api/scalars/string))
+
+### Type
+
+#### [`Form`](/docs/reference/tasklist-api/objects/form)
+
+Describes task embedded form
