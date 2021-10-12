@@ -144,7 +144,6 @@ outermost interceptor. In other words, calls are intercepted first by the
 interceptor at index 0, followed by the interceptor at index 1, etc.
 
 ## Troubleshooting
-
 Here we describe a few common errors. Hopefully, this will help you recognize
 these situations and provide an easy fix. Generally, the gateway will not be
 able to start up with a misconfigured interceptor.
@@ -153,11 +152,10 @@ Note that environment variables can overwrite your gateway configuration file.
 The gateway logs the configuration it uses during start-up. Please use that to
 verify your configuration.
 
-**java.lang.ClassNotFoundException**
-Your ServerInterceptor implementation could not be found. Make sure you've
-configured the `className` correctly in the [gateway
-configuration](#loading-an-interceptor-into-a-gateway) and that your [JAR
-contains your class](#packaging-an-interceptor).
+**java.lang.ClassNotFoundException** Your ServerInterceptor implementation could
+not be found. Make sure you've configured the `className` correctly in the
+[gateway configuration](#loading-an-interceptor-into-a-gateway) and that your
+[JAR contains your class](#packaging-an-interceptor).
 
 **io.camunda.zeebe.gateway.interceptors.impl.InterceptorLoadException**
 Something went wrong trying to load your interceptor. Make sure your [JAR is
@@ -170,3 +168,11 @@ common cases:
 - the JAR could not be loaded: make sure you've configured your interceptor
   correctly in the [gateway
   configuration](#loading-an-interceptor-into-a-gateway).
+
+**io.camunda.zeebe.util.jar.ExternalJarLoadException**: the JAR could not be
+loaded: make sure you've configured your interceptor correctly in the [gateway
+configuration](#loading-an-interceptor-into-a-gateway).
+
+**java.lang.UnsupportedClassVersionError** Your interceptor has been compiled by
+a more recent version of the Java Runtime. Make sure your [class is
+compiled](#packaging-an-interceptor) with JDK 11.
