@@ -21,6 +21,7 @@ module.exports = {
         "guides/update-guide/introduction",
         "guides/update-guide/026-to-100",
         "guides/update-guide/100-to-110",
+        "guides/update-guide/110-to-120",
       ],
     },
     "guides/migrating-from-Camunda-Platform",
