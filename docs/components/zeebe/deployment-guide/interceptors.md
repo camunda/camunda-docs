@@ -76,19 +76,36 @@ all incoming calls to the target broker, but it would also be possible to stop
 the message from interception by other interceptors and even to block it from
 dispatch to the broker.
 
+## Compiling your interceptor
+Our source code for the interceptor class can now be compiled. There are many
+ways to do this, but for simplicity we'll use `javac` directly.
+
+When compiling your class, you need to make sure all compile-time dependencies
+are provided. In the example above, that means we need the `grpc-api` and
+`slf4j-api` libraries available when compiling.
+
+Since the interceptor will be running inside the Zeebe gateway, the language
+level of the compiled code must be the same as Zeebe's (i.e. currently JDK
+11) or lower. This example thus assumes you're using version 11 of `javac`.
+
+```sh
+# to compile LoggingInterceptor.java, we'll need to provide the api libraries
+javac -classpath .:lib/grpc-api.jar:lib/slf4j-api.jar ./LoggingInterceptor.java
+```
+
 ## Packaging an interceptor
 Next, you need to package the interceptor class into a fat JAR. Such a JAR must
 contain all classes (i.e. including all classes your own classes depend upon at
 runtime).
 
-There are many ways to do this, but for simplicity we'll use `javac` and `jar`
-directly. Note, that means we have to define a java manifest file by hand, in
-order to place the libraries' classes on the classpath.
+Like compiling there are many ways to do this, but for simplicity we'll use
+`jar` directly. Note, that means we have to define a java manifest file by hand,
+in order to place the libraries' classes on the classpath.
+
+Similar to your interceptor class, any libraries you package must be compiled
+for the same language level as Zeebe's (i.e. currently JDK 11) or lower.
 
 ```sh
-# to compile LoggingInterceptor.java, we'll need to provide the grpc and slf4j api libraries
-javac -classpath .:lib/grpc-api.jar:lib/slf4j-api.jar ./LoggingInterceptor.java
-
 # both runtime libraries and the manifest must be packaged together with the compiled classes
 jar cvfm LoggingInterceptor.jar ./MANIFEST.MF ./*.class ./lib
 
