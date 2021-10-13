@@ -21,3 +21,4 @@ The deployment guide covers the following topics:
 - [Configuration](configuration/configuration.md) - Explains the configuration options. These configuration options apply to both environments, but not to Camunda Cloud. In Camunda Cloud, the configuration is provided for you.
 - [Security](security/security.md) - Discusses the security aspects of running Zeebe and how to use them.
 - [Operation](operations/index.md) - Outlines topics that become relevant when you want to operate Zeebe in production.
+- [Interceptors](../interceptors) - Describes how to enhance your Zeebe gateway with arbitrary gRPC call interceptors.
