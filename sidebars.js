@@ -155,70 +155,6 @@ module.exports = {
           ],
         },
         {
-          "Deployment guide": [
-            "components/zeebe/deployment-guide/index",
-            {
-              "Local installation": [
-                "components/zeebe/deployment-guide/local/install",
-                "components/zeebe/deployment-guide/local/quickstart",
-              ],
-            },
-            "components/zeebe/deployment-guide/docker/install",
-            {
-              "Kubernetes deployment": [
-                "components/zeebe/deployment-guide/kubernetes/index",
-                {
-                  "Helm charts": [
-                    "components/zeebe/deployment-guide/kubernetes/helm/index",
-                    "components/zeebe/deployment-guide/kubernetes/helm/prerequisites",
-                    "components/zeebe/deployment-guide/kubernetes/helm/installing-helm",
-                    "components/zeebe/deployment-guide/kubernetes/helm/accessing-operate",
-                  ],
-                },
-                "components/zeebe/deployment-guide/kubernetes/operator/zeebe-operator",
-              ],
-            },
-            {
-              "Getting started tutorial": [
-                "components/zeebe/deployment-guide/getting-started/index",
-                "components/zeebe/deployment-guide/getting-started/tutorial-setup",
-                "components/zeebe/deployment-guide/getting-started/create-a-process",
-                "components/zeebe/deployment-guide/getting-started/deploy-a-process",
-                "components/zeebe/deployment-guide/getting-started/create-process-instance",
-                "components/zeebe/deployment-guide/getting-started/next-steps-resources",
-              ],
-            },
-            {
-              Configuration: [
-                "components/zeebe/deployment-guide/configuration/configuration",
-                "components/zeebe/deployment-guide/configuration/logging",
-                "components/zeebe/deployment-guide/configuration/gateway-health-probes",
-                "components/zeebe/deployment-guide/configuration/environment-variables",
-              ],
-            },
-            {
-              Security: [
-                "components/zeebe/deployment-guide/security/security",
-                "components/zeebe/deployment-guide/security/authentication",
-                "components/zeebe/deployment-guide/security/authorization",
-              ],
-            },
-            {
-              Operation: [
-                "components/zeebe/deployment-guide/operations/index",
-                "components/zeebe/deployment-guide/operations/resource-planning",
-                "components/zeebe/deployment-guide/operations/network-ports",
-                "components/zeebe/deployment-guide/operations/setting-up-a-cluster",
-                "components/zeebe/deployment-guide/operations/metrics",
-                "components/zeebe/deployment-guide/operations/health",
-                "components/zeebe/deployment-guide/operations/backpressure",
-                "components/zeebe/deployment-guide/operations/disk-space",
-                "components/zeebe/deployment-guide/operations/update-zeebe",
-              ],
-            },
-          ],
-        },
-        {
           "Open Source community": [
             "components/zeebe/open-source/community-contributions",
             "components/zeebe/open-source/get-help-get-involved",
@@ -243,14 +179,6 @@ module.exports = {
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/operate-feedback-and-questions",
           ],
-          "Deployment guide": [
-            "components/operate/deployment/install-and-start",
-            "components/operate/deployment/configuration",
-            "components/operate/deployment/data-retention",
-            "components/operate/deployment/schema-and-migration",
-            "components/operate/deployment/importer-and-archiver",
-            "components/operate/deployment/authentication",
-          ],
           "Third-Party Libraries": [
             "components/operate/third-party-libraries/operate-backend-dependencies",
             "components/operate/third-party-libraries/operate-frontend-dependencies",
@@ -272,37 +200,9 @@ module.exports = {
               ],
             },
           ],
-          "Deployment guide": [
-            "components/tasklist/deployment/install-and-start",
-            "components/tasklist/deployment/configuration",
-            "components/tasklist/deployment/authentication",
-          ],
           "Third-Party Libraries": [
             "components/tasklist/third-party-libraries/tasklist-backend-dependencies",
             "components/tasklist/third-party-libraries/tasklist-frontend-dependencies",
-          ],
-        },
-      ],
-      IAM: [
-        "components/iam/what-is-iam",
-          {
-            "Getting started": [
-              {
-                "Running IAM with Docker": [
-                  "components/iam/getting-started/docker/setup-environment",
-                  "components/iam/getting-started/docker/start-iam",
-                  "components/iam/getting-started/docker/accessing-the-ui",
-                ]
-              }
-            ],
-          }, {
-            "Deployment": [
-              "components/iam/deployment/configuration-variables",
-            ],
-          }, {
-          "Third-Party Libraries": [
-            "components/iam/third-party-libraries/backend-third-party-libraries",
-            "components/iam/third-party-libraries/frontend-third-party-libraries",
           ],
         },
       ],
@@ -373,5 +273,108 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/supported-environments",
+  ],
+  "Self-Managed": [
+      "self-managed/overview",
+      {
+      "Tasklist deployment guide": [
+        "self-managed/tasklist-deployment/install-and-start",
+        "self-managed/tasklist-deployment/configuration",
+        "self-managed/tasklist-deployment/authentication",
+      ],
+      "Operate deployement guide": [
+        "self-managed/operate-deployment/install-and-start",
+        "self-managed/operate-deployment/configuration",
+        "self-managed/operate-deployment/data-retention",
+        "self-managed/operate-deployment/schema-and-migration",
+        "self-managed/operate-deployment/importer-and-archiver",
+        "self-managed/operate-deployment/authentication",
+      ],
+      IAM: [
+        "self-managed/iam/what-is-iam",
+          {
+            "Getting started": [
+              {
+                "Running IAM with Docker": [
+                  "self-managed/iam/getting-started/docker/setup-environment",
+                  "self-managed/iam/getting-started/docker/start-iam",
+                  "self-managed/iam/getting-started/docker/accessing-the-ui",
+                ]
+              }
+            ],
+          }, {
+            "Deployment": [
+              "self-managed/iam/deployment/configuration-variables",
+            ],
+          }, {
+          "Third-Party Libraries": [
+            "self-managed/iam/third-party-libraries/backend-third-party-libraries",
+            "self-managed/iam/third-party-libraries/frontend-third-party-libraries",
+          ],
+        },
+      ],
+      "Zeebe": [
+        "self-managed/zeebe-deployment/index",
+        {
+          "Local installation": [
+            "self-managed/zeebe-deployment/local/install",
+            "self-managed/zeebe-deployment/local/quickstart",
+          ],
+        },
+        "self-managed/zeebe-deployment/docker/install",
+        {
+          "Kubernetes deployment": [
+            "self-managed/zeebe-deployment/kubernetes/index",
+            {
+              "Helm charts": [
+                "self-managed/zeebe-deployment/kubernetes/helm/index",
+                "self-managed/zeebe-deployment/kubernetes/helm/prerequisites",
+                "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
+                "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate",
+              ],
+            },
+            "self-managed/zeebe-deployment/kubernetes/operator/zeebe-operator",
+          ],
+        },
+        {
+          "Getting started tutorial": [
+            "self-managed/zeebe-deployment/getting-started/index",
+            "self-managed/zeebe-deployment/getting-started/tutorial-setup",
+            "self-managed/zeebe-deployment/getting-started/create-a-process",
+            "self-managed/zeebe-deployment/getting-started/deploy-a-process",
+            "self-managed/zeebe-deployment/getting-started/create-process-instance",
+            "self-managed/zeebe-deployment/getting-started/next-steps-resources",
+          ],
+        },
+        {
+          Configuration: [
+            "self-managed/zeebe-deployment/configuration/configuration",
+            "self-managed/zeebe-deployment/configuration/logging",
+            "self-managed/zeebe-deployment/configuration/gateway-health-probes",
+            "self-managed/zeebe-deployment/configuration/environment-variables",
+          ],
+        },
+        {
+          Security: [
+            "self-managed/zeebe-deployment/security/security",
+            "self-managed/zeebe-deployment/security/authentication",
+            "self-managed/zeebe-deployment/security/authorization",
+          ],
+        },
+        {
+          Operation: [
+            "self-managed/zeebe-deployment/operations/index",
+            "self-managed/zeebe-deployment/operations/resource-planning",
+            "self-managed/zeebe-deployment/operations/network-ports",
+            "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
+            "self-managed/zeebe-deployment/operations/metrics",
+            "self-managed/zeebe-deployment/operations/health",
+            "self-managed/zeebe-deployment/operations/backpressure",
+            "self-managed/zeebe-deployment/operations/disk-space",
+            "self-managed/zeebe-deployment/operations/update-zeebe",
+          ],
+        },
+      ],
+    },
   ],
 };

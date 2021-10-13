@@ -74,7 +74,7 @@ export CAMUNDA_TASKLIST_AUTH0_ORGANIZATION=AN_ORGANIZATION
 
 ## IAM
 
-[IAM](/docs/components/iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+[IAM](../../iam/what-is-iam/) provides authentication and authorization functionality along with user management.
 
 ### Enable IAM
 
