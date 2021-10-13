@@ -63,7 +63,7 @@ As an example, the following partition schemes are guaranteed:
 | Partition 1 | X      | X      | X      |        |
 | Partition 2 |        | X      | X      | X      |
 | Partition 3 | X      |        | X      | X      |
-| Partition 4 |        |        |        | X      |
+| Partition 4 | X      | X      |        | X      |
 | Partition 5 | X      | X      | X      |        |
 | Partition 6 |        | X      | X      | X      |
 | Partition 7 | X      |        | X      | X      |
