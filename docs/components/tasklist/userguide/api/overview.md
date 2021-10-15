@@ -28,7 +28,7 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKE
 
 You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/getting-started/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
 
-See our guide on [building your own client](/components/clients/build-your-own-client.md).
+See our guide on [building your own client](/apis-clients/build-your-own-client.md).
 
 The following settings are needed:
 

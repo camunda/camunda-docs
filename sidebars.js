@@ -39,53 +39,6 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
       ],
-      Clients: [
-        "components/clients/overview",
-        {
-          "Java client": [
-            "components/clients/java-client/index",
-            "components/clients/java-client/job-worker",
-            "components/clients/java-client/logging",
-            "components/clients/java-client/testing",
-            {
-              Examples: [
-                "components/clients/java-client-examples/index",
-                "components/clients/java-client-examples/process-deploy",
-                "components/clients/java-client-examples/process-instance-create",
-                "components/clients/java-client-examples/process-instance-create-nonblocking",
-                "components/clients/java-client-examples/process-instance-create-with-result",
-                "components/clients/java-client-examples/job-worker-open",
-                "components/clients/java-client-examples/data-pojo",
-                "components/clients/java-client-examples/cluster-topology-request",
-              ],
-            },
-          ],
-        },
-        {
-          "Go client": [
-            "components/clients/go-client/index",
-            "components/clients/go-client/get-started",
-          ],
-        },
-        {
-          "CLI client": [
-            "components/clients/cli-client/index",
-            "components/clients/cli-client/get-started",
-          ],
-        },
-        {
-          "Community clients": [
-            "components/clients/community-clients/index",
-            "components/clients/community-clients/c-sharp",
-            "components/clients/community-clients/javascript",
-            "components/clients/community-clients/python",
-            "components/clients/community-clients/ruby",
-            "components/clients/community-clients/rust",
-            "components/clients/community-clients/spring",
-          ],
-        },
-        "components/clients/build-your-own-client",
-      ],
       "Cloud Console": [
         "components/cloud-console/introduction",
         {
@@ -311,6 +264,50 @@ module.exports = {
   ],
   "APIs & Clients": [
     "apis-clients/overview",
+    {
+      "Java client": [
+        "apis-clients/java-client/index",
+        "apis-clients/java-client/job-worker",
+        "apis-clients/java-client/logging",
+        "apis-clients/java-client/testing",
+        {
+          Examples: [
+            "apis-clients/java-client-examples/index",
+            "apis-clients/java-client-examples/process-deploy",
+            "apis-clients/java-client-examples/process-instance-create",
+            "apis-clients/java-client-examples/process-instance-create-nonblocking",
+            "apis-clients/java-client-examples/process-instance-create-with-result",
+            "apis-clients/java-client-examples/job-worker-open",
+            "apis-clients/java-client-examples/data-pojo",
+            "apis-clients/java-client-examples/cluster-topology-request",
+          ],
+        },
+      ],
+    },
+    {
+      "Go client": [
+        "apis-clients/go-client/index",
+        "apis-clients/go-client/get-started",
+      ],
+    },
+    {
+      "CLI client": [
+        "apis-clients/cli-client/index",
+        "apis-clients/cli-client/get-started",
+      ],
+    },
+    {
+      "Community clients": [
+        "apis-clients/community-clients/index",
+        "apis-clients/community-clients/c-sharp",
+        "apis-clients/community-clients/javascript",
+        "apis-clients/community-clients/python",
+        "apis-clients/community-clients/ruby",
+        "apis-clients/community-clients/rust",
+        "apis-clients/community-clients/spring",
+      ],
+    },
+    "apis-clients/build-your-own-client",
   ],
   Reference: [
     "reference/overview",
