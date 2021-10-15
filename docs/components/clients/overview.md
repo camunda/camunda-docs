@@ -27,12 +27,12 @@ Community clients supplement the official clients. These clients have not been t
 
 ## Community clients
 
-- [C#](other-clients/c-sharp.md)
-- [JavaScript/NodeJS](other-clients/javascript.md)
-- [Python](other-clients/python.md)
-- [Ruby](other-clients/ruby.md)
-- [Rust](other-clients/rust.md)
-- [Spring](other-clients/spring.md)
+- [C#](community-clients/c-sharp.md)
+- [JavaScript/NodeJS](community-clients/javascript.md)
+- [Python](community-clients/python.md)
+- [Ruby](community-clients/ruby.md)
+- [Rust](community-clients/rust.md)
+- [Spring](community-clients/spring.md)
 
 Finally, it is possible to [build your own client](build-your-own-client.md) if none of the other options are suitable.
 

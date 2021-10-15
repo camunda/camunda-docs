@@ -32,7 +32,7 @@ Clients are libraries you embed in an application (e.g. a microservice that exec
 
 Clients connect to the Zeebe gateway via [gRPC](https://grpc.io), which uses HTTP/2-based transport. To learn more about gRPC in Zeebe, check out the [Zeebe API (gRPC)](/reference/grpc.md).
 
-The Zeebe project includes officially-supported Java and Go clients. [Community clients](/components/clients/other-clients/index.md) have been created in other languages, including C#, Ruby, and JavaScript. The gRPC protocol makes it possible to [generate clients](/components/clients/build-your-own-client.md) in a range of different programming languages.
+The Zeebe project includes officially-supported Java and Go clients. [Community clients](/components/clients/community-clients/index.md) have been created in other languages, including C#, Ruby, and JavaScript. The gRPC protocol makes it possible to [generate clients](/components/clients/build-your-own-client.md) in a range of different programming languages.
 
 ### Job worker
 

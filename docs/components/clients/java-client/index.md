@@ -27,7 +27,7 @@ Use the latest released version from [Maven Central](https://search.maven.org/ar
 
 ## Spring Integration
 
-If you build a Spring or Spring Boot application, you might want to use [Spring Zeebe](../../other-clients/spring) instead of handling the lifecycle and configuration of the Java client yourself (as described in the following paragraphs).
+If you build a Spring or Spring Boot application, you might want to use [Spring Zeebe](../../community-clients/spring) instead of handling the lifecycle and configuration of the Java client yourself (as described in the following paragraphs).
 
 ## Bootstrapping
 
