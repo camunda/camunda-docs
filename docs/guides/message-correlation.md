@@ -1,7 +1,9 @@
 ---
 id: message-correlation
 title: Message Correlation
+description: "Message correlation allows you to target a running workflow with a state update from an external system asynchronously."
 ---
+<span class="badge badge--primary">Intermediate</span>
 
 Message correlation is a powerful feature in Camunda Cloud. It allows you to target a running workflow with a state update from an external system asynchronously. 
 

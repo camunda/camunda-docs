@@ -3,6 +3,7 @@ id: implement-decision-gateway
 title: Implement a decision gateway
 description: "Using the JSON object, let's route your process."
 ---
+<span class="badge badge--primary">Beginner</span>
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";

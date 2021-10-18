@@ -1,7 +1,9 @@
 ---
 id: setting-up-development-project
 title: Setting up your first development project
+description: "Set up your first project to model, deploy, and start a process instance."
 ---
+<span class="badge badge--primary">Beginner</span>
 
 Let's set up your first project to model, deploy, and start a process instance.
 

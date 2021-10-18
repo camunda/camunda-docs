@@ -1,7 +1,9 @@
 ---
 id: model-your-first-process
 title: Model your first process
+description: "Use Modeler to design and deploy a process."
 ---
+<span class="badge badge--primary">Beginner</span>
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";

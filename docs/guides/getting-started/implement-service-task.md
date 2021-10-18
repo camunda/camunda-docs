@@ -3,6 +3,7 @@ id: implement-service-task
 title: Implement a service task
 description: "Let's implement a service task to connect workers."
 ---
+<span class="badge badge--primary">Beginner</span>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

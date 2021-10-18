@@ -3,6 +3,7 @@ id: connect-to-your-cluster
 title: Connect to your cluster
 description: "Let's learn more about installing and communicating with clusters."
 ---
+<span class="badge badge--primary">Beginner</span>
 
 ## Installation
 

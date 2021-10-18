@@ -2,7 +2,9 @@
 id: create-camunda-cloud-account
 title: Sign up & log in
 slug: /guides/getting-started/
+description: "Set up your Camunda Cloud account to get started."
 ---
+<span class="badge badge--primary">Beginner</span>
 
 ## Sign up for Camunda Cloud
 
