@@ -309,11 +309,11 @@ module.exports = {
       ],
     },
     "apis-clients/build-your-own-client",
+    "apis-clients/public-api",
+    "apis-clients/cloud-console-api-clients",
   ],
   Reference: [
     "reference/overview",
-    "reference/public-api",
-    "reference/cloud-console-api-clients",
     "reference/cloud-console-api-reference",
     "reference/grpc",
     require("./docs/reference/tasklist-api/sidebar-schema"),

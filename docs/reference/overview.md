@@ -9,8 +9,6 @@ This section contains general reference material for Camunda Cloud, including AP
 
 ## APIs
 
-- [Public API](public-api.md)
-- [Console API clients](cloud-console-api-clients.md)
 - [Console API (REST)](cloud-console-api-reference.md)
 - [Zeebe API (gRPC)](grpc.md)
 - [Tasklist API (GraphQL)](tasklist-api/generated.md)
