@@ -14,9 +14,9 @@ module.exports = {
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
+    "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/message-correlation",
-    "guides/getting-started-orchestrate-microservices",
     {
       "Update Guide": [
         "guides/update-guide/introduction",
