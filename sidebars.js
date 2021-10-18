@@ -169,6 +169,7 @@ module.exports = {
                 "components/zeebe/deployment-guide/operations/update-zeebe",
               ],
             },
+            "components/zeebe/deployment-guide/interceptors"
           ],
         },
         {

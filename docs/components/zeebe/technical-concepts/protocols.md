@@ -29,3 +29,9 @@ Currently, Zeebe officially supports two gRPC clients: one in [Java](/apis-clien
 [Community clients](/apis-clients/community-clients/index.md) have been created in other languages, including C#, Ruby, and JavaScript.
 
 If there is no client in your target language yet, you can [build your own client](/apis-clients/build-your-own-client.md) in a range of different programming languages.
+
+## Intercepting calls
+
+Zeebe supports loading arbitrary gRPC server interceptors to intercept incoming
+calls. You can read more about it
+[here](/components/zeebe/deployment-guide/interceptors.md).
