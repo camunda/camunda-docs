@@ -5,10 +5,17 @@ description: "Deploy and start your process instance."
 ---
 <span class="badge badge--primary">Beginner</span>
 
+## Prerequisites
+
+- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- [Latest version of Zeebe](https://github.com/camunda-cloud/zeebe/releases)
+
 :::note
 
 BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot currently run a BPMN diagram modeled for Camunda Platform in Camunda Cloud, or vice versa.
 :::
+
+## Deploy and start your process instance
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";

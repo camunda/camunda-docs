@@ -5,6 +5,13 @@ description: "Let's implement a service task to connect workers."
 ---
 <span class="badge badge--primary">Beginner</span>
 
+## Prerequisites
+
+- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- [Latest version of Zeebe](https://github.com/camunda-cloud/zeebe/releases)
+
+## Implement a service task
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

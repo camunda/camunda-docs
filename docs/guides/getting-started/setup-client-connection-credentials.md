@@ -5,6 +5,13 @@ description: "Set up client connection credentials to create, name, and connect 
 ---
 <span class="badge badge--primary">Beginner</span>
 
+## Prerequisites
+
+- [Camunda Cloud account](create-camunda-cloud-account.md)
+- [Latest version of Zeebe](https://github.com/camunda-cloud/zeebe/releases)
+
+## Set up client connection credentials
+
 Here, we'll set up client connection credentials to create, name, and connect your client.
 
 To create a new client, take the following steps:

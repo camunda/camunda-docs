@@ -5,6 +5,12 @@ description: "Use Modeler to design and deploy a process."
 ---
 <span class="badge badge--primary">Beginner</span>
 
+## Prerequisites
+
+- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+
+## Design and deploy a process
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 

@@ -5,6 +5,13 @@ description: "Camunda Cloud offers Operate to monitor your process instances."
 ---
 <span class="badge badge--primary">Beginner</span>
 
+## Prerequisites
+
+- [Camunda Operate](/components/operate/deployment/install-and-start.md)
+- [Latest version of Zeebe](https://github.com/camunda-cloud/zeebe/releases)
+
+## Monitor your process
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
