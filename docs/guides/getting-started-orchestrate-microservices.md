@@ -68,7 +68,7 @@ Next, we’ll create a worker for the service task by associating it with the ty
 1. Open the downloaded or cloned project in your IDE.
 2. Add your credentials to `application.properties`. Your client id and client secret are available from the previous section in the credential text file you downloaded or copied. Your cluster id and region can be found by going to the cluster overview page.
 3. In the `Worker.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “orchestrate-something”, no action is required.
-4. After making these changes, perform a Maven install, then run main in `Worker.java`.
+4. After making these changes, perform a Maven install, then run main in `Worker.java`. If you prefer using a terminal, run `mvn package exec:java`.
 5. Navigate to Operate and you will see your token has moved to the end event, completing this process instance.
 
 Congratulations! You successfully built your first microservice orchestration solution with Camunda Cloud.
