@@ -11,11 +11,11 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-* Valid Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one.
+* Valid Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one
 * Java >= 8
 * Maven
 * IDE (IntelliJ, VSCode, or similar)
-* Download and unzip or clone the [repo](https://github.com/camunda-cloud/camunda-cloud-tutorials). Then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`
+* Download and unzip or clone the [repo](https://github.com/camunda-cloud/camunda-cloud-tutorials), then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`
 
 ## Guide steps
 
