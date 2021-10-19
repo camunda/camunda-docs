@@ -9,19 +9,17 @@ Using Camunda Cloud, you can orchestrate the microservices necessary to achieve 
 
 While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda Cloud in other programming languages.
 
-[ADD OUTLINE OF STEPS]
-
 ## Prerequisites
 
-* Valid Camunda Cloud account
+* Valid Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one.
 * Java >= 8
 * Maven
 * IDE (IntelliJ, VSCode, or similar)
-* Clone or download the [repo](https://github.com/berndruecker/camunda-cloud-tutorials/tree/main/orchestrate-microservices/part1-spring-boot-worker).
+* Download and unzip or clone the [repo](https://github.com/camunda-cloud/camunda-cloud-tutorials). Then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`
 
 ## Guide steps
 
-First, log in to your Camunda Cloud account.
+First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one, then log in.
 
 ### Design your process with BPMN
 
@@ -35,7 +33,7 @@ Start by designing your automated process using BPMN. This guide introduces you 
 6. Add an end task by dragging one from the palette, or by clicking the end task when the last service task in your diagram has focus.
 7. In the **Execute** drop down, click **Save and Deploy**. Your diagram is now deployed to your cluster.
 8. Start a new process instance in the **Execute** drop down by clicking **Start Instance**. 
-9. Navigate to Operate to see your process instance with a token waiting at the service task. In the **Execute** drop down, click **View Process Instances**.
+9. In the **Execute** drop down, click **View Process Instances**. Navigate to Operate to see your process instance with a token waiting at the service task.
 
 ### Create credentials for your Zeebe client
 
@@ -50,14 +48,17 @@ If your account is new, you should have a cluster already available. If no clust
 :::
 
 2. Navigate to the **API** tab. Click **Create**.
-3. Provide a descriptive name for your client. For this tutorial, the scope can be the default Zeebe. Click **Create**.
-4. Your client credentials can be copied or downloaded at this point. Once you close or navigate away from this screen, you will not be able to see them again. You will need your client id and your client secret when creating a worker in the next section.
+3. Provide a descriptive name for your client like `microservice-worker`. For this tutorial, the scope can be the default Zeebe scope. Click **Create**.
+4. Your client credentials can be copied or downloaded at this point. You will need your client id and your client secret when creating a worker in the next section, so keep this window open. Once you close or navigate away from this screen, you will not be able to see them again. 
 
 ### Create a worker for the service task
 
 Next, we’ll create a worker for the service task by associating it with the type we specified on the service task in the BPMN diagram.
 
 1. Open the downloaded or cloned project in your IDE.
-2. Add your credentials to `Worker.java`. Your client id and client secret are available from the previous section in the credential text file you downloaded or copied. Your cluster id and region can be found by going to the cluster overview page.
+2. Add your credentials to `application.properties`. Your client id and client secret are available from the previous section in the credential text file you downloaded or copied. Your cluster id and region can be found by going to the cluster overview page.
 3. In the `Worker.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “orchestrate-something”, no action is required.
 4. After making these changes, perform a Maven install, then run main in `Worker.java`.
+5. Navigate to Operate and you will see your token has moved to the end event, completing this process instance.
+
+Congratulations! You successfully built your first microservice orchestration solution with Camunda Cloud.
