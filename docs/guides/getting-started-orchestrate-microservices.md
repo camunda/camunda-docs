@@ -21,6 +21,10 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one, then log in.
 
+1. [Design your process with BPMN](#design-your-process-with-BPMN)
+2. [Create credentials for your Zeebe client](#create-credentials-for-your-zeebe-client)
+3. [Create a worker for the service task](#create-a-worker-for-the-service-task)
+
 ### Design your process with BPMN
 
 Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Cloud Modeler.
@@ -28,9 +32,15 @@ Start by designing your automated process using BPMN. This guide introduces you 
 1. Navigate to your diagrams, either through the **Diagrams** navigation, or by using the section under **Camunda Cloud Service** on the main dashboard. Click **Create New Diagram**. This opens Cloud Modeler.
 2. Give your model a descriptive name and id. For this guide, we'll use **Microservice Orchestration Tutorial** for the name and **microservice-orchestration-tutorial** for the id.
 3. Use Cloud Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Change the task type by clicking the wrench icon and selecting **Service Task**. 
-4. Add a descriptive name using the properties panel. 
-5. Use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use **orchestrate-something** as the type. You will use this in “Create a worker for the service task”.
-6. Add an end task by dragging one from the palette, or by clicking the end task when the last service task in your diagram has focus.
+
+![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
+
+4. Add a descriptive name using the properties panel. For this guide, we'll use **Microservice Example**.
+5. Use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use **orchestrate-something** as the type. You will use this in [Create a worker for the service task](#create-a-worker-for-the-service-task). If you do not have an option to add the **Type**, make sure you have used the wrench icon and selected **Service Task**.
+
+![Service task with properties panel open](./img/microservice-orchestration-service-task.png)
+
+6. Add an end task by dragging one from the palette, or by clicking the end task when the last service task in your diagram has focus. The linter should turn green with a checkmark and show zero errors and zero warnings.
 7. In the **Execute** drop down, click **Save and Deploy**. Your diagram is now deployed to your cluster.
 8. Start a new process instance in the **Execute** drop down by clicking **Start Instance**. 
 9. In the **Execute** drop down, click **View Process Instances**. Navigate to Operate to see your process instance with a token waiting at the service task.
