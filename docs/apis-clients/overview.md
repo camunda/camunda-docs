@@ -42,5 +42,5 @@ The clients mentioned above interact with Zeebe, the workflow engine integrated 
 
 Other components in Camunda Cloud provide language-agnostic APIs, but no clients to interact with them:
 
-- [Console API (REST)](/reference/cloud-console-api-reference.md) - enables you to create and manage clusters programmatically.
+- [Console API (REST)](cloud-console-api-reference.md) - enables you to create and manage clusters programmatically.
 - [Tasklist API (GraphQL)](/reference/tasklist-api/generated.md) - enables you to query, claim, and complete user tasks.

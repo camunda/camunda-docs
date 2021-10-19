@@ -5,13 +5,7 @@ sidebar_label: Overview
 slug: /reference/
 ---
 
-This section contains general reference material for Camunda Cloud, including API references.
-
-## APIs
-
-- [Console API (REST)](cloud-console-api-reference.md)
-- [Zeebe API (gRPC)](grpc.md)
-- [Tasklist API (GraphQL)](tasklist-api/generated.md)
+This section contains general reference material for Camunda Cloud.
 
 ## Security, support, & license information
 

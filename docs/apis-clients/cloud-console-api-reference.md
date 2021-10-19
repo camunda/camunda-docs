@@ -3,7 +3,7 @@ id: cloud-console-api-reference
 title: Console API (REST)
 ---
 
-For all requests, include the access token for Cloud API in the Authorization header: `authorization:Bearer ${TOKEN}` (see [Cloud Console API clients](./apis-clients/cloud-console-api-clients.md))
+For all requests, include the access token for Cloud API in the Authorization header: `authorization:Bearer ${TOKEN}` (see [Cloud Console API clients](cloud-console-api-clients.md))
 
 ## Clusters
 
