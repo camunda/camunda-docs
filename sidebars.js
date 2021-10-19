@@ -265,6 +265,7 @@ module.exports = {
   ],
   "APIs & Clients": [
     "apis-clients/overview",
+    require("./docs/apis-clients/tasklist-api/sidebar-schema"),
     {
       "Java client": [
         "apis-clients/java-client/index",
@@ -316,7 +317,6 @@ module.exports = {
   ],
   Reference: [
     "reference/overview",
-    require("./docs/reference/tasklist-api/sidebar-schema"),
     {
       "BPMN processes": [
         "reference/bpmn-processes/bpmn-primer",

@@ -1,6 +1,6 @@
 ---
 id: schema
-slug: /reference/tasklist-api
+slug: /apis-clients/tasklist-api
 title: Schema Documentation
 sidebar_position: 1
 ---

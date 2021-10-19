@@ -3,28 +3,17 @@ id: task
 title: Task
 ---
 
-export const Tag = ({children, color}) => (
-<span
-style={{
-      backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}>
-{children}
-</span>
-);
-
 Describes the User task.
 
 ```graphql
 type Task {
   id: ID!
   name: String!
+  taskDefinitionId: String!
   processName: String!
   creationTime: String!
   completionTime: String
-  assignee: User
+  assignee: String
   variables: [Variable!]
   taskState: TaskState!
   sortValues: [String!]
@@ -44,6 +33,10 @@ The unique identifier of the task
 
 Name of the task
 
+#### `taskDefinitionId` ([`String!`](/docs/apis-clients/tasklist-api/scalars/string))
+
+Task Definition ID (node BPMN id) of the process
+
 #### `processName` ([`String!`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Name of the process
@@ -56,9 +49,9 @@ When was the task created
 
 When was the task completed
 
-#### `assignee` ([`User`](/docs/apis-clients/tasklist-api/objects/user))
+#### `assignee` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
-Who is assigned to the task
+Username/id of who is assigned to the task
 
 #### `variables` ([`[Variable!]`](/docs/apis-clients/tasklist-api/objects/variable))
 

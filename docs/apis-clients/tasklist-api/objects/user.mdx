@@ -3,18 +3,6 @@ id: user
 title: User
 ---
 
-export const Tag = ({children, color}) => (
-<span
-style={{
-      backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}>
-{children}
-</span>
-);
-
 Describes the user.
 
 ```graphql
@@ -22,6 +10,7 @@ type User {
   username: ID!
   firstname: String
   lastname: String
+  permissions: [String!]
 }
 ```
 
@@ -32,3 +21,5 @@ type User {
 #### `firstname` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
 #### `lastname` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+
+#### `permissions` ([`[String!]`](/docs/apis-clients/tasklist-api/scalars/string))
