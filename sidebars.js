@@ -270,8 +270,8 @@ module.exports = {
       "APIs": [
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/public-api",
-        "apis-clients/cloud-console-api-clients",
         "apis-clients/cloud-console-api-reference",
+        "apis-clients/cloud-console-api-clients",
         "apis-clients/grpc",
       ],
     },
