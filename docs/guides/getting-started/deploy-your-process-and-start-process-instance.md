@@ -4,6 +4,7 @@ title: Deploy and start your process instance
 description: "Deploy and start your process instance."
 ---
 <span class="badge badge--primary">Beginner</span>
+<span class="badge badge--primary">Time estimate: 5 minutes</span>
 
 ## Prerequisites
 

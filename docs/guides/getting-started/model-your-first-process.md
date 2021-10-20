@@ -4,6 +4,7 @@ title: Model your first process
 description: "Use Modeler to design and deploy a process."
 ---
 <span class="badge badge--primary">Beginner</span>
+<span class="badge badge--primary">Time estimate: 5 minutes</span>
 
 ## Prerequisites
 

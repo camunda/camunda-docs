@@ -4,6 +4,7 @@ title: Implement a service task
 description: "Let's implement a service task to connect workers."
 ---
 <span class="badge badge--primary">Beginner</span>
+<span class="badge badge--primary">Time estimate: 8 minutes</span>
 
 ## Prerequisites
 

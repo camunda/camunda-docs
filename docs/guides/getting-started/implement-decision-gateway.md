@@ -4,6 +4,7 @@ title: Implement a decision gateway
 description: "Using the JSON object, let's route your process."
 ---
 <span class="badge badge--primary">Beginner</span>
+<span class="badge badge--primary">Time estimate: 5 minutes</span>
 
 ## Prerequisites
 
