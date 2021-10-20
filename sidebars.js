@@ -263,58 +263,68 @@ module.exports = {
     },
     "components/best-practices",
   ],
+
   "APIs & Clients": [
     "apis-clients/overview",
-    require("./docs/apis-clients/tasklist-api/sidebar-schema"),
     {
-      "Java client": [
-        "apis-clients/java-client/index",
-        "apis-clients/java-client/job-worker",
-        "apis-clients/java-client/logging",
-        "apis-clients/java-client/testing",
+      "APIs": [
+        require("./docs/apis-clients/tasklist-api/sidebar-schema"),
+        "apis-clients/public-api",
+        "apis-clients/cloud-console-api-clients",
+        "apis-clients/cloud-console-api-reference",
+        "apis-clients/grpc",
+      ],
+    },
+    {
+      "Clients": [
         {
-          Examples: [
-            "apis-clients/java-client-examples/index",
-            "apis-clients/java-client-examples/process-deploy",
-            "apis-clients/java-client-examples/process-instance-create",
-            "apis-clients/java-client-examples/process-instance-create-nonblocking",
-            "apis-clients/java-client-examples/process-instance-create-with-result",
-            "apis-clients/java-client-examples/job-worker-open",
-            "apis-clients/java-client-examples/data-pojo",
-            "apis-clients/java-client-examples/cluster-topology-request",
+          "Java client": [
+            "apis-clients/java-client/index",
+            "apis-clients/java-client/job-worker",
+            "apis-clients/java-client/logging",
+            "apis-clients/java-client/testing",
+              {
+                Examples: [
+                  "apis-clients/java-client-examples/index",
+                  "apis-clients/java-client-examples/process-deploy",
+                  "apis-clients/java-client-examples/process-instance-create",
+                  "apis-clients/java-client-examples/process-instance-create-nonblocking",
+                  "apis-clients/java-client-examples/process-instance-create-with-result",
+                  "apis-clients/java-client-examples/job-worker-open",
+                  "apis-clients/java-client-examples/data-pojo",
+                  "apis-clients/java-client-examples/cluster-topology-request",
+                  ],
+              },
+            ],
+          },
+        {
+          "Go client": [
+            "apis-clients/go-client/index",
+            "apis-clients/go-client/get-started",
           ],
         },
+        {
+          "CLI client": [
+          "apis-clients/cli-client/index",
+          "apis-clients/cli-client/get-started",
+          ],
+        },
+        {
+          "Community clients": [
+            "apis-clients/community-clients/index",
+            "apis-clients/community-clients/c-sharp",
+            "apis-clients/community-clients/javascript",
+            "apis-clients/community-clients/python",
+            "apis-clients/community-clients/ruby",
+            "apis-clients/community-clients/rust",
+            "apis-clients/community-clients/spring",
+          ],
+        },
+        "apis-clients/build-your-own-client",
       ],
     },
-    {
-      "Go client": [
-        "apis-clients/go-client/index",
-        "apis-clients/go-client/get-started",
-      ],
-    },
-    {
-      "CLI client": [
-        "apis-clients/cli-client/index",
-        "apis-clients/cli-client/get-started",
-      ],
-    },
-    {
-      "Community clients": [
-        "apis-clients/community-clients/index",
-        "apis-clients/community-clients/c-sharp",
-        "apis-clients/community-clients/javascript",
-        "apis-clients/community-clients/python",
-        "apis-clients/community-clients/ruby",
-        "apis-clients/community-clients/rust",
-        "apis-clients/community-clients/spring",
-      ],
-    },
-    "apis-clients/build-your-own-client",
-    "apis-clients/public-api",
-    "apis-clients/cloud-console-api-clients",
-    "apis-clients/cloud-console-api-reference",
-    "apis-clients/grpc",
   ],
+ 
   Reference: [
     "reference/overview",
     {

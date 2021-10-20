@@ -5,6 +5,25 @@ sidebar_label: "Overview"
 description: "Programmatically work with Camunda Cloud through APIs & clients"
 ---
 
+This section steps through a variety of offered APIs and clients for integration.
+
+## APIs and interacting with other components
+
+The clients mentioned below interact with Zeebe, the workflow engine integrated into Camunda Cloud.
+
+Other components in Camunda Cloud provide language-agnostic APIs, but no clients to interact with them:
+
+- [Console API (REST)](cloud-console-api-reference.md) - Enables you to create and manage clusters programmatically.
+- [Tasklist API (GraphQL)](/apis-clients/tasklist-api/generated.md) - Enables you to query, claim, and complete user tasks.
+
+### Additional APIs
+
+- [Public API](public-api.md) - Camunda Cloud provides a public API limited to the [Zeebe Client Java API](/apis-clients/java-client/index.md).
+- [Console API Clients](cloud-console-api-clients.md) - To interact with Camunda Cloud programmatically without using the Camunda Cloud UI, create Cloud API clients.
+- [Zeebe API](grpc.md) - Zeebe clients use gRPC to communicate with the cluster.
+
+## Clients
+
 Clients allow applications to do the following:
 
 - Deploy processes.
@@ -19,13 +38,13 @@ Camunda Cloud provides several offical clients based on this API. Official clien
 
 Community clients supplement the official clients. These clients have not been tested by Camunda.
 
-## Official clients
+### Official clients
 
 - [Java](java-client/index.md)
 - [Go](go-client/get-started.md)
 - [CLI](cli-client/index.md)
 
-## Community clients
+### Community clients
 
 - [C#](community-clients/c-sharp.md)
 - [JavaScript/NodeJS](community-clients/javascript.md)
@@ -35,12 +54,3 @@ Community clients supplement the official clients. These clients have not been t
 - [Spring](community-clients/spring.md)
 
 Finally, it is possible to [build your own client](build-your-own-client.md) if none of the other options are suitable.
-
-## Interacting with other components
-
-The clients mentioned above interact with Zeebe, the workflow engine integrated into Camunda Cloud.
-
-Other components in Camunda Cloud provide language-agnostic APIs, but no clients to interact with them:
-
-- [Console API (REST)](cloud-console-api-reference.md) - enables you to create and manage clusters programmatically.
-- [Tasklist API (GraphQL)](/apis-clients/tasklist-api/generated.md) - enables you to query, claim, and complete user tasks.
