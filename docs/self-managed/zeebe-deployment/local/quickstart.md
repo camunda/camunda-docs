@@ -133,6 +133,13 @@ First, let's deploy the process to the Zeebe broker.
 }
 ```
 
+See a few concepts important to understand at this point below:
+
+- A **job** is simply a work item in a process that must be completed before a process instance can proceed to the next step. ([See: Job Workers](/components/concepts/job-workers.md))
+- A **process instance** is one running instance of a process model. In our case, this is an individual order to be fulfilled. ([See: Processes](/components/concepts/processes.md))
+
+If a job is available for a given process instance, the worker activates it, completes it, and notifies Zeebe. Zeebe then advances that process instance to the next step in the process.
+
 ## Step 4: Create a process instance
 
 After the process is deployed, we can create a new instances of it. Every

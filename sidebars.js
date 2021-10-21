@@ -337,16 +337,6 @@ module.exports = {
           ],
         },
         {
-          "Getting started tutorial": [
-            "self-managed/zeebe-deployment/getting-started/index",
-            "self-managed/zeebe-deployment/getting-started/tutorial-setup",
-            "self-managed/zeebe-deployment/getting-started/create-a-process",
-            "self-managed/zeebe-deployment/getting-started/deploy-a-process",
-            "self-managed/zeebe-deployment/getting-started/create-process-instance",
-            "self-managed/zeebe-deployment/getting-started/next-steps-resources",
-          ],
-        },
-        {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
             "self-managed/zeebe-deployment/configuration/logging",

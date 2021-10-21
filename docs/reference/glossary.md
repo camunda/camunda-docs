@@ -52,7 +52,7 @@ A correlation is an attribute within a message used to match this message agains
 
 A process cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying processes to the broker.
 
-- [Getting started tutorial: Deploy a process](/self-managed/zeebe-deployment/getting-started/deploy-a-process.md)
+- [Zeebe Deployment](./self-managed/overview.md)
 
 ### Event
 
