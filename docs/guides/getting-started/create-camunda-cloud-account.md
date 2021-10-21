@@ -38,3 +38,7 @@ After login, you'll see the console overview page. This is the central place to 
 ![overview-gse](./img/home.png)
 
 You can now take a guided tour through Camunda Cloud using the **Product Walkthrough** button.
+
+## Next steps
+
+- [Set up client connection credentials](setup-client-connection-credentials.md)

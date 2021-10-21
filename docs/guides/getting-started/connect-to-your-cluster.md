@@ -42,3 +42,7 @@ Brokers:
     Partition 1 : Leader
     Partition 2 : Leader
 ```
+
+## Next steps
+
+- [Model your first process](model-your-first-process.md)

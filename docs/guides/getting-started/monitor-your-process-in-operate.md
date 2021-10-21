@@ -55,3 +55,7 @@ while true; do zbctl create instance camunda-cloud-quick-start-advanced; sleep 1
 In Operate, you'll see instances ending in both end events depending on which worker picked up the job.
 
 ![operate-instances](./img/operate-advanced-instances.png)
+
+## Next steps
+
+- [Get familiar with Operate](./components/operate/userguide/basic-operate-navigation.md)

@@ -50,3 +50,8 @@ And for the else sequence flow:
 </Tabs>
 
 Deploy the updated process again so the specified decisions in the gateway are used.
+
+## Next steps
+
+- [Monitor your process in Operate](monitor-your-process-in-operate.md)
+- [Camunda Operate](/components/operate/deployment/install-and-start.md)

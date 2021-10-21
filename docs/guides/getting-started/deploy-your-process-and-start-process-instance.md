@@ -73,3 +73,7 @@ export ZEEBE_CLIENT_SECRET='zbzsZI_6UnCsH_CIo0lNUN8qGyvLJr9VrH77ewNm8Oq3elvhPvV7
 
 </TabItem>
 </Tabs>
+
+## Next steps
+
+- [Implement a service task](implement-service-task.md)

@@ -67,3 +67,7 @@ Now, you can connect a worker for the configured service task:
 ```bash
 zbctl create worker test-worker --handler "echo {\"return\":\"Pong\"}"
 ```
+
+## Next steps
+
+- [Implement a decision gateway](implement-decision-gateway.md)
