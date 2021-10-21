@@ -36,7 +36,7 @@ Starting at the scope where the error was thrown, the error code is matched agai
 
 If the process instance is created via call activity, the error can also be caught in the calling parent process instance.
 
-Error boundary events and error event subprocesses must be interrupting. This means the process instance will not continue along the regular path when the error was caught. Instead, it continues where the error is caught.
+Error boundary events and error event subprocesses must be interrupting. This means the process instance will not continue along the regular path, but follows the path that leads out of the catching error event instead.
 
 If the error is thrown for a job, the associated task is terminated first. To continue the execution, the error boundary event or error event subprocess that caught the error are activated.
 
