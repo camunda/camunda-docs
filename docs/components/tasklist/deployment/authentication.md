@@ -62,7 +62,7 @@ camunda.tasklist.iam.clientSecret | Similar to a password for the application. |
 We provide two different permissions over IAM: read or write.
 To configure the authorization, you are required to create two different permissions:
 
-Permition value | Description 
+Permission value | Description 
 ----------------|-------------
 `read:*` | Grants the user the permission to access, view, and read the data in the application.
 `write:*` | Grants the user the permission to perform operations.
