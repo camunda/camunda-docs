@@ -7,6 +7,19 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 Options -Indexes
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
+
+RewriteRule ^docs/components/IAM(.*)$ /docs/self-managed/IAM/$1 [R=301,L]
+RewriteRule ^docs/components/IAM$ /docs/self-managed/IAM/ [R=301,L]
+
+RewriteRule ^docs/components/operate/deployment-guide/(.*)$ /docs/self-managed/operate-deployment/$1 [R=301,L]
+RewriteRule ^docs/components/operate/deployment-guide$ /docs/self-managed/operate-deployment/ [R=301,L]
+
+RewriteRule ^docs/components/tasklist/deployment-guide/(.*)$ /docs/self-managed/tasklist-deployment/$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/deployment-guide$ /docs/self-managed/tasklist-deployment/ [R=301,L]
+
+RewriteRule ^docs/components/zeebe/deployment-guide/(.*)$ /docs/self-managed/zeebe-deployment/$1 [R=301,L]
+RewriteRule ^docs/components/zeebe/deployment-guide$ /docs/self-managed/zeebe-deployment/ [R=301,L]
+
 RewriteRule ^docs/product-manuals/iam/overview$ /docs/components/iam/what-is-iam [R=301,L]
 RewriteRule ^docs/components/iam/overview$ /docs/components/iam/what-is-iam [R=301,L]
 
