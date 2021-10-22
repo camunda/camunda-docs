@@ -283,7 +283,7 @@ module.exports = {
         "self-managed/tasklist-deployment/configuration",
         "self-managed/tasklist-deployment/authentication",
       ],
-      "Operate deployement guide": [
+      "Operate deployment guide": [
         "self-managed/operate-deployment/install-and-start",
         "self-managed/operate-deployment/configuration",
         "self-managed/operate-deployment/data-retention",
