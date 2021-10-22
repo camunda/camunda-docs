@@ -3,8 +3,8 @@ id: monitor-your-process-in-operate
 title: Monitor your process in Operate
 description: "Camunda Cloud offers Operate to monitor your process instances."
 ---
-<span class="badge badge--primary">Beginner</span>
-<span class="badge badge--primary">Time estimate: 8 minutes</span>
+<span class="badge badge--warning">Beginner</span>
+<span class="badge badge--secondary">Time estimate: 8 minutes</span>
 
 ## Prerequisites
 

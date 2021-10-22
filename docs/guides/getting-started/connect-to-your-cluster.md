@@ -3,8 +3,8 @@ id: connect-to-your-cluster
 title: Connect to your cluster
 description: "Let's learn more about installing and communicating with clusters."
 ---
-<span class="badge badge--primary">Beginner</span>
-<span class="badge badge--primary">Time estimate: 5 minutes</span>
+<span class="badge badge--warning">Beginner</span>
+<span class="badge badge--secondary">Time estimate: 5 minutes</span>
 
 ## Prerequisites
 

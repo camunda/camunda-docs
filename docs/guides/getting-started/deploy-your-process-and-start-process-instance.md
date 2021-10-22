@@ -3,8 +3,8 @@ id: deploy-your-process-and-start-process-instance
 title: Deploy and start your process instance
 description: "Deploy and start your process instance."
 ---
-<span class="badge badge--primary">Beginner</span>
-<span class="badge badge--primary">Time estimate: 5 minutes</span>
+<span class="badge badge--warning">Beginner</span>
+<span class="badge badge--secondary">Time estimate: 5 minutes</span>
 
 ## Prerequisites
 
