@@ -112,12 +112,12 @@ camunda.operate.iam.issuerUrl | Url of issuer (IAM) | http://app.iam.localhost
 camunda.operate.iam.clientId | Similar to a username for the application | operate
 camunda.operate.iam.clientSecret | Similar to a password for the application. | XALaRPl...s7dL7
 
-We provide two different permissions over IAM (read or write).
-In order to configure the authorization, you are required to create 2 different permissions:
+We provide two different permissions over IAM: read or write.
+To configure the authorization, you are required to create two different permissions:
 
-Permition Value | Description 
+Permition value | Description 
 ----------------|-------------
-`read:*` | Grants the user the permission to access, view and read the data in the application
-`write:*` | Grants the user the permission to perform operations
+`read:*` | Grants the user the permission to access, view, and read the data in the application.
+`write:*` | Grants the user the permission to perform operations.
 
-Note that the minimum permission needed is `read:*`, any user without this permission will have the access denied to the application
+Note that the minimum permission needed is `read:*`. Any user without this permission will have access denied to the application.
