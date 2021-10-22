@@ -34,4 +34,4 @@ If there is no client in your target language yet, you can [build your own clien
 
 Zeebe supports loading arbitrary gRPC server interceptors to intercept incoming
 calls. You can read more about it
-[here](/components/zeebe/deployment-guide/interceptors.md).
+[here](self-managed/zeebe-deployment/interceptors.md).

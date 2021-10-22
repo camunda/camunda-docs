@@ -19,7 +19,7 @@ can accomplish with this include:
 
 ## Implementing an interceptor
 For the communication between client and gateway, Zeebe uses the gRPC
-[protocol](/components/zeebe/technical-concepts/protocols.md). An interceptor is
+[protocol](components/zeebe/technical-concepts/protocols.md). An interceptor is
 thus implemented as a gRPC
 [ServerInterceptor](https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html).
 
@@ -133,7 +133,7 @@ interceptor, you need to provide your gateway with:
   of the interceptor class, e.g. `com.acme.ExampleInterceptor`
 
 Let's continue with the LoggingInterceptor example. We can provide these
-[configurations](components/zeebe/deployment-guide/configuration/configuration.md)
+[configurations](configuration/configuration.md)
 using a gateway config file, environment variables or a mix of both. We'll be
 using a config file here.
 
