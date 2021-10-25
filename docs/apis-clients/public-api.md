@@ -17,15 +17,16 @@ policy](/reference/release-policy.md).
 
 ## Definition of public API
 
-Camunda Cloud public API is limited to the following items:
+Currently, both Zeebe API and [Tasklist API](/apis-clients/tasklist-api/generated.md) are officially supported APIs:
 
-### [Zeebe Client Java API](/apis-clients/java-client/index.md)
+- [Zeebe Client Java API](/apis-clients/java-client/index.md)
+- [Tasklist API](/apis-clients/tasklist-api/generated.md)
 
 All non-implementation Java packages (package name does not contain `impl`) of the following maven modules.
 
 - `io.camunda:zeebe-client-java`
 
-## Other APIs and client
+## Other APIs and clients
 
 Although we cannot currently guarantee backwards comptability of other APIs and clients, we aim to offer backwards compatibility still on a best
 effort basis.
