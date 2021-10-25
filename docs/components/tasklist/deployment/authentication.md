@@ -34,43 +34,6 @@ By default, two users are created:
 
 More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. The password must be encoded with a strong BCrypt hashing function.
 
-## Camunda Cloud Single Sign-On
-
-Currently, Tasklist supports Single Sign-On (SSO) in the Camunda Cloud environment. Camunda Cloud handles the configuration of Tasklist for SSO, so normally you don't need to adjust the following subsections.
-
-### Enable Single Sign-On
-
-SSO may be enabled only by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `sso-auth`.
-
-See the following example to set your Spring profile as an environmental variable:
-
-```
-export SPRING_PROFILES_ACTIVE=sso-auth
-```
-
-### Configure Single Sign-On
-
-SSO requires the following parameters:
-
-Parametername | Description
---------------|-------------
-camunda.tasklist.auth0.domain | Defines the domain the user sees.
-camunda.tasklist.auth0.backendDomain | Defines the domain which provides user information.
-camunda.tasklist.auth0.clientId | Similar to a username for the application.
-camunda.tasklist.auth0.clientSecret | Similar to a password for the application.
-camunda.tasklist.auth0.claimName | The claim checked by Tasklist. Similar to a permission name.
-camunda.tasklist.auth0.organization | The given organization should be contained in the value of the claim name.
-
-See the following example for setting parameters as environment variables:
-
-```
-export CAMUNDA_TASKLIST_AUTH0_DOMAIN=A_DOMAIN
-export CAMUNDA_TASKLIST_AUTH0_BACKENDDOMAIN=A_BACKEND_DDOMAIN
-export CAMUNDA_TASKLIST_AUTH0_CLIENTID=A_CLIENT_ID
-export CAMUNDA_TASKLIST_AUTH0_CLIENTSECRET=A_SECRET
-export CAMUNDA_TASKLIST_AUTH0_CLAIMNAME=A_CLAIM
-export CAMUNDA_TASKLIST_AUTH0_ORGANIZATION=AN_ORGANIZATION
-```
 
 ## IAM
 
@@ -95,3 +58,13 @@ camunda.tasklist.iam.issuer | Name/ID of issuer | http://app.iam.localhost
 camunda.tasklist.iam.issuerUrl | Url of issuer (IAM) | http://app.iam.localhost
 camunda.tasklist.iam.clientId | Similar to a username for the application | tasklist
 camunda.tasklist.iam.clientSecret | Similar to a password for the application. | XALaRPl...s7dL7
+
+We provide two different permissions over IAM: read or write.
+To configure the authorization, you are required to create two different permissions:
+
+Permission value | Description 
+----------------|-------------
+`read:*` | Grants the user the permission to access, view, and read the data in the application.
+`write:*` | Grants the user the permission to perform operations.
+
+Note that the minimum permission needed is `read:*`. Any user without this permission will have access denied.
