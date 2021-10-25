@@ -122,7 +122,7 @@ module.exports = {
         },
       ],
       Modeler: [
-        "components/modeler/overview",
+        "components/modeler/what-is-camunda-modeler",
         {
           "Cloud Modeler": [
             "components/modeler/cloud-modeler/launch-cloud-modeler",
