@@ -4,7 +4,7 @@ title: Sign up & log in
 slug: /guides/getting-started/
 description: "Set up your Camunda Cloud account to get started."
 ---
-<span class="badge badge--warning">Beginner</span>
+<span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--secondary">Time estimate: 5 minutes</span>
 
 ## Sign up for Camunda Cloud

@@ -111,3 +111,8 @@ svg.implemented:hover [stroke="#333"]{
 .bpmn-coverage-event-table td {
   text-align: center;
 }
+
+.badge--beginner {
+  background-color: #14D890;
+  color: #000000;
+}

@@ -3,7 +3,7 @@ id: setup-client-connection-credentials
 title: Setup client connection credentials
 description: "Set up client connection credentials to create, name, and connect your client."
 ---
-<span class="badge badge--warning">Beginner</span>
+<span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--secondary">Time estimate: 5 minutes</span>
 
 ## Prerequisites
