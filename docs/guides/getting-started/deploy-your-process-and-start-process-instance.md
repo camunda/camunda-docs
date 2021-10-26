@@ -9,7 +9,6 @@ description: "Deploy and start your process instance."
 ## Prerequisites
 
 - Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
-- [Latest version of Zeebe](https://github.com/camunda-cloud/zeebe/releases)
 
 :::note
 

@@ -9,7 +9,6 @@ description: "Let's learn more about installing and communicating with clusters.
 ## Prerequisites
 
 - [Camunda Cloud account](create-camunda-cloud-account.md)
-- [Latest version of Zeebe](https://github.com/camunda-cloud/zeebe/releases)
 - [Download and install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - Install the appropriate package:
 

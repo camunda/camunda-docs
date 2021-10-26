@@ -9,7 +9,6 @@ description: "Set up your first project to model, deploy, and start a process in
 ## Prerequisites
 
 - [Camunda Cloud SaaS](https://camunda.io)
-- [Latest version of Zeebe](https://github.com/camunda-cloud/zeebe/releases)
 - [Camunda Modeler](https://camunda.com/download/modeler/)
 - [Operate](/components/operate/deployment/install-and-start.md)
 - [Tasklist](/components/tasklist/deployment/install-and-start.md)

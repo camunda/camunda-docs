@@ -9,7 +9,6 @@ description: "Camunda Cloud offers Operate to monitor your process instances."
 ## Prerequisites
 
 - [Camunda Operate](/components/operate/deployment/install-and-start.md)
-- [Latest version of Zeebe](https://github.com/camunda-cloud/zeebe/releases)
 
 ## Monitor your process
 
