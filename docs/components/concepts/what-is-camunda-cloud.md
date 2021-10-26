@@ -40,3 +40,7 @@ Camunda Cloud is designed to operate on a very large scale. To achieve this, it 
 Most existing workflow engines offer a vast amount of features. While having access to lots of features is generally a good thing, it can come at a cost of increased complexity and degraded performance.
 
 Camunda Cloud is entirely focused on providing a compact, robust, and scalable solution for process orchestration. Rather than supporting a broad spectrum of features, its goal is to excel within this scope.
+
+## Next steps
+
+* To request information about Camunda Cloud performance and benchmarking, see our [Contact](/contact/) page.
