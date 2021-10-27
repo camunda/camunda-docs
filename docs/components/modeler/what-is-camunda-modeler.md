@@ -19,6 +19,6 @@ Camunda offers three tools to achieve this:
 
 **Cloud Modeler** and **Camunda Modeler** support the technical parameterization of the models. It's possible to design the model in Cawemo, and continue working with Cloud Modeler or Camunda Modeler.
 
-Cloud Modeler and Camunda Modeler differ mainly in their environment. Camunda Modeler is a desktop application that can be installed and used locally. Cloud Modeler is part of Cloud Console and offers a seamless integration into Camunda Cloud to model BPMN.
+Cloud Modeler and Camunda Modeler differ mainly in their environment. Cloud Modeler is part of Cloud Console and offers a seamless integration into Camunda Cloud to model BPMN. Camunda Modeler is a desktop application that can be installed and used locally.
 
 In this guide, we'll get you started modeling BPMN diagrams using Modeler.
