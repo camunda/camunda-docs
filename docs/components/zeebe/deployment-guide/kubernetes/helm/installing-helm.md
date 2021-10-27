@@ -55,7 +55,7 @@ Installing all the components in a cluster requires all Docker images to be down
 If you are using [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f kind-values.yaml`. The `kind-values.yaml` file can be downloaded [here](assets/kind-values.yaml).
 
 ```
-helm install --name <RELEASE NAME> zeebe/zeebe-full-helm -f kind-values.yaml
+helm install <RELEASE NAME> zeebe/zeebe-full-helm -f kind-values.yaml
 ```
 
 This will deploy the same components, but with a set of parameters tailored to a local environment setup. 
