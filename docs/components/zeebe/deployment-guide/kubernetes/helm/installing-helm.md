@@ -77,12 +77,13 @@ NAME                                                   READY   STATUS    RESTART
 elasticsearch-master-0                                 1/1     Running   0          4m6s
 elasticsearch-master-1                                 1/1     Running   0          4m6s
 elasticsearch-master-2                                 1/1     Running   0          4m6s
-<RELEASE NAME>-nginx-ingress-controller-5cf6dd7894-kc25s      1/1     Running   0          4m6s
-<RELEASE NAME>-nginx-ingress-default-backend-f5454db5-j9vh6   1/1     Running   0          4m6s
-<RELEASE NAME>-operate-5d4867d6d-h9zqw                        1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-0                                        1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-1                                        1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-2                                        1/1     Running   0          4m6s
+<RELEASE NAME>-ingress-nginx-controller                1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-operate-helm                      1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-0                                 1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-1                                 1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-2                                 1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-tasklist-helm                     1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 
 Check that each pod has at least 1/1 running instances. You can always tail the logs of these pods by running the following:
@@ -91,10 +92,15 @@ Check that each pod has at least 1/1 running instances. You can always tail the 
 > kubectl logs -f <POD NAME> 
 ```
 
-To interact with the services inside the cluster, use `port-forward` to route traffic from your environment to the cluster.
+To check on which port the services are running you can run the following command:
+```
+> kubectl get svc
+```
+
+To interact with the services inside the cluster, use `port-forward` to route traffic from your environment to the cluster. 
 
 ```
-> kubectl port-forward svc/<RELEASE NAME>-zeebe 26500:26500
+> kubectl port-forward svc/<RELEASE NAME>-zeebe-gateway 26500:26500
 ```
 
 Now, you can connect and execute operations against your newly-created Zeebe cluster. 
