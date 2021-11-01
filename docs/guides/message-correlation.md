@@ -3,8 +3,8 @@ id: message-correlation
 title: Message Correlation
 description: "Message correlation allows you to target a running workflow with a state update from an external system asynchronously."
 ---
-<span class="badge badge--primary">Intermediate</span>
-<span class="badge badge--secondary">Time estimate: 20 minutes</span>
+<span class="badge badge--intermediate">Intermediate</span>
+<span class="badge badge--medium">Time estimate: 20 minutes</span>
 
 ## Prerequisites
 

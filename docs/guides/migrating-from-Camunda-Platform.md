@@ -3,8 +3,8 @@ id: migrating-from-Camunda-Platform
 title: Migrating from Camunda Platform
 description: "Migrate process solutions developed for Camunda Platform to run them on Camunda Cloud."
 ---
-<span class="badge badge--primary">Advanced</span>
-<span class="badge badge--secondary">Time estimate: 1 hour</span>
+<span class="badge badge--advanced">Advanced</span>
+<span class="badge badge--long">Time estimate: 1 hour</span>
 
 This guide describes how to migrate process solutions developed for Camunda Platform to run them on Camunda Cloud. You will learn about necessary steps, and also limitations of migration.
 

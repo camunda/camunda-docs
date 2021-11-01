@@ -113,6 +113,31 @@ svg.implemented:hover [stroke="#333"]{
 }
 
 .badge--beginner {
+  background-color: #FF8B00;
+  color: #000000;
+}
+
+.badge--intermediate {
+  background-color: #FF5400;
+  color: #000000;
+}
+
+.badge--advanced {
+  background-color: #FF1F00;
+  color: #000000;
+}
+
+.badge--short {
   background-color: #14D890;
+  color: #000000;
+}
+
+.badge--medium {
+  background-color: #0BA7B9;
+  color: #000000;
+}
+
+.badge--long {
+  background-color: #0075FF;
   color: #000000;
 }

@@ -4,7 +4,7 @@ title: Setting up your first development project
 description: "Set up your first project to model, deploy, and start a process instance."
 ---
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--secondary">Time estimate: 20 minutes</span>
+<span class="badge badge--medium">Time estimate: 20 minutes</span>
 
 ## Prerequisites
 
