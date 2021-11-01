@@ -45,43 +45,6 @@ By default, two users are created:
 
 Add more users directly to Elasticsearch via the index `operate-user-<version>_`. The password must be encoded with a strong `bcrypt` hashing function.
 
-## Camunda Cloud single sign-on
-
-Currently, Operate supports single sign-on (SSO) in the Camunda Cloud environment. Camunda Cloud handles the configuration of Operate for SSO, so you don't need to normally adjust the following subsections.
-
-### Enable SSO
-
-SSO can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `sso-auth`.
-
-See the following example:
-
-```
-export SPRING_PROFILES_ACTIVE=sso-auth
-```
-
-### Configure SSO
-
-SSO requires the following parameters:
-
-Parameter name | Description
---------------|-------------
-camunda.operate.auth0.domain | Defines the domain the user sees.
-camunda.operate.auth0.backendDomain | Defines the domain which provides user information.
-camunda.operate.auth0.clientId | Similar to a username for the application.
-camunda.operate.auth0.clientSecret | Similar to a password for the application.
-camunda.operate.auth0.claimName | The claim checked by Operate. Similar to a permission name.
-camunda.operate.auth0.organization | The given organization should be contained in the value of the claim name.
-
-See the following example for setting parameters as environment variables:
-
-```
-export CAMUNDA_OPERATE_AUTH0_DOMAIN=A_DOMAIN
-export CAMUNDA_OPERATE_AUTH0_BACKENDDOMAIN=A_BACKEND_DDOMAIN
-export CAMUNDA_OPERATE_AUTH0_CLIENTID=A_CLIENT_ID
-export CAMUNDA_OPERATE_AUTH0_CLIENTSECRET=A_SECRET
-export CAMUNDA_OPERATE_AUTH0_CLAIMNAME=A_CLAIM
-export CAMUNDA_OPERATE_AUTH0_ORGANIZATION=AN_ORGANIZATION
-```
 
 ## LDAP
 
@@ -127,7 +90,7 @@ The active directory configuration will only be applied when `camunda.operate.ld
 
 ## IAM
 
-[IAM](../../iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+[IAM](/docs/components/iam/what-is-iam/) provides authentication and authorization functionality along with user management.
 
 ### Enable IAM
 
@@ -148,3 +111,13 @@ camunda.operate.iam.issuer | Name/ID of issuer | http://app.iam.localhost
 camunda.operate.iam.issuerUrl | Url of issuer (IAM) | http://app.iam.localhost
 camunda.operate.iam.clientId | Similar to a username for the application | operate
 camunda.operate.iam.clientSecret | Similar to a password for the application. | XALaRPl...s7dL7
+
+We provide two different permissions over IAM: read or write.
+To configure the authorization, you are required to create two different permissions:
+
+Permission value | Description 
+----------------|-------------
+`read:*` | Grants the user the permission to access, view, and read the data in the application.
+`write:*` | Grants the user the permission to perform operations.
+
+Note that the minimum permission needed is `read:*`. Any user without this permission will have access denied to the application.
