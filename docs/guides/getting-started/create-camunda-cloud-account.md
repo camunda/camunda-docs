@@ -33,5 +33,3 @@ Log in with the email address and password you used in the previous form, or use
 After login, you'll see the console overview page. This is the central place to manage your clusters, and the diagrams and forms you want to deploy to Camunda Cloud.
 
 ![overview-gse](./img/home.png)
-
-You can now take a guided tour through Camunda Cloud using the **Product Walkthrough** button.
