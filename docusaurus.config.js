@@ -64,6 +64,12 @@ module.exports = {
           label: "Reference",
           position: "left",
         },
+        {
+          type: "doc",
+          docId: "self-managed/overview",
+          label: "Self-Managed",
+          position: "right",
+        },
       ],
     },
     footer: {

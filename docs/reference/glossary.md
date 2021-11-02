@@ -52,7 +52,7 @@ A correlation is an attribute within a message used to match this message agains
 
 A process cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying processes to the broker.
 
-- [Getting started tutorial: Deploy a process](/components/zeebe/deployment-guide/getting-started/deploy-a-process.md)
+- [Zeebe Deployment](./self-managed/overview.md)
 
 ### Event
 
@@ -179,13 +179,13 @@ This is how long a client waits for a response from the broker after the client 
 
 The state of all active process instances, (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a process. The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the model or business process, the size and quantity of variables in each process instance, and the total number of executing process instances in a broker.
 
-- [Resource planning](/components/zeebe/deployment-guide/operations/resource-planning.md#snapshots)
+- [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#snapshots)
 
 ### Segment
 
 The log consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
-- [Resource planning](/components/zeebe/deployment-guide/operations/resource-planning.md#event-log)
+- [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#event-log)
 
 ### Worker
 

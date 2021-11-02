@@ -90,7 +90,7 @@ The active directory configuration will only be applied when `camunda.operate.ld
 
 ## IAM
 
-[IAM](/docs/components/iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+[IAM](../../iam/what-is-iam/) provides authentication and authorization functionality along with user management.
 
 ### Enable IAM
 

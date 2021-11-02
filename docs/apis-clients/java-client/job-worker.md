@@ -38,5 +38,5 @@ This error code indicates the Zeebe cluster is currently under too large of a lo
 By backing off, the job worker helps Zeebe by reducing the load.
 
 :::note
-Zeebe's [backpressure mechanism](../../../components/zeebe/deployment-guide/operations/backpressure) can also be configured.
+Zeebe's [backpressure mechanism](../../../self-managed/zeebe-deployment/operations/backpressure) can also be configured.
 :::
