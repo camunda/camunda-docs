@@ -32,34 +32,34 @@ type TaskQuery {
 
 ### Fields
 
-#### `state` ([`TaskState`](/docs/reference/tasklist-api/enums/task-state))
+#### `state` ([`TaskState`](/docs/apis-clients/tasklist-api/enums/task-state))
 
 State of the tasks
 
-#### `assigned` ([`Boolean`](/docs/reference/tasklist-api/scalars/boolean))
+#### `assigned` ([`Boolean`](/docs/apis-clients/tasklist-api/scalars/boolean))
 
 Are the tasks assigned?
 
-#### `assignee` ([`String`](/docs/reference/tasklist-api/scalars/string))
+#### `assignee` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Who is assigned to the tasks?
 
-#### `pageSize` ([`Int`](/docs/reference/tasklist-api/scalars/int))
+#### `pageSize` ([`Int`](/docs/apis-clients/tasklist-api/scalars/int))
 
 Size of tasks page (default: 50).
 
-#### `searchAfter` ([`[String!]`](/docs/reference/tasklist-api/scalars/string))
+#### `searchAfter` ([`[String!]`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values plus same sort values.
 
-#### `searchAfterOrEqual` ([`[String!]`](/docs/reference/tasklist-api/scalars/string))
+#### `searchAfterOrEqual` ([`[String!]`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values.
 
-#### `searchBefore` ([`[String!]`](/docs/reference/tasklist-api/scalars/string))
+#### `searchBefore` ([`[String!]`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values plus same sort values.
 
-#### `searchBeforeOrEqual` ([`[String!]`](/docs/reference/tasklist-api/scalars/string))
+#### `searchBeforeOrEqual` ([`[String!]`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values.

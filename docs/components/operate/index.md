@@ -27,5 +27,5 @@ Operate is also available for production use (with support) in the Camunda Cloud
 
 If you'd like try out Operate in Camunda Cloud, sign up [here](https://accounts.cloud.camunda.io/signup).
 
-Because Operate can be a helpful tool when getting started with Zeebe and building an initial proof of concept, we make it available under [Operate Trail license](https://camunda.com/legal/terms/cloud-terms-and-conditions/general-terms-and-conditions-for-the-operate-trial-version/). There are no restrictions under this license when it comes to the length of the evaluation period or the available feature set _as long as you use Operate in non-production environments only._
+Because Operate can be a helpful tool when getting started with Zeebe and building an initial proof of concept, we make it available under [Operate Trial license](https://camunda.com/legal/terms/cloud-terms-and-conditions/general-terms-and-conditions-for-the-operate-trial-version/). There are no restrictions under this license when it comes to the length of the evaluation period or the available feature set _as long as you use Operate in non-production environments only._
 
