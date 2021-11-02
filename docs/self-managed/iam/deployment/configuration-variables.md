@@ -16,8 +16,8 @@ FEATURE_LDAP | Toggle LDAP support within IAM | false
 
 Environment variable | Description | Default value
 -------|----------|-------
-ENFORCE_ACCESS_CONTROL | Controls the enforcing of permissions for the IAM component | false
-ENFORCE_HTTPS | Controls if the URLs supplied for client configurations have to be http/https. | true
+ENFORCE_ACCESS_CONTROL | Controls the enforcing of permissions for the IAM component, if set to false, all users can access user, role and permission management. | false
+ENFORCE_HTTPS | Controls if the URLs specified for client configuration must be `https://` | true
 
 ### LDAP 
 
