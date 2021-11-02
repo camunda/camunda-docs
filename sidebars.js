@@ -267,10 +267,10 @@ module.exports = {
     "apis-clients/overview",
     {
       "APIs": [
-        require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/public-api",
-        "apis-clients/cloud-console-api-reference",
         "apis-clients/grpc",
+        require("./docs/apis-clients/tasklist-api/sidebar-schema"),
+        "apis-clients/cloud-console-api-reference",
       ],
     },
     {
@@ -310,12 +310,12 @@ module.exports = {
         {
           "Community clients": [
             "apis-clients/community-clients/index",
-            "apis-clients/community-clients/c-sharp",
+            "apis-clients/community-clients/spring",
             "apis-clients/community-clients/javascript",
+            "apis-clients/community-clients/c-sharp",
             "apis-clients/community-clients/python",
             "apis-clients/community-clients/ruby",
             "apis-clients/community-clients/rust",
-            "apis-clients/community-clients/spring",
           ],
         },
         "apis-clients/build-your-own-client",

@@ -12,6 +12,7 @@ RewriteRule ^docs/reference/tasklist-api(.*)$ /docs/apis-clients/tasklist-api$1 
 RewriteRule ^docs/reference/tasklist-api$ /docs/apis-clients/tasklist-api [R=301,L]
 
 RewriteRule ^docs/reference/public-api/$ /docs/apis-clients/public-api [R=301,L]
+RewriteRule ^docs/reference/cloud-console-api-clients/$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
 RewriteRule ^docs/reference/cloud-console-api-reference/$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
 RewriteRule ^docs/reference/grpc/$ /docs/apis-clients/grpc [R=301,L]
 
