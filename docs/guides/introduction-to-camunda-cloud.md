@@ -5,12 +5,6 @@ sidebar_label: Introduction to Camunda Cloud
 slug: /guides/
 ---
 
-:::note 
-
-Looking for a hands-on introduction to Camunda Cloud? Sign up for [Camunda Cloud](https://camunda.io) to experience a product walk-through and see all the components of Camunda Cloud.
-
-:::
-
 [Camunda Cloud](https://camunda.io) delivers scalable, on-demand process automation as-a-service. Camunda Cloud is combined with powerful execution engines for BPMN processes and DMN decisions, and paired with tools for collaborative modeling, operations, and analytics.
 
 Camunda Cloud is comprised of four components:
