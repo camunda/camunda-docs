@@ -12,6 +12,13 @@ Environment variable | Description | Default value
 -----|-------------|--------------
 FEATURE_LDAP | Toggle LDAP support within IAM | false
 
+### Functionality
+
+Environment variable | Description | Default value
+-------|----------|-------
+ENFORCE_ACCESS_CONTROL | Controls the enforcing of permissions for the IAM component | false
+ENFORCE_HTTPS | Controls if the URLs supplied for client configurations have to be http/https. | true
+
 ### LDAP 
 
 All LDAP properties are prefixed with `LDAP_`.
