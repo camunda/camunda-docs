@@ -11,9 +11,9 @@ These examples are accessible in the [Zeebe GitHub repository](https://github.co
 Instructions to access code locally:
 
 ```
-git clone https://github.com/zeebe-io/zeebe.git
+git clone https://github.com/camunda-cloud/zeebe.git
 git checkout develop
-cd zeebe/samples
+cd samples
 ```
 
 Import the Maven project in the `samples` directory into your IDE to start hacking.
