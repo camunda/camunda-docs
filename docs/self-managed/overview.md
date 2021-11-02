@@ -1,6 +1,6 @@
 ---
 id: overview
-title: "Working with Camunda Cloud self-managed"
+title: "Camunda Cloud Self-Managed"
 ---
 
 The alternative way to use Camunda Cloud is to host it yourself through Camunda Cloud Self-Managed. 
