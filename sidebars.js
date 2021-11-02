@@ -40,53 +40,6 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
       ],
-      Clients: [
-        "components/clients/overview",
-        {
-          "Java client": [
-            "components/clients/java-client/index",
-            "components/clients/java-client/job-worker",
-            "components/clients/java-client/logging",
-            "components/clients/java-client/testing",
-            {
-              Examples: [
-                "components/clients/java-client-examples/index",
-                "components/clients/java-client-examples/process-deploy",
-                "components/clients/java-client-examples/process-instance-create",
-                "components/clients/java-client-examples/process-instance-create-nonblocking",
-                "components/clients/java-client-examples/process-instance-create-with-result",
-                "components/clients/java-client-examples/job-worker-open",
-                "components/clients/java-client-examples/data-pojo",
-                "components/clients/java-client-examples/cluster-topology-request",
-              ],
-            },
-          ],
-        },
-        {
-          "Go client": [
-            "components/clients/go-client/index",
-            "components/clients/go-client/get-started",
-          ],
-        },
-        {
-          "CLI client": [
-            "components/clients/cli-client/index",
-            "components/clients/cli-client/get-started",
-          ],
-        },
-        {
-          "Community clients": [
-            "components/clients/other-clients/index",
-            "components/clients/other-clients/c-sharp",
-            "components/clients/other-clients/javascript",
-            "components/clients/other-clients/python",
-            "components/clients/other-clients/ruby",
-            "components/clients/other-clients/rust",
-            "components/clients/other-clients/spring",
-          ],
-        },
-        "components/clients/build-your-own-client",
-      ],
       "Cloud Console": [
         "components/cloud-console/introduction",
         {
@@ -94,7 +47,6 @@ module.exports = {
             "components/cloud-console/manage-organization/organization-settings",
             "components/cloud-console/manage-organization/manage-users",
             "components/cloud-console/manage-organization/view-organization-activity",
-            "components/cloud-console/manage-organization/manage-cloud-management-api-clients",
             "components/cloud-console/manage-organization/update-billing-reservations",
             "components/cloud-console/manage-organization/switch-organization",
           ],
@@ -311,13 +263,69 @@ module.exports = {
     },
     "components/best-practices",
   ],
+
+  "APIs & Clients": [
+    "apis-clients/overview",
+    {
+      "APIs": [
+        "apis-clients/public-api",
+        "apis-clients/grpc",
+        require("./docs/apis-clients/tasklist-api/sidebar-schema"),
+        "apis-clients/cloud-console-api-reference",
+      ],
+    },
+    {
+      "Clients": [
+        {
+          "Java client": [
+            "apis-clients/java-client/index",
+            "apis-clients/java-client/job-worker",
+            "apis-clients/java-client/logging",
+            "apis-clients/java-client/testing",
+              {
+                Examples: [
+                  "apis-clients/java-client-examples/index",
+                  "apis-clients/java-client-examples/process-deploy",
+                  "apis-clients/java-client-examples/process-instance-create",
+                  "apis-clients/java-client-examples/process-instance-create-nonblocking",
+                  "apis-clients/java-client-examples/process-instance-create-with-result",
+                  "apis-clients/java-client-examples/job-worker-open",
+                  "apis-clients/java-client-examples/data-pojo",
+                  "apis-clients/java-client-examples/cluster-topology-request",
+                  ],
+              },
+            ],
+          },
+        {
+          "Go client": [
+            "apis-clients/go-client/index",
+            "apis-clients/go-client/get-started",
+          ],
+        },
+        {
+          "CLI client": [
+          "apis-clients/cli-client/index",
+          "apis-clients/cli-client/get-started",
+          ],
+        },
+        {
+          "Community clients": [
+            "apis-clients/community-clients/index",
+            "apis-clients/community-clients/spring",
+            "apis-clients/community-clients/javascript",
+            "apis-clients/community-clients/c-sharp",
+            "apis-clients/community-clients/python",
+            "apis-clients/community-clients/ruby",
+            "apis-clients/community-clients/rust",
+          ],
+        },
+        "apis-clients/build-your-own-client",
+      ],
+    },
+  ],
+ 
   Reference: [
     "reference/overview",
-    "reference/public-api",
-    "reference/cloud-console-api-clients",
-    "reference/cloud-console-api-reference",
-    "reference/grpc",
-    require("./docs/reference/tasklist-api/sidebar-schema"),
     {
       "BPMN processes": [
         "reference/bpmn-processes/bpmn-primer",

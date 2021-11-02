@@ -7,6 +7,21 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 Options -Indexes
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
+
+RewriteRule ^docs/reference/tasklist-api(.*)$ /docs/apis-clients/tasklist-api$1 [R=301,L]
+RewriteRule ^docs/reference/tasklist-api$ /docs/apis-clients/tasklist-api [R=301,L]
+
+RewriteRule ^docs/reference/public-api/$ /docs/apis-clients/public-api [R=301,L]
+RewriteRule ^docs/reference/cloud-console-api-clients/$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/reference/cloud-console-api-reference/$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/reference/grpc/$ /docs/apis-clients/grpc [R=301,L]
+
+RewriteRule ^docs/components/clients/other-clients(.*)$ /docs/apis-clients/community-clients$1 [R=301,L]
+RewriteRule ^docs/components/clients/other-clients$ /docs/apis-clients/community-clients [R=301,L]
+
+RewriteRule ^docs/components/clients/(.*)$ /docs/apis-clients/$1 [R=301,L]
+RewriteRule ^docs/components/clients$ /docs/apis-clients/ [R=301,L]
+
 RewriteRule ^docs/product-manuals/iam/overview$ /docs/components/iam/what-is-iam [R=301,L]
 RewriteRule ^docs/components/iam/overview$ /docs/components/iam/what-is-iam [R=301,L]
 
