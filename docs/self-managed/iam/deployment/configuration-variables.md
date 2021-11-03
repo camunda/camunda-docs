@@ -10,14 +10,14 @@ As IAM is a Spring Boot application, you may use the standard Spring [configurat
 
 Environment variable | Description | Default value
 -----|-------------|--------------
-FEATURE_LDAP | Toggle LDAP support within IAM | false
+FEATURE_LDAP | Toggle LDAP support within IAM. | false
 
 ### Functionality
 
 Environment variable | Description | Default value
 -------|----------|-------
-ENFORCE_ACCESS_CONTROL | Controls the enforcing of permissions for the IAM component, if set to false, all users can access user, role and permission management. | false
-ENFORCE_HTTPS | Controls if the URLs specified for client configuration must be `https://` | true
+ENFORCE_ACCESS_CONTROL | Controls enforcement of permissions for the IAM component. If set to false, all users can access user, role, and permission management. | false
+ENFORCE_HTTPS | Controls if the URLs specified for client configuration must be `https://`. | true
 
 ### LDAP 
 
