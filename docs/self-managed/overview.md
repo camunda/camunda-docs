@@ -20,6 +20,6 @@ Camunda Cloud Self-Managed users may also use Camunda Modeler to build BPMN diag
 
 :::note
 
-Camunda Cloud Self-Managed is not Camunda Platform. If you are looking for Camunda Cloud Platform documentation, [click here](https://docs.camunda.org).
+Camunda Cloud Self-Managed is not Camunda Platform. If you are looking for Camunda Platform documentation, [click here](https://docs.camunda.org).
 
 :::
