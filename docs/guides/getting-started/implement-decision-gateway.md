@@ -3,6 +3,14 @@ id: implement-decision-gateway
 title: Implement a decision gateway
 description: "Using the JSON object, let's route your process."
 ---
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--short">Time estimate: 5 minutes</span>
+
+## Prerequisites
+
+- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+
+## Implement a decision gateway
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -42,3 +50,8 @@ And for the else sequence flow:
 </Tabs>
 
 Deploy the updated process again so the specified decisions in the gateway are used.
+
+## Next steps
+
+- [Monitor your process in Operate](monitor-your-process-in-operate.md)
+- [Camunda Operate](/self-managed/operate-deployment/install-and-start.md)

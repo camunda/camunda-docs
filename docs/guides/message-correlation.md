@@ -1,7 +1,18 @@
 ---
 id: message-correlation
 title: Message Correlation
+description: "Message correlation allows you to target a running workflow with a state update from an external system asynchronously."
 ---
+<span class="badge badge--intermediate">Intermediate</span>
+<span class="badge badge--medium">Time estimate: 20 minutes</span>
+
+## Prerequisites
+
+- [Node.js client](https://github.com/camunda-community-hub/zeebe-client-node-js)
+- [Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor)
+- [Camunda Modeler](https://camunda.com/download/modeler/)
+
+## Message correlation
 
 Message correlation is a powerful feature in Camunda Cloud. It allows you to target a running workflow with a state update from an external system asynchronously. 
 
