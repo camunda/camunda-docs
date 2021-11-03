@@ -8,7 +8,7 @@ description: "Camunda Cloud offers Operate to monitor your process instances."
 
 ## Prerequisites
 
-- [Camunda Operate](/components/operate/deployment/install-and-start.md)
+- [Camunda Operate](/self-managed/operate-deployment/install-and-start.md)
 
 ## Monitor your process
 
