@@ -14,6 +14,7 @@ module.exports = {
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
+    "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/message-correlation",
     {
@@ -39,53 +40,6 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
       ],
-      Clients: [
-        "components/clients/overview",
-        {
-          "Java client": [
-            "components/clients/java-client/index",
-            "components/clients/java-client/job-worker",
-            "components/clients/java-client/logging",
-            "components/clients/java-client/testing",
-            {
-              Examples: [
-                "components/clients/java-client-examples/index",
-                "components/clients/java-client-examples/process-deploy",
-                "components/clients/java-client-examples/process-instance-create",
-                "components/clients/java-client-examples/process-instance-create-nonblocking",
-                "components/clients/java-client-examples/process-instance-create-with-result",
-                "components/clients/java-client-examples/job-worker-open",
-                "components/clients/java-client-examples/data-pojo",
-                "components/clients/java-client-examples/cluster-topology-request",
-              ],
-            },
-          ],
-        },
-        {
-          "Go client": [
-            "components/clients/go-client/index",
-            "components/clients/go-client/get-started",
-          ],
-        },
-        {
-          "CLI client": [
-            "components/clients/cli-client/index",
-            "components/clients/cli-client/get-started",
-          ],
-        },
-        {
-          "Community clients": [
-            "components/clients/other-clients/index",
-            "components/clients/other-clients/c-sharp",
-            "components/clients/other-clients/javascript",
-            "components/clients/other-clients/python",
-            "components/clients/other-clients/ruby",
-            "components/clients/other-clients/rust",
-            "components/clients/other-clients/spring",
-          ],
-        },
-        "components/clients/build-your-own-client",
-      ],
       "Cloud Console": [
         "components/cloud-console/introduction",
         {
@@ -93,7 +47,6 @@ module.exports = {
             "components/cloud-console/manage-organization/organization-settings",
             "components/cloud-console/manage-organization/manage-users",
             "components/cloud-console/manage-organization/view-organization-activity",
-            "components/cloud-console/manage-organization/manage-cloud-management-api-clients",
             "components/cloud-console/manage-organization/update-billing-reservations",
             "components/cloud-console/manage-organization/switch-organization",
           ],
@@ -155,71 +108,6 @@ module.exports = {
           ],
         },
         {
-          "Deployment guide": [
-            "components/zeebe/deployment-guide/index",
-            {
-              "Local installation": [
-                "components/zeebe/deployment-guide/local/install",
-                "components/zeebe/deployment-guide/local/quickstart",
-              ],
-            },
-            "components/zeebe/deployment-guide/docker/install",
-            {
-              "Kubernetes deployment": [
-                "components/zeebe/deployment-guide/kubernetes/index",
-                {
-                  "Helm charts": [
-                    "components/zeebe/deployment-guide/kubernetes/helm/index",
-                    "components/zeebe/deployment-guide/kubernetes/helm/prerequisites",
-                    "components/zeebe/deployment-guide/kubernetes/helm/installing-helm",
-                    "components/zeebe/deployment-guide/kubernetes/helm/accessing-operate",
-                  ],
-                },
-                "components/zeebe/deployment-guide/kubernetes/operator/zeebe-operator",
-              ],
-            },
-            {
-              "Getting started tutorial": [
-                "components/zeebe/deployment-guide/getting-started/index",
-                "components/zeebe/deployment-guide/getting-started/tutorial-setup",
-                "components/zeebe/deployment-guide/getting-started/create-a-process",
-                "components/zeebe/deployment-guide/getting-started/deploy-a-process",
-                "components/zeebe/deployment-guide/getting-started/create-process-instance",
-                "components/zeebe/deployment-guide/getting-started/next-steps-resources",
-              ],
-            },
-            {
-              Configuration: [
-                "components/zeebe/deployment-guide/configuration/configuration",
-                "components/zeebe/deployment-guide/configuration/logging",
-                "components/zeebe/deployment-guide/configuration/gateway-health-probes",
-                "components/zeebe/deployment-guide/configuration/environment-variables",
-              ],
-            },
-            {
-              Security: [
-                "components/zeebe/deployment-guide/security/security",
-                "components/zeebe/deployment-guide/security/authentication",
-                "components/zeebe/deployment-guide/security/authorization",
-              ],
-            },
-            {
-              Operation: [
-                "components/zeebe/deployment-guide/operations/index",
-                "components/zeebe/deployment-guide/operations/resource-planning",
-                "components/zeebe/deployment-guide/operations/network-ports",
-                "components/zeebe/deployment-guide/operations/setting-up-a-cluster",
-                "components/zeebe/deployment-guide/operations/metrics",
-                "components/zeebe/deployment-guide/operations/health",
-                "components/zeebe/deployment-guide/operations/backpressure",
-                "components/zeebe/deployment-guide/operations/disk-space",
-                "components/zeebe/deployment-guide/operations/update-zeebe",
-              ],
-            },
-            "components/zeebe/deployment-guide/interceptors"
-          ],
-        },
-        {
           "Open Source community": [
             "components/zeebe/open-source/community-contributions",
             "components/zeebe/open-source/get-help-get-involved",
@@ -244,14 +132,6 @@ module.exports = {
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/operate-feedback-and-questions",
           ],
-          "Deployment guide": [
-            "components/operate/deployment/install-and-start",
-            "components/operate/deployment/configuration",
-            "components/operate/deployment/data-retention",
-            "components/operate/deployment/schema-and-migration",
-            "components/operate/deployment/importer-and-archiver",
-            "components/operate/deployment/authentication",
-          ],
           "Third-Party Libraries": [
             "components/operate/third-party-libraries/operate-backend-dependencies",
             "components/operate/third-party-libraries/operate-frontend-dependencies",
@@ -273,50 +153,78 @@ module.exports = {
               ],
             },
           ],
-          "Deployment guide": [
-            "components/tasklist/deployment/install-and-start",
-            "components/tasklist/deployment/configuration",
-            "components/tasklist/deployment/authentication",
-          ],
           "Third-Party Libraries": [
             "components/tasklist/third-party-libraries/tasklist-backend-dependencies",
             "components/tasklist/third-party-libraries/tasklist-frontend-dependencies",
           ],
         },
       ],
-      IAM: [
-        "components/iam/what-is-iam",
-          {
-            "Getting started": [
-              {
-                "Running IAM with Docker": [
-                  "components/iam/getting-started/docker/setup-environment",
-                  "components/iam/getting-started/docker/start-iam",
-                  "components/iam/getting-started/docker/accessing-the-ui",
-                ]
-              }
-            ],
-          }, {
-            "Deployment": [
-              "components/iam/deployment/configuration-variables",
-            ],
-          }, {
-          "Third-Party Libraries": [
-            "components/iam/third-party-libraries/backend-third-party-libraries",
-            "components/iam/third-party-libraries/frontend-third-party-libraries",
-          ],
-        },
-      ],
     },
     "components/best-practices",
   ],
+
+  "APIs & Clients": [
+    "apis-clients/overview",
+    {
+      "APIs": [
+        "apis-clients/public-api",
+        "apis-clients/grpc",
+        require("./docs/apis-clients/tasklist-api/sidebar-schema"),
+        "apis-clients/cloud-console-api-reference",
+      ],
+    },
+    {
+      "Clients": [
+        {
+          "Java client": [
+            "apis-clients/java-client/index",
+            "apis-clients/java-client/job-worker",
+            "apis-clients/java-client/logging",
+            "apis-clients/java-client/testing",
+              {
+                Examples: [
+                  "apis-clients/java-client-examples/index",
+                  "apis-clients/java-client-examples/process-deploy",
+                  "apis-clients/java-client-examples/process-instance-create",
+                  "apis-clients/java-client-examples/process-instance-create-nonblocking",
+                  "apis-clients/java-client-examples/process-instance-create-with-result",
+                  "apis-clients/java-client-examples/job-worker-open",
+                  "apis-clients/java-client-examples/data-pojo",
+                  "apis-clients/java-client-examples/cluster-topology-request",
+                  ],
+              },
+            ],
+          },
+        {
+          "Go client": [
+            "apis-clients/go-client/index",
+            "apis-clients/go-client/get-started",
+          ],
+        },
+        {
+          "CLI client": [
+          "apis-clients/cli-client/index",
+          "apis-clients/cli-client/get-started",
+          ],
+        },
+        {
+          "Community clients": [
+            "apis-clients/community-clients/index",
+            "apis-clients/community-clients/spring",
+            "apis-clients/community-clients/javascript",
+            "apis-clients/community-clients/c-sharp",
+            "apis-clients/community-clients/python",
+            "apis-clients/community-clients/ruby",
+            "apis-clients/community-clients/rust",
+          ],
+        },
+        "apis-clients/build-your-own-client",
+      ],
+    },
+  ],
+ 
   Reference: [
     "reference/overview",
-    "reference/public-api",
-    "reference/cloud-console-api-clients",
-    "reference/cloud-console-api-reference",
-    "reference/grpc",
-    require("./docs/reference/tasklist-api/sidebar-schema"),
     {
       "BPMN processes": [
         "reference/bpmn-processes/bpmn-primer",
@@ -374,5 +282,98 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/supported-environments",
+  ],
+  "Self-Managed": [
+      "self-managed/overview",
+      {
+      "Tasklist": [
+        "self-managed/tasklist-deployment/install-and-start",
+        "self-managed/tasklist-deployment/configuration",
+        "self-managed/tasklist-deployment/authentication",
+      ],
+      "Operate": [
+        "self-managed/operate-deployment/install-and-start",
+        "self-managed/operate-deployment/configuration",
+        "self-managed/operate-deployment/data-retention",
+        "self-managed/operate-deployment/schema-and-migration",
+        "self-managed/operate-deployment/importer-and-archiver",
+        "self-managed/operate-deployment/authentication",
+      ],
+      IAM: [
+        "self-managed/iam/what-is-iam",
+          {
+            "Getting started": [
+              {
+                "Running IAM with Docker": [
+                  "self-managed/iam/getting-started/docker/setup-environment",
+                  "self-managed/iam/getting-started/docker/start-iam",
+                  "self-managed/iam/getting-started/docker/accessing-the-ui",
+                ]
+              }
+            ],
+          }, {
+            "Deployment": [
+              "self-managed/iam/deployment/configuration-variables",
+            ],
+          }, {
+          "Third-Party Libraries": [
+            "self-managed/iam/third-party-libraries/backend-third-party-libraries",
+            "self-managed/iam/third-party-libraries/frontend-third-party-libraries",
+          ],
+        },
+      ],
+      "Zeebe": [
+        "self-managed/zeebe-deployment/index",
+        {
+          "Local installation": [
+            "self-managed/zeebe-deployment/local/install",
+            "self-managed/zeebe-deployment/local/quickstart",
+          ],
+        },
+        "self-managed/zeebe-deployment/docker/install",
+        {
+          "Kubernetes deployment": [
+            "self-managed/zeebe-deployment/kubernetes/index",
+            {
+              "Helm charts": [
+                "self-managed/zeebe-deployment/kubernetes/helm/index",
+                "self-managed/zeebe-deployment/kubernetes/helm/prerequisites",
+                "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
+                "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate",
+              ],
+            },
+            "self-managed/zeebe-deployment/kubernetes/operator/zeebe-operator",
+          ],
+        },
+        {
+          Configuration: [
+            "self-managed/zeebe-deployment/configuration/configuration",
+            "self-managed/zeebe-deployment/configuration/logging",
+            "self-managed/zeebe-deployment/configuration/gateway-health-probes",
+            "self-managed/zeebe-deployment/configuration/environment-variables",
+          ],
+        },
+        {
+          Security: [
+            "self-managed/zeebe-deployment/security/security",
+            "self-managed/zeebe-deployment/security/authentication",
+            "self-managed/zeebe-deployment/security/authorization",
+          ],
+        },
+        {
+          Operation: [
+            "self-managed/zeebe-deployment/operations/index",
+            "self-managed/zeebe-deployment/operations/resource-planning",
+            "self-managed/zeebe-deployment/operations/network-ports",
+            "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
+            "self-managed/zeebe-deployment/operations/metrics",
+            "self-managed/zeebe-deployment/operations/health",
+            "self-managed/zeebe-deployment/operations/backpressure",
+            "self-managed/zeebe-deployment/operations/disk-space",
+            "self-managed/zeebe-deployment/operations/update-zeebe",
+          ],
+        },
+      ],
+    },
   ],
 };

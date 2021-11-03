@@ -26,7 +26,7 @@ Here is a basic example from [the Camunda Cloud documentation](https://docs.camu
 
 ![message correlation workflow](img/message-correlation-workflow.png)
 
-Use [Camunda Modeler](https://camunda.com/download/modeler/) to open the [test-messaging](https://github.com/jwulf/zeebe-message-correlation/bpmn/test-messaging.bpmn) file in [this GitHub project](https://github.com/jwulf/zeebe-message-correlation).
+Use [Camunda Modeler](https://camunda.com/download/modeler/) to open the [test-messaging](https://github.com/jwulf/zeebe-message-correlation/blob/master/bpmn/test-messaging.bpmn) file in [this GitHub project](https://github.com/jwulf/zeebe-message-correlation).
 
 Click on the intermediate message catch event to see how it is configured:
 
