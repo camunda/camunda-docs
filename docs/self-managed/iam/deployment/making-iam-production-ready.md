@@ -29,3 +29,18 @@ to a JSON formatted output from a signing key generator.
 Unsure how to generate a JSON Web Key? We'd recommend looking at the 
 [Nimbus JOSE + JWT documentation](https://connect2id.com/products/nimbus-jose-jwt/generator) for examples.
 :::
+
+### Enable access control
+The IAM component is capable of enforcing access control although by default this functionality is disabled.
+When access control is disabled, all users, regardless of role and permission assignment, will be able to manage users, roles, and permissions.
+
+To enable access control, set the `ENFORCE_ACCESS_CONTROL` environmental value to `true`
+
+### Configure IAM host URLs
+The IAM component by default exposes the service on `http://localhost:8080`.
+
+To change the location that the IAM component is served from, set `FRONTEND_URL`, `BACKEND_URL`, and `TOKEN_ISSUER` to your chosen URL.
+
+:::note
+The `BACKEND_URL` must be followed by `/api` for example, `http://localhost:8080/api`.
+:::
