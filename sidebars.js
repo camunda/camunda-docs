@@ -314,6 +314,7 @@ module.exports = {
           }, {
             "Deployment": [
               "self-managed/iam/deployment/configuration-variables",
+              "self-managed/iam/deployment/making-iam-production-ready",
             ],
           }, {
           "Third-Party Libraries": [
