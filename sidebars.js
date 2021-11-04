@@ -84,12 +84,34 @@ module.exports = {
             "components/modeler/cloud-modeler/start-instance",
             "components/modeler/cloud-modeler/model-overview",
           ],
+          },
+          {
           "Camunda Modeler": [
             "components/modeler/camunda-modeler/install-the-modeler",
             "components/modeler/camunda-modeler/model-your-first-diagram",
             "components/modeler/camunda-modeler/connect-to-camunda-cloud",
             "components/modeler/camunda-modeler/deploy-to-cloud",
             "components/modeler/camunda-modeler/start-instance",
+            {
+              "BPMN": [
+                "components/modeler/camunda-modeler/bpmn/camunda-modeler-bpmn",
+              ],
+            },
+            {
+              "DMN": [
+                "components/modeler/camunda-modeler/dmn/camunda-modeler-dmn",
+              ],
+            },
+            {
+              "Element Templates": [
+                "components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates",
+              ],
+            },
+            {
+              "Forms": [
+                "components/modeler/camunda-modeler/forms/building-forms",
+              ],
+            },
           ],
         },
       ],
