@@ -18,18 +18,18 @@ The easiest way to develop with Zeebe is using Docker. Docker provides a consist
 
 ### Docker configurations for docker-compose
 
-Docker configurations for starting Zeebe using `docker-compose` are available in the [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md) repository.
+A default docker compose configuration to run Zeebe, Operate and Tasklist is available in the get started repository: [docker-compose.yaml](https://github.com/camunda-cloud/camunda-cloud-get-started/blob/master/docker-compose.yaml).
 
-This repository contains several pre-defined configuration options:
+Download this file to your local computer, `cd` into that directory and run `docker compose up`. 
 
-- Single node
-- Small cluster with and without gateway
-- Single node with Operate
-- Single node with simple monitor
+Some more information on Zeebe using `docker-compose`, including more specific configurations, are available in the [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md) community extension.
 
-This allows you to start using complex configurations with a single command. You can tailor these configurations to your needs whenever you'd like.
+#### Exposed ports
 
-Further instructions for using these configurations are in the [README](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md).
+- `26500`: Zeebe Gateway API
+- [`8080`](http://localhost:8080/): Operate
+- [`8081`](http://localhost:8080/): Tasklist
+
 
 ### Using Docker without docker-compose
 
