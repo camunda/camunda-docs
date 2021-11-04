@@ -1,7 +1,16 @@
 ---
 id: model-your-first-process
 title: Model your first process
+description: "Use Modeler to design and deploy a process."
 ---
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--short">Time estimate: 10 minutes</span>
+
+## Prerequisites
+
+- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+
+## Design and deploy a process
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -45,3 +54,7 @@ Design a simple process with one start event and one end event, or download this
 ![zeebe-modeler](./img/zeebe-modeler.png)
 </TabItem>
 </Tabs>
+
+## Next steps
+
+- [Deploy and start your process instance](deploy-your-process-and-start-process-instance.md)

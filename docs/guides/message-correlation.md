@@ -1,7 +1,18 @@
 ---
 id: message-correlation
 title: Message Correlation
+description: "Message correlation allows you to target a running workflow with a state update from an external system asynchronously."
 ---
+<span class="badge badge--intermediate">Intermediate</span>
+<span class="badge badge--medium">Time estimate: 20 minutes</span>
+
+## Prerequisites
+
+- [Node.js client](https://github.com/camunda-community-hub/zeebe-client-node-js)
+- [Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor)
+- [Camunda Modeler](https://camunda.com/download/modeler/)
+
+## Message correlation
 
 Message correlation is a powerful feature in Camunda Cloud. It allows you to target a running workflow with a state update from an external system asynchronously. 
 
@@ -15,7 +26,7 @@ Here is a basic example from [the Camunda Cloud documentation](https://docs.camu
 
 ![message correlation workflow](img/message-correlation-workflow.png)
 
-Use [Camunda Modeler](https://camunda.com/download/modeler/) to open the [test-messaging](https://github.com/jwulf/zeebe-message-correlation/bpmn/test-messaging.bpmn) file in [this GitHub project](https://github.com/jwulf/zeebe-message-correlation).
+Use [Camunda Modeler](https://camunda.com/download/modeler/) to open the [test-messaging](https://github.com/jwulf/zeebe-message-correlation/blob/master/bpmn/test-messaging.bpmn) file in [this GitHub project](https://github.com/jwulf/zeebe-message-correlation).
 
 Click on the intermediate message catch event to see how it is configured:
 

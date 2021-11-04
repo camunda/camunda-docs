@@ -1,7 +1,16 @@
 ---
 id: monitor-your-process-in-operate
 title: Monitor your process in Operate
+description: "Camunda Cloud offers Operate to monitor your process instances."
 ---
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--short">Time estimate: 8 minutes</span>
+
+## Prerequisites
+
+- [Camunda Operate](/self-managed/operate-deployment/install-and-start.md)
+
+## Monitor your process
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -45,3 +54,7 @@ while true; do zbctl create instance camunda-cloud-quick-start-advanced; sleep 1
 In Operate, you'll see instances ending in both end events depending on which worker picked up the job.
 
 ![operate-instances](./img/operate-advanced-instances.png)
+
+## Next steps
+
+- [Get familiar with Operate](./components/operate/userguide/basic-operate-navigation.md)

@@ -1,7 +1,16 @@
 ---
 id: setup-client-connection-credentials
 title: Setup client connection credentials
+description: "Set up client connection credentials to create, name, and connect your client."
 ---
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--short">Time estimate: 5 minutes</span>
+
+## Prerequisites
+
+- [Camunda Cloud account](create-camunda-cloud-account.md)
+
+## Set up client connection credentials
 
 Here, we'll set up client connection credentials to create, name, and connect your client.
 
@@ -26,3 +35,7 @@ The downloaded file contains all the necessary information to communicate with y
 - `ZEEBE_ADDRESS`: Address where your cluster can be reached.
 - `ZEEBE_CLIENT_ID` and `ZEEBE_CLIENT_SECRET`: Credentials to request a new access token.
 - `ZEEBE_AUTHORIZATION_SERVER_URL`: A new token can be requested at this address, using the credentials.
+
+## Next steps
+
+- [Connect to your cluster](connect-to-your-cluster.md)
