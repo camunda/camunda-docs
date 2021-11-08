@@ -1,10 +1,10 @@
 ---
 id: organization-settings
-title: Organization Management
+title: Organization management
 description: "Follow these simple instructions to manage your organization."
 ---
 
-Organization Management can be accessed via the menu in the navigation bar.
+Organization management can be accessed via the menu in the navigation bar.
 
 ![avatar-menue](./img/avatar-menue.png)
 
