@@ -57,4 +57,4 @@ Design a simple process with one start event and one end event, or download this
 ## Next steps
 
 - [Deploy and start your process instance](deploy-your-process-and-start-process-instance.md)
-- [Camunda Modeler and Cloud Modeler](../components/modeler/overview.md)
+- [Camunda Modeler and Cloud Modeler](../../components/modeler/overview.md)
