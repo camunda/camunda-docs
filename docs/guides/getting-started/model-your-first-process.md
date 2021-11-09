@@ -3,6 +3,7 @@ id: model-your-first-process
 title: Model your first process
 description: "Use Modeler to design and deploy a process."
 ---
+
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--short">Time estimate: 10 minutes</span>
 
@@ -40,8 +41,6 @@ Using Cloud Modeler, processes are designed and deployed, and new instances are 
 ![console-modeler-new-diagram-with-end-event](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-end-event2.png)
 
 4. To save your diagram, click **Save**.
-
-![console-modeler-new-diagram](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-name.png)
 
 </TabItem>
 
