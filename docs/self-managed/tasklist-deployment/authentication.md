@@ -23,7 +23,7 @@ camunda.tasklist:
   password: aPassword
   roles:
     - OWNER
-    - USER
+    - OPERATOR
 ```
 
 On Tasklist startup, the user is created if they did not exist before.
