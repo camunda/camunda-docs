@@ -1,12 +1,21 @@
 ---
 id: deploy-your-process-and-start-process-instance
 title: Deploy and start your process instance
+description: "Deploy and start your process instance."
 ---
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--short">Time estimate: 5 minutes</span>
+
+## Prerequisites
+
+- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
 
 :::note
 
 BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot currently run a BPMN diagram modeled for Camunda Platform in Camunda Cloud, or vice versa.
 :::
+
+## Deploy and start your process instance
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -63,3 +72,7 @@ export ZEEBE_CLIENT_SECRET='zbzsZI_6UnCsH_CIo0lNUN8qGyvLJr9VrH77ewNm8Oq3elvhPvV7
 
 </TabItem>
 </Tabs>
+
+## Next steps
+
+- [Implement a service task](implement-service-task.md)

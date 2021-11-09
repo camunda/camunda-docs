@@ -2,7 +2,10 @@
 id: create-camunda-cloud-account
 title: Sign up & log in
 slug: /guides/getting-started/
+description: "Set up your Camunda Cloud account to get started."
 ---
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--short">Time estimate: 5 minutes</span>
 
 ## Sign up for Camunda Cloud
 
@@ -35,3 +38,7 @@ After login, you'll see the console overview page. This is the central place to 
 ![overview-gse](./img/home.png)
 
 You can now take a guided tour through Camunda Cloud using the **Product Walkthrough** button.
+
+## Next steps
+
+- [Set up client connection credentials](setup-client-connection-credentials.md)

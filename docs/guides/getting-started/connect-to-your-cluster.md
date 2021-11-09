@@ -3,10 +3,14 @@ id: connect-to-your-cluster
 title: Connect to your cluster
 description: "Let's learn more about installing and communicating with clusters."
 ---
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--short">Time estimate: 5 minutes</span>
 
-## Installation
+## Prerequisites
 
-Install the appropriate package.
+- [Camunda Cloud account](create-camunda-cloud-account.md)
+- [Download and install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- Install the appropriate package:
 
 ```bash
 npm i -g zbctl
@@ -37,3 +41,7 @@ Brokers:
     Partition 1 : Leader
     Partition 2 : Leader
 ```
+
+## Next steps
+
+- [Model your first process](model-your-first-process.md)

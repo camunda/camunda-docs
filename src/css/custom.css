@@ -111,3 +111,33 @@ svg.implemented:hover [stroke="#333"]{
 .bpmn-coverage-event-table td {
   text-align: center;
 }
+
+.badge--beginner {
+  background-color: #FF8B00;
+  color: #FFFFFF;
+}
+
+.badge--intermediate {
+  background-color: #FF5400;
+  color: #FFFFFF;
+}
+
+.badge--advanced {
+  background-color: #FF1F00;
+  color: #FFFFFF;
+}
+
+.badge--short {
+  background-color: #14D890;
+  color: #FFFFFF;
+}
+
+.badge--medium {
+  background-color: #0BA7B9;
+  color: #FFFFFF;
+}
+
+.badge--long {
+  background-color: #0075FF;
+  color: #FFFFFF;
+}

@@ -3,6 +3,14 @@ id: implement-service-task
 title: Implement a service task
 description: "Let's implement a service task to connect workers."
 ---
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--short">Time estimate: 8 minutes</span>
+
+## Prerequisites
+
+- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+
+## Implement a service task
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -58,3 +66,7 @@ Now, you can connect a worker for the configured service task:
 ```bash
 zbctl create worker test-worker --handler "echo {\"return\":\"Pong\"}"
 ```
+
+## Next steps
+
+- [Implement a decision gateway](implement-decision-gateway.md)
