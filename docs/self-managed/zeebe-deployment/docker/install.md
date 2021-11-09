@@ -28,7 +28,7 @@ Some more information on Zeebe using `docker-compose`, including more specific c
 
 - `26500`: Zeebe Gateway API
 - [`8080`](http://localhost:8080/): Operate
-- [`8081`](http://localhost:8080/): Tasklist
+- [`8081`](http://localhost:8081/): Tasklist
 
 
 ### Using Docker without docker-compose
