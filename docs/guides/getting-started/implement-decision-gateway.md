@@ -54,4 +54,5 @@ Deploy the updated process again so the specified decisions in the gateway are u
 ## Next steps
 
 - [Monitor your process in Operate](monitor-your-process-in-operate.md)
+- [Camunda Modeler and Cloud Modeler](../components/modeler/overview.md)
 - [Camunda Operate](/self-managed/operate-deployment/install-and-start.md)

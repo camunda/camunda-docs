@@ -340,7 +340,7 @@ FEEL defines several built-in functions:
 - [Context functions](/reference/feel/builtin-functions/feel-built-in-functions-context.md)
 - [Temporal functions](/reference/feel/builtin-functions/feel-built-in-functions-temporal.md)
 
-## Additional resources
+## Additional resources and next steps
 
 - [FEEL](/reference/feel/what-is-feel.md)
 - [FEEL data types](/reference/feel/language-guide/feel-data-types.md)

@@ -43,4 +43,6 @@ Camunda Cloud is entirely focused on providing a compact, robust, and scalable s
 
 ## Next steps
 
-* To request information about Camunda Cloud performance and benchmarking, see our [Contact](/contact/) page.
+- [Introduction to Camunda Cloud](./guides/introduction-to-camunda-cloud.md)
+- [Sign up and log in to Camunda Cloud](./guides/getting-started/create-camunda-cloud-account.md)
+- To request information about Camunda Cloud performance and benchmarking, see our [Contact](/contact/) page.
