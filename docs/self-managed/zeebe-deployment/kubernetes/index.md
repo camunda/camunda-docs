@@ -11,7 +11,6 @@ We recommend you use Kubernetes when deploying Zeebe to production.
 | Option                                                      | Comment                                                                                                                                                                                     |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Helm](helm/index.md)                                       | Helm allows you to choose exactly what chart (set of components) you want to install and how these components need to be configured.                                                    |
-| [Zeebe Operator (experimental)](operator/zeebe-operator.md) | The objective of the Zeebe k8s Operator is to simplify and natively integrate Zeebe with k8s, to solve operational burden, and facilitate the creation and maintenance of a set of clusters. |
 
 ## General information
 
