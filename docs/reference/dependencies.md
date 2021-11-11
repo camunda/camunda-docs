@@ -188,7 +188,7 @@ import TabItem from "@theme/TabItem";
 * zen-observable (Version: 0.8.15, License: [MIT](https://opensource.org/licenses/MIT))
 
 
-### Tasklist Dependecies (Backend)
+### Tasklist Dependencies (Backend)
 
 * auth0 (Version: 1.28.0, License: [MIT](https://opensource.org/licenses/MIT))
 * java-jwt (Version: 3.13.0, License: [MIT](https://opensource.org/licenses/MIT))
