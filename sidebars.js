@@ -356,12 +356,7 @@ module.exports = {
               "self-managed/iam/deployment/configuration-variables",
               "self-managed/iam/deployment/making-iam-production-ready",
             ],
-          }, {
-          "Third-Party Libraries": [
-            "self-managed/iam/third-party-libraries/backend-third-party-libraries",
-            "self-managed/iam/third-party-libraries/frontend-third-party-libraries",
-          ],
-        },
+          },
       ],
     },
   ],
