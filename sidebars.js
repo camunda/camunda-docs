@@ -274,43 +274,6 @@ module.exports = {
   "Self-Managed": [
       "self-managed/overview",
       {
-      "Tasklist": [
-        "self-managed/tasklist-deployment/install-and-start",
-        "self-managed/tasklist-deployment/configuration",
-        "self-managed/tasklist-deployment/authentication",
-      ],
-      "Operate": [
-        "self-managed/operate-deployment/install-and-start",
-        "self-managed/operate-deployment/configuration",
-        "self-managed/operate-deployment/data-retention",
-        "self-managed/operate-deployment/schema-and-migration",
-        "self-managed/operate-deployment/importer-and-archiver",
-        "self-managed/operate-deployment/authentication",
-      ],
-      IAM: [
-        "self-managed/iam/what-is-iam",
-          {
-            "Getting started": [
-              {
-                "Running IAM with Docker": [
-                  "self-managed/iam/getting-started/docker/setup-environment",
-                  "self-managed/iam/getting-started/docker/start-iam",
-                  "self-managed/iam/getting-started/docker/accessing-the-ui",
-                ]
-              }
-            ],
-          }, {
-            "Deployment": [
-              "self-managed/iam/deployment/configuration-variables",
-              "self-managed/iam/deployment/making-iam-production-ready",
-            ],
-          }, {
-          "Third-Party Libraries": [
-            "self-managed/iam/third-party-libraries/backend-third-party-libraries",
-            "self-managed/iam/third-party-libraries/frontend-third-party-libraries",
-          ],
-        },
-      ],
       "Zeebe": [
         "self-managed/zeebe-deployment/index",
         {
@@ -360,6 +323,43 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/backpressure",
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
+          ],
+        },
+      ],
+      "Operate": [
+        "self-managed/operate-deployment/install-and-start",
+        "self-managed/operate-deployment/configuration",
+        "self-managed/operate-deployment/data-retention",
+        "self-managed/operate-deployment/schema-and-migration",
+        "self-managed/operate-deployment/importer-and-archiver",
+        "self-managed/operate-deployment/authentication",
+      ],
+      "Tasklist": [
+        "self-managed/tasklist-deployment/install-and-start",
+        "self-managed/tasklist-deployment/configuration",
+        "self-managed/tasklist-deployment/authentication",
+      ],
+      IAM: [
+        "self-managed/iam/what-is-iam",
+          {
+            "Getting started": [
+              {
+                "Running IAM with Docker": [
+                  "self-managed/iam/getting-started/docker/setup-environment",
+                  "self-managed/iam/getting-started/docker/start-iam",
+                  "self-managed/iam/getting-started/docker/accessing-the-ui",
+                ]
+              }
+            ],
+          }, {
+            "Deployment": [
+              "self-managed/iam/deployment/configuration-variables",
+              "self-managed/iam/deployment/making-iam-production-ready",
+            ],
+          }, {
+          "Third-Party Libraries": [
+            "self-managed/iam/third-party-libraries/backend-third-party-libraries",
+            "self-managed/iam/third-party-libraries/frontend-third-party-libraries",
           ],
         },
       ],

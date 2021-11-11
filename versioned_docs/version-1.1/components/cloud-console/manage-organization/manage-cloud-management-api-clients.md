@@ -7,7 +7,7 @@ To interact with Camunda Cloud programmatically without using the Camunda Cloud 
 
 Cloud Management API clients are created for an organization, and can access all Zeebe clusters of this organization.
 
-You can manage clients in the organization settings under the **Cloud Management API** tab.
+You can manage clients in the organization management under the **Cloud Management API** tab.
 
 A client can have one or multiple of the following permissions:
 

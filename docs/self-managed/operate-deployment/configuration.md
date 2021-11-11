@@ -247,11 +247,15 @@ The following snippet represents the default Operate configuration, which is shi
 # Operate configuration file
 
 camunda.operate:
-  # Set operate username and password.
-  # If user with <username> does not exists it will be created.
-  # Default: demo/demo
-  #username:
-  #password:
+  # Set operate userId, displayName and password.
+  # If user with <userId> does not exists it will be created.
+  # Default: demo/demo/demo
+  userId: anUserId
+  displayName: nameShownInWebpage
+  password: aPassword
+  roles:
+    - OWNER
+    - USER
   # ELS instance to store Operate data
   elasticsearch:
     # Cluster name

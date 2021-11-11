@@ -280,6 +280,10 @@ camunda.tasklist:
   # Default: demo/demo
   #username:
   #password:
+  #roles:
+  #  - OWNER
+  #  - OPERATOR
+  
   # ELS instance to store Tasklist data
   elasticsearch:
     # Cluster name
