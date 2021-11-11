@@ -114,11 +114,6 @@ module.exports = {
           ],
         },
         {
-          "Third-Party Libraries": [
-            "components/zeebe/third-party-libraries/zeebe-dependencies",
-          ],
-        },
-        {
           Appendix: [],
         },
       ],
@@ -131,10 +126,6 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/operate-feedback-and-questions",
-          ],
-          "Third-Party Libraries": [
-            "components/operate/third-party-libraries/operate-backend-dependencies",
-            "components/operate/third-party-libraries/operate-frontend-dependencies",
           ],
         },
       ],
@@ -152,10 +143,6 @@ module.exports = {
                 "components/tasklist/userguide/user-interface/camunda-forms",
               ],
             },
-          ],
-          "Third-Party Libraries": [
-            "components/tasklist/third-party-libraries/tasklist-backend-dependencies",
-            "components/tasklist/third-party-libraries/tasklist-frontend-dependencies",
           ],
         },
       ],
@@ -282,6 +269,7 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/supported-environments",
+    "reference/dependencies",
   ],
   "Self-Managed": [
       "self-managed/overview",
