@@ -153,6 +153,9 @@ module.exports = {
               ],
             },
           ],
+        },
+        "components/tasklist/faq",
+        {
           "Third-Party Libraries": [
             "components/tasklist/third-party-libraries/tasklist-backend-dependencies",
             "components/tasklist/third-party-libraries/tasklist-frontend-dependencies",
