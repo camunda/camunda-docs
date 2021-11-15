@@ -10,17 +10,19 @@ The following document provides a basic end-to-end glance into Optimize and its 
 
 Optimize offers business intelligence tooling for Camunda enterprise customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
 
-With Optimize, review heatmap displays for a closer look at the number of instances that took longer than average, based on duration distribution. As a result, reap actionable insights and rapidly identify the constraints of your system.
+With Optimize, you can review heatmap displays for a closer look at the number of instances that took longer than average, based on duration distribution. As a result, reap actionable insights and rapidly identify the constraints of your system.
 
 See [What is Optimize](https://camunda.com/products/camunda-platform/optimize/reports/) for an in-depth overview of Optimize’s capabilities.
 
-[//]:# (The above is just a placeholder link.)
+[//]:# (The above is just a placeholder link. Amara, should we add a landing page for Optimize? This was the text I moved below this original Optimize guide.)
 
 ## Set up 
 
 A Camunda Cloud user can launch Optimize from the Cloud Console — the interface where users create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md) before getting started with Optimize for SaaS users.
 
 So long as a user chooses a version of Zeebe when creating a cluster that includes Optimize, the user can access Optimize.  While creating a cluster, the creation modal will note if Optimize is included by each version of Zeebe that can be selected.
+
+[//]:# (Need to clarify above, what version(s) of Zeebe are applicable with Optimize, or is there an evergreen link we could add here?)
 
 Once you’ve created a cluster, take the following steps inside Cloud Console to access Optimize:
 
@@ -38,7 +40,7 @@ Once you open Optimize, you’ll first view the homepage for these collections, 
 
 To create a collection on the **Home** page, select **Create New > New Collection**. Name your collection and click **Create Collection**.
 
-Next, click on the collection to view its contents. You’ll notice you can again select Create New to draft new reports and dashboards.
+Next, click on the collection to view its contents. You’ll notice you can again select **Create New** to draft new reports and dashboards.
 
 Let’s create a dashboard inside our first collection. Take the following steps:
 
@@ -50,13 +52,13 @@ Let’s create a dashboard inside our first collection. Take the following steps
 6. Click **Create Dashboard**.
 7. Name your dashboard, and add any preferred reports or filters. Click **Save**.
 
-**Image placeholder**
+![dashboard example](./assets/dashboard.png)
 
 In the sample above, Optimize drafted a dashboard filled with reports for review. These reports include objectives like process instance counts, aggregated process duration, active incidents, and heatmaps. 
 
-Select **Edit > Add a Report** to incorporate additional reports you’ve already created (see #create-and-access-reports below). Click and drag the reports on the grid to arrange the dashboard to your liking.
+Select **Edit > Add a Report** to incorporate additional reports you’ve already created (see [create and access reports](#create-and-access-reports) below). Click and drag the reports on the grid to arrange the dashboard to your liking.
 
-Share your dashboard by clicking the **Share** tab. Toggle to **Enable sharing**, and copy or embed the provided link. Colleagues without access to Optimize can still view your report with the shared link.
+Click the **Share** tab to share your dashboard. Toggle to **Enable sharing**, and copy or embed the provided link. Colleagues without access to Optimize can still view your report with the shared link.
 
 ## Create and access reports
 
@@ -95,7 +97,7 @@ Inside this tab, you’ll notice **Outlier Analysis** and **Branch Analysis**.
 
 Inside **Outlier Analysis**, we utilize heatmap displays. Click **Select Process**, choose your process, and choose your version.
 
-**Image placeholder**
+![heatmap example](./assets/heatmap.png)
 
 Within the example above, we notice increased heat (recognized as red) surrounding our invoice approved gateway. Several instances have taken significantly longer than average, so we may choose to take a closer look at these instances by downloading the instance IDs, or viewing the details for further analysis. Here, you can also find if the outliers have a shared variable.
 
@@ -105,7 +107,7 @@ Inside the **Branch Analysis** tab, we can select a ​​process and analyze ho
 
 Fill in the process field, click on a gateway, and choose your end event. In the example below, we can further analyze the likelihood of an invoice being processed once it reaches the gateway for approval:
 
-**Image placeholder**
+![branch analysis example](./assets/analysis.png)
 
 Here, we’ve selected a process flow, gateway, and endpoint for a breakdown of all the instances that went through a particular gateway to a specific endpoint. Hover over the gateway for a breakdown of the process itself.
 
@@ -116,3 +118,5 @@ We’ve only touched the surface of Optimize. The component is full of additiona
 - [The Ultimate Guide to Solving Bottlenecks with Camunda: Part 1](https://camunda.com/blog/2021/10/the-ultimate-guide-to-solving-bottlenecks-with-camunda-part-1/)
 - [Camunda Optimize examples](https://github.com/camunda/camunda-optimize-examples)
 - [Process performance made transparent](https://camunda.com/products/camunda-platform/optimize/reports/)
+
+[//]:# (Eric, how exactly does the screenshot automation process work on your team? Do you have particular images you'd like to see in this guide? Happy to meet 1:1 on this if necessary.)
