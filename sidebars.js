@@ -306,7 +306,6 @@ module.exports = {
                 "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate",
               ],
             },
-            "self-managed/zeebe-deployment/kubernetes/operator/zeebe-operator",
           ],
         },
         {
