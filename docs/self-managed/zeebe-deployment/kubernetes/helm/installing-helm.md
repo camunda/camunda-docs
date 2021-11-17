@@ -25,7 +25,7 @@ When installing the `zeebe-full-helm` chart, all the components marked in green 
 
 ### Add Zeebe Helm repository
 
-The next step is to add the Zeebe Helm chart repository to your installation. Once this is done, Helm will be able to fetch and install charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
+The next step is to add the Zeebe Helm chart repository to your installation. Once this is done, Helm is able to fetch and install charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
 
 ```
 > helm repo add zeebe https://helm.camunda.io
@@ -64,7 +64,7 @@ This will deploy the same components, but with a set of parameters tailored to a
 All Docker images will be downloaded to your local KIND cluster, so it might take some time for the services to get started.
 :::
 
-You can check the progress of your deployment by checking if the Kubernetes PODs are up and running with the following:
+Review the progress of your deployment by checking if the Kubernetes PODs are up and running with the following:
 
 ```
 > kubectl get pods
@@ -92,7 +92,8 @@ Check that each pod has at least 1/1 running instances. You can always tail the 
 > kubectl logs -f <POD NAME> 
 ```
 
-To check on which port the services are running you can run the following command:
+To check which port the services are running on, run the following command:
+
 ```
 > kubectl get svc
 ```
