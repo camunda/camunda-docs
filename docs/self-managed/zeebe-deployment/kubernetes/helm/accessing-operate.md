@@ -17,7 +17,7 @@ You should see something like the following:
 
 ```
 NAME                                    TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                  AGE
-<RELEASE NAME>-nginx-ingress-controller        LoadBalancer   10.109.108.4     <pending>     80:30497/TCP,443:32232/TCP               63m
+<RELEASE NAME>-ingress-nginx-controller        LoadBalancer   10.109.108.4     <pending>     80:30497/TCP,443:32232/TCP               63m
 ```
 
 The `<pending>` under the `EXTERNAL-IP` column should change to a public IP that you (and other users) should be able to access from outside the cluster. Check your cloud provider's specific configuration if that doesn't work.
@@ -27,10 +27,11 @@ Then, you should be able to access Operate pointing your browser at `http://<EXT
 If you are running in Kubernetes KIND, you will need to `port-forward` to the ingress controller main entry point due KIND doesn't support LoadBalancers. You can do that by running in a different terminal:
 
 ```
-> kubectl port-forward svc/<RELEASE NAME>-nginx-ingress-controller 8080:80
+> kubectl port-forward svc/zeebe-self-managed-zeebe-operate-helm 8080:80
+> kubectl port-forward svc/zeebe-self-managed-zeebe-tasklist-helm 9090:80  
 ```
 
-Then, you should be able to access Operate pointing your browser at [http://localhost:8080](http://localhost:8080/).
+Then, you should be able to access Operate pointing your browser at [http://localhost:8080](http://localhost:8080/) and Tasklist pointing at http://localhost:9090.
 
 ![Operate Login](assets/operate-login.png)
 
