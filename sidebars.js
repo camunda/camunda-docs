@@ -17,6 +17,7 @@ module.exports = {
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/message-correlation",
+    "guides/utilizing-forms",
     {
       "Update Guide": [
         "guides/update-guide/introduction",
