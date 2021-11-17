@@ -65,7 +65,7 @@ If your account is new, you should have a cluster already available. If no clust
 
 Next, we’ll create a worker for the service task by associating it with the type we specified on the service task in the BPMN diagram.
 
-1. Open the downloaded or cloned project in your IDE.
+1. Open the downloaded or cloned project ([repo](https://github.com/camunda-cloud/camunda-cloud-tutorials), then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`) in your IDE .
 2. Add your credentials to `application.properties`. Your client id and client secret are available from the previous section in the credential text file you downloaded or copied. Your cluster id and region can be found by going to the cluster overview page.
 3. In the `Worker.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “orchestrate-something”, no action is required.
 4. After making these changes, perform a Maven install, then run the Worker.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
