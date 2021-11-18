@@ -44,6 +44,7 @@ In Java code, instantiate the client via the **ZeebeClientCloudBuilder** as foll
             .withClusterId(clusterId)
             .withClientId(clientId)
             .withClientSecret(clientSecret)
+            .withRegion("bru-2")
             .build();
 
     cloudClient.newTopologyRequest().send().join();
