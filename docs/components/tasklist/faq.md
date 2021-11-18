@@ -1,6 +1,6 @@
 ---
 id: faq
-title: FAQ
+title: Tasklist FAQ
 description: "Frequently asked questions about Tasklist"
 ---
 
