@@ -18,7 +18,7 @@ We recommend you use Kubernetes when deploying Zeebe to production.
 
 Zeebe broker nodes need to be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve the identity of cluster nodes. StatefulSets require persistent storage, which must be allocated in advance. Depending on your cloud provider, the persistent storage differs as it is provider-specific.
 
-In the [zeebe-kubernetes](https://github.com/zeebe-io/zeebe-kubernetes) repository, you'll find example Kubernetes manifests to configure a 3-broker cluster with the Elasticsearch exporter and the Operate preview. Examples are provided for provisioning storage on Google Cloud Platform, and Microsoft Azure.
+At [helm.camunda.io](https://helm.camunda.io/), you'll find helm charts to configure a 3-broker cluster with the Elasticsearch exporter and Operate.
 
 There are many ways you can provision and configure a Kubernetes cluster, and there are a number of architectural choices you need to make: will your workers run in the Kubernetes cluster or external to it?
 
