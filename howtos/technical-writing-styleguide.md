@@ -185,10 +185,14 @@ Create a new Maven project in your IDE. If you're using Eclipse, follow these st
 - Zeebe
 - Operate
 - Tasklist
+- Optimize
+- IAM
 
 Operate and Tasklist may need to be qualified outside of Camunda Cloud context.
 
 Modelers must be qualified so as not to be confused.
+
+**NOTE: An alternative way to use Camunda Cloud is to host it yourself. This is called Camunda Cloud Self-Managed.**
 
 ### Camunda Platform:
 
