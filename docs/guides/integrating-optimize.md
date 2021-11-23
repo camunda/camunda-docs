@@ -4,6 +4,9 @@ title: Integrating Optimize
 sidebar_label: Integrating Optimize
 ---
 
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">Time estimate: 20 minutes</span>
+
 ## Purpose
 
 The following document provides a basic end-to-end glance into Optimize and its features for new business users.
@@ -12,9 +15,7 @@ Optimize offers business intelligence tooling for Camunda enterprise customers. 
 
 With Optimize, you can review heatmap displays for a closer look at the number of instances that took longer than average, based on duration distribution. As a result, reap actionable insights and rapidly identify the constraints of your system.
 
-See [What is Optimize](https://camunda.com/products/camunda-platform/optimize/reports/) for an in-depth overview of Optimize’s capabilities.
-
-[//]:# (The above is just a placeholder link. Amara, should we add a landing page for Optimize? This was the text I moved below this original Optimize guide.)
+See an in-depth overview of Optimize’s capabilities [here](https://docs.camunda.org/optimize/latest/).
 
 ## Set up 
 
