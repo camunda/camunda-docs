@@ -1,10 +1,10 @@
 ---
 id: camunda-modeler-element-templates
-title: Element Templates
+title: Element templates
 ---
 
 :::note
-Element Templates can be used with Camunda Modeler version 1.0 and higher. They are currently available in BPMN diagrams only.
+Element templates can be used with Camunda Modeler version 1.0 and higher. They are currently available in BPMN diagrams only.
 :::
 
 # Overview
@@ -23,4 +23,4 @@ As seen in the _Mail Task_ example above the modeler allows properties of custom
 
 Refer to the following resources to learn more about element templates:
 
-* [Element Template documentation](https://github.com/camunda/camunda-modeler/tree/master/docs/element-templates)
+* [Element template documentation](https://github.com/camunda/camunda-modeler/tree/master/docs/element-templates)

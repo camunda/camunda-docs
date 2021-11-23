@@ -1,10 +1,12 @@
 ---
 id: utilizing-forms
-title: Building forms with Cloud Modeler
+title: Building forms with Modeler
 ---
 
 :::note
 The initial release of Camunda Forms includes a debut minimal feature set, which will be expanded with upcoming versions.
+
+If using with Camunda Platform, note that the Camunda Forms feature was added with the 4.7.0 release of the Camunda Modeler. Therefore, they can be used within BPMN diagrams running on Camunda Platform version 7.15.0 or later.
 :::
 
 # Overview
@@ -15,11 +17,10 @@ The Camunda Forms feature allows you to easily design and configure forms. Once 
 
 ## Create new form
 
-To start building a form, take the following steps:
+To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Camunda Modeler](./components/modeler/what-is-camunda-modeler.md) and take the following steps:
 
-1. Log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account.
-2. Click on the **Forms** tab at the top of the page.
-3. Click the blue **Create New Form** button.
+1. Click on the **Forms** tab at the top of the page or open the **File** menu in Modeler.
+2. Click the blue **Create New Form** button.
 
 ## Build your form
 
@@ -31,7 +32,11 @@ Add your desired elements from the palette on the left side by dragging and drop
 
 ![form palette](./img/form-palette.png)
 
-Within Forms for Camunda Cloud, we have the option to add text fields, numerical values, checkboxes, radio elements, selection menus, text components, and buttons.
+Within Forms, we have the option to add text fields, numerical values, checkboxes, radio elements, selection menus, text components, and buttons.
+
+:::note
+Within Camunda Platform, you can also analyze [embedded forms](https://docs.camunda.org/manual/latest/reference/forms/embedded-forms/).
+:::
 
 In the properties panel on the right side of the page, view and edit attributes that apply to the selected form element. For example, apply a minimum or maximum length to a text field, or require a minimum or maximum value within a number element. In this case, we have labeled the field, described the field, and required an input for our email message.
 
@@ -41,7 +46,9 @@ Refer to the [Camunda Forms reference material](https://docs.camunda.org/manual/
 
 ## Save your form
 
-To save your form, click the blue **Save** button in the top right corner of the page.
+To save your form in Camunda Cloud, click the blue **Save** button in the top right corner of the page.
+
+To save your form in Camunda Platform, click **File > Save File As...** in the top-level menu. Select a location on your file system to store the form as `.form` file. You can load that file again by clicking **File > Open File...**.
 
 ## Connect your form to a BPMN diagram
 
@@ -54,6 +61,8 @@ Next, let's implement a task form into a diagram. To connect your form to a user
 3. Select the user task requiring the help of a form.
 4. On the right side of the page, select the **Form** tab.
 5. Click **SELECT FORM** to incorporate the JSON configuration of the form you've built on Camunda Cloud.
+
+For Camunda Platform, refer to the [User Task Forms guide](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) to learn how to implement a task form in your application.
 
 # Additional resources
 
