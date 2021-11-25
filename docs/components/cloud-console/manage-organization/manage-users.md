@@ -12,7 +12,7 @@ If several users need access to the same Zeebe cluster, all users can be assigne
 
 ## Users
 
-The first user in an organization is usually the owner of the organization. An owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one owner.
+The first user in an organization is the owner of the organization. An owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one owner.
 
 If the owner of the organization has to be changed for a certain reason, this can be done in the user administration. The current owner selects another member of the organization and chooses **Assign as Owner** from the menu. In the dialog that appears, you can select which new roles are to be assigned to the current owner.
 
@@ -30,4 +30,4 @@ The following roles are additionally available, providing dedicated rights for s
 
 Users are invited to a Camunda Cloud organization via their email address, which must be accepted by the user. As long as the invitation has not been accepted, the user remains in the `Pending` state.
 
-People who do not yet have a Camunda Cloud account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda Cloud account.
+People who do not yet have a Camunda Cloud account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda Cloud account by following the instructions in the invitation email.
