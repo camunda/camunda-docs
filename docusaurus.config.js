@@ -21,6 +21,7 @@ module.exports = {
     //        linkRoot: "/docs/"
     //      },
     //    ],
+    'plugin-image-zoom',
     [
       require.resolve("docusaurus-gtm-plugin"),
       {
@@ -160,6 +161,7 @@ module.exports = {
       contextualSearch: true, // useful for versioned docs (https://docusaurus.io/docs/search#contextual-search)
       searchParameters: {}, // Optional (if provided by Algolia)
     },
+    zoomSelector: '.markdown img',
     // Disabling Dark Mode
     // https://github.com/camunda-cloud/camunda-cloud-documentation/issues/125
     //
