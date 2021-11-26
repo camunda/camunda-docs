@@ -13,7 +13,7 @@ To create a new IP Whitelist, take the following steps:
 
 ![cluster-details](./img/cluster-detail-ip-whitelists.png)
 
-2. Click **Create** to create a IP Whitelist.
+2. Click **Create** to create an IP Whitelist.
 
 ![create-alert](./img/cluster-detail-create-ip-whitelist.png)
 
