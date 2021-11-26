@@ -23,10 +23,12 @@ In addition to the Owner, the **Admin** role is available as a second role with 
 The following roles are additionally available, providing dedicated rights for specific elements in Camunda Cloud.
 
 - **Operations Engineer**: Full access to Console and Operate, except Cluster deletion privileges
+- **Analyst**: Full access to Optimize and read-only access to Clusters
 - **Task User**: Full access to Tasklist and read-only access to Clusters
 - **Developer**: Full access to Console, except deletion privileges. Full access to Operate, and Tasklist
 - **Visitor**: Read-only access
-- **Analyst**: Full access to Optimize and read-only access to Clusters
+
+Users can be assigned multiple roles. For example, a user can have the role of _Operations Engineer_ and _Task User_, which gives them access to the _Operate_ and _Tasklist_.
 
 Users are invited to a Camunda Cloud organization via their email address, which must be accepted by the user. As long as the invitation has not been accepted, the user remains in the `Pending` state.
 
