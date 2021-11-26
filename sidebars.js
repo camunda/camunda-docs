@@ -58,6 +58,7 @@ module.exports = {
             "components/cloud-console/manage-clusters/delete-cluster",
             "components/cloud-console/manage-clusters/manage-api-clients",
             "components/cloud-console/manage-clusters/manage-alerts",
+            "components/cloud-console/manage-clusters/manage-ip-whitelists",
           ],
         },
         {
