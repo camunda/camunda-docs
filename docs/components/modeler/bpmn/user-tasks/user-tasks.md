@@ -27,6 +27,19 @@ embedded [Camunda Forms](../../../../guides/utilizing-forms.md),
 these can be embedded into the BPMN process XML as a `zeebe:UserTaskForm`
 extension element of the process element.
 
+## Assignments
+User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
+This can be used to define which user the task can be assigned to. One or both of the following
+attributes can be specified simultaneously:
+- `assignee`: Specifies the user assigned to the task. [Tasklist] will claim the task for this user.
+- `candidateGroups`: Specifies the groups of users that the task can be assigned to.
+
+Typically, the assignee and candidate groups are defined as static values (e.g. `some_username` and
+`sales, operations`), but they can also be defined as
+[expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers,
+book.author)`). The expressiosn are evaluated on activating the user task and must result in a
+`string` for the assignee and a `list of strings` for the candidate groups.
+
 ## Variable mappings
 
 By default, all job variables are merged into the process instance. This
@@ -44,7 +57,7 @@ as configuration parameters for the worker.
 
 ### XML representation
 
-A user task with a user task form:
+A user task with a user task form and an assignment definition:
 
 ```xml
 <bpmn:process id="controlProcess" name="Control Process" isExecutable="true">
@@ -55,6 +68,7 @@ A user task with a user task form:
   </bpmn:extensionElements>
   <bpmn:userTask id="Activity_025dulo" name="Configure">
     <bpmn:extensionElements>
+      <zeebe:assignmentDefinition assignee="= default_controller" candidateGroups="controllers" />
       <zeebe:formDefinition formKey="camunda-forms:bpmn:userTaskForm_2g7iho6" />
     </bpmn:extensionElements>
   </bpmn:userTask>
