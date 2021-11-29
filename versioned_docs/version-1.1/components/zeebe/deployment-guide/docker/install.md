@@ -18,7 +18,7 @@ The easiest way to develop with Zeebe is using Docker. Docker provides a consist
 
 ### Docker configurations for docker-compose
 
-Docker configurations for starting Zeebe using `docker-compose` are available in the [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md) repository.
+Docker configurations for starting Zeebe using `docker-compose` are available in the [zeebe-docker-compose](https://github.com/camunda-cloud/camunda-cloud-get-started/blob/master/docker-compose.yaml) repository.
 
 This repository contains several pre-defined configuration options:
 
@@ -29,7 +29,7 @@ This repository contains several pre-defined configuration options:
 
 This allows you to start using complex configurations with a single command. You can tailor these configurations to your needs whenever you'd like.
 
-Further instructions for using these configurations are in the [README](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md).
+Further instructions for using these configurations are in the [README](https://github.com/camunda-cloud/camunda-cloud-get-started#local-setup).
 
 ### Using Docker without docker-compose
 
