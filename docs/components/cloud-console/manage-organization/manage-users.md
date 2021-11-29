@@ -14,21 +14,21 @@ If several users need access to the same Zeebe cluster, all users can be assigne
 
 The first user in an organization is the owner of the organization. An owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one owner.
 
-If the owner of the organization has to be changed for a certain reason, this can be done in the user administration. The current owner selects another member of the organization and chooses **Assign as Owner** from the menu. In the dialog that appears, you can select which new roles are to be assigned to the current owner.
+To change the owner of the organization, utilize the user administration. The current owner selects another member of the organization, and selects **Assign as Owner** from the menu. In the dialog that appears, select which new roles are to be assigned to the current owner.
 
-### Roles and Permissions
+### Roles and permissions
 
-In addition to the Owner, the **Admin** role is available as a second role with comprehensive rights. The Admin role has the same rights as the Owner, with the difference that an Admin cannot manage other Admins.
+In addition to the owner, the **Admin** role is available as a second role with comprehensive rights. The admin role has the same rights as the owner, with the difference that an admin cannot manage other admins.
 
 The following roles are additionally available, providing dedicated rights for specific elements in Camunda Cloud.
 
-- **Operations Engineer**: Full access to Console and Operate, except Cluster deletion privileges
-- **Analyst**: Full access to Optimize and read-only access to Clusters
-- **Task User**: Full access to Tasklist and read-only access to Clusters
-- **Developer**: Full access to Console, except deletion privileges. Full access to Operate, and Tasklist
+- **Operations Engineer**: Full access to Console and Operate, except cluster deletion privileges
+- **Analyst**: Full access to Optimize and read-only access to clusters
+- **Task User**: Full access to Tasklist and read-only access to clusters
+- **Developer**: Full access to Console, except deletion privileges; full access to Operate and Tasklist
 - **Visitor**: Read-only access
 
-Users can be assigned multiple roles. For example, a user can have the role of _Operations Engineer_ and _Task User_, which gives them access to the _Operate_ and _Tasklist_.
+Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **Operate** and **Tasklist**.
 
 Users are invited to a Camunda Cloud organization via their email address, which must be accepted by the user. As long as the invitation has not been accepted, the user remains in the `Pending` state.
 
