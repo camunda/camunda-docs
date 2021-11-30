@@ -5,11 +5,11 @@ title: What is Camunda Modeler?
 
 Any executable process needs a **BPMN diagram** designed and configured beforehand.
 
-The design is used to specify the flow of a process. Thereby, different events must be configured in the model so the workflow engine understands what must executed.
+A BPMN diagram is used to visually outline the structure and flow of a process. As a result, the process can be more easily understood by various stakeholders.
 
-A configuration can be the conditions in a gateway or the specification of a service task.
+In tandem, different events and implementation details (such as the conditions within a gateway, or the specifications of a service task) must be configured in the model so the workflow engine understands what must executed once the process reaches a certain task.
 
-Camunda offers three tools to achieve this:
+Camunda offers three tools to implement these details:
 
 - [Cawemo](https://cawemo.com/)
 - [Cloud Modeler](./cloud-modeler/launch-cloud-modeler.md)
@@ -19,6 +19,6 @@ Camunda offers three tools to achieve this:
 
 **Cloud Modeler** and **Camunda Modeler** support the technical parameterization of the models. It's possible to design the model in Cawemo, and continue working with Cloud Modeler or Camunda Modeler.
 
-Cloud Modeler and Camunda Modeler differ mainly in their environment. Cloud Modeler is part of Cloud Console and offers a seamless integration into Camunda Cloud to model BPMN. Camunda Modeler is a desktop application that can be installed and used locally.
+Cloud Modeler and Camunda Modeler differ mainly in their environment. Cloud Modeler is part of Cloud Console and offers a seamless integration into Camunda Cloud to model BPMN. Camunda Modeler is a desktop application that can be installed and used locally, all while integrating your local development environment.
 
-In this guide, we'll get you started modeling BPMN diagrams using Modeler.
+In this guide, we'll demonstrate modeling BPMN diagrams using both Cloud Modeler and Camunda Modeler.

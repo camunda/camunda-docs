@@ -24,7 +24,7 @@ To start building a form, log in to your [Camunda Cloud](./getting-started/creat
 
 ## Build your form
 
-Now you can start to build your Camunda form. First, let's name our form by clicking the three vertical dots next to the text reading **New Form** in the top left corner of the page. Select **Rename** to give your form a new name. In this example, we'll analyze a form to help with a task in obtaining an email message.
+Now you can start to build your Camunda form. First, let's name our form by clicking the three vertical dots next to the text reading **New Form** in the top left corner of the page. Select **Rename** to give your form a new name. In this example, we'll build a form to help with a task in obtaining an email message.
 
 ![form email example](./img/form-email-example.png)
 
@@ -35,7 +35,7 @@ Add your desired elements from the palette on the left side by dragging and drop
 Within Forms, we have the option to add text fields, numerical values, checkboxes, radio elements, selection menus, text components, and buttons.
 
 :::note
-Within Camunda Platform, you can also analyze [embedded forms](https://docs.camunda.org/manual/latest/reference/forms/embedded-forms/).
+Within Camunda Platform, you can also utilize [embedded forms](https://docs.camunda.org/manual/latest/reference/forms/embedded-forms/).
 :::
 
 In the properties panel on the right side of the page, view and edit attributes that apply to the selected form element. For example, apply a minimum or maximum length to a text field, or require a minimum or maximum value within a number element. In this case, we have labeled the field, described the field, and required an input for our email message.
@@ -52,9 +52,11 @@ To save your form in Camunda Platform, click **File > Save File As...** in the t
 
 ## Connect your form to a BPMN diagram
 
+Next, let's implement a task form into a diagram. In tandem, we can connect your form to a user task or start event.
+
 Click on the **Forms** tab again to view a list of all the forms you've created.
 
-Next, let's implement a task form into a diagram. To connect your form to a user task or start event, take the following steps:
+Take the following steps:
 
 1. Click the **Diagrams** tab at the top of the screen.
 2. Select the diagram where you'd like to apply your form.
@@ -62,7 +64,9 @@ Next, let's implement a task form into a diagram. To connect your form to a user
 4. On the right side of the page, select the **Form** tab.
 5. Click **SELECT FORM** to incorporate the JSON configuration of the form you've built on Camunda Cloud.
 
+:::note
 For Camunda Platform, refer to the [User Task Forms guide](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) to learn how to implement a task form in your application.
+:::
 
 # Additional resources
 
