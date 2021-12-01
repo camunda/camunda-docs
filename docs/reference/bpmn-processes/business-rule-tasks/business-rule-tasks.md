@@ -32,7 +32,7 @@ specifies the type of job workers should subscribe to (e.g. DMN).
 Use [task headers](../../service-tasks/service-tasks#task-headers) to pass static parameters to the job
 worker (e.g. the key of the decision to evaluate).
 
-Define [variable mappings](../../service-tasks/service-tasks#variable-mappings) to transform the
+Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) to transform the
 variables passed to the job worker, or to customize how the variables of the job are merged
 in the process instance.
 
