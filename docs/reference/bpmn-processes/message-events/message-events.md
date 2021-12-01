@@ -74,7 +74,11 @@ To correlate a message to the message event, the message is published with the d
 
 ## Variable mappings
 
-By default, all message variables are merged into the process instance. This behavior can be customized by defining an output mapping at the message catch event.
+Output variable mappings are used in order to customize how variables are merged into the process instance.
+It can contain multiple elements that specify which variables should be mapped.
+The `Process Variable Name` of an output  denotes the variable name outside of the activity.
+
+For more information about this topic visit the documentation about [Input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
 
 ## Additional resources
 
