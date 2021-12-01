@@ -7,7 +7,7 @@ A call activity (or reusable subprocess) allows to call/invoke another process a
 
 ![call-activity](assets/call-activities-example.png)
 
-When a call activity is entered, a new process instance of the referenced process is created. The new process instance is activated at the **none start event**. The process can have start events of other types, but they are ignored.
+When a call activity is entered, a new process instance of the referenced process is created. The new process instance is activated at the **standard start event**. The process can have start events of other types, but they are ignored.
 
 When the created process instance is completed, the call activity is left and the outgoing sequence flow is taken.
 
@@ -39,17 +39,19 @@ If the attribute `propagateAllChildVariables` is set (default: `true`), all vari
 
 It's recommended to disable the attribute `propagateAllChildVariables` or define output mappings if the call activity is in a parallel flow (e.g. when it is marked as [parallel multi-instance](../multi-instance/multi-instance.md#variable-mappings)). Otherwise, it can happen that variables are overridden accidentally when they are changed in the parallel flow.
 
+For more information on this topic visit the documentation about [Input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
+
 ## Additional resources
 
 ### XML representation
 
-A call activity with static process id:
+A call activity with static process id and propagation of all child variables turned on:
 
 ```xml
-<bpmn:callActivity id="task-A" name="A">
-  <bpmn:extensionElements>
-    <zeebe:calledElement processId="child-process-id" />
-  </bpmn:extensionElements>
+<bpmn:callActivity id="Call_Activity" name="Call Process A ">
+   <bpmn:extensionElements>
+    <zeebe:calledElement processId="child-process-a" propagateAllChildVariables="true" />
+   </bpmn:extensionElements>
 </bpmn:callActivity>
 ```
 
