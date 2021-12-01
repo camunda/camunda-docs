@@ -25,10 +25,11 @@ A service task can define an arbitrary number of `taskHeaders`. They are static 
 
 ## Variable mappings
 
-By default, all job variables merge into the process instance. This behavior can be customized by defining an output mapping at the service task.
+Input/output variable mappings can be used to create new variables or customize how variables are merged into the process instance.
 
-Input mappings can be used to transform the variables into a format accepted by the job worker.
+In order to use the variable mapping, the Zeebe extension element ioMapping has to be added to the element. It can contain multiple input and output elements that specify which variables should be mapped. The `Local Input Variable` denotes the variable name inside the activity (a local variable to be created), whereas the `Process Variable Name` of an output  denotes the variable name outside of the activity.
 
+For more information about this topic visit the documentation about [Input/output variable mappings](https://docs.camunda.io/docs/components/concepts/variables/#inputoutput-variable-mappings).
 ## Additional resources
 
 ### XML representation
