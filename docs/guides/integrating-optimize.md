@@ -13,7 +13,7 @@ The following document provides a basic end-to-end glance into Optimize and its 
 
 Optimize offers business intelligence tooling for Camunda enterprise customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
 
-With Optimize, you can review heatmap displays for a closer look at the number of instances that took longer than average, based on duration distribution. As a result, reap actionable insights and rapidly identify the constraints of your system.
+With Optimize, review heatmap displays for instances which took longer than average to discover long-running flow nodes. As a result, reap actionable insights and rapidly identify the constraints of your system.
 
 See an in-depth overview of Optimize’s capabilities [here](https://docs.camunda.org/optimize/latest/).
 
@@ -21,9 +21,7 @@ See an in-depth overview of Optimize’s capabilities [here](https://docs.camund
 
 A Camunda Cloud user can launch Optimize from the Cloud Console — the interface where users create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md) before getting started with Optimize for SaaS users.
 
-So long as a user chooses a version of Zeebe when creating a cluster that includes Optimize, the user can access Optimize.  While creating a cluster, the creation modal will note if Optimize is included by each version of Zeebe that can be selected.
-
-[//]:# (Need to clarify above, what version(s) of Zeebe are applicable with Optimize, or is there an evergreen link we could add here?)
+So long as a user is operating with [Camunda Cloud 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, the user can access Optimize. While creating a cluster, the creation modal will note if Optimize is included by each version of Zeebe that can be selected.
 
 Once you’ve created a cluster, take the following steps inside Cloud Console to access Optimize:
 
@@ -39,19 +37,19 @@ Within Optimize, **reports** are based on a *single* visualization, similar to a
 
 Once you open Optimize, you’ll first view the homepage for these collections, dashboards, and reports.
 
-To create a collection on the **Home** page, select **Create New > New Collection**. Name your collection and click **Create Collection**.
+To create a collection on the **Home** page, select **Create New > New Collection**. Then, you can name your collection and select which processes will be available.
 
-Next, click on the collection to view its contents. You’ll notice you can again select **Create New** to draft new reports and dashboards.
+From within your collection, you can again select **Create New** and draft reports and dashboards. Add users and additional data sources by navigating between the tabs inside the collection.
 
 Let’s create a dashboard inside our first collection. Take the following steps:
 
-1. Return to the **Home** page to review your collections, dashboards, and reports. You’ll be able to view all process instances you’ve already run and retrieve additional data on these instances within the Camunda engine.
+1. Return to the **Home** page to view a list of existing collections, dashboards, and reports. You’ll be able to view all process instances you’ve already run and retrieve additional data on these instances within the Camunda engine.
 2. Select the collection where you’d like to create a dashboard.
 3. Click **Create New > New Dashboard**.
 4. Optimize offers preconfigured dashboard templates, or you can start from a blank dashboard. In this example, we’ll select a preconfigured template by clicking the **Process performance overview** option.
 5. Under **Select Process**, choose the process you’d like to analyze and the version.
 6. Click **Create Dashboard**.
-7. Name your dashboard, and add any preferred reports or filters. Click **Save**.
+7. Name your dashboard, and add any additional existing reports or create filters. Click **Save**.
 
 ![dashboard example](./assets/dashboard.png)
 
@@ -65,9 +63,9 @@ Click the **Share** tab to share your dashboard. Toggle to **Enable sharing**, a
 
 To create a custom report based on a key performance indicator (KPI) you’d like to analyze, and to incorporate this report into a dashboard, follow the steps below:
 
-1. On the right side of the **Home** page, select **Create New > New Report**. Here we’ll take a look at a single process, though you can also view combined processes and decision reports.
+1. On the right side of the **Home** page, select **Create New > New Report**. Here we’ll take a look at a single process, though you can also view data from multiple processes.
 2. Click the text box under **Select Process** and select the process you’d like to analyze. 
-3. Select the type of report you’d like to use on the left side of the **Create new Report** box. As with dashboards, Optimize offers preconfigured templates such as heatmaps and tables. We’ll begin with a heatmap.
+3. Select the type of report you’d like to use on the right side of the **Create new Report** box. As with dashboards, Optimize offers preconfigured templates such as heatmaps and tables. We’ll begin with a heatmap.
 4. Click **Create Report**.
 5. Set up and customize your report. Begin by naming your report in the text box at the top of the page, pre-filled with **New Report**.
 6. In the gray text box to the right, confirm your data source, and select what you’d like to review from the process (in this case, we are viewing flow nodes.) You can also group by topics such as duration or start date.
