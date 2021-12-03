@@ -9,7 +9,7 @@ A BPMN diagram is used to visually outline the structure and flow of a process. 
 
 In tandem, different events and implementation details (such as the conditions within a gateway, or the specifications of a service task) must be configured in the model so the workflow engine understands what must executed once the process reaches a certain task.
 
-Camunda offers three tools to implement these details:
+Camunda offers three tools to design your diagrams and implement them:
 
 - [Cawemo](https://cawemo.com/)
 - [Cloud Modeler](./cloud-modeler/launch-cloud-modeler.md)

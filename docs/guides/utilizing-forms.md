@@ -54,7 +54,11 @@ To save your form in Camunda Platform, click **File > Save File As...** in the t
 
 Next, let's implement a task form into a diagram. In tandem, we can connect your form to a user task or start event.
 
-Click on the **Forms** tab again to view a list of all the forms you've created.
+:::note
+For Camunda Platform, refer to the [User Task Forms guide](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) to learn how to implement a task form in your application.
+:::
+
+Click on the **Forms** tab in Camunda Cloud to view a list of all the forms you've created.
 
 Take the following steps:
 
@@ -63,10 +67,6 @@ Take the following steps:
 3. Select the user task requiring the help of a form.
 4. On the right side of the page, select the **Form** tab.
 5. Click **SELECT FORM** to incorporate the JSON configuration of the form you've built on Camunda Cloud.
-
-:::note
-For Camunda Platform, refer to the [User Task Forms guide](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) to learn how to implement a task form in your application.
-:::
 
 # Additional resources
 
