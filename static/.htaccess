@@ -59,3 +59,7 @@ RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
+
+
+# Add yaml mime type
+AddType text/vnd.yaml   yaml
