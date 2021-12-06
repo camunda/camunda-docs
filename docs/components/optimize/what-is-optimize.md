@@ -1,0 +1,26 @@
+---
+id: what-is-optimize
+title: What is Optimize?
+---
+
+Camunda is largely comprised of three key components:
+
+- Design
+- Automate
+- Improve
+
+A user can design process flows through tools like Cawemo and Modeler, and deploy applications via Modeler or an IDE into the server. A user can use Tasklist to review and complete tasks, and Operate to view and analyze process instances.
+
+Beyond these design and automate cornerstones lies an important component to leverage our process data and analyze areas for improvement: Optimize.
+
+Geared toward business stakeholders, Optimize offers business intelligence tooling for Camunda enterprise customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
+
+As you run process instances through the server, Optimize makes REST API calls into the Camunda server, takes new historical data generated since the previous call, and stores the data in its own Elasticsearch database.
+
+As a result, you can analyze reports and dashboards, and reap actionable insights independently of what is happening inside the Camunda server itself (meaning no effects on runtime).
+
+Review heatmap displays for a closer look at the number of instances that took longer than average, based on duration distribution. You can also visualize a heatmap by counting the number of activity instances, comparing them to the total number of process instances, and obtaining a percentage.
+
+Unlike standard business intelligence tools, Optimize understands the user’s goals, and leads them through continuous process improvement. Optimize is purpose-built to help rapidly identify the constraints of your system.
+
+In the following sections, we’ll walk through the basic setup, use, and analysis of Optimize.
