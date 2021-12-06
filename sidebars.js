@@ -129,6 +129,23 @@ module.exports = {
           ],
         },
       ],
+      Optimize: [
+        "components/optimize/what-is-optimize",
+        {
+          "User guide": [
+            "components/optimize/userguide/collections-dashboards-reports",
+            "components/optimize/userguide/data-sources",
+            "components/optimize/userguide/creating-reports",
+            "components/optimize/userguide/creating-dashboards",
+            "components/optimize/userguide/additional-features",
+          ],
+          "Process analysis": [
+            "components/optimize/userguide/process-analysis/overview",
+            "components/optimize/userguide/process-analysis/outlier-analysis",
+            "components/optimize/userguide/process-analysis/branch-analysis",
+          ],
+        },
+      ],
       Tasklist: [
         "components/tasklist/introduction",
         {
