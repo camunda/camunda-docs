@@ -31,7 +31,7 @@ If the variables are causing the incident, complete the following steps:
 2. Increase the remaining retries of the job.
 3. Mark the incident as resolved. 
 
-**NOTE**: It's recommended you complete these tasks in [Operate](/components/operate/index.md).
+**NOTE**: It's recommended you complete these operations in [Operate](/components/operate/index.md).
 
 It is also possible to complete these steps via the client API. Using the Java client, this could look like the following:
 
@@ -59,7 +59,7 @@ If an incident is created during process execution and it's not related to a job
 
 To resolve the incident, update the variables and mark the incident as resolved.
 
-**NOTE**: It's recommended you complete these tasks in [Operate](/components/operate/index.md).
+**NOTE**: It's recommended you complete these operations in [Operate](/components/operate/index.md).
 
 Using the Java client, this could look like the following:
 
