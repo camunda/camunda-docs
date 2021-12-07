@@ -22,3 +22,5 @@ Cloud Modeler and Camunda Modeler differ mainly in their environment. Cloud Mode
 **Cawemo** focuses on the design phase and provides options for collaborative work on a BPMN model.
 
 In this guide, we'll demonstrate modeling BPMN diagrams using both Cloud Modeler and Camunda Modeler.
+
+Additionally, the Camunda Forms feature allows you to easily design and configure forms. Once configured, they can be connected to a user task or start event to implement a task form in your application. Learn more in our documentation on [utilizing forms](./../../guides/utilizing-forms.md).
