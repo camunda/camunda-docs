@@ -37,7 +37,7 @@ attributes can be specified simultaneously:
 Typically, the assignee and candidate groups are defined as static values (e.g. `some_username` and
 `sales, operations`), but they can also be defined as
 [expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers,
-book.author)`). The expressiosn are evaluated on activating the user task and must result in a
+book.author)`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate groups.
 
 ## Variable mappings
