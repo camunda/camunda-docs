@@ -1,13 +1,10 @@
 ---
 id: modeler-bpmn
 title: BPMN in Modeler
+description: Let's start modeling by creating a new BPMN diagram.
 ---
 
-# Overview
-
-[//]:#(Need to add overview sentence here.)
-
-## Create new BPMN 2.0 diagram
+# Create new BPMN 2.0 diagram
 
 To start modeling, create a new BPMN 2.0 diagram by selecting **Create New Diagram** in the **Diagrams** tab for your process engine in the top-level menu.
 
@@ -21,7 +18,9 @@ BPMN diagrams must be created for the process engine they intend to be deployed 
 
 ![Start Modeling](./img/quickstart-2.png)
 
-Now you can start to create a BPMN 2.0 model. Add the desired elements from the palette on the left hand side by dragging and dropping them onto the diagram canvas. Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of an element in place.
+Now you can start to create a BPMN 2.0 model. Add the desired elements from the palette on the left hand side by dragging and dropping them onto the diagram canvas.
+
+Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of an element in place.
 
 ## Demo
 

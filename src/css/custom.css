@@ -141,3 +141,8 @@ svg.implemented:hover [stroke="#333"]{
   background-color: #0075FF;
   color: #FFFFFF;
 }
+
+.badge--platform {
+  background-color: #FF1F00;
+  color: #FFFFFF;
+}
