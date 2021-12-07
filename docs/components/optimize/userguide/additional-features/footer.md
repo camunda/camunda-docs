@@ -1,6 +1,7 @@
 ---
-id: additional-features
-title: Additional features
+id: footer
+title: Footer
+description: Take a closer look at engine connection status, Elasticsearch connection, import progress, and more.
 ---
 
 # Footer

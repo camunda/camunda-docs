@@ -137,12 +137,15 @@ module.exports = {
             "components/optimize/userguide/data-sources",
             "components/optimize/userguide/creating-reports",
             "components/optimize/userguide/creating-dashboards",
-            "components/optimize/userguide/additional-features",
           ],
           "Process analysis": [
             "components/optimize/userguide/process-analysis/overview",
             "components/optimize/userguide/process-analysis/outlier-analysis",
             "components/optimize/userguide/process-analysis/branch-analysis",
+          ],
+          "Additional features": [
+            "components/optimize/userguide/additional-features/filters",
+            "components/optimize/userguide/additional-features/footer",
           ],
         },
       ],

@@ -1,6 +1,7 @@
 ---
 id: branch-analysis
 title: Branch analysis
+description: Optimize provides you with a statistical analysis for a given end event and a gateway.
 ---
 
 # Overview
