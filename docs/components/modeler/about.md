@@ -1,6 +1,6 @@
 ---
-id: what-is-camunda-modeler
-title: What is Camunda Modeler?
+id: about-modeler
+title: About Modeler
 ---
 
 Any executable process needs a **BPMN diagram** designed and configured beforehand.
@@ -11,14 +11,14 @@ In tandem, different events and implementation details (such as the conditions w
 
 Camunda offers three tools to design your diagrams and implement them:
 
-- [Cawemo](https://cawemo.com/)
 - [Cloud Modeler](./cloud-modeler/launch-cloud-modeler.md)
 - [Camunda Modeler](./camunda-modeler/install-the-modeler.md)
+- [Cawemo](https://cawemo.com/)
 
-**Cawemo** focuses on the design phase and provides options for collaborative work on a BPMN model.
-
-**Cloud Modeler** and **Camunda Modeler** support the technical parameterization of the models. It's possible to design the model in Cawemo, and continue working with Cloud Modeler or Camunda Modeler.
+**Cloud Modeler** and **Camunda Modeler** support the technical implementation of the models. It's possible to design the model in Cawemo, and continue working with Cloud Modeler or Camunda Modeler.
 
 Cloud Modeler and Camunda Modeler differ mainly in their environment. Cloud Modeler is part of Cloud Console and offers a seamless integration into Camunda Cloud to model BPMN. Camunda Modeler is a desktop application that can be installed and used locally, all while integrating your local development environment.
+
+**Cawemo** focuses on the design phase and provides options for collaborative work on a BPMN model.
 
 In this guide, we'll demonstrate modeling BPMN diagrams using both Cloud Modeler and Camunda Modeler.

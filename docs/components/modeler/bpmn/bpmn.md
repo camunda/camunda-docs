@@ -1,21 +1,23 @@
 ---
-id: camunda-modeler-bpmn
-title: BPMN in Camunda Modeler
+id: modeler-bpmn
+title: BPMN in Modeler
 ---
 
-# Quickstart
+# Overview
 
-## Create new BPMN 2.0 Diagram
+[//]:#(Need to add overview sentence here.)
 
-![New BPMN Diagram](./img/quickstart-1.png)
+## Create new BPMN 2.0 diagram
 
-To start modeling, create a new BPMN 2.0 diagram for the Camunda Platform by selecting **Create diagram > Create new BPMN diagram (Camunda Platform)** in the top-level menu.
+To start modeling, create a new BPMN 2.0 diagram by selecting **Create New Diagram** in the **Diagrams** tab for your process engine in the top-level menu.
+
+If working in Platform, select **Create diagram > Create new BPMN diagram**.
 
 :::note
 BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot run a BPMN diagram modeled for Camunda Platform in Camunda Cloud, or vice versa, at this time.
 :::
 
-## Start Modeling
+## Start modeling
 
 ![Start Modeling](./img/quickstart-2.png)
 
@@ -27,11 +29,11 @@ Now you can start to create a BPMN 2.0 model. Add the desired elements from the 
 
 The demo above shows how to create more BPMN 2.0 elements like lanes, task types and event definitions.
 
-## BPMN 2.0 Coverage
+## BPMN 2.0 coverage
 
-The Camunda Modeler covers all BPMN 2.0 elements for modeling processes and collaborations.
+Modeler [covers all BPMN 2.0 elements](/docs/reference/bpmn-processes/bpmn-coverage/) for modeling processes and collaborations.
 
-## BPMN 2.0 Properties for Execution
+## BPMN 2.0 properties for execution
 
 ![Save BPMN Diagram](./img/quickstart-3.png)
 
@@ -41,6 +43,8 @@ In the properties panel on the right hand side, you can view and edit attributes
 
 The panel can be hidden and restored by clicking the tab on its left border.
 
-## Save a Diagram
+## Save a diagram
 
-To save your state of work, click **File > Save File As...** in the top-level menu. Then select a location on your file system to store the diagram in the BPMN 2.0 XML format. You can load that file again by clicking **File > Open File...**.
+To save your state of work in Cloud, click **Save**.
+
+To save your state of work in Platform, click **File > Save File As...** in the top-level menu. Then select a location on your file system to store the diagram in the BPMN 2.0 XML format. You can load that file again by clicking **File > Open File...**.

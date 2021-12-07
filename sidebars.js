@@ -75,7 +75,7 @@ module.exports = {
         },
       ],
       Modeler: [
-        "components/modeler/what-is-camunda-modeler",
+        "components/modeler/about-modeler",
         {
           "Cloud Modeler": [
             "components/modeler/cloud-modeler/launch-cloud-modeler",
@@ -98,7 +98,7 @@ module.exports = {
           },
           {
           "BPMN": [
-            "components/modeler/bpmn/camunda-modeler-bpmn",
+            "components/modeler/bpmn/modeler-bpmn",
           ],
           },
           {

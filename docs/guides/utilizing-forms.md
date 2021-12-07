@@ -17,7 +17,7 @@ The Camunda Forms feature allows you to easily design and configure forms. Once 
 
 ## Create new form
 
-To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Camunda Modeler](./components/modeler/what-is-camunda-modeler.md) and take the following steps:
+To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Camunda Modeler](./components/modeler/about.md) and take the following steps:
 
 1. Click on the **Forms** tab at the top of the page or open the **File** menu in Modeler.
 2. Click the blue **Create New Form** button.
@@ -70,6 +70,6 @@ Take the following steps:
 
 # Additional resources
 
-- [Camunda and Cloud Modeler](./components/modeler/what-is-camunda-modeler.md)
+- [Camunda and Cloud Modeler](./components/modeler/about.md)
 - [Model your first process](./getting-started/model-your-first-process.md)
 - [User task reference](./reference/bpmn-processes/user-tasks/user-tasks.md)
