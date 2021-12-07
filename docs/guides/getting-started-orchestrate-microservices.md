@@ -21,7 +21,7 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one, then log in.
 
-1. [Design your process with BPMN](#design-your-process-with-BPMN)
+1. [Design your process with BPMN](#design-your-process-with-bpmn)
 2. [Create credentials for your Zeebe client](#create-credentials-for-your-zeebe-client)
 3. [Create a worker for the service task](#create-a-worker-for-the-service-task)
 

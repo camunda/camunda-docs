@@ -7,9 +7,8 @@ description: "Let's take a closer look at how Operate authenticates for use."
 Operate provides three ways to authenticate:
 
 1. User information stored in [Elasticsearch](#user-in-elasticsearch).
-2. [Camunda Cloud single sign-on](#camunda-cloud-single-sign-on).
-3. [Lightweight Directory Access Protocol (LDAP)](#ldap).
-4. [IAM Authentication and Authorization](#iam)
+2. [Lightweight Directory Access Protocol (LDAP)](#ldap).
+3. [IAM Authentication and Authorization](#iam)
 
 By default, user storage in Elasticsearch is enabled.
 
