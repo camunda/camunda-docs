@@ -10,11 +10,11 @@ When working with Camunda Cloud, you may see various messages in your logs. Not 
 
 Camunda Cloud uses the following log levels:
 
-* TRACE: information which is helpful only if you want to trace the execution of a particular component. 
-* DEBUG: information which can provide helpful context when debugging. You may see a DEBUG message right after an INFO one to provide more context.
-* INFO: information about the system which is useful for the user (note: in the case of the broker, the user here is the user deploying it), e.g. leader changes, a new node added to or removed from the membership, etc.
-* WARN: expected errors (e.g. connection time outs, the remote node is unavailable, etc.) which may indicate that parts of the system are not working, and would require attention if they persist, but may resolve by themselves. These should be monitored, but may not require a support ticket.
-* ERROR: errors which require a person to look into them, e.g. log corruption, inconsistent log, anything which could shut down a partition, etc.
+* TRACE: Information which is helpful only if you want to trace the execution of a particular component. 
+* DEBUG: Information which can provide helpful context when debugging. You may see a DEBUG message right after an INFO message to provide more context.
+* INFO: Information about the system which is useful for the user (note: in the case of the broker, the user here is the user deploying it). For example, leader changes, a new node added to or removed from the membership, etc.
+* WARN: Expected errors (e.g. connection time outs, the remote node is unavailable, etc.) which may indicate that parts of the system are not working, and would require attention if they persist, but may resolve by themselves. These should be monitored, but may not require a support ticket.
+* ERROR: Errors which require a person to look into them, e.g. log corruption, inconsistent log, anything which could shut down a partition, etc.
 
 
 ## Enable logging
