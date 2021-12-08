@@ -39,7 +39,7 @@ If the attribute `propagateAllChildVariables` is set (default: `true`), all vari
 
 It's recommended to disable the attribute `propagateAllChildVariables` or define output mappings if the call activity is in a parallel flow (e.g. when it is marked as [parallel multi-instance](../multi-instance/multi-instance.md#variable-mappings)). Otherwise, it can happen that variables are overridden accidentally when they are changed in the parallel flow.
 
-For more information on this topic visit the documentation about [Input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
+Visit our documentation regarding [input and output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) for more information on this topic.
 
 ## Additional resources
 

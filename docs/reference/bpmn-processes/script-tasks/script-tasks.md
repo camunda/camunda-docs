@@ -30,7 +30,7 @@ the type of job workers should subscribe to (e.g. `script`).
 
 Use [task headers](../../service-tasks/service-tasks#task-headers) to pass static parameters to the job
 worker (e.g. the script to evaluate). The extension shown below requires certain attributes set in the task headers. 
-Take a look into the referenced GitHub repository or at the example down below. 
+Take a look at the referenced GitHub repository, or the example below. 
 
 Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) to transform the
 variables passed to the job worker, or to customize how the variables of the job merge
