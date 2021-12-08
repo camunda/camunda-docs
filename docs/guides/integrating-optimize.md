@@ -19,9 +19,9 @@ See an in-depth overview of Optimize’s capabilities [here](https://docs.camund
 
 ## Set up 
 
-A Camunda Cloud user can launch Optimize from the Cloud Console — the interface where users create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md) before getting started with Optimize for SaaS users.
+Within Camunda Cloud, you can launch Optimize from the Cloud Console — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md) before getting started with Optimize for SaaS users.
 
-So long as a user is operating with [Camunda Cloud 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, the user can access Optimize. While creating a cluster, the creation modal will note if Optimize is included by each version of Zeebe that can be selected.
+So long as you are operating with [Camunda Cloud 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. While creating a cluster, the creation modal will note if Optimize is included by each version of Zeebe that can be selected.
 
 Once you’ve created a cluster, take the following steps inside Cloud Console to access Optimize:
 
