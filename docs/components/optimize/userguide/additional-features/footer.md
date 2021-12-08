@@ -14,6 +14,8 @@ In the **Footer** section of Optimize, you can see some important information, s
 - Timezone: The timezone all date and time information is displayed in
 - Optimize version
 
+![footer overview](./img/footer-overview.png)
+
 There are three possible states of engine connection:
 
 - Connected and import finished (green circle)
@@ -21,3 +23,5 @@ There are three possible states of engine connection:
 - Not connected (red circle)
 
 Elasticsearch can be either connected or not (green and red circles respectively).
+
+![footer engine connections](./img/footer-engine-connections.png)

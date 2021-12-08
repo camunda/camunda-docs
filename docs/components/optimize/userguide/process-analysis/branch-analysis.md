@@ -8,6 +8,8 @@ description: Optimize provides you with a statistical analysis for a given end e
 
 If a process contains more than one end event, it is useful to know which path tokens took to reach a specific end event. Optimize provides you with a statistical analysis for a given end event and a gateway. This analysis includes how tokens were split at the gateway in question, and how many of the tokens of each branch reached the end event.
 
+![branch analysis](./img/analysis-1.png)
+
 # Branch analysis in Optimize
 
 Select a process definition using the **Select Process** option in the top left of the page. After selecting a process definition and version, the diagram of the process is displayed on the page.
@@ -18,7 +20,7 @@ To perform a statistical analysis on the selected process, specify a gateway and
 
 After selecting an end event and gateway, a statistical analysis is shown next to the diagram. The analysis consists of two bar charts and a statistical summary. Both charts contain a bar for every sequence flow leaving the selected gateway.
 
-# Statistical analysis of gateway and end event
+![branch analysis second example](./img/analysis-2.png)
 
 The first chart shows the distribution of process instances over the various sequence flows, showing how often each sequence flow has been executed, independently of whether the process instance then reached the selected end event.
 

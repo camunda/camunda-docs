@@ -13,6 +13,8 @@ To create a new dashboard, click the **Create New** button on the homepage or co
 
 Creating a dashboard from a template also creates new reports which are saved as soon as the dashboard is saved.
 
+![create new dashboard](./img/dashboardTemplate.png)
+
 # Edit mode
 
 The edit mode allows you to configure the dashboard and adjust it to your needs, including the following operations:
@@ -23,7 +25,11 @@ The edit mode allows you to configure the dashboard and adjust it to your needs,
 - Cancel changes you already applied to the dashboard
 - Set filters available on the dashboard
 
+![edit mode](./img/dashboard-dashboardEditActions.png)
+
 Once you have prepared all your reports, you can now start to assemble them into a dashboard. Above the dashboard grid, click **Add a report** to open a modal where you can select one of your defined reports and add it to the dashboard:
+
+![add a report modal](./img/dashboard-addAReportModal.png)
 
 :::note
 If the dashboard is inside a collection, only reports that are in the same collection can be added. If the dashboard is not in a collection, it can only contain reports that are also not in a collection.
@@ -32,6 +38,8 @@ If the dashboard is inside a collection, only reports that are in the same colle
 In the **Add report** modal, click **Add External Source** to enter the URL of an external data source which should be added to the dashboard. This allows you to create dashboards that combine Optimize reports with data from other services. Such external reports are added as iframes to the dashboard.
 
 To move the report to your desired place, drag it in any direction. As soon as you release the dragged report, it snaps to the closest grid position. Dragging the handle on the lower right corner of each report will resize it. Delete the report from your dashboard by clicking on the **x** button on the upper right corner of each report.
+
+![edit actions](./img/dashboard-reportEditActions.png)
 
 ## Adding filters in edit mode
 
@@ -43,6 +51,8 @@ In the dashboard edit mode, there is an **Add a Filter** button which shows a **
 - Variable: Allows filtering by process instance variable value
 - Assignee: Allows filtering flow node data by their assignee
 - Candidate Group: Allows filtering flow node data by their candidate group
+
+![filter edits](./img/filter-editMode.png)
 
 For Variable Filters, specify which variable the filter should apply to. For string and number variables, provide a list of values which should be allowed to be filtered by. 
 
@@ -66,7 +76,11 @@ Once you have defined what your dashboard should look like, the view mode provid
 
 - Auto-refresh: This feature periodically updates the dashboard with the latest data. You can decide how often the update should be performed by setting a time span reaching from 1 to 60 minutes. An animation indicates when the next update is occurring. If you do not wish to use that feature anymore, you can disable it anytime. Note that when refreshing the dashboard page manually or switching to another page in between, the auto-refresh must be enabled again.
 
+![process performance overview](./img/dashboard-viewMode-monitorFeatures.png)
+
 To share the dashboard with other people or embed it in a webpage, use the sharing feature of the dashboard. Click on the share button, which opens up a popover. After turning the “enable sharing” switch on, a link is generated which you can send to people who do not have access to Camunda Optimize, and thus enable them to see the dashboard. If you applied filters on the dashboard, you can include them in the shared version of the dashboard by enabling the **Share with current filters applied** checkbox. If the checkbox is not checked, the shared dashboard will include the default filters if any have been set.
+
+![sharing](./img/dashboard-sharingPopover.png)
 
 You can also click the **Embed Link** button to copy a code to paste into your webpage. Everyone that views the webpage can then see the content of the dashboard. The shared versions of the dashboard allow only to view the dashboard itself. There is no possibility to alter it or interact with any other features of Optimize. Revoke the sharing anytime by disabling the share switch.
 
@@ -87,6 +101,8 @@ If the interactions do not suffice to get the desired information or you want to
 ## Adding filters in view mode
 
 In the dashboard view mode, there is a **Filters** button which opens a panel that shows all filters available for this dashboard. More filters can be made available in the dashboard edit mode. If the dashboard editor checked the **Allow viewer to add filter values** box for assignee, candidate group, or variable filters, dashboard viewers can add their own values to filter by.
+
+![filters in view mode](./img/filter-viewMode.png)
 
 Filters apply to all process reports on the dashboard. If a report already has filters set, they will be be combined with the dashboard filter. For example, if a report has a filter to only show running instances and a dashboard filter for suspended instances is set, the report will only show instances that are both running and suspended. Dashboard filters are not applied to decision reports or external reports.
 

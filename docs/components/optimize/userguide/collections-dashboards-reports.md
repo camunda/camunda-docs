@@ -9,9 +9,13 @@ Within Optimize, **reports** are based on a *single* visualization, similar to a
 
 The Optimize landing page shows a list of all existing dashboards and reports you've created, as well as collections you have access to. Click on a collection to view its accompanying reports and dashboards.
 
+![home page](./img/home.png)
+
 In addition to the name of the dashboard, report, or collection, you can also see the date it was last modified. Alongside collections, dashboards, and combined reports, you can also see how many entities are contained within (e.g. how many reports are on a dashboard). You can also see how many users and groups have access to a collection.
 
 Clicking on a report, dashboard, or collection takes you to its corresponding details page. When moving the mouse over one of these components, you can access a context menu that allows you to edit, copy, or delete the component. Multiple components can be selected and deleted at once using the bulk menu which appears after selecting at least one component. When copying a component, you also have the option to move that copy into a collection.
+
+![copy sales dashboard](./img/copy.png)
 
 To find a collection, report, or dashboard, use the search field on the top of the page to filter the list by the name of the component.
 
@@ -21,6 +25,8 @@ To create a dashboard or report, use the **Create New** button available in the 
 
 By default, if you create a collection, only you can access the collection and the contents within. To share a collection with other users, add them to the collection.
 
+![users and user groups](./img/users.png)
+
 You are automatically assigned the manager role when creating a new collection. There can be multiple managers for a collection. However, there must be at least one manager for every collection. Managers can do the following:
 
 - Add, edit, and remove dashboards and reports to the collection.
@@ -28,6 +34,8 @@ You are automatically assigned the manager role when creating a new collection. 
 - Add, edit, and remove other users and user groups to collections via the collection's **Users** tab.
 
 A manager can add a new user or group to the collection using the **Add** button. Use the ID of the user/group to add them. Every user/group has a role assigned to them that specifies their access rights to the collection.
+
+![add user or user group](./img/addUser.png)
 
 An editor may edit, delete, and create new dashboards or reports in the collection. Editors may not edit the name of the collection, delete the collection, or change anything in the **Users** tab.
 
