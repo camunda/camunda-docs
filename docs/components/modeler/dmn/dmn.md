@@ -4,7 +4,7 @@ title: Editing DMN in Camunda Modeler
 description: To start modeling, let's create a new DMN diagram.
 ---
 
-<span class="badge badge--platform">Platform-only</span>
+<span class="badge badge--CCSM">CCSM</span>
 
 ## Create new DMN decision requirement diagram
 
