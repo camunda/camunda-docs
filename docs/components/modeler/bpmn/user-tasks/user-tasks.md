@@ -68,7 +68,7 @@ A user task with a user task form and an assignment definition:
   </bpmn:extensionElements>
   <bpmn:userTask id="Activity_025dulo" name="Configure">
     <bpmn:extensionElements>
-      <zeebe:assignmentDefinition assignee="= default_controller" candidateGroups="controllers" />
+      <zeebe:assignmentDefinition assignee="= default_controller" candidateGroups="controllers, auditors" />
       <zeebe:formDefinition formKey="camunda-forms:bpmn:userTaskForm_2g7iho6" />
     </bpmn:extensionElements>
   </bpmn:userTask>
