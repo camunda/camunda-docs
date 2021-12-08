@@ -1,3 +1,5 @@
+//const rehypeBpmn = require("rehype-bpmn")
+
 module.exports = {
   title: "Camunda Cloud Docs",
   tagline: "Camunda Cloud, Zeebe, Operate, Tasklist",
@@ -28,6 +30,20 @@ module.exports = {
       },
     ],
   ],
+  scripts: [
+    {
+      src: "/js/bpmn-js-rendering.js",
+      async: true
+    },
+    {
+      src: "https://code.jquery.com/jquery-3.6.0.min.js",
+      async: true
+    },
+    {
+      src: "https://unpkg.com/bpmn-js/dist/bpmn-viewer.production.min.js",
+      async: true
+    }
+  ],  
   themeConfig: {
     navbar: {
       title: "Camunda Cloud Docs",
