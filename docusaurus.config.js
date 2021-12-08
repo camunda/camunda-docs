@@ -1,5 +1,3 @@
-//const rehypeBpmn = require("rehype-bpmn")
-
 module.exports = {
   title: "Camunda Cloud Docs",
   tagline: "Camunda Cloud, Zeebe, Operate, Tasklist",
