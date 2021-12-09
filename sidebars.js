@@ -163,7 +163,6 @@ module.exports = {
               ],
               "User interface mode": [
                 "components/tasklist/userguide/user-interface/overview",
-                "components/tasklist/userguide/user-interface/camunda-forms",
               ],
             },
           ],

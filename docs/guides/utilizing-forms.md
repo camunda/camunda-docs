@@ -1,6 +1,7 @@
 ---
 id: utilizing-forms
 title: Building forms with Modeler
+description: "Let's learn about Camunda Forms, how to use them, how to model them with a diagram, and deploying."
 ---
 
 :::note
@@ -12,6 +13,8 @@ If using with Camunda Platform, note that the Camunda Forms feature was added wi
 # Overview
 
 The Camunda Forms feature allows you to easily design and configure forms. Once configured, they can be connected to a user task or start event to implement a task form in your application.
+
+While you can incorporate Camunda Forms solely within Camunda Cloud, you can also utilize Camunda Forms in Camunda Platform. After deploying a diagram with an embedded form, Tasklist imports this form schema and uses it to render the form on every task assigned to it.
 
 # Quickstart
 
@@ -67,6 +70,19 @@ Take the following steps:
 3. Select the user task requiring the help of a form.
 4. On the right side of the page, select the **Form** tab.
 5. Click **SELECT FORM** to incorporate the JSON configuration of the form you've built on Camunda Cloud.
+
+Within Camunda Platform, you can click on the bottom left corner that says **JSON** to switch to the JSON view. Use caution when naming the fields of your form. Fields have their values pre-filled from variables with the same name.
+
+Copy the JSON schema, and go back to the BPMN diagram you modeled earlier. Select the **user task** and click on the **Forms** tab. After switching tabs, you should see the field where you can paste the form JSON schema. Paste the schema and save the file.
+
+With Camunda Platform, deploy your diagram to Zeebe and create an instance using the following command:
+
+```sh
+zbctl deploy /path/to/my/diagram.bpmn
+zbctl create instance diagram-id
+```
+
+Then, open Tasklist to claim the task, fill in the form, and complete the task.
 
 # Additional resources
 
