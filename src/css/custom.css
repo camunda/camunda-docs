@@ -164,11 +164,12 @@ svg.implemented:hover [stroke="#333"]{
   line-height:1.67em;
   font-style:normal;
   font-weight: bold;
-  margin-block-end: 1em;
+  /*margin-block-end: 1em; leads to wired effects when callout has multiple lines*/
   margin-inline-end: 0.75em;
 }
 span.callout + p {
   display: inline;
+  margin: 0 0 1.25rem;
 }
 span.callout + p::after{
   content: "\a";

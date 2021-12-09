@@ -56,6 +56,10 @@ Try to model symmetrically. Identify related splitting and joining gateways and 
 
 <div bpmn="creating-readable-process-models-bpmn/modeling-symmetrically.bpmn" callouts="inclusive_gateway_splitting,inclusive_gateway_joining,exclusive_gateway_splitting,exclusive_gateway_joining" />
 
+:::caution Camunda Platform 7 Only
+Inclusive Gateways (OR) are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
+:::
+
 <span className="callout">1</span> 
 
 The inclusive gateway splits the process flow into two paths which are ...
@@ -71,6 +75,7 @@ another exclusive gateway splits the process flow into two more paths which are 
 <span className="callout">4</span>
 
 ... joined again with an exclusive gateway.
+
 
 By explicitly showing *pairs of gateways* "opening" and "closing" parts of the process diagram and by positioning such gateway pairs *as symmetrically as possible*, the readability of process model is improved. The reader can easily recognize logical parts of the diagram and quickly "jump" to those parts the reader is momentarily interested in.
 
@@ -103,11 +108,12 @@ The author could have attached the sequence flow leaving this task on its left. 
 
 *Avoid very long (multi page) sequence flows*, especially when flowing against the reading direction. The reader will lose any sense of what such lines actually mean. Instead use link events to connect points which are not on the same page/screen anymore.
 
+
+<div bpmn="creating-readable-process-models-bpmn/avoiding-multi-page-sequence-flows.bpmn" callouts="throwing-linkevent-recourse-not-possible,catching-linkevent-recourse-not-possible" />
+
 :::caution Camunda Platform 7 Only
 Link events are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
 :::
-
-<div bpmn="creating-readable-process-models-bpmn/avoiding-multi-page-sequence-flows.bpmn" callouts="throwing-linkevent-recourse-not-possible,catching-linkevent-recourse-not-possible" />
 
 <span className="callout">1</span>
 
@@ -129,19 +135,24 @@ Model splitting the process flow by always using *gateway symbols* like <img src
 
 <div bpmn="creating-readable-process-models-bpmn/explicit-gateways-instead-of-conditional-flows.bpmn" callouts="inclusive_gateway" />
 
+:::caution Camunda Platform 7 Only
+Inclusive Gateways (OR) and Conditional sequence flows are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
+:::
+
 <span className="callout">1</span>
 
 You could have left out e.g. this inclusive gateway by drawing two outgoing sequence flows directly out of the preceding task "Choose menu" and attaching conditions to those then "conditional sequence flows" (<img src="../img-bpmn-elements/conditional-flow.svg" className="inline-image" />). However, experience shows that readers understand the flow semantics of gateways better, which is why we do not make use of this possibility.
 
-:::caution Camunda Platform 7 Only
-Conditional sequence flows are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
-:::
 
 #### Modeling Start and End Events
 
 Model the trigger and the end status of processes by always explicitly showing the *start* and *end event symbols*.
 
 <div bpmn="creating-readable-process-models-bpmn/explicit-start-and-end-events.bpmn" callouts="start_event, end_event" />
+
+:::caution
+Process models without start and end event cannot be executed on the Camunda workflow engine
+:::
 
 <span className="callout">1</span>
 
@@ -150,10 +161,6 @@ According to the BPMN standard, you could have left out the start event ...
 <span className="callout">2</span>
 
 ... as long as you also leave out the end events of a process. However, you would have lost important information in your model, which is why we do not make use of this syntactical possibility.
-
-:::caution
-Process models without start and end event cannot be executed on the Camunda workflow engine
-:::
 
 Be specific about the *state* you reached with your event from a *business perspective*. Quite typically you will reach "success" and "failure" like events from a business perspective:
 
