@@ -20,9 +20,9 @@ bookchapter: 4
 
 Name all elements in your BPMN diagrams by focusing on the business perspective. For activities, use a verb to describe what to do. For events, describe in which (business) state the process or domain object is currently in. For (data based) gateways, pose a question and describe the conditions under which the process moves on along the outgoing flows.
 
-## You must
+## Essential Practices
 
-### Name Activities
+### Naming Activities
 
 Name a *task* using an object and a verb in the infinitive. By doing that you consistently describe *what you do with an object*.
 
@@ -35,7 +35,7 @@ Name a *subprocess* (or *call activity*) by using an object and a - by conventio
 WARNING: Avoid very broad and general verbs like e.g. "Handle invoice" or "Process order" and try to be more specific about what you do in your activity from a business perspective.
 
 
-### Name *Events*
+### Naming Events
 
 Wherever possible, name an *event* by using an object and a verb reflecting a state. Always try to describe *in which state an object is* when the process is about to leave the event.
 
@@ -49,15 +49,19 @@ Be specific about the state you reached with your event from a business perspect
 
 <div bpmn="naming-bpmn-elements-bpmn/gateway.bpmn" callouts="invoice_paid, invoice_rejected" />
 
-<p><span className="badge badge--info">1</span> 'Invoice paid' better qualifies the "successful" business state than 'Invoice processed' would ...</p>
+<span className="callout">1</span>
 
-<p><span className="badge badge--info">2</span> ... because in principle you can call the failed state 'Invoice processed', too, but the reader of the diagram is much better informed by calling it 'Invoice rejected'.</p>
+'Invoice paid' better qualifies the "successful" business state than 'Invoice processed' would ...
+
+<span className="callout">2</span>
+
+... because in principle you can call the failed state 'Invoice processed', too, but the reader of the diagram is much better informed by calling it 'Invoice rejected'.
 
 WARNING: Avoid very broad and general verbs like e.g. "Invoice processed" or "Order handled"!
 
 
 
-### Name *Gateways*
+### Naming Gateways
 
 Label a data-based *exclusive gateway* with a question. Label the outgoing sequence flows with the conditions they are executed under. Frmulate the conditions as answers to the question posed at the gateway.
 
@@ -71,11 +75,11 @@ If this is not possible, leave out the question completely but describe the cond
 
 <div bpmn="naming-bpmn-elements-bpmn/gateway-inclusive-without-question.bpmn" />
 
-WARNING: *Avoid naming event based gateways*, but ensure you name their subsequent events. Also, avoid naming *parallel gateways* and all forms of *joining gateways*. You don't need to specify anything about those gateways, as the flow semantics are always the same.
+*Avoid naming event based gateways*, but ensure you name their subsequent events. Also, avoid naming *parallel gateways* and all forms of *joining gateways*. You don't need to specify anything about those gateways, as the flow semantics are always the same.
 
 
 
-### Name *Processes*
+### Naming Processes
 
 A *pool* should be given the same name as the process the pool contains, by using an object and a nominalized verb. Optionally add the organizational role which is responsible for the process shown in the pool as a whole.
 
@@ -88,9 +92,9 @@ In case you have more than one lane in a pool, name each *lane* by using the org
 Name a *diagram* (file) with same name as process shown in the diagram. In case of a collaboration diagram, use a name reflecting the end-to-end perspective shown in that diagram.
 
 
-## You Should
+## Recommended Practices
 
-### Use *Sentence Case*
+### Using Sentence Case
 
 Use [sentence case](https://en.wiktionary.org/wiki/sentence_case) when naming BPMN symbols. It is standard capitalization of an English sentence, with the first letter uppercase and subsequent letters lowercase with exceptions such as proper nouns or acronyms.
 
@@ -98,15 +102,15 @@ Use [sentence case](https://en.wiktionary.org/wiki/sentence_case) when naming BP
 
 
 
-### Avoid *Technical Terms*
+### Avoiding Technical Terms
 
 Avoid to use purely *technical terms* when naming e.g. activities or other BPMN symbols - they are not always clear to every reader. Completely avoid using names of coding artifacts like classes, methods and technical services or purely technical systems.
 
 
 
-## You May
+## Helpful Practices
 
-### Avoid *Abbreviations*
+### Avoiding Abbreviations
 
 Avoid using *abbreviations* - they are not always clear to every reader. This is especially true for abbreviations which are company or department specific. Try to avoid them completely.
 

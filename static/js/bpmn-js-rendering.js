@@ -4,12 +4,13 @@ async function renderBpmn(index, element) {
     var bpmnId = "bpmn-" + (index + 1) + "-screen";
     var bpmnDiv = element.append("<div id='" + bpmnId + "'></div>").find("#" + bpmnId);
     
-    // create the thumbs div
+    /* create the thumbs div
     var thumbs = element.attr("thumbs");
     if (thumbs) {
       // TODO: Do we want to link somewhere?
       bpmnDiv.append("<a href='#thumbs' class='icon thumbs'><i class='fa fa-thumbs-" + thumbs + "'></a>")
     }
+    */
 
     // render the svg
     var viewer = new window.BpmnJS({container: "#" + bpmnId});
@@ -21,7 +22,7 @@ async function renderBpmn(index, element) {
         var canvas = viewer.get('canvas');
         adjustBox(canvas.viewbox(), canvas.viewbox().outer.width);
         bpmnDiv.attr("style", "height: " + (canvas.viewbox().outer.height) + "px; overflow: visible");
-        bpmnDiv.attr("class", "bjs-asciidoc");
+        bpmnDiv.attr("class", "bpmn-model");
 
         // create callout overlays
         var overlays = viewer.get('overlays');
@@ -34,8 +35,10 @@ async function renderBpmn(index, element) {
           }
         }
         canvas.zoom('fit-viewport');
+        /*
         thumbs = thumbs ? " " + thumbs : "";
         bpmnDiv.attr("class", "bjs-asciidoc" + thumbs);
+        */
         scrollToHash();
         
       } catch (err) {
@@ -47,7 +50,7 @@ async function renderBpmn(index, element) {
   function addOverlay(overlays, bpmnElementId, text) {
     try {
       overlays.add(bpmnElementId, {
-        html: '<span class="badge badge--info">'+ text +'</span>',
+        html: '<span class="callout">'+ text +'</span>',
         position: {
           right: 1,
           top: -12
