@@ -40,11 +40,17 @@ By attaching boundary events not just to individual activities, but to subproces
 
 <div bpmn="building-flexibility-into-bpmn-models-bpmn/subprocess.bpmn" callouts="subprocess,condition,activity" />
 
-<p><span className="badge badge--info">1</span> While we are occupied with carrying out some area of activities, in a scope of our process ...</p>
+<span className="callout">1</span>
 
-<p><span className="badge badge--info">2</span> ... an event might occur, which causes us ...</p>
+While we are occupied with carrying out some area of activities, in a scope of our process ...
 
-<p><span className="badge badge--info">3</span> to carry out this activity in addition to continuing with ordinary work</p>
+<span className="callout">2</span>
+
+... an event might occur, which causes us ...
+
+<span className="callout">3</span>
+
+to carry out this activity in addition to continuing with ordinary work
 
 
 ### Event Sub Processes
@@ -64,13 +70,21 @@ Sometimes we need highly flexible means to cancel scopes or trigger additional a
 
 <div bpmn="building-flexibility-into-bpmn-models-bpmn/escalation.bpmn" callouts="escalation,boundary,activity,followup" />
 
-<p><span className="badge badge--info">1</span> As soon as we are finished with the first activity inside the scope... </p>
+<span className="callout">1</span>
 
-<p><span className="badge badge--info">2</span> ... we inform the surrounding scope about that and trigger an additional, essential activity ... </p>
+As soon as we are finished with the first activity inside the scope... 
 
-<p><span className="badge badge--info">3</span> ... but also continue with our second activity in order to complete the subprocess. </p>
+<span className="callout">2</span>
 
-<p><span className="badge badge--info">4</span> We can then already continue with the followup work regardless of whether that additional activity is already finished or not. </p>
+... we inform the surrounding scope about that and trigger an additional, essential activity ... 
+
+<span className="callout">3</span>
+
+... but also continue with our second activity in order to complete the subprocess. 
+
+<span className="callout">4</span>
+
+We can then already continue with the followup work regardless of whether that additional activity is already finished or not. 
 
 
 ### Termination Events
@@ -83,9 +97,13 @@ In order to build flexibility into process models, it is also useful to remember
 
 <div bpmn="building-flexibility-into-bpmn-models-bpmn/termination.bpmn" callouts="termination,followup" />
 
-<p><span className="badge badge--info">1</span> As soon as one of our two activities achieves the result, we can cancel the other one ...</p>
+<span className="callout">1</span>
 
-<p><span className="badge badge--info">2</span> ..., successfully complete the sub process and normally continue with our followup work</p>
+As soon as one of our two activities achieves the result, we can cancel the other one ...
+
+<span className="callout">2</span>
+
+..., successfully complete the sub process and normally continue with our followup work
 
 
 
@@ -102,9 +120,13 @@ Some of our orders might be so important that we want to make sure to keep custo
 
 <div bpmn="building-flexibility-into-bpmn-models-bpmn/example-order-proactive-communication.bpmn" callouts="on-demand,on-a-regular-basis" />
 
-<p><span className="badge badge--info">1</span> Order managers can request proactive customer communication on demand. Assume they can communicate the reasons via a form, whereas the communication as such is carried out by the call center.</p>
+<span className="callout">1</span>
 
-<p><span className="badge badge--info">2</span> On a regular basis, we check based on some rules, whether the order is so important that we proactively communicate why the order is not yet confirmed. Again the communication is carried out by the callcenter.</p>
+Order managers can request proactive customer communication on demand. Assume they can communicate the reasons via a form, whereas the communication as such is carried out by the call center.
+
+<span className="callout">2</span>
+
+On a regular basis, we check based on some rules, whether the order is so important that we proactively communicate why the order is not yet confirmed. Again the communication is carried out by the callcenter.
 
 
 ### Allow for order cancellation any time
@@ -113,11 +135,18 @@ The customer might be allows to request a cancellation ntil the order is finally
 
 <div bpmn="building-flexibility-into-bpmn-models-bpmn/example-cancel-order.bpmn" callouts="cancellation,error_throw,error_catch" />
 
-<p><span className="badge badge--info">1</span> Whenever the customer requests a cancellation, which can be done until the order is confirmed, we review that request and decide whether we have to accept the cancellation or not.</p>
+<span className="callout">1</span>
 
-<p><span className="badge badge--info">2</span> In case we have to accept the cancellation, we want to terminate the whole process. In order to do so we need to use one trick: Throwing an error event, that will end the current event subprocess but not yet the order process.</p>
+Whenever the customer requests a cancellation, which can be done until the order is confirmed, we review that request and decide whether we have to accept the cancellation or not.
 
-<p><span className="badge badge--info">3</span> This leads to another subprocess to be triggered, and this one is interrupting. So now the process instance is really cancelled. </p>
+<span className="callout">2</span>
+
+In case we have to accept the cancellation, we want to terminate the whole process. In order to do so we need to use one trick: Throwing an error event, that will end the current event subprocess but not yet the order process.
+
+<span className="callout">3</span>
+
+This leads to another subprocess to be triggered, and this one is interrupting. So now the process instance is really cancelled. 
+
 
 ### Allow for order details change, but repeat order validation 
 
