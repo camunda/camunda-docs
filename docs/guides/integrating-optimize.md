@@ -11,7 +11,7 @@ sidebar_label: Integrating Optimize
 
 The following document provides a basic end-to-end glance into Optimize and its features for new business users.
 
-Optimize offers business intelligence tooling for Camunda enterprise customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
+Optimize offers business intelligence tooling for Camunda customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
 
 With Optimize, review heatmap displays for instances which took longer than average to discover long-running flow nodes. As a result, reap actionable insights and rapidly identify the constraints of your system.
 
@@ -117,5 +117,3 @@ We’ve only touched the surface of Optimize. The component is full of additiona
 - [The Ultimate Guide to Solving Bottlenecks with Camunda: Part 1](https://camunda.com/blog/2021/10/the-ultimate-guide-to-solving-bottlenecks-with-camunda-part-1/)
 - [Camunda Optimize examples](https://github.com/camunda/camunda-optimize-examples)
 - [Process performance made transparent](https://camunda.com/products/camunda-platform/optimize/reports/)
-
-[//]:# (Eric, how exactly does the screenshot automation process work on your team? Do you have particular images you'd like to see in this guide? Happy to meet 1:1 on this if necessary.)
