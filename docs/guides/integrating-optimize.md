@@ -37,7 +37,7 @@ Within Optimize, **reports** are based on a *single* visualization, similar to a
 
 Once you open Optimize, you’ll first view the homepage for these collections, dashboards, and reports.
 
-To create a collection on the **Home** page, select **Create New > New Collection**. Then, you can name your collection and select which processes will be available.
+To create a collection on the **Home** page, select **Create New > New Collection**. Then, you can name your collection and select which data sources and processes will be available.
 
 From within your collection, you can again select **Create New** and draft reports and dashboards. Add users and additional data sources by navigating between the tabs inside the collection.
 
