@@ -358,6 +358,10 @@ module.exports = {
             ],
           },
       ],
+    },{
+      Troubleshooting: [
+        "self-managed/troubleshooting/log-levels",
+      ]
     },
   ],
 };
