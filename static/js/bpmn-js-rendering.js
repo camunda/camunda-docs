@@ -63,70 +63,77 @@ async function renderBpmn(index, element) {
       console.log("Could not add overlay for element '" + bpmnElementId + "'", err);
     }
   }
-/*
-  function renderDmn(index, element, print) {
+
+  function renderDmn(index, element) {
     // create unique id for div holding the dmn
-    var dmnId = "dmn-" + (index + 1) + (print ? "-print" : "-screen");
+    var dmnId = "dmn-" + (index + 1);
     // create the div
     var dmnDiv = element.append("<div id='" + dmnId + "'></div>").find("#" + dmnId);
-    // create the thumbs div
+    /*/ create the thumbs div
     var thumbs = element.attr("thumbs");
     if (thumbs) {
       dmnDiv.append("<a href='../using-our-best-practices/#thumbs' class='icon thumbs'><i class='fa fa-thumbs-" + thumbs + "'></a>")
     }
+    */
     // render the table
     var hideDetails = element.attr("hideDetails") !== "false";
     var viewer = new window.DmnJS({container: "#" + dmnId, hideDetails: hideDetails});
-    $.get(element.attr("dmn"), function (dmnDiagram) {
-      viewer.importXML(dmnDiagram, function (err) {
-        if (!err) {
-          if (element.attr("callouts")) {
-            // prepare a small array of callout objects
-            var callouts = [];
-            element.attr("callouts").split(',').forEach(function(entry) {
-              var ent = {
-                col: entry.split(':')[0],
-                row: entry.split(':')[1]
-              };
-              callouts.push(ent);
-            });
-            // hook in callout objects as overlays by using the event bus
-            viewer.get('eventBus').on('cell.render', function (event) {
-              for (var i = 0; i < callouts.length; ++i) {
-                if (event.data.column.id === callouts[i].col &&
-                    event.data.row.id === callouts[i].row) {
-                  // avoid to add children several times (don't know why the event fires several times for a cell)
-                  if (event.gfx.lastChild.nodeName !== 'B') {
-                    // prepare callout elements
-                    var el1 = document.createElement('i');
-                    el1.setAttribute("class", "conum");
-                    el1.setAttribute("data-value", (i + 1).toString());
-                    var el2= document.createElement('b');
-                    el2.appendChild(document.createTextNode('(' + (i + 1) + ')'));
-                    // append callout elements
-                    event.gfx.appendChild(el1);
-                    event.gfx.appendChild(el2);
-                  };
-                }
-              }
-            });
-          }
-          // re-render to apply new renderer
-          viewer.get('elementRegistry').forEach(function (element, gfx) {
-            viewer.get('graphicsFactory').update(element._type, element, gfx);
+    $.get(element.attr("dmn"), async function (dmnDiagram) {
+      try {
+        await viewer.importXML(dmnDiagram);
+        if (element.attr("callouts")) {
+          // prepare a small array of callout objects
+          var callouts = [];
+          element.attr("callouts").split(',').forEach(function(entry) {
+            var ent = {
+              col: entry.split(':')[0],
+              row: entry.split(':')[1]
+            };
+            callouts.push(ent);
           });
-          //enable thumbs
-          thumbs = thumbs ? " " + thumbs : "";
-          dmnDiv.attr("class", "tjs-asciidoc" + thumbs);
-          if (!print)
-            scrollToHash();
-        } else {
-          console.log("Error while rendering " + element.attr("dmn") + ": ", err);
+
+          var i = 1;
+          callouts.forEach( callout => {
+            addOverlayToDmn(dmnId, callout, i);
+            i = i+1;    
+          });
         }
-      });
-    }, 'text');
+
+        /*/enable thumbs
+        thumbs = thumbs ? " " + thumbs : "";
+        dmnDiv.attr("class", "tjs-asciidoc" + thumbs);
+        */
+        scrollToHash();
+      } catch (err) {
+        console.log("Error while rendering " + element.attr("dmn") + ": ", err);
+      }
+    });
   }
-*/  
+
+  function addOverlayToDmn(dmnId, callout, text) {
+    var cellElement;
+    if (callout.col == "header") {
+      if (callout.row == "hitPolicy") {
+        cellElement = $('#' + dmnId +' div.hit-policy');
+      } else if (callout.row == "decisionTable") {
+        cellElement = $('#' + dmnId +' div.decision-table-name');
+      } else {
+        //cellElement = $('[data-col-id="'+callout.row+'"]').not('[data-row-id]').find('div.input-label');
+        cellElement = $('#' + dmnId +' div.input-label:contains("'+callout.row+'")');
+        if (cellElement.length==0) {
+          cellElement = $('#' + dmnId +' div.output-label:contains("'+callout.row+'")');
+        }
+      }
+    } else if (callout.col == "rowHeader") {              
+      cellElement = $('#' + dmnId +' td.rule-index[data-element-id="'+callout.row+'"]');
+    } else {
+      cellElement = $('#' + dmnId +' [data-col-id="'+callout.col+'"][data-row-id="'+callout.row+'"]');
+    }
+    if (cellElement) {
+      cellElement.append(' <span class="callout">' + text + '</span');
+    }
+  }
+
   var locationHash = location.hash;
   var bpmnDivsCount = 0;
   var bpmnDivsAll = 0;
@@ -147,6 +154,9 @@ async function renderBpmn(index, element) {
     document.head.appendChild(scriptElement);
   }
   */
+  function addStylesheet(source) {
+    $('<link type="text/css" rel="stylesheet" href="'+source+'" />').insertBefore('head > link[href="/styles.css"]');
+  }
   
   function renderAll() {
     
@@ -156,6 +166,10 @@ async function renderBpmn(index, element) {
       addScript("https://code.jquery.com/jquery-3.6.0.min.js");
       addScript("https://unpkg.com/bpmn-js/dist/bpmn-viewer.production.min.js");
     }*/
+
+    addStylesheet("https://unpkg.com/dmn-js@11.0.2/dist/assets/dmn-js-shared.css");    
+    addStylesheet("https://unpkg.com/dmn-js@11.0.2/dist/assets/dmn-js-decision-table.css");
+    addStylesheet("https://unpkg.com/dmn-js@11.0.2/dist/assets/dmn-font/css/dmn.css");
 
     var bpmnDivs = $("div[bpmn]");
     bpmnDivsAll += bpmnDivs.length;

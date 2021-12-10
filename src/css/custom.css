@@ -175,3 +175,11 @@ span.callout + p::after{
   content: "\a";
   white-space: pre;
 }
+
+/* I needed to overwrite this, otherwise the DMN table is super small */
+.dmn-decision-table-container .tjs-container {
+  width: 100%;
+}
+.dmn-decision-table-container .tjs-table {
+  width: 100%;
+}
