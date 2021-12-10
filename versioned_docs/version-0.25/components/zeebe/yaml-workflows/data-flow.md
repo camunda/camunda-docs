@@ -27,7 +27,7 @@ tasks:
       type: shipment-service
 ```
 
-Every mapping element has a `source` and a `target` element which must be a [variable expression](../reference/variables.md#access-variables).
+Every mapping element has a `source` and a `target` element which must be a [variable expression](../reference/variables.md).
 
 ## Additional Resources
 

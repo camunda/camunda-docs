@@ -90,7 +90,7 @@ The upgrade is successful if the following conditions are met:
 
 * the broker is ready (see [Ready Check](health.md#ready-check))
 * the broker is healthy (see [Health Check](health.md#health-check))
-* all partitions are healthy (see the [Metric](metrics.md#metrics-related-to-health) `zeebe_health`)
+* all partitions are healthy (see the [Metric](metrics.md#available-metrics) `zeebe_health`)
 * the stream processors of the partition leaders are in the phase `PROCESSING` (see [Partitions Admin Endpoint](#partitions-admin-endpoint))
 
 If the upgrade failed because of a known issue then a partition change its status to unhealthy, and the log output may contain the following error message:
