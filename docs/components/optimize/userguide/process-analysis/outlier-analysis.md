@@ -1,12 +1,12 @@
 ---
 id: outlier-analysis
 title: Outlier analysis
-description: Outlier analysis allows you to easily identify process instances where certain flow node instances took significantly longer than others.
+description: Outlier analysis allows you to easily identify process instances that took significantly longer than others to complete a flow node.
 ---
 
 # Overview
 
-Outlier analysis allows you to easily identify process instances where certain flow node instances took significantly longer than others and subsequently slow down your process. Let’s have a look at the feature based on a step-by-step example.
+Outlier analysis allows you to easily identify process instances that took significantly longer than others to complete a flow node, and subsequently slow down your process. Let’s have a look at the feature based on a step-by-step example.
 
 # Outlier analysis in action
 

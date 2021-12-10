@@ -21,6 +21,6 @@ As a result, you can analyze reports and dashboards, and reap actionable insight
 
 Review heatmap displays for a closer look at the number of instances that took longer than average, based on duration distribution. You can also visualize a heatmap by counting the number of activity instances, comparing them to the total number of process instances, and obtaining a percentage.
 
-Unlike standard business intelligence tools, Optimize understands the user’s goals, and leads them through continuous process improvement. Optimize is purpose-built to help rapidly identify the constraints of your system.
+Unlike standard business intelligence tools, Optimize understands the user’s goals and leads them through continuous process improvement. Optimize is purpose-built to help rapidly identify the constraints of your system.
 
 In the following sections, we’ll walk through using and analyzing Optimize.
