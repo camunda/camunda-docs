@@ -13,6 +13,7 @@ module.exports = {
         "guides/getting-started/contributing",
         "guides/getting-started/code-of-conduct",
         // "guides/getting-started/involve-humans",
+        "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
     "guides/getting-started-orchestrate-microservices",
