@@ -10,13 +10,15 @@ module.exports = {
         "guides/getting-started/deploy-your-process-and-start-process-instance",
         "guides/getting-started/implement-service-task",
         "guides/getting-started/implement-decision-gateway",
+        "guides/getting-started/contributing",
+        "guides/getting-started/code-of-conduct",
         // "guides/getting-started/involve-humans",
-        "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/message-correlation",
+   
     {
       "Update Guide": [
         "guides/update-guide/introduction",
