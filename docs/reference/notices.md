@@ -24,7 +24,7 @@ IAM
 IAM bundles log4j libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44228.
 Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bundle the log4j-core library which contains the vulnerability referred to by the CVE. As a result, Camunda does not consider IAM to be affected by the vulnerability.
 
-Still, Camunda recommends applying fixes as mentioned in Solutions below.
+Still, Camunda recommends applying fixes as mentioned in the Solution section below.
 
 #### How to determine if the installation is affected
 
@@ -50,7 +50,7 @@ Zeebe, Operate, Tasklist
 #### Impact:
 
 Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44228.
-At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in Solutions below.
+At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
 
 #### How to determine if the installation is affected
