@@ -13,8 +13,6 @@ keywords: ["code of conduct", "CoC", "community standards"]
 
 We want to provide each and every one of you with a consistently great experience, so we created this Community Code of Conduct. We want to ensure that mutual support will always be guaranteed and that we create an environment in which we can grow together.
 
-As is the nature of open source software, maintainers and extension creators often wear many hats. These range from administrative, to QA, and much more. As extensions in the Camunda Community Hub are community led, it is crucial that users of extensions understand that Maintainers are often working on community extensions in their free time.
-
 Please remember to be kind, and follow the Camunda Code of Conduct when interacting with other Camunda community members. Keep in mind that communication styles vary, and no two individuals communicate in the same way. Please do your best to remain helpful, and try to avoid making sweeping demands whenever possible.
 
 It is expected that Maintainers will follow the Code of Conduct when interacting with community members, and the same holds true for community members interacting with project Maintainers.
