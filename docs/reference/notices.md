@@ -17,34 +17,6 @@ December 13th, 2021
 
 #### Product affected:
 
-IAM
-
-#### Impact:
-
-IAM bundles log4j libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44228.
-Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bundle the log4j-core library which contains the vulnerability referred to by the CVE. As a result, Camunda does not consider IAM to be affected by the vulnerability.
-
-Still, Camunda recommends applying fixes as mentioned in the Solution section below.
-
-#### How to determine if the installation is affected
-
-You are using IAM version <= 1.2.5
-
-#### Solution
-
-Camunda has provided the following releases which contain a fix
-
-- [IAM 1.2.6](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.6)
-
-
-### Notice 1
-
-#### Publication Date:
-
-December 13th, 2021
-
-#### Product affected:
-
 Zeebe, Operate, Tasklist
 
 #### Impact:
@@ -66,9 +38,37 @@ Camunda has provided the following releases which contain a fix
 
 Apply the patches mentioned above or set the JVM option `-Dlog4j2.formatMsgNoLookups=true`
 
+### Notice 1
+
+#### Publication Date:
+
+December 13th, 2021
+
+#### Product affected:
+
+IAM
+
+#### Impact:
+
+IAM bundles log4j libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44228.
+Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bundle the log4j-core library which contains the vulnerability referred to by the CVE. As a result, Camunda does not consider IAM to be affected by the vulnerability.
+
+Still, Camunda recommends applying fixes as mentioned in the Solution section below.
+
+#### How to determine if the installation is affected
+
+You are using IAM version <= 1.2.5
+
+#### Solution
+
+Camunda has provided the following releases which contain a fix
+
+- [IAM 1.2.6](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.6)
+
+
 ## Report a vulnerability
 
-Please report security vulnerabilities to Camunda immediately. Please follow the steps on our [Camunda Security page](https://camunda.com/security#report-a-vulnerability) to report a vulnerability. 
+Please report security vulnerabilities to Camunda immediately. Please follow the steps on our [Camunda Security page](https://camunda.com/security#report-a-vulnerability) to report a vulnerability.
 
 ## Additional security information
 
