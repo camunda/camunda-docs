@@ -13,7 +13,7 @@ Camunda publishes security notices after fixes are available.
 
 #### Publication Date:
 
-December 13th, 2021
+December 14th, 2021
 
 #### Product affected:
 
@@ -42,7 +42,7 @@ Apply the patches mentioned above or set the JVM option `-Dlog4j2.formatMsgNoLoo
 
 #### Publication Date:
 
-December 13th, 2021
+December 14th, 2021
 
 #### Product affected:
 
