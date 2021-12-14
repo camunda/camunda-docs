@@ -2,6 +2,7 @@
 id: automating-a-process-using-bpmn
 title: Automating a process using BPMN
 description: A quickstart to how BPMN can automate your most complex business processes using an easy-to-adopt visual modeling language.
+keywords: workflow, modeling
 ---
 
 <span class="badge badge--beginner">Beginner</span>
