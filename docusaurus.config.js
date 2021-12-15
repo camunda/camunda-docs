@@ -29,6 +29,9 @@ module.exports = {
     ],
   ],
   themeConfig: {
+    prism: {
+      additionalLanguages: ['java'],
+    },
     navbar: {
       title: "Camunda Cloud Docs",
       logo: {

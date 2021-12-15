@@ -428,7 +428,7 @@ Returned if:
 ### `ResolveIncident` RPC
 
 Resolves a given incident. This simply marks the incident as resolved; most likely a call to
-UpdateJobRetries or UpdateProcessInstancePayload will be necessary to actually resolve the
+UpdateJobRetries or SetVariables will be necessary to actually resolve the
 problem, followed by this call.
 
 #### Input: `ResolveIncidentRequest`

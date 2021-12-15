@@ -12,7 +12,6 @@ You will be guided through the following steps:
 * [Deploy a workflow](#deploy-a-workflow)
 * [Create a workflow instance](#create-a-workflow-instance)
 * [Work on a task](#work-on-a-task)
-* [Open a topic subscription](#open-a-topic-subscription)
 
 
 > You can find the complete source code, on [GitHub](https://github.com/zeebe-io/zeebe-get-started-go-client).

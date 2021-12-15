@@ -91,13 +91,13 @@ A job represents a distinct unit of work within a business process. Service task
 jobs in your process and are identified by a unique id. A job has a type to allow specific job
 workers to find jobs that they can work on.
 
-- [Job workers](/components/concepts/job-workers.md#what-is-a-job)
+- [Job workers](/components/concepts/job-workers.md)
 
 ### Job activation timeout
 
 This is the amount of time the broker will wait for a complete or fail response from the job worker after a job has been submitted to the job worker for processing before it marks the job as available again for other job workers.
 
-- [Job workers](/components/concepts/job-workers.md#requesting-jobs-from-the-broker)
+- [Job workers](/components/concepts/job-workers.md#requesting-jobs)
 
 ### Job worker
 
