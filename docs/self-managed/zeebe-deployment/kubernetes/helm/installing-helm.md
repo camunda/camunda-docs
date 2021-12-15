@@ -25,7 +25,7 @@ When installing the `zeebe-full-helm` chart, all the components marked in green 
 
 ### Add Zeebe Helm repository
 
-The next step is to add the Zeebe Helm chart repository to your installation. Once this is done, Helm will be able to fetch and install charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
+The next step is to add the Zeebe Helm chart repository to your installation. Once this is done, Helm is able to fetch and install charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
 
 ```
 > helm repo add zeebe https://helm.camunda.io
@@ -52,10 +52,10 @@ Notice that you can add the `-n` flag to specify in which Kubernetes namespace t
 
 Installing all the components in a cluster requires all Docker images to be downloaded to the remote cluster. Depending on which Cloud provider you are using, the amount of time it will take to fetch all the images will vary. 
 
-If you are using [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f kind-values.yaml`. The `kind-values.yaml` file can be downloaded [here](assets/kind-values.yaml).
+If you are using [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f zeebe-dev-profile.yaml`. The `zeebe-dev-profile.yaml` file can be downloaded [here](https://github.com/camunda-community-hub/zeebe-helm-profiles/blob/master/zeebe-dev-profile.yaml).
 
 ```
-helm install --name <RELEASE NAME> zeebe/zeebe-full-helm -f kind-values.yaml
+helm install <RELEASE NAME> zeebe/zeebe-full-helm -f kind-values.yaml
 ```
 
 This will deploy the same components, but with a set of parameters tailored to a local environment setup. 
@@ -64,7 +64,7 @@ This will deploy the same components, but with a set of parameters tailored to a
 All Docker images will be downloaded to your local KIND cluster, so it might take some time for the services to get started.
 :::
 
-You can check the progress of your deployment by checking if the Kubernetes PODs are up and running with the following:
+Review the progress of your deployment by checking if the Kubernetes PODs are up and running with the following:
 
 ```
 > kubectl get pods
@@ -77,12 +77,13 @@ NAME                                                   READY   STATUS    RESTART
 elasticsearch-master-0                                 1/1     Running   0          4m6s
 elasticsearch-master-1                                 1/1     Running   0          4m6s
 elasticsearch-master-2                                 1/1     Running   0          4m6s
-<RELEASE NAME>-nginx-ingress-controller-5cf6dd7894-kc25s      1/1     Running   0          4m6s
-<RELEASE NAME>-nginx-ingress-default-backend-f5454db5-j9vh6   1/1     Running   0          4m6s
-<RELEASE NAME>-operate-5d4867d6d-h9zqw                        1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-0                                        1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-1                                        1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-2                                        1/1     Running   0          4m6s
+<RELEASE NAME>-ingress-nginx-controller                1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-operate-helm                      1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-0                                 1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-1                                 1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-2                                 1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-tasklist-helm                     1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 
 Check that each pod has at least 1/1 running instances. You can always tail the logs of these pods by running the following:
@@ -91,10 +92,15 @@ Check that each pod has at least 1/1 running instances. You can always tail the 
 > kubectl logs -f <POD NAME> 
 ```
 
-To interact with the services inside the cluster, use `port-forward` to route traffic from your environment to the cluster.
+To check which port the services are running on, run the following command:
 
 ```
-> kubectl port-forward svc/<RELEASE NAME>-zeebe 26500:26500
+> kubectl get svc
+```
+
+To interact with the services inside the cluster, use `port-forward` to route traffic from your environment to the cluster.
+```
+> kubectl port-forward svc/<RELEASE NAME>-zeebe-gateway 26500:26500
 ```
 
 Now, you can connect and execute operations against your newly-created Zeebe cluster. 

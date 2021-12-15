@@ -8,6 +8,11 @@ Options -Indexes
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/components/zeebe/third-party-libraries/zeebe-dependencies/$ docs/reference/dependencies/ [R=301,L]
+RewriteRule ^docs/components/operate/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
+RewriteRule ^docs/components/tasklist/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
+
 RewriteRule ^docs/components/IAM(.*)$ /docs/self-managed/IAM/$1 [R=301,L]
 RewriteRule ^docs/components/IAM$ /docs/self-managed/IAM/ [R=301,L]
 
@@ -23,18 +28,40 @@ RewriteRule ^docs/reference/tasklist-api(.*)$ /docs/apis-clients/tasklist-api$1 
 RewriteRule ^docs/reference/tasklist-api$ /docs/apis-clients/tasklist-api [R=301,L]
 
 RewriteRule ^docs/reference/public-api/$ /docs/apis-clients/public-api [R=301,L]
-RewriteRule ^docs/reference/cloud-console-api-clients/$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
-RewriteRule ^docs/reference/cloud-console-api-reference/$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
 RewriteRule ^docs/reference/grpc/$ /docs/apis-clients/grpc [R=301,L]
 
 RewriteRule ^docs/components/clients/other-clients(.*)$ /docs/apis-clients/community-clients$1 [R=301,L]
 RewriteRule ^docs/components/clients/other-clients$ /docs/apis-clients/community-clients [R=301,L]
 
+RewriteRule ^docs/reference/cloud-console-api-reference(.*)$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/reference/cloud-console-api-reference$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+
+RewriteRule ^docs/reference/cloud-console-api-clients(.*)$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/reference/cloud-console-api-clients$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+
+RewriteRule ^docs/components/clients/overview(.*)$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/components/clients/overview$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+
+RewriteRule ^docs/components/cloud-console/manage-organization/manage-cloud-management-api-clients(.*)$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/components/cloud-console/manage-organization/manage-cloud-management-api-clients$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+
 RewriteRule ^docs/components/clients/(.*)$ /docs/apis-clients/$1 [R=301,L]
 RewriteRule ^docs/components/clients$ /docs/apis-clients/ [R=301,L]
+
+RewriteRule ^docs/product-manuals/clients/java-client/get-started(.*)$ /docs/apis-clients/java-client/index [R=301,L]
+RewriteRule ^docs/product-manuals/clients/java-client/get-started$ /docs/apis-clients/java-client/index [R=301,L]
 
 RewriteRule ^docs/product-manuals/iam/overview$ /docs/components/iam/what-is-iam [R=301,L]
 RewriteRule ^docs/components/iam/overview$ /docs/components/iam/what-is-iam [R=301,L]
 
 RewriteRule ^docs/product-manuals/(.*)$ /docs/components/$1 [R=301,L]
 RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
+
+# workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
+RewriteRule ^(.*(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
+
+
+# Add yaml mime type
+AddType text/vnd.yaml   yaml
+# Add bpmn mime type
+AddType text/xml        bpmn
