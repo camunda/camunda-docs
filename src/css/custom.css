@@ -151,6 +151,10 @@ navbar .navbar .navbar__link[href*=self-managed] {
  color: #14D890;
 }
 
+ .menu__link[href*=self-managed]{
+  color: #14D890;
+ }
+
 .navbar .navbar__link[href*=self-managed]:hover{
   color: #ff1f00;
  }
@@ -165,6 +169,6 @@ navbar .navbar .navbar__link[href*=self-managed] {
 }
 
 .navbar .navbar__link[href*=self-managed]:before {
-  background-image: url('../img/Camunda-SELF-MANAGED-ICON-2021-11DEC_sign-up-gradient.png');
+  background-image: url('../../static/img/Camunda-SELF-MANAGED-ICON-2021-11DEC_sign-up-gradient.png');
   margin-right: 2px;
 }
