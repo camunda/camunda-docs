@@ -141,3 +141,30 @@ svg.implemented:hover [stroke="#333"]{
   background-color: #0075FF;
   color: #FFFFFF;
 }
+
+navbar .navbar .navbar__link[href*=self-managed] {
+  font-size: 0;
+  padding: 4px;
+  margin: 0 4px;
+}
+.navbar .navbar__link[href*=self-managed]{
+ color: #14D890;
+}
+
+.navbar .navbar__link[href*=self-managed]:hover{
+  color: #ff1f00;
+ }
+
+.navbar .navbar__link[href*=self-managed]:before {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+  float: left;
+}
+
+.navbar .navbar__link[href*=self-managed]:before {
+  background-image: url('../img/Camunda-SELF-MANAGED-ICON-2021-11DEC_sign-up-gradient.png');
+  margin-right: 2px;
+}
