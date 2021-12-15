@@ -3,11 +3,6 @@ id: testing
 title: "Writing tests"
 ---
 
-:::caution
-This project is in very early stages of development. Using this in a production environment is not recommended
-until a stable version is published.
-:::
-
 You can use the `zeebe-process-test` library to write JUnit tests for your BPMN process. The library starts an in-memory Zeebe engine and provides some basic assertions to verify your process behaves
 as expected.
 
