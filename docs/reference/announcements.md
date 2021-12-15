@@ -35,3 +35,7 @@ In terms of specifying values, there were two minor changes:
 ## Removed in 1.0
 
 The support for YAML processes was removed as of release 1.0. The `resourceType` in Deployment record and Process grpc request are deprecated; they will always contain `BPMN` as value.
+
+## Deprecated in 1.3
+
+The `zeebe-test` module was deprecated in 1.3.0. We are currently planning to remove `zeebe-test` for the 1.4.0 release.

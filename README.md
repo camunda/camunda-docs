@@ -11,6 +11,8 @@ This repository contains the Camunda Cloud documentation, which can be found at 
 
 [![development guidelines](./howtos/documentation-guidelines.svg)](./howtos/documentation-guidelines.md)
 
+[![technical writing style guide](./howtos/technical-writing-styleguide.svg)](./howtos/technical-writing-styleguide.md)
+
 [![technical writing cheatsheet](./howtos/technical-writing-cheatsheet.svg)](./howtos/technical-writing-cheatsheet.md)
 
 ---

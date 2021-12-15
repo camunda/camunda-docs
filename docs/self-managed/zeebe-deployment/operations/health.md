@@ -6,7 +6,7 @@ description: "This document analyzes health status checks and responses."
 
 ## Broker
 
-Zeebe broker exposes two http endpoints to query its health status:
+Zeebe broker exposes three http endpoints to query its health status:
 
 - Startup check
 - Ready check

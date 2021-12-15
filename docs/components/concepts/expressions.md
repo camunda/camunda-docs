@@ -236,7 +236,7 @@ The following operators can be applied on temporal values:
 
   <tr>
     <td>duration</td>
-    <td>duration("P12H"),<br/> duration("P4Y")</td>
+    <td>duration("PT12H"),<br/> duration("P4Y")</td>
     <td>
       <li>duration + duration</li>
       <li>duration + date</li>
