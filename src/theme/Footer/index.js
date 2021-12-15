@@ -4,16 +4,17 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from "react";
-import clsx from "clsx";
+import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 import Head from "@docusaurus/Head";
 import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import clsx from "clsx";
+import mixpanel from "mixpanel-browser";
+import React from "react";
 import styles from "./styles.module.css";
 import googletagmanager from "./gtm";
-import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
-import mixpanel from "mixpanel-browser";
 
 function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }) {
   const toUrl = useBaseUrl(to);
@@ -130,63 +131,87 @@ function Footer() {
         ></script>
         {googletagmanager()} */}
       </Head>
-      <Auth0Provider
-        domain="weblogin.cloud.camunda.io"
-        clientId="xxpG51I1fjAVqkyiclS3IFntj9pC46lA"
-        audience="cloud.camunda.io"
-        redirectUri={window.location.origin}
-      >
-        <MixpanelElement></MixpanelElement>
-        {/* <MixpanelElement2></MixpanelElement2> */}
-        <LoginButton></LoginButton>
-      </Auth0Provider>
+      <AnalyticsEvents></AnalyticsEvents>
     </footer>
   );
 }
 
+const AnalyticsEvents = () => {
+  return (
+    <BrowserOnly>
+      {() => {
+        const origin = window.location.origin;
+        return (
+          <Auth0Provider
+            domain="weblogin.cloud.camunda.io"
+            clientId="xxpG51I1fjAVqkyiclS3IFntj9pC46lA"
+            audience="cloud.camunda.io"
+            redirectUri={origin}
+          >
+            <MixpanelElement></MixpanelElement>
+            {/* <MixpanelElement2></MixpanelElement2> */}
+            <LoginButton></LoginButton>
+          </Auth0Provider>
+        );
+      }}
+    </BrowserOnly>
+  );
+};
+
 const MixpanelElement = () => {
-  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
-  const osano = window.Osano;
-  if (osano?.cm?.analytics) {
-    console.log(`osano consent available for analytics`);
-    const stage = "prod";
-    let mixpanelLoaded = false;
-    try {
-      const loadedStage = mixpanel.get_property("stage");
-      if (loadedStage === stage) {
-        mixpanelLoaded = true;
-      }
-    } catch (_error) {
-      console.log("mixpanel not loaded...");
-    }
-    if (!mixpanelLoaded) {
-      getAccessTokenSilently()
-        .then((_token) => {
-          console.log(_token);
-          if (isAuthenticated) {
-            console.log(user);
-            const userId = user.sub;
-            mixpanel.init("1104cabe553c23b7e67d56b1976437aa");
-            mixpanel.identify(userId);
-            mixpanel.register({
-              userId,
-              stage,
-            });
+  return (
+    <BrowserOnly>
+      {() => {
+        const osano = window.Osano;
+        // const osano = {
+        //   cm: {
+        //     analytics: true,
+        //   },
+        // };
+        if (osano?.cm?.analytics) {
+          const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+          console.log(`osano consent available for analytics`);
+          const stage = "prod";
+          let mixpanelLoaded = false;
+          try {
+            const loadedStage = mixpanel.get_property("stage");
+            if (loadedStage === stage) {
+              mixpanelLoaded = true;
+            }
+          } catch (_error) {
+            console.log("mixpanel not loaded...");
+          }
+          if (!mixpanelLoaded) {
+            getAccessTokenSilently()
+              .then((_token) => {
+                // console.log(_token);
+                if (isAuthenticated) {
+                  // console.log(user);
+                  const userId = user.sub;
+                  mixpanel.init("1104cabe553c23b7e67d56b1976437aa");
+                  mixpanel.identify(userId);
+                  mixpanel.register({
+                    userId,
+                    stage,
+                  });
+                  mixpanel.track("docs");
+                }
+              })
+              .catch((_error) => {
+                console.log(`failed silent login`);
+                console.log(_error);
+              });
+          } else {
+            console.log(`tracking mixpanel event`);
             mixpanel.track("docs");
           }
-        })
-        .catch((_error) => {
-          console.log(`failed silent login`);
-          console.log(_error);
-        });
-    } else {
-      console.log(`tracking mixpanel event`);
-      mixpanel.track("docs");
-    }
-  } else {
-    console.log(`sorry, no osano analytics consent`);
-  }
-  return <div>silent login</div>;
+        } else {
+          console.log(`sorry, no osano analytics consent`);
+        }
+        return <div>silent login</div>;
+      }}
+    </BrowserOnly>
+  );
 };
 
 // const MixpanelElement = () => {
