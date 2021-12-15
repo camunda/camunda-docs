@@ -3,13 +3,13 @@ id: what-is-optimize
 title: What is Optimize?
 ---
 
-Camunda is largely comprised of three key components:
+Camunda Cloud is built to handle three key aspects of process automation:
 
 - Design
 - Automate
 - Improve
 
-A user can design process flows through tools like Cawemo and Modeler, and deploy applications via Modeler or an IDE into the server. A user can use Tasklist to review and complete tasks, and Operate to view and analyze process instances.
+A user can design process flows through tools like Cawemo and [Modeler](./modeler/overview.md). In a production scenario, you can deploy through Camunda Modeler, Console Modeler, or programmatically. A user can use [Tasklist](./tasklist/introduction.md) to review and complete tasks, and [Operate](./operate/index.md) to view and analyze process instances.
 
 Beyond these design and automate cornerstones lies an important component to leverage our process data and analyze areas for improvement: Optimize.
 

@@ -87,6 +87,10 @@ There are multiple ways in which you can define your date filters:
 
 - One way is to set the filter to a current amount of time. e.g. today, this week, this month, etc. In such cases, the filter does not remain static but moves with time to deliver a subset of the data according to the selected time interval.
 
+:::note
+Within date filters, weeks begin on Monday, not Sunday. This is not configurable in Optimize.
+:::
+
 - Another way to define the filter is to set it to a previous amount of time. e.g. yesterday, last week, last month, etc. This filter also moves with time and is automatically adjusted to cover completed periods of time. To clarify, let's take the following example: Today is Wednesday March 11th. If you set a process instance start date filter to 'Last... + week', you get all process instances that were started from Monday March 2nd to Sunday March 8th. Now a Week passes and we have Wednesday March 18th. Applying the same filter now filters the process instances which were started from Monday March 9th to Sunday March 15th.
 
 - To cover previous time periods up the current moment of time, you can use the 'Rolling' option. To clarify this option, let's take the following example: today is March 28th. If you set a process instance start date filter to the last three days, you get all process instances that were started from March 26th to March 28th. Now a day passes and we have March 29th. Applying the same filter now filters the process instances which were started from March 27th to March 29th.
@@ -160,7 +164,7 @@ Variable filters can only filter for the final value of the variable. For instan
 :::
 
 :::note
-The variable filter can only filter for variables of a [primitive type](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#supported-variable-values)
+The variable filter can only filter for variables of a [primitive type](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#supported-variable-values).
 :::
 
 :::note
