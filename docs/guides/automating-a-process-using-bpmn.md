@@ -14,8 +14,6 @@ Business Process Model and Notation (BPMN) is the global standard for process mo
 
 Processes are the algorithms that determine how an organization runs based on independent tasks. Successful businesses grow from proven, effective processes. Therefore, Camunda’s workflow engine executes processes defined in BPMN.
 
-![empty bpmn diagram sample](./img/automate-any-process-anywhere.png)
-
 Take the following example where we've outlined a diagram to send an email. Don't worry too much about the symbols as we'll get to that shortly. For now, recognize the start and end of the process, comprised of entering a message, and sending the email.
 
 ![sending email bmmn diagram](./img/simple-bpmn-process.png)
@@ -24,7 +22,7 @@ Implement control and visibility over your critical business processes, as the w
 
 ## Set up
 
-At Camunda, we utilize [Modeler](../components/modeler/overview.md) to build out BPMN diagrams.
+At Camunda, we utilize [Modeler](./components/modeler/overview.md) to build out BPMN diagrams.
 
 You can begin building out your processes within Camunda Cloud using Cloud Modeler. Therefore, ensure you’ve [created a Camunda Cloud account](getting-started/create-camunda-cloud-account.md) to get started.
 
@@ -66,7 +64,8 @@ Take the following steps:
 
 5. Attach the next gateway once these two tasks have completed to move forward.
 6. Add a user task to bake the cake, and finally a user task to ice the cake.
-7. Add an end event, represented by a bold circle, and enjoy your cake!
+7. Add an end event, represented by a bold circle.
+8. Click **Save** and enjoy your cake!
 
 ![completed bpmn diagram](./img/complete-baking-cake-bpmn.png)
 
@@ -74,7 +73,7 @@ Take the following steps:
 You can also import a BPMN diagram with Cloud Modeler. Click **Import New Diagram** in the context menu.
 :::
 
-![import diagra,](./img/import-diagram.png)
+![import diagram](./img/import-diagram.png)
 
 ## Execute your process diagram
 
