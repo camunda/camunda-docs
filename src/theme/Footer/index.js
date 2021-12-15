@@ -133,6 +133,7 @@ function Footer() {
       <Auth0Provider
         domain="weblogin.cloud.camunda.io"
         clientId="xxpG51I1fjAVqkyiclS3IFntj9pC46lA"
+        audience="cloud.camunda.io"
         redirectUri={window.location.origin}
       >
         <MixpanelElement></MixpanelElement>
