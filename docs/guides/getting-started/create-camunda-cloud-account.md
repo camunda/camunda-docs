@@ -15,7 +15,7 @@ Create a Camunda Cloud account so you can create clusters, deploy processes, and
 
 Visit [https://camunda.io/signup](https://camunda.io/signup) and view the **Sign Up** screen:
 
-![signup](./img/signup.png)
+![sign up page](./img/signup.png)
 
 ### Create an account
 
@@ -31,11 +31,11 @@ If you choose to create an account through the social sign up buttons, you'll be
 
 Log in with the email address and password you used in the previous form, or use the social login buttons.
 
-![login](./img/login.png)
+![login page](./img/login.png)
 
 After login, you'll see the console overview page. This is the central place to manage your clusters, and the diagrams and forms you want to deploy to Camunda Cloud.
 
-![overview-gse](./img/home.png)
+![Camunda Cloud Console landing page](./img/home.png)
 
 You can now take a guided tour through Camunda Cloud using the **Product Walkthrough** button.
 

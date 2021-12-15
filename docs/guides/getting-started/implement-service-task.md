@@ -30,7 +30,7 @@ Take the following steps:
 
 1. Click **Import New Diagram** in the context menu to inject the BPMN-model you downloaded into the diagram.
 
-![import](../../components/modeler/cloud-modeler/img/import-diagram.png)
+![import diagram Cloud Modeler](../../components/modeler/cloud-modeler/img/import-diagram.png)
 
 ![processId-cloud](./img/cloud-modeler-advanced-process-id.png)
 
@@ -39,7 +39,7 @@ This process includes a service task and an XOR gateway.
 2. Select the service task and fill in the properties. 
 3. Set the **Type** to `test-worker`.
 
-![process-cloud](./img/cloud-modeler-advanced.png)
+![process-cloud example](./img/cloud-modeler-advanced.png)
 
 4. Deploy the new process using the **Save & Deploy** option in the **Execute** menu.
 
@@ -49,12 +49,12 @@ This process includes a service task and an XOR gateway.
 
 <TabItem value='desktop'>
 
-![processId](./img/zeebe-modeler-advanced-process-id.png)
+![processId sample](./img/zeebe-modeler-advanced-process-id.png)
 
 6. This process includes a service task and an XOR gateway. Select the service task and fill in the properties.
 7. Set the **Type** to `test-worker`.
 
-![process](./img/zeebe-modeler-advanced.png)
+![process diagram sample](./img/zeebe-modeler-advanced.png)
 
 8. Deploy the new process.
 

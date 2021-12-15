@@ -31,11 +31,11 @@ import TabItem from "@theme/TabItem";
 
 You can now use the **Save & Deploy** option in the **Execute** menu to deploy the newly-created process to your cluster.
 
-![console-modeler-deploy](../../components/modeler/cloud-modeler/img/save-and-deploy.png)
+![deploy process to cluster Camunda Cloud](../../components/modeler/cloud-modeler/img/save-and-deploy.png)
 
 Deployment can take a few seconds, but you should get a confirmation for successful deployment.
 
-![console-modeler-deploy-successfull](../../components/modeler/cloud-modeler/img/save-and-deploy-successful.png)
+![deploy successful Camunda Cloud](../../components/modeler/cloud-modeler/img/save-and-deploy-successful.png)
 
 You can now start a new process instance. For this example, you can start an instance with an empty payload.
 
