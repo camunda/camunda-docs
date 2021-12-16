@@ -3,11 +3,11 @@ id: creating-dashboards
 title: Creating dashboards
 ---
 
-# Overview
+## Overview
 
 Often it is desired to get a quick overview of the business performance by monitoring the underlying processes. To achieve that, you can define reports in Camunda Optimize according to KPIs (Key Performance Indicators) relevant to your business objectives. A dashboard shows multiple reports so you can get an up-to-date view of the productivity of your system.
 
-The dashboard consists of the [edit mode](#edit-mode) and [view mode](#view-mode).
+The dashboard consists of the **edit mode** and **view mode**.
 
 To create a new dashboard, click the **Create New** button on the homepage or collection page and select the **New dashboard** option. This opens a dialog where you can set the dashboard name and select one of multiple dashboard templates. When not creating a blank dashboard, select a process definition. This process definition is used to create new reports for the dashboard.
 
@@ -15,7 +15,7 @@ Creating a dashboard from a template also creates new reports which are saved as
 
 ![create new dashboard](./img/dashboardTemplate.png)
 
-# Edit mode
+## Edit mode
 
 The edit mode allows you to configure the dashboard and adjust it to your needs, including the following operations:
 
@@ -41,7 +41,7 @@ To move the report to your desired place, drag it in any direction. As soon as y
 
 ![edit actions](./img/dashboard-reportEditActions.png)
 
-## Adding filters in edit mode
+### Adding filters in edit mode
 
 In the dashboard edit mode, there is an **Add a Filter** button which shows a **Filters** panel that allows specifying filters which will become available for the dashboard. The following filters are available:
 
@@ -62,13 +62,13 @@ For **Assignee** and **Candidate Group** filters, the dashboard editor can speci
 
 The list of variable names, variable values, assignees, and candidate groups is compiled from all reports on the dashboard.
 
-### Setting a default dashboard filter
+#### Setting a default dashboard filter
 
 After specifying available filters in the dashboard edit mode, editors of the dashboard can also set a default filter. A default filter is always applied when a user initially opens the dashboard. Viewers can still remove filter values to see unfiltered reports, but if a user does not perform any steps to change the filter manually, they will see the reports with the defined default filter.
 
 To set a default filter, dashboard editors can use the added filter options in the filter area. Whatever filter configuration is set there when the dashboard is saved becomes the default filter for the dashboard.
 
-# View mode
+## View mode
 
 Once you have defined what your dashboard should look like, the view mode provides you with all the features to monitor you process, such as:
 
@@ -92,13 +92,13 @@ For example, to completely hide the header from the shared dashboard, add `heade
 
 `http://<dashboard share url>?header=hidden`
 
-## Interacting with reports
+### Interacting with reports
 
 To see more details about the report on the dashboard, interact with the reports. The kind of interaction always depends on the report itself.
 
 If the interactions do not suffice to get the desired information or you want to edit the report, directly access the report by clicking on its title.
 
-## Adding filters in view mode
+### Adding filters in view mode
 
 In the dashboard view mode, there is a **Filters** button which opens a panel that shows all filters available for this dashboard. More filters can be made available in the dashboard edit mode. If the dashboard editor checked the **Allow viewer to add filter values** box for assignee, candidate group, or variable filters, dashboard viewers can add their own values to filter by.
 

@@ -4,13 +4,13 @@ title: Branch analysis
 description: Optimize provides you with a statistical analysis for a given end event and a gateway.
 ---
 
-# Overview
+## Overview
 
 If a process contains more than one end event, it is useful to know which path tokens took to reach a specific end event. Optimize provides you with a statistical analysis for a given end event and a gateway. This analysis includes how tokens were split at the gateway in question, and how many of the tokens of each branch reached the end event.
 
 ![branch analysis](./img/analysis-1.png)
 
-# Branch analysis in Optimize
+## Branch analysis in Optimize
 
 Select a process definition using the **Select Process** option in the top left of the page. After selecting a process definition and version, the diagram of the process is displayed on the page.
 

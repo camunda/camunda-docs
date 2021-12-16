@@ -4,7 +4,7 @@ title: Footer
 description: Take a closer look at engine connection status, Elasticsearch connection, import progress, and more.
 ---
 
-# Footer
+## Footer
 
 In the **Footer** section of Optimize, you can see some important information, such as:
 

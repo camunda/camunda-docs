@@ -11,7 +11,7 @@ Camunda Optimize offers various ways of filtering your data, such as filter by:
 - [Instance state](#instance-state-filters)
   - [Running/Completed process instances](#running-completed-instances-only-filter)
   - [Canceled/Non Canceled process instances](#canceled-instances-only-filter)
-  - [Suspended/Non Suspended process instances](#suspended-non-suspended-instances-only-filter)
+  - [Suspended/Non Suspended process instances](#suspended-and-non-suspended-instances-only-filter)
 - [Flow Node Status Filter](#flow-node-status-filter)
 - [Start/End dates](#date-filters)
   - [Process instance date](#process-instance-date-filter)
@@ -39,7 +39,7 @@ Additionally, if the report contains multiple processes, filters need to specify
 
 ## Instance state filters
 
-### Running/completed instances only filter
+### Running completed instances only filter
 
 By default, a report considers all process instances, regardless of whether they are still running or not. This behavior can be adjusted with the `Running Instances Only` and `Completed Instances Only` filters. Be aware that setting one of those filters (e.g. `Running Instances Only`) while the other one is already set (e.g. `Completed Instances Only`), will show a warning message since these two filters are incompatible with each other and will not show any data.
 
@@ -53,7 +53,7 @@ internally or externally. Be aware that adding this filter along with the `Runni
 As opposed to the `Canceled Instances Only Filter`, applying the `Non Canceled Instances Only` filter will make Optimize query only those instances which were _not_ canceled during 
 their execution. This means that only active and completed instances are considered, externally or internally terminated instances are not included in the report.
 
-### Suspended/non suspended instances only filter
+### Suspended and non suspended instances only filter
 
 By default, a report considers all process instances, regardless of whether they are suspended or not. Adding this filter makes it possible to only evaluate process instances that are in the suspension state. Please note that if you have enabled history cleanup, this might affect the accuracy of this filer since the suspension state is imported from historic data.
 

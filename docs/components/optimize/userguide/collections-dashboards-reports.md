@@ -3,7 +3,7 @@ id: collections-dashboards-reports
 title: Collections, dashboards, and reports
 ---
 
-# Collections, dashboards, and reports
+## Collections, dashboards, and reports
 
 Within Optimize, **reports** are based on a *single* visualization, similar to a single chart or graph. **Dashboards** are aggregations of these visualizations, similar to a full spreadsheet of data collections, or a combination of several comparative charts and graphs. **Collections** are groups of these data sets, similar to project folders for organizational purposes where we can nest a series of dashboards and/or reports within.
 
@@ -21,7 +21,7 @@ To find a collection, report, or dashboard, use the search field on the top of t
 
 To create a dashboard or report, use the **Create New** button available in the top right corner of the page.
 
-# User permissions
+## User permissions
 
 By default, if you create a collection, only you can access the collection and the contents within. To share a collection with other users, add them to the collection.
 
