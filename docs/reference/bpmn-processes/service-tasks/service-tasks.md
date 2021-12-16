@@ -25,7 +25,7 @@ A service task can define an arbitrary number of `taskHeaders`. They are static 
 
 ## Variable mappings
 
-Input/output variable mappings can be used to create new variables or customize how variables are merged into the process instance.
+By default, all job variables merge into the process instance. This behavior can be customized by defining an output mapping at the service task.
 
 To use the variable mapping, the Zeebe extension element ioMapping must be added to the element. It can contain multiple input and output elements that specify which variables should be mapped. The `Local Input Variable` denotes the variable name inside the activity (a local variable to be created), whereas the `Process Variable Name` of an output denotes the variable name outside of the activity.
 

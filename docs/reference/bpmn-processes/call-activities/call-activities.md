@@ -7,7 +7,7 @@ A call activity (or reusable subprocess) allows to call/invoke another process a
 
 ![call-activity](assets/call-activities-example.png)
 
-When a call activity is entered, a new process instance of the referenced process is created. The new process instance is activated at the **standard start event**. The process can have start events of other types, but they are ignored.
+When a call activity is entered, a new process instance of the referenced process is created. The new process instance is activated at the **none start event**. The process can have start events of other types, but they are ignored.
 
 When the created process instance is completed, the call activity is left and the outgoing sequence flow is taken.
 
@@ -49,9 +49,9 @@ A call activity with static process id and propagation of all child variables tu
 
 ```xml
 <bpmn:callActivity id="Call_Activity" name="Call Process A ">
-   <bpmn:extensionElements>
-    <zeebe:calledElement processId="child-process-a" propagateAllChildVariables="true" />
-   </bpmn:extensionElements>
+    <bpmn:extensionElements>
+        <zeebe:calledElement processId="child-process-a" propagateAllChildVariables="true" />
+    </bpmn:extensionElements>
 </bpmn:callActivity>
 ```
 

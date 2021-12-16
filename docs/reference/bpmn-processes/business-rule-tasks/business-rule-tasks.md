@@ -26,7 +26,7 @@ Jobs for business rule tasks are not processed by Zeebe itself. To process them,
 
 ## Defining a task
 
-A business rule task must define a [job type](../../service-tasks/service-tasks#task-definition). This
+A business rule task must define a [job type](../../service-tasks/service-tasks#task-definition) the same way as a service task does. This
 specifies the type of job workers should subscribe to (e.g. DMN).
 
 Use [task headers](../../service-tasks/service-tasks#task-headers) to pass static parameters to the job

@@ -25,12 +25,12 @@ Jobs for script tasks are not processed by Zeebe itself. To process them, provid
 
 ## Defining a task
 
-A script task must define a [job type](../../service-tasks/service-tasks#task-definition). It specifies
+A script task must define a [job type](../../service-tasks/service-tasks#task-definition) the same way as a service task does. It specifies
 the type of job workers should subscribe to (e.g. `script`).
 
 Use [task headers](../../service-tasks/service-tasks#task-headers) to pass static parameters to the job
-worker (e.g. the script to evaluate). The extension shown below requires certain attributes set in the task headers. 
-Take a look at the referenced GitHub repository, or the example below. 
+worker (e.g. the script to evaluate). The community extension [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker) requires certain attributes to be set in the task headers. 
+Take a look at the link for more information. 
 
 Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) to transform the
 variables passed to the job worker, or to customize how the variables of the job merge
