@@ -12,6 +12,10 @@ This page contains licensing information for all components of Camunda Cloud.
 
 Licenses and license information for Zeebe can be found on the Zeebe project [README](https://github.com/camunda-cloud/zeebe#license).
 
+### Camunda Modeler
+
+The source code of the Camunda Modeler is licensed under the MIT license as stated in the [`LICENSE` file](https://github.com/camunda/camunda-modeler/blob/master/LICENSE) in the root of the source code repository. This file is also shipped as `LICENSE.camunda-modeler.txt` with each modeler distribution.
+
 ### Camunda Cloud Documentation
 
 License information for our documentation can be found in the [LICENSE.txt](https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/LICENSE.txt) of the Camunda Cloud Documentation repository.
