@@ -3,8 +3,6 @@ id: collections-dashboards-reports
 title: Collections, dashboards, and reports
 ---
 
-## Collections, dashboards, and reports
-
 Within Optimize, **reports** are based on a *single* visualization, similar to a single chart or graph. **Dashboards** are aggregations of these visualizations, similar to a full spreadsheet of data collections, or a combination of several comparative charts and graphs. **Collections** are groups of these data sets, similar to project folders for organizational purposes where we can nest a series of dashboards and/or reports within.
 
 The Optimize landing page shows a list of all existing dashboards and reports you've created, as well as collections you have access to. Click on a collection to view its accompanying reports and dashboards.
