@@ -42,9 +42,15 @@ To run the demonstration, take the following steps:
 
 2. Install dependencies:
 
- ```
- npm i && npm i -g ts-node typescript
- ```
+  :::note
+
+  This guides requires `npm` version 6.
+
+  :::
+
+  ```
+  npm i && npm i -g ts-node typescript
+  ```
 
 3. In another terminal, start the Zeebe Broker using the `simple-monitor` profile from the [zeebe-docker-compose](https://github.com/camunda-community-hub/zeebe-docker-compose) repo.
 
