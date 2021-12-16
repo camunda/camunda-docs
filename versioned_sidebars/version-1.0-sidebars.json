@@ -588,7 +588,7 @@
                 },
                 {
                   "type": "doc",
-                  "id": "version-1.0/components/zeebe/deployment-guide/security/authentication"
+                  "id": "version-1.0/components/zeebe/deployment-guide/security/transport-layer-security"
                 },
                 {
                   "type": "doc",

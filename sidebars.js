@@ -211,7 +211,7 @@ module.exports = {
       ],
     },
   ],
- 
+
   Reference: [
     "reference/overview",
     {
@@ -309,7 +309,7 @@ module.exports = {
         {
           Security: [
             "self-managed/zeebe-deployment/security/security",
-            "self-managed/zeebe-deployment/security/authentication",
+            "self-managed/zeebe-deployment/security/transport-layer-security",
             "self-managed/zeebe-deployment/security/authorization",
           ],
         },
