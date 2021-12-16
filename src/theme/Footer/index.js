@@ -4,12 +4,15 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from "react";
-import clsx from "clsx";
+import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 import Head from "@docusaurus/Head";
 import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import clsx from "clsx";
+import mixpanel from "mixpanel-browser";
+import React from "react";
 import styles from "./styles.module.css";
 import googletagmanager from "./gtm";
 
@@ -128,8 +131,88 @@ function Footer() {
         ></script>
         {googletagmanager()} */}
       </Head>
+      <AnalyticsEvents></AnalyticsEvents>
     </footer>
   );
 }
+
+const AnalyticsEvents = () => {
+  return (
+    <BrowserOnly>
+      {() => {
+        const auth0Config = {
+          domain: "weblogin.cloud.camunda.io",
+          clientId: "xxpG51I1fjAVqkyiclS3IFntj9pC46lA",
+          audience: "cloud.camunda.io",
+          origin: window.location.origin,
+        };
+        return (
+          <Auth0Provider
+            domain={auth0Config.domain}
+            clientId={auth0Config.clientId}
+            audience={auth0Config.audience}
+            redirectUri={auth0Config.origin}
+          >
+            <MixpanelElement></MixpanelElement>
+          </Auth0Provider>
+        );
+      }}
+    </BrowserOnly>
+  );
+};
+
+const MixpanelElement = () => {
+  return (
+    <BrowserOnly>
+      {() => {
+        const osano = window.Osano;
+        if (osano?.cm?.analytics) {
+          const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+          // check if mixpanel is initiated
+          const stage = "prod";
+          let mixpanelInitiated = false;
+          try {
+            const loadedStage = mixpanel.get_property("stage");
+            if (loadedStage === stage) {
+              mixpanelInitiated = true;
+            }
+          } catch (_error) {
+            // mixpanel is not initiated
+          }
+          if (!mixpanelInitiated) {
+            getAccessTokenSilently()
+              .then((_token) => {
+                if (isAuthenticated) {
+                  let orgId;
+                  if (user["https://camunda.com/orgs"]?.length > 0) {
+                    orgId = user["https://camunda.com/orgs"][0].id;
+                  }
+                  const userId = user.sub;
+                  mixpanel.init("1104cabe553c23b7e67d56b1976437aa");
+                  mixpanel.identify(userId);
+                  const superProperties = { userId, stage };
+                  if (orgId) {
+                    superProperties["orgId"] = orgId;
+                    superProperties["org_id"] = orgId;
+                  }
+                  mixpanel.register(superProperties);
+                  mixpanel.track("docs");
+                }
+              })
+              .catch((_error) => {
+                // failed to silently authenticate user
+              });
+          } else {
+            // track event "docs"
+            mixpanel.track("docs");
+          }
+        } else {
+          // Osano is not or analytics consent is not enabled
+        }
+        return <span></span>;
+      }}
+    </BrowserOnly>
+  );
+};
 
 export default Footer;
