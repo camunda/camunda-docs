@@ -161,6 +161,8 @@ const AnalyticsEvents = () => {
   );
 };
 
+let lastEventTs = 0;
+
 const MixpanelElement = () => {
   return (
     <BrowserOnly>
@@ -196,7 +198,7 @@ const MixpanelElement = () => {
                     superProperties["org_id"] = orgId;
                   }
                   mixpanel.register(superProperties);
-                  mixpanel.track("docs");
+                  sendMixpanelEvent("docs");
                 }
               })
               .catch((_error) => {
@@ -204,7 +206,7 @@ const MixpanelElement = () => {
               });
           } else {
             // track event "docs"
-            mixpanel.track("docs");
+            sendMixpanelEvent("docs");
           }
         } else {
           // Osano is not or analytics consent is not enabled
@@ -214,5 +216,16 @@ const MixpanelElement = () => {
     </BrowserOnly>
   );
 };
+
+function sendMixpanelEvent(eventName) {
+  // somehow the code is executed twice
+  // that leads to the fact that events are sent twice
+  // workaround: send events only once per second
+  const now = Date.now();
+  if (now - lastEventTs > 1000) {
+    mixpanel.track(eventName);
+    lastEventTs = now;
+  }
+}
 
 export default Footer;
