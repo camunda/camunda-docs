@@ -154,12 +154,15 @@ const AnalyticsEvents = () => {
             redirectUri={auth0Config.origin}
           >
             <MixpanelElement></MixpanelElement>
+            <LoginButton></LoginButton>
           </Auth0Provider>
         );
       }}
     </BrowserOnly>
   );
 };
+
+let index = 0;
 
 const MixpanelElement = () => {
   return (
@@ -204,7 +207,9 @@ const MixpanelElement = () => {
               });
           } else {
             // track event "docs"
+            console.log(`mixpanel event ${index}`);
             mixpanel.track("docs");
+            index++;
           }
         } else {
           // Osano is not or analytics consent is not enabled
@@ -213,6 +218,12 @@ const MixpanelElement = () => {
       }}
     </BrowserOnly>
   );
+};
+
+const LoginButton = () => {
+  const { loginWithRedirect } = useAuth0();
+
+  return <button onClick={() => loginWithRedirect()}>Log In</button>;
 };
 
 export default Footer;
