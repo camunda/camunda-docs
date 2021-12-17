@@ -162,7 +162,7 @@ const AnalyticsEvents = () => {
   );
 };
 
-let index = 0;
+let lastEventTs = 0;
 
 const MixpanelElement = () => {
   return (
@@ -199,7 +199,7 @@ const MixpanelElement = () => {
                     superProperties["org_id"] = orgId;
                   }
                   mixpanel.register(superProperties);
-                  mixpanel.track("docs");
+                  sendMixpanelEvent("docs");
                 }
               })
               .catch((_error) => {
@@ -207,9 +207,7 @@ const MixpanelElement = () => {
               });
           } else {
             // track event "docs"
-            console.log(`mixpanel event ${index}`);
-            mixpanel.track("docs");
-            index++;
+            sendMixpanelEvent("docs");
           }
         } else {
           // Osano is not or analytics consent is not enabled
@@ -219,6 +217,15 @@ const MixpanelElement = () => {
     </BrowserOnly>
   );
 };
+
+function sendMixpanelEvent(eventName) {
+  const now = Date.now();
+  if (now - lastEventTs > 1000) {
+    console.log(`mixpanel event ${index}`);
+    mixpanel.track(eventName);
+    lastEventTs = now;
+  }
+}
 
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
