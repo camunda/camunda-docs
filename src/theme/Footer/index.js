@@ -154,7 +154,6 @@ const AnalyticsEvents = () => {
             redirectUri={auth0Config.origin}
           >
             <MixpanelElement></MixpanelElement>
-            <LoginButton></LoginButton>
           </Auth0Provider>
         );
       }}
@@ -219,18 +218,14 @@ const MixpanelElement = () => {
 };
 
 function sendMixpanelEvent(eventName) {
+  // somehow the code is executed twice
+  // that leads to the fact that events are sent twice
+  // workaround: send events only once per second
   const now = Date.now();
   if (now - lastEventTs > 1000) {
-    console.log(`mixpanel event ${index}`);
     mixpanel.track(eventName);
     lastEventTs = now;
   }
 }
-
-const LoginButton = () => {
-  const { loginWithRedirect } = useAuth0();
-
-  return <button onClick={() => loginWithRedirect()}>Log In</button>;
-};
 
 export default Footer;
