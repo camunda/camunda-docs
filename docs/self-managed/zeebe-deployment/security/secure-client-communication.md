@@ -1,13 +1,13 @@
 ---
 id: secure-client-communication
-title: "Secure Client Communication"
+title: "Secure client communication"
 ---
 
 
 
 # Client security
 
-Zeebe supports transport layer security between the gateway and all of the officially supported clients. In this section, we will go through how to configure these components.
+Zeebe supports transport layer security between the gateway and all of the officially supported clients. In this section, we will review how to configure these components.
 
 ## Gateway
 
