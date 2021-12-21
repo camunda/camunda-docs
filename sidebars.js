@@ -138,15 +138,29 @@ module.exports = {
             "components/optimize/userguide/data-sources",
             "components/optimize/userguide/creating-dashboards",
             "components/optimize/userguide/creating-reports",
-          ],
+          {
           "Process analysis": [
             "components/optimize/userguide/process-analysis/overview",
             "components/optimize/userguide/process-analysis/outlier-analysis",
             "components/optimize/userguide/process-analysis/branch-analysis",
           ],
+          },
+          {
+          "Decision analysis": [
+            "components/optimize/userguide/decision-analysis/overview",
+            "components/optimize/userguide/decision-analysis/decision-report",
+            "components/optimize/userguide/decision-analysis/decision-filter",
+          ],
+          },
+          {
           "Additional features": [
+            "components/optimize/userguide/additional-features/alerts",
+            "components/optimize/userguide/additional-features/event-based-processes",
+            "components/optimize/userguide/additional-features/export-import",
             "components/optimize/userguide/additional-features/filters",
             "components/optimize/userguide/additional-features/footer",
+          ],
+          },
           ],
         },
       ],
