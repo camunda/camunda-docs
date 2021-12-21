@@ -63,3 +63,5 @@ RewriteRule ^(.*(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
+# Add bpmn mime type
+AddType text/xml        bpmn

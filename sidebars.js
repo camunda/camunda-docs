@@ -16,6 +16,7 @@ module.exports = {
     },
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
+    "guides/integrating-optimize",
     "guides/message-correlation",
     {
       "Update Guide": [
@@ -358,6 +359,10 @@ module.exports = {
             ],
           },
       ],
+    },{
+      Troubleshooting: [
+        "self-managed/troubleshooting/log-levels",
+      ]
     },
   ],
 };

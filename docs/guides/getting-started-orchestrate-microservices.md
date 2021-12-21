@@ -19,24 +19,27 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Guide steps
 
-First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one, then log in.
+First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one.
 
-1. [Design your process with BPMN](#design-your-process-with-BPMN)
-2. [Create credentials for your Zeebe client](#create-credentials-for-your-zeebe-client)
-3. [Create a worker for the service task](#create-a-worker-for-the-service-task)
+- [Prerequisites](#prerequisites)
+- [Guide steps](#guide-steps)
+  - [Design your process with BPMN](#design-your-process-with-bpmn)
+  - [Create credentials for your Zeebe client](#create-credentials-for-your-zeebe-client)
+  - [Create a worker for the service task](#create-a-worker-for-the-service-task)
+- [Next steps](#next-steps)
 
 ### Design your process with BPMN
 
 Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Cloud Modeler.
 
 1. Navigate to your diagrams, either through the **Diagrams** navigation, or by using the section under **Camunda Cloud Service** on the main dashboard. Click **Create New Diagram**. This opens Cloud Modeler.
-2. Give your model a descriptive name and id. For this guide, we'll use **Microservice Orchestration Tutorial** for the name and **microservice-orchestration-tutorial** for the id.
-3. Use Cloud Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Change the task type by clicking the wrench icon and selecting **Service Task**. 
+2. Give your model a descriptive name and id. On the right side of the console, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **Microservice Orchestration Tutorial** for the name and **microservice-orchestration-tutorial** for the id.
+3. Use Cloud Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Click the wrench icon and select **Service Task** to change the task type.
 
 ![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
 
-4. Add a descriptive name using the properties panel. For this guide, we'll use **Microservice Example**.
-5. Use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use **orchestrate-something** as the type. You will use this in [Create a worker for the service task](#create-a-worker-for-the-service-task). If you do not have an option to add the **Type**, make sure you have used the wrench icon and selected **Service Task**.
+1. Add a descriptive name using the properties panel. For this guide, we'll use **Microservice Example**. Since you previously opened the **General** section of the properties panel, it is likely still open when working with your service task configuration.
+2. In the properties panel, expand the **Task definition** section and use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use **orchestrate-something** as the type. You will use this while [creating a worker for the service task](#create-a-worker-for-the-service-task). If you do not have an option to add the **Type**, use the wrench icon and select **Service Task**.
 
 ![Service task with properties panel open](./img/microservice-orchestration-service-task.png)
 
@@ -66,9 +69,14 @@ If your account is new, you should have a cluster already available. If no clust
 Next, we’ll create a worker for the service task by associating it with the type we specified on the service task in the BPMN diagram.
 
 1. Open the downloaded or cloned project ([repo](https://github.com/camunda-cloud/camunda-cloud-tutorials), then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`) in your IDE .
-2. Add your credentials to `application.properties`. Your client id and client secret are available from the previous section in the credential text file you downloaded or copied. Your cluster id and region can be found by going to the cluster overview page.
+2. Add your credentials to `application.properties`. Your client id and client secret are available from the previous section in the credential text file you downloaded or copied. Go to the cluster overview page to find your cluster id and region.
 3. In the `Worker.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “orchestrate-something”, no action is required.
 4. After making these changes, perform a Maven install, then run the Worker.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
 5. Navigate to Operate and you will see your token has moved to the end event, completing this process instance.
 
 Congratulations! You successfully built your first microservice orchestration solution with Camunda Cloud.
+
+## Next steps
+
+* Learn more about Camunda Cloud and what it can do by reading [What is Camunda Cloud?](../../components/concepts/what-is-camunda-cloud/).
+* Get your local environment ready for development with Camunda Cloud by [setting up your first development project](../setting-up-development-project).

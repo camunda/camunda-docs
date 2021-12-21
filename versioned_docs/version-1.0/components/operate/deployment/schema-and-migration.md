@@ -7,7 +7,7 @@ Operate stores data in Elasticsearch. On first start Operate will create all req
 * [Schema](#schema)
 * [Data migration](#data-migration)
 * [How to migrate](#how-to-migrate)
-* [Example for migrate in Kubernetes](#example-for-migrate-in-kubernetes)
+* [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
 
 ## Schema
 
