@@ -1,0 +1,31 @@
+---
+id: user-management
+title: "User Access Management"
+description: "Define which users have access to Optimize."
+---
+
+{{< note title="Good to know!" class="info" >}}
+
+Providing Optimize access to a user just enables them to log in to Optimize. To be able
+to create reports the user also needs to have permission to access the engine data. To see
+how this can be done please refer to the [Authorization Management]({{< ref "/technical-guide/setup/authorization/_index.md" >}}) section.
+
+{{< /note >}}
+
+You can use the credentials from the Camunda Platform users to access Optimize. However, for the users to gain access to Optimize, they need to be authorized. This is not done in Optimize itself, but needs to be configured in the Camunda Platform and can be achieved on different levels with different options. If you do not know how authorization in Camunda works, please have a look at the [authorization service documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/).
+
+When defining an authorization to grant Optimize access, the most important aspect is that you grant access on resource type application with resource ID "optimize" ( or "\*" if you want to grant access to all applications including Optimize). The permissions you can set, are either `ALL` or `ACCESS`. They are treated equally, so there is no difference between them.
+
+Authorizing users in admin can be done as follows:
+
+{{< img src="Admin-GrantAccessAuthorizations.png" title="Grant Optimize Access in Admin" >}}
+
+1. The first option allows access for Optimize on a global level. With this setting all users are allowed to log into Camunda Optimize.
+2. The second option defines the access for a single user. The user `Kermit` can now log into Camunda Optimize.
+3. The third option provides access on group level. All users belonging to the group `optimize-users` can log into Camunda Optimize.
+
+It is also possible to revoke the Optimize authorization for specific users or groups. For instance, you can define Optimize on a global scale, but exclude the `engineers` group:
+
+{{< img src="Admin-RevokeGroupAccess.png" title="Revoke Optimize Access for group 'engineers' in Admin" >}}
+
+When Optimize is configured to load data from multiple instances of the Camunda Platform, then it suffices to be granted by one instance for the user to be able to log into Optimize. Notice that, like for all authorizations, grants have precedence over revokes. That is, if there is a Camunda Platform instance that grants access to optimize to a user, then the user can log in even if another instance revokes access to Optimize for this user.
