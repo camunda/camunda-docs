@@ -36,14 +36,14 @@ Some comments on the guide:
        ./bin/x-pack/users useradd optimize -p IloveOptimize -r superuser
        ```
 
-{{< note title="Warning!" class="warning" >}}
+:::note Warning!
 Please note that although the `superuser` role does allow Optimize to communicate with the secured Elasticsearch instance, this role also grants full access to the cluster. A user with the superuser role can also manage users, roles and impersonate any other user in the system which is a security risk for your system.
 See [Setting Up User Authentication](https://www.elastic.co/guide/en/x-pack/6.2/setting-up-authentication.html) for further details.
-{{< /note >}}
+:::
 
 **Enable Optimize to connect to the secured HTTP Elasticsearch instance**
 
 Now that you have configured your Elasticsearch instance, you need to setup the connection security settings accordingly
 to allow Optimize to connect to the secured Elasticsearch instance via HTTPS.
 
-All the necessary Optimize settings can be found in the [configuration guide]({{< ref "/technical-guide/setup/configuration/_index.md#elasticsearch-security" >}}).
+All the necessary Optimize settings can be found in the [configuration guide](./configuration.md/#elasticsearch-security").

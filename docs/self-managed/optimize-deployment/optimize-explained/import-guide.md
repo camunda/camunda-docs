@@ -74,7 +74,7 @@ The following components were used for these import tests:
   </tr>
 </table>
 
-The Optimize configuration with the default settings was used, as described in detail in the [configuration overview]({{< ref "/technical-guide/setup/configuration/_index.md" >}}).
+The Optimize configuration with the default settings was used, as described in detail in the [configuration overview](./../setup/configuration.md).
 
 The following hardware specifications were used for each dedicated host
 
@@ -172,13 +172,13 @@ During execution, the following steps are performed:
 1. [Start an import round](#start-an-import-round)
 2. [Prepare the import](#prepare-the-import)
 
-- 2.1 Poll a new page
-- 2.2 Map entities and add an import job
+   - 2.1 Poll a new page
+   - 2.2 Map entities and add an import job
 
 3. [Execute the import](#execute-the-import)
 
-- 3.1 Poll a job
-- 3.2 Persist the new entities to Elasticsearch
+   - 3.1 Poll a job
+   - 3.2 Persist the new entities to Elasticsearch
 
 ## Start an import round
 

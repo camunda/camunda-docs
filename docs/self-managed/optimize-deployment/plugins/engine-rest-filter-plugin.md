@@ -4,7 +4,7 @@ title: "Engine Rest Filter"
 description: "Register your own REST filter that is called for every REST call to the engine."
 ---
 
-Before implementing the plugin make sure that you have [setup your environment]({{< ref "/technical-guide/plugins/_index.md#setup-your-environment" >}}).
+Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
 
 This feature allows you to register your own filter that is called for every REST call to one of the configured process engines.
 For that, the Optimize plugin system provides the following interface:

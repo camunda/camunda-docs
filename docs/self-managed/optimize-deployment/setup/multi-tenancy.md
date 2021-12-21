@@ -53,5 +53,4 @@ Optimize users who have an `Optimize Application Authorization` on both engines 
 
 :::note Heads up!
 Once a `defaultTenant.id` is configured and data imported, you cannot change it anymore without doing a [full reimport](./../migration-update/instructions.md/#force-reimport-of-engine-data-in-optimize) as any changes to the configuration cannot be applied to already imported data records.
-{{< /note >}}
 :::

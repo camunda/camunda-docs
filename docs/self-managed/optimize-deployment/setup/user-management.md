@@ -4,13 +4,12 @@ title: "User Access Management"
 description: "Define which users have access to Optimize."
 ---
 
-{{< note title="Good to know!" class="info" >}}
+:::note Good to know!
 
 Providing Optimize access to a user just enables them to log in to Optimize. To be able
 to create reports the user also needs to have permission to access the engine data. To see
-how this can be done please refer to the [Authorization Management]({{< ref "/technical-guide/setup/authorization/_index.md" >}}) section.
-
-{{< /note >}}
+how this can be done please refer to the [Authorization Management](./authorization-management.md) section.
+:::
 
 You can use the credentials from the Camunda Platform users to access Optimize. However, for the users to gain access to Optimize, they need to be authorized. This is not done in Optimize itself, but needs to be configured in the Camunda Platform and can be achieved on different levels with different options. If you do not know how authorization in Camunda works, please have a look at the [authorization service documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/).
 

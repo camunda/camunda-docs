@@ -11,18 +11,10 @@ If you want to update Optimize by several versions, you cannot do that at once b
 | Update from | Recommended update path to 3.6.0 |
 | --- | --- |
 | 3.6 | You are on the latest version. |
-| 3.4-3.5 | 
-1. Rolling update to 3.5 
-2. 2. Rolling update from 3.5 to 3.6 |
-| 3.2 - 3.3 | 
-1. Rolling update to 3.3
-2. Rolling update from 3.3 to 3.4 |
-| 3.0 - 3.1 |
-1. Rolling update to 3.1
-2. Rolling update from 3.1 to 3.2 |
-| 2.0 - 2.7 |
-1. Rolling update to 2.7
-2. Rolling update from 2.7 to 3.0 |
+| 3.4-3.5 | 1. Rolling update to 3.5  <br /> 2. Rolling update from 3.5 to 3.6 |
+| 3.2 - 3.3 | 1. Rolling update to 3.3 <br /> 2. Rolling update from 3.3 to 3.4 |
+| 3.0 - 3.1 | 1. Rolling update to 3.1 <br /> 2. Rolling update from 3.1 to 3.2 |
+| 2.0 - 2.7 | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
 | 1.0 - 1.5 | No update possible. Use the latest version directly. | 
 
 # Migration Instructions
@@ -80,7 +72,7 @@ This approach requires you to manually execute the update script. You can perfor
 - Open up a terminal, change to the root directory of your **new** Optimize version and run the following command: `./upgrade/upgrade.sh` on Linux or `update/update.bat` on Windows
 - During the execution the executable will output a warning to ask you to back-up your Elasticsearch data. Type 'yes' to confirm that you have backed up the data.
 - Feel free to [file a support case](https://docs.camunda.org/enterprise/support/) if any errors occur during the migration process.
-- To get more verbose information about the update, you can adjust the logging level as it is described in the [configuration documentation]({{< ref "/technical-guide/setup/configuration/_index.md#logging" >}}).
+- To get more verbose information about the update, you can adjust the logging level as it is described in the [configuration documentation](./../setup/configuration.md#logging).
 
 ### 3.2 Automatic update execution (Optimize >3.2.0):
 

@@ -28,12 +28,12 @@ For more details on the configuration keys please refer to the [localization con
 
 Custom locales can be added by creating a locale file under `./config/localization/` and adding it to the `availableLocales` configuration.
 
-{{< note title="" class="warning" >}}
+:::note 
 Please note the following:
 
 Configuring a custom locale means you have to maintain it yourself and update it in the context of an Optimize Update.
 There is currently no changelog of new localization entries available and it is required that each localization file contains an entry for each key used by Optimize.
-{{< /note >}}
+::: 
 
 As an example, a custom localization can be created by making a copy of the `./config/localization/en.json` named `/config/localization/es.json` and adding it to the available locales in `./config/environment-config.yaml`
 

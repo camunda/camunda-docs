@@ -17,13 +17,13 @@ There are two possible setups where multiple process engines can be used:
 
 Please check which scenario corresponds to your setup because the configuration of multiple engines to Optimize is not always suited for the best import performance.
 
-{{< note title="Heads Up!" class="warning" >}}
+:::note Heads Up!
 There are two restrictions for the multiple engines feature:
 
 1. The process engines are assumed to have distinct process definitions, which means that one process definition (same key, tenant and version) is not deployed on two or more engines at the same time.
 Alternatively each engine could be configured with default tenant identifiers as described in the [One Tenant Per Engine Scenario](../multi-tenancy/#one-process-engine-per-tenant).
 2. The engines are assumed to have distinct tenant identifiers, which means one particular tenantId is not deployed on two or more engines at the same time.
-{{< /note >}}
+:::
 
 ## Multiple engines with distributed Databases
 
@@ -35,7 +35,7 @@ Now you are able to connect each engine to Optimize. The data will then automati
 
 {{< img src="./img/Multiple-Engine-Distributed-Database.png" title="Multiple Engines connected to Optimize, each having its own Database" >}}
 
-In order to set up the connections to the engines, you need to add the information to the [configuration file]({{< ref "/technical-guide/setup/configuration/_index.md#connection-to-camunda-bpm-platform" >}}). For the sake of simplicity, let's assume we have two microservices, `Payment` and `Inventory`, each having their own engine with its own database and processes. Both are accessible in the local network. The `Payment` engine has the port `8080` and the `Inventory` engine the port `1234`. Now an excerpt of the configuration could look as follows:
+In order to set up the connections to the engines, you need to add the information to the [configuration file](./configuration.md/#connection-to-camunda-bpm-platform). For the sake of simplicity, let's assume we have two microservices, `Payment` and `Inventory`, each having their own engine with its own database and processes. Both are accessible in the local network. The `Payment` engine has the port `8080` and the `Inventory` engine the port `1234`. Now an excerpt of the configuration could look as follows:
 
 ```yaml
 engines:
@@ -76,7 +76,7 @@ In general, tests have shown that Optmize puts a very low strain on the engine a
 # Authentication/Authorization in the multiple engine setup
 
 When you configure multiple engines in Optimize, each process engine can host different users with a different set of authorizations. If a user is logging in, Optimize will try to authenticate and authorize the user on each configured engine. In case you are not familiar with how 
-the authorization/authentication works for a single engine scenario, please checkout the [User Access Management]({{< ref "/technical-guide/setup/user-management/_index.md" >}}) and [Authorization Management]({{< ref "/technical-guide/setup/authorization/_index.md" >}}) documentation first.
+the authorization/authentication works for a single engine scenario, please checkout the [User Access Management](./user-management.md) and [Authorization Management](./authorization-management.md) documentation first.
 
 To determine if a user is allowed to log in and which resources they are allowed to access within the multiple engine scenario, Optimize uses the following algorithm:
 

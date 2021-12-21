@@ -4,8 +4,10 @@ title: "External Variable Ingestion"
 description: "The REST API to ingest external variable data into Optimize."
 ---
 
-{{< note title="Heads Up!" class="warning" >}} The external variable ingestion API is a beta feature and will be subject
-to future changes. {{< /note >}}
+:::note Heads Up!
+The external variable ingestion API is a beta feature and will be subject
+to future changes.
+:::
 
 # Purpose
 
@@ -60,23 +62,11 @@ POST `/api/ingestion/variable`
 # Request Headers
 
 The following request headers have to be provided with every variable ingestion request:
-<table class="table table-striped">
-  <tr>
-    <th>Header</th>
-    <th>Constraints</th>
-    <th>Value</th>
-  </tr>
-  <tr>
-    <td>Authorization</td>
-    <td>REQUIRED</td>
-    <td>See [Authorization](#authorization)</td>
-  </tr>
-  <tr>
-    <td>Content-Type</td>
-    <td>REQUIRED</td>
-    <td>`application/json`</td>
-  </tr>
-</table>
+
+| Header | Constraints | Value |
+| --- | --- | --- |
+| Authorization | REQUIRED | See [Authorization](#authorization). |
+| Content-Type | REQUIRED | `application/json` |
 
 # Request Body
 
@@ -146,26 +136,12 @@ This method returns no content.
 # Response Codes
 
 Possible HTTP Response Status codes:
-<table class="table table-striped">
-  <tr>
-    <th>Code</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>204</td>
-    <td>Request successful.</td>
-  </tr>
-  <tr>
-    <td>400</td>
-    <td>Returned if some of the properties in the request body are invalid or missing.</td>
-  </tr>
-  <tr>
-    <td>401</td>
-    <td>
-      Secret incorrect or missing. See [Authorization](#authorization) on how to authorize.
-    </td>
-  </tr>
-</table>
+
+|Code|Description|
+|--- |--- |
+|204|Request successful.|
+|400|Returned if some of the properties in the request body are invalid or missing.|
+|401|Secret incorrect or missing. See [Authorization](#authorization) on how to authorize.|
 
 # Example
 

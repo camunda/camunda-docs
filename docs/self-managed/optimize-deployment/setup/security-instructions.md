@@ -28,22 +28,22 @@ Optimize already comes with a myriad of settings and security mechanism by defau
 
 ## Disable HTTP
 
-For security reasons, we recommend using Optimize over HTTPS and disabling HTTP. You can disable HTTP by setting the http property in the container settings to an empty/null value. Consult the respective section in the [configuration guide]({{< ref "/technical-guide/setup/configuration/_index.md#container" >}}) for the more details.
+For security reasons, we recommend using Optimize over HTTPS and disabling HTTP. You can disable HTTP by setting the http property in the container settings to an empty/null value. Consult the respective section in the [configuration guide](./configuration.md/#container) for the more details.
 
 ## Fine tune Optimize Security Headers
 
 Over time, various client-side security mechanisms have been developed to protect web applications from various attacks. Some of these security mechanisms are only activated if the web application sends the corresponding HTTP headers in its server responses.
 
-Optimize adds several of theses headers which can be fine tuned in the [configuration]({{< ref "/technical-guide/setup/configuration/_index.md#security" >}}) to ensure appropriate security.
+Optimize adds several of theses headers which can be fine tuned in the [configuration](./configuration.md/#security) to ensure appropriate security.
 
 ## Authentication
 
-Authentication controls who can access Optimize. Read all about how to restrict the application access in the [user access management guide]({{< ref "/technical-guide/setup/user-management/_index.md" >}}).
+Authentication controls who can access Optimize. Read all about how to restrict the application access in the [user access management guide](./user-management.md).
 
 ## Authorization
 
-Authorization controls what data a user can access and change in Optimize once authenticated. Authentication is a pre-requisite to authorization. Read all about how to restrict the data access in the [authorization management guide]({{< ref "/technical-guide/setup/authorization/_index.md" >}}).
+Authorization controls what data a user can access and change in Optimize once authenticated. Authentication is a pre-requisite to authorization. Read all about how to restrict the data access in the [authorization management guide](./authorization-management.md).
 
 # Secure Elasticsearch
 
-Optimize stores its data in Elasticsearch, which is a search engine that acts as a document based datastore. In order to protect access to this data, Elasticsearch must be configured correctly. The documentation guide on [how to secure Elasticsearch]({{< ref "/technical-guide/setup/secure-elasticsearch/_index.md" >}}) provides a detailed description on how to restrict data access and secure the connection to Elasticsearch.
+Optimize stores its data in Elasticsearch, which is a search engine that acts as a document based datastore. In order to protect access to this data, Elasticsearch must be configured correctly. The documentation guide on [how to secure Elasticsearch](./secure-elasticsearch.md) provides a detailed description on how to restrict data access and secure the connection to Elasticsearch.

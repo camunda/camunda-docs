@@ -8,7 +8,7 @@ description: "Read about how to install Optimize."
 
 This document describes the installation process of the Camunda Optimize distribution, as well as various configuration possibilities available after initial installation.
 
-Before proceeding with the installation, please read the article about [supported environments]({{< ref "/technical-guide/supported-environments/_index.md" >}}).
+Before proceeding with the installation, please read the article about [supported environments](./../../../reference/supported-environments.md).
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ If you intend to run Optimize on your local machine, please make sure you have a
 
 The Optimize Demo distribution comes with an Elasticsearch instance. The supplied Elasticsearch server is not customized or tuned by Camunda in any manner. It is intended to make the process of trying out Optimize as easy as possible. The only requirement in addition to the demo distribution itself is a running engine (ideally on localhost).
 
-To install the demo distribution containing Elasticsearch, please download the archive with the latest version from the [download page](/enterprise/download/#camunda-optimize) and extract it to the desired folder. After that, start Optimize by running the script `optimize-demo.sh` on Linux and Mac
+To install the demo distribution containing Elasticsearch, please download the archive with the latest version from the [download page](https://docs.camunda.org/enterprise/download/#camunda-optimize) and extract it to the desired folder. After that, start Optimize by running the script `optimize-demo.sh` on Linux and Mac
 
 ```bash
 ./optimize-demo.sh
@@ -107,7 +107,7 @@ The most important environment variables you may have to configure are related t
 
 A complete sample can be found here: [Connect to remote Camunda Platform and Elasticsearch](#connect-to-remote-camunda-bpm-and-elasticsearch).
 
-Furthermore, there are also environment variables specific to the [Event Based Process](../event-based-processes) feature you may make use of:
+Furthermore, there are also environment variables specific to the [Event Based Process](./../../../components/optimize/userguide/additional-features/event-based-processes.md) feature you may make use of:
 
 - `OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED` determines whether this instance of Optimize should convert historical data to event data usable for Event Based Processes (default: `false`)
 - `OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS` an array of user ids that are authorized to administer Event Based Processes (default: `[]`)
@@ -148,37 +148,37 @@ In managed Docker container environments like [kubernetes](https://kubernetes.io
 
 You can start using Optimize right away by opening the following URL in your browser: [http://localhost:8090](http://localhost:8090)
 
-Then you can use the users from the Camunda Platform to login to Optimize. For details on how to configure the user access, please consult the [user access management]({{< ref "/technical-guide/setup/user-management/_index.md" >}}) section.
+Then you can use the users from the Camunda Platform to login to Optimize. For details on how to configure the user access, please consult the [user access management](./user-management.md) section.
 
 Before you can fully utilize all features of Optimize, you need to wait until all data has been imported. A green circle in the footer indicates when the import is finished.
 
 ## Health - Readiness
 
-To check whether Optimize is ready to use, you can make use of the [health-readiness endpoint](../../rest-api/health), exposed as part of [Optimize's REST API](../../rest-api).  
+To check whether Optimize is ready to use, you can make use of the [health-readiness endpoint](./../rest-api/health-readiness.md), exposed as part of Optimize's REST API.  
 
 ## Configuration
 
 All distributions of Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements. To do that, have a look into the folder named `environment`. There are two files, one called `environment-config.yaml` with values that override the default Optimize properties and another called `environment-logback.xml`, which sets the logging configuration.
 
-You can see all supported values and read about logging configuration [here]({{< ref "/technical-guide/setup/configuration/_index.md" >}}).
+You can see all supported values and read about logging configuration [here](./configuration.md).
 
 ### Optimize Web Container Configuration
 
-Please refer to the [configuration section on container settings]({{< ref "/technical-guide/setup/configuration/_index.md#container" >}}) for more information on how to adjust the Optimize Web Container configuration.
+Please refer to the [configuration section on container settings](./configuration.md) for more information on how to adjust the Optimize Web Container configuration.
 
 ### Elasticsearch configuration
 
-You can customize the [Elasticsearch connection settings]({{< ref "/technical-guide/setup/configuration/_index.md#connection-settings" >}}) as well as the [index settings]({{< ref "/technical-guide/setup/configuration/_index.md#index-settings" >}}).
+You can customize the [Elasticsearch connection settings](./configuration.md/#connection-settings) as well as the [index settings](./configuration.md/#index-settings).
 
 ### Camunda Platform configuration
 
-To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, please refer to the [Camunda Platform configuration section]({{< ref "/technical-guide/setup/configuration/_index.md#connection-to-camunda-bpm-platform" >}}).
+To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, please refer to the [Camunda Platform configuration section](./configuration.md/#connection-to-camunda-bpm-platform).
 
 ## Import of the data set
 
 By default, Optimize comes without any data available. To start using all the features of the system, you have to perform a data import from the Camunda Platform. This process is triggered automatically when starting Optimize.
 
-If you are interested in the details of the import, please refer to the dedicated [import overview section]({{< ref "/technical-guide/optimize-explained/import/import-overview.md" >}}).
+If you are interested in the details of the import, please refer to the dedicated [import overview section](./../optimize-explained/import-guide.md).
 
 # Hardware Resources
 
@@ -210,11 +210,11 @@ In this case we recommend that you test the import with realistic data and adjus
 
 ## Example Scenarios
 
-{{< note title="Heads Up!" class="warning" >}}
+:::note Heads Up!
 Exact hardware requirements highly depend on a number of factors such as: size of the data,
 network speed, current load on the engine and its underlying database. Therefore, we cannot
 guarantee that the following requirements will satisfy every use case.
-{{< /note >}}
+:::
 
 #### 20 Definitions with less than 50k Instances per Definition 
 

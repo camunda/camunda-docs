@@ -433,6 +433,12 @@ module.exports = {
         "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
           ],
         },
+        {
+          "Optimize Explained": [
+            "self-managed/optimize-deployment/optimize-explained/engine-data-deletion",
+            "self-managed/optimize-deployment/optimize-explained/import-guide",
+          ],
+        },
         
         
       ],

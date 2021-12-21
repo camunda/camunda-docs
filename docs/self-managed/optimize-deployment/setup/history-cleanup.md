@@ -6,12 +6,12 @@ description: "Make sure that old data is automatically removed from Optimize."
 
 In order to satisfy data protection laws or just for general storage management purposes Optimize provides an automated cleanup functionality.
 
-{{< note title="" class="warning" >}}
+:::note
 Please note the following:
 
 - By default the history cleanup is disabled in Optimize. Before enabling it you should consider the type of cleanup and time to live period that fits to your needs. Otherwise historic data intended for analysis might get lost irreversibly.
 - The default [engine history cleanup](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/#history-cleanup) works differently than the one in Optimize due to the possible cleanup strategies. The current implementation in Optimize is equivalent to the [end time strategy](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/#end-time-based-strategy) of the Engine.
-{{< /note >}}
+:::
 
 ## Setup
 
@@ -89,7 +89,7 @@ historyCleanup:
 ```
 
 {{< note title="" class="info" >}}
-Please note that the ingested event cleanup does not cascade down to potentially existing [Event Based Processes](../event-based-processes/) that may contain data originating from ingested events. To make sure data of ingested events is also removed from Event Based Processes, you need to enable the [Process Data Cleanup](#process-data-cleanup) as well.
+Please note that the ingested event cleanup does not cascade down to potentially existing [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md) that may contain data originating from ingested events. To make sure data of ingested events is also removed from Event Based Processes, you need to enable the [Process Data Cleanup](#process-data-cleanup) as well.
 {{< /note >}}
 
 ## Example

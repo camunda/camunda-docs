@@ -55,9 +55,9 @@ and their default values [here](service-config.yaml).
 
 In the following section you will find descriptions and default values of the configuration fields with their respective YAML path.
 
-{{< note title="Heads Up!" class="info" >}}
+:::note Heads Up
 For changes in the configuration to take effect, you need to restart Optimize!
-{{< /note >}}
+:::
 
 ## Java System Properties & OS Environment variable placeholders
 
@@ -132,16 +132,11 @@ These values control mechanisms of Optimize related security, e.g. security head
 |  |
 | security.auth.token.lifeMin                      | 60              | Optimize uses token-based authentication to keep track of which users are logged in. Define the lifetime of the token in minutes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | security.auth.token.secret                       | null            | Optional secret used to sign authentication tokens, it's recommended to use at least a 64 character secret. If set to `null` a random secret will be generated with each startup of Optimize.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| security.auth.superUserIds                       | []            | List of user IDs that are granted full permission to all collections, reports & dashboards. Note: For reports these users are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](https://docs.camunda.org/optimize/latest/technical-guide/setup/authorization).                                                                                                                                                                                                                                                                                                            |
-| security.auth.superGroupIds                      | []            | List of group IDs that are granted full permission to all collections, reports & dashboards. All members of the groups specified will have superuser permissions in Optimize. Note: For reports these groups are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](https://docs.camunda.org/optimize/latest/technical-guide/setup/authorization).                                                                                                                                                                                                                         |
+| security.auth.superUserIds                       | [ ]            | List of user IDs that are granted full permission to all collections, reports & dashboards. <br /><br /> Note: For reports these users are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](./authorization-management.md).                                                                                                                                                                                                                                                                                                            |
+| security.auth.superGroupIds                      | [ ]            | List of group IDs that are granted full permission to all collections, reports & dashboards. All members of the groups specified will have superuser permissions in Optimize. <br /><br />Note: For reports these groups are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](./authorization-management.md).                                                                                                                                                                                                                         |
 | security.responseHeaders.HSTS.max-age            | 31536000        | HTTP Strict Transport Security (HSTS) is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking. This field defines the time, in seconds, that the browser should remember that this site is only to be accessed using HTTPS. If you set the number to a negative value no HSTS header is sent.                                                                                                                                                                                                                                                                                                               |
 | security.responseHeaders.HSTS.includeSubDomains  | true            | HTTP Strict Transport Security (HSTS) is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking. If this optional parameter is specified, this rule applies to all of the site’s subdomains as well.                                                                                                                                                                                                                                                                                                                                                                                                          |
-| security.responseHeaders.X-XSS-Protection        | 1; mode=block   | This header enables the cross-site scripting (XSS) filter in your browser. Can have one of the following options:
-
-*   `0`: Filter disabled.
-*   `1`: Filter enabled. If a cross-site scripting attack is detected, in order to stop the attack, the browser will sanitize the page.
-*   `1; mode=block`: Filter enabled. Rather than sanitize the page, when a XSS attack is detected, the browser will prevent rendering of the page.
-*   `1; report=http://[YOURDOMAIN]/your_report_URI`: Filter enabled. The browser will sanitize the page and report the violation. This is a Chromium function utilizing CSP violation reports to send details to a URI of your choice. |
+| security.responseHeaders.X-XSS-Protection        | 1; mode=block   | This header enables the cross-site scripting (XSS) filter in your browser. Can have one of the following options:<ul><li>   `0`: Filter disabled. </li><li>    `1`: Filter enabled. If a cross-site scripting attack is detected, in order to stop the attack, the browser will sanitize the page. </li><li>    `1; mode=block`: Filter enabled. Rather than sanitize the page, when a XSS attack is detected, the browser will prevent rendering of the page.</li><li>    `1; report=http://[YOURDOMAIN]/your_report_URI`: Filter enabled. The browser will sanitize the page and report the violation. This is a Chromium function utilizing CSP violation reports to send details to a URI of your choice.</li></ul> |
 | security.responseHeaders.X-Content-Type-Options  | true            | Setting this header will prevent the browser from interpreting files as a different MIME type to what is specified in the Content-Type HTTP header (e.g. treating text/plain as text/css).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | security.responseHeaders.Content-Security-Policy | base-uri 'self' | A Content Security Policy (CSP) has significant impact on the way browsers render pages. By default Optimize uses the base-uri directive which restricts the URLs that can be used to the Optimize pages. Find more details in [Mozilla's Content Security Policy Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy).                                                                                                                                                                                                                                                                                                      |
 
@@ -151,19 +146,13 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|container.host|localhost|A host name or IP address to identify a specific network interface on
-      which to listen.|
-|container.ports.http|8090|A port number that will be used by Optimize to process HTTP connections.
-      If set to null, ~ or left empty, HTTP connections won't be accepted.|
-|container.ports.https|8091|A port number that will be used by Optimize to process
-      secure HTTPS connections.|
-|container.keystore.location|keystore.jks|HTTPS requires an SSL Certificate. When you generate an SSL Certificate,
-      you are creating a keystore file and a keystore password for use when the
-      browser interface connects. This field specifies the location of this keystore file.|
+|container.host|localhost|A host name or IP address to identify a specific network interface on which to listen.|
+|container.ports.http|8090|A port number that will be used by Optimize to process HTTP connections. If set to null, ~ or left empty, HTTP connections won't be accepted.|
+|container.ports.https|8091|A port number that will be used by Optimize to process secure HTTPS connections.|
+|container.keystore.location|keystore.jks|HTTPS requires an SSL Certificate. When you generate an SSL Certificate, you are creating a keystore file and a keystore password for use when the browser interface connects. This field specifies the location of this keystore file.|
 |container.keystore.password|optimize|Password of keystore file.|
 |container.status.connections.max|10|Maximum number of web socket connections accepted for status report.|
-|container.accessUrl|null|Optional URL to access Optimize (used for links to Optimize in e.g. alert emails).
-       If no value specified the container host and port are used instead.|
+|container.accessUrl|null|Optional URL to access Optimize (used for links to Optimize in e.g. alert emails). If no value specified the container host and port are used instead.|
 
 ## Connection to Camunda Platform
 
@@ -175,31 +164,15 @@ with it and represented by `${engineAlias}`.
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
 |engines.${engineAlias}.name|default|The process engine's name on the platform, this is the unique engine identifier on the platforms REST API.|
-|engines.${engineAlias}.defaultTenant.id|null|A default tenantID to associate all imported data with if there is no tenant configured in the engine itself.
-      This property is only relevant in the context of a `One Process Engine Per Tenant` tenancy.
-      For details consult the Multi-Tenancy documentation.|
+|engines.${engineAlias}.defaultTenant.id|null|A default tenantID to associate all imported data with if there is no tenant configured in the engine itself. This property is only relevant in the context of a `One Process Engine Per Tenant` tenancy. For details consult the Multi-Tenancy documentation.|
 |engines.${engineAlias}.defaultTenant.name|null|The name used for this default tenant when displayed in the UI.|
 |engines.${engineAlias}.rest|http://localhost:8080/engine-rest|A base URL that will be used for connections to the Camunda Engine REST API.|
 |engines.${engineAlias}.importEnabled|true|Determines whether this instance of Optimize should import definition & historical data from this engine.|
 |engines.${engineAlias}.eventImportEnabled|false|Determines whether this instance of Optimize should convert historical data to event data usable for event based processes.|
-|engines.${engineAlias}.authentication.enabled|false|Toggles basic authentication on or off. When enabling basic
-      authentication, please be aware that you also need to adjust the values
-      of the user and password.|
-|engines.${engineAlias}.authentication.user||When basic authentication is enabled, this user is used to authenticate
-      against the engine.
-
-      Note: when enabled, it is required that the user has
-      
-        READ_HISTORY permission on the Process and Decision Definition resources
-        READ permission on *all* ("*")Authorization, Group, User, Tenant, Deployment & User Operation Log resources
-       
-       to enable users to log in and Optimize to import the engine data.|
-|engines.${engineAlias}.authentication.password||When basic authentication is enabled, this password is used to
-      authenticate against the engine.|
-|engines.${engineAlias}.webapps.endpoint|http://localhost:8080/camunda|Defines the endpoint where the Camunda webapps are found.
-  This allows Optimize to directly link
-      to the other Camunda Web Applications, e.g. to jump from
-      Optimize directly to a dedicated process instance in Cockpit|
+|engines.${engineAlias}.authentication.enabled|false|Toggles basic authentication on or off. When enabling basic authentication, please be aware that you also need to adjust the values of the user and password.|
+|engines.${engineAlias}.authentication.user||When basic authentication is enabled, this user is used to authenticate against the engine.<br /><br /> Note: when enabled, it is required that the user has <ul><li>READ_HISTORY permission on the Process and Decision Definition resources</li> <li>READ permission on *all* ("*")Authorization, Group, User, Tenant, Deployment & User Operation Log resources</li></ul> to enable users to log in and Optimize to import the engine data.|
+|engines.${engineAlias}.authentication.password||When basic authentication is enabled, this password is used to authenticate against the engine.|
+|engines.${engineAlias}.webapps.endpoint|http://localhost:8080/camunda|Defines the endpoint where the Camunda webapps are found. This allows Optimize to directly link to the other Camunda Web Applications, e.g. to jump from Optimize directly to a dedicated process instance in Cockpit|
 |engines.${engineAlias}.webapps.enabled|true|Enables/disables linking to other Camunda Web Applications|
 
 ## Engine Common Settings
@@ -214,11 +187,10 @@ REST API endpoint locations, timeouts, etc.
 |import.data.activity-instance.maxPageSize|10000|Determines the page size for historic activity instance fetching.|
 |import.data.incident.maxPageSize|10000|Determines the page size for historic incident fetching.|
 |import.data.process-definition-xml.maxPageSize|2|Determines the page size for process definition xml model fetching. Should be a low value, as large models will lead to memory or timeout problems.|
-|import.data.process-definition.maxPageSize|10000|Determines the page size for process definition entities
-      fetching.|
+|import.data.process-definition.maxPageSize|10000|Determines the page size for process definition entities fetching.|
 |import.data.process-instance.maxPageSize|10000|Determines the page size for historic decision instance fetching.|
 |import.data.variable.maxPageSize|10000|Determines the page size for historic variable instance fetching.|
-|import.data.variable.includeObjectVariableValue|true|Controls whether Optimize fetches the serialized value of object variables from the Camunda Runtime REST API. By default this is active for backwards compatibility. If no variable plugin to handle object variables is installed, it can be turned off to reduce the overhead of the variable import. Note: Disabling the object variable value transmission is only effective with Camunda Platform 7.13.11+, 7.14.5+ and 7.15.0+.|
+|import.data.variable.includeObjectVariableValue|true|Controls whether Optimize fetches the serialized value of object variables from the Camunda Runtime REST API. By default this is active for backwards compatibility. If no variable plugin to handle object variables is installed, it can be turned off to reduce the overhead of the variable import. <br /><br />Note: Disabling the object variable value transmission is only effective with Camunda Platform 7.13.11+, 7.14.5+ and 7.15.0+.|
 |import.data.user-task-instance.maxPageSize|10000|Determines the page size for historic User Task instance fetching.|
 |import.data.identity-link-log.maxPageSize|10000|Determines the page size for historic identity link log fetching.|
 |import.data.decision-definition-xml.maxPageSize|2|Determines the page size for decision definition xml model fetching. Should be a low value, as large models will lead to memory or timeout problems.|
@@ -230,7 +202,7 @@ REST API endpoint locations, timeouts, etc.
 |import.data.dmn.enabled|true|Determines if the DMN/decision data, such as decision definitions and instances, should be imported.|
 |import.data.user-task-worker.enabled|true|Determines if the User Task worker data, such as assignee or candidate group of a User Task, should be imported.|
 |import.data.user-task-worker.metadata.includeUserMetaData|true|Determines whether Optimize imports and displays assignee user metadata, otherwise only the user id is shown.|
-|import.data.user-task-worker.metadata.cronTrigger|0 */3 * * *|Cron expression for when to fully refresh the internal metadata cache, it defaults to every third hour. Otherwise deleted assignees/candidateGroups or metadata changes are not reflected in Optimize. You can either use the default Cron (5 fields) or the Spring Cron (6 fields) expression format here. For details on the format please refer to: Cron Expression Description Spring Cron Expression Documentation|
+|import.data.user-task-worker.metadata.cronTrigger|`0 */3 * * *`|Cron expression for when to fully refresh the internal metadata cache, it defaults to every third hour. Otherwise deleted assignees/candidateGroups or metadata changes are not reflected in Optimize. You can either use the default Cron (5 fields) or the Spring Cron (6 fields) expression format here. For details on the format please refer to: Cron Expression Description Spring Cron Expression Documentation|
 |import.data.user-task-worker.metadata.maxPageSize|10000|The max page size when multiple users or groups are iterated during the metadata refresh.|
 |import.data.user-task-worker.metadata.maxEntryLimit|100000|The entry limit of the cache that holds the metadata, if you need more entries you can increase that limit. When increasing the limit, keep in mind to account for that by increasing the JVM heap memory as well. Please refer to the "Adjust Optimize heap size" documentation.|
 |import.skipDataAfterNestedDocLimitReached|false|Some data can no longer be imported to a given document if its number of nested documents has reached the configured limit. Enable this setting to skip this data during import if the nested document limit has been reached.|
@@ -243,7 +215,7 @@ REST API endpoint locations, timeouts, etc.
 |import.importIndexStorageIntervalInSec|10|States how often the import index should be stored to Elasticsearch.|
 |import.currentTimeBackoffMilliseconds|300000|This is the time interval the import backs off from the current tip of the time during the ongoing import cycle. This ensures that potentially missed concurrent writes in the engine are reread going back by the amount of this time interval.|
 |import.identitySync.includeUserMetaData|true|Whether to include metaData (firstName, lastName, email) when synchronizing users. If disabled only user IDs will be shown on user search and in collection permissions.|
-|import.identitySync.cronTrigger|0 */2 * * * |Cron expression for when the identity sync should run, defaults to every second hour. You can either use the default Cron (5 fields) or the Spring Cron (6 fields) expression format here. For details on the format please refer to: Cron Expression Description Spring Cron Expression Documentation|
+|import.identitySync.cronTrigger|`0 */2 * * *` |Cron expression for when the identity sync should run, defaults to every second hour. You can either use the default Cron (5 fields) or the Spring Cron (6 fields) expression format here.<br /><br /> For details on the format please refer to: <ul><li>[Cron Expression Description](https://en.wikipedia.org/wiki/Cron)</li><li> [Spring Cron Expression Documentation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/support/CronSequenceGenerator.html)</li></ul>|
 |import.identitySync.maxPageSize|10000|The max page size when multiple users or groups are iterated during the import.|
 |import.identitySync.maxEntryLimit|100000|The entry limit of the user/group search cache. When increasing the limit, keep in mind to account for this by increasing the JVM heap memory as well. Please refer to the "Adjust Optimize heap size" documentation on how to configure the heap size.|
 
@@ -277,9 +249,9 @@ if one node fails, Optimize is still able to talk to the cluster.
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|es.settings.index.prefix|optimize|The prefix prepended to all Optimize index and alias names. Custom values allow to operate multiple isolated Optimize instances on one Elasticsearch cluster. NOTE: Changing this after Optimize was already run before will create new empty indexes.|
+|es.settings.index.prefix|optimize|The prefix prepended to all Optimize index and alias names. Custom values allow to operate multiple isolated Optimize instances on one Elasticsearch cluster. <br /><br />NOTE: Changing this after Optimize was already run before will create new empty indexes.|
 |es.settings.index.number_of_replicas|1|How often data should be replicated to handle node failures.|
-|es.settings.index.number_of_shards|1|How many shards should be used in the cluster for process instance and decision instance indices. All other indices will be made up of a single shard. Note: this property only applies the first time Optimize is started and the schema/mapping is deployed on Elasticsearch. If you want this property to take effect again, you need to delete all indices (and with that all data) and restart Optimize.|
+|es.settings.index.number_of_shards|1|How many shards should be used in the cluster for process instance and decision instance indices. All other indices will be made up of a single shard. <br /><br />Note: this property only applies the first time Optimize is started and the schema/mapping is deployed on Elasticsearch. If you want this property to take effect again, you need to delete all indices (and with that all data) and restart Optimize.|
 |es.settings.index.refresh_interval|2s|How long Elasticsearch waits until the documents are available for search. A positive value defines the duration in seconds. A value of -1 means that a refresh needs to be done manually.|
 |es.settings.index.nested_documents_limit|10000|Optimize uses nested documents to store list information such as activities or variables belonging to a process instance. This setting defines the maximum number of activities/variables/incidents that a single process instance can contain. This limit helps to prevent out of memory errors and should be used with care. For more information, please refer to the Elasticsearch documentation on this topic.|
 
@@ -294,7 +266,7 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 |es.security.password||The basic authentication (x-pack) password.|
 |es.security.ssl.enabled|false|Used to enable or disable TLS/SSL for the HTTP connection.|
 |es.security.ssl.certificate||The path to a PEM encoded file containing the certificate (or certificate chain) that will be presented to clients when they connect.|
-|es.security.ssl.certificate_authorities|[]|A list of paths to PEM encoded CA certificate files that should be trusted, e.g. ['/path/to/ca.crt']. Note: if you are using a public CA that is already trusted by the Java runtime, you do not need to set the certificate_authorities.|
+|es.security.ssl.certificate_authorities|[ ]|A list of paths to PEM encoded CA certificate files that should be trusted, e.g. ['/path/to/ca.crt']. <br /><br />Note: if you are using a public CA that is already trusted by the Java runtime, you do not need to set the certificate_authorities.|
 
 ## Email
 
@@ -329,7 +301,7 @@ Settings for automatic cleanup of historic process/decision instances based on t
 
 | YAML Path | Default Value | Description |
 | --- | --- | --- |
-| historyCleanup.cronTrigger | '0 1 * * *' | Cron expression to schedule when the cleanup should be executed, defaults to 01:00 A.M. As the cleanup can cause considerable load on the underlying Elasticsearch database it is recommended to schedule it outside of office hours. You can either use the default Cron (5 fields) or the Spring Cron (6 fields) expression format here.  For details on the format please refer to:* [Cron Expression Description](https://en.wikipedia.org/wiki/Cron) * [Spring Cron Expression Documentation](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/support/CronSequenceGenerator.html) |
+| historyCleanup.cronTrigger | `'0 1 * * *'` | Cron expression to schedule when the cleanup should be executed, defaults to 01:00 A.M. As the cleanup can cause considerable load on the underlying Elasticsearch database it is recommended to schedule it outside of office hours. You can either use the default Cron (5 fields) or the Spring Cron (6 fields) expression format here.  For details on the format please refer to: [Cron Expression Description](https://en.wikipedia.org/wiki/Cron) or [Spring Cron Expression Documentation](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/scheduling/support/CronSequenceGenerator.html) |
 | historyCleanup.ttl | 'P2Y' | Global time to live (ttl) period for process/decision/event data. The relevant property differs between entities. For process data, it's the `endTime` of the process instance. For decision data, it's the `evaluationTime` and for ingested events it's the `time` field. The format of the string is ISO_8601 duration. The default value is 2 years.  For details on the notation refer to: [https://en.wikipedia.org/wiki/ISO_8601#Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) Note: The time component of the ISO_8601 duration is not supported. Only years (Y), months (M) and days (D) are. |
 | historyCleanup.processDataCleanup.enabled | false | A switch to activate the history cleanup of process data. \[true/false\] |
 | historyCleanup.processDataCleanup.cleanupMode | 'all' | Global type of the cleanup to perform for process instances, possible values:  'all' - delete everything related and including the process instance that passed the defined ttl  'variables' - only delete variables of a process instance  Note: This doesn't affect the decision instance cleanup which always deletes the whole instance. |
@@ -348,7 +320,7 @@ Define the languages that can be used by Optimize.
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|localization.availableLocales|['en','de']|All locales available in the Optimize Frontend. Note: for languages other than the default there must be a `<localeCode>.json` file available under ./config/localization.|
+|localization.availableLocales|['en','de']|All locales available in the Optimize Frontend. <br /><br />Note: for languages other than the default there must be a `<localeCode>.json` file available under ./config/localization.|
 |localization.fallbackLocale|'en'|The fallback locale used if there is a locale requested that is not available in availableLocales. The fallbackLocale is required to be present in localization.availableLocales.|
 
 ## UI Configuration
@@ -368,8 +340,8 @@ Configuration of the Optimize event based process feature.
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|eventBasedProcess.authorizedUserIds|[]|A list of userIds that are authorized to manage (Create, Update, Publish & Delete) event based processes.|
-|eventBasedProcess.authorizedGroupIds|[]|A list of groupIds that are authorized to manage (Create, Update, Publish & Delete) event based processes.|
+|eventBasedProcess.authorizedUserIds|[ ]|A list of userIds that are authorized to manage (Create, Update, Publish & Delete) event based processes.|
+|eventBasedProcess.authorizedGroupIds|[ ]|A list of groupIds that are authorized to manage (Create, Update, Publish & Delete) event based processes.|
 |eventBasedProcess.eventImport.enabled|false|Determines whether this Optimize instance performs event based process instance import.|
 |eventBasedProcess.eventImport.maxPageSize|5000|The batch size of events being correlated to process instances of event based processes.|
 |eventBasedProcess.eventIndexRollover.scheduleIntervalInMinutes|10|The interval in minutes at which to check whether the conditions for a rollover of eligible indices are met, triggering one if required. This value should be greater than 0.|
@@ -377,7 +349,7 @@ Configuration of the Optimize event based process feature.
 
 ## Event Ingestion REST API Configuration
 
-Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-ingestion) for [Event Based Processes](../event-based-processes).
+Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-ingestion) for [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md).
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
@@ -404,7 +376,7 @@ Configuration of initial telemetry settings.
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|telemetry.initializeTelemetry|false|Decides whether telemetry is initially enabled or disabled when Optimize starts. Thereafter, telemetry can be turned on and off in the UI by superusers. If enabled, information about the setup and usage of the Optimize is sent to remote Camunda servers for the sake of analytical evaluation. When enabled, the following information is sent every 24 hours: Optimize version, License Key, Optimize installation ID, Elasticsearch version. Legal note: Before you install Camunda Optimize version >= 3.2.0 or activate the telemetric functionality, please make sure that you are authorized to take this step, and that the installation or activation of the telemetric functionality is not in conflict with any internal company policies, compliance guidelines, any contractual or other provisions or obligations of your company. Camunda cannot be held responsible in the event of unauthorized installation or activation of this function.|
+|telemetry.initializeTelemetry|false|Decides whether telemetry is initially enabled or disabled when Optimize starts. Thereafter, telemetry can be turned on and off in the UI by superusers. If enabled, information about the setup and usage of the Optimize is sent to remote Camunda servers for the sake of analytical evaluation. When enabled, the following information is sent every 24 hours: Optimize version, License Key, Optimize installation ID, Elasticsearch version. <br /><br />Legal note: Before you install Camunda Optimize version >= 3.2.0 or activate the telemetric functionality, please make sure that you are authorized to take this step, and that the installation or activation of the telemetric functionality is not in conflict with any internal company policies, compliance guidelines, any contractual or other provisions or obligations of your company. Camunda cannot be held responsible in the event of unauthorized installation or activation of this function.|
 
 ## Other
 
@@ -420,6 +392,6 @@ Settings of plugin subsystem serialization format, variable import, Camunda endp
 | plugin.decisionOutputImport.basePackages |     | Look in the given base package list for Decision output import adaption plugins. If empty, the import is not influenced. |
 | plugin.elasticsearchCustomHeader.basePackages |     | Look in the given base package list for Elasticsearch custom header plugins. If empty, Elasticsearch requests are not influenced. |
 | serialization.engineDateFormat | yyyy-MM-dd'T'HH:mm:ss.SSSZ | Define a custom date format that should be used (should be the same as in the engine). |
-| export.csv.limit | 1000 | Maximum number of records returned by CSV export. Note: Increasing this value comes at a memory cost for the Optimize application that varies based on the actual data. As a rough guideline, an export of a 50000 raw data report records containing 8 variables on each instance can cause temporary heap memory peaks of up to ~200MB with the actual CSV file having a size of ~20MB. Please adjust the heap memory accordingly, see [Adjust Optimize heap size](../installation/#adjust-optimize-heap-size) on how to do that. |
+| export.csv.limit | 1000 | Maximum number of records returned by CSV export.<br /><br /> Note: Increasing this value comes at a memory cost for the Optimize application that varies based on the actual data. As a rough guideline, an export of a 50000 raw data report records containing 8 variables on each instance can cause temporary heap memory peaks of up to ~200MB with the actual CSV file having a size of ~20MB. Please adjust the heap memory accordingly, see [Adjust Optimize heap size](../installation/#adjust-optimize-heap-size) on how to do that. |
 | export.csv.delimiter | ,   | The delimiter used for the CSV export. The value defaults to a comma, however other common CSV delimiters such as semicolons (";") and tabs ("\\t") can also be used. |
 | sharing.enabled | true | Enable/disable the possibility to share reports and dashboards. |

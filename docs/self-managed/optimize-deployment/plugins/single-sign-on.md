@@ -4,7 +4,7 @@ title: "Single Sign On"
 description: "Register your own hook into the Optimize authentication system such that you can integrate Optimize with your single sign on system."
 ---
 
-Before implementing the plugin make sure that you have [setup your environment]({{< ref "/technical-guide/plugins/_index.md#setup-your-environment" >}}).
+Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
 
 This feature allows you to register your own hook into the Optimize authentication system such that you can
 integrate Optimize with your single sign on system. This allows you to skip the log in via the Optimize interface.

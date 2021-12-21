@@ -6,7 +6,7 @@ description: "The REST API to ingest external events into Optimize."
 
 # Purpose
 
-The Event Ingestion REST API serves the purpose to ingest business process related event data from any third-party system to Camunda Optimize. These events can then be correlated into an [Event Based Process](../../../user-guide/event-based-processes/)  in Optimize to get business insights into business processes that are not yet fully modeled nor automated using the Camunda Platform.
+The Event Ingestion REST API serves the purpose to ingest business process related event data from any third-party system to Camunda Optimize. These events can then be correlated into an [Event Based Process](./../../../components/optimize/userguide/additional-features/event-based-processes.md)  in Optimize to get business insights into business processes that are not yet fully modeled nor automated using the Camunda Platform.
 
 # Functionality
 
@@ -71,32 +71,28 @@ The following request headers have to be provided with every ingest request:
 | [source](https://github.com/cloudevents/spec/blob/v1.0/spec.md#source-1) | String | REQUIRED | Identifies the context in which an event happened, see [CloudEvents - Version 1.0 - source](https://github.com/cloudevents/spec/blob/v1.0/spec.md#source-1).A use-case could be if you have conflicting types across different sources, e.g. a `type:OrderProcessed` originating from both `order-service` and `shipping-service`. In this case the `source` field provides means to clearly separate between the origins of a particular event. Note: The triplet of `type`, `source` and `group` will be used as a unique identifier for classes of events. |
 | [type](https://github.com/cloudevents/spec/blob/v1.0/spec.md#type) | String | REQUIRED | This attribute contains a value describing the type of event related to the originating occurrence, see [CloudEvents - Version 1.0 - type](https://github.com/cloudevents/spec/blob/v1.0/spec.md#type). Note: The triplet of `type`, `source` and `group` will be used as a unique identifier for classes of events. The value `camunda` cannot be used for this field. | 
 | [time](https://github.com/cloudevents/spec/blob/v1.0/spec.md#type) | [Timestamp](https://github.com/cloudevents/spec/blob/v1.0/spec.md#type-system) | OPTIONAL | Timestamp of when the occurrence happened, see [CloudEvents - Version 1.0 - time](https://github.com/cloudevents/spec/blob/v1.0/spec.md#time). String encoding: [RFC 3339](https://tools.ietf.org/html/rfc3339). If not present a default value of the time the event was received will be created. |
-| [data](https://github.com/cloudevents/spec/blob/v1.0/spec.md#event-data) | Object | OPTIONAL | Event payload data that is part of the event, see [CloudEvents - Version 1.0 - Event Data](https://github.com/cloudevents/spec/blob/v1.0/spec.md#event-data). This CloudEvents Consumer API only accepts data encoded as `application/json`, the optional attribute [CloudEvents - Version 1.0 - datacontenttype](https://github.com/cloudevents/spec/blob/v1.0/spec.md#datacontenttype) is thus not required to be provided by the producer. Furthermore there are no schema restrictions on the `data` attribute and thus the attribute [CloudEvents - Version 1.0 - dataschema](https://github.com/cloudevents/spec/blob/v1.0/spec.md#datacontenttype) is also not required to be provided. Producer may provide any valid JSON object but only simple properties of that object will get converted to variables of a process instances of an [Event Based Process](../../setup/event-based-processes) instance later on.
-      The following is an example of a valid simple properties `data` value. Each of those properties would be available as a variable in any [Event Based Process](../../setup/event-based-processes) where an event containing this as `data` was mapped:
-      ```
-          {
-            "reviewSuccessful": true,
-            "amount": 10.5,
-            "customerId": "lovelyCustomer1"
-          }
-      ```
-      Nested objects, such as `customer` in this example, would not be available as a variable in Event Based Processes where an event containing this as `data` value was mapped:
-      ```
-          {
-            "customer": {
-            "firstName":"John",
-            "lasTName":"Doe"
-            }
-          }
-      ``` |
-| group | String | OPTIONAL | This is an OPTIONAL [CloudEvents Extension Context Attribute](https://github.com/cloudevents/spec/blob/v1.0/spec.md#extension-context-attributes) that is specific to this API.
-      A group identifier that may allow to easier identify a group of related events for a user at the stage of mapping events to a process model.
-      An example could be a domain of events that are most likely related to each other, e.g. `billing`.
-      When this field is provided, it will be used to allow adding events that belongs to a group to the [mapping table](../../../user-guide/event-based-processes/#external-events). 
-      Optimize handles groups case-sensitively.
-      Note: The triplet of `type`, `source` and `group` will be used as a unique identifier for classes of events. |
-| traceid | String | REQUIRED | This is a REQUIRED [CloudEvents Extension Context Attribute](https://github.com/cloudevents/spec/blob/v1.0/spec.md#extension-context-attributes) that is specific to this API. A traceid is a correlation key that relates multiple events to a single business transaction or process instance in BPMN terms.
-      Events with the same traceId will get correlated into one process instance of an Event Based Process. | 
+| [data](https://github.com/cloudevents/spec/blob/v1.0/spec.md#event-data) | Object | OPTIONAL | Event payload data that is part of the event, see [CloudEvents - Version 1.0 - Event Data](https://github.com/cloudevents/spec/blob/v1.0/spec.md#event-data). This CloudEvents Consumer API only accepts data encoded as `application/json`, the optional attribute [CloudEvents - Version 1.0 - datacontenttype](https://github.com/cloudevents/spec/blob/v1.0/spec.md#datacontenttype) is thus not required to be provided by the producer. Furthermore there are no schema restrictions on the `data` attribute and thus the attribute [CloudEvents - Version 1.0 - dataschema](https://github.com/cloudevents/spec/blob/v1.0/spec.md#datacontenttype) is also not required to be provided. Producer may provide any valid JSON object but only simple properties of that object will get converted to variables of a process instances of an [Event Based Process](./../setup/setup-event-based-processes.md) instance later on. |
+| group | String | OPTIONAL | This is an OPTIONAL [CloudEvents Extension Context Attribute](https://github.com/cloudevents/spec/blob/v1.0/spec.md#extension-context-attributes) that is specific to this API. A group identifier that may allow to easier identify a group of related events for a user at the stage of mapping events to a process model. An example could be a domain of events that are most likely related to each other, e.g. `billing`. When this field is provided, it will be used to allow adding events that belongs to a group to the [mapping table](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#external-events). Optimize handles groups case-sensitively. Note: The triplet of `type`, `source` and `group` will be used as a unique identifier for classes of events. |
+| traceid | String | REQUIRED | This is a REQUIRED [CloudEvents Extension Context Attribute](https://github.com/cloudevents/spec/blob/v1.0/spec.md#extension-context-attributes) that is specific to this API. A traceid is a correlation key that relates multiple events to a single business transaction or process instance in BPMN terms. Events with the same traceId will get correlated into one process instance of an Event Based Process. | 
+
+
+The following is an example of a valid simple properties `data` value. Each of those properties would be available as a variable in any [Event Based Process](./../setup/setup-event-based-processes.md) where an event containing this as `data` was mapped:
+  ```
+      {
+        "reviewSuccessful": true,
+        "amount": 10.5,
+        "customerId": "lovelyCustomer1"
+      }
+  ```
+  Nested objects, such as `customer` in this example, would not be available as a variable in Event Based Processes where an event containing this as `data` value was mapped:
+  ```
+      {
+        "customer": {
+        "firstName":"John",
+        "lasTName":"Doe"
+        }
+      }
+  ``` 
 
 # Result
 
@@ -112,9 +108,7 @@ Possible HTTP Response Status codes:
 | 400 | Returned if some of the properties in the request body are invalid or missing. |
 | 401 | Secret incorrect or missing in HTTP Header `X-Optimize-API-Secret`. See [Authorization](#authorization) on how to authenticate. |
 | 403 | The Event Based Process feature is not enabled. |
-| 429 | The maximum number of requests that can be serviced at any time has been reached. 
-        The response will include a `Retry-After` HTTP header specifying the recommended number of seconds before the request should be retried.  
-        See [Configuration](../../setup/configuration/#event-ingestion-rest-api-configuration) for information on how to configure this limit. |
+| 429 | The maximum number of requests that can be serviced at any time has been reached. The response will include a `Retry-After` HTTP header specifying the recommended number of seconds before the request should be retried. See [Configuration](../../setup/configuration/#event-ingestion-rest-api-configuration) for information on how to configure this limit. |
 | 500 | Some error occurred while processing the ingested event, best check the Optimize log. |
 
 # Example
