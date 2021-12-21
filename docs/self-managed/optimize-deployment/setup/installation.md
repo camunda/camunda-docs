@@ -46,7 +46,7 @@ or `elasticsearch-startup.bat` on Windows:
 
 ## Production Distribution without Elasticsearch
 
-This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-bpm-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
+This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-platform-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
 
 ```bash
 ./optimize-startup.sh
@@ -105,7 +105,7 @@ The most important environment variables you may have to configure are related t
 - `OPTIMIZE_ELASTICSEARCH_HOST` the address/hostname under which the Elasticsearch node is available (default: `localhost`)
 - `OPTIMIZE_ELASTICSEARCH_HTTP_PORT` port number used by Elasticsearch to accept HTTP connections (default: `9200`)
 
-A complete sample can be found here: [Connect to remote Camunda Platform and Elasticsearch](#connect-to-remote-camunda-bpm-and-elasticsearch).
+A complete sample can be found here: [Connect to remote Camunda Platform and Elasticsearch](#connect-to-remote-camunda-platform-and-elasticsearch).
 
 Furthermore, there are also environment variables specific to the [Event Based Process](./../../../components/optimize/userguide/additional-features/event-based-processes.md) feature you may make use of:
 

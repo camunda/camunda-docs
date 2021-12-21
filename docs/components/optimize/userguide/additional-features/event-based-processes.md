@@ -11,7 +11,7 @@ You need to setup the event-based processes feature to make use of this feature.
 :::
 
 :::note
-When Camunda activity events are used in event-based processes, Camunda admin authorizations are not inherited for the event-based process. The authorization to use an event-based process is solely managed via the access management of event-based processes when [publishing an event-based process](#publishing-an-event-based-process) or at any time via the [edit access option](#event-based-process-list-edit-access) in the event-based process list.
+When Camunda activity events are used in event-based processes, Camunda admin authorizations are not inherited for the event-based process. The authorization to use an event-based process is solely managed via the access management of event-based processes when [publishing an event-based process](#publishing-an-event-based-process) or at any time via the [edit access option](#event-based-process-list---edit-access) in the event-based process list.
 
 Visit our technical guide documentation on authorization management and event-based processes for the reasoning behind this behavior.
 :::

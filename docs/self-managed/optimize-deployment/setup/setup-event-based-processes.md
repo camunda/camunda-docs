@@ -28,7 +28,7 @@ A full configuration example authorizing the user `demo` and all members of the 
 # Use Camunda Activity Event Sources for Event Based Processes
 
 :::note Authorization to Event Based Processes
-Please note that when Camunda Activity Events are used in Event Based Processes, Camunda Admin Authorizations are not inherited for the Event Based Process. The Authorization to use an Event Based Process is solely managed via the access management of Event Based Processes when [publishing an Event Based Process](#publishing-an-event-based-process) or at any time via the [Edit Access Option](#event-based-process-list-edit-access) in the Event Based Process List.
+Please note that when Camunda Activity Events are used in Event Based Processes, Camunda Admin Authorizations are not inherited for the Event Based Process. The Authorization to use an Event Based Process is solely managed via the access management of Event Based Processes when [publishing an Event Based Process](#publishing-an-event-based-process) or at any time via the [Edit Access Option](#event-based-process-list---edit-access) in the Event Based Process List.
 
 Please checkout [Authorization Management - Event Based Process](./authorization-management.md/#event-based-processes) for the reasoning behind this behavior.
 :::
