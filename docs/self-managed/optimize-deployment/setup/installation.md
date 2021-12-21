@@ -172,7 +172,7 @@ You can customize the [Elasticsearch connection settings](./configuration.md/#co
 
 ### Camunda Platform configuration
 
-To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, please refer to the [Camunda Platform configuration section](./configuration.md/#connection-to-camunda-bpm-platform).
+To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, please refer to the [Camunda Platform configuration section](./configuration.md/#connection-to-camunda-platform).
 
 ## Import of the data set
 

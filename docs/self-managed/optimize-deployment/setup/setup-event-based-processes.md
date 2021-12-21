@@ -33,7 +33,7 @@ Please note that when Camunda Activity Events are used in Event Based Processes,
 Please checkout [Authorization Management - Event Based Process](./authorization-management.md/#event-based-processes) for the reasoning behind this behavior.
 :::
 
-In order to be able to publish event based processes that include [Camunda Event Sources](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#camunda-events) it is required to set [`engines.${engineAlias}.eventImportEnabled`](../configuration/#connection-to-camunda-bpm-platform) to `true` for the connected engine the Camunda Process originates from.
+In order to be able to publish event based processes that include [Camunda Event Sources](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#camunda-events) it is required to set [`engines.${engineAlias}.eventImportEnabled`](../configuration/#connection-to-camunda-platform) to `true` for the connected engine the Camunda Process originates from.
 
 :::note Heads Up!
 You need to [reimport data](./../migration-update/instructions.md/#force-reimport-of-engine-data-in-optimize) from this engine to have all historic Camunda events available for Event Based Processes. Otherwise only new events will be included.

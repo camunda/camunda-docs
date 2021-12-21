@@ -19,7 +19,7 @@ It is important to configure the cluster in the sense that only one instance at 
 If more than one instance is importing data from one and the same Camunda Platform engine concurrently inconsistencies can occur.
 :::
 
-The configuration property [`engines.${engineAlias}.importEnabled`](../configuration/#connection-to-camunda-bpm-platform) allows to disable the import from a particular configured engine.
+The configuration property [`engines.${engineAlias}.importEnabled`](../configuration/#connection-to-camunda-platform) allows to disable the import from a particular configured engine.
 
 Given a simple failover cluster consisting of two instances connected to one engine, the engine configurations in the `environment-config.yaml` would look like the following:
 
@@ -54,7 +54,7 @@ Note that the second non-importing instance has the [history cleanup disabled](.
 
 In the context of event based process import and clustering there are two additional configuration properties to consider carefully.
 
-One is specific to each configured Camunda engine [`engines.${engineAlias}.eventImportEnabled`](../configuration/#connection-to-camunda-bpm-platform) and controls whether data from this engine is imported as event source data as well for [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md). You need to enable this on the same cluster node for which the [`engines.${engineAlias}.importEnabled`](../configuration/#connection-to-camunda-bpm-platform) configuration flag is set to `true`. 
+One is specific to each configured Camunda engine [`engines.${engineAlias}.eventImportEnabled`](../configuration/#connection-to-camunda-platform) and controls whether data from this engine is imported as event source data as well for [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md). You need to enable this on the same cluster node for which the [`engines.${engineAlias}.importEnabled`](../configuration/#connection-to-camunda-platform) configuration flag is set to `true`. 
 
 [`eventBasedProcess.eventImport.enabled`](../configuration/#event-based-process-configuration) controls whether the particular cluster node processes events to create event based process instances. This allows you to run a dedicated node that performs this operation, while other nodes might just feed in Camunda activity events.
 
