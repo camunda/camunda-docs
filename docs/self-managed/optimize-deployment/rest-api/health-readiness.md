@@ -4,15 +4,15 @@ title: "Health Readiness"
 description: "The REST API to check the readiness of Optimize."
 ---
 
-# Purpose
+## Purpose
 
 The purpose of Health-Readiness REST API is to return information indicating whether or not Optimize is ready to be used.
 
-# Method & HTTP Target Resource
+## Method & HTTP Target Resource
 
 GET `/api/readyz`
 
-# Response
+## Response
 
 The response is an empty body with the status code indicating the readiness of Optimize. The following responses are available:
 

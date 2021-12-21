@@ -4,7 +4,7 @@ title: "Configuration"
 description: "An overview of all possible configuration options in Optimize."
 ---
 
-# Logging
+## Logging
 
 Camunda Optimize provides logging facilities that are preconfigured to use
 _INFO_ logging level which provides minimal output of information in log files.
@@ -46,7 +46,7 @@ Whether using the configuration file or Docker environment variables, to define 
 - _debug_: in addition to _info_, writes information about the scheduling process, alerting as well as the import of the engine data.
 - _trace_: like _debug_ but in addition, writes all requests sent to the Camunda engine as well as all queries towards Elasticsearch to the log output.
 
-# System configuration
+## System configuration
 
 All distributions of Camunda Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements. To do that, have a look into the folder named `config` which contains a file called `environment-config.yaml` with values that override the default Optimize properties.
 
@@ -59,7 +59,7 @@ In the following section you will find descriptions and default values of the co
 For changes in the configuration to take effect, you need to restart Optimize!
 :::
 
-## Java System Properties & OS Environment variable placeholders
+### Java System Properties & OS Environment variable placeholders
 
 To externalize configuration properties from the `environment-config.yaml`, Optimize provides variable placeholder support.
 
@@ -110,7 +110,7 @@ and for the Windows Powershell in three double quotes:
 ./optimize-startup.bat """-DAUTH_TOKEN_SECRET=othertokenValue"""
 ```
 
-### Default values
+#### Default values
 
 For variable placeholders it's also possible to provide default values using the following format: `${VARIABLE_NAME:DEFAULT_VALUE}`. The `DEFAULT_VALUE` can contain any character except `}`.
 
@@ -123,7 +123,7 @@ security:
       secret: ${AUTH_TOKEN_SECRET:defaultSecret}
 ```
 
-## Security
+### Security
 
 These values control mechanisms of Optimize related security, e.g. security headers and authentication.
 
@@ -140,7 +140,7 @@ These values control mechanisms of Optimize related security, e.g. security head
 | security.responseHeaders.X-Content-Type-Options  | true            | Setting this header will prevent the browser from interpreting files as a different MIME type to what is specified in the Content-Type HTTP header (e.g. treating text/plain as text/css).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | security.responseHeaders.Content-Security-Policy | base-uri 'self' | A Content Security Policy (CSP) has significant impact on the way browsers render pages. By default Optimize uses the base-uri directive which restricts the URLs that can be used to the Optimize pages. Find more details in [Mozilla's Content Security Policy Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy).                                                                                                                                                                                                                                                                                                      |
 
-## Container
+### Container
 
 Settings related to embedded Jetty container, which serves the Optimize application.
 
@@ -154,7 +154,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 |container.status.connections.max|10|Maximum number of web socket connections accepted for status report.|
 |container.accessUrl|null|Optional URL to access Optimize (used for links to Optimize in e.g. alert emails). If no value specified the container host and port are used instead.|
 
-## Connection to Camunda Platform
+### Connection to Camunda Platform
 
 Configuration for engines used to import data. Please note that you have to have
 at least one engine configured at all times. You can configure multiple engines
@@ -175,7 +175,7 @@ with it and represented by `${engineAlias}`.
 |engines.${engineAlias}.webapps.endpoint|http://localhost:8080/camunda|Defines the endpoint where the Camunda webapps are found. This allows Optimize to directly link to the other Camunda Web Applications, e.g. to jump from Optimize directly to a dedicated process instance in Cockpit|
 |engines.${engineAlias}.webapps.enabled|true|Enables/disables linking to other Camunda Web Applications|
 
-## Engine Common Settings
+### Engine Common Settings
 
 Settings used by Optimize, which are common among all configured engines, such as
 REST API endpoint locations, timeouts, etc.
@@ -220,11 +220,11 @@ REST API endpoint locations, timeouts, etc.
 |import.identitySync.maxEntryLimit|100000|The entry limit of the user/group search cache. When increasing the limit, keep in mind to account for this by increasing the JVM heap memory as well. Please refer to the "Adjust Optimize heap size" documentation on how to configure the heap size.|
 
 
-## Elasticsearch
+### Elasticsearch
 
 Settings related to Elasticsearch.
 
-### Connection settings
+#### Connection settings
 
 Everything that is related to building the connection to Elasticsearch.
 
@@ -245,7 +245,7 @@ if one node fails, Optimize is still able to talk to the cluster.
 |es.connection.proxy.sslEnabled|false|Whether this proxy is using a secured connection (HTTPS).|
 
 
-### Index settings
+#### Index settings
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
@@ -256,7 +256,7 @@ if one node fails, Optimize is still able to talk to the cluster.
 |es.settings.index.nested_documents_limit|10000|Optimize uses nested documents to store list information such as activities or variables belonging to a process instance. This setting defines the maximum number of activities/variables/incidents that a single process instance can contain. This limit helps to prevent out of memory errors and should be used with care. For more information, please refer to the Elasticsearch documentation on this topic.|
 
 
-### Elasticsearch Security
+#### Elasticsearch Security
 
 Define a secured connection to be able to communicate with a secured Elasticsearch instance.
 
@@ -268,7 +268,7 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 |es.security.ssl.certificate||The path to a PEM encoded file containing the certificate (or certificate chain) that will be presented to clients when they connect.|
 |es.security.ssl.certificate_authorities|[ ]|A list of paths to PEM encoded CA certificate files that should be trusted, e.g. ['/path/to/ca.crt']. <br /><br />Note: if you are using a public CA that is already trusted by the Java runtime, you do not need to set the certificate_authorities.|
 
-## Email
+### Email
 
 Settings for the email server to send email notifications, e.g. when an alert is triggered.
 
@@ -283,7 +283,7 @@ Settings for the email server to send email notifications, e.g. when an alert is
 |email.authentication.password||Corresponding password to the given user of your smtp server.|
 |email.authentication.securityProtocol||States how the connection to the server should be secured. Possible values are 'NONE', 'STARTTLS' or 'SSL/TLS'.|
 
-## Alert Notification Webhooks
+### Alert Notification Webhooks
 
 Settings for webhooks which can receive custom alert notifications. You can configure multiple webhooks which will be available to select from when creating or editing alerts. Each webhook configuration should have a unique human readable name which will appear in the Optimize UI.
 
@@ -295,7 +295,7 @@ Settings for webhooks which can receive custom alert notifications. You can conf
 |webhookAlerting.webhooks.${webhookName}.defaultPayload||The payload of the request to be sent to the webhook. This should include the placeholder '{{ALERT_MESSAGE}}', which indicates where the content of the alert is to be inserted into the payload.|
 
 
-## History Cleanup Settings
+### History Cleanup Settings
 
 Settings for automatic cleanup of historic process/decision instances based on their end time.
 
@@ -314,7 +314,7 @@ Settings for automatic cleanup of historic process/decision instances based on t
 | historyCleanup.decisionDataCleanup  .perDecisionDefinitionConfig.${key}.ttl |     | Time to live to use for decision instances of the decision definition with the ${key}. |
 | historyCleanup.ingestedEventCleanup.enabled | false | A switch to activate the history cleanup of ingested event data. \[true/false\] |
 
-## Localization
+### Localization
 
 Define the languages that can be used by Optimize.
 
@@ -323,7 +323,7 @@ Define the languages that can be used by Optimize.
 |localization.availableLocales|['en','de']|All locales available in the Optimize Frontend. <br /><br />Note: for languages other than the default there must be a `<localeCode>.json` file available under ./config/localization.|
 |localization.fallbackLocale|'en'|The fallback locale used if there is a locale requested that is not available in availableLocales. The fallbackLocale is required to be present in localization.availableLocales.|
 
-## UI Configuration
+### UI Configuration
 
 Customize the Optimize UI e.g. by adjusting the logo, head background color etc.
 
@@ -334,7 +334,7 @@ Customize the Optimize UI e.g. by adjusting the logo, head background color etc.
 |ui.header.backgroundColor|'#FFFFFF'|A hex encoded color that should be used as background color for the header. Default color is white.|
 |ui.logoutHidden|false|Setting this property to true will hide the logout option from the user menu. This is useful if you are using single sign-on and it is not possible for users to logout.|
 
-## Event Based Process Configuration
+### Event Based Process Configuration
 
 Configuration of the Optimize event based process feature.
 
@@ -347,7 +347,7 @@ Configuration of the Optimize event based process feature.
 |eventBasedProcess.eventIndexRollover.scheduleIntervalInMinutes|10|The interval in minutes at which to check whether the conditions for a rollover of eligible indices are met, triggering one if required. This value should be greater than 0.|
 |eventBasedProcess.eventIndexRollover.maxIndexSizeGB|50|Specifies the maximum total index size for events (excluding replicas). When shards get too large, query performance can slow down and rolling over an index can bring an improvement. Using this configuration, a rollover will occur when triggered and the current event index size matches or exceeds the maxIndexSizeGB threshold.|
 
-## Event Ingestion REST API Configuration
+### Event Ingestion REST API Configuration
 
 Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-ingestion) for [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md).
 
@@ -357,7 +357,7 @@ Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-in
 |eventBasedProcess.eventIngestion.maxBatchRequestBytes|10485760|Content length limit for an ingestion REST API bulk request in bytes. Requests will be rejected when exceeding that limit. Defaults to 10MB. In case this limit is raised you should carefully tune the heap memory accordingly, see Adjust Optimize heap size on how to do that.|
 |eventBasedProcess.eventIngestion.maxRequests|5|The maximum number of event ingestion requests that can be serviced at any given time.|
 
-## External Variable Ingestion REST API Configuration
+### External Variable Ingestion REST API Configuration
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
@@ -370,7 +370,7 @@ Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-in
 |externalVariable.variableIngestion.maxRequests|5|The maximum number of variable ingestion requests that can be serviced at any given time.|
 
 
-## Telemetry Configuration
+### Telemetry Configuration
 
 Configuration of initial telemetry settings.
 
@@ -378,7 +378,7 @@ Configuration of initial telemetry settings.
 |--- |--- |--- |
 |telemetry.initializeTelemetry|false|Decides whether telemetry is initially enabled or disabled when Optimize starts. Thereafter, telemetry can be turned on and off in the UI by superusers. If enabled, information about the setup and usage of the Optimize is sent to remote Camunda servers for the sake of analytical evaluation. When enabled, the following information is sent every 24 hours: Optimize version, License Key, Optimize installation ID, Elasticsearch version. <br /><br />Legal note: Before you install Camunda Optimize version >= 3.2.0 or activate the telemetric functionality, please make sure that you are authorized to take this step, and that the installation or activation of the telemetric functionality is not in conflict with any internal company policies, compliance guidelines, any contractual or other provisions or obligations of your company. Camunda cannot be held responsible in the event of unauthorized installation or activation of this function.|
 
-## Other
+### Other
 
 Settings of plugin subsystem serialization format, variable import, Camunda endpoint.
 

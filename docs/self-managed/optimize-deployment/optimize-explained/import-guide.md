@@ -6,7 +6,7 @@ description: "Shows how the import generally works and an example of import perf
 
 This document provides instructions on how the import of the engine data to Optimize works.
 
-# Architecture Overview
+## Architecture Overview
 
 In general, the import assumes the following setup:
 
@@ -39,7 +39,7 @@ Please note the following limitations regarding the data in Optimize's database:
 
 Please refer to the [Import Procedure](#import-procedure) section for a more detailed description of how Optimize imports engine data.
 
-# Import performance overview
+## Import performance overview
 
 This section gives an overview of how fast Optimize imports certain data sets. The purpose of these estimates is to help you evaluate whether Optimize's import performance meets your demands.
 
@@ -47,7 +47,7 @@ It is very likely that these metrics change for different data sets because the 
 
 The import is also affected by how the involved components are set up. For instance, if you deploy the Camunda engine on a different machine than Optimize and Elasticsearch to provide both applications with more computation resources the process is likely to speed up. If the Camunda engine and Optimize are physically far away from each other, the network latency might slow down the import.
 
-## Setup
+### Setup
 
 The following components were used for these import tests:
 
@@ -97,7 +97,7 @@ The following hardware specifications were used for each dedicated host
 
 The time was measured from the start of Optimize until the entire data import to Optimize was finished.
 
-## Large size data set
+### Large size data set
 
 This data set contains the following amount of instances:
 
@@ -129,7 +129,7 @@ Results:
 - **Duration of importing the whole data set:** ~120 minutes
 - **Speed of the import:** ~1400 process instances per second during the import process
 
-## Medium size data set
+### Medium size data set
 
 This data set contains the following amount of instances:
 
@@ -157,7 +157,7 @@ Results:
 - **Duration of importing the whole data set:** ~ 10 minutes
 - **Speed of the import:** ~1500 process instances per second during the import process
 
-# Import procedure
+## Import procedure
 
 :::note Heads up!
 Understanding the details of the import procedure is not necessary to make Optimize work. In addition, there is no guarantee that the following description is either complete or up-to-date.
@@ -180,7 +180,7 @@ During execution, the following steps are performed:
    - 3.1 Poll a job
    - 3.2 Persist the new entities to Elasticsearch
 
-## Start an import round
+### Start an import round
 
 The import process is automatically scheduled in rounds by the `Import Scheduler` after startup of Optimize. In each import round, multiple `Import Services` are scheduled to run, each fetches data of one specific entity type. For example, one service is responsible for importing the historic activity instances and another one for the process definitions.
 
@@ -202,11 +202,11 @@ If you would like to rapidly update data imported into Optimize, you have to red
 
 More information about the import configuration can be found in the [configuration section](./../setup/configuration.md/#engine-common-settings).
 
-## Prepare the import
+### Prepare the import
 
 The preparation of the import is executed by the `ImportService`. Every `ImportService` implementation performs several steps:
 
-### Poll a new page
+#### Poll a new page
 
 The whole polling/preparation workflow of the engine data is done in pages, meaning only a limited amount of entities is fetched on each execution. For example, say the engine has 1000 historic activity instances and the page size is 100. As a consequence, the engine would be polled 10 times. This prevents running out of memory and overloading the network.
 
@@ -216,11 +216,11 @@ Polling a new page does not only consist of the `ImportService`, but the `IndexH
 
 First, the `ImportScheduler` retrieves the newest index, which identifies the last imported page. This index is passed to the `ImportService` to order it to import a new page of data. With the index and the page size, the fetching of the engine data is delegated to the `EntityFetcher`.
 
-### Map entities and add an import job
+#### Map entities and add an import job
 
 All fetched entities are mapped to a representation that allows Optimize to query the data very quickly. Subsequently, an import job is created and added to the queue to persist the data in Elasticsearch.
 
-## Execute the import
+### Execute the import
 
 Full aggregation of the data is performed by a dedicated `ImportJobExecutor` for each entity type, which waits for `ImportJob` instances to be added to the execution queue. As soon as a job is in the queue, the executor:
 

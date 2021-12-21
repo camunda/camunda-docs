@@ -4,17 +4,17 @@ title: "Installation"
 description: "Read about how to install Optimize."
 ---
 
-# Installation Guide
+## Installation Guide
 
 This document describes the installation process of the Camunda Optimize distribution, as well as various configuration possibilities available after initial installation.
 
 Before proceeding with the installation, please read the article about [supported environments](./../../../reference/supported-environments.md).
 
-## Prerequisites
+### Prerequisites
 
 If you intend to run Optimize on your local machine, please make sure you have a supported JRE (Java Runtime Environment) installed, best refer to the [Java Runtime](./../../../reference/supported-environments.md/#java-runtime) section on which runtimes are supported.
 
-## Demo Distribution with Elasticsearch
+### Demo Distribution with Elasticsearch
 
 The Optimize Demo distribution comes with an Elasticsearch instance. The supplied Elasticsearch server is not customized or tuned by Camunda in any manner. It is intended to make the process of trying out Optimize as easy as possible. The only requirement in addition to the demo distribution itself is a running engine (ideally on localhost).
 
@@ -44,7 +44,7 @@ or `elasticsearch-startup.bat` on Windows:
 .\elasticsearch-startup.bat
 ```
 
-## Production Distribution without Elasticsearch
+### Production Distribution without Elasticsearch
 
 This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-platform-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
 
@@ -58,7 +58,7 @@ or `optimize-startup.bat` on Windows:
 .\optimize-startup.bat
 ```
 
-## Production Docker image without Elasticsearch
+### Production Docker image without Elasticsearch
 
 The Optimize Docker images can be used in production. They are hosted on our dedicated Docker registry and are available to enterprise customers who bought Optimize only. You can browse the available images in our [Docker registry](https://registry.camunda.cloud) after logging in with your credentials.
 
@@ -73,9 +73,9 @@ Login Succeeded
 
 After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-bpm-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node you can use environment variables instead of mounting configuration files into the Docker container:
 
-### Getting started with the Optimize docker image
+#### Getting started with the Optimize docker image
 
-#### Full local setup
+##### Full local setup
 
 To start the Optimize docker image and connect to an already locally running Camunda Platform as well as Elasticsearch instance you could run the following command:
 ```
@@ -83,7 +83,7 @@ docker run -d --name optimize --network host \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
-#### Connect to remote Camunda Platform and Elasticsearch
+##### Connect to remote Camunda Platform and Elasticsearch
 If however your Camunda Platform as well as Elasticsearch instance reside on a different host you may provide their destination via the corresponding environment variables:
 
 ```
@@ -94,7 +94,7 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
-### Available Environment Variables
+#### Available Environment Variables
 
 There is only a limited set of configuration keys exposed via environment variables. These mainly serve the purpose of testing and exploring Optimize, for production configurations we recommend to follow the setup in section [Configuration using a `environment-config.yaml` file](#configuration-using-a-environment-config-yaml-file)
 
@@ -120,7 +120,7 @@ Additionally there are also runtime related environment variables such as:
 
 You can also adjust logging levels using environment variables as described in the [logging configuration](../configuration#logging).
 
-### License key file
+#### License key file
 If you want the Optimize Docker container to automatically recognize your [license key file]({{< ref "/user-guide/license/_index.md" >}}), you can use standard [Docker means](https://docs.docker.com/storage/volumes/) to make the file with the license key available inside the container. Replacing the `ABSOLUTE_PATH_ON_HOST_TO_LICENSE_FILE` with the absolute path to the license key file on your host can be done with the following command:
 
 ```
@@ -129,7 +129,7 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
-### Configuration using a `environment-config.yaml` file
+#### Configuration using a `environment-config.yaml` file
 
 In a production environment the limited set of [environment variables](#available-environment-variables) is usually not enough so that you want to prepare a custom `environment-config.yaml` file. Please refer to the [Configuration](../configuration) section of the documentation for the available configuration parameters.
 
@@ -144,7 +144,7 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
 In managed Docker container environments like [kubernetes](https://kubernetes.io/) you may set this up using [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/).
 
 
-## Usage
+### Usage
 
 You can start using Optimize right away by opening the following URL in your browser: [http://localhost:8090](http://localhost:8090)
 
@@ -152,35 +152,35 @@ Then you can use the users from the Camunda Platform to login to Optimize. For d
 
 Before you can fully utilize all features of Optimize, you need to wait until all data has been imported. A green circle in the footer indicates when the import is finished.
 
-## Health - Readiness
+### Health - Readiness
 
 To check whether Optimize is ready to use, you can make use of the [health-readiness endpoint](./../rest-api/health-readiness.md), exposed as part of Optimize's REST API.  
 
-## Configuration
+### Configuration
 
 All distributions of Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements. To do that, have a look into the folder named `environment`. There are two files, one called `environment-config.yaml` with values that override the default Optimize properties and another called `environment-logback.xml`, which sets the logging configuration.
 
 You can see all supported values and read about logging configuration [here](./configuration.md).
 
-### Optimize Web Container Configuration
+#### Optimize Web Container Configuration
 
 Please refer to the [configuration section on container settings](./configuration.md) for more information on how to adjust the Optimize Web Container configuration.
 
-### Elasticsearch configuration
+#### Elasticsearch configuration
 
 You can customize the [Elasticsearch connection settings](./configuration.md/#connection-settings) as well as the [index settings](./configuration.md/#index-settings).
 
-### Camunda Platform configuration
+#### Camunda Platform configuration
 
 To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, please refer to the [Camunda Platform configuration section](./configuration.md/#connection-to-camunda-platform).
 
-## Import of the data set
+### Import of the data set
 
 By default, Optimize comes without any data available. To start using all the features of the system, you have to perform a data import from the Camunda Platform. This process is triggered automatically when starting Optimize.
 
 If you are interested in the details of the import, please refer to the dedicated [import overview section](./../optimize-explained/import-guide.md).
 
-# Hardware Resources
+## Hardware Resources
 
 We recommend to carefully choose hardware resources that are allocated to the server with Optimize.
 
@@ -189,7 +189,7 @@ by the Camunda Platform Engine. The final amount of space on the hard drive requ
 depend on your replication settings, but as a rule of thumb you could expect Optimize to use 30% of the space that
 your relational database is using.
 
-## How your Data Influences Elasticsearch Requirements 
+### How your Data Influences Elasticsearch Requirements 
 
 The Elasticsearch requirements are heavily influenced by the makeup of your data set. This is mainly because Optimize creates
 one instance index per definition, so the amount of indices in your Elasticserach instance will grow with the amount of definitions
@@ -208,7 +208,7 @@ Please note that these guidelines are based on test data that may deviate from y
 a large amount of variables this may result in a larger shard size. 
 In this case we recommend that you test the import with realistic data and adjust the number of shards accordingly. 
 
-## Example Scenarios
+### Example Scenarios
 
 :::note Heads Up!
 Exact hardware requirements highly depend on a number of factors such as: size of the data,
@@ -216,7 +216,7 @@ network speed, current load on the engine and its underlying database. Therefore
 guarantee that the following requirements will satisfy every use case.
 :::
 
-#### 20 Definitions with less than 50k Instances per Definition 
+##### 20 Definitions with less than 50k Instances per Definition 
 
 We recommend to use one shard per instance index, so 20 shards overall for instance indices alone.
 Aiming for 20 shards per GB of Elasticsearch JVM heap space results in 1 GB of heap memory additionally to the base requirement of 1 GB. 
@@ -231,7 +231,7 @@ can expect the instance index shards to be no larger than 10GB.
   - 4 GB RAM (2 GB JVM Heap Memory, see [setting JVM heap size](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/advanced-configuration.html#setting-jvm-heap-size))
   - [local SSD storage recommended](https://www.elastic.co/guide/en/elasticsearch/guide/master/hardware.html#_disks)
   
-#### 40 Definitions with up to 10 Million Instances per Definition
+##### 40 Definitions with up to 10 Million Instances per Definition
 
 We recommend to use two shards per instance index, so 80 shards for instance indices alone.
 Aiming for 20 shards per GB of Elasticsearch JVM heap space results in 4 GB of heap memory additionally to the base requirement of 1 GB. 
@@ -246,9 +246,9 @@ scenario you can expect a shard size of 50 GB for each instance index shard.
   - 10 GB RAM (5 GB JVM Heap Memory, see [setting JVM heap size](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/advanced-configuration.html#setting-jvm-heap-size))
   - [local SSD storage recommended](https://www.elastic.co/guide/en/elasticsearch/guide/master/hardware.html#_disks)
 
-# Recommended Additional Configurations
+## Recommended Additional Configurations
 
-## Adjust engine heap size
+### Adjust engine heap size
 
 Sending huge process definition diagrams via Rest API might cause the engine to crash if the engine heap size is inadequately limited. Thus, it is recommended to increase the heap size of the engine to at least 2 GB, e.g. by adding the following java command line property when starting the engine:
 
@@ -262,7 +262,7 @@ Also, it is recommended to decrease the [deployment cache size](https://docs.cam
 <property name="cacheCapacity" value="500" />
 ```
 
-## Adjust Optimize heap size
+### Adjust Optimize heap size
 
 By default Optimize is configured with 1GB JVM heap memory. Depending on your setup and actual data you might still encounter situations where you need more than this default for a seamless operation of Optimize. To increase the maximum heap size you can set the environment variable `OPTIMIZE_JAVA_OPTS` and provide the desired JVM system properties, e.g. for 2GB of Heap:
 
@@ -270,6 +270,6 @@ By default Optimize is configured with 1GB JVM heap memory. Depending on your se
 OPTIMIZE_JAVA_OPTS=-Xmx2048m
 ```
 
-## Maximum result limits for queries
+### Maximum result limits for queries
 
 It's possible that engine queries [consume a lot of memory](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-api/#query-maximum-results-limit). To mitigate this risk, you can [limit the number of results](https://docs.camunda.org/manual/latest/reference/deployment-descriptors/tags/process-engine/#queryMaxResultsLimit) a query can return. If you do this, it is highly recommended that you set the value of the `queryMaxResultsLimit` setting to `10000` so that the Optimize import works without any problems. This value should still be low enough so you don't run into any problems with the previously mentioned heap configurations.

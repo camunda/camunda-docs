@@ -4,23 +4,23 @@ title: "Event Ingestion"
 description: "The REST API to ingest external events into Optimize."
 ---
 
-# Purpose
+## Purpose
 
 The Event Ingestion REST API serves the purpose to ingest business process related event data from any third-party system to Camunda Optimize. These events can then be correlated into an [Event Based Process](./../../../components/optimize/userguide/additional-features/event-based-processes.md)  in Optimize to get business insights into business processes that are not yet fully modeled nor automated using the Camunda Platform.
 
-# Functionality
+## Functionality
 
 The Event Ingestion REST API has the following functionality
 
 1. Ingest new event data in batches, see [Example - Ingest three cloud events](#ingest-cloud-events)
 2. Reingest/Override previously ingested events, see [Example - Reingest cloud events](#reingest-cloud-events)
 
-# CloudEvents Compliance
+## CloudEvents Compliance
 To provide the best interoperability possible, the Optimize Event Ingestion REST API implements the [CloudEvents - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/spec.md) specification, which is hosted by the [Cloud Native Computing Foundation (CNCF)](https://www.cncf.io/).
 
 In particular the Optimize Event Ingestion REST API is a CloudEvents consumer implemented as a HTTP Web Hook, as defined by the [CloudEvents HTTP 1.1 Web Hooks for Event Delivery - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md) specification. Following the [Structured Content Mode](https://github.com/cloudevents/spec/blob/v1.0/http-protocol-binding.md#32-structured-content-mode) of the [HTTP Protocol Binding for CloudEvents - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-protocol-binding.md), event context attributes and Event Data is encoded in the [JSON Batch Format](https://github.com/cloudevents/spec/blob/v1.0/json-format.md#4-json-batch-format) of the [CloudEvents JSON Event Format v1.0](https://github.com/cloudevents/spec/blob/v1.0/json-format.md).
 
-# Authorization
+## Authorization
 
 As required by the [CloudEvents HTTP 1.1 Web Hooks for Event Delivery - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#3-authorization) specification, every [Event Ingestion REST API Request](#method-http-target-resource) needs to include and authorization token either as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header or as a [URI Query Parameter](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#32-uri-query-parameter) named `access_token`.
 
@@ -45,11 +45,11 @@ The following is an example configuration with a token value of `secret`:
       eventIngestion:
         accessToken: secret
 
-# Method & HTTP Target Resource
+## Method & HTTP Target Resource
 
 POST `/api/ingestion/event/batch`
 
-# Request Headers
+## Request Headers
 
 The following request headers have to be provided with every ingest request:
 
@@ -60,7 +60,7 @@ The following request headers have to be provided with every ingest request:
 | Content-Length | REQUIRED | Size in bytes of the entity-body, also see [Content-Length](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length). | 
 | Content-Type | REQUIRED | Must be one of: `application/cloudevents-batch+json` or `application/json` | 
 
-# Request Body
+## Request Body
 
 [JSON Batch Format](https://github.com/cloudevents/spec/blob/v1.0/json-format.md#4-json-batch-format) compliant JSON Array of CloudEvent JSON Objects:
 
@@ -94,11 +94,11 @@ The following is an example of a valid simple properties `data` value. Each of t
       }
   ``` 
 
-# Result
+## Result
 
 This method returns no content.
 
-# Response Codes
+## Response Codes
 
 Possible HTTP Response Status codes:
 
@@ -111,11 +111,11 @@ Possible HTTP Response Status codes:
 | 429 | The maximum number of requests that can be serviced at any time has been reached. The response will include a `Retry-After` HTTP header specifying the recommended number of seconds before the request should be retried. See [Configuration](../../setup/configuration/#event-ingestion-rest-api-configuration) for information on how to configure this limit. |
 | 500 | Some error occurred while processing the ingested event, best check the Optimize log. |
 
-# Example
+## Example
 
-## Ingest cloud events
+### Ingest cloud events
 
-### Request
+#### Request
 POST `/api/ingestion/event/batch`
 
 Request Body:
@@ -158,18 +158,18 @@ Request Body:
       }
     ]
 
-### Response
+#### Response
 
 Status 204.
 
-## Reingest cloud events
+### Reingest cloud events
 
 The API allows you to update any previously ingested cloud event by just ingesting an event using the same event `id`.
 The following request would update the first cloud event that got ingested in the [Ingest three cloud events sample](#ingest-cloud-events). Please note that on an update the cloud event needs to be provided as a whole, it's not possible to perform partial updates through this API.
 
 In this example an additional field `newField` is added to the data block of the cloud event with the id `1edc4160-74e5-4ffc-af59-2d281cf5aca341`.
 
-### Request
+#### Request
 POST `/api/ingestion/event/batch`
 
 Request Body:
@@ -191,6 +191,6 @@ Request Body:
       }
     ]
 
-### Response
+#### Response
 
 Status 204.

@@ -6,7 +6,7 @@ description: "Learn about the supported multi-tenancy scenarios."
 
 Learn how to set up Multi-Tenancy with Optimize.
 
-# Possible Multi-Tenancy scenarios
+## Possible Multi-Tenancy scenarios
 
 As described in the [Camunda Platform documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/multi-tenancy/), there are two possible Multi-Tenant scenarios which are also supported by Optimize:
 
@@ -14,14 +14,14 @@ As described in the [Camunda Platform documentation](https://docs.camunda.org/ma
   - [Single Process Engine With Tenant-Identifiers](#single-process-engine-with-tenant-identifiers)
   - [One Process Engine Per Tenant](#one-process-engine-per-tenant)
 
-## Single Process Engine With Tenant-Identifiers
+### Single Process Engine With Tenant-Identifiers
 
 Tenant-Identifiers available in the Camunda Platform Engine are automatically imported into Optimize and tenant-based access authorization is enforced based on the configured `Tenant Authorizations` within the Camunda Platform. This means there is no additional setup required for Optimize in order to support this Multi-Tenancy scenario.
 Users granted tenant access via the Camunda Platform will be able to create and see reports for that particular tenant in Optimize. In the following screenshot the user `demo` is granted access to data of the tenant with the id `firstTenant` and will be able to select that tenant in the report builder. Other users, without the particular firstTenant authorization, will not be able to select that tenant in the report builder nor be able to see results of reports that are based on that tenant.
 
 {{< img src="./img/admin-tenant-authorization.png" title="Tenant Authorization" >}}
 
-## One Process Engine Per Tenant
+### One Process Engine Per Tenant
 
 In the case of a Multi-Engine scenario where tenant specific data is isolated by deploying to dedicated engines there are no Tenant-Identifiers present in the particular engines themselves. In order for a single Optimize instance that is configured to import from each of those engines to support this scenario it is required to configure a `defaultTenant` for each of those engines.
 
