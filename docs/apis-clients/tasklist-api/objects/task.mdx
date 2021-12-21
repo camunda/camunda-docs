@@ -20,28 +20,29 @@ type Task {
   isFirst: Boolean
   formKey: String
   processDefinitionId: String
+  candidateGroups: [String!]
 }
 ```
 
 ### Fields
 
-#### `id` ([`ID!`](/docs/apis-clients/tasklist-api/scalars/id))
+#### `id` ([`ID`](/docs/apis-clients/tasklist-api/scalars/id))
 
 The unique identifier of the task
 
-#### `name` ([`String!`](/docs/apis-clients/tasklist-api/scalars/string))
+#### `name` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Name of the task
 
-#### `taskDefinitionId` ([`String!`](/docs/apis-clients/tasklist-api/scalars/string))
+#### `taskDefinitionId` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Task Definition ID (node BPMN id) of the process
 
-#### `processName` ([`String!`](/docs/apis-clients/tasklist-api/scalars/string))
+#### `processName` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Name of the process
 
-#### `creationTime` ([`String!`](/docs/apis-clients/tasklist-api/scalars/string))
+#### `creationTime` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
 When was the task created
 
@@ -53,15 +54,15 @@ When was the task completed
 
 Username/id of who is assigned to the task
 
-#### `variables` ([`[Variable!]`](/docs/apis-clients/tasklist-api/objects/variable))
+#### `variables` ([`Variable`](/docs/apis-clients/tasklist-api/objects/variable))
 
 Variables associated to the task
 
-#### `taskState` ([`TaskState!`](/docs/apis-clients/tasklist-api/enums/task-state))
+#### `taskState` ([`TaskState`](/docs/apis-clients/tasklist-api/enums/task-state))
 
 State of the task
 
-#### `sortValues` ([`[String!]`](/docs/apis-clients/tasklist-api/scalars/string))
+#### `sortValues` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Array of values to be copied into `TaskQuery` to request for next or previous page of tasks.
 
@@ -76,3 +77,7 @@ Reference to the task form
 #### `processDefinitionId` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
 Reference to process definition
+
+#### `candidateGroups` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+
+Candidate groups
