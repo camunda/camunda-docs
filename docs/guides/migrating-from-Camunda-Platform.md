@@ -22,11 +22,11 @@ For migration, you need to look at development artifacts (BPMN models and applic
 
 In general, **development artifacts** *can* be migrated:
 
-* **BPMN models:** Camunda Cloud uses BPMN like Camunda Platform does, which generally allows use of the same model files, but you might need to configure *different extension atrributes* (at least by using a different namespace). Furthermore, Camunda Cloud has a *different coverage* of BPMN concepts that are supported (see [Camunda Cloud BPMN coverage](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage) vs [Camunda Platform BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Cloud will increase over time.
+* **BPMN models:** Camunda Cloud uses BPMN like Camunda Platform does, which generally allows use of the same model files, but you might need to configure *different extension atrributes* (at least by using a different namespace). Furthermore, Camunda Cloud has a *different coverage* of BPMN concepts that are supported (see [Camunda Cloud BPMN coverage](https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-processes/bpmn-coverage) vs [Camunda Platform BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Cloud will increase over time.
 
 * **DMN models:** In Camunda Platform, the Camunda DMN engine is directly integrated into the platform. This is not yet the case for Camunda Cloud, but you can use the [Zeebe DMN Worker](https://github.com/camunda-community-hub/zeebe-dmn-worker) provided as a community extension, which can process your existing DMN models.
 
-* **CMMN models:** It is not possible to run CMMN on Zeebe, *CMMN models cannot be migrated*. You can remodel cases in BPMN according to [Building Flexibility into BPMN Models](https://camunda.com/best-practices/building-flexibility-into-bpmn-models/), keeping in mind the [Camunda Cloud BPMN coverage](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage).
+* **CMMN models:** It is not possible to run CMMN on Zeebe, *CMMN models cannot be migrated*. You can remodel cases in BPMN according to [Building Flexibility into BPMN Models](https://camunda.com/best-practices/building-flexibility-into-bpmn-models/), keeping in mind the [Camunda Cloud BPMN coverage](https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-processes/bpmn-coverage).
 
 * **Application code:** The application code needs to use *a different client library and different APIs*. This will lead to code changes you must implement.
 
@@ -168,7 +168,7 @@ In Camunda Platform there are three ways to attach Java code to service tasks in
 
 Camunda Cloud cannot directly execute custom Java code. Instead, there must be a [job worker](https://docs.camunda.io/docs/product-manuals/concepts/job-workers) executing code.
 
-The [Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type ```camunda-platform-to-cloud-migration```. [Task headers](https://docs.camunda.io/docs/reference/bpmn-processes/service-tasks/service-tasks#task-headers) are used to configure a delegation class or expression for this worker.
+The [Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type ```camunda-platform-to-cloud-migration```. [Task headers](https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-processes/service-tasks/service-tasks#task-headers) are used to configure a delegation class or expression for this worker.
 
 You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
 
@@ -214,19 +214,19 @@ To migrate BPMN process models from Camunda Platform to Camunda Cloud, you must 
 
 * The namespace of extensions has changed
 * Different configuration attributes are used
-* Camunda Cloud has a *different coverage* of BPMN elements (see [Camunda Cloud BPMN coverage](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage) vs [Camunda Platform BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Cloud will increase over time.
+* Camunda Cloud has a *different coverage* of BPMN elements (see [Camunda Cloud BPMN coverage](https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-processes/bpmn-coverage) vs [Camunda Platform BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Cloud will increase over time.
 
 The following sections list migration steps and unsupported attributes by BPMN symbol.
 
 ### Service tasks
 
-![Service Task](../reference/bpmn-processes/assets/bpmn-symbols/service-task.svg)
+![Service Task](../components/modeler/bpmn/bpmn-processes/assets/bpmn-symbols/service-task.svg)
 
 Migrating a service task is described in the section about migrating your programming code above.
 
 ### Send tasks
 
-![Send Task](../reference/bpmn-processes/assets/bpmn-symbols/send-task.svg)
+![Send Task](../components/modeler/bpmn/bpmn-processes/assets/bpmn-symbols/send-task.svg)
 
 In both engines, a send task has the same behavior as a service task. A send task is migrated exactly like a service task.
 
@@ -247,7 +247,7 @@ The following is not possible:
 
 ### Human tasks
 
-![User Task](../reference/bpmn-processes/assets/bpmn-symbols/user-task.svg)
+![User Task](../components/modeler/bpmn/bpmn-processes/assets/bpmn-symbols/user-task.svg)
 
 Human task management is still under development in Camunda Cloud, so most configuration options are not yet available.
 
@@ -282,7 +282,7 @@ Only Camunda Forms are currently supported in Camunda Cloud and can be migrated.
 
 ### Business rule tasks
 
-![Business Rule Task](../reference/bpmn-processes/assets/bpmn-symbols/business-rule-task.svg)
+![Business Rule Task](../components/modeler/bpmn/bpmn-processes/assets/bpmn-symbols/business-rule-task.svg)
 
 In Camunda Platform, the Camunda DMN engine is directly integrated into the platform. This is not yet the case for Camunda Cloud, but you can use the [Zeebe DMN Worker](https://github.com/camunda-community-hub/zeebe-dmn-worker), provided as as a community extension, which can execute your existing DMN models. You can also build your own DMN worker, probably inspired by this community extension.
 
@@ -309,7 +309,7 @@ The following attributes/elements cannot be migrated:
 
 ### Call activities
 
-![Call Activity](../reference/bpmn-processes/assets/bpmn-symbols/call-activity.svg)
+![Call Activity](../components/modeler/bpmn/bpmn-processes/assets/bpmn-symbols/call-activity.svg)
 
 Call activities are generally supported in Zeebe. The following attributes/elements can be migrated:
 
@@ -327,7 +327,7 @@ The following attributes/elements cannot be migrated:
 
 ### Script task
 
-![Script Task](../reference/bpmn-processes/assets/bpmn-symbols/script-task.svg)
+![Script Task](../components/modeler/bpmn/bpmn-processes/assets/bpmn-symbols/script-task.svg)
 
 Script tasks cannot natively be executed by the Zeebe engine. They behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker), provided as a community extension.
 
@@ -368,7 +368,7 @@ Whenever you build a process solution using Camunda Platform, you can follow the
 * Don't expose Camunda APIs (REST or Java) to front-end applications.
 * Use primitive variable types or JSON payloads only (no XML or serialized Java objects).
 * Use JSONPath on JSON payloads (translates easier to FEEL).
-* Stick to [BPMN elements supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage).
+* Stick to [BPMN elements supported in Camunda Cloud](https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-processes/bpmn-coverage).
 * Use [FEEL as script language in BPMN](https://camunda.github.io/feel-scala/docs/reference/developer-guide/bootstrapping#use-as-script-engine), e.g. on Gateways.
 * Use Camunda Forms.
 

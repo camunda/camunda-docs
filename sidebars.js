@@ -100,6 +100,56 @@ module.exports = {
           {
           "BPMN": [
             "components/modeler/bpmn/modeler-bpmn",
+            {
+              "Reference material": [
+                "components/modeler/bpmn/bpmn-processes/bpmn-primer",
+                "components/modeler/bpmn/bpmn-processes/bpmn-coverage",
+                "components/modeler/bpmn/bpmn-processes/data-flow",
+                {
+                  "Tasks": [
+                        "components/modeler/bpmn/bpmn-processes/tasks",
+                        "components/modeler/bpmn/bpmn-processes/service-tasks/service-tasks",
+                        "components/modeler/bpmn/bpmn-processes/user-tasks/user-tasks",
+                        "components/modeler/bpmn/bpmn-processes/receive-tasks/receive-tasks",
+                        "components/modeler/bpmn/bpmn-processes/business-rule-tasks/business-rule-tasks",
+                        "components/modeler/bpmn/bpmn-processes/script-tasks/script-tasks",
+                        "components/modeler/bpmn/bpmn-processes/send-tasks/send-tasks",
+                        "components/modeler/bpmn/bpmn-processes/manual-tasks/manual-tasks",
+                      ],
+                    },
+                    {
+                    "Gateways": [
+                        "components/modeler/bpmn/bpmn-processes/gateways",
+                        "components/modeler/bpmn/bpmn-processes/exclusive-gateways/exclusive-gateways",
+                        "components/modeler/bpmn/bpmn-processes/parallel-gateways/parallel-gateways",
+                        "components/modeler/bpmn/bpmn-processes/event-based-gateways/event-based-gateways",
+                      ],
+                    },
+                    {
+                    "Events": [
+                        "components/modeler/bpmn/bpmn-processes/events",
+                        "components/modeler/bpmn/bpmn-processes/none-events/none-events",
+                        "components/modeler/bpmn/bpmn-processes/message-events/message-events",
+                        "components/modeler/bpmn/bpmn-processes/timer-events/timer-events",
+                        "components/modeler/bpmn/bpmn-processes/error-events/error-events",
+                      ],
+                    },
+                    {
+                    "Subprocesses": [
+                        "components/modeler/bpmn/bpmn-processes/subprocesses",
+                        "components/modeler/bpmn/bpmn-processes/embedded-subprocesses/embedded-subprocesses",
+                        "components/modeler/bpmn/bpmn-processes/call-activities/call-activities",
+                        "components/modeler/bpmn/bpmn-processes/event-subprocesses/event-subprocesses",
+                      ],
+                    },
+                    {
+                    "Markers": [
+                        "components/modeler/bpmn/bpmn-processes/markers",
+                        "components/modeler/bpmn/bpmn-processes/multi-instance/multi-instance",
+                      ],
+                    },
+                  ],
+                },
           ],
           },
           {
@@ -227,56 +277,6 @@ module.exports = {
  
   Reference: [
     "reference/overview",
-    {
-      "BPMN processes": [
-        "reference/bpmn-processes/bpmn-primer",
-        "reference/bpmn-processes/bpmn-coverage",
-        "reference/bpmn-processes/data-flow",
-        {
-          Tasks: [
-            "reference/bpmn-processes/tasks",
-            "reference/bpmn-processes/service-tasks/service-tasks",
-            "reference/bpmn-processes/user-tasks/user-tasks",
-            "reference/bpmn-processes/receive-tasks/receive-tasks",
-            "reference/bpmn-processes/business-rule-tasks/business-rule-tasks",
-            "reference/bpmn-processes/script-tasks/script-tasks",
-            "reference/bpmn-processes/send-tasks/send-tasks",
-            "reference/bpmn-processes/manual-tasks/manual-tasks",
-          ],
-        },
-        {
-          Gateways: [
-            "reference/bpmn-processes/gateways",
-            "reference/bpmn-processes/exclusive-gateways/exclusive-gateways",
-            "reference/bpmn-processes/parallel-gateways/parallel-gateways",
-            "reference/bpmn-processes/event-based-gateways/event-based-gateways",
-          ],
-        },
-        {
-          Events: [
-            "reference/bpmn-processes/events",
-            "reference/bpmn-processes/none-events/none-events",
-            "reference/bpmn-processes/message-events/message-events",
-            "reference/bpmn-processes/timer-events/timer-events",
-            "reference/bpmn-processes/error-events/error-events",
-          ],
-        },
-        {
-          Subprocesses: [
-            "reference/bpmn-processes/subprocesses",
-            "reference/bpmn-processes/embedded-subprocesses/embedded-subprocesses",
-            "reference/bpmn-processes/call-activities/call-activities",
-            "reference/bpmn-processes/event-subprocesses/event-subprocesses",
-          ],
-        },
-        {
-          Markers: [
-            "reference/bpmn-processes/markers",
-            "reference/bpmn-processes/multi-instance/multi-instance",
-          ],
-        },
-      ],
-    },
     require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
     "reference/announcements",

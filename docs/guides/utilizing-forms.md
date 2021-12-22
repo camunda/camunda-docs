@@ -88,4 +88,4 @@ Then, open Tasklist to claim the task, fill in the form, and complete the task.
 
 - [Camunda and Cloud Modeler](./components/modeler/about.md)
 - [Model your first process](./getting-started/model-your-first-process.md)
-- [User task reference](./reference/bpmn-processes/user-tasks/user-tasks.md)
+- [User task reference](./components/modeler/bpmn/bpmn-processes/user-tasks/user-tasks.md)

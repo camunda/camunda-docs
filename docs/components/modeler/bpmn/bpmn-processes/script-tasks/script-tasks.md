@@ -9,7 +9,7 @@ JavaScript, or Python.
 ![task](assets/script-task.png)
 
 Script tasks behave exactly like [service tasks](../../service-tasks/service-tasks). Both task
-types are based on jobs and [job workers](../../../components/concepts/job-workers.md). The
+types are based on jobs and [job workers](../../../../../components/concepts/job-workers.md). The
 differences between these task types are the visual representation (i.e. the task marker) and the
 semantics for the model.
 

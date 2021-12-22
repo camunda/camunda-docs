@@ -32,7 +32,7 @@ The demo above shows how to create more BPMN 2.0 elements like lanes, task types
 
 ## BPMN 2.0 coverage
 
-Modeler [covers all BPMN 2.0 elements](/docs/reference/bpmn-processes/bpmn-coverage/) for modeling processes and collaborations.
+Modeler [covers all BPMN 2.0 elements](/docs/components/modeler/bpmn/bpmn-processes/bpmn-coverage/) for modeling processes and collaborations.
 
 ## BPMN 2.0 properties for execution
 

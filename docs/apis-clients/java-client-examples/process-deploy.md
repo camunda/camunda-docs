@@ -7,7 +7,7 @@ description: "Let's analyze the prerequisites and code to deploy a process using
 ## Related resources
 
 - [Process basics](/components/concepts/processes.md)
-- [BPMN introduction](/reference/bpmn-processes/bpmn-primer.md)
+- [BPMN introduction](/components/modeler/bpmn/bpmn-processes/bpmn-primer.md)
 
 ## Prerequisites
 
