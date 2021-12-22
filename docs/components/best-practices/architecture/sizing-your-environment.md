@@ -1,5 +1,5 @@
 ---
-title:  Sizing Your Environment
+title:  Sizing Your Camunda Cloud Environment
 stakeholders:
     - Architecture
     - Operations
@@ -18,7 +18,12 @@ bookchapter: 5
 comment: See https://docs.google.com/spreadsheets/d/1s6TO0rmAhD-eYj69qERbAH3tLTW55mudsV-Ga6QBYb0/edit#gid=0 for example calculation
 ---
 
-In order to define and size your environment appropriately, you need to understand the factors that influence hardware requirements. Then you can apply this knowledge to select the appropriate Camunda Cloud SaaS hardware package or size your self-managed Kubernetes cluster.
+In order to define and size your environment for Camunda Cloud appropriately, you need to understand the factors that influence hardware requirements. Then you can apply this knowledge to select the appropriate Camunda Cloud SaaS hardware package or size your self-managed Kubernetes cluster.
+
+:::caution Camunda Cloud only
+This best practice targets Camunda Cloud only! If you are looking at Camunda Plaform, please visit [Sizing your Camunda 7 environment](../sizing-your-environment-c7/).
+:::
+
 
 ## Understanding influencing factors
 
@@ -137,3 +142,6 @@ This is definitely recommend, if you want to setup a cluster that can handle mor
 
 Use the [Zeebe benchmark project](https://github.com/camunda-cloud/zeebe/tree/develop/benchmarks/setup) to setup a benchmark. 
 
+You need access 
+
+ * Kubectl https://kubernetes.io/de/docs/tasks/tools/install-kubectl/
