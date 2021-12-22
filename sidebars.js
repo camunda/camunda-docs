@@ -191,6 +191,40 @@ module.exports = {
           ],
         },
       ],
+      Optimize: [
+        "components/optimize/what-is-optimize",
+        {
+          "User guide": [
+            "components/optimize/userguide/collections-dashboards-reports",
+            "components/optimize/userguide/data-sources",
+            "components/optimize/userguide/creating-dashboards",
+            "components/optimize/userguide/creating-reports",
+          {
+          "Process analysis": [
+            "components/optimize/userguide/process-analysis/overview",
+            "components/optimize/userguide/process-analysis/outlier-analysis",
+            "components/optimize/userguide/process-analysis/branch-analysis",
+          ],
+          },
+          {
+          "Decision analysis": [
+            "components/optimize/userguide/decision-analysis/overview",
+            "components/optimize/userguide/decision-analysis/decision-report",
+            "components/optimize/userguide/decision-analysis/decision-filter",
+          ],
+          },
+          {
+          "Additional features": [
+            "components/optimize/userguide/additional-features/alerts",
+            "components/optimize/userguide/additional-features/event-based-processes",
+            "components/optimize/userguide/additional-features/export-import",
+            "components/optimize/userguide/additional-features/filters",
+            "components/optimize/userguide/additional-features/footer",
+          ],
+          },
+          ],
+        },
+      ],
       Tasklist: [
         "components/tasklist/introduction",
         {
@@ -349,6 +383,74 @@ module.exports = {
         "self-managed/tasklist-deployment/install-and-start",
         "self-managed/tasklist-deployment/configuration",
         "self-managed/tasklist-deployment/authentication",
+      ],
+      "Optimize":[
+        {
+          Setup: [
+        "self-managed/optimize-deployment/setup/installation",
+        "self-managed/optimize-deployment/setup/security-instructions",
+        "self-managed/optimize-deployment/setup/configuration",
+        "self-managed/optimize-deployment/setup/user-management",
+        "self-managed/optimize-deployment/setup/authorization-management",
+        "self-managed/optimize-deployment/setup/secure-elasticsearch",
+        "self-managed/optimize-deployment/setup/shared-elasticsearch-cluster",
+        "self-managed/optimize-deployment/setup/history-cleanup",
+        "self-managed/optimize-deployment/setup/localization",
+        "self-managed/optimize-deployment/setup/multi-tenancy",
+        "self-managed/optimize-deployment/setup/multiple-engines",
+        "self-managed/optimize-deployment/setup/clustering",
+        "self-managed/optimize-deployment/setup/webhooks",
+        "self-managed/optimize-deployment/setup/setup-event-based-processes",
+        "self-managed/optimize-deployment/setup/telemetry",
+        "self-managed/optimize-deployment/setup/common-problems",
+          ],
+        },
+        {
+          Plugins: [
+        "self-managed/optimize-deployment/plugins/plugin-system",
+        "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
+        "self-managed/optimize-deployment/plugins/decision-import-plugin",
+        "self-managed/optimize-deployment/plugins/elasticsearch-header",
+        "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
+        "self-managed/optimize-deployment/plugins/single-sign-on",
+        "self-managed/optimize-deployment/plugins/variable-import-plugin",
+          ],
+        },
+        {
+          "REST API": [
+        "self-managed/optimize-deployment/rest-api/event-ingestion",
+        "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
+        "self-managed/optimize-deployment/rest-api/health-readiness",
+
+          ],
+        },
+        "self-managed/optimize-deployment/reimport",
+        {
+          "Migration & Update": [
+        "self-managed/optimize-deployment/migration-update/instructions",
+        "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
+        "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
+        "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
+        "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
+        "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
+        "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
+        "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
+        "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
+        "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
+        "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
+        "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
+        "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
+        "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
+          ],
+        },
+        {
+          "Optimize Explained": [
+            "self-managed/optimize-deployment/optimize-explained/engine-data-deletion",
+            "self-managed/optimize-deployment/optimize-explained/import-guide",
+          ],
+        },
+        
+        
       ],
       IAM: [
         "self-managed/iam/what-is-iam",
