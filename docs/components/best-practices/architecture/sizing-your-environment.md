@@ -140,8 +140,5 @@ If you are in doubt about which package to choose, you can do a load test with a
 
 This is definitely recommend, if you want to setup a cluster that can handle more load than the standard packages.
 
-Use the [Zeebe benchmark project](https://github.com/camunda-cloud/zeebe/tree/develop/benchmarks/setup) to setup a benchmark. 
+You can look at the [Zeebe benchmark project](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/setup/README.md#benchmarking-camunda-cloud-saas) as a starting point, but it will not run out-of-the-box (e.g. you need need to build starter and worker code yourself and use self-created docker images).
 
-You need access 
-
- * Kubectl https://kubernetes.io/de/docs/tasks/tools/install-kubectl/
