@@ -14,7 +14,7 @@ bookchapter: 5
 
 
 
-## Knowing the DMN Hit Policy Basics
+## Knowing the DMN hit policy basics
 
 A decision table consists of several *rules*, typically represented as rows. When reading such a row we look at certain *input values* and deduct a certain result represented by *output values*. When using the simplest hit policy *"unique"* (*U*), such rules do *not overlap*: only a single rule must match.
 
@@ -40,7 +40,7 @@ Eight of those eleven hit policies evaluate a decision table to a *single result
 
 
 
-### Single Result Decision Tables
+### Single result decision tables
 
 Such tables either return the output of only one rule or aggregate the output of many rules into one result. The hit policies to be considered are
 
@@ -64,7 +64,7 @@ Camunda does not yet support the hit policy *priority*. In essence priorities ar
 
 
 
-### Multiple Result Decision Tables
+### Multiple result decision tables
 
 *Multiple result* tables may return the output of multiple rules. The hit policies for such tables are:
 
@@ -79,14 +79,14 @@ Camunda does not yet support the hit policy *output order*. In essence output or
 :::
 
 
-## Understanding DMN Hit Policy Use Cases
+## Understanding DMN hit policy use cases
 
 
 Most situations can be addressed by using different hit policies. In that case, the hit policy will have an effect on the readability and maintainability of the table. Often it is worth trying different varieties until you have a feel for what will work best. In practice, we often use the free https://camunda.org/dmn/simulator/[Online Simulator] to play around with various alternatives.
 
 
 
-### Unique: Granting Categories of Customers a Specified Discount
+### Unique: granting categories of customers a specified discount
 
 Hit policy "*Unique*" will typically make it easy to build a decision table which make sure that your rules are "complete" - in the sense that the rules do not just not overlap but cover all possible input values - so that you do not "forget" anything.
 
@@ -104,7 +104,7 @@ Such a use case fits to the hit policy "*Unique*". For such use cases it is an a
 
 
 
-### First: Accepting a Customer Based on Hard Criteria
+### First: accepting a customer based on hard criteria
 
 Having said that, the hit policy "*First*" can sometimes make it easier for an organisation to reason about decision logic dealing with some criteria that are "harder" (more "clearcut") than others. Furthermore it can help to make a decision table layout more compact and therefore easier to interpret.
 
@@ -130,7 +130,7 @@ Our experience so far tends to show that it can be more tricky and error prone t
 
 
 
-### Collect: Deciding Which Groups of People May Review an Order
+### Collect: deciding which groups of people may review an order
 
 With hit policy *collect* you do not care about the order or any interdependencies in between your rules at all. Instead you just "collect" independent rules and just care about the question which rules are applicable to your specific case.
 
@@ -144,7 +144,7 @@ We could use this information to route the order into the applicable group's tas
 
 
 
-### Sum: Accepting a Customer Based on Soft Criteria
+### Sum: accepting a customer based on soft criteria
 
 Hit policy "collect" may be combined with operators such as *Sum (C+)*, leading to very different use cases. A very typical one is the requirement to evaluate a case based on manyfold factors influencing the overall result.
 

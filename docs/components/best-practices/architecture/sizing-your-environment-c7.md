@@ -50,15 +50,15 @@ From the Camunda perspective there are a number of aspects to look at:
 
 
 
-## Determining Hardware Requirements
+## Determining hardware requirements
 
-### Performance & Scalability
+### Performance & scalability
 
 We normally do not hit limits in scalability of Camunda. Due to the small footprint the engine can run with extreme efficiency. All state is persisted in the database, so you can always add new process engine instances (e.g. cluster nodes) to speed up execution.  
 
 The natural limit for this kind of architecture is the database. More scalability can be achieved using [Camunda Cloud](https://camunda.com/products/cloud/).
 
-### High Availability
+### High availability
 
 We recommend to run two machines for high availability. They do not have to form a proper cluster in terms of an application server cluster, just setup two identical nodes pointing to the same database.
 
@@ -82,14 +82,14 @@ Think about a medium server:
 - If you have CPU intense delegation code.
 - If your code/deployment has additional requirements.
 
-### Disk Space
+### Disk space
 
 Depending on the container you need around 500 MB - 1 GB of disk space. We recommend to have at least 2 GB to be able to store enough logs in case you experience any problems.
 
 
-## Determining Database Requirements
+## Determining database requirements
 
-### Chose A Good Database
+### Chose a good database
 
 As mentioned in [deciding about your Camunda 7 stack](deciding-about-your-stack-c7) we recommend Oracle or PostgreSQL. Together with DB2 we made the best performance observations there.
 
@@ -97,7 +97,7 @@ Note that H2 is seldom used in production and we do not have much experience wit
 
 
 
-### Required Database Size
+### Required database size
 
 
 The amount of space required on the database depends on
@@ -144,7 +144,7 @@ As a rule of thumb capture the following figures and use the example above to ma
 
 
 
-### Example Calculation
+### Example calculation
 
 This is an example calculation from a real-life scenario.
 

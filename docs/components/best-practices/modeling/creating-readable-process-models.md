@@ -17,9 +17,9 @@ bookchapter: 1
 We create visual process models in order to better understand, discuss and remember processes. Hence it is crucial that models are easy to read and to understand. The single most important thing is to to use well-chosen labels.
 
 
-## Essential Practices
+## Essential practices
 
-### Labeling BPMN Elements
+### Labeling BPMN elements
 
 Use [conventions for naming BPMN elements](naming-bpmn-elements.md), this will consistently inform the reader of the business semantics. The clarity and meaning of a process is often only as good as its labels.
 
@@ -48,9 +48,9 @@ Labeled *end events* characterize end *results* of the process from a business p
 
 
 
-## Recommended Practices
+## Recommended practices
 
-### Modeling Symmetrically
+### Modeling symmetrically
 
 Try to model symmetrically. Identify related splitting and joining gateways and form easily recognizable *visual*, eventually *nested*, *blocks* with those gateways.
 
@@ -80,7 +80,7 @@ another exclusive gateway splits the process flow into two more paths which are 
 By explicitly showing *pairs of gateways* "opening" and "closing" parts of the process diagram and by positioning such gateway pairs *as symmetrically as possible*, the readability of process model is improved. The reader can easily recognize logical parts of the diagram and quickly "jump" to those parts the reader is momentarily interested in.
 
 
-### Modeling From Left To Right
+### Modeling from left to right
 
 Model process diagrams *from left to right*. By carefully positioning symbols from left to right, according to the typical point in time at which they occur, one can improve the readability of process models significantly:
 
@@ -88,7 +88,7 @@ Model process diagrams *from left to right*. By carefully positioning symbols fr
 
 Modeling from left to right supports the reading direction (for western audience) and supports the human field of vision - which prefers wide screens. 
 
-### Creating Readable Sequence Flows
+### Creating readable sequence flows
 
 Consciously decide whether *overlapping sequence flows* make your model more or less readable. On one hand avoid overlapping sequence flows where the reader will not be able to follow the flow directions anymore.Use overlapping sequence flows where it is less confusing for the reader to see just one line representing several sequence flows leading to the same target.
 
@@ -125,11 +125,11 @@ You see a throwing link event here, which ...
 
 Avoid excessive use of link events. The example above serves to show the possible usage, but at the same time it is too small to satisfy the usage of link events in real-world sceanrio!
 
-### Modeling Explicitly
+### Modeling explicitly
 
 Make your models easier to understand by modeling *explicitly*, which most often means to either completely avoid certain more "implicit" BPMN constructs - or at least to use them cautiously. Always have in mind the central *goal of increased readability* and understandability of the model, when deciding whether to model explicitly or implicitly. When in doubt, best to favor an explicit style.
 
-#### Using Gateways Instead of Conditional Flows
+#### Using gateways instead of conditional flows
 
 Model splitting the process flow by always using *gateway symbols* like <img src="../img-bpmn-elements/inclusive-gateway.svg" className="inline-image" /> instead of conditional flows <img src="../img-bpmn-elements/conditional-flow.svg" className="inline-image" />.
 
@@ -144,7 +144,7 @@ Inclusive Gateways (OR) and Conditional sequence flows are [not yet supported in
 You could have left out e.g. this inclusive gateway by drawing two outgoing sequence flows directly out of the preceding task "Choose menu" and attaching conditions to those then "conditional sequence flows" (<img src="../img-bpmn-elements/conditional-flow.svg" className="inline-image" />). However, experience shows that readers understand the flow semantics of gateways better, which is why we do not make use of this possibility.
 
 
-#### Modeling Start and End Events
+#### Modeling start and end events
 
 Model the trigger and the end status of processes by always explicitly showing the *start* and *end event symbols*.
 
@@ -175,7 +175,7 @@ Be specific about the *state* you reached with your event from a *business persp
 ... because in principle you can call the failed state 'Invoice processed', too, but the reader of the diagram is much better informed by calling it 'Invoice rejected'.
 
 
-#### Separating Splitting and Joining Gateways
+#### Separating splitting and joining gateways
 
 In general, avoid mixing up the split and join semantics of gateways by explicitly showing *two separate symbols*:
 
@@ -201,7 +201,7 @@ The *primary function* of this gateway from a reader's perspective is to *split*
 
 A decrease in readability by modeling explicit joining gateways often happens when *modeling loops*, because many readers will be slightly irritated by a joining gateway which is visually placed before the splitting gateway "belonging" to the same block. It is then often preferable to just use implicit joining to avoid unnecessary irritations.
 
-#### Using XOR Gateway Markers
+#### Using XOR gateway markers
 
 Model the XOR gateway by explicitly showing the *"X" symbol*, even if some tools allow to draw a blank gateway.
 
@@ -217,7 +217,7 @@ You could have shown the splitting gateway ...
 
 The "X" marker makes a clearer difference to the other gateway types (inclusive, parallel, event-based, complex) which leads us to prefer *explicit XOR gateway markers* in general.
 
-#### Splitting Sequence Flows with Parallel Gateways
+#### Splitting sequence flows with parallel gateways
 
 Always model splitting the process flow by explicitly showing the *gateway symbol*:
 
@@ -234,7 +234,7 @@ You could have modeled this parallel split implicitly by leaving out the gateway
 The fact that readers of models using parallelization will most probably need to understand the semantics of a parallel join combined with the preference for xref:modeling-symmetrically[modeling symmetrically] leads us to prefer *explicit parallel gateways*, too.
 
 
-#### Joining Sequence Flows with XOR Gateways
+#### Joining sequence flows with XOR gateways
 
 Model joining the process flow by explicitly showing the *XOR gateway symbol* - so the reader does not have to know BPMN details to understand how two incoming or outgoing sequence flows in a task behave. Additionally this often supports the [symmetry of the model](#modeling-symmetrically) by explicitly showing a "relationship" of the splitting and joining *gateways forming a visual "block"*.
 
@@ -275,7 +275,7 @@ Again, you could have modeled the implicit join explicitly, to. As this again wo
 
 
 
-### Avoiding Lanes
+### Avoiding lanes
 
 Consider *avoiding lanes* for most of your models all together. They tend to conflict with several of the best practices presented here, like [Modeling *Symmetrically*](#modeling-symmetrically), [Emphasizing the *Happy Path*](#emphasizing-the-happy-path) and [Creating Readable *Sequence Flows*](#creating-readable-sequence-flows). Apart from readability concerns, our experience also shows that lanes make it more difficult to change the resulting process models and therefore cause considerably *more effort in maintenance*.
 
@@ -301,9 +301,9 @@ Note that roles are part of your executable BPMN process model as *technical att
 
 
 
-## Helpful Practices
+## Helpful practices
 
-### Emphasizing the Happy Path
+### Emphasizing the happy path
 
 You may want to emphasize the *"happy path"* leading to the delivery of a successful process result by placing the tasks, events and gateways belonging to the happy path on a straight sequence flow in the center of your diagram - at least as much as possible.
 
@@ -314,7 +314,7 @@ The *five* BPMN symbols belonging to the happy path are put on a straight sequen
 
 
 
-### Using Collaboration Diagrams
+### Using collaboration diagrams
 
 If you model on operational level (see [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) use *collaboration diagrams* with several *separate pools* for the process participants [instead of lanes](#avoiding-lanes) as operational models using lanes make it very hard for the individual process participant to identify the details of his/her own process involvement.
 
@@ -338,7 +338,7 @@ Using *collaboration diagrams* with *separate pools* for the process participant
 
 
 
-### Showing Interaction With Systems
+### Showing interaction with systems
 
 Consciously decide how you want to model systems the process participants are interacting with. Use *data stores* to show systems which primarily serve as a means to store and retrieve data. Use - depending on your needs *collapsed* or *expanded* - *pools* for systems which are carrying out crucial activities in the process going way beyond storing and retrieving data.
 
@@ -359,7 +359,7 @@ Another *data store* is used to represent a container which could be a physical 
 When *choosing* between those *two options* for modeling systems (data stores, collapsed pools) keep in mind that only pools represent processes and therefore have the capability to be expanded and modeled in all their internal details later on.
 
 
-### Avoiding Excessive Usage of Data Objects
+### Avoiding excessive usage of data objects
 
 Avoid excessive use of *data objects*, but use them cautiously to show the *most important data related aspects* of your process.
 
@@ -383,7 +383,7 @@ Use message symbols to add *information regarding the message payload*, but only
 
 
 
-### Avoiding Changes to Symbol Size and Color 
+### Avoiding changes to symbol size and color 
 
 Leave the *size of symbols as it is* by default. Different sizes of e.g. tasks or events suggest that the bigger symbol is more important than the smaller one - a most of the time unwarranted assumption. Instead of writing long labels, use short and consistent labels in line with your [naming conventions](naming-bpmn-elements.md) and move all additional information into BPMN annotations associated to your specific BPMN element.
 

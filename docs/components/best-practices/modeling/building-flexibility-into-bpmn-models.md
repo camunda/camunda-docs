@@ -12,7 +12,7 @@ weight: 30
 
 BPMN modeling primarily targets structured processes, often with the goal to automate as many steps as possible, increase efficiency and decrease process execution costs. But sometimes we need ways to build flexibility into such process models to deal with expected or unexpected operational problems or to allow for humans to intervene.
 
-## Understanding the Required Symbols
+## Understanding the required symbols
 
 In order to build flexibility into BPMN process models, one need to understand BPMN symbols and modeling techniques. After introducing the main symbols we show more concrete examples.
 
@@ -34,7 +34,7 @@ BPMN allows us to attach events to the boundary of activities in order to trigge
 <div bpmn="building-flexibility-into-bpmn-models-bpmn/boundary.bpmn" />
 
 
-### Sub Processes with Boundary Events
+### Sub processes with boundary events
 
 By attaching boundary events not just to individual activities, but to subprocesses, we can flexibly define the area or scope for which we want to trigger some flexible activities.
 
@@ -53,14 +53,14 @@ While we are occupied with carrying out some area of activities, in a scope of o
 to carry out this activity in addition to continuing with ordinary work
 
 
-### Event Sub Processes
+### Event sub processes
 
 Sometimes we need to build in flexible activities which are carried out at any point in time. In such cases, we can leverage BPMN's event-based subprocesses.
 
 <div bpmn="building-flexibility-into-bpmn-models-bpmn/event-subprocess.bpmn" />
 
 
-### Escalation Events
+### Escalation events
 
 :::caution Camunda Platform 7 Only
 Escalation events are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
@@ -87,7 +87,7 @@ As soon as we are finished with the first activity inside the scope...
 We can then already continue with the followup work regardless of whether that additional activity is already finished or not. 
 
 
-### Termination Events
+### Termination events
 
 :::caution Camunda Platform 7 Only
 Termination events are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)

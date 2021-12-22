@@ -127,7 +127,7 @@ Camunda Cloud defines three fixed hardware packages you can select from. The tab
 **\*\*** The numbers in the table where measured using Camunda Cloud 1.2.4 and [the official benchmark project](https://github.com/camunda-cloud/zeebe/tree/develop/benchmarks) (load generation was running on an own Kubernetes Cluster). The mentioned resources are the resource limits configured in the Kubernetes cluster and are subject to change.
 
 
-### Camunda Cloud Self-Managed
+### Camunda Cloud self-managed
 
 When provisioning Camunda Cloud yourself onto your self-managed Kubernetes cluster, we recommend to follow the sizing we do for Camunda Cloud SaaS. The below table gives you the current resources configuration for the three hardware packages.
 

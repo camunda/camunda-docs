@@ -20,9 +20,9 @@ bookchapter: 4
 
 Name all elements in your BPMN diagrams by focusing on the business perspective. For activities, use a verb to describe what to do. For events, describe in which (business) state the process or domain object is currently in. For (data based) gateways, pose a question and describe the conditions under which the process moves on along the outgoing flows.
 
-## Essential Practices
+## Essential practices
 
-### Naming Activities
+### Naming activities
 
 Name a *task* using an object and a verb in the infinitive. By doing that you consistently describe *what you do with an object*.
 
@@ -35,7 +35,7 @@ Name a *subprocess* (or *call activity*) by using an object and a - by conventio
 WARNING: Avoid very broad and general verbs like e.g. "Handle invoice" or "Process order" and try to be more specific about what you do in your activity from a business perspective.
 
 
-### Naming Events
+### Naming events
 
 Wherever possible, name an *event* by using an object and a verb reflecting a state. Always try to describe *in which state an object is* when the process is about to leave the event.
 
@@ -61,7 +61,7 @@ WARNING: Avoid very broad and general verbs like e.g. "Invoice processed" or "Or
 
 
 
-### Naming Gateways
+### Naming gateways
 
 Label a data-based *exclusive gateway* with a question. Label the outgoing sequence flows with the conditions they are executed under. Frmulate the conditions as answers to the question posed at the gateway.
 
@@ -79,7 +79,7 @@ If this is not possible, leave out the question completely but describe the cond
 
 
 
-### Naming Processes
+### Naming processes
 
 A *pool* should be given the same name as the process the pool contains, by using an object and a nominalized verb. Optionally add the organizational role which is responsible for the process shown in the pool as a whole.
 
@@ -92,9 +92,9 @@ In case you have more than one lane in a pool, name each *lane* by using the org
 Name a *diagram* (file) with same name as process shown in the diagram. In case of a collaboration diagram, use a name reflecting the end-to-end perspective shown in that diagram.
 
 
-## Recommended Practices
+## Recommended practices
 
-### Using Sentence Case
+### Using sentence case
 
 Use [sentence case](https://en.wiktionary.org/wiki/sentence_case) when naming BPMN symbols. It is standard capitalization of an English sentence, with the first letter uppercase and subsequent letters lowercase with exceptions such as proper nouns or acronyms.
 
@@ -102,15 +102,15 @@ Use [sentence case](https://en.wiktionary.org/wiki/sentence_case) when naming BP
 
 
 
-### Avoiding Technical Terms
+### Avoiding technical terms
 
 Avoid to use purely *technical terms* when naming e.g. activities or other BPMN symbols - they are not always clear to every reader. Completely avoid using names of coding artifacts like classes, methods and technical services or purely technical systems.
 
 
 
-## Helpful Practices
+## Helpful practices
 
-### Avoiding Abbreviations
+### Avoiding abbreviations
 
 Avoid using *abbreviations* - they are not always clear to every reader. This is especially true for abbreviations which are company or department specific. Try to avoid them completely.
 
