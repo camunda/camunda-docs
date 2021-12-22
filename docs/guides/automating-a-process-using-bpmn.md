@@ -22,9 +22,9 @@ BPMN offers control and visibility over your critical business processes. The wo
 
 ## Set up
 
-At Camunda, you can utilize [Modeler](./components/modeler/overview.md) to build out BPMN diagrams.
+At Camunda, you can utilize [Modeler](/components/modeler/overview.md) to build out BPMN diagrams.
 
-Begin building out your process diagrams within [Camunda Cloud](./guides/introduction-to-camunda-cloud.md) using [Cloud Modeler](./components/modeler/overview.md). To get started, ensure you’ve [created a Camunda Cloud account](getting-started/create-camunda-cloud-account.md).
+Begin building out your process diagrams within [Camunda Cloud](./introduction-to-camunda-cloud.md) using [Cloud Modeler](/components/modeler/overview.md). To get started, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md).
 
 ## Getting started with BPMN
 
@@ -87,16 +87,16 @@ To execute your completed process diagram, click **Save**. Then, click **Execute
 
 You can now start a new process instance to initiate your process diagram. Click the **Execute** dropdown, and then **Start Instance**.
 
-You can now monitor your instances in [Operate](../components/operate/index.md). From your diagram, click the **Execute** dropdown, and **View Process Instances**. This will automatically take you to Camunda Operate to monitor your running instances.
+You can now monitor your instances in [Operate](./components/operate/index.md). From your diagram, click the **Execute** dropdown, and **View Process Instances**. This will automatically take you to Camunda Operate to monitor your running instances.
 
-You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the **Execute** dropdown, and **View User Tasks** to automatically be taken to [Tasklist](../components/tasklist/introduction.md).
+You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the **Execute** dropdown, and **View User Tasks** to automatically be taken to [Tasklist](./components/tasklist/introduction.md).
 
 ## Additional resources and next steps
 
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
 - [BPMN Implementation Reference](https://docs.camunda.org/manual/7.16/reference/bpmn20/)
 - [BPMN Engine](https://camunda.com/products/camunda-platform/bpmn-engine/)
-- [Model Your First Process](getting-started/model-your-first-process.md)
+- [Model Your First Process](./getting-started/model-your-first-process.md)
 - [BPMN Reference](https://camunda.com/bpmn/reference/)
-- [Operate](../components/operate/index.md)
-- [Tasklist](../components/tasklist/introduction.md)
+- [Operate](./components/operate/index.md)
+- [Tasklist](./components/tasklist/introduction.md)
