@@ -45,7 +45,7 @@ You can build out a BPMN diagram for a process using several elements, including
 - Gateways: For example, parallel gateways that move the process along between two tasks at the same time.
 - Subprocesses: For example, a transaction subprocess which can be used to group multiple activities to a transaction.
 
-For a complete list of BPMN elements and their capabilities, visit the [BPMN reference material](../components/modeler/bpmn/about.md).
+For a complete list of BPMN elements and their capabilities, visit the [BPMN reference material](../components/modeler/bpmn/bpmn.md).
 
 ### BPMN in action
 
@@ -92,9 +92,9 @@ You can also visit an ongoing list of user tasks required in your BPMN diagram. 
 ## Additional resources and next steps
 
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
-- [BPMN Implementation Reference](https://docs.camunda.org/manual/7.16/reference/bpmn20/)
+- [BPMN Implementation Reference](https://docs.camunda.org/manual/latest/reference/bpmn20/)
 - [BPMN Engine](https://camunda.com/products/camunda-platform/bpmn-engine/)
 - [Model Your First Process](./getting-started/model-your-first-process.md)
-- [BPMN Reference](https://camunda.com/bpmn/reference/)
+- [BPMN Reference](../components/modeler/bpmn/bpmn.md)
 - [Operate](./components/operate/index.md)
 - [Tasklist](./components/tasklist/introduction.md)
