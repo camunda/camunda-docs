@@ -18,7 +18,7 @@ bookchapter: 5
 
 A decision table consists of several *rules*, typically represented as rows. When reading such a row we look at certain *input values* and deduct a certain result represented by *output values*. When using the simplest hit policy *"unique"* (*U*), such rules do *not overlap*: only a single rule must match.
 
-<div dmn="choosing-the-dmn-hit-policy-dmn/unique.dmn" callouts="header:Season,header:Jacket,header:hitPolicy" />
+<div dmn="choosing-the-dmn-hit-policy-assets/unique.dmn" callouts="header:Season,header:Jacket,header:hitPolicy" />
 
 <span className="callout">1</span>
 
@@ -90,7 +90,7 @@ Most situations can be addressed by using different hit policies. In that case, 
 
 Hit policy "*Unique*" will typically make it easy to build a decision table which make sure that your rules are "complete" - in the sense that the rules do not just not overlap but cover all possible input values - so that you do not "forget" anything.
 
-<div dmn="choosing-the-dmn-hit-policy-dmn/customer-discount.dmn" callouts="header:Category,rowHeader:long-time-silver"/>
+<div dmn="choosing-the-dmn-hit-policy-assets/customer-discount.dmn" callouts="header:Category,rowHeader:long-time-silver"/>
 
 <span className="callout">1</span>
 
@@ -108,7 +108,7 @@ Such a use case fits to the hit policy "*Unique*". For such use cases it is an a
 
 Having said that, the hit policy "*First*" can sometimes make it easier for an organisation to reason about decision logic dealing with some criteria that are "harder" (more "clearcut") than others. Furthermore it can help to make a decision table layout more compact and therefore easier to interpret.
 
-<div dmn="choosing-the-dmn-hit-policy-dmn/customer-creditworthiness-hard.dmn" callouts="rating:bad,rowHeader:good,rowHeader:declined" />
+<div dmn="choosing-the-dmn-hit-policy-assets/customer-creditworthiness-hard.dmn" callouts="rating:bad,rowHeader:good,rowHeader:declined" />
 
 <span className="callout">1</span>
 
@@ -136,7 +136,7 @@ With hit policy *collect* you do not care about the order or any interdependenci
 
 Consider e.g. the question of "who is allowed" to carry out some action, as e.g. reviewing and deciding about incoming orders:
 
-<div dmn="choosing-the-dmn-hit-policy-dmn/order-review-groups.dmn" />
+<div dmn="choosing-the-dmn-hit-policy-assets/order-review-groups.dmn" />
 
 As a result of this decision table we will either get `["Sales"]` or `["Management"]` or a list of both groups `["Sales", "Management"]`.
 
@@ -150,7 +150,7 @@ Hit policy "collect" may be combined with operators such as *Sum (C+)*, leading 
 
 Assume e.g. we want to deal with customers we know nothing about. They receive a score of 0. But in case we know something about them we also weigh in our knowledge:
 
-<div dmn="choosing-the-dmn-hit-policy-dmn/customer-creditworthiness-soft.dmn" callouts="header:decisionTable,rating:good,income:lowIncome,income:goodIncome" />
+<div dmn="choosing-the-dmn-hit-policy-assets/customer-creditworthiness-soft.dmn" callouts="header:decisionTable,rating:good,income:lowIncome,income:goodIncome" />
 
 <span className="callout">1</span>
 

@@ -23,7 +23,7 @@ We create visual process models in order to better understand, discuss and remem
 
 Use [conventions for naming BPMN elements](naming-bpmn-elements.md), this will consistently inform the reader of the business semantics. The clarity and meaning of a process is often only as good as its labels.
 
-<div bpmn="creating-readable-process-models-bpmn/TwitterDemoProcess.bpmn" callouts="start_event_new_tweet,user_task_review_tweet,gateway_approved,boundary_event_tweet_duplicated,end_event_tweet_published" />
+<div bpmn="creating-readable-process-models-assets/TwitterDemoProcess.bpmn" callouts="start_event_new_tweet,user_task_review_tweet,gateway_approved,boundary_event_tweet_duplicated,end_event_tweet_published" />
 
 <span className="callout">1</span> 
 
@@ -54,7 +54,7 @@ Labeled *end events* characterize end *results* of the process from a business p
 
 Try to model symmetrically. Identify related splitting and joining gateways and form easily recognizable *visual*, eventually *nested*, *blocks* with those gateways.
 
-<div bpmn="creating-readable-process-models-bpmn/modeling-symmetrically.bpmn" callouts="inclusive_gateway_splitting,inclusive_gateway_joining,exclusive_gateway_splitting,exclusive_gateway_joining" />
+<div bpmn="creating-readable-process-models-assets/modeling-symmetrically.bpmn" callouts="inclusive_gateway_splitting,inclusive_gateway_joining,exclusive_gateway_splitting,exclusive_gateway_joining" />
 
 :::caution Camunda Platform 7 Only
 Inclusive Gateways (OR) are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
@@ -84,7 +84,7 @@ By explicitly showing *pairs of gateways* "opening" and "closing" parts of the p
 
 Model process diagrams *from left to right*. By carefully positioning symbols from left to right, according to the typical point in time at which they occur, one can improve the readability of process models significantly:
 
-<div bpmn="creating-readable-process-models-bpmn/model-from-left-to-right.bpmn" />
+<div bpmn="creating-readable-process-models-assets/model-from-left-to-right.bpmn" />
 
 Modeling from left to right supports the reading direction (for western audience) and supports the human field of vision - which prefers wide screens. 
 
@@ -94,7 +94,7 @@ Consciously decide whether *overlapping sequence flows* make your model more or 
 
 Avoid sequence flows *violating the reading direction*, meaning no outgoing flows on the left or incoming flows on the right of a symbol.
 
-<div bpmn="creating-readable-process-models-bpmn/overlapping-sequence-flows.bpmn" callouts="end_event_order_declined,task_correct_fax_number" />
+<div bpmn="creating-readable-process-models-assets/overlapping-sequence-flows.bpmn" callouts="end_event_order_declined,task_correct_fax_number" />
 
 <span className="callout">1</span>
 
@@ -109,7 +109,7 @@ The author could have attached the sequence flow leaving this task on its left. 
 *Avoid very long (multi page) sequence flows*, especially when flowing against the reading direction. The reader will lose any sense of what such lines actually mean. Instead use link events to connect points which are not on the same page/screen anymore.
 
 
-<div bpmn="creating-readable-process-models-bpmn/avoiding-multi-page-sequence-flows.bpmn" callouts="throwing-linkevent-recourse-not-possible,catching-linkevent-recourse-not-possible" />
+<div bpmn="creating-readable-process-models-assets/avoiding-multi-page-sequence-flows.bpmn" callouts="throwing-linkevent-recourse-not-possible,catching-linkevent-recourse-not-possible" />
 
 :::caution Camunda Platform 7 Only
 Link events are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
@@ -133,7 +133,7 @@ Make your models easier to understand by modeling *explicitly*, which most often
 
 Model splitting the process flow by always using *gateway symbols* like <img src="../img-bpmn-elements/inclusive-gateway.svg" className="inline-image" /> instead of conditional flows <img src="../img-bpmn-elements/conditional-flow.svg" className="inline-image" />.
 
-<div bpmn="creating-readable-process-models-bpmn/explicit-gateways-instead-of-conditional-flows.bpmn" callouts="inclusive_gateway" />
+<div bpmn="creating-readable-process-models-assets/explicit-gateways-instead-of-conditional-flows.bpmn" callouts="inclusive_gateway" />
 
 :::caution Camunda Platform 7 Only
 Inclusive Gateways (OR) and Conditional sequence flows are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
@@ -148,7 +148,7 @@ You could have left out e.g. this inclusive gateway by drawing two outgoing sequ
 
 Model the trigger and the end status of processes by always explicitly showing the *start* and *end event symbols*.
 
-<div bpmn="creating-readable-process-models-bpmn/explicit-start-and-end-events.bpmn" callouts="start_event, end_event" />
+<div bpmn="creating-readable-process-models-assets/explicit-start-and-end-events.bpmn" callouts="start_event, end_event" />
 
 :::caution
 Process models without start and end event cannot be executed on the Camunda workflow engine
@@ -164,7 +164,7 @@ According to the BPMN standard, you could have left out the start event ...
 
 Be specific about the *state* you reached with your event from a *business perspective*. Quite typically you will reach "success" and "failure" like events from a business perspective:
 
-<div bpmn="creating-readable-process-models-bpmn/business-states.bpmn" callouts="invoice_paid, invoice_rejected" />
+<div bpmn="creating-readable-process-models-assets/business-states.bpmn" callouts="invoice_paid, invoice_rejected" />
 
 <span className="callout">1</span>
 
@@ -179,7 +179,7 @@ Be specific about the *state* you reached with your event from a *business persp
 
 In general, avoid mixing up the split and join semantics of gateways by explicitly showing *two separate symbols*:
 
-<div bpmn="creating-readable-process-models-bpmn/separation-of-splitting-and-joining-gateways.bpmn" callouts="exclusive_gateway_joining,exclusive_gateway_splitting_2" />
+<div bpmn="creating-readable-process-models-assets/separation-of-splitting-and-joining-gateways.bpmn" callouts="exclusive_gateway_joining,exclusive_gateway_splitting_2" />
 
 <span className="callout">1</span>
 
@@ -193,7 +193,7 @@ The fact that readers will often overlook the join semantics of gateways serving
 
 However, there are cases in which the readability of models can be improved with *implicit modeling*. Consider the following example:
 
-<div bpmn="creating-readable-process-models-bpmn/without-separation-of-splitting-and-joining-gateways.bpmn" callouts="event_based_gateway" />
+<div bpmn="creating-readable-process-models-assets/without-separation-of-splitting-and-joining-gateways.bpmn" callouts="event_based_gateway" />
 
 <span className="callout">1</span>
 
@@ -205,7 +205,7 @@ A decrease in readability by modeling explicit joining gateways often happens wh
 
 Model the XOR gateway by explicitly showing the *"X" symbol*, even if some tools allow to draw a blank gateway.
 
-<div bpmn="creating-readable-process-models-bpmn/explicit-xor-gateway-markers.bpmn" callouts="exclusive_gateway_splitting, exclusive_gateway_joining" />
+<div bpmn="creating-readable-process-models-assets/explicit-xor-gateway-markers.bpmn" callouts="exclusive_gateway_splitting, exclusive_gateway_joining" />
 
 <span className="callout">1</span>
 
@@ -221,7 +221,7 @@ The "X" marker makes a clearer difference to the other gateway types (inclusive,
 
 Always model splitting the process flow by explicitly showing the *gateway symbol*:
 
-<div bpmn="creating-readable-process-models-bpmn/explicit-splitting-parallel-gateways.bpmn" callouts="parallel_gateway_splitting,parallel_gateway_joining" />
+<div bpmn="creating-readable-process-models-assets/explicit-splitting-parallel-gateways.bpmn" callouts="parallel_gateway_splitting,parallel_gateway_joining" />
 
 <span className="callout">1</span>
 
@@ -238,7 +238,7 @@ The fact that readers of models using parallelization will most probably need to
 
 Model joining the process flow by explicitly showing the *XOR gateway symbol* - so the reader does not have to know BPMN details to understand how two incoming or outgoing sequence flows in a task behave. Additionally this often supports the [symmetry of the model](#modeling-symmetrically) by explicitly showing a "relationship" of the splitting and joining *gateways forming a visual "block"*.
 
-<div bpmn="creating-readable-process-models-bpmn/explicit-joining-xor-gateways.bpmn" callouts="exclusive_gateway_joining,exclusive_gateway_splitting" />
+<div bpmn="creating-readable-process-models-assets/explicit-joining-xor-gateways.bpmn" callouts="exclusive_gateway_joining,exclusive_gateway_splitting" />
 
 <span className="callout">1</span>
 
@@ -250,7 +250,7 @@ You could have modeled this join implicitly by leaving out the gateway and direc
 
 This is particularly helpful for models bigger than that example with many such - eventually nested - blocks. Consider the following model, showing two *nested blocks* of gateways:
 
-<div bpmn="creating-readable-process-models-bpmn/explicit-joining-gateways-nested.bpmn" callouts="exclusive_gateway_joining" />
+<div bpmn="creating-readable-process-models-assets/explicit-joining-gateways-nested.bpmn" callouts="exclusive_gateway_joining" />
 
 <span className="callout">1</span>
 
@@ -259,7 +259,7 @@ Now, you could not even have modeled this join implicitly, because it's directly
 
 There are always exceptions to the rule! There are cases in which the readability of models can be *improved* with *implicit modeling*. So don't be dogmatic about explicit modeling, always aim for the best readable model. The following example shows a case of a model in which splitting and joining points do not form natural "blocks" anyway. In such cases, it can be preferable to make use of *implicit joining* to improve the overall readability!
 
-<div bpmn="creating-readable-process-models-bpmn/implicit-joining-gateways.bpmn" callouts="task_hand_over_to_collection_agency,task_close_case" />
+<div bpmn="creating-readable-process-models-assets/implicit-joining-gateways.bpmn" callouts="task_hand_over_to_collection_agency,task_close_case" />
 
 <span className="callout">1</span>
 
@@ -307,7 +307,7 @@ Note that roles are part of your executable BPMN process model as *technical att
 
 You may want to emphasize the *"happy path"* leading to the delivery of a successful process result by placing the tasks, events and gateways belonging to the happy path on a straight sequence flow in the center of your diagram - at least as much as possible.
 
-<div bpmn="creating-readable-process-models-bpmn/TwitterDemoProcess.bpmn" callouts="start_event_new_tweet,user_task_review_tweet,gateway_approved,service_task_publish_on_twitter,end_event_tweet_published" />
+<div bpmn="creating-readable-process-models-assets/TwitterDemoProcess.bpmn" callouts="start_event_new_tweet,user_task_review_tweet,gateway_approved,service_task_publish_on_twitter,end_event_tweet_published" />
 
 The *five* BPMN symbols belonging to the happy path are put on a straight sequence flow in the center of the diagram.
 
@@ -320,7 +320,7 @@ If you model on operational level (see [BPMN Tutorial](https://camunda.com/bpmn/
 
 Furthermore, model just *one coherent process per pool* (apart from event subprocesses, of course), even though BPMN in principle allows several processes per pool. This improves readability by constituting a clear visual border around every process and by providing a natural space for labeling that part of the end-to-end process in the pool's header.
 
-<div bpmn="creating-readable-process-models-bpmn/using-collaboration-diagrams.bpmn" callouts="pool-invoice-collection,pool-invoice-approval,pool-invoice-payment" />
+<div bpmn="creating-readable-process-models-assets/using-collaboration-diagrams.bpmn" callouts="pool-invoice-collection,pool-invoice-approval,pool-invoice-payment" />
 
 <span className="callout">1</span> 
 
@@ -342,7 +342,7 @@ Using *collaboration diagrams* with *separate pools* for the process participant
 
 Consciously decide how you want to model systems the process participants are interacting with. Use *data stores* to show systems which primarily serve as a means to store and retrieve data. Use - depending on your needs *collapsed* or *expanded* - *pools* for systems which are carrying out crucial activities in the process going way beyond storing and retrieving data.
 
-<div bpmn="creating-readable-process-models-bpmn/showing-interaction-with-systems.bpmn" callouts="pool-payments-processing,datastore-archived-pdfs,datastore-invoices-to-be-paid" />
+<div bpmn="creating-readable-process-models-assets/showing-interaction-with-systems.bpmn" callouts="pool-payments-processing,datastore-archived-pdfs,datastore-invoices-to-be-paid" />
 
 <span className="callout">1</span>
 
@@ -367,7 +367,7 @@ Experience shows that many data objects and especially many data associations qu
 
 You might find three practices helpful to find your own "right" amount of data visualization:
 
-<div bpmn="creating-readable-process-models-bpmn/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-flow" />
+<div bpmn="creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-flow" />
 
 <span className="callout">1</span>
 
@@ -391,7 +391,7 @@ Furthermore, avoid *excessive use of colors*. Experience shows that colors are v
 
 However, there are valid exceptions. For example you could mark the *happy path* through a process with a visually weak coloring:
 
-<div bpmn="creating-readable-process-models-bpmn/TwitterDemoProcessColor.bpmn" />
+<div bpmn="creating-readable-process-models-assets/TwitterDemoProcessColor.bpmn" />
 
 
 Another case for useful coloring might be to make a visual difference between *human* and *technical flows* within a bigger collaboration diagram by coloring the header bar on the left hand side of the pools.

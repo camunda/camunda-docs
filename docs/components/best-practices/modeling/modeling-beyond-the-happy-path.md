@@ -24,7 +24,7 @@ The happy path is kind of the default scenario with a positive outcome, so no ex
 
 When we have that, the diagram shows the *happy path* of a business process (or of the selectively chosen part of the end-to-end business process):
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/happy-path.bpmn" callouts="end_event_order_confirmed, start_event_order_received, task_check_order_completeness, intermediate_event_delivery_date_fixed" />
+<div bpmn="modeling-beyond-the-happy-path-assets/happy-path.bpmn" callouts="end_event_order_confirmed, start_event_order_received, task_check_order_completeness, intermediate_event_delivery_date_fixed" />
 
 <span className="callout">1</span>
 
@@ -65,7 +65,7 @@ With BPMN gateways we can deal with problems arising at a *particular point* in 
 
 By using data-based gateways we *actively decide* "now and here" on the basis of our own *process data* which path our process must move along. Therefore we can e.g. use a XOR gateway to fork off a "problem path" dealing with a problematic result of *our own activities*:
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/exclusive-gateway.bpmn" callouts="exclusive_gateway_order_complete,exclusive_gateway_customer_creditworthy,end_event_order_declined" />
+<div bpmn="modeling-beyond-the-happy-path-assets/exclusive-gateway.bpmn" callouts="exclusive_gateway_order_complete,exclusive_gateway_customer_creditworthy,end_event_order_declined" />
 
 <span className="callout">1</span>
 
@@ -85,7 +85,7 @@ The *end event* characterizes the undesired end result "order declined" which we
 
 By using event-based gateways we *passively wait* for *future events* deciding about which path our process will have to move along. Therefore we can e.g. use use it to fork off a "problem path" dealing with an undesired event *outside of our own control*:
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/event-based-gateway.bpmn" callouts="event_based_gateway,intermediate_event_ordered_good_not_deliverable" />
+<div bpmn="modeling-beyond-the-happy-path-assets/event-based-gateway.bpmn" callouts="event_based_gateway,intermediate_event_ordered_good_not_deliverable" />
 
 <span className="callout">1</span>
 
@@ -101,7 +101,7 @@ The *intermediate message event* allows us to deal with the undesired event that
 
 By using event-based gateways we can also deal with the situation that *nothing relevant* for our process *happens*. We do this by defining a time period, after which we decide that we do not want to wait any longer:
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/event-based-gateway-timer.bpmn" callouts="intermediate_event_answer_overdue" />
+<div bpmn="modeling-beyond-the-happy-path-assets/event-based-gateway-timer.bpmn" callouts="intermediate_event_answer_overdue" />
 
 <span className="callout">1</span>
 
@@ -119,7 +119,7 @@ With BPMN boundary events we can deal with problems arising *while we are active
 
 A typical case is that it turns out to be *impossible to achieve the result* of an activity while working on it. We can then choose to interrupt our work and fork off a "problem path" to deal with the issue:
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/boundary-error-event.bpmn" callouts="boundary_error_event_order_not_readable" />
+<div bpmn="modeling-beyond-the-happy-path-assets/boundary-error-event.bpmn" callouts="boundary_error_event_order_not_readable" />
 
 <span className="callout">1</span>
 
@@ -135,7 +135,7 @@ An example for a typical technical concern would be that we currently cannot rea
 
 Another typical use case for reacting to situations while we are actively occupied is that it sometimes turns out that we need to do stuff *in addition to what we already do*:
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/boundary-timer-event.bpmn" callouts="sub_process,boundary_event_after_two_days" />
+<div bpmn="modeling-beyond-the-happy-path-assets/boundary-timer-event.bpmn" callouts="sub_process,boundary_event_after_two_days" />
 
 <span className="callout">1</span>
 
@@ -157,7 +157,7 @@ With BPMN event sub processes we can can - a bit similar to boundary events - de
 
 Some issues can occur almost anywhere on the way through our process. The event sub process allows us to fork off a *problem path* modeled separately from our main process to deal with such issues:
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/non-interrupting-event-subprocess.bpmn" callouts="start_event_status_requested,task_provide_status_information" />
+<div bpmn="modeling-beyond-the-happy-path-assets/non-interrupting-event-subprocess.bpmn" callouts="start_event_status_requested,task_provide_status_information" />
 
 <span className="callout">1</span>
 
@@ -173,7 +173,7 @@ We should then provide the requested information without interferring with the o
 
 Another typical use case for event based sub processes is a cancellation requested by the customer:
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/interrupting-event-subprocess.bpmn" callouts="start_event_order_canceled,task_inform_dealer" />
+<div bpmn="modeling-beyond-the-happy-path-assets/interrupting-event-subprocess.bpmn" callouts="start_event_order_canceled,task_inform_dealer" />
 
 <span className="callout">1</span>
 
@@ -192,7 +192,7 @@ We should then interrupt the main process (which is already expressed by the nat
 
 The examples above leverage the *event based gateway*. BPMN also allows to model *receive tasks* that wait for responses. This has the advantage that you now can leverage boundary events to deal with *missing results* or other *events occuring while you are waiting* for the response. This is an *alternative* to the event based gateways shown in the above models.
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/passivity-as-activity.bpmn" callouts="task_receive_delivery_date,boundary_event_answer_overdue,boundary_event_ordered_good_not_deliverable" />
+<div bpmn="modeling-beyond-the-happy-path-assets/passivity-as-activity.bpmn" callouts="task_receive_delivery_date,boundary_event_answer_overdue,boundary_event_ordered_good_not_deliverable" />
 
 <span className="callout">1</span>
 
@@ -212,7 +212,7 @@ The possibility that it now might turn out that the ordered good is not delivera
 
 Boundary Events are particularly useful when you consider that you might want to remind your dealer that the answer is overdue and give him another chance for transmitting the delivery date before you give up waiting. First, consider how this could be achieved by using event based gateways:
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/multi-phase-escalation-with-event-based-gateways.bpmn" callouts="gateway_dealer_already_reminded,task_remind_dealer" />
+<div bpmn="modeling-beyond-the-happy-path-assets/multi-phase-escalation-with-event-based-gateways.bpmn" callouts="gateway_dealer_already_reminded,task_remind_dealer" />
 
 <span className="callout">1</span>
 
@@ -224,7 +224,7 @@ However, note that while we are reminding the dealer, we are strictly speaking n
 
 To get the BPMN execution semantics above fully right, we would now need to attach the two possible answers of the dealer ('Delivery data fixed', 'Ordered good not available') as boundary events to the task 'Remind dealer', too! Quite a modeling construct, just to properly wait for the dealer's response, right? Therefore, consider the following alternative to this modeling issue using boundary events only:
 
-<div bpmn="modeling-beyond-the-happy-path-bpmn/multi-phase-escalation-with-boundary-events.bpmn" callouts="boundary_event_answer_late" />
+<div bpmn="modeling-beyond-the-happy-path-assets/multi-phase-escalation-with-boundary-events.bpmn" callouts="boundary_event_answer_late" />
 
 <span className="callout">1</span>
 
