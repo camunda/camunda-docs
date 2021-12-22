@@ -8,6 +8,116 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 6
+
+#### Publication Date:
+
+December 22th, 2021
+
+#### Product affected:
+
+Zeebe, Operate, Tasklist
+
+#### Impact:
+
+Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45105.
+At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
+
+
+#### How to determine if the installation is affected
+
+You are using Zeebe, Operate or Tasklist version <= 1.2.7 or <= 1.1.8
+
+#### Solution
+
+Camunda has provided the following releases which contain a fix
+
+- [Zeebe, Operate and Tasklist 1.2.8](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.8)
+- [Zeebe, Operate and Tasklist 1.1.9](https://github.com/camunda-cloud/zeebe/releases/tag/1.1.9)
+
+### Notice 5
+
+#### Publication Date:
+
+December 22th, 2021
+
+#### Product affected:
+
+IAM
+
+#### Impact:
+
+IAM bundles log4j libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45105.
+Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bundle the log4j-core library which contains the vulnerability referred to by the CVE. As a result, Camunda does not consider IAM to be affected by the vulnerability. Still, Camunda recommends applying fixes as mentioned in the Solution section below.
+
+IAM bundles logback libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-42550.
+At this point, Camunda is not aware of any specific attack vector in IAM allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
+
+#### How to determine if the installation is affected
+
+You are using IAM version <= 1.2.7
+
+#### Solution
+
+Camunda has provided the following releases which contain a fix
+
+- [IAM 1.2.8](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.8)
+
+
+### Notice 4
+
+#### Publication Date:
+
+December 17th, 2021
+
+#### Product affected:
+
+Zeebe, Operate, Tasklist
+
+#### Impact:
+
+Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45046.
+At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
+
+
+#### How to determine if the installation is affected
+
+You are using Zeebe, Operate or Tasklist version <= 1.2.6 or <= 1.1.7
+
+#### Solution
+
+Camunda has provided the following releases which contain a fix
+
+- [Zeebe, Operate and Tasklist 1.2.7](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.7)
+- [Zeebe, Operate and Tasklist 1.1.8](https://github.com/camunda-cloud/zeebe/releases/tag/1.1.8)
+
+### Notice 3
+
+#### Publication Date:
+
+December 17th, 2021
+
+#### Product affected:
+
+IAM
+
+#### Impact:
+
+IAM bundles log4j libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45046.
+Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bundle the log4j-core library which contains the vulnerability referred to by the CVE. As a result, Camunda does not consider IAM to be affected by the vulnerability. Still, Camunda recommends applying fixes as mentioned in the Solution section below.
+
+IAM bundles logback libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-42550.
+At this point, Camunda is not aware of any specific attack vector in IAM allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
+
+#### How to determine if the installation is affected
+
+You are using IAM version <= 1.2.6
+
+#### Solution
+
+Camunda has provided the following releases which contain a fix
+
+- [IAM 1.2.7](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.7)
 
 ### Notice 2
 

@@ -17,6 +17,7 @@ import TabItem from "@theme/TabItem";
 {label: 'Tasklist', value: 'tasklist', },
 {label: 'IAM', value: 'iam', },
 {label: 'Optimize', value: 'optimize', },
+{label: 'Camunda Modeler', value: 'modeler', },
 ]
 }>
 
@@ -930,6 +931,7 @@ All of these libraries are required for core functionality.
 
 </TabItem>
 
+
 <TabItem value='optimize'>
 
 ### Optimize Dependencies (front end)
@@ -1295,6 +1297,10 @@ All of these libraries are required for core functionality.
 * spring-web@5.3.10, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
 * spring-websocket@5.3.10, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
 * snakeyaml@1.28, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+  
+<TabItem value='modeler'>
+
+Camunda Modeler is a desktop modeling application that builds upon a number of third party libraries. You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/camunda-modeler/blob/master/THIRD_PARTY_NOTICES), located in the root of the source code repository. This file is also shipped with the application distribution as `THIRD_PARTY_NOTICES.camunda-modeler.txt`.
 
 </TabItem>
 
