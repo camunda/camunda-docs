@@ -6,7 +6,7 @@ description: "Let's analyze the prerequisites and code to handle variables as PO
 
 ## Related resources
 
-- [Data flow](../../components/modeler/bpmn/bpmn-processes/data-flow.md)
+- [Data flow](../../components/modeler/bpmn/data-flow.md)
 
 ## Prerequisites
 

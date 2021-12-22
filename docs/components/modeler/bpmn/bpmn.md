@@ -18,7 +18,7 @@ BPMN diagrams must be created for the process engine they intend to be deployed 
 
 ## Start modeling
 
-![Start Modeling](./img/quickstart-2.png)
+![Start Modeling](./assets/quickstart-2.png)
 
 Now you can start to create a BPMN 2.0 model. Add the desired elements from the palette on the left hand side by dragging and dropping them onto the diagram canvas.
 
@@ -26,21 +26,21 @@ Alternatively, you can add new elements by using the context menu that appears w
 
 ## Demo
 
-![Demo](./img/demo.gif)
+![Demo](./assets/demo.gif)
 
 The demo above shows how to create more BPMN 2.0 elements like lanes, task types and event definitions.
 
 ## BPMN 2.0 coverage
 
-Modeler [covers all BPMN 2.0 elements](/docs/components/modeler/bpmn/bpmn-processes/bpmn-coverage/) for modeling processes and collaborations.
+Modeler [covers all BPMN 2.0 elements](/docs/components/modeler/bpmn/bpmn-coverage/) for modeling processes and collaborations.
 
 ## BPMN 2.0 properties for execution
 
-![Save BPMN Diagram](./img/quickstart-3.png)
+![Save BPMN Diagram](./assets/quickstart-3.png)
 
 In the properties panel on the right hand side, you can view and edit attributes that apply to the currently selected element.
 
-![Save BPMN Diagram](./img/quickstart-4.png)
+![Save BPMN Diagram](./assets/quickstart-4.png)
 
 The panel can be hidden and restored by clicking the tab on its left border.
 

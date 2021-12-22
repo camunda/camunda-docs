@@ -27,7 +27,7 @@ They are especially useful for monitoring to understand how the process is doing
 The engine itself doesn't do anything in the event, it just passes through it.
 
 ## Variable mappings
-Start and intermediate none events can have [variable output mappings](../../../../../components/concepts/variables.md#output-mappings). End events do not support this.
+Start and intermediate none events can have [variable output mappings](../../../../components/concepts/variables.md#output-mappings). End events do not support this.
 
 For start events this is often used to initialize process variables.
 

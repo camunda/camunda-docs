@@ -100,57 +100,53 @@ module.exports = {
           {
           "BPMN": [
             "components/modeler/bpmn/modeler-bpmn",
-            {
-              "Reference material": [
-                "components/modeler/bpmn/bpmn-processes/bpmn-primer",
-                "components/modeler/bpmn/bpmn-processes/bpmn-coverage",
-                "components/modeler/bpmn/bpmn-processes/data-flow",
+            "components/modeler/bpmn/bpmn-primer",
+            "components/modeler/bpmn/bpmn-coverage",
+            "components/modeler/bpmn/data-flow",
                 {
                   "Tasks": [
-                        "components/modeler/bpmn/bpmn-processes/tasks",
-                        "components/modeler/bpmn/bpmn-processes/service-tasks/service-tasks",
-                        "components/modeler/bpmn/bpmn-processes/user-tasks/user-tasks",
-                        "components/modeler/bpmn/bpmn-processes/receive-tasks/receive-tasks",
-                        "components/modeler/bpmn/bpmn-processes/business-rule-tasks/business-rule-tasks",
-                        "components/modeler/bpmn/bpmn-processes/script-tasks/script-tasks",
-                        "components/modeler/bpmn/bpmn-processes/send-tasks/send-tasks",
-                        "components/modeler/bpmn/bpmn-processes/manual-tasks/manual-tasks",
+                        "components/modeler/bpmn/tasks",
+                        "components/modeler/bpmn/service-tasks/service-tasks",
+                        "components/modeler/bpmn/user-tasks/user-tasks",
+                        "components/modeler/bpmn/receive-tasks/receive-tasks",
+                        "components/modeler/bpmn/business-rule-tasks/business-rule-tasks",
+                        "components/modeler/bpmn/script-tasks/script-tasks",
+                        "components/modeler/bpmn/send-tasks/send-tasks",
+                        "components/modeler/bpmn/manual-tasks/manual-tasks",
                       ],
                     },
                     {
                     "Gateways": [
-                        "components/modeler/bpmn/bpmn-processes/gateways",
-                        "components/modeler/bpmn/bpmn-processes/exclusive-gateways/exclusive-gateways",
-                        "components/modeler/bpmn/bpmn-processes/parallel-gateways/parallel-gateways",
-                        "components/modeler/bpmn/bpmn-processes/event-based-gateways/event-based-gateways",
+                        "components/modeler/bpmn/gateways",
+                        "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
+                        "components/modeler/bpmn/parallel-gateways/parallel-gateways",
+                        "components/modeler/bpmn/event-based-gateways/event-based-gateways",
                       ],
                     },
                     {
                     "Events": [
-                        "components/modeler/bpmn/bpmn-processes/events",
-                        "components/modeler/bpmn/bpmn-processes/none-events/none-events",
-                        "components/modeler/bpmn/bpmn-processes/message-events/message-events",
-                        "components/modeler/bpmn/bpmn-processes/timer-events/timer-events",
-                        "components/modeler/bpmn/bpmn-processes/error-events/error-events",
+                        "components/modeler/bpmn/events",
+                        "components/modeler/bpmn/none-events/none-events",
+                        "components/modeler/bpmn/message-events/message-events",
+                        "components/modeler/bpmn/timer-events/timer-events",
+                        "components/modeler/bpmn/error-events/error-events",
                       ],
                     },
                     {
                     "Subprocesses": [
-                        "components/modeler/bpmn/bpmn-processes/subprocesses",
-                        "components/modeler/bpmn/bpmn-processes/embedded-subprocesses/embedded-subprocesses",
-                        "components/modeler/bpmn/bpmn-processes/call-activities/call-activities",
-                        "components/modeler/bpmn/bpmn-processes/event-subprocesses/event-subprocesses",
+                        "components/modeler/bpmn/subprocesses",
+                        "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
+                        "components/modeler/bpmn/call-activities/call-activities",
+                        "components/modeler/bpmn/event-subprocesses/event-subprocesses",
                       ],
                     },
                     {
                     "Markers": [
-                        "components/modeler/bpmn/bpmn-processes/markers",
-                        "components/modeler/bpmn/bpmn-processes/multi-instance/multi-instance",
+                        "components/modeler/bpmn/markers",
+                        "components/modeler/bpmn/multi-instance/multi-instance",
                       ],
                     },
                   ],
-                },
-          ],
           },
           {
           "DMN": [
