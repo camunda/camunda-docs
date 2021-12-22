@@ -13,6 +13,9 @@ RewriteRule ^docs/components/operate/third-party-libraries/(.*)$  docs/reference
 RewriteRule ^docs/components/tasklist/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
 
+RewriteRule ^docs/reference/bpmn-processes(.*)$ /docs/components/modeler/bpmn$1 [R=301,L]
+RewriteRule ^docs/reference/bpmn-processes$ /docs/components/modeler/bpmn [R=301,L]
+
 RewriteRule ^docs/components/IAM(.*)$ /docs/self-managed/IAM/$1 [R=301,L]
 RewriteRule ^docs/components/IAM$ /docs/self-managed/IAM/ [R=301,L]
 

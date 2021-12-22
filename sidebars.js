@@ -17,6 +17,7 @@ module.exports = {
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/automating-a-process-using-bpmn",
+    "guides/utilizing-forms",
     "guides/integrating-optimize",
     "guides/message-correlation",
     {
@@ -76,7 +77,7 @@ module.exports = {
         },
       ],
       Modeler: [
-        "components/modeler/overview",
+        "components/modeler/about-modeler",
         {
           "Cloud Modeler": [
             "components/modeler/cloud-modeler/launch-cloud-modeler",
@@ -86,14 +87,73 @@ module.exports = {
             "components/modeler/cloud-modeler/start-instance",
             "components/modeler/cloud-modeler/model-overview",
           ],
+          },
+          {
           "Camunda Modeler": [
             "components/modeler/camunda-modeler/install-the-modeler",
             "components/modeler/camunda-modeler/model-your-first-diagram",
             "components/modeler/camunda-modeler/connect-to-camunda-cloud",
             "components/modeler/camunda-modeler/deploy-to-cloud",
             "components/modeler/camunda-modeler/start-instance",
+            "components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates",
+              ],
+          },
+          {
+          "BPMN": [
+            "components/modeler/bpmn/modeler-bpmn",
+            "components/modeler/bpmn/bpmn-primer",
+            "components/modeler/bpmn/bpmn-coverage",
+            "components/modeler/bpmn/data-flow",
+                {
+                  "Tasks": [
+                        "components/modeler/bpmn/tasks",
+                        "components/modeler/bpmn/service-tasks/service-tasks",
+                        "components/modeler/bpmn/user-tasks/user-tasks",
+                        "components/modeler/bpmn/receive-tasks/receive-tasks",
+                        "components/modeler/bpmn/business-rule-tasks/business-rule-tasks",
+                        "components/modeler/bpmn/script-tasks/script-tasks",
+                        "components/modeler/bpmn/send-tasks/send-tasks",
+                        "components/modeler/bpmn/manual-tasks/manual-tasks",
+                      ],
+                    },
+                    {
+                    "Gateways": [
+                        "components/modeler/bpmn/gateways",
+                        "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
+                        "components/modeler/bpmn/parallel-gateways/parallel-gateways",
+                        "components/modeler/bpmn/event-based-gateways/event-based-gateways",
+                      ],
+                    },
+                    {
+                    "Events": [
+                        "components/modeler/bpmn/events",
+                        "components/modeler/bpmn/none-events/none-events",
+                        "components/modeler/bpmn/message-events/message-events",
+                        "components/modeler/bpmn/timer-events/timer-events",
+                        "components/modeler/bpmn/error-events/error-events",
+                      ],
+                    },
+                    {
+                    "Subprocesses": [
+                        "components/modeler/bpmn/subprocesses",
+                        "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
+                        "components/modeler/bpmn/call-activities/call-activities",
+                        "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+                      ],
+                    },
+                    {
+                    "Markers": [
+                        "components/modeler/bpmn/markers",
+                        "components/modeler/bpmn/multi-instance/multi-instance",
+                      ],
+                    },
+                  ],
+          },
+          {
+          "DMN": [
+            "components/modeler/dmn/camunda-modeler-dmn",
           ],
-        },
+          },
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
@@ -142,7 +202,6 @@ module.exports = {
               ],
               "User interface mode": [
                 "components/tasklist/userguide/user-interface/overview",
-                "components/tasklist/userguide/user-interface/camunda-forms",
               ],
             },
           ],
@@ -215,56 +274,6 @@ module.exports = {
  
   Reference: [
     "reference/overview",
-    {
-      "BPMN processes": [
-        "reference/bpmn-processes/bpmn-primer",
-        "reference/bpmn-processes/bpmn-coverage",
-        "reference/bpmn-processes/data-flow",
-        {
-          Tasks: [
-            "reference/bpmn-processes/tasks",
-            "reference/bpmn-processes/service-tasks/service-tasks",
-            "reference/bpmn-processes/user-tasks/user-tasks",
-            "reference/bpmn-processes/receive-tasks/receive-tasks",
-            "reference/bpmn-processes/business-rule-tasks/business-rule-tasks",
-            "reference/bpmn-processes/script-tasks/script-tasks",
-            "reference/bpmn-processes/send-tasks/send-tasks",
-            "reference/bpmn-processes/manual-tasks/manual-tasks",
-          ],
-        },
-        {
-          Gateways: [
-            "reference/bpmn-processes/gateways",
-            "reference/bpmn-processes/exclusive-gateways/exclusive-gateways",
-            "reference/bpmn-processes/parallel-gateways/parallel-gateways",
-            "reference/bpmn-processes/event-based-gateways/event-based-gateways",
-          ],
-        },
-        {
-          Events: [
-            "reference/bpmn-processes/events",
-            "reference/bpmn-processes/none-events/none-events",
-            "reference/bpmn-processes/message-events/message-events",
-            "reference/bpmn-processes/timer-events/timer-events",
-            "reference/bpmn-processes/error-events/error-events",
-          ],
-        },
-        {
-          Subprocesses: [
-            "reference/bpmn-processes/subprocesses",
-            "reference/bpmn-processes/embedded-subprocesses/embedded-subprocesses",
-            "reference/bpmn-processes/call-activities/call-activities",
-            "reference/bpmn-processes/event-subprocesses/event-subprocesses",
-          ],
-        },
-        {
-          Markers: [
-            "reference/bpmn-processes/markers",
-            "reference/bpmn-processes/multi-instance/multi-instance",
-          ],
-        },
-      ],
-    },
     require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
     "reference/announcements",

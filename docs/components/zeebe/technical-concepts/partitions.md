@@ -98,7 +98,7 @@ Starting with 1.2.0, there is a new experimental configuration option which lets
 
 The partitioning scheme is controlled via a new configuration option under `zeebe.broker.experimental.partitioning`, more specifically `zeebe.broker.experimental.partitioning.scheme`. This option currently takes the following values:
 
-- `ROUND_ROBIN`: When set, this applies the round robin partition distribution, which corresponds to the distribution explain above on this page. _This is the default option, and requires no extra configuration if you want to use it._
+- `ROUND_ROBIN`: When set, this applies the round robin partition distribution, which corresponds to the distribution explained above on this page. _This is the default option, and requires no extra configuration if you want to use it._
 - `FIXED`: When set, this applies a manually configured partition distribution, configured separately.
 
 To use the `FIXED` partitioning scheme, _you must provide an exhaustive map of all partitions to a set of brokers_. This is achieved via the `zeebe.broker.experimental.partitioning.fixed` configuration option. Here is an example for a cluster of `5` brokers, `3` partitions, and a replication factor of `3`.

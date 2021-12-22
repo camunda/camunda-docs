@@ -363,4 +363,4 @@ Yay! You finished this tutorial and learned the basic usage of the Go client.
 Next steps:
 
 - Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-cloud.md).
-- Learn more about [BPMN processes](/reference/bpmn-processes/bpmn-primer.md).
+- Learn more about [BPMN processes](/components/modeler/bpmn/bpmn-primer.md).
