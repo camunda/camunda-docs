@@ -24,3 +24,16 @@ description: "Let's take a closer look at supported environments alongside Zeebe
   Tasklist require OpenJDK 11+ and Elasticsearch 7.14.x.
 - **Tasklist Browser App**: Requires the latest version of Chrome, Firefox, or
   Edge on Windows, MacOS, and Linux.
+
+## Camunda Modeler
+
+Supported on the following platforms:
+
+Windows 7 / 10
+Mac OS X 10.11
+Ubuntu LTS (latest)
+Reported to work on
+
+Ubuntu 12.04 and newer
+Fedora 21
+Debian 8
