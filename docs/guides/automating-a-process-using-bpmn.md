@@ -22,9 +22,9 @@ BPMN offers control and visibility over your critical business processes. The wo
 
 ## Set up
 
-At Camunda, you can utilize [Modeler](/components/modeler/overview.md) to build out BPMN diagrams.
+At Camunda, you can utilize [Modeler](../components/modeler/about.md) to build out BPMN diagrams.
 
-Begin building out your process diagrams within [Camunda Cloud](./introduction-to-camunda-cloud.md) using [Cloud Modeler](/components/modeler/overview.md). To get started, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md).
+Begin building out your process diagrams within [Camunda Cloud](./introduction-to-camunda-cloud.md) using [Cloud Modeler](../components/modeler/about.md). To get started, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md).
 
 ## Getting started with BPMN
 
@@ -45,9 +45,7 @@ You can build out a BPMN diagram for a process using several elements, including
 - Gateways: For example, parallel gateways that move the process along between two tasks at the same time.
 - Subprocesses: For example, a transaction subprocess which can be used to group multiple activities to a transaction.
 
-For a complete list of BPMN elements, visit the [BPMN reference material](https://docs.camunda.org/manual/latest/reference/bpmn20/).
-
-If you're new to BPMN elements and their capabilities, also visit the [BPMN symbol documentation](https://camunda.com/bpmn/reference/).
+For a complete list of BPMN elements and their capabilities, visit the [BPMN reference material](../components/modeler/bpmn/about.md).
 
 ### BPMN in action
 
