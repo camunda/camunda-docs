@@ -88,9 +88,9 @@ historyCleanup:
     enabled: true
 ```
 
-{{< note title="" class="info" >}}
+:::note
 Please note that the ingested event cleanup does not cascade down to potentially existing [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md) that may contain data originating from ingested events. To make sure data of ingested events is also removed from Event Based Processes, you need to enable the [Process Data Cleanup](#process-data-cleanup) as well.
-{{< /note >}}
+:::
 
 ## Example
 

@@ -17,4 +17,4 @@ The following illustration demonstrates this use case with two Optimize instance
 Please note that changing the value of `es.settings.index.prefix` after an instance was already running results in new indexes being created with the new prefix value. There is no support in migrating data between indexes based on different prefixes.
 :::
 
-{{< img src="./img/shared-elasticsearch-cluster.png" title="Shared Elasticsearch Cluster Setup" >}}
+![Shared Elasticsearch Cluster Setup](img/shared-elasticsearch-cluster.png)

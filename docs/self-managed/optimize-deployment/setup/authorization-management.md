@@ -18,7 +18,7 @@ When defining an authorization to grant or deny access to certain definitions, t
 
 As an example, have a look how adding authorizations for process definitions could be done in Camunda Admin:
 
-{{< img src="Admin-GrantDefinitionAuthorizations.png" title="Grant Optimize Access in Admin" >}}
+![Grant Optimize Access in Admin](img/Admin-GrantDefinitionAuthorizations.png)
 
 1. The first option grants global read access for the process definition `invoice`. With this setting all users are allowed to see, update, create and delete reports related to the process definition `invoice` in Optimize.
 2. The second option defines an authorization for a single user. The user `Kermit` can now see, update, create and delete reports related to the process definition `invoice` in Optimize.
@@ -26,7 +26,7 @@ As an example, have a look how adding authorizations for process definitions cou
 
 It is also possible to revoke the definition authorization for specific users or groups. For instance, you can define access for all process definitions on a global scale, but exclude the `engineers` group from access reports related to the `invoice` process:
 
-{{< img src="Admin-RevokeDefinitionAuthorization.png" title="Revoke Optimize Access for group 'engineers' in Admin" >}}
+![Revoke Optimize Access for group 'engineers' in Admin](img/Admin-RevokeDefinitionAuthorization.png)
 
 Decision definitions are managed in the same manner in the `Authorizations -> Decision Definition` section of the Authorizations Management of the Camunda Platform.
 

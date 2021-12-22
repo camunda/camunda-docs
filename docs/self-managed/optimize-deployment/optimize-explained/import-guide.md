@@ -16,7 +16,7 @@ In general, the import assumes the following setup:
 
 The following depicts the setup and how the components communicate with each other:
 
-{{< img src="../img/Optimize-Structure.png" title="Optimize Import Structure" >}}
+![Optimize Import Structure](img/Optimize-Structure.png)
 
 Optimize queries the engine data using a dedicated Optimize REST-API within the engine, transforms the data and stores it in its own Elasticsearch database such that it can be quickly and easily queried by Optimize when evaluating reports or performing analyses. The reason for having a dedicated REST endpoint for Optimize is performance: the default REST-API adds a lot of complexity to retrieve the data from the engine database, which can result in low performance for large data sets.
 
@@ -122,7 +122,7 @@ This data set contains the following amount of instances:
 
 Here you can see how the data is distributed over the different process definitions:
 
-{{< img src="../img/Import-performance-diagramms-logistic_large.png" title="Data Distribution" >}}
+![Data Distribution](img/Import-performance-diagramms-logistic_large.png)
 
 Results:
 
@@ -150,7 +150,7 @@ This data set contains the following amount of instances:
 
 Here you can see how the data is distributed over the different process definitions:
 
-{{< img src="../img/Import-performance-diagramms-logistic_medium.png" title="Data Distribution" >}}
+![Data Distribution](img/Import-performance-diagramms-logistic_medium.png)
 
 Results:
 
@@ -165,7 +165,7 @@ Understanding the details of the import procedure is not necessary to make Optim
 
 The following image illustrates the components involved in the import process as well as basic interactions between them:
 
-{{< img src="../img/Optimize-Import-Process.png" title="Optimize Procedure" >}}
+![Optimize Procedure](img/Optimize-Import-Process.png)
 
 During execution, the following steps are performed:
 
@@ -212,7 +212,7 @@ The whole polling/preparation workflow of the engine data is done in pages, mean
 
 Polling a new page does not only consist of the `ImportService`, but the `IndexHandler` and the `EntityFetcher` are also involved. The following image depicts how those components are connected with each other:
 
-{{< img src="../img/Import-Service-Polling.png" title="ImportService Polling Procedure" >}}
+![ImportService Polling Procedure](img/Import-Service-Polling.png)
 
 First, the `ImportScheduler` retrieves the newest index, which identifies the last imported page. This index is passed to the `ImportService` to order it to import a new page of data. With the index and the page size, the fetching of the engine data is delegated to the `EntityFetcher`.
 

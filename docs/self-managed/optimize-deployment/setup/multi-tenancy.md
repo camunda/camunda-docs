@@ -19,7 +19,7 @@ As described in the [Camunda Platform documentation](https://docs.camunda.org/ma
 Tenant-Identifiers available in the Camunda Platform Engine are automatically imported into Optimize and tenant-based access authorization is enforced based on the configured `Tenant Authorizations` within the Camunda Platform. This means there is no additional setup required for Optimize in order to support this Multi-Tenancy scenario.
 Users granted tenant access via the Camunda Platform will be able to create and see reports for that particular tenant in Optimize. In the following screenshot the user `demo` is granted access to data of the tenant with the id `firstTenant` and will be able to select that tenant in the report builder. Other users, without the particular firstTenant authorization, will not be able to select that tenant in the report builder nor be able to see results of reports that are based on that tenant.
 
-{{< img src="./img/admin-tenant-authorization.png" title="Tenant Authorization" >}}
+![Tenant Authorization](img/admin-tenant-authorization.png)
 
 ### One Process Engine Per Tenant
 
