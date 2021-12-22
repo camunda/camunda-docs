@@ -4,6 +4,8 @@ title: "Multiple Process Engines"
 description: "Learn how to set up multiple process engines with Optimize and which scenarios are supported."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Learn how to set up multiple process engines with Optimize and which scenarios are supported.
 
 ## Possible multiple process engine scenarios

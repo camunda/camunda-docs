@@ -4,6 +4,8 @@ title: "Variable Import Customization"
 description: "Enrich or filter the variable import so you can customize which and how variables are imported to Optimize."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
 
 This feature enables you to enrich or filter the variable import, e.g., if variables in Camunda contain IDs of variables in another database and you would like resolve those references to the actual values.

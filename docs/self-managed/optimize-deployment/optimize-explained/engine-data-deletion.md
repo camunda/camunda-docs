@@ -4,6 +4,8 @@ title: "Engine Data Deletion"
 description: "Explains how Optimize copes with the deletion of engine data."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 The engine slows down if the historic data grows significantly over time, particularly in cases where the amount of data streaming in each day is large. One solution to this is to remove old data from the engine on a regular basis, yet still importing the data to Optimize so it can be used for deeper analytics.
 
 To support the described use-case, Optimize does not care if you delete any data on the engine side. Specifically, Optimize does not sync with the engine on data deletion. If you want to remove any data from Optimize you can either erase the data from Elasticsearch or use the [Optimize History Cleanup Feature](./../setup/history-cleanup.md).

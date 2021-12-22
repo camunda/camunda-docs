@@ -4,6 +4,8 @@ title: "Engine Rest Filter"
 description: "Register your own REST filter that is called for every REST call to the engine."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
 
 This feature allows you to register your own filter that is called for every REST call to one of the configured process engines.

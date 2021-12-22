@@ -4,6 +4,8 @@ title: "Clustering"
 description: "Read about how to run Optimize in a cluster."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 This document describes the setup of a Camunda Optimize Cluster which is mainly useful in a failover scenario but also provides means of load-balancing in terms of distributing import and user load.
 
 ## Configuration

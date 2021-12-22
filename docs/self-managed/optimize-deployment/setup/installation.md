@@ -4,6 +4,8 @@ title: "Installation"
 description: "Read about how to install Optimize."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 ## Installation Guide
 
 This document describes the installation process of the Camunda Optimize distribution, as well as various configuration possibilities available after initial installation.

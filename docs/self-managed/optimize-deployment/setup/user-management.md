@@ -4,6 +4,8 @@ title: "User Access Management"
 description: "Define which users have access to Optimize."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 :::note Good to know!
 
 Providing Optimize access to a user just enables them to log in to Optimize. To be able

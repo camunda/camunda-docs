@@ -4,6 +4,8 @@ title: "History Cleanup"
 description: "Make sure that old data is automatically removed from Optimize."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 In order to satisfy data protection laws or just for general storage management purposes Optimize provides an automated cleanup functionality.
 
 :::note

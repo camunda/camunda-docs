@@ -4,6 +4,8 @@ title: "Configuration"
 description: "An overview of all possible configuration options in Optimize."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 ## Logging
 
 Camunda Optimize provides logging facilities that are preconfigured to use

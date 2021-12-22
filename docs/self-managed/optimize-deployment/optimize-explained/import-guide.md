@@ -4,6 +4,8 @@ title: "Data Import"
 description: "Shows how the import generally works and an example of import performance."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 This document provides instructions on how the import of the engine data to Optimize works.
 
 ## Architecture Overview

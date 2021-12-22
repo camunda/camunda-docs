@@ -4,6 +4,8 @@ title: "Multi-Tenancy"
 description: "Learn about the supported multi-tenancy scenarios."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Learn how to set up Multi-Tenancy with Optimize.
 
 ## Possible Multi-Tenancy scenarios

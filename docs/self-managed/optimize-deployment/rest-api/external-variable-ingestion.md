@@ -4,6 +4,8 @@ title: "External Variable Ingestion"
 description: "The REST API to ingest external variable data into Optimize."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 :::note Heads Up!
 The external variable ingestion API is a beta feature and will be subject
 to future changes.

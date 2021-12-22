@@ -4,6 +4,8 @@ title: "Localization"
 description: "Localization of Optimize."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 In order to present a localized version of Optimize to users corresponding to their default Browser language, Optimize provides the possibility to configure localizations.
 
 ## Default Locale Configuration

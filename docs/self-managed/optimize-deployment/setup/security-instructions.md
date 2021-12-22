@@ -4,6 +4,8 @@ title: "Security Instructions"
 description: "Learn how to secure your Optimize distribution against potential attacks."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 This page provides an overview of how to secure a Camunda Optimize installation. For Camunda's security policy, a list of security notices and a guide on how to report vulnerabilities, please visit the [general security documentation](https://docs.camunda.org/security/).
 
 This guide also identifies areas where we consider security issues to be relevant for the Camunda Optimize product and list those in the subsequent sections. Compliance for those areas is ensured based on common industry best practices and influenced by security requirements of standards like OWASP Top 10 and others.

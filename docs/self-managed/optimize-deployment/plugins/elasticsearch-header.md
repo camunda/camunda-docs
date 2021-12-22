@@ -4,6 +4,8 @@ title: "Elasticsearch header"
 description: "Register your own hook into the Optimize Elasticsearch client to add custom headers to requests."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
 
 This feature allows you to register your own hook into the Optimize Elasticsearch client, allowing you to add custom headers 

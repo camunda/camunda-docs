@@ -4,6 +4,8 @@ title: "Common Problems"
 description: "Information to help troubleshoot common problems"
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 This section aims to provide initial help to troubleshoot common issues. This guide is not intended to be a complete list of possible problems, nor does it provide detailed step-by-step solutions, it's intention is merely to point you in the right direction when investigating what may be causing the issue you are experiencing.  
 
 ## Optimize is missing some or all Definitions

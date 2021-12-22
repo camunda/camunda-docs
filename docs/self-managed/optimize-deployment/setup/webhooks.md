@@ -4,6 +4,8 @@ title: "Webhooks"
 description: "Read about how to configure alert notification webhooks for alerts on custom systems."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Additionally to email notifications, you can configure webhooks in Optimize to receive alert notifications on custom systems. This page describes how to setup your webhook configurations using the example of a simple Slack app.
 
 

@@ -4,6 +4,8 @@ title: "Business Key Import Customization"
 description: "Adapt the process instance import so you can customize the associated business keys."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
 
 This feature enables you to customize business keys during the process instance import, e.g. if your business keys contain sensitive information that requires anonymization.

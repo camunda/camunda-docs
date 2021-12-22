@@ -4,6 +4,8 @@ title: "Instructions"
 description: "Find out how to update to a new version of Optimize without losing your reports and dashboards."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Roughly every quarter of a year a new minor version of Optimize is released. These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
 
 If you want to update Optimize by several versions, you cannot do that at once but you need to perform the updates in a sequential order. For instance, if you want to update from 2.5 to 3.0, you need to update first from 2.5 to 2.6, then from 2.6 to 2.7 and finally from 2.7 to 3.0. The following table shows the recommended update paths to the latest version:

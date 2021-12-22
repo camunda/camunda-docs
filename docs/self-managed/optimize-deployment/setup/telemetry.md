@@ -4,6 +4,8 @@ title: "Telemetry"
 description: "Learn about Optimize telemetry, what data is collected and why."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 At Camunda, we strive to offer excellent user experience at a high and stable level. On a strict opt-in basis, we are looking to collect environment and usage data to further improve the user experience for you. These insights help us to understand typical environment setups and product usage patterns and will be used to inform product improvement decisions to your benefit.
 
 The telemetry reporting is disabled by default and only collects and sends data after you explicitly enable the telemetry configuration flag. The configuration can be changed by `superusers` at any time during runtime via a configuration menu option in the UI.

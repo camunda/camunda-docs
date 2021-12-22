@@ -4,6 +4,8 @@ title: "Decision Inputs and Outputs Import Customization"
 description: "Enrich or filter the Decision inputs and outputs so you can customize which and how these are imported to Optimize."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
 
 This feature enables you to enrich, modify or filter the decision input and output instances, e.g., if instances in Camunda contain IDs of instances in another database and you would like to resolve those references to the actual values.

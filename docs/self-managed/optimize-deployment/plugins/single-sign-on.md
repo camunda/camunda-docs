@@ -4,6 +4,8 @@ title: "Single Sign On"
 description: "Register your own hook into the Optimize authentication system such that you can integrate Optimize with your single sign on system."
 ---
 
+<span class="badge badge--platform">Platform only</span>
+
 Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
 
 This feature allows you to register your own hook into the Optimize authentication system such that you can
