@@ -37,7 +37,7 @@ POST /api/ingestion/event/batch?access_token=mySecret
 ```
 
 The token to be used to access the Optimize Event Ingestion REST API is a configurable shared secret.
-Please refer to [Event Ingestion REST API Configuration](../../setup/configuration/#event-ingestion-rest-api-configuration) for the particular configuration key to set this token.
+Please refer to [Event Ingestion REST API Configuration](./../setup/configuration.md/#event-ingestion-rest-api-configuration) for the particular configuration key to set this token.
 
 The following is an example configuration with a token value of `secret`:
 
@@ -56,7 +56,7 @@ The following request headers have to be provided with every ingest request:
 
 | Header | Constraints | Value |
 | --- | --- | --- |
-| Authorization | REQUIRED | See [Authorization](./../setup/authorization-management.md) | 
+| Authorization | REQUIRED | See [Authorization](#authorization) | 
 | Content-Length | REQUIRED | Size in bytes of the entity-body, also see [Content-Length](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length). | 
 | Content-Type | REQUIRED | Must be one of: `application/cloudevents-batch+json` or `application/json` | 
 

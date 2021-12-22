@@ -10,7 +10,7 @@ Based on this data it is possible to create process models inside Optimize - cal
 
 To enable this feature please refer to [Event Based Process Configuration](#event-based-process-configuration).
 
-# Event Based Process Configuration
+## Event Based Process Configuration
 
 In order to make use of ingested events and create event based process mappings for them, the event based process feature needs to be enabled in the [Optimize configuration](../configuration/#event-based-process-configuration).
 This also includes authorizing particular users by their userId or user groups by their groupId to be able to create so called Event Based Processes that can be used by other users of Optimize once published.
@@ -25,10 +25,10 @@ A full configuration example authorizing the user `demo` and all members of the 
       eventIngestion:
         accessToken: secret
 
-# Use Camunda Activity Event Sources for Event Based Processes
+## Use Camunda Activity Event Sources for Event Based Processes
 
 :::note Authorization to Event Based Processes
-Please note that when Camunda Activity Events are used in Event Based Processes, Camunda Admin Authorizations are not inherited for the Event Based Process. The Authorization to use an Event Based Process is solely managed via the access management of Event Based Processes when [publishing an Event Based Process](#publishing-an-event-based-process) or at any time via the [Edit Access Option](#event-based-process-list---edit-access) in the Event Based Process List.
+Please note that when Camunda Activity Events are used in Event Based Processes, Camunda Admin Authorizations are not inherited for the Event Based Process. The Authorization to use an Event Based Process is solely managed via the access management of Event Based Processes when [publishing an Event Based Process](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#publishing-an-event-based-process) or at any time via the [Edit Access Option](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#event-based-process-list---edit-access) in the Event Based Process List.
 
 Please checkout [Authorization Management - Event Based Process](./authorization-management.md/#event-based-processes) for the reasoning behind this behavior.
 :::

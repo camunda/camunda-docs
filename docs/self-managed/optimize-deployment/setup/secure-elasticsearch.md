@@ -6,11 +6,11 @@ description: "Secure your Elasticsearch instance so that the communication is en
 
 It is possible to connect Optimize to an Elasticsearch instance or cluster which is secured by the Elasticsearch extension X-Pack. Bear in mind that X-Pack is an enterprise feature of Elasticsearch and might require you to obtain a license before it can be used in a commercial context.
 
-**Installing X-Pack**
+## Installing X-Pack
 
 All the information about how to install X-Pack to secure Elasticsearch can be found in the [Installing X-Pack in Elasticsearch guide](https://www.elastic.co/guide/en/elasticsearch/reference/6.2/installing-xpack-es.html#installing-xpack-es). Please follow the steps 1 to 5.
 
-**Securing Elasticsearch**
+## Securing Elasticsearch
 
 To enable TLS for Elasticsearch communication once X-Pack is installed, please follow these instructions by elastic: [Encrypting Communications in Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/6.2/configuring-tls.html).
 
@@ -41,9 +41,9 @@ Please note that although the `superuser` role does allow Optimize to communicat
 See [Setting Up User Authentication](https://www.elastic.co/guide/en/x-pack/6.2/setting-up-authentication.html) for further details.
 :::
 
-**Enable Optimize to connect to the secured HTTP Elasticsearch instance**
+## Enable Optimize to connect to the secured HTTP Elasticsearch instance
 
 Now that you have configured your Elasticsearch instance, you need to setup the connection security settings accordingly
 to allow Optimize to connect to the secured Elasticsearch instance via HTTPS.
 
-All the necessary Optimize settings can be found in the [configuration guide](./configuration.md/#elasticsearch-security").
+All the necessary Optimize settings can be found in the [configuration guide](./configuration.md/#elasticsearch-security).

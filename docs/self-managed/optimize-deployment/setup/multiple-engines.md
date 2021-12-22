@@ -6,14 +6,14 @@ description: "Learn how to set up multiple process engines with Optimize and whi
 
 Learn how to set up multiple process engines with Optimize and which scenarios are supported.
 
-# Possible multiple process engine scenarios
+## Possible multiple process engine scenarios
 
 There are two possible setups where multiple process engines can be used:
 
 - [Possible multiple process engine scenarios](#possible-multiple-process-engine-scenarios)
   - [Multiple engines with distributed Databases](#multiple-engines-with-distributed-databases)
   - [Multiple engines with a shared Database](#multiple-engines-with-a-shared-database)
-- [Authentication/Authorization in the multiple engine setup](#authenticationauthorization-in-the-multiple-engine-setup)
+- [Authentication and Authorization in the multiple engine setup](#authentication-and-authorization-in-the-multiple-engine-setup)
 
 Please check which scenario corresponds to your setup because the configuration of multiple engines to Optimize is not always suited for the best import performance.
 
@@ -25,7 +25,7 @@ Alternatively each engine could be configured with default tenant identifiers as
 2. The engines are assumed to have distinct tenant identifiers, which means one particular tenantId is not deployed on two or more engines at the same time.
 :::
 
-## Multiple engines with distributed Databases
+### Multiple engines with distributed Databases
 
 In this scenario you have multiple process engines and each engine has its own database as illustrated in the following diagram:
 
@@ -59,7 +59,7 @@ engines:
 
 `payment` and `inventory` are custom names that were choosen in order to later on distinguish where the data was originally imported from.
 
-## Multiple engines with a shared Database
+### Multiple engines with a shared Database
 
 In this scenario you have multiple engines distributed in a cluster, where each engine instance is connected to a shared database. See the following diagram for an illustration:
 
@@ -73,7 +73,7 @@ In the scenario of multiple engines with a shared database, it might make sense 
 
 In general, tests have shown that Optmize puts a very low strain on the engine and its impact on the engine's operations are in almost all cases neglectable.
 
-# Authentication/Authorization in the multiple engine setup
+## Authentication and Authorization in the multiple engine setup
 
 When you configure multiple engines in Optimize, each process engine can host different users with a different set of authorizations. If a user is logging in, Optimize will try to authenticate and authorize the user on each configured engine. In case you are not familiar with how 
 the authorization/authentication works for a single engine scenario, please checkout the [User Access Management](./user-management.md) and [Authorization Management](./authorization-management.md) documentation first.

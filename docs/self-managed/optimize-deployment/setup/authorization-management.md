@@ -10,7 +10,7 @@ User authorization management differs depending on whether the entities to manag
 
 The authorization to process or decision data, as well as tenants and user data imported from any connected Camunda REST-API, is not managed in Optimize itself but needs to be configured in the Camunda Platform and can be achieved on different levels with different options. If you do not know how authorization in Camunda works, please have a look at the [authorization service documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/). This has the advantage that you don't need to define the authorizations several times.
 
-### Process/Decision Definition related Authorizations
+### Process or Decision Definition related Authorizations
 
 You can specify which user has access to certain process or decision definitions, including data related to that definition. By that we mean the user can only see, create, edit and delete reports to definitions they are authorized to.
 

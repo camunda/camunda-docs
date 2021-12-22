@@ -71,7 +71,7 @@ Password: ******
 Login Succeeded
 ```
 
-After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-bpm-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node you can use environment variables instead of mounting configuration files into the Docker container:
+After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-platform-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node you can use environment variables instead of mounting configuration files into the Docker container:
 
 #### Getting started with the Optimize docker image
 
@@ -129,7 +129,7 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
-#### Configuration using a `environment-config.yaml` file
+#### Configuration using a yaml file
 
 In a production environment the limited set of [environment variables](#available-environment-variables) is usually not enough so that you want to prepare a custom `environment-config.yaml` file. Please refer to the [Configuration](../configuration) section of the documentation for the available configuration parameters.
 
