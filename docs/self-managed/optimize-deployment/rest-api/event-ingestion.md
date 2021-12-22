@@ -22,7 +22,7 @@ In particular the Optimize Event Ingestion REST API is a CloudEvents consumer im
 
 ## Authorization
 
-As required by the [CloudEvents HTTP 1.1 Web Hooks for Event Delivery - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#3-authorization) specification, every [Event Ingestion REST API Request](#method-http-target-resource) needs to include and authorization token either as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header or as a [URI Query Parameter](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#32-uri-query-parameter) named `access_token`.
+As required by the [CloudEvents HTTP 1.1 Web Hooks for Event Delivery - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#3-authorization) specification, every [Event Ingestion REST API Request](#method-and-http-target-resource) needs to include and authorization token either as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header or as a [URI Query Parameter](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#32-uri-query-parameter) named `access_token`.
 
 Given a valid token, `mySecret`, the header would need to be set in one of the following ways:
 ```
@@ -45,7 +45,7 @@ The following is an example configuration with a token value of `secret`:
       eventIngestion:
         accessToken: secret
 
-## Method & HTTP Target Resource
+## Method and HTTP Target Resource
 
 POST `/api/ingestion/event/batch`
 

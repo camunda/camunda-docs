@@ -96,7 +96,7 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
 
 #### Available Environment Variables
 
-There is only a limited set of configuration keys exposed via environment variables. These mainly serve the purpose of testing and exploring Optimize, for production configurations we recommend to follow the setup in section [Configuration using a `environment-config.yaml` file](#configuration-using-a-environment-config-yaml-file)
+There is only a limited set of configuration keys exposed via environment variables. These mainly serve the purpose of testing and exploring Optimize, for production configurations we recommend to follow the setup in section [Configuration using a `environment-config.yaml` file](#configuration-using-a-yaml-file)
 
 The most important environment variables you may have to configure are related to the connection to the Camunda Platform REST API as well as Elasticsearch:
 
