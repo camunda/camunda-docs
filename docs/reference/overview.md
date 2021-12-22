@@ -19,6 +19,5 @@ This section contains general reference material for Camunda Cloud.
 
 ## Additional resources
 
-- [BPMN processes](bpmn-processes/bpmn-primer.md)
 - [FEEL expressions](feel/what-is-feel.md)
 - [Glossary](glossary.md)
