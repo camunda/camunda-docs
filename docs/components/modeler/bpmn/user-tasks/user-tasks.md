@@ -40,6 +40,17 @@ Typically, the assignee and candidate groups are defined as static values (e.g. 
 book.author)`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate groups.
 
+In order for [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user, 
+the value of the `assignee` must be the user's **unique identifier**.
+The unique identifier depends on the authentication method used to login to Tasklist:
+- Camunda Cloud (login with email, Google, GitHub): `email`
+- Default Basic Auth (elasticsearch): `username`
+- IAM: `username`
+
+:::info
+Example: You log in to Tasklist using Camunda Cloud login with email using your emailadres `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
+:::
+
 ## Variable mappings
 
 By default, all job variables are merged into the process instance. This
