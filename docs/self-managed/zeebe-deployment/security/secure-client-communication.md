@@ -1,9 +1,13 @@
 ---
-id: authentication
-title: "Authentication"
+id: secure-client-communication
+title: "Secure client communication"
 ---
 
-Zeebe supports transport layer security between the gateway and all of the officially supported clients. In this section, we will go through how to configure these components.
+
+
+# Client security
+
+Zeebe supports transport layer security between the gateway and all of the officially supported clients. In this section, we will review how to configure these components.
 
 ## Gateway
 
