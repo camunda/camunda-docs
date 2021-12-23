@@ -1,6 +1,6 @@
 ---
-id: authorization
-title: "Authorization"
+id: client-authorization
+title: "Client authorization"
 ---
 
 Zeebe clients also provide a way for users to modify gRPC call headers, namely to contain access tokens.
