@@ -12,9 +12,9 @@ To use the Zeebe Go client library, add the following dependency to your `go.mod
 ```
 module github.com/zb-user/zb-example
 
-go 1.13
+go 1.17
 
-require github.com/zeebe-io/zeebe/clients/go v0.26.0
+require github.com/camunda-cloud/zeebe/clients/go v1.2.9
 ```
 
 ## Bootstrapping
@@ -27,7 +27,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
+    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
 )
 
 func main() {
@@ -86,7 +86,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
+    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
     "os"
 )
 

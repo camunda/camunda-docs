@@ -66,7 +66,7 @@ import (
     "fmt"
     "google.golang.org/grpc/status"
     "google.golang.org/grpc/codes"
-    "github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
+    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
 )
 
 type MyCredentialsProvider struct {
@@ -160,7 +160,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
+    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
 )
 
 func main() {
@@ -200,7 +200,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
+    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
 )
 
 func main() {

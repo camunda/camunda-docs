@@ -76,7 +76,7 @@ Similarly to the Java client, if no CA certificate is specified, the client will
 package test
 
 import (
-	"github.com/zeebe-io/zeebe/clients/go/zbc"
+	"github.com/camunda-cloud/zeebe/clients/go/zbc"
 )
 
 
@@ -94,7 +94,7 @@ To disable TLS, execute the following:
 package test
 
 import (
-	"github.com/zeebe-io/zeebe/clients/go/zbc"
+	"github.com/camunda-cloud/zeebe/clients/go/zbc"
 )
 
 
