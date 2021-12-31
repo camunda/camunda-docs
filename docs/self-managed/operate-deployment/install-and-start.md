@@ -44,7 +44,7 @@ On the Zeebe release page, compatible versions of Zeebe and Operate are grouped 
 
 Operate uses open-source Elasticsearch as its underlying data store. Therefore to run Operate, you must download and run Elasticsearch.
 
-Operate is currently compatible with Elasticsearch 7.12.1. Download Elasticsearch [here](https://www.elastic.co/downloads/past-releases/elasticsearch-7-12-1).
+Operate is currently compatible with Elasticsearch 7.16.2. Download Elasticsearch [here](https://www.elastic.co/downloads/past-releases/elasticsearch-7-16-2).
 
 ### Run Elasticsearch
 
