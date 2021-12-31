@@ -310,9 +310,8 @@ module.exports = {
         {
           Security: [
             "self-managed/zeebe-deployment/security/security",
-            "self-managed/zeebe-deployment/security/secure-client-communication",
-            "self-managed/zeebe-deployment/security/client-authorization",
-            "self-managed/zeebe-deployment/security/secure-cluster-communication"
+            "self-managed/zeebe-deployment/security/authentication",
+            "self-managed/zeebe-deployment/security/authorization",
           ],
         },
         {
