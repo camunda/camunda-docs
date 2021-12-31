@@ -50,6 +50,7 @@ module.exports = {
             "components/cloud-console/manage-organization/organization-settings",
             "components/cloud-console/manage-organization/manage-users",
             "components/cloud-console/manage-organization/view-organization-activity",
+            "components/cloud-console/manage-organization/usage-history",
             "components/cloud-console/manage-organization/update-billing-reservations",
             "components/cloud-console/manage-organization/switch-organization",
           ],
