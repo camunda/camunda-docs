@@ -12,10 +12,8 @@ If you want to update Optimize by several versions, you cannot do that at once b
 
 | Update from | Recommended update path to 3.6.0 |
 | --- | --- |
-| 3.6 | You are on the latest version. |
-| 3.4-3.5 | 1. Rolling update to 3.5  <br /> 2. Rolling update from 3.5 to 3.6 |
-| 3.2 - 3.3 | 1. Rolling update to 3.3 <br /> 2. Rolling update from 3.3 to 3.4 |
-| 3.0 - 3.1 | 1. Rolling update to 3.1 <br /> 2. Rolling update from 3.1 to 3.2 |
+| 3.7 | You are on the latest version. |
+| 3.0 - 3.6 | 1. Rolling update to 3.6  <br /> |
 | 2.0 - 2.7 | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
 | 1.0 - 1.5 | No update possible. Use the latest version directly. | 
 

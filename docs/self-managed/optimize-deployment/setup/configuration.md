@@ -168,6 +168,7 @@ with it and represented by `${engineAlias}`.
 |engines.${engineAlias}.name|default|The process engine's name on the platform, this is the unique engine identifier on the platforms REST API.|
 |engines.${engineAlias}.defaultTenant.id|null|A default tenantID to associate all imported data with if there is no tenant configured in the engine itself. This property is only relevant in the context of a `One Process Engine Per Tenant` tenancy. For details consult the Multi-Tenancy documentation.|
 |engines.${engineAlias}.defaultTenant.name|null|The name used for this default tenant when displayed in the UI.|
+|engines.${engineAlias}.excludeTenant|[ ]|Comma-separated list of tenant IDs to be excluded when importing data from the specified engine. When left empty, data from all tenants will be imported. Please note that the `defaultTenant` cannot be excluded (and therefore also not the entities with `null` as tenant)|
 |engines.${engineAlias}.rest|http://localhost:8080/engine-rest|A base URL that will be used for connections to the Camunda Engine REST API.|
 |engines.${engineAlias}.importEnabled|true|Determines whether this instance of Optimize should import definition & historical data from this engine.|
 |engines.${engineAlias}.eventImportEnabled|false|Determines whether this instance of Optimize should convert historical data to event data usable for event based processes.|
