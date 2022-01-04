@@ -31,6 +31,7 @@ Use partitions to scale your process processing. Partitions are dynamically dist
 
 :::note
 While each partition has one leading broker, _not all brokers are guaranteed to lead a partition_. A broker can lead more than one partition, and, at times, a broker in a cluster may act only as a replication back-up for partitions. This broker will not be doing any active work on processes until a partition fail-over happens and the broker gets elected as the new leader for that partition.
+:::
 
 ## Partition data layout
 
