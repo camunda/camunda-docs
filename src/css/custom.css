@@ -174,8 +174,12 @@ navbar .navbar .navbar__link[href*=self-managed] {
 }
 
 .sign-up{
- color: #fff;
+ color: #fff !important;
 }
+
+.sign-up:hover{
+  color: #000 !important;
+ }
 
 .get-started:hover{
   background-color:#000;
