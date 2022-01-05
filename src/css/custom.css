@@ -37,7 +37,7 @@ body {
   background-image: url("/img/Camunda_Master_Colours_RGB.png");
   background-color: transparent;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
 }
 
 .button--hero {
@@ -175,6 +175,7 @@ navbar .navbar .navbar__link[href*=self-managed] {
 
 .sign-up{
  color: #fff !important;
+ margin: 1em;
 }
 
 .sign-up:hover{
