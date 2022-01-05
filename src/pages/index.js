@@ -40,22 +40,22 @@ const features = [
 
 const features2 = [
   {
-    title: 'Reference',
-    imageUrl: 'img/reference.png',
-    url: 'https://docs.camunda.io/docs/reference/',
-    description: (
-      <>
-        Reference material including dependencies.
-      </>
-    ),
-  },
-  {
     title: 'Self-Managed',
     imageUrl: 'img/self-managed.png',
     url: 'https://docs.camunda.io/docs/self-managed/overview/',
     description: (
       <>
         Everything you need to deploy and configure Camunda Cloud Self-Managed.
+      </>
+    ),
+  },
+  {
+    title: 'Reference',
+    imageUrl: 'img/reference.png',
+    url: 'https://docs.camunda.io/docs/reference/',
+    description: (
+      <>
+        Reference material including dependencies.
       </>
     ),
   },
@@ -156,7 +156,7 @@ function Home() {
         <div className={clsx('hero hero--secondary', styles.heroBanner)}>
           <div className="container">
             <h1 className="hero__title">Unsure where to begin?</h1>
-            <p className="hero__subtitle">Try one of our use case Guides!</p>
+            <p className="hero__subtitle">Try our Microservice Orchestration guide</p>
               <div className={styles.buttons}>
               <Link
                 className={clsx(
@@ -164,7 +164,7 @@ function Home() {
                   styles.getStarted,
                 )}
                 to={useBaseUrl('docs/guides/getting-started-orchestrate-microservices/')}>
-                Get Started with Microservice Orchestration
+                Begin Now
               </Link>
             </div>
           </div>
