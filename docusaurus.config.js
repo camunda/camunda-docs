@@ -1,6 +1,6 @@
 module.exports = {
   title: "Camunda Cloud Docs",
-  tagline: "Camunda Cloud, Zeebe, Operate, Tasklist",
+  tagline: "Documentation for all components of Camunda Cloud",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
@@ -63,15 +63,15 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "reference/overview",
-          label: "Reference",
+          docId: "self-managed/overview",
+          label: "Self-Managed",
           position: "left",
         },
         {
           type: "doc",
-          docId: "self-managed/overview",
-          label: "Self-Managed",
-          position: "right",
+          docId: "reference/overview",
+          label: "Reference",
+          position: "left",
         },
       ],
     },
