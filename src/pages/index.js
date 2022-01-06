@@ -55,7 +55,7 @@ const features2 = [
     url: 'https://docs.camunda.io/docs/reference/',
     description: (
       <>
-        Supporting material to strengthen your understanding of FEEL expressions, releases, dependencies and more.
+        Supporting material to strengthen your understanding of FEEL expressions, releases, dependencies, and more.
       </>
     ),
   },
