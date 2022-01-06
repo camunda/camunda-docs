@@ -12,7 +12,7 @@ const features = [
     imageUrl: 'img/guides.png',
     url: 'https://docs.camunda.io/docs/guides',
     description: (
-      <>Goal oriented content for components and features.
+      <>Step-by-step content to strengthen your knowledge of Camunda Cloud, its components, and its features.
       </>
     ),
   },
@@ -22,7 +22,7 @@ const features = [
     url: 'https://docs.camunda.io/docs/components/',
     description: (
       <>
-        Learn more about how to work with each component.
+        Conceptualize the cornerstones of Camunda Cloud and learn more about its supporting components.
       </>
     ),
   },
@@ -32,7 +32,7 @@ const features = [
     url: 'https://docs.camunda.io/docs/apis-clients/overview/',
     description: (
       <>
-        Programmatically interact with your automated process.
+        Programmatically interact with your automated processes.
       </>
     ),
   },
@@ -45,7 +45,7 @@ const features2 = [
     url: 'https://docs.camunda.io/docs/self-managed/overview/',
     description: (
       <>
-        Everything you need to deploy and configure Camunda Cloud Self-Managed.
+        A self-hosted Camunda Cloud alternative, offering everything you need to download, configure, and work with each component.
       </>
     ),
   },
@@ -55,7 +55,7 @@ const features2 = [
     url: 'https://docs.camunda.io/docs/reference/',
     description: (
       <>
-        Reference material including dependencies.
+        Supporting material to strengthen your understanding of FEEL expressions, releases, dependencies and more.
       </>
     ),
   },
