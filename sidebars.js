@@ -433,18 +433,21 @@ module.exports = {
               "Dashboard": [
                 "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
                 "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
+                "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions",
               ],
             },
             {
               "Report": [
                 "self-managed/optimize-deployment/rest-api/report/get-report-ids",
                 "self-managed/optimize-deployment/rest-api/report/delete-report",
+                "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
                 "self-managed/optimize-deployment/rest-api/report/get-data-export",
               ],
             },
             "self-managed/optimize-deployment/rest-api/event-ingestion",
             "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
             "self-managed/optimize-deployment/rest-api/health-readiness",
+            "self-managed/optimize-deployment/rest-api/import-entities",
           ],
         },
         "self-managed/optimize-deployment/reimport",
