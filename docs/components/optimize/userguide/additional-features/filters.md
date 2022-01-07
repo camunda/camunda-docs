@@ -205,6 +205,11 @@ This filters all instances where the selected date variable has a value within a
 
 Similar to the other variables, there are two input switches that allow you to exclude or include process instances where a particular date variable is either `null` or `undefined`.
 
+
+### Combine multiple variables filters with OR logic
+
+Additionally to using variable filters individually, there is also the option of combining all the previously mentioned variable filters with OR logic. This means that variables which fullfill the condition specified in at least one filter will be displayed.
+
 ## Assignee and candidate group filters
 
 These filters allow you to include or exclude instances based on the assignee or the candidate group of at least one User Task of a particular process instance.
