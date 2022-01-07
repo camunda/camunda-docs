@@ -6,7 +6,7 @@ description: "This document outlines built-in numeric functions and examples."
 
 ## decimal()
 
-Round the given number at the given scale using the given rounding mode. If no rounding mode is passed in, it uses `HALF_EVEN` as default. 
+Round the given number at the given scale using the given rounding mode. If no rounding mode is passed in then it uses `HALF_EVEN` as default. 
 
 * parameters:
   * `n`: number
@@ -109,7 +109,7 @@ log(10)
 
 ## exp()
 
-Returns the Euler’s number e raised to the power of number.
+Returns the Euler’s number e raised to the power of number .
 
 * parameters:
   * `number`: number

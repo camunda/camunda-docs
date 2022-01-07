@@ -344,5 +344,5 @@ FEEL defines several built-in functions:
 
 - [FEEL](/reference/feel/what-is-feel.md)
 - [FEEL data types](/reference/feel/language-guide/feel-data-types.md)
-- [FEEL expressions](/reference/feel/language-guide/feel-expression.md)
+- [FEEL expressions](/reference/feel/language-guide/feel-expressions-introduction.md)
 - [DMN specification](https://www.omg.org/spec/DMN/About-DMN/)

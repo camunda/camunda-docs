@@ -123,7 +123,7 @@ Each key-value pair must be a context with two entries: `key` and `value`. The e
 
 It might override context entries if the keys are equal. The entries are overridden in the same order as the contexts in the given list.    
 
-Returns `null` if one of the entries is not a context or if a context doesn't contain the required entries.
+Returns `null` if one of the entries is not a context, or if a context doesn't contain the required entries.
 
 * parameters:
   * `entries`: list of contexts 
