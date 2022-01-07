@@ -147,7 +147,7 @@ The broker will fail to start if any of these conditions are not met.
 
 #### Priority election
 
-If you're using the experimental priority election feature, you must also specify the priorities of each brokers. In fact, the broker will fail to start if the nodes do not have different priorities, as otherwise you could get into lengthy election loops.
+If you're using the priority election feature, you must also specify the priorities of each brokers. In fact, the broker will fail to start if the nodes do not have different priorities, as otherwise you could get into lengthy election loops.
 
 Here is the same example configuration as above, but this time with priorities configured:
 
