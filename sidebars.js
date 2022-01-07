@@ -380,11 +380,13 @@ module.exports = {
         "self-managed/operate-deployment/schema-and-migration",
         "self-managed/operate-deployment/importer-and-archiver",
         "self-managed/operate-deployment/authentication",
+        "self-managed/operate-deployment/usage-metrics",
       ],
       "Tasklist": [
         "self-managed/tasklist-deployment/install-and-start",
         "self-managed/tasklist-deployment/configuration",
         "self-managed/tasklist-deployment/authentication",
+        "self-managed/tasklist-deployment/usage-metrics",
       ],
       "Optimize":[
         {
