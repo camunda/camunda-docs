@@ -79,6 +79,8 @@ Once you have defined what your dashboard should look like, the view mode provid
 Note: The refresh rate will not be saved unless it is selected in the [edit mode](#edit-mode) of the dashboard.
 If it was selected in the view mode, the refresh rate will not be saved when refreshing the Dashboard page manually or switching to another page in between
 
+- Alerts: If the created dashboard exists inside a collection, it is possible to create and manage created alerts for the reports inside the dashboard.
+
 ![process performance overview](./img/dashboard-viewMode-monitorFeatures.png)
 
 To share the dashboard with other people or embed it in a webpage, use the sharing feature of the dashboard. Click on the share button, which opens up a popover. After turning the “enable sharing” switch on, a link is generated which you can send to people who do not have access to Camunda Optimize, and thus enable them to see the dashboard. If you applied filters on the dashboard, you can include them in the shared version of the dashboard by enabling the **Share with current filters applied** checkbox. If the checkbox is not checked, the shared dashboard will include the default filters if any have been set.
