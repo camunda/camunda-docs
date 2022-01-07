@@ -164,10 +164,6 @@ Variable filters can only filter for the final value of the variable. For instan
 :::
 
 :::note
-The variable filter can only filter for variables of a [primitive type](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#supported-variable-values).
-:::
-
-:::note
 To use complex types like object, you can use the Variable Import Customization feature to transform your object variables into primitive type variables.
 :::
 
@@ -205,6 +201,9 @@ This filters all instances where the selected date variable has a value within a
 
 Similar to the other variables, there are two input switches that allow you to exclude or include process instances where a particular date variable is either `null` or `undefined`.
 
+### List Variable Filters
+If you wish to filter based on the value of a [list variable](../../../../../self-managed/optimize-deployment/setup/object-variables#list-variables), the applied Filter will depend on the primitive type of items within the list, eg you will be creating a numeric variable Filter for a variable which is a list of numbers, a string variable Filter for a list of strings and so on. It is important to note here that Filters are applied on each individual item within the list variable and not the list itself.  
+For example, an “is” Filter on a list of string values filters for those instances where any individual list item is equal to the given term, ie instances whose list variable “contains” the selected value. Similarly, the “contains” Filter matches process instances whose list variable contains at least one value which in turn contains the given substring.
 
 ### Combine multiple variables filters with OR logic
 

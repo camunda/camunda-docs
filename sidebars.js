@@ -407,6 +407,7 @@ module.exports = {
         "self-managed/optimize-deployment/setup/localization",
         "self-managed/optimize-deployment/setup/multi-tenancy",
         "self-managed/optimize-deployment/setup/multiple-engines",
+        "self-managed/optimize-deployment/setup/object-variables",
         "self-managed/optimize-deployment/setup/clustering",
         "self-managed/optimize-deployment/setup/webhooks",
         "self-managed/optimize-deployment/setup/setup-event-based-processes",
