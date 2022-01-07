@@ -142,6 +142,15 @@ These values control mechanisms of Optimize related security, e.g. security head
 | security.responseHeaders.X-Content-Type-Options  | true            | Setting this header will prevent the browser from interpreting files as a different MIME type to what is specified in the Content-Type HTTP header (e.g. treating text/plain as text/css).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | security.responseHeaders.Content-Security-Policy | base-uri 'self' | A Content Security Policy (CSP) has significant impact on the way browsers render pages. By default Optimize uses the base-uri directive which restricts the URLs that can be used to the Optimize pages. Find more details in [Mozilla's Content Security Policy Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy).                                                                                                                                                                                                                                                                                                      |
 
+### Public API
+
+This section focusses on common properties related to the Public REST API of Optimize.
+
+|YAML Path|Default Value|Description|
+|--- |--- |--- |
+|api.accessToken|null|Secret token to be provided to the secured REST API on access.If set to <code>null</code> an error will be thrown and requests will get rejected.<br /><br />It is mandatory to configure a value if the majority of Public REST API is to be used.|
+
+
 ### Container
 
 Settings related to embedded Jetty container, which serves the Optimize application.
@@ -356,7 +365,6 @@ Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-in
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|eventBasedProcess.eventIngestion.accessToken|null|Secret token to be provided on the Ingestion REST API when ingesting data. If set to null a random token will be generated with each startup of Optimize and logged. It is recommended to configure a value if the Event Ingestion REST API is to be used.|
 |eventBasedProcess.eventIngestion.maxBatchRequestBytes|10485760|Content length limit for an ingestion REST API bulk request in bytes. Requests will be rejected when exceeding that limit. Defaults to 10MB. In case this limit is raised you should carefully tune the heap memory accordingly, see Adjust Optimize heap size on how to do that.|
 |eventBasedProcess.eventIngestion.maxRequests|5|The maximum number of event ingestion requests that can be serviced at any given time.|
 
@@ -364,7 +372,6 @@ Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-in
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|externalVariable.variableIngestion.accessToken|null|Secret token to be provided when ingesting external variable data. If set to null a random token will be generated with each startup of Optimize and logged. It is recommended to configure a value if the External Variable Ingestion REST API is to be used.|
 |externalVariable.import.enabled|false|Controls whether external ingested variable data is processed and imported to process instance data.|
 |externalVariable.import.maxPageSize|10000|Determines the page size for the import of ingested external variable data to process instance data.|
 |externalVariable.variableIndexRollover.maxIndexSizeGB|50|Specifies the maximum size for the external variable index. When shards get too large, query performance can slow down and rolling over an index can bring an improvement. Using this configuration, a rollover will occur when the current external variable index size matches or exceeds the maxIndexSizeGB threshold.|

@@ -428,23 +428,21 @@ module.exports = {
         },
         {
           "REST API": [
+            "self-managed/optimize-deployment/rest-api/authorization",
             {
               "Dashboard": [
-                "self-managed/optimize-deployment/rest-api/dashboard/dashboard-api",
                 "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
               ],
             },
             {
               "Report": [
-                "self-managed/optimize-deployment/rest-api/report/report-api",
                 "self-managed/optimize-deployment/rest-api/report/delete-report",
                 "self-managed/optimize-deployment/rest-api/report/get-data-export",
               ],
             },
-        "self-managed/optimize-deployment/rest-api/event-ingestion",
-        "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
-        "self-managed/optimize-deployment/rest-api/health-readiness",
-
+            "self-managed/optimize-deployment/rest-api/event-ingestion",
+            "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
+            "self-managed/optimize-deployment/rest-api/health-readiness",
           ],
         },
         "self-managed/optimize-deployment/reimport",

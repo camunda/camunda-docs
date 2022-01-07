@@ -36,7 +36,7 @@ The following request headers have to be provided with every data export request
 
 |Header|Constraints|Value|
 |--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](report-api.md/#authorization)|
+|Authorization|REQUIRED*|[Authorization](../../authorization)|
 
 * Only required if not set as a query parameter
 
@@ -46,7 +46,7 @@ The following query parameters have to be provided with every data export reques
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
-|access_token|REQUIRED*|[Authorization](report-api.md/#authorization)|
+|access_token|REQUIRED*|[Authorization](../../authorization)|
 |limit|REQUIRED|Maximum number of records per page. Please note that the limit will only be considered when performing the request for the first page of a raw data report. The following requests for a given searchRequestId will have the same page size as the first request.|
 |paginationTimeout|REQUIRED|The amount of time (in seconds) for which a search context will be held in memory, so that the remaining pages of the result can be retrieved. For more information on how to paginate through the results, please refer to the section [Pagination](#pagination).|
 |searchRequestId|Optional|The ID of a previous search for which you wish to retrieve the next page of results. For more information on how to get and use a searchRequestId please refer to the section [Pagination](#pagination).|
@@ -77,7 +77,7 @@ Possible HTTP Response Status codes:
 |--- |--- |
 |200|Request successful.|
 |400|Returned if some of the properties from the request are invalid or missing.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](report-api.md/#authorization) on how to authenticate.|
+|401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
 |404|The requested report was not found, please check the provided report-ID.|
 |500|Some error occurred while processing the export request, best check the Optimize log.|
 

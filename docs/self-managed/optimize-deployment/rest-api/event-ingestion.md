@@ -26,26 +26,7 @@ In particular the Optimize Event Ingestion REST API is a CloudEvents consumer im
 
 As required by the [CloudEvents HTTP 1.1 Web Hooks for Event Delivery - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#3-authorization) specification, every [Event Ingestion REST API Request](#method-and-http-target-resource) needs to include and authorization token either as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header or as a [URI Query Parameter](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#32-uri-query-parameter) named `access_token`.
 
-Given a valid token, `mySecret`, the header would need to be set in one of the following ways:
-```
-Authorization: mySecret
-```
-```
-Authorization: Bearer mySecret
-```
-For sending the token as a query parameter the HTTP Query would look like the following:
-```
-POST /api/ingestion/event/batch?access_token=mySecret
-```
-
-The token to be used to access the Optimize Event Ingestion REST API is a configurable shared secret.
-Please refer to [Event Ingestion REST API Configuration](./../setup/configuration.md/#event-ingestion-rest-api-configuration) for the particular configuration key to set this token.
-
-The following is an example configuration with a token value of `secret`:
-
-    eventBasedProcess:
-      eventIngestion:
-        accessToken: secret
+Details on how to configure and pass this token can be found [here](../authorization).
 
 ## Method and HTTP Target Resource
 

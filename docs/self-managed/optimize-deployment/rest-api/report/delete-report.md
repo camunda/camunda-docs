@@ -26,7 +26,7 @@ The following request headers have to be provided with every delete request:
 
 |Header|Constraints|Value|
 |--- |--- |--- |
-|Authorization|REQUIRED*|See [Authorization](./report-api.md/#authorization)|
+|Authorization|REQUIRED*|See [Authorization](../../authorization)|
 
 * Only required if not set as a query parameter
 
@@ -36,7 +36,7 @@ The following query parameters have to be provided with every delete request:
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
-|access_token|REQUIRED*|See [Authorization](report-api.md/#authorization)|
+|access_token|REQUIRED*|See [Authorization](../../authorization)|
 
 * Only required if not set as a request header
 
@@ -55,7 +55,7 @@ Possible HTTP Response Status codes:
 |Code|Description|
 |--- |--- |
 |204|Request successful.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](report-api.md/#authorization) on how to authenticate.|
+|401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
 |404|The requested Report was not found, please check the provided report-ID.|
 |500|Some error occurred while processing the request, best check the Optimize log.|
 
