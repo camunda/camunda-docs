@@ -1,7 +1,7 @@
 ---
 id: get-data-export
-title: "Report Result Data Export"
-description: "The REST API to export report Result data from Optimize."
+title: "Export Report Result Data"
+description: "The REST API to export Report result data from Optimize."
 ---
 
 <span class="badge badge--platform">Platform only</span>

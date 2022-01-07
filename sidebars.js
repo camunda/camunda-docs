@@ -431,11 +431,13 @@ module.exports = {
             "self-managed/optimize-deployment/rest-api/authorization",
             {
               "Dashboard": [
+                "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
                 "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
               ],
             },
             {
               "Report": [
+                "self-managed/optimize-deployment/rest-api/report/get-report-ids",
                 "self-managed/optimize-deployment/rest-api/report/delete-report",
                 "self-managed/optimize-deployment/rest-api/report/get-data-export",
               ],

@@ -1,6 +1,6 @@
 ---
 id: delete-dashboard
-title: "Dashboard Delete"
+title: "Delete Dashboards"
 description: "The REST API to delete Dashboards from Optimize."
 ---
 
@@ -59,8 +59,6 @@ Possible HTTP Response Status codes:
 |401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
 |404|The requested Dashboard was not found, please check the provided dashboard-ID.|
 |500|Some error occurred while processing the request, best check the Optimize log.|
-
-
 
 ## Example
 

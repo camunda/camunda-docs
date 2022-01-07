@@ -1,6 +1,6 @@
 ---
 id: delete-report
-title: "Report Deletion"
+title: "Delete Reports"
 description: "The REST API to delete Reports from Optimize."
 ---
 
@@ -58,8 +58,6 @@ Possible HTTP Response Status codes:
 |401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
 |404|The requested Report was not found, please check the provided report-ID.|
 |500|Some error occurred while processing the request, best check the Optimize log.|
-
-
 
 ## Example
 
