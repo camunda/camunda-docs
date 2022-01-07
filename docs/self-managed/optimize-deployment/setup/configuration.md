@@ -295,7 +295,7 @@ Settings for webhooks which can receive custom alert notifications. You can conf
 |webhookAlerting.webhooks.${webhookName}.url||The URL of the webhook.|
 |webhookAlerting.webhooks.${webhookName}.headers||A map of the headers of the request to be sent to the webhook.|
 |webhookAlerting.webhooks.${webhookName}.httpMethod||The HTTP Method of the request to be sent to the webhook.|
-|webhookAlerting.webhooks.${webhookName}.defaultPayload||The payload of the request to be sent to the webhook. This should include the placeholder '{{ALERT_MESSAGE}}', which indicates where the content of the alert is to be inserted into the payload.|
+|webhookAlerting.webhooks.${webhookName}.defaultPayload||The payload of the request to be sent to the webhook. This should include placeholder keys that allow you to define dynamic content. See [Alert Webhook Payload Placeholders](../webhooks#alert-webhook-payload-placeholders) for available values.|
 
 
 ### History Cleanup Settings
