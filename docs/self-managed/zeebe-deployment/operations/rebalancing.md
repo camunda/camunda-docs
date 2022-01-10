@@ -41,7 +41,8 @@ Brokers are assigned as primary partition leaders based on the configuration.
 Only configurations where a partition designates a single broker as primary partition leader are supported.
 
 **Priority election** is controlled by the `zeebe.broker.cluster.raft.enablePriorityElection` config and is enabled by default.
-See [here](../configuration/priority-election.md) for more information about priority election.
+
+Learn more about [priority election](../configuration/priority-election.md).
 
 **Partition distribution** is controlled by the `zeebe.broker.experimental.partitioning` config options.
 The default scheme is `ROUND_ROBIN`.

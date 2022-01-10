@@ -1,11 +1,10 @@
 ---
 id: fixed-partitioning
 title: "Fixed partitioning"
-description: ""
+description: "Manually configure which partitions belong to which brokers."
 ---
 
-Starting with 1.2.0, there is a new experimental configuration option which lets you specify a fixed partitioning scheme.
-This means you can manually configure which partitions belong to which brokers.
+Starting with 1.2.0, there is a new experimental configuration option which lets you specify a fixed partitioning scheme; this means you can manually configure which partitions belong to which brokers.
 
 The partitioning scheme is controlled via a new configuration option under `zeebe.broker.experimental.partitioning`,
 more specifically `zeebe.broker.experimental.partitioning.scheme`. This option currently takes the following values:
@@ -13,7 +12,7 @@ more specifically `zeebe.broker.experimental.partitioning.scheme`. This option c
 - `ROUND_ROBIN`: When set, this applies the round-robin partition distribution, which corresponds to the distribution explained above on this page. _This is the default option, and requires no extra configuration if you want to use it._
 - `FIXED`: When set, this applies a manually configured partition distribution, configured separately.
 
-To use the `FIXED` partitioning scheme, _you must provide an exhaustive map of all partitions to a set of brokers_. This is achieved via the `zeebe.broker.experimental.partitioning.fixed` configuration option. Here is an example for a cluster of `5` brokers, `3` partitions, and a replication factor of `3`.
+To use the `FIXED` partitioning scheme, _you must provide an exhaustive map of all partitions to a set of brokers_. This is achieved via the `zeebe.broker.experimental.partitioning.fixed` configuration option. The example below outlines a cluster of `5` brokers, `3` partitions, and a replication factor of `3`.
 
 ```yaml
 partitioning:
@@ -58,7 +57,7 @@ The broker will fail to start if any of these conditions are not met.
 
 ## Priority election
 
-If you're using the priority election feature, you must also specify the priorities of each brokers. In fact, the broker will fail to start if the nodes do not have different priorities, as otherwise you could get into lengthy election loops.
+If you're using the priority election feature, you must also specify the priorities of each broker. In fact, the broker will fail to start if the nodes do not have different priorities, as otherwise you may encounter lengthy election loops.
 
 Here is the same example configuration as above, but this time with priorities configured:
 
@@ -93,5 +92,5 @@ partitioning:
 ```
 
 :::note
-The only condition is that the priorities for the nodes of a given partition must be different from each other. We recommend, however, that you use a simple monotonic increase from 1 to the replica count, as shown above.
+The only condition is that the priorities for the nodes of a given partition must be different from one another. We recommend, however, that you use a simple monotonic increase from 1 to the replica count, as shown above.
 :::
