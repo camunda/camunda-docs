@@ -23,6 +23,10 @@ async function renderBpmn(index, element) {
         adjustBox(canvas.viewbox(), canvas.viewbox().outer.width);
         bpmnDiv.attr("style", "height: " + (canvas.viewbox().outer.height) + "px; overflow: visible");
         bpmnDiv.attr("class", "bpmn-model");
+        if (element.attr("thumbs") == "down") {
+          bpmnDiv.attr("class", "thumbs-down-example");
+          bpmnDiv.prepend("<i class='thumbs-down'>&#x1F44E;</i>");
+        }
 
         // create callout overlays
         var overlays = viewer.get('overlays');

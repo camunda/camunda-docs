@@ -167,6 +167,16 @@ svg.implemented:hover [stroke="#333"]{
   /*margin-block-end: 1em; leads to wired effects when callout has multiple lines*/
   margin-inline-end: 0.75em;
 }
+.thumbs-down-example {
+  border: 3px solid #BD0100;
+  padding-bottom: 0px;
+}
+.thumbs-down {
+  color: #BD0100 !important;
+  font-size: xx-large;
+  position: absolute;
+  z-index: 10;
+}
 span.callout + p {
   display: inline;
   margin: 0 0 1.25rem;
