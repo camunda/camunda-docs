@@ -11,5 +11,13 @@ This section contains product manual content for each component in Camunda Cloud
 - [Cloud Console](cloud-console/introduction.md) - More information on working with Cloud Console.
 - [Modeler](modeler/about.md) - Documentation on Camunda's modeling tools, including Cloud Modeler and Camunda Modeler.
 - [Zeebe Engine](zeebe/zeebe-overview.md) - Complete documentation for Zeebe. 
-- [Operate](operate/index.md) - User and deployment guide for Operate.
+- [Operate](operate/index.md) - User guide for monitoring and troubleshooting your process with Operate.
+- [Optimize](optimize/what-is-optimize.md) - Detailed user guide for working with Optimize to improve your processes by identifying constraints in your system.
 - [Tasklist](tasklist/introduction.md) - Documentation for working with user tasks in Tasklist.
+
+
+:::note Looking for deployment guides?
+
+Deployment guides for Camunda Cloud components are available in the [Self-Managed section](./self-managed/overview.md).
+
+:::
