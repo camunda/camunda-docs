@@ -187,7 +187,7 @@ navbar .navbar .navbar__link[href*=self-managed] {
   background-color:#000;
   color: #fff;
   --ifm-button-border-color: #000;
-
+}
   
 /* Styles for BPMN.io integration and callouts in these models */
 .bpmn-model {
