@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_1okben7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="jacketDecision" name="Jacket">
+    <decisionTable id="decisionTable">
+      <input id="season" label="Season">
+        <inputExpression id="inputExpression1" typeRef="string">        <text></text>
+</inputExpression>
+      </input>
+      <output id="jacket" label="Jacket" name="" typeRef="string" />
+      <rule id="spring">
+        <description><![CDATA["A light blazer should actually do it."]]></description>
+        <inputEntry id="UnaryTests_0ftvtf0">        <text><![CDATA["Spring"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1emw4ae">        <text><![CDATA["Blazer"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="summer">
+        <description><![CDATA["It might rain, so better take one with you."]]></description>
+        <inputEntry id="UnaryTests_0e4lk3b">        <text><![CDATA["Summer"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1d5erms">        <text><![CDATA["Rain Jacket"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="fall">
+        <description><![CDATA["Best season to use the best one."]]></description>
+        <inputEntry id="UnaryTests_0mucwok">        <text><![CDATA["Fall"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_070a09d">        <text><![CDATA["Leather Jacket"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="winter">
+        <description><![CDATA["Keeps you warm even in northern germany."]]></description>
+        <inputEntry id="UnaryTests_1y1oa5t">        <text><![CDATA["Winter"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_02c2695">        <text><![CDATA["Down Jacket"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

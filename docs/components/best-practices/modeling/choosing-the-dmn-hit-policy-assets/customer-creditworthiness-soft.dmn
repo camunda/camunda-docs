@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_1okben7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="Creditworthiness">
+    <decisionTable id="decisionTable" hitPolicy="COLLECT" aggregation="SUM">
+      <input id="rating" label="Rating (past experience)">
+        <inputExpression id="LiteralExpression_0srl9wq" typeRef="string" />
+      </input>
+      <input id="income" label="Current monthly net income">
+        <inputExpression id="LiteralExpression_1hs0lw4" typeRef="long" />
+      </input>
+      <output id="creditworthiness" label="Creditworthiness" name="" typeRef="integer" />
+      <rule id="bad">
+        <description>If we have bad experience you start with -15 points.</description>
+        <inputEntry id="UnaryTests_1ofmqk7">        <text><![CDATA["Bad"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ckef2h">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0wtdw43">        <text>-15</text>
+</outputEntry>
+      </rule>
+      <rule id="good">
+        <description>If we have good experience you start with +15 points.</description>
+        <inputEntry id="UnaryTests_0dobqio">        <text><![CDATA["Good"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1jbcknv">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_10hv6zm">        <text>15</text>
+</outputEntry>
+      </rule>
+      <rule id="lowIncome">
+        <description>For a very low income we deduct -10 points.</description>
+        <inputEntry id="UnaryTests_1w1u86d">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1kmgffc">        <text><![CDATA[< 500]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_09vlu80">        <text>-10</text>
+</outputEntry>
+      </rule>
+      <rule id="reasonableIncome">
+        <description>For a reasonable income we add 5 points.</description>
+        <inputEntry id="UnaryTests_1o7bxpb">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_188d0xj">        <text><![CDATA[>= 1000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0nzap7g">        <text>5</text>
+</outputEntry>
+      </rule>
+      <rule id="goodIncome">
+        <description>For a good income you receive 10 points extra.</description>
+        <inputEntry id="UnaryTests_16pl5xz">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bh982j">        <text><![CDATA[>= 2000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0z09wqy">        <text>10</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

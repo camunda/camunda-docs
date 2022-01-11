@@ -31,6 +31,24 @@ module.exports = {
       },
     ],
   ],
+  scripts: [
+    {
+      src: "/js/bpmn-js-rendering.js",
+      async: true
+    },
+    {
+      src: "https://code.jquery.com/jquery-3.6.0.min.js",
+      async: true
+    },
+    {
+      src: "https://unpkg.com/bpmn-js/dist/bpmn-viewer.production.min.js",
+      async: true
+    },
+    {
+      src: "https://unpkg.com/dmn-js@11.0.2/dist/dmn-viewer.production.min.js",
+      async: true
+    }
+  ],  
   themeConfig: {
     prism: {
       additionalLanguages: ['java'],
