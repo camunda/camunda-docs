@@ -276,7 +276,7 @@ In Camunda Platform, you have [different ways to provide forms for user tasks](h
 * Embedded Task Forms (embedded custom HTML and JavaScript)
 * Camunda Forms (simple forms defined via Camunda Modeler properties)
 * External Task Forms (link to custom applications)
-* [Camunda Forms](https://docs.camunda.io/docs/components/tasklist/userguide/user-interface/camunda-forms/)
+* [Camunda Forms](../../components/tasklist/userguide/user-interface/camunda-forms/)
 
 Only Camunda Forms are currently supported in Camunda Cloud and can be migrated.
 
