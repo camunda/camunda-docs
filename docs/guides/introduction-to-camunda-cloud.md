@@ -11,10 +11,11 @@ Camunda Cloud is comprised of four components:
 
 * Zeebe - Zeebe is the cloud-native process engine of Camunda Cloud.
 * Operate - Manage, monitor, and troubleshoot your processes through Operate.
+* Optimize - Improve your processes by identifying constraints in your system with Optimize.
 * Tasklist - Use Tasklist to complete tasks which need human input.
 * Cloud Console (including Cloud Modeler) - Configure and deploy clusters, model processes, and more with Cloud Console. 
 
-Camunda Cloud can be used with Camunda Modeler, and soon, Optimize and Cawemo. 
+Camunda Cloud can be used with Camunda Modeler, and soon, Cawemo. 
 
 In this section of the Camunda Cloud documentation, you'll find guides for getting started with Camunda Cloud. For more conceptual information on Camunda Cloud, see [What is Camunda Cloud](components/concepts/what-is-camunda-cloud.md).
 
