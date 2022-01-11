@@ -322,4 +322,4 @@ To test your API you can access `localhost:3000/graphl` on your browser and shou
 
 ## Demo data generation and sample frontend
 
-To test our app with the a real frontend we can change the port inside `api/main.ts` to `6000`. And then run from the root folder `yarn start:demo-data` to start the backend, frontend and demo data generation or just `yarn start` if you don't need any new data.
+To test our app with a real frontend we can change the port inside `api/main.ts` to `6000`. And then run from the root folder `yarn start:demo-data` to start the backend, frontend and demo data generation or just `yarn start` if you don't need any new data.
