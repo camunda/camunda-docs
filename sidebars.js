@@ -407,6 +407,7 @@ module.exports = {
         "self-managed/optimize-deployment/setup/localization",
         "self-managed/optimize-deployment/setup/multi-tenancy",
         "self-managed/optimize-deployment/setup/multiple-engines",
+        "self-managed/optimize-deployment/setup/object-variables",
         "self-managed/optimize-deployment/setup/clustering",
         "self-managed/optimize-deployment/setup/webhooks",
         "self-managed/optimize-deployment/setup/setup-event-based-processes",
@@ -428,29 +429,33 @@ module.exports = {
         },
         {
           "REST API": [
+            "self-managed/optimize-deployment/rest-api/authorization",
             {
               "Dashboard": [
-                "self-managed/optimize-deployment/rest-api/dashboard/dashboard-api",
+                "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
                 "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
+                "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions",
               ],
             },
             {
               "Report": [
-                "self-managed/optimize-deployment/rest-api/report/report-api",
+                "self-managed/optimize-deployment/rest-api/report/get-report-ids",
                 "self-managed/optimize-deployment/rest-api/report/delete-report",
+                "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
                 "self-managed/optimize-deployment/rest-api/report/get-data-export",
               ],
             },
-        "self-managed/optimize-deployment/rest-api/event-ingestion",
-        "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
-        "self-managed/optimize-deployment/rest-api/health-readiness",
-
+            "self-managed/optimize-deployment/rest-api/event-ingestion",
+            "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
+            "self-managed/optimize-deployment/rest-api/health-readiness",
+            "self-managed/optimize-deployment/rest-api/import-entities",
           ],
         },
         "self-managed/optimize-deployment/reimport",
         {
           "Migration & Update": [
         "self-managed/optimize-deployment/migration-update/instructions",
+        "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
         "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
         "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
         "self-managed/optimize-deployment/migration-update/3.3-to-3.4",

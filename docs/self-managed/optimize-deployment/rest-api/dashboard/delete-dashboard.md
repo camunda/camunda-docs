@@ -1,6 +1,6 @@
 ---
 id: delete-dashboard
-title: "Dashboard Delete"
+title: "Delete Dashboards"
 description: "The REST API to delete Dashboards from Optimize."
 ---
 
@@ -27,7 +27,7 @@ The following request headers have to be provided with every delete request:
 
 |Header|Constraints|Value|
 |--- |--- |--- |
-|Authorization|REQUIRED*|See [Authorization](dashboard-api.md/#authorization)|
+|Authorization|REQUIRED*|See [Authorization](../../authorization)|
 
 * Only required if not set as a query parameter
 
@@ -37,7 +37,7 @@ The following query parameters have to be provided with every delete request:
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
-|access_token|REQUIRED*|See [Authorization](dashboard-api.md/#authorization)|
+|access_token|REQUIRED*|See [Authorization](../../authorization)|
 
 * Only required if not set as a request header
 
@@ -56,11 +56,9 @@ Possible HTTP Response Status codes:
 |Code|Description|
 |--- |--- |
 |204|Request successful.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](dashboard-api.md/#authorization) on how to authenticate.|
+|401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
 |404|The requested Dashboard was not found, please check the provided dashboard-ID.|
 |500|Some error occurred while processing the request, best check the Optimize log.|
-
-
 
 ## Example
 

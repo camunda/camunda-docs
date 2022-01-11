@@ -24,6 +24,7 @@ The edit mode allows you to configure the dashboard and adjust it to your needs,
 - Save the current state with your applied changes
 - Cancel changes you already applied to the dashboard
 - Set filters available on the dashboard
+- Set a default auto refresh rate to periodically update the Dashboard in [view mode](#view-mode)
 
 ![edit mode](./img/dashboard-dashboardEditActions.png)
 
@@ -74,7 +75,11 @@ Once you have defined what your dashboard should look like, the view mode provid
 
 - Fullscreen: Display the dashboard in fullscreen and only see the essential information of your dashboard - the reports - and hide the header, control panel, and footer. While in fullscreen mode, you can click on the **Toggle Theme** button to switch between the default light theme and a dark theme.
 
-- Auto-refresh: This feature periodically updates the dashboard with the latest data. You can decide how often the update should be performed by setting a time span reaching from 1 to 60 minutes. An animation indicates when the next update is occurring. If you do not wish to use that feature anymore, you can disable it anytime. Note that when refreshing the dashboard page manually or switching to another page in between, the auto-refresh must be enabled again.
+- Auto-refresh: This feature periodically updates the dashboard with the latest data. You can decide how often the update should be performed by setting a time span reaching from 1 to 60 minutes. An animation indicates when the next update is occurring. If you do not wish to use that feature anymore, you can disable it anytime. <br />
+Note: The refresh rate will not be saved unless it is selected in the [edit mode](#edit-mode) of the dashboard.
+If it was selected in the view mode, the refresh rate will not be saved when refreshing the Dashboard page manually or switching to another page in between
+
+- Alerts: If the created dashboard exists inside a collection, it is possible to create and manage created alerts for the reports inside the dashboard.
 
 ![process performance overview](./img/dashboard-viewMode-monitorFeatures.png)
 

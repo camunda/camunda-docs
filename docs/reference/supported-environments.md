@@ -38,7 +38,7 @@ Run Camunda Optimize in a Java-runnable environment. The following environments 
 
 ### Elasticsearch
 
-- Elasticsearch 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+
+- Elasticsearch 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+
 - Any minor version above the ones listed in the previous point is likely to be supported as well, but this hasn't been tested. For this reason, Camunda doesn't give any warranty.
 - Any major version smaller or greater than ElasticSearch 7 will be rejected by Optimize. For example, Optimize won't work with ElasticSearch 6.X or 8.X.
 - For the supported versions mentioned before, the Elasticsearch community as well as any professional version is supported. However, bear in mind that the professional edition comes with additional safety features that allow you to secure Elasticsearch. If you use the community edition, securing Elasticsearch needs to be done manually.
