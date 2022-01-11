@@ -414,6 +414,7 @@ module.exports = {
         "self-managed/optimize-deployment/setup/common-problems",
           ],
         },
+        "self-managed/optimize-deployment/setup",
         {
           Plugins: [
         "self-managed/optimize-deployment/plugins/plugin-system",
