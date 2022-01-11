@@ -148,7 +148,7 @@ While a process represents a defined sequence of distinct steps representing you
 A process instance variable represents the execution state (i.e data) of a process instance. These variables capture business process parameters which are the input and output of various stages of the process instance and which also influence process flow execution.
 
 - [Variables](/components/concepts/variables.md)
-- [Data flow](/reference/bpmn-processes/data-flow.md)
+- [Data flow](/components/modeler/bpmn/data-flow.md)
 
 
 ### Record
