@@ -7,17 +7,17 @@ Expressions can be used to access variables and calculate values dynamically.
 
 The following attributes of BPMN elements *require* an expression:
 
-- Sequence flow on an exclusive gateway: [condition](/reference/bpmn-processes/exclusive-gateways/exclusive-gateways.md#conditions)
-- Message catch event/receive task: [correlation key](/reference/bpmn-processes/message-events/message-events.md#messages)
-- Multi-instance activity: [input collection](/reference/bpmn-processes/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/reference/bpmn-processes/multi-instance/multi-instance.md#collecting-the-output)
+- Sequence flow on an exclusive gateway: [condition](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md#conditions)
+- Message catch event/receive task: [correlation key](/components/modeler/bpmn/message-events/message-events.md#messages)
+- Multi-instance activity: [input collection](/components/modeler/bpmn/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/components/modeler/bpmn/multi-instance/multi-instance.md#collecting-the-output)
 - Input/output variable mappings: [source](variables.md#inputoutput-variable-mappings)
 
 Additionally, the following attributes of BPMN elements can define an expression *optionally*, instead of a static value:
 
-- Timer catch event: [timer definition](/reference/bpmn-processes/timer-events/timer-events.md#timers)
-- Message catch event/receive task: [message name](/reference/bpmn-processes/message-events/message-events.md#messages)
-- Service task: [job type](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition), [job retries](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition)
-- Call activity: [process id](/reference/bpmn-processes/call-activities/call-activities.md#defining-the-called-process)
+- Timer catch event: [timer definition](/components/modeler/bpmn/timer-events/timer-events.md#timers)
+- Message catch event/receive task: [message name](/components/modeler/bpmn/message-events/message-events.md#messages)
+- Service task: [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition), [job retries](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition)
+- Call activity: [process id](/components/modeler/bpmn/call-activities/call-activities.md#defining-the-called-process)
 
 ## Expressions vs. static values
 

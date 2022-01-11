@@ -10,6 +10,7 @@ Via Cloud Console, you can:
 - [Create](./manage-clusters/create-cluster.md) and [delete](./manage-clusters/delete-cluster.md) clusters.
 - [Manage API clients](./manage-clusters/manage-api-clients.md) to interact with Zeebe and Tasklist.
 - [Manage alerts](./manage-clusters/manage-alerts.md) to get notified when workflow errors occur.
+- [Manage IP Whitelists](./manage-clusters/manage-ip-whitelists.md) to restrict access to clusters.
 - [Manage](./manage-organization/organization-settings.md) your organization.
 - [Cloud Console API clients (REST)](./apis-clients/cloud-console-api-reference.md) to manage clusters programmatically.
 
