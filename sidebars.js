@@ -351,6 +351,8 @@ module.exports = {
             "self-managed/zeebe-deployment/configuration/logging",
             "self-managed/zeebe-deployment/configuration/gateway-health-probes",
             "self-managed/zeebe-deployment/configuration/environment-variables",
+            "self-managed/zeebe-deployment/configuration/fixed-partitioning",
+            "self-managed/zeebe-deployment/configuration/priority-election",
           ],
         },
         {
