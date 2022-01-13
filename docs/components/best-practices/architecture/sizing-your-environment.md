@@ -55,6 +55,8 @@ The number of tasks per process allows you to calculate the required number of *
 | Tasks per day | 4,000 | / 5 | Tasks in the process model as counted above |
 | Tasks per second | 0.05 | / (24\*60\*60) | Seconds per day |
 
+In most cases, we define throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second.
+
 
 ### Peak loads
 
@@ -62,18 +64,23 @@ In most scenarios, your load will be volatile and not constant. For example, you
 
 In the above example, that one day with the peak load defines your overall throughput requirements.
 
-In most cases, we define throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second. This is especially important if you need to guarantee certain cycle times even within peak loads. The cycle time is the time a process (or sometimes only single tasks) takes to complete. For example, the number of milliseconds a fully automated process with 10 tasks takes.
+Sometimes, looking at peaks might also mean, that you are not looking at all 24 hours of a day, but only 8 business hours, or probably the busiest 2 hours of a day, depending on your typical workload.
 
-Your calculation might look different if you have peak loads:
+
+### Latency and cycle time
+
+In some use cases, the cycle time of a process (or sometimes even the cycle time of single tasks) matter. For example, you want to provide a REST endpoint, that starts a process instance to calculate a score for a customer. This process needs to execute four service tasks, but the REST request should return a response synchronously, no later than 250 milliseconds after the request. 
+
+While the cycle time of service tasks depends very much on what you do in these tasks, the overhead of the workflow engine itself can be measured. In an experiment with Camunda Cloud 1.2.4, running all worker code in in the same GCP zone as Camunda Cloud, we measured around 10ms processing time per process node and approximately 50 ms latency to process service tasks in remote workers. Hence, to execute 4 service tasks requires 240 ms for workflow engine overhead. 
+
+The closer you push throughput to the limits, the more latency you will get. This is basically, because the different requests compete for hardware resources, especially disk write operations. As a consequence, whenever cycle time and latency matters to you, you should plan for hardware buffer to not utilize your cluster too much. This makes sure, your latency does not go up because of resource contention. A good rule of thumb is to multiply your average load by 20. This means, you cannot only accomodate unexpected peak loads, but also have more free resources on average, keeping latency down.
 
 | Indicator | Number | Calculation method | Comment |
 | :- |-: | :-: | :- | 
 | Onboarding instances per year | 5,000,000 |  | Business input, but irrelevant |
 | Expected process instances on peak day | 150,000 |  | Business input |
 | Tasks per second within business hours on peak day | 5.20 | / (8\*60\*60) | Only looking at seconds of the 8 business hours of a day |
-| Tasks per second including buffer | 52.08 | \* 10 | Adding some buffer (here 10 times the load) is recommended in critical high-performance use cases |
-
-If cycle time matters, you might even plan for more buffer, as the tasks will not be evenly distributed within the 8 business hours. The exact buffer depends on the severity of delays, a good rule of thumb is to plan for 10 times the tasks per second.
+| Tasks per second including buffer | 104.16 | \* 20 | Adding some buffer is recommended in critical high-performance or low-latency use cases |
 
 
 ### Disk space
@@ -86,11 +93,11 @@ The data you attach to a process instance (process variables) will influence dis
 
 Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda Cloud SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
 
-* Zeebe: 25 kb / PI
-* Operate: 19 kb / PI
-* Optimize: 7 kb / PI
-* Tasklist: 7 kb / PI
-* Sum: 58 kb / PI
+* Zeebe: 75 kb / PI
+* Operate: 57 kb / PI
+* Optimize: 21 kb / PI
+* Tasklist: 21 kb / PI
+* Sum: 174 kb / PI
 
 Using your throughput and retention settings, you can now calculate the required disk space for your scenario. Example:
 
@@ -99,15 +106,15 @@ Using your throughput and retention settings, you can now calculate the required
 | Process instances per day  |             | 20,000        |                                                                                                    |
 | **Runtime**                    |             |              |                                                                                                    |
 | Typical process cycle time | \* 5 days   | 100,000       | How long is a process instance typically active? Determines the number of active process instances |
-| Disk space for Zeebe       | \* 25 kb    | 2.38 GB  | (Converted into GB by / 1024 / 1024)                                                               |
-| Disk space for Tasklist    | \* 7 kb     | 0.67 GB |                                                                                                    |
+| Disk space for Zeebe       | \* 75 kib    | 7.15 GiB  | (Converted into GB by / 1024 / 1024)                                                               |
+| Disk space for Tasklist    | \* 21 kib     | 0.67 GiB |                                                                                                    |
 | **Operate**                    |             |              |                                                                                                    |
 | PI in retention time             | \* 30 day   | 600,000       |                                                                                                    |
-| Disk space                 | \* 19 kb    | 10.87 GB |                                                                                                    |
+| Disk space                 | \* 57 kib    | 32.62 GiB |                                                                                                    |
 | **Optimize**                   |             |              |                                                                                                    |
 | PI in retention time             | \* 6 months | 3,600,000      |                                                                                                    |
-| Disk space                 | \* 7 kb     | 24.03 GB  |                                                                                                    |
-| **Sum**                        |             | **37.96 GB**  |                                                                                                    |
+| Disk space                 | \* 21 kib     | 72.10 GiB  |                                                                                                    |
+| **Sum**                        |             | **113.87 GiB**  |                                                                                                    |
 
 
 ## Understanding sizing and scalability behavior
@@ -128,7 +135,7 @@ Note that Camunda licensing does not depend on the provisioned hardware resource
 First, calculate your requirements using the information provided above, taking the example calculations from above:
 
 * Throughput: 20,000 process instances / day
-* Disk space: 40 GB
+* Disk space: 114 GB
 
 Now you can select a hardware package that can cover these requirements. In this example this fits well into a cluster of size S.
 
@@ -166,7 +173,7 @@ However, the following example shows the current configuration of a cluster of s
 
 ## Planning non-production environments
 
-All clusters can be used for development, testing, integration, Q&A, and production. 
+All clusters can be used for development, testing, integration, Q&A, and production. In Camunda Cloud SaaS, production and test environments are organized via separate organizations within Camunda Cloud to ease the management of clusters, while also minimizing the risk to accidentally accessing a production cluster.
 
 Note that functional unit tests that are written in Java and use [zeebe-proces-test](https://github.com/camunda-cloud/zeebe-process-test/), will use an in-memory broker in unit tests, so no development cluster is needed for this use case. 
 
