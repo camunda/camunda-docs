@@ -60,8 +60,8 @@ RewriteRule ^docs/components/iam/overview$ /docs/components/iam/what-is-iam [R=3
 RewriteRule ^docs/product-manuals/(.*)$ /docs/components/$1 [R=301,L]
 RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
 
-RewriteRule ^docs/self-managed/zeebe-deployment/security/authorization$ /docs/self-managed/zeebe-deployment/security/client-authorization/ [R=301, L]
-RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication$ /docs/self-managed/zeebe-deployment/security/secure-client-communication/ [R=301, L]
+RewriteRule ^docs/self-managed/zeebe-deployment/security/authorization$ /docs/self-managed/zeebe-deployment/security/client-authorization/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication$ /docs/self-managed/zeebe-deployment/security/secure-client-communication/ [R=301,L]
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
