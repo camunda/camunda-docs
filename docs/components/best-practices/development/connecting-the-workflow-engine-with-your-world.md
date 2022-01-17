@@ -165,9 +165,7 @@ The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camu
 
 <img src ="connecting-the-workflow-engine-with-your-world-assets/messaging-example.png"/>
 
-Note that the support for the send task used in this diagram will be introduced with Camunda Cloud 1.1 in July 2021. Prior to the 1.1 version you might have to use a service task as a workaround.
-
-In the next blog post in this series you will learn why I used a send and receive task here, and not simply a service task, which would technically also work (spoiler alert: because the payment service might be long running, think about expired credit cards that need to be updated or wire transfers that need to happen).
+[Service integration patterns](./service-integration-patterns) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: Send and receive task are used here, because the payment service might be long running, think about expired credit cards that need to be updated or wire transfers that need to happen).
 
 The same concept will apply to other programming languages, for example you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above.
 
