@@ -51,30 +51,10 @@ There are exceptions when you might not want to have all glue code within one ap
 2.  You want to write glue code in different programming languages, for example, because writing specific logic in a specific language is much easier (like using Python for certain AI calculations or Java for certain mainframe integrations).
 
 
-## Thinking about transactions and idempotency of workers
+## Thinking about transactions, exceptions and idempotency of workers
 
-Let's quickly understand, how a worker really works.
+Make sure to visit [Dealing With Problems and Exceptions](./dealing-with-problems-and-exceptions) to gain a better understanding how workers deal with transactions and exceptions to the happy path.
 
-Whenever a process instance arrives at a service task, a new job is created and pushed to an internal persistent queue within Camunda Cloud. A client application can subscribe to these jobs with the workflow engine by the task type name (which is comparable to a queue name).
-
-If there is no worker subscribed when a job is created, the job is simply put in a queue. If multiple workers are subscribed, they are competing consumers, and jobs are distributed among them.
-
-Whenever the worker has finished whatever it needs to do (like invoking the REST endpoint), it completes the job, which is another call to the workflow engine.
-
-<img src="writing-good-workers-assets/worker-concept.png" />
-
-This means, that executing the glue code is external to the workflow engine and there is **no technical transaction spanning both components**. In other words: things can get out of sync if either the job handler or the workflow engine fails.
-
-Zeebe uses the **at-least-once strategy** for job handlers, which is a typical choice in distributed systems. This means that the process instance only advances in the happy case (the job was completed, the workflow engine received the complete job request and committed it). A typical failure case occurs when the worker who polled the job crashes and cannot complete the job anymore. [In this case, the workflow engine gives the job to another worker after a configured timeout](/docs/product-manuals/concepts/job-workers#timeouts). This ensures that the job handler is executed at least once.
-
-But this can mean that the handler is executed more than once! You need to consider this in your handler code, as the handler might be called more than one time. The [technical term describing this is idempotency](https://en.wikipedia.org/wiki/Idempotence). Typical strategies are for example described in [3 common pitfalls in microservice integration — and how to avoid them](https://medium.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07): One possibility is to ask the service provider if it has already seen the same request. A more common approach is to implement the service provider in a way that allows for duplicate calls. There are two easy ways of mastering this:
-
-*  **Natural idempotency**. Some methods can be executed as often as you want because they just flip some state. Example: `confirmCustomer()`
-*   **Business idempotency**. Sometimes you have business identifiers that allow you to detect duplicate calls (e.g. by keeping a database of records that you can check). Example: `createCustomer(email)`
-
-If these approaches do not work, you will need to add a **custom idempotency handling** by using unique IDs or hashes. For example, you can generate a unique identifier and add it to the call. This way a duplicate call can be easily spotted if you store that ID on the service provider side. If you leverage a workflow engine you probably can let it do the heavy lifting.Example: `charge(transactionId, amount)`
-
-Whatever strategy you use, make sure that you’ve thought about idempotency consciously.
 
 ## Data minimization in workers
 
