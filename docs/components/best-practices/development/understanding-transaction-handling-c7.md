@@ -15,53 +15,51 @@ bookchapter: 4
 This best practice targets Camunda Platform 7.x only! Zeebe, the workflow engine used in Camunda Cloud, as a very different transactional behevaior, please visit [dealing with problems and exceptions](./dealing-with-problems-and-exceptions).
 :::
 
-Try to carefully study and fully understand the concepts of wait states (save points) acting as 'transaction borders' for technical (ACID) transactions. In case of technical failures, they are by default rolled back and need to be retried either by the user or the background job executor. 
+Try to carefully study and fully understand the concepts of wait states (save points) acting as *transaction boundaries* for technical (ACID) transactions. In case of technical failures, they are by default rolled back and need to be retried either by the user or the background job executor. 
 
 ## Understanding technical (ACID) transactions in Camunda Platform 7
 
 
-Every time we use the Camunda Platform 7 API to ask the workflow engine to do something (like e.g. starting a process, completing a task, signaling an execution), the engine will advance in the
-process until it reaches *wait states* on each active path of execution.
+Every time we use the Camunda Platform 7 API to ask the workflow engine to do something (like e.g. starting a process, completing a task, signaling an execution), the engine will advance in the process until it reaches *wait states* on each active path of execution, which can be:
 
 <div bpmn="understanding-transaction-handling-c7-assets/wait-states.bpmn" callouts="receive_task,intermediate_catching_event_timer,event_based_gateway,business_rule_task,end_event_message" />
 
 <span className="callout">1</span>
 
-*User Tasks* and *Receive Tasks* are wait states ...
+*User tasks* and *receive tasks*
 
 <span className="callout">2</span>
 
-... so are all *Intermediate Catching Events* and ...
+All *intermediate catching events*
 
 <span className="callout">3</span>
 
-... the *Event Based Gateway* - which offers the possibility of reacting to one of multiple Intermediate Catching Events.
+The *event based gateway*, which offers the possibility of reacting to one of multiple intermediate catching events
 
 <span className="callout">4</span>
 
-Furthermore several task types (*Service*, *Send*, *Business Rule* Tasks) ...
+Several further task types (*service*, *send*, *business rule* tasks)
 
 <span className="callout">5</span>
 
-... as well as the *Throwing Message Events* might be implemented as [External Tasks](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/), which are then wait states, too.
+[External Tasks](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are wait states, too. In this case, the *throwing message events* might be implemented as external task. 
 
-At a wait state, any further process execution must wait for some trigger. Wait states will therefore always be persisted to the database: within a *single database transaction*, the process engine will cover the distance from one *transaction boundary* of persisted wait states to the next such boundary. However, you have fine grained control over these transaction boundaries by introducing additional *save points* using the [\"async before\" and \"async after\" attributes](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#configure-asynchronous-continuations). A background job executor will then make sure that the process *continues asynchronously*.
+At a wait state, any further process execution must wait for some trigger. Wait states will therefore always be persisted to the database. The design of the workflow engine is, that within a *single database transaction*, the process engine will cover the distance from one persisted wait states to the next. However, you have fine grained control over these transaction boundaries by introducing additional *save points* using the [`async before` and `async after` attributes](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#configure-asynchronous-continuations). A background job executor will then make sure that the process *continues asynchronously*.
 
-Learn more about [Transactions in Processes](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/) in general and [Asynchronous Continuations](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#why-asynchronous-continuations) in the User Guide.
+Learn more about [transactions in processes](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/) in general and [asynchronous continuations](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#why-asynchronous-continuations) in the user guide.
 
 
 
 :::note Technical vs. business transactions
-
-Sometimes when we refer to "transactions" in processes we refer to a very different concept, which must be clearly distinguished from "technical" database transactions. A *business transaction* marks a section in a process for which 'all or nothing' semantics similar to a technical transaction should apply, but from a pure business perspective. This is described in [dealing with problems and exceptions](./dealing-with-problems-and-exceptions).
+Sometimes when we refer to "transactions" in processes, we refer to a very different concept, which must be clearly distinguished from technical database transactions. A *business transaction* marks a section in a process for which 'all or nothing' semantics apply, but from a pure business perspective. This is described in [dealing with problems and exceptions](./dealing-with-problems-and-exceptions).
 :::
 
 
-## Demarcating custom transaction boundaries
+## Controlling transaction boundaries
 
 ### Using additional save points
 
-You have fine grained control over transaction boundaries by introducing *additional optional "save points"* on top of the obligatory [wait states](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#wait-states). Use the *`asyncBefore='true'`* and *`asyncAfter='true'`* attributes in your process definition BPMN XML. The process state will then be persisted at these points and a background job executor will make sure that it is continued asynchronously.
+You have fine grained control over transaction boundaries by introducing *save points*  additionally to [wait states](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#wait-states), that are always a save point. Use the `asyncBefore='true'` and `asyncAfter='true'` attributes in your process definition BPMN XML. The process state will then be persisted at these points and a background job executor will make sure that it is continued asynchronously.
 
 <div bpmn="understanding-transaction-handling-c7-assets/additional-save-points.bpmn" callouts="user_task_write_tweet, service_task_check_explicit_language,service_task_publish_tweet" />
 
