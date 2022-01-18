@@ -4,7 +4,7 @@ title: What is Optimize?
 ---
 
 :::note
-New to Optimize? Visit our introductory guide to [Optimize](./guides/integrating-optimize.md) to get started.
+New to Optimize? Visit our introductory guide to [Optimize](./guides/improve-processes-with-optimize.md) to get started.
 :::
 
 Camunda Cloud is built to handle three key aspects of process automation:
