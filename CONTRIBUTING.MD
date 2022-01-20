@@ -1,18 +1,14 @@
 ---
-title: "Getting Started"
+title: "Getting started"
 weight: 1
 aliases: [ "/contributor-guide" ]
 description:
-  A list of things that you should be familiar with before you
-  get started with contributing to the Camunda Cloud Documentation. 
-  This includes such things as signing the contributor License Agreement, 
-  familiarizing yourself with our Code of Conduct,
-  and more.
+  A list of concepts you should be familiar with, such as signing the contributor License Agreement and familiarizing yourself with our Code of Conduct before contributing to the Camunda Cloud documentation. 
 ---
 
-# Getting Started
+# Getting started
 
-- [Getting Started](#getting-started)
+- [Getting started](#getting-started)
   - [Welcome](#welcome)
   - [Contributor Guide](#contributor-guide)
   - [Prerequisites](#prerequisites)
@@ -28,7 +24,7 @@ description:
 
 ## Welcome
 
-Our documentation is open source, and we welcome new contributions. We take pride in maintaining and encouraging a friendly, welcoming, and collaborative open-source community. All contributors to our project are expected to adhere to our [Code of Conduct].
+Our documentation is open source, and we welcome new contributions. We take pride in maintaining and encouraging a friendly, welcoming, and collaborative open-source community. All contributors to our project are expected to adhere to our [Code of Conduct](#code-of-conduct).
 
 ## Contributor guide
 
@@ -36,32 +32,33 @@ Anyone can open an issue regarding our documentation, or contribute a change wit
 
 We would love it if you took the time to contribute to our project. You can do so in a variety of ways:
 
-- Contribute your knowledge -- If you see a section of the documentation that you feel you could improve by adding something that’s missing, whether that’s by adding a helpful tip, screenshot, or code snippet, please feel free to [open a pull request].
-- Help us improve -- If you have an idea for a new feature request, long-term improvements, or interesting solutions that you feel would benefit the Camunda Cloud ecosystem and our documentation, we’d be happy to look at your issue.
-- File a bug report -- Is a link broken? Does a screenshot not load? Is something missing alt-text? Don’t hesitate to reach out to us and let us know by [opening an issue].
-documentation and our community.
+- Contribute your knowledge — If you see a section of the documentation that you feel you could improve by adding something that’s missing, whether that’s by adding a helpful tip, screenshot, or code snippet, please feel free to [open a pull request](#opening-a-pull-request).
+- Help us improve — If you have an idea for a new feature request, long-term improvements, or interesting solutions that you feel would benefit the Camunda Cloud ecosystem and our documentation, we’d be happy to look at your issue.
+- File a bug report — Is a link broken? Does a screenshot not load? Does something need alt-text to improve accessibility? Don’t hesitate to reach out to us and let us know by [opening an issue]().
+[//]:# (What is the link you would like to provide above?)
 - If you would like to get a better understanding of how our documentation is built and contribute back upstream to the tooling that this documentation uses, we encourage you to get started with the [Docusaurus 2] framework.
+[//]:# (Pausing here to comment. Are you planning to add links to all of the references here in a separate commit?)
 
 ## Prerequisites
 
-You will need to be comfortable with working in the either the [GitHub web-based editor] or a text editor such as Visual Studio Code or Atom. You will also need to understand the basics of [Git] and [GitHub] to have your best experience contributing to the Camunda.
+You need to be comfortable working in the either the [GitHub web-based editor] or a text editor such as Visual Studio Code or Atom. You will also need to understand the basics of [Git] and [GitHub] to have your best experience contributing to the Camunda.
 
 ### Contributor License Agreement
 
-You will be asked to sign our [Contributor License Agreement] when you open a Pull Request. We are not asking you to assign copyright to us, but to give us the right to distribute your code without restriction. We ask this of all contributors in order to assure our users of the origin and continuing existence of the code.
+You will be asked to sign our [Contributor License Agreement] (CLA) when you open a pull request. We are not asking you to assign copyright to us, but to give us the right to distribute your code without restriction. We ask this of all contributors in order to assure our users of the origin and continuing existence of the code.
 
 *Note: In most cases, you will only need to sign the CLA once.*
 
 ### Code of Conduct
 
-By contributing to this repository, you will also be expected to adhere to our community [Code of Conduct].
+By contributing to this repository, you are also expected to adhere to our community [Code of Conduct].
 
 ### Code formatting
 
-Before submitting your pull request for code review, please ensure your code has met the requirements listed below.
+Before submitting your pull request for code review, please ensure your code has met the requirements listed below:
 
 - Is your code formatted according to our [code style guidelines]?
-- Does your writing follow our [Technical Style Guide]?
+- Does your writing follow our [Technical Writing Style Guide]?
 - Is your code covered by unit tests?
   - It is the responsibility of contributors to ensure that their contributed code passes automated testing.
   - Ask us if you are not sure where to write the tests or what kind of tests you should write.
@@ -72,9 +69,9 @@ Before submitting your pull request for code review, please ensure your code has
 
 ### Opening a pull request
 
-Before opening a pull request to the Camunda Cloud Documentation, it’s important to review our how-to’s. These are a [variety] of these instructional documents that will detail how to get started on your contributor journey.
+Before opening a pull request to the Camunda Cloud Documentation, it’s important to review our how-to’s. These are a variety of these [instructional documents] that detail how to get started on your contributor journey.
 
-- [Documentation Guidelines] -- These guidelines detail our process for adding a new documentation page, opening your first pull request, our code reviewers and their areas of expertise, and how to structure your documentation files.
+- [Documentation Guidelines] — These guidelines detail our process for adding a new documentation page, opening your first pull request, our code reviewers and their areas of expertise, and how to structure your documentation files.
 - Review our [Pull Requests and Code Review] wiki.
 
 ### Conventional commits
@@ -85,30 +82,33 @@ This convention is utilized in conjunction with [SemVer] (semantic versioning), 
 
 The commit message should be structured as follows:
 
+```
     <header>
     <BLANK LINE>
     <body>
     <BLANK LINE> (optional - mandatory with footer)
     <footer> (optional)
+```
 
 ### Commit message header formatting
 
 Commit message headers should follow this formatting example:
 
-    {type}(scope): {description}
+    `{type}(scope): {description}`
+
 All header messages should be kept between 72-120 characters.
 
 Examples:
 
-- **docs(reference)**: add start event to bpmn symbol support matrix
-- **perf(broker)**: reduce latency in backpressure
-- **feat(clients/go)**: allow more than 9000 jobs in a single call
+- **docs(reference)**: Add start event to bpmn symbol support matrix.
+- **perf(broker)**: Reduce latency in backpressure.
+- **feat(clients/go)**: Allow more than 9000 jobs in a single call.
 
 **Type** should be one of the following categories:
 
-- **build**: Changes that impact the project’s build system (e.g. Maven, Docker, etc)
-- **ci**: Changes to a project’s CI configuration files and scripts (e.g. Jenkins, GitHub Actions, etc)
-- **deps**: A change to the external dependencies (This is already used by Dependabot)
+- **build**: Changes that impact the project’s build system (e.g. Maven, Docker, etc.)
+- **ci**: Changes to a project’s CI configuration files and scripts (e.g. Jenkins, GitHub Actions, etc.)
+- **deps**: A change to the external dependencies (this is already used by Dependabot.)
 - **docs**: A change to the documentation
 - **feat**: A proposed new feature
 - **fix**: A bug fix
@@ -122,15 +122,15 @@ Examples:
 
 ### Code reviews
 
-Thorough code reviews are necessary to end up with a high quality product. When code contribution guidelines are unclear, the code review process can lead to frustration. The Camunda Cloud team strives to make code reviews a positive experience for both reviewers and contributors.
+Thorough code reviews are necessary to produce a high-quality product. When code contribution guidelines are unclear, the code review process can lead to frustration. The Camunda Cloud team strives to make code reviews a positive experience for both reviewers and contributors.
 
-While new and returning contributors are highly encouraged to read the contributor guidelines before opening a pull request, experienced contributors and project maintainers should regularly review the contributor guide as well to ensure that they are up-to-date.
+While new and returning contributors are highly encouraged to read the contributor guidelines before opening a pull request, experienced contributors and project maintainers should regularly review the contributor guide as well to ensure they are up to date.
 
 ### Best practices for reviewers
 
 Code reviewers are a crucial part of any open source project, and as such, have distinct responsibilities.
 
-- Minimize delays -- Try to review pull requests that you are assigned to on a weekly basis
+- Minimize delays — Review pull requests you are assigned to on a weekly basis.
 - Having doubts? Review the [code style guidelines].
 - Principles, not opinions
   - Keep your feedback in scope of ensuring the principles of the documentation are adhered to. Avoid personal attacks when reviewing code.
@@ -141,7 +141,7 @@ For further guidelines and best practices to keep in mind as a reviewer, please 
 
 #### Inspiration
 
-This documentation is inspired and influenced by the Zeebe documentation, the Camunda Platform documentation,the Microsoft contributor guidelines,
+This documentation is inspired and influenced by the Zeebe documentation, the Camunda Platform documentation, the Microsoft contributor guidelines,
 the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 
 [Getting Started]:./getting-started
@@ -168,3 +168,5 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [Technical Style Guide]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/technical-writing-styleguide.md
 [Pull Requests and Code Review]: https://github.com/camunda-cloud/zeebe/wiki/Pull-Requests-and-Code-Reviews
 [SemVer]: http://semver.org/
+
+[//]:# (Ah, I see now. Will these links be incorporated into the text or left as-is? For technical writing purposes and overall debugging, it's best to have these alongside their text.)
