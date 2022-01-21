@@ -1,12 +1,3 @@
----
-title: "Documentation workflows"
-weight: 1
-aliases: [ "/documentation-workflows" ]
-description:
-  A guide to walk you through the Camunda Cloud documentation workflow when working with the
-  GitHub web-based editor. 
----
-
 # Getting started
 
 - [Getting started](#getting-started)

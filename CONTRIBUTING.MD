@@ -1,12 +1,6 @@
----
-title: "Getting started"
-weight: 1
-aliases: [ "/contributor-guide" ]
-description:
-  A list of concepts you should be familiar with, such as signing the contributor License Agreement and familiarizing yourself with our Code of Conduct before contributing to the Camunda Cloud documentation. 
----
+# Contributing guide
 
-# Getting started
+## Getting started
 
 - [Getting started](#getting-started)
   - [Welcome](#welcome)
@@ -24,20 +18,18 @@ description:
 
 ## Welcome
 
-Our documentation is open source, and we welcome new contributions. We take pride in maintaining and encouraging a friendly, welcoming, and collaborative open-source community. All contributors to our project are expected to adhere to our [Code of Conduct](#code-of-conduct).
+Our documentation is open source, and we welcome new contributions. We take pride in maintaining and encouraging a friendly, welcoming, and collaborative open-source community. All contributors to our project are expected to adhere to our [Code of Conduct].
 
 ## Contributor guide
 
-Anyone can open an issue regarding our documentation, or contribute a change with a pull request to our [documentation].
+Anyone can open an issue regarding our documentation, or contribute a change with a pull request to update the documentation's content.
 
 We would love it if you took the time to contribute to our project. You can do so in a variety of ways:
 
-- Contribute your knowledge — If you see a section of the documentation that you feel you could improve by adding something that’s missing, whether that’s by adding a helpful tip, screenshot, or code snippet, please feel free to [open a pull request](#opening-a-pull-request).
+- Contribute your knowledge — If you see a section of the documentation that you feel you could improve by adding something that’s missing, whether that’s by adding a helpful tip, screenshot, or code snippet, please feel free to [open a pull request].
 - Help us improve — If you have an idea for a new feature request, long-term improvements, or interesting solutions that you feel would benefit the Camunda Cloud ecosystem and our documentation, we’d be happy to look at your issue.
-- File a bug report — Is a link broken? Does a screenshot not load? Does something need alt-text to improve accessibility? Don’t hesitate to reach out to us and let us know by [opening an issue]().
-[//]:# (What is the link you would like to provide above?)
+- File a bug report — Is a link broken? Does a screenshot not load? Does something need alt-text to improve accessibility? Don’t hesitate to reach out to us and let us know by [opening an issue].
 - If you would like to get a better understanding of how our documentation is built and contribute back upstream to the tooling that this documentation uses, we encourage you to get started with the [Docusaurus 2] framework.
-[//]:# (Pausing here to comment. Are you planning to add links to all of the references here in a separate commit?)
 
 ## Prerequisites
 
@@ -148,7 +140,6 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [Welcome]: ./welcome
 [Contributor Guide]: ./contributor-guide
 [Prerequisities]: ./prerequisities
-[Contributor License Agreement]: https://cla-assistant.io/zeebe-io/
 [Code of Conduct]: ./code-of-conduct.md
 [documentation]: https://github.com/camunda-cloud/camunda-cloud-documentation
 [open a pull request]: https://github.com/camunda-cloud/camunda-cloud-documentation/compare
@@ -160,7 +151,7 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [GitHub web-based editor]: https://docs.github.com/en/codespaces/the-githubdev-web-based-editor
 [Git]: https://git-scm.com/
 [GitHub]: https://lab.github.com/
-[Contributor License Agreement]: https://cla-assistant.io/zeebe-io/
+[Contributor License Agreement]: https://cla-assistant.io/camunda-cloud/camunda-cloud-documentation
 [code style guidelines]: https://github.com/camunda-cloud/zeebe/wiki/Code-Style
 [testing best practices]: https://docs.camunda.io/docs/apis-clients/java-client/testing/
 [Conventional Commits]: ./conventional-commits
@@ -168,5 +159,3 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [Technical Style Guide]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/technical-writing-styleguide.md
 [Pull Requests and Code Review]: https://github.com/camunda-cloud/zeebe/wiki/Pull-Requests-and-Code-Reviews
 [SemVer]: http://semver.org/
-
-[//]:# (Ah, I see now. Will these links be incorporated into the text or left as-is? For technical writing purposes and overall debugging, it's best to have these alongside their text.)
