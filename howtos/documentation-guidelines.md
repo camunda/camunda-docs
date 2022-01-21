@@ -11,8 +11,14 @@ All changes have to be done in a separate Branch. As soon as the changes are don
 
 ## Adding a new documentation page
 
-1. Select the corresponding directory
-2. Add the document id to [`sidebars.js`](./sidebars.js)
+1. Select the corresponding directory.
+2. Add the document id to [`sidebars.js`](./sidebars.js).
+
+## Moving an existing page
+
+1. Identify the page, pages, or directory and relocate it in the file structure.
+2. Update [`sidebars.js`](./sidebars.js) to fit the new location.
+3. Add a redirect/rewrite rule to the top of [`.htaccess`](static/.htaccess).
 
 ## Review Process
 
