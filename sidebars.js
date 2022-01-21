@@ -26,7 +26,7 @@ module.exports = {
         "guides/update-guide/120-to-130",
         "guides/update-guide/110-to-120",
         "guides/update-guide/100-to-110",
-        "guides/update-guide/026-to-100",        
+        "guides/update-guide/026-to-100",
       ],
     },
     "guides/migrating-from-Camunda-Platform",
@@ -96,7 +96,6 @@ module.exports = {
             "components/modeler/camunda-modeler/install-the-modeler",
             "components/modeler/camunda-modeler/model-your-first-diagram",
             "components/modeler/camunda-modeler/connect-to-camunda-cloud",
-            "components/modeler/camunda-modeler/deploy-to-cloud",
             "components/modeler/camunda-modeler/start-instance",
             "components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates",
               ],
@@ -308,7 +307,7 @@ module.exports = {
       ],
     },
   ],
- 
+
   Reference: [
     "reference/overview",
     require("./docs/reference/feel/sidebar-schema"),
@@ -477,8 +476,8 @@ module.exports = {
             "self-managed/optimize-deployment/optimize-explained/import-guide",
           ],
         },
-        
-        
+
+
       ],
       IAM: [
         "self-managed/iam/what-is-iam",
