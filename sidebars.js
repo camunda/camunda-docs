@@ -82,13 +82,15 @@ module.exports = {
       Modeler: [
         "components/modeler/about-modeler",
         {
-          "Cloud Modeler": [
-            "components/modeler/cloud-modeler/launch-cloud-modeler",
-            "components/modeler/cloud-modeler/model-your-first-diagram",
-            "components/modeler/cloud-modeler/import-diagram",
-            "components/modeler/cloud-modeler/save-and-deploy",
-            "components/modeler/cloud-modeler/start-instance",
-            "components/modeler/cloud-modeler/model-overview",
+          "Web Modeler": [
+            "components/modeler/web-modeler/launch-web-modeler",
+            "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/import-diagram",
+            "components/modeler/web-modeler/save-and-deploy",
+            "components/modeler/web-modeler/start-instance",
+            "components/modeler/web-modeler/model-overview",
+            "components/modeler/web-modeler/collaboration",
+            "components/modeler/web-modeler/milestones",
           ],
         },
         {

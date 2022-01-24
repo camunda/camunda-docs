@@ -9,36 +9,36 @@ description: "Use Modeler to design and deploy a process."
 
 ## Prerequisites
 
-- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
 
 ## Design and deploy a process
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In Camunda Cloud, you have two options to design and deploy a process: Console Modeler and [Camunda Modeler](https://camunda.com/download/modeler/).
+In Camunda Cloud, you have two options to design and deploy a process: Web Modeler and [Camunda Modeler](https://camunda.com/download/modeler/).
 
-<Tabs groupId="modeler" defaultValue="console" values={
+<Tabs groupId="modeler" defaultValue="web" values={
 [
-{label: 'Console Modeler', value: 'console', },
+{label: 'Web Modeler', value: 'web', },
 {label: 'Camunda Modeler', value: 'desktop', },
 ]
 }>
 
-<TabItem value='console'>
+<TabItem value='web'>
 
-Using Cloud Modeler, processes are designed and deployed, and new instances are created directly from the console. Take the following steps:
+Using Web Modeler, processes are designed and deployed, and new instances are created directly from the console. Take the following steps:
 
 1. Find your saved models under the **Diagrams** tab.
 
 2. Click **Create New Diagram**.
 
-![console-modeler](../../components/modeler/cloud-modeler/img/bpmn-diagrams-overview.png)
+![console-modeler](../../components/modeler/web-modeler/img/bpmn-diagrams-overview.png)
 
 3. Add an **EndEvent** to create a valid BPMN diagram.
 
-![console-modeler-new-diagram-with-end-event](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-end-event.png)
-![console-modeler-new-diagram-with-end-event](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-end-event2.png)
+![console-modeler-new-diagram-with-end-event](../../components/modeler/web-modeler/img/cloud-modeler-new-diagram-with-end-event.png)
+![console-modeler-new-diagram-with-end-event](../../components/modeler/web-modeler/img/cloud-modeler-new-diagram-with-end-event2.png)
 
 4. To save your diagram, click **Save**.
 

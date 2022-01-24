@@ -13,7 +13,7 @@ After [downloading](./install-the-modeler.md) and starting Camunda Modeler, you 
 
 ![new diagram](./img/new-diagram.png)
 
-As with [Cloud Modeler](../cloud-modeler/model-your-first-diagram.md), you can now add new elements.
+As with [Web Modeler](../web-modeler/model-your-first-diagram.md), you can now add new elements.
 
 3. On the left side of the screen you will find the element palette supported by the engine. Drag and drop the elements onto the diagram:
 

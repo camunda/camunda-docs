@@ -8,7 +8,7 @@ description: "Using the JSON object, let's route your process."
 
 ## Prerequisites
 
-- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
 
 ## Implement a decision gateway
 
@@ -29,14 +29,14 @@ And for the else sequence flow:
 = return != "Pong"
 ```
 
-<Tabs groupId="modeler" defaultValue="console" values={
+<Tabs groupId="modeler" defaultValue="web" values={
     [
-        {label: 'Console Modeler', value: 'console', },
+        {label: 'Web Modeler', value: 'web', },
         {label: 'Camunda Modeler', value: 'desktop', },
     ]
 }>
 
-<TabItem value='console'>
+<TabItem value='web'>
 
 ![sequenceflows-cloud](./img/cloud-modeler-advanced-sequence-flows.png)
 

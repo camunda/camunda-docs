@@ -8,7 +8,7 @@ description: "Let's implement a service task to connect workers."
 
 ## Prerequisites
 
-- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
 
 ## Implement a service task
 
@@ -17,20 +17,20 @@ import TabItem from '@theme/TabItem';
 
 Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
 
-<Tabs groupId="modeler" defaultValue="console" values={
+<Tabs groupId="modeler" defaultValue="web" values={
 [
-{label: 'Console Modeler', value: 'console', },
+{label: 'Web Modeler', value: 'web', },
 {label: 'Camunda Modeler', value: 'desktop', },
 ]
 }>
 
-<TabItem value='console'>
+<TabItem value='web'>
 
 Take the following steps:
 
 1. Click **Import New Diagram** in the context menu to inject the BPMN-model you downloaded into the diagram.
 
-![import](../../components/modeler/cloud-modeler/img/import-diagram.png)
+![import](../../components/modeler/web-modeler/img/import-diagram.png)
 
 ![processId-cloud](./img/cloud-modeler-advanced-process-id.png)
 

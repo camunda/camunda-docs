@@ -8,7 +8,7 @@ description: "Deploy and start your process instance."
 
 ## Prerequisites
 
-- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
 
 :::note
 
@@ -31,19 +31,19 @@ import TabItem from "@theme/TabItem";
 
 You can now use the **Save & Deploy** option in the **Execute** menu to deploy the newly-created process to your cluster.
 
-![console-modeler-deploy](../../components/modeler/cloud-modeler/img/save-and-deploy.png)
+![console-modeler-deploy](../../components/modeler/web-modeler/img/save-and-deploy.png)
 
 Deployment can take a few seconds, but you should get a confirmation for successful deployment.
 
-![console-modeler-deploy-successfull](../../components/modeler/cloud-modeler/img/save-and-deploy-successful.png)
+![console-modeler-deploy-successfull](../../components/modeler/web-modeler/img/save-and-deploy-successful.png)
 
 You can now start a new process instance. For this example, you can start an instance with an empty payload.
 
-![console-modeler-start-instance](../../components/modeler/cloud-modeler/img/start-process-instance-variables.png)
+![console-modeler-start-instance](../../components/modeler/web-modeler/img/start-process-instance-variables.png)
 
 Once the instance is started, you'll receive a confirmation with a link to open Operate.
 
-![console-modeler-start-instance-done](../../components/modeler/cloud-modeler/img/start-process-instance-done.png)
+![console-modeler-start-instance-done](../../components/modeler/web-modeler/img/start-process-instance-done.png)
 
 </TabItem>
 
