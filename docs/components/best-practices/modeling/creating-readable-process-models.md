@@ -56,8 +56,6 @@ Try to model symmetrically. Identify related splitting and joining gateways and 
 Inclusive Gateways (OR) are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
 :::
 
-[//]:# (Can we mention Platform 7 currently or should we remove the numerics?)
-
 <span className="callout">1</span> 
 
 The inclusive gateway splits the process flow into two paths which are ...
@@ -74,7 +72,7 @@ another exclusive gateway splits the process flow into two more paths which are 
 
 ... joined again with an exclusive gateway.
 
-By explicitly showing *pairs of gateways* "opening" and "closing" parts of the process diagram, and by positioning such gateway pairs *as symmetrically as possible*, the readability of process model is improved. The reader can easily recognize logical parts of the diagram and quickly "jump" to those parts the reader is momentarily interested in.
+By explicitly showing *pairs of gateways* "opening" and "closing" parts of the process diagram, and by positioning such gateway pairs *as symmetrically as possible*, the readability of process model is improved. The reader can easily recognize logical parts of the diagram and quickly jump to those parts the reader is momentarily interested in.
 
 ### Modeling from left to right
 
@@ -136,9 +134,7 @@ Inclusive Gateways (OR) and Conditional sequence flows are [not yet supported in
 
 <span className="callout">1</span>
 
-[//]:# (I'm confused by what you're explaining below. Do you mean, "For example, you could've left out this inclusive gateway by drawing two outgoing sequence flows...")
-
-You could have left out e.g. this inclusive gateway by drawing two outgoing sequence flows directly out of the preceding task **Choose menu** and attaching conditions to those then "conditional sequence flows" (<img src="../img-bpmn-elements/conditional-flow.svg" className="inline-image" />). However, experience shows that readers understand the flow semantics of gateways better, which is why we do not make use of this possibility.
+For example, you could've left out this inclusive gateway by drawing two outgoing sequence flows directly out of the preceding task **Choose menu** and attaching conditions to those sequence flows (becoming conditional sequence flows <img src="../img-bpmn-elements/conditional-flow.svg" className="inline-image" />). However, experience shows that readers understand the flow semantics of gateways better, which is why we do not make use of this possibility.
 
 
 #### Modeling start and end events
@@ -227,9 +223,8 @@ You could have modeled this parallel split implicitly by leaving out the gateway
 
 ...you will always need the explicit symbol.
 
-The fact that readers of models using parallelization will likely need to understand the semantics of a parallel join combined with the preference for xref:modeling-symmetrically[modeling symmetrically] leads us to prefer *explicit parallel gateways*, too.
+The fact that readers of models using parallelization will likely need to understand the semantics of a parallel join combined with the preference for modeling symmetrically leads us to prefer *explicit parallel gateways*, too.
 
-[//]:# (Is the xreference above a typo in migration?)
 
 #### Joining sequence flows with XOR gateways
 
