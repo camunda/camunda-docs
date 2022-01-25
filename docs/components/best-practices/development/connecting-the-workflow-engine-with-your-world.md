@@ -17,7 +17,7 @@ The trade-offs will be discussed later, let’s look at the two options first.
 
 ## Programming glue code
 
-In order to write code that connects to Zeebe, you typically embed [the Zeebe client library](/docs/product-manuals/clients/overview) into your application. An application can of course also be a service or microservice. If you have multiple applications that connect to Zeebe all of them will require the client library. If you want to use a programming language where no such client library exists, you can [generate a gRPC client yourself](https://camunda.com/blog/2018/11/grpc-generating-a-zeebe-python-client/).
+In order to write code that connects to Zeebe, you typically embed [the Zeebe client library](/docs/apis-clients/overview/) into your application. An application can of course also be a service or microservice. If you have multiple applications that connect to Zeebe all of them will require the client library. If you want to use a programming language where no such client library exists, you can [generate a gRPC client yourself](https://camunda.com/blog/2018/11/grpc-generating-a-zeebe-python-client/).
 
 ![Clients to Zeebe](connecting-the-workflow-engine-with-your-world-assets/clients.png)
 
@@ -30,7 +30,7 @@ Your application can basically do two things with the client:
 
 Using the Zeebe client’s API you can communicate with the workflow engine. The two most important API calls are to start new process instances and to correlate messages to a process instance.
 
-**Start process instances using the** [**Java Client**](/docs/product-manuals/clients/java-client/get-started/)**:**
+**Start process instances using the** [**Java Client**](/docs/apis-clients/java-client/index/)**:**
 
 ```java
 processInstance = zeebeClient.newCreateInstanceCommand()  
@@ -40,7 +40,7 @@ processInstance = zeebeClient.newCreateInstanceCommand()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new instance", throwable); });
 ```
 
-**Start process instances using the** [**NodeJS Client**](/docs/product-manuals/clients/other-clients/javascript)**:**
+**Start process instances using the** [**NodeJS Client**](/docs/apis-clients/community-clients/javascript/)**:**
 
 ```js
 const processInstance = await zbc.createWorkflowInstance({  
@@ -140,7 +140,7 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job) {
 }
 ```
 
-There is an own practice on [how to write a good job worker](./writing-good-workers/).
+There is an own practice on [how to write a good job worker](../writing-good-workers/).
 
 ## Technology Examples
 
@@ -165,7 +165,7 @@ The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camu
 
 ![Messaging example](connecting-the-workflow-engine-with-your-world-assets/messaging-example.png)
 
-[Service integration patterns](./service-integration-patterns/) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: Send and receive task are used here, because the payment service might be long running, think about expired credit cards that need to be updated or wire transfers that need to happen).
+[Service integration patterns](../service-integration-patterns/) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: Send and receive task are used here, because the payment service might be long running, think about expired credit cards that need to be updated or wire transfers that need to happen).
 
 The same concept will apply to other programming languages, for example you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above.
 

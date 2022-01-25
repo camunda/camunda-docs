@@ -517,7 +517,7 @@ The message name for start events has to be *unique* to the whole workflow engin
 #### Starting specific versions of process instances by ID
 
 
-See [versioning process definitions](./versioning-process-definitions/) for details on versioning of process definitions.
+See [versioning process definitions](../versioning-process-definitions/) for details on versioning of process definitions.
 
 By default the workflow engine always starts the newest version of a process definition. You can start a specific version of a process definition by referencing the *ID* (primary key) of that definition in the engine's database.
 
@@ -631,7 +631,7 @@ You will need a mechanism receiving that message and routing it to the workflow 
 This part of the best practice targets Camunda Cloud only! 
 :::
 
-API examples for REST, AMQP, and Kafka are shown in [connecting the workflow engine with your world](./connecting-the-workflow-engine-with-your-world/).
+API examples for REST, AMQP, and Kafka are shown in [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 
 ### Camunda Platform 7 examples
 

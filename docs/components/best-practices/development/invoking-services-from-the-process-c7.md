@@ -22,7 +22,7 @@ bookchapter: 1
 ---
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you are looking at Camunda Cloud, please visit [Connecting the workflow engine with your world](./connecting-the-workflow-engine-with-your-world/).
+This best practice targets Camunda Platform 7.x only! If you are looking at Camunda Cloud, please visit [Connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 :::
 
 
@@ -589,7 +589,7 @@ completion.</p>
 
 ## Dealing with problems and exceptions
 
-When invoking services, you can experience faults and exceptions. See our separate best practice guide about [dealing with problems and exceptions](./dealing-with-problems-and-exceptions/).
+When invoking services, you can experience faults and exceptions. See our separate best practice guide about [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
 
 
 

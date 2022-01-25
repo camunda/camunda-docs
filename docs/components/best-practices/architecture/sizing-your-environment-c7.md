@@ -1,4 +1,5 @@
 ---
+id: sizing-your-environment-c7
 title:  Sizing Your Camunda 7 Environment
 stakeholders:
     - Architecture
@@ -27,7 +28,7 @@ This best practice targets Camunda Platform 7.x only! If you are looking at Camu
 
 You do not need big hardware to run Camunda. Actually the hardware requirements are basically determined by two things:
 
-* The container / application server you want to use (see [deciding about your Camunda 7 stack](deciding-about-your-stack-c7).
+* The container / application server you want to use (see [deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
 * Things you do in [Delegation Code](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) like Service Tasks. For example when calling SOAP WebServices or when doing complex calculations in Java more CPU time is consumed within the delegation code (your code) than in Camunda.
 
 The only way to get reliable figures for your project and environment is to do load testing on a close-to-production environment. We recommend to do this if in doubt. Steering the REST API via load generator tools like JMeter is relatively easy.
