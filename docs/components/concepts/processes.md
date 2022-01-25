@@ -1,6 +1,7 @@
 ---
 id: processes
 title: "Processes"
+description: "Processes are flowchart-like blueprints that define the orchestration of tasks."
 ---
 
 Processes are flowchart-like blueprints that define the orchestration of **tasks**. 
@@ -73,3 +74,8 @@ In many cases, it's also useful to perform multiple tasks in parallel. This can 
 ![data-conditions](assets/processes-parallel-gateway.png)
 
 The diamond shape with the **+** marker means all outgoing paths are activated. The tasks on those paths can run in parallel. The order is only fulfilled after both tasks have completed.
+
+## Next steps
+
+- [About Modeler](./modeler/about.md)
+- [Automating a process using BPMN](./../guides/automating-a-process-using-bpmn.md)

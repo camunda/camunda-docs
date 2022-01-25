@@ -1,6 +1,7 @@
 ---
 id: job-workers
 title: "Job workers"
+description: "A job worker is a service capable of performing a particular task in a process."
 ---
 
 A job worker is a service capable of performing a particular task in a process.
@@ -73,3 +74,7 @@ If the job is not completed or failed within the configured job activation timeo
 A timeout may lead to two different workers working on the same job, possibly at the same time. If this occurs, only one worker successfully completes the job. The other `complete job` command is rejected with a `NOT FOUND` error.
 
 The fact that jobs may be worked on more than once means that Zeebe is an "at least once" system with respect to job delivery and that worker code must be idempotent. In other words, workers __must__ deal with jobs in a way that allows the code to be executed more than once for the same job, all while preserving the expected application state.
+
+## Next steps
+
+- [Zeebe overview](./zeebe/zeebe-overview.md)
