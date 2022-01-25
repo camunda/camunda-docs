@@ -77,5 +77,5 @@ The diamond shape with the **+** marker means all outgoing paths are activated. 
 
 ## Next steps
 
-- [About Modeler](./modeler/about.md)
-- [Automating a process using BPMN](./../guides/automating-a-process-using-bpmn.md)
+- [About Modeler](./components/modeler/about.md)
+- [Automating a process using BPMN](./guides/automating-a-process-using-bpmn.md)
