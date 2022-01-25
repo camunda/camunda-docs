@@ -14,13 +14,13 @@ title: "Writing Good Workers For Camunda Cloud"
 
 Assume the following simple order fulfillment process, that needs to invoke three synchronous REST calls to the responsible systems (payment, inventory, and shipping) via custom glue code:
 
-<img src="writing-good-workers-assets/order-fulfillment-process.png" />
+![order fulfillment example](writing-good-workers-assets/order-fulfillment-process.png)
 
 Should you create three different applications with a worker for one task type each, or would it be better to process all task types within one application?
 
 As a rule of thumb, we recommend implementing **all glue code in one application**, which then is the so-called **process solution** (as described in [Practical Process Automation](https://processautomationbook.com/)). This process solution might also include the BPMN process model itself, deployed during startup. Thus, you create a self-contained application that is easy to version, test, integrate and deploy.
 
-<img src="writing-good-workers-assets/process-solution.png" />
+![Process solution](writing-good-workers-assets/process-solution.png)
 Figure taken from [Practical Process Automation](https://processautomationbook.com/)
 
 Thinking of Java, the three REST invocations might live in three classes within the same package (showing only two for brevity):
@@ -53,7 +53,7 @@ There are exceptions when you might not want to have all glue code within one ap
 
 ## Thinking about transactions, exceptions and idempotency of workers
 
-Make sure to visit [Dealing With Problems and Exceptions](./dealing-with-problems-and-exceptions) to gain a better understanding how workers deal with transactions and exceptions to the happy path.
+Make sure to visit [Dealing With Problems and Exceptions](./dealing-with-problems-and-exceptions/) to gain a better understanding how workers deal with transactions and exceptions to the happy path.
 
 
 ## Data minimization in workers

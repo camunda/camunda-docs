@@ -15,8 +15,6 @@ booksection: "C. Modeling"
 bookchapter: 2
 ---
 
-[//]:# (Think we need an id above for this to appear?)
-
 First, model the happy path to the desired end result before collecting problems and exceptions, prioritizing them, and introducing them incrementally. Secondly, focus on one selected issue at a time, and choose the right techniques for modeling beyond the happy path.
 
 ## The happy path and beyond
@@ -183,9 +181,8 @@ The fact that we do not receive such an answer at all can now be modeled as an *
 
 <span className="callout">3</span>
 
-The possibility that it now might turn out that the ordered good is not deliverable could also become a boundary event, e.g. a *boundary message event*. The undesired event prevents us from sucessfully receiving a delivery date, and we therefore cancel any further waiting but instead inform the customer about the status.
+It might turn out that the ordered good is not deliverable. This can be modeled as *boundary message event*. Upon that message we cancel any further waiting but inform the customer about the status instead.
 
-[//]:# (What do you mean in the sentence above?)
 
 ### Modeling a multi phase escalation path
 

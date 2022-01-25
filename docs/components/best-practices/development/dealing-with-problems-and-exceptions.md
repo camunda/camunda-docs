@@ -25,7 +25,7 @@ Whenever a process instance arrives at a service task, a new job is created and 
 
 If there is no worker subscribed when a job is created, the job is simply put in a queue. If multiple workers are subscribed, they are competing consumers, and jobs are distributed among them.
 
-<img src="dealing-with-problems-and-exceptions-assets/worker-concept.png" />
+![Worker concept](dealing-with-problems-and-exceptions-assets/worker-concept.png)
 
 Whenever the worker has finished whatever it needs to do (like invoking the REST endpoint), it sends another call to the workflow engine, which [can be one of these three](/docs/components/concepts/job-workers/#completing-or-failing-jobs):
 
@@ -40,7 +40,7 @@ As the glue code in the worker is external to the workflow engine, there is **no
 
 A typical example scenario is the following, where a worker then calls a REST endpoint to invoke business logic:
 
-<img src="dealing-with-problems-and-exceptions-assets/typical-call-chain.png" />
+![Typical call chain](dealing-with-problems-and-exceptions-assets/typical-call-chain.png)
 
 Technical ACID transaction will only be applied in the business application. The job worker mostly needs to handle exceptions on a technical level, e.g. to control retry behavior, or pass it on to the process level, where you might need to implement business transactions.
 
@@ -226,11 +226,11 @@ Applictions using databases can often leverage ACID (atomic, consistent, isoltat
 
 Those ACID transactions cannot be applied to distributed systems (the talk [lost in transaction](https://berndruecker.io/lost-in-transaction/) elaborates on this), so if you call out to multiple services from a process, you end up with seperate ACID transactions at play. The following illustrations are taken from [the O'Reilly book Practical Process Automation](https://processautomationbook.com/):
 
-<img src="dealing-with-problems-and-exceptions-assets/multiple-acid-transactions.png" width="60%" />
+![Multiple ACID transactions](dealing-with-problems-and-exceptions-assets/multiple-acid-transactions.png)
 
 In the above example, the CRM system and the billing system have their local ACId transactions. The workflow engine itself also runs transactional. But there cannot be a joined technical transaction.This requires a new way of dealing with consistency on the business level, which is refered to as **business transaction**:
 
-<img src="dealing-with-problems-and-exceptions-assets/business-vs-technical-transaction.png" width="60%" />
+![Businss vs technical transaction](dealing-with-problems-and-exceptions-assets/business-vs-technical-transaction.png)
 
 A *business transaction* marks a section in a process for which 'all or nothing' semantics similar to a technical transaction should apply, but from a business perspective. You might encounter inconsistent states in between (like for example a new customer being present in the CRM system, but not yet in the billing system).
 

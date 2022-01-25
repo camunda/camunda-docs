@@ -59,7 +59,7 @@ An example application following can be also found here: https://github.com/bern
 
 The basic architecture with this stack is shown in the following diagram:
 
-<img src="deciding-about-your-stack-c7-assets/greenfield-architecture.png" />
+![greenfield stack architecture diagram](deciding-about-your-stack-c7-assets/greenfield-architecture.png)
 
 
 

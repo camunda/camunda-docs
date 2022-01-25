@@ -14,7 +14,13 @@ async function renderBpmn(index, element) {
 
     // render the svg
     var viewer = new window.BpmnJS({container: "#" + bpmnId});
-    $.get(element.attr("bpmn"), async function (bpmnDiagram) {
+    var bpmnUrl = element.attr("bpmn");
+
+    // go one level up if trailing slashes are used in the pages
+    if (window.location.href.endsWith("/")) {
+      bpmnUrl = "../" + bpmnUrl;
+    }
+    $.get(bpmnUrl, async function (bpmnDiagram) {
       try {
         await viewer.importXML(bpmnDiagram);
 

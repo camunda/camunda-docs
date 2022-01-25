@@ -22,7 +22,7 @@ bookchapter: 1
 ---
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you are looking at Camunda Cloud, please visit [Connecting the workflow engine with your world](./connecting-the-workflow-engine-with-your-world).
+This best practice targets Camunda Platform 7.x only! If you are looking at Camunda Cloud, please visit [Connecting the workflow engine with your world](./connecting-the-workflow-engine-with-your-world/).
 :::
 
 
@@ -45,7 +45,7 @@ There are two patterns available to glue your code to a process model:
 
 An *external task* is a task that waits to be completed by some external service worker without explicitly calling that service. It's configured by declaring a so called *topic* (which characterizes the type of the service). The Camunda API must be polled to retrieve open external tasks for a certain service's topic and must be informed about the completion of a task:
 
-<img src="invoking-services-from-the-process-assets/external-task-pattern.png" />
+![External task pattern](invoking-services-from-the-process-assets/external-task-pattern.png)
 
 The interaction with the external task API can be done in two different ways:
 
@@ -203,20 +203,20 @@ completion.</p>
 			<th class="tableblock halign-center valign-middle" colspan="5">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/task-service.svg" alt="task service" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/task-service.svg" alt="task service" />
 					</span>
 					<span class="image">
-						<img src="../img-bpmn-elements/message-intermediate-send.svg" alt="message intermediate send" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/message-intermediate-send.svg" alt="message intermediate send" />
 					</span>
 					<span class="image">
-						<img src="../img-bpmn-elements/task-send.svg" alt="task send" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/task-send.svg" alt="task send" />
 					</span>
 				</p>
 			</th>
 			<th class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/task-script.svg" alt="task script" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/task-script.svg" alt="task script" />
 					</span>
 				</p>
 			</th>
@@ -742,7 +742,7 @@ To call a *SAP* system, you have the following options:
 
 A script task ...
 
-<img src="../img-bpmn-elements/task-script.svg" />
+<img src="/docs/components/best-practices/img-bpmn-elements/task-script.svg" />
 
 &nbsp;... is defined by specifying the script and the scriptFormat.
 

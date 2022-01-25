@@ -32,7 +32,7 @@ Let’s look at using BPMN tasks to handle these communication patterns, before 
 
 The [service task](/docs/reference/bpmn-processes/service-tasks/service-tasks) is the typical element to implement synchronous request/response calls, such as REST, gRPC or SOAP. You should **always use service tasks for synchronous request/response**.
 
-<img src="service-integration-patterns-assets/service-task.png" />
+![Service task](service-integration-patterns-assets/service-task.png)
 
 ### Send task
 
@@ -40,11 +40,11 @@ Technically, **send tasks behave exactly like service tasks**. But the alternati
 
 You **should use send tasks for sending asynchronous messages**, like AMQP messages or Kafka records.
 
-<img src="service-integration-patterns-assets/send-task.png" />
+![Send task](service-integration-patterns-assets/send-task.png)
 
 There is some grey area whenever you call a synchronous service that then sends an asynchronous message. A good example is email. Assume your process does a synchronous request/response call to a service that then sends an email to inform the customer. The call itself is synchronous because it gives you a confirmation (acknowledgement, or ACK for short) that the email has been sent. Now is the "inform customer" task in your process a service or a send task?
 
-<img src="service-integration-patterns-assets/synchronous-ack.png" />
+![Asynchronous ACK](service-integration-patterns-assets/synchronous-ack.png)
 
 This question is not easy to answer and **depends on what your stakeholders understand more intuitively**. The more technical people are, the more you might tend towards a service task, as this is technically correct. The more you move towards the business side, the more you might tend to use a send task, as business people will consider sending an email an asynchronous message. In general we tend to **let the business win** — as it is vital that business stakeholders understand business processes.
 
@@ -58,7 +58,7 @@ You could also argue to use send tasks to invoke synchronous request/response ca
 
 A [receive task](/docs/reference/bpmn-processes/receive-tasks/receive-tasks) waits for an asynchronous message. Receive tasks **should be used for incoming asynchronous messages or events**, like AMQP messages or Kafka records.
 
-<img src="service-integration-patterns-assets/receive-task.png" />
+![Receive task](service-integration-patterns-assets/receive-task.png)
 
 Receive tasks can be used to receive the response in asynchronous request/response scenarios, which is discussed next.
 
@@ -66,11 +66,11 @@ Receive tasks can be used to receive the response in asynchronous request/respon
 
 For asynchronous request/response calls you can use a send task for the request, and a following receive task to wait for the response:
 
-<img src="service-integration-patterns-assets/send-and-receive-task.png" />
+![Send and receive task](service-integration-patterns-assets/send-and-receive-task.png)
 
 You can also use a service task, which is sometimes unknown even to advanced users. A service task can technically wait for a response that happens at any time, a process instance will wait in the service task, as it would in the receive task.
 
-<img src="service-integration-patterns-assets/service-task.png" />
+![Service task](service-integration-patterns-assets/service-task.png)
 
 Deciding between these options is not completely straightforward. You can find a table listing the decision criteria below. As a general rule-of-thumb, we recommend using **the service task as the default option for synchronous *and* asynchronous request/response** calls. The beauty of service tasks is that you remove visual clutter from the diagram, which makes it easier to read for most stakeholders.
 
@@ -126,10 +126,10 @@ The following table summarizes the possibilities and recommendations.
   </tr>
   <tr>
     <td></td>
-    <td><img alt="Service task" src="service-integration-patterns-assets/service-task.png" /></td>
-    <td><img alt="Send task" src="service-integration-patterns-assets/send-task.png" /></td>
-    <td><img alt="Service task" src="service-integration-patterns-assets/service-task.png" /></td>
-    <td><img alt="Send and receive task" src="service-integration-patterns-assets/send-and-receive-task.png" /></td>
+    <td><img alt="Service task" src="/docs/components/best-practices/img-bpmn-elements/task-service.svg" /></td>
+    <td><img alt="Send task" src="/docs/components/best-practices/img-bpmn-elements/task-send.svg" /></td>
+    <td><img alt="Service task" src="/docs/components/best-practices/img-bpmn-elements/task-service.svg" /></td>
+    <td><img alt="Send and receive task" src="../service-integration-patterns-assets/send-and-receive-task.png" /></td>
   </tr>  
   <tr>
     <td>Technical implications</td>
@@ -166,7 +166,7 @@ BPMN errors cannot be used<br />
 
 Instead of using send or receive _tasks_, you can also use send or receive _events_ in BPMN.
 
-<img src="service-integration-patterns-assets/events-vs-tasks.png" />
+![Events vs tasks](service-integration-patterns-assets/events-vs-tasks.png)
 
 Let's first explore when you want to do that and afterwards look into some more advanced patterns that become possible with events.
 
@@ -176,7 +176,7 @@ The **execution semantics of send and receive events is identical with send and 
 
 However, there is one small difference that might be relevant: **Only tasks can have boundary events**, which allows to easily model when you want to cancel waiting for a message:
 
-<img src="service-integration-patterns-assets/boundary-event.png" />
+![Boundary events](service-integration-patterns-assets/boundary-event.png)
 
 Despite this, the whole visual representation is of course different. In general, **tasks are easier understood** by most stakeholders, as they are used very often in BPMN models. However, in certain contexts, such as event-driven architectures, events might be better suited as the concept of events is very common. Especially, if you apply domain-driven design (DDD) and discuss domain events all day long, it might be intuitive that events are clearly visible in your BPMN models. Another situation better suited for events is if you send events to your internal reporting system besides doing “the real” business logic. Our experience shows that the smaller event symbols are often unconsciously treated as less important by readers of the model, leading to models that are easier to understand.
 
@@ -203,24 +203,23 @@ Note that the choice about events vs. commands also [needs to be reflected in th
 
 Very often the response payload of the message will be examined to determine how to move on in the process.
 
-<img src="service-integration-patterns-assets/response-gateway.png" />
+![Gateway handling response](service-integration-patterns-assets/response-gateway.png)
 
 In this case, you receive exactly one type of message for the response. As an alternative, you could also use different message types, to which the process can react differently. For example, you might wait for the validation message, but also accept a cancellation or rejection message instead:
 
-
-<img src="service-integration-patterns-assets/response-boundary-message-events.png" />
+![Boundary message event to capture different response messages](service-integration-patterns-assets/response-boundary-message-events.png)
 
 This modeling has the advantage that it is much easier to see the expected normal flow of the process (also called the happy path), with exceptions deviating from it. On the other hand, this pattern mixes receive tasks and events in one model, which can confuse readers. And you should also keep in mind that it only works for a limited number of non-happy messages.
 
 To avoid the task/event mixture you could use a so-called event-based gateway instead, this gateway waits for one of a list of possible message types to be received:
 
-<img src="service-integration-patterns-assets/response-event-based-gateway.png" />
+![Event based gateway to capture different response messages](service-integration-patterns-assets/response-event-based-gateway.png)
 
 We typically try to avoid the event-based gateway, as it is hard to understand for non-BPMN-professionals. At the same time it shares the downside of the first pattern with the decision gateway after the receive task: the happy path cannot be easily spotted.
 
 As a fourth possibility you can add event sub processes, which get activated whenever some event is received while the process is still active in some other area. In the above example you could just model the happy path and model all deviations as event sub processes.
 
-<img src="service-integration-patterns-assets/response-event-subprocess.png" />
+![Event sub process to capture different response messages](service-integration-patterns-assets/response-event-subprocess.png)
 
 This pattern is pretty handy, but also needs some explanation to people new to BPMN. It has one downside you need to know: Once your process instance moves to the sub process, you can’t easily go back to the normal flow. To some extent this problem can be solved by advanced modeling patterns like shown in the [allow for order cancellation any time](../modeling/building-flexibility-into-bpmn-models#_allow_for_order_cancellation_any_time) example.
 
@@ -235,7 +234,7 @@ At the same time the event sub process has a super power that is worth mentionin
 
 ### Message type on the wire != BPMN message type
 
-There is one important detail worth mentioning in the context of message response patterns: The message type used in BPMN models does not have to be exactly the message type you get on the wire. When you correlate technical messages, e.g. from AMQP, you typically write a piece of glue code that receives the message and calls the workflow engine API . This is described in [connecting the workflow engine with your world](./connecting-the-workflow-engine-with-your-world), including a code example. In this glue code you can do various transformations, for example:
+There is one important detail worth mentioning in the context of message response patterns: The message type used in BPMN models does not have to be exactly the message type you get on the wire. When you correlate technical messages, e.g. from AMQP, you typically write a piece of glue code that receives the message and calls the workflow engine API . This is described in [connecting the workflow engine with your world](./connecting-the-workflow-engine-with-your-world/), including a code example. In this glue code you can do various transformations, for example:
 
 * Messages on different message queues could lead to the same BPMN message type, probably having some additional parameter in the payload indicating the origin.
 * Some message header or payload attributes could be used to select between different BPMN message types being used.
@@ -248,7 +247,6 @@ Whenever technical details of one service integration become complicated, you ca
 
 An example is given in chapter 7 of [Practical Process Automation](https://processautomationbook.com/):
 
-
-<img src="service-integration-patterns-assets/hiding-technical-details-behind-call-activity.png" />
+![Hiding technical details behind call activity](service-integration-patterns-assets/hiding-technical-details-behind-call-activity.png)
 
 In the customer scenario, a document storage service was long running, but could not do a real callback or response message for technical reasons (in short: firewall limitations). As a result, the document storage service needed to be regularly polled for the response. In the customer scenario, this was done by a "document storage adapter" process, that leveraged workflow engine features to implement the polling every minute, and especially the persistent waiting in between. In the main business process, this technical adapter process was simply invoked via a call activity, meaning no technicalities bloated that diagram.

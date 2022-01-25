@@ -57,35 +57,35 @@ Several BPMN start events can be used to start a new process instance.
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/none-start.svg" alt="none start" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/none-start.svg" alt="none start" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/message-start.svg" alt="message start" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/message-start.svg" alt="message start" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/timer-start.svg" alt="timer start" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/timer-start.svg" alt="timer start" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/signal-start.svg" alt="signal start" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/signal-start.svg" alt="signal start" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/conditional-start.svg" alt="conditional start" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/conditional-start.svg" alt="conditional start" />
 					</span>
 				</p>
 			</td>
@@ -213,35 +213,35 @@ Several BPMN intermediate events (and the receive task) can be used to make a pr
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/message-intermediate.svg" alt="message intermediate" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/message-intermediate.svg" alt="message intermediate" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/task-receive.svg" alt="task receive" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/task-receive.svg" alt="task receive" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/timer-intermediate.svg" alt="timer intermediate" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/timer-intermediate.svg" alt="timer intermediate" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/signal-intermediate.svg" alt="signal intermediate" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/signal-intermediate.svg" alt="signal intermediate" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="../img-bpmn-elements/conditional-intermediate.svg" alt="conditional intermediate" />
+						<img src="/docs/components/best-practices/img-bpmn-elements/conditional-intermediate.svg" alt="conditional intermediate" />
 					</span>
 				</p>
 			</td>
@@ -517,7 +517,7 @@ The message name for start events has to be *unique* to the whole workflow engin
 #### Starting specific versions of process instances by ID
 
 
-See [versioning process definitions](./versioning-process-definitions) for details on versioning of process definitions.
+See [versioning process definitions](./versioning-process-definitions/) for details on versioning of process definitions.
 
 By default the workflow engine always starts the newest version of a process definition. You can start a specific version of a process definition by referencing the *ID* (primary key) of that definition in the engine's database.
 
@@ -631,7 +631,7 @@ You will need a mechanism receiving that message and routing it to the workflow 
 This part of the best practice targets Camunda Cloud only! 
 :::
 
-API examples for REST, AMQP, and Kafka are shown in [connecting the workflow engine with your world](./connecting-the-workflow-engine-with-your-world).
+API examples for REST, AMQP, and Kafka are shown in [connecting the workflow engine with your world](./connecting-the-workflow-engine-with-your-world/).
 
 ### Camunda Platform 7 examples
 

@@ -76,7 +76,7 @@ Define a *moderator* to avoid too many detours and keep your POC on track.
 ### Planning the technical environment
 
 :::caution Camunda Cloud only
-This best practice targets Camunda Cloud. If you want to run a POC with Camuna Platform 7 you might want to have a look into [deciding about your Camunda Platform 7 stack](./deciding-about-your-stack-c7) for this.
+This best practice targets Camunda Cloud. If you want to run a POC with Camuna Platform 7 you might want to have a look into [deciding about your Camunda Platform 7 stack](./deciding-about-your-stack-c7/) for this.
 :::
 
 Make the necessary technological choices. Typically, POCs run on Camunda Cloud SaaS to unless your goal is to valudate that Camunda Cloud runs in your specific Kubernetes environment in a self-managed fashion. A simple test account is often sufficient, unless your goal is to do high load or performance tests, for which you need specific hardware.

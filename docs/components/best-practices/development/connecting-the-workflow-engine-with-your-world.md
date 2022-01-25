@@ -19,7 +19,7 @@ The trade-offs will be discussed later, let’s look at the two options first.
 
 In order to write code that connects to Zeebe, you typically embed [the Zeebe client library](/docs/product-manuals/clients/overview) into your application. An application can of course also be a service or microservice. If you have multiple applications that connect to Zeebe all of them will require the client library. If you want to use a programming language where no such client library exists, you can [generate a gRPC client yourself](https://camunda.com/blog/2018/11/grpc-generating-a-zeebe-python-client/).
 
-<img src="connecting-the-workflow-engine-with-your-world-assets/clients.png" />
+![Clients to Zeebe](connecting-the-workflow-engine-with-your-world-assets/clients.png)
 
 Your application can basically do two things with the client:
 
@@ -140,7 +140,7 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job) {
 }
 ```
 
-There is an own practice on [how to write a good job worker](./writing-good-workers).
+There is an own practice on [how to write a good job worker](./writing-good-workers/).
 
 ## Technology Examples
 
@@ -153,7 +153,7 @@ You could build a piece of code that provides a REST endpoint in the language of
 
 The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camunda-cloud) contains an example using Java and Spring Boot for the [REST endpoint](https://github.com/berndruecker/ticket-booking-camunda-cloud/blob/master/booking-service-java/src/main/java/io/berndruecker/ticketbooking/rest/TicketBookingRestController.java#L35). Similarly you can leverage the [Spring Boot extension](https://github.com/zeebe-io/spring-zeebe/) to startup job workers that will [execute outgoing REST calls](https://github.com/berndruecker/ticket-booking-camunda-cloud/blob/master/booking-service-java/src/main/java/io/berndruecker/ticketbooking/adapter/GenerateTicketAdapter.java#L29).
 
-<img src ="connecting-the-workflow-engine-with-your-world-assets/rest-example.png"/>
+![REST example](connecting-the-workflow-engine-with-your-world-assets/rest-example.png)
 
 You can find [NodeJS sample code for the REST endpoint](https://github.com/berndruecker/flowing-retail/blob/master/zeebe/nodejs/nestjs-zeebe/checkout/src/app.controller.ts) in the [Flowing Retail example](https://github.com/berndruecker/flowing-retail).
 
@@ -163,9 +163,9 @@ You can do the same for messages, which is often [AMQP](https://en.wikipedia.org
 
 The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camunda-cloud) contains an example for RabbitMQ, Java and Spring Boot. It provides a message listener to correlate incoming messages with waiting process instances, and [glue code to send outgoing messages onto the message broker](https://github.com/berndruecker/ticket-booking-camunda-cloud/blob/master/booking-service-java/src/main/java/io/berndruecker/ticketbooking/adapter/RetrievePaymentAdapter.java).
 
-<img src ="connecting-the-workflow-engine-with-your-world-assets/messaging-example.png"/>
+![Messaging example](connecting-the-workflow-engine-with-your-world-assets/messaging-example.png)
 
-[Service integration patterns](./service-integration-patterns) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: Send and receive task are used here, because the payment service might be long running, think about expired credit cards that need to be updated or wire transfers that need to happen).
+[Service integration patterns](./service-integration-patterns/) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: Send and receive task are used here, because the payment service might be long running, think about expired credit cards that need to be updated or wire transfers that need to happen).
 
 The same concept will apply to other programming languages, for example you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above.
 
@@ -173,13 +173,13 @@ The same concept will apply to other programming languages, for example you coul
 
 You can do the same trick with Kafka topics. The [Flowing Retail example](https://github.com/berndruecker/flowing-retail) shows this using Java, Spring Boot and Spring Cloud Streams. There is [code to subscribe to a Kafka topic and start new process instances for new records](https://github.com/berndruecker/flowing-retail/blob/master/kafka/java/order-zeebe/src/main/java/io/flowing/retail/kafka/order/messages/MessageListener.java#L39), and there is some glue code to create new records when a process instance executes a service task. Of course, you could also use other frameworks to achieve the same result.
 
-<img src ="connecting-the-workflow-engine-with-your-world-assets/kafka-example.png"/>
+![Kafka Example](connecting-the-workflow-engine-with-your-world-assets/kafka-example.png)
 
 ## Designing Applications With Glue Code
 
 Typical applications will include multiple pieces of glue code in one codebase.
 
-<img src ="connecting-the-workflow-engine-with-your-world-assets/architecture.png"/>
+![Architecture with glue code](connecting-the-workflow-engine-with-your-world-assets/architecture.png)
 
 For example, the onboarding microservice shown in the figure above includes
 
@@ -196,19 +196,19 @@ As you could see, the glue code is relatively simple, but you need to write code
 
 A connector can be uni or bidirectional and is typically one dedicated application that implements the connection that translates in one or both directions of communication. Such a connector might also be helpful in case integrations are not that simple anymore.
 
-<img src ="connecting-the-workflow-engine-with-your-world-assets/connector.png"/>
+![Connectors](connecting-the-workflow-engine-with-your-world-assets/connector.png)
 
 For example, the [HTTP connector](https://github.com/camunda-community-hub/zeebe-http-worker) is a one-way connector that contains a job worker that can process service tasks doing HTTP calls as visualized in the example in the following figure.
 
-<img src ="connecting-the-workflow-engine-with-your-world-assets/rest-connector.png"/>
+![REST Connectors](connecting-the-workflow-engine-with-your-world-assets/rest-connector.png)
 
 Another example is the [Kafka Connector](https://github.com/camunda-community-hub/kafka-connect-zeebe) as illustrated below.
 
-<img src ="connecting-the-workflow-engine-with-your-world-assets/kafka-connector.png"/>
+![Kafka Connector](connecting-the-workflow-engine-with-your-world-assets/kafka-connector.png)
 
 This is a bidirectional connector which contains a Kafka listener for forwarding Kafka records to Zeebe and also a job worker which creates Kafka records every time a service task is executed. This is illustrated by the following example.
 
-<img src ="connecting-the-workflow-engine-with-your-world-assets/kafka-connector-details.png"/>
+![Kafka Connector Details](connecting-the-workflow-engine-with-your-world-assets/kafka-connector-details.png)
 
 ### Out-of-the-box connectors
 
@@ -221,7 +221,7 @@ A list of community-maintained connectors can be found at [https://awesome.zeebe
 
 Currently, connectors are not operated as part of the Camunda Cloud SaaS offering, which means you need to operate them yourself in your environment, which might be a private or public cloud.
 
-<img src ="connecting-the-workflow-engine-with-your-world-assets/connector-in-cloud.png"/>
+![Connectors in SaaS](connecting-the-workflow-engine-with-your-world-assets/connector-in-cloud.png)
 
 
 ### Reusing Your Own Integration Logic By Extracting Connectors
