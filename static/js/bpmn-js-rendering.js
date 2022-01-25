@@ -16,8 +16,8 @@ async function renderBpmn(index, element) {
     var viewer = new window.BpmnJS({container: "#" + bpmnId});
     var bpmnUrl = element.attr("bpmn");
 
-    // go one level up if trailing slashes are used in the pages
-    if (window.location.href.endsWith("/")) {
+    // go one level up if trailing slashes are used in the page (which is to expect in the current stetting)
+    if (new RegExp(/^.*\/(\?|#|$).*$/).test(window.location.href)) {
       bpmnUrl = "../" + bpmnUrl;
     }
     $.get(bpmnUrl, async function (bpmnDiagram) {
