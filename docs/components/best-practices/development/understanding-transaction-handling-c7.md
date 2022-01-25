@@ -12,7 +12,7 @@ bookchapter: 4
 ---
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! Zeebe, the workflow engine used in Camunda Cloud, as a very different transactional behevaior, please visit [dealing with problems and exceptions](./dealing-with-problems-and-exceptions/).
+This best practice targets Camunda Platform 7.x only! Zeebe, the workflow engine used in Camunda Cloud, as a very different transactional behevaior, please visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
 :::
 
 Try to carefully study and fully understand the concepts of wait states (save points) acting as *transaction boundaries* for technical (ACID) transactions. In case of technical failures, they are by default rolled back and need to be retried either by the user or the background job executor. 
@@ -51,7 +51,7 @@ Learn more about [transactions in processes](https://docs.camunda.org/manual/lat
 
 
 :::note Technical vs. business transactions
-Sometimes when we refer to "transactions" in processes, we refer to a very different concept, which must be clearly distinguished from technical database transactions. A *business transaction* marks a section in a process for which 'all or nothing' semantics apply, but from a pure business perspective. This is described in [dealing with problems and exceptions](./dealing-with-problems-and-exceptions/).
+Sometimes when we refer to "transactions" in processes, we refer to a very different concept, which must be clearly distinguished from technical database transactions. A *business transaction* marks a section in a process for which 'all or nothing' semantics apply, but from a pure business perspective. This is described in [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
 :::
 
 

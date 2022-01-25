@@ -92,7 +92,7 @@ Depending on the container you need around 500 MB - 1 GB of disk space. We recom
 
 ### Chose a good database
 
-As mentioned in [deciding about your Camunda 7 stack](deciding-about-your-stack-c7) we recommend Oracle or PostgreSQL. Together with DB2 we made the best performance observations there.
+As mentioned in [deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/) we recommend Oracle or PostgreSQL. Together with DB2 we made the best performance observations there.
 
 Note that H2 is seldom used in production and we do not have much experience with heavy load on this database ([H2 FAQ: Is it Reliable?](http://www.h2database.com/html/faq.html#reliable)).
 
