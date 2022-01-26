@@ -83,7 +83,7 @@ module.exports = {
         "components/modeler/about-modeler",
         {
           "Web Modeler": [
-            "components/modeler/web-modeler/launch-web-modeler",
+            "components/modeler/web-modeler/launch-cloud-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/save-and-deploy",
@@ -94,12 +94,12 @@ module.exports = {
           ],
         },
         {
-          "Camunda Modeler": [
-            "components/modeler/camunda-modeler/install-the-modeler",
-            "components/modeler/camunda-modeler/model-your-first-diagram",
-            "components/modeler/camunda-modeler/connect-to-camunda-cloud",
-            "components/modeler/camunda-modeler/start-instance",
-            "components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates",
+          "Desktop Modeler": [
+            "components/modeler/desktop-modeler/install-the-modeler",
+            "components/modeler/desktop-modeler/model-your-first-diagram",
+            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/element-templates/desktop-modeler-element-templates",
           ],
         },
         {
@@ -155,7 +155,7 @@ module.exports = {
         },
         {
           "DMN": [
-            "components/modeler/dmn/camunda-modeler-dmn",
+            "components/modeler/dmn/desktop-modeler-dmn",
           ],
         },
       ],

@@ -9,7 +9,7 @@ description: "Set up your first project to model, deploy, and start a process in
 ## Prerequisites
 
 - [Camunda Cloud SaaS](https://camunda.io)
-- [Camunda Modeler](https://camunda.com/download/modeler/)
+- [Desktop Modeler](https://camunda.com/download/modeler/)
 - [Operate](/self-managed/operate-deployment/install-and-start.md)
 - [Tasklist](/self-managed/tasklist-deployment/install-and-start.md)
 - [Optimize](../components/optimize/what-is-optimize.md)

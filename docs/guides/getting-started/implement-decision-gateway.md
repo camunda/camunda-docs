@@ -8,7 +8,7 @@ description: "Using the JSON object, let's route your process."
 
 ## Prerequisites
 
-- Web Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Desktop Modeler](https://camunda.com/download/modeler/)
 
 ## Implement a decision gateway
 
@@ -32,7 +32,7 @@ And for the else sequence flow:
 <Tabs groupId="modeler" defaultValue="web" values={
     [
         {label: 'Web Modeler', value: 'web', },
-        {label: 'Camunda Modeler', value: 'desktop', },
+        {label: 'Desktop Modeler', value: 'desktop', },
     ]
 }>
 

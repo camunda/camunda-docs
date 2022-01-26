@@ -8,7 +8,7 @@ description: "Deploy and start your process instance."
 
 ## Prerequisites
 
-- Web Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Desktop Modeler](https://camunda.com/download/modeler/)
 
 :::note
 
@@ -22,8 +22,8 @@ import TabItem from "@theme/TabItem";
 
 <Tabs groupId="modeler" defaultValue="console" values={
 [
-{label: 'Console Modeler', value: 'console', },
-{label: 'Camunda Modeler', value: 'desktop', },
+{label: 'Web Modeler', value: 'console', },
+{label: 'Desktop Modeler', value: 'desktop', },
 ]
 }>
 

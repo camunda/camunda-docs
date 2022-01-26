@@ -8,7 +8,7 @@ description: "Let's implement a service task to connect workers."
 
 ## Prerequisites
 
-- Web Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Desktop Modeler](https://camunda.com/download/modeler/)
 
 ## Implement a service task
 
@@ -20,7 +20,7 @@ Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the
 <Tabs groupId="modeler" defaultValue="web" values={
 [
 {label: 'Web Modeler', value: 'web', },
-{label: 'Camunda Modeler', value: 'desktop', },
+{label: 'Desktop Modeler', value: 'desktop', },
 ]
 }>
 

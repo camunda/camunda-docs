@@ -7,7 +7,7 @@ description: "Let's learn about Camunda Forms, how to use them, how to model the
 :::note
 The initial release of Camunda Forms includes a debut minimal feature set, which will be expanded with upcoming versions.
 
-If using with Camunda Platform, note that the Camunda Forms feature was added with the 4.7.0 release of the Camunda Modeler. Therefore, they can be used within BPMN diagrams running on Camunda Platform version 7.15.0 or later.
+If using with Camunda Platform, note that the Camunda Forms feature was added with the 4.7.0 release of the Desktop Modeler. Therefore, they can be used within BPMN diagrams running on Camunda Platform version 7.15.0 or later.
 :::
 
 ## Overview
@@ -20,7 +20,7 @@ While you can incorporate Camunda Forms solely within Camunda Cloud, you can als
 
 ### Create new form
 
-To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Camunda Modeler](./components/modeler/about.md) and take the following steps:
+To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Desktop Modeler](./components/modeler/about.md) and take the following steps:
 
 1. Click on the **Forms** tab at the top of the page or open the **File** menu in Modeler.
 2. Click the blue **Create New Form** button.
@@ -90,6 +90,6 @@ Then, open Tasklist to claim the task, fill in the form, and complete the task.
 
 ## Additional resources
 
-- [Camunda and Cloud Modeler](./components/modeler/about.md)
+- [Desktop and Web Modeler](./components/modeler/about.md)
 - [Model your first process](./getting-started/model-your-first-process.md)
 - [User task reference](./components/modeler/bpmn/user-tasks/user-tasks.md)

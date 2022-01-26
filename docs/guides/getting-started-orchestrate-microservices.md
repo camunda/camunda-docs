@@ -30,11 +30,11 @@ First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](h
 
 ### Design your process with BPMN
 
-Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Cloud Modeler.
+Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Web Modeler.
 
-1. Navigate to your diagrams, either through the **Diagrams** navigation, or by using the section under **Camunda Cloud Service** on the main dashboard. Click **Create New Diagram**. This opens Cloud Modeler.
+1. Navigate to your diagrams, either through the **Diagrams** navigation, or by using the section under **Camunda Cloud Service** on the main dashboard. Click **Create New Diagram**. This opens Web Modeler.
 2. Give your model a descriptive name and id. On the right side of the console, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **Microservice Orchestration Tutorial** for the name and **microservice-orchestration-tutorial** for the id.
-3. Use Cloud Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Click the wrench icon and select **Service Task** to change the task type.
+3. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Click the wrench icon and select **Service Task** to change the task type.
 
 ![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
 

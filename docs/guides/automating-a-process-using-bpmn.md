@@ -22,9 +22,8 @@ BPMN offers control and visibility over your critical business processes. The wo
 
 ## Set up
 
-At Camunda, you can utilize [Modeler](../components/modeler/about.md) to build out BPMN diagrams.
-
-Begin building out your process diagrams within [Camunda Cloud](./introduction-to-camunda-cloud.md) using [Cloud Modeler](../components/modeler/about.md). To get started, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md).
+Begin by building your BPMN diagrams with [Modeler](../components/modeler/about.md).
+To get started, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md).
 
 ## Getting started with BPMN
 
@@ -68,7 +67,7 @@ Take the following steps:
 ![completed bpmn diagram](./img/complete-baking-cake-bpmn.png)
 
 :::note
-You can also import a BPMN diagram with Cloud Modeler. Click **Import New Diagram** in the context menu.
+You can also import a BPMN diagram with Web Modeler. Click **Import New Diagram** in the context menu.
 :::
 
 ![import diagram](./img/import-diagram.png)

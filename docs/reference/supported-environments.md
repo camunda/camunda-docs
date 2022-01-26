@@ -63,7 +63,7 @@ DMN [1.1](https://www.omg.org/spec/DMN/1.1), [1.2](https://www.omg.org/spec/DMN/
 
 Production versions of the Camunda Engine version 7.14.0+, 7.15.0+ and 7.16.0+ with REST API and history with level `full` enabled are supported. [Development (alpha) versions](https://docs.camunda.org/enterprise/release-policy/#community-vs-enterprise-releases) are not supported. For optimal performance, we always recommend running the latest version of the Camunda Engine. To ensure correct logging of user operations using the REST API, they should always be performed with user authentication. Alternatively, `restrictUserOperationLogToAuthenticatedUsers` should be set to `false` in the connected engine, this setting allows user operations to be logged even if there is no user authentication context for the request.
 
-## Camunda Modeler
+## Desktop Modeler
 
 Supported on the following platforms:
 

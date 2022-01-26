@@ -9,19 +9,19 @@ description: "Use Modeler to design and deploy a process."
 
 ## Prerequisites
 
-- Web Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Desktop Modeler](https://camunda.com/download/modeler/)
 
 ## Design and deploy a process
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In Camunda Cloud, you have two options to design and deploy a process: Web Modeler and [Camunda Modeler](https://camunda.com/download/modeler/).
+In Camunda Cloud, you have two options to design and deploy a process: Web Modeler and [Desktop Modeler](https://camunda.com/download/modeler/).
 
 <Tabs groupId="modeler" defaultValue="web" values={
 [
 {label: 'Web Modeler', value: 'web', },
-{label: 'Camunda Modeler', value: 'desktop', },
+{label: 'Desktop Modeler', value: 'desktop', },
 ]
 }>
 
@@ -46,7 +46,7 @@ Using Web Modeler, processes are designed and deployed, and new instances are cr
 
 <TabItem value='desktop'>
 
-Using Camunda Modeler, processes are designed and deployed, and new instances are created.
+Using Desktop Modeler, processes are designed and deployed, and new instances are created.
 
 Design a simple process with one start event and one end event, or download this [BPMN model](./bpmn/gettingstarted_quickstart.bpmn).
 

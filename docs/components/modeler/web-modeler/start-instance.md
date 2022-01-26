@@ -4,7 +4,7 @@ title: Start a new process instance
 description: "If a BPMN diagram is deployed via Cloud Modeler, you can start a new instance of this diagram."
 ---
 
-If a BPMN diagram is deployed via Cloud Modeler, you can start a new instance of this diagram.
+If a BPMN diagram is deployed via Web Modeler, you can start a new instance of this diagram.
 
 To do so, click **Start Instance** in the context menu.
 
