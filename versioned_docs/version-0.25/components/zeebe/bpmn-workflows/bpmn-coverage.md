@@ -34,13 +34,13 @@ import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
 import TransactionalSubprocessSvg from './assets/bpmn-symbols/transactional-subprocess.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../embedded-subprocesses/embedded-subprocesses">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows/embedded-subprocesses/embedded-subprocesses">
         <EmbeddedSubprocessSvg className="implemented" />
     </a>
-    <a href="../call-activities/call-activities">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//call-activities/call-activities">
         <CallActivitySvg className="implemented" />
     </a>
-    <a href="../event-subprocesses/event-subprocesses">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//event-subprocesses/event-subprocesses">
         <EventSubprocessSvg className="implemented" />
     </a>
     <a href="#">
@@ -61,13 +61,13 @@ import UndefinedTaskSvg from './assets/bpmn-symbols/undefined-task.svg'
 import ReceiveTaskInstantiatedSvg from './assets/bpmn-symbols/receive-task-instantiated.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../service-tasks/service-tasks">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//service-tasks/service-tasks">
         <ServiceTaskSvg className="implemented" />
     </a>
     <a href="#">
         <UserTaskSvg />
     </a>
-    <a href="../receive-tasks/receive-tasks">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//receive-tasks/receive-tasks">
         <ReceiveTaskSvg className="implemented" />
     </a>
     <a href="#">
@@ -99,13 +99,13 @@ import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
 import ComplexGatewaySvg from './assets/bpmn-symbols/complex-gateway.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../exclusive-gateways/exclusive-gateways">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//exclusive-gateways/exclusive-gateways">
         <ExclusiveGatewaySvg className="implemented" />
     </a>
-    <a href="../parallel-gateways/parallel-gateways">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//parallel-gateways/parallel-gateways">
         <ParallelGatewaySvg className="implemented" />
     </a>
-    <a href="../event-based-gateways/event-based-gateways">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//event-based-gateways/event-based-gateways">
         <EventBasedGatewaySvg className="implemented" />
     </a>
     <a href="#">
@@ -124,10 +124,10 @@ import LoopSvg from './assets/bpmn-symbols/loop.svg'
 import CompensationSvg from './assets/bpmn-symbols/compensation.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../multi-instance/multi-instance">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//multi-instance/multi-instance">
         <MultiInstanceParallelSvg className="implemented" />
     </a>
-    <a href="../multi-instance/multi-instance">
+    <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//multi-instance/multi-instance">
         <MultiInstanceSequentialSvg className="implemented" />
     </a>
     <a href="#">
@@ -267,10 +267,10 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
   <tbody>
     <tr>
         <td>
-            <a href="../none-events/none-events">None</a>
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//none-events/none-events">None</a>
         </td>
         <td>
-            <a href="../none-events/none-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//none-events/none-events">
                 <NoneStartEventSvg className="implemented" />
             </a>
         </td>
@@ -285,42 +285,42 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
             </a>
         </td>
         <td>
-            <a href="../none-events/none-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//none-events/none-events">
                 <NoneEndEventSvg className="implemented" />
             </a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="../message-events/message-events">Message</a>
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//message-events/message-events">Message</a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//message-events/message-events">
                 <MessageStartEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//message-events/message-events">
                 <MessageEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//message-events/message-events">
                 <MessageEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//message-events/message-events">
                 <MessageCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//message-events/message-events">
                 <MessageBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//message-events/message-events">
                 <MessageBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
@@ -337,35 +337,35 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            <a href="../timer-events/timer-events">Timer</a>
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//timer-events/timer-events">Timer</a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//timer-events/timer-events">
                 <TimerStartEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//timer-events/timer-events">
                 <TimerEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//timer-events/timer-events">
                 <TimerEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//timer-events/timer-events">
                 <TimerCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//timer-events/timer-events">
                 <TimerBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//timer-events/timer-events">
                 <TimerBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
@@ -374,25 +374,25 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            <a href="../error-events/error-events">Error</a>
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//error-events/error-events">Error</a>
         </td>
         <td></td>
         <td>
-            <a href="../error-events/error-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//error-events/error-events">
                 <ErrorEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td></td>
         <td>
-            <a href="../error-events/error-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//error-events/error-events">
                 <ErrorBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td></td>
         <td>
-            <a href="../error-events/error-events">
+            <a href="https://docs.camunda.io/docs/components/zeebe/bpmn-workflows//error-events/error-events">
                 <ErrorEndEventSvg className="implemented" />
             </a>
         </td>

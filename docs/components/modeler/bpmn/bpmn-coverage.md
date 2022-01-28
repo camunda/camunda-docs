@@ -35,13 +35,13 @@ import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
 import TransactionalSubprocessSvg from './assets/bpmn-symbols/transactional-subprocess.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../embedded-subprocesses/embedded-subprocesses">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses.md">
         <EmbeddedSubprocessSvg className="implemented" />
     </a>
-    <a href="../call-activities/call-activities">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/call-activities/call-activities.md">
         <CallActivitySvg className="implemented" />
     </a>
-    <a href="../event-subprocesses/event-subprocesses">
+    <a href="https://docs.camunda.io/docs/event-subprocesses/event-subprocesses.md">
         <EventSubprocessSvg className="implemented" />
     </a>
     <a href="#">
@@ -62,25 +62,25 @@ import UndefinedTaskSvg from './assets/bpmn-symbols/undefined-task.svg'
 import ReceiveTaskInstantiatedSvg from './assets/bpmn-symbols/receive-task-instantiated.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../service-tasks/service-tasks">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/service-tasks/service-tasks.md">
         <ServiceTaskSvg className="implemented" />
     </a>
-    <a href="../user-tasks/user-tasks">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/user-tasks.md">
         <UserTaskSvg className="implemented" />
     </a>
-    <a href="../receive-tasks/receive-tasks">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/receive-tasks/receive-tasks.md">
         <ReceiveTaskSvg className="implemented" />
     </a>
-    <a href="../send-tasks/send-tasks">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/send-tasks/send-tasks.md">
         <SendTaskSvg className="implemented" />
     </a>
-    <a href="../business-rule-tasks/business-rule-tasks">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md">
         <BusinessRuleTaskSvg className="implemented" />
     </a>
-    <a href="../script-tasks/script-tasks">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/script-tasks/script-tasks.md">
         <ScriptTaskSvg className="implemented" />
     </a>
-    <a href="../manual-tasks/manual-tasks">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/manual-tasks/manual-tasks.md">
         <ManualTaskSvg className="implemented"/>
     </a>
     <a href="#">
@@ -100,13 +100,13 @@ import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
 import ComplexGatewaySvg from './assets/bpmn-symbols/complex-gateway.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../exclusive-gateways/exclusive-gateways">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md">
         <ExclusiveGatewaySvg className="implemented" />
     </a>
-    <a href="../parallel-gateways/parallel-gateways">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/parallel-gateways/parallel-gateways.md">
         <ParallelGatewaySvg className="implemented" />
     </a>
-    <a href="../event-based-gateways/event-based-gateways">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/event-based-gateways/event-based-gateways.md">
         <EventBasedGatewaySvg className="implemented" />
     </a>
     <a href="#">
@@ -125,10 +125,10 @@ import LoopSvg from './assets/bpmn-symbols/loop.svg'
 import CompensationSvg from './assets/bpmn-symbols/compensation.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../multi-instance/multi-instance">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/multi-instance/multi-instance.md">
         <MultiInstanceParallelSvg className="implemented" />
     </a>
-    <a href="../multi-instance/multi-instance">
+    <a href="https://docs.camunda.io/docs/components/modeler/bpmn/multi-instance/multi-instance.md">
         <MultiInstanceSequentialSvg className="implemented" />
     </a>
     <a href="#">
@@ -268,10 +268,10 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
   <tbody>
     <tr>
         <td>
-            <a href="../none-events/none-events">None</a>
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/none-events/none-events.md">None</a>
         </td>
         <td>
-            <a href="../none-events/none-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/none-events/none-events.md">
                 <NoneStartEventSvg className="implemented" />
             </a>
         </td>
@@ -281,92 +281,92 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
         <td></td>
         <td></td>
         <td>
-            <a href="../none-events/none-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/none-events/none-events.md">
                 <NoneThrowEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../none-events/none-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/none-events/none-events.md">
                 <NoneEndEventSvg className="implemented" />
             </a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="../message-events/message-events">Message</a>
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events.md">Message</a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events.md">
                 <MessageStartEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events.md">
                 <MessageEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events.md">
                 <MessageEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events.md">
                 <MessageCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events.md">
                 <MessageBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events.md">
                 <MessageBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events.md">
                 <MessageThrowEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/message-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events.md">
                 <MessageEndEventSvg className="implemented" />
             </a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="../timer-events/timer-events">Timer</a>
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events.md">Timer</a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events.md">
                 <TimerStartEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events.md">
                 <TimerEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events.md">
                 <TimerEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events.md">
                 <TimerCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events.md">
                 <TimerBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/timer-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events.md">
                 <TimerBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
@@ -375,25 +375,25 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            <a href="../error-events/error-events">Error</a>
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/error-events/error-events.md">Error</a>
         </td>
         <td></td>
         <td>
-            <a href="../error-events/error-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/error-events/error-events.md">
                 <ErrorEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td></td>
         <td>
-            <a href="../error-events/error-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/error-events/error-events.md">
                 <ErrorBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td></td>
         <td>
-            <a href="../error-events/error-events">
+            <a href="https://docs.camunda.io/docs/components/modeler/bpmn/error-events/error-events.md">
                 <ErrorEndEventSvg className="implemented" />
             </a>
         </td>
