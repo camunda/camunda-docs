@@ -156,6 +156,6 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [testing best practices]: https://docs.camunda.io/docs/apis-clients/java-client/testing/
 [Conventional Commits]: ./conventional-commits
 [template and settings files]: https://github.com/camunda/camunda-bpm-platform/tree/master/settings
-[Technical Style Guide]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/technical-writing-styleguide.md
+[Technical Writing Style Guide]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/technical-writing-styleguide.md
 [Pull Requests and Code Review]: https://github.com/camunda-cloud/zeebe/wiki/Pull-Requests-and-Code-Reviews
 [SemVer]: http://semver.org/
