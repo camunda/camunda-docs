@@ -13,6 +13,9 @@ RewriteRule ^docs/components/operate/third-party-libraries/(.*)$  docs/reference
 RewriteRule ^docs/components/tasklist/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
 
+RewriteRule ^docs/reference/bpmn-processes(.*)$ /docs/components/modeler/bpmn$1 [R=301,L]
+RewriteRule ^docs/reference/bpmn-processes$ /docs/components/modeler/bpmn [R=301,L]
+
 RewriteRule ^docs/components/IAM(.*)$ /docs/self-managed/IAM/$1 [R=301,L]
 RewriteRule ^docs/components/IAM$ /docs/self-managed/IAM/ [R=301,L]
 
@@ -57,8 +60,11 @@ RewriteRule ^docs/components/iam/overview$ /docs/components/iam/what-is-iam [R=3
 RewriteRule ^docs/product-manuals/(.*)$ /docs/components/$1 [R=301,L]
 RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
 
+RewriteRule ^docs/self-managed/zeebe-deployment/security/authorization/?$ /docs/self-managed/zeebe-deployment/security/client-authorization/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs/self-managed/zeebe-deployment/security/secure-client-communication/ [R=301,L]
+
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
-RewriteRule ^(.*(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
+RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
 
 
 # Add yaml mime type

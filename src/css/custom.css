@@ -37,7 +37,7 @@ body {
   background-image: url("/img/Camunda_Master_Colours_RGB.png");
   background-color: transparent;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
 }
 
 .button--hero {
@@ -48,17 +48,15 @@ body {
   background-color: #e6e7e8;
 }
 
-.sign-up-link {
-  color: #D1D3D4;
-}
-
-.sign-up-link:hover {
-  color: #14d890;
-}
-
 .osano-footer-link-docu {
   color: var(--ifm-color-link-footer);
 
+}
+
+.hero--secondary {
+  background-color: #14d890;
+  background-size: 100%;
+  color: #000;
 }
 
 /* Osano Styles  */
@@ -140,4 +138,52 @@ svg.implemented:hover [stroke="#333"]{
 .badge--long {
   background-color: #0075FF;
   color: #FFFFFF;
+}
+
+.badge--platform {
+  background-color: #FF1F00;
+  color: #FFFFFF;
+}
+
+navbar .navbar .navbar__link[href*=self-managed] {
+  font-size: 0;
+  padding: 4px;
+  margin: 0 4px;
+}
+
+ .menu__link[href*=self-managed]:hover{
+  color: #14D890;
+ }
+
+.navbar .navbar__link[href*=self-managed]:hover{
+  color: #14D890;
+ }
+
+.navbar .navbar__link[href*=self-managed]:before {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+  float: left;
+}
+
+.navbar .navbar__link[href*=self-managed]:before {
+  background-image: url('../../static/img/self-managed.png');
+  margin-right: 2px;
+}
+
+.sign-up{
+ color: #fff !important;
+ margin: 1em;
+}
+
+.sign-up:hover{
+  color: #000 !important;
+ }
+
+.get-started:hover{
+  background-color:#000;
+  color: #fff;
+  --ifm-button-border-color: #000;
 }

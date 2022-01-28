@@ -3,6 +3,12 @@ id: overview
 title: "Camunda Cloud Self-Managed"
 ---
 
+:::note
+
+Camunda Cloud Self-Managed is not Camunda Platform. If you are looking for Camunda Platform documentation, [click here](https://docs.camunda.org).
+
+:::
+
 The alternative way to use Camunda Cloud is to host it yourself through Camunda Cloud Self-Managed. 
 
 Building process automation solutions with Camunda Cloud Self-Managed is similar to working with Camunda Cloud SaaS. For more information on Camunda Cloud SaaS, check out [What is Camunda Cloud?](../components/concepts/what-is-camunda-cloud.md) If you are new to Camunda Cloud, we recommend you start your journey with [Camunda Cloud SaaS-based guides](../../guides/).
@@ -14,12 +20,13 @@ The following components are available for Camunda Cloud Self-Managed:
 * Zeebe
 * Operate
 * Tasklist
+* Optimize
 * IAM (not available in Camunda Cloud SaaS)
 
 Camunda Cloud Self-Managed users may also use Camunda Modeler to build BPMN diagrams and work with Camunda Forms. 
 
-:::note
+While documentation for Optimize is available in the Self-Managed section, we continue to refine the experience for Camunda Cloud Self-Managed users.
 
-Camunda Cloud Self-Managed is not Camunda Platform. If you are looking for Camunda Platform documentation, [click here](https://docs.camunda.org).
-
+:::note Looking for component documentation?
+User guides and conceptual content for Camunda Cloud components are available in the [components section](./../../components).
 :::
