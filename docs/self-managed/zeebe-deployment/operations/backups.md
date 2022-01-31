@@ -8,7 +8,7 @@ Zeebe fully manages the state of your process instances and does not use an exte
 Zeebe is fault tolerant and replicates state internally.
 Backups are only necessary if you want to protect against the loss of entire replica sets or data corruption bugs.
 
-State of other component, such as Operate and Tasklist, is not managed by Zeebe and needs to be backed up seperately.
+State of other component, such as Operate and Tasklist, is not managed by Zeebe and needs to be backed up separately.
 
 Taking backups is a manual process that is highly dependent on you infrastructure and deployment.
 We do not provide an automated backup mechanism or tool.
