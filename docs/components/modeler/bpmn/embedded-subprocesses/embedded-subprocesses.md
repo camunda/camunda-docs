@@ -1,13 +1,14 @@
 ---
 id: embedded-subprocesses
 title: "Embedded subprocess"
+description: "An embedded subprocess allows you to group elements of the process."
 ---
 
-An embedded subprocess allows to group elements of the process.
+An embedded subprocess allows you to group elements of the process.
 
 ![embedded-subprocess](assets/embedded-subprocess.png)
 
-An embedded subprocess must have exactly one none start event. Other start events are not allowed.
+An embedded subprocess must have exactly **one** none start event. Other start events are not allowed.
 
 When an embedded subprocess is entered, the start event is activated. The subprocess stays active as long as one containing element is active. When the last element is completed, the subprocess is completed and the outgoing sequence flow is taken.
 

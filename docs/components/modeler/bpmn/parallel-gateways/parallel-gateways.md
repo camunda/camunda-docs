@@ -1,9 +1,10 @@
 ---
 id: parallel-gateways
 title: "Parallel gateway"
+description: "A parallel gateway (or AND-gateway) allows you to split the flow into concurrent paths."
 ---
 
-A parallel gateway (or AND-gateway) allows to split the flow into concurrent paths.
+A parallel gateway (or AND-gateway) allows you to split the flow into concurrent paths.
 
 ![process](assets/parallel-gateways.png)
 

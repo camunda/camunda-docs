@@ -1,9 +1,10 @@
 ---
 id: call-activities
 title: "Call activities"
+description: "A call activity (or reusable subprocess) allows you to call and invoke another process as part of this process."
 ---
 
-A call activity (or reusable subprocess) allows to call/invoke another process as part of this process. It's similar to an [embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md), but the process is externalized (i.e. stored as separated BPMN) and can be invoked by different processes.
+A call activity (or reusable subprocess) allows you to call and invoke another process as part of this process. It's similar to an [embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md), but the process is externalized (i.e. stored as separated BPMN) and can be invoked by different processes.
 
 ![call-activity](assets/call-activities-example.png)
 
@@ -37,7 +38,7 @@ Input mappings can be used to create new local variables in the scope of the cal
 
 If the attribute `propagateAllChildVariables` is set (default: `true`), all variables of the created process instance are propagated to the call activity. This behavior can be customized by defining output mappings at the call activity. The output mappings are applied on completing the call activity and only those variables that are defined in the output mappings are propagated.
 
-It's recommended to disable the attribute `propagateAllChildVariables` or define output mappings if the call activity is in a parallel flow (e.g. when it is marked as [parallel multi-instance](../multi-instance/multi-instance.md#variable-mappings)). Otherwise, it can happen that variables are overridden accidentally when they are changed in the parallel flow.
+It's recommended to disable the attribute `propagateAllChildVariables` or define output mappings if the call activity is in a parallel flow (e.g. when it is marked as [parallel multi-instance](../multi-instance/multi-instance.md#variable-mappings)). Otherwise, variables can be accidentally overridden when they are changed in the parallel flow.
 
 ## Additional resources
 
