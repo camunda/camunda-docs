@@ -18,7 +18,7 @@ module.exports = {
     "guides/setting-up-development-project",
     "guides/automating-a-process-using-bpmn",
     "guides/utilizing-forms",
-    "guides/integrating-optimize",
+    "guides/improve-processes-with-optimize",
     "guides/message-correlation",
     {
       "Update Guide": [

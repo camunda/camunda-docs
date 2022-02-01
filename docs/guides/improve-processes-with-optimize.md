@@ -1,7 +1,7 @@
 ---
-id: integrating-optimize
-title: Integrating Optimize
-sidebar_label: Integrating Optimize
+id: improve-processes-with-optimize
+title: Improve processes with Optimize
+sidebar_label: Improve processes with Optimize
 ---
 
 <span class="badge badge--beginner">Beginner</span>
