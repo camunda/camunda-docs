@@ -16,7 +16,7 @@ Additionally, the following attributes of BPMN elements can define an expression
 
 - Timer catch event: [timer definition](/reference/bpmn-processes/timer-events/timer-events.md#timers)
 - Message catch event/receive task: [message name](/reference/bpmn-processes/message-events/message-events.md#messages)
-- Service task: [job type](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition), [job retries](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition)
+- Service task/business rule task/script task/send task: [job type](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition), [job retries](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition)
 - Call activity: [process id](/reference/bpmn-processes/call-activities/call-activities.md#defining-the-called-process)
 
 ## Expressions vs. static values

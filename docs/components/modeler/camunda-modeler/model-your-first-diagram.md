@@ -3,7 +3,7 @@ id: model-your-first-diagram
 title: Model your first diagram
 ---
 
-After [downloading](./install-the-modeler.md), setting up, and starting Camunda Modeler, you can model your first BPMN diagram. Follow the steps below:
+After [downloading](./install-the-modeler.md), and starting Camunda Modeler, you can model your first BPMN diagram. Follow the steps below:
 
 1. Create a new BPMN diagram:
 

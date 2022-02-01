@@ -37,26 +37,6 @@ Please refer to
 the [configuration section](../../setup/configuration#external-variable-ingestion-rest-api-configuration) to learn more
 about how to set up external variable ingestion.
 
-## Authorization
-
-Every variable ingestion request has to be authorized with an authorization token, this token can either be given as
-an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header or as a URI Query Parameter
-named `access_token`. This token is configurable, please refer to
-the [configuration section](../../setup/configuration#external-variable-ingestion-rest-api-configuration) for further
-information.
-
-Given a valid token, `mySecret`, the header would need to be set in one of the following ways:
-```
-Authorization: mySecret
-```
-```
-Authorization: Bearer mySecret
-```
-For sending the token as a query parameter the HTTP Query would look like the following:
-```
-POST /api/ingestion/variable?access_token=mySecret
-```
-
 ## Method & HTTP Target Resource
 
 POST `/api/ingestion/variable`
@@ -67,8 +47,20 @@ The following request headers have to be provided with every variable ingestion 
 
 | Header | Constraints | Value |
 | --- | --- | --- |
-| Authorization | REQUIRED | See [Authorization](#authorization). |
+| Authorization | REQUIRED* | See [Authorization](../authorization). |
 | Content-Type | REQUIRED | `application/json` |
+
+* Only required if not set as a query parameter
+
+## Query Parameters
+
+The following query parameters have to be provided with every delete request:
+
+|Parameter|Constraints|Value|
+|--- |--- |--- |
+|access_token|REQUIRED*|See [Authorization](../authorization)|
+
+* Only required if not set as a request header
 
 ## Request Body
 
@@ -143,7 +135,7 @@ Possible HTTP Response Status codes:
 |--- |--- |
 |204|Request successful.|
 |400|Returned if some of the properties in the request body are invalid or missing.|
-|401|Secret incorrect or missing. See [Authorization](#authorization) on how to authorize.|
+|401|Secret incorrect or missing. See [Authorization](../authorization) on how to authorize.|
 
 ## Example
 

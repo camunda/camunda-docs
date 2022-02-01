@@ -66,7 +66,7 @@ In this section of the report builder, you are characterizing the output of the 
 
 First, you need to select which part of the data you want to view. Optimize differentiates between the view (e.g. Process Instance or Flow Node) and the measure (e.g. count or duration): 
 
-1. Raw Data: View just a table with the actual data listed as rows. This can come in handy if you found interesting insights in certain process instances and need detailed information about those instances or you are exploring a process definition with a limited number of instances. 
+1. Raw Data: View just a table with the actual data listed as rows. This can come in handy if you found interesting insights in certain process instances and need detailed information about those instances or you are exploring a process definition with a limited number of instances. This Report type also allows you to inspect raw [object variable values](../../../../self-managed/optimize-deployment/setup/object-variables).
 2. Process instance
   * Count: View how many process instances were executed.
   * Duration: View how long the process instances took to complete.
@@ -461,26 +461,28 @@ As for charts and table reports, it is possible to display the total instance co
 
 ### View Mode
 
-Once you have defined what your report should look like, the view mode provides you with different kinds of actions, such as switching to the edit mode by clicking on the edit button or deleting the whole report if you do not have any use for it anymore. To see more details about the report, you can interact with it, e.g. by moving your mouse over individual datapoints in diagrams or zooming in or out of heatmaps. The kind of interaction always depends on the report itself.
+Once you have defined what your Report should look like, the view mode gives you a full view of the report visualization. To see more details about the Report, you can interact with it, e.g. by moving your mouse over individual datapoints in diagrams or zooming in or out of heatmaps. The kind of interaction always depends on the Report itself.
 
-To download the data of the report, click **Download CSV**. The downloaded file will include the report information in a table format.
+The view mode also provides you with different kinds of actions such as: 
 
 ![report sharing popover in Camunda Optimize](./img/report-sharingPopover.png)
 
-To share the report with other people or to embed it in a webpage, use the sharing feature of the report. Click on the share button, which opens up a popover. After enabling the "enable sharing" switch, a link is generated which you can send to people who do not have access to Camunda Optimize and thus enable them to see the report.
+- Download CSV: In case you want to download the data of the Report, you can click the `Download CSV` button. The downloaded file will include the Report information in a table format.
 
-You can also use the **Embed Link** button if you wish to insert the report into your webpage. Everyone that views the webpage can then see content of the report. The shared versions of the report allow to view the report itself only. There is no possibility to alter it or interact with any other features of Optimize. You can revoke the sharing any time by disabling the share switch.
+- Sharing: In case you want to share the Report with other people or want to embed it in a webpage, you can use the sharing feature of the Report. Just click on the share button, which opens up a popover. After enabling the "enable sharing" switch, a link is generated which you can send to people who do not have access to Camunda Optimize and thus enable them to see the Report.
 
-If you prefer to hide the header of the shared report or specific part of it, you can do that by adding the following parameter to the share URL:
+    You can also use the "Embed Link" button if you wish to insert the report into your webpage. Everyone that views the webpage can then see content of the Report. The shared versions of the Report allow to view the Report itself only. There is no possibility to alter it or interact with any other features of Optimize. You can revoke the sharing any time by disabling the share switch.
 
-```
-header : titleOnly / linkOnly / hidden 
-```
-For example, to completely hide the header from the shared report, you can add `header=hidden` as shown:
+    If you prefer to hide the header of the shared report or specific part of it, you can do that by adding the following parameter to the share URL:
+    ```
+    header : titleOnly / linkOnly / hidden 
+    ```
+    For example, to completely hide the header from the shared report, you can add `header=hidden` as shown: 
+    ```
+    http://<report share url>?header=hidden
+    ```
 
-```
-http://<report share url>?header=hidden
-```
+- Alerts: If the created report is inside a collection, you can use the Alert dropdown to create and manage Alerts for that report. Since Alerts can only be created on reports that have a number visualization, the Alerts dropdown will be only be visible for such reports.
 
 ## Creating a combined report
 

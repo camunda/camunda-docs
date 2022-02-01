@@ -17,15 +17,16 @@ To enable this feature please refer to [Event Based Process Configuration](#even
 In order to make use of ingested events and create event based process mappings for them, the event based process feature needs to be enabled in the [Optimize configuration](../configuration/#event-based-process-configuration).
 This also includes authorizing particular users by their userId or user groups by their groupId to be able to create so called Event Based Processes that can be used by other users of Optimize once published.
 
-A full configuration example authorizing the user `demo` and all members of the `sales` user group to manage Event Based Processes, enabling the event based process import as well as configuring an [Event Ingestion API](../../rest-api/event-ingestion) accessToken with the value `secret`, would look like the following:
+A full configuration example authorizing the user `demo` and all members of the `sales` user group to manage Event Based Processes, enabling the event based process import as well as configuring a [Public API](../configuration/#public-api) accessToken with the value `secret`, would look like the following:
 
+    api:
+      accessToken: secret
+    
     eventBasedProcess:
       authorizedUserIds: ['demo']
       authorizedGroupIds: ['sales']
       eventImport:
       	enabled: true
-      eventIngestion:
-        accessToken: secret
 
 ## Use Camunda Activity Event Sources for Event Based Processes
 

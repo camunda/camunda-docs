@@ -23,10 +23,10 @@ module.exports = {
     {
       "Update Guide": [
         "guides/update-guide/introduction",
-        "guides/update-guide/026-to-100",
-        "guides/update-guide/100-to-110",
-        "guides/update-guide/110-to-120",
         "guides/update-guide/120-to-130",
+        "guides/update-guide/110-to-120",
+        "guides/update-guide/100-to-110",
+        "guides/update-guide/026-to-100",
       ],
     },
     "guides/migrating-from-Camunda-Platform",
@@ -96,7 +96,6 @@ module.exports = {
             "components/modeler/camunda-modeler/install-the-modeler",
             "components/modeler/camunda-modeler/model-your-first-diagram",
             "components/modeler/camunda-modeler/connect-to-camunda-cloud",
-            "components/modeler/camunda-modeler/deploy-to-cloud",
             "components/modeler/camunda-modeler/start-instance",
             "components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates",
               ],
@@ -308,7 +307,7 @@ module.exports = {
       ],
     },
   ],
- 
+
   Reference: [
     "reference/overview",
     require("./docs/reference/feel/sidebar-schema"),
@@ -407,6 +406,7 @@ module.exports = {
         "self-managed/optimize-deployment/setup/localization",
         "self-managed/optimize-deployment/setup/multi-tenancy",
         "self-managed/optimize-deployment/setup/multiple-engines",
+        "self-managed/optimize-deployment/setup/object-variables",
         "self-managed/optimize-deployment/setup/clustering",
         "self-managed/optimize-deployment/setup/webhooks",
         "self-managed/optimize-deployment/setup/setup-event-based-processes",
@@ -414,6 +414,7 @@ module.exports = {
         "self-managed/optimize-deployment/setup/common-problems",
           ],
         },
+        "self-managed/optimize-deployment/setup",
         {
           Plugins: [
         "self-managed/optimize-deployment/plugins/plugin-system",
@@ -427,29 +428,33 @@ module.exports = {
         },
         {
           "REST API": [
+            "self-managed/optimize-deployment/rest-api/authorization",
             {
               "Dashboard": [
-                "self-managed/optimize-deployment/rest-api/dashboard/dashboard-api",
+                "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
                 "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
+                "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions",
               ],
             },
             {
               "Report": [
-                "self-managed/optimize-deployment/rest-api/report/report-api",
+                "self-managed/optimize-deployment/rest-api/report/get-report-ids",
                 "self-managed/optimize-deployment/rest-api/report/delete-report",
+                "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
                 "self-managed/optimize-deployment/rest-api/report/get-data-export",
               ],
             },
-        "self-managed/optimize-deployment/rest-api/event-ingestion",
-        "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
-        "self-managed/optimize-deployment/rest-api/health-readiness",
-
+            "self-managed/optimize-deployment/rest-api/event-ingestion",
+            "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
+            "self-managed/optimize-deployment/rest-api/health-readiness",
+            "self-managed/optimize-deployment/rest-api/import-entities",
           ],
         },
         "self-managed/optimize-deployment/reimport",
         {
           "Migration & Update": [
         "self-managed/optimize-deployment/migration-update/instructions",
+        "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
         "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
         "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
         "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
@@ -471,8 +476,8 @@ module.exports = {
             "self-managed/optimize-deployment/optimize-explained/import-guide",
           ],
         },
-        
-        
+
+
       ],
       IAM: [
         "self-managed/iam/what-is-iam",
