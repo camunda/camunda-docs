@@ -75,17 +75,17 @@ Define a *moderator* to avoid too many detours and keep your POC on track.
 
 ### Planning the technical environment
 
-:::caution Camunda Cloud only
-This best practice targets Camunda Cloud. If you want to run a POC with Camuna Platform 7 you might want to have a look into [deciding about your Camunda Platform 7 stack](../../architecture/deciding-about-your-stack-c7/) for this.
+:::caution Camunda Cloud
+This best practice targets Camunda Cloud. If you want to run a POC with Camuna Platform 7 you might want to have a look into [deciding about your Camunda Platform 7 stack](../../architecture/deciding-about-your-stack-c7/).
 :::
 
-Make the necessary technological choices. Typically, POCs run on Camunda Cloud SaaS to unless your goal is to valudate that Camunda Cloud runs in your specific Kubernetes environment in a self-managed fashion. A simple test account is often sufficient, unless your goal is to do high load or performance tests, for which you need specific hardware.
+Make the necessary technological choices. Typically, POCs *run on Camunda Cloud SaaS* unless your goal is to validate that Camunda Cloud runs in your Kubernetes environment in a self-managed fashion. A simple test account is often sufficient, unless your goal is to do load or performance tests, for which you need bigger clusters. Please reach out to us in such cases.
 
-In case you want to access *systems interfaces* during your POC, set up a *test* system and verify that it is usable.
+In case you want to access *third party systems* during your POC, set up proper test systems for those and verify that they are usable.
 
-Prepare a location in a *version control system* where you can develop your POC. Having a shared repository with history does make sense also (or especially) in a two days POC! Collaboration is simplified very much if the Camunda consultant can also access the repository. It may worth just creating a repository with weaker access limitations for the POC.
+Prepare a location in a *version control system* where you can develop your POC. Having a shared repository with history does make sense also (or especially) in a two days POC! Collaboration is simplified if the Camunda consultant can also access that repository. It may worth just creating a repository with weaker access limitations for the POC.
 
-If your organization cannot easily setup a repository for the POC, or access for the consultant is impossible, you can easily create a cloud repository. We typically recommend [GitHub](https://github.com/), a free account is sufficient. It gives you a Git repository and you can invite all necessary people for the POC. Afterwards you can simply delete that repository.
+If your organization cannot easily setup a repository for the POC, or access for externals is impossible, you can easily create a cloud repository. We typically recommend [GitHub](https://github.com/), a free account is sufficient. It gives you a Git repository and you can invite all necessary people for the POC. Afterwards you can simply delete that repository.
 
 
 
@@ -94,7 +94,7 @@ If your organization cannot easily setup a repository for the POC, or access for
 As already mentioned above, we typically plan no more than *a focused week* for the POC workshop itself. Sometimes it also works well to split up the POC into two weeks of 2-3 days each, which allows everybody to reflect on the POC over the weekend.
 
 * Plan *1-3 days* for *modeling* the process with Camunda Modeler.
-* Plan *2-3 days* for *implementing* the process with Camunda.
+* Plan *2-3 days* for *implementing* the process solution.
 
 When selecting the exact time frame, consider all the people involved as well as any technical preparation you need to do up front. You also might want to plan for further steps, like a few more things you implement yourself internally in a second follow up week.
 
@@ -106,26 +106,26 @@ Before presenting the results of your proof of concept to a wider audience of st
 The speaker might also be your Camunda Consultant - they are used to present to a wide audience!
 
 
-## Preparing a POC with your Camunda consultant
+## Checklists
 
-### Technical Checklist
+### Technical
 
 * *Cloud Access*: Make sure you have an account for Camunda Cloud with an active subscription or trial account
 
 * *Installations*: Make sure your *developer systems*, as well as any *target systems* for the POC test and production you wish to use are set up. In particular install:
 
-** Camunda *Modeler* (https://camunda.org/download/modeler/)
-** Java, Maven and your favorite IDE (e.g. Eclipse)
-** Make sure *Maven* runs and builds and is wired to access the public [Camunda](https://app.camunda.com/nexus/content/groups/public) repositories. Prepare a simple project and make sure it builds and runs.
+  * Camunda *Modeler* (https://camunda.org/download/modeler/)
+  * Java, Maven and your favorite IDE (e.g. Eclipse)
+  * Make sure *Maven* runs and builds and it can access [the Java client](http://localhost:3000/docs/apis-clients/java-client/index/) dependencies. Prepare a simple project and make sure it builds and runs.
 
 * *Developer Computers*: For maximum productivity, all participating developers should use the computer with which they work every day. Avoid using computers from a training room or shared laptops unless they allow a remote connection to the developer's personal computer. If the developer's computers are neither portable nor remotely accessible consider conducting the POC in the regular office space of the developers. If your company network is restricting access to Maven and Git repositories on the Internet, consider using laptops that are not connected to the company network. Similarly, you should not force the external consultants to work on one of your computers. They will be twice as productive on their laptops and not lose time with software setup, configuration, and access restrictions. Obviously, you do not have to connect the consultant's laptop to your company network. Internet access and a shared code repository are enough to collaborate.
 
-* *Files* or *Version Control System*: Make sure we can easily exchange files and code during the POC, preferably via your own version control system (e.g. Git or SVN) or at least via shared folders, USB sticks or email attachments. If your organization cannot easily set up a repository for the POC, or access for the consultant is impossible, you can easily create a cloud repository yourself. We typically recommend GitHub, a free account is sufficient. It gives you a Git repository and you can invite all necessary people for the POC. Afterwards, you can simply delete that repository.
+* *Files* or *Version Control System*: Make sure we can easily exchange files and code during the POC, preferably via your own version control system (e.g. Git or SVN) or at least via shared folders, USB sticks or email attachments.
 
 * *Interfaces*: Clarify which technical systems interfaces you want to access during your POC, make any *documentation* for those available to the whole POC team and make sure there is a technically knowledgeable *contact person* for the interface available to the team during the POC. Set up a *test system* and verify that it is usable. Verify with Camunda that everything is clear to the team, in particular from a technological perspective.
 
 
-### Organizational briefing
+### Organizational
 
 Inform all POC team members and other relevant stakeholders about
 
@@ -139,8 +139,7 @@ Inform all POC team members and other relevant stakeholders about
   * *Internet* availability for team members and external consultants
 
 * for remote POCs
-  * exact meeting setup, e.g. links to the right meeting room, passwords, etc. (for remote POCs). In case you can't easily host meetings for external participants, your Camunda consultant can setup a Zoom or Teams call. 
+  * exact meeting setup, e.g. links to the meeting room, passwords, etc.. In case you can't easily host meetings for external participants, your Camunda consultant can setup a Zoom or Microsoft Teams call
   * Ideally some chat capability, e.g. a temporary Slack account
 
-
-Ideally, prepare a few *organizational* and/or *project* info slides to get everybody up to speed on day 1 of the workshop.
+Ideally, prepare a few *organizational* and/or *project* info slides to get everybody up to speed on day one of the workshop.

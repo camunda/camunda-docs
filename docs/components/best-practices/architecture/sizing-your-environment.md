@@ -146,19 +146,16 @@ Camunda Cloud defines three fixed hardware packages you can select from. The tab
 
 | **\***                                              | S                               | M                               | L                                |
 | :------------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
-| Max Throughput **Tasks/day**                 | 1.7 M                           | 19 M                            | 28 M                             |
-| Max Throughput **Tasks/second**              | 20                              | 220                             | 320                              |
-| Max Throughput **Process Instances/day**     | 0.2 M                           | 1.9 M                           | 3 M                              |
+| Max Throughput **Tasks/day**                 | 5.9 M                           | 19 M                            | 28 M                             |
+| Max Throughput **Tasks/second**              | 65                              | 220                             | 320                              |
+| Max Throughput **Process Instances/day**     | 0.5 M                           | 1.9 M                           | 3 M                              |
 | Max Total Number of Process Instances        | 5.4 M                           | 17 M                            |                                  |
-| Typically used for licensing tier **\*\***     | XS, S, M, L, XL                 | XXL                             |                                  |
-| Approx resources provisioned **\*\*\***        | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
+| Approx resources provisioned **\*\***        | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
 
 **\*** The numbers in the table where measured using Camunda Cloud 1.2.4 and [the official benchmark project](https://github.com/camunda-cloud/zeebe/tree/develop/benchmarks). It uses a [ten task process](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/ten_tasks.bpmn). To calculate day-based metrics, a equal distribution over 24 hours is assumed.
 
 
-**\*\*** This information tells you, which cluster size you would need to fully utilize your volume tier from your Camunda license. Please note, that this is looking at a load that is distributed evenly over time, your peak loads might still justify a bigger cluster.
-
-**\*\*\***  These are the resource limits configured in the Kubernetes cluster and are always subject to change.
+**\*\***  These are the resource limits configured in the Kubernetes cluster and are always subject to change.
 
 
 ### Camunda Cloud self-managed

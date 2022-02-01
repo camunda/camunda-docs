@@ -47,9 +47,10 @@ Of course, you can also pull the glue code for all task types into one class. Te
 
 There are exceptions when you might not want to have all glue code within one application:
 
-1.  You need to specifically control the load for one task type, like scaling it out or throttling it. For example, if one service task is doing PDF generation, which is compute-intensive, you might need to scale it much more than all other glue code. On the other hand, it could also mean limiting the number of parallel generation jobs due to licensing limitations of your third-party PDF generation library.
+1.  You need to specifically control the load for one task type, like *scaling it out* or *throttling it*. For example, if one service task is doing PDF generation, which is compute-intensive, you might need to scale it much more than all other glue code. On the other hand, it could also mean limiting the number of parallel generation jobs due to licensing limitations of your third-party PDF generation library.
 2.  You want to write glue code in different programming languages, for example, because writing specific logic in a specific language is much easier (like using Python for certain AI calculations or Java for certain mainframe integrations).
 
+In this case, you would spread your workers into different applications. Most often, you might still have a main process solution, that will also still deploy the process model. Only specific workers are carved out.
 
 ## Thinking about transactions, exceptions and idempotency of workers
 

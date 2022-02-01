@@ -206,13 +206,13 @@ Monitor load on the database to avoid overloading the database. It's sometimes b
 Typical monitoring and profiling tools our customer use:
 
 * Basic tools available with the Java installation
- * [VisualVM](https://docs.oracle.com/javase/8/docs/technotes/guides/visualvm/profiler.html)
- * JConsole
- * JVM Thread Dumps
+  * [VisualVM](https://docs.oracle.com/javase/8/docs/technotes/guides/visualvm/profiler.html)
+  * JConsole
+  * JVM Thread Dumps
 * Commercial offerings
- * App Dynamics
- * Dynatrace
- * YourKit
+  * App Dynamics
+  * Dynatrace
+  * YourKit
 
 
 Typical load generation tools our customer use:
@@ -448,4 +448,3 @@ In this situation, the best approach is not to collect any results, at least not
 In any case, the situation improves if you don't wait for the parallel processing to finish. This avoids a lot of the problem described here. You can also use workarounds like polling for all subprocesses to finish. Obviously, this is not only harder to understand from a business perspective, but also requires more effort to develop, so it should only be used if you run into serious performance trouble.
 
 <div bpmn="performance-tuning-camunda-c7-assets/parallel-batch-fire-and-forget.bpmn" callouts="" />
-

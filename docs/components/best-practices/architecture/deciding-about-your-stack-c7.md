@@ -22,15 +22,15 @@ This best practice targets Camunda Platform 7.x only! The Camunda Cloud stacks d
 
 ## The Java greenfield stack
 
-The greenfield stack is currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend to look for Camunda Cloud, that supports polyglott environments better.
+The greenfield stack is currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend to look for Camunda Cloud, that supports polyglott environments better. The greenfield recommendation has recently changed. So if the recommendation below is surprising to you, so you might want to check [this blog post](https://docs.google.com/document/d/1AJiK8Rv3YXwloENTHIr5r2bdW1yzlXOpObbHfvvq8PM/edit).
 
 Use the following stack:
 
-1. Leverage the [Camunda Run](https://docs.camunda.org/manual/latest/installation/camunda-bpm-run/) distribution to run Camunda Platform 7 using the [Enterprise Edition](http://camunda.com/bpm/), preferrably [via Docker](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-run/#starting-camunda-platform-run-using-docker).
+1. Leverage the [Camunda Run](https://docs.camunda.org/manual/latest/installation/camunda-bpm-run/) distribution to run Camunda Platform 7 using the [Enterprise Edition](http://camunda.com/bpm/), preferrably [via Docker](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-run/#starting-camunda-platform-run-using-docker)
 
-1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Camunda Engine OpenAPI REST Client Java and Spring Boot](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/)
+1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Camunda 4 REST Client for Spring Boot](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/)
 
-2.  [Maven](https://maven.apache.org/).
+2. Use [Maven](https://maven.apache.org/) as build tool
 
 3. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse
 
@@ -51,7 +51,7 @@ To run the process application *in production*, extend the stack:
 3. Run the process application by copying the jar-file to the server and start it with `java -jar YourProcessApplication.jar`. This can of course also be done via Docker.
 
 
-An example application following can be also found here: https://github.com/berndruecker/camunda-platform-remote-spring-boot-example. 
+An [example application is provided here](https://github.com/berndruecker/camunda-platform-remote-spring-boot-example).
 
 
 
@@ -98,8 +98,8 @@ Check the **prerequisites**:
 * Install [Oracle JDK 15](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * Install [Camunda Modeler](https://camunda.org/download/modeler/).
 * Install an IDE like [Eclipse](https://eclipse.org/downloads/). We recommend the latest "Eclipse IDE for Java Developers".
-** Activate workspace file sync [refresh using native hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
-** [Add Camunda Assert to your Eclipse content assist favorites](https://github.com/camunda/camunda-bpm-assert/blob/master/docs/README.md#add-camunda-bpm-assert-to-eclipse).
+  * Activate workspace file sync [refresh using native hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
+  * [Add Camunda Assert to your Eclipse content assist favorites](https://github.com/camunda/camunda-bpm-assert/blob/master/docs/README.md#add-camunda-bpm-assert-to-eclipse).
 
 * Check your network access to [Camunda Artifactory](https://camunda.jfrog.io/ui/) for downloading Maven Artifacts.
 * As an Enterprise Customer check that you have your company credentials at hand to login to get enterprise versions.
