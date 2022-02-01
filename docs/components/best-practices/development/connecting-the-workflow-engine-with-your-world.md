@@ -175,7 +175,7 @@ You can do the same trick with Kafka topics. The [Flowing Retail example](https:
 
 ![Kafka Example](connecting-the-workflow-engine-with-your-world-assets/kafka-example.png)
 
-## Designing Applications With Glue Code
+## Designing process solutions containing all glue code
 
 Typical applications will include multiple pieces of glue code in one codebase.
 
@@ -188,6 +188,8 @@ For example, the onboarding microservice shown in the figure above includes
 *   Glue code subscribing to the two service tasks that shall call a remote REST API (3) and (4).
 
 A job worker will be started automatically as part of the application to handle the subscriptions. In this example, the application is written in Java, but again, it could be [any supported programming language](https://docs.camunda.io/docs/product-manuals/clients/overview).
+
+As discussed in [writing good workers](../writing-good-workers/) you typically will bundle all workers within one process solution, but there are exceptions where it make sense to have single workers as seperate application.
 
 
 ## Connectors

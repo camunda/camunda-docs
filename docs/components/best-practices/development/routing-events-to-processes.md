@@ -380,10 +380,10 @@ Most events actuall occur somewhere external to the workflow engine and needs to
 
 
 
-### Using API (Camunda Cloud)
+### Using API
 
-:::caution Camunda Cloud only
-This part of the best practice targets Camunda Cloud only! 
+:::caution Camunda Cloud
+The following code examples target Camunda Cloud
 :::
 
 #### Starting process instance by BPMN process id
@@ -459,19 +459,12 @@ The message name for start events should be unique for the whole workflow engine
 
 
 
-### Using Connectors (Camunda Cloud)
-
-:::caution 
-Connectors are soon be introduced with Camunda Cloud.
-:::
 
 
+### Camunda Platform 7
 
-
-### Using API (Camunda Platform 7)
-
-:::caution Camunda Cloud only
-This part of the best practice targets Camunda Platform 7 only!
+:::caution Camunda Platform 7.x
+The code snippets in this section code snippets for Camunda Platform 7.x. Camunda Cloud was shown above.
 :::
 
 #### Starting process instances by key
@@ -625,15 +618,13 @@ other.
 
 You will need a mechanism receiving that message and routing it to the workflow engine. That could be a direct API call to Camunda. It could also be a AMQP or Kafka consumer or a SOAP endpoint using the Camunda API internally. It could even be a hotfolder polled by some framework like Apache Camel.
 
-### Camunda Cloud examples
-
-:::caution Camunda Cloud only
-This part of the best practice targets Camunda Cloud only! 
-:::
+### Camunda Cloud
 
 API examples for REST, AMQP, and Kafka are shown in [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 
-### Camunda Platform 7 examples
+
+
+### Camunda Platform 7
 
 :::caution Camunda Platform 7 only
 This part of the best practice targets Camunda Platform 7 only! 

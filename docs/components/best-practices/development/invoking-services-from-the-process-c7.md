@@ -71,6 +71,8 @@ Using external tasks comes with the following advantages:
 Learn more about external tasks in the [use guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) as well as the [reference](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/service-task/#external-tasks) and explore the video processing example shown above in greater detail by reading the [blog post](https://blog.camunda.org/post/2015/11/external-tasks/) about it.
 
 
+Note that Camunda Cloud focuses on the external task pattern, there are no Java Delegates available as explained in [this blog post](https://docs.google.com/document/d/19gLNB6_CvtpceDIwA_ViHncDoEPXXAxBn59ILlg4xb4/edit#).
+
 
 
 ### Java Delegates
@@ -133,12 +135,14 @@ Using Java delegates comes with the following advantages:
 
 ### General recommendation
 
-In general, [we recommend to use external tasks to apply a general architecture and mindset, that allows to also leverage Camunda Cloud much easier](https://docs.camunda.io/docs/guides/migrating-from-Camunda-Platform/#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
+In general, we *recommend to use external tasks* to apply a general architecture and mindset, that allows to [leverage Camunda Cloud easier](https://docs.camunda.io/docs/guides/migrating-from-Camunda-Platform/#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
 
 * A slightly increased complexity for Java projects, because they have to handle seperate Java clients.
 * A slightly increased overhead compared to JavaDelegates, as all comunication with the engine is remote, even if it runs in the same Java VM.
 
- Only if the increased latency does not work for your use case, for example because you need to execute a 30 task process synchronously to generate a REST response within a handfull of milliseconds, then you should consider Java Delegates (or also consider switching to use Camunda Cloud).
+Only if the increased latency does not work for your use case, for example because you need to execute a 30 task process synchronously to generate a REST response within a handfull of milliseconds, then you should consider Java Delegates (or also consider switching to use Camunda Cloud).
+
+
 
 ### Detailed comparison
 
@@ -589,7 +593,10 @@ completion.</p>
 
 ## Dealing with problems and exceptions
 
-When invoking services, you can experience faults and exceptions. See our separate best practice guide about [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
+When invoking services, you can experience faults and exceptions. See our separate best practices about 
+
+* [understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/) and 
+* [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
 
 
 
