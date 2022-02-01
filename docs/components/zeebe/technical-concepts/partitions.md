@@ -1,6 +1,7 @@
 ---
 id: partitions
 title: "Partitions"
+description: "In Zeebe, all data is organized into partitions. A partition is a persistent stream of process-related events."
 ---
 
 In Zeebe, all data is organized into **partitions**. A **partition** is a persistent stream of process-related events.
@@ -22,12 +23,12 @@ When you start an instance of a process, the client library then routes the requ
 When a process instance is created in a partition, its state is stored and managed by the same partition until its execution is terminated. The partition in which it is created is determined by various factors.
 
 - When a client sends a command `CreateProcessInstance` or `CreateProcessInstanceWithResult`, gateway chooses a partition in a round-robin manner and forwards the requests to that partition. The process instance is created in that partition.
-- When a client publishes a message to trigger a _message start event_, the message is forwarded to a partition based on the correlation key of the message. The process instance is created on the same partition where the message is published.
-- Process instances created by _timer start events_ are always created on partition 1.
+- When a client publishes a message to trigger a **message start event**, the message is forwarded to a partition based on the correlation key of the message. The process instance is created on the same partition where the message is published.
+- Process instances created by **timer start events** are always created on partition 1.
 
 ## Scalability
 
-Use partitions to scale your process processing. Partitions are dynamically distributed in a Zeebe cluster and for each partition there is one leading broker at a time. This _leader_ accepts requests and performs event processing for the partition. Let us assume you want to distribute process processing load over five machines. You can achieve that by bootstraping five partitions.
+Use partitions to scale your process processing. Partitions are dynamically distributed in a Zeebe cluster and for each partition there is one leading broker at a time. This **leader** accepts requests and performs event processing for the partition. Let's assume you want to distribute process processing load over five machines. You can achieve that by bootstraping five partitions.
 
 :::note
 While each partition has one leading broker, _not all brokers are guaranteed to lead a partition_. A broker can lead more than one partition, and, at times, a broker in a cluster may act only as a replication back-up for partitions. This broker will not be doing any active work on processes until a partition fail-over happens and the broker gets elected as the new leader for that partition.
@@ -53,11 +54,11 @@ As an example, the following partition schemes are guaranteed:
 
 #### Context
 
-- Number of Nodes: 4
-- Number of Partitions: 7
-- Replication Factor: 3
+- Number of nodes: 4
+- Number of partitions: 7
+- Replication factor: 3
 
-#### Partition Layout
+#### Partition layout
 
 |             | Node 1 | Node 2 | Node 3 | Node 4 |
 | -----------:|:------:|:------:|:------:|:------:|
@@ -73,11 +74,11 @@ As an example, the following partition schemes are guaranteed:
 
 #### Context
 
-- Number of Nodes: 5
-- Number of Partitions: 3
-- Replication Factor: 3
+- Number of nodes: 5
+- Number of partitions: 3
+- Replication factor: 3
 
-#### Partition Layout
+#### Partition layout
 
 |             | Node 1 | Node 2 | Node 3 | Node 4 | Node 5 |
 | -----------:|:------:|:------:|:------:|:------:|:------:|
@@ -90,5 +91,5 @@ As an example, the following partition schemes are guaranteed:
 Choosing the number of partitions depends on the use case, workload, and cluster setup. Here are some rules of thumb:
 
 - For testing and early development, start with a single partition. Note that Zeebe's process processing is highly optimized for efficiency, so a single partition can already handle high event loads.
-- With a single Zeebe broker, a single partition is mostly enough. However, if the node has many cores and the broker is configured to use them, more partitions can increase the total throughput (around two threads per partition).
+- With a single Zeebe broker, a single partition is usually enough. However, if the node has many cores and the broker is configured to use them, more partitions can increase the total throughput (around two threads per partition).
 - Base your decisions on data. Simulate the expected workload, measure, and compare the performance of different partition setups.

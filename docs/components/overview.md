@@ -3,6 +3,7 @@ id: overview
 title: Overview Components
 sidebar_label: Overview Components
 slug: /components/
+description: "This section contains product manual content for each component in Camunda Cloud, including conceptual content."
 ---
 
 This section contains product manual content for each component in Camunda Cloud, including conceptual content.
@@ -15,9 +16,10 @@ This section contains product manual content for each component in Camunda Cloud
 - [Optimize](optimize/what-is-optimize.md) - Detailed user guide for working with Optimize to improve your processes by identifying constraints in your system.
 - [Tasklist](tasklist/introduction.md) - Documentation for working with user tasks in Tasklist.
 
-
 :::note Looking for deployment guides?
 
 Deployment guides for Camunda Cloud components are available in the [Self-Managed section](./self-managed/overview.md).
 
 :::
+
+[//]:# (From a products perspective, do we want Components to be capitalized or lower case?)
