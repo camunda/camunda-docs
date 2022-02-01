@@ -8,6 +8,9 @@ Options -Indexes
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/guides/integrating-optimize(.*)$ /docs/guides/improve-processes-with-optimize$1 [R=301,L]
+RewriteRule ^docs/guides/integrating-optimize$ /docs/guides/improve-processes-with-optimize [R=301,L]
+
 RewriteRule ^docs/components/zeebe/third-party-libraries/zeebe-dependencies/$ docs/reference/dependencies/ [R=301,L]
 RewriteRule ^docs/components/operate/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
 RewriteRule ^docs/components/tasklist/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
