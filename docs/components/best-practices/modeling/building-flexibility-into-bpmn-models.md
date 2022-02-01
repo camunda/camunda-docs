@@ -1,6 +1,5 @@
 ---
-id: building-flexibility-into-bpmn-models
-title: Building Flexibility into BPMN Models
+title: Building flexibility into BPMN models
 date: 2017-12-07
 stakeholders: Modeling
 tags:

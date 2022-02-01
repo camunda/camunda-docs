@@ -1,7 +1,5 @@
 ---
-id: creating-readable-process-models
 title: Creating readable process models
-date: 2015-10-27
 stakeholders: Modeling
 tags:
     - BPMN

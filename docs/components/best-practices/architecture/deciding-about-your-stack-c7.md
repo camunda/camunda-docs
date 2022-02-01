@@ -1,5 +1,5 @@
 ---
-title:  Deciding About Your Camunda Platform 7 Stack
+title:  Deciding about your Camunda 7 stack
 stakeholders: Architecture
 tags:
     - Architecture

@@ -1,5 +1,5 @@
 ---
-title: "Service Integration Patterns With BPMN And Camunda Cloud"
+title: "Service integration patterns with BPMN"
 ---
 
 When integrating systems and services, you can choose between various modeling possibilities in BPMN. This practive will give you an overview and advice on how to decide between alternatives. You will see that service tasks in general are a good choice, but that there are also situations where you might want to switch to send and receive tasks or events.

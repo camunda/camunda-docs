@@ -1,5 +1,5 @@
 ---
-title: Dealing With Problems and Exceptions
+title: Dealing with problems and exceptions
 stakeholders: Development
 tags:
 - Transaction

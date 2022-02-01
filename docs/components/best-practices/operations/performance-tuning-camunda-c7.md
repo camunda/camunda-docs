@@ -1,5 +1,5 @@
 ---
-title: "Performance tuning Camunda Platform 7.x"
+title: "Performance tuning Camunda 7"
 stakeholders:
     - Operations
 tags:

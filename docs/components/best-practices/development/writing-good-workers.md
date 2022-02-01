@@ -1,5 +1,5 @@
 ---
-title: "Writing Good Workers For Camunda Cloud"
+title: "Writing good workers"
 ---
 
 [Service tasks](/docs/components/modeler/bpmn/service-tasks/service-tasks) within Camunda Cloud require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes, that you might want to 

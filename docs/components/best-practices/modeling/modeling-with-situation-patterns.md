@@ -1,5 +1,5 @@
 ---
-title: Modeling with Situation Patterns
+title: Modeling with situation patterns
 stakeholders:
 - Modeling
 - Development

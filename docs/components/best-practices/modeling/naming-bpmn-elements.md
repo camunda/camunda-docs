@@ -1,6 +1,5 @@
 ---
-id: naming-bpmn-elements
-title: "Naming BPMN Elements"
+title: "Naming BPMN elements"
 description: "
     
 "

@@ -1,5 +1,5 @@
 ---
-title: Routing Events to Processes
+title: Routing events to processes
 stakeholders:
 - Development
 tags:

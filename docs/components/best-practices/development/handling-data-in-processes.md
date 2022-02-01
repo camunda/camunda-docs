@@ -1,5 +1,5 @@
 ---
-title: "Handling Data in Processes"
+title: "Handling data in processes"
 stakeholders: Development
 tags:
     - BPMN Data Object

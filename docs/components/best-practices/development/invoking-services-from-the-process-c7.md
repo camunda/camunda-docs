@@ -1,5 +1,5 @@
 ---
-title:  Invoking Services from a Camunda 7 Process
+title: "Invoking services from a Camunda 7 process"
 stakeholders: Development
 tags:
     - Service

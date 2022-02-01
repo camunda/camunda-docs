@@ -244,10 +244,46 @@ module.exports = {
         },
         "components/tasklist/faq",
       ],
+      "Best Practices": [
+        "components/best-practices/overview",
+        {
+          "Architecture": [
+            "components/best-practices/architecture/sizing-your-environment", 
+          ],
+          "Development": [
+            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
+            "components/best-practices/development/service-integration-patterns",
+            "components/best-practices/development/writing-good-workers",
+            "components/best-practices/development/dealing-with-problems-and-exceptions",
+            "components/best-practices/development/handling-data-in-processes",
+            "components/best-practices/development/routing-events-to-processes",
+            "components/best-practices/development/testing-process-definitions",
+          ],
+          "Modeling": [
+            "components/best-practices/modeling/creating-readable-process-models",
+            "components/best-practices/modeling/naming-bpmn-elements",
+            "components/best-practices/modeling/naming-technically-relevant-ids",
+            "components/best-practices/modeling/modeling-beyond-the-happy-path",
+            "components/best-practices/modeling/modeling-with-situation-patterns",
+            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
+            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+          ],
+          "Operations": [
+          ],
+          "Management": [
+            "components/best-practices/management/doing-a-proper-poc",
+          ],
+          "Camunda 7 specific": [
+            "components/best-practices/architecture/deciding-about-your-stack-c7", 
+            "components/best-practices/architecture/sizing-your-environment-c7", 
+            "components/best-practices/development/invoking-services-from-the-process-c7",
+            "components/best-practices/development/understanding-transaction-handling-c7",
+            "components/best-practices/operations/performance-tuning-camunda-c7",
+          ],
     },
-    "components/best-practices",
+      ],
+    },
   ],
-
   "APIs & Clients": [
     "apis-clients/overview",
     {

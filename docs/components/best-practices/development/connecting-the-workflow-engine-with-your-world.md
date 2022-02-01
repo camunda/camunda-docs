@@ -1,5 +1,5 @@
 ---
-title: "Connecting The Workflow Engine With Your World"
+title: "Connecting the workflow engine with your world"
 ---
 
 

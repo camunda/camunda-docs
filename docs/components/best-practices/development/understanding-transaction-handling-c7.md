@@ -1,5 +1,5 @@
 ---
-title: Understanding Camunda Platform 7 Transaction Handling
+title: Understanding Camunda 7 transaction handling
 stakeholders: Development
 tags:
 - Transaction

@@ -1,5 +1,5 @@
 ---
-title: Doing a Proper Proof Of Concept
+title: Doing a proper proof of concept
 stakeholders: Project Management
 tags:
     - POC
