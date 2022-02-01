@@ -30,7 +30,7 @@ This view option allows you to create reports that show how often the decision w
 
 #### Group by: None
 
-This shows a single number indicating the total amount of evaluations for this decision definition and version in the current filter. Using the configuration dialog, you can limit the precision of the number and define a goal to create a progress bar. Details of both options are described in the process report configuration section](../creating-reports.md#number).
+This shows a single number indicating the total amount of evaluations for this decision definition and version in the current filter. Using the configuration dialog, you can limit the precision of the number and define a goal to create a progress bar. Details of both options are described in the [process report configuration section](../creating-reports.md#number).
 
 ![Progress Bar visualization for Decision Evaluation Count](./img/dmn_progress_bar.png)
 
