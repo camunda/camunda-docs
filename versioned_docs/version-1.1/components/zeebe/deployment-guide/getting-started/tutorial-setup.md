@@ -20,11 +20,11 @@ If you're looking for a very fast (but less comprehensive) "first contact" exper
 
 The tutorial assumes you have some basic knowledge of what Zeebe is and what it's used for. If you're completely new to Zeebe, you might find it helpful to read through the ["What is Camunda Cloud?"](/components/concepts/what-is-camunda-cloud.md) docs article first.
 
-Below are the components you'll use in the tutorial. The easiest way to run them is to download [Camunda Modeler](https://docs.camunda.io/docs/components/modeler/camunda-modeler/install-the-modeler) and use the `operate` docker-compose profile in the [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) repository. Further instructions for using Zeebe with Docker can be found in the README.md file in that repository.
+Below are the components you'll use in the tutorial. The easiest way to run them is to download [Camunda Modeler](/components/modeler/camunda-modeler/install-the-modeler.md) and use the `operate` docker-compose profile in the [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose) repository. Further instructions for using Zeebe with Docker can be found in the README.md file in that repository.
 
 You can also download the full distributions for these components, instead of running them with Docker.
 
-1.  [Camunda Modeler](https://docs.camunda.io/docs/components/modeler/camunda-modeler/install-the-modeler): A desktop modeling tool that we'll use to create and configure our process before we deploy it to Zeebe.
+1.  [Camunda Modeler](/components/modeler/camunda-modeler/install-the-modeler.md): A desktop modeling tool that we'll use to create and configure our process before we deploy it to Zeebe.
 1.  [Zeebe Distribution](https://github.com/camunda-cloud/zeebe/releases/tag/0.20.0): The Zeebe distribution contains the workflow engine where we'll deploy our process model; the engine is also responsible for managing the state of active process instances. Included in the distro is the Zeebe CLI, which we'll use throughout the tutorial. Please use Zeebe 0.20.0.
 1.  [Camunda Operate](https://github.com/camunda-cloud/zeebe/releases/tag/0.20.0): An operations tool for monitoring and troubleshooting live process instances in Zeebe. Operate is currently available for free and unrestricted _non-production use_.
 1.  [Elasticsearch 6.8.0](https://www.elastic.co/downloads/past-releases/elasticsearch-6-8-0): An open-source distributed datastore that can connect to Zeebe to store process data for auditing, visualization, analysis, etc. Camunda Operate uses Elasticsearch as its underlying datastore, which is why you need to download Elasticsearch to complete this tutorial. Operate and Zeebe are compatible with Elasticsearch 6.8.0.

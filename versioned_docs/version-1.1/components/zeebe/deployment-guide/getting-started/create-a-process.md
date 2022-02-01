@@ -20,7 +20,7 @@ If you're using the finished model we provide rather than building your own, you
 
 Camunda Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe. This application gives developers powerful features to design and deploy automated processes, human workflows, decision tables, and decision requirement diagrams using the globally-recognized [BPMN](https://camunda.com/bpmn/) and [DMN](https://camunda.com/dmn/) standards.
 
-Get started with Camunda Modeler using our [installation guide](https://docs.camunda.io/docs/components/modeler/camunda-modeler/install-the-modeler).
+Get started with Camunda Modeler using our [installation guide](/components/modeler/camunda-modeler/install-the-modeler.md).
 
 ## Creating a process model
 
