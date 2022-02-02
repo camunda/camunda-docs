@@ -91,6 +91,27 @@ source: =x
 target: output
 ```
 
+## Completion condition
+
+A `completionCondition` defines whether the multi-instance body can be completed immediately when the condition is satisfied. It is a [boolean expression](/components/concepts/expressions.md#boolean-expressions) that will be evaluated each time the instance of the multi-instance body completes. Any instances that are still active are terminated and the multi-instance body is completed when the expression evaluates to `true`.
+
+Multiple boolean values or comparisons can be combined as disjunction (`and`) or conjunction (`or`).
+
+For example:
+
+```feel
+= result.isSuccessful
+
+= count(["a", "b", "c", "d"]) > 3
+
+= orderCount >= 5 and orderCount < 15
+
+= orderCount > 15 or totalPrice > 50
+
+= list contains([6,7], today().weekday)
+```
+
+
 ## Additional resources
 
 ### XML representation
@@ -105,6 +126,9 @@ A sequential multi-instance service task:
           inputCollection="= items" inputElement="item"
           outputCollection="results" outputElement="= result" />
     </bpmn:extensionElements>
+    <bpmn:completionCondition xsi:type="bpmn:tFormalExpression">
+        = result.isSuccessful
+    </bpmn:completionCondition>
   </bpmn:multiInstanceLoopCharacteristics>
 </bpmn:serviceTask>
 ```
