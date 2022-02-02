@@ -279,6 +279,7 @@ module.exports = {
             "components/best-practices/development/invoking-services-from-the-process-c7",
             "components/best-practices/development/understanding-transaction-handling-c7",
             "components/best-practices/operations/performance-tuning-camunda-c7",
+            "components/best-practices/operations/securing-camunda-c7",
           ],
     },
       ],
