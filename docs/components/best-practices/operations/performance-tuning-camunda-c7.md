@@ -12,7 +12,7 @@ bookchapter: 3
 Understand influencing aspects on performance and apply tuning strategies appropriately, e.g. by configuring the Job Executor or applying External Tasks. When facing concrete challenges look at scenarios like the proper handling of huge batches.
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! The Camunda Cloud stacks differs completly in regards to performance and scalabilities and requires different strategies we currently work on providing as best practice.
+This best practice targets Camunda Platform 7.x only! The Camunda Cloud stacks differs in regards to performance and scalabilities and requires different strategies we currently work on providing as best practice.
 :::
 
 

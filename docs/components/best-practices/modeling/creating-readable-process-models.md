@@ -294,6 +294,16 @@ You may want to emphasize the *"happy path"* leading to the delivery of a succes
 
 The *five* BPMN symbols belonging to the happy path are put on a straight sequence flow in the center of the diagram.
 
+
+### Avoid modeling retry behavior
+
+A common idea is to model retry behavior into your process models. This *should be avoided* in general. The following process model shows a typical example of this anti pattern:
+
+<div bpmn="creating-readable-process-models-assets/retry-anti-pattern.bpmn" thumbs="down" />
+
+All operations use cases put into the model can be handled via Camunda tooling, e.g. by [retrying](/docs/components/concepts/job-workers/#completing-or-failing-jobs) or [Camunda Operate](/docs/components/operate/index/).
+
+
 ### Using collaboration diagrams
 
 If you model on an operational level (see [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) use *collaboration diagrams* with several *separate pools* for the process participants [instead of lanes](#avoiding-lanes) as operational models using lanes make it very hard for the individual process participant to identify the details of their process involvement.

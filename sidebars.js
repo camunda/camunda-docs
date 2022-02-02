@@ -280,6 +280,7 @@ module.exports = {
             "components/best-practices/development/understanding-transaction-handling-c7",
             "components/best-practices/operations/performance-tuning-camunda-c7",
             "components/best-practices/operations/securing-camunda-c7",
+            "components/best-practices/operations/operating-camunda-c7",
           ],
     },
       ],
