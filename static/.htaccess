@@ -69,6 +69,17 @@ RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
 
+# rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
+## index pages are not served as /index/ anymore but /index.html
+RewriteRule ^(.*)/index/$ /$1 [R=301,L]
+## tags do not exist anymore, redirect to main page
+RewriteRule ^(.*)/tags/$ / [R=301,L]
+## duplicate sections at the end where removed
+RewriteRule ^(.*)/(.+)/\2/$ /$1/$2 [R=301,L]
+RewriteRule ^(.*/components/modeler/dmn/)camunda-modeler-dmn/$ /$1 [R=301,L]
+RewriteRule ^(.*/components/modeler/camunda-modeler/element-templates/)camunda-modeler-element-templates/$ /$1 [R=301,L]
+RewriteRule ^(.*/components/modeler/bpmn/)modeler-bpmn/$ /$1 [R=301,L]
+
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
