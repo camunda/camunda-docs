@@ -29,7 +29,7 @@ Wait for all brokers to be fully shut down before proceeding to the next step.
 
 ### Creating the backup
 :::caution
-The `data` folder might contain symbolic and hard links which require special attention.
+The `data` folder contains symbolic and hard links which may require special attention when copying, depending on your environment.
 :::
 
 Each broker has a data folder where all state is persisted.
