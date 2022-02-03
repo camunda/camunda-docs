@@ -27,11 +27,13 @@ jobs:
         run: |
           docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnami/apache:latest
           echo "container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' webserver)" >> $GITHUB_ENV
+      - name: Download sitemap from production
+        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > sitemap.prod.txt
       - name: Waiting for URL available
         uses: nev7n/wait_for_response@v1
         with:
           url: 'http://${{ env.container_ip }}:8080/'
       - name: Check internal links
-        uses: filiph/linkcheck@v2.0.15+1
+        uses: filiph/linkcheck@v2.0.20
         with:
-          arguments: 'http://${{ env.container_ip }}:8080'
+          arguments: '-i sitemap.prod.txt'
