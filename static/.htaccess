@@ -83,6 +83,11 @@ RewriteRule ^(.*/components/modeler/bpmn/)modeler-bpmn/$ /$1 [R=301,L]
 # disabled blog, redirect to index page
 RewriteRule ^blog/ / [R=301,L]
 
+## Removed some left-over pages from 0.25 which should not be published anymore
+RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide$ /docs/0.25/components/tasklist/deployment/configuration/ [R=301,L]
+RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide/(.*)$ /docs/0.25/components/tasklist/deployment/$1 [R=301,L]
+RewriteRule ^docs/0.25/components/zeebe/tasklist-user-guide /docs/0.25/components/ [R=301,L]
+
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
