@@ -4,7 +4,7 @@ title: What is Optimize?
 ---
 
 :::note
-New to Optimize? Visit our introductory guide to [Optimize](./guides/improve-processes-with-optimize.md) to get started.
+New to Optimize? Visit our introductory guide to [Optimize](/guides/improve-processes-with-optimize.md) to get started.
 :::
 
 Camunda Cloud is built to handle three key aspects of process automation:
@@ -13,7 +13,7 @@ Camunda Cloud is built to handle three key aspects of process automation:
 - Automate
 - Improve
 
-A user can design process flows through tools like Cawemo and [Modeler](./../modeler/about.md). In a production scenario, you can deploy through Camunda Modeler, Console Modeler, or programmatically. A user can use [Tasklist](./components/tasklist/introduction.md) to review and complete tasks, and [Operate](./components/operate/index.md) to view and analyze process instances.
+A user can design process flows through tools like Cawemo and [Modeler](/components/modeler/about.md). In a production scenario, you can deploy through Camunda Modeler, Console Modeler, or programmatically. A user can use [Tasklist](/components/tasklist/introduction.md) to review and complete tasks, and [Operate](/components/operate/index.md) to view and analyze process instances.
 
 Beyond these design and automate cornerstones lies an important component to leverage our process data and analyze areas for improvement: Optimize.
 

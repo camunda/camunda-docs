@@ -5,7 +5,7 @@ title: "User tasks"
 
 A user task is used to model work that needs to be done by a human actor. When
 the process execution arrives at such a user task, a new job similar to a
-[service task](../../service-tasks/service-tasks) is created. The process instance
+[service task](/components/modeler/bpmn/service-tasks/service-tasks.md) is created. The process instance
 stops at this point and waits until the job is completed.
 
 ![user-task](assets/user-task.png)
@@ -23,7 +23,7 @@ instance continues.
 User tasks support specifying a `formKey` attribute, using the
 `zeebe:formDefinition` extension element. The form key can be used to specify
 an identifier to associate a form to the user task. [Tasklist] supports
-embedded [Camunda Forms](../../../../guides/utilizing-forms.md),
+embedded [Camunda Forms](/guides/utilizing-forms.md),
 these can be embedded into the BPMN process XML as a `zeebe:UserTaskForm`
 extension element of the process element.
 
