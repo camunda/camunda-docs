@@ -80,6 +80,9 @@ RewriteRule ^(.*/components/modeler/dmn/)camunda-modeler-dmn/$ /$1 [R=301,L]
 RewriteRule ^(.*/components/modeler/camunda-modeler/element-templates/)camunda-modeler-element-templates/$ /$1 [R=301,L]
 RewriteRule ^(.*/components/modeler/bpmn/)modeler-bpmn/$ /$1 [R=301,L]
 
+# disabled blog, redirect to index page
+RewriteRule ^blog/ / [R=301,L]
+
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
