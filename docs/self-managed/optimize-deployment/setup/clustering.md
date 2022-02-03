@@ -63,7 +63,7 @@ One is specific to each configured Camunda engine [`engines.${engineAlias}.event
 ### 2. Distributed User Sessions - Configure shared secret token
 
 If more than one Camunda Optimize instance are accessible by users for e.g. a failover scenario a shared secret token needs to be configured for all of the instances.
-This enables distributed sessions among all instances and users do not loose their session when being routed to another instance.
+This enables distributed sessions among all instances and users do not lose their session when being routed to another instance.
 
 The relevant configuration property is [`auth.token.secret`](../configuration/#security) which needs to be configured in the `environment-configuration.yaml` of each Camunda Optimize instance that is part of the cluster.
 
