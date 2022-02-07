@@ -1,49 +1,56 @@
 ---
 id: backups
 title: "Backups"
-description: "Overview and Guide for taking Zeebe backups"
+description: "A guide to creating and installing Zeebe backups."
 ---
 
-As Zeebe fully manages the state of your process instances you might want to consider taking backups of Zeebe data.
-Zeebe is fault-tolerant and replicates state internally.
-Backups are only necessary if you want to protect against the loss of entire replica sets or data corruption bugs.
+As Zeebe fully manages the state of your process instances, you should consider taking backups of Zeebe data.
 
-State of other components, such as Operate and Tasklist, is not managed by Zeebe and needs to be backed up separately.
+[//]:# ("...taking backups of Zeebe to prevent data loss?")
 
-Taking backups is a manual process that is highly dependent on your infrastructure and deployment.
-We do not provide an automated backup mechanism or tool.
+Zeebe is fault-tolerant and replicates state internally. Backups are only necessary if you'd like to protect against the loss of entire replica sets or data corruption bugs.
 
-## Cold Backups
+State of other components, such as Operate and Tasklist, is not managed by Zeebe and must be backed up separately.
+
+Taking backups is a manual process that is highly dependent on your infrastructure and deployment. Camunda does not provide an automated backup mechanism or tool. However, we do offer the following guidance to create and execute a successful backup.
+
+## Cold backups
 
 Cold backups, also called offline backups, require **downtime**.
-During the downtime, processes don't make progress and clients can't communicate with Zeebe.
-We recommend that you test how your clients behave during the downtime or that you shut down clients as well.
+
+During the downtime, processes don't make progress and clients can't communicate with Zeebe. We recommend testing how your clients behave during the downtime, or shutting down clients.
+
+[//]:# (Would it be worth adding a quick note on how to test clients/providing a link, and do you shut down clients instead for a particular reason?)
 
 ### Shutting down all brokers in the cluster
+
 To take a consistent backup, all brokers must be shut down first.
 
-As soon as brokers are shutting down, partitions become unhealthy and clients will lose connections to Zeebe or experience full backpressure.
+As soon as brokers shut down, partitions become unhealthy and clients lose connections to Zeebe or experience full backpressure.
 To prevent unnecessary failovers during the shutdown process, we recommend shutting down all brokers at the same time instead of a gradual shutdown.
 
-Wait for all brokers to be fully shut down before proceeding to the next step.
+Wait for all brokers to fully shut down before proceeding to the next step.
 
 ### Creating the backup
-:::caution
+
+:::note
 The `data` folder contains symbolic and hard links which may require special attention when copying, depending on your environment.
 :::
 
-Each broker has a data folder where all state is persisted.
-The location of the data folder is [configured](../configuration/configuration.md) via `zeebe.broker.data.directory`.
-Create a copy of the data folder and store it in a safe location.
+To create the backup, take the following steps:
+
+1. Each broker has a data folder where all state is persisted. The location of the data folder is [configured](../configuration/configuration.md) via `zeebe.broker.data.directory`. Create a copy of the data folder and store it in a safe location.
+
 If you have direct access to the broker, for example in a bare-metal setup, you can do this by creating a tarball like this: `tar caf backup.tar.gz data/`.
+
 You may also use filesystem snapshots or [kubernetes volume snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
-if that fits your environment better.
-Remember to double-check that you tool of choice supports symbolic and hard links.
+if that fits your environment better
 
-Do not merge or otherwise modify data folders as this might result in data loss and unrestorable backups.
-Additionally, you should save the broker configuration to ensure that the replacement cluster can process the backed up data.
+2. Double-check that your tool of choice supports symbolic and hard links.
+3. Do not merge or otherwise modify data folders as this might result in data loss and unrestorable backups.
+4. Save the broker configuration to ensure the replacement cluster can process the backed-up data.
 
-Here is how a backup may look like:
+See the following example on how a backup may look:
 
 ```bash
 $ tree zeebe-backup-*
@@ -56,32 +63,33 @@ zeebe-backup-2021-01-31
 └── zeebe-broker-2-data.tar.gz
 ```
 
-
 ### Resuming
 
 After taking the backup, brokers can be started again and will automatically resume with processing.
 
 ## Restore from backup
 
-### Prepare Replacement cluster
+### Prepare replacement cluster
 
-:::caution
+:::note
 Always use the same or the next minor version of Zeebe that you were using when taking the backup.
 Using a different version may result in data corruption or data loss.
 See the [update guide](/guides/update-guide/introduction.md) for more details.
 :::
 
-Make sure that your replacement cluster has the same number of brokers as the old cluster and uses the [same node ids](setting-up-a-cluster.md#configuration).
+Ensure your replacement cluster has the same number of brokers as the old cluster and uses the [same node IDs](setting-up-a-cluster.md#configuration).
 
 ### Shutting down all brokers in the replacement cluster
 
-Before installing the backup, make sure that all brokers are fully shut down.
+Before installing the backup, ensure all brokers are fully shut down.
 
 ### Installing the backup
 
-Delete the existing data folder on each broker of your replacement cluster.
-For each broker, copy over the configuration and the data folder.
-You may need to slightly adjust the configuration for your replacement cluster, for example to update IP addresses.
+To install the backup, take the following steps:
+
+1. Delete the existing data folder on each broker of your replacement cluster.
+2. For each broker, copy over the configuration and the data folder.
+3. You may need to slightly adjust the configuration for your replacement cluster, for example to update IP addresses.
 
 ### Starting the Zeebe cluster
 
