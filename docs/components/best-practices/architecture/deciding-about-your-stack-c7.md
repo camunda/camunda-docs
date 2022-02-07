@@ -14,7 +14,7 @@ booksection: "A. Getting Started"
 bookchapter: 4
 ---
 
-Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend to follow the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture. 
+Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend following the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture. 
 
 :::caution Camunda Platform 7 only
 This best practice targets Camunda Platform 7.x only! The Camunda Cloud stacks differs in many ways, but also reduced the number of decisions you have to take.
@@ -22,38 +22,35 @@ This best practice targets Camunda Platform 7.x only! The Camunda Cloud stacks d
 
 ## The Java greenfield stack
 
-The greenfield stack is currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend to look for Camunda Cloud, that supports polyglott environments better. The greenfield recommendation has recently changed. So if the recommendation below is surprising to you, so you might want to check [this blog post](https://docs.google.com/document/d/1AJiK8Rv3YXwloENTHIr5r2bdW1yzlXOpObbHfvvq8PM/edit).
+The greenfield stack is currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend looking at Camunda Cloud, which supports polyglott environments better. The greenfield recommendation has recently changed. So if the recommendation below is surprising to you, you might want to check [this blog post](https://docs.google.com/document/d/1AJiK8Rv3YXwloENTHIr5r2bdW1yzlXOpObbHfvvq8PM/edit).
 
 Use the following stack:
 
-1. Leverage the [Camunda Run](https://docs.camunda.org/manual/latest/installation/camunda-bpm-run/) distribution to run Camunda Platform 7 using the [Enterprise Edition](http://camunda.com/bpm/), preferrably [via Docker](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-run/#starting-camunda-platform-run-using-docker)
+1. Leverage the [Camunda Run](https://docs.camunda.org/manual/latest/installation/camunda-bpm-run/) distribution to run Camunda Platform 7 using the [Enterprise Edition](http://camunda.com/bpm/), preferrably [via Docker](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-run/#starting-camunda-platform-run-using-docker).
 
-1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Camunda 4 REST Client for Spring Boot](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/)
+1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Camunda 4 REST Client for Spring Boot](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/).
 
-2. Use [Maven](https://maven.apache.org/) as build tool
+2. Use [Maven](https://maven.apache.org/) as a build tool.
 
-3. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse
+3. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse.
 
 3. Use [Oracle JDK 15](https://www.oracle.com/technetwork/java/javase/downloads/index.html) as Java runtime.
 
-4. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/)
+4. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/).
 
-4. Add your process models and all Java code to the project
+4. Add your process models and all Java code to the project.
 
-5. The default distribution leverages an H2 file based Java database. We recommend to use this for development. We *strongly discourage* that multiple developers share the same database during development as this can lead to a multitude of problems.
+5. The default distribution leverages an H2 file-based Java database. We recommend using this for development. We *strongly discourage* multiple developers share the same database during development as this can lead to a multitude of problems.
 
 To run the process application *in production*, extend the stack:
 
-1. Use [PostgreSQL](http://www.postgresql.org/) - or the database you already operate.
+1. Use [PostgreSQL](http://www.postgresql.org/), or the database you already operate.
 
-2. [Secure your installation](https://docs.camunda.org/manual/latest/user-guide/security/)
+2. [Secure your installation](https://docs.camunda.org/manual/latest/user-guide/security/).
 
-3. Run the process application by copying the jar-file to the server and start it with `java -jar YourProcessApplication.jar`. This can of course also be done via Docker.
+3. Run the process application by copying the `jar` file to the server and start it with `java -jar YourProcessApplication.jar`. This can also be done via Docker.
 
-
-An [example application is provided here](https://github.com/berndruecker/camunda-platform-remote-spring-boot-example).
-
-
+See our [example application](https://github.com/berndruecker/camunda-platform-remote-spring-boot-example).
 
 ### Understanding the stack's architecture
 
@@ -61,48 +58,42 @@ The basic architecture with this stack is shown in the following diagram:
 
 ![greenfield stack architecture diagram](deciding-about-your-stack-c7-assets/greenfield-architecture.png)
 
-
-
 ### Understanding our motivation for the stack
 
-While we went through long and detailed discussions in order to come to this recommendation - it *doesn't* mean that it is necessarily superior to alternative stacks. So you can still feel good if you go down another route (see below for alternative options). But for the best practices we wanted to give *exactly
+While we went through long and detailed discussions to come to this recommendation, it *doesn't* mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (see below for alternative options). But for our Best Practices, we wanted to give *exactly
 one* greenfield recommendation for all our customers who have no special requirements on the stack.
 
-We decided for this stack because:
+We decided on this stack for the following reasons:
 
-- All components are open source and easily available
-- Camunda Run is the favorite distribution, as it focuses on External Tasks, the more modern paradigm also present in Camunda Cloud
-- Spring Boot is currently the most adopted way of building Java applications
-- Spring Boot applications are easy to customize as well as easy to roll out into test- and production environments, either on premise or in the cloud
-- PostgreSQL has a great track-record for performance
+- All components are open-source and easily available.
+- Camunda Run is the favorite distribution, as it focuses on external tasks, the more modern paradigm also present in Camunda Cloud.
+- Spring Boot is currently the most adopted way of building Java applications.
+- Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
+- PostgreSQL has a great track-record for performance.
 
+There are severa; *advantages using the greenfield stack*:
 
-There are *advantages using the greenfield stack*:
-
-- *Fewer Decisions:* Depending on your experience with the Java cosmos, the decisions to chose a stack might not be easy to take. So if you don't have special requirements take that burden from you and follow a well-known path.
+- *Fewer decisions:* Depending on your experience with the Java cosmos, the decisions to chose a stack might not be easy to take. So if you don't have special requirements, follow a well-known path.
 - *Proven:* Many of our customers use this stack with great success.
-- *More Documentation & Best Practices:* So you don't have to write your own extensive documentation - just point to the Camunda docs.
-- *Easier Support:* Asking for help gets much easier as you do not have to explain your setup in detail.
-
+- *More documentation & Best Practices:* You don't have to write your own extensive documentation, just point to the Camunda docs.
+- *Easier support:* Asking for help gets much easier as you do not have to explain your setup in detail.
 
 ### Considering Camunda Cloud instead
 
 Camunda Cloud is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Cloud from the start. You can find [a quick comparison of concepts in the docs](https://docs.camunda.io/docs/guides/migrating-from-Camunda-Platform/#conceptual-differences). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Cloud.
 
-
-
-### Getting Started with the Greenfield Stack
+### Getting started with the greenfield stack
 
 Check the **prerequisites**:
 
-* Install [Oracle JDK 15](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* Install [Oracle JDK 15](https://www.oracle.com/technetwork/java/javase/downloads/index.html).
 * Install [Camunda Modeler](https://camunda.org/download/modeler/).
 * Install an IDE like [Eclipse](https://eclipse.org/downloads/). We recommend the latest "Eclipse IDE for Java Developers".
   * Activate workspace file sync [refresh using native hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
   * [Add Camunda Assert to your Eclipse content assist favorites](https://github.com/camunda/camunda-bpm-assert/blob/master/docs/README.md#add-camunda-bpm-assert-to-eclipse).
 
 * Check your network access to [Camunda Artifactory](https://camunda.jfrog.io/ui/) for downloading Maven Artifacts.
-* As an Enterprise Customer check that you have your company credentials at hand to login to get enterprise versions.
+* As an Enterprise Customer, check that you have your company credentials at hand to log in and get enterprise versions.
 
 Create your **development project**
 
@@ -123,47 +114,45 @@ Create your **development project**
   * [Tasklist](http://localhost:8080/camunda/app/tasklist/)
   * [Cockpit](http://localhost:8080/camunda/app/cockpit/)
 * Package your application with `mvn clean install`.
-* Bring the jar file to your test or production server and start it there.
+* Bring the `jar` file to your test or production server and start it there.
 * You can setup or integrate it into an existing continous delivery pipeline.
 
+[//]:# (Are these steps? If so, I would change the bulleits to numbers.)
 
 ## Customize your stack
 
 ### Selecting the process engine mode
 
 
-|               | Camunda Run (Remote engine)       | Embedded Engine      | Container-Managed Engine            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| | Run the engine as an isolated BPM server only communicating with it via Web Services.       | Use the process engine as a simple library right within your own application, typically started via Spring Boot.   | Run the engine as a service preconfigured in your Java EE container.    |
-| Engine Bootstrap / Lifecycle Management         | Out-of-the-box        | Out-of-the-box for Spring Boot, otherwise do-it-yourself (see options below)  | Out-of-the-box             |
-| Camunda Webapps work in all use-cases           | &#10004;          | See limitations below      | &#10004;            |
-| Camunda REST API work in all use-cases          | &#10004;          | See options below          | &#10004;            |
-| [Multiple Process Applications can share a central engine](https://docs.camunda.org/manual/latest/user-guide/process-applications/)     | &#10004;          | Doable with a shared database, but requires custom development and has limitations  | &#10004;            |
-| [Multiple Engines can share resources (e.g. share the Job Executor)](https://docs.camunda.org/manual/latest/user-guide/process-engine/the-job-executor/#the-job-executor-and-multiple-process-engines) |        |       | &#10004;            |
-| One application WAR/EAR can include the process engine           |        | &#10004;         |             |
-| Supports untouched ("vanilla") containers            | &#10004;          | &#10004;         |             |
-| Runs in every Java environment           | &#10004;          | &#10004;         | [On Supported Containers](https://docs.camunda.org/manual/latest/introduction/supported-environments/#container-application-server-for-runtime-components-excluding-camunda-cycle) |
-| Responsibility for Engine Installation and Configuration         | Operations or Application Developer        | Application Developer      | Operations or Application Developer          |
-| Application point of view on process engine          | Remote Server         | Library        | Library           |
-| Possible communication types with services           | Remote       | Java InVM, Remote       | Java InVM, Remote          |
-| Programming language           | Polyglot (Java, NodeJs, C#, ...)       | Java        | Java           |
-| Use when            | **Default**, if there is no reason against it. Especially if your architecture or applications are not Java based.       | You want a single deployment including the engine.    | You use a supported application server and prefer to seperate engine installation from application development       |
-|               | [Learn More](https://docs.camunda.org/manual/latest/introduction/architecture/#standalone-remote-process-engine-server) | [Learn More](https://docs.camunda.org/manual/latest/introduction/architecture/#embedded-process-engine) | [Learn More](https://docs.camunda.org/manual/latest/introduction/architecture/#shared-container-managed-process-engine)      |
-
-
+| | Camunda Run (Remote engine) | Embedded Engine | Container-Managed Engine |
+| -- | -- | -- | -- |
+| | Run the engine as an isolated BPM server only, communicating with it via Web Services. | Use the process engine as a simple library within your own application, typically started via Spring Boot. | Run the engine as a service preconfigured in your Java EE container. |
+| Engine Bootstrap / Lifecycle Management | Out-of-the-box | Out-of-the-box for Spring Boot, otherwise do-it-yourself (see options below)  | Out-of-the-box |
+| Camunda Webapps work in all use-cases | &#10004; | See limitations below | &#10004; |
+| Camunda REST API work in all use-cases | &#10004; | See options below | &#10004; |
+| [Multiple Process Applications can share a central engine](https://docs.camunda.org/manual/latest/user-guide/process-applications/) | &#10004; | Doable with a shared database, but requires custom development and has limitations  | &#10004; |
+| [Multiple Engines can share resources (e.g. share the Job Executor)](https://docs.camunda.org/manual/latest/user-guide/process-engine/the-job-executor/#the-job-executor-and-multiple-process-engines) | | | &#10004; |
+| One application WAR/EAR can include the process engine | | &#10004; | |
+| Supports untouched ("vanilla") containers | &#10004; | &#10004; | |
+| Runs in every Java environment | &#10004; | &#10004; | [On Supported Containers](https://docs.camunda.org/manual/latest/introduction/supported-environments/#container-application-server-for-runtime-components-excluding-camunda-cycle) |
+| Responsibility for Engine Installation and Configuration | Operations or Application Developer | Application Developer | Operations or Application Developer |
+| Application point of view on process engine | Remote Server | Library | Library |
+| Possible communication types with services | Remote | Java InVM, Remote | Java InVM, Remote |
+| Programming language | Polyglot (Java, NodeJs, C#, ...) | Java | Java |
+| Use when | **Default**, if there is no reason against it. Especially if your architecture or applications are not Java based. | You want a single deployment including the engine. | You use a supported application server and prefer to seperate engine installation from application development. |
+|  | [Learn More](https://docs.camunda.org/manual/latest/introduction/architecture/#standalone-remote-process-engine-server) | [Learn More](https://docs.camunda.org/manual/latest/introduction/architecture/#embedded-process-engine) | [Learn More](https://docs.camunda.org/manual/latest/introduction/architecture/#shared-container-managed-process-engine) |
 
 In essence, the general recommendation is:
 
-* Use Camunda Run whenever possible
+* Use Camunda Run whenever possible.
 
 * Do not use a container-managed engine. The container managed engine allows to separate installation and configuration of the engine from the application development. This is an advantage if you really separate these roles within your organization. However, we experienced that this causes trouble more often than it does help. Developers most often are still responsible to install the engine, but might not be able to access the application server itself. That also explains the rise of Spring Boot (often alongside with Docker) and many projects successfully moved to that approach instead. Unless you have good reasons, we would not recommend starting new projects using a container-managed engine.
 
-* Use an embedded engine via Spring Boot if you need to provide one combined deployment artifact
-
+* Use an embedded engine via Spring Boot if you need to provide one combined deployment artifact.
 
 ### Understanding embedded engine specifics
 
-If you want to use an embedded engine (which is not the default recommendation, see above), the following information help you using it in the right way.
+If you want to use an embedded engine (which is not the default recommendation; see above,) the following information will help you use it correctly.
 
 #### Using Spring Boot
 
@@ -171,73 +160,64 @@ The Camunda Spring Boot Starter is a clean way of controlling the embedded engin
 
 #### Bootstrapping the engine and managing its lifecycle
 
-When running the engine in embedded mode you have to control the *lifecycle* of the engine yourself, basically *starting up* and *shutting down* the engine - and providing access to the API whenever a client needs it. You have several options to do that.
+When running the engine in embedded mode, you have to control the *lifecycle* of the engine yourself, basically *starting up* and *shutting down* the engine, and providing access to the API whenever a client needs it. You have several options to do that.
 
-|   | Spring Boot     | Spring Application Context     | `processes.xml`        | Programmatic     |
-| ------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-|   | Configure, start and stop the engine via Spring Boot Starter | Configure, start and stop the engine via Spring Beans defined in your Application Context. | Configure, start and stop the engine via Camunda’s processes.xml descriptor and a ProcessApplication class. | Configure, start and stop the engine yourself programmatically by using Java code. |
-| Use when   | You target Spring Boot as runtime environment.   | You already use Spring.     | You do not want to introduce a Spring dependency just for Camunda.   | You need full control over the engine or want to do advanced customizations. |
-| Unlimited Configuration Options | &#10004;    | &#10004;       |       | &#10004;     |
-| Development Effort  | Low    | Medium       | Low         | High       |                                                                             |
-
+|   | Spring Boot | Spring Application Context | `processes.xml` | Programmatic |
+| -- | -- | -- | --| --|
+|   | Configure, start, and stop the engine via Spring Boot Starter | Configure, start, and stop the engine via Spring Beans defined in your Application Context. | Configure, start, and stop the engine via Camunda’s processes.xml descriptor and a ProcessApplication class. | Configure, start, and stop the engine yourself programmatically by using Java code. |
+| Use when | You target Spring Boot as runtime environment. | You already use Spring. | You do not want to introduce a Spring dependency just for Camunda. | You need full control over the engine or want to do advanced customizations. |
+| Unlimited Configuration Options | &#10004; | &#10004; | | &#10004;  |
+| Development Effort  | Low | Medium | Low | High |  |
 
 #### Providing a REST API
 
-When running an embedded engine it might be harder to deploy the pre-built REST API.
+When running an embedded engine, it might be harder to deploy the pre-built REST API.
 
-
-|   | Use Spring Boot Starter for REST API     | Embed Camunda’s REST API    | Use Camunda’s Standalone Web App REST API    |
-| - | - | - |- |
+|   | Use Spring Boot Starter for REST API | Embed Camunda’s REST API | Use Camunda’s Standalone Web App REST API |
+| -- | -- | -- | -- |
 |  | The Spring Boot Starter allows to run the REST API as well as the Camunda web applications. | Provide Camunda’s REST API by embedding its JAX-RS code into your application. | Deploy Camunda’s "Standalone" Web Application (which runs its own engine) and use its REST API. |
-| No Classloading Restrictions | &#10004;        | &#10004;       |       |
-| Development Effort  | Low        | High      | Low      |                                                            |
-
-
+| No Classloading Restrictions | &#10004; | &#10004; |  |
+| Development Effort | Low | High | Low |  |
 
 #### Providing Camunda web applications (Tasklist, Cockpit)
 
-When running an embedded engine you still may want to use Camunda Web Application like e.g. Tasklist and Cockpit, but have to decide how exactly to run these web applications in your environment.
+When running an embedded engine, you may want to use a Camunda web application like Tasklist and Cockpit, but have to decide how exactly to run these web applications in your environment.
 
-|      | Use Spring Boot Starter for Camunda Web Applications        | Camunda "Standalone" Web Application                | Embedded Camunda Web Applications      |
-| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| | The Spring Boot Starter allows to run the REST API as well as the Camunda web applications. | Deploy Camunda’s "Standalone" Web Application, which is a WAR running its own engine - and point it to your applications engine database. | Embed the Camunda Web Applications into your own application - which is not a particularly easy task to do.              |
-| Classloading Restrictions       | None           | You can e.g. not submit a task in tasklist when a following synchronously called service uses a class contained in your own application. However, you can solve this by adding additional [safe points](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/). | None        |
-| Development Effort     | Low         | Low                   | High (undocumented)        |
-|      | [Spring Boot Starter](https://github.com/camunda/camunda-bpm-spring-boot-starter/)     | [Download Standalone Web Application](http://camunda.org/download/)               | [Implement e.g. via Maven WAR Overlays](https://maven.apache.org/plugins/maven-war-plugin/overlays.html) |
-
-
+|  | Use Spring Boot Starter for Camunda Web Applications | Camunda "Standalone" Web Application | Embedded Camunda Web Applications |
+| -- | -- | -- | -- |
+| | The Spring Boot Starter allows you to run the REST API as well as the Camunda web applications. | Deploy Camunda’s "Standalone" Web Application, which is a WAR running its own engine, and point it to your applications engine database. | Embed the Camunda Web Applications into your own application, which is not a particularly easy task to do.              |
+| Classloading Restrictions | None | For example, you can not submit a task in Tasklist when a following synchronously called service uses a class contained in your own application. However, you can solve this by adding additional [safe points](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/). | None |
+| Development Effort | Low | Low | High (undocumented) |
+| | [Spring Boot Starter](https://github.com/camunda/camunda-bpm-spring-boot-starter/) | [Download Standalone Web Application](http://camunda.org/download/) | [Implement e.g. via Maven WAR Overlays](https://maven.apache.org/plugins/maven-war-plugin/overlays.html) |
 
 ### Choosing a database
 
 Camunda Platform 7 requires a *relational database* for persistence. Even if the persistence provider is in theory pluggable and can be exchanged by e.g. some *NoSQL* persistence this is neither recommended nor supported. Therefore, if you have use cases for this, discuss them with Camunda beforehand!
 
-|  | PostgreSQL      | Oracle    | H2       | Other databases      |
-| ------------------------------ | --------------------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-|  | PostgreSQL is an open source object-relational database system. | Oracle Database is a commercial object-relational database system. | H2 is a Java SQL database with in-memory mode and a small footprint. |         |
-| Best Performance Observations  | &#10004;    | &#10004;    |       |         |
-| In-Memory Mode  |     |     | &#10004;      |         |
-| No installation required |     |     | &#10004;      |         |
-| Recommended for unit testing |     |     |    &#10004;   | 
-| Recommended for production use | &#10004;    | &#10004;    |       | &#10004; ([if supported](https://docs.camunda.org/manual/latest/introduction/supported-environments/#databases))  |
-|  | [Learn More](http://www.postgresql.org/)   | [Learn More](https://www.oracle.com/database)    | [Learn More](http://www.h2database.com/)  | [Supported Databases](https://docs.camunda.org/manual/latest/introduction/supported-environments/#databases) |
+|  | PostgreSQL | Oracle | H2 | Other databases |
+| -- | -- | -- | -- | -- |
+|  | PostgreSQL is an open-source, object-relational database system. | Oracle Database is a commercial object-relational database system. | H2 is a Java SQL database with in-memory mode and a small footprint. | |
+| Best Performance Observations | &#10004; | &#10004; |  |  |
+| In-Memory Mode  |  |  | &#10004; |  |
+| No installation required |  |  | &#10004; |  |
+| Recommended for unit testing |  |  | &#10004; | 
+| Recommended for production use | &#10004; | &#10004; |  | &#10004; ([if supported](https://docs.camunda.org/manual/latest/introduction/supported-environments/#databases))  |
+|  | [Learn More](http://www.postgresql.org/) | [Learn More](https://www.oracle.com/database) | [Learn More](http://www.h2database.com/)  | [Supported Databases](https://docs.camunda.org/manual/latest/introduction/supported-environments/#databases) |
 
 Ideally, use the database your organization already operates and your team is experienced with! 
-
-
 
 ### Modeling for executable processes
 
 We distinguish two different roles modeling in BPM projects:
 
-* *Process Developers* develop an executable process implementation. Process developers implementing solutions with Camunda must use Camunda Modeler to model executable processes, edit technical attributes and manage and version (e.g. in Git or SVN) the resulting (XML) files as part of the development project.
+* *Process Developers* develop an executable process implementation. Process developers implementing solutions with Camunda must use Camunda Modeler to model executable processes, edit technical attributes, and manage and version (e.g. in Git or SVN) the resulting (XML) files as part of the development project.
 
 * *Process Analysts* capture the operational know how about a process. For this part of the work, it is possible to use a different tool than Camunda Modeler.
 
-
-|      | Camunda Modeler    | Third-Party Modeler (BPMN Standard Compliant)         | Third-Party Modeler (Non-Compliant to Standard) |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| Roundtrip in between process analysts and developers possible | &#10004;       | &#10004; (Carefully check level of BPMN compliance - the [Model Interchange Working Group](http://bpmn-miwg.github.io/bpmn-miwg-tools/) can serve as a first starting point |    |
-| Use for Process Analysts     | &#10004;       | &#10004;            |    |
-| Use for Process Developers   | &#10004;       |             |    |
-| Use when      | You do not have a BPMN standard compliant modeling tool already rolled out. | You already rolled out a BPMN tool with a standard compliancy sufficient for roundtrip.      | Try to avoid   |
-|      | [Download](https://camunda.org/download/modeler/)   | [e.g. Cawemo](http://cawemo.com/)         |    |
+|  | Camunda Modeler | Third-Party Modeler (BPMN Standard Compliant) | Third-Party Modeler (Non-Compliant to Standard) |
+| -- | -- | -- | -- |
+| Roundtrip in between process analysts and developers possible | &#10004; | &#10004; (Carefully check level of BPMN compliance - the [Model Interchange Working Group](http://bpmn-miwg.github.io/bpmn-miwg-tools/) can serve as a first starting point |  |
+| Use for Process Analysts | &#10004; | &#10004; |  |
+| Use for Process Developers | &#10004; |  |  |
+| Use when | You do not have a BPMN standard compliant modeling tool already rolled out. | You already rolled out a BPMN tool with a standard compliancy sufficient for roundtrip. | Try to avoid  |
+| | [Download](https://camunda.org/download/modeler/) | [e.g. Cawemo](http://cawemo.com/) |  |

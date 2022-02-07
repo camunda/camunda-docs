@@ -9,40 +9,41 @@ booksection: "D. Automation"
 bookchapter: 6
 ---
 
-For executable flows, properly name all relevant technical element IDs in your BPMN diagrams. Focus on process, activity, message and error IDs, but also consider events as well as gateways and their sequence flows that carry conditional expressions. Those elements can shop up regularly (e.g. in your logs) and it makes your live easier if you can interpret their meaning.
+For executable flows, properly name all relevant technical element IDs in your BPMN diagrams.
+
+Focus on process, activity, message, and error IDs, but also consider events as well as gateways and their sequence flows that carry conditional expressions. Those elements can show up regularly (e.g. in your logs) and it makes things easier if you can interpret their meaning.
 
 ## Using naming conventions for BPMN IDs
 
-Define developer-friendly and business-relevant IDs for the process itself as well as all activities, messages and errors. Also consider events, gateways and the sequence flows that carry conditional expressions. Even though IDs are just identifiers, keep in mind that they will show up regularly on the technical level. Meaningful IDs will help a lot.
+Define developer-friendly and business-relevant IDs for the process itself, as well as all activities, messages, and errors. Also consider events, gateways, and the sequence flows that carry conditional expressions. Even though IDs are just identifiers, keep in mind that they will show up regularly on the technical level. Meaningful IDs will help a lot.
 
-Have a look on the IDs that are shown in the following example:
+Examine the IDs shown in the following example:
 
 <div bpmn="naming-technically-relevant-ids-assets/TweetApprovalProcess.bpmn" callouts="Participant_TweetApproval,StartEvent_NewTweetWritten,Task_ReviewTweet,Gateway_TweetApproved,SequenceFlow_ApprovedNo,BoundaryEvent_TweetDuplicated,EndEvent_TweetPublished" />
 
-The following table provides you with a guideline that we would use in a context where developers are comfortable with *Java* and its typical *camelCase* naming style. Of course you may adapt these suggestions to typical naming conventions used in your programming context.
+The following table provides you with a guideline that we would use in a context where developers are comfortable with *Java* and its typical *camelCase* naming style. You may adapt these suggestions to typical naming conventions used in your programming context.
 
-|   |                   | XML Attribute        | Prefix or Suffix | Resulting ID                   |
-| - | ----------------- | -------------------- | ---------------- | ------------------------------ |
-| **1** | Tweet Approval    | process/@id          | Process          | TweetApprovalProcess           |
-| **2** | New tweet written | startEvent/@id       | StartEvent\_     | StartEvent\_NewTweetWritten    |
-|   |                   | message/@id          | Message\_        | Message\_NewTweetWritten       |
-|   |                   | message/@name        | Msg\_            | Msg\_NewTweetWritten           |
-| **3** | Review tweet      | userTask/@id         | Task\_           | Task\_ReviewTweet              |
-| **4** | Tweet approved?   | exclusiveGateway/@id | Gateway\_        | Gateway\_TweetApproved         |
-| **5** | No                | sequenceFlow/@id     | SequenceFlow\_   | SequenceFlow\_TweetApprovedNo  |
-| **6** | Tweet duplicated  | boundaryEvent/@id    | BoundaryEvent\_  | BoundaryEvent\_TweetDuplicated |
-|   |                   | error/@id            | Error\_          | Error\_TweetDuplicated         |
-|   |                   | error/@errorCode     | Err\_            | Err\_TweetDuplicated           |
-| **7** | Tweet published   | EndEvent\_/@id       | EndEvent\_       | EndEvent\_TweetPublished       |
+|  |  | XML Attribute | Prefix or Suffix | Resulting ID  |
+| -- | -- | -- | -- | -- |
+| **1** | Tweet Approval | process/@id | Process | TweetApprovalProcess |
+| **2** | New tweet written | startEvent/@id | StartEvent\_ | StartEvent\_NewTweetWritten |
+|  |  | message/@id | Message\_ | Message\_NewTweetWritten |
+|  |  | message/@name | Msg\_ | Msg\_NewTweetWritten |
+| **3** | Review tweet | userTask/@id | Task\_ | Task\_ReviewTweet |
+| **4** | Tweet approved? | exclusiveGateway/@id | Gateway\_ | Gateway\_TweetApproved |
+| **5** | No | sequenceFlow/@id | SequenceFlow\_ | SequenceFlow\_TweetApprovedNo  |
+| **6** | Tweet duplicated  | boundaryEvent/@id | BoundaryEvent\_  | BoundaryEvent\_TweetDuplicated |
+|   |  | error/@id | Error\_ | Error\_TweetDuplicated |
+|   |  | error/@errorCode | Err\_ | Err\_TweetDuplicated |
+| **7** | Tweet published | EndEvent\_/@id | EndEvent\_ | EndEvent\_TweetPublished |
 
+### Editing IDs with Camunda Modeler
 
-### Editing IDs with the Camunda Modeler
-
-We recommend to use the Camunda Modeler's properties panel to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process id:
+We recommend using Camunda Modeler's properties panel to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process id:
 
 ![Properties Panel](naming-technically-relevant-ids-assets/camunda-modeler-properties-panel.png)
 
-We especially do not recommend to edit identifiers in the XML directly, as it might accidently corrupt your BPMN file. You have to keep the identifiers in the section about the graphical layout (so called "DI" for diagram interchange) further down in sync with the execution semantics at the top of the XML.
+We especially do not recommend editing identifiers in the XML directly, as it might accidently corrupt your BPMN file. You have to keep the identifiers in the section about the graphical layout (so called "DI" for diagram interchange) further down in sync with the execution semantics at the top of the XML.
 
 However, we include an XML example of all those identifiers mentioned for illustration:
 
@@ -75,20 +76,20 @@ However, we include an XML example of all those identifiers mentioned for illust
 
 <span className="callout">8</span>
 
-Elements in the diagram interchange section (DI) reference identifiers from above. You have to adjust them accordingly! The Camunda Modeler takes care of this automatically.
+Elements in the diagram interchange section (DI) reference identifiers from above; you have to adjust them accordingly! Camunda Modeler takes care of this automatically.
 
 Changing IDs can potentially break your tests or even process logic if done at a late stage of development. Therefore, consider using meaningful IDs right from the beginning and perform the renaming as part of the modeling.
 
 ### Aligning the BPMN file name with the process id
 
-Note that we see it as a good practice to *align* the *file name* of your BPMN models with the *process id* of the executable process that is inside the file.
+It is a good practice to *align* the *file name* of your BPMN models with the *process id* of the executable process that is inside the file.
 
 ![BPMN file name](naming-technically-relevant-ids-assets/aligning-the-bpmn-file-names.png)
 
 ## Generating id constants classes
 
-If you have lots of process, case and decision definitions with lots of IDs, consider to generate constant classes (e.g. via XSLT) directly from your BPMN or DMN XML files. This can e.g. be used for testing.
+If you have lots of process, case, and decision definitions with lots of IDs, consider generating constant classes (e.g. via XSLT) directly from your BPMN or DMN XML files. For example, this can be used for testing.
 
 ## Using a Camunda Modeler plugin to generate meaningful ids
 
-You can use [this modeler plugin community extentsion](https://github.com/camunda-community-hub/camunda-modeler-plugin-rename-technical-ids) to automatically convert your ids to comply with our best practices. Of course, you could also use this as a basisto create your own modeler plugin to generate ids that follow your custom naming conventions. Or you could implement a similar plugin to implement checks if all relavant ids follow your naming conventions.
+You can use [this modeler plugin community extentsion](https://github.com/camunda-community-hub/camunda-modeler-plugin-rename-technical-ids) to automatically convert your ids to comply with our best practices. Of course, you could also use this as a basis to create your own modeler plugin to generate ids that follow your custom naming conventions. Or, you could implement a similar plugin to implement checks if all relavant ids follow your naming conventions.
