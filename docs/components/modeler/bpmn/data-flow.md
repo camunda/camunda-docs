@@ -11,7 +11,7 @@ Variables are key-value-pairs and hold the contextual data of the process instan
 
 ## Job workers
 
-By default, a job worker gets all variables of a process instance. It can limit the data by
+By default, a job worker gets all variables of a process instance; it can limit the data by
 providing a list of required variables as **fetchVariables**.
 
 The worker uses the variables to do its work. When the work is done, it completes the job. If the
@@ -25,7 +25,7 @@ If the job worker expects the variables in a different format or under different
 
 ## Variable scopes vs. token-based data
 
-A process can have concurrent paths; for example, when using a parallel gateway. When the execution reaches the parallel gateway, new tokens are spawned which execute the following paths concurrently.
+A process can have concurrent paths; for example, when using a parallel gateway. When the execution reaches the parallel gateway, new tokens are created which execute the following paths concurrently.
 
 Since the variables are part of the process instance and not of the token, they can be read globally from any token. If a token adds a variable or modifies the value of a variable, the changes are also visible to concurrent tokens.
 

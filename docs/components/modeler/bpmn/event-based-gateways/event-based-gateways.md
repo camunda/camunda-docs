@@ -1,13 +1,14 @@
 ---
 id: event-based-gateways
 title: "Event-based gateway"
+description: "An event-based gateway allows you to make a decision based on events."
 ---
 
-An event-based gateway allows to make a decision based on events. 
+An event-based gateway allows you to make a decision based on events. 
 
 ![process](assets/event-based-gateway.png)
 
-An event-based gateway must have at least two outgoing sequence flows. Each sequence flow must to be connected to an intermediate catch event of type **timer or message**.
+An event-based gateway must have at least **two** outgoing sequence flows. Each sequence flow must to be connected to an intermediate catch event of type **timer or message**.
 
 When an event-based gateway is entered, the process instance waits at the gateway until one of the events is triggered. When the first event is triggered, the outgoing sequence flow of this event is taken. No other events of the gateway can be triggered afterward.
 
