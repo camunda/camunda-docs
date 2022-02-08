@@ -26,10 +26,10 @@ a job worker.
 
 ## Defining a task
 
-A send task must define a [job type](../../service-tasks/service-tasks#task-definition). It specifies
+A send task must define a [job type](../service-tasks/service-tasks#task-definition). It specifies
 the type of job that workers should subscribe to (e.g. `kafka`).
 
-Use [task headers](../../service-tasks/service-tasks#task-headers) to pass static parameters to the job
+Use [task headers](../service-tasks/service-tasks#task-headers) to pass static parameters to the job
 worker (e.g. the name of the topic to publish the message to).
 
 Define [variable mappings](../../service-tasks/service-tasks#variable-mappings) to transform the
