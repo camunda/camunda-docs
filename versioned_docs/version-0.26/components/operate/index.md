@@ -20,9 +20,9 @@ In addition to providing visibility into active and completed workflow instances
 
 ![operate-introduction](img/operate-introduction_light.png)
 
-In the [Operate User Guide](../userguide/basic-operate-navigation) you can find out how to use it to monitor workflow instances and more features.
+In the [Operate User Guide](components/operate/userguide/basic-operate-navigation.md) you can find out how to use it to monitor workflow instances and more features.
 
-In the [Operate Deployment Guide](../deployment/install-and-start) you can walk through how to install and run Operate.
+In the [Operate Deployment Guide](components/operate/deployment/install-and-start.md) you can walk through how to install and run Operate.
 
 Operate is also available for production use (with support) in the Camunda Cloud offering.
 If you'd like try out Operate in the Camunda Cloud, [please sign up here.](https://accounts.cloud.camunda.io/signup)

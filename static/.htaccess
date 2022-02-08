@@ -3,10 +3,13 @@ RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
-# Disable directory listing
-Options -Indexes
+# Disable directory listing and multi views
+Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
+
+RewriteRule ^docs/guides/integrating-optimize(.*)$ /docs/guides/improve-processes-with-optimize$1 [R=301,L]
+RewriteRule ^docs/guides/integrating-optimize$ /docs/guides/improve-processes-with-optimize [R=301,L]
 
 RewriteRule ^docs/components/zeebe/third-party-libraries/zeebe-dependencies/$ docs/reference/dependencies/ [R=301,L]
 RewriteRule ^docs/components/operate/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
@@ -65,6 +68,25 @@ RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
+
+# rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
+## index pages are not served as /index/ anymore but /index.html
+RewriteRule ^(.*)/index/$ /$1 [R=301,L]
+## tags do not exist anymore, redirect to main page
+RewriteRule ^(.*)/tags/$ / [R=301,L]
+## duplicate sections at the end where removed
+RewriteRule ^(.*)/(.+)/\2/$ /$1/$2 [R=301,L]
+RewriteRule ^(.*/components/modeler/dmn/)camunda-modeler-dmn/$ /$1 [R=301,L]
+RewriteRule ^(.*/components/modeler/camunda-modeler/element-templates/)camunda-modeler-element-templates/$ /$1 [R=301,L]
+RewriteRule ^(.*/components/modeler/bpmn/)modeler-bpmn/$ /$1 [R=301,L]
+
+# disabled blog, redirect to index page
+RewriteRule ^blog/ / [R=301,L]
+
+## Removed some left-over pages from 0.25 which should not be published anymore
+RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide$ /docs/0.25/components/tasklist/deployment/configuration/ [R=301,L]
+RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide/(.*)$ /docs/0.25/components/tasklist/deployment/$1 [R=301,L]
+RewriteRule ^docs/0.25/components/zeebe/tasklist-user-guide /docs/0.25/components/ [R=301,L]
 
 
 # Add yaml mime type

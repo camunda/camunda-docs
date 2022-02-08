@@ -14,7 +14,7 @@ Please note the following important considerations:
 
 2. **It is not necessarily recommended to migrate from Camunda Platform to Camunda Cloud**. Camunda Platform is a great product with existing support; there is no need to migrate existing solutions unless you have a good reason to (e.g. run it on SaaS, certain requirements on scalability or fault-tolerance, etc.) Therefore, we view migration more as an exception than a rule. Still, knowing the basic steps of migration can be helpful in building solutions with Camunda Platform, that will make migration easier in the future if necessary.
 
-Planning to migrate your project? [Talk to us](https://docs.camunda.io/contact/) so we can help where needed.
+Planning to migrate your project? [Talk to us](/contact/) so we can help where needed.
 
 ## Migration overview
 
@@ -22,11 +22,11 @@ For migration, you need to look at development artifacts (BPMN models and applic
 
 In general, **development artifacts** *can* be migrated:
 
-* **BPMN models:** Camunda Cloud uses BPMN like Camunda Platform does, which generally allows use of the same model files, but you might need to configure *different extension atrributes* (at least by using a different namespace). Furthermore, Camunda Cloud has a *different coverage* of BPMN concepts that are supported (see [Camunda Cloud BPMN coverage](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage) vs [Camunda Platform BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Cloud will increase over time.
+* **BPMN models:** Camunda Cloud uses BPMN like Camunda Platform does, which generally allows use of the same model files, but you might need to configure *different extension atrributes* (at least by using a different namespace). Furthermore, Camunda Cloud has a *different coverage* of BPMN concepts that are supported (see [Camunda Cloud BPMN coverage](/reference/bpmn-processes/bpmn-coverage.md) vs [Camunda Platform BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Cloud will increase over time.
 
 * **DMN models:** In Camunda Platform, the Camunda DMN engine is directly integrated into the platform. This is not yet the case for Camunda Cloud, but you can use the [Zeebe DMN Worker](https://github.com/camunda-community-hub/zeebe-dmn-worker) provided as a community extension, which can process your existing DMN models.
 
-* **CMMN models:** It is not possible to run CMMN on Zeebe, *CMMN models cannot be migrated*. You can remodel cases in BPMN according to [Building Flexibility into BPMN Models](https://camunda.com/best-practices/building-flexibility-into-bpmn-models/), keeping in mind the [Camunda Cloud BPMN coverage](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage).
+* **CMMN models:** It is not possible to run CMMN on Zeebe, *CMMN models cannot be migrated*. You can remodel cases in BPMN according to [Building Flexibility into BPMN Models](https://camunda.com/best-practices/building-flexibility-into-bpmn-models/), keeping in mind the [Camunda Cloud BPMN coverage](/reference/bpmn-processes/bpmn-coverage.md).
 
 * **Application code:** The application code needs to use *a different client library and different APIs*. This will lead to code changes you must implement.
 
@@ -78,7 +78,7 @@ To migrate existing process solutions using Camunda Spin heavily, you can still 
 
 Camunda Platform uses [JUEL (Java Unified Expression Language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/) as the expression language. In the embedded engine scneario, expressions can even read into beans (Java object instances) in the application.
 
-Camunda Cloud uses [FEEL (Friendly-Enough Expression Language](https://docs.camunda.io/docs/reference/feel/what-is-feel) and expressions can only access the process instance data and variables.
+Camunda Cloud uses [FEEL (Friendly-Enough Expression Language](/reference/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
 Most expressions can be converted (see [this community extension](https://github.com/berndruecker/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.js) as a starting point,) some might need to be completly rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform).
 
@@ -86,7 +86,7 @@ Most expressions can be converted (see [this community extension](https://github
 
 Camunda Platform provides several [connectors](https://docs.camunda.org/manual/latest/reference/connect/). These connectors are not supported in Camunda Cloud, as Camunda Cloud aims to create a much more powerful connector infrastructure.
 
-To migrate existing connectors, create a small bridging layer to invoke these connectors via a custom [job worker](https://docs.camunda.io/docs/product-manuals/concepts/job-workers).
+To migrate existing connectors, create a small bridging layer to invoke these connectors via a custom [job worker](/components/concepts/job-workers.md).
 
 ### Migration tooling
 
@@ -137,7 +137,7 @@ Due to limited adoption, there is no support for CDI or OSGI in Camunda Cloud. A
 
 ### Polyglot applications (C#, NodeJS, ...)
 
-When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform) with another (Camunda Cloud). As Zeebe comes with a different API, you need to adjust your source code. Also note that Zeebe does not currently provide a REST API, so you need to leverage a [client library](https://docs.camunda.io/docs/product-manuals/clients/overview).
+When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform) with another (Camunda Cloud). As Zeebe comes with a different API, you need to adjust your source code. Also note that Zeebe does not currently provide a REST API, so you need to leverage a [client library](/apis-clients/overview.md).
 
 ![polygot architecture](img/architecture-polyglot.png)
 
@@ -166,9 +166,9 @@ In Camunda Platform there are three ways to attach Java code to service tasks in
 * Evaluate an expression that resolves to a delegation object: ```camunda:delegateExpression```.
 * Invoke a method or value expression: ```camunda:expression```.
 
-Camunda Cloud cannot directly execute custom Java code. Instead, there must be a [job worker](https://docs.camunda.io/docs/product-manuals/concepts/job-workers) executing code.
+Camunda Cloud cannot directly execute custom Java code. Instead, there must be a [job worker](/components/concepts/job-workers.md) executing code.
 
-The [Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type ```camunda-platform-to-cloud-migration```. [Task headers](https://docs.camunda.io/docs/reference/bpmn-processes/service-tasks/service-tasks#task-headers) are used to configure a delegation class or expression for this worker.
+The [Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type ```camunda-platform-to-cloud-migration```. [Task headers](/reference/bpmn-processes/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
 
 You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
 
@@ -190,7 +190,7 @@ The following attributes/elements cannot be migrated:
 
 ### Service tasks as external tasks
 
-[External task workers](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in Camunda Platform are conceptually comparable to [job workers](https://docs.camunda.io/docs/product-manuals/concepts/job-workers) in Camunda Cloud. This means they are generally easier to migrate.
+[External task workers](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in Camunda Platform are conceptually comparable to [job workers](/components/concepts/job-workers.md) in Camunda Cloud. This means they are generally easier to migrate.
 
 The ```external task topic``` from Camunda Platform is directly translated in a ```task type name``` in Camunda Cloud.
 
@@ -214,7 +214,7 @@ To migrate BPMN process models from Camunda Platform to Camunda Cloud, you must 
 
 * The namespace of extensions has changed
 * Different configuration attributes are used
-* Camunda Cloud has a *different coverage* of BPMN elements (see [Camunda Cloud BPMN coverage](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage) vs [Camunda Platform BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Cloud will increase over time.
+* Camunda Cloud has a *different coverage* of BPMN elements (see [Camunda Cloud BPMN coverage](/reference/bpmn-processes/bpmn-coverage.md) vs [Camunda Platform BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Cloud will increase over time.
 
 The following sections list migration steps and unsupported attributes by BPMN symbol.
 
@@ -236,7 +236,7 @@ Gateways rarely need migration. The relevant configuration is mostly in the expr
 
 ### Expressions
 
-Expressions need to be in [FEEL (frienfly-enough expression language)](https://docs.camunda.io/docs/product-manuals/concepts/expressions#the-expression-language) instead of [JUEL (Java unified expression language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/).
+Expressions need to be in [FEEL (frienfly-enough expression language)](/components/concepts/expressions.md#the-expression-language) instead of [JUEL (Java unified expression language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/).
 
 Migrating simple expressions is doable (as you can see in [these test cases](https://github.com/berndruecker/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.test.js)), but not all expressions can be automatically converted.
 
@@ -368,7 +368,7 @@ Whenever you build a process solution using Camunda Platform, you can follow the
 * Don't expose Camunda APIs (REST or Java) to front-end applications.
 * Use primitive variable types or JSON payloads only (no XML or serialized Java objects).
 * Use JSONPath on JSON payloads (translates easier to FEEL).
-* Stick to [BPMN elements supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage).
+* Stick to [BPMN elements supported in Camunda Cloud](/reference/bpmn-processes/bpmn-coverage.md).
 * Use [FEEL as script language in BPMN](https://camunda.github.io/feel-scala/docs/reference/developer-guide/bootstrapping#use-as-script-engine), e.g. on Gateways.
 * Use Camunda Forms.
 
@@ -387,7 +387,7 @@ As described earlier in this guide, migration is an ongoing topic and this guide
 
 And even more.
 
-Please [reach out to us](https://docs.camunda.io/contact/) to discuss your specific migration use case.
+Please [reach out to us](/contact/) to discuss your specific migration use case.
 
 ## Summary
 
