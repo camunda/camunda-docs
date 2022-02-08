@@ -3,9 +3,9 @@ id: model-your-first-diagram
 title: Model your first diagram
 ---
 
-After [downloading](./install-the-modeler.md), and starting Camunda Modeler, you can model your first BPMN diagram. Follow the steps below:
+After [downloading](./install-the-modeler.md) and starting Camunda Modeler, you can model your first BPMN diagram. Follow the steps below:
 
-1. Create a new BPMN diagram:
+1. Create a BPMN diagram:
 
 ![empty application](./img/empty.png)
 
@@ -15,7 +15,7 @@ After [downloading](./install-the-modeler.md), and starting Camunda Modeler, you
 
 As with [Cloud Modeler](../cloud-modeler/model-your-first-diagram.md), you can now add new elements.
 
-3. On the left side of the screen you will find the element palette supported by the engine. Drag and drop the elements into the diagram:
+3. On the left side of the screen you will find the element palette supported by the engine. Drag and drop the elements onto the diagram:
 
 ![elements](./img/elements.png)
 

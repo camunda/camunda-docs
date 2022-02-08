@@ -1,6 +1,8 @@
 ---
 id: script-tasks
 title: "Script tasks"
+description: "A script task is used to model the evaluation of a script; for example, a script written in Groovy,
+JavaScript, or Python."
 ---
 
 A script task is used to model the evaluation of a script; for example, a script written in Groovy,
@@ -17,10 +19,8 @@ When a process instance enters a script task, it creates a corresponding job and
 completion. A job worker should request jobs of this job type and process them. When the job is
 complete, the process instance continues.
 
-:::info
-
+:::note
 Jobs for script tasks are not processed by Zeebe itself. To process them, provide a job worker.
-
 :::
 
 ## Defining a task
@@ -39,7 +39,7 @@ in the process instance.
 
 :::tip Community Extension
 
-Review the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker). It's a
+Review the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker). This is a
 community extension that provides a job worker to evaluate scripts. You can run it, or use it as a
 blueprint for your own job worker.
 

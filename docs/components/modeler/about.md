@@ -7,7 +7,7 @@ Any executable process needs a **BPMN diagram** designed and configured beforeha
 
 A BPMN diagram is used to visually outline the structure and flow of a process. As a result, the process can be more easily understood by various stakeholders.
 
-In tandem, different events and implementation details (such as the conditions within a gateway, or the specifications of a service task) must be configured in the model so the workflow engine understands what must executed once the process reaches a certain task.
+In tandem, different events and implementation details (such as the conditions within a gateway or the specifications of a service task) must be configured in the model so the workflow engine understands what must executed once the process reaches a certain task.
 
 Camunda offers a few tools to design your diagrams and implement them:
 
