@@ -4,9 +4,7 @@ title: "Backups"
 description: "A guide to creating and installing Zeebe backups."
 ---
 
-As Zeebe fully manages the state of your process instances, you should consider taking backups of Zeebe data.
-
-[//]:# ("...taking backups of Zeebe to prevent data loss?")
+As Zeebe fully manages the state of your process instances, consider taking backups of Zeebe data; this is crucial to prevent data loss, roll back application-level errors, and more.
 
 Zeebe is fault-tolerant and replicates state internally. Backups are only necessary if you'd like to protect against the loss of entire replica sets or data corruption bugs.
 
@@ -18,9 +16,8 @@ Taking backups is a manual process that is highly dependent on your infrastructu
 
 Cold backups, also called offline backups, require **downtime**.
 
-During the downtime, processes don't make progress and clients can't communicate with Zeebe. We recommend testing how your clients behave during the downtime, or shutting down clients.
-
-[//]:# (Would it be worth adding a quick note on how to test clients/providing a link, and do you shut down clients instead for a particular reason?)
+During the downtime, processes don't make progress and clients can't communicate with Zeebe.
+To make sure that the downtime doesn't cause issues for your clients, you should test how your clients behave during the downtime, or shut them down as well.
 
 ### Shutting down all brokers in the cluster
 
@@ -71,7 +68,7 @@ After taking the backup, brokers can be started again and will automatically res
 
 ### Prepare replacement cluster
 
-:::note
+:::note Caution
 Always use the same or the next minor version of Zeebe that you were using when taking the backup.
 Using a different version may result in data corruption or data loss.
 See the [update guide](/guides/update-guide/introduction.md) for more details.
