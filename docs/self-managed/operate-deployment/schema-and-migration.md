@@ -4,10 +4,15 @@ title: Schema and migration
 ---
 Operate stores data in Elasticsearch. On first start, Operate creates all required indices and templates.
 
-* [Schema](#schema)
-* [Data migration](#data-migration)
-* [How to migrate](#how-to-migrate)
-* [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
+- [Schema](#schema)
+- [Data migration](#data-migration)
+  - [Concept](#concept)
+  - [How to migrate](#how-to-migrate)
+    - [Migrate by using standalone application](#migrate-by-using-standalone-application)
+    - [Migrate by using built-in automatic upgrade](#migrate-by-using-built-in-automatic-upgrade)
+    - [Further notes](#further-notes)
+    - [Configure migration](#configure-migration)
+    - [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
 
 ## Schema
 
@@ -30,7 +35,7 @@ The version of Operate is reflected in Elasticsearch object names (e.g. `operate
 
 ### Concept
 
-The migration uses Elasticsearch [Ingest pipelines](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/ingest.html) to reindex the data.
+The migration uses Elasticsearch [ingest pipelines](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/ingest.html) to reindex the data.
 
 Each version of Operate delivers a set of migration steps which need to be applied for a corresponding version of Operate.
 
