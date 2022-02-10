@@ -235,6 +235,7 @@ module.exports = {
               "API mode": [
                 "components/tasklist/userguide/api/overview",
                 "components/tasklist/userguide/api/tutorial",
+                "components/tasklist/userguide/api/schema",
               ],
               "User interface mode": [
                 "components/tasklist/userguide/user-interface/overview",
