@@ -4,7 +4,7 @@ title: "Receive tasks"
 description: "Receive tasks are tasks which reference a message; these are used to wait until a proper message is received."
 ---
 
-Receive tasks are tasks which reference a message; these are used to wait until a proper message is received.
+Receive tasks reference a message; these are used to wait until a proper message is received.
 
 ![Receive Tasks](assets/receive-tasks.png)
 
@@ -28,8 +28,11 @@ To correlate a message to the receive task, the message is published with the de
 
 ## Variable mappings
 
-By default, all message variables are merged into the process instance. This behavior can be customized by defining an output mapping at the receive task.
+Output variable mappings are used to customize how variables are merged into the process instance.
+These can contain multiple elements that specify which variables should be mapped.
+The `Process Variable Name` of an output denotes the variable name outside of the activity.
 
+Visit our documentation on [input and output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) for more information on this topic.
 ## Additional resources
 
 ### XML representation
