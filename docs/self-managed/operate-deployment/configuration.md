@@ -78,7 +78,7 @@ Name | Description | Default value |
 | camunda.operate.elasticsearch.numberOfReplicas| How many replicas Elasticsearch uses for all Operate indices | 0 |
 
 These values are applied only on first startup of Operate or during version upgrade. After the Operate
-ELS schema is created, settings may be adjusted directly in the ELS template, and the new settings are applied
+schema is created, settings may be adjusted directly in the Elasticsearch template, and the new settings are applied
 to indices created after adjustment.
 
 ### A snippet from application.yml
