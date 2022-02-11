@@ -63,7 +63,7 @@ To run the demonstration, take the following steps:
   npm i && npm i -g ts-node typescript
   ```
 
-3. In another terminal, start the Zeebe Broker using the `simple-monitor` profile from the [zeebe-docker-compose](https://github.com/camunda-community-hub/zeebe-docker-compose) repo.
+3. In another terminal, start the Zeebe Broker in addition to  [simple-monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor).
 
 4. Deploy the workflow and start an instance:
 
