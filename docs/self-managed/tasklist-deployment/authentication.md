@@ -28,7 +28,7 @@ camunda.tasklist:
 
 On Tasklist startup, the user is created if they did not exist before.
 
-By default, two users are created:
+By default, three users are created:
 * Role `OWNER` with **userId**/**displayName**/**password** `demo`/`demo`/`demo`.
 * Role `USER` with **userId**/**displayName**/**password** `view`/`view`/`view`.
 * Role `OPERATOR` with **userId**/**displayName**/**password** `act`/`act`/`act`/.
