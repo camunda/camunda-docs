@@ -22,8 +22,6 @@ A default docker compose configuration to run Zeebe, Operate and Tasklist is ava
 
 Download this file to your local computer, `cd` into that directory and run `docker-compose up`. 
 
-Some more information on Zeebe using `docker-compose`, including more specific configurations, are available in the [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md) community extension.
-
 #### Exposed ports
 
 - `26500`: Zeebe Gateway API
