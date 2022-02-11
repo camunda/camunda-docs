@@ -27,7 +27,7 @@ a job worker.
 
 ## Defining a task
 
-A send task must define a [job type](../../service-tasks/service-tasks#task-definition) the same way as a service task does. It specifies
+A send task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks#task-definition) the same way as a service task does. It specifies
 the type of job that workers should subscribe to (e.g. `kafka` or `mail`).
 
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
