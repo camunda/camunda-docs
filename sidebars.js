@@ -269,9 +269,12 @@ module.exports = {
             "components/best-practices/modeling/choosing-the-dmn-hit-policy",
           ],
           "Operations": [
+            "components/best-practices/operations/versioning-process-definitions",
+            "components/best-practices/operations/reporting-about-processes",            
           ],
           "Management": [
             "components/best-practices/management/doing-a-proper-poc",
+            "components/best-practices/management/following-the-customer-success-path",            
           ],
           "Camunda 7 specific": [
             "components/best-practices/architecture/deciding-about-your-stack-c7", 
