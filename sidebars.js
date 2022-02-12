@@ -248,7 +248,9 @@ module.exports = {
         "components/best-practices/overview",
         {
           "Architecture": [
+            "components/best-practices/management/following-the-customer-success-path",            
             "components/best-practices/architecture/sizing-your-environment", 
+            "components/best-practices/management/doing-a-proper-poc",
           ],
           "Development": [
             "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
@@ -271,10 +273,6 @@ module.exports = {
           "Operations": [
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",            
-          ],
-          "Management": [
-            "components/best-practices/management/doing-a-proper-poc",
-            "components/best-practices/management/following-the-customer-success-path",            
           ],
           "Camunda 7 specific": [
             "components/best-practices/architecture/deciding-about-your-stack-c7", 
