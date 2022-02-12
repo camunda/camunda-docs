@@ -303,7 +303,7 @@ The nested values of a specific key can be extracted by `.key`.
 // ["foo", "bar"]
 ```
 
-### Evaluate an enary test
+### Evaluate a unary test
 
 Evaluates a [unary-tests expression](../feel-unary-tests) with the given value.
 
