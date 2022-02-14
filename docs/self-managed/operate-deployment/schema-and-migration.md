@@ -4,10 +4,15 @@ title: Schema and migration
 ---
 Operate stores data in Elasticsearch. On first start, Operate creates all required indices and templates.
 
-* [Schema](#schema)
-* [Data migration](#data-migration)
-* [How to migrate](#how-to-migrate)
-* [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
+- [Schema](#schema)
+- [Data migration](#data-migration)
+  - [Concept](#concept)
+  - [How to migrate](#how-to-migrate)
+    - [Migrate by using standalone application](#migrate-by-using-standalone-application)
+    - [Migrate by using built-in automatic upgrade](#migrate-by-using-built-in-automatic-upgrade)
+    - [Further notes](#further-notes)
+    - [Configure migration](#configure-migration)
+    - [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
 
 ## Schema
 
@@ -24,32 +29,13 @@ Index names follow the defined pattern below:
 
 Here, `operate-index-prefix` defines the prefix for index name (default `operate`), `datatype` defines which data is stored in the index (e.g. `user`, `variable` etc.,) `schemaversion` represents the index schema version, and `date` represents the finished date of the archived data. See [Data retention](data-retention.md).
 
-Knowing the index name pattern, it's possible to customize index settings by creating Elasticsearch templates. See an [example of an index template](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-templates.html).
-
-To define the desired number of shards and replicas, define the following template:
-
-```
-PUT _template/template_operate
-{
-  "index_patterns": ["operate-*"],
-  "settings": {
-    "number_of_shards": 5,
-    "number_of_replicas": 2
-  }
-}
-```
-
-:::note
-For these settings to work, the template must be created before Operate runs.
-:::
-
 ## Data migration
 
 The version of Operate is reflected in Elasticsearch object names (e.g. `operate-user-1.0.0_` index contains the user data for Operate 1.0.0.) When upgrading from one version of Operate to another, migration of data must be performed. Operate distribution provides an application to perform data migration from older versions.
 
 ### Concept
 
-The migration uses Elasticsearch [processors](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/ingest-processors.html) and [pipelines](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/pipeline.html) to reindex the data.
+The migration uses Elasticsearch [ingest pipelines](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/ingest.html) to reindex the data.
 
 Each version of Operate delivers a set of migration steps which need to be applied for a corresponding version of Operate.
 

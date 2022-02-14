@@ -55,16 +55,31 @@ You may need to import the certificate into JVM runtime.
 
 Either set `host` and `port` (deprecated) or `url` (recommended).
 
-Name | Description | Default value
------|-------------|--------------
-camunda.operate.elasticsearch.indexPrefix| Prefix for index names | operate
-camunda.operate.elasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
-camunda.operate.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
-camunda.operate.elasticsearch.username | Username to access Elasticsearch REST API | -
-camunda.operate.elasticsearch.password | Password to access Elasticsearch REST API | -
-camunda.operate.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -
-camunda.operate.elasticsearch.ssl.selfSigned | Certificate was self signed | false
-camunda.operate.elasticsearch.ssl.verifyHostname | Should the hostname be validated | false
+Name | Description | Default value |
+| -- | -- | -- |
+| camunda.operate.elasticsearch.indexPrefix | Prefix for index names | operate |
+| camunda.operate.elasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch |
+| camunda.operate.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200 |
+| camunda.operate.elasticsearch.username | Username to access Elasticsearch REST API | - |
+| camunda.operate.elasticsearch.password | Password to access Elasticsearch REST API | - |
+| camunda.operate.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | - |
+| camunda.operate.elasticsearch.ssl.selfSigned | Certificate was self-signed | false |
+| camunda.operate.elasticsearch.ssl.verifyHostname | Should the hostname be validated | false
+
+### Settings for shards and replicas
+
+Operate creates the template with index settings named `operate-<version>_template` that Elasticsearch uses for all Operate indices. These settings can be changed.
+
+The following configuration parameters define the settings:
+
+Name | Description | Default value |
+| -- | -- | -- |
+| camunda.operate.elasticsearch.numberOfShards| How many shards Elasticsearch uses for all Operate indices | 1 |
+| camunda.operate.elasticsearch.numberOfReplicas| How many replicas Elasticsearch uses for all Operate indices | 0 |
+
+These values are applied only on first startup of Operate or during version upgrade. After the Operate
+schema is created, settings may be adjusted directly in the Elasticsearch template, and the new settings are applied
+to indices created after adjustment.
 
 ### A snippet from application.yml
 

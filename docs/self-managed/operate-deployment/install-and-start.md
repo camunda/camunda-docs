@@ -67,7 +67,7 @@ To run Zeebe, execute the following command:
 
 
 ```
-cd zeebe-broker-*
+cd camunda-cloud-zeebe-*
 ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME=io.camunda.zeebe.exporter.ElasticsearchExporter ./bin/broker
 ```
 
@@ -83,7 +83,7 @@ You’ll know Zeebe has started successfully when you see a message similar to t
 To run Operate, execute the following command:
 
 ```
-cd camunda-operate-distro-1.0.0-*
+cd camunda-cloud-operate-*
 bin/operate
 ```
 
