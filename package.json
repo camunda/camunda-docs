@@ -23,7 +23,7 @@
     "@docusaurus/preset-classic": "^2.0.0-beta.15",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
-    "color": "^3.2.1",
+    "color": "^4.2.1",
     "docusaurus-gtm-plugin": "0.0.2",
     "mixpanel-browser": "^2.43.0",
     "react": "^17.0.2",
