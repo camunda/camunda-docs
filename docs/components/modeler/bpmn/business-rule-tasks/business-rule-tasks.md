@@ -25,13 +25,13 @@ Jobs for business rule tasks are not processed by Zeebe itself. To process them,
 
 ## Defining a task
 
-A business rule task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition). This
+A business rule task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a service task does. This
 specifies the type of job workers should subscribe to (e.g. DMN).
 
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
 worker (e.g. the key of the decision to evaluate).
 
-Define [variable mappings](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings) to transform the
+Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) to transform the
 variables passed to the job worker, or to customize how the variables of the job are merged
 in the process instance.
 
