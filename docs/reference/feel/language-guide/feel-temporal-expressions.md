@@ -1,11 +1,12 @@
 ---
 id: feel-temporal-expressions 
-title: Temporal Expressions
+title: Temporal expressions
+description: "This document outlines temporal expressions and examples."
 ---
 
 ### Literal
 
-Creates a new temporal value. 
+Creates a new temporal value.
 
 ```js
 date("2020-04-06")
@@ -77,7 +78,6 @@ duration("P3M")
   </tr>
 
 </table>
-
 
 ```js
 date("2020-04-06") + duration("P1D")

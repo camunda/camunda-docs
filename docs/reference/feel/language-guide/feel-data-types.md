@@ -1,14 +1,14 @@
 ---
 id: feel-data-types
-title: Data Types
+title: Data types
 description: "This document outlines data types, including null, number, string, boolean, and more."
 ---
 
-FEEL defines the following types.
+FEEL defines the following types:
 
 ### Null
 
-Nothing, null or nil (i.e. the value is not present).
+Nothing, null, or nil (i.e. the value is not present).
 
 * Java Type: `null`
 
@@ -66,7 +66,7 @@ A date value without a time component.
 date("2017-03-10")
 ```
 
-### Time 
+### Time
 
 A local or zoned time. The time can have an offset or time zone id.
 
@@ -82,7 +82,7 @@ time("11:45:30+02:00")
 time("10:31:10@Europe/Paris")
 ```
 
-### Date-Time 
+### Date-time
 
 A date with a local or zoned time component. The time can have an offset or time zone id.
 
@@ -97,9 +97,9 @@ date and time("2015-09-18T10:31:10+01:00")
 date and time("2015-09-18T10:31:10@Europe/Paris")
 ```
 
-### Days-Time-Duration
+### Days-time-duration
 
-A duration based on seconds. It can contain days, hours, minutes and seconds.
+A duration based on seconds. It can contain days, hours, minutes, and seconds.
 
 * Format: `PxDTxHxMxS`
 * Java Type: `java.time.Duration`
@@ -111,7 +111,7 @@ duration("PT30M")
 duration("P1DT6H")
 ```
 
-### Years-Months-Duration
+### Years-months-duration
 
 A duration based on the calendar. It can contain years and months.
 

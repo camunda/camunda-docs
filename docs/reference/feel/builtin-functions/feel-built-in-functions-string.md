@@ -1,6 +1,6 @@
 ---
 id: feel-built-in-functions-string
-title: String Functions
+title: String functions
 description: "This document outlines built-in string functions and examples."
 ---
 

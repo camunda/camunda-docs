@@ -1,9 +1,10 @@
 ---
 id: feel-variables 
 title: Variables
+description: "This document outlines variables and examples."
 ---
 
-### Access Variables
+### Access variables
 
 Access the value of a variable by its variable name.
 
@@ -11,13 +12,13 @@ Access the value of a variable by its variable name.
 a + b
 ```
 
-If the value of the variable is a context then a [context entry can be accessed](/docs/reference/feel/language-guide/feel-context-expressions#get-entry--path) by its key. 
+If the value of the variable is a context, a [context entry can be accessed](/docs/reference/feel/language-guide/feel-context-expressions#get-entry--path) by its key.
 
 ```js
 a.b
 ```
 
-:::tip Tip
+:::note
 
 Use a [null-check](/docs/reference/feel/language-guide/feel-boolean-expressions#null-check) if the variable can be `null` or is optional.  
 
@@ -27,13 +28,12 @@ a != null and a.b > 10
 
 :::
 
-### Escape Variable Names
+### Escape variable names
 
 The name of a variable can be any alphanumeric string including `_` (an underscore). For a
-combination of words, it is recommended to use the `camelCase` or the `snake_case` format.
+combination of words, it is recommended to use `camelCase` or the `snake_case` format.
 
-If a variable name or context key contains any special character (e.g. whitespace, dash, etc.) then
-the name can be wrapped into single backquotes/backticks (e.g. ``` `foo bar` ```).
+If a variable name or context key contains any special character (e.g. whitespace, dash, etc.,) the name can be placed in single backticks (e.g. ``` `foo bar` ```).
 
 ```js
 `first name`
@@ -42,5 +42,3 @@ the name can be wrapped into single backquotes/backticks (e.g. ``` `foo bar` ```
 
 order.`total price`
 ```
-
-

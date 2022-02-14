@@ -1,13 +1,15 @@
 ---
 id: feel-built-in-functions-range
-title: Range Functions
+title: Range functions
+description: "This document outlines range functions and examples."
 ---
 
 A set of functions establish relationships between single scalar values and ranges of such values.
 All functions take two arguments and return `true` if the relationship between the argument holds,
 or `false` otherwise.
 
-A scalar value must be of the following type: 
+A scalar value must be of the following type:
+
 * number
 * date
 * time

@@ -1,20 +1,19 @@
 ---
 id: what-is-feel
 title: What is FEEL?
+description: "FEEL is a part of DMN specification of the Object Management Group."
 ---
 
 FEEL (Friendly Enough Expression Language) is a part of
-the [DMN specification](http://www.omg.org/spec/DMN/) of the OMG. It is designed to write
-expressions for decision tables and literal expressions in a simple way what can easily understand
-by business professionals and developers.
+the [DMN specification](http://www.omg.org/spec/DMN/) of the Object Management Group (OMG). It is designed to write expressions for decision tables and literal expressions in a way that is easily understood by business professionals and developers.
 
-## Unary-Tests vs. Expressions
+## Unary-tests vs. expressions
 
-FEEL has two types of expressions for different use cases.
+FEEL has two types of expressions for different use cases:
 
-### Unary-Tests
+### Unary-tests
 
-A unary-tests expression is a special kind of boolean expression. It should be used for the input
+A [unary-tests expression](./language-guide/feel-unary-tests.md) is a special kind of boolean expression. It should be used for the input
 entries of a decision table (i.e. the conditions of a rule).
 
 ```js
@@ -31,12 +30,10 @@ not(2,4)
 // checks if the input value is less than or equal to one day    
 ```
 
-Learn [more](./language-guide/feel-unary-tests.md).
-
 ### Expressions
 
-General expressions that can return values of different types. They can be used everywhere, for
-example, in a decision table as input expression or as output entry.
+[General expressions](./language-guide/feel-expressions-introduction.md) that can return values of different types. They can be used everywhere; for
+example, in a decision table as an input expression or as an output entry.
 
 ```js
 applicant.monthly.income * 12                                           
@@ -49,5 +46,3 @@ sum( credit_history[record_date > date("2011-01-01")].weight )
 
 some ch in credit_history satisfies ch.event = "bankruptcy"      
 ```
-
-Learn [more](./language-guide/feel-expressions-introduction.md).

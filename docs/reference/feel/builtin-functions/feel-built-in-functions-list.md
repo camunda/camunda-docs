@@ -1,6 +1,6 @@
 ---
 id: feel-built-in-functions-list
-title: List Functions
+title: List functions
 description: "This document outlines built-in list functions and examples."
 ---
 
@@ -322,21 +322,21 @@ sort(list: [3,1,4,5,2], precedes: function(x,y) x < y)
 
 ## string join()
 
-Joins a list of strings into a single string. Similar to
+This joins a list of strings into a single string. This is similar to
 Java's [joining](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#joining(java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence))
 function.
 
-If an item of the list is `null` then the item is ignored for the result string. If an item is
-neither a string nor `null` then the function returns `null` instead of a string.
+If an item of the list is `null`, the item is ignored for the result string. If an item is
+neither a string nor `null`, the function returns `null` instead of a string.
 
-* parameters:
-  * `list`: the list of strings to join
-  * `delimiter`: (optional) the string that is used between each element (default: empty string)
-  * `prefix`: (optional) the string that is used at the beginning of the joined result (default:
+* Parameters:
+  * `list`: The list of strings to join
+  * `delimiter`: (Optional) The string used between each element (default: empty string)
+  * `prefix`: (Optional) The string used at the beginning of the joined result (default:
     empty string)
-  * `suffix`: (optional) the string that is used at the end of the joined result (default: empty
+  * `suffix`: (Optional) The string used at the end of the joined result (default: empty
     string)
-* result: the joined list as a string
+* Result: The joined list as a string
 
 ```js
 string join(["a","b","c"])

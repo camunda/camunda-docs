@@ -1,6 +1,6 @@
 ---
 id: feel-built-in-functions-context
-title: Context Functions
+title: Context functions
 description: "This document outlines context functions and a few examples."
 ---
 
@@ -20,7 +20,7 @@ get value({foo: 123}, "foo")
 
 ## get entries()
 
-Returns the entries of the context as list of key-value-pairs.
+Returns the entries of the context as a list of key-value-pairs.
 
 * parameters:
   * `context`: context
@@ -50,7 +50,7 @@ put({x:1}, "y", 2)
 
 ## put all()
 
-Union the given contexts (two or more). Returns a new context that includes all entries of the given contexts. It might override context entries if the keys are equal. The entries are overridden in the same order as the contexts are passed in the method.    
+Union the given contexts (two or more). Returns a new context that includes all entries of the given contexts. It might override context entries if the keys are equal. The entries are overridden in the same order as the contexts are passed in the method.
 
 Returns `null` if one of the values is not a context.
 

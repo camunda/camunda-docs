@@ -1,12 +1,12 @@
 ---
 id: feel-built-in-functions-numeric
-title: Numeric Functions
+title: Numeric functions
 description: "This document outlines built-in numeric functions and examples."
 ---
 
 ## decimal()
 
-Round the given number at the given scale using the given rounding mode. If no rounding mode is passed in then it uses `HALF_EVEN` as default. 
+Round the given number at the given scale using the given rounding mode. If no rounding mode is passed in, it uses `HALF_EVEN` as default.
 
 * parameters:
   * `n`: number

@@ -1,6 +1,6 @@
 ---
 id: feel-built-in-functions-temporal
-title: Temporal Functions
+title: Temporal functions
 description: "This document outlines built-in temporal functions and examples."
 ---
 
@@ -30,9 +30,9 @@ today()
 
 ## day of week()
 
-Returns the day of the week according to the Gregorian calendar. Note that it returns always the english name of the day.
+Returns the day of the week according to the Gregorian calendar. Note that it always returns the English name of the day.
 
-* parameters: 
+* parameters:
   * `date`: date/date-time
 * result: string
 
@@ -69,9 +69,9 @@ week of year(date("2019-09-17"))
 
 ## month of year()
 
-Returns the month of the week according to the Gregorian calendar. Note that it returns always the english name of the month.
+Returns the month of the week according to the Gregorian calendar. Note that it always returns the English name of the month.
 
-* parameters: 
+* parameters:
   * `date`: date/date-time
 * result: string
 
