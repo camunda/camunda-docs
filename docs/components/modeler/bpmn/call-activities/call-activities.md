@@ -44,12 +44,12 @@ It's recommended to disable the attribute `propagateAllChildVariables` or define
 
 ### XML representation
 
-A call activity with static process id:
+A call activity with static process id and propagation of all child variables turned on:
 
 ```xml
-<bpmn:callActivity id="task-A" name="A">
+<bpmn:callActivity id="Call_Activity" name="Call Process A">
   <bpmn:extensionElements>
-    <zeebe:calledElement processId="child-process-id" />
+    <zeebe:calledElement processId="child-process-a" propagateAllChildVariables="true" />
   </bpmn:extensionElements>
 </bpmn:callActivity>
 ```
