@@ -62,34 +62,32 @@ Configure your tests to be dedicated integration tests, and seperate them from u
 Some tools that are interessting to look at involve [JMeter](http://jmeter.apache.org/) for load tests, [SoapUI](http://www.soapui.org/) for functional tests of services, [Selenium](http://www.seleniumhq.org/) for frontend tests and [TestLink](http://testlink.org/) for test scenario descriptions. Also consider to use a JavaScript stack for frontend tests: we use [Mocha](http://mochajs.org/), [Chai](https://github.com/chaijs/chai), [Grunt](http://gruntjs.com/), [Karma](http://karma-runner.github.io), [Protractor](https://angular.github.io/protractor).
 
 
-## Writing process tests using Camunda Cloud and Spring
+## Writing process tests in Java
 
 :::caution Camunda Cloud only
 This section targets Camunda Cloud. Please refer to the specific section below if you are looking for Camunda Platform 7.x. 
 :::
 
-This section describes how to write process tests as unit tests in Java using Spring. This is a common setup of customers, but of course not the only one. Later in this best practice you will find some information on writing tests in other languages like NodeJs or C#.
+This section describes how to write process tests as unit tests in Java. Later in this best practice you will find some information on writing tests in other languages like NodeJs or C#.
+
+When using Java, most customers use Spring Boot. While this is a common setup of customers, it is of course not the only one. You find some more examples on plan Java process tests in the readme of the [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test) project.
 
 
-### Technical setup 
+### Technical setup using Spring
+
+:::caution JUnit 5
+You need to use JUnit 5. Please double check that you really use JUnit 5 in every test class: the `@Test` annotation you import needs to be `org.junit.jupiter.api.Test`.
+:::
 
 1. Use [*JUnit 5*](http://junit.org) as unit test framework.
 2. Use [spring-zeebe](https://github.com/camunda-community-hub/spring-zeebe)
 3. Use `@ZeebeSpringTest` to to ramp up an in-memory process engine.
 4. Use annotations from [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/) to check whether your expectations about the state of the process are met.
-5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) plus [PowerMock](https://github.com/jayway/powermock/) to mock service methods and verify that services are called as expected.
+5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) to mock service methods and verify that services are called as expected.
 
-
-:::JUnit 5
-Double check that you really use JUnit 5, the `@Test` annotation you need to import has the class `org.junit.jupiter.api.Test`
-:::
-
-
-TODO ADJUST CONTENT BELOW - THIS IS THE TARGET TEST
+A test can now look like the following example:
 
 ```java
-
-
 @SpringBootTest
 @ZeebeSpringTest
 public class TestTwitterProcess {
@@ -97,18 +95,14 @@ public class TestTwitterProcess {
     @Autowired
     private ZeebeClient zeebe;
 
-    @Autowired
-    private InMemoryEngine engine;
-
     @MockBean
     private TweetPublicationService tweetPublicationService;
 
     @Test
-    //@ZeebeTestDeployment(resources = "TwitterDemoProcess.bpmn")
-    public void testHappyPath() {
-        TwitterProcessVariables variables = new TwitterProcessVariables();
-        variables.setTweet("Hello world");
-        variables.setApproved(true);
+    public void testTweetApproved() {
+        TwitterProcessVariables variables = new TwitterProcessVariables()
+            .setTweet("Hello world")
+            .setApproved(true);
 
         ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
             .bpmnProcessId("TwitterDemoProcess").latestVersion() //
@@ -117,138 +111,110 @@ public class TestTwitterProcess {
         waitForProcessInstanceCompleted(processInstance);
         Mockito.verify(tweetPublicationService).tweet("Hello world");
     }
-
-    public void testDuplicate() {
-        // throw exception simulating duplicateM
-        Mockito.doThrow(new RuntimeException("DUPLICATE")).when(tweetPublicationService).tweet(anyString());
-
-        // ...
-    }
-
-    public void testRejectionPath() {
-        TwitterProcessVariables variables = new TwitterProcessVariables();
-        variables.setTweet("Hello world");
-        variables.setApproved(false);
-
-        ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
-                .bpmnProcessId("TwitterDemoProcess").latestVersion() //
-                .variables(variables).send().join();
-
-        waitForProcessInstanceCompleted(processInstance);
-        Mockito.verify(tweetPublicationService, never());
-    }
-
-
 }
 ```
 
+### Test scope and mocking
 
-### Test scope: the process definition plus glue code, but no business code
+In such a test case, you want to test the the executable BPMN process definition plus all the glue code which logically belongs to the process definition in a wider sense.  Typical examples of glue code you want to include in a process test are:
 
-We want to test the the executable BPMN process definition plus all the wiring code which still belongs to the process definition in a wider sense:
+* Worker code, typically connected to a service task
+* Expressions (FEEL) used in your process model for gateway decisions or input/output mappings
+* Other glue code, for example a REST API, that just does data mapping and delegates to the workflow engine
 
-<div bpmn="testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="service_task_publish_on_twitter,user_task_review_tweet,service_task_send_rejection_notification" />
+In the example above, this is the worker code and the REST API:
 
-Consider expression language and adapter logic (your workers) as being part of this "wider" process definition. A number of such things might be referenced in the BPMN XML:
+![Process test scope example](testing-process-definitions-assets/process-test-scope-example.png)
 
-<span className="callout">1</span>
-
-A *java delegate* or an (e.g. JUEL) *expression* is typically called by a service task.
-
-<span className="callout">2</span>
-
-A *task listener* sending an e-Mail to the boss might be defined behind the user task.
-
-<span className="callout">3</span>
-
-An *execution listener* logging the rejection mail into a folder might be defined behind the service task.
-
-Consider services executing process engine independent business code as *not* belonging to the process definition in a wider sense anymore.
+Workflow engine independent business code should *not* be included in the tests. In the twitter example, the `TwitterService` will be mocked, and the `TwitterWorker` will still read process variables and call this mock. This way you can make test the process model, the glue code, and the data flow in your process test.
 
 
-Mock everything which does not belong to the "wider" process definition explained above, e.g. a business service method called by your worker. Consider the service task "Publish on Twitter" which delegates to java code:
+The following code examples highlights the important aspects around mocking.
 
-```xml
-<serviceTask id="service_task_publish_on_twitter" camunda:delegateExpression="#{tweetPublicationDelegate}" name="Publish on Twitter">
-</serviceTask>
-```
-
-And this *java delegate* itself calls another "business service" method:
+The `PublishTweetWorker` is executed as part of the test. It does input data mapping **(1)** and also translates a specific business exception into a BPMN error **(2)**:
 
 ```java
-@Named
-public class TweetPublicationDelegate implements JavaDelegate {
+@Autowired
+private TwitterService twitterService;
 
-  @Inject
-  private TweetPublicationService tweetPublicationService;
-
-  public void execute(DelegateExecution execution) throws Exception {
-    String tweet = new TwitterDemoProcessVariables(execution).getTweet();  // 1
-    // ...
+@ZeebeWorker( type = "publish-tweet", autoComplete = true)
+public void handleTweet(@ZeebeVariablesAsType TwitterProcessVariables variables) throws Exception {
     try {
-      tweetPublicationService.tweet(tweet); // 2
-    } catch (DuplicateTweetException e) {
-      throw new BpmnError("duplicateMessage"); // 3
+        twitterService.tweet(
+          variables.getTweet() // 1
+        ); 
+    } catch (DuplicateTweetException ex) { // 2
+        throw new ZeebeBpmnError("duplicateMessage", "Could not post tweet, it is a duplicate.");
     }
-  }
-// ...
+}
 ```
 
-<span className="callout">1</span>
+The `TwitterService` is considered a business service (it could for example wrap the twitter4j API) and shall *not* be executed during the test. This is why this interface is mocked:
 
-Retrieving the process variable belongs to the *wiring delegate code*, is therefore part of the "wider" process definition and *is not mocked*. (For an explanation of the variable accessor class used here, see [handling data in processes](../handling-data-in-processes/)).
-
-<span className="callout">2</span>
-
-This method is executing process engine independent *"business" code*, is therefore not part of the "wider" process definition anymore and *needs to be mocked*.
-
-<span className="callout">3</span>
-
-The process engine specific exception is typically not produced by your business service method. Therefore we need to *translate the business exception* to the exception needed to drive the process - again code being part of the "wider" process definition and *not mocked*.
-
-Let's now look at how the mocking is wired in our test class:
 
 ```java
-@Mock // 1
-private TweetPublicationService tweetPublicationService;
+@MockBean
+private TwitterService tweetPublicationService;
 
-@Before
-public void setup() {
-  // set up java delegate to use the mocked tweet service
-  TweetPublicationDelegate tweetPublicationDelegate = new TweetPublicationDelegate();  // 2
-  tweetPublicationDelegate.setTweetService(tweetPublicationService);
-  // register a bean name with mock expression manager
-  Mocks.register("tweetPublicationDelegate", tweetPublicationDelegate); // 3
+@Test
+public void testTweetApproved() throws Exception {
+    // ...
+    // Using Mockito you can make sure a business method was called with the expected parameter
+    Mockito.verify(tweetPublicationService).tweet("Hello world"); 
 }
 
-@After
-public void teardown() {
-  Mocks.reset();  // 3
-}
+@Test
+public void testDuplicate() throws Exception {
+    // Using Mockito you can define what should happen if a method is called, in this case an exception is thrown to simulate a business error
+    Mockito.doThrow(new DuplicateTweetException("DUPLICATE")).when(tweetPublicationService).tweet(anyString());
+    //...
 ```
-
-<span className="callout">1</span>
-
-Annotated mock is automatically instantiated (by PowerMockRunner).
-
-<span className="callout">2</span>
-
-Java Delegate is prepared to work with this mocked service.
-
-<span className="callout">3</span>
-
-Java Delegate is registered under the bean name used in the process definition (to be resolved by MockExpressionManager) and the registration is cleaned up after each test.
-
-To stress it another time: please avoid to execute real business service methods within scope 1.
-
 
 
 ### Drive the process and assert the state
 
-Now *drive* the process from waitstate to waitstate and *assert* that you see the expected process and variable states. Divide and conquer by *testing your process in chunks*.
+For tests, you drive the process from waitstate to waitstate and assert that you see the expected process and variable states. The test method `testTweetApproved()` tests the happy path to a published tweet:
 
-- Fully test the *Happy Path* in one (big) test method, as this makes sure you have one consistent data flow in your process. Additionally it is easy to read and to understand, making it a great starting point for new developers to understand your process / process test case.
-- Test *forks/detours* from the happy path as well as *errors/exceptional* pathes as chunks in seperate (smaller) test methods. This allows to unit test in meaningful units.
+```java
+@Test
+public void testTweetApproved() throws Exception {
+    TwitterProcessVariables variables = new TwitterProcessVariables()
+        .setTweet("Hello world")
+        .setApproved(true); // TODO: Add Human Task to the test
+
+    ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
+        .bpmnProcessId("TwitterDemoProcess").latestVersion() //
+        .variables(variables) //
+        .send().join();
+
+    waitForProcessInstanceCompleted(processInstance);
+
+    assertThat(processInstance)
+            .hasPassedElement("end_event_tweet_published")
+            .hasNotPassedElement("end_event_tweet_rejected")
+            .isCompleted();
+
+    Mockito.verify(twitterService).tweet("Hello world");
+    Mockito.verifyNoMoreInteractions(twitterService);
+}
+```
+
+Be careful not to "overspecify" your test method by asserting too much. Your process definition will most probably evolve in the future and such changes should break as little test code as possible, but just as much as necessary! As a rule of thumb *always* assert that the expected *external effects* of your process really took place (e.g. that business services were called as expected). On top of that, carefully choose, which aspects of *internal process state* are important enough so that you want your test method to warn about any related change later on.
+
+
+:::caution Testing Human Tasks
+Asserting human tasks is currently under development in `zeebe-process-test` and will be added soon. At the moment, you cannot yet assert human tasks in your test cases.
+:::
+
+
+
+
+ ### Testing your process in chunks 
+
+Divide and conquer by *testing your process in chunks*.
+
+- Fully test the *Happy Path* in one (big) test method. This makes sure you have one consistent data flow in your process. Additionally it is easy to read and to understand, making it a great starting point for new developers to understand your process / process test case.
+- Test *forks/detours* from the happy path as well as *errors/exceptional* pathes as chunks in seperate test methods. This allows to unit test in meaningful units.
 
 Consider the important chunks and pathes the Tweet Approval Process consists of:
 
@@ -256,207 +222,64 @@ Consider the important chunks and pathes the Tweet Approval Process consists of:
 
 <span className="callout">1</span>
 
-It might be that the tweet just gets published. The *happy path*! 
+The *happy path*: The tweet just gets published. 
 
 <span className="callout">2</span>
 
-It might also be that the tweet gets rejected. The tweeting employee has to live with that path! 
+The tweet gets rejected.
 
 <span className="callout">3</span>
 
-It might also happen that a duplicated tweet gets rejected by twitter. A seldomly happening error path! 
-
-For bigger processes, conciously decide, whether you want to test the full *Happy Path as one long unit test* or not. On one hand, one long unit test can be easier to write and makes sure that the variables/data flow works for that path. On the other hand, if you want to follow a more "purist" unit testing approach, test the happy path in chunks, too. In this case it becomes absolutely crucial that you assert the expected variables/data state at the borders of your chunks.
+A duplicated tweet gets rejected by twitter.
 
 
-
-#### Test the happy path
-
-The test method `testTweetApproved()` tests the happy path to a published tweet:
+The tests for the exceptional paths are basically very similar to the happy path in our example:
 
 ```java
 @Test
-@Deployment(resources = "twitter/TwitterDemoProcess.bpmn")
-public void testTweetApproved() {
-  // given
-  ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(
-    "TwitterDemoProcess",
-    withVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET, TWEET)); // 1
-  assertThat(processInstance).isStarted();
-  // when
-  complete(task(), withVariables(TwitterDemoProcessConstants.VAR_NAME_APPROVED, true)); //2 
-  // then
-  assertThat(processInstance) // 3
-    .hasPassed("end_event_tweet_published")
-    .hasNotPassed("end_event_tweet_rejected")
-    .isEnded();
-  verify(tweetPublicationService).tweet(TWEET); // 4
-  verifyNoMoreInteractions(tweetPublicationService);
-```
+public void testRejectionPath() throws Exception {
+    TwitterProcessVariables variables = new TwitterProcessVariables();
+    variables.setTweet("Hello world");
+    variables.setApproved(false);
 
-<span className="callout">1</span>
+    ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
+            .bpmnProcessId("TwitterDemoProcess").latestVersion() //
+            .variables(variables) //
+            .send().join();
 
-Create a new process instance. You may want to use a submethod to start this process instance instead, as described in the next section.
-
-<span className="callout">2</span>
-
-Drive the process to its next waitstate, e.g. by completing a waiting user task. You may use convenience methods provided by camunda-bpm-assert, but you may also choose to directly use the process engine API.
-
-<span className="callout">3</span>
-
-Assert that your process is in the expected state.
-
-<span className="callout">4</span>
-
-Verify with your mocking library that your business service methods were called as expected.
-
-Be careful not to "overspecify" your test method by asserting too much. Your process definition will most probably evolve in the future and such changes should break as little test code as possible, but just as much as necessary! As a rule of thumb *always* assert that the expected *external effects* of your process really took place (e.g. that business services were called as expected). On top of that, carefully choose, which aspects of *internal process state* are important enough so that you want your test method to warn about any related change later on.
-
-#### Create submethods to start the process instance under test
-
-When testing *chunks* it is a good practice to implement submethods to *navigate the process into the node(s)* needed for several of your test methods as start node(s). Here you see one such submethod which simply creates a new process instance at its start event:
-
-```java
-// create a new process instance
-ProcessInstance newTweet(Map<String, Object> variables) {
-  ProcessInstance processInstance = runtimeService().startProcessInstanceByKey( // 1
-    "TwitterDemoProcess", variables
-  );
-  assertThat(processInstance) // 2
-    .isStarted()
-    .hasVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET);
-  return processInstance;
+    waitForProcessInstanceCompleted(processInstance);
+    waitForProcessInstanceHasPassedElement(processInstance, "end_event_tweet_rejected");
+    Mockito.verify(twitterService, never()).tweet(anyString());
 }
 ```
 
-<span className="callout">1</span>
-
-*Create a new process* instance (here "by key") and *initialize* some needed *process variables*.
-
-<span className="callout">2</span>
-
-At the end of the submethod, consider to assert that you leave the process in the expected state.
-
-And here you see a second submethod which creates a new process instance *right in the middle of the process*!
-
-```java
-// create a process instance directly at the point at which a tweet was rejected
-ProcessInstance rejectedTweet(Map<String, Object> variables) {
-  ProcessInstance processInstance = runtimeService()
-    .createProcessInstanceByKey("TwitterDemoProcess") // 1
-    .startBeforeActivity("service_task_publish_on_twitter")
-    .setVariables(variables)
-  .execute();
-  assertThat(processInstance) // 3
-    .isStarted()
-    .hasPassed("service_task_publish_on_twitter")
-    .hasVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET);
-  return processInstance;
-}
-```
-
-<span className="callout">1</span>
-
-*Create a modified process* instance by key and *initialize* some needed *process variables*.
-
-<span className="callout">2</span>
-
-At the end of the submethod, consider to assert that you leave the process in the expected state.
-
-As shown in the example, we use "Process Instance Modification" to implement such start methods. This allows to easily *test processes in chunks*, as shown in the next section.
-
-
-
-#### Test the exceptional pathes in chunks
-
-There are two exceptional pathes we test as chunks in this example:
-
-* The test method *testTweetRejected()* tests the path to a rejected tweet, the same four steps as already discussed occur again, just this time, the user task is completed with a tweet rejection:
+and: 
 
 ```java
 @Test
-@Deployment(resources = "twitter/TwitterDemoProcess.bpmn")
-public void testTweetRejected() {
-  // given
-  ProcessInstance processInstance = newTweet(withVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET, TWEET)); // 1
-  // when
-  complete(task(), withVariables(TwitterDemoProcessConstants.VAR_NAME_APPROVED, false));  // 2
-  // then
-  assertThat(processInstance) // 3
-    .hasPassed("end_event_tweet_rejected")
-    .hasNotPassed("end_event_tweet_published")
-    .isEnded();
-  verifyZeroInteractions(tweetPublicationService);  // 4
+public void testDuplicate() throws Exception {
+    // throw exception simulating duplicateM
+    Mockito.doThrow(new DuplicateTweetException("DUPLICATE")).when(twitterService).tweet(anyString());
+
+    TwitterProcessVariables variables = new TwitterProcessVariables()
+            .setTweet("Hello world")
+            .setApproved(true);
+
+    ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
+            .bpmnProcessId("TwitterDemoProcess").latestVersion() //
+            .variables(variables) //
+            .send().join();
+
+    waitForProcessInstanceHasPassedElement(processInstance, "boundary_event_tweet_duplicated");
+    // TODO: Add human task to test case
 }
 ```
 
-* The test method *testTweetDuplicated()* tests what happens in case a tweet turns out to be a duplicate and is rejected by Twitter. For this case, we attached an error event to the service task "Publish on Twitter". In the BPMN XML we see an error event defined with an errorCode "duplicateMessage".
-
-```xml
-  <boundaryEvent id="boundary_event_tweet_duplicated" name="Tweet duplicated" attachedToRef="service_task_publish_on_twitter">
-    <errorEventDefinition id="error_event_definition_tweet_duplicated" errorRef="error_tweet_duplicated"/>
-  </boundaryEvent>
-<error id="error_tweet_duplicated" errorCode="duplicateMessage" name="Tweet duplicated"/>
-```
-
-Above, we already saw the java delegate code throwing the BpmnError expcetion with that code "duplicateMessage". And here comes the method testing for the case a tweet is duplicated:
-
-```java
-@Test
-@Deployment(resources = "twitter/TwitterDemoProcess.bpmn")
-public void testTweetDuplicated() {
-  // given
-  doThrow(new DuplicateTweetException()) // 1
-    .when(tweetPublicationService).tweet(anyString());
-  // when
-  ProcessInstance processInstance = rejectedTweet(withVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET, TWEET));  // 2
-  // then
-  assertThat(processInstance) // 3
-    .hasPassed("boundary_event_tweet_duplicated")
-    .hasNotPassed("end_event_tweet_rejected").hasNotPassed("end_event_tweet_published")
-    .isWaitingAt("user_task_handle_duplicate");
-  verify(tweetPublicationService).tweet(TWEET);  // 4
-  verifyNoMoreInteractions(tweetPublicationService);
-  // when
-  complete(task()); // 5
-  // then
-  assertThat(processInstance)  // 6
-    .isWaitingAt("user_task_review_tweet")
-    .hasVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET)
-    .task().isAssignedTo("demo");
-}
-```
-
-<span className="callout">1</span>
-
-Initialise your mocked business service method to throw the business exception meant for that case.
-
-<span className="callout">2</span>
-
-Create a new process instance by calling a submethod starting the process "right in the middle" - as already xref:_create_submethods_to_start_the_process_instance_under_test[shown above].
-
-<span className="callout">3</span>
-
-Assert that your process is in the expected state. Again, be careful not to "overspecify" your test method by asserting too much, but there is a grey area of what you consider to be "just enough", of course.
-
-<span className="callout">4</span>
-
-Verify with your mocking library that your business service methods were called as expected.
-
-<span className="callout">5</span>
-
-You can move on and decide to test even more within that method. Here we complete the "Handle duplicate tweet" task in order ...
-
-<span className="callout">6</span>
-
-... to assert that the process moves again back to the "Review tweet" task and e.g. that this new task is assigned to the expected user etc.
-
-In order to make  your test code better readable, use developer-friendly naming conventions for ids (see [Naming Technically Relevant IDs](../../modeling/naming-technial-relevant-ids). If you have a lot of process definitions to test, consider to generate constant classes (via e.g. XSLT) directly from BPMN XML.
 
 
 
 
-## Writing polyglot process tests using Camunda Cloud
+## Writing polyglot process tests
 
 TODO
 
