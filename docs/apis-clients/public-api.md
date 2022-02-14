@@ -28,7 +28,4 @@ All non-implementation Java packages (package name does not contain `impl`) of t
 
 ## Other APIs and clients
 
-Although we cannot currently guarantee backwards compatibility of other APIs and clients, we aim to offer backwards compatibility still on a best
-effort basis.
-
-[//]:# (Thoughts on a better way to word the sentence above?)
+Currently we cannot *guarantee* backwards compatibility with other APIs and clients, though we do work to offer backwards compatibility to the best of our ability.
