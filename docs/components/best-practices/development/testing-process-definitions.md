@@ -18,54 +18,43 @@ bookchapter: 5
 
 Test your executable BPMN processes, they are software. If possible, do automated unit tests with a fast in-memory workflow engine. Before releasing, verify with integration tests close to your real-life environment, which might include human-driven, exploratory integration tests.
 
+This best practice uses this simple process example:
+
+<div bpmn="testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="user_task_review_tweet,service_task_send_rejection_notification,service_task_publish_on_twitter,user_task_handle_duplicate" />
+
+<span className="callout">1</span>
+
+New tweets need to be reviewed before publication.
+
+<span className="callout">2</span>
+
+The tweeting employee is notified about rejected tweets.
+
+<span className="callout">3</span>
+
+Approved tweets get published.
+
+<span className="callout">4</span>
+
+Duplicate tweets are rejected by Twitter and be dealt with by the original author (e.g. rephrased) just to be reviewed again.
 
 
 ## Testing Scopes
 
 There are basically three typical test scopes disced when building process solutions:
 
-1. **Unit tests**: Testing all programming code you developed for your process solution. This is typically pretty much independant of the process model and Camunda.
-2. **Process tests**: Testing the expected behavior of the process model, including glue code and specicially the data flowing through the process model.
-3. **Integration tests**: Testing the system in a close-to-real-life-environment to make sure it is really working. 
+1. **Unit tests**: Testing glue code / programming code you developed for your process solution. How to unit test your software itself is not discussed here, as this is a common practice for software development.
+
+2. **Process tests**: Testing the expected behavior of the process model, including glue code and specicially the data flowing through the process model. Those tests should run frequently, so they should behave like unit tests (quick turnaround, no need for external resources, ...).
+
+3. **Integration tests**: Testing the system in a close-to-real-life-environment to make sure it is really working. This is typically "just" done before releasing a new version of your system. Those tests include *human-driven*, *exploratory* tests.
 
 ![Scopes](testing-process-definitions-assets/scopes.png)
-
-### Unit tests (Scope 1)
-
-Unit testing itself is not discussed here, as this is a common practice for software development.
-
-### Process tests (Scope 2)
-
-Test the execution behaviour of a process definition. To run those tests frequently, they should behave like unit tests, executed single threaded and in-memory without the need for an external resource. 
-
-
-### Integration tests (Scope 3)
-
-Test the process close to to a real-life environment, which is potentially *multi threaded*.
-
-Verify that "it really works" before releasing a new version of your process definition, which includes *human-driven*, *exploratory* tests.
-
-Clearly *define your goals* for scope 3! Goals could be
-
-* end user & acceptance tests,
-* complete end-to-end tests,
-* performance & load tests, etc...
-
-Carefully consider to *automate* tests on scope 3. You need to look at the overall effort spent on writing test automation code and maintaining it, when being compared with executing human-driven tests for your software project's lifespan. The best choice depends very much on the frequency of regression test runs!
-
-Most effort is typically invested in setting up proper test data in surrounding systems.
-
-
-Configure your tests to be dedicated integration tests, and seperate them from unit or process tests.
-
-
-Some tools that are interessting to look at involve [JMeter](http://jmeter.apache.org/) for load tests, [SoapUI](http://www.soapui.org/) for functional tests of services, [Selenium](http://www.seleniumhq.org/) for frontend tests and [TestLink](http://testlink.org/) for test scenario descriptions. Also consider to use a JavaScript stack for frontend tests: we use [Mocha](http://mochajs.org/), [Chai](https://github.com/chaijs/chai), [Grunt](http://gruntjs.com/), [Karma](http://karma-runner.github.io), [Protractor](https://angular.github.io/protractor).
-
 
 ## Writing process tests in Java
 
 :::caution Camunda Cloud only
-This section targets Camunda Cloud. Please refer to the specific section below if you are looking for Camunda Platform 7.x. 
+This section targets Camunda Cloud. Please refer to the specific Camunda 7 section below if you are looking for Camunda Platform 7.x. 
 :::
 
 This section describes how to write process tests as unit tests in Java. Later in this best practice you will find some information on writing tests in other languages like NodeJs or C#.
@@ -85,7 +74,7 @@ You need to use JUnit 5. Please double check that you really use JUnit 5 in ever
 4. Use annotations from [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/) to check whether your expectations about the state of the process are met.
 5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) to mock service methods and verify that services are called as expected.
 
-A test can now look like the following example:
+A test can now look like the following example. The [complete source code is available on GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java):
 
 ```java
 @SpringBootTest
@@ -98,18 +87,35 @@ public class TestTwitterProcess {
     @MockBean
     private TweetPublicationService tweetPublicationService;
 
+
     @Test
-    public void testTweetApproved() {
+    public void testTweetApproved() throws Exception {
+        // Prepare data input
         TwitterProcessVariables variables = new TwitterProcessVariables()
             .setTweet("Hello world")
-            .setApproved(true);
+            .setBoss("Zeebot");
 
+        // start a process instance
         ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
             .bpmnProcessId("TwitterDemoProcess").latestVersion() //
-            .variables(variables).send().join();
+            .variables(variables) //
+            .send().join();
 
+        // And then retrieve the UserTask and complete it with 'approved = true'
+        waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", true));
+
+        // Now the process should run to the end
         waitForProcessInstanceCompleted(processInstance);
-        Mockito.verify(tweetPublicationService).tweet("Hello world");
+
+        // Let's assert that it passed certain BPMN elements (more to show off features here)
+        assertThat(processInstance)
+                .hasPassedElement("end_event_tweet_published")
+                .hasNotPassedElement("end_event_tweet_rejected")
+                .isCompleted();
+
+        // And verify it caused the right side effects b calling the business methods
+        Mockito.verify(twitterService).tweet("Hello world");
+        Mockito.verifyNoMoreInteractions(twitterService);
     }
 }
 ```
@@ -173,50 +179,83 @@ public void testDuplicate() throws Exception {
 
 ### Drive the process and assert the state
 
-For tests, you drive the process from waitstate to waitstate and assert that you see the expected process and variable states. The test method `testTweetApproved()` tests the happy path to a published tweet:
+For tests, you drive the process from waitstate to waitstate and assert that you see the expected process and variable states. For example, you might implement a test to test the scneario, that a tweet gets approved:
 
 ```java
 @Test
 public void testTweetApproved() throws Exception {
+    // Prepare data input
     TwitterProcessVariables variables = new TwitterProcessVariables()
         .setTweet("Hello world")
-        .setApproved(true); // TODO: Add Human Task to the test
+        .setBoss("Zeebot");
 
+    // start a process instance <1>
     ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
         .bpmnProcessId("TwitterDemoProcess").latestVersion() //
         .variables(variables) //
         .send().join();
 
+    // And then retrieve the UserTask and complete it with 'approved = true' <2>
+    waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", true));
+
+    // Now the process should run to the end
     waitForProcessInstanceCompleted(processInstance);
 
+    // Let's assert that it passed certain BPMN elements (more to show off features here) <3>
     assertThat(processInstance)
             .hasPassedElement("end_event_tweet_published")
             .hasNotPassedElement("end_event_tweet_rejected")
             .isCompleted();
 
+    // And verify it caused the right side effects b calling the business methods <4>
     Mockito.verify(twitterService).tweet("Hello world");
     Mockito.verifyNoMoreInteractions(twitterService);
+}
+```
+
+1. Create a new process instance. You may want to use some glue code to start your process (e.g. the REST API facade), or also create helper methods within your test class.
+
+2. Drive the process to its next waitstate, e.g. by completing a waiting user task. You may extract boilerplate code into helper methods like shown below.
+
+3. Assert that your process is in the expected state.
+
+4. Verify with your mocking library that your business service methods were called as expected.
+
+This is the helper method used to verify the workflow engine arrived in a specific user task, and complete that task with passing on some variables. As you can see, [a user task behaves like a service task with the type `io.camunda.zeebe:userTask`](/docs/components/modeler/bpmn/user-tasks/user-tasks/):
+
+```java
+public void waitForUserTaskAndComplete(String userTaskId, Map<String, Object> variables) {
+    // Let the workflow engine do whatever it needs to do
+    inMemoryEngine.waitForIdleState();
+
+    // Now get all user tasks
+    List<ActivatedJob> jobs = zeebe.newActivateJobsCommand().jobType(USER_TASK_JOB_TYPE).maxJobsToActivate(1).send().join().getJobs();
+
+    // Should be only one
+    assertTrue(jobs.size()>0, "Job for user task '" + userTaskId + "' does not exist");
+    ActivatedJob userTaskJob = jobs.get(0);
+    // Make sure it is the right one
+    if (userTaskId!=null) {
+        assertEquals(userTaskId, userTaskJob.getElementId());
+    }
+
+    // And complete it passing the variables
+    if (variables!=null) {
+        zeebe.newCompleteCommand(userTaskJob.getKey()).variables(variables).send().join();
+    } else {
+        zeebe.newCompleteCommand(userTaskJob.getKey()).send().join();
+    }
 }
 ```
 
 Be careful not to "overspecify" your test method by asserting too much. Your process definition will most probably evolve in the future and such changes should break as little test code as possible, but just as much as necessary! As a rule of thumb *always* assert that the expected *external effects* of your process really took place (e.g. that business services were called as expected). On top of that, carefully choose, which aspects of *internal process state* are important enough so that you want your test method to warn about any related change later on.
 
 
-:::caution Testing Human Tasks
-Asserting human tasks is currently under development in `zeebe-process-test` and will be added soon. At the moment, you cannot yet assert human tasks in your test cases.
-:::
-
-
 
 
  ### Testing your process in chunks 
 
-Divide and conquer by *testing your process in chunks*.
-
-- Fully test the *Happy Path* in one (big) test method. This makes sure you have one consistent data flow in your process. Additionally it is easy to read and to understand, making it a great starting point for new developers to understand your process / process test case.
-- Test *forks/detours* from the happy path as well as *errors/exceptional* pathes as chunks in seperate test methods. This allows to unit test in meaningful units.
-
-Consider the important chunks and pathes the Tweet Approval Process consists of:
+Divide and conquer by *testing your process in chunks*. Consider the important chunks and pathes the Tweet Approval Process consists of:
 
 <div bpmn="testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="end_event_tweet_published,end_event_tweet_rejected,boundary_event_tweet_duplicated" />
 
@@ -232,20 +271,65 @@ The tweet gets rejected.
 
 A duplicated tweet gets rejected by twitter.
 
+#### Testing the happy path
+
+The happy path is kind of the default scenario with a positive outcome, so no exceptions or errors or deviations are experienced. 
+
+Fully test the *Happy Path* in one (big) test method. This makes sure you have one consistent data flow in your process. Additionally it is easy to read and to understand, making it a great starting point for new developers to understand your process / process test case.
+
+You were already exposed to the happy path in our example, which is the scneario that the tweet gets approved:
+
+```java
+@Test
+public void testTweetApproved() throws Exception {
+    // Prepare data input
+    TwitterProcessVariables variables = new TwitterProcessVariables()
+        .setTweet("Hello world")
+        .setBoss("Zeebot");
+
+    // start a process instance <1>
+    ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
+        .bpmnProcessId("TwitterDemoProcess").latestVersion() //
+        .variables(variables) //
+        .send().join();
+
+    // And then retrieve the UserTask and complete it with 'approved = true' <2>
+    waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", true));
+
+    // Now the process should run to the end
+    waitForProcessInstanceCompleted(processInstance);
+
+    // Let's assert that it passed certain BPMN elements (more to show off features here) <3>
+    assertThat(processInstance)
+            .hasPassedElement("end_event_tweet_published")
+            .hasNotPassedElement("end_event_tweet_rejected")
+            .isCompleted();
+
+    // And verify it caused the right side effects b calling the business methods <4>
+    Mockito.verify(twitterService).tweet("Hello world");
+    Mockito.verifyNoMoreInteractions(twitterService);
+}
+```
+
+#### Testing detours
+
+Test *forks/detours* from the happy path as well as *errors/exceptional* pathes as chunks in seperate test methods. This allows to unit test in meaningful units. 
 
 The tests for the exceptional paths are basically very similar to the happy path in our example:
 
 ```java
 @Test
 public void testRejectionPath() throws Exception {
-    TwitterProcessVariables variables = new TwitterProcessVariables();
-    variables.setTweet("Hello world");
-    variables.setApproved(false);
+    TwitterProcessVariables variables = new TwitterProcessVariables()
+      .setTweet("Hello world")
+      .setBoss("Zeebot");
 
     ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
             .bpmnProcessId("TwitterDemoProcess").latestVersion() //
             .variables(variables) //
             .send().join();
+
+    waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", false));
 
     waitForProcessInstanceCompleted(processInstance);
     waitForProcessInstanceHasPassedElement(processInstance, "end_event_tweet_rejected");
@@ -257,21 +341,25 @@ and:
 
 ```java
 @Test
-public void testDuplicate() throws Exception {
+public void testDuplicateTweet() throws Exception {
     // throw exception simulating duplicateM
     Mockito.doThrow(new DuplicateTweetException("DUPLICATE")).when(twitterService).tweet(anyString());
 
     TwitterProcessVariables variables = new TwitterProcessVariables()
             .setTweet("Hello world")
-            .setApproved(true);
+            .setAuthor("bernd")
+            .setBoss("Zeebot");
 
     ProcessInstanceEvent processInstance = zeebe.newCreateInstanceCommand() //
             .bpmnProcessId("TwitterDemoProcess").latestVersion() //
             .variables(variables) //
             .send().join();
 
+    waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", true));
+
     waitForProcessInstanceHasPassedElement(processInstance, "boundary_event_tweet_duplicated");
     // TODO: Add human task to test case
+    waitForUserTaskAndComplete("user_task_handle_duplicate", new HashMap<>());
 }
 ```
 
@@ -283,8 +371,32 @@ public void testDuplicate() throws Exception {
 
 TODO
 
+* How to provision / cleanup engine (API to create cluster)
+* Use the API / Language client to drive your process
+* No assertions available at the moment (probably use history API?)
+* Assert side effects / workers
+
+* Example in NodeJS?
 
 
+
+## Integration tests
+
+Test the process in a close-to-real-life environment. This verifies that it really works before releasing a new version of your process definition, which includes *human-driven*, *exploratory* tests.
+
+Clearly *define your goals* for integration tests! Goals could be
+
+* end user & acceptance tests,
+* complete end-to-end tests,
+* performance & load tests, etc...
+
+Carefully consider to *automate* tests on scope 3. You need to look at the overall effort spent on writing test automation code and maintaining it, when being compared with executing human-driven tests for your software project's lifespan. The best choice depends very much on the frequency of regression test runs.
+
+Most effort is typically invested in setting up proper test data in surrounding systems.
+
+Configure your tests to be dedicated integration tests, and seperate them from unit or process tests.
+
+You can use typical industry standard tools for integration testing together with Camunda.
 
 
 
@@ -296,7 +408,9 @@ TODO
 This section targets Camunda Platform 7.x only. Please refer to the previous sections if you are looking for Camunda Cloud. 
 :::
 
-Camunda Platform 7 also has support for writing tests in Java:
+Camunda Platform 7 also has support for writing tests in Java. This section gives you an example, the basic ideas of test scopes and testing in chunks are also valid with Camunda Platform 7.
+
+Use:
 
 1. Use [*JUnit*](http://junit.org) as unit test framework.
 2. Use Camunda's [JUnit Rule](reference/javadoc/?org/camunda/bpm/engine/test/ProcessEngineRule.html) to ramp up an in-memory process engine where the [JobExecutor](user-guide/process-engine/the-job-executor/) is turned off.
@@ -306,27 +420,8 @@ Camunda Platform 7 also has support for writing tests in Java:
 6. Use Camunda's [MockExpressionManager](reference/javadoc/?org/camunda/bpm/engine/test/mock/MockExpressionManager.html) to resolve bean names used in your process definition without the need to ramp up the dependency injection framework (like CDI or Spring).
 7. Use an [In-Memory H2 database](http://www.h2database.com/html/features.html#in_memory_databases) as default database to test processes on developer machines. If required, you can run the same tests on *multiple databases*, e.g. Oracle, DB2, or MS-SQL on a CI-Server. To achieve that, you can make use of (e.g. maven) profiles and Java properties files for database configuration.
 
+Let's use the same example as above:
 
-
-To give an example we now test the *Tweet Approval Process* - a simple example process we use in various situations.
-
-<div bpmn="testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="user_task_review_tweet,service_task_send_rejection_notification,service_task_publish_on_twitter,user_task_handle_duplicate" />
-
-<span className="callout">1</span>
-
-New tweets need to be reviewed before publication.
-
-<span className="callout">2</span>
-
-The tweeting employee is notified about rejected tweets.
-
-<span className="callout">3</span>
-
-Approved tweets get published.
-
-<span className="callout">4</span>
-
-Duplicate tweets need to be dealt with, e.g. rephrased, and then reviewed again.
 
 A typical test case looks like this:
 
