@@ -100,13 +100,13 @@ Operate needs a connection to the Zeebe Broker to start the import and execute u
 
 ### Settings to connect
 
-Name | Description | Default value
------|-------------|--------------
-camunda.operate.zeebe.gatewayAddress | Gateway address that points to Zeebe as hostname and port. | localhost:26500
+Name | Description                                                                                                                 | Default value
+-----|-----------------------------------------------------------------------------------------------------------------------------|--------------
+camunda.operate.zeebe.gatewayAddress | Gateway address that points to Zeebe as hostname and port.                                                                  | localhost:26500 |
+camunda.operate.zeebe.secure | Should the connection be secure via Transport Layer Security (TLS).                                                     | false |
+camunda.operate.zeebe.certificatePath | Path to certificate which is used by Zeebe. This is necessary when the certificate isn't registered in the Operating System | - |
 
-:::note
-Currently, Operate does not support TLS communication with Zeebe.
-:::
+Please see also [Zeebe Secure Client Communication](/docs/self-managed/zeebe-deployment/security/secure-client-communication/)
 
 ### A snippet from application.yml
 
@@ -115,6 +115,8 @@ camunda.operate:
   zeebe:
     # Gateway host and port
     gatewayAddress: localhost:26500
+    secure: true
+    certificatePath: /usr/local/share/zeebe.key.pem
 ```
 
 ## Zeebe Elasticsearch exporter
