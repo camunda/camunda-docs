@@ -26,7 +26,7 @@ Note that this document assumes some understanding of fundamentals of underlying
 
 ### Setting up monitoring
 
-It's important to **set up proper monitoring** as described in our [Monitoring Best Practice](./operating-camunda/). Writing the value of certain performance indicators over time can definitely help to judge the urgency of certain bottlenecks or to warn you before an overload will happen.
+It's important to **set up proper monitoring** as described in our [Monitoring Best Practice](../operating-camunda-c7/). Writing the value of certain performance indicators over time can definitely help to judge the urgency of certain bottlenecks or to warn you before an overload will happen.
 
 ### Runtime database
 
@@ -81,7 +81,7 @@ Typical use cases are:
 
 ### Thread handling and the job executor
 
-Make sure you understand [save points and threading behavior](../development/understanding-transaction-handling-c7/).
+Make sure you understand [save points and threading behavior](../../development/understanding-transaction-handling-c7/).
 
 Save points are the tool to change threading and scaling behavior of a process instance. The more you use it, the more work will be done by the [Job Executor](https://docs.camunda.org/manual/latest/user-guide/process-engine/the-job-executor/), which is the key component to look at when you want to improve your system's performance.
 
@@ -164,7 +164,7 @@ Problem:
 
 Solution:
 
-- Store variables in external data-store or in separate tables in the Camunda schema. See [example solution](../../xxx/enhancing-tasklists-with-business-data/#implementing-a-custom-process-task-info-entity) and learn more about [handling data in processes](../../development/handling-data-in-processes/).
+- Store variables in external data-store or in separate tables in the Camunda schema. Learn more about [handling data in processes](../../development/handling-data-in-processes/).
 
 
 

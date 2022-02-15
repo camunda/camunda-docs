@@ -111,7 +111,7 @@ We sometimes also call that pattern the **four eyes principle**.
 
 Modeling a process dealing with that requirement can be achieved easily, but the better solution also depends on whether you prefer overall speed over total effort.
 
-All of the following modeling patterns assume that the two or more tasks needed to ultimately approve the loan must not be completed by one and the same person. When executing such patterns, you must enforce that. Learn more about that technical aspect in [Signing Off Work Done by Other People (4 Eyes Principle)](/managing-the-task-lifecycle/#signing-off-work-done-by-other-people).
+All of the following modeling patterns assume that the two or more tasks needed to ultimately approve the loan must not be completed by one and the same person. When executing such patterns, you must enforce that with the workflow engine.
 
 ### Option 1: Using separate tasks
 
@@ -193,7 +193,7 @@ You want to measure specific aspects of your process execution performance along
 
 When modeling a process, we should actually always add some information about important key performance indicators (KPIs) implicitly. For example, specifically [naming start and end events](../naming-bpmn-elements/#naming-events) with the process state reached from a business perspective. Additionally, we might explicitly add additional business milestones or phases.
 
-While the following section concentrates on the aspects of modeling KPIs, you might want to learn more about using them for [reporting about processes](../reporting-about-processes/) from a more technical perspective. For example, when being faced with the task to actually retrieve and present Camunda's historical data collected on the way of execution.
+While the following section concentrates on the aspects of modeling KPIs, you might want to learn more about using them for [reporting about processes](../../operations/reporting-about-processes/) from a more technical perspective. For example, when being faced with the task to actually retrieve and present Camunda's historical data collected on the way of execution.
 
 ### Option 1: Showing milestones
 

@@ -30,7 +30,7 @@ This best practice targets Camunda Platform 7.x only! The Camunda Cloud stacks d
 
 For a quick start, especially during development, follow [our greenfield recommendation for Camunda 7](../../architecture/deciding-about-your-stack-c7).
 
-For *production* usage we recommend to setup the container of your choice yourself, as we do not make sure we always ship the latest stable patched container version in our distribution. Also we cannot ship some containers for licensing reasons. Install Camunda into this container following the [installation guide](https://docs.camunda.org/manual/latest/installation/). Add required JDBC drivers for the database of your choice and configure datasources accordingly. Make sure to [secure Camunda](../securing-camunda-c7/") if required.
+For *production* usage we recommend to setup the container of your choice yourself, as we do not make sure we always ship the latest stable patched container version in our distribution. Also we cannot ship some containers for licensing reasons. Install Camunda into this container following the [installation guide](https://docs.camunda.org/manual/latest/installation/). Add required JDBC drivers for the database of your choice and configure datasources accordingly. Make sure to [secure Camunda](../securing-camunda-c7/) if required.
 
 We recommend to *script* the installation process, to allow for an *automated installation*. Typical steps include
 
