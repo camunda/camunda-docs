@@ -30,6 +30,8 @@ By default, all job variables merge into the process instance. This behavior can
 
 Input mappings can be used to transform the variables into a format accepted by the job worker.
 
+For more information about this topic visit the documentation about [Input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
+
 ## Additional resources
 
 ### XML representation
