@@ -251,6 +251,7 @@ module.exports = {
             "components/best-practices/management/following-the-customer-success-path",            
             "components/best-practices/architecture/sizing-your-environment", 
             "components/best-practices/management/doing-a-proper-poc",
+            "components/best-practices/architecture/understanding-human-tasks-management", 
           ],
           "Development": [
             "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
@@ -282,6 +283,7 @@ module.exports = {
             "components/best-practices/operations/performance-tuning-camunda-c7",
             "components/best-practices/operations/securing-camunda-c7",
             "components/best-practices/operations/operating-camunda-c7",
+            "components/best-practices/architecture/extending-human-task-management-c7", 
           ],
     },
       ],
