@@ -235,7 +235,7 @@ In some cases it can happen that the same activity is executed multiple times in
 
 #### Configure a report
 
-The configuration panel groups all the settings that can be applied to a report in one place. To see the panel click on the cog button available in the edit mode of any report. Every visualization has different settings that can be configured in the panel.
+The configuration panel groups all the settings that can be applied to a report in one place. To see the panel, click on the cog button available in the edit mode of any report. Every visualization has different settings that can be configured in the panel.
 
 When you save changes to the report configuration, they apply to the report view mode and any dashboard this report is displayed on.
 
@@ -261,7 +261,7 @@ Number reports appear as progress bar when the goal option is enabled from the p
 
 You can toggle between the progress bar and the single number visualization using the same goal line switch.
 
-A red line indicator appears on the progress bar when its value exceeds the goal value. On the right-hand side of the indicator, the bar turns into a darker color to clearly show the exceeded amount.
+A red line indicator appears on the progress bar when its value exceeds the goal value. On the right side of the indicator, the bar turns into a darker color to clearly show the exceeded amount.
 
 ![Progress Bar Visualization](./img/progressbarExceeded.png)
 
@@ -271,7 +271,7 @@ In table reports, the following configurations are possible:
 
 #### Show instance count
 
-Displays the total instance count on the right-hand side of the visualization. If you save the report while this option is enabled, the number will also be shown on any Dashboard this report is added to and when the report is shared.
+Displays the total instance count on the right side of the visualization. If you save the report while this option is enabled, the number will also be shown on any dashboard this report is added to and when the report is shared.
 
 #### Hide, show, and reorder table columns
 
@@ -293,16 +293,18 @@ Saving the reports will also preserve the applied sorting.
 
 The sorting currently works for all table reports except for:
 
-* Combined table reports
-* reports grouped by integer type variables
+- Combined table reports
+- Reports grouped by integer type variables
 
 #### Absolute and relative values
 
-When configuring a count report, you have the opportunity to configure which columns are included in the table. Using the switches for absolute and relative value you can hide or show the corresponding columns.
+When configuring a count report, you have the opportunity to configure which columns are included in the table. You can hide or show the corresponding columns using the switches for absolute and relative value.
 
 #### Custom bucket size for date variables
 
-When evaluating a report which is grouped by a date variable and displayed as a table, Optimize offers you the option to select your preferred unit specifying the custom result bucket size from the report configuration menu. The avaiblable units are year, month, week, day, and automatic. The default unit is automatic, which will create evenly spaced result buckets based on the values of the date variable. This configuration option is also available for charts.
+When evaluating a report which is grouped by a date variable and displayed as a table, Optimize offers you the option to select your preferred unit specifying the custom result bucket size from the report configuration menu. The available units are year, month, week, day, and automatic.
+
+The default unit is automatic, which will create evenly spaced result buckets based on the values of the date variable. This configuration option is also available for charts.
 
 #### Custom bucket size and baseline
 
@@ -310,7 +312,7 @@ When evaluating a report which is grouped by duration or a number variable, Opti
 
 For example, say a report contains the variable values 0.3, 6, and 13, and you set a bucket size of 5. By default, Optimize would now return a bucket for the values 0.3 to 5.3, one for 5.3 to 10.3, and one for 10.3 to 15.3. You may prefer your bucket start and end points to be a round number, in which case you should set your baseline to 0. With a baseline of 0 and bucket size 5, the result buckets now span 0 to 5, 5 to 10, and 10 to 15.
 
-If these configuration fields are not set, Optimize will by default create evenly spaced result buckets with a range based on the minimum and maximum values of the number variable.
+If these configuration fields are not set, by default Optimize will create evenly spaced result buckets with a range based on the minimum and maximum values of the number variable.
 
 This configuration option is also available for charts.
 
@@ -324,7 +326,7 @@ In charts, you can hide/show absolute and relative values that appear in the too
 
 #### Show instance count
 
-Displays the total instance count on the right-hand side of the visualization. If you save the report while this option is enabled, the number will also be shown on any dashboard this report is added to and when the report is shared.
+Displays the total instance count on the right side of the visualization. If you save the report while this option is enabled, the number will also be shown on any dashboard this report is added to and when the report is shared.
 
 #### Chart goal line
 
@@ -334,21 +336,14 @@ A good use case for such functionality is the following example:
 
 First, go to the edit mode of a report and choose the following configuration:
 
-<table class="table table-striped">
-  <tr>
-    <td>View</td><td>Count Frequency of Process Instance</td>
-  </tr>
-  <tr>
-    <td>Group by</td><td>Start Date of Process Instance: Month</td>
-  </tr>
-  <tr>
-    <td>Visualize as</td><td>Barchart</td>
-  </tr>
-</table>
+| View | Count frequency of process instance |
+| -- | -- |
+| Group by | Start date of process instance: Month |
+| Visualize as | Bar chart |
 
 Let us say that the number of completed process instances should always be above six. A goal line can be used as follows:
 
-Set the target value input field to six and select the above button. Now if the number of process instances is below six, it will be highlighted in red as shown.
+Set the target value input field to six and select the above button. If the number of process instances is below six, it will be highlighted in red as shown:
 
 ![Bar charts goal line](./img/targetValue.png)
 
@@ -358,7 +353,9 @@ This feature can be also used with every other bar chart and line chart visualiz
 
 #### Custom bucket size for date variables
 
-When evaluating a report which is grouped by a date variable and displayed as a chart, Optimize offers you the option to select your preferred unit specifying the custom result bucket size in the report configuration menu. The available units are year, month, week, day, and automatic. The default unit is automatic, which will create evenly spaced result buckets based on the values of the date variable. This configuration option is also available for tables.
+When evaluating a report which is grouped by a date variable and displayed as a chart, Optimize offers you the option to select your preferred unit specifying the custom result bucket size in the report configuration menu.
+
+The available units are year, month, week, day, and automatic. The default unit is automatic, which will create evenly spaced result buckets based on the values of the date variable. This configuration option is also available for tables.
 
 #### Custom bucket size and baseline
 
@@ -366,13 +363,13 @@ When evaluating a report which is grouped by duration or a number variable, Opti
 
 For example, say a report contains the variable values 0.3, 6, and 13 and you set a bucket size of 5. By default, Optimize would now return a bucket for the values 0.3 to 5.3, one for 5.3 to 10.3, and one for 10.3 to 15.3. You may prefer your bucket start and end points to be a round number, in which case you should set your baseline to 0. With a baseline of 0 and bucket size 5, the result buckets now span 0 to 5, 5 to 10, and 10 to 15.
 
-If these configuration fields are not set, Optimize will by default create evenly spaced result buckets with a range based on the minimum and maximum values of the number variable.
+If these configuration fields are not set, Optimize will create evenly spaced result buckets with a range based on the minimum and maximum values of the number variable by default.
 
 This configuration option is also available for tables.
 
 #### Stacked bar chart
 
-When evaluating a report which has a second "Group by", Optimize offers you the option to stack the bar chart bars instead of displaying them near each other. Stacking bars would be useful when the focus of the chart is to compare the totals (e.g. flow node count/process instance count/etc.) and one part of the totals (e.g. flow node/variable value/etc.)
+When evaluating a report which has a second "Group by", Optimize offers you the option to stack the bar chart bars instead of displaying them near each other. Stacking bars would be useful when the focus of the chart is to compare the totals (e.g. flow node count, process instance count, etc.) and one part of the totals (e.g. flow node, variable value, etc.)
 
 This configuration option is also available for bar/line charts.
 
@@ -380,7 +377,7 @@ This configuration option is also available for bar/line charts.
 
 #### Bar/line chart
 
-When evaluating a report which has both count and duration measures, Optimize offers you the option to display one of the measures as bars and the other measure as a line. This would help to differentiate between duration and count values displayed in the visualization. By default, the count measure is displayed as bars and the duration as a line. You can also switch between them by using the configuration option shown. 
+When evaluating a report which has both count and duration measures, Optimize offers you the option to display one of the measures as bars and the other measure as a line. This would help to differentiate between duration and count values displayed in the visualization. By default, the count measure is displayed as bars and the duration as a line. You can also switch between them by using the configuration option shown.
 
 ![Bar/Line chart report](./img/barLine.png)
 
@@ -390,32 +387,33 @@ When enabling absolute or relative values switches, all tooltips for all flow no
 
 ![Heatmap tooltips](./img/heatmap.png)
 
-As for charts and table reports, it is possible to display the total instance count on the right-hand side of the visualization. If you save the report while this option is enabled, the number will also be shown on any Dashboard this report is added to and when the report is shared.
+As for charts and table reports, it is possible to display the total instance count on the right-hand side of the visualization. If you save the report while this option is enabled, the number will also be shown on any dashboard this report is added to and when the report is shared.
 
-### View Mode
+### View mode
 
-Once you have defined what your Report should look like, the view mode gives you a full view of the report visualization. To see more details about the Report, you can interact with it, e.g. by moving your mouse over individual datapoints in diagrams or zooming in or out of heatmaps. The kind of interaction always depends on the Report itself.
+Once you have defined what your report should look like, the view mode gives you a full view of the report visualization. To see more details about the report, you can interact with it, e.g. by moving your mouse over individual data points in diagrams or zooming in or out of heatmaps. The kind of interaction always depends on the report itself.
 
-The view mode also provides you with different kinds of actions such as: 
+The view mode also provides you with different kinds of actions, such as:
 
 ![report sharing popover in Camunda Optimize](./img/report-sharingPopover.png)
 
-- Download CSV: In case you want to download the data of the Report, you can click the `Download CSV` button. The downloaded file will include the Report information in a table format.
+- Download CSV: In case you want to download the data of the report, you can click the **Download CSV** button. The downloaded file will include the report information in a table format.
 
-- Sharing: In case you want to share the Report with other people or want to embed it in a webpage, you can use the sharing feature of the Report. Just click on the share button, which opens up a popover. After enabling the "enable sharing" switch, a link is generated which you can send to people who do not have access to Camunda Optimize and thus enable them to see the Report.
+- Sharing: In case you want to share the report with other people or want to embed it in a webpage, you can use the sharing feature of the report. Just click on the **Share** button, which opens up a popover. After enabling the **Enable sharing** switch, a link is generated which you can send to people who do not have access to Camunda Optimize and thus enable them to see the report.
 
-    You can also use the "Embed Link" button if you wish to insert the report into your webpage. Everyone that views the webpage can then see content of the Report. The shared versions of the Report allow to view the Report itself only. There is no possibility to alter it or interact with any other features of Optimize. You can revoke the sharing any time by disabling the share switch.
+    You can also use the **Embed Link** button if you wish to insert the report into your webpage. Everyone that views the webpage can then see content of the report. The shared versions of the report allow you to view the report itself only. There is no possibility to alter it or interact with any other features of Optimize. You can revoke the sharing any time by disabling the share switch.
 
     If you prefer to hide the header of the shared report or specific part of it, you can do that by adding the following parameter to the share URL:
+
     ```
     header : titleOnly / linkOnly / hidden 
     ```
-    For example, to completely hide the header from the shared report, you can add `header=hidden` as shown: 
+    For example, to completely hide the header from the shared report, you can add `header=hidden` as shown:
     ```
     http://<report share url>?header=hidden
     ```
 
-- Alerts: If the created report is inside a collection, you can use the Alert dropdown to create and manage Alerts for that report. Since Alerts can only be created on reports that have a number visualization, the Alerts dropdown will be only be visible for such reports.
+- Alerts: If the created report is inside a collection, you can use the **Alert** dropdown to create and manage Alerts for that report. Since alerts can only be created on reports that have a number visualization, the **Alerts** dropdown will be only be visible for such reports.
 
 ## Creating a combined report
 
@@ -455,7 +453,7 @@ Only reports that match the following criteria can be combined:
 - Same visualization
 - Same view but combining user task duration (work, idle, and total). Flow node duration reports are also possible.
 - Distributed reports cannot be combined
-- Multi-Measure reports including reports containing multiple aggregations or multiple user task duration times cannot be combined.
+- Multi-measure reports including reports containing multiple aggregations or multiple user task duration times cannot be combined.
 - Process definition can be different.
 - Furthermore, it is possible to combine reports grouped by start date with reports grouped by end date under the condition that the date interval is the same.
 
@@ -466,14 +464,14 @@ Moreover, only the following visualizations are possible to combine and will sho
 - Table
 - Number
 
-Currently, it is not possible to combine decision reports with each other.
+Currently, it is not possible to combine decision reports.
 
 It is also possible to update the name of the report, save it, and add it to a dashboard exactly like the normal report. The combined reports will also show up in the reports list along with the normal reports.
 
 ### Configure combined reports
 
-You can configure the combined report using the cog wheel button available on the top right side of the screen. 
+You can configure the combined report using the cog wheel button available on the top right side of the screen.
 
-For example, in all chart reports, you can change what to show in the tooltips, change the axis names and set a goal line as shown in the figure below.
+For example, in all chart reports, you can change what to show in the tooltips, change the axis names, and set a goal line as shown in the figure below.
 
 ![Configurations available for combined reports](./img/combined-config.png)
