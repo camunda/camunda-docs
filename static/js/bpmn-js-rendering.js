@@ -156,19 +156,11 @@ async function renderBpmn(index, element) {
     bpmnDivsCount++;
   }
 
-  /*
-  function addScript(source) {
-    var scriptElement = document.createElement('script');
-    scriptElement.type = 'text/javascript'
-    scriptElement.setAttribute('src', source);
-    document.head.appendChild(scriptElement);
-  }
-  */
   function addStylesheet(source) {
     $('<link type="text/css" rel="stylesheet" href="'+source+'" />').insertBefore('head > link[href="/styles.css"]');
   }
   
-  function renderAll() {
+  function renderAllBpmnJs() {
     
     /* Doesn't work for me
     if (document.querySelectorAll('div[bpmn]').length>0) {
@@ -200,17 +192,3 @@ async function renderBpmn(index, element) {
     var factor = box.inner.width > width ? 1 / box.inner.width * width : 1.0;
     box.outer.height = Math.max(Math.ceil(box.inner.height * factor), 115);
   }
-    
-  // Add onload listener
-  if (window.addEventListener) { //W3C
-    window.addEventListener('load', renderAll, false);
-  }
-  else { //IE
-    window.attachEvent('onload', renderAll);
-  }
-  
-  /*
-  $(window).on("hashchange", function () {
-      window.scrollTo(window.scrollX, window.scrollY - 80);
-  });
-  */
