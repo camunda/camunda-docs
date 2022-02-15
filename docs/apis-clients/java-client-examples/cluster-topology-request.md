@@ -7,11 +7,11 @@ This example shows which broker is leader and follower for which partition. This
 
 ## Related resources
 
-- [Clustering casics](/components/zeebe/technical-concepts/clustering.md)
+- [Clustering basics](/components/zeebe/technical-concepts/clustering.md)
 
 ## Prerequisites
 
-1. Running Zeebe broker with endpoint `localhost:26500` (default)
+Run Zeebe broker with endpoint `localhost:26500` (default).
 
 ## TopologyViewer.java
 
