@@ -73,11 +73,9 @@ To correlate a message to the message event, the message is published with the d
 
 ## Variable mappings
 
-Output variable mappings customize how variables are merged into the process instance.
-These can contain multiple elements that specify which variables should be mapped.
-The `Process Variable Name` of an output denotes the variable name outside of the activity.
+By default, all message variables are merged into the process instance. This behavior can be customized by defining an output mapping at the message catch event.
 
-Visit our documentation regarding [input and output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) for more information on this topic.
+Visit the documentation regarding [variable mappings](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings) for more information on this topic.
 
 ## Additional resources
 
