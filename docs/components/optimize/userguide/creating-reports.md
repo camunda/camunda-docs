@@ -1,6 +1,7 @@
 ---
 id: creating-reports
 title: Creating reports
+description: "Reports offer the ability to view your data from different angles, and thus capture all aspects that influence your processes, show new trends, or depict your current business state."
 ---
 
 ## Overview
@@ -14,7 +15,7 @@ Each report consists of the [edit mode](#edit-mode) and [view mode](#view-mode) 
 To create a custom report based on a key performance indicator (KPI) you’d like to analyze, and to incorporate this report into a dashboard, follow the steps below:
 
 1. On the right side of the **Home** page, select **Create New > New Report**. Here we’ll take a look at a single process, though you can also view data from multiple processes.
-2. Click the text box under **Select Process** and select the process you’d like to analyze. 
+2. Click the text box under **Select Process** and select the process you’d like to analyze.
 3. Select the type of report you’d like to use on the right side of the **Create new Report** box. As with dashboards, Optimize offers preconfigured templates such as heatmaps and tables. We’ll begin with a heatmap.
 4. Click **Create Report**.
 5. Set up and customize your report. Begin by naming your report in the text box at the top of the page, pre-filled with **New Report**.
@@ -38,15 +39,15 @@ Building a report is the crux of the report edit mode. The building process itse
 
 #### Select process definitions
 
-Every report relates to one or multiple process definitions, versions and tenants. You must choose at least one process definition you want to create a report for.
+Every report relates to one or multiple process definitions, versions, and tenants. You must choose at least one process definition you want to create a report for.
 
 To add a process definition to the report, click **Add** at the top of the **Data Source** section of the report control panel. This opens a dialog showing all process definitions you can use in the report. You can select up to 10 definitions to add to the report. If there are many process definitions, you can use the input field to search for the definition you are looking for.
 
 ![Process definition selection in the report builder in Camunda Optimize](./img/report-processDefinitionSelection.png)
 
-For every added process definition, you can set a display name and a specific version or version range. To do so, click on the edit button in the process definition card. There are also buttons to remove the definition from the report or add a copy of the definition.
+For every added process definition, you can set a display name and a specific version or version range. To do so, click the **Edit** button in the process definition card. There are also buttons to remove the definition from the report or add a copy of the definition.
 
-When editing a process definition, using the version dropdown you can choose between all versions, the latest version or a specific set of versions.
+When editing a process definition, using the version dropdown, you can choose between all versions, the latest version, or a specific set of versions.
 
 ![Process Version selection in the report builder in Camunda Optimize](./img/report-versionSelection.png)
 
@@ -54,7 +55,7 @@ When editing a process definition, using the version dropdown you can choose bet
 - **Always display latest** option: Makes your report always refer to the latest version. Keep in mind that if a new version of the process is deployed, the report will automatically consider process instances of this new version only.
 - **Specific version** option: Specify one or multiple existing versions of the process.
 
-Data from older versions is mapped to the most recent version in the selection. Therefore, the report data can seem to be inconsistent, which is due to changes that occurred within the diagram through the different versions, e.g. the old versions do not contain newly added tasks or a part of the diagram was removed because it was considered to be obsolete.
+Data from older versions is mapped to the most recent version in the selection. Therefore, the report data can seem to be inconsistent, which is due to changes that occurred within the diagram through the different versions. For example, the old versions do not contain newly added tasks or a part of the diagram was removed because it was considered to be obsolete.
 
 ![Process definition selection for a multi-tenancy scenario](./img/tenantSelection.png)
 
@@ -64,9 +65,9 @@ By default, all process instances for the selected process definitions are inclu
 
 In this section of the report builder, you are characterizing the output of the report. Basically, you are defining "I want to view ... grouped by ... visualized as ...". To understand better what "View" and "Group by" mean, you can use the analogy of a graph, where "View" is the y-axis and "Group by" is the x-axis.
 
-First, you need to select which part of the data you want to view. Optimize differentiates between the view (e.g. Process Instance or Flow Node) and the measure (e.g. count or duration): 
+First, you need to select which part of the data you want to view. Optimize differentiates between the view (e.g. process instance or flow node) and the measure (e.g. count or duration):
 
-1. Raw Data: View just a table with the actual data listed as rows. This can come in handy if you found interesting insights in certain process instances and need detailed information about those instances or you are exploring a process definition with a limited number of instances. This Report type also allows you to inspect raw [object variable values](../../../../self-managed/optimize-deployment/setup/object-variables).
+1. Raw Data: View just a table with the actual data listed as rows. This can come in handy if you found interesting insights in certain process instances and need detailed information about those instances, or you are exploring a process definition with a limited number of instances. This report type also allows you to inspect raw [object variable values](../../../../self-managed/optimize-deployment/setup/object-variables).
 2. Process instance
   * Count: View how many process instances were executed.
   * Duration: View how long the process instances took to complete.
@@ -83,14 +84,14 @@ First, you need to select which part of the data you want to view. Optimize diff
 
 It is possible to display both count and duration measures for a single view in the same report.
 
-Subsequently, you need to define how to group the data. Think of it as applying a metric to your input, where you break up the data by date, flow nodes, variable values or other properties. For that, you have different options:
+Subsequently, you need to define how to group the data. Think of it as applying a metric to your input, where you break up the data by date, flow nodes, variable values, or other properties. For that, you have different options:
 
 - None: Do not split up the data.
 - Flow nodes: Cluster the data by flow nodes.
 - User tasks: Cluster the data by user tasks.
 - Duration: Cluster the data by duration. Depending on the selected view, this can be the duration of process instances, flow nodes, or user tasks.
 - Start date: Group instances together that were started during the same date period or time, e.g. hour, day or month. Depending on the selected view, this can be the start date of process instances, flow nodes, or user tasks.
-- End Date: Group instances together that were finished during the same date period or time, e.g. hour, day or month. Depending on the selected view, this can be the start date of process instances, flow nodes, or user tasks.
+- End date: Group instances together that were finished during the same date period or time, e.g. hour, day or month. Depending on the selected view, this can be the start date of process instances, flow nodes, or user tasks.
 - Running date of the process instance: Group process instances together that were running during the same date period or time, e.g. hour, day, or month.
 - Variable: Process instances with the same value for the selected variable are grouped together.
 - Assignee: Only available for user task views. Tasks are grouped together according to their current assignee.
@@ -99,62 +100,33 @@ Subsequently, you need to define how to group the data. Think of it as applying 
 
 Finally, define how you want the data to be visualized. Examples are heatmap, table, bar, or line chart.
 
-Not all of the above view, group by, and visualization options can be combined. For instance, if you choose `Flow Node: Count` as view, the data is automatically grouped by flow nodes as no other combination would be valid. All possible combinations can also be found in the following table:
+Not all the above view, group by, and visualization options can be combined. For instance, if you choose `Flow Node: Count` as view, the data is automatically grouped by flow nodes as no other combination would be valid.
 
-<table class="table table-striped">
-  <tr>
-    <td><b>View</b></td>
-    <td><b>Group By</b></td>
-    <td><b>Visualize as</b></td>
-  </tr>
-  <tr>
-    <td>Raw Data</td><td>None</td><td>Table</td>
-  </tr>
-  <tr>
-    <td>Process instance: Count, Process instance: Duration</td><td>None</td><td>Number</td>
-  </tr>
-  <tr>
-    <td>Process instance: Count</td><td>Start Date, End Date, Running Date, Variable, Duration, Process</td><td>Table, Chart</td>
-  </tr>
-    <tr>
-    <td>Process instance: Duration</td><td>Start Date, End Date, Variable, Process</td><td>Table, Chart</td>
-  </tr>
-  <tr>
-    <td>Incident: Count, Incident Duration</td><td>None</td><td>Number</td>
-  </tr>
-  <tr>
-    <td>Incident: Count, Incident Duration</td><td>Flow Nodes</td><td>Table, Chart, Heatmap</td>
-  </tr>
-  <tr>
-    <td>Flow Node: Count, Flow Node: Duration</td><td>Flow Nodes</td><td>Table, Chart, Heatmap</td>
-  </tr>
-  <tr>
-    <td>Flow Node: Count</td><td>Start Date, End Date, Duration, Variable</td><td>Table, Chart</td>
-  </tr>
-  <tr>
-    <td>Flow Node: Duration</td><td>Start Date, End Date, Variable</td><td>Table, Chart</td>
-  </tr>
-  <tr>
-    <td>User Task: Count, User Task: Duration</td><td>User Tasks</td><td>Table, Chart, Heatmap</td>
-  </tr>
-  <tr>
-    <td>User Task: Count, User Task: Duration</td><td>Start Date, End Date, Assignee, Candidate Group</td><td>Table, Chart</td>
-  </tr>
-  <tr>
-    <td>User Task: Count</td><td>Duration</td><td>Table, Chart</td>
-  </tr>
-  <tr>
-    <td>Variable</td><td>None</td><td>Number</td>
-  </tr>
-</table>
+All possible combinations can also be found in the following table:
+
+| View | Group by | Visualize as |
+| -- | -- | -- |
+| Raw Data | None | Table |
+| Process instance: Count, Process instance: Duration | None | Number |
+| Process instance: Count | Start Date, End Date, Running Date, Variable, Duration, Process | Table, Chart |
+| Process instance: Duration | Start Date, End Date, Variable, Process | Table, Chart |
+| Incident: Count, Incident Duration | None | Number |
+| Incident: Count, Incident Duration | Flow Nodes | Table, Chart, Heatmap |
+| Flow Node: Count, Flow Node: Duration | Flow Nodes | Table, Chart, Heatmap|
+| Flow Node: Count | Start Date, End Date, Duration, Variable | Table, Chart |
+| Flow Node: Duration | Start Date, End Date, Variable | Table, Chart |
+| User Task: Count, User Task: Duration | User Tasks | Table, Chart, Heatmap |
+| User Task: Count, User Task: Duration | Start Date, End Date, Assignee, Candidate Group | Table, Chart |
+| User Task: Count| Duration| Table, Chart |
+| Variable| None| Number |
 
 :::note
-You might sometimes see a warning message indicating that the data is limited to a certain number of points. This happens because the available stored data, in this case, is very large and it is not possible to display all the data in the selected visualization.
+You might sometimes see a warning message indicating that the data is limited to a certain number of points. This happens because the available stored data, in this case is very large, and it is not possible to display all the data in the selected visualization.
 :::
 
 #### Reports with a second "Group by" option
 
-Using the second "Group by" option, it is possible to apply another grouping to your data to display extra details such as dates, variable values, or assignees. This option will be shown below the first "Group by" option if the current report combination supports it. Here is an overview of the reports that supports a second "Group by": 
+Using the second "Group by" option, it is possible to apply another grouping to your data to display extra details such as dates, variable values, or assignees. This option will be shown below the first "Group by" option if the current report combination supports it. Here is an overview of the reports that supports a second "Group by":
 
 #### Flow node reports
 
@@ -163,66 +135,29 @@ Flow node names can be applied as a second "Group by". If the report contains mu
 #### User task reports
 
 User task names, assignees, and candidate groups can be applied as a second "Group by".
+
 For example, if your report is grouped by assignee/candidate group, it is possible to add another grouping by user task to see which user task your users/group are working on or have completed in the past. If the report contains multiple process definitions, the data can also be grouped by process as a second "Group by".
 
 ![Distributed User Task report](./img/distributed-report.png)
 
-Refer to the below table for an overview of all report combinations that support a second "Group by":
+Refer to the table below for an overview of all report combinations that support a second "Group by":
 
-<table class="table table-striped">
-    <tr>
-        <td><b>View</b></td>
-        <td><b>Group by</b></td>
-        <td><b>Second Group by</b></td>
-    </tr>
-    <tr>
-        <td>User Task Count, Duration</td>
-        <td>User Tasks</td>
-        <td>Assignee, Candidate Group, Process (only for multi-definition reports)</td>
-    </tr>
-    <tr>
-        <td>User Task Count, Duration</td>
-        <td>Start Date, End Date</td>
-        <td>Assignee, Candidate Group, User Tasks, Process (only for multi-definition reports)</td>
-    </tr> 
-    <tr>
-        <td>User Task Count, Duration</td>
-        <td>Assignee, Candidate Group</td>
-        <td>User Tasks, Process (only for multi-definition reports)</td>
-    </tr>
-    <tr>
-        <td>User Task Count</td>
-        <td>Duration</td>
-        <td>User Tasks, Process (only for multi-definition reports)</td>
-    </tr>
-</table>
+| View | Group by | Second group by |
+| -- | -- | -- |
+| User Task Count, Duration | User Tasks | Assignee, Candidate Group, Process (only for multi-definition reports) |
+| User Task Count, Duration | Start Date, End Date | Assignee, Candidate Group, User Tasks, Process (only for multi-definition reports) |
+| User Task Count, Duration | Assignee, Candidate Group | User Tasks, Process (only for multi-definition reports) |
+| User Task Count | Duration | User Tasks, Process (only for multi-definition reports) |
 
 #### Process instance reports
 
-Refer to the below table for the process instance count and duration reports that support a second "Group by":
+Refer to the table below for the process instance count and duration reports that support a second "Group by":
 
-<table class="table table-striped">
-    <tr>
-        <td><b>View</b></td>
-        <td><b>Group By</b></td>
-        <td><b>Second Group by</b></td>
-    </tr>
-    <tr>
-        <td>Process Instance Count, Duration</td>
-        <td>Start Date, End Date</td>
-        <td>Variable, Process (only for multi-definition reports)</td>
-    </tr>
-    <tr>
-        <td>Process Instance Count, Duration</td>
-        <td>Variable</td>
-        <td>Start Date, End Date, Process (only for multi-definition reports)</td>
-    </tr>
-    <tr>
-        <td>Process Instance Count</td>
-        <td>Running Date, Duration</td>
-        <td>Process (only for multi-definition reports)</td>
-    </tr>
-</table>
+| View | Group by | Second group by |
+| -- | -- | -- |
+| Process Instance Count, Duration | Start Date, End Date | Variable, Process (only for multi-definition reports) |
+| Process Instance Count, Duration | Variable | Start Date, End Date, Process (only for multi-definition reports) |
+| Process Instance Count | Running Date, Duration | Process (only for multi-definition reports) |
 
 The diagram below shows a report grouped by `Start Date` and a boolean variable:
 
@@ -240,15 +175,14 @@ Reports with multiple aggregations that have a [second "Group by"](#reports-with
 
 In user task duration reports, you have the opportunity to select which part of the user task's lifecycle you want to see in the report:
 
-* Idle: View how long each user task was considered idle (not claimed by an assignee/user) during its execution.
-* Work: View how long each user task was considered to be worked on by assignees/users (claimed by an assignee/user) during its execution.
-* Total: View how long each user task took to complete.
+- Idle: View how long each user task was considered idle (not claimed by an assignee/user) during its execution.
+- Work: View how long each user task was considered to be worked on by assignees/users (claimed by an assignee/user) during its execution.
+- Total: View how long each user task took to complete.
 
 It is possible to display and compare multiple user task duration times in the same report. Reports with multiple user task duration times that have a [second "Group by"](#reports-with-a-second-group-by-option) can only be visualized as table.
 
 :::note
-User tasks which have been completed yet have no claim operations are evaluated as follows: if the user task was canceled, the task is considered to have been idle whereas user tasks which were completed are considered to have been worked on 
-programmatically or via a custom UI, meaning the time between start and end is considered work time. 
+User tasks which have been completed yet have no claim operations are evaluated as follows: if the user task was canceled, the task is considered to have been idle whereas user tasks which were completed are considered to have been worked on programmatically or via a custom UI, meaning the time between start and end is considered work time.
 :::
 
 #### Target value comparison
@@ -257,29 +191,26 @@ Based on flow node duration heatmaps, Optimize allows you to specify a target va
 
 To set target values and create a target value comparison heatmap, you need to be in the edit mode of a report which has the following configuration:
 
-<table class="table table-striped">
-  <tr>
-    <td>View</td><td>Flow Node Duration/User Task Duration</td>
-  </tr>
-  <tr>
-    <td>Group by</td><td>Flow Nodes/User Tasks</td>
-  </tr>
-  <tr>
-    <td>Visualize as</td><td>Heatmap</td>
-  </tr>
-</table>
+| View | Flow node duration/user task duration |
+| -- | -- |
+| Group by | Flow nodes/user tasks |
+| Visualize as | Heatmap |
 
-If your report has this configuration, a target value button is visible. Clicking on the **Target Value** button for the first time opens an overlay containing the process diagram and a table with all flow nodes. You can also see the actual duration value for every flow node. If you want to set a target value for a flow node, use the number and unit fields in the last column. If the target value number field for a flow node is empty, this flow node has no target value set (the selected time unit is ignored in that case).
+If your report has this configuration, a target value button is visible. Clicking on the **Target Value** button for the first time opens an overlay containing the process diagram and a table with all flow nodes. You can also see the actual duration value for every flow node.
+
+To set a target value for a flow node, use the number and unit fields in the last column. If the target value number field for a flow node is empty, this flow node has no target value set (the selected time unit is ignored in that case).
 
 ![Setting Target Values](./img/targetvalue-2.png)
 
-If you set a target value for a flow node, this target value is represented as a badge on the flow node in the diagram in the upper part of the overlay. You can click on any flow node in the diagram to jump to the target value input field in the table. If you have a User Task report, you can only select user tasks here, as only those are included in the report result. When selecting a target value input field in the table, the corresponding diagram element is highlighted. To save the target value configuration, click **Apply**.
+If you set a target value for a flow node, this target value is represented as a badge on the flow node in the diagram in the upper part of the overlay. You can click on any flow node in the diagram to jump to the target value input field in the table.
 
-After you save the target values, the normal duration heatmap is replaced with a target value visualization. In this new visualization, flow nodes with an average duration larger than the specified target value are highlighted in red. 
+If you have a user task report, you can only select user tasks here, as only those are included in the report result. When selecting a target value input field in the table, the corresponding diagram element is highlighted. To save the target value configuration, click **Apply**.
 
-If you mouse over one of the nodes, the tooltip shows the following: 
+After you save the target values, the normal duration heatmap is replaced with a target value visualization. In this new visualization, flow nodes with an average duration larger than the specified target value are highlighted in red.
 
-- The target duration value 
+If you mouse over one of the nodes, the tooltip shows the following:
+
+- The target duration value
 - The actual duration
 - The relative percentage the actual value is of the target value
 - A button to download a list of process instance IDs that exceed the target value
@@ -294,7 +225,9 @@ As with any change to a report configuration, to persist target values and show 
 
 #### Process instance parts
 
-In some cases, you may not be interested in the duration of the whole process instance, but only a certain part of it. For that scenario, there is an additional button called **Process Instance Part** available for every process instance duration view that only shows data for a single process definition. Clicking this button opens an overlay letting you select the start and end of the part of the process instance you are interested in. After confirming the selection, the displayed duration refers to the selected part only instead of the whole instance.
+In some cases, you may not be interested in the duration of the whole process instance, but only a certain part of it. For that scenario, there is an additional button called **Process Instance Part** available for every process instance duration view that only shows data for a single process definition.
+
+Clicking this button opens an overlay letting you select the start and end of the part of the process instance you are interested in. After confirming the selection, the displayed duration refers to the selected part only instead of the whole instance.
 
 In some cases it can happen that the same activity is executed multiple times in the same process instance, e.g. if the process contains loops or parallel gateways. In such cases, Optimize considers only the part between the start date of the first instance of the start node and the end date of the first instance of the end node.
 
