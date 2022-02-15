@@ -413,17 +413,14 @@ Camunda Platform 7 also has support for writing tests in Java. This section give
 Use:
 
 1. Use [*JUnit*](http://junit.org) as unit test framework.
-2. Use Camunda's [JUnit Rule](reference/javadoc/?org/camunda/bpm/engine/test/ProcessEngineRule.html) to ramp up an in-memory process engine where the [JobExecutor](user-guide/process-engine/the-job-executor/) is turned off.
-3. Use Camunda's [@Deployment](reference/javadoc/?org/camunda/bpm/engine/test/Deployment.html) annotation to deploy and undeploy one or more process definitions under test for a single test method.
+2. Use Camunda's [JUnit Rule](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/ProcessEngineRule.html) to ramp up an in-memory process engine where the [JobExecutor](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/Deployment.html) is turned off.
+3. Use Camunda's [@Deployment](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/Deployment.html) annotation to deploy and undeploy one or more process definitions under test for a single test method.
 4. Use [camunda-bpm-assert](http://github.com/camunda/camunda-bpm-assert) to easily check whether your expectations about the state of the process are met.
 5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) plus [PowerMock](https://github.com/jayway/powermock/) to mock service methods and verify that services are called as expected.
-6. Use Camunda's [MockExpressionManager](reference/javadoc/?org/camunda/bpm/engine/test/mock/MockExpressionManager.html) to resolve bean names used in your process definition without the need to ramp up the dependency injection framework (like CDI or Spring).
+6. Use Camunda's [MockExpressionManager](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/mock/MockExpressionManager.html) to resolve bean names used in your process definition without the need to ramp up the dependency injection framework (like CDI or Spring).
 7. Use an [In-Memory H2 database](http://www.h2database.com/html/features.html#in_memory_databases) as default database to test processes on developer machines. If required, you can run the same tests on *multiple databases*, e.g. Oracle, DB2, or MS-SQL on a CI-Server. To achieve that, you can make use of (e.g. maven) profiles and Java properties files for database configuration.
 
-Let's use the same example as above:
-
-
-A typical test case looks like this:
+Let's use the same example as above. A typical test case looks like this:
 
 ```java
 // ...
