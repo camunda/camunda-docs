@@ -75,6 +75,8 @@ To correlate a message to the message event, the message is published with the d
 
 By default, all message variables are merged into the process instance. This behavior can be customized by defining an output mapping at the message catch event.
 
+Visit the documentation regarding [variable mappings](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings) for more information on this topic.
+
 ## Additional resources
 
 ### XML representation

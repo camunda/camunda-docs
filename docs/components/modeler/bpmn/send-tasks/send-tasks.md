@@ -5,7 +5,7 @@ description: "A send task is used to model the publication of a message to an ex
 ---
 
 A send task is used to model the publication of a message to an external system; for example, to a
-Kafka topic.
+Kafka topic or a mail server.
 
 ![task](assets/send-task.png)
 
@@ -27,7 +27,8 @@ a job worker.
 
 ## Defining a task
 
-A send task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition); it specifies the type of job that workers should subscribe to (e.g. `kafka`).
+A send task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same 
+way as a service task does. It specifies the type of job that workers should subscribe to (e.g. `kafka` or `mail`).
 
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
 worker (e.g. the name of the topic to publish the message to).
