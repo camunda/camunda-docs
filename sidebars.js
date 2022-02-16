@@ -334,14 +334,8 @@ module.exports = {
         {
           "Kubernetes deployment": [
             "self-managed/zeebe-deployment/kubernetes/index",
-            {
-              "Helm charts": [
-                "self-managed/zeebe-deployment/kubernetes/helm/index",
-                "self-managed/zeebe-deployment/kubernetes/helm/prerequisites",
-                "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
-                "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate",
-              ],
-            },
+            "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
+            "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist",
           ],
         },
         {

@@ -1,11 +1,28 @@
 ---
-id: accessing-operate
-title: "Accessing Operate from outside the cluster"
+id: accessing-operate-tasklist
+title: "Accessing Operate and Tasklist outside the cluster"
 ---
 
-The **Zeebe Full Helm charts** install an ingress controller. If this is deployed in a cloud provider (GKE, EKS, AKS, etc.), it should provision a `LoadBalancer` which will expose an external IP that can be used as the main entry point to access all the services/applications that are configured to have Ingress Routes.
+The **Camunda Cloud Helm charts** install an ingress controller. If this is deployed in a cloud provider (GKE, EKS, AKS, etc.),
+it should provision a `LoadBalancer` which will expose an external IP that can be used as the main entry point to access all the 
+services/applications that are configured to have Ingress Routes.
 
-> If you have your own ingress controller, you can use the child chart to install a Zeebe cluster, instead of using the parent chart.
+To interact with the services inside the cluster, use `port-forward` to route traffic from your environment to the cluster.
+```
+> kubectl port-forward svc/<RELEASE NAME>-zeebe-gateway 26500:26500
+```
+
+Now, you can connect and execute operations against your newly-created Camunda-Cloud cluster.
+
+:::note
+Notice that you need to keep `port-forward` running to communicate with the remote cluster.
+:::
+
+:::note
+Notice that accessing directly to the Zeebe cluster using `kubectl port-forward` is recommended for development purposes. By default, the Zeebe Helm charts are not exposing the Zeebe cluster via ingress. If you want to use `zbctl` or a local client/worker from outside the Kubernetes cluster, rely on `kubectl port-forward` to the Zeebe cluster to communicate.
+:::
+
+
 
 You can find the external IP by running the following:
 
