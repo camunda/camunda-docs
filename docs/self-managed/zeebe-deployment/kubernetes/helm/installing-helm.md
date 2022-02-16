@@ -1,19 +1,20 @@
 ---
 id: installing-helm
-title: "Camunda Cloud Helm Charts"
+title: "Camunda Cloud Helm charts"
 ---
 
 [Helm](https://github.com/helm/helm) is a package manager for Kubernetes resources. Helm allows us to install a set of components by simply referencing a package name, and allowing us to override configurations to accommodate these packages to different scenarios.
 
 Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us to aggregate a set of components together that can be installed with a single command. 
 
-The Camunda Cloud Helm chart is currently available and can be found in the [Camunda Cloud Helm repository](https://github.com/camunda-community-hub/camunda-cloud-helm). Per default the following will be installed: 
+The Camunda Cloud Helm chart is currently available and can be found in the [Camunda Cloud Helm repository](https://github.com/camunda-community-hub/camunda-cloud-helm). By default, the following will be installed:
+
 - **Camunda Cloud self-managed Helm (ccsm-helm)**:  
   - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` docker image.
-  - **Zeebe Gateway**: Deploys a Zeebe Gateway. 
+  - **Zeebe Gateway**: Deploys a Zeebe Gateway.
   - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
   - **Tasklist**: Deploys the Tasklist component to work with user tasks.
-  - **Elasticsearch**: Deploys an Elasticsearch Cluster with three nodes. 
+  - **Elasticsearch**: Deploys an Elasticsearch cluster with three nodes.
   
 ![Charts](assets/ccsm-helm-charts.png)
 
@@ -70,8 +71,8 @@ elasticsearch-master-2                                 1/1     Running   0      
 <RELEASE NAME>-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 
+### Installing the Camunda Cloud Helm Chart locally using KIND
 
-### Installing the Camunda Cloud Helm Chart locally using KIND 
 If you are using [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f ccsm-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda-community-hub/camunda-cloud-helm/blob/main/kind/ccsm-kind-values.yaml).
 
 ```
@@ -102,15 +103,16 @@ elasticsearch-master-0                                 1/1     Running   0      
 ```
 
 ### Troubleshooting the installation
-Check that each pod has at least 1/1 running instances. If one or more of your pods stay pending it means that it can not be scheduled onto a node. 
-Usually this happens because there are insufficient resources that prevent it. You can use the `kubectl describe ...` command to check on messages 
-from the scheduler: 
+
+Check that each pod has at least 1/1 running instances. If one or more of your pods stay pending, it means that it can not be scheduled onto a node.
+
+Usually this happens because there are insufficient resources that prevent it. Use the `kubectl describe ...` command to check on messages from the scheduler:
 
 ```
 > kubectl describe pods ${POD_NAME}
 ```
 
-If the output of the `describe` command was not beneficial you can always tail the logs of these pods by running the following:
+If the output of the `describe` command was not beneficial, tail the logs of these pods by running the following:
 
 ```
 > kubectl logs -f <POD NAME> 
