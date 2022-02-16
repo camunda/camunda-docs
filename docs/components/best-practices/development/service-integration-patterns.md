@@ -221,7 +221,7 @@ As a fourth possibility you can add event sub processes, which get activated whe
 
 ![Event sub process to capture different response messages](service-integration-patterns-assets/response-event-subprocess.png)
 
-This pattern is pretty handy, but also needs some explanation to people new to BPMN. It has one downside you need to know: Once your process instance moves to the sub process, you can’t easily go back to the normal flow. To some extent this problem can be solved by advanced modeling patterns like shown in the [allow for order cancellation any time](../../modeling/building-flexibility-into-bpmn-models#_allow_for_order_cancellation_any_time) example.
+This pattern is pretty handy, but also needs some explanation to people new to BPMN. It has one downside you need to know: Once your process instance moves to the sub process, you can’t easily go back to the normal flow. To some extent this problem can be solved by advanced modeling patterns like shown in the [allow for order cancellation any time](../../modeling/building-flexibility-into-bpmn-models/#allow-for-order-cancellation-any-time) example.
 
 At the same time the event sub process has a super power that is worth mentioning: You can now wait for cancellation messages in whole chunks of your process — it could arrive anytime.
 
