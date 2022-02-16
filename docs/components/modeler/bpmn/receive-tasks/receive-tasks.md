@@ -28,11 +28,10 @@ To correlate a message to the receive task, the message is published with the de
 
 ## Variable mappings
 
-Output variable mappings are used to customize how variables are merged into the process instance.
-These can contain multiple elements that specify which variables should be mapped.
-The `Process Variable Name` of an output denotes the variable name outside of the activity.
+Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
+to transform the variables passed to the job worker, or to customize how the variables of the job merge.
 
-Visit our documentation on [input and output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) for more information on this topic.
 ## Additional resources
 
 ### XML representation
