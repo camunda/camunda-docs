@@ -48,14 +48,14 @@ Let’s create a dashboard inside our first collection. Take the following steps
 1. Return to the **Home** page to view a list of existing collections, dashboards, and reports. You’ll be able to view all process instances you’ve already run and retrieve additional data on these instances within the Camunda engine.
 2. Select the collection where you’d like to create a dashboard.
 3. Click **Create New > New Dashboard**.
-4. Optimize offers preconfigured dashboard templates, or you can start from a blank dashboard. In this example, we’ll select a preconfigured template by clicking the **Process performance overview** option.
+4. Optimize offers preconfigured dashboard templates, or you can start from a blank dashboard. In this example, we’ll select a preconfigured template by clicking the **Process performance overview** option. Note that you can also create dashboards with multi-process templates.
 5. Under **Select Process**, choose the process you’d like to analyze and the version.
 6. Click **Create Dashboard**.
 7. Name your dashboard, and add any additional existing reports or create filters. Click **Save**.
 
 ![dashboard example](./assets/dashboard.png)
 
-In the sample above, Optimize drafted a dashboard filled with reports for review. These reports include objectives like process instance counts, aggregated process duration, active incidents, and heatmaps. 
+In the sample above, Optimize drafted a dashboard filled with reports for review. These reports include objectives like process instance counts, aggregated process duration, active incidents, and heatmaps.
 
 Select **Edit > Add a Report** to incorporate additional reports you’ve already created (see [create and access reports](#create-and-access-reports) below). Click and drag the reports on the grid to arrange the dashboard to your liking.
 
