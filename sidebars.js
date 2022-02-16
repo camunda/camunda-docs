@@ -88,7 +88,6 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/save-and-deploy",
             "components/modeler/web-modeler/start-instance",
-            "components/modeler/web-modeler/model-overview",
             "components/modeler/web-modeler/collaboration",
             "components/modeler/web-modeler/milestones",
           ],
