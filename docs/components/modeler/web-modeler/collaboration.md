@@ -4,6 +4,39 @@ title: Collaboration
 description: Collaboration features and access rights for Web Modeler
 ---
 
+### Projects
+
+After creating a project, you can invite members of your Camunda Cloud organization to collaborate in Web Modeler.
+There are four roles with different levels of access rights that can be assigned to each user:
+
+* **Project Admin:** the user can edit the project itself, all folders and diagrams within the project and invite more users to collaborate.
+* **Editor:** the user can edit all folders and diagrams within the project.
+* **Commenter:** the user cannot edit folders or diagrams nor invite users, but can view and leave comments on diagrams.
+* **Viewer:** the user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
+
+## Inviting users to Projects
+
+On the right side of a Project you can see a list of your collaborators and invite more.
+
+1. Click on **Add User**:
+![invite user](img/collaboration/web-modeler-collaborator-invite-modal-opened.png)
+
+2. Choose a role for your new collaborator
+![invite choose role](img/collaboration/web-modeler-collaborator-invite-choose-role.png)
+
+3. Start typing and Web Modeler will suggest Camunda Cloud organization members that you can invite to the project
+![invite suggestions](img/collaboration/web-modeler-collaborator-invite-suggestions.png)
+
+4. Write a message to your new collaborator
+![invite type message](img/collaboration/web-modeler-collaborator-invite-type-message.png)
+
+5. Click on **Send** and your new collaborator will receive an email with the invitation
+![invite sent](img/collaboration/web-modeler-collaborator-invite-sent.png)
+![invite email](img/collaboration/web-modeler-collaborator-invite-email.png)
+
+
+
+
 ## Sharing and embedding diagrams
 
 Diagrams can be shared with various people via a sharing link. This link can also be protected with an additional password.
@@ -29,15 +62,6 @@ By typing the ‘@’ character, a list of users shows up and one user can be se
 ## Access rights and permissions
 
 Different users can have access to different views in Web Modeler.
-
-### Projects
-
-After creating a project, further Web Modeler users can be invited to collaborate. There are four roles with different levels of access rights that can be assigned to each user:
-
-* **Project Admin:** the user can edit the project itself, all folders and diagrams within the project and invite further users.
-* **Editor:** the user can edit all folders and diagrams within the project.
-* **Commenter:** the user cannot edit folders or diagrams nor invite users, but can leave comments on each diagram.
-* **Viewer:** the user cannot edit folders or diagrams nor leave comments, but only view diagrams.
 
 ### Catalog projects
 
