@@ -57,35 +57,35 @@ Several BPMN start events can be used to start a new process instance.
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/none-start.svg" alt="none start" />
+						<img src="/img/bpmn-elements/none-start.svg" alt="none start" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/message-start.svg" alt="message start" />
+						<img src="/img/bpmn-elements/message-start.svg" alt="message start" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/timer-start.svg" alt="timer start" />
+						<img src="/img/bpmn-elements/timer-start.svg" alt="timer start" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/signal-start.svg" alt="signal start" />
+						<img src="/img/bpmn-elements/signal-start.svg" alt="signal start" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/conditional-start.svg" alt="conditional start" />
+						<img src="/img/bpmn-elements/conditional-start.svg" alt="conditional start" />
 					</span>
 				</p>
 			</td>
@@ -213,35 +213,35 @@ Several BPMN intermediate events (and the receive task) can be used to make a pr
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/message-intermediate.svg" alt="message intermediate" />
+						<img src="/img/bpmn-elements/message-intermediate.svg" alt="message intermediate" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/task-receive.svg" alt="task receive" />
+						<img src="/img/bpmn-elements/task-receive.svg" alt="task receive" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/timer-intermediate.svg" alt="timer intermediate" />
+						<img src="/img/bpmn-elements/timer-intermediate.svg" alt="timer intermediate" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/signal-intermediate.svg" alt="signal intermediate" />
+						<img src="/img/bpmn-elements/signal-intermediate.svg" alt="signal intermediate" />
 					</span>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/docs/components/best-practices/img-bpmn-elements/conditional-intermediate.svg" alt="conditional intermediate" />
+						<img src="/img/bpmn-elements/conditional-intermediate.svg" alt="conditional intermediate" />
 					</span>
 				</p>
 			</td>

@@ -126,9 +126,9 @@ The following table summarizes the possibilities and recommendations.
   </tr>
   <tr>
     <td></td>
-    <td><img alt="Service task" src="/docs/components/best-practices/img-bpmn-elements/task-service.svg" /></td>
-    <td><img alt="Send task" src="/docs/components/best-practices/img-bpmn-elements/task-send.svg" /></td>
-    <td><img alt="Service task" src="/docs/components/best-practices/img-bpmn-elements/task-service.svg" /></td>
+    <td><img alt="Service task" src="/img/bpmn-elements/task-service.svg" /></td>
+    <td><img alt="Send task" src="/img/bpmn-elements/task-send.svg" /></td>
+    <td><img alt="Service task" src="/img/bpmn-elements/task-service.svg" /></td>
     <td><img alt="Send and receive task" src="../service-integration-patterns-assets/send-and-receive-task.png" /></td>
   </tr>  
   <tr>
