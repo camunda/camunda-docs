@@ -8,10 +8,26 @@ that can be configured via `management.server.port` configuration parameter (def
 
 ## Number of active users
 
-Following endpoint returns the number of users that have been assigned to user tasks in given period:
+This endpoints return the number of unique users assigned to tasks in a given period and each of the unique `usernames`.
+
+The reason why it returns also the `usernames` is so that we are able to reconcile in case of multiple instances.
+
+Endpoint:
 
 ```
 http://<host>:<port>/actuator/usage-metrics/assignees?startTime={startTime}&endTime={endTime}
 ```
 
 , where `startTime` and `endTime` are of format `yyyy-MM-dd'T'HH:mm:ss.SSSZZ`, e.g. "1970-11-14T10:50:26.963-0100".
+
+Sample response:
+
+```json
+{
+    "total" : 2,
+    "assignees": [
+        "john.lennon", 
+        "oprah.winfrey"
+    ]
+}
+```
