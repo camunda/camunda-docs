@@ -304,12 +304,12 @@ Several BPMN intermediate events (and the receive task) can be used to make a pr
 			<th class="tableblock halign-left valign-top" />
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
-					<a href="docs/components/modeler/bpmn/message-events/message-events/">Learn more</a>
+					<a href="/docs/components/modeler/bpmn/message-events/message-events/">Learn more</a>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
-					<a href="docs/components/modeler/bpmn/receive-tasks/receive-tasks/">Learn more</a>
+					<a href="/docs/components/modeler/bpmn/receive-tasks/receive-tasks/">Learn more</a>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
