@@ -4,7 +4,18 @@ title: Collaboration
 description: Collaboration features and access rights for Web Modeler
 ---
 
-### Projects
+## Projects
+
+Files and folders are stored in projects.
+The user access on files and folders is defined at the project level.
+
+When you access the Web Modeler via the Cloud menu, you see the Home page with all the projects you can access:
+![home page](img/collaboration/web-modeler-home.png)
+
+
+###  Access rights and permissions
+
+Users can have various level of access to a project in Web Modeler.
 
 After creating a project, you can invite members of your Camunda Cloud organization to collaborate in Web Modeler.
 There are four roles with different levels of access rights that can be assigned to each user:
@@ -14,7 +25,8 @@ There are four roles with different levels of access rights that can be assigned
 * **Commenter:** the user cannot edit folders or diagrams nor invite users, but can view and leave comments on diagrams.
 * **Viewer:** the user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
-## Inviting users to Projects
+
+### Inviting users to Projects
 
 On the right side of a Project you can see a list of your collaborators and invite more.
 
@@ -35,38 +47,55 @@ On the right side of a Project you can see a list of your collaborators and invi
 ![invite email](img/collaboration/web-modeler-collaborator-invite-email.png)
 
 
+### Folders
+
+You can create folders in a project to semantically group and organize your diagrams.
+The user access on a folder is inherited from the project.
 
 
 ## Sharing and embedding diagrams
 
-Diagrams can be shared with various people via a sharing link. This link can also be protected with an additional password.
+Diagrams can also be shared with others in read-only mode via a sharing link.
+This link can also be protected with an additional password.
 
-Similar to the sharing link, a diagram can be included into HTML pages via an iframe tag. This tag can be copied from the sharing dialog via the embed button.
+1. Navigate to a diagram and click on the share icon button
+![share button](img/collaboration/web-modeler-share-icon-button.png)
+
+2. Click on **Create link**
+![share create link](img/collaboration/web-modeler-share-modal.png)
+
+3. Click on **Copy** to copy the link to your clipboard
+![share copy link](img/collaboration/web-modeler-share-modal-create.png)
+
+4. Click on **Add** and type a new password to protect your link
+![share copy link](img/collaboration/web-modeler-share-modal-password-protect.png)
+
+5. Click on **Email** to share the new link with multiple recipients
+![share copy link](img/collaboration/web-modeler-share-modal-email.png)
+
+Similar to the sharing link, a diagram can be embedded into HTML pages via an iframe tag. The iframe tag can be copied from the sharing dialog via the **Embed** button.
 
 For wiki systems like [Confluence](https://www.atlassian.com/software/confluence), we recommend using the HTML macro and adding the iframe tag from the sharing dialog. This way, diagrams can be easily included in documentation pages. To adjust the dimensions of the diagram, the width and height values of the iframe tag can be modified.
 
+
 ## Comments
 
-When selecting an element of the BPMN diagram, a discussion can be attached to this element. If no element is selected, then the discussion will be attached to the diagram itself.
+When selecting an element of the BPMN diagram, a discussion can be attached to this element. If no element is selected, then the discussion will be attached directly to the diagram.
+You can easily switch between the Properties Panel and Comments using the two tabs present at the top of the right side panel
+![comment](img/collaboration/web-modeler-comment-type-here.png)
 
-New comments can be added to the discussion. Afterwards, the comment can be edited or deleted via the context menu icon.
+New comments can be added to the discussion by any collaborator with Admin, Editor or Commenter access rights.
+Afterwards, the comment can be edited or deleted via the context menu icon.
+![comment context menu](img/collaboration/web-modeler-comment-with-context-menu.png)
 
-Existing discussions are highlighted within the diagram via additional icons.
+Elements with discussions attached will always have a visible blue overlay so you can easily identify discussion points.
+![comment context menu](img/collaboration/web-modeler-comment-overlay-on-diagram.png)
 
-In order to be allowed to add comments, the user needs the Editor or Commenter access right.
 
 ### Mentioning in comments
 
-By typing the ‘@’ character, a list of users shows up and one user can be selected. When submitting the comment, this user will receive an email as a notification about the new comment.
+By typing the ‘@’ character, you are able to filter the collaborators on the project and select one of them.
+![comment suggestion](img/collaboration/web-modeler-comment-mention-suggestions.png)
 
-## Access rights and permissions
-
-Different users can have access to different views in Web Modeler.
-
-### Catalog projects
-
-Other than [projects](#projects), catalog projects do not allow you to manage access rights. All members of your organization automatically have read-only access to your catalog project, meaning that they can see your templates, but not edit them.
-
-As the creator and owner of a catalog project, only you have the right to create, edit, and delete templates.
-
-### Folders
+When submitting the comment, this user will receive an email as a notification about the new comment.
+![comment suggestion email](img/collaboration/web-modeler-comment-mention-email.png)
