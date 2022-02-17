@@ -1,7 +1,15 @@
 async function renderBpmn(index, element) {
 
-    // create unique id for div (and the div itself)
+    var bpmnUrl = element.attr("bpmn");
+
+    // create div element with a unique id (created from the src)
     var bpmnId = "bpmn-" + (index + 1) + "-screen";
+
+    if ($("#" + bpmnId).length) {
+      // element was already rendered (this method is sometimes called twice if you click on page-internal links)
+      return;
+    }
+
     var bpmnDiv = element.append("<div id='" + bpmnId + "'></div>").find("#" + bpmnId);
     
     /* create the thumbs div
@@ -14,7 +22,6 @@ async function renderBpmn(index, element) {
 
     // render the svg
     var viewer = new window.BpmnJS({container: "#" + bpmnId});
-    var bpmnUrl = element.attr("bpmn");
 
     // go one level up if trailing slashes are used in the page (which is to expect in the current stetting)
     if (new RegExp(/^.*\/(\?|#|$).*$/).test(window.location.href)) {
@@ -173,18 +180,21 @@ async function renderBpmn(index, element) {
     addStylesheet("https://unpkg.com/dmn-js@11.0.2/dist/assets/dmn-js-decision-table.css");
     addStylesheet("https://unpkg.com/dmn-js@11.0.2/dist/assets/dmn-font/css/dmn.css");
 
+    // iterate over all divs with a bpmn attribute
     var bpmnDivs = $("div[bpmn]");
     bpmnDivsAll += bpmnDivs.length;
-    // iterate over all divs with a bpmn attribute
     bpmnDivs.each(function (index) {
       window.setTimeout(renderBpmn, index * 100, index, $(this), false);
     });
+
+    // iterate over all divs with a dmn attribute
     var dmnDivs = $("div[dmn]");
     bpmnDivsAll += dmnDivs.length;
     // iterate over all divs with a dmn attribute
     dmnDivs.each(function (index) {
       window.setTimeout(renderDmn, index * 100, index, $(this), false);
     });
+
     window.setTimeout(scrollToHash, 100);
   }
   
