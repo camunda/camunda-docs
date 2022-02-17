@@ -19,7 +19,7 @@ By default, deploying a process or decision definition means that the workflow e
 
 As a consequence, when looking directly at Camunda database tables you can see different versions in the process definition table and the running process instances which are linked to these versions:
 
-![xxx](versioning-process-definitions-assets/database-versions.png)
+![Versions](versioning-process-definitions-assets/database-versions.png)
 
 
 ## Selecting the best versioning approach
@@ -74,6 +74,22 @@ It's important to understand that process instance migration - just as you would
 
 
 
+### Things to consider before migration
+
+
+When planning your migration, here are some factors to consider:
+
+* *Do I have a good reason to migrate?*  Technically, you do not have to migrate process instances when using Camunda. Previous process definition instances will simply continue to run as intended (with some important caveats, see other things to consider below). Here are some examples of good reasons to migrate:
+
+  * Your supporting implementation resources have changed.
+  * Your latest process definition represents a substantial change in your business process
+  * Your latest process definition fixes a bug.
+  * Your latest process definition enforces some time-sensitive legal obligations or rules.
+* *How big of a difference is there between process definition versions?*  Not only the definition itself, but the data required to be present at any given time in your instance.
+* *Did supporting implementation resources change from the previous deployment?* If a service implementation changes in the new deployment and the reference to the implementation did not change from the previous deployment, then older process instances that are in flight will utilize the newer implementation by default upon deployment of the new resources.  If that breaks older instances, then you must migrate.
+* *Do I have a proper infrastructure to support “real data” testing of my migration plan?* This might be the most important aspect.  An ideal way to test your process instance migration would be to have prod-like data in some kind of staging environment that represents not only the type and quality of existing production data, but also volume, scale, and size.  You run your migration plan there so that you know what to expect when it comes time to migrate in production.  You also need the ability to quickly reset this data via some kind of snapshot, so that you can test over and over again.  You can expect many iterations of your migration plan before you move forward with a solid plan.
+
+For Camunda 7 users there is some more information available in [these migration examples](https://github.com/camunda-consulting/migration-examples/blob/master/README.md).
 
 
 ## Avoid versioning of dependant artifacts
