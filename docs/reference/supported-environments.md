@@ -75,3 +75,11 @@ Reported to work on
 Ubuntu 12.04 and newer
 Fedora 21
 Debian 8
+
+## Web Modeler
+### Web Browser
+
+- Google Chrome latest [recommended]
+- Mozilla Firefox latest
+- Microsoft Edge latest
+
