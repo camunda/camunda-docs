@@ -28,20 +28,21 @@ Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the
 
 Take the following steps:
 
-1. Click **Import New Diagram** in the context menu to inject the BPMN-model you downloaded into the diagram.
+1. In a Diagram, open the breadcrumb menu and choose **Replace via Upload** and then select a file from your machine
+![import diagram via replace](../../components/modeler/web-modeler/img/import-diagram/web-modeler-replace-via-upload-menu-item.png)
 
-![import](../../components/modeler/web-modeler/img/import-diagram.png)
-
-![processId-cloud](./img/cloud-modeler-advanced-process-id.png)
+2. Alternatively, you can drag and drop the file onto the canvas
+![import diagram via drag and drop](../../components/modeler/web-modeler/img/import-diagram/web-modeler-diagram-replace-via-drag-and-drop.png)
+![processId-cloud](./img/web-modeler-advanced-process-id.png)
 
 This process includes a service task and an XOR gateway. 
 
 2. Select the service task and fill in the properties. 
 3. Set the **Type** to `test-worker`.
 
-![process-cloud](./img/cloud-modeler-advanced.png)
+![process-cloud](./img/web-modeler-advanced.png)
 
-4. Deploy the new process using the **Save & Deploy** option in the **Execute** menu.
+4. Deploy the new process using the **Deploy Diagram** button.
 
 5. Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
 
