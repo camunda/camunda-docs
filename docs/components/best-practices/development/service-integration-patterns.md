@@ -129,7 +129,7 @@ The following table summarizes the possibilities and recommendations.
     <td><img alt="Service task" src="/img/bpmn-elements/task-service.svg" /></td>
     <td><img alt="Send task" src="/img/bpmn-elements/task-send.svg" /></td>
     <td><img alt="Service task" src="/img/bpmn-elements/task-service.svg" /></td>
-    <td><img alt="Send and receive task" src="/docs/components/best-practices/development/service-integration-patterns-assets/send-and-receive-task.png" /></td>
+    <td><img alt="Send and receive task" src="/img/bpmn-elements/send-and-receive-task.png" /></td>
   </tr>  
   <tr>
     <td>Technical implications</td>
