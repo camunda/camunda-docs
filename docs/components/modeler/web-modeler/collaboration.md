@@ -12,7 +12,6 @@ The user access on files and folders is defined at the project level.
 When you access Web Modeler via the Cloud menu, you see the Home page with all the projects you can access:
 ![home page](img/collaboration/web-modeler-home.png)
 
-
 ###  Access rights and permissions
 
 Users can have various level of access to a project in Web Modeler.
@@ -24,7 +23,6 @@ There are four roles with different levels of access rights that can be assigned
 * **Editor:** the user can edit all folders and diagrams within the project.
 * **Commenter:** the user cannot edit folders or diagrams nor invite users, but can view and leave comments on diagrams.
 * **Viewer:** the user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
-
 
 ### Inviting users to Projects
 
@@ -46,12 +44,10 @@ On the right side of a Project you can see a list of your collaborators and invi
 ![invite sent](img/collaboration/web-modeler-collaborator-invite-sent.png)
 ![invite email](img/collaboration/web-modeler-collaborator-invite-email.png)
 
-
 ### Folders
 
 You can create folders in a project to semantically group and organize your diagrams.
 The user access on a folder is inherited from the project.
-
 
 ## Sharing and embedding diagrams
 
@@ -77,7 +73,6 @@ Similar to the sharing link, a diagram can be embedded into HTML pages via an if
 
 For wiki systems like [Confluence](https://www.atlassian.com/software/confluence), we recommend using the HTML macro and adding the iframe tag from the sharing dialog. This way, diagrams can be easily included in documentation pages. To adjust the dimensions of the diagram, the width and height values of the iframe tag can be modified.
 
-
 ## Comments
 
 When selecting an element of the BPMN diagram, a discussion can be attached to this element. If no element is selected, then the discussion will be attached directly to the diagram.
@@ -91,11 +86,31 @@ Afterwards, the comment can be edited or deleted via the context menu icon.
 Elements with discussions attached will always have a visible blue overlay so you can easily identify discussion points.
 ![comment context menu](img/collaboration/web-modeler-comment-overlay-on-diagram.png)
 
-
-### Mentioning in comments
+### Mention others in comments
 
 By typing the ‘@’ character, you are able to filter the collaborators on the project and select one of them.
 ![comment suggestion](img/collaboration/web-modeler-comment-mention-suggestions.png)
 
 When submitting the comment, this user will receive an email as a notification about the new comment.
 ![comment suggestion email](img/collaboration/web-modeler-comment-mention-email.png)
+
+## Interact with your collaborators
+
+### Model a diagram together
+
+When others are opening the same diagram as you, the updates on the diagram are sent in real time. You can also see who is in the diagram with you.
+![real time collaboration](img/real-time-collaboration.png)
+
+### Draw other's attention
+
+Whether you are in a presentation or if others are in the same diagram as you are, use the attention grabber pointer to draw attention to a specific part of the diagram.
+
+1. Switch on the attention grabber pointer from the canvas tools
+![attention grabber](img/attention-grabber.png)
+
+2. And drop the pointer by clicking anywhere on the canvas
+![attention grabber gif](img/attention-grabber-pointer-pulse.gif)
+
+The pointer will pulsate to draw attention and will match your avatar color.
+It can also be seen in real-time by others that are looking at the same diagram as you.
+
