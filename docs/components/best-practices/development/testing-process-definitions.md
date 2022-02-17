@@ -410,7 +410,7 @@ This section targets Camunda Platform 7.x only. Please refer to the previous sec
 
 Camunda Platform 7 also has support for writing tests in Java. This section gives you an example, the basic ideas of test scopes and testing in chunks are also valid with Camunda Platform 7.
 
-Use:
+The technical setup for Camunda Platform 7: 
 
 1. Use [*JUnit*](http://junit.org) as unit test framework.
 2. Use Camunda's [JUnit Rule](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/ProcessEngineRule.html) to ramp up an in-memory process engine where the [JobExecutor](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/Deployment.html) is turned off.
@@ -420,7 +420,9 @@ Use:
 6. Use Camunda's [MockExpressionManager](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/mock/MockExpressionManager.html) to resolve bean names used in your process definition without the need to ramp up the dependency injection framework (like CDI or Spring).
 7. Use an [In-Memory H2 database](http://www.h2database.com/html/features.html#in_memory_databases) as default database to test processes on developer machines. If required, you can run the same tests on *multiple databases*, e.g. Oracle, DB2, or MS-SQL on a CI-Server. To achieve that, you can make use of (e.g. maven) profiles and Java properties files for database configuration.
 
-Let's use the same example as above. A typical test case looks like this:
+Let's use the same example as above. 
+
+A typical test case will look like this:
 
 ```java
 // ...
@@ -520,9 +522,10 @@ public void testTweetApproved() {
     .isEnded();
   verify(tweetPublicationService).tweet(TWEET); // 4
   verifyNoMoreInteractions(tweetPublicationService);
+}
 ```
 
-Then you can test the path where a tweet gets rejected. You don't have to start at the start event, but can start anywhere in your process:
+As a next step you might want to test the path where a tweet gets rejected. You don't have to start at the start event, but can start anywhere in your process:
 
 ```java
 @Test
