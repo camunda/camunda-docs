@@ -13,3 +13,10 @@ http://<host>:<port>/actuator/usage-metrics/process-instances?startTime={startTi
 ```
 
 , where `startTime` and `endTime` are of format `yyyy-MM-dd'T'HH:mm:ss.SSSZZ`, e.g. "1970-11-14T10:50:26.963-0100".
+
+Sample response:
+```json
+{
+    "total" : 99
+}
+```
