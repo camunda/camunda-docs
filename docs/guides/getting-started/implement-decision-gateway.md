@@ -38,7 +38,7 @@ And for the else sequence flow:
 
 <TabItem value='web'>
 
-![sequenceflows-cloud](./img/cloud-modeler-advanced-sequence-flows.png)
+![sequenceflows-cloud](./img/web-modeler-advanced-sequence-flows.png)
 
 </TabItem>
 
