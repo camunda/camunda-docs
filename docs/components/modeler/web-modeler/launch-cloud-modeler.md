@@ -7,7 +7,7 @@ Since Web Modeler is embedded in the Camunda Cloud Console, it does not need to 
 
 To launch Web Modeler, follow the steps below:
 
-1. Go to the **Modeler** tab.
+1. Click on the **Modeler** tab at the top of the page
 ![cloud web modeler menu item](img/cloud-web-modeler-menu-item.png)
 
 2. Click **New Project** to create a new project to store all your diagrams

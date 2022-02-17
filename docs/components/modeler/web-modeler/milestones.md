@@ -32,7 +32,7 @@ Hover over a milestone, click on the three dots menu and expand for more options
 ![milestones restore](img/milestones/web-modeler-milestone-restore-complete.png)
 
 
-### Diffing Milestones
+### Comparing Milestones
 Milestones can be compared visually. By enabling the diffing feature, the currently selected milestone will be compared to its predecessor.
 
 The differences that are highlighted are only those that affect the execution of the BPMN process. Pure visual changes like position changes are not highlighted.
