@@ -50,7 +50,7 @@ Refer to the [Camunda Forms reference material](https://docs.camunda.org/manual/
 
 ### Save your form
 
-To save your form in Camunda Cloud, you don't have to do anything. The Web Modeler will autosave every change you make.
+To save your form in Camunda Cloud, you don't have to do anything. Web Modeler will autosave every change you make.
 
 To save your form in Camunda Platform, click **File > Save File As...** in the top-level menu. Select a location on your file system to store the form as `.form` file. You can load that file again by clicking **File > Open File...**.
 

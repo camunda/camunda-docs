@@ -63,7 +63,7 @@ Take the following steps:
 5. Attach the next gateway once these two tasks have completed to move forward.
 6. Add a user task to bake the cake, and finally a user task to ice the cake.
 7. Add an end event, represented by a bold circle.
-8. The Web Modeler will autosave every change you make
+8. No need to save. Web Modeler will autosave every change you make
 
 ![completed bpmn diagram](./img/complete-baking-cake-bpmn.png)
 
