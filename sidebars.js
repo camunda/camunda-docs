@@ -222,6 +222,7 @@ module.exports = {
                 "components/optimize/userguide/additional-features/export-import",
                 "components/optimize/userguide/additional-features/filters",
                 "components/optimize/userguide/additional-features/footer",
+                "components/optimize/userguide/additional-features/variable-labeling",
               ],
             },
           ],
@@ -374,7 +375,6 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
             "self-managed/zeebe-deployment/operations/rebalancing",
-            "self-managed/zeebe-deployment/operations/backups"
           ],
         },
       ],
