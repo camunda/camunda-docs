@@ -1,6 +1,7 @@
 ---
 id: connect-to-camunda-cloud
 title: Connect to Camunda Cloud
+description: "Camunda Modeler can communicate directly with Camunda Cloud."
 ---
 
 Camunda Modeler can communicate directly with Camunda Cloud.

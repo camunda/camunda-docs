@@ -18,7 +18,7 @@ module.exports = {
     "guides/setting-up-development-project",
     "guides/automating-a-process-using-bpmn",
     "guides/utilizing-forms",
-    "guides/integrating-optimize",
+    "guides/improve-processes-with-optimize",
     "guides/message-correlation",
     {
       "Update Guide": [
@@ -90,72 +90,72 @@ module.exports = {
             "components/modeler/cloud-modeler/start-instance",
             "components/modeler/cloud-modeler/model-overview",
           ],
-          },
-          {
+        },
+        {
           "Camunda Modeler": [
             "components/modeler/camunda-modeler/install-the-modeler",
             "components/modeler/camunda-modeler/model-your-first-diagram",
             "components/modeler/camunda-modeler/connect-to-camunda-cloud",
             "components/modeler/camunda-modeler/start-instance",
             "components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates",
-              ],
-          },
-          {
+          ],
+        },
+        {
           "BPMN": [
             "components/modeler/bpmn/modeler-bpmn",
             "components/modeler/bpmn/bpmn-primer",
             "components/modeler/bpmn/bpmn-coverage",
             "components/modeler/bpmn/data-flow",
-                {
-                  "Tasks": [
-                        "components/modeler/bpmn/tasks",
-                        "components/modeler/bpmn/service-tasks/service-tasks",
-                        "components/modeler/bpmn/user-tasks/user-tasks",
-                        "components/modeler/bpmn/receive-tasks/receive-tasks",
-                        "components/modeler/bpmn/business-rule-tasks/business-rule-tasks",
-                        "components/modeler/bpmn/script-tasks/script-tasks",
-                        "components/modeler/bpmn/send-tasks/send-tasks",
-                        "components/modeler/bpmn/manual-tasks/manual-tasks",
-                      ],
-                    },
-                    {
-                    "Gateways": [
-                        "components/modeler/bpmn/gateways",
-                        "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
-                        "components/modeler/bpmn/parallel-gateways/parallel-gateways",
-                        "components/modeler/bpmn/event-based-gateways/event-based-gateways",
-                      ],
-                    },
-                    {
-                    "Events": [
-                        "components/modeler/bpmn/events",
-                        "components/modeler/bpmn/none-events/none-events",
-                        "components/modeler/bpmn/message-events/message-events",
-                        "components/modeler/bpmn/timer-events/timer-events",
-                        "components/modeler/bpmn/error-events/error-events",
-                      ],
-                    },
-                    {
-                    "Subprocesses": [
-                        "components/modeler/bpmn/subprocesses",
-                        "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
-                        "components/modeler/bpmn/call-activities/call-activities",
-                        "components/modeler/bpmn/event-subprocesses/event-subprocesses",
-                      ],
-                    },
-                    {
-                    "Markers": [
-                        "components/modeler/bpmn/markers",
-                        "components/modeler/bpmn/multi-instance/multi-instance",
-                      ],
-                    },
-                  ],
-          },
-          {
+            {
+              "Tasks": [
+                "components/modeler/bpmn/tasks",
+                "components/modeler/bpmn/service-tasks/service-tasks",
+                "components/modeler/bpmn/user-tasks/user-tasks",
+                "components/modeler/bpmn/receive-tasks/receive-tasks",
+                "components/modeler/bpmn/business-rule-tasks/business-rule-tasks",
+                "components/modeler/bpmn/script-tasks/script-tasks",
+                "components/modeler/bpmn/send-tasks/send-tasks",
+                "components/modeler/bpmn/manual-tasks/manual-tasks",
+              ],
+            },
+            {
+              "Gateways": [
+                "components/modeler/bpmn/gateways",
+                "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
+                "components/modeler/bpmn/parallel-gateways/parallel-gateways",
+                "components/modeler/bpmn/event-based-gateways/event-based-gateways",
+              ],
+            },
+            {
+              "Events": [
+                "components/modeler/bpmn/events",
+                "components/modeler/bpmn/none-events/none-events",
+                "components/modeler/bpmn/message-events/message-events",
+                "components/modeler/bpmn/timer-events/timer-events",
+                "components/modeler/bpmn/error-events/error-events",
+              ],
+            },
+            {
+              "Subprocesses": [
+                "components/modeler/bpmn/subprocesses",
+                "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
+                "components/modeler/bpmn/call-activities/call-activities",
+                "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+              ],
+            },
+            {
+              "Markers": [
+                "components/modeler/bpmn/markers",
+                "components/modeler/bpmn/multi-instance/multi-instance",
+              ],
+            },
+          ],
+        },
+        {
           "DMN": [
             "components/modeler/dmn/camunda-modeler-dmn",
           ],
-          },
+        },
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
@@ -201,29 +201,29 @@ module.exports = {
             "components/optimize/userguide/data-sources",
             "components/optimize/userguide/creating-dashboards",
             "components/optimize/userguide/creating-reports",
-          {
-          "Process analysis": [
-            "components/optimize/userguide/process-analysis/overview",
-            "components/optimize/userguide/process-analysis/outlier-analysis",
-            "components/optimize/userguide/process-analysis/branch-analysis",
-          ],
-          },
-          {
-          "Decision analysis": [
-            "components/optimize/userguide/decision-analysis/overview",
-            "components/optimize/userguide/decision-analysis/decision-report",
-            "components/optimize/userguide/decision-analysis/decision-filter",
-          ],
-          },
-          {
-          "Additional features": [
-            "components/optimize/userguide/additional-features/alerts",
-            "components/optimize/userguide/additional-features/event-based-processes",
-            "components/optimize/userguide/additional-features/export-import",
-            "components/optimize/userguide/additional-features/filters",
-            "components/optimize/userguide/additional-features/footer",
-          ],
-          },
+            {
+              "Process analysis": [
+                "components/optimize/userguide/process-analysis/overview",
+                "components/optimize/userguide/process-analysis/outlier-analysis",
+                "components/optimize/userguide/process-analysis/branch-analysis",
+              ],
+            },
+            {
+              "Decision analysis": [
+                "components/optimize/userguide/decision-analysis/overview",
+                "components/optimize/userguide/decision-analysis/decision-report",
+                "components/optimize/userguide/decision-analysis/decision-filter",
+              ],
+            },
+            {
+              "Additional features": [
+                "components/optimize/userguide/additional-features/alerts",
+                "components/optimize/userguide/additional-features/event-based-processes",
+                "components/optimize/userguide/additional-features/export-import",
+                "components/optimize/userguide/additional-features/filters",
+                "components/optimize/userguide/additional-features/footer",
+              ],
+            },
           ],
         },
       ],
@@ -308,20 +308,20 @@ module.exports = {
             "apis-clients/java-client/job-worker",
             "apis-clients/java-client/logging",
             "apis-clients/java-client/testing",
-              {
-                Examples: [
-                  "apis-clients/java-client-examples/index",
-                  "apis-clients/java-client-examples/process-deploy",
-                  "apis-clients/java-client-examples/process-instance-create",
-                  "apis-clients/java-client-examples/process-instance-create-nonblocking",
-                  "apis-clients/java-client-examples/process-instance-create-with-result",
-                  "apis-clients/java-client-examples/job-worker-open",
-                  "apis-clients/java-client-examples/data-pojo",
-                  "apis-clients/java-client-examples/cluster-topology-request",
-                  ],
-              },
-            ],
-          },
+            {
+              Examples: [
+                "apis-clients/java-client-examples/index",
+                "apis-clients/java-client-examples/process-deploy",
+                "apis-clients/java-client-examples/process-instance-create",
+                "apis-clients/java-client-examples/process-instance-create-nonblocking",
+                "apis-clients/java-client-examples/process-instance-create-with-result",
+                "apis-clients/java-client-examples/job-worker-open",
+                "apis-clients/java-client-examples/data-pojo",
+                "apis-clients/java-client-examples/cluster-topology-request",
+              ],
+            },
+          ],
+        },
         {
           "Go client": [
             "apis-clients/go-client/index",
@@ -330,8 +330,8 @@ module.exports = {
         },
         {
           "CLI client": [
-          "apis-clients/cli-client/index",
-          "apis-clients/cli-client/get-started",
+            "apis-clients/cli-client/index",
+            "apis-clients/cli-client/get-started",
           ],
         },
         {
@@ -362,8 +362,8 @@ module.exports = {
     "reference/dependencies",
   ],
   "Self-Managed": [
-      "self-managed/overview",
-      {
+    "self-managed/overview",
+    {
       "Zeebe": [
         "self-managed/zeebe-deployment/index",
         {
@@ -416,6 +416,7 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
             "self-managed/zeebe-deployment/operations/rebalancing",
+            "self-managed/zeebe-deployment/operations/backups"
           ],
         },
       ],
@@ -434,38 +435,38 @@ module.exports = {
         "self-managed/tasklist-deployment/authentication",
         "self-managed/tasklist-deployment/usage-metrics",
       ],
-      "Optimize":[
+      "Optimize": [
         {
           Setup: [
-        "self-managed/optimize-deployment/setup/installation",
-        "self-managed/optimize-deployment/setup/security-instructions",
-        "self-managed/optimize-deployment/setup/configuration",
-        "self-managed/optimize-deployment/setup/user-management",
-        "self-managed/optimize-deployment/setup/authorization-management",
-        "self-managed/optimize-deployment/setup/secure-elasticsearch",
-        "self-managed/optimize-deployment/setup/shared-elasticsearch-cluster",
-        "self-managed/optimize-deployment/setup/history-cleanup",
-        "self-managed/optimize-deployment/setup/localization",
-        "self-managed/optimize-deployment/setup/multi-tenancy",
-        "self-managed/optimize-deployment/setup/multiple-engines",
-        "self-managed/optimize-deployment/setup/object-variables",
-        "self-managed/optimize-deployment/setup/clustering",
-        "self-managed/optimize-deployment/setup/webhooks",
-        "self-managed/optimize-deployment/setup/setup-event-based-processes",
-        "self-managed/optimize-deployment/setup/telemetry",
-        "self-managed/optimize-deployment/setup/common-problems",
+            "self-managed/optimize-deployment/setup/installation",
+            "self-managed/optimize-deployment/setup/security-instructions",
+            "self-managed/optimize-deployment/setup/configuration",
+            "self-managed/optimize-deployment/setup/user-management",
+            "self-managed/optimize-deployment/setup/authorization-management",
+            "self-managed/optimize-deployment/setup/secure-elasticsearch",
+            "self-managed/optimize-deployment/setup/shared-elasticsearch-cluster",
+            "self-managed/optimize-deployment/setup/history-cleanup",
+            "self-managed/optimize-deployment/setup/localization",
+            "self-managed/optimize-deployment/setup/multi-tenancy",
+            "self-managed/optimize-deployment/setup/multiple-engines",
+            "self-managed/optimize-deployment/setup/object-variables",
+            "self-managed/optimize-deployment/setup/clustering",
+            "self-managed/optimize-deployment/setup/webhooks",
+            "self-managed/optimize-deployment/setup/setup-event-based-processes",
+            "self-managed/optimize-deployment/setup/telemetry",
+            "self-managed/optimize-deployment/setup/common-problems",
           ],
         },
         "self-managed/optimize-deployment/setup",
         {
           Plugins: [
-        "self-managed/optimize-deployment/plugins/plugin-system",
-        "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
-        "self-managed/optimize-deployment/plugins/decision-import-plugin",
-        "self-managed/optimize-deployment/plugins/elasticsearch-header",
-        "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
-        "self-managed/optimize-deployment/plugins/single-sign-on",
-        "self-managed/optimize-deployment/plugins/variable-import-plugin",
+            "self-managed/optimize-deployment/plugins/plugin-system",
+            "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
+            "self-managed/optimize-deployment/plugins/decision-import-plugin",
+            "self-managed/optimize-deployment/plugins/elasticsearch-header",
+            "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
+            "self-managed/optimize-deployment/plugins/single-sign-on",
+            "self-managed/optimize-deployment/plugins/variable-import-plugin",
           ],
         },
         {
@@ -495,21 +496,21 @@ module.exports = {
         "self-managed/optimize-deployment/reimport",
         {
           "Migration & Update": [
-        "self-managed/optimize-deployment/migration-update/instructions",
-        "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
-        "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
-        "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
-        "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
-        "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
-        "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
-        "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
-        "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
-        "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
-        "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
-        "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
-        "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
-        "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
-        "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
+            "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
+            "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
+            "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
+            "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
+            "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
+            "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
+            "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
+            "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
+            "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
+            "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
+            "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
+            "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
+            "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
+            "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
           ],
         },
         {
@@ -523,24 +524,24 @@ module.exports = {
       ],
       IAM: [
         "self-managed/iam/what-is-iam",
-          {
-            "Getting started": [
-              {
-                "Running IAM with Docker": [
-                  "self-managed/iam/getting-started/docker/setup-environment",
-                  "self-managed/iam/getting-started/docker/start-iam",
-                  "self-managed/iam/getting-started/docker/accessing-the-ui",
-                ]
-              }
-            ],
-          }, {
-            "Deployment": [
-              "self-managed/iam/deployment/configuration-variables",
-              "self-managed/iam/deployment/making-iam-production-ready",
-            ],
-          },
+        {
+          "Getting started": [
+            {
+              "Running IAM with Docker": [
+                "self-managed/iam/getting-started/docker/setup-environment",
+                "self-managed/iam/getting-started/docker/start-iam",
+                "self-managed/iam/getting-started/docker/accessing-the-ui",
+              ]
+            }
+          ],
+        }, {
+          "Deployment": [
+            "self-managed/iam/deployment/configuration-variables",
+            "self-managed/iam/deployment/making-iam-production-ready",
+          ],
+        },
       ],
-    },{
+    }, {
       Troubleshooting: [
         "self-managed/troubleshooting/log-levels",
       ]

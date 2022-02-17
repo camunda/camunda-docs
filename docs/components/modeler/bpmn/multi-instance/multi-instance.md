@@ -1,6 +1,7 @@
 ---
 id: multi-instance
 title: "Multi-Instance"
+description: "A multi-instance activity is executed multiple times - once for each element of a given collection."
 ---
 
 A multi-instance activity is executed multiple times - once for each element of a given collection (like a _foreach_ loop in a programming language).
@@ -20,11 +21,9 @@ When the activity is entered, the multi-instance body is activated and one insta
 
 ## Sequential vs. parallel
 
-A multi-instance activity is executed either sequentially or in parallel (default). In the BPMN, a sequential multi-instance activity is displayed with three horizontal lines at the bottom. A parallel one with three vertical lines.
+A multi-instance activity is executed either sequentially or in parallel (default). In the BPMN, a sequential multi-instance activity is displayed with three horizontal lines at the bottom. A parallel multi-instance activity is represented by three vertical lines.
 
-[//]:# (Can you clarify the sentence above?)
-
-In case of a **sequential** multi-instance activity, the instances are executed one-by-one. When one instance is completed, a new instance is created for the next element in the `inputCollection`.
+In case of a **sequential** multi-instance activity, the instances are executed one at a time. When one instance is completed, a new instance is created for the next element in the `inputCollection`.
 
 ![sequential multi-instance](assets/multi-instance-sequential.png)
 
@@ -70,7 +69,7 @@ Every instance has a local variable `loopCounter`. It holds the index in the `in
 
 Input and output variable mappings can be defined at the multi-instance activity; they are applied on each instance on activating and on completing.
 
-The input mappings can be used to create new local variables in the scope of an instance. These variables are only visible within the instance. It is a way to restrict the visibility of variables. By default, new variables (e.g. provided by a job worker) are created in the scope of the process instance and are visible to all instances of the multi-instance activity as well as outside of it. 
+The input mappings can be used to create new local variables in the scope of an instance. These variables are only visible within the instance; it is a way to restrict the visibility of variables. By default, new variables (e.g. provided by a job worker) are created in the scope of the process instance and are visible to all instances of the multi-instance activity as well as outside of it. 
 
 In case of a parallel multi-instance activity, this can lead to variables that are modified by multiple instances and result in race conditions. If a variable is defined as a local variable, it is not propagated to a parent or the process instance scope and can't be modified outside the instance.
 
@@ -91,6 +90,27 @@ source: =x
 target: output
 ```
 
+## Completion condition
+
+A `completionCondition` defines whether the multi-instance body can be completed immediately when the condition is satisfied. It is a [boolean expression](/components/concepts/expressions.md#boolean-expressions) that will be evaluated each time the instance of the multi-instance body completes. Any instances that are still active are terminated and the multi-instance body is completed when the expression evaluates to `true`.
+
+Multiple boolean values or comparisons can be combined as disjunction (`and`) or conjunction (`or`).
+
+For example:
+
+```feel
+= result.isSuccessful
+
+= count(["a", "b", "c", "d"]) > 3
+
+= orderCount >= 5 and orderCount < 15
+
+= orderCount > 15 or totalPrice > 50
+
+= list contains([6,7], today().weekday)
+```
+
+
 ## Additional resources
 
 ### XML representation
@@ -105,6 +125,9 @@ A sequential multi-instance service task:
           inputCollection="= items" inputElement="item"
           outputCollection="results" outputElement="= result" />
     </bpmn:extensionElements>
+    <bpmn:completionCondition xsi:type="bpmn:tFormalExpression">
+        = result.isSuccessful
+    </bpmn:completionCondition>
   </bpmn:multiInstanceLoopCharacteristics>
 </bpmn:serviceTask>
 ```

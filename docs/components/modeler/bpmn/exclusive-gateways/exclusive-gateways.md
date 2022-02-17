@@ -1,9 +1,10 @@
 ---
 id: exclusive-gateways
 title: "Exclusive gateway"
+description: "An exclusive gateway (or XOR-gateway) allows you to make a decision based on data."
 ---
 
-An exclusive gateway (or XOR-gateway) allows to make a decision based on data (i.e. on process instance variables).
+An exclusive gateway (or XOR-gateway) allows you to make a decision based on data (i.e. on process instance variables).
 
 ![process](assets/exclusive-gateway.png)
 

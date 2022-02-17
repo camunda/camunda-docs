@@ -7,7 +7,7 @@ title: "Environment variables"
 
 The configuration can be provided as a file or through environment variables. Mixing both sources is also possible. In that case environment variables have precedence over the configuration settings in the configuration file.
 
-All available environment variables are documented in the [configuration file templates](../configuration/#configuration-file-templates).
+All available environment variables are documented in the [configuration file templates](/components/zeebe/deployment-guide/configuration/configuration.md#configuration-file-templates).
 
 ## Environment variables for operators
 

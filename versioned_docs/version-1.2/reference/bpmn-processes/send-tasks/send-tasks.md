@@ -8,8 +8,8 @@ Kafka topic.
 
 ![task](assets/send-task.png)
 
-Send tasks behave exactly like [service tasks](../../service-tasks/service-tasks). Both task
-types are based on jobs and [job workers](../../../components/concepts/job-workers.md). The
+Send tasks behave exactly like [service tasks](/reference/bpmn-processes/service-tasks/service-tasks.md). Both task
+types are based on jobs and [job workers](/components/concepts/job-workers.md). The
 differences between these task types are the visual representation (i.e. the task marker) and the
 semantics for the model.
 
@@ -26,13 +26,13 @@ a job worker.
 
 ## Defining a task
 
-A send task must define a [job type](../../service-tasks/service-tasks#task-definition). It specifies
+A send task must define a [job type](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition). It specifies
 the type of job that workers should subscribe to (e.g. `kafka`).
 
-Use [task headers](../../service-tasks/service-tasks#task-headers) to pass static parameters to the job
+Use [task headers](/reference/bpmn-processes/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
 worker (e.g. the name of the topic to publish the message to).
 
-Define [variable mappings](../../service-tasks/service-tasks#variable-mappings) to transform the
+Define [variable mappings](/reference/bpmn-processes/service-tasks/service-tasks.md#variable-mappings) to transform the
 variables tpassed to the job worker, or to customize how the variables of the job merge
 in the process instance.
 

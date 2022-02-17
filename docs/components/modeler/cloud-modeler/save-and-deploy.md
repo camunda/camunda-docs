@@ -1,6 +1,7 @@
 ---
 id: save-and-deploy
 title: Save and deploy your diagram
+description: "If a diagram is only saved, it has no effect on your cluster."
 ---
 
 You must differentiate between saving and deploying. If a diagram is only saved, it has no effect on your cluster(s). It can be used by all members of your organization.

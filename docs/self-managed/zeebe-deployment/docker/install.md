@@ -22,8 +22,6 @@ A default docker compose configuration to run Zeebe, Operate and Tasklist is ava
 
 Download this file to your local computer, `cd` into that directory and run `docker-compose up`. 
 
-Some more information on Zeebe using `docker-compose`, including more specific configurations, are available in the [zeebe-docker-compose](https://github.com/zeebe-io/zeebe-docker-compose/blob/master/README.md) community extension.
-
 #### Exposed ports
 
 - `26500`: Zeebe Gateway API
@@ -73,4 +71,4 @@ As a next step, you can install Camunda Modeler.
 
 Camunda Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe. This application gives developers powerful features to design and deploy automated processes, human workflows, decision tables, and decision requirement diagrams using the globally-recognized [BPMN](https://camunda.com/bpmn/) and [DMN](https://camunda.com/dmn/) standards.
 
-Get started with Camunda Modeler using our [installation guide](https://docs.camunda.io/docs/components/modeler/camunda-modeler/install-the-modeler).
+Get started with Camunda Modeler using our [installation guide](/components/modeler/camunda-modeler/install-the-modeler.md).
