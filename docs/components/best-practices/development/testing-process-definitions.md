@@ -366,7 +366,7 @@ public void testDuplicateTweet() throws Exception {
 
 
 
-
+<!--
 ## Writing polyglot process tests
 
 TODO
@@ -377,7 +377,7 @@ TODO
 * Assert side effects / workers
 
 * Example in NodeJS?
-
+-->
 
 
 ## Integration tests
