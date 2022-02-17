@@ -20,15 +20,15 @@ If you don't have special architecture requirements, we recommend using SaaS fol
 This best practice targets Camunda Cloud only! If you look for Camunda Platform 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
 :::
 
-## The Java greenfield stack
+## The greenfield stack
 
 We like to give one greenfield stack recommendation, which is the stack you can simply use if there is no reason against it. And while we went through long and detailed discussions to come to this recommendation, it *doesn't* mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (see below for alternative options). 
-
-![greenfield stack architecture diagram](deciding-about-your-stack-assets/greenfield-architecture.png)
 
 The stack looks pretty similar in various programming language. Please use the programnming language your team is most familiar with. If in doubt, use Java or JavaScript.
 
 ### The Java greenfield stack
+
+![greenfield stack architecture diagram](deciding-about-your-stack-assets/greenfield-architecture.png)
 
 Use the following stack:
 
