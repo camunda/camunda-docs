@@ -249,6 +249,7 @@ module.exports = {
         {
           "Architecture": [
             "components/best-practices/management/following-the-customer-success-path",            
+            "components/best-practices/architecture/deciding-about-your-stack", 
             "components/best-practices/architecture/sizing-your-environment", 
             "components/best-practices/management/doing-a-proper-poc",
             "components/best-practices/architecture/understanding-human-tasks-management", 
