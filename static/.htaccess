@@ -8,12 +8,12 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
-RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm(.*)$ /docs/self-managed/zeebe-deployment/kubernetes$1 [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm$ /docs/self-managed/zeebe-deployment/kubernetes [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate(.*)$ /docs/self-managed/zeebe-deployment/kubernetes$1 [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate$ /docs/self-managed/zeebe-deployment/kubernetes [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites(.*)$ /docs/self-managed/zeebe-deployment/kubernetes$1 [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites$ /docs/self-managed/zeebe-deployment/kubernetes [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm(.*)$ /docs/self-managed/zeebe-deployment/kubernetes/helm/installing-helm$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm$ /docs/self-managed/zeebe-deployment/kubernetes/helm/installing-helm [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate(.*)$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites(.*)$ /docs/self-managed/zeebe-deployment/kubernetes/helm/installing-helm$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites$ /docs/self-managed/zeebe-deployment/kubernetes/helm/installing-helm [R=301,L]
 
 RewriteRule ^docs/guides/integrating-optimize(.*)$ /docs/guides/improve-processes-with-optimize$1 [R=301,L]
 RewriteRule ^docs/guides/integrating-optimize$ /docs/guides/improve-processes-with-optimize [R=301,L]
