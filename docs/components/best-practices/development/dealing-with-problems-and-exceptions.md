@@ -143,7 +143,7 @@ We decide that we want to deal with an exception in the process: in case the inv
 
 ... we assign a task to a human user, who is now in charge of taking care of delivering the invoice.
 
-Learn more about the usage of [error events](/docs/components/modeler/bpmn/error-events/error-events/) in the user guide.
+Learn more about the usage of [error events](/docs/components/modeler/bpmn/error-events/) in the user guide.
 
 
 

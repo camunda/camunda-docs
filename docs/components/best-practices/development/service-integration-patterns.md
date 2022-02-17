@@ -30,7 +30,7 @@ Let’s look at using BPMN tasks to handle these communication patterns, before 
 
 ### Service task
 
-The [service task](/docs/components/modeler/bpmn/service-tasks/service-tasks) is the typical element to implement synchronous request/response calls, such as REST, gRPC or SOAP. You should **always use service tasks for synchronous request/response**.
+The [service task](/docs/components/modeler/bpmn/service-tasks) is the typical element to implement synchronous request/response calls, such as REST, gRPC or SOAP. You should **always use service tasks for synchronous request/response**.
 
 ![Service task](service-integration-patterns-assets/service-task.png)
 
@@ -56,7 +56,7 @@ You could also argue to use send tasks to invoke synchronous request/response ca
 
 ### Receive task
 
-A [receive task](/docs/components/modeler/bpmn/receive-tasks/receive-tasks) waits for an asynchronous message. Receive tasks **should be used for incoming asynchronous messages or events**, like AMQP messages or Kafka records.
+A [receive task](/docs/components/modeler/bpmn/receive-tasks/) waits for an asynchronous message. Receive tasks **should be used for incoming asynchronous messages or events**, like AMQP messages or Kafka records.
 
 ![Receive task](service-integration-patterns-assets/receive-task.png)
 
@@ -243,7 +243,7 @@ It is probably not best practice to be as inconsistent as possible between techn
 
 ## Hiding technical complexity behind call activities
 
-Whenever technical details of one service integration become complicated, you can think of creating a separate process model for the technicalities of the call and use a [call activity](/docs/components/modeler/bpmn/call-activities/call-activities/) in the main process.
+Whenever technical details of one service integration become complicated, you can think of creating a separate process model for the technicalities of the call and use a [call activity](/docs/components/modeler/bpmn/call-activities/) in the main process.
 
 An example is given in chapter 7 of [Practical Process Automation](https://processautomationbook.com/):
 
