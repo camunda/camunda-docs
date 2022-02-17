@@ -17,12 +17,12 @@ bookchapter: 4
 Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend following the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture. 
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! The Camunda Cloud stacks differs in many ways, but also reduced the number of decisions you have to take.
+This best practice targets Camunda Platform 7.x only! If you look for Camunda Cloud, please refer to [Deciding about your Camunda Cloud stack](../deciding-about-your-stack/).
 :::
 
 ## The Java greenfield stack
 
-The greenfield stack is currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend looking at Camunda Cloud, which supports polyglott environments better. The greenfield recommendation has recently changed. So if the recommendation below is surprising to you, you might want to check [this blog post](https://docs.google.com/document/d/1AJiK8Rv3YXwloENTHIr5r2bdW1yzlXOpObbHfvvq8PM/edit).
+The greenfield stack is pretty similar for various languages. This section described the currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend looking at Camunda Cloud, which supports polyglott environments better. The greenfield recommendation has recently changed. So if the recommendation below is surprising to you, you might want to check [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
 
 Use the following stack:
 
