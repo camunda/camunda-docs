@@ -95,7 +95,14 @@ async function renderBpmn(index, element) {
     // render the table
     var hideDetails = element.attr("hideDetails") !== "false";
     var viewer = new window.DmnJS({container: "#" + dmnId, hideDetails: hideDetails});
-    $.get(element.attr("dmn"), async function (dmnDiagram) {
+
+    var dmnUrl = element.attr("dmn");
+    // go one level up if trailing slashes are used in the page (which is to expect in the current stetting)
+    if (new RegExp(/^.*\/(\?|#|$).*$/).test(window.location.href)) {
+      dmnUrl = "../" + dmnUrl;
+    }
+
+    $.get(dmnUrl, async function (dmnDiagram) {
       try {
         await viewer.importXML(dmnDiagram);
         if (element.attr("callouts")) {
