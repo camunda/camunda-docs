@@ -1,5 +1,5 @@
 ---
-title: Versioning Process Definitions
+title: Versioning process definitions
 stakeholders: Development
 tags:
     - Versioning

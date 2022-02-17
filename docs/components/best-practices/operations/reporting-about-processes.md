@@ -1,5 +1,5 @@
 ---
-title:  Reporting About Processes
+title:  Reporting about processes
 stakeholders:
     - Modeling
     - Architecture

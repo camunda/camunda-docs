@@ -1,6 +1,6 @@
 ---
 id: sizing-your-environment
-title:  Sizing Your Camunda Cloud Environment
+title:  Sizing your environment
 stakeholders:
     - Architecture
     - Operations
