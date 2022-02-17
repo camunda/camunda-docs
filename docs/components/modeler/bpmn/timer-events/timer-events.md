@@ -1,6 +1,7 @@
 ---
 id: timer-events
 title: "Timer events"
+description: "Timer events are events triggered by a defined timer."
 ---
 
 Timer events are events triggered by a defined timer.
@@ -25,9 +26,9 @@ When an intermediate timer catch event is entered, a corresponding timer is sche
 
 An interrupting timer boundary event must have a time duration definition. When the corresponding timer is triggered, the activity is terminated. Interrupting timer boundary events are often used to model timeouts; for example, canceling the processing after five minutes and doing something else.
 
-A non-interrupting timer boundary event must have either a time duration or time cycle definition. When the activity is entered, it schedules a corresponding timer. If the timer is triggered and defined as time cycle with repetitions > 0, it schedules the timer again until the defined number of repetitions is reached. 
+A non-interrupting timer boundary event must have either a time duration or time cycle definition. When the activity is entered, it schedules a corresponding timer. If the timer is triggered and defined as time cycle with repetitions greater than zero, it schedules the timer again until the defined number of repetitions is reached. 
 
-Non-interrupting timer boundary events are often used to model notifications; for example, contacting the support if the processing takes longer than an hour.
+Non-interrupting timer boundary events are often used to model notifications; for example, contacting support if the processing takes longer than an hour.
 
 ## Timers
 
@@ -35,8 +36,8 @@ Timers must be defined by providing either a date, a duration, or a cycle.
 
 A timer can be defined either as a static value (e.g. `P3D`) or as an [expression](/components/concepts/expressions.md). There are two common ways to use an expression:
 
-- [Access a variable](/components/concepts/expressions.md#access-variables) (e.g. `= remainingTime`)
-- [Use temporal values](/components/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`)
+- [Access a variable](/components/concepts/expressions.md#access-variables) (e.g. `= remainingTime`).
+- [Use temporal values](/components/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`).
 
 If the expression belongs to a timer start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the timer catch event. The evaluation must result in either a `string` that has the same ISO 8601 format as the static value, or an equivalent temporal value (i.e. a date-time, a duration, or a cycle).
 
@@ -50,7 +51,8 @@ A specific point in time defined as ISO 8601 combined date and time representati
 
 ### Time duration
 
-A duration is defined as a ISO 8601 durations format, which defines the amount of intervening time in a time interval and are represented by the format P(n)Y(n)M(n)DT(n)H(n)M(n)S (the (n) is replaced by the value for each of the date and time elements that follow the (n)).
+A duration is defined as a ISO 8601 durations format, which defines the amount of intervening time in a time interval and are represented by the format `P(n)Y(n)M(n)DT(n)H(n)M(n)S`. Note that the `n` is replaced by the value for each of the date and time elements that follow the `n`.
+
 The capital letters _P_, _Y_, _M_, _W_, _D_, _T_, _H_, _M_, and _S_ are designators for each of the date and time elements and are not replaced, but can be omitted.
 
 - _P_ is the duration designator (for period) placed at the start of the duration representation.
@@ -74,10 +76,10 @@ If the duration is zero or negative, the timer fires immediately.
 
 ### Time cycle
 
-A cycle defined as ISO 8601 repeating intervals format. It contains the duration and the number of repetitions. If the repetitions are not defined, the timer repeats infinitely until it is canceled.
+A cycle defined as ISO 8601 repeating intervals format; it contains the duration and the number of repetitions. If the repetitions are not defined, the timer repeats infinitely until it is canceled.
 
-- `R5/PT10S` - every 10 seconds, up to five times
-- `R/P1D` - every day, infinitely
+- `R5/PT10S`: Every 10 seconds, up to five times
+- `R/P1D`: Every day, infinitely
 
 ## Additional resources
 

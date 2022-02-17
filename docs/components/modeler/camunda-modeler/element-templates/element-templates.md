@@ -1,25 +1,25 @@
 ---
 id: camunda-modeler-element-templates
 title: Element templates
+description: "Element templates are a way to extend Camunda Modeler with domain-specific diagram elements, such as service and user tasks."
 ---
 
 :::note
-Element templates can be used with Camunda Modeler version 1.0 and higher. They are currently available in BPMN diagrams only.
+Element templates can be used with Camunda Modeler version 1.0+; they are currently available in BPMN diagrams only.
 :::
 
 # Overview
 
-Element templates are a way to extend the [Camunda Modeler](https://camunda.org/bpmn/tool/) with domain specific diagram elements such as service and user tasks.
+Element templates are a way to extend [Camunda Modeler](https://camunda.org/bpmn/tool/) with domain-specific diagram elements, such as service and user tasks.
 
 ![Custom fields in the Camunda Modeler](./img/overview.png)
 
 If applicable, element templates can be assigned to a diagram element via the properties panel.
-Once applied, they configure the diagram element with pre-defined values for BPMN properties, input/output mappings as well as extension properties.
+Once applied, element templates configure the diagram element with pre-defined values for BPMN properties, input/output mappings, and extension properties.
 
-As seen in the _Mail Task_ example above the modeler allows properties of custom elements to be edited, too.
+As seen in the _Mail Task_ example above, Modeler allows properties of custom elements to be edited, too.
 
-
-## Learn More
+## Learn more
 
 Refer to the following resources to learn more about element templates:
 

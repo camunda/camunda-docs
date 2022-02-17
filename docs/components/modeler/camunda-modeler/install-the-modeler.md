@@ -1,6 +1,7 @@
 ---
 id: install-the-modeler
 title: Install the Modeler
+description: "Camunda Modeler is the desktop application for modeling processes with BPMN."
 ---
 
 [Camunda Modeler](https://github.com/camunda/camunda-modeler) is the desktop application for modeling processes with BPMN.

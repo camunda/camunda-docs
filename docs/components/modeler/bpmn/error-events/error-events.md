@@ -1,9 +1,10 @@
 ---
 id: error-events
 title: "Error events"
+decription: "BPMN error events allow a process model to react to errors within a task."
 ---
 
-In process automation, you often encounter deviations from the "happy path" (the default scenario with a positive outcome). One way to resolve these deviations is using a BPMN error event, which allows a process model to react to errors within a task.
+In process automation, you often encounter deviations from the the default scenario. One way to resolve these deviations is using a BPMN error event, which allows a process model to react to errors within a task.
 
 For example, if an invalid credit card is used in the process below, the process takes a different path than usual and uses the default payment method to collect money.
 
@@ -35,7 +36,7 @@ Starting at the scope where the error was thrown, the error code is matched agai
 
 If the process instance is created via call activity, the error can also be caught in the calling parent process instance.
 
-Error boundary events and error event subprocesses must be interrupting. This means the process instance will not continue along the regular path, but follows the path that leads out of the catching error event instead.
+Error boundary events and error event subprocesses must be interrupting. This means the process instance will not continue along the regular path, but instead follow the path that leads out of the catching error event.
 
 If the error is thrown for a job, the associated task is terminated first. To continue the execution, the error boundary event or error event subprocess that caught the error is activated.
 
@@ -49,9 +50,13 @@ The incident attached to an error end event cannot be resolved by a user because
 
 ## Business error vs. technical error
 
-In real life, you’ll also have to deal with technical problems that you don't want to treat using error events. Suppose the credit card service becomes temporarily unavailable. You don't want to model the retrying, as you would have to add it to each and every service task. This will bloat the visual model and confuse business personnel. Instead, either retry or fall back to incidents as described above. This is hidden in the visual.
+In real life, you’ll also have to deal with technical problems that you don't want to treat using error events. 
 
-In this context, we found the terms **business error** and **technical error** can be confusing, as they emphasize the source of the error too much. This can lead to long discussions about whether a certain problem is technical or not, and if you are allowed to see technical errors in a business process model. It's much more important to look at how you *react* to certain errors. Even a technical problem can qualify for a business reaction. For example, you could decide to continue a process in the event that a scoring service is not available, and simply give every customer a good rating instead of blocking progress. The error is clearly technical, but the reaction is a business decision.
+Suppose the credit card service becomes temporarily unavailable. You don't want to model the retrying, as you would have to add it to each and every service task. This will bloat the visual model and confuse business personnel. Instead, either retry or fall back to incidents as described above. This is hidden in the visual.
+
+In this context, we found the terms **business error** and **technical error** can be confusing, as they emphasize the source of the error too much. This can lead to long discussions about whether a certain problem is technical or not, and if you are allowed to see technical errors in a business process model.
+
+It's much more important to look at how you *react* to certain errors. Even a technical problem can qualify for a business reaction. For example, you could decide to continue a process in the event that a scoring service is not available, and simply give every customer a good rating instead of blocking progress. The error is clearly technical, but the reaction is a business decision.
 
 In general, we recommend talking about business reactions, which are modeled in your process, and technical reactions, which are handled generically using retries or incidents.
 

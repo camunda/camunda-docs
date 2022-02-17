@@ -1,6 +1,7 @@
 ---
 id: user-tasks
 title: "User tasks"
+description: "A user task is used to model work that needs to be done by a human actor."
 ---
 
 A user task is used to model work that needs to be done by a human actor. When
@@ -10,7 +11,7 @@ stops at this point and waits until the job is completed.
 
 ![user-task](assets/user-task.png)
 
-Applications like [Tasklist] can be used by humans to complete these tasks.
+Applications like [Tasklist](/components/tasklist/introduction.md) can be used by humans to complete these tasks.
 
 Alternatively, a job worker can subscribe to the job type
 `io.camunda.zeebe:userTask` to complete the job manually.
@@ -28,6 +29,7 @@ these can be embedded into the BPMN process XML as a `zeebe:UserTaskForm`
 extension element of the process element.
 
 ## Assignments
+
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
 This can be used to define which user the task can be assigned to. One or both of the following
 attributes can be specified simultaneously:
@@ -40,15 +42,15 @@ Typically, the assignee and candidate groups are defined as static values (e.g. 
 book.author)`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate groups.
 
-In order for [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user, 
+For [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user, 
 the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
 - Camunda Cloud (login with email, Google, GitHub): `email`
 - Default Basic Auth (elasticsearch): `username`
 - IAM: `username`
 
-:::info
-Example: You log in to Tasklist using Camunda Cloud login with email using your emailadres `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
+:::note
+For example, say you log into Tasklist using Camunda Cloud login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
 :::
 
 ## Variable mappings
@@ -60,7 +62,7 @@ Input mappings can be used to transform the variables into a format accepted by 
 
 ## Task headers
 
-A user task can define an arbitrary number of `taskHeaders`. They are static
+A user task can define an arbitrary number of `taskHeaders`; they are static
 metadata handed to workers along with the job. The headers can be used
 as configuration parameters for the worker.
 
@@ -91,7 +93,3 @@ A user task with a user task form and an assignment definition:
 - [Tasklist](/components/tasklist/introduction.md)
 - [Job handling](/components/concepts/job-workers.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
-
-
-
-[Tasklist]: /components/tasklist/introduction.md

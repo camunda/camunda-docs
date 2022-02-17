@@ -1,6 +1,7 @@
 ---
 id: process-instance-creation
 title: "Process instance creation"
+description: "Depending on the process definition, an instance of it can be created in several ways."
 ---
 
 Depending on the process definition, an instance of it can be created in several ways.
@@ -60,7 +61,9 @@ This command is typically useful for short-running processes and processes that 
 
 If the process mutates system state, or further operations rely on the process outcome response to the client, consider designing your system for failure states and retries.
 
-**NOTE**: When the client resends the command, it creates a new process instance.
+:::note
+When the client resends the command, it creates a new process instance.
+:::
 
 <details>
   <summary>Code example</summary>
@@ -105,3 +108,8 @@ For each new message a new instance is created.
 ### Timer event
 
 A process can also have one or more [timer start events](/components/modeler/bpmn/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
+
+## Next steps
+
+- [About Modeler](./components/modeler/about.md)
+- [Automating a process using BPMN](./guides/automating-a-process-using-bpmn.md)
