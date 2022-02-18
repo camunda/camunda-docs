@@ -1,0 +1,42 @@
+# This file contains links from products to the documentation
+# This file is used to check that we don't accidentally break these links
+
+# Console
+
+https://docs.camunda.io/
+https://docs.camunda.io/docs/components/cloud-console/manage-organization/manage-users/
+https://docs.camunda.io/docs/components/concepts/job-workers/
+https://docs.camunda.io/docs/guides/getting-started/model-your-first-process
+https://docs.camunda.io/docs/guides/getting-started/setup-client-connection-credentials
+https://docs.camunda.io/docs/guides/message-correlation
+https://docs.camunda.io/docs/apis-clients/overview/
+https://docs.camunda.io/docs/components/cloud-console/manage-clusters/manage-alerts/
+https://docs.camunda.io/docs/components/cloud-console/manage-clusters/manage-ip-whitelists/
+https://docs.camunda.io/docs/components/concepts/variables/
+https://docs.camunda.io/docs/components/concepts/what-is-camunda-cloud/
+https://docs.camunda.io/docs/components/operate/index/
+https://docs.camunda.io/docs/components/tasklist/introduction/
+https://docs.camunda.io/docs/guides/utilizing-forms/
+https://docs.camunda.io/docs/components/modeler/bpmn/error-events/error-events/
+https://docs.camunda.io/docs/components/modeler/bpmn/exclusive-gateways/exclusive-gateways/
+https://docs.camunda.io/docs/components/modeler/bpmn/exclusive-gateways/exclusive-gateways/#conditions
+https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events/#intermediate-message-catch-events
+https://docs.camunda.io/docs/components/modeler/bpmn/receive-tasks/receive-tasks/
+https://docs.camunda.io/docs/components/modeler/bpmn/service-tasks/service-tasks/
+https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events/
+https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events/#timer-boundary-events
+https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events/#timers
+https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/user-tasks/
+
+# Modeler Properties Panel
+
+https://docs.camunda.io/docs/reference/bpmn-processes/exclusive-gateways/exclusive-gateways#conditions
+https://docs.camunda.io/docs/reference/bpmn-processes/receive-tasks/receive-tasks/#messages
+https://docs.camunda.io/docs/reference/bpmn-processes/message-events/message-events/#messages
+https://docs.camunda.io/docs/reference/bpmn-processes/call-activities/call-activities
+https://docs.camunda.io/docs/reference/bpmn-processes/service-tasks/service-tasks/#task-definition
+https://docs.camunda.io/docs/reference/bpmn-processes/business-rule-tasks/business-rule-tasks/#defining-a-task
+https://docs.camunda.io/docs/reference/bpmn-processes/script-tasks/script-tasks/#defining-a-task
+https://docs.camunda.io/docs/reference/bpmn-processes/send-tasks/send-tasks/#defining-a-task
+https://docs.camunda.io/docs/reference/bpmn-processes/error-events/error-events/#defining-the-error
+https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events#time-duration
