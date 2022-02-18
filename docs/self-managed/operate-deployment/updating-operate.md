@@ -18,9 +18,9 @@ Take the steps below:
 ### Progressively update
 
 1. Update Operate and Zeebe to version `1.1`.
-2. Let it run for a few hours and verify if everything works as expected.
-3. Repeat **Step 1** and **Step 2** for version `1.2`.
-4. Update both to version `1.3` safely.
+2. Let Operate run for a few hours and verify if everything works as expected.
+3. Repeat **Step 1** and **Step 2** to update to version `1.2`.
+4. Update both Operate and Zeebe to version `1.3`.
 
 :::note
 Depending on your amount of data, we recommend allowing a minor version to run for at least 24 hours before updating to the next version.
