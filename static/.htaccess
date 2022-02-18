@@ -82,7 +82,7 @@ RewriteRule ^(.*)/index/$ /$1 [R=301,L]
 ## tags do not exist anymore, redirect to main page
 RewriteRule ^(.*)/tags/$ / [R=301,L]
 ## duplicate sections at the end where removed
-RewriteRule ^(.*)/(.+)/\2/$ /$1/$2 [R=301,L]
+RewriteRule ^(.*)/(.+)/\2/?$ /$1/$2 [R=301,L]
 RewriteRule ^(.*/components/modeler/dmn/)camunda-modeler-dmn/$ /$1 [R=301,L]
 RewriteRule ^(.*/components/modeler/camunda-modeler/element-templates/)camunda-modeler-element-templates/$ /$1 [R=301,L]
 RewriteRule ^(.*/components/modeler/bpmn/)modeler-bpmn/$ /$1 [R=301,L]
