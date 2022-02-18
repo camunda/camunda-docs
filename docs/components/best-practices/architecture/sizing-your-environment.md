@@ -144,12 +144,12 @@ Now you can select a hardware package that can cover these requirements. In this
 
 Camunda Cloud defines three fixed hardware packages you can select from. The table below gives you an indication what requirements you can fullfill with these. If your requirements are above the mentioned numbers, please contact us to discuss a customized sizing.
 
-| **\***                                              | S                               | M                               | L                                |
+| **\***                                       | S                               | M                               | L                                |
 | :------------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
-| Max Throughput **Tasks/day**                 | 5.9 M                           | 19 M                            | 28 M                             |
-| Max Throughput **Tasks/second**              | 65                              | 220                             | 320                              |
-| Max Throughput **Process Instances/day**     | 0.5 M                           | 1.9 M                           | 3 M                              |
-| Max Total Number of Process Instances        | 5.4 M                           | 17 M                            |                                  |
+| Max Throughput **Tasks/day**                 | 5.9 M                           | 23 M                            | 43 M                             |
+| Max Throughput **Tasks/second**              | 65                              | 270                             | 500                              |
+| Max Throughput **Process Instances/day**     | 0.5 M                           | 2.3 M                           | 15 M                              |
+| Max Total Number of Process Instances        | 5.4 M                           | 5.4 M                            |                                  |
 | Approx resources provisioned **\*\***        | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
 
 **\*** The numbers in the table where measured using Camunda Cloud 1.2.4 and [the official benchmark project](https://github.com/camunda-cloud/zeebe/tree/develop/benchmarks). It uses a [ten task process](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/ten_tasks.bpmn). To calculate day-based metrics, a equal distribution over 24 hours is assumed.
@@ -162,12 +162,54 @@ Camunda Cloud defines three fixed hardware packages you can select from. The tab
 
 Provisioning Camunda Cloud onto your self-managed Kubernetes cluster might depend on various factors. For example, most customes already have own teams providing Elasticsearch for them as a service. 
 
-However, the following example shows the current configuration of a cluster of size S in Camunda Cloud SaaS, which can serve as a starting point for your own sizing. As you can see in the table above, such a cluster can serve 200,000 process instances / day and store up to 5.4 million process instances.
+However, the following example shows the current configuration of a cluster of size S in Camunda Cloud SaaS, which can serve as a starting point for your own sizing. As you can see in the table above, such a cluster can serve 500,000 process instances / day and store up to 5.4 million process instances (in-flight and history).
 
-
-
-![Sizing Table](sizing-your-environment-assets/sizing-camunda-cloud.png)
-
+|                    |                     | request | limit |
+| ------------------ | ------------------- | ------- | ----- |
+| **Zeebe**              |                     |         |       |
+| \# brokers         | 3     |
+| \# partitions      | 2     |
+| replication factor | 3     |
+|                    | vCPU \[cores\]      | 0.8     | 0.96  |
+|                    | Mem \[GB\]          | 0.25    | 1.92  |
+|                    | Disk \[GB\]         | 32      | 192   |
+| #gateway           | 2     |
+|                    | vCPU \[cores\]      | 0.4     | 0.4   |
+|                    | Mem \[GB\] limit    | 0.45    | 0.45  |
+| **Operate**            |                     |         |       |
+| #importer          | 1     |
+|                    | vCPU \[cores\]      | 0.3     | 1     |
+|                    | Mem \[GB\] limit    | 0.2     | 1     |
+| #webapp            | 2     |
+|                    | vCPU \[cores\]      | 0.3     | 1     |
+|                    | Mem \[GB\] limit    | 0.2     | 1     |
+| **Tasklist**           |                     |         |       |
+| #importer          | 1     |
+|                    | vCPU \[cores\]      | 0.4     | 1     |
+|                    | Mem \[GB\] limit    | 1       | 2     |
+| #webapp            | 2     |
+|                    | vCPU \[cores\]      | 0.4     | 1     |
+|                    | Mem \[GB\] limit    | 1       | 2     |
+| **Optimize**           |                     |         |       |
+| #importer          | 1     |
+|                    | vCPU \[cores\]      | 0.3     | 1     |
+|                    | Mem \[GB\] limit    | 0.4     | 1     |
+| #webapp            |  2     |
+|                    | vCPU \[cores\]      | 0.3     | 1     |
+|                    | Mem \[GB\] limit    | 0.4     | 1     |
+| **Elastic**            |                     |         |       |
+| #statefulset       | 1     |
+|                    | vCPU \[cores\]      | 1       | 2     |
+|                    | Mem \[GB\] limit    | 1       | 2     |
+|                    | Disk \[GB\] request | 64      | 64    |
+| **Other** (Worker, Analytics, ...) |
+| #                   |  1     |
+|                    | vCPU \[cores\]      | 0.4     | 0.4   |
+|                    | Mem \[GB\] limit    | 0.45    | 0.45  |
+| **Total resources**    |
+|                    | vCPU \[cores\]      | 0.4     | 15.08 |
+|                    | Mem \[GB\]          | 0.45    | 21.11 |
+|                    | Disk \[GB\]         | 0       | 640   |
 
 ## Planning non-production environments
 
