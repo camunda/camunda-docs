@@ -15,13 +15,13 @@ In general, best practices apply to Camunda Cloud, but there are also some speci
 ## Project management best practices
 
 * [Following the Customer Success Path](../management/following-the-customer-success-path/)
-* [Doing a proper POC](management/doing-a-proper-poc/)
+* [Doing a proper POC](../management/doing-a-proper-poc/)
 
 ## Architecture best practices
 
 * [Deciding about your stack](../architecture/deciding-about-your-stack/)
 * [Sizing your environment](../architecture/sizing-your-environment/) 
-* [Understanding human task management](architecture/understanding-human-tasks-management/)
+* [Understanding human task management](../architecture/understanding-human-tasks-management/)
 
 ## Development best practices
 
@@ -63,7 +63,7 @@ The best practices in this section apply to Camunda Platform 7 only
   * [Invoking services from a Camunda 7 process](../development/invoking-services-from-the-process-c7/) 
   * [Understanding Camunda 7 transaction handling](../development/understanding-transaction-handling-c7/)
 * Operations
-  * [Operating Camunda 7](../operating-camunda-c7/)
+  * [Operating Camunda 7](../operations/operating-camunda-c7/)
   * [Performance tuning Camunda 7](../operations/performance-tuning-camunda-c7/)
   * [Securing Camunda 7](../operations/securing-camunda-c7/)
 * Other
