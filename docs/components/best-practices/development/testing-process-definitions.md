@@ -1,6 +1,5 @@
 ---
 title: "Testing process definitions"
-stakeholders: Development
 tags:
     - Test / Unit Test
     - Test / Integration Test
@@ -8,12 +7,6 @@ tags:
     - Exception
     - Java Delegate
     - JUnit
-topics:
-    - Customer Success Path
-weight: 130
-
-booksection: "D. Automation"
-bookchapter: 5
 ---
 
 Test your executable BPMN processes, they are software. If possible, do automated unit tests with a fast in-memory workflow engine. Before releasing, verify with integration tests close to your real-life environment, which might include human-driven, exploratory integration tests.

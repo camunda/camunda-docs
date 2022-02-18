@@ -1,16 +1,9 @@
 ---
 title: "Handling data in processes"
-stakeholders: Development
 tags:
     - BPMN Data Object
     - Variable
     - Serialization
-topics:
-    - Customer Success Path
-weight: 120
-
-booksection: "D. Automation"
-bookchapter: 2
 ---
 
 When using Camunda you have access to a dynamic map of process variables, which lets you associate data to every single process instance. Make sure to use these mechanisms in a lightweight and meaningful manner storing just the relevant data in the process instance. 

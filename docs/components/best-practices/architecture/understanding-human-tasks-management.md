@@ -1,6 +1,5 @@
 ---
 title: Understanding human task management
-stakeholders: Development
 tags:
     - Human Task
     - Delegation
@@ -8,11 +7,6 @@ tags:
     - E-Mail Notification
     - 4-Eyes-Principle
     - Overdue Task
-topics:
-    - Tasklists
-
-booksection: "E. Human Task Management"
-bookchapter: 6
 ---
 
 

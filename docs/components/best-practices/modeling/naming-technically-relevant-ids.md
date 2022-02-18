@@ -1,12 +1,8 @@
 ---
 title: "Naming technically relevant IDs"
-stakeholders: Development
 tags:
     - BPMN
     - Naming Convention
-
-booksection: "D. Automation"
-bookchapter: 6
 ---
 
 For executable flows, properly name all relevant technical element IDs in your BPMN diagrams.

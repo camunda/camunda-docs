@@ -1,15 +1,7 @@
 ---
 title: "Following the Customer Success Path"
-stakeholders:
-    - Project Management
 tags:
     - Project Management
-topics:
-    - Customer Success Path
-weight: 1
-
-booksection: "A. Getting Started"
-bookchapter: 1
 ---
 
 Following certain steps when evaluating and introducing process automation helps to make it a success. Ensure you review the appropriate best practices at the right time.

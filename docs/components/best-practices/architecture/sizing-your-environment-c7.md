@@ -1,20 +1,11 @@
 ---
 id: sizing-your-environment-c7
 title:  Sizing Your Camunda 7 Environment
-stakeholders:
-    - Architecture
-    - Operations
 tags:
     - Database
     - Performance
     - Hardware
     - Sizing
-topics:
-    - Customer Success Path
-weight: 50
-
-booksection: "A. Getting Started"
-bookchapter: 5
 ---
 
 Size your environment for Camunda Platform 7 appropriately, including sufficient hardware and database space.

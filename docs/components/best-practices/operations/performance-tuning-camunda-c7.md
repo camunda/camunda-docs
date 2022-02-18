@@ -1,12 +1,7 @@
 ---
 title: "Performance tuning Camunda 7"
-stakeholders:
-    - Operations
 tags:
     - Performance
-
-booksection: "F. Operate"
-bookchapter: 3
 ---
 
 Understand influencing aspects on performance and apply tuning strategies appropriately, e.g. by configuring the Job Executor or applying External Tasks. When facing concrete challenges look at scenarios like the proper handling of huge batches.

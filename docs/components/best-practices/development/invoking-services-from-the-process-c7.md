@@ -1,6 +1,5 @@
 ---
 title: "Invoking services from a Camunda 7 process"
-stakeholders: Development
 tags:
     - Service
     - Java Delegate
@@ -13,12 +12,6 @@ tags:
     - ESB
     - SQL
     - SAP
-topics:
-    - Customer Success Path
-weight: 90
-
-booksection: "D. Automation"
-bookchapter: 1
 ---
 
 :::caution Camunda Platform 7 only

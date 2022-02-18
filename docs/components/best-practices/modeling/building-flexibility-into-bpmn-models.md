@@ -1,12 +1,7 @@
 ---
 title: Building flexibility into BPMN models
-date: 2017-12-07
-stakeholders: Modeling
 tags:
     - BPMN
-topics:
-    - Modeling Guidelines
-weight: 30
 ---
 
 BPMN modeling primarily targets structured processes, often with the goal to automate as many steps as possible, increase efficiency, and decrease process execution costs. But sometimes we need ways to build flexibility into such process models to deal with expected or unexpected operational problems or to allow for humans to intervene.

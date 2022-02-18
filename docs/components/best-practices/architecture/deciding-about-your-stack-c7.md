@@ -1,6 +1,5 @@
 ---
 title:  Deciding about your Camunda 7 stack
-stakeholders: Architecture
 tags:
     - Architecture
     - Stack
@@ -8,10 +7,6 @@ tags:
     - Application Server
     - Spring Boot
     - Maven
-weight: 60
-
-booksection: "A. Getting Started"
-bookchapter: 4
 ---
 
 Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend following the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture. 

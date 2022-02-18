@@ -1,7 +1,5 @@
 ---
 title: Routing events to processes
-stakeholders:
-- Development
 tags:
 - Event Handling
 - Process Instantiation
@@ -16,12 +14,6 @@ tags:
 - BPMN Message Event
 - BPMN Signal Event
 - BPMN Timer Event
-topics:
-    - Customer Success Path
-weight: 100
-
-booksection: "D. Automation"
-bookchapter: 3
 ---
 
 In order to start a new process instance or to route a message to an already running instance you have to choose the appropriate technology option to do so, like using the existing API or using customized possibilities including SOAP, AMQP, or Kafka. Leverage the possibilities of the universe of your runtime (like Java or NodeJS) and the frameworks of your choice to support the technologies or protocols you need.

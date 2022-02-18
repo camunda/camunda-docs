@@ -1,22 +1,11 @@
 ---
 id: sizing-your-environment
 title:  Sizing your environment
-stakeholders:
-    - Architecture
-    - Operations
 tags:
     - Database
     - Performance
     - Hardware
     - Sizing
-topics:
-    - Customer Success Path
-weight: 50
-
-booksection: "A. Getting Started"
-bookchapter: 5
-
-comment: See https://docs.google.com/spreadsheets/d/1s6TO0rmAhD-eYj69qERbAH3tLTW55mudsV-Ga6QBYb0/edit#gid=0 for example calculation
 ---
 
 In order to define and size your environment for Camunda Cloud appropriately, you need to understand the factors that influence hardware requirements. Then you can apply this knowledge to select the appropriate Camunda Cloud SaaS hardware package or size your self-managed Kubernetes cluster.

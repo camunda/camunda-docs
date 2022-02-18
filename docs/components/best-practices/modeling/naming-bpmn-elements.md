@@ -1,20 +1,9 @@
 ---
 title: "Naming BPMN elements"
-description: "
-    
-"
-date: 2015-10-27
-stakeholders: Modeling
+description: "Best Practices for naming BPMN elements"
 tags:
     - BPMN
     - Naming Convention
-topics:
-    - Customer Success Path
-    - Modeling Guidelines
-weight: 40
-
-booksection: "C. Modeling"
-bookchapter: 4
 ---
 
 Name all elements in your BPMN diagrams by focusing on the business perspective. For activities, use a verb to describe what to do. For events, describe in which (business) state the process or domain object is currently in. For (data-based) gateways, pose a question and describe the conditions under which the process moves on along the outgoing flows.

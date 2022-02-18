@@ -1,14 +1,10 @@
 ---
 title: Understanding Camunda 7 transaction handling
-stakeholders: Development
 tags:
 - Transaction
 - ACID Transaction
 - Incident
 - Save Point
-
-booksection: "D. Automation"
-bookchapter: 4
 ---
 
 :::caution Camunda Platform 7 only

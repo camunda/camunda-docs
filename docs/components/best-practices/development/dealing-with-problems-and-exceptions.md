@@ -1,6 +1,5 @@
 ---
 title: Dealing with problems and exceptions
-stakeholders: Development
 tags:
 - Transaction
 - ACID Transaction
@@ -9,9 +8,6 @@ tags:
 - BPMN Error Event
 - Incident
 - Save Point
-
-booksection: "D. Automation"
-bookchapter: 4
 ---
 
 

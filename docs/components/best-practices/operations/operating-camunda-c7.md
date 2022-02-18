@@ -1,8 +1,5 @@
 ---
 title: "Operating Camunda 7"
-stakeholders:
-    - Development
-    - Operations
 tags:
     - Save Point
     - Retry
@@ -10,12 +7,6 @@ tags:
     - Monitoring
     - Alarming
     - Backup
-topics:
-    - Customer Success Path
-weight: 150
-
-booksection: "F. Operate"
-bookchapter: 1
 ---
 
 In order to successfully operate Camunda Platform 7.x you need to take into account operation requirements when modeling business processes. Use your existing tools and infrastructure for technical monitoring and alarming. When appropriate, use Camunda Cockpit and consider extending it with plugins instead of writing your own tooling.

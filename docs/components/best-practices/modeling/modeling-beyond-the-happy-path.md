@@ -1,18 +1,11 @@
 ---
 title: Modeling beyond the happy path
-stakeholders: Modeling
 tags:
     - BPMN
     - BPMN Error Event
     - BPMN Message Event
     - BPMN Timer Event
     - Happy Path
-topics:
-    - Modeling Guidelines
-Weight: 100
-
-booksection: "C. Modeling"
-bookchapter: 2
 ---
 
 First, model the happy path to the desired end result before collecting problems and exceptions, prioritizing them, and introducing them incrementally. Secondly, focus on one selected issue at a time, and choose the right techniques for modeling beyond the happy path.

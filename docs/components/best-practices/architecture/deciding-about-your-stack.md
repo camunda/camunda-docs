@@ -1,6 +1,5 @@
 ---
 title:  Deciding about your stack
-stakeholders: Architecture
 tags:
     - Architecture
     - Stack
@@ -8,10 +7,6 @@ tags:
     - Application Server
     - Spring Boot
     - Maven
-weight: 60
-
-booksection: "A. Getting Started"
-bookchapter: 4
 ---
 
 If you don't have special architecture requirements, we recommend using SaaS following the proposed greenfield stack.

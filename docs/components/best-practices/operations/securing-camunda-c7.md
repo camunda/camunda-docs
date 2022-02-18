@@ -1,18 +1,10 @@
 ---
 title: "Securing Camunda 7"
-stakeholders:
-    - Operations
 tags:
     - Security
     - SSO
     - Authentication
     - Authorization
-topics:
-    - Customer Success Path
-weight: 140
-
-booksection: "F. Operate"
-bookchapter: 2
 ---
 
 Disallow unauthorized access by securing the Camunda Platform 7.x before going live with your process applications. Understand Camunda user management essentials, enforce authorization for the REST API, define access rights for Camunda specific resources such as process definitions and consider to integrate with your Single-Sign-On (SSO).
