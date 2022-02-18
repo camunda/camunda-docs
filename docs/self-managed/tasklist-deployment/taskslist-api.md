@@ -3,20 +3,19 @@ id: tasklist-api
 title: Tasklist API
 ---
 
-Tasklist offers an API (GraphQL) where clients authenticate via token, so that users can use it and integrate to their own systems without having to use Tasklist UI.
+Tasklist offers an API (GraphQL) where clients authenticate via token. Therefore, users can use the API and integrate it into their own systems without having to use Tasklist UI.
 
 ## Self-Managed API
 
-As there are different authentication methods available for the Self Managed Tasklist, we don't offer the Machine-to-machine (m2m) token, the current approach requires:
+As there are different authentication methods available for the Self-Managed Tasklist, we don't offer the machine-to-machine (m2m) token. The current approach requires the following:
 
-1. Clients must create a login Request 
-   `POST /api/login?username=<USERNAME>&password=<PASSWORD>`
-2. Use response headers/cookies in the API GraphQL
+- Clients must create a login request: `POST /api/login?username=<USERNAME>&password=<PASSWORD>`.
+- Use response headers/cookies in the API GraphQL.
 
 ### Limitations
 
-As in current Self Managed versions we can't differentiate a regular `User` request vs an `API User` request, this imposes some limitations to the Self Managed Tasklist API.
+As in current Self-Managed versions, we can't differentiate a regular `User` request versus an `API User` request; this imposes some limitations to the Self-Managed Tasklist API:
 
-1. Tasks must be claimed by `API User` before any change
-2. Tasks can only be claimed/assigned to `API User` itself (can't assign to someone else)
-3. Tasks can ONLY be Completed if previously claimed/assigned to `API User`
+- Tasks must be claimed by `API User` before any changes are made.
+- Tasks must be assigned to `API User` itself. You cannot assign these tasks to someone else.
+- Tasks can **only** be completed if previously claimed/assigned to `API User`.
