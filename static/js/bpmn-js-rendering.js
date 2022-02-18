@@ -1,3 +1,15 @@
+function adjustUrl(url) {
+  /*
+    not used as assets moved to static folder
+  // go one level up if trailing slashes are used in the page (which is to expect in the current stetting)
+  if (new RegExp(/^.*\/(\?|#|$).*$/).test(window.location.href)) {
+    url = "../" + url;
+  }
+  */
+
+  return "/bpmn/best-practices/" + url;
+}
+
 async function renderBpmn(index, element) {
 
     var bpmnUrl = element.attr("bpmn");
@@ -23,10 +35,8 @@ async function renderBpmn(index, element) {
     // render the svg
     var viewer = new window.BpmnJS({container: "#" + bpmnId});
 
-    // go one level up if trailing slashes are used in the page (which is to expect in the current stetting)
-    if (new RegExp(/^.*\/(\?|#|$).*$/).test(window.location.href)) {
-      bpmnUrl = "../" + bpmnUrl;
-    }
+    
+    bpmnUrl = adjustUrl(bpmnUrl);
     $.get(bpmnUrl, async function (bpmnDiagram) {
       try {
         await viewer.importXML(bpmnDiagram);
@@ -96,11 +106,7 @@ async function renderBpmn(index, element) {
     var hideDetails = element.attr("hideDetails") !== "false";
     var viewer = new window.DmnJS({container: "#" + dmnId, hideDetails: hideDetails});
 
-    var dmnUrl = element.attr("dmn");
-    // go one level up if trailing slashes are used in the page (which is to expect in the current stetting)
-    if (new RegExp(/^.*\/(\?|#|$).*$/).test(window.location.href)) {
-      dmnUrl = "../" + dmnUrl;
-    }
+    var dmnUrl = adjustUrl(element.attr("dmn"));
 
     $.get(dmnUrl, async function (dmnDiagram) {
       try {
