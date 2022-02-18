@@ -88,6 +88,9 @@ RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide$ /docs/0.25/co
 RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide/(.*)$ /docs/0.25/components/tasklist/deployment/$1 [R=301,L]
 RewriteRule ^docs/0.25/components/zeebe/tasklist-user-guide /docs/0.25/components/ [R=301,L]
 
+# redirect best-practices overview page
+RewriteRule ^docs/components/best-practices/?$ /docs/components/best-practices/overview/ [R=301,L]
+
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
