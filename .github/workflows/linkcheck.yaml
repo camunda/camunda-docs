@@ -13,6 +13,7 @@ jobs:
       matrix:
         url: [ "https://docs.camunda.io", "https://stage.docs.camunda.io" ]
     steps:
+      - uses: actions/checkout@v2
       - name: Download sitemap from production
         run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!${{ matrix.url }}!g" > sitemap.prod.txt
       - name: Prepare product links
