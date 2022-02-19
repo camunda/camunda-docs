@@ -10,8 +10,8 @@ This chapter is divided into the following sections:
 
 - [General information](index.md#general-information)
 - [Prerequisites](index.md#prerequisites)
-- [Getting to know and installing Camunda Cloud Helm charts](helm/installing-helm.md)
-- [Accessing Operate from outside a Kubernetes cluster](helm/accessing-operate-tasklist.md)
+- [Getting to know and installing Camunda Cloud Helm charts](./helm/installing-helm.md)
+- [Accessing Operate from outside a Kubernetes cluster](./helm/accessing-operate-tasklist.md)
 
 ## General information
 
