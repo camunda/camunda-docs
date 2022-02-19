@@ -17,6 +17,9 @@ RewriteRule ^docs/components/modeler/camunda-modeler$ /docs/components/modeler/d
 RewriteRule ^docs/components/modeler/cloud-modeler(.*)$ /docs/components/modeler/web-modeler$1 [R=301,L]
 RewriteRule ^docs/components/modeler/cloud-modeler$ /docs/components/modeler/web-modeler [R=301,L]
 
+RewriteRule ^docs/components/modeler/cloud-modeler/model-overview(.*)$ /docs/components/modeler/web-modeler/new-web-modeler$1 [R=301,L]
+RewriteRule ^docs/components/modeler/cloud-modeler/model-overview$ /docs/components/modeler/web-modeler/new-web-modeler [R=301,L]
+
 RewriteRule ^docs/guides/integrating-optimize(.*)$ /docs/guides/improve-processes-with-optimize$1 [R=301,L]
 RewriteRule ^docs/guides/integrating-optimize$ /docs/guides/improve-processes-with-optimize [R=301,L]
 
