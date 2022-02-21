@@ -3,26 +3,31 @@ id: installing-helm
 title: "Camunda Cloud Helm charts"
 ---
 
-[Helm](https://github.com/helm/helm) is a package manager for Kubernetes resources. Helm allows us to install a set of components by simply referencing a package name, and allowing us to override configurations to accommodate these packages to different scenarios.
+[Helm](https://github.com/helm/helm) is a package manager for Kubernetes resources. Helm allows us to install a set of 
+components by simply referencing a package name, and allowing us to override configurations to accommodate these packages 
+to different scenarios.
 
-Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us to aggregate a set of components together that can be installed with a single command. 
+Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us 
+to aggregate a set of components together that can be installed with a single command. 
 
-The Camunda Cloud Helm chart is currently available and can be found in the [Camunda Cloud Helm repository](https://github.com/camunda-community-hub/camunda-cloud-helm). By default, the following will be installed:
+The Camunda Cloud Helm chart is currently available and can be found in the [Camunda Cloud Helm repository](https://github.com/camunda-community-hub/camunda-cloud-helm). 
+By default, the following will be installed:
 
 - **Camunda Cloud self-managed Helm (ccsm-helm)**:  
-  - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` docker image.
-  - **Zeebe Gateway**: Deploys a Zeebe Gateway.
+  - **Zeebe**: Deploys a Zeebe Cluster with two brokers using the `camunda/zeebe` docker image.
+  - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
   - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
   - **Tasklist**: Deploys the Tasklist component to work with user tasks.
-  - **Elasticsearch**: Deploys an Elasticsearch cluster with three nodes.
+  - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
   
 ![Charts](assets/ccsm-helm-charts.png)
 
-When installing the `ccsm-helm` chart, all the components in this picture are installed. 
+When installing the [ccsm-helm](https://github.com/camunda-community-hub/camunda-cloud-helm/tree/main/charts/ccsm-helm) chart, 
+all the components in this picture are installed. 
 
 ### Add Camunda Cloud Helm repository
 
-The next step is to add the Camunda Cloud Helm chart repository to your installation. Once this is done, Helm is able to fetch and install charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
+In order to do so the Camunda Cloud Helm chart repository needs to be added. Once this is done, Helm is able to fetch and install charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
 
 ```
 > helm repo add camunda-cloud https://helm.camunda.io
@@ -62,13 +67,12 @@ This will return something similar to the following:
 NAME                                                   READY   STATUS    RESTARTS   AGE
 elasticsearch-master-0                                 1/1     Running   0          4m6s
 elasticsearch-master-1                                 1/1     Running   0          4m6s
-elasticsearch-master-2                                 1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-operate                           1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-operate-XXX                       1/1     Running   0          4m6s
 <RELEASE NAME>-zeebe-0                                 1/1     Running   0          4m6s
 <RELEASE NAME>-zeebe-1                                 1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-2                                 1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-tasklist                          1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-gateway                           1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-tasklist-XXX                      1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-gateway-XX1                       1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-gateway-XX2                       1/1     Running   0          4m6s
 ```
 
 ### Installing the Camunda Cloud Helm Chart locally using KIND

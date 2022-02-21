@@ -17,11 +17,16 @@ This chapter is divided into the following sections:
 
 ### Broker
 
-Camunda Cloud broker nodes need to be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve the identity of cluster nodes. StatefulSets require persistent storage, which must be allocated in advance. Depending on your cloud provider, the persistent storage differs as it is provider-specific.
+Zeebe broker nodes need to be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) 
+to preserve the identity of cluster nodes. StatefulSets require persistent storage, which must be allocated in advance. Depending on your 
+cloud provider, the persistent storage differs as it is provider-specific.
 
-At [helm.camunda.io](https://helm.camunda.io/), you'll find a Helm chart to configure a three-broker cluster with the Elasticsearch exporter and Operate. This size is comparable with the Production-S cluster plan in Camunda Cloud SaaS. It should be sufficient for 80% of use cases.
+At [helm.camunda.io](https://helm.camunda.io/), you'll find a Helm chart to configure a two-broker cluster with two Elasticsearch instances,
+Operate, the Zeebe Gateway and Tasklist. This size is comparable with the Production-S cluster plan in Camunda Cloud SaaS. It should be sufficient 
+for 80% of use cases.
 
-There are many ways you can provision and configure a Kubernetes cluster, and there are a number of architectural choices you need to make. Will your workers run in the Kubernetes cluster or external to it?
+There are many ways you can provision and configure a Kubernetes cluster, and there are a number of architectural choices 
+you need to make. Will your workers run in the Kubernetes cluster or external to it?
 
 You will need to configure your Kubernetes cluster and modify this to suit the architecture you are building.
 
@@ -33,7 +38,8 @@ We support [Kubernetes startup and liveness probes](../operations/health.md#gate
 
 ### Helm
 
-There are several alternatives to deploy applications to a Kubernetes cluster, but the following sections use Helm charts to deploy a set of components into your cluster.
+There are several alternatives to deploy applications to a Kubernetes cluster, but the following sections use Helm charts 
+to deploy a set of components into your cluster.
 
 Helm allows you to choose exactly what chart (set of components) you want to install and how these components need to be configured.
 
