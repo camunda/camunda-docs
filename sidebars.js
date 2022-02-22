@@ -244,10 +244,54 @@ module.exports = {
         },
         "components/tasklist/faq",
       ],
+      "Best Practices": [
+        "components/best-practices/overview",
+        {
+          "Project Management": [
+            "components/best-practices/management/following-the-customer-success-path",            
+            "components/best-practices/management/doing-a-proper-poc",
+          ],
+          "Architecture": [
+            "components/best-practices/architecture/deciding-about-your-stack", 
+            "components/best-practices/architecture/sizing-your-environment", 
+            "components/best-practices/architecture/understanding-human-tasks-management", 
+          ],
+          "Development": [
+            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
+            "components/best-practices/development/service-integration-patterns",
+            "components/best-practices/development/writing-good-workers",
+            "components/best-practices/development/dealing-with-problems-and-exceptions",
+            "components/best-practices/development/handling-data-in-processes",
+            "components/best-practices/development/routing-events-to-processes",
+            "components/best-practices/development/testing-process-definitions",
+          ],
+          "Modeling": [
+            "components/best-practices/modeling/creating-readable-process-models",
+            "components/best-practices/modeling/naming-bpmn-elements",
+            "components/best-practices/modeling/naming-technically-relevant-ids",
+            "components/best-practices/modeling/modeling-beyond-the-happy-path",
+            "components/best-practices/modeling/modeling-with-situation-patterns",
+            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
+            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+          ],
+          "Operations": [
+            "components/best-practices/operations/versioning-process-definitions",
+            "components/best-practices/operations/reporting-about-processes",            
+          ],
+          "Camunda 7 specific": [
+            "components/best-practices/architecture/deciding-about-your-stack-c7", 
+            "components/best-practices/architecture/sizing-your-environment-c7", 
+            "components/best-practices/development/invoking-services-from-the-process-c7",
+            "components/best-practices/development/understanding-transaction-handling-c7",
+            "components/best-practices/operations/operating-camunda-c7",
+            "components/best-practices/operations/performance-tuning-camunda-c7",
+            "components/best-practices/operations/securing-camunda-c7",
+            "components/best-practices/architecture/extending-human-task-management-c7", 
+          ],
     },
-    "components/best-practices",
+      ],
+    },
   ],
-
   "APIs & Clients": [
     "apis-clients/overview",
     {
