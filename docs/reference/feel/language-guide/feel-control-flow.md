@@ -22,7 +22,7 @@ if 12 < 10 then "low" else "high"
 ```
 
 :::note
-If the condition `c` doesn't evaluate to a boolean value (e.g. `null`,) it
+If the condition `c` doesn't evaluate to a boolean value (e.g. `null`), it
 executes the expression `b`.
 
 ```js
