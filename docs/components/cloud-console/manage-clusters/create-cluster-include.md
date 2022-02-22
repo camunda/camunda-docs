@@ -3,8 +3,6 @@
 
 Let's take a closer look at creating clusters and viewing their details.
 
-[//]:# (Do we need an id and title above? Seems we're still missing this.)
-
 ![cluster-creating](./img/cluster-overview-empty.png)
 
 To create a cluster, follow the steps below:
