@@ -62,7 +62,7 @@ For gRPC handling, complete the following steps:
 npm install -g grpcurl-tools
 ```
 
-3. Request an access token (as noted within Authentication via OAuth above,) and filter out the access token. Write the value for follow-up processing into a variable:
+3. Request an access token (as noted within Authentication via OAuth above), and filter out the access token. Write the value for follow-up processing into a variable:
 
 ```bash
 export ACCESS_TOKEN=$(curl -s --request POST \

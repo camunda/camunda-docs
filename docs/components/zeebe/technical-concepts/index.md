@@ -15,4 +15,4 @@ This section gives an overview of Zeebe's underlying technical concepts.
 - [Protocols](protocols.md) - Explains how external clients communicate with Zeebe.
 - [Exporters](exporters.md) - Discusses the extension point to add additional processing logic for each record in the event stream.
 
-In addition to these sections, you may also be interested in Camunda Cloud [Best Practices](././components/best-practices.md).
+In addition to these sections, you may also be interested in our [Best Practices](././components/best-practices/overview.md).

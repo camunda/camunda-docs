@@ -21,9 +21,9 @@ In addition to providing visibility into active and completed process instances,
 
 ![operate-introduction](img/operate-introduction_light.png)
 
-In the [Operate User Guide](../userguide/basic-operate-navigation), learn how to use it to monitor process instances and more features.
+In the [Operate User Guide](/components/operate/userguide/basic-operate-navigation.md), learn how to use it to monitor process instances and more features.
 
-In the [Operate Deployment Guide](../deployment/install-and-start), walk through how to install and run Operate.
+In the [Operate Deployment Guide](/components/operate/deployment/install-and-start.md), walk through how to install and run Operate.
 
 Operate is also available for production use (with support) in the Camunda Cloud offering.
 

@@ -1,7 +1,7 @@
 ---
 id: gateways
 title: "Overview"
-description: "This document outlines an overview of general events."
+description: "This document outlines an overview of currently supported gateways."
 ---
 
 Currently supported elements:

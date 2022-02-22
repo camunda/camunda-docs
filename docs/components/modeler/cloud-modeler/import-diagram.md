@@ -1,6 +1,7 @@
 ---
 id: import-diagram
 title: Import diagram
+description: "You can import a BPMN diagram at any time with Cloud Modeler."
 ---
 
 You can import a BPMN diagram at any time with Cloud Modeler. 

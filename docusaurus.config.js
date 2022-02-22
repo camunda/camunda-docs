@@ -30,7 +30,10 @@ module.exports = {
         id: "GTM-KQGNSTS", // GTM Container ID
       },
     ],
+    "./static/plugins/bpmn-js",
   ],
+  scripts: [
+  ],  
   themeConfig: {
     prism: {
       additionalLanguages: ['java'],
@@ -224,12 +227,7 @@ module.exports = {
             },
           },
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/blog/",
-        },
+        blog: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },

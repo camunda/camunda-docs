@@ -1,6 +1,7 @@
 ---
 id: variables
 title: "Variables"
+description: "Variables are part of a process instance and represent the data of the instance."
 ---
 
 Variables are part of a process instance and represent the data of the instance.
@@ -51,7 +52,7 @@ This process instance has the following variables:
 
 ### Variable propagation
 
-When variables are merged into a process instance (e.g. on job completion, on message correlation,) each variable is propagated from the scope of the activity to its higher scopes.
+When variables are merged into a process instance (e.g. on job completion, on message correlation, etc.) each variable is propagated from the scope of the activity to its higher scopes.
 
 The propagation ends when a scope contains a variable with the same name. In this case, the variable value is updated.
 
@@ -65,7 +66,7 @@ The job of **Task B** is completed with the variables `b`, `c`, and `d`. The var
 
 In some cases, variables should be set in a given scope, even if they don't exist in this scope before.
 
-In order to deactivate the variable propagation, the variables are set as _local variables_. This means the variables are created or updated in the given scope, regardless if they existed in this scope before.
+To deactivate the variable propagation, the variables are set as **local variables**. This means the variables are created or updated in the given scope, regardless if they existed in this scope before.
 
 ## Input/output variable mappings
 
@@ -104,26 +105,31 @@ When an input mapping is applied, it creates a new **local variable** in the sco
 
 Examples:
 
-| Process instance variables            | Input mappings                                                                                               | New variables                               |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
-| `orderId: "order-123"`                 | **source:** `=orderId`<br/> **target:** `reference`                                                          | `reference: "order-123"`                    |
-| `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
+| Process instance variables | Input mappings | New variables |
+| -- | -- | -- |
+| `orderId: "order-123"` | **source:** `=orderId`<br/> **target:** `reference` | `reference: "order-123"` |
+| `customer:{"name": "John"}` | **source:** `=customer.name`<br/>**target:** `sender` | `sender: "John"` |
 | `customer: "John"`<br/>`iban: "DE456"` | **source:** `=customer`<br/> **target:** `sender.name`<br/>**source:** `=iban`<br/>**target:** `sender.iban` | `sender: {"name": "John", "iban": "DE456"}` |
 
 ### Output mappings
 
 Output mappings can be used to customize how job/message variables are merged into the process instance. They can be defined on service tasks, receive tasks, message catch events, and subprocesses.
 
-If **one or more** output mappings are defined, the job/message variables are set as _local variables_ in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
+If **one or more** output mappings are defined, the job/message variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
 
 If **no** output mappings are defined, all job/message variables are merged into the process instance.
 
-In the case of a subprocess, the behavior is different. There are no job/message variables to be merged. However, output mappings can be used to propagate _local variables_ of the subprocess to higher scopes. By default, all _local variables_ are removed when the scope is left.
+In the case of a subprocess, the behavior is different. There are no job/message variables to be merged. However, output mappings can be used to propagate **local variables** of the subprocess to higher scopes. By default, all **local variables** are removed when the scope is left.
 
 Examples:
 
-| Job/message variables                                | Output mappings                                                                                                                      | Process instance variables                        |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
-| `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
+| Job/message variables | Output mappings | Process instance variables |
+| -- | -- | -- |
+| `status: "Ok"` | **source:** `=status`<br/>**target:** `paymentStatus` | `paymentStatus: "OK"` |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
-| `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |
+| `status: "Ok"`<br/>`transactionId: "t-789"` | **source:** `=transactionId`<br/>**target:** `order.transactionId` | `order: {"transactionId": "t-789"}`  |
+
+## Next steps
+
+- [Accesses a variable](expressions.md#access-variables)
+- [Incidents](incidents.md)

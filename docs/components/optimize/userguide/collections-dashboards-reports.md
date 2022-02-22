@@ -37,4 +37,4 @@ A manager can add a new user or group to the collection using the **Add** button
 
 An editor may edit, delete, and create new dashboards or reports in the collection. Editors may not edit the name of the collection, delete the collection, or change anything in the **Users** tab.
 
-Those with read-only access to the collection may only view the components contained within, as well as copy them. Viewers cannot create, edit, or delete components in a collection,. They are also not allowed to rename or delete the collection itself, or change anything in the **Users** tab.
+Those with read-only access to the collection may only view the components contained within, as well as copy them. Viewers cannot create, edit, or delete components in a collection. They are also not allowed to rename or delete the collection itself, or change anything in the **Users** tab.

@@ -1,13 +1,14 @@
 ---
 id: event-subprocesses
 title: "Event subprocess"
+description: "An event subprocess is a subprocess triggered by an event."
 ---
 
-An event subprocess is a subprocess triggered by an event. It can be added globally to the process, or locally inside an embedded subprocess.
+An event subprocess is a subprocess triggered by an event. This can be added globally to the process, or locally inside an embedded subprocess.
 
 ![event-subprocess](assets/event-subprocess.png)
 
-An event subprocess must have exactly one start event of one of the following types:
+An event subprocess must have exactly **one** start event of one of the following types:
 
 - [Timer](../timer-events/timer-events.md)
 - [Message](../message-events/message-events.md)
