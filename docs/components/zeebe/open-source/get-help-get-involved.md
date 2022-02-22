@@ -1,19 +1,20 @@
 ---
 id: get-help-get-involved
-title: "Get help & get involved"
+title: "Get help and get involved"
+description: "Ask questions, report problems, and make contributions."
 ---
 
 We provide a few different public-facing Zeebe support and feedback channels where users can ask questions, report problems, and make contributions.
 
 ### Camunda Cloud user forum
 
-The best place to ask questions about Zeebe and to troubleshoot issues is the [forum](https://forum.camunda.io).
+The best place to ask questions about Zeebe and troubleshoot issues is the [forum](https://forum.camunda.io).
 
 The Zeebe team monitors the forum closely, and we do our best to respond to all questions in a timely manner.
 
 ### Public Slack group
 
-Join our [public Slack group](https://zeebe-slack-invite.herokuapp.com/), where you can ask one-off questions, share community contributions, and connect with other Zeebe users.
+Join our [public Slack group](https://zeebe-slack-invite.herokuapp.com/), where you can ask questions, share community contributions, and connect with other Zeebe users.
 
 ### Create an issue in GitHub
 

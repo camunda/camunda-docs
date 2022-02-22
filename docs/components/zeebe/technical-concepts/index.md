@@ -2,9 +2,10 @@
 id: index
 sidebar_label: "Overview"
 title: "Technical concepts"
+description: "This section gives an overview of Zeebe's underlying technical concepts."
 ---
 
-This chapter gives an overview of Zeebe's underlying technical concepts.
+This section gives an overview of Zeebe's underlying technical concepts.
 
 - [Architecture](architecture.md) - Introduces you to the internal components of Zeebe, as well as interfaces for external systems to interact with Zeebe.
 - [Clustering](clustering.md) - Discusses the internal structure and properties of a Zeebe cluster.
