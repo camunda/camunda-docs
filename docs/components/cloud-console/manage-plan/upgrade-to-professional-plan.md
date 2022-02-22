@@ -1,7 +1,7 @@
 ---
 id: upgrade-to-professional-plan
-title: Upgrade to Professional Plan
-description: "Want to upgrade to a Professional Plan? Follow these simple steps."
+title: Upgrade to a Professional Plan
+description: "Want to upgrade to a Professional Plan? Follow these steps."
 ---
 
 :::note

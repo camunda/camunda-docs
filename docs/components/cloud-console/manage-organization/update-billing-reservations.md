@@ -17,12 +17,12 @@ Once signed up for the **Professional Plan** or **Enterprise Plan**, you have ac
 - View how many hardware packages are included on the right side of the page.
   - **Professional Plan**: Change the reservations for additional hardware packages.
 
-Reservations control how many clusters you can deploy. Increasing the number of reservations allows you to deploy more clusters, while decreasing the number of reservations does the opposite.
+Reservations control how many clusters you can deploy. Increasing the number of reservations allows you to deploy more clusters, while decreasing the number of reservations allows you to deploy fewer clusters.
 
 You can access the **Billing** page by selecting **Organization Management** in the Camunda Cloud Console navigation bar.
 
 ![billing-overview](./img/billing-overview.png)
 
-### Edit reservations (only Professional Plan)
+### Edit reservations (Professional Plan only)
 
-The number of reserved clusters can be changed with the **Edit** button. The number of reserved clusters cannot exceed the maximum limit and cannot go below what is currently in use.
+Use the **Edit** button to change the number of reserved clusters. The number of reserved clusters cannot exceed the maximum limit and cannot go below what is currently in use.
