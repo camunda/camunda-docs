@@ -3,8 +3,8 @@ id: language-guide-introduction
 title: Introduction
 ---
 
-Everything begins with [data types](./feel-data-types.md). Read this first to have a better
-understanding of the other content.
+Everything begins with [data types](./feel-data-types.md). Read on this subject first to have a better
+understanding of the other content like [expressions](./feel-expressions-introduction.md) and [built-in functions](./feel-functions.md).
 
 If you're writing an expression for an input entry of a decision table, visit our documentation on [unary-tests](./feel-unary-tests.md).
 

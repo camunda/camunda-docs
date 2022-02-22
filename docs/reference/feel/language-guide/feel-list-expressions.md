@@ -59,7 +59,7 @@ element of the list is at index `-1`.
 // null
 ```
 
-:::note Caution!
+:::caution be careful!
 The index of a list starts at `1`. In other languages, the index starts at `0`.
 :::
 

@@ -45,7 +45,7 @@ A context value can embed other context values.
 // {a:1, b:{c:2}}
 ```
 
-### Get entry/path
+### Get entry or path
 
 ```js
 a.b

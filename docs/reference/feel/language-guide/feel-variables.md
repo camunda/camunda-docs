@@ -12,13 +12,13 @@ Access the value of a variable by its variable name.
 a + b
 ```
 
-If the value of the variable is a context, a [context entry can be accessed](/docs/reference/feel/language-guide/feel-context-expressions#get-entrypath) by its key.
+If the value of the variable is a context, a [context entry can be accessed](/docs/reference/feel/language-guide/feel-context-expressions#get-entry-or-path) by its key.
 
 ```js
 a.b
 ```
 
-:::note
+:::tip
 
 Use a [null-check](/docs/reference/feel/language-guide/feel-boolean-expressions#null-check) if the variable can be `null` or is optional.  
 

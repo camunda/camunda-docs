@@ -4,7 +4,7 @@ title: Introduction
 description: "FEEL expressions are powerful and can be used for various cases."
 ---
 
-FEEL (Friendly Enough Expression Language) expressions are powerful and can be used for various cases.
+FEEL expressions are powerful and can be used for various cases.
 
 This section is split into expressions based on their operational data type:
 

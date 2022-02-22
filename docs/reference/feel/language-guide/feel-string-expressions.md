@@ -21,7 +21,7 @@ An addition concatenates the strings. The result is a string containing the char
 // "foobar"
 ```
 
-:::note
+:::tip
 
 The concatenation is only available for string values. For other types, you can use
 the [string()](/docs/reference/feel/builtin-functions/feel-built-in-functions-conversion#string) function to convert

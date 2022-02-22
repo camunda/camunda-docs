@@ -5,7 +5,7 @@ description: "FEEL includes many built-in functions. These functions can be invo
 in expressions and unary-tests."
 ---
 
-FEEL (Friendly Enough Expression Language) includes many built-in functions. These functions can be invoked
+FEEL includes many built-in functions. These functions can be invoked
 in [expressions](../language-guide/feel-expressions-introduction.md)
 and [unary-tests](../language-guide/feel-unary-tests.md).
 

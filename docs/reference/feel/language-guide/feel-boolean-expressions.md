@@ -95,7 +95,7 @@ date("2020-04-06") between date("2020-04-05") and date("2020-04-09")
 // true
 ```
 
-:::note Caution!
+:::caution Be Careful!
 The equals operator has only **one** equals sign (e.g. `x = y`). In other languages, the operator has two equals signs (e.g. `x == y`).
 :::
 
@@ -123,7 +123,7 @@ null = null
 // true
 ```  
 
-:::note Tip
+:::tip
 
 The built-in
 function [is defined()](../builtin-functions/feel-built-in-functions-boolean.md#is-defined) can be
