@@ -1,6 +1,7 @@
 ---
 id: clustering
 title: "Clustering"
+description: "Zeebe can operate as a cluster of brokers, forming a peer-to-peer network."
 ---
 
 Zeebe can operate as a cluster of brokers, forming a peer-to-peer network.
@@ -11,7 +12,7 @@ In this network, all brokers have the same responsibilities and there is no sing
 
 ## Gossip membership protocol
 
-Zeebe implements the [Gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol) to know which brokers are currently part of the cluster.
+Zeebe implements the [gossip protocol](https://en.wikipedia.org/wiki/Gossip_protocol) to know which brokers are currently part of the cluster.
 
 The cluster is bootstrapped using a set of well-known bootstrap brokers, to which the others can connect. To achieve this, each broker must have at least one bootstrap broker as its initial contact point in their configuration:
 
@@ -25,20 +26,22 @@ When a broker is connected to the cluster for the first time, it fetches the top
 
 ## Raft consensus and replication protocol
 
-To ensure fault tolerance, Zeebe replicates data across machines using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(computer_science)>).
+To ensure fault tolerance, Zeebe replicates data across servers using the [raft protocol](<https://en.wikipedia.org/wiki/Raft_(computer_science)>).
 
-Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a **leader** is determined by the raft protocol which takes in requests and performs all of the processing. All other brokers are passive **followers**. When the leader becomes unavailable, the followers transparently select a new leader.
+Data is divided into partitions (shards). Each partition has a number of replicas. Among the replica set, a **leader** is determined by the raft protocol, which takes in requests and performs all of the processing. All other brokers are passive **followers**. When the leader becomes unavailable, the followers transparently select a new leader.
 
 Each broker in the cluster may be both leader and follower at the same time for different partitions. In an ideal world, this leads to client traffic distributed evenly across all brokers.
 
 ![cluster](assets/data-distribution.png)
 
 :::note
-There is no active load balancing across partitions. Each leader election for any partition is completely autonomous and independent of leader elections for other partitions. This may lead, in the worst case, to one node becoming the leader for all partitions. This is not a problem for fault tolerance as the guarantees of replication still hold. However, it may negatively impact throughput as all traffic hits one node.
+There is no active load balancing across partitions. Each leader election for any partition is autonomous and independent of leader elections for other partitions.
+
+This may lead to one node becoming the leader for all partitions. This is not a problem for fault tolerance as the guarantees of replication remain. However, this may negatively impact throughput as all traffic hits one node.
 :::
 
 ## Commit
 
-Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of followers. This procedure is called **commit**. Committing ensures a record is durable even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
+Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of followers. This procedure is called **commit**. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
 
 ![cluster](assets/commit.png)
