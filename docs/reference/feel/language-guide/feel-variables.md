@@ -12,7 +12,7 @@ Access the value of a variable by its variable name.
 a + b
 ```
 
-If the value of the variable is a context, a [context entry can be accessed](/docs/reference/feel/language-guide/feel-context-expressions#get-entry--path) by its key.
+If the value of the variable is a context, a [context entry can be accessed](/docs/reference/feel/language-guide/feel-context-expressions#get-entrypath) by its key.
 
 ```js
 a.b
