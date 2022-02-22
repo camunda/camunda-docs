@@ -21,5 +21,3 @@ This section contains product manual content for each component in Camunda Cloud
 Deployment guides for Camunda Cloud components are available in the [Self-Managed section](./self-managed/overview.md).
 
 :::
-
-[//]:# (From a products perspective, do we want Components to be capitalized or lower case?)
