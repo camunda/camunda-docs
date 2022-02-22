@@ -101,8 +101,7 @@ The input value is passed implicitly to the operator.
 Combines multiple unary-test expressions following the ternary logic.
 
 * Returns `true` if at least one unary-test evaluates to `true`.
-* Otherwise, it returns `false`
-  http://localhost:3000/docs/reference/feel/language-guide/feel-functions/#invocation
+* Otherwise, it returns `false`.
 
 ```js
 2, 3, 4
