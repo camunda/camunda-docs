@@ -242,7 +242,6 @@ module.exports = {
             },
           ],
         },
-        "components/tasklist/faq",
       ],
       "Best Practices": [
         "components/best-practices/overview",
