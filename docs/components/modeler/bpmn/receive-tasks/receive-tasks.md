@@ -30,9 +30,10 @@ To correlate a message to the receive task, the message is published with the de
 
 Output variable mappings are used to customize how variables are merged into the process instance.
 These can contain multiple elements that specify which variables should be mapped.
-The `Process Variable Name` of an output denotes the variable name outside of the activity.
+The `Process Variable Name` of an output denotes the variable name outside the activity.
 
 Visit our documentation on [input and output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) for more information on this topic.
+
 ## Additional resources
 
 ### XML representation

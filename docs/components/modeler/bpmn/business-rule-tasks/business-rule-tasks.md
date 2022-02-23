@@ -31,9 +31,9 @@ specifies the type of job workers should subscribe to (e.g. DMN).
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
 worker (e.g. the key of the decision to evaluate).
 
-Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) to transform the
-variables passed to the job worker, or to customize how the variables of the job are merged
-in the process instance.
+Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
+to transform the variables passed to the job worker, or to customize how the variables of the job merge.
 
 ## Additional resources
 
