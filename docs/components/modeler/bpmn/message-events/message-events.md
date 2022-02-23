@@ -73,9 +73,9 @@ To correlate a message to the message event, the message is published with the d
 
 ## Variable mappings
 
-Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
-the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
-to transform the variables passed to the job worker, or to customize how the variables of the job merge.
+By default, all message variables are merged into the process instance. This behavior can be customized by defining an output mapping at the message catch event.
+
+Visit the documentation regarding [variable mappings](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings) for more information on this topic.
 
 ## Additional resources
 
