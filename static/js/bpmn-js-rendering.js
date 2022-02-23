@@ -37,7 +37,10 @@ async function renderBpmn(index, element) {
 
     
     bpmnUrl = adjustUrl(bpmnUrl);
-    $.get(bpmnUrl, async function (bpmnDiagram) {
+    $.ajax({
+      url: bpmnUrl,
+      dataType: "text",
+      success: async function (bpmnDiagram) {
       try {
         await viewer.importXML(bpmnDiagram);
 
@@ -71,8 +74,9 @@ async function renderBpmn(index, element) {
       } catch (err) {
         console.log("Error while rendering " + element.attr("bpmn") + ": ", err);
       }
-    });
-  }
+    }
+  });
+}
 
   function addOverlay(overlays, bpmnElementId, text) {
     try {
