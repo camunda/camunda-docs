@@ -14,7 +14,7 @@ The Camunda Cloud Helm chart is currently available and can be found in the [Cam
 By default, the following will be installed:
 
 - **Camunda Cloud self-managed Helm (ccsm-helm)**:  
-  - **Zeebe**: Deploys a Zeebe Cluster with two brokers using the `camunda/zeebe` docker image.
+  - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` docker image.
   - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
   - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
   - **Tasklist**: Deploys the Tasklist component to work with user tasks.
@@ -67,10 +67,11 @@ This will return something similar to the following:
 NAME                                                   READY   STATUS    RESTARTS   AGE
 elasticsearch-master-0                                 1/1     Running   0          4m6s
 elasticsearch-master-1                                 1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-operate-XXX                       1/1     Running   0          4m6s
+<RELEASE NAME>-operate-XXX                             1/1     Running   0          4m6s
 <RELEASE NAME>-zeebe-0                                 1/1     Running   0          4m6s
 <RELEASE NAME>-zeebe-1                                 1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-tasklist-XXX                      1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-2                                 1/1     Running   0          4m6s
+<RELEASE NAME>-tasklist-XXX                             1/1     Running   0          4m6s
 <RELEASE NAME>-zeebe-gateway-XX1                       1/1     Running   0          4m6s
 <RELEASE NAME>-zeebe-gateway-XX2                       1/1     Running   0          4m6s
 ```
@@ -102,9 +103,9 @@ This will return something similar to the following:
 ```
 NAME                                                   READY   STATUS    RESTARTS   AGE
 elasticsearch-master-0                                 1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-operate                           1/1     Running   0          4m6s
+<RELEASE NAME>-operate-XXX                           1/1     Running   0          4m6s
 <RELEASE NAME>-zeebe-0                                 1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-tasklist                          1/1     Running   0          4m6s
+<RELEASE NAME>-tasklist-XXX                          1/1     Running   0          4m6s
 <RELEASE NAME>-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 

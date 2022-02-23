@@ -21,8 +21,8 @@ Zeebe broker nodes need to be deployed as a [StatefulSet](https://kubernetes.io/
 to preserve the identity of cluster nodes. StatefulSets require persistent storage, which must be allocated in advance. Depending on your 
 cloud provider, the persistent storage differs as it is provider-specific.
 
-At [helm.camunda.io](https://helm.camunda.io/), you'll find a Helm chart to configure a two-broker cluster with two Elasticsearch instances,
-Operate, the Zeebe Gateway and Tasklist. This size is comparable with the Production-S cluster plan in Camunda Cloud SaaS. It should be sufficient 
+At [helm.camunda.io](https://helm.camunda.io/), you'll find a Helm chart to configure a three-broker cluster with two Elasticsearch instances,
+Operate, two Zeebe Gateways and Tasklist. This size is comparable with the Production-S cluster plan in Camunda Cloud SaaS. It should be sufficient 
 for 80% of use cases.
 
 There are many ways you can provision and configure a Kubernetes cluster, and there are a number of architectural choices 
