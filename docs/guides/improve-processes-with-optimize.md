@@ -82,9 +82,9 @@ For this purpose, you can create new alerts within your reports. These alerts wa
 
 To create an alert, take the following steps:
 
-1. Create a single-value report inside a collection for a KPI you want to track.
+1. Create a report with a number visualization inside a collection for a KPI you want to track.
 2. Inside your report, select the **Alerts** tab.
-3. Select the type of alert you would like to receive. For example, you can analyze high task backlog in a human task bottleneck analysis.
+3. Select the type of alert you would like to receive. For example, you can receive an email notification when the backlog on your bottleneck becomes too high.
 
 As you’re notified, you can begin to examine if the process is broken and if additional teams need to be notified.
 
