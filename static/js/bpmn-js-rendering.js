@@ -112,34 +112,38 @@ async function renderBpmn(index, element) {
 
     var dmnUrl = adjustUrl(element.attr("dmn"));
 
-    $.get(dmnUrl, async function (dmnDiagram) {
-      try {
-        await viewer.importXML(dmnDiagram);
-        if (element.attr("callouts")) {
-          // prepare a small array of callout objects
-          var callouts = [];
-          element.attr("callouts").split(',').forEach(function(entry) {
-            var ent = {
-              col: entry.split(':')[0],
-              row: entry.split(':')[1]
-            };
-            callouts.push(ent);
-          });
+    $.ajax({
+      url: dmnUrl,
+      dataType: "text",
+      success: async function (dmnDiagram) {
+        try {
+          await viewer.importXML(dmnDiagram);
+          if (element.attr("callouts")) {
+            // prepare a small array of callout objects
+            var callouts = [];
+            element.attr("callouts").split(',').forEach(function(entry) {
+              var ent = {
+                col: entry.split(':')[0],
+                row: entry.split(':')[1]
+              };
+              callouts.push(ent);
+            });
 
-          var i = 1;
-          callouts.forEach( callout => {
-            addOverlayToDmn(dmnId, callout, i);
-            i = i+1;    
-          });
+            var i = 1;
+            callouts.forEach( callout => {
+              addOverlayToDmn(dmnId, callout, i);
+              i = i+1;    
+            });
+          }
+
+          /*/enable thumbs
+          thumbs = thumbs ? " " + thumbs : "";
+          dmnDiv.attr("class", "tjs-asciidoc" + thumbs);
+          */
+          scrollToHash();
+        } catch (err) {
+          console.log("Error while rendering " + element.attr("dmn") + ": ", err);
         }
-
-        /*/enable thumbs
-        thumbs = thumbs ? " " + thumbs : "";
-        dmnDiv.attr("class", "tjs-asciidoc" + thumbs);
-        */
-        scrollToHash();
-      } catch (err) {
-        console.log("Error while rendering " + element.attr("dmn") + ": ", err);
       }
     });
   }
