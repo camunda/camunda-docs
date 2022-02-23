@@ -1,6 +1,7 @@
 ---
 id: feel-built-in-functions-conversion
-title: Conversion Functions
+title: Conversion functions
+description: "This document outlines conversion functions and a few examples."
 ---
 
 Convert a value into a different type.
@@ -9,7 +10,7 @@ Convert a value into a different type.
 
 * parameters:
   * `from`: string / date-time
-  * or `year`, `month`, `day`: number 
+  * or `year`, `month`, `day`: number
 * result: date
 
 ```js
@@ -121,12 +122,12 @@ Constructs a context of the given list of key-value pairs. It is the reverse fun
 
 Each key-value pair must be a context with two entries: `key` and `value`. The entry with name `key` must have a value of the type `string`.
 
-It might override context entries if the keys are equal. The entries are overridden in the same order as the contexts in the given list.    
+It might override context entries if the keys are equal. The entries are overridden in the same order as the contexts in the given list.
 
 Returns `null` if one of the entries is not a context or if a context doesn't contain the required entries.
 
 * parameters:
-  * `entries`: list of contexts 
+  * `entries`: list of contexts
 * result: context  
 
 ```js
