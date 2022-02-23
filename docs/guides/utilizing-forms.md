@@ -10,22 +10,22 @@ The initial release of Camunda Forms includes a debut minimal feature set, which
 If using with Camunda Platform, note that the Camunda Forms feature was added with the 4.7.0 release of the Camunda Modeler. Therefore, they can be used within BPMN diagrams running on Camunda Platform version 7.15.0 or later.
 :::
 
-# Overview
+## Overview
 
 The Camunda Forms feature allows you to easily design and configure forms. Once configured, they can be connected to a user task or start event to implement a task form in your application.
 
 While you can incorporate Camunda Forms solely within Camunda Cloud, you can also utilize Camunda Forms in Camunda Platform. After deploying a diagram with an embedded form, Tasklist imports this form schema and uses it to render the form on every task assigned to it.
 
-# Quickstart
+## Quickstart
 
-## Create new form
+### Create new form
 
 To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Camunda Modeler](./components/modeler/about.md) and take the following steps:
 
 1. Click on the **Forms** tab at the top of the page or open the **File** menu in Modeler.
 2. Click the blue **Create New Form** button.
 
-## Build your form
+### Build your form
 
 Now you can start to build your Camunda form. First, let's name our form by clicking the three vertical dots next to the text reading **New Form** in the top left corner of the page. Select **Rename** to give your form a new name. In this example, we'll build a form to help with a task in obtaining an email message.
 
@@ -47,13 +47,13 @@ In the properties panel on the right side of the page, view and edit attributes 
 
 Refer to the [Camunda Forms reference material](https://docs.camunda.org/manual/latest/reference/forms/camunda-forms/) to explore all form elements and configuration options in detail.
 
-## Save your form
+### Save your form
 
 To save your form in Camunda Cloud, click the blue **Save** button in the top right corner of the page.
 
 To save your form in Camunda Platform, click **File > Save File As...** in the top-level menu. Select a location on your file system to store the form as `.form` file. You can load that file again by clicking **File > Open File...**.
 
-## Connect your form to a BPMN diagram
+### Connect your form to a BPMN diagram
 
 Next, let's implement a task form into a diagram. In tandem, we can connect your form to a user task or start event.
 
@@ -71,6 +71,10 @@ Take the following steps:
 4. On the right side of the page, select the **Form** tab.
 5. Click **SELECT FORM** to incorporate the JSON configuration of the form you've built on Camunda Cloud.
 
+:::note Submit button missing when you use Camunda Forms?
+When using Camunda Forms, any submit button present in the form schema is hidden so we can control when a user can complete a task.
+:::
+
 Within Camunda Platform, you can click on the bottom left corner that says **JSON** to switch to the JSON view. Use caution when naming the fields of your form. Fields have their values pre-filled from variables with the same name.
 
 Copy the JSON schema, and go back to the BPMN diagram you modeled earlier. Select the **user task** and click on the **Forms** tab. After switching tabs, you should see the field where you can paste the form JSON schema. Paste the schema and save the file.
@@ -84,7 +88,7 @@ zbctl create instance diagram-id
 
 Then, open Tasklist to claim the task, fill in the form, and complete the task.
 
-# Additional resources
+## Additional resources
 
 - [Camunda and Cloud Modeler](./components/modeler/about.md)
 - [Model your first process](./getting-started/model-your-first-process.md)

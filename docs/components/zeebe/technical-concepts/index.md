@@ -2,9 +2,10 @@
 id: index
 sidebar_label: "Overview"
 title: "Technical concepts"
+description: "This section gives an overview of Zeebe's underlying technical concepts."
 ---
 
-This chapter gives an overview of Zeebe's underlying technical concepts.
+This section gives an overview of Zeebe's underlying technical concepts.
 
 - [Architecture](architecture.md) - Introduces you to the internal components of Zeebe, as well as interfaces for external systems to interact with Zeebe.
 - [Clustering](clustering.md) - Discusses the internal structure and properties of a Zeebe cluster.
@@ -14,4 +15,4 @@ This chapter gives an overview of Zeebe's underlying technical concepts.
 - [Protocols](protocols.md) - Explains how external clients communicate with Zeebe.
 - [Exporters](exporters.md) - Discusses the extension point to add additional processing logic for each record in the event stream.
 
-In addition to these sections, you may also be interested in Camunda Cloud [Best Practices](././components/best-practices.md).
+In addition to these sections, you may also be interested in our [Best Practices](././components/best-practices/overview.md).

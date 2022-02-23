@@ -8,6 +8,9 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/components/tasklist/faq/(.*)$ /docs/guides/utilizing-forms$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/faq/$ /docs/guides/utilizing-forms [R=301,L]
+
 RewriteRule ^docs/guides/integrating-optimize(.*)$ /docs/guides/improve-processes-with-optimize$1 [R=301,L]
 RewriteRule ^docs/guides/integrating-optimize$ /docs/guides/improve-processes-with-optimize [R=301,L]
 
@@ -75,7 +78,7 @@ RewriteRule ^(.*)/index/$ /$1 [R=301,L]
 ## tags do not exist anymore, redirect to main page
 RewriteRule ^(.*)/tags/$ / [R=301,L]
 ## duplicate sections at the end where removed
-RewriteRule ^(.*)/(.+)/\2/$ /$1/$2 [R=301,L]
+RewriteRule ^(.*)/(.+)/\2/?$ /$1/$2 [R=301,L]
 RewriteRule ^(.*/components/modeler/dmn/)camunda-modeler-dmn/$ /$1 [R=301,L]
 RewriteRule ^(.*/components/modeler/camunda-modeler/element-templates/)camunda-modeler-element-templates/$ /$1 [R=301,L]
 RewriteRule ^(.*/components/modeler/bpmn/)modeler-bpmn/$ /$1 [R=301,L]
@@ -87,6 +90,9 @@ RewriteRule ^blog/ / [R=301,L]
 RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide$ /docs/0.25/components/tasklist/deployment/configuration/ [R=301,L]
 RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide/(.*)$ /docs/0.25/components/tasklist/deployment/$1 [R=301,L]
 RewriteRule ^docs/0.25/components/zeebe/tasklist-user-guide /docs/0.25/components/ [R=301,L]
+
+# redirect best-practices overview page
+RewriteRule ^docs/components/best-practices/?$ /docs/components/best-practices/overview/ [R=301,L]
 
 
 # Add yaml mime type

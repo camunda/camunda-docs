@@ -1,6 +1,7 @@
 ---
 id: manage-alerts
 title: Manage alerts
+description: "Camunda Cloud can notify you when process instances stop with an error."
 ---
 
 Camunda Cloud can notify you when process instances stop with an error.
@@ -24,9 +25,9 @@ To create a new alert, take the following steps:
 
 3. Choose between **Email** and **Webhook**.
 
-4. If you select **Email**, click **Create**. No further information is needed. For **webhook**, complete the additional steps below.
+4. If you select **Email**, click **Create**. No further information is needed. For **Webhook**, complete the additional steps below.
 
-5. To create a **Webhook** alert, provide a valid webhook URL that accepts `POST` requests.
+5. To create a **webhook** alert, provide a valid webhook URL that accepts `POST` requests.
 
 ![create-alert-webhook](./img/cluster-detail-alerts-webhook.png)
 
