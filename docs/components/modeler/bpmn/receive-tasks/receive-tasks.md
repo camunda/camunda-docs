@@ -32,6 +32,8 @@ Output variable mappings are used to customize how variables are merged into the
 These can contain multiple elements that specify which variables should be mapped.
 The `Process Variable Name` of an output denotes the variable name outside the activity.
 
+Visit our documentation on [input and output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) for more information on this topic.
+
 ## Additional resources
 
 ### XML representation
