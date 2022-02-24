@@ -60,7 +60,7 @@ Using external tasks comes with the following advantages:
 Learn more about external tasks in the [use guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) as well as the [reference](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/service-task/#external-tasks) and explore the video processing example shown above in greater detail by reading the [blog post](https://blog.camunda.org/post/2015/11/external-tasks/) about it.
 
 :::note
-Camunda Cloud focuses on the external task pattern, there are no Java Delegates available as explained in [this blog post](https://docs.google.com/document/d/19gLNB6_CvtpceDIwA_ViHncDoEPXXAxBn59ILlg4xb4/edit#).
+Camunda Cloud focuses on the external task pattern, there are no Java Delegates available as explained in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
 :::
 
 ### Java Delegates
