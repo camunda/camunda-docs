@@ -29,9 +29,9 @@ In Camunda Cloud, you have two options to design and deploy a process: Web Model
 
 Using Web Modeler, processes are designed and deployed, and new instances are created directly from the console. Take the following steps:
 
-1. Go to the **Modeler** tab at the top of the page
-2. Open any project from your Web Modeler home view
-3. Click the blue **New** button and choose **BPMN Diagram**
+1. Go to the **Modeler** tab at the top of the page.
+2. Open any project from your Web Modeler home view.
+3. Click the blue **New** button and choose **BPMN Diagram**.
 
 ![console-modeler](../../components/modeler/web-modeler/img/web-modeler-new-user-new-diagram-choose-bpmn.png)
 

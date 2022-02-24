@@ -45,8 +45,8 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 6. Add an end event by dragging one from the palette, or by clicking the end event when the last service task in your diagram has focus.
 7. On the right upper corner click the blue **Deploy Diagram** button. Your diagram is now deployed to your cluster.
-8. Start a new process instance by clicking on the blue **Start Instance** button. 
-9. To the right of the two blue buttons, click the honeycomb icon button next to the Start Instance button, and **View Process Instances**. Navigate to Operate to see your process instance with a token waiting at the service task.
+8. Start a new process instance by clicking on the blue **Start Instance** button.
+9. To the right of the two blue buttons, click the honeycomb icon button next to the **Start Instance** button, and **View Process Instances**. Navigate to Operate to see your process instance with a token waiting at the service task.
 
 ### Create credentials for your Zeebe client
 

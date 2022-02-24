@@ -28,23 +28,23 @@ Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the
 
 Take the following steps:
 
-1. In a Diagram, open the breadcrumb menu and choose **Replace via Upload** and then select a file from your machine
+1. In a diagram, open the breadcrumb menu and choose **Replace via Upload**. Then, select a file from your computer.
 ![import diagram via replace](../../components/modeler/web-modeler/img/import-diagram/web-modeler-replace-via-upload-menu-item.png)
 
-2. Alternatively, you can drag and drop the file onto the canvas
+2. Alternatively, you can drag and drop the file onto the canvas.
 ![import diagram via drag and drop](../../components/modeler/web-modeler/img/import-diagram/web-modeler-diagram-replace-via-drag-and-drop.png)
 ![processId-cloud](./img/web-modeler-advanced-process-id.png)
 
-This process includes a service task and an XOR gateway. 
+This process includes a service task and an XOR gateway.
 
-2. Select the service task and fill in the properties. 
-3. Set the **Type** to `test-worker`.
+3. Select the service task and fill in the properties.
+4. Set the **Type** to `test-worker`.
 
 ![process-cloud](./img/web-modeler-advanced.png)
 
-4. Deploy the new process using the **Deploy Diagram** button.
+5. Deploy the new process using the **Deploy Diagram** button.
 
-5. Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
+6. Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
 
 </TabItem>
 
@@ -52,8 +52,8 @@ This process includes a service task and an XOR gateway.
 
 ![processId](./img/zeebe-modeler-advanced-process-id.png)
 
-6. This process includes a service task and an XOR gateway. Select the service task and fill in the properties.
-7. Set the **Type** to `test-worker`.
+7. This process includes a service task and an XOR gateway. Select the service task and fill in the properties.
+8. Set the **Type** to `test-worker`.
 
 ![process](./img/zeebe-modeler-advanced.png)
 

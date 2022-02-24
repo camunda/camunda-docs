@@ -29,10 +29,10 @@ To get started, ensure you’ve [created a Camunda Cloud account](./getting-star
 
 Once logged in to your Camunda Cloud account, take the following steps:
 
-1. Click on the **Modeler** tab at the top of the page
-2. Open any project from your Web Modeler home view
-3. Click the blue **New** button and choose **BPMN Diagram**
-4. Right after creating your diagram you can name it by simply replacing the **New Diagram** text with the name of your choice.. In this case, we'll name it "Bake a Cake."
+1. Click on the **Modeler** tab at the top of the page.
+2. Open any project from your Web Modeler home view.
+3. Click the blue **New** button and choose **BPMN Diagram**.
+4. Right after creating your diagram, you can name it by replacing the **New Diagram** text with the name of your choice. In this case, we'll name it "Bake a Cake."
 
 ### BPMN elements
 
@@ -63,7 +63,7 @@ Take the following steps:
 5. Attach the next gateway once these two tasks have completed to move forward.
 6. Add a user task to bake the cake, and finally a user task to ice the cake.
 7. Add an end event, represented by a bold circle.
-8. No need to save. Web Modeler will autosave every change you make
+8. No need to save. Web Modeler will autosave every change you make.
 
 ![completed bpmn diagram](./img/complete-baking-cake-bpmn.png)
 
@@ -74,7 +74,7 @@ You can also import a BPMN diagram with Web Modeler. See how to do that [here](.
 ## Execute your process diagram
 
 :::note
-When you change a diagram and it is autosaved, that has no effect on your cluster(s).
+If you change a diagram and it is autosaved, this has no effect on your cluster(s).
 
 When you deploy the diagram, it becomes available on the selected cluster and new instances can start.
 :::
@@ -85,7 +85,7 @@ You can now start a new process instance to initiate your process diagram. Click
 
 You can now monitor your instances in [Operate](./components/operate/index.md). From your diagram, click the honeycomb icon button next to the Start Instance button, and **View Process Instances**. This will automatically take you to Camunda Operate to monitor your running instances.
 
-You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the Start Instance button, and **View User Tasks** to automatically be taken to [Tasklist](./components/tasklist/introduction.md).
+You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the **Start Instance** button, and **View User Tasks** to automatically be taken to [Tasklist](./components/tasklist/introduction.md).
 
 ## Additional resources and next steps
 

@@ -23,12 +23,12 @@ While you can incorporate Camunda Forms solely within Camunda Cloud, you can als
 To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Desktop Modeler](./components/modeler/about.md) and take the following steps:
 
 1. Click on the **Modeler** tab at the top of the page or alternatively open the **File** menu in Desktop Modeler.
-2. Open any project from your Web Modeler home view
-3. Click the blue **New** button and choose **Form**
+2. Open any project from your Web Modeler home view.
+3. Click the blue **New** button and choose **Form**.
 
 ### Build your form
 
-Now you can start to build your Camunda form. Right after creating your form you can name it by simply replacing the **New Form** text with the name of your choice. In this example, we'll build a form to help with a task in obtaining an email message.
+Now you can start to build your Camunda form. Right after creating your form, you can name it by replacing the **New Form** text with the name of your choice. In this example, we'll build a form to help with a task in obtaining an email message.
 
 ![form email example](./img/form-email-example.png)
 
@@ -66,11 +66,11 @@ Click on the **Modeler** tab at the top of the page and open any project from yo
 
 Take the following steps:
 
-1. Select the diagram where you'd like to apply your form
-2. Select the user task requiring the help of a form
-3. On the right side of the selected user task, select the blue overlay with three white horizontal lines to open the navigation menu
-4. Navigate to the form you want to connect and click the blue **Import** button
-5. When a user task has a connected form, the blue overlay will always stay visible on the right side of the task
+1. Select the diagram where you'd like to apply your form.
+2. Select the user task requiring the help of a form.
+3. On the right side of the selected user task, select the blue overlay with three white horizontal lines to open the navigation menu.
+4. Navigate to the form you want to connect and click the blue **Import** button.
+5. When a user task has a connected form, the blue overlay will always stay visible on the right side of the task.
 
 :::note Submit button missing when you use Camunda Forms?
 When using Camunda Forms, any submit button present in the form schema is hidden so we can control when a user can complete a task.
