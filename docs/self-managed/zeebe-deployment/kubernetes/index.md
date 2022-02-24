@@ -61,11 +61,13 @@ You also need a Kubernetes cluster. You have several options:
 - Local for development, you can use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), Minikube, and MicroK8s.
 - Remote: Google GKE, Azure AKS, Amazon EKS, etc.
 
-:::note
-You can use free trials from different cloud providers to create a Kubernetes cluster to test Zeebe in your cloud.
+:::note 
+Be aware that we only officially support the GKE environment.
+Feel free to try different trials from cloud providers to create a Kubernetes cluster to test Camunda Cloud Self-Managed in your cloud.
 :::
 
 Optional tools related to Camunda Cloud:
 
 - Camunda Modeler: to model/modify business processes. Install Camunda Modeler [here](/components/modeler/camunda-modeler/install-the-modeler.md).
-- Zeebe CTL(`zbctl`): command line tool to interact with a Zeebe cluster (local/remote). You can get the `zbctl` tool from the official [Zeebe release page](https://github.com/camunda-cloud/zeebe/releases).
+- Zeebe CTL(`zbctl`): command line tool to interact with a Zeebe cluster (local/remote). You can get the `zbctl` tool from the official
+[Zeebe release page](https://github.com/camunda-cloud/zeebe/releases).
