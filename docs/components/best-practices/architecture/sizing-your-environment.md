@@ -157,7 +157,7 @@ However, the following example shows the current configuration of a cluster of s
 | ------------------ | ------------------- | ------- | ----- |
 | **Zeebe**              |                     |         |       |
 | \# brokers         | 3     |
-| \# partitions      | 2     |
+| \# partitions      | 3     |
 | replication factor | 3     |
 |                    | vCPU \[cores\]      | 0.8     | 0.96  |
 |                    | Mem \[GB\]          | 0.25    | 1.92  |
