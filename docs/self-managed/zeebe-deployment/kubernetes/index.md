@@ -4,7 +4,7 @@ title: "Kubernetes deployment"
 sidebar_label: "Overview"
 ---
 
-We recommend you use Kubernetes when deploying Camunda Cloud Self-Managed to production.
+We recommend you to use Kubernetes when deploying Camunda Cloud Self-Managed to production.
 
 This chapter is divided into the following sections:
 
