@@ -78,7 +78,7 @@ Camunda Platform uses [JUEL (Java Unified Expression Language)](https://docs.cam
 
 Camunda Cloud uses [FEEL (Friendly-Enough Expression Language](/reference/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
-Most expressions can be converted (see [this community extension](https://github.com/berndruecker/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.js) as a starting point, some might need to be completly rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform).
+Most expressions can be converted (see [this community extension](https://github.com/berndruecker/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.js) as a starting point, some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform).
 
 #### Different connector infrastructure
 
@@ -90,7 +90,7 @@ To migrate existing connectors, create a small bridging layer to invoke these co
 
 Let's come back to a hands-on migration. The [Camunda Platform to Cloud migration tooling](https://github.com/berndruecker/camunda-platform-to-cloud-migration) is available as a community extension. This project contains two components:
 
-1. [A Camunda Modeler plugin to convert BPMN models from Camunda Platform to Camunda Cloud](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-modeler-plugin-platform-to-cloud-converter). This maps possible BPMN elements and technical attributes into the Camunda Cloud format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
+1. [A Desktop Modeler plugin to convert BPMN models from Camunda Platform to Camunda Cloud](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/desktop-modeler-plugin-platform-to-cloud-converter). This maps possible BPMN elements and technical attributes into the Camunda Cloud format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
 
 2. [The Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter). This is a library providing a worker to hook in Camunda Platform-based glue code. For example, it can invoke existing JavaDelegate classes.
 
@@ -272,7 +272,7 @@ The following attributes/elements cannot (yet) be migrated:
 In Camunda Platform, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
 
 * Embedded Task Forms (embedded custom HTML and JavaScript)
-* Camunda Forms (simple forms defined via Camunda Modeler properties)
+* Camunda Forms (simple forms defined via Desktop Modeler properties)
 * External Task Forms (link to custom applications)
 * [Camunda Forms](./utilizing-forms.md)
 

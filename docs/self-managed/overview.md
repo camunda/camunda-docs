@@ -23,7 +23,7 @@ The following components are available for Camunda Cloud Self-Managed:
 * Optimize
 * IAM (not available in Camunda Cloud SaaS)
 
-Camunda Cloud Self-Managed users may also use Camunda Modeler to build BPMN diagrams and work with Camunda Forms. 
+Camunda Cloud Self-Managed users may also use Desktop Modeler to build BPMN diagrams and work with Camunda Forms. 
 
 While documentation for Optimize is available in the Self-Managed section, we continue to refine the experience for Camunda Cloud Self-Managed users.
 

@@ -180,8 +180,8 @@ Create a new Maven project in your IDE. If you're using Eclipse, follow these st
 **Camunda Cloud** is made up of the following **components**:
 
 - Console
-- Cloud Modeler
-- Camunda Modeler 
+- Web Modeler
+- Desktop Modeler 
 - Zeebe
 - Operate
 - Tasklist
@@ -198,7 +198,7 @@ Modelers must be qualified so as not to be confused.
 
 **Camunda Platform** is used in conjunction with the following **products and web applications**:
 
-- Camunda Modeler
+- Desktop Modeler
 - Camunda Cockpit or Cockpit
 - Tasklist
 - Camunda Optimize
