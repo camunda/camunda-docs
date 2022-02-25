@@ -10,11 +10,9 @@ This guide describes how to migrate process solutions developed for Camunda Plat
 
 Please note the following important considerations:
 
-1. **Migrating from Camunda Platform to Camunda Cloud is not a paved path**. As you will read below, there are several differences between the products and not all solutions are easy to migrate. This guide describes our experiences with customer projects so far, but is not a "turn-key"-migration procedure.
+1. **It is not necessary to migrate from Camunda Platform to Camunda Cloud**. Camunda Platform is a great product with ongoing support; there is no need to migrate existing solutions unless you have a good reason to (e.g. run it on SaaS, certain requirements on scalability or fault-tolerance, etc.) It is OK to stay on Camunda Platform. But still then, knowing the basic steps of migration can be helpful in building solutions with Camunda Platform, that will make migration easier in the future if necessary.
 
-2. **It is not necessarily recommended to migrate from Camunda Platform to Camunda Cloud**. Camunda Platform is a great product with existing support; there is no need to migrate existing solutions unless you have a good reason to (e.g. run it on SaaS, certain requirements on scalability or fault-tolerance, etc.) Therefore, we view migration more as an exception than a rule. Still, knowing the basic steps of migration can be helpful in building solutions with Camunda Platform, that will make migration easier in the future if necessary.
-
-Planning to migrate your project? [Talk to us](/contact/) so we can help where needed.
+2. **There are limitations for an automated migration from Camunda Platform to Camunda Cloud**. As you will read below, there are several differences between the products and not all process solutions are easy to migrate. If in doubt, please [talk to us](/contact/) so we can help.
 
 ## Migration overview
 
@@ -251,7 +249,7 @@ The following is not possible:
 
 Human task management is still under development in Camunda Cloud, so most configuration options are not yet available.
 
-The following attributes/elements cannot be migrated:
+The following attributes/elements cannot (yet) be migrated:
 
 * Task assignment (to users or groups):
   * ```bpmn:humanPerformer```
