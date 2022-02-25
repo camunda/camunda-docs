@@ -43,8 +43,8 @@ Our primary goal in documentation is to achieve organization, clarity, and direc
 **Camunda Cloud** is made up of the following **components**:
 
 - Console
-- Cloud Modeler
-- Camunda Modeler 
+- Web Modeler
+- Desktop Modeler 
 - Zeebe
 - Operate
 - Tasklist
