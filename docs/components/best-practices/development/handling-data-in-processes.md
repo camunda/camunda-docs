@@ -6,15 +6,13 @@ tags:
     - Serialization
 ---
 
-When using Camunda, you have access to a dynamic map of process variables, which lets you associate data to every single process instance. Ensure you use these mechanisms in a lightweight and meaningful manner, storing just the relevant data in the process instance.
+When using Camunda, you have access to a dynamic map of process variables, which lets you associate data to every single process instance (and local scopes in case of user tasks or parallel flows). Ensure you use these mechanisms in a lightweight and meaningful manner, storing just the relevant data in the process instance.
 
 Depending on your programming language, consider accessing your process variables in a type safe way, centralizing (simple and complex) type conversion and using constants for process variable names.
 
 ## Understanding data handling in Camunda
 
-When using Camunda, you have access to a **dynamic map of process variables** which lets you associate data to every single process instance (and local scopes in case of user tasks or parallel flows).
-
-When reading and interpreting a business process diagram, you quickly realize that there is always data necessary for tasks, but also to drive the process through gateways to the correct next steps.
+When reading and interpreting a business process diagram, you quickly realize there is always data necessary for tasks, but also to drive the process through gateways to the correct next steps.
 
 Examine the following tweet approval process example:
 

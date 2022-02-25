@@ -9,9 +9,9 @@ tags:
     - JUnit
 ---
 
-Test your executable BPMN processes, they are software. If possible, do automated unit tests with a fast in-memory workflow engine. Before releasing, verify with integration tests close to your real-life environment, which might include human-driven, exploratory integration tests.
+Test your executable BPMN processes as they are software. If possible, do automated unit tests with a fast in-memory workflow engine. Before releasing, verify with integration tests close to your real-life environment, which might include human-driven, exploratory integration tests.
 
-This best practice uses this simple process example:
+This best practice uses the following process example:
 
 <div bpmn="testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="user_task_review_tweet,service_task_send_rejection_notification,service_task_publish_on_twitter,user_task_handle_duplicate" />
 
@@ -29,45 +29,43 @@ Approved tweets get published.
 
 <span className="callout">4</span>
 
-Duplicate tweets are rejected by Twitter and be dealt with by the original author (e.g. rephrased) just to be reviewed again.
+Duplicate tweets are rejected by Twitter and dealt with by the original author (e.g. rephrased) just to be reviewed again.
 
+## Testing scopes
 
-## Testing Scopes
+There are basically three typical test scopes used when building process solutions:
 
-There are basically three typical test scopes disced when building process solutions:
+1. **Unit tests**: Testing glue code or programming code you developed for your process solution. How to unit test your software itself is not discussed here, as this is a common practice for software development.
 
-1. **Unit tests**: Testing glue code / programming code you developed for your process solution. How to unit test your software itself is not discussed here, as this is a common practice for software development.
+2. **Process tests**: Testing the expected behavior of the process model, including glue code and specifically the data flowing through the process model. Those tests should run frequently, so they should behave like unit tests (quick turnaround, no need for external resources, etc.)
 
-2. **Process tests**: Testing the expected behavior of the process model, including glue code and specicially the data flowing through the process model. Those tests should run frequently, so they should behave like unit tests (quick turnaround, no need for external resources, ...).
-
-3. **Integration tests**: Testing the system in a close-to-real-life-environment to make sure it is really working. This is typically "just" done before releasing a new version of your system. Those tests include *human-driven*, *exploratory* tests.
+3. **Integration tests**: Testing the system in a close-to-real-life-environment to make sure it is really working. This is typically done before releasing a new version of your system. Those tests include *human-driven*, *exploratory* tests.
 
 ![Scopes](testing-process-definitions-assets/scopes.png)
 
 ## Writing process tests in Java
 
 :::caution Camunda Cloud only
-This section targets Camunda Cloud. Please refer to the specific Camunda 7 section below if you are looking for Camunda Platform 7.x. 
+This section targets Camunda Cloud. Refer to the specific Camunda 7 section below if you are looking for Camunda Platform 7.x.
 :::
 
-This section describes how to write process tests as unit tests in Java. Later in this best practice you will find some information on writing tests in other languages like NodeJs or C#.
+This section describes how to write process tests as unit tests in Java. Later in this best practice, you will find some information on writing tests in other languages, like Node.Js or C#.
 
-When using Java, most customers use Spring Boot. While this is a common setup of customers, it is of course not the only one. You find some more examples on plan Java process tests in the readme of the [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test) project.
-
+When using Java, most customers use Spring Boot. While this is a common setup for customers, it is not the only one. Find some more examples of Java process tests in the README.md of the [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test) project.
 
 ### Technical setup using Spring
 
 :::caution JUnit 5
-You need to use JUnit 5. Please double check that you really use JUnit 5 in every test class: the `@Test` annotation you import needs to be `org.junit.jupiter.api.Test`.
+You need to use JUnit 5. Ensure you use JUnit 5 in every test class: the `@Test` annotation you import needs to be `org.junit.jupiter.api.Test`.
 :::
 
 1. Use [*JUnit 5*](http://junit.org) as unit test framework.
-2. Use [spring-zeebe](https://github.com/camunda-community-hub/spring-zeebe)
-3. Use `@ZeebeSpringTest` to to ramp up an in-memory process engine.
+2. Use [spring-zeebe](https://github.com/camunda-community-hub/spring-zeebe).
+3. Use `@ZeebeSpringTest` to ramp up an in-memory process engine.
 4. Use annotations from [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/) to check whether your expectations about the state of the process are met.
 5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) to mock service methods and verify that services are called as expected.
 
-A test can now look like the following example. The [complete source code is available on GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java):
+A test can now look like the following example. The complete source code is available on [GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java):
 
 ```java
 @SpringBootTest
@@ -115,20 +113,19 @@ public class TestTwitterProcess {
 
 ### Test scope and mocking
 
-In such a test case, you want to test the the executable BPMN process definition plus all the glue code which logically belongs to the process definition in a wider sense.  Typical examples of glue code you want to include in a process test are:
+In such a test case, you want to test the executable BPMN process definition, plus all the glue code which logically belongs to the process definition in a wider sense. Typical examples of glue code you want to include in a process test are:
 
 * Worker code, typically connected to a service task
 * Expressions (FEEL) used in your process model for gateway decisions or input/output mappings
-* Other glue code, for example a REST API, that just does data mapping and delegates to the workflow engine
+* Other glue code, for example, a REST API that does data mapping and delegates to the workflow engine
 
 In the example above, this is the worker code and the REST API:
 
 ![Process test scope example](testing-process-definitions-assets/process-test-scope-example.png)
 
-Workflow engine independent business code should *not* be included in the tests. In the twitter example, the `TwitterService` will be mocked, and the `TwitterWorker` will still read process variables and call this mock. This way you can make test the process model, the glue code, and the data flow in your process test.
+Workflow engine-independent business code should *not* be included in the tests. In the Twitter example, the `TwitterService` will be mocked, and the `TwitterWorker` will still read process variables and call this mock. This way, you can make test the process model, the glue code, and the data flow in your process test.
 
-
-The following code examples highlights the important aspects around mocking.
+The following code examples highlight the important aspects around mocking.
 
 The `PublishTweetWorker` is executed as part of the test. It does input data mapping **(1)** and also translates a specific business exception into a BPMN error **(2)**:
 
@@ -148,7 +145,7 @@ public void handleTweet(@ZeebeVariablesAsType TwitterProcessVariables variables)
 }
 ```
 
-The `TwitterService` is considered a business service (it could for example wrap the twitter4j API) and shall *not* be executed during the test. This is why this interface is mocked:
+The `TwitterService` is considered a business service (it could, for example, wrap the twitter4j API) and shall *not* be executed during the test. This is why this interface is mocked:
 
 
 ```java
@@ -169,10 +166,9 @@ public void testDuplicate() throws Exception {
     //...
 ```
 
-
 ### Drive the process and assert the state
 
-For tests, you drive the process from waitstate to waitstate and assert that you see the expected process and variable states. For example, you might implement a test to test the scneario, that a tweet gets approved:
+For tests, you drive the process from waitstate to waitstate and assert that you see the expected process and variable states. For example, you might implement a test to test the scneario that a tweet gets approved:
 
 ```java
 @Test
@@ -208,7 +204,7 @@ public void testTweetApproved() throws Exception {
 
 1. Create a new process instance. You may want to use some glue code to start your process (e.g. the REST API facade), or also create helper methods within your test class.
 
-2. Drive the process to its next waitstate, e.g. by completing a waiting user task. You may extract boilerplate code into helper methods like shown below.
+2. Drive the process to its next waitstate, e.g. by completing a waiting user task. You may extract boilerplate code into helper methods as shown below.
 
 3. Assert that your process is in the expected state.
 
@@ -241,20 +237,19 @@ public void waitForUserTaskAndComplete(String userTaskId, Map<String, Object> va
 }
 ```
 
-Be careful not to "overspecify" your test method by asserting too much. Your process definition will most probably evolve in the future and such changes should break as little test code as possible, but just as much as necessary! As a rule of thumb *always* assert that the expected *external effects* of your process really took place (e.g. that business services were called as expected). On top of that, carefully choose, which aspects of *internal process state* are important enough so that you want your test method to warn about any related change later on.
+Be careful not to "overspecify" your test method by asserting too much. Your process definition will likely evolve in the future and such changes should break as little test code as possible, but just as much as necessary!
 
+As a rule of thumb *always* assert that the expected *external effects* of your process really took place (e.g. that business services were called as expected). Additionally, carefully choose which aspects of *internal process state* are important enough so that you want your test method to warn about any related change later on.
 
+### Testing your process in chunks
 
-
- ### Testing your process in chunks 
-
-Divide and conquer by *testing your process in chunks*. Consider the important chunks and pathes the Tweet Approval Process consists of:
+Divide and conquer by *testing your process in chunks*. Consider the important chunks and paths the Tweet Approval Process consists of:
 
 <div bpmn="testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="end_event_tweet_published,end_event_tweet_rejected,boundary_event_tweet_duplicated" />
 
 <span className="callout">1</span>
 
-The *happy path*: The tweet just gets published. 
+The *happy path*: The tweet just gets published.
 
 <span className="callout">2</span>
 
@@ -262,15 +257,15 @@ The tweet gets rejected.
 
 <span className="callout">3</span>
 
-A duplicated tweet gets rejected by twitter.
+A duplicated tweet gets rejected by Twitter.
 
 #### Testing the happy path
 
-The happy path is kind of the default scenario with a positive outcome, so no exceptions or errors or deviations are experienced. 
+The happy path is kind of the default scenario with a positive outcome, so no exceptions or errors or deviations are experienced.
 
-Fully test the *Happy Path* in one (big) test method. This makes sure you have one consistent data flow in your process. Additionally it is easy to read and to understand, making it a great starting point for new developers to understand your process / process test case.
+Fully test the happy path in one (big) test method. This makes sure you have one consistent data flow in your process. Additionally, it is easy to read and to understand, making it a great starting point for new developers to understand your process and process test case.
 
-You were already exposed to the happy path in our example, which is the scneario that the tweet gets approved:
+You were already exposed to the happy path in our example, which is the scenario that the tweet gets approved:
 
 ```java
 @Test
@@ -306,7 +301,7 @@ public void testTweetApproved() throws Exception {
 
 #### Testing detours
 
-Test *forks/detours* from the happy path as well as *errors/exceptional* pathes as chunks in seperate test methods. This allows to unit test in meaningful units. 
+Test *forks/detours* from the happy path as well as *errors/exceptional* paths as chunks in separate test methods. This allows to unit test in meaningful units.
 
 The tests for the exceptional paths are basically very similar to the happy path in our example:
 
@@ -330,7 +325,7 @@ public void testRejectionPath() throws Exception {
 }
 ```
 
-and: 
+and:
 
 ```java
 @Test
@@ -356,9 +351,6 @@ public void testDuplicateTweet() throws Exception {
 }
 ```
 
-
-
-
 <!--
 ## Writing polyglot process tests
 
@@ -372,48 +364,43 @@ TODO
 * Example in NodeJS?
 -->
 
-
 ## Integration tests
 
 Test the process in a close-to-real-life environment. This verifies that it really works before releasing a new version of your process definition, which includes *human-driven*, *exploratory* tests.
 
-Clearly *define your goals* for integration tests! Goals could be
+Clearly *define your goals* for integration tests! Goals could be:
 
-* end user & acceptance tests,
-* complete end-to-end tests,
-* performance & load tests, etc...
+* End user & acceptance tests
+* Complete end-to-end tests
+* Performance & load tests, etc.
 
-Carefully consider to *automate* tests on scope 3. You need to look at the overall effort spent on writing test automation code and maintaining it, when being compared with executing human-driven tests for your software project's lifespan. The best choice depends very much on the frequency of regression test runs.
+Carefully consider *automating* tests on scope 3. You need to look at the overall effort spent on writing test automation code and maintaining it when compared with executing human-driven tests for your software project's lifespan. The best choice depends very much on the frequency of regression test runs.
 
 Most effort is typically invested in setting up proper test data in surrounding systems.
 
-Configure your tests to be dedicated integration tests, and seperate them from unit or process tests.
+Configure your tests to be dedicated integration tests, and separate them from unit or process tests.
 
 You can use typical industry standard tools for integration testing together with Camunda.
-
-
-
-
 
 ## Technical setup and example using Camunda Platform 7
 
 :::caution Camunda Platform 7 only
-This section targets Camunda Platform 7.x only. Please refer to the previous sections if you are looking for Camunda Cloud. 
+This section targets Camunda Platform 7.x only. Refer to the previous sections if you are using Camunda Cloud.
 :::
 
 Camunda Platform 7 also has support for writing tests in Java. This section gives you an example, the basic ideas of test scopes and testing in chunks are also valid with Camunda Platform 7.
 
-The technical setup for Camunda Platform 7: 
+The technical setup for Camunda Platform 7:
 
 1. Use [*JUnit*](http://junit.org) as unit test framework.
 2. Use Camunda's [JUnit Rule](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/ProcessEngineRule.html) to ramp up an in-memory process engine where the [JobExecutor](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/Deployment.html) is turned off.
-3. Use Camunda's [@Deployment](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/Deployment.html) annotation to deploy and undeploy one or more process definitions under test for a single test method.
+3. Use Camunda's [@Deployment](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/Deployment.html) annotation to deploy and un-deploy one or more process definitions under test for a single test method.
 4. Use [camunda-bpm-assert](http://github.com/camunda/camunda-bpm-assert) to easily check whether your expectations about the state of the process are met.
 5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) plus [PowerMock](https://github.com/jayway/powermock/) to mock service methods and verify that services are called as expected.
 6. Use Camunda's [MockExpressionManager](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/mock/MockExpressionManager.html) to resolve bean names used in your process definition without the need to ramp up the dependency injection framework (like CDI or Spring).
-7. Use an [In-Memory H2 database](http://www.h2database.com/html/features.html#in_memory_databases) as default database to test processes on developer machines. If required, you can run the same tests on *multiple databases*, e.g. Oracle, DB2, or MS-SQL on a CI-Server. To achieve that, you can make use of (e.g. maven) profiles and Java properties files for database configuration.
+7. Use an [In-Memory H2 database](http://www.h2database.com/html/features.html#in_memory_databases) as default database to test processes on developer machines. If required, you can run the same tests on *multiple databases*, e.g. Oracle, DB2, or MS-SQL on a CI-Server. To achieve that, you can make use of (e.g. Maven) profiles and Java properties files for database configuration.
 
-Let's use the same example as above. 
+Let's use the same example as above.
 
 A typical test case will look like this:
 
@@ -446,14 +433,14 @@ public class TwitterTest {
 }
 ```
 
-The service task "Publish on Twitter" delegates to java code:
+The service task **Publish on Twitter** delegates to Java code:
 
 ```xml
 <serviceTask id="service_task_publish_on_twitter" camunda:delegateExpression="#{tweetPublicationDelegate}" name="Publish on Twitter">
 </serviceTask>
 ```
 
-And this *java delegate* itself calls a business method
+And this *Java delegate* itself calls a business method:
 
 ```java
 @Named
@@ -518,7 +505,7 @@ public void testTweetApproved() {
 }
 ```
 
-As a next step you might want to test the path where a tweet gets rejected. You don't have to start at the start event, but can start anywhere in your process:
+As a next step, you might want to test the path where a tweet gets rejected. You don't have to start at the start event, but can start anywhere in your process:
 
 ```java
 @Test
@@ -548,7 +535,7 @@ public void testTweetRejected() {
 }
 ```
 
-You could also implement another `testTweetDuplicated()` to verify the logic  in case a tweet turns out to be a duplicate and is rejected by Twitter. For this case, we attached an error event to the service task "Publish on Twitter". In the BPMN XML we see an error event defined with an errorCode "duplicateMessage".
+You could also implement another `testTweetDuplicated()` to verify the logic in case a tweet turns out to be a duplicate and is rejected by Twitter. For this case, we attached an error event to the service task **Publish on Twitter**. In the BPMN XML we see an error event defined with an errorCode `duplicateMessage`.
 
 ```xml
   <boundaryEvent id="boundary_event_tweet_duplicated" name="Tweet duplicated" attachedToRef="service_task_publish_on_twitter">
@@ -557,7 +544,7 @@ You could also implement another `testTweetDuplicated()` to verify the logic  in
 <error id="error_tweet_duplicated" errorCode="duplicateMessage" name="Tweet duplicated"/>
 ```
 
-Above, we already saw the java delegate code throwing the BpmnError expcetion with that code "duplicateMessage". And here comes the method testing for the case a tweet is duplicated:
+Above, we already saw the Java delegate code throwing the BPMN error exception with that code `duplicateMessage`. Here is the method testing for the case a tweet is duplicated:
 
 ```java
 @Test
