@@ -68,6 +68,6 @@ Feel free to try different trials from cloud providers to create a Kubernetes cl
 
 Optional tools related to Camunda Cloud:
 
-- Camunda Modeler: to model/modify business processes. Install Camunda Modeler [here](/components/modeler/camunda-modeler/install-the-modeler.md).
+- Camunda Modeler: to model/modify business processes. Install Camunda Modeler [here](/components/modeler/desktop-modeler/install-the-modeler.md).
 - Zeebe CTL(`zbctl`): command line tool to interact with a Zeebe cluster (local/remote). You can get the `zbctl` tool from the official
 [Zeebe release page](https://github.com/camunda-cloud/zeebe/releases).
