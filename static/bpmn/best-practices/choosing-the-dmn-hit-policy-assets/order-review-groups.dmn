@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_1okben7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="orderReviewGroups" name="Order Review Groups">
+    <decisionTable id="decisionTable" hitPolicy="COLLECT">
+      <input id="input1" label="Order category">
+        <inputExpression id="inputExpression1" typeRef="string" />
+      </input>
+      <input id="InputClause_0gei3gk" label="Order value">
+        <inputExpression id="LiteralExpression_0p56ly5" typeRef="double" />
+      </input>
+      <output id="output1" label="Review Group" name="" typeRef="string" />
+      <rule id="row-281665601-2">
+        <description>Sales of small new cars are our every day business and should be reviewed by sales.</description>
+        <inputEntry id="UnaryTests_0u5m8j6">        <text><![CDATA["New car"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12xdd8c">        <text><![CDATA[< 25000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1fwk6bg">        <text><![CDATA["Sales"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-281665601-3">
+        <description>For spare parts, we need to be more cautious, because of fraud detection reasons.</description>
+        <inputEntry id="UnaryTests_1aaugu4">        <text><![CDATA["Spare parts"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1vodkz1">        <text><![CDATA[< 5000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_01xrhou">        <text><![CDATA["Sales"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-281665601-4">
+        <description>When it comes to pre-owned cars, sales has free hand to decide independent of order value.</description>
+        <inputEntry id="UnaryTests_1yxwx20">        <text><![CDATA["Pre-owned car"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0rjh0nq">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0004mby">        <text><![CDATA["Sales"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-281665601-5">
+        <description>All cases may be decided by management, too. But they should not even see the very small ones.</description>
+        <inputEntry id="UnaryTests_1l0186g">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0znowxu">        <text><![CDATA[>= 5000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0cu7405">        <text><![CDATA["Management"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
