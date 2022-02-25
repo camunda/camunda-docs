@@ -6,20 +6,20 @@ description: "You can import a BPMN diagram at any time with Web Modeler."
 
 You can import a BPMN diagram at any time with Web Modeler, and there are several ways to accomplish this:
 
-1. In a project, click **New > Upload files** and select the files from your computer.
+- In a project, click **New > Upload files** and select the files from your computer.
 ![import diagram](img/import-diagram/web-modeler-upload-file-menu-item.png)
 ![import diagram](img/import-diagram/web-modeler-upload-file-choose.png)
 ![import diagram](img/import-diagram/web-modeler-upload-file-completed.png)
 
-2. In a project, drag one file from your computer and drop it.
+- In a project, drag one file from your computer and drop it.
 ![import diagram](img/import-diagram/web-modeler-project-drag-and-drop.png)
 
-3. In a diagram, open the breadcrumb menu and choose **Replace via upload**. Then, select a file from your computer.
+- In a diagram, open the breadcrumb menu and choose **Replace via upload**. Then, select a file from your computer.
 
 ![import diagram](img/import-diagram/web-modeler-replace-via-upload-menu-item.png)
 ![import diagram](img/import-diagram/web-modeler-replace-via-upload-choose.png)
 
-4. In a diagram, drag one file from your computer and drop it onto the canvas.
+- In a diagram, drag one file from your computer and drop it onto the canvas.
 ![import diagram](img/import-diagram/web-modeler-diagram-replace-via-drag-and-drop.png)
 
 :::note
