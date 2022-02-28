@@ -3,7 +3,7 @@ id: getting-started-orchestrate-microservices
 title: Getting started with Microservice Orchestration
 sidebar_label: Getting started with Microservice Orchestration
 description: "Orchestrate Microservices along a business process for visibility and resilience."
-keywords: microservices, orchestration, getting-started
+keywords: [microservices, orchestration, getting-started]
 ---
 
 Using Camunda Cloud, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda Cloud.
