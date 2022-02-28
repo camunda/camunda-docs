@@ -4,6 +4,8 @@ title: Start a new process instance
 description: "If a BPMN diagram is deployed via Web Modeler, you can start a new instance of this diagram."
 ---
 
+<span class="badge badge--cloud">Camunda Cloud only</span>
+
 If a BPMN diagram is deployed via Web Modeler, you can start a new instance of this diagram.
 
 To do so, click **Start Instance**:

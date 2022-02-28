@@ -4,6 +4,8 @@ title: Model your first diagram
 description: "After you've created a BPMN diagram, you can start modeling it."
 ---
 
+<span class="badge badge--cloud">Camunda Cloud only</span>
+
 After you've created a BPMN diagram, you can start modeling it.
 
 We've preconfigured a diagram consisting of a start event. To convert it to something meaningful, append a **Task** to it, and afterwards append an **EndEvent**:

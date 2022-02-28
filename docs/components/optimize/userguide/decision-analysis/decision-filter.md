@@ -4,7 +4,7 @@ title: Filters
 description: Narrow down your view on the decision by creating reports based on a subset of all decision evaluations.
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 Similar to [filters for process analysis](../additional-features/filters.md), you can define filters for your decision reports.
 
