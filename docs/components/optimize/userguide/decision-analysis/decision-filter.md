@@ -4,11 +4,11 @@ title: Filters
 description: Narrow down your view on the decision by creating reports based on a subset of all decision evaluations.
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 Similar to [filters for process analysis](../additional-features/filters.md), you can define filters for your decision reports.
 
-You can filter by the [evaluation date](#evaluation-date-filter) of the decision, or by [input- and output variables](#variable-filter). This screenshot shows how to add a filter to your Decision Report:
+You can filter by the [evaluation date](#evaluation-date-filter) of the decision, or by [input and output variables](#variable-filter). This screenshot shows how to add a filter to your decision report:
 
 ![Decision Report with open filter list in Camunda Optimize](./img/report-with-filterlist-open.png)
 

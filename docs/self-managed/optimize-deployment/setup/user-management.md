@@ -4,7 +4,7 @@ title: "User Access Management"
 description: "Define which users have access to Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 :::note Good to know!
 

@@ -4,7 +4,7 @@ title: Overview
 description: "Let's take a closer look at the endpoint, authentication, access token, and API usage within Tasklist."
 ---
 
-In this article we'll go over the basics you need to know on how to consume the Tasklist GraphQL API. To read more about on how to build a real world application you can click [here](../tutorial).
+In this document, we'll go over the basics on how to consume the Tasklist GraphQL API. Read more about how to build a real world application [here](../tutorial).
 
 ## Endpoint
 
@@ -32,14 +32,14 @@ See our guide on [building your own client](/apis-clients/build-your-own-client.
 
 The following settings are needed:
 
-| Name                     | Description                                     | Default value         |
-| ------------------------ | ----------------------------------------------- | --------------------- |
-| client id                | Name of your registered client                  | -                     |
-| client secret            | Password for your registered client             | -                     |
-| audience                 | Permission name, if not given use default value | `tasklist.camunda.io` |
-| authorization server url | Token issuer server                             | -                     |
+| Name | Description | Default value |
+| -- | -- | -- |
+| client id | Name of your registered client | - |
+| client secret | Password for your registered client | - |
+| audience | Permission name; if not given use default value | `tasklist.camunda.io` |
+| authorization server url | Token issuer server | - |
 
-You send a token issue _POST_ request to the authorization server with the following content:
+Send a token issue _POST_ request to the authorization server with the following content:
 
 ```json
 {
@@ -71,7 +71,7 @@ If the authorization is successful, the authorization server sends back the acce
 
 To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](../../../../../apis-clients/tasklist-api/).
 
-There are also several tools to explore GraphQL APIs [here](https://altair.sirmuel.design).
+There are also several [tools to explore GraphQL APIs](https://altair.sirmuel.design).
 
 For example, you want to know about provided types:
 
@@ -96,7 +96,7 @@ query {
 
 ## Example requests and responses
 
-### Get all tasks names
+### Get all task names
 
 _Request:_
 

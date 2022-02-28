@@ -12,13 +12,13 @@ Synonym to "[connector](#connector)".
 
 A broker is an instance of a Zeebe installation which executes processes and manages process state. A single broker is installed on a single machine.
 
-- [Architecture](/components/zeebe/technical-concepts/architecture.md#broker)
+- [Architecture](/components/zeebe/technical-concepts/architecture.md#brokers)
 
 ### Client
 
 A client interacts with the Zeebe broker on behalf of the business application. Clients poll for work from the broker.
 
-- [Architecture](/components/zeebe/technical-concepts/architecture.md#client)
+- [Architecture](/components/zeebe/technical-concepts/architecture.md#clients)
 
 ### Cluster
 
@@ -76,7 +76,7 @@ In a clustered environment, a broker which is not a leader is a follower of a gi
 
 Clients communicate with the Zeebe cluster through a gateway. The gateway provides a gRPC API and forwards client commands to the cluster. Depending on the setup, a gateway can be embedded in the broker or can be configured to be standalone.
 
-- [Architecture](/components/zeebe/technical-concepts/architecture.md#gateway)
+- [Architecture](/components/zeebe/technical-concepts/architecture.md#gateways)
 
 ### Incident
 

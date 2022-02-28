@@ -33,8 +33,9 @@ way as a service task does. It specifies the type of job that workers should sub
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
 worker (e.g. the name of the topic to publish the message to).
 
-Define [variable mappings](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings) to transform the
-variables passed to the job worker, or to customize how the variables of the job merge in the process instance.
+Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
+to transform the variables passed to the job worker, or to customize how the variables of the job merge.
 
 ## Additional resources
 

@@ -30,7 +30,10 @@ module.exports = {
         id: "GTM-KQGNSTS", // GTM Container ID
       },
     ],
+    "./static/plugins/bpmn-js",
   ],
+  scripts: [
+  ],  
   themeConfig: {
     prism: {
       additionalLanguages: ['java'],

@@ -8,7 +8,7 @@ sidebar_label: "Quick reference"
 
 ## Installation
 
-An installation can be done quickly via the package manager `npm`. The corresponding package is [here](https://www.npmjs.com/package/zbctl).
+Quickly install via the package manager `npm`. The corresponding package is [here](https://www.npmjs.com/package/zbctl).
 
 ```bash
 npm i -g zbctl

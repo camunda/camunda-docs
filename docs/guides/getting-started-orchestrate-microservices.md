@@ -30,11 +30,11 @@ First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](h
 
 ### Design your process with BPMN
 
-Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Cloud Modeler.
+Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Web Modeler.
 
-1. Navigate to your diagrams, either through the **Diagrams** navigation, or by using the section under **Camunda Cloud Service** on the main dashboard. Click **Create New Diagram**. This opens Cloud Modeler.
-2. Give your model a descriptive name and id. On the right side of the console, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **Microservice Orchestration Tutorial** for the name and **microservice-orchestration-tutorial** for the id.
-3. Use Cloud Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Click the wrench icon and select **Service Task** to change the task type.
+1. Navigate to the **Modeler** tab at the top of the page. This opens Web Modeler.
+3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **Microservice Orchestration Tutorial** for the name and **microservice-orchestration-tutorial** for the id.
+4. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Click the wrench icon and select **Service Task** to change the task type.
 
 ![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
 
@@ -43,10 +43,10 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 ![Service task with properties panel open](./img/microservice-orchestration-service-task.png)
 
-6. Add an end event by dragging one from the palette, or by clicking the end event when the last service task in your diagram has focus. The linter should turn green with a checkmark and show zero errors and zero warnings.
-7. In the **Execute** drop down, click **Save and Deploy**. Your diagram is now deployed to your cluster.
-8. Start a new process instance in the **Execute** drop down by clicking **Start Instance**. 
-9. In the **Execute** drop down, click **View Process Instances**. Navigate to Operate to see your process instance with a token waiting at the service task.
+6. Add an end event by dragging one from the palette, or by clicking the end event when the last service task in your diagram has focus.
+7. On the right upper corner click the blue **Deploy Diagram** button. Your diagram is now deployed to your cluster.
+8. Start a new process instance by clicking on the blue **Start Instance** button.
+9. To the right of the two blue buttons, click the honeycomb icon button next to the **Start Instance** button, and **View Process Instances**. Navigate to Operate to see your process instance with a token waiting at the service task.
 
 ### Create credentials for your Zeebe client
 
