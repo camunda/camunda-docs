@@ -16,6 +16,6 @@ As there are different authentication methods available for the Self-Managed Tas
 
 As in current Self-Managed versions, we can't differentiate a regular `User` request versus an `API User` request; this imposes some limitations to the Self-Managed Tasklist API:
 
-- Tasks must be claimed by `API User` before any changes are made.
-- Tasks must be assigned to `API User` itself. You cannot assign these tasks to someone else.
-- Tasks can **only** be completed if previously claimed/assigned to `API User`.
+- Tasks must be *claimed* by `API User` before any changes are made.
+- Tasks must be *assigned* to `API User` itself. You cannot assign these tasks to someone else.
+- Tasks can **only** be *completed* if previously claimed/assigned to `API User`.
