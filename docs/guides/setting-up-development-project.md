@@ -2,6 +2,7 @@
 id: setting-up-development-project
 title: Setting up your first development project
 description: "Set up your first project to model, deploy, and start a process instance."
+keywords: [get-started, local-install]
 ---
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 20 minutes</span>
