@@ -240,9 +240,7 @@ Tasklist uses Log4j2 framework for logging. In the distribution archive and insi
 </Configuration>
 ```
 
-By default, Console log appender is used.
-
-[//]:# (Do you mean ConsoleAppender above?)
+By default, Console Appender is used.
 
 ### JSON logging configuration
 
