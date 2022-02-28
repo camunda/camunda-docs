@@ -72,3 +72,4 @@ zbctl create worker test-worker --handler "echo {\"return\":\"Pong\"}"
 ## Next steps
 
 - [Implement a decision gateway](implement-decision-gateway.md)
+- [Getting Started with Microservice Orchestration](./../getting-started-orchestrate-microservices.md)
