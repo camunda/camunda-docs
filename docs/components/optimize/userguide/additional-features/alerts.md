@@ -4,7 +4,7 @@ title: Alerts
 description: Get a notification as soon as your system is behaving in an unexpected manner.
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 :::note
 You must configure the email service to receive notifications. See the [technical guide](../../../../self-managed/optimize-deployment/setup/installation.md) for which properties need to be defined.

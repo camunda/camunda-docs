@@ -4,6 +4,8 @@ title: Milestones
 description: Working with milestones in Web Modeler
 ---
 
+<span class="badge badge--cloud">Camunda Cloud only</span>
+
 ## Milestones
 
 You can save a snapshot of your diagram as a milestone any time.
