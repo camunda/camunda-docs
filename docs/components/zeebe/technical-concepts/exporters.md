@@ -8,11 +8,9 @@ As Zeebe processes jobs and processes, or performs internal maintenance (e.g. ra
 
 :::note
 
-Exporters are not available in Camunda Cloud Software-as-a-Service (SaaS). 
+Exporters are not available in Camunda Cloud Software-as-a-Service (SaaS).
 
 :::
-
-[//]:# (Given the note above, should this doc have a badge?)
 
 ![record-stream](assets/exporters-stream.png)
 
