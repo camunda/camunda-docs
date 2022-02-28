@@ -144,6 +144,12 @@ svg.implemented:hover [stroke="#333"]{
 .badge--platform {
   background-color: #FF1F00;
   color: #FFFFFF;
+  margin-bottom: 1em;
+}
+.badge--cloud {
+  background-color: #0075FF;
+  color: #FFFFFF;
+  margin-bottom: 1em;
 }
 
 navbar .navbar .navbar__link[href*=self-managed] {

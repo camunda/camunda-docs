@@ -4,6 +4,14 @@ title: New Web Modeler
 description: Your data was automatically migrated from the old Cloud Modeler to the new Web Modeler.
 ---
 
+<span class="badge badge--cloud">Camunda Cloud only</span>
+
+:::note
+
+Web Modeler is only available for Camunda Cloud SaaS.
+
+:::
+
 If you used our old Cloud Modeler (before March 2022), all of your data has been migrated to the new Web Modeler.
 
 Find all your diagrams and forms under the new **Modeler** entry in the top navigation bar.
