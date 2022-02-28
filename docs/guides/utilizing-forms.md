@@ -46,7 +46,7 @@ In the properties panel on the right side of the page, view and edit attributes 
 
 ![email properties](./img/form-properties-email.png)
 
-Refer to the [Camunda Forms reference material](https://docs.camunda.org/manual/latest/reference/forms/camunda-forms/) to explore all form elements and configuration options in detail.
+Refer to the [Camunda Forms reference material](https://docs.camunda.org/manual/7.16/reference/forms/camunda-forms/) to explore all form elements and configuration options in detail.
 
 ### Save your form
 
