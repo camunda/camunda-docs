@@ -4,7 +4,7 @@ title: "Export Report Result Data"
 description: "The REST API to export Report result data from Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 ## Purpose
 
