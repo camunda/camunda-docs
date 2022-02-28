@@ -17,11 +17,13 @@ With Optimize, review heatmap displays for instances which took longer than aver
 
 See an in-depth overview of Optimize’s capabilities [here](https://docs.camunda.org/optimize/latest/).
 
-## Set up 
+## Set up
 
-Within Camunda Cloud, you can launch Optimize from the Cloud Console — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md) before getting started with Optimize for SaaS users.
+Within Camunda Cloud, you can launch Optimize from the Cloud Console — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md), [set up client connection credentials](./getting-started/setup-client-connection-credentials.md), and [connected to your cluster](./getting-started/connect-to-your-cluster.md) before getting started with Optimize for SaaS users.
 
-So long as you are operating with [Camunda Cloud 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. While creating a cluster, the creation modal will note if Optimize is included by each version of Zeebe that can be selected.
+:::note
+So long as you are operating with [Camunda Cloud 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. From here, Optimize requires no additional set up. You can immediately obtain process insights as Optimize already continuously collects data for analysis.
+:::
 
 Once you’ve created a cluster, take the following steps inside Cloud Console to access Optimize:
 
@@ -46,14 +48,14 @@ Let’s create a dashboard inside our first collection. Take the following steps
 1. Return to the **Home** page to view a list of existing collections, dashboards, and reports. You’ll be able to view all process instances you’ve already run and retrieve additional data on these instances within the Camunda engine.
 2. Select the collection where you’d like to create a dashboard.
 3. Click **Create New > New Dashboard**.
-4. Optimize offers preconfigured dashboard templates, or you can start from a blank dashboard. In this example, we’ll select a preconfigured template by clicking the **Process performance overview** option.
+4. Optimize offers preconfigured dashboard templates, or you can start from a blank dashboard. In this example, we’ll select a preconfigured template by clicking the **Process performance overview** option. Note that you can also create dashboards with multi-process templates.
 5. Under **Select Process**, choose the process you’d like to analyze and the version.
 6. Click **Create Dashboard**.
 7. Name your dashboard, and add any additional existing reports or create filters. Click **Save**.
 
 ![dashboard example](./assets/dashboard.png)
 
-In the sample above, Optimize drafted a dashboard filled with reports for review. These reports include objectives like process instance counts, aggregated process duration, active incidents, and heatmaps. 
+In the sample above, Optimize drafted a dashboard filled with reports for review. These reports include objectives like process instance counts, aggregated process duration, active incidents, and heatmaps.
 
 Select **Edit > Add a Report** to incorporate additional reports you’ve already created (see [create and access reports](#create-and-access-reports) below). Click and drag the reports on the grid to arrange the dashboard to your liking.
 
@@ -71,6 +73,20 @@ To create a custom report based on a key performance indicator (KPI) you’d lik
 6. In the gray text box to the right, confirm your data source, and select what you’d like to review from the process (in this case, we are viewing flow nodes.) You can also group by topics such as duration or start date.
 7. If you’d like, filter the process instance or flow nodes. For example, you can filter by duration, only viewing process instances running for more than seven days.
 8. Finally, you have the option to view particular sets of data from the instance, like instance count or absolute value, by selecting the gear icon to the left of your data customization. You can also choose how you’d like to visualize your data in the box beneath **Visualization** (i.e. bar chart, pie chart, etc.). Once you’ve made your selections, click **Save**.
+
+## Alerts
+
+You don’t have to log in or view reports and dashboards to be alerted that something may need correction or further analysis in your process.
+
+For this purpose, you can create new alerts within your reports. These alerts watch reports for you among collections, and email you an alert if a set outlier occurs in your process flow.
+
+To create an alert, take the following steps:
+
+1. Create a report with a number visualization inside a collection for a KPI you want to track.
+2. Inside your report, select the **Alerts** tab.
+3. Select the type of alert you would like to receive. For example, you can receive an email notification when the backlog on your bottleneck becomes too high.
+
+As you’re notified, you can begin to examine if the process is broken and if additional teams need to be notified.
 
 ## Collections
 

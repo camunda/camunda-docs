@@ -30,7 +30,7 @@ This deployment guide also integrates with the following:
 New to BPMN and want to learn more before moving forward? [This blog post](https://zeebe.io/blog/2018/08/bpmn-for-microservices-orchestration-a-primer-part-1/) helps explain the standard and why it's a good fit for microservices orchestration.
 :::
 
-If you're already familiar with BPMN and how to create a BPMN model in Camunda Modeler, you can find the finished model we create during the tutorial here: [Zeebe Getting Started Tutorial Process Model](getting-started/assets/order-process.bpmn).
+If you're already familiar with BPMN and how to create a BPMN model in Desktop Modeler, you can find the finished model we create during the tutorial here: [Zeebe Getting Started Tutorial Process Model](getting-started/assets/order-process.bpmn).
 
 ## Additional resources
 

@@ -1,9 +1,10 @@
 ---
 id: receive-tasks
 title: "Receive tasks"
+description: "Receive tasks reference a message; these are used to wait until a proper message is received."
 ---
 
-Receive tasks are tasks which reference a message; these are used to wait until a proper message is received.
+Receive tasks reference a message; these are used to wait until a proper message is received.
 
 ![Receive Tasks](assets/receive-tasks.png)
 
@@ -11,13 +12,13 @@ When a receive task is entered, a corresponding message subscription is created.
 
 A message can be published using one of the Zeebe clients. When the message is correlated, the receive task is completed and the process instance continues.
 
-:::info
-An alternative way to receive tasks are [message intermediate catch events](../message-events/message-events.md), which behave the same but can be used together with event-based gateways.
+:::inote
+An alternative to receive tasks is [a message intermediate catch event](../message-events/message-events.md), which behaves the same way but can be used together with event-based gateways.
 :::
 
 ## Messages
 
-A message can be referenced by one or more receive tasks. It must define the name of the message (e.g. `Money collected`) and the `correlationKey` expression (e.g. `= orderId`).
+A message can be referenced by one or more receive tasks; it must define the name of the message (e.g. `Money collected`) and the `correlationKey` expression (e.g. `= orderId`).
 
 Usually, the name of the message is defined as a static value (e.g. `order canceled`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). The expression is evaluated on activating the receive task and must result in a `string`.
 
@@ -27,7 +28,11 @@ To correlate a message to the receive task, the message is published with the de
 
 ## Variable mappings
 
-By default, all message variables are merged into the process instance. This behavior can be customized by defining an output mapping at the receive task.
+Output variable mappings are used to customize how variables are merged into the process instance.
+These can contain multiple elements that specify which variables should be mapped.
+The `Process Variable Name` of an output denotes the variable name outside the activity.
+
+Visit our documentation on [input and output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) for more information on this topic.
 
 ## Additional resources
 

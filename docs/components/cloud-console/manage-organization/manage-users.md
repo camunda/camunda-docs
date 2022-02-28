@@ -16,7 +16,7 @@ Under this setting, members of the current organization can be managed. A user c
 
 - **Owner**: Owner of the organization (currently limited to one user and cannot be changed by the user.)
 - **Admin**: Restricted rights for user management.
-- **Member**: Can manage Zeebe Clusters, Client, and use Operate.
+- **Member**: Can manage Zeebe clusters, client, and use [Operate](./components/operate/index.md).
 
 The following table illustrates the rights of each role:
 
@@ -30,6 +30,6 @@ The following table illustrates the rights of each role:
 | Billing: Request paid plan   | X     | X     |        |
 | Users: Manage admins         | X     |       |        |
 
-Users are invited to a Camunda Cloud organization via their email address, which must be accepted by the user. As long as the invitation has not been accepted, the user remains in the `Pending` state.
+Users are invited to a Camunda Cloud organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 
-People who do not yet have a Camunda Cloud account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda Cloud account.
+People who do not yet have a Camunda Cloud account can also be invited to an organization. To access the organization, however, the invited individual must first [create a Camunda Cloud account](../../../guides/getting-started/create-camunda-cloud-account.md).

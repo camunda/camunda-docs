@@ -3,7 +3,7 @@ id: data-sources
 title: Data sources
 ---
 
-If you create a collection, you are asked to add Data sources that can be used for creating Reports. To see the added Data sources or add extra ones, go to the **Data Sources** tab of the Collection.
+If you create a collection, you can add data sources that can be used to create reports. To see the existing data sources or add additional ones, go to the **Data Sources** tab of the collection.
 
 ![add source by definition](./img/sourceByDefinition.png)
 

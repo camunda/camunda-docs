@@ -1,6 +1,8 @@
 ---
 id: script-tasks
 title: "Script tasks"
+description: "A script task is used to model the evaluation of a script; for example, a script written in Groovy,
+JavaScript, or Python."
 ---
 
 A script task is used to model the evaluation of a script; for example, a script written in Groovy,
@@ -17,29 +19,27 @@ When a process instance enters a script task, it creates a corresponding job and
 completion. A job worker should request jobs of this job type and process them. When the job is
 complete, the process instance continues.
 
-:::info
-
+:::note
 Jobs for script tasks are not processed by Zeebe itself. To process them, provide a job worker.
-
 :::
 
 ## Defining a task
 
-A script task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition). It specifies
+A script task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a service task does. It specifies
 the type of job workers should subscribe to (e.g. `script`).
 
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
-worker (e.g. the script to evaluate).
+worker (e.g. the script to evaluate). The community extension [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker) requires certain attributes to be set in the task headers.
 
-Define [variable mappings](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings) to transform the
-variables passed to the job worker, or to customize how the variables of the job merge
-in the process instance.
+Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
+to transform the variables passed to the job worker, or to customize how the variables of the job merge.
 
 ## Additional resources
 
 :::tip Community Extension
 
-Review the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker). It's a
+Review the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker). This is a
 community extension that provides a job worker to evaluate scripts. You can run it, or use it as a
 blueprint for your own job worker.
 

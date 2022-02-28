@@ -1,6 +1,7 @@
 ---
 id: business-rule-tasks
 title: "Business rule tasks"
+description: "A business rule task is used to model the evaluation of a business rule."
 ---
 
 A business rule task is used to model the evaluation of a business rule; for example, a decision
@@ -18,30 +19,28 @@ When a process instance enters a business rule task, it creates a corresponding 
 its completion. A job worker should request jobs of this job type and process them. When the job is
 completed, the process instance continues.
 
-:::info
-
+:::note
 Jobs for business rule tasks are not processed by Zeebe itself. To process them, you must provide a job worker.
-
 :::
 
 ## Defining a task
 
-A business rule task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition). This
+A business rule task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a service task does. This
 specifies the type of job workers should subscribe to (e.g. DMN).
 
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
 worker (e.g. the key of the decision to evaluate).
 
-Define [variable mappings](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings) to transform the
-variables passed to the job worker, or to customize how the variables of the job are merged
-in the process instance.
+Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
+to transform the variables passed to the job worker, or to customize how the variables of the job merge.
 
 ## Additional resources
 
 :::tip Community Extension
 
 Take a look at the [Zeebe DMN Worker](https://github.com/camunda-community-hub/zeebe-dmn-worker).
-It's a community extension providing a job worker to evaluate DMN decisions. You can run it, or
+This is a community extension providing a job worker to evaluate DMN decisions. You can run it, or
 use it as a blueprint for your own job worker.
 
 :::
