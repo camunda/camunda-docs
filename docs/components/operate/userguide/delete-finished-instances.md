@@ -44,8 +44,8 @@ To delete a process instance from the **Instances** page, take the following ste
 
 ![operate-instance-detail-confirm-delete-operation](./img/operate-instance-detail-delete-operation-confirm_light.png)
 
-The process instance is now deleted.
+:::note
+Use caution as the process instance is now deleted and you may not access it again.
+:::
 
 ![operate-instance-deleted-notification](./img/operate-instance-deleted-notification_light.png)
-
-[//]:# (Is there any chance of getting this process instance back? If not, we should probably note a warning.)

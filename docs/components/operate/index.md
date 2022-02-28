@@ -18,7 +18,7 @@ dark: useBaseUrl('img/operate-introduction_dark.png'),
 />;
 -->
 
-In addition to providing visibility into active and completed process instances, Operate also makes it possible to carry out key operations such as resolving <!-- FIXME: [incidents](/reference/incidents.html) --> incidents, and updating process instance variables.
+In addition to providing visibility into active and completed process instances, Operate also makes it possible to carry out key operations such as resolving [incidents](./userguide/resolve-incidents-update-variables.md), and updating process instance variables.
 
 [//]:# (What is the link to fix here?)
 
@@ -30,6 +30,4 @@ Operate is also available for production use (with support) in the Camunda Cloud
 
 To try out Operate in Camunda Cloud, sign up [here](https://accounts.cloud.camunda.io/signup).
 
-Because Operate can be a helpful tool when getting started with Zeebe and building an initial proof of concept, we make it available under the [Operate Trial license](https://camunda.com/legal/terms/cloud-terms-and-conditions/general-terms-and-conditions-for-the-operate-trial-version/). There are no restrictions under this license when it comes to the length of the evaluation period or the available feature set _as long as you use Operate in non-production environments only._
-
-[//]:# (Should Trial in "Operate Trial license" be capitalized? Will add to components glossary.)
+Because Operate can be a helpful tool when getting started with Zeebe and building an initial proof of concept, we make it available under the [Operate trial license](https://camunda.com/legal/terms/cloud-terms-and-conditions/general-terms-and-conditions-for-the-operate-trial-version/). There are no restrictions under this license when it comes to the length of the evaluation period or the available feature set _as long as you use Operate in non-production environments only._
