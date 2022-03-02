@@ -45,7 +45,7 @@ To create an automated process with user tasks, take the following steps:
 9. Append a gateway to your user task by dragging it onto the dashboard from the palette on the left side of the screen, or by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
 10. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
 11. Attach an end event to the two user tasks.
-![gateway example](./img/gateway-example.png)
+![gateway example](./img/gateway-example-1.png)
 
 #### Start and view your process instance
 
@@ -54,7 +54,7 @@ To create an automated process with user tasks, take the following steps:
 3. Navigate to [Operate](../components/operate/index.md) by clicking the honeycomb icon next to the **Start instance** button.
 4. Click **View process instances** to see your process instance alongside the green token waiting at the user task.
 
-![token moving through process](./img/user-task-token.png)
+![token moving through process](./img/user-task-token-1.png)
 
 #### Complete a user task
 
