@@ -9,44 +9,44 @@ description: "Use Modeler to design and deploy a process."
 
 ## Prerequisites
 
-- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Desktop Modeler](https://camunda.com/download/modeler/)
 
 ## Design and deploy a process
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In Camunda Cloud, you have two options to design and deploy a process: Console Modeler and [Camunda Modeler](https://camunda.com/download/modeler/).
+In Camunda Cloud, you have two options to design and deploy a process: Web Modeler and [Desktop Modeler](https://camunda.com/download/modeler/).
 
-<Tabs groupId="modeler" defaultValue="console" values={
+<Tabs groupId="modeler" defaultValue="web" values={
 [
-{label: 'Console Modeler', value: 'console', },
-{label: 'Camunda Modeler', value: 'desktop', },
+{label: 'Web Modeler', value: 'web', },
+{label: 'Desktop Modeler', value: 'desktop', },
 ]
 }>
 
-<TabItem value='console'>
+<TabItem value='web'>
 
-Using Cloud Modeler, processes are designed and deployed, and new instances are created directly from the console. Take the following steps:
+Using Web Modeler, processes are designed and deployed, and new instances are created directly from the console. Take the following steps:
 
-1. Find your saved models under the **Diagrams** tab.
+1. Go to the **Modeler** tab at the top of the page.
+2. Open any project from your Web Modeler home view.
+3. Click the blue **New** button and choose **BPMN Diagram**.
 
-2. Click **Create New Diagram**.
-
-![console-modeler](../../components/modeler/cloud-modeler/img/bpmn-diagrams-overview.png)
+![console-modeler](../../components/modeler/web-modeler/img/web-modeler-new-user-new-diagram-choose-bpmn.png)
 
 3. Add an **EndEvent** to create a valid BPMN diagram.
 
-![console-modeler-new-diagram-with-end-event](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-end-event.png)
-![console-modeler-new-diagram-with-end-event](../../components/modeler/cloud-modeler/img/cloud-modeler-new-diagram-with-end-event2.png)
+![console-modeler-new-diagram-with-end-event](../../components/modeler/web-modeler/img/web-modeler-with-end-event.png)
+![console-modeler-new-diagram-with-end-event](../../components/modeler/web-modeler/img/web-modeler-with-end-event2.png)
 
-4. To save your diagram, click **Save**.
+4. No need to save. Web Modeler will autosave every change you make
 
 </TabItem>
 
 <TabItem value='desktop'>
 
-Using Camunda Modeler, processes are designed and deployed, and new instances are created.
+Using Desktop Modeler, processes are designed and deployed, and new instances are created.
 
 Design a simple process with one start event and one end event, or download this [BPMN model](./bpmn/gettingstarted_quickstart.bpmn).
 

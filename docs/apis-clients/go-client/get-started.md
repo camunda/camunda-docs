@@ -182,8 +182,6 @@ Run the program and verify the process instance is created. You should see an ou
 processKey:2251799813686742 bpmnProcessId:"order-process" version:3 processInstanceKey:2251799813686744
 ```
 
-You did it!
-
 ## See the process in action
 
 Want to see how the process instance is executed? Follow the steps below:
@@ -357,10 +355,6 @@ processKey:2251799813686750 bpmnProcessId:"order-process" version:4 processInsta
 ```
 
 ## What's next?
-
-Yay! You finished this tutorial and learned the basic usage of the Go client.
-
-Next steps:
 
 - Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-cloud.md).
 - Learn more about [BPMN processes](/components/modeler/bpmn/bpmn-primer.md).

@@ -4,7 +4,7 @@ title: "Shared Elasticsearch Cluster"
 description: "Operate multiple Optimize instances on a shared Elasticsearch cluster."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 In case you have a large shared Elasticsearch cluster that you want to operate multiple Optimize instances on that are intended to run in complete isolation from each other, it is required to change the [`es.settings.index.prefix`](../configuration/#index-settings) setting for each Optimize instance.
 

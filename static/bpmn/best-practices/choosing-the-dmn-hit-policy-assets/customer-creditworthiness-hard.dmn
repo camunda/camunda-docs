@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_1okben7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="Creditworthiness">
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
+      <input id="rating" label="Rating (past experience)">
+        <inputExpression id="LiteralExpression_0srl9wq" typeRef="string" />
+      </input>
+      <input id="income" label="Current monthly net income">
+        <inputExpression id="LiteralExpression_1hs0lw4" typeRef="long" />
+      </input>
+      <output id="creditwortiness" label="Creditwortiness" name="" typeRef="boolean" />
+      <rule id="bad">
+        <description><![CDATA[Once the customer is on the black list, we don't care about income anymore.]]></description>
+        <inputEntry id="UnaryTests_1ofmqk7">        <text><![CDATA["Bad"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ckef2h">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0wtdw43">        <text>false</text>
+</outputEntry>
+      </rule>
+      <rule id="good">
+        <description>We always accept customers we know well, even if their current net income is very low or 0.</description>
+        <inputEntry id="UnaryTests_0dobqio">        <text><![CDATA["Good"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1jbcknv">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_10hv6zm">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="mixed">
+        <description><![CDATA[For a payment experience currently rated as "mixed" we demand a minimal income.]]></description>
+        <inputEntry id="UnaryTests_1w1u86d">        <text><![CDATA["Mixed"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1kmgffc">        <text><![CDATA[>= 500]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_09vlu80">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="unknown">
+        <description><![CDATA[If we don't know them yet, we demand a reasonable income for a beginning.]]></description>
+        <inputEntry id="UnaryTests_1o7bxpb">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_188d0xj">        <text><![CDATA[> 1000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0nzap7g">        <text>true</text>
+</outputEntry>
+      </rule>
+      <rule id="declined">
+        <description>All other customers are declined.</description>
+        <inputEntry id="UnaryTests_16pl5xz">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bh982j">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0z09wqy">        <text>false</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

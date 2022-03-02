@@ -8,7 +8,7 @@ description: "Deploy and start your process instance."
 
 ## Prerequisites
 
-- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Desktop Modeler](https://camunda.com/download/modeler/)
 
 :::note
 
@@ -22,28 +22,28 @@ import TabItem from "@theme/TabItem";
 
 <Tabs groupId="modeler" defaultValue="console" values={
 [
-{label: 'Console Modeler', value: 'console', },
-{label: 'Camunda Modeler', value: 'desktop', },
+{label: 'Web Modeler', value: 'console', },
+{label: 'Desktop Modeler', value: 'desktop', },
 ]
 }>
 
 <TabItem value='console'>
 
-You can now use the **Save & Deploy** option in the **Execute** menu to deploy the newly-created process to your cluster.
+You can click the blue **Deploy Diagram** button to deploy the newly-created process to your cluster.
 
-![console-modeler-deploy](../../components/modeler/cloud-modeler/img/save-and-deploy.png)
+![web-modeler-deploy](../../components/modeler/web-modeler/img/save-and-deploy.png)
 
 Deployment can take a few seconds, but you should get a confirmation for successful deployment.
 
-![console-modeler-deploy-successfull](../../components/modeler/cloud-modeler/img/save-and-deploy-successful.png)
+![web-modeler-deploy-successfull](../../components/modeler/web-modeler/img/save-and-deploy-successful.png)
 
 You can now start a new process instance. For this example, you can start an instance with an empty payload.
 
-![console-modeler-start-instance](../../components/modeler/cloud-modeler/img/start-process-instance-variables.png)
+![web-modeler-start-instance](../../components/modeler/web-modeler/img/start-process-instance-variables.png)
 
 Once the instance is started, you'll receive a confirmation with a link to open Operate.
 
-![console-modeler-start-instance-done](../../components/modeler/cloud-modeler/img/start-process-instance-done.png)
+![web-modeler-start-instance-done](../../components/modeler/web-modeler/img/start-process-instance-done.png)
 
 </TabItem>
 
@@ -76,3 +76,4 @@ export ZEEBE_CLIENT_SECRET='zbzsZI_6UnCsH_CIo0lNUN8qGyvLJr9VrH77ewNm8Oq3elvhPvV7
 ## Next steps
 
 - [Implement a service task](implement-service-task.md)
+- [Setting up your first development project](./../setting-up-development-project.md)

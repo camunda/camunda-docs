@@ -1,6 +1,7 @@
 ---
 id: none-events
 title: "None events"
+description: "None events are unspecified events, also called blank events."
 ---
 
 None events are unspecified events, also called "blank" events.
@@ -9,7 +10,7 @@ None events are unspecified events, also called "blank" events.
 
 ## None start events
 
-A process can have, at most, one none start event (besides other types of start events).
+At most, a process can have **one** none start event (besides other types of start events).
 
 A none start event is where the process instance or a subprocess starts when the process or the subprocess is activated.
 
@@ -21,15 +22,15 @@ If an activity has no outgoing sequence flow, it behaves the same as it would be
 
 ## Intermediate none events (throwing)
 
-Intermediate none events can be used to indicate some state achieved in the process. 
-They are especially useful for monitoring to understand how the process is doing, for example, as milestones or KPIs.
+Intermediate none events can be used to indicate some state achieved in the process. They are especially useful for monitoring to understand how the process is doing, for example, as milestones or key performance indicators (KPIs).
 
 The engine itself doesn't do anything in the event, it just passes through it.
 
 ## Variable mappings
+
 Start and intermediate none events can have [variable output mappings](../../../../components/concepts/variables.md#output-mappings). End events do not support this.
 
-For start events this is often used to initialize process variables.
+For start events, this is often used to initialize process variables.
 
 ## Additional resources
 

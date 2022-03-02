@@ -2,6 +2,7 @@
 id: setting-up-development-project
 title: Setting up your first development project
 description: "Set up your first project to model, deploy, and start a process instance."
+keywords: [get-started, local-install]
 ---
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 20 minutes</span>
@@ -9,9 +10,10 @@ description: "Set up your first project to model, deploy, and start a process in
 ## Prerequisites
 
 - [Camunda Cloud SaaS](https://camunda.io)
-- [Camunda Modeler](https://camunda.com/download/modeler/)
+- [Desktop Modeler](https://camunda.com/download/modeler/)
 - [Operate](/self-managed/operate-deployment/install-and-start.md)
 - [Tasklist](/self-managed/tasklist-deployment/install-and-start.md)
+- [Optimize](../components/optimize/what-is-optimize.md)
 
 ## Setting up your project
 

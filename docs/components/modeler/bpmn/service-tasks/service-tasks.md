@@ -1,6 +1,7 @@
 ---
 id: service-tasks
 title: "Service tasks"
+description: "A service task represents a work item in the process with a specific type."
 ---
 
 A service task represents a work item in the process with a specific type.
@@ -13,7 +14,7 @@ A [job worker](/components/concepts/job-workers.md) can subscribe to the job typ
 
 ## Task definition
 
-A service task must have a `taskDefinition`. This specifies the type of job workers can subscribe to.
+A service task must have a `taskDefinition`; this specifies the type of job workers can subscribe to.
 
 Optionally, a `taskDefinition` can specify the number of times the job is retried when a worker signals failure (default = 3).
 
@@ -21,13 +22,15 @@ Typically, the job type and the job retries are defined as static values (e.g. `
 
 ## Task headers
 
-A service task can define an arbitrary number of `taskHeaders`. They are static metadata handed to workers along with the job. The headers can be used as configuration parameters for the worker.
+A service task can define an arbitrary number of `taskHeaders`; they are static metadata handed to workers along with the job. The headers can be used as configuration parameters for the worker.
 
 ## Variable mappings
 
 By default, all job variables merge into the process instance. This behavior can be customized by defining an output mapping at the service task.
 
 Input mappings can be used to transform the variables into a format accepted by the job worker.
+
+For more information about this topic visit the documentation about [Input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
 
 ## Additional resources
 

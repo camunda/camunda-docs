@@ -31,7 +31,7 @@ Clients allow applications to do the following:
 
 Clients connect to Camunda Cloud via [gRPC](https://grpc.io), a high-performance, open-source, and universal RPC protocol.
 
-Camunda Cloud provides several offical clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
+Camunda Cloud provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
 Community clients supplement the official clients. These clients have not been tested by Camunda.
 

@@ -8,6 +8,13 @@ application or server installation from one Camunda Cloud version to the other.
 
 There is a dedicated update guide for each version:
 
+### [1.2 to 1.3](../120-to-130)
+
+Update from 1.2.x to 1.3.0
+
+[Release notes](https://github.com/camunda-cloud/zeebe/releases/tag/1.3.0)
+[Release blog](https://camunda.com/blog/2022/01/camunda-cloud-1-3-0-released/)
+
 ### [1.1 to 1.2](../110-to-120)
 
 Update from 1.1.x to 1.2.0

@@ -1,6 +1,7 @@
 ---
 id: processes
 title: "Processes"
+description: "Processes are flowchart-like blueprints that define the orchestration of tasks."
 ---
 
 Processes are flowchart-like blueprints that define the orchestration of **tasks**. 
@@ -25,7 +26,7 @@ Zeebe uses [BPMN 2.0](http://www.bpmn.org/) to represent processes. BPMN is an i
 
 Zeebe provides a free and open-source BPMN modeling tool to create BPMN diagrams and configure their technical properties. The modeler is a desktop application based on the [bpmn.io](https://bpmn.io) open-source project.
 
-Camunda Modeler can be [downloaded from GitHub](https://camunda.com/download/modeler/).
+Desktop Modeler can be [downloaded from GitHub](https://camunda.com/download/modeler/).
 
 ## Sequences
 
@@ -42,9 +43,7 @@ You can think of Zeebe's process orchestration as a state machine, taking the fo
 
 ## Data flow
 
-As Zeebe progresses from one task to the next in a process, it can move custom data in the form of variables. Variables are key-value-pairs and part of the process instance.
-
-[//]:# (Do we need hyphens between key-value-pairs?)
+As Zeebe progresses from one task to the next in a process, it can move custom data in the form of variables. Variables are key-value pairs and part of the process instance.
 
 ![data-flow](assets/process-data-flow.png)
 
@@ -73,3 +72,8 @@ In many cases, it's also useful to perform multiple tasks in parallel. This can 
 ![data-conditions](assets/processes-parallel-gateway.png)
 
 The diamond shape with the **+** marker means all outgoing paths are activated. The tasks on those paths can run in parallel. The order is only fulfilled after both tasks have completed.
+
+## Next steps
+
+- [About Modeler](./components/modeler/about.md)
+- [Automating a process using BPMN](./guides/automating-a-process-using-bpmn.md)

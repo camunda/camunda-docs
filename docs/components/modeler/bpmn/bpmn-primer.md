@@ -114,22 +114,22 @@ The following is an introduction to BPMN 2.0, its elements, and their execution 
 
 ## Modeling BPMN diagrams
 
-The best tool for modeling BPMN diagrams for Zeebe is **Camunda Modeler**.
+The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about.md).
 
 ![overview](./assets/modeler.gif)
 
 - [Download page](https://camunda.com/download/modeler/)
-- [Source code repository](https://github.com/camunda/camunda-modeler)
+- [Source code repository](https://github.com/camunda/desktop-modeler)
 
 ## BPMN elements
 
 ### Sequence flow: Controlling the flow of execution
 
-A core concept of BPMN is a _sequence flow_ that defines the order in which steps in the process happen. In BPMN's visual representation, a sequence flow is an arrow connecting two elements. The direction of the arrow indicates their order of execution.
+A core concept of BPMN is a **sequence flow** that defines the order in which steps in the process happen. In BPMN's visual representation, a sequence flow is an arrow connecting two elements. The direction of the arrow indicates their order of execution.
 
-![](./assets/sequenceflow.png)
+![sequence flow](./assets/sequenceflow.png)
 
-You can think of process execution as tokens running through the process model. When a process is started, a token is spawned at the beginning of the model. It advances with every completed step. When the token reaches the end of the process, it is consumed and the process instance ends. Zeebe's task is to drive the token and to make sure the job workers are invoked whenever necessary.
+You can think of process execution as tokens running through the process model. When a process is started, a token is created at the beginning of the model and advances with every completed step. When the token reaches the end of the process, it is consumed and the process instance ends. Zeebe's task is to drive the token and to make sure the job workers are invoked whenever necessary.
 
 <center>
 <ReactPlayer
@@ -161,7 +161,7 @@ url={[
 
 Choosing the granularity of a task is up to the person modeling the process. For example, the activity of processing an order can be modeled as a single _Process Order_ task, or as three individual tasks _Collect Money_, _Fetch Items_, _Ship Parcel_. If you use Zeebe to orchestrate microservices, one task can represent one microservice invocation.
 
-See the [Tasks](tasks.md) section on which types of tasks are currently supported and how to use them.
+See the [tasks](tasks.md) section on which types of tasks are currently supported and how to use them.
 
 ### Gateways: Steering flow
 
@@ -195,7 +195,7 @@ url={[
 />
 </center>
 
-See the [Gateways](gateways.md) section on which types of gateways are currently supported and how to use them.
+See the [gateways](gateways.md) section on which types of gateways are currently supported and how to use them.
 
 ### Events: Waiting for something to happen
 
@@ -217,7 +217,7 @@ The circle with the envelope symbol is a catching message event. It makes the to
 
 Events can be added to the process in various ways. Not only can they be used to make a token wait at a certain point, but also for interrupting a token's progress.
 
-See the [Events](events.md) section on which types of events are currently supported and how to use them.
+See the [events](events.md) section on which types of events are currently supported and how to use them.
 
 ### Subprocesses: Grouping elements
 
@@ -225,9 +225,9 @@ See the [Events](events.md) section on which types of events are currently suppo
 
 ![payload](./assets/sub-process.gif)
 
-When the event is triggered, the sub process is interrupted regardless which of its elements is currently active.
+When the event is triggered, the subprocess is interrupted, regardless which of its elements is currently active.
 
-See the [Subprocesses](subprocesses.md) section on which types of subprocesses are currently supported and how to use them.
+See the [subprocesses](subprocesses.md) section on which types of subprocesses are currently supported and how to use them.
 
 ## Additional resources
 
