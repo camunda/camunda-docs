@@ -1,12 +1,12 @@
 ---
 id: single-sign-on
-title: "Single Sign On"
+title: "Single sign on"
 description: "Register your own hook into the Optimize authentication system such that you can integrate Optimize with your single sign on system."
 ---
 
 <span class="badge badge--platform">Platform only</span>
 
-Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
+Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
 
 This feature allows you to register your own hook into the Optimize authentication system such that you can
 integrate Optimize with your single sign on system. This allows you to skip the log in via the Optimize interface.
@@ -23,7 +23,7 @@ public interface AuthenticationExtractor {
 Implement this interface to extract your custom auth header from the JAX-RS servlet request, which is represented by `servletRequest`.
 With the given request you are able to extract your information both from the request header and from the request cookies.
 
-The following example extracts a header with the name `user` and if the header exists the user name from the header is authenticated:
+The following example extracts a header with the name `user` and if the header exists, the user name from the header is authenticated:
 
 ```java
 package com.example.optimize.security.authentication;
@@ -46,7 +46,7 @@ public class AutomaticallySignInUserFromHeaderPlugin implements AuthenticationEx
 }
 ```
 
-Similar to the other plugins' setup, you have to package your plugin in a jar, add it to Optimize's `plugin` folder and make Optimize find it by adding the following configuration to `environment-config.yaml`:
+Similar to the other plugins' setup, you have to package your plugin in a `jar`, add it to Optimize's `plugin` folder, and make Optimize find it by adding the following configuration to `environment-config.yaml`:
 
 ```yaml
 plugin:

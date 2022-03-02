@@ -1,6 +1,6 @@
 ---
 id: event-ingestion
-title: "Event Ingestion"
+title: "Event ingestion"
 description: "The REST API to ingest external events into Optimize."
 ---
 

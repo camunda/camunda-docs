@@ -6,10 +6,9 @@ description: "Register your own hook into the Optimize Elasticsearch client to a
 
 <span class="badge badge--platform">Platform only</span>
 
-Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
+Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
 
-This feature allows you to register your own hook into the Optimize Elasticsearch client, allowing you to add custom headers 
-to all requests made to Elasticsearch. The plugin is invoked before every request to Elasticsearch is made, allowing different
+This feature allows you to register your own hook into the Optimize Elasticsearch client, allowing you to add custom headers to all requests made to Elasticsearch. The plugin is invoked before every request to Elasticsearch is made, allowing different
 headers and values to be added per request. This plugin is also loaded during the update and reimport.
 
 For that, the Optimize plugin system provides the following interface:
@@ -49,7 +48,7 @@ public class AddAuthorizationHeaderPlugin implements ElasticsearchCustomHeaderSu
 }
 ```
 
-Similar to the other plugins' setup, you have to package your plugin in a jar, add it to Optimize's `plugin` folder and make Optimize find it by adding the following configuration to `environment-config.yaml`:
+Similar to the other plugins' setup, you have to package your plugin in a `jar`, add it to Optimize's `plugin` folder, and make Optimize find it by adding the following configuration to `environment-config.yaml`:
 
 ```yaml
 plugin:

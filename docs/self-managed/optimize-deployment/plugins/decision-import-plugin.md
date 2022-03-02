@@ -1,14 +1,14 @@
 ---
 id: decision-import-plugin
-title: "Decision Inputs and Outputs Import Customization"
+title: "Decision inputs and outputs import customization"
 description: "Enrich or filter the Decision inputs and outputs so you can customize which and how these are imported to Optimize."
 ---
 
 <span class="badge badge--platform">Platform only</span>
 
-Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
+Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
 
-This feature enables you to enrich, modify or filter the decision input and output instances, e.g., if instances in Camunda contain IDs of instances in another database and you would like to resolve those references to the actual values.
+This feature enables you to enrich, modify, or filter the decision input and output instances, e.g., if instances in Camunda contain IDs of instances in another database and you would like to resolve those references to the actual values.
 
 The plugin system contains the following interfaces:
 
@@ -26,14 +26,15 @@ public interface DecisionOutputImportAdapter {
 }
 ```
 
-Implement these to adjust the input and output instances to be imported. The methods take a list of instances that would be imported if no further action is performed as parameter. The returned list is the customized list with the enriched/filtered instances that will be imported. To create new instances, you can use the PluginDecisionInputDto and PluginDecisionOutputDto classes as data transfer object (dto), which are also contained in the plugin system.
+Implement these to adjust the input and output instances to be imported. The methods take a list of instances that would be imported if no further action is performed as parameter. The returned list is the customized list with the enriched/filtered instances that will be imported. To create new instances, you can use the `PluginDecisionInputDto` and `PluginDecisionOutputDto` classes as data transfer object (DTO), which are also contained in the plugin system.
 
-Please note that:
+:::note
+All class members need to be set in order, otherwise the instance is ignored, as this may lead to problems during data analysis.
 
-- all dto class members need to be set in order, otherwise the instance is ignored, as this may lead to problems during data analysis.
-- the data from the engine is imported in batches. This means the `adaptInput/adaptOutput` method is called once per batch rather than once for all data. For instance, if you have 100 000 decision instances in total and the batch size is 10 000 then the plugin function will be called 10 times.
+The data from the engine is imported in batches. This means the `adaptInput/adaptOutput` method is called once per batch rather than once for all data. For instance, if you have 100 000 decision instances in total and if the batch size is 10,000, the plugin function will be called 10 times.
+:::
 
-Next, package your plugin into a jar file and then add the jar file to the `plugin` folder of your Optimize directory. Finally, add the name of the base package of your custom DecisionOutputImportAdapter/DecisionInputImportAdapter to the `environment-config.yaml` file:
+Next, package your plugin into a `jar` file and then add the `jar` file to the `plugin` folder of your Optimize directory. Finally, add the name of the base package of your custom `DecisionOutputImportAdapter/DecisionInputImportAdapter` to the `environment-config.yaml` file:
 
 ```yaml
 plugin:
@@ -70,7 +71,7 @@ public class SetAllStringInputsToFoo implements DecisionInputImportAdapter {
 }
 ```
 
-Now when 'SetAllStringInputsToFoo', packaged as a jar file, is added to the `plugin` folder, we just have to add the following property to the `environment-config.yaml` file to make the plugin work:
+Now, when `SetAllStringInputsToFoo`, packaged as a `jar` file, is added to the `plugin` folder, we just have to add the following property to the `environment-config.yaml` file to make the plugin work:
 
 ```yaml
 plugin:

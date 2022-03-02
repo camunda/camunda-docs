@@ -1,6 +1,6 @@
 ---
 id: import-guide
-title: "Data Import"
+title: "Data import"
 description: "Shows how the import generally works and an example of import performance."
 ---
 
@@ -8,7 +8,7 @@ description: "Shows how the import generally works and an example of import perf
 
 This document provides instructions on how the import of the engine data to Optimize works.
 
-## Architecture Overview
+## Architecture overview
 
 In general, the import assumes the following setup:
 
@@ -20,26 +20,26 @@ The following depicts the setup and how the components communicate with each oth
 
 ![Optimize Import Structure](img/Optimize-Structure.png)
 
-Optimize queries the engine data using a dedicated Optimize REST-API within the engine, transforms the data and stores it in its own Elasticsearch database such that it can be quickly and easily queried by Optimize when evaluating reports or performing analyses. The reason for having a dedicated REST endpoint for Optimize is performance: the default REST-API adds a lot of complexity to retrieve the data from the engine database, which can result in low performance for large data sets.
+Optimize queries the engine data using a dedicated Optimize REST-API within the engine, transforms the data, and stores it in its own Elasticsearch database such that it can be quickly and easily queried by Optimize when evaluating reports or performing analyses. The reason for having a dedicated REST endpoint for Optimize is performance: the default REST-API adds a lot of complexity to retrieve the data from the engine database, which can result in low performance for large data sets.
 
-Please note the following limitations regarding the data in Optimize's database:
+Note the following limitations regarding the data in Optimize's database:
 
 - The data is only a near real-time representation of the engine database. This means Elasticsearch may not contain the data of the most recent time frame, e.g. the last two minutes, but all the previous data should be synchronized.
 - Optimize only imports the data it needs for its analysis. The rest is omitted and won't be available for further investigation. Currently, Optimize imports:
-  - the history of the activity instances
-  - the history of the process instances
-  - the history of variables with the limitation that Optimize only imports primitive types and keeps only the latest version of the variable
-  - the history of User Tasks belonging to process instances
-  - the history of incidents with the exception of incidents that occurred due to the history cleanup job or a timer start event job running out of retries
-  - process definitions 
-  - process definition XMLs
-  - decision definitions
-  - definition deployment information
-  - historic decision instances with input and output
-  - tenants
-  - the historic identity link logs
+  - The history of the activity instances
+  - The history of the process instances
+  - The history of variables with the limitation that Optimize only imports primitive types and keeps only the latest version of the variable
+  - The history of user tasks belonging to process instances
+  - The history of incidents with the exception of incidents that occurred due to the history cleanup job or a timer start event job running out of retries
+  - Process definitions
+  - Process definition XMLs
+  - Decision definitions
+  - Definition deployment information
+  - Historic decision instances with input and output
+  - Tenants
+  - The historic identity link logs
 
-Please refer to the [Import Procedure](#import-procedure) section for a more detailed description of how Optimize imports engine data.
+Refer to the [Import Procedure](#import-procedure) section for a more detailed description of how Optimize imports engine data.
 
 ## Import performance overview
 
@@ -47,55 +47,39 @@ This section gives an overview of how fast Optimize imports certain data sets. T
 
 It is very likely that these metrics change for different data sets because the speed of the import depends on how the data is distributed.
 
-The import is also affected by how the involved components are set up. For instance, if you deploy the Camunda engine on a different machine than Optimize and Elasticsearch to provide both applications with more computation resources the process is likely to speed up. If the Camunda engine and Optimize are physically far away from each other, the network latency might slow down the import.
+The import is also affected by how the involved components are set up. For instance, if you deploy the Camunda engine on a different machine than Optimize and Elasticsearch to provide both applications with more computation resources, the process is likely to speed up. If the Camunda engine and Optimize are physically far away from each other, the network latency might slow down the import.
 
 ### Setup
 
 The following components were used for these import tests:
 
-<table class="table table-striped">
-  <tr>
-    <th>Component</th>
-    <th>Version</th>
-  </tr>
-  <tr>
-    <td>Camunda Platform</td>
-    <td>7.10.3</td>
-  </tr>
-  <tr>
-    <td>Camunda Platform Database</td>
-    <td>PostgreSQL 11.1</td>
-  </tr>
-  <tr>
-    <td>Elasticsearch</td>
-    <td>6.5.4</td>
-  </tr>
-  <tr>
-    <td>Optimize</td>
-    <td>2.4.0</td>
-  </tr>
-</table>
+| Component | Version |
+| - | - |
+| Camunda Platform | 7.10.3 |
+| Camunda Platform Database | PostgreSQL 11.1 |
+| Elasticsearch | 6.5.4 |
+| Optimize | 2.4.0 |
 
 The Optimize configuration with the default settings was used, as described in detail in the [configuration overview](./../setup/configuration.md).
 
 The following hardware specifications were used for each dedicated host
 
 - Elasticsearch:
-    - Processor: 8 vCPUs\*
-    - Working Memory: 8 GB
-    - Storage: local 120GB SSD
+  - Processor: 8 vCPUs\*
+  - Working Memory: 8 GB
+  - Storage: local 120GB SSD
 - Camunda Platform:
-    - Processor: 4 vCPUs\*
-    - Working Memory: 4 GB
+  - Processor: 4 vCPUs\*
+  - Working Memory: 4 GB
 - Camunda Platform Database (PostgreSQL):
-    - Processor: 8 vCPUs\*
-    - Working Memory: 2 GB
-    - Storage: local 480GB SSD
+  - Processor: 8 vCPUs\*
+  - Working Memory: 2 GB
+  - Storage: local 480GB SSD
 - Optimize:
-    - Processor: 4 vCPUs\*
-    - Working Memory: 8 GB
+  - Processor: 4 vCPUs\*
+  - Working Memory: 8 GB
 
-\*one vCPU equals one single hardware hyper-thread on an Intel Xeon E5 v2 CPU (Ivy Bridge) with a base frequency of 2.5 GHz
+\*one vCPU equals one single hardware hyper-thread on an Intel Xeon E5 v2 CPU (Ivy Bridge) with a base frequency of 2.5 GHz.
 
 The time was measured from the start of Optimize until the entire data import to Optimize was finished.
 
@@ -103,26 +87,11 @@ The time was measured from the start of Optimize until the entire data import to
 
 This data set contains the following amount of instances:
 
-<table class="table table-striped">
-  <tr>
-    <th>Number of Process Definitions</th>
-    <th>Number of Activity Instances</th>
-    <th>Number of Process Instances</th>
-    <th>Number of Variable Instances</th>
-    <th>Number of Decision Definitions</th>
-    <th>Number of Decision Instances</th>
-  </tr>
-  <tr>
-    <td>21</td>
-    <td>123 162 903</td>
-    <td>10 000 000</td>
-    <td>119 849 175</td>
-    <td>4</td>
-    <td>2 500 006</td>
-  </tr>
-</table>
+| Number of Process Definitions | Number of Activity Instances | Number of Process Instances | Number of Variable Instances | Number of Decision Definitions | Number of Decision Instances |
+| - | - | - | - | - | - |
+| 21 | 123 162 903 | 10 000 000 | 119 849 175 | 4 | 2 500 006 |
 
-Here you can see how the data is distributed over the different process definitions:
+Here, you can see how the data is distributed over the different process definitions:
 
 ![Data Distribution](img/Import-performance-diagramms-logistic_large.png)
 
@@ -135,20 +104,9 @@ Results:
 
 This data set contains the following amount of instances:
 
-<table class="table table-striped">
-  <tr>
-    <th>Number of Process Definitions</th>
-    <th>Number of Activity Instances</th>
-    <th>Number of Process Instances</th>
-    <th>Number of Variable Instances</th>
-  </tr>
-  <tr>
-    <td>20</td>
-    <td>21 932 786</td>
-    <td>2 000 000</td>
-    <td>6 913 889</td>
-  </tr>
-</table>
+| Number of Process Definitions | Number of Activity Instances | Number of Process Instances | Number of Variable Instances |
+| - | - | - | - |
+| 20 | 21 932 786 | 2 000 000 | 6 913 889 |
 
 Here you can see how the data is distributed over the different process definitions:
 
@@ -186,7 +144,7 @@ During execution, the following steps are performed:
 
 The import process is automatically scheduled in rounds by the `Import Scheduler` after startup of Optimize. In each import round, multiple `Import Services` are scheduled to run, each fetches data of one specific entity type. For example, one service is responsible for importing the historic activity instances and another one for the process definitions.
 
-For each service, it is checked if new data is available. Once all entities for one import service have been imported, the service starts to backoff. To be more precise, before it can be scheduled again it stays idle for a certain period of time, controlled by the "backoff" interval and a "backoff" counter. After the idle time has passed , the service can perform another try to import new data. Each round in which no new data could be imported, the counter is incremented. Thus, the backoff counter will act as a multiplier for the backoff time and increase the idle time between two import rounds. This mechanism is configurable using the following properties:
+For each service, it is checked if new data is available. Once all entities for one import service have been imported, the service starts to back off. To be more precise, before it can be scheduled again it stays idle for a certain period of time, controlled by the "backoff" interval and a "backoff" counter. After the idle time has passed, the service can perform another try to import new data. Each round in which no new data could be imported, the counter is incremented. Thus, the backoff counter will act as a multiplier for the backoff time and increase the idle time between two import rounds. This mechanism is configurable using the following properties:
 
 ```yaml
   handler:
@@ -212,7 +170,7 @@ The preparation of the import is executed by the `ImportService`. Every `ImportS
 
 The whole polling/preparation workflow of the engine data is done in pages, meaning only a limited amount of entities is fetched on each execution. For example, say the engine has 1000 historic activity instances and the page size is 100. As a consequence, the engine would be polled 10 times. This prevents running out of memory and overloading the network.
 
-Polling a new page does not only consist of the `ImportService`, but the `IndexHandler` and the `EntityFetcher` are also involved. The following image depicts how those components are connected with each other:
+Polling a new page does not only consist of the `ImportService`, but the `IndexHandler`, and the `EntityFetcher` are also involved. The following image depicts how those components are connected with each other:
 
 ![ImportService Polling Procedure](img/Import-Service-Polling.png)
 
@@ -226,13 +184,17 @@ All fetched entities are mapped to a representation that allows Optimize to quer
 
 Full aggregation of the data is performed by a dedicated `ImportJobExecutor` for each entity type, which waits for `ImportJob` instances to be added to the execution queue. As soon as a job is in the queue, the executor:
 
-- polls the job with the new Optimize entities
-- persists the new entities to Elasticsearch.
+- Polls the job with the new Optimize entities
+- Persists the new entities to Elasticsearch
 
-The data from the engine and Optimize do not have a one-to-one relationship, i.e., one entity type in Optimize may consist of data aggregated from different data types of the engine. For example, the historic process instance is first mapped to an Optimize `ProcessInstance`. However, for the heatmap analysis it is also necessary for `ProcessInstance` to contain all activities that were executed in the process instance. Therefore, the Optimize `ProcessInstance` is an aggregation of the engine's historic process instance and other related data: historic activity instance data, User Task data, and variable data are all [nested documents](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html) within Optimize's `ProcessInstance` representation.
+The data from the engine and Optimize do not have a one-to-one relationship, i.e., one entity type in Optimize may consist of data aggregated from different data types of the engine. For example, the historic process instance is first mapped to an Optimize `ProcessInstance`. However, for the heatmap analysis it is also necessary for `ProcessInstance` to contain all activities that were executed in the process instance.
+
+Therefore, the Optimize `ProcessInstance` is an aggregation of the engine's historic process instance and other related data: historic activity instance data, user task data, and variable data are all [nested documents](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html) within Optimize's `ProcessInstance` representation.
 
 :::note
-Optimize uses [nested documents](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html), the above mentioned data is an example of documents that are nested within Optimize's `ProcessInstance` index. Elasticsearch applies retrictions regarding how many objects can be nested within one document. If your data includes too many nested documents, you may experience import failures. To avoid this, you can temporarily increase the nested object limit in Optimize's [index configuration](./../setup/configuration.md/#index-settings). Please note that this might cause memory errors.
+Optimize uses [nested documents](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html), the above mentioned data is an example of documents that are nested within Optimize's `ProcessInstance` index.
+
+Elasticsearch applies restrictions regarding how many objects can be nested within one document. If your data includes too many nested documents, you may experience import failures. To avoid this, you can temporarily increase the nested object limit in Optimize's [index configuration](./../setup/configuration.md/#index-settings). Note that this might cause memory errors.
 :::
 
 Import executions per engine entity are actually independent from another. Each follows a [producer-consumer-pattern](https://dzone.com/articles/producer-consumer-pattern), where the type specific `ImportService` is the single producer and a dedicated single `ImportJobExecutor` is the consumer of its import jobs, decoupled by a queue. So, both are executed in different threads. To adjust the processing speed of the executor, the queue size and the number of threads that process the import jobs can be configured:
