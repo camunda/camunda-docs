@@ -59,7 +59,6 @@ cluster:
 
 In this example, we will set up a Zeebe cluster with five brokers. Each broker needs to get a unique node id.
 
-
 To scale well, we will bootstrap five partitions with a replication factor of three. For more information about this, take a look into the [clustering](/components/zeebe/technical-concepts/clustering.md) section.
 
 The clustering setup will look like this:
@@ -121,67 +120,13 @@ This matrix depends on the partitions count, replication factor and the cluster 
 
 For the current example, the matrix will look like the following:
 
-<table>
-<tr>
-    <th></th>
-    <th>Node 0</th>
-    <th>Node 1</th>
-    <th>Node 2</th>
-    <th>Node 3</th>
-    <th>Node 4</th>
-</tr>
-
-<!-- Partition 0 -->
-<tr>
- <td><b>Partition 0</b></td>
- <td>Leader</td>
- <td>Follower</td>
- <td>Follower</td>
- <td>-</td>
- <td>-</td>
-</tr>
-
-<!-- Partition 1 -->
-<tr>
- <td><b>Partition 1</b></td>
- <td>-</td>
- <td>Leader</td>
- <td>Follower</td>
- <td>Follower</td>
- <td>-</td>
-</tr>
-
-<!-- Partition 2 -->
-<tr>
- <td><b>Partition 2</b></td>
- <td>-</td>
- <td>-</td>
- <td>Leader</td>
- <td>Follower</td>
- <td>Follower</td>
-</tr>
-
-<!-- Partition 3 -->
-<tr>
- <td><b>Partition 3</b></td>
- <td>Follower</td>
- <td>-</td>
- <td>-</td>
- <td>Leader</td>
- <td>Follower</td>
-</tr>
-
-<!-- Partition 4 -->
-<tr>
- <td><b>Partition 4</b></td>
- <td>Follower</td>
- <td>Follower</td>
- <td>-</td>
- <td>-</td>
- <td>Leader</td>
-</tr>
-
-</table>
+| | Node 0 | Node 1 | Node 2 | Node 3 | Node 4 |
+| - | - | - | - | - | - |
+| Partition 0 | Leader | Follower | Follower | - | - |
+| Partition 1 | - | Leader | Follower | Follower | - |
+| Partition 2 | - | - | Leader | Follower | Follower |
+| Partition 3 | Follower | - | - | Leader | Follower |
+| Partition 4 | Follower | Follower | - | - | Leader |
 
 The matrix ensures the partitions are well distributed between the different nodes. Furthermore, it guarantees each node knows exactly which partitions it has to bootstrap and for which it will become the leader at first (this could change later, if the node needs to step down for example.)
 

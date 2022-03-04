@@ -84,10 +84,10 @@ By default, this data is stored in the following:
 > To avoid exceeding your disk space, here are a few pitfalls to avoid:
 >
 > - Do not create a high number of snapshots with a long period between them.
-> - Do not configure an exporter which does not not advance its record position (such as the Debug Exporter).
+> - Do not configure an exporter which does not advance its record position (such as the Debug Exporter).
 
 If you do configure an exporter, ensure you monitor its availability and health, as well as the availability and health the exporter depends on.
-This is the Achilles' heel of the cluster. If data cannot be exported, it cannot be removed from the cluster and will accumulate on disk. See _Effect of exporters and external system failure_ further on in this document for an explanation and possible buffering strategies.
+This is the Achilles' heel of the cluster. If data cannot be exported, it cannot be removed from the cluster and will accumulate on disk. See _effect of exporters and external system failure_ further on in this document for an explanation and possible buffering strategies.
 
 ### Event log
 
@@ -108,7 +108,7 @@ The following conditions inhibit the automatic deletion of event log segments:
 - The max number of snapshots has not been written. Log segment deletion begin as soon as the max number of snapshots is reached.
 - An exporter does not advance its read position in the event log. In this case, the event log grows ad infinitum.
 
-An event log segment is not deleted until all the events in it are exported by all configured exporters. This means exporters that rely on side-effects, perform intensive computation, or experience back pressure from external storage will cause disk usage to grow, as they delay the deletion of event log segments.
+An event log segment is not deleted until all the events in it are exported by all configured exporters. This means exporters that rely on side effects, perform intensive computation, or experience back pressure from external storage will cause disk usage to grow, as they delay the deletion of event log segments.
 
 Exporting is only performed on the partition leader, but the followers of the partition do not delete segments in their replica of the partition until the leader marks all events in it as unneeded by exporters.
 
@@ -128,7 +128,7 @@ On the lead broker of a partition, the current running state is kept in memory a
 
 ### Effect of exporters and external system failure
 
-If an external system relied on by an exporter fails (for example, if you are exporting data to Elasticsearch and the connection to the Elasticsearch cluster fails), the exporter will not advance its position in the event log, and brokers cannot truncate their logs. The broker event log grows until the exporter is able to re-establish the connection and export the data.
+If an external system relied on by an exporter fails (for example, if you are exporting data to Elasticsearch and the connection to the Elasticsearch cluster fails), the exporter will not advance its position in the event log, and brokers cannot truncate their logs. The broker event log grows until the exporter is able to reestablish the connection and export the data.
 
 To ensure your brokers are resilient in the event of external system failure, give them sufficient disk space to continue operating without truncating the event log until the connection to the external system is restored.
 

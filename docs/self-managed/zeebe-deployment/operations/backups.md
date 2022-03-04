@@ -40,7 +40,7 @@ To create the backup, take the following steps:
 
 If you have direct access to the broker, for example in a bare-metal setup, you can do this by creating a tarball like this: `tar caf backup.tar.gz data/`.
 
-You may also use filesystem snapshots or [kubernetes volume snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
+You may also use filesystem snapshots or [Kubernetes volume snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
 if that fits your environment better
 
 2. Double-check that your tool of choice supports symbolic and hard links.

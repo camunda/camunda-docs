@@ -19,7 +19,7 @@ This page guides you through the initial installation of the Zeebe broker and ne
 
 Download the latest Zeebe release from the [GitHub release page](https://github.com/camunda-cloud/zeebe/releases).
 
-Once you've downloaded a distribution, extract it into a folder of your choice. 
+Once you've downloaded a distribution, extract it into a folder of your choice.
 
 To extract the Zeebe distribution and start the broker, **Linux users** can type the following:
 
