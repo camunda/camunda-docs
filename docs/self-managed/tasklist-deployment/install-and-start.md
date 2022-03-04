@@ -110,4 +110,4 @@ If you've already developed user tasks in Zeebe, you can see these on the left p
 
 ## Update Tasklist
 
-To update Tasklist versions, visit the [user guide](../../components/tasklist-userguide/updating-tasklist.md).
+To update Tasklist versions, visit the [user guide](../../components/tasklist/userguide/updating-tasklist.md).
