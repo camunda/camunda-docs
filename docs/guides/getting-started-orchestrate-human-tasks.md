@@ -6,10 +6,6 @@ description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
-## Getting started with user task orchestration
-
-### Purpose
-
 Using [Camunda Cloud](./getting-started/create-camunda-cloud-account.md), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
 
 When a process instance arrives at such a user task, a new job similar to a service task is created. The process instance stops at this point and waits until the job is completed. Applications like [Tasklist](../components/tasklist/introduction.md) can be used by humans to complete these tasks.
