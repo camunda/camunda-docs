@@ -126,44 +126,12 @@ A final note for high-performance environments: These powerful messaging capabil
 The following table summarizes the possibilities and recommendations.
 
 | Case | Synchronous request/response | Asynchronous request/response |
-| BPMN element| Service task | Send task | Service task | Send + receive task |
-  </tr>
-  <tr>
-    <td></td>
-    <td><img alt="Service task" src="/img/bpmn-elements/task-service.svg" /></td>
-    <td><img alt="Send task" src="/img/bpmn-elements/task-send.svg" /></td>
-    <td><img alt="Service task" src="/img/bpmn-elements/task-service.svg" /></td>
-    <td><img alt="Send and receive task" src="/img/bpmn-elements/send-and-receive-task.png" /></td>
-  </tr>  
-  <tr>
-    <td>Technical implications</td>
-    <td></td>
-    <td>Behaves like a service task</td>
-    <td>A unique correlation ID is generated for you<br />
-You don’t have to think about race conditions or idempotency<br />
-Timeout handling and retry logic are built-in<br />
-API to flag business or technical errors</td>
-    <td>Correlation ID needs to be generated yourself, but is fully under control<br />
-Message buffering is possible but also necessary<br />
-Timeouts and retries need to be modeled<br />
-BPMN errors cannot be used<br />
-</td>
-  </tr>
-  <tr>
-    <td>Assessment</td>
-    <td>Very intuitive</td>
-    <td>Might be more intuitive for fire and forget semantics, but can also lead to discussions</td>
-    <td>Removes visual noise which helps stakeholders to concentrate on core business logic, but requires use of internal job instance keys</td>
-    <td>More visual clutter, but also more powerful options around correlation and modeling patterns</td>
-  </tr>    
-  <tr>
-    <td>Recommendation</td>
-    <td><b>Default option</b>, use unless it is confusing for business stakeholders (e.g. because of fire and forget semantics of a task)</td>
-    <td>Use for <b>fire and forget</b> semantics, unless it leads to unnecessary discussions, in this case use service task instead</td>
-    <td>Use when response is <b>within milliseconds</b> and you can pass the Zeebe-internal job instance key around</td>
-    <td>Use when the response will <b>take time</b> (> some seconds),  or you need a <b>correlation id you can control</b></td>
-  </tr>      
-</table>
+| - | - | - |
+| BPMN element| Service task & Send task | Service task & Send + receive task |
+| | ![Service task](/img/bpmn-elements/task-service.svg)![Send task](/img/bpmn-elements/task-send.svg) | ![Service task](/img/bpmn-elements/task-service.svg)![Send and receive task](/img/bpmn-elements/send-and-receive-task.png) |
+| Technical implications | Behaves like a service task | A unique correlation ID is generated for you. You don’t have to think about race conditions or idempotency. Timeout handling and retry logic are built-in. API to flag business or technical errors. Correlation ID needs to be generated yourself, but is fully under control. Message buffering is possible but also necessary. Timeouts and retries need to be modeled. BPMN errors cannot be used. |
+| Assessment | Very intuitive. Might be more intuitive for fire and forget semantics, but can also lead to discussions. | Removes visual noise which helps stakeholders to concentrate on core business logic, but requires use of internal job instance keys. More visual clutter, but also more powerful options around correlation and modeling patterns. |
+| Recommendation | Default option, use unless it is confusing for business stakeholders (e.g. because of fire and forget semantics of a task). Use for fire and forget semantics, unless it leads to unnecessary discussions, in this case use service task instead. | Use when response is within milliseconds and you can pass the Zeebe-internal job instance key around. Use when the response will take time (> some seconds), or you need a correlation id you can control. |
 
 [//]:# (Can you work to clean up this table in Markdown or let me know how you want it structured and I can clean it up? I'm not sure how you want the columns and such organized currently.)
 
