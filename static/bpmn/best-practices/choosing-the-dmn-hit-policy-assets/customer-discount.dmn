@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_1okben7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="Customer Discount">
+    <decisionTable id="decisionTable">
+      <input id="category" label="Category">
+        <inputExpression id="inputExpression1" typeRef="string" />
+      </input>
+      <input id="years" label="Years since first purchase">
+        <inputExpression id="LiteralExpression_1p8cwv3" typeRef="string" />
+      </input>
+      <output id="discount" label="Discount (in %)" name="" typeRef="double" />
+      <rule id="long-time-gold">
+        <inputEntry id="UnaryTests_1ldaxq1">        <text><![CDATA["Gold"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0q8ehx3">        <text><![CDATA[>= 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1o6ovf5">        <text>15</text>
+</outputEntry>
+      </rule>
+      <rule id="short-time-gold">
+        <inputEntry id="UnaryTests_0cnvlje">        <text><![CDATA["Gold"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0107dhh">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_08iduap">        <text>12</text>
+</outputEntry>
+      </rule>
+      <rule id="long-time-silver">
+        <inputEntry id="UnaryTests_11duiho">        <text><![CDATA["Silver"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_18vsjhz">        <text><![CDATA[>= 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_17028q0">        <text>9</text>
+</outputEntry>
+      </rule>
+      <rule id="short-time-silver">
+        <inputEntry id="UnaryTests_06lap80">        <text><![CDATA["Silver"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1hr33th">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0cmiq43">        <text>6</text>
+</outputEntry>
+      </rule>
+      <rule id="long-time-bronze">
+        <inputEntry id="UnaryTests_1a97kfl">        <text><![CDATA["Bronze"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_03i72zt">        <text><![CDATA[>= 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0k61e16">        <text>3</text>
+</outputEntry>
+      </rule>
+      <rule id="short-time-bronze">
+        <inputEntry id="UnaryTests_1l7kra4">        <text><![CDATA["Bronze"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0y4kf96">        <text><![CDATA[< 5]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1m3n2z4">        <text>0</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
