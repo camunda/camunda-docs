@@ -88,7 +88,7 @@ To migrate existing connectors, create a small bridging layer to invoke these co
 
 ### Migration tooling
 
-Let's come back to a hands-on migration. The [Camunda Platform to Cloud migration tooling](https://github.com/berndruecker/camunda-platform-to-cloud-migration) is available as a community extension. This project contains two components:
+Let's come back to a hands-on migration. The [Camunda Platform to Cloud migration tooling](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration) is available as a community extension. This project contains two components:
 
 1. [A Desktop Modeler plugin to convert BPMN models from Camunda Platform to Camunda Cloud](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/desktop-modeler-plugin-platform-to-cloud-converter). This maps possible BPMN elements and technical attributes into the Camunda Cloud format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
 
