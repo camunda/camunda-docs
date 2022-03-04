@@ -14,6 +14,7 @@ module.exports = {
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
+    "guides/getting-started-orchestrate-human-tasks",
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/automating-a-process-using-bpmn",
