@@ -1,6 +1,6 @@
 ---
 id: external-variable-ingestion
-title: "External Variable Ingestion"
+title: "External variable ingestion"
 description: "The REST API to ingest external variable data into Optimize."
 ---
 
@@ -16,32 +16,36 @@ to future changes.
 With the external variable ingestion API, variable data held in external systems can be ingested into Optimize directly,
 without the need for these variables to be present in your Camunda platform data. This can be useful when external
 business data, which is relevant for process analysis in Optimize, is to be associated with specific process instances.
-Especially if this data changes over time it is advisable to use this REST API to persist external variable updates to Optimize, as otherwise Optimize may not be aware of data changes in the external system.
+
+Especially if this data changes over time, it is advisable to use this REST API to persist external variable updates to Optimize, as otherwise Optimize may not be aware of data changes in the external system.
 
 ## Functionality
 
 The external variable ingestion API allows users to ingest batches of variable data which Optimize stores in a dedicated
 index. All variable data includes a reference to the process instance each variable belongs to, this reference then
 enables Optimize to import external variable data from the dedicated index to their respective process instances at
-regular intervals. Once Optimize has updated the process instance data, the external variables are available for Report
+regular intervals. Once Optimize has updated the process instance data, the external variables are available for report
 evaluations in Optimize.
 
 ## Limitations
 
-Please note that external variables should be treated as separate from engine variables. If you ingest variables that are already present in the engine, engine imports may override the ingested data and vice versa, leading to unreliable report results. Similarly, if the same ingested batch contains variables with duplicate IDs, you may experience unexpected report results because Optimize will assume only one of the updates per ID and batch to be the most up to date one. Also please ensure that the reference information (process instance ID and process definition key) is accurate, as otherwise Optimize will not be able to correctly associate variables with instance data and may create new instance indices, resulting in data which will not be usable in reports. External variables can only be ingested for process instances and will not be affected by any configured variable plugin.
+Note that external variables should be treated as separate from engine variables. If you ingest variables that are already present in the engine, engine imports may override the ingested data and vice versa, leading to unreliable report results.
 
+Similarly, if the same ingested batch contains variables with duplicate IDs, you may experience unexpected report results because Optimize will assume only one of the updates per ID and batch to be the most up to date one.
+
+Additionally, ensure the reference information (process instance ID and process definition key) is accurate, as otherwise Optimize will not be able to correctly associate variables with instance data and may create new instance indices, resulting in data which will not be usable in reports. External variables can only be ingested for process instances and will not be affected by any configured variable plugin.
 
 ## Configuration
 
-Please refer to
+Refer to
 the [configuration section](../../setup/configuration#external-variable-ingestion-rest-api-configuration) to learn more
 about how to set up external variable ingestion.
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 POST `/api/ingestion/variable`
 
-## Request Headers
+## Request headers
 
 The following request headers have to be provided with every variable ingestion request:
 
@@ -52,7 +56,7 @@ The following request headers have to be provided with every variable ingestion 
 
 * Only required if not set as a query parameter
 
-## Query Parameters
+## Query parameters
 
 The following query parameters have to be provided with every delete request:
 
@@ -62,84 +66,37 @@ The following query parameters have to be provided with every delete request:
 
 * Only required if not set as a request header
 
-## Request Body
+## Request body
 
 The request body contains an array of variable JSON Objects:
 
-<table class="table table-striped">
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Constraints</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>id</td>
-    <td>String</td>
-    <td>REQUIRED</td>
-    <td>
-      The unique identifier of this variable.
-    </td>
-  </tr>
-  <tr>
-    <td>name</td>
-    <td>String</td>
-    <td>REQUIRED</td>
-    <td>
-      The name of the variable.
-    </td>
-  </tr>
-  <tr>
-    <td>type</td>
-    <td>String</td>
-    <td>REQUIRED</td>
-    <td>
-      The type of the variable. Must be one of: String, Short, Long, Double, Integer, Boolean or Date.
-    </td>
-  </tr>
-  <tr>
-    <td>value</td>
-    <td>String</td>
-    <td>REQUIRED</td>
-    <td>
-      The current value of the variable.
-    </td>
-  </tr>
-  <tr>
-    <td>processInstanceId</td>
-    <td>String</td>
-    <td>REQUIRED</td>
-    <td>
-        The ID of the process instance this variable is to be associated with.
-    </td>
-  </tr>
-  <tr>
-    <td>processDefinitionKey</td>
-    <td>String</td>
-    <td>REQUIRED</td>
-    <td>
-        The definition key of the process instance this variable is to be associated with.
-    </td>
-  </tr>
-</table>
+| Name | Type | Constraints | Description|
+| - | - | - | - |
+| id | String | REQUIRED | The unique identifier of this variable. |
+| name | String | REQUIRED | The name of the variable. |
+| type | String | REQUIRED | The type of the variable. Must be one of: String, Short, Long, Double, Integer, Boolean, or Date. |
+| value | String | REQUIRED | The current value of the variable. |
+| processInstanceId | String | REQUIRED | The ID of the process instance this variable is to be associated with. |
+| processDefinitionKey | String | REQUIRED | The definition key of the process instance this variable is to be associated with. |
 
 ## Result
 
 This method returns no content.
 
-## Response Codes
+## Response codes
 
-Possible HTTP Response Status codes:
+Possible HTTP response status codes:
 
 |Code|Description|
 |--- |--- |
 |204|Request successful.|
-|400|Returned if some of the properties in the request body are invalid or missing.|
+|400|Returned if some properties in the request body are invalid or missing.|
 |401|Secret incorrect or missing. See [Authorization](../authorization) on how to authorize.|
 
 ## Example
 
 #### Request
+
 POST `/api/ingestion/variable`
 
 Request Body:

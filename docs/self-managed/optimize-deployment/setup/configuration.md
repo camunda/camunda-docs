@@ -21,6 +21,7 @@ reference as follows:
 ```xml
 <logger name="org.camunda.optimize" level="info" />
 ```
+
 * Optimize update:
 
 ```xml
@@ -28,6 +29,7 @@ reference as follows:
   <appender-ref ref="UPGRADE"/>
 </logger>
 ```
+
 * Communication to Elasticsearch:
 
 ```xml
@@ -42,11 +44,11 @@ If you are running Optimize with Docker, you can use the following environment v
 
 Whether using the configuration file or Docker environment variables, to define the granularity of the information shown in the log you can set one of the following log levels:
 
-- _error_: shows errors only.
-- _warn_: like _error_, but displays warnings as well.
-- _info_: logs everything from _warn_ and the most important information about state changes or actions in Optimize.
-- _debug_: in addition to _info_, writes information about the scheduling process, alerting as well as the import of the engine data.
-- _trace_: like _debug_ but in addition, writes all requests sent to the Camunda engine as well as all queries towards Elasticsearch to the log output.
+- **error**: shows errors only.
+- **warn**: like **error**, but displays warnings as well.
+- **info**: logs everything from **warn** and the most important information about state changes or actions in Optimize.
+- **debug**: in addition to **info**, writes information about the scheduling process, alerting as well as the import of the engine data.
+- **trace**: like **debug**, but in addition, writes all requests sent to the Camunda engine as well as all queries towards Elasticsearch to the log output.
 
 ## System configuration
 
@@ -55,22 +57,22 @@ All distributions of Camunda Optimize come with a predefined set of configuratio
 You can see a sample configuration file with all possible configuration fields
 and their default values [here](service-config.yaml).
 
-In the following section you will find descriptions and default values of the configuration fields with their respective YAML path.
+In the following section, you will find descriptions and default values of the configuration fields with their respective YAML path.
 
 :::note Heads Up
 For changes in the configuration to take effect, you need to restart Optimize!
 :::
 
-### Java System Properties & OS Environment variable placeholders
+### Java system properties & OS environment variable placeholders
 
 To externalize configuration properties from the `environment-config.yaml`, Optimize provides variable placeholder support.
 
 The order in which placeholders are resolved is the following:
 
-1. Java System Properties
-2. OS Environment variables
+1. Java system properties
+2. OS environment variables
 
-The placeholder format is `${VARIABLE_NAME}` and allows you to refer to a value of a Java System Property or OS Environment variable of your choice.
+The placeholder format is `${VARIABLE_NAME}` and allows you to refer to a value of a Java system property or OS environment variable of your choice.
 The `VARIABLE_NAME` is required to contain only lowercase or uppercase letters, digits and underscore `_` characters and shall not begin with a digit. The corresponding regular expression is `([a-zA-Z_]+[a-zA-Z0-9_]*)`.
 
 The following example illustrates the usage:
@@ -82,7 +84,7 @@ security:
       secret: ${AUTH_TOKEN_SECRET}
 ```
 
-Given this variable is set before Optimize is started, e.g on Unix systems with:
+Given this variable is set before Optimize is started, for example on Unix systems with:
 
 ```
 export AUTH_TOKEN_SECRET=sampleTokenValue
@@ -90,23 +92,23 @@ export AUTH_TOKEN_SECRET=sampleTokenValue
 
 The value will be resolved at startup to `sampleTokenValue`.
 
-However, if the same variable is provided at the same time as a Java System Property, e.g. via passing `-DAUTH_TOKEN_SECRET=othertokenValue` to the Optimize startup script:
+However, if the same variable is provided at the same time as a Java system property, for example via passing `-DAUTH_TOKEN_SECRET=othertokenValue` to the Optimize startup script:
 
 ```
 ./optimize-startup.sh -DAUTH_TOKEN_SECRET=othertokenValue
 ```
 
-The value would be resolved to `othertokenValue` as Java System Properties have precedence over OS Environment variables.
+The value would be resolved to `othertokenValue` as Java system properties have precedence over OS environment variables.
 
-Note for Windows Users:
-
-To pass Java System Properties to the provided Windows Batch script `optimize-startup.bat`, you have to put them into double quotes when using the cmd.exe shell:
+:::note
+For Windows users, to pass Java system properties to the provided Windows Batch script `optimize-startup.bat`, you have to put them into double quotes when using the `cmd.exe` shell, as shown below.
+:::
 
 ```
 optimize-startup.bat "-DAUTH_TOKEN_SECRET=othertokenValue"
 ```
 
-and for the Windows Powershell in three double quotes:
+For the Windows Powershell in three double quotes:
 
 ```
 ./optimize-startup.bat """-DAUTH_TOKEN_SECRET=othertokenValue"""
@@ -129,27 +131,26 @@ security:
 
 These values control mechanisms of Optimize related security, e.g. security headers and authentication.
 
-| YAML Path                                        | Default Value   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------------------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| YAML Path | Default Value | Description |
+| - | - | - |
 |  |
-| security.auth.token.lifeMin                      | 60              | Optimize uses token-based authentication to keep track of which users are logged in. Define the lifetime of the token in minutes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| security.auth.token.secret                       | null            | Optional secret used to sign authentication tokens, it's recommended to use at least a 64 character secret. If set to `null` a random secret will be generated with each startup of Optimize.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| security.auth.superUserIds                       | [ ]            | List of user IDs that are granted full permission to all collections, reports & dashboards. <br /><br /> Note: For reports these users are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](./authorization-management.md).                                                                                                                                                                                                                                                                                                            |
-| security.auth.superGroupIds                      | [ ]            | List of group IDs that are granted full permission to all collections, reports & dashboards. All members of the groups specified will have superuser permissions in Optimize. <br /><br />Note: For reports these groups are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](./authorization-management.md).                                                                                                                                                                                                                         |
-| security.responseHeaders.HSTS.max-age            | 31536000        | HTTP Strict Transport Security (HSTS) is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking. This field defines the time, in seconds, that the browser should remember that this site is only to be accessed using HTTPS. If you set the number to a negative value no HSTS header is sent.                                                                                                                                                                                                                                                                                                               |
-| security.responseHeaders.HSTS.includeSubDomains  | true            | HTTP Strict Transport Security (HSTS) is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking. If this optional parameter is specified, this rule applies to all of the site’s subdomains as well.                                                                                                                                                                                                                                                                                                                                                                                                          |
-| security.responseHeaders.X-XSS-Protection        | 1; mode=block   | This header enables the cross-site scripting (XSS) filter in your browser. Can have one of the following options:<ul><li>   `0`: Filter disabled. </li><li>    `1`: Filter enabled. If a cross-site scripting attack is detected, in order to stop the attack, the browser will sanitize the page. </li><li>    `1; mode=block`: Filter enabled. Rather than sanitize the page, when a XSS attack is detected, the browser will prevent rendering of the page.</li><li>    `1; report=http://[YOURDOMAIN]/your_report_URI`: Filter enabled. The browser will sanitize the page and report the violation. This is a Chromium function utilizing CSP violation reports to send details to a URI of your choice.</li></ul> |
-| security.responseHeaders.X-Content-Type-Options  | true            | Setting this header will prevent the browser from interpreting files as a different MIME type to what is specified in the Content-Type HTTP header (e.g. treating text/plain as text/css).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| security.responseHeaders.Content-Security-Policy | base-uri 'self' | A Content Security Policy (CSP) has significant impact on the way browsers render pages. By default Optimize uses the base-uri directive which restricts the URLs that can be used to the Optimize pages. Find more details in [Mozilla's Content Security Policy Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy).                                                                                                                                                                                                                                                                                                      |
+| security.auth.token.lifeMin | 60 | Optimize uses token-based authentication to keep track of which users are logged in. Define the lifetime of the token in minutes. |
+| security.auth.token.secret | null | Optional secret used to sign authentication tokens, it's recommended to use at least a 64-character secret. If set to `null` a random secret will be generated with each startup of Optimize. |
+| security.auth.superUserIds | [ ] | List of user IDs that are granted full permission to all collections, reports, and dashboards. <br /><br /> Note: For reports, these users are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](./authorization-management.md). |
+| security.auth.superGroupIds | [ ] | List of group IDs that are granted full permission to all collections, reports, and dashboards. All members of the groups specified will have superuser permissions in Optimize. <br /><br />Note: For reports, these groups are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](./authorization-management.md). |
+| security.responseHeaders.HSTS.max-age | 31536000 | HTTP Strict Transport Security (HSTS) is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking. This field defines the time, in seconds, that the browser should remember that this site is only to be accessed using HTTPS. If you set the number to a negative value no HSTS header is sent. |
+| security.responseHeaders.HSTS.includeSubDomains | true | HTTP Strict Transport Security (HSTS) is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking. If this optional parameter is specified, this rule applies to all the site’s subdomains as well. |
+| security.responseHeaders.X-XSS-Protection | 1; mode=block   | This header enables the cross-site scripting (XSS) filter in your browser. Can have one of the following options:<ul><li>   `0`: Filter disabled. </li><li>    `1`: Filter enabled. If a cross-site scripting attack is detected, in order to stop the attack, the browser will sanitize the page. </li><li>    `1; mode=block`: Filter enabled. Rather than sanitize the page, when a XSS attack is detected, the browser will prevent rendering of the page.</li><li>    `1; report=http://[YOURDOMAIN]/your_report_URI`: Filter enabled. The browser will sanitize the page and report the violation. This is a Chromium function utilizing CSP violation reports to send details to a URI of your choice.</li></ul> |
+| security.responseHeaders.X-Content-Type-Options  | true            | Setting this header will prevent the browser from interpreting files as a different MIME type to what is specified in the Content-Type HTTP header (e.g. treating text/plain as text/css). |
+| security.responseHeaders.Content-Security-Policy | base-uri 'self' | A Content Security Policy (CSP) has significant impact on the way browsers render pages. By default Optimize uses the base-uri directive which restricts the URLs that can be used to the Optimize pages. Find more details in [Mozilla's Content Security Policy Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy). |
 
 ### Public API
 
-This section focusses on common properties related to the Public REST API of Optimize.
+This section focuses on common properties related to the Public REST API of Optimize.
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|api.accessToken|null|Secret token to be provided to the secured REST API on access.If set to <code>null</code> an error will be thrown and requests will get rejected.<br /><br />It is mandatory to configure a value if the majority of Public REST API is to be used.|
-
+|api.accessToken|null|Secret token to be provided to the secured REST API on access. If set to `null` an error will be thrown and requests will get rejected.<br /><br />It is mandatory to configure a value if the majority of Public REST API is to be used.|
 
 ### Container
 
@@ -158,7 +159,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
 |container.host|localhost|A host name or IP address to identify a specific network interface on which to listen.|
-|container.ports.http|8090|A port number that will be used by Optimize to process HTTP connections. If set to null, ~ or left empty, HTTP connections won't be accepted.|
+|container.ports.http|8090|A port number that will be used by Optimize to process HTTP connections. If set to null, or left empty, HTTP connections won't be accepted.|
 |container.ports.https|8091|A port number that will be used by Optimize to process secure HTTPS connections.|
 |container.keystore.location|keystore.jks|HTTPS requires an SSL Certificate. When you generate an SSL Certificate, you are creating a keystore file and a keystore password for use when the browser interface connects. This field specifies the location of this keystore file.|
 |container.keystore.password|optimize|Password of keystore file.|
@@ -167,7 +168,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 
 ### Connection to Camunda Platform
 
-Configuration for engines used to import data. Please note that you have to have
+Configuration for engines used to import data. Note that you have to have
 at least one engine configured at all times. You can configure multiple engines
 to import data from. Each engine configuration should have a unique alias associated
 with it and represented by `${engineAlias}`.
@@ -187,7 +188,7 @@ with it and represented by `${engineAlias}`.
 |engines.${engineAlias}.webapps.endpoint|http://localhost:8080/camunda|Defines the endpoint where the Camunda webapps are found. This allows Optimize to directly link to the other Camunda Web Applications, e.g. to jump from Optimize directly to a dedicated process instance in Cockpit|
 |engines.${engineAlias}.webapps.enabled|true|Enables/disables linking to other Camunda Web Applications|
 
-### Engine Common Settings
+### Engine common settings
 
 Settings used by Optimize, which are common among all configured engines, such as
 REST API endpoint locations, timeouts, etc.
@@ -198,11 +199,11 @@ REST API endpoint locations, timeouts, etc.
 |engine-commons.read.timeout|0|Maximum time a request to the engine should last before a timeout triggers. A value of zero means to wait an infinite amount of time.|
 |import.data.activity-instance.maxPageSize|10000|Determines the page size for historic activity instance fetching.|
 |import.data.incident.maxPageSize|10000|Determines the page size for historic incident fetching.|
-|import.data.process-definition-xml.maxPageSize|2|Determines the page size for process definition xml model fetching. Should be a low value, as large models will lead to memory or timeout problems.|
+|import.data.process-definition-xml.maxPageSize|2|Determines the page size for process definition XML model fetching. Should be a low value, as large models will lead to memory or timeout problems.|
 |import.data.process-definition.maxPageSize|10000|Determines the page size for process definition entities fetching.|
 |import.data.process-instance.maxPageSize|10000|Determines the page size for historic decision instance fetching.|
 |import.data.variable.maxPageSize|10000|Determines the page size for historic variable instance fetching.|
-|import.data.variable.includeObjectVariableValue|true|Controls whether Optimize fetches the serialized value of object variables from the Camunda Runtime REST API. By default this is active for backwards compatibility. If no variable plugin to handle object variables is installed, it can be turned off to reduce the overhead of the variable import. <br /><br />Note: Disabling the object variable value transmission is only effective with Camunda Platform 7.13.11+, 7.14.5+ and 7.15.0+.|
+|import.data.variable.includeObjectVariableValue|true|Controls whether Optimize fetches the serialized value of object variables from the Camunda Runtime REST API. By default, this is active for backwards compatibility. If no variable plugin to handle object variables is installed, it can be turned off to reduce the overhead of the variable import. <br /><br />Note: Disabling the object variable value transmission is only effective with Camunda Platform 7.13.11+, 7.14.5+ and 7.15.0+.|
 |import.data.user-task-instance.maxPageSize|10000|Determines the page size for historic User Task instance fetching.|
 |import.data.identity-link-log.maxPageSize|10000|Determines the page size for historic identity link log fetching.|
 |import.data.decision-definition-xml.maxPageSize|2|Determines the page size for decision definition xml model fetching. Should be a low value, as large models will lead to memory or timeout problems.|
@@ -230,7 +231,6 @@ REST API endpoint locations, timeouts, etc.
 |import.identitySync.cronTrigger|`0 */2 * * *` |Cron expression for when the identity sync should run, defaults to every second hour. You can either use the default Cron (5 fields) or the Spring Cron (6 fields) expression format here.<br /><br /> For details on the format please refer to: <ul><li>[Cron Expression Description](https://en.wikipedia.org/wiki/Cron)</li><li> [Spring Cron Expression Documentation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/support/CronSequenceGenerator.html)</li></ul>|
 |import.identitySync.maxPageSize|10000|The max page size when multiple users or groups are iterated during the import.|
 |import.identitySync.maxEntryLimit|100000|The entry limit of the user/group search cache. When increasing the limit, keep in mind to account for this by increasing the JVM heap memory as well. Please refer to the "Adjust Optimize heap size" documentation on how to configure the heap size.|
-
 
 ### Elasticsearch
 

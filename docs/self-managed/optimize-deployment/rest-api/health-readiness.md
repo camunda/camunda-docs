@@ -1,6 +1,6 @@
 ---
 id: health-readiness
-title: "Health Readiness"
+title: "Health readiness"
 description: "The REST API to check the readiness of Optimize."
 ---
 
@@ -8,9 +8,9 @@ description: "The REST API to check the readiness of Optimize."
 
 ## Purpose
 
-The purpose of Health-Readiness REST API is to return information indicating whether or not Optimize is ready to be used.
+The purpose of Health-Readiness REST API is to return information indicating whether Optimize is ready to be used.
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 GET `/api/readyz`
 

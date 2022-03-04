@@ -26,7 +26,7 @@ Example for `application.yml`:
 Example for environment variable:
 `SERVER_SERVLET_CONTEXT_PATH=/tasklist`
 
-Default context-path is `/`
+Default context-path is `/`.
 
 ## GraphQL API access
 
@@ -55,9 +55,10 @@ Tasklist stores and reads data in/from Elasticsearch.
 Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch. Set the appropriate username/password combination in the configuration to use it.
 
 #### Settings to connect to a secured Elasticsearch instance
-To connect to a secured (https) Elasticsearch instance you need normally only set the url protocol
+
+To connect to a secured (https) Elasticsearch instance you need normally only set the URL protocol
 part to `https` instead of `http`. A secured Elasticsearch instance needs also `username` and `password`.
-The other ssl settings should only be used in case of connection problems, for example disable
+The other SSL settings should only be used in case of connection problems, for example disable
 host verification.
 
 :::note
@@ -66,7 +67,7 @@ You may need to import the certificate into JVM runtime.
 
 Name | Description | Default value
 -----|-------------|--------------
-camunda.tasklist.elasticsearch.indexPrefix | Prefix for index names | tasklist 
+camunda.tasklist.elasticsearch.indexPrefix | Prefix for index names | tasklist
 camunda.tasklist.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
 camunda.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
 camunda.tasklist.elasticsearch.username | Username to access Elasticsearch REST API | -
@@ -105,7 +106,7 @@ camunda.tasklist:
 
 ## Zeebe broker connection
 
-Tasklist needs a connection to Zeebe Broker to start the import.
+Tasklist needs a connection to Zeebe broker to start the import.
 
 ### Settings to connect
 
@@ -133,7 +134,8 @@ Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe
 Therefore, settings for this Elasticsearch connection must be defined and correspond to the settings on the Zeebe side.
 
 ### Settings to connect and import
-See also [Settings to connect to a secured elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
+
+See also [settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance).
 
 Name | Description | Default value
 -----|-------------|--------------
@@ -241,8 +243,6 @@ Tasklist uses Log4j2 framework for logging. In the distribution archive and insi
 ```
 
 By default, Console log appender is used.
-
-[//]:# (Do you mean ConsoleAppender above?)
 
 ### JSON logging configuration
 
