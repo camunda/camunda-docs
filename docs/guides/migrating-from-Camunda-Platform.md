@@ -10,11 +10,9 @@ This guide describes how to migrate process solutions developed for Camunda Plat
 
 Please note the following important considerations:
 
-1. **Migrating from Camunda Platform to Camunda Cloud is not a paved path**. As you will read below, there are several differences between the products and not all solutions are easy to migrate. This guide describes our experiences with customer projects so far, but is not a "turn-key"-migration procedure.
+1. **It is not necessary to migrate from Camunda Platform to Camunda Cloud**. Camunda Platform is a great product with ongoing support; there is no need to migrate existing solutions unless you have a good reason to (e.g. run it on SaaS, certain requirements on scalability or fault-tolerance, etc.) It is OK to stay on Camunda Platform. But still then, knowing the basic steps of migration can be helpful in building solutions with Camunda Platform, that will make migration easier in the future if necessary.
 
-2. **It is not necessarily recommended to migrate from Camunda Platform to Camunda Cloud**. Camunda Platform is a great product with existing support; there is no need to migrate existing solutions unless you have a good reason to (e.g. run it on SaaS, certain requirements on scalability or fault-tolerance, etc.) Therefore, we view migration more as an exception than a rule. Still, knowing the basic steps of migration can be helpful in building solutions with Camunda Platform, that will make migration easier in the future if necessary.
-
-Planning to migrate your project? [Talk to us](/contact/) so we can help where needed.
+2. **There are limitations for an automated migration from Camunda Platform to Camunda Cloud**. As you will read below, there are several differences between the products and not all process solutions are easy to migrate. If in doubt, please [talk to us](/contact/) so we can help.
 
 ## Migration overview
 
@@ -34,7 +32,7 @@ In general, **development artifacts** *can* be migrated:
 
 In general, **workflow engine data** *cannot* yet be migrated to Camunda Cloud.
 
-* **Runtime data:** Running process instances of Camunda Platform are stored in the Camunda Platform database. *Runtime data cannot be migrated* to Camunda Cloud. A possible workaround is to create a process model on Camunda Cloud solely used for migration to bring process instances to their respective wait state as described in [How to migrate to Camunda](https://page.camunda.com/wp-how-to-migrate-to-camunda).
+* **Runtime data:** Running process instances of Camunda Platform are stored in the Camunda Platform database. *Runtime data cannot be migrated* to Camunda Cloud.
 
 * **History data:** *Historic data cannot be migrated*.
 
@@ -80,7 +78,7 @@ Camunda Platform uses [JUEL (Java Unified Expression Language)](https://docs.cam
 
 Camunda Cloud uses [FEEL (Friendly-Enough Expression Language](/reference/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
-Most expressions can be converted (see [this community extension](https://github.com/berndruecker/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.js) as a starting point, some might need to be completly rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform).
+Most expressions can be converted (see [this community extension](https://github.com/berndruecker/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.js) as a starting point, some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform).
 
 #### Different connector infrastructure
 
@@ -90,9 +88,9 @@ To migrate existing connectors, create a small bridging layer to invoke these co
 
 ### Migration tooling
 
-Let's come back to a hands-on migration. The [Camunda Platform to Cloud migration tooling](https://github.com/berndruecker/camunda-platform-to-cloud-migration) is available as a community extension. This project contains two components:
+Let's come back to a hands-on migration. The [Camunda Platform to Cloud migration tooling](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration) is available as a community extension. This project contains two components:
 
-1. [A Camunda Modeler plugin to convert BPMN models from Camunda Platform to Camunda Cloud](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-modeler-plugin-platform-to-cloud-converter). This maps possible BPMN elements and technical attributes into the Camunda Cloud format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
+1. [A Desktop Modeler plugin to convert BPMN models from Camunda Platform to Camunda Cloud](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/desktop-modeler-plugin-platform-to-cloud-converter). This maps possible BPMN elements and technical attributes into the Camunda Cloud format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
 
 2. [The Camunda Platform to Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter). This is a library providing a worker to hook in Camunda Platform-based glue code. For example, it can invoke existing JavaDelegate classes.
 
@@ -251,7 +249,7 @@ The following is not possible:
 
 Human task management is still under development in Camunda Cloud, so most configuration options are not yet available.
 
-The following attributes/elements cannot be migrated:
+The following attributes/elements cannot (yet) be migrated:
 
 * Task assignment (to users or groups):
   * ```bpmn:humanPerformer```
@@ -274,7 +272,7 @@ The following attributes/elements cannot be migrated:
 In Camunda Platform, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
 
 * Embedded Task Forms (embedded custom HTML and JavaScript)
-* Camunda Forms (simple forms defined via Camunda Modeler properties)
+* Camunda Forms (simple forms defined via Desktop Modeler properties)
 * External Task Forms (link to custom applications)
 * [Camunda Forms](./utilizing-forms.md)
 

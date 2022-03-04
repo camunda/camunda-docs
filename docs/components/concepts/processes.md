@@ -26,7 +26,7 @@ Zeebe uses [BPMN 2.0](http://www.bpmn.org/) to represent processes. BPMN is an i
 
 Zeebe provides a free and open-source BPMN modeling tool to create BPMN diagrams and configure their technical properties. The modeler is a desktop application based on the [bpmn.io](https://bpmn.io) open-source project.
 
-Camunda Modeler can be [downloaded from GitHub](https://camunda.com/download/modeler/).
+Desktop Modeler can be [downloaded from GitHub](https://camunda.com/download/modeler/).
 
 ## Sequences
 
@@ -43,9 +43,7 @@ You can think of Zeebe's process orchestration as a state machine, taking the fo
 
 ## Data flow
 
-As Zeebe progresses from one task to the next in a process, it can move custom data in the form of variables. Variables are key-value-pairs and part of the process instance.
-
-[//]:# (Do we need hyphens between key-value-pairs?)
+As Zeebe progresses from one task to the next in a process, it can move custom data in the form of variables. Variables are key-value pairs and part of the process instance.
 
 ![data-flow](assets/process-data-flow.png)
 

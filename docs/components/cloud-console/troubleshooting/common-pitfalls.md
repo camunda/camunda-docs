@@ -10,9 +10,7 @@ See a few common pitfalls below:
 
 ## The button to create new clusters is disabled
 
-- Your organization is on a Trial Plan and you have already created a cluster. In this case, you cannot create another cluster, because only one cluster is included in the trial plan.
-
-[//]:# (So I think from a branding perspective and for consistency purposes we need to determine if we capitalize "Trial Plan" as a product, or go by "trial phase" or "free trial plan," etc. In tandem, we need to determine if we capitalize "Plan" after "Enterprise" and "Professional." Currently, it looks like we do.)
+- Your organization is on a trial plan and you have already created a cluster. In this case, you cannot create another cluster, because only one cluster is included in the trial plan.
 
 - Your billing reservations do not allow any more clusters. You must increase the [reservations](../manage-organization/update-billing-reservations.md) if you want to create more clusters. If you do not have the necessary rights, contact an admin or the owner of the organization.
 

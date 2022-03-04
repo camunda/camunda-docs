@@ -10,10 +10,6 @@ The `camunda/optimize:latest` Docker image can be used to run Optimize in Self-M
 variables need to be set for this to work correctly. See below for an example of how this could be done as
 part of a `docker-compose` file:
 
-[//]:# (What do you mean when you say "Certain environment
-variables need to be set for this to work correctly." I would maybe add something like "Certain environment
-variables must be set for this to work correctly. In this document, we'll step through these necessary adjustments. First, see an example of these adjustments in the sample below using a `docker-compose` file:)
-
 ```
 optimize:
     container_name: optimize

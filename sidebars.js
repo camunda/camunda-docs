@@ -14,6 +14,7 @@ module.exports = {
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
+    "guides/getting-started-orchestrate-human-tasks",
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/automating-a-process-using-bpmn",
@@ -82,22 +83,40 @@ module.exports = {
       Modeler: [
         "components/modeler/about-modeler",
         {
-          "Cloud Modeler": [
-            "components/modeler/cloud-modeler/launch-cloud-modeler",
-            "components/modeler/cloud-modeler/model-your-first-diagram",
-            "components/modeler/cloud-modeler/import-diagram",
-            "components/modeler/cloud-modeler/save-and-deploy",
-            "components/modeler/cloud-modeler/start-instance",
-            "components/modeler/cloud-modeler/model-overview",
+          "Web Modeler": [
+            "components/modeler/web-modeler/new-web-modeler",
+            "components/modeler/web-modeler/launch-cloud-modeler",
+            "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/import-diagram",
+            "components/modeler/web-modeler/save-and-deploy",
+            "components/modeler/web-modeler/start-instance",
+            "components/modeler/web-modeler/collaboration",
+            "components/modeler/web-modeler/milestones",
           ],
         },
         {
-          "Camunda Modeler": [
-            "components/modeler/camunda-modeler/install-the-modeler",
-            "components/modeler/camunda-modeler/model-your-first-diagram",
-            "components/modeler/camunda-modeler/connect-to-camunda-cloud",
-            "components/modeler/camunda-modeler/start-instance",
-            "components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates",
+          "Desktop Modeler": [
+            "components/modeler/desktop-modeler/install-the-modeler",
+            "components/modeler/desktop-modeler/model-your-first-diagram",
+            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/start-instance",
+            {
+              "Element templates": [
+                "components/modeler/desktop-modeler/element-templates/about-templates",
+                "components/modeler/desktop-modeler/element-templates/configuring-templates",
+                "components/modeler/desktop-modeler/element-templates/using-templates",
+                "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/additional-resources"
+              ],
+            },
+            {
+              "Additional configuration": [
+                "components/modeler/desktop-modeler/flags/flags",
+                "components/modeler/desktop-modeler/plugins/plugins",
+                "components/modeler/desktop-modeler/search-paths/search-paths",
+                "components/modeler/desktop-modeler/telemetry/telemetry"
+              ],
+            }
           ],
         },
         {
@@ -153,7 +172,7 @@ module.exports = {
         },
         {
           "DMN": [
-            "components/modeler/dmn/camunda-modeler-dmn",
+            "components/modeler/dmn/desktop-modeler-dmn",
           ],
         },
       ],
@@ -248,13 +267,13 @@ module.exports = {
         "components/best-practices/overview",
         {
           "Project Management": [
-            "components/best-practices/management/following-the-customer-success-path",            
+            "components/best-practices/management/following-the-customer-success-path",
             "components/best-practices/management/doing-a-proper-poc",
           ],
           "Architecture": [
-            "components/best-practices/architecture/deciding-about-your-stack", 
-            "components/best-practices/architecture/sizing-your-environment", 
-            "components/best-practices/architecture/understanding-human-tasks-management", 
+            "components/best-practices/architecture/deciding-about-your-stack",
+            "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/understanding-human-tasks-management",
           ],
           "Development": [
             "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
@@ -276,17 +295,17 @@ module.exports = {
           ],
           "Operations": [
             "components/best-practices/operations/versioning-process-definitions",
-            "components/best-practices/operations/reporting-about-processes",            
+            "components/best-practices/operations/reporting-about-processes",
           ],
           "Camunda 7 specific": [
-            "components/best-practices/architecture/deciding-about-your-stack-c7", 
-            "components/best-practices/architecture/sizing-your-environment-c7", 
+            "components/best-practices/architecture/deciding-about-your-stack-c7",
+            "components/best-practices/architecture/sizing-your-environment-c7",
             "components/best-practices/development/invoking-services-from-the-process-c7",
             "components/best-practices/development/understanding-transaction-handling-c7",
             "components/best-practices/operations/operating-camunda-c7",
             "components/best-practices/operations/performance-tuning-camunda-c7",
             "components/best-practices/operations/securing-camunda-c7",
-            "components/best-practices/architecture/extending-human-task-management-c7", 
+            "components/best-practices/architecture/extending-human-task-management-c7",
           ],
     },
       ],
@@ -378,14 +397,8 @@ module.exports = {
         {
           "Kubernetes deployment": [
             "self-managed/zeebe-deployment/kubernetes/index",
-            {
-              "Helm charts": [
-                "self-managed/zeebe-deployment/kubernetes/helm/index",
-                "self-managed/zeebe-deployment/kubernetes/helm/prerequisites",
-                "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
-                "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate",
-              ],
-            },
+            "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
+            "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist",
           ],
         },
         {

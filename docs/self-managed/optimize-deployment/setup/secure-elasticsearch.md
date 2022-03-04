@@ -4,7 +4,7 @@ title: "Secure Elasticsearch"
 description: "Secure your Elasticsearch instance so that the communication is encrypted and only authorized users have access to Elasticsearch."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 It is possible to connect Optimize to an Elasticsearch instance or cluster which is secured by the Elasticsearch extension X-Pack. Bear in mind that X-Pack is an enterprise feature of Elasticsearch and might require you to obtain a license before it can be used in a commercial context.
 

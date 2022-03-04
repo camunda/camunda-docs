@@ -87,5 +87,4 @@ Leveraging typical BI system's **ETL** (extract, transform, and load) features a
 
 To get the data into the BI system, leverage one of the mechanisms described above. Our recommendation generally is:
 
-- In a Self-Managed setting, implement a custom exporter.
 - In SaaS, leverage the history API to regularly pull data, as custom exporters are not supported there.
