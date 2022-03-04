@@ -83,6 +83,9 @@ RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs
 
 RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 
+# Static resource page for the camunda desktop modeler
+RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
+
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
 
