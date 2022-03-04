@@ -30,6 +30,8 @@ optimize:
         - CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT=1
         - CAMUNDA_OPTIMIZE_SHARING_ENABLED=false
         - CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN=true
+        - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=https://weblogin.cloud.company.com/.well-known/jwks.json
+        - OPTIMIZE_API_ACCESS_TOKEN=secret
 ```
 
 Some configuration properties are optional and have default values. See a description of these properties and their default values in the table below:
@@ -49,6 +51,8 @@ CAMUNDA_OPTIMIZE_ZEEBE_NAME | The record prefix for exported Zeebe records. | ze
 CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT | The number of partitions configured in Zeebe. | 1
 CAMUNDA_OPTIMIZE_SHARING_ENABLED | Disables the sharing feature (this is not currently supported). | false
 CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN | Disables the logout button (logout is handled by IAM). | 1
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation | null
+OPTIMIZE_API_ACCESS_TOKEN | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set. | null
 
 ## Requirements
 
