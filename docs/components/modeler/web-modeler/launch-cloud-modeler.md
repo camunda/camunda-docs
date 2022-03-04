@@ -3,6 +3,8 @@ id: launch-cloud-modeler
 title: Launch Web Modeler
 ---
 
+<span class="badge badge--cloud">Camunda Cloud only</span>
+
 Since Web Modeler is embedded in the Camunda Cloud Console, it does not need to be started separately.
 
 To launch Web Modeler, follow the steps below:

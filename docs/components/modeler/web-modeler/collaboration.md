@@ -4,6 +4,8 @@ title: Collaboration
 description: Collaboration features and access rights for Web Modeler.
 ---
 
+<span class="badge badge--cloud">Camunda Cloud only</span>
+
 ## Projects
 
 Files and folders are stored in projects.

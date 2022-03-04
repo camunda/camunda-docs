@@ -4,7 +4,7 @@ title: "Instructions"
 description: "Find out how to update to a new version of Optimize without losing your reports and dashboards."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 Roughly every quarter of a year a new minor version of Optimize is released. These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
 

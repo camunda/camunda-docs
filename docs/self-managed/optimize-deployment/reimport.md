@@ -4,7 +4,7 @@ title: "Camunda engine data reimport"
 description: "Find out how to reimport Camunda engine data without losing your reports and dashboards."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 There are cases where you might want to remove all Camunda Platform engine data from Optimize which has been imported from connected Camunda engines but don't want to lose Optimize entities such as collections, reports, or dashboards you created.
 

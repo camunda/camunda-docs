@@ -4,7 +4,7 @@ title: Event-based processes
 description: Create and analyze reports backed by ingested events.
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 ## Overview
 

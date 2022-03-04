@@ -4,7 +4,7 @@ title: "Event-based processes"
 description: "Read everything about how to configure event-based processes in Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 Event-based processes are BPMN processes that can be created inside Optimize which are based on events originating from external systems.
 

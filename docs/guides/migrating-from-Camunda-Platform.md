@@ -32,7 +32,7 @@ In general, **development artifacts** *can* be migrated:
 
 In general, **workflow engine data** *cannot* yet be migrated to Camunda Cloud.
 
-* **Runtime data:** Running process instances of Camunda Platform are stored in the Camunda Platform database. *Runtime data cannot be migrated* to Camunda Cloud. A possible workaround is to create a process model on Camunda Cloud solely used for migration to bring process instances to their respective wait state as described in [How to migrate to Camunda](https://page.camunda.com/wp-how-to-migrate-to-camunda).
+* **Runtime data:** Running process instances of Camunda Platform are stored in the Camunda Platform database. *Runtime data cannot be migrated* to Camunda Cloud.
 
 * **History data:** *Historic data cannot be migrated*.
 

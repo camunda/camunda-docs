@@ -4,7 +4,7 @@ title: "Health readiness"
 description: "The REST API to check the readiness of Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 ## Purpose
 

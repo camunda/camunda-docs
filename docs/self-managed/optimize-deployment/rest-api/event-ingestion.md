@@ -4,7 +4,7 @@ title: "Event ingestion"
 description: "The REST API to ingest external events into Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 ## Purpose
 

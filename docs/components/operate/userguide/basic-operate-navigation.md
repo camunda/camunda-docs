@@ -1,11 +1,12 @@
 ---
 id: basic-operate-navigation
 title: Getting familiar with Operate
+description: "An overview of navigating Operate and its features"
 ---
 
-This section and the next section, “Variables and incidents,” assumes you’ve deployed a process to Zeebe and created at least one process instance. 
+This section and the next section, [variables and incidents](./resolve-incidents-update-variables.md), assumes you’ve deployed a process to Zeebe and created at least one process instance. 
 
-If you’re not sure how to deploy processes or create instances, we recommend going through the [getting started tutorial](./guides/getting-started/model-your-first-process.md).
+If you’re not sure how to deploy processes or create instances, visit our [getting started tutorial](./guides/getting-started/model-your-first-process.md).
 
 In the following sections, we’ll use the same `order-process.bpmn` process model from the getting started tutorial. 
 
@@ -21,7 +22,7 @@ To view a deployed process, take the following steps:
 
 ![operate-view-process](./img/operate-view-process_light.png)
 
-3. From this **Running Instances** view, you can cancel a single running process instance. 
+3. From this **Instances** tab, you can cancel a single running process instance. 
 
 ![operate-cancel-process-instance](./img/operate-view-process-cancel_light.png)
 
@@ -34,5 +35,3 @@ Running process instances appear in the **Instances** section below the process 
 Here, see details about the process instance, including the instance history and the variables attached to the instance.
 
 ![operate-view-instance-detail](./img/operate-view-instance-detail_light.png)
-
-

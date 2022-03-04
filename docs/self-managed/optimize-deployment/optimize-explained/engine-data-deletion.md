@@ -4,7 +4,7 @@ title: "Engine data deletion"
 description: "Explains how Optimize copes with the deletion of engine data."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 The engine slows down if the historic data grows significantly over time, particularly in cases where the amount of data streaming in each day is large. One solution to this is to remove old data from the engine on a regular basis, yet still importing the data to Optimize so it can be used for deeper analytics.
 

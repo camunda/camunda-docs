@@ -4,7 +4,7 @@ title: "Authorization management"
 description: "Define which data users are authorized to see."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 User authorization management differs depending on whether the entities to manage the authorizations for are originating from adjacent systems like imported data from connected Camunda-BPM engines such as process instances, or whether the entities are fully managed by Camunda Optimize, such as [event-based processes and instances](./../../../components/optimize/userguide/additional-features/event-based-processes.md) or [collections](./../../../components/optimize/userguide/collections-dashboards-reports.md). For entities originating from adjacent systems authorizations are managed in the Camunda Platform via Camunda Admin, for the latter the authorizations are managed in Camunda Optimize.
 

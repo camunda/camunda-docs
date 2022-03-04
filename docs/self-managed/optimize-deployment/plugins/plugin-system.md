@@ -4,7 +4,7 @@ title: "Optimize plugin system"
 description: "Explains the principle of plugins in Optimize and how they can be added."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 Optimize allows you to adapt the behavior of Optimize, e.g. to decide which kind of data should be analyzed and to tackle technical issues.
 

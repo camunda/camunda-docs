@@ -4,7 +4,7 @@ title: "Elasticsearch header"
 description: "Register your own hook into the Optimize Elasticsearch client to add custom headers to requests."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
 

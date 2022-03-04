@@ -8,7 +8,7 @@ application or server installation from one Camunda Cloud version to the other.
 
 There is a dedicated update guide for each version:
 
-### [1.2 to 1.3](../110-to-120)
+### [1.2 to 1.3](../120-to-130)
 
 Update from 1.2.x to 1.3.0
 

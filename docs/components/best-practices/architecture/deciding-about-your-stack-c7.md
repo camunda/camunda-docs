@@ -92,8 +92,8 @@ Check the **prerequisites**:
 
 Create your **development project**
 
-* Create a new Spring Boot project (e.g. using [Spring initializr](https://start.spring.io/))
-* Add the dependency for the [Camunda Engine OpenAPI REST Client](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/) community extension:
+1. Create a new Spring Boot project (e.g. using [Spring initializr](https://start.spring.io/))
+2. Add the dependency for the [Camunda Engine OpenAPI REST Client](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/) community extension:
 
 ```
     <dependency>
@@ -103,16 +103,14 @@ Create your **development project**
     </dependency>
 ```
 
-* Model a process with the Camunda Modeler and save it under `src/main/resources`.
-* Run the main Java application class via your IDE.
-* Play around with your process using the Camunda Webapps (User `demo`, Password `demo`):
-  * [Tasklist](http://localhost:8080/camunda/app/tasklist/)
-  * [Cockpit](http://localhost:8080/camunda/app/cockpit/)
-* Package your application with `mvn clean install`.
-* Bring the `jar` file to your test or production server and start it there.
-* You can setup or integrate it into an existing continous delivery pipeline.
-
-[//]:# (Are these steps? If so, I would change the bulleits to numbers.)
+3. Model a process with Camunda Modeler and save it under `src/main/resources`.
+4. Run the main Java application class via your IDE.
+5. Play around with your process using the Camunda web apps (user `demo`, password `demo`):
+  - [Tasklist](http://localhost:8080/camunda/app/tasklist/)
+  - [Cockpit](http://localhost:8080/camunda/app/cockpit/)
+6. Package your application with `mvn clean install`.
+7. Bring the `jar` file to your test or production server and start it there.
+8. You can set up or integrate it into an existing continuous delivery pipeline.
 
 ## Customize your stack
 

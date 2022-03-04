@@ -4,7 +4,7 @@ title: "Installation"
 description: "Read about how to install Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 ## Installation guide
 

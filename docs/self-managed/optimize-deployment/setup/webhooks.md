@@ -4,7 +4,7 @@ title: "Webhooks"
 description: "Read about how to configure alert notification webhooks for alerts on custom systems."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 In addition to email notifications, you can configure webhooks in Optimize to receive alert notifications on custom systems. This page describes how to set up your webhook configurations using the example of a simple Slack app.
 

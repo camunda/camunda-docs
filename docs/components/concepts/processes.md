@@ -43,9 +43,7 @@ You can think of Zeebe's process orchestration as a state machine, taking the fo
 
 ## Data flow
 
-As Zeebe progresses from one task to the next in a process, it can move custom data in the form of variables. Variables are key-value-pairs and part of the process instance.
-
-[//]:# (Do we need hyphens between key-value-pairs?)
+As Zeebe progresses from one task to the next in a process, it can move custom data in the form of variables. Variables are key-value pairs and part of the process instance.
 
 ![data-flow](assets/process-data-flow.png)
 

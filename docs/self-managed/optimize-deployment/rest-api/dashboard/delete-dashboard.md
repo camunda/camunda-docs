@@ -4,7 +4,7 @@ title: "Delete dashboards"
 description: "The REST API to delete dashboards from Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 ## Purpose
 
