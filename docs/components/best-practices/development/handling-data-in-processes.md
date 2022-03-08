@@ -77,7 +77,7 @@ Camunda does not treat BPMN *data objects* (<img src="/img/bpmn-elements/data-ob
 
 ## Storing just the relevant data
 
-Do not excessively use process variables. As a rule of thumb, store *as less few variables as possible* within Camunda.
+Do not excessively use process variables. As a rule of thumb, store *as few variables as possible* within Camunda.
 
 ### Storing references only
 
