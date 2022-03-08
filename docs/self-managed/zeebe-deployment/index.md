@@ -23,8 +23,8 @@ The deployment guide covers the following topics:
 
 This deployment guide also integrates with the following:
 
-1.  [Zeebe Distribution](https://github.com/camunda-cloud/zeebe/releases): The Zeebe distribution contains the workflow engine where we'll deploy our process model; the engine is also responsible for managing the state of active process instances. Included in the distro is the Zeebe CLI. Refer to our [installation guide](local/install.md).
-1.  [Elasticsearch 7.x](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/index.html): An open-source distributed datastore that can connect to Zeebe to store process data for auditing, visualization, analysis, etc. Camunda Operate uses Elasticsearch as its underlying datastore, which is why you need to download Elasticsearch to complete this deployment. Currently, 7.x is the minimum mandatory version with Zeebe 1.x. With version 0.20.0 (currently used in our tutorial,) you may use 6.x.
+- [Zeebe Distribution](https://github.com/camunda-cloud/zeebe/releases): The Zeebe distribution contains the workflow engine where we'll deploy our process model; the engine is also responsible for managing the state of active process instances. Included in the distro is the Zeebe CLI. Refer to our [installation guide](local/install.md).
+- [Elasticsearch 7.x](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/index.html): An open-source distributed datastore that can connect to Zeebe to store process data for auditing, visualization, analysis, etc. Camunda Operate uses Elasticsearch as its underlying datastore, which is why you need to download Elasticsearch to complete this deployment. Currently, 7.x is the minimum mandatory version with Zeebe 1.x. With version 0.20.0 (currently used in our tutorial), you may use 6.x.
 
 :::note
 New to BPMN and want to learn more before moving forward? [This blog post](https://zeebe.io/blog/2018/08/bpmn-for-microservices-orchestration-a-primer-part-1/) helps explain the standard and why it's a good fit for microservices orchestration.
@@ -34,7 +34,7 @@ If you're already familiar with BPMN and how to create a BPMN model in Desktop M
 
 ## Additional resources
 
-If you have questions or feedback about deployment with Zeebe, we encourage you to visit the following: 
+If you have questions or feedback about deployment with Zeebe, we encourage you to visit the following:
 
 - [User forum](https://forum.camunda.io/)
 - [Public Slack channel](https://zeebe-slack-invite.herokuapp.com/)

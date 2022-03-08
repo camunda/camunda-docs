@@ -29,7 +29,7 @@ The liveness probe is available at `{zeebe-gateway}:8080/actuator/health/livenes
 
 It is based on the health indicators mentioned above.
 
-In the default configuration, the liveness probe is comprised of the following health indiactors:
+In the default configuration, the liveness probe is comprised of the following health indicators:
 
 - **Gateway Started** - Checks if the gateway is running (i.e. not currently starting and not yet shut down).
 - **Liveness Gateway Responsive** - Checks if the gateway can handle a request within an ample timeout, but will only report a `DOWN` health status after the underlying health indicator is down for more than 10 minutes.
