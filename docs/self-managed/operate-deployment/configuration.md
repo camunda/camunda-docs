@@ -43,17 +43,16 @@ Operate supports [basic authentication](https://www.elastic.co/guide/en/elastics
 Set the appropriate username/password combination in the configuration to use it.
 
 #### Settings to connect to a secured Elasticsearch instance
-To connect to a secured (https) Elasticsearch instance you need normally only set the url protocol 
-part to `https` instead of `http`. A secured Elasticsearch instance needs also `username` and `password`. 
-The other ssl settings should only be used in case of connection problems, for example disable
+
+To connect to a secured (https) Elasticsearch instance, you need normally only set the URL protocol part to `https` instead of `http`. A secured Elasticsearch instance needs also `username` and `password`.
+The other SSL settings should only be used in case of connection problems, for example disable
 host verification.
 
 :::note
 You may need to import the certificate into JVM runtime.
 :::
 
-
-Either set `host` and `port` (deprecated) or `url` (recommended).
+Either set `host` and `port` (deprecated), or `url` (recommended).
 
 Name | Description | Default value
 -----|-------------|--------------
@@ -63,7 +62,7 @@ camunda.operate.elasticsearch.url | URL of Elasticsearch REST API | http://local
 camunda.operate.elasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.operate.elasticsearch.password | Password to access Elasticsearch REST API | -
 camunda.operate.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -
-camunda.operate.elasticsearch.ssl.selfSigned | Certificate was self signed | false
+camunda.operate.elasticsearch.ssl.selfSigned | Certificate was self-signed | false
 camunda.operate.elasticsearch.ssl.verifyHostname | Should the hostname be validated | false
 
 ### A snippet from application.yml
@@ -81,7 +80,7 @@ camunda.operate:
 
 ## Zeebe broker connection
 
-Operate needs a connection to the Zeebe Broker to start the import and execute user operations.
+Operate needs a connection to the Zeebe broker to start the import and execute user operations.
 
 ### Settings to connect
 
@@ -109,7 +108,8 @@ Operate imports data from Elasticsearch indices created and filled in by the [Ze
 Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on the Zeebe side.
 
 ### Settings to connect and import
-See also [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
+
+See also [settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance).
 
 Name | Description | Default value
 -----|-------------|--------------
@@ -119,7 +119,7 @@ camunda.operate.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe 
 camunda.operate.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
 camunda.operate.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
 camunda.operate.zeebeElasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -
-camunda.operate.zeebeElasticsearch.ssl.selfSigned | Certificate was self signed | false
+camunda.operate.zeebeElasticsearch.ssl.selfSigned | Certificate was self-signed | false
 camunda.operate.zeebeElasticsearch.ssl.verifyHostname | Should the hostname be validated | false
 
 ### A snippet from application.yml:
@@ -137,7 +137,7 @@ camunda.operate:
 
 ## Operation executor
 
-Operations are user operations, like cancellation of process instance(s) or updating the variable value. 
+Operations are user operations, like cancellation of process instance(s) or updating the variable value.
 
 Operations are executed in a multi-threaded manner.
 

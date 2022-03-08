@@ -175,6 +175,11 @@ module.exports = {
             "components/modeler/dmn/desktop-modeler-dmn",
           ],
         },
+        {
+          "Forms": [
+            "components/modeler/forms/camunda-forms-reference",
+          ],
+        },
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",

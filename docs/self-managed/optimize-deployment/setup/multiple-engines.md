@@ -1,6 +1,6 @@
 ---
 id: multiple-engines
-title: "Multiple Process Engines"
+title: "Multiple process engines"
 description: "Learn how to set up multiple process engines with Optimize and which scenarios are supported."
 ---
 
@@ -13,31 +13,31 @@ Learn how to set up multiple process engines with Optimize and which scenarios a
 There are two possible setups where multiple process engines can be used:
 
 - [Possible multiple process engine scenarios](#possible-multiple-process-engine-scenarios)
-  - [Multiple engines with distributed Databases](#multiple-engines-with-distributed-databases)
-  - [Multiple engines with a shared Database](#multiple-engines-with-a-shared-database)
-- [Authentication and Authorization in the multiple engine setup](#authentication-and-authorization-in-the-multiple-engine-setup)
+  - [Multiple engines with distributed databases](#multiple-engines-with-distributed-databases)
+  - [Multiple engines with a shared database](#multiple-engines-with-a-shared-database)
+- [Authentication and authorization in the multiple engine setup](#authentication-and-authorization-in-the-multiple-engine-setup)
 
-Please check which scenario corresponds to your setup because the configuration of multiple engines to Optimize is not always suited for the best import performance.
+Check which scenario corresponds to your setup because the configuration of multiple engines to Optimize is not always suited for the best import performance.
 
 :::note Heads Up!
 There are two restrictions for the multiple engines feature:
 
 1. The process engines are assumed to have distinct process definitions, which means that one process definition (same key, tenant and version) is not deployed on two or more engines at the same time.
-Alternatively each engine could be configured with default tenant identifiers as described in the [One Tenant Per Engine Scenario](../multi-tenancy/#one-process-engine-per-tenant).
+Alternatively, each engine could be configured with default tenant identifiers as described in the [One Tenant Per Engine Scenario](../multi-tenancy/#one-process-engine-per-tenant).
 2. The engines are assumed to have distinct tenant identifiers, which means one particular tenantId is not deployed on two or more engines at the same time.
 :::
 
-### Multiple engines with distributed Databases
+### Multiple engines with distributed databases
 
-In this scenario you have multiple process engines and each engine has its own database as illustrated in the following diagram:
+In this scenario, you have multiple process engines and each engine has its own database as illustrated in the following diagram:
 
 ![Clustered Engine with distributed Database](img/Clustered-Engine-Distributed-Database.png)
 
-Now you are able to connect each engine to Optimize. The data will then automatically be imported into Optimize. The following diagram depicts the setup:
+Now, you are able to connect each engine to Optimize. The data will then automatically be imported into Optimize. The following diagram depicts the setup:
 
 ![Multiple Engines connected to Optimize, each having its own Database](img/Multiple-Engine-Distributed-Database.png)
 
-In order to set up the connections to the engines, you need to add the information to the [configuration file](./configuration.md/#connection-to-camunda-platform). For the sake of simplicity, let's assume we have two microservices, `Payment` and `Inventory`, each having their own engine with its own database and processes. Both are accessible in the local network. The `Payment` engine has the port `8080` and the `Inventory` engine the port `1234`. Now an excerpt of the configuration could look as follows:
+To set up the connections to the engines, you need to add the information to the [configuration file](./configuration.md/#connection-to-camunda-platform). For the sake of simplicity, let's assume we have two microservices, `Payment` and `Inventory`, each having their own engine with its own database and processes. Both are accessible in the local network. The `Payment` engine has the port `8080` and the `Inventory` engine the port `1234`. Now an excerpt of the configuration could look as follows:
 
 ```yaml
 engines:
@@ -59,26 +59,26 @@ engines:
     enabled: true
 ```
 
-`payment` and `inventory` are custom names that were choosen in order to later on distinguish where the data was originally imported from.
+`payment` and `inventory` are custom names that were chosen to distinguish where the data was originally imported from later on.
 
-### Multiple engines with a shared Database
+### Multiple engines with a shared database
 
 In this scenario you have multiple engines distributed in a cluster, where each engine instance is connected to a shared database. See the following diagram for an illustration:
 
 ![Clustered Engine with shared Database](img/Clustered-Engine-Shared-Database.png)
 
-Now it could be possible to connect each engine to Optimize. Since every engine accesses the same data through the shared database, Optimize would import the engine data multiple times. There is also no guarantee that importing the same data multiple times will not cause any data corruption. For this reason it is highly recommended to not use the setup from the section [Multiple engines with distributed databases](#multiple-engines-with-distributed-databases).
+Now it could be possible to connect each engine to Optimize. Since every engine accesses the same data through the shared database, Optimize would import the engine data multiple times. There is also no guarantee that importing the same data multiple times will not cause any data corruption. For this reason it is highly recommended to not use the setup from the section [multiple engines with distributed databases](#multiple-engines-with-distributed-databases).
 
-In the scenario of multiple engines with a shared database, it might make sense to balance the work load on each engine during the import. You can simply place a load balancer between the engines and Optimize, which ensures that the data is imported only once and the load is distributed among all engines. Thus, Optimize would only communicate to the load balancer. The following diagram depicts the described setup:
+In the scenario of multiple engines with a shared database, it might make sense to balance the work load on each engine during the import. You can place a load balancer between the engines and Optimize, which ensures that the data is imported only once and the load is distributed among all engines. Thus, Optimize would only communicate to the load balancer. The following diagram depicts the described setup:
 
 ![Multiple Engines with shared Database connected to Optimize](img/Multiple-Engine-Shared-Database.png)
 
-In general, tests have shown that Optmize puts a very low strain on the engine and its impact on the engine's operations are in almost all cases neglectable.
+In general, tests have shown that Optimize puts a very low strain on the engine and its impact on the engine's operations are in almost all cases neglectable.
 
-## Authentication and Authorization in the multiple engine setup
+## Authentication and authorization in the multiple engine setup
 
 When you configure multiple engines in Optimize, each process engine can host different users with a different set of authorizations. If a user is logging in, Optimize will try to authenticate and authorize the user on each configured engine. In case you are not familiar with how 
-the authorization/authentication works for a single engine scenario, please checkout the [User Access Management](./user-management.md) and [Authorization Management](./authorization-management.md) documentation first.
+the authorization/authentication works for a single engine scenario, visit the [User Access Management](./user-management.md) and [Authorization Management](./authorization-management.md) documentation first.
 
 To determine if a user is allowed to log in and which resources they are allowed to access within the multiple engine scenario, Optimize uses the following algorithm:
 

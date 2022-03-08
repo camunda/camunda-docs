@@ -3,11 +3,7 @@ id: secure-client-communication
 title: "Secure client communication"
 ---
 
-
-
-# Client security
-
-Zeebe supports transport layer security between the gateway and all of the officially supported clients. In this section, we will review how to configure these components.
+Zeebe supports transport layer security between the gateway and all the officially supported clients. In this section, we will review how to configure these components.
 
 ## Gateway
 
@@ -42,7 +38,6 @@ Disabling TLS should only be done for testing or development. During production 
 
 Without any configuration, the client looks in the system's certificate store for a CA certificate with which to validate the gateway's certificate chain. If you wish to use TLS without having to install a certificate in client's system, you can specify a CA certificate:
 
-
 ```java
 public class SecureClient {
     public static void main(final String[] args) {
@@ -52,6 +47,7 @@ public class SecureClient {
     }
 }
 ```
+
 Alternatively, use the `ZEEBE_CA_CERTIFICATE_PATH` environment variable to override the code configuration.
 
 To disable TLS in a Java client, use the `.usePlaintext()` option:
@@ -167,7 +163,6 @@ io.netty.handler.codec.http2.Http2Exception: HTTP/2 client preface string missin
 ```
 
 __Solution:__ Either enable TLS in the gateway as well or specify the `--insecure` flag when using `zbctl`.
-
 
 ### TLS is disabled in `zbctl` but enabled for the gateway
 
