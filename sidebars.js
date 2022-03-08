@@ -311,7 +311,7 @@ module.exports = {
             "apis-clients/java-client/index",
             "apis-clients/java-client/job-worker",
             "apis-clients/java-client/logging",
-            "apis-clients/java-client/testing",
+            "apis-clients/java-client/zeebe-process-test",
               {
                 Examples: [
                   "apis-clients/java-client-examples/index",
