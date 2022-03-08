@@ -412,6 +412,10 @@ The important characteristics are
 
 This scenario is supported by Camunda, but you can run into serious problems.
 
+:::caution Solved in Camunda Cloud
+This problem is only a problem with Camunda Platform 7.x! Zeebe, the workflow engine used in Camunda Cloud, can run high number of parallel activities.
+:::
+
 The basic problem is the [execution tree](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-concepts/#executions) getting really big in this scenario. In most situations, the engine has to load the whole tree in order to do anything, even if that happens only in one parallel path. This not only influences performance, but also adds load to the database.
 
 Turning off execution pre-fetching (available as internal process engine configuration property) is not recommended, as it may cause other trouble. Cockpit also suffers from huge data chunks, making it slow.

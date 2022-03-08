@@ -113,11 +113,11 @@ This is also balanced by the fact that service tasks are simply very handy. The 
 
 Using send and receive tasks means to use [the message concept built into Zeebe](/docs/components/concepts/messages). This is a powerful concept to solve a lot of problems around cardinalities of subscriptions, correlation of the message to the right process instances, and verification of uniqueness of the message (idempotency).
 
-When using messages, you need to provide the correlation id yourself. This means that the correlation ID is fully under your control, but it also means that you need to generate it yourself and make sure it is unique. You will most likely end up with generated UUIDs.
+When using messages, you need to provide the correlation id yourself. This means that the correlation id is fully under your control, but it also means that you need to generate it yourself and make sure it is unique. You will most likely end up with generated UUIDs.
 
-You can leverage [message buffering](/docs/components/concepts/messages#message-buffering) capabilities, which means that the process does not yet need to be ready to receive the message. You could, for example, do other things in between, but this also means that you will not get an exception right away if a message cannot be correlated, as it is simply buffered.
+You can leverage [message buffering](/docs/components/concepts/messages#message-buffering) capabilities, which means that the process does not yet need to be ready to receive the message. You could, for example, do other things in between, but this also means that you will not get an exception right away if a message cannot be correlated, as it is simply buffered. This leaves you in charge of dealing with messages that can never be delivered.
 
-This leaves you in charge of dealing with messages that can never be delivered. Retries are not built-in, leading to loops being modeled to retry service calls, and at least in the current Zeebe version, there is no possibility to trigger error events for a receive task, which means you need to model error messages as response payload or separate message types — both are discussed later in this post.
+Retries are not built-in, so if you need to model a loop to retry the initial service call if no response is received. And (at least in the current Zeebe version), there is no possibility to trigger error events for a receive task, which means you need to model error messages as response payload or separate message types — both are discussed later in this post.
 
 A final note for high-performance environments: These powerful messaging capabilities do not come for free and require some overhead within the engine. For pure request/response calls that return within milliseconds, none of the features are truly required. If you are looking to build a high-performance scenario, using service tasks instead of message correlation for request/response calls, you can tune your overall performance or throughput. However, as with everything performance related, the devil is in the detail, so [reach out to us](https://forum.camunda.io/) to discuss such a scenario in more depth.
 
@@ -125,15 +125,14 @@ A final note for high-performance environments: These powerful messaging capabil
 
 The following table summarizes the possibilities and recommendations.
 
-| Case | Synchronous request/response | Asynchronous request/response |
-| - | - | - |
-| BPMN element| Service task & Send task | Service task & Send + receive task |
-| | ![Service task](/img/bpmn-elements/task-service.svg)![Send task](/img/bpmn-elements/task-send.svg) | ![Service task](/img/bpmn-elements/task-service.svg)![Send and receive task](/img/bpmn-elements/send-and-receive-task.png) |
-| Technical implications | Behaves like a service task | A unique correlation ID is generated for you. You don’t have to think about race conditions or idempotency. Timeout handling and retry logic are built-in. API to flag business or technical errors. Correlation ID needs to be generated yourself, but is fully under control. Message buffering is possible but also necessary. Timeouts and retries need to be modeled. BPMN errors cannot be used. |
-| Assessment | Very intuitive. Might be more intuitive for fire and forget semantics, but can also lead to discussions. | Removes visual noise which helps stakeholders to concentrate on core business logic, but requires use of internal job instance keys. More visual clutter, but also more powerful options around correlation and modeling patterns. |
-| Recommendation | Default option, use unless it is confusing for business stakeholders (e.g. because of fire and forget semantics of a task). Use for fire and forget semantics, unless it leads to unnecessary discussions, in this case use service task instead. | Use when response is within milliseconds and you can pass the Zeebe-internal job instance key around. Use when the response will take time (> some seconds), or you need a correlation id you can control. |
+| Case | Synchronous request/response | Synchronous request/response | Asynchronous request/response | Asynchronous request/response |
+| :- | :- | :- | :- | :- |
+| BPMN element| Service task | Send task | Service task | Send + receive task |
+| | ![Service task](/img/bpmn-elements/task-service.svg) | ![Send task](/img/bpmn-elements/task-send.svg) | ![Service task](/img/bpmn-elements/task-service.svg) | ![Send and receive task](/img/bpmn-elements/send-and-receive-task.png) |
+| Technical implications | | Behaves like a service task | A unique correlation ID is generated for you. You don’t have to think about race conditions or idempotency. Timeout handling and retry logic are built-in. API to flag business or technical errors. | Correlation ID needs to be generated yourself, but is fully under control. Message buffering is possible but also necessary. Timeouts and retries need to be modeled. BPMN errors cannot be used. |
+| Assessment | Very intuitive. | Might be more intuitive for fire and forget semantics, but can also lead to discussions. | Removes visual noise which helps stakeholders to concentrate on core business logic, but requires use of internal job instance keys. | More visual clutter, but also more powerful options around correlation and modeling patterns. |
+| Recommendation | Default option, use unless it is confusing for business stakeholders (e.g. because of fire and forget semantics of a task). | Use for fire and forget semantics, unless it leads to unnecessary discussions, in this case use service task instead. | Use when response is within milliseconds and you can pass the Zeebe-internal job instance key around. | Use when the response will take time (> some seconds), or you need a correlation id you can control. |
 
-[//]:# (Can you work to clean up this table in Markdown or let me know how you want it structured and I can clean it up? I'm not sure how you want the columns and such organized currently.)
 
 ## Integrating services with BPMN events
 
@@ -158,7 +157,7 @@ However, in certain contexts, such as event-driven architectures, events might b
 Another situation better suited for events is if you send events to your internal reporting system besides doing “the real” business logic. Our experience shows that the smaller event symbols are often unconsciously treated as less important by readers of the model, leading to models that are easier to understand.
 
 |  | Send task | Receive task | Send event | Receive event |
-| - | - | - | - | - |
+| :- | :- | :- | :- | :- |
 | Recommendation | Prefer tasks over events | Prefer tasks over events | Use only if you consistently use events over tasks and have a good reason for doing so (e.g. event-driven architecture) | Use only if you consistently use events over tasks and have a good reason for doing so (e.g. event-driven architecture) |
 
 :::note
