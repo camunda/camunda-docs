@@ -3,32 +3,35 @@ title: "Connecting the workflow engine with your world"
 ---
 
 
-One of your first tasks to build a process solution is to sketch the basic architecture of your solution. To do so, you need to answer the question of how to connect the workflow engine (Zeebe) with your application or with remote systems? This will be mostly about writing some custom glue code in the programming language of your choice and use existing client libraries. In some cases, you might also want to leverage existing connectors, at least as a starting point.
+One of your first tasks to build a process solution is to sketch the basic architecture of your solution. To do so, you need to answer the question of how to connect the workflow engine (Zeebe) with your application or with remote systems.
 
+This document predominantly outlines writing some custom glue code in the programming language of your choice and using existing client libraries. In some cases, you might also want to leverage existing connectors as a starting point.
 
-The workflow engine (Zeebe) is a remote system for your applications, just like a database. Your application connects with Zeebe via remote protocols, [gRPC](https://grpc.io/) to be precise, which is typically hidden from you, like when using a database driver based on ODBC or JDBC.
+The workflow engine is a remote system for your applications, just like a database. Your application connects with Zeebe via remote protocols, [gRPC](https://grpc.io/) to be precise, which is typically hidden from you, like when using a database driver based on ODBC or JDBC.
 
-With Camunda Cloud and the Zeebe workflow engine there are two basic options:
+With Camunda Cloud and the Zeebe workflow engine, there are two basic options:
 
-1.  You write some **programming code** that typically leverages the client library for the programming language of your choice.
-2.  You use some **existing connector** which just needs a configuration.
+1. Write some **programming code** that typically leverages the client library for the programming language of your choice.
+2. Use some **existing connector** which just needs a configuration.
 
-The trade-offs will be discussed later, let’s look at the two options first.
+The trade-offs will be discussed later; let’s look at the two options first.
 
 ## Programming glue code
 
-In order to write code that connects to Zeebe, you typically embed [the Zeebe client library](/docs/apis-clients/overview/) into your application. An application can of course also be a service or microservice. If you have multiple applications that connect to Zeebe all of them will require the client library. If you want to use a programming language where no such client library exists, you can [generate a gRPC client yourself](https://camunda.com/blog/2018/11/grpc-generating-a-zeebe-python-client/).
+To write code that connects to Zeebe, you typically embed [the Zeebe client library](/docs/apis-clients/overview/) into your application. An application can of course also be a service or microservice.
+
+If you have multiple applications that connect to Zeebe, all of them will require the client library. If you want to use a programming language where no such client library exists, you can [generate a gRPC client yourself](https://camunda.com/blog/2018/11/grpc-generating-a-zeebe-python-client/).
 
 ![Clients to Zeebe](connecting-the-workflow-engine-with-your-world-assets/clients.png)
 
 Your application can basically do two things with the client:
 
-1.  **Actively call Zeebe**, for example, to start process instances, correlate messages, or deploy process definitions.
-2.  **Subscribe to tasks** created in the workflow engine in the context of BPMN service tasks.
+1. **Actively call Zeebe**, for example, to start process instances, correlate messages, or deploy process definitions.
+2. **Subscribe to tasks** created in the workflow engine in the context of BPMN service tasks.
 
 ### Calling Zeebe
 
-Using the Zeebe client’s API you can communicate with the workflow engine. The two most important API calls are to start new process instances and to correlate messages to a process instance.
+Using the Zeebe client’s API, you can communicate with the workflow engine. The two most important API calls are to start new process instances and to correlate messages to a process instance.
 
 **Start process instances using the** [**Java Client**](/docs/apis-clients/java-client/index/)**:**
 
@@ -83,7 +86,7 @@ This allows you to connect Zeebe with any external system by writing some custom
 
 ### Subscribing to tasks using a job worker
 
-In order to implement service tasks of a process model, you can write code that subscribes to the workflow engine. In essence, you will write some glue code that is called whenever a service task is reached (which internally creates a job, hence the name).
+To implement service tasks of a process model, you can write code that subscribes to the workflow engine. In essence, you will write some glue code that is called whenever a service task is reached (which internally creates a job, hence the name).
 
 **Glue code in Java:**
 
@@ -140,18 +143,19 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job) {
 }
 ```
 
-There is an own practice on [how to write a good job worker](../writing-good-workers/).
+There is also documentation on [how to write a good job worker](../writing-good-workers/).
 
-## Technology Examples
+## Technology examples
 
-
-Most projects want to connect to specific technologies, at the moment most people ask for REST, messaging or Kafka. 
+Most projects want to connect to specific technologies. Currently, most people ask for REST, messaging, or Kafka.
 
 ### REST
 
 You could build a piece of code that provides a REST endpoint in the language of choice and then starts a process instance.
 
-The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camunda-cloud) contains an example using Java and Spring Boot for the [REST endpoint](https://github.com/berndruecker/ticket-booking-camunda-cloud/blob/master/booking-service-java/src/main/java/io/berndruecker/ticketbooking/rest/TicketBookingRestController.java#L35). Similarly you can leverage the [Spring Boot extension](https://github.com/zeebe-io/spring-zeebe/) to startup job workers that will [execute outgoing REST calls](https://github.com/berndruecker/ticket-booking-camunda-cloud/blob/master/booking-service-java/src/main/java/io/berndruecker/ticketbooking/adapter/GenerateTicketAdapter.java#L29).
+The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camunda-cloud) contains an example using Java and Spring Boot for the [REST endpoint](https://github.com/berndruecker/ticket-booking-camunda-cloud/blob/master/booking-service-java/src/main/java/io/berndruecker/ticketbooking/rest/TicketBookingRestController.java#L35).
+
+Similarly, you can leverage the [Spring Boot extension](https://github.com/zeebe-io/spring-zeebe/) to startup job workers that will [execute outgoing REST calls](https://github.com/berndruecker/ticket-booking-camunda-cloud/blob/master/booking-service-java/src/main/java/io/berndruecker/ticketbooking/adapter/GenerateTicketAdapter.java#L29).
 
 ![REST example](connecting-the-workflow-engine-with-your-world-assets/rest-example.png)
 
@@ -161,17 +165,17 @@ You can find [NodeJS sample code for the REST endpoint](https://github.com/bernd
 
 You can do the same for messages, which is often [AMQP](https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol) nowadays.
 
-The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camunda-cloud) contains an example for RabbitMQ, Java and Spring Boot. It provides a message listener to correlate incoming messages with waiting process instances, and [glue code to send outgoing messages onto the message broker](https://github.com/berndruecker/ticket-booking-camunda-cloud/blob/master/booking-service-java/src/main/java/io/berndruecker/ticketbooking/adapter/RetrievePaymentAdapter.java).
+The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camunda-cloud) contains an example for RabbitMQ, Java, and Spring Boot. It provides a message listener to correlate incoming messages with waiting process instances, and [glue code to send outgoing messages onto the message broker](https://github.com/berndruecker/ticket-booking-camunda-cloud/blob/master/booking-service-java/src/main/java/io/berndruecker/ticketbooking/adapter/RetrievePaymentAdapter.java).
 
 ![Messaging example](connecting-the-workflow-engine-with-your-world-assets/messaging-example.png)
 
-[Service integration patterns](../service-integration-patterns/) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: Send and receive task are used here, because the payment service might be long running, think about expired credit cards that need to be updated or wire transfers that need to happen).
+[Service integration patterns](../service-integration-patterns/) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: send and receive tasks are used here because the payment service might be long-running; think about expired credit cards that need to be updated or wire transfers that need to happen).
 
-The same concept will apply to other programming languages, for example you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above.
+The same concept will apply to other programming languages. For example, you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above.
 
 ### Apache Kafka
 
-You can do the same trick with Kafka topics. The [Flowing Retail example](https://github.com/berndruecker/flowing-retail) shows this using Java, Spring Boot and Spring Cloud Streams. There is [code to subscribe to a Kafka topic and start new process instances for new records](https://github.com/berndruecker/flowing-retail/blob/master/kafka/java/order-zeebe/src/main/java/io/flowing/retail/kafka/order/messages/MessageListener.java#L39), and there is some glue code to create new records when a process instance executes a service task. Of course, you could also use other frameworks to achieve the same result.
+You can do the same trick with Kafka topics. The [Flowing Retail example](https://github.com/berndruecker/flowing-retail) shows this using Java, Spring Boot, and Spring Cloud Streams. There is [code to subscribe to a Kafka topic and start new process instances for new records](https://github.com/berndruecker/flowing-retail/blob/master/kafka/java/order-zeebe/src/main/java/io/flowing/retail/kafka/order/messages/MessageListener.java#L39), and there is some glue code to create new records when a process instance executes a service task. Of course, you could also use other frameworks to achieve the same result.
 
 ![Kafka Example](connecting-the-workflow-engine-with-your-world-assets/kafka-example.png)
 
@@ -181,34 +185,33 @@ Typical applications will include multiple pieces of glue code in one codebase.
 
 ![Architecture with glue code](connecting-the-workflow-engine-with-your-world-assets/architecture.png)
 
-For example, the onboarding microservice shown in the figure above includes
+For example, the onboarding microservice shown in the figure above includes:
 
-*   A REST endpoint, that starts a process instance (1)
-*   The process definition itself (2), probably auto-deployed to the workflow engine during the startup of the application
-*   Glue code subscribing to the two service tasks that shall call a remote REST API (3) and (4).
+* A REST endpoint that starts a process instance (1)
+* The process definition itself (2), probably auto-deployed to the workflow engine during the startup of the application.
+* Glue code subscribing to the two service tasks that shall call a remote REST API (3) and (4).
 
 A job worker will be started automatically as part of the application to handle the subscriptions. In this example, the application is written in Java, but again, it could be [any supported programming language](https://docs.camunda.io/docs/product-manuals/clients/overview).
 
-As discussed in [writing good workers](../writing-good-workers/) you typically will bundle all workers within one process solution, but there are exceptions where it make sense to have single workers as seperate application.
-
+As discussed in [writing good workers](../writing-good-workers/), you typically will bundle all workers within one process solution, but there are exceptions where it makes sense to have single workers as separate application.
 
 ## Connectors
 
-As you could see, the glue code is relatively simple, but you need to write code. Sometimes you might prefer using an out-of-the-box component connecting Zeebe with the technology you need just by configuration. This component is called a **connector**.
+As you could see, the glue code is relatively simple, but you need to write code. Sometimes you might prefer using an out-of-the-box component, connecting Zeebe with the technology you need just by configuration. This component is called a **connector**.
 
 A connector can be uni or bidirectional and is typically one dedicated application that implements the connection that translates in one or both directions of communication. Such a connector might also be helpful in case integrations are not that simple anymore.
 
 ![Connectors](connecting-the-workflow-engine-with-your-world-assets/connector.png)
 
-For example, the [HTTP connector](https://github.com/camunda-community-hub/zeebe-http-worker) is a one-way connector that contains a job worker that can process service tasks doing HTTP calls as visualized in the example in the following figure.
+For example, the [HTTP connector](https://github.com/camunda-community-hub/zeebe-http-worker) is a one-way connector that contains a job worker that can process service tasks doing HTTP calls as visualized in the example in the following figure:
 
 ![REST Connectors](connecting-the-workflow-engine-with-your-world-assets/rest-connector.png)
 
-Another example is the [Kafka Connector](https://github.com/camunda-community-hub/kafka-connect-zeebe) as illustrated below.
+Another example is the [Kafka Connector](https://github.com/camunda-community-hub/kafka-connect-zeebe), as illustrated below.
 
 ![Kafka Connector](connecting-the-workflow-engine-with-your-world-assets/kafka-connector.png)
 
-This is a bidirectional connector which contains a Kafka listener for forwarding Kafka records to Zeebe and also a job worker which creates Kafka records every time a service task is executed. This is illustrated by the following example.
+This is a bidirectional connector which contains a Kafka listener for forwarding Kafka records to Zeebe and also a job worker which creates Kafka records every time a service task is executed. This is illustrated by the following example:
 
 ![Kafka Connector Details](connecting-the-workflow-engine-with-your-world-assets/kafka-connector-details.png)
 
@@ -216,8 +219,7 @@ This is a bidirectional connector which contains a Kafka listener for forwarding
 
 Most connectors are currently community extensions, which basically means that they are not officially supported by Camunda, but by community members (who sometimes are Camunda employees). While this sounds like a restriction, it can also mean there is more flexibility to make progress.
 
-A list of community-maintained connectors can be found at [https://awesome.zeebe.io/](https://awesome.zeebe.io/).
-
+A list of community-maintained connectors can be found [here](https://awesome.zeebe.io/).
 
 ### Using connectors in SaaS
 
@@ -225,35 +227,34 @@ Currently, connectors are not operated as part of the Camunda Cloud SaaS offerin
 
 ![Connectors in SaaS](connecting-the-workflow-engine-with-your-world-assets/connector-in-cloud.png)
 
+### Reusing your own integration logic by extracting connectors
 
-### Reusing Your Own Integration Logic By Extracting Connectors
+If you need to integrate with certain infrastructure regularly, for example your CRM system, you might also want to create your own CRM connector, run it centralized, and reuse it in various applications.
 
-If you need to integrate with certain infrastructure regularly, like for example your CRM system, you might also want to create your own CRM connector, run it centralized and reuse it in various applications.
+In general, we recommend not to start such connectors too early. Don’t forget that such a connector gets hard to adjust once in production and reused across multiple applications. Also, it is often much harder to extract all configuration parameters correctly and fill them from within the process, than it would be to have bespoke glue code in the programming language of your choice.
 
-In general, we recommend not to start such connectors too early. Don’t forget, that such a connector gets hard to adjust once in production and reused across multiple applications. Also, it is often much harder to extract all configuration parameters correctly and fill them from within the process, than it would be to have bespoke glue code in the programming language of your choice.
+Therefore, you should only extract a full-blown connector if you understand exactly what you need.
 
-So you should only extract a full-blown connector if you understand exactly what you need.
+Don’t forget about the possibility to extract common glue code in a simple library that is then used at different places.
 
-Don’t forget about the possibility to extract common glue code in a simple library that is then used at different places. But note that updating a library that is used in various other applications can be harder than updating one central connector. So as with everything in life, the best approach depends on your scenario.
+:::note
+Updating a library that is used in various other applications can be harder than updating one central connector. In this case, the best approach depends on your scenario.
+:::
 
-But whenever you have such glue code running and really understand the implications of making it a connector as well as the value it will bring, it can make a lot of sense.
-
+Whenever you have such glue code running and really understand the implications of making it a connector, as well as the value it will bring, it can make a lot of sense.
 
 ## Recommendation
 
 As a general rule of thumb, prefer custom glue code whenever you don’t have a good reason to go with an existing connector (like the reasons mentioned above).
 
-A good reason to use connectors is, if you need to solve **complex integrations where little customization is needed**, such as the [Camunda RPA bridge](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-rpa-bridge/) to connect RPA bots (soon to be available for Camunda Cloud).
+A good reason to use connectors is if you need to solve complex integrations where little customization is needed, such as the [Camunda RPA bridge](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-rpa-bridge/) to connect RPA bots (soon to be available for Camunda Cloud).
 
-Good use of connectors are also scenarios **where you don’t need custom glue code**, for example when orchestrating serverless functions on AWS with the [AWS Lambda Connector](https://github.com/camunda-community-hub/zeebe-lambda-worker). This connector can be operated once and used in different processes.
+Good use of connectors are also scenarios where you don’t need custom glue code. For example, when orchestrating serverless functions on AWS with the [AWS Lambda Connector](https://github.com/camunda-community-hub/zeebe-lambda-worker). This connector can be operated once and used in different processes.
 
-Some use cases also allow to create a **resuable generic adapter**, for example to send status events to your business intelligence system.
+Some use cases also allow you to create a **resuable generic adapter**; for example, to send status events to your business intelligence system.
 
-But there are also common downsides with connectors. First, the **possibilities are limited** to what the creator of the connector has foreseen. In reality, you might have slightly different requirements and hit a limitation of a connector soon.
+But there are also common downsides with connectors. First, the possibilities are limited to what the creator of the connector has foreseen. In reality, you might have slightly different requirements and hit a limitation of a connector soon.
 
-Second, the connector **requires you to operate this connector** in addition to your own application. The complexity associated with this depends on your environment.
+Second, the connector requires you to operate this connector in addition to your own application. The complexity associated with this depends on your environment.
 
-Third, **testing your glue code gets harder**, as you can’t easily hook in mocks into such a connector — as you could in your own glue code.
-
-
-
+Third, testing your glue code gets harder, as you can’t easily hook in mocks into such a connector as you could in your own glue code.
