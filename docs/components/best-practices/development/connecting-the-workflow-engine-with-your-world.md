@@ -9,7 +9,7 @@ This document predominantly outlines writing some custom glue code in the progra
 
 The workflow engine is a remote system for your applications, just like a database. Your application connects with Zeebe via remote protocols, [gRPC](https://grpc.io/) to be precise, which is typically hidden from you, like when using a database driver based on ODBC or JDBC.
 
-With Camunda Cloud and the Zeebe workflow engin,e there are two basic options:
+With Camunda Cloud and the Zeebe workflow engine, there are two basic options:
 
 1. Write some **programming code** that typically leverages the client library for the programming language of your choice.
 2. Use some **existing connector** which just needs a configuration.
