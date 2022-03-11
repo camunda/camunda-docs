@@ -41,7 +41,7 @@ To create an automated process with user tasks, take the following steps:
 9. Append a gateway to your user task by dragging it onto the dashboard from the palette on the left side of the screen, or by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
 10. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
 11. Attach an end event to the two user tasks.
-![gateway example](./img/gateway-example-1.png)
+![gateway example](./img/gateway-example-dinner.png)
 
 #### Start and view your process instance
 
@@ -54,6 +54,8 @@ To create an automated process with user tasks, take the following steps:
 
 #### Complete a user task
 
+Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](./utilizing-forms.md).
+
 1. Go back to your Camunda Cloud diagram and select the honeycomb icon and then **View user tasks** to take a look at your user tasks inside Tasklist.
 2. Select the open user task on the left panel of **Tasks**. In our example below, this is **Decide what's for dinner**.
 3. Next to **Assignee**, click **Claim** to claim the task.
@@ -62,6 +64,10 @@ To create an automated process with user tasks, take the following steps:
 5. On the left panel of **Tasks**, filter by **Completed** tasks to see your task has been finished.
 
 You can now navigate back to Operate and notice the process instance has continued, and the token has moved forward.
+
+The token moves through the exclusive gateway (also called the XOR gateway), and is used to model the decision in the process. When the execution arrives at this gateway, all outgoing sequence flows are evaluated in the order in which they have been defined. The sequence flow which condition evaluates to ‘true’ (or which doesn’t have a condition set, conceptually having a ‘true’ value defined on the sequence flow) is selected for continuing the process.
+
+In this case, the token will move through the gateway and to the selected dinner based on the **Decide what's for dinner** user task we completed. If we select **Chicken**, the token moves forward to **Prepare chicken**. If we select **Salad**, the token moves forward to **Prepare salad**.
 
 ### Additional resources and next steps
 
