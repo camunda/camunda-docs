@@ -29,7 +29,7 @@ The following query parameters have to be provided with every request:
 |Parameter|Constraints|Value|
 |--- |--- |--- |
 |access_token|REQUIRED*|[Authorization](../../authorization)|
-|collectionId|REQUIRED|The ID of the Collection for which to retrieve the Report IDs.|
+|collectionId|REQUIRED|The ID of the collection for which to retrieve the dashboard IDs.|
 
 * Only required if not set as a request header
 
