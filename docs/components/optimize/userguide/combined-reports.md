@@ -1,5 +1,5 @@
 ---
-id: combined-report
+id: combined-reports
 title: Combined reports
 description: Occasionally, it is necessary to compare multiple reports or visualize them together in one diagram.
 ---
