@@ -8,7 +8,7 @@ description: "Reports offer the ability to view your data from different angles,
 
 Reports offer the ability to view your data from different angles, and thus capture all aspects that influence your processes, show new trends, or depict your current business state.
 
-Each report consists of the [edit mode](#edit-mode) and [view mode](#view-mode) to perform different kinds of actions on it.
+Each report consists of the [edit mode](./process-analysis/report-analysis/edit-mode.md) and [view mode](./process-analysis/report-analysis/view-mode.md) to perform different kinds of actions on it.
 
 ## Creating a single report
 
