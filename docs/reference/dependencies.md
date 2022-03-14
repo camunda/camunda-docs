@@ -1303,7 +1303,7 @@ All of these libraries are required for core functionality.
 
 <TabItem value='modeler'>
 
-Desktop Modeler is a desktop modeling application that builds upon a number of third party libraries. You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/desktop-modeler/blob/master/THIRD_PARTY_NOTICES), located in the root of the source code repository. This file is also shipped with the application distribution as `THIRD_PARTY_NOTICES.camunda-modeler.txt`.
+Desktop Modeler is a desktop modeling application that builds upon a number of third party libraries. You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/camunda-modeler/blob/master/THIRD_PARTY_NOTICES), located in the root of the source code repository. This file is also shipped with the application distribution as `THIRD_PARTY_NOTICES.camunda-modeler.txt`.
 
 </TabItem>
 
