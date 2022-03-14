@@ -65,17 +65,17 @@ It is possible to display both count and duration measures for a single view in 
 
 Subsequently, you need to define how to group the data. Think of it as applying a metric to your input, where you break up the data by date, flow nodes, variable values, or other properties. For that, you have different options:
 
-- None: Do not split up the data.
-- Flow nodes: Cluster the data by flow nodes.
-- User tasks: Cluster the data by user tasks.
-- Duration: Cluster the data by duration. Depending on the selected view, this can be the duration of process instances, flow nodes, or user tasks.
-- Start date: Group instances together that were started during the same date period or time, e.g. hour, day or month. Depending on the selected view, this can be the start date of process instances, flow nodes, or user tasks.
-- End date: Group instances together that were finished during the same date period or time, e.g. hour, day or month. Depending on the selected view, this can be the start date of process instances, flow nodes, or user tasks.
-- Running date of the process instance: Group process instances together that were running during the same date period or time, e.g. hour, day, or month.
-- Variable: Process instances with the same value for the selected variable are grouped together.
-- Assignee: Only available for user task views. Tasks are grouped together according to their current assignee.
-- Candidate group: Only available for user task views. Tasks with the same candidate group are grouped together.
-- Process: Only available for process instance reports with multiple definitions. Data from the same process is grouped together.
+- **None**: Do not split up the data.
+- **Flow nodes**: Cluster the data by flow nodes.
+- **User tasks**: Cluster the data by user tasks.
+- **Duration**: Cluster the data by duration. Depending on the selected view, this can be the duration of process instances, flow nodes, or user tasks.
+- **Start date**: Group instances together that were started during the same date period or time, e.g. hour, day or month. Depending on the selected view, this can be the start date of process instances, flow nodes, or user tasks.
+- **End date**: Group instances together that were finished during the same date period or time, e.g. hour, day or month. Depending on the selected view, this can be the start date of process instances, flow nodes, or user tasks.
+- **Running date of the process instance**: Group process instances together that were running during the same date period or time, e.g. hour, day, or month.
+- **Variable**: Process instances with the same value for the selected variable are grouped together.
+- **Assignee**: Only available for user task views. Tasks are grouped together according to their current assignee.
+- **Candidate group**: Only available for user task views. Tasks with the same candidate group are grouped together.
+- **Process**: Only available for process instance reports with multiple definitions. Data from the same process is grouped together.
 
 Finally, define how you want the data to be visualized. Examples are heatmap, table, bar, or line chart.
 
@@ -151,6 +151,10 @@ For duration and variable views, the default aggregation type is the average. Yo
 Reports with multiple aggregations that have a [second "Group by"](#reports-with-a-second-group-by-option) can only be visualized as table.
 
 ### User task duration time
+
+:::note
+The following information regarding idle versus work is currently applicable only to Camunda Platform 7.
+:::
 
 In user task duration reports, you have the opportunity to select which part of the user task's lifecycle you want to see in the report:
 
