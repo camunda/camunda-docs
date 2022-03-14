@@ -503,7 +503,7 @@ The ```bpmn message name``` is used in both products and doesn't need migration.
 For Camunda Cloud, [a former community extension](https://github.com/camunda-community-hub/dmn-scala), built by core Camunda developers, is productized. This engine has a higher coverage of DMN elements. This engine can execute DMN models designed for Camunda Platform 7, however, there are some small differences which can be assessed looking at [this issue](https://github.com/camunda/camunda-modeler/issues/2525).
 
 :::note
-The DMN engine is added to the Camunda Cloud stack at the moment and might not yet be available to you when you read this.
+The DMN engine is being added to the Camunda Cloud stack at the moment and might not yet be available to you when you read this.
 :::
 <!--
 The following elements/Attributes are not supported :
