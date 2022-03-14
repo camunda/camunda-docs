@@ -129,7 +129,7 @@ Having said that, also review the possibilities the workflow engine provides wit
 
 The longer the lifespans of process instances are, the bigger the *risks* that you might want to exchange important software components like e.g. the workflow engine itself. Typically, *very long-running, end-to-end processes* (running longer than *six months*) have periods without activity (e.g. waiting for a certain date in the future). Cut the process into several independent process definitions at these points.
 
-<div bpmn="versioning-process-definitions-assets/cutting.bpmn" callouts="service_task_create_reminder,process_scheduler" />
+<div bpmn="best-practices/versioning-process-definitions-assets/cutting.bpmn" callouts="service_task_create_reminder,process_scheduler" />
 
 <span className="callout">1</span>
 
@@ -155,7 +155,7 @@ When calling separately modeled sub processes (i.e. *Call Activities*), the defa
 
 Keeping in mind pros and cons of versioning as discussed above, we can therefore *encapsulate parts of a process*, for which we want to be able to change the runtime behavior more often into such call activities. This is an especially useful consideration for *long-running processes*.
 
-<div bpmn="versioning-process-definitions-assets/call-activities.bpmn" callouts="call_activity_order_shipping, call_activity_order_billing" />
+<div bpmn="best-practices/versioning-process-definitions-assets/call-activities.bpmn" callouts="call_activity_order_shipping, call_activity_order_billing" />
 
 <span className="callout">1</span>
 

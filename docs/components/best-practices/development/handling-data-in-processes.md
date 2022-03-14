@@ -16,7 +16,7 @@ When reading and interpreting a business process diagram, you quickly realize th
 
 Examine the following tweet approval process example:
 
-<div bpmn="handling-data-in-processes-assets/TwitterDemoProcess.bpmn" callouts="start_event_new_tweet,user_task_review_tweet,gateway_approved,service_task_publish_on_twitter" />
+<div bpmn="best-practices/handling-data-in-processes-assets/TwitterDemoProcess.bpmn" callouts="start_event_new_tweet,user_task_review_tweet,gateway_approved,service_task_publish_on_twitter" />
 
 <span className="callout">1</span>
 
@@ -129,7 +129,7 @@ However, if you also want to solve necessary type conversions (casting) or proba
 
 Consider, for example, the BPMN "Publish on Twitter" task in the Tweet Approval Process:
 
-<div bpmn="handling-data-in-processes-assets/TwitterDemoProcess.bpmn" callouts="service_task_publish_on_twitter" />
+<div bpmn="best-practices/handling-data-in-processes-assets/TwitterDemoProcess.bpmn" callouts="service_task_publish_on_twitter" />
 
 <span className="callout">1</span>
 

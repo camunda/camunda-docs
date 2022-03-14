@@ -103,7 +103,7 @@ There are different ways of enforcing deadlines for Human Tasks. Typical actions
 
 The following example shows how to explicitly model an escalation:
 
-<div bpmn="extending-human-task-management-c7-assets/enforcing-deadlines.bpmn" callouts="user_task_remind_boss" />
+<div bpmn="best-practices/extending-human-task-management-c7-assets/enforcing-deadlines.bpmn" callouts="user_task_remind_boss" />
 
 <span className="callout">1</span>
 

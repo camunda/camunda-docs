@@ -13,7 +13,7 @@ Test your executable BPMN processes as they are software. If possible, do automa
 
 This best practice uses the following process example:
 
-<div bpmn="testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="user_task_review_tweet,service_task_send_rejection_notification,service_task_publish_on_twitter,user_task_handle_duplicate" />
+<div bpmn="best-practices/testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="user_task_review_tweet,service_task_send_rejection_notification,service_task_publish_on_twitter,user_task_handle_duplicate" />
 
 <span className="callout">1</span>
 
@@ -245,7 +245,7 @@ As a rule of thumb *always* assert that the expected *external effects* of your 
 
 Divide and conquer by *testing your process in chunks*. Consider the important chunks and paths the Tweet Approval Process consists of:
 
-<div bpmn="testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="end_event_tweet_published,end_event_tweet_rejected,boundary_event_tweet_duplicated" />
+<div bpmn="best-practices/testing-process-definitions-assets/TwitterDemoProcess.bpmn" callouts="end_event_tweet_published,end_event_tweet_rejected,boundary_event_tweet_duplicated" />
 
 <span className="callout">1</span>
 
