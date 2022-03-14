@@ -43,7 +43,8 @@ To create an automated process with user tasks, take the following steps:
    - Note that the sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
 11. Attach an end event to the two user tasks.
 
-<div bpmn="./img/prepare-dinner.bpmn" />
+
+<div bpmn="getting-started-guides/prepare-dinner.bpmn" />
 
 #### Implement a form
 
