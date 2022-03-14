@@ -40,9 +40,21 @@ To create an automated process with user tasks, take the following steps:
 ![user task example](./img/user-task-example.png)
 9. Append a gateway to your user task by dragging it onto the dashboard from the palette on the left side of the screen, or by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
 10. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
+   - Note that the sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
 11. Attach an end event to the two user tasks.
 
 <div bpmn="./img/prepare-dinner.bpmn" />
+
+#### Implement a form
+
+1. To add a form and decide what's for dinner, return to the **Modeler** homepage and click **New > Form**.
+2. Name your form. In this case, we've named ours **Decide what's for dinner**.
+3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've described ours as **What's for dinner?**
+4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner, we've created two values: one labeled **Chicken**, and one labeled **Salad**.
+
+:::note
+As mentioned earlier, you'll need to insert the defined variable values into the appropriate sequence flows to execute your process. In this example, our sequence flows will now have the expressions of `= chicken=true` and `= salad=true`.
+:::
 
 #### Start and view your process instance
 
@@ -68,7 +80,7 @@ You can now navigate back to Operate and notice the process instance has continu
 
 The token moves through the exclusive gateway (also called the XOR gateway), and is used to model the decision in the process. When the execution arrives at this gateway, all outgoing sequence flows are evaluated in the order in which they have been defined. The sequence flow which condition evaluates to ‘true’ (or which doesn’t have a condition set, conceptually having a ‘true’ value defined on the sequence flow) is selected for continuing the process.
 
-In this case, the token will move through the gateway and to the selected dinner based on the **Decide what's for dinner** user task we completed. If we select **Chicken**, the token moves forward to **Prepare chicken**. If we select **Salad**, the token moves forward to **Prepare salad**.
+In this case, the token will move through the gateway and (according to the conditional expressions we outlined earlier) to the selected dinner based on the **Decide what's for dinner** user task we completed. If we select **Chicken**, the token moves forward to **Prepare chicken**. If we select **Salad**, the token moves forward to **Prepare salad**.
 
 ### Additional resources and next steps
 
