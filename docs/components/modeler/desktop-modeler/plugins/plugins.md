@@ -8,11 +8,27 @@ Plugins allow you to change the appearance and behavior of the Camunda Modeler a
 
 ## Plugging into the Camunda Modeler
 
-You can plug into the modeler to change its appearance, add new menu entries or extend the modeling tools for [BPMN](https://github.com/bpmn-io/bpmn-js), and [DMN](https://github.com/bpmn-io/dmn-js). Adding a plugin is as easy as putting it into the `resources/plugins` directory relative to your [`{APP_DATA_DIRECTORY}`](../search-paths#app-data-directory) or [`{USER_DATA_DIRECTORY}`](../search-paths#user-data-directory) directory.
+You can plug into the modeler to change its appearance, add new menu entries, extend the modeling tools for [BPMN](https://github.com/bpmn-io/bpmn-js), and [DMN](https://github.com/bpmn-io/dmn-js), or even slot in React components into the Camunda Modeler UI.
 
-The Camunda Modeler searches for available plug-in entry points via the `resources/plugins/*/index.js` glob. That being said, each plug-in must reside in it's own folder which is a direct child of the `plugins` directory. If you download and extract plugins from GitHub the extracted directory contains the actual plugin, so make sure to copy the plugin, not its parent directory.
+Adding a plugin is as easy as putting it into the `resources/plugins` directory relative to your [`{APP_DATA_DIRECTORY}`](../search-paths#app-data-directory) or [`{USER_DATA_DIRECTORY}`](../search-paths#user-data-directory) directory.
 
-So let's dive into how to add your own plugins.
+The Camunda Modeler searches for available plug-in entry points via the `resources/plugins/*/index.js` pattern. This means that each plug-in must reside in it's own folder which is a direct child of the `plugins` directory. If you download and extract plugins from GitHub, the extracted directory contains the actual plugin, so make sure to copy the plugin, not its parent directory.
+
+## Overview of your possibilities as a plugin developer
+
+There are many ways for you as developer to extend the Camunda Modeler and its modeling tools. The following table shows an overview:
+
+| Plugin type               | Functionality                                                                                                        | Example                                                                                                                         |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Menu Entries              | Add new entries to the menu bar - useful to interact with your plugins, link to external pages, add settings, ect... | [Menu Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/menu-plugin-example)                     |
+| Custom Styles             | Change the look and feel of Camunda Modeler by adding stylesheets                                                     | [Styles Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/style-plugin-example)                    |
+| React Components          | Embed custom React components into specific anchor points of the Camunda Modeler                                       | [React Plugin Example](https://github.com/pinussilvestrus/camunda-modeler-autosave-plugin)                                     |
+| bpmn-js Modules           | Extend our BPMN editor by injecting your own custom [bpmn-js](https://github.com/bpmn-io/bpmn-js) modules                                                           | [bpmn-js Module Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/bpmn-js-plugin-example)                  |
+| bpmn-moddle Extensions | Extend the BPMN language model by injecting your own custom [bpmn-moddle](https://github.com/bpmn-io/bpmn-moddle) modules                                                                              | [bpmn-moddle Extension Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/bpmn-js-plugin-moddle-extension-example) |
+| dmn-js Modules            | Extend our DMN editor by injecting your own custom [dmn-js](https://github.com/bpmn-io/dmn-js) modules                                                            | [dmn-js Module Example](https://github.com/camunda/camunda-modeler-plugins/tree/master/dmn-js-plugin-example)                   |
+| dmn-moddle Extensions  | Extend the DMN language model by injecting your own custom [dmn-moddle](https://github.com/bpmn-io/dmn-moddle) modules                                                                             | n/a |
+
+## Getting started with development
 
 ### Plug-in Entry Point
 
@@ -23,9 +39,10 @@ module.exports = {
   name: 'My Awesome Plugin', // the name of your plugin
   style: './style.css', // changing the appearance of the modeler
   menu: './menu.js', // adding menu entries to the modeler
-  script: './script.js' // extend the modeling tools for BPMN, or DMN
+  script: './script.js' // extending the modeler, and its BPMN and DMN components
 };
 ```
+
 The modeler will automatically load your plugins on startup.
 
 ### Changing the Appearance of the Modeler
@@ -44,7 +61,7 @@ Plug it into the modeler like this:
 
 ```javascript
 module.exports = {
-  style: './style.css'
+  style: './style.css'
 };
 ```
 
@@ -76,27 +93,29 @@ Plug them into the modeler like this:
 
 ```javascript
 module.exports = {
-  menu: './menu-entries'
+  menu: './menu-entries'
 };
 ```
 
-You can use a Node.js module here since the modeler is built with [Electron](https://electron.atom.io/) which uses [Node.js](https://nodejs.org/en/).
+> The code within the menu entries executes on [the main process](https://www.electronjs.org/docs/latest/tutorial/process-model) of Electron. This comes with the advantage of allowing you to use [Node.js](https://nodejs.org/en/) modules, but you need to consider, that you can not debug the respective code in Chromium. For more information regarding main process debugging, please refer to the [official Electron documentation](https://www.electronjs.org/docs/latest/tutorial/debugging-main-process).
 
 For more information on how the modeler's menu works, have a look at its implementation [here](https://github.com/camunda/camunda-modeler/blob/master/app/lib/menu/menu-builder.js).
 
-### Extend the Modeling Tools for BPMN, and DMN
+### Extend the modeler, and its BPMN and DMN components
 
-> Currently you can only extend bpmn-js and dmn-js
-
-You can extend the modeling tools for [BPMN](https://github.com/bpmn-io/bpmn-js), and [DMN](https://github.com/bpmn-io/dmn-js) with your own modules.
+You can extend the modeling tools for [BPMN](https://github.com/bpmn-io/bpmn-js), and [DMN](https://github.com/bpmn-io/dmn-js) with your own modules, as well as embedding React components into certain sections of Camunda Modeler.
 
 Since the client of the modeler uses [Chromium](https://www.chromium.org/Home) you can't use Node.js modules to extend the modeling tools. You need to bundle your plugin first. The easiest way to get started with client-side plugins is through [this](https://github.com/camunda/camunda-modeler-plugin-example) example project.
+
+> In this example we are building a bpmn-js plugin, but this basic structure applies to all extensions besides menu entries and style. The modules themselves will be different however, hence please refer to our [examples](https://github.com/camunda/camunda-modeler-plugins) for more information on how to build different kinds.
 
 First, clone the repository:
 
 ```
 git clone https://github.com/camunda/camunda-modeler-plugin-example.git
 ```
+
+> The plugin starter project comes with a menu and style folder which are referenced in the plugin entry point, if you do not need those you can remove them from the entry point and delete the respective folder.
 
 Next, install the dependencies:
 
@@ -119,13 +138,21 @@ module.exports = {
 };
 ```
 
-Make sure to require your file in `client.js`:
+Then, require your file in `client.js` and register it via our [helper functions](https://github.com/camunda/camunda-modeler-plugin-helpers):
 
 ```javascript
 var registerBpmnJSPlugin = require('camunda-modeler-plugin-helpers').registerBpmnJSPlugin;
 var plugin = require('./LoggingPlugin');
 
 registerBpmnJSPlugin(plugin);
+```
+
+You may want to create a plugin which specifically targets Camunda 7 or Camunda 8. To do this use the appropriate variations of the registration helper function for your plugin type.
+
+```javascript
+registerPlatformBpmnJSPlugin(plugin); // Register plugin for Camunda 7 BPMN diagrams only
+registerCloudBpmnJSPlugin(plugin); // Register plugin for Camunda 8 BPMN diagrams only
+registerBpmnJSPlugin(plugin); // Register plugin for Camunda 7 and 8 BPMN diagrams
 ```
 
 You can use the globally available functions `getModelerDirectory` and `getPluginsDirectory` to load additional resources:
