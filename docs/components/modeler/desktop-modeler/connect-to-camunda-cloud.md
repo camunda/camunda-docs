@@ -4,13 +4,13 @@ title: Connect to Camunda Cloud
 description: "Camunda Modeler can communicate directly with Camunda Cloud."
 ---
 
-Desktop Modeler can directly deploy diagrams and start process instances in Camunda Cloud. Follow the steps below, to deploy a diagram:
+Desktop Modeler can directly deploy diagrams and start process instances in Camunda Cloud. Follow the steps below to deploy a diagram:
 
 1. Click the deployment icon:
 
 ![deployment icon](./img/deploy-icon.png)
 
-2. Click **Camunda Cloud SaaS**, or alternatively, select **Camunda Cloud Self-Managed** if you for example want to deploy to a [local installation](../../../../self-managed/zeebe-deployment/local/install/):
+2. Click **Camunda Cloud SaaS**, or alternatively, select **Camunda Cloud Self-Managed** if you want to deploy to a [local installation](../../../../self-managed/zeebe-deployment/local/install/), for example:
 
 ![deployment configuration](./img/deploy-diagram-camunda-cloud.png)
 
