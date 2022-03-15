@@ -553,22 +553,25 @@ module.exports = {
 
 
       ],
-      IAM: [
-        "self-managed/iam/what-is-iam",
+      "Identity": [
+        "self-managed/identity/what-is-identity",
         {
           "Getting started": [
             {
-              "Running IAM with Docker": [
-                "self-managed/iam/getting-started/docker/setup-environment",
-                "self-managed/iam/getting-started/docker/start-iam",
-                "self-managed/iam/getting-started/docker/accessing-the-ui",
+              "Running Identity with Docker": [
+                "self-managed/identity/getting-started/docker/setup-environment",
+                "self-managed/identity/getting-started/docker/starting-the-services",
+                "self-managed/identity/getting-started/docker/logging-in",
               ]
             }
           ],
         }, {
+          "Guides": [
+            "self-managed/identity/guides/configure-external-identity-provider"
+          ],
+        }, {
           "Deployment": [
-            "self-managed/iam/deployment/configuration-variables",
-            "self-managed/iam/deployment/making-iam-production-ready",
+            "self-managed/identity/deployment/configuration-variables",
           ],
         },
       ],
