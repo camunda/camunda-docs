@@ -82,22 +82,24 @@ module.exports = {
       Modeler: [
         "components/modeler/about-modeler",
         {
-          "Cloud Modeler": [
-            "components/modeler/cloud-modeler/launch-cloud-modeler",
-            "components/modeler/cloud-modeler/model-your-first-diagram",
-            "components/modeler/cloud-modeler/import-diagram",
-            "components/modeler/cloud-modeler/save-and-deploy",
-            "components/modeler/cloud-modeler/start-instance",
-            "components/modeler/cloud-modeler/model-overview",
+          "Web Modeler": [
+            "components/modeler/web-modeler/new-web-modeler",
+            "components/modeler/web-modeler/launch-cloud-modeler",
+            "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/import-diagram",
+            "components/modeler/web-modeler/save-and-deploy",
+            "components/modeler/web-modeler/start-instance",
+            "components/modeler/web-modeler/collaboration",
+            "components/modeler/web-modeler/milestones",
           ],
         },
         {
-          "Camunda Modeler": [
-            "components/modeler/camunda-modeler/install-the-modeler",
-            "components/modeler/camunda-modeler/model-your-first-diagram",
-            "components/modeler/camunda-modeler/connect-to-camunda-cloud",
-            "components/modeler/camunda-modeler/start-instance",
-            "components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates",
+          "Desktop Modeler": [
+            "components/modeler/desktop-modeler/install-the-modeler",
+            "components/modeler/desktop-modeler/model-your-first-diagram",
+            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/element-templates/desktop-modeler-element-templates",
           ],
         },
         {
@@ -153,7 +155,7 @@ module.exports = {
         },
         {
           "DMN": [
-            "components/modeler/dmn/camunda-modeler-dmn",
+            "components/modeler/dmn/desktop-modeler-dmn",
           ],
         },
       ],
@@ -378,14 +380,8 @@ module.exports = {
         {
           "Kubernetes deployment": [
             "self-managed/zeebe-deployment/kubernetes/index",
-            {
-              "Helm charts": [
-                "self-managed/zeebe-deployment/kubernetes/helm/index",
-                "self-managed/zeebe-deployment/kubernetes/helm/prerequisites",
-                "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
-                "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate",
-              ],
-            },
+            "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
+            "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist",
           ],
         },
         {

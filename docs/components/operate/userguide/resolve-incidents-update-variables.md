@@ -1,74 +1,129 @@
 ---
 id: resolve-incidents-update-variables
 title: Variables and incidents
+description: "Let's examine variable and incidents."
 ---
 
-Every process instance created for the process model used in the getting started tutorial requires an `orderValue` so the XOR gateway evaluation will happen properly.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-Let’s look at a case where `orderValue` is present and was set as a string, but our `order-process.bpmn` model requires an integer to properly evaluate the `orderValue` and route the instance.
+Every process instance created for the process model used in the [getting started tutorial](./guides/getting-started/model-your-first-process.md) requires an `orderValue` so the XOR gateway evaluation will happen properly.
 
-**Linux**
+Let’s look at a case where `orderValue` is present and was set as a string, but our `order-process.bpmn` model required an integer to properly evaluate the `orderValue` and route the instance.
+
+<Tabs groupId="OS" defaultValue="linux" values={
+[
+{label: 'Linux', value: 'linux', },
+{label: 'MacOS', value: 'macos', },
+{label: 'Windows', value: 'windows', },
+]
+}>
+
+<TabItem value='linux'>
 
 ```
 ./bin/zbctl --insecure create instance order-process --variables '{"orderId": "1234", "orderValue":"99"}'
 ```
 
-**Mac**
+</TabItem>
+
+<TabItem value='macos'>
 
 ```
 ./bin/zbctl.darwin --insecure create instance order-process --variables '{"orderId": "1234", "orderValue":"99"}'
 ```
 
-**Windows (Powershell)**
+</TabItem>
+
+<TabItem value='windows'>
 
 ```
 ./bin/zbctl.exe --insecure create instance order-process --variables '{\"orderId\": \"1234\", \
 "orderValue\": \"99\"}'
 ```
 
-To advance the instance to our XOR gateway, we’ll quickly create a job worker to complete the `Initiate Payment` task:
+</TabItem>
+</Tabs>
 
-**Linux**
+## Advance an instance to an XOR gateway
+
+To advance the instance to our XOR gateway, we’ll create a job worker to complete the `Initiate Payment` task:
+
+<Tabs groupId="OS" defaultValue="linux" values={
+[
+{label: 'Linux', value: 'linux', },
+{label: 'MacOS', value: 'macos', },
+{label: 'Windows', value: 'windows', },
+]
+}>
+
+<TabItem value='linux'>
 
 ```
 ./bin/zbctl --insecure create worker initiate-payment --handler cat
 ```
 
-**Mac**
+</TabItem>
+
+<TabItem value='macos'>
 
 ```
 ./bin/zbctl.darwin --insecure create worker initiate-payment --handler cat
 ```
 
-**Windows (Powershell)**
+</TabItem>
+
+<TabItem value='windows'>
 
 ```
 ./bin/zbctl.exe --insecure create worker initiate-payment --handler "findstr .*"
 ```
 
-We’ll publish a message that will be correlated with the instance so we can advance past the `Payment Received` intermediate message catch event:
+</TabItem>
+</Tabs>
 
-**Linux**
+We’ll publish a message that will be correlated with the instance, so we can advance past the `Payment Received` intermediate message catch event:
+
+<Tabs groupId="OS" defaultValue="linux" values={
+[
+{label: 'Linux', value: 'linux', },
+{label: 'MacOS', value: 'macos', },
+{label: 'Windows', value: 'windows', },
+]
+}>
+
+<TabItem value='linux'>
 
 ```
 ./bin/zbctl --insecure publish message "payment-received" --correlationKey="1234"
 ```
 
-**Mac**
+</TabItem>
+
+<TabItem value='macos'>
 
 ```
 ./bin/zbctl.darwin --insecure publish message "payment-received" --correlationKey="1234"
 ```
 
-**Windows (Powershell)**
+</TabItem>
+
+<TabItem value='windows'>
 
 ```
 ./bin/zbctl.exe --insecure publish message "payment-received" --correlationKey="1234"
 ```
 
+</TabItem>
+</Tabs>
+
 In the Operate interface, you should now see the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
+[//]:# (What is the FIXME note referencing above?)
+
 ![operate-incident-process-view](./img/operate-process-view-incident_light.png)
+
+## Diagnosing and resolving incidents
 
 Operate provides tools for diagnosing and resolving incidents. Let’s go through incident diagnosis and resolution step by step.
 
@@ -93,29 +148,46 @@ There’s one last step: initiating a “retry” of the process instance. There
 
 ![operate-retry-instance](./img/operate-process-retry-incident_light.png)
 
-You should now see the incident has been resolved, and the process instance has progressed to the next step. Well done!
+You should now see the incident has been resolved, and the process instance has progressed to the next step.
 
 ![operate-incident-resolved-instance-view](./img/operate-incident-resolved_light.png)
 
+## Complete a process instance
+
 If you’d like to complete the process instance, create a worker for the `Ship Without Insurance` task:
 
-**Linux**
+<Tabs groupId="OS" defaultValue="linux" values={
+[
+{label: 'Linux', value: 'linux', },
+{label: 'MacOS', value: 'macos', },
+{label: 'Windows', value: 'windows', },
+]
+}>
+
+<TabItem value='linux'>
 
 ```
 ./bin/zbctl --insecure create worker ship-without-insurance --handler cat
 ```
 
-**Mac**
+</TabItem>
+
+<TabItem value='macos'>
 
 ```
 ./bin/zbctl.darwin --insecure create worker ship-without-insurance --handler cat
 ```
 
-**Windows (Powershell)**
+</TabItem>
+
+<TabItem value='windows'>
 
 ```
 ./bin/zbctl.exe --insecure create worker ship-without-insurance --handler "findstr .*"
 ```
+
+</TabItem>
+</Tabs>
 
 The completed process instance with the path taken:
 

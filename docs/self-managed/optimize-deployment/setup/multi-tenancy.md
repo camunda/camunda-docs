@@ -4,7 +4,7 @@ title: "Multi-Tenancy"
 description: "Learn about the supported multi-tenancy scenarios."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 Learn how to set up Multi-Tenancy with Optimize.
 

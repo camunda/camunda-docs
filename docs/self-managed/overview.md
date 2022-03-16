@@ -7,6 +7,8 @@ title: "Camunda Cloud Self-Managed"
 
 Camunda Cloud Self-Managed is not Camunda Platform. If you are looking for Camunda Platform documentation, [click here](https://docs.camunda.org).
 
+However, Optimize documentation is available for both Camunda Cloud and Camunda Platform, including deployment instructions available [here](./optimize-deployment/setup.md). Look for "Camunda Platform 7" badges to help you understand what content is available for what product.
+
 :::
 
 The alternative way to use Camunda Cloud is to host it yourself through Camunda Cloud Self-Managed. 
@@ -23,7 +25,7 @@ The following components are available for Camunda Cloud Self-Managed:
 * Optimize
 * IAM (not available in Camunda Cloud SaaS)
 
-Camunda Cloud Self-Managed users may also use Camunda Modeler to build BPMN diagrams and work with Camunda Forms. 
+Camunda Cloud Self-Managed users may also use Desktop Modeler to build BPMN diagrams and work with Camunda Forms. 
 
 While documentation for Optimize is available in the Self-Managed section, we continue to refine the experience for Camunda Cloud Self-Managed users.
 

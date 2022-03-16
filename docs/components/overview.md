@@ -10,7 +10,7 @@ This section contains product manual content for each component in Camunda Cloud
 
 - [Concepts](concepts/what-is-camunda-cloud.md) - Conceptual documentation on a variety of Camunda Cloud topics.
 - [Cloud Console](cloud-console/introduction.md) - More information on working with Cloud Console.
-- [Modeler](modeler/about.md) - Documentation on Camunda's modeling tools, including Cloud Modeler and Camunda Modeler.
+- [Modeler](modeler/about.md) - Documentation on Camunda's modeling tools, including Web Modeler and Desktop Modeler.
 - [Zeebe Engine](zeebe/zeebe-overview.md) - Complete documentation for Zeebe. 
 - [Operate](operate/index.md) - User guide for monitoring and troubleshooting your process with Operate.
 - [Optimize](optimize/what-is-optimize.md) - Detailed user guide for working with Optimize to improve your processes by identifying constraints in your system.

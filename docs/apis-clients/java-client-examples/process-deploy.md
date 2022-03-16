@@ -29,7 +29,7 @@ final DeploymentEvent deploymentEvent =
 
 [Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/resources/demoProcess.bpmn)
 
-Download the XML and save it in the Java classpath before running the example. Open the file with Camunda Modeler for a graphical representation.
+Download the XML and save it in the Java classpath before running the example. Open the file with Desktop Modeler for a graphical representation.
 
 <!--
 ```xml

@@ -78,7 +78,7 @@ Camunda saves historical data not just when a process instance finishes, but on 
 
 Historical data can be leveraged via three possible mechanisms:
 
-- *Camunda tools*: You can simply leverage Camunda Operate or Camunda Optimize. This is a very simple approach, that works out-of-the-box and should satisfy many requirements already. Camunda Operarte focuses on operational use cases ("where is my process? Why did this fail?") whereas Camunda Optimize provides business intelligence about your processes. Optimize allows you to build reports and dashboards including setting alerts for thresholds.
+- *Camunda tools*: You can simply leverage Camunda Operate or Camunda Optimize. This is a very simple approach, that works out-of-the-box and should satisfy many requirements already. Camunda Operate focuses on operational use cases ("where is my process? Why did this fail?") whereas Camunda Optimize provides business intelligence about your processes. Optimize allows you to build reports and dashboards including setting alerts for thresholds.
 
 - *Query API*: Using the public API (**currently under development**). This has the advantage that you can make use of the history data within your own applications. 
 

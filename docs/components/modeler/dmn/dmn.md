@@ -1,6 +1,6 @@
 ---
-id: camunda-modeler-dmn
-title: Editing DMN in Camunda Modeler
+id: desktop-modeler-dmn
+title: Editing DMN in Desktop Modeler
 description: To start modeling, let's create a DMN diagram.
 ---
 
@@ -36,7 +36,7 @@ To save your diagram, click **File > Save File As...** in the top-level menu. Th
 
 ## DMN coverage
 
-Camunda Modeler covers the following elements:
+Desktop Modeler covers the following elements:
 
 - Decision (tables and literal expressions)
 - Input data
