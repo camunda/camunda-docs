@@ -11,7 +11,7 @@ When a Zeebe cluster uses an uneven leader distribution, caused by losing a lead
 
 ## Manual rebalancing
 
-The gateway exposes an HTTP API to request rebalancing. You can use it by `POST`ing to the `/actuator/rebalance` endpoint on the monitoring port of the gateway: 
+The gateway exposes an HTTP API to request rebalancing. You can use it by `POST`ing to the `/actuator/rebalance` endpoint on the monitoring port of the gateway:
 
 ```bash
 curl -X POST https://{zeebe-gateway}:9600/actuator/rebalance/
@@ -26,19 +26,19 @@ During the rebalancing, partitions might become unhealthy and can't make progres
 
 Manual rebalancing is done on a best-effort basis.
 
-Due to the nature of distributed systems, Zeebe can never guarantee a particular distribution and rebalancing cannot avoid that. 
+Due to the nature of distributed systems, Zeebe can never guarantee a particular distribution and rebalancing cannot avoid that.
 
 There are two configurations where manual rebalancing is supported:
 
-1. **Priority election** with **round-robin distribution** <br/>
-Priority election and round-robin distribution are enabled by default. 
-As long as you have not manually disabled priority election or set a fixed distribution, rebalancing is supported. 
-Brokers are automatically assigned as primary partition leaders during startup, based on cluster size and replication factor.
+- **Priority election** with **round-robin distribution**
+  - Priority election and round-robin distribution are enabled by default.
+  - As long as you have not manually disabled priority election or set a fixed distribution, rebalancing is supported.
+  - Brokers are automatically assigned as primary partition leaders during startup, based on cluster size and replication factor.
 
-2. **Priority election** with **fixed distribution** <br/>
-Fixed distribution is an experimental configuration that is disabled by default. 
-Brokers are assigned as primary partition leaders based on the configuration.
-Only configurations where a partition designates a single broker as primary partition leader are supported.
+- **Priority election** with **fixed distribution**
+  - Fixed distribution is an experimental configuration that is disabled by default.
+  - Brokers are assigned as primary partition leaders based on the configuration.
+  - Only configurations where a partition designates a single broker as primary partition leader are supported.
 
 **Priority election** is controlled by the `zeebe.broker.cluster.raft.enablePriorityElection` config and is enabled by default.
 

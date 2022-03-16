@@ -104,8 +104,7 @@ host verification.
 You may need to import the certificate into JVM runtime.
 :::
 
-
-Either set `host` and `port` (deprecated) or `url` (recommended).
+Either set `host` and `port` (deprecated), or `url` (recommended).
 
 Name | Description | Default value |
 | -- | -- | -- |
@@ -205,7 +204,7 @@ camunda.operate:
 
 ## Operation executor
 
-Operations are user operations, like cancellation of process instance(s) or updating the variable value. 
+Operations are user operations, like cancellation of process instance(s) or updating the variable value.
 
 Operations are executed in a multi-threaded manner.
 

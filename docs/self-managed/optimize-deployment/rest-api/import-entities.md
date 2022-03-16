@@ -1,29 +1,29 @@
 ---
 id: import-entities
-title: "Import Entities"
-description: "The REST API to import Entity definitions."
+title: "Import entities"
+description: "The REST API to import entity definitions."
 ---
 
 ## Purpose
 
-This API allows users to import entity definitions such as Reports and Dashboards into existing Collections. These entity definitions may be obtained either using the [Report](../report/export-report-definitions/) or [Dashboard](../dashboard/export-dashboard-definitions) export API or [via the UI](../../../../components/optimize/userguide/additional-features/export-import#exporting-entities).
+This API allows users to import entity definitions such as reports and dashboards into existing collections. These entity definitions may be obtained either using the [report](../report/export-report-definitions/) or [dashboard](../dashboard/export-dashboard-definitions) export API or [via the UI](../../../../components/optimize/userguide/additional-features/export-import#exporting-entities).
 
 ### Prerequisites
 
-Please note that for importing via API, the following prerequisites must be met:
+For importing via API, the following prerequisites must be met:
 
 - All definitions the entities require exist in the target Optimize.
-- The target Collection, identified using the `collectionId` query parameter, must exist in the target system
-- The Collection Data Sources must include all relevant definitions for the entities.
-- The entity data structures match. To ensure matching data structures, please confirm that the Optimize version of the source is the same as the version of the target Optimize.
+- The target collection, identified using the `collectionId` query parameter, must exist in the target system.
+- The collection data sources must include all relevant definitions for the entities.
+- The entity data structures match. To ensure matching data structures, confirm that the Optimize version of the source is the same as the version of the target Optimize.
 
-If any of the above conditions are not met, the import will fail with an error response, please refer to the error message in the response for more information.
+If any of the above conditions are not met, the import will fail with an error response; refer to the error message in the response for more information.
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 POST `/api/public/import`
 
-## Request Headers
+## Request headers
 
 The following request headers have to be provided with every request:
 
@@ -31,48 +31,48 @@ The following request headers have to be provided with every request:
 |--- |--- |--- |
 |Authorization|REQUIRED*|[Authorization](../authorization)|
 
-* Only required if not set as a query parameter
+- Only required if not set as a query parameter
 
-## Query Parameters
+## Query parameters
 
 The following query parameters have to be provided with every request:
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
 |access_token|REQUIRED*|[Authorization](../authorization)|
-|collectionId|REQUIRED|The ID of the Collection for which to retrieve the Report IDs.|
+|collectionId|REQUIRED|The ID of the collection for which to retrieve the report IDs.|
 
-* Only required if not set as a request header
+- Only required if not set as a request header
 
-## Request Body
+## Request body
 
-The request body should contain a JSON array of entity definitions to be imported. These entity definitions may be obtained by using the [Report](../report/export-report-definitions) or [Dashboard](../dashboard/export-dashboard-definitions)  export APIs or by [manually exporting entities](../../../../components/optimize/userguide/additional-features/export-import#exporting-entities) via the Optimize UI. 
+The request body should contain a JSON array of entity definitions to be imported. These entity definitions may be obtained by using the [report](../report/export-report-definitions) or [dashboard](../dashboard/export-dashboard-definitions) export APIs or by [manually exporting entities](../../../../components/optimize/userguide/additional-features/export-import#exporting-entities) via the Optimize UI.
 
 ## Result
 
 The response contains a list of IDs of the newly created entities in the target system.
 
-## Response Codes
+## Response codes
 
-Possible HTTP Response Status codes:
+Possible HTTP response status codes:
 
 |Code|Description|
 |--- |--- |
 |200|Request successful.|
-|400|The provided list of entities is invalid. This can occur if any of the above listed [prerequisites](#prerequisites) are not met. Please check the `detailedMessage` of the error response for more information.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](../authorization) on how to authenticate.|
-|404|The given target Collection ID does not exist.|
+|400|The provided list of entities is invalid. This can occur if any of the above listed [prerequisites](#prerequisites) are not met. Check the `detailedMessage` of the error response for more information.|
+|401|Secret incorrect or missing in HTTP header. See [Authorization](../authorization) on how to authenticate.|
+|404|The given target collection ID does not exist.|
 |500|Some error occurred while processing the request, best check the Optimize log.|
 
 ## Example
 
-### Import two Entities
+### Import two entities
 
-Assuming you want to import a Report and a Dashboard into the Collection with ID `123`, this is what it would look like:
+Assuming you want to import a report and a dashboard into the collection with ID `123`, this is what it would look like:
 
 POST `/api/public/import?collectionId=123&access_token=mySecret`
 
-with request body:
+With the following request body:
 
 ```
 [

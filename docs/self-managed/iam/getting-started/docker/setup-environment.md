@@ -4,7 +4,7 @@ title: "Setup environment"
 sidebar_label: "Step 1: Setup environment"
 ---
 
-In this part of the tutorial, we'll show you how you can use containerization to run the IAM application on your machine. Here, it is assumed you have a basic understanding of Docker Compose. 
+In this part of the tutorial, we'll show you how you can use containerization to run the IAM application on your machine. Here, it is assumed you have a basic understanding of Docker Compose.
 
 :::tip
 Not sure what Docker Compose is? Check out Docker's [Overview of Docker Compose](https://docs.docker.com/compose/) guide.
@@ -39,7 +39,7 @@ services:
 Here, we set `ENFORCE_HTTPS` to **false** so we can use localhost. We recommend removing this option prior to production use.
 :::
 
-2. IAM requires a database to function. Add a database service to your docker-compose.yml file:
+2. IAM requires a database to function. Add a database service to your `docker-compose.yml` file:
 
 ```yaml
 database:
@@ -56,11 +56,7 @@ database:
 ```
 
 :::caution
-The IAM application currently only supports PostgreSQL 12+.
-:::
-
-:::caution
-The IAM application generates an encryption key per start. This means the database must be recreated each time.
+The IAM application currently only supports PostgreSQL 12+. Additionally, The IAM application generates an encryption key per start. This means the database must be recreated each time.
 :::
 
 3. We'll also need to add new entries to the `services.iam.environment` section to tell IAM where the database is located, and the password for access:

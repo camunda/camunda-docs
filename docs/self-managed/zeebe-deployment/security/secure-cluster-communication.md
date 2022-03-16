@@ -3,17 +3,13 @@ id: secure-cluster-communication
 title: "Secure cluster communication"
 ---
 
-
-
-# Secure cluster communication security
-
 :::note
 
 TLS between nodes in the same cluster is disabled by default.
 
 :::
 
-Zeebe supports transport layer security (TLS v1.3) between all nodes in a Zeebe cluster. This means it's possible to encrypt all TCP traffic between all nodes of a given cluster. 
+Zeebe supports transport layer security (TLS v1.3) between all nodes in a Zeebe cluster. This means it's possible to encrypt all TCP traffic between all nodes of a given cluster.
 
 Enabling TLS for cluster communication is an all or nothing feature: either all nodes are configured to use TLS, or none are. It's not currently possible to only configure some nodes to enable TLS.
 
@@ -33,7 +29,7 @@ For example, a simple certificate file with only a single certificate:
 -----END CERTIFICATE-----
 ```
 
-It you wanted to include its signing authority, for example, you would append the contents of the authority's public certificate to the end of the certificate chain file:
+If you wanted to include its signing authority, for example, you would append the contents of the authority's public certificate to the end of the certificate chain file:
 
 ```
 -----BEGIN CERTIFICATE-----
@@ -81,7 +77,6 @@ security:
 
 > The `certificateChainPath` and the `privateKeyPath` can be relative to your broker's working directory, or can be absolute paths.
 
-
 ## Gateway
 
 To configure secure communication for a standalone gateway with the rest of the cluster, configure its `zeebe.gateway.cluster.security` section, which looks like this:
@@ -123,15 +118,15 @@ In this model, only the client verifies the identity of the server, as opposed t
 
 ## Self signed certificates
 
-If you wish to use self signed certificates for testing or development purposes, the simplest way is to have all nodes share the same certificate. As aforementioned, the certificate chain configured on a node is also part of its trust store. As such, if all nodes share the same certificate, they will have no trouble verifying the identity of the other nodes.
+If you wish to use self-signed certificates for testing or development purposes, the simplest way is to have all nodes share the same certificate. As aforementioned, the certificate chain configured on a node is also part of its trust store. As such, if all nodes share the same certificate, they will have no trouble verifying the identity of the other nodes.
 
-You can still configure a different self signed certificate for each node, _provided they can be verified by the other nodes' certificate chain_.
+You can still configure a different self-signed certificate for each node, _provided they can be verified by the other nodes' certificate chain_.
 
 For example, let's say you have your own root certificate authority you use to sign your own certificates, and one certificate for each node that you signed with that authority. For each node, you can then create a certificate chain file which would consist of the node's public certificate, followed by the root certificate authority's public certificate. Though each node would have a different leaf certificate it uses to identify itself, the other nodes could verify its identity since their certificate chain contains an authority used to sign it.
 
 ### Testing & example
 
-To generate your own self signed certificates for testing, you must first create a certificate authority.
+To generate your own self-signed certificates for testing, you must first create a certificate authority.
 
 :::note
 For this example, whenever you are asked for input, feel free to just press enter and leave the defaults there.

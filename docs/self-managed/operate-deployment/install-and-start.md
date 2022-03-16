@@ -65,7 +65,6 @@ You’ll know Elasticsearch has started successfully when you see a message simi
 
 To run Zeebe, execute the following command:
 
-
 ```
 cd camunda-cloud-zeebe-*
 ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME=io.camunda.zeebe.exporter.ElasticsearchExporter ./bin/broker

@@ -14,13 +14,11 @@ tags:
 This best practice targets Camunda Platform 7.x only and is an appendum to [understanding human task management](../understanding-human-tasks-management/).
 :::
 
-
 ## The Camunda 7 task lifecyle
 
 Do not show the *lifecycle* of user *tasks* in the process model, they are generic and common to all processes and so can be controlled by using the [Camunda BPM task lifecycle](https://docs.camunda.org/manual/latest/webapps/tasklist/task-lifecycle/) features.
 
 ![Task lifecycle](extending-human-task-management-c7-assets/task-lifecycle.png)
-
 
 * Create: New tasks are normally created as part of *process execution*, but can be created by an *user action*, too (as standalone tasks). `taskService.newTask()`
 * Set Candidate: Typically candidates are initially set to *groups* of people as part of *process execution*, but can be requested by API, too. `taskService.addCandidateGroup(taskId, groupId)`
@@ -32,9 +30,7 @@ Do not show the *lifecycle* of user *tasks* in the process model, they are gener
 * Resolve: After having resolved the requested work individual assignees will want to *pass a delegated task back to the owner*: the original assignee. `taskService.resolveTask(String taskId)`
 * Complete: This is how you would *close the work on a task* and asking the process execution to move on `taskService.complete(String taskId, String userId)`
 
-
 ## Typical use cases
-
 
 ### Handing over tasks directly to other people
 
@@ -48,8 +44,6 @@ This can also be achieved via the Camunda tasklist:
 
 ![Task assignment](extending-human-task-management-c7-assets/assign.png)
 
-
-
 ### Delegating tasks to other people
 
 Delegate a task assigned to you by using Camunda "delegateTask". This means that somebody else is supposed to resolve (some of) the work and then pass the task back to you by resolving it. The original assignee is remembered as the "owner" of the task. A typical example is decision support: Some other employees collect information in order to prepare a decision, but the original assignee has to take that decision.
@@ -62,66 +56,58 @@ taskService.delegateTask(taskId, "gonzo");
 taskService.resolveTask(taskId);
 ```
 
-
-
 ### Notifying people about their tasks
 
-You might want to notify people about new tasks (e.g. via eMail). Do this by implementing a Camunda TaskListener, like shown in [this example](https://github.com/camunda/camunda-bpm-examples/tree/master/usertask/task-assignment-email).
+You might want to notify people about new tasks (e.g. via email). Do this by implementing a Camunda TaskListener, like shown in [this example](https://github.com/camunda/camunda-bpm-examples/tree/master/usertask/task-assignment-email).
 
 When you want to have this functionality for every user task you can use a ParseListener which adds it *everywhere*, so you don't have to adjust the BPMN model. See [BPMN Parse Listener](https://github.com/camunda/camunda-bpm-examples/tree/master/process-engine-plugin/bpmn-parse-listener) to see how this can be done.
-
-
-
 
 ### Following up on tasks after some time
 
 Follow up on tasks after some definable time by using Camunda's [Follow Up Date](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/user-task/#follow-up-date) field and use it in connection with filtering tasks.
 
-You can set a calculated follow up date by using a JUEL expression in your BPMN file
+You can set a calculated follow-up date by using a JUEL expression in your BPMN file
 
 ```xml
 <bpmn:userTask id="Check payment" camunda:followUpDate="${paymentService.getFollowUpDate()}"/>
 ```
 
-You can set a follow up date, that may be requested by the user, using the Java API
+You can set a follow-up date, that may be requested by the user, using the Java API
 
 ```java
 task.setFollowUpDate(myDate);
 ```
 
-Now you can use a task *filter* with criteria checking the follow up date and if it is due. This can be leveraged via API or in the Camunda Tasklist.
+Now you can use a task *filter* with criteria checking the follow-up date and if it is due. This can be leveraged via API or in the Camunda Tasklist.
 
 ![Follow up filter](extending-human-task-management-c7-assets/follow-up-filter.png)
-
-
 
 ### Enforcing deadlines for tasks
 
 There are different ways of enforcing deadlines for Human Tasks. Typical actions for overdue tasks are:
 
-- sending reminder mails
-- changing the assignee/group
-- creating a standalone task for a manager
+- Sending reminder mails
+- Changing the assignee/group
+- Creating a standalone task for a manager
 
-
-|                                                                    | Explicit modeling in BPMN                                                                      | Filtering due tasks                                                                        | Querying due tasks and take action                                                    | Timeout task event                                                       |
-| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-|                                                                    | Showing an escalation process path in your BPMN model (see example below)                      | Setting the Due Date field to easily filter for overdue tasks                              | Setting the Due Date field, querying it on a regular basis and take arbitrary actions | Implement a timeout event listener and configure it in the process model |
-|                                                                    | Explicit                                                                                       | Implicit                                                                                   | Implicit                                                                              | Implicit                                                                 |
-| Bulk actions possible (e.g. one mail with a list of all due tasks) |                                                                                                |                                                                                            | yes                                                                                   |                                                                          |
-| No custom component required                                       | yes                                                                                            | yes                                                                                        | Querying has to be done by external trigger or BPMN process                           | yes                                                                      |
-| Use when                                                           | The escalation is business relevant and has to be visible in the process model                 | Overdue tasks can be easily monitored via tasklist application, actions are taken manually | Sophisticated, automated actions should take place                                    | A timely escalation mechanism is desired                                 |
-| Don’t use when…​                                                   | Each and every User Task has a due date and explicit modeling would clutter your process model | You need an action to be executed automatically                                            | You do not want to run your own scheduling infrastructure                             | The escalation should be visible in the process model                    |
+|  | Explicit modeling in BPMN | Filtering due tasks | Querying due tasks and take action | Timeout task event |
+| - | - | - | - | - |
+|  | Showing an escalation process path in your BPMN model (see example below) | Setting the Due Date field to easily filter for overdue tasks | Setting the Due Date field, querying it on a regular basis and take arbitrary actions | Implement a timeout event listener and configure it in the process model |
+|  | Explicit| Implicit | Implicit    | Implicit  |
+| Bulk actions possible (e.g. one mail with a list of all due tasks) | |     | yes ||
+| No custom component required  | yes     | yes | Querying has to be done by external trigger or BPMN process      | yes    |
+| Use when | The escalation is business relevant and has to be visible in the process model | Overdue tasks can be easily monitored via tasklist application, actions are taken manually | Sophisticated, automated actions should take place       | A timely escalation mechanism is desired    |
+| Don’t use when…​ | Each and every User Task has a due date and explicit modeling would clutter your process model | You need an action to be executed automatically  | You do not want to run your own scheduling infrastructure| The escalation should be visible in the process model            |
 
 #### Modeling an escalation
 
 The following example shows how to explicitly model an escalation:
 
-<div bpmn="extending-human-task-management-c7-assets/enforcing-deadlines.bpmn" callouts="user_task_remind_boss" />
+<div bpmn="best-practices/extending-human-task-management-c7-assets/enforcing-deadlines.bpmn" callouts="user_task_remind_boss" />
 
 <span className="callout">1</span>
 
-The model shows an explicit escalation process path: if the tweet does not get reviewed within an hour, the boss needs to be reminded about the laws of the Internet age.
+The model shows an explicit escalation process path: if the tweet does not get reviewed within an hour, the boss needs to be reminded about the laws of the internet age.
 
 #### Filtering by due date
 
@@ -155,39 +141,35 @@ This example shows how to model a timeout event on a user task:
 
 Every hour, the process engine will invoke the `sendEmailReminderListener` bean to send out an email. The bean can access all task and process attributes.
 
-
 ## Enhancing task lists with business data
 
 Allow users to filter their tasks by relevant business data. Display this data right inside the task list and not just when selecting a task form. To achieve this with acceptable performance, select the implementation approach appropriate for your needs.
-
 
 ### Selecting an implementation approach
 
 To enhance your tasklist with business data, select the implementation approach appropriate for your needs.
 
-|                                                       | Camunda Process Variables                                                                                                    | Camunda Native Query API                                                                                                        | Custom MyBatis Mapping                                                                                                         | Custom Process or Task "InfoEntity"                                                                                                     |
-| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-|                                                       | Use simple process or task variables to store business data with tasks, often as an additional copy.                         | Use a native query to enhance query performance when retrieving tasks filtered by business data.                                | Use a custom database mapping to speed up retrieval of task data combined with business data.                                  | Use a custom database entity to store business data optimized for search and display.                                                   |
-| Filter with Business Data as Simple Process Variables | yes                                                                                                                          | yes                                                                                                                             | yes                                                                                                                            | yes                                                                                                                                     |
-| Filter with Business Data in Domain Database          |                                                                                                                              | yes                                                                                                                             | yes                                                                                                                            | yes                                                                                                                                     |
-| Display Business Data from Domain Database            | (only via "copy as process variable")                                                                                        | (only via "copy as process variable")                                                                                           | yes                                                                                                                            | yes                                                                                                                                     |
-| Development Effort                                    | out-of-the-box                                                                                                               | low                                                                                                                             | high                                                                                                                           | high                                                                                                                                    |
-| No Dependency on Camunda Internals                    | yes                                                                                                                          | (take care not to use hard coded table names)                                                                                   | (take care not to use hard coded table names)                                                                                  | yes                                                                                                                                     |
-| Required Know-How                                     |                                                                                                                              | SQL                                                                                                                             | SQL, Apache MyBatis, Advanced Camunda                                                                                          | Depends (e.g. JPA or JDBC)                                                                                                              |
-| Scaling / Performance                                 | Limited  (~ 5-10 criteria)                                                                                                                     | Medium (dep. on use case)                                                                                                       | Medium (dep. on use case)                                                                                                      | High (customized)                                                                                                                       |
-| Out-of-the-box usage with Camunda Tasklist            | yes                                                                                                                          |                                                                                                                                 |                                                                                                                                |                                                                                                                                         |
+| | Camunda Process Variables   | Camunda Native Query API           | Custom MyBatis Mapping            | Custom Process or Task "InfoEntity"        |
+| - | - | ---- | --- | ------------ |
+|  | Use simple process or task variables to store business data with tasks, often as an additional copy.   | Use a native query to enhance query performance when retrieving tasks filtered by business data. | Use a custom database mapping to speed up retrieval of task data combined with business data.   | Use a custom database entity to store business data optimized for search and display. |
+| Filter with Business Data as Simple Process Variables | yes       | yes | yes| yes         |
+| Filter with Business Data in Domain Database          |  | yes | yes| yes         |
+| Display Business Data from Domain Database            | (only via "copy as process variable")    | (only via "copy as process variable")       | yes| yes         |
+| Development Effort     | out-of-the-box| low | high        | high        |
+| No Dependency on Camunda Internals  | yes       | (take care not to use hard coded table names)   | (take care not to use hard coded table names)  | yes         |
+| Required Know-How      |  | SQL | SQL, Apache MyBatis, Advanced Camunda      | Depends (e.g. JPA or JDBC)                 |
+| Scaling / Performance  | Limited  (~ 5-10 criteria)  | Medium (dep. on use case)          | Medium (dep. on use case)         | High (customized)    |
+| Out-of-the-box usage with Camunda Tasklist            | yes       |     |    |             |
 
-
-### Using camunda process/task variables
+### Using Camunda process/task variables
 
 Using plain and simple process or task variables to store business data has the big *advantage* that
-you can use the out-of-the-box mechanisms. Plain and simple means to only use primary data types (e.g. String, Long, ...). Especially when using *Camunda tasklist* you can easily use process/task variables to
+you can use the out-of-the-box mechanisms. Plain and simple means to only use primary data types (e.g. String, Long, ...). Especially when using *Camunda Tasklist* you can easily use process/task variables to
 
-- *show* custom business data right inside the list, or
-- use such variables for defining re-usable *filters* which narrow down your tasklist items to the ones matching:
+- *Show* custom business data right inside the list, or
+- Use such variables for defining re-usable *filters* which narrow down your Tasklist items to the ones matching:
 
 ![Process variables](extending-human-task-management-c7-assets/process-variables.png)
-
 
 #### Including derived or calculated values
 
@@ -232,11 +214,6 @@ If you need variables only to search for tasks (but not to display attributes in
 
 When defining your Camunda tasklist filter, use the searchString variable and search in it by means of a 'LIKE' query.
 
-
-
-
-
-
 ### Using the Camunda native query API
 
 When you need to filter your tasks by business data stored in your own tables, leverage the possibility to create *native queries* via the Camunda *Java API*. Native Queries are
@@ -244,7 +221,7 @@ When you need to filter your tasks by business data stored in your own tables, l
 - expressed in *SQL* which is not limited to the Camunda Tables. However
 - the result is still *mapped to the Camunda Task entity*, so you do not have to dive into Apache MyBatis (the persistence framework used within Camunda).
 
-This means you *cannot* load data from your domain objects by native queries, you simply can express arbritrary WHERE clauses. Example:
+This means you *cannot* load data from your domain objects by native queries, you simply can express arbitrary WHERE clauses. Example:
 
 ```java
 List<Task> tasks = taskService.createNativeTaskQuery()
@@ -262,11 +239,11 @@ List<Task> tasks = taskService.createNativeTaskQuery()
 
 <span className="callout">1</span>
 
-Using native queries allows you to directly join Camunda tables with custom Business Data Tables (held in the same database) while still retrieving `Task.class` typed resultsets.
+Using native queries allows you to directly join Camunda tables with custom Business Data Tables (held in the same database) while still retrieving `Task.class` typed result sets.
 
 <span className="callout">2</span>
 
-Make sure that you do not use hard coded table names to be less dependant on Camunda Internals. However, please note that the example still uses interal details, e.g. by using column names. Your queries or table/column name mappings would need to be adapted in case these internal details change.
+Make sure that you do not use hard coded table names to be less dependent on Camunda Internals. However, please note that the example still uses internal details, e.g. by using column names. Your queries or table/column name mappings would need to be adapted in case these internal details change.
 
 
 ### Implementing a custom mybatis mapping
@@ -275,14 +252,9 @@ In case you want to not just filter tasklists for business data, but also load c
 
 Even if this is a very powerful mechanism, we normally do not recommend it, as you need to understand quite a bit about MyBatis. It will be hard to completely avoid dependencies on the Camunda database schema. The database schema is considered internal, hence this also might impose additional maintenance effort in your project for new Camunda versions.
 
-
-
-
-
-
 ### Implementing a custom *process/task info entity*
 
-For maximal flexibiliy (and best performance possibilities), create a custom ProcessInstanceEntity and/or TaskEntity designed to filter tasklists and display business data.
+For maximal flexibility (and best performance possibilities), create a custom ProcessInstanceEntity and/or TaskEntity designed to filter tasklists and display business data.
 
 Prefer a ProcessInstanceEntity over a TaskEntity as long as the business data you need is quite similar in between the different user tasks of a process definition. This way you avoid unnecessary database operations. If this is not the case you need to go for the TaskEntity as shown in the following example.
 

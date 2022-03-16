@@ -30,7 +30,7 @@ There are four roles with different levels of access rights that can be assigned
 
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
 
-1. Click **Add User**.
+1. Click **Add user**.
 ![invite user](img/collaboration/web-modeler-collaborator-invite-modal-opened.png)
 
 2. Choose a role for your new collaborator.

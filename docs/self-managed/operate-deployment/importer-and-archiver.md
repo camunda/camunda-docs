@@ -6,10 +6,10 @@ description: "Let's analyze how Operate is organized by modules to import and ar
 
 Operate consists of three modules:
 
- * **Webapp**: Contains the UI and operation executor functionality.
- * **Importer**: Responsible for importing data from Zeebe.
- * **Archiver**: Responsible for archiving "old" data (finished process instances and user operations.) See [Data retention](data-retention.md).
- 
+* **Webapp**: Contains the UI and operation executor functionality.
+* **Importer**: Responsible for importing data from Zeebe.
+* **Archiver**: Responsible for archiving "old" data (finished process instances and user operations.) See [data retention](data-retention.md).
+
 Modules can be run together or separately in any combination and can be scaled. When you run an Operate instance, by default, all modules are enabled. To disable them, use the following configuration parameters:
 
 Configuration parameter | Description | Default value
@@ -84,4 +84,3 @@ camunda.operate.importer.threadsCount | Number of threads in which data will be 
 :::note
 Parallelization of import and archiving within one node will also happen based on Zeebe partitions, meaning only configurations with (number of nodes) * (threadsCount) <= (total number of Zeebe partitions) will make sense. Too many threads and nodes will still work, but some of them will be idle.
 :::
-
