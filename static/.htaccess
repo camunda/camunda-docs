@@ -8,6 +8,8 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/reference/feel/language-guide/feel-expression$ reference/feel/language-guide/feel-expression-introduction[R=301,L]
+
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/?$ /docs/self-managed/zeebe-deployment/kubernetes/#helm [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites/?$ /docs/self-managed/zeebe-deployment/kubernetes/#prerequisites [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate/?$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist/ [R=301,L]
