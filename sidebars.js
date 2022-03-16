@@ -225,11 +225,19 @@ module.exports = {
             "components/optimize/userguide/data-sources",
             "components/optimize/userguide/creating-dashboards",
             "components/optimize/userguide/creating-reports",
+            "components/optimize/userguide/combined-reports",
             {
               "Process analysis": [
                 "components/optimize/userguide/process-analysis/overview",
                 "components/optimize/userguide/process-analysis/outlier-analysis",
                 "components/optimize/userguide/process-analysis/branch-analysis",
+                {
+                  "Report analysis": [
+                    "components/optimize/userguide/process-analysis/report-analysis/overview",
+                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                    "components/optimize/userguide/process-analysis/report-analysis/view-mode",
+                  ],
+                },
               ],
             },
             {
