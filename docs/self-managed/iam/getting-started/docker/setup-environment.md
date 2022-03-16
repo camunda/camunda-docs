@@ -4,6 +4,11 @@ title: "Setup environment"
 sidebar_label: "Step 1: Setup environment"
 ---
 
+:::caution
+IAM has been replaced with Identity for version 1.4+. Please refer to the
+[Identity documentation](../../../identity/what-is-identity.md) for ongoing support.
+:::
+
 In this part of the tutorial, we'll show you how you can use containerization to run the IAM application on your machine. Here, it is assumed you have a basic understanding of Docker Compose.
 
 :::tip

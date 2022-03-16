@@ -4,6 +4,11 @@ title: "Configuration variables"
 sidebar_label: "Configuration variables"
 ---
 
+:::caution
+IAM has been replaced with Identity for version 1.4+. Please refer to the
+[Identity documentation](../../identity/what-is-identity.md) for ongoing support.
+:::
+
 As IAM is a Spring Boot application, you may use the standard Spring [configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config) methods.
 
 ### Feature control

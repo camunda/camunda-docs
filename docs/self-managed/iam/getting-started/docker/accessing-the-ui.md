@@ -4,6 +4,11 @@ title: "Accessing the UI"
 sidebar_label: "Step 3: Accessing the UI"
 ---
 
+:::caution
+IAM has been replaced with Identity for version 1.4+. Please refer to the
+[Identity documentation](../../../identity/what-is-identity.md) for ongoing support.
+:::
+
 In this part of the tutorial, we'll show you how to access the login page and log in to the IAM component.
 
 ### Accessing the UI

@@ -4,6 +4,11 @@ title: "What is IAM?"
 sidebar_label: "What is IAM?"
 ---
 
+:::caution
+IAM has been replaced with Identity for version 1.4+. Please refer to the
+[Identity documentation](../identity/what-is-identity.md) for ongoing support.
+:::
+
 IAM is the component within the Camunda Cloud stack responsible for authentication and authorization. It allows you to:
 
 - Manage users

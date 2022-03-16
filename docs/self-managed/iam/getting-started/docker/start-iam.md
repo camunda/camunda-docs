@@ -4,6 +4,11 @@ title: "Start IAM"
 sidebar_label: "Step 2: Start IAM"
 ---
 
+:::caution
+IAM has been replaced with Identity for version 1.4+. Please refer to the
+[Identity documentation](../../../identity/what-is-identity.md) for ongoing support.
+:::
+
 ### Starting the containers
 
 There are several methods to start the containers. If you have Docker support within your IDE, consult their documentation on run configurations.

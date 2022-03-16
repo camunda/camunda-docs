@@ -4,6 +4,11 @@ title: "Making IAM production-ready"
 sidebar_label: "Making IAM production-ready"
 ---
 
+:::caution
+IAM has been replaced with Identity for version 1.4+. Please refer to the
+[Identity documentation](../../identity/what-is-identity.md) for ongoing support.
+:::
+
 The IAM component offers a quick start method to swiftly get up and running. This means we handle a few tasks to remove production level complexity. To ensure your IAM instance is ready for use in a production setting, we suggest performing the following tasks.
 
 ### Set the database encryption key variable
