@@ -21,7 +21,7 @@
     "@auth0/auth0-react": "^1.9.0",
     "@docusaurus/core": "^2.0.0-beta.15",
     "@docusaurus/preset-classic": "^2.0.0-beta.15",
-    "@mdx-js/react": "^1.6.22",
+    "@mdx-js/react": "^2.1.0",
     "clsx": "^1.1.1",
     "color": "^3.2.1",
     "docusaurus-gtm-plugin": "0.0.2",
