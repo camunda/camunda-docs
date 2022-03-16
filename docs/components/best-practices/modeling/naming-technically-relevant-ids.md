@@ -15,7 +15,7 @@ Define developer-friendly and business-relevant IDs for the process itself, as w
 
 Examine the IDs shown in the following example:
 
-<div bpmn="naming-technically-relevant-ids-assets/TweetApprovalProcess.bpmn" callouts="Participant_TweetApproval,StartEvent_NewTweetWritten,Task_ReviewTweet,Gateway_TweetApproved,SequenceFlow_ApprovedNo,BoundaryEvent_TweetDuplicated,EndEvent_TweetPublished" />
+<div bpmn="best-practices/naming-technically-relevant-ids-assets/TweetApprovalProcess.bpmn" callouts="Participant_TweetApproval,StartEvent_NewTweetWritten,Task_ReviewTweet,Gateway_TweetApproved,SequenceFlow_ApprovedNo,BoundaryEvent_TweetDuplicated,EndEvent_TweetPublished" />
 
 The following table provides you with a guideline that we would use in a context where developers are comfortable with *Java* and its typical *camelCase* naming style. You may adapt these suggestions to typical naming conventions used in your programming context.
 

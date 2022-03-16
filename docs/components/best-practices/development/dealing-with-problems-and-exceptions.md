@@ -116,7 +116,7 @@ You often encounter deviations from the "happy path" (the default scenario with 
 
 A common way to resolve these deviations is using a BPMN error event, which allows a process model to react to errors within a task. For example:
 
-<div bpmn="dealing-with-problems-and-exceptions-assets/dealing-with-exception.bpmn" callouts="boundary_event_message_not_deliverable,user_task_send_invoice_to_customer" />
+<div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/dealing-with-exception.bpmn" callouts="boundary_event_message_not_deliverable,user_task_send_invoice_to_customer" />
 
 <span className="callout">1</span>
 
@@ -132,7 +132,7 @@ Learn more about the usage of [error events](/docs/components/modeler/bpmn/error
 
 In BPMN process definitions, we can explicitly model an end event as an error.
 
-<div bpmn="dealing-with-problems-and-exceptions-assets/bpmn-error.bpmn" callouts="end_event_good_unavailable" />
+<div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/bpmn-error.bpmn" callouts="end_event_good_unavailable" />
 
 <span className="callout">1</span>
 
@@ -156,7 +156,7 @@ jobClient.newThrowErrorCommand(job)
 
 It is crucial to understand that according to the BPMN spec, a BPMN error is either handled via the process or **terminates the process instance**. It does not lead to an incident being raised. Therefore, you can and normally should always handle the BPMN error. You can, of course, also handle it in a parent process scope like in the example below:
 
-<div bpmn="dealing-with-problems-and-exceptions-assets/handling-a-bpmn-error.bpmn" callouts="boundary_event_good_unavailable" />
+<div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/handling-a-bpmn-error.bpmn" callouts="boundary_event_good_unavailable" />
 
 <span className="callout">1</span>
 
@@ -168,7 +168,7 @@ As an alternative to throwing a Java exception, you can also write a problematic
 
 From a business perspective, the underlying problem then looks less like an error and more like a result of an activity, so as a rule of thumb we deal with *expected results* of activities by means of gateways, but model exceptional errors, which *hinder us in reaching the expected result* as boundary error events.
 
-<div bpmn="dealing-with-problems-and-exceptions-assets/expected-results.bpmn" callouts="task_check_customers_creditworthiness,exclusive_gateway_customer_creditworthy,boundary_event_customer_id_non_existent" />
+<div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/expected-results.bpmn" callouts="task_check_customers_creditworthiness,exclusive_gateway_customer_creditworthy,boundary_event_customer_id_non_existent" />
 
 <span className="callout">1</span>
 
@@ -239,7 +239,7 @@ Camunda supports this through BPMN compensation events, which can link tasks wit
 Compensation is [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/) and only available in Camunda Platform 7.
 :::
 
-<div bpmn="dealing-with-problems-and-exceptions-assets/business-transaction.bpmn" callouts="add_customer,error_catch,throw_compensation,catch_compensation,deactivate_customer" />
+<div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/business-transaction.bpmn" callouts="add_customer,error_catch,throw_compensation,catch_compensation,deactivate_customer" />
 
 <span className="callout">1</span>
 

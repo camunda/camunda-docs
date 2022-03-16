@@ -24,7 +24,7 @@ Additionally, you can explicitly add the following:
 
 Consider the following example - a "Tweet Approval Process" shows start and end events as well as **milestones**:
 
-<div bpmn="reporting-about-processes-assets/TwitterReportingMilestone.bpmn" callouts="end_event_review_done_slowly,intermediate_event_tweet_approved,end_event_tweet_published,end_event_tweet_unpublished" />"
+<div bpmn="best-practices/reporting-about-processes-assets/TwitterReportingMilestone.bpmn" callouts="end_event_review_done_slowly,intermediate_event_tweet_approved,end_event_tweet_published,end_event_tweet_unpublished" />"
 
 <span className="callout">3</span>
 
@@ -48,7 +48,7 @@ Duplicate tweets will *not be published* even though they have been *approved* b
 
 When you do not (only) want to concentrate on milestones, but *phases* in your process, model the phases as subprocesses:
 
-<div bpmn="reporting-about-processes-assets/TwitterReportingPhases.bpmn" callouts="sub_process_review,sub_process_publication" />
+<div bpmn="best-practices/reporting-about-processes-assets/TwitterReportingPhases.bpmn" callouts="sub_process_review,sub_process_publication" />
 
 
 <span className="callout">1</span>

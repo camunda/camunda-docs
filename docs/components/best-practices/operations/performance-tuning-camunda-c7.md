@@ -402,7 +402,7 @@ Removing the metrics collections was a quick fix to resolve the problem.
 
 One concrete scenario is worth looking at, as customers stumble upon it regularly: doing some kind of batch processing via BPMN, where you have a high number of parallel activities in one process instance.
 
-<div bpmn="performance-tuning-camunda-c7-assets/parallel-batch.bpmn" callouts="MiTask,MiSubprocess,MiCallActivity,MiCallActivityResult" />
+<div bpmn="best-practices/performance-tuning-camunda-c7-assets/parallel-batch.bpmn" callouts="MiTask,MiSubprocess,MiCallActivity,MiCallActivityResult" />
 
 The important characteristics are
 
@@ -432,4 +432,4 @@ In this situation, the best approach is not to collect any results, at least not
 
 In any case, the situation improves if you don't wait for the parallel processing to finish. This avoids a lot of the problem described here. You can also use workarounds like polling for all subprocesses to finish. Obviously, this is not only harder to understand from a business perspective, but also requires more effort to develop, so it should only be used if you run into serious performance trouble.
 
-<div bpmn="performance-tuning-camunda-c7-assets/parallel-batch-fire-and-forget.bpmn" callouts="" />
+<div bpmn="best-practices/performance-tuning-camunda-c7-assets/parallel-batch-fire-and-forget.bpmn" callouts="" />

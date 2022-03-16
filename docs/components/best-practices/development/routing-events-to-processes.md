@@ -32,7 +32,7 @@ Several BPMN start events can be used to start a new process instance.
 | | [Learn more](/docs/components/modeler/bpmn/none-events/) | [Learn more](/docs/components/modeler/bpmn/message-events/) | [Learn more](/docs/components/modeler/bpmn/timer-events/) | | |
 
 
-<div bpmn="routing-events-to-processes-assets/start-events.bpmn" callouts="NoneStartEvent,MessageStartEvent1,MessageStartEvent2" />
+<div bpmn="best-practices/routing-events-to-processes-assets/start-events.bpmn" callouts="NoneStartEvent,MessageStartEvent1,MessageStartEvent2" />
 
 <span className="callout">1</span>
 
@@ -60,7 +60,7 @@ Several BPMN intermediate events (and the receive task) can be used to make a pr
 
 Consider this example:
 
-<div bpmn="routing-events-to-processes-assets/intermediate-events.bpmn" callouts="payment-received,order-canceled" />
+<div bpmn="best-practices/routing-events-to-processes-assets/intermediate-events.bpmn" callouts="payment-received,order-canceled" />
 
 <span className="callout">1</span>
 
@@ -76,7 +76,7 @@ Events relevant for the process execution can occur from within the workflow eng
 
 Consider the following loan application process - or at least the initial part with which the applicant's income is confirmed either via the employer or via the last income tax statement.
 
-<div bpmn="routing-events-to-processes-assets/loan-application.bpmn" callouts="timer-event,human-task,conditional-event" />
+<div bpmn="best-practices/routing-events-to-processes-assets/loan-application.bpmn" callouts="timer-event,human-task,conditional-event" />
 
 <span className="callout">1</span>
 
@@ -296,7 +296,7 @@ instances you want to migrate to a new Camunda process instances **in a defined 
 
 In these cases, you can start a process instance in arbitrary activities using the API.
 
-<div bpmn="routing-events-to-processes-assets/start-events.bpmn" callouts="service_task_publish_on_twitter" />
+<div bpmn="best-practices/routing-events-to-processes-assets/start-events.bpmn" callouts="service_task_publish_on_twitter" />
 
 <span className="callout">1</span>
 
@@ -317,7 +317,7 @@ In this section, we give examples for *technical messages*, which are received f
 other systems, typically by leveraging technologies like e.g. SOAP, REST, JMS or
 other.
 
-<div bpmn="routing-events-to-processes-assets/invoice-external-system.bpmn" callouts="start_event_invoice_received" />
+<div bpmn="best-practices/routing-events-to-processes-assets/invoice-external-system.bpmn" callouts="start_event_invoice_received" />
 
 <span className="callout">1</span>
 
@@ -456,7 +456,7 @@ If you have an ESB in your architecture, you may want to start process instances
 
 If you use the **Camunda BPMN Framework** as described in the book ["Real Life BPMN"](https://www.amazon.de/dp/B07XC6R17R/) you will typically have message start events (even if you only have a single start event) to connect the surrounding human flows to the technical flow via messages:
 
-<div bpmn="routing-events-to-processes-assets/collaboration.bpmn" callouts="MessageStartEvent1" />
+<div bpmn="best-practices/routing-events-to-processes-assets/collaboration.bpmn" callouts="MessageStartEvent1" />
 
 <span className="callout">1</span>
 
@@ -468,7 +468,7 @@ If there is *exactly one message start event* for the whole process definition, 
 
 If messages are exchanged between different processes deployed in the workflow engine you have to implement the communication yourself by writing some code that starts a new process instance.
 
-<div bpmn="routing-events-to-processes-assets/invoice-another-process.bpmn" callouts="send_task_route_event, send_task_2" />
+<div bpmn="best-practices/routing-events-to-processes-assets/invoice-another-process.bpmn" callouts="send_task_route_event, send_task_2" />
 
 <span className="callout">1</span>
 
@@ -509,7 +509,7 @@ public void notifyOrder(@ZeebeVariable String orderId, @ZeebeVariable String pay
 
 Sometimes explicit "user tasks" are not an appropriate choice to involve a human user to participate in a process: the user does not want to see a task in Tasklist, but rather have the possibility to actively trigger some action right at the time when it becomes necessary from a business perspective. The difference is which event gives the *active trigger*.
 
-<div bpmn="routing-events-to-processes-assets/invoice-human-user.bpmn" callouts="intermediate_event_order_paid,task_check_payments,task_mark_order_as_paid" />
+<div bpmn="best-practices/routing-events-to-processes-assets/invoice-human-user.bpmn" callouts="intermediate_event_order_paid,task_check_payments,task_mark_order_as_paid" />
 
 <span className="callout">1</span>
 
