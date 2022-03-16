@@ -10,7 +10,7 @@ Following certain steps when evaluating and introducing process automation helps
 
 When introducing Camunda as a new process automation platform inside your company, the following process has shown to work best:
 
-<div bpmn="following-the-customer-success-path-assets/customer-success.bpmn" callouts="Evaluate, Identify, Poc, DevelopPilot, PrepareOps, Review, ImplementNext, BuildPlatform, ProcessArchitecture" />
+<div bpmn="best-practices/following-the-customer-success-path-assets/customer-success.bpmn" callouts="Evaluate, Identify, Poc, DevelopPilot, PrepareOps, Review, ImplementNext, BuildPlatform, ProcessArchitecture" />
 
 <span className="callout">1</span>
 
@@ -70,7 +70,7 @@ Much more important than concrete numbers is an educated gut feeling. Therefore,
 
 A process model can be seen as a central artifact for estimation purpose, as it indicates and visually maintains a lot of the influencing factors mentioned above.
 
-<div bpmn="following-the-customer-success-path-assets/invoice.bpmn" callouts="invoiceReceived,assignApprover,approveInvoice,reviewInvoice,prepareBankTransfer,archiveInvoice" />
+<div bpmn="best-practices/following-the-customer-success-path-assets/invoice.bpmn" callouts="invoiceReceived,assignApprover,approveInvoice,reviewInvoice,prepareBankTransfer,archiveInvoice" />
 
 Here are the figures you could estimate:
 

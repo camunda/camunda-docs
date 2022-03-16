@@ -1,14 +1,14 @@
 ---
 id: variable-import-plugin
-title: "Variable Import Customization"
+title: "Variable import customization"
 description: "Enrich or filter the variable import so you can customize which and how variables are imported to Optimize."
 ---
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
-Before implementing the plugin make sure that you have [setup your environment](./plugin-system.md/#setup-your-environment).
+Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
 
-This feature enables you to enrich or filter the variable import, e.g., if variables in Camunda contain IDs of variables in another database and you would like resolve those references to the actual values.
+This feature enables you to enrich or filter the variable import, e.g., if variables in Camunda contain IDs of variables in another database and you would like to resolve those references to the actual values.
 
 The Optimize plugin system contains the following interface:
 
@@ -19,12 +19,13 @@ public interface VariableImportAdapter {
 }
 ```
 
-Implement this to adjust the variables to be imported. Given is a list of variables that would be imported if no further action is performed. The returned list is the customized list with the enriched/filtered variables that will be imported. To create new variable instances, you can use the `PluginVariableDto` class as data transfer object (dto), which is also contained in the plugin system.
+Implement this to adjust the variables to be imported. Given is a list of variables that would be imported if no further action is performed. The returned list is the customized list with the enriched/filtered variables that will be imported. To create new variable instances, you can use the `PluginVariableDto` class as data transfer object (DTO), which is also contained in the plugin system.
 
-Please note that:
+:::note
+All DTO class members need to be set in order, otherwise the variable is ignored, as this may lead to problems during data analysis.
 
-- all dto class members need to be set in order, otherwise the variable is ignored, as this may lead to problems during data analysis.
-- the data from the engine is imported in batches. This means the `adaptVariables` method is called once per batch rather than once for all data.  For instance, if you have 100 000 variables in total and the batch size is 10 000 then the plugin function will be called 10 times.
+The data from the engine is imported in batches. This means the `adaptVariables` method is called once per batch rather than once for all data. For instance, if you have 100,000 variables in total and the batch size is 10,000, the plugin function will be called 10 times.
+:::
 
 The following shows an example of a customization of the variable import in the package `optimize.plugin`, where every string variable is assigned the value 'foo':
 
@@ -51,7 +52,7 @@ import java.util.List;
 }
 ```
 
-Now when `MyCustomVariableImportAdapter`, packaged as a jar file, is added to Optimize's `plugin` folder, we just have to add the following property to the `environment-config.yaml` file to make the plugin work:
+Now when `MyCustomVariableImportAdapter`, packaged as a `jar` file, is added to Optimize's `plugin` folder, we just have to add the following property to the `environment-config.yaml` file to make the plugin work:
 
 ```yaml
 plugin:

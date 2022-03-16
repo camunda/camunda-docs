@@ -2,23 +2,21 @@
 title: "Writing good workers"
 ---
 
-[Service tasks](/docs/components/modeler/bpmn/service-tasks/) within Camunda Cloud require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes, that you might want to 
+[Service tasks](/docs/components/modeler/bpmn/service-tasks/) within Camunda Cloud require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes that you might want to:
 
 1. Write all glue code in one application, separating different classes or functions for the different task types.
 2. Think about idempotency and read or write as little data as possible from/to the process.
 3. Write non-blocking (reactive, async) code for your workers if you need to parallelize work. Use blocking code only for use cases where all work can be executed in a serialized manner. Don’t think about configuring thread pools yourself.
 
-
-
 ## Organizing glue code and workers in process solutions
 
-Assume the following simple order fulfillment process, that needs to invoke three synchronous REST calls to the responsible systems (payment, inventory, and shipping) via custom glue code:
+Assume the following order fulfillment process, that needs to invoke three synchronous REST calls to the responsible systems (payment, inventory, and shipping) via custom glue code:
 
 ![order fulfillment example](writing-good-workers-assets/order-fulfillment-process.png)
 
 Should you create three different applications with a worker for one task type each, or would it be better to process all task types within one application?
 
-As a rule of thumb, we recommend implementing **all glue code in one application**, which then is the so-called **process solution** (as described in [Practical Process Automation](https://processautomationbook.com/)). This process solution might also include the BPMN process model itself, deployed during startup. Thus, you create a self-contained application that is easy to version, test, integrate and deploy.
+As a rule of thumb, we recommend implementing **all glue code in one application**, which then is the so-called **process solution** (as described in [Practical Process Automation](https://processautomationbook.com/)). This process solution might also include the BPMN process model itself, deployed during startup. Thus, you create a self-contained application that is easy to version, test, integrate, and deploy.
 
 ![Process solution](writing-good-workers-assets/process-solution.png)
 Figure taken from [Practical Process Automation](https://processautomationbook.com/)
@@ -43,27 +41,25 @@ public class FetchGoodsWorker {
 }
 ```
 
-Of course, you can also pull the glue code for all task types into one class. Technically it does not make any difference and some people find that structure in their code easier. This is fine. If in doubt, the default is to create one class per task type.
+You can also pull the glue code for all task types into one class. Technically, it does not make any difference and some people find that structure in their code easier. If in doubt, the default is to create one class per task type.
 
 There are exceptions when you might not want to have all glue code within one application:
 
-1.  You need to specifically control the load for one task type, like *scaling it out* or *throttling it*. For example, if one service task is doing PDF generation, which is compute-intensive, you might need to scale it much more than all other glue code. On the other hand, it could also mean limiting the number of parallel generation jobs due to licensing limitations of your third-party PDF generation library.
-2.  You want to write glue code in different programming languages, for example, because writing specific logic in a specific language is much easier (like using Python for certain AI calculations or Java for certain mainframe integrations).
+1. You need to specifically control the load for one task type, like *scaling it out* or *throttling it*. For example, if one service task is doing PDF generation, which is compute-intensive, you might need to scale it much more than all other glue code. On the other hand, it could also mean limiting the number of parallel generation jobs due to licensing limitations of your third-party PDF generation library.
+2. You want to write glue code in different programming languages, for example, because writing specific logic in a specific language is much easier (like using Python for certain AI calculations or Java for certain mainframe integrations).
 
-In this case, you would spread your workers into different applications. Most often, you might still have a main process solution, that will also still deploy the process model. Only specific workers are carved out.
+In this case, you would spread your workers into different applications. Most often, you might still have a main process solution that will also still deploy the process model. Only specific workers are carved out.
 
 ## Thinking about transactions, exceptions and idempotency of workers
 
 Make sure to visit [Dealing With Problems and Exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding how workers deal with transactions and exceptions to the happy path.
 
-
 ## Data minimization in workers
 
-If performance or efficiency matters in your scenario, there are two rules about data in your workers you should be aware of.
+If performance or efficiency matters in your scenario, there are two rules about data in your workers you should be aware of:
 
-First, minimize what data you read for your job. In your job client, you can define which process variables you will need in your worker, and only these will be read and transferred, saving resources on the broker as well as network bandwidth.
-
-Second, minimize what data you write on job completion. You should explicitly not transmit the input variables of a job upon completion, which might happen easily if you simply reuse the map of variables you received as input for submitting the result.
+1. Minimize what data you read for your job. In your job client, you can define which process variables you will need in your worker, and only these will be read and transferred, saving resources on the broker as well as network bandwidth.
+2. Minimize what data you write on job completion. You should explicitly not transmit the input variables of a job upon completion, which might happen easily if you simply reuse the map of variables you received as input for submitting the result.
 
 Not transmitting all variables saves resources and bandwidth, but serves another purpose as well: upon job completion, these variables are written to the process and might overwrite existing variables. If you have parallel paths in your process (e.g. [parallel gateway](/docs/components/modeler/bpmn//parallel-gateways/), [multiple instance](/docs/components/modeler/bpmn/multi-instance/)) this can lead to race conditions that you need to think about. The less data you write, the smaller the problem.
 
@@ -71,9 +67,9 @@ Not transmitting all variables saves resources and bandwidth, but serves another
 
 If you need to process a lot of jobs, you need to think about optimizing your workers.
 
-Workers can control the number of jobs retrieved at once. In a busy system it makes sense to not only request one job, but probably 20 or even up to 50 jobs in one remote request to the workflow engine, and then start working on them locally. In a lesser utilized system long polling is used to avoid delays when a job comes in. Long polling means the client’s request to fetch jobs is blocked until a job is received (or some timeout hits). So the client does not constantly need to ask.
+Workers can control the number of jobs retrieved at once. In a busy system it makes sense to not only request one job, but probably 20 or even up to 50 jobs in one remote request to the workflow engine, and then start working on them locally. In a lesser utilized system, long polling is used to avoid delays when a job comes in. Long polling means the client’s request to fetch jobs is blocked until a job is received (or some timeout hits). Therefore, the client does not constantly need to ask.
 
-Anyway, you will have jobs in your local application that need to be processed. The worst-case in terms of scalability is that you process the jobs sequentially one after the other. While this sounds bad, it is still a valid approach for many use cases, as most projects do not need any parallel processing in the worker code as they simply do not care whether a job is executed a second earlier or later. Think of a business process that is executed only some hundred times per day and includes mostly human tasks — a sequential worker is totally sufficient. In this case, you can skip this paragraph section. 
+You will have jobs in your local application that need to be processed. The worst case in terms of scalability is that you process the jobs sequentially one after the other. While this sounds bad, it is still a valid approach for many use cases, as most projects do not need any parallel processing in the worker code as they simply do not care whether a job is executed a second earlier or later. Think of a business process that is executed only some hundred times per day and includes mostly human tasks — a sequential worker is totally sufficient. In this case, you can skip this paragraph section.
 
 However, you might need to do better and process jobs in parallel and utilize the full power of your worker’s CPUs. In such a case, you should read on and understand the difference between writing blocking and non-blocking code.
 
@@ -91,7 +87,7 @@ The downside of using thread pools is that you need to have a good understanding
 
 Reactive programming uses a different approach to achieve parallel work: extract the waiting part from your code.
 
-With a reactive HTTP client you will write code to issue the REST request, but then not block for the response. Instead, you define a callback as to what happens if the request returns. Most of you know this from JavaScript programming. Thus, the runtime can optimize the utilization of threads itself, without you the developer, even knowing.
+With a reactive HTTP client you will write code to issue the REST request, but then not block for the response. Instead, you define a callback as to what happens if the request returns. Most of you know this from JavaScript programming. Thus, the runtime can optimize the utilization of threads itself, without you the developer even knowing.
 
 ### Recommendation
 
@@ -99,7 +95,7 @@ In general, using reactive programming is favorable in most situations where par
 
 ## Client library examples
 
-Let’s go through a few code examples using Java, NodeJS, and C#, using the corresponding client libraries. All [code is available on Github](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution) and a [walk through recording is available on YouTube](https://youtu.be/ZHKz9l5yG3Q).
+Let’s go through a few code examples using Java, NodeJS, and C#, using the corresponding client libraries. All [code is available on GitHub](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution) and a [walk through recording is available on YouTube](https://youtu.be/ZHKz9l5yG3Q).
 
 ### Java
 
@@ -112,7 +108,7 @@ client.newWorker().jobType("retrieveMoney")
   }).open();
 ```
 
-The [Spring integration](https://github.com/zeebe-io/spring-zeebe/) provides a more elegant way of writing this, but also [uses a normal worker from the Java client](https://github.com/zeebe-io/spring-zeebe/blob/master/client/spring-zeebe/src/main/java/io/camunda/zeebe/spring/client/config/processor/ZeebeWorkerPostProcessor.java#L56) underneath. In this case your code might look like this:
+The [Spring integration](https://github.com/zeebe-io/spring-zeebe/) provides a more elegant way of writing this, but also [uses a normal worker from the Java client](https://github.com/zeebe-io/spring-zeebe/blob/master/client/spring-zeebe/src/main/java/io/camunda/zeebe/spring/client/config/processor/ZeebeWorkerPostProcessor.java#L56) underneath. In this case, your code might look like this:
 
 ```java
 @ZeebeWorker(type = "retrieveMoney")
@@ -129,13 +125,13 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
   .build();
 ```
 
-or in Spring Zeebe:
+Or, in Spring Zeebe:
 
 ```properties
 zeebe.client.worker.threads=5
 ```
 
-Now, you can **leverage blocking code** for your REST call, like for example the RestTemplate inside Spring:
+Now, you can **leverage blocking code** for your REST call, for example, the `RestTemplate` inside Spring:
 
 ```java
 @ZeebeWorker(type = "rest")
@@ -164,7 +160,7 @@ Doing so **limits** the degree of parallelism to the number of threads you have 
 10:57:00.764 [pool-4-thread-1] …finished. Complete Job…10:57:00.805 [pool-4-thread-1] …completed (3). Current throughput (jobs/s ): 3
 ```
 
-If you experience a large number of jobs, and these jobs are waiting for IO the whole time — as REST calls do — you should think about using **reactive programming**. For the REST call this means for example the Spring WebClient:
+If you experience a large number of jobs, and these jobs are waiting for IO the whole time — as REST calls do — you should think about using **reactive programming**. For the REST call, this means for example the Spring WebClient:
 
 ```java
 @ZeebeWorker(type = "rest")
@@ -229,19 +225,17 @@ With this reactive glue code, you don’t need to worry about thread pools in th
 10:54:08.167 [ault-executor-0] …completed (55). Current throughput (jobs/s ): 55, Max: 55
 ```
 
-These observations yield in the following recommendations:
+These observations yield the following recommendations:
 
 | | Blocking Code | Reactive Code |
 | - | - | - |
-| Parallelism | Some parallelism is possibly by a thread pool, which is used by the client library. The default thread pool size is one, which needs to be adjuted in the config in order to scale | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform |
+| Parallelism | Some parallelism is possibly by a thread pool, which is used by the client library. The default thread pool size is one, which needs to be adjusted in the config in order to scale. | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform. |
 | **Use when** | You don't have requirements to process jobs in parallel | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST)
-| | Your developers are not familiar with reactive programming | This should be the **default** if your developer are familiar with reactive programming |
-
-
+| | Your developers are not familiar with reactive programming | This should be the **default** if your developer are familiar with reactive programming. |
 
 ### NodeJs client
 
-Using the [NodeJS client](https://github.com/camunda-cloud/camunda-cloud-get-started/tree/master/nodejs) your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
+Using the [Node.JS client](https://github.com/camunda-cloud/camunda-cloud-get-started/tree/master/nodejs), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
 
 ```js
 zbc.createWorker({
@@ -264,18 +258,18 @@ zbc.createWorker({
 
 This is **reactive code**. And a really interesting observation is that reactive programming is so deep in the JavaScript language that it is impossible to write blocking code, even code that looks blocking is still [executed in a non-blocking fashion](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/nodejs-blocking.log).
 
-NodeJs code scales pretty well and there is no specific thread pool defined or necessary. The Camunda Cloud NodeJS client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L28).
+Node.JS code scales pretty well and there is no specific thread pool defined or necessary. The Camunda Cloud Node.JS client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L28).
 
 This makes the recommendation very straight-forward:
 
 ||Reactive code|
-| Parallelism | Event loop provided by NodeJS |
-| **Use when** | Alwas |
+| Parallelism | Event loop provided by Node.JS |
+| **Use when** | Always |
 
 
 ### C#
 
-Using the [C# client](https://github.com/camunda-cloud/camunda-cloud-get-started/tree/master/csharp) you can write worker code like this:
+Using the [C# client](https://github.com/camunda-cloud/camunda-cloud-get-started/tree/master/csharp), you can write worker code like this:
 
 ```csharp
 zeebeClient.NewWorker()
@@ -286,9 +280,9 @@ zeebeClient.NewWorker()
   .Open()
 ```
 
-You can see that you can set a number of handler threads. Interestingly, this is a naming legacy. The C# client uses the [Dataflow Task Parallel Library (TPL)](https://docs.microsoft.com/en-us/dotnet/standard/parallel-programming/dataflow-task-parallel-library) to implement parallelism, so the thread count configures the degree of parallelism allowed to TPL in reality. Internally this is implemented as a mixture of event loop and threading, which is an implementation detail of TPL. This is a great foundation to scale the worker.
+You can see that you can set a number of handler threads. Interestingly, this is a naming legacy. The C# client uses the [Dataflow Task Parallel Library (TPL)](https://docs.microsoft.com/en-us/dotnet/standard/parallel-programming/dataflow-task-parallel-library) to implement parallelism, so the thread count configures the degree of parallelism allowed to TPL in reality. Internally, this is implemented as a mixture of event loop and threading, which is an implementation detail of TPL. This is a great foundation to scale the worker.
 
-You need to provide a Handler. For this handler you have to make sure to write non-blocking code, the following example shows this for a REST call using the [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0) library:
+You need to provide a handler. For this handler, you have to make sure to write non-blocking code; the following example shows this for a REST call using the [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0) library:
 
 ```csharp
 private static async void NonBlockingJobHandler(IJobClient jobClient, IJob activatedJob)
@@ -320,7 +314,7 @@ private static void NonBlockingJobHandler(IJobClient jobClient, IJob activatedJo
 }
 ```
 
-In contrast to NodeJS you can also write **blocking code** in C# if you want to (or more probable: it happens by accident):
+In contrast to Node.JS, you can also write **blocking code** in C# if you want to (or more probable: it happens by accident):
 
 ```csharp
 private static async void BlockingJobHandler(IJobClient jobClient, IJob activatedJob)
@@ -335,9 +329,8 @@ private static async void BlockingJobHandler(IJobClient jobClient, IJob activate
 
 The degree of parallelism is down to one again, [according to the logs](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/dotnet-blocking-thread-1.log). So C# is comparable to Java, just that the typically used C# libraries are reactive by default, whereas Java still knows just too many blocking libraries. The recommendations for C#:
 
-| | Blocking Code | Reactive Code |
+| | Blocking code | Reactive code |
 | - | - | - |
-| Parallelism | Some parallelism is possibly by a thread pool, which is used by the client library. | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform |
-| **Use when** | **Rarely**, and only if you don't have requirements to process jobs in parallel or might even want to reduce the level or prallelism. | This should be the **default**
+| Parallelism | Some parallelism is possibly by a thread pool, which is used by the client library. | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform. |
+| **Use when** | **Rarely**, and only if you don't have requirements to process jobs in parallel or might even want to reduce the level or parallelism. | This should be the **default**
 | | Your developers are not familiar with reactive programming | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST) |
-

@@ -29,7 +29,7 @@ But the hardware sizing depends more on the **number of BPMN tasks** in a proces
 
 If you already know your future process model, you can use this to count the number of tasks for your process. For example, the following onboarding process contains five service tasks in a typical execution.
 
-<div bpmn="sizing-your-environment-assets/customer_onboarding.bpmn" callouts="task1,task2,task3,task4,task5" />
+<div bpmn="best-practices/sizing-your-environment-assets/customer_onboarding.bpmn" callouts="task1,task2,task3,task4,task5" />
 
 If you don't yet know the number of service tasks, we recommend to assume 10 service tasks as a rule of thumb.
 

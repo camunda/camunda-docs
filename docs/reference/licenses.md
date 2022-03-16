@@ -14,7 +14,7 @@ Licenses and license information for Zeebe can be found on the Zeebe project [RE
 
 ### Desktop Modeler
 
-The source code of the Desktop Modeler is licensed under the MIT license as stated in the [`LICENSE` file](https://github.com/camunda/desktop-modeler/blob/master/LICENSE) in the root of the source code repository. This file is also shipped as `LICENSE.camunda-modeler.txt` with each modeler distribution.
+The source code of the Desktop Modeler is licensed under the MIT license as stated in the [`LICENSE` file](https://github.com/camunda/camunda-modeler/blob/master/LICENSE) in the root of the source code repository. This file is also shipped as `LICENSE.camunda-modeler.txt` with each modeler distribution.
 
 ### Camunda Cloud Documentation
 

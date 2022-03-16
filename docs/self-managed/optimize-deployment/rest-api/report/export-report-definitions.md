@@ -1,19 +1,20 @@
 ---
 id: export-report-definitions
-title: "Export Report Definitions"
-description: "The REST API to export Report definitions."
+title: "Export report definitions"
+description: "The REST API to export report definitions."
 ---
 
 ## Purpose
 
-This API allows users to export Report definitions which can later be imported into another Optimize system. The Reports to be exported may be within a Collection or private entities, the API has access to both.  
+This API allows users to export report definitions which can later be imported into another Optimize system. The reports to be exported may be within a collection or private entities, the API has access to both.
+
 The obtained list of entity exports can be imported into other Optimize systems either using the dedicated [import API](../../import-entities) or [via UI](../../../../../components/optimize/userguide/additional-features/export-import#importing-entities).
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 POST `/api/public/export/report/definition/json`
 
-## Request Headers
+## Request headers
 
 The following request headers have to be provided with every request:
 
@@ -23,7 +24,7 @@ The following request headers have to be provided with every request:
 
 * Only required if not set as a query parameter
 
-## Query Parameters
+## Query parameters
 
 The following query parameters have to be provided with every request:
 
@@ -33,30 +34,30 @@ The following query parameters have to be provided with every request:
 
 * Only required if not set as a request header
 
-## Request Body
+## Request body
 
-The request body should contain a JSON array of Report IDs to be exported.
+The request body should contain a JSON array of report IDs to be exported.
 
 ## Result
 
-The response contains a list of exported Report definitions.
+The response contains a list of exported report definitions.
 
-## Response Codes
+## Response codes
 
-Possible HTTP Response Status codes:
+Possible HTTP response status codes:
 
 |Code|Description|
 |--- |--- |
 |204|Request successful.|
 |401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|404|At least one of the given Report IDs does not exist.|
+|404|At least one of the given report IDs does not exist.|
 |500|Some error occurred while processing the request, best check the Optimize log.|
 
 ## Example
 
-### Export two Reports
+### Export two reports
 
-Assuming you want to export the two Reports with IDs `123` and `456` and have configured the accessToken `mySecret`, this is what it would look like:
+Assuming you want to export the two reports with IDs `123` and `456` and have configured the accessToken `mySecret`, this is what it would look like:
 
 POST `/api/public/export/report/definition/json?access_token=mySecret`
 
@@ -70,7 +71,7 @@ with request body:
 
 Status 200.
 
-##### Response Content
+##### Response content
 
 ```
 [

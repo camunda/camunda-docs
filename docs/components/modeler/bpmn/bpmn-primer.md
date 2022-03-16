@@ -119,7 +119,7 @@ The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about.md).
 ![overview](./assets/modeler.gif)
 
 - [Download page](https://camunda.com/download/modeler/)
-- [Source code repository](https://github.com/camunda/desktop-modeler)
+- [Source code repository](https://github.com/camunda/camunda-modeler)
 
 ## BPMN elements
 

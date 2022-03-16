@@ -14,6 +14,7 @@ module.exports = {
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
+    "guides/getting-started-orchestrate-human-tasks",
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/automating-a-process-using-bpmn",
@@ -99,7 +100,23 @@ module.exports = {
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-cloud",
             "components/modeler/desktop-modeler/start-instance",
-            "components/modeler/desktop-modeler/element-templates/desktop-modeler-element-templates",
+            {
+              "Element templates": [
+                "components/modeler/desktop-modeler/element-templates/about-templates",
+                "components/modeler/desktop-modeler/element-templates/configuring-templates",
+                "components/modeler/desktop-modeler/element-templates/using-templates",
+                "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/additional-resources"
+              ],
+            },
+            {
+              "Additional configuration": [
+                "components/modeler/desktop-modeler/flags/flags",
+                "components/modeler/desktop-modeler/plugins/plugins",
+                "components/modeler/desktop-modeler/search-paths/search-paths",
+                "components/modeler/desktop-modeler/telemetry/telemetry"
+              ],
+            }
           ],
         },
         {
@@ -156,6 +173,11 @@ module.exports = {
         {
           "DMN": [
             "components/modeler/dmn/desktop-modeler-dmn",
+          ],
+        },
+        {
+          "Forms": [
+            "components/modeler/forms/camunda-forms-reference",
           ],
         },
       ],
@@ -250,13 +272,13 @@ module.exports = {
         "components/best-practices/overview",
         {
           "Project Management": [
-            "components/best-practices/management/following-the-customer-success-path",            
+            "components/best-practices/management/following-the-customer-success-path",
             "components/best-practices/management/doing-a-proper-poc",
           ],
           "Architecture": [
-            "components/best-practices/architecture/deciding-about-your-stack", 
-            "components/best-practices/architecture/sizing-your-environment", 
-            "components/best-practices/architecture/understanding-human-tasks-management", 
+            "components/best-practices/architecture/deciding-about-your-stack",
+            "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/understanding-human-tasks-management",
           ],
           "Development": [
             "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
@@ -278,17 +300,17 @@ module.exports = {
           ],
           "Operations": [
             "components/best-practices/operations/versioning-process-definitions",
-            "components/best-practices/operations/reporting-about-processes",            
+            "components/best-practices/operations/reporting-about-processes",
           ],
           "Camunda 7 specific": [
-            "components/best-practices/architecture/deciding-about-your-stack-c7", 
-            "components/best-practices/architecture/sizing-your-environment-c7", 
+            "components/best-practices/architecture/deciding-about-your-stack-c7",
+            "components/best-practices/architecture/sizing-your-environment-c7",
             "components/best-practices/development/invoking-services-from-the-process-c7",
             "components/best-practices/development/understanding-transaction-handling-c7",
             "components/best-practices/operations/operating-camunda-c7",
             "components/best-practices/operations/performance-tuning-camunda-c7",
             "components/best-practices/operations/securing-camunda-c7",
-            "components/best-practices/architecture/extending-human-task-management-c7", 
+            "components/best-practices/architecture/extending-human-task-management-c7",
           ],
     },
       ],
@@ -414,6 +436,7 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
             "self-managed/zeebe-deployment/operations/rebalancing",
+            "self-managed/zeebe-deployment/operations/backups"
           ],
         },
       ],
