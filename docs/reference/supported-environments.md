@@ -1,10 +1,10 @@
 ---
 id: supported-environments
 title: "Supported environments"
-description: "Find out where to run Camunda Cloud components for SaaS and Self-Managed, including Optimize for both Camunda Cloud and Camunda Platform 7."
+description: "Find out where to run Camunda Platform 8 components for SaaS and Self-Managed, including Optimize for both Camunda Platform 8 and Camunda Platform 7."
 ---
 
-## Camunda Cloud SaaS & Self-Managed
+## Camunda Platform 8 SaaS & Self-Managed
 
 
 
@@ -27,7 +27,7 @@ _Hint: There are more [community-maintained Camunda Platform 8 clients](./apis-c
 - Mac OS X 10.11
 - Ubuntu LTS (latest)
 
-## Camunda Cloud Self-Managed
+## Camunda Platform 8 Self-Managed
 
 We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes environment. 
 We provide officially supported [Helm Charts](./self-managed/zeebe-deployment/kubernetes/helm/installing-helm/) for this.
