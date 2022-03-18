@@ -11,13 +11,14 @@ required maven coordinates to add the DMN engine as a dependency to your
 project. It then shows how to configure and build a new DMN engine instance.
 
 # Maven Coordinates
+[//]: # Update this section's links to point to things within docs.camunda.io, they've been stubbed out for now.
 
 The Camunda DMN engine is released to Maven Central.
 
-Start by importing the [`camunda-engine-dmn` BOM](/get-started/apache-maven/#camunda-dmn-engine-bom)
+Start by importing the [`camunda-engine-dmn` BOM](/#)
 to ensure correct dependency management.
 
-Next, include the [`camunda-engine-dmn`](/get-started/apache-maven/#camunda-dmn)
+Next, include the [`camunda-engine-dmn`](/#)
 artifact in the `dependencies` section.
 
 # Building a DMN Engine
