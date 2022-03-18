@@ -390,7 +390,7 @@ Gateways rarely need migration. The relevant configuration is mostly in the expr
 
 ### Expressions
 
-Expressions need to be in [FEEL (frienfly-enough expression language)](/components/concepts/expressions.md#the-expression-language) instead of [JUEL (Java unified expression language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/).
+Expressions need to be in [FEEL (friendly-enough expression language)](/components/concepts/expressions.md#the-expression-language) instead of [JUEL (Java unified expression language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/).
 
 Migrating simple expressions is doable (as you can see in [these test cases](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.test.js)), but not all expressions can be automatically converted.
 
