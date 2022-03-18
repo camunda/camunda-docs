@@ -7,7 +7,7 @@ function adjustUrl(url) {
   }
   */
 
-  return "/bpmn/best-practices/" + url;
+  return "/bpmn/" + url;
 }
 
 async function renderBpmn(index, element) {

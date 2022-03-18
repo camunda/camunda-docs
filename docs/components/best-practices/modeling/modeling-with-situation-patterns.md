@@ -18,7 +18,7 @@ In this scenario, the shop clearly did not implement the escalation of the delay
 
 ### Option 1: Using event-based gateways
 
-<div bpmn="modeling-with-situation-patterns-assets/multi-step-escalation-using-event-based-gateways.bpmn" callouts="gateway_step_1,gateway_step_2" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/multi-step-escalation-using-event-based-gateways.bpmn" callouts="gateway_step_1,gateway_step_2" />
 
 <span className="callout">1</span>
 
@@ -42,7 +42,7 @@ You might want to use that pattern when modeling *simple two phase escalations*.
 
 ### Option 2: Using gateways forming a loop
 
-<div bpmn="modeling-with-situation-patterns-assets/multi-step-escalation-using-gateways-forming-a-loop.bpmn" callouts="gateway_1,gateway_2" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/multi-step-escalation-using-gateways-forming-a-loop.bpmn" callouts="gateway_1,gateway_2" />
 
 <span className="callout">1</span>
 
@@ -66,7 +66,7 @@ You might want to use that pattern when modeling *escalations with multiple step
 
 ### Option 3: Using boundary events
 
-<div bpmn="modeling-with-situation-patterns-assets/multi-step-escalation-using-boundary-events.bpmn" callouts="receive_task,boundary_event_2,boundary_event_1" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/multi-step-escalation-using-boundary-events.bpmn" callouts="receive_task,boundary_event_2,boundary_event_1" />
 
 <span className="callout">1</span>
 
@@ -106,7 +106,7 @@ All of the following modeling patterns assume that the two or more tasks needed 
 
 ### Option 1: Using separate tasks
 
-<div bpmn="modeling-with-situation-patterns-assets/four-eyes-principle-using-separate-tasks.bpmn" callouts="task_1,task_2" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/four-eyes-principle-using-separate-tasks.bpmn" callouts="task_1,task_2" />
 
 <span className="callout">1</span>
 
@@ -128,13 +128,13 @@ You might want to use that pattern when modeling the need for a *second set* of 
 
 While it is theoretically possible to model separate, explicit approval tasks in parallel, we do not recommend such patterns due to readability concerns.
 
-<div bpmn="modeling-with-situation-patterns-assets/four-eyes-principle-using-separate-tasks-in-parallel.bpmn" thumbs="down" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/four-eyes-principle-using-separate-tasks-in-parallel.bpmn" thumbs="down" />
 
 As a better alternative when looking for *maximization of speed*, see [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
 
 ### Option 2: Using a loop
 
-<div bpmn="modeling-with-situation-patterns-assets/four-eyes-principle-using-a-loop.bpmn" callouts="task,gateway_forming_loop" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/four-eyes-principle-using-a-loop.bpmn" callouts="task,gateway_forming_loop" />
 
 <span className="callout">1</span>
 
@@ -156,7 +156,7 @@ You might want to use that pattern when modeling the need for *multiple sets* of
 
 ### Option 3: Using a multi-instance task
 
-<div bpmn="modeling-with-situation-patterns-assets/four-eyes-principle-using-a-multi-instance-task.bpmn" callouts="task,boundary_event" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/four-eyes-principle-using-a-multi-instance-task.bpmn" callouts="task,boundary_event" />
 
 <span className="callout">1</span>
 
@@ -188,7 +188,7 @@ While the following section concentrates on the aspects of modeling KPIs, you mi
 
 ### Option 1: Showing milestones
 
-<div bpmn="modeling-with-situation-patterns-assets/measuring-key-performance-indicators-using-events.bpmn" callouts="business-rule-task,gateway_1,intermediate_event_automatically,intermediate_event_manually,end_event_accepted,end_event_rejected" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/measuring-key-performance-indicators-using-events.bpmn" callouts="business-rule-task,gateway_1,intermediate_event_automatically,intermediate_event_manually,end_event_accepted,end_event_rejected" />
 
 <span className="callout">1</span>
 
@@ -224,7 +224,7 @@ Furthermore, we will be able to measure the *handling time* needed for the user 
 
 As an alternative or supplement to using events, you might also use subprocesses to emphasize certain phases in your process.
 
-<div bpmn="modeling-with-situation-patterns-assets/measuring-key-performance-indicators-using-sub-processes.bpmn" callouts="sub_process" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/measuring-key-performance-indicators-using-sub-processes.bpmn" callouts="sub_process" />
 
 <span className="callout">1</span>
 
@@ -242,7 +242,7 @@ We sometimes also call that pattern **business rules** in BPMN.
 
 ### Showing decision logic in the diagram?
 
-<div bpmn="modeling-with-situation-patterns-assets/evaluating-decisions-in-processes-showing-decision-logic.bpmn" thumbs="down" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/evaluating-decisions-in-processes-showing-decision-logic.bpmn" thumbs="down" />
 
 When modeling business processes, we focus on the flow of work and just use gateways to show that following tasks or results fundamentally differ from each other. However, in the example above, the business analyst used gateways to model the logic underlying a decision, which clearly is considered to be an anti-pattern!
 
@@ -250,7 +250,7 @@ It does not make sense to model the rules determining a decision inside the BPMN
 
 ### Using a single task for a decision
 
-<div bpmn="modeling-with-situation-patterns-assets/evaluating-decisions-in-processes-using-a-single-task.bpmn" callouts="business_rule_task,data_based_gateway" thumbs="up" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/evaluating-decisions-in-processes-using-a-single-task.bpmn" callouts="business_rule_task,data_based_gateway" thumbs="up" />
 
 <span className="callout">1</span>
 
@@ -268,7 +268,7 @@ You model a certain step in a process and wonder about undesired outcomes and ot
 
 ### Option 1: Using gateways to check for undesired results
 
-<div bpmn="modeling-with-situation-patterns-assets/distinguishing-undesired-results-from-fatal-problems-1.bpmn" callouts="data_based_gateway" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/distinguishing-undesired-results-from-fatal-problems-1.bpmn" callouts="data_based_gateway" />
 
 <span className="callout">1</span>
 
@@ -276,7 +276,7 @@ Showing the check for the applicant's creditworthiness as a gateway also informs
 
 ### Option 2: Using boundary error events to check for fatal problems
 
-<div bpmn="modeling-with-situation-patterns-assets/distinguishing-undesired-results-from-fatal-problems-2.bpmn" callouts="error_boundary_event" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/distinguishing-undesired-results-from-fatal-problems-2.bpmn" callouts="error_boundary_event" />
 
 <span className="callout">1</span>
 
@@ -288,7 +288,7 @@ The fact that both problems (an unknown applicant number or an applicant which t
 
 What we want to consider to be a valid result for a process step depends on assumptions and definitions. We might have chosen to model the process above with slightly different execution semantics, while achieving the same business semantics:
 
-<div bpmn="modeling-with-situation-patterns-assets/distinguishing-undesired-results-from-fatal-problems-3.bpmn" callouts="error_boundary_event" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/distinguishing-undesired-results-from-fatal-problems-3.bpmn" callouts="error_boundary_event" />
 
 <span className="callout">1</span>
 
@@ -308,7 +308,7 @@ We sometimes also call that pattern **first come, first serve**.
 
 ### Using a multi-instance task
 
-<div bpmn="modeling-with-situation-patterns-assets/asking-multiple-recipients-for-a-single-reply.bpmn" callouts="send_task_mi,catching_message_event" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/asking-multiple-recipients-for-a-single-reply.bpmn" callouts="send_task_mi,catching_message_event" />
 
 <span className="callout">1</span>
 
@@ -330,7 +330,7 @@ We sometimes also call that pattern simply the **1-to-n problem**.
 
 ### Using data stores and multi instance activities
 
-<div bpmn="modeling-with-situation-patterns-assets/processing-a-batch-of-objects.bpmn" callouts="start_event_advice_needed,task_record_billable_hours,data_store,start_event_monthly,task_determine_billable_clients,subprocess_client_invoicing_text_annotation,task_check_and_correct_timesheet_entry,end_event_client_invoiced" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/processing-a-batch-of-objects.bpmn" callouts="start_event_advice_needed,task_record_billable_hours,data_store,start_event_monthly,task_determine_billable_clients,subprocess_client_invoicing_text_annotation,task_check_and_correct_timesheet_entry,end_event_client_invoiced" />
 
 <span className="callout">1</span>
 
@@ -372,7 +372,7 @@ You need to process a request, but need to make sure that you don't process seve
 
 ### Using message events
 
-<div bpmn="modeling-with-situation-patterns-assets/concurring-dependent-instances.bpmn" callouts="creditworthiness-check-active,determine-active-creditworthiness-check,inform-waiting-instances,creditworthiness-determined" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/concurring-dependent-instances.bpmn" callouts="creditworthiness-check-active,determine-active-creditworthiness-check,inform-waiting-instances,creditworthiness-determined" />
 
 <span className="callout">1</span>
 
@@ -396,7 +396,7 @@ The model explicitly shows separate steps (*determine* and *inform* waiting inst
 
 While using timer events can be a feasible approach in case you want to avoid communication between instances, we do not recommend it. For example, one downside is that such solutions cause delays and overhead due to the perdiodical queries and the loop.
 
-<div bpmn="modeling-with-situation-patterns-assets/concurring-dependent-instances-timer.bpmn" callouts="creditworthiness-check-activated,creditworthiness-check-deferred,creditworthiness-checked,determine-active-creditworthiness-check-2" thumbs="down" />
+<div bpmn="best-practices/modeling-with-situation-patterns-assets/concurring-dependent-instances-timer.bpmn" callouts="creditworthiness-check-activated,creditworthiness-check-deferred,creditworthiness-checked,determine-active-creditworthiness-check-2" thumbs="down" />
 
 <span className="callout">1</span>
 

@@ -1,19 +1,20 @@
 ---
 id: export-dashboard-definitions
-title: "Export Dashboard Definitions"
-description: "The REST API to export Dashboard definitions."
+title: "Export dashboard definitions"
+description: "The REST API to export dashboard definitions."
 ---
 
 ## Purpose
 
-This API allows users to export Dashboard definitions which can later be imported into another Optimize system. Note that exporting a Dashboard also exports all Reports contained within the Dashboard. The Dashboards to be exported may be within a Collection or private entities, the API has access to both.  
+This API allows users to export dashboard definitions which can later be imported into another Optimize system. Note that exporting a dashboard also exports all reports contained within the dashboard. The dashboards to be exported may be within a Collection or private entities, the API has access to both.
+
 The obtained list of entity exports can be imported into other Optimize systems either using the dedicated [import API](../../import-entities) or [via UI](../../../../../components/optimize/userguide/additional-features/export-import#importing-entities).
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 POST `/api/public/export/dashboard/definition/json`
 
-## Request Headers
+## Request headers
 
 The following request headers have to be provided with every request:
 
@@ -23,7 +24,7 @@ The following request headers have to be provided with every request:
 
 * Only required if not set as a query parameter
 
-## Query Parameters
+## Query parameters
 
 The following query parameters have to be provided with every request:
 
@@ -33,30 +34,30 @@ The following query parameters have to be provided with every request:
 
 * Only required if not set as a request header
 
-## Request Body
+## Request body
 
-The request body should contain a JSON array of Dashboard IDs to be exported.
+The request body should contain a JSON array of dashboard IDs to be exported.
 
 ## Result
 
-The response contains a list of exported Dashboard definitions as well as all Report Definitions contained within the Dashboards.
+The response contains a list of exported dashboard definitions as well as all report definitions contained within the dashboards.
 
-## Response Codes
+## Response codes
 
-Possible HTTP Response Status codes:
+Possible HTTP response status codes:
 
 |Code|Description|
 |--- |--- |
 |204|Request successful.|
 |401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|404|At least one of the given Dashboard IDs does not exist.|
+|404|At least one of the given dashboard IDs does not exist.|
 |500|Some error occurred while processing the request, best check the Optimize log.|
 
 ## Example
 
-### Export two Dashboards
+### Export two dashboards
 
-Assuming you want to export the two Dashboards with IDs `123` and `456` and have configured the accessToken `mySecret`, this is what it would look like:
+Assuming you want to export the two dashboards with IDs `123` and `456` and have configured the accessToken `mySecret`, this is what it would look like:
 
 POST `/api/public/export/dashboard/definition/json?access_token=mySecret`
 
@@ -70,9 +71,9 @@ with request body:
 
 Status 200.
 
-##### Response Content
+##### Response content
 
-The response contains the two exported Dashboard definitions as well as all three process Reports contained within the two Dashboards.
+The response contains the two exported dashboard definitions as well as all three process reports contained within the two dashboards.
 
 ```
 [

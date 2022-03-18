@@ -18,7 +18,7 @@ Try to carefully study and fully understand the concepts of wait states (save po
 
 Every time we use the Camunda Platform 7 API to ask the workflow engine to do something (like e.g. starting a process, completing a task, signaling an execution), the engine will advance in the process until it reaches *wait states* on each active path of execution, which can be:
 
-<div bpmn="understanding-transaction-handling-c7-assets/wait-states.bpmn" callouts="receive_task,intermediate_catching_event_timer,event_based_gateway,business_rule_task,end_event_message" />
+<div bpmn="best-practices/understanding-transaction-handling-c7-assets/wait-states.bpmn" callouts="receive_task,intermediate_catching_event_timer,event_based_gateway,business_rule_task,end_event_message" />
 
 <span className="callout">1</span>
 
@@ -57,7 +57,7 @@ Sometimes when we refer to "transactions" in processes, we refer to a very diffe
 
 You have fine grained control over transaction boundaries by introducing *save points*  additionally to [wait states](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#wait-states), that are always a save point. Use the `asyncBefore='true'` and `asyncAfter='true'` attributes in your process definition BPMN XML. The process state will then be persisted at these points and a background job executor will make sure that it is continued asynchronously.
 
-<div bpmn="understanding-transaction-handling-c7-assets/additional-save-points.bpmn" callouts="user_task_write_tweet, service_task_check_explicit_language,service_task_publish_tweet" />
+<div bpmn="best-practices/understanding-transaction-handling-c7-assets/additional-save-points.bpmn" callouts="user_task_write_tweet, service_task_check_explicit_language,service_task_publish_tweet" />
 
 <span className="callout">1</span>
 
@@ -79,7 +79,7 @@ Pay special attention to the consequence of these save points with regards to re
 
 A typical *rule of thumb*, especially when doing a lot of service orchestration, is to *mark every service task* being *asynchronous*.
 
-<div bpmn="understanding-transaction-handling-c7-assets/service-tasks-async.bpmn" />
+<div bpmn="best-practices/understanding-transaction-handling-c7-assets/service-tasks-async.bpmn" />
 
 The downside is that the jobs slightly increase the overall resource consumption. But this is often worth it, as it has a couple of advantages for operations:
 
@@ -162,7 +162,7 @@ From the perspective of a user trying to complete the task, it appears *impossib
 
 But hindering the user to complete the user task can also be just what you want. Consider e.g. the possibility to *validate task form input* via a subsequent service:
 
-<div bpmn="understanding-transaction-handling-c7-assets/validating-data.bpmn" callouts="user_task_provide_data,service_task_validate_data" />
+<div bpmn="best-practices/understanding-transaction-handling-c7-assets/validating-data.bpmn" callouts="user_task_provide_data,service_task_validate_data" />
 
 <span className="callout">1</span>
 

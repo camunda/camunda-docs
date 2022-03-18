@@ -3,7 +3,7 @@ id: quickstart
 title: "Quickstart"
 ---
 
-This quickstart guide introduces you the main concepts of Zeebe in five steps without the need to write a single line of code.
+This quickstart guide introduces you to the main concepts of Zeebe in five steps without the need to write a single line of code.
 
 ## Step 1: Download the Zeebe distribution
 
@@ -19,7 +19,7 @@ cd zeebe-broker-X.Y.Z/
 :::note
 Some command examples might not work on Windows if you use cmd or
 Powershell. For Windows users, we recommend using a bash-like shell, i.e. Git
-Bash, Cygwin or MinGW for this guide.
+Bash, Cygwin, or MinGW for this guide.
 :::
 
 Inside the Zeebe directory, you'll find multiple directories:
@@ -59,7 +59,7 @@ Zeebe CLI `zbctl`.
 We can now check the status of the Zeebe broker.
 
 :::note
-By default, the embedded gateway listens to a plaintext connection but the clients are configured to use TLS. Therefore, all `zbctl` commands in the quickstart will specify the `--insecure` flag.
+By default, the embedded gateway listens to a plaintext connection, but the clients are configured to use TLS. Therefore, all `zbctl` commands in the quickstart will specify the `--insecure` flag.
 :::
 
 ```
@@ -142,7 +142,7 @@ If a job is available for a given process instance, the worker activates it, com
 
 ## Step 4: Create a process instance
 
-After the process is deployed, we can create a new instances of it. Every
+After the process is deployed, we can create a new instance of it. Every
 instance of a process is a single execution of the process. To create a new
 instance, we must specify the process ID from the BPMN file. In
 our case, the ID is `order-process` as defined in the `order-process.bpmn`:
@@ -154,11 +154,14 @@ our case, the ID is `order-process` as defined in the `order-process.bpmn`:
 Every instance of a process normally processes some kind of data. We can
 specify the initial data of the instance as variables when we start the instance.
 
-> **Note:** Windows users who want to execute this command using cmd or Powershell
-> have to escape the variables differently.
->
-> - cmd: `"{\"orderId\": 1234}"`
-> - Powershell: `'{"\"orderId"\": 1234}'`
+:::note
+Windows users who want to execute this command using cmd or Powershell
+have to escape the variables differently.
+
+- cmd: `"{\"orderId\": 1234}"`
+- Powershell: `'{"\"orderId"\": 1234}'`
+
+:::
 
 ```
 ./bin/zbctl --insecure create instance order-process --variables '{"orderId": 1234}'
@@ -180,16 +183,16 @@ created for every task which is reached during process instance execution. To fi
 and completed by a [job worker](/components/concepts/job-workers.md).
 
 A job worker is a long-living process which repeatedly tries to activate jobs for a given job type and completes them after executing its business logic. The `zbctl` also provides a command to spawn simple job workers using an external command or
-script. 
+script.
 
 The job worker receives for every job the process instance variables as JSON object on
 `stdin` and has to return its result also as a JSON object on `stdout` if it
 handled the job successfully.
 
-In this example, we use the unix command `cat`, which outputs what it receives
+In this example, we use the Unix command `cat`, which outputs what it receives
 on `stdin`. To complete a process instance we now must create a job worker for
 each of the three task types from the process definition: `payment-service`,
-`inventory-service`. and `shipment-service`.
+`inventory-service`, and `shipment-service`.
 
 :::note
 For Windows users, this command does not work with cmd as the `cat` command does not exist. We recommend using Powershell or a bash-like shell to execute this command.

@@ -8,7 +8,7 @@ The IAM component offers a quick start method to swiftly get up and running. Thi
 
 ### Set the database encryption key variable
 
-The IAM component stores certain information requiring encryption. By default, if no value is set for the `DATABASE_ENCRYPTION_KEY` environmental variable during each start of the IAM service, a value is generated. 
+The IAM component stores certain information requiring encryption. By default, if no value is set for the `DATABASE_ENCRYPTION_KEY` environmental variable during each start of the IAM service, a value is generated.
 
 To maintain a consistent value, set the `DATABASE_ENCRYPTION_KEY` environmental variable to an alpha-numeric string.
 
@@ -18,14 +18,13 @@ We suggest a string length of 32 characters.
 
 ### Set the token signing key variable
 
-The IAM component generates authentication tokens. To do this, a signing key must be used. By default, if no signing key is provided during each start of the IAM service, one is automatically generated. 
+The IAM component generates authentication tokens. To do this, a signing key must be used. By default, if no signing key is provided during each start of the IAM service, one is automatically generated.
 
 To use authentication tokens generated before a service restart, set the `TOKEN_SIGNING_KEY` environmental value
 to a JSON formatted output from a signing key generator.
 
 :::tip
-Unsure how to generate a JSON Web Key? Visit the 
-[Nimbus JOSE + JWT documentation](https://connect2id.com/products/nimbus-jose-jwt/generator) for examples.
+Unsure how to generate a JSON Web Key? Visit the [Nimbus JOSE + JWT documentation](https://connect2id.com/products/nimbus-jose-jwt/generator) for examples.
 :::
 
 ### Enable access control

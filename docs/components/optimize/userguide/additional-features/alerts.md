@@ -4,13 +4,11 @@ title: Alerts
 description: Get a notification as soon as your system is behaving in an unexpected manner.
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
 :::note
 You must configure the email service to receive notifications. See the [technical guide](../../../../self-managed/optimize-deployment/setup/installation.md) for which properties need to be defined.
 :::
 
-Optimize's alerting functionality can be used to notify you when your report hits a predefined critical value. You can create alerts for any number reports that exist within a collection. Inside the collection, navigate to the **Alerts** tab to see all alerts defined for reports in this collection. You can manage an alert by moving the mouse over the alert entry and clicking the **Edit** or **Delete** buttons in the context menu on the right side of the page.
+Optimize's alerting functionality can be used to notify you when your report hits a predefined critical value. You can create alerts for any number reports that exist within a collection. Inside the collection, navigate to the **Alerts** tab to create and view all alerts defined for reports in this collection. You can manage an alert by moving the mouse over the alert entry and clicking the **Edit** or **Delete** buttons in the context menu on the right side of the page.
 
 ![Alert overview](./img/alerts-overview.png)
 

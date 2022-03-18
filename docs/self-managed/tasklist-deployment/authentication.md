@@ -15,7 +15,7 @@ By default, user storage in Elasticsearch is enabled.
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
 
-The **username**, **password** and **roles** for one user may be set in application.yml:
+The **username**, **password**, and **roles** for one user may be set in application.yml:
 
 ```
 camunda.tasklist:
@@ -35,7 +35,6 @@ By default, three users are created:
 
 More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. The password must be encoded with a strong BCrypt hashing function.
 
-
 ## IAM
 
 [IAM](../../iam/what-is-iam/) provides authentication and authorization functionality along with user management.
@@ -51,6 +50,7 @@ export SPRING_PROFILES_ACTIVE=iam-auth
 ```
 
 ### Configure IAM
+
 IAM requires the following parameters:
 
 Parameter name | Description | Example value
@@ -63,7 +63,7 @@ camunda.tasklist.iam.clientSecret | Similar to a password for the application. |
 We provide two different permissions over IAM: read or write.
 To configure the authorization, you are required to create two different permissions:
 
-Permission value | Description 
+Permission value | Description
 ----------------|-------------
 `read:*` | Grants the user the permission to access, view, and read the data in the application.
 `write:*` | Grants the user the permission to perform operations.

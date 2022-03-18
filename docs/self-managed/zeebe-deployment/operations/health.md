@@ -6,7 +6,7 @@ description: "This document analyzes health status checks and responses."
 
 ## Broker
 
-Zeebe broker exposes three http endpoints to query its health status:
+Zeebe broker exposes three HTTP endpoints to query its health status:
 
 - Startup check
 - Ready check
@@ -18,9 +18,10 @@ Startup check endpoint is exposed via `http://{zeebe-broker}:{zeebe.broker.netwo
 This endpoint returns an empty 204 response. If it is not ready, it will return a 503 error.
 
 A broker has successfully started when:
-1. The broker has found other brokers in the cluster.
-1. All partitions owned by this broker have started and participate in replication.
-2. Other necessary services have started.
+
+- The broker has found other brokers in the cluster.
+- All partitions owned by this broker have started and participate in replication.
+- Other necessary services have started.
 
 A successful startup does not mean the broker is ready to process requests.
 The broker is ready only after startup has successfully completed.

@@ -94,7 +94,7 @@ When calculating database size, you should also clarify if and how often you wil
 
 The real space occupied within your database depends very much on your database product and configuration. There is no easy formula to calculate this space. Instead, this section gives an example:
 
-<div bpmn="sizing-your-environment-assets/invoice.bpmn" callouts="reviewInvoice,invoiceNotProcessed" />
+<div bpmn="best-practices/sizing-your-environment-assets/invoice.bpmn" callouts="reviewInvoice,invoiceNotProcessed" />
 
 <span className="callout">1</span>
 

@@ -17,7 +17,7 @@ Although, by default `OAuthCredentialsProvider` is configured with to use a Camu
 
 As previously mentioned, the `CredentialProvider`'s purpose is to modify the gRPC headers with an authorization method such that a reverse proxy sitting in front of the gateway can validate them.
 
-The interface consists of an `applyCredentials` method and a `shouldRetryRequest` method. The first method is called for each gRPC call and takes a map of headers to which it should add credentials. The second method is called whenever a gRPC call fails and takes in the error that caused the failure which is then used to decide whether or not the request should be retried.
+The interface consists of an `applyCredentials` method and a `shouldRetryRequest` method. The first method is called for each gRPC call and takes a map of headers to which it should add credentials. The second method is called whenever a gRPC call fails and takes in the error that caused the failure which is then used to decide whether the request should be retried.
 
 The following sections implement simple custom provider in Java and Go.
 
@@ -44,7 +44,7 @@ public class MyCredentialsProvider implements CredentialsProvider {
 }
 ```
 
-After implementing the `CredentialsProvider`, we can simply provide it when building a client:
+After implementing the `CredentialsProvider`, we can provide it when building a client:
 
 ```java
 public class SecureClient {
@@ -132,7 +132,7 @@ public class AuthorizedClient {
 }
 ```
 
-For security reasons, client secrets should not be hardcoded. Therefore, it's recommended to use environment variables to pass client secrets into Zeebe. Although several variables are supported, the ones required to set up a minimal client are `ZEEBE_CLIENT_ID` and `ZEEBE_CLIENT_SECRET`. After setting these variables to the correct values, the following would be equivalent to the previous code:
+For security reasons, client secrets should not be hard coded. Therefore, it's recommended to use environment variables to pass client secrets into Zeebe. Although several variables are supported, the ones required to set up a minimal client are `ZEEBE_CLIENT_ID` and `ZEEBE_CLIENT_SECRET`. After setting these variables to the correct values, the following would be equivalent to the previous code:
 
 ```java
 public class AuthorizedClient {
@@ -150,10 +150,11 @@ public class AuthorizedClient {
 The client creates an `OAuthCredentialProvider` with the credentials specified through the environment variables and the audience is extracted from the address specified through the `ZeebeClientBuilder`.
 
 :::note
-Zeebe's Java client will not prevent you from adding credentials to gRPC calls while using an insecure connection, but you should be aware that doing so will expose your access token by transmiting it in plaintext.
+Zeebe's Java client will not prevent you from adding credentials to gRPC calls while using an insecure connection, but you should be aware that doing so will expose your access token by transmitting it in plaintext.
 :::
 
 ### Go
+
 ```go
 package main
 
@@ -224,7 +225,6 @@ func main() {
 :::note
 Like the Java client, the Go client will not prevent you from adding credentials to gRPC calls while using an insecure connection, but doing so will expose your access token.
 :::
-
 
 ### Environment variables
 

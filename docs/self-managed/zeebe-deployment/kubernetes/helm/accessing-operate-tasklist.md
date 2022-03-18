@@ -10,17 +10,27 @@ To interact with the services inside the Camunda Cloud cluster, use `port-forwar
 > kubectl port-forward svc/<RELEASE NAME>-zeebe-gateway 26500:26500
 ```
 
+<<<<<<< HEAD
 Now, you can connect and execute operations against your new Camunda Cloud cluster. This allows you to use `zbctl` as a 
 command line interface to read and create resources inside the Zeebe broker. You can install `zbctl` via [npm](https://www.npmjs.com/package/zbctl).
 
+=======
+Now, you can connect and execute operations against your new Camunda Cloud cluster. This allows you to use `zbctl` as a command line interface to read and create resources inside the Zeebe broker. You can install `zbctl` via [npm](https://www.npmjs.com/package/zbctl).
+>>>>>>> master
 
 :::note
 Notice that you need to keep `port-forward` running to communicate with the remote cluster.
 :::
 
+<<<<<<< HEAD
 Note that accessing the Zeebe cluster directly using `kubectl port-forward` is recommended for development purposes. 
 By default, the Camunda Cloud Helm charts are not exposing the Zeebe cluster via the ingress controller. If you want to use `zbctl` or a 
 local client/worker from outside the Kubernetes cluster, rely on `kubectl port-forward` to the Zeebe cluster to communicate.
+=======
+Note thay accessing the Zeebe cluster directly using `kubectl port-forward` is recommended for development purposes.
+
+By default, the Camunda Cloud Helm charts are not exposing the Zeebe cluster via the ingress controller. If you want to use `zbctl` or a local client/worker from outside the Kubernetes cluster, rely on `kubectl port-forward` to the Zeebe cluster to communicate.
+>>>>>>> master
 
 You can find the external IP by running the following:
 
@@ -35,8 +45,12 @@ NAME                               TYPE           CLUSTER-IP       EXTERNAL-IP  
 <RELEASE NAME>-zeebe-gateway       LoadBalancer   10.109.108.4     <pending>     80:30497/TCP,443:32232/TCP               63m
 ```
 
+<<<<<<< HEAD
 The `<pending>` under the `EXTERNAL-IP` column should change to a public IP that you (and other users) should be able to 
 access from outside the cluster. Check your cloud provider's specific configuration if that does not work.
+=======
+The `<pending>` under the `EXTERNAL-IP` column should change to a public IP that you (and other users) should be able to access from outside the cluster. Check your cloud provider's specific configuration if that does not work.
+>>>>>>> master
 
 Then, you can access Operate pointing your browser at `http://<EXTERNAL-IP>`.
 

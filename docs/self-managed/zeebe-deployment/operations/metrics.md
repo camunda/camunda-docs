@@ -35,7 +35,7 @@ Configure the HTTP server to export the metrics in the [configuration file](../c
 
 ## Connecting Prometheus
 
-As explained, Zeebe exposes the metrics over a HTTP server. The default port is `9600`.
+As explained, Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
 
 Add the following entry to your `prometheus.yml`:
 
@@ -77,9 +77,9 @@ Most metrics have the following common label:
 
 **Metrics related to performance:**
 
-Zeebe has a back-pressure mechanism by which it rejects requests when it receives more requests than it can handle without incurring high processing latency.
+Zeebe has a backpressure mechanism by which it rejects requests when it receives more requests than it can handle without incurring high processing latency.
 
-Monitor back-pressure and processing latency of the commands using the following metrics:
+Monitor backpressure and processing latency of the commands using the following metrics:
 
 - `zeebe_dropped_request_count_total`: The number of user requests rejected by the broker due to backpressure.
 - `zeebe_backpressure_requests_limit`: The limit for the number of inflight requests used for backpressure.

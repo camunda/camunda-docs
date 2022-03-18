@@ -1,18 +1,18 @@
 ---
 id: get-report-ids
-title: "Get Report IDs"
-description: "The REST API to retrieve all Report IDs in a given Collection."
+title: "Get report IDs"
+description: "The REST API to retrieve all report IDs in a given collection."
 ---
 
 ## Purpose
 
-This API allows users to retrieve all Report IDs from a given Collection.
+This API allows users to retrieve all report IDs from a given collection.
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 GET `/api/public/report`
 
-## Request Headers
+## Request headers
 
 The following request headers have to be provided with every request:
 
@@ -22,29 +22,28 @@ The following request headers have to be provided with every request:
 
 * Only required if not set as a query parameter
 
-## Query Parameters
+## Query parameters
 
 The following query parameters have to be provided with every request:
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
 |access_token|REQUIRED*|[Authorization](../../authorization)|
-|collectionId|REQUIRED|The ID of the Collection for which to retrieve the Report IDs.|
-
+|collectionId|REQUIRED|The ID of the Collection for which to retrieve the report IDs.|
 
 * Only required if not set as a request header
 
-## Request Body
+## Request body
 
 No request body is required.
 
 ## Result
 
-The response contains a list of IDs of the Reports existing in the Collection with the given Collection ID.
+The response contains a list of IDs of the reports existing in the collection with the given collection ID.
 
-## Response Codes
+## Response codes
 
-Possible HTTP Response Status codes:
+Possible HTTP response status codes:
 
 |Code|Description|
 |--- |--- |
@@ -54,8 +53,9 @@ Possible HTTP Response Status codes:
 
 ## Example
 
-#### Retrieve all Report IDs from a Collection
-Assuming you want to retrieve all Report IDs in the Collection with the ID `1234` and have configured the accessToken `mySecret`, this is what it would look like:
+#### Retrieve all report IDs from a collection
+
+Assuming you want to retrieve all report IDs in the collection with the ID `1234` and have configured the accessToken `mySecret`, this is what it would look like:
 
 GET `/api/public/report?collectionId=1234&access_token=mySecret`
 
@@ -63,7 +63,7 @@ GET `/api/public/report?collectionId=1234&access_token=mySecret`
 
 Status 200.
 
-###### Response Content
+###### Response content
 
 ```
 [

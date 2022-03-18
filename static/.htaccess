@@ -8,6 +8,9 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# !!!! FIX THIS BEFORE RELEASE !!!!
+RewriteRule ^docs/reference/feel/language-guide/feel-expression/?$ /docs/reference/feel/what-is-feel/ [R=301,L]
+
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/?$ /docs/self-managed/zeebe-deployment/kubernetes/#helm [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites/?$ /docs/self-managed/zeebe-deployment/kubernetes/#prerequisites [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate/?$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist/ [R=301,L]
@@ -80,6 +83,11 @@ RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
 
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authorization/?$ /docs/self-managed/zeebe-deployment/security/client-authorization/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs/self-managed/zeebe-deployment/security/secure-client-communication/ [R=301,L]
+
+RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
+
+# Static resource page for the camunda desktop modeler
+RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
