@@ -14,7 +14,7 @@ description: "Find out where to run Camunda Platform 8 components for SaaS and S
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, MacOS, and Linux (latest)
 
-_Hint: There are more [community-maintained Camunda Platform 8 clients](./apis-clients/community-clients/)._
+_Hint: There are more [community-maintained Camunda Platform 8 clients](./apis-clients/community-clients/index.md)._
 
 ### Web Browser
 
@@ -30,7 +30,7 @@ _Hint: There are more [community-maintained Camunda Platform 8 clients](./apis-c
 ## Camunda Platform 8 Self-Managed
 
 We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes environment. 
-We provide officially supported [Helm Charts](./self-managed/zeebe-deployment/kubernetes/helm/installing-helm/) for this.
+We provide officially supported [Helm Charts](./self-managed/zeebe-deployment/kubernetes/helm/installing-helm.md) for this.
 
 If you cannot run in a Kubernetes environment, you may [run the distribution](https://github.com/camunda-cloud/zeebe/releases) with Java directly. 
 
