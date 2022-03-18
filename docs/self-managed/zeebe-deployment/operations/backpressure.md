@@ -4,17 +4,18 @@ title: "Backpressure"
 description: "This document outlines an overview of backpressure and its accompanying assets."
 ---
 
-When a broker receives a client request, it is written to the _event stream_ first (see section [Internal processing](/components/zeebe/technical-concepts/internal-processing.md) for details), and processed later by the stream processor.
+When a broker receives a client request, it is written to the **event stream** first (see section [internal processing](/components/zeebe/technical-concepts/internal-processing.md) for details), and processed later by the stream processor.
+
 If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command.
-If the broker keeps accepting new requests from the client, the back log increases and the processing latency can grow beyond an acceptable time.
+If the broker keeps accepting new requests from the client, the backlog increases and the processing latency can grow beyond an acceptable time.
 
 To avoid such problems, Zeebe employs a backpressure mechanism. When the broker receives more requests than it can process with an acceptable latency, it rejects some requests (see [technical error handling](/apis-clients/grpc.md#technical-error-handling)).
 
 ### Terminology
 
-- _RTT_ - The time between when the request is accepted by the broker and when the response to the request is sent back to the gateway.
-- _inflight count_ - The number of requests accepted by the broker but the response is not yet sent.
-- _limit_ - Maximum number of flight requests. When the inflight count is above the limit, any new incoming request is rejected.
+- **RTT** - The time between when the request is accepted by the broker and when the response to the request is sent back to the gateway.
+- **Inflight count** - The number of requests accepted by the broker but the response is not yet sent.
+- **Limit** - Maximum number of flight requests. When the inflight count is above the limit, any new incoming request is rejected.
 
 :::note
 The limit and inflight count are calculated per partition.
@@ -43,8 +44,8 @@ the limit will be reduced according to the configured _backoffRatio_.
 Vegas is an adaptive limit algorithm based on TCP Vegas congestion control algorithm.
 Vegas estimates a base latency as the minimum observed latency.
 This base RTT is the expected latency when there is no load.
-Whenever the RTT deviates from the base RTT, a new limit is calculated based on the vegas algorithm.
-Vegas allows to configure two parameters - _alpha_ and _beta_.
+Whenever the RTT deviates from the base RTT, a new limit is calculated based on the Vegas algorithm.
+Vegas allows you to configure two parameters - _alpha_ and _beta_.
 The values correspond to a queue size estimated by the Vegas algorithm based on the observed RTT, base RTT, and current limit.
 When the queue size is below _alpha_, the limit is increased.
 When the queue size is above _beta_, the limit is decreased.
@@ -53,7 +54,7 @@ When the queue size is above _beta_, the limit is decreased.
 
 Gradient is an adaptive limit algorithm that dynamically calculates the limit based on observed RTT.
 In the gradient algorithm, the limit is adjusted based on the gradient of observed RTT and an observed minimum RTT.
-If gradient is less than 1, the limit is decreased otherwise the limit is increased.
+If gradient is less than 1, the limit is decreased. Otherwise, the limit is increased.
 
 ### Gradient2
 
@@ -76,7 +77,7 @@ You may want to run the benchmark with different loads:
 2. With high load - Where the number of requests sent per second is above what Zeebe can process within a reasonable latency.
 
 If the value of the limit is small, the processing latency will be small, but the number of rejected requests may be high.
-If the value of the limit is large, less requests may be rejected (depending on the request rate),
+If the value of the limit is large, fewer requests may be rejected (depending on the request rate),
 but the processing latency may increase.
 
 When using **fixed limit**, you can run the benchmark with different values for the limit.

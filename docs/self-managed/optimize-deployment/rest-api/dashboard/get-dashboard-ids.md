@@ -1,18 +1,18 @@
 ---
 id: get-dashboard-ids
-title: "Get Dashboard IDs"
-description: "The REST API to retrieve all Dashboard IDs in a given Collection."
+title: "Get dashboard IDs"
+description: "The REST API to retrieve all dashboard IDs in a given collection."
 ---
 
 ## Purpose
 
-This API allows users to retrieve all Dashboard IDs from a given Collection.
+This API allows users to retrieve all dashboard IDs from a given collection.
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 GET `/api/public/dashboard`
 
-## Request Headers
+## Request headers
 
 The following request headers have to be provided with every request:
 
@@ -22,28 +22,28 @@ The following request headers have to be provided with every request:
 
 * Only required if not set as a query parameter
 
-## Query Parameters
+## Query parameters
 
 The following query parameters have to be provided with every request:
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
 |access_token|REQUIRED*|[Authorization](../../authorization)|
-|collectionId|REQUIRED|The ID of the Collection for which to retrieve the Report IDs.|
+|collectionId|REQUIRED|The ID of the collection for which to retrieve the dashboard IDs.|
 
 * Only required if not set as a request header
 
-## Request Body
+## Request body
 
 No request body is required.
 
 ## Result
 
-The response contains a list of IDs of the Dashboards existing in the Collection with the given Collection ID.
+The response contains a list of IDs of the dashboards existing in the collection with the given collection ID.
 
-## Response Codes
+## Response codes
 
-Possible HTTP Response Status codes:
+Possible HTTP response status codes:
 
 |Code|Description|
 |--- |--- |
@@ -53,8 +53,9 @@ Possible HTTP Response Status codes:
 
 ## Example
 
-### Retrieve all Dashboard IDs from a Collection
-Assuming you want to retrieve all Dashboard IDs in the Collection with the ID `1234` and have configured the accessToken `mySecret`, this is what it would look like:
+### Retrieve all dashboard IDs from a collection
+
+Assuming you want to retrieve all dashboard IDs in the collection with the ID `1234` and have configured the accessToken `mySecret`, this is what it would look like:
 
 GET `/api/public/dashboard?collectionId=1234&access_token=mySecret`
 
@@ -62,7 +63,7 @@ GET `/api/public/dashboard?collectionId=1234&access_token=mySecret`
 
 Status 200.
 
-##### Response Content
+##### Response content
 
 ```
 [

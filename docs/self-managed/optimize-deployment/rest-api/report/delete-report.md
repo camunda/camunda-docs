@@ -1,26 +1,26 @@
 ---
 id: delete-report
-title: "Delete Reports"
-description: "The REST API to delete Reports from Optimize."
+title: "Delete reports"
+description: "The REST API to delete reports from Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 ## Purpose
 
-The Report Deletion API allows to delete Reports by ID from Optimize.
+The report deletion API allows you to delete reports by ID from Optimize.
 
 :::note Heads up!
-During deletion a Report will get removed from any Dashboard or Combined Report it is referenced by. In case a Report is referenced by an Alert, the corresponding Alert will get deleted too.
+During deletion a report will get removed from any dashboard or combined report it is referenced by. In case a report is referenced by an alert, the corresponding alert will get deleted too.
 :::
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 DELETE `/api/public/report/{report-ID}`
 
-Where `report-ID` is the ID of the Report you wish to delete.
+Where `report-ID` is the ID of the report you wish to delete.
 
-## Request Headers
+## Request headers
 
 The following request headers have to be provided with every delete request:
 
@@ -30,7 +30,7 @@ The following request headers have to be provided with every delete request:
 
 * Only required if not set as a query parameter
 
-## Query Parameters
+## Query parameters
 
 The following query parameters have to be provided with every delete request:
 
@@ -40,7 +40,7 @@ The following query parameters have to be provided with every delete request:
 
 * Only required if not set as a request header
 
-## Request Body
+## Request body
 
 No request body is required.
 
@@ -48,21 +48,22 @@ No request body is required.
 
 No response body.
 
-## Response Codes
+## Response codes
 
-Possible HTTP Response Status codes:
+Possible HTTP response status codes:
 
 |Code|Description|
 |--- |--- |
 |204|Request successful.|
 |401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|404|The requested Report was not found, please check the provided report-ID.|
+|404|The requested report was not found, please check the provided report-ID.|
 |500|Some error occurred while processing the request, best check the Optimize log.|
 
 ## Example
 
 ### Delete a report
-Let's assume you want to delete a Report with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, this is what it would look like:
+
+Let's assume you want to delete a report with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, this is what it would look like:
 
 DELETE `/api/public/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62?access_token=mySecret`
 

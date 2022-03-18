@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="45" height="15" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <defs>
+  <marker id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Estart" refX="1" refY="5" markerUnits="userSpaceOnUse" markerWidth="17" markerHeight="11" orient="auto">
+   <path id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Econditional" d="m0,6l8,-5l7,4l-7,4l-7,-4" fill="white" stroke="#000000"/>
+  </marker>
+  <marker id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Eend" refX="15" refY="8" markerUnits="userSpaceOnUse" markerWidth="15" markerHeight="16" orient="auto">
+   <path id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Earrowhead" d="m0,3l15,5l-15,5l0,-10z" fill="#000000" stroke="#000000" stroke-linejoin="round" stroke-width="2"/>
+  </marker>
+  <marker id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Estart_shadow" refX="1" refY="5" markerUnits="userSpaceOnUse" markerWidth="17" markerHeight="11" orient="auto">
+   <path id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Econditional_shadow" d="m0,6l8,-5l7,4l-7,4l-7,-4" fill="white" stroke="white" stroke-width="5" stroke-opacity="0.7"/>
+  </marker>
+  <marker id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Eend_shadow" refX="15" refY="8" markerUnits="userSpaceOnUse" markerWidth="15" markerHeight="16" orient="auto">
+   <path id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Earrowhead_shadow" d="m0,3l15,5l-15,5l0,-10z" fill="black" stroke="white" stroke-linejoin="round" stroke-width="5" stroke-opacity="0.7"/>
+  </marker>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <g stroke="black" font-family="'Open Sans', 'Ezra SIL', 'DejaVu Sans', HanaMinA, HanaMinB, sans-serif" font-style="normal" font-weight="normal" font-size="12" id="svg_3">
+   <g class="stencils" id="svg_4">
+    <g class="me" id="svg_5"/>
+    <g class="children" id="svg_6"/>
+    <g class="edge" id="svg_7">
+     <g id="svg-sid-112C7929-1098-43BC-A0A2-E3E69B7E25B0">
+      <g class="stencils" id="svg_8">
+       <g class="me" id="svg_9">
+        <g id="svg_10">
+         <path id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Ebg_frame_shadow" d="m1,7.4961l42.39999,0" stroke="white" fill="none" stroke-width="5" stroke-linejoin="round" marker-start="url(#sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Estart_shadow)" marker-end="url(#sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Eend_shadow)" stroke-opacity="0.7"/>
+         <path id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Ebg_frame" d="m1,7.4961l42.39999,0" stroke="#000000" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Estart)" marker-end="url(#sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Eend)"/>
+        </g>
+        <text id="sid-CC644897-D99C-43B8-9C1E-FD6B5D3AE43Etext_name" x="35" y="36.4961" stroke-width="0pt" fill="#000000" font-size="12" text-anchor="start"/>
+       </g>
+       <g class="children" id="svg_11"/>
+       <g class="edge" id="svg_12"/>
+      </g>
+      <g class="controls" id="svg_13">
+       <g class="dockers" id="svg_14"/>
+       <g class="magnets" id="svg_15"/>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

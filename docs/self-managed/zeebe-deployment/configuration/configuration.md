@@ -92,18 +92,17 @@ Zeebe uses Spring Boot for its configuration parsing. All other ways to [configu
 
 Details can be found in the Spring documentation.
 
-> **Note**
->
-> We recommend not to use `SPRING_CONFIG_LOCATION` as this will replace all existing configuration defaults.
-> When used inappropriately, some features will be disabled or will not be configured properly.
->
-> If you specify `SPRING_CONFIG_LOCATION`, specify it like this:
->
-> ```shell script
-> export SPRING_CONFIG_LOCATION='classpath:/,file:./[path to config file]'
-> ```
->
-> This will ensure the defaults defined in the classpath resources will be used (unless explicitly overwritten by the configuration file you provide). If you omit the defaults defined in the classpath, some features may be disabled or will not be configured properly.
+:::note
+We recommend not to use `SPRING_CONFIG_LOCATION` as this will replace all existing configuration defaults. When used inappropriately, some features will be disabled or will not be configured properly.
+:::
+
+If you specify `SPRING_CONFIG_LOCATION`, specify it like this:
+
+ ```shell script
+ export SPRING_CONFIG_LOCATION='classpath:/,file:./[path to config file]'
+ ```
+
+ This will ensure the defaults defined in the classpath resources will be used (unless explicitly overwritten by the configuration file you provide). If you omit the defaults defined in the classpath, some features may be disabled or will not be configured properly.
 
 ## Verifying configuration
 
@@ -187,8 +186,7 @@ For specific use cases, it might be necessary to customize health probes:
 ## Experimental configuration options
 
 You may have already noticed a special section of Zeebe's configuration templates titled `experimental`.
-This section refers to settings which are potentially not backwards compatible. In other words, any configuration 
-setting found there may or may not be dropped in any minor version.
+This section refers to settings which are potentially not backwards compatible. In other words, any configuration setting found there may or may not be dropped in any minor version.
 
 These settings are there primarily for incubating features and/or very advanced settings for which the team has not found
 a good general default configuration. Once one is found, or the incubating feature is promoted, the setting(s) may be moved

@@ -1,21 +1,21 @@
 ---
 id: user-management
-title: "User Access Management"
+title: "User access management"
 description: "Define which users have access to Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 :::note Good to know!
 
 Providing Optimize access to a user just enables them to log in to Optimize. To be able
-to create reports the user also needs to have permission to access the engine data. To see
-how this can be done please refer to the [Authorization Management](./authorization-management.md) section.
+to create reports, the user also needs to have permission to access the engine data. To see
+how this can be done, refer to the [Authorization Management](./authorization-management.md) section.
 :::
 
-You can use the credentials from the Camunda Platform users to access Optimize. However, for the users to gain access to Optimize, they need to be authorized. This is not done in Optimize itself, but needs to be configured in the Camunda Platform and can be achieved on different levels with different options. If you do not know how authorization in Camunda works, please have a look at the [authorization service documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/).
+You can use the credentials from the Camunda Platform users to access Optimize. However, for the users to gain access to Optimize, they need to be authorized. This is not done in Optimize itself, but needs to be configured in the Camunda Platform and can be achieved on different levels with different options. If you do not know how authorization in Camunda works, visit the [authorization service documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/).
 
-When defining an authorization to grant Optimize access, the most important aspect is that you grant access on resource type application with resource ID "optimize" ( or "\*" if you want to grant access to all applications including Optimize). The permissions you can set, are either `ALL` or `ACCESS`. They are treated equally, so there is no difference between them.
+When defining an authorization to grant Optimize access, the most important aspect is that you grant access on resource type application with resource ID "optimize" (or "\*" if you want to grant access to all applications including Optimize). The permissions you can set, are either `ALL` or `ACCESS`. They are treated equally, so there is no difference between them.
 
 Authorizing users in admin can be done as follows:
 
@@ -29,4 +29,4 @@ It is also possible to revoke the Optimize authorization for specific users or g
 
 ![Revoke Optimize Access for group 'engineers' in Admin](img/Admin-RevokeGroupAccess.png)
 
-When Optimize is configured to load data from multiple instances of the Camunda Platform, then it suffices to be granted by one instance for the user to be able to log into Optimize. Notice that, like for all authorizations, grants have precedence over revokes. That is, if there is a Camunda Platform instance that grants access to optimize to a user, then the user can log in even if another instance revokes access to Optimize for this user.
+When Optimize is configured to load data from multiple instances of Camunda Platform, then it suffices to be granted by one instance for the user to be able to log into Optimize. Notice that, like for all authorizations, grants have precedence over revokes. That is, if there is a Camunda Platform instance that grants access to optimize to a user, the user can log in even if another instance revokes access to Optimize for this user.

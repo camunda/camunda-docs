@@ -58,3 +58,4 @@ In Operate, you'll see instances ending in both end events depending on which wo
 ## Next steps
 
 - [Get familiar with Operate](./components/operate/userguide/basic-operate-navigation.md)
+- [Setting up your first development project](./../setting-up-development-project.md)

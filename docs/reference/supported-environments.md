@@ -6,7 +6,7 @@ description: "Let's take a closer look at supported environments alongside Zeebe
 
 ## Zeebe
 
-- **Zeebe Broker/Gateway**: The cluster components of Zeebe require OpenJDK 11+ and optional if the Elasticsearch exporter is used Elasticsearch 7.16.x.
+- **Zeebe Broker/Gateway**: The cluster components of Zeebe require OpenJDK 17+ and optional if the Elasticsearch exporter is used Elasticsearch 7.16.x.
 - **Zeebe Java Client**: The Java client for Zeebe requires OpenJDK 8+.
 - **Zeebe Go Client**: The Go client for Zeebe requires Go 1.13+.
 - **zbctl**: The Zeebe CLI supports latest versions of Windows, MacOS, and Linux.
@@ -63,7 +63,7 @@ DMN [1.1](https://www.omg.org/spec/DMN/1.1), [1.2](https://www.omg.org/spec/DMN/
 
 Production versions of the Camunda Engine version 7.14.0+, 7.15.0+ and 7.16.0+ with REST API and history with level `full` enabled are supported. [Development (alpha) versions](https://docs.camunda.org/enterprise/release-policy/#community-vs-enterprise-releases) are not supported. For optimal performance, we always recommend running the latest version of the Camunda Engine. To ensure correct logging of user operations using the REST API, they should always be performed with user authentication. Alternatively, `restrictUserOperationLogToAuthenticatedUsers` should be set to `false` in the connected engine, this setting allows user operations to be logged even if there is no user authentication context for the request.
 
-## Camunda Modeler
+## Desktop Modeler
 
 Supported on the following platforms:
 
@@ -75,3 +75,11 @@ Reported to work on
 Ubuntu 12.04 and newer
 Fedora 21
 Debian 8
+
+## Web Modeler
+### Web Browser
+
+- Google Chrome latest [recommended]
+- Mozilla Firefox latest
+- Microsoft Edge latest
+

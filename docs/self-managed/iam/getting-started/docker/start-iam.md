@@ -13,6 +13,7 @@ If you are using the command line, use the following global command:
 ```shell
 docker compose -f /path/to/your/docker-compose.yml up -d
 ```
+
 :::note
 If you are using Docker Compose V1, you can use the command `docker-compose`.
 :::

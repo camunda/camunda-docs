@@ -18,16 +18,19 @@ The easiest way to develop with Zeebe is using Docker. Docker provides a consist
 
 ### Docker configurations for docker-compose
 
-A default docker compose configuration to run Zeebe, Operate and Tasklist is available in the get started repository: [docker-compose.yaml](https://github.com/camunda-cloud/camunda-cloud-get-started/blob/master/docker-compose.yaml).
+A default docker compose configuration to run Zeebe, Operate, and Tasklist is available in the get started repository: [docker-compose.yaml](https://github.com/camunda-cloud/camunda-cloud-get-started/blob/master/docker-compose.yaml).
 
+<<<<<<< HEAD
 Download this file to your local computer, `cd` into that directory and run `docker-compose up`. 
+=======
+Download this file to your local computer, `cd` into that directory, and run `docker-compose up`.
+>>>>>>> master
 
 #### Exposed ports
 
 - `26500`: Zeebe Gateway API
 - [`8080`](http://localhost:8080/): Operate
 - [`8081`](http://localhost:8081/): Tasklist
-
 
 ### Using Docker without docker-compose
 
@@ -37,7 +40,7 @@ You can run Zeebe with Docker:
 docker run --name zeebe -p 26500-26502:26500-26502 camunda/zeebe:latest
 ```
 
-This will give you a a single broker node.
+This will give you a single broker node.
 
 #### Exposed ports
 
@@ -67,8 +70,8 @@ Available environment variables:
 
 ## Next steps
 
-As a next step, you can install Camunda Modeler.
+As a next step, you can install Desktop Modeler.
 
-Camunda Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe. This application gives developers powerful features to design and deploy automated processes, human workflows, decision tables, and decision requirement diagrams using the globally-recognized [BPMN](https://camunda.com/bpmn/) and [DMN](https://camunda.com/dmn/) standards.
+Desktop Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe. This application gives developers powerful features to design and deploy automated processes, human workflows, decision tables, and decision requirement diagrams using the globally-recognized [BPMN](https://camunda.com/bpmn/) and [DMN](https://camunda.com/dmn/) standards.
 
-Get started with Camunda Modeler using our [installation guide](/components/modeler/camunda-modeler/install-the-modeler.md).
+Get started with Desktop Modeler using our [installation guide](/components/modeler/desktop-modeler/install-the-modeler.md).

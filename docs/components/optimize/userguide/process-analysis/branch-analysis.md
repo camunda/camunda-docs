@@ -16,7 +16,9 @@ Select a process definition using the **Select Process** option in the top left 
 
 By default, all process instances for the selected process definition are included in the analysis. You can reduce this set of process instances by applying filters.
 
-To perform a statistical analysis on the selected process, specify a gateway and an end event. Moving your mouse cursor over the end event and gateway inputs at the top of the screen highlights available elements in the diagram. Likewise, mouse over an element to see whether it is an end event or gateway. Additionally, if you move your mouse over an end event, you see detailed information about this end event, like how many instances reached this end event. Click on an element to select or deselect it. You can also clear the selection using the x button in the control panel on top. Changing the process definition also clears the selection.
+To perform a statistical analysis on the selected process, specify a gateway and an end event. Moving your mouse cursor over the end event and gateway inputs at the top of the screen highlights available elements in the diagram. Likewise, mouse over an element to see whether it is an end event or gateway.
+
+Additionally, if you move your mouse over an end event, you see detailed information about this end event, like how many instances reached this end event. Click on an element to select or deselect it. You can also clear the selection using the **x** button in the control panel on top. Changing the process definition also clears the selection.
 
 After selecting an end event and gateway, a statistical analysis is shown next to the diagram. The analysis consists of two bar charts and a statistical summary. Both charts contain a bar for every sequence flow leaving the selected gateway.
 

@@ -1,36 +1,30 @@
 ---
 id: get-data-export
-title: "Export Report Result Data"
-description: "The REST API to export Report result data from Optimize."
+title: "Export report result data"
+description: "The REST API to export report result data from Optimize."
 ---
 
-<span class="badge badge--platform">Platform only</span>
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 ## Purpose
 
-The Data Export API allows users to export large amounts of data in a machine-readable format (JSON) from Optimize. 
+The data export API allows users to export large amounts of data in a machine-readable format (JSON) from Optimize.
 
 ## Functionality
 
-Users can export all report types (except combined reports) from `Optimize` using the Data Export API. Moreover, 
-raw data reports can be exported in a paginated fashion, so that large amounts of data can be consumed in chunks by the 
-client. 
+Users can export all report types (except combined reports) from `Optimize` using the Data Export API. Moreover, raw data reports can be exported in a paginated fashion, so that large amounts of data can be consumed in chunks by the client.
 
 ### Pagination
 
-The simplest way to paginate through the results is to perform a search request with all the `REQUIRED` header/query 
-parameters as described in the sections below (but without `searchRequestId`), then pass the `searchRequestId` 
-returned in each response to the next request, until no more documents are returned. Please note 
-that it's often the case, but not guaranteed, that the `searchRequestId` remains stable through the entire 
-pagination, so always use the `searchRequestId` from the most current response to make your next request.
+The simplest way to paginate through the results is to perform a search request with all the `REQUIRED` header/query parameters as described in the sections below (but without `searchRequestId`), then pass the `searchRequestId` returned in each response to the next request, until no more documents are returned. Note that it's often the case, but not guaranteed, that the `searchRequestId` remains stable through the entire pagination, so always use the `searchRequestId` from the most current response to make your next request.
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 GET `/api/public/export/report/{report-ID}/result/json`
 
 Where `report-ID` is the ID of the report you wish to export.
 
-## Request Headers
+## Request headers
 
 The following request headers have to be provided with every data export request:
 
@@ -40,7 +34,7 @@ The following request headers have to be provided with every data export request
 
 * Only required if not set as a query parameter
 
-## Query Parameters
+## Query parameters
 
 The following query parameters have to be provided with every data export request:
 
@@ -53,7 +47,7 @@ The following query parameters have to be provided with every data export reques
 
 * Only required if not set as a request header
 
-## Request Body
+## Request body
 
 No request body is required.
 
@@ -68,10 +62,9 @@ No request body is required.
 |message|In case there is additional information relevant to this request, this field will contain a message describing it. The response will only contain this field if there is a message to be shown|
 |data [Array]|An array containing numberOfRecordsInResponse report data records in JSON Format|
 
+## Response codes
 
-## Response Codes
-
-Possible HTTP Response Status codes:
+Possible HTTP response status codes:
 
 |Code|Description|
 |--- |--- |
@@ -81,19 +74,18 @@ Possible HTTP Response Status codes:
 |404|The requested report was not found, please check the provided report-ID.|
 |500|Some error occurred while processing the export request, best check the Optimize log.|
 
-
 ## Example
 
 ### Export a raw data report
-Let's assume you want to export a report with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, with a maximum of two 
-records per page, an access token `mySecret` and a pagination timeout of 60s, this is what it would look like
+
+Let's assume you want to export a report with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, with a maximum of two records per page, an access token `mySecret` and a pagination timeout of 60s, this is what it would look like
 
 #### Initial API call
 
 GET `/api/public/export/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62/result/json?
 paginationTimeout=60&access_token=mySecret&limit=2`
 
-##### Response content:
+##### Response content
 
     {
       "searchRequestId": "FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ",
@@ -134,13 +126,11 @@ Status 200.
 
 #### Subsequent API calls
 
-Please note here the use of the query parameter `searchRequestId` to retrieve further pages from the initial search.
+Note here the use of the query parameter `searchRequestId` to retrieve further pages from the initial search.
 
-GET `/api/public/export/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62/result/json?
-paginationTimeout=60&access_token=mySecret&searchRequestId
-=FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ&limit=2`
+`GET /api/public/export/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62/result/json?paginationTimeout=60&access_token=mySecret&searchRequestId=FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ&limit=2`
 
-##### Response content:
+##### Response content
 
     {
       "searchRequestId": "FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ",
