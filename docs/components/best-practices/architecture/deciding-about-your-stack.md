@@ -35,7 +35,7 @@ Use the following stack:
 
 3. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse.
 
-3. Use [Oracle JDK 15](https://www.oracle.com/technetwork/java/javase/downloads/index.html) as Java runtime.
+3. Use [Open JDK 17](https://jdk.java.net/17/) as Java runtime.
 
 4. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/).
 

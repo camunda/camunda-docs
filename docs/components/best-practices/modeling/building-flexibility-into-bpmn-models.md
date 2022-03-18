@@ -14,7 +14,7 @@ To build flexibility into BPMN process models, one must understand BPMN symbols 
 
 BPMN events allow us to react to all kinds of information. We can use them to trigger flexible activities. In particular, BPMN events **catching** **messages**, **conditions**, and **timeouts** are useful in that context.
 
-<div bpmn="building-flexibility-into-bpmn-models-assets/events.bpmn" />
+<div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/events.bpmn" />
 
 :::caution Camunda Platform 7 Only
 Condition events are [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/).
@@ -24,13 +24,13 @@ Condition events are [not yet supported in Camunda Cloud](https://docs.camunda.i
 
 BPMN allows us to attach events to the boundary of activities to trigger some follow-up action. By modeling such an event as either **interrupting** or **non-interrupting**, we can decide to do the activities either *instead of* the activity we attach the event to, or *in addition to* it.
 
-<div bpmn="building-flexibility-into-bpmn-models-assets/boundary.bpmn" />
+<div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/boundary.bpmn" />
 
 ### Subprocesses with boundary events
 
 By attaching boundary events not just to individual activities, but also to subprocesses, we can flexibly define the area or scope for which we want to trigger some flexible activities.
 
-<div bpmn="building-flexibility-into-bpmn-models-assets/subprocess.bpmn" callouts="subprocess,condition,activity" />
+<div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/subprocess.bpmn" callouts="subprocess,condition,activity" />
 
 <span className="callout">1</span>
 
@@ -48,7 +48,7 @@ While we are occupied with carrying out some area of activities, in a scope of o
 
 Sometimes we need to build in flexible activities which are carried out at any point in time. In such cases, we can leverage BPMN's event-based subprocesses.
 
-<div bpmn="building-flexibility-into-bpmn-models-assets/event-subprocess.bpmn" />
+<div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/event-subprocess.bpmn" />
 
 ### Escalation events
 
@@ -58,7 +58,7 @@ Escalation events are [not yet supported in Camunda Cloud](https://docs.camunda.
 
 Sometimes we need highly flexible means to cancel scopes or trigger additional activities from within a scope. The BPMN escalation events can be particularly useful to implement such requirements.
 
-<div bpmn="building-flexibility-into-bpmn-models-assets/escalation.bpmn" callouts="escalation,boundary,activity,followup" />
+<div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/escalation.bpmn" callouts="escalation,boundary,activity,followup" />
 
 <span className="callout">1</span>
 
@@ -84,7 +84,7 @@ Termination events are [not yet supported in Camunda Cloud](https://docs.camunda
 
 To build flexibility into process models, it is also useful to remember that the termination event just terminates the scope within which it is defined and therefore *not* always the whole process instance. With that technique, it becomes possible to cancel some activities inside a subprocess while completing it successfully and leaving it via the "normal" outgoing path.
 
-<div bpmn="building-flexibility-into-bpmn-models-assets/termination.bpmn" callouts="termination,followup" />
+<div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/termination.bpmn" callouts="termination,followup" />
 
 <span className="callout">1</span>
 
@@ -102,7 +102,7 @@ Assume that for an order to be validated, the customer must determine the delive
 
 Some of our orders might be so important that we want to ensure we keep customers happy, even if not everything runs smoothly on our side.
 
-<div bpmn="building-flexibility-into-bpmn-models-assets/example-order-proactive-communication.bpmn" callouts="on-demand,on-a-regular-basis" />
+<div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/example-order-proactive-communication.bpmn" callouts="on-demand,on-a-regular-basis" />
 
 <span className="callout">1</span>
 
@@ -116,7 +116,7 @@ On a regular basis, we check based on some rules, whether the order is so import
 
 The customer might be allowed to request a cancellation until the order is confirmed. This request would have to be reviewed to determine whether we must accept the cancellation.
 
-<div bpmn="building-flexibility-into-bpmn-models-assets/example-cancel-order.bpmn" callouts="cancellation,error_throw,error_catch" />
+<div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/example-cancel-order.bpmn" callouts="cancellation,error_throw,error_catch" />
 
 <span className="callout">1</span>
 
@@ -138,4 +138,4 @@ Condition events are [not yet supported in Camunda Cloud](https://docs.camunda.i
 
 If the customer changes the order details, the order must be validated again.
 
-<div bpmn="building-flexibility-into-bpmn-models-assets/example-revalidate-order.bpmn" />
+<div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/example-revalidate-order.bpmn" />

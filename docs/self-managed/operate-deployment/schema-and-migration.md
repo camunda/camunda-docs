@@ -4,10 +4,15 @@ title: Schema and migration
 ---
 Operate stores data in Elasticsearch. On first start, Operate creates all required indices and templates.
 
-* [Schema](#schema)
-* [Data migration](#data-migration)
-* [How to migrate](#how-to-migrate)
-* [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
+- [Schema](#schema)
+- [Data migration](#data-migration)
+  - [Concept](#concept)
+  - [How to migrate](#how-to-migrate)
+    - [Migrate by using standalone application](#migrate-by-using-standalone-application)
+    - [Migrate by using built-in automatic upgrade](#migrate-by-using-built-in-automatic-upgrade)
+    - [Further notes](#further-notes)
+    - [Configure migration](#configure-migration)
+    - [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
 
 ## Schema
 
@@ -22,7 +27,7 @@ Index names follow the defined pattern below:
 
 ```
 
-Here, `operate-index-prefix` defines the prefix for index name (default `operate`), `datatype` defines which data is stored in the index (e.g. `user`, `variable` etc.,) `schemaversion` represents the index schema version, and `date` represents the finished date of the archived data. See [Data retention](data-retention.md).
+Here, `operate-index-prefix` defines the prefix for index name (default `operate`), `datatype` defines which data is stored in the index (e.g. `user`, `variable` etc.,) `schemaversion` represents the index schema version, and `date` represents the finished date of the archived data. See [data retention](data-retention.md).
 
 Knowing the index name pattern, it's possible to customize index settings by creating Elasticsearch templates. See an [example of an index template](https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-templates.html).
 
@@ -45,7 +50,7 @@ For these settings to work, the template must be created before Operate runs.
 
 ## Data migration
 
-The version of Operate is reflected in Elasticsearch object names (e.g. `operate-user-1.0.0_` index contains the user data for Operate 1.0.0.) When upgrading from one version of Operate to another, migration of data must be performed. Operate distribution provides an application to perform data migration from older versions.
+The version of Operate is reflected in Elasticsearch object names (e.g. `operate-user-1.0.0_` index contains the user data for Operate 1.0.0). When upgrading from one version of Operate to another, migration of data must be performed. Operate distribution provides an application to perform data migration from older versions.
 
 ### Concept
 
@@ -75,16 +80,14 @@ All known migration steps with metadata are stored in the `operate-migration-ste
 
 :::note
 The old indices are deleted *only* after successful migration. This might require more disk space during the migration process.
-:::
 
-:::note
 Take care of data backup before performing migration.
 :::
 
 #### Migrate by using built-in automatic upgrade
 
 When running a newer version of Operate against an older schema, it performs data migration on a startup.
-The migration happens for every index, for which it detects exactly **one** older version. Migration fails if it detects more than one older version of some index. 
+The migration happens for every index, for which it detects exactly **one** older version. Migration fails if it detects more than one older version of some index.
 
 #### Further notes
 
@@ -108,16 +111,16 @@ Small document size means big batch size, while big document size means small ba
 2. In how many slices should the reindex be divided. For each shard used by the index, you normally use a slice.
 Elasticsearch decides how many slices are used if the value is set to 0 (automatic).
 
-`camunda.operate.migration.slices = 0` - Must be positive. Default is 0 (automatic). 
+`camunda.operate.migration.slices = 0` - Must be positive. Default is 0 (automatic).
 
 #### Example for migration in Kubernetes
 
 To ensure the migration is executed *before* Operate is started, use
-the [initContainer](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) feature of Kubernetes. 
+the [initContainer](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) feature of Kubernetes.
 
-This ensures only the "main" container is started if the initContainer is successfully executed.
+This ensures only the "main" container is started if the `initContainer` is successfully executed.
 
-The following snippet of a pod description for Kubernetes shows the usage of `migrate` script as initContainers:
+The following snippet of a pod description for Kubernetes shows the usage of `migrate` script as `initContainers`:
 
 ```
 ...
@@ -134,4 +137,3 @@ spec:
        env:
 ...
 ```
-

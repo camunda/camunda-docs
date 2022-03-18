@@ -14,11 +14,11 @@ Name all elements in your BPMN diagrams by focusing on the business perspective.
 
 Name a *task* using an object and a verb in the infinitive. By doing this, you consistently describe *what you do with an object*.
 
-<div bpmn="naming-bpmn-elements-assets/task.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/task.bpmn" />
 
 Name a *subprocess* (or *call activity*) by using an object and a  (by convention *nominalized*) verb. Similar to tasks, you should always describe *what you do with an object*.
 
-<div bpmn="naming-bpmn-elements-assets/subprocess.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/subprocess.bpmn" />
 
 :::note
 Avoid very broad and general verbs like "Handle invoice" or "Process order." Try to be more specific about what you do in your activity from a business perspective.
@@ -28,15 +28,15 @@ Avoid very broad and general verbs like "Handle invoice" or "Process order." Try
 
 Wherever possible, name an *event* using an object and a verb reflecting a state. Always try to describe *which state an object is in* when the process is about to leave the event.
 
-<div bpmn="naming-bpmn-elements-assets/event.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/event.bpmn" />
 
 This naming approach does not always work perfectly. In those cases, precisely describe the business semantics when the process is about to leave the event. The following names are also valid:
 
-<div bpmn="naming-bpmn-elements-assets/event-alternative.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/event-alternative.bpmn" />
 
 Be specific about the state you reached with your event from a business perspective. Often, you will reach "success" and "failure" like events from a business perspective:
 
-<div bpmn="naming-bpmn-elements-assets/gateway.bpmn" callouts="invoice_paid, invoice_rejected" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/gateway.bpmn" callouts="invoice_paid, invoice_rejected" />
 
 <span className="callout">1</span>
 
@@ -54,15 +54,15 @@ Avoid very broad and general verbs like "Invoice processed" or "Order handled"!
 
 Label a data-based *exclusive gateway* with a question. Label the outgoing sequence flows with the conditions they are executed under. Formulate the conditions as answers to the question posed at the gateway.
 
-<div bpmn="naming-bpmn-elements-assets/gateway.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/gateway.bpmn" />
 
 This naming approach does not always work for *inclusive gateways*, because the outgoing flows' conditions can be completely independent from each other. Still, use a question whenever possible.
 
-<div bpmn="naming-bpmn-elements-assets/gateway-inclusive-with-question.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/gateway-inclusive-with-question.bpmn" />
 
 If this is not possible, leave out the question completely but describe the conditions under which the outgoing paths are executed.
 
-<div bpmn="naming-bpmn-elements-assets/gateway-inclusive-without-question.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/gateway-inclusive-without-question.bpmn" />
 
 *Avoid naming event-based gateways*, but ensure you name their subsequent events. Also, avoid naming *parallel gateways* and all forms of *joining gateways*. You don't need to specify anything about those gateways, as the flow semantics are always the same.
 
@@ -70,11 +70,11 @@ If this is not possible, leave out the question completely but describe the cond
 
 A *pool* should be given the same name as the process the pool contains using an object and a nominalized verb. Optionally, add the organizational role responsible for the process shown in the pool as a whole.
 
-<div bpmn="naming-bpmn-elements-assets/pool.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/pool.bpmn" />
 
 If you have more than one lane in a pool, name each *lane* using the organizational role or technical system responsible for carrying out the activities shown in the lane.
 
-<div bpmn="naming-bpmn-elements-assets/lane.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/lane.bpmn" />
 
 Name a *diagram* (file) with same name as the process shown in the diagram. In case of a collaboration diagram, use a name reflecting the end-to-end perspective shown in that diagram.
 
@@ -84,7 +84,7 @@ Name a *diagram* (file) with same name as the process shown in the diagram. In c
 
 Use [sentence case](https://en.wiktionary.org/wiki/sentence_case) when naming BPMN symbols. This is standard capitalization of an English sentence, with the first letter uppercase and subsequent letters lowercase, with exceptions such as proper nouns or acronyms.
 
-<div bpmn="naming-bpmn-elements-assets/lane.bpmn" />
+<div bpmn="best-practices/naming-bpmn-elements-assets/lane.bpmn" />
 
 ### Avoiding technical terms
 

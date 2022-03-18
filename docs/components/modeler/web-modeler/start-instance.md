@@ -8,7 +8,7 @@ description: "If a BPMN diagram is deployed via Web Modeler, you can start a new
 
 If a BPMN diagram is deployed via Web Modeler, you can start a new instance of this diagram.
 
-To do so, click **Start Instance**:
+To do so, click **Start instance**:
 
 ![start instance](img/web-modeler-start-instance-modal-healthy.png)
 

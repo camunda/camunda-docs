@@ -14,6 +14,7 @@ module.exports = {
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
+    "guides/getting-started-orchestrate-human-tasks",
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/automating-a-process-using-bpmn",
@@ -174,6 +175,11 @@ module.exports = {
             "components/modeler/dmn/desktop-modeler-dmn",
           ],
         },
+        {
+          "Forms": [
+            "components/modeler/forms/camunda-forms-reference",
+          ],
+        },
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
@@ -219,11 +225,19 @@ module.exports = {
             "components/optimize/userguide/data-sources",
             "components/optimize/userguide/creating-dashboards",
             "components/optimize/userguide/creating-reports",
+            "components/optimize/userguide/combined-reports",
             {
               "Process analysis": [
                 "components/optimize/userguide/process-analysis/overview",
                 "components/optimize/userguide/process-analysis/outlier-analysis",
                 "components/optimize/userguide/process-analysis/branch-analysis",
+                {
+                  "Report analysis": [
+                    "components/optimize/userguide/process-analysis/report-analysis/overview",
+                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                    "components/optimize/userguide/process-analysis/report-analysis/view-mode",
+                  ],
+                },
               ],
             },
             {
@@ -430,6 +444,7 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
             "self-managed/zeebe-deployment/operations/rebalancing",
+            "self-managed/zeebe-deployment/operations/backups"
           ],
         },
       ],

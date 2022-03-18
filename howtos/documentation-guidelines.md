@@ -24,11 +24,13 @@ All changes have to be done in a separate Branch. As soon as the changes are don
 
 After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
 
-- Cloud: @urbanisierung
-- Zeebe: @pihme
+- Console: @ultraschuppi
+- Zeebe: @npepinpe
 - Operate/Tasklist: @ralfpuchert
+- Optimize: @megglos
 - DevRel: @akeller
 - Product Management: @felix-mueller
+- Documentation review: @christinaausley (fallback: @akeller)
 - Fallback: @menski
 
 In case you don't know who to assign choose @menski and he will delegate.

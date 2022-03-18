@@ -1,27 +1,26 @@
 ---
 id: delete-dashboard
-title: "Delete Dashboards"
-description: "The REST API to delete Dashboards from Optimize."
+title: "Delete dashboards"
+description: "The REST API to delete dashboards from Optimize."
 ---
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
 ## Purpose
 
-The Dashboards Deletion API allows to delete Dashboards by ID from Optimize.
+The dashboards deletion API allows you to delete dashboards by ID from Optimize.
 
 :::note Heads up!
-The deletion of a Dashboard does not affect the referenced Reports.
+The deletion of a dashboard does not affect the referenced reports.
 :::
 
-
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 DELETE `/api/public/dashboard/{dashboard-ID}`
 
-Where `dashboard-ID` is the ID of the Dashboard you wish to delete.
+Where `dashboard-ID` is the ID of the dashboard you wish to delete.
 
-## Request Headers
+## Request headers
 
 The following request headers have to be provided with every delete request:
 
@@ -31,7 +30,7 @@ The following request headers have to be provided with every delete request:
 
 * Only required if not set as a query parameter
 
-## Query Parameters
+## Query parameters
 
 The following query parameters have to be provided with every delete request:
 
@@ -41,7 +40,7 @@ The following query parameters have to be provided with every delete request:
 
 * Only required if not set as a request header
 
-## Request Body
+## Request body
 
 No request body is required.
 
@@ -49,21 +48,22 @@ No request body is required.
 
 No response body.
 
-## Response Codes
+## Response codes
 
-Possible HTTP Response Status codes:
+Possible HTTP Response status codes:
 
 |Code|Description|
 |--- |--- |
 |204|Request successful.|
 |401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|404|The requested Dashboard was not found, please check the provided dashboard-ID.|
+|404|The requested dashboard was not found, please check the provided dashboard-ID.|
 |500|Some error occurred while processing the request, best check the Optimize log.|
 
 ## Example
 
-### Delete a Dashboard
-Let's assume you want to delete a Dashboard with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, this is what it would look like:
+### Delete a dashboard
+
+Let's assume you want to delete a dashboard with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, this is what it would look like:
 
 DELETE `/api/public/dashboard/e6c5aaa1-6a18-44e7-8480-d562d511ba62?access_token=mySecret`
 
