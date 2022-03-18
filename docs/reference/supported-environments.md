@@ -57,11 +57,12 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 
 _Note: You can use newer Modeler versions with older Zeebe versions too._
 
-## Camunda Platform 7 Version Matrix
+## Camunda Platform 7 & Optimize Version Matrix
 
-| Automate | Improve |
+| Improve | Automate |
 |---|---|
-| Camunda Platform 7.14.x | Optimize 3.7.x |
-| Camunda Platform 7.15.x | Optimize 3.6.x Optimize 3.7.x Optimize 3.8.x |
-| Camunda Platform 7.16.x | Optimize 3.7.x Optimize 3.8.x |
-| Camunda Platform 7.17.x | Optimize 3.8.x |
+| Optimize 3.4.x | Camunda Platform 7.13.5, 7.14.x, 7.15.x |
+| Optimize 3.5.x | Camunda Platform 7.13.5, 7.14.x, 7.15.x |
+| Optimize 3.6.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x |
+| Optimize 3.7.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x |
+| Optimize 3.8.x | Camunda Platform 7.15.x, 7.16.x, 7.17.x |
