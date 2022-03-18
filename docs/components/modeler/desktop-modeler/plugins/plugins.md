@@ -4,7 +4,9 @@ title: Plugins
 description: "Plugins allow you to change the appearance and behavior of Desktop Modeler and add new features."
 ---
 
-> The Camunda Modeler plugins API is not stable and might change in the future.
+:::note
+The Camunda Modeler plugins API is not stable and might change in the future.
+:::
 
 Plugins allow you to change the appearance and behavior of Camunda Modeler and add new features.
 
