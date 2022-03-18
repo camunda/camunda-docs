@@ -92,6 +92,10 @@ RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
 
+# Replaced deprecated java-client/testing page with java-client/zeebe-process-test page
+RewriteRule ^docs/apis-clients/java-client/testing(.*)$ /docs/apis-clients/java-client/zeebe-process-test$1 [R=301,L]
+RewriteRule ^docs/apis-clients/java-client/testing$ /docs/apis-clients/java-client/zeebe-process-test [R=301,L]
+
 # rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
 ## index pages are not served as /index/ anymore but /index.html
 RewriteRule ^(.*)/index/$ /$1 [R=301,L]
