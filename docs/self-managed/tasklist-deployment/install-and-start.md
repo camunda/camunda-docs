@@ -107,3 +107,7 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 If you've already developed user tasks in Zeebe, you can see these on the left panel on the start screen:
 
 ![tasklist-start-screen](img/tasklist-start-screen_light.png)
+
+## Update Tasklist
+
+To update Tasklist versions, visit the [user guide](../../components/tasklist/userguide/updating-tasklist.md).

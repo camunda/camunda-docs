@@ -107,3 +107,7 @@ After you sign in, you'll see an empty dashboard if you haven't yet deployed any
 If you _have_ deployed processes or created process instances, you'll see them on your dashboard:
 
 ![operate-dash-with-processes](img/operate-introduction_light.png)
+
+## Update Operate
+
+To update Operate versions, visit the [user guide](../../components/operate/userguide/updating-operate.md).
