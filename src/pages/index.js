@@ -12,7 +12,7 @@ const features = [
     imageUrl: 'img/guides.png',
     url: 'https://docs.camunda.io/docs/guides',
     description: (
-      <>Step-by-step content to strengthen your knowledge of Camunda Cloud, its components, and its features.
+      <>Step-by-step content to strengthen your knowledge of Camunda Platform 8, its components, and its features.
       </>
     ),
   },
@@ -22,7 +22,7 @@ const features = [
     url: 'https://docs.camunda.io/docs/components/',
     description: (
       <>
-        Conceptualize the cornerstones of Camunda Cloud and learn more about its supporting components.
+        Conceptualize the cornerstones of Camunda Platform 8 and learn more about its supporting components.
       </>
     ),
   },
@@ -45,7 +45,7 @@ const features2 = [
     url: 'https://docs.camunda.io/docs/self-managed/overview/',
     description: (
       <>
-        A self-hosted Camunda Cloud alternative, offering everything you need to download, configure, and work with each component.
+        A self-hosted Camunda Platform 8 alternative, offering everything you need to download, configure, and work with each component.
       </>
     ),
   },
@@ -64,7 +64,7 @@ const features2 = [
 function Feature({imageUrl, url, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-      <div className={clsx('col col--4', styles.feature)}>
+      <div className={clsx('col col--4 component-block', styles.feature)}>
         {imgUrl && (
           <div className="text--center">
             <a href={url}>
@@ -72,8 +72,8 @@ function Feature({imageUrl, url, title, description}) {
             </a>
           </div>
         )}
-        <h3>{title}</h3>
-        <p>{description}</p>
+        <h3 className="component-title">{title}</h3>
+        <p className="component-desc">{description}</p>
       </div>
   );
 }
@@ -81,7 +81,7 @@ function Feature({imageUrl, url, title, description}) {
 function Feature2({imageUrl, url, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-      <div className={clsx('col col--offset-1 col--4', styles.feature)}>
+      <div className={clsx('col col--offset-1 col--4 component-block', styles.feature)}>
         {imgUrl && (
           <div className="text--center">
             <a href={url}>
@@ -89,7 +89,7 @@ function Feature2({imageUrl, url, title, description}) {
             </a>
           </div>
         )}
-        <h3>{title}</h3>
+        <h3 className="component-title">{title}</h3>
         <p>{description}</p>
       </div>
   );
@@ -156,15 +156,23 @@ function Home() {
         <div className={clsx('hero hero--secondary', styles.heroBanner)}>
           <div className="container">
             <h1 className="hero__title">Unsure where to begin?</h1>
-            <p className="hero__subtitle">Try our Microservice Orchestration guide</p>
+            <p className="hero__subtitle">Try one of our use case guides</p>
               <div className={styles.buttons}>
               <Link
                 className={clsx(
-                  'button button--outline button--secondary button--lg button--hero get-started',
+                  'button button--outline button--secondary button--lg button--hero get-started-use-case',
                   styles.getStarted,
                 )}
                 to={useBaseUrl('docs/guides/getting-started-orchestrate-microservices/')}>
-                Begin Now
+                Microservice Orchestration
+              </Link>
+              <Link
+                className={clsx(
+                  'button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2',
+                  styles.getStarted,
+                )}
+                to={useBaseUrl('docs/guides/getting-started-orchestrate-human-tasks/')}>
+                Human Task Orchestration
               </Link>
             </div>
           </div>

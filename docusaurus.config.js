@@ -1,6 +1,6 @@
 module.exports = {
-  title: "Camunda Cloud Docs",
-  tagline: "Documentation for all components of Camunda Cloud",
+  title: "Camunda Platform 8",
+  tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
@@ -39,10 +39,10 @@ module.exports = {
       additionalLanguages: ['java'],
     },
     navbar: {
-      title: "Camunda Cloud Docs",
+      title: "Camunda Platform 8 Docs",
       logo: {
-        alt: "Camunda Cloud Docs",
-        src: "img/camunda-cloud-gradient.png",
+        alt: "Camunda Platform 8 Docs",
+        src: "img/black-C.png",
       },
       items: [
         {
@@ -131,7 +131,7 @@ module.exports = {
           title: "More",
           items: [
             {
-              label: "Cloud Console",
+              label: "Camunda Platform 8 Console",
               href: "https://camunda.io",
             },
             {
