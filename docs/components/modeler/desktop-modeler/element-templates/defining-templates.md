@@ -242,6 +242,38 @@ Note that the configuration options `editable` and `constraints` will have no ef
 For the `property`, `camunda:property`, `camunda:in`, `camunda:in:businessKey`, `camunda:out` and `camunda:field` bindings, an omitted `type` will lead to rendering the `String` component (single line input).
 
 For the `camunda:executionListener` binding, an omitted `type` will lead to the `Hidden` component (ie. no visible input for the user).
+
+###### Feel
+
+As of Camunda Modeler `v5.0.0`, we support the feel properties `optional` and `required`.
+When set, the input field offers a visual indications that a feel expression is expected.
+
+```json
+  "properties": [
+    {
+      "label": "Optional Feel Expression",
+      "type": "String",
+      "feel": "optional"
+    },
+    {
+      "label": "Required Feel Expression",
+      "type": "Text",
+      "feel": "required"
+    }
+  ]
+```
+
+__Supported Types__
+
+Camunda Platform
+
+*Feel Inputs are currently not supported for Camunda Platform element templates.*
+
+Camunda Cloud
+
+* `String`
+* `Text`
+
 #### Bindings
 
 The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The _"mapping result"_ in the following section will use `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` will be displayed and used for `[userInput]`. `[]` brackets will be used to indicate where the parameters are mapped to in the XML.
