@@ -35,7 +35,8 @@ The version of Operate is reflected in Elasticsearch object names (e.g. `operate
 
 ### Concept
 
-The migration uses Elasticsearch [ingest pipelines](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/ingest.html) to reindex the data.
+The migration uses Elasticsearch [ingest pipelines](https://www.elastic.co/guide/en/elasticsearch/reference/7.16/ingest.html) to reindex the data.
+Please ensure that your Elasticsearch cluster has at least one node with the ingest role, as described [here](https://www.elastic.co/guide/en/elasticsearch/reference/7.16/ingest.html#ingest-prerequisites).
 
 Each version of Operate delivers a set of migration steps which need to be applied for a corresponding version of Operate.
 
