@@ -18,9 +18,11 @@ optimize:
         - 8090:8090
     environment:
         - SPRING_PROFILES_ACTIVE=ccsm
-        - CAMUNDA_OPTIMIZE_IAM_ISSUER_URL=http://localhost:9090
-        - CAMUNDA_OPTIMIZE_IAM_CLIENTID=optimize
-        - CAMUNDA_OPTIMIZE_IAM_CLIENTSECRET=secret
+        - CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL=http://localhost:9090
+        - CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL=http://keycloak:8080/auth/realms/camunda-platform
+        - CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID=optimize
+        - CAMUNDA_OPTIMIZE_IDENTITY_CLIENTSECRET=secret
+        - CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE=optimize-api
         - OPTIMIZE_ELASTICSEARCH_HOST=localhost
         - OPTIMIZE_ELASTICSEARCH_HTTP_PORT=9200
         - CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED=false
@@ -39,9 +41,11 @@ Some configuration properties are optional and have default values. See a descri
 Name | Description | Default value
 -----|-------------|--------------
 SPRING_PROFILES_ACTIVE | Starts Optimize in Self-Managed mode. |
-CAMUNDA_OPTIMIZE_IAM_ISSUER_URL| The URL at which IAM can be accessed by Optimize. |
-CAMUNDA_OPTIMIZE_IAM_CLIENTID | The Client ID used to register Optimize with IAM. |
-CAMUNDA_OPTIMIZE_IAM_CLIENTSECRET | The secret used when registering Optimize with IAM. |
+CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL | The URL at which Identity can be accessed by Optimize. |
+CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL | The URL at which the Identity auth provider can be accessed by Optimize. This should match the configured provider in Identity and is to be used for container to container communication |
+CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID | The Client ID used to register Optimize with Identity. |
+CAMUNDA_OPTIMIZE_IDENTITY_CLIENTSECRET | The secret used when registering Optimize with Identity. |
+CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE | The audience used when registering Optimize with Identity. |
 OPTIMIZE_ELASTICSEARCH_HOST | The address/hostname under which the Elasticsearch node is available. | localhost
 OPTIMIZE_ELASTICSEARCH_HTTP_PORT | The port number used by Elasticsearch to accept HTTP connections. | 9200
 CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED| Determines whether or not `same-site` is enabled for Optimize Cookies. This must be set to `false`. | true
@@ -50,15 +54,15 @@ CAMUNDA_OPTIMIZE_ZEEBE_ENABLED | Enables import of Zeebe data in Optimize. | fal
 CAMUNDA_OPTIMIZE_ZEEBE_NAME | The record prefix for exported Zeebe records. | zeebe-record
 CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT | The number of partitions configured in Zeebe. | 1
 CAMUNDA_OPTIMIZE_SHARING_ENABLED | Disables the sharing feature (this is not currently supported). | false
-CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN | Disables the logout button (logout is handled by IAM). | 1
+CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN | Disables the logout button (logout is handled by Identity). | 1
 SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation | null
 OPTIMIZE_API_ACCESS_TOKEN | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set. | null
 
 ## Requirements
 
-Self-Managed Optimize must be able to connect to Elasticsearch to write and read data. In addition, Optimize needs to connect to IAM for authentication purposes. Both of these requirements can be configured with the options described above.
+Self-Managed Optimize must be able to connect to Elasticsearch to write and read data. In addition, Optimize needs to connect to Identity for authentication purposes. Both of these requirements can be configured with the options described above.
 
-Optimize must also be configured as a client in IAM, and users will only be granted access to Optimize if they have a role
+Optimize must also be configured as a client in Identity, and users will only be granted access to Optimize if they have a role
 that has `write:*` permission for Optimize.
 
 For Optimize to import Zeebe data, Optimize must also be configured to be aware of the record prefix used when the records are exported to Elasticsearch. This can also be configured per the example above.
