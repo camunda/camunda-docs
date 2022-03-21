@@ -43,6 +43,12 @@ Requirements for the components can be seen below:
 | Tasklist | OpenJDK 11+ | Elasticsearch 7.16.x |
 | Optimize | OpenJDK 11+ | Elasticsearch 7.8.x - 7.16.x |
 
+:::note Elasticsearch support
+[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported verison of Elastic compatible with Camunda Platform 8. 
+
+AWS Opensearch is not supported at this time.
+:::
+
 ### Version Matrix
 
 This overview shows which Zeebe version works with which Modeler, Operate, Tasklist and Optimize:
