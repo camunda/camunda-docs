@@ -50,7 +50,7 @@ To migrate existing process solutions that use Camunda Spin heavily, you can sti
 
 #### Expression language
 
-Camunda Platform 7 uses [JUEL (Java Unified Expression Language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/) as the expression language. In the embedded engine scneario, expressions can even read into beans (Java object instances) in the application.
+Camunda Platform 7 uses [JUEL (Java Unified Expression Language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/) as the expression language. In the embedded engine scenario, expressions can even read into beans (Java object instances) in the application.
 
 Camunda Cloud uses [FEEL (Friendly-Enough Expression Language](/reference/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
@@ -105,7 +105,7 @@ You can find a complete Java Spring Boot example, showing the Camunda Platform 7
 
 ### Programming model
 
-The programming model of Camunda 7 and Camunda Cloud is be very similar if you program in Java and use Spring. 
+The programming model of Camunda 7 and Camunda Cloud are very similar if you program in Java and use Spring. 
 
 For example, a worker in Camunda Cloud can be implemented like this (using [spring-zeebe](https://github.com/camunda-community-hub/spring-zeebe)):
 
@@ -183,7 +183,7 @@ Migrating **Modeler Plugins** is generally possible, as the same modeler infrast
 
 ## Migration overview
 
-Let's discsus if you need to migrate first, before diving into the necessary steps and what tools can help you achieve the migration.
+Let's discuss if you need to migrate first, before diving into the necessary steps and what tools can help you achieve the migration.
 
 ### When to migrate?
 
