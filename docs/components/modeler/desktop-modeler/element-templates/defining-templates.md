@@ -189,7 +189,7 @@ As seen in the example the important attributes in a property definition are:
 The input types `String`, `Text`, `Boolean`, `Dropdown` and `Hidden` are available. As seen above `String` maps to a single-line input, `Text` maps to a multi-line input.
 
 
-###### Boolean / Checkbox Type
+##### Boolean / Checkbox Type
 
 The `Boolean` type maps to a checkbox that can be toggled by the user. It renders as shown below:
 
@@ -197,7 +197,7 @@ The `Boolean` type maps to a checkbox that can be toggled by the user. It render
 
 When checked, it maps to `true` in the respective field (see [bindings](#bindings)). Note that it does not map to `${true}` and can therefore not be used e.g., for mapping a boolean to a process variable.
 
-###### Dropdown Type
+##### Dropdown Type
 
 The `Dropdown` type allows users to select from a number of pre-defined options that are stored in a custom properties `choices` attribute as `{ name, value }` pairs:
 
@@ -223,7 +223,7 @@ The resulting properties panel control looks like this:
 
 ![properties panel drop down](./img/field-dropdown.png)
 
-###### Omitted Type
+##### Omitted Type
 
 By omitting the `type` configuration the default UI component will be rendered for the respective binding.
 
@@ -242,6 +242,38 @@ Note that the configuration options `editable` and `constraints` will have no ef
 For the `property`, `camunda:property`, `camunda:in`, `camunda:in:businessKey`, `camunda:out` and `camunda:field` bindings, an omitted `type` will lead to rendering the `String` component (single line input).
 
 For the `camunda:executionListener` binding, an omitted `type` will lead to the `Hidden` component (ie. no visible input for the user).
+
+##### Feel
+
+As of Camunda Modeler `v5.0.0`, we support the feel properties `optional` and `required`.
+When set, the input field offers visual indications that a feel expression is expected.
+
+```json
+  "properties": [
+    {
+      "label": "Optional Feel Expression",
+      "type": "String",
+      "feel": "optional"
+    },
+    {
+      "label": "Required Feel Expression",
+      "type": "Text",
+      "feel": "required"
+    }
+  ]
+```
+
+###### Supported Types
+
+Camunda Platform
+
+*Feel Inputs are currently not supported for Camunda Platform element templates.*
+
+Camunda Cloud
+
+* `String`
+* `Text`
+
 #### Bindings
 
 The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The _"mapping result"_ in the following section will use `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` will be displayed and used for `[userInput]`. `[]` brackets will be used to indicate where the parameters are mapped to in the XML.
@@ -258,7 +290,7 @@ Notice that adherence to the following configuration options is enforced by desi
 
 <TabItem value='both'>
 
-###### `property`
+##### `property`
 
 | **Binding `type`**  | `property`  |
 |---|---|
@@ -272,7 +304,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 
 <TabItem value='platform'>
 
-###### `camunda:property`
+##### `camunda:property`
 
 | **Binding `type`**  | `camunda:property`  |
 |---|---|
@@ -280,7 +312,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `name`: the name of the extension element property  |
 | **Mapping result** | `<camunda:property name="[name]" value="[userInput]" />`  |
 
-###### `camunda:inputParameter`
+##### `camunda:inputParameter`
 
 | **Binding `type`**  | `camunda:inputParameter`  |
 |---|---|
@@ -288,7 +320,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `name`: the name of the input parameter<br />`scriptFormat`: the format of the script (if script is to be mapped)  |
 | **Mapping result** | If `scriptFormat` is not set:<br />`<camunda:inputParameter name="[name]">[userInput]</camunda:inputParameter>`<br /><br />If `scriptFormat` is set:<br />`<camunda:inputParameter name="[name]"><camunda:script scriptFormat="[scriptFormat]">[userInput]</camunda:script></camunda:inputParameter>`  |
 
-###### `camunda:outputParameter`
+##### `camunda:outputParameter`
 
 |  **Binding `type`**  |  `camunda:outputParameter` |
 |---|---|
@@ -296,7 +328,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `source`: the source value to be mapped to the `outputParameter`<br />`scriptFormat`: the format of the script (if script is to be mapped)  |
 | **Mapping result (example)** | If `scriptFormat` is not set:<br />`<camunda:outputParameter name="[userInput]">[source]</camunda:inputParameter>`<br /><br />If `scriptFormat` is set:<br />`<camunda:outputParameter name="[userInput]"><camunda:script scriptFormat="[scriptFormat]">[source]</camunda:script></camunda:outputParameter>`  |
 
-###### `camunda:in`
+##### `camunda:in`
 
 |  **Binding `type`**  |  `camunda:in` |
 |---|---|
@@ -304,7 +336,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `target`: the target value to be mapped to<br />`expression`: `true` indicates that the userInput is an expression<br />`variables`: either `all` or `local` indicating the variable mapping  |
 | **Mapping result** | If `target` is set:<br />`<camunda:in source="[userInput]" target="[target]"/>`<br /><br />If `target` is set and `expression` is set to `true`:<br />`<camunda:in sourceExpression="[userInput]" target="[target]" />`<br /><br /> If `variables` is set to `local`:<br />` <camunda:in local="true" variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`)<br /><br />If `variables` is set to `local` and `target` is set:<br />`<camunda:in local="true" source="[userInput]" target="[target]" />`<br /><br />If `variables` is set to `local`, `target` is set and `expression` is set to `true`:<br />`<camunda:in local="true" sourceExpression="[userInput]" target="[target]" />`<br /><br />If `variables` is set to `all`:<br />`<camunda:in variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`) |
 
-###### `camunda:in:businessKey`
+##### `camunda:in:businessKey`
 
 |  **Binding `type`**  |  `camunda:in:businessKey` |
 |---|---|
@@ -312,7 +344,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  |  |
 | **Mapping result** | `<camunda:in businessKey="[userInput]" />` |
 
-###### `camunda:out`
+##### `camunda:out`
 
 |  **Binding `type`**  |  `camunda:out` |
 |---|---|
@@ -320,7 +352,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  |  `source`: the source value to be mapped<br />`sourceExpression`: a string containing the expression for the source attribute<br />`variables`: either `all` or `local` indicating the variable mapping  |
 | **Mapping result** | If `source` is set:<br />`<camunda:out source="[source]" target="[userInput]" />`<br /><br />If `sourceExpression` is set:<br />`<camunda:out sourceExpression="[sourceExpression]" target="[userInput]" />`<br /><br />If `variables` is set to `all`:<br />`<camunda:out variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`)<br /><br />If `variables` is set to `local` and `source` is set:<br />`<camunda:out local="true" source="[source]" target="[userInput]" />`<br /><br />If `variables` is set to `local` and `sourceExpression` is set:<br />`<camunda:out local="true" sourceExpression="[source]" target="[userInput]" />`<br /><br />If `variables` is set to `local`:<br />`<camunda:out local="true" variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`) |
 
-###### `camunda:executionListener`
+##### `camunda:executionListener`
 
 |  **Binding `type`**  |  `camunda:executionListener` |
 |---|---|
@@ -328,7 +360,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `event`: value for the `event` attribute<br />`scriptFormat`: value for the `scriptFormat` attribute |
 | **Mapping result** | `<camunda:executionListener event="[event]"><camunda:script scriptFormat="[scriptFormat]">[value]</camunda:script></camunda:executionListener>`<br />(Notice that `[value]` needs to be set, since only `Hidden` is allowed as a type hence the user can not set a `[userInput]`) |
 
-###### `camunda:field`
+##### `camunda:field`
 
 |  **Binding `type`**  |  `camunda:field` |
 |---|---|
@@ -336,7 +368,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `name`: value for the `name` attribute<br />`expression`: `true` that an expression is passed |
 | **Mapping result** | `<camunda:field name="[name]"><camunda:string>[userInput]</camunda:string></camunda:field>`<br /><br />If `expression` is set to `true`:<br />`<camunda:field name="[name]"><camunda:expression>[userInput]</camunda:expression>` |
 
-###### `camunda:errorEventDefinition`
+##### `camunda:errorEventDefinition`
 
 |  **Binding `type`**  |  `camunda:errorEventDefinition` |
 |---|---|
@@ -348,7 +380,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 
 <TabItem value='cloud'>
 
-###### `zeebe:input`
+##### `zeebe:input`
 
 | **Binding `type`**  | `zeebe:input`  |
 |---|---|
@@ -356,7 +388,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `name`: the name of the input parameter |
 | **Mapping result** | `<zeebe:input target="[name]" source="[userInput] />`  |
 
-###### `zeebe:output`
+##### `zeebe:output`
 
 | **Binding `type`**  | `zeebe:output`  |
 |---|---|
@@ -364,7 +396,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `source`: the source of the output parameter |
 | **Mapping result** | `<zeebe:output target="[userInput]" source="[source] />`  |
 
-###### `zeebe:taskHeader`
+##### `zeebe:taskHeader`
 
 | **Binding `type`**  | `zeebe:taskHeader`  |
 |---|---|
@@ -372,7 +404,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `key`: the key of the task header |
 | **Mapping result** | `<zeebe:header key="[key]" value="[userInput] />`  |
 
-###### `zeebe:taskDefinition:type`
+##### `zeebe:taskDefinition:type`
 
 | **Binding `type`**  | `zeebe:taskDefinition:type`  |
 |---|---|
