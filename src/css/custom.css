@@ -227,6 +227,10 @@ navbar .navbar .navbar__link[href*=self-managed] {
   text-align: center;
 }
 
+.component-desc{
+  text-align: center;
+}
+
 .component-block:hover{
   transform: translateY(-8px);
 }

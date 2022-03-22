@@ -90,7 +90,7 @@ function Feature2({imageUrl, url, title, description}) {
           </div>
         )}
         <h3 className="component-title">{title}</h3>
-        <p>{description}</p>
+        <p className="component-desc">{description}</p>
       </div>
   );
 }
