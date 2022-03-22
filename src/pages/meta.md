@@ -5,33 +5,33 @@ description: Learn how Camunda Platform 8 docs are structured and what you can e
 
 # How to use the docs
 
-[docs.camunda.io](https://docs.camunda.io) is home to the Camunda Platform 8 docs including all the components. 
+[docs.camunda.io](https://docs.camunda.io) is home to the Camunda Platform 8 docs, including all of the components. 
 
-Whether you are just reading the docs to understand how Camunda Platform 8 works or helping write the docs, this _meta_ page will give you all the info you need to be successful.
+Whether you are reading the docs to understand how Camunda Platform 8 works, or helping write the docs, this _meta_ page will give you all the information you need to be successful.
 
 ## Structure
 
-Camunda Platform 8 docs are structured in such a way that the documentation is SaaS-first meaning you will be introduced to the components, concepts, and Best Practices based on how they are used in Camunda Platform 8 SaaS.
+Camunda Platform 8 docs are structured in such a way that the documentation is SaaS-first, meaning you will be introduced to the components, concepts, and Best Practices based on how they are used in Camunda Platform 8 SaaS.
 
-For new users, this means they will be able to get immediately acquainted with Camunda Platform 8 through the trial experience by navigating the vast majority of the documentation.
+This means new users can get immediately acquainted with Camunda Platform 8 through the trial experience by navigating the vast majority of the documentation.
 
-### Self-Managed Section
+### Self-Managed section
 
-Keen eyes may notice the Self-Managed section in the top navigation or the icon on the main page look a little different than the rest. This is intentional to help distinguish this area in the docs. 
+Keen eyes may notice the Self-Managed section in the top navigation or the icon on the main page looks a little different than the rest of the sections. This is intentional to help distinguish this area in the docs from SaaS-focused content. 
 
-In this section, documentation includes guidance specifically for Self-Managed users that may not apply to SaaS users, including deployment guides for current components of Camunda Platform 8. 
+In the Self-Managed section, documentation includes guidance specifically for Self-Managed users that may not apply to SaaS users, including deployment guides for current components of Camunda Platform 8.
 
-In addition, you can find Optimize documentation for Camunda Platform 7. 
+In addition, you can find Optimize documentation for Camunda Platform 7 in this section. 
 
 ## Badges
 
-As the product matures, the documentation will grow. We are looking for ways to experiment with adding visuals near the top of the docs to help you understand the expectation for a given piece of content.
+As the product matures, the documentation will grow. We are experimenting with added visuals near the top of the docs to help you understand the expectations for a given piece of content. For example, how long will it take to read and complete the tasks in the doc? Is this particular document targeted toward beginners versus advanced users? Is this document exclusive to Camunda Platform 7 or Camunda Platform 8 users?
 
 Disagree with how we've badged our content? Feel free to submit a PR!
 
 ### Difficulty badges
 
-Our getting started guides are for beginners and always will be. But not all of our guides will be getting started guides! Look for these labels to help you understand what's the best guide for your level.
+Our getting started guides are for beginners and always will be. However, not all of our guides will be getting started guides! Look for these labels to help you understand what's the best guide for your level.
 
 
 <span class="badge badge--beginner">Beginner</span> 
@@ -66,7 +66,7 @@ We use a mix of word count and reading estimates mixed with hands-on experience 
 
 Shipping incrementally means we may not always be at feature parity between Camunda Platform 8 and Camunda Platform 7 or Desktop Modeler and Web Modeler. 
 
-In those instances, big or small, we want to make sure you can see what works for what product or component.
+In those instances, big or small, we want to make sure you can see what works with each product or component.
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
