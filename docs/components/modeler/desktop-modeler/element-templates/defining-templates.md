@@ -37,13 +37,13 @@ As seen in the code snippet a template consist of a number of important componen
   Example (Camunda Platform)
 
   ```json
-  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.6.0/resources/schema.json"
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.8.0/resources/schema.json"
   ```
 
   Example (Camunda Cloud)
 
   ```json
-  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.1.0/resources/schema.json"
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.2.0/resources/schema.json"
   ```
 
 * `name : String`: Name of the template that will appear in the Catalog.
@@ -57,15 +57,15 @@ As seen in the code snippet a template consist of a number of important componen
 
 The application uses the `$schema` property to ensure compatibility for a given element template. The latest supported [Camunda element templates JSON Schema versions](https://github.com/camunda/element-templates-json-schema) are
 
-* `v0.7.0` (Camunda Platform)
-* `v0.1.0` (Camunda Cloud)
+* `v0.8.0` (Camunda Platform)
+* `v0.2.0` (Camunda Cloud)
 
 The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
 
-For example, given the following `$schema` definition, the application takes `0.6.0` as the JSON Schema version of the element template.
+For example, given the following `$schema` definition, the application takes `0.8.0` as the JSON Schema version of the element template.
 
 ```json
-"$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.6.0/resources/schema.json"
+"$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.8.0/resources/schema.json"
 ```
 
 The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, the Camunda Modeler assumes the latest JSON Schema version for Camunda Platform element templates.
