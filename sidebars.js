@@ -47,6 +47,9 @@ module.exports = {
         {
           "Access control": [
             "components/concepts/access-control/applications",
+            "components/concepts/access-control/apis",
+            "components/concepts/access-control/permissions",
+            "components/concepts/access-control/roles",
           ]
         }
       ],
