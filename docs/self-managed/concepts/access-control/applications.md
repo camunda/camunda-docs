@@ -5,9 +5,9 @@ sidebar_label: "Applications"
 ---
 
 To be able to use [Identity](/self-managed/identity/what-is-identity.md) for authentication
-each deployed component requires a matching Application to be created.
+each deployed component requires a matching application to be created.
 
-When an application is created in the Identity UI, a Client ID and Client Secret will be generated which can be
+When an application is created in the Identity UI, a client ID and client secret will be generated which can be
 used in the component configuration allowing authentication flows to happen.
 
 :::tip Want to learn how to add an application in [Identity](/self-managed/identity/what-is-identity.md)?

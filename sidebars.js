@@ -44,14 +44,6 @@ module.exports = {
         "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
-        {
-          "Access control": [
-            "components/concepts/access-control/applications",
-            "components/concepts/access-control/apis",
-            "components/concepts/access-control/permissions",
-            "components/concepts/access-control/roles",
-          ]
-        }
       ],
       "Cloud Console": [
         "components/cloud-console/introduction",
@@ -407,6 +399,18 @@ module.exports = {
   ],
   "Self-Managed": [
     "self-managed/overview",
+    {
+      Concepts: [
+        {
+          "Access control": [
+            "self-managed/concepts/access-control/applications",
+            "self-managed/concepts/access-control/apis",
+            "self-managed/concepts/access-control/permissions",
+            "self-managed/concepts/access-control/roles",
+          ]
+        }
+      ],
+    },
     {
       "Zeebe": [
         "self-managed/zeebe-deployment/index",

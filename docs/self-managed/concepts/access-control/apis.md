@@ -8,7 +8,7 @@ An API refers to a service that provides resources, and it is through these reso
 access via permissions.
 
 In [Identity](/self-managed/identity/what-is-identity.md) we use APIs to attach 
-[Permissions](/components/concepts/access-control/permissions.md) to and once they have been created the
+[Permissions](/self-managed/concepts/access-control/permissions.md) to and once they have been created the
 components in the Camunda Cloud stack are then able to allow or deny Users certain functionality.
 
 
