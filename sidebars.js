@@ -582,6 +582,7 @@ module.exports = {
             "self-managed/identity/guides/adding-an-application",
             "self-managed/identity/guides/adding-an-api",
             "self-managed/identity/guides/adding-a-permission",
+            "self-managed/identity/guides/adding-a-role",
             "self-managed/identity/guides/configure-external-identity-provider"
           ],
         }, {
