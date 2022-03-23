@@ -41,4 +41,4 @@ You can now take a guided tour through Camunda Cloud using the **Product Walkthr
 
 ## Next steps
 
-- [Set up client connection credentials](setup-client-connection-credentials.md)
+- [Create your Cluster](create-your-cluster)
