@@ -143,6 +143,10 @@ module.exports = {
               to: "contact",
             },
             {
+              label: "Meta",
+              to: "meta",
+            },
+            {
               label: "Blog",
               href: "https://camunda.com/blog/category/camunda-cloud/",
             },
