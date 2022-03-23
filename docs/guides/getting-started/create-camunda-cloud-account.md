@@ -4,6 +4,7 @@ title: Sign up & log in
 slug: /guides/getting-started/
 description: "Set up your Camunda Cloud account to get started."
 ---
+
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--short">Time estimate: 5 minutes</span>
 
@@ -35,9 +36,7 @@ Log in with the email address and password you used in the previous form, or use
 
 After login, you'll see the console overview page. This is the central place to manage your clusters, and the diagrams and forms you want to deploy to Camunda Cloud.
 
-![overview-gse](./img/home.png)
-
-You can now take a guided tour through Camunda Cloud using the **Product Walkthrough** button.
+![overview-home](./img/home.png)
 
 ## Next steps
 
