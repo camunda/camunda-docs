@@ -18,16 +18,19 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 * IDE (IntelliJ, VSCode, or similar)
 * Download and unzip or clone the [repo](https://github.com/camunda-cloud/camunda-cloud-tutorials), then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`
 
-## Guide steps
+### Create a cluster
 
-First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one.
+You must create a cluster if you have a new Camunda Cloud account. 
 
-- [Prerequisites](#prerequisites)
-- [Guide steps](#guide-steps)
-  - [Design your process with BPMN](#design-your-process-with-bpmn)
-  - [Create credentials for your Zeebe client](#create-credentials-for-your-zeebe-client)
-  - [Create a worker for the service task](#create-a-worker-for-the-service-task)
-- [Next steps](#next-steps)
+1. To create a cluster, click the **Clusters** tab, and click **Create New Cluster**.
+2. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel, the latest generation, and the region closest to you. Click **Create**.
+3. Your cluster will take a few moments to create. Check the satuts on the **Clusters** page or by clicking into the cluster itself and looking at the **Applications Overview**.
+
+Even while the cluster shows a status **Creating** you can still proceed to begin modeling.
+
+:::note
+Zeebe must show a status of **Healthy** to properly deploy your model in future guide steps.
+:::
 
 ### Design your process with BPMN
 

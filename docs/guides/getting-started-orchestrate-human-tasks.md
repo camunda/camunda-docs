@@ -19,6 +19,20 @@ In this guide, we’ll step through one way to create an automated process utili
 - Ensure you have a valid [Camunda Cloud account](./getting-started/create-camunda-cloud-account.md), or sign up if you still need one.
 - (Optional) Install [Camunda Desktop Modeler](../components/modeler/desktop-modeler/install-the-modeler.md).
 
+### Create a cluster
+
+You must create a cluster if you have a new Camunda Cloud account. 
+
+1. To create a cluster, click the **Clusters** tab, and click **Create New Cluster**.
+2. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel, the latest generation, and the region closest to you. Click **Create**.
+3. Your cluster will take a few moments to create. Check the satuts on the **Clusters** page or by clicking into the cluster itself and looking at the **Applications Overview**.
+
+Even while the cluster shows a status **Creating** you can still proceed to begin modeling.
+
+:::note
+Zeebe must show a status of **Healthy** to properly deploy your model in future guide steps.
+:::
+
 ### Create an automated process with user tasks
 
 To create an automated process with user tasks, take the following steps:
