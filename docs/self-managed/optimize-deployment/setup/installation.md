@@ -126,7 +126,7 @@ You can also adjust logging levels using environment variables as described in t
 
 #### License key file
 
-If you want the Optimize Docker container to automatically recognize your [license key file]({{< ref "/user-guide/license/_index.md" >}}), you can use standard [Docker means](https://docs.docker.com/storage/volumes/) to make the file with the license key available inside the container. Replacing the `ABSOLUTE_PATH_ON_HOST_TO_LICENSE_FILE` with the absolute path to the license key file on your host can be done with the following command:
+If you want the Optimize Docker container to automatically recognize your [license key file](./license.md), you can use standard [Docker means](https://docs.docker.com/storage/volumes/) to make the file with the license key available inside the container. Replacing the `ABSOLUTE_PATH_ON_HOST_TO_LICENSE_FILE` with the absolute path to the license key file on your host can be done with the following command:
 
 ```
 docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
