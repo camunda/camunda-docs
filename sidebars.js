@@ -330,6 +330,7 @@ module.exports = {
       "APIs": [
         "apis-clients/public-api",
         "apis-clients/grpc",
+        "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/cloud-console-api-reference",
       ],
