@@ -6,75 +6,83 @@ title: Operate API (REST)
 ## Introduction
 
 Operate API is a REST API and provides searching, getting, and changing data of Operate.
-Requests and responses are in JSON notation.
-
-Some objects have additional endpoints. For example, `process-definitions` has an endpoint to get the process-defintion
-as XML representation.
-
-In case of errors, Operate API returns an error object as JSON with status, message, type, and instance information.
+Requests and responses are in JSON notation. Some objects have additional endpoints.
+For example, `process-definitions` has an endpoint to get the process-definition as XML representation.
+In case of errors, Operate API returns an error object.
 
 ## Authentication
-[TODO: Add cookie and jwt token validation (cloud only)]
+
+You need an authentication to access the API endpoints.
+The authentication is described in [Operate Configuration - REST API access](/docs/self-managed/operate-deployment/configuration/#rest-api-access).
 
 ## Endpoints
 
-|Endpoint|Description|
-|:---  | ---: |
-|**Process definitions**||
-|`POST /v1/process-definitions/search`| Search for process definitions |
-|`GET /v1/process-definitions/{key}` | Get process definition by key |
-|`GET /v1/process-definitions/{key}/xml` | Get process defintion by key as XML |
-|`DELETE /v1/process-definitions/{key}`|Delete process definition by key |
-|**Process instances**||
-|`POST /v1/process-instances/search` | Search for process instances |
-|`GET /v1/process-instances/{key}` |  Get process instance by key |
-|`DELETE /v1/process-instances/{key}` | Delete process instance _and dependant_ data by key|
-|**Incidents**||
-|`POST /v1/incidents/search`| Search for incidents | 
-|`GET /v1/incidents/{key}` | Get incident by key |
-|**Flownode instances**|| 
-|`POST /v1/flownode-instances/search`| Search for flownode instances |
-|`GET /v1/flownode-instances/{key}` | Get flownode instance by key |
-|**Variables**|| 
-|`POST /v1/variables/search`| Search for variables. Results can contain truncated variable values.| 
-|`GET /v1/variables/{key}` | Get variable by key. Contains the full value of variable |
+| Endpoint (HTTP verb + URL path)         |Description|
+|:----------------------------------------| ---: |
+| **Process definitions**                 ||
+| `POST /v1/process-definitions/search`   | Search for process definitions |
+| `GET /v1/process-definitions/{key}`     | Get process definition by key |
+| `GET /v1/process-definitions/{key}/xml` | Get process defintion by key as XML |
+| **Process instances**                   ||
+| `POST /v1/process-instances/search`     | Search for process instances |
+| `GET /v1/process-instances/{key}`       |  Get process instance by key |
+| `DELETE /v1/process-instances/{key}`    | Delete process instance _and dependant_ data by key|
+| **Incidents**                           ||
+| `POST /v1/incidents/search`             | Search for incidents | 
+| `GET /v1/incidents/{key}`               | Get incident by key |
+| **Flownode instances**                  || 
+| `POST /v1/flownode-instances/search`    | Search for flownode instances |
+| `GET /v1/flownode-instances/{key}`      | Get flownode instance by key |
+| **Variables**                           || 
+| `POST /v1/variables/search`             | Search for variables. Results can contain truncated variable values.| 
+| `GET /v1/variables/{key}`               | Get variable by key. Contains the full value of variable |
 
 ## Search
-Every object has a search `/v1/<object>/search` endpoint which can be requested by `POST` and given query request:
+Every object has a search `/v1/<object>/search` endpoint which can be requested by `POST` and a given query request.
 
 ### Query
-The query request consists of specifications about filter, size, sort, and pagination.
+The query request consists of components for **filter**, **size**, **sort**, and **pagination**.
 ```
 {
    "filter": { object fields to match },
-   "size": <number of items of objects to return>,
-   "sort": [ {"field":"<name of object field to sort on>", "order": "<ASC|DESC>" ],
-   "searchAfter": [ where to search after: array of objects copied from previous results ] 
+   "size": <number of items to return>,
+   "sort": [ {"field":"<name of field to sort on>", "order": "<ASC|DESC>" ],
+   "searchAfter": [ <identifier of item from which next search should start> ] 
 }
 ```
 #### Filter
-Specify on which fields should the search match. Only items that match the given fields will be returned.
-Take a look at the [object schemas](https://github.com/camunda-cloud/operate/wiki/Public-API-(History-API)#object-schemas) to find out the fields you can use to filter.
+Specifies which fields should match. Only items that match the given fields will be returned.
+The section [Object schemas](#object-schemas) lists all available fields for each object.
 
 ##### Filter strings, numbers and, booleans.
-Specify the exact value of the field.
+Fields of type string, numbers, and booleans need the exact value to match.
 
-###### Example
-Return all items with field 'processInstanceKey' equals 235:
+###### Examples
+Return all items with field `processInstanceKey` equals `235`:
 ```json
 { "filter": { "processInstanceKey": 235 } }
 ```
-You can also give more fields.
-Return all items with field 'processInstanceKey' equals 235, 'state' equals 'ACTIVE' and 'incidents' equals 'true'
+Return all items with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incidents` equals `true`
 ```json
 { "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incidents": true }}
 ```
 ##### Filter dates
-Specify and exact date or a range of date by using the syntax for [datemath of Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/common-options.html#date-math)
-[TODO: Describe  possible date modifier]
+Date fields need to be specified in format: `yyyy-MM-dd'T'HH:mm:ss.SSSZZ`, for example `2022-03-17T11:50:25.729+0000`.
+
+You can use modifier to match date ranges:
+
+| Modifier | Description |
+|--|-------------|
+| \|\|/y  | Within a year |
+| \|\|/M | Within a month |
+| \|\|/w | Within a week |
+| \|\|/d | Within a day |
+| \|\|/h | Within an hour |
+| \|\|/m | Within a minute |
+| \|\|/s | Within a second |
 
 ###### Example
-Return all items with field 'startDate' within a minute ('||/m') for **2022-03-17 11:50:25**
+Return all items with field `startDate` within a minute (`||/m`) for `2022-03-17 11:50:25`
 ```json
 {
   "filter": {
@@ -83,36 +91,46 @@ Return all items with field 'startDate' within a minute ('||/m') for **2022-03-1
 }
 ```
 #### Size
-How many items should be maximum returned. Should be a number.
+Maximum items should be returned. Must be a number.
 
 ##### Example
-Return maximum 23 items:
+Return maximum `23` items:
 ```json
 { "size": 23 }
 ```
 #### Sort
-Specify which field of the object should be sorted and whether ascending ("ASC") or descending ("DESC").
+Specify which field of the object should be sorted and whether ascending (`ASC`) or descending (`DESC`).
 
 ##### Example
-Sort by name descending:
+Sort by `name` **desc**ending:
 ```json
 { "sort": [{"field":"name","order":"DESC"}] }
 ```
 #### Pagination
-Specify after which object should be searched. For that you need the values from previous results. You copy the values from `sortValues` field
-from the results object into the `searchAfter` value. See also `Results`
+Specify the item where the next search should start. For that you need the values from previous results. 
+You copy the values from `sortValues` field from the previous results into the `searchAfter` value of query. 
+See also [Results](#results)
 
 ##### Example
-Get next page for sorted by name descending:
+Get next page for: sorted by name descending:
 ```json
 { "sort": [{"field":"name","order":"DESC"}], "searchAfter": ["the-name",12345] }
 ```
-
 #### Query components combined
-[TODO: Describe default values]
+The query components `filter`, `size`, `sort`, and `searchAfter` can be combined.
+
+Default values are:
+
+| Component   | Default Value                         | Description                  |
+|-------------|---------------------------------------|------------------------------|
+| filter      | null                                  | empty (all fields match)     |
+| size        | 10                                    ||
+| sort        | ```[{"field":"key","order":"ASC"}]``` | Sorted ascending by key      | 
+| searchAfter | null                                  | first items will be returned |
+
 ##### Example
 
-Get max **50** process instances with `processVersion` equals `2` sorted **asc**ending by `bpmnProcessId`:
+Get max `50` process instances with `processVersion` equals `2` sorted `asc`ending by `bpmnProcessId`:
 
 `POST /v1/process-instances/search`
 
@@ -152,7 +170,7 @@ Results are:
 }
 ```
 
-Take the value of `sortValues` and copy it to `searchAfter` for the next 50 items:
+Take the value of `sortValues` and copy it to `searchAfter` for the next `50` items:
 
 ```json
 {
@@ -174,10 +192,11 @@ Take the value of `sortValues` and copy it to `searchAfter` for the next 50 item
 ``` 
 
 ### Results
-The API responds with a `Results` object. It contains an `items` array, `total` amount of found objects and `sortValues` for pagination.
+The API responds with a `Results` object. It contains an `items` array, `total` amount of found items 
+and `sortValues` for pagination.
 ```
 {
-  "items": [ { object 1 } , { object 2 } ... ],
+  "items": [ { item 1 } , { item 2 } ... ],
   "total": <number of found items>,
   "sortValues": [<array of values to retrieve next page of results>]
 }
@@ -188,8 +207,10 @@ An array of objects that matches the query.
 The total amount of found objects. This is an exact value until 10.000. Over that try to make your query more specific.  
 See also [Elasticsearch max results](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/index-modules.html#index-max-result-window)
 #### sortValues (Pagination)
-Use the value (an array) of this field to get the next page of results in your next query. Copy the value to `searchAfter` in your next query to get the next page. See also [Elasticsearch search after](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/paginate-search-results.html#search-after)
-[TODO: Describe more/better]
+Use the value (an array) of this field to get the next page of results in your next query. 
+Copy the value to `searchAfter` in your next query to get the next page. 
+
+See also [Elasticsearch search after](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/paginate-search-results.html#search-after)
 
 ##### Example
 Results for `process-instances`:
@@ -224,10 +245,8 @@ Results for `process-instances`:
 
 ## Get object by key
 
-[TODO: Describe more] 
-Every object has a search `/v1/<object>/{key}` endpoint which can be requested by `GET`
-
-Specify the key of the object to get the full object. Every object has a `key` field for that.
+Every object has a `GET /v1/<object>/{key}` endpoint where `{key}` is the identifier of the object.
+Every object has a `key` field.
 
 ### Example
 Get the data for process instance with key `2251799813699213`:
@@ -247,8 +266,9 @@ Get the data for process instance with key `2251799813699213`:
 }
 ```
 ## Change objects
-Some objects can be changed eg. deleted. The endpoint is the same as getting the object but with HTTP DELETE instead of HTTP GET.
-The response is `ChangeStatus` object which describes what happened and how many objects were changed.
+Some objects can be changed e.g. deleted. 
+The endpoint is the same as getting the object but with HTTP `DELETE` instead of HTTP `GET`.
+The response is a `ChangeStatus` object which describes what happened and how many objects were changed.
 
 ### Example
 Delete the data for process instance (and all dependant data) with key `2251799813699213`:
@@ -265,14 +285,21 @@ Delete the data for process instance (and all dependant data) with key `22517998
 
 ## Object schemas
 
-[TODO: Describe more]
-[TODO: Add reference page]
+Each object has a set of fields with values. 
+These values could be of type `string`, `number`, `boolean`, `dateString`
+
+|Type|Example|
+|---|--|
+|string|"Operate"|
+|number|235|
+|boolean| true|false |
+|dateString| "2022-03-23T11:50:25.729+0000"|
 
 ### Process definition
 ```
 {
  "key":	           <number>
- "name":	   <string>
+ "name":	       <string>
  "version":        <number> 
  "bpmnProcessId":  <string>
 }
@@ -284,9 +311,9 @@ Delete the data for process instance (and all dependant data) with key `22517998
  "processVersion":       <number>
  "bpmnProcessId":        <string>
  "parentKey":	         <number>
- "startDate":	         <date string: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
- "endDate":	         <date string: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
- "state":	         <string>
+ "startDate":	         <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "endDate":	             <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "state":	             <string>
  "processDefinitionKey": <number>
 }
 ```
@@ -296,10 +323,10 @@ Delete the data for process instance (and all dependant data) with key `22517998
  "key":	                 <number>
  "processDefinitionKey": <number>
  "processInstanceKey":	 <number>
- "type":	         <string>
- "message":	         <string>
- "creationTime":	 <date string: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
- "state":	         <string>
+ "type":	             <string>
+ "message":	             <string>
+ "creationTime":	     <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "state":	             <string>
 }
 ```
 ### Flownode instance
@@ -307,11 +334,11 @@ Delete the data for process instance (and all dependant data) with key `22517998
 {
  "key":                  <number>
  "processInstanceKey":	 <number>
- "startDate":            <date string: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
- "endDate":	         <date string: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
- "incidentKey":   	 <number>
- "type":	         <string>
- "state":	         <string>
+ "startDate":            <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "endDate":	             <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "incidentKey":   	     <number>
+ "type":	             <string>
+ "state":	             <string>
  "incident":	         <boolean>
 }
 ```
@@ -321,8 +348,8 @@ Delete the data for process instance (and all dependant data) with key `22517998
  "key":	                <number>
  "processInstanceKey":	<number>
  "scopeKey":	        <number>
- "name":	        <string>
- "value":	        <string>. - Always truncated if value is too big in "search" results. In "get object" result it is not truncated.
+ "name":	            <string>
+ "value":	            <string> - Always truncated if value is too big in "search" results. In "get object" result it is not truncated.
  "truncated":	        <boolean> - If true 'value' is truncated. 
 }
 ```
@@ -336,8 +363,8 @@ Delete the data for process instance (and all dependant data) with key `22517998
 ### Error
 ```
 {
- "status":	 <number> - HTTP Status
- "message":	 <string> - Details about the error
+ "status":	     <number> - HTTP Status
+ "message":	     <string> - Details about the error.
  "instance":	 <string> - UUID for look up eg. in log messages
  "type":         <string> - Type of error. Could be ServerException, ClientException, ValidationException, ResourceNotFoundException
 }
