@@ -190,7 +190,7 @@ const MixpanelElement = () => {
                     orgId = user["https://camunda.com/orgs"][0].id;
                   }
                   const userId = user.sub;
-                  mixpanel.init("1104cabe553c23b7e67d56b1976437aa");
+                  mixpanel.init("b4db7bd0787698f42fb2929d88a8a85f");
                   mixpanel.identify(userId);
                   const superProperties = { userId, stage };
                   if (orgId) {
