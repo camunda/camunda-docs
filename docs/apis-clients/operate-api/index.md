@@ -70,7 +70,9 @@ Return all items with field `processInstanceKey` equals `235`:
 ```json
 { "filter": { "processInstanceKey": 235 } }
 ```
-Return all items with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incidents` equals `true`
+
+Return all items with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incidents` equals `true`:
+
 ```json
 { "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incidents": true }}
 ```
@@ -135,7 +137,7 @@ See also [results](#results).
 
 ##### Example
 
-Get next page for: sorted by name descending:
+Get next page for sorted by name descending:
 
 ```json
 { "sort": [{"field":"name","order":"DESC"}], "searchAfter": ["the-name",12345] }
