@@ -135,7 +135,7 @@ The broker stores the process under its BPMN process id and assigns a version.
 ```go
 	// After the client is created
 	ctx := context.Background()
-	response, err := client.NewDeployProcessCommand().AddResourceFile("order-process.bpmn").Send(ctx)
+	response, err := client.NewDeployResourceCommand().AddResourceFile("order-process.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -253,7 +253,7 @@ func main() {
 
 	// deploy process
 	ctx := context.Background()
-	response, err := zbClient.NewDeployProcessCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
+	response, err := zbClient.NewDeployResourceCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
