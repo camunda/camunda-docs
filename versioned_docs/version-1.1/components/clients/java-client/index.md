@@ -27,7 +27,7 @@ Use the latest released version from [Maven Central](https://search.maven.org/ar
 
 ## Spring Integration
 
-If you build a Spring or Spring Boot application, you might want to use [Spring Zeebe](../../other-clients/spring) instead of handling the lifecycle and configuration of the Java client yourself (as described in the following paragraphs).
+If you build a Spring or Spring Boot application, you might want to use [Spring Zeebe](/components/clients/other-clients/spring.md) instead of handling the lifecycle and configuration of the Java client yourself (as described in the following paragraphs).
 
 ## Bootstrapping
 
@@ -90,10 +90,7 @@ ZeebeClient client =
 ## Next steps
 
 - [Getting Started Guide](https://github.com/camunda-cloud/camunda-cloud-get-started): A comprehensive tutorial that covers Camunda Modeler, Operate, and the Java client.
-
-[//]:# (Should we link to the desktop browser version of the gettin started guide here?)
-
 - [Job worker](job-worker.md): An introduction to the Java client's job worker.
 - [Logging](logging.md): An introduction to configuring logging for a Zeebe client.
 - [Writing tests](testing.md): An introduction to writing tests that use an embedded version of the workflow engine.
-- [Examples](../java-client-examples/index.md): A collection of specific examples for different use cases.
+- [Examples](components/clients/java-client-examples/index.md): A collection of specific examples for different use cases.

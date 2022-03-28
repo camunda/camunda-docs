@@ -5,6 +5,7 @@
  * work well for content-centric websites.
  */
 
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #ff1f00;
@@ -37,7 +38,7 @@ body {
   background-image: url("/img/Camunda_Master_Colours_RGB.png");
   background-color: transparent;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
 }
 
 .button--hero {
@@ -48,17 +49,15 @@ body {
   background-color: #e6e7e8;
 }
 
-.sign-up-link {
-  color: #D1D3D4;
-}
-
-.sign-up-link:hover {
-  color: #14d890;
-}
-
 .osano-footer-link-docu {
   color: var(--ifm-color-link-footer);
 
+}
+
+.hero--secondary {
+  background-color: #14d890;
+  background-size: 100%;
+  color: #000;
 }
 
 /* Osano Styles  */
@@ -140,4 +139,109 @@ svg.implemented:hover [stroke="#333"]{
 .badge--long {
   background-color: #0075FF;
   color: #FFFFFF;
+}
+
+.badge--platform {
+  background-color: #FC5D0D;
+  color: #FFFFFF;
+  margin-bottom: 1em;
+}
+.badge--cloud {
+  background-color: #26D07C;
+  color: #000000;
+  margin-bottom: 1em;
+}
+
+navbar .navbar .navbar__link[href*=self-managed] {
+  font-size: 0;
+  padding: 4px;
+  margin: 0 4px;
+}
+
+ .menu__link[href*=self-managed]:hover{
+  color: #14D890;
+ }
+
+.navbar .navbar__link[href*=self-managed]:hover{
+  color: #14D890;
+ }
+
+.navbar .navbar__link[href*=self-managed]:before {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+  float: left;
+}
+
+.navbar .navbar__link[href*=self-managed]:before {
+  background-image: url('../../static/img/self-managed.png');
+  margin-right: 2px;
+}
+
+.sign-up{
+ color: #fff !important;
+ margin: 1em;
+}
+
+.sign-up:hover{
+  color: #000 !important;
+ }
+
+.get-started:hover{
+  background-color:#000;
+  color: #fff;
+  --ifm-button-border-color: #000;
+}
+  
+/* Styles for BPMN.io integration and callouts in these models */
+.bpmn-model {
+  position: relative;
+  background-color: #F9F9F9;
+  margin-bottom: 15px;
+  padding: 10px;
+  overflow: hidden;
+}
+.callout {
+  display:inline-block;
+  color:#fff!important;
+  background-color:rgba(0,0,0,.8);
+  -webkit-border-radius:100px;
+  border-radius:100px;
+  text-align:center;
+  font-size:.75em;
+  width:1.67em;
+  height:1.67em;
+  line-height:1.67em;
+  font-style:normal;
+  font-weight: bold;
+  /*margin-block-end: 1em; leads to wired effects when callout has multiple lines*/
+  margin-inline-end: 0.75em;
+}
+.thumbs-down-example {
+  border: 3px solid #BD0100;
+  padding-bottom: 0px;
+}
+.thumbs-down {
+  color: #BD0100 !important;
+  font-size: xx-large;
+  position: absolute;
+  z-index: 10;
+}
+span.callout + p {
+  display: inline;
+  margin: 0 0 1.25rem;
+}
+span.callout + p::after{
+  content: "\a";
+  white-space: pre;
+}
+
+/* I needed to overwrite this, otherwise the DMN table is super small */
+.dmn-decision-table-container .tjs-container {
+  width: 100%;
+}
+.dmn-decision-table-container .tjs-table {
+  width: 100%;
 }

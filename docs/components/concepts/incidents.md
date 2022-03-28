@@ -1,6 +1,7 @@
 ---
 id: incidents
 title: "Incidents"
+description: "A process instance is stuck at a particular point, and requires user interaction to resolve the problem."
 ---
 
 In Camunda Cloud, an incident represents a problem in process execution. This means a process instance is stuck at a particular point, and requires user interaction to resolve the problem.
@@ -11,7 +12,9 @@ Incidents are created in different situations, including the following:
 - An input or output variable mapping can't be applied.
 - A condition can't be evaluated.
 
-**NOTE**: Incidents are not created when an unexpected exception (e.g. `NullPointerException`, `OutOfMemoyError` etc.) occurs.
+:::note
+Incidents are not created when an unexpected exception (e.g. `NullPointerException`, `OutOfMemoyError` etc.) occurs.
+:::
 
 ## Resolving
 
@@ -31,7 +34,9 @@ If the variables are causing the incident, complete the following steps:
 2. Increase the remaining retries of the job.
 3. Mark the incident as resolved. 
 
-**NOTE**: It's recommended you complete these tasks in [Operate](/components/operate/index.md).
+:::note
+It's recommended you complete these operations in [Operate](/components/operate/index.md).
+:::
 
 It is also possible to complete these steps via the client API. Using the Java client, this could look like the following:
 
@@ -59,7 +64,9 @@ If an incident is created during process execution and it's not related to a job
 
 To resolve the incident, update the variables and mark the incident as resolved.
 
-**NOTE**: It's recommended you complete these tasks in [Operate](/components/operate/index.md).
+:::note
+It's recommended you complete these operations in [Operate](/components/operate/index.md).
+:::
 
 Using the Java client, this could look like the following:
 
@@ -75,3 +82,6 @@ client.newResolveIncidentCommand(incident.getKey())
 ```
 
 When the incident is resolved, the process instance continues.
+
+- [Operate](/components/operate/index.md)
+- [APIs and Clients](./apis-clients/overview.md)

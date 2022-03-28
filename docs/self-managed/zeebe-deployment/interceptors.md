@@ -11,23 +11,24 @@ There they can be intercepted before being dispatched. Zeebe provides a way to
 load arbitrary interceptors into the gateway. Some typical examples of what you
 can accomplish with this include:
 
-- enforcing custom authorization rules on incoming calls
-- monitoring and logging of incoming calls  (e.g.
+- Enforcing custom authorization rules on incoming calls
+- Monitoring and logging of incoming calls (e.g.
   https://github.com/grpc-ecosystem/java-grpc-prometheus)
-- distributed tracing (e.g.
+- Distributed tracing (e.g.
   https://github.com/open-telemetry/opentelemetry-java-instrumentation)
 
 ## Implementing an interceptor
+
 For the communication between client and gateway, Zeebe uses the gRPC
 [protocol](components/zeebe/technical-concepts/protocols.md). An interceptor is
 thus implemented as a gRPC
 [ServerInterceptor](https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html).
 
 An implementation must adhere to the following requirements:
-- it implements
-  [ServerInterceptor](https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html)
-- it has public visibility
-- it has a public default constructor (i.e. no-arg constructor)
+
+- It implements [ServerInterceptor](https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html)
+- It has public visibility
+- It has a public default constructor (i.e. no-arg constructor)
 
 Let's consider an interceptor that provides logging of incoming calls as an
 example. Other ServerInterceptor examples can be found in the official grpc-java
@@ -77,6 +78,7 @@ the message from interception by other interceptors and even to block it from
 dispatch to the broker.
 
 ## Compiling your interceptor
+
 Our source code for the interceptor class can now be compiled. There are many
 ways to do this, but for simplicity we'll use `javac` directly.
 
@@ -94,6 +96,7 @@ javac -classpath .:lib/grpc-api.jar:lib/slf4j-api.jar ./LoggingInterceptor.java
 ```
 
 ## Packaging an interceptor
+
 Next, you need to package the interceptor class into a fat JAR. Such a JAR must
 contain all classes (i.e. including all classes your own classes depend upon at
 runtime).
@@ -123,13 +126,14 @@ jar tf ./LoggingInterceptor.jar
 ```
 
 ## Loading an interceptor into a gateway
+
 An interceptor can be loaded into your gateway as a fat JAR. For each
 interceptor, you need to provide your gateway with:
-- an interception order index
-- an identifier to identify this specific interceptor
-- where to find the JAR with the interceptor class
-- the [fully qualified
-  name](https://docs.oracle.com/javase/specs/jls/se17/html/jls-6.html#jls-6.7)
+
+- An interception order index
+- An identifier to identify this specific interceptor
+- Where to find the JAR with the interceptor class
+- The [fully qualified name](https://docs.oracle.com/javase/specs/jls/se17/html/jls-6.html#jls-6.7)
   of the interceptor class, e.g. `com.acme.ExampleInterceptor`
 
 Let's continue with the LoggingInterceptor example. We can provide these
@@ -164,7 +168,7 @@ zeebe:
         jarPath: ...
 ```
 
-Note, that multiple interceptors can be configured (i.e.
+Note that multiple interceptors can be configured (i.e.
 `zeebe.gateway.interceptors` expects a list of interceptor configurations). The
 listing order determines the order in which a call is intercepted by the
 different interceptors. The first interceptor in the list wraps the second, etc.
@@ -180,6 +184,7 @@ ordering of the different interceptors. For example, to configure the
 `jarPath` can be configured using `zeebe_gateway_interceptors_1_jarPath`.
 
 ## About class loading
+
 [Previously](#packaging-an-interceptor), we stated that you need to package the
 interceptor class into a fat JAR. Although good general advice, this is not
 entirely true. To understand why, let's discuss how the class loading of your
@@ -200,6 +205,7 @@ depends on a different version of a class than the one provided by Zeebe, then
 you can provide your own version without having to worry about breaking Zeebe.
 
 ## Troubleshooting
+
 Here we describe a few common errors. Hopefully, this will help you recognize
 these situations and provide an easy fix. Generally, the gateway will not be
 able to start up with a misconfigured interceptor.
@@ -219,11 +225,11 @@ packaged](#packaging-an-interceptor) correctly, i.e. it contains all runtime
 dependencies and specifies them in the manifest file's classpath. The exception
 should provide a clear description, but generally we distinguish the following
 common cases:
-- unable to instantiate your class: make sure your class adheres to the
+
+- Unable to instantiate your class: make sure your class adheres to the
   [requirements described above](#implementing-an-interceptor).
-- the JAR could not be loaded: make sure you've configured your interceptor
-  correctly in the [gateway
-  configuration](#loading-an-interceptor-into-a-gateway).
+- The JAR could not be loaded: make sure you've configured your interceptor
+  correctly in the [gateway configuration](#loading-an-interceptor-into-a-gateway).
 
 **io.camunda.zeebe.util.jar.ExternalJarLoadException**: the JAR could not be
 loaded: make sure you've configured your interceptor correctly in the [gateway

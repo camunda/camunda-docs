@@ -3,10 +3,36 @@ RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
-# Disable directory listing
-Options -Indexes
+# Disable directory listing and multi views
+Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
+
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/?$ /docs/self-managed/zeebe-deployment/kubernetes/#helm [NE,R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites/?$ /docs/self-managed/zeebe-deployment/kubernetes/#prerequisites [NE,R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate/?$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist/ [R=301,L]
+RewriteRule ^docs/components/tasklist/faq/(.*)$ /docs/guides/utilizing-forms$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/faq/$ /docs/guides/utilizing-forms [R=301,L]
+
+RewriteRule ^docs/components/modeler/cloud-modeler/model-overview(.*)$ /docs/components/modeler/web-modeler/new-web-modeler$1 [R=301,L]
+RewriteRule ^docs/components/modeler/cloud-modeler/model-overview$ /docs/components/modeler/web-modeler/new-web-modeler [R=301,L]
+
+RewriteRule ^docs/components/modeler/camunda-modeler(.*)$ /docs/components/modeler/desktop-modeler$1 [R=301,L]
+RewriteRule ^docs/components/modeler/camunda-modeler$ /docs/components/modeler/desktop-modeler [R=301,L]
+
+RewriteRule ^docs/components/modeler/cloud-modeler(.*)$ /docs/components/modeler/web-modeler$1 [R=301,L]
+RewriteRule ^docs/components/modeler/cloud-modeler$ /docs/components/modeler/web-modeler [R=301,L]
+
+RewriteRule ^docs/guides/integrating-optimize(.*)$ /docs/guides/improve-processes-with-optimize$1 [R=301,L]
+RewriteRule ^docs/guides/integrating-optimize$ /docs/guides/improve-processes-with-optimize [R=301,L]
+
+RewriteRule ^docs/components/zeebe/third-party-libraries/zeebe-dependencies/$ docs/reference/dependencies/ [R=301,L]
+RewriteRule ^docs/components/operate/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
+RewriteRule ^docs/components/tasklist/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
+
+RewriteRule ^docs/reference/bpmn-processes(.*)$ /docs/components/modeler/bpmn$1 [R=301,L]
+RewriteRule ^docs/reference/bpmn-processes$ /docs/components/modeler/bpmn [R=301,L]
 
 RewriteRule ^docs/components/IAM(.*)$ /docs/self-managed/IAM/$1 [R=301,L]
 RewriteRule ^docs/components/IAM$ /docs/self-managed/IAM/ [R=301,L]
@@ -23,18 +49,70 @@ RewriteRule ^docs/reference/tasklist-api(.*)$ /docs/apis-clients/tasklist-api$1 
 RewriteRule ^docs/reference/tasklist-api$ /docs/apis-clients/tasklist-api [R=301,L]
 
 RewriteRule ^docs/reference/public-api/$ /docs/apis-clients/public-api [R=301,L]
-RewriteRule ^docs/reference/cloud-console-api-clients/$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
-RewriteRule ^docs/reference/cloud-console-api-reference/$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
 RewriteRule ^docs/reference/grpc/$ /docs/apis-clients/grpc [R=301,L]
 
 RewriteRule ^docs/components/clients/other-clients(.*)$ /docs/apis-clients/community-clients$1 [R=301,L]
 RewriteRule ^docs/components/clients/other-clients$ /docs/apis-clients/community-clients [R=301,L]
 
+RewriteRule ^docs/reference/cloud-console-api-reference(.*)$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/reference/cloud-console-api-reference$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+
+RewriteRule ^docs/reference/cloud-console-api-clients(.*)$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/reference/cloud-console-api-clients$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+
+RewriteRule ^docs/components/clients/overview(.*)$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/components/clients/overview$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+
+RewriteRule ^docs/components/cloud-console/manage-organization/manage-cloud-management-api-clients(.*)$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+RewriteRule ^docs/components/cloud-console/manage-organization/manage-cloud-management-api-clients$ /docs/apis-clients/cloud-console-api-reference [R=301,L]
+
 RewriteRule ^docs/components/clients/(.*)$ /docs/apis-clients/$1 [R=301,L]
 RewriteRule ^docs/components/clients$ /docs/apis-clients/ [R=301,L]
+
+RewriteRule ^docs/product-manuals/clients/java-client/get-started(.*)$ /docs/apis-clients/java-client/index [R=301,L]
+RewriteRule ^docs/product-manuals/clients/java-client/get-started$ /docs/apis-clients/java-client/index [R=301,L]
 
 RewriteRule ^docs/product-manuals/iam/overview$ /docs/components/iam/what-is-iam [R=301,L]
 RewriteRule ^docs/components/iam/overview$ /docs/components/iam/what-is-iam [R=301,L]
 
 RewriteRule ^docs/product-manuals/(.*)$ /docs/components/$1 [R=301,L]
 RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
+
+RewriteRule ^docs/self-managed/zeebe-deployment/security/authorization/?$ /docs/self-managed/zeebe-deployment/security/client-authorization/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs/self-managed/zeebe-deployment/security/secure-client-communication/ [R=301,L]
+
+RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
+
+# Static resource page for the camunda desktop modeler
+RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
+
+# workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
+RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
+
+# rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
+## index pages are not served as /index/ anymore but /index.html
+RewriteRule ^(.*)/index/$ /$1 [R=301,L]
+## tags do not exist anymore, redirect to main page
+RewriteRule ^(.*)/tags/$ / [R=301,L]
+## duplicate sections at the end where removed
+RewriteRule ^(.*)/(.+)/\2/?$ /$1/$2 [R=301,L]
+RewriteRule ^(.*/components/modeler/dmn/)camunda-modeler-dmn/$ /$1 [R=301,L]
+RewriteRule ^(.*/components/modeler/camunda-modeler/element-templates/)camunda-modeler-element-templates/$ /$1 [R=301,L]
+RewriteRule ^(.*/components/modeler/bpmn/)modeler-bpmn/$ /$1 [R=301,L]
+
+# disabled blog, redirect to index page
+RewriteRule ^blog/ / [R=301,L]
+
+## Removed some left-over pages from 0.25 which should not be published anymore
+RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide$ /docs/0.25/components/tasklist/deployment/configuration/ [R=301,L]
+RewriteRule ^docs/0.25/components/zeebe/tasklist-deployment-guide/(.*)$ /docs/0.25/components/tasklist/deployment/$1 [R=301,L]
+RewriteRule ^docs/0.25/components/zeebe/tasklist-user-guide /docs/0.25/components/ [R=301,L]
+
+# redirect best-practices overview page
+RewriteRule ^docs/components/best-practices/?$ /docs/components/best-practices/overview/ [R=301,L]
+
+
+# Add yaml mime type
+AddType text/vnd.yaml   yaml
+# Add bpmn mime type
+AddType text/xml        bpmn

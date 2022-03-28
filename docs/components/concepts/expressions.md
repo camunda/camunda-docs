@@ -1,23 +1,25 @@
 ---
 id: expressions
 title: "Expressions"
+description: "Expressions can be used to access variables and calculate values dynamically."
 ---
 
 Expressions can be used to access variables and calculate values dynamically.
 
 The following attributes of BPMN elements *require* an expression:
 
-- Sequence flow on an exclusive gateway: [condition](/reference/bpmn-processes/exclusive-gateways/exclusive-gateways.md#conditions)
-- Message catch event/receive task: [correlation key](/reference/bpmn-processes/message-events/message-events.md#messages)
-- Multi-instance activity: [input collection](/reference/bpmn-processes/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/reference/bpmn-processes/multi-instance/multi-instance.md#collecting-the-output)
+- Sequence flow on an exclusive gateway: [condition](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md#conditions)
+- Message catch event/receive task: [correlation key](/components/modeler/bpmn/message-events/message-events.md#messages)
+- Multi-instance activity: [input collection](/components/modeler/bpmn/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/components/modeler/bpmn/multi-instance/multi-instance.md#collecting-the-output)
 - Input/output variable mappings: [source](variables.md#inputoutput-variable-mappings)
 
 Additionally, the following attributes of BPMN elements can define an expression *optionally*, instead of a static value:
 
-- Timer catch event: [timer definition](/reference/bpmn-processes/timer-events/timer-events.md#timers)
-- Message catch event/receive task: [message name](/reference/bpmn-processes/message-events/message-events.md#messages)
-- Service task: [job type](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition), [job retries](/reference/bpmn-processes/service-tasks/service-tasks.md#task-definition)
-- Call activity: [process id](/reference/bpmn-processes/call-activities/call-activities.md#defining-the-called-process)
+- Timer catch event: [timer definition](/components/modeler/bpmn/timer-events/timer-events.md#timers)
+- Message catch event/receive task: [message name](/components/modeler/bpmn/message-events/message-events.md#messages)
+- Service task/business rule task/script task/send task: [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition), [job retries](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition)
+- User task: [assignee](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments), [candidateGroups](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments)
+- Call activity: [process id](/components/modeler/bpmn/call-activities/call-activities.md#defining-the-called-process)
 
 ## Expressions vs. static values
 
@@ -26,15 +28,17 @@ Some attributes of BPMN elements—like the timer definition of a timer catch ev
 - As an expression (e.g. `= remaingTime`)
 - As a static value (e.g. `PT2H`)
 
-Expressions always start with an **equal sign** (**=**). For example, `= order.amount > 100`. The text following the equal sign is the actual expression. For example, `order.amount > 100` checks if the amount of the order is greater than 100.
+Expressions always start with an **equals sign** (**=**). For example, `= order.amount > 100`. The text following the equal sign is the actual expression. For example, `order.amount > 100` checks if the amount of the order is greater than 100.
 
 If the element does not start with the prefix, it is used as a static value. A static value is used either as a string (e.g. job type) or as a number (e.g. job retries). A string value must not be enclosed in quotes.
 
-**NOTE**: An expression can also define a static value by using literals (e.g. `= "foo"`, `= 21`, `= true`, `= [1,2,3]`, `= {x: 22}`, etc.)
+:::note
+An expression can also define a static value by using literals (e.g. `= "foo"`, `= 21`, `= true`, `= [1,2,3]`, `= {x: 22}`, etc.)
+:::
 
 ## The expression language
 
-An expression is written in **FEEL** (Friendly Enough Expression Language). FEEL is part of the OMG's DMN (Decision Model and Notation) specification. It is designed to have the following properties:
+An expression is written in **FEEL** (**Friendly Enough Expression Language**). FEEL is part of the OMG's **DMN** (**Decision Model and Notation**) specification. It is designed to have the following properties:
 
 - Free of side effects
 - Simple data model with JSON-like object types: numbers, dates, strings, lists, and contexts
@@ -80,7 +84,7 @@ Values can be compared using the following operators:
   </tr>
 
   <tr>
-    <td>= (only <b>one</b> equal sign)</td>
+    <td>= (only <b>one</b> equals sign)</td>
     <td>equal to</td>
     <td>owner = "Paul"</td>
   </tr>
@@ -170,7 +174,7 @@ Any value can be transformed into a string value using the `string()` function.
 // "order-123"
 ```
 
-More functions for string values are available as [built-in string functions](/reference/feel/builtin-functions/feel-built-in-functions-string.md) (e.g. contains, matches, etc.).
+More functions for string values are available as [built-in string functions](/reference/feel/builtin-functions/feel-built-in-functions-string.md) (e.g. contains, matches, etc.)
 
 ### Temporal expressions
 
@@ -236,7 +240,7 @@ The following operators can be applied on temporal values:
 
   <tr>
     <td>duration</td>
-    <td>duration("P12H"),<br/> duration("P4Y")</td>
+    <td>duration("PT12H"),<br/> duration("P4Y")</td>
     <td>
       <li>duration + duration</li>
       <li>duration + date</li>
@@ -340,7 +344,7 @@ FEEL defines several built-in functions:
 - [Context functions](/reference/feel/builtin-functions/feel-built-in-functions-context.md)
 - [Temporal functions](/reference/feel/builtin-functions/feel-built-in-functions-temporal.md)
 
-## Additional resources
+## Next steps
 
 - [FEEL](/reference/feel/what-is-feel.md)
 - [FEEL data types](/reference/feel/language-guide/feel-data-types.md)

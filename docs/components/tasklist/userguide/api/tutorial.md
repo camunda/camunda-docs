@@ -1,40 +1,44 @@
 ---
 id: tutorial
 title: Tutorial
-description: "Let's implement an application using the Tasklist API"
+description: "Let's implement an application using the Tasklist API."
 ---
 
-# How to build an application using the Tasklist API and NestJS
+## Building an application using the Tasklist API and NestJS
 
 The Tasklist API provides a simple way for you to build apps powered by BPMN that require human interaction.
-On this example we'll use NestJS, one of the most popular Node.js backend frameworks to a build a loan request review application.
+
+With this example, we'll use NestJS (one of the most popular Node.js backend frameworks) to a build a loan request review application.
 
 ## Getting started
 
-To do this tutorial we'll need:
+For this tutorial we'll need:
 
 - Node v14+
-- The [NestJS CLI](https://docs.nestjs.com/cli/overview) tool. You can install it by running `npm install -g @nestjs/cli`
+- The [NestJS CLI](https://docs.nestjs.com/cli/overview) tool. Install it by running `npm install -g @nestjs/cli`.
 - [A cluster on Camunda Cloud](../../../../cloud-console/manage-clusters/create-cluster)
-- [A set of API credentials, remember to check the Tasklist option when creating them.](../../../../cloud-console/manage-clusters/manage-api-clients) Don't forget to save these, we'll need them later.
-- [To clone this repo](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs)
+- [A set of API credentials; remember to check the Tasklist option when creating them](../../../../cloud-console/manage-clusters/manage-api-clients). Don't forget to save these, we'll need them later.
+- [A clone of this repo](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs)
 
-## Before we go ahead
+## Before moving forward
 
-If you followed the steps on the Getting started section you should have cloned a repo with the complete demo application we're going to build over this tutorial. The default branch in this repo has the complete application, so we need to checkout to the branch `0-getting-started` before proceeding.
+If you have all the prerequisites from the getting started section above, you should have cloned a repo with the complete demo application we're going to build over this tutorial. The default branch in this repo has the complete application, so we need to `checkout` to the branch `0-getting-started` before proceeding.
 
-Inside the repo folder you'll find some files and 2 folders, one of these folders is called `demo-data/` and the other `frontend/`. As it might be evident inside of each of these folders there are 2 different projects. The former will be responsible by deploying the demo process into Zeebe and generating instances for that process. The later is a frontend application that will consume our API, this project is boostrapped with [Vite](https://vitejs.dev), [bulma](https://bulma.io) for styling and [react-query](https://react-query.tanstack.com)
+Inside the repo folder, you'll find some files and two folders, one of these folders is called `demo-data/` and the other `frontend/`. As it might be evident inside each of these folders, there are two different projects.
+
+The former will be responsible by deploying the demo process into Zeebe and generating instances for that process. The latter is a front-end application that will consume our API; this project is bootstrapped with [Vite](https://vitejs.dev), [bulma](https://bulma.io) for styling, and [react-query](https://react-query.tanstack.com)
 
 ## Creating a new NestJS application
 
-Now let's bootstrap our NestJS app, to do that:
+Now let's bootstrap our NestJS app. Take the following steps:
 
-- Open your terminal and go to the cloned repository folder
-- Run `nest new api`
-- Pick `yarn` as a package manager
+1. Open your terminal and go to the cloned repository folder.
+2. Run `nest new api`.
+3. Pick `yarn` as a package manager.
 
-This will create the NestJS project for us inside the `api/` folder, we can clean up the project a bit and remove the files `api/app.controller.spec.ts`, `api/app.controller.ts` and `api/app.service.ts`.
-We can also remove the references from the deleted files in `api/app.module.ts`, the file should look like this:
+This will create the NestJS project for us inside the `api/` folder. We can clean up the project a bit and remove the files `api/app.controller.spec.ts`, `api/app.controller.ts`, and `api/app.service.ts`.
+
+We can also remove the references from the deleted files in `api/app.module.ts`. The file should look like this:
 
 ```ts
 import { Module } from "@nestjs/common";
@@ -47,7 +51,7 @@ import { Module } from "@nestjs/common";
 export class AppModule {}
 ```
 
-To check if everything is working as expected you can run `yarn workspace api run start:dev` from the root folder on your terminal. You should see a message similar like the one below:
+To check if everything is working as expected, run `yarn workspace api run start:dev` from the root folder on your terminal. You should see a message similar to the one below:
 
 ```sh
 [00:00:00 AM] Starting compilation in watch mode...
@@ -59,14 +63,14 @@ To check if everything is working as expected you can run `yarn workspace api ru
 
 ## Generating the Tasklist service
 
-Now inside the `api/` folder we'll need to generate a service that will be responsible for accessing the Tasklist API. To do that:
+Inside the `api/` folder we'll need to generate a service that will be responsible for accessing the Tasklist API. Take the following steps:
 
-- Run `nest g service`
-- You'll be prompted to pick a name for the service, let's pick `tasklist`
-- Run `yarn add @nestjs/axios`
+1. Run `nest g service`.
+2. You'll be prompted to pick a name for the service, let's pick `tasklist`.
+3. Run `yarn add @nestjs/axios`.
 
-A folder called `tasklist/` will be created with the service definition and test, again you can delete the tests if you wish. We also installed the package `@nestjs/axios` so we can make requests to the Tasklist API.
-To use make HTTP requests we need to inject the module into the service, like below:
+A folder called `tasklist/` will be created with the service definition and test; you can delete the tests if you wish. We also installed the package `@nestjs/axios`, so we can make requests to the Tasklist API.
+To make HTTP requests we need to inject the module into the service, like below:
 
 ```ts
 import { Injectable } from "@nestjs/common";
@@ -78,7 +82,7 @@ export class TasklistService {
 }
 ```
 
-Now were ready to make requests to the API, but first let's define a Data Transfer Object, or DTO, with the shape of the tasks were going to request. For that we can create a file in `tasklist/dto/task.dto.ts`. There we can define the DTO like:
+Now, we're ready to make requests to the API. First, let's define a Data Transfer Object (DTO) with the shape of the tasks we're going to request. For that, we can create a file in `tasklist/dto/task.dto.ts`. There, we can define the DTO as follows:
 
 ```ts
 type Variable = {
@@ -103,7 +107,7 @@ export class TaskDto {
 }
 ```
 
-We can implement the requests, for that we need to define the Tasklist API query and define the methods on the service:
+We can implement the requests. For this, we need to define the Tasklist API query and define the methods on the service:
 
 ```ts
 import { HttpService } from "@nestjs/axios";
@@ -163,12 +167,13 @@ export class TasklistService {
 }
 ```
 
-For the sake of brevity we only have one query and one method here, to see the complete implementation you can check this [file](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs/blob/2-generating-tasklist-service/api/src/tasklist/tasklist.service.ts)
+To keep things concise, we have one query and one method here. To see the complete implementation, review [this file](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs/blob/2-generating-tasklist-service/api/src/tasklist/tasklist.service.ts).
 
 ## Handling the Tasklist API authentication
 
 We have the implementation of our service, but we still can't make requests to the Tasklist API because we're not providing any credentials to the API.
-To achieve this we need to rename the file `.env.example` to `.env` (the file needs to be on the root because we'll reuse it to generate the demo data), and the content of this file should look like this:
+
+To achieve this, we need to rename the file `.env.example` to `.env` (the file needs to be on the root because we'll reuse it to generate the demo data), and the content of this file should look like this:
 
 ```sh
 ZEEBE_ADDRESS="<cluster-id>.bru-2.zeebe.camunda.io:443"
@@ -179,9 +184,11 @@ TASKLIST_API_ADDRESS="https://bru-2.tasklist.camunda.io/<cluster-id>/graphql"
 ZEEBE_AUTHORIZATION_AUDIENCE="tasklist.camunda.io"
 ```
 
-You can find all this information on the tab `API` in our cluster page, the client id and secret should be on the file you downloaded on the Getting started section.
-Now we have our credentials we can authenticate and inject the JWT token into every request we make into Tasklist API.
-For that we need to turn our tasklist service into part of a module, run `nest g module` and name it `tasklist`, the same we named the service. This will generate the module file and update `app.module.ts`.
+You can find all this information on the **API** tab of the cluster page. The client id and secret should be on the file you downloaded in the getting started section.
+
+Now that we have our credentials, we can authenticate and inject the JWT token into every request we make into Tasklist API.
+
+For this, we need to turn our Tasklist service into part of a module. Run `nest g module` and name it `tasklist`, the same we named the service. This will generate the module file and update `app.module.ts`.
 We need to edit the `app.module.ts` file to use only the module:
 
 ```ts
@@ -265,12 +272,15 @@ export class TasklistModule implements OnModuleInit {
 }
 ```
 
-This will make that when this module is initialised we read the credentials using the `@nestjs/config` package, authenticate into the API and inject the JWT into Axios. We also set a timeout to request a new token when the first one expires.
+When this module is initialized, we can read the credentials using the `@nestjs/config` package, authenticate into the API, and inject the JWT into Axios. We also set a timeout to request a new token when the first one expires.
 
 ## Creating your application API
 
-Now we're able to implement our actual business logic, but first we need to install some packages to create our custom GraphQL API. Run `yarn add @nestjs/graphql graphql apollo-server-express`.
-We'll have to generate a module, a service and a resource. To achieve that run the following commands:
+We're now able to implement our actual business logic, but first we need to install some packages to create our custom GraphQL API.
+
+Run `yarn add @nestjs/graphql graphql apollo-server-express`.
+
+We'll have to generate a module, a service, and a resource. To achieve this, run the following commands:
 
 ```sh
 nest g module
@@ -278,7 +288,7 @@ nest g service
 nest g resource
 ```
 
-Use the name `loanRequests` for all options. For the resource generation select the option `GraphQL (code first)` and you don't have to generate the CRUD entrypoints.
+Use the name `loanRequests` for all options. For the resource generation, select the option `GraphQL (code first)` and you don't have to generate the CRUD entry points.
 
 We can now change our `app.module.ts` file to its final form:
 
@@ -315,11 +325,16 @@ import { LoanRequestsResolver } from "./loan-requests.resolver";
 export class LoanRequestsModule {}
 ```
 
-We just need to implement the service, which will have 3 methods (1 to get all requests, 1 to get a single request and 1 to make a decision) and the 4 resolvers for the GraphQL API (2 mutations and 2 queries). You can find the full implementation [here](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs/tree/4-application/api/src/loan-requests).
+We just need to implement the service, which will have three methods (one to get all requests, one to get a single request, and one to make a decision.)
+
+We will also have four resolvers for the GraphQL API (two mutations and two queries).
+
+Find the full implementation [here](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs/tree/4-application/api/src/loan-requests).
 
 You can run `yarn start:dev` inside the `api/` folder and the NestJS app should start without errors.
-To test your API you can access `localhost:3000/graphl` on your browser and should see our custom GraphQL API playground.
+
+To test your API, you can access `localhost:3000/graphl` on your browser and should see our custom GraphQL API playground.
 
 ## Demo data generation and sample frontend
 
-To test our app with the a real frontend we can change the port inside `api/main.ts` to `6000`. And then run from the root folder `yarn start:demo-data` to start the backend, frontend and demo data generation or just `yarn start` if you don't need any new data.
+To test our app with a real frontend, we can change the port inside `api/main.ts` to `6000`. Then, run from the root folder `yarn start:demo-data` to start the backend, frontend, and demo data generation, or just `yarn start` if you don't need any new data.

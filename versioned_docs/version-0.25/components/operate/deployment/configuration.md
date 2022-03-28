@@ -16,7 +16,6 @@ with `camunda.operate`. The following parts are configurable:
  * [Scaling Operate](importer-and-archiver.md)
  * [Monitoring possibilities](#monitoring-operate)
  * [Logging configuration](#logging)
- * [Probes](#probes)
 
 ## Configurations
 

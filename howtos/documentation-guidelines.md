@@ -7,22 +7,30 @@ All changes have to be done in a separate Branch. As soon as the changes are don
 ## Structure
 
 - Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Cloud** --> `introduction-to-camunda-cloud.md`. Use the file name as internal document id to reference in `sidebars.js`.
-- Sub catagories have to be placed in their own sub directories. Example: Guides/Getting Started can be found in `docs/guides/getting-started`.
+- Sub categories have to be placed in their own sub directories. Example: Guides/Getting Started can be found in `docs/guides/getting-started`.
 
 ## Adding a new documentation page
 
-1. Select the corresponding directory
-2. Add the document id to [`sidebars.js`](./sidebars.js)
+1. Select the corresponding directory.
+2. Add the document id to `sidebars.js`.
+
+## Moving an existing page
+
+1. Identify the page, pages, or directory and relocate it in the file structure.
+2. Update `sidebars.js` to fit the new location.
+3. Add a redirect/rewrite rule to the top of `.htaccess`.
 
 ## Review Process
 
-After the proprosed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representives, and they will take care of delegating the issue:
+After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
 
-- Cloud: @urbanisierung
-- Zeebe: @pihme
+- Console: @ultraschuppi
+- Zeebe: @npepinpe
 - Operate/Tasklist: @ralfpuchert
+- Optimize: @megglos
 - DevRel: @akeller
 - Product Management: @felix-mueller
+- Documentation review: @christinaausley (fallback: @akeller)
 - Fallback: @menski
 
 In case you don't know who to assign choose @menski and he will delegate.

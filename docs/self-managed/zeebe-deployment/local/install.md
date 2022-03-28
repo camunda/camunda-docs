@@ -19,7 +19,7 @@ This page guides you through the initial installation of the Zeebe broker and ne
 
 Download the latest Zeebe release from the [GitHub release page](https://github.com/camunda-cloud/zeebe/releases).
 
-Once you've downloaded a distribution, extract it into a folder of your choice. 
+Once you've downloaded a distribution, extract it into a folder of your choice.
 
 To extract the Zeebe distribution and start the broker, **Linux users** can type the following:
 
@@ -47,8 +47,8 @@ bash
 
 ## Next steps
 
-As a next step, you can install Camunda Modeler.
+As a next step, you can install Desktop Modeler.
 
-Camunda Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe. This application gives developers powerful features to design and deploy automated processes, human workflows, decision tables, and decision requirement diagrams using the globally-recognized [BPMN](https://camunda.com/bpmn/) and [DMN](https://camunda.com/dmn/) standards.
+Desktop Modeler is an open-source desktop BPMN modeling application created specifically for Zeebe. This application gives developers powerful features to design and deploy automated processes, human workflows, decision tables, and decision requirement diagrams using the globally-recognized [BPMN](https://camunda.com/bpmn/) and [DMN](https://camunda.com/dmn/) standards.
 
-Get started with Camunda Modeler using our [installation guide](https://docs.camunda.io/docs/components/modeler/camunda-modeler/install-the-modeler).
+Get started with Desktop Modeler using our [installation guide](/components/modeler/desktop-modeler/install-the-modeler.md).

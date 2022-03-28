@@ -48,7 +48,7 @@ On the Zeebe release page, compatible versions of Zeebe and Tasklist are grouped
 
 Tasklist uses open-source Elasticsearch as its underlying data store. Therefore to run Tasklist, download and run Elasticsearch.
 
-Tasklist is currently compatible with Elasticsearch 7.12.1. Download Elasticsearch [here](https://www.elastic.co/downloads/past-releases/elasticsearch-7-12-1).
+Tasklist is currently compatible with Elasticsearch 7.16.2. Download Elasticsearch [here](https://www.elastic.co/downloads/past-releases/elasticsearch-7-16-2).
 
 ### Run Elasticsearch
 
@@ -107,3 +107,7 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 If you've already developed user tasks in Zeebe, you can see these on the left panel on the start screen:
 
 ![tasklist-start-screen](img/tasklist-start-screen_light.png)
+
+## Update Tasklist
+
+To update Tasklist versions, visit the [user guide](../../components/tasklist/userguide/updating-tasklist.md).

@@ -1,13 +1,14 @@
 ---
 id: community-contributions
 title: "Community contributions"
+description: "Zeebe welcomes extensions and contributions from the community!"
 ---
 
 Zeebe is available as open-source software on [GitHub](https://github.com/camunda-cloud/zeebe).
 
 Zeebe welcomes extensions and contributions from the community!
 
-We use both the [Camunda Community Hub](https://github.com/Camunda-Community-Hub/community/) and [Awesome Zeebe](https://awesome.zeebe.io/) as a place to keep track of Zeebe ecosystem contributions, including the following:
+We use both the [Camunda Community Hub](https://github.com/Camunda-Community-Hub/community/) and [Awesome Zeebe](https://awesome.zeebe.io/) to keep track of Zeebe ecosystem contributions, including the following:
 
 - Clients
 - Workers
@@ -21,8 +22,8 @@ If you're interested in contributing to the main Zeebe repository (versus creati
 
 ## Next steps
 
-- [Get help & get involved](get-help-get-involved.md).
-- Check out [Awesome Zeebe](https://awesome.zeebe.io/).
+- [Get help and get involved](get-help-get-involved.md).
+- Check out [Awesome Camunda Cloud](https://github.com/camunda-community-hub/awesome-camunda-cloud).
 - Learn more about our [release policy](reference/release-policy.md).
 - Avoid suprises by staying on top of [announcements](reference/announcements.md).
 - Read more about the [Camunda Community Hub](https://camunda.com/blog/2021/03/introducing-the-camunda-community-hub/).

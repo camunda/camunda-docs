@@ -8,7 +8,7 @@ description: "Let's take a closer look at the environment variables for configur
 
 The configuration can be provided as a file or through environment variables. Mixing both sources is also possible. In that case environment variables have precedence over the configuration settings in the configuration file.
 
-All available environment variables are documented in the [configuration file templates](../configuration/#configuration-file-templates).
+All available environment variables are documented in the [configuration file templates](configuration.md#configuration-file-templates).
 
 ## Environment variables for operators
 

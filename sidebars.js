@@ -14,15 +14,20 @@ module.exports = {
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
+    "guides/getting-started-orchestrate-human-tasks",
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
+    "guides/automating-a-process-using-bpmn",
+    "guides/utilizing-forms",
+    "guides/improve-processes-with-optimize",
     "guides/message-correlation",
     {
       "Update Guide": [
         "guides/update-guide/introduction",
-        "guides/update-guide/026-to-100",
-        "guides/update-guide/100-to-110",
+        "guides/update-guide/120-to-130",
         "guides/update-guide/110-to-120",
+        "guides/update-guide/100-to-110",
+        "guides/update-guide/026-to-100",
       ],
     },
     "guides/migrating-from-Camunda-Platform",
@@ -47,6 +52,7 @@ module.exports = {
             "components/cloud-console/manage-organization/organization-settings",
             "components/cloud-console/manage-organization/manage-users",
             "components/cloud-console/manage-organization/view-organization-activity",
+            "components/cloud-console/manage-organization/usage-history",
             "components/cloud-console/manage-organization/update-billing-reservations",
             "components/cloud-console/manage-organization/switch-organization",
           ],
@@ -58,6 +64,7 @@ module.exports = {
             "components/cloud-console/manage-clusters/delete-cluster",
             "components/cloud-console/manage-clusters/manage-api-clients",
             "components/cloud-console/manage-clusters/manage-alerts",
+            "components/cloud-console/manage-clusters/manage-ip-whitelists",
           ],
         },
         {
@@ -74,22 +81,103 @@ module.exports = {
         },
       ],
       Modeler: [
-        "components/modeler/overview",
+        "components/modeler/about-modeler",
         {
-          "Cloud Modeler": [
-            "components/modeler/cloud-modeler/launch-cloud-modeler",
-            "components/modeler/cloud-modeler/model-your-first-diagram",
-            "components/modeler/cloud-modeler/import-diagram",
-            "components/modeler/cloud-modeler/save-and-deploy",
-            "components/modeler/cloud-modeler/start-instance",
-            "components/modeler/cloud-modeler/model-overview",
+          "Web Modeler": [
+            "components/modeler/web-modeler/new-web-modeler",
+            "components/modeler/web-modeler/launch-cloud-modeler",
+            "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/import-diagram",
+            "components/modeler/web-modeler/save-and-deploy",
+            "components/modeler/web-modeler/start-instance",
+            "components/modeler/web-modeler/collaboration",
+            "components/modeler/web-modeler/milestones",
           ],
-          "Camunda Modeler": [
-            "components/modeler/camunda-modeler/install-the-modeler",
-            "components/modeler/camunda-modeler/model-your-first-diagram",
-            "components/modeler/camunda-modeler/connect-to-camunda-cloud",
-            "components/modeler/camunda-modeler/deploy-to-cloud",
-            "components/modeler/camunda-modeler/start-instance",
+        },
+        {
+          "Desktop Modeler": [
+            "components/modeler/desktop-modeler/install-the-modeler",
+            "components/modeler/desktop-modeler/model-your-first-diagram",
+            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/start-instance",
+            {
+              "Element templates": [
+                "components/modeler/desktop-modeler/element-templates/about-templates",
+                "components/modeler/desktop-modeler/element-templates/configuring-templates",
+                "components/modeler/desktop-modeler/element-templates/using-templates",
+                "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/additional-resources"
+              ],
+            },
+            {
+              "Additional configuration": [
+                "components/modeler/desktop-modeler/flags/flags",
+                "components/modeler/desktop-modeler/plugins/plugins",
+                "components/modeler/desktop-modeler/search-paths/search-paths",
+                "components/modeler/desktop-modeler/telemetry/telemetry"
+              ],
+            }
+          ],
+        },
+        {
+          "BPMN": [
+            "components/modeler/bpmn/modeler-bpmn",
+            "components/modeler/bpmn/bpmn-primer",
+            "components/modeler/bpmn/bpmn-coverage",
+            "components/modeler/bpmn/data-flow",
+            {
+              "Tasks": [
+                "components/modeler/bpmn/tasks",
+                "components/modeler/bpmn/service-tasks/service-tasks",
+                "components/modeler/bpmn/user-tasks/user-tasks",
+                "components/modeler/bpmn/receive-tasks/receive-tasks",
+                "components/modeler/bpmn/business-rule-tasks/business-rule-tasks",
+                "components/modeler/bpmn/script-tasks/script-tasks",
+                "components/modeler/bpmn/send-tasks/send-tasks",
+                "components/modeler/bpmn/manual-tasks/manual-tasks",
+              ],
+            },
+            {
+              "Gateways": [
+                "components/modeler/bpmn/gateways",
+                "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
+                "components/modeler/bpmn/parallel-gateways/parallel-gateways",
+                "components/modeler/bpmn/event-based-gateways/event-based-gateways",
+              ],
+            },
+            {
+              "Events": [
+                "components/modeler/bpmn/events",
+                "components/modeler/bpmn/none-events/none-events",
+                "components/modeler/bpmn/message-events/message-events",
+                "components/modeler/bpmn/timer-events/timer-events",
+                "components/modeler/bpmn/error-events/error-events",
+              ],
+            },
+            {
+              "Subprocesses": [
+                "components/modeler/bpmn/subprocesses",
+                "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
+                "components/modeler/bpmn/call-activities/call-activities",
+                "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+              ],
+            },
+            {
+              "Markers": [
+                "components/modeler/bpmn/markers",
+                "components/modeler/bpmn/multi-instance/multi-instance",
+              ],
+            },
+          ],
+        },
+        {
+          "DMN": [
+            "components/modeler/dmn/desktop-modeler-dmn",
+          ],
+        },
+        {
+          "Forms": [
+            "components/modeler/forms/camunda-forms-reference",
           ],
         },
       ],
@@ -114,11 +202,6 @@ module.exports = {
           ],
         },
         {
-          "Third-Party Libraries": [
-            "components/zeebe/third-party-libraries/zeebe-dependencies",
-          ],
-        },
-        {
           Appendix: [],
         },
       ],
@@ -132,9 +215,48 @@ module.exports = {
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/operate-feedback-and-questions",
           ],
-          "Third-Party Libraries": [
-            "components/operate/third-party-libraries/operate-backend-dependencies",
-            "components/operate/third-party-libraries/operate-frontend-dependencies",
+        },
+      ],
+      Optimize: [
+        "components/optimize/what-is-optimize",
+        {
+          "User guide": [
+            "components/optimize/userguide/collections-dashboards-reports",
+            "components/optimize/userguide/data-sources",
+            "components/optimize/userguide/creating-dashboards",
+            "components/optimize/userguide/creating-reports",
+            "components/optimize/userguide/combined-reports",
+            {
+              "Process analysis": [
+                "components/optimize/userguide/process-analysis/overview",
+                "components/optimize/userguide/process-analysis/outlier-analysis",
+                "components/optimize/userguide/process-analysis/branch-analysis",
+                {
+                  "Report analysis": [
+                    "components/optimize/userguide/process-analysis/report-analysis/overview",
+                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                    "components/optimize/userguide/process-analysis/report-analysis/view-mode",
+                  ],
+                },
+              ],
+            },
+            {
+              "Decision analysis": [
+                "components/optimize/userguide/decision-analysis/overview",
+                "components/optimize/userguide/decision-analysis/decision-report",
+                "components/optimize/userguide/decision-analysis/decision-filter",
+              ],
+            },
+            {
+              "Additional features": [
+                "components/optimize/userguide/additional-features/alerts",
+                "components/optimize/userguide/additional-features/event-based-processes",
+                "components/optimize/userguide/additional-features/export-import",
+                "components/optimize/userguide/additional-features/filters",
+                "components/optimize/userguide/additional-features/footer",
+                "components/optimize/userguide/additional-features/variable-labeling",
+              ],
+            },
           ],
         },
       ],
@@ -149,23 +271,59 @@ module.exports = {
               ],
               "User interface mode": [
                 "components/tasklist/userguide/user-interface/overview",
-                "components/tasklist/userguide/user-interface/camunda-forms",
               ],
             },
           ],
         },
-        "components/tasklist/faq",
+      ],
+      "Best Practices": [
+        "components/best-practices/overview",
         {
-          "Third-Party Libraries": [
-            "components/tasklist/third-party-libraries/tasklist-backend-dependencies",
-            "components/tasklist/third-party-libraries/tasklist-frontend-dependencies",
+          "Project Management": [
+            "components/best-practices/management/following-the-customer-success-path",
+            "components/best-practices/management/doing-a-proper-poc",
           ],
-        },
+          "Architecture": [
+            "components/best-practices/architecture/deciding-about-your-stack",
+            "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/understanding-human-tasks-management",
+          ],
+          "Development": [
+            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
+            "components/best-practices/development/service-integration-patterns",
+            "components/best-practices/development/writing-good-workers",
+            "components/best-practices/development/dealing-with-problems-and-exceptions",
+            "components/best-practices/development/handling-data-in-processes",
+            "components/best-practices/development/routing-events-to-processes",
+            "components/best-practices/development/testing-process-definitions",
+          ],
+          "Modeling": [
+            "components/best-practices/modeling/creating-readable-process-models",
+            "components/best-practices/modeling/naming-bpmn-elements",
+            "components/best-practices/modeling/naming-technically-relevant-ids",
+            "components/best-practices/modeling/modeling-beyond-the-happy-path",
+            "components/best-practices/modeling/modeling-with-situation-patterns",
+            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
+            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+          ],
+          "Operations": [
+            "components/best-practices/operations/versioning-process-definitions",
+            "components/best-practices/operations/reporting-about-processes",
+          ],
+          "Camunda 7 specific": [
+            "components/best-practices/architecture/deciding-about-your-stack-c7",
+            "components/best-practices/architecture/sizing-your-environment-c7",
+            "components/best-practices/development/invoking-services-from-the-process-c7",
+            "components/best-practices/development/understanding-transaction-handling-c7",
+            "components/best-practices/operations/operating-camunda-c7",
+            "components/best-practices/operations/performance-tuning-camunda-c7",
+            "components/best-practices/operations/securing-camunda-c7",
+            "components/best-practices/architecture/extending-human-task-management-c7",
+          ],
+    },
       ],
     },
-    "components/best-practices",
   ],
-
   "APIs & Clients": [
     "apis-clients/overview",
     {
@@ -184,20 +342,20 @@ module.exports = {
             "apis-clients/java-client/job-worker",
             "apis-clients/java-client/logging",
             "apis-clients/java-client/testing",
-              {
-                Examples: [
-                  "apis-clients/java-client-examples/index",
-                  "apis-clients/java-client-examples/process-deploy",
-                  "apis-clients/java-client-examples/process-instance-create",
-                  "apis-clients/java-client-examples/process-instance-create-nonblocking",
-                  "apis-clients/java-client-examples/process-instance-create-with-result",
-                  "apis-clients/java-client-examples/job-worker-open",
-                  "apis-clients/java-client-examples/data-pojo",
-                  "apis-clients/java-client-examples/cluster-topology-request",
-                  ],
-              },
-            ],
-          },
+            {
+              Examples: [
+                "apis-clients/java-client-examples/index",
+                "apis-clients/java-client-examples/process-deploy",
+                "apis-clients/java-client-examples/process-instance-create",
+                "apis-clients/java-client-examples/process-instance-create-nonblocking",
+                "apis-clients/java-client-examples/process-instance-create-with-result",
+                "apis-clients/java-client-examples/job-worker-open",
+                "apis-clients/java-client-examples/data-pojo",
+                "apis-clients/java-client-examples/cluster-topology-request",
+              ],
+            },
+          ],
+        },
         {
           "Go client": [
             "apis-clients/go-client/index",
@@ -206,8 +364,8 @@ module.exports = {
         },
         {
           "CLI client": [
-          "apis-clients/cli-client/index",
-          "apis-clients/cli-client/get-started",
+            "apis-clients/cli-client/index",
+            "apis-clients/cli-client/get-started",
           ],
         },
         {
@@ -225,59 +383,9 @@ module.exports = {
       ],
     },
   ],
- 
+
   Reference: [
     "reference/overview",
-    {
-      "BPMN processes": [
-        "reference/bpmn-processes/bpmn-primer",
-        "reference/bpmn-processes/bpmn-coverage",
-        "reference/bpmn-processes/data-flow",
-        {
-          Tasks: [
-            "reference/bpmn-processes/tasks",
-            "reference/bpmn-processes/service-tasks/service-tasks",
-            "reference/bpmn-processes/user-tasks/user-tasks",
-            "reference/bpmn-processes/receive-tasks/receive-tasks",
-            "reference/bpmn-processes/business-rule-tasks/business-rule-tasks",
-            "reference/bpmn-processes/script-tasks/script-tasks",
-            "reference/bpmn-processes/send-tasks/send-tasks",
-            "reference/bpmn-processes/manual-tasks/manual-tasks",
-          ],
-        },
-        {
-          Gateways: [
-            "reference/bpmn-processes/gateways",
-            "reference/bpmn-processes/exclusive-gateways/exclusive-gateways",
-            "reference/bpmn-processes/parallel-gateways/parallel-gateways",
-            "reference/bpmn-processes/event-based-gateways/event-based-gateways",
-          ],
-        },
-        {
-          Events: [
-            "reference/bpmn-processes/events",
-            "reference/bpmn-processes/none-events/none-events",
-            "reference/bpmn-processes/message-events/message-events",
-            "reference/bpmn-processes/timer-events/timer-events",
-            "reference/bpmn-processes/error-events/error-events",
-          ],
-        },
-        {
-          Subprocesses: [
-            "reference/bpmn-processes/subprocesses",
-            "reference/bpmn-processes/embedded-subprocesses/embedded-subprocesses",
-            "reference/bpmn-processes/call-activities/call-activities",
-            "reference/bpmn-processes/event-subprocesses/event-subprocesses",
-          ],
-        },
-        {
-          Markers: [
-            "reference/bpmn-processes/markers",
-            "reference/bpmn-processes/multi-instance/multi-instance",
-          ],
-        },
-      ],
-    },
     require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
     "reference/announcements",
@@ -285,10 +393,11 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/supported-environments",
+    "reference/dependencies",
   ],
   "Self-Managed": [
-      "self-managed/overview",
-      {
+    "self-managed/overview",
+    {
       "Zeebe": [
         "self-managed/zeebe-deployment/index",
         {
@@ -301,14 +410,8 @@ module.exports = {
         {
           "Kubernetes deployment": [
             "self-managed/zeebe-deployment/kubernetes/index",
-            {
-              "Helm charts": [
-                "self-managed/zeebe-deployment/kubernetes/helm/index",
-                "self-managed/zeebe-deployment/kubernetes/helm/prerequisites",
-                "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
-                "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate",
-              ],
-            },
+            "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
+            "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist",
           ],
         },
         {
@@ -317,13 +420,16 @@ module.exports = {
             "self-managed/zeebe-deployment/configuration/logging",
             "self-managed/zeebe-deployment/configuration/gateway-health-probes",
             "self-managed/zeebe-deployment/configuration/environment-variables",
+            "self-managed/zeebe-deployment/configuration/fixed-partitioning",
+            "self-managed/zeebe-deployment/configuration/priority-election",
           ],
         },
         {
           Security: [
             "self-managed/zeebe-deployment/security/security",
-            "self-managed/zeebe-deployment/security/authentication",
-            "self-managed/zeebe-deployment/security/authorization",
+            "self-managed/zeebe-deployment/security/secure-client-communication",
+            "self-managed/zeebe-deployment/security/client-authorization",
+            "self-managed/zeebe-deployment/security/secure-cluster-communication"
           ],
         },
         {
@@ -337,6 +443,8 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/backpressure",
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
+            "self-managed/zeebe-deployment/operations/rebalancing",
+            "self-managed/zeebe-deployment/operations/backups"
           ],
         },
       ],
@@ -347,36 +455,125 @@ module.exports = {
         "self-managed/operate-deployment/schema-and-migration",
         "self-managed/operate-deployment/importer-and-archiver",
         "self-managed/operate-deployment/authentication",
+        "self-managed/operate-deployment/usage-metrics",
       ],
       "Tasklist": [
         "self-managed/tasklist-deployment/install-and-start",
         "self-managed/tasklist-deployment/configuration",
         "self-managed/tasklist-deployment/authentication",
+        "self-managed/tasklist-deployment/usage-metrics",
+      ],
+      "Optimize": [
+        {
+          Setup: [
+            "self-managed/optimize-deployment/setup/installation",
+            "self-managed/optimize-deployment/setup/optimize-license",
+            "self-managed/optimize-deployment/setup/security-instructions",
+            "self-managed/optimize-deployment/setup/configuration",
+            "self-managed/optimize-deployment/setup/user-management",
+            "self-managed/optimize-deployment/setup/authorization-management",
+            "self-managed/optimize-deployment/setup/secure-elasticsearch",
+            "self-managed/optimize-deployment/setup/shared-elasticsearch-cluster",
+            "self-managed/optimize-deployment/setup/history-cleanup",
+            "self-managed/optimize-deployment/setup/localization",
+            "self-managed/optimize-deployment/setup/multi-tenancy",
+            "self-managed/optimize-deployment/setup/multiple-engines",
+            "self-managed/optimize-deployment/setup/object-variables",
+            "self-managed/optimize-deployment/setup/clustering",
+            "self-managed/optimize-deployment/setup/webhooks",
+            "self-managed/optimize-deployment/setup/setup-event-based-processes",
+            "self-managed/optimize-deployment/setup/telemetry",
+            "self-managed/optimize-deployment/setup/common-problems",
+          ],
+        },
+        "self-managed/optimize-deployment/setup",
+        {
+          Plugins: [
+            "self-managed/optimize-deployment/plugins/plugin-system",
+            "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
+            "self-managed/optimize-deployment/plugins/decision-import-plugin",
+            "self-managed/optimize-deployment/plugins/elasticsearch-header",
+            "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
+            "self-managed/optimize-deployment/plugins/single-sign-on",
+            "self-managed/optimize-deployment/plugins/variable-import-plugin",
+          ],
+        },
+        {
+          "REST API": [
+            "self-managed/optimize-deployment/rest-api/authorization",
+            {
+              "Dashboard": [
+                "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
+                "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
+                "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions",
+              ],
+            },
+            {
+              "Report": [
+                "self-managed/optimize-deployment/rest-api/report/get-report-ids",
+                "self-managed/optimize-deployment/rest-api/report/delete-report",
+                "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
+                "self-managed/optimize-deployment/rest-api/report/get-data-export",
+              ],
+            },
+            "self-managed/optimize-deployment/rest-api/event-ingestion",
+            "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
+            "self-managed/optimize-deployment/rest-api/health-readiness",
+            "self-managed/optimize-deployment/rest-api/import-entities",
+          ],
+        },
+        "self-managed/optimize-deployment/reimport",
+        {
+          "Migration & Update": [
+            "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
+            "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
+            "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
+            "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
+            "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
+            "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
+            "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
+            "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
+            "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
+            "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
+            "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
+            "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
+            "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
+            "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
+          ],
+        },
+        {
+          "Optimize Explained": [
+            "self-managed/optimize-deployment/optimize-explained/engine-data-deletion",
+            "self-managed/optimize-deployment/optimize-explained/import-guide",
+          ],
+        },
+
+
       ],
       IAM: [
         "self-managed/iam/what-is-iam",
-          {
-            "Getting started": [
-              {
-                "Running IAM with Docker": [
-                  "self-managed/iam/getting-started/docker/setup-environment",
-                  "self-managed/iam/getting-started/docker/start-iam",
-                  "self-managed/iam/getting-started/docker/accessing-the-ui",
-                ]
-              }
-            ],
-          }, {
-            "Deployment": [
-              "self-managed/iam/deployment/configuration-variables",
-              "self-managed/iam/deployment/making-iam-production-ready",
-            ],
-          }, {
-          "Third-Party Libraries": [
-            "self-managed/iam/third-party-libraries/backend-third-party-libraries",
-            "self-managed/iam/third-party-libraries/frontend-third-party-libraries",
+        {
+          "Getting started": [
+            {
+              "Running IAM with Docker": [
+                "self-managed/iam/getting-started/docker/setup-environment",
+                "self-managed/iam/getting-started/docker/start-iam",
+                "self-managed/iam/getting-started/docker/accessing-the-ui",
+              ]
+            }
+          ],
+        }, {
+          "Deployment": [
+            "self-managed/iam/deployment/configuration-variables",
+            "self-managed/iam/deployment/making-iam-production-ready",
           ],
         },
       ],
+    }, {
+      Troubleshooting: [
+        "self-managed/troubleshooting/log-levels",
+      ]
     },
   ],
 };

@@ -12,13 +12,13 @@ Synonym to "[connector](#connector)".
 
 A broker is an instance of a Zeebe installation which executes processes and manages process state. A single broker is installed on a single machine.
 
-- [Architecture](/components/zeebe/technical-concepts/architecture.md#broker)
+- [Architecture](/components/zeebe/technical-concepts/architecture.md#brokers)
 
 ### Client
 
 A client interacts with the Zeebe broker on behalf of the business application. Clients poll for work from the broker.
 
-- [Architecture](/components/zeebe/technical-concepts/architecture.md#client)
+- [Architecture](/components/zeebe/technical-concepts/architecture.md#clients)
 
 ### Cluster
 
@@ -76,7 +76,7 @@ In a clustered environment, a broker which is not a leader is a follower of a gi
 
 Clients communicate with the Zeebe cluster through a gateway. The gateway provides a gRPC API and forwards client commands to the cluster. Depending on the setup, a gateway can be embedded in the broker or can be configured to be standalone.
 
-- [Architecture](/components/zeebe/technical-concepts/architecture.md#gateway)
+- [Architecture](/components/zeebe/technical-concepts/architecture.md#gateways)
 
 ### Incident
 
@@ -90,13 +90,13 @@ A job represents a distinct unit of work within a business process. Service task
 jobs in your process and are identified by a unique id. A job has a type to allow specific job
 workers to find jobs that they can work on.
 
-- [Job workers](/components/concepts/job-workers.md#what-is-a-job)
+- [Job workers](/components/concepts/job-workers.md)
 
 ### Job activation timeout
 
 This is the amount of time the broker will wait for a complete or fail response from the job worker. This comes after a job has been submitted to the job worker for processing and before it marks the job as available again for other job workers.
 
-- [Job workers](/components/concepts/job-workers.md#requesting-jobs-from-the-broker)
+- [Job workers](/components/concepts/job-workers.md#requesting-jobs)
 
 ### Job worker
 
@@ -148,7 +148,7 @@ While a process represents a defined sequence of distinct steps representing you
 A process instance variable represents the execution state (i.e data) of a process instance. These variables capture business process parameters which are the input and output of various stages of the process instance and which also influence process flow execution.
 
 - [Variables](/components/concepts/variables.md)
-- [Data flow](/reference/bpmn-processes/data-flow.md)
+- [Data flow](/components/modeler/bpmn/data-flow.md)
 
 
 ### Record

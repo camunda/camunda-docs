@@ -6,12 +6,12 @@ description: "Let's analyze the prerequisites and code to deploy a process using
 
 ## Related resources
 
-- [Process basics](/components/concepts/processes.md)
-- [BPMN introduction](/reference/bpmn-processes/bpmn-primer.md)
+- [Process basics](../../components/concepts/processes.md)
+- [BPMN introduction](../../components/modeler/bpmn/bpmn-primer.md)
 
 ## Prerequisites
 
-1. Run the Zeebe broker with endpoint `localhost:26500` (default).
+Run the Zeebe broker with endpoint `localhost:26500` (default).
 
 ## ProcessDeployer.java
 
@@ -29,7 +29,7 @@ final DeploymentEvent deploymentEvent =
 
 [Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/resources/demoProcess.bpmn)
 
-Download the XML and save it in the Java classpath before running the example. Open the file with Camunda Modeler for a graphical representation.
+Download the XML and save it in the Java classpath before running the example. Open the file with Desktop Modeler for a graphical representation.
 
 <!--
 ```xml

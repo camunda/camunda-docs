@@ -10,7 +10,7 @@ description: "Message correlation allows you to target a running workflow with a
 
 - [Node.js client](https://github.com/camunda-community-hub/zeebe-client-node-js)
 - [Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor)
-- [Camunda Modeler](https://camunda.com/download/modeler/)
+- [Desktop Modeler](https://camunda.com/download/modeler/)
 
 ## Message correlation
 
@@ -22,11 +22,11 @@ We will use [Simple Monitor](https://github.com/camunda-community-hub/zeebe-simp
 
 ## Workflow
 
-Here is a basic example from [the Camunda Cloud documentation](https://docs.camunda.io/docs/product-manuals/concepts/messages):
+Here is a basic example from [the Camunda Cloud documentation](/components/concepts/messages.md):
 
 ![message correlation workflow](img/message-correlation-workflow.png)
 
-Use [Camunda Modeler](https://camunda.com/download/modeler/) to open the [test-messaging](https://github.com/jwulf/zeebe-message-correlation/blob/master/bpmn/test-messaging.bpmn) file in [this GitHub project](https://github.com/jwulf/zeebe-message-correlation).
+Use [Desktop Modeler](https://camunda.com/download/modeler/) to open the [test-messaging](https://github.com/jwulf/zeebe-message-correlation/blob/master/bpmn/test-messaging.bpmn) file in [this GitHub project](https://github.com/jwulf/zeebe-message-correlation).
 
 Click on the intermediate message catch event to see how it is configured:
 
@@ -53,11 +53,17 @@ To run the demonstration, take the following steps:
 
 2. Install dependencies:
 
- ```
- npm i && npm i -g ts-node typescript
- ```
+  :::note
 
-3. In another terminal, start the Zeebe Broker using the `simple-monitor` profile from the [zeebe-docker-compose](https://github.com/camunda-community-hub/zeebe-docker-compose) repo.
+  This guides requires `npm` version 6.
+
+  :::
+
+  ```
+  npm i && npm i -g ts-node typescript
+  ```
+
+3. In another terminal, start the Zeebe Broker in addition to  [simple-monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor).
 
 4. Deploy the workflow and start an instance:
 

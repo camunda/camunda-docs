@@ -1,6 +1,7 @@
 ---
 id: process-instance-creation
 title: "Process instance creation"
+description: "Depending on the process definition, an instance of it can be created in several ways."
 ---
 
 Depending on the process definition, an instance of it can be created in several ways.
@@ -19,7 +20,7 @@ There are two commands to create a process instance, outlined in the sections be
 
 ### Create and execute asynchronously
 
-A process that has a [none start event](/reference/bpmn-processes/none-events/none-events.md#none-start-events) is started explicitly using **[CreateProcessInstance](/apis-clients/grpc.md#createprocessinstance-rpc)**.
+A process that has a [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) is started explicitly using **[CreateProcessInstance](/apis-clients/grpc.md#createprocessinstance-rpc)**.
 
 This command creates a new process instance and immediately responds with the process instance id. The execution of the process occurs after the response is sent.
 
@@ -60,7 +61,9 @@ This command is typically useful for short-running processes and processes that 
 
 If the process mutates system state, or further operations rely on the process outcome response to the client, consider designing your system for failure states and retries.
 
-**NOTE**: When the client resends the command, it creates a new process instance.
+:::note
+When the client resends the command, it creates a new process instance.
+:::
 
 <details>
   <summary>Code example</summary>
@@ -98,10 +101,15 @@ Process instances are also created implicitly via various start events. Camunda 
 
 ### Message event
 
-A process with a [message start event](/reference/bpmn-processes/message-events/message-events.md#message-start-events) can be started by publishing a message with the name that matches the message name of the start event.
+A process with a [message start event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) can be started by publishing a message with the name that matches the message name of the start event.
 
 For each new message a new instance is created.
 
 ### Timer event
 
-A process can also have one or more [timer start events](/reference/bpmn-processes/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
+A process can also have one or more [timer start events](/components/modeler/bpmn/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
+
+## Next steps
+
+- [About Modeler](./components/modeler/about.md)
+- [Automating a process using BPMN](./guides/automating-a-process-using-bpmn.md)

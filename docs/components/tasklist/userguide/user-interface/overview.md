@@ -1,6 +1,7 @@
 ---
 id: overview
 title: Overview and example use case
+description: "What you can do with Tasklist and an example use case."
 ---
 
 ## What can I do with Tasklist?
@@ -9,7 +10,7 @@ Tasklist shows you all user tasks that appeared in processes; those processes ar
 
 User tasks need an interaction from the user. This can be updating, adding variables, filling out a Camunda Form, or simply completion of the task. The user must first claim a task or unclaim an already claimed task.
 
-If the user claimed a task, the task is completable. Different task status filters help the user choose the desired task.
+If the user claimed a task, the task can be completed. Different task status filters help the user choose the desired task.
 
 ## Example use case
 
@@ -50,13 +51,17 @@ Once you've claimed a task, you can complete the task by adding and updating var
 
 ![tasklist-claimed-by-me](img/tasklist-claimed-by-me_light.png)
 
-Always choose a list of tasks with a specified status and then select the task you want to work on.
+Always choose a list of tasks with a specified status. Then, select the task you want to work on.
 
 Complete the task and check if it is shown in the **Completed** list.
 
-Change variables as needed and begin completion with **Complete Task**.
+Change variables as needed and begin completion with the **Complete Task** button.
 
 #### Add and update variables
+
+Update variables in the **Variables** section by adjusting their text field.
+
+To add a new variable, click **Add Variable**.
 
 ![tasklist-complete-task](img/tasklist-complete-task_light.png)
 

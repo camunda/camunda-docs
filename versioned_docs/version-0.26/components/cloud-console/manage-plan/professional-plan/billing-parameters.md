@@ -7,7 +7,7 @@ title: Billing parameters
 The terms under which the Professional Plan is available might change in the future.
 :::
 
-The Professional Plan has a fixed monthly subscription fee (_"Base Fee"_) as well as a variable, pay as you go component which depends on the amount of [cluster reservations](#managing-reservations) (_"Reservations Billing"_).
+The Professional Plan has a fixed monthly subscription fee (_"Base Fee"_) as well as a variable, pay as you go component which depends on the amount of [cluster reservations](../../../manage-organization/update-billing-reservations/#managing-reservations) (_"Reservations Billing"_).
 
 Reservations billing works as follows: for each day (GMT+2), the _daily total_ is calculated. To obtain the daily total, all reservations that were active on that day are recorded and for each such reservation, the daily price of the cluster type corresponding to that reservation is added. (Note: The daily price of a cluster type is obtained by dividing the monthly price of the cluster type by the numbers of days in the month). At the end of the month, the daily totals are added up to obtain the _monthly total_.
 

@@ -1,6 +1,7 @@
 ---
 id: best-practices
 title: Best Practices
+description: "Similar to our Camunda Best Practices, we offer Best Practices with a mix of conceptual and practical implementation information for working with Camunda Cloud."
 ---
 
 Similar to our [Camunda Best Practices](https://camunda.com/best-practices/_/), we offer Best Practices with a mix of conceptual and practical implementation information for working with Camunda Cloud. Currently, these are available through blog posts and our [Best Practices hub](https://camunda.com/best-practices/_/).
@@ -19,4 +20,4 @@ Find our Camunda Cloud and BMPN-focused material below:
 * [Naming BPMN Elements](https://camunda.com/best-practices/naming-bpmn-elements/)
 * [Creating Readable Process Models](https://camunda.com/best-practices/creating-readable-process-models/)
 
-This page is updated as more Best Practices are made available.
+This page will be updated as more Best Practices are made available.

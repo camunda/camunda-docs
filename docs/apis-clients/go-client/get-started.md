@@ -33,9 +33,9 @@ go mod init
 ```
 module github.com/zb-user/zb-example
 
-go 1.13
+go 1.17
 
-require github.com/zeebe-io/zeebe/clients/go v0.26.0
+require github.com/camunda-cloud/zeebe/clients/go v1.2.9
 ```
 
 3. Set the connection settings and client credentials as environment variables:
@@ -59,8 +59,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
-	"github.com/zeebe-io/zeebe/clients/go/pkg/pb"
+	"github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
+	"github.com/camunda-cloud/zeebe/clients/go/pkg/pb"
 	"os"
 )
 
@@ -182,8 +182,6 @@ Run the program and verify the process instance is created. You should see an ou
 processKey:2251799813686742 bpmnProcessId:"order-process" version:3 processInstanceKey:2251799813686744
 ```
 
-You did it!
-
 ## See the process in action
 
 Want to see how the process instance is executed? Follow the steps below:
@@ -224,9 +222,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/zeebe-io/zeebe/clients/go/pkg/entities"
-	"github.com/zeebe-io/zeebe/clients/go/pkg/worker"
-	"github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
+	"github.com/camunda-cloud/zeebe/clients/go/pkg/entities"
+	"github.com/camunda-cloud/zeebe/clients/go/pkg/worker"
+	"github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
 	"log"
 	"os"
 )
@@ -358,9 +356,5 @@ processKey:2251799813686750 bpmnProcessId:"order-process" version:4 processInsta
 
 ## What's next?
 
-Yay! You finished this tutorial and learned the basic usage of the Go client.
-
-Next steps:
-
 - Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-cloud.md).
-- Learn more about [BPMN processes](/reference/bpmn-processes/bpmn-primer.md).
+- Learn more about [BPMN processes](/components/modeler/bpmn/bpmn-primer.md).

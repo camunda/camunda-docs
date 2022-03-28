@@ -1,6 +1,6 @@
 module.exports = {
   title: "Camunda Cloud Docs",
-  tagline: "Camunda Cloud, Zeebe, Operate, Tasklist",
+  tagline: "Documentation for all components of Camunda Cloud",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
@@ -13,22 +13,31 @@ module.exports = {
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
   plugins: [
-    //    ["@edno/docusaurus2-graphql-doc-generator",
-    //      {
-    //        schema: "http://localhost:8080/tasklist/graphql",
-    //        rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-    //        baseURL: "apis-clients/tasklist-api",
-    //        linkRoot: "/docs/"
-    //      },
-    //    ],
+//        ["@edno/docusaurus2-graphql-doc-generator",
+//          {
+//            schema: "http://localhost:8080/tasklist/graphql",
+//            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
+//            baseURL: "apis-clients/tasklist-api",
+//            linkRoot: "/docs/",
+//            loaders: {
+//              UrlLoader: "@graphql-tools/url-loader"
+//            }
+//          },
+//        ],
     [
       require.resolve("docusaurus-gtm-plugin"),
       {
         id: "GTM-KQGNSTS", // GTM Container ID
       },
     ],
+    "./static/plugins/bpmn-js",
   ],
+  scripts: [
+  ],  
   themeConfig: {
+    prism: {
+      additionalLanguages: ['java'],
+    },
     navbar: {
       title: "Camunda Cloud Docs",
       logo: {
@@ -60,15 +69,15 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "reference/overview",
-          label: "Reference",
+          docId: "self-managed/overview",
+          label: "Self-Managed",
           position: "left",
         },
         {
           type: "doc",
-          docId: "self-managed/overview",
-          label: "Self-Managed",
-          position: "right",
+          docId: "reference/overview",
+          label: "Reference",
+          position: "left",
         },
       ],
     },
@@ -218,12 +227,7 @@ module.exports = {
             },
           },
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/blog/",
-        },
+        blog: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },

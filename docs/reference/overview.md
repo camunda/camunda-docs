@@ -15,9 +15,9 @@ This section contains general reference material for Camunda Cloud.
 - [Service status](status.md)
 - [Release policy](release-policy.md)
 - [Supported environments](supported-environments.md)
+- [Dependencies & Third Party Libraries](dependencies.md)
 
 ## Additional resources
 
-- [BPMN processes](bpmn-processes/bpmn-primer.md)
 - [FEEL expressions](feel/what-is-feel.md)
 - [Glossary](glossary.md)

@@ -15,8 +15,34 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 16
       - name: Install Dependencies
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Remove https redirect
+        run: |
+          sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
+      - name: Run web server
+        run: |
+          docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnami/apache:latest
+          echo "container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' webserver)" >> $GITHUB_ENV
+      - name: Download sitemap from production
+        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > sitemap.prod.txt
+      - name: Prepare product links
+        run:  grep 'https://docs.camunda.io' product-links.txt | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > product-links.prod.txt
+      - name: Waiting for URL available
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: 'http://${{ env.container_ip }}:8080/'
+      - name: Check internal links
+        # disable action until https://github.com/tylerbutler/linkcheck-bin/issues/1 is released
+        #uses: filiph/linkcheck@v2.0.20
+        #with:
+        #  arguments: '-i sitemap.prod.txt'
+        run: |
+          curl -sL https://github.com/filiph/linkcheck/releases/download/2.0.20/linkcheck-2.0.20-linux-x64.tar.gz | tar xvzf - linkcheck/linkcheck --strip 1
+          # Check links from production sitemap to ensure no publish links are broken
+          ./linkcheck -i sitemap.prod.txt
+          # Check links from other products to ensure no links are broken
+          ./linkcheck -i product-links.prod.txt

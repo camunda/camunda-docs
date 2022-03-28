@@ -8,7 +8,7 @@ description: "Let's implement a service task to connect workers."
 
 ## Prerequisites
 
-- Console Modeler or [Camunda Modeler](https://camunda.com/download/modeler/)
+- Web Modeler or [Desktop Modeler](https://camunda.com/download/modeler/)
 
 ## Implement a service task
 
@@ -17,31 +17,33 @@ import TabItem from '@theme/TabItem';
 
 Use [this process model](./bpmn/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
 
-<Tabs groupId="modeler" defaultValue="console" values={
+<Tabs groupId="modeler" defaultValue="web" values={
 [
-{label: 'Console Modeler', value: 'console', },
-{label: 'Camunda Modeler', value: 'desktop', },
+{label: 'Web Modeler', value: 'web', },
+{label: 'Desktop Modeler', value: 'desktop', },
 ]
 }>
 
-<TabItem value='console'>
+<TabItem value='web'>
 
 Take the following steps:
 
-1. Click **Import New Diagram** in the context menu to inject the BPMN-model you downloaded into the diagram.
+1. In a diagram, open the breadcrumb menu and choose **Replace via Upload**. Then, select a file from your computer.
+![import diagram via replace](../../components/modeler/web-modeler/img/import-diagram/web-modeler-replace-via-upload-menu-item.png)
 
-![import](../../components/modeler/cloud-modeler/img/import-diagram.png)
+Alternatively, you can drag and drop the file onto the canvas.
+![import diagram via drag and drop](../../components/modeler/web-modeler/img/import-diagram/web-modeler-diagram-replace-via-drag-and-drop.png)
+![processId-cloud](./img/web-modeler-advanced-process-id.png)
 
-![processId-cloud](./img/cloud-modeler-advanced-process-id.png)
+This process includes a service task and an XOR gateway.
 
-This process includes a service task and an XOR gateway. 
+2. Select the service task and fill in the properties.
 
-2. Select the service task and fill in the properties. 
 3. Set the **Type** to `test-worker`.
 
-![process-cloud](./img/cloud-modeler-advanced.png)
+![process-cloud](./img/web-modeler-advanced.png)
 
-4. Deploy the new process using the **Save & Deploy** option in the **Execute** menu.
+4. Deploy the new process using the **Deploy Diagram** button.
 
 5. Make sure you have [created a client](./setup-client-connection-credentials.md) and [connected a cluster](connect-to-your-cluster.md).
 
@@ -51,12 +53,12 @@ This process includes a service task and an XOR gateway.
 
 ![processId](./img/zeebe-modeler-advanced-process-id.png)
 
-6. This process includes a service task and an XOR gateway. Select the service task and fill in the properties.
-7. Set the **Type** to `test-worker`.
+1. This process includes a service task and an XOR gateway. Select the service task and fill in the properties.
+2. Set the **Type** to `test-worker`.
 
 ![process](./img/zeebe-modeler-advanced.png)
 
-8. Deploy the new process.
+3. Deploy the new process.
 
 </TabItem>
 </Tabs>
@@ -70,3 +72,4 @@ zbctl create worker test-worker --handler "echo {\"return\":\"Pong\"}"
 ## Next steps
 
 - [Implement a decision gateway](implement-decision-gateway.md)
+- [Getting Started with Microservice Orchestration](./../getting-started-orchestrate-microservices.md)
