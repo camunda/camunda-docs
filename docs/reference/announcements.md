@@ -39,3 +39,8 @@ The support for YAML processes was removed as of release 1.0. The `resourceType`
 ## Deprecated in 1.3
 
 The `zeebe-test` module was deprecated in 1.3.0. We are currently planning to remove `zeebe-test` for the 1.4.0 release.
+
+## Deprecated in 8.0
+
+The [DeployProcess RPC](/apis-clients/grpc.md#deployprocess-rpc) was deprecated in 8.0. 
+It is replaced by the [DeployResource RPC](/apis-clients/grpc.md#deployresource-rpc).
