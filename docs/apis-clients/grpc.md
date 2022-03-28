@@ -342,6 +342,110 @@ Returned if:
   - The resource data is not deserializable (e.g. detected as BPMN, but it's broken XML).
   - The process is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task.)
 
+### `DeployResource` RPC
+
+Deploys one or more resources (e.g. processes or decision models) to Zeebe.
+Note that this is an atomic call, i.e. either all resources are deployed, or none of them are.
+
+#### Input: `DeployResourceRequest`
+
+```protobuf
+message DeployResourceRequest {
+  // list of resources to deploy
+  repeated Resource resources = 1;
+}
+
+message Resource {
+  // the resource name, e.g. myProcess.bpmn or myDecision.dmn
+  string name = 1;
+  // the file content as a UTF8-encoded string
+  bytes content = 2;
+}
+```
+
+#### Output: `DeployResourceResponse`
+
+```protobuf
+message DeployResourceResponse {
+  // the unique key identifying the deployment
+  int64 key = 1;
+  // a list of deployed resources, e.g. processes
+  repeated Deployment deployments = 2;
+}
+
+message Deployment {
+  // each deployment has only one metadata
+  oneof Metadata {
+    // metadata of a deployed process
+    ProcessMetadata process = 1;
+    // metadata of a deployed decision
+    DecisionMetadata decision = 2;
+    // metadata of a deployed decision requirements
+    DecisionRequirementsMetadata decisionRequirements = 3;
+  }
+}
+
+message ProcessMetadata {
+  // the bpmn process ID, as parsed during deployment; together with the version forms a
+  // unique identifier for a specific process definition
+  string bpmnProcessId = 1;
+  // the assigned process version
+  int32 version = 2;
+  // the assigned key, which acts as a unique identifier for this process
+  int64 processDefinitionKey = 3;
+  // the resource name (see: ProcessRequestObject.name) from which this process was
+  // parsed
+  string resourceName = 4;
+}
+
+message DecisionMetadata {
+  // the dmn decision ID, as parsed during deployment; together with the
+  // versions forms a unique identifier for a specific decision
+  string dmnDecisionId = 1;
+  // the dmn name of the decision, as parsed during deployment
+  string dmnDecisionName = 2;
+  // the assigned decision version
+  int32 version = 3;
+  // the assigned decision key, which acts as a unique identifier for this
+  // decision
+  int64 decisionKey = 4;
+  // the dmn ID of the decision requirements graph that this decision is part
+  // of, as parsed during deployment
+  string dmnDecisionRequirementsId = 5;
+  // the assigned key of the decision requirements graph that this decision is
+  // part of
+  int64 decisionRequirementsKey = 6;
+}
+
+message DecisionRequirementsMetadata {
+  // the dmn decision requirements ID, as parsed during deployment; together
+  // with the versions forms a unique identifier for a specific decision
+  string dmnDecisionRequirementsId = 1;
+  // the dmn name of the decision requirements, as parsed during deployment
+  string dmnDecisionRequirementsName = 2;
+  // the assigned decision requirements version
+  int32 version = 3;
+  // the assigned decision requirements key, which acts as a unique identifier
+  // for this decision requirements
+  int64 decisionRequirementsKey = 4;
+  // the resource name (see: Resource.name) from which this decision
+  // requirements was parsed
+  string resourceName = 5;
+}
+```
+
+#### Errors
+
+##### GRPC_STATUS_INVALID_ARGUMENT
+
+Returned if:
+
+- No resources given.
+- At least one resource is invalid. A resource is considered invalid if:
+  - The resource type is not supported (e.g. supported resources include BPMN and DMN files)
+  - The content is not deserializable (e.g. detected as BPMN, but it's broken XML)
+  - The content is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
+
 ### `FailJob` RPC
 
 Marks the job as failed; if the retries argument is positive, the job is immediately
