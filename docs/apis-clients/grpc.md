@@ -6,10 +6,6 @@ description: "Zeebe clients use gRPC to communicate with the cluster."
 
 [Zeebe](../components/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
 
-:::note
-This specification still contains references to YAML workflows. This is a [deprecated feature](./reference/announcements.md) and will eventually be removed.
-:::
-
 ## Gateway service
 
 The Zeebe client gRPC API is exposed through a single gateway service.
