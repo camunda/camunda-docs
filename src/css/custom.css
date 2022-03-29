@@ -44,6 +44,7 @@ body {
   background-color: #FC5D0D;
   border-color: #FC5D0D;
   color: #fff !important;
+  transition: all .3s;
 }
 
 .button--hero:hover {
@@ -51,18 +52,21 @@ body {
   border-color: #FC5D0D;
   color: #fff !important;
   transform: translateY(-8px);
+  transition: all .3s;
 }
 
 .sign-up{
   color: #fff !important;
   border-color: #FC5D0D;
   margin: 1em;
+  transition: all .3s;
 }
  
 .sign-up:hover{
   color: #fff !important;
   background-color: #FC5D0D;
   transform: translateY(-8px);
+  transition: all .3s ease;
 }
 
 .osano-footer-link-docu {
@@ -88,9 +92,11 @@ body {
   .osano-cm-widget:hover {
   opacity: 1;
   transform: none;
+  transition: all .3s ease;
   }
   .osano-cm-widget:active {
   transform: translateY(1px);
+  transition: all .3s ease;
   }
   .osano-cm-link {
   color: #002f66 !important;}
@@ -200,6 +206,7 @@ navbar .navbar .navbar__link[href*=self-managed] {
   background-color:#042B1D;
   color: #fff;
   border-color: #042B1D;
+  transition: all .3s ease;
 }
 
 .get-started-use-case:hover{
@@ -207,6 +214,7 @@ navbar .navbar .navbar__link[href*=self-managed] {
   color: #000 !important;
   border-color: #000;
   transform: translateY(-8px);
+  transition: all .3s ease;
 }
 
 .get-started-use-case-2 {
@@ -214,6 +222,7 @@ navbar .navbar .navbar__link[href*=self-managed] {
   color: #042B1D !important;
   border-color: #042B1D;
   margin: 1em;
+  transition: all .3s ease;
 }
 
 .get-started-use-case-2:hover{
@@ -221,6 +230,7 @@ navbar .navbar .navbar__link[href*=self-managed] {
   color: #fff !important;
   border-color: #000;
   transform: translateY(-8px);
+  transition: all .3s ease;
 }
 
 .component-title{
@@ -233,6 +243,7 @@ navbar .navbar .navbar__link[href*=self-managed] {
 
 .component-block:hover{
   transform: translateY(-8px);
+  transition: all .3s ease;
 }
 
 
