@@ -9,11 +9,11 @@ description: Let's start modeling by creating a BPMN diagram.
 To start modeling, create a BPMN 2.0 diagram by selecting **Create New Diagram** in the **Diagrams** tab for your process engine in the top-level menu.
 
 :::note
-If working in Camunda Platform, select **Create diagram > Create new BPMN diagram**.
+If working in Camunda Platform 7, select **Create diagram > Create new BPMN diagram**.
 :::
 
 :::note
-BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot run a BPMN diagram modeled for Camunda Platform in Camunda Cloud, or vice versa, at this time.
+BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot run a BPMN diagram modeled for Camunda Platform 7 in Camunda Cloud, or vice versa, at this time.
 :::
 
 ## Start modeling
@@ -49,5 +49,5 @@ The panel can be hidden and displayed by clicking the tab on its left border.
 To save your state of work, click **Save**.
 
 :::note
-To save your state of work in Camunda Platform, click **File > Save File As...** in the top-level menu. Then, select a location on your file system to store the diagram in the BPMN 2.0 XML format. You can load that file again by clicking **File > Open File...**.
+To save your state of work in Camunda Platform 7, click **File > Save File As...** in the top-level menu. Then, select a location on your file system to store the diagram in the BPMN 2.0 XML format. You can load that file again by clicking **File > Open File...**.
 :::

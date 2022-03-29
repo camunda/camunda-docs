@@ -34,7 +34,7 @@ As seen in the code snippet a template consist of a number of important componen
 
 * `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Cloud element templates.
 
-  Example (Camunda Platform)
+  Example (Camunda Platform 7)
 
   ```json
   "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.6.0/resources/schema.json"
@@ -57,7 +57,7 @@ As seen in the code snippet a template consist of a number of important componen
 
 The application uses the `$schema` property to ensure compatibility for a given element template. The latest supported [Camunda element templates JSON Schema versions](https://github.com/camunda/element-templates-json-schema) are
 
-* `v0.7.0` (Camunda Platform)
+* `v0.7.0` (Camunda Platform 7)
 * `v0.1.0` (Camunda Cloud)
 
 The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
@@ -68,7 +68,7 @@ For example, given the following `$schema` definition, the application takes `0.
 "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.6.0/resources/schema.json"
 ```
 
-The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, the Camunda Modeler assumes the latest JSON Schema version for Camunda Platform element templates.
+The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, the Camunda Modeler assumes the latest JSON Schema version for Camunda Platform 7 element templates.
 
 Learn more about specifing a `$schema` [here](../defining-templates).
 
@@ -266,7 +266,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**  | `name`: the name of the property  |
 | **Mapping result** | `<... [name]=[userInput] ... />`  |
 
-The `property` binding is supported both in Camunda Platform and Cloud.
+The `property` binding is supported both in Camunda Platform 7 and Cloud.
 
 </TabItem>
 
@@ -426,9 +426,9 @@ If a user removes the value in the configured control, it will also remove the m
 
 __Supported Bindings__
 
-Camunda Platform
+Camunda Platform 7
 
-*Optional bindings are currently not supported for Camunda Platform element templates.*
+*Optional bindings are currently not supported for Camunda Platform 7 element templates.*
 
 Camunda Cloud
 
@@ -487,8 +487,8 @@ __Supported Scopes__
 
 | Name | Target | Supported by |
 | ------------- | ------------- | ------------- |
-| `camunda:Connector` | [Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/) | Camunda Platform |
-| `bpmn:Error` | Global BPMN Error Element | Camunda Platform |
+| `camunda:Connector` | [Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/) | Camunda Platform 7 |
+| `bpmn:Error` | Global BPMN Error Element | Camunda Platform 7 |
 
 </TabItem>
 

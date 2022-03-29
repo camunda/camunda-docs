@@ -1,6 +1,6 @@
 ---
 id: migrating-from-Camunda-Platform
-title: Migrating from Camunda 7
+title: Migrating from Camunda Platform 7
 description: "Migrate process solutions developed for Camunda Platform 7 to run them on Camunda Cloud."
 ---
 <span class="badge badge--advanced">Advanced</span>
@@ -86,7 +86,7 @@ This is visualized on the left-hand side of the picture below. With Camunda Clou
 - Glue code implemented as workers (being Spring beans)
 
 
-<!--With Camunda Platform, you can easily start the workflow engine within your Spring Boot application. While Camunda Cloud also provides Spring Boot support, it is reduced to the client to the workflow engine. Camunda Cloud does not support the embedded engine mode of Camunda Platform. This means the broker cannot be started within the same Spring Boot application and JVM as the business application. Respectively, the configuration of the workflow engine itself is also not part of the Spring Boot application anymore.-->
+<!--With Camunda Platform 7, you can easily start the workflow engine within your Spring Boot application. While Camunda Cloud also provides Spring Boot support, it is reduced to the client to the workflow engine. Camunda Cloud does not support the embedded engine mode of Camunda Platform 7. This means the broker cannot be started within the same Spring Boot application and JVM as the business application. Respectively, the configuration of the workflow engine itself is also not part of the Spring Boot application anymore.-->
 
 ![spring boot](img/architecture-spring-boot.png)
 
@@ -243,7 +243,7 @@ The [Camunda Platform 7 to Camunda Cloud migration tooling](https://github.com/c
 
 1. [A Desktop Modeler plugin to convert BPMN models from Camunda Platform 7 to Camunda Cloud](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/desktop-modeler-plugin-platform-to-cloud-converter). This maps possible BPMN elements and technical attributes into the Camunda Cloud format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
 
-2. [The Camunda Platform 7 to Camunda Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter). This is a library providing a worker to hook in Camunda Platform-based glue code. For example, it can invoke existing JavaDelegate classes.
+2. [The Camunda Platform 7 to Camunda Cloud Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter). This is a library providing a worker to hook in Camunda Platform 7-based glue code. For example, it can invoke existing JavaDelegate classes.
 
 In essence, this tooling implements details described in the next sections.
 

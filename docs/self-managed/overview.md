@@ -5,9 +5,9 @@ title: "Camunda Cloud Self-Managed"
 
 :::note
 
-Camunda Cloud Self-Managed is not Camunda Platform. If you are looking for Camunda Platform documentation, [click here](https://docs.camunda.org).
+Camunda Cloud Self-Managed is not Camunda Platform 7. If you are looking for Camunda Platform 7 documentation, [click here](https://docs.camunda.org).
 
-However, Optimize documentation is available for both Camunda Cloud and Camunda Platform, including deployment instructions available [here](./optimize-deployment/setup.md). Look for "Camunda Platform 7" badges to help you understand what content is available for what product.
+However, Optimize documentation is available for both Camunda Cloud and Camunda Platform 7, including deployment instructions available [here](./optimize-deployment/setup.md). Look for "Camunda Platform 7" badges to help you understand what content is available for what product.
 
 :::
 

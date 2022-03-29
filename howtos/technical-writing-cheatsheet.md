@@ -40,33 +40,6 @@ Our primary goal in documentation is to achieve organization, clarity, and direc
 
 **NOTE: This section is an overview of a few commonly misunderstood Camunda terms. Refer to the Camunda Technical Writing Terms and Glossary for a complete list. To avoid overuse of company jargon or confusion, please refer to this summary of [OMG specifications](https://www.omg.org/spec/category/business-modeling/) when referring to acronyms within your documentation.**
 
-**Camunda Cloud** is made up of the following **components**:
-
-- Console
-- Web Modeler
-- Desktop Modeler 
-- Zeebe
-- Operate
-- Tasklist
-- Optimize
-- IAM
-
-Operate, Tasklist, and Optimize may need to be qualified outside of Camunda Cloud context.
-
-Modelers must be qualified so as not to be confused.
-
-**NOTE: An alternative way to use Camunda Cloud is to host it yourself. This is called Camunda Cloud Self-Managed.**
-
-**Camunda Platform**just  is used in conjunction with the following **products and web applications**:
-
-- Camunda Modeler
-- Camunda Cockpit or Cockpit
-- Tasklist
-- Camunda Optimize
-- Cawemo
-
-Some of these can drop their Camunda qualifier if used within the context of Camunda Platform
-
 Additional words or phrases used in Camunda documentation:
 
 | Term/Acronym | Meaning | Avoid | Use |

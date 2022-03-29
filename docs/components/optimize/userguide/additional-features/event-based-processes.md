@@ -8,7 +8,7 @@ description: Create and analyze reports backed by ingested events.
 
 ## Overview
 
-Event-based processes are BPMN processes that can be created inside Optimize and based on events. These events can be loaded from an external system or created from internal BPMN processes. They are particularly useful to create reports and dashboards based on a process that is not fully automated with Camunda Platform yet.
+Event-based processes are BPMN processes that can be created inside Optimize and based on events. These events can be loaded from an external system or created from internal BPMN processes. They are particularly useful to create reports and dashboards based on a process that is not fully automated with Camunda Platform 7 yet.
 
 Once the event-based process feature is correctly configured, you will see a new link in the navigation to go to the event-based process list. From there, you can see, create, or edit your event-based processes.
 

@@ -10,8 +10,7 @@ Default to [Google's Style Guide](https://developers.google.com/style) for anyth
 
 The Camunda Technical Writing Style Guide applies primarily to current and future external-facing technical content:
 
-- Camunda Platform documentation
-- Camunda Cloud documentation
+- Camunda Platform 7 and Camunda Platform 8 documentation
 
 If you are unsure whether or not you should utilize the practices within this document, please refer to your line manager or team lead.
 
@@ -168,43 +167,10 @@ Create a new Maven project in your IDE. If you're using Eclipse, follow these st
 | -- | -- | -- | -- |
 | Acronyms | BPMN, DMN, TTFN – the use of acronyms should be judged by the level of audience knowledge.<br>For a technical audience, use industry standard acronyms from the start. However, for new concepts or emerging acronyms, write the process in full first, and then follow with the acronym at the next use.<br>For a non-technical audience, always write an acronym in full the first time you use it in any new piece of content. Afterwards, it can be abbreviated. | Avoid abbreviating the term on its first use if the documentation is for an audience which may be non-technical. | Most often, you should spell out the acronym on first reference and abbreviate thereafter depending on the level of audience knowledge. |
 | And/or | Either or both of two stated possibilities. | You can further parallelize archiver and(or) importer within one node using the following configuration parameters | You can further parallelize archiver and/or importer within one node using the following configuration parameters |
-| Camunda Cloud | See details in the sub-section titled **Camunda Cloud** below this table. | Avoid confusion of Camunda Cloud components with other Camunda product components. | See details in the sub-section titled **Camunda Cloud** below this table. |
-| Camunda Platform | See details in the sub-section titled **Camunda Platform** below this table. | Avoid confusion of Camunda Platform components with other Camunda product components. | See details in the sub-section titled **Camunda Platform** below this table. |
 | File extensions | Do not capitalize file extensions like .pdf, .doc, etc. | Uppercase | Lowercase |
 | [Job titles](https://grammar.yourdictionary.com/capitalization/capitalization-of-job-titles.html) | Do not capitalize a job title if listed after a name.<br>Do capitalize a job title if listed before a name. | Charley Mann, Content Strategist | Charley Mann, content strategist |
 | Process | See details in the sub-section titled **Process vs. workflow** below this table. | Avoid "workflow automation" and "workflow instance" where "process automation" and "process instance" is preferred. | We prefer process automation and process instance over workflow automation or workflow instance.<br>See details in the sub-section titled **Process vs. workflow** below this table. |
 | Workflow | See details in the sub-section titled **Process vs. workflow** below this table. | Avoid "workflow automation" and "workflow instance" where "process automation" and "process instance" is preferred. | We prefer process automation and process instance over workflow automation or workflow instance.<br>See details in the sub-section titled **Process vs. workflow** below this table. |
-
-### Camunda Cloud:
-
-**Camunda Cloud** is made up of the following **components**:
-
-- Console
-- Web Modeler
-- Desktop Modeler 
-- Zeebe
-- Operate
-- Tasklist
-- Optimize
-- IAM
-
-Operate and Tasklist may need to be qualified outside of Camunda Cloud context.
-
-Modelers must be qualified so as not to be confused.
-
-**NOTE: An alternative way to use Camunda Cloud is to host it yourself. This is called Camunda Cloud Self-Managed.**
-
-### Camunda Platform:
-
-**Camunda Platform** is used in conjunction with the following **products and web applications**:
-
-- Desktop Modeler
-- Camunda Cockpit or Cockpit
-- Tasklist
-- Camunda Optimize
-- Cawemo
-
-Some of these can drop their Camunda qualifier if used within the context of Camunda Platform.
 
 ### Process vs. workflow:
 
