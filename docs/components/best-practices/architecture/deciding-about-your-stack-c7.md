@@ -87,7 +87,7 @@ Check the **prerequisites**:
   * Activate workspace file sync [refresh using native hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
   * [Add Camunda Assert to your Eclipse content assist favorites](https://github.com/camunda/camunda-bpm-assert/blob/master/docs/README.md#add-camunda-bpm-assert-to-eclipse).
 
-* Check your network access to [Camunda Artifactory](https://camunda.jfrog.io/ui/) for downloading Maven Artifacts.
+* Check your network access to [Camunda Artifactory](https://artifacts.camunda.com/ui/) for downloading Maven Artifacts.
 * As an Enterprise Customer, check that you have your company credentials at hand to log in and get enterprise versions.
 
 Create your **development project**
