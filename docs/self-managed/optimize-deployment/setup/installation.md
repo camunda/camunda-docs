@@ -14,7 +14,7 @@ Before proceeding with the installation, read the article about [supported envir
 
 ### Prerequisites
 
-If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime](./../../../reference/supported-environments.md/#java-runtime) section on which runtimes are supported.
+If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime](./../../../reference/supported-environments.md) section on which runtimes are supported.
 
 ### Demo Distribution with Elasticsearch
 

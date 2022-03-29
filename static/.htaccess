@@ -8,6 +8,9 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# !!!! FIX THIS BEFORE RELEASE !!!!
+RewriteRule ^docs/reference/feel/language-guide/feel-expression/?$ /docs/reference/feel/what-is-feel/ [R=301,L]
+
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/?$ /docs/self-managed/zeebe-deployment/kubernetes/#helm [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites/?$ /docs/self-managed/zeebe-deployment/kubernetes/#prerequisites [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate/?$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist/ [R=301,L]
@@ -87,7 +90,11 @@ RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/
 RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
-RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
+RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg|graphqls))/$ /$1 [R=301,L]
+
+# Replaced deprecated java-client/testing page with java-client/zeebe-process-test page
+RewriteRule ^docs/apis-clients/java-client/testing(.*)$ /docs/apis-clients/java-client/zeebe-process-test$1 [R=301,L]
+RewriteRule ^docs/apis-clients/java-client/testing$ /docs/apis-clients/java-client/zeebe-process-test [R=301,L]
 
 # rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
 ## index pages are not served as /index/ anymore but /index.html
@@ -116,3 +123,5 @@ RewriteRule ^docs/components/best-practices/?$ /docs/components/best-practices/o
 AddType text/vnd.yaml   yaml
 # Add bpmn mime type
 AddType text/xml        bpmn
+# Add graphql scheme mime type
+AddType text/plain      graphqls

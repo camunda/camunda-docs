@@ -341,21 +341,21 @@ module.exports = {
             "apis-clients/java-client/index",
             "apis-clients/java-client/job-worker",
             "apis-clients/java-client/logging",
-            "apis-clients/java-client/testing",
-            {
-              Examples: [
-                "apis-clients/java-client-examples/index",
-                "apis-clients/java-client-examples/process-deploy",
-                "apis-clients/java-client-examples/process-instance-create",
-                "apis-clients/java-client-examples/process-instance-create-nonblocking",
-                "apis-clients/java-client-examples/process-instance-create-with-result",
-                "apis-clients/java-client-examples/job-worker-open",
-                "apis-clients/java-client-examples/data-pojo",
-                "apis-clients/java-client-examples/cluster-topology-request",
-              ],
-            },
-          ],
-        },
+            "apis-clients/java-client/zeebe-process-test",
+              {
+                Examples: [
+                  "apis-clients/java-client-examples/index",
+                  "apis-clients/java-client-examples/process-deploy",
+                  "apis-clients/java-client-examples/process-instance-create",
+                  "apis-clients/java-client-examples/process-instance-create-nonblocking",
+                  "apis-clients/java-client-examples/process-instance-create-with-result",
+                  "apis-clients/java-client-examples/job-worker-open",
+                  "apis-clients/java-client-examples/data-pojo",
+                  "apis-clients/java-client-examples/cluster-topology-request",
+                  ],
+              },
+            ],
+          },
         {
           "Go client": [
             "apis-clients/go-client/index",

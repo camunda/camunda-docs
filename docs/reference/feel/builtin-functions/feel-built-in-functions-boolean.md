@@ -1,6 +1,6 @@
 ---
 id: feel-built-in-functions-boolean
-title: Boolean Functions
+title: Boolean functions
 description: "This document outlines current boolean functions and a few examples."
 ---
 
@@ -19,7 +19,7 @@ not(true)
 
 Checks if a given value is defined. A value is defined if it exists, and it is an instance of one of the FEEL data types including `null`.
 
-The function can be used to check if a variable or a context entry (e.g. a property of a variable) exists. It allows differentiating between a `null` variable and a value that doesn't exist.   
+The function can be used to check if a variable or a context entry (e.g. a property of a variable) exists. It allows differentiating between a `null` variable and a value that doesn't exist.
 
 * parameters:
   * `value`: any

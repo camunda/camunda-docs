@@ -3,11 +3,20 @@ id: installing-helm
 title: "Camunda Cloud Helm charts"
 ---
 
-[Helm](https://github.com/helm/helm) is a package manager for Kubernetes resources. Helm allows us to install a set of components by simply referencing a package name, and allowing us to override configurations to accommodate these packages to different scenarios.
+[Helm](https://github.com/helm/helm) is a package manager for Kubernetes resources. Helm allows us to install a set of 
+components by simply referencing a package name, and allowing us to override configurations to accommodate these packages 
+to different scenarios.
 
+<<<<<<< HEAD
+Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us 
+to aggregate a set of components together that can be installed with a single command. 
+
+The Camunda Cloud Helm chart is currently available and can be found in the [Camunda Cloud Helm repository](https://github.com/camunda-community-hub/camunda-cloud-helm). 
+=======
 Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us to aggregate a set of components together that can be installed with a single command.
 
 The Camunda Cloud Helm chart is currently available and can be found in the [Camunda Cloud Helm repository](https://github.com/camunda-community-hub/camunda-cloud-helm).
+>>>>>>> master
 By default, the following will be installed:
 
 - **Camunda Cloud self-managed Helm (ccsm-helm)**:  
@@ -19,22 +28,39 @@ By default, the following will be installed:
   
 ![Charts](assets/ccsm-helm-charts.png)
 
+<<<<<<< HEAD
+When installing the [ccsm-helm](https://github.com/camunda-community-hub/camunda-cloud-helm/tree/main/charts/ccsm-helm) chart, 
+all the components in this picture are installed. 
+
+### Add Camunda Cloud Helm repository
+
+In order to do so the Camunda Cloud Helm chart repository needs to be added. Once this is done, Helm is able to fetch and install charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
+=======
 When installing the [ccsm-helm](https://github.com/camunda-community-hub/camunda-cloud-helm/tree/main/charts/ccsm-helm) chart, all the components in this picture are installed.
 
 ### Add Camunda Cloud Helm repository
 
 The Camunda Cloud Helm chart repository needs to be added. Once this is done, Helm is able to fetch and install charts hosted in [http://helm.camunda.io](http://helm.camunda.io).
+>>>>>>> master
 
 ```
 > helm repo add camunda-cloud https://helm.camunda.io
 > helm repo update
 ```
 
+<<<<<<< HEAD
+Once this is complete, we are ready to install the Helm chart hosted in the official Camunda Cloud Helm chart repo. 
+
+### Installing the Camunda Cloud Helm Chart in a Cloud environment
+
+In this section, we will install all the available Camunda Cloud components inside a Kubernetes cluster. Notice that this Kubernetes cluster can have services which are already running; Zeebe is simply installed as another set of services. 
+=======
 Once this is complete, we are ready to install the Helm chart hosted in the official Camunda Cloud Helm chart repo.
 
 ### Installing the Camunda Cloud Helm chart in a Cloud environment
 
 In this section, we will install all the available Camunda Cloud components inside a Kubernetes cluster. Notice that this Kubernetes cluster can have services which are already running; Zeebe is simply installed as another set of services.
+>>>>>>> master
 
 ```
 > helm install <RELEASE NAME> camunda-cloud/ccsm-helm
@@ -73,12 +99,47 @@ elasticsearch-master-1                                 1/1     Running   0      
 
 If you want to use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f ccsm-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda-community-hub/camunda-cloud-helm/blob/main/kind/ccsm-kind-values.yaml).
 
+<<<<<<< HEAD
+
+Review the progress of your deployment by checking if the Kubernetes PODs are up and running with the following:
+
+```
+> kubectl get pods
+```
+
+This will return something similar to the following:
+
+```
+NAME                                                   READY   STATUS    RESTARTS   AGE
+elasticsearch-master-0                                 1/1     Running   0          4m6s
+elasticsearch-master-1                                 1/1     Running   0          4m6s
+<RELEASE NAME>-operate-XXX                             1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-0                                 1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-1                                 1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-2                                 1/1     Running   0          4m6s
+<RELEASE NAME>-tasklist-XXX                             1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-gateway-XX1                       1/1     Running   0          4m6s
+<RELEASE NAME>-zeebe-gateway-XX2                       1/1     Running   0          4m6s
+```
+
+### Installing the Camunda Cloud Helm Chart locally using KIND
+
+If you want to use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f ccsm-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda-community-hub/camunda-cloud-helm/blob/main/kind/ccsm-kind-values.yaml).
+
+Be aware, that using KIND is only recommended for development purposes.
+
+```
+helm install <RELEASE NAME> camunda-cloud/ccsm-helm -f ccsm-kind-values.yaml
+```
+
+=======
 Be aware that using KIND is only recommended for development purposes.
 
 ```
 helm install <RELEASE NAME> camunda-cloud/ccsm-helm -f ccsm-kind-values.yaml
 ```
 
+>>>>>>> master
 This will deploy the same components, but with a set of parameters tailored to a local environment setup.
 
 :::note
@@ -104,7 +165,11 @@ elasticsearch-master-0                                 1/1     Running   0      
 
 ### Troubleshooting the installation
 
+<<<<<<< HEAD
+Check that each pod has at least 1/1 running instances. If one or more of your pods stay pending, it means that it can not be scheduled onto a node.
+=======
 Check that each POD has at least 1/1 running instances. If one or more of your PODs stay pending, it means that it can not be scheduled onto a node.
+>>>>>>> master
 
 Usually this happens because there are insufficient resources that prevent it. Use the `kubectl describe ...` command to check on messages from the scheduler:
 
@@ -112,7 +177,11 @@ Usually this happens because there are insufficient resources that prevent it. U
 > kubectl describe pods ${POD_NAME}
 ```
 
+<<<<<<< HEAD
+If the output of the `describe` command was not beneficial, tail the logs of these pods by running the following:
+=======
 If the output of the `describe` command was not beneficial, tail the logs of these PODs by running the following:
+>>>>>>> master
 
 ```
 > kubectl logs -f <POD NAME> 

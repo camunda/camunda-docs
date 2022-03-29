@@ -2,7 +2,7 @@
 
 ## Overview
 
-A quickstart to the complete [Camunda Technical Writing Style Guide](./technical-writing-styleguide.md). The following document outlines technical writing techniques Camunda utilizes to ensure uniform styling across Camunda documentation for a more cohesive and organized user experience alongside a fast-growing staff.
+A quickstart to the complete [Camunda Writing Style Guide](./technical-writing-styleguide.md). The following document outlines writing techniques Camunda utilizes to ensure uniform styling across Camunda documentation for a more cohesive and organized user experience alongside a fast-growing staff.
 
 ## Goal
 
@@ -38,9 +38,7 @@ Our primary goal in documentation is to achieve organization, clarity, and direc
 
 ## Product names and other terminology
 
-**NOTE: This section is an overview of a few commonly misunderstood Camunda terms. Refer to the Camunda Technical Writing Terms and Glossary for a complete list. To avoid overuse of company jargon or confusion, please refer to this summary of [OMG specifications](https://www.omg.org/spec/category/business-modeling/) when referring to acronyms within your documentation.**
-
-Additional words or phrases used in Camunda documentation:
+**NOTE: This section is an overview of a few commonly misunderstood Camunda terms. Refer to this summary of [OMG specifications](https://www.omg.org/spec/category/business-modeling/) when referring to acronyms within your documentation.**
 
 | Term/Acronym | Meaning | Avoid | Use |
 | -- | -- | -- | -- |

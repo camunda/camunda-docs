@@ -10,9 +10,15 @@ This guide describes how to migrate process solutions developed for Camunda Plat
 
 You will see the basic differences of the products, learn about necessary steps, and also limitations of migration.
 
+<<<<<<< HEAD
+1. **It is not necessary to migrate from Camunda Platform to Camunda Cloud**. Camunda Platform is a great product with ongoing support; there is no need to migrate existing solutions unless you have a good reason to (e.g. run it on SaaS, certain requirements on scalability or fault-tolerance, etc.) It is OK to stay on Camunda Platform. But still then, knowing the basic steps of migration can be helpful in building solutions with Camunda Platform, that will make migration easier in the future if necessary.
+
+2. **There are limitations for an automated migration from Camunda Platform to Camunda Cloud**. As you will read below, there are several differences between the products and not all process solutions are easy to migrate. If in doubt, please [talk to us](/contact/) so we can help.
+=======
 It's important to note that migration of existing projects to Camunda Cloud is optional. Camunda Platform 7 is a great product with ongoing support.
 
 
+>>>>>>> master
 
 ## Camunda 7 vs. Camunda Cloud
 
@@ -29,7 +35,11 @@ This section does not compare Camunda Platform 7 with Camunda Cloud in detail, b
 
 Camunda Platform 7 allows embedding the workflow engine as a library in your application. This means both run in the same JVM, share thread pools, and can even use the same datasource and transaction manager.
 
+<<<<<<< HEAD
+* **Runtime data:** Running process instances of Camunda Platform are stored in the Camunda Platform database. *Runtime data cannot be migrated* to Camunda Cloud.
+=======
 In contrast, the workflow engine in Camunda Cloud is always a remote resource for your application, while the embedded engine mode is not supported.
+>>>>>>> master
 
  If you are interested in the reasons why we switched our recommendation from embedded to remote workflow engines, please refer to [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
 
@@ -67,6 +77,10 @@ To migrate existing connectors, create a small bridging layer to invoke these co
 
 
 
+<<<<<<< HEAD
+Most expressions can be converted (see [this community extension](https://github.com/berndruecker/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.js) as a starting point, some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform).
+=======
+>>>>>>> master
 
 
 ### Process solutions using Spring Boot
@@ -80,10 +94,14 @@ With Camunda 7, a frequently used architecture to build a process solution (also
 
 This is visualized on the left-hand side of the picture below. With Camunda Cloud, a comparable process solution would look like the right-hand side of the picture and leverage:
 
+<<<<<<< HEAD
+1. [A Desktop Modeler plugin to convert BPMN models from Camunda Platform to Camunda Cloud](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/desktop-modeler-plugin-platform-to-cloud-converter). This maps possible BPMN elements and technical attributes into the Camunda Cloud format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
+=======
 - Java
 - Spring Boot
 - Spring Zeebe Starter (embeding the Zeebe client)
 - Glue code implemented as workers (being Spring beans)
+>>>>>>> master
 
 
 <!--With Camunda Platform 7, you can easily start the workflow engine within your Spring Boot application. While Camunda Cloud also provides Spring Boot support, it is reduced to the client to the workflow engine. Camunda Cloud does not support the embedded engine mode of Camunda Platform 7. This means the broker cannot be started within the same Spring Boot application and JVM as the business application. Respectively, the configuration of the workflow engine itself is also not part of the Spring Boot application anymore.-->
@@ -387,6 +405,9 @@ The following is not possible:
 
 Human task management is also available in Camunda Cloud, but uses a different tasklist user interface and API.
 
+<<<<<<< HEAD
+The following attributes/elements cannot (yet) be migrated:
+=======
 In Camunda Platform 7, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
 
 * Embedded Task Forms (embedded custom HTML and JavaScript)
@@ -397,6 +418,7 @@ In Camunda Platform 7, you have [different ways to provide forms for user tasks]
 Only Camunda Forms are currently supported in Camunda Cloud and can be migrated.
 
 The following attributes/elements can be migrated:
+>>>>>>> master
 
 * Task assignment (to users or groups):
   * ```bpmn:humanPerformer```
@@ -417,6 +439,17 @@ The following attributes/elements cannot (yet) be migrated:
 * ```camunda:followUpDate```
 * ```camunda:priority```
 
+<<<<<<< HEAD
+#### Forms
+
+In Camunda Platform, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
+
+* Embedded Task Forms (embedded custom HTML and JavaScript)
+* Camunda Forms (simple forms defined via Desktop Modeler properties)
+* External Task Forms (link to custom applications)
+* [Camunda Forms](./utilizing-forms.md)
+=======
+>>>>>>> master
 
 
 ### Business rule tasks

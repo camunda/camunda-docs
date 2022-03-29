@@ -35,18 +35,38 @@ body {
 }
 
 .hero--primary {
-  background-image: url("/img/Camunda_Master_Colours_RGB.png");
-  background-color: transparent;
+  background-color: #000;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .button--hero {
-  background-color: #fff;
+  background-color: #FC5D0D;
+  border-color: #FC5D0D;
+  color: #fff !important;
+  transition: all .3s;
 }
 
 .button--hero:hover {
-  background-color: #e6e7e8;
+  background-color: transparent;
+  border-color: #FC5D0D;
+  color: #fff !important;
+  transform: translateY(-8px);
+  transition: all .3s;
+}
+
+.sign-up{
+  color: #fff !important;
+  border-color: #FC5D0D;
+  margin: 1em;
+  transition: all .3s;
+}
+ 
+.sign-up:hover{
+  color: #fff !important;
+  background-color: #FC5D0D;
+  transform: translateY(-8px);
+  transition: all .3s ease;
 }
 
 .osano-footer-link-docu {
@@ -72,9 +92,11 @@ body {
   .osano-cm-widget:hover {
   opacity: 1;
   transform: none;
+  transition: all .3s ease;
   }
   .osano-cm-widget:active {
   transform: translateY(1px);
+  transition: all .3s ease;
   }
   .osano-cm-link {
   color: #002f66 !important;}
@@ -180,20 +202,55 @@ navbar .navbar .navbar__link[href*=self-managed] {
   margin-right: 2px;
 }
 
-.sign-up{
- color: #fff !important;
- margin: 1em;
-}
-
-.sign-up:hover{
-  color: #000 !important;
- }
-
-.get-started:hover{
-  background-color:#000;
+.get-started-use-case {
+  background-color:#042B1D;
   color: #fff;
-  --ifm-button-border-color: #000;
+  border-color: #042B1D;
+  transition: all .3s ease;
 }
+
+.get-started-use-case:hover{
+  background-color: transparent;
+  color: #000 !important;
+  border-color: #000;
+  transform: translateY(-8px);
+  transition: all .3s ease;
+}
+
+.get-started-use-case-2 {
+  background-color: transparent;
+  color: #042B1D !important;
+  border-color: #042B1D;
+  margin: 1em;
+  transition: all .3s ease;
+}
+
+.get-started-use-case-2:hover{
+  background-color:#000;
+  color: #fff !important;
+  border-color: #000;
+  transform: translateY(-8px);
+  transition: all .3s ease;
+}
+
+.component-title{
+  text-align: center;
+}
+
+.component-desc{
+  text-align: center;
+}
+
+.component-block{
+  transition: all .3s ease;
+}
+
+.component-block:hover{
+  transform: translateY(-8px);
+  transition: all .3s ease;
+}
+
+
   
 /* Styles for BPMN.io integration and callouts in these models */
 .bpmn-model {

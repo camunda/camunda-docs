@@ -20,7 +20,11 @@ The easiest way to develop with Zeebe is using Docker. Docker provides a consist
 
 A default docker compose configuration to run Zeebe, Operate, and Tasklist is available in the get started repository: [docker-compose.yaml](https://github.com/camunda-cloud/camunda-cloud-get-started/blob/master/docker-compose.yaml).
 
+<<<<<<< HEAD
+Download this file to your local computer, `cd` into that directory and run `docker-compose up`. 
+=======
 Download this file to your local computer, `cd` into that directory, and run `docker-compose up`.
+>>>>>>> master
 
 #### Exposed ports
 
