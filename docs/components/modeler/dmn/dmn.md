@@ -4,17 +4,17 @@ title: Editing DMN in Desktop Modeler
 description: To start modeling, let's create a DMN diagram.
 ---
 
-<span class="badge badge--CCSM">Camunda Platform Only</span>
+<span class="badge badge--CCSM">Camunda Platform 7 Only</span>
 
 :::note
-DMN is currently only available in Camunda Platform.
+DMN is currently only available in Camunda Platform 7.
 :::
 
 ## Create new DMN decision requirement diagram
 
 ![New DMN Diagram](./img/create-dmn.png)
 
-To start modeling, create a new DMN 1.3 diagram for Camunda Platform by selecting **Create diagram > Create new DMN diagram (Camunda Platform)** in the top-level menu.
+To start modeling, create a new DMN 1.3 diagram for Camunda Platform 7 by selecting **Create diagram > Create new DMN diagram (Camunda Platform 7)** in the top-level menu.
 
 ## Start modeling
 

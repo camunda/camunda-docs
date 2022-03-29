@@ -136,8 +136,8 @@ Also in the case of BPMN diagrams, we add selected diagram metrics:
 ### Deployment Event
 The `Deployment Event` is sent in following situations:
 
- - User deploys a BPMN diagram to Camunda Platform or Camunda Cloud
- - User deploys a DMN diagram to Camunda Platform
+ - User deploys a BPMN diagram to Camunda Platform 7 or Camunda Cloud
+ - User deploys a DMN diagram to Camunda Platform 7
 
 The Deployment Event has the following core structure:
 ```json
@@ -153,7 +153,7 @@ The Deployment Event has the following core structure:
 }
 ```
 
-In case the diagram deployment was not successful, the error code returned from the Camunda Platform will be added to the payload:
+In case the diagram deployment was not successful, the error code returned from the Camunda Platform 7 will be added to the payload:
 
 ```json
 {

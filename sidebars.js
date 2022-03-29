@@ -467,6 +467,7 @@ module.exports = {
         {
           Setup: [
             "self-managed/optimize-deployment/setup/installation",
+            "self-managed/optimize-deployment/setup/optimize-license",
             "self-managed/optimize-deployment/setup/security-instructions",
             "self-managed/optimize-deployment/setup/configuration",
             "self-managed/optimize-deployment/setup/user-management",
