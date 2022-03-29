@@ -133,11 +133,12 @@ Sort by `name` **desc**ending:
 
 Specify the item where the next search should start. For this, you need the values from previous results. 
 Copy the values from `sortValues` field from the previous results into the `searchAfter` value of query. 
-See also [results](#results).
+See also [results](#results). 
 
 ##### Example
 
-Get next page for sorted by name descending:
+Get next 10 results for previous query by copying the value of `sortValues` of the previous results object.
+Assuming the `sortValues` value was `["the-name",12345]`, put it as value for `searchAfter` in the next query.
 
 ```json
 { "sort": [{"field":"name","order":"DESC"}], "searchAfter": ["the-name",12345] }
