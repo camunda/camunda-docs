@@ -578,7 +578,7 @@ module.exports = {
             }
           ],
         }, {
-          "Guides": [
+          "User guide": [
             "self-managed/identity/guides/adding-an-application",
             "self-managed/identity/guides/adding-an-api",
             "self-managed/identity/guides/adding-a-permission",

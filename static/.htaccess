@@ -86,6 +86,13 @@ RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs
 
 RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 
+RewriteRule ^docs/self-managed/iam/what-is-iam/(.*)$  /docs/self-managed/identity/what-is-identity/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started/docker/setup-environment/(.*)$  /docs/self-managed/identity/getting-started/docker/setup-environment/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started/docker/start-iam/(.*)$  /docs/self-managed/identity/getting-started/docker/starting-the-services/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started/docker/accessing-the-ui/(.*)$  /docs/self-managed/identity/getting-started/docker/logging-in/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/deployment/configuration-variables/(.*)$  /docs/self-managed/identity/deployment/configuration-variables/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/deployment/making-iam-production-ready/(.*)$  /docs/self-managed/identity/deployment/making-identity-production-ready/ [R=301,L]
+
 # Static resource page for the camunda desktop modeler
 RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
 
