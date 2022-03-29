@@ -4,7 +4,7 @@ title: Milestones
 description: Working with milestones in Web Modeler
 ---
 
-<span class="badge badge--cloud">Camunda Cloud only</span>
+<span class="badge badge--cloud">Camunda Platform 8 only</span>
 
 ## Milestones
 

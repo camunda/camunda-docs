@@ -1,7 +1,7 @@
 ---
 id: bpmn-coverage
 title: "BPMN coverage"
-description: "List of BPMN symbols compatible with Camunda Cloud"
+description: "List of BPMN symbols compatible with Camunda Platform 8"
 ---
 
 export const Highlight = ({children, color}) => (

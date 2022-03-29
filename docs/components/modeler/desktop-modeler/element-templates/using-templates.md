@@ -23,7 +23,7 @@ Camunda Platform
   camunda:modelerTemplateVesion="1" />
 ```
 
-Camunda Cloud
+Camunda Platform 8
 
 ```xml
 <bpmn:serviceTask id="MailTask"

@@ -27,4 +27,4 @@ Elements that support different types can be reconfigured by clicking on the cor
 
 ![properties panel](img/properties-panel.png)
 
-5. Once you finish modeling and configuring your diagram, save it as BPMN or deploy it on a [Camunda Cloud cluster](./connect-to-camunda-cloud.md). You can also export the diagram as an image.
+5. Once you finish modeling and configuring your diagram, save it as BPMN or deploy it on a [Camunda Platform 8 cluster](./connect-to-camunda-cloud.md). You can also export the diagram as an image.

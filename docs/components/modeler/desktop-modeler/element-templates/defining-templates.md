@@ -32,7 +32,7 @@ Templates are defined in template descriptor files as a JSON array:
 
 As seen in the code snippet a template consist of a number of important components:
 
-* `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Cloud element templates.
+* `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Platform 8 element templates.
 
   Example (Camunda Platform)
 
@@ -40,7 +40,7 @@ As seen in the code snippet a template consist of a number of important componen
   "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.8.0/resources/schema.json"
   ```
 
-  Example (Camunda Cloud)
+  Example (Camunda Platform 8)
 
   ```json
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.2.0/resources/schema.json"
@@ -58,7 +58,7 @@ As seen in the code snippet a template consist of a number of important componen
 The application uses the `$schema` property to ensure compatibility for a given element template. The latest supported [Camunda element templates JSON Schema versions](https://github.com/camunda/element-templates-json-schema) are
 
 * `v0.8.0` (Camunda Platform)
-* `v0.2.0` (Camunda Cloud)
+* `v0.2.0` (Camunda Platform 8)
 
 The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
 
@@ -269,7 +269,7 @@ Camunda Platform
 
 *Feel Inputs are currently not supported for Camunda Platform element templates.*
 
-Camunda Cloud
+Camunda Platform 8
 
 * `String`
 * `Text`
@@ -282,9 +282,9 @@ Notice that adherence to the following configuration options is enforced by desi
 
 <Tabs groupId="bindings" defaultValue="both" values={
 [
-{label: 'Bindings for Camunda Platform or Camunda Cloud', value: 'both', },
+{label: 'Bindings for Camunda Platform or Camunda Platform 8', value: 'both', },
 {label: 'Bindings for Camunda Platform', value: 'platform', },
-{label: 'Bindings for Camunda Cloud', value: 'cloud', },
+{label: 'Bindings for Camunda Platform 8', value: 'cloud', },
 ]
 }>
 
@@ -462,7 +462,7 @@ Camunda Platform
 
 *Optional bindings are currently not supported for Camunda Platform element templates.*
 
-Camunda Cloud
+Camunda Platform 8
 
 * `zeebe:input`
 * `zeebe:output`
@@ -511,7 +511,7 @@ __Supported Scopes__
 <Tabs groupId="scopes" defaultValue="platformScopes" values={
 [
 {label: 'Scoped bindings for Camunda Platform', value: 'platformScopes', },
-{label: 'Scoped bindings for Camunda Cloud', value: 'cloudScopes', }
+{label: 'Scoped bindings for Camunda Platform 8', value: 'cloudScopes', }
 ]
 }>
 

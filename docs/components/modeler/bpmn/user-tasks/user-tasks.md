@@ -45,12 +45,12 @@ book.author)`). The expressions are evaluated on activating the user task and mu
 For [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user, 
 the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
-- Camunda Cloud (login with email, Google, GitHub): `email`
+- Camunda Platform 8 (login with email, Google, GitHub): `email`
 - Default Basic Auth (elasticsearch): `username`
 - IAM: `username`
 
 :::note
-For example, say you log into Tasklist using Camunda Cloud login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
+For example, say you log into Tasklist using Camunda Platform 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
 :::
 
 ## Variable mappings
