@@ -1,14 +1,13 @@
 ---
 id: setup-environment
-title: "Setup environment"
-sidebar_label: "Step 1: Setup environment"
+title: "Set up environment"
+sidebar_label: "Step 1: Set up environment"
 ---
 
-In this part of the tutorial, we'll show you how you can use containerization to run the Identity application on your 
-machine. Here, it is assumed you have a basic understanding of Docker Compose. 
+In this part of the tutorial, we'll show you how you can use containerization to run the Identity application on your machine. Here, it is assumed you have a basic understanding of Docker Compose.
 
 :::tip
-Not sure what Docker Compose is? Check out Docker's [Overview of Docker Compose](https://docs.docker.com/compose/) guide.
+Not sure what Docker Compose is? Check out Docker's [Overview of Docker Compose](https://docs.docker.com/compose/).
 :::
 
 ### Prerequisites
@@ -33,7 +32,7 @@ services:
     restart: on-failure
 ```
 
-2. Identity requires a Keycloak instance to function. Add a Keycloak instance service to your docker-compose.yml file:
+2. Identity requires a Keycloak instance to function. Add a Keycloak instance service to your `docker-compose.yml` file:
 
 ```yaml
 keycloak:
@@ -54,19 +53,17 @@ keycloak:
 ```
 
 :::note
-To learn more about Keycloak please see the [Keycloak website](https://www.keycloak.org/)
+To learn more about Keycloak, see the [Keycloak website](https://www.keycloak.org/).
 :::
 
-3. We'll also need to add new entries to the `services.identity.environment` section to tell Identity where Keycloak 
- is located:
+3. We'll also need to add new entries to the `services.identity.environment` section to tell Identity where Keycloak is located:
 
 ```yaml
   KEYCLOAK_URL: http://keycloak:8080/auth
   IDENTITY_AUTH_PROVIDER_BACKEND_URL: http://keycloak:8080/auth/realms/camunda-platform
 ```
 
-4. Let's tell Docker Compose that the `identity` service is dependent on the `keycloak` service by adding the following 
-lines under `services.identity`:
+4. Tell Docker Compose that the `identity` service is dependent on the `keycloak` service by adding the following lines under `services.identity`:
 
 ```yaml
     depends_on:
@@ -115,5 +112,4 @@ services:
 
 ### Conclusion
 
-Now that we've configured the containers for the Identity application and the supporting Keycloak instance, 
-let's move on to [starting the services](../starting-the-services).
+Now that we've configured the containers for the Identity application and the supporting Keycloak instance, let's move on to [starting the services](../starting-the-services).

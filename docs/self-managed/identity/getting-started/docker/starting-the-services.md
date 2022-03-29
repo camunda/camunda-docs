@@ -6,14 +6,14 @@ sidebar_label: "Step 2: Start the services"
 
 ### Starting the services
 
-There are several methods to start the containers. If you have Docker support within your IDE, consult their 
-documentation on run configurations.
+There are several methods to start the containers. If you have Docker support within your IDE, consult their documentation on run configurations.
 
 If you are using the command line, use the following global command:
 
 ```shell
 docker compose -f /path/to/your/docker-compose.yml up -d
 ```
+
 :::note
 If you are using Docker Compose V1, you can use the command `docker-compose`.
 :::
@@ -33,10 +33,9 @@ e15d9e80f18d   identity:latest         "java -jar identity.…"   5 hours ago   
 ```
 
 :::tip
-If the container for the Identity application does not remain healthy, you can use the `CONTAINER ID` to check the logs 
-by running `docker logs <COMTAINER_ID>`.
+If the container for the Identity application does not remain healthy, you can use the `CONTAINER ID` to check the logs by running `docker logs <COMTAINER_ID>`.
 :::
 
 ### Conclusion
 
-Congratulations! You've now started the Identity application. Let's move on to [logging in](../logging-in).
+You've now started the Identity application. Let's move on to [logging in](../logging-in).

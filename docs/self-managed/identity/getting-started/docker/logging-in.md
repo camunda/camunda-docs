@@ -14,7 +14,7 @@ Navigate to `localhost:8080` to see the UI exposed by the Identity component.
 
 ### Default user
 
-Identity creates a default user during installation, use this account to log in.
+Identity creates a default user during installation; use this account to log in.
 
 ```text
 Username: demo
