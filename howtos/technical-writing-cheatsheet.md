@@ -38,7 +38,7 @@ Our primary goal in documentation is to achieve organization, clarity, and direc
 
 ## Product names and other terminology
 
-**NOTE: This section is an overview of a few commonly misunderstood Camunda terms. Please refer to this summary of [OMG specifications](https://www.omg.org/spec/category/business-modeling/) when referring to acronyms within your documentation.**
+**NOTE: This section is an overview of a few commonly misunderstood Camunda terms. Refer to this summary of [OMG specifications](https://www.omg.org/spec/category/business-modeling/) when referring to acronyms within your documentation.**
 
 | Term/Acronym | Meaning | Avoid | Use |
 | -- | -- | -- | -- |
