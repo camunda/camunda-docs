@@ -37,7 +37,7 @@ module.exports = {
   themeConfig: {
     announcementBar:{
       id: 'camunda8',
-      content: '<b>📣 Camunda Cloud is now Camunda Platform 8!</b> Learn more about how to navigate the docs <a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.com/meta">here</a>.',
+      content: '<b>📣 Camunda Cloud is now Camunda Platform 8!</b> Learn more about navigating the updated documentation <a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.com/meta">here</a>.',
       backgroundColor: '#14D890',
       textColor: '#000',
       isCloseable: false,
