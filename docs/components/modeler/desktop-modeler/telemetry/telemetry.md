@@ -39,7 +39,8 @@ The `Ping Event` is sent in following situations:
 The Ping Event has the following structure:
 ```json
 {
-  "event": "ping"
+  "event": "ping",
+  "plugins": ["PLUGIN_NAME"]
 }
 ```
 
