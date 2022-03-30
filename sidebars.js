@@ -330,6 +330,7 @@ module.exports = {
       "APIs": [
         "apis-clients/public-api",
         "apis-clients/grpc",
+        "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/cloud-console-api-reference",
       ],
@@ -467,6 +468,7 @@ module.exports = {
         {
           Setup: [
             "self-managed/optimize-deployment/setup/installation",
+            "self-managed/optimize-deployment/setup/optimize-license",
             "self-managed/optimize-deployment/setup/security-instructions",
             "self-managed/optimize-deployment/setup/configuration",
             "self-managed/optimize-deployment/setup/user-management",

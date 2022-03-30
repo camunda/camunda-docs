@@ -13,9 +13,7 @@ After [downloading](./install-the-modeler.md) and starting Desktop Modeler, you 
 
 ![new diagram](./img/new-diagram.png)
 
-As with [Web Modeler](../web-modeler/model-your-first-diagram.md), you can now add new elements.
-
-3. On the left side of the screen you will find the element palette supported by the engine. Drag and drop the elements onto the diagram:
+3. On the left side of the screen you will find the element palette. Drag and drop the elements onto the diagram:
 
 ![elements](./img/elements.png)
 
@@ -23,8 +21,8 @@ Elements that support different types can be reconfigured by clicking on the cor
 
 ![task configuration](img/element-configuration.png)
 
-4. Each element has adjustable attributes. Use the properties panel on the right side of the page:
+4. Use the properties panel on the right side of the page to edit the properties of the currently selected element:
 
 ![properties panel](img/properties-panel.png)
 
-5. Once you finish modeling and configuring your diagram, save it as BPMN or deploy it on a [Camunda Cloud cluster](./connect-to-camunda-cloud.md). You can also export the diagram as an image.
+5. Once you finish modeling and configuring your diagram, you can deploy it to a [Camunda Cloud cluster](./connect-to-camunda-cloud.md).

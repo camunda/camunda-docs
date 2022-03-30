@@ -55,8 +55,8 @@ The following components were used for these import tests:
 
 | Component | Version |
 | - | - |
-| Camunda Platform | 7.10.3 |
-| Camunda Platform Database | PostgreSQL 11.1 |
+| Camunda Platform 7 | 7.10.3 |
+| Camunda Platform 7 Database | PostgreSQL 11.1 |
 | Elasticsearch | 6.5.4 |
 | Optimize | 2.4.0 |
 
@@ -68,10 +68,10 @@ The following hardware specifications were used for each dedicated host
   - Processor: 8 vCPUs\*
   - Working Memory: 8 GB
   - Storage: local 120GB SSD
-- Camunda Platform:
+- Camunda Platform 7:
   - Processor: 4 vCPUs\*
   - Working Memory: 4 GB
-- Camunda Platform Database (PostgreSQL):
+- Camunda Platform 7 Database (PostgreSQL):
   - Processor: 8 vCPUs\*
   - Working Memory: 2 GB
   - Storage: local 480GB SSD

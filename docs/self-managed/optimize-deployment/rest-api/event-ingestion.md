@@ -8,7 +8,7 @@ description: "The REST API to ingest external events into Optimize."
 
 ## Purpose
 
-The Event Ingestion REST API ingests business process related event data from any third-party system to Camunda Optimize. These events can then be correlated into an [event-based process](./../../../components/optimize/userguide/additional-features/event-based-processes.md) in Optimize to get business insights into business processes that are not yet fully modeled nor automated using the Camunda Platform.
+The Event Ingestion REST API ingests business process related event data from any third-party system to Camunda Optimize. These events can then be correlated into an [event-based process](./../../../components/optimize/userguide/additional-features/event-based-processes.md) in Optimize to get business insights into business processes that are not yet fully modeled nor automated using Camunda Platform 7.
 
 ## Functionality
 

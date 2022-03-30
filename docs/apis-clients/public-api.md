@@ -20,6 +20,7 @@ Currently, both Zeebe API and [Tasklist API](/apis-clients/tasklist-api/generate
 
 - [Zeebe Client Java API](/apis-clients/java-client/index.md)
 - [Tasklist API](/apis-clients/tasklist-api/generated.md)
+- [Operate API](/apis-clients/operate-api/index.md)
 
 All non-implementation Java packages (package name does not contain `impl`) of the following Maven modules.
 

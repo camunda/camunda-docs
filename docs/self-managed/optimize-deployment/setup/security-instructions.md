@@ -10,7 +10,7 @@ This page provides an overview of how to secure a Camunda Optimize installation.
 
 This guide also identifies areas where we consider security issues to be relevant for the Camunda Optimize product and list those in the subsequent sections. Compliance for those areas is ensured based on common industry best practices and influenced by security requirements of standards like OWASP Top 10 and others.
 
-It is essential to know that Optimize does not operate on its own, but needs the Camunda Platform engine to import the data from and Elasticsearch to store the data. A detailed description of the setup can be found in the [architecture overview]({{< ref "/technical-guide/optimize-explained/import/import-overview.md" >}}) guide. There are three components that are affected by security which are detailed in the following subsections:
+It is essential to know that Optimize does not operate on its own, but needs the Camunda Platform 7 engine to import the data from and Elasticsearch to store the data. A detailed description of the setup can be found in the [architecture overview]({{< ref "/technical-guide/optimize-explained/import/import-overview.md" >}}) guide. There are three components that are affected by security which are detailed in the following subsections:
 
 - [Secure Elasticsearch](#secure-elasticsearch)
 

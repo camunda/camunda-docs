@@ -6,7 +6,7 @@ description: Forms created with Camunda Modeler are embeddable in Tasklist.
 
 
 :::note Support for Camunda Forms
-The Camunda Forms feature was added with the 7.15.0 release of Camunda Platform and the 4.7.0 release of Camunda Modeler.
+The Camunda Forms feature was added with the 7.15.0 release of Camunda Platform 7 and the 4.7.0 release of Camunda Modeler.
 :::
 
 Camunda Forms allow you to easily design and configure forms, and then embed them in Camunda Tasklist.
