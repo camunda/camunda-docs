@@ -579,11 +579,11 @@ module.exports = {
           ],
         }, {
           "User guide": [
-            "self-managed/identity/guides/adding-an-application",
-            "self-managed/identity/guides/adding-an-api",
-            "self-managed/identity/guides/adding-a-permission",
-            "self-managed/identity/guides/adding-a-role",
-            "self-managed/identity/guides/configure-external-identity-provider"
+            "self-managed/identity/user-guide/adding-an-application",
+            "self-managed/identity/user-guide/adding-an-api",
+            "self-managed/identity/user-guide/adding-a-permission",
+            "self-managed/identity/user-guide/adding-a-role",
+            "self-managed/identity/user-guide/configure-external-identity-provider"
           ],
         }, {
           "Deployment": [
