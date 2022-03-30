@@ -65,6 +65,7 @@ module.exports = {
             "components/cloud-console/manage-clusters/manage-api-clients",
             "components/cloud-console/manage-clusters/manage-alerts",
             "components/cloud-console/manage-clusters/manage-ip-whitelists",
+            "components/cloud-console/manage-clusters/manage-secrets",
           ],
         },
         {
@@ -92,6 +93,19 @@ module.exports = {
             "components/modeler/web-modeler/start-instance",
             "components/modeler/web-modeler/collaboration",
             "components/modeler/web-modeler/milestones",
+            {
+              "Connectors": [
+                "components/modeler/web-modeler/connectors/index",
+                "components/modeler/web-modeler/connectors/use-connectors",
+                {
+                  "Available Connectors": [
+                    "components/modeler/web-modeler/connectors/available-connectors/index",
+                    "components/modeler/web-modeler/connectors/available-connectors/rest",
+                    "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
+                  ]
+                }
+              ]
+            }
           ],
         },
         {
