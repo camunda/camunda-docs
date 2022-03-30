@@ -8,7 +8,7 @@ Operate provides three ways to authenticate:
 
 1. User information stored in [Elasticsearch](#user-in-elasticsearch)
 2. [Lightweight Directory Access Protocol (LDAP)](#ldap)
-3. [IAM Authentication and Authorization](#iam)
+3. [Identity Authentication and Authorization](#identity)
 
 By default, user storage in Elasticsearch is enabled.
 
@@ -116,39 +116,31 @@ CAMUNDA_OPERATE_LDAP_USERIDATTRNAME=userPrincipalName
 `userSearchFilter` can be empty, and active directory default implementation would get `(&(objectClass=user)(userPrincipalName={0}))`.
 :::
 
-## IAM
+## Identity
 
-[IAM](../../iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+<!-- TODO: insert link to identity when available [Identity](../../self-managed/identity) -->
+Identity provides authentication and authorization functionality along with user management.
 
-### Enable IAM
+### Enable Identity
 
-IAM can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `iam-auth`.
+Identity can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `identity-auth`.
 
 See the following example:
 
 ```
-export SPRING_PROFILES_ACTIVE=iam-auth
+export SPRING_PROFILES_ACTIVE=identity-auth
 ```
 
-### Configure IAM
+### Configure Identity
 
-IAM requires the following parameters:
+Identity requires the following parameters:
 
 | Parameter name | Description | Example value |
 | -- | -- | -- |
-| camunda.operate.iam.issuer | Name/ID of issuer | http://app.iam.localhost |
-| camunda.operate.iam.issuerUrl | URL of issuer (IAM) | http://app.iam.localhost |
-| camunda.operate.iam.clientId | Similar to a username for the application | operate |
-| camunda.operate.iam.clientSecret | Similar to a password for the application | XALaRPl...s7dL7 |
+| camunda.operate.identity.issuerUrl | URL of issuer (Identity) | http://localhost:18080/auth/realms/camunda-platform |
+| camunda.operate.identity.issuerBackendUrl | Backend URL of issuer (Identity) | http://localhost:18080/auth/realms/camunda-platform |
+| camunda.operate.identity.clientId | Similar to a username for the application | operate |
+| camunda.operate.identity.clientSecret | Similar to a password for the application | XALaRPl...s7dL7 |
+| camunda.operate.identity.audience | Audience for Operate | operate-api |
 
-We provide two different permissions over IAM: read or write.
-To configure the authorization, you are required to create two different permissions:
 
-| Permission value | Description |
-| -- | -- |
-| `read:*` | Grants the user the permission to access, view, and read the data in the application. |
-| `write:*` | Grants the user the permission to perform operations. |
-
-:::note
-The minimum permission needed is `read:*`. Any user without this permission will have access denied to the application.
-::::
