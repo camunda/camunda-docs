@@ -91,7 +91,7 @@ RewriteRule ^docs/self-managed/iam/getting-started/docker/setup-environment/(.*)
 RewriteRule ^docs/self-managed/iam/getting-started/docker/start-iam/(.*)$  /docs/self-managed/identity/getting-started/docker/starting-the-services/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/getting-started/docker/accessing-the-ui/(.*)$  /docs/self-managed/identity/getting-started/docker/logging-in/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/deployment/configuration-variables/(.*)$  /docs/self-managed/identity/deployment/configuration-variables/ [R=301,L]
-RewriteRule ^docs/self-managed/iam/deployment/making-iam-production-ready/(.*)$  /docs/self-managed/identity/guides/making-identity-production-ready/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/deployment/making-iam-production-ready/(.*)$  /docs/self-managed/identity/user-guide/making-identity-production-ready/ [R=301,L]
 
 # Static resource page for the camunda desktop modeler
 RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]

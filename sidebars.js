@@ -583,11 +583,13 @@ module.exports = {
             "self-managed/identity/user-guide/adding-an-api",
             "self-managed/identity/user-guide/adding-a-permission",
             "self-managed/identity/user-guide/adding-a-role",
-            "self-managed/identity/user-guide/configure-external-identity-provider"
+            "self-managed/identity/user-guide/configure-external-identity-provider",
+            "self-managed/identity/user-guide/making-identity-production-ready",
           ],
         }, {
           "Deployment": [
             "self-managed/identity/deployment/configuration-variables",
+            "self-managed/identity/deployment/application-monitoring",
           ],
         },
       ],

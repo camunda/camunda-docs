@@ -29,7 +29,12 @@ services:
     image: camunda/identity:latest
     ports:
       - "8080:8080"
-    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8082/actuator/health" ]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 30s
 ```
 
 2. Identity requires a Keycloak instance to function. Add a Keycloak instance service to your `docker-compose.yml` file:
@@ -63,7 +68,17 @@ To learn more about Keycloak, see the [Keycloak website](https://www.keycloak.or
   IDENTITY_AUTH_PROVIDER_BACKEND_URL: http://keycloak:8080/auth/realms/camunda-platform
 ```
 
-4. Tell Docker Compose that the `identity` service is dependent on the `keycloak` service by adding the following lines under `services.identity`:
+4. Let's provide details for a user to be created on startup by adding the following entries to the `services.identity.environment` section:
+
+```yaml
+  KEYCLOAK_USERS_0_FIRST_NAME: "Bark"
+  KEYCLOAK_USERS_0_LAST_NAME: "Barkins"
+  KEYCLOAK_USERS_0_USERNAME: "demo"
+  KEYCLOAK_USERS_0_PASSWORD: "demo"
+  KEYCLOAK_USERS_0_ROLES_0: "Identity"
+```
+
+5. Tell Docker Compose that the `identity` service is dependent on the `keycloak` service by adding the following lines under `services.identity`:
 
 ```yaml
     depends_on:
@@ -100,8 +115,7 @@ services:
       - keycloak
     restart: on-failure
     container_name: identity
-    image: identity:latest
-    build: ../../../../..
+    image: camunda/identity:8.0.0
     ports:
       - "8080:8080"
     environment:
