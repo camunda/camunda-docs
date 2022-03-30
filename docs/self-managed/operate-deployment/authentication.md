@@ -31,11 +31,11 @@ camunda.operate:
 Currently, `OPERATOR`, `OWNER`, and `USER` roles are available.
 
 ### Roles for users
-Name | Description 
------|-------------
-OWNER| Full access
-OPERATOR| Read and write access
-USER | Read only access
+| Name     | Description           |
+|----------|-----------------------|
+| OWNER    | Full access           |
+| OPERATOR | Read and write access |
+| USER     | Read only access      |
 
 On startup of Operate, the user is created if they did not exist before.
 
@@ -64,7 +64,6 @@ A user can authenticate via LDAP.
 
 The following parameters for connection to an LDAP server should be given:
 
-<<<<<<< HEAD
  Parameter name | Description | Example | Required |
  | -- | -- | -- | -- |
  | camunda.operate.ldap.url | URL to an LDAP Server | ldaps://camunda.com/ | Yes |
@@ -85,30 +84,22 @@ CAMUNDA_OPERATE_LDAP_MANAGERDN=cn=admin,dc=planetexpress,dc=com
 CAMUNDA_OPERATE_LDAP_MANAGERPASSWORD=GoodNewsEveryone
 CAMUNDA_OPERATE_LDAP_USERSEARCHFILTER=uid={0}
 ```
-=======
-| Parameter name | Description | Example | Required |
-| -- | -- | -- | -- |
-| camunda.operate.ldap.url | URL to an LDAP Server | ldaps://camunda.com/ | Yes |
-| camunda.operate.ldap.baseDn| Base domain name | dc=camunda,dc=com| Yes |
-| camunda.operate.ldap.managerDn| Manager domain used by Operate to log into LDAP server to retrieve user information | cn=admin,dc=camunda,dc=com | Yes |
-| camunda.operate.ldap.managerPassword| Password for manager| | Yes |
-| camunda.operate.ldap.userSearchFilter| Filter to retrieve user info. The pattern '{0}' is replaced by the given username in the login form. | {0} | No, default is {0} |
-| camunda.operate.ldap.userSearchBase | Starting point for search | ou=Support,dc=camunda,dc=com | No |
->>>>>>> master
 
 ### Configuration of active directory-based LDAP
 
 For an **active directory**-based LDAP server, an **additional** parameter should be given:
 
- Parameter name | Description | Required |
- --------------|------------|---------
- camunda.operate.ldap.domain| Domain | Yes
+| Parameter name | Description | Required |
+| -- | -- | -- |
+| camunda.operate.ldap.url | URL to an active directory LDAP server | Yes |
+| camunda.operate.ldap.domain| Domain | Yes |
+| camunda.operate.ldap.baseDn| Root domain name | No |
+| camunda.operate.ldap.userSearchFilter| Used as a search filter | No |
 
 :::note
 The active directory configuration will only be applied when `camunda.operate.ldap.domain` is given.
 :::
 
-<<<<<<< HEAD
 Example for active directory:
 
 ````shell
@@ -124,14 +115,6 @@ CAMUNDA_OPERATE_LDAP_USERIDATTRNAME=userPrincipalName
 :::note
 `userSearchFilter` can be empty, and active directory default implementation would get `(&(objectClass=user)(userPrincipalName={0}))`.
 :::
-=======
-| Parameter name | Description | Required |
-| -- | -- | -- |
-| camunda.operate.ldap.url | URL to an active directory LDAP server | Yes |
-| camunda.operate.ldap.domain| Domain | Yes |
-| camunda.operate.ldap.baseDn| Root domain name | No |
-| camunda.operate.ldap.userSearchFilter| Used as a search filter | No |
->>>>>>> master
 
 ## IAM
 
