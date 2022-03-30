@@ -4,12 +4,6 @@ title: Telemetry
 description: "You can opt-in the collection of telemetry data when using the desktop modeler. This data will be used to better understand how the application is used and to improve it based on data."
 ---
 
-:::caution
-
-The `"executionPlatform": "Camunda Cloud"` remains the correct value for Camunda Platform 8 compatible diagrams.
-
-:::
-
 You can opt-in the collection of telemetry data when using the desktop modeler. This data will be used to better understand how the application is used and to improve it based on data.
 
 This page summarizes the data that is being collected.
@@ -74,8 +68,8 @@ In the case of bpmn and form, we add the engine profile:
 ```json
 {
   "engineProfile": {
-    "executionPlatform": "Camunda Cloud",
-    "executionPlatformVersion": "1.1"
+    "executionPlatform": "<target platform>",
+    "executionPlatformVersion": "<target platform version>"
   }
 }
 ```
@@ -145,12 +139,6 @@ The `Deployment Event` is sent in following situations:
  - User deploys a BPMN diagram to Camunda Platform 7 or Camunda Platform 8
  - User deploys a DMN diagram to Camunda Platform 7
 
-:::caution
-
-The `"executionPlatform": "Camunda Cloud"` remains the correct value for Camunda Platform 8 compatible diagrams.
-
-:::
-
 The Deployment Event has the following core structure:
 ```json
 {
@@ -159,8 +147,8 @@ The Deployment Event has the following core structure:
   "deployment": {
     "outcome": "[success or failure]",
     "context": "[deploymentTool or startInstanceTool]",
-    "executionPlatform": "[Camunda Cloud or Camunda Platform]",
-    "executionPlatformVersion": "[version deployed to]"
+    "executionPlatform": "[<target platform>]",
+    "executionPlatformVersion": "[<target platform version>]"
   }
 }
 ```
@@ -229,7 +217,7 @@ If it is set in the diagram, we also add target engine profile information:
 ```json
 {
   "engineProfile": {
-    "executionPlatform": "Camunda Cloud"
+    "executionPlatform": "<target platform>"
   }
 }
 ```
