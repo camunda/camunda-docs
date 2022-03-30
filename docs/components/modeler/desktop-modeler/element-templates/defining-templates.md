@@ -265,9 +265,9 @@ When set, the input field offers visual indications that a feel expression is ex
 
 ###### Supported Types
 
-Camunda Platform
+Camunda Platform 7
 
-*Feel Inputs are currently not supported for Camunda Platform element templates.*
+*Feel Inputs are currently not supported for Camunda Platform 7 element templates.*
 
 Camunda Platform 8
 
@@ -510,7 +510,7 @@ __Supported Scopes__
 
 <Tabs groupId="scopes" defaultValue="platformScopes" values={
 [
-{label: 'Scoped bindings for Camunda Platform', value: 'platformScopes', },
+{label: 'Scoped bindings for Camunda Platform 7', value: 'platformScopes', },
 {label: 'Scoped bindings for Camunda Platform 8', value: 'cloudScopes', }
 ]
 }>
