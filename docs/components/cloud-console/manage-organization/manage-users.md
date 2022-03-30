@@ -30,6 +30,6 @@ The following roles are additionally available, providing dedicated rights for s
 
 Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **Operate** and **Tasklist**.
 
-Users are invited to a Camunda Cloud organization via their email address, which must be accepted by the user. As long as the invitation has not been accepted, the user remains in the `Pending` state.
+Users are invited to a Camunda Cloud organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 
 People who do not yet have a Camunda Cloud account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda Cloud account by following the instructions in the invitation email.
