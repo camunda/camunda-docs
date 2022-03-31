@@ -250,7 +250,10 @@ navbar .navbar .navbar__link[href*=self-managed] {
   transition: all .3s ease;
 }
 
-
+div[class^=announcementBar_] {
+  font-size: 120%;
+  padding: 1em;
+}
   
 /* Styles for BPMN.io integration and callouts in these models */
 .bpmn-model {
