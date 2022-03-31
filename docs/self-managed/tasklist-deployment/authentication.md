@@ -37,7 +37,7 @@ More users can be added directly to Elasticsearch, to the index `tasklist-user-<
 
 ## Identity
 
-<!-- TODO: insert link to identity when available [Identity](../../self-managed/identity) -->
+<!-- TODO: insert link to identity when available [Identity](/docs/self-managed/identity/deployment/configuration-variables/) -->
 Identity provides authentication and authorization functionality along with user management.
 
 ### Enable Identity
