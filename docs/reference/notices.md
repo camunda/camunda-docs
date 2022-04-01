@@ -8,6 +8,29 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 9
+
+#### Publiclation Date:
+
+April 1st, 2022
+
+### Product affected:
+
+Zeebe
+
+#### Impact:
+
+Zeebe bundles Spring for which the following CVE has been published: https://tanzu.vmware.com/security/cve-2022-22965
+At this point, Camunda is not aware of any specific attack vector in Zeebe to exploit the vulnerability.
+
+### How to determine if the installation is affected
+
+You are using Zeebe version <= 1.3.6 or <= 1.2.11
+
+### Solution
+
+Camunda will provide patch releases for versions 1.3 and 1.2 in the near future.
+
 ### Notice 8
 
 #### Publication Date:
