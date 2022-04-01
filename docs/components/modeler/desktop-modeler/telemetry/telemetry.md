@@ -229,15 +229,15 @@ The `tracked click events` are sent when a user clicks a link or button containe
 
 At the current moment, these containers are:
 
-  - Each of the welcome page columns
-  - The version info overlay
+ - Each of the welcome page columns
+ - The version info overlay
 
 The event supplies: 
 
-  - The parent container id to locate the application section
-  - The button label or link text (generalized as label) for identification of what was specifically clicked
-  - A type to differentiate buttons, internal and external links
-  - Optionally for external links: the link target
+ - The parent container id to locate the application section
+ - The button label or link text (generalized as label) for identification of what was specifically clicked
+ - A type to differentiate buttons, internal and external links
+ - Optionally for external links: the link target
 
 Example event:
 
