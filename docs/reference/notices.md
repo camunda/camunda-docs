@@ -10,7 +10,7 @@ Camunda publishes security notices after fixes are available.
 
 ### Notice 9
 
-#### Publiclation Date:
+#### Publication Date:
 
 April 1st, 2022
 
