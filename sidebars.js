@@ -92,6 +92,7 @@ module.exports = {
             "components/modeler/web-modeler/start-instance",
             "components/modeler/web-modeler/collaboration",
             "components/modeler/web-modeler/milestones",
+            "components/modeler/web-modeler/token-simulation",
           ],
         },
         {
