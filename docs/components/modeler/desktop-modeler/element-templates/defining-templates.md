@@ -282,8 +282,8 @@ Notice that adherence to the following configuration options is enforced by desi
 
 <Tabs groupId="bindings" defaultValue="both" values={
 [
-{label: 'Bindings for Camunda Platform or Camunda Platform 8', value: 'both', },
-{label: 'Bindings for Camunda Platform', value: 'platform', },
+{label: 'Bindings for Camunda Platform 7 and 8', value: 'both', },
+{label: 'Bindings for Camunda Platform 7', value: 'platform', },
 {label: 'Bindings for Camunda Platform 8', value: 'cloud', },
 ]
 }>
@@ -469,7 +469,7 @@ Camunda Platform 8
 
 #### Scoped Bindings
 
-Scoped bindings allow you to configure nested elements, such as [connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
+Scoped bindings allow you to configure nested elements, such as [Camunda Platform 7 connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
 
 ```json
 {
