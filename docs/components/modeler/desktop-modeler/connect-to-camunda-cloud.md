@@ -1,10 +1,10 @@
 ---
 id: connect-to-camunda-cloud
-title: Connect to Camunda Cloud
-description: "Camunda Modeler can communicate directly with Camunda Cloud."
+title: Connect to Camunda Platform 8
+description: "Camunda Modeler can communicate directly with Camunda Platform 8."
 ---
 
-Desktop Modeler can directly deploy diagrams and start process instances in Camunda Cloud. Follow the steps below to deploy a diagram:
+Desktop Modeler can directly deploy diagrams and start process instances in Camunda Platform 8. Follow the steps below to deploy a diagram:
 
 1. Click the deployment icon:
 
@@ -16,7 +16,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 3. Input the `Cluster URL` and the credentials (`Client ID`, `Client Secret`) of your [API client](../../cloud-console/manage-clusters/manage-api-clients.md):
 
-![deployment via camunda cloud](./img/deploy-diagram-camunda-cloud-remember.png)
+![deployment via Camunda Platform 8](./img/deploy-diagram-camunda-cloud-remember.png)
 
 4. Select the **Remember** checkbox if you want to locally store the connection information.
 

@@ -13,7 +13,7 @@ If working in Camunda Platform 7, select **Create diagram > Create new BPMN diag
 :::
 
 :::note
-BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot run a BPMN diagram modeled for Camunda Platform 7 in Camunda Cloud, or vice versa, at this time.
+BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot run a BPMN diagram modeled for Camunda Platform 7 in Camunda Platform 8, or vice versa, at this time.
 :::
 
 ## Start modeling

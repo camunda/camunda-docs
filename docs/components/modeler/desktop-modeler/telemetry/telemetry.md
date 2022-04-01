@@ -69,8 +69,8 @@ In the case of bpmn and form, we add the engine profile:
 ```json
 {
   "engineProfile": {
-    "executionPlatform": "Camunda Cloud",
-    "executionPlatformVersion": "1.1"
+    "executionPlatform": "<target platform>",
+    "executionPlatformVersion": "<target platform version>"
   }
 }
 ```
@@ -137,7 +137,7 @@ Also in the case of BPMN diagrams, we add selected diagram metrics:
 ### Deployment Event
 The `Deployment Event` is sent in following situations:
 
- - User deploys a BPMN diagram to Camunda Platform 7 or Camunda Cloud
+ - User deploys a BPMN diagram to Camunda Platform 7 or Camunda Platform 8
  - User deploys a DMN diagram to Camunda Platform 7
 
 The Deployment Event has the following core structure:
@@ -148,8 +148,8 @@ The Deployment Event has the following core structure:
   "deployment": {
     "outcome": "[success or failure]",
     "context": "[deploymentTool or startInstanceTool]",
-    "executionPlatform": "[Camunda Cloud or Camunda Platform]",
-    "executionPlatformVersion": "[version deployed to]"
+    "executionPlatform": "[<target platform>]",
+    "executionPlatformVersion": "[<target platform version>]"
   }
 }
 ```
@@ -218,7 +218,7 @@ If it is set in the diagram, we also add target engine profile information:
 ```json
 {
   "engineProfile": {
-    "executionPlatform": "Camunda Cloud"
+    "executionPlatform": "<target platform>"
   }
 }
 ```
