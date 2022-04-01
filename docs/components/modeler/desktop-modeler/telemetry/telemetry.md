@@ -223,29 +223,45 @@ If it is set in the diagram, we also add target engine profile information:
 }
 ```
 
+### Tracked Click Events
 
-### Version Info Events
+The `tracked click events` are sent when a user clicks a link or button contained within a tracked parent 'container'. 
 
-The version info events are sent in following situations:
+At the current moment, these containers are:
 
- - User opens version info overlay via the button on the status bar
- - User opens version info overlay via the menu
- - User opens a link in the version info overlay
+  - Each of the welcome page columns
+  - The version info overlay
 
-In the two first cases, a `versionInfoOpened` event is sent:
+The event supplies: 
+
+  - The parent container id to locate the application section
+  - The button label or link text (generalized as label) for identification of what was specifically clicked
+  - A type to differentiate buttons, internal and external links
+  - Optionally for external links: the link target
+
+Example event:
+
+```json
+{
+  "event": "userTrackedClick",
+  "type": "[button or external-link or internal-link]"
+  "parent": "welcome-page-learn-more"
+  "label": "Click here to read more about Camunda"
+  "link": "https://camunda.com/"
+}
+```
+Note again, `"link"` is only present for `"type": "external-link"`
+
+
+### Version Info Opened Event
+
+The version info opened event is sent when the version info overlay is opened via user interaction.
+
+It has the following structure:
 
 ```json
 {
   "event": "versionInfoOpened",
   "source": "[menu or statusBar]"
-}
-```
-
-When a link is clicked, a `versionInfoLinkOpened` event is sent:
-
-```json
-{
-  "event": "versionInfoLinkOpened",
-  "label": "[anchor content, e.g. Camunda Modeler docs]"
 }
 ```
