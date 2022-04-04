@@ -20,9 +20,9 @@ dark: useBaseUrl('img/operate-introduction_dark.png'),
 
 In addition to providing visibility into active and completed process instances, Operate also makes it possible to carry out key operations such as resolving [incidents](./userguide/resolve-incidents-update-variables.md), and updating process instance variables.
 
-[//]:# (What is the link to fix here?)
+[//]: # "What is the link to fix here?"
 
-![operate-introduction](img/operate-introduction_light.png)
+![operate-introduction](img/operate-introduction.png)
 
 Learn how to use Operate to monitor process instances and more features in the [Operate user guide](/components/operate/userguide/basic-operate-navigation.md).
 
