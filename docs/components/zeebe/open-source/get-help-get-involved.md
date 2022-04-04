@@ -6,7 +6,7 @@ description: "Ask questions, report problems, and make contributions."
 
 We provide a few different public-facing Zeebe support and feedback channels where users can ask questions, report problems, and make contributions.
 
-### Camunda Cloud user forum
+### Camunda Platform 8 user forum
 
 The best place to ask questions about Zeebe and troubleshoot issues is the [forum](https://forum.camunda.io).
 
