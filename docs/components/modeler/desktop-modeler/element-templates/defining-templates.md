@@ -625,6 +625,34 @@ Together with the `pattern` constraint, you may define your custom error message
 ```
 
 
+#### Icons 
+
+As of Camunda Modeler `v5.0.0,` it is possible to define custom icons to update the visual appearance of elements after applying an element template.
+
+```json
+[
+  {
+    "name": "Template 1",
+    "id": "sometemplate",
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "icon": {
+      "contents": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22' fill='none'%3E%3Ccircle cx='11' cy='11' r='9' fill='black'/%3E%3Ctext x='6.9' y='14.9' fill='white' style='font-family: Arial; font-size: 10px;'%3EM%3C/text%3E%3C/svg%3E"
+    },
+    "properties": [
+      ...
+    ]
+  }
+]
+```
+
+![Icons](./img/icons.png)
+
+The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons (e.g., 18x18 pixels) to better fit into the existing user interface.
+
+This feature is currently only supported for Camunda Platform 8 element templates.
+
 
 #### Display All Entries
 
