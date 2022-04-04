@@ -12,4 +12,4 @@ As you model a business process using BPMN and deploy it to the workflow engine,
 
 Tasklist provides a GraphQL API, which you can use to build your own application, or you can use the general UI we prepared for you. Read more on the [API](../userguide/api/overview) and the [UI](../userguide/user-interface/overview).
 
-Tasklist is also available for production use (with support) in the Camunda Cloud offering. To try out Tasklist in Camunda Cloud, sign up [here](https://accounts.cloud.camunda.io/signup).
+Tasklist is also available for production use (with support) in the Camunda Platform 8 offering. To try out Tasklist in Camunda Platform 8, sign up [here](https://accounts.cloud.camunda.io/signup).
