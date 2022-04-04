@@ -4,13 +4,13 @@ title: "Go client - Getting started guide"
 sidebar_label: "Getting started guide"
 ---
 
-In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda Cloud.
+In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda Platform 8.
 
 You can find the complete source code on [GitHub](https://github.com/zeebe-io/zeebe-get-started-go-client).
 
 ## Prerequisites
 
-- [Camunda Cloud account](/guides/getting-started/create-camunda-cloud-account.md)
+- [Camunda Platform 8 account](/guides/getting-started/create-camunda-cloud-account.md)
 - [Cluster](/guides/getting-started/create-camunda-cloud-account.md)
 - [Client credentials](/guides/getting-started/setup-client-connection-credentials.md)
 - [Modeler](/guides/getting-started/model-your-first-process.md)
@@ -48,7 +48,7 @@ export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
 :::note
-When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
 :::
 
 4. Create a `main.go` file inside the module and add the following lines to bootstrap the Zeebe client:
@@ -186,7 +186,7 @@ processKey:2251799813686742 bpmnProcessId:"order-process" version:3 processInsta
 
 Want to see how the process instance is executed? Follow the steps below:
 
-1. Go to the cluster in Camunda Cloud and select it.
+1. Go to the cluster in Camunda Platform 8 and select it.
 1. Click on the link to [Operate](/components/operate/userguide/basic-operate-navigation.md).
 1. Select the process **order process**.
 
