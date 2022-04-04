@@ -8,7 +8,8 @@ You can opt-in the collection of telemetry data when using the desktop modeler. 
 
 This page summarizes the data that is being collected.
 
-## General Structure of the Events
+## General structure of the events
+
 Independent from the type of the event we're dealing with, the payload we send to the ET has the following structure:
 ```json
 {
@@ -27,9 +28,10 @@ Independent from the type of the event we're dealing with, the payload we send t
 
 Every event directly modifies the `internals` field of the payload.
 
-## Definition of Events
+## Definition of events
 
-### Ping Event
+### Ping event
+
 The `Ping Event` is sent in following situations:
 
  - The modeler is opened (given that `Usage Statistics` option is enabled)
@@ -44,7 +46,8 @@ The Ping Event has the following structure:
 }
 ```
 
-### Diagram Opened Event
+### Diagram opened event
+
 The `Diagram Opened Event` is sent in following situations:
 
  - User created a new BPMN diagram
@@ -133,8 +136,8 @@ Also in the case of BPMN diagrams, we add selected diagram metrics:
 }
 ```
 
+### Deployment event
 
-### Deployment Event
 The `Deployment Event` is sent in following situations:
 
  - User deploys a BPMN diagram to Camunda Platform 7 or Camunda Cloud
@@ -223,11 +226,11 @@ If it is set in the diagram, we also add target engine profile information:
 }
 ```
 
-### Tracked Click Events
+### Tracked click events
 
-The `tracked click events` are sent when a user clicks a link or button contained within a tracked parent 'container'. 
+The `Tracked Click Events` are sent when a user clicks a link or button contained within a tracked parent 'container'. 
 
-At the current moment, these containers are:
+Currently, these containers are:
 
  - Each of the welcome page columns
  - The version info overlay
@@ -236,7 +239,7 @@ The event supplies:
 
  - The parent container id to locate the application section
  - The button label or link text (generalized as label) for identification of what was specifically clicked
- - A type to differentiate buttons, internal and external links
+ - A type to differentiate buttons, internal links, and external links
  - Optionally for external links: the link target
 
 Example event:
@@ -250,12 +253,14 @@ Example event:
   "link": "https://camunda.com/"
 }
 ```
-Note again, `"link"` is only present for `"type": "external-link"`
 
+:::note
+`"link"` is only present for `"type": "external-link"`.
+:::
 
-### Version Info Opened Event
+### Version info opened event
 
-The version info opened event is sent when the version info overlay is opened via user interaction.
+The `Version Info Opened Event` is sent when the version info overlay is opened via user interaction.
 
 It has the following structure:
 
