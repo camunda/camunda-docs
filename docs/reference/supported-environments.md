@@ -44,7 +44,7 @@ Requirements for the components can be seen below:
 | Optimize | OpenJDK 11+ | Elasticsearch 7.8.x - 7.16.x |
 
 :::note Elasticsearch support
-[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported verison of Elastic compatible with Camunda Platform 8. 
+[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Camunda Platform 8. 
 
 AWS Opensearch is not supported at this time.
 :::
