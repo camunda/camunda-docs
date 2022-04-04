@@ -1,14 +1,14 @@
 ---
 id: cloud-console-api-reference
 title: Cloud Console API clients (REST)
-description: "To interact with Camunda Cloud programmatically without using the Camunda Cloud UI, create Cloud API clients."
+description: "To interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI, create Cloud API clients."
 ---
 
 ## Cloud API management
 
-To interact with Camunda Cloud programmatically without using the Camunda Cloud UI, create Cloud API clients in the organization settings under the **Cloud Management API** tab.
+To interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI, create Cloud API clients in the organization settings under the **Cloud Management API** tab.
 
-Cloud API clients are created for an organization, and therefore can access all Camunda Cloud clusters of this organization.
+Cloud API clients are created for an organization, and therefore can access all Camunda Platform 8 clusters of this organization.
 
 A client can have one or multiple of the following permissions:
 
