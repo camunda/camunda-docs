@@ -11,7 +11,7 @@ Operate provides usage metrics under `usage-metrics` Actuator endpoint. It is ex
 http://<host>:<port>/actuator/usage-metrics/process-instances?startTime={startTime}&endTime={endTime}
 ```
 
-, where `startTime` and `endTime` are of format `yyyy-MM-dd'T'HH:mm:ss.SSSZZ`, e.g. "1970-11-14T10:50:26.963-0100".
+Here, `startTime` and `endTime` are of format `yyyy-MM-dd'T'HH:mm:ss.SSSZZ`, e.g. "1970-11-14T10:50:26.963-0100".
 
 Sample response:
 ```json
