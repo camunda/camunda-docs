@@ -21,3 +21,7 @@ Visit [Spring - Configure SSL](https://docs.spring.io/spring-boot/docs/current/r
 for more information.
 
 To enable TLS alongside Keycloak, visit the Keycloak documentation regarding [TLS enablement](https://www.keycloak.org/server/enabletls).
+
+## Setting Identity URL
+
+To ensure that the authentication flows are successful, the `IDENTITY_URL` should be set to the URL of the Identity service.

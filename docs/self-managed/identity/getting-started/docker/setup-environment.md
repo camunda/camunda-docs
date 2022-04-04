@@ -42,8 +42,6 @@ services:
 ```yaml
 keycloak:
   image: jboss/keycloak:16.1.1
-  volumes:
-    - ./keycloak/themes/identity:/opt/jboss/keycloak/themes/identity
   ports:
     - "18080:8080"
   environment:
@@ -96,8 +94,6 @@ services:
   keycloak:
     container_name: keycloak
     image: jboss/keycloak:16.1.1
-    volumes:
-      - ./keycloak/themes/identity:/opt/jboss/keycloak/themes/identity
     ports:
       - "18080:8080"
     environment:
@@ -121,6 +117,11 @@ services:
     environment:
       KEYCLOAK_URL: http://keycloak:8080/auth
       IDENTITY_AUTH_PROVIDER_BACKEND_URL: http://keycloak:8080/auth/realms/camunda-platform
+      KEYCLOAK_USERS_0_FIRST_NAME: "Bark"
+      KEYCLOAK_USERS_0_LAST_NAME: "Barkins"
+      KEYCLOAK_USERS_0_USERNAME: "demo"
+      KEYCLOAK_USERS_0_PASSWORD: "demo"
+      KEYCLOAK_USERS_0_ROLES_0: "Identity"
 ```
 </details>
 

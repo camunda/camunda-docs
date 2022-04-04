@@ -28,7 +28,7 @@ Your output should look similar to the following:
 
 ```text
 CONTAINER ID   IMAGE                   COMMAND                  CREATED       STATUS                 PORTS                               NAMES
-e15d9e80f18d   identity:latest         "java -jar identity.…"   5 hours ago   Up 5 hours             0.0.0.0:8080->8080/tcp              identity
+e15d9e80f18d   camunda/identity:8.0.0  "java -jar identity.…"   5 hours ago   Up 5 hours             0.0.0.0:8080->8080/tcp              identity
 9e209e46b4df   jboss/keycloak:16.1.1   "/opt/jboss/tools/do…"   5 hours ago   Up 5 hours (healthy)   8443/tcp, 0.0.0.0:18080->8080/tcp   keycloak
 ```
 
