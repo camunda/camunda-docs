@@ -16,7 +16,7 @@ If the user claimed a task, the task can be completed. Different task status fil
 
 If you've successfully logged in, you'll see a screen similar to the following:
 
-![tasklist-start-screen](../../img/tasklist-start-screen_light.png)
+![tasklist-start-screen](../img/tasklist-start-screen_light.png)
 
 On the left side of the screen, you can see tasks. On the right side of the screen, you can see details of the current selected task.
 
