@@ -265,11 +265,8 @@ module.exports = {
         "components/tasklist/introduction",
         {
           "User guide": [
-            {
-              "User interface mode": [
-                "components/tasklist/userguide/overview",
-              ],
-            },
+            "components/tasklist/userguide/overview",
+            "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
       ],
