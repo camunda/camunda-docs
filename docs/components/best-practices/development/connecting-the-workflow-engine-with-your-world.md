@@ -217,9 +217,9 @@ This is a bidirectional connector which contains a Kafka listener for forwarding
 
 ### Out-of-the-box connectors
 
-Most connectors are currently community extensions, which basically means that they are not officially supported by Camunda, but by community members (who sometimes are Camunda employees). While this sounds like a restriction, it can also mean there is more flexibility to make progress.
+Most connectors are currently community extensions, which basically means that they are not officially supported by Camunda, but by community members (who sometimes are Camunda employees). While this sounds like a restriction, it can also mean there is more flexibility to make progress. A list of community-maintained connectors can be found [here](https://github.com/camunda-community-hub/awesome-camunda-cloud#connectors-and-bridges).
 
-A list of community-maintained connectors can be found [here](https://awesome.zeebe.io/).
+Camunda itself is also working on improving the connector infrastructure as such to be able to provide more connectors easier in the future.
 
 ### Using connectors in SaaS
 
