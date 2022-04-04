@@ -138,7 +138,7 @@ module.exports = {
           title: "More",
           items: [
             {
-              label: "Camunda Platform 8 Console",
+              label: "Console",
               href: "https://camunda.io",
             },
             {
