@@ -34,7 +34,7 @@ We still stay optimistic. Therefore, the process again passively waits for the s
 
 * :thumbsdown: The usage of separate event-based gateways leads to *duplication* (for example, of the receiving message events) and makes the model *larger*, even more so in case multiple steps of escalation need to be modeled.
 
-* :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Cloud introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway. 
+* :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Platform 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway. 
 
 :::note
 You might want to use that pattern when modeling *simple two phase escalations*. You should not execute it on Camunda Platform 7.
@@ -58,7 +58,7 @@ We choose by means of an exclusive gateway to make a *first step of escalation*:
 
 * :thumbsdown: The solution is *less explicit*. We could not choose to label the timer with explicit durations, as a single timer is used for both durations. The solution is *less readable* for a less experienced reading public. For a fast understanding of the two step escalation, this method of modeling is less suitable.
 
-* :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Cloud introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway. 
+* :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Platform 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway. 
 
 :::note
 You might want to use that pattern when modeling *escalations with multiple steps*. You should not execute it on Camunda Platform 7.
