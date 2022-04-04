@@ -1,7 +1,6 @@
 ---
 id: connect-to-camunda-cloud
-title: Connect to Camunda Platform 8
-description: "Camunda Modeler can communicate directly with Camunda Platform 8."
+title: Deploy your first diagram
 ---
 
 Desktop Modeler can directly deploy diagrams and start process instances in Camunda Platform 8. Follow the steps below to deploy a diagram:
