@@ -7,7 +7,7 @@ description: "Let's take a closer look at the authentication methods of Tasklist
 Tasklist provides two ways to authenticate:
 
 1. User information stored in [Elasticsearch](#user-in-elasticsearch)
-2. [IAM Authentication and Authorization](#iam)
+2. [Identity Authentication and Authorization](#identity)
 
 By default, user storage in Elasticsearch is enabled.
 
@@ -35,9 +35,9 @@ By default, three users are created:
 
 More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. The password must be encoded with a strong BCrypt hashing function.
 
-## IAM
+## Identity
 
-[IAM](../../iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+[Identity](../../identity/what-is-identity/) provides authentication and authorization functionality along with user management.
 
 ### Enable IAM
 
