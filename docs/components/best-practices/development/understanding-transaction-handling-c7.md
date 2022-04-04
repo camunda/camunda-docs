@@ -8,7 +8,7 @@ tags:
 ---
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! Zeebe, the workflow engine used in Camunda Cloud, as a very different transactional behevaior, please visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
+This best practice targets Camunda Platform 7.x only! Zeebe, the workflow engine used in Camunda Platform 8, as a very different transactional behevaior, please visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
 :::
 
 Try to carefully study and fully understand the concepts of wait states (save points) acting as *transaction boundaries* for technical (ACID) transactions. In case of technical failures, they are by default rolled back and need to be retried either by the user or the background job executor. 

@@ -7,7 +7,7 @@ tags:
 Understand influencing aspects on performance and apply tuning strategies appropriately, for example, by configuring the job executor or applying external tasks. When facing concrete challenges, look at scenarios like the proper handling of huge batches.
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! The Camunda Cloud stacks differ in regards to performance and scalabilities and requires different strategies we currently work on providing as best practice.
+This best practice targets Camunda Platform 7.x only! The Camunda Platform 8 stacks differ in regards to performance and scalabilities and requires different strategies we currently work on providing as best practice.
 :::
 
 ## Performance basics
@@ -211,8 +211,8 @@ Typical load generation tools our customer use:
 
 This section applies if the system is experiencing acute problems due to load or poor configuration.
 
-:::caution Camunda Cloud is built with scalability top of mind
-Note that Camunda Cloud and its workflow engine Zeeebe were engineered for performance and scalability. If you hit problems you cannot easily resolve with Camunda Platform 7.x, it might be worth having a look at Camunda Cloud instead.
+:::caution Camunda Platform 8 is built with scalability top of mind
+Note that Camunda Platform 8 and its workflow engine Zeeebe were engineered for performance and scalability. If you hit problems you cannot easily resolve with Camunda Platform 7.x, it might be worth having a look at Camunda Platform 8 instead.
 :::
 
 ### Collecting information for root causing
@@ -412,8 +412,8 @@ The important characteristics are
 
 This scenario is supported by Camunda, but you can run into serious problems.
 
-:::caution Solved in Camunda Cloud
-This problem is only a problem with Camunda Platform 7.x! Zeebe, the workflow engine used in Camunda Cloud, can run high number of parallel activities.
+:::caution Solved in Camunda Platform 8
+This problem is only a problem with Camunda Platform 7.x! Zeebe, the workflow engine used in Camunda Platform 8, can run high number of parallel activities.
 :::
 
 The basic problem is the [execution tree](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-concepts/#executions) getting really big in this scenario. In most situations, the engine has to load the whole tree in order to do anything, even if that happens only in one parallel path. This not only influences performance, but also adds load to the database.
