@@ -40,13 +40,13 @@ As seen in the code snippet a template consist of a number of important componen
   Example (Camunda Platform 7)
 
   ```json
-  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.8.0/resources/schema.json"
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.9.0/resources/schema.json"
   ```
 
   Example (Camunda Platform 8)
 
   ```json
-  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.2.0/resources/schema.json"
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.4.0/resources/schema.json"
   ```
 
 * `name : String`: Name of the template. Will be shown in the element template selection modal and in the properties panel (after having applied an element template).
@@ -62,8 +62,8 @@ As seen in the code snippet a template consist of a number of important componen
 
 The application uses the `$schema` property to ensure compatibility for a given element template. The latest supported [Camunda element templates JSON Schema versions](https://github.com/camunda/element-templates-json-schema) are
 
-* `v0.8.0` (Camunda Platform 7)
-* `v0.2.0` (Camunda Platform 8)
+* `v0.9.1` (Camunda Platform 7)
+* `v0.4.1` (Camunda Platform 8)
 
 The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
 
