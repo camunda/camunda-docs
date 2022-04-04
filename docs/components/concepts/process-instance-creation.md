@@ -97,7 +97,7 @@ Failure scenarios applicable to other commands are applicable to this command as
 
 ## Events
 
-Process instances are also created implicitly via various start events. Camunda Cloud supports message start events and timer start events.
+Process instances are also created implicitly via various start events. Camunda Platform 8 supports message start events and timer start events.
 
 ### Message event
 
