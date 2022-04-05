@@ -9,9 +9,9 @@ modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 
 ![task](assets/business-rule-task.png)
 
-:::note
-Camunda Cloud supports alternative task implementations for the business rule task. If you want to
-use your own implementation for a business rule task, see the **Alternative task implementation**
+:::info
+Camunda Platform 8 supports alternative task implementations for the business rule task. If you want
+to use your own implementation for a business rule task, see the **Alternative task implementation**
 section below. The sections before it apply to the DMN decision implementation only.
 :::
 
