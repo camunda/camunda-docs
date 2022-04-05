@@ -75,8 +75,10 @@ Jobs for business rule tasks are not processed by Zeebe itself. To process them,
 job worker.
 :::
 
-A business rule task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a service task does. This
-specifies the type of job that workers should subscribe to (e.g. DMN).
+A business rule task must define a [job
+type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a
+service task does. This specifies the type of job that workers should subscribe to (e.g.
+`calculate_risk`).
 
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
 worker (e.g. the key of the decision to evaluate).
@@ -112,7 +114,7 @@ A business rule task with a job worker implementation and a custom header:
 ```xml
 <bpmn:businessRuleTask id="calculate-risk" name="Calculate risk">
   <bpmn:extensionElements>
-    <zeebe:taskDefinition type="DMN" />
+    <zeebe:taskDefinition type="calculate_risk" />
     <zeebe:taskHeaders>
       <zeebe:header key="decisionRef" value="risk" />
     </zeebe:taskHeaders>
