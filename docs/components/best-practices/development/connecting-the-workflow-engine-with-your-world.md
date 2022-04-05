@@ -9,7 +9,7 @@ This document predominantly outlines writing some custom glue code in the progra
 
 The workflow engine is a remote system for your applications, just like a database. Your application connects with Zeebe via remote protocols, [gRPC](https://grpc.io/) to be precise, which is typically hidden from you, like when using a database driver based on ODBC or JDBC.
 
-With Camunda Cloud and the Zeebe workflow engine, there are two basic options:
+With Camunda Platform 8 and the Zeebe workflow engine, there are two basic options:
 
 1. Write some **programming code** that typically leverages the client library for the programming language of your choice.
 2. Use some **existing connector** which just needs a configuration.
@@ -217,13 +217,13 @@ This is a bidirectional connector which contains a Kafka listener for forwarding
 
 ### Out-of-the-box connectors
 
-Most connectors are currently community extensions, which basically means that they are not officially supported by Camunda, but by community members (who sometimes are Camunda employees). While this sounds like a restriction, it can also mean there is more flexibility to make progress.
+Most connectors are currently community extensions, which basically means that they are not officially supported by Camunda, but by community members (who sometimes are Camunda employees). While this sounds like a restriction, it can also mean there is more flexibility to make progress. A list of community-maintained connectors can be found [here](https://github.com/camunda-community-hub/awesome-camunda-cloud#connectors-and-bridges).
 
-A list of community-maintained connectors can be found [here](https://awesome.zeebe.io/).
+Camunda itself is also working on improving the connector infrastructure as such to be able to provide more connectors easier in the future.
 
 ### Using connectors in SaaS
 
-Currently, connectors are not operated as part of the Camunda Cloud SaaS offering, which means you need to operate them yourself in your environment, which might be a private or public cloud.
+Currently, connectors are not operated as part of the Camunda Platform 8 SaaS offering, which means you need to operate them yourself in your environment, which might be a private or public cloud.
 
 ![Connectors in SaaS](connecting-the-workflow-engine-with-your-world-assets/connector-in-cloud.png)
 
@@ -247,7 +247,7 @@ Whenever you have such glue code running and really understand the implications 
 
 As a general rule of thumb, prefer custom glue code whenever you don’t have a good reason to go with an existing connector (like the reasons mentioned above).
 
-A good reason to use connectors is if you need to solve complex integrations where little customization is needed, such as the [Camunda RPA bridge](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-rpa-bridge/) to connect RPA bots (soon to be available for Camunda Cloud).
+A good reason to use connectors is if you need to solve complex integrations where little customization is needed, such as the [Camunda RPA bridge](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-rpa-bridge/) to connect RPA bots (soon to be available for Camunda Platform 8).
 
 Good use of connectors are also scenarios where you don’t need custom glue code. For example, when orchestrating serverless functions on AWS with the [AWS Lambda Connector](https://github.com/camunda-community-hub/zeebe-lambda-worker). This connector can be operated once and used in different processes.
 

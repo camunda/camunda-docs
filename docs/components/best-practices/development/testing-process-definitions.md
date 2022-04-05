@@ -45,8 +45,8 @@ There are basically three typical test scopes used when building process solutio
 
 ## Writing process tests in Java
 
-:::caution Camunda Cloud only
-This section targets Camunda Cloud. Refer to the specific Camunda 7 section below if you are looking for Camunda Platform 7.x.
+:::caution Camunda Platform 8 only
+This section targets Camunda Platform 8. Refer to the specific Camunda 7 section below if you are looking for Camunda Platform 7.x.
 :::
 
 This section describes how to write process tests as unit tests in Java. Later in this best practice, you will find some information on writing tests in other languages, like Node.Js or C#.
@@ -385,7 +385,7 @@ You can use typical industry standard tools for integration testing together wit
 ## Technical setup and example using Camunda Platform 7
 
 :::caution Camunda Platform 7 only
-This section targets Camunda Platform 7.x only. Refer to the previous sections if you are using Camunda Cloud.
+This section targets Camunda Platform 7.x only. Refer to the previous sections if you are using Camunda Platform 8.
 :::
 
 Camunda Platform 7 also has support for writing tests in Java. This section gives you an example, the basic ideas of test scopes and testing in chunks are also valid with Camunda Platform 7.
