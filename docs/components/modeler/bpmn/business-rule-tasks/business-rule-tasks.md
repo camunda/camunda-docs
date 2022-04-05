@@ -11,7 +11,7 @@ modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 
 :::info
 Camunda Platform 8 supports alternative task implementations for the business rule task. If you want
-to use your own implementation for a business rule task, see the **Alternative task implementation**
+to use your own implementation for a business rule task, see the **Job worker implementation**
 section below. The sections before it apply to the DMN decision implementation only.
 :::
 
@@ -56,13 +56,13 @@ the result of the decision.
 For more information about this topic visit the documentation about [Input/output variable
 mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
 
-## Alternative task implementation
+## Job worker implementation
 A business rule task does not have to evaluate a decision modeled with DMN. Instead, you can also
 use [job workers](/components/concepts/job-workers.md) to implement your business rule task.
 
-An alternative task implementation can be defined using the `zeebe:taskDefinition` extension element.
+A job worker implementation can be defined using the `zeebe:taskDefinition` extension element.
 
-Business rule tasks with an alternative task implementation behave exactly like [service
+Business rule tasks with a job worker implementation behave exactly like [service
 tasks](/components/modeler/bpmn/service-tasks/service-tasks.md). The differences between these task
 types are the visual representation (i.e. the task marker) and the semantics for the model.
 
@@ -107,7 +107,7 @@ A business rule task with a called decision:
 </bpmn:businessRuleTask>
 ```
 
-A business rule task with an alternative task implementation and a custom header:
+A business rule task with a job worker implementation and a custom header:
 
 ```xml
 <bpmn:businessRuleTask id="calculate-risk" name="Calculate risk">
