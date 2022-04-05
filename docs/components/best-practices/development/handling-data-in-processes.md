@@ -72,7 +72,7 @@ Camunda does not treat BPMN **data objects** (<img src="/img/bpmn-elements/data-
 
 Do not excessively use process variables. As a rule of thumb, store *as few variables as possible* within Camunda.
 
-Please note the [technical limitations of variables sizes](/docs/components/concepts/variables/#variable-size-limitations).
+Please note the [technical limitations of variables sizes](/docs/components/concepts/variables/#variable-size-limitation).
 
 ### Storing references only
 
