@@ -36,7 +36,7 @@ module.exports = {
     "components/overview",
     {
       Concepts: [
-        "components/concepts/what-is-camunda-cloud",
+        "components/concepts/what-is-camunda-platform-8",
         "components/concepts/processes",
         "components/concepts/job-workers",
         "components/concepts/process-instance-creation",
