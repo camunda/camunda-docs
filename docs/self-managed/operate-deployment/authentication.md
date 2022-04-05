@@ -31,11 +31,11 @@ camunda.operate:
 Currently, `OPERATOR`, `OWNER`, and `USER` roles are available.
 
 ### Roles for users
-Name | Description 
------|-------------
-OWNER| Full access
-OPERATOR| Read and write access
-USER | Read only access
+| Name     | Description           |
+|----------|-----------------------|
+| OWNER    | Full access           |
+| OPERATOR | Read and write access |
+| USER     | Read only access      |
 
 On startup of Operate, the user is created if they did not exist before.
 
@@ -64,7 +64,6 @@ A user can authenticate via LDAP.
 
 The following parameters for connection to an LDAP server should be given:
 
-<<<<<<< HEAD
  Parameter name | Description | Example | Required |
  | -- | -- | -- | -- |
  | camunda.operate.ldap.url | URL to an LDAP Server | ldaps://camunda.com/ | Yes |
@@ -85,30 +84,22 @@ CAMUNDA_OPERATE_LDAP_MANAGERDN=cn=admin,dc=planetexpress,dc=com
 CAMUNDA_OPERATE_LDAP_MANAGERPASSWORD=GoodNewsEveryone
 CAMUNDA_OPERATE_LDAP_USERSEARCHFILTER=uid={0}
 ```
-=======
-| Parameter name | Description | Example | Required |
-| -- | -- | -- | -- |
-| camunda.operate.ldap.url | URL to an LDAP Server | ldaps://camunda.com/ | Yes |
-| camunda.operate.ldap.baseDn| Base domain name | dc=camunda,dc=com| Yes |
-| camunda.operate.ldap.managerDn| Manager domain used by Operate to log into LDAP server to retrieve user information | cn=admin,dc=camunda,dc=com | Yes |
-| camunda.operate.ldap.managerPassword| Password for manager| | Yes |
-| camunda.operate.ldap.userSearchFilter| Filter to retrieve user info. The pattern '{0}' is replaced by the given username in the login form. | {0} | No, default is {0} |
-| camunda.operate.ldap.userSearchBase | Starting point for search | ou=Support,dc=camunda,dc=com | No |
->>>>>>> master
 
 ### Configuration of active directory-based LDAP
 
 For an **active directory**-based LDAP server, an **additional** parameter should be given:
 
- Parameter name | Description | Required |
- --------------|------------|---------
- camunda.operate.ldap.domain| Domain | Yes
+| Parameter name | Description | Required |
+| -- | -- | -- |
+| camunda.operate.ldap.url | URL to an active directory LDAP server | Yes |
+| camunda.operate.ldap.domain| Domain | Yes |
+| camunda.operate.ldap.baseDn| Root domain name | No |
+| camunda.operate.ldap.userSearchFilter| Used as a search filter | No |
 
 :::note
 The active directory configuration will only be applied when `camunda.operate.ldap.domain` is given.
 :::
 
-<<<<<<< HEAD
 Example for active directory:
 
 ````shell
@@ -124,48 +115,31 @@ CAMUNDA_OPERATE_LDAP_USERIDATTRNAME=userPrincipalName
 :::note
 `userSearchFilter` can be empty, and active directory default implementation would get `(&(objectClass=user)(userPrincipalName={0}))`.
 :::
-=======
-| Parameter name | Description | Required |
-| -- | -- | -- |
-| camunda.operate.ldap.url | URL to an active directory LDAP server | Yes |
-| camunda.operate.ldap.domain| Domain | Yes |
-| camunda.operate.ldap.baseDn| Root domain name | No |
-| camunda.operate.ldap.userSearchFilter| Used as a search filter | No |
->>>>>>> master
 
 ## Identity
 
 [Identity](../../identity/what-is-identity/) provides authentication and authorization functionality along with user management.
 
-### Enable IAM
+### Enable Identity
 
-IAM can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `iam-auth`.
+Identity can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `identity-auth`.
 
 See the following example:
 
 ```
-export SPRING_PROFILES_ACTIVE=iam-auth
+export SPRING_PROFILES_ACTIVE=identity-auth
 ```
 
-### Configure IAM
+### Configure Identity
 
-IAM requires the following parameters:
+Identity requires the following parameters:
 
 | Parameter name | Description | Example value |
 | -- | -- | -- |
-| camunda.operate.iam.issuer | Name/ID of issuer | http://app.iam.localhost |
-| camunda.operate.iam.issuerUrl | URL of issuer (IAM) | http://app.iam.localhost |
-| camunda.operate.iam.clientId | Similar to a username for the application | operate |
-| camunda.operate.iam.clientSecret | Similar to a password for the application | XALaRPl...s7dL7 |
+| camunda.operate.identity.issuerUrl | URL of issuer (Identity) | http://localhost:18080/auth/realms/camunda-platform |
+| camunda.operate.identity.issuerBackendUrl | Backend URL of issuer (Identity) | http://localhost:18080/auth/realms/camunda-platform |
+| camunda.operate.identity.clientId | Similar to a username for the application | operate |
+| camunda.operate.identity.clientSecret | Similar to a password for the application | XALaRPl...s7dL7 |
+| camunda.operate.identity.audience | Audience for Operate | operate-api |
 
-We provide two different permissions over IAM: read or write.
-To configure the authorization, you are required to create two different permissions:
 
-| Permission value | Description |
-| -- | -- |
-| `read:*` | Grants the user the permission to access, view, and read the data in the application. |
-| `write:*` | Grants the user the permission to perform operations. |
-
-:::note
-The minimum permission needed is `read:*`. Any user without this permission will have access denied to the application.
-::::
