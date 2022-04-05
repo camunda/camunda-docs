@@ -12,7 +12,7 @@ In this document, we'll go over the basics on how to consume the Tasklist GraphQ
 
 Tasklist provides a GraphQL API at endpoint `/graphql`.
 
-In Camunda 8 that would be `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`
+From Camunda 8 onwards the endpoint is `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`
 
 ## Authentication
 
