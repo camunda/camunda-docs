@@ -8,7 +8,7 @@ Operate provides three ways to authenticate:
 
 1. User information stored in [Elasticsearch](#user-in-elasticsearch)
 2. [Lightweight Directory Access Protocol (LDAP)](#ldap)
-3. [IAM Authentication and Authorization](#iam)
+3. [Identity Authentication and Authorization](#identity)
 
 By default, user storage in Elasticsearch is enabled.
 
@@ -133,9 +133,9 @@ CAMUNDA_OPERATE_LDAP_USERIDATTRNAME=userPrincipalName
 | camunda.operate.ldap.userSearchFilter| Used as a search filter | No |
 >>>>>>> master
 
-## IAM
+## Identity
 
-[IAM](../../iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+[Identity](../../identity/what-is-identity/) provides authentication and authorization functionality along with user management.
 
 ### Enable IAM
 
