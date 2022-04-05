@@ -5,7 +5,7 @@ description: "A user task is used to model work that needs to be done by a human
 ---
 
 A user task is used to model work that needs to be done by a human actor. When
-the process execution arrives at such a user task, a new job similar to a
+the process instance arrives at such a user task, a new job similar to a
 [service task](/components/modeler/bpmn/service-tasks/service-tasks.md) is created. The process instance
 stops at this point and waits until the job is completed.
 

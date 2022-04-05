@@ -15,7 +15,7 @@ to use your own implementation for a business rule task, see the **Job worker im
 section below. The sections before it apply to the DMN decision implementation only.
 :::
 
-When the process execution arrives at a business rule task, a decision is evaluated using the
+When the process instance arrives at a business rule task, a decision is evaluated using the
 internal DMN decision engine. Once the decision is made, the process instance continues.
 
 If the decision evaluation is unsuccessful, an [incident](/components/concepts/incidents.md) is
