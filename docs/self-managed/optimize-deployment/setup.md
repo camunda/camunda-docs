@@ -33,6 +33,7 @@ optimize:
         - CAMUNDA_OPTIMIZE_SHARING_ENABLED=true
         - CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN=true
         - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=https://weblogin.cloud.company.com/.well-known/jwks.json
+        - CAMUNDA_OPTIMIZE_API_AUDIENCE=optimize-api
         - OPTIMIZE_API_ACCESS_TOKEN=secret
 ```
 
@@ -56,6 +57,7 @@ CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT | The number of partitions configured in 
 CAMUNDA_OPTIMIZE_SHARING_ENABLED | Enable/disable the possibility to share reports and dashboards. | true
 CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN | Disables the logout button (logout is handled by Identity). | true
 SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation | null
+CAMUNDA_OPTIMIZE_API_AUDIENCE | Optimize tries to match this with the <code>aud</code> field contained in the JWT token. Only used when the JWK_SET_URI above is set. This is not necessarily the same as <code>CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE</code>, in case a service other than Identity is being used to generate the API tokens| optimize
 OPTIMIZE_API_ACCESS_TOKEN | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set. | null
 
 ## Requirements
