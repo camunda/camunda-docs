@@ -265,8 +265,8 @@ public class App
     {
         // after the workflow instance is created
 
-        try(final JobWorker jobWorker = client.newWorker()) {
-            jobWorker.jobType("payment-service")
+        try(final JobWorkerBuilderStep1 jobWorkerBuilder = client.newWorker()) {
+            jobWorkerBuilder.jobType("payment-service")
             .handler((jobClient, job) ->
             {
                 System.out.println("Collect money");
