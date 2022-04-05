@@ -171,11 +171,7 @@ module.exports = {
             },
           ],
         },
-        {
-          "DMN": [
-            "components/modeler/dmn/desktop-modeler-dmn",
-          ],
-        },
+        require("./docs/components/modeler/dmn/sidebar-schema"),
         {
           "Forms": [
             "components/modeler/forms/camunda-forms-reference",
