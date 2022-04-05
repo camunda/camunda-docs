@@ -46,7 +46,7 @@ All variables in scope of the business rule task are available to the decision e
 decision is evaluated. Input mappings can be used to transform the variables into a format accepted
 by the decision.
 
-:::note
+:::info
 Input mappings are applied on activating the business rule task (or when an incident at the business
 rule task is resolved), before the decision evaluation. When an incident is resolved at the business
 rule task, then the input mappings are applied again before evaluating the decision. This can affect
@@ -70,11 +70,6 @@ When a process instance enters a business rule task with alternative task implem
 a corresponding job and waits for its completion. A job worker should request jobs of this job type
 and process them. When the job is completed, the process instance continues.
 
-:::note
-Jobs for business rule tasks are not processed by Zeebe itself. To process them, you must provide a
-job worker.
-:::
-
 A business rule task must define a [job
 type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a
 service task does. This specifies the type of job that workers should subscribe to (e.g.
@@ -86,14 +81,6 @@ worker (e.g. the key of the decision to evaluate).
 Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
 the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
 to transform the variables passed to the job worker, or to customize how the variables of the job merge.
-
-:::tip Community Extension
-
-Take a look at the [Zeebe DMN Worker](https://github.com/camunda-community-hub/zeebe-dmn-worker).
-This is a community extension providing a job worker to evaluate DMN decisions. You can run it, or
-use it as a blueprint for your own job worker.
-
-:::
 
 ## Additional resources
 
