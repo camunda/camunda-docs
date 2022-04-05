@@ -45,7 +45,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
       ],
-      "Cloud Console": [
+      "Console": [
         "components/cloud-console/introduction",
         {
           "Manage your organization": [
