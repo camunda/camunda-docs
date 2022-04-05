@@ -33,7 +33,7 @@ optimize:
         - CAMUNDA_OPTIMIZE_SHARING_ENABLED=true
         - CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN=true
         - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=https://weblogin.cloud.company.com/.well-known/jwks.json
-        - CAMUNDA_OPTIMIZE_API_AUDIENCE=optimize-api
+        - CAMUNDA_OPTIMIZE_API_AUDIENCE=optimize
         - OPTIMIZE_API_ACCESS_TOKEN=secret
 ```
 
