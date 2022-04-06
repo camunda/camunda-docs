@@ -29,7 +29,7 @@ RewriteRule ^docs/components/modeler/cloud-modeler$ /docs/components/modeler/web
 RewriteRule ^docs/guides/integrating-optimize(.*)$ /docs/guides/improve-processes-with-optimize$1 [R=301,L]
 RewriteRule ^docs/guides/integrating-optimize$ /docs/guides/improve-processes-with-optimize [R=301,L]
 
-RewriteRule ^docs/guides/migrating-from-Camunda-Platform$ /docs/guides/migrating-from-camunda-platform-7 [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-platform$ /docs/guides/migrating-from-camunda-platform-7 [R=301,L]
 
 RewriteRule ^docs/components/zeebe/third-party-libraries/zeebe-dependencies/$ docs/reference/dependencies/ [R=301,L]
 RewriteRule ^docs/components/operate/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
