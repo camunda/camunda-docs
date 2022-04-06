@@ -48,13 +48,12 @@ In Java code, instantiate the client as follows:
             .clientSecret(clientSecret)
             .build();
 
-    ZeebeClient client =
-        ZeebeClient.newClientBuilder()
+    try (ZeebeClient client = ZeebeClient.newClientBuilder()
             .gatewayAddress(zeebeAPI)
             .credentialsProvider(credentialsProvider)
-            .build();
-
-    client.newTopologyRequest().send().join();
+            .build()) {
+      client.newTopologyRequest().send().join();
+    }
   }
 ```
 
@@ -62,7 +61,7 @@ Let's go over this code snippet line by line:
 
 1. Declare a few variables to define the connection properties. These values can be taken from the connection information on the **Client Credentials** page. Note that `clientSecret` is only visible when you create the client credentials.
 2. Create the credentials provider for the OAuth protocol. This is needed to authenticate your client.
-3. Create the client by passing in the address of the cluster we want to connect to and the credentials provider from the step above.
+3. Create the client by passing in the address of the cluster we want to connect to and the credentials provider from the step above. Note that a client should be closed after usage, which is easily achieved by the try-with-resources statement.
 4. Send a test request to verify the connection was established.
 
 See [io.camunda.zeebe.client.ZeebeClientBuilder](https://javadoc.io/doc/io.zeebe/zeebe-client-java/latest/io/zeebe/client/ZeebeClientBuilder.html) for a description of all available configuration properties.
@@ -76,7 +75,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
 
 Given these environment variables, you can instantiate the client as follows:
 

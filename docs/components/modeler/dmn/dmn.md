@@ -1,26 +1,13 @@
 ---
 id: desktop-modeler-dmn
-title: Editing DMN in Desktop Modeler
-description: To start modeling, let's create a DMN diagram.
+title: DMN in Modeler
 ---
-
-<span class="badge badge--CCSM">Camunda Platform 7 Only</span>
-
-:::note
-DMN is currently only available in Camunda Platform 7.
-:::
-
-## Create new DMN decision requirement diagram
-
-![New DMN Diagram](./img/create-dmn.png)
-
-To start modeling, create a new DMN 1.3 diagram for Camunda Platform 7 by selecting **Create diagram > Create new DMN diagram (Camunda Platform 7)** in the top-level menu.
 
 ## Start modeling
 
 ![Start Modeling](./img/main.png)
 
-Now you can start to create a DMN 1.3 model. Add the desired elements from the palette on the left side by dragging and dropping them onto the diagram canvas.
+Camunda Desktop and Web Modeler both offer the same Modeling experience for DMN 1.3 models: Modeling starts in the Decision Requirements Diagram (DRD) view. From there, you can add DMN elements from the palette on the left side by dragging and dropping them onto the diagram canvas.
 
 Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of an element in place. Use the properties panel on the right side to change the name or id of the DMN diagram.
 
@@ -30,13 +17,9 @@ Alternatively, you can add new elements by using the context menu that appears w
 
 The demo above shows how to model a decision table. After creating a decision and morphing it into a decision table, you can start editing the table by clicking the overlay on the upper left corner of the decision. Using the overview in the decision table view, you can jump between decision tables.
 
-## Save a diagram
-
-To save your diagram, click **File > Save File As...** in the top-level menu. Then, select a location on your file system to store the diagram in the DMN 1.3 XML format. You can load that file again by clicking **File > Open File...**.
-
 ## DMN coverage
 
-Desktop Modeler covers the following elements:
+The Modeler supports the following DMN elements:
 
 - Decision (tables and literal expressions)
 - Input data

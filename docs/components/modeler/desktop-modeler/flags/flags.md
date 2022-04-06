@@ -57,7 +57,7 @@ As a result, the app will only allow users to model BPMN diagrams.
 
 ![BPMN only mode](./img/bpmn-only.png)
 
-### Custom `version-info` label
+### Custom `display-version` label
 
 To display a custom version information in the status bar of the app, configure your `flags.json` like this:
 

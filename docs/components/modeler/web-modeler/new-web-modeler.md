@@ -4,11 +4,11 @@ title: New Web Modeler
 description: Your data was automatically migrated from the old Cloud Modeler to the new Web Modeler.
 ---
 
-<span class="badge badge--cloud">Camunda Cloud only</span>
+<span class="badge badge--cloud">Camunda Platform 8 only</span>
 
 :::note
 
-Web Modeler is only available for Camunda Cloud SaaS.
+Web Modeler is only available for Camunda Platform 8 SaaS.
 
 :::
 

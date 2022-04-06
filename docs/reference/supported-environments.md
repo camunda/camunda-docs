@@ -29,10 +29,7 @@ _Hint: There are more [community-maintained Camunda Platform 8 clients](./apis-c
 
 ## Camunda Platform 8 Self-Managed
 
-We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes environment. 
-We provide officially supported [Helm Charts](./self-managed/zeebe-deployment/kubernetes/helm/installing-helm.md) for this.
-
-If you cannot run in a Kubernetes environment, you may [run the distribution](https://github.com/camunda-cloud/zeebe/releases) with Java directly. 
+We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/docs/self-managed/platform-deployment/kubernetes-helm/) for this. Please follow the [Installation Guide](/docs/self-managed/platform-deployment/) to learn more about installation possibilities.
 
 Requirements for the components can be seen below:
 
@@ -44,7 +41,7 @@ Requirements for the components can be seen below:
 | Optimize | OpenJDK 11+ | Elasticsearch 7.8.x - 7.16.x |
 
 :::note Elasticsearch support
-[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported verison of Elastic compatible with Camunda Platform 8. 
+[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Camunda Platform 8. 
 
 AWS Opensearch is not supported at this time.
 :::

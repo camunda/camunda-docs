@@ -30,7 +30,7 @@ module.exports = {
         "guides/update-guide/026-to-100",
       ],
     },
-    "guides/migrating-from-Camunda-Platform",
+    "guides/migrating-from-camunda-platform-7",
   ],
   Components: [
     "components/overview",
@@ -45,7 +45,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
       ],
-      "Cloud Console": [
+      "Console": [
         "components/cloud-console/introduction",
         {
           "Manage your organization": [
@@ -93,6 +93,7 @@ module.exports = {
             "components/modeler/web-modeler/start-instance",
             "components/modeler/web-modeler/collaboration",
             "components/modeler/web-modeler/milestones",
+            "components/modeler/web-modeler/token-simulation",
             {
               "Connectors": [
                 "components/modeler/web-modeler/connectors/index",
@@ -278,15 +279,8 @@ module.exports = {
         "components/tasklist/introduction",
         {
           "User guide": [
-            {
-              "API mode": [
-                "components/tasklist/userguide/api/overview",
-                "components/tasklist/userguide/api/tutorial",
-              ],
-              "User interface mode": [
-                "components/tasklist/userguide/user-interface/overview",
-              ],
-            },
+            "components/tasklist/userguide/overview",
+            "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
       ],
@@ -413,22 +407,34 @@ module.exports = {
   "Self-Managed": [
     "self-managed/overview",
     {
+      "Installation": [
+        "self-managed/platform-deployment/index",
+        {
+          "Kubernetes": [
+            "self-managed/platform-deployment/kubernetes",
+            "self-managed/platform-deployment/kubernetes-helm",
+          ],
+        },
+        "self-managed/platform-deployment/docker",
+        "self-managed/platform-deployment/local",
+      ],
+    },
+    {
+      Concepts: [
+        {
+          "Access control": [
+            "self-managed/concepts/access-control/applications",
+            "self-managed/concepts/access-control/apis",
+            "self-managed/concepts/access-control/permissions",
+            "self-managed/concepts/access-control/roles",
+            "self-managed/concepts/access-control/users",
+          ]
+        }
+      ],
+    },
+    {
       "Zeebe": [
         "self-managed/zeebe-deployment/index",
-        {
-          "Local installation": [
-            "self-managed/zeebe-deployment/local/install",
-            "self-managed/zeebe-deployment/local/quickstart",
-          ],
-        },
-        "self-managed/zeebe-deployment/docker/install",
-        {
-          "Kubernetes deployment": [
-            "self-managed/zeebe-deployment/kubernetes/index",
-            "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
-            "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist",
-          ],
-        },
         {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
@@ -479,6 +485,7 @@ module.exports = {
         "self-managed/tasklist-deployment/usage-metrics",
       ],
       "Optimize": [
+        "self-managed/optimize-deployment/setup",
         {
           Setup: [
             "self-managed/optimize-deployment/setup/installation",
@@ -501,7 +508,6 @@ module.exports = {
             "self-managed/optimize-deployment/setup/common-problems",
           ],
         },
-        "self-managed/optimize-deployment/setup",
         {
           Plugins: [
             "self-managed/optimize-deployment/plugins/plugin-system",
@@ -566,22 +572,33 @@ module.exports = {
 
 
       ],
-      IAM: [
-        "self-managed/iam/what-is-iam",
+      "Identity": [
+        "self-managed/identity/what-is-identity",
         {
           "Getting started": [
             {
-              "Running IAM with Docker": [
-                "self-managed/iam/getting-started/docker/setup-environment",
-                "self-managed/iam/getting-started/docker/start-iam",
-                "self-managed/iam/getting-started/docker/accessing-the-ui",
+              "Running Identity with Docker": [
+                "self-managed/identity/getting-started/docker/setup-environment",
+                "self-managed/identity/getting-started/docker/starting-the-services",
+                "self-managed/identity/getting-started/docker/logging-in",
               ]
             }
           ],
         }, {
+          "User guide": [
+            "self-managed/identity/user-guide/adding-an-application",
+            "self-managed/identity/user-guide/adding-an-api",
+            "self-managed/identity/user-guide/adding-a-permission",
+            "self-managed/identity/user-guide/adding-a-role",
+            "self-managed/identity/user-guide/assigning-a-permission-to-a-role",
+            "self-managed/identity/user-guide/assigning-a-role-to-a-user",
+            "self-managed/identity/user-guide/configure-external-identity-provider",
+            "self-managed/identity/user-guide/making-identity-production-ready",
+          ],
+        }, {
           "Deployment": [
-            "self-managed/iam/deployment/configuration-variables",
-            "self-managed/iam/deployment/making-iam-production-ready",
+            "self-managed/identity/deployment/configuration-variables",
+            "self-managed/identity/deployment/application-monitoring",
           ],
         },
       ],

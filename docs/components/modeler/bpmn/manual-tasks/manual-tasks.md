@@ -8,7 +8,7 @@ A manual task defines a task that is external to the BPM engine. This is used to
 by somebody who the engine does not need to know of and there is no known system or UI interface.
 
 For the engine, a manual task is handled as a pass-through activity, automatically continuing the 
-process at the moment the process execution arrives.
+process at the moment the process instance arrives.
 
 ![task](assets/manual-task.png)
 

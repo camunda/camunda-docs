@@ -12,12 +12,12 @@ tags:
 Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend following the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture. 
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you look for Camunda Cloud, please refer to [Deciding about your Camunda Cloud stack](../deciding-about-your-stack/).
+This best practice targets Camunda Platform 7.x only! If you look for Camunda Platform 8, please refer to [Deciding about your Camunda Platform 8 stack](../deciding-about-your-stack/).
 :::
 
 ## The Java greenfield stack
 
-The greenfield stack is pretty similar for various languages. This section described the currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend looking at Camunda Cloud, which supports polyglott environments better. The greenfield recommendation has recently changed. So if the recommendation below is surprising to you, you might want to check [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
+The greenfield stack is pretty similar for various languages. This section described the currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend looking at Camunda Platform 8, which supports polyglott environments better. The greenfield recommendation has recently changed. So if the recommendation below is surprising to you, you might want to check [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
 
 Use the following stack:
 
@@ -61,7 +61,7 @@ one* greenfield recommendation for all our customers who have no special require
 We decided on this stack for the following reasons:
 
 - All components are open-source and easily available.
-- Camunda Run is the favorite distribution, as it focuses on external tasks, the more modern paradigm also present in Camunda Cloud.
+- Camunda Run is the favorite distribution, as it focuses on external tasks, the more modern paradigm also present in Camunda Platform 8.
 - Spring Boot is currently the most adopted way of building Java applications.
 - Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
 - PostgreSQL has a great track-record for performance.
@@ -73,9 +73,9 @@ There are severa; *advantages using the greenfield stack*:
 - *More documentation & Best Practices:* You don't have to write your own extensive documentation, just point to the Camunda docs.
 - *Easier support:* Asking for help gets much easier as you do not have to explain your setup in detail.
 
-### Considering Camunda Cloud instead
+### Considering Camunda Platform 8 instead
 
-Camunda Cloud is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Cloud from the start. You can find [a quick comparison of concepts in the docs](https://docs.camunda.io/docs/guides/migrating-from-Camunda-Platform/#conceptual-differences). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Cloud.
+Camunda Platform 8 is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Platform 8 from the start. You can find [a quick comparison of concepts in the docs](../../../guides/migrating-from-camunda-platform-7.md#conceptual-differences). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Platform 8.
 
 ### Getting started with the greenfield stack
 
