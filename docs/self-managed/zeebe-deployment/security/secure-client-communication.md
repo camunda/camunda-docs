@@ -3,11 +3,11 @@ id: secure-client-communication
 title: "Secure client communication"
 ---
 
-Zeebe supports transport layer security between the gateway and all the officially supported clients. In this section, we will review how to configure these components.
+Zeebe supports TLS (transport layer security) between the gateway and all the officially supported clients. In this section, we will review how to configure these components.
 
 ## Gateway
 
-Transport layer security in the gateway is disabled by default. This means that if you are just experimenting with Zeebe or in development, there is no configuration needed. However, if you want to enable authentication you can configure Zeebe in the `security` section of the configuration files. The following configurations are present in both `gateway.yaml.template` and `broker.standalone.yaml.template`, the file you should edit depends on whether you are using a standalone gateway or an embedded gateway.
+TLS in the gateway is disabled by default. This means that if you are just experimenting with Zeebe or in development, there is no configuration needed. However, if you want to enable authentication you can configure Zeebe in the `security` section of the configuration files. The following configurations are present in both `gateway.yaml.template` and `broker.standalone.yaml.template`, the file you should edit depends on whether you are using a standalone gateway or an embedded gateway.
 
 ```yaml
 ...
