@@ -29,7 +29,7 @@ _Hint: There are more [community-maintained Camunda Platform 8 clients](./apis-c
 
 ## Camunda Platform 8 Self-Managed
 
-We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](./self-managed/zeebe-deployment/kubernetes-helm/) for this. Please follow the [Installation Guide](./self-managed/platform-deployment/) to learn more about installation possibilities.
+We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/docs/self-managed/platform-deployment/kubernetes-helm/) for this. Please follow the [Installation Guide](docs/self-managed/platform-deployment/) to learn more about installation possibilities.
 
 Requirements for the components can be seen below:
 

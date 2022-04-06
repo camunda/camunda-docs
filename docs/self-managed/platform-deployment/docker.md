@@ -123,7 +123,7 @@ tasklist:
 The `camunda/optimize:latest` Docker image can be used to run Optimize 
 
 :::note
-Configure the appropriate settings described in the [Optimize configuration](../../optimize-deployment/configuration) section.
+Configure the appropriate settings described in the [Optimize configuration](../../optimize-deployment/setup/) section.
 :::
 
 Like for example this `docker-compose` configuration:
