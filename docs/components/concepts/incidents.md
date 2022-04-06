@@ -11,6 +11,7 @@ Incidents are created in different situations, including the following:
 - A job is failed and it has no retries left.
 - An input or output variable mapping can't be applied.
 - A condition can't be evaluated.
+- A decision can't be evaluated.
 
 :::note
 Incidents are not created when an unexpected exception (e.g. `NullPointerException`, `OutOfMemoyError` etc.) occurs.
