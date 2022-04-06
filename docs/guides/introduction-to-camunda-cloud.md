@@ -16,9 +16,9 @@ Camunda Cloud is comprised of six components:
 * Cloud Console - Configure and deploy clusters with Cloud Console.
 * Web Modeler - Collaborate and model processes, deploy and start new instances all without leaving Camunda Cloud.
 
-Camunda Cloud can be used with both Desktop Modeler, and Web Modeler. 
+Camunda Cloud can be used with both Desktop Modeler, and Web Modeler.
 
-In this section of the Camunda Cloud documentation, you'll find guides for getting started with Camunda Cloud. For more conceptual information on Camunda Cloud, see [What is Camunda Cloud](components/concepts/what-is-camunda-cloud.md).
+In this section of the Camunda Cloud documentation, you'll find guides for getting started with Camunda Cloud. For more conceptual information on Camunda Cloud, see [What is Camunda Cloud](components/concepts/what-is-camunda-platform-8.md).
 
 ## Next steps
 

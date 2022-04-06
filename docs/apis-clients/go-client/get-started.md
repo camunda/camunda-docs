@@ -356,5 +356,5 @@ processKey:2251799813686750 bpmnProcessId:"order-process" version:4 processInsta
 
 ## What's next?
 
-- Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-cloud.md).
+- Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-platform-8.md).
 - Learn more about [BPMN processes](/components/modeler/bpmn/bpmn-primer.md).

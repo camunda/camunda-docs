@@ -81,5 +81,5 @@ Congratulations! You successfully built your first microservice orchestration so
 
 ## Next steps
 
-* Learn more about Camunda Cloud and what it can do by reading [What is Camunda Cloud?](../../components/concepts/what-is-camunda-cloud/).
+* Learn more about Camunda Cloud and what it can do by reading [What is Camunda Cloud?](../../components/concepts/what-is-camunda-platform-8).
 * Get your local environment ready for development with Camunda Cloud by [setting up your first development project](../setting-up-development-project).

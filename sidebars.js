@@ -36,7 +36,7 @@ module.exports = {
     "components/overview",
     {
       Concepts: [
-        "components/concepts/what-is-camunda-cloud",
+        "components/concepts/what-is-camunda-platform-8",
         "components/concepts/processes",
         "components/concepts/job-workers",
         "components/concepts/process-instance-creation",
@@ -46,38 +46,39 @@ module.exports = {
         "components/concepts/expressions",
       ],
       "Console": [
-        "components/cloud-console/introduction",
+        "components/console/introduction",
         {
           "Manage your organization": [
-            "components/cloud-console/manage-organization/organization-settings",
-            "components/cloud-console/manage-organization/manage-users",
-            "components/cloud-console/manage-organization/view-organization-activity",
-            "components/cloud-console/manage-organization/usage-history",
-            "components/cloud-console/manage-organization/update-billing-reservations",
-            "components/cloud-console/manage-organization/switch-organization",
+            "components/console/manage-organization/organization-settings",
+            "components/console/manage-organization/manage-users",
+            "components/console/manage-organization/view-organization-activity",
+            "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/update-billing-reservations",
+            "components/console/manage-organization/switch-organization",
           ],
         },
         {
           "Manage clusters": [
-            "components/cloud-console/manage-clusters/create-cluster",
-            "components/cloud-console/manage-clusters/rename-cluster",
-            "components/cloud-console/manage-clusters/delete-cluster",
-            "components/cloud-console/manage-clusters/manage-api-clients",
-            "components/cloud-console/manage-clusters/manage-alerts",
-            "components/cloud-console/manage-clusters/manage-ip-whitelists",
-            "components/cloud-console/manage-clusters/manage-secrets",
+            "components/console/manage-clusters/create-cluster",
+            "components/console/manage-clusters/rename-cluster",
+            "components/console/manage-clusters/delete-cluster",
+            "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-alerts",
+            "components/console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/manage-secrets",
+
           ],
         },
         {
           "Manage your plan": [
-            "components/cloud-console/manage-plan/available-plans",
-            "components/cloud-console/manage-plan/upgrade-to-professional-plan",
+            "components/console/manage-plan/available-plans",
+            "components/console/manage-plan/upgrade-to-professional-plan",
           ],
         },
         {
           Troubleshooting: [
-            "components/cloud-console/troubleshooting/common-pitfalls",
-            "components/cloud-console/troubleshooting/feedback-and-support",
+            "components/console/troubleshooting/common-pitfalls",
+            "components/console/troubleshooting/feedback-and-support",
           ],
         },
       ],
@@ -340,7 +341,7 @@ module.exports = {
         "apis-clients/grpc",
         "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
-        "apis-clients/cloud-console-api-reference",
+        "apis-clients/console-api-reference",
       ],
     },
     {

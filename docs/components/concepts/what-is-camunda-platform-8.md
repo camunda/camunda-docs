@@ -1,5 +1,5 @@
 ---
-id: what-is-camunda-cloud
+id: what-is-camunda-platform-8
 title: "What is Camunda Platform 8?"
 ---
 
