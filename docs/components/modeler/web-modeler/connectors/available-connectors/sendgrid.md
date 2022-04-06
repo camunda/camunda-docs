@@ -57,7 +57,7 @@ To create an API Key in Sendgrid follow the next steps:
 
 We advise you to keep your API Key safe and avoid exporing it in the BPMN xml file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../../../cloud-console/manage-clusters/manage-secrets.md) 
+1. Follow our [guide for creating secrets](../../../../console/manage-clusters/manage-secrets.md)
 2. Name your secret `SEND_GRID_API_KEY` so you can easily reference it later in our Connector
 
 ## Sendgrid Connector
