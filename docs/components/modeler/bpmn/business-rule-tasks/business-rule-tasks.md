@@ -11,8 +11,8 @@ modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 
 :::info
 Camunda Platform 8 supports alternative task implementations for the business rule task. If you want
-to use your own implementation for a business rule task, see the [Job worker
-implementation](#job-worker-implementation) section below. The sections before it apply to the DMN
+to use your own implementation for a business rule task, see the [job worker
+implementation](#job-worker-implementation) section below. The sections before this job worker implementation apply to the DMN
 decision implementation only.
 :::
 
@@ -31,11 +31,11 @@ A business rule task must define the DMN decision id of the called decision as `
 Usually, the `decisionId` is defined as a static value (e.g. `shipping_box_size`), but it can also
 be defined as an [expression](/components/concepts/expressions.md) (e.g. `= "shipping_box_size_" +
 countryCode`). The expression is evaluated on activating the business rule task (or when an incident
-at the business rule task is resolved), after input mappings have been applied. The expression must
+at the business rule task is resolved) after input mappings have been applied. The expression must
 result in a `string`.
 
 A business rule task must define the process variable name of the decision result as
-`resultVariable`. The result of the decision will be stored in this variable. The `resultVariable`
+`resultVariable`. The result of the decision is stored in this variable. The `resultVariable`
 is defined as a static value.
 
 ## Variable mappings
@@ -50,14 +50,15 @@ by the decision.
 :::info
 Input mappings are applied on activating the business rule task (or when an incident at the business
 rule task is resolved), before the decision evaluation. When an incident is resolved at the business
-rule task, then the input mappings are applied again before evaluating the decision. This can affect
+rule task, the input mappings are applied again before evaluating the decision. This can affect
 the result of the decision.
 :::
 
-For more information about this topic visit the documentation about [Input/output variable
+For more information about this topic, visit the documentation about [input/output variable
 mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
 
 ## Job worker implementation
+
 A business rule task does not have to evaluate a decision modeled with DMN. Instead, you can also
 use [job workers](/components/concepts/job-workers.md) to implement your business rule task.
 
