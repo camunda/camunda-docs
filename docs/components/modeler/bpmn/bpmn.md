@@ -4,13 +4,7 @@ title: BPMN in Modeler
 description: Let's start modeling by creating a BPMN diagram.
 ---
 
-# Create a BPMN 2.0 diagram
-
-To start modeling, create a BPMN 2.0 diagram by selecting **Create New Diagram** in the **Diagrams** tab for your process engine in the top-level menu.
-
-:::note
-If working in Camunda Platform 7, select **Create diagram > Create new BPMN diagram**.
-:::
+# Model a BPMN 2.0 diagram
 
 :::note
 BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot run a BPMN diagram modeled for Camunda Platform 7 in Camunda Platform 8, or vice versa, at this time.
@@ -20,9 +14,7 @@ BPMN diagrams must be created for the process engine they intend to be deployed 
 
 ![Start Modeling](./assets/quickstart-2.png)
 
-Now you can start to create a BPMN 2.0 model. Add the desired elements from the palette on the left side of the page by dragging and dropping them onto the diagram canvas.
-
-Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of an element in place.
+The Web and Desktop Modeler both offer the same core BPMN 2.0 Modeling experience: you can add BPMN elements from the palette on the left side of the page by dragging and dropping them onto the diagram canvas. Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of an element in place.
 
 ## Demo
 
@@ -32,22 +24,10 @@ The demo above shows how to create more BPMN 2.0 elements like lanes, task types
 
 ## BPMN 2.0 coverage
 
-Modeler [covers all BPMN 2.0 elements](/docs/components/modeler/bpmn/bpmn-coverage/) for modeling processes and collaborations.
+The Modeler [covers all BPMN 2.0 elements](/docs/components/modeler/bpmn/bpmn-coverage/) for modeling processes and collaborations.
 
 ## BPMN 2.0 properties for execution
 
 ![Save BPMN Diagram](./assets/quickstart-3.png)
 
 In the properties panel on the right side, view and edit attributes that apply to the selected element.
-
-![Save BPMN Diagram](./assets/quickstart-4.png)
-
-The panel can be hidden and displayed by clicking the tab on its left border.
-
-## Save a diagram
-
-To save your state of work, click **Save**.
-
-:::note
-To save your state of work in Camunda Platform 7, click **File > Save File As...** in the top-level menu. Then, select a location on your file system to store the diagram in the BPMN 2.0 XML format. You can load that file again by clicking **File > Open File...**.
-:::

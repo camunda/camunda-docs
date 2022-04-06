@@ -45,7 +45,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
       ],
-      "Cloud Console": [
+      "Console": [
         "components/cloud-console/introduction",
         {
           "Manage your organization": [
@@ -265,15 +265,8 @@ module.exports = {
         "components/tasklist/introduction",
         {
           "User guide": [
-            {
-              "API mode": [
-                "components/tasklist/userguide/api/overview",
-                "components/tasklist/userguide/api/tutorial",
-              ],
-              "User interface mode": [
-                "components/tasklist/userguide/user-interface/overview",
-              ],
-            },
+            "components/tasklist/userguide/overview",
+            "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
       ],
@@ -420,6 +413,7 @@ module.exports = {
             "self-managed/concepts/access-control/apis",
             "self-managed/concepts/access-control/permissions",
             "self-managed/concepts/access-control/roles",
+            "self-managed/concepts/access-control/users",
           ]
         }
       ],

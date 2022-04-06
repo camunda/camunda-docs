@@ -1,6 +1,8 @@
 ---
 id: overview
 title: Overview
+slug: /apis-clients/tasklist-api/overview
+sidebar_position: 1
 description: "Let's take a closer look at the endpoint, authentication, access token, and API usage within Tasklist."
 ---
 
@@ -9,6 +11,8 @@ In this document, we'll go over the basics on how to consume the Tasklist GraphQ
 ## Endpoint
 
 Tasklist provides a GraphQL API at endpoint `/graphql`.
+
+From Camunda Platform 8 onwards the endpoint is `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`
 
 ## Authentication
 
@@ -69,7 +73,7 @@ If the authorization is successful, the authorization server sends back the acce
 
 ## Obtaining the Tasklist schema
 
-To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](../../../../../apis-clients/tasklist-api/).
+To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](/docs/apis-clients/tasklist-api/).
 
 There are also several [tools to explore GraphQL APIs](https://altair.sirmuel.design).
 
