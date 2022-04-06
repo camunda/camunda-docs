@@ -326,7 +326,7 @@ module.exports = {
         "apis-clients/grpc",
         "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
-        "apis-clients/cloud-console-api-reference",
+        "apis-clients/console-api-reference",
       ],
     },
     {
