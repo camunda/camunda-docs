@@ -30,7 +30,7 @@ module.exports = {
         "guides/update-guide/026-to-100",
       ],
     },
-    "guides/migrating-from-Camunda-Platform",
+    "guides/migrating-from-camunda-platform-7",
   ],
   Components: [
     "components/overview",
