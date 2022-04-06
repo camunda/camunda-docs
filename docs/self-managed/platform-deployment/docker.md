@@ -30,7 +30,7 @@ The following ports are exposed:
 - [`8080`](http://localhost:8080/): Operate
 - [`8081`](http://localhost:8081/): Tasklist
 
-While the Docker images itself are supported for production usage, the provided [docker-compose.yaml](https://github.com/camunda-cloud/camunda-cloud-get-started/blob/master/docker-compose.yaml) is designed to be used by developers to run an environment locally, it is not designed to be used in production. We recommend to use [Kubernetes](./kubernetes) in production, see also [Installation Overview](./).
+While the Docker images itself are supported for production usage, the provided [docker-compose.yaml](https://github.com/camunda-cloud/camunda-cloud-get-started/blob/master/docker-compose.yaml) is designed to be used by developers to run an environment locally, it is not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
 
 
 ## Zeebe
@@ -101,7 +101,7 @@ operate:
 You can use the Docker image `camunda/tasklist:latest` to run Tasklist as a container.
 
 :::note
-Configure the appropriate settings described in the [Tasklist configuration](../tasklist-deployment/configuration) section.
+Configure the appropriate settings described in the [Tasklist configuration](../../tasklist-deployment/configuration) section.
 :::
 
 Like for example this `docker-compose` configuration:
@@ -123,7 +123,7 @@ tasklist:
 The `camunda/optimize:latest` Docker image can be used to run Optimize 
 
 :::note
-Configure the appropriate settings described in the [Optimize configuration](../optimize-deployment/configuration) section.
+Configure the appropriate settings described in the [Optimize configuration](../../optimize-deployment/configuration) section.
 :::
 
 Like for example this `docker-compose` configuration:

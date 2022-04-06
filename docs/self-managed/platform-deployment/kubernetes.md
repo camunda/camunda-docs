@@ -26,7 +26,7 @@ We support [Kubernetes startup and liveness probes](../../zeebe-deployment/confi
 
 There are several alternatives to deploy applications to a Kubernetes cluster, but we recommend to use our provided Helm charts to deploy a set of components into your cluster. Helm allows you to choose exactly what chart (set of components) you want to install and how these components need to be configured.
 
-Refer to the [documentation on Camunda's Helm charts](./kubernetes-helm/) for details.
+Refer to the [documentation on Camunda's Helm charts](../kubernetes-helm/) for details.
 
 To do do, you must have the following tools installed in your local environment:
 
