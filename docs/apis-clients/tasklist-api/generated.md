@@ -2,7 +2,7 @@
 id: schema
 slug: /apis-clients/tasklist-api
 title: Schema Documentation
-sidebar_position: 1
+sidebar_position: 3
 ---
 
 This documentation has been automatically generated from the GraphQL schema.

@@ -1,6 +1,8 @@
 ---
 id: tutorial
 title: Tutorial
+slug: /apis-clients/tasklist-api/tutorial
+sidebar_position: 2
 description: "Let's implement an application using the Tasklist API."
 ---
 

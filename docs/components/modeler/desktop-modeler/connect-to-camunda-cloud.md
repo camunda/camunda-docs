@@ -9,7 +9,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 ![deployment icon](./img/deploy-icon.png)
 
-2. Click **Camunda Cloud SaaS**, or alternatively, select **Camunda Cloud Self-Managed** if you want to deploy to a [local installation](../../../../self-managed/zeebe-deployment/local/install/), for example:
+2. Click **Camunda Cloud SaaS**, or alternatively, select **Camunda Cloud Self-Managed** if you want to deploy to a [local installation](../../../../self-managed/platform-deployment/), for example:
 
 ![deployment configuration](./img/deploy-diagram-camunda-cloud.png)
 

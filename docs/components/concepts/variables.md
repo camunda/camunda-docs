@@ -32,6 +32,14 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 - Object (e.g. `{ "orderNumber": "A12BH98", "date": "2020-10-15", "amount": 185.34}`)
 - Null (`null`)
 
+## Variable size limitation
+
+Generally, there is a limit of 4 MB for the payload of a process instance. This 4 MB includes the variables and the workflow engine internal data, which means there is slightly less memory available for variables. The exact limitation depends on a few factors, but you can consider 3 MB as being safe. If in doubt, run a quick test case.
+
+:::note
+Regardless, we don't recommend storing much data in your process context. See our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
+:::
+
 ## Variable scopes
 
 Variable scopes define the _visibility_ of variables. The root scope is the process instance itself. Variables in this scope are visible everywhere in the process.
