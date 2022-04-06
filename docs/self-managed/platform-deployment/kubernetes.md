@@ -68,7 +68,7 @@ Notice that you need to keep `port-forward` running to communicate with the remo
 
 Note that accessing the Zeebe cluster directly using `kubectl port-forward` is recommended for development purposes. 
 
-By default, the [Camunda Helm charts](./kubernetes-helm) are not exposing the Zeebe cluster via the ingress controller. If you want to use `zbctl` or a local client/worker from outside the Kubernetes cluster, rely on `kubectl port-forward` to the Zeebe cluster to communicate.
+By default, the [Camunda Helm charts](../kubernetes-helm) are not exposing the Zeebe cluster via the ingress controller. If you want to use `zbctl` or a local client/worker from outside the Kubernetes cluster, rely on `kubectl port-forward` to the Zeebe cluster to communicate.
 
 You can find the external IP by running the following:
 

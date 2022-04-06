@@ -16,7 +16,7 @@ Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](/apis-c
 ### Additional APIs
 
 - [Public API](public-api.md) - Camunda Platform 8's provided public API.
-- [Cloud Console API clients (REST)](cloud-console-api-reference.md) - Enables you to programmatically create and manage clusters, and interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI.
+- [Cloud Console API clients (REST)](console-api-reference.md) - Enables you to programmatically create and manage clusters, and interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI.
 - [Zeebe API](grpc.md) - Zeebe clients use gRPC to communicate with the cluster.
 
 ## Clients
