@@ -11,9 +11,9 @@ Options -Indexes -MultiViews
 # !!!! FIX THIS BEFORE RELEASE !!!!
 RewriteRule ^docs/reference/feel/language-guide/feel-expression/?$ /docs/reference/feel/what-is-feel/ [R=301,L]
 
-RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/?$ /docs/self-managed/zeebe-deployment/kubernetes/#helm [NE,R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites/?$ /docs/self-managed/zeebe-deployment/kubernetes/#prerequisites [NE,R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate/?$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/.*$ /docs/self-managed/platform-deployment/kubernetes/ [NE,R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/docker/.*$ /docs/self-managed/platform-deployment/docker/ [NE,R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/local/.*$ /docs/self-managed/platform-deployment/local/ [NE,R=301,L]
 RewriteRule ^docs/components/tasklist/faq/(.*)$ /docs/guides/utilizing-forms$1 [R=301,L]
 RewriteRule ^docs/components/tasklist/faq/$ /docs/guides/utilizing-forms [R=301,L]
 
