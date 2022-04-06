@@ -400,6 +400,19 @@ module.exports = {
   "Self-Managed": [
     "self-managed/overview",
     {
+      "Installation": [
+        "self-managed/platform-deployment/index",
+        {
+          "Kubernetes": [
+            "self-managed/platform-deployment/kubernetes",
+            "self-managed/platform-deployment/kubernetes-helm",
+          ],
+        },
+        "self-managed/platform-deployment/docker",
+        "self-managed/platform-deployment/local",
+      ],
+    },
+    {
       Concepts: [
         {
           "Access control": [
@@ -414,20 +427,6 @@ module.exports = {
     {
       "Zeebe": [
         "self-managed/zeebe-deployment/index",
-        {
-          "Local installation": [
-            "self-managed/zeebe-deployment/local/install",
-            "self-managed/zeebe-deployment/local/quickstart",
-          ],
-        },
-        "self-managed/zeebe-deployment/docker/install",
-        {
-          "Kubernetes deployment": [
-            "self-managed/zeebe-deployment/kubernetes/index",
-            "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
-            "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist",
-          ],
-        },
         {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
@@ -478,6 +477,7 @@ module.exports = {
         "self-managed/tasklist-deployment/usage-metrics",
       ],
       "Optimize": [
+        "self-managed/optimize-deployment/setup",
         {
           Setup: [
             "self-managed/optimize-deployment/setup/installation",
@@ -500,7 +500,6 @@ module.exports = {
             "self-managed/optimize-deployment/setup/common-problems",
           ],
         },
-        "self-managed/optimize-deployment/setup",
         {
           Plugins: [
             "self-managed/optimize-deployment/plugins/plugin-system",
