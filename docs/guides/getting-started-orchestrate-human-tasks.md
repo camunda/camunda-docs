@@ -19,6 +19,12 @@ In this guide, we’ll step through one way to create an automated process utili
 - Ensure you have a valid [Camunda Cloud account](./getting-started/create-camunda-cloud-account.md), or sign up if you still need one.
 - (Optional) Install [Camunda Desktop Modeler](../components/modeler/desktop-modeler/install-the-modeler.md).
 
+### Create a cluster
+
+import CreateCluster from './assets/react-components/create-cluster.md'
+
+<CreateCluster/>
+
 ### Create an automated process with user tasks
 
 To create an automated process with user tasks, take the following steps:
