@@ -1,5 +1,5 @@
 ---
-id: getting-started
+id: index
 title: "Logging in"
 sidebar_label: "Installation and first steps"
 ---
