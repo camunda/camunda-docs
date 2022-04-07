@@ -45,7 +45,7 @@ A rule can have one or more input entries, which are the conditions of the rule.
 in a `text` element as child of an
 `inputEntry` XML element.
 
-The expression language of the input entry is [FEEL](/reference/feel/language-guide/feel-unary-tests.md) (unary-tests).
+The expression language of the input entry is [FEEL](/components/modeler/feel/language-guide/feel-unary-tests.md) (unary-tests).
 
 The input entry is satisfied when the evaluated expression returns `true`.
 
@@ -75,7 +75,7 @@ input entry is represented by a `-`.
 A rule can have one or more output entries, which are the conclusions of the rule. Each output entry contains an
 expression in a `text` element as child of an `outputEntry` XML element.
 
-The expression language of the output entry is [FEEL](/reference/feel/language-guide/feel-expressions-introduction.md).
+The expression language of the output entry is [FEEL](/components/modeler/feel/language-guide/feel-expressions-introduction.md).
 
 ```xml
 

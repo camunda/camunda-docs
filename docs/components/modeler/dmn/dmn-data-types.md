@@ -8,14 +8,14 @@ The Camunda Platform supports the following data types for DMN:
 
 | Type name         | Associated FEEL type                                                                             |
 |-------------------|--------------------------------------------------------------------------------------------------|
-| number            | [Number](/reference/feel/language-guide/feel-data-types.md#number)                               |
-| string            | [String](/reference/feel/language-guide/feel-data-types.md#string)                               |
-| boolean           | [Boolean](/reference/feel/language-guide/feel-data-types.md#boolean)                             |
-| time              | [Time](/reference/feel/language-guide/feel-data-types.md#time)                                   |
-| date              | [Date](/reference/feel/language-guide/feel-data-types.md#date)                                   |
-| dateTime          | [Date-Time](/reference/feel/language-guide/feel-data-types.md#date-time)                         |
-| dayTimeDuration   | [Days-Time-Duration](/reference/feel/language-guide/feel-data-types.md#days-time-duration)       |
-| yearMonthDuration | [Years-Months-Duration](/reference/feel/language-guide/feel-data-types.md#years-months-duration) |
+| number            | [Number](/components/modeler/feel/language-guide/feel-data-types.md#number)                               |
+| string            | [String](/components/modeler/feel/language-guide/feel-data-types.md#string)                               |
+| boolean           | [Boolean](/components/modeler/feel/language-guide/feel-data-types.md#boolean)                             |
+| time              | [Time](/components/modeler/feel/language-guide/feel-data-types.md#time)                                   |
+| date              | [Date](/components/modeler/feel/language-guide/feel-data-types.md#date)                                   |
+| dateTime          | [Date-Time](/components/modeler/feel/language-guide/feel-data-types.md#date-time)                         |
+| dayTimeDuration   | [Days-Time-Duration](/components/modeler/feel/language-guide/feel-data-types.md#days-time-duration)       |
+| yearMonthDuration | [Years-Months-Duration](/components/modeler/feel/language-guide/feel-data-types.md#years-months-duration) |
 | Any               | Wildcard for any type                                                                            |
 
 The data types can be used in the type definitions of DMN elements, for example:

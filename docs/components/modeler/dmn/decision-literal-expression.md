@@ -73,7 +73,7 @@ The literal expression specifies how the value of the decision is generated. It 
 or to combine the output values of [required decisions](decision-requirements-graph.md#required-decisions).
 
 The expression language of the literal expression
-is [FEEL](/reference/feel/language-guide/feel-expressions-introduction.md).
+is [FEEL](/components/modeler/feel/language-guide/feel-expressions-introduction.md).
 
 The expression is set inside a `text` element that is a child of the `literalExpression` XML element.
 

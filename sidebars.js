@@ -172,6 +172,7 @@ module.exports = {
           ],
         },
         require("./docs/components/modeler/dmn/sidebar-schema"),
+        require("./docs/components/modeler/feel/sidebar-schema"),
         {
           "Forms": [
             "components/modeler/forms/camunda-forms-reference",
@@ -377,7 +378,6 @@ module.exports = {
 
   Reference: [
     "reference/overview",
-    require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
     "reference/announcements",
     "reference/licenses",
