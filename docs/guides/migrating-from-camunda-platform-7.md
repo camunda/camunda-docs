@@ -53,7 +53,7 @@ To migrate existing process solutions that use Camunda Spin heavily, you can sti
 
 Camunda Platform 7 uses [JUEL (Java Unified Expression Language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/) as the expression language. In the embedded engine scenario, expressions can even read into beans (Java object instances) in the application.
 
-Camunda Platform 8 uses [FEEL (Friendly-Enough Expression Language](/reference/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
+Camunda Platform 8 uses [FEEL (Friendly-Enough Expression Language](/components/modeler/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
 Most expressions can be converted (see [this community extension](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.js as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform 7).
 

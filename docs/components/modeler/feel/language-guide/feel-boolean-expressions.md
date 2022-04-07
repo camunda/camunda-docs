@@ -234,7 +234,7 @@ null instance of Any
 
 ### Unary-tests/in
 
-Evaluates a [unary-tests](/docs/reference/feel/language-guide/feel-unary-tests) with the given value. The keyword `in` separates the value from the unary-tests.
+Evaluates a [unary-tests](/docs/components/modeler/feel/language-guide/feel-unary-tests) with the given value. The keyword `in` separates the value from the unary-tests.
 
 ```js
 5 in (3..7)

@@ -18,16 +18,11 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 * IDE (IntelliJ, VSCode, or similar)
 * Download and unzip or clone the [repo](https://github.com/camunda-cloud/camunda-cloud-tutorials), then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`
 
-## Guide steps
+### Create a cluster
 
-First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one.
+import CreateCluster from './assets/react-components/create-cluster.md'
 
-- [Prerequisites](#prerequisites)
-- [Guide steps](#guide-steps)
-  - [Design your process with BPMN](#design-your-process-with-bpmn)
-  - [Create credentials for your Zeebe client](#create-credentials-for-your-zeebe-client)
-  - [Create a worker for the service task](#create-a-worker-for-the-service-task)
-- [Next steps](#next-steps)
+<CreateCluster/>
 
 ### Design your process with BPMN
 
@@ -81,5 +76,5 @@ Congratulations! You successfully built your first microservice orchestration so
 
 ## Next steps
 
-* Learn more about Camunda Cloud and what it can do by reading [What is Camunda Cloud?](../../components/concepts/what-is-camunda-cloud/).
+* Learn more about Camunda Cloud and what it can do by reading [What is Camunda Cloud?](../../components/concepts/what-is-camunda-platform-8).
 * Get your local environment ready for development with Camunda Cloud by [setting up your first development project](../setting-up-development-project).

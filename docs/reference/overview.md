@@ -19,5 +19,4 @@ This section contains general reference material for Camunda Cloud.
 
 ## Additional resources
 
-- [FEEL expressions](feel/what-is-feel.md)
 - [Glossary](glossary.md)

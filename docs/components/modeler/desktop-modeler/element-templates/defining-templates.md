@@ -40,18 +40,19 @@ As seen in the code snippet a template consist of a number of important componen
   Example (Camunda Platform 7)
 
   ```json
-  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.8.0/resources/schema.json"
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.9.0/resources/schema.json"
   ```
 
   Example (Camunda Platform 8)
 
   ```json
-  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.2.0/resources/schema.json"
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.4.0/resources/schema.json"
   ```
 
-* `name : String`: Name of the template that will appear in the Catalog.
+* `name : String`: Name of the template. Will be shown in the element template selection modal and in the properties panel (after having applied an element template).
 * `id : String`: ID of the template.
 * `description : String`: Optional description of the template. Will be shown in the element template selection modal and in the properties panel (after having applied an element template).
+* `documentationRef : String`: Optional URL pointing to a template documentation. Will be shown in the properties panel (after having applied an element template).
 * `version : Integer`: Optional version of the template. If you add a version to a template it will be considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 * `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
 * `elementType : Object`: Optional type of the element. If you add an elementType to the template, the element will be replaced with the specified type when you apply the template.
@@ -61,8 +62,8 @@ As seen in the code snippet a template consist of a number of important componen
 
 The application uses the `$schema` property to ensure compatibility for a given element template. The latest supported [Camunda element templates JSON Schema versions](https://github.com/camunda/element-templates-json-schema) are
 
-* `v0.8.0` (Camunda Platform 7)
-* `v0.2.0` (Camunda Platform 8)
+* `v0.9.1` (Camunda Platform 7)
+* `v0.4.1` (Camunda Platform 8)
 
 The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
 
@@ -623,6 +624,34 @@ Together with the `pattern` constraint, you may define your custom error message
   ]
 ```
 
+
+#### Icons 
+
+As of Camunda Modeler `v5.0.0,` it is possible to define custom icons to update the visual appearance of elements after applying an element template.
+
+```json
+[
+  {
+    "name": "Template 1",
+    "id": "sometemplate",
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "icon": {
+      "contents": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22' fill='none'%3E%3Ccircle cx='11' cy='11' r='9' fill='black'/%3E%3Ctext x='6.9' y='14.9' fill='white' style='font-family: Arial; font-size: 10px;'%3EM%3C/text%3E%3C/svg%3E"
+    },
+    "properties": [
+      ...
+    ]
+  }
+]
+```
+
+![Icons](./img/icons.png)
+
+The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons (e.g., 18x18 pixels) to better fit into the existing user interface.
+
+This feature is currently only supported for Camunda Platform 8 element templates.
 
 
 #### Display All Entries

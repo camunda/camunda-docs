@@ -24,15 +24,18 @@ raised at the business rule task. When the incident is resolved, the decision is
 
 ## Defining a called decision
 
-A called decision links the business rule task to a DMN decision. It can be defined using the
+A called decision links the business rule task to a DMN decision, either to
+a [decision table](/components/modeler/dmn/decision-table.md) or to
+a [decision literal expression](/components/modeler/dmn/decision-literal-expression.md)
+. It can be defined using the
 `zeebe:calledDecision` extension element.
 
-A business rule task must define the DMN decision id of the called decision as `decisionId`.
-Usually, the `decisionId` is defined as a static value (e.g. `shipping_box_size`), but it can also
-be defined as an [expression](/components/concepts/expressions.md) (e.g. `= "shipping_box_size_" +
-countryCode`). The expression is evaluated on activating the business rule task (or when an incident
-at the business rule task is resolved) after input mappings have been applied. The expression must
-result in a `string`.
+A business rule task must define the [DMN decision id](/components/modeler/dmn/decision-table.md#decision-id) of the
+called decision as `decisionId`. Usually, the `decisionId` is defined as a static value (e.g. `shipping_box_size`), but
+it can also be defined as an [expression](/components/concepts/expressions.md) (
+e.g. `= "shipping_box_size_" + countryCode`). The expression is evaluated on activating the business rule task (or when
+an incident at the business rule task is resolved) after input mappings have been applied. The expression must result in
+a `string`.
 
 A business rule task must define the process variable name of the decision result as
 `resultVariable`. The result of the decision is stored in this variable. The `resultVariable`

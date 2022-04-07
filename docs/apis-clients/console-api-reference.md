@@ -1,5 +1,5 @@
 ---
-id: cloud-console-api-reference
+id: console-api-reference
 title: Console API clients (REST)
 description: "To interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI, create Cloud API clients."
 ---

@@ -96,7 +96,7 @@ Use the following conditional expression for the **else** sequence flow:
 Now, you can deploy the [process](./assets/gettingstarted_quickstart_advanced.bpmn). Navigate to the folder where you saved your process.
 
 ```bash
-zbctl deploy gettingstarted_quickstart_advanced.bpmn
+zbctl deploy resource gettingstarted_quickstart_advanced.bpmn
 ```
 
 If the deployment is successful, you'll get the following output:
@@ -104,12 +104,14 @@ If the deployment is successful, you'll get the following output:
 ```bash
 {
   "key": 2251799813685493,
-  "processes": [
+  "deployments": [
     {
-      "bpmnProcessId": "camunda-cloud-quick-start-advanced",
-      "version": 1,
-      "processKey": 2251799813685492,
-      "resourceName": "gettingstarted_quickstart_advanced.bpmn"
+      "process": {
+        "bpmnProcessId": "camunda-cloud-quick-start-advanced",
+        "version": 1,
+        "processKey": 2251799813685492,
+        "resourceName": "gettingstarted_quickstart_advanced.bpmn"
+      }
     }
   ]
 }

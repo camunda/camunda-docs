@@ -105,7 +105,7 @@ Start an assertion using the following entry points:
 ### Deployment assertions
 
 ```java
-DeploymentEvent event = client.newDeployCommand()
+DeploymentEvent event = client.newDeployResourceCommand()
   .addResourceFromClasspath("my-process.bpmn")
   .send()
   .join();
