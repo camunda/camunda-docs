@@ -11,6 +11,9 @@ Options -Indexes -MultiViews
 # !!!! FIX THIS BEFORE RELEASE !!!!
 RewriteRule ^docs/reference/feel/language-guide/feel-expression/?$ /docs/reference/feel/what-is-feel/ [R=301,L]
 
+RewriteRule ^docs/components/zeebe/technical-concepts/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
+RewriteRule ^docs/components/zeebe/technical-concepts/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
+
 RewriteRule ^docs/reference/feel/builtin-functions/(.*)$ /docs/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/ [R=301,L]
 RewriteRule ^docs/reference/feel/language-guide/(.*)$ /docs/components/modeler/feel/what-is-feel/ [R=301,L]
 RewriteRule ^docs/reference/feel/(.*)$ /docs/components/modeler/feel/what-is-feel/ [R=301,L]
