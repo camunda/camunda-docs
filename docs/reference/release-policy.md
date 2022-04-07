@@ -3,23 +3,23 @@ id: release-policy
 title: "Release policy"
 ---
 
-Components of Camunda Cloud follow the [Semantic Versioning standard](https://semver.org/), which defines a version number using the `MAJOR.MINOR.PATCH` pattern.
+Components of Camunda Platform 8 follow the [Semantic Versioning standard](https://semver.org/), which defines a version number using the `MAJOR.MINOR.PATCH` pattern.
 
 - `MAJOR` version can make incompatible API changes.
 - `MINOR` version can add functionality in a backwards compatible manner.
 - `PATCH` version can make backwards compatible bug fixes.
 
-The Camunda Cloud team strives to release:
-- A new minor version of the Camunda Cloud components every three months
+The Camunda Platform 8 team strives to release:
+- A new minor version of the Camunda Platform 8 components every three months
 - In between minor versions, two alpha releases (to preview the upcoming minor version)
 
-Camunda Cloud supports the last two released minor versions with
+Camunda Platform 8 supports the last two released minor versions with
 patch releases. Patch releases are offered on a best effort basis for the
 currently supported versions.
 
 
 ## Provisioning in SaaS
-In our managed service, we differentiate between components that are part of a Camunda Platform Cluster and components that are outside of the cluster. 
+In our managed service, we differentiate between components that are part of a Camunda Platform 8 cluster and components that are outside of the cluster. 
 
 A cluster usually consists of:
 * Zeebe
@@ -41,7 +41,9 @@ On the stable channel, the last three supported minor versions are made availabl
 
 ### New Versions
 
-Whenever a new Camunda Platform version is released, we do our best to provide the new version on our managed service at the same time. We add a notice to Console, recommending an update to the latest version. 
+Whenever a new Camunda Platform 8 version is released, we do our best to provide the new version on our managed service at the same time. We add a notice to Console, recommending an update to the latest version. 
+
+![Console with notice to update the cluster in Camunda Platform 8 SaaS](img/update-console.png)
 
 #### Updates or restart for critical issues
 In our managed service we reserve the right to force update or restart a cluster immediately and without notice in advance if there is a critical security or stability issue. 
@@ -49,9 +51,9 @@ In our managed service we reserve the right to force update or restart a cluster
 
 ## Self-Managed
 
-Whenever a new Camunda Platform version is released, Camunda Platform Self-Managed enterprise customers will be notified via email. 
+Whenever a new Camunda Platform 8 version is released, Camunda Platform 8 Self-Managed enterprise customers will be notified via email. 
 
-If you are not an enterprise customer, you can stay up to date via release blogs, the announcements page, or releases on GitHub and Docker Hub.
+If you are not an enterprise customer, you can stay up to date via [release blogs](https://camunda.com/blog/category/release-notes/), the [announcements page](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 
 ### New Versions
-If you are running Camunda Platform Self-Managed, you may follow our update guide.
+If you are running Camunda Platform 8 Self-Managed, you may follow our [update guide](/guides/update-guide/introduction.md).
