@@ -6,7 +6,7 @@ description: "Processes are flowchart-like blueprints that define the orchestrat
 
 Processes are flowchart-like blueprints that define the orchestration of **tasks**.
 
-For example, with Camunda you can [orchestrate human tasks](../../guides/getting-started-orchestrate-human-tasks.md)
+For example, with Camunda you can [orchestrate human tasks](../../guides/getting-started-orchestrate-human-tasks.md).
 
 Every task represents a piece of business logic so the ordered execution produces a meaningful result.
 
