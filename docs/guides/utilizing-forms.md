@@ -83,7 +83,7 @@ Copy the JSON schema, and go back to the BPMN diagram you modeled earlier. Selec
 With Camunda Platform 7, deploy your diagram to Zeebe and create an instance using the following command:
 
 ```sh
-zbctl deploy /path/to/my/diagram.bpmn
+zbctl deploy resource /path/to/my/diagram.bpmn
 zbctl create instance diagram-id
 ```
 

@@ -54,7 +54,7 @@ Available Commands:
   cancel      Cancel resource
   complete    Complete a resource
   create      Create resources
-  deploy      Creates new process defined by provided BPMN file as processPath
+  deploy      Deploys new resources for each file provided
   fail        Fail a resource
   generate    Generate documentation
   help        Help about any command

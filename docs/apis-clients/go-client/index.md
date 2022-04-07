@@ -14,7 +14,7 @@ module github.com/zb-user/zb-example
 
 go 1.17
 
-require github.com/camunda-cloud/zeebe/clients/go v1.2.9
+require github.com/camunda/zeebe/clients/go/v8 v8.0.0
 ```
 
 ## Bootstrapping
@@ -27,7 +27,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
+    "github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
 )
 
 func main() {
@@ -86,7 +86,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
+    "github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
     "os"
 )
 

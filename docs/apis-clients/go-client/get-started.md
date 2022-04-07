@@ -35,7 +35,7 @@ module github.com/zb-user/zb-example
 
 go 1.17
 
-require github.com/camunda-cloud/zeebe/clients/go v1.2.9
+require github.com/camunda/zeebe/clients/go/v8 v8.0.0
 ```
 
 3. Set the connection settings and client credentials as environment variables:
@@ -59,8 +59,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/pb"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/pb"
 	"os"
 )
 
@@ -135,7 +135,7 @@ The broker stores the process under its BPMN process id and assigns a version.
 ```go
 	// After the client is created
 	ctx := context.Background()
-	response, err := client.NewDeployProcessCommand().AddResourceFile("order-process.bpmn").Send(ctx)
+	response, err := client.NewDeployResourceCommand().AddResourceFile("order-process.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -147,7 +147,7 @@ Run the program and verify the process deployed successfully.
 You should see a similar output:
 
 ```
-key:2251799813686743 processes:<bpmnProcessId:"order-process" version:3 processKey:2251799813686742 resourceName:"order-process.bpmn" >
+key:2251799813685254  processes:{bpmnProcessId:"order-process"  version:3  processDefinitionKey:2251799813685253  resourceName:"order-process.bpmn"}
 ```
 
 ## Create a process instance
@@ -222,9 +222,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/entities"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/worker"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
 	"log"
 	"os"
 )
@@ -253,7 +253,7 @@ func main() {
 
 	// deploy process
 	ctx := context.Background()
-	response, err := zbClient.NewDeployProcessCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
+	response, err := zbClient.NewDeployResourceCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -345,13 +345,12 @@ When observing the Zeebe Monitor, you can see the process instance moved from th
 When you run the example above, you should see a similar output to the following:
 
 ```
-key:2251799813686751 processes:<bpmnProcessId:"order-process" version:4 processKey:2251799813686750 resourceName:"order-process.bpmn" >
-processKey:2251799813686750 bpmnProcessId:"order-process" version:4 processInstanceKey:22517998136
-86752
-2019/06/06 20:59:50 Complete job 2251799813686760 of type payment-service
-2019/06/06 20:59:50 Processing order: 31243
-2019/06/06 20:59:50 Collect money using payment method: VISA
-2019/06/06 20:59:50 Successfully completed job
+key:2251799813685256  deployments:{process:{bpmnProcessId:"order-process-4"  version:1  processDefinitionKey:2251799813685255  resourceName:"order-process.bpmn"}}
+processDefinitionKey:2251799813685255  bpmnProcessId:"order-process-4"  version:1  processInstanceKey:2251799813685257
+2022/04/06 16:20:59 Complete job 2251799813685264 of type payment-service
+2022/04/06 16:20:59 Processing order: 31243
+2022/04/06 16:20:59 Collect money using payment method: VISA
+2022/04/06 16:20:59 Successfully completed job
 ```
 
 ## What's next?
