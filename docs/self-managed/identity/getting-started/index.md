@@ -1,6 +1,6 @@
 ---
 id: index
-title: "Logging in"
+title: "Installation and first steps"
 sidebar_label: "Installation and first steps"
 ---
 
