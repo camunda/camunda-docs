@@ -78,7 +78,7 @@ If the value of the entry `b` is also a context, the path can be chained (i.e. `
 
 ### Filter
 
-Filters a list of context elements. It is a special kind of the [filter expression](/docs/reference/feel/language-guide/feel-list-expressions#filter) for lists.  
+Filters a list of context elements. It is a special kind of the [filter expression](/docs/components/modeler/feel/language-guide/feel-list-expressions#filter) for lists.  
 
 While filtering, the entries of the current context element can be accessed by their key.
 
