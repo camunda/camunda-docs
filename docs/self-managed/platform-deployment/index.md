@@ -14,7 +14,7 @@ Camunda Platform 8 includes the following components:
 * Operate (Java Application, requiring Elasticsearch)
 * Tasklist ( Java Application, requiring Elasticsearch)
 * Optimize (Java Application, requiring Elasticsearch)
-* IAM (Java Application, requiring PostgreSQL)
+* Identity (Java Application, requiring Keycloak)
 
 Depending on your needs, you might not need all of the above components to succefully use Camunda Platform 8.
 

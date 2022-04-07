@@ -25,6 +25,8 @@ RewriteRule ^docs/components/cloud-console/$ /docs/components/console/ [R=301,L]
 RewriteRule ^docs/components/concepts/what-is-camunda-cloud(.*)$ /docs/components/concepts/what-is-camunda-platform-8$1 [R=301,L]
 RewriteRule ^docs/components/concepts/what-is-camunda-cloud$ /docs/components/concepts/what-is-camunda-platform-8 [R=301,L]
 
+RewriteRule ^docs/self-managed/identity/getting-started/.*$ /docs/self-managed/getting-started/ [NE,R=301,L]
+
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/?$ /docs/self-managed/zeebe-deployment/kubernetes/#helm [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites/?$ /docs/self-managed/zeebe-deployment/kubernetes/#prerequisites [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate/?$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist/ [R=301,L]

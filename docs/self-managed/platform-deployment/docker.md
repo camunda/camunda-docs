@@ -24,6 +24,10 @@ A default docker compose configuration to run Zeebe, Operate, and Tasklist is av
 
 Download this file to your local computer, `cd` into that directory, and run `docker-compose up`.
 
+:::tip
+Not sure what Docker Compose is? Check out Docker's [Overview of Docker Compose](https://docs.docker.com/compose/).
+:::
+
 The following ports are exposed:
 
 - `26500`: Zeebe Gateway API
@@ -117,6 +121,149 @@ tasklist:
         - camunda.tasklist.zeebeElasticsearch.url=http://elasticsearch:9200
         - camunda.tasklist.zeebe.gatewayAddress=zeebe:26500
 ```
+## Identity
+
+You can use the Docker image `camunda/identity:latest` to run Identity as a container.
+
+The following steps walk you through the requirements and configuration.
+
+1. Navigate to a directory of your choice and create a `docker-compose.yml` file containing the following starting structure:
+
+```yaml
+version: "3.6"
+
+services:
+  identity:
+    image: camunda/identity:latest
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8082/actuator/health" ]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 30s
+```
+
+2. Identity requires a Keycloak instance to function. Add a Keycloak instance service to your `docker-compose.yml` file:
+
+```yaml
+keycloak:
+  image: jboss/keycloak:16.1.1
+  ports:
+    - "18080:8080"
+  environment:
+    KEYCLOAK_USER: admin
+    KEYCLOAK_PASSWORD: admin
+  healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:9990/health"]
+    interval: 30s
+    timeout: 15s
+    retries: 5
+    start_period: 30s
+```
+
+:::note
+To learn more about Keycloak, see the [Keycloak website](https://www.keycloak.org/).
+:::
+
+3. We'll also need to add new entries to the `services.identity.environment` section to tell Identity where Keycloak is located:
+
+```yaml
+  KEYCLOAK_URL: http://keycloak:8080/auth
+  IDENTITY_AUTH_PROVIDER_BACKEND_URL: http://keycloak:8080/auth/realms/camunda-platform
+```
+
+4. Let's provide details for a user to be created on startup by adding the following entries to the `services.identity.environment` section:
+
+```yaml
+  KEYCLOAK_USERS_0_FIRST_NAME: "Bark"
+  KEYCLOAK_USERS_0_LAST_NAME: "Barkins"
+  KEYCLOAK_USERS_0_USERNAME: "demo"
+  KEYCLOAK_USERS_0_PASSWORD: "demo"
+  KEYCLOAK_USERS_0_ROLES_0: "Identity"
+```
+
+5. Tell Docker Compose that the `identity` service is dependent on the `keycloak` service by adding the following lines under `services.identity`:
+
+```yaml
+    depends_on:
+      - keycloak
+```
+
+Your `docker-compose.yml` file should now look like this:
+
+<details><summary>Show complete Docker Compose file</summary>
+
+```yaml
+version: "3.6"
+
+services:
+  keycloak:
+    container_name: keycloak
+    image: jboss/keycloak:16.1.1
+    ports:
+      - "18080:8080"
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9990/health" ]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 30s
+
+  identity:
+    depends_on:
+      - keycloak
+    restart: on-failure
+    container_name: identity
+    image: camunda/identity:8.0.0
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_URL: http://keycloak:8080/auth
+      IDENTITY_AUTH_PROVIDER_BACKEND_URL: http://keycloak:8080/auth/realms/camunda-platform
+      KEYCLOAK_USERS_0_FIRST_NAME: "Bark"
+      KEYCLOAK_USERS_0_LAST_NAME: "Barkins"
+      KEYCLOAK_USERS_0_USERNAME: "demo"
+      KEYCLOAK_USERS_0_PASSWORD: "demo"
+      KEYCLOAK_USERS_0_ROLES_0: "Identity"
+```
+</details>
+
+Now you can start up Identity:
+
+```shell
+docker compose -f /path/to/your/docker-compose.yml up -d
+```
+
+If exposes a web interface on [localhost:8080](http://localhost:8080/).
+
+:::note
+If you are using Docker Compose V1, you can use the command `docker-compose`.
+:::
+
+This command starts the `identity` and `keycloak` services. The health of the services can be checked with the following command:
+
+```shell
+docker ps
+```
+
+Your output should look similar to the following:
+
+```text
+CONTAINER ID   IMAGE                   COMMAND                  CREATED       STATUS                 PORTS                               NAMES
+e15d9e80f18d   camunda/identity:8.0.0  "java -jar identity.…"   5 hours ago   Up 5 hours             0.0.0.0:8080->8080/tcp              identity
+9e209e46b4df   jboss/keycloak:16.1.1   "/opt/jboss/tools/do…"   5 hours ago   Up 5 hours (healthy)   8443/tcp, 0.0.0.0:18080->8080/tcp   keycloak
+```
+
+:::tip
+If the container for the Identity application does not remain healthy, you can use the `CONTAINER ID` to check the logs by running `docker logs <COMTAINER_ID>`.
+:::
+
+After starting the Identity application, you can move on and [log in](../../identity/getting-started/).
 
 ## Optimize
 
