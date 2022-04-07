@@ -556,7 +556,7 @@ module.exports = {
       ],
       "Identity": [
         "self-managed/identity/what-is-identity",
-        "self-managed/identity/getting-started",
+        "self-managed/identity/getting-started/index",
         {
           "User guide": [
             "self-managed/identity/user-guide/adding-an-application",
