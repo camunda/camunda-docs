@@ -26,8 +26,8 @@ RewriteRule ^docs/components/concepts/what-is-camunda-cloud(.*)$ /docs/component
 RewriteRule ^docs/components/concepts/what-is-camunda-cloud$ /docs/components/concepts/what-is-camunda-platform-8 [R=301,L]
 
 # !!!! FIX THIS BEFORE RELEASE !!!!
-RewriteRule ^docs/self-managed/iam/getting-started/(.*)$ /docs/self-managed/overview/[NE,R=301,L]
-RewriteRule ^docs/self-managed/iam/getting-started/$ /docs/self-managed/overview/[NE,R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started(.*)$ /docs/self-managed/overview/[NE,R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started$ /docs/self-managed/overview/[NE,R=301,L]
 
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/?$ /docs/self-managed/zeebe-deployment/kubernetes/#helm [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites/?$ /docs/self-managed/zeebe-deployment/kubernetes/#prerequisites [NE,R=301,L]
