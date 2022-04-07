@@ -43,6 +43,8 @@ You can build out a BPMN diagram for a process using several elements, including
 - Events: The things that happen. For example, start and end events which begin and terminate the process.
 - Tasks: For example, user tasks for a particular user to complete, or service tasks to invoke various webservices.
 - Gateways: For example, parallel gateways that move the process along between two tasks at the same time.
+  - Utilize [variables](../components/concepts/variables.md) to reflect the data of process instances.
+  - Leverage [expressions](../components/concepts/expressions.md) to access variables and calculate their value(s).
 - Subprocesses: For example, a transaction subprocess which can be used to group multiple activities to a transaction.
 
 For a complete list of BPMN elements and their capabilities, visit the [BPMN reference material](../components/modeler/bpmn/bpmn.md).
@@ -86,6 +88,10 @@ You can now start a new process instance to initiate your process diagram. Click
 You can now monitor your instances in [Operate](./components/operate/index.md). From your diagram, click the honeycomb icon button next to the Start Instance button, and **View Process Instances**. This will automatically take you to Camunda Operate to monitor your running instances.
 
 You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the **Start Instance** button, and **View User Tasks** to automatically be taken to [Tasklist](./components/tasklist/introduction.md).
+
+:::note
+Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
+:::
 
 ## Additional resources and next steps
 

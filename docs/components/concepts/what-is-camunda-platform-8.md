@@ -3,7 +3,7 @@ id: what-is-camunda-platform-8
 title: "What is Camunda Platform 8?"
 ---
 
-[Camunda Platform 8](https://camunda.io) is a **software as a service** (**SaaS**) offering for microservice orchestration. Camunda Platform 8 ensures that, once started, flows are always carried out fully, retrying steps in case of failures. Along the way, Camunda Platform 8 maintains a complete audit log so the progress of flows can be tracked.
+[Camunda Platform 8](https://camunda.io) is a **software as a service** (**SaaS**) offering for [microservice orchestration](../../guides/getting-started-orchestrate-microservices.md). Camunda Platform 8 ensures that, once started, flows are always carried out fully, retrying steps in case of failures. Along the way, Camunda Platform 8 maintains a complete audit log so the progress of flows can be tracked.
 
 Camunda Platform 8 is a turn-key solution that accelerates your project implementation. It is particularly suited for integrating heterogeneous systems and orchestrating dispersed services implemented in different programming languages.
 
@@ -27,7 +27,7 @@ Camunda Platform 8 addresses these challenges and provides:
 
 Camunda Platform 8 is designed to operate on a very large scale. To achieve this, it provides:
 
-- **Horizontal scalability** and no dependence on an external database; Zeebe (the workflow engine inside Camunda Platform 8) writes data directly to the filesystem on the same servers where it is deployed. Zeebe makes it simple to distribute processing across a cluster of machines to deliver high throughput.
+- **Horizontal scalability** and no dependence on an external database; [Zeebe](../zeebe/zeebe-overview.md) (the workflow engine inside Camunda Platform 8) writes data directly to the filesystem on the same servers where it is deployed. Zeebe makes it simple to distribute processing across a cluster of machines to deliver high throughput.
 - **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda Platform 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action.
 - **Audit trail** as all process-relevant events are written to an append-only log, providing an audit trail and a history of the state of a process.
 - **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda Platform 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda Platform 8 resilient, scalable, and reactive.
@@ -44,3 +44,7 @@ Camunda Platform 8 is entirely focused on providing a compact, robust, and scala
 ## Next steps
 
 * To request information about Camunda Platform 8 performance and benchmarking, see our [Contact](/contact/) page.
+* [Introduction to Camunda Platform 8](../../guides/introduction-to-camunda-cloud.md)
+* [Create a Camunda Platform 8 account](../../guides/getting-started/create-camunda-cloud-account.md)
+* [Migrate from Camunda Platform 7 to Camunda Platform 8](../../guides/migrating-from-camunda-platform-7.md)
+* [Automate a process using BPMN](../../guides/automating-a-process-using-bpmn.md)
