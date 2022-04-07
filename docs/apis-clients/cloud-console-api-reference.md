@@ -26,8 +26,7 @@ After a Cloud API client is created, the `Client Secret` is only shown once. Sav
 To retrieve an access token for the Cloud API client:
 
 ```bash
-curl --header "Content-Type: application/json" \
-    --request POST \
+curl -X POST --header "Content-Type: application/json" \
     --data '{"grant_type":"client_credentials", "audience":"api.cloud.camunda.io", "client_id":"XXX", "client_secret":"YYY"}' \
     https://login.cloud.camunda.io/oauth/token
 ```
