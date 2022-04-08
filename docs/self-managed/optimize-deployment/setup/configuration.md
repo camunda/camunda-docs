@@ -155,6 +155,7 @@ the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
 |--- |--- |--- |
 |api.accessToken|null|Secret static shared token to be provided to the secured REST API in the authorization header. Will be ignored if `api.jwtSetUri` is also set. |
 |api.jwtSetUri|null|Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`|
+|api.audience|optimize|Optimize tries to match this with the `aud` field contained in the JWT token. Only used when `jwtSetUri` is set.|
 
 ### Container
 
