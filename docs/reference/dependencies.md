@@ -1,11 +1,11 @@
 ---
 id: dependencies
 title: "Dependencies"
-description: "Dependencies and Third Party Libraries for all the components of Camunda Cloud"
+description: "Dependencies and Third Party Libraries for all the components of Camunda Platform 8"
 keywords: ["dependencies", "third party", "third party libraries"]
 ---
 
-A complete list of all dependencies and third-party libraries for all the components of Camunda Cloud (including Self-Managed).
+A complete list of all dependencies and third-party libraries for all the components of Camunda Platform 8 (including Self-Managed).
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -629,7 +629,7 @@ import TabItem from "@theme/TabItem";
 
 :::note
 
-IAM is only available for Camunda Cloud Self-Managed at this time.
+IAM is only available for Camunda Platform 8 Self-Managed at this time.
 
 :::
 

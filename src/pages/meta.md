@@ -72,6 +72,6 @@ In those instances, big or small, we want to make sure you can see what works wi
 
 `<span class="badge badge--platform">Camunda Platform 7 only</span>`
 
-<span class="badge badge--cloud">Camunda Cloud only</span>
+<span class="badge badge--cloud">Camunda Platform 8 only</span>
 
-`<span class="badge badge--cloud">Camunda Cloud only</span>`
+`<span class="badge badge--cloud">Camunda Platform 8 only</span>`

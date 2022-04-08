@@ -17,4 +17,4 @@ Identity is the component within the Camunda Cloud stack responsible for authent
 
 ### Next steps
 
-If you're new to Identity, we suggest reviewing [Step 1: Set up environment](../getting-started/docker/setup-environment/) to get started.
+If you're new to Identity, we suggest reviewing our [Getting Started Guide](../getting-started/).

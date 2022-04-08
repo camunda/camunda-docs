@@ -4,7 +4,9 @@ title: "Processes"
 description: "Processes are flowchart-like blueprints that define the orchestration of tasks."
 ---
 
-Processes are flowchart-like blueprints that define the orchestration of **tasks**. 
+Processes are flowchart-like blueprints that define the orchestration of **tasks**.
+
+For example, with Camunda you can [orchestrate human tasks](../../guides/getting-started-orchestrate-human-tasks.md).
 
 Every task represents a piece of business logic so the ordered execution produces a meaningful result.
 
@@ -27,6 +29,10 @@ Zeebe uses [BPMN 2.0](http://www.bpmn.org/) to represent processes. BPMN is an i
 Zeebe provides a free and open-source BPMN modeling tool to create BPMN diagrams and configure their technical properties. The modeler is a desktop application based on the [bpmn.io](https://bpmn.io) open-source project.
 
 Desktop Modeler can be [downloaded from GitHub](https://camunda.com/download/modeler/).
+
+:::note
+New to modeling a process using BPMN? Visit our step-by-step introductory guide to [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md).
+:::
 
 ## Sequences
 

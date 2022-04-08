@@ -1,12 +1,12 @@
 ---
 id: licenses
 title: "Licenses"
-description: "Licensing information for components of Camunda Cloud"
+description: "Licensing information for components of Camunda Platform 8"
 ---
 
 ## Licensing
 
-This page contains licensing information for all components of Camunda Cloud.
+This page contains licensing information for all components of Camunda Platform 8.
 
 ### Zeebe
 
@@ -20,9 +20,9 @@ Operate, Tasklist, Identity, and Optimize are licensed to our users and customer
 
 The source code of Desktop Modeler is licensed under the MIT license as stated in the [`LICENSE` file](https://github.com/camunda/camunda-modeler/blob/master/LICENSE) in the root of the source code repository. This file is also shipped as `LICENSE.camunda-modeler.txt` with each modeler distribution.
 
-### Camunda Cloud documentation
+### Camunda Platform 8 documentation
 
-License information for our documentation can be found in the [LICENSE.txt](https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/LICENSE.txt) of the Camunda Cloud documentation repository.
+License information for our documentation can be found in the [LICENSE.txt](https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/LICENSE.txt) of the Camunda Platform 8 documentation repository.
 
 ## Terms & conditions
 
