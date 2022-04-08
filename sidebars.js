@@ -524,6 +524,7 @@ module.exports = {
             "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
             "self-managed/optimize-deployment/rest-api/health-readiness",
             "self-managed/optimize-deployment/rest-api/import-entities",
+            "self-managed/optimize-deployment/rest-api/variable-labeling",
           ],
         },
         "self-managed/optimize-deployment/reimport",
