@@ -26,9 +26,9 @@ For details on supported environments (e.g. Java or Elasticsearch versions), see
 
 You have the following options to run the above components in a self-managed fashion:
 
-- [**Kubernetes**](./kubernetes): We strongly recommend to use a Kubernetes to run Camunda 8 in production. Using Minikube, Kubernetes can also be an interesting environment to run Camunda 8 locally on developer machines.
-- [**Docker**](./docker): You can run the provided Docker images of the components, also in production. For convenience, we provide a Docker Compose configuration to run Camunda 8 on developer machines. Note that the Docker Compose configuration is **not** optimized for production usage, but for local development.
-- [**Local installation**](./local): You can simply run the Java applications on a local or virtual machine if it provides a supported Java Virtual Machine (JVM). This allows to run Camunda on virtual machines or bare metal and gives you big flexibility, however, you have to configure all nuts and bolts for the components to interact correctly yourself. We consider this a last resort. Please note, that Windows/Mac is **NOT** supported for production usage of Zeebe.
+- [**Kubernetes**](./kubernetes): We strongly recommend using Kubernetes to run Camunda 8 in production. Using Minikube, Kubernetes can also be an interesting environment to run Camunda 8 locally on developer machines.
+- [**Docker**](./docker): You can run the provided Docker images of the components, also in production. For your convenience, we provide a Docker Compose configuration to run Camunda 8 on developer machines. Note that the Docker Compose configuration is **not** optimized for production usage, but for local development.
+- [**Local installation**](./local): You can run the Java applications on a local or virtual machine if it provides a supported Java Virtual Machine (JVM). This allows you to run Camunda on virtual machines or bare metal and offers a significant amount of flexibility. However, you will need to configure the details for the components to interact correctly yourself. We consider this a last resort. Note that Windows/Mac is **not** supported for production usage of Zeebe.
 
 We strongly recommend
 

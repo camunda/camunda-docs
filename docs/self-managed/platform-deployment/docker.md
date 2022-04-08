@@ -3,8 +3,7 @@ id: docker
 title: "Docker"
 ---
 
-This page guides you through running Camunda Platform 8 via Docker. 
-
+This page guides you through running Camunda Platform 8 via Docker.
 
 Prerequisites to use Docker:
 
@@ -12,7 +11,6 @@ Prerequisites to use Docker:
   - Linux
   - Windows/MacOS (development only, not supported for production)
 - Docker
-
 
 ## Docker Images
 
@@ -35,7 +33,6 @@ The following ports are exposed:
 - [`8081`](http://localhost:8081/): Tasklist
 
 While the Docker images itself are supported for production usage, the provided [docker-compose.yaml](https://github.com/camunda-cloud/camunda-cloud-get-started/blob/master/docker-compose.yaml) is designed to be used by developers to run an environment locally, it is not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
-
 
 ## Zeebe
 
@@ -74,9 +71,6 @@ Available environment variables:
 - `ZEEBE_LOG_LEVEL` - sets the log level of the Zeebe Logger (default: `info`).
 - `ZEEBE_BROKER_NETWORK_HOST` - sets the host address to bind to instead of the IP of the container.
 - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` - sets the contact points of other brokers in a cluster setup.
-
-
-
 
 ## Operate
 
@@ -239,7 +233,7 @@ Now you can start up Identity:
 docker compose -f /path/to/your/docker-compose.yml up -d
 ```
 
-If exposes a web interface on [localhost:8080](http://localhost:8080/).
+This exposes a web interface on [localhost:8080](http://localhost:8080/).
 
 :::note
 If you are using Docker Compose V1, you can use the command `docker-compose`.
