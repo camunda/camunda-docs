@@ -18,9 +18,7 @@ The following request headers have to be provided with every request:
 
 |Header|Constraints|Value|
 |--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](../../authorization)|
-
-* Only required if not set as a query parameter
+|Authorization|REQUIRED|[Authorization](../../authorization)|
 
 ## Query parameters
 
@@ -28,10 +26,7 @@ The following query parameters have to be provided with every request:
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
-|access_token|REQUIRED*|[Authorization](../../authorization)|
 |collectionId|REQUIRED|The ID of the Collection for which to retrieve the report IDs.|
-
-* Only required if not set as a request header
 
 ## Request body
 
@@ -57,7 +52,10 @@ Possible HTTP response status codes:
 
 Assuming you want to retrieve all report IDs in the collection with the ID `1234` and have configured the accessToken `mySecret`, this is what it would look like:
 
-GET `/api/public/report?collectionId=1234&access_token=mySecret`
+GET `/api/public/report?collectionId=1234`
+
+##### Request header
+`Authorization: Bearer mySecret`
 
 ###### Response
 
