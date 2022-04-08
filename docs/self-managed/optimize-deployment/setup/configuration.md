@@ -254,6 +254,7 @@ if one node fails, Optimize is still able to talk to the cluster.
 |--- |--- |--- |
 |es.connection.timeout|10000|Maximum time without connection to Elasticsearch that Optimize should wait until a timeout triggers.|
 |es.connection.responseConsumerBufferLimitInMb|100|Maximum size of the Elasticsearch response consumer heap buffer. This can be increased to resolve errors from Elasticsearch relating to the entity content being too long|
+|es.connection.pathPrefix||The path prefix under which Elasticsearch is available.|
 |es.connection.nodes[*].host|localhost|The address/hostname under which the Elasticsearch node is available.|
 |es.connection.nodes[*].httpPort|9200|A port number used by Elasticsearch to accept HTTP connections.|
 |es.connection.proxy.enabled|false|Whether an HTTP proxy should be used for requests to Elasticsearch.|

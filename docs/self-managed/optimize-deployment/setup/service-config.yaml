@@ -264,6 +264,8 @@ es:
     # Maximum size of the Elasticsearch response consumer heap buffer. This can be increased to resolve errors
     # from Elasticsearch relating to the entity content being too long
     responseConsumerBufferLimitInMb: 100
+    # The path prefix under which Elasticsearch is available
+    pathPrefix: ''
     # a list of Elasticsearch nodes Optimize can connect to. If you  have built
     # an Elasticsearch cluster with several nodes it is recommended to define
     # several connection points in case one node fails.
