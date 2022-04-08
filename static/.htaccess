@@ -25,10 +25,6 @@ RewriteRule ^docs/components/cloud-console/$ /docs/components/console/ [R=301,L]
 RewriteRule ^docs/components/concepts/what-is-camunda-cloud(.*)$ /docs/components/concepts/what-is-camunda-platform-8$1 [R=301,L]
 RewriteRule ^docs/components/concepts/what-is-camunda-cloud$ /docs/components/concepts/what-is-camunda-platform-8 [R=301,L]
 
-# !!!! FIX THIS BEFORE RELEASE !!!!
-RewriteRule ^docs/self-managed/iam/getting-started(.*)$ /docs/self-managed/overview/[NE,R=301,L]
-RewriteRule ^docs/self-managed/iam/getting-started$ /docs/self-managed/overview/[NE,R=301,L]
-
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/?$ /docs/self-managed/zeebe-deployment/kubernetes/#helm [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites/?$ /docs/self-managed/zeebe-deployment/kubernetes/#prerequisites [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate/?$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist/ [R=301,L]
@@ -114,10 +110,13 @@ RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/
 
 RewriteRule ^docs/self-managed/iam/what-is-iam/(.*)$  /docs/self-managed/identity/what-is-identity/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/getting-started/docker/setup-environment(.*)$  /docs/self-managed/identity/getting-started/index [R=301,L]
-RewriteRule ^docs/self-managed/iam/getting-started/docker/start-iam(.*)$  /docs/self-managed/identity/getting-started/docker/index [R=301,L]
-RewriteRule ^docs/self-managed/iam/getting-started/docker/accessing-the-ui(.*)$  /docs/self-managed/identity/getting-started/docker/index [R=301,L]
 RewriteRule ^docs/self-managed/iam/deployment/configuration-variables/(.*)$  /docs/self-managed/identity/deployment/configuration-variables/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/deployment/making-iam-production-ready/(.*)$  /docs/self-managed/identity/user-guide/making-identity-production-ready/ [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/getting-started/docker/(.*)$ /docs/self-managed/identity/getting-started/index [R=301,L]
+RewriteRule ^docs/self-managed/identity/getting-started/docker$ /docs/self-managed/identity/getting-started/index [R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started/docker/(.*)$ /docs/self-managed/identity/getting-started/index [R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started/docker$ /docs/self-managed/identity/getting-started/index [R=301,L]
 
 # Static resource page for the camunda desktop modeler
 RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
