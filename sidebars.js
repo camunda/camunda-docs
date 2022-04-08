@@ -557,17 +557,8 @@ module.exports = {
       ],
       "Identity": [
         "self-managed/identity/what-is-identity",
+        "self-managed/identity/getting-started/index",
         {
-          "Getting started": [
-            {
-              "Running Identity with Docker": [
-                "self-managed/identity/getting-started/docker/setup-environment",
-                "self-managed/identity/getting-started/docker/starting-the-services",
-                "self-managed/identity/getting-started/docker/logging-in",
-              ]
-            }
-          ],
-        }, {
           "User guide": [
             "self-managed/identity/user-guide/adding-an-application",
             "self-managed/identity/user-guide/adding-an-api",

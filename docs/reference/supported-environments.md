@@ -33,11 +33,12 @@ We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes envi
 
 Requirements for the components can be seen below:
 
-|  | Java Version | Elastic |
+|  | Java version | Other requirements |
 |---|---|---|
 | Zeebe Broker and Gateway | OpenJDK 17+ | Elasticsearch 7.16.x(only if Elastic exporter is used) |
 | Operate | OpenJDK 11+ | Elasticsearch 7.16.x |
 | Tasklist | OpenJDK 11+ | Elasticsearch 7.16.x |
+| Identity | OpenJDK 17+ | Keycloak 16.1.1 |
 | Optimize | OpenJDK 11+ | Elasticsearch 7.8.x - 7.16.x |
 
 :::note Elasticsearch support

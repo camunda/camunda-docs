@@ -155,6 +155,9 @@ If you've already developed user tasks in Zeebe, you can see these on the left p
 To update Tasklist versions, visit the [guide to update Tasklist](../../components/tasklist/userguide/updating-tasklist.md).
 
 
+## Run Identity
+
+A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#identity) instead.
 
 
 ## Run Optimize
