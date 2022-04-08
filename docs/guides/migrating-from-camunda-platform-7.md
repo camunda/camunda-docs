@@ -361,7 +361,7 @@ In both engines, a send task has the same behavior as a service task. A send tas
 
 ### Gateways
 
-Gateways rarely need migration. The relevant configuration is mostly in the expressions on outgoing sequence flows.
+Gateways rarely need migration. The relevant configuration is mostly in the [expressions](../components/concepts/expressions.md) on outgoing sequence flows.
 
 ### Expressions
 

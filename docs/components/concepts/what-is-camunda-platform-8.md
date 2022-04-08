@@ -3,7 +3,7 @@ id: what-is-camunda-platform-8
 title: "What is Camunda Platform 8?"
 ---
 
-Camunda Platform 8 orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](../../guides/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.
+[Camunda Platform 8](https://camunda.io) orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](../../guides/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.
 
 ## What use cases does Camunda Platform 8 have?
 
@@ -27,13 +27,13 @@ For a closer look at other use cases, see the [solutions](https://camunda.com/so
 
 Camunda Platform 8 is designed to operate on a very large scale. To achieve this, it provides:
 
-- Horizontal scalability and no dependence on an external database. [Zeebe](../zeebe/zeebe-overview.md) (the workflow engine inside Camunda Platform 8) writes data directly to the file system on the same servers where it is deployed. Zeebe allows the distribution of processing across a cluster of machines to deliver high throughput.
-- High availability and fault tolerance via a pre-configured replication mechanism, ensuring Camunda Platform 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action.
-- Audit trail as all process-relevant events are written to an append-only log, providing an audit trail and a history of the state of a process.
-- Reactive publish-subscribe interaction model which enables microservices that connect to Camunda Platform 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda Platform 8 both scalable and reactive.
-- Visual processes modeled in ISO-standard BPMN 2.0 and DMN so technical and non-technical stakeholders can collaborate on process design in a widely-used modeling language.
-- Language-agnostic client model makes it possible to build a client in nearly any programming language an organization uses to build microservices.
-- Operational ease-of-use. As a SaaS provider, we take care of all operational details.
+- **Horizontal scalability** and no dependence on an external database; [Zeebe](../zeebe/zeebe-overview.md) (the workflow engine inside Camunda Platform 8) writes data directly to the filesystem on the same servers where it is deployed. Zeebe makes it simple to distribute processing across a cluster of machines to deliver high throughput.
+- **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda Platform 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action.
+- **Audit trail** as all process-relevant events are written to an append-only log, providing an audit trail and a history of the state of a process.
+- **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda Platform 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda Platform 8 resilient, scalable, and reactive.
+- **Visual processes modeled in ISO-standard BPMN 2.0** so technical and non-technical stakeholders can collaborate on process design in a widely-used modeling language.
+- **Language-agnostic client model** makes it possible to build a client in nearly any programming language an organization uses to build microservices.
+- **Operational ease-of-use** as a SaaS provider we take care of all operational details.
 
 ## What are the Camunda Platform 8 components?
 
@@ -89,4 +89,8 @@ The platform and tools are easy to get started with and simple to use in your en
 
 ## Next steps
 
-To request information about Camunda Platform 8 performance and benchmarking, see our [Contact](https://c8.docs.camunda.io/contact/) page or try [Camunda Platform 8](https://camunda.com/get-started).
+* To request information about Camunda Platform 8 performance and benchmarking, see our [Contact](/contact/) page.
+* [Introduction to Camunda Platform 8](../../guides/introduction-to-camunda-cloud.md)
+* [Create a Camunda Platform 8 account](../../guides/getting-started/create-camunda-cloud-account.md)
+* [Migrate from Camunda Platform 7 to Camunda Platform 8](../../guides/migrating-from-camunda-platform-7.md)
+* [Automate a process using BPMN](../../guides/automating-a-process-using-bpmn.md)
