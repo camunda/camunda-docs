@@ -50,7 +50,7 @@ The request body should contain a JSON array of entity definitions to be importe
 
 ## Result
 
-The response contains a list of IDs of the newly created entities in the target system.
+The response contains a list of DTOs that specify the ID and entity type (`report` or `dashboard`) of each newly created entity in the target system.
 
 ## Response codes
 
@@ -110,10 +110,12 @@ Status 200.
 ```
 [
     {
-        "id": "e8ca18b9-e637-45c8-87da-0a2b08b34d6e"
+        "id": "e8ca18b9-e637-45c8-87da-0a2b08b34d6e",
+        "entityType": "dashboard"
     },
     {
-        "id": "290b3425-ba33-4fbb-b20b-a4f236036847"
+        "id": "290b3425-ba33-4fbb-b20b-a4f236036847",
+        "entityType": "report"
     }
 ]
 ```
