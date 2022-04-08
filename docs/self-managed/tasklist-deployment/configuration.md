@@ -110,22 +110,23 @@ Tasklist needs a connection to Zeebe broker to start the import.
 
 ### Settings to connect
 
-Name | Description | Default value
------|-------------|--------------
-camunda.tasklist.zeebe.gatewayAddress | Gateway address point to Zeebe as hostname and port. | localhost:26500
+| Name | Description | Default value |
+| -- | --| -- |
+| camunda.tasklist.zeebe.gatewayAddress | Gateway address that points to Zeebe as hostname and port. | localhost:26500 |
+| camunda.tasklist.zeebe.secure | Connection should be secure via Transport Layer Security (TLS). | false |
+| camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | - |
 
-:::note
-Currently, Tasklist does not support TLS communication with Zeebe.
-:::
+Additionally, visit [Zeebe Secure Client Communication](/docs/self-managed/zeebe-deployment/security/secure-client-communication/) for more details.
 
 ### A snippet from application.yml
 
 ```yaml
 camunda.tasklist:
   zeebe:
-    # Gateway address
+    # Gateway host and port
     gatewayAddress: localhost:26500
 ```
+`
 
 ## Zeebe Elasticsearch exporter
 
