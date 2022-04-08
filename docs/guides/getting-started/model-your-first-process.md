@@ -16,7 +16,7 @@ description: "Use Modeler to design and deploy a process."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In Camunda Cloud, you have two options to design and deploy a process: Web Modeler and [Desktop Modeler](https://camunda.com/download/modeler/).
+In Camunda Platform 8, you have two options to design and deploy a process: Web Modeler and [Desktop Modeler](https://camunda.com/download/modeler/).
 
 <Tabs groupId="modeler" defaultValue="web" values={
 [

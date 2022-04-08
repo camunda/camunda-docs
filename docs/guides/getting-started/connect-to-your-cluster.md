@@ -8,7 +8,7 @@ description: "Let's learn more about installing and communicating with clusters.
 
 ## Prerequisites
 
-- [Camunda Cloud account](create-camunda-cloud-account.md)
+- [Camunda Platform 8 account](create-camunda-cloud-account.md)
 - [Download and install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - Install the appropriate package:
 

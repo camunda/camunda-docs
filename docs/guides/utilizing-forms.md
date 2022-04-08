@@ -14,13 +14,13 @@ If using with Camunda Platform 7, note that the Camunda Forms feature was added 
 
 The Camunda Forms feature allows you to easily design and configure forms. Once configured, they can be connected to a user task or start event to implement a task form in your application.
 
-While you can incorporate Camunda Forms solely within Camunda Cloud, you can also utilize Camunda Forms in Camunda Platform 7. After deploying a diagram with an embedded form, Tasklist imports this form schema and uses it to render the form on every task assigned to it.
+While you can incorporate Camunda Forms solely within Camunda Platform 8, you can also utilize Camunda Forms in Camunda Platform 7. After deploying a diagram with an embedded form, Tasklist imports this form schema and uses it to render the form on every task assigned to it.
 
 ## Quickstart
 
 ### Create new form
 
-To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Desktop Modeler](./components/modeler/about.md) and take the following steps:
+To start building a form, log in to your [Camunda Platform 8](./getting-started/create-camunda-cloud-account.md) account or open [Desktop Modeler](./components/modeler/about.md) and take the following steps:
 
 1. Click on the **Modeler** tab at the top of the page or alternatively open the **File** menu in Desktop Modeler.
 2. Open any project from your Web Modeler home view.
@@ -50,7 +50,7 @@ Refer to the [Camunda Forms reference material](../components/modeler/forms/camu
 
 ### Save your form
 
-To save your form in Camunda Cloud, you don't have to do anything. Web Modeler will autosave every change you make.
+To save your form in Camunda Platform 8, you don't have to do anything. Web Modeler will autosave every change you make.
 
 To save your form in Camunda Platform 7, click **File > Save File As...** in the top-level menu. Select a location on your file system to store the form as `.form` file. You can load that file again by clicking **File > Open File...**.
 
