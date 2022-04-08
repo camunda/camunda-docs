@@ -119,7 +119,7 @@ RewriteRule ^docs/self-managed/iam/deployment/making-iam-production-ready/(.*)$ 
 RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
-RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg|graphqls))/$ /$1 [R=301,L]
+RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg|graphqls|diff))/$ /$1 [R=301,L]
 
 # Replaced deprecated java-client/testing page with java-client/zeebe-process-test page
 RewriteRule ^docs/apis-clients/java-client/testing(.*)$ /docs/apis-clients/java-client/zeebe-process-test$1 [R=301,L]
