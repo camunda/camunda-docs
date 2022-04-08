@@ -20,19 +20,11 @@ The following request headers have to be provided with every request:
 
 |Header|Constraints|Value|
 |--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](../../authorization)|
-
-* Only required if not set as a query parameter
+|Authorization|REQUIRED|[Authorization](../../authorization)|
 
 ## Query parameters
 
-The following query parameters have to be provided with every request:
-
-|Parameter|Constraints|Value|
-|--- |--- |--- |
-|access_token|REQUIRED*|See [Authorization](../../authorization)|
-
-* Only required if not set as a request header
+No query parameters available.
 
 ## Request body
 
@@ -59,9 +51,12 @@ Possible HTTP response status codes:
 
 Assuming you want to export the two reports with IDs `123` and `456` and have configured the accessToken `mySecret`, this is what it would look like:
 
-POST `/api/public/export/report/definition/json?access_token=mySecret`
+POST `/api/public/export/report/definition/json`
 
-with request body:
+##### Request header
+`Authorization: Bearer mySecret`
+
+##### Request body
 
 ```
 [ "123", "456" ]

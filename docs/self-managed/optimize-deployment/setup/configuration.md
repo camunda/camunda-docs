@@ -146,11 +146,15 @@ These values control mechanisms of Optimize related security, e.g. security head
 
 ### Public API
 
-This section focuses on common properties related to the Public REST API of Optimize.
+This section focuses on common properties related to the Public REST API of Optimize. It is 
+mandatory to configure one of the values below if the Public REST API is to be used. If neither is 
+configured an error will be thrown and all requests to the Public API will get rejected. If both are configured then 
+the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|api.accessToken|null|Secret token to be provided to the secured REST API on access. If set to `null` an error will be thrown and requests will get rejected.<br /><br />It is mandatory to configure a value if the majority of Public REST API is to be used.|
+|api.accessToken|null|Secret static shared token to be provided to the secured REST API in the authorization header. Will be ignored if `api.jwtSetUri` is also set. |
+|api.jwtSetUri|null|Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`|
 
 ### Container
 

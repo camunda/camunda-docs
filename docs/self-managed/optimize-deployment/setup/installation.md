@@ -116,11 +116,20 @@ Furthermore, there are also environment variables specific to the [event-based p
 - `OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED`: Determines whether this instance of Optimize should convert historical data to event data usable for event-based processes (default: `false`)
 - `OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS`: An array of user ids that are authorized to administer event-based processes (default: `[]`)
 - `OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED`: Determines whether this Optimize instance performs event-based process instance import. (default: `false`)
-- `OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN`: Secret token to be provided on the [Ingestion REST API](../../rest-api/event-ingestion) when ingesting data.
 
 Additionally, there are also runtime related environment variables such as:
 
 - `OPTIMIZE_JAVA_OPTS`: Allows you to configure/overwrite Java Virtual Machine (JVM) parameters; defaults to `-Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m`.
+
+In case you want to make use of the Optimize Public API, you can also set ONE of the following variables:
+
+- `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` Complete URI to get public keys for JWT 
+  validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`. For more details see [Public API 
+  Authorization](../../rest-api/authorization)
+- `OPTIMIZE_API_ACCESS_TOKEN` Secret static shared token to be provided to the secured REST API on access in the 
+  authorization header. Will
+  be ignored if `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` is also set. For more details see [Public API
+  Authorization](../../rest-api/authorization)
 
 You can also adjust logging levels using environment variables as described in the [logging configuration](../configuration#logging).
 

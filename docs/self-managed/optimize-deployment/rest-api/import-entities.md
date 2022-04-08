@@ -29,9 +29,7 @@ The following request headers have to be provided with every request:
 
 |Header|Constraints|Value|
 |--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](../authorization)|
-
-- Only required if not set as a query parameter
+|Authorization|REQUIRED|[Authorization](../authorization)|
 
 ## Query parameters
 
@@ -39,10 +37,7 @@ The following query parameters have to be provided with every request:
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
-|access_token|REQUIRED*|[Authorization](../authorization)|
 |collectionId|REQUIRED|The ID of the collection for which to retrieve the report IDs.|
-
-- Only required if not set as a request header
 
 ## Request body
 
@@ -70,9 +65,12 @@ Possible HTTP response status codes:
 
 Assuming you want to import a report and a dashboard into the collection with ID `123`, this is what it would look like:
 
-POST `/api/public/import?collectionId=123&access_token=mySecret`
+POST `/api/public/import?collectionId=123`
 
-With the following request body:
+##### Request header
+`Authorization: Bearer mySecret`
+
+##### Request body
 
 ```
 [
