@@ -38,7 +38,7 @@ Requirements for the components can be seen below:
 | Zeebe Broker and Gateway | OpenJDK 17+ | Elasticsearch 7.16.x(only if Elastic exporter is used) |
 | Operate | OpenJDK 11+ | Elasticsearch 7.16.x |
 | Tasklist | OpenJDK 11+ | Elasticsearch 7.16.x |
-| Optimize | OpenJDK 11+ | Elasticsearch 7.8.x - 7.16.x |
+| Optimize | OpenJDK 11+ | Elasticsearch 7.10.x - 7.16.x |
 
 :::note Elasticsearch support
 [Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Camunda Platform 8. 
