@@ -121,15 +121,12 @@ Additionally, there are also runtime related environment variables such as:
 
 - `OPTIMIZE_JAVA_OPTS`: Allows you to configure/overwrite Java Virtual Machine (JVM) parameters; defaults to `-Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m`.
 
-In case you want to make use of the Optimize Public API, you can also set ONE of the following variables:
+In case you want to make use of the Optimize Public API, you can also set **one** of the following variables:
 
-- `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` Complete URI to get public keys for JWT 
-  validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`. For more details see [Public API 
-  Authorization](../../rest-api/authorization)
-- `OPTIMIZE_API_ACCESS_TOKEN` Secret static shared token to be provided to the secured REST API on access in the 
-  authorization header. Will
+- `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`. For more details see [Public API Authorization](../../rest-api/authorization).
+- `OPTIMIZE_API_ACCESS_TOKEN` Secret static shared token to be provided to the secured REST API on access in the authorization header. Will
   be ignored if `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` is also set. For more details see [Public API
-  Authorization](../../rest-api/authorization)
+  Authorization](../../rest-api/authorization).
 
 You can also adjust logging levels using environment variables as described in the [logging configuration](../configuration#logging).
 

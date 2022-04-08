@@ -1,34 +1,36 @@
 ---
 id: enable-sharing
-title: "Enable Sharing"
+title: "Enable sharing"
 description: "The REST API to enable sharing"
 ---
 
 ## Purpose
 
-This API allows users to enable the sharing functionality for all reports and dashboards in Optimize. Please note that this setting will be permanently persisted in memory and will take precedence over any other previous configurations (e.g. configuration files). If sharing had been previously enabled and then disabled, re-enabling sharing will allow users to access previously shared URLs under the same address as before. Calling this endpoint when sharing is already enabled will have no effect.
+This API allows users to enable the sharing functionality for all reports and dashboards in Optimize. Note that this setting will be permanently persisted in memory and will take precedence over any other previous configurations (e.g. configuration files).
 
-## Method & HTTP Target Resource
+If sharing had been previously enabled and then disabled, re-enabling sharing will allow users to access previously shared URLs under the same address as before. Calling this endpoint when sharing is already enabled will have no effect.
+
+## Method & HTTP target resource
 
 POST `api/public/share/enable`
 
-## Request Headers
+## Request headers
 
-The following request headers have to be provided with every request:
+The following request headers must be provided with every request:
 
 |Header|Constraints|Value|
 |--- |--- |--- |
 |Authorization|REQUIRED|See [Authorization](../../authorization)|
 
-## Query Parameters
+## Query parameters
 
 No query parameters necessary.
 
-## Request Body
+## Request body
 
 An empty request body should be sent.
 
-## Response Codes
+## Response codes
 
 Possible HTTP Response Status codes:
 
@@ -44,14 +46,15 @@ Possible HTTP Response Status codes:
 
 POST `api/public/share/enable`
 
-##### Request header
+#### Request header
+
 `Authorization: Bearer mySecret`
 
-##### Response
+#### Response
 
 Status 204 (Successful)
 
-##### Response Content
+#### Response content
 
 ```
 no content

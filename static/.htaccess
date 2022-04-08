@@ -154,3 +154,5 @@ AddType text/vnd.yaml   yaml
 AddType text/xml        bpmn
 # Add graphql scheme mime type
 AddType text/plain      graphqls
+# Add diff mime type
+AddType text/plain      diff

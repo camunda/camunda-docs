@@ -25,7 +25,7 @@ In particular, the Optimize Event Ingestion REST API is a CloudEvents consumer i
 
 ## Authorization
 
-As required by the [CloudEvents HTTP 1.1 Web Hooks for Event Delivery - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#3-authorization) specification, every [Event Ingestion REST API Request](#method-and-http-target-resource) needs to include an authorization token as a [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header.
+As required by the [CloudEvents HTTP 1.1 Web Hooks for Event Delivery - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#3-authorization) specification, every [Event Ingestion REST API Request](#method-and-http-target-resource) needs to include an authorization token as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header.
 
 Details on how to configure and pass this token can be found [here](../authorization).
 
@@ -105,9 +105,10 @@ Possible HTTP response status codes:
 POST `/api/ingestion/event/batch`
 
 ##### Request header
+
 `Authorization: Bearer mySecret`
 
-##### Request Body:
+##### Request body
 
      [
        {

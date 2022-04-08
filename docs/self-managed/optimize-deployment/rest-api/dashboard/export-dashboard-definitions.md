@@ -53,20 +53,21 @@ Assuming you want to export the two dashboards with IDs `123` and `456` and have
 
 POST `/api/public/export/dashboard/definition/json`
 
-##### Request header
+#### Request header
+
 `Authorization: Bearer mySecret`
 
-##### Request body:
+#### Request body
 
 ```
 [ "123", "456" ]
 ```
 
-##### Response
+#### Response
 
 Status 200.
 
-##### Response content
+#### Response content
 
 The response contains the two exported dashboard definitions as well as all three process reports contained within the two dashboards.
 

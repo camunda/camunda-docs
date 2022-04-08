@@ -1,36 +1,36 @@
 ---
 id: disable-sharing
-title: "Disable Sharing"
+title: "Disable sharing"
 description: "The REST API to disable sharing"
 ---
 
 ## Purpose
 
-This API allows users to disable the sharing functionality for all reports and dashboards in Optimize. Please note that this setting will be permanently persisted in memory and will take precedence over any other previous configurations  (e.g. configuration files).
+This API allows users to disable the sharing functionality for all reports and dashboards in Optimize. Note that this setting will be permanently persisted in memory and will take precedence over any other previous configurations (e.g. configuration files).
 
 When sharing is disabled, previously shared URLs will no longer be accessible. Upon re-enabling sharing, the previously shared URLs will work once again under the same address as before. Calling this endpoint when sharing is already disabled will have no effect.
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 POST `api/public/share/disable`
 
-## Request Headers
+## Request headers
 
-The following request headers have to be provided with every request:
+The following request headers must be provided with every request:
 
 |Header|Constraints|Value|
 |--- |--- |--- |
 |Authorization|REQUIRED|See [Authorization](../../authorization)|
 
-## Query Parameters
+## Query parameters
 
 No query parameters necessary.
 
-## Request Body
+## Request body
 
 An empty request body should be sent.
 
-## Response Codes
+## Response codes
 
 Possible HTTP Response Status codes:
 
@@ -46,14 +46,15 @@ Possible HTTP Response Status codes:
 
 POST `api/public/share/disable`
 
-##### Request header
+#### Request header
+
 `Authorization: Bearer mySecret`
 
-##### Response
+#### Response
 
 Status 204 (Successful)
 
-##### Response Content
+#### Response content
 
 ```
 no content

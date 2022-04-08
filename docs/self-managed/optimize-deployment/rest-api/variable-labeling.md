@@ -1,41 +1,39 @@
 ---
 id: variable-labeling
-title: "Variable Labeling"
-description: "The REST API to create, update and delete variable labels in Optimize."
+title: "Variable labeling"
+description: "The REST API to create, update, and delete variable labels in Optimize."
 ---
 
 ## Purpose
 
-With the variable labeling endpoint, variable labels can be added, updated and deleted from Optimize.  
+With the variable labeling endpoint, variable labels can be added, updated, and deleted from Optimize.  
 
 ## Functionality
 
-The variable labeling API allows users to add, update and delete batches of variable label data, which Optimize stores in a dedicated
-index. All variable label data includes a reference to the process definition each variable belongs to, which allows Optimize to display 
-a variable's label instead of its original name, anywhere the given process definition is being used. Some examples of that would be 
-in reports, configuring filters, report grouping, dashboard filters and Event Based Processes.
+The variable labeling API allows users to add, update, and delete batches of variable label data, which Optimize stores in a dedicated
+index. All variable label data includes a reference to the process definition each variable belongs to, which allows Optimize to display a variable's label instead of its original name anywhere the given process definition is being used. Some examples of that would be in reports, configuring filters, report grouping, dashboard filters, and event-based processes.
 
 ## Limitations
 
-Please note that this feature is currently not supported in outlier analysis. This means that during Outlier Analysis, the original name of a variable will be displayed.
+Note that this feature is currently not supported in outlier analysis. This means that during outlier analysis, the original name of a variable will be displayed.
 
 ## Authorization
 
 Every request requires [Authorization](../authorization).
 
-## Method & HTTP Target Resource
+## Method & HTTP target resource
 
 POST `/api/public/variables/labels`
 
-## Request Headers
+## Request headers
 
-The following request headers have to be provided with every variable labeling request:
+The following request headers must be provided with every variable labeling request:
 
 |Header|Constraints|Value|
 |--- |--- |--- |
 |Authorization|REQUIRED*|[Authorization](../authorization)|
 
-## Request Body
+## Request body
 
 The request body should contain a reference to the process definition using its key, as well as an array of variable labels. Each variable label object in the array must specify the name and type of the variable for which a label is being added, as well as the value of the label itself.
 
@@ -43,7 +41,7 @@ The request body should contain a reference to the process definition using its 
 
 This method returns no content.
 
-## Response Codes
+## Response codes
 
 Possible HTTP Response Status codes:
 
@@ -52,14 +50,18 @@ Possible HTTP Response Status codes:
 |204|Request successful.|
 |400|Returned if some of the properties in the request body are invalid or missing.|
 |401|Secret incorrect or missing. See [Authorization](#authorization) on how to authorize.|
-|404|The process definition with the given definition key doesnt exist.|
+|404|The process definition with the given definition key doesn't exist.|
 
 ## Example 1
 
 Insert three labels for three variable for a given process definition
-**Note**: If the label exists already in the index, then its value will be overridden.
+
+:::note
+If the label exists already in the index, its value will be overridden.
+:::
 
 ### Request
+
 POST `/api/public/variables/labels`
 
 Request Body:
@@ -91,13 +93,13 @@ Request Body:
 
 Status 204.
 
-
 ## Example 2
 
 Delete a label for a variable belonging to a given process definition by inputting an empty
-String for its value. If there is no label for the given variable in Elasticsearch then no operation is being conducted.
+string for its value. If there is no label for the given variable in Elasticsearch, no operation is being conducted.
 
 ### Request
+
 POST `/api/public/variables/labels`
 
 Request Body:
@@ -124,6 +126,7 @@ Status 204.
 Insert and delete labels for two variables belonging to a given process definition. The following example adds a label for the variable with name **bookAvailable** and deletes a label for the variable with name **person.name**.
 
 ### Request
+
 POST `/api/public/variables/labels`
 
 Request Body:
@@ -155,6 +158,7 @@ Status 204.
 Attempting to insert multiple labels for the same variable will result to a 400 response code.
 
 ### Request
+
 POST `/api/public/variables/labels`
 
 Request Body:

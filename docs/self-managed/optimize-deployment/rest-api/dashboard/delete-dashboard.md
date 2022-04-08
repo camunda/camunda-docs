@@ -59,8 +59,10 @@ Let's assume you want to delete a dashboard with the ID `e6c5abb1-6a18-44e7-8480
 
 DELETE `/api/public/dashboard/e6c5aaa1-6a18-44e7-8480-d562d511ba62`
 
-##### Request Header
+#### Request header
+
 `Authorization: Bearer mySecret`
-##### Response
+
+#### Response
 
 Status 204.

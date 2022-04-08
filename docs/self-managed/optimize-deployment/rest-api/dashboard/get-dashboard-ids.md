@@ -54,13 +54,15 @@ Assuming you want to retrieve all dashboard IDs in the collection with the ID `1
 
 GET `/api/public/dashboard?collectionId=1234`
 
-##### Request header
+#### Request header
+
 `Authorization: Bearer mySecret`
-##### Response
+
+#### Response
 
 Status 200.
 
-##### Response content
+#### Response content
 
 ```
 [
