@@ -15,7 +15,6 @@ package-lock.json
 # be removed or moved to the top. #
 # ------------------------------- #
 docs
-hacks
 howtos
 media-src
 product-links.txt
