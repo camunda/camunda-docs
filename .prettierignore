@@ -13,11 +13,7 @@ node_modules
 .prettierignore
 .prettierrc.json
 .vscode
-CONTRIBUTING.MD
-LICENSE.txt
-README.md
 blog
-code-of-conduct.md
 docs
 docusaurus.config.js
 hacks
