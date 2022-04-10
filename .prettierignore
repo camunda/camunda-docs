@@ -16,7 +16,6 @@ node_modules
 CONTRIBUTING.MD
 LICENSE.txt
 README.md
-babel.config.js
 blog
 code-of-conduct.md
 docs
