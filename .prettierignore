@@ -14,7 +14,6 @@ package-lock.json
 # adoption. These should either   #
 # be removed or moved to the top. #
 # ------------------------------- #
-.github
 blog
 docs
 hacks
