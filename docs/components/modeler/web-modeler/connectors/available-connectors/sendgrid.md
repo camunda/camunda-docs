@@ -55,7 +55,7 @@ To create an API Key in Sendgrid follow the next steps:
 
 ### Create a new Connector Secret
 
-We advise you to keep your API Key safe and avoid exporing it in the BPMN xml file by creating a secret:
+We advise you to keep your API Key safe and avoid exposing it in the BPMN xml file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../../../console/manage-clusters/manage-secrets.md)
 2. Name your secret `SEND_GRID_API_KEY` so you can easily reference it later in our Connector
@@ -80,7 +80,7 @@ To use this Connector follow the steps below:
 
 Alternatively, you can directly create a **Sendgrid Email Connector** by using the append menu:
 
-![create sendgrid connector append](../img/connectors-sendgrid-create-task-append.png)
+![create sendgrid connector append](../img/connectors-create-task-append.png)
 
 #### Make your SendGrid Email Connector executable
 
@@ -158,7 +158,7 @@ To use this Connector follow the steps below:
 
 Alternatively, you can directly create a **Sendgrid Email Template Connector** by using the append menu:
 
-![create sendgrid template connector append](../img/connectors-sendgrid-create-task-append.png)
+![create sendgrid template connector append](../img/connectors-create-task-append.png)
 
 #### Make your SendGrid Email Template Connector executable
 
