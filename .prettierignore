@@ -15,16 +15,13 @@ node_modules
 .vscode
 blog
 docs
-docusaurus.config.js
 hacks
 howtos
 media-src
 package-lock.json
 package.json
 product-links.txt
-sidebars.js
 src
 static
 versioned_docs
 versioned_sidebars
-versions.json
