@@ -1,0 +1,35 @@
+# Ignore dependencies
+node_modules
+
+# -------- To be removed -------- #
+# Ignore while prettier is being  #
+# enabled to assist gradual       #
+# adoption. These should either   #
+# be removed or moved to the top. #
+# ------------------------------- #
+.git
+.github
+.gitignore
+.prettierignore
+.prettierrc.json
+.vscode
+CONTRIBUTING.MD
+LICENSE.txt
+README.md
+babel.config.js
+blog
+code-of-conduct.md
+docs
+docusaurus.config.js
+hacks
+howtos
+media-src
+package-lock.json
+package.json
+product-links.txt
+sidebars.js
+src
+static
+versioned_docs
+versioned_sidebars
+versions.json
