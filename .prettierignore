@@ -1,5 +1,6 @@
 # Ignore dependencies
 node_modules
+package-lock.json
 
 # -------- To be removed -------- #
 # Ignore while prettier is being  #
@@ -10,16 +11,12 @@ node_modules
 .git
 .github
 .gitignore
-.prettierignore
-.prettierrc.json
 .vscode
 blog
 docs
 hacks
 howtos
 media-src
-package-lock.json
-package.json
 product-links.txt
 src
 static
