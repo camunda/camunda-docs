@@ -5,6 +5,9 @@ package-lock.json
 # Ignore files managed by Git
 .git
 
+# Ignore files managed by VSCode
+.vscode
+
 # -------- To be removed -------- #
 # Ignore while prettier is being  #
 # enabled to assist gradual       #
@@ -12,7 +15,6 @@ package-lock.json
 # be removed or moved to the top. #
 # ------------------------------- #
 .github
-.vscode
 blog
 docs
 hacks
