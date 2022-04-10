@@ -2,15 +2,16 @@
 node_modules
 package-lock.json
 
+# Ignore files managed by Git
+.git
+
 # -------- To be removed -------- #
 # Ignore while prettier is being  #
 # enabled to assist gradual       #
 # adoption. These should either   #
 # be removed or moved to the top. #
 # ------------------------------- #
-.git
 .github
-.gitignore
 .vscode
 blog
 docs
