@@ -115,7 +115,7 @@ You can provide a body for your request under the **Payload** section in the **R
 Be aware that **REST connector** is supporting only JSON payload.
 
 ```json
-{
+= {
      "temp": 25,
      "pressure": 1013,
      "humidity": 44,
@@ -149,3 +149,8 @@ You can choose to map the content of your **response** in a **Result Variable** 
 ![rest connector http response mapping](../img/connectors-rest-http-response-mapping.png)
 
 The next steps in your process will have access to the **currentWeather** variable that will contain the mapped keys: `actual_temp`, `feel_temp`, and `weather`.
+
+
+:::note
+Now you can simply [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors the run-time is available out of the box in Camunda 8 SaaS.
+:::
