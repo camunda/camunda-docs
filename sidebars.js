@@ -66,6 +66,8 @@ module.exports = {
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/manage-secrets",
+
           ],
         },
         {
@@ -94,6 +96,19 @@ module.exports = {
             "components/modeler/web-modeler/collaboration",
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
+            {
+              "Connectors": [
+                "components/modeler/web-modeler/connectors/index",
+                "components/modeler/web-modeler/connectors/use-connectors",
+                {
+                  "Available Connectors": [
+                    "components/modeler/web-modeler/connectors/available-connectors/index",
+                    "components/modeler/web-modeler/connectors/available-connectors/rest",
+                    "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
+                  ]
+                }
+              ]
+            }
           ],
         },
         {

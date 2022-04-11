@@ -122,7 +122,7 @@ module.exports = {
           items: [
             {
               label: "Slack",
-              href: "https://zeebe-slack-invite.herokuapp.com/",
+              href: "https://camunda-slack-invite.herokuapp.com/",
             },
             {
               label: "Twitter",
