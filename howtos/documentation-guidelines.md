@@ -20,6 +20,8 @@ All changes have to be done in a separate Branch. As soon as the changes are don
 2. Update `sidebars.js` to fit the new location.
 3. Add a redirect/rewrite rule to the top of `.htaccess`.
 
+The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
+
 ## Review Process
 
 After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
