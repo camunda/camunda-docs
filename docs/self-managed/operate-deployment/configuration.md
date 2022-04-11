@@ -65,7 +65,7 @@ Operate requires the following settings to validate the token:
 
 __Example:__
 1. Obtain a token to access the REST API.
-You need `client_id`, `client_secret`, `audience`, and the URL of the authorization server. For more information on how to get these for Camunda Cloud, look
+You need `client_id`, `client_secret`, `audience`, and the URL of the authorization server. For more information on how to get these for Camunda Platform 8, look
 at [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
 
 ```shell

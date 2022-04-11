@@ -8,7 +8,7 @@ Please refer to the [Installation Guide](/docs/self-managed/platform-deployment/
 
 Within this section you will find detailed information about 
 
-- [Configuration](configuration/configuration.md) - Explains the configuration options. These configuration options apply to both environments, but not to Camunda Cloud. In Camunda Cloud, the configuration is provided for you.
+- [Configuration](configuration/configuration.md) - Explains the configuration options. These configuration options apply to both environments, but not to Camunda Platform 8. In Camunda Platform 8, the configuration is provided for you.
 - [Security](security/security.md) - Discusses the security aspects of running Zeebe and how to use them.
 - [Operation](operations/index.md) - Outlines topics that become relevant when you want to operate Zeebe in production.
 
