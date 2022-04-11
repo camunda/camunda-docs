@@ -167,7 +167,7 @@ When you run your application in for example NodeJS or C#, you exchange one remo
 
 ### Plugins
 
-[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda Platform 8, as such plugins can massively change the behavior or even harm the stabilty of the engine. Some use cases might be implemented using [exporters](../../components/zeebe/technical-concepts/exporters). Note that exporters are only available for self-managed Zeebe clusters and not in Camunda Platform 8 SaaS.
+[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda Platform 8, as such plugins can massively change the behavior or even harm the stabilty of the engine. Some use cases might be implemented using [exporters](/self-managed/concepts/exporters.md). Note that exporters are only available for self-managed Zeebe clusters and not in Camunda Platform 8 SaaS.
 
 Migrating **Modeler Plugins** is generally possible, as the same modeler infrastructure is used. 
 

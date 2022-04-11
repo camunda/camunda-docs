@@ -191,7 +191,6 @@ module.exports = {
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",
             "components/zeebe/technical-concepts/protocols",
-            "components/zeebe/technical-concepts/exporters",
           ],
         },
         {
@@ -412,7 +411,8 @@ module.exports = {
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ]
-        }
+        },
+        "self-managed/concepts/exporters",
       ],
     },
     {

@@ -12,7 +12,7 @@ Exporters are not available in Camunda Platform 8 Software-as-a-Service (SaaS).
 
 :::
 
-![record-stream](assets/exporters-stream.png)
+![record-stream](img/exporters-stream.png)
 
 While the clients provide no way to inspect this stream directly, Zeebe can load
 and configure user code that can process each record in the form of an exporter.

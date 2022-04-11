@@ -13,6 +13,5 @@ This section gives an overview of Zeebe's underlying technical concepts.
 - [Internal processing](internal-processing.md) - Explains the basics of Zeebe's event processing.
 - [Process lifecycles](process-lifecycles.md) - Expands on the event processing concept and goes into more detail regarding the lifecycles of selected process elements.
 - [Protocols](protocols.md) - Explains how external clients communicate with Zeebe.
-- [Exporters](exporters.md) - Discusses the extension point to add additional processing logic for each record in the event stream.
 
 In addition to these sections, you may also be interested in our [Best Practices](././components/best-practices/overview.md).
