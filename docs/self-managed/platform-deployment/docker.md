@@ -31,9 +31,9 @@ The following ports are exposed:
 - `26500`: Zeebe Gateway API (for connecting with API clients,  `zbctl` or Camunda Modeler)
 - [`8081`](http://localhost:8081/): Operate
 - [`8082`](http://localhost:8082/): Tasklist
-- `26500`: Zeebe Gateway API
-- [`8080`](http://localhost:8080/): Operate
-- [`8081`](http://localhost:8081/): Tasklist
+- [`8083`](http://localhost:8083/): Optimize
+- [`8084`](http://localhost:8084/): Identity
+- [`18080`](http://localhost:18080/): Keycloak
 
 While the Docker images themselves are supported for production usage, the provided [docker-compose.yaml](https://github.com/camunda-cloud/camunda-cloud-get-started/blob/master/docker-compose.yaml) is designed to be used by developers to run an environment locally, it is not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
 
