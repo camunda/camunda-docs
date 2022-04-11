@@ -74,7 +74,7 @@ You can develop process solutions as decribed with Java above also in any other 
 
 You can also run Camunda Cloud self-managed on your own Kubernetes cluster. Details can be found in the [docs](/docs/self-managed/overview).
 
-While there [exists a Docker Compose configuration](/docs/self-managed/zeebe-deployment/docker/install/) to run Camunda Cload locally, this is not meant to be used for production, but rather to quickly startup compenents on a developer machine to be able to play around.
+While there [exists a Docker Compose configuration](/self-managed/zeebe-deployment/docker/install.md) to run Camunda Cload locally, this is not meant to be used for production, but rather to quickly startup compenents on a developer machine to be able to play around.
 
 
 ### Modeling for executable processes
