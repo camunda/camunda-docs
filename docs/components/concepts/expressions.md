@@ -6,6 +6,8 @@ description: "Expressions can be used to access variables and calculate values d
 
 Expressions can be used to access variables and calculate values dynamically.
 
+This is particularly useful when [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md) and [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md).
+
 The following attributes of BPMN elements *require* an expression:
 
 - Sequence flow on an exclusive gateway: [condition](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md#conditions)
@@ -45,7 +47,7 @@ An expression is written in **FEEL** (**Friendly Enough Expression Language**). 
 - Simple syntax designed for business professionals and developers
 - Three-valued logic (true, false, null)
 
-Camunda Cloud integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL expressions](/reference/feel/what-is-feel.md).
+Camunda Platform 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL expressions](/components/modeler/feel/what-is-feel.md).
 
 ### Access variables
 
@@ -174,7 +176,7 @@ Any value can be transformed into a string value using the `string()` function.
 // "order-123"
 ```
 
-More functions for string values are available as [built-in string functions](/reference/feel/builtin-functions/feel-built-in-functions-string.md) (e.g. contains, matches, etc.)
+More functions for string values are available as [built-in string functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-string.md) (e.g. contains, matches, etc.)
 
 ### Temporal expressions
 
@@ -336,17 +338,17 @@ contains(string: "foobar", match: "foo")
 
 FEEL defines several built-in functions:
 
-- [Conversion functions](/reference/feel/builtin-functions/feel-built-in-functions-conversion.md)
-- [Boolean functions](/reference/feel/builtin-functions/feel-built-in-functions-boolean.md)
-- [String functions](/reference/feel/builtin-functions/feel-built-in-functions-string.md)
-- [Numeric functions](/reference/feel/builtin-functions/feel-built-in-functions-numeric.md)
-- [List functions](/reference/feel/builtin-functions/feel-built-in-functions-list.md)
-- [Context functions](/reference/feel/builtin-functions/feel-built-in-functions-context.md)
-- [Temporal functions](/reference/feel/builtin-functions/feel-built-in-functions-temporal.md)
+- [Conversion functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md)
+- [Boolean functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean.md)
+- [String functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-string.md)
+- [Numeric functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-numeric.md)
+- [List functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-list.md)
+- [Context functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md)
+- [Temporal functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-temporal.md)
 
 ## Next steps
 
-- [FEEL](/reference/feel/what-is-feel.md)
-- [FEEL data types](/reference/feel/language-guide/feel-data-types.md)
-- [FEEL expressions](/reference/feel/language-guide/feel-expression.md)
+- [FEEL](/components/modeler/feel/what-is-feel.md)
+- [FEEL data types](/components/modeler/feel/language-guide/feel-data-types.md)
+- [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
 - [DMN specification](https://www.omg.org/spec/DMN/About-DMN/)

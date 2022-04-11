@@ -8,10 +8,10 @@ tags:
     - Sizing
 ---
 
-In order to define and size your environment for Camunda Cloud appropriately, you need to understand the factors that influence hardware requirements. Then you can apply this knowledge to select the appropriate Camunda Cloud SaaS hardware package or size your self-managed Kubernetes cluster.
+In order to define and size your environment for Camunda Platform 8 appropriately, you need to understand the factors that influence hardware requirements. Then you can apply this knowledge to select the appropriate Camunda Platform 8 SaaS hardware package or size your self-managed Kubernetes cluster.
 
-:::caution Camunda Cloud only
-This best practice targets Camunda Cloud only! If you are looking at Camunda Plaform, please visit [Sizing your Camunda 7 environment](../sizing-your-environment-c7/).
+:::caution Camunda Platform 8 only
+This best practice targets Camunda Platform 8 only! If you are looking at Camunda Plaform, please visit [Sizing your Camunda 7 environment](../sizing-your-environment-c7/).
 :::
 
 
@@ -61,7 +61,7 @@ Sometimes, looking at peaks might also mean, that you are not looking at all 24 
 
 In some use cases, the cycle time of a process (or sometimes even the cycle time of single tasks) matter. For example, you want to provide a REST endpoint, that starts a process instance to calculate a score for a customer. This process needs to execute four service tasks, but the REST request should return a response synchronously, no later than 250 milliseconds after the request. 
 
-While the cycle time of service tasks depends very much on what you do in these tasks, the overhead of the workflow engine itself can be measured. In an experiment with Camunda Cloud 1.2.4, running all worker code in in the same GCP zone as Camunda Cloud, we measured around 10ms processing time per process node and approximately 50 ms latency to process service tasks in remote workers. Hence, to execute 4 service tasks results in 240 ms workflow engine overhead. 
+While the cycle time of service tasks depends very much on what you do in these tasks, the overhead of the workflow engine itself can be measured. In an experiment with Camunda Platform 8 1.2.4, running all worker code in in the same GCP zone as Camunda Platform 8, we measured around 10ms processing time per process node and approximately 50 ms latency to process service tasks in remote workers. Hence, to execute 4 service tasks results in 240 ms workflow engine overhead. 
 
 The closer you push throughput to the limits, the more latency you will get. This is basically, because the different requests compete for hardware resources, especially disk write operations. As a consequence, whenever cycle time and latency matters to you, you should plan for hardware buffer to not utilize your cluster too much. This makes sure, your latency does not go up because of resource contention. A good rule of thumb is to multiply your average load by 20. This means, you cannot only accomodate unexpected peak loads, but also have more free resources on average, keeping latency down.
 
@@ -81,7 +81,7 @@ Furthermore, data is also sent Operate and Optimize, which store data in Elastic
 
 The data you attach to a process instance (process variables) will influence disk space requirements. For example, it makes a big difference if you only add one or two strings (requiring ~ 1kb of space) to your process instances, or a full JSON document containing 1MB.
 
-Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda Cloud SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
+Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda Platform 8 SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
 
 * Zeebe: 75 kb / PI
 * Operate: 57 kb / PI
@@ -109,13 +109,13 @@ Using your throughput and retention settings, you can now calculate the required
 
 ## Understanding sizing and scalability behavior
 
-Spinning up a Camunda Cloud Cluster means you run multiple components that all need resources in the background, like the Zeebe broker, Elasticsearch (as the database for Operate, Tasklist, and Optimize), Operate, Tasklist, and Optimize. All those components need to be equiped with resources.
+Spinning up a Camunda Platform 8 Cluster means you run multiple components that all need resources in the background, like the Zeebe broker, Elasticsearch (as the database for Operate, Tasklist, and Optimize), Operate, Tasklist, and Optimize. All those components need to be equiped with resources.
 
 All components are clustered to provide high-availability, fault-tolerance and resiliency. 
 
 Zeebe scales horizontally by adding more cluster nodes (pods). This is limited by the so-called partition size of a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your cluster or to have some buffer if your load increases later on. The number of partitions cannot be changed after the cluster was initially provisioned (at least not yet), so elastic scalability of cluster nodes is (not yet) possible.
 
-Camunda Cloud runs on Kubernetes. Every component is operated as a so-called pod, that gets resources assigned. These resources can be vertically scaled (=get more or less hardware resources assigned dynamically) within certain limits. Note that vertically scaling not always results in more throughput, as the various components have dependencies on each other. This is a complex topic and requires running experiments with benchmarks. In general, we recommend to start with the minimalistic hardware package as described below. If you have further requirements, you use this as a starting point to increase resources.
+Camunda Platform 8 runs on Kubernetes. Every component is operated as a so-called pod, that gets resources assigned. These resources can be vertically scaled (=get more or less hardware resources assigned dynamically) within certain limits. Note that vertically scaling not always results in more throughput, as the various components have dependencies on each other. This is a complex topic and requires running experiments with benchmarks. In general, we recommend to start with the minimalistic hardware package as described below. If you have further requirements, you use this as a starting point to increase resources.
 
 Note that Camunda licensing does not depend on the provisioned hardware resources, making it easy to size according to your needs.
 
@@ -129,9 +129,9 @@ First, calculate your requirements using the information provided above, taking 
 
 Now you can select a hardware package that can cover these requirements. In this example this fits well into a cluster of size S.
 
-### Camunda Cloud SaaS
+### Camunda Platform 8 SaaS
 
-Camunda Cloud defines three fixed hardware packages you can select from. The table below gives you an indication what requirements you can fullfill with these. If your requirements are above the mentioned numbers, please contact us to discuss a customized sizing.
+Camunda Platform 8 defines three fixed hardware packages you can select from. The table below gives you an indication what requirements you can fullfill with these. If your requirements are above the mentioned numbers, please contact us to discuss a customized sizing.
 
 | **\***                                       | S                               | M                               | L                                |
 | :------------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
@@ -141,17 +141,17 @@ Camunda Cloud defines three fixed hardware packages you can select from. The tab
 | Max Total Number of Process Instances        | 5.4 M                           | 5.4 M                            |                                  |
 | Approx resources provisioned **\*\***        | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
 
-**\*** The numbers in the table where measured using Camunda Cloud 1.2.4 and [the official benchmark project](https://github.com/camunda-cloud/zeebe/tree/develop/benchmarks). It uses a [ten task process](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/ten_tasks.bpmn). To calculate day-based metrics, a equal distribution over 24 hours is assumed.
+**\*** The numbers in the table where measured using Camunda Platform 8 1.2.4 and [the official benchmark project](https://github.com/camunda-cloud/zeebe/tree/develop/benchmarks). It uses a [ten task process](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/ten_tasks.bpmn). To calculate day-based metrics, a equal distribution over 24 hours is assumed.
 
 
 **\*\***  These are the resource limits configured in the Kubernetes cluster and are always subject to change.
 
 
-### Camunda Cloud self-managed
+### Camunda Platform 8 self-managed
 
-Provisioning Camunda Cloud onto your self-managed Kubernetes cluster might depend on various factors. For example, most customes already have own teams providing Elasticsearch for them as a service. 
+Provisioning Camunda Platform 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customes already have own teams providing Elasticsearch for them as a service. 
 
-However, the following example shows the current configuration of a cluster of size S in Camunda Cloud SaaS, which can serve as a starting point for your own sizing. As you can see in the table above, such a cluster can serve 500,000 process instances / day and store up to 5.4 million process instances (in-flight and history).
+However, the following example shows the current configuration of a cluster of size S in Camunda Platform 8 SaaS, which can serve as a starting point for your own sizing. As you can see in the table above, such a cluster can serve 500,000 process instances / day and store up to 5.4 million process instances (in-flight and history).
 
 |                    |                     | request | limit |
 | ------------------ | ------------------- | ------- | ----- |
@@ -202,7 +202,7 @@ However, the following example shows the current configuration of a cluster of s
 
 ## Planning non-production environments
 
-All clusters can be used for development, testing, integration, Q&A, and production. In Camunda Cloud SaaS, production and test environments are organized via separate organizations within Camunda Cloud to ease the management of clusters, while also minimizing the risk to accidentally accessing a production cluster.
+All clusters can be used for development, testing, integration, Q&A, and production. In Camunda Platform 8 SaaS, production and test environments are organized via separate organizations within Camunda Platform 8 to ease the management of clusters, while also minimizing the risk to accidentally accessing a production cluster.
 
 Note that functional unit tests that are written in Java and use [zeebe-proces-test](https://github.com/camunda-cloud/zeebe-process-test/), will use an in-memory broker in unit tests, so no development cluster is needed for this use case. 
 
@@ -217,9 +217,9 @@ A typical customer set-up consists of:
 * 1 Test cluster 
 * Multiple developer clusters
 
-Ideally, every active developer runs its own cluster, so that the workflow engine does not need to be shared amongst developers. Otherwise clusters are not isolated, which can lead to errors if for example developer A deploys a new version of the same process as developer B. Typically, developer clusters can be deleted when they are no longer used, as no data needs to be kept, so you might not need one cluster per developer that works with Camunda Cloud at some point in time. And using in-memory unit tests further reduces the contention on developer clusters. 
+Ideally, every active developer runs its own cluster, so that the workflow engine does not need to be shared amongst developers. Otherwise clusters are not isolated, which can lead to errors if for example developer A deploys a new version of the same process as developer B. Typically, developer clusters can be deleted when they are no longer used, as no data needs to be kept, so you might not need one cluster per developer that works with Camunda Platform 8 at some point in time. And using in-memory unit tests further reduces the contention on developer clusters. 
 
-However, some customers do share a Camunda Cloud cluster amongst various developers for economic reasons. This can work well if everybody is aware of the problems that can arise.
+However, some customers do share a Camunda Platform 8 cluster amongst various developers for economic reasons. This can work well if everybody is aware of the problems that can arise.
 
 ## Running experiments and benchmarks
 

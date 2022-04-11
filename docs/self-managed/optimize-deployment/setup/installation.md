@@ -14,7 +14,7 @@ Before proceeding with the installation, read the article about [supported envir
 
 ### Prerequisites
 
-If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime](./../../../reference/supported-environments.md/#java-runtime) section on which runtimes are supported.
+If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime](./../../../reference/supported-environments.md) section on which runtimes are supported.
 
 ### Demo Distribution with Elasticsearch
 
@@ -48,7 +48,7 @@ or `elasticsearch-startup.bat` on Windows:
 
 ### Production distribution without Elasticsearch
 
-This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-platform-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
+This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform 7 connection](#camunda-platform-7-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
 
 ```bash
 ./optimize-startup.sh
@@ -73,22 +73,22 @@ Password: ******
 Login Succeeded
 ```
 
-After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-platform-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node, you can use environment variables instead of mounting configuration files into the Docker container:
+After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-platform-7-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node, you can use environment variables instead of mounting configuration files into the Docker container:
 
 #### Getting started with the Optimize docker image
 
 ##### Full local setup
 
-To start the Optimize docker image and connect to an already locally running Camunda Platform as well as Elasticsearch instance you could run the following command:
+To start the Optimize docker image and connect to an already locally running Camunda Platform 7 as well as Elasticsearch instance you could run the following command:
 
 ```
 docker run -d --name optimize --network host \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
-##### Connect to remote Camunda Platform and Elasticsearch
+##### Connect to remote Camunda Platform 7 and Elasticsearch
 
-If, however, your Camunda Platform as well as Elasticsearch instance reside on a different host, you may provide their destination via the corresponding environment variables:
+If, however, your Camunda Platform 7 as well as Elasticsearch instance reside on a different host, you may provide their destination via the corresponding environment variables:
 
 ```
 docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
@@ -102,25 +102,31 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
 
 There is only a limited set of configuration keys exposed via environment variables. These mainly serve the purpose of testing and exploring Optimize. For production configurations, we recommend following the setup in documentation on [configuration using a `environment-config.yaml` file](#configuration-using-a-yaml-file).
 
-The most important environment variables you may have to configure are related to the connection to the Camunda Platform REST API, as well as Elasticsearch:
+The most important environment variables you may have to configure are related to the connection to the Camunda Platform 7 REST API, as well as Elasticsearch:
 
 - `OPTIMIZE_CAMUNDABPM_REST_URL`: The base URL that will be used for connections to the Camunda Engine REST API (default: `http://localhost:8080/engine-rest`)
 - `OPTIMIZE_CAMUNDABPM_WEBAPPS_URL`: The endpoint where to find the Camunda web apps for the given engine (default: `http://localhost:8080/camunda`)
 - `OPTIMIZE_ELASTICSEARCH_HOST`: The address/hostname under which the Elasticsearch node is available (default: `localhost`)
 - `OPTIMIZE_ELASTICSEARCH_HTTP_PORT`: The port number used by Elasticsearch to accept HTTP connections (default: `9200`)
 
-A complete sample can be found within [Connect to remote Camunda Platform and Elasticsearch](#connect-to-remote-camunda-platform-and-elasticsearch).
+A complete sample can be found within [Connect to remote Camunda Platform 7 and Elasticsearch](#connect-to-remote-camunda-platform-7-and-elasticsearch).
 
 Furthermore, there are also environment variables specific to the [event-based process](./../../../components/optimize/userguide/additional-features/event-based-processes.md) feature you may make use of:
 
 - `OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED`: Determines whether this instance of Optimize should convert historical data to event data usable for event-based processes (default: `false`)
 - `OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS`: An array of user ids that are authorized to administer event-based processes (default: `[]`)
 - `OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED`: Determines whether this Optimize instance performs event-based process instance import. (default: `false`)
-- `OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN`: Secret token to be provided on the [Ingestion REST API](../../rest-api/event-ingestion) when ingesting data.
 
 Additionally, there are also runtime related environment variables such as:
 
 - `OPTIMIZE_JAVA_OPTS`: Allows you to configure/overwrite Java Virtual Machine (JVM) parameters; defaults to `-Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m`.
+
+In case you want to make use of the Optimize Public API, you can also set **one** of the following variables:
+
+- `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`. For more details see [Public API Authorization](../../rest-api/authorization).
+- `OPTIMIZE_API_ACCESS_TOKEN` Secret static shared token to be provided to the secured REST API on access in the authorization header. Will
+  be ignored if `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` is also set. For more details see [Public API
+  Authorization](../../rest-api/authorization).
 
 You can also adjust logging levels using environment variables as described in the [logging configuration](../configuration#logging).
 
@@ -152,7 +158,7 @@ In managed Docker container environments like [Kubernetes](https://kubernetes.io
 
 You can start using Optimize right away by opening the following URL in your browser: [http://localhost:8090](http://localhost:8090)
 
-Then, you can use the users from the Camunda Platform to log in to Optimize. For details on how to configure the user access, consult the [user access management](./user-management.md) section.
+Then, you can use the users from the Camunda Platform 7 to log in to Optimize. For details on how to configure the user access, consult the [user access management](./user-management.md) section.
 
 Before you can fully utilize all features of Optimize, you need to wait until all data has been imported. A green circle in the footer indicates when the import is finished.
 
@@ -174,13 +180,13 @@ Refer to the [configuration section on container settings](./configuration.md) f
 
 You can customize the [Elasticsearch connection settings](./configuration.md/#connection-settings) as well as the [index settings](./configuration.md/#index-settings).
 
-#### Camunda Platform configuration
+#### Camunda Platform 7 configuration
 
-To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, refer to the [Camunda Platform configuration section](./configuration.md/#connection-to-camunda-platform).
+To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform 7, refer to the [Camunda Platform 7 configuration section](./configuration.md/#connection-to-camunda-platform-7).
 
 ### Import of the data set
 
-By default, Optimize comes without any data available. To start using all the features of the system, you have to perform a data import from the Camunda Platform. This process is triggered automatically when starting Optimize.
+By default, Optimize comes without any data available. To start using all the features of the system, you have to perform a data import from the Camunda Platform 7. This process is triggered automatically when starting Optimize.
 
 If you are interested in the details of the import, refer to the dedicated [import overview section](./../optimize-explained/import-guide.md).
 
@@ -189,7 +195,7 @@ If you are interested in the details of the import, refer to the dedicated [impo
 We recommend to carefully choose hardware resources that are allocated to the server with Optimize.
 
 Be aware that Optimize is using data structures that are different from data stored
-by the Camunda Platform Engine. The final amount of space on the hard drive required by Optimize will
+by the Camunda Platform 7 engine. The final amount of space on the hard drive required by Optimize will
 depend on your replication settings, but as a rule of thumb, you could expect Optimize to use 30% of the space that
 your relational database is using.
 

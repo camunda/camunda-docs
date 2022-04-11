@@ -4,11 +4,11 @@ title: "CLI client - Getting started guide"
 sidebar_label: "Getting started guide"
 ---
 
-In this tutorial, you will learn to use the CLI client `zbctl` to interact with Camunda Cloud.
+In this tutorial, you will learn to use the CLI client `zbctl` to interact with Camunda Platform 8.
 
 ## Prerequisites
 
-- [Camunda Cloud account](/guides/getting-started/create-camunda-cloud-account.md)
+- [Camunda Platform 8 account](/guides/getting-started/create-camunda-cloud-account.md)
 - [Cluster](/guides/getting-started/create-camunda-cloud-account.md)
 - [Client credentials](/guides/getting-started/setup-client-connection-credentials.md)
 - [Modeler](/guides/getting-started/model-your-first-process.md)
@@ -37,7 +37,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When creating client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
+When creating client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
 
 Alternatively, use the [described flags](https://www.npmjs.com/package/zbctl#usage) (`--address`, `--clientId`, and `--clientSecret`) with the `zbctl` commands.
 
@@ -96,7 +96,7 @@ Use the following conditional expression for the **else** sequence flow:
 Now, you can deploy the [process](./assets/gettingstarted_quickstart_advanced.bpmn). Navigate to the folder where you saved your process.
 
 ```bash
-zbctl deploy gettingstarted_quickstart_advanced.bpmn
+zbctl deploy resource gettingstarted_quickstart_advanced.bpmn
 ```
 
 If the deployment is successful, you'll get the following output:
@@ -104,12 +104,14 @@ If the deployment is successful, you'll get the following output:
 ```bash
 {
   "key": 2251799813685493,
-  "processes": [
+  "deployments": [
     {
-      "bpmnProcessId": "camunda-cloud-quick-start-advanced",
-      "version": 1,
-      "processKey": 2251799813685492,
-      "resourceName": "gettingstarted_quickstart_advanced.bpmn"
+      "process": {
+        "bpmnProcessId": "camunda-cloud-quick-start-advanced",
+        "version": 1,
+        "processKey": 2251799813685492,
+        "resourceName": "gettingstarted_quickstart_advanced.bpmn"
+      }
     }
   ]
 }

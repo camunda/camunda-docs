@@ -1,7 +1,7 @@
 ---
 id: monitor-your-process-in-operate
 title: Monitor your process in Operate
-description: "Camunda Cloud offers Operate to monitor your process instances."
+description: "Camunda Platform 8 offers Operate to monitor your process instances."
 ---
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--short">Time estimate: 8 minutes</span>
@@ -15,7 +15,7 @@ description: "Camunda Cloud offers Operate to monitor your process instances."
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Camunda Cloud offers Operate to monitor your process instances.
+Camunda Platform 8 offers Operate to monitor your process instances.
 
 :::note
 Find an entry point in the cluster details.

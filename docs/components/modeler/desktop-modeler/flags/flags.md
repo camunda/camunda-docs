@@ -33,6 +33,7 @@ Flags passed as command line arguments take precedence over those configured via
 | "disable-adjust-origin"  | false |
 | "disable-cmmn" | true |
 | "disable-dmn" | false |
+| "disable-form" | false |
 | "disable-platform" | false |
 | "disable-zeebe" | false |
 | "disable-remote-interaction" | false |
@@ -48,8 +49,8 @@ To disable the CMMN and DMN editing capabilities of the App, configure your `fla
 
 ```js
 {
-    "disable-cmmn": true,
-    "disable-dmn": true
+    "disable-dmn": true,
+    "disable-form": true
 }
 ```
 
@@ -57,7 +58,7 @@ As a result, the app will only allow users to model BPMN diagrams.
 
 ![BPMN only mode](./img/bpmn-only.png)
 
-### Custom `version-info` label
+### Custom `display-version` label
 
 To display a custom version information in the status bar of the app, configure your `flags.json` like this:
 

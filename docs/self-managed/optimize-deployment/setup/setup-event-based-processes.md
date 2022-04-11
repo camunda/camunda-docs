@@ -8,7 +8,7 @@ description: "Read everything about how to configure event-based processes in Op
 
 Event-based processes are BPMN processes that can be created inside Optimize which are based on events originating from external systems.
 
-Event ingestion is the process of sending event data from external systems to Camunda Optimize to support business processes that are not fully automated with Camunda Platform yet.
+Event ingestion is the process of sending event data from external systems to Camunda Optimize to support business processes that are not fully automated with Camunda Platform 7 yet.
 Based on this data, it is possible to create process models inside Optimize - called event-based processes - that can be used in reports.
 
 To enable this feature, refer to [event-based process configuration](#event-based-process-configuration).
@@ -38,7 +38,7 @@ When Camunda activity events are used in event-based processes, Camunda Admin Au
 Visit [Authorization Management - event-based process](./authorization-management.md/#event-based-processes) for the reasoning behind this behavior.
 :::
 
-To publish event-based processes that include [Camunda Event Sources](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#camunda-events), it is required to set [`engines.${engineAlias}.eventImportEnabled`](../configuration/#connection-to-camunda-platform) to `true` for the connected engine the Camunda process originates from.
+To publish event-based processes that include [Camunda Event Sources](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#camunda-events), it is required to set [`engines.${engineAlias}.eventImportEnabled`](../configuration/#connection-to-camunda-platform-7) to `true` for the connected engine the Camunda process originates from.
 
 :::note Heads Up!
 You need to [reimport data](./../migration-update/instructions.md/#force-reimport-of-engine-data-in-optimize) from this engine to have all historic Camunda events available for event-based processes. Otherwise, only new events will be included.

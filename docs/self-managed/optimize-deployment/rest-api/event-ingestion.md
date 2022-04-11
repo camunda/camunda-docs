@@ -8,7 +8,7 @@ description: "The REST API to ingest external events into Optimize."
 
 ## Purpose
 
-The Event Ingestion REST API ingests business process related event data from any third-party system to Camunda Optimize. These events can then be correlated into an [event-based process](./../../../components/optimize/userguide/additional-features/event-based-processes.md) in Optimize to get business insights into business processes that are not yet fully modeled nor automated using the Camunda Platform.
+The Event Ingestion REST API ingests business process related event data from any third-party system to Camunda Optimize. These events can then be correlated into an [event-based process](./../../../components/optimize/userguide/additional-features/event-based-processes.md) in Optimize to get business insights into business processes that are not yet fully modeled nor automated using Camunda Platform 7.
 
 ## Functionality
 
@@ -25,7 +25,7 @@ In particular, the Optimize Event Ingestion REST API is a CloudEvents consumer i
 
 ## Authorization
 
-As required by the [CloudEvents HTTP 1.1 Web Hooks for Event Delivery - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#3-authorization) specification, every [Event Ingestion REST API request](#method-and-http-target-resource) needs to include an authorization token either as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header, or as a [URI Query Parameter](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#32-uri-query-parameter) named `access_token`.
+As required by the [CloudEvents HTTP 1.1 Web Hooks for Event Delivery - Version 1.0](https://github.com/cloudevents/spec/blob/v1.0/http-webhook.md#3-authorization) specification, every [Event Ingestion REST API Request](#method-and-http-target-resource) needs to include an authorization token as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header.
 
 Details on how to configure and pass this token can be found [here](../authorization).
 
@@ -91,7 +91,7 @@ Possible HTTP response status codes:
 | --- | --- |
 | 204 | Request successful |
 | 400 | Returned if some of the properties in the request body are invalid or missing. |
-| 401 | Secret incorrect or missing in HTTP Header `X-Optimize-API-Secret`. See [Authorization](#authorization) on how to authenticate. |
+| 401 | Secret incorrect or missing in HTTP Header `Authorization`. See [Authorization](#authorization) on how to authenticate. |
 | 403 | The Event Based Process feature is not enabled. |
 | 429 | The maximum number of requests that can be serviced at any time has been reached. The response will include a `Retry-After` HTTP header specifying the recommended number of seconds before the request should be retried. See [Configuration](../../setup/configuration/#event-ingestion-rest-api-configuration) for information on how to configure this limit. |
 | 500 | Some error occurred while processing the ingested event, best check the Optimize log. |
@@ -104,7 +104,11 @@ Possible HTTP response status codes:
 
 POST `/api/ingestion/event/batch`
 
-Request Body:
+##### Request header
+
+`Authorization: Bearer mySecret`
+
+##### Request body
 
      [
        {
@@ -160,7 +164,10 @@ In this example, an additional field `newField` is added to the data block of th
 
 POST `/api/ingestion/event/batch`
 
-Request body:
+##### Request header
+`Authorization: Bearer mySecret`
+
+##### Request Body:
 
      [
        {

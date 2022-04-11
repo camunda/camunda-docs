@@ -4,13 +4,14 @@ title: "Incidents"
 description: "A process instance is stuck at a particular point, and requires user interaction to resolve the problem."
 ---
 
-In Camunda Cloud, an incident represents a problem in process execution. This means a process instance is stuck at a particular point, and requires user interaction to resolve the problem.
+In Camunda Platform 8, an incident represents a problem in process execution. This means a process instance is stuck at a particular point, and requires user interaction to resolve the problem.
 
 Incidents are created in different situations, including the following:
 
 - A job is failed and it has no retries left.
 - An input or output variable mapping can't be applied.
 - A condition can't be evaluated.
+- A decision can't be evaluated.
 
 :::note
 Incidents are not created when an unexpected exception (e.g. `NullPointerException`, `OutOfMemoyError` etc.) occurs.

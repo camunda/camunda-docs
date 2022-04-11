@@ -34,8 +34,8 @@ Run versions *in parallel* for
 
 ### Migrating process instances to a new version
 
-:::caution Camunda Cloud
-Camunda Cloud does not yet support process instance migrations as described here. This feature is currently in development and will be available soon.
+:::caution Camunda Platform 8
+Camunda Platform 8 does not yet support process instance migrations as described here. This feature is currently in development and will be available soon.
 :::
 
 *Migrate* running instances to the newest definition when:
@@ -46,7 +46,7 @@ Camunda Cloud does not yet support process instance migrations as described here
 Migrating process instances can be achieved either programmatically or by using the operations tooling. *Programmatically*, you need to *create a migration plan* that describes how process instances are to be migrated from one process definition to another.
 
 ```java
-// Sample code from Camunda Platform 7.x, this feature is not yet available in Camunda Cloud:
+// Sample code from Camunda Platform 7.x, this feature is not yet available in Camunda Platform 8:
 MigrationPlan migrationPlan = processEngine.getRuntimeService()
   .createMigrationPlan("exampleProcess:1", "exampleProcess:2")
     .mapActivities("assessCreditWorthiness", "assessCreditWorthiness")
@@ -147,8 +147,8 @@ Having said this, we want to emphasize that the engine is perfectly fine with ha
 
 ### Using call activities to influence versioning behaviour of pieces
 
-:::caution Camunda Cloud
-With Camunda Cloud you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/docs/components/modeler/bpmn/call-activities/).
+:::caution Camunda Platform 8
+With Camunda Platform 8 you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/docs/components/modeler/bpmn/call-activities/).
 :::
 
 When calling separately modeled sub processes (i.e. *Call Activities*), the default behavior of the process engine is to call the *latest* deployed version of that sub process. You can change this default 'binding' behavior to call a *specific* version or the version which was *deployed* together with the parent process.

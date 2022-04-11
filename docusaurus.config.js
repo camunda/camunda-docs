@@ -1,6 +1,6 @@
 module.exports = {
-  title: "Camunda Cloud Docs",
-  tagline: "Documentation for all components of Camunda Cloud",
+  title: "Camunda Platform 8",
+  tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
@@ -35,14 +35,21 @@ module.exports = {
   scripts: [
   ],  
   themeConfig: {
+    announcementBar:{
+      id: 'camunda8',
+      content: '<b>📣 Camunda Cloud is now Camunda Platform 8!</b> Learn more about navigating the updated documentation <a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.com/meta">here</a>.',
+      backgroundColor: '#14D890',
+      textColor: '#000',
+      isCloseable: false,
+    },
     prism: {
       additionalLanguages: ['java'],
     },
     navbar: {
-      title: "Camunda Cloud Docs",
+      title: "Camunda Platform 8 Docs",
       logo: {
-        alt: "Camunda Cloud Docs",
-        src: "img/camunda-cloud-gradient.png",
+        alt: "Camunda Platform 8 Docs",
+        src: "img/black-C.png",
       },
       items: [
         {
@@ -115,7 +122,7 @@ module.exports = {
           items: [
             {
               label: "Slack",
-              href: "https://zeebe-slack-invite.herokuapp.com/",
+              href: "https://camunda-slack-invite.herokuapp.com/",
             },
             {
               label: "Twitter",
@@ -131,7 +138,7 @@ module.exports = {
           title: "More",
           items: [
             {
-              label: "Cloud Console",
+              label: "Console",
               href: "https://camunda.io",
             },
             {
@@ -141,6 +148,10 @@ module.exports = {
             {
               label: "Contact",
               to: "contact",
+            },
+            {
+              label: "Meta",
+              to: "meta",
             },
             {
               label: "Blog",

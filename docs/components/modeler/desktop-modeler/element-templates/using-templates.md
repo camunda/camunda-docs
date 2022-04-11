@@ -15,7 +15,7 @@ Clicking the `Catalog` button will bring up a modal menu allowing to browse and 
 
 Applying a template will store it via the `modelerTemplate` property and the optional `modelerTemplateVersion` property on the selected element:
 
-Camunda Platform
+Camunda Platform 7
 
 ```xml
 <bpmn:serviceTask id="MailTask"
@@ -23,7 +23,7 @@ Camunda Platform
   camunda:modelerTemplateVesion="1" />
 ```
 
-Camunda Cloud
+Camunda Platform 8
 
 ```xml
 <bpmn:serviceTask id="MailTask"

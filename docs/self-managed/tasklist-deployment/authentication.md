@@ -7,7 +7,7 @@ description: "Let's take a closer look at the authentication methods of Tasklist
 Tasklist provides two ways to authenticate:
 
 1. User information stored in [Elasticsearch](#user-in-elasticsearch)
-2. [IAM Authentication and Authorization](#iam)
+2. [Identity Authentication and Authorization](#identity)
 
 By default, user storage in Elasticsearch is enabled.
 
@@ -28,44 +28,35 @@ camunda.tasklist:
 
 On Tasklist startup, the user is created if they did not exist before.
 
-By default, two users are created:
-
+By default, three users are created:
 * Role `OWNER` with **userId**/**displayName**/**password** `demo`/`demo`/`demo`.
 * Role `USER` with **userId**/**displayName**/**password** `view`/`view`/`view`.
+* Role `OPERATOR` with **userId**/**displayName**/**password** `act`/`act`/`act`/.
 
 More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. The password must be encoded with a strong BCrypt hashing function.
 
-## IAM
+## Identity
 
-[IAM](../../iam/what-is-iam/) provides authentication and authorization functionality along with user management.
+[Identity](../../identity/what-is-identity/) provides authentication and authorization functionality along with user management.
 
-### Enable IAM
+### Enable Identity
 
-IAM can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `iam-auth`.
+Identity can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `identity-auth`.
 
 See the following example:
 
 ```
-export SPRING_PROFILES_ACTIVE=iam-auth
+export SPRING_PROFILES_ACTIVE=identity-auth
 ```
 
-### Configure IAM
+### Configure Identity
 
-IAM requires the following parameters:
+Identity requires the following parameters:
 
-Parameter name | Description | Example value
----------------|-------------|---------------
-camunda.tasklist.iam.issuer | Name/ID of issuer | http://app.iam.localhost
-camunda.tasklist.iam.issuerUrl | Url of issuer (IAM) | http://app.iam.localhost
-camunda.tasklist.iam.clientId | Similar to a username for the application | tasklist
-camunda.tasklist.iam.clientSecret | Similar to a password for the application. | XALaRPl...s7dL7
-
-We provide two different permissions over IAM: read or write.
-To configure the authorization, you are required to create two different permissions:
-
-Permission value | Description
-----------------|-------------
-`read:*` | Grants the user the permission to access, view, and read the data in the application.
-`write:*` | Grants the user the permission to perform operations.
-
-Note that the minimum permission needed is `read:*`. Any user without this permission will have access denied.
+| Parameter name | Description | Example value |
+| -- | -- | -- |
+| camunda.tasklist.identity.issuerUrl | URL of issuer (Identity) | http://localhost:18080/auth/realms/camunda-platform |
+| camunda.tasklist.identity.issuerBackendUrl | Backend URL of issuer (Identity) | http://localhost:18080/auth/realms/camunda-platform |
+| camunda.tasklist.identity.clientId | Similar to a username for the application | tasklist |
+| camunda.tasklist.identity.clientSecret | Similar to a password for the application | XALaRPl...s7dL7 |
+| camunda.tasklist.identity.audience | Audience for Tasklist | tasklist-api |

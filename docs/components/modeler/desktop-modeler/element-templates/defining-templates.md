@@ -17,8 +17,11 @@ Templates are defined in template descriptor files as a JSON array:
     "description": "some description",
     "version": 1,
     "appliesTo": [
-      "bpmn:ServiceTask"
+      "bpmn:Task"
     ],
+    "elementType": {
+      "value": "bpmn:ServiceTask",
+    }
     "properties": [
       ...
     ]
@@ -32,43 +35,45 @@ Templates are defined in template descriptor files as a JSON array:
 
 As seen in the code snippet a template consist of a number of important components:
 
-* `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Cloud element templates.
+* `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Platform 8 element templates.
 
-  Example (Camunda Platform)
-
-  ```json
-  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.6.0/resources/schema.json"
-  ```
-
-  Example (Camunda Cloud)
+  Example (Camunda Platform 7)
 
   ```json
-  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.1.0/resources/schema.json"
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.9.0/resources/schema.json"
   ```
 
-* `name : String`: Name of the template that will appear in the Catalog.
+  Example (Camunda Platform 8)
+
+  ```json
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.4.0/resources/schema.json"
+  ```
+
+* `name : String`: Name of the template. Will be shown in the element template selection modal and in the properties panel (after having applied an element template).
 * `id : String`: ID of the template.
 * `description : String`: Optional description of the template. Will be shown in the element template selection modal and in the properties panel (after having applied an element template).
+* `documentationRef : String`: Optional URL pointing to a template documentation. Will be shown in the properties panel (after having applied an element template).
 * `version : Integer`: Optional version of the template. If you add a version to a template it will be considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 * `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
+* `elementType : Object`: Optional type of the element. If you add an elementType to the template, the element will be replaced with the specified type when you apply the template.
 * `properties : Array<Object>`: List of properties of the template.
 
 ### JSON Schema Compatibility
 
 The application uses the `$schema` property to ensure compatibility for a given element template. The latest supported [Camunda element templates JSON Schema versions](https://github.com/camunda/element-templates-json-schema) are
 
-* `v0.7.0` (Camunda Platform)
-* `v0.1.0` (Camunda Cloud)
+* `v0.9.1` (Camunda Platform 7)
+* `v0.4.1` (Camunda Platform 8)
 
 The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
 
-For example, given the following `$schema` definition, the application takes `0.6.0` as the JSON Schema version of the element template.
+For example, given the following `$schema` definition, the application takes `0.8.0` as the JSON Schema version of the element template.
 
 ```json
-"$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.6.0/resources/schema.json"
+"$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.8.0/resources/schema.json"
 ```
 
-The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, the Camunda Modeler assumes the latest JSON Schema version for Camunda Platform element templates.
+The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, the Camunda Modeler assumes the latest JSON Schema version for Camunda Platform 7 element templates.
 
 Learn more about specifing a `$schema` [here](../defining-templates).
 
@@ -189,7 +194,7 @@ As seen in the example the important attributes in a property definition are:
 The input types `String`, `Text`, `Boolean`, `Dropdown` and `Hidden` are available. As seen above `String` maps to a single-line input, `Text` maps to a multi-line input.
 
 
-###### Boolean / Checkbox Type
+##### Boolean / Checkbox Type
 
 The `Boolean` type maps to a checkbox that can be toggled by the user. It renders as shown below:
 
@@ -197,7 +202,7 @@ The `Boolean` type maps to a checkbox that can be toggled by the user. It render
 
 When checked, it maps to `true` in the respective field (see [bindings](#bindings)). Note that it does not map to `${true}` and can therefore not be used e.g., for mapping a boolean to a process variable.
 
-###### Dropdown Type
+##### Dropdown Type
 
 The `Dropdown` type allows users to select from a number of pre-defined options that are stored in a custom properties `choices` attribute as `{ name, value }` pairs:
 
@@ -223,7 +228,7 @@ The resulting properties panel control looks like this:
 
 ![properties panel drop down](./img/field-dropdown.png)
 
-###### Omitted Type
+##### Omitted Type
 
 By omitting the `type` configuration the default UI component will be rendered for the respective binding.
 
@@ -242,6 +247,38 @@ Note that the configuration options `editable` and `constraints` will have no ef
 For the `property`, `camunda:property`, `camunda:in`, `camunda:in:businessKey`, `camunda:out` and `camunda:field` bindings, an omitted `type` will lead to rendering the `String` component (single line input).
 
 For the `camunda:executionListener` binding, an omitted `type` will lead to the `Hidden` component (ie. no visible input for the user).
+
+##### Feel
+
+As of Camunda Modeler `v5.0.0`, we support the feel properties `optional` and `required`.
+When set, the input field offers visual indications that a feel expression is expected.
+
+```json
+  "properties": [
+    {
+      "label": "Optional Feel Expression",
+      "type": "String",
+      "feel": "optional"
+    },
+    {
+      "label": "Required Feel Expression",
+      "type": "Text",
+      "feel": "required"
+    }
+  ]
+```
+
+###### Supported Types
+
+Camunda Platform 7
+
+*Feel Inputs are currently not supported for Camunda Platform 7 element templates.*
+
+Camunda Platform 8
+
+* `String`
+* `Text`
+
 #### Bindings
 
 The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The _"mapping result"_ in the following section will use `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` will be displayed and used for `[userInput]`. `[]` brackets will be used to indicate where the parameters are mapped to in the XML.
@@ -250,15 +287,15 @@ Notice that adherence to the following configuration options is enforced by desi
 
 <Tabs groupId="bindings" defaultValue="both" values={
 [
-{label: 'Bindings for Camunda Platform or Camunda Cloud', value: 'both', },
-{label: 'Bindings for Camunda Platform', value: 'platform', },
-{label: 'Bindings for Camunda Cloud', value: 'cloud', },
+{label: 'Bindings for Camunda Platform 7 and 8', value: 'both', },
+{label: 'Bindings for Camunda Platform 7', value: 'platform', },
+{label: 'Bindings for Camunda Platform 8', value: 'cloud', },
 ]
 }>
 
 <TabItem value='both'>
 
-###### `property`
+##### `property`
 
 | **Binding `type`**  | `property`  |
 |---|---|
@@ -266,13 +303,13 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**  | `name`: the name of the property  |
 | **Mapping result** | `<... [name]=[userInput] ... />`  |
 
-The `property` binding is supported both in Camunda Platform and Cloud.
+The `property` binding is supported both in Camunda Platform 7 and Cloud.
 
 </TabItem>
 
 <TabItem value='platform'>
 
-###### `camunda:property`
+##### `camunda:property`
 
 | **Binding `type`**  | `camunda:property`  |
 |---|---|
@@ -280,7 +317,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `name`: the name of the extension element property  |
 | **Mapping result** | `<camunda:property name="[name]" value="[userInput]" />`  |
 
-###### `camunda:inputParameter`
+##### `camunda:inputParameter`
 
 | **Binding `type`**  | `camunda:inputParameter`  |
 |---|---|
@@ -288,7 +325,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `name`: the name of the input parameter<br />`scriptFormat`: the format of the script (if script is to be mapped)  |
 | **Mapping result** | If `scriptFormat` is not set:<br />`<camunda:inputParameter name="[name]">[userInput]</camunda:inputParameter>`<br /><br />If `scriptFormat` is set:<br />`<camunda:inputParameter name="[name]"><camunda:script scriptFormat="[scriptFormat]">[userInput]</camunda:script></camunda:inputParameter>`  |
 
-###### `camunda:outputParameter`
+##### `camunda:outputParameter`
 
 |  **Binding `type`**  |  `camunda:outputParameter` |
 |---|---|
@@ -296,7 +333,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `source`: the source value to be mapped to the `outputParameter`<br />`scriptFormat`: the format of the script (if script is to be mapped)  |
 | **Mapping result (example)** | If `scriptFormat` is not set:<br />`<camunda:outputParameter name="[userInput]">[source]</camunda:inputParameter>`<br /><br />If `scriptFormat` is set:<br />`<camunda:outputParameter name="[userInput]"><camunda:script scriptFormat="[scriptFormat]">[source]</camunda:script></camunda:outputParameter>`  |
 
-###### `camunda:in`
+##### `camunda:in`
 
 |  **Binding `type`**  |  `camunda:in` |
 |---|---|
@@ -304,7 +341,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `target`: the target value to be mapped to<br />`expression`: `true` indicates that the userInput is an expression<br />`variables`: either `all` or `local` indicating the variable mapping  |
 | **Mapping result** | If `target` is set:<br />`<camunda:in source="[userInput]" target="[target]"/>`<br /><br />If `target` is set and `expression` is set to `true`:<br />`<camunda:in sourceExpression="[userInput]" target="[target]" />`<br /><br /> If `variables` is set to `local`:<br />` <camunda:in local="true" variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`)<br /><br />If `variables` is set to `local` and `target` is set:<br />`<camunda:in local="true" source="[userInput]" target="[target]" />`<br /><br />If `variables` is set to `local`, `target` is set and `expression` is set to `true`:<br />`<camunda:in local="true" sourceExpression="[userInput]" target="[target]" />`<br /><br />If `variables` is set to `all`:<br />`<camunda:in variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`) |
 
-###### `camunda:in:businessKey`
+##### `camunda:in:businessKey`
 
 |  **Binding `type`**  |  `camunda:in:businessKey` |
 |---|---|
@@ -312,7 +349,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  |  |
 | **Mapping result** | `<camunda:in businessKey="[userInput]" />` |
 
-###### `camunda:out`
+##### `camunda:out`
 
 |  **Binding `type`**  |  `camunda:out` |
 |---|---|
@@ -320,7 +357,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  |  `source`: the source value to be mapped<br />`sourceExpression`: a string containing the expression for the source attribute<br />`variables`: either `all` or `local` indicating the variable mapping  |
 | **Mapping result** | If `source` is set:<br />`<camunda:out source="[source]" target="[userInput]" />`<br /><br />If `sourceExpression` is set:<br />`<camunda:out sourceExpression="[sourceExpression]" target="[userInput]" />`<br /><br />If `variables` is set to `all`:<br />`<camunda:out variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`)<br /><br />If `variables` is set to `local` and `source` is set:<br />`<camunda:out local="true" source="[source]" target="[userInput]" />`<br /><br />If `variables` is set to `local` and `sourceExpression` is set:<br />`<camunda:out local="true" sourceExpression="[source]" target="[userInput]" />`<br /><br />If `variables` is set to `local`:<br />`<camunda:out local="true" variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`) |
 
-###### `camunda:executionListener`
+##### `camunda:executionListener`
 
 |  **Binding `type`**  |  `camunda:executionListener` |
 |---|---|
@@ -328,7 +365,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `event`: value for the `event` attribute<br />`scriptFormat`: value for the `scriptFormat` attribute |
 | **Mapping result** | `<camunda:executionListener event="[event]"><camunda:script scriptFormat="[scriptFormat]">[value]</camunda:script></camunda:executionListener>`<br />(Notice that `[value]` needs to be set, since only `Hidden` is allowed as a type hence the user can not set a `[userInput]`) |
 
-###### `camunda:field`
+##### `camunda:field`
 
 |  **Binding `type`**  |  `camunda:field` |
 |---|---|
@@ -336,7 +373,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `name`: value for the `name` attribute<br />`expression`: `true` that an expression is passed |
 | **Mapping result** | `<camunda:field name="[name]"><camunda:string>[userInput]</camunda:string></camunda:field>`<br /><br />If `expression` is set to `true`:<br />`<camunda:field name="[name]"><camunda:expression>[userInput]</camunda:expression>` |
 
-###### `camunda:errorEventDefinition`
+##### `camunda:errorEventDefinition`
 
 |  **Binding `type`**  |  `camunda:errorEventDefinition` |
 |---|---|
@@ -348,7 +385,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 
 <TabItem value='cloud'>
 
-###### `zeebe:input`
+##### `zeebe:input`
 
 | **Binding `type`**  | `zeebe:input`  |
 |---|---|
@@ -356,7 +393,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `name`: the name of the input parameter |
 | **Mapping result** | `<zeebe:input target="[name]" source="[userInput] />`  |
 
-###### `zeebe:output`
+##### `zeebe:output`
 
 | **Binding `type`**  | `zeebe:output`  |
 |---|---|
@@ -364,7 +401,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `source`: the source of the output parameter |
 | **Mapping result** | `<zeebe:output target="[userInput]" source="[source] />`  |
 
-###### `zeebe:taskHeader`
+##### `zeebe:taskHeader`
 
 | **Binding `type`**  | `zeebe:taskHeader`  |
 |---|---|
@@ -372,7 +409,7 @@ The `property` binding is supported both in Camunda Platform and Cloud.
 | **Binding parameters**  | `key`: the key of the task header |
 | **Mapping result** | `<zeebe:header key="[key]" value="[userInput] />`  |
 
-###### `zeebe:taskDefinition:type`
+##### `zeebe:taskDefinition:type`
 
 | **Binding `type`**  | `zeebe:taskDefinition:type`  |
 |---|---|
@@ -426,18 +463,18 @@ If a user removes the value in the configured control, it will also remove the m
 
 __Supported Bindings__
 
-Camunda Platform
+Camunda Platform 7
 
-*Optional bindings are currently not supported for Camunda Platform element templates.*
+*Optional bindings are currently not supported for Camunda Platform 7 element templates.*
 
-Camunda Cloud
+Camunda Platform 8
 
 * `zeebe:input`
 * `zeebe:output`
 
 #### Scoped Bindings
 
-Scoped bindings allow you to configure nested elements, such as [connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
+Scoped bindings allow you to configure nested elements, such as [Camunda Platform 7 connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
 
 ```json
 {
@@ -478,8 +515,8 @@ __Supported Scopes__
 
 <Tabs groupId="scopes" defaultValue="platformScopes" values={
 [
-{label: 'Scoped bindings for Camunda Platform', value: 'platformScopes', },
-{label: 'Scoped bindings for Camunda Cloud', value: 'cloudScopes', }
+{label: 'Scoped bindings for Camunda Platform 7', value: 'platformScopes', },
+{label: 'Scoped bindings for Camunda Platform 8', value: 'cloudScopes', }
 ]
 }>
 
@@ -487,8 +524,8 @@ __Supported Scopes__
 
 | Name | Target | Supported by |
 | ------------- | ------------- | ------------- |
-| `camunda:Connector` | [Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/) | Camunda Platform |
-| `bpmn:Error` | Global BPMN Error Element | Camunda Platform |
+| `camunda:Connector` | [Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/) | Camunda Platform 7 |
+| `bpmn:Error` | Global BPMN Error Element | Camunda Platform 7 |
 
 </TabItem>
 
@@ -587,6 +624,34 @@ Together with the `pattern` constraint, you may define your custom error message
   ]
 ```
 
+
+#### Icons 
+
+As of Camunda Modeler `v5.0.0,` it is possible to define custom icons to update the visual appearance of elements after applying an element template.
+
+```json
+[
+  {
+    "name": "Template 1",
+    "id": "sometemplate",
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "icon": {
+      "contents": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22' fill='none'%3E%3Ccircle cx='11' cy='11' r='9' fill='black'/%3E%3Ctext x='6.9' y='14.9' fill='white' style='font-family: Arial; font-size: 10px;'%3EM%3C/text%3E%3C/svg%3E"
+    },
+    "properties": [
+      ...
+    ]
+  }
+]
+```
+
+![Icons](./img/icons.png)
+
+The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons (e.g., 18x18 pixels) to better fit into the existing user interface.
+
+This feature is currently only supported for Camunda Platform 8 element templates.
 
 
 #### Display All Entries

@@ -10,7 +10,7 @@ tags:
 Disallow unauthorized access by securing the Camunda Platform 7.x before going live with your process applications. Understand Camunda user management essentials, enforce authorization for the REST API, define access rights for Camunda specific resources such as process definitions, and consider integrating with your Single-Sign-On (SSO).
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! For Camunda Cloud, visit [Zeebe Security](/docs/self-managed/zeebe-deployment/security/).
+This best practice targets Camunda Platform 7.x only! For Camunda Platform 8, visit [Zeebe Security](/docs/self-managed/zeebe-deployment/security/).
 :::
 
 ## Understanding user management essentials

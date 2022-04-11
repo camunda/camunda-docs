@@ -2,19 +2,20 @@
 
 ## Getting started
 
-- [Getting started](#getting-started)
+- [Contributing guide](#contributing-guide)
+  - [Getting started](#getting-started)
   - [Welcome](#welcome)
-  - [Contributor Guide](#contributor-guide)
+  - [Contributor guide](#contributor-guide)
   - [Prerequisites](#prerequisites)
-  - [Contributor License Agreement](#contributor-license-agreement)
-  - [Code of Conduct](#code-of-conduct)
-  - [Code formatting](#code-formatting)
-  - [Opening a pull request](#opening-a-pull-request)
-  - [Conventional Commits](#conventional-commits)
-  - [Commit message header formatting](#commit-message-header-formatting)
-  - [Code reviews](#code-reviews)
-  - [Best practices for reviewers](#best-practices-for-reviewers)
-  - [Inspiration](#inspiration)
+    - [Contributor License Agreement](#contributor-license-agreement)
+    - [Code of Conduct](#code-of-conduct)
+    - [Code formatting](#code-formatting)
+    - [Opening a pull request](#opening-a-pull-request)
+    - [Conventional commits](#conventional-commits)
+    - [Commit message header formatting](#commit-message-header-formatting)
+    - [Code reviews](#code-reviews)
+    - [Best practices for reviewers](#best-practices-for-reviewers)
+      - [Inspiration](#inspiration)
 
 ## Welcome
 
@@ -133,7 +134,7 @@ For further guidelines and best practices to keep in mind as a reviewer, please 
 
 #### Inspiration
 
-This documentation is inspired and influenced by the Zeebe documentation, the Camunda Platform documentation, the Microsoft contributor guidelines,
+This documentation is inspired and influenced by the Zeebe documentation, the Camunda Platform 7 documentation, the Microsoft contributor guidelines,
 the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 
 [Getting Started]:./getting-started
@@ -153,7 +154,7 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [GitHub]: https://lab.github.com/
 [Contributor License Agreement]: https://cla-assistant.io/camunda-cloud/camunda-cloud-documentation
 [code style guidelines]: https://github.com/camunda-cloud/zeebe/wiki/Code-Style
-[testing best practices]: https://docs.camunda.io/docs/apis-clients/java-client/testing/
+[testing best practices]: https://docs.camunda.io/docs/apis-clients/java-client/zeebe-process-test/
 [Conventional Commits]: ./conventional-commits
 [template and settings files]: https://github.com/camunda/camunda-bpm-platform/tree/master/settings
 [Technical Writing Style Guide]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/technical-writing-styleguide.md

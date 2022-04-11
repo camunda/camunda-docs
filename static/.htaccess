@@ -8,9 +8,32 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# !!!! FIX THIS BEFORE RELEASE !!!!
+RewriteRule ^docs/reference/feel/language-guide/feel-expression/?$ /docs/reference/feel/what-is-feel/ [R=301,L]
+
+RewriteRule ^docs/components/zeebe/technical-concepts/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
+RewriteRule ^docs/components/zeebe/technical-concepts/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
+
+RewriteRule ^docs/reference/feel/builtin-functions/(.*)$ /docs/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/ [R=301,L]
+RewriteRule ^docs/reference/feel/language-guide/(.*)$ /docs/components/modeler/feel/what-is-feel/ [R=301,L]
+RewriteRule ^docs/reference/feel/(.*)$ /docs/components/modeler/feel/what-is-feel/ [R=301,L]
+RewriteRule ^docs/reference/feel$ /docs/components/modeler/feel/what-is-feel/ [R=301,L]
+
+RewriteRule ^docs/apis-clients/cloud-console-api-reference(.*)$ /docs/apis-clients/console-api-reference [R=301,L]
+RewriteRule ^docs/apis-clients/cloud-console-api-reference$ /docs/apis-clients/console-api-reference [R=301,L]
+
+RewriteRule ^docs/components/cloud-console/(.*)$ /docs/components/console/$1 [R=301,L]
+RewriteRule ^docs/components/cloud-console/$ /docs/components/console/ [R=301,L]
+
+RewriteRule ^docs/components/concepts/what-is-camunda-cloud(.*)$ /docs/components/concepts/what-is-camunda-platform-8$1 [R=301,L]
+RewriteRule ^docs/components/concepts/what-is-camunda-cloud$ /docs/components/concepts/what-is-camunda-platform-8 [R=301,L]
+
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/?$ /docs/self-managed/zeebe-deployment/kubernetes/#helm [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/prerequisites/?$ /docs/self-managed/zeebe-deployment/kubernetes/#prerequisites [NE,R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate/?$ /docs/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/kubernetes/.*$ /docs/self-managed/platform-deployment/kubernetes/ [NE,R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/docker/.*$ /docs/self-managed/platform-deployment/docker/ [NE,R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/local/.*$ /docs/self-managed/platform-deployment/local/ [NE,R=301,L]
 RewriteRule ^docs/components/tasklist/faq/(.*)$ /docs/guides/utilizing-forms$1 [R=301,L]
 RewriteRule ^docs/components/tasklist/faq/$ /docs/guides/utilizing-forms [R=301,L]
 
@@ -25,6 +48,9 @@ RewriteRule ^docs/components/modeler/cloud-modeler$ /docs/components/modeler/web
 
 RewriteRule ^docs/guides/integrating-optimize(.*)$ /docs/guides/improve-processes-with-optimize$1 [R=301,L]
 RewriteRule ^docs/guides/integrating-optimize$ /docs/guides/improve-processes-with-optimize [R=301,L]
+
+RewriteRule ^docs/guides/migrating-from-Camunda-Platform(.*)$ /docs/guides/migrating-from-camunda-platform-7$1 [R=301,L]
+RewriteRule ^docs/guides/migrating-from-Camunda-Platform$ /docs/guides/migrating-from-camunda-platform-7 [R=301,L]
 
 RewriteRule ^docs/components/zeebe/third-party-libraries/zeebe-dependencies/$ docs/reference/dependencies/ [R=301,L]
 RewriteRule ^docs/components/operate/third-party-libraries/(.*)$  docs/reference/dependencies/ [R=301,L]
@@ -42,6 +68,8 @@ RewriteRule ^docs/components/operate/deployment-guide$ /docs/self-managed/operat
 
 RewriteRule ^docs/components/tasklist/deployment-guide/(.*)$ /docs/self-managed/tasklist-deployment/$1 [R=301,L]
 RewriteRule ^docs/components/tasklist/deployment-guide$ /docs/self-managed/tasklist-deployment/ [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/api/(.*)$ /docs/apis-clients/tasklist-api/$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/user-interface/(.*)$ /docs/components/tasklist/userguide/$1 [R=301,L]
 
 RewriteRule ^docs/components/zeebe/deployment-guide/(.*)$ /docs/self-managed/zeebe-deployment/$1 [R=301,L]
 RewriteRule ^docs/components/zeebe/deployment-guide$ /docs/self-managed/zeebe-deployment/ [R=301,L]
@@ -83,11 +111,25 @@ RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs
 
 RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 
+RewriteRule ^docs/self-managed/iam/what-is-iam/(.*)$  /docs/self-managed/identity/what-is-identity/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/deployment/configuration-variables/(.*)$  /docs/self-managed/identity/deployment/configuration-variables/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/deployment/making-iam-production-ready/(.*)$  /docs/self-managed/identity/user-guide/making-identity-production-ready/ [R=301,L]
+
+# !!!! FIX THIS BEFORE RELEASE !!!!
+RewriteRule ^docs/self-managed/identity/getting-started/docker/(.*)$ /docs/self-managed/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/getting-started/docker$ /docs/self-managed/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started/docker/(.*)$ /docs/self-managed/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started/docker$ /docs/self-managed/overview/ [R=301,L]
+
 # Static resource page for the camunda desktop modeler
 RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
-RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg))/$ /$1 [R=301,L]
+RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg|graphqls|diff))/$ /$1 [R=301,L]
+
+# Replaced deprecated java-client/testing page with java-client/zeebe-process-test page
+RewriteRule ^docs/apis-clients/java-client/testing(.*)$ /docs/apis-clients/java-client/zeebe-process-test$1 [R=301,L]
+RewriteRule ^docs/apis-clients/java-client/testing$ /docs/apis-clients/java-client/zeebe-process-test [R=301,L]
 
 # rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
 ## index pages are not served as /index/ anymore but /index.html
@@ -116,3 +158,7 @@ RewriteRule ^docs/components/best-practices/?$ /docs/components/best-practices/o
 AddType text/vnd.yaml   yaml
 # Add bpmn mime type
 AddType text/xml        bpmn
+# Add graphql scheme mime type
+AddType text/plain      graphqls
+# Add diff mime type
+AddType text/plain      diff

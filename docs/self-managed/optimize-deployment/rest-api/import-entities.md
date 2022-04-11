@@ -29,9 +29,7 @@ The following request headers have to be provided with every request:
 
 |Header|Constraints|Value|
 |--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](../authorization)|
-
-- Only required if not set as a query parameter
+|Authorization|REQUIRED|[Authorization](../authorization)|
 
 ## Query parameters
 
@@ -39,10 +37,7 @@ The following query parameters have to be provided with every request:
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
-|access_token|REQUIRED*|[Authorization](../authorization)|
 |collectionId|REQUIRED|The ID of the collection for which to retrieve the report IDs.|
-
-- Only required if not set as a request header
 
 ## Request body
 
@@ -50,7 +45,7 @@ The request body should contain a JSON array of entity definitions to be importe
 
 ## Result
 
-The response contains a list of IDs of the newly created entities in the target system.
+The response contains a list of DTOs that specify the ID and entity type (`report` or `dashboard`) of each newly created entity in the target system.
 
 ## Response codes
 
@@ -70,9 +65,12 @@ Possible HTTP response status codes:
 
 Assuming you want to import a report and a dashboard into the collection with ID `123`, this is what it would look like:
 
-POST `/api/public/import?collectionId=123&access_token=mySecret`
+POST `/api/public/import?collectionId=123`
 
-With the following request body:
+##### Request header
+`Authorization: Bearer mySecret`
+
+##### Request body
 
 ```
 [
@@ -110,10 +108,12 @@ Status 200.
 ```
 [
     {
-        "id": "e8ca18b9-e637-45c8-87da-0a2b08b34d6e"
+        "id": "e8ca18b9-e637-45c8-87da-0a2b08b34d6e",
+        "entityType": "dashboard"
     },
     {
-        "id": "290b3425-ba33-4fbb-b20b-a4f236036847"
+        "id": "290b3425-ba33-4fbb-b20b-a4f236036847",
+        "entityType": "report"
     }
 ]
 ```

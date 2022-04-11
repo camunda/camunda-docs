@@ -12,7 +12,7 @@ description: "Deploy and start your process instance."
 
 :::note
 
-BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot currently run a BPMN diagram modeled for Camunda Platform in Camunda Cloud, or vice versa.
+BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot currently run a BPMN diagram modeled for Camunda Platform 7 in Camunda Platform 8, or vice versa.
 :::
 
 ## Deploy and start your process instance

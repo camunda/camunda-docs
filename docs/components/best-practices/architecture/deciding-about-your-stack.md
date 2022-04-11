@@ -11,8 +11,8 @@ tags:
 
 If you don't have special architecture requirements, we recommend using SaaS following the proposed greenfield stack.
 
-:::caution Camunda Cloud
-This best practice targets Camunda Cloud only! If you look for Camunda Platform 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
+:::caution Camunda Platform 8
+This best practice targets Camunda Platform 8 only! If you look for Camunda Platform 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
 :::
 
 ## The greenfield stack
@@ -27,7 +27,7 @@ The stack looks pretty similar in various programming language. Please use the p
 
 Use the following stack:
 
-1. Use [Camunda Cloud SaaS](https://accounts.cloud.camunda.io/signup) and create a cluster there
+1. Use [Camunda Platform 8 SaaS](https://accounts.cloud.camunda.io/signup) and create a cluster there
 
 1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](/docs/apis-clients/community-clients/spring/).
 
@@ -70,11 +70,11 @@ You can develop process solutions as decribed with Java above also in any other 
 
 ## Customize your stack
 
-### Running Camunda Cloud self-managed
+### Running Camunda Platform 8 self-managed
 
-You can also run Camunda Cloud self-managed on your own Kubernetes cluster. Details can be found in the [docs](/docs/self-managed/overview).
+You can also run Camunda Platform 8 self-managed on your own Kubernetes cluster. Details can be found in the [docs](/docs/self-managed/platform-deployment).
 
-While there [exists a Docker Compose configuration](/docs/self-managed/zeebe-deployment/docker/install/) to run Camunda Cload locally, this is not meant to be used for production, but rather to quickly startup compenents on a developer machine to be able to play around.
+While there [exists a Docker Compose configuration](/docs/self-managed/platform-deployment/docker/) to run Camunda Cload locally, this is not meant to be used for production, but rather to quickly startup compenents on a developer machine to be able to play around.
 
 
 ### Modeling for executable processes

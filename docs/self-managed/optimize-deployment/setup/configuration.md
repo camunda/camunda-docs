@@ -136,8 +136,8 @@ These values control mechanisms of Optimize related security, e.g. security head
 |  |
 | security.auth.token.lifeMin | 60 | Optimize uses token-based authentication to keep track of which users are logged in. Define the lifetime of the token in minutes. |
 | security.auth.token.secret | null | Optional secret used to sign authentication tokens, it's recommended to use at least a 64-character secret. If set to `null` a random secret will be generated with each startup of Optimize. |
-| security.auth.superUserIds | [ ] | List of user IDs that are granted full permission to all collections, reports, and dashboards. <br /><br /> Note: For reports, these users are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](./authorization-management.md). |
-| security.auth.superGroupIds | [ ] | List of group IDs that are granted full permission to all collections, reports, and dashboards. All members of the groups specified will have superuser permissions in Optimize. <br /><br />Note: For reports, these groups are still required to be granted access to the corresponding process/decision definitions in Camunda Platform Admin. See [Authorization Management](./authorization-management.md). |
+| security.auth.superUserIds | [ ] | List of user IDs that are granted full permission to all collections, reports, and dashboards. <br /><br /> Note: For reports, these users are still required to be granted access to the corresponding process/decision definitions in Camunda Platform 7 Admin. See [Authorization Management](./authorization-management.md). |
+| security.auth.superGroupIds | [ ] | List of group IDs that are granted full permission to all collections, reports, and dashboards. All members of the groups specified will have superuser permissions in Optimize. <br /><br />Note: For reports, these groups are still required to be granted access to the corresponding process/decision definitions in Camunda Platform 7 Admin. See [Authorization Management](./authorization-management.md). |
 | security.responseHeaders.HSTS.max-age | 31536000 | HTTP Strict Transport Security (HSTS) is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking. This field defines the time, in seconds, that the browser should remember that this site is only to be accessed using HTTPS. If you set the number to a negative value no HSTS header is sent. |
 | security.responseHeaders.HSTS.includeSubDomains | true | HTTP Strict Transport Security (HSTS) is a web security policy mechanism which helps to protect websites against protocol downgrade attacks and cookie hijacking. If this optional parameter is specified, this rule applies to all the site’s subdomains as well. |
 | security.responseHeaders.X-XSS-Protection | 1; mode=block   | This header enables the cross-site scripting (XSS) filter in your browser. Can have one of the following options:<ul><li>   `0`: Filter disabled. </li><li>    `1`: Filter enabled. If a cross-site scripting attack is detected, in order to stop the attack, the browser will sanitize the page. </li><li>    `1; mode=block`: Filter enabled. Rather than sanitize the page, when a XSS attack is detected, the browser will prevent rendering of the page.</li><li>    `1; report=http://[YOURDOMAIN]/your_report_URI`: Filter enabled. The browser will sanitize the page and report the violation. This is a Chromium function utilizing CSP violation reports to send details to a URI of your choice.</li></ul> |
@@ -146,11 +146,16 @@ These values control mechanisms of Optimize related security, e.g. security head
 
 ### Public API
 
-This section focuses on common properties related to the Public REST API of Optimize.
+This section focuses on common properties related to the Public REST API of Optimize. It is 
+mandatory to configure one of the values below if the Public REST API is to be used. If neither is 
+configured an error will be thrown and all requests to the Public API will get rejected. If both are configured then 
+the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|api.accessToken|null|Secret token to be provided to the secured REST API on access. If set to `null` an error will be thrown and requests will get rejected.<br /><br />It is mandatory to configure a value if the majority of Public REST API is to be used.|
+|api.accessToken|null|Secret static shared token to be provided to the secured REST API in the authorization header. Will be ignored if `api.jwtSetUri` is also set. |
+|api.jwtSetUri|null|Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`|
+|api.audience|optimize|Optimize tries to match this with the `aud` field contained in the JWT token. Only used when `jwtSetUri` is set.|
 
 ### Container
 
@@ -166,7 +171,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 |container.status.connections.max|10|Maximum number of web socket connections accepted for status report.|
 |container.accessUrl|null|Optional URL to access Optimize (used for links to Optimize in e.g. alert emails). If no value specified the container host and port are used instead.|
 
-### Connection to Camunda Platform
+### Connection to Camunda Platform 7
 
 Configuration for engines used to import data. Note that you have to have
 at least one engine configured at all times. You can configure multiple engines
@@ -203,7 +208,7 @@ REST API endpoint locations, timeouts, etc.
 |import.data.process-definition.maxPageSize|10000|Determines the page size for process definition entities fetching.|
 |import.data.process-instance.maxPageSize|10000|Determines the page size for historic decision instance fetching.|
 |import.data.variable.maxPageSize|10000|Determines the page size for historic variable instance fetching.|
-|import.data.variable.includeObjectVariableValue|true|Controls whether Optimize fetches the serialized value of object variables from the Camunda Runtime REST API. By default, this is active for backwards compatibility. If no variable plugin to handle object variables is installed, it can be turned off to reduce the overhead of the variable import. <br /><br />Note: Disabling the object variable value transmission is only effective with Camunda Platform 7.13.11+, 7.14.5+ and 7.15.0+.|
+|import.data.variable.includeObjectVariableValue|true|Controls whether Optimize fetches the serialized value of object variables from the Camunda Runtime REST API. By default, this is active for backwards compatibility. If no variable plugin to handle object variables is installed, it can be turned off to reduce the overhead of the variable import. <br /><br />Note: Disabling the object variable value transmission is only effective with Camunda Platform 7.15.0+.|
 |import.data.user-task-instance.maxPageSize|10000|Determines the page size for historic User Task instance fetching.|
 |import.data.identity-link-log.maxPageSize|10000|Determines the page size for historic identity link log fetching.|
 |import.data.decision-definition-xml.maxPageSize|2|Determines the page size for decision definition xml model fetching. Should be a low value, as large models will lead to memory or timeout problems.|
@@ -231,6 +236,7 @@ REST API endpoint locations, timeouts, etc.
 |import.identitySync.cronTrigger|`0 */2 * * *` |Cron expression for when the identity sync should run, defaults to every second hour. You can either use the default Cron (5 fields) or the Spring Cron (6 fields) expression format here.<br /><br /> For details on the format please refer to: <ul><li>[Cron Expression Description](https://en.wikipedia.org/wiki/Cron)</li><li> [Spring Cron Expression Documentation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/support/CronSequenceGenerator.html)</li></ul>|
 |import.identitySync.maxPageSize|10000|The max page size when multiple users or groups are iterated during the import.|
 |import.identitySync.maxEntryLimit|100000|The entry limit of the user/group search cache. When increasing the limit, keep in mind to account for this by increasing the JVM heap memory as well. Please refer to the "Adjust Optimize heap size" documentation on how to configure the heap size.|
+|import.customer-onboarding|false|Determines if the customer onboarding data should be loaded to Optimize.|
 
 ### Elasticsearch
 
@@ -249,6 +255,7 @@ if one node fails, Optimize is still able to talk to the cluster.
 |--- |--- |--- |
 |es.connection.timeout|10000|Maximum time without connection to Elasticsearch that Optimize should wait until a timeout triggers.|
 |es.connection.responseConsumerBufferLimitInMb|100|Maximum size of the Elasticsearch response consumer heap buffer. This can be increased to resolve errors from Elasticsearch relating to the entity content being too long|
+|es.connection.pathPrefix||The path prefix under which Elasticsearch is available.|
 |es.connection.nodes[*].host|localhost|The address/hostname under which the Elasticsearch node is available.|
 |es.connection.nodes[*].httpPort|9200|A port number used by Elasticsearch to accept HTTP connections.|
 |es.connection.proxy.enabled|false|Whether an HTTP proxy should be used for requests to Elasticsearch.|

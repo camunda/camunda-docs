@@ -6,7 +6,7 @@ All changes have to be done in a separate Branch. As soon as the changes are don
 
 ## Structure
 
-- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Cloud** --> `introduction-to-camunda-cloud.md`. Use the file name as internal document id to reference in `sidebars.js`.
+- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-platform-8.md`. Use the file name as internal document id to reference in `sidebars.js`.
 - Sub categories have to be placed in their own sub directories. Example: Guides/Getting Started can be found in `docs/guides/getting-started`.
 
 ## Adding a new documentation page

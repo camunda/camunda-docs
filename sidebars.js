@@ -31,13 +31,13 @@ module.exports = {
         "guides/update-guide/026-to-100",
       ],
     },
-    "guides/migrating-from-Camunda-Platform",
+    "guides/migrating-from-camunda-platform-7",
   ],
   Components: [
     "components/overview",
     {
       Concepts: [
-        "components/concepts/what-is-camunda-cloud",
+        "components/concepts/what-is-camunda-platform-8",
         "components/concepts/processes",
         "components/concepts/job-workers",
         "components/concepts/process-instance-creation",
@@ -46,38 +46,40 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
       ],
-      "Cloud Console": [
-        "components/cloud-console/introduction",
+      "Console": [
+        "components/console/introduction",
         {
           "Manage your organization": [
-            "components/cloud-console/manage-organization/organization-settings",
-            "components/cloud-console/manage-organization/manage-users",
-            "components/cloud-console/manage-organization/view-organization-activity",
-            "components/cloud-console/manage-organization/usage-history",
-            "components/cloud-console/manage-organization/update-billing-reservations",
-            "components/cloud-console/manage-organization/switch-organization",
+            "components/console/manage-organization/organization-settings",
+            "components/console/manage-organization/manage-users",
+            "components/console/manage-organization/view-organization-activity",
+            "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/update-billing-reservations",
+            "components/console/manage-organization/switch-organization",
           ],
         },
         {
           "Manage clusters": [
-            "components/cloud-console/manage-clusters/create-cluster",
-            "components/cloud-console/manage-clusters/rename-cluster",
-            "components/cloud-console/manage-clusters/delete-cluster",
-            "components/cloud-console/manage-clusters/manage-api-clients",
-            "components/cloud-console/manage-clusters/manage-alerts",
-            "components/cloud-console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/create-cluster",
+            "components/console/manage-clusters/rename-cluster",
+            "components/console/manage-clusters/delete-cluster",
+            "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-alerts",
+            "components/console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/manage-secrets",
+
           ],
         },
         {
           "Manage your plan": [
-            "components/cloud-console/manage-plan/available-plans",
-            "components/cloud-console/manage-plan/upgrade-to-professional-plan",
+            "components/console/manage-plan/available-plans",
+            "components/console/manage-plan/upgrade-to-professional-plan",
           ],
         },
         {
           Troubleshooting: [
-            "components/cloud-console/troubleshooting/common-pitfalls",
-            "components/cloud-console/troubleshooting/feedback-and-support",
+            "components/console/troubleshooting/common-pitfalls",
+            "components/console/troubleshooting/feedback-and-support",
           ],
         },
       ],
@@ -94,6 +96,19 @@ module.exports = {
             "components/modeler/web-modeler/collaboration",
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
+            {
+              "Connectors": [
+                "components/modeler/web-modeler/connectors/index",
+                "components/modeler/web-modeler/connectors/use-connectors",
+                {
+                  "Available Connectors": [
+                    "components/modeler/web-modeler/connectors/available-connectors/index",
+                    "components/modeler/web-modeler/connectors/available-connectors/rest",
+                    "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
+                  ]
+                }
+              ]
+            }
           ],
         },
         {
@@ -172,11 +187,8 @@ module.exports = {
             },
           ],
         },
-        {
-          "DMN": [
-            "components/modeler/dmn/desktop-modeler-dmn",
-          ],
-        },
+        require("./docs/components/modeler/dmn/sidebar-schema"),
+        require("./docs/components/modeler/feel/sidebar-schema"),
         {
           "Forms": [
             "components/modeler/forms/camunda-forms-reference",
@@ -194,7 +206,6 @@ module.exports = {
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",
             "components/zeebe/technical-concepts/protocols",
-            "components/zeebe/technical-concepts/exporters",
           ],
         },
         {
@@ -266,15 +277,8 @@ module.exports = {
         "components/tasklist/introduction",
         {
           "User guide": [
-            {
-              "API mode": [
-                "components/tasklist/userguide/api/overview",
-                "components/tasklist/userguide/api/tutorial",
-              ],
-              "User interface mode": [
-                "components/tasklist/userguide/user-interface/overview",
-              ],
-            },
+            "components/tasklist/userguide/overview",
+            "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
       ],
@@ -332,8 +336,9 @@ module.exports = {
       "APIs": [
         "apis-clients/public-api",
         "apis-clients/grpc",
+        "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
-        "apis-clients/cloud-console-api-reference",
+        "apis-clients/console-api-reference",
       ],
     },
     {
@@ -343,21 +348,21 @@ module.exports = {
             "apis-clients/java-client/index",
             "apis-clients/java-client/job-worker",
             "apis-clients/java-client/logging",
-            "apis-clients/java-client/testing",
-            {
-              Examples: [
-                "apis-clients/java-client-examples/index",
-                "apis-clients/java-client-examples/process-deploy",
-                "apis-clients/java-client-examples/process-instance-create",
-                "apis-clients/java-client-examples/process-instance-create-nonblocking",
-                "apis-clients/java-client-examples/process-instance-create-with-result",
-                "apis-clients/java-client-examples/job-worker-open",
-                "apis-clients/java-client-examples/data-pojo",
-                "apis-clients/java-client-examples/cluster-topology-request",
-              ],
-            },
-          ],
-        },
+            "apis-clients/java-client/zeebe-process-test",
+              {
+                Examples: [
+                  "apis-clients/java-client-examples/index",
+                  "apis-clients/java-client-examples/process-deploy",
+                  "apis-clients/java-client-examples/process-instance-create",
+                  "apis-clients/java-client-examples/process-instance-create-nonblocking",
+                  "apis-clients/java-client-examples/process-instance-create-with-result",
+                  "apis-clients/java-client-examples/job-worker-open",
+                  "apis-clients/java-client-examples/data-pojo",
+                  "apis-clients/java-client-examples/cluster-topology-request",
+                  ],
+              },
+            ],
+          },
         {
           "Go client": [
             "apis-clients/go-client/index",
@@ -388,7 +393,6 @@ module.exports = {
 
   Reference: [
     "reference/overview",
-    require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
     "reference/announcements",
     "reference/licenses",
@@ -400,22 +404,35 @@ module.exports = {
   "Self-Managed": [
     "self-managed/overview",
     {
+      "Installation": [
+        "self-managed/platform-deployment/index",
+        {
+          "Kubernetes": [
+            "self-managed/platform-deployment/kubernetes",
+            "self-managed/platform-deployment/kubernetes-helm",
+          ],
+        },
+        "self-managed/platform-deployment/docker",
+        "self-managed/platform-deployment/local",
+      ],
+    },
+    {
+      Concepts: [
+        {
+          "Access control": [
+            "self-managed/concepts/access-control/applications",
+            "self-managed/concepts/access-control/apis",
+            "self-managed/concepts/access-control/permissions",
+            "self-managed/concepts/access-control/roles",
+            "self-managed/concepts/access-control/users",
+          ]
+        },
+        "self-managed/concepts/exporters",
+      ],
+    },
+    {
       "Zeebe": [
         "self-managed/zeebe-deployment/index",
-        {
-          "Local installation": [
-            "self-managed/zeebe-deployment/local/install",
-            "self-managed/zeebe-deployment/local/quickstart",
-          ],
-        },
-        "self-managed/zeebe-deployment/docker/install",
-        {
-          "Kubernetes deployment": [
-            "self-managed/zeebe-deployment/kubernetes/index",
-            "self-managed/zeebe-deployment/kubernetes/helm/installing-helm",
-            "self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist",
-          ],
-        },
         {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
@@ -466,6 +483,7 @@ module.exports = {
         "self-managed/tasklist-deployment/usage-metrics",
       ],
       "Optimize": [
+        "self-managed/optimize-deployment/setup",
         {
           Setup: [
             "self-managed/optimize-deployment/setup/installation",
@@ -488,7 +506,6 @@ module.exports = {
             "self-managed/optimize-deployment/setup/common-problems",
           ],
         },
-        "self-managed/optimize-deployment/setup",
         {
           Plugins: [
             "self-managed/optimize-deployment/plugins/plugin-system",
@@ -503,6 +520,12 @@ module.exports = {
         {
           "REST API": [
             "self-managed/optimize-deployment/rest-api/authorization",
+            {
+              "Configuration": [
+                "self-managed/optimize-deployment/rest-api/configuration/enable-sharing",
+                "self-managed/optimize-deployment/rest-api/configuration/disable-sharing",
+              ],
+            },
             {
               "Dashboard": [
                 "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
@@ -522,12 +545,14 @@ module.exports = {
             "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
             "self-managed/optimize-deployment/rest-api/health-readiness",
             "self-managed/optimize-deployment/rest-api/import-entities",
+            "self-managed/optimize-deployment/rest-api/variable-labeling",
           ],
         },
         "self-managed/optimize-deployment/reimport",
         {
           "Migration & Update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
             "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
             "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
             "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
@@ -553,22 +578,24 @@ module.exports = {
 
 
       ],
-      IAM: [
-        "self-managed/iam/what-is-iam",
+      "Identity": [
+        "self-managed/identity/what-is-identity",
+        "self-managed/identity/getting-started/index",
         {
-          "Getting started": [
-            {
-              "Running IAM with Docker": [
-                "self-managed/iam/getting-started/docker/setup-environment",
-                "self-managed/iam/getting-started/docker/start-iam",
-                "self-managed/iam/getting-started/docker/accessing-the-ui",
-              ]
-            }
+          "User guide": [
+            "self-managed/identity/user-guide/adding-an-application",
+            "self-managed/identity/user-guide/adding-an-api",
+            "self-managed/identity/user-guide/adding-a-permission",
+            "self-managed/identity/user-guide/adding-a-role",
+            "self-managed/identity/user-guide/assigning-a-permission-to-a-role",
+            "self-managed/identity/user-guide/assigning-a-role-to-a-user",
+            "self-managed/identity/user-guide/configure-external-identity-provider",
+            "self-managed/identity/user-guide/making-identity-production-ready",
           ],
         }, {
           "Deployment": [
-            "self-managed/iam/deployment/configuration-variables",
-            "self-managed/iam/deployment/making-iam-production-ready",
+            "self-managed/identity/deployment/configuration-variables",
+            "self-managed/identity/deployment/application-monitoring",
           ],
         },
       ],
