@@ -61,9 +61,9 @@ Most expressions can be converted (see [this community extension](https://github
 
 Camunda Platform 7 provides several [connectors](https://docs.camunda.org/manual/latest/reference/connect/). These connectors are not supported in Camunda Platform 8, as Camunda Platform 8 will create a much more powerful connector infrastructure.
 
+[//]:# (Flagging here as will need to update once connectors docs are merged.)
+
 To migrate existing connectors, create a small bridging layer to invoke these connectors via a custom [job workers](/components/concepts/job-workers.md).
-
-
 
 ### Process solutions using Spring Boot
 
@@ -247,9 +247,9 @@ In essence, this tooling implements details described in the next sections.
 Camunda Platform 8 has a different API than Camunda Platform 7. As a result, you have to migrate some of your code, especially code that does the following:
 
 * Uses the Client API (e.g. to start process instances)
-* Implements [service tasks](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/service-task/), which can be:
+* Implements [service tasks](../components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
   * [Java code attached to a service task](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) and called by the engine directly (in-VM).
-  * [External tasks](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/), where workers subscribe to the engine.
+  * [External tasks](../components/best-practices/development/invoking-services-from-the-process-c7.md#external-tasks), where workers subscribe to the engine.
 
 
 <!--
