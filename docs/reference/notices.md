@@ -8,6 +8,34 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 9
+
+#### Publication Date:
+
+April 11th, 2022
+
+#### Product affected:
+
+Zeebe, Operate, Tasklist, IAM
+
+#### Impact:
+
+Zeebe, Operate, Tasklist and IAM are using the Spring framework for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2022-22965
+
+At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate, Tasklist or IAM allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
+
+
+#### How to determine if the installation is affected
+
+You are using Zeebe, Operate or Tasklist version <= 1.2.11 or <= 1.3.6
+
+#### Solution
+
+Camunda has provided the following releases which contain a fix
+
+- [Zeebe, Operate and Tasklist 1.3.7](https://github.com/camunda-cloud/zeebe/releases/tag/1.3.7)
+- [Zeebe, Operate and Tasklist 1.2.12](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.12)
+
 ### Notice 8
 
 #### Publication Date:
