@@ -1,38 +1,35 @@
 ---
 id: manage-secrets
 title: Manage Secrets
-description: Manage Secrets for Connectors
+description: Manage Secrets for connectors
 ---
 
-
-
-
-Create secrets and reference them in your Connectors without exposing sensitive information in your BPMN processes.
+Create Secrets and reference them in your connectors without exposing sensitive information in your BPMN processes.
 
 :::note Warning
-**Connector Secrets** are managed at the cluster level so ensure you deploy your processes to the cluster that contains the necessary secrets.
-If you deploy and the secret is missing then Operate will show an incident.
+**Connector Secrets** are managed at the cluster level, so ensure you deploy your processes to the cluster that contains the necessary Secrets.
+If you deploy and the Secret is missing, Operate will show an incident.
 :::
 
-To create a new secret, go to your cluster and take the following steps:
+To create a new Secret, go to your cluster and take the following steps:
 
-1. Select the **Connector Secrets** tab
+1. Select the **Connector Secrets** tab.
 
 ![secrets](./img/cluster-detail-secrets.png)
 
-2. Click on **Create**
-3. Provide a **Key** for your secret that you will use to reference your secret from your Connector
-4. Provide the **Secret** that will be assigned to the **Key**
+1. Click **Create**.
+2. Provide a **Key** for your Secret that you will use to reference your Secret from your Connector.
+3. Provide the **Secret** that will be assigned to the **Key**.
 
 ![secrets-create](./img/cluster-detail-secrets-create.png)
 
-5. Click on **Create** and view your new secret in the list
+4. Click **Create** and view your new Secret in the list.
 
 ![secrets-view](./img/cluster-detail-secrets-view.png)
 
-Now you can reference your secret like this: `secrets.MY_API_KEY` in any Connector field in the Properties Panel that is marked with the FEEL Expression icon: ![feel-icon](./img/feel-icon.png).
+Now you can reference your Secret like this: `secrets.MY_API_KEY` in any connector field in the properties panel that is marked with the FEEL Expression icon: ![feel-icon](./img/feel-icon.png).
 
 :::note Warning
-`secrets.*` is a reserved syntax. please don't use it for other purposes than referencing our secrets in any of your variables or FEEL expressions.
-If you use the syntax and deploy, the Engine will search a secret and Operate will show an incident.
+`secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your Secrets in any of your variables or FEEL expressions.
+If you use the syntax and deploy, the engine will search a Secret and Operate will show an incident.
 :::
