@@ -50,7 +50,7 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 To interact with your Camunda Platform 8 cluster, you'll use the Zeebe client. First, you'll need to create credentials.
 
-1. The main page for Camunda Platform 8 Console should be open on another tab. Use Camunda Platform 8 Console to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your cluster id and region. You will need this information later when creating a worker in the next section.
+1. The main page for Console should be open on another tab. Use Console to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your cluster id and region. You will need this information later when creating a worker in the next section.
 
 :::note 
 
