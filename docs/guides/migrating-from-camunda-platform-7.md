@@ -55,7 +55,7 @@ Camunda Platform 7 uses [JUEL (Java Unified Expression Language)](https://docs.c
 
 Camunda Platform 8 uses [FEEL (Friendly-Enough Expression Language](/components/modeler/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
-Most expressions can be converted (see [this community extension](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.js as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform 7).
+Most expressions can be converted (see [this community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/modeler-plugin-7-to-8-converter/client/JuelToFeelConverter.js as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform 7).
 
 #### Different connector infrastructure
 
@@ -91,7 +91,7 @@ The packaging of a process solution is the same with Camunda Platform 7 and Camu
 
 Process solution definition taken from ["Practical Process Automation"](https://processautomationbook.com/).
 
-You can find a complete Java Spring Boot example, showing the Camunda Platform 7 process solution alongside the comparable Camunda Platform 8 process solution in the [Camunda Platform 7 to Camunda Platform 8 migration example](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration/tree/main/example).
+You can find a complete Java Spring Boot example, showing the Camunda Platform 7 process solution alongside the comparable Camunda Platform 8 process solution in the [Camunda Platform 7 to Camunda Platform 8 migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/example).
 
 
 
@@ -201,7 +201,7 @@ The typical steps are:
    1. Adjust your BPMN models (only in rare cases you have to touch your DMN models)
    2. Adjust your development project (remove embedded engine, add Zeebe client)
    2. Refactor your code to use the Zeebe client API
-   3. Refactor your glue code or use [the Java Delegate adapter project](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter).
+   3. Refactor your glue code or use [the Java Delegate adapter project](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter).
 2. Migrate workflow engine data
 
 
@@ -232,11 +232,11 @@ In general, **workflow engine data** is harder to migrate to Camunda Platform 8:
 
 ### Migration tooling
 
-The [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration), available as a community extension, contains two components that will help you with migration:
+The [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration), available as a community extension, contains two components that will help you with migration:
 
-1. [A Desktop Modeler plugin to convert BPMN models from Camunda Platform 7 to Camunda Platform 8](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/desktop-modeler-plugin-platform-to-cloud-converter). This maps possible BPMN elements and technical attributes into the Camunda Platform 8 format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
+1. [A Desktop Modeler plugin to convert BPMN models from Camunda Platform 7 to Camunda Platform 8](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/modeler-plugin-7-to-8-converter). This maps possible BPMN elements and technical attributes into the Camunda Platform 8 format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
 
-2. [The Camunda Platform 7 to Camunda Platform 8 Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter). This is a library providing a worker to hook in Camunda Platform 7-based glue code. For example, it can invoke existing JavaDelegate classes.
+2. [The Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter). This is a library providing a worker to hook in Camunda Platform 7-based glue code. For example, it can invoke existing JavaDelegate classes.
 
 In essence, this tooling implements details described in the next sections.
 
@@ -262,7 +262,7 @@ For example, to migrate an existing Spring Boot application, take the following 
 
 1. Adjust Maven dependencies
   * Remove Camunda Platform 7 Spring Boot Starter and all other Camunda dependencies.
-  * Add [Spring Zeebe Starter](https://github.com/zeebe-io/spring-zeebe).
+  * Add [Spring Zeebe Starter](https://github.com/camunda-community-hub/spring-zeebe).
 2. Adjust config
   * Make sure to set [Camunda Platform 8 credentials](https://github.com/camunda-community-hub/spring-zeebe#configuring-camunda-cloud-connection) (for example, in `src/main/resources/application.properties`) and point it to an existing Zeebe cluster.
   * Remove existing Camunda Platform 7 settings.
@@ -287,15 +287,15 @@ In Camunda Platform 7, there are three ways to attach Java code to service tasks
 
 Camunda Platform 8 cannot directly execute custom Java code. Instead, there must be a [job worker](/components/concepts/job-workers.md) executing code.
 
-The [Camunda Platform 7 to Camunda Platform 8 Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type ```camunda-7-migration```. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
+The [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type ```camunda-7-adapter```. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
 
 ![Service task in Camunda Platform 7 and Camunda Platform 8](img/migration-service-task.png)
 
 You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
 
-The [Camunda Platform 7 to Camunda Platform 8 Converter Modeler plugin](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-modeler-plugin-platform-to-cloud-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
+The [Camunda Platform 7 to Camunda Platform 8 Converter Modeler plugin](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/modeler-plugin-7-to-8-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
 
-The topic ```camunda-7-migration``` is set and the following attributes/elements are migrated and put into a task header:
+The topic ```camunda-7-adapter``` is set and the following attributes/elements are migrated and put into a task header:
 * ```camunda:class```
 * ```camunda:delegateExpression```
 * ```camunda:expression``` and ```camunda:resultVariable```
@@ -320,7 +320,7 @@ To migrate BPMN process models from Camunda Platform 7 to Camunda Platform 8, yo
 * Different configuration attributes are used
 * Camunda Platform 8 has a *different coverage* of BPMN elements (see [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) vs [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
 
-The following sections describe what the existing [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration) does by BPMN symbol and explain unsupported attributes.
+The following sections describe what the existing [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration/) does by BPMN symbol and explain unsupported attributes.
 
 ### Service tasks
 
@@ -333,7 +333,7 @@ A service task might have **attached Java code**. In this case, the following at
 * ```camunda:delegateExpression```
 * ```camunda:expression``` and ```camunda:resultVariable```
 
-The topic ```camunda-7-migration``` is set.
+The topic ```camunda-7-adapter``` is set.
 
 The following attributes/elements cannot be migrated:
 * ```camunda:asyncBefore```: Every task in Zeebe is always asyncBefore and asyncAfter.
@@ -367,7 +367,7 @@ Gateways rarely need migration. The relevant configuration is mostly in the [exp
 
 Expressions need to be in [FEEL (friendly-enough expression language)](/components/concepts/expressions.md#the-expression-language) instead of [JUEL (Java unified expression language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/).
 
-Migrating simple expressions is doable (as you can see in [these test cases](https://github.com/camunda-community-hub/camunda-platform-to-cloud-migration/blob/main/camunda-modeler-plugin-platform-to-cloud-converter/client/JuelToFeelConverter.test.js)), but not all expressions can be automatically converted.
+Migrating simple expressions is doable (as you can see in [these test cases](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/modeler-plugin-7-to-8-converter/client/JuelToFeelConverter.test.js)), but not all expressions can be automatically converted.
 
 The following is not possible:
 
@@ -490,6 +490,8 @@ The ```bpmn message name``` is used in both products and doesn't need migration.
 
 For Camunda Platform 8, [a former community extension](https://github.com/camunda-community-hub/dmn-scala), built by core Camunda developers, is productized. This engine has a higher coverage of DMN elements. This engine can execute DMN models designed for Camunda Platform 7, however, there are some small differences listed below.
 
+You can use the above mentioned tooling to convert your DMN models from Camunda Platform 7 to Camunda Platform 8.
+
 The following elements/attributes are not supported :
 
   * `Version Tag` is not supported in Camunda Platform 8
@@ -523,7 +525,7 @@ As described earlier in this guide, migration is an ongoing topic and this guide
 
 * Describe implications on testing.
 * Discuss adapters for Java or REST client.
-* Discuss external task adapter for Java code and probably add it to the [Camunda Platform 7 to Camunda Platform 8 Adapter](https://github.com/berndruecker/camunda-platform-to-cloud-migration/tree/main/camunda-platform-to-cloud-adapter).
+* Discuss external task adapter for Java code and probably add it to the [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter).
 * Discuss more concepts around BPMN
 ** [Field injection](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#field-injection) that is using ```camunda:field``` available on many BPMN elements.
 ** Multiple instance markers available on most BPMN elements.
