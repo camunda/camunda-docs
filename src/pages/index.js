@@ -101,7 +101,7 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Documentation for all the components of Camunda Cloud.">
+      description="Documentation for all the components of Camunda Platform 8.">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>

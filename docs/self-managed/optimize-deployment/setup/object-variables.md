@@ -38,13 +38,13 @@ Depending on where the imported object variables originate, the following config
 
 ### Platform object variables
 
-If you are importing object variables from Camunda Platform 7, it is required to configure the Platform 7's spin serialization so process variables are by default **serialized as JSON**. Refer to the [Platform 7 documentation](https://docs.camunda.org/manual/latest/user-guide/data-formats/json/#serializing-process-variables) for more information on how to set up JSON serialization.
+Optimize supports both [object process variables serialized as JSON](https://docs.camunda.org/manual/latest/user-guide/data-formats/json/#serializing-process-variables) and [native JSON variables](https://docs.camunda.org/manual/latest/user-guide/data-formats/json/#native-json-variable-value) from Camunda Platform 7. If you are importing object variables, it is required to configure the Platform's spin serialization so that process variables are by default **serialized as JSON**. Refer to the [Camunda Platform 7 documentation](https://docs.camunda.org/manual/latest/user-guide/data-formats/json/#serializing-process-variables) for more information on how to set up JSON serialization.
 
-Furthermore, to allow Optimize to correctly parse date properties within the object variable, ensure date properties of objects are serialized using a common **date format** other than timestamps. If date properties are serialized as timestamps, these properties cannot be identified and parsed as dates when importing into Optimize and will instead be persisted as number variables.
+Furthermore, to allow Optimize to correctly parse date properties within the object or native JSON variable, ensure date properties of objects are serialized using a common **date format** (for example `yyyy-MM-dd'T'HH:mm:ss.SSSZ`) other than unix timestamps. If date properties are serialized as unix timestamps, these properties cannot be identified and parsed as dates when importing into Optimize and will instead be persisted as number variables.
 
 ### Zeebe object variables
 
-If you are creating object variables using a Zeebe process, ensure date properties within the JSON object are stored using a common **date format** other than timestamps. If Optimize imports timestamp date properties, these properties cannot be identified and parsed as dates and will instead be persisted as number variables.
+If you are creating object variables using a Zeebe process, ensure date properties within the JSON object are stored using a common **date format** (for example `yyyy-MM-dd'T'HH:mm:ss.SSSZ`) other than unix timestamps. If Optimize imports unix timestamp date properties, these properties cannot be identified and parsed as dates and will instead be persisted as number variables.
 
 ### External object variables
 

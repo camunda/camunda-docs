@@ -51,6 +51,10 @@ And for the else sequence flow:
 
 Deploy the updated process again so the specified decisions in the gateway are used.
 
+:::note
+When utilizing [variables](../../components/concepts/variables.md) to represent the data of a process instance, you can also utilize [expressions](../../components/concepts/expressions.md) to access these variables and calculate the value(s).
+:::
+
 ## Next steps
 
 - [Monitor your process in Operate](monitor-your-process-in-operate.md)

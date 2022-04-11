@@ -19,6 +19,12 @@ In this guide, we’ll step through one way to create an automated process utili
 - Ensure you have a valid [Camunda Cloud account](./getting-started/create-camunda-cloud-account.md), or sign up if you still need one.
 - (Optional) Install [Camunda Desktop Modeler](../components/modeler/desktop-modeler/install-the-modeler.md).
 
+### Create a cluster
+
+import CreateCluster from './assets/react-components/create-cluster.md'
+
+<CreateCluster/>
+
 ### Create an automated process with user tasks
 
 To create an automated process with user tasks, take the following steps:
@@ -43,8 +49,11 @@ To create an automated process with user tasks, take the following steps:
    - Note that the sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
 11. Attach an end event to the two user tasks.
 
-
 <div bpmn="getting-started-guides/prepare-dinner.bpmn" />
+
+:::note
+Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
+:::
 
 #### Implement a form
 
@@ -80,6 +89,10 @@ Within this example, we've included a form to demonstrate the completion of a hu
 You can now navigate back to Operate and notice the process instance has continued, and the token has moved forward.
 
 The token moves through the exclusive gateway (also called the XOR gateway), and is used to model the decision in the process. When the execution arrives at this gateway, all outgoing sequence flows are evaluated in the order in which they have been defined. The sequence flow which condition evaluates to ‘true’ (or which doesn’t have a condition set, conceptually having a ‘true’ value defined on the sequence flow) is selected for continuing the process.
+
+:::note
+Here, after implementing your gateway, is when [expressions](../components/concepts/expressions.md) will become useful in accessing [variables](../components/concepts/variables.md) and calculating their value to move forward in a process.
+:::
 
 In this case, the token will move through the gateway and (according to the conditional expressions we outlined earlier) to the selected dinner based on the **Decide what's for dinner** user task we completed. If we select **Chicken**, the token moves forward to **Prepare chicken**. If we select **Salad**, the token moves forward to **Prepare salad**.
 

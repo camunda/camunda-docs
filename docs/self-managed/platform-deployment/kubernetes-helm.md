@@ -3,9 +3,9 @@ id: kubernetes-helm
 title: "Camunda Helm charts"
 ---
 
-Camunda provides Helm charts that are continuously being improved and released to the [Camunda Cloud Helm Chart Repository](https://github.com/camunda-community-hub/camunda-cloud-helm). Those Helm charts are not cloud provider-specific, so you can choose your Kubernetes provider.
+Camunda provides contionously improved Helm charts that are available here: [Camunda Platform Helm Charts](https://github.com/camunda/camunda-platform-helm). Those Helm charts are not cloud provider-specific, so you can choose your Kubernetes provider.
 
-We encourage [reporting issues](https://github.com/camunda-community-hub/camunda-cloud-helm/issues) if you find them.
+We encourage [reporting issues](https://github.com/camunda/camunda-platform-helm/issues) if you find them.
 
 
 ## What is Helm?
@@ -23,11 +23,12 @@ By default, the following will be installed:
   - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
   - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
   - **Tasklist**: Deploys the Tasklist component to work with user tasks.
+  - **Identity**: Deploys the Identity component responsible for authentication and authorization.
   - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
   
 ![Charts](assets/ccsm-helm-charts.png)
 
-When installing the [ccsm-helm](https://github.com/camunda-community-hub/camunda-cloud-helm/tree/main/charts/ccsm-helm) chart, all the components in this picture are installed. 
+When installing the [ccsm-helm](https://github.com/camunda/camunda-platform-helm/tree/main/charts/ccsm-helm) chart, all the components in this picture are installed. 
 
 ## How to install Camunda 8 using Helm
 
@@ -84,7 +85,7 @@ elasticsearch-master-1                                 1/1     Running   0      
 
 ### Installing the Camunda Helm chart locally using KIND
 
-If you want to use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f ccsm-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda-community-hub/camunda-cloud-helm/blob/main/kind/ccsm-kind-values.yaml).
+If you want to use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f ccsm-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda/camunda-platform-helm/blob/main/kind/ccsm-kind-values.yaml).
 
 
 

@@ -146,11 +146,16 @@ These values control mechanisms of Optimize related security, e.g. security head
 
 ### Public API
 
-This section focuses on common properties related to the Public REST API of Optimize.
+This section focuses on common properties related to the Public REST API of Optimize. It is 
+mandatory to configure one of the values below if the Public REST API is to be used. If neither is 
+configured an error will be thrown and all requests to the Public API will get rejected. If both are configured then 
+the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|api.accessToken|null|Secret token to be provided to the secured REST API on access. If set to `null` an error will be thrown and requests will get rejected.<br /><br />It is mandatory to configure a value if the majority of Public REST API is to be used.|
+|api.accessToken|null|Secret static shared token to be provided to the secured REST API in the authorization header. Will be ignored if `api.jwtSetUri` is also set. |
+|api.jwtSetUri|null|Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`|
+|api.audience|optimize|Optimize tries to match this with the `aud` field contained in the JWT token. Only used when `jwtSetUri` is set.|
 
 ### Container
 
@@ -203,7 +208,7 @@ REST API endpoint locations, timeouts, etc.
 |import.data.process-definition.maxPageSize|10000|Determines the page size for process definition entities fetching.|
 |import.data.process-instance.maxPageSize|10000|Determines the page size for historic decision instance fetching.|
 |import.data.variable.maxPageSize|10000|Determines the page size for historic variable instance fetching.|
-|import.data.variable.includeObjectVariableValue|true|Controls whether Optimize fetches the serialized value of object variables from the Camunda Runtime REST API. By default, this is active for backwards compatibility. If no variable plugin to handle object variables is installed, it can be turned off to reduce the overhead of the variable import. <br /><br />Note: Disabling the object variable value transmission is only effective with Camunda Platform 7 7.13.11+, 7.14.5+, and 7.15.0+.|
+|import.data.variable.includeObjectVariableValue|true|Controls whether Optimize fetches the serialized value of object variables from the Camunda Runtime REST API. By default, this is active for backwards compatibility. If no variable plugin to handle object variables is installed, it can be turned off to reduce the overhead of the variable import. <br /><br />Note: Disabling the object variable value transmission is only effective with Camunda Platform 7.15.0+.|
 |import.data.user-task-instance.maxPageSize|10000|Determines the page size for historic User Task instance fetching.|
 |import.data.identity-link-log.maxPageSize|10000|Determines the page size for historic identity link log fetching.|
 |import.data.decision-definition-xml.maxPageSize|2|Determines the page size for decision definition xml model fetching. Should be a low value, as large models will lead to memory or timeout problems.|
@@ -250,6 +255,7 @@ if one node fails, Optimize is still able to talk to the cluster.
 |--- |--- |--- |
 |es.connection.timeout|10000|Maximum time without connection to Elasticsearch that Optimize should wait until a timeout triggers.|
 |es.connection.responseConsumerBufferLimitInMb|100|Maximum size of the Elasticsearch response consumer heap buffer. This can be increased to resolve errors from Elasticsearch relating to the entity content being too long|
+|es.connection.pathPrefix||The path prefix under which Elasticsearch is available.|
 |es.connection.nodes[*].host|localhost|The address/hostname under which the Elasticsearch node is available.|
 |es.connection.nodes[*].httpPort|9200|A port number used by Elasticsearch to accept HTTP connections.|
 |es.connection.proxy.enabled|false|Whether an HTTP proxy should be used for requests to Elasticsearch.|

@@ -33,6 +33,7 @@ Flags passed as command line arguments take precedence over those configured via
 | "disable-adjust-origin"  | false |
 | "disable-cmmn" | true |
 | "disable-dmn" | false |
+| "disable-form" | false |
 | "disable-platform" | false |
 | "disable-zeebe" | false |
 | "disable-remote-interaction" | false |
@@ -48,8 +49,8 @@ To disable the CMMN and DMN editing capabilities of the App, configure your `fla
 
 ```js
 {
-    "disable-cmmn": true,
-    "disable-dmn": true
+    "disable-dmn": true,
+    "disable-form": true
 }
 ```
 

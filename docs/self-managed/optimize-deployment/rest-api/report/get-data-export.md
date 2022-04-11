@@ -30,9 +30,7 @@ The following request headers have to be provided with every data export request
 
 |Header|Constraints|Value|
 |--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](../../authorization)|
-
-* Only required if not set as a query parameter
+|Authorization|REQUIRED|[Authorization](../../authorization)|
 
 ## Query parameters
 
@@ -40,12 +38,9 @@ The following query parameters have to be provided with every data export reques
 
 |Parameter|Constraints|Value|
 |--- |--- |--- |
-|access_token|REQUIRED*|[Authorization](../../authorization)|
 |limit|REQUIRED|Maximum number of records per page. Please note that the limit will only be considered when performing the request for the first page of a raw data report. The following requests for a given searchRequestId will have the same page size as the first request.|
 |paginationTimeout|REQUIRED|The amount of time (in seconds) for which a search context will be held in memory, so that the remaining pages of the result can be retrieved. For more information on how to paginate through the results, please refer to the section [Pagination](#pagination).|
 |searchRequestId|Optional|The ID of a previous search for which you wish to retrieve the next page of results. For more information on how to get and use a searchRequestId please refer to the section [Pagination](#pagination).|
-
-* Only required if not set as a request header
 
 ## Request body
 
@@ -83,8 +78,10 @@ Let's assume you want to export a report with the ID `e6c5abb1-6a18-44e7-8480-d5
 #### Initial API call
 
 GET `/api/public/export/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62/result/json?
-paginationTimeout=60&access_token=mySecret&limit=2`
+paginationTimeout=60&limit=2`
 
+##### Request header
+`Authorization: Bearer mySecret`
 ##### Response content
 
     {
@@ -128,7 +125,10 @@ Status 200.
 
 Note here the use of the query parameter `searchRequestId` to retrieve further pages from the initial search.
 
-`GET /api/public/export/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62/result/json?paginationTimeout=60&access_token=mySecret&searchRequestId=FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ&limit=2`
+`GET /api/public/export/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62/result/json?paginationTimeout=60&searchRequestId=FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ&limit=2`
+
+##### Request header
+`Authorization: Bearer mySecret`
 
 ##### Response content
 

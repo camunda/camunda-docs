@@ -4,6 +4,7 @@ module.exports = {
     {
       "Getting started with Camunda Cloud": [
         "guides/getting-started/create-camunda-cloud-account",
+        "guides/getting-started/create-your-cluster",
         "guides/getting-started/setup-client-connection-credentials",
         "guides/getting-started/connect-to-your-cluster",
         "guides/getting-started/model-your-first-process",
@@ -186,11 +187,8 @@ module.exports = {
             },
           ],
         },
-        {
-          "DMN": [
-            "components/modeler/dmn/desktop-modeler-dmn",
-          ],
-        },
+        require("./docs/components/modeler/dmn/sidebar-schema"),
+        require("./docs/components/modeler/feel/sidebar-schema"),
         {
           "Forms": [
             "components/modeler/forms/camunda-forms-reference",
@@ -396,7 +394,6 @@ module.exports = {
 
   Reference: [
     "reference/overview",
-    require("./docs/reference/feel/sidebar-schema"),
     "reference/glossary",
     "reference/announcements",
     "reference/licenses",
@@ -524,6 +521,12 @@ module.exports = {
           "REST API": [
             "self-managed/optimize-deployment/rest-api/authorization",
             {
+              "Configuration": [
+                "self-managed/optimize-deployment/rest-api/configuration/enable-sharing",
+                "self-managed/optimize-deployment/rest-api/configuration/disable-sharing",
+              ],
+            },
+            {
               "Dashboard": [
                 "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
                 "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
@@ -542,12 +545,14 @@ module.exports = {
             "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
             "self-managed/optimize-deployment/rest-api/health-readiness",
             "self-managed/optimize-deployment/rest-api/import-entities",
+            "self-managed/optimize-deployment/rest-api/variable-labeling",
           ],
         },
         "self-managed/optimize-deployment/reimport",
         {
           "Migration & Update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
             "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
             "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
             "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
@@ -575,17 +580,8 @@ module.exports = {
       ],
       "Identity": [
         "self-managed/identity/what-is-identity",
+        "self-managed/identity/getting-started/index",
         {
-          "Getting started": [
-            {
-              "Running Identity with Docker": [
-                "self-managed/identity/getting-started/docker/setup-environment",
-                "self-managed/identity/getting-started/docker/starting-the-services",
-                "self-managed/identity/getting-started/docker/logging-in",
-              ]
-            }
-          ],
-        }, {
           "User guide": [
             "self-managed/identity/user-guide/adding-an-application",
             "self-managed/identity/user-guide/adding-an-api",
