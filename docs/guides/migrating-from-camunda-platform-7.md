@@ -59,9 +59,7 @@ Most expressions can be converted (see [this community extension](https://github
 
 #### Different connector infrastructure
 
-Camunda Platform 7 provides several [connectors](https://docs.camunda.org/manual/latest/reference/connect/). These connectors are not supported in Camunda Platform 8, as Camunda Platform 8 will create a much more powerful connector infrastructure.
-
-[//]:# (Flagging here as will need to update once connectors docs are merged.)
+Camunda Platform 7 provides several [connectors](https://docs.camunda.org/manual/latest/reference/connect/). Camunda Platform 8 now also offers multiple [connectors](../components/modeler/web-modeler/connectors/available-connectors/index.md) as well.
 
 To migrate existing connectors, create a small bridging layer to invoke these connectors via a custom [job workers](/components/concepts/job-workers.md).
 
