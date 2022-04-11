@@ -1,7 +1,7 @@
 ---
 id: use-connectors
 title: Use Connectors
-description: How to use Connectos in Web Modeler
+description: How to use Connectors in Web Modeler
 ---
 
 Any task can be transformed into a connector task using the change type context menu item (spanner/wrench icon) to integrate connectors in a business model. Users can search for keywords like REST or email to find specific connectors. To discover all available connectors in Camunda, input the term connector into the search bar.
