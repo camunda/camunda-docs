@@ -8,7 +8,7 @@ description: "Set up client connection credentials to create, name, and connect 
 
 ## Prerequisites
 
-- [Camunda Cloud account](create-camunda-cloud-account.md)
+- [Camunda Platform 8 account](create-camunda-cloud-account.md)
 
 ## Set up client connection credentials
 

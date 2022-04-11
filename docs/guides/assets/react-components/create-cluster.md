@@ -1,7 +1,7 @@
 ---
 ---
 
-You must create a cluster if you have a new Camunda Cloud account. 
+You must create a cluster if you have a new Camunda Platform 8 account. 
 
 1. To create a cluster, click the **Clusters** tab, and click **Create New Cluster**.
 2. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel, the latest generation, and the region closest to you. Click **Create**.

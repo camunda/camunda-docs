@@ -6,7 +6,7 @@ description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
-Using [Camunda Cloud](./getting-started/create-camunda-cloud-account.md), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
+Using [Camunda Platform 8](./getting-started/create-camunda-cloud-account.md), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
 
 When a process instance arrives at such a user task, a new job similar to a service task is created. The process instance stops at this point and waits until the job is completed. Applications like [Tasklist](../components/tasklist/introduction.md) can be used by humans to complete these tasks.
 
@@ -16,7 +16,7 @@ In this guide, we’ll step through one way to create an automated process utili
 
 ### Prerequisites
 
-- Ensure you have a valid [Camunda Cloud account](./getting-started/create-camunda-cloud-account.md), or sign up if you still need one.
+- Ensure you have a valid [Camunda Platform 8 account](./getting-started/create-camunda-cloud-account.md), or sign up if you still need one.
 - (Optional) Install [Camunda Desktop Modeler](../components/modeler/desktop-modeler/install-the-modeler.md).
 
 ### Create a cluster
@@ -31,7 +31,7 @@ To create an automated process with user tasks, take the following steps:
 
 #### Develop your automated process with user tasks
 
-1. Log in to your Camunda Cloud account.
+1. Log in to your Camunda Platform 8 account.
 2. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
 3. Name your project and select **New > BPMN Diagram > + Create blank**.
 4. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Preparing dinner` with an id of `preparing-dinner`.
@@ -79,7 +79,7 @@ As mentioned earlier, you'll need to insert the defined variable values into the
 
 Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](./utilizing-forms.md).
 
-1. Go back to your Camunda Cloud diagram and select the honeycomb icon and then **View user tasks** to take a look at your user tasks inside Tasklist.
+1. Go back to your Camunda Platform 8 diagram and select the honeycomb icon and then **View user tasks** to take a look at your user tasks inside Tasklist.
 2. Select the open user task on the left panel of **Tasks**. In our example below, this is **Decide what's for dinner**.
 3. Next to **Assignee**, click **Claim** to claim the task.
 4. Once finished entering the appropriate information, click **Complete Task**.

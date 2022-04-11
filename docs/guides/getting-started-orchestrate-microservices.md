@@ -6,13 +6,13 @@ description: "Orchestrate Microservices along a business process for visibility 
 keywords: [microservices, orchestration, getting-started]
 ---
 
-Using Camunda Cloud, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda Cloud.
+Using Camunda Platform 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda Platform 8.
 
-While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda Cloud in other programming languages.
+While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda Platform 8 in other programming languages.
 
 ## Prerequisites
 
-* Valid Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one
+* Valid Camunda Platform 8 account or [sign up](https://camunda.io/signup) if you still need one
 * Java >= 8
 * Maven
 * IDE (IntelliJ, VSCode, or similar)
@@ -48,9 +48,9 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 ### Create credentials for your Zeebe client
 
-To interact with your Camunda Cloud cluster, you'll use the Zeebe client. First, you'll need to create credentials.
+To interact with your Camunda Platform 8 cluster, you'll use the Zeebe client. First, you'll need to create credentials.
 
-1. The main page for Camunda Cloud Console should be open on another tab. Use Camunda Cloud Console to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your cluster id and region. You will need this information later when creating a worker in the next section.
+1. The main page for Console should be open on another tab. Use Console to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your cluster id and region. You will need this information later when creating a worker in the next section.
 
 :::note 
 
@@ -72,9 +72,9 @@ Next, we’ll create a worker for the service task by associating it with the ty
 4. After making these changes, perform a Maven install, then run the Worker.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
 5. Using the Modeler tab in your browser, navigate to Operate and you will see your token has moved to the end event, completing this process instance.
 
-Congratulations! You successfully built your first microservice orchestration solution with Camunda Cloud.
+Congratulations! You successfully built your first microservice orchestration solution with Camunda Platform 8.
 
 ## Next steps
 
-* Learn more about Camunda Cloud and what it can do by reading [What is Camunda Cloud?](../../components/concepts/what-is-camunda-platform-8).
-* Get your local environment ready for development with Camunda Cloud by [setting up your first development project](../setting-up-development-project).
+* Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8?](../../components/concepts/what-is-camunda-platform-8).
+* Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](../setting-up-development-project).
