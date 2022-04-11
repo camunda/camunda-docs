@@ -28,6 +28,9 @@ Not sure what Docker Compose is? Check out Docker's [Overview of Docker Compose]
 
 The following ports are exposed:
 
+- `26500`: Zeebe Gateway API (for connecting with API clients,  `zbctl` or Camunda Modeler)
+- [`8081`](http://localhost:8081/): Operate
+- [`8082`](http://localhost:8082/): Tasklist
 - `26500`: Zeebe Gateway API
 - [`8080`](http://localhost:8080/): Operate
 - [`8081`](http://localhost:8081/): Tasklist
@@ -87,7 +90,7 @@ operate:
     container_name: operate
     image: camunda/operate:latest
     ports:
-        - 8080:8080
+        - "8081:8080"
     environment:
         - camunda.operate.elasticsearch.url=http://elasticsearch:9200
         - camunda.operate.zeebeElasticsearch.url=http://elasticsearch:9200
@@ -109,7 +112,7 @@ tasklist:
     container_name: tasklist
     image: camunda/tasklist:latest
     ports:
-        - 8080:8080
+        - "8082:8080"
     environment:
         - camunda.tasklist.elasticsearch.url=http://elasticsearch:9200
         - camunda.tasklist.zeebeElasticsearch.url=http://elasticsearch:9200
@@ -130,7 +133,9 @@ services:
   identity:
     image: camunda/identity:latest
     ports:
-      - "8080:8080"
+      - "8084:8084"
+    environment:
+      SERVER_PORT: 8084
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8082/actuator/health" ]
       interval: 30s
@@ -215,8 +220,9 @@ services:
     container_name: identity
     image: camunda/identity:8.0.0
     ports:
-      - "8080:8080"
+      - "8084:8084"
     environment:
+      SERVER_PORT: 8084
       KEYCLOAK_URL: http://keycloak:8080/auth
       IDENTITY_AUTH_PROVIDER_BACKEND_URL: http://keycloak:8080/auth/realms/camunda-platform
       KEYCLOAK_USERS_0_FIRST_NAME: "Bark"
@@ -249,7 +255,7 @@ Your output should look similar to the following:
 
 ```text
 CONTAINER ID   IMAGE                   COMMAND                  CREATED       STATUS                 PORTS                               NAMES
-e15d9e80f18d   camunda/identity:8.0.0  "java -jar identity.…"   5 hours ago   Up 5 hours             0.0.0.0:8080->8080/tcp              identity
+e15d9e80f18d   camunda/identity:8.0.0  "java -jar identity.…"   5 hours ago   Up 5 hours             0.0.0.0:8084->8084/tcp              identity
 9e209e46b4df   jboss/keycloak:16.1.1   "/opt/jboss/tools/do…"   5 hours ago   Up 5 hours (healthy)   8443/tcp, 0.0.0.0:18080->8080/tcp   keycloak
 ```
 
@@ -274,7 +280,7 @@ optimize:
     container_name: optimize
     image: camunda/optimize:latest
     ports:
-        - 8090:8090
+        - 8083:8090
     environment:
         - SPRING_PROFILES_ACTIVE=ccsm
         - CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL=http://localhost:9090
