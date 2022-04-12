@@ -4,8 +4,6 @@ title: "Instructions"
 description: "Find out how to update to a new version of Optimize without losing your reports and dashboards."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
 Roughly every quarter of a year a new minor version of Optimize is released. These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
 
 If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 2.5 to 3.0, you need to update first from 2.5 to 2.6, then from 2.6 to 2.7, and finally from 2.7 to 3.0. The following table shows the recommended update paths to the latest version:
@@ -72,7 +70,7 @@ This approach requires you to manually execute the update script. You can perfor
 - Open up a terminal, change to the root directory of your **new** Optimize version and run the following command: `./upgrade/upgrade.sh` on Linux or `update/update.bat` on Windows
 - During the execution the executable will output a warning to ask you to back-up your Elasticsearch data. Type `yes` to confirm that you have backed up the data.
 - Feel free to [file a support case](https://docs.camunda.org/enterprise/support/) if any errors occur during the migration process.
-- To get more verbose information about the update, you can adjust the logging level as it is described in the [configuration documentation](./../setup/configuration.md/#logging).
+- To get more verbose information about the update, you can adjust the logging level as it is described in the [configuration documentation](./../configuration/logging.md).
 
 #### 3.2 Automatic update execution (Optimize >3.2.0)
 

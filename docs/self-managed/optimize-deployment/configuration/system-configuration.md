@@ -1,56 +1,8 @@
 ---
-id: configuration
-title: "Configuration"
+id: system-configuration
+title: "System configuration"
 description: "An overview of all possible configuration options in Optimize."
 ---
-
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
-## Logging
-
-Camunda Optimize provides logging facilities that are preconfigured to use
-_INFO_ logging level which provides minimal output of information in log files.
-This level can be adjusted using the `environment-logback.xml` configuration file.
-
-Even though one could potentially configure logging levels for all packages, it
-is recommended to set logging levels for the following three Optimize parts only using exact package
-reference as follows:
-
-* Optimize runtime environment:
-
-```xml
-<logger name="org.camunda.optimize" level="info" />
-```
-
-* Optimize update:
-
-```xml
-<logger name="org.camunda.optimize.update" level="info">
-  <appender-ref ref="UPGRADE"/>
-</logger>
-```
-
-* Communication to Elasticsearch:
-
-```xml
-<logger name="org.elasticsearch" level="warn" />
-```
-
-If you are running Optimize with Docker, you can use the following environment variables to configure its logging levels.
-
-- `OPTIMIZE_LOG_LEVEL` sets the logging level for the Optimize log
-- `UPGRADE_LOG_LEVEL` sets the logging level for the Optimize update log
-- `ES_LOG_LEVEL` sets the logging level for Elasticsearch
-
-Whether using the configuration file or Docker environment variables, to define the granularity of the information shown in the log you can set one of the following log levels:
-
-- **error**: shows errors only.
-- **warn**: like **error**, but displays warnings as well.
-- **info**: logs everything from **warn** and the most important information about state changes or actions in Optimize.
-- **debug**: in addition to **info**, writes information about the scheduling process, alerting as well as the import of the engine data.
-- **trace**: like **debug**, but in addition, writes all requests sent to the Camunda engine as well as all queries towards Elasticsearch to the log output.
-
-## System configuration
 
 All distributions of Camunda Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements. To do that, have a look into the folder named `config` which contains a file called `environment-config.yaml` with values that override the default Optimize properties.
 
@@ -193,7 +145,7 @@ with it and represented by `${engineAlias}`.
 |engines.${engineAlias}.webapps.endpoint|http://localhost:8080/camunda|Defines the endpoint where the Camunda webapps are found. This allows Optimize to directly link to the other Camunda Web Applications, e.g. to jump from Optimize directly to a dedicated process instance in Cockpit|
 |engines.${engineAlias}.webapps.enabled|true|Enables/disables linking to other Camunda Web Applications|
 
-### Engine common settings
+### Camunda Platform 7 common import settings
 
 Settings used by Optimize, which are common among all configured engines, such as
 REST API endpoint locations, timeouts, etc.
@@ -237,6 +189,15 @@ REST API endpoint locations, timeouts, etc.
 |import.identitySync.maxPageSize|10000|The max page size when multiple users or groups are iterated during the import.|
 |import.identitySync.maxEntryLimit|100000|The entry limit of the user/group search cache. When increasing the limit, keep in mind to account for this by increasing the JVM heap memory as well. Please refer to the "Adjust Optimize heap size" documentation on how to configure the heap size.|
 |import.customer-onboarding|false|Determines if the customer onboarding data should be loaded to Optimize.|
+
+### Connection to Camunda Platform 8
+
+|YAML Path|Default Value|Description|
+|--- |--- |--- |
+|zeebe.enabled|false|Toggles whether Optimize should attempt to import data from the connected Zeebe instance|
+|zeebe.name|zeebe-record|The name suffix of the exported Zeebe records. This must match the record-prefix configured in the exporter of the instance|
+|zeebe.partitionCount|1|The number of partitions configured for the Zeebe record source|
+|zeebe.maxImportPageSize|10000|The max page size for importing Zeebe data|
 
 ### Elasticsearch
 
@@ -355,6 +316,8 @@ Customize the Optimize UI e.g. by adjusting the logo, head background color etc.
 
 ### Event Based Process Configuration
 
+<span class="badge badge--platform">Camunda Platform 7 only</span>
+
 Configuration of the Optimize event based process feature.
 
 |YAML Path|Default Value|Description|
@@ -368,7 +331,9 @@ Configuration of the Optimize event based process feature.
 
 ### Event Ingestion REST API Configuration
 
-Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-ingestion) for [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md).
+<span class="badge badge--platform">Camunda Platform 7 only</span>
+
+Configuration of the Optimize [Event Ingestion REST API](../rest-api/event-ingestion.md) for [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md).
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
@@ -388,6 +353,8 @@ Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-in
 
 
 ### Telemetry Configuration
+
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 Configuration of initial telemetry settings.
 
@@ -409,6 +376,6 @@ Settings of plugin subsystem serialization format, variable import, Camunda endp
 | plugin.decisionOutputImport.basePackages |     | Look in the given base package list for Decision output import adaption plugins. If empty, the import is not influenced. |
 | plugin.elasticsearchCustomHeader.basePackages |     | Look in the given base package list for Elasticsearch custom header plugins. If empty, Elasticsearch requests are not influenced. |
 | serialization.engineDateFormat | yyyy-MM-dd'T'HH:mm:ss.SSSZ | Define a custom date format that should be used (should be the same as in the engine). |
-| export.csv.limit | 1000 | Maximum number of records returned by CSV export.<br /><br /> Note: Increasing this value comes at a memory cost for the Optimize application that varies based on the actual data. As a rough guideline, an export of a 50000 raw data report records containing 8 variables on each instance can cause temporary heap memory peaks of up to ~200MB with the actual CSV file having a size of ~20MB. Please adjust the heap memory accordingly, see [Adjust Optimize heap size](../installation/#adjust-optimize-heap-size) on how to do that. |
+| export.csv.limit | 1000 | Maximum number of records returned by CSV export.<br /><br /> Note: Increasing this value comes at a memory cost for the Optimize application that varies based on the actual data. As a rough guideline, an export of a 50000 raw data report records containing 8 variables on each instance can cause temporary heap memory peaks of up to ~200MB with the actual CSV file having a size of ~20MB. Please adjust the heap memory accordingly, see [Adjust Optimize heap size](../install-and-start.md#adjust-optimize-heap-size) on how to do that. |
 | export.csv.delimiter | ,   | The delimiter used for the CSV export. The value defaults to a comma, however other common CSV delimiters such as semicolons (";") and tabs ("\\t") can also be used. |
 | sharing.enabled | true | Enable/disable the possibility to share reports and dashboards. |

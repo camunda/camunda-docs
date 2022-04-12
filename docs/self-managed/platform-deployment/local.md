@@ -162,4 +162,4 @@ A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use 
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup](../../optimize-deployment/setup/installation). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.
+The installation of Optimize is described in [Optimize Setup](../optimize-deployment/install-and-start.md). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.

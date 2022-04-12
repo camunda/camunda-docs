@@ -82,7 +82,7 @@ Below is an example payload including all telemetry data currently sent by Optim
 
 ### Optimize configuration
 
-You can enable telemetry before starting Optimize by setting the `initializeTelemetry` flag in your configuration file to `true`. Refer to the [configuration section](../configuration#telemetry-configuration) for more details.
+You can enable telemetry before starting Optimize by setting the `initializeTelemetry` flag in your configuration file to `true`. Refer to the [configuration section](./system-configuration.md#telemetry-configuration) for more details.
 
 ### UI
 

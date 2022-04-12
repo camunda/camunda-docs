@@ -48,4 +48,6 @@ There are entities that only exist in Camunda Optimize and authorizations to the
 
 ### Event based processes
 
+<span class="badge badge--platform">Camunda Platform 7 only</span>
+
 Although [event-based processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md) may include data originating from adjacent systems like the Camunda Engine when using [Camunda Activity Event Sources](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#event-sources), they do not enforce any authorizations from Camunda Admin. The reason for that is that multiple sources can get combined in a single [event-based process](./../../../components/optimize/userguide/additional-features/event-based-processes.md) that may contain conflicting authorizations. It is thus required to authorize users or groups to [event-based processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md) either directly when [publishing](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#publishing-an-event-based-process) them or later on via the [event-based process - Edit Access](./../../../components/optimize/userguide/additional-features/event-based-processes.md#event-based-process-list---edit-access) option.

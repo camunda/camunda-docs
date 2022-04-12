@@ -30,7 +30,7 @@ Any configured [variable plugins](../../plugins/variable-import-plugin) are appl
 
 ## Optimize configuration
 
-The import of object variable values is enabled by default and can be disabled using the `import.data.variable.includeObjectVariableValue` [configuration](../configuration/#engine-common-settings).
+The import of object variable values is enabled by default and can be disabled using the `import.data.variable.includeObjectVariableValue` [configuration](./system-configuration.md#camunda-platform-7-common-import-settings).
 
 ## Other system configurations
 
