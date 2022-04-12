@@ -194,10 +194,10 @@ REST API endpoint locations, timeouts, etc.
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |
-|zeebe.enabled|false|Toggles whether Optimize should attempt to import data from the connected Zeebe instance|
-|zeebe.name|zeebe-record|The name suffix of the exported Zeebe records. This must match the record-prefix configured in the exporter of the instance|
-|zeebe.partitionCount|1|The number of partitions configured for the Zeebe record source|
-|zeebe.maxImportPageSize|10000|The max page size for importing Zeebe data|
+|zeebe.enabled|false|Toggles whether Optimize should attempt to import data from the connected Zeebe instance.|
+|zeebe.name|zeebe-record|The name suffix of the exported Zeebe records. This must match the record-prefix configured in the exporter of the instance.|
+|zeebe.partitionCount|1|The number of partitions configured for the Zeebe record source.|
+|zeebe.maxImportPageSize|10000|The max page size for importing Zeebe data.|
 
 ### Elasticsearch
 
@@ -333,7 +333,7 @@ Configuration of the Optimize event based process feature.
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
-Configuration of the Optimize [Event Ingestion REST API](../rest-api/event-ingestion.md) for [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md).
+Configuration of the Optimize [Event Ingestion REST API](../rest-api/event-ingestion.md) for [event-based processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md).
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |

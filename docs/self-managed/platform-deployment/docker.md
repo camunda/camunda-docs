@@ -260,18 +260,18 @@ SPRING_PROFILES_ACTIVE | Starts Optimize in Self-Managed mode. |
 CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL | The URL at which Identity can be accessed by Optimize. |
 CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL | The URL at which the Identity auth provider can be accessed by Optimize. This should match the configured provider in Identity and is to be used for container to container communication. |
 CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID | The Client ID used to register Optimize with Identity. |
-CAMUNDA_OPTIMIZE_IDENTITY_CLIENTSECRET | The secret used when registering Optimize with Identity. |
+CAMUNDA_OPTIMIZE_IDENTITY_CLIENTSECRET | The Secret used when registering Optimize with Identity. |
 CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE | The audience used when registering Optimize with Identity. |
 OPTIMIZE_ELASTICSEARCH_HOST | The address/hostname under which the Elasticsearch node is available. | localhost
 OPTIMIZE_ELASTICSEARCH_HTTP_PORT | The port number used by Elasticsearch to accept HTTP connections. | 9200
-CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED| Determines whether or not `same-site` is enabled for Optimize cookies. This must be set to `false`. | true
+CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED| Determines if `same-site` is enabled for Optimize cookies. This must be set to `false`. | true
 CAMUNDA_OPTIMIZE_ENTERPRISE | This should only be set to `true` if an Enterprise License has been acquired. | true
 CAMUNDA_OPTIMIZE_ZEEBE_ENABLED | Enables import of Zeebe data in Optimize. | false
 CAMUNDA_OPTIMIZE_ZEEBE_NAME | The record prefix for exported Zeebe records. | zeebe-record
 CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT | The number of partitions configured in Zeebe. | 1
 CAMUNDA_OPTIMIZE_SHARING_ENABLED | Enable/disable the possibility to share reports and dashboards. | true
 CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN | Disables the logout button (logout is handled by Identity). | true
-SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation | null
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation. | null
 OPTIMIZE_API_ACCESS_TOKEN | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set. | null
 
 Like for example this `docker-compose` configuration:
