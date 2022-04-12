@@ -8,6 +8,18 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/self-managed/optimize-deployment/setup/(.*)$ /docs/self-managed/optimize-deployment/configuration/$1 [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/$ /docs/self-managed/optimize-deployment/configuration/ [R=301,L]
+
+RewriteRule ^docs/self-managed/optimize-deployment/setup/configuration(.*)$ /docs/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/configuration$ /docs/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
+
+RewriteRule ^docs/self-managed/optimize-deployment/setup/installation(.*)$ /docs/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/installation$ /docs/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
+
+RewriteRule ^docs/self-managed/optimize-deployment/setup/secure-elasticsearch(.*)$ /docs/self-managed/optimize-deployment/configuration/security-instructions [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/secure-elasticsearch$ /docs/self-managed/optimize-deployment/configuration/security-instructions [R=301,L]
+
 RewriteRule ^docs/components/zeebe/technical-concepts/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
 RewriteRule ^docs/components/zeebe/technical-concepts/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
 
