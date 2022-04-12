@@ -17,7 +17,7 @@ There is a dedicated update guide for each version:
 
 Update from 1.3.x to 8.0.0
 
-[Release notes](https://github.com/camunda/zeebe/releases/tag/8.0.0)
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.0.0)
 [Release blog](https://camunda.com/blog/2022/04/camunda-cloud-1-3-0-released/)
 
 ### [Camunda Cloud 1.2 to 1.3](../120-to-130)
