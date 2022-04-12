@@ -18,10 +18,18 @@ npm i -g zbctl
 
 ## First connection
 
+:::note
+Windows users will need to use [described flags](https://www.npmjs.com/package/zbctl#usage).
+
+```bash
+zbctl --address '[Zeebe API]' --clientId '[Client ID]' --clientSecret '[Client ID]' --AuthzURL '[OAuth API]'
+```
+:::
+
 After creating a client and downloading the connection file, you will now need to source it to make it available in your environment. If these are known to the system, a client can communicate directly with its own cluster in the cloud without further configuration.
 
 ```bash
-source ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
+  source ~/Downloads/CamundaCloudMgmtAPI-Client-test-client.txt
 ```
 
 ```bash
