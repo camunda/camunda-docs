@@ -8,9 +8,6 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
-# !!!! FIX THIS BEFORE RELEASE !!!!
-RewriteRule ^docs/reference/feel/language-guide/feel-expression/?$ /docs/reference/feel/what-is-feel/ [R=301,L]
-
 RewriteRule ^docs/components/zeebe/technical-concepts/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
 RewriteRule ^docs/components/zeebe/technical-concepts/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
 
@@ -114,12 +111,7 @@ RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/
 RewriteRule ^docs/self-managed/iam/what-is-iam/(.*)$  /docs/self-managed/identity/what-is-identity/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/deployment/configuration-variables/(.*)$  /docs/self-managed/identity/deployment/configuration-variables/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/deployment/making-iam-production-ready/(.*)$  /docs/self-managed/identity/user-guide/making-identity-production-ready/ [R=301,L]
-
-# !!!! FIX THIS BEFORE RELEASE !!!!
-RewriteRule ^docs/self-managed/identity/getting-started/docker/(.*)$ /docs/self-managed/overview/ [R=301,L]
-RewriteRule ^docs/self-managed/identity/getting-started/docker$ /docs/self-managed/overview/ [R=301,L]
-RewriteRule ^docs/self-managed/iam/getting-started/docker/(.*)$ /docs/self-managed/overview/ [R=301,L]
-RewriteRule ^docs/self-managed/iam/getting-started/docker$ /docs/self-managed/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/iam/getting-started(.*)$ /docs/self-managed/identity/getting-started/ [R=301,L]
 
 # Static resource page for the camunda desktop modeler
 RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
