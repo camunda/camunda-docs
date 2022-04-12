@@ -88,7 +88,7 @@ ZeebeClient client =
 
 ## Next steps
 
-- [Getting Started Guide](https://github.com/camunda-cloud/camunda-cloud-get-started): A comprehensive tutorial that covers Camunda Modeler, Operate, and the Java client.
+- [Getting Started Guide](https://github.com/camunda/camunda-platform-get-started): A comprehensive tutorial that covers Camunda Modeler, Operate, and the Java client.
 - [Job worker](job-worker.md): An introduction to the Java client's job worker.
 - [Logging](logging.md): An introduction to configuring logging for a Zeebe client.
 - [Writing tests](zeebe-process-test.md): An introduction to unit testing processes.

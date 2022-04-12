@@ -19,7 +19,7 @@ keywords: [get-started, local-install]
 
 Let's set up your first project to model, deploy, and start a process instance.
 
-The [camunda-cloud-get-started GitHub repository](https://github.com/camunda-cloud/camunda-cloud-get-started)
+The [camunda-platform-get-started GitHub repository](https://github.com/camunda/camunda-platform-get-started)
 contains a hands-on guide for setting up a Camunda Platform 8 project locally.
 
 The guide offers a general walk-through on how to model, deploy, and start a

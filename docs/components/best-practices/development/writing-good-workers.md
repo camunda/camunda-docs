@@ -99,7 +99,7 @@ Let’s go through a few code examples using Java, NodeJS, and C#, using the cor
 
 ### Java
 
-Using the [Java Client](https://github.com/camunda-cloud/camunda-cloud-get-started/tree/master/java) you can write worker code like this:
+Using the [Java Client](https://github.com/camunda/camunda-platform-get-started/tree/master/java) you can write worker code like this:
 
 ```java
 client.newWorker().jobType("retrieveMoney")
@@ -235,7 +235,7 @@ These observations yield the following recommendations:
 
 ### NodeJs client
 
-Using the [Node.JS client](https://github.com/camunda-cloud/camunda-cloud-get-started/tree/master/nodejs), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
+Using the [Node.JS client](https://github.com/camunda/camunda-platform-get-started/tree/master/nodejs), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
 
 ```js
 zbc.createWorker({
@@ -269,7 +269,7 @@ This makes the recommendation very straight-forward:
 
 ### C#
 
-Using the [C# client](https://github.com/camunda-cloud/camunda-cloud-get-started/tree/master/csharp), you can write worker code like this:
+Using the [C# client](https://github.com/camunda/camunda-platform-get-started/tree/master/csharp), you can write worker code like this:
 
 ```csharp
 zeebeClient.NewWorker()
