@@ -18,21 +18,10 @@ We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All 
 
 ## Docker Compose
 
-A default docker compose configuration to run Zeebe, Operate, and Tasklist is available in the get started repository: [docker-compose.yaml](https://github.com/camunda/camunda-platform-get-started/blob/master/docker-compose.yaml).
+A default docker compose configuration to run Zeebe, Operate, Tasklist, Optimize and Identity is available in [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
+Follow the instructions in the [README](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) to start the local environment.
 
-Download this file to your local computer, `cd` into that directory, and run `docker-compose up`.
-
-:::tip
-Not sure what Docker Compose is? Check out Docker's [Overview of Docker Compose](https://docs.docker.com/compose/).
-:::
-
-The following ports are exposed:
-
-- `26500`: Zeebe Gateway API
-- [`8080`](http://localhost:8080/): Operate
-- [`8081`](http://localhost:8081/): Tasklist
-
-While the Docker images itself are supported for production usage, the provided [docker-compose.yaml](https://github.com/camunda/camunda-platform-get-started/blob/master/docker-compose.yaml) is designed to be used by developers to run an environment locally, it is not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
+While the Docker images itself are supported for production usage, the provided [docker-compose.yaml](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) is designed to be used by developers to run an environment locally, it is not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
 
 ## Zeebe
 
