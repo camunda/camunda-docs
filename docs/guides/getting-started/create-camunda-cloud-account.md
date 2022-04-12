@@ -12,9 +12,9 @@ description: "Set up your Camunda Platform 8 account to get started."
 
 Create a Camunda Platform 8 account so you can create clusters, deploy processes, and create a new instance.
 
-### Visit [https://camunda.io/signup](https://camunda.io/signup)
+### Visit [camunda.io/signup](https://camunda.io/signup)
 
-Visit [https://camunda.io/signup](https://camunda.io/signup) and view the **Sign Up** screen:
+Visit [camunda.io/signup](https://camunda.io/signup) and view the **Sign Up** screen:
 
 ![signup](./img/signup.png)
 
@@ -28,7 +28,7 @@ If you choose to create an account through the social sign up buttons, you'll be
 
 ## Log in to your Camunda Platform 8 account
 
-### Visit [https://camunda.io](https://camunda.io)
+### Visit [camunda.io](https://camunda.io)
 
 Log in with the email address and password you used in the previous form, or use the social login buttons.
 
