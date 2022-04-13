@@ -45,6 +45,7 @@ Community clients supplement the official clients. These clients have not been t
 
 - [C#](community-clients/c-sharp.md)
 - [JavaScript/NodeJS](community-clients/javascript.md)
+- [Micronaut](community-clients/micronaut.md)
 - [Python](community-clients/python.md)
 - [Ruby](community-clients/ruby.md)
 - [Rust](community-clients/rust.md)
