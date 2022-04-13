@@ -29,7 +29,7 @@ Use the following stack:
 
 3. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse.
 
-3. Use [Oracle JDK 15](https://www.oracle.com/technetwork/java/javase/downloads/index.html) as Java runtime.
+3. Use [OpenJDK JDK 17](https://jdk.java.net/17/) as Java runtime.
 
 4. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/).
 
@@ -66,7 +66,7 @@ We decided on this stack for the following reasons:
 - Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
 - PostgreSQL has a great track-record for performance.
 
-There are severa; *advantages using the greenfield stack*:
+There are several *advantages using the greenfield stack*:
 
 - *Fewer decisions:* Depending on your experience with the Java cosmos, the decisions to chose a stack might not be easy to take. So if you don't have special requirements, follow a well-known path.
 - *Proven:* Many of our customers use this stack with great success.
@@ -81,7 +81,7 @@ Camunda Platform 8 is an alternative process automation offering that catches up
 
 Check the **prerequisites**:
 
-* Install [Oracle JDK 15](https://www.oracle.com/technetwork/java/javase/downloads/index.html).
+* Install [OpenJDK JDK 17](https://jdk.java.net/17/).
 * Install [Camunda Modeler](https://camunda.org/download/modeler/).
 * Install an IDE like [Eclipse](https://eclipse.org/downloads/). We recommend the latest "Eclipse IDE for Java Developers".
   * Activate workspace file sync [refresh using native hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
