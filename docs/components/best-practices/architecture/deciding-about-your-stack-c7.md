@@ -29,7 +29,7 @@ Use the following stack:
 
 3. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse.
 
-3. Use [Oracle JDK 17](https://www.oracle.com/technetwork/java/javase/downloads/index.html) as Java runtime.
+3. Use [OpenJDK JDK 17](https://jdk.java.net/17/) as Java runtime.
 
 4. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/).
 
@@ -81,7 +81,7 @@ Camunda Platform 8 is an alternative process automation offering that catches up
 
 Check the **prerequisites**:
 
-* Install [Oracle JDK 17](https://www.oracle.com/technetwork/java/javase/downloads/index.html).
+* Install [OpenJDK JDK 17](https://jdk.java.net/17/).
 * Install [Camunda Modeler](https://camunda.org/download/modeler/).
 * Install an IDE like [Eclipse](https://eclipse.org/downloads/). We recommend the latest "Eclipse IDE for Java Developers".
   * Activate workspace file sync [refresh using native hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
