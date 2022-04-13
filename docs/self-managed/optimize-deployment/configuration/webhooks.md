@@ -4,13 +4,11 @@ title: "Webhooks"
 description: "Read about how to configure alert notification webhooks for alerts on custom systems."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
 In addition to email notifications, you can configure webhooks in Optimize to receive alert notifications on custom systems. This page describes how to set up your webhook configurations using the example of a simple Slack app.
 
 ## The alert webhook configuration
 
-You can configure a list of webhooks in the Optimize configuration, see [Alert Notification Webhooks](../configuration/#alert-notification-webhooks) for available configuration properties.
+You can configure a list of webhooks in the Optimize configuration, see [Alert Notification Webhooks](./system-configuration.md#alert-notification-webhooks) for available configuration properties.
 
 ### Alert webhook payload placeholders
 
@@ -62,6 +60,6 @@ webhookAlerting:
      defaultPayload: '{"text": "The alert *{{ALERT_NAME}}* was triggered as *{{ALERT_TYPE}}*, you can view the report <{{ALERT_REPORT_LINK}}|here>."}'
 ```
 
-All configuration parameters are described in the [Alert Notification Webhooks Configuration Section](./configuration.md/#alert-notification-webhooks).
+All configuration parameters are described in the [Alert Notification Webhooks Configuration Section](./system-configuration.md#alert-notification-webhooks).
 
 With this configuration, when you create an alert for a report in Optimize, `mySlackWebhook` will appear in the targets selection dropdown in the alert creation modal. Once you have selected the webhook from the dropdown and saved the alert, Optimize will send a message to the channel you have selected when creating your Slack app whenever an alert notification is triggered. The content of the message is the same as the content of the alert email notifications. One alert may send either or both email and webhook notifications.

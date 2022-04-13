@@ -12,4 +12,4 @@ When you log in to Optimize for the first time, you are redirected to the licens
 
 Alternatively, you can add a file with the license key to the path `${optimize-root-folder}/config/OptimizeLicense.txt`; it will be automatically loaded to the database unless it already contains a license key.
 
-If you are using the Optimize Docker images and want Optimize to automatically recognize your license key, refer to the [installation guide](./installation.md#license-key-file) on how to achieve this.
+If you are using the Optimize Docker images and want Optimize to automatically recognize your license key, refer to the [installation guide](../../install-and-start#license-key-file) on how to achieve this.

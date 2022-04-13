@@ -4,8 +4,6 @@ title: "Localization"
 description: "Localization of Optimize."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
 To present a localized version of Optimize to users corresponding to their default browser language, Optimize provides the possibility to configure localizations.
 
 ## Default locale configuration
@@ -24,7 +22,7 @@ locales:
   fallbackLocale: 'en'
 ```
 
-For more details on the configuration keys, refer to the [localization configuration section](../configuration/#localization).
+For more details on the configuration keys, refer to the [localization configuration section](./system-configuration.md#localization).
 
 ## Custom locale configuration
 

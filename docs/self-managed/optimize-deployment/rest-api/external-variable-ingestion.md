@@ -36,7 +36,7 @@ Additionally, ensure the reference information (process instance ID and process 
 ## Configuration
 
 Refer to
-the [configuration section](../../setup/configuration#external-variable-ingestion-rest-api-configuration) to learn more
+the [configuration section](./../configuration/system-configuration.md#external-variable-ingestion-rest-api-configuration) to learn more
 about how to set up external variable ingestion.
 
 ## Method & HTTP target resource

@@ -60,7 +60,7 @@ The following components were used for these import tests:
 | Elasticsearch | 6.5.4 |
 | Optimize | 2.4.0 |
 
-The Optimize configuration with the default settings was used, as described in detail in the [configuration overview](./../setup/configuration.md).
+The Optimize configuration with the default settings was used, as described in detail in the [configuration overview](./../configuration/system-configuration.md).
 
 The following hardware specifications were used for each dedicated host
 
@@ -160,7 +160,7 @@ For each service, it is checked if new data is available. Once all entities for 
 
 If you would like to rapidly update data imported into Optimize, you have to reduce this value. However, this will cause additional strain on the engine and might influence the performance of the engine if you set a low value.
 
-More information about the import configuration can be found in the [configuration section](./../setup/configuration.md/#engine-common-settings).
+More information about the import configuration can be found in the [configuration section](./../configuration/system-configuration.md#camunda-platform-7-common-import-settings).
 
 ### Prepare the import
 
@@ -194,7 +194,7 @@ Therefore, the Optimize `ProcessInstance` is an aggregation of the engine's hist
 :::note
 Optimize uses [nested documents](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html), the above mentioned data is an example of documents that are nested within Optimize's `ProcessInstance` index.
 
-Elasticsearch applies restrictions regarding how many objects can be nested within one document. If your data includes too many nested documents, you may experience import failures. To avoid this, you can temporarily increase the nested object limit in Optimize's [index configuration](./../setup/configuration.md/#index-settings). Note that this might cause memory errors.
+Elasticsearch applies restrictions regarding how many objects can be nested within one document. If your data includes too many nested documents, you may experience import failures. To avoid this, you can temporarily increase the nested object limit in Optimize's [index configuration](./../configuration/system-configuration.md#index-settings). Note that this might cause memory errors.
 :::
 
 Import executions per engine entity are actually independent from another. Each follows a [producer-consumer-pattern](https://dzone.com/articles/producer-consumer-pattern), where the type specific `ImportService` is the single producer and a dedicated single `ImportJobExecutor` is the consumer of its import jobs, decoupled by a queue. So, both are executed in different threads. To adjust the processing speed of the executor, the queue size and the number of threads that process the import jobs can be configured:

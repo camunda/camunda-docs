@@ -15,11 +15,11 @@ To enable this feature, refer to [event-based process configuration](#event-base
 
 ## Event based process configuration
 
-To make use of ingested events and create event-based process mappings for them, the event-based process feature needs to be enabled in the [Optimize configuration](../configuration/#event-based-process-configuration).
+To make use of ingested events and create event-based process mappings for them, the event-based process feature needs to be enabled in the [Optimize configuration](./system-configuration.md#event-based-process-configuration).
 
 This also includes authorizing particular users by their userId or user groups by their groupId to be able to create so-called event-based processes that can be used by other users of Optimize once published.
 
-A full configuration example authorizing the user `demo` and all members of the `sales` user group to manage event-based processes, enabling the event-based process import as well as configuring a [Public API](../configuration/#public-api) accessToken with the value `secret`, would look like the following:
+A full configuration example authorizing the user `demo` and all members of the `sales` user group to manage event-based processes, enabling the event-based process import as well as configuring a [Public API](./system-configuration.md#public-api) accessToken with the value `secret`, would look like the following:
 
     api:
       accessToken: secret
@@ -38,7 +38,7 @@ When Camunda activity events are used in event-based processes, Camunda Admin Au
 Visit [Authorization Management - event-based process](./authorization-management.md/#event-based-processes) for the reasoning behind this behavior.
 :::
 
-To publish event-based processes that include [Camunda Event Sources](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#camunda-events), it is required to set [`engines.${engineAlias}.eventImportEnabled`](../configuration/#connection-to-camunda-platform-7) to `true` for the connected engine the Camunda process originates from.
+To publish event-based processes that include [Camunda Event Sources](./../../../components/optimize/userguide/additional-features/event-based-processes.md/#camunda-events), it is required to set [`engines.${engineAlias}.eventImportEnabled`](./system-configuration.md#connection-to-camunda-platform-7) to `true` for the connected engine the Camunda process originates from.
 
 :::note Heads Up!
 You need to [reimport data](./../migration-update/instructions.md/#force-reimport-of-engine-data-in-optimize) from this engine to have all historic Camunda events available for event-based processes. Otherwise, only new events will be included.
