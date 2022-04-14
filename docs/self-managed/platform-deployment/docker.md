@@ -3,50 +3,67 @@ id: docker
 title: "Docker"
 ---
 
-This page guides you through running Camunda Platform 8 via Docker.
+This page guides you through Camunda Platform 8 Docker images and how to run the platform in a developer setup using Docker Compose.
 
-Prerequisites to use Docker:
 
-- Operating system:
-  - Linux
-  - Windows/MacOS (development only, not supported for production)
-- Docker
-
-## Docker Images
+## Docker images
 
 We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All those images are publicly accessible.
 
-## Docker Compose
+:::info
+The provided Docker images are supported for production usage only on Linux systems. Windows or MacOS is only supported for development environments.
+:::
 
-A default docker compose configuration to run Zeebe, Operate, Tasklist, Optimize and Identity is available in [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
-Follow the instructions in the [README](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) to start the local environment.
+| Component | Docker Image           | Link to configuration options                                                                                                                              |
+| --------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Zeebe     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe) | [Environment variables](../../zeebe-deployment/configuration/environment-variables/) |
+| Operate   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate) | [Operate configuration](../../operate-deployment/configuration) |
+| Tasklist  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist) | [Tasklist configuration](../../tasklist-deployment/configuration) |
+| Identity  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity) | [Configuration variables](../../identity/deployment/configuration-variables/) |
+| Optimize  | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize) | [Environment variables](../../optimize-deployment/install-and-start/#available-environment-variables) |
 
-While the Docker images itself are supported for production usage, the provided [docker-compose.yaml](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) is designed to be used by developers to run an environment locally, it is not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
-
-## Zeebe
-
-You can run Zeebe with Docker:
+Zeebe is the only component that is often run without any of the others. In this scenario, it does not need anything else, so a simple docker run is sufficient:
 
 ```bash
 docker run --name zeebe -p 26500-26502:26500-26502 camunda/zeebe:latest
 ```
 
-This will give you a single broker node.
+This will give you a single broker node with the following ports exposed:
 
-### Ports
+- `26500`: Gateway API (this is the port clients need to use)
+- `26501`: Command API (internal, gateway-to-broker)
+- `26502`: Internal API (internal, broker-to-broker)
 
-The docker image exposes the following ports:
 
-- `26500`: Gateway API
-- `26501`: Command API (gateway-to-broker)
-- `26502`: Internal API (broker-to-broker)
+## Docker Compose
 
-### Volumes
+A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize and Identity is available in the [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
+Follow the instructions in the [README](https://github.com/camunda/camunda-platform#using-docker-compose). 
+
+:::warning
+While the Docker images itself are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally, they are not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
+:::
+
+
+This Docker Compose configuration serves two purposes:
+
+1. It can be used to start up a development environment locally
+2. It documents how the various components need to be wired together
+
+:::note
+We recommend to use [Helm + KIND](../kubernetes-helm/#installing-the-camunda-helm-chart-locally-using-kind) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
+:::
+
+## Configuration hints
+
+### Zeebe
+
+#### Volumes
 
 The default data volume is under `/usr/local/zeebe/data`. It contains
 all data which should be persisted.
 
-### Configuration
+#### Configuration
 
 The Zeebe configuration is located at `/usr/local/zeebe/config/application.yaml`.
 The logging configuration is located at `/usr/local/zeebe/config/log4j2.xml`.
@@ -61,196 +78,9 @@ Available environment variables:
 - `ZEEBE_BROKER_NETWORK_HOST` - sets the host address to bind to instead of the IP of the container.
 - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` - sets the contact points of other brokers in a cluster setup.
 
-## Operate
 
-You can use the Docker image `camunda/operate:latest` to run Operate as a container.
 
-:::note
-Ensure you set the appropriate settings described in the [Operate configuration](../../operate-deployment/configuration) section.
-:::note
-
-Like for example this `docker-compose` configuration:
-
-```
-operate:
-    container_name: operate
-    image: camunda/operate:latest
-    ports:
-        - 8080:8080
-    environment:
-        - camunda.operate.elasticsearch.url=http://elasticsearch:9200
-        - camunda.operate.zeebeElasticsearch.url=http://elasticsearch:9200
-        - camunda.operate.zeebe.gatewayAddress=zeebe:26500
-```
-
-## Tasklist
-
-You can use the Docker image `camunda/tasklist:latest` to run Tasklist as a container.
-
-:::note
-Configure the appropriate settings described in the [Tasklist configuration](../../tasklist-deployment/configuration) section.
-:::
-
-Like for example this `docker-compose` configuration:
-
-```
-tasklist:
-    container_name: tasklist
-    image: camunda/tasklist:latest
-    ports:
-        - 8080:8080
-    environment:
-        - camunda.tasklist.elasticsearch.url=http://elasticsearch:9200
-        - camunda.tasklist.zeebeElasticsearch.url=http://elasticsearch:9200
-        - camunda.tasklist.zeebe.gatewayAddress=zeebe:26500
-```
-## Identity
-
-You can use the Docker image `camunda/identity:latest` to run Identity as a container.
-
-The following steps walk you through the requirements and configuration.
-
-1. Navigate to a directory of your choice and create a `docker-compose.yml` file containing the following starting structure:
-
-```yaml
-version: "3.6"
-
-services:
-  identity:
-    image: camunda/identity:latest
-    ports:
-      - "8080:8080"
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8082/actuator/health" ]
-      interval: 30s
-      timeout: 15s
-      retries: 5
-      start_period: 30s
-```
-
-2. Identity requires a Keycloak instance to function. Add a Keycloak instance service to your `docker-compose.yml` file:
-
-```yaml
-keycloak:
-  image: jboss/keycloak:16.1.1
-  ports:
-    - "18080:8080"
-  environment:
-    KEYCLOAK_USER: admin
-    KEYCLOAK_PASSWORD: admin
-  healthcheck:
-    test: ["CMD", "curl", "-f", "http://localhost:9990/health"]
-    interval: 30s
-    timeout: 15s
-    retries: 5
-    start_period: 30s
-```
-
-:::note
-To learn more about Keycloak, see the [Keycloak website](https://www.keycloak.org/).
-:::
-
-3. We'll also need to add new entries to the `services.identity.environment` section to tell Identity where Keycloak is located:
-
-```yaml
-  KEYCLOAK_URL: http://keycloak:8080/auth
-  IDENTITY_AUTH_PROVIDER_BACKEND_URL: http://keycloak:8080/auth/realms/camunda-platform
-```
-
-4. Let's provide details for a user to be created on startup by adding the following entries to the `services.identity.environment` section:
-
-```yaml
-  KEYCLOAK_USERS_0_FIRST_NAME: "Bark"
-  KEYCLOAK_USERS_0_LAST_NAME: "Barkins"
-  KEYCLOAK_USERS_0_USERNAME: "demo"
-  KEYCLOAK_USERS_0_PASSWORD: "demo"
-  KEYCLOAK_USERS_0_ROLES_0: "Identity"
-```
-
-5. Tell Docker Compose that the `identity` service is dependent on the `keycloak` service by adding the following lines under `services.identity`:
-
-```yaml
-    depends_on:
-      - keycloak
-```
-
-Your `docker-compose.yml` file should now look like this:
-
-<details><summary>Show complete Docker Compose file</summary>
-
-```yaml
-version: "3.6"
-
-services:
-  keycloak:
-    container_name: keycloak
-    image: jboss/keycloak:16.1.1
-    ports:
-      - "18080:8080"
-    environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9990/health" ]
-      interval: 30s
-      timeout: 15s
-      retries: 5
-      start_period: 30s
-
-  identity:
-    depends_on:
-      - keycloak
-    restart: on-failure
-    container_name: identity
-    image: camunda/identity:8.0.0
-    ports:
-      - "8080:8080"
-    environment:
-      KEYCLOAK_URL: http://keycloak:8080/auth
-      IDENTITY_AUTH_PROVIDER_BACKEND_URL: http://keycloak:8080/auth/realms/camunda-platform
-      KEYCLOAK_USERS_0_FIRST_NAME: "Bark"
-      KEYCLOAK_USERS_0_LAST_NAME: "Barkins"
-      KEYCLOAK_USERS_0_USERNAME: "demo"
-      KEYCLOAK_USERS_0_PASSWORD: "demo"
-      KEYCLOAK_USERS_0_ROLES_0: "Identity"
-```
-</details>
-
-Now you can start up Identity:
-
-```shell
-docker compose -f /path/to/your/docker-compose.yml up -d
-```
-
-This exposes a web interface on [localhost:8080](http://localhost:8080/).
-
-:::note
-If you are using Docker Compose V1, you can use the command `docker-compose`.
-:::
-
-This command starts the `identity` and `keycloak` services. The health of the services can be checked with the following command:
-
-```shell
-docker ps
-```
-
-Your output should look similar to the following:
-
-```text
-CONTAINER ID   IMAGE                   COMMAND                  CREATED       STATUS                 PORTS                               NAMES
-e15d9e80f18d   camunda/identity:8.0.0  "java -jar identity.…"   5 hours ago   Up 5 hours             0.0.0.0:8080->8080/tcp              identity
-9e209e46b4df   jboss/keycloak:16.1.1   "/opt/jboss/tools/do…"   5 hours ago   Up 5 hours (healthy)   8443/tcp, 0.0.0.0:18080->8080/tcp   keycloak
-```
-
-:::tip
-If the container for the Identity application does not remain healthy, you can use the `CONTAINER ID` to check the logs by running `docker logs <COMTAINER_ID>`.
-:::
-
-After starting the Identity application, you can move on and [log in](../../identity/getting-started/).
-
-## Optimize
-
-The `camunda/optimize:latest` Docker image can be used to run Optimize 
+### Optimize
 
 Some configuration properties are optional and have default values. See a description of these properties and their default values in the table below:
 
