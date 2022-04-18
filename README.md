@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./static/img/camunda-cloud-gradient.png" width="200px"/>
+<img src="./static/img/black-C.png" width="200px"/>
 
 <h1>Camunda Cloud Documentation</h1>
 <p>
