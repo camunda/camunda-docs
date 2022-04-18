@@ -202,6 +202,22 @@ navbar .navbar .navbar__link[href*=self-managed] {
   margin-right: 2px;
 }
 
+/* Between mobile and desktop sizes, the nav bar gets a little scrunchy. Scale things down a bit to make more space. */ 
+@media screen and (min-width: 996px) and (max-width: 1140px) {
+  .navbar .navbar__title, .navbar .navbar__link {
+    font-size: 0.9em;
+  }
+
+  .navbar .navbar__item {
+    padding: var(--ifm-navbar-item-padding-vertical) calc(0.5 * var(--ifm-navbar-item-padding-horizontal));
+  }
+
+  .navbar .navbar__link[href*=self-managed]:before {
+    width: 23px;
+    height: 23px;
+  }  
+}
+
 .get-started-use-case {
   background-color:#042B1D;
   color: #fff;
