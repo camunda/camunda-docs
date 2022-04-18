@@ -7,6 +7,7 @@ In addition to the core Java and Go clients provided by Zeebe, there are a numbe
 
 - [C#](c-sharp.md)
 - [JavaScript/NodeJS](javascript.md)
+- [Micronaut](micronaut.md)
 - [Python](python.md)
 - [Ruby](ruby.md)
 - [Rust](rust.md)

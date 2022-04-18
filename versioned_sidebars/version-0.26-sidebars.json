@@ -212,6 +212,10 @@
             },
             {
               "type": "doc",
+              "id": "version-0.26/components/clients/other-clients/micronaut"
+            },
+            {
+              "type": "doc",
               "id": "version-0.26/components/clients/other-clients/javascript"
             },
             {

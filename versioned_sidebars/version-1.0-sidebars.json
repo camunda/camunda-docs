@@ -215,6 +215,10 @@
             },
             {
               "type": "doc",
+              "id": "version-1.0/components/clients/other-clients/micronaut"
+            },
+            {
+              "type": "doc",
               "id": "version-1.0/components/clients/other-clients/c-sharp"
             },
             {
