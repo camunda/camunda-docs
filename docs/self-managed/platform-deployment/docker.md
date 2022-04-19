@@ -5,16 +5,15 @@ title: "Docker"
 
 This page guides you through Camunda Platform 8 Docker images and how to run the platform in a developer setup using Docker Compose.
 
-
 ## Docker images
 
 We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All those images are publicly accessible.
 
 :::info
-The provided Docker images are supported for production usage only on Linux systems. Windows or MacOS is only supported for development environments.
+The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
 :::
 
-| Component | Docker Image           | Link to configuration options                                                                                                                              |
+| Component | Docker image           | Link to configuration options                                                                                                                              |
 | --------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Zeebe     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe) | [Environment variables](../../zeebe-deployment/configuration/environment-variables/) |
 | Operate   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate) | [Operate configuration](../../operate-deployment/configuration) |
@@ -22,7 +21,7 @@ The provided Docker images are supported for production usage only on Linux syst
 | Identity  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity) | [Configuration variables](../../identity/deployment/configuration-variables/) |
 | Optimize  | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize) | [Environment variables](../../optimize-deployment/install-and-start/#available-environment-variables) |
 
-Zeebe is the only component that is often run without any of the others. In this scenario, it does not need anything else, so a simple docker run is sufficient:
+Zeebe is the only component that is often run without any of the others. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 
 ```bash
 docker run --name zeebe -p 26500-26502:26500-26502 camunda/zeebe:latest
@@ -34,21 +33,19 @@ This will give you a single broker node with the following ports exposed:
 - `26501`: Command API (internal, gateway-to-broker)
 - `26502`: Internal API (internal, broker-to-broker)
 
-
 ## Docker Compose
 
-A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize and Identity is available in the [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
-Follow the instructions in the [README](https://github.com/camunda/camunda-platform#using-docker-compose). 
+A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, and Identity is available in the [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
+Follow the instructions in the [README](https://github.com/camunda/camunda-platform#using-docker-compose).
 
 :::warning
-While the Docker images itself are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally, they are not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
+While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
 :::
-
 
 This Docker Compose configuration serves two purposes:
 
-1. It can be used to start up a development environment locally
-2. It documents how the various components need to be wired together
+1. It can be used to start up a development environment locally.
+2. It documents how the various components need to be wired together.
 
 :::note
 We recommend to use [Helm + KIND](../kubernetes-helm/#installing-the-camunda-helm-chart-locally-using-kind) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
@@ -74,11 +71,9 @@ variables to use for each configuration setting.
 
 Available environment variables:
 
-- `ZEEBE_LOG_LEVEL` - sets the log level of the Zeebe Logger (default: `info`).
-- `ZEEBE_BROKER_NETWORK_HOST` - sets the host address to bind to instead of the IP of the container.
-- `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` - sets the contact points of other brokers in a cluster setup.
-
-
+- `ZEEBE_LOG_LEVEL` - Sets the log level of the Zeebe Logger (default: `info`).
+- `ZEEBE_BROKER_NETWORK_HOST` - Sets the host address to bind to instead of the IP of the container.
+- `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` - Sets the contact points of other brokers in a cluster setup.
 
 ### Optimize
 
@@ -132,11 +127,9 @@ optimize:
         - OPTIMIZE_API_ACCESS_TOKEN=secret
 ```
 
-
 Self-Managed Optimize must be able to connect to Elasticsearch to write and read data. In addition, Optimize needs to connect to Identity for authentication purposes. Both of these requirements can be configured with the options described above.
 
 Optimize must also be configured as a client in Identity, and users will only be granted access to Optimize if they have a role
 that has `write:*` permission for Optimize.
 
 For Optimize to import Zeebe data, Optimize must also be configured to be aware of the record prefix used when the records are exported to Elasticsearch. This can also be configured per the example above.
-
