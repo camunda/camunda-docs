@@ -157,7 +157,7 @@ To update Tasklist versions, visit the [guide to update Tasklist](../../componen
 
 ## Run Identity
 
-A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#identity) instead.
+A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/) instead.
 
 
 ## Run Optimize
