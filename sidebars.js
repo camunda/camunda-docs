@@ -405,7 +405,10 @@ module.exports = {
       Installation: [
         "self-managed/platform-deployment/index",
         {
-          Kubernetes: ["self-managed/platform-deployment/kubernetes"],
+          Kubernetes: [
+            "self-managed/platform-deployment/kubernetes",
+            "self-managed/platform-deployment/kubernetes-helm",
+          ],
         },
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/local",
@@ -430,6 +433,9 @@ module.exports = {
         "self-managed/zeebe-deployment/index",
         {
           Configuration: [
+            "self-managed/zeebe-deployment/configuration/configuration",
+            "self-managed/zeebe-deployment/configuration/logging",
+            "self-managed/zeebe-deployment/configuration/gateway-health-probes",
             "self-managed/zeebe-deployment/configuration/environment-variables",
             "self-managed/zeebe-deployment/configuration/fixed-partitioning",
             "self-managed/zeebe-deployment/configuration/priority-election",
