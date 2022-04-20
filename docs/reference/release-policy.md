@@ -7,7 +7,7 @@ Camunda Platform 8 follows the [Camunda release policy](https://camunda.com/rele
 
 :::note
 
-Interested in deprecation and support announcements? Read more on the [Announcements page](announcements.md).
+Interested in deprecation and support announcements? Read more on the [Announcements](announcements.md) page.
 
 :::
 
