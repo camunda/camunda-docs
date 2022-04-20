@@ -85,7 +85,7 @@ elasticsearch-master-1                                 1/1     Running   0      
 
 ### Installing the Camunda Helm chart locally using KIND
 
-If you want to use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f ccsm-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda/camunda-platform-helm/blob/main/kind/ccsm-kind-values.yaml).
+If you want to use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f ccsm-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda/camunda-platform-helm/blob/main/kind/camunda-platform-core-kind-values.yaml).
 
 
 
