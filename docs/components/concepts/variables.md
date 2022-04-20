@@ -141,5 +141,5 @@ Examples:
 
 ## Next steps
 
-- [Accesses a variable](expressions.md#access-variables)
+- [Access variables](expressions.md#access-variables)
 - [Incidents](incidents.md)
