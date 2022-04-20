@@ -4,6 +4,10 @@
 
 All changes have to be done in a separate Branch. As soon as the changes are done please open a PR. A Github Action runs with every commit to a Branch and checks if the documentation can be build (including a broken links check).
 
+## Not all PRs require an issue
+
+In the spirit of "Always Progress", if you are confident you know what change needs to be made a separate issue on the topic is not required. However, if you have an idea that needs to go into the backlog, creating an issue instead of a PR is the best way to go.
+
 ## Structure
 
 - Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-platform-8.md`. Use the file name as internal document id to reference in `sidebars.js`.
