@@ -32,7 +32,7 @@ You have the following options to run the above components in a self-managed fas
 
 ## Deployment recommendation
 
-As you can see below, we recommend SaaS whenever possible, as Camunda does the heavy lifting and provides everything as a service for you. This provides peace of mind and allows you to concentrate on the important work. If SaaS is not an option, we have a strong opinion on how you should install Camunda Platform 8, depending on the goal (production or development).
+As you can see below, we recommend [SaaS](https://camunda.com/get-started) whenever possible, as Camunda does the heavy lifting and provides everything as a service for you. This provides peace of mind and allows you to concentrate on the important work. If SaaS is not an option, we have a strong opinion on how you should install Camunda Platform 8, depending on the goal (production or development).
 
 ### Production
 
