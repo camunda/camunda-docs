@@ -40,7 +40,7 @@ Modeling starts here in the Decision Requirements Diagram (DRD) view. From here,
 2. In this example, we'll append two input data which may determine what we wear for the day: the temperature, and the activity. To do this, either drag and drop the oval-shaped input data elements from the menu on the left side of the DRD, name them, and connect them by clicking the decision and the arrow icon, or, click the decision directly, and click the input data element to drag and drop it onto the canvas. With the latter option, you can see this input data will automatically be connected to the decision.
 3. Ensure you have also given appropriate IDs to the input data icons. In this example, our IDs are "temperature" and "activity".
 
-SCREENSHOT 1
+![dmn model example](./img/dmn-model-example.png)
 
 ## Create your DMN table
 
@@ -63,12 +63,12 @@ Utilizing a data type other than a string? Take a look at our documentation on d
 
 4. Similar to the first column, enter "activity" for the expression and predefined values of "inside" and "outside".
 
-SCREENSHOT 2
+![dmn table example](./img/dmn-table-example.png)
 
 5. Double-click the **Output** column. Here, we'll plug in an **Output Name** of "clothingChoice", and Predefined Values of "shorts" and "pants".
 6. Once finished, we'll click the pencil icon to write out our possible outcomes. For example, we can select the predefined values of "hot" and "outside" to determine we will wear shorts. These inputs can also be combined with [rules](../components/modeler/dmn/decision-table-rule.md).
 
-SCREENSHOT 3
+![dmn table complete example](./img/dmn-table-complete-example.png)
 
 :::note
 A decision table has a hit policy that specifies what the results of the evaluation of a decision table consist of. You'll notice the hit policy of our table is **Unique**, meaning only one rule can be satisfied or no rule at all. Learn more about different [hit policies](../components/modeler/dmn/decision-table-hit-policy.md).
