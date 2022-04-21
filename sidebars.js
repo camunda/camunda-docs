@@ -19,6 +19,7 @@ module.exports = {
     "guides/getting-started-orchestrate-microservices",
     "guides/setting-up-development-project",
     "guides/automating-a-process-using-bpmn",
+    "guides/create-decision-tables-using-dmn",
     "guides/utilizing-forms",
     "guides/improve-processes-with-optimize",
     "guides/message-correlation",
