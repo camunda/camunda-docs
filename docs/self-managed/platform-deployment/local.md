@@ -19,7 +19,7 @@ Make sure to configure the web applications to use a port that is available. By 
 
 
 
-## Download a compatible set of Camunda 8 components
+## Download a compatible set of Camunda Platform 8 components
 
 Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/zeebe/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions. 
 
@@ -157,9 +157,9 @@ To update Tasklist versions, visit the [guide to update Tasklist](../../componen
 
 ## Run Identity
 
-A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#identity) instead.
+A local setup of Identity in Camunda Platform 8 is not yet supported out-of-the-box, use [Docker](../docker/) instead.
 
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup](../optimize-deployment/install-and-start.md). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.
+The installation of Optimize is described in [Optimize Setup](../optimize-deployment/install-and-start.md). A local setup in Camunda Platform 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.
