@@ -8,6 +8,10 @@ package-lock.json
 # Ignore files managed by VSCode
 .vscode
 
+# Ignore build artifacts
+.docusaurus
+build
+
 # -------- To be removed -------- #
 # Ignore while prettier is being  #
 # enabled to assist gradual       #
