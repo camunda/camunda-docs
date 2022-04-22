@@ -66,7 +66,7 @@ This process includes a service task and an XOR gateway.
 Now, you can connect a worker for the configured service task:
 
 ```bash
-zbctl create worker test-worker --handler "echo {\"return\":\"Pong\"}"
+zbctl create worker test-worker --handler "echo {\"variable\":\"Pong\"}"
 ```
 
 ## Next steps
