@@ -20,7 +20,7 @@ jobs:
       - name: Disable Indexing
         run: "sed -i 's/noIndex: false/noIndex: true/g' docusaurus.config.js"
       - name: Update URL
-        run: "sed -i 's!url: \"https://docs.camunda.io\"!url: \"https://c8.docs.camunda.io\"!g' docusaurus.config.js"
+        run: 'sed -i ''s!url: "https://docs.camunda.io"!url: "https://c8.docs.camunda.io"!g'' docusaurus.config.js'
       - name: Build
         run: npm run build
       - name: Publish
