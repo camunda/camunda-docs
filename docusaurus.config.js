@@ -12,6 +12,7 @@ module.exports = {
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
+  no: "don't use this",
   plugins: [
     //        ["@edno/docusaurus2-graphql-doc-generator",
     //          {
