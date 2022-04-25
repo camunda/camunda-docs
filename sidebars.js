@@ -48,7 +48,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
       ],
-      "Console": [
+      Console: [
         "components/console/introduction",
         {
           "Manage your organization": [
@@ -69,7 +69,6 @@ module.exports = {
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-whitelists",
             "components/console/manage-clusters/manage-secrets",
-
           ],
         },
         {
@@ -99,7 +98,7 @@ module.exports = {
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
-              "Connectors": [
+              Connectors: [
                 "components/modeler/web-modeler/connectors/index",
                 "components/modeler/web-modeler/connectors/use-connectors",
                 {
@@ -107,10 +106,10 @@ module.exports = {
                     "components/modeler/web-modeler/connectors/available-connectors/index",
                     "components/modeler/web-modeler/connectors/available-connectors/rest",
                     "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
-                  ]
-                }
-              ]
-            }
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
@@ -125,7 +124,7 @@ module.exports = {
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/additional-resources"
+                "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
             {
@@ -133,19 +132,19 @@ module.exports = {
                 "components/modeler/desktop-modeler/flags/flags",
                 "components/modeler/desktop-modeler/plugins/plugins",
                 "components/modeler/desktop-modeler/search-paths/search-paths",
-                "components/modeler/desktop-modeler/telemetry/telemetry"
+                "components/modeler/desktop-modeler/telemetry/telemetry",
               ],
-            }
+            },
           ],
         },
         {
-          "BPMN": [
+          BPMN: [
             "components/modeler/bpmn/modeler-bpmn",
             "components/modeler/bpmn/bpmn-primer",
             "components/modeler/bpmn/bpmn-coverage",
             "components/modeler/bpmn/data-flow",
             {
-              "Tasks": [
+              Tasks: [
                 "components/modeler/bpmn/tasks",
                 "components/modeler/bpmn/service-tasks/service-tasks",
                 "components/modeler/bpmn/user-tasks/user-tasks",
@@ -157,7 +156,7 @@ module.exports = {
               ],
             },
             {
-              "Gateways": [
+              Gateways: [
                 "components/modeler/bpmn/gateways",
                 "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
                 "components/modeler/bpmn/parallel-gateways/parallel-gateways",
@@ -165,7 +164,7 @@ module.exports = {
               ],
             },
             {
-              "Events": [
+              Events: [
                 "components/modeler/bpmn/events",
                 "components/modeler/bpmn/none-events/none-events",
                 "components/modeler/bpmn/message-events/message-events",
@@ -174,7 +173,7 @@ module.exports = {
               ],
             },
             {
-              "Subprocesses": [
+              Subprocesses: [
                 "components/modeler/bpmn/subprocesses",
                 "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
                 "components/modeler/bpmn/call-activities/call-activities",
@@ -182,7 +181,7 @@ module.exports = {
               ],
             },
             {
-              "Markers": [
+              Markers: [
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
               ],
@@ -192,9 +191,7 @@ module.exports = {
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
         {
-          "Forms": [
-            "components/modeler/forms/camunda-forms-reference",
-          ],
+          Forms: ["components/modeler/forms/camunda-forms-reference"],
         },
       ],
       Zeebe: [
@@ -291,12 +288,12 @@ module.exports = {
             "components/best-practices/management/following-the-customer-success-path",
             "components/best-practices/management/doing-a-proper-poc",
           ],
-          "Architecture": [
+          Architecture: [
             "components/best-practices/architecture/deciding-about-your-stack",
             "components/best-practices/architecture/sizing-your-environment",
             "components/best-practices/architecture/understanding-human-tasks-management",
           ],
-          "Development": [
+          Development: [
             "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
             "components/best-practices/development/service-integration-patterns",
             "components/best-practices/development/writing-good-workers",
@@ -305,7 +302,7 @@ module.exports = {
             "components/best-practices/development/routing-events-to-processes",
             "components/best-practices/development/testing-process-definitions",
           ],
-          "Modeling": [
+          Modeling: [
             "components/best-practices/modeling/creating-readable-process-models",
             "components/best-practices/modeling/naming-bpmn-elements",
             "components/best-practices/modeling/naming-technically-relevant-ids",
@@ -314,7 +311,7 @@ module.exports = {
             "components/best-practices/modeling/building-flexibility-into-bpmn-models",
             "components/best-practices/modeling/choosing-the-dmn-hit-policy",
           ],
-          "Operations": [
+          Operations: [
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
           ],
@@ -328,14 +325,14 @@ module.exports = {
             "components/best-practices/operations/securing-camunda-c7",
             "components/best-practices/architecture/extending-human-task-management-c7",
           ],
-    },
+        },
       ],
     },
   ],
   "APIs & Clients": [
     "apis-clients/overview",
     {
-      "APIs": [
+      APIs: [
         "apis-clients/public-api",
         "apis-clients/grpc",
         "apis-clients/operate-api/index",
@@ -344,27 +341,27 @@ module.exports = {
       ],
     },
     {
-      "Clients": [
+      Clients: [
         {
           "Java client": [
             "apis-clients/java-client/index",
             "apis-clients/java-client/job-worker",
             "apis-clients/java-client/logging",
             "apis-clients/java-client/zeebe-process-test",
-              {
-                Examples: [
-                  "apis-clients/java-client-examples/index",
-                  "apis-clients/java-client-examples/process-deploy",
-                  "apis-clients/java-client-examples/process-instance-create",
-                  "apis-clients/java-client-examples/process-instance-create-nonblocking",
-                  "apis-clients/java-client-examples/process-instance-create-with-result",
-                  "apis-clients/java-client-examples/job-worker-open",
-                  "apis-clients/java-client-examples/data-pojo",
-                  "apis-clients/java-client-examples/cluster-topology-request",
-                  ],
-              },
-            ],
-          },
+            {
+              Examples: [
+                "apis-clients/java-client-examples/index",
+                "apis-clients/java-client-examples/process-deploy",
+                "apis-clients/java-client-examples/process-instance-create",
+                "apis-clients/java-client-examples/process-instance-create-nonblocking",
+                "apis-clients/java-client-examples/process-instance-create-with-result",
+                "apis-clients/java-client-examples/job-worker-open",
+                "apis-clients/java-client-examples/data-pojo",
+                "apis-clients/java-client-examples/cluster-topology-request",
+              ],
+            },
+          ],
+        },
         {
           "Go client": [
             "apis-clients/go-client/index",
@@ -407,10 +404,10 @@ module.exports = {
   "Self-Managed": [
     "self-managed/overview",
     {
-      "Installation": [
+      Installation: [
         "self-managed/platform-deployment/index",
         {
-          "Kubernetes": [
+          Kubernetes: [
             "self-managed/platform-deployment/kubernetes",
             "self-managed/platform-deployment/kubernetes-helm",
           ],
@@ -428,13 +425,13 @@ module.exports = {
             "self-managed/concepts/access-control/permissions",
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
-          ]
+          ],
         },
         "self-managed/concepts/exporters",
       ],
     },
     {
-      "Zeebe": [
+      Zeebe: [
         "self-managed/zeebe-deployment/index",
         {
           Configuration: [
@@ -451,7 +448,7 @@ module.exports = {
             "self-managed/zeebe-deployment/security/security",
             "self-managed/zeebe-deployment/security/secure-client-communication",
             "self-managed/zeebe-deployment/security/client-authorization",
-            "self-managed/zeebe-deployment/security/secure-cluster-communication"
+            "self-managed/zeebe-deployment/security/secure-cluster-communication",
           ],
         },
         {
@@ -466,11 +463,11 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
             "self-managed/zeebe-deployment/operations/rebalancing",
-            "self-managed/zeebe-deployment/operations/backups"
+            "self-managed/zeebe-deployment/operations/backups",
           ],
         },
       ],
-      "Operate": [
+      Operate: [
         "self-managed/operate-deployment/install-and-start",
         "self-managed/operate-deployment/configuration",
         "self-managed/operate-deployment/data-retention",
@@ -479,13 +476,13 @@ module.exports = {
         "self-managed/operate-deployment/authentication",
         "self-managed/operate-deployment/usage-metrics",
       ],
-      "Tasklist": [
+      Tasklist: [
         "self-managed/tasklist-deployment/install-and-start",
         "self-managed/tasklist-deployment/configuration",
         "self-managed/tasklist-deployment/authentication",
         "self-managed/tasklist-deployment/usage-metrics",
       ],
-      "Optimize": [
+      Optimize: [
         "self-managed/optimize-deployment/install-and-start",
         {
           Configuration: [
@@ -523,20 +520,20 @@ module.exports = {
           "REST API": [
             "self-managed/optimize-deployment/rest-api/authorization",
             {
-              "Configuration": [
+              Configuration: [
                 "self-managed/optimize-deployment/rest-api/configuration/enable-sharing",
                 "self-managed/optimize-deployment/rest-api/configuration/disable-sharing",
               ],
             },
             {
-              "Dashboard": [
+              Dashboard: [
                 "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
                 "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
                 "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions",
               ],
             },
             {
-              "Report": [
+              Report: [
                 "self-managed/optimize-deployment/rest-api/report/get-report-ids",
                 "self-managed/optimize-deployment/rest-api/report/delete-report",
                 "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
@@ -577,10 +574,8 @@ module.exports = {
             "self-managed/optimize-deployment/optimize-explained/import-guide",
           ],
         },
-
-
       ],
-      "Identity": [
+      Identity: [
         "self-managed/identity/what-is-identity",
         "self-managed/identity/getting-started/index",
         {
@@ -594,17 +589,17 @@ module.exports = {
             "self-managed/identity/user-guide/configure-external-identity-provider",
             "self-managed/identity/user-guide/making-identity-production-ready",
           ],
-        }, {
-          "Deployment": [
+        },
+        {
+          Deployment: [
             "self-managed/identity/deployment/configuration-variables",
             "self-managed/identity/deployment/application-monitoring",
           ],
         },
       ],
-    }, {
-      Troubleshooting: [
-        "self-managed/troubleshooting/log-levels",
-      ]
+    },
+    {
+      Troubleshooting: ["self-managed/troubleshooting/log-levels"],
     },
   ],
 };

@@ -133,7 +133,7 @@ With Camunda Platform 8 you deploy:
 - An elastic database (for Operate, Taskliste, and Optimize)
 - Optimize, Operate, and Tasklist (each one is a Java application). You can scale those application to increase availability if you want.
 
-![Camunda Platform 7 vs Camunda Platform 8 Deployment View](img/camunda7-vs-camunda-cloud-deployment-view.png)
+![Camunda Platform 7 vs Camunda Platform 8 Deployment View](img/camunda7-vs-camunda8-deployment-view.png)
 
 Camunda Platform 8 deployments happen within Kubernetes. There are [Helm charts available](https://docs.camunda.io/docs/self-managed/zeebe-deployment/kubernetes/helm/) if you want to run Camunda Platform 8 self-managed. 
 

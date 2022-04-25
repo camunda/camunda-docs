@@ -13,17 +13,17 @@ module.exports = {
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
   plugins: [
-//        ["@edno/docusaurus2-graphql-doc-generator",
-//          {
-//            schema: "http://localhost:8080/tasklist/graphql",
-//            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-//            baseURL: "apis-clients/tasklist-api",
-//            linkRoot: "/docs/",
-//            loaders: {
-//              UrlLoader: "@graphql-tools/url-loader"
-//            }
-//          },
-//        ],
+    //        ["@edno/docusaurus2-graphql-doc-generator",
+    //          {
+    //            schema: "http://localhost:8080/tasklist/graphql",
+    //            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
+    //            baseURL: "apis-clients/tasklist-api",
+    //            linkRoot: "/docs/",
+    //            loaders: {
+    //              UrlLoader: "@graphql-tools/url-loader"
+    //            }
+    //          },
+    //        ],
     [
       require.resolve("docusaurus-gtm-plugin"),
       {
@@ -32,18 +32,18 @@ module.exports = {
     ],
     "./static/plugins/bpmn-js",
   ],
-  scripts: [
-  ],  
+  scripts: [],
   themeConfig: {
-    announcementBar:{
-      id: 'camunda8',
-      content: '<b>📣 Camunda Cloud is now Camunda Platform 8!</b> Learn more about navigating the updated documentation <a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io/meta">here</a>.',
-      backgroundColor: '#14D890',
-      textColor: '#000',
+    announcementBar: {
+      id: "camunda8",
+      content:
+        '<b>📣 Camunda Cloud is now Camunda Platform 8!</b> Learn more about navigating the updated documentation <a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io/meta">here</a>.',
+      backgroundColor: "#14D890",
+      textColor: "#000",
       isCloseable: false,
     },
     prism: {
-      additionalLanguages: ['java'],
+      additionalLanguages: ["java"],
     },
     navbar: {
       title: "Camunda Platform 8 Docs",
