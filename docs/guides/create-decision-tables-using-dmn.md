@@ -40,7 +40,7 @@ Modeling starts here in the Decision Requirements Diagram (DRD) view. From here,
 2. In this example, we'll append two input data which may determine what we wear for the day: the temperature, and the activity. To do this, either drag and drop the oval-shaped input data elements from the menu on the left side of the DRD, name them, and connect them by clicking the decision and the arrow icon, or, click the decision directly, and click the input data element to drag and drop it onto the canvas. With the latter option, you can see this input data will automatically be connected to the decision.
 3. Ensure you have also given appropriate IDs to the input data icons. In this example, our IDs are "temperature" and "activity".
 
-<img src="./img/dmn-model-example.png" width="600" height="300" />
+![dmn model example](./img/dmn-model-example.png)
 
 ## Create your DMN table
 
@@ -48,7 +48,7 @@ Now that our DRD is complete, let's build out the DMN table for our decision.
 
 1. Click the table icon in the top left corner of the box containing our "Clothes to wear" decision.
 
-<img src="./img/dmn-table-blank.png" width="600" height="300" />
+![dmn blank table](./img/dmn-table-blank.png)
 
 Here, we'll give a set of rules among weather and the activity to determine what we wear. For example, when a certain value is true (or in this case, when two values are true among the weather and the activity,) then one outcome is determined for clothes to wear.
 
@@ -65,12 +65,12 @@ Utilizing a data type other than a string? Take a look at our documentation on d
 
 4. Similar to the first column, enter "activity" for the expression and predefined values of "inside" and "outside".
 
-<img src="./img/dmn-table-example.png" width="600" height="300" />
+![dmn table example](./img/dmn-table-example.png)
 
-5. Double-click the **Output** column. Here, we'll plug in an **Output Name** of "clothingChoice", and Predefined Values of "shorts" and "pants".
-6. Once finished, we'll click the pencil icon to write out our possible outcomes. For example, we can select the predefined values of "hot" and "outside" to determine we will wear shorts. These inputs can also be combined with [rules](../components/modeler/dmn/decision-table-rule.md).
+1. Double-click the **Output** column. Here, we'll plug in an **Output Name** of "clothingChoice", and Predefined Values of "shorts" and "pants".
+2. Once finished, we'll click the pencil icon to write out our possible outcomes. For example, we can select the predefined values of "hot" and "outside" to determine we will wear shorts. These inputs can also be combined with [rules](../components/modeler/dmn/decision-table-rule.md).
 
-<img src="./img/dmn-table-complete-example.png" width="600" height="150" />
+![completed dmn table](./img/dmn-table-complete-example.png)
 
 :::note
 A decision table has a hit policy that specifies what the results of the evaluation of a decision table consist of. You'll notice the hit policy of our table is **Unique**, meaning only one rule can be satisfied or no rule at all. Learn more about different [hit policies](../components/modeler/dmn/decision-table-hit-policy.md).
@@ -79,6 +79,12 @@ A decision table has a hit policy that specifies what the results of the evaluat
 ## Deploy your diagram
 
 Click **Deploy diagram** to launch your DMN decision table.
+
+You can now implement your DMN table in a BPMN diagram using features like a [business rule task](../components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md).
+
+When a process instance arrives at a business rule task, a decision is evaluated using the internal DMN decision engine. Once the decision is made, the process instance continues.
+
+If the decision evaluation is unsuccessful, an [incident](../components/concepts/incidents.md) is raised at the business rule task. When the incident is resolved, the decision is evaluated again.
 
 ## Additional resources and next steps
 
