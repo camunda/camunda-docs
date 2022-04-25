@@ -40,7 +40,7 @@ Modeling starts here in the Decision Requirements Diagram (DRD) view. From here,
 2. In this example, we'll append two input data which may determine what we wear for the day: the temperature, and the activity. To do this, either drag and drop the oval-shaped input data elements from the menu on the left side of the DRD, name them, and connect them by clicking the decision and the arrow icon, or, click the decision directly, and click the input data element to drag and drop it onto the canvas. With the latter option, you can see this input data will automatically be connected to the decision.
 3. Ensure you have also given appropriate IDs to the input data icons. In this example, our IDs are "temperature" and "activity".
 
-![dmn model example](./img/dmn-model-example.png)
+<img src="./img/dmn-model-example.png" width="600" height="300" />
 
 ## Create your DMN table
 
@@ -48,7 +48,7 @@ Now that our DRD is complete, let's build out the DMN table for our decision.
 
 1. Click the table icon in the top left corner of the box containing our "Clothes to wear" decision.
 
-![blank dmn table](./img/dmn-table-blank.png)
+<img src="./img/dmn-table-blank.png" width="600" height="300" />
 
 Here, we'll give a set of rules among weather and the activity to determine what we wear. For example, when a certain value is true (or in this case, when two values are true among the weather and the activity,) then one outcome is determined for clothes to wear.
 
@@ -56,8 +56,8 @@ Here, we'll give a set of rules among weather and the activity to determine what
 At any time, you can click **Edit DRD** to return to your DRD and continue moving elements around on the palette.
 :::
 
-2. Click the **+** icon next to the **When** column so we can analyze both the weather and the activity.
-3. Double-click the first column. In the **Expression** field, we'll enter "temperature". Given the **Type** will remain **string**, we'll enter "Hot" and "Cold" in the **Add Predefined Values** field, separated by commas. Click your keyboards "enter" key to save these values.
+1. Click the **+** icon next to the **When** column so we can analyze both the weather and the activity.
+2. Double-click the first column. In the **Expression** field, we'll enter "temperature". Given the **Type** will remain **string**, we'll enter "Hot" and "Cold" in the **Add Predefined Values** field, separated by commas. Click your keyboards "enter" key to save these values.
 
 :::note
 Utilizing a data type other than a string? Take a look at our documentation on different [data types](../components/modeler/dmn/dmn-data-types.md), like booleans and numbers.
@@ -65,12 +65,12 @@ Utilizing a data type other than a string? Take a look at our documentation on d
 
 4. Similar to the first column, enter "activity" for the expression and predefined values of "inside" and "outside".
 
-![dmn table example](./img/dmn-table-example.png)
+<img src="./img/dmn-table-example.png" width="600" height="300" />
 
 5. Double-click the **Output** column. Here, we'll plug in an **Output Name** of "clothingChoice", and Predefined Values of "shorts" and "pants".
 6. Once finished, we'll click the pencil icon to write out our possible outcomes. For example, we can select the predefined values of "hot" and "outside" to determine we will wear shorts. These inputs can also be combined with [rules](../components/modeler/dmn/decision-table-rule.md).
 
-![dmn table complete example](./img/dmn-table-complete-example.png)
+<img src="./img/dmn-table-complete-example.png" width="600" height="150" />
 
 :::note
 A decision table has a hit policy that specifies what the results of the evaluation of a decision table consist of. You'll notice the hit policy of our table is **Unique**, meaning only one rule can be satisfied or no rule at all. Learn more about different [hit policies](../components/modeler/dmn/decision-table-hit-policy.md).
