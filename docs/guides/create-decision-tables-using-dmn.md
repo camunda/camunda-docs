@@ -48,6 +48,8 @@ Now that our DRD is complete, let's build out the DMN table for our decision.
 
 1. Click the table icon in the top left corner of the box containing our "Clothes to wear" decision.
 
+![blank dmn table](./img/dmn-table-blank.png)
+
 Here, we'll give a set of rules among weather and the activity to determine what we wear. For example, when a certain value is true (or in this case, when two values are true among the weather and the activity,) then one outcome is determined for clothes to wear.
 
 :::note
