@@ -6,7 +6,7 @@ module.exports = {
         "guides/getting-started/create-camunda-cloud-account",
         "guides/getting-started/create-your-cluster",
         "guides/getting-started/setup-client-connection-credentials",
-        "guides/getting-started/connect-to-your-cluster",
+        // "guides/getting-started/connect-to-your-cluster",
         "guides/getting-started/model-your-first-process",
         "guides/getting-started/deploy-your-process-and-start-process-instance",
         "guides/getting-started/implement-service-task",
