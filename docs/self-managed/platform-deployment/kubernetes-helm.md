@@ -29,7 +29,7 @@ By default, the following will be installed:
   
 ![Charts](assets/ccsm-helm-charts.png)
 
-When installing the [camund-platform](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform) Helm chart, all the components in this picture are installed.
+When installing the [camunda-platform](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform) Helm chart, all the components in this picture are installed.
 
 ## How to install Camunda 8 using Helm
 
