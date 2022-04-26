@@ -63,11 +63,11 @@ _Note: You can use newer Modeler versions with older Zeebe versions too._
 
 ## Camunda Platform 7 & Optimize Version Matrix
 
-| Improve | Automate |
-|---|---|
-| Optimize 3.3.x | Camunda Platform 7.12.11+, 7.13.5+, 7.14.x |
-| Optimize 3.4.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x |
-| Optimize 3.5.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x |
-| Optimize 3.6.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x |
-| Optimize 3.7.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x |
-| Optimize 3.8.x | Camunda Platform 7.15.x, 7.16.x, 7.17.x |
+| Improve | Automate |  Java version |
+|---|---|---|
+| Optimize 3.3.x | Camunda Platform 7.12.11+, 7.13.5+, 7.14.x | OpenJDK 8+ or OpenJDK 11+ |
+| Optimize 3.4.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x | OpenJDK 8+ or OpenJDK 11+ |
+| Optimize 3.5.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x | OpenJDK 11+ |
+| Optimize 3.6.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x | OpenJDK 11+ |
+| Optimize 3.7.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x | OpenJDK 11+ |
+| Optimize 3.8.x | Camunda Platform 7.15.x, 7.16.x, 7.17.x | OpenJDK 11+ |
