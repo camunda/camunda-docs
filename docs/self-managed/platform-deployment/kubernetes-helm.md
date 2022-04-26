@@ -23,6 +23,7 @@ By default, the following will be installed:
   - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
   - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
   - **Tasklist**: Deploys the Tasklist component to work with user tasks.
+  - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
   - **Identity**: Deploys the Identity component responsible for authentication and authorization.
   - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
   
