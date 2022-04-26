@@ -73,7 +73,7 @@ When it comes to editing individual settings, two data types are worth mentionin
   - Machine-friendly format: size in bytes as long
 - Timeouts/intervals (e.g. `requestTimeout`)
   - Human-friendly format: `15s` (or `m, h`)
-  - Machine-friendly format: either duration in milliseconds as long, or [ISO-8601 duration](ttps://en.wikipedia.org/wiki/ISO_8601#Durations) format (e.g. `PT15S`)
+  - Machine-friendly format: either duration in milliseconds as long, or [ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) format (e.g. `PT15S`)
 
 ## Passing configuration files to Zeebe
 
