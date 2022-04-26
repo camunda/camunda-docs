@@ -35,7 +35,3 @@ The downloaded file contains all the necessary information to communicate with y
 - `ZEEBE_ADDRESS`: Address where your cluster can be reached.
 - `ZEEBE_CLIENT_ID` and `ZEEBE_CLIENT_SECRET`: Credentials to request a new access token.
 - `ZEEBE_AUTHORIZATION_SERVER_URL`: A new token can be requested at this address, using the credentials.
-
-## Next steps
-
-- [Connect to your cluster](connect-to-your-cluster.md)
