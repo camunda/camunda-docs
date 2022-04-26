@@ -29,7 +29,7 @@ By default, the following will be installed:
   
 ![Charts](assets/ccsm-helm-charts.png)
 
-When installing the [ccsm-helm](https://github.com/camunda/camunda-platform-helm/tree/main/charts/ccsm-helm) chart, all the components in this picture are installed. 
+When installing the [camund-platform](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform) Helm chart, all the components in this picture are installed.
 
 ## How to install Camunda 8 using Helm
 
@@ -50,7 +50,7 @@ Once this is complete, we are ready to install the Helm chart hosted in the offi
 To install the available Camunda Platform 8 components inside a Kubernetes cluster, you can simply run: 
 
 ```
-> helm install <RELEASE NAME> camunda/ccsm-helm
+> helm install <RELEASE NAME> camunda/camunda-platform
 ```
 
 :::note
@@ -72,28 +72,32 @@ Review the progress of your deployment by checking if the Kubernetes PODs are up
 This will return something similar to the following:
 
 ```
-NAME                                                   READY   STATUS    RESTARTS   AGE
-elasticsearch-master-0                                 1/1     Running   0          4m6s
-elasticsearch-master-1                                 1/1     Running   0          4m6s
-<RELEASE NAME>-operate-XXX                             1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-0                                 1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-1                                 1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-2                                 1/1     Running   0          4m6s
-<RELEASE NAME>-tasklist-XXX                             1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-gateway-XX1                       1/1     Running   0          4m6s
-<RELEASE NAME>-zeebe-gateway-XX2                       1/1     Running   0          4m6s
+NAME                                           READY   STATUS              RESTARTS   AGE
+<RELEASE NAME>-keycloak-0                       0/1     Pending             0          4s
+<RELEASE NAME>-identity-6bb5d864cc-kk6dv        0/1     ContainerCreating   0          4s
+<RELEASE NAME>-operate-cb597fd76-6vr2x          0/1     ContainerCreating   0          4s
+<RELEASE NAME>-optimize-676955b547-vxts7        0/1     ContainerCreating   0          4s
+<RELEASE NAME>-postgresql-0                     0/1     Pending             0          4s
+<RELEASE NAME>-tasklist-5bf5c56f7b-sdwg7        0/1     ContainerCreating   0          4s
+<RELEASE NAME>-zeebe-0                          0/1     Pending             0          4s
+<RELEASE NAME>-zeebe-1                          0/1     ContainerCreating   0          4s
+<RELEASE NAME>-zeebe-2                          0/1     Pending             0          4s
+<RELEASE NAME>-zeebe-gateway-657b774f95-bbcx5   0/1     ContainerCreating   0          4s
+<RELEASE NAME>-zeebe-gateway-657b774f95-gmlbm   0/1     Running             0          4s
+elasticsearch-master-0                          0/1     Pending             0          4s
+elasticsearch-master-1                          0/1     Init:0/1            0          4s
 ```
 
 ### Installing the Camunda Helm chart locally using KIND
 
-If you want to use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f ccsm-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda/camunda-platform-helm/blob/main/kind/camunda-platform-core-kind-values.yaml).
+If you want to use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f camunda-platform-core-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda/camunda-platform-helm/blob/main/kind/camunda-platform-core-kind-values.yaml).
 
 
 
 Be aware, that using KIND is only recommended for development purposes.
 
 ```
-helm install <RELEASE NAME> camunda-cloud/ccsm-helm -f ccsm-kind-values.yaml
+helm install <RELEASE NAME> camunda-cloud/camunda-platform -f camunda-platform-core-kind-values.yaml
 ```
 
 This will deploy the same components, but with a set of parameters tailored to a local environment setup.
