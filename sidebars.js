@@ -237,6 +237,7 @@ module.exports = {
             "components/optimize/userguide/creating-dashboards",
             "components/optimize/userguide/creating-reports",
             "components/optimize/userguide/combined-reports",
+            "components/optimize/userguide/processes",
             {
               "Process analysis": [
                 "components/optimize/userguide/process-analysis/overview",
