@@ -128,27 +128,27 @@ Be aware that **REST connector** is supporting only JSON payload.
 
 ## Response
 
-The HTTP response will be available in your process in the **response** variable.
+The HTTP response will be available in a temporary local `response` variable. This variable can be map to the process by specifing **Result Variable**.
 
-The following fields are available in the **response** variable:
+The following fields are available in the `response` variable:
 
 * **status**: the response status
 * **body**: the response body of your request
 * **headers**: the response headers
 
-You can choose to map the content of your **response** in a **Result Variable** using again the ![feel-icon](../img/feel-icon.png) [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
+Additionally you can choose to unpack the content of your `response` into multiple process variables using the ![feel-icon](../img/feel-icon.png) **Result Expression** which is a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md).
 
 ```text
 = {
     actual_temp: response.body.main.temp,
     feel_temp: response.body.main.feels_like,
-    weather: body.weather[1].main
+    weather: response.body.weather[1].main
 }
 ```
 
 ![rest connector http response mapping](../img/connectors-rest-http-response-mapping.png)
 
-The next steps in your process will have access to the **currentWeather** variable that will contain the mapped keys: `actual_temp`, `feel_temp`, and `weather`.
+The next steps in your process will have access to the `currentWeather` variable that will contain the full response and the mapped variables from the result expression: `actual_temp`, `feel_temp`, and `weather`.
 
 
 :::note

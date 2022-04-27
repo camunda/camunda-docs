@@ -128,10 +128,10 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
 
 ![get sendgrid template id](../img/connectors-sendgrid-email-template-id.png)
 
-8. Provide the test data in the **Template Data** field.
+8. Provide the test data in the **Template Data** field as a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md):
 
 ```text
-{
+= {
   name: "Jane",
   location: "Berlin",
   weather: "Clear",
