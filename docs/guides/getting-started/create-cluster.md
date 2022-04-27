@@ -1,12 +1,9 @@
 ---
-id: create-camunda-cloud-account
-title: Sign up & log in
+id: create-cluster
+title: Create a cluster
 slug: /guides/getting-started/
 description: "Set up your Camunda Platform 8 account to get started."
 ---
-
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--short">Time estimate: 5 minutes</span>
 
 ## Sign up for Camunda Platform 8
 
@@ -38,6 +35,13 @@ After login, you'll see the console overview page. This is the central place to 
 
 ![overview-home](./img/home.png)
 
-## Next steps
+import CreateCluster from '../../components/console/manage-clusters/create-cluster-include.md'
 
-- [Create your Cluster](create-your-cluster)
+<CreateCluster/>
+
+## Next Steps
+
+From here, you can continue with this guide or jump into the use case getting started guides below:
+
+* [Getting started with Human Task Orchestration](/guides/getting-started-orchestrate-human-tasks.md) - learn how to work with user tasks in a concise guide.
+* [Getting started with Microservice Orchestration](/docs/guides/getting-started-orchestrate-microservices.md) - learn how to begin with service tasks and workers in a concise guide.

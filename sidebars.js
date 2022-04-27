@@ -3,15 +3,9 @@ module.exports = {
     "guides/introduction-to-camunda-cloud",
     {
       "Getting started with Camunda Platform": [
-        "guides/getting-started/create-camunda-cloud-account",
-        "guides/getting-started/create-your-cluster",
-        "guides/getting-started/setup-client-connection-credentials",
-        "guides/getting-started/connect-to-your-cluster",
+        "guides/getting-started/create-cluster",
         "guides/getting-started/model-your-first-process",
         "guides/getting-started/deploy-your-process-and-start-process-instance",
-        "guides/getting-started/implement-service-task",
-        "guides/getting-started/implement-decision-gateway",
-        // "guides/getting-started/involve-humans",
         "guides/getting-started/monitor-your-process-in-operate",
       ],
     },
