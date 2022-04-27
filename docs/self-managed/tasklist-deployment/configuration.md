@@ -42,7 +42,7 @@ spring.security.oauth2.resourceserver.jwt.jwk-set-uri (recommended) | Complete U
 *OR* | |
 spring.security.oauth2.resourceserver.jwt.issuer-uri| URI to get public keys for JWT validation.| https://weblogin.cloud.company.com/
 
-The settings can be given in [application.yml](https://github.com/camunda-cloud/tasklist/blob/master/config/application.yml) (eg. `camunda.tasklist.client.audience: tasklist.camunda.io`) or as environment variables (eg. `CAMUNDA_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`).
+The settings can be given in [application.yml](#an-example-of-applicationyml-file) (eg. `camunda.tasklist.client.audience: tasklist.camunda.io`) or as environment variables (eg. `CAMUNDA_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`).
 
 The [API client](/docs/apis-clients/tasklist-api/overview/) must obtain the JWT token and send it in each request to `graphql` in an authorization header as described above.
 
