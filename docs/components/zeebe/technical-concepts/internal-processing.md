@@ -2,6 +2,7 @@
 id: internal-processing
 title: "Internal processing"
 description: "This document analyzes the state machines, events and commands, stateful stream processing, driving the engine, and handling backpressure within Zeebe."
+keywords: [ back-pressure, backpressure ]
 ---
 
 Internally, Zeebe is implemented as a collection of **stream processors** working on record streams \(partitions\). The stream processing model is used since it is a unified approach to provide:
@@ -58,7 +59,7 @@ This command can in turn be processed, completing the service task and driving t
 
 When a broker receives a client request, it is written to the **event stream** first, and processed later by the stream processor. If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command. If the broker keeps accepting new requests from the client, the back log increases and the processing latency can grow beyond an acceptable time.
 
-To avoid such problems, Zeebe employs a back-pressure mechanism.
+To avoid such problems, Zeebe employs a [back-pressure](/self-managed/zeebe-deployment/operations/backpressure.md) mechanism.
 When the broker receives more requests than it can process with an acceptable latency, it rejects some requests.
 
 The maximum rate of requests that can be processed by a broker depends on the processing capacity of the machine, the network latency, current load of the system, etc.
@@ -69,3 +70,4 @@ The inflight request count is incremented when a request is accepted, and decrem
 
 When the broker rejects requests due to back-pressure, the clients can retry them with an appropriate retry strategy. If the rejection rate is high, it indicates that the broker is constantly under high load.
 In that case, it is recommended to reduce the request rate.
+
