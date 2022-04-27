@@ -2,6 +2,7 @@
 id: backups
 title: "Backups"
 description: "A guide to creating and installing Zeebe backups."
+keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
 As Zeebe fully manages the state of your process instances, consider taking backups of Zeebe data; this is crucial to prevent data loss, roll back application-level errors, and more.

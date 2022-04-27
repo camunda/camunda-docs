@@ -2,7 +2,7 @@
 id: backpressure
 title: "Backpressure"
 description: "This document outlines an overview of backpressure and its accompanying assets."
-keywords: [ back-pressure, backpressure ]
+keywords: [ back-pressure, backpressure, back pressure ]
 ---
 
 When a broker receives a client request, it is written to the **event stream** first (see section [internal processing](/components/zeebe/technical-concepts/internal-processing.md) for details), and processed later by the stream processor.
