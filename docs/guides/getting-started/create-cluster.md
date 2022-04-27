@@ -1,9 +1,11 @@
 ---
 id: create-cluster
-title: Create a cluster
+title: Create an account and cluster
 slug: /guides/getting-started/
 description: "Set up your Camunda Platform 8 account to get started."
 ---
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--short">Time estimate: 5 minutes</span>
 
 ## Sign up for Camunda Platform 8
 
@@ -34,6 +36,8 @@ Log in with the email address and password you used in the previous form, or use
 After login, you'll see the console overview page. This is the central place to manage your clusters, and the diagrams and forms you want to deploy to Camunda Platform 8.
 
 ![overview-home](./img/home.png)
+
+### Create a cluster
 
 import CreateCluster from '../../components/console/manage-clusters/create-cluster-include.md'
 

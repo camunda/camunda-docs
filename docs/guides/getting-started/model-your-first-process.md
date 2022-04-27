@@ -35,7 +35,7 @@ Using Web Modeler, processes are designed and deployed, and new instances are cr
 
 ![console-modeler](../../components/modeler/web-modeler/img/web-modeler-new-user-new-diagram-choose-bpmn.png)
 
-3. Add an **EndEvent** to create a valid BPMN diagram.
+1. Add an **EndEvent** to create a valid BPMN diagram.
 
 ![console-modeler-new-diagram-with-end-event](../../components/modeler/web-modeler/img/web-modeler-with-end-event.png)
 ![console-modeler-new-diagram-with-end-event](../../components/modeler/web-modeler/img/web-modeler-with-end-event2.png)
