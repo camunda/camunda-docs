@@ -69,7 +69,7 @@ You need `client_id`, `client_secret`, `audience`, and the URL of the authorizat
 at [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
 
 ```shell
-curl -X POST -H 'content-type: application/json' -d '{"client_id": "RgVdPv...", "client_secret":"eDS1~Hg...","audience":"operate.camunda.io","grant_type":"client_credentials"}' https://login.cloud.camunda.com/oauth/token    
+curl -X POST -H 'content-type: application/json' -d '{"client_id": "RgVdPv...", "client_secret":"eDS1~Hg...","audience":"operate.camunda.io","grant_type":"client_credentials"}' https://login.cloud.camunda.io/oauth/token    
 ```
 
 You will get something like the following:
