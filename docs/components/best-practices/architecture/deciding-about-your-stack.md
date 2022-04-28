@@ -55,7 +55,7 @@ We decided on this stack for the following reasons:
 - Spring Boot is currently the most adopted way of building Java applications.
 - Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
 
-You might want to follow the [get started guide for microservices orchestration](/docs/guides/getting-started-orchestrate-microservices/) or follow the instrucstions in [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) to get going
+You might want to follow the [get started guide for microservices orchestration](/guides/getting-started-orchestrate-microservices.md) or follow the instrucstions in [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) to get going
 
 
 ## Polyglot stacks
