@@ -98,7 +98,6 @@ Variables are part of a process instance and represent the data of the instance.
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
 - [BPMN Implementation Reference](https://docs.camunda.org/manual/latest/reference/bpmn20/)
 - [BPMN Engine](https://camunda.com/products/camunda-platform/bpmn-engine/)
-- [Model Your First Process](./getting-started/model-your-first-process.md)
 - [BPMN Reference](../components/modeler/bpmn/bpmn.md)
 - [Operate](./components/operate/index.md)
 - [Tasklist](./components/tasklist/introduction.md)
