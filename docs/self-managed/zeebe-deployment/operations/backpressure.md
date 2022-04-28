@@ -2,6 +2,7 @@
 id: backpressure
 title: "Backpressure"
 description: "This document outlines an overview of backpressure and its accompanying assets."
+keywords: [ back-pressure, backpressure, back pressure ]
 ---
 
 When a broker receives a client request, it is written to the **event stream** first (see section [internal processing](/components/zeebe/technical-concepts/internal-processing.md) for details), and processed later by the stream processor.
@@ -100,3 +101,7 @@ If this is the expected workload, you might consider a different configuration f
 ## Potential issues
 
 The rate limiter used by Zeebe to implement backpressure may use `System.nanoTime()` to measure the RTT of requests. In some systems, we've observed consecutive calls to this method can return equal or even decreasing values. [Low clock resolution](https://shipilev.net/blog/2014/nanotrusting-nanotime) and [monotonicity](https://bugs.openjdk.java.net/browse/JDK-6458294) [issues](https://stackoverflow.com/questions/3657289/linux-clock-gettimeclock-monotonic-strange-non-monotonic-behavior) are some of the most likely culprits of this. If this happens, it's recommended to configure the backpressure to use the **fixed** algorithm. Without a clock with sufficient resolution, adaptive backpressure algorithms are not useful.
+
+## Next steps
+
+Looking for more information on backpressure? Check out [this section](/components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) on internal processing and backpressure.
