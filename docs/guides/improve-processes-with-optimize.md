@@ -19,7 +19,7 @@ For an in-depth overview of Optimize’s capabilities, visit our [Optimize docum
 
 ## Set up
 
-Within Camunda Platform 8, you can launch Optimize from Console — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Platform 8 account](./getting-started/create-camunda-cloud-account.md), [set up client connection credentials](./getting-started/setup-client-connection-credentials.md), and [connected to your cluster](./getting-started/connect-to-your-cluster.md) before getting started with Optimize for SaaS users.
+Within Camunda Platform 8, you can launch Optimize from Console — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Platform 8 account](./create-account.md), [set up client connection credentials](./getting-started/setup-client-connection-credentials.md), and [connected to your cluster](./getting-started/connect-to-your-cluster.md) before getting started with Optimize for SaaS users.
 
 :::note
 So long as you are operating with [Camunda Platform 8 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. From here, Optimize requires no additional set up. You can immediately obtain process insights as Optimize already continuously collects data for analysis.

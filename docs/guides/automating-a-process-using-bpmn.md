@@ -23,7 +23,7 @@ BPMN offers control and visibility over your critical business processes. The wo
 ## Set up
 
 Begin by building your BPMN diagrams with [Modeler](../components/modeler/about.md).
-To get started, ensure you’ve [created a Camunda Platform 8 account](./getting-started/create-camunda-cloud-account.md).
+To get started, ensure you’ve [created a Camunda Platform 8 account](./guides/create-account.md).
 
 ## Getting started with BPMN
 
