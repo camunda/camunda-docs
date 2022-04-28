@@ -163,7 +163,7 @@ function Home() {
                   'button button--outline button--secondary button--lg button--hero get-started-use-case',
                   styles.getStarted,
                 )}
-                to={useBaseUrl('docs/guides/getting-started-orchestrate-microservices/')}>
+                to={useBaseUrl('docs/guides/orchestrate-microservices/')}>
                 Microservice Orchestration
               </Link>
               <Link
@@ -171,8 +171,16 @@ function Home() {
                   'button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2',
                   styles.getStarted,
                 )}
-                to={useBaseUrl('docs/guides/getting-started-orchestrate-human-tasks/')}>
+                to={useBaseUrl('docs/guides/orchestrate-human-tasks/')}>
                 Human Task Orchestration
+              </Link>
+              <Link
+                className={clsx(
+                  'button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2',
+                  styles.getStarted,
+                )}
+                to={useBaseUrl('docs/guides/orchestrate-api-endpoints/')}>
+                API Endpoint Orchestration
               </Link>
             </div>
           </div>
