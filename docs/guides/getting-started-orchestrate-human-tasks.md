@@ -66,6 +66,10 @@ Variables are part of a process instance and represent the data of the instance.
 As mentioned earlier, you'll need to insert the defined variable values into the appropriate sequence flows to execute your process. In this example, our sequence flows will now have the expressions of `= chicken=true` and `= salad=true`.
 :::
 
+5. Add the form to your BPMN diagram in two different ways:
+   1. Within your form, click the rectangular **Copy JSON** icon to copy the form JSON to your clipboard. Navigate to your BPMN diagram, and click the appropriate user task. Within the properties panel of the user task, navigate to the **Form** section, select a **Type** of **Camunda forms** and paste your JSON into the **Form JSON configuration** field.
+   2. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import**.
+
 #### Start and view your process instance
 
 1. To deploy your diagram to your cluster, click **Deploy diagram > Deploy**.
@@ -77,7 +81,7 @@ As mentioned earlier, you'll need to insert the defined variable values into the
 
 #### Complete a user task
 
-Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](./utilizing-forms.md).
+Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](../components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
 
 1. Go back to your Camunda Platform 8 diagram and select the honeycomb icon and then **View user tasks** to take a look at your user tasks inside Tasklist.
 2. Select the open user task on the left panel of **Tasks**. In our example below, this is **Decide what's for dinner**.
