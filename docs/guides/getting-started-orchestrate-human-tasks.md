@@ -66,7 +66,7 @@ Variables are part of a process instance and represent the data of the instance.
 As mentioned earlier, you'll need to insert the defined variable values into the appropriate sequence flows to execute your process. In this example, our sequence flows will now have the expressions of `= chicken=true` and `= salad=true`.
 :::
 
-5. Add the form to your BPMN diagram in two different ways:
+5. You can add the form to your BPMN diagram in a few ways:
    1. Within your form, click the rectangular **Copy JSON** icon to copy the form JSON to your clipboard. Navigate to your BPMN diagram, and click the appropriate user task. Within the properties panel of the user task, navigate to the **Form** section, select a **Type** of **Camunda forms** and paste your JSON into the **Form JSON configuration** field.
    2. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import**.
 
