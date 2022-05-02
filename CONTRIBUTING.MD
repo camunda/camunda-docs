@@ -40,7 +40,7 @@ You need to be comfortable working in the either the [GitHub web-based editor] o
 
 You will be asked to sign our [Contributor License Agreement] (CLA) when you open a pull request. We are not asking you to assign copyright to us, but to give us the right to distribute your code without restriction. We ask this of all contributors in order to assure our users of the origin and continuing existence of the code.
 
-*Note: In most cases, you will only need to sign the CLA once.*
+_Note: In most cases, you will only need to sign the CLA once._
 
 ### Code of Conduct
 
@@ -137,26 +137,26 @@ For further guidelines and best practices to keep in mind as a reviewer, please 
 This documentation is inspired and influenced by the Zeebe documentation, the Camunda Platform 7 documentation, the Microsoft contributor guidelines,
 the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 
-[Getting Started]:./getting-started
-[Welcome]: ./welcome
-[Contributor Guide]: ./contributor-guide
-[Prerequisities]: ./prerequisities
-[Code of Conduct]: ./code-of-conduct.md
+[getting started]: ./getting-started
+[welcome]: ./welcome
+[contributor guide]: ./contributor-guide
+[prerequisities]: ./prerequisities
+[code of conduct]: ./code-of-conduct.md
 [documentation]: https://github.com/camunda-cloud/camunda-cloud-documentation
 [open a pull request]: https://github.com/camunda-cloud/camunda-cloud-documentation/compare
 [conventional commits]: https://www.conventionalcommits.org/en/v1.0.0/#summary
 [variety]: https://github.com/camunda-cloud/camunda-cloud-documentation/tree/master/howtos
-[Documentation guidelines]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/documentation-guidelines.md
+[documentation guidelines]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/documentation-guidelines.md
 [opening an issue]: https://github.com/camunda-cloud/camunda-cloud-documentation/issues
-[Docusaurus 2]: https://v2.docusaurus.io/
-[GitHub web-based editor]: https://docs.github.com/en/codespaces/the-githubdev-web-based-editor
-[Git]: https://git-scm.com/
-[GitHub]: https://lab.github.com/
-[Contributor License Agreement]: https://cla-assistant.io/camunda-cloud/camunda-cloud-documentation
+[docusaurus 2]: https://v2.docusaurus.io/
+[github web-based editor]: https://docs.github.com/en/codespaces/the-githubdev-web-based-editor
+[git]: https://git-scm.com/
+[github]: https://lab.github.com/
+[contributor license agreement]: https://cla-assistant.io/camunda-cloud/camunda-cloud-documentation
 [code style guidelines]: https://github.com/camunda-cloud/zeebe/wiki/Code-Style
 [testing best practices]: https://docs.camunda.io/docs/apis-clients/java-client/zeebe-process-test/
-[Conventional Commits]: ./conventional-commits
+[conventional commits]: ./conventional-commits
 [template and settings files]: https://github.com/camunda/camunda-bpm-platform/tree/master/settings
-[Technical Writing Style Guide]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/technical-writing-styleguide.md
-[Pull Requests and Code Review]: https://github.com/camunda-cloud/zeebe/wiki/Pull-Requests-and-Code-Reviews
-[SemVer]: http://semver.org/
+[technical writing style guide]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/technical-writing-styleguide.md
+[pull requests and code review]: https://github.com/camunda-cloud/zeebe/wiki/Pull-Requests-and-Code-Reviews
+[semver]: http://semver.org/
