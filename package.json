@@ -50,6 +50,6 @@
     "prettier": "2.6.2"
   },
   "lint-staged": {
-    "*.{css,js,json,md,mdx,yaml,yml}": "npm run format"
+    "*.{css,js,json,MD,md,mdx,yaml,yml}": "npm run format"
   }
 }
