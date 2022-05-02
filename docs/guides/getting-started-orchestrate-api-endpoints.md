@@ -1,7 +1,7 @@
 ---
 id: orchestrate-api-endpoints
 title: Getting started with API Endpoints
-sidebar_label: Getting started API Endpoints
+sidebar_label: Getting started with API Endpoints
 description: "Use Connectors to build low code process automation solutions"
 keywords: [api endpoints, orchestration, getting started, user guide, connectors]
 ---
@@ -55,3 +55,5 @@ The HTTP response will be available in a temporary local response variable. This
 9. To the right of the two blue buttons, click the Application icon (honeycomb icon) button next to the **Start instance** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
 ## Additional resources and next steps
+
+* Dive deeper into [connectors](/components/modeler/web-modeler/connectors/index.md).
