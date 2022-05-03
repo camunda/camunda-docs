@@ -17,6 +17,7 @@
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "prepare": "husky install"
   },
   "dependencies": {
