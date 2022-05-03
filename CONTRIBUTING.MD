@@ -51,6 +51,8 @@ By contributing to this repository, you are also expected to adhere to our commu
 Before submitting your pull request for code review, please ensure your code has met the requirements listed below:
 
 - Is your code formatted according to our [code style guidelines]?
+  - Code format is validated by prettier during the pull-request build workflow.
+  - You can auto-format your code locally by running `npm run format`.
 - Does your writing follow our [Technical Writing Style Guide]?
 - Is your code covered by unit tests?
   - It is the responsibility of contributors to ensure that their contributed code passes automated testing.
