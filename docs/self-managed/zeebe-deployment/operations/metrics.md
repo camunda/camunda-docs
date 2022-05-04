@@ -1,6 +1,7 @@
 ---
 id: metrics
 title: "Metrics"
+keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
 When operating a distributed system like Zeebe, it is important to put proper monitoring in place.

@@ -428,7 +428,7 @@ More information can be found in the [Camunda Platform 7 REST API Reference](htt
 #### Apache Camel (e.g. files in a drop folder)
 
 Use [Apache Camel](http://camel.apache.org/) if you want to use one of the existing [Camel Components](http://camel.apache.org/components.html) (a huge list). Consider leveraging the
-[Camunda Platform 7 Camel Community Extension](https://github.com/camunda/camunda-bpm-camel). You can find an example of this in action on JBoss/Wildfly in [this showcase (unsupported)](https://github.com/camunda/camunda-consulting/blob/master/showcases/camel-use-cases/).
+[Camunda Platform 7 Camel Community Extension](https://github.com/camunda-community-hub/camunda-bpm-camel). 
 
 Starting a process instance can be done by a Camel route, e.g. when a file was placed into a drop folder:
 
@@ -440,7 +440,7 @@ from("file://c:/tmp") // some drop folder
     .to("camunda-bpm:start?processDefinitionKey=invoice"); // and start new process instance
 ```
 
-In this case, the message transported within the Camel route is handed over to the process instance as a variable named `camelBody` by default, see [documentation](https://github.com/camunda/camunda-bpm-camel#camunda-bpmstart-start-a-process-instance).
+In this case, the message transported within the Camel route is handed over to the process instance as a variable named `camelBody` by default, see [documentation](https://github.com/camunda-community-hub/camunda-bpm-camel#camunda-bpmstart-start-a-process-instance).
 
 #### Messages sent via an Enterprise Service Bus (ESB)
 

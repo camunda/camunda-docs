@@ -1,6 +1,7 @@
 ---
 id: resource-planning
 title: "Resource planning"
+keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
 The short answer to “_what resources and configuration will I need to take Zeebe to production?_” is: it depends.
@@ -108,7 +109,7 @@ The following conditions inhibit the automatic deletion of event log segments:
 - The max number of snapshots has not been written. Log segment deletion begin as soon as the max number of snapshots is reached.
 - An exporter does not advance its read position in the event log. In this case, the event log grows ad infinitum.
 
-An event log segment is not deleted until all the events in it are exported by all configured exporters. This means exporters that rely on side effects, perform intensive computation, or experience back pressure from external storage will cause disk usage to grow, as they delay the deletion of event log segments.
+An event log segment is not deleted until all the events in it are exported by all configured exporters. This means exporters that rely on side effects, perform intensive computation, or experience backpressure from external storage will cause disk usage to grow, as they delay the deletion of event log segments.
 
 Exporting is only performed on the partition leader, but the followers of the partition do not delete segments in their replica of the partition until the leader marks all events in it as unneeded by exporters.
 

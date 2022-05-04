@@ -16,7 +16,9 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.9.0",
@@ -44,6 +46,11 @@
     ]
   },
   "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
     "prettier": "2.6.2"
+  },
+  "lint-staged": {
+    "*.{css,js,json,MD,md,mdx,yaml,yml}": "npm run format"
   }
 }
