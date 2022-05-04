@@ -8,6 +8,9 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/guides/operating-the-camunda-cloud-stack-on-kubernetes(.*)$ /docs/self-managed/platform-deployment/kubernetes [R=301,L]
+RewriteRule ^docs/guides/operating-the-camunda-cloud-stack-on-kubernetes$ /docs/self-managed/platform-deployment/kubernetes [R=301,L]
+
 RewriteRule ^docs/guides/getting-started-orchestrate-microservices(.*)$ /docs/guides/orchestrate-microservices [R=301,L]
 RewriteRule ^docs/guides/getting-started-orchestrate-microservices$ /docs/guides/orchestrate-microservices [R=301,L]
 
