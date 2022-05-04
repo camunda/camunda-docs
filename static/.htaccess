@@ -47,6 +47,9 @@ RewriteRule ^docs/guides/getting-started$ /docs/guides/ [R=301,L]
 RewriteRule ^docs/components/guides/getting-started/(.*)$ /docs/components/guides/$1 [R=301,L]
 RewriteRule ^docs/components/guides/getting-started$ /docs/components/guides/ [R=301,L]
 
+RewriteRule ^docs/components/zeebe/technical-concepts/internal-processing/#handling-back-pressure(.*)$ /docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure [R=301,L]
+RewriteRule ^docs/components/zeebe/technical-concepts/internal-processing/#handling-back-pressure$ /docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure [R=301,L]
+
 RewriteRule ^docs/self-managed/optimize-deployment/setup/secure-elasticsearch(.*)$ /docs/self-managed/optimize-deployment/configuration/security-instructions [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/setup/secure-elasticsearch$ /docs/self-managed/optimize-deployment/configuration/security-instructions [R=301,L]
 

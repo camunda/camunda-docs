@@ -2,6 +2,7 @@
 id: grpc
 title: "Zeebe API (gRPC)"
 description: "Zeebe clients use gRPC to communicate with the cluster."
+keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
 [Zeebe](../components/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
@@ -691,12 +692,12 @@ communicate with nodes in the cluster. The nodes in the cluster are called broke
 Technical errors which occur between gateway and brokers (e.g. the gateway cannot deserialize the broker response,
 the broker is unavailable, etc.) are reported to the client using the following error codes:
 
-- `GRPC_STATUS_RESOURCE_EXHAUSTED`: When a broker receives more requests than it can handle, it signals back-pressure and rejects requests with this error code.
+- `GRPC_STATUS_RESOURCE_EXHAUSTED`: When a broker receives more requests than it can handle, it signals backpressure and rejects requests with this error code.
   - In this case, it is possible to retry the requests with an appropriate retry strategy.
   - If you receive many such errors within a short time period, it indicates the broker is constantly under high load.
   - It is recommended to reduce the rate of requests.
-    When back-pressure is active, the broker may reject any request except _CompleteJob_ RPC and _FailJob_ RPC.
-  - These requests are white-listed for back-pressure and are always accepted by the broker even if it is receiving requests above its limits.
+    When backpressure is active, the broker may reject any request except _CompleteJob_ RPC and _FailJob_ RPC.
+  - These requests are white-listed for backpressure and are always accepted by the broker even if it is receiving requests above its limits.
 - `GRPC_STATUS_UNAVAILABLE`: If the gateway itself is in an invalid state (e.g. out of memory).
 - `GRPC_STATUS_INTERNAL`: For any other internal errors that occurred between the gateway and the broker.
 
