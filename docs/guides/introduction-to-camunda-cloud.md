@@ -19,7 +19,3 @@ Camunda Platform 8 is comprised of six components:
 Camunda Platform 8 can be used with both Desktop Modeler, and Web Modeler.
 
 In this section of the Camunda Platform 8 documentation, you'll find guides for getting started with Camunda Platform 8. For more conceptual information on Camunda Platform 8, see [What is Camunda Platform 8](components/concepts/what-is-camunda-platform-8.md).
-
-## Next steps
-
-- [Sign up and log in to Camunda Platform 8](/guides/getting-started/create-camunda-cloud-account.md)

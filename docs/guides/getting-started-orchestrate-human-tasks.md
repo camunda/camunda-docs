@@ -1,12 +1,12 @@
 ---
-id: getting-started-orchestrate-human-tasks
+id: orchestrate-human-tasks
 title: Getting started with Human Task Orchestration
 sidebar_label: Getting started with Human Task Orchestration
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
-Using [Camunda Platform 8](./getting-started/create-camunda-cloud-account.md), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
+Using [Camunda Platform 8](https://camunda.io), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
 
 When a process instance arrives at such a user task, a new job similar to a service task is created. The process instance stops at this point and waits until the job is completed. Applications like [Tasklist](../components/tasklist/introduction.md) can be used by humans to complete these tasks.
 
@@ -14,27 +14,21 @@ While it may originally seem like the goal of automating a process is to remove 
 
 In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser.
 
-### Prerequisites
-
-- Ensure you have a valid [Camunda Platform 8 account](./getting-started/create-camunda-cloud-account.md), or sign up if you still need one.
-- (Optional) Install [Camunda Desktop Modeler](../components/modeler/desktop-modeler/install-the-modeler.md).
-
-### Create a cluster
+## Create a cluster
 
 import CreateCluster from './assets/react-components/create-cluster.md'
 
 <CreateCluster/>
 
-### Create an automated process with user tasks
+## Create an automated process with user tasks
 
 To create an automated process with user tasks, take the following steps:
 
-#### Develop your automated process with user tasks
+### Develop your automated process with user tasks
 
-1. Log in to your Camunda Platform 8 account.
-2. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
-3. Name your project and select **New > BPMN Diagram > + Create blank**.
-4. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Preparing dinner` with an id of `preparing-dinner`.
+1. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
+2. Name your project and select **New > BPMN Diagram > + Create blank**.
+3. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Preparing dinner` with an id of `preparing-dinner`.
 ![modeler example](./img/modeler-example.png)
 5. Use Web Modeler to design a BPMN flow with user tasks. Create a user task by dragging the task icon from the palette, or click the existing start event and the displayed task icon.
 6. Change the task type by clicking the wrench icon. Select **User Task**.
@@ -55,7 +49,7 @@ To create an automated process with user tasks, take the following steps:
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
 :::
 
-#### Implement a form
+### Implement a form
 
 1. To add a form and decide what's for dinner, return to the **Modeler** homepage and click **New > Form**.
 2. Name your form. In this case, we've named ours **Decide what's for dinner**.
@@ -70,7 +64,7 @@ As mentioned earlier, you'll need to insert the defined variable values into the
    1. Within your form, click the rectangular **Copy JSON** icon to copy the form JSON to your clipboard. Navigate to your BPMN diagram, and click the appropriate user task. Within the properties panel of the user task, navigate to the **Form** section, select a **Type** of **Camunda forms** and paste your JSON into the **Form JSON configuration** field.
    2. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import**.
 
-#### Start and view your process instance
+### Start and view your process instance
 
 1. To deploy your diagram to your cluster, click **Deploy diagram > Deploy**.
 2. To officially start a new process instance, click **Start instance**.
@@ -79,7 +73,7 @@ As mentioned earlier, you'll need to insert the defined variable values into the
 
 ![token moving through process](./img/user-task-token-1.png)
 
-#### Complete a user task
+### Complete a user task
 
 Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](../components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
 
@@ -100,7 +94,7 @@ Here, after implementing your gateway, is when [expressions](../components/conce
 
 In this case, the token will move through the gateway and (according to the conditional expressions we outlined earlier) to the selected dinner based on the **Decide what's for dinner** user task we completed. If we select **Chicken**, the token moves forward to **Prepare chicken**. If we select **Salad**, the token moves forward to **Prepare salad**.
 
-### Additional resources and next steps
+## Additional resources and next steps
 
 - [BPMN user tasks](../components/modeler/bpmn/user-tasks/user-tasks.md)
 - [Building Forms with Modeler](./utilizing-forms.md)
