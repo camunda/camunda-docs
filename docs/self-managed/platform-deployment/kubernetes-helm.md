@@ -138,19 +138,20 @@ If the output of the `describe` command was not beneficial, tail the logs of the
 > kubectl logs -f <POD NAME> 
 ```
 
-
 ## Upgrading from one Helm release to another
 
-If you want to upgrade to a more recent version of the Camunda Platform Helm charts there are certain things you need to keep in mind.
+To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
 
-What you normally do for a helm upgrade is to run the
-[helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Identity and the related authentication mechanism then you should be able to easily do an upgrade, via the previous mention command. But if Identity is enabled, which is the default, then the upgrade path is a bit more complex than just running `helm upgrade`.
+Normally for a Helm upgrade, you run the
+[Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Identity and the related authentication mechanism, you should be able to easily do an upgrade via this command, `helm upgrade`.
 
-Make sure to read the next sections to make you familiar with the upgrade process.
+However, if Identity is enabled (this is the default), the upgrade path is a bit more complex than just running `helm upgrade`.
+
+Read the next sections to familiarize yourself with the upgrade process.
 
 ### Upgrading with Identity and Secrets
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, then this means Identity and the related authentication mechanism are enabled. For authentification, the Helm charts generate for each web app the secrets randomly, if not specified on installation. If you just run `helm upgrade` to upgrade to a newer chart version you likely will see this:
+If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation. If you just run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 $ helm upgrade camunda-platform-test camunda/camunda-platform 
@@ -164,17 +165,21 @@ PASSWORDS ERROR: You must provide your current passwords when upgrading the rele
         export TASKLIST_SECRET=$(kubectl get secret --namespace "zell-c8-optimize" "camunda-platform-test-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 ```
 
-The reason is the following: As described earlier per default, if not further specified, secrets are randomly generated on the first Helm installation. We use a library chart, [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common), for this. The generated secrets are persisted on persistent volume claims (PVCs), which are not maintained by Helm. If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated! On an upgrade secrets can be recreated by Helm, this could lead to the re-generating of the secret values. This would mean that newly generated secrets wouldn't longer match with the persisted secrets. To avoid such an issue Bitnami blocks the upgrade path and prints the help message you can see above.
+As described earlier per default, this occurs because Secrets are randomly generated on the first Helm installation if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated Secrets are persisted on persistent volume claims (PVCs), which are not maintained by Helm.
 
-In the error message, Bitnami links to their well-described [Troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases) which covers this topic pretty well, but we will shortly go over it and explain it here as well, to avoid confusion.
+If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, Secrets can be recreated by Helm, and could lead to the regeneration of the Secret values. This would mean that newly-generated Secrets wouldn't longer match with the persisted secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
 
-### Secrets Extraction
+In the error message, Bitnami links to their well-described [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion we will step through the troubleshooting process in this guide as well.
 
-To make the upgrade work you need to first extract all secrets which were previously generated.
+### Secrets extraction
 
-> Note: You also have to do that for some which have been generated for Keycloak, since Keycloak is a dependency of Identity.
+For a successful upgrade, you first need to extract all Secrets which were previously generated.
 
-To extract the secrets you can use the following snippet. Make sure to replace `<releasename>` with your chosen Helm release name.
+:::note
+You also need to extract all Secrets which were generated for Keycloak, since Keycloak is a dependency of Identity.
+:::
+
+To extract the Secrets, use the following code snippet. Make sure to replace `<releasename>` with your chosen Helm release name.
 
 ```shell
 export TASKLIST_SECRET=$(kubectl get secret "<releasename>-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
@@ -185,7 +190,7 @@ export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "<releasename>-keycloak" 
 export POSTGRESQL_SECRET=$(kubectl get secret "<releasename>-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
 ```
 
-After exporting all secrets into environment variables you can run the following upgrade command.
+After exporting all Secrets into environment variables, run the following upgrade command.
 
 ```shell
 helm upgrade <releasename> charts/camunda-platform/ \
@@ -197,6 +202,8 @@ helm upgrade <releasename> charts/camunda-platform/ \
   --set identity.keycloak.postgresql.auth.password=$POSTGRESQL_SECRET
 ```
 
-> Note: If you have specified on the first installation certain values, you have to specify them again on the upgrade. Either via --set or the values file and the -f flag!
+:::note
+If you have specified on the first installation certain values, you have to specify them again on the upgrade. Either via `--set` or the values file and the `-f` flag.
+:::
 
 For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
