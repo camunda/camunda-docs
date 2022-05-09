@@ -151,7 +151,7 @@ Read the next sections to familiarize yourself with the upgrade process.
 
 ### Upgrading with Identity and Secrets
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation. If you just run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
+If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the Secrets randomly if not specified on installation. If you just run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 $ helm upgrade camunda-platform-test camunda/camunda-platform 
@@ -165,7 +165,7 @@ PASSWORDS ERROR: You must provide your current passwords when upgrading the rele
         export TASKLIST_SECRET=$(kubectl get secret --namespace "zell-c8-optimize" "camunda-platform-test-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 ```
 
-As described earlier per default, this occurs because Secrets are randomly generated on the first Helm installation if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated Secrets are persisted on persistent volume claims (PVCs), which are not maintained by Helm.
+As mentioned, this output returns because Secrets are randomly generated with the first Helm installation by default if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated Secrets are persisted on persistent volume claims (PVCs), which are not maintained by Helm.
 
 If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, Secrets can be recreated by Helm, and could lead to the regeneration of the Secret values. This would mean that newly-generated Secrets wouldn't longer match with the persisted secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
 
