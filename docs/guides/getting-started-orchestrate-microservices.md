@@ -1,5 +1,5 @@
 ---
-id: getting-started-orchestrate-microservices
+id: orchestrate-microservices
 title: Getting started with Microservice Orchestration
 sidebar_label: Getting started with Microservice Orchestration
 description: "Orchestrate Microservices along a business process for visibility and resilience."
@@ -12,7 +12,7 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-* Valid Camunda Platform 8 account or [sign up](https://camunda.io/signup) if you still need one
+* Ensure you have a valid [Camunda Platform 8 account](./create-account.md), or sign up if you still need one.
 * Java >= 8
 * Maven
 * IDE (IntelliJ, VSCode, or similar)
@@ -28,9 +28,8 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 
 Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Web Modeler.
 
-1. Navigate to the **Modeler** tab at the top of the page. This opens Web Modeler to your **Projects** page in a separate browser tab.
-2. Create a new project by clicking the blue **New project** button. Give your project a descriptive name.
-3. Click the blue **New** button and select **BPMN Diagram**. A modal will appear to select a template, click **+ Create blank**.
+1. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
+2. Name your project and select **New > BPMN Diagram > + Create blank**.
 4. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **Microservice Orchestration Tutorial** for the name and **microservice-orchestration-tutorial** for the id.
 5. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click the wrench icon and select **Service Task** to change the task type.
 
@@ -74,7 +73,7 @@ Next, we’ll create a worker for the service task by associating it with the ty
 
 Congratulations! You successfully built your first microservice orchestration solution with Camunda Platform 8.
 
-## Next steps
+## Additional resources and next steps
 
 * Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8?](../../components/concepts/what-is-camunda-platform-8).
 * Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](../setting-up-development-project).

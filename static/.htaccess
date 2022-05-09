@@ -8,6 +8,45 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/guides/operating-the-camunda-cloud-stack-on-kubernetes(.*)$ /docs/self-managed/platform-deployment/kubernetes [R=301,L]
+RewriteRule ^docs/guides/operating-the-camunda-cloud-stack-on-kubernetes$ /docs/self-managed/platform-deployment/kubernetes [R=301,L]
+
+RewriteRule ^docs/guides/getting-started-orchestrate-microservices(.*)$ /docs/guides/orchestrate-microservices [R=301,L]
+RewriteRule ^docs/guides/getting-started-orchestrate-microservices$ /docs/guides/orchestrate-microservices [R=301,L]
+
+RewriteRule ^docs/guides/getting-started-orchestrate-human-tasks(.*)$ /docs/guides/orchestrate-human-tasks [R=301,L]
+RewriteRule ^docs/guides/getting-started-orchestrate-human-tasks$ /docs/guides/orchestrate-human-tasks [R=301,L]
+
+RewriteRule ^docs/guides/getting-started/monitor-your-process-in-operate(.*)$ /docs/self-managed/operate-deployment/install-and-start [R=301,L]
+RewriteRule ^docs/guides/getting-started/monitor-your-process-in-operate$ /docs/self-managed/operate-deployment/install-and-start [R=301,L]
+
+RewriteRule ^docs/guides/getting-started/involve-humans(.*)$ /docs/guides/orchestrate-human-tasks [R=301,L]
+RewriteRule ^docs/guides/getting-started/involve-humans$ /docs/guides/orchestrate-human-tasks [R=301,L]
+
+RewriteRule ^docs/guides/getting-started/implement-decision-gateway(.*)$ /docs/guides/automating-a-process-using-bpmn [R=301,L]
+RewriteRule ^docs/guides/getting-started/implement-decision-gateway$ /docs/guides/automating-a-process-using-bpmn [R=301,L]
+
+RewriteRule ^docs/guides/getting-started/implement-service-task(.*)$ /docs/guides/automating-a-process-using-bpmn [R=301,L]
+RewriteRule ^docs/guides/getting-started/implement-service-task$ /docs/guides/automating-a-process-using-bpmn [R=301,L]
+
+RewriteRule ^docs/guides/getting-started/deploy-your-process-and-start-process-instance(.*)$ /docs/guides/automating-a-process-using-bpmn [R=301,L]
+RewriteRule ^docs/guides/getting-started/deploy-your-process-and-start-process-instance$ /docs/guides/automating-a-process-using-bpmn [R=301,L]
+
+RewriteRule ^docs/guides/getting-started/connect-to-your-cluster(.*)$ /docs/guides/create-cluster [R=301,L]
+RewriteRule ^docs/guides/getting-started/connect-to-your-cluster$ /docs/guides/create-cluster [R=301,L]
+
+RewriteRule ^docs/guides/getting-started/create-your-cluster(.*)$ /docs/guides/create-cluster [R=301,L]
+RewriteRule ^docs/guides/getting-started/create-your-cluster$ /docs/guides/create-cluster [R=301,L]
+
+RewriteRule ^docs/guides/getting-started/create-camunda-cloud-account(.*)$ /docs/guides/create-account [R=301,L]
+RewriteRule ^docs/guides/getting-started/create-camunda-cloud-account$ /docs/guides/create-account [R=301,L]
+
+RewriteRule ^docs/guides/getting-started/(.*)$ /docs/guides/$1 [R=301,L]
+RewriteRule ^docs/guides/getting-started$ /docs/guides/ [R=301,L]
+
+RewriteRule ^docs/components/guides/getting-started/(.*)$ /docs/components/guides/$1 [R=301,L]
+RewriteRule ^docs/components/guides/getting-started$ /docs/components/guides/ [R=301,L]
+
 RewriteRule ^docs/components/zeebe/technical-concepts/internal-processing/#handling-back-pressure(.*)$ /docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure [R=301,L]
 RewriteRule ^docs/components/zeebe/technical-concepts/internal-processing/#handling-back-pressure$ /docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure [R=301,L]
 
