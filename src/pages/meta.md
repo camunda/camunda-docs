@@ -11,9 +11,12 @@ Whether you are reading the docs to understand how Camunda Platform 8 works, or 
 
 ## Structure
 
-Camunda Platform 8 docs are structured in such a way that the documentation is SaaS-first, meaning you will be introduced to the components, concepts, and Best Practices based on how they are used in Camunda Platform 8 SaaS.
+Camunda Platform 8 docs are structured in such a way that the documentation is SaaS-first, meaning you will be introduced to the following based on how they are used in Camunda Platform 8 SaaS:
 
-This means new users can get immediately acquainted with Camunda Platform 8 through the trial experience by navigating the vast majority of the documentation.
+* Guides: Step-by-step material to get started with Camunda Platform 8.
+* Components: Product manual and conceptual content for each component in Camunda Platform 8, including Console, Modeler, Zeebe, Operate, Optimize, and Tasklist. Here, you'll also find The Camunda Best Practices section. This section is our condensed experience of using BPMN and DMN on the Camunda toolstack, and is collected by consulting engagement with our customers and feedback from the community.
+* APIs & clients: A section dedicated to a variety of offered APIs and clients for integration.
+* Reference: General reference material for Camunda Platform 8, including a glossary, supported environments, and dependencies.
 
 ### Self-Managed section
 
