@@ -7,13 +7,14 @@
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Head from "@docusaurus/Head";
-import isInternalUrl from '@docusaurus/isInternalUrl';
+import isInternalUrl from "@docusaurus/isInternalUrl";
 import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import clsx from "clsx";
 import mixpanel from "mixpanel-browser";
 import React from "react";
+import IconExternalLink from "../ExternalLinkIcon";
 import styles from "./styles.module.css";
 
 function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }) {
@@ -38,7 +39,7 @@ function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }) {
       {href && !isInternalUrl(href) ? (
         <span>
           {label}
-          <span>***</span>
+          <IconExternalLink />
         </span>
       ) : (
         label
