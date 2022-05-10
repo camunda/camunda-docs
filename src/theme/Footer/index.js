@@ -14,7 +14,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import clsx from "clsx";
 import mixpanel from "mixpanel-browser";
 import React from "react";
-import IconExternalLink from "../ExternalLinkIcon";
+import IconExternalLink from "../IconExternalLink";
 import styles from "./styles.module.css";
 
 function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }) {
