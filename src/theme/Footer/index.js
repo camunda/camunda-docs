@@ -7,6 +7,7 @@
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Head from "@docusaurus/Head";
+import isInternalUrl from '@docusaurus/isInternalUrl';
 import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import useBaseUrl from "@docusaurus/useBaseUrl";
@@ -34,7 +35,14 @@ function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }) {
           })}
       {...props}
     >
-      {label}
+      {href && !isInternalUrl(href) ? (
+        <span>
+          {label}
+          <span>***</span>
+        </span>
+      ) : (
+        label
+      )}
     </Link>
   );
 }
