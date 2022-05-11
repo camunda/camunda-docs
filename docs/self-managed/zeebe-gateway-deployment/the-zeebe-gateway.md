@@ -1,21 +1,21 @@
 ---
 id: index
-title: "Zeebe gateway"
+title: "Zeebe Gateway"
 sidebar_label: "Overview"
 description: "The Zeebe Gateway is a component of the Zeebe cluster."
 ---
 
-## What is the Zeebe gateway?
+## What is the Zeebe Gateway?
 
-The Zeebe gateway is a component of the Zeebe cluster; it can be considered the contact point for the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster. For more information about the Zeebe broker, visit our [additional documentation](../../components/zeebe/technical-concepts/architecture.md#brokers).
+The Zeebe Gateway is a component of the Zeebe cluster; it can be considered the contact point for the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster. For more information about the Zeebe broker, visit our [additional documentation](../../components/zeebe/technical-concepts/architecture.md#brokers).
 
-To summarize, the Zeebe broker is the main part of the Zeebe cluster, which does all the heavy work like processing, replicating, exporting, and everything based on partitions. The Zeebe gateway acts as a load balancer and router between Zeebe’s processing partitions.
+To summarize, the Zeebe broker is the main part of the Zeebe cluster, which does all the heavy work like processing, replicating, exporting, and everything based on partitions. The Zeebe Gateway acts as a load balancer and router between Zeebe’s processing partitions.
 
 ![Zeebe gateway overview](assets/zeebe-gateway-overview.png)
 
-To interact with the Zeebe cluster, the Zeebe client sends a command as a gRPC message to the Zeebe gateway (to port `26500` by default). Given the gateway supports gRPC, the user can use several clients in different languages to interact with the Zeebe cluster. For more information, read our [overview](../../apis-clients/overview.md).
+To interact with the Zeebe cluster, the Zeebe client sends a command as a gRPC message to the Zeebe Gateway (to port `26500` by default). Given the gateway supports gRPC, the user can use several clients in different languages to interact with the Zeebe cluster. For more information, read our [overview](../../apis-clients/overview.md).
 
-When the Zeebe gateway receives a valid gRPC message, it is translated to an internal binary format and forwarded to one of the partition leaders inside the Zeebe cluster. The command type and values can determine to which partition the command is forwarded.
+When the Zeebe Gateway receives a valid gRPC message, it is translated to an internal binary format and forwarded to one of the partition leaders inside the Zeebe cluster. The command type and values can determine to which partition the command is forwarded.
 
 For example, creating a new process instance is sent in a round-robin fashion to the different partitions. If the command relates to an existing process instance, the command must be sent to the same partition where it was first created (determined by the key).
 
@@ -23,15 +23,15 @@ To determine the current leader for the corresponding partition, the gateway mus
 
 ## Why do we have it and what problems does it solve?
 
-The Zeebe gateway protects the brokers from external sources. It allows the creation of a demilitarized zone ([DMZ](https://en.wikipedia.org/wiki/DMZ_(computing))) and the Zeebe gateway is the only contact point.
+The Zeebe Gateway protects the brokers from external sources. It allows the creation of a demilitarized zone ([DMZ](https://en.wikipedia.org/wiki/DMZ_(computing))) and the Zeebe Gateway is the only contact point.
 
-The Zeebe gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/overview.md).
+The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/overview.md).
 
 The gateway can be run and scaled independently of the brokers, which allows separating the concerns of the applications.
 
 ## Embedded versus standalone
 
-The Zeebe gateway can be run in two different ways: embedded and standalone.
+The Zeebe Gateway can be run in two different ways: embedded and standalone.
 
 ### Embedded
 
@@ -49,7 +49,7 @@ Running the gateway in standalone mode means the gateway will be executed as its
 
 ## Configuration
 
-The Zeebe gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. Find a detailed `application.yaml` with comments [here](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
+The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. Find a detailed `application.yaml` with comments [here](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
 
 In the following sections, we provide tables with environment variables, application properties, a description, and their corresponding default values. We also describe a few use cases for each type of configuration.
 
@@ -131,10 +131,10 @@ When there is no latency enabling, this may have a performance impact. Additiona
 
 To handle many concurrent incoming requests, the user can do two things: scale the deployed gateways (if the standalone mode is in use), or increase the used resources and threads.
 
-The Zeebe gateway uses one thread by default, but this should be set to a higher number if the gateway doesn’t exhaust its available resources and doesn’t keep up with the load. The corresponding environment variables look like this: `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`.
+The Zeebe Gateway uses one thread by default, but this should be set to a higher number if the gateway doesn’t exhaust its available resources and doesn’t keep up with the load. The corresponding environment variables look like this: `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`.
 During benchmarking and when increasing the thread count, it might make sense to also increase the given resources, which are quite small in the Helm chart.
 
-For high availability and redundancy, two Zeebe gateway are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Setting this value to a higher number than one allows for quick failover.
+For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Setting this value to a higher number than one allows for quick failover.
 
 To explore how the gateway behaves, or what it does, metrics can be consumed. By default, the gateway exports Prometheus metrics, which can be scrapped under `:9600/actuator/prometheus`.
 
