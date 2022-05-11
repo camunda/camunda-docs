@@ -1,0 +1,176 @@
+---
+id: index
+title: "The Zeebe Gateway"
+sidebar_label: "Overview"
+---
+
+# Zeebe Gateway
+
+## What is the Zeebe Gateway?
+
+The Zeebe Gateway is a component of the Zeebe cluster, it can be seen as the contact point for the Zeebe cluster which allows Zeebe Clients to communicate with Zeebe Brokers inside a Zeebe cluster. For more information about the Zeebe Broker check this part of our [documentation](https://docs.camunda.io/docs/components/zeebe/technical-concepts/architecture/#brokers).
+
+**In short:** the Zeebe Broker is the main part of the Zeebe Cluster, which does all the heavy work like processing, replicating, exporting, etc everything based on partitions. The Zeebe gateway acts as a load balancer and router between Zeebe’s processing partitions.
+
+In order to interact with the Zeebe Cluster, the Zeebe Client would send a Command as gRPC Message to the Zeebe Gateway (per default to port `26500`). Since the Gateway supports gRPC the user can use several clients in different languages to interact with the Zeebe cluster. For more information check out this [overview](https://docs.camunda.io/docs/apis-clients/overview/).
+
+When the Zeebe Gateway receives a valid gRPC message it will be translated to an internal binary format and forwarded to one of the partition leaders inside the Zeebe cluster. The command type and values can determine to which partition the command is forwarded. For example: Creating a new process instance is sent in a round-robin fashing to the different partitions. If the command relates to an existing process instance then the command has to be sent to the same partition where it was first created, this is determined by the key.
+
+To know which is the current leader for the corresponding partition the gateway needs to maintain the topology of the Zeebe Cluster. The gateway(s) and broker(s) form a cluster using gossip in order to distribute information.
+
+## Why do we have it? / What problems does it solve?
+
+To protect the Brokers from outside. It allows the creation of a demilitarized zone ([DMZ](https://en.wikipedia.org/wiki/DMZ_(computing))) and the Zeebe Gateway is the only contact point.
+It allows you to easily create clients in your language of choice and keep the client implementation thin as possible. There are already several client implementations available, officially supported, and community maintained. Check the list [here](https://docs.camunda.io/docs/apis-clients/overview/).  
+The gateway can be run and scaled independently of the Brokers, which allows separating the concerns of the applications.
+
+### Embedded vs Standalone
+
+The Zeebe Gateway can be run in two different ways, embedded and standalone. In this section, we want to shortly explain both.
+
+#### Embedded
+
+Running the gateway in an embedded mode means it will run as part of the Zeebe broker. The broker will accept gRPC client messages via the embedded gateway and distribute the translated requests inside the cluster. This means that the request which is accepted by the embedded gateway does not necessarily go to the same broker, where the embedded gateway is running.
+
+The embedded gateway is useful for development and testing purposes, to reduce the burden of deploying and running multiple applications, etc. For example, in [zeebe-process-test](https://github.com/camunda/zeebe-process-test) an embedded gateway is used to accept the client commands and write directly to the engine.
+
+:::note Be aware
+If the gateway is running in the embedded mode, it will consume resources from the broker, which might impact the performance of the system.
+:::
+
+#### Standalone:
+
+Running the gateway in a standalone mode means that the gateway will be executed as its own application. This is the recommended way for production use cases, and it is the default (and only option) in the Helm charts. As written above it allows separating the concerns, especially the gateway can be scaled independently of the broker based on the current work-load.
+
+## Configuration
+
+The Zeebe gateway can be configured similarly to the broker via application.yaml file or environment variables. A detailed application.yaml, with comments, you can find [here](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
+
+In the following sections you can find tables with environment variables, application properties, a description, and their corresponding default values. We try to describe some use cases for each type of configuration.
+
+The configuration properties follow some conventions, especially the types for byte sizes and time units, check out the [application.yaml](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template), which describes that in detail.
+
+For deploying purposes it is easier to use environment variables, we will explain some usage of them in the following sections. As Helm is the recommended way to deploy Camunda Platform 8, we will explain some configuration options here as well.
+
+### Network Configuration
+
+The network configuration allows configuring the host and port details for the gateway.
+
+| Environment variable         | Application.yaml property     | Description                         | Default value |
+|------------------------------|-------------------------------|-------------------------------------|---------------|
+| `ZEEBE_GATEWAY_NETWORK_HOST` | `zeebe.gateway.network.host`  | Sets the host the gateway binds to. | `0.0.0.0`     |
+| `ZEEBE_GATEWAY_NETWORK_PORT` | `zeebe.gateway.network.port`  | Sets the port the gateway binds to. | `26500`       |
+| `ZEEBE_GATEWAY_NETWORK_MINKEEPALIVEINTERVAL` | `zeebe.gateway.network.minKeepAliveInterval` | This setting specifies the minimum accepted interval between keep alive pings. If clients sending keep-alive requests in a smaller rate they will be forcefully closed by the gateway. | `30s` |
+
+## Cluster Configuration
+
+As explained in the sections above the gateway needs to connect to the Zeebe brokers.
+
+It is important to configure the cluster contact point to one of the Zeebe brokers. Be aware that the gateway currently doesn’t support a list of contact points. The contact point needs to be available to the gateway. With help of the SWIM protocol, the gateway will find the other Broker nodes (if there are any). The corresponding environment variable is called: `ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT`.
+
+It is necessary to use the same cluster name for broker and gateway otherwise, a connection will not be possible. The related configuration property is zeebe.gateway.cluster.clusterName and as an environment variable, it is called: `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`.
+
+If you use the Helm charts both properties are configured for you already.
+
+| Environment variable                 | Application.yaml property            | Description                                              | Default value   |
+|--------------------------------------|--------------------------------------|----------------------------------------------------------|-----------------|
+| `ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT`   | `zeebe.gateway.cluster.contactPoint`   | Sets the broker the gateway should initial contact       | `127.0.0.1:26502` |                                      
+| `ZEEBE_GATEWAY_CLUSTER_REQUESTTIMEOUT` | `zeebe.gateway.cluster.requestTimeout` | Sets the timeout of requests send to the broker cluster  | `15s`             |                             
+| `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`    | `zeebe.gateway.cluster.clusterName`    | Sets name of the Zeebe cluster to connect to. This must be the same as the clustername configured in the brokers.| `zeebe-cluster`   |              
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERID`       | `zeebe.gateway.cluster.memberId`       | Sets the member id of the gateway in the cluster. This can be any unique string. | `gateway`         |                                                         
+| `ZEEBE_GATEWAY_CLUSTER_HOST`           | `zeebe.gateway.cluster.host`           | Sets the host the gateway node binds to for internal cluster communication | `0.0.0.0`         |                                                                       
+| `ZEEBE_GATEWAY_CLUSTER_PORT`           | `zeebe.gateway.cluster.port`           | Sets the port the gateway node binds to for internal cluster communication | `26502`           |                                                                                                              
+
+
+
+### Membership Configuration
+
+To configure how the gateway connects and distributes information with other nodes (brokers or gateways) via SWIM the following properties can be used. It might be useful to increase timeouts for setups that encounter a high latency between nodes.
+
+| Environment variable                                 | Application.yaml property                          | Description                                                                                          | Default value |
+|------------------------------------------------------|----------------------------------------------------|------------------------------------------------------------------------------------------------------|---------------|
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`   | `zeebe.gateway.cluster.membership.broadcastUpdates`  | Configure whether to broadcast member updates to all members.                                        | `false`         |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES`  | `zeebe.gateway.cluster.membership.broadcastDisputes` | Configure whether to broadcast disputes to all members.                                              | `true`          |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`      | `zeebe.gateway.cluster.membership.notifySuspect`     | Configure whether to notify a suspect node on state changes.                                         | `false`         |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPINTERVAL`     | `zeebe.gateway.cluster.membership.gossipInterval`    | Sets the interval at which the membership updates are sent to a random member.                       | `250ms`         |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPFANOUT`       | `zeebe.gateway.cluster.membership.gossipFanout`      | Sets the number of members to which membership updates are sent at each gossip interval.             | `2`             |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBEINTERVAL`      | `zeebe.gateway.cluster.membership.probeInterval`     | Sets the interval at which to probe a random member.                                                 | `1s`            |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBETIMEOUT`       | `zeebe.gateway.cluster.membership.probeTimeout`      | Sets the timeout for a probe response                                                                | `100ms`         |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SUSPECTPROBES`      | `zeebe.gateway.cluster.membership.suspectProbes`     | Sets the number of probes failed before declaring a member is suspect                                | `3`             |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_FAILURETIMEOUT`     | `zeebe.gateway.cluster.membership.failureTimeout`    | Sets the timeout for a suspect member is declared dead.                                              | `10s`           |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SYNCINTERVAL`       | `zeebe.gateway.cluster.membership.syncInterval`      | Sets the interval at which this member synchronizes its membership information with a random member. | `10s`           |
+
+
+### Security Configuration
+
+The security configurations allow configuring how the gateway interacts with other nodes inside the Zeebe cluster.
+
+| Environment variable                                | Application.yaml property                           | Description                                                                                          | Default value |
+|-----------------------------------------------------|-----------------------------------------------------|------------------------------------------------------------------------------------------------------|---------------|
+| `ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED`              | `zeebe.gateway.cluster.security.enabled`              |Enables TLS authentication between this gateway and other nodes in the cluster.| `false`         |
+| `ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH` | `zeebe.gateway.cluster.security.certificateChainPath` |Sets the path to the certificate chain file.|               |
+| `ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH`       | `zeebe.gateway.cluster.security.privateKeyPath`       |Sets the path to the private key file location.|               |
+
+
+### Message Compression
+
+To configure the compression algorithm for all messages sent between the gateway and
+the brokers the following property can be set. Available options are NONE, GZIP, and SNAPPY.
+This feature is useful when the network latency between the nodes is very high (for example when nodes are deployed in different data centers). When latency is high, the network bandwidth is severely reduced. Hence enabling compression helps to improve the throughput.
+
+:::note
+When there is no latency enabling this may have a performance impact.
+:::
+
+:::note
+When this flag is enabled, you must also enable compression in the standalone broker configuration.
+:::
+
+
+| Environment variable                     | Application.yaml property                           | Description                                                                                          | Default value |
+|------------------------------------------|-----------------------------------------------------|------------------------------------------------------------------------------------------------------|---------------|
+| `ZEEBE_GATEWAY_CLUSTER_MESSAGECOMPRESSION` | `zeebe.gateway.cluster.messageCompression` | Configure compression algorithm for all messages sent between the brokers and between the broker and the gateway. Available options are NONE, GZIP, and SNAPPY. | `NONE` |
+
+
+## Threads Configuration
+
+To handle many concurrent incoming requests, the user can do two things. Either scaling the deployed gateways (if the standalone mode is in use) or increasing the used resources and threads.
+
+The Zeebe gateway uses per default one thread, but this should be set to a higher number if the gateway doesn’t exhaust its available resources and doesn’t keep up with the load. The corresponding environment variables look like this: `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`
+During benchmarking and increasing the thread count it might make sense to also to increase the given resources, which are per default in the Helm chart quite small.
+
+For high availability and redundancy, two Zeebe gateway are deployed, per default with the Helm charts. In order to change that amount set the following: `zeebe-gateway.replicas=2` to a different number. Setting this value to a higher number than one allows for fail-over quickly.
+
+If you want to explore how the gateway behaves, or what it does, then metrics can be consumed. By default, the gateway export Prometheus metrics, which can be scrapped under `:9600/actuator/prometheus`
+
+| Environment variable                    | Application.yaml property               | Description                                                                                          | Default value |
+|-----------------------------------------|-----------------------------------------|------------------------------------------------------------------------------------------------------|---------------|
+| `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS` | `zeebe.gateway.threads.managementThreads` |Sets the number of threads the gateway will use to communicate with the broker cluster. | `1`             |
+
+
+## Security Configuration
+
+| Environment variable                        | Application.yaml property                   | Description                                                 | Default value |
+|---------------------------------------------|---------------------------------------------|-------------------------------------------------------------|---------------|
+| `ZEEBE_GATEWAY_SECURITY_ENABLED`              | `zeebe.gateway.security.enabled`              | Enables TLS authentication between clients and the gateway. | `false`       |
+| `ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH` | `zeebe.gateway.security.certificateChainPath` | Sets the path to the certificate chain file.                ||
+| `ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH`       | `zeebe.gateway.security.privateKeyPath`       | Sets the path to the private key file location.             ||
+
+## Long Polling configuration
+
+Long polling behavior of the gateway can be configured, what it in detail means please refer to https://docs.camunda.io/docs/components/concepts/job-workers/#long-polling
+
+| Environment variable                        | Application.yaml property                   | Description                                                 | Default value |
+|---------------------------------------------|---------------------------------------------|-------------------------------------------------------------|---------------|
+| `ZEEBE_GATEWAY_LONGPOLLING_ENABLED` | `zeebe.gateway.longPolling.enabled` | Enables long polling for available jobs. | `true` |
+
+
+## Interceptors Configuration
+
+It is possible to intercept requests in the gateway, which can again be configured via environment variables or the application.yaml file. For more details check this [section](https://docs.camunda.io/docs/self-managed/zeebe-deployment/interceptors/)
+
+| Environment variable                   | Application.yaml property                | Description                                                 | Default value |
+|----------------------------------------|------------------------------------------|-------------------------------------------------------------|---------------|
+| `ZEEBE_GATEWAY_INTERCEPTORS_0_ID`        | `zeebe.gateway.interceptors.[0].id`        |The identifier for this interceptor.||
+| `ZEEBE_GATEWAY_INTERCEPTORS_0_JARPATH`   | `zeebe.gateway.interceptors.[0].jarPath`   |The path (relative or absolute) to the JAR file containing the interceptor class and its dependencies.||
+| `ZEEBE_GATEWAY_INTERCEPTORS_0_CLASSNAME` | `zeebe.gateway.interceptors.[0].className` |The entry point of the interceptor, a class which must: <br/>- implement io.grpc.ServerInterceptor<br/>- have public visibility<br/>- have a public default constructor (i.e. no-arg constructor)||
