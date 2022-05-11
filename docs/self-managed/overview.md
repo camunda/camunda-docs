@@ -20,6 +20,7 @@ The content in this section of the documentation will include everything you nee
 The following components are available for Camunda Platform 8 Self-Managed:
 
 * Zeebe
+* Zeebe Gateway
 * Operate
 * Tasklist
 * Optimize
