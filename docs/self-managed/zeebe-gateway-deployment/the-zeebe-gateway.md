@@ -12,6 +12,9 @@ The Zeebe Gateway is a component of the Zeebe cluster, it can be seen as the con
 
 **In short:** the Zeebe Broker is the main part of the Zeebe Cluster, which does all the heavy work like processing, replicating, exporting, etc everything based on partitions. The Zeebe gateway acts as a load balancer and router between Zeebe’s processing partitions.
 
+
+![Zeebe gateway overview](assets/zeebe-gateway-overview.png)
+
 In order to interact with the Zeebe Cluster, the Zeebe Client would send a Command as gRPC Message to the Zeebe Gateway (per default to port `26500`). Since the Gateway supports gRPC the user can use several clients in different languages to interact with the Zeebe cluster. For more information check out this [overview](https://docs.camunda.io/docs/apis-clients/overview/).
 
 When the Zeebe Gateway receives a valid gRPC message it will be translated to an internal binary format and forwarded to one of the partition leaders inside the Zeebe cluster. The command type and values can determine to which partition the command is forwarded. For example: Creating a new process instance is sent in a round-robin fashing to the different partitions. If the command relates to an existing process instance then the command has to be sent to the same partition where it was first created, this is determined by the key.
