@@ -16,20 +16,22 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "@auth0/auth0-react": "^1.9.0",
+    "@auth0/auth0-react": "^1.10.1",
     "@docusaurus/core": "2.0.0-beta.15",
     "@docusaurus/preset-classic": "2.0.0-beta.15",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
     "color": "^3.2.1",
     "docusaurus-gtm-plugin": "0.0.2",
-    "mixpanel-browser": "^2.43.0",
+    "mixpanel-browser": "^2.45.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-player": "^2.9.0"
+    "react-player": "^2.10.0"
   },
   "browserslist": {
     "production": [
@@ -44,6 +46,11 @@
     ]
   },
   "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
     "prettier": "2.6.2"
+  },
+  "lint-staged": {
+    "*.{css,js,json,MD,md,mdx,yaml,yml}": "npm run format"
   }
 }

@@ -24,7 +24,7 @@ The following components are available for Camunda Platform 8 Self-Managed:
 * Operate
 * Tasklist
 * Optimize
-* IAM (not available in Camunda Platform 8 SaaS)
+* Identity (not available in Camunda Platform 8 SaaS)
 
 Camunda Platform 8 Self-Managed users may also use Desktop Modeler to build BPMN diagrams and work with Camunda Forms.
 

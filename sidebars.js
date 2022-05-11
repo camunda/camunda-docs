@@ -1,29 +1,28 @@
 module.exports = {
   Guides: [
-    "guides/introduction-to-camunda-cloud",
     {
-      "Getting started with Camunda Platform": [
-        "guides/getting-started/create-camunda-cloud-account",
-        "guides/getting-started/create-your-cluster",
-        "guides/getting-started/setup-client-connection-credentials",
-        "guides/getting-started/connect-to-your-cluster",
-        "guides/getting-started/model-your-first-process",
-        "guides/getting-started/deploy-your-process-and-start-process-instance",
-        "guides/getting-started/implement-service-task",
-        "guides/getting-started/implement-decision-gateway",
-        // "guides/getting-started/involve-humans",
-        "guides/getting-started/monitor-your-process-in-operate",
+      "Getting started": [
+        "guides/introduction-to-camunda-cloud",
+        "guides/create-account",
+        "guides/model-your-first-process",
+        "guides/create-cluster",
+        "guides/orchestrate-human-tasks",
+        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-microservices",
       ],
     },
-    "guides/getting-started-orchestrate-human-tasks",
-    "guides/getting-started-orchestrate-microservices",
-    "guides/setting-up-development-project",
-    "guides/automating-a-process-using-bpmn",
-    "guides/utilizing-forms",
-    "guides/improve-processes-with-optimize",
-    "guides/message-correlation",
     {
-      "Update Guide": [
+      "Next steps": [
+        "guides/setting-up-development-project",
+        "guides/setup-client-connection-credentials",
+        "guides/automating-a-process-using-bpmn",
+        "guides/utilizing-forms",
+        "guides/improve-processes-with-optimize",
+        "guides/message-correlation",
+      ],
+    },
+    {
+      "Update guide": [
         "guides/update-guide/introduction",
         "guides/update-guide/130-to-800",
         "guides/update-guide/120-to-130",
