@@ -27,7 +27,7 @@ Additionally, the following attributes of BPMN elements can define an expression
 
 Some attributes of BPMN elements—like the timer definition of a timer catch event—can be defined in one of two ways:
 
-- As an expression (e.g. `= remaingTime`)
+- As an expression (e.g. `= remainingTime`)
 - As a static value (e.g. `PT2H`)
 
 Expressions always start with an **equals sign** (**=**). For example, `= order.amount > 100`. The text following the equal sign is the actual expression. For example, `order.amount > 100` checks if the amount of the order is greater than 100.
