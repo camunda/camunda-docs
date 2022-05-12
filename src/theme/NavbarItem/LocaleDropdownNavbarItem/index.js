@@ -1,0 +1,2 @@
+import OriginalLocaleDropdownNavbarItem from "@theme-original/NavbarItem/LocaleDropdownNavbarItem";
+export default OriginalLocaleDropdownNavbarItem;
