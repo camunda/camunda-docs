@@ -29,7 +29,7 @@ The Zeebe Gateway protects the brokers from external sources. It allows the crea
 
 The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/overview.md).
 
-The gateway can be run and scaled independently of the brokers, which means it translates the messages, distributes them to the correct partition leaders, and separates the concerns of the applications.
+The gateway can be run and scaled independently of the brokers, which means it translates the messages, distributes them to the correct partition leaders, and separates the concerns of the applications. For example: If your system encounters a spike of incoming requests, and you have set up enough partitions on the Broker side up front, but not enough gateways to handle the load you can easily scale them up.
 
 ## Embedded versus standalone
 
