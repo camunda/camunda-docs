@@ -94,13 +94,14 @@ target: output
 
 A `completionCondition` defines whether the multi-instance body can be completed immediately when the condition is satisfied. It is a [boolean expression](/components/concepts/expressions.md#boolean-expressions) that will be evaluated each time the instance of the multi-instance body completes. Any instances that are still active are terminated and the multi-instance body is completed when the expression evaluates to `true`.
 
-The BPMN 2.0 specification defines the following properties of a multi-instance body instance:
+The BPMN 2.0 specification defines the following properties of a multi-instance body:
 
 - `numberOfInstances`: The number of instances created.
 - `numberOfActiveInstances`: The number of instances currently active.
 - `numberOfCompletedInstances`: The number of instances already completed.
+- `numberOfTerminatedInstances`: The number of instances already terminated, this will always be `0`.
 
-These properties are available for use in the `completionCondition` expression. Although they are available in this expression, they do not exist as process variables. These properties take precedence over process variables with the same name.
+These properties are available for use in the `completionCondition` expression (eg. when 50% of the instances have completed, the multi-instance body is completed). Although they are available in this expression, they do not exist as process variables. These properties take precedence over process variables with the same name.
 
 Multiple boolean values or comparisons can be combined as disjunction (`and`) or conjunction (`or`).
 
@@ -112,8 +113,6 @@ For example:
 = count(["a", "b", "c", "d"]) > 3
 
 = orderCount >= 5 and orderCount < 15
-
-= orderCount > 15 or totalPrice > 50
 
 = list contains([6,7], today().weekday)
 
