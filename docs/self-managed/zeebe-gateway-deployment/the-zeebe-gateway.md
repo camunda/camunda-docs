@@ -19,7 +19,7 @@ When the Zeebe Gateway receives a valid gRPC message, it is translated to an int
 
 For example, creating a new process instance is sent in a round-robin fashion to the different partitions. If the command relates to an existing process instance, the command must be sent to the same partition where it was first created (determined by the key).
 
-To determine the current leader for the corresponding partition, the gateway must maintain the topology of the Zeebe cluster. The gateway(s) and broker(s) form a cluster using gossip to distribute information.
+To determine the current leader for the corresponding partition, the gateway must maintain the topology of the Zeebe cluster. The gateway(s) and broker(s) form a cluster using gossip protocol to distribute information.
 
 ## Why do we have it and what problems does it solve?
 
@@ -27,7 +27,7 @@ The Zeebe Gateway protects the brokers from external sources. It allows the crea
 
 The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/overview.md).
 
-The gateway can be run and scaled independently of the brokers, which allows separating the concerns of the applications.
+The gateway can be run and scaled independently of the brokers, which means it translates the messages, distributes them to the correct partition leaders, and separates the concerns of the applications.
 
 ## Embedded versus standalone
 
@@ -132,7 +132,7 @@ When there is no latency enabling, this may have a performance impact. Additiona
 To handle many concurrent incoming requests, the user can do two things: scale the deployed gateways (if the standalone mode is in use), or increase the used resources and threads.
 
 The Zeebe Gateway uses one thread by default, but this should be set to a higher number if the gateway doesn’t exhaust its available resources and doesn’t keep up with the load. The corresponding environment variables look like this: `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`.
-During benchmarking and when increasing the thread count, it might make sense to also increase the given resources, which are quite small in the Helm chart.
+During benchmarking and when increasing the thread count, it may also make sense to increase the given resources, which are quite small in the Helm chart.
 
 For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Setting this value to a higher number than one allows for quick failover.
 
