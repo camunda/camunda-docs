@@ -39,13 +39,11 @@ module.exports = {
         path: "community",
         routeBasePath: "community",
         sidebarPath: require.resolve("./sidebarsCommunity.js"),
+        lastVersion: "current",
         versions: {
           current: {
             label: `latest`,
           },
-          // 5: {
-          //   label: "Community v5",
-          // },
         },
         // ... other options
       },
