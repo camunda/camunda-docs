@@ -1,9 +1,9 @@
 ---
 id: overview
-title: Overview Components
+title: Overview Steve
 sidebar_label: Overview Components
 slug: /components/
-description: "This section contains product manual content for each component in Camunda Platform 8, including conceptual content."
+description: "Components overview"
 ---
 
 Components overview, latest version

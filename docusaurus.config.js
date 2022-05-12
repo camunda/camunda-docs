@@ -1,11 +1,12 @@
 module.exports = {
+  onBrokenLinks: "ignore",
+  onBrokenMarkdownLinks: "ignore",
   title: "Camunda Platform 8",
   tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/",
-  onBrokenLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "camunda-cloud", // Usually your GitHub org/user name.
   projectName: "camunda-cloud-documentation", // Usually your repo name.
@@ -31,6 +32,24 @@ module.exports = {
       },
     ],
     "./static/plugins/bpmn-js",
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "community",
+        path: "community",
+        routeBasePath: "community",
+        sidebarPath: require.resolve("./sidebarsCommunity.js"),
+        versions: {
+          current: {
+            label: `latest`,
+          },
+          // 5: {
+          //   label: "Community v5",
+          // },
+        },
+        // ... other options
+      },
+    ],
   ],
   scripts: [],
   themeConfig: {
