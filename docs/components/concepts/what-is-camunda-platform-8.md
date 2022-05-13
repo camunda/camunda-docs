@@ -63,7 +63,7 @@ With [Tasklist](../tasklist/introduction.md), process owners can achieve end-to-
 
 ### Optimize
 
-[Optimize](../optimize/what-is-optimize.md) leverages process execution data to continuously [provide actionable insights](../../guides/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
+[Optimize](../../../optimize/what-is-optimize.md) leverages process execution data to continuously [provide actionable insights](../../guides/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
 
 ### Console
 

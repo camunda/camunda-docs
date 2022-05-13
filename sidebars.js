@@ -57,19 +57,24 @@ module.exports = {
         },
       ],
       Optimize: [
-        "components/optimize/what-is-optimize",
         {
-          "User guide": [
-            "components/optimize/userguide/collections-dashboards-reports",
-            "components/optimize/userguide/data-sources",
-            {
-              "Process analysis": [
-                "components/optimize/userguide/process-analysis/overview",
-                "components/optimize/userguide/process-analysis/outlier-analysis",
-              ],
-            },
-          ],
+          type: "link",
+          label: "What is Optimize?",
+          href: "/optimize/what-is-optimize",
         },
+        // "components/optimize/what-is-optimize",
+        // {
+        //   "User guide": [
+        //     "components/optimize/userguide/collections-dashboards-reports",
+        //     "components/optimize/userguide/data-sources",
+        //     {
+        //       "Process analysis": [
+        //         "components/optimize/userguide/process-analysis/overview",
+        //         "components/optimize/userguide/process-analysis/outlier-analysis",
+        //       ],
+        //     },
+        //   ],
+        // },
       ],
       Tasklist: [
         "components/tasklist/introduction",

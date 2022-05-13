@@ -31,6 +31,23 @@ module.exports = {
       },
     ],
     "./static/plugins/bpmn-js",
+
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "optimize",
+        path: "optimize",
+        routeBasePath: "optimize",
+        sidebarPath: require.resolve("./optimize_sidebars.js"),
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: `latest`,
+          },
+        },
+        // ... other options
+      },
+    ],
   ],
   scripts: [],
   themeConfig: {
