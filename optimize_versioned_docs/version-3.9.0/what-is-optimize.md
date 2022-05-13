@@ -4,7 +4,7 @@ title: What is Optimize?
 description: "Leverage process data and analyze areas for improvement."
 ---
 
-Yoooo this is version `latest`!!!
+Whaaattttt this is version `3.9.0`!!!
 
 :::note
 New to Optimize? Visit our introductory guide to [Optimize](/guides/improve-processes-with-optimize.md) to get started.
