@@ -1,3 +1,5 @@
+// POC note: most of the links in this file point at the main
+//   docs instance, so they can't use the "shortcut" format.
 module.exports = {
   Components: [
     {
@@ -103,6 +105,8 @@ module.exports = {
         },
       ],
 
+      // POC note: this is the only section of links that _doesn't_ cross over to the main docs instance.
+      //   Anything here can use the shortcut format.
       Optimize: [
         "what-is-optimize",
         {

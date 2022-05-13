@@ -1,3 +1,5 @@
+// POC note: the majority of links in this file are within the same
+//   docs instance, so they can use the "shortcut" format.
 module.exports = {
   Guides: [
     {
@@ -56,6 +58,8 @@ module.exports = {
           ],
         },
       ],
+      // POC note: this is the only section of links that _does_ cross over to the optimize docs instance.
+      //   None of these can be shortcut format.
       Optimize: [
         {
           type: "link",
