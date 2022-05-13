@@ -27,7 +27,7 @@ To determine the current leader for the corresponding partition, the gateway mus
 
 The Zeebe Gateway protects the brokers from external sources. It allows the creation of a demilitarized zone ([DMZ](https://en.wikipedia.org/wiki/DMZ_(computing))) and the Zeebe Gateway is the only contact point.
 
-The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/overview.md). The clients can be kept thin, since the gateway takes care of the cluster topology and forwarding the requests to the right partitions.
+The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. The clients can be kept thin, since the gateway takes care of the cluster topology and forwarding the requests to the right partitions. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/overview.md).
 
 The gateway can be run and scaled independently of the brokers, which means it translates the messages, distributes them to the correct partition leaders, and separates the concerns of the applications. For example: If your system encounters a spike of incoming requests, and you have set up enough partitions on the Broker side up front, but not enough gateways to handle the load you can easily scale them up.
 
