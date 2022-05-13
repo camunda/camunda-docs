@@ -598,7 +598,7 @@ module.exports = {
       ],
     },
     {
-      "Zeebe Gateway": ["self-managed/zeebe-deployment/index"],
+      "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/the-zeebe-gateway"],
     },
     {
       Troubleshooting: ["self-managed/troubleshooting/log-levels"],
