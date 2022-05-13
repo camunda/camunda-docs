@@ -1,0 +1,2 @@
+import OriginalDocsVersionDropdownNavbarItem from "@theme-original/NavbarItem/DocsVersionDropdownNavbarItem";
+export default OriginalDocsVersionDropdownNavbarItem;
