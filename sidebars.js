@@ -62,19 +62,34 @@ module.exports = {
           label: "What is Optimize?",
           href: "/optimize/what-is-optimize",
         },
-        // "components/optimize/what-is-optimize",
-        // {
-        //   "User guide": [
-        //     "components/optimize/userguide/collections-dashboards-reports",
-        //     "components/optimize/userguide/data-sources",
-        //     {
-        //       "Process analysis": [
-        //         "components/optimize/userguide/process-analysis/overview",
-        //         "components/optimize/userguide/process-analysis/outlier-analysis",
-        //       ],
-        //     },
-        //   ],
-        // },
+        {
+          "User guide": [
+            {
+              type: "link",
+              label: "Collections, dashboards, and reports",
+              href: "/optimize/userguide/collections-dashboards-reports",
+            },
+            {
+              type: "link",
+              label: "Data sources",
+              href: "/optimize/userguide/data-sources",
+            },
+            {
+              "Process analysis": [
+                {
+                  type: "link",
+                  label: "Overview",
+                  href: "/optimize/userguide/process-analysis/overview",
+                },
+                {
+                  type: "link",
+                  label: "Outlier analysis",
+                  href: "/optimize/userguide/process-analysis/outlier-analysis",
+                },
+              ],
+            },
+          ],
+        },
       ],
       Tasklist: [
         "components/tasklist/introduction",
