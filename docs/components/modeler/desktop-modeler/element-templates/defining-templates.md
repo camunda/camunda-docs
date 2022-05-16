@@ -649,7 +649,7 @@ As of Camunda Modeler `v5.0.0,` it is possible to define custom icons to update 
 
 ![Icons](./img/icons.png)
 
-The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons (e.g., 18x18 pixels) to better fit into the existing user interface.
+The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. They get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
 
 This feature is currently only supported for Camunda Platform 8 element templates.
 
