@@ -1,5 +1,5 @@
 ---
-id: index
+id: zeebe-gateway
 title: "Zeebe Gateway"
 sidebar_label: "Overview"
 description: "The Zeebe Gateway is a component of the Zeebe cluster."
