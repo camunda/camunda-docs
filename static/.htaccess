@@ -8,8 +8,8 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
-RewriteRule ^docs/docs/self-managed/zeebe-gateway-deployment/index(.*)$ /docs/self-managed/zeebe-gateway-deployment/zeebe-gateway [R=301,L]
-RewriteRule ^docs/docs/self-managed/zeebe-gateway-deployment/index$ /docs/self-managed/zeebe-gateway-deployment/zeebe-gateway [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-gateway-deployment/index(.*)$ /docs/self-managed/zeebe-gateway-deployment/zeebe-gateway [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-gateway-deployment/index$ /docs/self-managed/zeebe-gateway-deployment/zeebe-gateway [R=301,L]
 
 RewriteRule ^docs/guides/operating-the-camunda-cloud-stack-on-kubernetes(.*)$ /docs/self-managed/platform-deployment/kubernetes [R=301,L]
 RewriteRule ^docs/guides/operating-the-camunda-cloud-stack-on-kubernetes$ /docs/self-managed/platform-deployment/kubernetes [R=301,L]
