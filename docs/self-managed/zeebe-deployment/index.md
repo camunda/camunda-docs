@@ -6,7 +6,7 @@ sidebar_label: "Overview"
 
 Please refer to the [Installation Guide](/docs/self-managed/platform-deployment/) for details on how to install Zeebe in a private cloud or on your own hardware.
 
-Within this section you will find detailed information about 
+Within this section you will find detailed information about:
 
 - [Configuration](configuration/configuration.md) - Explains the configuration options. These configuration options apply to both environments, but not to Camunda Platform 8. In Camunda Platform 8, the configuration is provided for you.
 - [Security](security/security.md) - Discusses the security aspects of running Zeebe and how to use them.
