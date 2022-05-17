@@ -59,7 +59,7 @@ Most metrics have the following common label:
 - `partition`: Cluster-unique id of the partition
 
 :::note
-Both brokers and gateways expose their respective metrics. The gateway metrics must be enabled via configuration, and the brokers have an optional metrics exporter that can be enabled for maximum insight.
+Both brokers and gateways expose their respective metrics. The brokers have an optional metrics exporter that can be enabled for maximum insight.
 :::
 
 **Metrics related to process processing:**
