@@ -15,6 +15,10 @@ To summarize, the Zeebe broker is the main part of the Zeebe cluster, which does
 
 To interact with the Zeebe cluster, the Zeebe client sends a command as a gRPC message to the Zeebe Gateway (to port `26500` by default). Given the gateway supports gRPC, the user can use several clients in different languages to interact with the Zeebe cluster. For more information, read our [overview](../../apis-clients/overview.md).
 
+:::note
+Be aware Zeebe brokers divide data into partitions (shards), and use RAFT for replication. Read more on RAFT [here](../../components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
+:::
+
 When the Zeebe Gateway receives a valid gRPC message, it is translated to an internal binary format and forwarded to one of the partition leaders inside the Zeebe cluster. The command type and values can determine to which partition the command is forwarded.
 
 For example, creating a new process instance is sent in a round-robin fashion to the different partitions. If the command relates to an existing process instance, the command must be sent to the same partition where it was first created (determined by the key).
@@ -25,9 +29,9 @@ To determine the current leader for the corresponding partition, the gateway mus
 
 The Zeebe Gateway protects the brokers from external sources. It allows the creation of a demilitarized zone ([DMZ](https://en.wikipedia.org/wiki/DMZ_(computing))) and the Zeebe Gateway is the only contact point.
 
-The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/overview.md).
+The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. The clients can be kept thin, since the gateway takes care of the cluster topology and forwards the requests to the right partitions. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/overview.md).
 
-The gateway can be run and scaled independently of the brokers, which means it translates the messages, distributes them to the correct partition leaders, and separates the concerns of the applications.
+The gateway can be run and scaled independently of the brokers, which means it translates the messages, distributes them to the correct partition leaders, and separates the concerns of the applications. For example, if your system encounters a spike of incoming requests, and you have set up enough partitions on the broker side up front, but not enough gateways to handle the load, you can easily scale them up.
 
 ## Embedded versus standalone
 
@@ -55,7 +59,7 @@ In the following sections, we provide tables with environment variables, applica
 
 The configuration properties follow some conventions, especially the types for byte sizes and time units, check out the [application.yaml](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template), which describes this in detail.
 
-For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda Platform 8, we will explain some configuration options here as well.
+For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda Platform 8, we will explain some configuration options here as well. Find more information about possible Zeebe gateway Helm chart configurations [here](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#zeebe-gateway).
 
 ### Network configuration
 
@@ -117,7 +121,7 @@ The security configurations allow configuring how the gateway interacts with oth
 
 To configure the compression algorithm for all messages sent between the gateway and
 the brokers, the following property can be set. Available options are NONE, GZIP, and SNAPPY.
-This feature is useful when the network latency between the nodes is very high (for example, when nodes are deployed in different data centers). When latency is high, the network bandwidth is severely reduced. Therefore, enabling compression helps improve the throughput.
+This feature is useful when the network latency between the nodes is very high (for example, when nodes are deployed in different data centers). When latency is high, the network bandwidth is severely reduced. Therefore, enabling compression helps improve the throughput. You need to decide between reducing bandwidth or reducing resources required for compression.
 
 :::note
 When there is no latency enabling, this may have a performance impact. Additionally, when this flag is enabled, you must also enable compression in the standalone broker configuration.
@@ -134,7 +138,7 @@ To handle many concurrent incoming requests, the user can do two things: scale t
 The Zeebe Gateway uses one thread by default, but this should be set to a higher number if the gateway doesn’t exhaust its available resources and doesn’t keep up with the load. The corresponding environment variables look like this: `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`.
 During benchmarking and when increasing the thread count, it may also make sense to increase the given resources, which are quite small in the Helm chart.
 
-For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Setting this value to a higher number than one allows for quick failover.
+For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Increasing the number of gateway replicas to more than one enables the possibility for quick failover; in the case one gateway dies, the remaining gateway(s) can handle the traffic.
 
 To explore how the gateway behaves, or what it does, metrics can be consumed. By default, the gateway exports Prometheus metrics, which can be scrapped under `:9600/actuator/prometheus`.
 
