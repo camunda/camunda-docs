@@ -39,12 +39,6 @@ module.exports = {
         path: "optimize",
         routeBasePath: "optimize",
         sidebarPath: require.resolve("./optimize_sidebars.js"),
-        lastVersion: "current",
-        versions: {
-          current: {
-            label: `latest`,
-          },
-        },
         // ... other options
       },
     ],
@@ -260,16 +254,10 @@ module.exports = {
           editUrl:
             "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/",
           // disableVersioning: isVersioningDisabled,
-          lastVersion: "current",
           // onlyIncludeVersions:
           //   !isVersioningDisabled && (isDev || isDeployPreview)
           //     ? ["current", ...versions.slice(0, 2)]
           //     : undefined,
-          versions: {
-            current: {
-              label: `latest`,
-            },
-          },
         },
         blog: false,
         theme: {
