@@ -97,23 +97,19 @@ module.exports = {
       },
       links: [
         {
-          title: "Docs",
+          title: "About",
           items: [
             {
-              label: "Introduction",
-              to: "docs/guides",
+              label: "How to use our docs",
+              to: "meta",
             },
             {
-              label: "Licenses",
-              to: "docs/reference/licenses",
+              label: "Try free",
+              href: "https://camunda.com/get-started",
             },
             {
-              label: "Notices",
-              to: "docs/reference/notices",
-            },
-            {
-              label: "Release cycle",
-              to: "docs/reference/release-policy",
+              label: "Contact",
+              to: "contact",
             },
           ],
         },
@@ -132,10 +128,26 @@ module.exports = {
               label: "GitHub",
               href: "https://github.com/camunda-cloud/camunda-cloud-documentation",
             },
+            {
+              label: "Forum",
+              href: "https://forum.camunda.io/",
+            },
+            {
+              label: "Contribute",
+              href: "https://camunda.com/developers/how-to-contribute/",
+            },
+            {
+              label: "Developer resources",
+              href: "https://camunda.com/developers/",
+            },
+            {
+              label: "Subscribe",
+              href: "https://camunda.com/developers/developer-community-updates/",
+            },
           ],
         },
         {
-          title: "More",
+          title: "Camunda",
           items: [
             {
               label: "Console",
@@ -146,16 +158,12 @@ module.exports = {
               href: "https://status.camunda.io",
             },
             {
-              label: "Contact",
-              to: "contact",
-            },
-            {
-              label: "Meta",
-              to: "meta",
-            },
-            {
               label: "Blog",
               href: "https://camunda.com/blog/category/camunda-cloud/",
+            },
+            {
+              label: "Release cycle",
+              to: "docs/reference/release-policy",
             },
           ],
         },
@@ -168,6 +176,14 @@ module.exports = {
             },
             {
               html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
+            },
+            {
+              label: "Licenses",
+              to: "docs/reference/licenses",
+            },
+            {
+              label: "Security notices",
+              to: "docs/reference/notices",
             },
           ],
         },
