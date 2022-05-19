@@ -176,7 +176,7 @@ Learn more about [rollback on exceptions](https://docs.camunda.org/manual/latest
 
 ## Handling exceptions via the process
 
-As an alternative to rolling back transactions, you can also handle those exceptions within the process, see [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/#handling-errors-on-the-process-level/) for details.
+As an alternative to rolling back transactions, you can also handle those exceptions within the process, see [dealing with problems and exceptions](../dealing-with-problems-and-exceptions.md#handling-errors-on-the-process-level/) for details.
 
 Just be aware of the following technical constraint: in case your transaction manager marks the current transaction *for rollback* (as possible in Java transaction managers), handling the exception by a processis not possible as the workflow engine cannot commit its work in this transaction.
 
