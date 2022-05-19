@@ -12,6 +12,13 @@ tags:
 
 ## Understanding workers
 
+:::caution Camunda Platform 8 only
+The description of workers targets Camunda Platform 8, even if [external tasks in Camunda Platform 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are conceptionally close. If you are looking for Camunda Platform 7, [understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/) might be worth to visit. 
+
+Later parts of this best practice are generically applicable though.
+:::
+
+
 First, let's briefly examine how a worker operates.
 
 Whenever a process instance arrives at a service task, a new job is created and pushed to an internal persistent queue within Camunda Platform 8. A client application can subscribe to these jobs with the workflow engine by the task type name (which is comparable to a queue name).
