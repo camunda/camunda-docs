@@ -1,65 +1,138 @@
-// POC note: the majority of links in this file are within the same
-//   docs instance, so they can use the "shortcut" format.
 module.exports = {
   Guides: [
     {
       "Getting started": [
-        "guides/introduction-to-camunda-cloud",
-        "guides/create-account",
+        {
+          type: "link",
+          label: "Introduction to Camunda Platform 8",
+          href: "/docs/guides",
+        },
+        {
+          type: "link",
+          label: "Create an account",
+          href: "/docs/guides/getting-started",
+        },
       ],
     },
     {
       "Next steps": [
-        "guides/setting-up-development-project",
-        "guides/setup-client-connection-credentials",
+        {
+          type: "link",
+          label: "Setting up your first development project",
+          href: "/docs/guides/setting-up-development-project",
+        },
+        {
+          type: "link",
+          label: "Setup client connection credentials",
+          href: "/docs/guides/setup-client-connection-credentials",
+        },
       ],
     },
   ],
   Components: [
-    "components/overview",
+    {
+      type: "link",
+      label: "Overview Components",
+      href: "/docs/components",
+    },
     {
       Concepts: [
-        "components/concepts/what-is-camunda-platform-8",
-        "components/concepts/processes",
+        {
+          type: "link",
+          label: "What is Camunda Platform 8?",
+          href: "/docs/components/concepts/what-is-camunda-platform-8",
+        },
+        {
+          type: "link",
+          label: "Processes",
+          href: "/docs/components/concepts/processes",
+        },
       ],
       Console: [
-        "components/console/introduction",
+        {
+          type: "link",
+          label: "Introduction to Camunda Platform Console",
+          href: "/docs/components/console/introduction",
+        },
         {
           "Manage your organization": [
-            "components/console/manage-organization/organization-settings",
-            "components/console/manage-organization/manage-users",
+            {
+              type: "link",
+              label: "Organization management",
+              href: "/docs/components/console/manage-organization/organization-settings",
+            },
+            {
+              type: "link",
+              label: "Manage users of your organization",
+              href: "/docs/components/console/manage-organization/manage-users",
+            },
           ],
         },
       ],
       Modeler: [
-        "components/modeler/about-modeler",
+        {
+          type: "link",
+          label: "Introduction to Camunda Platform Console",
+          href: "/docs/components/modeler/about-modeler",
+        },
         {
           "Web Modeler": [
-            "components/modeler/web-modeler/new-web-modeler",
-            "components/modeler/web-modeler/launch-cloud-modeler",
+            {
+              type: "link",
+              label: "New Web Modeler",
+              href: "/docs/components/modeler/web-modeler/new-web-modeler",
+            },
+            {
+              type: "link",
+              label: "Launch Web Modeler",
+              href: "/docs/components/modeler/web-modeler/launch-cloud-modeler",
+            },
           ],
         },
       ],
       Zeebe: [
-        "components/zeebe/zeebe-overview",
+        {
+          type: "link",
+          label: "Introduction",
+          href: "/docs/components/zeebe/zeebe-overview",
+        },
         {
           "Technical concepts": [
-            "components/zeebe/technical-concepts/index",
-            "components/zeebe/technical-concepts/architecture",
+            {
+              type: "link",
+              label: "Overview",
+              href: "/docs/components/zeebe/technical-concepts/index",
+            },
+            {
+              type: "link",
+              label: "Architecture",
+              href: "/docs/components/zeebe/technical-concepts/architecture",
+            },
           ],
         },
       ],
       Operate: [
-        "components/operate/index",
+        {
+          type: "link",
+          label: "Introduction",
+          href: "/docs/components/operate/index",
+        },
         {
           "User guide": [
-            "components/operate/userguide/basic-operate-navigation",
-            "components/operate/userguide/resolve-incidents-update-variables",
+            {
+              type: "link",
+              label: "Getting familiar with Operate",
+              href: "/docs/components/operate/userguide/basic-operate-navigation",
+            },
+            {
+              type: "link",
+              label: "Variables and incidents",
+              href: "/docs/components/operate/userguide/resolve-incidents-update-variables",
+            },
           ],
         },
       ],
-      // POC note: this is the only section of links that _does_ cross over to the optimize docs instance.
-      //   None of these can be shortcut format.
+
       Optimize: [
         {
           type: "link",
@@ -95,44 +168,115 @@ module.exports = {
           ],
         },
       ],
+
       Tasklist: [
-        "components/tasklist/introduction",
+        {
+          type: "link",
+          label: "Introduction",
+          href: "/docs/components/tasklist/introduction",
+        },
         {
           "User guide": [
-            "components/tasklist/userguide/overview",
-            "components/tasklist/userguide/updating-tasklist-cloud",
+            {
+              type: "link",
+              label: "Overview and example use case",
+              href: "/docs/components/tasklist/userguide/overview",
+            },
+            {
+              type: "link",
+              label: "Updating Tasklist",
+              href: "/docs/components/tasklist/userguide/updating-tasklist-cloud",
+            },
           ],
         },
       ],
       "Best Practices": [
-        "components/best-practices/overview",
+        {
+          type: "link",
+          label: "Overview",
+          href: "/docs/components/best-practices/overview",
+        },
         {
           "Project Management": [
-            "components/best-practices/management/following-the-customer-success-path",
-            "components/best-practices/management/doing-a-proper-poc",
+            {
+              type: "link",
+              label: "Following the Customer Success Path",
+              href: "/docs/components/best-practices/management/following-the-customer-success-path",
+            },
+            {
+              type: "link",
+              label: "Doing a proper POC",
+              href: "/docs/components/best-practices/management/doing-a-proper-poc",
+            },
           ],
           Architecture: [
-            "components/best-practices/architecture/deciding-about-your-stack",
-            "components/best-practices/architecture/sizing-your-environment",
+            {
+              type: "link",
+              label: "Deciding about your stack",
+              href: "/docs/components/best-practices/architecture/deciding-about-your-stack",
+            },
+            {
+              type: "link",
+              label: "Sizing your environment",
+              href: "/docs/components/best-practices/architecture/sizing-your-environment",
+            },
           ],
         },
       ],
     },
   ],
   "APIs & Clients": [
-    "apis-clients/overview",
     {
-      APIs: ["apis-clients/public-api", "apis-clients/grpc"],
+      type: "link",
+      label: "Overview",
+      href: "/docs/apis-clients/overview",
+    },
+    {
+      APIs: [
+        {
+          type: "link",
+          label: "Public API",
+          href: "/docs/apis-clients/public-api",
+        },
+        {
+          type: "link",
+          label: "Zeebe API (gRPC)",
+          href: "/docs/apis-clients/grpc",
+        },
+      ],
     },
   ],
 
-  Reference: ["reference/overview", "reference/glossary"],
+  Reference: [
+    {
+      type: "link",
+      label: "Overview",
+      href: "/docs/reference/overview",
+    },
+    {
+      type: "link",
+      label: "Glossary",
+      href: "/docs/reference/glossary",
+    },
+  ],
   "Self-Managed": [
-    "self-managed/overview",
+    {
+      type: "link",
+      label: "Camunda Platform 8 Self-Managed",
+      href: "/docs/self-managed/overview",
+    },
     {
       Installation: [
-        "self-managed/platform-deployment/index",
-        "self-managed/platform-deployment/local",
+        {
+          type: "link",
+          label: "Overview",
+          href: "/docs/self-managed/platform-deployment/index",
+        },
+        {
+          type: "link",
+          label: "Local",
+          href: "/docs/self-managed/platform-deployment/local",
+        },
       ],
     },
   ],
