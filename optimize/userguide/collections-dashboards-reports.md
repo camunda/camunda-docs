@@ -2,6 +2,7 @@
 id: collections-dashboards-reports
 title: Collections, dashboards, and reports
 description: "Let's take a closer look at the structure of Optimize and its permissions."
+displayed_sidebar: Components
 ---
 
 Within Optimize, **reports** are based on a _single_ visualization, similar to a single chart or graph. **Dashboards** are aggregations of these visualizations, similar to a full spreadsheet of data collections, or a combination of several comparative charts and graphs. **Collections** are groups of these data sets, similar to project folders for organizational purposes where we can nest a series of dashboards and/or reports within.

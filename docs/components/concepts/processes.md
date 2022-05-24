@@ -2,6 +2,7 @@
 id: processes
 title: "Processes"
 description: "Processes are flowchart-like blueprints that define the orchestration of tasks."
+displayed_sidebar: Components
 ---
 
 Processes are flowchart-like blueprints that define the orchestration of **tasks**.

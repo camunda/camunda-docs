@@ -2,6 +2,7 @@
 id: setup-client-connection-credentials
 title: Setup client connection credentials
 description: "Set up client connection credentials to create, name, and connect your client."
+displayed_sidebar: Guides
 ---
 
 ## Set up client connection credentials

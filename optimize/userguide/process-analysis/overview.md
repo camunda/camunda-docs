@@ -2,6 +2,7 @@
 id: overview
 title: Overview
 description: Further analyze your reports, and learn more about branch and outlier analysis.
+displayed_sidebar: Components
 ---
 
 The following documentation provides an opportunity to further analyze your reports through several methods:

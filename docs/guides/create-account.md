@@ -3,6 +3,7 @@ id: create-account
 title: Create an account
 slug: /guides/getting-started/
 description: "Set up your Camunda Platform 8 account to get started."
+displayed_sidebar: Guides
 ---
 
 ## Sign up for Camunda Platform 8
