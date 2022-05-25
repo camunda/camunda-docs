@@ -19,7 +19,6 @@ build
 # be removed or moved to the top. #
 # ------------------------------- #
 docs
-howtos
 src
 versioned_docs
 versioned_sidebars
