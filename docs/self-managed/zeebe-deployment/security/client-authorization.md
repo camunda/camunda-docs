@@ -111,7 +111,7 @@ By default, the authorization server is the one used by Camunda Platform 8, but 
 
 To use the Zeebe client with Camunda Platform 8, first an `OAuthCredentialsProvider` must be created and configured with the appropriate client credentials. The `audience` should be equivalent to the cluster endpoint without a port number.
 
-``` java
+```java
 public class AuthorizedClient {
     public void main(String[] args) {
         final OAuthCredentialsProvider provider =
@@ -230,8 +230,8 @@ Like the Java client, the Go client will not prevent you from adding credentials
 
 Since there are several environment variables that can be used to configure an `OAuthCredentialsProvider`, we list them here along with their uses:
 
-* `ZEEBE_CLIENT_ID` - The client ID used to request an access token from the authorization server
-* `ZEEBE_CLIENT_SECRET` - The client secret used to request an access token from the authorization server
-* `ZEEBE_TOKEN_AUDIENCE` - The address for which the token should be valid
-* `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda Platform 8)
-* `ZEEBE_CLIENT_CONFIG_PATH` - The path to a cache file where the access tokens will be stored (by default, it's `$HOME/.camunda/credentials`)
+- `ZEEBE_CLIENT_ID` - The client ID used to request an access token from the authorization server
+- `ZEEBE_CLIENT_SECRET` - The client secret used to request an access token from the authorization server
+- `ZEEBE_TOKEN_AUDIENCE` - The address for which the token should be valid
+- `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda Platform 8)
+- `ZEEBE_CLIENT_CONFIG_PATH` - The path to a cache file where the access tokens will be stored (by default, it's `$HOME/.camunda/credentials`)

@@ -3,6 +3,7 @@ id: priority-election
 title: "Priority election"
 description: "An alternative to the default raft leader election."
 ---
+
 Priority election is an alternative to the default raft leader election, where leader election is implemented by a random timer-based algorithm.
 
 It aims to achieve a more uniform leader distribution by assigning each node a priority per partition and modifying the election algorithm to ensure nodes with higher priority have a higher chance of becoming leader.

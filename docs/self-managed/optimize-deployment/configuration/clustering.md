@@ -95,5 +95,5 @@ The tiniest cluster setup consisting of one importing instance from a given `def
 
 ![Two Optimize instances](./img/Optimize-Clustering.png)
 
-The HTTP/S Load-Balancer would route user requests to either of the two instances, while Optimize #1 would also care about importing data from the engine to the shared 
+The HTTP/S Load-Balancer would route user requests to either of the two instances, while Optimize #1 would also care about importing data from the engine to the shared
 Elasticsearch instance/cluster and Optimize #2 only accesses the engine in order to authenticate and authorize users.

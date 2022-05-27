@@ -82,7 +82,7 @@ once every time a leader is elected for a partition.
 
 ## Processing
 
-At any given point, there is exactly one leader node for a given partition. 
+At any given point, there is exactly one leader node for a given partition.
 
 Whenever a node becomes the leader for a partition, it runs an instance of an
 [exporter stream processor](https://github.com/camunda-cloud/zeebe/tree/develop/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).

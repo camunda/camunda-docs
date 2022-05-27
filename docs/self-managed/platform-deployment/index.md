@@ -10,11 +10,11 @@ This chapter contains information for users who want to deploy and run Camunda P
 
 Camunda Platform 8 includes the following components as Java applications:
 
-* Zeebe Broker and Gateway
-* Operate (requiring Elasticsearch)
-* Tasklist (requiring Elasticsearch)
-* Optimize (requiring Elasticsearch)
-* Identity (requiring Keycloak)
+- Zeebe Broker and Gateway
+- Operate (requiring Elasticsearch)
+- Tasklist (requiring Elasticsearch)
+- Optimize (requiring Elasticsearch)
+- Identity (requiring Keycloak)
 
 Depending on your needs, you might not need all the above components to successfully use Camunda Platform 8.
 
@@ -26,9 +26,9 @@ For details on supported environments (e.g. Java or Elasticsearch versions), see
 
 You have the following options to run the above components in a self-managed fashion:
 
-* [**Kubernetes**](./kubernetes): We strongly recommend using Kubernetes to run Camunda Platform 8 in production. Using minikube, Kubernetes can also be an interesting environment to run Camunda Platform 8 locally on developer machines.
-* [**Docker**](./docker): You can run the provided Docker images of the components, also in production. For your convenience, we provide a Docker Compose configuration to run Camunda Platform 8 on developer machines. Note that the Docker Compose configuration is **not** optimized for production usage, but for local development.
-* [**Local installation**](./local): You can run the Java applications on a local or virtual machine if it provides a supported Java Virtual Machine (JVM). This allows you to run Camunda on virtual machines or bare metal and offers a significant amount of flexibility. However, you will need to configure the details for the components to interact correctly yourself. We consider this a last resort. Note that Windows/Mac is **not** supported for production usage of Zeebe.
+- [**Kubernetes**](./kubernetes): We strongly recommend using Kubernetes to run Camunda Platform 8 in production. Using minikube, Kubernetes can also be an interesting environment to run Camunda Platform 8 locally on developer machines.
+- [**Docker**](./docker): You can run the provided Docker images of the components, also in production. For your convenience, we provide a Docker Compose configuration to run Camunda Platform 8 on developer machines. Note that the Docker Compose configuration is **not** optimized for production usage, but for local development.
+- [**Local installation**](./local): You can run the Java applications on a local or virtual machine if it provides a supported Java Virtual Machine (JVM). This allows you to run Camunda on virtual machines or bare metal and offers a significant amount of flexibility. However, you will need to configure the details for the components to interact correctly yourself. We consider this a last resort. Note that Windows/Mac is **not** supported for production usage of Zeebe.
 
 ## Deployment recommendation
 
@@ -60,5 +60,5 @@ We support the following deployment options (the sequence expresses preference) 
 
 If you have questions or feedback about deployment with Zeebe, we encourage you to visit:
 
-* [User forum](https://forum.camunda.io/)
-* [Public Slack channel](https://camunda-slack-invite.herokuapp.com/)
+- [User forum](https://forum.camunda.io/)
+- [Public Slack channel](https://camunda-slack-invite.herokuapp.com/)

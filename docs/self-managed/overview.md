@@ -19,12 +19,12 @@ The content in this section of the documentation will include everything you nee
 
 The following components are available for Camunda Platform 8 Self-Managed:
 
-* Zeebe
-* Zeebe Gateway
-* Operate
-* Tasklist
-* Optimize
-* Identity (not available in Camunda Platform 8 SaaS)
+- Zeebe
+- Zeebe Gateway
+- Operate
+- Tasklist
+- Optimize
+- Identity (not available in Camunda Platform 8 SaaS)
 
 Camunda Platform 8 Self-Managed users may also use Desktop Modeler to build BPMN diagrams and work with Camunda Forms.
 

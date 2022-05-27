@@ -20,7 +20,6 @@ build
 # ------------------------------- #
 docs/apis-clients
 docs/components
-docs/self-managed
 howtos
 versioned_docs
 versioned_sidebars
