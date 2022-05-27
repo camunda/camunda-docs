@@ -51,11 +51,11 @@ zbctl publish message "Money collected" --correlationKey "order-123" --ttl 1h
 
 ## Message cardinality
 
-A message is correlated only *once* to a process (based on the BPMN process id), across all versions of this process. If multiple subscriptions for the same process are opened (by multiple process instances or within one instance,) the message is correlated only to one of the subscriptions.
+A message is correlated only _once_ to a process (based on the BPMN process id), across all versions of this process. If multiple subscriptions for the same process are opened (by multiple process instances or within one instance,) the message is correlated only to one of the subscriptions.
 
-When subscriptions are opened for different processes, the message is correlated to *all* of the subscriptions.
+When subscriptions are opened for different processes, the message is correlated to _all_ of the subscriptions.
 
-A message is *not* correlated to a message start event subscription if an instance of the process is active and was created by a message with the same correlation key. If the message is buffered, it can be correlated after the active instance is ended. Otherwise, it is discarded.
+A message is _not_ correlated to a message start event subscription if an instance of the process is active and was created by a message with the same correlation key. If the message is buffered, it can be correlated after the active instance is ended. Otherwise, it is discarded.
 
 ## Message uniqueness
 

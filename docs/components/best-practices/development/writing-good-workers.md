@@ -45,7 +45,7 @@ You can also pull the glue code for all task types into one class. Technically, 
 
 There are exceptions when you might not want to have all glue code within one application:
 
-1. You need to specifically control the load for one task type, like *scaling it out* or *throttling it*. For example, if one service task is doing PDF generation, which is compute-intensive, you might need to scale it much more than all other glue code. On the other hand, it could also mean limiting the number of parallel generation jobs due to licensing limitations of your third-party PDF generation library.
+1. You need to specifically control the load for one task type, like _scaling it out_ or _throttling it_. For example, if one service task is doing PDF generation, which is compute-intensive, you might need to scale it much more than all other glue code. On the other hand, it could also mean limiting the number of parallel generation jobs due to licensing limitations of your third-party PDF generation library.
 2. You want to write glue code in different programming languages, for example, because writing specific logic in a specific language is much easier (like using Python for certain AI calculations or Java for certain mainframe integrations).
 
 In this case, you would spread your workers into different applications. Most often, you might still have a main process solution that will also still deploy the process model. Only specific workers are carved out.
@@ -138,7 +138,7 @@ Now, you can **leverage blocking code** for your REST call, for example, the `Re
 public void blockingRestCall(final JobClient client, final ActivatedJob job) {
   LOGGER.info("Invoke REST call...");
   String response = restTemplate.getForObject( // <-- blocking call
-    PAYMENT_URL, String.class);    
+    PAYMENT_URL, String.class);
   LOGGER.info("...finished. Complete Job...");
   client.newCompleteCommand(job.getKey()).send()
     .join(); // <-- this blocks to wait for the response
@@ -168,8 +168,8 @@ public void nonBlockingRestCall(final JobClient client, final ActivatedJob job) 
   LOGGER.info("Invoke REST call...");
   Flux<String> paymentResponseFlux = WebClient.create()
     .get().uri(PAYMENT_URL).retrieve()
-    .bodyToFlux(String.class); 
- 
+    .bodyToFlux(String.class);
+
   // non-blocking, so we register the callbacks (for happy and exceptional case)
   paymentResponseFlux.subscribe(
     response -> {
@@ -194,8 +194,8 @@ This code uses the reactive approach to use the Zeebe API:
 
 ```
 client.newCompleteCommand(job.getKey()).send()
-  .thenApply(jobResponse -> { 
-    counter.inc(); 
+  .thenApply(jobResponse -> {
+    counter.inc();
     return jobResponse;
   })
   .exceptionally(t -> {
@@ -227,11 +227,11 @@ With this reactive glue code, you don’t need to worry about thread pools in th
 
 These observations yield the following recommendations:
 
-| | Blocking Code | Reactive Code |
-| - | - | - |
-| Parallelism | Some parallelism is possibly by a thread pool, which is used by the client library. The default thread pool size is one, which needs to be adjusted in the config in order to scale. | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform. |
-| **Use when** | You don't have requirements to process jobs in parallel | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST)
-| | Your developers are not familiar with reactive programming | This should be the **default** if your developer are familiar with reactive programming. |
+|              | Blocking Code                                                                                                                                                                        | Reactive Code                                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Parallelism  | Some parallelism is possibly by a thread pool, which is used by the client library. The default thread pool size is one, which needs to be adjusted in the config in order to scale. | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform. |
+| **Use when** | You don't have requirements to process jobs in parallel                                                                                                                              | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST)                          |
+|              | Your developers are not familiar with reactive programming                                                                                                                           | This should be the **default** if your developer are familiar with reactive programming.                         |
 
 ### NodeJs client
 
@@ -239,21 +239,22 @@ Using the [Node.JS client](https://github.com/camunda/camunda-platform-get-start
 
 ```js
 zbc.createWorker({
-  taskType: 'rest',
+  taskType: "rest",
   taskHandler: (job, _, worker) => {
     console.log("Invoke REST call...");
-    axios.get(PAYMENT_URL)
-      .then(response => {
-        console.log("...finished. Complete Job...")
-        job.complete().then( result => {
-          incCounter()              
-        })
+    axios
+      .get(PAYMENT_URL)
+      .then((response) => {
+        console.log("...finished. Complete Job...");
+        job.complete().then((result) => {
+          incCounter();
+        });
       })
-      .catch(error => {
-        job.fail("Could not invoke REST API: " + error.message)
-      });      
-  }
-})
+      .catch((error) => {
+        job.fail("Could not invoke REST API: " + error.message);
+      });
+  },
+});
 ```
 
 This is **reactive code**. And a really interesting observation is that reactive programming is so deep in the JavaScript language that it is impossible to write blocking code, even code that looks blocking is still [executed in a non-blocking fashion](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/nodejs-blocking.log).
@@ -265,7 +266,6 @@ This makes the recommendation very straight-forward:
 ||Reactive code|
 | Parallelism | Event loop provided by Node.JS |
 | **Use when** | Always |
-
 
 ### C#
 
@@ -301,7 +301,7 @@ The code is executed in parallel, [as you can see in the logs](https://github.co
 private static void NonBlockingJobHandler(IJobClient jobClient, IJob activatedJob)
 {
   Log.LogInformation("Invoke REST call...");
-  var response = httpClient.GetAsync("/").ContinueWith( response => {                
+  var response = httpClient.GetAsync("/").ContinueWith( response => {
     Log.LogInformation("...finished. Complete Job...");
     jobClient.NewCompleteJobCommand(activatedJob).Send().ContinueWith( result => {
       if (result.Exception==null) {
@@ -329,8 +329,8 @@ private static async void BlockingJobHandler(IJobClient jobClient, IJob activate
 
 The degree of parallelism is down to one again, [according to the logs](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/dotnet-blocking-thread-1.log). So C# is comparable to Java, just that the typically used C# libraries are reactive by default, whereas Java still knows just too many blocking libraries. The recommendations for C#:
 
-| | Blocking code | Reactive code |
-| - | - | - |
-| Parallelism | Some parallelism is possibly by a thread pool, which is used by the client library. | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform. |
-| **Use when** | **Rarely**, and only if you don't have requirements to process jobs in parallel or might even want to reduce the level or parallelism. | This should be the **default**
-| | Your developers are not familiar with reactive programming | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST) |
+|              | Blocking code                                                                                                                          | Reactive code                                                                                                    |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Parallelism  | Some parallelism is possibly by a thread pool, which is used by the client library.                                                    | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform. |
+| **Use when** | **Rarely**, and only if you don't have requirements to process jobs in parallel or might even want to reduce the level or parallelism. | This should be the **default**                                                                                   |
+|              | Your developers are not familiar with reactive programming                                                                             | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST)                          |

@@ -72,6 +72,7 @@ In our example template we will use the following subject and body:
 Subject:
 Your Camunda Weather Report for {{location}}
 ```
+
 ```text
 Body:
 Hi {{name}},
@@ -157,7 +158,6 @@ If you want to provide dynamic content in the email via process variables, you c
 :::note
 Now you can simply [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors the run-time is available out of the box in Camunda 8 SaaS.
 :::
-
 
 ## Appendix
 

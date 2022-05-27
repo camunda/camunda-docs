@@ -33,18 +33,19 @@ extension element of the process element.
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
 This can be used to define which user the task can be assigned to. One or both of the following
 attributes can be specified simultaneously:
+
 - `assignee`: Specifies the user assigned to the task. [Tasklist] will claim the task for this user.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
 Typically, the assignee and candidate groups are defined as static values (e.g. `some_username` and
 `sales, operations`), but they can also be defined as
-[expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers,
-book.author)`). The expressions are evaluated on activating the user task and must result in a
+[expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate groups.
 
-For [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user, 
+For [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user,
 the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
+
 - Camunda Platform 8 (login with email, Google, GitHub): `email`
 - Default Basic Auth (elasticsearch): `username`
 - IAM: `username`

@@ -19,7 +19,6 @@ build
 # be removed or moved to the top. #
 # ------------------------------- #
 docs/apis-clients
-docs/components
 docs/self-managed
 howtos
 versioned_docs

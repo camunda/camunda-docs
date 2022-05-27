@@ -1,7 +1,7 @@
 ---
 title: Choosing the DMN Hit Policy
 tags:
-- DMN
+  - DMN
 ---
 
 **Hit policies** describe different ways (standardized by DMN) to evaluate the rules contained in a decision table. Different hit policies do not only lead to different results, but typically also require different modes of thinking and reason about the meaning of the entire table. Therefore, it's crucial to not just know the different DMN hit policies, but also to understand the motivations for their existence and the most typical cases for using them.
@@ -34,34 +34,34 @@ Eight of those eleven hit policies evaluate a decision table to a **single resul
 
 Such tables either return the output of only one rule or aggregate the output of many rules into one result. The hit policies to be considered are
 
-* `U`**nique**: Rules do not overlap. Only a single rule can match.
+- `U`**nique**: Rules do not overlap. Only a single rule can match.
 
-* `F`**irst**: Rules are evaluated from top to bottom. Rules may overlap, but only the first match counts.
+- `F`**irst**: Rules are evaluated from top to bottom. Rules may overlap, but only the first match counts.
 
-* `P`**riority**: Rule outputs are prioritized. Rules may overlap, but only the match with the highest output priority counts.
+- `P`**riority**: Rule outputs are prioritized. Rules may overlap, but only the match with the highest output priority counts.
 
 :::note
 Camunda does not yet support the hit policy **priority**. In essence, priorities are specified as an ordered list of output values in decreasing order of priority. Such priorities are therefore independent from rule sequence! Though not yet supported, you can mimic that behavior using hit policy "(**C**)ollect" and determining a priority yourself; for example, by means of an execution listener attached to the end of your business rule task.
 :::
 
-* `**A**`**ny**: Multiple matching rules must not make a difference: all matching rules must lead to the same output.
+- `**A**`**ny**: Multiple matching rules must not make a difference: all matching rules must lead to the same output.
 
 **Collect** and **aggregate**: The output of all matching rules is aggregated by means of an operator:
 
-* `C+`**Sum**: Add up all the matching rule's distinct outputs.
-* `C<`**Minimum**: Take the smallest value of all the matching rule's outputs.
-* `C>`**Maximum**: Take the largest value of all the matching rule's outputs.
-* `C#`**Number**: Return the number of all the matching rule's distinct outputs.
+- `C+`**Sum**: Add up all the matching rule's distinct outputs.
+- `C<`**Minimum**: Take the smallest value of all the matching rule's outputs.
+- `C>`**Maximum**: Take the largest value of all the matching rule's outputs.
+- `C#`**Number**: Return the number of all the matching rule's distinct outputs.
 
 ### Multiple result decision tables
 
 **Multiple result** tables may return the output of multiple rules. The hit policies for such tables are:
 
-* `C`**ollect**: All matching rules result in an arbitrarily ordered list of all the output entries.
+- `C`**ollect**: All matching rules result in an arbitrarily ordered list of all the output entries.
 
-* `R`**ule order**: All matching rules result in a list of outputs ordered by the sequence of those rules in the decision table.
+- `R`**ule order**: All matching rules result in a list of outputs ordered by the sequence of those rules in the decision table.
 
-* `O`**utput order**: All matching rules result in a list of outputs ordered by their (decreasing) output priority.
+- `O`**utput order**: All matching rules result in a list of outputs ordered by their (decreasing) output priority.
 
 :::note
 Camunda does not yet support the hit policy **output order**. In essence, output orders are specified as an ordered list of output values in decreasing order of priority. Such priorities are therefore independent from rule sequence! Though not yet supported, you can mimic that behavior using hit policy "(**C**)ollect" and determining an output order yourself; for example, by means of an execution listener attached to the end of your business rule task.
@@ -79,11 +79,11 @@ Hit policy "**Unique**" will typically make it easy to build a decision table, w
 
 <span className="callout">1</span>
 
-The *input* area of each row specifies a certain **segment** of possible input values.
+The _input_ area of each row specifies a certain **segment** of possible input values.
 
 <span className="callout">2</span>
 
-This row, for example, expresses that *long time silver customers receive a 9% discount*.
+This row, for example, expresses that _long time silver customers receive a 9% discount_.
 
 Such a use case fits to the hit policy "**Unique**". For such use cases, it is an advantage that this hit policy make your decision logic invalid in case you violate its requirement that your table rules never "overlap": after all, you must not produce ambigious results.
 
