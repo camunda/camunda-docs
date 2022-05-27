@@ -12,6 +12,10 @@ tags:
 
 ## Understanding workers
 
+:::caution Camunda Platform 8 only
+The description of workers targets Camunda Platform 8, even if [external tasks in Camunda Platform 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are conceptually similar. If you are looking for Camunda Platform 7, visit [understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/).
+:::
+
 First, let's briefly examine how a worker operates.
 
 Whenever a process instance arrives at a service task, a new job is created and pushed to an internal persistent queue within Camunda Platform 8. A client application can subscribe to these jobs with the workflow engine by the task type name (which is comparable to a queue name).
@@ -39,6 +43,10 @@ A typical example scenario is the following, where a worker calls a REST endpoin
 Technical ACID transaction will only be applied in the business application. The job worker mostly needs to handle exceptions on a technical level, e.g. to control retry behavior, or pass it on to the process level, where you might need to implement business transactions.
 
 ## Handling exceptions on a technical level
+
+:::caution Camunda Platform 8 only
+The description of handling exceptions targets Camunda Platform 8. If you are looking for Camunda Platform 7, visit our documentation on [operating Camunda Platform 7](../operations/operating-camunda-c7.md).
+:::
 
 ### Leveraging retries
 

@@ -18,7 +18,8 @@ build
 # adoption. These should either   #
 # be removed or moved to the top. #
 # ------------------------------- #
-docs
-src
+docs/apis-clients
+docs/components
+docs/self-managed
 versioned_docs
 versioned_sidebars

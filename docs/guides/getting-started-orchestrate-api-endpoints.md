@@ -3,7 +3,8 @@ id: orchestrate-api-endpoints
 title: Getting started with API Endpoints
 sidebar_label: Getting started with API Endpoints
 description: "Use Connectors to build low code process automation solutions"
-keywords: [api endpoints, orchestration, getting started, user guide, connectors]
+keywords:
+  [api endpoints, orchestration, getting started, user guide, connectors]
 ---
 
 A connector is a reusable building block that works out of the box. Each connector task can be configured with domain-specific parameters without implementing custom business logic.
@@ -24,9 +25,9 @@ To use a **REST connector** in your process, follow the steps below:
 
 1. Create a BPMN diagram. To do this, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
 2. Name your project and select **New > BPMN Diagram > + Create blank**.
-4. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **API Endpoint Tutorial** for the name and **api-endpoint-tutorial** for the id.
-5. Use Web Modeler to design a BPMN flow with a connector task. Create a connector task by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
-6. Change the task type by clicking the wrench icon and select **REST Connector (No Auth)** in the **Connectors** section.
+3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **API Endpoint Tutorial** for the name and **api-endpoint-tutorial** for the id.
+4. Use Web Modeler to design a BPMN flow with a connector task. Create a connector task by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
+5. Change the task type by clicking the wrench icon and select **REST Connector (No Auth)** in the **Connectors** section.
 
 ![create sendgrid connector wrench](img/connectors-rest-create-task-wrench.png)
 
@@ -57,4 +58,4 @@ To deploy your process, take the following steps:
 
 ## Additional resources and next steps
 
-* Dive deeper into [connectors](/components/modeler/web-modeler/connectors/index.md).
+- Dive deeper into [connectors](/components/modeler/web-modeler/connectors/index.md).
