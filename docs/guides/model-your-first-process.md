@@ -10,7 +10,7 @@ In Camunda Platform 8, you have two options to design and deploy a process, but 
 
 1. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
 2. Name your project and select **New > BPMN Diagram > + Create blank**.
-![blank project create bpmn diagram](./img/blank-project.png)
+   ![blank project create bpmn diagram](./img/blank-project.png)
 3. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen.
 4. Create a task by dragging the rectangular task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task.
 5. Name the task by double-clicking the task or using the properties panel.
@@ -36,7 +36,7 @@ If you want to invite collaborators to work on your process together, you'll nee
 
 1. First, add your colleague to the Organization. Click your account name then **Organization Management**.
 2. Navigate to **Users > Add New User**. Add your colleague's email and assign them an appropriate role - **Developer** is likely a good default option here as the user will have full access to Console, Operate, and Tasklist without deletion privileges.
-![add new user](./img/invite-collaborators.png)
+   ![add new user](./img/invite-collaborators.png)
 3. Click **Add**. An email will be sent to the email you provided. Your colleague must hit **Join** to finish adding them to the organization.
 4. Now that they're added to the organization, you can add them to a project. Open **Modeler**, navigate to your project and open the **Collaborators** panel on the right side.
 5. Click **Add user** and find your colleague you added to your organization. Assign their role with the dropdown and click **Send invites**.
