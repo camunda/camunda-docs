@@ -671,7 +671,7 @@ With FEEL, you can evaluate that data structure directly and have an expression 
 = some risk in riskLevels satisfies risk = "red"
 ```
 
-Additionally, you can even hook in FEEL as the scripting language in Camunda Platform 7 today (as explained by [Scripting with DMN inside BPMN](https://camunda.com/blog/2018/07/dmn-scripting/) or [User Task Assignment based on a DMN Decision Table](https://camunda.com/blog/2020/05/camunda-bpm-user-task-assignment-based-on-a-dmn-decision-table/)).  
+Additionally, you can even hook in FEEL as the scripting language in Camunda Platform 7 today (as explained by [Scripting with DMN inside BPMN](https://camunda.com/blog/2018/07/dmn-scripting/) or [User Task Assignment based on a DMN Decision Table](https://camunda.com/blog/2020/05/camunda-bpm-user-task-assignment-based-on-a-dmn-decision-table/)).
 
 However, more commonly you will keep using JUEL in Camunda Platform 7. If you write simple expressions, they can be easily migrated automatically, as you can see in [the test case](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/modeler-plugin-7-to-8-converter/client/JuelToFeelConverter.test.js) of the [migration community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration). You should avoid more complex expressions if possible.
 
