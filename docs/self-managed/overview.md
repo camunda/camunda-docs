@@ -11,7 +11,7 @@ However, Optimize documentation is available for both Camunda Platform 8 and Cam
 
 :::
 
-The alternative way to use Camunda Platform 8 is to host it yourself through Camunda Platform 8 Self-Managed.
+As an alternative to Camunda Platform 8 SaaS is to host it yourself through Camunda Platform 8 Self-Managed.
 
 Building process automation solutions with Camunda Platform 8 Self-Managed is similar to working with Camunda Platform 8 SaaS. For more information on Camunda Platform 8 SaaS, check out [What is Camunda Platform 8?](../components/concepts/what-is-camunda-platform-8.md) If you are new to Camunda Platform 8, we recommend you start your journey with [Camunda Platform 8 SaaS-based guides](../../guides/).
 
