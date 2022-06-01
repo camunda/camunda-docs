@@ -1,5 +1,5 @@
 ---
-id: feel-boolean-expressions 
+id: feel-boolean-expressions
 title: Boolean expressions
 description: "This document outlines boolean expressions and examples."
 ---
@@ -9,9 +9,9 @@ description: "This document outlines boolean expressions and examples."
 Creates a new boolean value.
 
 ```js
-true
+true;
 
-false
+false;
 ```
 
 ### Comparison
@@ -121,7 +121,7 @@ null = null
 
 {}.y = null
 // true
-```  
+```
 
 :::tip
 
@@ -147,10 +147,10 @@ is defined({}.y)
 
 Combines multiple boolean values following the ternary logic.
 
-* The result is `true` if all values are `true`.
-* The result is `false` if one value is `false`.
-* Otherwise, the result is `null` (i.e. if a value is not a boolean.)
- 
+- The result is `true` if all values are `true`.
+- The result is `false` if one value is `false`.
+- Otherwise, the result is `null` (i.e. if a value is not a boolean.)
+
 ```js
 true and true
 // true
@@ -175,24 +175,24 @@ false and "otherwise"
 
 Combines multiple boolean values following the ternary logic.
 
-* The result is `true` if at least one value is `true`.
-* The result is `false` if all values are `false`.
-* Otherwise, the result is `null` (i.e. if a value is not a boolean.)
+- The result is `true` if at least one value is `true`.
+- The result is `false` if all values are `false`.
+- Otherwise, the result is `null` (i.e. if a value is not a boolean.)
 
 ```js
-true or false   
+true or false
 // true
 
-false or false  
+false or false
 // false
 
-true or null   
+true or null
 // true
 
 true or "otherwise"
 // true
 
-false or null  
+false or null
 // null
 
 false or "otherwise"
@@ -203,18 +203,18 @@ false or "otherwise"
 
 Checks if the value is of the given type. Available type names:
 
-* `boolean`
-* `number`
-* `string`
-* `date`
-* `time`
-* `date time`
-* `day-time-duration`
-* `year-month-duration`
-* `list`
-* `context`
-* `function`
-* `Any`
+- `boolean`
+- `number`
+- `string`
+- `date`
+- `time`
+- `date time`
+- `day-time-duration`
+- `year-month-duration`
+- `list`
+- `context`
+- `function`
+- `Any`
 
 Use the type `Any` to check if the value is not `null`.
 

@@ -1,7 +1,7 @@
 ---
 title: Building flexibility into BPMN models
 tags:
-    - BPMN
+  - BPMN
 ---
 
 BPMN modeling primarily targets structured processes, often with the goal to automate as many steps as possible, increase efficiency, and decrease process execution costs. But sometimes we need ways to build flexibility into such process models to deal with expected or unexpected operational problems or to allow for humans to intervene.
@@ -22,7 +22,7 @@ Condition events are [not yet supported in Camunda Platform 8](https://docs.camu
 
 ### Boundary events to add activities on triggers
 
-BPMN allows us to attach events to the boundary of activities to trigger some follow-up action. By modeling such an event as either **interrupting** or **non-interrupting**, we can decide to do the activities either *instead of* the activity we attach the event to, or *in addition to* it.
+BPMN allows us to attach events to the boundary of activities to trigger some follow-up action. By modeling such an event as either **interrupting** or **non-interrupting**, we can decide to do the activities either _instead of_ the activity we attach the event to, or _in addition to_ it.
 
 <div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/boundary.bpmn" />
 
@@ -62,19 +62,19 @@ Sometimes we need highly flexible means to cancel scopes or trigger additional a
 
 <span className="callout">1</span>
 
-As soon as we are finished with the first activity inside the scope... 
+As soon as we are finished with the first activity inside the scope...
 
 <span className="callout">2</span>
 
-...we inform the surrounding scope about that and trigger an additional, essential activity... 
+...we inform the surrounding scope about that and trigger an additional, essential activity...
 
 <span className="callout">3</span>
 
-...but also continue with our second activity to complete the subprocess. 
+...but also continue with our second activity to complete the subprocess.
 
 <span className="callout">4</span>
 
-We can then already continue with the follow-up work regardless of whether that additional activity is already finished. 
+We can then already continue with the follow-up work regardless of whether that additional activity is already finished.
 
 ### Termination events
 
@@ -82,7 +82,7 @@ We can then already continue with the follow-up work regardless of whether that 
 Termination events are [not yet supported in Camunda Platform 8](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/) and only available in Camunda Platform 7.
 :::
 
-To build flexibility into process models, it is also useful to remember that the termination event just terminates the scope within which it is defined and therefore *not* always the whole process instance. With that technique, it becomes possible to cancel some activities inside a subprocess while completing it successfully and leaving it via the "normal" outgoing path.
+To build flexibility into process models, it is also useful to remember that the termination event just terminates the scope within which it is defined and therefore _not_ always the whole process instance. With that technique, it becomes possible to cancel some activities inside a subprocess while completing it successfully and leaving it via the "normal" outgoing path.
 
 <div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/termination.bpmn" callouts="termination,followup" />
 
@@ -128,9 +128,9 @@ If we accept the cancellation, we must terminate the entire process. To do so, w
 
 <span className="callout">3</span>
 
-This leads to another subprocess to be triggered, and this one is interrupting. Now, the process instance is really cancelled. 
+This leads to another subprocess to be triggered, and this one is interrupting. Now, the process instance is really cancelled.
 
-### Allow for order details to change, but repeat order validation 
+### Allow for order details to change, but repeat order validation
 
 :::caution Camunda Platform 7 Only
 Condition events are [not yet supported in Camunda Platform 8](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)

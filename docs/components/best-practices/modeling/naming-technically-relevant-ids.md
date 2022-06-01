@@ -1,8 +1,8 @@
 ---
 title: "Naming technically relevant IDs"
 tags:
-    - BPMN
-    - Naming Convention
+  - BPMN
+  - Naming Convention
 ---
 
 For executable flows, properly name all relevant technical element IDs in your BPMN diagrams.
@@ -17,21 +17,21 @@ Examine the IDs shown in the following example:
 
 <div bpmn="best-practices/naming-technically-relevant-ids-assets/TweetApprovalProcess.bpmn" callouts="Participant_TweetApproval,StartEvent_NewTweetWritten,Task_ReviewTweet,Gateway_TweetApproved,SequenceFlow_ApprovedNo,BoundaryEvent_TweetDuplicated,EndEvent_TweetPublished" />
 
-The following table provides you with a guideline that we would use in a context where developers are comfortable with *Java* and its typical *camelCase* naming style. You may adapt these suggestions to typical naming conventions used in your programming context.
+The following table provides you with a guideline that we would use in a context where developers are comfortable with _Java_ and its typical _camelCase_ naming style. You may adapt these suggestions to typical naming conventions used in your programming context.
 
-|  |  | XML Attribute | Prefix or Suffix | Resulting ID  |
-| -- | -- | -- | -- | -- |
-| **1** | Tweet Approval | process/@id | Process | TweetApprovalProcess |
-| **2** | New tweet written | startEvent/@id | StartEvent\_ | StartEvent\_NewTweetWritten |
-|  |  | message/@id | Message\_ | Message\_NewTweetWritten |
-|  |  | message/@name | Msg\_ | Msg\_NewTweetWritten |
-| **3** | Review tweet | userTask/@id | Task\_ | Task\_ReviewTweet |
-| **4** | Tweet approved? | exclusiveGateway/@id | Gateway\_ | Gateway\_TweetApproved |
-| **5** | No | sequenceFlow/@id | SequenceFlow\_ | SequenceFlow\_TweetApprovedNo  |
-| **6** | Tweet duplicated  | boundaryEvent/@id | BoundaryEvent\_  | BoundaryEvent\_TweetDuplicated |
-|   |  | error/@id | Error\_ | Error\_TweetDuplicated |
-|   |  | error/@errorCode | Err\_ | Err\_TweetDuplicated |
-| **7** | Tweet published | EndEvent\_/@id | EndEvent\_ | EndEvent\_TweetPublished |
+|       |                   | XML Attribute        | Prefix or Suffix | Resulting ID                  |
+| ----- | ----------------- | -------------------- | ---------------- | ----------------------------- |
+| **1** | Tweet Approval    | process/@id          | Process          | TweetApprovalProcess          |
+| **2** | New tweet written | startEvent/@id       | StartEvent\_     | StartEvent_NewTweetWritten    |
+|       |                   | message/@id          | Message\_        | Message_NewTweetWritten       |
+|       |                   | message/@name        | Msg\_            | Msg_NewTweetWritten           |
+| **3** | Review tweet      | userTask/@id         | Task\_           | Task_ReviewTweet              |
+| **4** | Tweet approved?   | exclusiveGateway/@id | Gateway\_        | Gateway_TweetApproved         |
+| **5** | No                | sequenceFlow/@id     | SequenceFlow\_   | SequenceFlow_TweetApprovedNo  |
+| **6** | Tweet duplicated  | boundaryEvent/@id    | BoundaryEvent\_  | BoundaryEvent_TweetDuplicated |
+|       |                   | error/@id            | Error\_          | Error_TweetDuplicated         |
+|       |                   | error/@errorCode     | Err\_            | Err_TweetDuplicated           |
+| **7** | Tweet published   | EndEvent\_/@id       | EndEvent\_       | EndEvent_TweetPublished       |
 
 ### Editing IDs with Camunda Modeler
 
@@ -78,7 +78,7 @@ Changing IDs can potentially break your tests or even process logic if done at a
 
 ### Aligning the BPMN file name with the process id
 
-It is a good practice to *align* the *file name* of your BPMN models with the *process id* of the executable process that is inside the file.
+It is a good practice to _align_ the _file name_ of your BPMN models with the _process id_ of the executable process that is inside the file.
 
 ![BPMN file name](naming-technically-relevant-ids-assets/aligning-the-bpmn-file-names.png)
 

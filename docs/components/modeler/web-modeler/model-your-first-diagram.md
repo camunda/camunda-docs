@@ -22,19 +22,19 @@ Elements supporting different types can be reconfigured by clicking on the corre
 Use the canvas tools in the bottom right corner to interact with your diagram.
 
 1. Zoom in.
-![zoom in](img/zoom-in.png)
+   ![zoom in](img/zoom-in.png)
 
 2. Zoom out.
-![zoom in](img/zoom-out.png)
+   ![zoom in](img/zoom-out.png)
 
 3. Reset viewport if you get lost on the canvas.
-![reset view port](img/reset-viewport.png)
+   ![reset view port](img/reset-viewport.png)
 
-1. Open the minimap to navigate complex diagrams.
-![mini map](img/minimap.png)
+4. Open the minimap to navigate complex diagrams.
+   ![mini map](img/minimap.png)
 
 5. Enter the fullscreen mode for distraction-free modeling.
-![full screen](img/fullscreen.png)
+   ![full screen](img/fullscreen.png)
 
 6. Drop an attention point and use it as a laser pointer in your presentations.
-![attention grabber](img/attention-grabber.png)
+   ![attention grabber](img/attention-grabber.png)

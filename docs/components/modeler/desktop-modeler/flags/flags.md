@@ -24,22 +24,21 @@ camunda-modeler --disable-plugins
 
 Flags passed as command line arguments take precedence over those configured via a configuration file.
 
-
 ## Available Flags
 
-| flag | default value |
-| ------------- | ------------- |
-| "disable-plugins"  | false |
-| "disable-adjust-origin"  | false |
-| "disable-cmmn" | true |
-| "disable-dmn" | false |
-| "disable-form" | false |
-| "disable-platform" | false |
-| "disable-zeebe" | false |
-| "disable-remote-interaction" | false |
-| "single-instance" | false |
-| "user-data-dir" | [Electron default](../search-paths) |
-| "display-version" | `undefined` |
+| flag                         | default value                       |
+| ---------------------------- | ----------------------------------- |
+| "disable-plugins"            | false                               |
+| "disable-adjust-origin"      | false                               |
+| "disable-cmmn"               | true                                |
+| "disable-dmn"                | false                               |
+| "disable-form"               | false                               |
+| "disable-platform"           | false                               |
+| "disable-zeebe"              | false                               |
+| "disable-remote-interaction" | false                               |
+| "single-instance"            | false                               |
+| "user-data-dir"              | [Electron default](../search-paths) |
+| "display-version"            | `undefined`                         |
 
 ## Examples
 
