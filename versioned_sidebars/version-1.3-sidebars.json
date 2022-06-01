@@ -172,14 +172,10 @@
           ]
         },
         {
-          "DMN": [
-            "components/modeler/dmn/desktop-modeler-dmn"
-          ]
+          "DMN": ["components/modeler/dmn/desktop-modeler-dmn"]
         },
         {
-          "Forms": [
-            "components/modeler/forms/camunda-forms-reference"
-          ]
+          "Forms": ["components/modeler/forms/camunda-forms-reference"]
         }
       ],
       "Zeebe": [
@@ -597,9 +593,7 @@
       ]
     },
     {
-      "Troubleshooting": [
-        "self-managed/troubleshooting/log-levels"
-      ]
+      "Troubleshooting": ["self-managed/troubleshooting/log-levels"]
     }
   ]
 }
