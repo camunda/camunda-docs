@@ -19,7 +19,6 @@ build
 # be removed or moved to the top. #
 # ------------------------------- #
 docs/self-managed
-howtos
 versioned_docs/version-0.25
 versioned_docs/version-0.26
 versioned_docs/version-1.0
