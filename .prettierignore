@@ -19,6 +19,5 @@ build
 # be removed or moved to the top. #
 # ------------------------------- #
 docs/self-managed
-howtos
 versioned_docs
 versioned_sidebars
