@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "husky": "^8.0.1",
-    "lint-staged": "^12.4.3",
+    "lint-staged": "^13.0.0",
     "prettier": "2.6.2"
   },
   "lint-staged": {
