@@ -3,7 +3,7 @@
 
 <h1>Camunda Platform Documentation</h1>
 <p>
-This repository contains the Camunda Platform documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
+This repository is tired of all the nonsense, and contains the Camunda Platform documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
 </p>
 </div>
 
