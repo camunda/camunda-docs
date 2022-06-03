@@ -2,6 +2,8 @@
 
 ## Installation
 
+First eat some cheese then...
+
 ```bash
 npm i
 ```
