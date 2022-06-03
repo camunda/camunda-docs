@@ -690,4 +690,3 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
 
   </tbody>
 </table>
-

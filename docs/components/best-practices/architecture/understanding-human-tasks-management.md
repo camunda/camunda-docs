@@ -1,12 +1,12 @@
 ---
 title: Understanding human task management
 tags:
-    - Human Task
-    - Delegation
-    - Escalation
-    - E-Mail Notification
-    - 4-Eyes-Principle
-    - Overdue Task
+  - Human Task
+  - Delegation
+  - Escalation
+  - E-Mail Notification
+  - 4-Eyes-Principle
+  - Overdue Task
 ---
 
 ## Using task assignment features
@@ -17,7 +17,7 @@ The lifecycle of human tasks (like assigning, delegating, and completing tasks) 
 
 So every task can be assigned to either a group of people, or a specific individual. An individual can 'claim' a task, indicating that they are picking the task from the pool (to avoid multiple people working on the same task).
 
-As a general rule, you should assign human tasks in your business process to *groups of people* instead of specific individuals.
+As a general rule, you should assign human tasks in your business process to _groups of people_ instead of specific individuals.
 
 ```xml
 <bpmn:userTask id="task_approve_vacation">
@@ -26,7 +26,7 @@ As a general rule, you should assign human tasks in your business process to *gr
   </bpmn:extensionElements>
 ```
 
-Then, require individual members of that group to explicitly *claim tasks* before working on them. This way, you avoid different people working on the same task at the same time. See [`claimTask`](/docs/apis-clients/tasklist-api/mutations/claim-task/).
+Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. See [`claimTask`](/docs/apis-clients/tasklist-api/mutations/claim-task/).
 
 ```graphql
 claimTask(
@@ -39,7 +39,7 @@ You can also directly claim tasks in Camunda Tasklist with the click of a button
 
 ![Claim](understanding-human-tasks-management-assets/claim.png)
 
-While assigning users to groups is advised, it's not the only option. You could always assign a task to a *single person* who is supposed to complete the task (e.g. the individual 'customer' of your process or a coworker having specific knowledge for the case). You will need to have access to the specific person relevant for your process instance, e.g. via a process variable:
+While assigning users to groups is advised, it's not the only option. You could always assign a task to a _single person_ who is supposed to complete the task (e.g. the individual 'customer' of your process or a coworker having specific knowledge for the case). You will need to have access to the specific person relevant for your process instance, e.g. via a process variable:
 
 ```xml
 <bpmn:userTask id="task_approve_vacation">
@@ -62,30 +62,30 @@ If you have human tasks in your process, you must make up your mind on how exact
 
 When building a custom tasklist/application, you must plan for the following aspects. You will need to
 
-- *Query* for user tasks and *generate lists* of those tasks.
-- *Filter the list* along specific attributes like current assignee, candidate groups, etc.
-- *Select* and *display* the right forms for starting processes and completing tasks.
-- Use *custom/business value* data in order to *filter* with those values and *display* them correlated with the task list and within forms.
-- *Authorize* users to access those lists, filters, and forms.
+- _Query_ for user tasks and _generate lists_ of those tasks.
+- _Filter the list_ along specific attributes like current assignee, candidate groups, etc.
+- _Select_ and _display_ the right forms for starting processes and completing tasks.
+- Use _custom/business value_ data in order to _filter_ with those values and _display_ them correlated with the task list and within forms.
+- _Authorize_ users to access those lists, filters, and forms.
 
 ### Considerations for using third party task lists
 
 When integrating a third party tasklist, you must plan for the following aspects. You will need to take care of:
 
-- *Creating* tasks in the third party tasklist based on the user tasks created by Camunda.
-- *Completing* tasks in Camunda and move on process execution based on user action in the third party tasklist.
-- *Cancelling* tasks, triggered by Camunda or triggered by the user in the third-party tasklist.
-- Transferring *business data* to be edited in the third-party tasklist back and forth.
+- _Creating_ tasks in the third party tasklist based on the user tasks created by Camunda.
+- _Completing_ tasks in Camunda and move on process execution based on user action in the third party tasklist.
+- _Cancelling_ tasks, triggered by Camunda or triggered by the user in the third-party tasklist.
+- Transferring _business data_ to be edited in the third-party tasklist back and forth.
 
-Your third party tasklist application also needs to allow for some programmatic control of the lifecycle of its tasks. The third-party application *must have* the ability:
+Your third party tasklist application also needs to allow for some programmatic control of the lifecycle of its tasks. The third-party application _must have_ the ability:
 
-- To programmatically *create* a new task.
-- To *hook in code* which programmatically informs other systems that the user is about to change a task's state.
-- To *manage custom attributes* connected to a task and programmatically access them.
+- To programmatically _create_ a new task.
+- To _hook in code_ which programmatically informs other systems that the user is about to change a task's state.
+- To _manage custom attributes_ connected to a task and programmatically access them.
 
-Additionally, it *should have* the ability
+Additionally, it _should have_ the ability
 
-- To programmatically *delete* a task which was cancelled in Camunda. Without this possibility such tasks remain in the users tasklist and would need to be removed manually. Depending on the way you integrate the task completion mechanism, when the user tries to complete such tasks, they would immediately see an error or the action would just not matter anymore and serve as a removal from the list.
+- To programmatically _delete_ a task which was cancelled in Camunda. Without this possibility such tasks remain in the users tasklist and would need to be removed manually. Depending on the way you integrate the task completion mechanism, when the user tries to complete such tasks, they would immediately see an error or the action would just not matter anymore and serve as a removal from the list.
 
 Transfer just the minimal amount of business data in between Camunda and your third-party tasklist application.
 
@@ -95,9 +95,9 @@ For completing tasks, transfer just the business data which originated from Camu
 
 ### Task lists may not look like task lists
 
-There are situations where you might want to show a user interface that does not look like a task list, even if it is fed by tasks. The following *example* shows such a situation in the document *input management* process of a company. Every document is handled by a separate process instance, but users typically look at complete mailings consisting of several such documents. In a customer scenario, there were people in charge of assessing the scanned mailing and distributing the individual documents to the responsible departments. It was important to do that in one step, as sometimes documents referred to each other.
+There are situations where you might want to show a user interface that does not look like a task list, even if it is fed by tasks. The following _example_ shows such a situation in the document _input management_ process of a company. Every document is handled by a separate process instance, but users typically look at complete mailings consisting of several such documents. In a customer scenario, there were people in charge of assessing the scanned mailing and distributing the individual documents to the responsible departments. It was important to do that in one step, as sometimes documents referred to each other.
 
-So you have several user tasks which are heavily *interdependent* from a business point of view and should therefore be completed *in one step* by the same person.
+So you have several user tasks which are heavily _interdependent_ from a business point of view and should therefore be completed _in one step_ by the same person.
 
 The solution to this was a custom user interface that basically queries for human tasks, but show them grouped by mailings:
 

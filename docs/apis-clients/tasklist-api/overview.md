@@ -36,12 +36,12 @@ See our guide on [building your own client](/apis-clients/build-your-own-client.
 
 The following settings are needed:
 
-| Name | Description | Default value |
-| -- | -- | -- |
-| client id | Name of your registered client | - |
-| client secret | Password for your registered client | - |
-| audience | Permission name; if not given use default value | `tasklist.camunda.io` |
-| authorization server url | Token issuer server | - |
+| Name                     | Description                                     | Default value         |
+| ------------------------ | ----------------------------------------------- | --------------------- |
+| client id                | Name of your registered client                  | -                     |
+| client secret            | Password for your registered client             | -                     |
+| audience                 | Permission name; if not given use default value | `tasklist.camunda.io` |
+| authorization server url | Token issuer server                             | -                     |
 
 Send a token issue _POST_ request to the authorization server with the following content:
 

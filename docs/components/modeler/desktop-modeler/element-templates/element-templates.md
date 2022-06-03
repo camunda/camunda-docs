@@ -23,4 +23,4 @@ As seen in the _Mail Task_ example above, Modeler allows properties of custom el
 
 Refer to the following resources to learn more about element templates:
 
-* [Element template documentation](https://github.com/camunda/desktop-modeler/tree/master/docs/element-templates)
+- [Element template documentation](https://github.com/camunda/desktop-modeler/tree/master/docs/element-templates)

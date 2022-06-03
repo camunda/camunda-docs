@@ -1,13 +1,13 @@
 ---
 title: Dealing with problems and exceptions
 tags:
-- Transaction
-- ACID Transaction
-- Compensation
-- Exception Handling
-- BPMN Error Event
-- Incident
-- Save Point
+  - Transaction
+  - ACID Transaction
+  - Compensation
+  - Exception Handling
+  - BPMN Error Event
+  - Incident
+  - Save Point
 ---
 
 ## Understanding workers
@@ -28,8 +28,8 @@ Whenever the worker has finished whatever it needs to do (like invoking the REST
 
 - [`CompleteJob`](/docs/apis-clients/grpc/#completejob-rpc): The service task went well, the process instance can move on.
 - [`FailJob `](/docs/apis-clients/grpc/#failjob-rpc): The service task failed, and the workflow engine should handle this failure. There are two possibilities:
-    - `remaining retries > 0`: The job is retried.
-    - `remaining retries <= 0`: An incident is raised and the job is not retried until the incident is resolved.
+  - `remaining retries > 0`: The job is retried.
+  - `remaining retries <= 0`: An incident is raised and the job is not retried until the incident is resolved.
 - [`ThrowError`](/docs/apis-clients/grpc/#throwerror-rpc): A BPMN error is reported, which typically is handled on the BPMN level.
 
 As the glue code in the worker is external to the workflow engine, there is **no technical transaction spanning both components**. Technical transactions refer to ACID (atomic, consistent, isolated, durable) properties, mostly known from relational databases.
@@ -88,12 +88,12 @@ Provide a meaningful error message, as this will be displayed to a human operato
 Example in Node.js:
 
 ```js
-zbc.createWorker('retrieveMoney', job => {
-    try {
-        // ...
-    } catch (e) {
-        job.fail('Could not retrieve money due to: ' + e.message, (job.retries - 1))
-    }
+zbc.createWorker("retrieveMoney", (job) => {
+  try {
+    // ...
+  } catch (e) {
+    job.fail("Could not retrieve money due to: " + e.message, job.retries - 1);
+  }
 });
 ```
 
@@ -174,21 +174,21 @@ The boundary error event deals with the case that the item is unavailable.
 
 As an alternative to throwing a Java exception, you can also write a problematic result into a process variable and model an XOR-Gateway later in the process flow to take a different path if that problem occurs.
 
-From a business perspective, the underlying problem then looks less like an error and more like a result of an activity, so as a rule of thumb we deal with *expected results* of activities by means of gateways, but model exceptional errors, which *hinder us in reaching the expected result* as boundary error events.
+From a business perspective, the underlying problem then looks less like an error and more like a result of an activity, so as a rule of thumb we deal with _expected results_ of activities by means of gateways, but model exceptional errors, which _hinder us in reaching the expected result_ as boundary error events.
 
 <div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/expected-results.bpmn" callouts="task_check_customers_creditworthiness,exclusive_gateway_customer_creditworthy,boundary_event_customer_id_non_existent" />
 
 <span className="callout">1</span>
 
-The task is to "check the customer's creditworthiness", so we can reason that we *expect as a result* to know whether the customer is credit-worthy or not.
+The task is to "check the customer's creditworthiness", so we can reason that we _expect as a result_ to know whether the customer is credit-worthy or not.
 
 <span className="callout">2</span>
 
-We can therefore model an *exclusive gateway* working on that result and decide via the subsequent process flow what to do with a customer who is not credit-worthy. Here, we just consider the order to be declined.
+We can therefore model an _exclusive gateway_ working on that result and decide via the subsequent process flow what to do with a customer who is not credit-worthy. Here, we just consider the order to be declined.
 
 <span className="callout">3</span>
 
-However, it could be that we *cannot reach a result*, because while we are trying to obtain knowledge about the customer's creditworthiness, we discover that the ID we have is not associated with any known real person. We can't obtain the expected result and therefore model a *boundary error event*. In the example, the consequence is just the same and we consider the order to be declined.
+However, it could be that we _cannot reach a result_, because while we are trying to obtain knowledge about the customer's creditworthiness, we discover that the ID we have is not associated with any known real person. We can't obtain the expected result and therefore model a _boundary error event_. In the example, the consequence is just the same and we consider the order to be declined.
 
 ### Business vs. technical errors
 

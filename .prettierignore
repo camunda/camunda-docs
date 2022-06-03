@@ -18,8 +18,9 @@ build
 # adoption. These should either   #
 # be removed or moved to the top. #
 # ------------------------------- #
-docs/apis-clients
-docs/components
-howtos
-versioned_docs
-versioned_sidebars
+versioned_docs/version-0.25
+versioned_docs/version-0.26
+versioned_docs/version-1.0
+versioned_docs/version-1.1
+versioned_docs/version-1.2
+versioned_docs/version-1.3

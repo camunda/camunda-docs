@@ -115,10 +115,10 @@ When an input mapping is applied, it creates a new **local variable** in the sco
 
 Examples:
 
-| Process instance variables | Input mappings | New variables |
-| -- | -- | -- |
-| `orderId: "order-123"` | **source:** `=orderId`<br/> **target:** `reference` | `reference: "order-123"` |
-| `customer:{"name": "John"}` | **source:** `=customer.name`<br/>**target:** `sender` | `sender: "John"` |
+| Process instance variables             | Input mappings                                                                                               | New variables                               |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| `orderId: "order-123"`                 | **source:** `=orderId`<br/> **target:** `reference`                                                          | `reference: "order-123"`                    |
+| `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
 | `customer: "John"`<br/>`iban: "DE456"` | **source:** `=customer`<br/> **target:** `sender.name`<br/>**source:** `=iban`<br/>**target:** `sender.iban` | `sender: {"name": "John", "iban": "DE456"}` |
 
 ### Output mappings
@@ -133,11 +133,11 @@ In the case of a subprocess, the behavior is different. There are no job/message
 
 Examples:
 
-| Job/message variables | Output mappings | Process instance variables |
-| -- | -- | -- |
-| `status: "Ok"` | **source:** `=status`<br/>**target:** `paymentStatus` | `paymentStatus: "OK"` |
+| Job/message variables                                | Output mappings                                                                                                                      | Process instance variables                         |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
-| `status: "Ok"`<br/>`transactionId: "t-789"` | **source:** `=transactionId`<br/>**target:** `order.transactionId` | `order: {"transactionId": "t-789"}`  |
+| `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |
 
 ## Next steps
 
