@@ -7,6 +7,10 @@ description: "Programmatically work with Camunda Platform 8 through APIs & clien
 
 This section steps through a variety of offered APIs and clients for integration.
 
+:::note
+You're permitted to use these web apps and APIs for free with the Free Edition in non-production environments. To use the software in production, [purchase the Camunda Platform Enterprise Edition](https://camunda.com/products/cloud/camunda-cloud-enterprise-contact/). Read more in our [licensing](../reference/licenses.md) documentation.
+:::
+
 ## APIs and interacting with other components
 
 The clients mentioned below interact with Zeebe, the workflow engine integrated into Camunda Platform 8.

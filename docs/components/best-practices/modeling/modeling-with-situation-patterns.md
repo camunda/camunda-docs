@@ -1,7 +1,7 @@
 ---
 title: Modeling with situation patterns
 tags:
-    - BPMN
+  - BPMN
 ---
 
 When modeling, you will sometimes realize that some situations share common characteristics. To save work for yourself and spread such knowledge within your organization, collect and document such patterns as soon as you understand their nature and have found a satisfying solution for modeling them. For a start, we collected some typical patterns for you, which we see quite often in our modeling practice. You do not need to reinvent the wheel over and over again.
@@ -30,14 +30,14 @@ We still stay optimistic. Therefore, the process again passively waits for the s
 
 **Evaluation:**
 
-* :thumbsup: This solution explicitly shows how the two steps of this escalation are performed. Timers are modeled separately, followed by their corresponding escalation activities.
+- :thumbsup: This solution explicitly shows how the two steps of this escalation are performed. Timers are modeled separately, followed by their corresponding escalation activities.
 
-* :thumbsdown: The usage of separate event-based gateways leads to *duplication* (for example, of the receiving message events) and makes the model *larger*, even more so in case multiple steps of escalation need to be modeled.
+- :thumbsdown: The usage of separate event-based gateways leads to _duplication_ (for example, of the receiving message events) and makes the model _larger_, even more so in case multiple steps of escalation need to be modeled.
 
-* :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Platform 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway. 
+- :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Platform 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway.
 
 :::note
-You might want to use that pattern when modeling *simple two phase escalations*. You should not execute it on Camunda Platform 7.
+You might want to use that pattern when modeling _simple two phase escalations_. You should not execute it on Camunda Platform 7.
 :::
 
 ### Option 2: Using gateways forming a loop
@@ -50,18 +50,18 @@ After having ordered the goods, the process passively waits for the success case
 
 <span className="callout">2</span>
 
-We choose by means of an exclusive gateway to make a *first step of escalation*: remind the dealer. We still stay optimistic. Therefore, the process returns to the event-based gateway and again passively waits for the success case: the goods should still be delivered. However, in case this does not happen again within a reasonable time, we choose a *second step of escalation*: cancel the deal.
+We choose by means of an exclusive gateway to make a _first step of escalation_: remind the dealer. We still stay optimistic. Therefore, the process returns to the event-based gateway and again passively waits for the success case: the goods should still be delivered. However, in case this does not happen again within a reasonable time, we choose a _second step of escalation_: cancel the deal.
 
 **Evaluation:**
 
-* :thumbsup: This model is a more *compact* and more *generic* modeling solution to the situation. If it comes to multiple steps of escalation, you will need such an approach to avoid huge diagrams.
+- :thumbsup: This model is a more _compact_ and more _generic_ modeling solution to the situation. If it comes to multiple steps of escalation, you will need such an approach to avoid huge diagrams.
 
-* :thumbsdown: The solution is *less explicit*. We could not choose to label the timer with explicit durations, as a single timer is used for both durations. The solution is *less readable* for a less experienced reading public. For a fast understanding of the two step escalation, this method of modeling is less suitable.
+- :thumbsdown: The solution is _less explicit_. We could not choose to label the timer with explicit durations, as a single timer is used for both durations. The solution is _less readable_ for a less experienced reading public. For a fast understanding of the two step escalation, this method of modeling is less suitable.
 
-* :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Platform 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway. 
+- :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Platform 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway.
 
 :::note
-You might want to use that pattern when modeling *escalations with multiple steps*. You should not execute it on Camunda Platform 7.
+You might want to use that pattern when modeling _escalations with multiple steps_. You should not execute it on Camunda Platform 7.
 :::
 
 ### Option 3: Using boundary events
@@ -74,27 +74,27 @@ After having ordered the goods, the process passively waits for the success case
 
 <span className="callout">2</span>
 
-a non-interrupting boundary timer event triggers a *first step of escalation*: remind the dealer. We still stay optimistic. Therefore, we did not interrupt the receive task, but continued to wait for the success case: the goods should still be delivered.
+a non-interrupting boundary timer event triggers a _first step of escalation_: remind the dealer. We still stay optimistic. Therefore, we did not interrupt the receive task, but continued to wait for the success case: the goods should still be delivered.
 
 <span className="callout">3</span>
 
-However, in case this does not happen within a reasonable time, we trigger a *second step of escalation* by means of an interrupting boundary timer event: interrupt the waiting for delivery and cancel the deal.
+However, in case this does not happen within a reasonable time, we trigger a _second step of escalation_ by means of an interrupting boundary timer event: interrupt the waiting for delivery and cancel the deal.
 
 **Evaluation:**
 
-* :thumbsup: This model is even more *compact* and a very *generic* modeling solution to the situation. If it comes to multiple steps of escalation, the non-interrupting boundary timer event could even trigger multiple times.
+- :thumbsup: This model is even more _compact_ and a very _generic_ modeling solution to the situation. If it comes to multiple steps of escalation, the non-interrupting boundary timer event could even trigger multiple times.
 
-* :thumbsup: The model complies with BPMN execution semantics. Since we never leave the wait state, the process is always ready to receive incoming messages. 
+- :thumbsup: The model complies with BPMN execution semantics. Since we never leave the wait state, the process is always ready to receive incoming messages.
 
-* :thumbsdown: The solution is *less readable* and *less intuitive* for a less experienced reading public, because the way the interrupting and non-interrupting timers collaborate requires a profound understanding of boundary events and the consequences for token flow semantics. For communication purposes, this method of modeling is therefore typically less suitable.
+- :thumbsdown: The solution is _less readable_ and _less intuitive_ for a less experienced reading public, because the way the interrupting and non-interrupting timers collaborate requires a profound understanding of boundary events and the consequences for token flow semantics. For communication purposes, this method of modeling is therefore typically less suitable.
 
 :::note
-You might want to use that pattern when modeling *escalations with two steps* as well as *escalations with multiple steps* for *executable models.*
+You might want to use that pattern when modeling _escalations with two steps_ as well as _escalations with multiple steps_ for _executable models._
 :::
 
 ## Requiring a second set of eyes
 
-For a certain task - typically a critical one in terms of your business -  you need the opinion, review, or approval of two different people.
+For a certain task - typically a critical one in terms of your business - you need the opinion, review, or approval of two different people.
 
 We sometimes also call that pattern the **four eyes principle**.
 
@@ -118,19 +118,19 @@ A first approver looks at the loan and decides whether they approve. If they dec
 
 **Evaluation:**
 
-* :thumbsup: This solution *explicitly* shows how the two steps of this approval are performed. Tasks are modeled separately, followed by gateways visualizing the decision making process.
+- :thumbsup: This solution _explicitly_ shows how the two steps of this approval are performed. Tasks are modeled separately, followed by gateways visualizing the decision making process.
 
-* Note that the approvers work in a *strictly sequential* mode, which might be exactly what we need in case we want *minimization of effort* and, for example, display the reasonings of the first approver for the second one. However, we also might prefer *maximization of speed*. If this is the case, see solution [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) further below.
+- Note that the approvers work in a _strictly sequential_ mode, which might be exactly what we need in case we want _minimization of effort_ and, for example, display the reasonings of the first approver for the second one. However, we also might prefer _maximization of speed_. If this is the case, see solution [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) further below.
 
-* :thumbsdown: The usage of separate tasks leads to *duplication* and makes the model *larger*, even more so in case multiple steps of approvals need to be modeled.
+- :thumbsdown: The usage of separate tasks leads to _duplication_ and makes the model _larger_, even more so in case multiple steps of approvals need to be modeled.
 
-You might want to use that pattern when modeling the need for a *second set* of eyes needed in *sequential* order, therefore *minimizing effort* needed by the participating approvers.
+You might want to use that pattern when modeling the need for a _second set_ of eyes needed in _sequential_ order, therefore _minimizing effort_ needed by the participating approvers.
 
 While it is theoretically possible to model separate, explicit approval tasks in parallel, we do not recommend such patterns due to readability concerns.
 
 <div bpmn="best-practices/modeling-with-situation-patterns-assets/four-eyes-principle-using-separate-tasks-in-parallel.bpmn" thumbs="down" />
 
-As a better alternative when looking for *maximization of speed*, see [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
+As a better alternative when looking for _maximization of speed_, see [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
 
 ### Option 2: Using a loop
 
@@ -146,13 +146,13 @@ A first approver looks at the loan and decides if they approve. If they decide n
 
 **Evaluation:**
 
-* :thumbsup: This model is a more *compact* modeling solution to the situation. If it comes to multiple sets of eyes needed, you will probably prefer such an approach to avoid huge diagrams.
+- :thumbsup: This model is a more _compact_ modeling solution to the situation. If it comes to multiple sets of eyes needed, you will probably prefer such an approach to avoid huge diagrams.
 
-* Note that the approvers work in a *strictly sequential* mode, which might be exactly what we need if we want *minimization of effort* and, for example, display the reasonings of the first approver for the second one. However, we also might prefer *maximization of speed*. If this is the case, see [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
+- Note that the approvers work in a _strictly sequential_ mode, which might be exactly what we need if we want _minimization of effort_ and, for example, display the reasonings of the first approver for the second one. However, we also might prefer _maximization of speed_. If this is the case, see [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
 
-* :thumbsdown: The solution is *less explicit*. We could not choose to label the tasks with explicit references to a first and a second step of approval, as a single task is used for both approvals. The solution is *less readable* for a less experienced reading public. For a fast understanding of the two steps needed for ultimate approval, this method of modeling is less suitable.
+- :thumbsdown: The solution is _less explicit_. We could not choose to label the tasks with explicit references to a first and a second step of approval, as a single task is used for both approvals. The solution is _less readable_ for a less experienced reading public. For a fast understanding of the two steps needed for ultimate approval, this method of modeling is less suitable.
 
-You might want to use that pattern when modeling the need for *multiple sets* of eyes needed in *sequential* order, therefore *minimizing effort* needed by the participating approvers.
+You might want to use that pattern when modeling the need for _multiple sets_ of eyes needed in _sequential_ order, therefore _minimizing effort_ needed by the participating approvers.
 
 ### Option 3: Using a multi-instance task
 
@@ -168,13 +168,13 @@ If the loan is not approved by one of the approvers, a boundary message event is
 
 **Evaluation:**
 
-* :thumbsup: This model is a very *compact* modeling solution to the situation. It can also easily deal with multiple sets of eyes needed.
+- :thumbsup: This model is a very _compact_ modeling solution to the situation. It can also easily deal with multiple sets of eyes needed.
 
-* Note that the approvers work in a *parallel* mode, which might be exactly what we need in case we want *maximization of speed* and want the approvers to do their work independent from each other and uninfluenced by each other. However, we also might prefer *minimization of effort*. If this is the case, see [option 1 (separate tasks)](#option-1-using-separate-tasks) or [option 2 (loop)](#option-2-using-a-loop) above.
+- Note that the approvers work in a _parallel_ mode, which might be exactly what we need in case we want _maximization of speed_ and want the approvers to do their work independent from each other and uninfluenced by each other. However, we also might prefer _minimization of effort_. If this is the case, see [option 1 (separate tasks)](#option-1-using-separate-tasks) or [option 2 (loop)](#option-2-using-a-loop) above.
 
-* :thumbsdown: The solution is much *less explicit* and *less readable* for a less experienced reading public, because the way the boundary event interacts with a multi-instance task requires a profound understanding of BPMN. For communication purposes, this method of modeling is therefore typically less suitable.
+- :thumbsdown: The solution is much _less explicit_ and _less readable_ for a less experienced reading public, because the way the boundary event interacts with a multi-instance task requires a profound understanding of BPMN. For communication purposes, this method of modeling is therefore typically less suitable.
 
-You might want to use that pattern when modeling the need for *two* or *multiple sets* of eyes needed in *parallel* order, therefore *maximising speed* for the overall approval process.
+You might want to use that pattern when modeling the need for _two_ or _multiple sets_ of eyes needed in _parallel_ order, therefore _maximising speed_ for the overall approval process.
 
 ## Measuring key performance indicators (KPIs)
 
@@ -214,11 +214,11 @@ We also use end events, which are meaningful from a business perspective. We mus
 
 ...or rejected.
 
-By means of that process model, we can now let Camunda count the applications which were accepted and declined. We know how many and which instances we needed to review manually, and can therefore also narrow down our *accpeted/declined statistics* to those manual cases.
+By means of that process model, we can now let Camunda count the applications which were accepted and declined. We know how many and which instances we needed to review manually, and can therefore also narrow down our _accpeted/declined statistics_ to those manual cases.
 
-Furthermore, we will be able to measure the *handling time* needed for the user task; for example, by measuring the time needed from claiming the task to completing it. The customer will need to wait a *cycle time* from start to end events, and these statistics, for example, could be limited to the manually assessed applications and will then also include any idle periods in the process.
+Furthermore, we will be able to measure the _handling time_ needed for the user task; for example, by measuring the time needed from claiming the task to completing it. The customer will need to wait a _cycle time_ from start to end events, and these statistics, for example, could be limited to the manually assessed applications and will then also include any idle periods in the process.
 
-*By comparing the economic *value* of manually assessed insurance policies to the *effort* (handling time) we invest into them, we will also be able to learn whether we focus our manual work on the meaningful cases and eventually improve upon the automatically evaluated assessment rules.
+*By comparing the economic *value* of manually assessed insurance policies to the *effort\* (handling time) we invest into them, we will also be able to learn whether we focus our manual work on the meaningful cases and eventually improve upon the automatically evaluated assessment rules.
 
 ### Option 2: Emphasizing process phases
 
@@ -228,7 +228,7 @@ As an alternative or supplement to using events, you might also use subprocesses
 
 <span className="callout">1</span>
 
-By introducing a separate embedded subprocess, we emphasize the *phase* of manual application assessment, which is the critical one from an economic perspective.
+By introducing a separate embedded subprocess, we emphasize the _phase_ of manual application assessment, which is the critical one from an economic perspective.
 
 Note that this makes even more sense if multiple tasks are contained within one phase.
 
@@ -272,7 +272,7 @@ You model a certain step in a process and wonder about undesired outcomes and ot
 
 <span className="callout">1</span>
 
-Showing the check for the applicant's creditworthiness as a gateway also informs about the result of the preceding task: the applicant might be creditworthy - or not. Both outcomes are *valid results* of the task, even though one of the outcomes here might be *undesired* from a business perspective.
+Showing the check for the applicant's creditworthiness as a gateway also informs about the result of the preceding task: the applicant might be creditworthy - or not. Both outcomes are _valid results_ of the task, even though one of the outcomes here might be _undesired_ from a business perspective.
 
 ### Option 2: Using boundary error events to check for fatal problems
 
@@ -280,7 +280,7 @@ Showing the check for the applicant's creditworthiness as a gateway also informs
 
 <span className="callout">1</span>
 
-Not to know anything about the creditworthiness (because we cannot even retrieve information about the applicant) is not considered to be a valid result of the step, but a *fatal problem* hindering us to achieve any valid result. We therefore model it as a boundary error event.
+Not to know anything about the creditworthiness (because we cannot even retrieve information about the applicant) is not considered to be a valid result of the step, but a _fatal problem_ hindering us to achieve any valid result. We therefore model it as a boundary error event.
 
 The fact that both problems (an unknown applicant number or an applicant which turns out not to be credit-worthy) lead us at the moment to the same reaction in the process (we reject the credit card application) does not influence that we need to model it differently. The decision in favor of a gateway or an error boundary event solely depends on the exact definition of the result of a process step. See the next section.
 
@@ -294,7 +294,7 @@ What we want to consider to be a valid result for a process step depends on assu
 
 The only valid result for the step "Ensure credit-worthiness" is knowing that the customer is in fact credit-worthy. Therefore, any other condition must be modeled with an error boundary event.
 
-To advance clarity by means of process models, it is absolutely crucial for modelers to have a clear mental definition of the *result* a specific step produces, and as a consequence, to be able to distinguish *undesired results* from *fatal problems* hindering us to achieve any result for the step.
+To advance clarity by means of process models, it is absolutely crucial for modelers to have a clear mental definition of the _result_ a specific step produces, and as a consequence, to be able to distinguish _undesired results_ from _fatal problems_ hindering us to achieve any result for the step.
 
 While there is not necessarily a right way to decide what to consider as a valid result for your step, the business reader will typically have a mental preference to see certain business issues, either more as undesired outcomes or more as fatal problems. However, for the executable pools, your discretion to decide about a step's result might also be limited when using, for example, service contracts which are already pre-defined.
 
@@ -350,7 +350,7 @@ The assistant starts their invoicing process on a monthly basis. In other words,
 
 <span className="callout">5</span>
 
-As a first step, the assistant determines all the billable clients. This are the clients for which time sheet entries exist in the respective month. Note that we have *many* legal advice instances who have a relationship to *one* billing instance and that the connection is implicitly shown by the read operation on the current status of data in the time sheet.
+As a first step, the assistant determines all the billable clients. This are the clients for which time sheet entries exist in the respective month. Note that we have _many_ legal advice instances who have a relationship to _one_ billing instance and that the connection is implicitly shown by the read operation on the current status of data in the time sheet.
 
 <span className="callout">6</span>
 
@@ -390,7 +390,7 @@ When the active instance has determined the creditworthiness, it will move on to
 
 ...which will receive a message with a creditworthiness payload and be finished themselves with the needed information.
 
-The model explicitly shows separate steps (*determine* and *inform* waiting instances) which you might want to implement more efficiently within one single step doing both semantic steps at once by means of a small piece of programming code.
+The model explicitly shows separate steps (_determine_ and _inform_ waiting instances) which you might want to implement more efficiently within one single step doing both semantic steps at once by means of a small piece of programming code.
 
 ### Using a timer event
 

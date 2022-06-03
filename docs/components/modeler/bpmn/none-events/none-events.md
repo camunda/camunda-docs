@@ -37,16 +37,19 @@ For start events, this is often used to initialize process variables.
 ### XML representation
 
 A none start event:
+
 ```xml
 <bpmn:startEvent id="order-placed" name="Order Placed" />
 ```
 
 A none end event:
+
 ```xml
 <bpmn:endEvent id="order-delivered" name="Order Delivered" />
 ```
 
 An intermediate none event:
+
 ```xml
 <bpmn:intermediateThrowEvent id="money-collected" name="Money Collected" />
 ```

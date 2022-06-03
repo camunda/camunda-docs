@@ -26,7 +26,7 @@ When an intermediate timer catch event is entered, a corresponding timer is sche
 
 An interrupting timer boundary event must have a time duration definition. When the corresponding timer is triggered, the activity is terminated. Interrupting timer boundary events are often used to model timeouts; for example, canceling the processing after five minutes and doing something else.
 
-A non-interrupting timer boundary event must have either a time duration or time cycle definition. When the activity is entered, it schedules a corresponding timer. If the timer is triggered and defined as time cycle with repetitions greater than zero, it schedules the timer again until the defined number of repetitions is reached. 
+A non-interrupting timer boundary event must have either a time duration or time cycle definition. When the activity is entered, it schedules a corresponding timer. If the timer is triggered and defined as time cycle with repetitions greater than zero, it schedules the timer again until the defined number of repetitions is reached.
 
 Non-interrupting timer boundary events are often used to model notifications; for example, contacting support if the processing takes longer than an hour.
 
@@ -66,6 +66,7 @@ The capital letters _P_, _Y_, _M_, _W_, _D_, _T_, _H_, _M_, and _S_ are designat
 - _S_ is the second designator that follows the value for the number of seconds.
 
 Examples:
+
 - `PT15S` - 15 seconds
 - `PT1H30M` - 1 hour and 30 minutes
 - `P14D` - 14 days

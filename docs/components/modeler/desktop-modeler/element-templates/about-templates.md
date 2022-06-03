@@ -4,7 +4,7 @@ title: About element templates
 description: "Element templates are a way to extend Camunda Modeler with domain-specific diagram elements, such as service and user tasks."
 ---
 
-:::note 
+:::note
 The Camunda Modeler element templates API is not stable and might change in the future.
 :::
 

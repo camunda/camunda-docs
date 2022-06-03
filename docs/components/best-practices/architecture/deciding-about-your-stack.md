@@ -1,12 +1,12 @@
 ---
-title:  Deciding about your stack
+title: Deciding about your stack
 tags:
-    - Architecture
-    - Stack
-    - Database
-    - Application Server
-    - Spring Boot
-    - Maven
+  - Architecture
+  - Stack
+  - Database
+  - Application Server
+  - Spring Boot
+  - Maven
 ---
 
 If you don't have special architecture requirements, we recommend using SaaS following the proposed greenfield stack.
@@ -17,7 +17,7 @@ This best practice targets Camunda Platform 8 only! If you look for Camunda Plat
 
 ## The greenfield stack
 
-We like to give one greenfield stack recommendation, which is the stack you can simply use if there is no reason against it. And while we went through long and detailed discussions to come to this recommendation, it *doesn't* mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (see below for alternative options). 
+We like to give one greenfield stack recommendation, which is the stack you can simply use if there is no reason against it. And while we went through long and detailed discussions to come to this recommendation, it _doesn't_ mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (see below for alternative options).
 
 The stack looks pretty similar in various programming language. Please use the programnming language your team is most familiar with. If in doubt, use Java or JavaScript.
 
@@ -31,22 +31,21 @@ Use the following stack:
 
 1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](/docs/apis-clients/community-clients/spring/).
 
-2. Use [Maven](https://maven.apache.org/) as a build tool.
+1. Use [Maven](https://maven.apache.org/) as a build tool.
 
-3. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse.
+1. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse.
 
-3. Use [Open JDK 17](https://jdk.java.net/17/) as Java runtime.
+1. Use [Open JDK 17](https://jdk.java.net/17/) as Java runtime.
 
-4. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/).
+1. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/).
 
-4. Add your process models and all Java code to the project.
+1. Add your process models and all Java code to the project.
 
-To run the process application *in production*:
+To run the process application _in production_:
 
 3. Run the process application by copying the `jar` file to the server and start it with `java -jar YourProcessApplication.jar`. This is most often done via Docker.
 
 See our [example application](https://github.com/camunda-community-hub/camunda-cloud-examples/tree/main/twitter-review-java-springboot).
-
 
 We decided on this stack for the following reasons:
 
@@ -75,19 +74,18 @@ You can also run Camunda Platform 8 self-managed on your own Kubernetes cluster.
 
 While there [exists a Docker Compose configuration](/docs/self-managed/platform-deployment/docker/) to run Camunda Cload locally, this is not meant to be used for production, but rather to quickly startup compenents on a developer machine to be able to play around.
 
-
 ### Modeling for executable processes
 
 We distinguish two different roles modeling in BPM projects:
 
-* *Process Developers* develop an executable process implementation. Process developers implementing solutions with Camunda must use Camunda Modeler to model executable processes, edit technical attributes, and manage and version (e.g. in Git or SVN) the resulting (XML) files as part of the development project.
+- _Process Developers_ develop an executable process implementation. Process developers implementing solutions with Camunda must use Camunda Modeler to model executable processes, edit technical attributes, and manage and version (e.g. in Git or SVN) the resulting (XML) files as part of the development project.
 
-* *Process Analysts* capture the operational know how about a process. For this part of the work, it is possible to use a different tool than Camunda Modeler.
+- _Process Analysts_ capture the operational know how about a process. For this part of the work, it is possible to use a different tool than Camunda Modeler.
 
-|  | Camunda Modeler | Third-Party Modeler (BPMN Standard Compliant) | Third-Party Modeler (Non-Compliant to Standard) |
-| -- | -- | -- | -- |
-| Roundtrip in between process analysts and developers possible | &#10004; | &#10004; (Carefully check level of BPMN compliance - the [Model Interchange Working Group](http://bpmn-miwg.github.io/bpmn-miwg-tools/) can serve as a first starting point |  |
-| Use for Process Analysts | &#10004; | &#10004; |  |
-| Use for Process Developers | &#10004; |  |  |
-| Use when | You do not have a BPMN standard compliant modeling tool already rolled out. | You already rolled out a BPMN tool with a standard compliancy sufficient for roundtrip. | Try to avoid  |
-| | [Download](https://camunda.org/download/modeler/) | [e.g. Cawemo](http://cawemo.com/) |  |
+|                                                               | Camunda Modeler                                                             | Third-Party Modeler (BPMN Standard Compliant)                                                                                                                               | Third-Party Modeler (Non-Compliant to Standard) |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Roundtrip in between process analysts and developers possible | &#10004;                                                                    | &#10004; (Carefully check level of BPMN compliance - the [Model Interchange Working Group](http://bpmn-miwg.github.io/bpmn-miwg-tools/) can serve as a first starting point |                                                 |
+| Use for Process Analysts                                      | &#10004;                                                                    | &#10004;                                                                                                                                                                    |                                                 |
+| Use for Process Developers                                    | &#10004;                                                                    |                                                                                                                                                                             |                                                 |
+| Use when                                                      | You do not have a BPMN standard compliant modeling tool already rolled out. | You already rolled out a BPMN tool with a standard compliancy sufficient for roundtrip.                                                                                     | Try to avoid                                    |
+|                                                               | [Download](https://camunda.org/download/modeler/)                           | [e.g. Cawemo](http://cawemo.com/)                                                                                                                                           |                                                 |

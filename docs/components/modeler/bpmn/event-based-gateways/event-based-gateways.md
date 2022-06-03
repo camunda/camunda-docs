@@ -4,7 +4,7 @@ title: "Event-based gateway"
 description: "An event-based gateway allows you to make a decision based on events."
 ---
 
-An event-based gateway allows you to make a decision based on events. 
+An event-based gateway allows you to make a decision based on events.
 
 ![process](assets/event-based-gateway.png)
 
@@ -23,7 +23,7 @@ An event-based gateway with two outgoing sequence flows:
 
 <bpmn:sequenceFlow id="s1" sourceRef="gateway" targetRef="payment-details-updated" />
 
-<bpmn:intermediateCatchEvent id="payment-details-updated" 
+<bpmn:intermediateCatchEvent id="payment-details-updated"
   name="Payment Details Updated">
   <bpmn:messageEventDefinition messageRef="message-payment-details-updated" />
 </bpmn:intermediateCatchEvent>
@@ -39,5 +39,5 @@ An event-based gateway with two outgoing sequence flows:
 
 ### References
 
-* [Timer events](../timer-events/timer-events.md)
-* [Message events](../message-events/message-events.md)
+- [Timer events](../timer-events/timer-events.md)
+- [Message events](../message-events/message-events.md)

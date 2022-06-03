@@ -4,16 +4,15 @@ title: Camunda Forms Reference
 description: Forms created with Camunda Modeler are embeddable in Tasklist.
 ---
 
-
 :::note Support for Camunda Forms
 The Camunda Forms feature was added with the 7.15.0 release of Camunda Platform 7 and the 4.7.0 release of Camunda Modeler.
 :::
 
 Camunda Forms allow you to easily design and configure forms, and then embed them in Camunda Tasklist.
 
-* Camunda Forms are created in Camunda Modeler.
-* Camunda Forms can be embedded in Camunda Tasklist. You can find out how in the [user task forms guide](../../../guides/utilizing-forms.md).
-* Camunda Forms are powered by the open-source [bpmn-io form-js library](https://github.com/bpmn-io/form-js). Visit the [open source repository](https://github.com/bpmn-io/form-js) to find out how to render a form using plain JavaScript in a custom application (note that this also requires you to fetch the form from the respective BPMN 2.0 element and provide data as needed to the form.)
+- Camunda Forms are created in Camunda Modeler.
+- Camunda Forms can be embedded in Camunda Tasklist. You can find out how in the [user task forms guide](../../../guides/utilizing-forms.md).
+- Camunda Forms are powered by the open-source [bpmn-io form-js library](https://github.com/bpmn-io/form-js). Visit the [open source repository](https://github.com/bpmn-io/form-js) to find out how to render a form using plain JavaScript in a custom application (note that this also requires you to fetch the form from the respective BPMN 2.0 element and provide data as needed to the form.)
 
 ## Components
 
@@ -27,14 +26,14 @@ A text field allowing the user to read and edit textual data.
 
 A text field can be configured using the following configuration properties:
 
-* **Field Label**: Label displayed on top of the text field.
-* **Field Description**: Description provided below the text field.
-* **Key**: Identifier used to map data to the text field.
-* **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
-  * **Required**: Text field must contain a value.
-  * **Minimum Length**: Text field must have at least x characters.
-  * **Maximum Length**: Text field must not have more than x characters.
-  * **Regular Expression Pattern**: Text field value must match the provided regular expression pattern.
+- **Field Label**: Label displayed on top of the text field.
+- **Field Description**: Description provided below the text field.
+- **Key**: Identifier used to map data to the text field.
+- **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
+  - **Required**: Text field must contain a value.
+  - **Minimum Length**: Text field must have at least x characters.
+  - **Maximum Length**: Text field must not have more than x characters.
+  - **Regular Expression Pattern**: Text field value must match the provided regular expression pattern.
 
 ### Number
 
@@ -44,13 +43,13 @@ A number field allowing the user to read and edit numeric data.
 
 A number can be configured using the following configuration properties:
 
-* **Field Label**: Label displayed on top of the number field.
-* **Field Description**: Description provided below the number field.
-* **Key**: Identifier used to map data to the number field.
-* **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
-  * **Required**: Number field must contain a value.
-  * **Minimum Length**: Number field must have at least x characters.
-  * **Maximum Length**: Number field must not have more than x characters.
+- **Field Label**: Label displayed on top of the number field.
+- **Field Description**: Description provided below the number field.
+- **Key**: Identifier used to map data to the number field.
+- **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
+  - **Required**: Number field must contain a value.
+  - **Minimum Length**: Number field must have at least x characters.
+  - **Maximum Length**: Number field must not have more than x characters.
 
 ### Checkbox
 
@@ -60,9 +59,9 @@ A checkbox allowing the user to read and edit boolean data.
 
 A checkbox can be configured using the following configuration properties:
 
-* **Field Label**: Label displayed on top of the checkbox.
-* **Field Description**: Description provided below the checkbox.
-* **Key**: Identifier used to map data to the checkbox.
+- **Field Label**: Label displayed on top of the checkbox.
+- **Field Description**: Description provided below the checkbox.
+- **Key**: Identifier used to map data to the checkbox.
 
 ### Radio
 
@@ -72,14 +71,14 @@ A radio button allowing the user to select one of multiple radio button entries.
 
 A radio button can be configured using the following configuration properties:
 
-* **Field Label**: Label displayed on top of the checkbox.
-* **Field Description**: Description provided below the checkbox.
-* **Key**: Identifier used to map data to the checkbox.
-* **Values**: A list of values, each representing one radio button which the user can click. Click the **Plus** icon to add a new value and the **Trash** icon to remove a value.
-  * **Label**: Label of the radio button.
-  * **Value**: Value that the radio button maps to.
-* **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
-  * **Required**: One radio option must be selected.
+- **Field Label**: Label displayed on top of the checkbox.
+- **Field Description**: Description provided below the checkbox.
+- **Key**: Identifier used to map data to the checkbox.
+- **Values**: A list of values, each representing one radio button which the user can click. Click the **Plus** icon to add a new value and the **Trash** icon to remove a value.
+  - **Label**: Label of the radio button.
+  - **Value**: Value that the radio button maps to.
+- **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
+  - **Required**: One radio option must be selected.
 
 ### Select
 
@@ -89,14 +88,14 @@ A select allowing the user to select one of multiple entries from a dropdown men
 
 A select can be configured using the following configuration properties:
 
-* **Field Label**: Label displayed on top of the select.
-* **Field Description**: Description provided below the select.
-* **Key**: Identifier used to map data to the select.
-* **Values**: A list of values, each representing one select option which the user can select. Click the **Plus** icon to add a new value and the **Trash** icon to remove a value.
-  * **Label**: Label of the select entry.
-  * **Value**: Value that the select entry maps to.
-* **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
-  * **Required**: One select entry must be selected.
+- **Field Label**: Label displayed on top of the select.
+- **Field Description**: Description provided below the select.
+- **Key**: Identifier used to map data to the select.
+- **Values**: A list of values, each representing one select option which the user can select. Click the **Plus** icon to add a new value and the **Trash** icon to remove a value.
+  - **Label**: Label of the select entry.
+  - **Value**: Value that the select entry maps to.
+- **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
+  - **Required**: One select entry must be selected.
 
 ### Text
 
@@ -106,7 +105,7 @@ A text component allowing to display static information to the user.
 
 A text component can be configured using the following configuration properties:
 
-* **Text**: Either **Markdown** or **basic HTML** which will be rendered in the form. Note that dangerous HTML elements will not be rendered so to prevent the risk of cross-site scripting using Camunda Forms.
+- **Text**: Either **Markdown** or **basic HTML** which will be rendered in the form. Note that dangerous HTML elements will not be rendered so to prevent the risk of cross-site scripting using Camunda Forms.
 
 **Example for Markdown**:
 
@@ -161,10 +160,10 @@ A button allowing the user to submit or reset the form.
 
 A button can be configured using the following configuration properties:
 
-* **Field Label**: Label to be displayed on top of the button.
-* **Action**: The button can either trigger a **Submit** or a **Reset** action.
-  * **Submit**: Submit the form (given there are no validation errors).
-  * **Reset**: Reset the form, all user inputs will be lost.
+- **Field Label**: Label to be displayed on top of the button.
+- **Action**: The button can either trigger a **Submit** or a **Reset** action.
+  - **Submit**: Submit the form (given there are no validation errors).
+  - **Reset**: Reset the form, all user inputs will be lost.
 
 ## Mapping components to process variables
 

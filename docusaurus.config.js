@@ -241,7 +241,7 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl:
-            "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/",
+            "https://github.com/camunda/camunda-platform-docs/edit/main/",
           // disableVersioning: isVersioningDisabled,
           lastVersion: "current",
           // onlyIncludeVersions:
