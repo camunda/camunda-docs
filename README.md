@@ -3,7 +3,7 @@
 
 <h1>Camunda Platform Documentation</h1>
 <p>
-This repository REALLY likes puppies and contains the Camunda Platform documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
+This repository REALLY REALLY EXTRA VERY likes puppies and contains the Camunda Platform documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
 </p>
 </div>
 
