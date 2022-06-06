@@ -24,9 +24,9 @@ Where `report-ID` is the ID of the report you wish to delete.
 
 The following request headers have to be provided with every delete request:
 
-|Header|Constraints|Value|
-|--- |--- |--- |
-|Authorization|REQUIRED|See [Authorization](../../authorization)|
+| Header        | Constraints | Value                                    |
+| ------------- | ----------- | ---------------------------------------- |
+| Authorization | REQUIRED    | See [Authorization](../../authorization) |
 
 ## Query parameters
 
@@ -44,12 +44,12 @@ No response body.
 
 Possible HTTP response status codes:
 
-|Code|Description|
-|--- |--- |
-|204|Request successful.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|404|The requested report was not found, please check the provided report-ID.|
-|500|Some error occurred while processing the request, best check the Optimize log.|
+| Code | Description                                                                                                  |
+| ---- | ------------------------------------------------------------------------------------------------------------ |
+| 204  | Request successful.                                                                                          |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 404  | The requested report was not found, please check the provided report-ID.                                     |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
 ## Example
 
@@ -60,6 +60,7 @@ Let's assume you want to delete a report with the ID `e6c5abb1-6a18-44e7-8480-d5
 DELETE `/api/public/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62`
 
 ##### Request header
+
 `Authorization: Bearer mySecret`
 
 ##### Response

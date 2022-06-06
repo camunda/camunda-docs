@@ -12,11 +12,9 @@ Within this section you will find detailed information about:
 - [Security](security/security.md) - Discusses the security aspects of running Zeebe and how to use them.
 - [Operation](operations/index.md) - Outlines topics that become relevant when you want to operate Zeebe in production.
 
-
 :::note
 New to BPMN and want to learn more before moving forward? [Visit our Get Started Guides](/docs/guides/getting-started/) to learn about BPMN and orchestration.
 :::
-
 
 ## Additional resources
 

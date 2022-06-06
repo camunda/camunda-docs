@@ -3,10 +3,13 @@ id: install-and-start
 title: "Installation"
 description: "Install and configure Optimize Self-Managed."
 ---
+
 ## Camunda Platform 8 stack
+
 Please refer to the [Installation Guide](/docs/self-managed/platform-deployment/) for details on how to install Optimize as part of a Camunda 8 stack.
 
 ## Camunda Platform 7 Enterprise stack
+
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
 This document describes the installation process of the Camunda Optimize and connect it to a Camunda 7 stack, as well as various configuration possibilities available after initial installation.
@@ -64,6 +67,7 @@ or `optimize-startup.bat` on Windows:
 ```batch
 .\optimize-startup.bat
 ```
+
 ### Dockerized installation
 
 The Optimize Docker images can be used in production. They are hosted on our dedicated Docker registry and are available to enterprise customers who bought Optimize only. You can browse the available images in our [Docker registry](https://registry.camunda.cloud) after logging in with your credentials.
@@ -229,11 +233,11 @@ The Elasticsearch requirements are heavily influenced by the makeup of your data
 one instance index per definition, so the amount of indices in your Elasticsearch instance will grow with the amount of definitions
 you have deployed.
 
-This is why we recommend a minimum of 1 GB of Elasticsearch heap space to provide for all non-instance indices plus additional 
+This is why we recommend a minimum of 1 GB of Elasticsearch heap space to provide for all non-instance indices plus additional
 space in relation to how many definitions and instances your data set has.
 
 By default, Optimize uses [one shard per instance index](./configuration/system-configuration.md#index-settings) and performance tests have shown
-that a shard size of 10GB is enough for approximately 1 million instances. Elasticsearch recommends to aim for 
+that a shard size of 10GB is enough for approximately 1 million instances. Elasticsearch recommends to aim for
 [20 shards or fewer per GB of heap memory](https://www.elastic.co/guide/en/elasticsearch/reference/current/size-your-shards.html#shard-count-recommendation),
 so you will need 1GB of additional heap memory per 20 definitions.
 Elasticsearch also recommends a [shard size between 10 and 50 GB](https://www.elastic.co/guide/en/elasticsearch/reference/current/size-your-shards.html#shard-size-recommendation),
@@ -253,7 +257,7 @@ network speed, current load on the engine and its underlying database. Therefore
 guarantee that the following requirements will satisfy every use case.
 :::
 
-##### 20 Definitions with less than 50k Instances per definition 
+##### 20 Definitions with less than 50k Instances per definition
 
 We recommend to use one shard per instance index, so 20 shards overall for instance indices alone.
 Aiming for 20 shards per GB of Elasticsearch JVM heap space results in 1 GB of heap memory additionally to the base requirement of 1 GB.
@@ -268,7 +272,7 @@ can expect the instance index shards to be no larger than 10GB.
   - 2 CPU Threads
   - 4 GB RAM (2 GB JVM Heap Memory, see [setting JVM heap size](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/advanced-configuration.html#setting-jvm-heap-size))
   - [Local SSD storage recommended](https://www.elastic.co/guide/en/elasticsearch/guide/master/hardware.html#_disks)
-  
+
 ##### 40 Definitions with up to 10 million instances per definition
 
 We recommend to use two shards per instance index, so 80 shards for instance indices alone.

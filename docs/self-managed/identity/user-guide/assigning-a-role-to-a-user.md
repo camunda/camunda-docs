@@ -29,6 +29,3 @@ To assign a role to a user using Identity, take the following steps:
 On confirmation, the modal will close, the table will update, and the newly assigned role will be shown:
 
 ![assign-a-role-refreshed-table](img/assign-a-role-refreshed-table.png)
-
-
-

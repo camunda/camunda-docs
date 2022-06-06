@@ -27,7 +27,7 @@ To determine the current leader for the corresponding partition, the gateway mus
 
 ## Why do we have it and what problems does it solve?
 
-The Zeebe Gateway protects the brokers from external sources. It allows the creation of a demilitarized zone ([DMZ](https://en.wikipedia.org/wiki/DMZ_(computing))) and the Zeebe Gateway is the only contact point.
+The Zeebe Gateway protects the brokers from external sources. It allows the creation of a demilitarized zone ([DMZ](<https://en.wikipedia.org/wiki/DMZ_(computing)>)) and the Zeebe Gateway is the only contact point.
 
 The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. The clients can be kept thin, since the gateway takes care of the cluster topology and forwards the requests to the right partitions. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/overview.md).
 
@@ -65,11 +65,11 @@ For deploying purposes, it is easier to use environment variables. The following
 
 The network configuration allows configuration of the host and port details for the gateway.
 
-| Environment variable         | Application.yaml property     | Description                         | Default value |
-|------------------------------|-------------------------------|-------------------------------------|---------------|
-| `ZEEBE_GATEWAY_NETWORK_HOST` | `zeebe.gateway.network.host`  | Sets the host the gateway binds to. | `0.0.0.0`     |
-| `ZEEBE_GATEWAY_NETWORK_PORT` | `zeebe.gateway.network.port`  | Sets the port the gateway binds to. | `26500`       |
-| `ZEEBE_GATEWAY_NETWORK_MINKEEPALIVEINTERVAL` | `zeebe.gateway.network.minKeepAliveInterval` | This setting specifies the minimum accepted interval between keep alive requests. If clients send keep-alive requests at a smaller rate, they are forcefully closed by the gateway. | `30s` |
+| Environment variable                         | Application.yaml property                    | Description                                                                                                                                                                         | Default value |
+| -------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `ZEEBE_GATEWAY_NETWORK_HOST`                 | `zeebe.gateway.network.host`                 | Sets the host the gateway binds to.                                                                                                                                                 | `0.0.0.0`     |
+| `ZEEBE_GATEWAY_NETWORK_PORT`                 | `zeebe.gateway.network.port`                 | Sets the port the gateway binds to.                                                                                                                                                 | `26500`       |
+| `ZEEBE_GATEWAY_NETWORK_MINKEEPALIVEINTERVAL` | `zeebe.gateway.network.minKeepAliveInterval` | This setting specifies the minimum accepted interval between keep alive requests. If clients send keep-alive requests at a smaller rate, they are forcefully closed by the gateway. | `30s`         |
 
 ### Cluster configuration
 
@@ -81,41 +81,41 @@ It is necessary to use the same cluster name for the broker and gateway. Otherwi
 
 If you use the Helm charts, both properties are configured for you already.
 
-| Environment variable                 | Application.yaml property            | Description                                              | Default value   |
-|--------------------------------------|--------------------------------------|----------------------------------------------------------|-----------------|
-| `ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT`   | `zeebe.gateway.cluster.contactPoint`   | Sets the broker the gateway should initial contact.      | `127.0.0.1:26502` |  
-| `ZEEBE_GATEWAY_CLUSTER_REQUESTTIMEOUT` | `zeebe.gateway.cluster.requestTimeout` | Sets the timeout of requests sent to the broker cluster.  | `15s`             |
-| `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`    | `zeebe.gateway.cluster.clusterName`    | Sets the name of the Zeebe cluster to connect to. This must be the same as the clustername configured in the brokers.| `zeebe-cluster`   |
-| `ZEEBE_GATEWAY_CLUSTER_MEMBERID`       | `zeebe.gateway.cluster.memberId`       | Sets the member id of the gateway in the cluster. This can be any unique string. | `gateway`         |
-| `ZEEBE_GATEWAY_CLUSTER_HOST`           | `zeebe.gateway.cluster.host`           | Sets the host the gateway node binds to for internal cluster communicatio. | `0.0.0.0`         |
-| `ZEEBE_GATEWAY_CLUSTER_PORT`           | `zeebe.gateway.cluster.port`           | Sets the port the gateway node binds to for internal cluster communication. | `26502`           |  
+| Environment variable                   | Application.yaml property              | Description                                                                                                           | Default value     |
+| -------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT`   | `zeebe.gateway.cluster.contactPoint`   | Sets the broker the gateway should initial contact.                                                                   | `127.0.0.1:26502` |
+| `ZEEBE_GATEWAY_CLUSTER_REQUESTTIMEOUT` | `zeebe.gateway.cluster.requestTimeout` | Sets the timeout of requests sent to the broker cluster.                                                              | `15s`             |
+| `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`    | `zeebe.gateway.cluster.clusterName`    | Sets the name of the Zeebe cluster to connect to. This must be the same as the clustername configured in the brokers. | `zeebe-cluster`   |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERID`       | `zeebe.gateway.cluster.memberId`       | Sets the member id of the gateway in the cluster. This can be any unique string.                                      | `gateway`         |
+| `ZEEBE_GATEWAY_CLUSTER_HOST`           | `zeebe.gateway.cluster.host`           | Sets the host the gateway node binds to for internal cluster communicatio.                                            | `0.0.0.0`         |
+| `ZEEBE_GATEWAY_CLUSTER_PORT`           | `zeebe.gateway.cluster.port`           | Sets the port the gateway node binds to for internal cluster communication.                                           | `26502`           |
 
 ### Membership configuration
 
 To configure how the gateway connects and distributes information with other nodes (brokers or gateways) via SWIM, the following properties can be used. It might be useful to increase timeouts for setups that encounter a high latency between nodes.
 
-| Environment variable                                 | Application.yaml property                          | Description                                                                                          | Default value |
-|------------------------------------------------------|----------------------------------------------------|------------------------------------------------------------------------------------------------------|---------------|
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`   | `zeebe.gateway.cluster.membership.broadcastUpdates`  | Configure whether to broadcast member updates to all members.                                        | `false`         |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES`  | `zeebe.gateway.cluster.membership.broadcastDisputes` | Configure whether to broadcast disputes to all members.                                              | `true`          |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`      | `zeebe.gateway.cluster.membership.notifySuspect`     | Configure whether to notify a suspect node on state changes.                                         | `false`         |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPINTERVAL`     | `zeebe.gateway.cluster.membership.gossipInterval`    | Sets the interval at which the membership updates are sent to a random member.                       | `250ms`         |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPFANOUT`       | `zeebe.gateway.cluster.membership.gossipFanout`      | Sets the number of members to which membership updates are sent at each gossip interval.             | `2`             |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBEINTERVAL`      | `zeebe.gateway.cluster.membership.probeInterval`     | Sets the interval at which to probe a random member.                                                 | `1s`            |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBETIMEOUT`       | `zeebe.gateway.cluster.membership.probeTimeout`      | Sets the timeout for a probe response.                                                                | `100ms`         |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SUSPECTPROBES`      | `zeebe.gateway.cluster.membership.suspectProbes`     | Sets the number of probes failed before declaring a member is suspect.                                | `3`             |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_FAILURETIMEOUT`     | `zeebe.gateway.cluster.membership.failureTimeout`    | Sets the timeout for a suspect member declared dead.                                              | `10s`           |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SYNCINTERVAL`       | `zeebe.gateway.cluster.membership.syncInterval`      | Sets the interval at which this member synchronizes its membership information with a random member. | `10s`           |
+| Environment variable                                | Application.yaml property                            | Description                                                                                          | Default value |
+| --------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------- |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`  | `zeebe.gateway.cluster.membership.broadcastUpdates`  | Configure whether to broadcast member updates to all members.                                        | `false`       |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES` | `zeebe.gateway.cluster.membership.broadcastDisputes` | Configure whether to broadcast disputes to all members.                                              | `true`        |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`     | `zeebe.gateway.cluster.membership.notifySuspect`     | Configure whether to notify a suspect node on state changes.                                         | `false`       |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPINTERVAL`    | `zeebe.gateway.cluster.membership.gossipInterval`    | Sets the interval at which the membership updates are sent to a random member.                       | `250ms`       |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPFANOUT`      | `zeebe.gateway.cluster.membership.gossipFanout`      | Sets the number of members to which membership updates are sent at each gossip interval.             | `2`           |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBEINTERVAL`     | `zeebe.gateway.cluster.membership.probeInterval`     | Sets the interval at which to probe a random member.                                                 | `1s`          |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBETIMEOUT`      | `zeebe.gateway.cluster.membership.probeTimeout`      | Sets the timeout for a probe response.                                                               | `100ms`       |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SUSPECTPROBES`     | `zeebe.gateway.cluster.membership.suspectProbes`     | Sets the number of probes failed before declaring a member is suspect.                               | `3`           |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_FAILURETIMEOUT`    | `zeebe.gateway.cluster.membership.failureTimeout`    | Sets the timeout for a suspect member declared dead.                                                 | `10s`         |
+| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SYNCINTERVAL`      | `zeebe.gateway.cluster.membership.syncInterval`      | Sets the interval at which this member synchronizes its membership information with a random member. | `10s`         |
 
 ### Security configuration
 
 The security configurations allow configuring how the gateway interacts with other nodes inside the Zeebe cluster.
 
-| Environment variable                                | Application.yaml property                           | Description                                                                                          | Default value |
-|-----------------------------------------------------|-----------------------------------------------------|------------------------------------------------------------------------------------------------------|---------------|
-| `ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED`              | `zeebe.gateway.cluster.security.enabled`              |Enables TLS authentication between this gateway and other nodes in the cluster.| `false`         |
-| `ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH` | `zeebe.gateway.cluster.security.certificateChainPath` |Sets the path to the certificate chain file.|               |
-| `ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH`       | `zeebe.gateway.cluster.security.privateKeyPath`       |Sets the path to the private key file location.|               |
+| Environment variable                                  | Application.yaml property                             | Description                                                                     | Default value |
+| ----------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- | ------------- |
+| `ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED`              | `zeebe.gateway.cluster.security.enabled`              | Enables TLS authentication between this gateway and other nodes in the cluster. | `false`       |
+| `ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH` | `zeebe.gateway.cluster.security.certificateChainPath` | Sets the path to the certificate chain file.                                    |               |
+| `ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH`       | `zeebe.gateway.cluster.security.privateKeyPath`       | Sets the path to the private key file location.                                 |               |
 
 ### Message compression
 
@@ -127,9 +127,9 @@ This feature is useful when the network latency between the nodes is very high (
 When there is no latency enabling, this may have a performance impact. Additionally, when this flag is enabled, you must also enable compression in the standalone broker configuration.
 :::
 
-| Environment variable                     | Application.yaml property                           | Description                                                                                          | Default value |
-|------------------------------------------|-----------------------------------------------------|------------------------------------------------------------------------------------------------------|---------------|
-| `ZEEBE_GATEWAY_CLUSTER_MESSAGECOMPRESSION` | `zeebe.gateway.cluster.messageCompression` | Configure compression algorithm for all messages sent between the brokers and between the broker and the gateway. Available options are NONE, GZIP, and SNAPPY. | `NONE` |
+| Environment variable                       | Application.yaml property                  | Description                                                                                                                                                     | Default value |
+| ------------------------------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `ZEEBE_GATEWAY_CLUSTER_MESSAGECOMPRESSION` | `zeebe.gateway.cluster.messageCompression` | Configure compression algorithm for all messages sent between the brokers and between the broker and the gateway. Available options are NONE, GZIP, and SNAPPY. | `NONE`        |
 
 ### Threads configuration
 
@@ -142,32 +142,32 @@ For high availability and redundancy, two Zeebe Gateways are deployed by default
 
 To explore how the gateway behaves, or what it does, metrics can be consumed. By default, the gateway exports Prometheus metrics, which can be scrapped under `:9600/actuator/prometheus`.
 
-| Environment variable                    | Application.yaml property               | Description                                                                                          | Default value |
-|-----------------------------------------|-----------------------------------------|------------------------------------------------------------------------------------------------------|---------------|
-| `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS` | `zeebe.gateway.threads.managementThreads` |Sets the number of threads the gateway will use to communicate with the broker cluster. | `1`             |
+| Environment variable                      | Application.yaml property                 | Description                                                                             | Default value |
+| ----------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------------- | ------------- |
+| `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS` | `zeebe.gateway.threads.managementThreads` | Sets the number of threads the gateway will use to communicate with the broker cluster. | `1`           |
 
 ### Security configurations
 
-| Environment variable                        | Application.yaml property                   | Description                                                 | Default value |
-|---------------------------------------------|---------------------------------------------|-------------------------------------------------------------|---------------|
+| Environment variable                          | Application.yaml property                     | Description                                                 | Default value |
+| --------------------------------------------- | --------------------------------------------- | ----------------------------------------------------------- | ------------- |
 | `ZEEBE_GATEWAY_SECURITY_ENABLED`              | `zeebe.gateway.security.enabled`              | Enables TLS authentication between clients and the gateway. | `false`       |
-| `ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH` | `zeebe.gateway.security.certificateChainPath` | Sets the path to the certificate chain file.                ||
-| `ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH`       | `zeebe.gateway.security.privateKeyPath`       | Sets the path to the private key file location.             ||
+| `ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH` | `zeebe.gateway.security.certificateChainPath` | Sets the path to the certificate chain file.                |               |
+| `ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH`       | `zeebe.gateway.security.privateKeyPath`       | Sets the path to the private key file location.             |               |
 
 ### Long-polling configuration
 
 It's possible to configure gateway long-polling behavior. Read more on long-polling behavior [here](../../components/concepts/job-workers.md#long-polling).
 
-| Environment variable                        | Application.yaml property                   | Description                                                 | Default value |
-|---------------------------------------------|---------------------------------------------|-------------------------------------------------------------|---------------|
-| `ZEEBE_GATEWAY_LONGPOLLING_ENABLED` | `zeebe.gateway.longPolling.enabled` | Enables long polling for available jobs. | `true` |
+| Environment variable                | Application.yaml property           | Description                              | Default value |
+| ----------------------------------- | ----------------------------------- | ---------------------------------------- | ------------- |
+| `ZEEBE_GATEWAY_LONGPOLLING_ENABLED` | `zeebe.gateway.longPolling.enabled` | Enables long polling for available jobs. | `true`        |
 
 ### Interceptors configuration
 
 It is possible to intercept requests in the gateway, which can be configured via environment variables or the `application.yaml` file. For more details, read about [interceptors](../../self-managed/zeebe-deployment/interceptors.md).
 
-| Environment variable                   | Application.yaml property                | Description                                                 | Default value |
-|----------------------------------------|------------------------------------------|-------------------------------------------------------------|---------------|
-| `ZEEBE_GATEWAY_INTERCEPTORS_0_ID`        | `zeebe.gateway.interceptors.[0].id`        |The identifier for this interceptor.||
-| `ZEEBE_GATEWAY_INTERCEPTORS_0_JARPATH`   | `zeebe.gateway.interceptors.[0].jarPath`   |The path (relative or absolute) to the `JAR` file containing the interceptor class and its dependencies.||
-| `ZEEBE_GATEWAY_INTERCEPTORS_0_CLASSNAME` | `zeebe.gateway.interceptors.[0].className` |The entry point of the interceptor, a class which must: <br/>- Implement io.grpc.ServerInterceptor<br/>- Have public visibility<br/>- Have a public default constructor (i.e. no-arg constructor)||
+| Environment variable                     | Application.yaml property                  | Description                                                                                                                                                                                       | Default value |
+| ---------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `ZEEBE_GATEWAY_INTERCEPTORS_0_ID`        | `zeebe.gateway.interceptors.[0].id`        | The identifier for this interceptor.                                                                                                                                                              |               |
+| `ZEEBE_GATEWAY_INTERCEPTORS_0_JARPATH`   | `zeebe.gateway.interceptors.[0].jarPath`   | The path (relative or absolute) to the `JAR` file containing the interceptor class and its dependencies.                                                                                          |               |
+| `ZEEBE_GATEWAY_INTERCEPTORS_0_CLASSNAME` | `zeebe.gateway.interceptors.[0].className` | The entry point of the interceptor, a class which must: <br/>- Implement io.grpc.ServerInterceptor<br/>- Have public visibility<br/>- Have a public default constructor (i.e. no-arg constructor) |               |
