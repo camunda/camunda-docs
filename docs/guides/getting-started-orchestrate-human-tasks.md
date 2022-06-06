@@ -59,7 +59,7 @@ Variables are part of a process instance and represent the data of the instance.
 4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner, we've created two values: one labeled **Chicken**, and one labeled **Salad**.
 
 :::note
-As mentioned earlier, you'll need to insert the defined variable values into the appropriate sequence flows to execute your process. In this example, our sequence flows will now have the expressions of `= chicken=true` and `= salad=true`.
+As mentioned earlier, you'll need to insert the defined variable values into the appropriate sequence flows to execute your process. For example, our sequence flow will now have the expressions of `= meal = "salad"`.
 :::
 
 5. You can add the form to your BPMN diagram in a few ways:

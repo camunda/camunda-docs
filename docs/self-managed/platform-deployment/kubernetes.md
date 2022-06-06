@@ -50,7 +50,6 @@ Optional tools related to Camunda Platform 8:
 - Zeebe CTL(`zbctl`): command line tool to interact with a Zeebe cluster (local/remote). You can get the `zbctl` tool from the official
 [Zeebe release page](https://github.com/camunda-cloud/zeebe/releases).
 
-
 ## Accessing Camunda components from outside the Kubernetes cluster
 
 To interact with the Camunda services inside a Kubernetes cluster, use `port-forward` to route traffic from your environment to the cluster.
@@ -104,7 +103,7 @@ Then, you can access Operate pointing your browser at [http://localhost:8080](ht
   </div>
 </details>
 <details>
-  <summary>Operate and Tasklist Login</summary>
+  <summary>Operate and Tasklist Dashboard</summary>
   <div>
     <img src={require('./assets/operate-tasklist-dashboard.png').default}/>
   </div>
