@@ -38,7 +38,7 @@ partitioning:
 This configuration will produce the following distribution:
 
 |             | Node 0 | Node 1 | Node 2 | Node 3 | Node 4 |
-|------------:|:------:|:------:|:------:|:------:|:------:|
+| ----------: | :----: | :----: | :----: | :----: | :----: |
 | Partition 1 |   X    |        |   X    |        |   X    |
 | Partition 2 |        |   X    |        |   X    |   X    |
 | Partition 3 |   X    |        |   X    |   X    |        |

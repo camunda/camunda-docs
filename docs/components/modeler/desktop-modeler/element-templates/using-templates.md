@@ -35,16 +35,16 @@ It will also setup custom fields on the diagram element and make these available
 
 ### Removing Templates
 
-To remove an applied template from an element, either the *Unlink* or *Remove* function can be used:
+To remove an applied template from an element, either the _Unlink_ or _Remove_ function can be used:
 
-* *Remove*: Remove the element template from the `modelerTemplate` property and also reset all properties of the respective element.
-* *Unlink*: Remove the element template from the `modelerTemplate` property but keep the properties which were set.
+- _Remove_: Remove the element template from the `modelerTemplate` property and also reset all properties of the respective element.
+- _Unlink_: Remove the element template from the `modelerTemplate` property but keep the properties which were set.
 
 ![Unlink or Remove](./img/unlink-remove.png)
 
 ### Updating Templates
 
-If a template is applied and a new version of the template is found you can *update* the template.
+If a template is applied and a new version of the template is found you can _update_ the template.
 
 ![Update Template](./img/update-template.png)
 
@@ -56,6 +56,6 @@ Templates are updated according to the following rules:
 
 ### Missing Templates
 
-If a template is applied to an element but the respective template cannot be found on the system, the editing of the element will be disabled. *Unlinking* or *removing* the template for the element or adding the element template config will enable the editing again.
+If a template is applied to an element but the respective template cannot be found on the system, the editing of the element will be disabled. _Unlinking_ or _removing_ the template for the element or adding the element template config will enable the editing again.
 
 ![Template not Found](./img/template-not-found.png)

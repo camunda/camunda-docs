@@ -48,4 +48,4 @@ Jump between decision tables or literal expressions in your decision requirement
 
 ![New DMN Literal Expression](assets/desktop-modeler-dmn/literal-expression.png)
 
-You can also edit literal expressions. Just as with decision tables, in the decision requirement diagram view, click the blue icon to *drill-down* into the literal expression view and start editing.
+You can also edit literal expressions. Just as with decision tables, in the decision requirement diagram view, click the blue icon to _drill-down_ into the literal expression view and start editing.

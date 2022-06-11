@@ -53,7 +53,7 @@ Below is an example payload including all telemetry data currently sent by Optim
     "version": "3.2.0",
     "edition": "enterprise",
     "internals": {
-      "database": {  
+      "database": {
         "vendor": "elasticsearch",
         "version": "7.0.0"
       },
@@ -67,11 +67,11 @@ Below is an example payload including all telemetry data currently sent by Optim
           "optimize": "true",
           "cawemo": "false"
         },
-        "raw": 
+        "raw":
           "customer = a customer name; expiryDate = 2025-01-01; optimize: true;"
       },
-      "engine-installation-ids": 
-        [ "8343cc7a-8ad1-42d4-97d2-43452c0bdfa3", 
+      "engine-installation-ids":
+        [ "8343cc7a-8ad1-42d4-97d2-43452c0bdfa3",
         "22607b92-fcb8-11ea-adc1-0242ac120002" ]
     }
   }

@@ -87,8 +87,7 @@ are provided. In the example above, that means we need the `grpc-api` and
 `slf4j-api` libraries available when compiling.
 
 Since the interceptor will be running inside the Zeebe gateway, the language
-level of the compiled code must be the same as Zeebe's (i.e. currently JDK
-11) or lower. This example thus assumes you're using version 11 of `javac`.
+level of the compiled code must be the same as Zeebe's (i.e. currently JDK 11) or lower. This example thus assumes you're using version 11 of `javac`.
 
 ```sh
 # to compile LoggingInterceptor.java, we'll need to provide the api libraries

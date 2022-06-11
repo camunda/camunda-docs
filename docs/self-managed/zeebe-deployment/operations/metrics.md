@@ -58,6 +58,10 @@ Most metrics have the following common label:
 
 - `partition`: Cluster-unique id of the partition
 
+:::note
+Both brokers and gateways expose their respective metrics. The brokers have an optional metrics exporter that can be enabled for maximum insight.
+:::
+
 **Metrics related to process processing:**
 
 - `zeebe_stream_processor_events_total`: The number of events processed by the stream processor.

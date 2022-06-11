@@ -21,30 +21,30 @@ Users can have various levels of access to a project in Web Modeler, outlined in
 After creating a project, you can invite members of your Camunda Platform 8 organization to collaborate in Web Modeler.
 There are four roles with different levels of access rights that can be assigned to each user:
 
-* **Project Admin**: The user can edit the project itself, all folders and diagrams within the project, and invite more users to collaborate.
-* **Editor**: The user can edit all folders and diagrams within the project.
-* **Commenter**: the user cannot edit folders or diagrams nor invite users, but can view and leave comments on diagrams.
-* **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
+- **Project Admin**: The user can edit the project itself, all folders and diagrams within the project, and invite more users to collaborate.
+- **Editor**: The user can edit all folders and diagrams within the project.
+- **Commenter**: the user cannot edit folders or diagrams nor invite users, but can view and leave comments on diagrams.
+- **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
 ### Inviting users to projects
 
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
 
 1. Click **Add user**.
-![invite user](img/collaboration/web-modeler-collaborator-invite-modal-opened.png)
+   ![invite user](img/collaboration/web-modeler-collaborator-invite-modal-opened.png)
 
 2. Choose a role for your new collaborator.
-![invite choose role](img/collaboration/web-modeler-collaborator-invite-choose-role.png)
+   ![invite choose role](img/collaboration/web-modeler-collaborator-invite-choose-role.png)
 
 3. Begin typing the name of the individual and Web Modeler will suggest Camunda Platform 8 organization members that you can invite to the project.
-![invite suggestions](img/collaboration/web-modeler-collaborator-invite-suggestions.png)
+   ![invite suggestions](img/collaboration/web-modeler-collaborator-invite-suggestions.png)
 
 4. Write a message to your new collaborator about their invitation to the project.
-![invite type message](img/collaboration/web-modeler-collaborator-invite-type-message.png)
+   ![invite type message](img/collaboration/web-modeler-collaborator-invite-type-message.png)
 
 5. Click **Send** and your new collaborator will receive an email with the invitation.
-![invite sent](img/collaboration/web-modeler-collaborator-invite-sent.png)
-![invite email](img/collaboration/web-modeler-collaborator-invite-email.png)
+   ![invite sent](img/collaboration/web-modeler-collaborator-invite-sent.png)
+   ![invite email](img/collaboration/web-modeler-collaborator-invite-email.png)
 
 ### Folders
 
@@ -57,19 +57,19 @@ Diagrams can also be shared with others in read-only mode via a sharing link.
 This link can also be protected with an additional password.
 
 1. Navigate to a diagram and click on the share icon button.
-![share button](img/collaboration/web-modeler-share-icon-button.png)
+   ![share button](img/collaboration/web-modeler-share-icon-button.png)
 
 2. Click **Create link**.
-![share create link](img/collaboration/web-modeler-share-modal.png)
+   ![share create link](img/collaboration/web-modeler-share-modal.png)
 
-1. Click **Copy** to copy the link to your clipboard.
-![share copy link](img/collaboration/web-modeler-share-modal-create.png)
+3. Click **Copy** to copy the link to your clipboard.
+   ![share copy link](img/collaboration/web-modeler-share-modal-create.png)
 
-1. Click **Add** and type a new password to protect your link.
-![share copy link](img/collaboration/web-modeler-share-modal-password-protect.png)
+4. Click **Add** and type a new password to protect your link.
+   ![share copy link](img/collaboration/web-modeler-share-modal-password-protect.png)
 
 5. Click **Email** to share the new link with multiple recipients.
-![share copy link](img/collaboration/web-modeler-share-modal-email.png)
+   ![share copy link](img/collaboration/web-modeler-share-modal-email.png)
 
 Similar to the sharing link, a diagram can be embedded into HTML pages via an iframe tag. The iframe tag can be copied from the sharing dialog via the **Embed** button.
 
@@ -109,10 +109,10 @@ When others are opening the same diagram as you, the updates on the diagram are 
 Whether you are in a presentation or if others are in the same diagram as you are, use the attention grabber pointer to draw attention to a specific part of the diagram. To do this, take the following steps:
 
 1. Switch on the attention grabber pointer from the canvas tools.
-![attention grabber](img/attention-grabber.png)
+   ![attention grabber](img/attention-grabber.png)
 
 2. Drop the pointer by clicking anywhere on the canvas.
-![attention grabber gif](img/attention-grabber-pointer-pulse.gif)
+   ![attention grabber gif](img/attention-grabber-pointer-pulse.gif)
 
 The pointer will pulsate to draw attention and will match your avatar color.
 It can also be seen in real-time by others that are looking at the same diagram as you.

@@ -29,18 +29,20 @@ To create an automated process with user tasks, take the following steps:
 1. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
 2. Name your project and select **New > BPMN Diagram > + Create blank**.
 3. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Preparing dinner` with an id of `preparing-dinner`.
-![modeler example](./img/modeler-example.png)
-5. Use Web Modeler to design a BPMN flow with user tasks. Create a user task by dragging the task icon from the palette, or click the existing start event and the displayed task icon.
-6. Change the task type by clicking the wrench icon. Select **User Task**.
-7. Add a descriptive name using the properties panel. In this case, we've named ours `Decide what's for dinner`.
-8. Assign this task to a user or group using the properties panel.
+   ![modeler example](./img/modeler-example.png)
+4. Use Web Modeler to design a BPMN flow with user tasks. Create a user task by dragging the task icon from the palette, or click the existing start event and the displayed task icon.
+5. Change the task type by clicking the wrench icon. Select **User Task**.
+6. Add a descriptive name using the properties panel. In this case, we've named ours `Decide what's for dinner`.
+7. Assign this task to a user or group using the properties panel.
    - User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element. This can be used to define which user the task can be assigned to. One or both of the following attributes can be specified simultaneously:
    - `assignee`: Specifies the user assigned to the task. Tasklist will claim the task for this user.
    - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
-![user task example](./img/user-task-example.png)
-9. Append a gateway to your user task by dragging it onto the dashboard from the palette on the left side of the screen, or by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
-10. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
-   - Note that the sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
+     ![user task example](./img/user-task-example.png)
+8. Append a gateway to your user task by dragging it onto the dashboard from the palette on the left side of the screen, or by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
+9. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
+
+- Note that the sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
+
 11. Attach an end event to the two user tasks.
 
 <div bpmn="getting-started-guides/prepare-dinner.bpmn" />
@@ -60,6 +62,10 @@ Variables are part of a process instance and represent the data of the instance.
 As mentioned earlier, you'll need to insert the defined variable values into the appropriate sequence flows to execute your process. In this example, our sequence flows will now have the expressions of `= chicken=true` and `= salad=true`.
 :::
 
+5. You can add the form to your BPMN diagram in a few ways:
+   1. Within your form, click the rectangular **Copy JSON** icon to copy the form JSON to your clipboard. Navigate to your BPMN diagram, and click the appropriate user task. Within the properties panel of the user task, navigate to the **Form** section, select a **Type** of **Camunda forms** and paste your JSON into the **Form JSON configuration** field.
+   2. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import**.
+
 ### Start and view your process instance
 
 1. To deploy your diagram to your cluster, click **Deploy diagram > Deploy**.
@@ -71,13 +77,13 @@ As mentioned earlier, you'll need to insert the defined variable values into the
 
 ### Complete a user task
 
-Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](./utilizing-forms.md).
+Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](../components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
 
 1. Go back to your Camunda Platform 8 diagram and select the honeycomb icon and then **View user tasks** to take a look at your user tasks inside Tasklist.
 2. Select the open user task on the left panel of **Tasks**. In our example below, this is **Decide what's for dinner**.
 3. Next to **Assignee**, click **Claim** to claim the task.
 4. Once finished entering the appropriate information, click **Complete Task**.
-![complete a human task in Tasklist](./img/user-task-tasklist.png)
+   ![complete a human task in Tasklist](./img/user-task-tasklist.png)
 5. On the left panel of **Tasks**, filter by **Completed** tasks to see your task has been finished.
 
 You can now navigate back to Operate and notice the process instance has continued, and the token has moved forward.

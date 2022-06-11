@@ -16,17 +16,17 @@ GET `/api/public/dashboard`
 
 The following request headers have to be provided with every request:
 
-|Header|Constraints|Value|
-|--- |--- |--- |
-|Authorization|REQUIRED|[Authorization](../../authorization)|
+| Header        | Constraints | Value                                |
+| ------------- | ----------- | ------------------------------------ |
+| Authorization | REQUIRED    | [Authorization](../../authorization) |
 
 ## Query parameters
 
 The following query parameters have to be provided with every request:
 
-|Parameter|Constraints|Value|
-|--- |--- |--- |
-|collectionId|REQUIRED|The ID of the collection for which to retrieve the dashboard IDs.|
+| Parameter    | Constraints | Value                                                             |
+| ------------ | ----------- | ----------------------------------------------------------------- |
+| collectionId | REQUIRED    | The ID of the collection for which to retrieve the dashboard IDs. |
 
 ## Request body
 
@@ -40,11 +40,11 @@ The response contains a list of IDs of the dashboards existing in the collection
 
 Possible HTTP response status codes:
 
-|Code|Description|
-|--- |--- |
-|200|Request successful.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|500|Some error occurred while processing the request, best check the Optimize log.|
+| Code | Description                                                                                                  |
+| ---- | ------------------------------------------------------------------------------------------------------------ |
+| 200  | Request successful.                                                                                          |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
 ## Example
 

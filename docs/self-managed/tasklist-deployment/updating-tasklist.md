@@ -6,8 +6,8 @@ description: "Follow these steps for a successful Tasklist version update."
 
 When updating Tasklist versions, it's important to consider a few factors:
 
-* Every Tasklist version supports importing data for the current version and the previous one. For example, if you are running Tasklist `1.3`, your Tasklist imports data from Zeebe `1.2` and `1.3`.
-* Before updating the Tasklist version and skipping multiple minor versions, ensure you import all the data from the previous versions. See the sections below for more information.
+- Every Tasklist version supports importing data for the current version and the previous one. For example, if you are running Tasklist `1.3`, your Tasklist imports data from Zeebe `1.2` and `1.3`.
+- Before updating the Tasklist version and skipping multiple minor versions, ensure you import all the data from the previous versions. See the sections below for more information.
 
 ## Skipping multiple minor versions
 

@@ -23,10 +23,7 @@ Sample response:
 
 ```json
 {
-    "total" : 2,
-    "assignees": [
-        "john.lennon", 
-        "oprah.winfrey"
-    ]
+  "total": 2,
+  "assignees": ["john.lennon", "oprah.winfrey"]
 }
 ```
