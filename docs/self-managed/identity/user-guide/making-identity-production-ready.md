@@ -12,6 +12,11 @@ As Keycloak is an external-based dependency of the Identity application, we reco
 [Keycloak's documentation on production configuration](https://www.keycloak.org/server/configuration-production) to
 make sure your Keycloak instance is production-ready.
 
+### Backup
+
+To ensure recovery is possible we recommend regularly backing up the database that supports Keycloak.
+For more information about backups, please consult the documentation of your chosen provider.
+
 ## Enabling TLS
 
 A safe and healthy exchange of secure data requires Transport Layer Security (TLS).
