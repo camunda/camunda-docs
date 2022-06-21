@@ -10,10 +10,9 @@ You can find the complete source code on [GitHub](https://github.com/zeebe-io/ze
 
 ## Prerequisites
 
-- [Camunda Platform 8 account](/guides/getting-started/create-camunda-cloud-account.md)
-- [Cluster](/guides/getting-started/create-camunda-cloud-account.md)
-- [Client credentials](/guides/getting-started/setup-client-connection-credentials.md)
-- [Modeler](/guides/getting-started/model-your-first-process.md)
+- [Camunda Platform 8 account](/guides/create-account.md)
+- [Cluster](/guides/create-cluster.md)
+- [Client credentials](/guides/setup-client-connection-credentials.md)
 - Go v1.13+ environment installed
 
 ## Set up a project
@@ -116,7 +115,7 @@ Broker 0.0.0.0 : 26501
 
 Now, we need a simple process we can deploy. Later, we will extend the process with more functionality. For now, follow the steps below:
 
-1. Open the [modeler](/guides/getting-started/model-your-first-process.md) of your choice and create a new BPMN diagram.
+1. Open the Web Modeler and create a new BPMN diagram.
 
 2. Add a start event named `Order Placed` and an end event named `Order Delivered` to the diagram. Then, connect the events.
 

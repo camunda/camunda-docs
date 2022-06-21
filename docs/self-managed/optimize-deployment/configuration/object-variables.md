@@ -6,7 +6,7 @@ description: "Learn how Optimize imports and handles object and list variables."
 
 ## Object variables
 
-Complex object variables can be imported into Optimize and thereafter be used in reports and filters. During import, Optimize flattens the given object variable to create individual variables for each property of the object, resulting in multiple "sub variables" for each imported object variable.  
+Complex object variables can be imported into Optimize and thereafter be used in reports and filters. During import, Optimize flattens the given object variable to create individual variables for each property of the object, resulting in multiple "sub variables" for each imported object variable.
 
 For example, an object variable called `user` with the properties `firstName` and `lastName` will result in two flattened variables: `user.firstName` and `user.lastName`. These variables can be used within reports and filters.
 
@@ -20,7 +20,7 @@ For example, a list variable with the name `users` and the values `["John Smith"
 
 However, filters are not yet fully optimized for list support, and some filter terms may be initially misleading. This is because filters currently apply to each list item individually rather than the entire list. For example, an "is" filter on a list of string values filters for those instances where any individual list item is equal to the given term, for example, instances whose list variable "contains" the selected value.
 
-Similarly, the "contains" filter matches process instances whose list variable contains at least one value which in turn contains the given substring.  
+Similarly, the "contains" filter matches process instances whose list variable contains at least one value which in turn contains the given substring.
 
 The value of list properties within objects as well as variables which are lists of objects rather than primitives can be inspected in the raw object variable value column accessible in raw data reports.
 

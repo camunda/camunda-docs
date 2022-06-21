@@ -1,19 +1,19 @@
 ---
 title: Routing events to processes
 tags:
-- Event Handling
-- Process Instantiation
-- Message Handling
-- Correlation
-- SOAP
-- JMS
-- REST
-- Camel
-- ESB
-- API
-- BPMN Message Event
-- BPMN Signal Event
-- BPMN Timer Event
+  - Event Handling
+  - Process Instantiation
+  - Message Handling
+  - Correlation
+  - SOAP
+  - JMS
+  - REST
+  - Camel
+  - ESB
+  - API
+  - BPMN Message Event
+  - BPMN Signal Event
+  - BPMN Timer Event
 ---
 
 To start a new process instance or to route a message to an already running instance, you have to choose the appropriate technology option to do so, like using the existing API or using customized possibilities including SOAP, AMQP, or Kafka. Leverage the possibilities of the universe of your runtime (like Java or Node.js) and the frameworks of your choice to support the technologies or protocols you need.
@@ -24,19 +24,18 @@ To start a new process instance or to route a message to an already running inst
 
 Several BPMN start events can be used to start a new process instance.
 
-| | None Event | Message Event | Timer Event | Signal Event | Conditional Event |
-| - | - | - | - | - | - |
-| | ![none start](/img/bpmn-elements/none-start.svg) | ![message start](/img/bpmn-elements/message-start.svg) | ![timer start](/img/bpmn-elements/timer-start.svg) | ![signal start](/img/bpmn-elements/signal-start.svg) | ![conditional start](/img/bpmn-elements/conditional-start.svg) |
-| Use when | You have only **one start event** or a start event which is clearly standard. | You have to differentiate **several start events**. | You want to automatically start process instances **time controlled**. | You need to start **several process instances** at once. Rarely used. | When a specific **condition** is met, a process instance is created. |
-| Supported for Execution | &#10004; | &#10004; | &#10004; | Not yet supported in Camunda Platform 8 | Determine occurrence of condition externally yourself and use the message event. |
-| | [Learn more](/docs/components/modeler/bpmn/none-events/) | [Learn more](/docs/components/modeler/bpmn/message-events/) | [Learn more](/docs/components/modeler/bpmn/timer-events/) | | |
-
+|                         | None Event                                                                    | Message Event                                               | Timer Event                                                            | Signal Event                                                          | Conditional Event                                                                |
+| ----------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+|                         | ![none start](/img/bpmn-elements/none-start.svg)                              | ![message start](/img/bpmn-elements/message-start.svg)      | ![timer start](/img/bpmn-elements/timer-start.svg)                     | ![signal start](/img/bpmn-elements/signal-start.svg)                  | ![conditional start](/img/bpmn-elements/conditional-start.svg)                   |
+| Use when                | You have only **one start event** or a start event which is clearly standard. | You have to differentiate **several start events**.         | You want to automatically start process instances **time controlled**. | You need to start **several process instances** at once. Rarely used. | When a specific **condition** is met, a process instance is created.             |
+| Supported for Execution | &#10004;                                                                      | &#10004;                                                    | &#10004;                                                               | Not yet supported in Camunda Platform 8                               | Determine occurrence of condition externally yourself and use the message event. |
+|                         | [Learn more](/docs/components/modeler/bpmn/none-events/)                      | [Learn more](/docs/components/modeler/bpmn/message-events/) | [Learn more](/docs/components/modeler/bpmn/timer-events/)              |                                                                       |                                                                                  |
 
 <div bpmn="best-practices/routing-events-to-processes-assets/start-events.bpmn" callouts="NoneStartEvent,MessageStartEvent1,MessageStartEvent2" />
 
 <span className="callout">1</span>
 
-This none start event indicates the typical starting point. Note that only *one* such start event can exist in one process definition.
+This none start event indicates the typical starting point. Note that only _one_ such start event can exist in one process definition.
 
 <span className="callout">1</span>
 
@@ -44,19 +43,18 @@ This message start event is defined to react to a specific message type...
 
 <span className="callout">1</span>
 
-...hence you can have *multiple* message start events in a process definition. In this example, both message start events seems to be exceptional cases - for equivalent cases we recommend to just use message instead of none start events.
+...hence you can have _multiple_ message start events in a process definition. In this example, both message start events seems to be exceptional cases - for equivalent cases we recommend to just use message instead of none start events.
 
 ### Intermediate events
 
-Several BPMN intermediate events (and the receive task) can be used to make a process instance *wait* for and *react* to certain triggers.
+Several BPMN intermediate events (and the receive task) can be used to make a process instance _wait_ for and _react_ to certain triggers.
 
-| | Message Event | Receive Task | Timer Event | Signal Event| Conditional Event |
-| - | - | - | - | - | - |
-| | ![message intermediate](/img/bpmn-elements/message-intermediate.svg) | ![task receive](/img/bpmn-elements/task-receive.svg) | ![timer intermediate](/img/bpmn-elements/timer-intermediate.svg) | ![signal intermediate](/img/bpmn-elements/signal-intermediate.svg) | ![conditional intermediate](/img/bpmn-elements/conditional-intermediate.svg) |
-| Use when | You route an incoming **message** to a specific and unique process instance. | As alternative to message events (to leverage BPMN boundary events, e.g. for timeouts). | You want to make your process instance wait for a certain (point in) **time**. | You route an incoming **signal** to all process instances waiting for it. | When a specific **condition** is met, the waiting process instance moves on. |
-| Supported for Execution | &#10004 | &#10004; | &#10004; | Not yet supported in Camunda Platform 8 | Not yet supported in Camunda Platform 8 |
-| | [Learn more](/docs/components/modeler/bpmn/message-events/) | [Learn more](/docs/components/modeler/bpmn/receive-tasks/) | [Learn more](/docs/components/modeler/bpmn/timer-events/) | |
-
+|                         | Message Event                                                                | Receive Task                                                                            | Timer Event                                                                    | Signal Event                                                              | Conditional Event                                                            |
+| ----------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+|                         | ![message intermediate](/img/bpmn-elements/message-intermediate.svg)         | ![task receive](/img/bpmn-elements/task-receive.svg)                                    | ![timer intermediate](/img/bpmn-elements/timer-intermediate.svg)               | ![signal intermediate](/img/bpmn-elements/signal-intermediate.svg)        | ![conditional intermediate](/img/bpmn-elements/conditional-intermediate.svg) |
+| Use when                | You route an incoming **message** to a specific and unique process instance. | As alternative to message events (to leverage BPMN boundary events, e.g. for timeouts). | You want to make your process instance wait for a certain (point in) **time**. | You route an incoming **signal** to all process instances waiting for it. | When a specific **condition** is met, the waiting process instance moves on. |
+| Supported for Execution | &#10004                                                                      | &#10004;                                                                                | &#10004;                                                                       | Not yet supported in Camunda Platform 8                                   | Not yet supported in Camunda Platform 8                                      |
+|                         | [Learn more](/docs/components/modeler/bpmn/message-events/)                  | [Learn more](/docs/components/modeler/bpmn/receive-tasks/)                              | [Learn more](/docs/components/modeler/bpmn/timer-events/)                      |                                                                           |
 
 Consider this example:
 
@@ -64,11 +62,11 @@ Consider this example:
 
 <span className="callout">1</span>
 
-This intermediate message event causes the process instance to wait unconditionally for a *specific* event...
+This intermediate message event causes the process instance to wait unconditionally for a _specific_ event...
 
 <span className="callout">2</span>
 
-...whereas the intermediate message event attached to the boundary of an activity waits for an *optional* event, potentially arriving while we are occupied with the activity.
+...whereas the intermediate message event attached to the boundary of an activity waits for an _optional_ event, potentially arriving while we are occupied with the activity.
 
 ## Reacting to process-internal events
 
@@ -100,8 +98,8 @@ A conditional event's condition expression is evaluated at it's "scope" creation
 
 Most events actually occur somewhere external to the workflow engine and need to be routed to it. The core workflow engine is by design not concerned with the technical part of receiving external messages, but you can receive messages and route them to the workflow engine by the following ways:
 
-* Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
-* Using connectors: Configure a connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda Platform 8 only.
+- Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
+- Using connectors: Configure a connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda Platform 8 only.
 
 ### Using API
 
@@ -116,35 +114,35 @@ If you have only one starting point (none start event) in your process definitio
 Example in Java:
 
 ```java
-processInstance = zeebeClient.newCreateInstanceCommand()  
-  .bpmnProcessId("invoice").latestVersion() 
-  .send()  
+processInstance = zeebeClient.newCreateInstanceCommand()
+  .bpmnProcessId("invoice").latestVersion()
+  .send()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new process instance", throwable); });
 ```
 
 Example in Node.js:
 
 ```js
-zbc.createWorkflowInstance({  
-  bpmnProcessId: 'invoice'
-})
+zbc.createWorkflowInstance({
+  bpmnProcessId: "invoice",
+});
 ```
 
 This starts a new process instance in the latest version of the process definition. You can also start a specific version of a process definition:
 
 ```java
-processInstance = zeebeClient.newCreateInstanceCommand()  
-  .bpmnProcessId("invoice").version(5) 
+processInstance = zeebeClient.newCreateInstanceCommand()
+  .bpmnProcessId("invoice").version(5)
   //...
 ```
 
 or
 
 ```js
-zbc.createWorkflowInstance({  
-  bpmnProcessId: 'invoice',   
-  version: 6
-})
+zbc.createWorkflowInstance({
+  bpmnProcessId: "invoice",
+  version: 6,
+});
 ```
 
 You can also use [`CreateProcessInstanceWithResult`](/docs/apis-clients/grpc/#createprocessinstancewithresult-rpc) instead, if you want to block the execution until the process instance has completed.
@@ -158,7 +156,7 @@ client.newPublishMessageComment()
   .messageName("message_invoiceReceived") // <1>
   .corrlationKey(invoiceId) // <2>
   .variables( // <3>
-	  //... 
+	  //...
   ).send()
   .exceptionally( throwable -> { throw new RuntimeException("Could not publish message", throwable); });
 ```
@@ -173,7 +171,7 @@ Correlation key has to be provided, even if a start event does not require corre
 
 <span className="callout">3</span>
 
-*Payload* delivered with the message.
+_Payload_ delivered with the message.
 
 On one hand, now you do not have to know the key of the BPMN process. On the other hand, you cannot influence the version of the process definition used when starting a process instance by message.
 
@@ -195,7 +193,7 @@ If you have only one starting point, you reference the process definition by the
 
 <span className="callout">1</span>
 
-Process *ID* defined in the BPMN. The API calls this ID the "Key" of the process.
+Process _ID_ defined in the BPMN. The API calls this ID the "Key" of the process.
 
 See the [Process Engine API](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-api/) for more details.
 
@@ -212,21 +210,21 @@ processEngine.getRuntimeService()
 
 <span className="callout">1</span>
 
-Message *Name* defined in the BPMN
+Message _Name_ defined in the BPMN
 
 <span className="callout">2</span>
 
-*Payload* delivered with the message
+_Payload_ delivered with the message
 
 On one hand, now you do not have to know the key of the BPMN process. On the other hand, you cannot influence the version of the process definition used when starting a process instance by message.
 
-The message name for start events has to be *unique* to the whole workflow engine - otherwise the engine will not know which process to start.
+The message name for start events has to be _unique_ to the whole workflow engine - otherwise the engine will not know which process to start.
 
 #### Starting specific versions of process instances by ID
 
 See [versioning process definitions](../../operations/versioning-process-definitions/) for details on versioning of process definitions.
 
-By default, the workflow engine always starts the newest version of a process definition. You can start a specific version of a process definition by referencing the *ID* (primary key) of that definition in the engine's database.
+By default, the workflow engine always starts the newest version of a process definition. You can start a specific version of a process definition by referencing the _ID_ (primary key) of that definition in the engine's database.
 
 ```java
 ProcessDefinition processDefinition = processEngine().getRepositoryService()
@@ -238,12 +236,11 @@ processEngine().getRuntimeService()
   .startProcessInstanceById(processDefinition.getId());
 ```
 
-"By ID" does *NOT* relate to the ID in the BPMN XML file (which is known as "Key" in the process engine). Instead, ID relates to the *primary key* in the Camunda database. You don't have influence on this ID - it will be created during deployment time.
+"By ID" does _NOT_ relate to the ID in the BPMN XML file (which is known as "Key" in the process engine). Instead, ID relates to the _primary key_ in the Camunda database. You don't have influence on this ID - it will be created during deployment time.
 
 #### Correlating messages to running process instances
 
-In case you want to route an event to a process instance already started, you will need to *correlate* the message to the specific process instance waiting for it by matching some properties of the incoming message to some properties of your process instance:
-
+In case you want to route an event to a process instance already started, you will need to _correlate_ the message to the specific process instance waiting for it by matching some properties of the incoming message to some properties of your process instance:
 
 ```java
 runtimeService
@@ -255,23 +252,23 @@ runtimeService
 
 <span className="callout">1</span>
 
-A process instance matches if it is waiting for a message *named* myMessage...
+A process instance matches if it is waiting for a message _named_ myMessage...
 
 <span className="callout">2</span>
 
-...if it carries the orderId of the message as its *business key*...
+...if it carries the orderId of the message as its _business key_...
 
 <span className="callout">3</span>
 
-...and if a *process variable* "customerId" also matches the expectations.
+...and if a _process variable_ "customerId" also matches the expectations.
 
-As a best practice, correlate incoming messages based on *one* unique artificial attribute (e.g. `correlationIdMyMessage`) created specifically for this communication. Alternatively, you also have the option to select the process instance targeted by a message based on a query involving complex criteria, and then as a second step explicitly correlate the message to the selected process instance.
+As a best practice, correlate incoming messages based on _one_ unique artificial attribute (e.g. `correlationIdMyMessage`) created specifically for this communication. Alternatively, you also have the option to select the process instance targeted by a message based on a query involving complex criteria, and then as a second step explicitly correlate the message to the selected process instance.
 
 The [API docs](https://docs.camunda.org/manual/latest/reference/bpmn20/events/message-events/#explicitly-triggering-a-message) show more details about the possibilities to trigger message events.
 
 #### Routings signals to process instances
 
-In the case of a [BPMN signal](https://docs.camunda.org/manual/latest/reference/bpmn20/events/signal-events/), a correlation to a specific process instance is neither necessary nor possible, as the mechanism is meant to inform *all* process instances "subscribing" to a specific signal event:
+In the case of a [BPMN signal](https://docs.camunda.org/manual/latest/reference/bpmn20/events/signal-events/), a correlation to a specific process instance is neither necessary nor possible, as the mechanism is meant to inform _all_ process instances "subscribing" to a specific signal event:
 
 ```java
 runtimeService
@@ -282,17 +279,17 @@ runtimeService
 
 <span className="callout">1</span>
 
-A process instance matches if it is waiting for or started by a signal *named* `mySignal`.
+A process instance matches if it is waiting for or started by a signal _named_ `mySignal`.
 
 #### Starting process instances at arbitrary nodes
 
 There are use cases when you want to start a process instance at some point
 other than the modeled start event:
 
-* **Testing**: It's always best to test a process instances in chunks, so you don't always need to start at the beginning.
+- **Testing**: It's always best to test a process instances in chunks, so you don't always need to start at the beginning.
 
-* **Migration**: When migrating to Camunda, you might have existing process
-instances you want to migrate to a new Camunda process instances **in a defined state**.
+- **Migration**: When migrating to Camunda, you might have existing process
+  instances you want to migrate to a new Camunda process instances **in a defined state**.
 
 In these cases, you can start a process instance in arbitrary activities using the API.
 
@@ -313,7 +310,7 @@ See [User Guide: Starting a Process Instance at Any Set of Activities](https://d
 
 ## Technology examples for messages sent by external systems
 
-In this section, we give examples for *technical messages*, which are received from
+In this section, we give examples for _technical messages_, which are received from
 other systems, typically by leveraging technologies like e.g. SOAP, REST, JMS or
 other.
 
@@ -428,7 +425,7 @@ More information can be found in the [Camunda Platform 7 REST API Reference](htt
 #### Apache Camel (e.g. files in a drop folder)
 
 Use [Apache Camel](http://camel.apache.org/) if you want to use one of the existing [Camel Components](http://camel.apache.org/components.html) (a huge list). Consider leveraging the
-[Camunda Platform 7 Camel Community Extension](https://github.com/camunda/camunda-bpm-camel). You can find an example of this in action on JBoss/Wildfly in [this showcase (unsupported)](https://github.com/camunda/camunda-consulting/blob/master/showcases/camel-use-cases/).
+[Camunda Platform 7 Camel Community Extension](https://github.com/camunda-community-hub/camunda-bpm-camel).
 
 Starting a process instance can be done by a Camel route, e.g. when a file was placed into a drop folder:
 
@@ -440,7 +437,7 @@ from("file://c:/tmp") // some drop folder
     .to("camunda-bpm:start?processDefinitionKey=invoice"); // and start new process instance
 ```
 
-In this case, the message transported within the Camel route is handed over to the process instance as a variable named `camelBody` by default, see [documentation](https://github.com/camunda/camunda-bpm-camel#camunda-bpmstart-start-a-process-instance).
+In this case, the message transported within the Camel route is handed over to the process instance as a variable named `camelBody` by default, see [documentation](https://github.com/camunda-community-hub/camunda-bpm-camel#camunda-bpmstart-start-a-process-instance).
 
 #### Messages sent via an Enterprise Service Bus (ESB)
 
@@ -462,7 +459,7 @@ If you use the **Camunda BPMN Framework** as described in the book ["Real Life B
 
 This is a message start event, which allows you to show the collaboration between the human and the technical flows. However, it is the only the starting point of the technical pool and could be a none start event in terms of execution.
 
-If there is *exactly one message start event* for the whole process definition, it can also be treated as if it were a none start event when starting a process instance.
+If there is _exactly one message start event_ for the whole process definition, it can also be treated as if it were a none start event when starting a process instance.
 
 ## Sending messages to other processes
 
@@ -479,10 +476,10 @@ Use some simple code on the sending side to route the message to a new process i
 public void routeInput(@ZeebeVariable String invoiceId) {
   Map<String, Object> variables = new HashMap<String, Object>();
   variables.put("invoiceId", execution.getVariable("invoiceId"));
-  zeebeClient.newCreateInstanceCommand()  
+  zeebeClient.newCreateInstanceCommand()
     .bpmnProcessId("invoice").latestVersion()
 	.variables(variables)
-    .send()  
+    .send()
     .exceptionally( throwable -> { throw new RuntimeException("Could not create new process instance", throwable); });
 }
 ```
@@ -507,7 +504,7 @@ public void notifyOrder(@ZeebeVariable String orderId, @ZeebeVariable String pay
 
 ## Handling messages sent by a user
 
-Sometimes explicit "user tasks" are not an appropriate choice to involve a human user to participate in a process: the user does not want to see a task in Tasklist, but rather have the possibility to actively trigger some action right at the time when it becomes necessary from a business perspective. The difference is which event gives the *active trigger*.
+Sometimes explicit "user tasks" are not an appropriate choice to involve a human user to participate in a process: the user does not want to see a task in Tasklist, but rather have the possibility to actively trigger some action right at the time when it becomes necessary from a business perspective. The difference is which event gives the _active trigger_.
 
 <div bpmn="best-practices/routing-events-to-processes-assets/invoice-human-user.bpmn" callouts="intermediate_event_order_paid,task_check_payments,task_mark_order_as_paid" />
 

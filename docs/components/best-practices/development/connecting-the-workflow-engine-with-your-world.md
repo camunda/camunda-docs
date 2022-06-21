@@ -2,7 +2,6 @@
 title: "Connecting the workflow engine with your world"
 ---
 
-
 One of your first tasks to build a process solution is to sketch the basic architecture of your solution. To do so, you need to answer the question of how to connect the workflow engine (Zeebe) with your application or with remote systems.
 
 This document predominantly outlines writing some custom glue code in the programming language of your choice and using existing client libraries. In some cases, you might also want to leverage existing connectors as a starting point.
@@ -36,50 +35,50 @@ Using the Zeebe client’s API, you can communicate with the workflow engine. Th
 **Start process instances using the** [**Java Client**](/docs/apis-clients/java-client/index/)**:**
 
 ```java
-processInstance = zeebeClient.newCreateInstanceCommand()  
-  .bpmnProcessId("someProcess").latestVersion()  
-  .variables( someProcessVariablesAsMap )  
-  .send()  
+processInstance = zeebeClient.newCreateInstanceCommand()
+  .bpmnProcessId("someProcess").latestVersion()
+  .variables( someProcessVariablesAsMap )
+  .send()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new instance", throwable); });
 ```
 
 **Start process instances using the** [**NodeJS Client**](/docs/apis-clients/community-clients/javascript/)**:**
 
 ```js
-const processInstance = await zbc.createWorkflowInstance({  
-  bpmnProcessId: 'someProcess',   
-  version: 5,  
-  variables: {  
-    testData: 'something',  
-  }  
-})
+const processInstance = await zbc.createWorkflowInstance({
+  bpmnProcessId: "someProcess",
+  version: 5,
+  variables: {
+    testData: "something",
+  },
+});
 ```
 
 **Correlate messages to process instances using the Java Client**:
 
 ```java
-zeebeClient.newPublishMessageCommand() //  
-  .messageName("messageA")  
-  .messageId(uniqueMessageIdForDeduplication)  
-  .correlationKey(message.getCorrelationid())  
-  .variables(singletonMap("paymentInfo", "YeahWeCouldAddSomething"))  
-  .send()  
+zeebeClient.newPublishMessageCommand() //
+  .messageName("messageA")
+  .messageId(uniqueMessageIdForDeduplication)
+  .correlationKey(message.getCorrelationid())
+  .variables(singletonMap("paymentInfo", "YeahWeCouldAddSomething"))
+  .send()
   .exceptionally( throwable -> { throw new RuntimeException("Could not publish message " + message, throwable); });
 ```
 
 **Correlate messages to process instances using the NodeJS Client**:
 
 ```js
-zbc.publishMessage({  
-  name: 'messageA',  
-  messageId: messageId,  
-  correlationKey: correlationId,  
-  variables: {   
-    valueToAddToWorkflowVariables: 'here',   
-    status: 'PROCESSED'   
-  },  
-  timeToLive: Duration.seconds.of(10)  
-})
+zbc.publishMessage({
+  name: "messageA",
+  messageId: messageId,
+  correlationKey: correlationId,
+  variables: {
+    valueToAddToWorkflowVariables: "here",
+    status: "PROCESSED",
+  },
+  timeToLive: Duration.seconds.of(10),
+});
 ```
 
 This allows you to connect Zeebe with any external system by writing some custom glue code. We will look at common technology examples to illustrate this in a minute.
@@ -91,21 +90,21 @@ To implement service tasks of a process model, you can write code that subscribe
 **Glue code in Java:**
 
 ```java
-class ExampleJobHandler implements JobHandler {  
-  public void handle(final JobClient client, final ActivatedJob job) {  
-    // here: business logic that is executed with every job  
-    client.newCompleteCommand(job.getKey()).send()  
-      .exceptionally( throwable -> { throw new RuntimeException("Could not complete job " + job, throwable); });;  
-  }  
+class ExampleJobHandler implements JobHandler {
+  public void handle(final JobClient client, final ActivatedJob job) {
+    // here: business logic that is executed with every job
+    client.newCompleteCommand(job.getKey()).send()
+      .exceptionally( throwable -> { throw new RuntimeException("Could not complete job " + job, throwable); });;
+  }
 }
 ```
 
 **Glue code in NodeJS:**
 
 ```js
-function handler(job, complete, worker) {  
-  // here: business logic that is executed with every job  
-  complete.success()  
+function handler(job, complete, worker) {
+  // here: business logic that is executed with every job
+  complete.success();
 }
 ```
 
@@ -114,21 +113,21 @@ Now, this handler needs to be connected to Zeebe, which is generally done by sub
 **Open subscription via the Zeebe Java client:**
 
 ```java
-zeebeClient  
-  .newWorker()  
-  .jobType("serviceA")  
-  .handler(new ExampleJobHandler())  
-  .timeout(Duration.ofSeconds(10))  
+zeebeClient
+  .newWorker()
+  .jobType("serviceA")
+  .handler(new ExampleJobHandler())
+  .timeout(Duration.ofSeconds(10))
   .open()) {waitUntilSystemInput("exit");}
 ```
 
 **Open subscription via the Zeebe NodeJS client:**
 
 ```js
-zbc.createWorker({  
-  taskType: 'serviceA',  
-  taskHandler: handler,  
-})
+zbc.createWorker({
+  taskType: "serviceA",
+  taskHandler: handler,
+});
 ```
 
 You can also use integrations in certain programming frameworks, like [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) in the Java world, which starts the job worker and implements the subscription automatically in the background for your glue code.
@@ -136,9 +135,9 @@ You can also use integrations in certain programming frameworks, like [Spring Ze
 **A subscription for your glue code is opened automatically by the Spring integration:**
 
 ```java
-@ZeebeWorker(type = "serviceA", autoComplete = true)  
-public void handleJobFoo(final JobClient client, final ActivatedJob job) {  
-  // here: business logic that is executed with every job  
+@ZeebeWorker(type = "serviceA", autoComplete = true)
+public void handleJobFoo(final JobClient client, final ActivatedJob job) {
+  // here: business logic that is executed with every job
   // you do not need to call "complete" on the job, as autoComplete is turned on above
 }
 ```
@@ -187,9 +186,9 @@ Typical applications will include multiple pieces of glue code in one codebase.
 
 For example, the onboarding microservice shown in the figure above includes:
 
-* A REST endpoint that starts a process instance (1)
-* The process definition itself (2), probably auto-deployed to the workflow engine during the startup of the application.
-* Glue code subscribing to the two service tasks that shall call a remote REST API (3) and (4).
+- A REST endpoint that starts a process instance (1)
+- The process definition itself (2), probably auto-deployed to the workflow engine during the startup of the application.
+- Glue code subscribing to the two service tasks that shall call a remote REST API (3) and (4).
 
 A job worker will be started automatically as part of the application to handle the subscriptions. In this example, the application is written in Java, but again, it could be [any supported programming language](https://docs.camunda.io/docs/product-manuals/clients/overview).
 

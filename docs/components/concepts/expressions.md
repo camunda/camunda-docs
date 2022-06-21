@@ -8,14 +8,14 @@ Expressions can be used to access variables and calculate values dynamically.
 
 This is particularly useful when [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md) and [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md).
 
-The following attributes of BPMN elements *require* an expression:
+The following attributes of BPMN elements _require_ an expression:
 
 - Sequence flow on an exclusive gateway: [condition](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md#conditions)
 - Message catch event/receive task: [correlation key](/components/modeler/bpmn/message-events/message-events.md#messages)
 - Multi-instance activity: [input collection](/components/modeler/bpmn/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/components/modeler/bpmn/multi-instance/multi-instance.md#collecting-the-output)
 - Input/output variable mappings: [source](variables.md#inputoutput-variable-mappings)
 
-Additionally, the following attributes of BPMN elements can define an expression *optionally*, instead of a static value:
+Additionally, the following attributes of BPMN elements can define an expression _optionally_, instead of a static value:
 
 - Timer catch event: [timer definition](/components/modeler/bpmn/timer-events/timer-events.md#timers)
 - Message catch event/receive task: [message name](/components/modeler/bpmn/message-events/message-events.md#messages)
@@ -284,7 +284,7 @@ cycle(duration("P7D"))
 
 ### List expressions
 
-An element of a list can be accessed by its index. The index starts at `1` with the first element (*not* at `0`).
+An element of a list can be accessed by its index. The index starts at `1` with the first element (_not_ at `0`).
 
 A negative index starts at the end by `-1`. If the index is out of the range of the list,`null` is returned instead:
 

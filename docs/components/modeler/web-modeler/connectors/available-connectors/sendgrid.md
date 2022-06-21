@@ -72,6 +72,7 @@ In our example template we will use the following subject and body:
 Subject:
 Your Camunda Weather Report for {{location}}
 ```
+
 ```text
 Body:
 Hi {{name}},
@@ -142,10 +143,21 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
 
 ![sendgrid email template connector complete properties](../img/connectors-sendgrid-email-template-complete-properties.png)
 
+If you want to provide dynamic content in the email via process variables, you can set them in the **Template Data** field as well:
+
+```text
+= {
+  name: nameVariable,
+  location: locationVariable,
+  weather: weatherVariable,
+  actual-temp: temerature,
+  feel-temp: windChill
+}
+```
+
 :::note
 Now you can simply [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors the run-time is available out of the box in Camunda 8 SaaS.
 :::
-
 
 ## Appendix
 

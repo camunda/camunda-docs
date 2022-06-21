@@ -28,4 +28,4 @@ All non-implementation Java packages (package name does not contain `impl`) of t
 
 ## Other APIs and clients
 
-Currently, we cannot *guarantee* backwards compatibility with other APIs and clients, though we do work to offer backwards compatibility to the best of our ability.
+Currently, we cannot _guarantee_ backwards compatibility with other APIs and clients, though we do work to offer backwards compatibility to the best of our ability.

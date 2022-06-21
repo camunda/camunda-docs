@@ -63,9 +63,9 @@ This also insulates job workers against sudden bursts in traffic. Because worker
 After working on an activated job, a job worker informs Camunda Platform 8 that the job has either `completed` or `failed`.
 
 - When the job worker completes its work, it sends a `complete job` command along with any variables, which in turn is merged into the process instance. This is how the job worker exposes the results of its work.
-- If the job worker can not successfully complete its work, it sends a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker. 
-    - If `remaining retries` is greather than zero, the job is retried and reassigned. 
-    - If `remaining retries` is zero or negative, an incident is raised and the job is not retried until the incident is resolved.
+- If the job worker can not successfully complete its work, it sends a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker.
+  - If `remaining retries` is greather than zero, the job is retried and reassigned.
+  - If `remaining retries` is zero or negative, an incident is raised and the job is not retried until the incident is resolved.
 
 ## Timeouts
 
@@ -73,7 +73,7 @@ If the job is not completed or failed within the configured job activation timeo
 
 A timeout may lead to two different workers working on the same job, possibly at the same time. If this occurs, only one worker successfully completes the job. The other `complete job` command is rejected with a `NOT FOUND` error.
 
-The fact that jobs may be worked on more than once means that Zeebe is an "at least once" system with respect to job delivery and that worker code must be idempotent. In other words, workers __must__ deal with jobs in a way that allows the code to be executed more than once for the same job, all while preserving the expected application state.
+The fact that jobs may be worked on more than once means that Zeebe is an "at least once" system with respect to job delivery and that worker code must be idempotent. In other words, workers **must** deal with jobs in a way that allows the code to be executed more than once for the same job, all while preserving the expected application state.
 
 ## Next steps
 

@@ -6,12 +6,12 @@ description: "This document outlines current boolean functions and a few example
 
 ## not()
 
-* parameters:
-  * `negand`: boolean
-* result: boolean
+- parameters:
+  - `negand`: boolean
+- result: boolean
 
 ```js
-not(true)
+not(true);
 // false
 ```
 
@@ -21,9 +21,9 @@ Checks if a given value is defined. A value is defined if it exists, and it is a
 
 The function can be used to check if a variable or a context entry (e.g. a property of a variable) exists. It allows differentiating between a `null` variable and a value that doesn't exist.
 
-* parameters:
-  * `value`: any
-* result: boolean
+- parameters:
+  - `value`: any
+- result: boolean
 
 ```js
 is defined(1)

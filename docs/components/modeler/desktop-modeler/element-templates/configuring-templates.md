@@ -10,11 +10,9 @@ Element templates are defined as [JSON files](../defining-templates). There are 
 
 New templates will be recognized when reconnecting to Cawemo or on Camunda Modeler reload/restart.
 
-
 #### Example Setup
 
-
-Add a `.json` file to the `resources/element-templates` sub-folder of your local [`{APP_DATA_DIRECTORY}`](../../search-paths#app-data-directory) or [`{USER_DATA_DIRECTORY}`](../../search-paths#user-data-directory) directory. You may have to create the `resources` and `element-templates` folders  yourself.
+Add a `.json` file to the `resources/element-templates` sub-folder of your local [`{APP_DATA_DIRECTORY}`](../../search-paths#app-data-directory) or [`{USER_DATA_DIRECTORY}`](../../search-paths#user-data-directory) directory. You may have to create the `resources` and `element-templates` folders yourself.
 
 For local template discovery, create a `.camunda/element-templates` folder relative in the directory
 or any parent directory of the diagrams you are editing.

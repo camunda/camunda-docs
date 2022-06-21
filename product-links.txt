@@ -40,3 +40,14 @@ https://docs.camunda.io/docs/reference/bpmn-processes/script-tasks/script-tasks/
 https://docs.camunda.io/docs/reference/bpmn-processes/send-tasks/send-tasks/#defining-a-task
 https://docs.camunda.io/docs/reference/bpmn-processes/error-events/error-events/#defining-the-error
 https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events#time-duration
+
+# Zeebe readme
+
+https://docs.camunda.io
+https://docs.camunda.io/docs/components/concepts/what-is-camunda-platform-8/
+https://docs.camunda.io/docs/guides/
+https://docs.camunda.io/docs/components/zeebe/technical-concepts/
+https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-primer/
+https://docs.camunda.io/docs/self-managed/zeebe-deployment/
+https://docs.camunda.io/docs/apis-clients/java-client/
+https://docs.camunda.io/docs/apis-clients/go-client/

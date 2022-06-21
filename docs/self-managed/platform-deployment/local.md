@@ -9,20 +9,16 @@ This page guides you through the manual installation of the Camunda Platform 8 o
 ## Prerequisites
 
 - Operating system:
-  - Linux 
+  - Linux
   - Windows/MacOS (development only, not supported for production)
 - Java Virtual Machine, see [supported environments](/docs/reference/supported-environments/) for version details
 - Elasticsearch, see [supported environments](/docs/reference/supported-environments/) for version details
 
-
 Make sure to configure the web applications to use a port that is available. By default the web applications like Operate and Tasklist listen both to port 8080.
-
-
 
 ## Download a compatible set of Camunda Platform 8 components
 
-Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/zeebe/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions. 
-
+Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/zeebe/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
 
 ## Download and run Elasticsearch
 
@@ -42,9 +38,6 @@ You’ll know Elasticsearch has started successfully when you see a message simi
 ```log
 [INFO ][o.e.l.LicenseService     ] [-IbqP-o] license [72038058-e8ae-4c71-81a1-e9727f2b81c7] mode [basic] - valid
 ```
-
-
-
 
 ## Run Zeebe
 
@@ -73,7 +66,6 @@ Once the Zeebe broker has started, it should produce the following output:
 23:39:13.273 [] [main] INFO  io.camunda.zeebe.broker.system - Starting broker with configuration {
 ```
 
-
 To run Zeebe with the Elasticsearch Exporter that is needed for Operate, Tasklist and Optimize to work, execute the following commands:
 
 ```bash
@@ -87,7 +79,6 @@ You’ll know Zeebe has started successfully when you see a message similar to t
 [partition-0] [0.0.0.0:26501-zb-actors-0] INFO  io.camunda.zeebe.raft - Joined raft in term 0
 [exporter] [0.0.0.0:26501-zb-actors-1] INFO  io.camunda.zeebe.broker.exporter.elasticsearch - Exporter opened
 ```
-
 
 ## Run Operate
 
@@ -119,8 +110,6 @@ If you _have_ deployed processes or created process instances, you'll see them o
 ![operate-dash-with-processes](assets/operate-introduction_light.png)
 
 To update Operate versions, visit the [guide to update Operate](../../components/operate/userguide/updating-operate.md).
-
-
 
 ## Run Tasklist
 
@@ -154,11 +143,9 @@ If you've already developed user tasks in Zeebe, you can see these on the left p
 
 To update Tasklist versions, visit the [guide to update Tasklist](../../components/tasklist/userguide/updating-tasklist.md).
 
-
 ## Run Identity
 
 A local setup of Identity in Camunda Platform 8 is not yet supported out-of-the-box, use [Docker](../docker/) instead.
-
 
 ## Run Optimize
 

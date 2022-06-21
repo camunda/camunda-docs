@@ -27,17 +27,17 @@ POST `/api/public/import`
 
 The following request headers have to be provided with every request:
 
-|Header|Constraints|Value|
-|--- |--- |--- |
-|Authorization|REQUIRED|[Authorization](../authorization)|
+| Header        | Constraints | Value                             |
+| ------------- | ----------- | --------------------------------- |
+| Authorization | REQUIRED    | [Authorization](../authorization) |
 
 ## Query parameters
 
 The following query parameters have to be provided with every request:
 
-|Parameter|Constraints|Value|
-|--- |--- |--- |
-|collectionId|REQUIRED|The ID of the collection for which to retrieve the report IDs.|
+| Parameter    | Constraints | Value                                                          |
+| ------------ | ----------- | -------------------------------------------------------------- |
+| collectionId | REQUIRED    | The ID of the collection for which to retrieve the report IDs. |
 
 ## Request body
 
@@ -51,13 +51,13 @@ The response contains a list of DTOs that specify the ID and entity type (`repor
 
 Possible HTTP response status codes:
 
-|Code|Description|
-|--- |--- |
-|200|Request successful.|
-|400|The provided list of entities is invalid. This can occur if any of the above listed [prerequisites](#prerequisites) are not met. Check the `detailedMessage` of the error response for more information.|
-|401|Secret incorrect or missing in HTTP header. See [Authorization](../authorization) on how to authenticate.|
-|404|The given target collection ID does not exist.|
-|500|Some error occurred while processing the request, best check the Optimize log.|
+| Code | Description                                                                                                                                                                                              |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 200  | Request successful.                                                                                                                                                                                      |
+| 400  | The provided list of entities is invalid. This can occur if any of the above listed [prerequisites](#prerequisites) are not met. Check the `detailedMessage` of the error response for more information. |
+| 401  | Secret incorrect or missing in HTTP header. See [Authorization](../authorization) on how to authenticate.                                                                                                |
+| 404  | The given target collection ID does not exist.                                                                                                                                                           |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                                                                                                                           |
 
 ## Example
 
@@ -68,6 +68,7 @@ Assuming you want to import a report and a dashboard into the collection with ID
 POST `/api/public/import?collectionId=123`
 
 ##### Request header
+
 `Authorization: Bearer mySecret`
 
 ##### Request body

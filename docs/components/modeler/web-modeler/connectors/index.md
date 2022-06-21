@@ -5,7 +5,7 @@ description: Introduction to connectors in Web Modeler
 ---
 
 To automate complex [business processes](/components/concepts/processes.md) using Camunda Platform 8, a user has to implement the business logic using the concept of [job workers](/components/concepts/job-workers.md). Creating these job workers requires an initial investment and effort to get started with Camunda Platform 8. At the same time, some use cases require the same business logic to be implemented. The concept of connectors is to provide a solution to reduce the onboarding time enables fast prototyping and solves everyday use cases in Camunda Platform 8.
- 
+
 A connector is a reusable building block that works out of the box. Each connector task can be configured with domain specific parameters without implementing custom business logic. In the following documentation, you can learn more about how to [use connectors](use-connectors.md) and which connectors are [available out-of-the-box](available-connectors/index.md).
 
 The concept of a connector consists of two parts: the business logic is implemented as a [job worker](/components/concepts/job-workers.md), and the user interface during modeling is provided using an [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md).

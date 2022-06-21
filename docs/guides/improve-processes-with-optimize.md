@@ -19,7 +19,7 @@ For an in-depth overview of Optimize’s capabilities, visit our [Optimize docum
 
 ## Set up
 
-Within Camunda Platform 8, you can launch Optimize from Console — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Platform 8 account](./getting-started/create-camunda-cloud-account.md), [set up client connection credentials](./getting-started/setup-client-connection-credentials.md), and [connected to your cluster](./getting-started/connect-to-your-cluster.md) before getting started with Optimize for SaaS users.
+Within Camunda Platform 8, you can launch Optimize from Console — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Platform 8 account](./create-account.md) before getting started with Optimize for SaaS users.
 
 :::note
 So long as you are operating with [Camunda Platform 8 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. From here, Optimize requires no additional set up. You can immediately obtain process insights as Optimize already continuously collects data for analysis.
@@ -35,7 +35,7 @@ You can begin analyzing reports and dashboards with just two process versions. H
 
 ## Create and analyze dashboards
 
-Within Optimize, **reports** are based on a *single* visualization, similar to a single chart or graph. **Dashboards** are aggregations of these visualizations, similar to a full spreadsheet of data collections, or a combination of several comparative charts and graphs. **Collections** are groups of these data sets, similar to project folders for organizational purposes where we can nest a series of dashboards and/or reports within.
+Within Optimize, **reports** are based on a _single_ visualization, similar to a single chart or graph. **Dashboards** are aggregations of these visualizations, similar to a full spreadsheet of data collections, or a combination of several comparative charts and graphs. **Collections** are groups of these data sets, similar to project folders for organizational purposes where we can nest a series of dashboards and/or reports within.
 
 Once you open Optimize, you’ll first view the homepage for these collections, dashboards, and reports.
 
@@ -66,7 +66,7 @@ Click the **Share** tab to share your dashboard. Toggle to **Enable sharing**, a
 To create a custom report based on a key performance indicator (KPI) you’d like to analyze, and to incorporate this report into a dashboard, follow the steps below:
 
 1. On the right side of the **Home** page, select **Create New > New Report**. Here we’ll take a look at a single process, though you can also view data from multiple processes.
-2. Click the text box under **Select Process** and select the process you’d like to analyze. 
+2. Click the text box under **Select Process** and select the process you’d like to analyze.
 3. Select the type of report you’d like to use on the right side of the **Create new Report** box. As with dashboards, Optimize offers preconfigured templates such as heatmaps and tables. We’ll begin with a heatmap.
 4. Click **Create Report**.
 5. Set up and customize your report. Begin by naming your report in the text box at the top of the page, pre-filled with **New Report**.
@@ -129,6 +129,7 @@ Here, we’ve selected a process flow, gateway, and endpoint for a breakdown of 
 ## Additional resources and next steps
 
 We’ve only touched the surface of Optimize. The component is full of additional ways to analyze your data for effective process improvement. We recommend taking a look at several resources to catch up on Optimize’s latest release, new features, and many usage examples:
+
 - [Camunda Optimize 3.6.0 Release](https://camunda.com/blog/2021/10/camunda-optimize-360-released/)
 - [The Ultimate Guide to Solving Bottlenecks with Camunda: Part 1](https://camunda.com/blog/2021/10/the-ultimate-guide-to-solving-bottlenecks-with-camunda-part-1/)
 - [Camunda Optimize examples](https://github.com/camunda/camunda-optimize-examples)

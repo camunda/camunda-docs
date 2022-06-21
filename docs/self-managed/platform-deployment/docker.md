@@ -13,12 +13,12 @@ We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All 
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
 :::
 
-| Component | Docker image           | Link to configuration options                                                                                                                              |
-| --------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe) | [Environment variables](../../zeebe-deployment/configuration/environment-variables/) |
-| Operate   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate) | [Operate configuration](../../operate-deployment/configuration) |
-| Tasklist  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist) | [Tasklist configuration](../../tasklist-deployment/configuration) |
-| Identity  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity) | [Configuration variables](../../identity/deployment/configuration-variables/) |
+| Component | Docker image                                                         | Link to configuration options                                                                         |
+| --------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Zeebe     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)       | [Environment variables](../../zeebe-deployment/configuration/environment-variables/)                  |
+| Operate   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)   | [Operate configuration](../../operate-deployment/configuration)                                       |
+| Tasklist  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist) | [Tasklist configuration](../../tasklist-deployment/configuration)                                     |
+| Identity  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity) | [Configuration variables](../../identity/deployment/configuration-variables/)                         |
 | Optimize  | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize) | [Environment variables](../../optimize-deployment/install-and-start/#available-environment-variables) |
 
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
@@ -79,25 +79,25 @@ Available environment variables:
 
 Some configuration properties are optional and have default values. See a description of these properties and their default values in the table below:
 
-Name | Description | Default value
------|-------------|--------------
-SPRING_PROFILES_ACTIVE | Starts Optimize in Self-Managed mode. |
-CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL | The URL at which Identity can be accessed by Optimize. |
-CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL | The URL at which the Identity auth provider can be accessed by Optimize. This should match the configured provider in Identity and is to be used for container to container communication. |
-CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID | The Client ID used to register Optimize with Identity. |
-CAMUNDA_OPTIMIZE_IDENTITY_CLIENTSECRET | The Secret used when registering Optimize with Identity. |
-CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE | The audience used when registering Optimize with Identity. |
-OPTIMIZE_ELASTICSEARCH_HOST | The address/hostname under which the Elasticsearch node is available. | localhost
-OPTIMIZE_ELASTICSEARCH_HTTP_PORT | The port number used by Elasticsearch to accept HTTP connections. | 9200
-CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED| Determines if `same-site` is enabled for Optimize cookies. This must be set to `false`. | true
-CAMUNDA_OPTIMIZE_ENTERPRISE | This should only be set to `true` if an Enterprise License has been acquired. | true
-CAMUNDA_OPTIMIZE_ZEEBE_ENABLED | Enables import of Zeebe data in Optimize. | false
-CAMUNDA_OPTIMIZE_ZEEBE_NAME | The record prefix for exported Zeebe records. | zeebe-record
-CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT | The number of partitions configured in Zeebe. | 1
-CAMUNDA_OPTIMIZE_SHARING_ENABLED | Enable/disable the possibility to share reports and dashboards. | true
-CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN | Disables the logout button (logout is handled by Identity). | true
-SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation. | null
-OPTIMIZE_API_ACCESS_TOKEN | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set. | null
+| Name                                                    | Description                                                                                                                                                                                | Default value |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| SPRING_PROFILES_ACTIVE                                  | Starts Optimize in Self-Managed mode.                                                                                                                                                      |
+| CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL                    | The URL at which Identity can be accessed by Optimize.                                                                                                                                     |
+| CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL            | The URL at which the Identity auth provider can be accessed by Optimize. This should match the configured provider in Identity and is to be used for container to container communication. |
+| CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID                      | The Client ID used to register Optimize with Identity.                                                                                                                                     |
+| CAMUNDA_OPTIMIZE_IDENTITY_CLIENTSECRET                  | The Secret used when registering Optimize with Identity.                                                                                                                                   |
+| CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE                      | The audience used when registering Optimize with Identity.                                                                                                                                 |
+| OPTIMIZE_ELASTICSEARCH_HOST                             | The address/hostname under which the Elasticsearch node is available.                                                                                                                      | localhost     |
+| OPTIMIZE_ELASTICSEARCH_HTTP_PORT                        | The port number used by Elasticsearch to accept HTTP connections.                                                                                                                          | 9200          |
+| CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED | Determines if `same-site` is enabled for Optimize cookies. This must be set to `false`.                                                                                                    | true          |
+| CAMUNDA_OPTIMIZE_ENTERPRISE                             | This should only be set to `true` if an Enterprise License has been acquired.                                                                                                              | true          |
+| CAMUNDA_OPTIMIZE_ZEEBE_ENABLED                          | Enables import of Zeebe data in Optimize.                                                                                                                                                  | false         |
+| CAMUNDA_OPTIMIZE_ZEEBE_NAME                             | The record prefix for exported Zeebe records.                                                                                                                                              | zeebe-record  |
+| CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT                  | The number of partitions configured in Zeebe.                                                                                                                                              | 1             |
+| CAMUNDA_OPTIMIZE_SHARING_ENABLED                        | Enable/disable the possibility to share reports and dashboards.                                                                                                                            | true          |
+| CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN                       | Disables the logout button (logout is handled by Identity).                                                                                                                                | true          |
+| SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI   | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation.                                              | null          |
+| OPTIMIZE_API_ACCESS_TOKEN                               | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set.                                  | null          |
 
 Like for example this `docker-compose` configuration:
 

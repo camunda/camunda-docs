@@ -1,5 +1,5 @@
 ---
-id: feel-context-expressions 
+id: feel-context-expressions
 title: Context expressions
 description: "This document outlines context expressions and examples."
 ---
@@ -48,7 +48,7 @@ A context value can embed other context values.
 ### Get entry or path
 
 ```js
-a.b
+a.b;
 ```
 
 Accesses the entry with the key `b` of the context `a`. The path is separated by `.`.
@@ -78,21 +78,21 @@ If the value of the entry `b` is also a context, the path can be chained (i.e. `
 
 ### Filter
 
-Filters a list of context elements. It is a special kind of the [filter expression](/docs/components/modeler/feel/language-guide/feel-list-expressions#filter) for lists.  
+Filters a list of context elements. It is a special kind of the [filter expression](/docs/components/modeler/feel/language-guide/feel-list-expressions#filter) for lists.
 
 While filtering, the entries of the current context element can be accessed by their key.
 
 ```js
-[ 
+[
   {
-    a: "p1", 
-    b: 5
-  },  
+    a: "p1",
+    b: 5,
+  },
   {
-    a: "p2", 
-    b: 10
-  } 
-][b > 7] 
+    a: "p2",
+    b: 10,
+  },
+][b > 7];
 // {a: "p2", b: 10}
 ```
 
@@ -105,12 +105,12 @@ list containing the values of the context elements for the given key.
 [
   {
     a: "p1",
-    b: 5
+    b: 5,
   },
   {
     a: "p2",
-    b: 10
-  }
-].a     
+    b: 10,
+  },
+].a;
 // ["p1", "p2"]
 ```

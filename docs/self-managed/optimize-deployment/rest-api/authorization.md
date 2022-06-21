@@ -3,7 +3,7 @@ id: authorization
 title: "Authorization"
 ---
 
-Most requests of the Public REST API need to include an authorization token 
+Most requests of the Public REST API need to include an authorization token
 as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header.
 
 Given a valid token `mySecret`, the header would need to be set as follows:

@@ -100,7 +100,7 @@ export class TaskDto {
   completionTime: string | null;
   assignee: string | null;
   variables: Variable[];
-  taskState: 'CREATED' | 'COMPLETED' | 'CANCELED';
+  taskState: "CREATED" | "COMPLETED" | "CANCELED";
   sortValues: [string, string];
   isFirst: boolean | null;
   formKey: string | null;

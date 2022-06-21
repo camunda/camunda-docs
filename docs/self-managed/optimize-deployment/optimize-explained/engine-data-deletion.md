@@ -14,8 +14,8 @@ The subsections below describe the ways in which Optimize handles data deletion 
 
 There are two possible ways of doing this:
 
-* **Historic Cleanup**: If you have enabled the [history cleanup](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/#history-cleanup), historic data will be removed in the engine based on configurable time-to-live.
-* **Manual Deletion**: You trigger a [manual deletion](https://docs.camunda.org/manual/latest/reference/rest/history/process-instance/post-delete/), e.g. via REST-API.
+- **Historic Cleanup**: If you have enabled the [history cleanup](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/#history-cleanup), historic data will be removed in the engine based on configurable time-to-live.
+- **Manual Deletion**: You trigger a [manual deletion](https://docs.camunda.org/manual/latest/reference/rest/history/process-instance/post-delete/), e.g. via REST-API.
 
 Optimize can handle this case as it imports the old data first, and once it has imported everything, it will only add to its database new data streaming in.
 

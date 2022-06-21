@@ -3,6 +3,7 @@ id: message-correlation
 title: Message Correlation
 description: "Message correlation allows you to target a running workflow with a state update from an external system asynchronously."
 ---
+
 <span class="badge badge--intermediate">Intermediate</span>
 <span class="badge badge--medium">Time estimate: 20 minutes</span>
 
@@ -14,7 +15,7 @@ description: "Message correlation allows you to target a running workflow with a
 
 ## Message correlation
 
-Message correlation is a powerful feature in Camunda Platform 8. It allows you to target a running workflow with a state update from an external system asynchronously. 
+Message correlation is a powerful feature in Camunda Platform 8. It allows you to target a running workflow with a state update from an external system asynchronously.
 
 This tutorial uses the [Node.js client](https://github.com/camunda-community-hub/zeebe-client-node-js), but it serves to illustrate message correlation concepts that are applicable to all language clients.
 
@@ -43,7 +44,7 @@ A crucial piece here is the **Subscription Correlation Key**. In a running insta
     });
 ```
 
- The concrete value of the message `correlationKey` is matched against running workflow instances by comparing the supplied value against the `orderId` variable of running instances subscribed to this message. This is the relationship established by setting the `correlationKey` to `orderId` in the message catch event in the BPMN.
+The concrete value of the message `correlationKey` is matched against running workflow instances by comparing the supplied value against the `orderId` variable of running instances subscribed to this message. This is the relationship established by setting the `correlationKey` to `orderId` in the message catch event in the BPMN.
 
 ## Running the demonstration
 
@@ -53,39 +54,39 @@ To run the demonstration, take the following steps:
 
 2. Install dependencies:
 
-  :::note
+:::note
 
-  This guides requires `npm` version 6.
+This guides requires `npm` version 6.
 
-  :::
+:::
 
-  ```
-  npm i && npm i -g ts-node typescript
-  ```
+```
+npm i && npm i -g ts-node typescript
+```
 
-3. In another terminal, start the Zeebe Broker in addition to  [simple-monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor).
+3. In another terminal, start the Zeebe Broker in addition to [simple-monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor).
 
 4. Deploy the workflow and start an instance:
 
- ```
- ts-node start-workflow.ts
- ```
+```
+ts-node start-workflow.ts
+```
 
 This starts a workflow instance with the `orderId` set to 345:
 
- ```typescript
+```typescript
 await zbc.createProcessInstance("test-messaging", {
-      orderId: "345",
-      customerId: "110110",
-      paymentStatus: "unpaid"
-    })
- ```
+  orderId: "345",
+  customerId: "110110",
+  paymentStatus: "unpaid",
+});
+```
 
 5. Open Simple Monitor at [http://localhost:8082](http://localhost:8082).
 
 6. Click on the workflow instance. You will see the current state of the workflow:
 
- ![workflow state](img/message-correlation-workflow-state.png)
+![workflow state](img/message-correlation-workflow-state.png)
 
 The numbers above the BPMN symbols indicate that no tokens are waiting at the start event, and one has passed through. One token is waiting at the **Collect Money** task, and none have passed through.
 
@@ -134,14 +135,14 @@ Messages are buffered on the broker, so your external systems can emit messages 
 For example, to send a message buffered for 10 minutes with the JavaScript client:
 
 ```typescript
-  zbc.publishMessage({
-    correlationKey: "345",
-    name: "Money Collected",
-    variables: {
-      paymentStatus: "paid"
-    },
-    timeToLive: 600000
-  });
+zbc.publishMessage({
+  correlationKey: "345",
+  name: "Money Collected",
+  variables: {
+    paymentStatus: "paid",
+  },
+  timeToLive: 600000,
+});
 ```
 
 To see it in action, take the following steps:
@@ -169,17 +170,17 @@ Note that the message is correlated to the workflow instance, even though it arr
 
 A couple of common gotchas:
 
-- The `correlationKey` in the BPMN message definition is the name of the workflow variable to match against. The `correlationKey` in the message is the concrete value to match against that variable in the workflow instance. 
+- The `correlationKey` in the BPMN message definition is the name of the workflow variable to match against. The `correlationKey` in the message is the concrete value to match against that variable in the workflow instance.
 
- - The message subscription _is not updated after it is opened_. That is not an issue in the case of a message catch event. However, for boundary message events (both interrupting and non-interrupting,) the subscription is opened _as soon as the token enters the bounding subprocess_. If any service task modifies the `orderId` value inside the subprocess, the subscription is not updated.  
- 
- For example, the interrupting boundary message event in the following example will not be correlated on the updated value, because the subscription is opened when the token enters the subprocess, using the value at that time:
- 
- ![not correlating](img/message-correlation-not-like-this.png)
- 
- If you need a boundary message event correlated on a value modified somewhere in your process, put the boundary message event in a subprocess after the task that sets the variable. The message subscription for the boundary message event will open when the token enters the subprocess, with the current variable value.
+- The message subscription _is not updated after it is opened_. That is not an issue in the case of a message catch event. However, for boundary message events (both interrupting and non-interrupting,) the subscription is opened _as soon as the token enters the bounding subprocess_. If any service task modifies the `orderId` value inside the subprocess, the subscription is not updated.
 
- ![correlating](img/message-correlation-like-this.png)
+For example, the interrupting boundary message event in the following example will not be correlated on the updated value, because the subscription is opened when the token enters the subprocess, using the value at that time:
+
+![not correlating](img/message-correlation-not-like-this.png)
+
+If you need a boundary message event correlated on a value modified somewhere in your process, put the boundary message event in a subprocess after the task that sets the variable. The message subscription for the boundary message event will open when the token enters the subprocess, with the current variable value.
+
+![correlating](img/message-correlation-like-this.png)
 
 ## Summary
 
