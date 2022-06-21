@@ -20,7 +20,7 @@ Head over to our documentation on [M2M tokens](/self-managed/concepts/authentica
 
 ### Generate token
 
-In our example, the Keycloak instance that supports Identity can be found via `http://localhost:18080`. 
+In our example, the Keycloak instance that supports Identity can be found via `http://localhost:18080`.
 This may be different for you so please adjust the host name (and port if required) as appropriate.
 
 To request a token we use the following cURL command replacing the placeholders with your applications

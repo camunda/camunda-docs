@@ -5,11 +5,11 @@ sidebar_label: "Machine-to-machine (M2M) tokens"
 ---
 
 A machine-to-machine, or as they are also known M2M, token is a token which is requested by one service, so it can
-communicate with another service acting as itself. 
+communicate with another service acting as itself.
 
 In [Identity](/self-managed/identity/what-is-identity.md) we provide the ability to assign permissions to
 an application. This functionality allows an application to perform the `client_credentials` flow to
-retrieve a JWT token with permissions. 
+retrieve a JWT token with permissions.
 
 The token generated can then be used to communicate with other applications in the Camunda Platform without
 the need for user intervention.

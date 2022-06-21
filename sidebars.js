@@ -425,9 +425,7 @@ module.exports = {
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ],
-          "Authentication": [
-            "self-managed/concepts/authentication/m2m-tokens",
-          ]
+          Authentication: ["self-managed/concepts/authentication/m2m-tokens"],
         },
         "self-managed/concepts/exporters",
       ],
