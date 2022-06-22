@@ -30,7 +30,7 @@ Once logged in to your Camunda Platform 8 account, take the following steps:
 
 1. Click the **Modeler** tab at the top of the page.
 2. Click **New project** and name your project. For this example, we'll name our project "Deciding what to wear".
-3. Click **you New > DMN Diagram** and name your diagram. We'll name our diagram "Picking an outfit".
+3. Click **New > DMN Diagram** and name your diagram. We'll name our diagram "Picking an outfit".
 
 ## DMN in action
 
@@ -50,7 +50,7 @@ Now that our DRD is complete, let's build out the DMN table for our decision.
 
 ![dmn blank table](./img/dmn-table-blank.png)
 
-Here, we'll give a set of rules among weather and the activity to determine what we wear. For example, when a certain value is true (or in this case, when two values are true among the weather and the activity,) then one outcome is determined for clothes to wear.
+Here, we'll give a set of rules among weather and the activity to determine what we wear. For example, when a certain value is true (or in this case, when two values are true among the weather and the activity), then one outcome is determined for clothes to wear.
 
 :::note
 At any time, you can click **Edit DRD** to return to your DRD and continue moving elements around on the palette.
