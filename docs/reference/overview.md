@@ -5,7 +5,7 @@ sidebar_label: Overview
 slug: /reference/
 ---
 
-This section contains general reference material for Camunda Cloud.
+This section contains general reference material for Camunda Platform 8.
 
 ## Security, support, & license information
 
@@ -19,5 +19,4 @@ This section contains general reference material for Camunda Cloud.
 
 ## Additional resources
 
-- [FEEL expressions](feel/what-is-feel.md)
 - [Glossary](glossary.md)

@@ -4,34 +4,34 @@ title: Getting familiar with Operate
 description: "An overview of navigating Operate and its features"
 ---
 
-This section and the next section, [variables and incidents](./resolve-incidents-update-variables.md), assumes you’ve deployed a process to Zeebe and created at least one process instance. 
+This section and the next section, [variables and incidents](./resolve-incidents-update-variables.md), assumes you’ve deployed a process to Zeebe and created at least one process instance.
 
-If you’re not sure how to deploy processes or create instances, visit our [getting started tutorial](./guides/getting-started/model-your-first-process.md).
+If you’re not sure how to deploy processes or create instances, visit our [Guides section](/guides/introduction-to-camunda-cloud.md).
 
-In the following sections, we’ll use the same [`order-process.bpmn`](https://docs.camunda.io/assets/files/order-process-2ae29e9d889a3d640464be250206d550.bpmn/) process model from the getting started tutorial. 
+In the following sections, we’ll use the same [`order-process.bpmn`](https://docs.camunda.io/assets/files/order-process-2ae29e9d889a3d640464be250206d550.bpmn/) process model.
 
 ## View a deployed process
 
 To view a deployed process, take the following steps:
 
-1. In the **Instances by Process** panel on your dashboard, note the list of your deployed processes and running instances. 
+1. In the **Process Instances by Name** panel on your dashboard, note the list of your deployed processes and running instances.
 
-![operate-view-process](../img/operate-introduction_light.png)
+![operate-view-process](../img/operate-introduction.png)
 
-2. When you click on the name of a deployed process in the **Instances by Process** panel, you’ll navigate to a view of that process model and all running instances.
+2. When you click on the name of a deployed process in the **Process Instances by Name** panel, you’ll navigate to a view of that process model and all running instances.
 
-![operate-view-process](./img/operate-view-process_light.png)
+![operate-view-process](./img/operate-view-process.png)
 
-3. From this **Instances** tab, you can cancel a single running process instance. 
+3. From this **Processes** tab, you can cancel a single running process instance.
 
-![operate-cancel-process-instance](./img/operate-view-process-cancel_light.png)
+![operate-cancel-process-instance](./img/operate-view-process-cancel.png)
 
 ## Inspect a process instance
 
-Running process instances appear in the **Instances** section below the process model. To inspect a specific instance, click on the instance id. 
+Running process instances appear in the **Instances** section below the process model. To inspect a specific instance, click on the instance id.
 
-![operate-inspect-instance](./img/operate-process-instance-id_light.png)
+![operate-inspect-instance](./img/operate-process-instance-id.png)
 
 Here, see details about the process instance, including the instance history and the variables attached to the instance.
 
-![operate-view-instance-detail](./img/operate-view-instance-detail_light.png)
+![operate-view-instance-detail](./img/operate-view-instance-detail.png)

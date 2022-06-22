@@ -73,7 +73,7 @@ When it comes to editing individual settings, two data types are worth mentionin
   - Machine-friendly format: size in bytes as long
 - Timeouts/intervals (e.g. `requestTimeout`)
   - Human-friendly format: `15s` (or `m, h`)
-  - Machine-friendly format: either duration in milliseconds as long, or [ISO-8601 duration](ttps://en.wikipedia.org/wiki/ISO_8601#Durations) format (e.g. `PT15S`)
+  - Machine-friendly format: either duration in milliseconds as long, or [ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) format (e.g. `PT15S`)
 
 ## Passing configuration files to Zeebe
 
@@ -98,11 +98,11 @@ We recommend not to use `SPRING_CONFIG_LOCATION` as this will replace all existi
 
 If you specify `SPRING_CONFIG_LOCATION`, specify it like this:
 
- ```shell script
- export SPRING_CONFIG_LOCATION='classpath:/,file:./[path to config file]'
- ```
+```shell script
+export SPRING_CONFIG_LOCATION='classpath:/,file:./[path to config file]'
+```
 
- This will ensure the defaults defined in the classpath resources will be used (unless explicitly overwritten by the configuration file you provide). If you omit the defaults defined in the classpath, some features may be disabled or will not be configured properly.
+This will ensure the defaults defined in the classpath resources will be used (unless explicitly overwritten by the configuration file you provide). If you omit the defaults defined in the classpath, some features may be disabled or will not be configured properly.
 
 ## Verifying configuration
 

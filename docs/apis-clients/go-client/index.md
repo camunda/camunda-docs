@@ -14,7 +14,7 @@ module github.com/zb-user/zb-example
 
 go 1.17
 
-require github.com/camunda-cloud/zeebe/clients/go v1.2.9
+require github.com/camunda/zeebe/clients/go/v8 v8.0.0
 ```
 
 ## Bootstrapping
@@ -27,7 +27,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
+    "github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
 )
 
 func main() {
@@ -76,7 +76,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
 
 Given these environment variables, you can instantiate the client as follows:
 
@@ -86,7 +86,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
+    "github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
     "os"
 )
 

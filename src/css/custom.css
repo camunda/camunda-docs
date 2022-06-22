@@ -5,7 +5,6 @@
  * work well for content-centric websites.
  */
 
-
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #ff1f00;
@@ -35,23 +34,42 @@ body {
 }
 
 .hero--primary {
-  background-image: url("/img/Camunda_Master_Colours_RGB.png");
-  background-color: transparent;
+  background-color: #000;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .button--hero {
-  background-color: #fff;
+  background-color: #fc5d0d;
+  border-color: #fc5d0d;
+  color: #fff !important;
+  transition: all 0.3s;
 }
 
 .button--hero:hover {
-  background-color: #e6e7e8;
+  background-color: transparent;
+  border-color: #fc5d0d;
+  color: #fff !important;
+  transform: translateY(-8px);
+  transition: all 0.3s;
+}
+
+.sign-up {
+  color: #fff !important;
+  border-color: #fc5d0d;
+  margin: 1em;
+  transition: all 0.3s;
+}
+
+.sign-up:hover {
+  color: #fff !important;
+  background-color: #fc5d0d;
+  transform: translateY(-8px);
+  transition: all 0.3s ease;
 }
 
 .osano-footer-link-docu {
   color: var(--ifm-color-link-footer);
-
 }
 
 .hero--secondary {
@@ -64,41 +82,48 @@ body {
 
 .osano-cm-widget svg {
   display: none;
-  }
-  .osano-cm-widget svg {
+}
+.osano-cm-widget svg {
   display: none;
-  }
-  .osano-cm-widget:focus,
-  .osano-cm-widget:hover {
+}
+.osano-cm-widget:focus,
+.osano-cm-widget:hover {
   opacity: 1;
   transform: none;
-  }
-  .osano-cm-widget:active {
+  transition: all 0.3s ease;
+}
+.osano-cm-widget:active {
   transform: translateY(1px);
-  }
-  .osano-cm-link {
-  color: #002f66 !important;}
-  .osano-cm-close {
-    background: transparent !important;}
-  div.osano-cm-info__info-views.osano-cm-info-views.osano-cm-info-views--position_0 > div > ul > li:last-of-type {
-      display: none;
-  }
+  transition: all 0.3s ease;
+}
+.osano-cm-link {
+  color: #002f66 !important;
+}
+.osano-cm-close {
+  background: transparent !important;
+}
+div.osano-cm-info__info-views.osano-cm-info-views.osano-cm-info-views--position_0
+  > div
+  > ul
+  > li:last-of-type {
+  display: none;
+}
 
 /* style SVG images of the BPMN coverage page */
-svg.implemented [fill="#333"]{
-  fill:#11c399
+svg.implemented [fill="#333"] {
+  fill: #11c399;
 }
 
-svg.implemented [stroke="#333"]{
-  stroke:#11c399
+svg.implemented [stroke="#333"] {
+  stroke: #11c399;
 }
 
-svg.implemented:hover [fill="#333"]{
-  fill:#14d890;
+svg.implemented:hover [fill="#333"] {
+  fill: #14d890;
 }
 
-svg.implemented:hover [stroke="#333"]{
-  stroke:#14d890;
+svg.implemented:hover [stroke="#333"] {
+  stroke: #14d890;
 }
 
 .bpmn-symbol-container a {
@@ -112,62 +137,62 @@ svg.implemented:hover [stroke="#333"]{
 }
 
 .badge--beginner {
-  background-color: #FF8B00;
-  color: #FFFFFF;
+  background-color: #ff8b00;
+  color: #ffffff;
 }
 
 .badge--intermediate {
-  background-color: #FF5400;
-  color: #FFFFFF;
+  background-color: #ff5400;
+  color: #ffffff;
 }
 
 .badge--advanced {
-  background-color: #FF1F00;
-  color: #FFFFFF;
+  background-color: #ff1f00;
+  color: #ffffff;
 }
 
 .badge--short {
-  background-color: #14D890;
-  color: #FFFFFF;
+  background-color: #14d890;
+  color: #ffffff;
 }
 
 .badge--medium {
-  background-color: #0BA7B9;
-  color: #FFFFFF;
+  background-color: #0ba7b9;
+  color: #ffffff;
 }
 
 .badge--long {
-  background-color: #0075FF;
-  color: #FFFFFF;
+  background-color: #0075ff;
+  color: #ffffff;
 }
 
 .badge--platform {
-  background-color: #FC5D0D;
-  color: #FFFFFF;
+  background-color: #fc5d0d;
+  color: #ffffff;
   margin-bottom: 1em;
 }
 .badge--cloud {
-  background-color: #26D07C;
+  background-color: #26d07c;
   color: #000000;
   margin-bottom: 1em;
 }
 
-navbar .navbar .navbar__link[href*=self-managed] {
+navbar .navbar .navbar__link[href*="self-managed"] {
   font-size: 0;
   padding: 4px;
   margin: 0 4px;
 }
 
- .menu__link[href*=self-managed]:hover{
-  color: #14D890;
- }
+.menu__link[href*="self-managed"]:hover {
+  color: #14d890;
+}
 
-.navbar .navbar__link[href*=self-managed]:hover{
-  color: #14D890;
- }
+.navbar .navbar__link[href*="self-managed"]:hover {
+  color: #14d890;
+}
 
-.navbar .navbar__link[href*=self-managed]:before {
-  content: '';
+.navbar .navbar__link[href*="self-managed"]:before {
+  content: "";
   display: block;
   width: 25px;
   height: 25px;
@@ -175,56 +200,112 @@ navbar .navbar .navbar__link[href*=self-managed] {
   float: left;
 }
 
-.navbar .navbar__link[href*=self-managed]:before {
-  background-image: url('../../static/img/self-managed.png');
+.navbar .navbar__link[href*="self-managed"]:before {
+  background-image: url("../../static/img/self-managed.png");
   margin-right: 2px;
 }
 
-.sign-up{
- color: #fff !important;
- margin: 1em;
+/* Between mobile and desktop sizes, the nav bar gets a little scrunchy. Scale things down a bit to make more space. */
+@media screen and (min-width: 996px) and (max-width: 1140px) {
+  .navbar .navbar__title,
+  .navbar .navbar__link {
+    font-size: 0.9em;
+  }
+
+  .navbar .navbar__item {
+    padding: var(--ifm-navbar-item-padding-vertical)
+      calc(0.5 * var(--ifm-navbar-item-padding-horizontal));
+  }
+
+  .navbar .navbar__link[href*="self-managed"]:before {
+    width: 23px;
+    height: 23px;
+  }
 }
 
-.sign-up:hover{
-  color: #000 !important;
- }
-
-.get-started:hover{
-  background-color:#000;
+.get-started-use-case {
+  background-color: #042b1d;
   color: #fff;
-  --ifm-button-border-color: #000;
+  border-color: #042b1d;
+  transition: all 0.3s ease;
 }
-  
+
+.get-started-use-case:hover {
+  background-color: transparent;
+  color: #000 !important;
+  border-color: #000;
+  transform: translateY(-8px);
+  transition: all 0.3s ease;
+}
+
+.get-started-use-case-2 {
+  background-color: transparent;
+  color: #042b1d !important;
+  border-color: #042b1d;
+  margin: 1em;
+  transition: all 0.3s ease;
+}
+
+.get-started-use-case-2:hover {
+  background-color: #000;
+  color: #fff !important;
+  border-color: #000;
+  transform: translateY(-8px);
+  transition: all 0.3s ease;
+}
+
+.component-title {
+  text-align: center;
+}
+
+.component-desc {
+  text-align: center;
+}
+
+.component-block {
+  transition: all 0.3s ease;
+}
+
+.component-block:hover {
+  transform: translateY(-8px);
+  transition: all 0.3s ease;
+}
+
+div[class^="announcementBar_"] {
+  font-size: 120%;
+  padding: 1em;
+}
+
 /* Styles for BPMN.io integration and callouts in these models */
 .bpmn-model {
   position: relative;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   margin-bottom: 15px;
   padding: 10px;
   overflow: hidden;
 }
 .callout {
-  display:inline-block;
-  color:#fff!important;
-  background-color:rgba(0,0,0,.8);
-  -webkit-border-radius:100px;
-  border-radius:100px;
-  text-align:center;
-  font-size:.75em;
-  width:1.67em;
-  height:1.67em;
-  line-height:1.67em;
-  font-style:normal;
+  display: inline-block;
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  text-align: center;
+  font-size: 0.75em;
+  width: 1.67em;
+  height: 1.67em;
+  line-height: 1.67em;
+  font-style: normal;
   font-weight: bold;
   /*margin-block-end: 1em; leads to wired effects when callout has multiple lines*/
   margin-inline-end: 0.75em;
 }
 .thumbs-down-example {
-  border: 3px solid #BD0100;
+  border: 3px solid #bd0100;
   padding-bottom: 0px;
 }
 .thumbs-down {
-  color: #BD0100 !important;
+  color: #bd0100 !important;
   font-size: xx-large;
   position: absolute;
   z-index: 10;
@@ -233,7 +314,7 @@ span.callout + p {
   display: inline;
   margin: 0 0 1.25rem;
 }
-span.callout + p::after{
+span.callout + p::after {
   content: "\a";
   white-space: pre;
 }

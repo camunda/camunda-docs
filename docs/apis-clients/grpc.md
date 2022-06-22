@@ -2,13 +2,10 @@
 id: grpc
 title: "Zeebe API (gRPC)"
 description: "Zeebe clients use gRPC to communicate with the cluster."
+keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
 [Zeebe](../components/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
-
-:::note
-This specification still contains references to YAML workflows. This is a [deprecated feature](./reference/announcements.md) and will eventually be removed.
-:::
 
 ## Gateway service
 
@@ -272,48 +269,47 @@ Returned if:
 - The given variables argument is not a valid JSON document; it is expected to be a valid
   JSON document where the root node is an object.
 
-### `DeployProcess` RPC
+### `DeployResource` RPC
 
-Deploys one or more processes to Zeebe. Note that this is an atomic call,
-i.e. either all processes are deployed, or none of them are.
+Deploys one or more resources (e.g. processes or decision models) to Zeebe.
+Note that this is an atomic call, i.e. either all resources are deployed, or none of them are.
 
-#### Input: `DeployProcessRequest`
+#### Input: `DeployResourceRequest`
 
 ```protobuf
-message DeployProcessRequest {
-  // List of process resources to deploy
-  repeated ProcessRequestObject processes = 1;
+message DeployResourceRequest {
+  // list of resources to deploy
+  repeated Resource resources = 1;
 }
 
-message ProcessRequestObject {
-  enum ResourceType {
-    // FILE type means the gateway will try to detect the resource type
-    // using the file extension of the name field
-    FILE = 0;
-    BPMN = 1; // extension 'bpmn'
-    YAML = 2 [deprecated = true]; // extension 'yaml'; removed as of release 1.0
-  }
-
-  // the resource basename, e.g. myProcess.bpmn
+message Resource {
+  // the resource name, e.g. myProcess.bpmn or myDecision.dmn
   string name = 1;
-  // the resource type; if set to BPMN or YAML then the file extension
-  // is ignored
-  // As of release 1.0, YAML support was removed and BPMN is the only supported resource type.
-  // The field was kept to not break clients.
-  ResourceType type = 2 [deprecated = true];
-  // the process definition as a UTF8-encoded string
-  bytes definition = 3;
+  // the file content as a UTF8-encoded string
+  bytes content = 2;
 }
 ```
 
-#### Output: `DeployProcessResponse`
+#### Output: `DeployResourceResponse`
 
 ```protobuf
-message DeployProcessResponse {
+message DeployResourceResponse {
   // the unique key identifying the deployment
   int64 key = 1;
-  // a list of deployed processes
-  repeated ProcessMetadata processes = 2;
+  // a list of deployed resources, e.g. processes
+  repeated Deployment deployments = 2;
+}
+
+message Deployment {
+  // each deployment has only one metadata
+  oneof Metadata {
+    // metadata of a deployed process
+    ProcessMetadata process = 1;
+    // metadata of a deployed decision
+    DecisionMetadata decision = 2;
+    // metadata of a deployed decision requirements
+    DecisionRequirementsMetadata decisionRequirements = 3;
+  }
 }
 
 message ProcessMetadata {
@@ -323,10 +319,45 @@ message ProcessMetadata {
   // the assigned process version
   int32 version = 2;
   // the assigned key, which acts as a unique identifier for this process
-  int64 processKey = 3;
+  int64 processDefinitionKey = 3;
   // the resource name (see: ProcessRequestObject.name) from which this process was
   // parsed
   string resourceName = 4;
+}
+
+message DecisionMetadata {
+  // the dmn decision ID, as parsed during deployment; together with the
+  // versions forms a unique identifier for a specific decision
+  string dmnDecisionId = 1;
+  // the dmn name of the decision, as parsed during deployment
+  string dmnDecisionName = 2;
+  // the assigned decision version
+  int32 version = 3;
+  // the assigned decision key, which acts as a unique identifier for this
+  // decision
+  int64 decisionKey = 4;
+  // the dmn ID of the decision requirements graph that this decision is part
+  // of, as parsed during deployment
+  string dmnDecisionRequirementsId = 5;
+  // the assigned key of the decision requirements graph that this decision is
+  // part of
+  int64 decisionRequirementsKey = 6;
+}
+
+message DecisionRequirementsMetadata {
+  // the dmn decision requirements ID, as parsed during deployment; together
+  // with the versions forms a unique identifier for a specific decision
+  string dmnDecisionRequirementsId = 1;
+  // the dmn name of the decision requirements, as parsed during deployment
+  string dmnDecisionRequirementsName = 2;
+  // the assigned decision requirements version
+  int32 version = 3;
+  // the assigned decision requirements key, which acts as a unique identifier
+  // for this decision requirements
+  int64 decisionRequirementsKey = 4;
+  // the resource name (see: Resource.name) from which this decision
+  // requirements was parsed
+  string resourceName = 5;
 }
 ```
 
@@ -338,9 +369,9 @@ Returned if:
 
 - No resources given.
 - At least one resource is invalid. A resource is considered invalid if:
-  - It is not a BPMN or YAML file (currently detected through the file extension).
-  - The resource data is not deserializable (e.g. detected as BPMN, but it's broken XML).
-  - The process is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task.)
+  - The resource type is not supported (e.g. supported resources include BPMN and DMN files)
+  - The content is not deserializable (e.g. detected as BPMN, but it's broken XML)
+  - The content is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
 
 ### `FailJob` RPC
 
@@ -661,12 +692,12 @@ communicate with nodes in the cluster. The nodes in the cluster are called broke
 Technical errors which occur between gateway and brokers (e.g. the gateway cannot deserialize the broker response,
 the broker is unavailable, etc.) are reported to the client using the following error codes:
 
-- `GRPC_STATUS_RESOURCE_EXHAUSTED`: When a broker receives more requests than it can handle, it signals back-pressure and rejects requests with this error code.
+- `GRPC_STATUS_RESOURCE_EXHAUSTED`: When a broker receives more requests than it can handle, it signals backpressure and rejects requests with this error code.
   - In this case, it is possible to retry the requests with an appropriate retry strategy.
   - If you receive many such errors within a short time period, it indicates the broker is constantly under high load.
   - It is recommended to reduce the rate of requests.
-    When back-pressure is active, the broker may reject any request except _CompleteJob_ RPC and _FailJob_ RPC.
-  - These requests are white-listed for back-pressure and are always accepted by the broker even if it is receiving requests above its limits.
+    When backpressure is active, the broker may reject any request except _CompleteJob_ RPC and _FailJob_ RPC.
+  - These requests are white-listed for backpressure and are always accepted by the broker even if it is receiving requests above its limits.
 - `GRPC_STATUS_UNAVAILABLE`: If the gateway itself is in an invalid state (e.g. out of memory).
 - `GRPC_STATUS_INTERNAL`: For any other internal errors that occurred between the gateway and the broker.
 
@@ -677,3 +708,81 @@ in a circuit breaker).
 As the gRPC server/client is based on generated code, keep in mind that
 any call made to the server can also return errors as described by the spec
 [here](https://grpc.io/docs/guides/error.html#error-status-codes).
+
+## Deprecated RPCs
+
+The following RPCs are exposed by the gateway service, but have been deprecated.
+
+### `DeployProcess` RPC
+
+:::note
+Deprecated since 8, replaced by [DeployResource RPC](#deployresource-rpc).
+:::
+
+Deploys one or more processes to Zeebe. Note that this is an atomic call,
+i.e. either all processes are deployed, or none of them are.
+
+#### Input: `DeployProcessRequest`
+
+```protobuf
+message DeployProcessRequest {
+  // List of process resources to deploy
+  repeated ProcessRequestObject processes = 1;
+}
+
+message ProcessRequestObject {
+  enum ResourceType {
+    // FILE type means the gateway will try to detect the resource type
+    // using the file extension of the name field
+    FILE = 0;
+    BPMN = 1; // extension 'bpmn'
+    YAML = 2 [deprecated = true]; // extension 'yaml'; removed as of release 1.0
+  }
+
+  // the resource basename, e.g. myProcess.bpmn
+  string name = 1;
+  // the resource type; if set to BPMN or YAML then the file extension
+  // is ignored
+  // As of release 1.0, YAML support was removed and BPMN is the only supported resource type.
+  // The field was kept to not break clients.
+  ResourceType type = 2 [deprecated = true];
+  // the process definition as a UTF8-encoded string
+  bytes definition = 3;
+}
+```
+
+#### Output: `DeployProcessResponse`
+
+```protobuf
+message DeployProcessResponse {
+  // the unique key identifying the deployment
+  int64 key = 1;
+  // a list of deployed processes
+  repeated ProcessMetadata processes = 2;
+}
+
+message ProcessMetadata {
+  // the bpmn process ID, as parsed during deployment; together with the version forms a
+  // unique identifier for a specific process definition
+  string bpmnProcessId = 1;
+  // the assigned process version
+  int32 version = 2;
+  // the assigned key, which acts as a unique identifier for this process
+  int64 processKey = 3;
+  // the resource name (see: ProcessRequestObject.name) from which this process was
+  // parsed
+  string resourceName = 4;
+}
+```
+
+#### Errors
+
+##### GRPC_STATUS_INVALID_ARGUMENT
+
+Returned if:
+
+- No resources given.
+- At least one resource is invalid. A resource is considered invalid if:
+  - It is not a BPMN or YAML file (currently detected through the file extension).
+  - The resource data is not deserializable (e.g. detected as BPMN, but it's broken XML).
+  - The process is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task.)

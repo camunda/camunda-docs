@@ -16,22 +16,17 @@ GET `/api/public/report`
 
 The following request headers have to be provided with every request:
 
-|Header|Constraints|Value|
-|--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](../../authorization)|
-
-* Only required if not set as a query parameter
+| Header        | Constraints | Value                                |
+| ------------- | ----------- | ------------------------------------ |
+| Authorization | REQUIRED    | [Authorization](../../authorization) |
 
 ## Query parameters
 
 The following query parameters have to be provided with every request:
 
-|Parameter|Constraints|Value|
-|--- |--- |--- |
-|access_token|REQUIRED*|[Authorization](../../authorization)|
-|collectionId|REQUIRED|The ID of the Collection for which to retrieve the report IDs.|
-
-* Only required if not set as a request header
+| Parameter    | Constraints | Value                                                          |
+| ------------ | ----------- | -------------------------------------------------------------- |
+| collectionId | REQUIRED    | The ID of the Collection for which to retrieve the report IDs. |
 
 ## Request body
 
@@ -45,11 +40,11 @@ The response contains a list of IDs of the reports existing in the collection wi
 
 Possible HTTP response status codes:
 
-|Code|Description|
-|--- |--- |
-|200|Request successful.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|500|Some error occurred while processing the request, best check the Optimize log.|
+| Code | Description                                                                                                  |
+| ---- | ------------------------------------------------------------------------------------------------------------ |
+| 200  | Request successful.                                                                                          |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
 ## Example
 
@@ -57,7 +52,11 @@ Possible HTTP response status codes:
 
 Assuming you want to retrieve all report IDs in the collection with the ID `1234` and have configured the accessToken `mySecret`, this is what it would look like:
 
-GET `/api/public/report?collectionId=1234&access_token=mySecret`
+GET `/api/public/report?collectionId=1234`
+
+##### Request header
+
+`Authorization: Bearer mySecret`
 
 ###### Response
 

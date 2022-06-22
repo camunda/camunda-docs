@@ -8,8 +8,10 @@ You can opt-in the collection of telemetry data when using the desktop modeler. 
 
 This page summarizes the data that is being collected.
 
-## General Structure of the Events
+## General structure of the events
+
 Independent from the type of the event we're dealing with, the payload we send to the ET has the following structure:
+
 ```json
 {
   "installation": "[THE_EDITOR_ID]",
@@ -27,35 +29,40 @@ Independent from the type of the event we're dealing with, the payload we send t
 
 Every event directly modifies the `internals` field of the payload.
 
-## Definition of Events
+## Definition of events
 
-### Ping Event
+### Ping event
+
 The `Ping Event` is sent in following situations:
 
- - The modeler is opened (given that `Usage Statistics` option is enabled)
- - `Usage Statistics` option is enabled for the first time.
- - Once every 24 hours (given that `Usage Statistics` option is enabled)
+- The modeler is opened (given that `Usage Statistics` option is enabled)
+- `Usage Statistics` option is enabled for the first time.
+- Once every 24 hours (given that `Usage Statistics` option is enabled)
 
 The Ping Event has the following structure:
+
 ```json
 {
-  "event": "ping"
+  "event": "ping",
+  "plugins": ["PLUGIN_NAME"]
 }
 ```
 
-### Diagram Opened Event
+### Diagram opened event
+
 The `Diagram Opened Event` is sent in following situations:
 
- - User created a new BPMN diagram
- - User created a new DMN diagram
- - User created a new CMMN diagram
- - User created a new Form
- - User opened an existing BPMN diagram
- - User opened an existing DMN diagram
- - User opened an existing CMMN diagram
- - User opened an existing Form
+- User created a new BPMN diagram
+- User created a new DMN diagram
+- User created a new CMMN diagram
+- User created a new Form
+- User opened an existing BPMN diagram
+- User opened an existing DMN diagram
+- User opened an existing CMMN diagram
+- User opened an existing Form
 
 The Diagram Opened Event has the following core structure:
+
 ```json
 {
   "event": "diagramOpened",
@@ -68,8 +75,8 @@ In the case of bpmn and form, we add the engine profile:
 ```json
 {
   "engineProfile": {
-    "executionPlatform": "Camunda Cloud",
-    "executionPlatformVersion": "1.1"
+    "executionPlatform": "<target platform>",
+    "executionPlatformVersion": "<target platform version>"
   }
 }
 ```
@@ -82,7 +89,7 @@ Diagram Opened Event payload:
   "elementTemplateCount": 1,
   "elementTemplates": [
     {
-      "appliesTo": [ "bpmn:ServiceTask" ],
+      "appliesTo": ["bpmn:ServiceTask"],
       "properties": {
         "camunda:asyncBefore": 1,
         "camunda:class": 1,
@@ -132,14 +139,15 @@ Also in the case of BPMN diagrams, we add selected diagram metrics:
 }
 ```
 
+### Deployment event
 
-### Deployment Event
 The `Deployment Event` is sent in following situations:
 
- - User deploys a BPMN diagram to Camunda Platform or Camunda Cloud
- - User deploys a DMN diagram to Camunda Platform
+- User deploys a BPMN diagram to Camunda Platform 7 or Camunda Platform 8
+- User deploys a DMN diagram to Camunda Platform 7
 
 The Deployment Event has the following core structure:
+
 ```json
 {
   "event": "deployment",
@@ -147,13 +155,13 @@ The Deployment Event has the following core structure:
   "deployment": {
     "outcome": "[success or failure]",
     "context": "[deploymentTool or startInstanceTool]",
-    "executionPlatform": "[Camunda Cloud or Camunda Platform]",
-    "executionPlatformVersion": "[version deployed to]"
+    "executionPlatform": "[<target platform>]",
+    "executionPlatformVersion": "[<target platform version>]"
   }
 }
 ```
 
-In case the diagram deployment was not successful, the error code returned from the Camunda Platform will be added to the payload:
+In case the diagram deployment was not successful, the error code returned from the Camunda Platform 7 will be added to the payload:
 
 ```json
 {
@@ -217,34 +225,52 @@ If it is set in the diagram, we also add target engine profile information:
 ```json
 {
   "engineProfile": {
-    "executionPlatform": "Camunda Cloud"
+    "executionPlatform": "<target platform>"
   }
 }
 ```
 
+### Tracked click events
 
-### Version Info Events
+The `Tracked Click Events` are sent when a user clicks a link or button contained within a tracked parent 'container'.
 
-The version info events are sent in following situations:
+Currently, these containers are:
 
- - User opens version info overlay via the button on the status bar
- - User opens version info overlay via the menu
- - User opens a link in the version info overlay
+- Each of the welcome page columns
+- The version info overlay
 
-In the two first cases, a `versionInfoOpened` event is sent:
+The event supplies:
+
+- The parent container id to locate the application section
+- The button label or link text (generalized as label) for identification of what was specifically clicked
+- A type to differentiate buttons, internal links, and external links
+- Optionally for external links: the link target
+
+Example event:
+
+```json
+{
+  "event": "userTrackedClick",
+  "type": "[button or external-link or internal-link]"
+  "parent": "welcome-page-learn-more"
+  "label": "Click here to read more about Camunda"
+  "link": "https://camunda.com/"
+}
+```
+
+:::note
+`"link"` is only present for `"type": "external-link"`.
+:::
+
+### Version info opened event
+
+The `Version Info Opened Event` is sent when the version info overlay is opened via user interaction.
+
+It has the following structure:
 
 ```json
 {
   "event": "versionInfoOpened",
   "source": "[menu or statusBar]"
-}
-```
-
-When a link is clicked, a `versionInfoLinkOpened` event is sent:
-
-```json
-{
-  "event": "versionInfoLinkOpened",
-  "label": "[anchor content, e.g. Camunda Modeler docs]"
 }
 ```

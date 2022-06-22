@@ -1,22 +1,22 @@
 ---
 title: "Performance tuning Camunda 7"
 tags:
-    - Performance
+  - Performance
 ---
 
 Understand influencing aspects on performance and apply tuning strategies appropriately, for example, by configuring the job executor or applying external tasks. When facing concrete challenges, look at scenarios like the proper handling of huge batches.
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! The Camunda Cloud stacks differ in regards to performance and scalabilities and requires different strategies we currently work on providing as best practice.
+This best practice targets Camunda Platform 7.x only! The Camunda Platform 8 stacks differ in regards to performance and scalabilities and requires different strategies we currently work on providing as best practice.
 :::
 
 ## Performance basics
 
 Note that this document assumes some understanding of fundamentals of underlying technologies such as the following:
 
-* Database fundamentals
-* Monitoring, observability, and benchmark tools
-* JVM fundamentals
+- Database fundamentals
+- Monitoring, observability, and benchmark tools
+- JVM fundamentals
 
 ### Setting up monitoring
 
@@ -26,10 +26,10 @@ It's important to **set up proper monitoring** as described in our [Monitoring B
 
 The database i/o for **writing** state changes of process instances to your **runtime tables** depend on your use case. The following are the fundamental factors:
 
-* The complexity of process models - measured by the **number of save points**.
-* The **number of started process instances** - measured per time unit.
-* The **data attached** to process instances (aka process variables) - measured in bytes.
-* The average **duration** of process instances, as the longer they need to complete (and hence wait in a persistent state) the less database traffic their total number of save points cause per time unit, but the more data you have stored in the runtime database.
+- The complexity of process models - measured by the **number of save points**.
+- The **number of started process instances** - measured per time unit.
+- The **data attached** to process instances (aka process variables) - measured in bytes.
+- The average **duration** of process instances, as the longer they need to complete (and hence wait in a persistent state) the less database traffic their total number of save points cause per time unit, but the more data you have stored in the runtime database.
 
 The performance for **querying and reading** from the runtime tables is most influenced by the process variables/business data you use. For every process variable used in a query, a join is needed on SQL level, which influences performance. This can hit you, especially when doing message correlation or tasklist queries. You can tune performance **by using indices** as described below.
 
@@ -69,8 +69,8 @@ public class CamundaFilterHistoryEventHandler extends DbHistoryEventHandler {
 
 Typical use cases are:
 
-* Filtering high-volume but unnecessary events from the history in order to improve performance
-* Filtering sensible data which should not be written to history (e.g. individual-related data)
+- Filtering high-volume but unnecessary events from the history in order to improve performance
+- Filtering sensible data which should not be written to history (e.g. individual-related data)
 
 ### Thread handling and the job executor
 
@@ -84,7 +84,7 @@ The **default configuration** of the job executor is typically **not good** and 
 
 You have to set the retry strategy for every save point. Be aware that retries increase the load of the system because you're creating a new transaction, database connection, thread when a job is re-executed, and any additional processing required by your business logic.
 
-[Exclusive Jobs](https://docs.camunda.org/manual/latest/user-guide/process-engine/the-job-executor/#exclusive-jobs) are the default in Camunda, which means that *for one process instance* there is always **only one job executed** in parallel. This is a safety net to avoid optimistic lock exceptions, as multiple parallel paths might conflict by writing to the same database row.
+[Exclusive Jobs](https://docs.camunda.org/manual/latest/user-guide/process-engine/the-job-executor/#exclusive-jobs) are the default in Camunda, which means that _for one process instance_ there is always **only one job executed** in parallel. This is a safety net to avoid optimistic lock exceptions, as multiple parallel paths might conflict by writing to the same database row.
 
 You can **change this configuration** to run jobs of one process instance in parallel if you make sure not to create optimistic lock exceptions by a **fitting process design**. Additionally, handle optimistic lock exceptions properly by doing **retries**.
 
@@ -170,19 +170,19 @@ Camunda requires [READ COMMITTED transaction isolation](https://docs.camunda.org
 
 Load balancing has two layers:
 
-* Load balancing on the inbound channel is out-of-scope for Camunda, instead use standard third-party software like an HTTP load balancer or messaging.
+- Load balancing on the inbound channel is out-of-scope for Camunda, instead use standard third-party software like an HTTP load balancer or messaging.
 
-* Job execution (also known as asynchronous processing or `_jobs_`) in Camunda can be used to do load balancing, using multiple threads and multiple cluster nodes. This is described in more detail in the following sections.
+- Job execution (also known as asynchronous processing or `_jobs_`) in Camunda can be used to do load balancing, using multiple threads and multiple cluster nodes. This is described in more detail in the following sections.
 
 ## Running load tests
 
 When you are in doubt if a certain load requirement can be tackled by Camunda, you should run a load test. This normally involves the following phases:
 
-* Prepare an *environment* which is as close to production as possible, otherwise results might be biased.
-* Prepare concrete *scenarios* you want to run, which includes e.g. BPMN workflows that are realistic for you. If you typically run synchronous service tasks do so in the scenarios. If you have big payloads use them. If you leverage multiple instance tasks make sure your scenario also contains them.
-* Define *clear goals* for the load tests, e.g. you might need to run at least **1000 workflow instances/second**, or you might need to keep **latency below 50 ms for the 95th percentile**.
-* Prepare *load generation*, which is not always easy as you have to stress your system in a way, that you cannot do by one simple client.
-* Prepare *monitoring* to analyze the situation if you run into problems. Typical measures are (see below for a more complete list):
+- Prepare an _environment_ which is as close to production as possible, otherwise results might be biased.
+- Prepare concrete _scenarios_ you want to run, which includes e.g. BPMN workflows that are realistic for you. If you typically run synchronous service tasks do so in the scenarios. If you have big payloads use them. If you leverage multiple instance tasks make sure your scenario also contains them.
+- Define _clear goals_ for the load tests, e.g. you might need to run at least **1000 workflow instances/second**, or you might need to keep **latency below 50 ms for the 95th percentile**.
+- Prepare _load generation_, which is not always easy as you have to stress your system in a way, that you cannot do by one simple client.
+- Prepare _monitoring_ to analyze the situation if you run into problems. Typical measures are (see below for a more complete list):
 
 Java memory consumption, especially garbage collection and potential memory leaks, often occur due to issues in surrounding components.
 
@@ -192,63 +192,63 @@ Monitor load on the database to avoid overloading the database. It's sometimes b
 
 Typical monitoring and profiling tools our customer use:
 
-* Basic tools available with the Java installation
-  * [VisualVM](https://docs.oracle.com/javase/8/docs/technotes/guides/visualvm/profiler.html)
-  * JConsole
-  * JVM Thread Dumps
-* Commercial offerings
-  * App Dynamics
-  * Dynatrace
-  * YourKit
+- Basic tools available with the Java installation
+  - [VisualVM](https://docs.oracle.com/javase/8/docs/technotes/guides/visualvm/profiler.html)
+  - JConsole
+  - JVM Thread Dumps
+- Commercial offerings
+  - App Dynamics
+  - Dynatrace
+  - YourKit
 
 Typical load generation tools our customer use:
 
-* JMeter
-* Postman
-* SOAP-UI
+- JMeter
+- Postman
+- SOAP-UI
 
 ## Resolving overload
 
 This section applies if the system is experiencing acute problems due to load or poor configuration.
 
-:::caution Camunda Cloud is built with scalability top of mind
-Note that Camunda Cloud and its workflow engine Zeeebe were engineered for performance and scalability. If you hit problems you cannot easily resolve with Camunda Platform 7.x, it might be worth having a look at Camunda Cloud instead.
+:::caution Camunda Platform 8 is built with scalability top of mind
+Note that Camunda Platform 8 and its workflow engine Zeeebe were engineered for performance and scalability. If you hit problems you cannot easily resolve with Camunda Platform 7.x, it might be worth having a look at Camunda Platform 8 instead.
 :::
 
 ### Collecting information for root causing
 
 Initially, we need to have a strategy to deal with problems. Take a minute to think about what principles you will apply to solve acute and generic performance problems. Below are some questions to ask to analyze the root cause:
 
-* What makes you think there is a performance problem?
-* Has this system ever performed well?
-* What has changed recently? (Software? Hardware? Load?)
-* Can the performance degradation be expressed in terms of latency or run time?
-* Does the problem affect other people or applications (or is it just you)?
-* What is the environment?
-  * What software and hardware is used?
-  * Versions?
-  * Configuration?
+- What makes you think there is a performance problem?
+- Has this system ever performed well?
+- What has changed recently? (Software? Hardware? Load?)
+- Can the performance degradation be expressed in terms of latency or run time?
+- Does the problem affect other people or applications (or is it just you)?
+- What is the environment?
+  - What software and hardware is used?
+  - Versions?
+  - Configuration?
 
 When we suspect (or experience) problems, we typically have a deeper look at:
 
-* Detailed information about **jobs**, typically retrieved from the database via **SQL queries** (see also [unsupported sample queries](https://github.com/camunda-consulting/code/tree/master/snippets/db-queries-for-monitoring)):
-  * **# of executed jobs**: How many jobs are currently acquired/locked, which means they are executed at the moment?
-  * **Cluster distribution**: How are the executed jobs distributed over the cluster? Therefore, look at the lock owner, which is written to the database.
-  * **# of not yet executed jobs**: How many jobs are currently due, which means the due date is reached or no due date was set, but are not acquired? These are the jobs that should be executed but are not yet. This number should be normally close to zero. Capture the number over time, if it stays above a certain threshold, you have a bottleneck. In this situation, you might even suffer from job starvation, as Camunda does not enforce a FIFO principle for job execution. This situation needs to be resolved. A typical pattern is to experience this overload only on peak times of the day and resolve in quiet times.
+- Detailed information about **jobs**, typically retrieved from the database via **SQL queries** (see also [unsupported sample queries](https://github.com/camunda-consulting/code/tree/master/snippets/db-queries-for-monitoring)):
+  - **# of executed jobs**: How many jobs are currently acquired/locked, which means they are executed at the moment?
+  - **Cluster distribution**: How are the executed jobs distributed over the cluster? Therefore, look at the lock owner, which is written to the database.
+  - **# of not yet executed jobs**: How many jobs are currently due, which means the due date is reached or no due date was set, but are not acquired? These are the jobs that should be executed but are not yet. This number should be normally close to zero. Capture the number over time, if it stays above a certain threshold, you have a bottleneck. In this situation, you might even suffer from job starvation, as Camunda does not enforce a FIFO principle for job execution. This situation needs to be resolved. A typical pattern is to experience this overload only on peak times of the day and resolve in quiet times.
 
 So far, we've never experienced running out of CPU capacity. If that happens, clustering is a very natural choice to solve the problem. But in most cases, applications built on Camunda will more often than not be waiting for i/o (database, remote service calls, etc.) To solve overload problems correctly, you have to analyze the root cause:
 
-* Basic system metrics for your Camunda application (container, application server or Java process) and database. Plot them over time!
- * CPU utilization
- * Memory utilization
- * I/O
- * Response times
+- Basic system metrics for your Camunda application (container, application server or Java process) and database. Plot them over time!
+- CPU utilization
+- Memory utilization
+- I/O
+- Response times
 
 Often, we cannot get metrics from the database due to security restrictions. In this case, we try to measure response times from the database as an indicator of its health. This works very well with dedicated frameworks like App Dynamics.
 
-* Database information
- * Slow query log
- * Other utilization information, depending on the concrete database product. Best approach your DBA.
+- Database information
+- Slow query log
+- Other utilization information, depending on the concrete database product. Best approach your DBA.
 
 Collecting this information normally gives a good indication which component is really busy and causes the bottleneck.
 
@@ -258,9 +258,9 @@ Having an idea about the bottleneck leads you to the proper tuning strategy. How
 
 The basic strategy is simple:
 
-* Set up tests and conduct measurements, which give you a **baseline** you can compare against.
-* **Change** something, but best only **one thing at a time**.
-* Measure again and **compare against your benchmark** so you get an idea how much the change improved the situation.
+- Set up tests and conduct measurements, which give you a **baseline** you can compare against.
+- **Change** something, but best only **one thing at a time**.
+- Measure again and **compare against your benchmark** so you get an idea how much the change improved the situation.
 
 For resources like the job executor thread pool, start with small numbers and increase them. If you start too big, you always have to check in two dimensions: increasing and decreasing.
 
@@ -270,8 +270,8 @@ For resources like the job executor thread pool, start with small numbers and in
 
 A good compromise often is:
 
-* Monitor the load on your production systems (as indicated above, e.g. using database queries).
-* Change settings and inspect the impact over time.
+- Monitor the load on your production systems (as indicated above, e.g. using database queries).
+- Change settings and inspect the impact over time.
 
 :::note
 This is not a scientific but rather hands-on approach. Production load might vary very much, so plan enough time to allow regression towards the mean and keep an eye on other performance indicators like process instances started to judge the results realistically.
@@ -318,8 +318,8 @@ Idle time for acquisition if no executable job was found.
 
 A meaningful configuration has to balance these values according to the given situation. In order to give hints, you need to understand some basics:
 
-* It does not make sense to have more **active threads** than the CPU cores can directly handle. Otherwise, you will just swap in and out threads and hinder efficient computation.
-* Whenever a **thread blocks because of i/o**, e.g. the user waits for some database operation to finish, it is not active and the CPU will not be bothered with it.
+- It does not make sense to have more **active threads** than the CPU cores can directly handle. Otherwise, you will just swap in and out threads and hinder efficient computation.
+- Whenever a **thread blocks because of i/o**, e.g. the user waits for some database operation to finish, it is not active and the CPU will not be bothered with it.
 
 When you want to figure out **how many threads you can assign to the job executor** thread pool **(1)** you need to know how much threads are available in total and **how much threads are already in use** by other thread pools (web server and servlets, scheduling frameworks, EJB, JMS, etc.) The more components you run on your machine, the harder it gets to predict the free CPU capacity. This is also true for virtualized environments where resources are shared.
 
@@ -329,10 +329,10 @@ When increasing the number of threads, make sure that you also **increase the in
 
 A typical approach to tune performance is:
 
-* Start with the number of threads = CPU cores * 1.5
-* Increase queue size stepwise until there is no gain in throughput anymore because all threads are "busy" waiting for i/o.
-* Now increase worker threads and afterward queue size and always check that this improves throughput.
-* Whenever you reach a limit, you found your upper configuration limit, which is typically optimal for production.
+- Start with the number of threads = CPU cores \* 1.5
+- Increase queue size stepwise until there is no gain in throughput anymore because all threads are "busy" waiting for i/o.
+- Now increase worker threads and afterward queue size and always check that this improves throughput.
+- Whenever you reach a limit, you found your upper configuration limit, which is typically optimal for production.
 
 As already indicated, when you dive deep into job executor tuning because of high volume operations, it might be worth to take one step back and think about using [external tasks](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) as an alternative. This often scales better, as a worker can, for example, collect a huge amount of tasks and just report completion back, how this is executed and scaled can be completely decided by you.
 
@@ -342,8 +342,8 @@ A resource that the process engine and the job executor heavily depend on are da
 
 First, you should find out which connection pool implementation is used based on your project's dependencies:
 
-* [Spring Boot's algorithm for selecting the data source implementation](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-connect-to-production-database)
-* [Code example to detect data source implementation](https://www.mkyong.com/spring-boot/spring-boot-how-to-know-which-connection-pool-is-used/)
+- [Spring Boot's algorithm for selecting the data source implementation](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-connect-to-production-database)
+- [Code example to detect data source implementation](https://www.mkyong.com/spring-boot/spring-boot-how-to-know-which-connection-pool-is-used/)
 
 Preferably, use [HikariCP](https://github.com/brettwooldridge/HikariCP) and configure its [settings](https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby) using `spring.datasource.hikari.*` properties. HikariCP's default pool size is 10. Their website provides an [article about connection pool sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
 
@@ -353,9 +353,9 @@ Having tuned the job execution the database might become a bottleneck when handl
 
 If both are not possible or sufficient, check if the database load can be reduced by **changes in your application**. Therefore, you need to analyze the root cause of the load. It is a good idea to partition your database in a way that you see load data for runtime, history, and specifically the table containing byte arrays. Two typical findings are:
 
-* A lot of data is written into **history**, for example, because you run through a lot of tasks and update a lot of variables. In this case, a good strategy is to reconfigure history to reduce the amount of data or use a custom history backend, as already described.
+- A lot of data is written into **history**, for example, because you run through a lot of tasks and update a lot of variables. In this case, a good strategy is to reconfigure history to reduce the amount of data or use a custom history backend, as already described.
 
-* Big chunks of data are written to the byte array table, mostly because you save **too much data as process variable** like big XML or JSON structures. Camunda always needs to update one process variable as a whole, even if you only change some attributes or add lines to a list being part of the data structure. Additionally, the whole chunk is also written to history to keep a history of variable values. In this scenario, it is much more efficient to store the business data as a separate structured entity or into a better fitting storage (like a document database). Then Camunda only stores a reference and is freed of a lot of load towards the database.
+- Big chunks of data are written to the byte array table, mostly because you save **too much data as process variable** like big XML or JSON structures. Camunda always needs to update one process variable as a whole, even if you only change some attributes or add lines to a list being part of the data structure. Additionally, the whole chunk is also written to history to keep a history of variable values. In this scenario, it is much more efficient to store the business data as a separate structured entity or into a better fitting storage (like a document database). Then Camunda only stores a reference and is freed of a lot of load towards the database.
 
 Camunda batches SQL statements of the current call and runs them at once at the end of the transaction. Depending on the nature of the process model and the work done in this transaction, this batch might become big.
 
@@ -367,12 +367,12 @@ In order to find candidates for optimization, **check the slow query log** of yo
 
 Examples:
 
-* Creating an index on process instance end time (`create index PROC_DEF_ID_END_TIME ON ACT_HI_PROCINST (PROC_DEF_ID_,END_TIME_`) in case you query for that very often.
-* [Job acquisition](https://docs.camunda.org/manual/latest/user-guide/process-engine/the-job-executor/#the-job-order-of-job-acquisition) contains hints on indices depending on the job executor configuration.
+- Creating an index on process instance end time (`create index PROC_DEF_ID_END_TIME ON ACT_HI_PROCINST (PROC_DEF_ID_,END_TIME_`) in case you query for that very often.
+- [Job acquisition](https://docs.camunda.org/manual/latest/user-guide/process-engine/the-job-executor/#the-job-order-of-job-acquisition) contains hints on indices depending on the job executor configuration.
 
 ### Applying sharding
 
-If none of the above strategies are sufficient, you need to reduce the load put on the Camunda engine as a whole. This can be done by a mechanism called **[sharding](https://en.wikipedia.org/wiki/Shard_(database_architecture))**.
+If none of the above strategies are sufficient, you need to reduce the load put on the Camunda engine as a whole. This can be done by a mechanism called **[sharding](<https://en.wikipedia.org/wiki/Shard_(database_architecture)>)**.
 
 Therefore, you distribute the overall load to multiple logical engines (called shards), which itself can be a cluster on its own. Every shard runs its own database. A sharding algorithm and distribution must be implemented. One example was described [by Zalando in this blog post](https://blog.camunda.org/post/2015/03/camunda-meets-cassandra-zalando/).
 
@@ -406,14 +406,14 @@ One concrete scenario is worth looking at, as customers stumble upon it regularl
 
 The important characteristics are
 
-* It is modeled using parallel [Multiple Instance](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/task-markers/#multiple-instance) (MI)
-* You have high numbers of elements for the MI (> 1000)
-* You are using wait states or save points within the parallel branch
+- It is modeled using parallel [Multiple Instance](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/task-markers/#multiple-instance) (MI)
+- You have high numbers of elements for the MI (> 1000)
+- You are using wait states or save points within the parallel branch
 
 This scenario is supported by Camunda, but you can run into serious problems.
 
-:::caution Solved in Camunda Cloud
-This problem is only a problem with Camunda Platform 7.x! Zeebe, the workflow engine used in Camunda Cloud, can run high number of parallel activities.
+:::caution Solved in Camunda Platform 8
+This problem is only a problem with Camunda Platform 7.x! Zeebe, the workflow engine used in Camunda Platform 8, can run high number of parallel activities.
 :::
 
 The basic problem is the [execution tree](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-concepts/#executions) getting really big in this scenario. In most situations, the engine has to load the whole tree in order to do anything, even if that happens only in one parallel path. This not only influences performance, but also adds load to the database.

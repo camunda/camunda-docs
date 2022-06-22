@@ -27,22 +27,17 @@ POST `/api/public/import`
 
 The following request headers have to be provided with every request:
 
-|Header|Constraints|Value|
-|--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](../authorization)|
-
-- Only required if not set as a query parameter
+| Header        | Constraints | Value                             |
+| ------------- | ----------- | --------------------------------- |
+| Authorization | REQUIRED    | [Authorization](../authorization) |
 
 ## Query parameters
 
 The following query parameters have to be provided with every request:
 
-|Parameter|Constraints|Value|
-|--- |--- |--- |
-|access_token|REQUIRED*|[Authorization](../authorization)|
-|collectionId|REQUIRED|The ID of the collection for which to retrieve the report IDs.|
-
-- Only required if not set as a request header
+| Parameter    | Constraints | Value                                                          |
+| ------------ | ----------- | -------------------------------------------------------------- |
+| collectionId | REQUIRED    | The ID of the collection for which to retrieve the report IDs. |
 
 ## Request body
 
@@ -50,19 +45,19 @@ The request body should contain a JSON array of entity definitions to be importe
 
 ## Result
 
-The response contains a list of IDs of the newly created entities in the target system.
+The response contains a list of DTOs that specify the ID and entity type (`report` or `dashboard`) of each newly created entity in the target system.
 
 ## Response codes
 
 Possible HTTP response status codes:
 
-|Code|Description|
-|--- |--- |
-|200|Request successful.|
-|400|The provided list of entities is invalid. This can occur if any of the above listed [prerequisites](#prerequisites) are not met. Check the `detailedMessage` of the error response for more information.|
-|401|Secret incorrect or missing in HTTP header. See [Authorization](../authorization) on how to authenticate.|
-|404|The given target collection ID does not exist.|
-|500|Some error occurred while processing the request, best check the Optimize log.|
+| Code | Description                                                                                                                                                                                              |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 200  | Request successful.                                                                                                                                                                                      |
+| 400  | The provided list of entities is invalid. This can occur if any of the above listed [prerequisites](#prerequisites) are not met. Check the `detailedMessage` of the error response for more information. |
+| 401  | Secret incorrect or missing in HTTP header. See [Authorization](../authorization) on how to authenticate.                                                                                                |
+| 404  | The given target collection ID does not exist.                                                                                                                                                           |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                                                                                                                           |
 
 ## Example
 
@@ -70,9 +65,13 @@ Possible HTTP response status codes:
 
 Assuming you want to import a report and a dashboard into the collection with ID `123`, this is what it would look like:
 
-POST `/api/public/import?collectionId=123&access_token=mySecret`
+POST `/api/public/import?collectionId=123`
 
-With the following request body:
+##### Request header
+
+`Authorization: Bearer mySecret`
+
+##### Request body
 
 ```
 [
@@ -110,10 +109,12 @@ Status 200.
 ```
 [
     {
-        "id": "e8ca18b9-e637-45c8-87da-0a2b08b34d6e"
+        "id": "e8ca18b9-e637-45c8-87da-0a2b08b34d6e",
+        "entityType": "dashboard"
     },
     {
-        "id": "290b3425-ba33-4fbb-b20b-a4f236036847"
+        "id": "290b3425-ba33-4fbb-b20b-a4f236036847",
+        "entityType": "report"
     }
 ]
 ```

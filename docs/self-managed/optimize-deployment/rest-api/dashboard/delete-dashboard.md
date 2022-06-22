@@ -24,21 +24,13 @@ Where `dashboard-ID` is the ID of the dashboard you wish to delete.
 
 The following request headers have to be provided with every delete request:
 
-|Header|Constraints|Value|
-|--- |--- |--- |
-|Authorization|REQUIRED*|See [Authorization](../../authorization)|
-
-* Only required if not set as a query parameter
+| Header        | Constraints | Value                                    |
+| ------------- | ----------- | ---------------------------------------- |
+| Authorization | REQUIRED    | See [Authorization](../../authorization) |
 
 ## Query parameters
 
-The following query parameters have to be provided with every delete request:
-
-|Parameter|Constraints|Value|
-|--- |--- |--- |
-|access_token|REQUIRED*|See [Authorization](../../authorization)|
-
-* Only required if not set as a request header
+No query parameters available.
 
 ## Request body
 
@@ -52,12 +44,12 @@ No response body.
 
 Possible HTTP Response status codes:
 
-|Code|Description|
-|--- |--- |
-|204|Request successful.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|404|The requested dashboard was not found, please check the provided dashboard-ID.|
-|500|Some error occurred while processing the request, best check the Optimize log.|
+| Code | Description                                                                                                  |
+| ---- | ------------------------------------------------------------------------------------------------------------ |
+| 204  | Request successful.                                                                                          |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 404  | The requested dashboard was not found, please check the provided dashboard-ID.                               |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
 ## Example
 
@@ -65,8 +57,12 @@ Possible HTTP Response status codes:
 
 Let's assume you want to delete a dashboard with the ID `e6c5abb1-6a18-44e7-8480-d562d511ba62`, this is what it would look like:
 
-DELETE `/api/public/dashboard/e6c5aaa1-6a18-44e7-8480-d562d511ba62?access_token=mySecret`
+DELETE `/api/public/dashboard/e6c5aaa1-6a18-44e7-8480-d562d511ba62`
 
-##### Response
+#### Request header
+
+`Authorization: Bearer mySecret`
+
+#### Response
 
 Status 204.

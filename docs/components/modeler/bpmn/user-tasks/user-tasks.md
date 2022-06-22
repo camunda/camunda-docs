@@ -5,7 +5,7 @@ description: "A user task is used to model work that needs to be done by a human
 ---
 
 A user task is used to model work that needs to be done by a human actor. When
-the process execution arrives at such a user task, a new job similar to a
+the process instance arrives at such a user task, a new job similar to a
 [service task](/components/modeler/bpmn/service-tasks/service-tasks.md) is created. The process instance
 stops at this point and waits until the job is completed.
 
@@ -33,24 +33,25 @@ extension element of the process element.
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
 This can be used to define which user the task can be assigned to. One or both of the following
 attributes can be specified simultaneously:
+
 - `assignee`: Specifies the user assigned to the task. [Tasklist] will claim the task for this user.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
 Typically, the assignee and candidate groups are defined as static values (e.g. `some_username` and
 `sales, operations`), but they can also be defined as
-[expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers,
-book.author)`). The expressions are evaluated on activating the user task and must result in a
+[expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate groups.
 
-For [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user, 
+For [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user,
 the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
-- Camunda Cloud (login with email, Google, GitHub): `email`
+
+- Camunda Platform 8 (login with email, Google, GitHub): `email`
 - Default Basic Auth (elasticsearch): `username`
 - IAM: `username`
 
 :::note
-For example, say you log into Tasklist using Camunda Cloud login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
+For example, say you log into Tasklist using Camunda Platform 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
 :::
 
 ## Variable mappings

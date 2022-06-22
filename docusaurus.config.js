@@ -1,6 +1,6 @@
 module.exports = {
-  title: "Camunda Cloud Docs",
-  tagline: "Documentation for all components of Camunda Cloud",
+  title: "Camunda Platform 8",
+  tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
@@ -13,17 +13,17 @@ module.exports = {
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
   plugins: [
-//        ["@edno/docusaurus2-graphql-doc-generator",
-//          {
-//            schema: "http://localhost:8080/tasklist/graphql",
-//            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-//            baseURL: "apis-clients/tasklist-api",
-//            linkRoot: "/docs/",
-//            loaders: {
-//              UrlLoader: "@graphql-tools/url-loader"
-//            }
-//          },
-//        ],
+    //        ["@edno/docusaurus2-graphql-doc-generator",
+    //          {
+    //            schema: "http://localhost:8080/tasklist/graphql",
+    //            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
+    //            baseURL: "apis-clients/tasklist-api",
+    //            linkRoot: "/docs/",
+    //            loaders: {
+    //              UrlLoader: "@graphql-tools/url-loader"
+    //            }
+    //          },
+    //        ],
     [
       require.resolve("docusaurus-gtm-plugin"),
       {
@@ -32,17 +32,24 @@ module.exports = {
     ],
     "./static/plugins/bpmn-js",
   ],
-  scripts: [
-  ],  
+  scripts: [],
   themeConfig: {
+    announcementBar: {
+      id: "camunda8",
+      content:
+        '<b>📣 Camunda Cloud is now Camunda Platform 8!</b> Learn more about navigating the updated documentation <a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io/meta">here</a>.',
+      backgroundColor: "#14D890",
+      textColor: "#000",
+      isCloseable: false,
+    },
     prism: {
-      additionalLanguages: ['java'],
+      additionalLanguages: ["java"],
     },
     navbar: {
-      title: "Camunda Cloud Docs",
+      title: "Camunda Platform 8 Docs",
       logo: {
-        alt: "Camunda Cloud Docs",
-        src: "img/camunda-cloud-gradient.png",
+        alt: "Camunda Platform 8 Docs",
+        src: "img/black-C.png",
       },
       items: [
         {
@@ -90,23 +97,19 @@ module.exports = {
       },
       links: [
         {
-          title: "Docs",
+          title: "About",
           items: [
             {
-              label: "Introduction",
-              to: "docs/guides",
+              label: "How to use our docs",
+              to: "meta",
             },
             {
-              label: "Licenses",
-              to: "docs/reference/licenses",
+              label: "Try free",
+              href: "https://camunda.com/get-started",
             },
             {
-              label: "Notices",
-              to: "docs/reference/notices",
-            },
-            {
-              label: "Release cycle",
-              to: "docs/reference/release-policy",
+              label: "Contact",
+              to: "contact",
             },
           ],
         },
@@ -115,7 +118,7 @@ module.exports = {
           items: [
             {
               label: "Slack",
-              href: "https://zeebe-slack-invite.herokuapp.com/",
+              href: "https://camunda-slack-invite.herokuapp.com/",
             },
             {
               label: "Twitter",
@@ -125,13 +128,29 @@ module.exports = {
               label: "GitHub",
               href: "https://github.com/camunda-cloud/camunda-cloud-documentation",
             },
+            {
+              label: "Forum",
+              href: "https://forum.camunda.io/",
+            },
+            {
+              label: "Contribute",
+              href: "https://camunda.com/developers/how-to-contribute/",
+            },
+            {
+              label: "Developer resources",
+              href: "https://camunda.com/developers/",
+            },
+            {
+              label: "Subscribe",
+              href: "https://camunda.com/developers/developer-community-updates/",
+            },
           ],
         },
         {
-          title: "More",
+          title: "Camunda",
           items: [
             {
-              label: "Cloud Console",
+              label: "Console",
               href: "https://camunda.io",
             },
             {
@@ -139,12 +158,12 @@ module.exports = {
               href: "https://status.camunda.io",
             },
             {
-              label: "Contact",
-              to: "contact",
-            },
-            {
               label: "Blog",
               href: "https://camunda.com/blog/category/camunda-cloud/",
+            },
+            {
+              label: "Release cycle",
+              to: "docs/reference/release-policy",
             },
           ],
         },
@@ -157,6 +176,14 @@ module.exports = {
             },
             {
               html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
+            },
+            {
+              label: "Licenses",
+              to: "docs/reference/licenses",
+            },
+            {
+              label: "Security notices",
+              to: "docs/reference/notices",
             },
           ],
         },
@@ -214,7 +241,7 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl:
-            "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/",
+            "https://github.com/camunda/camunda-platform-docs/edit/main/",
           // disableVersioning: isVersioningDisabled,
           lastVersion: "current",
           // onlyIncludeVersions:

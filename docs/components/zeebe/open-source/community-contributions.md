@@ -23,7 +23,7 @@ If you're interested in contributing to the main Zeebe repository (versus creati
 ## Next steps
 
 - [Get help and get involved](get-help-get-involved.md).
-- Check out [Awesome Camunda Cloud](https://github.com/camunda-community-hub/awesome-camunda-cloud).
+- Check out [Awesome Camunda Platform 8](https://github.com/camunda-community-hub/awesome-camunda-cloud).
 - Learn more about our [release policy](reference/release-policy.md).
 - Avoid suprises by staying on top of [announcements](reference/announcements.md).
 - Read more about the [Camunda Community Hub](https://camunda.com/blog/2021/03/introducing-the-camunda-community-hub/).

@@ -1,21 +1,21 @@
 ---
 title: "Invoking services from a Camunda 7 process"
 tags:
-    - Service
-    - Java Delegate
-    - Expression Language
-    - External Task
-    - REST
-    - SOAP
-    - JMS
-    - Camel
-    - ESB
-    - SQL
-    - SAP
+  - Service
+  - Java Delegate
+  - Expression Language
+  - External Task
+  - REST
+  - SOAP
+  - JMS
+  - Camel
+  - ESB
+  - SQL
+  - SAP
 ---
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you are using Camunda Cloud, visit [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
+This best practice targets Camunda Platform 7.x only! If you are using Camunda Platform 8, visit [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 :::
 
 Access business logic implemented for the Java VM and remote services by means of small pieces of glue code. This glue code maps process input/output to your business logic by means of best-of-breed libraries of your own choosing.
@@ -28,8 +28,8 @@ In most cases, you should use a pull approach, where external worker threads que
 
 There are two patterns available to glue your code to a process model:
 
-* **Push:** The process engine actively issues a **service call** (or executes a **script**) via the mechanisms described below. The workflow engie pushes the work.
-* **Pull:** External worker threads query the process engine API for **external tasks**, and they pull the work. Then, they do the actual work and notify the process engine of works completion.
+- **Push:** The process engine actively issues a **service call** (or executes a **script**) via the mechanisms described below. The workflow engie pushes the work.
+- **Pull:** External worker threads query the process engine API for **external tasks**, and they pull the work. Then, they do the actual work and notify the process engine of works completion.
 
 ### External tasks
 
@@ -39,28 +39,28 @@ An **external task** is a task that waits to be completed by some external servi
 
 The interaction with the external task API can be done in two different ways:
 
-* Use [Camunda's external task client libraries](https://docs.camunda.org/manual/latest/user-guide/ext-client/) for [Java](https://github.com/camunda/camunda-external-task-client-java) or [Node.js](https://github.com/camunda/camunda-external-task-client-js). These libraries make it very easy to implement your external task worker.
+- Use [Camunda's external task client libraries](https://docs.camunda.org/manual/latest/user-guide/ext-client/) for [Java](https://github.com/camunda/camunda-external-task-client-java) or [Node.js](https://github.com/camunda/camunda-external-task-client-js). These libraries make it very easy to implement your external task worker.
 
-* Create your own client for Camunda's REST API based on the [Camunda OpenAPI specification](https://docs.camunda.org/manual/latest/reference/rest/openapi/), probably via code generation. This approach allows you to generate code for every programming language and also covers the full REST API, not only external tasks.
+- Create your own client for Camunda's REST API based on the [Camunda OpenAPI specification](https://docs.camunda.org/manual/latest/reference/rest/openapi/), probably via code generation. This approach allows you to generate code for every programming language and also covers the full REST API, not only external tasks.
 
 Using external tasks comes with the following advantages:
 
-* **Temporal decoupling**: The pattern can replace a message queue between the service task (the "consumer") and the service implementation (the "provider"). It can eliminate the need for operating a dedicated message bus while keeping the decoupling that messaging would provide.
+- **Temporal decoupling**: The pattern can replace a message queue between the service task (the "consumer") and the service implementation (the "provider"). It can eliminate the need for operating a dedicated message bus while keeping the decoupling that messaging would provide.
 
-* **Polyglott architectures**: The pattern can be used to integrate .NET based services, for example, when it might not be that easy to write Java delegates to call them. Service implementations are possible in any language that can be used to interact with a REST API.
+- **Polyglott architectures**: The pattern can be used to integrate .NET based services, for example, when it might not be that easy to write Java delegates to call them. Service implementations are possible in any language that can be used to interact with a REST API.
 
-* **Better scaling**: The pattern allows you to start and stop workers as you like, and run as many of them as you need. By doing so, you can scale each service task (or to be precise, each "topic") individually.
+- **Better scaling**: The pattern allows you to start and stop workers as you like, and run as many of them as you need. By doing so, you can scale each service task (or to be precise, each "topic") individually.
 
-* **Connect cloud and on-premise**: The pattern supports you in running Camunda somewhere in the cloud (as our customers often do), because you can still have services on-premise, as they can now query their work via REST over SSL, which is also quite firewall-friendly.
+- **Connect cloud and on-premise**: The pattern supports you in running Camunda somewhere in the cloud (as our customers often do), because you can still have services on-premise, as they can now query their work via REST over SSL, which is also quite firewall-friendly.
 
-* **Avoid timeouts**: The pattern allows you to asynchronously call long-running services, which eventually block for hours (and would therefore cause transaction and connection timeouts when being called synchronously).
+- **Avoid timeouts**: The pattern allows you to asynchronously call long-running services, which eventually block for hours (and would therefore cause transaction and connection timeouts when being called synchronously).
 
-* **Run services on specialized hardware**: Each worker can run in the environment that is best suited for the specific task of that worker; for example, CPU-optimized cloud instances for complex image processing and memory-optimized instances for other tasks.
+- **Run services on specialized hardware**: Each worker can run in the environment that is best suited for the specific task of that worker; for example, CPU-optimized cloud instances for complex image processing and memory-optimized instances for other tasks.
 
 Learn more about external tasks in the [use guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) as well as the [reference](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/service-task/#external-tasks) and explore the video processing example shown above in greater detail by reading the [blog post](https://blog.camunda.org/post/2015/11/external-tasks/) about it.
 
 :::note
-Camunda Cloud focuses on the external task pattern, there are no Java Delegates available as explained in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
+Camunda Platform 8 focuses on the external task pattern, there are no Java Delegates available as explained in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
 :::
 
 ### Java Delegates
@@ -72,7 +72,7 @@ A Java Delegate is a simple Java class that implements the Camunda `JavaDelegate
 </serviceTask>
 ```
 
-Leverage dependency injection to get access to your *business service* beans from the delegate. Consider a delegate to be a semantical part of the process definition in a wider sense: it is taking care of the nuts and bolts needed to wire the business logic to your process. Typically, it does the following:
+Leverage dependency injection to get access to your _business service_ beans from the delegate. Consider a delegate to be a semantical part of the process definition in a wider sense: it is taking care of the nuts and bolts needed to wire the business logic to your process. Typically, it does the following:
 
 1. Data Input Mapping
 2. Calling a method on the business service
@@ -121,12 +121,12 @@ One advantage of using Java Delegates is that, if you develop in Java, this is a
 
 ### General recommendation
 
-In general, we *recommend to use external tasks* to apply a general architecture and mindset, that allows to [leverage Camunda Cloud easier](https://docs.camunda.io/docs/guides/migrating-from-Camunda-Platform/#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
+In general, we _recommend to use external tasks_ to apply a general architecture and mindset, that allows to [leverage Camunda Platform 8 easier](../../../guides/migrating-from-camunda-platform-7.md#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
 
-* A slightly increased complexity for Java projects, because they have to handle seperate Java clients.
-* A slightly increased overhead compared to Java Delegates, as all comunication with the engine is remote, even if it runs in the same Java VM.
+- A slightly increased complexity for Java projects, because they have to handle seperate Java clients.
+- A slightly increased overhead compared to Java Delegates, as all comunication with the engine is remote, even if it runs in the same Java VM.
 
-Only if the increased latency does not work for your use case, for example, because you need to execute a 30-task process synchronously to generate a REST response within a handfull of milliseconds, should you then consider Java Delegates (or also consider switching to use Camunda Cloud).
+Only if the increased latency does not work for your use case, for example, because you need to execute a 30-task process synchronously to generate a REST response within a handfull of milliseconds, should you then consider Java Delegates (or also consider switching to use Camunda Platform 8).
 
 ### Detailed comparison
 
@@ -576,8 +576,8 @@ completion.</p>
 
 When invoking services, you can experience faults and exceptions. See our separate best practices about:
 
-* [Understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/) 
-* [Dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
+- [Understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/)
+- [Dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
 
 ## Example technology solutions
 
@@ -707,11 +707,11 @@ Instead of invoking SQL directly, consider using [JPA](http://www.oracle.com/tec
 
 ### Calling SAP systems
 
-To call a  **SAP** system, you have the following options:
+To call a **SAP** system, you have the following options:
 
-* Use REST or SOAP client calls, connecting Camunda to **SAP Netweaver Gateway** or **SAP Enterprise Services**.
+- Use REST or SOAP client calls, connecting Camunda to **SAP Netweaver Gateway** or **SAP Enterprise Services**.
 
-* Use **SAP's Java Connectors (JCo)**. Consider using some frameworks to make this easier, like the open-source frameworks of [Hibersap](https://github.com/hibersap).
+- Use **SAP's Java Connectors (JCo)**. Consider using some frameworks to make this easier, like the open-source frameworks of [Hibersap](https://github.com/hibersap).
 
 ### Executing a Groovy script
 

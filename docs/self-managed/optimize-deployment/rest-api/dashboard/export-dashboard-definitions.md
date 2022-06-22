@@ -18,21 +18,13 @@ POST `/api/public/export/dashboard/definition/json`
 
 The following request headers have to be provided with every request:
 
-|Header|Constraints|Value|
-|--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](../../authorization)|
-
-* Only required if not set as a query parameter
+| Header        | Constraints | Value                                |
+| ------------- | ----------- | ------------------------------------ |
+| Authorization | REQUIRED    | [Authorization](../../authorization) |
 
 ## Query parameters
 
-The following query parameters have to be provided with every request:
-
-|Parameter|Constraints|Value|
-|--- |--- |--- |
-|access_token|REQUIRED*|See [Authorization](../../authorization)|
-
-* Only required if not set as a request header
+No query parameters available.
 
 ## Request body
 
@@ -46,12 +38,12 @@ The response contains a list of exported dashboard definitions as well as all re
 
 Possible HTTP response status codes:
 
-|Code|Description|
-|--- |--- |
-|204|Request successful.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|404|At least one of the given dashboard IDs does not exist.|
-|500|Some error occurred while processing the request, best check the Optimize log.|
+| Code | Description                                                                                                  |
+| ---- | ------------------------------------------------------------------------------------------------------------ |
+| 204  | Request successful.                                                                                          |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 404  | At least one of the given dashboard IDs does not exist.                                                      |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
 ## Example
 
@@ -59,19 +51,23 @@ Possible HTTP response status codes:
 
 Assuming you want to export the two dashboards with IDs `123` and `456` and have configured the accessToken `mySecret`, this is what it would look like:
 
-POST `/api/public/export/dashboard/definition/json?access_token=mySecret`
+POST `/api/public/export/dashboard/definition/json`
 
-with request body:
+#### Request header
+
+`Authorization: Bearer mySecret`
+
+#### Request body
 
 ```
 [ "123", "456" ]
 ```
 
-##### Response
+#### Response
 
 Status 200.
 
-##### Response content
+#### Response content
 
 The response contains the two exported dashboard definitions as well as all three process reports contained within the two dashboards.
 

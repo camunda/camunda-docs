@@ -1,16 +1,16 @@
 ---
 title: "Securing Camunda 7"
 tags:
-    - Security
-    - SSO
-    - Authentication
-    - Authorization
+  - Security
+  - SSO
+  - Authentication
+  - Authorization
 ---
 
 Disallow unauthorized access by securing the Camunda Platform 7.x before going live with your process applications. Understand Camunda user management essentials, enforce authorization for the REST API, define access rights for Camunda specific resources such as process definitions, and consider integrating with your Single-Sign-On (SSO).
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! For Camunda Cloud, visit [Zeebe Security](/docs/self-managed/zeebe-deployment/security/).
+This best practice targets Camunda Platform 7.x only! For Camunda Platform 8, visit [Zeebe Security](/docs/self-managed/zeebe-deployment/security/).
 :::
 
 ## Understanding user management essentials
@@ -37,15 +37,15 @@ taskService.claim(taskId, "fozzie");
 
 No further concepts exist like logical workflow roles or special mappings.
 
-Camunda ships with an [IdentityService](https://docs.camunda.org/manual/latest/user-guide/process-engine/identity-service/) which allows you to either manage real users and groups *directly within the Camunda database*, or access the users and group information managed in a directory service database which supports **LDAP** (Lightweight Directory Access Protocol), like Microsoft's "Active Directory" and many others. One can also provide a custom **IdentityService** implementation to satisfy each and every requirement apart from the default identity service options shipped with Camunda. This is particularly helpful if you plan to integrate with a third party identity management system. Using the **IdentityService** is not mandatory - it is *possible* to reference users and groups within Camunda that are not known by the engine's **IdentityService** at all. This could be useful for testing purposes or when integrating with third party identity management solutions.
+Camunda ships with an [IdentityService](https://docs.camunda.org/manual/latest/user-guide/process-engine/identity-service/) which allows you to either manage real users and groups _directly within the Camunda database_, or access the users and group information managed in a directory service database which supports **LDAP** (Lightweight Directory Access Protocol), like Microsoft's "Active Directory" and many others. One can also provide a custom **IdentityService** implementation to satisfy each and every requirement apart from the default identity service options shipped with Camunda. This is particularly helpful if you plan to integrate with a third party identity management system. Using the **IdentityService** is not mandatory - it is _possible_ to reference users and groups within Camunda that are not known by the engine's **IdentityService** at all. This could be useful for testing purposes or when integrating with third party identity management solutions.
 
 The Camunda LDAP Identity Service doesn’t support tenants. That means tenant-related access restrictions do not work by default when using the LDAP plugin.
 
-To illustrate, Camunda needs access to (text string based) *users and groups* in order to:
+To illustrate, Camunda needs access to (text string based) _users and groups_ in order to:
 
-* Allow *logging into* the web applications shipping with it (Camunda Tasklist, Cockpit, etc.)
-* Allow Tasklist to, for example, present *open tasks* available for the groups of the logged in user
-* Allow Cockpit to, for example, present just the process definitions related to the *tenant(s)* the logged in user is associated with.
+- Allow _logging into_ the web applications shipping with it (Camunda Tasklist, Cockpit, etc.)
+- Allow Tasklist to, for example, present _open tasks_ available for the groups of the logged in user
+- Allow Cockpit to, for example, present just the process definitions related to the _tenant(s)_ the logged in user is associated with.
 
 Keep in mind that your custom directory service is decoupled from Camunda. While it is possible to delete users and groups or change memberships in your directory service without harming Camunda's runtime, the text strings already known to Camunda won't change without manual intervention.
 
@@ -55,7 +55,7 @@ Camunda's [IdentityService](https://docs.camunda.org/manual/latest/user-guide/pr
 
 ### Understanding authentication
 
-The procedure of *authentication* makes sure that the user is known to the Camunda engine. When directly using Camunda's Java API, this must be done *for each thread* by issuing, for example:
+The procedure of _authentication_ makes sure that the user is known to the Camunda engine. When directly using Camunda's Java API, this must be done _for each thread_ by issuing, for example:
 
 ```java
 identityService.setAuthenticatedUserId("fozzie");
@@ -81,19 +81,19 @@ To better understand the consequences and needs when being faced with the task t
 
 <span className="callout">1</span>
 
-A *request* is either asking for a REST API endpoint or one of the web applications functionalities.
+A _request_ is either asking for a REST API endpoint or one of the web applications functionalities.
 
 <span className="callout">2</span>
 
-The `ProcessEngineAuthenticationFilter` (for REST) or the `AuthenticationFilter` (for the web applications) check the user's authentication credentials via the *IdentityService*. The filters retrieve groups and tenant memberships and set the authenticated user for the current thread in the engine.
+The `ProcessEngineAuthenticationFilter` (for REST) or the `AuthenticationFilter` (for the web applications) check the user's authentication credentials via the _IdentityService_. The filters retrieve groups and tenant memberships and set the authenticated user for the current thread in the engine.
 
 <span className="callout">3</span>
 
-The request is *allowed*.
+The request is _allowed_.
 
 <span className="callout">4</span>
 
-The request might also be *denied*, in case the authentication fails (e.g. because the username is unknown or the password does not match). For the web applications, a denied request is redirected to the login page.
+The request might also be _denied_, in case the authentication fails (e.g. because the username is unknown or the password does not match). For the web applications, a denied request is redirected to the login page.
 
 <span className="callout">5</span>
 
@@ -105,29 +105,29 @@ Under the hood, the engine enforces authorizations by instrumenting SQL queries.
 
 <span className="callout">7</span>
 
-As a consequence, only allowed and *accessible data* will be presented to the user.
+As a consequence, only allowed and _accessible data_ will be presented to the user.
 
 ### Securing the Camunda core engine
 
-You can enable or disable authorization checks for the engine itself. Authorizations will only be checked if you [enable authorization checks](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/#enable-authorization-checks) and *tell the engine who is logged in* with the *current thread*:
+You can enable or disable authorization checks for the engine itself. Authorizations will only be checked if you [enable authorization checks](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/#enable-authorization-checks) and _tell the engine who is logged in_ with the _current thread_:
 
 ```java
 identityService.setAuthenticatedUserId("fozzie");
 ```
 
- If you directly use the API and do not tell the process engine who is logged in with the current thread, it will provide full access to all data.
+If you directly use the API and do not tell the process engine who is logged in with the current thread, it will provide full access to all data.
 
 Authorization is enabled per default in the Camunda distributions, but if you configure and run your own engine (e.g. via Spring), it is disabled by default.
 
 For the authorization checks (to access specific resources), the engine does not question whether the authenticated user is known to the used IdentityService. As mentioned above, the engine treats users, groups and tenants as strings and grants access if those strings match with the defined authorization rules.
 
-In case you *do not require authorizations*, make sure that [authorization checks are disabled](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/#enable-authorization-checks), since they do have a performance impact. You might not need authorizations if you build your own custom web application handling authentication and authorization itself that just uses Camunda in the background, for example.
+In case you _do not require authorizations_, make sure that [authorization checks are disabled](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/#enable-authorization-checks), since they do have a performance impact. You might not need authorizations if you build your own custom web application handling authentication and authorization itself that just uses Camunda in the background, for example.
 
 If you have authorization checks enabled, you might or might not want to perform these checks when you execute Java code as part of your workflow. One example could be loading the number of running process instances to be used for some decision. For this reason, you can [enable or disable authorization checks for custom user code](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/#enable-authorization-checks-for-user-code) separately.
 
 ### Securing Camunda's REST API
 
-Internally, the REST API is just another client for the Java API which needs to inform the engine about the authenticated user. This only works if you turn on authentication for the REST API. Otherwise, no user is logged in and you have *unrestricted access*.
+Internally, the REST API is just another client for the Java API which needs to inform the engine about the authenticated user. This only works if you turn on authentication for the REST API. Otherwise, no user is logged in and you have _unrestricted access_.
 
 Authentication and hence authorization checks are by default disabled for the REST API to allow for a quick getting started experience.
 
@@ -139,8 +139,8 @@ If you do not need the REST API in production, consider undeploying the REST API
 
 ### Securing Camunda's web applications
 
-The Camunda web applications (Tasklist, Cockpit, Admin) have by default a form based *authentication turned on*. There is no further need for changing any configuration when going into production, apart from the more general consideration to enable a custom identity service provider (see below).
-However, ensure that you do not deploy artifacts like the *h2 console* and the *example applications* in your production environments. They are solely shipped for development purposes and a smooth experience when getting started with Camunda.
+The Camunda web applications (Tasklist, Cockpit, Admin) have by default a form based _authentication turned on_. There is no further need for changing any configuration when going into production, apart from the more general consideration to enable a custom identity service provider (see below).
+However, ensure that you do not deploy artifacts like the _h2 console_ and the _example applications_ in your production environments. They are solely shipped for development purposes and a smooth experience when getting started with Camunda.
 
 Internally, Camunda Web Apps use an `AuthenticationFilter` very similar to the REST API `ProcessEngineAuthenticationFilter` described above; it just redirects an unknown user to the login page.
 
@@ -148,7 +148,7 @@ Internally, Camunda Web Apps use an `AuthenticationFilter` very similar to the R
 
 By default, Camunda will manage users and groups directly within the Camunda database. As an alternative to that, you can also enable read-only access to an LDAP-based user/group repository. The [LDAP identity service](https://docs.camunda.org/manual/latest/user-guide/process-engine/identity-service/#the-ldap-identity-service) is implemented as a Process Engine Plugin and can be added to the process engine configuration in order to replace the default database identity service.
 
-As an alternative to those two possibilities, [implement a custom IdentityProvider](https://docs.camunda.org/manual/latest/user-guide/process-engine/identity-service/) to satisfy each and every other requirement. You can provide *read-only* or even *writable* access to your user repository.
+As an alternative to those two possibilities, [implement a custom IdentityProvider](https://docs.camunda.org/manual/latest/user-guide/process-engine/identity-service/) to satisfy each and every other requirement. You can provide _read-only_ or even _writable_ access to your user repository.
 
 Note that as the LDAP Identity Service doesn’t support tenants (multi-tenancy). For multi-tenancy configured via LDAP, you would therefore need a custom identity service allowing you to retrieve tenant IDs from your LDAP.
 
@@ -177,5 +177,5 @@ From Camunda 7.9 on, it is much easier to implement SSO by making use of the [Co
 You can get started by looking at some examples showing how this can be achieved for different authentication frameworks:
 
 - [Very basic authentication filter](https://github.com/camunda-consulting/camunda-webapp-plugins/tree/master/camunda-webapp-plugin-sso-autologin) for the Camunda web apps that reads the user from a provided URL parameter.
-- Many *application servers* support single sign-on out of the box (or through plugins) and can provide the user id to the application. Have a look at the [Single Sign-On Community Extension](https://github.com/camunda/camunda-sso-jboss/).
+- Many _application servers_ support single sign-on out of the box (or through plugins) and can provide the user id to the application. Have a look at the [Single Sign-On Community Extension](https://github.com/camunda/camunda-sso-jboss/).
 - It is quite easy to [integrate Camunda with Spring Security](https://github.com/camunda-consulting/code/tree/master/snippets/springboot-security-sso) so that the framework handles authentication and passes the authenticated user on to Camunda.

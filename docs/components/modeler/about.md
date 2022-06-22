@@ -3,11 +3,11 @@ id: about-modeler
 title: About Modeler
 ---
 
-<span class="badge badge--cloud">Camunda Cloud only</span>
+<span class="badge badge--cloud">Camunda Platform 8 only</span>
 
 :::note
 
-Web Modeler is only available for Camunda Cloud SaaS.
+Web Modeler is only available for Camunda Platform 8 SaaS.
 
 :::
 
@@ -22,7 +22,7 @@ Camunda offers a few tools to design your diagrams and implement them:
 - [Web Modeler](./web-modeler/launch-cloud-modeler.md)
 - [Desktop Modeler](./desktop-modeler/install-the-modeler.md)
 
-Web Modeler and Desktop Modeler differ mainly in their environment. Web Modeler is part of Cloud Console and offers a seamless integration into Camunda Cloud to model BPMN. Desktop Modeler is a desktop application that can be installed and used locally, all while integrating your local development environment.
+Web Modeler and Desktop Modeler differ mainly in their environment. Web Modeler is part of Cloud Console and offers a seamless integration into Camunda Platform 8 to model BPMN. Desktop Modeler is a desktop application that can be installed and used locally, all while integrating your local development environment.
 
 In this guide, we'll demonstrate modeling BPMN diagrams using both Web Modeler and Desktop Modeler.
 

@@ -641,6 +641,10 @@
             },
             {
               "type": "doc",
+              "id": "version-1.2/apis-clients/community-clients/micronaut"
+            },
+            {
+              "type": "doc",
               "id": "version-1.2/apis-clients/community-clients/c-sharp"
             },
             {

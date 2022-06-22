@@ -23,11 +23,11 @@ BPMN offers control and visibility over your critical business processes. The wo
 ## Set up
 
 Begin by building your BPMN diagrams with [Modeler](../components/modeler/about.md).
-To get started, ensure you’ve [created a Camunda Cloud account](./getting-started/create-camunda-cloud-account.md).
+To get started, ensure you’ve [created a Camunda Platform 8 account](./guides/create-account.md).
 
 ## Getting started with BPMN
 
-Once logged in to your Camunda Cloud account, take the following steps:
+Once logged in to your Camunda Platform 8 account, take the following steps:
 
 1. Click on the **Modeler** tab at the top of the page.
 2. Open any project from your Web Modeler home view.
@@ -43,6 +43,8 @@ You can build out a BPMN diagram for a process using several elements, including
 - Events: The things that happen. For example, start and end events which begin and terminate the process.
 - Tasks: For example, user tasks for a particular user to complete, or service tasks to invoke various webservices.
 - Gateways: For example, parallel gateways that move the process along between two tasks at the same time.
+  - Utilize [variables](../components/concepts/variables.md) to reflect the data of process instances.
+  - Leverage [expressions](../components/concepts/expressions.md) to access variables and calculate their value(s).
 - Subprocesses: For example, a transaction subprocess which can be used to group multiple activities to a transaction.
 
 For a complete list of BPMN elements and their capabilities, visit the [BPMN reference material](../components/modeler/bpmn/bpmn.md).
@@ -79,20 +81,23 @@ If you change a diagram and it is autosaved, this has no effect on your cluster(
 When you deploy the diagram, it becomes available on the selected cluster and new instances can start.
 :::
 
-To execute your completed process diagram, click the blue **Deploy Diagram** button.
+To execute your completed process diagram, click the blue **Deploy diagram** button.
 
-You can now start a new process instance to initiate your process diagram. Click the blue **Start Instance** button.
+You can now start a new process instance to initiate your process diagram. Click the blue **Start instance** button.
 
-You can now monitor your instances in [Operate](./components/operate/index.md). From your diagram, click the honeycomb icon button next to the Start Instance button, and **View Process Instances**. This will automatically take you to Camunda Operate to monitor your running instances.
+You can now monitor your instances in [Operate](./components/operate/index.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Camunda Operate to monitor your running instances.
 
-You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the **Start Instance** button, and **View User Tasks** to automatically be taken to [Tasklist](./components/tasklist/introduction.md).
+You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the **Start instance** button, and **View user tasks** to automatically be taken to [Tasklist](./components/tasklist/introduction.md).
+
+:::note
+Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
+:::
 
 ## Additional resources and next steps
 
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
 - [BPMN Implementation Reference](https://docs.camunda.org/manual/latest/reference/bpmn20/)
 - [BPMN Engine](https://camunda.com/products/camunda-platform/bpmn-engine/)
-- [Model Your First Process](./getting-started/model-your-first-process.md)
 - [BPMN Reference](../components/modeler/bpmn/bpmn.md)
 - [Operate](./components/operate/index.md)
 - [Tasklist](./components/tasklist/introduction.md)

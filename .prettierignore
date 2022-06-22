@@ -1,0 +1,26 @@
+# Ignore dependencies
+node_modules
+package-lock.json
+
+# Ignore files managed by Git
+.git
+
+# Ignore files managed by VSCode
+.vscode
+
+# Ignore build artifacts
+.docusaurus
+build
+
+# -------- To be removed -------- #
+# Ignore while prettier is being  #
+# enabled to assist gradual       #
+# adoption. These should either   #
+# be removed or moved to the top. #
+# ------------------------------- #
+versioned_docs/version-0.25
+versioned_docs/version-0.26
+versioned_docs/version-1.0
+versioned_docs/version-1.1
+versioned_docs/version-1.2
+versioned_docs/version-1.3

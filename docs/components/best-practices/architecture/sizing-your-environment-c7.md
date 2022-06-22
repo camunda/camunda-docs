@@ -1,17 +1,17 @@
 ---
 id: sizing-your-environment-c7
-title:  Sizing Your Camunda 7 Environment
+title: Sizing Your Camunda 7 Environment
 tags:
-    - Database
-    - Performance
-    - Hardware
-    - Sizing
+  - Database
+  - Performance
+  - Hardware
+  - Sizing
 ---
 
 Size your environment for Camunda Platform 7 appropriately, including sufficient hardware and database space.
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you are using Camunda Cloud, visit [Sizing your Camunda Cloud Environment](../sizing-your-environment/).
+This best practice targets Camunda Platform 7.x only! If you are using Camunda Platform 8, visit [Sizing your Camunda Platform 8 Environment](../sizing-your-environment/).
 :::
 
 ## Understanding the influencing factors
@@ -41,9 +41,9 @@ From the Camunda perspective, there are a number of aspects to look at:
 
 ### Performance & scalability
 
-We normally do not hit limits in scalability of Camunda. Due to the small footprint, the engine can run with extreme efficiency. All state is persisted in the database, so you can always add new process engine instances (e.g. cluster nodes) to speed up execution.  
+We normally do not hit limits in scalability of Camunda. Due to the small footprint, the engine can run with extreme efficiency. All state is persisted in the database, so you can always add new process engine instances (e.g. cluster nodes) to speed up execution.
 
-The natural limit for this kind of architecture is the database. More scalability can be achieved using [Camunda Cloud](https://camunda.com/products/cloud/).
+The natural limit for this kind of architecture is the database. More scalability can be achieved using [Camunda Platform 8](https://camunda.com/products/cloud/).
 
 ### High availability
 
@@ -112,11 +112,11 @@ To gain some numbers, we were running the [invoice example](https://github.com/c
 
 This gave us the following results:
 
-| - | Number of PIs | Disk space | Calculated disk space per PI | Remarks |
-| -- | -- | -- | -- | -- |
-| Runtime | 6.989 | 28,375 MB | 4,157 KB | Around half of the space is used for indices. |
-| History | 39.953 | 766,375 MB | 19,642 KB | Space requirements massively influenced by history level. |
-| Sum | - | 794,75 MB | - | - |
+| -       | Number of PIs | Disk space | Calculated disk space per PI | Remarks                                                   |
+| ------- | ------------- | ---------- | ---------------------------- | --------------------------------------------------------- |
+| Runtime | 6.989         | 28,375 MB  | 4,157 KB                     | Around half of the space is used for indices.             |
+| History | 39.953        | 766,375 MB | 19,642 KB                    | Space requirements massively influenced by history level. |
+| Sum     | -             | 794,75 MB  | -                            | -                                                         |
 
 As a rule of thumb, capture the following figures and use the example above to make an informed "guess":
 

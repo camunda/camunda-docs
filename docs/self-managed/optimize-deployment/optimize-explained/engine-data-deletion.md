@@ -4,11 +4,9 @@ title: "Engine data deletion"
 description: "Explains how Optimize copes with the deletion of engine data."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
 The engine slows down if the historic data grows significantly over time, particularly in cases where the amount of data streaming in each day is large. One solution to this is to remove old data from the engine on a regular basis, yet still importing the data to Optimize so it can be used for deeper analytics.
 
-To support the described use-case, Optimize does not care if you delete any data on the engine side. Specifically, Optimize does not sync with the engine on data deletion. If you want to remove any data from Optimize, you can either erase the data from Elasticsearch or use the [Optimize History Cleanup Feature](./../setup/history-cleanup.md).
+To support the described use-case, Optimize does not care if you delete any data on the engine side. Specifically, Optimize does not sync with the engine on data deletion. If you want to remove any data from Optimize, you can either erase the data from Elasticsearch or use the [Optimize History Cleanup Feature](./../../configuration/history-cleanup/).
 
 The subsections below describe the ways in which Optimize handles data deletion from the engine.
 
@@ -16,8 +14,8 @@ The subsections below describe the ways in which Optimize handles data deletion 
 
 There are two possible ways of doing this:
 
-* **Historic Cleanup**: If you have enabled the [history cleanup](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/#history-cleanup), historic data will be removed in the engine based on configurable time-to-live.
-* **Manual Deletion**: You trigger a [manual deletion](https://docs.camunda.org/manual/latest/reference/rest/history/process-instance/post-delete/), e.g. via REST-API.
+- **Historic Cleanup**: If you have enabled the [history cleanup](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/#history-cleanup), historic data will be removed in the engine based on configurable time-to-live.
+- **Manual Deletion**: You trigger a [manual deletion](https://docs.camunda.org/manual/latest/reference/rest/history/process-instance/post-delete/), e.g. via REST-API.
 
 Optimize can handle this case as it imports the old data first, and once it has imported everything, it will only add to its database new data streaming in.
 

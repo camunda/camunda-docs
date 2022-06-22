@@ -1,43 +1,37 @@
 ---
-id: getting-started-orchestrate-microservices
+id: orchestrate-microservices
 title: Getting started with Microservice Orchestration
 sidebar_label: Getting started with Microservice Orchestration
 description: "Orchestrate Microservices along a business process for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
 ---
 
-Using Camunda Cloud, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda Cloud.
+Using Camunda Platform 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda Platform 8.
 
-While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda Cloud in other programming languages.
+While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda Platform 8 in other programming languages.
 
 ## Prerequisites
 
-* Valid Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one
-* Java >= 8
-* Maven
-* IDE (IntelliJ, VSCode, or similar)
-* Download and unzip or clone the [repo](https://github.com/camunda-cloud/camunda-cloud-tutorials), then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`
+- Ensure you have a valid [Camunda Platform 8 account](./create-account.md), or sign up if you still need one.
+- Java >= 8
+- Maven
+- IDE (IntelliJ, VSCode, or similar)
+- Download and unzip or clone the [repo](https://github.com/camunda-cloud/camunda-cloud-tutorials), then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`
 
-## Guide steps
+### Create a cluster
 
-First, [log in](https://camunda.io) to your Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one.
+import CreateCluster from './assets/react-components/create-cluster.md'
 
-- [Prerequisites](#prerequisites)
-- [Guide steps](#guide-steps)
-  - [Design your process with BPMN](#design-your-process-with-bpmn)
-  - [Create credentials for your Zeebe client](#create-credentials-for-your-zeebe-client)
-  - [Create a worker for the service task](#create-a-worker-for-the-service-task)
-- [Next steps](#next-steps)
+<CreateCluster/>
 
 ### Design your process with BPMN
 
 Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Web Modeler.
 
-1. Navigate to the **Modeler** tab at the top of the page. This opens Web Modeler to your **Projects** page in a separate browser tab.
-2. Create a new project by clicking the blue **New project** button. Give your project a descriptive name.
-3. Click the blue **New** button and select **BPMN Diagram**. A modal will appear to select a template, click **+ Create blank**.
-4. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **Microservice Orchestration Tutorial** for the name and **microservice-orchestration-tutorial** for the id.
-5. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click the wrench icon and select **Service Task** to change the task type.
+1. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
+2. Name your project and select **New > BPMN Diagram > + Create blank**.
+3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **Microservice Orchestration Tutorial** for the name and **microservice-orchestration-tutorial** for the id.
+4. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click the wrench icon and select **Service Task** to change the task type.
 
 ![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
 
@@ -53,11 +47,11 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 ### Create credentials for your Zeebe client
 
-To interact with your Camunda Cloud cluster, you'll use the Zeebe client. First, you'll need to create credentials.
+To interact with your Camunda Platform 8 cluster, you'll use the Zeebe client. First, you'll need to create credentials.
 
-1. The main page for Camunda Cloud Console should be open on another tab. Use Camunda Cloud Console to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your cluster id and region. You will need this information later when creating a worker in the next section.
+1. The main page for Console should be open on another tab. Use Console to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your cluster id and region. You will need this information later when creating a worker in the next section.
 
-:::note 
+:::note
 
 If your account is new, you should have a cluster already available. If no cluster is available, or you’d like to create a new one, click **Create New Cluster**.
 
@@ -65,7 +59,7 @@ If your account is new, you should have a cluster already available. If no clust
 
 2. Navigate to the **API** tab. Click **Create**.
 3. Provide a descriptive name for your client like `microservice-worker`. For this tutorial, the scope can be the default Zeebe scope. Click **Create**.
-4. Your client credentials can be copied or downloaded at this point. You will need your client id and your client secret when creating a worker in the next section, so keep this window open. Once you close or navigate away from this screen, you will not be able to see them again. 
+4. Your client credentials can be copied or downloaded at this point. You will need your client id and your client secret when creating a worker in the next section, so keep this window open. Once you close or navigate away from this screen, you will not be able to see them again.
 
 ### Create a worker for the service task
 
@@ -77,9 +71,9 @@ Next, we’ll create a worker for the service task by associating it with the ty
 4. After making these changes, perform a Maven install, then run the Worker.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
 5. Using the Modeler tab in your browser, navigate to Operate and you will see your token has moved to the end event, completing this process instance.
 
-Congratulations! You successfully built your first microservice orchestration solution with Camunda Cloud.
+Congratulations! You successfully built your first microservice orchestration solution with Camunda Platform 8.
 
-## Next steps
+## Additional resources and next steps
 
-* Learn more about Camunda Cloud and what it can do by reading [What is Camunda Cloud?](../../components/concepts/what-is-camunda-cloud/).
-* Get your local environment ready for development with Camunda Cloud by [setting up your first development project](../setting-up-development-project).
+- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8?](../../components/concepts/what-is-camunda-platform-8).
+- Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](../setting-up-development-project).

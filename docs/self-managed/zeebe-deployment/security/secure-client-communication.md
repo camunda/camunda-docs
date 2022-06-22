@@ -3,23 +3,23 @@ id: secure-client-communication
 title: "Secure client communication"
 ---
 
-Zeebe supports transport layer security between the gateway and all the officially supported clients. In this section, we will review how to configure these components.
+Zeebe supports TLS (transport layer security) between the gateway and all the officially supported clients. In this section, we will review how to configure these components.
 
 ## Gateway
 
-Transport layer security in the gateway is disabled by default. This means that if you are just experimenting with Zeebe or in development, there is no configuration needed. However, if you want to enable authentication you can configure Zeebe in the `security` section of the configuration files. The following configurations are present in both `gateway.yaml.template` and `broker.standalone.yaml.template`, the file you should edit depends on whether you are using a standalone gateway or an embedded gateway.
+TLS in the gateway is disabled by default. This means that if you are just experimenting with Zeebe or in development, there is no configuration needed. However, if you want to enable authentication you can configure Zeebe in the `security` section of the configuration files. The following configurations are present in both `gateway.yaml.template` and `broker.standalone.yaml.template`, the file you should edit depends on whether you are using a standalone gateway or an embedded gateway.
 
 ```yaml
-...
-  security:
-    # Enables TLS authentication between clients and the gateway
-    enabled: false
+---
+security:
+  # Enables TLS authentication between clients and the gateway
+  enabled: false
 
-    # Sets the path to the certificate chain file
-    certificateChainPath:
+  # Sets the path to the certificate chain file
+  certificateChainPath:
 
-    # Sets the path to the private key file location
-    privateKeyPath:
+  # Sets the path to the private key file location
+  privateKeyPath:
 ```
 
 `enabled` should be either `true` or `false`, where true will enable TLS authentication between client and gateway, and false will disable it. `certificateChainPath` and `privateKeyPath` are used to configure the certificate with which the server will authenticate itself. `certificateChainPath` should be a file path pointing to a certificate chain in PEM format representing the server's certificate, and `privateKeyPath` is a file path pointing to the certificate's PKCS8 private key, also in PEM format.
@@ -84,6 +84,7 @@ func main() {
 	// ...
 }
 ```
+
 To disable TLS, execute the following:
 
 ```go
@@ -162,7 +163,7 @@ io.netty.handler.codec.http2.Http2Exception: HTTP/2 client preface string missin
   at java.lang.Thread.run(Thread.java:748)
 ```
 
-__Solution:__ Either enable TLS in the gateway as well or specify the `--insecure` flag when using `zbctl`.
+**Solution:** Either enable TLS in the gateway as well or specify the `--insecure` flag when using `zbctl`.
 
 ### TLS is disabled in `zbctl` but enabled for the gateway
 
@@ -172,7 +173,7 @@ __Solution:__ Either enable TLS in the gateway as well or specify the `--insecur
 Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection closed
 ```
 
-__Solution:__ Either enable TLS in the client by specifying a path to a certificate or disable it in the gateway by editing the appropriate configuration file.
+**Solution:** Either enable TLS in the client by specifying a path to a certificate or disable it in the gateway by editing the appropriate configuration file.
 
 ### TLS is enabled for both client and gateway but the CA certificate can't be found
 
@@ -182,4 +183,4 @@ __Solution:__ Either enable TLS in the client by specifying a path to a certific
 Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: authentication handshake failed: x509: certificate signed by unknown authority
 ```
 
-__Solution:__ Either install the CA certificate in the appropriate location for the system or specify a path to certificate using the methods described above.
+**Solution:** Either install the CA certificate in the appropriate location for the system or specify a path to certificate using the methods described above.

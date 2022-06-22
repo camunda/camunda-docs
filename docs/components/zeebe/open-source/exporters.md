@@ -46,7 +46,7 @@ During the loading phase, the configuration for each exporter is validated. The 
 - An exporter ID is not unique
 - An exporter points to a non-existent/non-accessible JAR
 - An exporter points to a non-existent/non-instantiable class
-- An exporter instance throws an exception in its `Exporter#configure` method 
+- An exporter instance throws an exception in its `Exporter#configure` method
 
 The last point is there to provide individual exporters to perform lightweight
 validation of their configuration (e.g. fail if missing arguments).

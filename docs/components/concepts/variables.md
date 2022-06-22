@@ -8,6 +8,8 @@ Variables are part of a process instance and represent the data of the instance.
 
 A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
 
+When [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md) or [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
+
 ## Variable names
 
 The name of a variable can be any alphanumeric string including the `_` symbol. For a combination of words, it's recommended to use the `camelCase` or the `snake_case` format. The `kebab-case` format is not allowed because it contains the operator `-`.
@@ -31,6 +33,14 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 - Array (e.g. `["item1" , "item2", "item3"]`)
 - Object (e.g. `{ "orderNumber": "A12BH98", "date": "2020-10-15", "amount": 185.34}`)
 - Null (`null`)
+
+## Variable size limitation
+
+Generally, there is a limit of 4 MB for the payload of a process instance. This 4 MB includes the variables and the workflow engine internal data, which means there is slightly less memory available for variables. The exact limitation depends on a few factors, but you can consider 3 MB as being safe. If in doubt, run a quick test case.
+
+:::note
+Regardless, we don't recommend storing much data in your process context. See our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
+:::
 
 ## Variable scopes
 
@@ -105,10 +115,10 @@ When an input mapping is applied, it creates a new **local variable** in the sco
 
 Examples:
 
-| Process instance variables | Input mappings | New variables |
-| -- | -- | -- |
-| `orderId: "order-123"` | **source:** `=orderId`<br/> **target:** `reference` | `reference: "order-123"` |
-| `customer:{"name": "John"}` | **source:** `=customer.name`<br/>**target:** `sender` | `sender: "John"` |
+| Process instance variables             | Input mappings                                                                                               | New variables                               |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| `orderId: "order-123"`                 | **source:** `=orderId`<br/> **target:** `reference`                                                          | `reference: "order-123"`                    |
+| `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
 | `customer: "John"`<br/>`iban: "DE456"` | **source:** `=customer`<br/> **target:** `sender.name`<br/>**source:** `=iban`<br/>**target:** `sender.iban` | `sender: {"name": "John", "iban": "DE456"}` |
 
 ### Output mappings
@@ -123,13 +133,13 @@ In the case of a subprocess, the behavior is different. There are no job/message
 
 Examples:
 
-| Job/message variables | Output mappings | Process instance variables |
-| -- | -- | -- |
-| `status: "Ok"` | **source:** `=status`<br/>**target:** `paymentStatus` | `paymentStatus: "OK"` |
+| Job/message variables                                | Output mappings                                                                                                                      | Process instance variables                         |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
-| `status: "Ok"`<br/>`transactionId: "t-789"` | **source:** `=transactionId`<br/>**target:** `order.transactionId` | `order: {"transactionId": "t-789"}`  |
+| `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |
 
 ## Next steps
 
-- [Accesses a variable](expressions.md#access-variables)
+- [Access variables](expressions.md#access-variables)
 - [Incidents](incidents.md)

@@ -1,129 +1,138 @@
-import React from 'react';
-import clsx from 'clsx';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from './styles.module.css';
+import React from "react";
+import clsx from "clsx";
+import Layout from "@theme/Layout";
+import Link from "@docusaurus/Link";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import styles from "./styles.module.css";
 
 const features = [
   {
-    title: 'Guides',
-    imageUrl: 'img/guides.png',
-    url: 'https://docs.camunda.io/docs/guides',
+    title: "Guides",
+    imageUrl: "img/guides.png",
+    url: "https://docs.camunda.io/docs/guides",
     description: (
-      <>Step-by-step content to strengthen your knowledge of Camunda Cloud, its components, and its features.
+      <>
+        Step-by-step content to strengthen your knowledge of Camunda Platform 8,
+        its components, and its features.
       </>
     ),
   },
   {
-    title: 'Components',
-    imageUrl: 'img/components.png',
-    url: 'https://docs.camunda.io/docs/components/',
+    title: "Components",
+    imageUrl: "img/components.png",
+    url: "https://docs.camunda.io/docs/components/",
     description: (
       <>
-        Conceptualize the cornerstones of Camunda Cloud and learn more about its supporting components.
+        Conceptualize the cornerstones of Camunda Platform 8 and learn more
+        about its supporting components.
       </>
     ),
   },
   {
-    title: 'APIs & Clients',
-    imageUrl: 'img/apisclients.png',
-    url: 'https://docs.camunda.io/docs/apis-clients/overview/',
-    description: (
-      <>
-        Programmatically interact with your automated processes.
-      </>
-    ),
+    title: "APIs & Clients",
+    imageUrl: "img/apisclients.png",
+    url: "https://docs.camunda.io/docs/apis-clients/overview/",
+    description: <>Programmatically interact with your automated processes.</>,
   },
 ];
 
 const features2 = [
   {
-    title: 'Self-Managed',
-    imageUrl: 'img/self-managed.png',
-    url: 'https://docs.camunda.io/docs/self-managed/overview/',
+    title: "Self-Managed",
+    imageUrl: "img/self-managed.png",
+    url: "https://docs.camunda.io/docs/self-managed/overview/",
     description: (
       <>
-        A self-hosted Camunda Cloud alternative, offering everything you need to download, configure, and work with each component.
+        A self-hosted Camunda Platform 8 alternative, offering everything you
+        need to download, configure, and work with each component.
       </>
     ),
   },
   {
-    title: 'Reference',
-    imageUrl: 'img/reference.png',
-    url: 'https://docs.camunda.io/docs/reference/',
+    title: "Reference",
+    imageUrl: "img/reference.png",
+    url: "https://docs.camunda.io/docs/reference/",
     description: (
       <>
-        Supporting material to strengthen your understanding of FEEL expressions, releases, dependencies, and more.
+        Supporting material to strengthen your understanding of supported
+        environments, releases, dependencies, and more.
       </>
     ),
   },
 ];
 
-function Feature({imageUrl, url, title, description}) {
+function Feature({ imageUrl, url, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-      <div className={clsx('col col--4', styles.feature)}>
-        {imgUrl && (
-          <div className="text--center">
-            <a href={url}>
-              <img className={styles.featureImage} src={imgUrl} alt={title} />
-            </a>
-          </div>
-        )}
-        <h3>{title}</h3>
-        <p>{description}</p>
-      </div>
+    <div className={clsx("col col--4 component-block", styles.feature)}>
+      {imgUrl && (
+        <div className="text--center">
+          <a href={url}>
+            <img className={styles.featureImage} src={imgUrl} alt={title} />
+          </a>
+        </div>
+      )}
+      <h3 className="component-title">{title}</h3>
+      <p className="component-desc">{description}</p>
+    </div>
   );
 }
 
-function Feature2({imageUrl, url, title, description}) {
+function Feature2({ imageUrl, url, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-      <div className={clsx('col col--offset-1 col--4', styles.feature)}>
-        {imgUrl && (
-          <div className="text--center">
-            <a href={url}>
-              <img className={styles.featureImage} src={imgUrl} alt={title} />
-            </a>
-          </div>
-        )}
-        <h3>{title}</h3>
-        <p>{description}</p>
-      </div>
+    <div
+      className={clsx(
+        "col col--offset-1 col--4 component-block",
+        styles.feature
+      )}
+    >
+      {imgUrl && (
+        <div className="text--center">
+          <a href={url}>
+            <img className={styles.featureImage} src={imgUrl} alt={title} />
+          </a>
+        </div>
+      )}
+      <h3 className="component-title">{title}</h3>
+      <p className="component-desc">{description}</p>
+    </div>
   );
 }
 
 function Home() {
   const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
+  const { siteConfig = {} } = context;
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Documentation for all the components of Camunda Cloud.">
-      <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      description="Documentation for all the components of Camunda Platform 8."
+    >
+      <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className="row">
-            <div className={clsx('col col--offset-4 col--2',styles.buttons)}>
+            <div className={clsx("col col--offset-4 col--2", styles.buttons)}>
               <Link
                 className={clsx(
-                  'button button--outline button--secondary button--lg button--hero get-started',
-                  styles.getStarted,
+                  "button button--outline button--secondary button--lg button--hero get-started",
+                  styles.getStarted
                 )}
-                to={useBaseUrl('docs/guides/')}>
+                to={useBaseUrl("docs/guides/")}
+              >
                 Get Started
               </Link>
             </div>
-            <div className={clsx('col col--2',styles.buttons)}>
+            <div className={clsx("col col--2", styles.buttons)}>
               <Link
                 className={clsx(
-                  'button button--outline button--secondary button--lg sign-up',
-                  styles.getStarted,
+                  "button button--outline button--secondary button--lg sign-up",
+                  styles.getStarted
                 )}
-                to={useBaseUrl('https://camunda.io/signup')}>
+                to={useBaseUrl("https://camunda.io/signup")}
+              >
                 Sign Up
               </Link>
             </div>
@@ -153,18 +162,37 @@ function Home() {
             </div>
           </section>
         )}
-        <div className={clsx('hero hero--secondary', styles.heroBanner)}>
+        <div className={clsx("hero hero--secondary", styles.heroBanner)}>
           <div className="container">
             <h1 className="hero__title">Unsure where to begin?</h1>
-            <p className="hero__subtitle">Try our Microservice Orchestration guide</p>
-              <div className={styles.buttons}>
+            <p className="hero__subtitle">Try one of our use case guides</p>
+            <div className={styles.buttons}>
               <Link
                 className={clsx(
-                  'button button--outline button--secondary button--lg button--hero get-started',
-                  styles.getStarted,
+                  "button button--outline button--secondary button--lg button--hero get-started-use-case",
+                  styles.getStarted
                 )}
-                to={useBaseUrl('docs/guides/getting-started-orchestrate-microservices/')}>
-                Begin Now
+                to={useBaseUrl("docs/guides/orchestrate-microservices/")}
+              >
+                Microservice Orchestration
+              </Link>
+              <Link
+                className={clsx(
+                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
+                  styles.getStarted
+                )}
+                to={useBaseUrl("docs/guides/orchestrate-human-tasks/")}
+              >
+                Human Task Orchestration
+              </Link>
+              <Link
+                className={clsx(
+                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
+                  styles.getStarted
+                )}
+                to={useBaseUrl("docs/guides/orchestrate-api-endpoints/")}
+              >
+                API Endpoint Orchestration
               </Link>
             </div>
           </div>

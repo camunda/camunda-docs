@@ -108,7 +108,7 @@ Take the following example: Today is Wednesday, March 11. If you set a process i
 Take the following example: today is March 28. If you set a process instance start date filter to the last three days, you get all process instances that were started from March 26 to March 28. A day passes, and we now have March 29. Applying the same filter now filters the process instances which were started from March 27 to March 29.
 
 - If you do not want the filter to be completely dynamic, you can also select `Between`, `Before`, or `After`.
- - The `Between` option only considers process instances started or ended within a fixed date range (e.g. filter all process instances between 2018-01-01 and 2018-01-26). This range is fixed and does not change.  
+- The `Between` option only considers process instances started or ended within a fixed date range (e.g. filter all process instances between 2018-01-01 and 2018-01-26). This range is fixed and does not change.
 - In the same way, you can select `After` or `Before` options to only consider process instances that started or ended after/before a fixed date.
 
 The start and the end date filters are independent and can be applied to a report simultaneously. However, be aware that each of these filters can only exist once. If, for example, you define a new start date filter when another one already exists, the second one will replace the first one.
@@ -235,7 +235,7 @@ Similar to the other variables, there are two input switches that allow you to e
 
 ### List variable filters
 
-To filter based on the value of a [list variable](../../../../../self-managed/optimize-deployment/setup/object-variables#list-variables), the applied filter will depend on the primitive type of items within the list. For example, you will be creating a numeric variable filter for a variable which is a list of numbers, a string variable filter for a list of strings, and so on. It is important to note here that filters are applied on each individual item within the list variable and not the list itself.
+To filter based on the value of a [list variable](../../../../self-managed/optimize-deployment/configuration/object-variables.md#list-variables), the applied filter will depend on the primitive type of items within the list. For example, you will be creating a numeric variable filter for a variable which is a list of numbers, a string variable filter for a list of strings, and so on. It is important to note here that filters are applied on each individual item within the list variable and not the list itself.
 
 For example, an "is" filter on a list of string values filters for those instances where any individual list item is equal to the given term. For example, instances whose list variable "contains" the selected value.
 
@@ -255,9 +255,9 @@ As shown in the example, it is possible to select one or more assignees or even 
 
 This filter has different behavior depending on where it was [defined](#filter-behavior):
 
-- As a `Flow Node data filter` applied on a user task report: This filter only includes user task instances that satisfy *all* assignee/candidateGroup filters defined in the report at once. Mutually exclusive filters like having both an inclusive and an exclusive filter on the same assignee do not yield any results in user task reports.
+- As a `Flow Node data filter` applied on a user task report: This filter only includes user task instances that satisfy _all_ assignee/candidateGroup filters defined in the report at once. Mutually exclusive filters like having both an inclusive and an exclusive filter on the same assignee do not yield any results in user task reports.
 
-- As an `instance filter`: This filter includes all process instances where *at least one* user task satisfies one particular assignee/candidateGroup criterion. This means multiple mutually exclusive assignee/candidateGroup filter entries might still yield results for these reports (e.g. if the process definition contains multiple user tasks).
+- As an `instance filter`: This filter includes all process instances where _at least one_ user task satisfies one particular assignee/candidateGroup criterion. This means multiple mutually exclusive assignee/candidateGroup filter entries might still yield results for these reports (e.g. if the process definition contains multiple user tasks).
 
 ## Incident filter
 
@@ -265,11 +265,11 @@ This filter has a different behavior depending on where it was [defined](#filter
 
 - As an `instance filter`: This filter will retrieve only those process instances that contain open, resolved, or no incidents (depending on your selection). Here are some examples where this filter can be useful:
 
-    - Creating reports that contain no incidents since the instances that have incidents have very long durations and are influencing your data.
+  - Creating reports that contain no incidents since the instances that have incidents have very long durations and are influencing your data.
 
-    - To monitor all the instances from multiple engines that have open incidents.
+  - To monitor all the instances from multiple engines that have open incidents.
 
-    On the other hand, this filter is not useful for counting the number of incidents because instances with an open or resolved instance filter might still contain instances from the other type.
+  On the other hand, this filter is not useful for counting the number of incidents because instances with an open or resolved instance filter might still contain instances from the other type.
 
 - As a `Flow Node data filter`: This filter will additionally filter the instance incident states to only include incidents of the same type (open or resolved). As an example, This filter can be used to count the number of open or resolved incidents since it considers the incidents of that type exclusively. This filter is currently only useful if you are in an incident view report.
 

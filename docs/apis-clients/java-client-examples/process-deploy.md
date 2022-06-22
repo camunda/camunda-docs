@@ -19,7 +19,7 @@ Run the Zeebe broker with endpoint `localhost:26500` (default).
 
 ```java
 final DeploymentEvent deploymentEvent =
-        client.newDeployCommand()
+        client.newDeployResourceCommand()
             .addResourceFromClasspath("demoProcess.bpmn")
             .send()
             .join();

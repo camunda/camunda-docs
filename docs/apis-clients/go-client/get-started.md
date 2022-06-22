@@ -4,16 +4,15 @@ title: "Go client - Getting started guide"
 sidebar_label: "Getting started guide"
 ---
 
-In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda Cloud.
+In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda Platform 8.
 
 You can find the complete source code on [GitHub](https://github.com/zeebe-io/zeebe-get-started-go-client).
 
 ## Prerequisites
 
-- [Camunda Cloud account](/guides/getting-started/create-camunda-cloud-account.md)
-- [Cluster](/guides/getting-started/create-camunda-cloud-account.md)
-- [Client credentials](/guides/getting-started/setup-client-connection-credentials.md)
-- [Modeler](/guides/getting-started/model-your-first-process.md)
+- [Camunda Platform 8 account](/guides/create-account.md)
+- [Cluster](/guides/create-cluster.md)
+- [Client credentials](/guides/setup-client-connection-credentials.md)
 - Go v1.13+ environment installed
 
 ## Set up a project
@@ -35,7 +34,7 @@ module github.com/zb-user/zb-example
 
 go 1.17
 
-require github.com/camunda-cloud/zeebe/clients/go v1.2.9
+require github.com/camunda/zeebe/clients/go/v8 v8.0.0
 ```
 
 3. Set the connection settings and client credentials as environment variables:
@@ -48,7 +47,7 @@ export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
 :::note
-When you create client credentials in Camunda Cloud, you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
 :::
 
 4. Create a `main.go` file inside the module and add the following lines to bootstrap the Zeebe client:
@@ -59,8 +58,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/pb"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/pb"
 	"os"
 )
 
@@ -116,7 +115,7 @@ Broker 0.0.0.0 : 26501
 
 Now, we need a simple process we can deploy. Later, we will extend the process with more functionality. For now, follow the steps below:
 
-1. Open the [modeler](/guides/getting-started/model-your-first-process.md) of your choice and create a new BPMN diagram.
+1. Open the Web Modeler and create a new BPMN diagram.
 
 2. Add a start event named `Order Placed` and an end event named `Order Delivered` to the diagram. Then, connect the events.
 
@@ -135,7 +134,7 @@ The broker stores the process under its BPMN process id and assigns a version.
 ```go
 	// After the client is created
 	ctx := context.Background()
-	response, err := client.NewDeployProcessCommand().AddResourceFile("order-process.bpmn").Send(ctx)
+	response, err := client.NewDeployResourceCommand().AddResourceFile("order-process.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -147,7 +146,7 @@ Run the program and verify the process deployed successfully.
 You should see a similar output:
 
 ```
-key:2251799813686743 processes:<bpmnProcessId:"order-process" version:3 processKey:2251799813686742 resourceName:"order-process.bpmn" >
+key:2251799813685254  processes:{bpmnProcessId:"order-process"  version:3  processDefinitionKey:2251799813685253  resourceName:"order-process.bpmn"}
 ```
 
 ## Create a process instance
@@ -186,7 +185,7 @@ processKey:2251799813686742 bpmnProcessId:"order-process" version:3 processInsta
 
 Want to see how the process instance is executed? Follow the steps below:
 
-1. Go to the cluster in Camunda Cloud and select it.
+1. Go to the cluster in Camunda Platform 8 and select it.
 1. Click on the link to [Operate](/components/operate/userguide/basic-operate-navigation.md).
 1. Select the process **order process**.
 
@@ -222,9 +221,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/entities"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/worker"
-	"github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
 	"log"
 	"os"
 )
@@ -253,7 +252,7 @@ func main() {
 
 	// deploy process
 	ctx := context.Background()
-	response, err := zbClient.NewDeployProcessCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
+	response, err := zbClient.NewDeployResourceCommand().AddResourceFile("order-process-4.bpmn").Send(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -345,16 +344,15 @@ When observing the Zeebe Monitor, you can see the process instance moved from th
 When you run the example above, you should see a similar output to the following:
 
 ```
-key:2251799813686751 processes:<bpmnProcessId:"order-process" version:4 processKey:2251799813686750 resourceName:"order-process.bpmn" >
-processKey:2251799813686750 bpmnProcessId:"order-process" version:4 processInstanceKey:22517998136
-86752
-2019/06/06 20:59:50 Complete job 2251799813686760 of type payment-service
-2019/06/06 20:59:50 Processing order: 31243
-2019/06/06 20:59:50 Collect money using payment method: VISA
-2019/06/06 20:59:50 Successfully completed job
+key:2251799813685256  deployments:{process:{bpmnProcessId:"order-process-4"  version:1  processDefinitionKey:2251799813685255  resourceName:"order-process.bpmn"}}
+processDefinitionKey:2251799813685255  bpmnProcessId:"order-process-4"  version:1  processInstanceKey:2251799813685257
+2022/04/06 16:20:59 Complete job 2251799813685264 of type payment-service
+2022/04/06 16:20:59 Processing order: 31243
+2022/04/06 16:20:59 Collect money using payment method: VISA
+2022/04/06 16:20:59 Successfully completed job
 ```
 
 ## What's next?
 
-- Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-cloud.md).
+- Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-platform-8.md).
 - Learn more about [BPMN processes](/components/modeler/bpmn/bpmn-primer.md).

@@ -46,19 +46,27 @@ In this section of the report builder, you are characterizing the output of the 
 
 First, you need to select which part of the data you want to view. Optimize differentiates between the view (e.g. process instance or flow node) and the measure (e.g. count or duration):
 
-1. Raw Data: View just a table with the actual data listed as rows. This can come in handy if you found interesting insights in certain process instances and need detailed information about those instances, or you are exploring a process definition with a limited number of instances. This report type also allows you to inspect raw [object variable values](../../../../../self-managed/optimize-deployment/setup/object-variables.md).
+1. Raw Data: View just a table with the actual data listed as rows. This can come in handy if you found interesting insights in certain process instances and need detailed information about those instances, or you are exploring a process definition with a limited number of instances. This report type also allows you to inspect raw [object variable values](../../../../../self-managed/optimize-deployment/configuration/object-variables.md).
 2. Process instance
-  * Count: View how many process instances were executed.
-  * Duration: View how long the process instances took to complete.
+
+- Count: View how many process instances were executed.
+- Duration: View how long the process instances took to complete.
+
 3. Incident
-  * Count: View how many incidents occurred on the process.
-  * Resolution duration: View how long the incident took to get resolved.
+
+- Count: View how many incidents occurred on the process.
+- Resolution duration: View how long the incident took to get resolved.
+
 4. Flow node
-  * Count: View how often the flow nodes (e.g. tasks) have been executed.
-  * Duration: View how long each flow node took to complete.
+
+- Count: View how often the flow nodes (e.g. tasks) have been executed.
+- Duration: View how long each flow node took to complete.
+
 5. User task
-  * Count: View how often each user task has been executed.
-  * Duration: View how long each user task took to complete.
+
+- Count: View how often each user task has been executed.
+- Duration: View how long each user task took to complete.
+
 6. Variable: View an aggregation of values for a specific numeric variable of the process definition.
 
 It is possible to display both count and duration measures for a single view in the same report.
@@ -83,21 +91,21 @@ Not all the above view, group by, and visualization options can be combined. For
 
 All possible combinations can also be found in the following table:
 
-| View | Group by | Visualize as |
-| -- | -- | -- |
-| Raw Data | None | Table |
-| Process instance: Count, Process instance: Duration | None | Number |
-| Process instance: Count | Start Date, End Date, Running Date, Variable, Duration, Process | Table, Chart |
-| Process instance: Duration | Start Date, End Date, Variable, Process | Table, Chart |
-| Incident: Count, Incident Duration | None | Number |
-| Incident: Count, Incident Duration | Flow Nodes | Table, Chart, Heatmap |
-| Flow Node: Count, Flow Node: Duration | Flow Nodes | Table, Chart, Heatmap|
-| Flow Node: Count | Start Date, End Date, Duration, Variable | Table, Chart |
-| Flow Node: Duration | Start Date, End Date, Variable | Table, Chart |
-| User Task: Count, User Task: Duration | User Tasks | Table, Chart, Heatmap |
-| User Task: Count, User Task: Duration | Start Date, End Date, Assignee, Candidate Group | Table, Chart |
-| User Task: Count| Duration| Table, Chart |
-| Variable| None| Number |
+| View                                                | Group by                                                        | Visualize as          |
+| --------------------------------------------------- | --------------------------------------------------------------- | --------------------- |
+| Raw Data                                            | None                                                            | Table                 |
+| Process instance: Count, Process instance: Duration | None                                                            | Number                |
+| Process instance: Count                             | Start Date, End Date, Running Date, Variable, Duration, Process | Table, Chart          |
+| Process instance: Duration                          | Start Date, End Date, Variable, Process                         | Table, Chart          |
+| Incident: Count, Incident Duration                  | None                                                            | Number                |
+| Incident: Count, Incident Duration                  | Flow Nodes                                                      | Table, Chart, Heatmap |
+| Flow Node: Count, Flow Node: Duration               | Flow Nodes                                                      | Table, Chart, Heatmap |
+| Flow Node: Count                                    | Start Date, End Date, Duration, Variable                        | Table, Chart          |
+| Flow Node: Duration                                 | Start Date, End Date, Variable                                  | Table, Chart          |
+| User Task: Count, User Task: Duration               | User Tasks                                                      | Table, Chart, Heatmap |
+| User Task: Count, User Task: Duration               | Start Date, End Date, Assignee, Candidate Group                 | Table, Chart          |
+| User Task: Count                                    | Duration                                                        | Table, Chart          |
+| Variable                                            | None                                                            | Number                |
 
 :::note
 You might sometimes see a warning message indicating that the data is limited to a certain number of points. This happens because the available stored data, in this case is very large, and it is not possible to display all the data in the selected visualization.
@@ -121,22 +129,22 @@ For example, if your report is grouped by assignee/candidate group, it is possib
 
 Refer to the table below for an overview of all report combinations that support a second "Group by":
 
-| View | Group by | Second group by |
-| -- | -- | -- |
-| User Task Count, Duration | User Tasks | Assignee, Candidate Group, Process (only for multi-definition reports) |
-| User Task Count, Duration | Start Date, End Date | Assignee, Candidate Group, User Tasks, Process (only for multi-definition reports) |
-| User Task Count, Duration | Assignee, Candidate Group | User Tasks, Process (only for multi-definition reports) |
-| User Task Count | Duration | User Tasks, Process (only for multi-definition reports) |
+| View                      | Group by                  | Second group by                                                                    |
+| ------------------------- | ------------------------- | ---------------------------------------------------------------------------------- |
+| User Task Count, Duration | User Tasks                | Assignee, Candidate Group, Process (only for multi-definition reports)             |
+| User Task Count, Duration | Start Date, End Date      | Assignee, Candidate Group, User Tasks, Process (only for multi-definition reports) |
+| User Task Count, Duration | Assignee, Candidate Group | User Tasks, Process (only for multi-definition reports)                            |
+| User Task Count           | Duration                  | User Tasks, Process (only for multi-definition reports)                            |
 
 ### Process instance reports
 
 Refer to the table below for the process instance count and duration reports that support a second "Group by":
 
-| View | Group by | Second group by |
-| -- | -- | -- |
-| Process Instance Count, Duration | Start Date, End Date | Variable, Process (only for multi-definition reports) |
-| Process Instance Count, Duration | Variable | Start Date, End Date, Process (only for multi-definition reports) |
-| Process Instance Count | Running Date, Duration | Process (only for multi-definition reports) |
+| View                             | Group by               | Second group by                                                   |
+| -------------------------------- | ---------------------- | ----------------------------------------------------------------- |
+| Process Instance Count, Duration | Start Date, End Date   | Variable, Process (only for multi-definition reports)             |
+| Process Instance Count, Duration | Variable               | Start Date, End Date, Process (only for multi-definition reports) |
+| Process Instance Count           | Running Date, Duration | Process (only for multi-definition reports)                       |
 
 The diagram below shows a report grouped by `Start Date` and a boolean variable:
 
@@ -174,10 +182,10 @@ Based on flow node duration heatmaps, Optimize allows you to specify a target va
 
 To set target values and create a target value comparison heatmap, you need to be in the edit mode of a report which has the following configuration:
 
-| View | Flow node duration/user task duration |
-| -- | -- |
-| Group by | Flow nodes/user tasks |
-| Visualize as | Heatmap |
+| View         | Flow node duration/user task duration |
+| ------------ | ------------------------------------- |
+| Group by     | Flow nodes/user tasks                 |
+| Visualize as | Heatmap                               |
 
 If your report has this configuration, a target value button is visible. Clicking on the **Target Value** button for the first time opens an overlay containing the process diagram and a table with all flow nodes. You can also see the actual duration value for every flow node.
 
@@ -319,10 +327,10 @@ A good use case for such functionality is the following example:
 
 First, go to the edit mode of a report and choose the following configuration:
 
-| View | Count frequency of process instance |
-| -- | -- |
-| Group by | Start date of process instance: Month |
-| Visualize as | Bar chart |
+| View         | Count frequency of process instance   |
+| ------------ | ------------------------------------- |
+| Group by     | Start date of process instance: Month |
+| Visualize as | Bar chart                             |
 
 Let us say that the number of completed process instances should always be above six. A goal line can be used as follows:
 

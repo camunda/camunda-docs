@@ -7,19 +7,16 @@ Describes the user.
 
 ```graphql
 type User {
-  username: ID!
-  firstname: String
-  lastname: String
+  userId: ID!
+  displayName: String
   permissions: [String!]
 }
 ```
 
 ### Fields
 
-#### `username` ([`ID`](/docs/apis-clients/tasklist-api/scalars/id))
+#### `userId` ([`ID`](/docs/apis-clients/tasklist-api/scalars/id))
 
-#### `firstname` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
-
-#### `lastname` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### `displayName` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
 
 #### `permissions` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))

@@ -1,34 +1,18 @@
 ---
 id: supported-environments
 title: "Supported environments"
-description: "Let's take a closer look at supported environments alongside Zeebe, Operate, and Tasklist."
+description: "Find out where to run Camunda Platform 8 components for SaaS and Self-Managed, including Optimize for both Camunda Platform 8 and Camunda Platform 7."
 ---
 
-## Zeebe
+## Camunda Platform 8 SaaS & Self-Managed
 
-- **Zeebe Broker/Gateway**: The cluster components of Zeebe require OpenJDK 11+ and optional if the Elasticsearch exporter is used Elasticsearch 7.16.x.
-- **Zeebe Java Client**: The Java client for Zeebe requires OpenJDK 8+.
-- **Zeebe Go Client**: The Go client for Zeebe requires Go 1.13+.
-- **zbctl**: The Zeebe CLI supports latest versions of Windows, MacOS, and Linux.
+### Clients
 
-## Camunda Operate
+- **Zeebe Java Client**: OpenJDK 8+
+- **Zeebe Go Client**: Go 1.13+
+- **zbctl**: Windows, MacOS, and Linux (latest)
 
-- **Operate Web App/Importer/Archiver**: The server components of Camunda
-  Operate require OpenJDK 11+ and Elasticsearch 7.16.x.
-- **Operate Browser App**: Requires the latest version of Chrome, Firefox, or
-  Edge on Windows, MacOS, and Linux.
-
-## Camunda Tasklist
-
-- **Tasklist Web App/Importer/Archiver**: The server components of Camunda
-  Tasklist require OpenJDK 11+ and Elasticsearch 7.16.x.
-- **Tasklist Browser App**: Requires the latest version of Chrome, Firefox, or
-  Edge on Windows, MacOS, and Linux.
-
-
-## Optimize
-
-Run Camunda Optimize in a Java-runnable environment. The following environments are supported:
+_Hint: There are more [community-maintained Camunda Platform 8 clients](./apis-clients/community-clients/index.md)._
 
 ### Web Browser
 
@@ -36,50 +20,53 @@ Run Camunda Optimize in a Java-runnable environment. The following environments 
 - Mozilla Firefox latest
 - Microsoft Edge latest
 
-### Elasticsearch
+### Desktop Modeler
 
-- Elasticsearch 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+
-- Any minor version above the ones listed in the previous point is likely to be supported as well, but this hasn't been tested. For this reason, Camunda doesn't give any warranty.
-- Any major version smaller or greater than ElasticSearch 7 will be rejected by Optimize. For example, Optimize won't work with ElasticSearch 6.X or 8.X.
-- For the supported versions mentioned before, the Elasticsearch community as well as any professional version is supported. However, bear in mind that the professional edition comes with additional safety features that allow you to secure Elasticsearch. If you use the community edition, securing Elasticsearch needs to be done manually.
+- Windows 7 / 10
+- Mac OS X 10.11
+- Ubuntu LTS (latest)
 
-### Java Runtime
+## Camunda Platform 8 Self-Managed
 
-Optimize tries to support LTS versions of Java for as long as reasonably possible. Non-LTS versions newer than the supported LTS versions may also work, but we recommend using one of the releases listed below.
+We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/docs/self-managed/platform-deployment/kubernetes-helm/) for this. Please follow the [Installation Guide](/docs/self-managed/platform-deployment/) to learn more about installation possibilities.
 
-- Oracle JDK/JRE 11
-- Open JDK/JRE 11 including builds of the following products:
- - Adopt OpenJDK
+Requirements for the components can be seen below:
 
-### Docker
+|                          | Java version | Other requirements                                     |
+| ------------------------ | ------------ | ------------------------------------------------------ |
+| Zeebe Broker and Gateway | OpenJDK 17+  | Elasticsearch 7.16.x(only if Elastic exporter is used) |
+| Operate                  | OpenJDK 11+  | Elasticsearch 7.16.x                                   |
+| Tasklist                 | OpenJDK 11+  | Elasticsearch 7.16.x                                   |
+| Identity                 | OpenJDK 17+  | Keycloak 16.1.1                                        |
+| Optimize                 | OpenJDK 11+  | Elasticsearch 7.10.x - 7.15.x, 7.16.2+, 7.17.x         |
 
-[Docker CE](https://docs.docker.com/install/) 17.03 or newer
+:::note Elasticsearch support
+[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Camunda Platform 8.
 
-### DMN - Decision Model and Notation Standard
+AWS Opensearch is not supported at this time.
+:::
 
-DMN [1.1](https://www.omg.org/spec/DMN/1.1), [1.2](https://www.omg.org/spec/DMN/1.2) or [1.3](https://www.omg.org/spec/DMN/1.3)
+### Version Matrix
 
-### Camunda Platform
+This overview shows which Zeebe version works with which Modeler, Operate, Tasklist and Optimize:
 
-Production versions of the Camunda Engine version 7.14.0+, 7.15.0+ and 7.16.0+ with REST API and history with level `full` enabled are supported. [Development (alpha) versions](https://docs.camunda.org/enterprise/release-policy/#community-vs-enterprise-releases) are not supported. For optimal performance, we always recommend running the latest version of the Camunda Engine. To ensure correct logging of user operations using the REST API, they should always be performed with user authentication. Alternatively, `restrictUserOperationLogToAuthenticatedUsers` should be set to `false` in the connected engine, this setting allows user operations to be logged even if there is no user authentication context for the request.
+| Design                | Automate    |                                             | Improve        |
+| --------------------- | ----------- | ------------------------------------------- | -------------- |
+| Desktop Modeler 4.7+  | Zeebe 1.0.x | Operate 1.0.x Tasklist 1.0.x                | -              |
+| Desktop Modeler 4.9+  | Zeebe 1.1.x | Operate 1.1.x Tasklist 1.1.x                | -              |
+| Desktop Modeler 4.11+ | Zeebe 1.2.x | Operate 1.2.x Tasklist 1.2.x IAM 1.2.x      | -              |
+| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x      | Optimize 3.7.x |
+| Desktop Modeler 5.0+  | Zeebe 8.0.x | Operate 8.0.x Tasklist 8.0.x Identity 8.0.x | Optimize 3.8.x |
 
-## Desktop Modeler
+_Note: You can use newer Modeler versions with older Zeebe versions too._
 
-Supported on the following platforms:
+## Camunda Platform 7 & Optimize Version Matrix
 
-Windows 7 / 10
-Mac OS X 10.11
-Ubuntu LTS (latest)
-Reported to work on
-
-Ubuntu 12.04 and newer
-Fedora 21
-Debian 8
-
-## Web Modeler
-### Web Browser
-
-- Google Chrome latest [recommended]
-- Mozilla Firefox latest
-- Microsoft Edge latest
-
+| Improve        | Automate                                   | Java version              |
+| -------------- | ------------------------------------------ | ------------------------- |
+| Optimize 3.3.x | Camunda Platform 7.12.11+, 7.13.5+, 7.14.x | OpenJDK 8+ or OpenJDK 11+ |
+| Optimize 3.4.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 8+ or OpenJDK 11+ |
+| Optimize 3.5.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 11+               |
+| Optimize 3.6.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               |
+| Optimize 3.7.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               |
+| Optimize 3.8.x | Camunda Platform 7.15.x, 7.16.x, 7.17.x    | OpenJDK 11+               |

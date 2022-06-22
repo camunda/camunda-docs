@@ -1,20 +1,24 @@
 ---
 title: Dealing with problems and exceptions
 tags:
-- Transaction
-- ACID Transaction
-- Compensation
-- Exception Handling
-- BPMN Error Event
-- Incident
-- Save Point
+  - Transaction
+  - ACID Transaction
+  - Compensation
+  - Exception Handling
+  - BPMN Error Event
+  - Incident
+  - Save Point
 ---
 
 ## Understanding workers
 
+:::caution Camunda Platform 8 only
+The description of workers targets Camunda Platform 8, even if [external tasks in Camunda Platform 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are conceptually similar. If you are looking for Camunda Platform 7, visit [understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/).
+:::
+
 First, let's briefly examine how a worker operates.
 
-Whenever a process instance arrives at a service task, a new job is created and pushed to an internal persistent queue within Camunda Cloud. A client application can subscribe to these jobs with the workflow engine by the task type name (which is comparable to a queue name).
+Whenever a process instance arrives at a service task, a new job is created and pushed to an internal persistent queue within Camunda Platform 8. A client application can subscribe to these jobs with the workflow engine by the task type name (which is comparable to a queue name).
 
 If there is no worker subscribed when a job is created, the job is simply put in a queue. If multiple workers are subscribed, they are competing consumers, and jobs are distributed among them.
 
@@ -24,8 +28,8 @@ Whenever the worker has finished whatever it needs to do (like invoking the REST
 
 - [`CompleteJob`](/docs/apis-clients/grpc/#completejob-rpc): The service task went well, the process instance can move on.
 - [`FailJob `](/docs/apis-clients/grpc/#failjob-rpc): The service task failed, and the workflow engine should handle this failure. There are two possibilities:
-    - `remaining retries > 0`: The job is retried.
-    - `remaining retries <= 0`: An incident is raised and the job is not retried until the incident is resolved.
+  - `remaining retries > 0`: The job is retried.
+  - `remaining retries <= 0`: An incident is raised and the job is not retried until the incident is resolved.
 - [`ThrowError`](/docs/apis-clients/grpc/#throwerror-rpc): A BPMN error is reported, which typically is handled on the BPMN level.
 
 As the glue code in the worker is external to the workflow engine, there is **no technical transaction spanning both components**. Technical transactions refer to ACID (atomic, consistent, isolated, durable) properties, mostly known from relational databases.
@@ -39,6 +43,10 @@ A typical example scenario is the following, where a worker calls a REST endpoin
 Technical ACID transaction will only be applied in the business application. The job worker mostly needs to handle exceptions on a technical level, e.g. to control retry behavior, or pass it on to the process level, where you might need to implement business transactions.
 
 ## Handling exceptions on a technical level
+
+:::caution Camunda Platform 8 only
+The description of handling exceptions targets Camunda Platform 8. If you are looking for Camunda Platform 7, visit our documentation on [operating Camunda Platform 7](../operations/operating-camunda-c7.md).
+:::
 
 ### Leveraging retries
 
@@ -80,12 +88,12 @@ Provide a meaningful error message, as this will be displayed to a human operato
 Example in Node.js:
 
 ```js
-zbc.createWorker('retrieveMoney', job => {
-    try {
-        // ...
-    } catch (e) {
-        job.fail('Could not retrieve money due to: ' + e.message, (job.retries - 1))
-    }
+zbc.createWorker("retrieveMoney", (job) => {
+  try {
+    // ...
+  } catch (e) {
+    job.fail("Could not retrieve money due to: " + e.message, job.retries - 1);
+  }
 });
 ```
 
@@ -99,7 +107,7 @@ Zeebe uses the **at-least-once strategy** for job handlers, which is a typical c
 
 But this can mean that the handler is executed more than once! You need to consider this in your handler code, as the handler might be called more than one time. The [technical term describing this is idempotency](https://en.wikipedia.org/wiki/Idempotence).
 
-For example, typical strategies are described in [3 common pitfalls in microservice integration — and how to avoid them](https://medium.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07). One possibility is to ask the service provider if it has already seen the same request. A more common approach is to implement the service provider in a way that allows for duplicate calls. There are two ways of mastering this:
+For example, typical strategies are described in [3 common pitfalls in microservice integration — and how to avoid them](https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07). One possibility is to ask the service provider if it has already seen the same request. A more common approach is to implement the service provider in a way that allows for duplicate calls. There are two ways of mastering this:
 
 - **Natural idempotency**. Some methods can be executed as often as you want because they just flip some state. Example: `confirmCustomer()`.
 - **Business idempotency**. Sometimes you have business identifiers that allow you to detect duplicate calls (e.g. by keeping a database of records that you can check). Example: `createCustomer(email)`.
@@ -166,21 +174,21 @@ The boundary error event deals with the case that the item is unavailable.
 
 As an alternative to throwing a Java exception, you can also write a problematic result into a process variable and model an XOR-Gateway later in the process flow to take a different path if that problem occurs.
 
-From a business perspective, the underlying problem then looks less like an error and more like a result of an activity, so as a rule of thumb we deal with *expected results* of activities by means of gateways, but model exceptional errors, which *hinder us in reaching the expected result* as boundary error events.
+From a business perspective, the underlying problem then looks less like an error and more like a result of an activity, so as a rule of thumb we deal with _expected results_ of activities by means of gateways, but model exceptional errors, which _hinder us in reaching the expected result_ as boundary error events.
 
 <div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/expected-results.bpmn" callouts="task_check_customers_creditworthiness,exclusive_gateway_customer_creditworthy,boundary_event_customer_id_non_existent" />
 
 <span className="callout">1</span>
 
-The task is to "check the customer's creditworthiness", so we can reason that we *expect as a result* to know whether the customer is credit-worthy or not.
+The task is to "check the customer's creditworthiness", so we can reason that we _expect as a result_ to know whether the customer is credit-worthy or not.
 
 <span className="callout">2</span>
 
-We can therefore model an *exclusive gateway* working on that result and decide via the subsequent process flow what to do with a customer who is not credit-worthy. Here, we just consider the order to be declined.
+We can therefore model an _exclusive gateway_ working on that result and decide via the subsequent process flow what to do with a customer who is not credit-worthy. Here, we just consider the order to be declined.
 
 <span className="callout">3</span>
 
-However, it could be that we *cannot reach a result*, because while we are trying to obtain knowledge about the customer's creditworthiness, we discover that the ID we have is not associated with any known real person. We can't obtain the expected result and therefore model a *boundary error event*. In the example, the consequence is just the same and we consider the order to be declined.
+However, it could be that we _cannot reach a result_, because while we are trying to obtain knowledge about the customer's creditworthiness, we discover that the ID we have is not associated with any known real person. We can't obtain the expected result and therefore model a _boundary error event_. In the example, the consequence is just the same and we consider the order to be declined.
 
 ### Business vs. technical errors
 
@@ -236,7 +244,7 @@ The Saga pattern describes long-running transactions in distributed systems. The
 Camunda supports this through BPMN compensation events, which can link tasks with their undo tasks.
 
 :::caution Camunda Platform 7 Only
-Compensation is [not yet supported in Camunda Cloud](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/) and only available in Camunda Platform 7.
+Compensation is [not yet supported in Camunda Platform 8](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/) and only available in Camunda Platform 7.
 :::
 
 <div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/business-transaction.bpmn" callouts="add_customer,error_catch,throw_compensation,catch_compensation,deactivate_customer" />

@@ -2,6 +2,7 @@
 id: backups
 title: "Backups"
 description: "A guide to creating and installing Zeebe backups."
+keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
 As Zeebe fully manages the state of your process instances, consider taking backups of Zeebe data; this is crucial to prevent data loss, roll back application-level errors, and more.
@@ -40,8 +41,7 @@ To create the backup, take the following steps:
 
 If you have direct access to the broker, for example in a bare-metal setup, you can do this by creating a tarball like this: `tar caf backup.tar.gz data/`.
 
-You may also use filesystem snapshots or [Kubernetes volume snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/)
-if that fits your environment better
+You may also use filesystem snapshots or [Kubernetes volume snapshots](https://kubernetes.io/docs/concepts/storage/volume-snapshots/) if that fits your environment better
 
 2. Double-check that your tool of choice supports symbolic and hard links.
 3. Do not merge or otherwise modify data folders as this might result in data loss and unrestorable backups.
