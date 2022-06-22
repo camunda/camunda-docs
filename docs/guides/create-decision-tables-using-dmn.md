@@ -18,7 +18,7 @@ In this guide, we'll step through the lightweight implementation of a DMN diagra
 
 ### Create a Camunda Platform 8 account
 
-We'll begin building our DMN diagrams with [Modeler](../components/modeler/about.md). To get started, ensure you've [created a Camunda Platform 8 account](./getting-started/create-camunda-cloud-account.md).
+We'll begin building our DMN diagrams with [Modeler](../components/modeler/about.md). To get started, ensure you've [created a Camunda Platform 8 account](./create-account.md).
 
 ### Create a cluster
 
