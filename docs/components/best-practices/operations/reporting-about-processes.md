@@ -1,13 +1,13 @@
 ---
-title:  Reporting about processes
+title: Reporting about processes
 tags:
-    - Reporting
-    - History
-    - DWH
-    - BI
-    - KPI
-    - SQL
-    - MIS (Management Information System)
+  - Reporting
+  - History
+  - DWH
+  - BI
+  - KPI
+  - SQL
+  - MIS (Management Information System)
 ---
 
 The Camunda engine automatically collects audit information about historical process or decision instances. Leverage this data by generating and displaying business relevant reports. Add business relevant phases and milestones to your process models serving as a basis for key performance indicators (KPIs).
@@ -28,7 +28,7 @@ Consider the following example - a "Tweet Approval Process" shows start and end 
 
 <span className="callout">3</span>
 
-After one business day, the reviewer is reminded to speed up - and such reviews are internally *marked* by passing the end event 'Review done slowly'.
+After one business day, the reviewer is reminded to speed up - and such reviews are internally _marked_ by passing the end event 'Review done slowly'.
 
 <span className="callout">4</span>
 
@@ -40,24 +40,23 @@ Furthermore, when tweets are successfully published, we are interested in the **
 
 <span className="callout">6</span>
 
-...when compared to tweets that do not get published. Therefore, we model *two different end events* representing those two business end states of the process.
+...when compared to tweets that do not get published. Therefore, we model _two different end events_ representing those two business end states of the process.
 
 :::note
-Duplicate tweets will *not be published* even though they have been *approved* before. The more precisely we describe and *name* the business semantics of events, the better our KPI's will reflect the reality we want to measure!
+Duplicate tweets will _not be published_ even though they have been _approved_ before. The more precisely we describe and _name_ the business semantics of events, the better our KPI's will reflect the reality we want to measure!
 :::
 
-When you do not (only) want to concentrate on milestones, but *phases* in your process, model the phases as subprocesses:
+When you do not (only) want to concentrate on milestones, but _phases_ in your process, model the phases as subprocesses:
 
 <div bpmn="best-practices/reporting-about-processes-assets/TwitterReportingPhases.bpmn" callouts="sub_process_review,sub_process_publication" />
 
-
 <span className="callout">1</span>
 
-The phase *Review*—modeled with a subprocess—will be active, while the human reviewer will need to find time to complete the task...
+The phase _Review_—modeled with a subprocess—will be active, while the human reviewer will need to find time to complete the task...
 
 <span className="callout">2</span>
 
-...whereas the phase *Publication* will be completed automatically - hence process instances "remaining" there for longer than a few seconds will probably indicate ongoing problems with the uptime and reachability of the used services.
+...whereas the phase _Publication_ will be completed automatically - hence process instances "remaining" there for longer than a few seconds will probably indicate ongoing problems with the uptime and reachability of the used services.
 
 ## History architecture
 
@@ -83,7 +82,7 @@ Historical data can be leveraged via three possible mechanisms:
 
 You might move data from the Camunda History to a decoupled system like a Business Intelligence (BI) solution, a Data Warehouse (DWH), some Data Lake, or an own monitoring solution, for example based on Prometheus.
 
-Leveraging typical BI system's **ETL** (extract, transform, and load) features allows you to optimize data structure for your reporting purposes (to *speed up* report generation) or to combine generic process engine data with business entities (to allow for *more in-depth analysis*).
+Leveraging typical BI system's **ETL** (extract, transform, and load) features allows you to optimize data structure for your reporting purposes (to _speed up_ report generation) or to combine generic process engine data with business entities (to allow for _more in-depth analysis_).
 
 To get the data into the BI system, leverage one of the mechanisms described above. Our recommendation generally is:
 

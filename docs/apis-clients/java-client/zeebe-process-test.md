@@ -4,16 +4,16 @@ title: "Zeebe Process Test"
 ---
 
 [Zeebe Process Test](https://github.com/camunda-cloud/zeebe-process-test) allows you to unit test your Camunda Platform 8 BPMN
-processes. It will start a Zeebe test engine and provide you with a set of assertions you can use to verify your process 
+processes. It will start a Zeebe test engine and provide you with a set of assertions you can use to verify your process
 behaves as expected.
 
 ## Prerequisites
 
 This library requires the following:
 
-* Java 17+ when running with an embedded engine (`zeebe-process-test-extension`)
-* Java 8+ and Docker when running using testcontainers (`zeebe-process-test-extension-testcontainer`)
-* JUnit 5
+- Java 17+ when running with an embedded engine (`zeebe-process-test-extension`)
+- Java 8+ and Docker when running using testcontainers (`zeebe-process-test-extension-testcontainer`)
+- JUnit 5
 
 ## Dependency
 
@@ -63,13 +63,13 @@ Annotate your test class with the `@ZeebeProcessTest` annotation. This annotatio
 1. It will manage the lifecycle of the testcontainer/embedded test engine.
 2. It will create a client which can be used to interact with the engine.
 3. It will (optionally) inject three fields in your test class:
-    1. `ZeebeTestEngine` - This is the engine that will run your process. It will provide some basic functionality
-       to help you write your tests, such as waiting for an idle state and increasing the time.
-    2. `ZeebeClient` - This is the client that allows you to send commands to the engine, such as
-       starting a process instance. The interface of this client is identical to the interface you
-       use to connect to a real Zeebe engine.
-    3. `RecordStream` - This gives you access to all the records processed by the engine.
-       Assertions use the records for verifying expectations. This grants you the freedom to create your own assertions.
+   1. `ZeebeTestEngine` - This is the engine that will run your process. It will provide some basic functionality
+      to help you write your tests, such as waiting for an idle state and increasing the time.
+   2. `ZeebeClient` - This is the client that allows you to send commands to the engine, such as
+      starting a process instance. The interface of this client is identical to the interface you
+      use to connect to a real Zeebe engine.
+   3. `RecordStream` - This gives you access to all the records processed by the engine.
+      Assertions use the records for verifying expectations. This grants you the freedom to create your own assertions.
 
 ```java
 // When using the embedded test engine (Java 17+)
@@ -91,12 +91,13 @@ class DeploymentAssertTest {
 Switching between testcontainers and embedded requires just two steps:
 
 1. Switch to the relevant dependency.
-   * Testcontainers: `zeebe-process-test-extension-testcontainer`
-   * Embedded: `zeebe-process-test-extension`
+
+   - Testcontainers: `zeebe-process-test-extension-testcontainer`
+   - Embedded: `zeebe-process-test-extension`
 
 2. Change the import of `@ZeebeProcessTest`.
-   * Testcontainers: `import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;`
-   * Embedded: `import io.camunda.zeebe.process.test.extension.ZeebeProcessTest;`
+   - Testcontainers: `import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;`
+   - Embedded: `import io.camunda.zeebe.process.test.extension.ZeebeProcessTest;`
 
 ## Assertions
 

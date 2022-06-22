@@ -8,14 +8,14 @@ description: "Let's take a closer look at how Operate stores and archives data."
 
 Operate imports data from Zeebe and stores it in Elasticsearch indices with a defined prefix (default: `operate`). Specifically, this includes the following:
 
-* Deployed processes, including the diagrams
-* The state of process instances, including variables and flow nodes, activated within instance execution, incidents, etc.
+- Deployed processes, including the diagrams
+- The state of process instances, including variables and flow nodes, activated within instance execution, incidents, etc.
 
 It additionally stores some Operate-specific data:
 
-* Operations performed by the user
-* List of users
-* Technical data, like the state of Zeebe import, etc.
+- Operations performed by the user
+- List of users
+- Technical data, like the state of Zeebe import, etc.
 
 The data representing process instance state becomes immutable after the process instance is finished. Currently, the data may be archived, meaning it is moved to a dated index, e.g. `operate_variables_2020-01-01`, where date represents the date on which the given process instance was finished. The same is valid for user operations; after they are finished, the related data is moved to dated indices.
 

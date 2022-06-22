@@ -23,7 +23,7 @@ A full configuration example authorizing the user `demo` and all members of the 
 
     api:
       accessToken: secret
-    
+
     eventBasedProcess:
       authorizedUserIds: ['demo']
       authorizedGroupIds: ['sales']

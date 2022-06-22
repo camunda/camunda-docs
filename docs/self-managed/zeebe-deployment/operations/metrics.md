@@ -1,6 +1,7 @@
 ---
 id: metrics
 title: "Metrics"
+keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
 When operating a distributed system like Zeebe, it is important to put proper monitoring in place.
@@ -56,6 +57,10 @@ All Zeebe-related metrics have a `zeebe_`-prefix.
 Most metrics have the following common label:
 
 - `partition`: Cluster-unique id of the partition
+
+:::note
+Both brokers and gateways expose their respective metrics. The brokers have an optional metrics exporter that can be enabled for maximum insight.
+:::
 
 **Metrics related to process processing:**
 

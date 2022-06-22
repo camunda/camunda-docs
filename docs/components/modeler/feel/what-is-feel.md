@@ -17,17 +17,17 @@ A [unary-tests expression](./language-guide/feel-unary-tests.md) is a special ki
 entries of a decision table (i.e. the conditions of a rule).
 
 ```js
-< 7                                                 
+< 7
 // checks if the input value is less than 7
 
-not(2,4)                                            
+not(2,4)
 // checks if the input value is neither 2 nor 4
 
-[date("2015-09-17")..date("2015-09-19")]            
+[date("2015-09-17")..date("2015-09-19")]
 // checks if the input value is between '2015-09-17' and '2015-09-19'
 
-<= duration("P1D")                                  
-// checks if the input value is less than or equal to one day    
+<= duration("P1D")
+// checks if the input value is less than or equal to one day
 ```
 
 ### Expressions
@@ -36,13 +36,13 @@ not(2,4)
 example, in a decision table as an input expression or as an output entry.
 
 ```js
-applicant.monthly.income * 12                                           
+applicant.monthly.income * 12
 
-if applicant.maritalStatus in ("M","S") then "valid" else "not valid"    
+if applicant.maritalStatus in ("M","S") then "valid" else "not valid"
 
-sum( [applicant.monthly.repayments, applicant.monthly.expenses] )        
+sum( [applicant.monthly.repayments, applicant.monthly.expenses] )
 
-sum( credit_history[record_date > date("2011-01-01")].weight )           
+sum( credit_history[record_date > date("2011-01-01")].weight )
 
-some ch in credit_history satisfies ch.event = "bankruptcy"      
+some ch in credit_history satisfies ch.event = "bankruptcy"
 ```

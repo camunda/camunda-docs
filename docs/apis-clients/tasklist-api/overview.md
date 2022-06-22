@@ -30,18 +30,18 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKE
 
 ### How to obtain the access token
 
-You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/getting-started/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
+You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
 
 See our guide on [building your own client](/apis-clients/build-your-own-client.md).
 
 The following settings are needed:
 
-| Name | Description | Default value |
-| -- | -- | -- |
-| client id | Name of your registered client | - |
-| client secret | Password for your registered client | - |
-| audience | Permission name; if not given use default value | `tasklist.camunda.io` |
-| authorization server url | Token issuer server | - |
+| Name                     | Description                                     | Default value         |
+| ------------------------ | ----------------------------------------------- | --------------------- |
+| client id                | Name of your registered client                  | -                     |
+| client secret            | Password for your registered client             | -                     |
+| audience                 | Permission name; if not given use default value | `tasklist.camunda.io` |
+| authorization server url | Token issuer server                             | -                     |
 
 Send a token issue _POST_ request to the authorization server with the following content:
 

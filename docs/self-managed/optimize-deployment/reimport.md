@@ -22,16 +22,16 @@ steps:
 1. Stop Optimize, but keep Elasticsearch running (hint: to only start Elasticsearch without Optimize, you can use `elasticsearch-startup.sh` or `elasticsearch-startup.bat` scripts).
 2. From the Optimize installation root run `./reimport/reimport.sh` on Linux or `reimport/reimport.bat` on Windows and wait for it to finish
 
-    * In Docker environments, you can override the command the container executes on start to call the reimport script, e.g. in [docker-compose](https://docs.docker.com/compose/) this could look like the following:
+   - In Docker environments, you can override the command the container executes on start to call the reimport script, e.g. in [docker-compose](https://docs.docker.com/compose/) this could look like the following:
 
-    ```
-    version: '2.4'
+   ```
+   version: '2.4'
 
-    services:
-      optimize:
-        image: registry.camunda.cloud/optimize-ee/optimize:latest
-        command: ["./reimport/reimport.sh"]
-    ```
+   services:
+     optimize:
+       image: registry.camunda.cloud/optimize-ee/optimize:latest
+       command: ["./reimport/reimport.sh"]
+   ```
 
 3. Start Optimize again. Optimize will now import all the engine data from scratch.
 4. If you made use of event-based processes you will have to manually publish them again.

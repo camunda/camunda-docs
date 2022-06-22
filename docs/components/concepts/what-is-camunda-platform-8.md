@@ -89,8 +89,8 @@ The platform and tools are easy to get started with and simple to use in your en
 
 ## Next steps
 
-* To request information about Camunda Platform 8 performance and benchmarking, see our [Contact](/contact/) page.
-* [Introduction to Camunda Platform 8](../../guides/introduction-to-camunda-cloud.md)
-* [Create a Camunda Platform 8 account](../../guides/getting-started/create-camunda-cloud-account.md)
-* [Migrate from Camunda Platform 7 to Camunda Platform 8](../../guides/migrating-from-camunda-platform-7.md)
-* [Automate a process using BPMN](../../guides/automating-a-process-using-bpmn.md)
+- To request information about Camunda Platform 8 performance and benchmarking, see our [Contact](/contact/) page.
+- [Introduction to Camunda Platform 8](../../guides/introduction-to-camunda-cloud.md)
+- [Create a Camunda Platform 8 account](../../guides/create-account.md)
+- [Migrate from Camunda Platform 7 to Camunda Platform 8](../../guides/migrating-from-camunda-platform-7.md)
+- [Automate a process using BPMN](../../guides/automating-a-process-using-bpmn.md)

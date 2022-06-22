@@ -62,17 +62,17 @@ To configure secure communication for a broker, configure its `zeebe.broker.netw
 
 ```yaml
 security:
-    # Enables TLS authentication between this gateway and other nodes in the cluster
-    # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_ENABLED.
-    enabled: false
+  # Enables TLS authentication between this gateway and other nodes in the cluster
+  # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_ENABLED.
+  enabled: false
 
-    # Sets the path to the certificate chain file.
-    # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH.
-    certificateChainPath:
+  # Sets the path to the certificate chain file.
+  # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH.
+  certificateChainPath:
 
-    # Sets the path to the private key file location
-    # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH.
-    privateKeyPath:
+  # Sets the path to the private key file location
+  # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH.
+  privateKeyPath:
 ```
 
 > The `certificateChainPath` and the `privateKeyPath` can be relative to your broker's working directory, or can be absolute paths.
@@ -83,17 +83,17 @@ To configure secure communication for a standalone gateway with the rest of the 
 
 ```yaml
 security:
-    # Enables TLS authentication between this gateway and other nodes in the cluster
-    # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED.
-    enabled: false
+  # Enables TLS authentication between this gateway and other nodes in the cluster
+  # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED.
+  enabled: false
 
-    # Sets the path to the certificate chain file.
-    # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH.
-    certificateChainPath:
+  # Sets the path to the certificate chain file.
+  # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH.
+  certificateChainPath:
 
-    # Sets the path to the private key file location
-    # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH.
-    privateKeyPath:
+  # Sets the path to the private key file location
+  # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH.
+  privateKeyPath:
 ```
 
 :::note
@@ -177,7 +177,7 @@ cat nodeC.pem ca.pem > chainNodeC.pem
 
 ```yaml
 security:
-    enabled: true
-    certificateChainPath: chainNodeA.pem
-    privateKeyPath: nodeA.key
+  enabled: true
+  certificateChainPath: chainNodeA.pem
+  privateKeyPath: nodeA.key
 ```

@@ -2,6 +2,7 @@
 id: job-worker
 title: "Job worker"
 description: "Let's take a deeper look at job workers to handle jobs."
+keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
 ## Related resources

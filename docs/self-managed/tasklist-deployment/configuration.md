@@ -7,14 +7,14 @@ Tasklist is a Spring Boot application. This means all provided ways to [configur
 
 By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist-related settings are prefixed with `camunda.tasklist`. The following components are configurable:
 
-* [Webserver](#webserver)
-* [GraphQL API access](#graphql-api-access)
-* [Elasticsearch connection](#elasticsearch)
-* [Zeebe Broker connection](#zeebe-broker-connection)
-* [Zeebe Elasticsearch exporter](#zeebe-elasticsearch-exporter)
-* [Authentication](authentication.md)
-* [Monitoring and health probes](#monitoring-and-health-probes)
-* [Logging configuration](#logging)
+- [Webserver](#webserver)
+- [GraphQL API access](#graphql-api-access)
+- [Elasticsearch connection](#elasticsearch)
+- [Zeebe Broker connection](#zeebe-broker-connection)
+- [Zeebe Elasticsearch exporter](#zeebe-elasticsearch-exporter)
+- [Authentication](authentication.md)
+- [Monitoring and health probes](#monitoring-and-health-probes)
+- [Logging configuration](#logging)
 
 ## Webserver
 
@@ -34,15 +34,15 @@ Tasklist provides a GraphQL API under the endpoint `/graphql`. Clients can acces
 
 The Tasklist server requires the following settings to validate the token:
 
-Setting|Description|Example
--------|------------|--------
-camunda.tasklist.client.audience| Tasklist tries to match this with `aud` in JWT. | tasklist.camunda.io
-camunda.tasklist.client.clusterId| Tasklist tries to match this with `scope` in JWT. | cafe-0815-0235-a221-21cc6df91dc5
-spring.security.oauth2.resourceserver.jwt.jwk-set-uri (recommended) | Complete URI to get public keys for JWT validation. | https://weblogin.cloud.company.com/.well-known/jwks.json
-*OR* | |
-spring.security.oauth2.resourceserver.jwt.issuer-uri| URI to get public keys for JWT validation.| https://weblogin.cloud.company.com/
+| Setting                                                             | Description                                         | Example                                                  |
+| ------------------------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------- |
+| camunda.tasklist.client.audience                                    | Tasklist tries to match this with `aud` in JWT.     | tasklist.camunda.io                                      |
+| camunda.tasklist.client.clusterId                                   | Tasklist tries to match this with `scope` in JWT.   | cafe-0815-0235-a221-21cc6df91dc5                         |
+| spring.security.oauth2.resourceserver.jwt.jwk-set-uri (recommended) | Complete URI to get public keys for JWT validation. | https://weblogin.cloud.company.com/.well-known/jwks.json |
+| _OR_                                                                |                                                     |
+| spring.security.oauth2.resourceserver.jwt.issuer-uri                | URI to get public keys for JWT validation.          | https://weblogin.cloud.company.com/                      |
 
-The settings can be given in [application.yml](https://github.com/camunda-cloud/tasklist/blob/master/config/application.yml) (eg. `camunda.tasklist.client.audience: tasklist.camunda.io`) or as environment variables (eg. `CAMUNDA_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`).
+The settings can be given in [application.yml](#an-example-of-applicationyml-file) (eg. `camunda.tasklist.client.audience: tasklist.camunda.io`) or as environment variables (eg. `CAMUNDA_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`).
 
 The [API client](/docs/apis-clients/tasklist-api/overview/) must obtain the JWT token and send it in each request to `graphql` in an authorization header as described above.
 
@@ -65,16 +65,16 @@ host verification.
 You may need to import the certificate into JVM runtime.
 :::
 
-Name | Description | Default value
------|-------------|--------------
-camunda.tasklist.elasticsearch.indexPrefix | Prefix for index names | tasklist
-camunda.tasklist.elasticsearch.clusterName | Clustername of Elasticsearch | elasticsearch
-camunda.tasklist.elasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
-camunda.tasklist.elasticsearch.username | Username to access Elasticsearch REST API | -
-camunda.tasklist.elasticsearch.password | Password to access Elasticsearch REST API | -
-camunda.tasklist.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -
-camunda.tasklist.elasticsearch.ssl.selfSigned | Certificate was self signed | false
-camunda.tasklist.elasticsearch.ssl.verifyHostname | Should the hostname be validated | false
+| Name                                               | Description                               | Default value         |
+| -------------------------------------------------- | ----------------------------------------- | --------------------- |
+| camunda.tasklist.elasticsearch.indexPrefix         | Prefix for index names                    | tasklist              |
+| camunda.tasklist.elasticsearch.clusterName         | Clustername of Elasticsearch              | elasticsearch         |
+| camunda.tasklist.elasticsearch.url                 | URL of Elasticsearch REST API             | http://localhost:9200 |
+| camunda.tasklist.elasticsearch.username            | Username to access Elasticsearch REST API | -                     |
+| camunda.tasklist.elasticsearch.password            | Password to access Elasticsearch REST API | -                     |
+| camunda.tasklist.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -                     |
+| camunda.tasklist.elasticsearch.ssl.selfSigned      | Certificate was self signed               | false                 |
+| camunda.tasklist.elasticsearch.ssl.verifyHostname  | Should the hostname be validated          | false                 |
 
 ### Settings for shards and replicas
 
@@ -82,10 +82,10 @@ Tasklist creates the template with index settings named `tasklist-<version>_temp
 
 The following configuration parameters define the settings:
 
-Name|Description|Default value
-----|-----------|--------------
-camunda.tasklist.elasticsearch.numberOfShards| How many shards Elasticsearch uses for all Tasklist indices.| 1
-camunda.tasklist.elasticsearch.numberOfReplicas| How many replicas Elasticsearch uses for all Tasklist indices.| 0
+| Name                                            | Description                                                    | Default value |
+| ----------------------------------------------- | -------------------------------------------------------------- | ------------- |
+| camunda.tasklist.elasticsearch.numberOfShards   | How many shards Elasticsearch uses for all Tasklist indices.   | 1             |
+| camunda.tasklist.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Tasklist indices. | 0             |
 
 These values are applied only on first startup of Tasklist or during version upgrade. After the Tasklist
 ELS schema is created, settings may be adjusted directly in the ELS template, and the new settings are applied
@@ -110,11 +110,11 @@ Tasklist needs a connection to Zeebe broker to start the import.
 
 ### Settings to connect
 
-| Name | Description | Default value |
-| -- | --| -- |
-| camunda.tasklist.zeebe.gatewayAddress | Gateway address that points to Zeebe as hostname and port. | localhost:26500 |
-| camunda.tasklist.zeebe.secure | Connection should be secure via Transport Layer Security (TLS). | false |
-| camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | - |
+| Name                                   | Description                                                                                                         | Default value   |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------- |
+| camunda.tasklist.zeebe.gatewayAddress  | Gateway address that points to Zeebe as hostname and port.                                                          | localhost:26500 |
+| camunda.tasklist.zeebe.secure          | Connection should be secure via Transport Layer Security (TLS).                                                     | false           |
+| camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | -               |
 
 Additionally, visit [Zeebe Secure Client Communication](/docs/self-managed/zeebe-deployment/security/secure-client-communication/) for more details.
 
@@ -126,6 +126,7 @@ camunda.tasklist:
     # Gateway host and port
     gatewayAddress: localhost:26500
 ```
+
 `
 
 ## Zeebe Elasticsearch exporter
@@ -138,16 +139,16 @@ Therefore, settings for this Elasticsearch connection must be defined and corres
 
 See also [settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance).
 
-Name | Description | Default value
------|-------------|--------------
-camunda.tasklist.zeebeElasticsearch.clusterName | Cluster name of Elasticsearch | elasticsearch
-camunda.tasklist.zeebeElasticsearch.url | URL of Elasticsearch REST API | http://localhost:9200
-camunda.tasklist.zeebeElasticsearch.prefix | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record
-camunda.tasklist.zeebeElasticsearch.username | Username to access Elasticsearch REST API | -
-camunda.tasklist.zeebeElasticsearch.password | Password to access Elasticsearch REST API | -
-camunda.tasklist.zeebeElasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -
-camunda.tasklist.zeebeElasticsearch.ssl.selfSigned | Certificate was self signed | false
-camunda.tasklist.zeebeElasticsearch.ssl.verifyHostname | Should the hostname be validated | false
+| Name                                                    | Description                                                | Default value         |
+| ------------------------------------------------------- | ---------------------------------------------------------- | --------------------- |
+| camunda.tasklist.zeebeElasticsearch.clusterName         | Cluster name of Elasticsearch                              | elasticsearch         |
+| camunda.tasklist.zeebeElasticsearch.url                 | URL of Elasticsearch REST API                              | http://localhost:9200 |
+| camunda.tasklist.zeebeElasticsearch.prefix              | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record          |
+| camunda.tasklist.zeebeElasticsearch.username            | Username to access Elasticsearch REST API                  | -                     |
+| camunda.tasklist.zeebeElasticsearch.password            | Password to access Elasticsearch REST API                  | -                     |
+| camunda.tasklist.zeebeElasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch                  | -                     |
+| camunda.tasklist.zeebeElasticsearch.ssl.selfSigned      | Certificate was self signed                                | false                 |
+| camunda.tasklist.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated                           | false                 |
 
 ### A snippet from application.yml
 
@@ -182,11 +183,11 @@ management.health.probes.enabled: true
 
 With this configuration, the following endpoints are available for use out of the box:
 
-```<server>:8080/actuator/prometheus``` Prometheus metrics
+`<server>:8080/actuator/prometheus` Prometheus metrics
 
-```<server>:8080/actuator/health/liveness``` Liveness probe
+`<server>:8080/actuator/health/liveness` Liveness probe
 
-```<server>:8080/actuator/health/readiness``` Readiness probe
+`<server>:8080/actuator/health/readiness` Readiness probe
 
 ### Example snippets to use Tasklist probes in Kubernetes
 
@@ -196,21 +197,22 @@ For details to set Kubernetes probes parameters, see [Kubernetes configure probe
 
 ```yaml
 readinessProbe:
-     httpGet:
-        path: /actuator/health/readiness
-        port: 8080
-     initialDelaySeconds: 30
-     periodSeconds: 30
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 30
 ```
+
 #### Liveness probe as yaml config
 
 ```yaml
 livenessProbe:
-     httpGet:
-        path: /actuator/health/liveness
-        port: 8080
-     initialDelaySeconds: 30
-     periodSeconds: 30
+  httpGet:
+    path: /actuator/health/liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 30
 ```
 
 ## Logging
@@ -248,7 +250,7 @@ By default, Console Appender is used.
 ### JSON logging configuration
 
 You can choose to output logs in JSON format (Stackdriver compatible). To enable it, define
-the environment variable ```TASKLIST_LOG_APPENDER``` like the following:
+the environment variable `TASKLIST_LOG_APPENDER` like the following:
 
 ```sh
 TASKLIST_LOG_APPENDER=Stackdriver
@@ -284,7 +286,7 @@ camunda.tasklist:
   #roles:
   #  - OWNER
   #  - OPERATOR
-  
+
   # ELS instance to store Tasklist data
   elasticsearch:
     # Cluster name

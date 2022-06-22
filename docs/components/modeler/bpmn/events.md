@@ -6,10 +6,10 @@ description: "This document outlines an overview of general events, intermediate
 
 Currently supported events:
 
-* [None events](none-events/none-events.md)
-* [Message events](message-events/message-events.md)
-* [Timer events](timer-events/timer-events.md)
-* [Error events](error-events/error-events.md)
+- [None events](none-events/none-events.md)
+- [Message events](message-events/message-events.md)
+- [Timer events](timer-events/timer-events.md)
+- [Error events](error-events/error-events.md)
 
 ## Events in general
 
@@ -17,9 +17,9 @@ Events in BPMN can be **thrown** (i.e. sent), or **caught** (i.e. received), res
 
 Additionally, a distinction is made between start, intermediate, and end events:
 
-* **Start events** (catch events, as they can only react to something) are used to denote the beginning of a process or subprocess.
-* **End events** (throw events, as they indicate something has happened) are used to denote the end of a particular sequence flow.
-* **Intermediate events** can be used to indicate that something has happened (i.e. intermediate throw events), or to wait and react to certain events (i.e. intermediate catch events).
+- **Start events** (catch events, as they can only react to something) are used to denote the beginning of a process or subprocess.
+- **End events** (throw events, as they indicate something has happened) are used to denote the end of a particular sequence flow.
+- **Intermediate events** can be used to indicate that something has happened (i.e. intermediate throw events), or to wait and react to certain events (i.e. intermediate catch events).
 
 Intermediate catch events can be inserted into your process in two different contexts: normal flow, or attached to an activity, and are called boundary events.
 

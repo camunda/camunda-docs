@@ -24,7 +24,6 @@ Zeebe, Operate, Tasklist and IAM are using the Spring framework for which the fo
 
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate, Tasklist or IAM allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-
 #### How to determine if the installation is affected
 
 You are using Zeebe, Operate or Tasklist version <= 1.2.11 or <= 1.3.6
@@ -50,7 +49,6 @@ Zeebe, Operate, Tasklist
 
 Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44832.
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
-
 
 #### How to determine if the installation is affected
 
@@ -88,7 +86,6 @@ Camunda has provided the following releases which contain a fix
 
 - [IAM 1.2.9](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.9)
 
-
 ### Notice 6
 
 #### Publication Date:
@@ -103,7 +100,6 @@ Zeebe, Operate, Tasklist
 
 Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45105.
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
-
 
 #### How to determine if the installation is affected
 
@@ -144,7 +140,6 @@ Camunda has provided the following releases which contain a fix
 
 - [IAM 1.2.8](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.8)
 
-
 ### Notice 4
 
 #### Publication Date:
@@ -159,7 +154,6 @@ Zeebe, Operate, Tasklist
 
 Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45046.
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
-
 
 #### How to determine if the installation is affected
 
@@ -215,7 +209,6 @@ Zeebe, Operate, Tasklist
 Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44228.
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-
 #### How to determine if the installation is affected
 
 You are using Zeebe, Operate or Tasklist version <= 1.2.5 or <= 1.1.6
@@ -255,7 +248,6 @@ You are using IAM version <= 1.2.5
 Camunda has provided the following releases which contain a fix
 
 - [IAM 1.2.6](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.6)
-
 
 ## Report a vulnerability
 

@@ -28,15 +28,15 @@ To create a client, take the following steps:
 
 1. Navigate into the **API** tab.
 
-![cluster-details](../../../guides/getting-started/img/cluster-detail-clients.png)
+![cluster-details](img/cluster-detail-clients.png)
 
-2. Click **Create New Client** to create a new client and name your client accordingly.
+1. Click **Create New Client** to create a new client and name your client accordingly.
 
-![create-client](../../../guides/getting-started/img/cluster-details-create-client.png)
+![create-client](img/cluster-details-create-client.png)
 
-3. Ensure you keep the generated client credentials in a safe place. The **client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
+1. Ensure you keep the generated client credentials in a safe place. The **client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
 
-![created-client](../../../guides/getting-started/img/cluster-details-created-client.png)
+![created-client](img/cluster-details-created-client.png)
 
 The downloaded file contains all necessary information to communicate with your Zeebe instance in the future:
 

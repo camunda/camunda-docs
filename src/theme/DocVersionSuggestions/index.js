@@ -26,10 +26,8 @@ function DocVersionSuggestions() {
   });
   const { savePreferredVersionName } = useDocsPreferredVersion(pluginId);
   const activeVersion = useActiveVersion(pluginId);
-  const {
-    latestDocSuggestion,
-    latestVersionSuggestion,
-  } = useDocVersionSuggestions(pluginId); // No suggestion to be made
+  const { latestDocSuggestion, latestVersionSuggestion } =
+    useDocVersionSuggestions(pluginId); // No suggestion to be made
 
   if (!latestVersionSuggestion) {
     return <></>;
