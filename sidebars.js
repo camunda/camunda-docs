@@ -233,7 +233,13 @@ module.exports = {
           "User guide": [
             "components/optimize/userguide/collections-dashboards-reports",
             "components/optimize/userguide/data-sources",
-            "components/optimize/userguide/creating-dashboards",
+            {
+              Dashboards: [
+                "components/optimize/userguide/creating-dashboards",
+                "components/optimize/userguide/edit-mode",
+                "components/optimize/userguide/view-mode",
+              ],
+            },
             "components/optimize/userguide/creating-reports",
             "components/optimize/userguide/combined-reports",
             "components/optimize/userguide/processes",
