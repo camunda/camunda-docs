@@ -37,6 +37,7 @@ In this example, we've designed the following BPMN diagram:
 ![bpmn example diagram](./img/bpmn-expense-sample.png)
 
 [//]: # 'Do you want me to add steps for building out the sample diagram here? Or, would it be better to say something like "To learn more about building your own BPMN diagram from scratch, visit our guide on automating a process using BPMN."'
+[//]: # 'Do we want to change the diagram so the start event is "Receipt ready" and the first task is "Receipt uploaded?"'
 
 ## Add a connector
 
@@ -57,6 +58,8 @@ To add our productivity applications connector, take the following steps:
 ![filling out connector properties panel](./img/connector-properties-panel.png)
 
 Our connector is now attached and ready to use!
+
+[//]: # "Does this need to be expanded? Should I go ahead and obtain a SendGrid API so we can actually see the email sent, or do we feel demonstrating the attachment of a sample connector is sufficient?"
 
 ## Execute your process diagram
 
