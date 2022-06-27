@@ -11,7 +11,7 @@ Once you have defined what your dashboard should look like, the view mode provid
 - Auto-refresh: This feature periodically updates the dashboard with the latest data. You can decide how often the update should be performed by setting a time span reaching from 1 to 60 minutes. An animation indicates when the next update is occurring. If you do not wish to use that feature anymore, you can disable it anytime.
 
 :::note
-The refresh rate will not be saved unless it is selected in the [edit mode](#edit-mode) of the dashboard.
+The refresh rate will not be saved unless it is selected in the [edit mode](./edit-mode.md) of the dashboard.
 If it was selected in the view mode, the refresh rate will not be saved when refreshing the dashboard page manually or switching to another page in between.
 :::
 
