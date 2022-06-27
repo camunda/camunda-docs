@@ -251,7 +251,17 @@ module.exports = {
                 {
                   "Report analysis": [
                     "components/optimize/userguide/process-analysis/report-analysis/overview",
-                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                    {
+                      "Edit mode": [
+                        "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                        "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
+                        "components/optimize/userguide/process-analysis/report-analysis/define-reports",
+                        "components/optimize/userguide/process-analysis/report-analysis/measures",
+                        "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
+                        "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
+                        "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
+                      ],
+                    },
                     "components/optimize/userguide/process-analysis/report-analysis/view-mode",
                   ],
                 },
@@ -269,6 +279,16 @@ module.exports = {
                 "components/optimize/userguide/additional-features/alerts",
                 "components/optimize/userguide/additional-features/event-based-processes",
                 "components/optimize/userguide/additional-features/export-import",
+                {
+                  Filters: [
+                    "components/optimize/userguide/additional-features/filters",
+                    "components/optimize/userguide/additional-features/general-filters",
+                    "components/optimize/userguide/additional-features/instance-state-filters",
+                    "components/optimize/userguide/additional-features/flow-node-filters",
+                    "components/optimize/userguide/additional-features/process-instance-filters",
+                    "components/optimize/userguide/additional-features/variable-filters",
+                  ],
+                },
                 "components/optimize/userguide/additional-features/filters",
                 "components/optimize/userguide/additional-features/footer",
                 "components/optimize/userguide/additional-features/variable-labeling",
