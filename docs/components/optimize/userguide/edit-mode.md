@@ -11,7 +11,7 @@ The edit mode allows you to configure the dashboard and adjust it to your needs,
 - Save the current state with your applied changes
 - Cancel changes you already applied to the dashboard
 - Set filters available on the dashboard
-- Set a default auto refresh rate to periodically update the dashboard in [view mode](#view-mode)
+- Set a default auto refresh rate to periodically update the dashboard in [view mode](./view-mode.md)
 
 ![edit mode](./img/dashboard-dashboardEditActions.png)
 

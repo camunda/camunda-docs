@@ -6,7 +6,7 @@ description: Learn more about general date filters, duration filters, and more.
 
 ## Date filters
 
-In Optimize, there are two kinds of date filters: the start and the end date filter. Each of these filters can be applied on [process instance](#process-instance-date-filter) and on [flow node](#flow-node-date-filter) dates.
+In Optimize, there are two kinds of date filters: the start and the end date filter. Each of these filters can be applied on [process instance](./process-instance-filters.md#process-instance-date-filter) and on [flow node](./flow-node-filters.md#flow-node-date-filter) dates.
 
 There are multiple ways in which you can define your date filters:
 
@@ -38,7 +38,7 @@ These filters allow you to include or exclude instances based on the assignee or
 
 As shown in the example, it is possible to select one or more assignees or even filter for unassigned instances.
 
-This filter has different behavior depending on where it was [defined](#filter-behavior):
+This filter has different behavior depending on where it was [defined](./filters.md#filter-behavior):
 
 - As a `Flow Node data filter` applied on a user task report: This filter only includes user task instances that satisfy _all_ assignee/candidateGroup filters defined in the report at once. Mutually exclusive filters like having both an inclusive and an exclusive filter on the same assignee do not yield any results in user task reports.
 
@@ -46,7 +46,7 @@ This filter has different behavior depending on where it was [defined](#filter-b
 
 ## Incident filter
 
-This filter has a different behavior depending on where it was [defined](#filter-behavior):
+This filter has a different behavior depending on where it was [defined](./filters.md#filter-behavior):
 
 - As an `instance filter`: This filter will retrieve only those process instances that contain open, resolved, or no incidents (depending on your selection). Here are some examples where this filter can be useful:
 
@@ -65,7 +65,7 @@ The incident filter does not currently filter flow nodes regardless of where it 
 ## Combined filters
 
 All the previously mentioned filters can be combined. Only those process instances which match all the configured filters
-are considered in the report or analysis. The [duration filter](#duration-filters), [flow node filter](#flow-node-filter), and [variable filter](#variable-filter) can be defined several times. See the following screenshot for a possible combination of filters:
+are considered in the report or analysis. The [duration filter](./general-filters.md#duration-filters), [flow node filter](./flow-node-filters.md), and [variable filter](./variable-filters.md) can be defined several times. See the following screenshot for a possible combination of filters:
 
 ![Combined filter in Camunda Optimize](./img/combined-filter.png)
 

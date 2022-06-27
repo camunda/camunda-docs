@@ -56,7 +56,7 @@ Null or undefined options can be included or excluded from the results in a way 
 
 ## Date variables
 
-This filters all instances where the selected date variable has a value within a specified date range. All the options that are available to configure [date filters](#date-filters) are also available for date variables.
+This filters all instances where the selected date variable has a value within a specified date range. All the options that are available to configure [date filters](./general-filters.md#date-filters) are also available for date variables.
 
 Similar to the other variables, there are two input switches that allow you to exclude or include process instances where a particular date variable is either `null` or `undefined`.
 

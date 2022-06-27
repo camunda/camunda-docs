@@ -30,7 +30,7 @@ This view option allows you to create reports that show how often the decision w
 
 #### Group by: None
 
-This shows a single number indicating the total amount of evaluations for this decision definition and version in the current filter. Using the configuration dialog, you can limit the precision of the number and define a goal to create a progress bar. Details of both options are described in the [process report configuration section](../process-analysis/report-analysis/edit-mode.md#number).
+This shows a single number indicating the total amount of evaluations for this decision definition and version in the current filter. Using the configuration dialog, you can limit the precision of the number and define a goal to create a progress bar. Details of both options are described in the [process report configuration section](../process-analysis/report-analysis/configure-reports.md#number).
 
 ![Progress Bar visualization for Decision Evaluation Count](./img/dmn_progress_bar.png)
 
@@ -42,7 +42,7 @@ This report shows the decision table with an additional column to the right. Thi
 
 #### Group by: Evaluation date
 
-Using this group by option allows you to see the development of evaluations over time. The result can be visualized as table or chart. In combination with filters, this allows you to create powerful reports. For example, to show during which time period the decision resulted in a certain output variable. If you visualize such a report as a chart, you have access to all the [chart visualization options](../process-analysis/report-analysis/edit-mode.md#charts-line-bar-pie) process reports have, too.
+Using this group by option allows you to see the development of evaluations over time. The result can be visualized as table or chart. In combination with filters, this allows you to create powerful reports. For example, to show during which time period the decision resulted in a certain output variable. If you visualize such a report as a chart, you have access to all the [chart visualization options](../process-analysis/report-analysis/configure-reports.md#charts-line-bar-pie) process reports have, too.
 
 ![Line Chart showing decision evaluations by date](./img/dmn_date_chart.png)
 

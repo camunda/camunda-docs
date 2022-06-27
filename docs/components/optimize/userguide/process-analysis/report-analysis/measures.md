@@ -10,7 +10,7 @@ For duration and variable views, the default aggregation type is the average. Yo
 
 ![Duration Aggregation Selection](./img/durationAggregation.png)
 
-Reports with multiple aggregations that have a [second "Group by"](#reports-with-a-second-group-by-option) can only be visualized as table.
+Reports with multiple aggregations that have a [second "Group by"](./define-reports.md#reports-with-a-second-Group-by-option) can only be visualized as table.
 
 ## User task duration time
 
@@ -24,7 +24,7 @@ In user task duration reports, you have the opportunity to select which part of 
 - Work: View how long each user task was considered to be worked on by assignees/users (claimed by an assignee/user) during its execution.
 - Total: View how long each user task took to complete.
 
-It is possible to display and compare multiple user task duration times in the same report. Reports with multiple user task duration times that have a [second "Group by"](#reports-with-a-second-group-by-option) can only be visualized as table.
+It is possible to display and compare multiple user task duration times in the same report. Reports with multiple user task duration times that have a [second "Group by"](./define-reports.md#reports-with-a-second-Group-by-option) can only be visualized as table.
 
 :::note
 User tasks which have been completed yet have no claim operations are evaluated as follows: if the user task was canceled, the task is considered to have been idle whereas user tasks which were completed are considered to have been worked on programmatically or via a custom UI, meaning the time between start and end is considered work time.

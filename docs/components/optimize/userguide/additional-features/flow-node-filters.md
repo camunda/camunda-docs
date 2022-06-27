@@ -18,7 +18,7 @@ In flow node and user tasks reports, all flow nodes are included in the result b
 
 ## Flow node status filter
 
-Some flow nodes can take a relatively long time to complete (e.g. user tasks or long-running service tasks). By default, a report includes all flow nodes in the calculations, whether they are currently running, canceled, or already completed. You can change this behavior by adding a flow node status filter as a [flow node data filter](#filter-behavior).
+Some flow nodes can take a relatively long time to complete (e.g. user tasks or long-running service tasks). By default, a report includes all flow nodes in the calculations, whether they are currently running, canceled, or already completed. You can change this behavior by adding a flow node status filter as a [flow node data filter](./filters.md#filter-behavior).
 
 Adding one of the flow node status options will filter both instances and flow nodes according to the selected status:
 
@@ -46,7 +46,7 @@ Similar to process instance date filters, flow node date filters allow you to fi
 Reports with a flow node end date filter will only consider data from completed flow nodes.
 :::
 
-This filter type can be applied either as a [process instance](#filter-behavior) or as a [flow node](#filter-behavior) filter:
+This filter type can be applied either as a [process instance](./filters.md#filter-behavior) or as a [flow node](./filters.md#filter-behavior) filter:
 
 - When applied as a process instance filter, you are required to select the flow nodes that are to be relevant to the filter, yielding a report which will only consider those process instances where one or more of the selected flow nodes match the configured filter.
 
