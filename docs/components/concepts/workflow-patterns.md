@@ -61,9 +61,9 @@ There is also a specific loop task marker in BPMN (but please note, that this [i
 
 <div bpmn="workflow-patterns/loop-marker.bpmn" callouts="taskA" />
 
-### Parallel static branches
+### Static parallel branches
 
-See [Workflow Pattern 2: Parallel Split](http://www.workflowpatterns.com/patterns/control/new/wcp2.php) and [Workflow Pattern 33: Generalized AND-Join](http://www.workflowpatterns.com/patterns/control/new/wcp33.php): "The divergence of a branch into two or more parallel branches each of which execute concurrently". Plus "the convergence of two or more branches into a single subsequent branch".
+You want some pre-modelled tasks to be carried out in parallel. See [Workflow Pattern 2: Parallel Split](http://www.workflowpatterns.com/patterns/control/new/wcp2.php) and [Workflow Pattern 33: Generalized AND-Join](http://www.workflowpatterns.com/patterns/control/new/wcp33.php): "The divergence of a branch into two or more parallel branches each of which execute concurrently". Plus "the convergence of two or more branches into a single subsequent branch".
 
 In BPMN this is typically implemented using [parallel gateways](/docs/components/modeler/bpmn/parallel-gateways/), also called AND-gateways:
 
@@ -79,9 +79,9 @@ This AND-gateway waits for Task A, B, and C to complete, before the flow can mov
 
 You can read more about it in [our BPMN primer - gateways: Steering flow](/docs/components/modeler/bpmn/bpmn-primer/#gateways-steering-flow).
 
-### Parallel dynamic branches
+### Dynamic parallel branches
 
-See [Workflow Pattern 14: Multiple Instances with a priori Run-Time Knowledge](http://www.workflowpatterns.com/patterns/control/new/wcp14.php): "Multiple instances of a task can be created. The required number of instances may depend on a number of runtime factors, but is known before the task instances must be created. Once initiated, these instances are independent of each other and run concurrently. It is necessary to synchronize the instances at completion before any subsequent tasks can be triggered".
+You want execute some tasks for every element of a list, like the `for each` construct in programming languages. See [Workflow Pattern 14: Multiple Instances with a priori Run-Time Knowledge](http://www.workflowpatterns.com/patterns/control/new/wcp14.php): "Multiple instances of a task can be created. The required number of instances may depend on a number of runtime factors, but is known before the task instances must be created. Once initiated, these instances are independent of each other and run concurrently. It is necessary to synchronize the instances at completion before any subsequent tasks can be triggered".
 
 In BPMN this is implemented using [multiple instance activities](/docs/components/modeler/bpmn/multi-instance/):
 
@@ -111,9 +111,61 @@ You can read more about it in [our BPMN primer - events: Waiting for something t
 
 ## Reacting to events
 
+The above mentioned waiting for events is a special case of generally reacting to events. You might also want to react to events, even if the process is doing something else at the moment. Typical examples are customer cancelation requests coming in for running order fulfillment processes, or timeouts if parts of the process take too long.
+
+In both cases, the process might be doing something else, but still needs to be able to react to those events, which turns out to be rarely supported well amonst workflow engines. Let's explore this, by looking at specific features and examples.
+
 ### Time based
 
+You want to react if a certain point in time is due or a specific time duration has passed. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php).
+
+In BPMN, you cannot only wait for the timer event within a flow, but also leverage [boundary events](/docs/components/modeler/bpmn/events/#boundary-events) or [event subprocesses](/docs/components/modeler/bpmn/event-subprocesses/).
+
+Those events can be interrupting, or non-interrupting, meaning that you will either interrupt the current activity, or start something in parallel.
+
+<div bpmn="workflow-patterns/reactive-events-timer.bpmn" callouts="boundaryTimerNonInterrupting, boundaryTimerInterrupting, eventSubprocess, eventTimerNonInterrupting" />
+
+<span className="callout">1</span>
+
+This timer is non-interrupting (dashed line), so the "Escalate request approval" task is started in parallel, additionally to the "Approve request" task. The idea is, that the escalation task might make a manager to double-check the original task does not slip. Non-interrupting events can also be recurring, so you could also escalate "every two hours".
+
+<span className="callout">2</span>
+
+This timer is interrupting (solid line). Once it fires, the "Approve request" task will be canceled and the process continues on the alternative path, in this case to automatically reject the request. Note that both timers so far can only happen if the task "Approve request" is active
+
+<span className="callout">3</span>
+
+This is an event subprocess (dotted line). This can be activated from everywhere in the current scope. In this example, the scope is the whole process.
+
+<span className="callout">4</span>
+
+So if the process is not completed within the defined SLA, the timer fires and the event subprocess is started. As the timer is non-interrupting (dashed line again), it does not intervene with the normal flow of operations, but starts something additionally in parallel.
+
+Please note, that the above process is not necessarily modeled following all of our [modeling best practices](/docs/components/best-practices/modeling/creating-readable-process-models/), but intentionally shows different ways to use BPMN to implement certain workflow patterns.
+
 ### External messages/events
+
+You might also want to react to certain incoming messages or event in an existing process. The prime example is a customer canceling the current order fulfillment process. This might be possible only in a certain process phase, and even lead to different actions. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php) and [Workflow Pattern 24: Persistent Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp24.php).
+
+As with timers, you can leverage [boundary events](/docs/components/modeler/bpmn/events/#boundary-events) or [event subprocesses](/docs/components/modeler/bpmn/event-subprocesses/).
+
+<div bpmn="workflow-patterns/reactive-message-events.bpmn" callouts="event1, subprocess1, event2, event3" />
+
+<span className="callout">1</span>
+
+An order cancelation message comes in for the current process instance using [message correlation](xxx). This cancelation cancels the current subprocess to do something else instead.
+
+<span className="callout">2</span>
+
+Subprocesses can be easily used to define phases of a process, as the cancellation is treated differently depending on the current process phase.
+
+<span className="callout">3</span>
+
+Because, for example, in preparation we might already have to clean up certain things.
+
+<span className="callout">4</span>
+
+And probably during delivery we do not allow any cancelations any more. This is also why this event is non-interrupting (dashed line), so we keep doing "Delivery".
 
 ### Correlation mechansisms
 
