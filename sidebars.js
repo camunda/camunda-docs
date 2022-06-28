@@ -545,7 +545,7 @@ module.exports = {
             "self-managed/optimize-deployment/configuration/getting-started",
             {
               "System configuration": [
-                "self-managed/optimize-deployment/configuration/overview",
+                "self-managed/optimize-deployment/configuration/system-configuration",
                 "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
                 "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
               ],
@@ -601,7 +601,7 @@ module.exports = {
           ],
         },
         {
-          "Optimize Explained": [
+          "Advanced features": [
             "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
             "self-managed/optimize-deployment/advanced-features/import-guide",
           ],
