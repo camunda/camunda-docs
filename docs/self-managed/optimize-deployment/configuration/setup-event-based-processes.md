@@ -15,7 +15,7 @@ To enable this feature, refer to [event-based process configuration](#event-base
 
 ## Event based process configuration
 
-To make use of ingested events and create event-based process mappings for them, the event-based process feature needs to be enabled in the [Optimize configuration](./system-configuration.md#event-based-process-configuration).
+To make use of ingested events and create event-based process mappings for them, the event-based process feature needs to be enabled in the [Optimize configuration](./system-configuration.md).
 
 This also includes authorizing particular users by their userId or user groups by their groupId to be able to create so-called event-based processes that can be used by other users of Optimize once published.
 
