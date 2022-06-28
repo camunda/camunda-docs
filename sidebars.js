@@ -511,7 +511,14 @@ module.exports = {
         "self-managed/optimize-deployment/install-and-start",
         {
           Configuration: [
-            "self-managed/optimize-deployment/configuration/system-configuration",
+            "self-managed/optimize-deployment/configuration/getting-started",
+            {
+              "System configuration": [
+                "self-managed/optimize-deployment/configuration/overview",
+                "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
+                "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
+              ],
+            },
             "self-managed/optimize-deployment/configuration/logging",
             "self-managed/optimize-deployment/configuration/optimize-license",
             "self-managed/optimize-deployment/configuration/security-instructions",
@@ -595,8 +602,8 @@ module.exports = {
         },
         {
           "Optimize Explained": [
-            "self-managed/optimize-deployment/optimize-explained/engine-data-deletion",
-            "self-managed/optimize-deployment/optimize-explained/import-guide",
+            "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
+            "self-managed/optimize-deployment/advanced-features/import-guide",
           ],
         },
       ],
