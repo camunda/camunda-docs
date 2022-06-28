@@ -65,7 +65,7 @@ The incident filter does not currently filter flow nodes regardless of where it 
 ## Combined filters
 
 All the previously mentioned filters can be combined. Only those process instances which match all the configured filters
-are considered in the report or analysis. The [duration filter](./general-filters.md#duration-filters), [flow node filter](./flow-node-filters.md), and [variable filter](./variable-filters.md) can be defined several times. See the following screenshot for a possible combination of filters:
+are considered in the report or analysis. The [duration filter](./filters.md#duration-filters), [flow node filter](./flow-node-filters.md), and [variable filter](./variable-filters.md) can be defined several times. See the following screenshot for a possible combination of filters:
 
 ![Combined filter in Camunda Optimize](./img/combined-filter.png)
 

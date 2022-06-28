@@ -73,7 +73,7 @@ All possible combinations can also be found in the following table:
 You might sometimes see a warning message indicating that the data is limited to a certain number of points. This happens because the available stored data, in this case is very large, and it is not possible to display all the data in the selected visualization.
 :::
 
-## Reports with a second Group by option
+## Reports with a second "Group by" option
 
 Using the second "Group by" option, it is possible to apply another grouping to your data to display extra details such as dates, variable values, or assignees. This option will be shown below the first "Group by" option if the current report combination supports it. Here is an overview of the reports that supports a second "Group by":
 
