@@ -25,12 +25,16 @@ Intermediate catch events can be inserted into your process in two different con
 
 ## Intermediate events
 
-In normal flow, an intermediate throw event executes its event (e.g. send a message) once the token has reached it, and once done the token continues to all outgoing sequence flows.
+<div bpmn="intermediate-events.bpmn" callouts="event1, event2" />
 
-An intermediate catch event, however, stops the token, and waits until the event it is waiting for occurs, at which execution resumes, and the token moves on.
+In normal flow, an intermediate throw event executes its event (e.g. send a message) once the token has reached it, and once done the token continues to all outgoing sequence flows (<span className="callout">1</span>).
+
+An intermediate catch event, however, stops the token, and waits until the event it is waiting for occurs, at which execution resumes, and the token moves on (<span className="callout">2</span>).
 
 ## Boundary events
 
 Boundary events provide a way to model what should happen if an event occurs while an activity is active. For example, if a process is waiting on a user task to happen which is taking too long, an intermediate timer catch event can be attached to the task, with an outgoing sequence flow to notification task, allowing the modeler to automate and sending a reminder email to the user.
 
-A boundary event must be an intermediate catch event, and can be either interrupting or non-interrupting. Interrupting means that once triggered, before taking any outgoing sequence flow, the activity the event is attached to is terminated. This allows modeling timeouts where we want to prune certain execution paths if something happens (e.g. the process takes too long).
+<div bpmn="boundary-events.bpmn" callouts="event1, event2" />
+
+A boundary event must be an intermediate catch event, and can be either interrupting (<span className="callout">1</span>)or non-interrupting (<span className="callout">2</span>). Interrupting means that once triggered, before taking any outgoing sequence flow, the activity the event is attached to is terminated. This allows modeling timeouts where we want to prune certain execution paths if something happens (e.g. the process takes too long).
