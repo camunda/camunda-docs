@@ -363,6 +363,37 @@ module.exports = {
         "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/console-api-reference",
+        {
+          "Optimize API (REST)": [
+            "apis-clients/optimize-api/authorization",
+            {
+              Configuration: [
+                "apis-clients/optimize-api/configuration/enable-sharing",
+                "apis-clients/optimize-api/configuration/disable-sharing",
+              ],
+            },
+            {
+              Dashboard: [
+                "apis-clients/optimize-api/dashboard/get-dashboard-ids",
+                "apis-clients/optimize-api/dashboard/delete-dashboard",
+                "apis-clients/optimize-api/dashboard/export-dashboard-definitions",
+              ],
+            },
+            {
+              Report: [
+                "apis-clients/optimize-api/report/get-report-ids",
+                "apis-clients/optimize-api/report/delete-report",
+                "apis-clients/optimize-api/report/export-report-definitions",
+                "apis-clients/optimize-api/report/get-data-export",
+              ],
+            },
+            "apis-clients/optimize-api/event-ingestion",
+            "apis-clients/optimize-api/external-variable-ingestion",
+            "apis-clients/optimize-api/health-readiness",
+            "apis-clients/optimize-api/import-entities",
+            "apis-clients/optimize-api/variable-labeling",
+          ],
+        },
       ],
     },
     {
@@ -546,37 +577,6 @@ module.exports = {
             "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
             "self-managed/optimize-deployment/plugins/single-sign-on",
             "self-managed/optimize-deployment/plugins/variable-import-plugin",
-          ],
-        },
-        {
-          "REST API": [
-            "self-managed/optimize-deployment/rest-api/authorization",
-            {
-              Configuration: [
-                "self-managed/optimize-deployment/rest-api/configuration/enable-sharing",
-                "self-managed/optimize-deployment/rest-api/configuration/disable-sharing",
-              ],
-            },
-            {
-              Dashboard: [
-                "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
-                "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
-                "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions",
-              ],
-            },
-            {
-              Report: [
-                "self-managed/optimize-deployment/rest-api/report/get-report-ids",
-                "self-managed/optimize-deployment/rest-api/report/delete-report",
-                "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
-                "self-managed/optimize-deployment/rest-api/report/get-data-export",
-              ],
-            },
-            "self-managed/optimize-deployment/rest-api/event-ingestion",
-            "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
-            "self-managed/optimize-deployment/rest-api/health-readiness",
-            "self-managed/optimize-deployment/rest-api/import-entities",
-            "self-managed/optimize-deployment/rest-api/variable-labeling",
           ],
         },
         "self-managed/optimize-deployment/reimport",

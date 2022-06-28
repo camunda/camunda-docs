@@ -6,8 +6,6 @@ description: "The REST API to delete dashboards from Optimize."
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
-## Purpose
-
 The dashboards deletion API allows you to delete dashboards by ID from Optimize.
 
 :::note Heads up!
@@ -26,7 +24,7 @@ The following request headers have to be provided with every delete request:
 
 | Header        | Constraints | Value                                    |
 | ------------- | ----------- | ---------------------------------------- |
-| Authorization | REQUIRED    | See [Authorization](../../authorization) |
+| Authorization | REQUIRED    | See [Authorization](../authorization.md) |
 
 ## Query parameters
 
@@ -47,7 +45,7 @@ Possible HTTP Response status codes:
 | Code | Description                                                                                                  |
 | ---- | ------------------------------------------------------------------------------------------------------------ |
 | 204  | Request successful.                                                                                          |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../authorization.md) on how to authenticate. |
 | 404  | The requested dashboard was not found, please check the provided dashboard-ID.                               |
 | 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
