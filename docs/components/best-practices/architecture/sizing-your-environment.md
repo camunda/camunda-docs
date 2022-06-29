@@ -76,6 +76,10 @@ Furthermore, data is also sent Operate and Optimize, which store data in Elastic
 
 The data you attach to a process instance (process variables) will influence disk space requirements. For example, it makes a big difference if you only add one or two strings (requiring ~ 1kb of space) to your process instances, or a full JSON document containing 1MB.
 
+:::note
+Note that Elasticsearch needs enough memory available to load a big chunk of this data into memory.
+:::
+
 Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda Platform 8 SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
 
 - Zeebe: 75 kb / PI
@@ -126,23 +130,23 @@ Now you can select a hardware package that can cover these requirements. In this
 
 Camunda Platform 8 defines three fixed hardware packages you can select from. The table below gives you an indication what requirements you can fullfill with these. If your requirements are above the mentioned numbers, please contact us to discuss a customized sizing.
 
-| **\***                                   |                               S |                               M |                                L |
-| :--------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
-| Max Throughput **Tasks/day**             |                           5.9 M |                            23 M |                             43 M |
-| Max Throughput **Tasks/second**          |                              65 |                             270 |                              500 |
-| Max Throughput **Process Instances/day** |                           0.5 M |                           2.3 M |                             15 M |
-| Max Total Number of Process Instances    |                           5.4 M |                           5.4 M |                                  |
-| Approx resources provisioned **\*\***    | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
+| **\***                                       |                               S |                               M |                                L |
+| :------------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
+| Max Throughput **Tasks/day**                 |                           5.9 M |                            23 M |                             43 M |
+| Max Throughput **Tasks/second**              |                              65 |                             270 |                              500 |
+| Max Throughput **Process Instances/day**     |                           0.5 M |                           2.3 M |                             15 M |
+| Max Total Number of Process Instances stored |                           100 k |                           5.4 M |                                  |
+| Approx resources provisioned **\*\***        | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
 
-**\*** The numbers in the table where measured using Camunda Platform 8 1.2.4 and [the official benchmark project](https://github.com/camunda-cloud/zeebe/tree/develop/benchmarks). It uses a [ten task process](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/ten_tasks.bpmn). To calculate day-based metrics, a equal distribution over 24 hours is assumed.
+**\*** The numbers in the table where measured using Camunda Platform 8 (version 8.0) and [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark). It uses a [ten task process](https://github.com/camunda-community-hub/camunda-8-benchmark/blob/main/src/main/resources/bpmn/typical_process.bpmn). To calculate day-based metrics, a equal distribution over 24 hours is assumed.
 
 **\*\*** These are the resource limits configured in the Kubernetes cluster and are always subject to change.
 
 ### Camunda Platform 8 self-managed
 
-Provisioning Camunda Platform 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customes already have own teams providing Elasticsearch for them as a service.
+Provisioning Camunda Platform 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customes already have own teams providing Elasticsearch for them as a service. However, the following example shows the current configuration of a cluster of size S in Camunda Platform 8 SaaS, which can serve as a starting point for your own sizing.
 
-However, the following example shows the current configuration of a cluster of size S in Camunda Platform 8 SaaS, which can serve as a starting point for your own sizing. As you can see in the table above, such a cluster can serve 500,000 process instances / day and store up to 5.4 million process instances (in-flight and history).
+s you can see in the table above, such a cluster can serve 500,000 process instances / day and store up to 100 thousand process instances (in-flight and history). You might wonder, why the total number of process instances stored is that low. This is related to limited resources provided to ElasticSearch, yielding in performance problems with too many data stored there. By increasing the available memory to ElasticSearch you can also increase that number. At the same time, even with this rather low number, you can always gurantee the throughput of the core workflow engine during peak loads, as this perfomance is not influenced. Also, you can always increase memory for ElasticSearch later on when if it is required.
 
 |                                    |                     | request | limit |
 | ---------------------------------- | ------------------- | ------- | ----- |
