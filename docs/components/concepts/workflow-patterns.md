@@ -169,18 +169,84 @@ And probably during delivery we do not allow any cancelations any more. This is 
 
 ### Correlation mechansisms
 
+Mapping external messages to an existing process instance is called [message correlation](/docs/components/concepts/messages/). This is a crucial functionality to make sure you can communicate with process instances from the outside.
+
+There are two main problems to solve:
+
+1. How to find the right process instance? This is solved by a `message name` and a `correlation key` (e.g. `orderCanceled` and `order-42`).
+
+2. How to persist messages if a process instance is not yet ready to receive that message just yet? This is solved by having an internal message store and a `time to live` attached to messages. This is relateed to [Workflow Pattern 24: Persistent Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp24.php)
+
+You can find more information in [our documentation about messages](/docs/components/concepts/messages/).
+
 ### Events from subprocesses
 
-### Engine-wide events
+Sometimes, you want to communicate from a subprocess to its parent, without ending the subprocess. BPMN allows this by an [escalation event](/docs/components/modeler/bpmn/bpmn-coverage/).
+
+:::note
+The escalation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in version 8.
+:::
+
+<div bpmn="workflow-patterns/escalation.bpmn" callouts="event" />
+
+<span className="callout">1</span>
+
+An escalation event can be thrown from any of the called subprocesses and will be picked up by his parent to start something in parallel, as this is an non interupting event (dashed line).
+
+The subprocess can raise the escalation any time:
+
+<div bpmn="workflow-patterns/escalation-sub.bpmn" callouts="event" />
+
+### Broadcasts and engine-wide events
+
+While messages are always targeted at one specific process instance, you might also want to inform many processes about an event at once. For example, you might regularly adjust certain customer scoring rules that always should be taken into account immediately. This can be implemented using the [signal event](/docs/components/modeler/bpmn/bpmn-coverage/).
+
+:::note
+The escalation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in version 8.
+:::
+
+<div bpmn="workflow-patterns/signal-catch.bpmn"/>
 
 ## Handling errors
 
+Handling exceptions well is one of the most imporant capabilities of a workflow engine, and it needs built-in support from the modeling language.
+
+You might also want to look into our [best practice - modeling beyond the happy path](/docs/components/best-practices/modeling/modeling-beyond-the-happy-path/) to understand possibilities.
+
 ### Error scopes
+
+The reaction to errors might need to be different depending on the current state of the process. This can be achieved by using [subprocesses](xxx) in combination with either [boundary events](xxx) or [event subprocesses](xxx).
+
+<div bpmn="workflow-patterns/subprocess-error.bpmn" callouts="errorEvent, errorEventSubprocess" />
+
+<span className="callout">1</span>
+
+This error event only catches errors from the subprocess "clearing". The idea here would be, that in case of any clearing service not being available, the order is assumed cleared. Note, that this example is mainly built for illustration, and does not necessarily mean this is the best way to solve this business requirement.
+
+<span className="callout">2</span>
+
+In contrast, this error event subprocess is triggered whenever there is a fraud detected, independant where this error is raised.
 
 ### Catch errors per type
 
-### Catch all errors
+You might need to react to different event types differently, which is possible by using the error type known to BPMN:
+
+<div bpmn="workflow-patterns/error-type.bpmn" callouts="error1, error2" />
+
+Now there is a different reaction if fraud was detected (<span className="callout">1</span>) or the address was found to contain an error (<span className="callout">2</span>).
 
 ## Business transactions
 
+Modern systems are highly distributed accross the network. In such systems, you cannot rely on technical ACID transactions for consistency, but need to elevate decisions around consistency or regaining consistency to the business level. See [Achieving consistency without transaction managers](https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c) for some more background on this.
+
 ### Compensation
+
+An important problem to solve is how to rollback a business transaction in case of problems. In other words: How to restore business consistency. One interesting strategy is to leverage compensating activities to undo the original actions whenever the problem occurs. This is also known as the [Saga Pattern](https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b).
+
+In BPMN, you can use [compensation events](xxx) to easily implement compensations in your processes.
+
+:::note
+The compensation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in version 8.
+:::
+
+<div bpmn="workflow-patterns/compensation.bpmn" callouts="error1, error2" />
