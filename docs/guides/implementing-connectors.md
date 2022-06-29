@@ -2,18 +2,20 @@
 id: implementing-connectors
 title: Implement connectors
 description: "Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes across systems."
-keywords: [connector, modeling, connectors]
+keywords: [connector, modeling, connectors, low-code, no-code]
 ---
 
 The launch of [Camunda Platform 8](../components/concepts/what-is-camunda-platform-8.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
 
-This goal is achieved using [connectors](../components/modeler/web-modeler/connectors/index.md). Ready to use out of the box, connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about.md), and configuring them via the properties panel.
+[Connectors](../components/modeler/web-modeler/connectors/index.md) achieve this goal. Ready to use out of the box, connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about.md), and configuring them via the properties panel.
 
-Connectors technically consist of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, we'll walk step-by-step through the implementation of a sample connector.
+Connectors technically consist of two parts: the business logic is implemented as a [job worker](../components/concepts/job-workers.md), and the user interface during modeling is provided using an element template. In this guide, we'll walk step-by-step through the implementation of a sample connector.
 
 ## Set up
 
 We'll implement our connector with [Modeler](../components/modeler/about.md). To get started, ensure you’ve [created a Camunda Platform 8 account](./guides/create-account.md).
+
+You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if you do not have one already, as we'll use SendGrid in our example connector.
 
 ### Create a cluster
 
@@ -36,15 +38,16 @@ In this example, we've designed the following BPMN diagram:
 
 ![bpmn example diagram](./img/bpmn-expense-sample.png)
 
-[//]: # 'Do you want me to add steps for building out the sample diagram here? Or, would it be better to say something like "To learn more about building your own BPMN diagram from scratch, visit our guide on automating a process using BPMN."'
-[//]: # 'Do we want to change the diagram so the start event is "Receipt ready" and the first task is "Receipt uploaded?"'
+:::note
+To learn more about building your own BPMN diagram from scratch, visit our guide on [automating a process using BPMN](./automating-a-process-using-bpmn.md).
+:::
 
 ## Add a connector
 
 Here, a receipt is initially uploaded for review. The first task we need to complete is notifying the manager of the uploaded receipt. If we want to leverage our email service to notify the manager, we can utilize a productivity applications connector to replace this task.
 
 :::note
-Camunda offers a variety of available connectors and even has the opportunity to construct custom connectors. For example, utilize cloud connectors to communicate with cloud-native applications and conform to REST, GraphQL, or SOAP protocols. Or, employ service connectors to integrate with technology enablers like RPA, AI or IOT services. Learn more about our [available connectors](../components/modeler/web-modeler/connectors/available-connectors/index.md) to find out which may best suit your business needs.
+Camunda offers a variety of available connectors. For example, utilize cloud connectors to communicate with cloud-native applications and conform to REST, GraphQL, or SOAP protocols. Or, employ service connectors to integrate with technology enablers like RPA, AI or IOT services. Learn more about our [available connectors](../components/modeler/web-modeler/connectors/available-connectors/index.md) to find out which may best suit your business needs.
 :::
 
 To add our productivity applications connector, take the following steps:
