@@ -69,4 +69,3 @@ npm run docusaurus docs:version 0.26
 ## Further information
 
 The Docusaurus documentation provides a detailed explanation of versioning at [https://v2.docusaurus.io/docs/versioning/](https://v2.docusaurus.io/docs/versioning/).
-```

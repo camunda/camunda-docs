@@ -9,11 +9,11 @@ entries of a decision table (i.e. the conditions of a rule).
 
 A unary-tests expression returns `true` if one of the following conditions is fulfilled:
 
-* The expression evaluates to `true` when the input value is applied to it.
-* The expression evaluates to a list, and the input value is equal to at least one of the values in
+- The expression evaluates to `true` when the input value is applied to it.
+- The expression evaluates to a list, and the input value is equal to at least one of the values in
   that list.
-* The expression evaluates to a value, and the input value is equal to that value.
-* The expression is equal to `-` (a dash).
+- The expression evaluates to a value, and the input value is equal to that value.
+- The expression is equal to `-` (a dash).
 
 ### Comparison
 
@@ -61,15 +61,7 @@ The input value is passed implicitly as the first argument of the operator.
 </table>
 
 ```js
-"valid"
-
-< 10
-
-<= date("2020-04-06")
-
-> time("08:00:00")
-
->= duration("P5D")
+"valid" < 10 <= date("2020-04-06") > time("08:00:00") >= duration("P5D");
 ```
 
 ### Interval
@@ -100,8 +92,8 @@ The input value is passed implicitly to the operator.
 
 Combines multiple unary-test expressions following the ternary logic.
 
-* Returns `true` if at least one unary-test evaluates to `true`.
-* Otherwise, it returns `false`.
+- Returns `true` if at least one unary-test evaluates to `true`.
+- Otherwise, it returns `false`.
 
 ```js
 2, 3, 4
@@ -119,11 +111,11 @@ disjunction.
 It returns `true` if the given unary-test evaluates to `false`.
 
 ```js
-not("valid")
+not("valid");
 // input != "valid"
 
-not(2, 3)             
-// input != 2 and input != 3 
+not(2, 3);
+// input != 2 and input != 3
 ```
 
 ### Expressions

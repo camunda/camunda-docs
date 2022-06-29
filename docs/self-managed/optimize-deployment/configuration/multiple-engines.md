@@ -23,9 +23,9 @@ Check which scenario corresponds to your setup because the configuration of mult
 There are two restrictions for the multiple engines feature:
 
 1. The process engines are assumed to have distinct process definitions, which means that one process definition (same key, tenant and version) is not deployed on two or more engines at the same time.
-Alternatively, each engine could be configured with default tenant identifiers as described in the [One Tenant Per Engine Scenario](../multi-tenancy/#one-process-engine-per-tenant).
+   Alternatively, each engine could be configured with default tenant identifiers as described in the [One Tenant Per Engine Scenario](../multi-tenancy/#one-process-engine-per-tenant).
 2. The engines are assumed to have distinct tenant identifiers, which means one particular tenantId is not deployed on two or more engines at the same time.
-:::
+   :::
 
 ### Multiple engines with distributed databases
 
@@ -77,7 +77,7 @@ In general, tests have shown that Optimize puts a very low strain on the engine 
 
 ## Authentication and authorization in the multiple engine setup
 
-When you configure multiple engines in Optimize, each process engine can host different users with a different set of authorizations. If a user is logging in, Optimize will try to authenticate and authorize the user on each configured engine. In case you are not familiar with how 
+When you configure multiple engines in Optimize, each process engine can host different users with a different set of authorizations. If a user is logging in, Optimize will try to authenticate and authorize the user on each configured engine. In case you are not familiar with how
 the authorization/authentication works for a single engine scenario, visit the [User Access Management](./user-management.md) and [Authorization Management](./authorization-management.md) documentation first.
 
 To determine if a user is allowed to log in and which resources they are allowed to access within the multiple engine scenario, Optimize uses the following algorithm:

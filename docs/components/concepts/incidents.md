@@ -33,7 +33,7 @@ If the variables are causing the incident, complete the following steps:
 
 1. Update the variables of the process instance.
 2. Increase the remaining retries of the job.
-3. Mark the incident as resolved. 
+3. Mark the incident as resolved.
 
 :::note
 It's recommended you complete these operations in [Operate](/components/operate/index.md).

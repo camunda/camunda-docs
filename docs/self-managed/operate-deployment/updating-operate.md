@@ -6,8 +6,8 @@ description: "Follow these steps for a successful Operate version update."
 
 When updating Operate versions, it's important to pay attention to a few points:
 
-* Every Operate version supports importing data for the current version and the previous one. For example, if you are running Operate `1.3`, Operate imports data from Zeebe `1.2` and `1.3`.
-* Before updating the Operate version and skipping multiple minor versions, import all the data from previous versions. See the sections below for additional details.
+- Every Operate version supports importing data for the current version and the previous one. For example, if you are running Operate `1.3`, Operate imports data from Zeebe `1.2` and `1.3`.
+- Before updating the Operate version and skipping multiple minor versions, import all the data from previous versions. See the sections below for additional details.
 
 ## Skipping multiple minor versions
 

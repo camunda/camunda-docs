@@ -11,7 +11,7 @@ However, Optimize documentation is available for both Camunda Platform 8 and Cam
 
 :::
 
-The alternative way to use Camunda Platform 8 is to host it yourself through Camunda Platform 8 Self-Managed.
+As an alternative to using Camunda Platform 8 through SaaS, you can host it yourself; we call this setup Camunda Platform 8 Self-Managed.
 
 Building process automation solutions with Camunda Platform 8 Self-Managed is similar to working with Camunda Platform 8 SaaS. For more information on Camunda Platform 8 SaaS, check out [What is Camunda Platform 8?](../components/concepts/what-is-camunda-platform-8.md) If you are new to Camunda Platform 8, we recommend you start your journey with [Camunda Platform 8 SaaS-based guides](../../guides/).
 
@@ -19,14 +19,14 @@ The content in this section of the documentation will include everything you nee
 
 The following components are available for Camunda Platform 8 Self-Managed:
 
-* Zeebe
-* Zeebe Gateway
-* Operate
-* Tasklist
-* Optimize
-* Identity (not available in Camunda Platform 8 SaaS)
+- Zeebe
+- Zeebe Gateway
+- Operate
+- Tasklist
+- Optimize
+- Identity (not available in Camunda Platform 8 SaaS)
 
-Camunda Platform 8 Self-Managed users may also use Desktop Modeler to build BPMN diagrams and work with Camunda Forms.
+Camunda Platform 8 Self-Managed users may also use [Desktop Modeler](../../components/modeler/desktop-modeler/install-the-modeler) as an addition to these components. The Desktop Modeler can be used by process developers to build BPMN diagrams, DMN diagrams, or Camunda Forms for automation.
 
 While documentation for Optimize is available in the Self-Managed section, we continue to refine the experience for Camunda Platform 8 Self-Managed users.
 

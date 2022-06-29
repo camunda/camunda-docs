@@ -7,6 +7,10 @@ description: "Programmatically work with Camunda Platform 8 through APIs & clien
 
 This section steps through a variety of offered APIs and clients for integration.
 
+:::note
+You're permitted to use these web apps and APIs for free with the Free Edition in non-production environments. To use the software in production, [purchase the Camunda Platform Enterprise Edition](https://camunda.com/products/cloud/camunda-cloud-enterprise-contact/). Read more in our [licensing](../reference/licenses.md) documentation.
+:::
+
 ## APIs and interacting with other components
 
 The clients mentioned below interact with Zeebe, the workflow engine integrated into Camunda Platform 8.
@@ -18,6 +22,10 @@ Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](/apis-c
 - [Public API](public-api.md) - Camunda Platform 8's provided public API.
 - [Cloud Console API clients (REST)](console-api-reference.md) - Enables you to programmatically create and manage clusters, and interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI.
 - [Zeebe API](grpc.md) - Zeebe clients use gRPC to communicate with the cluster.
+
+:::note
+Additionally, visit our documentation on [Operate](../self-managed/operate-deployment/usage-metrics.md) and [Tasklist](../self-managed/tasklist-deployment/usage-metrics.md) usage metric APIs.
+:::
 
 ## Clients
 

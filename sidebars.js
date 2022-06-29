@@ -90,6 +90,7 @@ module.exports = {
             "components/modeler/web-modeler/launch-cloud-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/import-diagram",
+            "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/save-and-deploy",
             "components/modeler/web-modeler/start-instance",
             "components/modeler/web-modeler/collaboration",
@@ -598,7 +599,7 @@ module.exports = {
       ],
     },
     {
-      "Zeebe Gateway": ["self-managed/zeebe-deployment/index"],
+      "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
     },
     {
       Troubleshooting: ["self-managed/troubleshooting/log-levels"],

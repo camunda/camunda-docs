@@ -12,7 +12,6 @@ After a task was transformed into a connector task, the available configuration 
 
 ![](img/use-connectors-properties.png)
 
-
 Fields in the properties panel marked with an equal sign inside a circle indicate that [FEEL](/components/modeler/feel/what-is-feel.md) can be used to configure the property. If the icon includes an equal sign marked with a star, FEEL is required. Using FEEL allows the user to reference process data from variables in the expression to configure the properties.
 
 ![](img/use-connectors-feel.png)

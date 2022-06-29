@@ -10,17 +10,17 @@ You will see that service tasks in general are a good choice, but there are also
 
 Let's briefly examine the three typical communication patterns to integrate systems:
 
-* **Request/response using synchronous communication styles**: You use a synchronous protocol, like HTTP, and block for the result.
-* **Request/response using asynchronous communication styles**: You use asynchronous communication, for example, by sending messages via a message broker, but wait for a response message right after. Technically, these are two independent asynchronous messages, but the sender blocks until the response is received, hence logically making it a request/response.
-* **Asynchronous messages or events:** If a peer service needs a long time to process a request, the response is much later than the request, say hours instead of milliseconds. In this case, the response is typically handled as a separate message. Additionally, some of your services might also wait for messages or events that are not connected to a concrete request, especially in event-driven architectures.
+- **Request/response using synchronous communication styles**: You use a synchronous protocol, like HTTP, and block for the result.
+- **Request/response using asynchronous communication styles**: You use asynchronous communication, for example, by sending messages via a message broker, but wait for a response message right after. Technically, these are two independent asynchronous messages, but the sender blocks until the response is received, hence logically making it a request/response.
+- **Asynchronous messages or events:** If a peer service needs a long time to process a request, the response is much later than the request, say hours instead of milliseconds. In this case, the response is typically handled as a separate message. Additionally, some of your services might also wait for messages or events that are not connected to a concrete request, especially in event-driven architectures.
 
 The following table gives a summary of the three options:
 
-| | Synchronous request/response | Asynchronous request/response | Asynchronous messages or events |
-| - | :- | :- | :- |
-| **Business level** | Synchronous | Synchronous | Asynchronous |
-| **Technical communication style** | Synchronous | Asynchronous | Asynchronous |
-| **Example** | HTTP | AMQP, JMS | AMQP, Apache Kafka |
+|                                   | Synchronous request/response | Asynchronous request/response | Asynchronous messages or events |
+| --------------------------------- | :--------------------------- | :---------------------------- | :------------------------------ |
+| **Business level**                | Synchronous                  | Synchronous                   | Asynchronous                    |
+| **Technical communication style** | Synchronous                  | Asynchronous                  | Asynchronous                    |
+| **Example**                       | HTTP                         | AMQP, JMS                     | AMQP, Apache Kafka              |
 
 You can dive more into communication styles in the webinar [Communication Between Loosely Coupled Microservices](https://page.camunda.com/wb-communication-between-microservices) ([slides](https://www.slideshare.net/BerndRuecker/webinar-communication-between-loosely-coupled-microservices), [recording](https://page.camunda.com/wb-communication-between-microservices) and [FAQ](https://medium.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5)).
 
@@ -78,7 +78,7 @@ You can also use a service task, which is sometimes unknown even to advanced use
 
 Deciding between these options is not completely straightforward. You can find a table listing the decision criteria below.
 
-As a general rule-of-thumb, we recommend using **the service task as the default option for synchronous *and* asynchronous request/response** calls. The beauty of service tasks is that you remove visual clutter from the diagram, which makes it easier to read for most stakeholders.
+As a general rule-of-thumb, we recommend using **the service task as the default option for synchronous _and_ asynchronous request/response** calls. The beauty of service tasks is that you remove visual clutter from the diagram, which makes it easier to read for most stakeholders.
 
 This is ideal if the business problem requires a logically synchronous service invocation. It allows you to ignore the technical details about the protocol on the process model level.
 
@@ -94,8 +94,8 @@ However, there are also technical implications of this design choice that need t
 
 You can keep a service task open and just complete it later when the response arrives, but in **to complete the service task, you need the _job instance key_** from Zeebe. This is an internal ID from the workflow engine. You can either:
 
-* Pass it around to the third party service which sends it back as part of the response message.
-* Build some kind of lookup table, where you map your own correlation information to the right job key.
+- Pass it around to the third party service which sends it back as part of the response message.
+- Build some kind of lookup table, where you map your own correlation information to the right job key.
 
 :::note
 Later versions of Zeebe might provide query possibilities for this job key based on user controlled data, which might open up more possibilities.
@@ -125,14 +125,13 @@ A final note for high-performance environments: These powerful messaging capabil
 
 The following table summarizes the possibilities and recommendations.
 
-| Case | Synchronous request/response | Synchronous request/response | Asynchronous request/response | Asynchronous request/response |
-| :- | :- | :- | :- | :- |
-| BPMN element| Service task | Send task | Service task | Send + receive task |
-| | ![Service task](/img/bpmn-elements/task-service.svg) | ![Send task](/img/bpmn-elements/task-send.svg) | ![Service task](/img/bpmn-elements/task-service.svg) | ![Send and receive task](/img/bpmn-elements/send-and-receive-task.png) |
-| Technical implications | | Behaves like a service task | A unique correlation ID is generated for you. You don’t have to think about race conditions or idempotency. Timeout handling and retry logic are built-in. API to flag business or technical errors. | Correlation ID needs to be generated yourself, but is fully under control. Message buffering is possible but also necessary. Timeouts and retries need to be modeled. BPMN errors cannot be used. |
-| Assessment | Very intuitive. | Might be more intuitive for fire and forget semantics, but can also lead to discussions. | Removes visual noise which helps stakeholders to concentrate on core business logic, but requires use of internal job instance keys. | More visual clutter, but also more powerful options around correlation and modeling patterns. |
-| Recommendation | Default option, use unless it is confusing for business stakeholders (e.g. because of fire and forget semantics of a task). | Use for fire and forget semantics, unless it leads to unnecessary discussions, in this case use service task instead. | Use when response is within milliseconds and you can pass the Zeebe-internal job instance key around. | Use when the response will take time (> some seconds), or you need a correlation id you can control. |
-
+| Case                   | Synchronous request/response                                                                                                | Synchronous request/response                                                                                          | Asynchronous request/response                                                                                                                                                                        | Asynchronous request/response                                                                                                                                                                     |
+| :--------------------- | :-------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| BPMN element           | Service task                                                                                                                | Send task                                                                                                             | Service task                                                                                                                                                                                         | Send + receive task                                                                                                                                                                               |
+|                        | ![Service task](/img/bpmn-elements/task-service.svg)                                                                        | ![Send task](/img/bpmn-elements/task-send.svg)                                                                        | ![Service task](/img/bpmn-elements/task-service.svg)                                                                                                                                                 | ![Send and receive task](/img/bpmn-elements/send-and-receive-task.png)                                                                                                                            |
+| Technical implications |                                                                                                                             | Behaves like a service task                                                                                           | A unique correlation ID is generated for you. You don’t have to think about race conditions or idempotency. Timeout handling and retry logic are built-in. API to flag business or technical errors. | Correlation ID needs to be generated yourself, but is fully under control. Message buffering is possible but also necessary. Timeouts and retries need to be modeled. BPMN errors cannot be used. |
+| Assessment             | Very intuitive.                                                                                                             | Might be more intuitive for fire and forget semantics, but can also lead to discussions.                              | Removes visual noise which helps stakeholders to concentrate on core business logic, but requires use of internal job instance keys.                                                                 | More visual clutter, but also more powerful options around correlation and modeling patterns.                                                                                                     |
+| Recommendation         | Default option, use unless it is confusing for business stakeholders (e.g. because of fire and forget semantics of a task). | Use for fire and forget semantics, unless it leads to unnecessary discussions, in this case use service task instead. | Use when response is within milliseconds and you can pass the Zeebe-internal job instance key around.                                                                                                | Use when the response will take time (> some seconds), or you need a correlation id you can control.                                                                                              |
 
 ## Integrating services with BPMN events
 
@@ -156,8 +155,8 @@ However, in certain contexts, such as event-driven architectures, events might b
 
 Another situation better suited for events is if you send events to your internal reporting system besides doing “the real” business logic. Our experience shows that the smaller event symbols are often unconsciously treated as less important by readers of the model, leading to models that are easier to understand.
 
-|  | Send task | Receive task | Send event | Receive event |
-| :- | :- | :- | :- | :- |
+|                | Send task                | Receive task             | Send event                                                                                                              | Receive event                                                                                                           |
+| :------------- | :----------------------- | :----------------------- | :---------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
 | Recommendation | Prefer tasks over events | Prefer tasks over events | Use only if you consistently use events over tasks and have a good reason for doing so (e.g. event-driven architecture) | Use only if you consistently use events over tasks and have a good reason for doing so (e.g. event-driven architecture) |
 
 :::note
@@ -190,19 +189,19 @@ This pattern is pretty handy, but also needs some explanation to people new to B
 
 At the same time, the event subprocess has a superpower worth mentioning: you can now wait for cancellation messages in whole chunks of your process — it could arrive anytime.
 
-| | Receive task with boundary events | Payload and XOR-gateway | Event-based gateway | Event sub process |
-| - | - | - | - | - |
-| | ![Boundary Events](service-integration-patterns-assets/response-boundary-message-events.png) | ![XOR Gateway](service-integration-patterns-assets/response-gateway.png) | ![Event-based Gateway](service-integration-patterns-assets/response-event-based-gateway.png) | ![Event Subprocess](service-integration-patterns-assets/response-event-subprocess.png)
-| Understandability | Easy | Very easy | Hard | Medium |
-| Assessment | Limitation on how many message types are possible | Happy path not easily visible |   | Might need some explanation for readers of the model |
-| Recommendation | Use when it is important to see message types in the visual, limit to two boundary message events | Use when there are more response types or if the response type can be treated as a result | Try to avoid | Use if you need bigger scopes where you can react to events
+|                   | Receive task with boundary events                                                                 | Payload and XOR-gateway                                                                   | Event-based gateway                                                                          | Event sub process                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+|                   | ![Boundary Events](service-integration-patterns-assets/response-boundary-message-events.png)      | ![XOR Gateway](service-integration-patterns-assets/response-gateway.png)                  | ![Event-based Gateway](service-integration-patterns-assets/response-event-based-gateway.png) | ![Event Subprocess](service-integration-patterns-assets/response-event-subprocess.png) |
+| Understandability | Easy                                                                                              | Very easy                                                                                 | Hard                                                                                         | Medium                                                                                 |
+| Assessment        | Limitation on how many message types are possible                                                 | Happy path not easily visible                                                             |                                                                                              | Might need some explanation for readers of the model                                   |
+| Recommendation    | Use when it is important to see message types in the visual, limit to two boundary message events | Use when there are more response types or if the response type can be treated as a result | Try to avoid                                                                                 | Use if you need bigger scopes where you can react to events                            |
 
 ### Message type on the wire != BPMN message type
 
 There is one important detail worth mentioning in the context of message response patterns: The message type used in BPMN models does not have to be exactly the message type you get on the wire. When you correlate technical messages, e.g. from AMQP, you typically write a piece of glue code that receives the message and calls the workflow engine API. This is described in [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/), including a code example. In this glue code you can do various transformations, for example:
 
-* Messages on different message queues could lead to the same BPMN message type, probably having some additional parameter in the payload indicating the origin.
-* Some message header or payload attributes could be used to select between different BPMN message types being used.
+- Messages on different message queues could lead to the same BPMN message type, probably having some additional parameter in the payload indicating the origin.
+- Some message header or payload attributes could be used to select between different BPMN message types being used.
 
 It is probably not best practice to be as inconsistent as possible between technical message types and BPMN message types. Still, the flexibility of a custom mapping might be beneficial in some cases.
 

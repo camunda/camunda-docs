@@ -53,12 +53,12 @@ The import is also affected by how the involved components are set up. For insta
 
 The following components were used for these import tests:
 
-| Component | Version |
-| - | - |
-| Camunda Platform 7 | 7.10.3 |
+| Component                   | Version         |
+| --------------------------- | --------------- |
+| Camunda Platform 7          | 7.10.3          |
 | Camunda Platform 7 Database | PostgreSQL 11.1 |
-| Elasticsearch | 6.5.4 |
-| Optimize | 2.4.0 |
+| Elasticsearch               | 6.5.4           |
+| Optimize                    | 2.4.0           |
 
 The Optimize configuration with the default settings was used, as described in detail in the [configuration overview](./../configuration/system-configuration.md).
 
@@ -88,8 +88,8 @@ The time was measured from the start of Optimize until the entire data import to
 This data set contains the following amount of instances:
 
 | Number of Process Definitions | Number of Activity Instances | Number of Process Instances | Number of Variable Instances | Number of Decision Definitions | Number of Decision Instances |
-| - | - | - | - | - | - |
-| 21 | 123 162 903 | 10 000 000 | 119 849 175 | 4 | 2 500 006 |
+| ----------------------------- | ---------------------------- | --------------------------- | ---------------------------- | ------------------------------ | ---------------------------- |
+| 21                            | 123 162 903                  | 10 000 000                  | 119 849 175                  | 4                              | 2 500 006                    |
 
 Here, you can see how the data is distributed over the different process definitions:
 
@@ -105,8 +105,8 @@ Results:
 This data set contains the following amount of instances:
 
 | Number of Process Definitions | Number of Activity Instances | Number of Process Instances | Number of Variable Instances |
-| - | - | - | - |
-| 20 | 21 932 786 | 2 000 000 | 6 913 889 |
+| ----------------------------- | ---------------------------- | --------------------------- | ---------------------------- |
+| 20                            | 21 932 786                   | 2 000 000                   | 6 913 889                    |
 
 Here you can see how the data is distributed over the different process definitions:
 
@@ -147,15 +147,15 @@ The import process is automatically scheduled in rounds by the `Import Scheduler
 For each service, it is checked if new data is available. Once all entities for one import service have been imported, the service starts to back off. To be more precise, before it can be scheduled again it stays idle for a certain period of time, controlled by the "backoff" interval and a "backoff" counter. After the idle time has passed, the service can perform another try to import new data. Each round in which no new data could be imported, the counter is incremented. Thus, the backoff counter will act as a multiplier for the backoff time and increase the idle time between two import rounds. This mechanism is configurable using the following properties:
 
 ```yaml
-  handler:
-    backoff:
-      # Interval which is used for the backoff time calculation.
-      initial: 1000
-      # Once all pages are consumed, the import service component will
-      # start scheduling fetching tasks in increasing periods of time,
-      # controlled by 'backoff' counter.
-      # This property sets maximal backoff interval in seconds
-      max: 30
+handler:
+  backoff:
+    # Interval which is used for the backoff time calculation.
+    initial: 1000
+    # Once all pages are consumed, the import service component will
+    # start scheduling fetching tasks in increasing periods of time,
+    # controlled by 'backoff' counter.
+    # This property sets maximal backoff interval in seconds
+    max: 30
 ```
 
 If you would like to rapidly update data imported into Optimize, you have to reduce this value. However, this will cause additional strain on the engine and might influence the performance of the engine if you set a low value.
@@ -201,7 +201,7 @@ Import executions per engine entity are actually independent from another. Each 
 
 ```yaml
 import:
-  # Number of threads being used to process the import jobs per data type that are writing 
+  # Number of threads being used to process the import jobs per data type that are writing
   # data to elasticsearch.
   elasticsearchJobExecutorThreadCount: 1
   # Adjust the queue size of the import jobs per data type that store data to elasticsearch.

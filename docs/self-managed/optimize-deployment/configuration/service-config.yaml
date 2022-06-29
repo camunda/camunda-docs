@@ -88,7 +88,7 @@ container:
 engines:
   # An alias of the engine, which will be used for internal purposes like
   # logging and displaying which data belong to which engine.
-  'camunda-bpm':
+  "camunda-bpm":
     # The process engines name on the platform, this is the unique engine identifier on the platforms REST API.
     name: default
     # A default tenant to the be injected on data from this engine where no tenant is configured in the engine itself.
@@ -117,10 +117,10 @@ engines:
       enabled: false
       # When basic authentication is enabled, this password is used to
       # authenticate against the engine.
-      password: ''
+      password: ""
       # When basic authentication is enabled, this user is used to authenticate
       # against the engine.
-      user: ''
+      user: ""
     # The webapps configuration allows Optimize to directly link
     # to the other Camunda Web Applications, e.g. to jump from
     # Optimize directly to a dedicated process instance in Cockpit
@@ -211,7 +211,7 @@ import:
         includeUserMetaData: true
         # Cron expression for when to fully refresh the internal metadata cache, it defaults to every third hour.
         # Otherwise deleted assignees/candidateGroups or metadata changes are not reflected in Optimize.
-        cronTrigger: '0 */3 * * *'
+        cronTrigger: "0 */3 * * *"
         # The max page size when multiple users or groups are iterated during the metadata refresh.
         maxPageSize: 10000
         # The entry limit of the cache that holds the metadata, if you need more entries you can increase that limit.
@@ -246,7 +246,7 @@ import:
     # Whether to include metaData (firstName, lastName, email) when synchronizing users
     includeUserMetaData: true
     # Cron expression for when the identity sync should run, defaults to every second hour.
-    cronTrigger: '0 */2 * * *'
+    cronTrigger: "0 */2 * * *"
     # The max page size when multiple users or groups are iterated during the import.
     maxPageSize: 10000
     # The entry limit of the cache, if you need more entries you can increase that limit.
@@ -265,13 +265,13 @@ es:
     # from Elasticsearch relating to the entity content being too long
     responseConsumerBufferLimitInMb: 100
     # The path prefix under which Elasticsearch is available
-    pathPrefix: ''
+    pathPrefix: ""
     # a list of Elasticsearch nodes Optimize can connect to. If you  have built
     # an Elasticsearch cluster with several nodes it is recommended to define
     # several connection points in case one node fails.
     nodes:
       # the address/hostname under which the Elasticsearch node is available.
-      - host: 'localhost'
+      - host: "localhost"
         # A port number used by Elasticsearch to accept HTTP connections.
         httpPort: 9200
     # HTTP forward proxy configuration
@@ -284,7 +284,6 @@ es:
       port: null
       # whether this proxy is using a secured connection
       sslEnabled: false
-
 
   # Elasticsearch security settings
   security:
@@ -313,7 +312,7 @@ es:
     index:
       # the prefix prepended to all Optimize index and alias names
       # NOTE: Changing this after Optimize was already run before, will create new empty indexes
-      prefix: 'optimize'
+      prefix: "optimize"
       # How often should the data replicated in case of node failure.
       number_of_replicas: 1
       # How many shards should be used in the cluster for process instance and decision instance indices.
@@ -334,7 +333,7 @@ es:
 
 plugin:
   # Defines the directory path in the local Optimize file system which should be checked for plugins
-  directory: './plugin'
+  directory: "./plugin"
   variableImport:
     # Look in the given base package list for variable import adaption plugins.
     # If empty, the import is not influenced.
@@ -367,15 +366,15 @@ serialization:
 
 alerting:
   quartz:
-    jobStore: 'org.quartz.simpl.RAMJobStore'
+    jobStore: "org.quartz.simpl.RAMJobStore"
 
 email:
   # A switch to control email sending process.
   enabled: false
   # Email address that can be used to send alerts
-  address: ''
+  address: ""
   # The smtp server name
-  hostname: ''
+  hostname: ""
   # The smtp server port. This one is also used as SSL port for the security connection.
   port: 587
   # Define configuration properties for the authentication of the email server
@@ -383,12 +382,12 @@ email:
     # A switch to control whether the email server requires authentication
     enabled: true
     # Username of your smtp server
-    username: ''
+    username: ""
     # Corresponding password to the given user of your smtp server
-    password: ''
+    password: ""
     # States how the connection to the server should be secured.
     # Possible values are 'NONE', 'STARTTLS' or 'SSL/TLS'
-    securityProtocol: 'NONE'
+    securityProtocol: "NONE"
 
 export:
   csv:
@@ -405,17 +404,17 @@ sharing:
 
 historyCleanup:
   # cron expression for when the cleanup should run
-  cronTrigger: '0 1 * * *'
+  cronTrigger: "0 1 * * *"
   # default time to live (ttl) for data, when reached the corresponding process/decision/event instances will get cleaned up
   # Format is ISO_8601 duration  https://en.wikipedia.org/wiki/ISO_8601#Durations
-  ttl: 'P2Y'
+  ttl: "P2Y"
   processDataCleanup:
     # switch for the camunda process data cleanup, defaults to false
     enabled: false
     # type of process data cleanup to perform, possible values:
     # 'all' - delete everything related to the process instance
     # 'variables' - only delete associated variables of a process instance
-    cleanupMode: 'all'
+    cleanupMode: "all"
     # Defines the batch size in which camunda engine process instance data gets cleaned up
     # may be reduced if requests fail due to request size constraints
     batchSize: 10000
@@ -440,14 +439,14 @@ historyCleanup:
 locales:
   # all locales available
   # Note: for others than the default there must be a <localeCode>.json file available under ./config/localization.
-  availableLocales: ['en', 'de']
+  availableLocales: ["en", "de"]
   # the fallback locale is used if there is a locale requested that is not available in availableLocales
-  fallbackLocale: 'en'
+  fallbackLocale: "en"
 
 ui:
   header:
     # determines the color theme of the text in the header. Currently 'dark' and 'light' are supported.
-    textColor: 'dark'
+    textColor: "dark"
     # Path to the logo that is displayed in the header of Optimize.
     # Path can be:
     # * relative: starting from the config folder you can provide a relative path.
@@ -455,15 +454,15 @@ ui:
     #
     # Supported image formats can be found here:
     # https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#Supported_image_formats
-    pathToLogoIcon: 'logo/camunda_icon.svg'
+    pathToLogoIcon: "logo/camunda_icon.svg"
     # a hex encoded color that should be used as background color for the header. Default color is white.
-    backgroundColor: '#FFFFFF'
+    backgroundColor: "#FFFFFF"
 
 eventBasedProcess:
   # A list of userIds that are authorized to manage (Create, Update, Publish & Delete) event based processes.
   authorizedUserIds: []
-    # A list of groupIds that are authorized to manage (Create, Update, Publish & Delete) event based processes.
-    authorizedGroupIds: []
+  # A list of groupIds that are authorized to manage (Create, Update, Publish & Delete) event based processes.
+  authorizedGroupIds: []
   eventImport:
     # Determines whether this Optimize instance performs event based process instance import.
     enabled: false

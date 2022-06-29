@@ -6,7 +6,7 @@ description: "The REST API to create, update, and delete variable labels in Opti
 
 ## Purpose
 
-With the variable labeling endpoint, variable labels can be added, updated, and deleted from Optimize.  
+With the variable labeling endpoint, variable labels can be added, updated, and deleted from Optimize.
 
 ## Functionality
 
@@ -29,9 +29,9 @@ POST `/api/public/variables/labels`
 
 The following request headers must be provided with every variable labeling request:
 
-|Header|Constraints|Value|
-|--- |--- |--- |
-|Authorization|REQUIRED*|[Authorization](../authorization)|
+| Header        | Constraints | Value                             |
+| ------------- | ----------- | --------------------------------- |
+| Authorization | REQUIRED\*  | [Authorization](../authorization) |
 
 ## Request body
 
@@ -45,12 +45,12 @@ This method returns no content.
 
 Possible HTTP Response Status codes:
 
-|Code|Description|
-|--- |--- |
-|204|Request successful.|
-|400|Returned if some of the properties in the request body are invalid or missing.|
-|401|Secret incorrect or missing. See [Authorization](#authorization) on how to authorize.|
-|404|The process definition with the given definition key doesn't exist.|
+| Code | Description                                                                           |
+| ---- | ------------------------------------------------------------------------------------- |
+| 204  | Request successful.                                                                   |
+| 400  | Returned if some of the properties in the request body are invalid or missing.        |
+| 401  | Secret incorrect or missing. See [Authorization](#authorization) on how to authorize. |
+| 404  | The process definition with the given definition key doesn't exist.                   |
 
 ## Example 1
 
@@ -66,24 +66,24 @@ POST `/api/public/variables/labels`
 
 Request Body:
 
-```     
+```
         {
-          "definitionKey": "bookrequest-1-tenant",  
+          "definitionKey": "bookrequest-1-tenant",
           "labels" : [
             {
-              "variableName": "bookAvailable", 
-              "variableType": "Boolean", 
-              "variableLabel": "book availability" 
+              "variableName": "bookAvailable",
+              "variableType": "Boolean",
+              "variableLabel": "book availability"
             },
-            { 
-              "variableName": "person.name", 
+            {
+              "variableName": "person.name",
               "variableType": "String",
-              "variableLabel": "first and last name" 
+              "variableLabel": "first and last name"
             },
-            { 
-              "variableName": "person.hobbies._listSize", 
+            {
+              "variableName": "person.hobbies._listSize",
               "variableType": "Long",
-              "variableLabel": "amount of hobbies" 
+              "variableLabel": "amount of hobbies"
             }
           ]
         }
@@ -104,13 +104,13 @@ POST `/api/public/variables/labels`
 
 Request Body:
 
-```     
+```
       {
-        "definitionKey": "bookrequest-1-tenant",  
+        "definitionKey": "bookrequest-1-tenant",
         "labels" : [
-          { 
-            "variableName": "bookAvailable", 
-            "variableType": "Boolean", 
+          {
+            "variableName": "bookAvailable",
+            "variableType": "Boolean",
             "variableLabel": ""
           }
         ]
@@ -131,19 +131,19 @@ POST `/api/public/variables/labels`
 
 Request Body:
 
-```   
+```
       {
-        "definitionKey": "bookrequest-1-tenant",  
+        "definitionKey": "bookrequest-1-tenant",
          "labels" : [
            {
-             "variableName": "bookAvailable", 
-             "variableType": "Boolean", 
-             "variableLabel": "book availability" 
+             "variableName": "bookAvailable",
+             "variableType": "Boolean",
+             "variableLabel": "book availability"
            },
-           { 
-             "variableName": "person.name", 
+           {
+             "variableName": "person.name",
              "variableType": "String",
-             "variableLabel": "" 
+             "variableLabel": ""
            },
          ]
        }
@@ -165,17 +165,17 @@ Request Body:
 
 ```
       {
-        "definitionKey": "someProcessDefinitionKey",  
+        "definitionKey": "someProcessDefinitionKey",
         "labels" : [
           {
-            "variableName": "bookAvailable", 
-            "variableType": "Boolean", 
-            "variableLabel": "book availability" 
+            "variableName": "bookAvailable",
+            "variableType": "Boolean",
+            "variableLabel": "book availability"
           },
           {
-            "variableName": "bookAvailable", 
-            "variableType": "Boolean", 
-            "variableLabel": "is book available" 
+            "variableName": "bookAvailable",
+            "variableType": "Boolean",
+            "variableLabel": "is book available"
           },
         ]
       }
