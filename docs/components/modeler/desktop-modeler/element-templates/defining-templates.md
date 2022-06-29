@@ -62,8 +62,8 @@ As seen in the code snippet a template consist of a number of important componen
 
 The application uses the `$schema` property to ensure compatibility for a given element template. The latest supported [Camunda element templates JSON Schema versions](https://github.com/camunda/element-templates-json-schema) are
 
-- `v0.9.1` (Camunda Platform 7)
-- `v0.4.1` (Camunda Platform 8)
+- `v0.10.0` (Camunda Platform 7)
+- `v0.5.0` (Camunda Platform 8)
 
 The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
 
@@ -184,6 +184,11 @@ As seen in the example the important attributes in a property definition are:
 - `value`: An optional default value to be used if the property to be bound is not yet set
 - `binding`: Specifying how the property is mapped to BPMN or Camunda extension elements and attributes (may be any of `property`, `camunda:property`, `camunda:inputParameter`, `camunda:outputParameter`, `camunda:in`, `camunda:out`, `camunda:executionListener`, `camunda:field`, `camunda:errorEventDefinition`)
 - `constraints`: A list of editing constraints to apply to the template
+
+Camunda Platform 8 also supports these properties:
+
+- `id`: An identifier that can be used to reference the property in conditional properties
+- `condition`: A condition that determines when the property is active
 
 #### Types
 
@@ -661,3 +666,75 @@ Per default, the element template defines the visible entries of the properties 
 ```
 
 ![Display default entries](./img/entries-visible.png)
+
+### Defining Conditional Properties
+
+Properties may have a condition which determines when they should be active, depending on the value of another property. When property is **active**, it is displayed in the properties panel, and its value is serialized in the XML. If a property is **not active**, it is not displayed, and its value is removed from the XML.
+
+For a property value to be used in a condition, the property needs to have an `id` that can be referenced by the conditional property.
+
+There are two possible comparison operators:
+
+- `equals`: checks if the value is equal to the value defined in the condition
+- `oneOf`: checks if the value is in the list of values defined in the condition
+
+```json
+...
+  "properties": [
+    {
+      "id": "httpMethod",
+      "label": "HTTP Method",
+      "type": "Dropdown",
+      "choices": [
+        { "name": "get", "value": "GET" },
+        { "name": "patch", "value": "PATCH" },
+        { "name": "post", "value": "POST" },
+        { "name": "delete", "value": "DELETE" }
+      ],
+      "binding": { ... },
+    },
+    {
+      "label": "Request Body",
+      "type": "String",
+      "binding": { ... },
+      "condition": {
+        "property": "httpMethod",
+        "oneOf": ["patch", "post", "delete"]
+      }
+    },
+    {
+      "id": "authenticationType",
+      "label": "Authentication Type",
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "None",
+          "value": ""
+        },
+        {
+          "name": "Basic",
+          "value": "basic"
+        }
+      ],
+      "binding": { ... }
+    },
+    {
+      "label": "Username",
+      "type": "String",
+      "binding": { ... },
+      "condition": {
+        "property": "authenticationType",
+        "equals": "basic"
+      }
+    },
+    {
+      "label": "Password",
+      "type": "String",
+      "binding": { ... },
+      "condition": {
+        "property": "authenticationType",
+        "equals": "basic"
+      }
+    },
+  ]
+```
