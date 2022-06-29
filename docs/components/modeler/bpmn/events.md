@@ -27,9 +27,9 @@ Intermediate catch events can be inserted into your process in two different con
 
 <div bpmn="intermediate-events.bpmn" callouts="event1, event2" />
 
-In normal flow, an intermediate throw event executes its event (e.g. send a message) once the token has reached it, and once done the token continues to all outgoing sequence flows (<span className="callout">1</span>).
+In normal flow, an intermediate throw event executes its event (e.g. send a message) once the token has reached it. Once complete, the token continues to all outgoing sequence flows (<span className="callout">1</span>).
 
-An intermediate catch event, however, stops the token, and waits until the event it is waiting for occurs, at which execution resumes, and the token moves on (<span className="callout">2</span>).
+An intermediate catch event, however, stops the token and waits until the event it is waiting for occurs, at which point execution resumes and the token moves on (<span className="callout">2</span>).
 
 ## Boundary events
 
@@ -37,4 +37,4 @@ Boundary events provide a way to model what should happen if an event occurs whi
 
 <div bpmn="boundary-events.bpmn" callouts="event1, event2" />
 
-A boundary event must be an intermediate catch event, and can be either interrupting (<span className="callout">1</span>)or non-interrupting (<span className="callout">2</span>). Interrupting means that once triggered, before taking any outgoing sequence flow, the activity the event is attached to is terminated. This allows modeling timeouts where we want to prune certain execution paths if something happens (e.g. the process takes too long).
+A boundary event must be an intermediate catch event, and can be either interrupting (<span className="callout">1</span>)or non-interrupting (<span className="callout">2</span>). Interrupting means that once triggered, before taking any outgoing sequence flow the activity the event is attached to is terminated. This allows modeling timeouts where we can prune certain execution paths if something happens (e.g. the process takes too long).
