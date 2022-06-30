@@ -24,7 +24,7 @@ Quickly install via the package manager `npm`. The corresponding package is [her
 npm i -g zbctl
 ```
 
-You can also download a binary for your operating system from the [Zeebe GitHub releases page](https://github.com/camunda-cloud/zeebe/releases).
+You can also download a binary for your operating system from the [Zeebe GitHub releases page](releases).
 
 ### Connection settings
 
