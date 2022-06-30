@@ -15,7 +15,7 @@ If you want to understand, why the process modeling language and the support for
 
 See also [Workflow Pattern 1: Sequence](http://www.workflowpatterns.com/patterns/control/basic/wcp1.php): "A task in a process in enabled after the completion of a preceding task in the same process".
 
-This is implemented by a [Sequence Flow](xxx) that connects two activities:
+This is implemented by a [Sequence Flow](/docs/components/modeler/bpmn/bpmn-primer/#sequence-flow-controlling-the-flow-of-execution) that connects two activities:
 
 <div bpmn="workflow-patterns/sequence.bpmn" callouts="sequenceFlow1,sequenceFlow2,sequenceFlow3" />
 
@@ -27,11 +27,11 @@ You can read more about it in [our BPMN primer - sequence flows: Controlling the
 
 See [Workflow Pattern 4: Exclusive Choice](http://www.workflowpatterns.com/patterns/control/basic/wcp4.php): "The thread of control is immediately passed to precisely one of the outgoing branches".
 
-This is implemented by a [XOR Gateway](xxx):
+This is implemented by an [exclusive gateway (XOR)](/docs/components/modeler/bpmn/exclusive-gateways/):
 
 <div bpmn="workflow-patterns/xor.bpmn" callouts="xorGateway,taskB,taskC" />
 
-All outgoing sequence flows of the XOR Gatewy (<span className="callout">1</span>) have a [condition](xxx) configured, which decides if the process continues in Task B (<span className="callout">2</span>if `x>42`) or Task C (<span className="callout">3</span>if `not(x>42)`).
+All outgoing sequence flows of the XOR Gatewy (<span className="callout">1</span>) have a [condition](/docs/components/concepts/expressions/#boolean-expressions) configured, which decides if the process continues in Task B (<span className="callout">2</span>if `x>42`) or Task C (<span className="callout">3</span>if `not(x>42)`).
 
 You can read more about it in [our BPMN primer - gateways: Steering flow](/docs/components/modeler/bpmn/bpmn-primer/#gateways-steering-flow).
 
@@ -153,7 +153,7 @@ As with timers, you can leverage [boundary events](/docs/components/modeler/bpmn
 
 <span className="callout">1</span>
 
-An order cancelation message comes in for the current process instance using [message correlation](xxx). This cancelation cancels the current subprocess to do something else instead.
+An order cancelation message comes in for the current process instance using [message correlation](/docs/components/concepts/messages/). This cancelation cancels the current subprocess to do something else instead.
 
 <span className="callout">2</span>
 
@@ -215,7 +215,7 @@ You might also want to look into our [best practice - modeling beyond the happy 
 
 ### Error scopes
 
-The reaction to errors might need to be different depending on the current state of the process. This can be achieved by using [subprocesses](xxx) in combination with either [boundary events](xxx) or [event subprocesses](xxx).
+The reaction to errors might need to be different depending on the current state of the process. This can be achieved by using [subprocesses](h/docs/components/modeler/bpmn/embedded-subprocesses/) in combination with either [boundary events](/docs/components/modeler/bpmn/events/#boundary-events) or [event subprocesses](/docs/components/modeler/bpmn/event-subprocesses/).
 
 <div bpmn="workflow-patterns/subprocess-error.bpmn" callouts="errorEvent, errorEventSubprocess" />
 
@@ -243,10 +243,26 @@ Modern systems are highly distributed accross the network. In such systems, you 
 
 An important problem to solve is how to rollback a business transaction in case of problems. In other words: How to restore business consistency. One interesting strategy is to leverage compensating activities to undo the original actions whenever the problem occurs. This is also known as the [Saga Pattern](https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b).
 
-In BPMN, you can use [compensation events](xxx) to easily implement compensations in your processes.
+In BPMN, you can use [compensation events](/docs/components/modeler/bpmn/bpmn-coverage/) to easily implement compensations in your processes.
 
 :::note
 The compensation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in version 8.
 :::
 
-<div bpmn="workflow-patterns/compensation.bpmn" callouts="error1, error2" />
+<div bpmn="workflow-patterns/compensation.bpmn" callouts="comp1task, comp3task, comp1, compThrow" />
+
+<span className="callout">1</span>
+
+For every task in a process model, you can define a compensation task. This can be any valid BPMN task, this is a service task, but it could also be a a human task (<span className="callout">2</span>), a subprocess, or anything else.
+
+The compensation task gets only executed if the original task was executed.
+
+<span className="callout">3</span>
+
+This compensation tasks gets connected to the original task by a dedicated compensation event.
+
+<span className="callout">4</span>
+
+Within your process model, you can define when it is time to compensate. Whenever you trigger the compensation event, all tasks of the current scope that where executed, will be automatically compensated.
+
+The big feature here is that you don't have to rebuild the routing logic to compensate correctly, like checking again if the customer balance was used. The workflow engine will take care automatically, also in more complicated situations like multiple instance activities.
