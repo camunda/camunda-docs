@@ -9,8 +9,7 @@ keywords: ["backpressure", "back-pressure", "back pressure"]
 
 ## Gateway service
 
-The Zeebe client gRPC API is exposed through a single gateway service. The current version of the proto buffer file can be found 
-in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/gateway-protocol/src/main/proto/gateway.proto) 
+The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/gateway-protocol/src/main/proto/gateway.proto).
 
 ### `ActivateJobs` RPC
 
