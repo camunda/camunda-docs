@@ -5,23 +5,25 @@ sidebar_label: Workflow Patterns
 slug: /components/concepts/workflow-patterns/
 ---
 
-For true end-to-end process orchestration, you must be able to accurately express all the things happening in your business processes, which will pretty require simple and advances workflow patterns. This page describes how Camunda and BPMN can implement typical patterns, using the scientific background of the [Workflow Patterns Initiative](http://www.workflowpatterns.com/).
+For true end-to-end process orchestration, you must be able to accurately express all the things happening in your business processes, which will require simple and advanced workflow patterns. This page describes how Camunda and BPMN implement typical patterns, leaning on the scientific background of the [Workflow Patterns Initiative](http://www.workflowpatterns.com/).
 
-If you want to understand, why the process modeling language and the support for those patterns is very relevant, you can read our blog post about [Advanced Workflow Patterns](https://docs.google.com/document/d/1lu0V4q6xE7zT4aKVM9xmcD9c9PaxBltN59_BzCL47qY/edit#heading=h.d4xwt0gq03os).
+If you want to understand, why the upport for all of those patterns in a process modeling language is so relevant, you might want to look in the blog post about [Advanced Workflow Patterns](https://docs.google.com/document/d/1lu0V4q6xE7zT4aKVM9xmcD9c9PaxBltN59_BzCL47qY/edit#heading=h.d4xwt0gq03os) showing some workarounds necessary if the language cannot express those patterns.
 
 ## Routing
 
+The most basic workflow patterns are (excuse the play on words) around the basic flow of work.
+
 ### Sequence
 
-See also [Workflow Pattern 1: Sequence](http://www.workflowpatterns.com/patterns/control/basic/wcp1.php): "A task in a process in enabled after the completion of a preceding task in the same process".
+See [Workflow Pattern 1: Sequence](http://www.workflowpatterns.com/patterns/control/basic/wcp1.php): "A task in a process in enabled after the completion of a preceding task in the same process".
 
-This is implemented by a [Sequence Flow](/docs/components/modeler/bpmn/bpmn-primer/#sequence-flow-controlling-the-flow-of-execution) that connects two activities:
+This is implemented by a [sequence flow](/docs/components/modeler/bpmn/bpmn-primer/#sequence-flow-controlling-the-flow-of-execution) connecting two activities:
 
-<div bpmn="workflow-patterns/sequence.bpmn" callouts="sequenceFlow1,sequenceFlow2,sequenceFlow3" />
+<div bpmn="workflow-patterns/sequence.bpmn" callouts="BeforeSequenceFlow1" />
 
-The first sequence flow (<span className="callout">1</span>) connects the start event with Task A. Task B is connected using another sequence flow (<span className="callout">2</span>), meaning that it can only happen if Task A was completed.
+The first sequence flow (<span className="callout">1</span>) connects the start event with Task A. Then, Task B is connected using another sequence flow, meaning that it can only happen if Task A was completed. If Task B completes, the sequence flow routes to the end event so that the process instance can complete.
 
-You can read more about it in [our BPMN primer - sequence flows: Controlling the flow of execution](/docs/components/modeler/bpmn/bpmn-primer/#sequence-flow-controlling-the-flow-of-execution).
+You can read more about it in [our BPMN primer: sequence flows - controlling the flow of execution](/docs/components/modeler/bpmn/bpmn-primer/#sequence-flow-controlling-the-flow-of-execution).
 
 ### Conditions (if/then)
 
@@ -31,9 +33,9 @@ This is implemented by an [exclusive gateway (XOR)](/docs/components/modeler/bpm
 
 <div bpmn="workflow-patterns/xor.bpmn" callouts="xorGateway,taskB,taskC" />
 
-All outgoing sequence flows of the XOR Gatewy (<span className="callout">1</span>) have a [condition](/docs/components/concepts/expressions/#boolean-expressions) configured, which decides if the process continues in Task B (<span className="callout">2</span>if `x>42`) or Task C (<span className="callout">3</span>if `not(x>42)`).
+All outgoing sequence flows of the XOR Gatewy (<span className="callout">1</span>) have a [condition](/docs/components/concepts/expressions/#boolean-expressions) configured, which decides if the process continues in Task B (<span className="callout">2</span> if `x>42`) or Task C (<span className="callout">3</span>if `not(x>42)`).
 
-You can read more about it in [our BPMN primer - gateways: Steering flow](/docs/components/modeler/bpmn/bpmn-primer/#gateways-steering-flow).
+You can read more about it in [our BPMN primer: gateways - steering flow](/docs/components/modeler/bpmn/bpmn-primer/#gateways-steering-flow).
 
 ### Invoke subworkflows
 
@@ -45,7 +47,9 @@ This is implemented by a [call activity](/docs/components/modeler/bpmn/call-acti
 
 <span className="callout">1</span>
 
-When the call activity is entered, a new process instance of the referenced process is created. Only when the created process instance is completed, the call activity is left and the outgoing sequence flow is taken. You can reference any other BPMN process, for example:
+When the call activity is entered, a new process instance of the referenced process is created. Only when the created process instance is completed, the call activity is left and the outgoing sequence flow is taken.
+
+You can reference any other BPMN process, for example:
 
 <div bpmn="workflow-patterns/call-activity-child.bpmn" />
 
@@ -55,17 +59,25 @@ See [Workflow Pattern 21: Structured Loop](http://www.workflowpatterns.com/patte
 
 In BPMN you can simply model a loop:
 
-<div bpmn="workflow-patterns/loop.bpmn"  callouts="xor"/>
+<div bpmn="workflow-patterns/loop.pmn" callouts="xor"/>
 
-There is also a specific loop task marker in BPMN (but please note, that this [is not yet supported in Zeebe](/docs/components/modeler/bpmn/bpmn-coverage/)):
+<span className="callout">1</span>
 
-<div bpmn="workflow-patterns/loop-marker.bpmn" callouts="taskA" />
+This exclusive gateway contains the expression to decide if to continue or exit the loop. The gateway can be before or after the loop.
+
+There is also a specific loop task marker in BPMN:
+
+:::note
+The loop task marker event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in version 8.
+:::
+
+<div bpmn="workflow-patterns/loop-marker.bpmn" />
 
 ### Static parallel branches
 
-You want some pre-modelled tasks to be carried out in parallel. See [Workflow Pattern 2: Parallel Split](http://www.workflowpatterns.com/patterns/control/new/wcp2.php) and [Workflow Pattern 33: Generalized AND-Join](http://www.workflowpatterns.com/patterns/control/new/wcp33.php): "The divergence of a branch into two or more parallel branches each of which execute concurrently". Plus "the convergence of two or more branches into a single subsequent branch".
+You want some tasks, that are known during design time, to be carried out in parallel. See [Workflow Pattern 2: Parallel Split](http://www.workflowpatterns.com/patterns/control/new/wcp2.php) and [Workflow Pattern 33: Generalized AND-Join](http://www.workflowpatterns.com/patterns/control/new/wcp33.php): "The divergence of a branch into two or more parallel branches each of which execute concurrently". Plus "the convergence of two or more branches into a single subsequent branch".
 
-In BPMN this is typically implemented using [parallel gateways](/docs/components/modeler/bpmn/parallel-gateways/), also called AND-gateways:
+In BPMN this is implemented using [parallel gateways (AND)](/docs/components/modeler/bpmn/parallel-gateways/):
 
 <div bpmn="workflow-patterns/and.bpmn" callouts="andSplit, andJoin" />
 
@@ -77,11 +89,11 @@ This AND-gateway splits the flow into concurrent paths, so that Task A, B, and C
 
 This AND-gateway waits for Task A, B, and C to complete, before the flow can move on.
 
-You can read more about it in [our BPMN primer - gateways: Steering flow](/docs/components/modeler/bpmn/bpmn-primer/#gateways-steering-flow).
+You can read more about it in [our BPMN primer: gateways - steering flow](/docs/components/modeler/bpmn/bpmn-primer/#gateways-steering-flow).
 
 ### Dynamic parallel branches
 
-You want execute some tasks for every element of a list, like the `for each` construct in programming languages. See [Workflow Pattern 14: Multiple Instances with a priori Run-Time Knowledge](http://www.workflowpatterns.com/patterns/control/new/wcp14.php): "Multiple instances of a task can be created. The required number of instances may depend on a number of runtime factors, but is known before the task instances must be created. Once initiated, these instances are independent of each other and run concurrently. It is necessary to synchronize the instances at completion before any subsequent tasks can be triggered".
+You might want to execute some tasks for every element of a list, like the `for each` construct in programming languages. See [Workflow Pattern 14: Multiple Instances with a priori Run-Time Knowledge](http://www.workflowpatterns.com/patterns/control/new/wcp14.php): "Multiple instances of a task can be created. The required number of instances may depend on a number of runtime factors, but is known before the task instances must be created. Once initiated, these instances are independent of each other and run concurrently. It is necessary to synchronize the instances at completion before any subsequent tasks can be triggered".
 
 In BPMN this is implemented using [multiple instance activities](/docs/components/modeler/bpmn/multi-instance/):
 
@@ -89,37 +101,37 @@ In BPMN this is implemented using [multiple instance activities](/docs/component
 
 <span className="callout">1</span>
 
-The parallel multiple instance marker defines, that this subprocess is executed multiple times - once for each element of a given collection (like a foreach loop in a programming language).
+The parallel multiple instance marker defines, that this subprocess is executed multiple times - once for each element of a given collection (like a `for each` loop in a programming language).
 
 ### Wait
 
-A typical situation is that a process needs to wait for some event to happen, e.g. some time to pass or some external trigger to arrive. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php).
+A typical situation is that a process needs to wait for some event to happen, e.g. some time to pass or some external message to arrive. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php).
 
-In BPMN this is implemented using [events](/docs/components/modeler/bpmn/events/) or [receive tasks](/docs/components/modeler/bpmn/receive-tasks/):
+In BPMN this is implemented using [events](/docs/components/modeler/bpmn/events/) (or [receive tasks](/docs/components/modeler/bpmn/receive-tasks/)):
 
 <div bpmn="workflow-patterns/wait.bpmn" callouts="timer, message" />
 
 <span className="callout">1</span>
 
-The timer event causes the process to wait, in this case until a specific point in time is due. You could also specify durations. See [timer events](/docs/components/modeler/bpmn/timer-events/).
+The timer event causes the process to wait, in this case until a specific point in time is due or some duration has elapsed. See [timer events](/docs/components/modeler/bpmn/timer-events/).
 
 <span className="callout">2</span>
 
-The process will wait for a message to arrive. The message is an external trigger provided by API and can technically be anything, from a callback (e.g. via REST), over real messaging (like AMQP), to notifications within your system. See [message events](/docs/components/modeler/bpmn/message-events/).
+The process will wait for a message to arrive. The message is an external trigger provided by API and can technically be anything, from a callback (e.g. via REST), over real messaging (like AMQP), to notifications within your system. See [message events](/docs/components/modeler/bpmn/message-events/) for more details.
 
-You can read more about it in [our BPMN primer - events: Waiting for something to happen](/docs/components/modeler/bpmn/bpmn-primer/#events-waiting-for-something-to-happen).
+You can read more about events in [our BPMN primer: events - waiting for something to happen](/docs/components/modeler/bpmn/bpmn-primer/#events-waiting-for-something-to-happen).
 
 ## Reacting to events
 
-The above mentioned waiting for events is a special case of generally reacting to events. You might also want to react to events, even if the process is doing something else at the moment. Typical examples are customer cancelation requests coming in for running order fulfillment processes, or timeouts if parts of the process take too long.
+The above mentioned waiting is a special case, where you react to events while not doing anything else. Oftentimes, you want to react to events even if the process is doing something else at the moment. This is described in this section.
 
-In both cases, the process might be doing something else, but still needs to be able to react to those events, which turns out to be rarely supported well amonst workflow engines. Let's explore this, by looking at specific features and examples.
+Typical examples are customer cancelation requests coming in for running order fulfillment processes, or timeouts if parts of the process take too long.
 
 ### Time based
 
 You want to react if a certain point in time is due or a specific time duration has passed. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php).
 
-In BPMN, you cannot only wait for the timer event within a flow, but also leverage [boundary events](/docs/components/modeler/bpmn/events/#boundary-events) or [event subprocesses](/docs/components/modeler/bpmn/event-subprocesses/).
+In BPMN, you can leverage [boundary events](/docs/components/modeler/bpmn/events/#boundary-events) or [event subprocesses](/docs/components/modeler/bpmn/event-subprocesses/).
 
 Those events can be interrupting, or non-interrupting, meaning that you will either interrupt the current activity, or start something in parallel.
 
@@ -127,11 +139,11 @@ Those events can be interrupting, or non-interrupting, meaning that you will eit
 
 <span className="callout">1</span>
 
-This timer is non-interrupting (dashed line), so the "Escalate request approval" task is started in parallel, additionally to the "Approve request" task. The idea is, that the escalation task might make a manager to double-check the original task does not slip. Non-interrupting events can also be recurring, so you could also escalate "every two hours".
+This timer is non-interrupting (dashed line), so the "Escalate request approval" task is started in parallel, additionally to the "Approve request" task. The idea is, that the escalation task might make a manager double-checking the original task does not slip. Non-interrupting events can also be recurring, so you could also escalate "every two hours".
 
 <span className="callout">2</span>
 
-This timer is interrupting (solid line). Once it fires, the "Approve request" task will be canceled and the process continues on the alternative path, in this case to automatically reject the request. Note that both timers so far can only happen if the task "Approve request" is active
+This timer is interrupting (solid line). Once it fires, the "Approve request" task will be canceled and the process continues on the alternative path, in this case to automatically reject the request. Note that both timers so far can only happen if the task "Approve request" is active.
 
 <span className="callout">3</span>
 
@@ -145,27 +157,29 @@ Please note, that the above process is not necessarily modeled following all of 
 
 ### External messages/events
 
-You might also want to react to certain incoming messages or event in an existing process. The prime example is a customer canceling the current order fulfillment process. This might be possible only in a certain process phase, and even lead to different actions. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php) and [Workflow Pattern 24: Persistent Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp24.php).
+You might also want to react to certain incoming messages or events in an existing process. The prime example is a customer canceling the current order fulfillment process. This might be possible only in a certain process phase and lead to different actions. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php) and [Workflow Pattern 24: Persistent Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp24.php).
 
 As with timers, you can leverage [boundary events](/docs/components/modeler/bpmn/events/#boundary-events) or [event subprocesses](/docs/components/modeler/bpmn/event-subprocesses/).
 
-<div bpmn="workflow-patterns/reactive-message-events.bpmn" callouts="event1, subprocess1, event2, event3" />
+<div bpmn="workflow-patterns/reactive-message-events.bpmn" callouts="subprocess1, event1, event2, event3" />
+
+Assume that an order cancelation message comes in for the current process instance using [message correlation](/docs/components/concepts/messages/).
 
 <span className="callout">1</span>
 
-An order cancelation message comes in for the current process instance using [message correlation](/docs/components/concepts/messages/). This cancelation cancels the current subprocess to do something else instead.
+Subprocesses can be easily used to define phases of a process, as the cancellation is treated differently depending on the current process phase.
 
 <span className="callout">2</span>
 
-Subprocesses can be easily used to define phases of a process, as the cancellation is treated differently depending on the current process phase.
+For example, a cancellation during the clearing phase has no consequences and can simply be executed.
 
 <span className="callout">3</span>
 
-Because, for example, in preparation we might already have to clean up certain things.
+But when the process is already in the preparation phase it might need to clean up certain things properly.
 
 <span className="callout">4</span>
 
-And probably during delivery we do not allow any cancelations any more. This is also why this event is non-interrupting (dashed line), so we keep doing "Delivery".
+And during delivery it does not even allow cancelations any more. This is also why this event is non-interrupting (dashed line), so we keep doing "Delivery".
 
 ### Correlation mechansisms
 
@@ -173,15 +187,15 @@ Mapping external messages to an existing process instance is called [message cor
 
 There are two main problems to solve:
 
-1. How to find the right process instance? This is solved by a `message name` and a `correlation key` (e.g. `orderCanceled` and `order-42`).
+1. How to find the right process instance? In Camunda, this is solved by a `message name` and a `correlation key` (e.g. `orderCanceled` and `order-42`).
 
-2. How to persist messages if a process instance is not yet ready to receive that message just yet? This is solved by having an internal message store and a `time to live` attached to messages. This is relateed to [Workflow Pattern 24: Persistent Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp24.php)
+2. How to persist messages if a process instance is not yet ready to receive that message just yet? In Camunda, this is solved by having an internal message store and a `time to live` attached to messages. This is relateed to [Workflow Pattern 24: Persistent Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp24.php)
 
 You can find more information in [our documentation about messages](/docs/components/concepts/messages/).
 
 ### Events from subprocesses
 
-Sometimes, you want to communicate from a subprocess to its parent, without ending the subprocess. BPMN allows this by an [escalation event](/docs/components/modeler/bpmn/bpmn-coverage/).
+Sometimes, you a subprocess need to comincate with its parent without ending the subprocess yet. BPMN allows this by an [escalation event](/docs/components/modeler/bpmn/bpmn-coverage/).
 
 :::note
 The escalation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in version 8.
@@ -205,13 +219,17 @@ While messages are always targeted at one specific process instance, you might a
 The escalation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in version 8.
 :::
 
-<div bpmn="workflow-patterns/signal-catch.bpmn"/>
+<div bpmn="workflow-patterns/signal-catch.bpmn" callouts="signal"/>
+
+<span className="callout">1</span>
+
+The signal event will be catched and in this case interrupts the onboarding to go back to score the customer again.
 
 ## Handling errors
 
 Handling exceptions well is one of the most imporant capabilities of a workflow engine, and it needs built-in support from the modeling language.
 
-You might also want to look into our [best practice - modeling beyond the happy path](/docs/components/best-practices/modeling/modeling-beyond-the-happy-path/) to understand possibilities.
+You might also want to look into our [best practice: modeling beyond the happy path](/docs/components/best-practices/modeling/modeling-beyond-the-happy-path/) to understand possibilities.
 
 ### Error scopes
 
@@ -229,7 +247,7 @@ In contrast, this error event subprocess is triggered whenever there is a fraud 
 
 ### Catch errors per type
 
-You might need to react to different event types differently, which is possible by using the error type known to BPMN:
+You might need to react to different event types differently, which is possible by using the [error type](/docs/components/modeler/bpmn/error-events/#defining-the-error) known to BPMN:
 
 <div bpmn="workflow-patterns/error-type.bpmn" callouts="error1, error2" />
 
@@ -253,9 +271,7 @@ The compensation event is supported in Camunda Platform 7, but not yet in Camund
 
 <span className="callout">1</span>
 
-For every task in a process model, you can define a compensation task. This can be any valid BPMN task, this is a service task, but it could also be a a human task (<span className="callout">2</span>), a subprocess, or anything else.
-
-The compensation task gets only executed if the original task was executed.
+For every task in a process model, you can define a compensation task. This can be any valid BPMN task, like a service task, a human task (<span className="callout">2</span>), a subprocess, or anything else.
 
 <span className="callout">3</span>
 
@@ -263,6 +279,6 @@ This compensation tasks gets connected to the original task by a dedicated compe
 
 <span className="callout">4</span>
 
-Within your process model, you can define when it is time to compensate. Whenever you trigger the compensation event, all tasks of the current scope that where executed, will be automatically compensated.
+Within your process model, you can define when it is time to compensate. Whenever you trigger the compensation event, all tasks of the current scope that where executed, will be automatically compensated. This means, that their configured compensation task gets executed.
 
-The big feature here is that you don't have to rebuild the routing logic to compensate correctly, like checking again if the customer balance was used. The workflow engine will take care automatically, also in more complicated situations like multiple instance activities.
+The big advantage is that you don't have to remodel the routing logic to compensate correctly, like checking again if the customer balance was used. The workflow engine will take care automatically, also in more complicated situations like multiple instance activities.

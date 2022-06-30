@@ -81,15 +81,15 @@
     <bpmn:boundaryEvent id="comp1" attachedToRef="Activity_0806its">
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_1wm0m53" />
     </bpmn:boundaryEvent>
-    <bpmn:task id="comp1task" name="Refund charge to customers balance" isForCompensation="true" />
     <bpmn:boundaryEvent id="comp2" attachedToRef="Activity_15lmhf2">
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_1dyyzs3" />
     </bpmn:boundaryEvent>
-    <bpmn:task id="comp2task" name="Cancel transaction on credit card" isForCompensation="true" />
     <bpmn:boundaryEvent id="comp3" attachedToRef="Activity_1un4qr1">
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_04tw89w" />
     </bpmn:boundaryEvent>
     <bpmn:userTask id="comp3task" name="Refund&#10;payment" isForCompensation="true" />
+    <bpmn:serviceTask id="comp1task" name="Refund charge to customers balance" isForCompensation="true" />
+    <bpmn:serviceTask id="comp2task" name="Cancel transaction on credit card" isForCompensation="true" />
     <bpmn:association id="Association_1wv4c3e" associationDirection="One" sourceRef="comp1" targetRef="comp1task" />
     <bpmn:association id="Association_1irb7i8" associationDirection="One" sourceRef="comp2" targetRef="comp2task" />
     <bpmn:association id="Association_16v8mjq" associationDirection="One" sourceRef="comp3" targetRef="comp3task" />
@@ -211,20 +211,18 @@
       <bpmndi:BPMNShape id="Activity_1db4xn3_di" bpmnElement="Activity_1un4qr1">
         <dc:Bounds x="870" y="320" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_140mscp_di" bpmnElement="comp1task">
-        <dc:Bounds x="550" y="450" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_12so2lo_di" bpmnElement="comp2task">
-        <dc:Bounds x="890" y="80" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1xrdq4b_di" bpmnElement="Activity_0ehctpx">
         <dc:Bounds x="870" y="560" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_099oljd_di" bpmnElement="comp3task">
         <dc:Bounds x="890" y="450" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0bw6tki_di" bpmnElement="comp1task">
+        <dc:Bounds x="550" y="450" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1pm8hnl_di" bpmnElement="comp2task">
+        <dc:Bounds x="890" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ew0g4w_di" bpmnElement="Activity_0hjsfdm" isExpanded="true">
         <dc:Bounds x="400" y="620" width="270" height="120" />
