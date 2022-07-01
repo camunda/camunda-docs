@@ -8,7 +8,7 @@ In this guide we will show you how to use Identity to assign a permission to an 
 
 To assign a permission to an application using Identity, take the following steps:
 
-1. Log in to the Identity UI and navigate to the **Applications** page and click on an application. Then select the **Access to APIs** tab and click on **Assign Permissions**:
+1. Log in to the Identity UI and navigate to the **Applications** page and click on an application. Then, select the **Access to APIs** tab and click **Assign Permissions**:
 
 ![assign-a-permission-application-tab](img/assign-a-permission-application-tab.png)
 
@@ -16,7 +16,7 @@ To assign a permission to an application using Identity, take the following step
 
 ![assign-a-permission-application-modal-1](img/assign-a-permission-application-modal-1.png)
 
-3. Select the permissions you would like to assign and click **Add**
+3. Select the permissions you would like to assign and click **Add**.
 
 ![assign-a-permission-application-modal-2](img/assign-a-permission-application-modal-2.png)
 
