@@ -7,18 +7,17 @@ Camunda provides contionously improved Helm charts that are available here: [Cam
 
 We encourage [reporting issues](https://github.com/camunda/camunda-platform-helm/issues) if you find them.
 
-
 ## What is Helm?
 
 [Helm](https://github.com/helm/helm) is a package manager for Kubernetes resources. Helm allows us to install a set of components by simply referencing a package name, and allowing us to override configurations to accommodate these packages to different scenarios.
 
-Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us to aggregate a set of components together that can be installed with a single command. 
+Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us to aggregate a set of components together that can be installed with a single command.
 
 ## Components installed by the Helm charts
 
 By default, the following will be installed:
 
-- **Camunda Platform 8 self-managed Helm (ccsm-helm)**:  
+- **Camunda Platform 8 self-managed Helm (ccsm-helm)**:
   - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` docker image.
   - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
   - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
@@ -26,7 +25,7 @@ By default, the following will be installed:
   - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
   - **Identity**: Deploys the Identity component responsible for authentication and authorization.
   - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
-  
+
 ![Charts](assets/ccsm-helm-charts.png)
 
 When installing the [camunda-platform](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform) Helm chart, all the components in this picture are installed.
@@ -42,12 +41,11 @@ You have to add the Camunda Helm chart repository in order to use the charts. On
 > helm repo update
 ```
 
-Once this is complete, we are ready to install the Helm chart hosted in the official Camunda Helm chart repo. 
-
+Once this is complete, we are ready to install the Helm chart hosted in the official Camunda Helm chart repo.
 
 ### Installing the Camunda Helm chart in a Cloud environment
 
-To install the available Camunda Platform 8 components inside a Kubernetes cluster, you can simply run: 
+To install the available Camunda Platform 8 components inside a Kubernetes cluster, you can simply run:
 
 ```
 > helm install <RELEASE NAME> camunda/camunda-platform
@@ -59,7 +57,7 @@ Change &gt;RELEASE NAME&lt; with a name of your choice.
 Also, notice that you can add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 :::
 
-Notice that this Kubernetes cluster can have services which are already running; Camunda components are simply installed as another set of services. 
+Notice that this Kubernetes cluster can have services which are already running; Camunda components are simply installed as another set of services.
 
 Installing all the components in a cluster requires all Docker images to be downloaded to the remote cluster. Depending on which Cloud provider you are using, the amount of time it will take to fetch all the images will vary.
 
@@ -92,8 +90,6 @@ elasticsearch-master-1                          0/1     Init:0/1            0   
 
 If you want to use [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), add `-f camunda-platform-core-kind-values.yaml`. The file can be downloaded [here](https://github.com/camunda/camunda-platform-helm/blob/main/kind/camunda-platform-core-kind-values.yaml).
 
-
-
 Be aware, that using KIND is only recommended for development purposes.
 
 ```
@@ -111,7 +107,6 @@ Review the progress of your deployment by checking if the Kubernetes PODs are up
 ```
 > kubectl get pods
 ```
-
 
 This will return something similar to the following:
 
@@ -135,7 +130,7 @@ Check that each pod has at least 1/1 running instances. If one or more of your p
 If the output of the `describe` command was not beneficial, tail the logs of these pods by running the following:
 
 ```
-> kubectl logs -f <POD NAME> 
+> kubectl logs -f <POD NAME>
 ```
 
 ## Upgrading from one Helm release to another
@@ -154,8 +149,8 @@ Read the next sections to familiarize yourself with the upgrade process.
 If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the Secrets randomly if not specified on installation. If you just run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
-$ helm upgrade camunda-platform-test camunda/camunda-platform 
-Error: UPGRADE FAILED: execution error at (camunda-platform/charts/identity/templates/tasklist-secret.yaml:10:22): 
+$ helm upgrade camunda-platform-test camunda/camunda-platform
+Error: UPGRADE FAILED: execution error at (camunda-platform/charts/identity/templates/tasklist-secret.yaml:10:22):
 PASSWORDS ERROR: You must provide your current passwords when upgrading the release.
                  Note that even after reinstallation, old credentials may be needed as they may be kept in persistent volume claims.
                  Further information can be obtained at https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases

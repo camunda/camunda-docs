@@ -30,6 +30,7 @@ management.endpoint.partitions.enabled=false
 ### Query the partition status
 
 The status of the partitions can be queried with a `GET` request:
+
 ```
 /actuator/partitions
 ```

@@ -18,9 +18,9 @@ POST `/api/public/export/report/definition/json`
 
 The following request headers have to be provided with every request:
 
-|Header|Constraints|Value|
-|--- |--- |--- |
-|Authorization|REQUIRED|[Authorization](../../authorization)|
+| Header        | Constraints | Value                                |
+| ------------- | ----------- | ------------------------------------ |
+| Authorization | REQUIRED    | [Authorization](../../authorization) |
 
 ## Query parameters
 
@@ -38,12 +38,12 @@ The response contains a list of exported report definitions.
 
 Possible HTTP response status codes:
 
-|Code|Description|
-|--- |--- |
-|204|Request successful.|
-|401|Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate.|
-|404|At least one of the given report IDs does not exist.|
-|500|Some error occurred while processing the request, best check the Optimize log.|
+| Code | Description                                                                                                  |
+| ---- | ------------------------------------------------------------------------------------------------------------ |
+| 204  | Request successful.                                                                                          |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 404  | At least one of the given report IDs does not exist.                                                         |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
 ## Example
 
@@ -54,6 +54,7 @@ Assuming you want to export the two reports with IDs `123` and `456` and have co
 POST `/api/public/export/report/definition/json`
 
 ##### Request header
+
 `Authorization: Bearer mySecret`
 
 ##### Request body

@@ -8,12 +8,12 @@ Roughly every quarter of a year a new minor version of Optimize is released. The
 
 If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 2.5 to 3.0, you need to update first from 2.5 to 2.6, then from 2.6 to 2.7, and finally from 2.7 to 3.0. The following table shows the recommended update paths to the latest version:
 
-| Update from | Recommended update path to 3.8 |
-| --- | --- |
-| 3.8 | You are on the latest version. |
-| 3.0 - 3.7 | Rolling update to 3.8  <br /> |
-| 2.0 - 2.7 | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
-| 1.0 - 1.5 | No update possible. Use the latest version directly. |
+| Update from | Recommended update path to 3.8                                    |
+| ----------- | ----------------------------------------------------------------- |
+| 3.8         | You are on the latest version.                                    |
+| 3.0 - 3.7   | Rolling update to 3.8 <br />                                      |
+| 2.0 - 2.7   | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
+| 1.0 - 1.5   | No update possible. Use the latest version directly.              |
 
 ## Migration instructions
 
@@ -54,9 +54,9 @@ Although the above steps summarize the basic update procedure, it is still highl
 :::note Heads Up!
 Note that the following updates are not supported by Elasticsearch:
 
-* 6.8 to 7.0.
-* 6.7 to 7.1.–7.X (where X>1, e.g. 7.5)
-:::
+- 6.8 to 7.0.
+- 6.7 to 7.1.–7.X (where X>1, e.g. 7.5)
+  :::
 
 ### 3. Perform the migration
 

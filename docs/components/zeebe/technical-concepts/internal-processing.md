@@ -57,16 +57,13 @@ This command can in turn be processed, completing the service task and driving t
 
 ## Handling backpressure
 
-When a broker receives a client request, it is written to the **event stream** first, and processed later by the stream processor. If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command. If the broker keeps accepting new requests from the client, the back log increases and the processing latency can grow beyond an acceptable time.
+When a broker receives a client request, it is written to the **event stream** first, and processed later by the stream processor. If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command. If the broker keeps accepting new requests from the client, the backlog increases and the processing latency can grow beyond an acceptable time.
 
 To avoid such problems, Zeebe employs a [backpressure](/self-managed/zeebe-deployment/operations/backpressure.md) mechanism.
 When the broker receives more requests than it can process with an acceptable latency, it rejects some requests.
 
-The maximum rate of requests that can be processed by a broker depends on the processing capacity of the machine, the network latency, current load of the system, etc.
+Backpressure is indicated to the client by throwing a **resource exhausted** exception. If a client sees this exception, it can retry the requests with an appropriate retry strategy. If the rejection rate is high, it indicates the broker is constantly under high load and you need to reduce the rate of requests. Alternatively, you can also increase broker resources to adjust to your needs. In high-load scenarios, it is recommended to [benchmark](https://camunda.com/blog/2022/05/how-to-benchmark-your-camunda-platform-8-cluster/) your Zeebe broker up front to size it correctly.
 
-Hence, there is no fixed limit configured in Zeebe for the maximum rate of requests it accepts. Instead, Zeebe uses an adaptive algorithm to dynamically determine the limit of the number of inflight requests (the requests that are accepted by the broker, but not yet processed).
+The maximum rate of requests that can be processed by a broker depends on the processing capacity of the machine, the network latency, current load of the system, etc. There is no fixed limit configured in Zeebe for the maximum rate of requests it accepts. Instead, Zeebe uses an adaptive algorithm to dynamically determine the limit of the number of in-flight requests (the requests that are accepted by the broker, but not yet processed).
 
-The inflight request count is incremented when a request is accepted, and decremented when a response is sent back to the client. The broker rejects requests when the inflight request count reaches the limit.
-
-When the broker rejects requests due to backpressure, the clients can retry them with an appropriate retry strategy. If the rejection rate is high, it indicates that the broker is constantly under high load.
-In that case, it is recommended to reduce the request rate.
+The in-flight request count is incremented when a request is accepted, and decremented when a response is sent back to the client. The broker rejects requests when the in-flight request count reaches the limit.

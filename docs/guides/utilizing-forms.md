@@ -72,22 +72,23 @@ Take the following steps:
 4. Navigate to the form you want to connect and click the blue **Import** button.
 5. When a user task has a connected form, the blue overlay will always stay visible on the right side of the task.
 
-:::note Submit button missing when you use Camunda Forms?
-When using Camunda Forms, any submit button present in the form schema is hidden so we can control when a user can complete a task.
-:::
+Note that when using Camunda Forms, any submit button present in the form schema is hidden so we can control when a user can complete a task.
 
-Within Camunda Platform 7, you can click on the bottom left corner that says **JSON** to switch to the JSON view. Use caution when naming the fields of your form. Fields have their values pre-filled from variables with the same name.
+:::note Using Camunda Platform 7?
+Click on the bottom left corner that says **JSON** to switch to the JSON view. Use caution when naming the fields of your form. Fields have their values pre-filled from variables with the same name.
 
 Copy the JSON schema, and go back to the BPMN diagram you modeled earlier. Select the **user task** and click on the **Forms** tab. After switching tabs, you should see the field where you can paste the form JSON schema. Paste the schema and save the file.
+:::
 
-With Camunda Platform 7, deploy your diagram to Zeebe and create an instance using the following command:
+## Deploy your diagram and start an instance
 
-```sh
-zbctl deploy resource /path/to/my/diagram.bpmn
-zbctl create instance diagram-id
-```
+To execute your completed process diagram, click the blue **Deploy diagram** button. You can now start a new process instance to initiate your process diagram. Click the blue **Start instance** button. You can now monitor your instances in [Operate](../components/operate/index.md).
 
-Then, open Tasklist to claim the task, fill in the form, and complete the task.
+To [complete a user task](./getting-started-orchestrate-human-tasks.md), click the honeycomb icon button next to the **Start instance** button, and **View user tasks** to automatically be taken to [Tasklist](../components/tasklist/introduction.md).
+
+:::note
+To deploy with Camunda Platform 7, use the [process engine](https://docs.camunda.org/manual/7.16/user-guide/process-engine/).
+:::
 
 ## Additional resources
 
