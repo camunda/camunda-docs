@@ -25,6 +25,7 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
         "guides/update-guide/120-to-130",
         "guides/update-guide/110-to-120",
