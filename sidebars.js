@@ -213,9 +213,6 @@ module.exports = {
             "components/zeebe/open-source/get-help-get-involved",
           ],
         },
-        {
-          Appendix: [],
-        },
       ],
       Operate: [
         "components/operate/index",
