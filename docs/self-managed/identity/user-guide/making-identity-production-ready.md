@@ -12,10 +12,20 @@ As Keycloak is an external-based dependency of the Identity application, we reco
 [Keycloak's documentation on production configuration](https://www.keycloak.org/server/configuration-production) to
 make sure your Keycloak instance is production-ready.
 
-### Backup
+### Backing up
 
 To ensure recovery is possible we recommend regularly backing up the database that supports Keycloak.
-For more information about backups, please consult the documentation of your chosen provider.
+
+#### Helm deployment
+
+If you have deployed the Camunda platform using our [Helm charts](/self-managed/platform-deployment/kubernetes-helm.md),
+by default there will be a Postgres database deployed alongside. In this instance we recommend referencing the
+[Postgres documentation](https://www.postgresql.org/docs/current/backup.html) for advice on how to back up.
+
+#### Alternative deployment
+
+If your Keycloak service uses a different database provider to Postgres we recommend
+referencing the backup section of the documentation for your chosen provider and version.
 
 ## Enabling TLS
 
