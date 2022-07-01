@@ -711,7 +711,7 @@ To call a **SAP** system, you have the following options:
 
 - Use REST or SOAP client calls, connecting Camunda to **SAP Netweaver Gateway** or **SAP Enterprise Services**.
 
-- Use **SAP's Java Connectors (JCo)**. Consider using some frameworks to make this easier, like the open-source frameworks of [Hibersap](https://github.com/hibersap).
+- Use **SAP's Java Connectors (JCo)**. Consider using some frameworks to make this easier, like the open source frameworks of [Hibersap](https://github.com/hibersap).
 
 ### Executing a Groovy script
 
