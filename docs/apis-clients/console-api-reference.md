@@ -9,7 +9,7 @@ description: "To interact with Camunda Platform 8 programmatically without using
 For all requests, include the access token for Cloud API in the Authorization header: `authorization:Bearer ${TOKEN}`.
 
 :::note
-A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).
+A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda Platform 8 cluster.
 :::
 
 ## Cloud API management
