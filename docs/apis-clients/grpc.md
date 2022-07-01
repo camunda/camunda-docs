@@ -174,7 +174,7 @@ Only processes with none start events can be started through this command.
 message CreateProcessInstanceRequest {
   // the unique key identifying the process definition (e.g. returned from a process
   // in the DeployProcessResponse message)
-  int64 processKey = 1;
+  int64 processDefinitionKey = 1;
   // the BPMN process ID of the process definition
   string bpmnProcessId = 2;
   // the version of the process; set to -1 to use the latest version
