@@ -59,7 +59,7 @@ See [Workflow Pattern 21: Structured Loop](http://www.workflowpatterns.com/patte
 
 In BPMN you can simply model a loop:
 
-<div bpmn="workflow-patterns/loop.pmn" callouts="xor"/>
+<div bpmn="workflow-patterns/loop.bpmn" callouts="xor"/>
 
 <span className="callout">1</span>
 
