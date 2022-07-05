@@ -12,7 +12,7 @@ Camunda Forms allow you to easily design and configure forms, and then embed the
 
 - Camunda Forms are created in Camunda Modeler.
 - Camunda Forms can be embedded in Camunda Tasklist. You can find out how in the [user task forms guide](../../../guides/utilizing-forms.md).
-- Camunda Forms are powered by the open-source [bpmn-io form-js library](https://github.com/bpmn-io/form-js). Visit the [open source repository](https://github.com/bpmn-io/form-js) to find out how to render a form using plain JavaScript in a custom application (note that this also requires you to fetch the form from the respective BPMN 2.0 element and provide data as needed to the form.)
+- Camunda Forms are powered by the open source [bpmn-io form-js library](https://github.com/bpmn-io/form-js). Visit the [open source repository](https://github.com/bpmn-io/form-js) to find out how to render a form using plain JavaScript in a custom application (note that this also requires you to fetch the form from the respective BPMN 2.0 element and provide data as needed to the form.)
 
 ## Components
 

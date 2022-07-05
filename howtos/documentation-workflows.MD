@@ -2,11 +2,11 @@
 
 - [Getting started](#getting-started)
   - [Overview](#overview)
-  - [Edit this page](#Edit-this-page)
+    - [Edit this page](#edit-this-page)
 
 ## Overview
 
-There are a variety of Camunda open-source projects whose documentation sets are open source and available on GitHub. Some documentation may not be completely open source, but will allow for edits to be made to it by making suggestions via a pull request. Writing, reviewing, and creating documentation in the open allows for a streamlined and collaborative approach to documentation. This also aligns both internal and external contributors and allows the Camunda community as a whole to work together to improve our documentation.
+There are a variety of Camunda open source projects whose documentation sets are open source and available on GitHub. Some documentation may not be completely open source, but will allow for edits to be made to it by making suggestions via a pull request. Writing, reviewing, and creating documentation in the open allows for a streamlined and collaborative approach to documentation. This also aligns both internal and external contributors and allows the Camunda community as a whole to work together to improve our documentation.
 
 The contributor experience on docs.camunda.io integrates GitHub workflows in addition to allowing contributors to make quick edits to existing documentation. An example of this would be fixing a typo, adding a sentence for clarification, updating a screenshot, or making a grammatical change.
 
@@ -32,4 +32,4 @@ If there is no **Edit this page** button available, that particular documentatio
 5. After your changes have been proposed, you will want to create a pull request (also known as a PR) following the guidelines outlined in our [contributor guide]. If you’ve never submitted a PR before, check out [About Pull Requests] on GitHub to learn more about the pull request process.
 6. Thank you for your contribution! A member of the project’s team will review and merge your pull request once it has been reviewed and approved. Keep in mind that you may get feedback from maintainers requesting changes, so be sure to check your GitHub notifications on a regular basis.
 
-[About Pull Requests]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
+[about pull requests]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests

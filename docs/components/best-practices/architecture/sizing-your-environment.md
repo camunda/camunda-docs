@@ -144,52 +144,52 @@ Provisioning Camunda Platform 8 onto your self-managed Kubernetes cluster might 
 
 However, the following example shows the current configuration of a cluster of size S in Camunda Platform 8 SaaS, which can serve as a starting point for your own sizing. As you can see in the table above, such a cluster can serve 500,000 process instances / day and store up to 5.4 million process instances (in-flight and history).
 
-|                                    |                     | request | limit |
-| ---------------------------------- | ------------------- | ------- | ----- |
-| **Zeebe**                          |                     |         |       |
-| \# brokers                         | 3                   |
-| \# partitions                      | 3                   |
-| replication factor                 | 3                   |
-|                                    | vCPU \[cores\]      | 0.8     | 0.96  |
-|                                    | Mem \[GB\]          | 0.25    | 1.92  |
-|                                    | Disk \[GB\]         | 32      | 192   |
-| #gateway                           | 2                   |
-|                                    | vCPU \[cores\]      | 0.4     | 0.4   |
-|                                    | Mem \[GB\] limit    | 0.45    | 0.45  |
-| **Operate**                        |                     |         |       |
-| #importer                          | 1                   |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 1     |
-| #webapp                            | 2                   |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 1     |
-| **Tasklist**                       |                     |         |       |
-| #importer                          | 1                   |
-|                                    | vCPU \[cores\]      | 0.4     | 1     |
-|                                    | Mem \[GB\] limit    | 1       | 2     |
-| #webapp                            | 2                   |
-|                                    | vCPU \[cores\]      | 0.4     | 1     |
-|                                    | Mem \[GB\] limit    | 1       | 2     |
-| **Optimize**                       |                     |         |       |
-| #importer                          | 1                   |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.4     | 1     |
-| #webapp                            | 2                   |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.4     | 1     |
-| **Elastic**                        |                     |         |       |
-| #statefulset                       | 1                   |
-|                                    | vCPU \[cores\]      | 1       | 2     |
-|                                    | Mem \[GB\] limit    | 1       | 2     |
-|                                    | Disk \[GB\] request | 64      | 64    |
-| **Other** (Worker, Analytics, ...) |
-| #                                  | 1                   |
-|                                    | vCPU \[cores\]      | 0.4     | 0.4   |
-|                                    | Mem \[GB\] limit    | 0.45    | 0.45  |
-| **Total resources**                |
-|                                    | vCPU \[cores\]      | 0.4     | 15.08 |
-|                                    | Mem \[GB\]          | 0.45    | 21.11 |
-|                                    | Disk \[GB\]         | 0       | 640   |
+|                                |                     | request | limit |
+| ------------------------------ | ------------------- | ------- | ----- |
+| **Zeebe**                      |                     |         |       |
+| \# brokers                     | 3                   |         |       |
+| \# partitions                  | 3                   |         |       |
+| replication factor             | 3                   |         |       |
+|                                | vCPU \[cores\]      | 0.8     | 0.96  |
+|                                | Mem \[GB\]          | 2       | 4     |
+|                                | Disk \[GB\]         | 32      | 192   |
+| #gateway                       | 2                   |         |       |
+|                                | vCPU \[cores\]      | 0.4     | 0.4   |
+|                                | Mem \[GB\] limit    | 0.45    | 0.45  |
+| **Operate**                    |                     |         |       |
+| #importer                      | 1                   |         |       |
+|                                | vCPU \[cores\]      | 0.4     | 1     |
+|                                | Mem \[GB\] limit    | 1       | 1     |
+| #webapp                        | 2                   |         |       |
+|                                | vCPU \[cores\]      | 0.4     | 1     |
+|                                | Mem \[GB\] limit    | 1       | 1     |
+| **Tasklist**                   |                     |         |       |
+| #importer                      | 1                   |         |       |
+|                                | vCPU \[cores\]      | 0.4     | 1     |
+|                                | Mem \[GB\] limit    | 1       | 2     |
+| #webapp                        | 2                   |         |       |
+|                                | vCPU \[cores\]      | 0.4     | 1     |
+|                                | Mem \[GB\] limit    | 1       | 2     |
+| **Optimize**                   |                     |         |       |
+| #importer                      | 1                   |         |       |
+|                                | vCPU \[cores\]      | 0.4     | 1     |
+|                                | Mem \[GB\] limit    | 1       | 1     |
+| #webapp                        | 2                   |         |       |
+|                                | vCPU \[cores\]      | 0.4     | 1     |
+|                                | Mem \[GB\] limit    | 1       | 1     |
+| **Elastic**                    |                     |         |       |
+| #statefulset                   | 1                   |         |       |
+|                                | vCPU \[cores\]      | 1       | 2     |
+|                                | Mem \[GB\] limit    | 1       | 6     |
+|                                | Disk \[GB\] request | 64      | 64    |
+| **Other** (Worker, Analytics, ...) |                     |         |       |
+| #                              | 1                   |         |       |
+|                                | vCPU \[cores\]      | 0.4     | 0.4   |
+|                                | Mem \[GB\] limit    | 0.45    | 0.45  |
+| **Total resources**            |                     |         |       |
+|                                | vCPU \[cores\]      | 5       | 9.76  |
+|                                | Mem \[GB\]          | 9.9     | 18.9  |
+|                                | Disk \[GB\]         | 96      | 256   |
 
 ## Planning non-production environments
 
