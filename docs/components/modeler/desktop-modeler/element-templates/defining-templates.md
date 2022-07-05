@@ -11,7 +11,7 @@ Templates are defined in template descriptor files as a JSON array:
 ```json
 [
   {
-    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.2.0/resources/schema.json",
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
     "name": "Template 1",
     "id": "sometemplate",
     "description": "some description",
@@ -40,13 +40,13 @@ As seen in the code snippet a template consist of a number of important componen
   Example (Camunda Platform 7)
 
   ```json
-  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.9.0/resources/schema.json"
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json"
   ```
 
   Example (Camunda Platform 8)
 
   ```json
-  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.4.0/resources/schema.json"
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"
   ```
 
 - `name : String`: Name of the template. Will be shown in the element template selection modal and in the properties panel (after having applied an element template).
@@ -67,10 +67,10 @@ The application uses the `$schema` property to ensure compatibility for a given 
 
 The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
 
-For example, given the following `$schema` definition, the application takes `0.8.0` as the JSON Schema version of the element template.
+For example, given the following `$schema` definition, the application takes `0.9.1` as the JSON Schema version of the element template.
 
 ```json
-"$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.8.0/resources/schema.json"
+"$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.9.1/resources/schema.json"
 ```
 
 The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, the Camunda Modeler assumes the latest JSON Schema version for Camunda Platform 7 element templates.
@@ -94,7 +94,7 @@ Let us consider the following example that defines a template for a mail sending
 
 ```json
 {
-  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.7.0/resources/schema.json",
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
   "name": "Mail Task",
   "id": "com.camunda.example.MailTask",
   "appliesTo": ["bpmn:ServiceTask"],

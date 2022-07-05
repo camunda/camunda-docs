@@ -49,7 +49,7 @@ See our [example application](https://github.com/camunda-community-hub/camunda-c
 
 We decided on this stack for the following reasons:
 
-- All components are open-source and easily available.
+- All components are open source and easily available.
 - SaaS is the easiest way to consume capabilities like a workflow engine.
 - Spring Boot is currently the most adopted way of building Java applications.
 - Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
