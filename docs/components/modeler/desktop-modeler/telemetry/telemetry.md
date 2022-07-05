@@ -1,32 +1,30 @@
 ---
 id: telemetry
 title: Telemetry
-description: "You can opt-in the collection of telemetry data when using the desktop modeler. This data will be used to better understand how the application is used and to improve it based on data."
+description: "You can opt in for the collection of telemetry data when using Desktop Modeler. This data is used to better understand how the application is used and to improve it based on data."
 ---
 
-You can opt-in the collection of telemetry data when using the desktop modeler. This data will be used to better understand how the application is used and to improve it based on data.
-
-This page summarizes the data that is being collected.
+You can opt in for the collection of telemetry data when using Desktop Modeler. This data is used to better understand how the application is used and to improve it based on data. This page summarizes the data collected.
 
 ## General structure of the events
 
-The events **Desktop Modeler** sends are sharing a similar payload which usually, but not exclusively includes information like:
+The events **Desktop Modeler** sends share a similar payload which usually (but not exclusively) includes information like:
 
-- **event name**: the name of the event being triggered (e.g. "diagram:opened")
-- **application version**: the version of the Desktop Modeler that is being used (e.g. Version 5.0.0)
-- **editor id**: a randomly generated id assigned to your Desktop Modeler installation
+- **event name**: The name of the event triggered (e.g. `diagram:opened`)
+- **application version**: The version of Desktop Modeler being used (e.g. Version 5.0.0)
+- **editor id**: A randomly generated id assigned to your Desktop Modeler installation
 
 ## Definition of events
 
 ### Ping event
 
-The `Ping Event` is sent in following situations:
+The `Ping Event` is sent in the following situations:
 
-- The modeler is opened (given that `Usage Statistics` option is enabled)
+- The modeler is opened (given that `Usage Statistics` option is enabled).
 - `Usage Statistics` option is enabled for the first time.
-- Once every 24 hours (given that `Usage Statistics` option is enabled)
+- Once every 24 hours (given that `Usage Statistics` option is enabled).
 
-The Ping Event also sends the list plugins installed and flags defined.
+The `Ping Event` also sends the list of plugins installed and flags defined:
 
 ```json
   "plugins": ["PLUGIN_NAME"],
@@ -37,7 +35,7 @@ The Ping Event also sends the list plugins installed and flags defined.
 
 ### Diagram opened/closed event
 
-The `Diagram Opened Event` is sent in following situations:
+The `Diagram Opened Event` is sent in the following situations:
 
 - User created a new BPMN diagram
 - User created a new DMN diagram
@@ -46,7 +44,7 @@ The `Diagram Opened Event` is sent in following situations:
 - User opened an existing DMN diagram
 - User opened an existing Form
 
-The `Diagram Closed Event` is sent in following situations:
+The `Diagram Closed Event` is sent in the following situations:
 
 - User closed a BPMN diagram
 - User closed a DMN diagram
@@ -54,8 +52,8 @@ The `Diagram Closed Event` is sent in following situations:
 
 These events include the following properties:
 
-- `diagramType`: [bpmn, dmn or form]
-- engine profile:
+- `diagramType`: BPMN, DMN, or Form
+- Engine profile:
   - `executionPlatform`: <target platform\>
   - `executionPlatformVersion`: <target platform version\>
 
@@ -118,21 +116,21 @@ Also in the case of BPMN diagrams, the event payload may include further diagram
 
 ### Deployment and start instance events
 
-The `Deployment Event` is sent in following situations:
+The `Deployment Event` is sent in the following situations:
 
 - User deploys a BPMN or DMN diagram to Camunda Platform 7 or Camunda Platform 8
 - User deploys a Form to Camunda Platform 7
 
-The Deployment Event and Start Instance has the following properties:
+The `Deployment Event` and `Start Instance` have the following properties:
 
-- `diagramType`: [bpmn, dmn or form]
-- engine profile:
+- `diagramType`: BPMN, DMN, or Form
+- Engine profile:
   - `executionPlatform`: <target platform\>
   - `executionPlatformVersion`: <target platform version\>
 
-We also send infromation regarding the outcome of the deployment. In case the diagram deployment was not successful, the `error` returned will be added to the payload.
+We also send information regarding the outcome of the deployment. In case the diagram deployment was not successful, the `error` returned will be added to the payload.
 
-If provided, for example, when deploying to a Zeebe based platform, we add the target type of the deployment as well:
+If provided, for example, when deploying to a Zeebe-based platform, we add the target type of the deployment as well:
 
 ```json
 "targetType": "[camundaCloud or selfHosted]"
@@ -196,7 +194,7 @@ The event supplies:
 - The `parent` container id to locate the application section
 - The button label or link text (generalized as label) for identification of what was specifically clicked
 - A type to differentiate buttons, internal links, and external links
-- Optionally for external links: the link target
+- The link target (optional for external links)
 
 Example event:
 
@@ -223,6 +221,6 @@ The `Overlay Opened Event` is sent when an overlay is opened via user interactio
 - Deployment overlay is closed
 - Start Instance overlay is closed
 
-For the Version Info overlay, the event also sends `source` of the click (`"menu"` or `"statusBar"`).
+For the **Version Info** overlay, the event also sends `source` of the click (`"menu"` or `"statusBar"`).
 
-For the Deployment and Start Instance overlays, the event also send the `diagramType` (BPMN, DMN or FORM)
+For the **Deployment** and **Start Instance** overlays, the event also send the `diagramType` (BPMN, DMN or Form).
