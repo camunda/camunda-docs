@@ -6,11 +6,11 @@ description: "Depending on the process definition, an instance of it can be crea
 
 Depending on the process definition, an instance of it can be created in several ways.
 
-At Camunda, this includes the following:
+Camunda Platform 8 supports the following ways to create a process instance:
 
-- `CreateProcessInstance` commands
-- Timer event handler
-- Message event
+- [`CreateProcessInstance` commands](#commands)
+- [Message event](#message-event)
+- [Timer event](#timer-event)
 
 ## Commands
 
