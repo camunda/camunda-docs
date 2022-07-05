@@ -13,5 +13,5 @@ to be external and therefore require SSL.
 
 As the [Camunda Platform Helm Charts](https://github.com/camunda/camunda-platform-helm) currently do not provide support
 for the distribution of the Keycloak TLS key to the other containers, we would recommend viewing the solution available in
-the [Identity documentation](docs/self-managed/identity/troubleshooting/common-problems/#solution-2-identity-making-requests-from-an-external-ip-address)
+the [Identity documentation](/docs/self-managed/identity/troubleshooting/common-problems#solution-2-identity-making-requests-from-an-external-ip-address)
 for advice.
