@@ -213,9 +213,6 @@ module.exports = {
             "components/zeebe/open-source/get-help-get-involved",
           ],
         },
-        {
-          Appendix: [],
-        },
       ],
       Operate: [
         "components/operate/index",
@@ -584,6 +581,7 @@ module.exports = {
             "self-managed/identity/user-guide/adding-an-application",
             "self-managed/identity/user-guide/adding-an-api",
             "self-managed/identity/user-guide/adding-a-permission",
+            "self-managed/identity/user-guide/assigning-a-permission-to-an-application",
             "self-managed/identity/user-guide/adding-a-role",
             "self-managed/identity/user-guide/assigning-a-permission-to-a-role",
             "self-managed/identity/user-guide/assigning-a-role-to-a-user",

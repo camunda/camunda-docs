@@ -805,12 +805,6 @@
               "id": "version-0.25/components/tasklist/deployment/authentication"
             }
           ]
-        },
-        {
-          "collapsed": true,
-          "type": "category",
-          "label": "User Guide",
-          "items": []
         }
       ]
     }
