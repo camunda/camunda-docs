@@ -116,6 +116,24 @@ You can activate the same element multiples times inside the created process ins
 
 Start instructions are supported for both `CreateProcessInstance` commands.
 
+<details>
+  <summary>Code example</summary>
+  <p>
+  Create a process instance starting before the 'ship_parcel' element:
+
+```java
+client.newCreateInstanceCommand()
+  .bpmnProcessId("order-process")
+  .latestVersion()
+  .variables(Map.of("orderId", "1234"))
+  .startBeforeElement("ship_parcel")
+  .send()
+  .join();
+```
+
+  </p>
+</details>
+
 ## Events
 
 Process instances are also created implicitly via various start events. Camunda Platform 8 supports message start events and timer start events.
