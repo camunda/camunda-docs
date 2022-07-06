@@ -588,6 +588,7 @@ module.exports = {
             "self-managed/identity/user-guide/assigning-a-permission-to-a-role",
             "self-managed/identity/user-guide/assigning-a-role-to-a-user",
             "self-managed/identity/user-guide/configure-external-identity-provider",
+            "self-managed/identity/user-guide/configure-logging",
             "self-managed/identity/user-guide/making-identity-production-ready",
             "self-managed/identity/user-guide/generating-m2m-tokens",
           ],
