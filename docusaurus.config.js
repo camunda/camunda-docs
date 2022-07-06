@@ -191,10 +191,10 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Camunda`,
     },
     algolia: {
-      apiKey: "f1b2a46296ae374b7f5a5c627341c354",
+      // These keys are for our new standalone algolia instance!
+      apiKey: "d701d38126d1a43866047d3ab97680d1",
+      appId: "6KYF3VMCXZ",
       indexName: "camunda",
-      contextualSearch: true, // useful for versioned docs (https://docusaurus.io/docs/search#contextual-search)
-      searchParameters: {}, // Optional (if provided by Algolia)
     },
     // Disabling Dark Mode
     // https://github.com/camunda-cloud/camunda-cloud-documentation/issues/125

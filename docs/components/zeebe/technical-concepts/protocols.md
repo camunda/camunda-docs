@@ -11,7 +11,7 @@ For the communication between client and gateway, [gRPC](https://grpc.io/) is us
 
 ## What is gRPC?
 
-gRPC was first developed by Google and is now an open-source project and part of the Cloud Native Computing Foundation.
+gRPC was first developed by Google and is now an open source project and part of the Cloud Native Computing Foundation.
 
 If you’re new to gRPC, see [What is gRPC](https://grpc.io/docs/guides/index.html) on the project website for an introduction.
 

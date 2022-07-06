@@ -371,13 +371,6 @@
               "id": "version-1.2/components/zeebe/open-source/get-help-get-involved"
             }
           ]
-        },
-        {
-          "type": "category",
-          "collapsed": true,
-          "collapsible": true,
-          "label": "Appendix",
-          "items": []
         }
       ]
     },
