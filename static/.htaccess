@@ -8,8 +8,8 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/components/optimize/userguide/additional-features/filters/(.*)$ /docs/components/optimize/userguide/process-analysis/filters/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/rest-api/(.*)$ /docs/apis-clients/optimize-api/$1 [R=301,L]
-
 RewriteRule ^docs/self-managed/optimize-deployment/optimize-explained/(.*)$ /docs/self-managed/optimize-deployment/advanced-features/$1 [R=301,L]
 
 RewriteRule ^docs/self-managed/zeebe-gateway-deployment/index(.*)$ /docs/self-managed/zeebe-gateway-deployment/zeebe-gateway [R=301,L]
