@@ -60,7 +60,7 @@ one_ greenfield recommendation for all our customers who have no special require
 
 We decided on this stack for the following reasons:
 
-- All components are open-source and easily available.
+- All components are open source and easily available.
 - Camunda Run is the favorite distribution, as it focuses on external tasks, the more modern paradigm also present in Camunda Platform 8.
 - Spring Boot is currently the most adopted way of building Java applications.
 - Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
@@ -191,7 +191,7 @@ Camunda Platform 7 requires a _relational database_ for persistence. Even if the
 
 |                                | PostgreSQL                                                       | Oracle                                                             | H2                                                                   | Other databases                                                                                                  |
 | ------------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-|                                | PostgreSQL is an open-source, object-relational database system. | Oracle Database is a commercial object-relational database system. | H2 is a Java SQL database with in-memory mode and a small footprint. |                                                                                                                  |
+|                                | PostgreSQL is an open source, object-relational database system. | Oracle Database is a commercial object-relational database system. | H2 is a Java SQL database with in-memory mode and a small footprint. |                                                                                                                  |
 | Best Performance Observations  | &#10004;                                                         | &#10004;                                                           |                                                                      |                                                                                                                  |
 | In-Memory Mode                 |                                                                  |                                                                    | &#10004;                                                             |                                                                                                                  |
 | No installation required       |                                                                  |                                                                    | &#10004;                                                             |                                                                                                                  |
