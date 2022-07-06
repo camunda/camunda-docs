@@ -10,13 +10,13 @@ Here, we'll set up client connection credentials to create, name, and connect yo
 
 To create a new client, take the following steps:
 
-1. Navigate to the API tab:
+1. Navigate to the API tab by clicking **Clusters > `cluster-name` > API**.
 
 ![cluster-details](./img/cluster-detail-clients.png)
 
-2. Click **Create New Client** to create a new client and name your client accordingly.
+1. Click **Create** to create a new client and name your client accordingly.
 
-3. Select **Zeebe** so the newly-created client can access your Zeebe instance.
+2. Select **Zeebe** so the newly-created client can access your Zeebe instance.
 
 ![create-client](./img/cluster-details-create-client.png)
 

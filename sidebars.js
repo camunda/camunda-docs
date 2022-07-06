@@ -16,6 +16,7 @@ module.exports = {
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/automating-a-process-using-bpmn",
+        "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
         "guides/message-correlation",
@@ -45,6 +46,7 @@ module.exports = {
         "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
+        "components/concepts/workflow-patterns",
       ],
       Console: [
         "components/console/introduction",
@@ -211,9 +213,6 @@ module.exports = {
             "components/zeebe/open-source/community-contributions",
             "components/zeebe/open-source/get-help-get-involved",
           ],
-        },
-        {
-          Appendix: [],
         },
       ],
       Operate: [
@@ -426,6 +425,7 @@ module.exports = {
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ],
+          Authentication: ["self-managed/concepts/authentication/m2m-tokens"],
         },
         "self-managed/concepts/exporters",
       ],
@@ -583,12 +583,14 @@ module.exports = {
             "self-managed/identity/user-guide/adding-an-application",
             "self-managed/identity/user-guide/adding-an-api",
             "self-managed/identity/user-guide/adding-a-permission",
+            "self-managed/identity/user-guide/assigning-a-permission-to-an-application",
             "self-managed/identity/user-guide/adding-a-role",
             "self-managed/identity/user-guide/assigning-a-permission-to-a-role",
             "self-managed/identity/user-guide/assigning-a-role-to-a-user",
             "self-managed/identity/user-guide/configure-external-identity-provider",
             "self-managed/identity/user-guide/configure-logging",
             "self-managed/identity/user-guide/making-identity-production-ready",
+            "self-managed/identity/user-guide/generating-m2m-tokens",
           ],
         },
         {
