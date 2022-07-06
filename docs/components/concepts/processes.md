@@ -26,7 +26,7 @@ Zeebe uses [BPMN 2.0](http://www.bpmn.org/) to represent processes. BPMN is an i
 
 ## BPMN modeler
 
-Zeebe provides a free and open-source BPMN modeling tool to create BPMN diagrams and configure their technical properties. The modeler is a desktop application based on the [bpmn.io](https://bpmn.io) open-source project.
+Zeebe provides a free and open source BPMN modeling tool to create BPMN diagrams and configure their technical properties. The modeler is a desktop application based on the [bpmn.io](https://bpmn.io) open source project.
 
 Desktop Modeler can be [downloaded from GitHub](https://camunda.com/download/modeler/).
 

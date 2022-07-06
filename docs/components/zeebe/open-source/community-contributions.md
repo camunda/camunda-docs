@@ -4,7 +4,7 @@ title: "Community contributions"
 description: "Zeebe welcomes extensions and contributions from the community!"
 ---
 
-Zeebe is available as open-source software on [GitHub](https://github.com/camunda-cloud/zeebe).
+Zeebe is available as open source software on [GitHub](https://github.com/camunda-cloud/zeebe).
 
 Zeebe welcomes extensions and contributions from the community!
 

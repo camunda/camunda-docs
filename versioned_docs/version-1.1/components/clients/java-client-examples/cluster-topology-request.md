@@ -15,7 +15,7 @@ This example shows which broker is leader and follower for which partition. This
 
 ## TopologyViewer.java
 
-[Source on GitHub](https://github.com/camunda-cloud/zeebe/blob/develop/samples/src/main/java/io/camunda/zeebe/example/cluster/TopologyViewer.java)
+[Source on GitHub](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/zeebe-client-plain-java/src/main/java/io/camunda/zeebe/example/cluster/TopologyViewer.java)
 
 ```java
 final Topology topology = client.newTopologyRequest().send().join();
