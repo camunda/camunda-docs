@@ -251,11 +251,11 @@ The reaction to errors might need to be different depending on the current state
 
 <span className="callout">1</span>
 
-This error event only catches errors from the subprocess "clearing". The idea here would be that in case of any clearing service not being available, the order is assumed cleared. Note that this example is mainly built for illustration, and does not necessarily mean this is the best way to solve this business requirement.
+This boundary error event is attached to the subprocess "clearing" and only catches errors within that subprocess. The idea here would be that in case of any clearing service not being available, the order is assumed cleared. Note that this example is mainly built for illustration, and does not necessarily mean this is the best way to solve this business requirement.
 
 <span className="callout">2</span>
 
-Alternatively, this error event subprocess is triggered whenever there is a fraud detected, independent where this error is raised.
+Alternatively, this error event subprocess is triggered whenever there is a fraud detected, independent of whether the error occurs in any of the subprocesses or the main process.
 
 ### Catch errors per type
 
