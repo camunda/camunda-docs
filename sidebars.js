@@ -424,6 +424,7 @@ module.exports = {
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ],
+          Authentication: ["self-managed/concepts/authentication/m2m-tokens"],
         },
         "self-managed/concepts/exporters",
       ],
@@ -587,6 +588,7 @@ module.exports = {
             "self-managed/identity/user-guide/assigning-a-role-to-a-user",
             "self-managed/identity/user-guide/configure-external-identity-provider",
             "self-managed/identity/user-guide/making-identity-production-ready",
+            "self-managed/identity/user-guide/generating-m2m-tokens",
           ],
         },
         {
