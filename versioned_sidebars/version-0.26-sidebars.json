@@ -671,12 +671,6 @@
               "id": "version-0.26/components/zeebe/open-source/deprecated-features"
             }
           ]
-        },
-        {
-          "collapsed": true,
-          "type": "category",
-          "label": "Appendix",
-          "items": []
         }
       ]
     },

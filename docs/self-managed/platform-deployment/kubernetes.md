@@ -47,8 +47,7 @@ Be aware that we only officially test the Google GKE environment.
 Optional tools related to Camunda Platform 8:
 
 - Camunda Modeler: to model/modify business processes. Install Camunda Modeler [here](/components/modeler/desktop-modeler/install-the-modeler.md).
-- Zeebe CTL(`zbctl`): command line tool to interact with a Zeebe cluster (local/remote). You can get the `zbctl` tool from the official
-  [Zeebe release page](https://github.com/camunda-cloud/zeebe/releases).
+- Zeebe CTL(`zbctl`): command line tool to interact with a Zeebe cluster (local/remote). You can get the `zbctl` tool from the official [Zeebe release page](https://github.com/camunda-cloud/zeebe/releases).
 
 ## Accessing Camunda components from outside the Kubernetes cluster
 
@@ -104,7 +103,7 @@ Then, you can access Operate pointing your browser at [http://localhost:8080](ht
   </div>
 </details>
 <details>
-  <summary>Operate and Tasklist Login</summary>
+  <summary>Operate and Tasklist Dashboard</summary>
   <div>
     <img src={require('./assets/operate-tasklist-dashboard.png').default}/>
   </div>

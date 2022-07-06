@@ -670,12 +670,6 @@
               "id": "version-1.0/components/zeebe/third-party-libraries/zeebe-dependencies"
             }
           ]
-        },
-        {
-          "collapsed": true,
-          "type": "category",
-          "label": "Appendix",
-          "items": []
         }
       ]
     },
