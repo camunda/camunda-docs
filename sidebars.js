@@ -46,6 +46,7 @@ module.exports = {
         "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
+        "components/concepts/workflow-patterns",
       ],
       Console: [
         "components/console/introduction",
