@@ -265,6 +265,16 @@ module.exports = {
                     "components/optimize/userguide/process-analysis/report-analysis/view-mode",
                   ],
                 },
+                {
+                  Filters: [
+                    "components/optimize/userguide/process-analysis/filters",
+                    "components/optimize/userguide/process-analysis/general-filters",
+                    "components/optimize/userguide/process-analysis/instance-state-filters",
+                    "components/optimize/userguide/process-analysis/flow-node-filters",
+                    "components/optimize/userguide/process-analysis/process-instance-filters",
+                    "components/optimize/userguide/process-analysis/variable-filters",
+                  ],
+                },
               ],
             },
             {
@@ -279,17 +289,6 @@ module.exports = {
                 "components/optimize/userguide/additional-features/alerts",
                 "components/optimize/userguide/additional-features/event-based-processes",
                 "components/optimize/userguide/additional-features/export-import",
-                {
-                  Filters: [
-                    "components/optimize/userguide/additional-features/filters",
-                    "components/optimize/userguide/additional-features/general-filters",
-                    "components/optimize/userguide/additional-features/instance-state-filters",
-                    "components/optimize/userguide/additional-features/flow-node-filters",
-                    "components/optimize/userguide/additional-features/process-instance-filters",
-                    "components/optimize/userguide/additional-features/variable-filters",
-                  ],
-                },
-                "components/optimize/userguide/additional-features/filters",
                 "components/optimize/userguide/additional-features/footer",
                 "components/optimize/userguide/additional-features/variable-labeling",
               ],

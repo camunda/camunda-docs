@@ -26,7 +26,7 @@ To create a raw data report, select **Raw Data** from the view dropdown. The oth
 
 ## Evaluation count
 
-This view option allows you to create reports that show how often the decision was evaluated. Depending on the group by selection, this could be either the total number of evaluations, a chart displaying how this number of evaluations developed over time, or how they were distributed across variables or rules. As always, you can define [filters](../additional-features/filters.md) to specify which decision evaluations to include in the report.
+This view option allows you to create reports that show how often the decision was evaluated. Depending on the group by selection, this could be either the total number of evaluations, a chart displaying how this number of evaluations developed over time, or how they were distributed across variables or rules. As always, you can define [filters](../process-analysis/filters.md) to specify which decision evaluations to include in the report.
 
 #### Group by: None
 

@@ -24,4 +24,4 @@ Data from older versions is mapped to the most recent version in the selection. 
 
 ![Process definition selection for a multi-tenancy scenario](./img/tenantSelection.png)
 
-By default, all process instances for the selected process definitions are included in a report. You can reduce this set of process instances by applying a [filter](../../additional-features/filters.md).
+By default, all process instances for the selected process definitions are included in a report. You can reduce this set of process instances by applying a [filter](../../process-analysis/filters.md).
