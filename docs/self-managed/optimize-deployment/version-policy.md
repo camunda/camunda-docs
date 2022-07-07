@@ -14,9 +14,9 @@ Camunda Optimize will get new releases every month being at least an alpha relea
 
 | Quarter | Type of Release |
 | ------- | --------------- |
-| Q1      | Minor/Major           |
+| Q1      | Minor/Major     |
 | Q2      | Preview         |
-| Q3      | Minor/Major           |
+| Q3      | Minor/Major     |
 | Q4      | Preview         |
 
 ## Pre-Release Versions
