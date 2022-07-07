@@ -128,15 +128,15 @@ The `Deployment Event` and `Start Instance` have the following properties:
   - `executionPlatform`: <target platform\>
   - `executionPlatformVersion`: <target platform version\>
 
-We also send information regarding the outcome of the deployment. In case the diagram deployment was not successful, the `error` returned will be added to the payload.
+In the event of an unsuccessful deployment, an `error` property will be present in the payload containing an error code.
 
-If provided, for example, when deploying to a Zeebe-based platform, we add the target type of the deployment as well:
+If provided, as is the case when deploying to a Zeebe-based platform, the payload also includes the target type of the deployment:
 
 ```json
 "targetType": "[camundaCloud or selfHosted]"
 ```
 
-In case of BPMN files, we may add selected diagram metrics:
+In case of BPMN files, the event payload may include further diagram metrics:
 
 ```json
 {
@@ -174,7 +174,7 @@ In case of BPMN files, we may add selected diagram metrics:
 }
 ```
 
-If it is set in the diagram, we also add target engine profile information:
+If the target engine profile is set in the diagram, the payload will also contain it.
 
 ```json
  "executionPlatform": "<target platform>"
