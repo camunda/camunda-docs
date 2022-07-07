@@ -10,18 +10,18 @@ Camunda Optimize versions are denoted as X.Y.Z as well as by an optional [pre-re
 
 ## Release Cadence
 
-Camunda Optimize will get new releases every month being at least an alpha release and/or a patch release. At the end of a quarter either a new minor or a preview release will be published. The following table illustrates when to expect which type of release.
+Camunda Optimize will get new releases every month being at least an alpha release and/or a patch release. At the end of a quarter either a new minor/major or a preview release will be published. The following table illustrates when to expect which type of release.
 
 | Quarter | Type of Release |
 | ------- | --------------- |
-| Q1      | Minor           |
+| Q1      | Minor/Major           |
 | Q2      | Preview         |
-| Q3      | Minor           |
+| Q3      | Minor/Major           |
 | Q4      | Preview         |
 
 ## Pre-Release Versions
 
-There are two types of [pre-release](https://semver.org/spec/v2.0.0.html#spec-item-9) versions of Camunda Optimize getting published.
+There are two types of [pre-release](https://semver.org/spec/v2.0.0.html#spec-item-9) versions of Camunda Optimize that are published.
 
 ### Alpha Releases
 
