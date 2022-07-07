@@ -6,7 +6,7 @@ sidebar_label: "Getting started guide"
 
 In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda Platform 8.
 
-You can find the complete source code on [GitHub](https://github.com/zeebe-io/zeebe-get-started-go-client).
+You can find a complete example on [GitHub](https://github.com/camunda/camunda-platform-get-started/tree/main/go).
 
 ## Prerequisites
 
