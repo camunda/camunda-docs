@@ -95,15 +95,12 @@ Failure scenarios applicable to other commands are applicable to this command as
 - **Failover**: When the node processing this process crashes, another node continues the processing. The other node does not send the response because the request is registered on the first one.
 - **Gateway failure**: If the gateway the client is connected to fails, nodes inside the cluster cannot send the response to the client.
 
-### Create and starting at a user-defined element
+### Create and start at a user-defined element
 
-The [`create and execute asynchronously`](#create-and-execute-asynchronously) and [create and `await results`](#create-and-await-results) commands both start the process instance at their default initial element: the single [none start event](./components/modeler/bpmn/none-events/none-events.md#none-start-events). Camunda Platform 8 also provides a way to create a process instance starting at user-defined element(s).
+The [`create and execute asynchronously`](#create-and-execute-asynchronously) and [`create and await results`](#create-and-await-results) commands both start the process instance at their default initial element: the single [none start event](./components/modeler/bpmn/none-events/none-events.md#none-start-events). Camunda Platform 8 also provides a way to create a process instance starting at user-defined element(s).
 
 :::info
-This is an advanced feature.
-Camunda recommends to only use this functionality for testing purposes.
-The none start event is the defined beginning of your process.
-Most likely the process is modeled with the intent to start all instances from the beginning.
+This is an advanced feature. Camunda recommends to only use this functionality for testing purposes. The none start event is the defined beginning of your process. Most likely the process is modeled with the intent to start all instances from the beginning.
 :::
 
 To start the process instance at a user-defined element, you need to provide start instructions along with the command. Each instruction describes how and where to start a single element.
