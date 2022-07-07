@@ -4,6 +4,14 @@ title: Console API clients (REST)
 description: "To interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI, create Cloud API clients."
 ---
 
+## Console API (REST)
+
+For all requests, include the access token for Cloud API in the Authorization header: `authorization:Bearer ${TOKEN}`.
+
+:::note
+A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda Platform 8 cluster.
+:::
+
 ## Cloud API management
 
 To interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI, create Cloud API clients in the organization settings under the **Cloud Management API** tab.
@@ -37,7 +45,3 @@ Access tokens have a validity period found in the access token. After this time,
 :::
 
 Note that the auth service has built-in rate limiting. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
-
-## Console API (REST)
-
-For all requests, include the access token for Cloud API in the Authorization header: `authorization:Bearer ${TOKEN}`. A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).
