@@ -1,7 +1,7 @@
 ---
-id: general-filters
-title: General filters
-description: Learn more about general date filters, assignee and candidate group filters, and more.
+id: metadata-filters
+title: Metadata filters
+description: Learn more about metadata filters, like date filters, assignee and candidate group filters, and more.
 ---
 
 ## Date filters

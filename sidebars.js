@@ -268,7 +268,7 @@ module.exports = {
                 {
                   Filters: [
                     "components/optimize/userguide/process-analysis/filters",
-                    "components/optimize/userguide/process-analysis/general-filters",
+                    "components/optimize/userguide/process-analysis/metadata-filters",
                     "components/optimize/userguide/process-analysis/instance-state-filters",
                     "components/optimize/userguide/process-analysis/flow-node-filters",
                     "components/optimize/userguide/process-analysis/process-instance-filters",
@@ -548,6 +548,7 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/system-configuration",
                 "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
                 "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
+                "self-managed/optimize-deployment/configuration/event-based-process-configuration",
               ],
             },
             "self-managed/optimize-deployment/configuration/logging",

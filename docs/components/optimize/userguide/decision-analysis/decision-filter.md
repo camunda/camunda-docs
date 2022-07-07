@@ -16,7 +16,7 @@ You can filter by the [evaluation date](#evaluation-date-filter) of the decision
 
 Applying an evaluation date filter will result in the report considering only decision evaluations which occurred within the defined date range. Only one evaluation date filter can be defined for any report.
 
-Like the [process instance date filters](../process-analysis/general-filters.md#date-filters), you can define a fixed or relative filter. Read the appropriate section in the process filter guide for details about the differences.
+Like the [process instance date filters](../process-analysis/metadata-filters.md#date-filters), you can define a fixed or relative filter. Read the appropriate section in the process filter guide for details about the differences.
 
 As an alternative way to create an evaluation date filter, you can use your mouse to select the area you want to create the filter for if your report is visualized as a bar or line chart.
 

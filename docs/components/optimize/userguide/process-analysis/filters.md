@@ -8,7 +8,7 @@ Locating flaws in your process models can be a huge challenge when you have mill
 
 Camunda Optimize offers various ways of filtering your data, such as filter by:
 
-- [General filters](./general-filters.md) (date, duration, assignee, etc.)
+- [Metadata](./metadata-filters.md) (date, duration, assignee, etc.)
 - [Instance state](./instance-state-filters.md) (running or canceled instances)
 - [Flow node](./flow-node-filters.md) (flow node date, flow node duration, etc.)
 - [Process instance](./process-instance-filters.md) (process instance date, process instance duration)

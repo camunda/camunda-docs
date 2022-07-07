@@ -1,10 +1,10 @@
 ---
 id: compare-target-values
 title: Compare target values
-description: Based on flow node duration heatmaps, Optimize allows you to specify a target value for every activity.
+description: Based on flow node duration heatmaps, Optimize allows you to specify a target value for every task.
 ---
 
-Based on flow node duration heatmaps, Optimize allows you to specify a target value for every activity. For example, if a user task has to be completed within one day, you can set the target value to one day. If the time it takes to complete the user task exceeds this target value, the task is highlighted in the heatmap.
+Based on flow node duration heatmaps, Optimize allows you to specify a target value for every task. For example, if a user task has to be completed within one day, you can set the target value to one day. If the time it takes to complete the user task exceeds this target value, the task is highlighted in the heatmap.
 
 To set target values and create a target value comparison heatmap, you need to be in the edit mode of a report which has the following configuration:
 
