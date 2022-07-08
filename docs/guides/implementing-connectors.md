@@ -15,7 +15,7 @@ Connectors technically consist of two parts: the business logic is implemented a
 
 We'll implement our connector with [Modeler](../components/modeler/about.md). To get started, ensure you’ve [created a Camunda Platform 8 account](./guides/create-account.md).
 
-You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if you do not have one already, as we'll use SendGrid in our example connector. Once you've created your account, you will immediately be prompted to create a [sender](https://docs.sendgrid.com/ui/sending-email/senders).
+You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if you don't have one already, as we'll use SendGrid in our example connector. Once you've created your account, you will immediately be prompted to create a [sender](https://docs.sendgrid.com/ui/sending-email/senders).
 
 ### Create a cluster
 
