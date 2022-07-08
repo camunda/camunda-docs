@@ -112,6 +112,11 @@ module.exports = {
                 },
               ],
             },
+            {
+              "Advanced modeling": [
+                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+              ],
+            },
           ],
         },
         {
