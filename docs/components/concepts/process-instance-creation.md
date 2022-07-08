@@ -6,11 +6,11 @@ description: "Depending on the process definition, an instance of it can be crea
 
 Depending on the process definition, an instance of it can be created in several ways.
 
-At Camunda, this includes the following:
+Camunda Platform 8 supports the following ways to create a process instance:
 
-- `CreateProcessInstance` commands
-- Timer event handler
-- Message event
+- [`CreateProcessInstance` commands](#commands)
+- [Message event](#message-event)
+- [Timer event](#timer-event)
 
 ## Commands
 
@@ -94,6 +94,41 @@ Failure scenarios applicable to other commands are applicable to this command as
 - **Network connection loss**: This can occur at several steps in the communication chain.
 - **Failover**: When the node processing this process crashes, another node continues the processing. The other node does not send the response because the request is registered on the first one.
 - **Gateway failure**: If the gateway the client is connected to fails, nodes inside the cluster cannot send the response to the client.
+
+### Create and start at a user-defined element
+
+The [`create and execute asynchronously`](#create-and-execute-asynchronously) and [`create and await results`](#create-and-await-results) commands both start the process instance at their default initial element: the single [none start event](./components/modeler/bpmn/none-events/none-events.md#none-start-events). Camunda Platform 8 also provides a way to create a process instance starting at user-defined element(s).
+
+:::info
+This is an advanced feature. Camunda recommends to only use this functionality for testing purposes. The none start event is the defined beginning of your process. Most likely the process is modeled with the intent to start all instances from the beginning.
+:::
+
+To start the process instance at a user-defined element, you need to provide start instructions along with the command. Each instruction describes how and where to start a single element.
+
+By default, the instruction starts before the given element. This means input mappings of that element are applied as usual.
+
+Multiple instructions can be provided to start the process instance at more than one element.
+You can activate the same element multiple times inside the created process instance by referring to the same element id in more than one instruction.
+
+Start instructions are supported for both `CreateProcessInstance` commands.
+
+<details>
+  <summary>Code example</summary>
+  <p>
+  Create a process instance starting before the 'ship_parcel' element:
+
+```java
+client.newCreateInstanceCommand()
+  .bpmnProcessId("order-process")
+  .latestVersion()
+  .variables(Map.of("orderId", "1234"))
+  .startBeforeElement("ship_parcel")
+  .send()
+  .join();
+```
+
+  </p>
+</details>
 
 ## Events
 
