@@ -19,7 +19,7 @@
 
 ## Welcome
 
-Our documentation is open source, and we welcome new contributions. We take pride in maintaining and encouraging a friendly, welcoming, and collaborative open-source community. All contributors to our project are expected to adhere to our [Code of Conduct].
+Our documentation is open source, and we welcome new contributions. We take pride in maintaining and encouraging a friendly, welcoming, and collaborative open source community. All contributors to our project are expected to adhere to our [Code of Conduct].
 
 ## Contributor guide
 
