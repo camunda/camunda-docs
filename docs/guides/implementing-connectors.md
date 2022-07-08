@@ -15,7 +15,7 @@ Connectors technically consist of two parts: the business logic is implemented a
 
 We'll implement our connector with [Modeler](../components/modeler/about.md). To get started, ensure you’ve [created a Camunda Platform 8 account](./guides/create-account.md).
 
-You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if you do not have one already, as we'll use SendGrid in our example connector.
+You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if you do not have one already, as we'll use SendGrid in our example connector. Once you've created your account, you will immediately be prompted to create a [sender](https://docs.sendgrid.com/ui/sending-email/senders).
 
 ### Create a cluster
 
@@ -52,17 +52,17 @@ Camunda offers a variety of available connectors. For example, utilize cloud con
 
 To add our productivity applications connector, take the following steps:
 
-1. Click the start event. A panel to the right of the start event will appear.
+1. Click the start event. A context pad to the right of the start event will appear.
 2. Click the **Append connector** item in the panel.
 3. To send an email via SendGrid, for example, select the **SendGrid Email Connector** option. Name this newly-created task `Notify manger of receipt`. This now replaces our original task.
    ![adding a connector](./img/adding-connector.png)
-4. You need to fill out the required information in the properties panel of this task on the right side of the screen. Here, we'll add an example SendGrid API key, a sender and receiver name and email address, and the email message content.
+4. You need to fill out the required information in the properties panel of this task on the right side of the screen. Here, we'll add an example API key obtained from our [SendGrid account](https://app.sendgrid.com/settings/api_keys), a sender and receiver name and email address, and the email message content.
 
 ![filling out connector properties panel](./img/connector-properties-panel.png)
 
-Our connector is now attached and ready to use!
+Our connector is now attached and ready to use. Your completed diagram should look like the following:
 
-[//]: # "Does this need to be expanded? Should I go ahead and obtain a SendGrid API so we can actually see the email sent, or do we feel demonstrating the attachment of a sample connector is sufficient?"
+![completed connectors and BPMN diagram](./img/connectors-bpmn-diagram.png)
 
 ## Execute your process diagram
 
@@ -72,15 +72,25 @@ If you change a diagram and it is autosaved, this has no effect on your cluster(
 When you deploy the diagram, it becomes available on the selected cluster and new instances can start.
 :::
 
-To execute your completed process diagram, click the blue **Deploy diagram** button.
+To execute your completed process diagram, click **Deploy diagram**.
 
-You can now start a new process instance to initiate your process diagram. Click the blue **Start instance** button.
+You can now start a new process instance to initiate your process diagram. Click **Start instance**.
 
-You can now monitor your instances in [Operate](./components/operate/index.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Camunda Operate to monitor your running instances.
+You can now monitor your instances in [Operate](./components/operate/index.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Operate to monitor your running instances.
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
 :::
+
+## Observe your running process
+
+After the [user task](./getting-started-orchestrate-human-tasks.md) **Upload receipt** is completed in [Tasklist](../components/tasklist/introduction.md), an email is automatically sent to the address as specified in the connectors properties panel we configured earlier.
+
+![email via SendGrid](./img/sendgrid-email.png)
+
+In [Operate](../components/operate/index.md), you will now see the process move forward to **Review receipt**.
+
+![operate example](./img/operate-example.png)
 
 ## Additional resources and next steps
 
