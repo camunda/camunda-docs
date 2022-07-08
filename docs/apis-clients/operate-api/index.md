@@ -13,7 +13,61 @@ In case of errors, Operate API returns an error object.
 ## Authentication
 
 You need authentication to access the API endpoints.
-The authentication is described in [Operate Configuration - REST API access](/docs/self-managed/operate-deployment/configuration/#rest-api-access).
+
+### Authentication in the Cloud
+
+#### JWT token
+
+**Example:**
+
+1. Obtain a token to access the REST API.
+   You need `client_id`, `client_secret`, `audience`, and the URL of the authorization server. For more information on how to get these for Camunda Platform 8, look
+   at [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
+
+```shell
+curl -X POST -H 'content-type: application/json' -d '{"client_id": "RgVdPv...", "client_secret":"eDS1~Hg...","audience":"operate.camunda.io","grant_type":"client_credentials"}' https://login.cloud.camunda.io/oauth/token
+```
+
+You will get something like the following:
+
+```json
+{
+  "access_token": "eyJhbG...",
+  "scope": "f408ca38-....",
+  "expires_in": 58847,
+  "token_type": "Bearer"
+}
+```
+
+Take the `access_token` value from the response object and store it as your token.
+
+2. Send the token as an authorization header in each request. In this case, request all process definitions.
+
+```shell
+curl -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhb...' -d '{}'
+```
+
+#### Cookies
+
+Another way to access API is to use Cookies header in each request. The cookie can be obtained by using the API endpoint `/api/login`.
+
+**Example:**
+
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
+
+```shell
+curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
+```
+
+2. Send the cookie (as a header) in each API request. In this case, request all process definitions.
+
+```shell
+curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -d '{}'
+```
+
+### Authentication for Self-Managed cluster
+
+The authentication is described in [Operate Configuration - Authentication](/docs/self-managed/operate-deployment/authentication/#identity).
 
 ## Endpoints
 

@@ -54,10 +54,53 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 
 Identity requires the following parameters:
 
-| Parameter name                             | Description                               | Example value                                       |
-| ------------------------------------------ | ----------------------------------------- | --------------------------------------------------- |
-| camunda.tasklist.identity.issuerUrl        | URL of issuer (Identity)                  | http://localhost:18080/auth/realms/camunda-platform |
-| camunda.tasklist.identity.issuerBackendUrl | Backend URL of issuer (Identity)          | http://localhost:18080/auth/realms/camunda-platform |
-| camunda.tasklist.identity.clientId         | Similar to a username for the application | tasklist                                            |
-| camunda.tasklist.identity.clientSecret     | Similar to a password for the application | XALaRPl...s7dL7                                     |
-| camunda.tasklist.identity.audience         | Audience for Tasklist                     | tasklist-api                                        |
+| Parameter name                                      | Description                                        | Example value                                                                     |
+| --------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------- |
+| camunda.tasklist.identity.issuerUrl                 | URL of issuer (Identity)                           | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.tasklist.identity.issuerBackendUrl          | Backend URL of issuer (Identity)                   | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.tasklist.identity.clientId                  | Similar to a username for the application          | tasklist                                                                          |
+| camunda.tasklist.identity.clientSecret              | Similar to a password for the application          | XALaRPl...s7dL7                                                                   |
+| camunda.tasklist.identity.audience                  | Audience for Tasklist                              | tasklist-api                                                                      |
+| spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI.                                  | http://localhost:18080/auth/realms/camunda-platform                               |
+| spring.security.oauth2.resourceserver.jwt.jwkseturi | Complete URI to get public keys for JWT validation | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
+
+### Use Identity JWT token to access Tasklist API
+
+Tasklist provides a [GraphQL API](../../../apis-clients/tasklist-api/) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+
+**Example:**
+
+1. [Add an application in Identity](../../identity/user-guide/adding-an-application/).
+2. [Add permissions to an application](../../identity/user-guide/assigning-a-permission-to-an-application/) for Tasklist API.
+3. Obtain a token to access the GraphQL API.
+   You will need:
+   - `client_id`, `client_secret` from Identity application you created
+   - URL of the authorization server will look like: `http://<keycloak_host>:<port>/auth/realms/camunda-platform/protocol/openid-connect/token`, where host and port reference Keycloak URL (e.g. `localhost:18080`).
+
+```shell
+curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'client_id=<client id>' \
+--data-urlencode 'client_secret=<secret>' \
+--data-urlencode 'grant_type=client_credentials'
+```
+
+You will get something like the following:
+
+```json
+{
+  "access_token": "eyJhbG...",
+  "expires_in": 300,
+  "refresh_expires_in": 0,
+  "token_type": "Bearer",
+  "not-before-policy": 0
+}
+```
+
+Take the `access_token` value from the response object and store it as your token.
+
+2. Send the token as an authorization header in each request. In this case, request all tasks.
+
+```shell
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){id name}}"}' http://localhost:8080/graphql
+```

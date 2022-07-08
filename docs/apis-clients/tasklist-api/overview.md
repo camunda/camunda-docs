@@ -14,7 +14,7 @@ Tasklist provides a GraphQL API at endpoint `/graphql`.
 
 From Camunda Platform 8 onwards the endpoint is `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`
 
-## Authentication
+## Authentication in the Cloud
 
 To access the API endpoint, you need an access token.
 
@@ -70,6 +70,10 @@ If the authorization is successful, the authorization server sends back the acce
   "token_type": "Bearer"
 }
 ```
+
+## Authentication for Self-Managed cluster
+
+The authentication is described in [Tasklist Configuration - Authentication](/docs/self-managed/tasklist-deployment/authentication/#identity).
 
 ## Obtaining the Tasklist schema
 
