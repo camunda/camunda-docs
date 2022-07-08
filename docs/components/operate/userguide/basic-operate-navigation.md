@@ -35,3 +35,5 @@ Running process instances appear in the **Instances** section below the process 
 Here, see details about the process instance, including the instance history and the variables attached to the instance.
 
 ![operate-view-instance-detail](./img/operate-view-instance-detail.png)
+
+To visualize the performance of process instances, we recommend utilizing [Optimize](../../optimize/what-is-optimize.md).

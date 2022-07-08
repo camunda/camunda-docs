@@ -26,7 +26,7 @@ This often occurs when Elasticsearch is running out of disk space. If this is th
 
 ## Exception indicating an error while checking the engine version
 
-The most common cause for this issue is that the engine endpoint Optimize uses is not configured correctly. Check your [configuration](./system-configuration.md#connection-to-camunda-platform-7) and ensure the engine REST URL is set correctly.
+The most common cause for this issue is that the engine endpoint Optimize uses is not configured correctly. Check your [configuration](./system-configuration-platform-7.md) and ensure the engine REST URL is set correctly.
 
 ## Update issues
 
