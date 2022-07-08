@@ -21,6 +21,8 @@ You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if
 
 import CreateCluster from './assets/react-components/create-cluster.md'
 
+<CreateCluster/>
+
 ## Getting started
 
 Once logged in to your Camunda Platform 8 account, take the following steps:
