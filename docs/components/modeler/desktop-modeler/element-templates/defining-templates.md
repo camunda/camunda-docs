@@ -58,12 +58,12 @@ As seen in the code snippet a template consist of a number of important componen
 - `elementType : Object`: Optional type of the element. If you add an elementType to the template, the element will be replaced with the specified type when you apply the template.
 - `properties : Array<Object>`: List of properties of the template.
 
-### JSON Schema Compatibility
+### JSON schema compatibility
 
 The application uses the `$schema` property to ensure compatibility for a given element template. The latest supported [Camunda element templates JSON Schema versions](https://github.com/camunda/element-templates-json-schema) are
 
-- `v0.9.1` (Camunda Platform 7)
-- `v0.4.1` (Camunda Platform 8)
+- `v0.10.0` (Camunda Platform 7)
+- `v0.5.0` (Camunda Platform 8)
 
 The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
 
@@ -77,7 +77,7 @@ The JSON Schema versioning is backward-compatible, meaning that all versions inc
 
 Learn more about specifing a `$schema` [here](../defining-templates).
 
-### Supported BPMN Types
+### Supported BPMN types
 
 Currently, element templates may be used on the following BPMN elements:
 
@@ -86,7 +86,7 @@ Currently, element templates may be used on the following BPMN elements:
 - `bpmn:Process`
 - `bpmn:Event`
 
-### Defining Template Properties
+### Defining template properties
 
 With each template, you define some user-editable fields as well as their mapping to BPMN 2.0 XML as well as Camunda extension elements.
 
@@ -185,11 +185,16 @@ As seen in the example the important attributes in a property definition are:
 - `binding`: Specifying how the property is mapped to BPMN or Camunda extension elements and attributes (may be any of `property`, `camunda:property`, `camunda:inputParameter`, `camunda:outputParameter`, `camunda:in`, `camunda:out`, `camunda:executionListener`, `camunda:field`, `camunda:errorEventDefinition`)
 - `constraints`: A list of editing constraints to apply to the template
 
+Camunda Platform 8 also supports these properties:
+
+- `id`: An identifier that can be used to reference the property in conditional properties.
+- `condition`: A condition that determines when the property is active.
+
 #### Types
 
 The input types `String`, `Text`, `Boolean`, `Dropdown` and `Hidden` are available. As seen above `String` maps to a single-line input, `Text` maps to a multi-line input.
 
-##### Boolean / Checkbox Type
+##### Boolean / checkbox type
 
 The `Boolean` type maps to a checkbox that can be toggled by the user. It renders as shown below:
 
@@ -197,7 +202,7 @@ The `Boolean` type maps to a checkbox that can be toggled by the user. It render
 
 When checked, it maps to `true` in the respective field (see [bindings](#bindings)). Note that it does not map to `${true}` and can therefore not be used e.g., for mapping a boolean to a process variable.
 
-##### Dropdown Type
+##### Dropdown type
 
 The `Dropdown` type allows users to select from a number of pre-defined options that are stored in a custom properties `choices` attribute as `{ name, value }` pairs:
 
@@ -223,7 +228,7 @@ The resulting properties panel control looks like this:
 
 ![properties panel drop down](./img/field-dropdown.png)
 
-##### Omitted Type
+##### Omitted type
 
 By omitting the `type` configuration the default UI component will be rendered for the respective binding.
 
@@ -263,7 +268,7 @@ When set, the input field offers visual indications that a feel expression is ex
   ]
 ```
 
-###### Supported Types
+###### Supported types
 
 Camunda Platform 7
 
@@ -415,7 +420,7 @@ The `property` binding is supported both in Camunda Platform 7 and Cloud.
 </TabItem>
 </Tabs>
 
-#### Optional Bindings
+#### Optional bindings
 
 As of Camunda Modeler `v5.0.0`, we support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
 
@@ -463,7 +468,7 @@ Camunda Platform 8
 - `zeebe:input`
 - `zeebe:output`
 
-#### Scoped Bindings
+#### Scoped bindings
 
 Scoped bindings allow you to configure nested elements, such as [Camunda Platform 7 connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
 
@@ -590,7 +595,7 @@ Custom Fields may have a number of constraints associated with them:
 - `maxLength`: Maximal length for the input
 - `pattern`: Regular expression to match the input against
 
-##### Regular Expression
+##### Regular expression
 
 Together with the `pattern` constraint, you may define your custom error messages:
 
@@ -640,7 +645,7 @@ The icon contents must be a valid [data](https://developer.mozilla.org/en-US/doc
 
 This feature is currently only supported for Camunda Platform 8 element templates.
 
-#### Display All Entries
+#### Display all entries
 
 Per default, the element template defines the visible entries of the properties panel. All other property controls are hidden. If you want to bring all the default entries back, it is possible to use the `entriesVisible` property.
 
@@ -661,3 +666,75 @@ Per default, the element template defines the visible entries of the properties 
 ```
 
 ![Display default entries](./img/entries-visible.png)
+
+### Defining conditional properties
+
+Properties may have a condition which determines when they should be active, depending on the value of another property. When property is **active**, it is displayed in the properties panel, and its value is serialized in the XML. If a property is **not active**, it is not displayed, and its value is removed from the XML.
+
+For a property value to be used in a condition, the property needs to have an `id` that can be referenced by the conditional property.
+
+There are two possible comparison operators:
+
+- `equals`: Checks if the value is equal to the value defined in the condition.
+- `oneOf`: Checks if the value is in the list of values defined in the condition.
+
+```json
+...
+  "properties": [
+    {
+      "id": "httpMethod",
+      "label": "HTTP Method",
+      "type": "Dropdown",
+      "choices": [
+        { "name": "get", "value": "GET" },
+        { "name": "patch", "value": "PATCH" },
+        { "name": "post", "value": "POST" },
+        { "name": "delete", "value": "DELETE" }
+      ],
+      "binding": { ... },
+    },
+    {
+      "label": "Request Body",
+      "type": "String",
+      "binding": { ... },
+      "condition": {
+        "property": "httpMethod",
+        "oneOf": ["patch", "post", "delete"]
+      }
+    },
+    {
+      "id": "authenticationType",
+      "label": "Authentication Type",
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "None",
+          "value": ""
+        },
+        {
+          "name": "Basic",
+          "value": "basic"
+        }
+      ],
+      "binding": { ... }
+    },
+    {
+      "label": "Username",
+      "type": "String",
+      "binding": { ... },
+      "condition": {
+        "property": "authenticationType",
+        "equals": "basic"
+      }
+    },
+    {
+      "label": "Password",
+      "type": "String",
+      "binding": { ... },
+      "condition": {
+        "property": "authenticationType",
+        "equals": "basic"
+      }
+    },
+  ]
+```
