@@ -160,7 +160,7 @@ handler:
 
 If you would like to rapidly update data imported into Optimize, you have to reduce this value. However, this will cause additional strain on the engine and might influence the performance of the engine if you set a low value.
 
-More information about the import configuration can be found in the [configuration section](./../configuration/system-configuration.md#camunda-platform-7-common-import-settings).
+More information about the import configuration can be found in the [configuration section](./../configuration/system-configuration-platform-7.md).
 
 ### Prepare the import
 

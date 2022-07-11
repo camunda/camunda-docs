@@ -4,11 +4,9 @@ title: "Export report definitions"
 description: "The REST API to export report definitions."
 ---
 
-## Purpose
-
 This API allows users to export report definitions which can later be imported into another Optimize system. The reports to be exported may be within a collection or private entities, the API has access to both.
 
-The obtained list of entity exports can be imported into other Optimize systems either using the dedicated [import API](../../import-entities) or [via UI](../../../../../components/optimize/userguide/additional-features/export-import#importing-entities).
+The obtained list of entity exports can be imported into other Optimize systems either using the dedicated [import API](../import-entities.md) or [via UI](../../../components/optimize/userguide/additional-features/export-import.md#importing-entities).
 
 ## Method & HTTP target resource
 
@@ -20,7 +18,7 @@ The following request headers have to be provided with every request:
 
 | Header        | Constraints | Value                                |
 | ------------- | ----------- | ------------------------------------ |
-| Authorization | REQUIRED    | [Authorization](../../authorization) |
+| Authorization | REQUIRED    | [Authorization](../authorization.md) |
 
 ## Query parameters
 
@@ -41,7 +39,7 @@ Possible HTTP response status codes:
 | Code | Description                                                                                                  |
 | ---- | ------------------------------------------------------------------------------------------------------------ |
 | 204  | Request successful.                                                                                          |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../authorization.md) on how to authenticate. |
 | 404  | At least one of the given report IDs does not exist.                                                         |
 | 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
@@ -53,21 +51,21 @@ Assuming you want to export the two reports with IDs `123` and `456` and have co
 
 POST `/api/public/export/report/definition/json`
 
-##### Request header
+#### Request header
 
 `Authorization: Bearer mySecret`
 
-##### Request body
+#### Request body
 
 ```
 [ "123", "456" ]
 ```
 
-##### Response
+#### Response
 
 Status 200.
 
-##### Response content
+#### Response content
 
 ```
 [

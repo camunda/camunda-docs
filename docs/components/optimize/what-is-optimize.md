@@ -20,6 +20,8 @@ Beyond these design and automate cornerstones lies an important component to lev
 
 Geared toward business stakeholders, Optimize offers business intelligence tooling for Camunda enterprise customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
 
+![process performance dashboard](./img/optimize-process-performance-dashboard.png)
+
 As you run process instances through the server, Optimize makes REST API calls into the Camunda server, takes new historical data generated since the previous call, and stores the data in its own Elasticsearch database.
 
 As a result, you can analyze reports and dashboards, and reap actionable insights independently of what is happening inside the Camunda server itself (meaning no effects on runtime).

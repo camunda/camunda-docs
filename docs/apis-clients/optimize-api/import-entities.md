@@ -4,11 +4,9 @@ title: "Import entities"
 description: "The REST API to import entity definitions."
 ---
 
-## Purpose
+This API allows users to import entity definitions such as reports and dashboards into existing collections. These entity definitions may be obtained either using the [report](../report/export-report-definitions/) or [dashboard](../dashboard/export-dashboard-definitions) export API or [via the UI](../../components/optimize/userguide/additional-features/export-import.md#exporting-entities).
 
-This API allows users to import entity definitions such as reports and dashboards into existing collections. These entity definitions may be obtained either using the [report](../report/export-report-definitions/) or [dashboard](../dashboard/export-dashboard-definitions) export API or [via the UI](../../../../components/optimize/userguide/additional-features/export-import#exporting-entities).
-
-### Prerequisites
+## Prerequisites
 
 For importing via API, the following prerequisites must be met:
 
@@ -27,9 +25,9 @@ POST `/api/public/import`
 
 The following request headers have to be provided with every request:
 
-| Header        | Constraints | Value                             |
-| ------------- | ----------- | --------------------------------- |
-| Authorization | REQUIRED    | [Authorization](../authorization) |
+| Header        | Constraints | Value                               |
+| ------------- | ----------- | ----------------------------------- |
+| Authorization | REQUIRED    | [Authorization](./authorization.md) |
 
 ## Query parameters
 
@@ -41,7 +39,7 @@ The following query parameters have to be provided with every request:
 
 ## Request body
 
-The request body should contain a JSON array of entity definitions to be imported. These entity definitions may be obtained by using the [report](../report/export-report-definitions) or [dashboard](../dashboard/export-dashboard-definitions) export APIs or by [manually exporting entities](../../../../components/optimize/userguide/additional-features/export-import#exporting-entities) via the Optimize UI.
+The request body should contain a JSON array of entity definitions to be imported. These entity definitions may be obtained by using the [report](../report/export-report-definitions) or [dashboard](../dashboard/export-dashboard-definitions) export APIs or by [manually exporting entities](../../components/optimize/userguide/additional-features/export-import.md#exporting-entities) via the Optimize UI.
 
 ## Result
 
@@ -55,7 +53,7 @@ Possible HTTP response status codes:
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 200  | Request successful.                                                                                                                                                                                      |
 | 400  | The provided list of entities is invalid. This can occur if any of the above listed [prerequisites](#prerequisites) are not met. Check the `detailedMessage` of the error response for more information. |
-| 401  | Secret incorrect or missing in HTTP header. See [Authorization](../authorization) on how to authenticate.                                                                                                |
+| 401  | Secret incorrect or missing in HTTP header. See [Authorization](./authorization.md) on how to authenticate.                                                                                              |
 | 404  | The given target collection ID does not exist.                                                                                                                                                           |
 | 500  | Some error occurred while processing the request, best check the Optimize log.                                                                                                                           |
 
@@ -67,11 +65,11 @@ Assuming you want to import a report and a dashboard into the collection with ID
 
 POST `/api/public/import?collectionId=123`
 
-##### Request header
+#### Request header
 
 `Authorization: Bearer mySecret`
 
-##### Request body
+#### Request body
 
 ```
 [
@@ -100,11 +98,11 @@ POST `/api/public/import?collectionId=123`
 ]
 ```
 
-##### Response
+#### Response
 
 Status 200.
 
-##### Response Content
+#### Response Content
 
 ```
 [

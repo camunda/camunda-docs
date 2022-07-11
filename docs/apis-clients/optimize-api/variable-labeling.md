@@ -4,8 +4,6 @@ title: "Variable labeling"
 description: "The REST API to create, update, and delete variable labels in Optimize."
 ---
 
-## Purpose
-
 With the variable labeling endpoint, variable labels can be added, updated, and deleted from Optimize.
 
 ## Functionality
@@ -19,7 +17,7 @@ Note that this feature is currently not supported in outlier analysis. This mean
 
 ## Authorization
 
-Every request requires [Authorization](../authorization).
+Every request requires [Authorization](./authorization.md).
 
 ## Method & HTTP target resource
 
@@ -29,9 +27,9 @@ POST `/api/public/variables/labels`
 
 The following request headers must be provided with every variable labeling request:
 
-| Header        | Constraints | Value                             |
-| ------------- | ----------- | --------------------------------- |
-| Authorization | REQUIRED\*  | [Authorization](../authorization) |
+| Header        | Constraints | Value                               |
+| ------------- | ----------- | ----------------------------------- |
+| Authorization | REQUIRED\*  | [Authorization](./authorization.md) |
 
 ## Request body
 
