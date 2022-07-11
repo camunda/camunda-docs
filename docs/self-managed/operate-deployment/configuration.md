@@ -9,7 +9,6 @@ a Spring Boot application can be applied.
 By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
 
 - [Webserver](#webserver)
-- [REST API access](#rest-api-access)
 - [Elasticsearch connection](#elasticsearch)
 - [Zeebe Broker connection](#zeebe-broker-connection)
 - [Zeebe Elasticsearch Exporter](#zeebe-elasticsearch-exporter)
@@ -32,69 +31,6 @@ Example for environment variable:
 `SERVER_SERVLET_CONTEXT_PATH=/operate`
 
 The default context-path is `/`.
-
-### REST API access
-
-Operate provides a REST API under the endpoint `/v1`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`, or by logging in as a user and using the cookie in each request.
-
-#### Access with cookie
-
-The client needs to send the cookie with each request. The cookie can be obtained by using the API endpoint `/api/login`.
-
-**Example:**
-
-1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
-
-```shell
-curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
-```
-
-2. Send the cookie (as a header) in each API request. In this case, request all process definitions.
-
-```shell
-curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/list' -H 'Content-Type: application/json' -d '{}'
-```
-
-#### Access with JWT access token
-
-Operate requires the following settings to validate the token:
-
-| Setting                                                             | Description                                         | Example                                                  |
-| ------------------------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------- |
-| camunda.operate.client.audience                                     | Operate tries to match this with `aud` in JWT.      | operate.camunda.io                                       |
-| camunda.operate.client.clusterId                                    | Operate tries to match this with `scope` in JWT.    | cafe-0815-0235-a221-21cc6df91dc5                         |
-| spring.security.oauth2.resourceserver.jwt.jwk-set-uri (recommended) | Complete URI to get public keys for JWT validation. | https://weblogin.cloud.company.com/.well-known/jwks.json |
-| _OR_                                                                |                                                     |
-| spring.security.oauth2.resourceserver.jwt.issuer-uri                | URI to get public keys for JWT validation.          | https://weblogin.cloud.company.com/                      |
-
-**Example:**
-
-1. Obtain a token to access the REST API.
-   You need `client_id`, `client_secret`, `audience`, and the URL of the authorization server. For more information on how to get these for Camunda Platform 8, look
-   at [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
-
-```shell
-curl -X POST -H 'content-type: application/json' -d '{"client_id": "RgVdPv...", "client_secret":"eDS1~Hg...","audience":"operate.camunda.io","grant_type":"client_credentials"}' https://login.cloud.camunda.io/oauth/token
-```
-
-You will get something like the following:
-
-```json
-{
-  "access_token": "eyJhbG...",
-  "scope": "f408ca38-....",
-  "expires_in": 58847,
-  "token_type": "Bearer"
-}
-```
-
-Take the `access_token` value from the response object and store it as your token.
-
-2. Send the token as an authorization header in each request. In this case, request all process definitions.
-
-```shell
-curl -X POST 'http://localhost:8080/v1/process-definitions/list' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhb...' -d '{}'
-```
 
 ### Elasticsearch
 
