@@ -14,9 +14,11 @@ In case of errors, Operate API returns an error object.
 
 You need authentication to access the API endpoints.
 
-### Authentication in the Cloud
+### Authentication in the cloud
 
 #### JWT token
+
+To authorize in the cloud using a JWT token, take the steps in the following example:
 
 **Example:**
 
@@ -49,7 +51,7 @@ curl -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-T
 
 #### Cookies
 
-Another way to access API is to use Cookies header in each request. The cookie can be obtained by using the API endpoint `/api/login`.
+Another way to access API is to use cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the steps in the following example:
 
 **Example:**
 

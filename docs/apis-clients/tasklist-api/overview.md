@@ -14,7 +14,7 @@ Tasklist provides a GraphQL API at endpoint `/graphql`.
 
 From Camunda Platform 8 onwards the endpoint is `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`
 
-## Authentication in the Cloud
+## Authentication in the cloud
 
 To access the API endpoint, you need an access token.
 

@@ -144,7 +144,7 @@ Identity requires the following parameters:
 | camunda.operate.identity.clientId                   | Similar to a username for the application          | operate                                                                           |
 | camunda.operate.identity.clientSecret               | Similar to a password for the application          | XALaRPl...s7dL7                                                                   |
 | camunda.operate.identity.audience                   | Audience for Operate                               | operate-api                                                                       |
-| spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI.                                  | http://localhost:18080/auth/realms/camunda-platform                               |
+| spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI                                   | http://localhost:18080/auth/realms/camunda-platform                               |
 | spring.security.oauth2.resourceserver.jwt.jwkseturi | Complete URI to get public keys for JWT validation | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
 ### Use Identity JWT token to access Operate API
@@ -157,7 +157,7 @@ Operate provides a [REST API](../../../apis-clients/operate-api/) under the endp
 2. [Add permissions to an application](../../identity/user-guide/assigning-a-permission-to-an-application/) for Operate API.
 3. Obtain a token to access the REST API.
    You will need:
-   - `client_id`, `client_secret` from Identity application you created
+   - `client_id` and `client_secret` from Identity application you created.
    - URL of the authorization server will look like: `http://<keycloak_host>:<port>/auth/realms/camunda-platform/protocol/openid-connect/token`, where host and port reference Keycloak URL (e.g. `localhost:18080`).
 
 ```shell
