@@ -1,18 +1,16 @@
 ---
-id: disable-sharing
-title: "Disable sharing"
-description: "The REST API to disable sharing"
+id: enable-sharing
+title: "Enable sharing"
+description: "The REST API to enable sharing"
 ---
 
-## Purpose
+This API allows users to enable the sharing functionality for all reports and dashboards in Optimize. Note that this setting will be permanently persisted in memory and will take precedence over any other previous configurations (e.g. configuration files).
 
-This API allows users to disable the sharing functionality for all reports and dashboards in Optimize. Note that this setting will be permanently persisted in memory and will take precedence over any other previous configurations (e.g. configuration files).
-
-When sharing is disabled, previously shared URLs will no longer be accessible. Upon re-enabling sharing, the previously shared URLs will work once again under the same address as before. Calling this endpoint when sharing is already disabled will have no effect.
+If sharing had been previously enabled and then disabled, re-enabling sharing will allow users to access previously shared URLs under the same address as before. Calling this endpoint when sharing is already enabled will have no effect.
 
 ## Method & HTTP target resource
 
-POST `api/public/share/disable`
+POST `api/public/share/enable`
 
 ## Request headers
 
@@ -20,7 +18,7 @@ The following request headers must be provided with every request:
 
 | Header        | Constraints | Value                                    |
 | ------------- | ----------- | ---------------------------------------- |
-| Authorization | REQUIRED    | See [Authorization](../../authorization) |
+| Authorization | REQUIRED    | See [Authorization](../authorization.md) |
 
 ## Query parameters
 
@@ -37,14 +35,14 @@ Possible HTTP Response Status codes:
 | Code | Description                                                                                                  |
 | ---- | ------------------------------------------------------------------------------------------------------------ |
 | 204  | Request successful.                                                                                          |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../authorization.md) on how to authenticate. |
 | 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
 ## Example
 
-### Disable sharing
+### Enable sharing
 
-POST `api/public/share/disable`
+POST `api/public/share/enable`
 
 #### Request header
 

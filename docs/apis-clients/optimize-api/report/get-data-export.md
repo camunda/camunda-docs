@@ -6,8 +6,6 @@ description: "The REST API to export report result data from Optimize."
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
-## Purpose
-
 The data export API allows users to export large amounts of data in a machine-readable format (JSON) from Optimize.
 
 ## Functionality
@@ -30,7 +28,7 @@ The following request headers have to be provided with every data export request
 
 | Header        | Constraints | Value                                |
 | ------------- | ----------- | ------------------------------------ |
-| Authorization | REQUIRED    | [Authorization](../../authorization) |
+| Authorization | REQUIRED    | [Authorization](../authorization.md) |
 
 ## Query parameters
 
@@ -65,7 +63,7 @@ Possible HTTP response status codes:
 | ---- | ------------------------------------------------------------------------------------------------------------ |
 | 200  | Request successful.                                                                                          |
 | 400  | Returned if some of the properties from the request are invalid or missing.                                  |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../authorization.md) on how to authenticate. |
 | 404  | The requested report was not found, please check the provided report-ID.                                     |
 | 500  | Some error occurred while processing the export request, best check the Optimize log.                        |
 

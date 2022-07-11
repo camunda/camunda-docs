@@ -6,8 +6,6 @@ description: "The REST API to delete reports from Optimize."
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
-## Purpose
-
 The report deletion API allows you to delete reports by ID from Optimize.
 
 :::note Heads up!
@@ -26,7 +24,7 @@ The following request headers have to be provided with every delete request:
 
 | Header        | Constraints | Value                                    |
 | ------------- | ----------- | ---------------------------------------- |
-| Authorization | REQUIRED    | See [Authorization](../../authorization) |
+| Authorization | REQUIRED    | See [Authorization](../authorization.md) |
 
 ## Query parameters
 
@@ -47,7 +45,7 @@ Possible HTTP response status codes:
 | Code | Description                                                                                                  |
 | ---- | ------------------------------------------------------------------------------------------------------------ |
 | 204  | Request successful.                                                                                          |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../../authorization) on how to authenticate. |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../authorization.md) on how to authenticate. |
 | 404  | The requested report was not found, please check the provided report-ID.                                     |
 | 500  | Some error occurred while processing the request, best check the Optimize log.                               |
 
@@ -59,10 +57,10 @@ Let's assume you want to delete a report with the ID `e6c5abb1-6a18-44e7-8480-d5
 
 DELETE `/api/public/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62`
 
-##### Request header
+#### Request header
 
 `Authorization: Bearer mySecret`
 
-##### Response
+#### Response
 
 Status 204.
