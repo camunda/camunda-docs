@@ -8,7 +8,11 @@ Any task can be transformed into a connector task using the change type context 
 
 ![](img/use-connectors-context-menu.png)
 
-After a task was transformed into a connector task, the available configuration will be visible in the properties panel on the right side. The required fields will be highlighted with an error message.
+Alternatively, you can directly create a connector task by using the append context menu item. This will create a new connector task directly following the currently selected element.
+
+![](img/use-connectors-append.png)
+
+Once a connector task is selected, the available configuration will be visible in the properties panel on the right side. The required fields will be highlighted with an error message.
 
 ![](img/use-connectors-properties.png)
 

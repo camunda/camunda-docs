@@ -21,17 +21,7 @@ The SendGrid connector comes with two options:
 
 #### Create a SendGrid Email Connector Task
 
-To use this connector, follow the steps below:
-
-1. Open Web Modeler and create a new BPMN diagram.
-2. Add a **Task** and an **EndEvent**.
-3. Click on the **Task**, click on the wrench icon, and select **SendGrid Email Connector**. You can also use the search field and type `Sendgrid`.
-
-![create sendgrid connector wrench](../img/connectors-sendgrid-create-task-wrench.png)
-
-Alternatively, you can directly create a **SendGrid Email Connector** by using the append menu:
-
-![create sendgrid connector append](../img/connectors-create-task-append.png)
+To use a **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the **change type** context menu, or create a new **SendGrid: Send Email** connector task by using the **append** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
 
 #### Make your SendGrid Email Connector executable
 
@@ -101,17 +91,7 @@ While you are editing your template you can test how your email would look by sw
 
 #### Create a SendGrid Email template Connector task
 
-To use this connector, follow the steps below:
-
-1. Open Web Modeler and create a new BPMN Diagram.
-2. Add a **Task** and an **EndEvent**.
-3. Click on the **Task**, click the wrench icon, and select **SendGrid Email Template Connector**. You can also use the search field and type `Sendgrid`.
-
-![create sendgrid template connector wrench](../img/connectors-sendgrid-create-task-wrench-template.png)
-
-Alternatively, you can directly create a **SendGrid Email Template Connector** by using the append menu:
-
-![create sendgrid template connector append](../img/connectors-create-task-append.png)
+To use this **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email via Template** using the **change type** context menu, or create a new **SendGrid: Send Email via Template** connector task by using the **append** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
 
 #### Make your SendGrid Email Template Connector executable
 

@@ -8,20 +8,7 @@ The **REST connector** allows you to make a request to a REST API and use the re
 
 ## Create a REST connector task
 
-To use a **REST connector** in your process, follow the steps below:
-
-1. Open Web Modeler and create a new BPMN diagram.
-2. Add a **Task** and an **EndEvent**.
-3. Click on the **Task**, click the wrench icon, and select which **REST connector** you want to use depending on your authentication method:
-   - Rest Connector (No Auth)
-   - Rest Connector (Basic Auth)
-   - Rest Connector (Bearer Token Auth)
-
-![create sendgrid connector wrench](../img/connectors-rest-create-task-wrench.png)
-
-Alternatively, you can directly create a **REST connector** by using the append menu:
-
-![create rest connector append](../img/connectors-create-task-append.png)
+To use a **REST connector** in your process, either change the type of an existing task using the **change type** context menu, or create a new connector task by using the **append** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
 
 ## Make your REST connector executable
 

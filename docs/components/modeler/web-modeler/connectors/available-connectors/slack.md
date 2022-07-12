@@ -12,17 +12,7 @@ To use the Slack connector, a Slack app must be registered with the Slack worksp
 
 ## Create a Slack connector task
 
-To use a **Slack connector** in your process, follow the steps below:
-
-1. Open Web Modeler and create a new BPMN diagram.
-2. Add a **Task** and an **EndEvent**.
-3. Click on the **Task**, click the wrench icon, and select which **Slack connector** you want to use. Currently Camunda 8 only supports to send messages to channels or individuals using the **Slack: Send Message connector**
-
-![create slack connector wrench](../img/connectors-slack-create-task-wrench.png)
-
-Alternatively, you can directly create a **Slack connector** by using the append menu:
-
-![create slack connector append](../img/connectors-create-task-append.png)
+To use a **Slack connector** in your process, either change the type of an existing task using the **change type** context menu, or create a new connector task by using the **append** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
 
 ## Make your Slack connector executable
 
