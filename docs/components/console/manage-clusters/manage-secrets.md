@@ -27,7 +27,11 @@ To create a new Secret, go to your cluster and take the following steps:
 
 ![secrets-view](./img/cluster-detail-secrets-view.png)
 
-Now you can reference your Secret like this: `secrets.MY_API_KEY` in any connector field in the properties panel that is marked with the FEEL Expression icon: ![feel-icon](./img/feel-icon.png).
+Now you can reference your Secret like this: `secrets.MY_API_KEY` in any connector field in the properties panel that is marked with the FEEL Expression icon: ![feel-icon](./img/feel-icon.png). Keep in mind Secrets are not variables and must be wrapped in double quotes as follows:
+
+```
+= { myHeader: "secrets.MY_API_KEY"}
+```
 
 :::note Warning
 `secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your Secrets in any of your variables or FEEL expressions.
