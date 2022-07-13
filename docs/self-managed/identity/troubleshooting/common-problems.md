@@ -20,16 +20,17 @@ This can be caused by:
 
 ### Solution 1: The Keycloak service has not started/is not ready
 
-The Keycloak service can take time to start due to the supporting systems, please provide Keycloak with adequate time
-before starting (or restarting) the Identity service.
+The Keycloak service can take time to start due to the supporting systems.
 
-A Keycloak service that is ready should show the following log lines:
+Keycloak is ready to accept connections when the following log lines are visible:
 
 ```
 15:24:24,094 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: Keycloak 16.1.1 (WildFly Core 18.0.4.Final) started in 33171ms - Started 718 of 1020 services (699 services are lazy, passive or on-demand)
 15:24:24,098 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:9990/management
 15:24:24,100 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
 ```
+
+When the Keycloak service is ready for connections, please start (or restart) the Identity pod.
 
 ### Solution 2: Identity making requests from an external IP address
 

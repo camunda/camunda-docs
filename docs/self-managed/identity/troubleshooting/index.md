@@ -6,7 +6,7 @@ sidebar_label: "Overview"
 
 ## Issue: Identity pod crashloops/continually restarts
 
-If the Identity pod crashloops it is likely that there is an issue with the connection to Keycloak.
+If the Identity pod crash loops, or the pod continually restarts, it is likely that there is an issue with the connection to Keycloak.
 
 1. Find the name of the Identity pod by running:
 
