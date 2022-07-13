@@ -21,7 +21,7 @@ The SendGrid connector comes with two options:
 
 #### Create a SendGrid Email Connector Task
 
-To use a **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the **change type** context menu, or create a new **SendGrid: Send Email** connector task by using the **append** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
+To use a **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email** connector task by using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
 
 #### Make your SendGrid Email Connector executable
 
@@ -91,7 +91,7 @@ While you are editing your template you can test how your email would look by sw
 
 #### Create a SendGrid Email template Connector task
 
-To use this **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email via Template** using the **change type** context menu, or create a new **SendGrid: Send Email via Template** connector task by using the **append** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
+To use this **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email via Template** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email via Template** connector task by using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
 
 #### Make your SendGrid Email Template Connector executable
 

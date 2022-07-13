@@ -8,7 +8,7 @@ The **REST connector** allows you to make a request to a REST API and use the re
 
 ## Create a REST connector task
 
-To use a **REST connector** in your process, either change the type of an existing task using the **change type** context menu, or create a new connector task by using the **append** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
+To use a **REST connector** in your process, either change the type of an existing task using the wrench-shaped **Change type** context menu, or create a new connector task by using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
 
 ## Make your REST connector executable
 

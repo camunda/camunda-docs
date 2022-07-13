@@ -8,7 +8,7 @@ Any task can be transformed into a connector task using the change type context 
 
 ![](img/use-connectors-context-menu.png)
 
-Alternatively, you can directly create a connector task by using the append context menu item. This will create a new connector task directly following the currently selected element.
+Alternatively, you can directly create a connector task by using the **Append conector** context menu item. This will create a new connector task directly following the currently selected element.
 
 ![](img/use-connectors-append.png)
 
