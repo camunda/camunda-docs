@@ -134,7 +134,7 @@ To generate your own self-signed certificates for testing/development, you will 
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365 --nodes -addext 'subjectAltName=IP:127.0.0.1'
 ```
 
-This will generate a new certificate, `cert.pem`, and a new passwordless key, `key.pem`. 
+This will generate a new certificate, `cert.pem`, and a new passwordless key, `key.pem`.
 
 :::warning
 Do not use these in production! Again, this is for development and testing purposes only.
