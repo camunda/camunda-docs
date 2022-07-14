@@ -24,6 +24,8 @@ We'll begin building our DMN diagrams with [Modeler](../components/modeler/about
 
 import CreateCluster from './assets/react-components/create-cluster.md'
 
+<CreateCluster/>
+
 ## Getting started with DMN
 
 Once logged in to your Camunda Platform 8 account, take the following steps:

@@ -16,6 +16,7 @@ module.exports = {
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/automating-a-process-using-bpmn",
+        "guides/implementing-connectors",
         "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
@@ -233,7 +234,13 @@ module.exports = {
           "User guide": [
             "components/optimize/userguide/collections-dashboards-reports",
             "components/optimize/userguide/data-sources",
-            "components/optimize/userguide/creating-dashboards",
+            {
+              Dashboards: [
+                "components/optimize/userguide/creating-dashboards",
+                "components/optimize/userguide/edit-mode",
+                "components/optimize/userguide/view-mode",
+              ],
+            },
             "components/optimize/userguide/creating-reports",
             "components/optimize/userguide/combined-reports",
             "components/optimize/userguide/processes",
@@ -245,8 +252,28 @@ module.exports = {
                 {
                   "Report analysis": [
                     "components/optimize/userguide/process-analysis/report-analysis/overview",
-                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                    {
+                      "Edit mode": [
+                        "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                        "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
+                        "components/optimize/userguide/process-analysis/report-analysis/define-reports",
+                        "components/optimize/userguide/process-analysis/report-analysis/measures",
+                        "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
+                        "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
+                        "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
+                      ],
+                    },
                     "components/optimize/userguide/process-analysis/report-analysis/view-mode",
+                  ],
+                },
+                {
+                  Filters: [
+                    "components/optimize/userguide/process-analysis/filters",
+                    "components/optimize/userguide/process-analysis/metadata-filters",
+                    "components/optimize/userguide/process-analysis/instance-state-filters",
+                    "components/optimize/userguide/process-analysis/flow-node-filters",
+                    "components/optimize/userguide/process-analysis/process-instance-filters",
+                    "components/optimize/userguide/process-analysis/variable-filters",
                   ],
                 },
               ],
@@ -263,7 +290,6 @@ module.exports = {
                 "components/optimize/userguide/additional-features/alerts",
                 "components/optimize/userguide/additional-features/event-based-processes",
                 "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/filters",
                 "components/optimize/userguide/additional-features/footer",
                 "components/optimize/userguide/additional-features/variable-labeling",
               ],
@@ -337,6 +363,37 @@ module.exports = {
         "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/console-api-reference",
+        {
+          "Optimize API (REST)": [
+            "apis-clients/optimize-api/authorization",
+            {
+              Configuration: [
+                "apis-clients/optimize-api/configuration/enable-sharing",
+                "apis-clients/optimize-api/configuration/disable-sharing",
+              ],
+            },
+            {
+              Dashboard: [
+                "apis-clients/optimize-api/dashboard/get-dashboard-ids",
+                "apis-clients/optimize-api/dashboard/delete-dashboard",
+                "apis-clients/optimize-api/dashboard/export-dashboard-definitions",
+              ],
+            },
+            {
+              Report: [
+                "apis-clients/optimize-api/report/get-report-ids",
+                "apis-clients/optimize-api/report/delete-report",
+                "apis-clients/optimize-api/report/export-report-definitions",
+                "apis-clients/optimize-api/report/get-data-export",
+              ],
+            },
+            "apis-clients/optimize-api/event-ingestion",
+            "apis-clients/optimize-api/external-variable-ingestion",
+            "apis-clients/optimize-api/health-readiness",
+            "apis-clients/optimize-api/import-entities",
+            "apis-clients/optimize-api/variable-labeling",
+          ],
+        },
       ],
     },
     {
@@ -485,9 +542,18 @@ module.exports = {
       ],
       Optimize: [
         "self-managed/optimize-deployment/install-and-start",
+        "self-managed/optimize-deployment/version-policy",
         {
           Configuration: [
-            "self-managed/optimize-deployment/configuration/system-configuration",
+            "self-managed/optimize-deployment/configuration/getting-started",
+            {
+              "System configuration": [
+                "self-managed/optimize-deployment/configuration/system-configuration",
+                "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
+                "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
+                "self-managed/optimize-deployment/configuration/event-based-process-configuration",
+              ],
+            },
             "self-managed/optimize-deployment/configuration/logging",
             "self-managed/optimize-deployment/configuration/optimize-license",
             "self-managed/optimize-deployment/configuration/security-instructions",
@@ -517,37 +583,6 @@ module.exports = {
             "self-managed/optimize-deployment/plugins/variable-import-plugin",
           ],
         },
-        {
-          "REST API": [
-            "self-managed/optimize-deployment/rest-api/authorization",
-            {
-              Configuration: [
-                "self-managed/optimize-deployment/rest-api/configuration/enable-sharing",
-                "self-managed/optimize-deployment/rest-api/configuration/disable-sharing",
-              ],
-            },
-            {
-              Dashboard: [
-                "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
-                "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
-                "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions",
-              ],
-            },
-            {
-              Report: [
-                "self-managed/optimize-deployment/rest-api/report/get-report-ids",
-                "self-managed/optimize-deployment/rest-api/report/delete-report",
-                "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
-                "self-managed/optimize-deployment/rest-api/report/get-data-export",
-              ],
-            },
-            "self-managed/optimize-deployment/rest-api/event-ingestion",
-            "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
-            "self-managed/optimize-deployment/rest-api/health-readiness",
-            "self-managed/optimize-deployment/rest-api/import-entities",
-            "self-managed/optimize-deployment/rest-api/variable-labeling",
-          ],
-        },
         "self-managed/optimize-deployment/reimport",
         {
           "Migration & Update": [
@@ -570,9 +605,9 @@ module.exports = {
           ],
         },
         {
-          "Optimize Explained": [
-            "self-managed/optimize-deployment/optimize-explained/engine-data-deletion",
-            "self-managed/optimize-deployment/optimize-explained/import-guide",
+          "Advanced features": [
+            "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
+            "self-managed/optimize-deployment/advanced-features/import-guide",
           ],
         },
       ],

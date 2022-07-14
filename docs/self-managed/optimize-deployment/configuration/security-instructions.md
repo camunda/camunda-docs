@@ -13,7 +13,7 @@ This guide also identifies areas where we consider security issues to be relevan
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
 :::note Important!
-Optimize does not operate on its own, but needs the Camunda Platform 7 engine to import the data from and Elasticsearch to store the data. A detailed description of the setup can be found in the [architecture overview](../optimize-explained/import-guide.md) guide.
+Optimize does not operate on its own, but needs the Camunda Platform 7 engine to import the data from and Elasticsearch to store the data. A detailed description of the setup can be found in the [architecture overview](../advanced-features/import-guide.md) guide.
 :::
 
 The BPMN platform with its process engine is a full standalone application which has a dedicated [security](https://docs.camunda.org/manual/latest/user-guide/security/) guide. The sections that are of major importance for the communication with Optimize are: [enabling authentication for the REST API](https://docs.camunda.org/manual/latest/user-guide/security/#enabling-authentication-for-the-rest-api/#enabling-authentication-for-the-rest-api) and [enabling SSL/HTTPS](https://docs.camunda.org/manual/latest/user-guide/security/#enabling-authentication-for-the-rest-api).

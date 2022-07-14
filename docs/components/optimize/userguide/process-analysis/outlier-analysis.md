@@ -10,7 +10,7 @@ Outlier analysis allows you to easily identify process instances that took signi
 
 ## Outlier analysis in action
 
-Select a process definition that you would like to analyze. Once a definition is selected, a **heatmap** is displayed which highlights the flow nodes where Optimize identified many duration outliers. In our example, the **Approve Invoice** activity has duration outliers. When hovering over the task, you can see how many instances were identified and how much longer they took than the average duration.
+Select a process definition that you would like to analyze. Once a definition is selected, a **heatmap** is displayed which highlights the flow nodes where Optimize identified many duration outliers. In our example, the **Approve Invoice** task has duration outliers. When hovering over the task, you can see how many instances were identified and how much longer they took than the average duration.
 
 ![outlier analysis example 1](./img/outlierExample_1_heatMap.png)
 

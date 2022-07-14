@@ -8,7 +8,6 @@ Tasklist is a Spring Boot application. This means all provided ways to [configur
 By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist-related settings are prefixed with `camunda.tasklist`. The following components are configurable:
 
 - [Webserver](#webserver)
-- [GraphQL API access](#graphql-api-access)
 - [Elasticsearch connection](#elasticsearch)
 - [Zeebe Broker connection](#zeebe-broker-connection)
 - [Zeebe Elasticsearch exporter](#zeebe-elasticsearch-exporter)
@@ -27,24 +26,6 @@ Example for environment variable:
 `SERVER_SERVLET_CONTEXT_PATH=/tasklist`
 
 Default context-path is `/`.
-
-## GraphQL API access
-
-Tasklist provides a GraphQL API under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
-
-The Tasklist server requires the following settings to validate the token:
-
-| Setting                                                             | Description                                         | Example                                                  |
-| ------------------------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------- |
-| camunda.tasklist.client.audience                                    | Tasklist tries to match this with `aud` in JWT.     | tasklist.camunda.io                                      |
-| camunda.tasklist.client.clusterId                                   | Tasklist tries to match this with `scope` in JWT.   | cafe-0815-0235-a221-21cc6df91dc5                         |
-| spring.security.oauth2.resourceserver.jwt.jwk-set-uri (recommended) | Complete URI to get public keys for JWT validation. | https://weblogin.cloud.company.com/.well-known/jwks.json |
-| _OR_                                                                |                                                     |
-| spring.security.oauth2.resourceserver.jwt.issuer-uri                | URI to get public keys for JWT validation.          | https://weblogin.cloud.company.com/                      |
-
-The settings can be given in [application.yml](#an-example-of-applicationyml-file) (eg. `camunda.tasklist.client.audience: tasklist.camunda.io`) or as environment variables (eg. `CAMUNDA_TASKLIST_CLIENT_AUDIENCE=tasklist.camunda.io`).
-
-The [API client](/docs/apis-clients/tasklist-api/overview/) must obtain the JWT token and send it in each request to `graphql` in an authorization header as described above.
 
 ## Elasticsearch
 
