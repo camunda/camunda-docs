@@ -475,6 +475,7 @@ module.exports = {
         },
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/local",
+        "self-managed/platform-deployment/known-limitations",
       ],
     },
     {
@@ -636,6 +637,10 @@ module.exports = {
           Deployment: [
             "self-managed/identity/deployment/configuration-variables",
             "self-managed/identity/deployment/application-monitoring",
+          ],
+          Troubleshooting: [
+            "self-managed/identity/troubleshooting/index",
+            "self-managed/identity/troubleshooting/common-problems",
           ],
         },
       ],
