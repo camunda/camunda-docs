@@ -107,7 +107,7 @@ The solution to this was a custom user interface that basically queries for huma
 
 The custom tasklist shows each mailing as one "distribution task", even though they consist of several human tasks fetched from the workflow instance.
 
-<span className="callout">3</span>
+<span className="callout">2</span>
 
 The custom user interface allows you to work on all four human tasks at once. By dragging and dropping a document within the tree, the user can choose to which department the document is delivered to.
 
