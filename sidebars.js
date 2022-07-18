@@ -2,7 +2,7 @@ module.exports = {
   Guides: [
     {
       "Getting started": [
-        "guides/introduction-to-camunda-cloud",
+        "guides/introduction-to-camunda-platform-8",
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/create-cluster",
