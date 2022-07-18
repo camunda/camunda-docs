@@ -10,7 +10,7 @@ slug: /guides/
 Camunda Platform 8 consists of six [components](../components/overview.md):
 
 - [Console](../components/console/introduction.md) - Configure and deploy clusters with Console.
-- [Web Modeler](../components/modeler/about.md) - Collaborate, model processes, and deploy or start new instances.. Note that Camunda Platform 8 can be used with both [Desktop Modeler](../components/modeler/desktop-modeler/install-the-modeler.md) and [Web Modeler](../components/modeler/web-modeler/new-web-modeler.md).
+- [Web Modeler](../components/modeler/about.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda Platform 8 can be used with both [Desktop Modeler](../components/modeler/desktop-modeler/install-the-modeler.md) and [Web Modeler](../components/modeler/web-modeler/new-web-modeler.md).
 - [Zeebe](../components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda Platform 8.
 - [Tasklist](../components/tasklist/introduction.md) - Complete tasks which require human input.
 - [Operate](../components/operate/index.md) - Manage, monitor, and troubleshoot your processes.
