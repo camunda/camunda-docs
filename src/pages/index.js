@@ -32,7 +32,7 @@ const features = [
   {
     title: "APIs & Clients",
     imageUrl: "img/apisclients.png",
-    url: "https://docs.camunda.io/docs/apis-clients/overview/",
+    url: "https://docs.camunda.io/docs/apis-clients/working-with-apis-clients/",
     description: <>Programmatically interact with your automated processes.</>,
   },
 ];
