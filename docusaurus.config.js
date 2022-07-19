@@ -58,7 +58,7 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "guides/introduction-to-camunda-cloud",
+          docId: "guides/introduction-to-camunda-platform-8",
           label: "Guides",
           position: "left",
         },
