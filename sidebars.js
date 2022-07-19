@@ -360,7 +360,7 @@ module.exports = {
     },
   ],
   "APIs & Clients": [
-    "apis-clients/overview",
+    "apis-clients/working-with-apis-clients",
     {
       APIs: [
         "apis-clients/public-api",
@@ -370,7 +370,7 @@ module.exports = {
         "apis-clients/console-api-reference",
         {
           "Optimize API (REST)": [
-            "apis-clients/optimize-api/authorization",
+            "apis-clients/optimize-api/optimize-api-authorization",
             {
               Configuration: [
                 "apis-clients/optimize-api/configuration/enable-sharing",
@@ -426,13 +426,13 @@ module.exports = {
         {
           "Go client": [
             "apis-clients/go-client/index",
-            "apis-clients/go-client/get-started",
+            "apis-clients/go-client/go-get-started",
           ],
         },
         {
           "CLI client": [
             "apis-clients/cli-client/index",
-            "apis-clients/cli-client/get-started",
+            "apis-clients/cli-client/cli-get-started",
           ],
         },
         {

@@ -1,7 +1,7 @@
 ---
-id: overview
+id: tasklist-api-overview
 title: Overview
-slug: /apis-clients/tasklist-api/overview
+slug: /apis-clients/tasklist-api/tasklist-api-overview
 sidebar_position: 1
 description: "Let's take a closer look at the endpoint, authentication, access token, and API usage within Tasklist."
 ---
