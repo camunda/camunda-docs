@@ -1,5 +1,5 @@
 ---
-id: introduction
+id: introduction-to-console
 title: Introduction to Camunda Platform Console
 ---
 

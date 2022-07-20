@@ -67,7 +67,7 @@ With [Tasklist](../tasklist/introduction.md), process owners can achieve end-to-
 
 ### Console
 
-With [Console](../console/introduction.md), teams can create, configure, manage, and monitor clusters for all environments from development to production. Additionally, Console offers control over organizational settings such as user management, roles, and insights into usage metrics.
+With [Console](../console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments from development to production. Additionally, Console offers control over organizational settings such as user management, roles, and insights into usage metrics.
 
 ## How does Camunda Platform 8 compare to other solutions?
 

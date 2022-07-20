@@ -50,7 +50,7 @@ module.exports = {
         "components/concepts/workflow-patterns",
       ],
       Console: [
-        "components/console/introduction",
+        "components/console/introduction-to-console",
         {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
@@ -80,8 +80,8 @@ module.exports = {
         },
         {
           Troubleshooting: [
-            "components/console/troubleshooting/common-pitfalls",
-            "components/console/troubleshooting/feedback-and-support",
+            "components/console/console-troubleshooting/common-pitfalls",
+            "components/console/console-troubleshooting/feedback-and-support",
           ],
         },
       ],
@@ -312,7 +312,7 @@ module.exports = {
         },
       ],
       "Best Practices": [
-        "components/best-practices/overview",
+        "components/best-practices/best-practices-overview",
         {
           "Project Management": [
             "components/best-practices/management/following-the-customer-success-path",

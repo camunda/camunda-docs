@@ -9,7 +9,7 @@ description: "This section contains product manual content for each component in
 This section contains product manual content for each component in Camunda Platform 8, including conceptual content.
 
 - [Concepts](concepts/what-is-camunda-platform-8.md) - Conceptual documentation on a variety of Camunda Platform 8 topics.
-- [Console](console/introduction.md) - More information on working with Console.
+- [Console](console/introduction-to-console.md) - More information on working with Console.
 - [Modeler](modeler/about.md) - Documentation on Camunda's modeling tools, including Web Modeler and Desktop Modeler.
 - [Zeebe Engine](zeebe/zeebe-overview.md) - Complete documentation for Zeebe.
 - [Operate](operate/index.md) - User guide for monitoring and troubleshooting your process with Operate.

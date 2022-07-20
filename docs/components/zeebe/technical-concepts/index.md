@@ -14,4 +14,4 @@ This section gives an overview of Zeebe's underlying technical concepts.
 - [Process lifecycles](process-lifecycles.md) - Expands on the event processing concept and goes into more detail regarding the lifecycles of selected process elements.
 - [Protocols](protocols.md) - Explains how external clients communicate with Zeebe.
 
-In addition to these sections, you may also be interested in our [Best Practices](././components/best-practices/overview.md).
+In addition to these sections, you may also be interested in our [Best Practices](././components/best-practices/best-practices-overview.md).
