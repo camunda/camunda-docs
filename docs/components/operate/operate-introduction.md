@@ -1,5 +1,5 @@
 ---
-id: index
+id: operate-introduction
 title: Introduction
 description: "Operate is a tool for monitoring and troubleshooting process instances running in Zeebe."
 ---

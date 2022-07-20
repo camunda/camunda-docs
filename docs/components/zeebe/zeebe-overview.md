@@ -28,5 +28,5 @@ Additionally, regardless of how you are working with Zeebe and Camunda Platform 
 
 ## Next steps
 
-- Get familiar with [technical concepts](technical-concepts/index.md).
+- Get familiar with [technical concepts](technical-concepts/technical-concepts-overview.md).
 - Explore [community contributions](open-source/community-contributions.md).

@@ -36,7 +36,7 @@ module.exports = {
     "guides/migrating-from-camunda-platform-7",
   ],
   Components: [
-    "components/overview",
+    "components/components-overview",
     {
       Concepts: [
         "components/concepts/what-is-camunda-platform-8",
@@ -50,7 +50,7 @@ module.exports = {
         "components/concepts/workflow-patterns",
       ],
       Console: [
-        "components/console/introduction",
+        "components/console/introduction-to-console",
         {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
@@ -80,8 +80,8 @@ module.exports = {
         },
         {
           Troubleshooting: [
-            "components/console/troubleshooting/common-pitfalls",
-            "components/console/troubleshooting/feedback-and-support",
+            "components/console/console-troubleshooting/common-pitfalls",
+            "components/console/console-troubleshooting/feedback-and-support",
           ],
         },
       ],
@@ -101,11 +101,11 @@ module.exports = {
             "components/modeler/web-modeler/token-simulation",
             {
               Connectors: [
-                "components/modeler/web-modeler/connectors/index",
+                "components/modeler/web-modeler/connectors/introduction-to-connectors",
                 "components/modeler/web-modeler/connectors/use-connectors",
                 {
                   "Available Connectors": [
-                    "components/modeler/web-modeler/connectors/available-connectors/index",
+                    "components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview",
                     "components/modeler/web-modeler/connectors/available-connectors/rest",
                     "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
                   ],
@@ -205,7 +205,7 @@ module.exports = {
         "components/zeebe/zeebe-overview",
         {
           "Technical concepts": [
-            "components/zeebe/technical-concepts/index",
+            "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
             "components/zeebe/technical-concepts/clustering",
             "components/zeebe/technical-concepts/partitions",
@@ -222,7 +222,7 @@ module.exports = {
         },
       ],
       Operate: [
-        "components/operate/index",
+        "components/operate/operate-introduction",
         {
           "User guide": [
             "components/operate/userguide/basic-operate-navigation",
@@ -251,7 +251,7 @@ module.exports = {
             "components/optimize/userguide/processes",
             {
               "Process analysis": [
-                "components/optimize/userguide/process-analysis/overview",
+                "components/optimize/userguide/process-analysis/process-analysis-overview",
                 "components/optimize/userguide/process-analysis/outlier-analysis",
                 "components/optimize/userguide/process-analysis/branch-analysis",
                 {
@@ -285,7 +285,7 @@ module.exports = {
             },
             {
               "Decision analysis": [
-                "components/optimize/userguide/decision-analysis/overview",
+                "components/optimize/userguide/decision-analysis/decision-analysis-overview",
                 "components/optimize/userguide/decision-analysis/decision-report",
                 "components/optimize/userguide/decision-analysis/decision-filter",
               ],
@@ -303,16 +303,16 @@ module.exports = {
         },
       ],
       Tasklist: [
-        "components/tasklist/introduction",
+        "components/tasklist/introduction-to-tasklist",
         {
           "User guide": [
-            "components/tasklist/userguide/overview",
+            "components/tasklist/userguide/using-tasklist",
             "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
       ],
       "Best Practices": [
-        "components/best-practices/overview",
+        "components/best-practices/best-practices-overview",
         {
           "Project Management": [
             "components/best-practices/management/following-the-customer-success-path",

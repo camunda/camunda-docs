@@ -1,5 +1,5 @@
 ---
-id: overview
+id: decision-analysis-overview
 title: Overview
 description: Explore, discover and get insights into your decisions that otherwise would be hidden.
 ---

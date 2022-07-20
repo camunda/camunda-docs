@@ -8,7 +8,7 @@ keywords: [human tasks, orchestration, getting started, user guide]
 
 Using [Camunda Platform 8](https://camunda.io), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
 
-When a process instance arrives at such a user task, a new job similar to a service task is created. The process instance stops at this point and waits until the job is completed. Applications like [Tasklist](../components/tasklist/introduction.md) can be used by humans to complete these tasks.
+When a process instance arrives at such a user task, a new job similar to a service task is created. The process instance stops at this point and waits until the job is completed. Applications like [Tasklist](../components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks.
 
 While it may originally seem like the goal of automating a process is to remove humans entirely, efficiently allocating work through user tasks can be even more beneficial.
 
@@ -70,7 +70,7 @@ As mentioned earlier, you'll need to insert the defined variable values into the
 
 1. To deploy your diagram to your cluster, click **Deploy diagram > Deploy**.
 2. To officially start a new process instance, click **Start instance**.
-3. Navigate to [Operate](../components/operate/index.md) by clicking the honeycomb icon next to the **Start instance** button.
+3. Navigate to [Operate](../components/operate/operate-introduction.md) by clicking the honeycomb icon next to the **Start instance** button.
 4. Click **View process instances** to see your process instance alongside the green token waiting at the user task.
 
 ![token moving through process](./img/user-task-token-1.png)
@@ -100,6 +100,6 @@ In this case, the token will move through the gateway and (according to the cond
 
 - [BPMN user tasks](../components/modeler/bpmn/user-tasks/user-tasks.md)
 - [Building Forms with Modeler](./utilizing-forms.md)
-- [Introduction to Operate](../components/operate/index.md)
-- [Introduction to Tasklist](../components/tasklist/introduction.md)
+- [Introduction to Operate](../components/operate/operate-introduction.md)
+- [Introduction to Tasklist](../components/tasklist/introduction-to-tasklist.md)
 - [Intermediate Modeler example](https://github.com/NPDeehan/Whos50GameCamundaCloud)

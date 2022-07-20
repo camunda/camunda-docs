@@ -11,7 +11,7 @@ stops at this point and waits until the job is completed.
 
 ![user-task](assets/user-task.png)
 
-Applications like [Tasklist](/components/tasklist/introduction.md) can be used by humans to complete these tasks.
+Applications like [Tasklist](/components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks.
 
 Alternatively, a job worker can subscribe to the job type
 `io.camunda.zeebe:userTask` to complete the job manually.
@@ -42,7 +42,7 @@ Typically, the assignee and candidate groups are defined as static values (e.g. 
 [expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate groups.
 
-For [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user,
+For [Tasklist](/components/tasklist/introduction-to-tasklist.md) to claim the task for a known Tasklist user,
 the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
 
@@ -91,6 +91,6 @@ A user task with a user task form and an assignment definition:
 
 ### References
 
-- [Tasklist](/components/tasklist/introduction.md)
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Job handling](/components/concepts/job-workers.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
