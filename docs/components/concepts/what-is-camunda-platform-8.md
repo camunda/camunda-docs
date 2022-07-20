@@ -39,7 +39,7 @@ Camunda Platform 8 is designed to operate on a very large scale. To achieve this
 
 ### Modeler
 
-Model and deploy business process diagrams with BPMN and DMN. By using industry-standard BPMN flowcharts to model and automate end-to-end processes, both developers and business stakeholders can collaborate and work on process diagrams and decision tables simultaneously, and use collaborative features such as comments to discuss. Available via [web and desktop app](../modeler/about.md).
+Model and deploy business process diagrams with BPMN and DMN. By using industry-standard BPMN flowcharts to model and automate end-to-end processes, both developers and business stakeholders can collaborate and work on process diagrams and decision tables simultaneously, and use collaborative features such as comments to discuss. Available via [web and desktop app](../modeler/about-modeler.md).
 
 #### Connectors
 

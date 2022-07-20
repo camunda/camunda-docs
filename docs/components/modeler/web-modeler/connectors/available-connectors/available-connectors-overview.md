@@ -1,5 +1,5 @@
 ---
-id: index
+id: available-connectors-overview
 title: Overview
 description: Which connectors are available in Web Modeler
 ---

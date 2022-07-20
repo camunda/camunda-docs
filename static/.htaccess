@@ -8,9 +8,14 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/index/(.*)$ /docs/components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/index$ /docs/components/modeler/web-modeler/connectors/available-connectors-overview/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/index/(.*)$ /docs/components/modeler/web-modeler/connectors/introduction-to-connectors/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/index$ /docs/components/modeler/web-modeler/connectors/introduction-to-connectors/ [R=301,L]
+
 RewriteRule ^docs/components/console/introduction/(.*)$ /docs/components/console/introduction-to-console/$1 [R=301,L]
 RewriteRule ^docs/components/console/introduction$ /docs/components/console/introduction-to-console/ [R=301,L]
-RewriteRule ^docs/components/console/troubleshooting/(.*)$ /docs/components/console/connsole-troubleshooting/$1 [R=301,L]
+RewriteRule ^docs/components/console/troubleshooting/(.*)$ /docs/components/console/console-troubleshooting/$1 [R=301,L]
 RewriteRule ^docs/components/console/troubleshooting$ /docs/components/console/console-troubleshooting/ [R=301,L]
 
 RewriteRule ^docs/components/best-practices/overview/(.*)$ /docs/components/best-practices/best-practices-overview/$1 [R=301,L]

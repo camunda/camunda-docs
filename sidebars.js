@@ -101,11 +101,11 @@ module.exports = {
             "components/modeler/web-modeler/token-simulation",
             {
               Connectors: [
-                "components/modeler/web-modeler/connectors/index",
+                "components/modeler/web-modeler/connectors/introduction-to-connectors",
                 "components/modeler/web-modeler/connectors/use-connectors",
                 {
                   "Available Connectors": [
-                    "components/modeler/web-modeler/connectors/available-connectors/index",
+                    "components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview",
                     "components/modeler/web-modeler/connectors/available-connectors/rest",
                     "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
                   ],

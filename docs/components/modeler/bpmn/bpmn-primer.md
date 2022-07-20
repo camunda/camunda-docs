@@ -114,7 +114,7 @@ The following is an introduction to BPMN 2.0, its elements, and their execution 
 
 ## Modeling BPMN diagrams
 
-The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about.md).
+The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about-modeler.md).
 
 ![overview](./assets/modeler.gif)
 
