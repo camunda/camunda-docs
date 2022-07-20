@@ -251,7 +251,7 @@ module.exports = {
             "components/optimize/userguide/processes",
             {
               "Process analysis": [
-                "components/optimize/userguide/process-analysis/overview",
+                "components/optimize/userguide/process-analysis/process-analysis-overview",
                 "components/optimize/userguide/process-analysis/outlier-analysis",
                 "components/optimize/userguide/process-analysis/branch-analysis",
                 {
@@ -285,7 +285,7 @@ module.exports = {
             },
             {
               "Decision analysis": [
-                "components/optimize/userguide/decision-analysis/overview",
+                "components/optimize/userguide/decision-analysis/decision-analysis-overview",
                 "components/optimize/userguide/decision-analysis/decision-report",
                 "components/optimize/userguide/decision-analysis/decision-filter",
               ],

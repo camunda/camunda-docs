@@ -8,6 +8,11 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/components/optimize/userguide/process-analysis/overview/(.*)$ /docs/components/optimize/userguide/process-analysis/process-analysis-overview/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/overview$ /docs/components/optimize/userguide/process-analysis/process-analysis-overview/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview/(.*)$ /docs/components/optimize/userguide/decision-analysis/decision-analysis-overview/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview$ /docs/components/optimize/userguide/decision-analysis/decision-analysis-overview/ [R=301,L]
+
 RewriteRule ^docs/components/operate/index/(.*)$ /docs/components/operate/operate-introduction/$1 [R=301,L]
 RewriteRule ^docs/components/operate/index$ /docs/components/operate/operate-introduction/ [R=301,L]
 
