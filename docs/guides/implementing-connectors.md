@@ -86,7 +86,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 ## Observe your running process
 
-After the [user task](./getting-started-orchestrate-human-tasks.md) **Upload receipt** is completed in [Tasklist](../components/tasklist/introduction.md), an email is automatically sent to the address as specified in the connectors properties panel we configured earlier.
+After the [user task](./getting-started-orchestrate-human-tasks.md) **Upload receipt** is completed in [Tasklist](../components/tasklist/introduction-to-tasklist.md), an email is automatically sent to the address as specified in the connectors properties panel we configured earlier.
 
 ![email via SendGrid](./img/sendgrid-email.png)
 

@@ -55,7 +55,7 @@ Powered by Zeebe, Camunda’s cloud-native workflow engine provides organization
 
 ### Tasklist
 
-With [Tasklist](../tasklist/introduction.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, they’ll see it appear in Tasklist.
+With [Tasklist](../tasklist/introduction-to-tasklist.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, they’ll see it appear in Tasklist.
 
 ### Operate
 

@@ -303,10 +303,10 @@ module.exports = {
         },
       ],
       Tasklist: [
-        "components/tasklist/introduction",
+        "components/tasklist/introduction-to-tasklist",
         {
           "User guide": [
-            "components/tasklist/userguide/overview",
+            "components/tasklist/userguide/using-tasklist",
             "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },

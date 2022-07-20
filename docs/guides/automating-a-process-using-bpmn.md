@@ -87,7 +87,7 @@ You can now start a new process instance to initiate your process diagram. Click
 
 You can now monitor your instances in [Operate](./components/operate/operate-introduction.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Camunda Operate to monitor your running instances.
 
-You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the **Start instance** button, and **View user tasks** to automatically be taken to [Tasklist](./components/tasklist/introduction.md).
+You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the **Start instance** button, and **View user tasks** to automatically be taken to [Tasklist](./components/tasklist/introduction-to-tasklist.md).
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
@@ -100,4 +100,4 @@ Variables are part of a process instance and represent the data of the instance.
 - [BPMN Engine](https://camunda.com/products/camunda-platform/bpmn-engine/)
 - [BPMN Reference](../components/modeler/bpmn/bpmn.md)
 - [Operate](./components/operate/operate-introduction.md)
-- [Tasklist](./components/tasklist/introduction.md)
+- [Tasklist](./components/tasklist/introduction-to-tasklist.md)
