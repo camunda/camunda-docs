@@ -36,7 +36,7 @@ module.exports = {
     "guides/migrating-from-camunda-platform-7",
   ],
   Components: [
-    "components/overview",
+    "components/components-overview",
     {
       Concepts: [
         "components/concepts/what-is-camunda-platform-8",
@@ -205,7 +205,7 @@ module.exports = {
         "components/zeebe/zeebe-overview",
         {
           "Technical concepts": [
-            "components/zeebe/technical-concepts/index",
+            "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
             "components/zeebe/technical-concepts/clustering",
             "components/zeebe/technical-concepts/partitions",

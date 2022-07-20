@@ -1,5 +1,5 @@
 ---
-id: index
+id: technical-concepts-overview
 sidebar_label: "Overview"
 title: "Technical concepts"
 description: "This section gives an overview of Zeebe's underlying technical concepts."

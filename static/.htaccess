@@ -8,6 +8,12 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/components/overview/(.*)$ /docs/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/components/overview$ /docs/components/components-overview/ [R=301,L]
+
+RewriteRule ^docs/components/zeebe/technical-concepts/index/(.*)$ /docs/components/zeebe/technical-concepts/technical-concepts-overview/$1 [R=301,L]
+RewriteRule ^docs/components/zeebe/technical-concepts/index$ /docs/components/zeebe/technical-concepts/technical-concepts-overview/ [R=301,L]
+
 RewriteRule ^docs/components/tasklist/userguide/overview/(.*)$ /docs/components/tasklist/userguide/using-tasklist/$1 [R=301,L]
 RewriteRule ^docs/components/tasklist/userguide/overview$ /docs/components/tasklist/userguide/using-tasklist/ [R=301,L]
 RewriteRule ^docs/components/tasklist/introduction/(.*)$ /docs/components/tasklist/introduction-to-tasklist/$1 [R=301,L]
