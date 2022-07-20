@@ -1,7 +1,7 @@
 ---
-id: get-started
-title: "Go client - Getting started guide"
-sidebar_label: "Getting started guide"
+id: go-get-started
+title: Getting started with the Go client
+sidebar_label: "Getting started with the Go client"
 ---
 
 In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda Platform 8.

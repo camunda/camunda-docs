@@ -8,6 +8,14 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/apis-clients/overview/(.*)$ /docs/apis-clients/working-with-apis-clients/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/overview$ /docs/apis-clients/working-with-apis-clients [R=301,L]
+RewriteRule ^docs/apis-clients/tasklist-api/tutorial/(.*)$ /docs/apis-clients/tasklist-api/tasklist-api-tutorial/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/tasklist-api/overview/(.*)$ /docs/apis-clients/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/optimize-api/authorization/(.*)$ /docs/apis-clients/optimize-api/optimize-api-authorization/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/go-client/get-started/(.*)$ /docs/apis-clients/go-client/go-get-started/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/cli-client/get-started/(.*)$ /docs/apis-clients/cli-client/cli-get-started/$1 [R=301,L]
+
 RewriteRule ^docs/components/optimize/userguide/additional-features/filters/(.*)$ /docs/components/optimize/userguide/process-analysis/filters/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/rest-api/(.*)$ /docs/apis-clients/optimize-api/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/optimize-explained/(.*)$ /docs/self-managed/optimize-deployment/advanced-features/$1 [R=301,L]

@@ -1,7 +1,7 @@
 ---
-id: get-started
-title: "CLI client - Getting started guide"
-sidebar_label: "Getting started guide"
+id: cli-get-started
+title: Getting started with the CLI client
+sidebar_label: "Getting started with the CLI client"
 ---
 
 In this tutorial, you will learn to use the CLI client `zbctl` to interact with Camunda Platform 8.

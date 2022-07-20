@@ -1,12 +1,12 @@
 ---
-id: overview
+id: tasklist-api-overview
 title: Overview
-slug: /apis-clients/tasklist-api/overview
+slug: /apis-clients/tasklist-api/tasklist-api-overview
 sidebar_position: 1
 description: "Let's take a closer look at the endpoint, authentication, access token, and API usage within Tasklist."
 ---
 
-In this document, we'll go over the basics on how to consume the Tasklist GraphQL API. Read more about how to build a real world application [here](../tutorial).
+In this document, we'll go over the basics on how to consume the Tasklist GraphQL API. Read more about how to build a real world application [here](../tasklist-api-tutorial).
 
 ## Endpoint
 

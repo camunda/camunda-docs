@@ -1,7 +1,7 @@
 ---
-id: overview
+id: working-with-apis-clients
 title: "Working with APIs & Clients"
-sidebar_label: "Overview"
+sidebar_label: "Working with APIs & Clients"
 description: "Programmatically work with Camunda Platform 8 through APIs & clients"
 ---
 
@@ -46,7 +46,7 @@ Community clients supplement the official clients. These clients have not been t
 ### Official clients
 
 - [Java](java-client/index.md)
-- [Go](go-client/get-started.md)
+- [Go](go-client/go-get-started.md)
 - [CLI](cli-client/index.md)
 
 ### Community clients

@@ -1,5 +1,5 @@
 ---
-id: authorization
+id: optimize-api-authorization
 title: "Authorization"
 ---
 
