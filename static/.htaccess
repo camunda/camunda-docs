@@ -11,8 +11,7 @@ Options -Indexes -MultiViews
 RewriteRule ^docs/components/overview/(.*)$ /docs/components/components-overview/$1 [R=301,L]
 RewriteRule ^docs/components/overview$ /docs/components/components-overview/ [R=301,L]
 
-RewriteRule ^docs/components/zeebe/technical-concepts/(.*)$ /docs/components/zeebe/technical-concepts/technical-concepts-overview/$1 [R=301,L]
-RewriteRule ^docs/components/zeebe/technical-concepts$ /docs/components/zeebe/technical-concepts/technical-concepts-overview/ [R=301,L]
+RewriteRule ^docs/components/zeebe/technical-concepts/index$ /docs/components/zeebe/technical-concepts/technical-concepts-overview [R=301,L]
 
 RewriteRule ^docs/components/tasklist/userguide/overview/(.*)$ /docs/components/tasklist/userguide/using-tasklist/$1 [R=301,L]
 RewriteRule ^docs/components/tasklist/userguide/overview$ /docs/components/tasklist/userguide/using-tasklist/ [R=301,L]
@@ -24,13 +23,10 @@ RewriteRule ^docs/components/optimize/userguide/process-analysis/overview$ /docs
 RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview/(.*)$ /docs/components/optimize/userguide/decision-analysis/decision-analysis-overview/$1 [R=301,L]
 RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview$ /docs/components/optimize/userguide/decision-analysis/decision-analysis-overview/ [R=301,L]
 
-RewriteRule ^docs/components/operate/(.*)$ /docs/components/operate/operate-introduction/$1 [R=301,L]
-RewriteRule ^docs/components/operate$ /docs/components/operate/operate-introduction/ [R=301,L]
+RewriteRule ^docs/components/operate/index$ /docs/components/operate/operate-introduction [R=301,L]
 
-RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/(.*)$ /docs/components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors$ /docs/components/modeler/web-modeler/connectors/available-connectors-overview/ [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/connectors/(.*)$ /docs/components/modeler/web-modeler/connectors/introduction-to-connectors/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/connectors$ /docs/components/modeler/web-modeler/connectors/introduction-to-connectors/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/index$ /docs/components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/index$ /docs/components/modeler/web-modeler/connectors/introduction-to-connectors [R=301,L]
 
 RewriteRule ^docs/components/console/introduction/(.*)$ /docs/components/console/introduction-to-console/$1 [R=301,L]
 RewriteRule ^docs/components/console/introduction$ /docs/components/console/introduction-to-console/ [R=301,L]
