@@ -18,12 +18,6 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 - IDE (IntelliJ, VSCode, or similar)
 - Download and unzip or clone the [repo](https://github.com/camunda-cloud/camunda-cloud-tutorials), then `cd` into `camunda-cloud-tutorials/orchestrate-microservices/worker-java`
 
-### Create a cluster
-
-import CreateCluster from './assets/react-components/create-cluster.md'
-
-<CreateCluster/>
-
 ### Design your process with BPMN
 
 Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Web Modeler.
@@ -44,6 +38,12 @@ Start by designing your automated process using BPMN. This guide introduces you 
 7. On the right upper corner click the blue **Deploy diagram** button. Your diagram is now deployed to your cluster.
 8. Start a new process instance by clicking on the blue **Start instance** button.
 9. To the right of the two blue buttons, click the Application icon (honeycomb icon) button next to the **Start instance** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
+
+### Create a cluster
+
+import CreateCluster from './assets/react-components/create-cluster.md'
+
+<CreateCluster/>
 
 ### Create credentials for your Zeebe client
 

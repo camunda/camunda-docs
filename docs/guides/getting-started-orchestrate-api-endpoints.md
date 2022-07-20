@@ -13,12 +13,6 @@ The concept of a connector consists of two parts: the business logic is implemen
 
 This guide will walk you through working with a REST connector task as a first time Camunda Platform 8 user.
 
-## Create a cluster
-
-import CreateCluster from './assets/react-components/create-cluster.md'
-
-<CreateCluster/>
-
 ## Create a REST connector task
 
 To use a **REST connector** in your process, follow the steps below:
@@ -46,6 +40,12 @@ To make the **REST connector** executable, fill out the mandatory **URL** field 
 The HTTP response will be available in a temporary local response variable. This variable can be mapped to the process by specifying **Result Variable**.
 
 In the **Response Mapping** section, use `={"body" : body}` as the **Result Expression** so you can see the entire JSON object returned if it's successful.
+
+## Create a cluster
+
+import CreateCluster from './assets/react-components/create-cluster.md'
+
+<CreateCluster/>
 
 ## Deploy your process
 

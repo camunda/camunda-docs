@@ -14,12 +14,6 @@ While it may originally seem like the goal of automating a process is to remove 
 
 In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser.
 
-## Create a cluster
-
-import CreateCluster from './assets/react-components/create-cluster.md'
-
-<CreateCluster/>
-
 ## Create an automated process with user tasks
 
 To create an automated process with user tasks, take the following steps:
@@ -65,6 +59,12 @@ As mentioned earlier, you'll need to insert the defined variable values into the
 5. You can add the form to your BPMN diagram in a few ways:
    1. Within your form, click the rectangular **Copy JSON** icon to copy the form JSON to your clipboard. Navigate to your BPMN diagram, and click the appropriate user task. Within the properties panel of the user task, navigate to the **Form** section, select a **Type** of **Camunda forms** and paste your JSON into the **Form JSON configuration** field.
    2. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import**.
+
+## Create a cluster
+
+import CreateCluster from './assets/react-components/create-cluster.md'
+
+<CreateCluster/>
 
 ### Start and view your process instance
 
