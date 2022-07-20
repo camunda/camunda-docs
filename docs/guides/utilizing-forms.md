@@ -82,7 +82,7 @@ Copy the JSON schema, and go back to the BPMN diagram you modeled earlier. Selec
 
 ## Deploy your diagram and start an instance
 
-To execute your completed process diagram, click the blue **Deploy diagram** button. You can now start a new process instance to initiate your process diagram. Click the blue **Start instance** button. You can now monitor your instances in [Operate](../components/operate/index.md).
+To execute your completed process diagram, click the blue **Deploy diagram** button. You can now start a new process instance to initiate your process diagram. Click the blue **Start instance** button. You can now monitor your instances in [Operate](../components/operate/operate-introduction.md).
 
 To [complete a user task](./getting-started-orchestrate-human-tasks.md), click the honeycomb icon button next to the **Start instance** button, and **View user tasks** to automatically be taken to [Tasklist](../components/tasklist/introduction.md).
 

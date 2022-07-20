@@ -78,7 +78,7 @@ To execute your completed process diagram, click **Deploy diagram**.
 
 You can now start a new process instance to initiate your process diagram. Click **Start instance**.
 
-You can now monitor your instances in [Operate](./components/operate/index.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Operate to monitor your running instances.
+You can now monitor your instances in [Operate](./components/operate/operate-introduction.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Operate to monitor your running instances.
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
@@ -90,7 +90,7 @@ After the [user task](./getting-started-orchestrate-human-tasks.md) **Upload rec
 
 ![email via SendGrid](./img/sendgrid-email.png)
 
-In [Operate](../components/operate/index.md), you will now see the process move forward to **Review receipt**.
+In [Operate](../components/operate/operate-introduction.md), you will now see the process move forward to **Review receipt**.
 
 ![operate example](./img/operate-example.png)
 

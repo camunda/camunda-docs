@@ -222,7 +222,7 @@ module.exports = {
         },
       ],
       Operate: [
-        "components/operate/index",
+        "components/operate/operate-introduction",
         {
           "User guide": [
             "components/operate/userguide/basic-operate-navigation",

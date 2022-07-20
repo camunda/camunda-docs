@@ -14,7 +14,7 @@ https://docs.camunda.io/docs/components/console/manage-clusters/manage-alerts/
 https://docs.camunda.io/docs/components/console/manage-clusters/manage-ip-whitelists/
 https://docs.camunda.io/docs/components/concepts/variables/
 https://docs.camunda.io/docs/components/concepts/what-is-camunda-platform-8/
-https://docs.camunda.io/docs/components/operate/index/
+https://docs.camunda.io/docs/components/operate/operate-introduction/
 https://docs.camunda.io/docs/components/tasklist/introduction/
 https://docs.camunda.io/docs/guides/utilizing-forms/
 https://docs.camunda.io/docs/components/modeler/bpmn/error-events/error-events/

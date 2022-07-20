@@ -59,7 +59,7 @@ With [Tasklist](../tasklist/introduction.md), process owners can achieve end-to-
 
 ### Operate
 
-[Operate](../operate/index.md) provides transparency and real-time visibility to monitor, analyze, and resolve problems with processes running in Camunda Platform 8.
+[Operate](../operate/operate-introduction.md) provides transparency and real-time visibility to monitor, analyze, and resolve problems with processes running in Camunda Platform 8.
 
 ### Optimize
 
