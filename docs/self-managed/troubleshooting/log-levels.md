@@ -22,4 +22,4 @@ Enable logging for each component of Camunda Platform 8 using the following inst
 
 - [Zeebe](../zeebe-deployment/configuration/logging.md)
 - [Operate](../operate-deployment/operate-configuration.md/#logging)
-- [Tasklist](../tasklist-deployment/configuration.md/#logging)
+- [Tasklist](../tasklist-deployment/tasklist-configuration.md/#logging)

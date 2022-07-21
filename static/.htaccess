@@ -8,6 +8,10 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/self-managed/tasklist-deployment/authentication/(.*)$ /docs/self-managed/tasklist-deployment/tasklist-authentication/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/platform-deployment/?$ /docs/self-managed/platform-deployment/platform-8-deployment/ [R=301,L]
+
 RewriteRule ^docs/self-managed/operate-deployment/configuration/(.*)$ /docs/self-managed/operate-deployment/operate-configuration/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/authentication/(.*)$ /docs/self-managed/operate-deployment/operate-authentication/$1 [R=301,L]
 

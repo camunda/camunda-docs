@@ -466,7 +466,7 @@ module.exports = {
     "self-managed/overview",
     {
       Installation: [
-        "self-managed/platform-deployment/index",
+        "self-managed/platform-deployment/platform-8-deployment",
         {
           Kubernetes: [
             "self-managed/platform-deployment/kubernetes",
@@ -541,8 +541,8 @@ module.exports = {
       ],
       Tasklist: [
         "self-managed/tasklist-deployment/install-and-start",
-        "self-managed/tasklist-deployment/configuration",
-        "self-managed/tasklist-deployment/authentication",
+        "self-managed/tasklist-deployment/tasklist-configuration",
+        "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics",
       ],
       Optimize: [

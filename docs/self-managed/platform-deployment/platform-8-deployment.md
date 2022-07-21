@@ -1,5 +1,5 @@
 ---
-id: index
+id: platform-8-deployment
 title: "Camunda Platform 8 deployment"
 sidebar_label: "Overview"
 ---
