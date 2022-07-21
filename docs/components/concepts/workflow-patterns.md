@@ -207,7 +207,7 @@ You can find more information in [our documentation about messages](/docs/compon
 
 ### Events from subprocesses
 
-Sometimes, a subprocess needs to communicate with it's parent process without ending the subprocess yet. BPMN allows this by an [escalation event](/docs/components/modeler/bpmn/bpmn-coverage/).
+Sometimes, a subprocess needs to communicate with its parent process without ending the subprocess yet. BPMN allows this by an [escalation event](/docs/components/modeler/bpmn/bpmn-coverage/).
 
 :::note
 The escalation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in Camunda Platform 8.
