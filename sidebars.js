@@ -532,11 +532,11 @@ module.exports = {
       ],
       Operate: [
         "self-managed/operate-deployment/install-and-start",
-        "self-managed/operate-deployment/configuration",
+        "self-managed/operate-deployment/operate-configuration",
         "self-managed/operate-deployment/data-retention",
         "self-managed/operate-deployment/schema-and-migration",
         "self-managed/operate-deployment/importer-and-archiver",
-        "self-managed/operate-deployment/authentication",
+        "self-managed/operate-deployment/operate-authentication",
         "self-managed/operate-deployment/usage-metrics",
       ],
       Tasklist: [
@@ -618,7 +618,7 @@ module.exports = {
       ],
       Identity: [
         "self-managed/identity/what-is-identity",
-        "self-managed/identity/getting-started/index",
+        "self-managed/identity/getting-started/install-identity",
         {
           "User guide": [
             "self-managed/identity/user-guide/adding-an-application",
@@ -639,7 +639,7 @@ module.exports = {
             "self-managed/identity/deployment/application-monitoring",
           ],
           Troubleshooting: [
-            "self-managed/identity/troubleshooting/index",
+            "self-managed/identity/troubleshooting/troubleshoot-identity",
             "self-managed/identity/troubleshooting/common-problems",
           ],
         },

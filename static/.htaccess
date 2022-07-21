@@ -8,6 +8,12 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/self-managed/operate-deployment/configuration/(.*)$ /docs/self-managed/operate-deployment/operate-configuration/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/authentication/(.*)$ /docs/self-managed/operate-deployment/operate-authentication/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/troubleshooting/?$ /docs/self-managed/identity/troubleshooting/troubleshoot-identity/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/getting-started/?$ /docs/self-managed/identity/getting-started/install-identity/ [R=301,L]
+
 RewriteRule ^docs/components/overview/(.*)$ /docs/components/components-overview/$1 [R=301,L]
 RewriteRule ^docs/components/overview$ /docs/components/components-overview/ [R=301,L]
 

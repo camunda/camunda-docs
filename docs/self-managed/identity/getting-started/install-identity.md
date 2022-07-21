@@ -1,5 +1,5 @@
 ---
-id: index
+id: install-identity
 title: "Installation and first steps"
 sidebar_label: "Installation and first steps"
 ---
