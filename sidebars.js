@@ -463,7 +463,7 @@ module.exports = {
     "reference/dependencies",
   ],
   "Self-Managed": [
-    "self-managed/overview",
+    "self-managed/about-self-managed",
     {
       Installation: [
         "self-managed/platform-deployment/platform-8-deployment",
@@ -495,7 +495,7 @@ module.exports = {
     },
     {
       Zeebe: [
-        "self-managed/zeebe-deployment/index",
+        "self-managed/zeebe-deployment/zeebe-installation",
         {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
@@ -516,7 +516,7 @@ module.exports = {
         },
         {
           Operation: [
-            "self-managed/zeebe-deployment/operations/index",
+            "self-managed/zeebe-deployment/operations/zeebe-in-production",
             "self-managed/zeebe-deployment/operations/resource-planning",
             "self-managed/zeebe-deployment/operations/network-ports",
             "self-managed/zeebe-deployment/operations/setting-up-a-cluster",

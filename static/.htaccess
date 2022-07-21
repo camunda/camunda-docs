@@ -8,6 +8,12 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/self-managed/overview/(.*)$ /docs/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/self-managed/overview$ /docs/self-managed/about-self-managed/ [R=301,L]
+
+RewriteRule ^docs/self-managed/zeebe-deployment/?$ /docs/self-managed/zeebe-deployment/zeebe-installation/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/operations/?$ /docs/self-managed/zeebe-deployment/operations/zeebe-in-production/ [R=301,L]
+
 RewriteRule ^docs/self-managed/tasklist-deployment/configuration/(.*)$ /docs/self-managed/tasklist-deployment/tasklist-configuration/$1 [R=301,L]
 RewriteRule ^docs/self-managed/tasklist-deployment/authentication/(.*)$ /docs/self-managed/tasklist-deployment/tasklist-authentication/$1 [R=301,L]
 

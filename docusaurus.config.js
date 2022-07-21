@@ -76,7 +76,7 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "self-managed/overview",
+          docId: "self-managed/about-self-managed",
           label: "Self-Managed",
           position: "left",
         },
