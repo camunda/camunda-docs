@@ -1,7 +1,7 @@
 ---
 ---
 
-You must create a cluster if you have a new Camunda Platform 8 account.
+You must create a cluster if you have a new Camunda Platform 8 account. Otherwise, if you want to deploy a diagram, you will be redirected to the cluster creation first of all.
 
 1. To create a cluster, go to **Console**, click the **Clusters** tab, and click **Create New Cluster**.
 2. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation. Click **Create**.
