@@ -39,7 +39,7 @@ A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, and Id
 Follow the instructions in the [README](https://github.com/camunda/camunda-platform#using-docker-compose).
 
 :::warning
-While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](../kubernetes) in production, see also [Installation Overview](./).
+While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](./kubernetes.md) in production, see also [Installation Overview](./).
 :::
 
 This Docker Compose configuration serves two purposes:
@@ -48,7 +48,7 @@ This Docker Compose configuration serves two purposes:
 2. It documents how the various components need to be wired together.
 
 :::note
-We recommend to use [Helm + KIND](../kubernetes-helm/#installing-the-camunda-helm-chart-locally-using-kind) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
+We recommend to use [Helm + KIND](./kubernetes-helm.md#installing-the-camunda-helm-chart-locally-using-kind) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
 :::
 
 ## Configuration hints

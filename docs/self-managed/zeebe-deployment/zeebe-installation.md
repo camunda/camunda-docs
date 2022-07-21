@@ -4,7 +4,7 @@ title: "Installation"
 sidebar_label: "Overview"
 ---
 
-Please refer to the [Installation Guide](/docs/self-managed/platform-deployment/) for details on how to install Zeebe in a private cloud or on your own hardware.
+Please refer to the [Installation Guide](/docs/self-managed/platform-deployment/platform-8-deployment) for details on how to install Zeebe in a private cloud or on your own hardware.
 
 Within this section you will find detailed information about:
 
