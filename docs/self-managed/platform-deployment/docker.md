@@ -17,7 +17,7 @@ The provided Docker images are supported for production usage only on Linux syst
 | --------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | Zeebe     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)       | [Environment variables](../../zeebe-deployment/configuration/environment-variables/)                  |
 | Operate   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)   | [Operate configuration](../../operate-deployment/operate-configuration)                               |
-| Tasklist  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist) | [Tasklist configuration](../../tasklist-deployment/configuration)                                     |
+| Tasklist  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist) | [Tasklist configuration](../../tasklist-deployment/tasklist-configuration)                            |
 | Identity  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity) | [Configuration variables](../../identity/deployment/configuration-variables/)                         |
 | Optimize  | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize) | [Environment variables](../../optimize-deployment/install-and-start/#available-environment-variables) |
 
