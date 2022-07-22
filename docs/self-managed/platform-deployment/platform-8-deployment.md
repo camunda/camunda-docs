@@ -1,7 +1,7 @@
 ---
 id: platform-8-deployment
 title: "Camunda Platform 8 deployment"
-sidebar_label: "Overview"
+sidebar_label: "Deployment"
 ---
 
 This chapter contains information for users who want to deploy and run Camunda Platform 8 Self-Managed, typically in your self-controlled cloud (public or private) or even on your own hardware.
