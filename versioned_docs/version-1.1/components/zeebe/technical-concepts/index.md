@@ -15,4 +15,4 @@ This chapter gives an overview of Zeebe's underlying technical concepts.
 - [Exporters](exporters.md) - discusses the extension point to add additional processing logic for each record in the event stream.
 
 
-In addition to these sections, you may also be interested in Camunda Cloud [Best Practices](././components/best-practices.md).
+In addition to these sections, you may also be interested in Camunda Cloud [Best Practices](/components/best-practices.md).
