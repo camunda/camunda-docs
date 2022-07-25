@@ -1,5 +1,5 @@
 ---
-id: authentication
+id: tasklist-authentication
 title: Authentication
 description: "Let's take a closer look at the authentication methods of Tasklist."
 ---

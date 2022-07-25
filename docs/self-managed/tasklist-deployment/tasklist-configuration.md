@@ -1,5 +1,5 @@
 ---
-id: configuration
+id: tasklist-configuration
 title: Configuration
 ---
 
@@ -8,12 +8,26 @@ Tasklist is a Spring Boot application. This means all provided ways to [configur
 By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist-related settings are prefixed with `camunda.tasklist`. The following components are configurable:
 
 - [Webserver](#webserver)
-- [Elasticsearch connection](#elasticsearch)
-- [Zeebe Broker connection](#zeebe-broker-connection)
+- [Elasticsearch](#elasticsearch)
+  - [Settings to connect](#settings-to-connect)
+    - [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
+  - [Settings for shards and replicas](#settings-for-shards-and-replicas)
+  - [A snippet from application.yml](#a-snippet-from-applicationyml)
+- [Zeebe broker connection](#zeebe-broker-connection)
+  - [Settings to connect](#settings-to-connect-1)
+  - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
 - [Zeebe Elasticsearch exporter](#zeebe-elasticsearch-exporter)
-- [Authentication](authentication.md)
+  - [Settings to connect and import](#settings-to-connect-and-import)
+  - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
 - [Monitoring and health probes](#monitoring-and-health-probes)
-- [Logging configuration](#logging)
+  - [Example snippets to use Tasklist probes in Kubernetes](#example-snippets-to-use-tasklist-probes-in-kubernetes)
+    - [Readiness probe as yaml config](#readiness-probe-as-yaml-config)
+    - [Liveness probe as yaml config](#liveness-probe-as-yaml-config)
+- [Logging](#logging)
+  - [JSON logging configuration](#json-logging-configuration)
+  - [Change logging level at runtime](#change-logging-level-at-runtime)
+    - [Set all Tasklist loggers to DEBUG](#set-all-tasklist-loggers-to-debug)
+- [An example of application.yml file](#an-example-of-applicationyml-file)
 
 ## Webserver
 

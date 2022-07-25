@@ -1,16 +1,16 @@
 ---
-id: index
+id: zeebe-installation
 title: "Installation"
 sidebar_label: "Overview"
 ---
 
-Please refer to the [Installation Guide](/docs/self-managed/platform-deployment/) for details on how to install Zeebe in a private cloud or on your own hardware.
+Please refer to the [Installation Guide](/docs/self-managed/platform-deployment/platform-8-deployment) for details on how to install Zeebe in a private cloud or on your own hardware.
 
 Within this section you will find detailed information about:
 
 - [Configuration](configuration/configuration.md) - Explains the configuration options. These configuration options apply to both environments, but not to Camunda Platform 8. In Camunda Platform 8, the configuration is provided for you.
 - [Security](security/security.md) - Discusses the security aspects of running Zeebe and how to use them.
-- [Operation](operations/index.md) - Outlines topics that become relevant when you want to operate Zeebe in production.
+- [Operation](operations/zeebe-in-production.md) - Outlines topics that become relevant when you want to operate Zeebe in production.
 
 :::note
 New to BPMN and want to learn more before moving forward? [Visit our Get Started Guides](/docs/guides/getting-started/) to learn about BPMN and orchestration.

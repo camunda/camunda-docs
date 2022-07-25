@@ -41,7 +41,7 @@ const features2 = [
   {
     title: "Self-Managed",
     imageUrl: "img/self-managed.png",
-    url: "https://docs.camunda.io/docs/self-managed/overview/",
+    url: "https://docs.camunda.io/docs/self-managed/about-self-managed/",
     description: (
       <>
         A self-hosted Camunda Platform 8 alternative, offering everything you
