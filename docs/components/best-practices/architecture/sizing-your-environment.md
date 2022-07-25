@@ -68,13 +68,27 @@ The closer you push throughput to the limits, the more latency you will get. Thi
 | Tasks per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day                                |
 | Tasks per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases |
 
+### Payload size
+
+Every process instance can hold payload (known as [process variables](/docs/components/concepts/variables/)). The payload of all running process instances needs to be managed by the runtime workflow engine, and all data of running and ended process instances is also also sent Operate and Optimize.
+
+The data you attach to a process instance (process variables) will influence disk space requirements. For example, it makes a big difference if you only add one or two strings (requiring ~ 1kb of space) to your process instances, or a full JSON document containing 1MB.
+
+The payload size is an important factor when looking at sizing. There are a couple of rule of thumbs regarding payload size:
+
+* The maximum [variable size per process instance is limited](/docs/components/concepts/variables/#variable-size-limitation), currently to roughly 3 MiB.
+* We don't recommend storing much data in your process context. See our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
+* Every [partition](/docs/components/zeebe/technical-concepts/partitions/) of the Zeebe installation can typically handle up to 2 GiB, if you have bigger amounts of data you should create more partitions. For example, if you run one million process instance with 4 KiB of data each, you end up requiring 3.9 GiB, so you need at least two partitions.
+
+Additionally, the payload size also affects disp space requirements, discussed next.
+
 ### Disk space
 
 The workflow engine itself will store data along every process instance, especially to keep the current state persistent. This is unavoidable. In case there are human tasks, data is also sent to Tasklist and kept there, until tasks are completed.
 
 Furthermore, data is also sent Operate and Optimize, which store data in Elasticsearch. These tools keep historical audit data for some time. The total amount of disk space can be reduced by using **data retention settings**. We typically delete data in Operate after 30 to 90 days, but keep it in Optimize for a longer period of time to allow more analysis. A good rule of thumb is something between 6 and 18 months.
 
-The data you attach to a process instance (process variables) will influence disk space requirements. For example, it makes a big difference if you only add one or two strings (requiring ~ 1kb of space) to your process instances, or a full JSON document containing 1MB.
+
 
 :::note
 Elasticsearch needs enough memory available to load a large amount of this data into memory.
