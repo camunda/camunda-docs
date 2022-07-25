@@ -18,7 +18,7 @@ With Zeebe you can:
 - Export processes data for monitoring and analysis (currently only available through the [Elasticsearch exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter) added in Camunda Platform 8 Self-Managed).
 - Engage with an active community.
 
-For documentation on deploying Zeebe as part of Camunda Platform 8 Self-Managed, refer to the [deployment guide](../../self-managed/zeebe-deployment/index.md).
+For documentation on deploying Zeebe as part of Camunda Platform 8 Self-Managed, refer to the [deployment guide](../../self-managed/zeebe-deployment/zeebe-installation.md).
 
 ## Enterprise support for Zeebe
 

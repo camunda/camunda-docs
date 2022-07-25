@@ -1,5 +1,5 @@
 ---
-id: index
+id: troubleshoot-identity
 title: "Troubleshooting Identity"
 sidebar_label: "Overview"
 ---

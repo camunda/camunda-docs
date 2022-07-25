@@ -1,5 +1,5 @@
 ---
-id: configuration
+id: operate-configuration
 title: Configuration
 ---
 
@@ -13,7 +13,7 @@ By default, the configuration for Operate is stored in a YAML file (`application
 - [Zeebe Broker connection](#zeebe-broker-connection)
 - [Zeebe Elasticsearch Exporter](#zeebe-elasticsearch-exporter)
 - [Operation Executor](#operation-executor)
-- [Authentication](authentication.md)
+- [Authentication](operate-authentication.md)
 - [Scaling Operate](importer-and-archiver.md)
 - [Monitoring possibilities](#monitoring-operate)
 - [Logging configuration](#logging)

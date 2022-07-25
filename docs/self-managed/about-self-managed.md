@@ -1,5 +1,5 @@
 ---
-id: overview
+id: about-self-managed
 title: "Camunda Platform 8 Self-Managed"
 ---
 
