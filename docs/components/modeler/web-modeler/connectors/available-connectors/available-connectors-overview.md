@@ -8,5 +8,6 @@ This section gives an overview of the **connectors** available in Camunda Platfo
 
 - [REST connector](rest.md) - allows you to make a request to a REST API and use the response in the next steps of your process.
 - [SendGrid connector](sendgrid.md) - allows you to quickly and easily send emails from your BPMN processes.
+- [Slack connector](slack.md) - allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
 In addition to these sections, you may also be interested in how to configure [connector Secrets](../../../../console/manage-clusters/manage-secrets.md).
