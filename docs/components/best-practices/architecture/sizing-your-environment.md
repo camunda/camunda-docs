@@ -72,15 +72,15 @@ The closer you push throughput to the limits, the more latency you will get. Thi
 
 Every process instance can hold payload (known as [process variables](/docs/components/concepts/variables/)). The payload of all running process instances needs to be managed by the runtime workflow engine, and all data of running and ended process instances is also also sent Operate and Optimize.
 
-The data you attach to a process instance (process variables) will influence disk space requirements. For example, it makes a big difference if you only add one or two strings (requiring ~ 1kb of space) to your process instances, or a full JSON document containing 1MB.
+The data you attach to a process instance (process variables) will influence resource requirements. For example, it makes a big difference if you only add one or two strings (requiring ~ 1kb of space) to your process instances, or a full JSON document containing 1MB. Hence, the payload size is an important factor when looking at sizing. 
 
-The payload size is an important factor when looking at sizing. There are a couple of rule of thumbs regarding payload size:
+There are a couple of rule of thumbs regarding payload size:
 
 * The maximum [variable size per process instance is limited](/docs/components/concepts/variables/#variable-size-limitation), currently to roughly 3 MiB.
 * We don't recommend storing much data in your process context. See our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
-* Every [partition](/docs/components/zeebe/technical-concepts/partitions/) of the Zeebe installation can typically handle up to 2 GiB, if you have bigger amounts of data you should create more partitions. For example, if you run one million process instance with 4 KiB of data each, you end up requiring 3.9 GiB, so you need at least two partitions.
+* Every [partition](/docs/components/zeebe/technical-concepts/partitions/) of the Zeebe installation can typically handle up to 1 GiB of payload in total. Bigger payloads can lead to slower processing. For example, if you run one million process instance with 4 KiB of data each, you end up with 3.9 GiB of data, so you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which per default is three. 
 
-Additionally, the payload size also affects disp space requirements, discussed next.
+The payload size also affects disp space requirements, discussed next.
 
 ### Disk space
 
