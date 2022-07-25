@@ -5,7 +5,7 @@ title: "Writing tests"
 You can use the `zeebe-test` module to write JUnit tests for your job worker and BPMN process. This provides a JUnit rule to bootstrap the broker and some basic assertions.
 
 :::note
-`zeebe-test` is [deprecated for removal](./reference/announcements.md).
+`zeebe-test` is [deprecated for removal](/reference/announcements.md).
 :::
 
 ## Usage in a Maven project
