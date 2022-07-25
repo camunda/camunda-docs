@@ -13,7 +13,7 @@ Connectors technically consist of two parts: the business logic is implemented a
 
 ## Set up
 
-We'll implement our connector with [Modeler](../components/modeler/about-modeler.md). To get started, ensure you’ve [created a Camunda Platform 8 account](./guides/create-account.md).
+We'll implement our connector with [Modeler](../components/modeler/about-modeler.md). To get started, ensure you’ve [created a Camunda Platform 8 account](/guides/create-account.md).
 
 You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if you don't have one already, as we'll use SendGrid in our example connector. Once you've created your account, you will immediately be prompted to create a [sender](https://docs.sendgrid.com/ui/sending-email/senders).
 
@@ -78,7 +78,7 @@ To execute your completed process diagram, click **Deploy diagram**.
 
 You can now start a new process instance to initiate your process diagram. Click **Start instance**.
 
-You can now monitor your instances in [Operate](./components/operate/operate-introduction.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Operate to monitor your running instances.
+You can now monitor your instances in [Operate](components/operate/operate-introduction.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Operate to monitor your running instances.
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
