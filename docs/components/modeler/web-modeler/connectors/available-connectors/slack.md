@@ -1,7 +1,7 @@
 ---
 id: slack
 title: Slack connector
-description: The Slack connector allows you to send messages to channels or users in your Slack workspace from your BPMN process.
+description: Send messages to channels or users in your Slack workspace from your BPMN process.
 ---
 
 The **Slack connector** allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
@@ -20,10 +20,10 @@ To make the **Slack connector** executable, fill out the mandatory fields highli
 
 ![slack connector red properties](../img/connectors-slack-red-properties.png)
 
-1. Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, 'secrets.SLACK_OAUTH_TOKEN`
+1. Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, 'secrets.SLACK_OAUTH_TOKEN`.
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
-   2. A **user** is specified by a user name starting with an `@` symbol (for example, `@myUser`).
+   2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
 3. Set **Message** to the message string you would like to send (for example, `Hello World!`)
 
 The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](../../../../concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
@@ -89,4 +89,4 @@ The **Slack connector** uses an OAuth bearer token (for example, the Slack app b
 We advise you to keep your Slack bot token safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../../../console/manage-clusters/manage-secrets.md).
-2. Name your secret `SLACK_OAUTH_TOKEN` so you can easily reference it later in the connector.
+2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the connector.

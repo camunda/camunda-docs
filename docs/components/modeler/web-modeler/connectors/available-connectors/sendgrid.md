@@ -1,14 +1,14 @@
 ---
 id: sendgrid
 title: SendGrid connector
-description: Working with SendGrid connector
+description: Quickly send emails from your BPMN processes.
 ---
 
-The **SendGrid connector** allows you to quickly and easily send emails from your BPMN processes.
+The **SendGrid connector** allows you to quickly send emails from your BPMN processes.
 
 ## Prerequisites
 
-To use the SendGrid connector a SendGrip API key is needed. Please follow [these steps](#appendix) in case you do not have a SendGrid account or API key [secret configured](#create-a-new-connector-secret) in your cluster.
+To use the SendGrid connector, a SendGrid API key is needed. Follow [these steps](#appendix) if you do not have a SendGrid account or API key [secret configured](#create-a-new-connector-secret) in your cluster.
 
 ## SendGrid connector
 
@@ -21,7 +21,7 @@ The SendGrid connector comes with two options:
 
 #### Create a SendGrid Email Connector Task
 
-To use a **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email** connector task by using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
+To use a **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email** connector task using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
 
 #### Make your SendGrid Email Connector executable
 
@@ -41,7 +41,7 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
 ![sendgrid email connector complete properties](../img/connectors-sendgrid-email-complete-properties.png)
 
 :::note
-Now you can simply [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors the run-time is available out of the box in Camunda 8 SaaS.
+Now you can [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors, the runtime is available out of the box in Camunda Platform 8 SaaS.
 :::
 
 ### SendGrid Email Template Connector
@@ -54,9 +54,9 @@ Send an email via SendGrid Dynamic Template and use the [Handlebars templating l
 2. Add a unique template name and click **Save**.
 3. To begin editing your new template, click **Add Version**.
 4. Select an editor and click **Continue**.
-5. Design your template. For more information on using Handlebars, click [here](https://docs.sendgrid.com/for-developers/sending-email/using-handlebars).
+5. Design your template. Find more information on using Handlebars [here](https://docs.sendgrid.com/for-developers/sending-email/using-handlebars).
 
-In our example template we will use the following subject and body:
+In our example template, we will use the following subject and body:
 
 ```text
 Subject:
@@ -75,17 +75,17 @@ The Camunda Team
 
 In our example template, we will use the following Handlebars:
 
-`{{name}}` - the name of the user requesting the weather report
+`{{name}}` - The name of the user requesting the weather report
 
-`{{location}}` - the location used for the weather report
+`{{location}}` - The location used for the weather report
 
-`{{weather}}` - the current weather condition
+`{{weather}}` - The current weather condition
 
-`{{actual-temp}}` - the measured temperature
+`{{actual-temp}}` - The measured temperature
 
-`{{feel-temp}}` - how the temperature feels like in reality
+`{{feel-temp}}` - How the temperature feels like in reality
 
-While you are editing your template you can test how your email would look by switching to **Preview** mode, choosing **{} Show Test Data**, and then providing the necessary data:
+While you are editing your template, you can test how your email would look by switching to **Preview** mode, choosing **{} Show Test Data**, and then providing the necessary data:
 
 ![sendgrid email template test](../img/connectors-sendgrid-email-template-test-data.png)
 
@@ -136,14 +136,14 @@ If you want to provide dynamic content in the email via process variables, you c
 ```
 
 :::note
-Now you can simply [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors the run-time is available out of the box in Camunda 8 SaaS.
+Now you can [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors, the runtime is available out of the box in Camunda Platform 8 SaaS.
 :::
 
 ## Appendix
 
 ### Create a SendGrid account
 
-To use the **SendGrid connector**, create a free account in SendGrid if you do not have one yet.
+To use the **SendGrid connector**, create a free account in SendGrid if you do not have one yet:
 
 1. Go to [https://signup.sendgrid.com/](https://signup.sendgrid.com/).
 2. Set up the account with your email and choose a password.
@@ -190,4 +190,4 @@ To create an API key in SendGrid, take the following steps:
 We advise you to keep your API key safe and avoid exposing it in the BPMN `xml` file by creating a Secret:
 
 1. Follow our [guide for creating Secrets](../../../../console/manage-clusters/manage-secrets.md).
-2. Name your Secret `SEND_GRID_API_KEY` so you can easily reference it later in our connector.
+2. Name your Secret `SEND_GRID_API_KEY` so you can reference it later in the connector.
