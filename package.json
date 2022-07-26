@@ -18,7 +18,8 @@
     "serve": "docusaurus serve",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "playwright test"
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.10.2",
@@ -44,8 +45,10 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.24.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
+    "playwright": "^1.24.1",
     "prettier": "2.7.1"
   },
   "lint-staged": {
