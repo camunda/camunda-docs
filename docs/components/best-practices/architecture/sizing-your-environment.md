@@ -63,7 +63,7 @@ The closer you push throughput to the limits, the more latency you will get. Thi
 
 | Indicator                                          |    Number | Calculation method | Comment                                                                                 |
 | :------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
-| Onboarding instances per year                      | 5,000,000 |                    | Business input, but irrelevant                                                          |
+| Onboarding instances per yea                    | 5,000,000 |                    | Business input, but irrelevant                                                          |
 | Expected process instances on peak day             |   150,000 |                    | Business input                                                                          |
 | Tasks per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day                                |
 | Tasks per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases |
