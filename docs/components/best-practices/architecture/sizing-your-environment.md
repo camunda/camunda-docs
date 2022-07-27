@@ -40,8 +40,8 @@ The number of tasks per process allows you to calculate the required number of *
 | :--------------------------------- | --------: | :----------------: | :------------------------------------------ |
 | Onboarding instances per year      | 5,000,000 |                    | Business input                              |
 | Process instances per business day |    20,000 |       / 250        | average number of working days in a year    |
-| Tasks per day                      |     4,000 |        / 5         | Tasks in the process model as counted above |
-| Tasks per second                   |      0.05 |   / (24\*60\*60)   | Seconds per day                             |
+| Tasks per day                      |   100,000 |        \* 5        | Tasks in the process model as counted above |
+| Tasks per second                   |      1.16 |   / (24\*60\*60)   | Seconds per day                             |
 
 In most cases, we define throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second.
 
@@ -61,12 +61,12 @@ While the cycle time of service tasks depends very much on what you do in these 
 
 The closer you push throughput to the limits, the more latency you will get. This is basically, because the different requests compete for hardware resources, especially disk write operations. As a consequence, whenever cycle time and latency matters to you, you should plan for hardware buffer to not utilize your cluster too much. This makes sure, your latency does not go up because of resource contention. A good rule of thumb is to multiply your average load by 20. This means, you cannot only accomodate unexpected peak loads, but also have more free resources on average, keeping latency down.
 
-| Indicator                                          |    Number | Calculation method | Comment                                                                                 |
-| :------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
-| Onboarding instances per year                      | 5,000,000 |                    | Business input, but irrelevant                                                          |
-| Expected process instances on peak day             |   150,000 |                    | Business input                                                                          |
-| Tasks per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day                                |
-| Tasks per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases |
+| Indicator                                                      |    Number | Calculation method | Comment                                                                                 |
+| :------------------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
+| Onboarding instances per year                                  | 5,000,000 |                    | Business input, but irrelevant                                                          |
+| Expected process instances on peak day                         |   150,000 |                    | Business input                                                                          |
+| Process instances per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day                                |
+| Process instances per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases |
 
 ### Payload size
 
