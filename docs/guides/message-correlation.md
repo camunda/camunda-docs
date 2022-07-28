@@ -51,28 +51,15 @@ The concrete value of the message `correlationKey` is matched against running wo
 To run the demonstration, take the following steps:
 
 1. Clone this repository.
-
 2. Install dependencies:
-
-:::note
-
-This guides requires `npm` version 6.
-
-:::
-
-```
-npm i && npm i -g ts-node typescript
-```
-
+   :::note
+   This guide requires `npm` version 6.
+   :::
+   `npm i && npm i -g ts-node typescript`
 3. In another terminal, start the Zeebe Broker in addition to [simple-monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor).
-
 4. Deploy the workflow and start an instance:
-
-```
-ts-node start-workflow.ts
-```
-
-This starts a workflow instance with the `orderId` set to 345:
+   `ts-node start-workflow.ts`
+   This starts a workflow instance with the `orderId` set to 345:
 
 ```typescript
 await zbc.createProcessInstance("test-messaging", {
@@ -83,43 +70,22 @@ await zbc.createProcessInstance("test-messaging", {
 ```
 
 5. Open Simple Monitor at [http://localhost:8082](http://localhost:8082).
-
 6. Click on the workflow instance. You will see the current state of the workflow:
-
-![workflow state](img/message-correlation-workflow-state.png)
-
-The numbers above the BPMN symbols indicate that no tokens are waiting at the start event, and one has passed through. One token is waiting at the **Collect Money** task, and none have passed through.
-
+   ![workflow state](img/message-correlation-workflow-state.png)
+   The numbers above the BPMN symbols indicate that no tokens are waiting at the start event, and one has passed through. One token is waiting at the **Collect Money** task, and none have passed through.
 7. Take a look at the **Variables** tab at the bottom of the screen. (If you don't see it, you are probably looking at the workflow, rather than the instance. In that case, drill down into the instance):
-
-![message correlation variables](img/message-correlation-variables.png)
-
-You can see that this workflow instance has the variable `orderId` set to the value 345.
-
+   ![message correlation variables](img/message-correlation-variables.png)
+   You can see that this workflow instance has the variable `orderId` set to the value 345.
 8. Start the workers:
-
-```
-ts-node workers.ts
-```
-
+   `ts-node workers.ts`
 9. Refresh Simple Monitor to see the current state of the workflow:
-
-![message correlation wait on message](img/message-correlation-wait-on-message.png)
-
-Now, the token is at the message catch event, waiting for a message to be correlated.
-
+   ![message correlation wait on message](img/message-correlation-wait-on-message.png)
+   Now, the token is at the message catch event, waiting for a message to be correlated.
 10. Take a look at the **Message Subscriptions** tab:
-
-![message subscriptions](img/message-correlation-message-subscriptions.png)
-
-You can see the broker has opened a message subscription for this workflow instance with the concrete value of the `orderId` 345. This was created when the token entered the message catch event.
-
+    ![message subscriptions](img/message-correlation-message-subscriptions.png)
+    You can see the broker has opened a message subscription for this workflow instance with the concrete value of the `orderId` 345. This was created when the token entered the message catch event.
 11. Send the message in another terminal:
-
-```
-ts-node send-message.ts
-```
-
+    `ts-node send-message.ts`
 12. Refresh Simple Monitor, and note that the message has been correlated and the workflow has run to completion:
 
 ![message correlation completed](img/message-correlation-completed.png)
