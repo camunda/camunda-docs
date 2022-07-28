@@ -5,7 +5,7 @@ title: Getting familiar with Operate
 
 This section and the next section, “Variables and incidents,” assumes you’ve deployed a process to Zeebe and created at least one process instance. 
 
-If you’re not sure how to deploy processes or create instances, we recommend going through the [getting started tutorial](./guides/getting-started/model-your-first-process.md).
+If you’re not sure how to deploy processes or create instances, we recommend going through the [getting started tutorial](/guides/getting-started/model-your-first-process.md).
 
 In the following sections, we’ll use the same `order-process.bpmn` process model from the getting started tutorial. 
 

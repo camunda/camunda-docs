@@ -20,7 +20,7 @@ While you can incorporate Camunda Forms solely within Camunda Cloud, you can als
 
 ### Create new form
 
-To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Desktop Modeler](./components/modeler/about.md) and take the following steps:
+To start building a form, log in to your [Camunda Cloud](./getting-started/create-camunda-cloud-account.md) account or open [Desktop Modeler](/components/modeler/about.md) and take the following steps:
 
 1. Click on the **Modeler** tab at the top of the page or alternatively open the **File** menu in Desktop Modeler.
 2. Open any project from your Web Modeler home view.
@@ -91,6 +91,6 @@ Then, open Tasklist to claim the task, fill in the form, and complete the task.
 
 ## Additional resources
 
-- [Desktop and Web Modeler](./components/modeler/about.md)
+- [Desktop and Web Modeler](/components/modeler/about.md)
 - [Model your first process](./getting-started/model-your-first-process.md)
-- [User task reference](./components/modeler/bpmn/user-tasks/user-tasks.md)
+- [User task reference](/components/modeler/bpmn/user-tasks/user-tasks.md)

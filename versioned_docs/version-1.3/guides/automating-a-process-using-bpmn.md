@@ -83,9 +83,9 @@ To execute your completed process diagram, click the blue **Deploy Diagram** but
 
 You can now start a new process instance to initiate your process diagram. Click the blue **Start Instance** button.
 
-You can now monitor your instances in [Operate](./components/operate/index.md). From your diagram, click the honeycomb icon button next to the Start Instance button, and **View Process Instances**. This will automatically take you to Camunda Operate to monitor your running instances.
+You can now monitor your instances in [Operate](/components/operate/index.md). From your diagram, click the honeycomb icon button next to the Start Instance button, and **View Process Instances**. This will automatically take you to Camunda Operate to monitor your running instances.
 
-You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the **Start Instance** button, and **View User Tasks** to automatically be taken to [Tasklist](./components/tasklist/introduction.md).
+You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the **Start Instance** button, and **View User Tasks** to automatically be taken to [Tasklist](/components/tasklist/introduction.md).
 
 ## Additional resources and next steps
 
@@ -94,5 +94,5 @@ You can also visit an ongoing list of user tasks required in your BPMN diagram. 
 - [BPMN Engine](https://camunda.com/products/camunda-platform/bpmn-engine/)
 - [Model Your First Process](./getting-started/model-your-first-process.md)
 - [BPMN Reference](../components/modeler/bpmn/bpmn.md)
-- [Operate](./components/operate/index.md)
-- [Tasklist](./components/tasklist/introduction.md)
+- [Operate](/components/operate/index.md)
+- [Tasklist](/components/tasklist/introduction.md)
