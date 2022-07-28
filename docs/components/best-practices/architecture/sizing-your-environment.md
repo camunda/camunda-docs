@@ -40,8 +40,8 @@ The number of tasks per process allows you to calculate the required number of *
 | :--------------------------------- | --------: | :----------------: | :------------------------------------------ |
 | Onboarding instances per year      | 5,000,000 |                    | Business input                              |
 | Process instances per business day |    20,000 |       / 250        | average number of working days in a year    |
-| Tasks per day                      |     4,000 |        / 5         | Tasks in the process model as counted above |
-| Tasks per second                   |      0.05 |   / (24\*60\*60)   | Seconds per day                             |
+| Tasks per day                      |   100,000 |        \* 5        | Tasks in the process model as counted above |
+| Tasks per second                   |      1.16 |   / (24\*60\*60)   | Seconds per day                             |
 
 In most cases, we define throughput per day, as this time frame is easier to understand. But in high-performance use cases you might need to define the throughput per second.
 
@@ -61,12 +61,26 @@ While the cycle time of service tasks depends very much on what you do in these 
 
 The closer you push throughput to the limits, the more latency you will get. This is basically, because the different requests compete for hardware resources, especially disk write operations. As a consequence, whenever cycle time and latency matters to you, you should plan for hardware buffer to not utilize your cluster too much. This makes sure, your latency does not go up because of resource contention. A good rule of thumb is to multiply your average load by 20. This means, you cannot only accomodate unexpected peak loads, but also have more free resources on average, keeping latency down.
 
-| Indicator                                          |    Number | Calculation method | Comment                                                                                 |
-| :------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
-| Onboarding instances per year                      | 5,000,000 |                    | Business input, but irrelevant                                                          |
-| Expected process instances on peak day             |   150,000 |                    | Business input                                                                          |
-| Tasks per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day                                |
-| Tasks per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases |
+| Indicator                                                      |    Number | Calculation method | Comment                                                                                 |
+| :------------------------------------------------------------- | --------: | :----------------: | :-------------------------------------------------------------------------------------- |
+| Onboarding instances per year                                  | 5,000,000 |                    | Business input, but irrelevant                                                          |
+| Expected process instances on peak day                         |   150,000 |                    | Business input                                                                          |
+| Process instances per second within business hours on peak day |      5.20 |   / (8\*60\*60)    | Only looking at seconds of the 8 business hours of a day                                |
+| Process instances per second including buffer                  |    104.16 |       \* 20        | Adding some buffer is recommended in critical high-performance or low-latency use cases |
+
+### Payload size
+
+Every process instance can hold a payload (known as [process variables](/docs/components/concepts/variables/)). The payload of all running process instances must be managed by the runtime workflow engine, and all data of running and ended process instances is also forwarded to Operate and Optimize.
+
+The data you attach to a process instance (process variables) influences resource requirements. For example, it makes a big difference if you only add one or two strings (requiring around 1 KB of space) to your process instances, or a full JSON document containing 1 MB. Hence, the payload size is an important factor when looking at sizing.
+
+There are a few general rules regarding payload size:
+
+- The maximum [variable size per process instance is limited](/docs/components/concepts/variables/#variable-size-limitation), currently to roughly 3 MB.
+- We don't recommend storing much data in your process context. See our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
+- Every [partition](/docs/components/zeebe/technical-concepts/partitions/) of the Zeebe installation can typically handle up to 1 GB of payload in total. Larger payloads can lead to slower processing. For example, if you run one million process instances with 4 KB of data each, you end up with 3.9 GB of data, and you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which by default is three.
+
+The payload size also affects disk space requirements, as described in the next section.
 
 ### Disk space
 
@@ -74,7 +88,9 @@ The workflow engine itself will store data along every process instance, especia
 
 Furthermore, data is also sent Operate and Optimize, which store data in Elasticsearch. These tools keep historical audit data for some time. The total amount of disk space can be reduced by using **data retention settings**. We typically delete data in Operate after 30 to 90 days, but keep it in Optimize for a longer period of time to allow more analysis. A good rule of thumb is something between 6 and 18 months.
 
-The data you attach to a process instance (process variables) will influence disk space requirements. For example, it makes a big difference if you only add one or two strings (requiring ~ 1kb of space) to your process instances, or a full JSON document containing 1MB.
+:::note
+Elasticsearch needs enough memory available to load a large amount of this data into memory.
+:::
 
 Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda Platform 8 SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
 
@@ -126,23 +142,25 @@ Now you can select a hardware package that can cover these requirements. In this
 
 Camunda Platform 8 defines three fixed hardware packages you can select from. The table below gives you an indication what requirements you can fullfill with these. If your requirements are above the mentioned numbers, please contact us to discuss a customized sizing.
 
-| **\***                                   |                               S |                               M |                                L |
-| :--------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
-| Max Throughput **Tasks/day**             |                           5.9 M |                            23 M |                             43 M |
-| Max Throughput **Tasks/second**          |                              65 |                             270 |                              500 |
-| Max Throughput **Process Instances/day** |                           0.5 M |                           2.3 M |                             15 M |
-| Max Total Number of Process Instances    |                           5.4 M |                           5.4 M |                                  |
-| Approx resources provisioned **\*\***    | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
+| **\***                                                                  |                               S |                               M |                                L |
+| :---------------------------------------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
+| Max Throughput **Tasks/day**                                            |                           5.9 M |                            23 M |                             43 M |
+| Max Throughput **Tasks/second**                                         |                              65 |                             270 |                              500 |
+| Max Throughput **Process Instances/day**                                |                           0.5 M |                           2.3 M |                             15 M |
+| Max Total Number of Process Instances stored (in Elasicsearch in total) |                           100 k |                           5.4 M |                                  |
+| Approx resources provisioned **\*\***                                   | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
 
-**\*** The numbers in the table where measured using Camunda Platform 8 1.2.4 and [the official benchmark project](https://github.com/camunda-cloud/zeebe/tree/develop/benchmarks). It uses a [ten task process](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/project/src/main/resources/bpmn/ten_tasks.bpmn). To calculate day-based metrics, a equal distribution over 24 hours is assumed.
+**\*** The numbers in the table where measured using Camunda Platform 8 (version 8.0) and [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark). It uses a [ten task process](https://github.com/camunda-community-hub/camunda-8-benchmark/blob/main/src/main/resources/bpmn/typical_process.bpmn). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 
 **\*\*** These are the resource limits configured in the Kubernetes cluster and are always subject to change.
 
+You might wonder why the total number of process instances stored is that low. This is related to limited resources provided to Elasticsearch, yielding performance problems with too much data stored there. By increasing the available memory to Elasticsearch you can also increase that number. At the same time, even with this rather low number, you can always guarantee the throughput of the core workflow engine during peak loads, as this performance is not influenced. Also, you can always increase memory for Elasticsearch later on if it is required.
+
 ### Camunda Platform 8 self-managed
 
-Provisioning Camunda Platform 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customes already have own teams providing Elasticsearch for them as a service.
+Provisioning Camunda Platform 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customes already have own teams providing Elasticsearch for them as a service. However, the following example shows the current configuration of a cluster of size S in Camunda Platform 8 SaaS, which can serve as a starting point for your own sizing.
 
-However, the following example shows the current configuration of a cluster of size S in Camunda Platform 8 SaaS, which can serve as a starting point for your own sizing. As you can see in the table above, such a cluster can serve 500,000 process instances / day and store up to 5.4 million process instances (in-flight and history).
+As you can see in the table above, such a cluster can serve 500,000 process instances per day and store up to 100,000 process instances in Elasticsearch (in-flight and history).
 
 |                                    |                     | request | limit |
 | ---------------------------------- | ------------------- | ------- | ----- |

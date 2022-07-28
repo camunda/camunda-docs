@@ -12,7 +12,7 @@ tags:
 To successfully operate Camunda Platform 7.x, you need to take into account operation requirements when modeling business processes. Use your existing tools and infrastructure for technical monitoring and alarming. When appropriate, use Camunda Cockpit and consider extending it with plugins instead of writing your own tooling.
 
 :::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! The Camunda Platform 8 stacks differs and operating it is discussed in [Camunda Platform 8 Self-Managed](/docs/self-managed/overview/).
+This best practice targets Camunda Platform 7.x only! The Camunda Platform 8 stacks differs and operating it is discussed in [Camunda Platform 8 Self-Managed](/docs/self-managed/about-self-managed/).
 :::
 
 ## Installing Camunda Platform 7.x

@@ -123,6 +123,10 @@ A snapshot is a projection of all events that represent the current running stat
 
 When the broker writes a new snapshot, it deletes all data on the log which was written before the latest snapshot.
 
+:::note
+We tested the snapshot interval via a Zeebe Chaos experiment. Learn more about this experiment and snapshot intervals in our [Zeebe Chaos blog](https://zeebe-io.github.io/zeebe-chaos/2022/02/01/High-Snapshot-Frequency/#snapshot-interval).
+:::
+
 ### RocksDB
 
 On the lead broker of a partition, the current running state is kept in memory and on disk in RocksDB. In our experience, this grows to 2GB under a heavy load of long-running processes. The snapshots replicated to followers are snapshots of RocksDB.

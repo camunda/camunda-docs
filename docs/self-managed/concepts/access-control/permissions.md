@@ -10,5 +10,5 @@ Permissions are assigned to [APIs](self-managed/concepts/access-control/apis.md)
 [roles](/self-managed/concepts/access-control/roles.md).
 
 :::note
-Refer to the [components documentation](../../../components/overview.md) to see what permissions are supported or required.
+Refer to the [components documentation](../../../components/components-overview.md) to see what permissions are supported or required.
 :::

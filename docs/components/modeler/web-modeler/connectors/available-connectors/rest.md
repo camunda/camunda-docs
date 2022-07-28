@@ -8,20 +8,7 @@ The **REST connector** allows you to make a request to a REST API and use the re
 
 ## Create a REST connector task
 
-To use a **REST connector** in your process, follow the steps below:
-
-1. Open Web Modeler and create a new BPMN diagram.
-2. Add a **Task** and an **EndEvent**.
-3. Click on the **Task**, click the wrench icon, and select which **REST connector** you want to use depending on your authentication method:
-   - Rest Connector (No Auth)
-   - Rest Connector (Basic Auth)
-   - Rest Connector (Bearer Token Auth)
-
-![create sendgrid connector wrench](../img/connectors-rest-create-task-wrench.png)
-
-Alternatively, you can directly create a **REST connector** by using the append menu:
-
-![create rest connector append](../img/connectors-create-task-append.png)
+To use a **REST connector** in your process, either change the type of an existing task using the wrench-shaped **Change type** context menu, or create a new connector task by using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
 
 ## Make your REST connector executable
 
@@ -93,6 +80,10 @@ The **Query Parameters** field can be configured using the ![feel-icon](../img/f
 }
 ```
 
+:::note
+Secrets are not like regular variables and must be wrapped in double quotes (`"`) when used in an expression.
+:::
+
 ![rest connector query parameters](../img/connectors-rest-query-param.png)
 
 ### Http Headers
@@ -113,6 +104,10 @@ When you are making a PUT, POST, or PATCH request, you might need to provide a b
 You can provide a body for your request under the **Payload** section in the **Request Body** field.
 
 Be aware that **REST connector** is supporting only JSON payload.
+
+:::note
+Secrets are currently not supported in the body of a REST connector.
+:::
 
 ```json
 = {

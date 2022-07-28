@@ -8,6 +8,63 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/self-managed/overview/(.*)$ /docs/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/self-managed/overview$ /docs/self-managed/about-self-managed/ [R=301,L]
+
+RewriteRule ^docs/self-managed/zeebe-deployment/?$ /docs/self-managed/zeebe-deployment/zeebe-installation/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/operations/?$ /docs/self-managed/zeebe-deployment/operations/zeebe-in-production/ [R=301,L]
+
+RewriteRule ^docs/self-managed/tasklist-deployment/configuration/(.*)$ /docs/self-managed/tasklist-deployment/tasklist-configuration/$1 [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/authentication/(.*)$ /docs/self-managed/tasklist-deployment/tasklist-authentication/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/platform-deployment/?$ /docs/self-managed/platform-deployment/platform-8-deployment/ [R=301,L]
+
+RewriteRule ^docs/self-managed/operate-deployment/configuration/(.*)$ /docs/self-managed/operate-deployment/operate-configuration/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/authentication/(.*)$ /docs/self-managed/operate-deployment/operate-authentication/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/troubleshooting/?$ /docs/self-managed/identity/troubleshooting/troubleshoot-identity/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/getting-started/?$ /docs/self-managed/identity/getting-started/install-identity/ [R=301,L]
+
+RewriteRule ^docs/components/overview/(.*)$ /docs/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/components/overview$ /docs/components/components-overview/ [R=301,L]
+
+RewriteRule ^docs/components/zeebe/technical-concepts/?$ /docs/components/zeebe/technical-concepts/technical-concepts-overview/ [R=301,L]
+
+RewriteRule ^docs/components/tasklist/userguide/overview/(.*)$ /docs/components/tasklist/userguide/using-tasklist/$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/overview$ /docs/components/tasklist/userguide/using-tasklist/ [R=301,L]
+RewriteRule ^docs/components/tasklist/introduction/(.*)$ /docs/components/tasklist/introduction-to-tasklist/$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/introduction$ /docs/components/tasklist/introduction-to-tasklist/ [R=301,L]
+
+RewriteRule ^docs/components/optimize/userguide/process-analysis/overview/(.*)$ /docs/components/optimize/userguide/process-analysis/process-analysis-overview/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/overview$ /docs/components/optimize/userguide/process-analysis/process-analysis-overview/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview/(.*)$ /docs/components/optimize/userguide/decision-analysis/decision-analysis-overview/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview$ /docs/components/optimize/userguide/decision-analysis/decision-analysis-overview/ [R=301,L]
+
+RewriteRule ^docs/components/operate/?$ /docs/components/operate/operate-introduction/ [R=301,L]
+
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/?$ /docs/components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/?$ /docs/components/modeler/web-modeler/connectors/introduction-to-connectors/ [R=301,L]
+
+RewriteRule ^docs/components/console/introduction/(.*)$ /docs/components/console/introduction-to-console/$1 [R=301,L]
+RewriteRule ^docs/components/console/introduction$ /docs/components/console/introduction-to-console/ [R=301,L]
+RewriteRule ^docs/components/console/troubleshooting/(.*)$ /docs/components/console/console-troubleshooting/$1 [R=301,L]
+RewriteRule ^docs/components/console/troubleshooting$ /docs/components/console/console-troubleshooting/ [R=301,L]
+
+RewriteRule ^docs/components/best-practices/overview/(.*)$ /docs/components/best-practices/best-practices-overview/$1 [R=301,L]
+RewriteRule ^docs/components/best-practices/overview$ /docs/components/best-practices/best-practices-overview [R=301,L]
+
+RewriteRule ^docs/apis-clients/overview/(.*)$ /docs/apis-clients/working-with-apis-clients/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/overview$ /docs/apis-clients/working-with-apis-clients [R=301,L]
+RewriteRule ^docs/apis-clients/tasklist-api/tutorial/(.*)$ /docs/apis-clients/tasklist-api/tasklist-api-tutorial/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/tasklist-api/overview/(.*)$ /docs/apis-clients/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/optimize-api/authorization/(.*)$ /docs/apis-clients/optimize-api/optimize-api-authorization/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/go-client/get-started/(.*)$ /docs/apis-clients/go-client/go-get-started/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/cli-client/get-started/(.*)$ /docs/apis-clients/cli-client/cli-get-started/$1 [R=301,L]
+
+RewriteRule ^docs/components/optimize/userguide/additional-features/filters/(.*)$ /docs/components/optimize/userguide/process-analysis/filters/$1 [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/rest-api/(.*)$ /docs/apis-clients/optimize-api/$1 [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/optimize-explained/(.*)$ /docs/self-managed/optimize-deployment/advanced-features/$1 [R=301,L]
+
 RewriteRule ^docs/self-managed/zeebe-gateway-deployment/index(.*)$ /docs/self-managed/zeebe-gateway-deployment/zeebe-gateway [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-gateway-deployment/index$ /docs/self-managed/zeebe-gateway-deployment/zeebe-gateway [R=301,L]
 

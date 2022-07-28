@@ -14,11 +14,13 @@ Camunda Platform 8 is built to handle three key aspects of process automation:
 - Automate
 - Improve
 
-A user can design process flows through our [Modeler](/components/modeler/about.md). In a production scenario, you can deploy through Desktop Modeler, Web Modeler, or programmatically. A user can use [Tasklist](/components/tasklist/introduction.md) to review and complete tasks, and [Operate](/components/operate/index.md) to view and analyze process instances.
+A user can design process flows through our [Modeler](/components/modeler/about-modeler.md). In a production scenario, you can deploy through Desktop Modeler, Web Modeler, or programmatically. A user can use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to review and complete tasks, and [Operate](/components/operate/operate-introduction.md) to view and analyze process instances.
 
 Beyond these design and automate cornerstones lies an important component to leverage our process data and analyze areas for improvement: Optimize.
 
 Geared toward business stakeholders, Optimize offers business intelligence tooling for Camunda enterprise customers. By leveraging data collected during process execution, you can access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
+
+![process performance dashboard](./img/optimize-process-performance-dashboard.png)
 
 As you run process instances through the server, Optimize makes REST API calls into the Camunda server, takes new historical data generated since the previous call, and stores the data in its own Elasticsearch database.
 

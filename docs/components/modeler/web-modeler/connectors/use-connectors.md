@@ -8,7 +8,11 @@ Any task can be transformed into a connector task using the change type context 
 
 ![](img/use-connectors-context-menu.png)
 
-After a task was transformed into a connector task, the available configuration will be visible in the properties panel on the right side. The required fields will be highlighted with an error message.
+Alternatively, you can directly create a connector task by using the **Append conector** context menu item. This will create a new connector task directly following the currently selected element.
+
+![](img/use-connectors-append.png)
+
+Once a connector task is selected, the available configuration will be visible in the properties panel on the right side. The required fields will be highlighted with an error message.
 
 ![](img/use-connectors-properties.png)
 
@@ -16,4 +20,4 @@ Fields in the properties panel marked with an equal sign inside a circle indicat
 
 ![](img/use-connectors-feel.png)
 
-Please find the available connectors in Camunda Platform 8 SaaS in the [following pages](/components/modeler/web-modeler/connectors/available-connectors/index.md).
+Please find the available connectors in Camunda Platform 8 SaaS in the [following pages](/components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview.md).

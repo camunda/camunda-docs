@@ -22,9 +22,9 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.10.2",
-    "@docusaurus/core": "^2.0.0-beta.16",
-    "@docusaurus/preset-classic": "^2.0.0-beta.16",
-    "clsx": "^1.1.1",
+    "@docusaurus/core": "^2.0.0-beta.18",
+    "@docusaurus/preset-classic": "^2.0.0-beta.18",
+    "clsx": "^1.2.1",
     "docusaurus-gtm-plugin": "0.0.2",
     "mixpanel-browser": "^2.45.0",
     "react": "^17.0.2",

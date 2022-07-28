@@ -52,7 +52,7 @@ Most expressions can be converted (see [this community extension](https://github
 
 #### Different connector infrastructure
 
-Camunda Platform 7 provides several [connectors](https://docs.camunda.org/manual/latest/reference/connect/). Camunda Platform 8 now also offers multiple [connectors](../components/modeler/web-modeler/connectors/available-connectors/index.md) as well.
+Camunda Platform 7 provides several [connectors](https://docs.camunda.org/manual/latest/reference/connect/). Camunda Platform 8 now also offers multiple [connectors](../components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview.md) as well.
 
 To migrate existing connectors, create a small bridging layer to invoke these connectors via a custom [job workers](/components/concepts/job-workers.md).
 
@@ -149,7 +149,7 @@ Due to limited adoption, there is no support for CDI or OSGI in Camunda Platform
 
 #### Polyglot applications (C#, NodeJS, ...)
 
-When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform 7) with another (Camunda Platform 8). As Zeebe comes with a different API, you need to adjust your source code. Camunda Platform 8 does not use REST as API technology, but gRPC, and you will need to leverage a [client library](/apis-clients/overview.md) instead.
+When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform 7) with another (Camunda Platform 8). As Zeebe comes with a different API, you need to adjust your source code. Camunda Platform 8 does not use REST as API technology, but gRPC, and you will need to leverage a [client library](/apis-clients/working-with-apis-clients.md) instead.
 
 ![polygot architecture](img/architecture-polyglot.png)
 

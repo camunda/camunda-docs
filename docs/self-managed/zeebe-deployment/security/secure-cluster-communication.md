@@ -133,7 +133,7 @@ For this example, whenever you are asked for input, feel free to just press ente
 :::
 
 ```shell
-openssl req -new -newkey rsa:2048 -nodes -out ca.csr -keyout ca.key
+openssl req -config <(printf "[req]\ndistinguished_name=dn\n[dn]\n[ext]\nbasicConstraints=CA:TRUE,pathlen:0") -new -newkey rsa:2048 -nodes -subj "/C=DE/O=Test/OU=Test/ST=BE/CN=cluster.local" -x509 -extensions ext -keyout ca.key -out ca.pem
 openssl x509 -trustout -signkey ca.key -days 365 -req -in ca.csr -out ca.pem
 ```
 
@@ -160,10 +160,12 @@ openssl req -new -key nodeC.key -out nodeC.csr
 3. Create the final certificates for each node:
 
 ```shell
-openssl x509 -req -days 365 -in nodeA.csr -CA ca.pem -CAkey ca.key -set_serial 01 -out nodeA.pem
-openssl x509 -req -days 365 -in nodeB.csr -CA ca.pem -CAkey ca.key -set_serial 01 -out nodeB.pem
-openssl x509 -req -days 365 -in nodeC.csr -CA ca.pem -CAkey ca.key -set_serial 01 -out nodeC.pem
+openssl x509 -req -days 365 -in nodeA.csr -CA ca.pem -CAkey ca.key -set_serial 01 -extfile <(printf "subjectAltName = IP.1:127.0.0.1") -out nodeA.pem
+openssl x509 -req -days 365 -in nodeB.csr -CA ca.pem -CAkey ca.key -set_serial 01 -extfile <(printf "subjectAltName = IP.1:127.0.0.1") -out nodeB.pem
+openssl x509 -req -days 365 -in nodeC.csr -CA ca.pem -CAkey ca.key -set_serial 01 -extfile <(printf "subjectAltName = IP.1:127.0.0.1") -out nodeC.pem
 ```
+
+Make sure to replace `IP.1:127.0.0.1` with the advertised host of the broker. If it's an IP address, then keep the `IP.1` prefix. If it's a hostname/DNS entry, then you can write it out as `DNS.1:advertisedHost`. To be flexible, you can also use a wildcard host. For example, if you're deploying in Kubernetes, you could use `subjectAltName = DNS.1:*.cluster.local"`. You can also omit the whole `-extfile` parameter if you do not wish to use hostname verification at all.
 
 4. Create the certificate chain so that each node is able to verify the identity of the others:
 

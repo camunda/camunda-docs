@@ -39,7 +39,7 @@ Camunda Platform 8 is designed to operate on a very large scale. To achieve this
 
 ### Modeler
 
-Model and deploy business process diagrams with BPMN and DMN. By using industry-standard BPMN flowcharts to model and automate end-to-end processes, both developers and business stakeholders can collaborate and work on process diagrams and decision tables simultaneously, and use collaborative features such as comments to discuss. Available via [web and desktop app](../modeler/about.md).
+Model and deploy business process diagrams with BPMN and DMN. By using industry-standard BPMN flowcharts to model and automate end-to-end processes, both developers and business stakeholders can collaborate and work on process diagrams and decision tables simultaneously, and use collaborative features such as comments to discuss. Available via [web and desktop app](../modeler/about-modeler.md).
 
 #### Connectors
 
@@ -55,11 +55,11 @@ Powered by Zeebe, Camunda’s cloud-native workflow engine provides organization
 
 ### Tasklist
 
-With [Tasklist](../tasklist/introduction.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, they’ll see it appear in Tasklist.
+With [Tasklist](../tasklist/introduction-to-tasklist.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, they’ll see it appear in Tasklist.
 
 ### Operate
 
-[Operate](../operate/index.md) provides transparency and real-time visibility to monitor, analyze, and resolve problems with processes running in Camunda Platform 8.
+[Operate](../operate/operate-introduction.md) provides transparency and real-time visibility to monitor, analyze, and resolve problems with processes running in Camunda Platform 8.
 
 ### Optimize
 
@@ -67,7 +67,7 @@ With [Tasklist](../tasklist/introduction.md), process owners can achieve end-to-
 
 ### Console
 
-With [Console](../console/introduction.md), teams can create, configure, manage, and monitor clusters for all environments from development to production. Additionally, Console offers control over organizational settings such as user management, roles, and insights into usage metrics.
+With [Console](../console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments from development to production. Additionally, Console offers control over organizational settings such as user management, roles, and insights into usage metrics.
 
 ## How does Camunda Platform 8 compare to other solutions?
 
@@ -85,12 +85,12 @@ Use BPMN and DMN standards as a common language for developers and business stak
 
 ### Developer-friendly approach
 
-The platform and tools are easy to get started with and simple to use in your environment right away, with full public access to all of Camunda's documentation, [open APIs for integration](../../apis-clients/overview.md), and a [community](https://camunda.com/developers/) comprised of around 100,000 developers.
+The platform and tools are easy to get started with and simple to use in your environment right away, with full public access to all of Camunda's documentation, [open APIs for integration](../../apis-clients/working-with-apis-clients.md), and a [community](https://camunda.com/developers/) comprised of around 100,000 developers.
 
 ## Next steps
 
 - To request information about Camunda Platform 8 performance and benchmarking, see our [Contact](/contact/) page.
-- [Introduction to Camunda Platform 8](../../guides/introduction-to-camunda-cloud.md)
+- [Introduction to Camunda Platform 8](../../guides/introduction-to-camunda-platform-8.md)
 - [Create a Camunda Platform 8 account](../../guides/create-account.md)
 - [Migrate from Camunda Platform 7 to Camunda Platform 8](../../guides/migrating-from-camunda-platform-7.md)
 - [Automate a process using BPMN](../../guides/automating-a-process-using-bpmn.md)

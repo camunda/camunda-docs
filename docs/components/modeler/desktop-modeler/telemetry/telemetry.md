@@ -1,88 +1,63 @@
 ---
 id: telemetry
 title: Telemetry
-description: "You can opt-in the collection of telemetry data when using the desktop modeler. This data will be used to better understand how the application is used and to improve it based on data."
+description: "You can opt in for the collection of telemetry data when using Desktop Modeler. This data is used to better understand how the application is used and to improve it based on data."
 ---
 
-You can opt-in the collection of telemetry data when using the desktop modeler. This data will be used to better understand how the application is used and to improve it based on data.
-
-This page summarizes the data that is being collected.
+You can opt in for the collection of telemetry data when using Desktop Modeler. This data is used to better understand how the application is used and to improve it based on data. This page summarizes the data collected.
 
 ## General structure of the events
 
-Independent from the type of the event we're dealing with, the payload we send to the ET has the following structure:
+The events **Desktop Modeler** sends share a similar payload which usually (but not exclusively) includes information like:
 
-```json
-{
-  "installation": "[THE_EDITOR_ID]",
-  "product": {
-    "name": "Camunda Modeler",
-    "version": "[MODELER_VERISON]",
-    "edition": "community",
-    "internals": {
-      "event": "[NAME_OF_THE_EVENT]",
-      "[SOME_ADDITIONAL_EVENT_DATA]": "[SOME_CUSTOM_VALUE]"
-    }
-  }
-}
-```
-
-Every event directly modifies the `internals` field of the payload.
+- **event name**: The name of the event triggered (e.g. `diagram:opened`)
+- **application version**: The version of Desktop Modeler being used (e.g. Version 5.0.0)
+- **editor id**: A randomly generated id assigned to your Desktop Modeler installation
 
 ## Definition of events
 
 ### Ping event
 
-The `Ping Event` is sent in following situations:
+The `Ping Event` is sent in the following situations:
 
-- The modeler is opened (given that `Usage Statistics` option is enabled)
+- The modeler is opened (given that `Usage Statistics` option is enabled).
 - `Usage Statistics` option is enabled for the first time.
-- Once every 24 hours (given that `Usage Statistics` option is enabled)
+- Once every 24 hours (given that `Usage Statistics` option is enabled).
 
-The Ping Event has the following structure:
+The `Ping Event` also sends the list of plugins installed and flags defined:
 
 ```json
-{
-  "event": "ping",
-  "plugins": ["PLUGIN_NAME"]
-}
+  "plugins": ["PLUGIN_NAME"],
+  "flags": {
+    "FLAG_NAME": "FLAG_VALUE"
+  }
 ```
 
-### Diagram opened event
+### Diagram opened/closed event
 
-The `Diagram Opened Event` is sent in following situations:
+The `Diagram Opened Event` is sent in the following situations:
 
 - User created a new BPMN diagram
 - User created a new DMN diagram
-- User created a new CMMN diagram
 - User created a new Form
 - User opened an existing BPMN diagram
 - User opened an existing DMN diagram
-- User opened an existing CMMN diagram
 - User opened an existing Form
 
-The Diagram Opened Event has the following core structure:
+The `Diagram Closed Event` is sent in the following situations:
 
-```json
-{
-  "event": "diagramOpened",
-  "diagramType": "[bpmn, dmn, cmmn or form]"
-}
-```
+- User closed a BPMN diagram
+- User closed a DMN diagram
+- User closed a Form
 
-In the case of bpmn and form, we add the engine profile:
+These events include the following properties:
 
-```json
-{
-  "engineProfile": {
-    "executionPlatform": "<target platform>",
-    "executionPlatformVersion": "<target platform version>"
-  }
-}
-```
+- `diagramType`: BPMN, DMN, or Form
+- Engine profile:
+  - `executionPlatform`: <target platform\>
+  - `executionPlatformVersion`: <target platform version\>
 
-In case the diagram type is bpmn, we also add the element template usage to
-Diagram Opened Event payload:
+In case of BPMN files, the event payload may include further diagram metrics:
 
 ```json
 {
@@ -101,7 +76,7 @@ Diagram Opened Event payload:
 }
 ```
 
-Also in the case of BPMN diagrams, we add selected diagram metrics:
+Also in the case of BPMN diagrams, the event payload may include further diagram metrics:
 
 ```json
 {
@@ -139,50 +114,29 @@ Also in the case of BPMN diagrams, we add selected diagram metrics:
 }
 ```
 
-### Deployment event
+### Deployment and start instance events
 
-The `Deployment Event` is sent in following situations:
+The `Deployment Event` is sent in the following situations:
 
-- User deploys a BPMN diagram to Camunda Platform 7 or Camunda Platform 8
-- User deploys a DMN diagram to Camunda Platform 7
+- User deploys a BPMN or DMN diagram to Camunda Platform 7 or Camunda Platform 8
+- User deploys a Form to Camunda Platform 7
 
-The Deployment Event has the following core structure:
+The `Deployment Event` and `Start Instance` have the following properties:
 
-```json
-{
-  "event": "deployment",
-  "diagramType": "[bpmn or dmn]",
-  "deployment": {
-    "outcome": "[success or failure]",
-    "context": "[deploymentTool or startInstanceTool]",
-    "executionPlatform": "[<target platform>]",
-    "executionPlatformVersion": "[<target platform version>]"
-  }
-}
-```
+- `diagramType`: BPMN, DMN, or Form
+- Engine profile:
+  - `executionPlatform`: <target platform\>
+  - `executionPlatformVersion`: <target platform version\>
 
-In case the diagram deployment was not successful, the error code returned from the Camunda Platform 7 will be added to the payload:
+In the event of an unsuccessful deployment, an `error` property will be present in the payload containing an error code.
+
+If provided, as is the case when deploying to a Zeebe-based platform, the payload also includes the target type of the deployment:
 
 ```json
-{
-  "deployment": {
-    "outcome": "failure",
-    "error": "DIAGRAM_PARSE_ERROR"
-  }
-}
+"targetType": "[camundaCloud or selfHosted]"
 ```
 
-If provided, for example, when deploying to a Zeebe based platform, we add the target type of the deployment as well:
-
-```json
-{
-  "deployment": {
-    "targetType": "camundaCloud"
-  }
-}
-```
-
-In case of BPMN files, we add selected diagram metrics:
+In case of BPMN files, the event payload may include further diagram metrics:
 
 ```json
 {
@@ -220,14 +174,10 @@ In case of BPMN files, we add selected diagram metrics:
 }
 ```
 
-If it is set in the diagram, we also add target engine profile information:
+If the target engine profile is set in the diagram, the payload will also contain it.
 
 ```json
-{
-  "engineProfile": {
-    "executionPlatform": "<target platform>"
-  }
-}
+ "executionPlatform": "<target platform>"
 ```
 
 ### Tracked click events
@@ -241,19 +191,18 @@ Currently, these containers are:
 
 The event supplies:
 
-- The parent container id to locate the application section
+- The `parent` container id to locate the application section
 - The button label or link text (generalized as label) for identification of what was specifically clicked
 - A type to differentiate buttons, internal links, and external links
-- Optionally for external links: the link target
+- The link target (optional for external links)
 
 Example event:
 
 ```json
 {
-  "event": "userTrackedClick",
-  "type": "[button or external-link or internal-link]"
-  "parent": "welcome-page-learn-more"
-  "label": "Click here to read more about Camunda"
+  "type": "[button or external-link or internal-link]",
+  "parent": "welcome-page-learn-more",
+  "label": "Click here to read more about Camunda",
   "link": "https://camunda.com/"
 }
 ```
@@ -262,15 +211,16 @@ Example event:
 `"link"` is only present for `"type": "external-link"`.
 :::
 
-### Version info opened event
+### Overlay opened event
 
-The `Version Info Opened Event` is sent when the version info overlay is opened via user interaction.
+The `Overlay Opened Event` is sent when an overlay is opened via user interaction. Currently, this event is sent in the following circumstances:
 
-It has the following structure:
+- Version Info overlay is opened
+- Deployment overlay is opened
+- Start instance overlay is opened
+- Deployment overlay is closed
+- Start Instance overlay is closed
 
-```json
-{
-  "event": "versionInfoOpened",
-  "source": "[menu or statusBar]"
-}
-```
+For the **Version Info** overlay, the event also sends `source` of the click (`"menu"` or `"statusBar"`).
+
+For the **Deployment** and **Start Instance** overlays, the event also send the `diagramType` (BPMN, DMN or Form).

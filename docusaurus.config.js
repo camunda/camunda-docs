@@ -58,25 +58,25 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "guides/introduction-to-camunda-cloud",
+          docId: "guides/introduction-to-camunda-platform-8",
           label: "Guides",
           position: "left",
         },
         {
           type: "doc",
-          docId: "components/overview",
+          docId: "components/components-overview",
           label: "Components",
           position: "left",
         },
         {
           type: "doc",
-          docId: "apis-clients/overview",
+          docId: "apis-clients/working-with-apis-clients",
           label: "APIs & Clients",
           position: "left",
         },
         {
           type: "doc",
-          docId: "self-managed/overview",
+          docId: "self-managed/about-self-managed",
           label: "Self-Managed",
           position: "left",
         },
@@ -195,42 +195,6 @@ module.exports = {
       apiKey: "d701d38126d1a43866047d3ab97680d1",
       appId: "6KYF3VMCXZ",
       indexName: "camunda",
-    },
-    // Disabling Dark Mode
-    // https://github.com/camunda-cloud/camunda-cloud-documentation/issues/125
-    //
-    colorMode: {
-      // "light" | "dark"
-      defaultMode: "light",
-
-      // Hides the switch in the navbar
-      // Useful if you want to support a single color mode
-      disableSwitch: true,
-
-      // Should we use the prefers-color-scheme media-query,
-      // using user system preferences, instead of the hardcoded defaultMode
-      respectPrefersColorScheme: false,
-
-      // Dark/light switch icon options
-      switchConfig: {
-        // Icon for the switch while in dark mode
-        darkIcon: "🌙",
-
-        // CSS to apply to dark icon,
-        // React inline style object
-        // see https://reactjs.org/docs/dom-elements.html#style
-        darkIconStyle: {
-          marginLeft: "2px",
-        },
-
-        // Unicode icons such as '\u2600' will work
-        // Unicode with 5 chars require brackets: '\u{1F602}'
-        lightIcon: "\u{1F602}",
-
-        lightIconStyle: {
-          marginLeft: "1px",
-        },
-      },
     },
   },
   presets: [

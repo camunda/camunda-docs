@@ -6,7 +6,7 @@ description: "An overview of navigating Operate and its features"
 
 This section and the next section, [variables and incidents](./resolve-incidents-update-variables.md), assumes you’ve deployed a process to Zeebe and created at least one process instance.
 
-If you’re not sure how to deploy processes or create instances, visit our [Guides section](/guides/introduction-to-camunda-cloud.md).
+If you’re not sure how to deploy processes or create instances, visit our [Guides section](/guides/introduction-to-camunda-platform-8.md).
 
 In the following sections, we’ll use the same [`order-process.bpmn`](https://docs.camunda.io/assets/files/order-process-2ae29e9d889a3d640464be250206d550.bpmn/) process model.
 
@@ -35,3 +35,5 @@ Running process instances appear in the **Instances** section below the process 
 Here, see details about the process instance, including the instance history and the variables attached to the instance.
 
 ![operate-view-instance-detail](./img/operate-view-instance-detail.png)
+
+To visualize the performance of process instances, we recommend utilizing [Optimize](../../optimize/what-is-optimize.md).

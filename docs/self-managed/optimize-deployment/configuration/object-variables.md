@@ -30,7 +30,7 @@ Any configured [variable plugins](../../plugins/variable-import-plugin) are appl
 
 ## Optimize configuration
 
-The import of object variable values is enabled by default and can be disabled using the `import.data.variable.includeObjectVariableValue` [configuration](./system-configuration.md#camunda-platform-7-common-import-settings).
+The import of object variable values is enabled by default and can be disabled using the `import.data.variable.includeObjectVariableValue` [configuration](./system-configuration-platform-7.md).
 
 ## Other system configurations
 
@@ -50,4 +50,4 @@ If you are creating object variables using a Zeebe process, ensure date properti
 
 External variables of type object require an additional field called `serializationDataFormat` which specifies which data format was used to serialize the given object.
 
-Refer to the [external object variable API section](../../rest-api/external-variable-ingestion) for further details on how to ingest external variables.
+Refer to the [external object variable API section](../../../apis-clients/optimize-api/external-variable-ingestion.md) for further details on how to ingest external variables.
