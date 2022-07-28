@@ -51,6 +51,6 @@ jobs:
         run: |
           curl -sL https://github.com/filiph/linkcheck/releases/download/2.0.20/linkcheck-2.0.20-linux-x64.tar.gz | tar xvzf - linkcheck/linkcheck --strip 1
           # Check links from production sitemap to ensure no publish links are broken
-          ./linkcheck -i sitemap.prod.txt
+          ./linkcheck -d -i sitemap.prod.txt
           # Check links from other products to ensure no links are broken
-          ./linkcheck -i product-links.prod.txt
+          ./linkcheck -d -i product-links.prod.txt
