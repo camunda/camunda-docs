@@ -35,15 +35,15 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 ![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
 
-5. Add a descriptive name using the properties panel. For this guide, we'll use **Microservice Example**. Since you previously opened the **General** section of the properties panel, it is likely still open when working with your service task configuration.
-6. In the properties panel, expand the **Task definition** section and use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use **orchestrate-something** as the type. You will use this while [creating a worker for the service task](#create-a-worker-for-the-service-task). If you do not have an option to add the **Type**, use the wrench icon and select **Service Task**.
+1. Add a descriptive name using the properties panel. For this guide, we'll use **Microservice Example**. Since you previously opened the **General** section of the properties panel, it is likely still open when working with your service task configuration.
+2. In the properties panel, expand the **Task definition** section and use the **Type** field to enter a string used in connecting this service task to the corresponding microservice code. For this guide, we'll use **orchestrate-something** as the type. You will use this while [creating a worker for the service task](#create-a-worker-for-the-service-task). If you do not have an option to add the **Type**, use the wrench icon and select **Service Task**.
 
 ![Service task with properties panel open](./img/microservice-orchestration-service-task.png)
 
-7. Add an end event by dragging one from the palette, or by clicking the end event when the last service task in your diagram has focus. Make sure there is an arrow connecting the service task to the end event.
-8. On the right upper corner click the blue **Deploy diagram** button. Your diagram is now deployed to your cluster.
-9. Start a new process instance by clicking on the blue **Start instance** button.
-10. To the right of the two blue buttons, click the Application icon (honeycomb icon) button next to the **Start instance** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
+6. Add an end event by dragging one from the palette, or by clicking the end event when the last service task in your diagram has focus. Make sure there is an arrow connecting the service task to the end event.
+7. On the right upper corner click the blue **Deploy diagram** button. Your diagram is now deployed to your cluster.
+8. Start a new process instance by clicking on the blue **Start instance** button.
+9. To the right of the two blue buttons, click the Application icon (honeycomb icon) button next to the **Start instance** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
 ### Create credentials for your Zeebe client
 
