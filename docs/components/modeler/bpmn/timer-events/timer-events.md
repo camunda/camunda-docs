@@ -78,9 +78,12 @@ If the duration is zero or negative, the timer fires immediately.
 ### Time cycle
 
 A cycle defined as ISO 8601 repeating intervals format; it contains the duration and the number of repetitions. If the repetitions are not defined, the timer repeats infinitely until it is canceled.
+It's possible to define a start time. By doing this, the timer triggers for the first time on the given start time. Afterwards, it will follow the interval as usual.
 
 - `R5/PT10S`: Every 10 seconds, up to five times
 - `R/P1D`: Every day, infinitely
+- `R/2022-01-01T10:00:00+02:00[Europe/Berlin]/P1D`: Every day infinitely, starting from January 1, 2022 at 10 a.m. UTC plus 2 hours
+- `R3/2022-04-027T17:20:00+02:00Z/P1D`: Every day up to three times, starting from April 27, 2022 at 5:20 p.m. UTC
 
 ## Additional resources
 
