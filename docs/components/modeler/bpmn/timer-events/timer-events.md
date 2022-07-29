@@ -83,7 +83,7 @@ It's possible to define a start time. By doing this, the timer triggers for the 
 - `R5/PT10S`: Every 10 seconds, up to five times
 - `R/P1D`: Every day, infinitely
 - `R/2022-01-01T10:00:00+02:00[Europe/Berlin]/P1D`: Every day infinitely, starting from January 1, 2022 at 10 a.m. UTC plus 2 hours
-- `R3/2022-04-027T17:20:00Z/P1D`: Every day up to three times, starting from April 27, 2022 at 5:20 p.m. UTC
+- `R3/2022-04-27T17:20:00Z/P1D`: Every day up to three times, starting from April 27, 2022 at 5:20 p.m. UTC
 
 ## Additional resources
 
