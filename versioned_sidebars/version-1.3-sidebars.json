@@ -319,7 +319,7 @@
     }
   ],
   "APIs & Clients": [
-    "apis-clients/overview",
+    "apis-clients/working-with-apis-clients",
     {
       "APIs": [
         "apis-clients/public-api",

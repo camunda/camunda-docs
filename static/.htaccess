@@ -59,6 +59,10 @@ RewriteRule ^docs/components/console/troubleshooting$ /docs/components/console/c
 RewriteRule ^docs/components/best-practices/overview/(.*)$ /docs/components/best-practices/best-practices-overview/$1 [R=301,L]
 RewriteRule ^docs/components/best-practices/overview$ /docs/components/best-practices/best-practices-overview [R=301,L]
 
+RewriteRule ^docs/1.3/apis-clients/overview/(.*)$ /docs/1.3/apis-clients/working-with-apis-clients/$1 [R=301,L]
+RewriteRule ^docs/1.3/apis-clients/overview$ /docs/1.3/apis-clients/working-with-apis-clients [R=301,L]
+RewriteRule ^docs/1.2/apis-clients/overview/(.*)$ /docs/1.2/apis-clients/working-with-apis-clients/$1 [R=301,L]
+RewriteRule ^docs/1.2/apis-clients/overview$ /docs/1.2/apis-clients/working-with-apis-clients [R=301,L]
 RewriteRule ^docs/apis-clients/overview/(.*)$ /docs/apis-clients/working-with-apis-clients/$1 [R=301,L]
 RewriteRule ^docs/apis-clients/overview$ /docs/apis-clients/working-with-apis-clients [R=301,L]
 RewriteRule ^docs/apis-clients/tasklist-api/tutorial/(.*)$ /docs/apis-clients/tasklist-api/tasklist-api-tutorial/$1 [R=301,L]
