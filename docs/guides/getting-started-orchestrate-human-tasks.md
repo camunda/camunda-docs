@@ -40,10 +40,10 @@ To create an automated process with user tasks, take the following steps:
      ![user task example](./img/user-task-example.png)
 8. Append a gateway to your user task by dragging it onto the dashboard from the palette on the left side of the screen, or by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
 9. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
-
-- Note that the sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
-
-11. Attach an end event to the two user tasks.
+   :::note
+   The sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
+   :::
+10. Attach an end event to the two user tasks.
 
 <div bpmn="getting-started-guides/prepare-dinner.bpmn" />
 
@@ -57,11 +57,9 @@ Variables are part of a process instance and represent the data of the instance.
 2. Name your form. In this case, we've named ours **Decide what's for dinner**.
 3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've described ours as **What's for dinner?**
 4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner, we've created two values: one labeled **Chicken** and one labeled **Salad**.
-
-:::note
-As mentioned earlier, you'll need to insert the defined variable values into the appropriate sequence flows to execute your process. For example, our sequence flow will now have the expressions of `= meal = "salad"`.
-:::
-
+   :::note
+   As mentioned earlier, you'll need to insert the defined variable values into the appropriate sequence flows to execute your process. For example, our sequence flow will now have the expressions of `= meal = "salad"`.
+   :::
 5. You can add the form to your BPMN diagram in a few ways:
    1. Within your form, click the rectangular **Copy JSON** icon to copy the form JSON to your clipboard. Navigate to your BPMN diagram, and click the appropriate user task. Within the properties panel of the user task, navigate to the **Form** section, select a **Type** of **Camunda forms** and paste your JSON into the **Form JSON configuration** field.
    2. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import**.
