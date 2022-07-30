@@ -1,5 +1,5 @@
 ---
-id: overview
+id: about-self-managed
 title: "Camunda Cloud Self-Managed"
 ---
 
