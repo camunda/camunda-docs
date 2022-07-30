@@ -33,7 +33,7 @@
     "guides/migrating-from-Camunda-Platform"
   ],
   "Components": [
-    "components/overview",
+    "components/components-overview",
     {
       "Concepts": [
         "components/concepts/what-is-camunda-cloud",
