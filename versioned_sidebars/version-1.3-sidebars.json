@@ -415,7 +415,7 @@
     "reference/dependencies"
   ],
   "Self-Managed": [
-    "self-managed/overview",
+    "self-managed/about-self-managed",
     {
       "Zeebe": [
         "self-managed/zeebe-deployment/index",
