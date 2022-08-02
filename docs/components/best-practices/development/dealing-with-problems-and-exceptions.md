@@ -83,7 +83,7 @@ Decrement the retries by one.
 
 <span className="callout">2</span>
 
-Provide a meaningful error message, as this will be displayed to a human operator once an incident is created ion Operate.
+Provide a meaningful error message, as this will be displayed to a human operator once an incident is created in Operate.
 
 Example in Node.js:
 
