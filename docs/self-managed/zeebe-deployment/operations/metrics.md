@@ -23,11 +23,11 @@ Read details of the format in the [Prometheus documentation][prom-format].
 **Example:**
 
 ```
-# HELP zeebe_stream_processor_events_total Number of events processed by stream processor
-# TYPE zeebe_stream_processor_events_total counter
-zeebe_stream_processor_events_total{action="written",partition="1",} 20320.0
-zeebe_stream_processor_events_total{action="processed",partition="1",} 20320.0
-zeebe_stream_processor_events_total{action="skipped",partition="1",} 2153.0
+# HELP zeebe_stream_processor_records_total Number of events processed by stream processor
+# TYPE zeebe_stream_processor_records_total counter
+zeebe_stream_processor_records_total{action="written",partition="1",} 20320.0
+zeebe_stream_processor_records_total{action="processed",partition="1",} 20320.0
+zeebe_stream_processor_records_total{action="skipped",partition="1",} 2153.0
 ```
 
 ## Configuring metrics
@@ -64,18 +64,15 @@ Both brokers and gateways expose their respective metrics. The brokers have an o
 
 **Metrics related to process processing:**
 
-- `zeebe_stream_processor_events_total`: The number of events processed by the stream processor.
+- `zeebe_stream_processor_records_total`: The number of events processed by the stream processor.
   The `action` label separates processed, skipped, and written events.
 - `zeebe_exporter_events_total`: The number of events processed by the exporter processor.
   The `action` label separates exported and skipped events.
 - `zeebe_element_instance_events_total`: The number of occurred process element instance events.
   The `action` label separates the number of activated, completed, and terminated elements.
   The `type` label separates different BPMN element types.
-- `zeebe_running_process_instances_total`: The number of currently running process instances, i.e.
-  not completed or terminated.
 - `zeebe_job_events_total`: The number of job events. The `action` label separates the number of
   created, activated, timed out, completed, failed, and canceled jobs.
-- `zeebe_pending_jobs_total`: The number of currently pending jobs, i.e. not completed or terminated.
 - `zeebe_incident_events_total`: The number of incident events. The `action` label separates the number
   of created and resolved incident events.
 - `zeebe_pending_incidents_total`: The number of currently pending incident, i.e. not resolved.
