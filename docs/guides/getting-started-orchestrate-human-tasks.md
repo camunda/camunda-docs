@@ -30,19 +30,21 @@ To create an automated process with user tasks, take the following steps:
    ![modeler example](./img/modeler-example.png)
 4. Use Web Modeler to design a BPMN flow with user tasks. Create a user task by dragging the task icon from the palette, or click the existing start event and the displayed task icon.
 5. Change the task type by clicking the wrench icon. Select [**User Task**](https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/).
-  ![wrench icon example](./img/wrench-icon-example.png)
+   ![wrench icon example](./img/wrench-icon-example.png)
 6. Add a descriptive name using the properties panel. In this case, we've named ours `Decide what's for dinner`.
-7. Append an exclusive [gateway](https://docs.camunda.io/docs/components/modeler/bpmn/gateways/) to your user task by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
-  ![gateway symbol example](./img/gateway-symbol-example.png)
+7. Append an exclusive [gateway](../components/modeler/bpmn/gateways.md) to your user task by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
+   ![gateway symbol example](./img/gateway-symbol-example.png)
 8. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
 9. Add an expression, by clicking on the sequence flow to view the properties panel, and open the Condition tab to insert a conditional expression.
+
 - Note that the sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
   ![sequence flow example](./img/sequence-flow-example.png)
+
 10. Add a closing gateway to follow the BPMN standards' best practices.
 11. Add a user activity “eat meal” and close the process with an end event to the user tasks.
 12. To follow the BPMN best practices we should add a pool to indicate who is executing the process.
 
-  ![dinner bpmn model](./img/dinner-bpmn-model.png)
+![dinner bpmn model](./img/dinner-bpmn-model.png)
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
@@ -55,7 +57,7 @@ Variables are part of a process instance and represent the data of the instance.
 3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've described ours as **What's for dinner?**
 4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner add an extra value by clicking on the plus sign. Enter the value **Chicken** with the label as **Chicken** and enter the value **Salad** with the label as **Salad** in the other value.
 
-  ![form values example](./img/form-values-example.png)
+![form values example](./img/form-values-example.png)
 
 :::note
 You'll need to insert the defined variable values into the appropriate sequence flows in the BPMN model to execute your process. For example, our sequence flow will now have the expressions of `= meal = "salad"`.
@@ -63,7 +65,7 @@ You'll need to insert the defined variable values into the appropriate sequence 
 
 5. You can add the form to your BPMN diagram in a few ways:
    1. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import**.
-   ![form import example](./img/form-import-example.png)
+      ![form import example](./img/form-import-example.png)
    2. Within your form, click the rectangular **Copy JSON** icon to copy the form JSON to your clipboard. Navigate to your BPMN diagram, and click the appropriate user task. Within the properties panel of the user task, navigate to the **Form** section, select a **Type** of **Camunda forms** and paste your JSON into the **Form JSON configuration** field.
 
 ## Create a cluster
