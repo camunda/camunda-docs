@@ -77,4 +77,4 @@ The fact that jobs may be worked on more than once means that Zeebe is an "at le
 
 ## Next steps
 
-- [Zeebe overview](./components/zeebe/zeebe-overview.md)
+- [Zeebe overview](/components/zeebe/zeebe-overview.md)

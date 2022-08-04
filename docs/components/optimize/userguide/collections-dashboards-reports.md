@@ -10,7 +10,7 @@ The Optimize landing page shows a list of all existing dashboards and reports yo
 
 ![home page](./img/home.png)
 
-In addition to the name of the dashboard, report, or collection, you can also see the date it was last modified. Alongside collections, dashboards, and combined reports, you can also see how many entities are contained within (e.g. how many reports are on a dashboard). You can also see how many users and groups have access to a collection.
+In addition to the name of the dashboard, report, or collection, you can also see the date it was last modified. Alongside collections, dashboards, and combined process reports, you can also see how many entities are contained within (e.g. how many reports are on a dashboard). You can also see how many users and groups have access to a collection.
 
 Clicking on a report, dashboard, or collection takes you to its corresponding details page. When moving the mouse over one of these entities, you can access a context menu that allows you to edit, copy, or delete the entity. Multiple entities can be selected and deleted at once using the bulk menu which appears after selecting at least one entity. When copying an entity, you also have the option to move that copy into a collection.
 

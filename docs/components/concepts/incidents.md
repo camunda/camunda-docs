@@ -36,7 +36,7 @@ If the variables are causing the incident, complete the following steps:
 3. Mark the incident as resolved.
 
 :::note
-It's recommended you complete these operations in [Operate](/components/operate/index.md).
+It's recommended you complete these operations in [Operate](/components/operate/operate-introduction.md).
 :::
 
 It is also possible to complete these steps via the client API. Using the Java client, this could look like the following:
@@ -66,7 +66,7 @@ If an incident is created during process execution and it's not related to a job
 To resolve the incident, update the variables and mark the incident as resolved.
 
 :::note
-It's recommended you complete these operations in [Operate](/components/operate/index.md).
+It's recommended you complete these operations in [Operate](/components/operate/operate-introduction.md).
 :::
 
 Using the Java client, this could look like the following:
@@ -84,5 +84,5 @@ client.newResolveIncidentCommand(incident.getKey())
 
 When the incident is resolved, the process instance continues.
 
-- [Operate](/components/operate/index.md)
-- [APIs and Clients](./apis-clients/overview.md)
+- [Operate](/components/operate/operate-introduction.md)
+- [APIs and Clients](/apis-clients/working-with-apis-clients.md)

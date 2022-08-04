@@ -16,7 +16,7 @@ Under this setting, members of the current organization can be managed. A user c
 
 - **Owner**: Owner of the organization (currently limited to one user and cannot be changed by the user.)
 - **Admin**: Restricted rights for user management.
-- **Member**: Can manage Zeebe clusters, client, and use [Operate](./components/operate/index.md).
+- **Member**: Can manage Zeebe clusters, client, and use [Operate](/components/operate/index.md).
 
 The following table illustrates the rights of each role:
 

@@ -9,7 +9,7 @@ description: "The REST API to delete reports from Optimize."
 The report deletion API allows you to delete reports by ID from Optimize.
 
 :::note Heads up!
-During deletion a report will get removed from any dashboard or combined report it is referenced by. In case a report is referenced by an alert, the corresponding alert will get deleted too.
+During deletion a report will get removed from any dashboard or combined process report it is referenced by. In case a report is referenced by an alert, the corresponding alert will get deleted too.
 :::
 
 ## Method & HTTP target resource
@@ -22,9 +22,9 @@ Where `report-ID` is the ID of the report you wish to delete.
 
 The following request headers have to be provided with every delete request:
 
-| Header        | Constraints | Value                                    |
-| ------------- | ----------- | ---------------------------------------- |
-| Authorization | REQUIRED    | See [Authorization](../authorization.md) |
+| Header        | Constraints | Value                                                 |
+| ------------- | ----------- | ----------------------------------------------------- |
+| Authorization | REQUIRED    | See [Authorization](../optimize-api-authorization.md) |
 
 ## Query parameters
 
@@ -42,12 +42,12 @@ No response body.
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                                  |
-| ---- | ------------------------------------------------------------------------------------------------------------ |
-| 204  | Request successful.                                                                                          |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../authorization.md) on how to authenticate. |
-| 404  | The requested report was not found, please check the provided report-ID.                                     |
-| 500  | Some error occurred while processing the request, best check the Optimize log.                               |
+| Code | Description                                                                                                               |
+| ---- | ------------------------------------------------------------------------------------------------------------------------- |
+| 204  | Request successful.                                                                                                       |
+| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../optimize-api-authorization.md) on how to authenticate. |
+| 404  | The requested report was not found, please check the provided report-ID.                                                  |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                                            |
 
 ## Example
 

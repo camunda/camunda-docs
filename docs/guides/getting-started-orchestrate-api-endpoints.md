@@ -58,4 +58,4 @@ To deploy your process, take the following steps:
 
 ## Additional resources and next steps
 
-- Dive deeper into [connectors](/components/modeler/web-modeler/connectors/index.md).
+- Dive deeper into [connectors](/components/modeler/web-modeler/connectors/introduction-to-connectors.md).

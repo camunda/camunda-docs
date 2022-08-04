@@ -78,7 +78,7 @@ function Footer() {
                 {linkItem.items != null &&
                 Array.isArray(linkItem.items) &&
                 linkItem.items.length > 0 ? (
-                  <ul className="footer__items">
+                  <ul className="footer__items clean-list">
                     {linkItem.items.map((item, key) =>
                       item.html ? (
                         <li

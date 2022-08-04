@@ -36,7 +36,7 @@ module.exports = {
     "guides/migrating-from-camunda-platform-7",
   ],
   Components: [
-    "components/overview",
+    "components/components-overview",
     {
       Concepts: [
         "components/concepts/what-is-camunda-platform-8",
@@ -50,7 +50,7 @@ module.exports = {
         "components/concepts/workflow-patterns",
       ],
       Console: [
-        "components/console/introduction",
+        "components/console/introduction-to-console",
         {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
@@ -80,8 +80,8 @@ module.exports = {
         },
         {
           Troubleshooting: [
-            "components/console/troubleshooting/common-pitfalls",
-            "components/console/troubleshooting/feedback-and-support",
+            "components/console/console-troubleshooting/common-pitfalls",
+            "components/console/console-troubleshooting/feedback-and-support",
           ],
         },
       ],
@@ -101,13 +101,14 @@ module.exports = {
             "components/modeler/web-modeler/token-simulation",
             {
               Connectors: [
-                "components/modeler/web-modeler/connectors/index",
+                "components/modeler/web-modeler/connectors/introduction-to-connectors",
                 "components/modeler/web-modeler/connectors/use-connectors",
                 {
                   "Available Connectors": [
-                    "components/modeler/web-modeler/connectors/available-connectors/index",
+                    "components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview",
                     "components/modeler/web-modeler/connectors/available-connectors/rest",
                     "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
+                    "components/modeler/web-modeler/connectors/available-connectors/slack",
                   ],
                 },
               ],
@@ -205,7 +206,7 @@ module.exports = {
         "components/zeebe/zeebe-overview",
         {
           "Technical concepts": [
-            "components/zeebe/technical-concepts/index",
+            "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
             "components/zeebe/technical-concepts/clustering",
             "components/zeebe/technical-concepts/partitions",
@@ -222,7 +223,7 @@ module.exports = {
         },
       ],
       Operate: [
-        "components/operate/index",
+        "components/operate/operate-introduction",
         {
           "User guide": [
             "components/operate/userguide/basic-operate-navigation",
@@ -247,11 +248,11 @@ module.exports = {
               ],
             },
             "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/combined-reports",
+            "components/optimize/userguide/combined-process-reports",
             "components/optimize/userguide/processes",
             {
               "Process analysis": [
-                "components/optimize/userguide/process-analysis/overview",
+                "components/optimize/userguide/process-analysis/process-analysis-overview",
                 "components/optimize/userguide/process-analysis/outlier-analysis",
                 "components/optimize/userguide/process-analysis/branch-analysis",
                 {
@@ -285,7 +286,7 @@ module.exports = {
             },
             {
               "Decision analysis": [
-                "components/optimize/userguide/decision-analysis/overview",
+                "components/optimize/userguide/decision-analysis/decision-analysis-overview",
                 "components/optimize/userguide/decision-analysis/decision-report",
                 "components/optimize/userguide/decision-analysis/decision-filter",
               ],
@@ -303,16 +304,16 @@ module.exports = {
         },
       ],
       Tasklist: [
-        "components/tasklist/introduction",
+        "components/tasklist/introduction-to-tasklist",
         {
           "User guide": [
-            "components/tasklist/userguide/overview",
+            "components/tasklist/userguide/using-tasklist",
             "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
       ],
       "Best Practices": [
-        "components/best-practices/overview",
+        "components/best-practices/best-practices-overview",
         {
           "Project Management": [
             "components/best-practices/management/following-the-customer-success-path",
@@ -360,7 +361,7 @@ module.exports = {
     },
   ],
   "APIs & Clients": [
-    "apis-clients/overview",
+    "apis-clients/working-with-apis-clients",
     {
       APIs: [
         "apis-clients/public-api",
@@ -370,7 +371,7 @@ module.exports = {
         "apis-clients/console-api-reference",
         {
           "Optimize API (REST)": [
-            "apis-clients/optimize-api/authorization",
+            "apis-clients/optimize-api/optimize-api-authorization",
             {
               Configuration: [
                 "apis-clients/optimize-api/configuration/enable-sharing",
@@ -426,13 +427,13 @@ module.exports = {
         {
           "Go client": [
             "apis-clients/go-client/index",
-            "apis-clients/go-client/get-started",
+            "apis-clients/go-client/go-get-started",
           ],
         },
         {
           "CLI client": [
             "apis-clients/cli-client/index",
-            "apis-clients/cli-client/get-started",
+            "apis-clients/cli-client/cli-get-started",
           ],
         },
         {
@@ -463,10 +464,10 @@ module.exports = {
     "reference/dependencies",
   ],
   "Self-Managed": [
-    "self-managed/overview",
+    "self-managed/about-self-managed",
     {
       Installation: [
-        "self-managed/platform-deployment/index",
+        "self-managed/platform-deployment/platform-8-deployment",
         {
           Kubernetes: [
             "self-managed/platform-deployment/kubernetes",
@@ -495,7 +496,7 @@ module.exports = {
     },
     {
       Zeebe: [
-        "self-managed/zeebe-deployment/index",
+        "self-managed/zeebe-deployment/zeebe-installation",
         {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
@@ -516,7 +517,7 @@ module.exports = {
         },
         {
           Operation: [
-            "self-managed/zeebe-deployment/operations/index",
+            "self-managed/zeebe-deployment/operations/zeebe-in-production",
             "self-managed/zeebe-deployment/operations/resource-planning",
             "self-managed/zeebe-deployment/operations/network-ports",
             "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
@@ -532,17 +533,17 @@ module.exports = {
       ],
       Operate: [
         "self-managed/operate-deployment/install-and-start",
-        "self-managed/operate-deployment/configuration",
+        "self-managed/operate-deployment/operate-configuration",
         "self-managed/operate-deployment/data-retention",
         "self-managed/operate-deployment/schema-and-migration",
         "self-managed/operate-deployment/importer-and-archiver",
-        "self-managed/operate-deployment/authentication",
+        "self-managed/operate-deployment/operate-authentication",
         "self-managed/operate-deployment/usage-metrics",
       ],
       Tasklist: [
         "self-managed/tasklist-deployment/install-and-start",
-        "self-managed/tasklist-deployment/configuration",
-        "self-managed/tasklist-deployment/authentication",
+        "self-managed/tasklist-deployment/tasklist-configuration",
+        "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics",
       ],
       Optimize: [
@@ -618,7 +619,7 @@ module.exports = {
       ],
       Identity: [
         "self-managed/identity/what-is-identity",
-        "self-managed/identity/getting-started/index",
+        "self-managed/identity/getting-started/install-identity",
         {
           "User guide": [
             "self-managed/identity/user-guide/adding-an-application",
@@ -639,7 +640,7 @@ module.exports = {
             "self-managed/identity/deployment/application-monitoring",
           ],
           Troubleshooting: [
-            "self-managed/identity/troubleshooting/index",
+            "self-managed/identity/troubleshooting/troubleshoot-identity",
             "self-managed/identity/troubleshooting/common-problems",
           ],
         },

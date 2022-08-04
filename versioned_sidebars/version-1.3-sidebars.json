@@ -33,7 +33,7 @@
     "guides/migrating-from-Camunda-Platform"
   ],
   "Components": [
-    "components/overview",
+    "components/components-overview",
     {
       "Concepts": [
         "components/concepts/what-is-camunda-cloud",
@@ -319,7 +319,7 @@
     }
   ],
   "APIs & Clients": [
-    "apis-clients/overview",
+    "apis-clients/working-with-apis-clients",
     {
       "APIs": [
         "apis-clients/public-api",
@@ -415,7 +415,7 @@
     "reference/dependencies"
   ],
   "Self-Managed": [
-    "self-managed/overview",
+    "self-managed/about-self-managed",
     {
       "Zeebe": [
         "self-managed/zeebe-deployment/index",

@@ -8,7 +8,12 @@ keywords: [human tasks, orchestration, getting started, user guide]
 
 Using [Camunda Platform 8](https://camunda.io), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
 
+<<<<<<< HEAD
 When a process instance arrives at such a user task, a new job is created. The process instance stops at this point and waits until the job is completed. Applications like [Tasklist](../components/tasklist/introduction.md) can be used by humans to complete these tasks.
+=======
+When a process instance arrives at such a user task, a new job similar to a service task is created. The process instance stops at this point and waits until the job is completed. Applications like [Tasklist](../components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks.
+
+> > > > > > > main
 
 While it may originally seem like the goal of automating a process is to remove humans entirely, efficiently allocating work through user tasks can be even more beneficial.
 
@@ -32,17 +37,17 @@ To create an automated process with user tasks, take the following steps:
 5. Change the task type by clicking the wrench icon. Select [**User Task**](https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/).
    ![wrench icon example](./img/wrench-icon-example.png)
 6. Add a descriptive name using the properties panel. In this case, we've named ours `Decide what's for dinner`.
-7. Append an exclusive [gateway](../components/modeler/bpmn/gateways.md) to your user task by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
-   ![gateway symbol example](./img/gateway-symbol-example.png)
-8. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
-9. Add an expression, by clicking on the sequence flow to view the properties panel, and open the Condition tab to insert a conditional expression.
-
-- Note that the sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
-  ![sequence flow example](./img/sequence-flow-example.png)
-
-10. Add a closing gateway to follow the BPMN standards' best practices.
-11. Add a user activity “eat meal” and close the process with an end event to the user tasks.
-12. To follow the BPMN best practices we should add a pool to indicate who is executing the process.
+7. Assign this task to a user or group using the properties panel.
+   - User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element. This can be used to define which user the task can be assigned to. One or both of the following attributes can be specified simultaneously:
+   - `assignee`: Specifies the user assigned to the task. Tasklist will claim the task for this user.
+   - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
+     ![user task example](./img/user-task-example.png)
+8. Append a gateway to your user task by dragging it onto the dashboard from the palette on the left side of the screen, or by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
+9. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
+   :::note
+   The sequence flows require [expressions](../components/concepts/expressions.md) to access variables from the form we'll create below to determine what to eat for dinner. To add an expression, click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
+   :::
+10. Attach an end event to the two user tasks.
 
 ![dinner bpmn model](./img/dinner-bpmn-model.png)
 
@@ -55,6 +60,7 @@ Variables are part of a process instance and represent the data of the instance.
 1. To add a form and decide what's for dinner, return to the **Modeler** homepage and click **New > Form**.
 2. Name your form. In this case, we've named ours **Decide what's for dinner**.
 3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've described ours as **What's for dinner?**
+   <<<<<<< HEAD
 4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner add an extra value by clicking on the plus sign. Enter the value **Chicken** with the label as **Chicken** and enter the value **Salad** with the label as **Salad** in the other value.
 
 ![form values example](./img/form-values-example.png)
@@ -63,10 +69,16 @@ Variables are part of a process instance and represent the data of the instance.
 You'll need to insert the defined variable values into the appropriate sequence flows in the BPMN model to execute your process. For example, our sequence flow will now have the expressions of `= meal = "salad"`.
 :::
 
-5. You can add the form to your BPMN diagram in a few ways:
-   1. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import**.
-      ![form import example](./img/form-import-example.png)
-   2. Within your form, click the rectangular **Copy JSON** icon to copy the form JSON to your clipboard. Navigate to your BPMN diagram, and click the appropriate user task. Within the properties panel of the user task, navigate to the **Form** section, select a **Type** of **Camunda forms** and paste your JSON into the **Form JSON configuration** field.
+======= 4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner, we've created two values: one labeled **Chicken** and one labeled **Salad**.
+:::note
+As mentioned earlier, you'll need to insert the defined variable values into the appropriate sequence flows to execute your process. For example, our sequence flow will now have the expressions of `= meal = "salad"`.
+:::
+
+> > > > > > > main 5. You can add the form to your BPMN diagram in a few ways:
+
+1.  Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import**.
+    ![form import example](./img/form-import-example.png)
+2.  Within your form, click the rectangular **Copy JSON** icon to copy the form JSON to your clipboard. Navigate to your BPMN diagram, and click the appropriate user task. Within the properties panel of the user task, navigate to the **Form** section, select a **Type** of **Camunda forms** and paste your JSON into the **Form JSON configuration** field.
 
 ## Create a cluster
 
@@ -78,8 +90,11 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 
 1. To deploy your diagram to your cluster, click **Deploy diagram > Deploy**.
 2. To officially start a new process instance, click **Start instance**.
-3. Navigate to [Operate](../components/operate/index.md) by clicking the honeycomb icon next to the **Start instance** button. ![honeycomb icon example](./img/honeycomb-icon-example.png)
-4. Click **View process instances** to see your process instance alongside the green token waiting at the user task.
+   <<<<<<< HEAD
+3. # Navigate to [Operate](../components/operate/index.md) by clicking the honeycomb icon next to the **Start instance** button. ![honeycomb icon example](./img/honeycomb-icon-example.png)
+4. Navigate to [Operate](../components/operate/operate-introduction.md) by clicking the honeycomb icon next to the **Start instance** button.
+   > > > > > > > main
+5. Click **View process instances** to see your process instance alongside the green token waiting at the user task.
 
 ![token moving through process](./img/user-task-token-1.png)
 
@@ -109,6 +124,6 @@ In this case, the token will move through the gateway and (according to the cond
 
 - [BPMN user tasks](../components/modeler/bpmn/user-tasks/user-tasks.md)
 - [Building Forms with Modeler](./utilizing-forms.md)
-- [Introduction to Operate](../components/operate/index.md)
-- [Introduction to Tasklist](../components/tasklist/introduction.md)
+- [Introduction to Operate](../components/operate/operate-introduction.md)
+- [Introduction to Tasklist](../components/tasklist/introduction-to-tasklist.md)
 - [Intermediate Modeler example](https://github.com/NPDeehan/Whos50GameCamundaCloud)

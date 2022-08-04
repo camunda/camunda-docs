@@ -70,7 +70,7 @@ A test can now look like the following example. The complete source code is avai
 ```java
 @SpringBootTest
 @ZeebeSpringTest
-public class TestTwitterProcess {
+class TestTwitterProcess {
 
     @Autowired
     private ZeebeClient zeebe;
@@ -80,7 +80,7 @@ public class TestTwitterProcess {
 
 
     @Test
-    public void testTweetApproved() throws Exception {
+    void testTweetApproved() throws Exception {
         // Prepare data input
         TwitterProcessVariables variables = new TwitterProcessVariables()
             .setTweet("Hello world")
@@ -152,14 +152,14 @@ The `TwitterService` is considered a business service (it could, for example, wr
 private TwitterService tweetPublicationService;
 
 @Test
-public void testTweetApproved() throws Exception {
+void testTweetApproved() throws Exception {
     // ...
     // Using Mockito you can make sure a business method was called with the expected parameter
     Mockito.verify(tweetPublicationService).tweet("Hello world");
 }
 
 @Test
-public void testDuplicate() throws Exception {
+void testDuplicate() throws Exception {
     // Using Mockito you can define what should happen if a method is called, in this case an exception is thrown to simulate a business error
     Mockito.doThrow(new DuplicateTweetException("DUPLICATE")).when(tweetPublicationService).tweet(anyString());
     //...
@@ -171,7 +171,7 @@ For tests, you drive the process from waitstate to waitstate and assert that you
 
 ```java
 @Test
-public void testTweetApproved() throws Exception {
+void testTweetApproved() throws Exception {
     // Prepare data input
     TwitterProcessVariables variables = new TwitterProcessVariables()
         .setTweet("Hello world")
@@ -268,7 +268,7 @@ You were already exposed to the happy path in our example, which is the scenario
 
 ```java
 @Test
-public void testTweetApproved() throws Exception {
+void testTweetApproved() throws Exception {
     // Prepare data input
     TwitterProcessVariables variables = new TwitterProcessVariables()
         .setTweet("Hello world")
@@ -306,7 +306,7 @@ The tests for the exceptional paths are basically very similar to the happy path
 
 ```java
 @Test
-public void testRejectionPath() throws Exception {
+void testRejectionPath() throws Exception {
     TwitterProcessVariables variables = new TwitterProcessVariables()
       .setTweet("Hello world")
       .setBoss("Zeebot");
@@ -328,7 +328,7 @@ and:
 
 ```java
 @Test
-public void testDuplicateTweet() throws Exception {
+void testDuplicateTweet() throws Exception {
     // throw exception simulating duplicateM
     Mockito.doThrow(new DuplicateTweetException("DUPLICATE")).when(twitterService).tweet(anyString());
 
@@ -409,7 +409,7 @@ import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*; // <4
 import static org.mockito.Mockito.*; // <5>
 
 @RunWith(PowerMockRunner.class) // <1> <5>
-public class TwitterTest {
+class TwitterTest {
 
   @Rule
   public ProcessEngineRule processEngineRule = new ProcessEngineRule(); // <2>
@@ -418,14 +418,14 @@ public class TwitterTest {
   private TweetPublicationService tweetPublicationService;
 
   @Before
-  public void setup() {
+  void setup() {
 	// ...
     Mocks.register("tweetPublicationDelegate", tweetPublicationDelegate); // <6>
   }
 
   @Test // <1>
   @Deployment(resources = "twitter/TwitterDemoProcess.bpmn") // <3>
-  public void testTweetApproved() {
+  void testTweetApproved() {
 	// ...
   }
 // ...
@@ -467,7 +467,7 @@ The TweetPublicationService is mocked:
 private TweetPublicationService tweetPublicationService;
 
 @Before
-public void setup() {
+void setup() {
   // set up java delegate to use the mocked tweet service
   TweetPublicationDelegate tweetPublicationDelegate = new TweetPublicationDelegate();  // 2
   tweetPublicationDelegate.setTweetService(tweetPublicationService);
@@ -476,7 +476,7 @@ public void setup() {
 }
 
 @After
-public void teardown() {
+void teardown() {
   Mocks.reset();  // 3
 }
 ```
@@ -486,7 +486,7 @@ Now you can test the happy path to a published tweet:
 ```java
 @Test
 @Deployment(resources = "twitter/TwitterDemoProcess.bpmn")
-public void testTweetApproved() {
+void testTweetApproved() {
   // given
   ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(
     "TwitterDemoProcess",
@@ -509,7 +509,7 @@ As a next step, you might want to test the path where a tweet gets rejected. You
 ```java
 @Test
 @Deployment(resources = "twitter/TwitterDemoProcess.bpmn")
-public void testTweetRejected() {
+void testTweetRejected() {
 
   // create a process instance directly at the point at which a tweet was rejected
   ProcessInstance processInstance = runtimeService()
@@ -548,7 +548,7 @@ Above, we already saw the Java delegate code throwing the BPMN error exception w
 ```java
 @Test
 @Deployment(resources = "twitter/TwitterDemoProcess.bpmn")
-public void testTweetDuplicated() {
+void testTweetDuplicated() {
   // given
   doThrow(new DuplicateTweetException()) // 1
     .when(tweetPublicationService).tweet(anyString());

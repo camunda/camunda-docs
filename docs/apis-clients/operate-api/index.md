@@ -69,7 +69,7 @@ curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search'
 
 ### Authentication for Self-Managed cluster
 
-The authentication is described in [Operate Configuration - Authentication](/docs/self-managed/operate-deployment/authentication/#identity).
+The authentication is described in [Operate Configuration - Authentication](/docs/self-managed/operate-deployment/operate-authentication/#identity).
 
 ## Endpoints
 
