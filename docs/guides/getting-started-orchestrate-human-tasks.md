@@ -85,11 +85,8 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 
 1. To deploy your diagram to your cluster, click **Deploy diagram > Deploy**.
 2. To officially start a new process instance, click **Start instance**.
-   <<<<<<< HEAD
-3. # Navigate to [Operate](../components/operate/index.md) by clicking the honeycomb icon next to the **Start instance** button. ![honeycomb icon example](./img/honeycomb-icon-example.png)
-4. Navigate to [Operate](../components/operate/operate-introduction.md) by clicking the honeycomb icon next to the **Start instance** button.
-   > > > > > > > main
-5. Click **View process instances** to see your process instance alongside the green token waiting at the user task.
+3. Navigate to [Operate](../components/operate/operate-introduction.md) by clicking the ![honeycomb icon example](./img/honeycomb-icon-example.png) next to the **Start instance** button.
+4. Click **View process instances** to see your process instance alongside the green token waiting at the user task.
 
 ![token moving through process](./img/user-task-token-1.png)
 
