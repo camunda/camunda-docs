@@ -28,7 +28,7 @@ In this section of the Camunda Platform 8 documentation, you'll find guides to g
 
 1. [Create a Camunda Platform 8 account](./create-account.md) - Create a Camunda Platform 8 account to create clusters, deploy processes, and create a new instance.
 2. [Model your first process](./model-your-first-process.md) - Design and deploy a process, and share the process with your teammates or other stakeholders to begin collaborating.
-3. [Create a cluster](./create-cluster.md) - Create your first cluster to execute processes.
+3. [Create a cluster](../components/console/manage-clusters/create-cluster.md) - Create your first cluster to execute processes.
 4. [Orchestrate human tasks](./getting-started-orchestrate-human-tasks.md) - Assign human tasks to users so they can enter the necessary data to drive the business process forward.
 5. [Get started with API endpoints](./getting-started-orchestrate-api-endpoints.md) - Configure connector tasks with domain-specific parameters.
 6. [Orchestrate microservices](./getting-started-orchestrate-microservices.md) - Orchestrate the microservices necessary to achieve your end-to-end automated business process.

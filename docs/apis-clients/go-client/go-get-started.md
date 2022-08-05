@@ -11,7 +11,7 @@ You can find a complete example on [GitHub](https://github.com/camunda/camunda-p
 ## Prerequisites
 
 - [Camunda Platform 8 account](/guides/create-account.md)
-- [Cluster](/guides/create-cluster.md)
+- [Cluster](../../components/console/manage-clusters/create-cluster.md)
 - [Client credentials](/guides/setup-client-connection-credentials.md)
 - Go v1.13+ environment installed
 
