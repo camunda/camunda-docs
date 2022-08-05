@@ -5,7 +5,6 @@ module.exports = {
         "guides/introduction-to-camunda-platform-8",
         "guides/create-account",
         "guides/model-your-first-process",
-        "guides/create-cluster",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-api-endpoints",
         "guides/orchestrate-microservices",
@@ -13,6 +12,7 @@ module.exports = {
     },
     {
       "Next steps": [
+        "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/automating-a-process-using-bpmn",

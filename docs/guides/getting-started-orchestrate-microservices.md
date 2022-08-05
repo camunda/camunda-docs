@@ -12,17 +12,11 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-- Ensure you have a valid [Camunda Platform 8 account](./create-account.md), or sign up if you still need one.
+- Ensure you have a valid [Camunda Platform 8 account](create-account.md), or sign up if you still need one.
 - Java >= 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
 - Download and unzip or clone the [repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/orchestrate-microservices/worker-java`
-
-### Create a cluster
-
-import CreateCluster from './assets/react-components/create-cluster.md'
-
-<CreateCluster/>
 
 ### Design your process with BPMN
 
@@ -40,6 +34,12 @@ Start by designing your automated process using BPMN. This guide introduces you 
 8. On the right upper corner click the blue **Deploy diagram** button. Your diagram is now deployed to your cluster.
 9. Start a new process instance by clicking on the blue **Start instance** button.
 10. To the right of the two blue buttons, click the Application icon (honeycomb icon) button next to the **Start instance** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
+
+### Create a cluster
+
+import CreateCluster from './assets/react-components/create-cluster.md'
+
+<CreateCluster/>
 
 ### Create credentials for your Zeebe client
 
@@ -67,5 +67,5 @@ Congratulations! You successfully built your first microservice orchestration so
 
 ## Additional resources and next steps
 
-- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8?](../../components/concepts/what-is-camunda-platform-8).
-- Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](../setting-up-development-project).
+- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8?](/components/concepts/what-is-camunda-platform-8.md).
+- Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](setting-up-development-project.md).
