@@ -7,14 +7,14 @@ slug: /guides/
 
 [Camunda Platform 8](https://camunda.io) delivers scalable, on-demand process automation as-a-service. Camunda Platform 8 is combined with powerful execution engines for BPMN processes and DMN decisions, and paired with tools for collaborative modeling, operations, and analytics.
 
-Camunda Platform 8 consists of six [components](../components/components-overview.md):
+Camunda Platform 8 consists of six [components](/components/components-overview.md):
 
-- [Console](../components/console/introduction-to-console.md) - Configure and deploy clusters with Console.
-- [Web Modeler](../components/modeler/about-modeler.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda Platform 8 can be used with both [Desktop Modeler](../components/modeler/desktop-modeler/install-the-modeler.md) and [Web Modeler](../components/modeler/web-modeler/new-web-modeler.md).
-- [Zeebe](../components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda Platform 8.
-- [Tasklist](../components/tasklist/introduction-to-tasklist.md) - Complete tasks which require human input.
-- [Operate](../components/operate/operate-introduction.md) - Manage, monitor, and troubleshoot your processes.
-- [Optimize](../components/optimize/what-is-optimize.md) - Improve your processes by identifying constraints in your system.
+- [Console](/components/console/introduction-to-console.md) - Configure and deploy clusters with Console.
+- [Web Modeler](/components/modeler/about-modeler.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda Platform 8 can be used with both [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) and [Web Modeler](/components/modeler/web-modeler/new-web-modeler.md).
+- [Zeebe](/components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda Platform 8.
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md) - Complete tasks which require human input.
+- [Operate](/components/operate/operate-introduction.md) - Manage, monitor, and troubleshoot your processes.
+- [Optimize](/components/optimize/what-is-optimize.md) - Improve your processes by identifying constraints in your system.
 
 For more conceptual information about Camunda Platform 8, see [What is Camunda Platform 8](components/concepts/what-is-camunda-platform-8.md).
 
@@ -24,11 +24,11 @@ Interested in migrating process solutions developed for Camunda Platform 7 to ru
 
 ## Getting started
 
-In this section of the Camunda Platform 8 documentation, you'll find guides to get started with Camunda Platform 8 before learning more about each individual [component](../components/components-overview.md). Our getting started guides walk you through the following steps:
+In this section of the Camunda Platform 8 documentation, you'll find guides to get started with Camunda Platform 8 before learning more about each individual [component](/components/components-overview.md). Our getting started guides walk you through the following steps:
 
 1. [Create a Camunda Platform 8 account](./create-account.md) - Create a Camunda Platform 8 account to create clusters, deploy processes, and create a new instance.
 2. [Model your first process](./model-your-first-process.md) - Design and deploy a process, and share the process with your teammates or other stakeholders to begin collaborating.
-3. [Create a cluster](../components/console/manage-clusters/create-cluster.md) - Create your first cluster to execute processes.
+3. [Create a cluster](./create-cluster.md) - Create your first cluster to execute processes.
 4. [Orchestrate human tasks](./getting-started-orchestrate-human-tasks.md) - Assign human tasks to users so they can enter the necessary data to drive the business process forward.
 5. [Get started with API endpoints](./getting-started-orchestrate-api-endpoints.md) - Configure connector tasks with domain-specific parameters.
 6. [Orchestrate microservices](./getting-started-orchestrate-microservices.md) - Orchestrate the microservices necessary to achieve your end-to-end automated business process.

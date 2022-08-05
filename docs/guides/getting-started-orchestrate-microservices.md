@@ -12,7 +12,7 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-- Ensure you have a valid [Camunda Platform 8 account](./create-account.md), or sign up if you still need one.
+- Ensure you have a valid [Camunda Platform 8 account](create-account.md), or sign up if you still need one.
 - Java >= 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
@@ -37,17 +37,9 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 ### Create a cluster
 
-You must create a cluster if you have a new Camunda Platform 8 account.
+import CreateCluster from './assets/react-components/create-cluster.md'
 
-1. To create a cluster, click the **Clusters** tab, and click **Create New Cluster**.
-2. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation. Click **Create**.
-3. Your cluster will take a few moments to create. Check the status on the **Clusters** page or by clicking into the cluster itself and looking at the **Applications Overview**.
-
-Even while the cluster shows a status **Creating**, you can still proceed to begin modeling.
-
-:::note
-Zeebe must show a status of Healthy to properly deploy your model in future guide steps.
-:::
+<CreateCluster/>
 
 ### Create credentials for your Zeebe client
 
@@ -75,5 +67,5 @@ Congratulations! You successfully built your first microservice orchestration so
 
 ## Additional resources and next steps
 
-- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8?](../../components/concepts/what-is-camunda-platform-8).
-- Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](../setting-up-development-project).
+- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8?](/components/concepts/what-is-camunda-platform-8.md).
+- Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](setting-up-development-project.md).

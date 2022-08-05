@@ -60,7 +60,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 1. To deploy your diagram, click **Deploy diagram > Deploy**.
    :::note
-   If you have not yet created a cluster, clicking **Deploy diagram** will take you to the console to create a cluster. Once you make your cluster creation request, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](components/console/manage-clusters/create-cluster/).
+   If you have not yet created a cluster, clicking **Deploy diagram** will take you to the console to create a cluster. Once you make your cluster creation request, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](create-cluster.md).
    :::
 2. To officially start a new process instance, click **Start instance**.
 3. Navigate to [Operate](/components/operate/operate-introduction.md) by clicking the honeycomb icon next to the **Start instance** button.

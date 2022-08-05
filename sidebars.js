@@ -12,6 +12,7 @@ module.exports = {
     },
     {
       "Next steps": [
+        "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/automating-a-process-using-bpmn",

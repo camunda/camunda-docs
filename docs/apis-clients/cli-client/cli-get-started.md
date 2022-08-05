@@ -9,7 +9,7 @@ In this tutorial, you will learn to use the CLI client `zbctl` to interact with 
 ## Prerequisites
 
 - [Camunda Platform 8 account](/guides/create-account.md)
-- [Cluster](../../components/console/manage-clusters/create-cluster.md)
+- [Cluster](/guides/create-cluster.md)
 - [Client credentials](/guides/setup-client-connection-credentials.md)
 - [Modeler](/guides/model-your-first-process.md)
 - [NPM environment](https://www.npmjs.com/)
