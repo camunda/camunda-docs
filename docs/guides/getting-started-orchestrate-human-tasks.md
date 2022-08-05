@@ -58,10 +58,10 @@ Variables are part of a process instance and represent the data of the instance.
 
 ### Start and view your process instance
 
-1. To deploy your diagram, click **Deploy diagram > Deploy**.
-   :::note
-   If you have not yet created a cluster, clicking **Deploy diagram** will take you to the console to create a cluster. Once you have created your cluster, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](..components/console/manage-clusters/create-cluster/).
-   :::
+1. To deploy your diagram, click **Deploy diagram > Deploy**. 
+:::note 
+If you have not yet created a cluster, clicking **Deploy diagram** will take you to the console to create a cluster. Once you make your cluster creation request, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](..components/console/manage-clusters/create-cluster/).
+:::
 2. To officially start a new process instance, click **Start instance**.
 3. Navigate to [Operate](../components/operate/operate-introduction.md) by clicking the honeycomb icon next to the **Start instance** button.
 4. Click **View process instances** to see your process instance alongside the green token waiting at the user task.
@@ -75,7 +75,6 @@ Within this example, we've included a form to demonstrate the completion of a hu
 1. Go back to your Camunda Platform 8 diagram and select the honeycomb icon and then **View user tasks** to take a look at your user tasks inside Tasklist.
 2. Select the open user task on the left panel of **Tasks**. In our example below, this is **Decide what's for dinner**.
 3. Next to **Assignee**, click **Claim** to claim the task.
-   - To automatically assign this task, edit the **Assignee** field in the user task properties panel in your BPMN diagram. To learn more about automatically assigning tasks, visit our documentation on [user tasks](../components/modeler/bpmn/user-tasks/#assignments).
 4. Once finished entering the appropriate information, click **Complete Task**.
    ![complete a human task in Tasklist](./img/user-task-tasklist.png)
 5. On the left panel of **Tasks**, filter by **Completed** tasks to see your task has been finished.
