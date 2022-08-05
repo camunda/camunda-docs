@@ -49,19 +49,19 @@ Variables are part of a process instance and represent the data of the instance.
 2. Name your form. In this case, we've named ours **Decide what's for dinner**.
 3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've described ours as **What's for dinner?**
 4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner add an extra value by clicking on the plus sign. Enter the value **Chicken** with the label as **Chicken** and enter the value **Salad** with the label as **Salad** in the other value.
-![form values example](./img/form-values-example.png)
-:::note
-You'll need to insert the defined variable values into the appropriate sequence flows in the BPMN model to execute your process. For example, our sequence flow will now have the expressions of `= meal = "salad"`.
-:::
+   ![form values example](./img/form-values-example.png)
+   :::note
+   You'll need to insert the defined variable values into the appropriate sequence flows in the BPMN model to execute your process. For example, our sequence flow will now have the expressions of `= meal = "salad"`.
+   :::
 5. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import** to add the form to the BPMN diagram.
-    ![form import example](./img/form-import-example.png)
+   ![form import example](./img/form-import-example.png)
 
 ### Start and view your process instance
 
-1. To deploy your diagram, click **Deploy diagram > Deploy**. 
-:::note 
-If you have not yet created a cluster, clicking **Deploy diagram** will take you to the console to create a cluster. Once you have created your cluster, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](..components/console/manage-clusters/create-cluster/).
-:::
+1. To deploy your diagram, click **Deploy diagram > Deploy**.
+   :::note
+   If you have not yet created a cluster, clicking **Deploy diagram** will take you to the console to create a cluster. Once you have created your cluster, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](..components/console/manage-clusters/create-cluster/).
+   :::
 2. To officially start a new process instance, click **Start instance**.
 3. Navigate to [Operate](../components/operate/operate-introduction.md) by clicking the honeycomb icon next to the **Start instance** button.
 4. Click **View process instances** to see your process instance alongside the green token waiting at the user task.
