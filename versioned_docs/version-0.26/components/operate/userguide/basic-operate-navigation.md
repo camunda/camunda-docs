@@ -5,7 +5,7 @@ title: Getting familiar with Operate
 
 This section "Getting familiar with Operate" and the next section “Variables and incidents” assumes that you’ve deployed a workflow to Zeebe and have created at least one workflow instance. 
 
-If you’re not sure how to deploy workflows or create instances, we recommend going through the [Getting started tutorial](./guides/getting-started/model-your-first-process.md)
+If you’re not sure how to deploy workflows or create instances, we recommend going through the [Getting started tutorial](/guides/getting-started/model-your-first-process.md)
 
 In the following sections, we’ll use the same `order-process.bpmn` workflow model from the Getting Started guide. 
 

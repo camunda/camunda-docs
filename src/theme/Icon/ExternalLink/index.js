@@ -1,8 +1,11 @@
+// Why is this swizzled?
+//   1. Marketing gave us a custom icon for opening external links.
+//   2. We add a `title` to the icon for assistive devices.
+// Swizzled from version 2.0.0-rc.1.
+
 import React from "react";
-
 import styles from "./styles.module.css";
-
-function IconExternalLink({ width = 15, height = 15 }) {
+export default function IconExternalLink({ width = 15, height = 15 }) {
   return (
     <svg
       width={width}
@@ -20,5 +23,3 @@ function IconExternalLink({ width = 15, height = 15 }) {
     </svg>
   );
 }
-
-export default IconExternalLink;

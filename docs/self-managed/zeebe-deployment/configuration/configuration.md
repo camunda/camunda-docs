@@ -156,14 +156,6 @@ Zeebe uses Log4j2 framework for logging. In the distribution and the docker imag
 
 To enable Google Stackdriver compatible JSON logging, set the environment variable `ZEEBE_LOG_APPENDER=Stackdriver` before starting Zeebe.
 
-### Default logging configuration
-
-- `config/log4j2.xml` (applied by default)
-
-```
-{{#include ../../../dist/src/main/config/log4j2.xml}}
-```
-
 ### Change log level dynamically
 
 Zeebe brokers expose a [Spring Boot Actuators web endpoint](https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#loggers)

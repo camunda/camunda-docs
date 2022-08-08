@@ -1,5 +1,5 @@
 ---
-id: overview
+id: components-overview
 title: Overview Components
 sidebar_label: Overview Components
 slug: /components/
@@ -18,6 +18,6 @@ This section contains product manual content for each component in Camunda Cloud
 
 :::note Looking for deployment guides?
 
-Deployment guides for Camunda Cloud components are available in the [Self-Managed section](./self-managed/overview.md).
+Deployment guides for Camunda Cloud components are available in the [Self-Managed section](/self-managed/overview.md).
 
 :::

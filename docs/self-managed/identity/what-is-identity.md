@@ -17,4 +17,4 @@ Identity is the component within the Camunda Platform 8 stack responsible for au
 
 ### Next steps
 
-If you're new to Identity, we suggest reviewing our [Getting Started Guide](../getting-started/).
+If you're new to Identity, we suggest reviewing our [Getting Started Guide](./getting-started/install-identity.md).

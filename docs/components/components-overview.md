@@ -18,6 +18,6 @@ This section contains product manual content for each component in Camunda Platf
 
 :::note Looking for deployment guides?
 
-Deployment guides for Camunda Platform 8 components are available in the [Self-Managed section](./self-managed/overview.md).
+Deployment guides for Camunda Platform 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
 
 :::

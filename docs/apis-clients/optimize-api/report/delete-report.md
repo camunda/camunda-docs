@@ -9,7 +9,7 @@ description: "The REST API to delete reports from Optimize."
 The report deletion API allows you to delete reports by ID from Optimize.
 
 :::note Heads up!
-During deletion a report will get removed from any dashboard or combined report it is referenced by. In case a report is referenced by an alert, the corresponding alert will get deleted too.
+During deletion a report will get removed from any dashboard or combined process report it is referenced by. In case a report is referenced by an alert, the corresponding alert will get deleted too.
 :::
 
 ## Method & HTTP target resource

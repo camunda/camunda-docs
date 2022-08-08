@@ -13,12 +13,6 @@ The concept of a connector consists of two parts: the business logic is implemen
 
 This guide will walk you through working with a REST connector task as a first time Camunda Platform 8 user.
 
-## Create a cluster
-
-import CreateCluster from './assets/react-components/create-cluster.md'
-
-<CreateCluster/>
-
 ## Create a REST connector task
 
 To use a **REST connector** in your process, follow the steps below:
@@ -53,6 +47,9 @@ To deploy your process, take the following steps:
 
 1. Drag the bolded circular end event element from the palette and onto the canvas, or by clicking on the final service task, and then the end event element alongside it. Ensure there is an arrow connecting the service task to the end event.
 2. In the top right corner click the blue **Deploy diagram** button. Your diagram is now deployed to your cluster.
+   :::note
+   If you have not yet created a cluster, clicking **Deploy diagram** will take you to the console to create a cluster. Once you make your cluster creation request, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](create-cluster.md).
+   :::
 3. Start a new process instance by clicking on the blue **Start instance** button.
 4. To the right of the **Start instance** button, click the honeycomb-shaped **Applications** icon. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 

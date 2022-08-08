@@ -54,29 +54,20 @@ Now that you've created a decision, add some logic to make it executable by morp
 
 Now that our DRD is complete, let's build out the DMN table for our decision.
 
-1. Click the table icon in the top left corner of the box containing our "Clothes to wear" decision.
-
-![dmn blank table](./img/dmn-table-blank.png)
-
-Here, we'll give a set of rules among weather and the activity to determine what we wear. For example, when a certain value is true (or in this case, when two values are true among the weather and the activity), then one outcome is determined for clothes to wear.
-
-:::note
-At any time, you can click **Edit DRD** to return to your DRD and continue moving elements around on the palette.
-:::
-
-1. Click the **+** icon next to the **When** column so we can analyze both the weather and the activity.
-2. Double-click the first column. In the **Expression** field, we'll enter "temperature". Given the **Type** will remain **string**, we'll enter "Hot" and "Cold" in the **Add Predefined Values** field, separated by commas. Click your keyboards "enter" key to save these values.
-
-:::note
-Utilizing a data type other than a string? Take a look at our documentation on different [data types](../components/modeler/dmn/dmn-data-types.md), like booleans and numbers.
-:::
-
+1. Click the table icon in the top left corner of the box containing our "Clothes to wear" decision. Here, we'll give a set of rules among weather and the activity to determine what we wear. For example, when a certain value is true (or in this case, when two values are true among the weather and the activity), then one outcome is determined for clothes to wear.
+   ![dmn blank table](./img/dmn-table-blank.png)
+   :::note
+   At any time, you can click **Edit DRD** to return to your DRD and continue moving elements around on the palette.
+   :::
+2. Click the **+** icon next to the **When** column so we can analyze both the weather and the activity.
+3. Double-click the first column. In the **Expression** field, we'll enter "temperature". Given the **Type** will remain **string**, we'll enter "Hot" and "Cold" in the **Add Predefined Values** field, separated by commas. Click your keyboards "enter" key to save these values.
+   :::note
+   Utilizing a data type other than a string? Take a look at our documentation on different [data types](../components/modeler/dmn/dmn-data-types.md), like booleans and numbers.
+   :::
 4. Similar to the first column, enter "activity" for the expression and predefined values of "inside" and "outside".
-
-![dmn table example](./img/dmn-table-example.png)
-
-1. Double-click the **Output** column. Here, we'll plug in an **Output Name** of "clothingChoice", and Predefined Values of "shorts" and "pants".
-2. Once finished, we'll click the pencil icon to write out our possible outcomes. For example, we can select the predefined values of "hot" and "outside" to determine we will wear shorts. These inputs can also be combined with [rules](../components/modeler/dmn/decision-table-rule.md).
+   ![dmn table example](./img/dmn-table-example.png)
+5. Double-click the **Output** column. Here, we'll plug in an **Output Name** of "clothingChoice", and Predefined Values of "shorts" and "pants".
+6. Once finished, we'll click the pencil icon to write out our possible outcomes. For example, we can select the predefined values of "hot" and "outside" to determine we will wear shorts. These inputs can also be combined with [rules](../components/modeler/dmn/decision-table-rule.md).
 
 ![completed dmn table](./img/dmn-table-complete-example.png)
 

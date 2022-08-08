@@ -5,7 +5,6 @@ module.exports = {
         "guides/introduction-to-camunda-platform-8",
         "guides/create-account",
         "guides/model-your-first-process",
-        "guides/create-cluster",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-api-endpoints",
         "guides/orchestrate-microservices",
@@ -13,6 +12,7 @@ module.exports = {
     },
     {
       "Next steps": [
+        "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/automating-a-process-using-bpmn",
@@ -108,6 +108,7 @@ module.exports = {
                     "components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview",
                     "components/modeler/web-modeler/connectors/available-connectors/rest",
                     "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
+                    "components/modeler/web-modeler/connectors/available-connectors/slack",
                   ],
                 },
               ],
@@ -247,7 +248,7 @@ module.exports = {
               ],
             },
             "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/combined-reports",
+            "components/optimize/userguide/combined-process-reports",
             "components/optimize/userguide/processes",
             {
               "Process analysis": [
@@ -463,10 +464,10 @@ module.exports = {
     "reference/dependencies",
   ],
   "Self-Managed": [
-    "self-managed/overview",
+    "self-managed/about-self-managed",
     {
       Installation: [
-        "self-managed/platform-deployment/index",
+        "self-managed/platform-deployment/platform-8-deployment",
         {
           Kubernetes: [
             "self-managed/platform-deployment/kubernetes",
@@ -495,7 +496,7 @@ module.exports = {
     },
     {
       Zeebe: [
-        "self-managed/zeebe-deployment/index",
+        "self-managed/zeebe-deployment/zeebe-installation",
         {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
@@ -516,7 +517,7 @@ module.exports = {
         },
         {
           Operation: [
-            "self-managed/zeebe-deployment/operations/index",
+            "self-managed/zeebe-deployment/operations/zeebe-in-production",
             "self-managed/zeebe-deployment/operations/resource-planning",
             "self-managed/zeebe-deployment/operations/network-ports",
             "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
@@ -532,17 +533,17 @@ module.exports = {
       ],
       Operate: [
         "self-managed/operate-deployment/install-and-start",
-        "self-managed/operate-deployment/configuration",
+        "self-managed/operate-deployment/operate-configuration",
         "self-managed/operate-deployment/data-retention",
         "self-managed/operate-deployment/schema-and-migration",
         "self-managed/operate-deployment/importer-and-archiver",
-        "self-managed/operate-deployment/authentication",
+        "self-managed/operate-deployment/operate-authentication",
         "self-managed/operate-deployment/usage-metrics",
       ],
       Tasklist: [
         "self-managed/tasklist-deployment/install-and-start",
-        "self-managed/tasklist-deployment/configuration",
-        "self-managed/tasklist-deployment/authentication",
+        "self-managed/tasklist-deployment/tasklist-configuration",
+        "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics",
       ],
       Optimize: [
@@ -618,7 +619,7 @@ module.exports = {
       ],
       Identity: [
         "self-managed/identity/what-is-identity",
-        "self-managed/identity/getting-started/index",
+        "self-managed/identity/getting-started/install-identity",
         {
           "User guide": [
             "self-managed/identity/user-guide/adding-an-application",
@@ -639,7 +640,7 @@ module.exports = {
             "self-managed/identity/deployment/application-monitoring",
           ],
           Troubleshooting: [
-            "self-managed/identity/troubleshooting/index",
+            "self-managed/identity/troubleshooting/troubleshoot-identity",
             "self-managed/identity/troubleshooting/common-problems",
           ],
         },
