@@ -10,12 +10,34 @@ on:
   pull_request:
 
 jobs:
+  auto-format:
+    # For internal PRs, this will run on `push` events;
+    #   for external/forked PRs, it will run on `pull_request` events.
+    #   Ideally we'd have checked this condition when defining the triggers,
+    #   but that's not supported by GitHub actions.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        # with:
+        #   ref: ${{ github.head_ref }}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run format
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4.14.1
+        with:
+          commit_message: "chore(format): apply prettier changes"
+          # branch: ${{ github.head_ref }}
   build-docs:
     # For internal PRs, this will run on `push` events;
     #   for external/forked PRs, it will run on `pull_request` events.
     #   Ideally we'd have checked this condition when defining the triggers,
     #   but that's not supported by GitHub actions.
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork
+    needs: auto-format
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
