@@ -473,6 +473,10 @@ module.exports = {
             "self-managed/platform-deployment/kubernetes",
             "self-managed/platform-deployment/kubernetes-helm",
           ],
+          OpenShift: [
+            "self-managed/platform-deployment/openshift",
+            "self-managed/platform-deployment/openshift-helm",
+          ],
         },
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/local",
