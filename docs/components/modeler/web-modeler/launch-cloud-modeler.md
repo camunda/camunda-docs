@@ -22,7 +22,7 @@ To launch Web Modeler, follow the steps below:
    ![web modeler templates list modal](img/web-modeler-new-user-templates-list-modal.png)
 5. From the modal, you can also open the details of a specific template by clicking **Details**.
    - In the details modal, you can find information about the author, the technical level, the description, and the categories of the selected template. You can also browse the diagram from the preview on the right side. To proceed with creating the diagram, click **Create model from template**.
-   ![web modeler template details modal](img/web-modeler-new-user-template-details-modal.png)
+     ![web modeler template details modal](img/web-modeler-new-user-template-details-modal.png)
 
 Congrats! You just created your first diagram.
 ![web modeler new diagram created](img/web-modeler-new-user-new-diagram.png)
