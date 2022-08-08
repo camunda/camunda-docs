@@ -19,8 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        # with:
-        #   ref: ${{ github.head_ref }}
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.head_ref }}
       - uses: actions/setup-node@v1
         with:
           node-version: 16
@@ -30,7 +31,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4.14.1
         with:
           commit_message: "chore(format): apply prettier changes"
-          branch: ${{ github.head_ref }}
+          # branch: ${{ github.head_ref }}
   build-docs:
     # For internal PRs, this will run on `push` events;
     #   for external/forked PRs, it will run on `pull_request` events.
