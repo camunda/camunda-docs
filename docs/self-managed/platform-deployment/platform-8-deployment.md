@@ -27,6 +27,7 @@ For details on supported environments (e.g. Java or Elasticsearch versions), see
 You have the following options to run the above components in a self-managed fashion:
 
 - [**Kubernetes**](./kubernetes.md): We strongly recommend using Kubernetes to run Camunda Platform 8 in production. Using minikube, Kubernetes can also be an interesting environment to run Camunda Platform 8 locally on developer machines.
+- [**OpenShift**](./openshift.md): You can run Camunda Platform 8 on OpenShift in much the same way you would on a standard Kubernetes cluster, with some configuration based on your desired security context constraints.
 - [**Docker**](./docker.md): You can run the provided Docker images of the components, also in production. For your convenience, we provide a Docker Compose configuration to run Camunda Platform 8 on developer machines. Note that the Docker Compose configuration is **not** optimized for production usage, but for local development.
 - [**Local installation**](./local.md): You can run the Java applications on a local or virtual machine if it provides a supported Java Virtual Machine (JVM). This allows you to run Camunda on virtual machines or bare metal and offers a significant amount of flexibility. However, you will need to configure the details for the components to interact correctly yourself. We consider this a last resort. Note that Windows/Mac is **not** supported for production usage of Zeebe.
 
@@ -41,7 +42,7 @@ For production usage, we highly recommend using a real Kubernetes cluster and ou
 We support the following deployment options (the sequence expresses preference) for production:
 
 1. **SaaS**
-2. [**Helm**](./kubernetes-helm.md) on a real Kubernetes cluster (independent where this is hosted, for example GKE).
+2. [**Helm**](./kubernetes-helm.md) on a real Kubernetes cluster (independent where this is hosted, for example GKE), including [a dedicated guide to deploy with Helm on OpenShift](./openshift-helm.md).
 3. [**Docker**](./docker.md) images together with the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
 4. [**Local installation**](./local.md) using the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
 
