@@ -100,20 +100,6 @@ module.exports = {
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
-              Connectors: [
-                "components/modeler/web-modeler/connectors/introduction-to-connectors",
-                "components/modeler/web-modeler/connectors/use-connectors",
-                {
-                  "Available Connectors": [
-                    "components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview",
-                    "components/modeler/web-modeler/connectors/available-connectors/rest",
-                    "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
-                    "components/modeler/web-modeler/connectors/available-connectors/slack",
-                  ],
-                },
-              ],
-            },
-            {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
               ],
