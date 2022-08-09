@@ -37,7 +37,7 @@ To do do, you must have the following tools installed in your local environment:
 
 You can use your Kubernetes environment of choice, e.g.:
 
-- [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), Minikube, and MicroK8s for local development
+- [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), Minikube, and MicroK8s for local development.
 - [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift), an enterprise ready solution with a focus on security.
 - Remote cloud service for prod, like Google GKE, Azure AKS, Amazon EKS, etc.
 
