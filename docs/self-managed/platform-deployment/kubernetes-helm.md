@@ -88,13 +88,13 @@ elasticsearch-master-1                          0/1     Init:0/1            0   
 
 ### Installing on OpenShift
 
-To install the Camunda Platform Helm chart in OpenShift, you will need to customize the values based on your desired security context constraints (SCC). By using the `anyuid` SCC, you can deploy the Helm chart as described above, as with any Kubernetes cluster, e.g.:
+To install the Camunda Platform Helm chart in OpenShift, you will need to customize the values based on your desired security context constraints (SCC). By using the `anyuid` SCC, you can deploy the Helm chart as described above, as with any Kubernetes cluster. For example:
 
 ```shell
 > helm install <RELEASE NAME> camunda/camunda-platform
 ```
 
-If you wish to deploy with less permissive SCCs, such as `restricted`, or `nonroot`, then read the [OpenShift deployment](./openshift-helm.md) guide, which includes detailed instructions as well as a guide for troubleshooting common problems.
+If you wish to deploy with less permissive SCC, such as `restricted` or `nonroot`, read the [OpenShift deployment](./openshift-helm.md) guide, which includes detailed instructions as well as a guide for troubleshooting common problems.
 
 ### Installing the Camunda Helm chart locally using KIND
 

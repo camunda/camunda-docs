@@ -42,7 +42,7 @@ For production usage, we highly recommend using a real Kubernetes cluster and ou
 We support the following deployment options (the sequence expresses preference) for production:
 
 1. **SaaS**
-2. [**Helm**](./kubernetes-helm.md) on a real Kubernetes cluster (independent where this is hosted, for example GKE), including [a dedicated guide to deploy with Helm on OpenShift](./openshift-helm.md).
+2. [**Helm**](./kubernetes-helm.md) on a real Kubernetes cluster (independent of where this is hosted, for example GKE), including [a dedicated guide to deploy with Helm on OpenShift](./openshift-helm.md).
 3. [**Docker**](./docker.md) images together with the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
 4. [**Local installation**](./local.md) using the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
 
