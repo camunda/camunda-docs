@@ -207,17 +207,6 @@ module.exports = {
           // Please change this to your repo.
           editUrl:
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
-          // disableVersioning: isVersioningDisabled,
-          lastVersion: "current",
-          // onlyIncludeVersions:
-          //   !isVersioningDisabled && (isDev || isDeployPreview)
-          //     ? ["current", ...versions.slice(0, 2)]
-          //     : undefined,
-          versions: {
-            current: {
-              label: `latest`,
-            },
-          },
         },
         blog: false,
         theme: {
