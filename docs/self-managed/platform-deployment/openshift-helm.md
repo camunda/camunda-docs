@@ -23,7 +23,7 @@ Find a quick start guide in the [Helm chart repository](https://github.com/camun
 
 The `Elasticsearch`, `Keycloak`, and `Postgresql` charts all specify default non-root users for security purposes. To deploy these charts through the `camunda-platform` chart, these default values must be removed. Unfortunately, due to a [longstanding bug in Helm](https://github.com/helm/helm/issues/9136) affecting all Helm versions from 3.2.0 and greater, this makes the installation of the chart (when deploying any of these sub-charts) more complex.
 
-Note that this is only an issue if you are deploying `Elasticsearch`, `Keycloak` (via `Identity`), or `Postgresql` (via `Keycloak`). If you are not deploying these, or not via the `camunda-platform` chart, or you are using a [permissive SCC](./openshift.md#permissive-scc).
+Note that this is only an issue if you are deploying `Elasticsearch`, `Keycloak` (via `Identity`), or `Postgresql` (via `Keycloak`). If you are not deploying these, or not via the `camunda-platform` chart, or you are using [permissive SCC](./openshift.md#permissive-scc), this issue does not affect your deployment.
 
 :::note
 This also affects installations done through the OpenShift console, as it still uses Helm under the hood.
