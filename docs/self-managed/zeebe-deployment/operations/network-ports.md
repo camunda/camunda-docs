@@ -10,7 +10,7 @@ The broker cluster sits behind the gRPC Gateway, which handles all requests from
 The gateway needs to receive communication via `zeebe.gateway.network.port: 26500` from clients/workers, and `zeebe.gateway.cluster.initialContactPoints: [127.0.0.1:26502]` from brokers.
 
 :::note
-You can use all broker connections instead of one to make the startup process of the Zeebe Gateway more resilient.
+You can use all broker connections instead of one to make the startup process of the Zeebe gateway more resilient.
 :::
 
 The relevant [configuration](../configuration/configuration.md) settings are:
