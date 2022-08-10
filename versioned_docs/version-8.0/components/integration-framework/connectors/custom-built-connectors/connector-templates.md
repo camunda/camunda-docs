@@ -7,9 +7,9 @@ description: Introduction to connector templates
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-**Connector templates** are JSON configuration files, which customize how a BPMN element is shown, and how it can be configured by process developers.
+**Connector templates** are JSON configuration files which customize how a BPMN element is shown, and how it can be configured by process developers.
 
-You can for example allow the user to model and configure the following **REST connector** by providing a simple JSON configuration:
+You can, for example, allow the user to model and configure the following **REST connector** by providing a simple JSON configuration:
 
 <Tabs groupId="connectorTemplate" defaultValue="process" values={
 [
@@ -175,12 +175,12 @@ You can for example allow the user to model and configure the following **REST c
 
 ## Develop connector templates
 
-You can develop connector template by using the [`element template` feature](../../../modeler/desktop-modeler/element-templates/defining-templates.md). You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
+You can develop connector templates using the [`element template` feature](../../../modeler/desktop-modeler/element-templates/defining-templates.md). You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
 
 ## Providing and using connector templates
 
-When using the [web modeler](../../../modeler/web-modeler/launch-cloud-modeler.md), you can create **connector templates** directly within the application and then share them with your respective organization.
+When using [Web Modeler](../../../modeler/web-modeler/launch-cloud-modeler.md), you can create **connector templates** directly within the application and then share them with your respective organization.
 
-When using the [desktop modeler](../../../modeler/desktop-modeler/install-the-modeler.md), you have to place the **connector templates** within the [file-system, so that the modeler will pick them up](../../../modeler/desktop-modeler/element-templates/configuring-templates.md).
+When using [Desktop Modeler](../../../modeler/desktop-modeler/install-the-modeler.md), you must place the **connector templates** within the [file system](../../../modeler/desktop-modeler/element-templates/configuring-templates.md) so the modeler will pick them up.
 
-Once avaiable, process developers can directly [use the **connector templates** from within the modeling canvas](../use-connectors.md).
+Once available, process developers can directly [use the **connector templates** from within the modeling canvas](../use-connectors.md).
