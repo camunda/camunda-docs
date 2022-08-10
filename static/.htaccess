@@ -258,8 +258,8 @@ RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-co
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/slack(.*)$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/slack$2 [R=301,L]
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/slack$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/slack [R=301,L]
 
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors(.*)$ /docs/components/integration-framework/introduction$2 [R=301,L]
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors$ /docs/components/integration-framework/introduction [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors(.*)$ /docs/components/integration-framework/introduction-to-connectors$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors$ /docs/components/integration-framework/introduction-to-connectors [R=301,L]
 
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/use-connectors(.*)$ /docs/components/integration-framework/connectors/use-connectors$2 [R=301,L]
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/use-connectors$ /docs/components/integration-framework/connectors/use-connectors [R=301,L]
