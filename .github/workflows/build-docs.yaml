@@ -30,6 +30,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4.14.1
         with:
           commit_message: "chore(format): apply prettier changes"
+          ref: ${{ github.head_ref }}
   auto-format-non-forked:
     # For non-forked PRs, only run on `push`. This event re-fires when they push more commits.
     # TODO: get rid of all this copy pasta.
