@@ -5,7 +5,7 @@ description: Introduction to the Connector SDK
 ---
 
 :::note
-The **connector SDK** is a prototype and subject to breaking changes. Use at your own risk!
+The **connector SDK** is in developer preview and subject to breaking changes. Use at your own risk!
 :::
 
 The **connector SDK** allows you to easily develop own **connectors**. With the help of the SDK you can easily perform common operations, such as
