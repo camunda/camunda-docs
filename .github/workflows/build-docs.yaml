@@ -52,7 +52,9 @@ jobs:
     #   Ideally we'd have checked this condition when defining the triggers,
     #   but that's not supported by GitHub actions.
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork
-    needs: auto-format
+    needs:
+      - auto-format-forked
+      - auto-format-non-forked
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
