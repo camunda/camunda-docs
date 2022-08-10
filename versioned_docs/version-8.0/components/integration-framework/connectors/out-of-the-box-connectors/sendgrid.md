@@ -40,10 +40,6 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
 
 ![sendgrid email connector complete properties](../img/connectors-sendgrid-email-complete-properties.png)
 
-:::note
-Now you can [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors, the runtime is available out of the box in Camunda Platform 8 SaaS.
-:::
-
 ### SendGrid Email Template Connector
 
 Send an email via SendGrid Dynamic Template and use the [Handlebars templating language](https://handlebarsjs.com/) to pass dynamic values to your connector.
@@ -135,10 +131,6 @@ If you want to provide dynamic content in the email via process variables, you c
 }
 ```
 
-:::note
-Now you can [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors, the runtime is available out of the box in Camunda Platform 8 SaaS.
-:::
-
 ## Appendix
 
 ### Create a SendGrid account
@@ -189,5 +181,5 @@ To create an API key in SendGrid, take the following steps:
 
 We advise you to keep your API key safe and avoid exposing it in the BPMN `xml` file by creating a Secret:
 
-1. Follow our [guide for creating Secrets](../../../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating Secrets](../../../console/manage-clusters/manage-secrets.md).
 2. Name your Secret `SEND_GRID_API_KEY` so you can reference it later in the connector.

@@ -34,7 +34,7 @@ No extra authentication configuration is required; you can jump to the [next sec
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a Secret:
 
-1. Follow our [guide for creating Secrets](../../../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating Secrets](../../../console/manage-clusters/manage-secrets.md).
 2. Name your Secret (i.e `REST_BASIC_AUTH_SECRET`) so you can reference it later in the connector.
 
 ### Configure Basic Authentication
@@ -52,7 +52,7 @@ Select the **REST Connector** and fill out the following properties under the **
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a Secret:
 
-1. Follow our [guide for creating Secrets](../../../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating Secrets](../../../console/manage-clusters/manage-secrets.md).
 2. Name your Secret (i.e `REST_BEARER_TOKEN`) so you can reference it later in the connector.
 
 #### Configure the Bearer Token
@@ -146,7 +146,3 @@ Additionally, you can choose to unpack the content of your `response` into multi
 ![rest connector http response mapping](../img/connectors-rest-http-response-mapping.png)
 
 The next steps in your process will have access to the `currentWeather` variable that will contain the full response and the mapped variables from the result expression: `actual_temp`, `feel_temp`, and `weather`.
-
-:::note
-Now you can [deploy and start a new instance](../../save-and-deploy.md) of your process. As with all connectors, the runtime is available out of the box in Camunda Platform 8 SaaS.
-:::
