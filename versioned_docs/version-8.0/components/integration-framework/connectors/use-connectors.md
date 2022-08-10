@@ -20,4 +20,4 @@ Fields in the properties panel marked with an equals sign inside a circle indica
 
 ![feel connectors](img/use-connectors-feel.png)
 
-Find the available connectors in Camunda Platform 8 SaaS and how to use them in the [following pages](/components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview.md).
+Find the available connectors in Camunda Platform 8 SaaS and how to use them in the [following pages](./out-of-the-box-connectors/available-connectors-overview.md).
