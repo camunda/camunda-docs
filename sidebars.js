@@ -299,7 +299,7 @@ module.exports = {
         },
       ],
       "Integration Framework": [
-        "components/integration-framework/introduction-to-integration-frameworks",
+        "components/integration-framework/introduction-to-connectors",
         {
           Connectors: [
             "components/integration-framework/connectors/use-connectors",

@@ -1,5 +1,5 @@
 ---
-id: introduction-to-integration-frameworks
+id: introduction-to-connectors
 title: Introduction
 ---
 
