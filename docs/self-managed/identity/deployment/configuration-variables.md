@@ -15,6 +15,11 @@ methods.
 | `IDENTITY_URL`                       | The URL of the Identity service                      | http://localhost:8080                               |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use              | http://localhost:18080/auth                         |
 | `IDENTITY_AUTH_PROVIDER_BACKEND_URL` | Used to support container to container communication | http://localhost:18080/auth/realms/camunda-platform |
+| `IDENTITY_BASE_PATH`                 | Used to configure Identity to run on a subpath       |                                                     |
+
+:::note
+When setting the `IDENTITY_BASE_PATH` variable, a secure connection (HTTPS) is required to allow Identity to correctly handle requests
+:::
 
 ### Component configuration
 
