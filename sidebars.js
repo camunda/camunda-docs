@@ -5,7 +5,6 @@ module.exports = {
         "guides/introduction-to-camunda-platform-8",
         "guides/create-account",
         "guides/model-your-first-process",
-        "guides/create-cluster",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-api-endpoints",
         "guides/orchestrate-microservices",
@@ -13,6 +12,7 @@ module.exports = {
     },
     {
       "Next steps": [
+        "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/automating-a-process-using-bpmn",
@@ -100,20 +100,6 @@ module.exports = {
             "components/modeler/web-modeler/collaboration",
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
-            {
-              Connectors: [
-                "components/modeler/web-modeler/connectors/introduction-to-connectors",
-                "components/modeler/web-modeler/connectors/use-connectors",
-                {
-                  "Available Connectors": [
-                    "components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview",
-                    "components/modeler/web-modeler/connectors/available-connectors/rest",
-                    "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
-                    "components/modeler/web-modeler/connectors/available-connectors/slack",
-                  ],
-                },
-              ],
-            },
             {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
@@ -249,7 +235,7 @@ module.exports = {
               ],
             },
             "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/combined-reports",
+            "components/optimize/userguide/combined-process-reports",
             "components/optimize/userguide/processes",
             {
               "Process analysis": [
@@ -310,6 +296,26 @@ module.exports = {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/userguide/updating-tasklist-cloud",
+          ],
+        },
+      ],
+      "Integration Framework": [
+        "components/integration-framework/introduction-to-connectors",
+        {
+          Connectors: [
+            "components/integration-framework/connectors/use-connectors",
+            {
+              "Out-of-the-box Connectors": [
+                "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
+                "components/integration-framework/connectors/out-of-the-box-connectors/rest",
+                "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
+                "components/integration-framework/connectors/out-of-the-box-connectors/slack",
+              ],
+              "Custom-build Connectors": [
+                "components/integration-framework/connectors/custom-built-connectors/connector-templates",
+                "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
+              ],
+            },
           ],
         },
       ],
@@ -473,6 +479,10 @@ module.exports = {
           Kubernetes: [
             "self-managed/platform-deployment/kubernetes",
             "self-managed/platform-deployment/kubernetes-helm",
+          ],
+          OpenShift: [
+            "self-managed/platform-deployment/openshift",
+            "self-managed/platform-deployment/openshift-helm",
           ],
         },
         "self-managed/platform-deployment/docker",

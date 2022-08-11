@@ -1,5 +1,5 @@
 ---
-id: overview
+id: components-overview
 title: Overview Components
 sidebar_label: Overview Components
 slug: /components/

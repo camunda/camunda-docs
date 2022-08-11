@@ -6,6 +6,7 @@ module.exports = {
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/",
   onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "camunda-cloud", // Usually your GitHub org/user name.
   projectName: "camunda-cloud-documentation", // Usually your repo name.
@@ -206,17 +207,6 @@ module.exports = {
           // Please change this to your repo.
           editUrl:
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
-          // disableVersioning: isVersioningDisabled,
-          lastVersion: "current",
-          // onlyIncludeVersions:
-          //   !isVersioningDisabled && (isDev || isDeployPreview)
-          //     ? ["current", ...versions.slice(0, 2)]
-          //     : undefined,
-          versions: {
-            current: {
-              label: `latest`,
-            },
-          },
         },
         blog: false,
         theme: {
