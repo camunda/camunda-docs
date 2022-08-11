@@ -78,9 +78,11 @@ If the duration is zero or negative, the timer fires immediately.
 ### Time cycle
 
 A cycle defined as ISO 8601 repeating intervals format; it contains the duration and the number of repetitions. If the repetitions are not defined, the timer repeats infinitely until it is canceled.
+Additionally, you can specify a time cycle using cron expressions. See the [CronExpression Tutorial](https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions) for additional information about using cron expressions.
 
 - `R5/PT10S`: Every 10 seconds, up to five times
 - `R/P1D`: Every day, infinitely
+- `0 0 9-17 * * MON-FRI`: Every hour on the hour from 9-5 p.m. UTC Monday-Friday
 
 ## Additional resources
 
