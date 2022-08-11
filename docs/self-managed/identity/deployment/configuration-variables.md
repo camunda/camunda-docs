@@ -18,7 +18,7 @@ methods.
 | `IDENTITY_BASE_PATH`                 | Used to configure Identity to run on a subpath       |                                                     |
 
 :::note
-When setting the `IDENTITY_BASE_PATH` variable, a secure connection (HTTPS) is required to allow Identity to correctly handle requests
+When setting the `IDENTITY_BASE_PATH` variable, a secure connection (HTTPS) is required to allow Identity to correctly handle requests.
 :::
 
 ### Component configuration
