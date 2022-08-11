@@ -389,6 +389,11 @@ email:
     # Possible values are 'NONE', 'STARTTLS' or 'SSL/TLS'
     securityProtocol: "NONE"
 
+entity:
+  # which users are authorized to create/edit/delete Optimize entities outside of a collection.
+  # Available options: 'all', 'superuser', 'none'
+  authorizedEditors: "all"
+
 export:
   csv:
     # which users are authorized to download CSVs. Available options: 'all', 'superuser', 'none'
