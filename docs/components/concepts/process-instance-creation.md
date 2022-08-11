@@ -97,7 +97,7 @@ Failure scenarios applicable to other commands are applicable to this command as
 
 ### Create and start at a user-defined element
 
-The [`create and execute asynchronously`](#create-and-execute-asynchronously) and [`create and await results`](#create-and-await-results) commands both start the process instance at their default initial element: the single [none start event](./components/modeler/bpmn/none-events/none-events.md#none-start-events). Camunda Platform 8 also provides a way to create a process instance starting at user-defined element(s).
+The [`create and execute asynchronously`](#create-and-execute-asynchronously) and [`create and await results`](#create-and-await-results) commands both start the process instance at their default initial element: the single [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events). Camunda Platform 8 also provides a way to create a process instance starting at user-defined element(s).
 
 :::info
 This is an advanced feature. Camunda recommends to only use this functionality for testing purposes. The none start event is the defined beginning of your process. Most likely the process is modeled with the intent to start all instances from the beginning.
