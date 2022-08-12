@@ -41,7 +41,6 @@ Clients connect to Camunda Platform 8 via [gRPC](https://grpc.io), a high-perfor
 
 Camunda Platform 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
-
 ### Official clients
 
 - [Java](java-client/index.md)
