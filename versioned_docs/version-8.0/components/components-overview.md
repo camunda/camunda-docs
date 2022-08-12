@@ -17,6 +17,10 @@ This section contains product manual content for each component in Camunda Platf
 - [Tasklist](tasklist/introduction-to-tasklist.md) - Documentation for working with user tasks in Tasklist.
 - [Integration Framework](integration-framework/introduction.md) - Documentation on the Camunda framework to integrate with outside systems.
 
+Together these components work to provide the Camunda Platform 8 SaaS experience.
+
+![Architecture diagram for Camunda Platform including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
+
 :::note Looking for deployment guides?
 
 Deployment guides for Camunda Platform 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
