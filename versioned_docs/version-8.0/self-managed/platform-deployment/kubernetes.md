@@ -42,7 +42,7 @@ You can use your Kubernetes environment of choice, e.g.:
 - Remote cloud service for prod, like Google GKE, Azure AKS, Amazon EKS, etc.
 
 :::note
-Be aware that we only officially test the Google GKE and OpenShift environments.
+Be aware that we only officially test the stock Kubernetes and OpenShift environments.
 :::
 
 Optional tools related to Camunda Platform 8:
