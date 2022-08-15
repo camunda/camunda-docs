@@ -1,5 +1,5 @@
 ---
-id: introduction-to-camunda-platform-8
+id: introduction-to-camunda
 title: Introduction to Camunda Platform 8
 sidebar_label: Introduction to Camunda Platform 8
 slug: /guides/
