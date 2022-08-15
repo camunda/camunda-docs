@@ -1,0 +1,20 @@
+name: sync-board
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  sync-board:
+    # if: github....reviewer == "christina" or "amara"
+    runs-on: ubuntu-latest
+    steps:
+      # filter based on reviewer assigned?
+      # move to board
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/orgs/camunda/projects/27
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: needs-docs-review
+          # label-operator: NOT
