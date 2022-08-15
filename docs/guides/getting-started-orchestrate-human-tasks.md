@@ -47,7 +47,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 ### Implement a form
 
-1. To add a form and decide what's for dinner, return to the **Modeler** project page and click **New > Form**.
+1. To add a form and decide what's for dinner, navigate to the **Modeler** Home page and click on the project you are working on. Then click **New > Form**.
 2. Name your form. In this case, we've named ours **Decide what's for dinner**.
 3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've described ours as **What's for dinner?**
 4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner add an extra value by clicking on the plus sign. Enter the value **Chicken** with the label as **Chicken** and enter the value **Salad** with the label as **Salad** in the other value.
