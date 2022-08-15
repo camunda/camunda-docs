@@ -18,8 +18,3 @@ jobs:
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: needs-docs-review
           # label-operator: NOT
-      - uses: alex-page/github-project-automation-plus@v0.8.1
-        with:
-          project: Documentation Board
-          column: In Review
-          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
