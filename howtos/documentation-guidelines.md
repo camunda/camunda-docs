@@ -40,12 +40,14 @@ The redirects/rewrite rules added to `.htaccess` will not work when running the 
 After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
 
 - Console: @ultraschuppi
+- Modeler: @camunda/modeling-dev
 - Zeebe: @npepinpe
 - Operate/Tasklist: @ralfpuchert
-- Optimize: @megglos
-- DevRel: @akeller
+- Optimize: @RomanJRW
+- DevRel/DevEx: @akeller
 - Product Management: @felix-mueller
-- Documentation review: @christinaausley (fallback: @akeller)
+- Documentation: @christinaausley (fallback: @akeller)
+- Documentation infrastructure: @pepopowitz (fallback: @akeller)
 - Fallback: @menski
 
 In case you don't know who to assign choose @menski and he will delegate.
