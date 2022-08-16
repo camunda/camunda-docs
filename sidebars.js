@@ -310,6 +310,7 @@ module.exports = {
                 "components/integration-framework/connectors/out-of-the-box-connectors/rest",
                 "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
                 "components/integration-framework/connectors/out-of-the-box-connectors/slack",
+                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
               ],
               "Custom-built Connectors": [
                 "components/integration-framework/connectors/custom-built-connectors/connector-templates",
