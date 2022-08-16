@@ -2,7 +2,7 @@
   "version-1.0/Guides": [
     {
       "type": "doc",
-      "id": "version-1.0/guides/introduction-to-camunda-cloud"
+      "id": "version-1.0/guides/introduction-to-camunda"
     },
     {
       "collapsed": true,
