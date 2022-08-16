@@ -1,9 +1,9 @@
-return {
+module.exports = {
   Components: [
     {
       type: "link",
       label: "Overview Components",
-      href: "/docs/components",
+      href: "/docs/next/components",
     },
   ],
   Optimize: ["what-is-optimize"],

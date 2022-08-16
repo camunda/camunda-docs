@@ -222,7 +222,11 @@ module.exports = {
         },
       ],
       Optimize: [
-        "components/optimize/what-is-optimize",
+        {
+          type: "link",
+          label: "What is Optimize?",
+          href: "/optimize/what-is-optimize",
+        },
         {
           "User guide": [
             "components/optimize/userguide/collections-dashboards-reports",
