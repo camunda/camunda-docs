@@ -1,5 +1,5 @@
 ---
-id: introduction-to-camunda-cloud
+id: introduction-to-camunda
 title: Introduction to Camunda Cloud
 sidebar_label: Introduction to Camunda Cloud
 slug: /guides/

@@ -8,7 +8,7 @@ Zeebe is available as open source software on [GitHub](https://github.com/camund
 
 Zeebe welcomes extensions and contributions from the community!
 
-We use both the [Camunda Community Hub](https://github.com/Camunda-Community-Hub/community/) and [Awesome Zeebe](https://awesome.zeebe.io/) to keep track of Zeebe ecosystem contributions, including the following:
+We use both the [Camunda Community Hub](https://github.com/Camunda-Community-Hub/community/) and [Awesome Camunda Platform 8](https://github.com/camunda-community-hub/awesome-camunda-platform-8) to keep track of Zeebe ecosystem contributions, including the following:
 
 - Clients
 - Workers
@@ -16,7 +16,7 @@ We use both the [Camunda Community Hub](https://github.com/Camunda-Community-Hub
 - Applications
 - Other integrations such as Spring-Zeebe and the Apache Kafka connector
 
-If you built something for the Zeebe ecosystem, we encourage you to [add it to the Camunda Community Hub](https://github.com/Camunda-Community-Hub/community/issues/new?assignees=&labels=&template=new-community-extension-proposal-template.md&title=) using the **New Community Extension Proposal** template.
+If you have built something for the Zeebe ecosystem, we encourage you to [transfer it to the Camunda Community Hub](https://github.com/camunda-community-hub/community/blob/main/transferring-extensions.md).
 
 If you're interested in contributing to the main Zeebe repository (versus creating an extension that lives in its own repository), be sure to start with the [Contributing to Zeebe](https://github.com/camunda-cloud/zeebe/blob/master/CONTRIBUTING.md) guide in GitHub.
 
@@ -26,4 +26,4 @@ If you're interested in contributing to the main Zeebe repository (versus creati
 - Check out [Awesome Camunda Platform 8](https://github.com/camunda-community-hub/awesome-camunda-cloud).
 - Learn more about our [release policy](reference/release-policy.md).
 - Avoid suprises by staying on top of [announcements](reference/announcements.md).
-- Read more about the [Camunda Community Hub](https://camunda.com/blog/2021/03/introducing-the-camunda-community-hub/).
+- Read more about the [Camunda Community Hub](https://github.com/camunda-community-hub/community).

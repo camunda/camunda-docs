@@ -38,7 +38,7 @@ You can use **connectors** from two different perspectives:
 
 #### Out-of-the-box connectors
 
-You can [out-of-the-box connectors](./connectors/use-connectors.md) provided by Camunda. When using Camunda Platform 8 SaaS, the runtime is operated by Camunda and offered in the scope of the product. The **out-of-the-box connectors** are a solution which allow you to solve [everyday use cases](./connectors/out-of-the-box-connectors/available-connectors-overview.md) in process automation without the need to implement a single line of code.
+You can use [out-of-the-box connectors](./connectors/use-connectors.md) provided by Camunda. When using Camunda Platform 8 SaaS, the runtime is operated by Camunda and offered in the scope of the product. The **out-of-the-box connectors** are a solution which allow you to solve [everyday use cases](./connectors/out-of-the-box-connectors/available-connectors-overview.md) in process automation without the need to implement a single line of code.
 
 #### Custom-built connectors
 

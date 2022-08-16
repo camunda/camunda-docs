@@ -41,8 +41,6 @@ Clients connect to Camunda Platform 8 via [gRPC](https://grpc.io), a high-perfor
 
 Camunda Platform 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
-Community clients supplement the official clients. These clients have not been tested by Camunda.
-
 ### Official clients
 
 - [Java](java-client/index.md)
@@ -51,6 +49,8 @@ Community clients supplement the official clients. These clients have not been t
 
 ### Community clients
 
+Community clients supplement the official clients. These clients have not been tested by Camunda.
+
 - [C#](community-clients/c-sharp.md)
 - [JavaScript/NodeJS](community-clients/javascript.md)
 - [Micronaut](community-clients/micronaut.md)
@@ -58,5 +58,7 @@ Community clients supplement the official clients. These clients have not been t
 - [Ruby](community-clients/ruby.md)
 - [Rust](community-clients/rust.md)
 - [Spring](community-clients/spring.md)
+
+You can browse other community extensions and the most up-to-date list of community clients [here](https://github.com/orgs/camunda-community-hub/repositories).
 
 Finally, it is possible to [build your own client](build-your-own-client.md) if none of the other options are suitable.

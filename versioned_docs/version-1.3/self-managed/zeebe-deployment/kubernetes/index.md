@@ -56,8 +56,8 @@ You also need a Kubernetes cluster. You have several options:
 - Remote: Google GKE, Azure AKS, Amazon EKS, etc.
 
 :::note
-Be aware that we only officially support the GKE environment.
-Feel free to try different trials from cloud providers to create a Kubernetes cluster to test Camunda Cloud Self-Managed in your cloud.
+Be aware that we only officially test the stock Kubernetes and OpenShift environments.
+However, feel free to try different trials from cloud providers to create a Kubernetes cluster to test Camunda Cloud Self-Managed in your cloud.
 :::
 
 Optional tools related to Camunda Cloud:

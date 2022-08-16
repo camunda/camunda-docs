@@ -15,7 +15,7 @@ Any executable process needs a **BPMN diagram** designed and configured beforeha
 
 A BPMN diagram is used to visually outline the structure and flow of a process. As a result, the process can be more easily understood by various stakeholders.
 
-In tandem, different events and implementation details (such as the conditions within a gateway or the specifications of a service task) must be configured in the model so the workflow engine understands what must executed once the process reaches a certain task.
+In tandem, different events and implementation details (such as the conditions within a gateway or the specifications of a service task) must be configured in the model so the workflow engine understands what must be executed once the process reaches a certain task.
 
 Camunda offers a few tools to design your diagrams and implement them:
 
@@ -23,6 +23,10 @@ Camunda offers a few tools to design your diagrams and implement them:
 - [Desktop Modeler](./desktop-modeler/install-the-modeler.md)
 
 Web Modeler and Desktop Modeler differ mainly in their environment. Web Modeler is part of Cloud Console and offers a seamless integration into Camunda Platform 8 to model BPMN. Desktop Modeler is a desktop application that can be installed and used locally, all while integrating your local development environment.
+
+:::note
+Interested in editing the underlying XML of BPMN and DMN diagrams directly? Be sure to utilize Desktop Modeler, as it features an XML editor tab. The XML editor comes with its own history (undo or redo), search and replace functionality, and XML syntax highlighting.
+:::
 
 In this guide, we'll demonstrate modeling BPMN diagrams using both Web Modeler and Desktop Modeler.
 
