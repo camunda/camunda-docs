@@ -1,4 +1,5 @@
 const visitPromise = import("unist-util-visit");
+const expandVersionedUrl = require("./expandVersionedUrl");
 
 const resolve = async () => {
   visit = (await visitPromise).visit;
@@ -10,8 +11,8 @@ const versionedLinks = (options) => {
   const transformer = async (ast, vfile) => {
     await visit(ast, "link", (node) => {
       if (node.url.startsWith("$docs$") || node.url.startsWith("$optimize$")) {
-        node.url = node.url.replace("$docs$", "/docs/next");
-        console.log("sjh", node.url);
+        // vfile.cwd = '/Users/stevenhicks/sjh/dev/camunda/camunda-platform-docs'
+        node.url = expandVersionedUrl(node.url, vfile.cwd);
       }
       return node;
     });
