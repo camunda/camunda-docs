@@ -14,7 +14,7 @@ Camunda Platform 8 is built to handle three key aspects of process automation:
 - Automate
 - Improve
 
-A user can design process flows through our [Modeler](/docs/next/components/modeler/about-modeler/). In a production scenario, you can deploy through Desktop Modeler, Web Modeler, or programmatically. A user can use [Tasklist](/docs/next/components/tasklist/introduction-to-tasklist/) to review and complete tasks, and [Operate](/docs/next/components/operate/operate-introduction) to view and analyze process instances.
+A user can design process flows through our [Modeler]($docs$/components/modeler/about-modeler/). In a production scenario, you can deploy through Desktop Modeler, Web Modeler, or programmatically. A user can use [Tasklist]($docs$/components/tasklist/introduction-to-tasklist/) to review and complete tasks, and [Operate]($docs$/components/operate/operate-introduction) to view and analyze process instances.
 
 Beyond these design and automate cornerstones lies an important component to leverage our process data and analyze areas for improvement: Optimize.
 
