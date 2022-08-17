@@ -1,3 +1,5 @@
+const versionedLinks = require("./src/mdx/versionedLinks");
+
 module.exports = {
   title: "Camunda Platform 8",
   tagline: "Documentation for all components of Camunda Platform 8",
@@ -38,6 +40,7 @@ module.exports = {
         id: "optimize",
         path: "optimize",
         routeBasePath: "optimize",
+        beforeDefaultRemarkPlugins: [versionedLinks],
         // sidebarPath: require.resolve("./optimize_sidebars.js"),
       },
     ],
@@ -216,6 +219,7 @@ module.exports = {
           // Please change this to your repo.
           editUrl:
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
+          beforeDefaultRemarkPlugins: [versionedLinks],
         },
         blog: false,
         theme: {
