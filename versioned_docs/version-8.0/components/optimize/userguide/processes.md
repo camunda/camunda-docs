@@ -22,3 +22,14 @@ Once a report is configured as KPI, its status can be seen on the **Processes Ov
 
 The process can be configured by clicking the 'Configure' button when hovering over the process. From this modal, you can change the owner of the process, as well as enable/disable the process digest. The process digest is a scheduled email report summarizing the current and previous state of the KPI reports for that process. It will be emailed to the owner of that process at the configured schedule. Please note that process digests are an alpha feature.
 ![Configure Process](./img/configureProcess.png)
+
+## KPI import scheduler
+
+Since users might be dealing with hundreds or even thousands of KPIs, a scheduler has been developed which updates the KPI values on a given interval. The default interval in which the KPIs get updates is 10 minutes.
+If the given interval needs to be changed then the environment variable **entity.kpiRefreshInterval** needs to be modified. For more information please visit the relevant [configuration section](../../../self-managed/optimize-deployment/configuration/system-configuration.md).
+
+## Limitations
+
+Since the updates on the KPIs will appear on the process overview page after the given KPI import scheduler interval has passed, changes such as creation, update and deletion of KPIs will show with a delay. In case you wish to make these changes apparent more promptly, the kpi scheduler interval value could be given a lower value.
+
+\nAdditionally, it is worth mentioning that for the evaluation of the KPI reports, the default timezone of the machine on which Optimize is being run on will be used.
