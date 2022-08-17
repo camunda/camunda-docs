@@ -30,7 +30,9 @@ The **Channel/User Name** and **Message** can either be given static values, or 
 
 ![slack connector compose](../img/connectors-slack-compose.png)
 
-This Slack [guide](https://api.slack.com/reference/surfaces/formatting#basics) can assist in formatting messages.
+:::note
+Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/formatting#basics) can assist in formatting messages.
+:::
 
 ## Slack API response
 
