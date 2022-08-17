@@ -185,9 +185,9 @@ Settings for the email server to send email notifications, e.g. when an alert is
 | email.authentication.password         |               | Corresponding password to the given user of your smtp server.                                                   |
 | email.authentication.securityProtocol |               | States how the connection to the server should be secured. Possible values are 'NONE', 'STARTTLS' or 'SSL/TLS'. |
 
-### Digests
+### Digest
 
-Settings influencing the process digest feature
+Settings influencing the process digest feature.
 
 | YAML Path          | Default Value   | Description                                                          |
 | ------------------ | --------------- | -------------------------------------------------------------------- |
