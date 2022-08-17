@@ -30,6 +30,8 @@ The **Channel/User Name** and **Message** can either be given static values, or 
 
 ![slack connector compose](../img/connectors-slack-compose.png)
 
+This Slack [guide](https://api.slack.com/reference/surfaces/formatting#basics) can assist in formatting messages.
+
 ## Slack API response
 
 The **Slack connector** exposes the Slack API response as a [local variable](https://docs.camunda.io/docs/components/concepts/variables/#variable-scopes) called `response`.
