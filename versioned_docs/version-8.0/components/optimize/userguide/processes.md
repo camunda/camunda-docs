@@ -26,10 +26,10 @@ The process can be configured by clicking the 'Configure' button when hovering o
 ## KPI import scheduler
 
 Since users might be dealing with hundreds or even thousands of KPIs, a scheduler has been developed which updates the KPI values on a given interval. The default interval in which the KPIs get updates is 10 minutes.
-If the given interval needs to be changed then the environment variable **entity.kpiRefreshInterval** needs to be modified. For more information please visit the relevant [configuration section](../../../self-managed/optimize-deployment/configuration/system-configuration.md).
+To change this interval, please modify the configuration value for **entity.kpiRefreshInterval**. For more information please visit the relevant [configuration section](../../../self-managed/optimize-deployment/configuration/system-configuration.md).
 
 ## Limitations
 
-Since the updates on the KPIs will appear on the process overview page after the given KPI import scheduler interval has passed, changes such as creation, update and deletion of KPIs will show with a delay. In case you wish to make these changes apparent more promptly, the kpi scheduler interval value could be given a lower value.
+Since the updates on the KPIs will appear on the process overview page after the given KPI import scheduler interval has passed, changes such as creation, update and deletion of KPIs will show with a delay. In case you wish to make these changes apparent more promptly, you can set the kpi scheduler interval to a lower value as described above.
 
 \nAdditionally, it is worth mentioning that for the evaluation of the KPI reports, the default timezone of the machine on which Optimize is being run on will be used.
