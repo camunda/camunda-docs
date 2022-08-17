@@ -13,11 +13,6 @@ describe("expandVersionedUrl", () => {
     );
   });
 
-  // describe("token syntax", () => {
-  //   it("lets me specify $docs$/ with a trailing slash")
-  //   it("lets me specify $docs$ without a trailing slash")
-  // })
-
   describe("when source is from optimize docs", () => {
     const targetUrl = "$docs$/some/thing";
 
