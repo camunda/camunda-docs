@@ -1,7 +1,7 @@
 ---
 id: workflow-patterns
-title: Workflow Patterns
-sidebar_label: Workflow Patterns
+title: Workflow patterns
+sidebar_label: Workflow patterns
 slug: /components/concepts/workflow-patterns/
 ---
 

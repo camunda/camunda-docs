@@ -1,6 +1,6 @@
 ---
 id: use-connectors
-title: Use Connectors
+title: Use connectors
 description: How to use Connectors in Web Modeler
 ---
 

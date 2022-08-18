@@ -1,6 +1,6 @@
 ---
 id: multi-instance
-title: "Multi-Instance"
+title: "Multi-instance"
 description: "A multi-instance activity is executed multiple times - once for each element of a given collection."
 ---
 
