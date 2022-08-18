@@ -35,8 +35,8 @@ To create an automated process with [user tasks](/components/modeler/bpmn/user-t
 7. Append an exclusive [gateway](/components/modeler/bpmn/gateways.md) to your user task by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
 8. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
 9. Sequence flows require expressions to access variables from the form we'll create below to determine what to eat for dinner. To add an [expression](/components/concepts/expressions.md), click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
-10. Our sequence flow will have the expressions of `= Meal = "Salad"`on one side and `= Meal = "Chicken"`on the other. 
-   ![expression input example](./img/expression-input-example.png)
+10. Our sequence flow will have the expressions of `= Meal = "Salad"`on one side and `= Meal = "Chicken"`on the other.
+    ![expression input example](./img/expression-input-example.png)
 11. Attach an end event to the two user tasks.
 
 ![dinner bpmn model](./img/dinner-bpmn-model.png)
