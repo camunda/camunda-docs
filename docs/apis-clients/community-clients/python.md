@@ -13,7 +13,7 @@ This Python client is maintained by [Stéphane Ludwig](https://gitlab.com/stepha
 
 ## Pyzeebe
 
-This Python client is maintained by [Jonatan Martens](https://github.com/JonatanMartens)
+This Python client is maintained by [Jonatan Martens](https://github.com/JonatanMartens).
 
 - [Source code](https://github.com/camunda-community-hub/pyzeebe)
 - [Pip package](https://pypi.org/project/pyzeebe/)
