@@ -185,6 +185,14 @@ Settings for the email server to send email notifications, e.g. when an alert is
 | email.authentication.password         |               | Corresponding password to the given user of your smtp server.                                                   |
 | email.authentication.securityProtocol |               | States how the connection to the server should be secured. Possible values are 'NONE', 'STARTTLS' or 'SSL/TLS'. |
 
+### Digest
+
+Settings influencing the process digest feature.
+
+| YAML Path          | Default value   | Description                                                          |
+| ------------------ | --------------- | -------------------------------------------------------------------- |
+| digest.cronTrigger | 0 0 9 \* \* MON | Cron expression to define when enabled email digests are to be sent. |
+
 ### Alert Notification Webhooks
 
 Settings for webhooks which can receive custom alert notifications. You can configure multiple webhooks which will be available to select from when creating or editing alerts. Each webhook configuration should have a unique human readable name which will appear in the Optimize UI.
