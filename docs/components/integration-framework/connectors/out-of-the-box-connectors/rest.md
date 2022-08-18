@@ -1,6 +1,6 @@
 ---
 id: rest
-title: REST connector
+title: REST Connector
 description: Make a request to a REST API and use the response in the next steps of your process.
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: connector-sdk
 title: Connector SDK
-description: Introduction to the Connector SDK
+description: Introduction to the Connector SDK.
 ---
 
 :::note

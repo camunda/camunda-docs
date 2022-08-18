@@ -299,19 +299,19 @@ module.exports = {
           ],
         },
       ],
-      "Integration framework": [
+      "Integration Framework": [
         "components/integration-framework/introduction-to-connectors",
         {
           Connectors: [
             "components/integration-framework/connectors/use-connectors",
             {
-              "Out-of-the-box connectors": [
+              "Out-of-the-box Connectors": [
                 "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
                 "components/integration-framework/connectors/out-of-the-box-connectors/rest",
                 "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
                 "components/integration-framework/connectors/out-of-the-box-connectors/slack",
               ],
-              "Custom-built connectors": [
+              "Custom-built Connectors": [
                 "components/integration-framework/connectors/custom-built-connectors/connector-templates",
                 "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
               ],

@@ -1,7 +1,7 @@
 ---
 id: connector-templates
 title: Connector templates
-description: Introduction to connector templates
+description: Introduction to Connector templates.
 ---
 
 import Tabs from "@theme/Tabs";
