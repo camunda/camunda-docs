@@ -6,6 +6,11 @@ sidebar_label: "Assigning a role to a user"
 
 In this guide we will show you how to use Identity to assign a role to a user.
 
+:::caution Write access needed
+To assign a role to a user, you need to have write access to Identity.
+Read our [guide on managing user access](managing-user-access.md) to learn more.
+:::
+
 To assign a role to a user using Identity, take the following steps:
 
 1. Log in to the Identity UI and navigate to the **Users** tab:

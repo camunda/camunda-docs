@@ -10,6 +10,11 @@ In this guide we will show you how to use Identity to create a permission.
 Head over to our documentation on [permissions](/self-managed/concepts/access-control/apis.md) to find out more.
 :::
 
+:::caution Write access needed
+To add a permission, you need to have write access to Identity.
+Read our [guide on managing user access](managing-user-access.md) to learn more.
+:::
+
 To create a permission using Identity, take the following steps:
 
 1. Log in to the Identity UI and navigate to the **API** tab:
