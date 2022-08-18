@@ -189,7 +189,7 @@ Settings for the email server to send email notifications, e.g. when an alert is
 
 Settings influencing the process digest feature.
 
-| YAML Path          | Default Value   | Description                                                          |
+| YAML Path          | Default value   | Description                                                          |
 | ------------------ | --------------- | -------------------------------------------------------------------- |
 | digest.cronTrigger | 0 0 9 \* \* MON | Cron expression to define when enabled email digests are to be sent. |
 
