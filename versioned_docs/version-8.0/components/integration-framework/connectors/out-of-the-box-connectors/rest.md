@@ -30,12 +30,12 @@ No extra authentication configuration is required; you can jump to the [next sec
 
 #### REST Connector (Basic Auth)
 
-##### Create a new connector Secret
+##### Create a new connector secret
 
-We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a Secret:
+We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating Secrets](../../../console/manage-clusters/manage-secrets.md).
-2. Name your Secret (i.e `REST_BASIC_AUTH_SECRET`) so you can reference it later in the connector.
+1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
+2. Name your secret (i.e `REST_BASIC_AUTH_SECRET`) so you can reference it later in the connector.
 
 ### Configure Basic Authentication
 
@@ -48,12 +48,12 @@ Select the **REST Connector** and fill out the following properties under the **
 
 ### REST Connector (Bearer Token Auth)
 
-#### Create a new connector Secret
+#### Create a new connector secret
 
-We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a Secret:
+We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating Secrets](../../../console/manage-clusters/manage-secrets.md).
-2. Name your Secret (i.e `REST_BEARER_TOKEN`) so you can reference it later in the connector.
+1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
+2. Name your secret (i.e `REST_BEARER_TOKEN`) so you can reference it later in the connector.
 
 #### Configure the Bearer Token
 

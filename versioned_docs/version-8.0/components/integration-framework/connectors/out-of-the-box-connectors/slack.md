@@ -20,7 +20,7 @@ To make the **Slack connector** executable, fill out the mandatory fields highli
 
 ![slack connector red properties](../img/connectors-slack-red-properties.png)
 
-1. Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, 'secrets.SLACK_OAUTH_TOKEN'.
+1. Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, secrets.SLACK_OAUTH_TOKEN'.
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
