@@ -12,7 +12,7 @@ _Does this change need to be released before a certain date or milestone? If so,
 
 ## PR Checklist
 
-- [ ] My changes apply to an already released version and I have added them to the relevant `/versioned_docs` directory, or they are not for an already released version.
+- [ ] My changes apply to an already released version, and I have added them to the relevant `/versioned_docs` directory, or they are not for an already released version.
 - [ ] My changes apply to future versions, and I have added them to the main `/docs` directory, or they are not for future versions.
 - [ ] My changes require an [Engineering review](https://github.com/camunda/camunda-platform-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned an engineering manager or tech lead as a reviewer, or my changes do not require an Engineering review.
 - [ ] My changes require a [technical writer review](https://github.com/camunda/camunda-platform-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned @christinaausley as a reviewer, or my changes to not require a technical writer review.
