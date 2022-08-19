@@ -10,7 +10,7 @@ The **connector SDK** is in developer preview and subject to breaking changes. U
 
 The **connector SDK** allows you to develop your own **connectors**. With the help of the SDK you can perform common operations, such as:
 
-- Replacing Secrets
+- Replacing secrets
 - Validating the request
 - Executing the **connector** as a job worker or custom runtime, tailored toward your environment
 

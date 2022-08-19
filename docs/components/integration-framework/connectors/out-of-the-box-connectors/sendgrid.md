@@ -173,13 +173,13 @@ To create an API key in SendGrid, take the following steps:
 3. Click **API Keys > Create API Key**.
 4. Give your key a name (i.e. `my-camunda-connector-key`).
 5. Click **Create Key**.
-6. Copy the **API Key** and move on to the next step for creating a connector Secret.
+6. Copy the **API Key** and move on to the next step for creating a connector secret.
 
 ![create sendgrid api key](../img/connectors-sendgrid-create-api-key.png)
 
-### Create a new connector Secret
+### Create a new connector secret
 
-We advise you to keep your API key safe and avoid exposing it in the BPMN `xml` file by creating a Secret:
+We advise you to keep your API key safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating Secrets](../../../console/manage-clusters/manage-secrets.md).
-2. Name your Secret `SEND_GRID_API_KEY` so you can reference it later in the connector.
+1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
+2. Name your secret `SEND_GRID_API_KEY` so you can reference it later in the connector.
