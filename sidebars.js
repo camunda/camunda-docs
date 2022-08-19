@@ -188,7 +188,7 @@ module.exports = {
         require("./docs/components/modeler/feel/sidebar-schema"),
         {
           Forms: ["components/modeler/forms/camunda-forms-reference"],
-        }
+        },
       ],
       "Integration Framework": [
         "components/integration-framework/introduction-to-connectors",
