@@ -4,19 +4,15 @@ on:
   pull_request:
     types: [review_requested]
 
+env:
+  DOCS_REVIEWERS: ("akeller" "christinaausley")
+
 jobs:
   sync-board:
-    # if: github....reviewer == "christina" or "amara"
-    # if: contains(github.event.pull_request.labels.*.name, 'needs-docs-review')
-    if: github.event.requested_reviewer.login == 'akeller' || github.event.requested_reviewer.login == 'christinaausley'
+    if: contains(env.DOCS_REVIEWERS, github.event.requested_reviewer.login)
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
-        id: github_context_step
-        run: echo '${{ toJSON(github.event) }}'
-      # filter based on reviewer assigned?
-      # move to board
-      - name: Get project data
+      - name: Get project IDs for later steps
         env:
           GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
           ORGANIZATION: camunda
@@ -61,7 +57,7 @@ jobs:
             }' -f project=$PROJECT_ID -f pr=$PR_ID --jq '.data.addProjectV2ItemById.item.id')"
 
             echo 'ITEM_ID='$item_id >> $GITHUB_ENV
-      - name: Set fields
+      - name: Set status field
         env:
           GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
         run: |
@@ -85,11 +81,3 @@ jobs:
                   }
               }
             }' -f project=$PROJECT_ID -f item=$ITEM_ID -f status_field=$STATUS_FIELD_ID -f status_value=${{ env.IN_REVIEW_OPTION_ID }}
-
-      # --silent
-
-      # - uses: alex-page/github-project-automation-plus@v0.8.1 # Error: Could not find the column "👀 In review" or project "Documentation Board"
-      #   with: # - uses: alex-page/github-project-automation-plus@v0.8.1
-      #     project: Documentation
-      #     column: Review
-      #     repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
