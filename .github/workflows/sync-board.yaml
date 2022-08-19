@@ -8,7 +8,7 @@ jobs:
   sync-board:
     # if: github....reviewer == "christina" or "amara"
     # if: contains(github.event.pull_request.labels.*.name, 'needs-docs-review')
-    if: github.event.pull_request.requested_reviewer.login == 'akeller' || github.event.pull_request.requested_reviewer.login == 'christinaausley'
+    if: github.event.requested_reviewer.login == 'akeller' || github.event.requested_reviewer.login == 'christinaausley'
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
