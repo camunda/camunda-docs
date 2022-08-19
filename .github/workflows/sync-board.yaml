@@ -2,13 +2,12 @@ name: sync-board
 
 on:
   pull_request:
-    types:
-      - labeled
+    types: [review_requested]
 
 jobs:
   sync-board:
     # if: github....reviewer == "christina" or "amara"
-    if: contains(github.event.pull_request.labels.*.name, 'needs-docs-review')
+    # if: contains(github.event.pull_request.labels.*.name, 'needs-docs-review')
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
