@@ -30,7 +30,7 @@ To create an automated process with [user tasks](/components/modeler/bpmn/user-t
    ![modeler example](./img/modeler-example.png)
 4. Use Web Modeler to design a BPMN flow with user tasks. Create a user task by dragging the task icon from the palette, or click the existing start event and the displayed task icon.
 5. Change the task type by clicking the wrench icon. Select **User Task**.
-   ![wrench icon example](./img/wrench-icon-example-2.png)
+   ![wrench icon example](./img/wrench-icon-example.png)
 6. Add a descriptive name using the properties panel. In this case, we've named ours `Decide what's for dinner`.
 7. Append an exclusive [gateway](/components/modeler/bpmn/gateways.md) to your user task by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
 8. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
