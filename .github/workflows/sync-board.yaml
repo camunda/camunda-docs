@@ -4,12 +4,9 @@ on:
   pull_request:
     types: [review_requested]
 
-env:
-  DOCS_REVIEWERS: ("akeller" "christinaausley")
-
 jobs:
   sync-board:
-    if: contains(env.DOCS_REVIEWERS, github.event.requested_reviewer.login)
+    if: github.event.requested_reviewer.login == 'akeller' || github.event.requested_reviewer.login == 'christinaausley'
     runs-on: ubuntu-latest
     steps:
       - name: Get project IDs for later steps
