@@ -1,7 +1,7 @@
 ---
 id: orchestrate-microservices
-title: Getting started with Microservice Orchestration
-sidebar_label: Getting started with Microservice Orchestration
+title: Getting started with microservice orchestration
+sidebar_label: Getting started with microservice orchestration
 description: "Orchestrate Microservices along a business process for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
 ---

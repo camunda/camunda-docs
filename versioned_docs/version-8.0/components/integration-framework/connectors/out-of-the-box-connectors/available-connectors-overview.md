@@ -1,7 +1,7 @@
 ---
 id: available-connectors-overview
 title: Overview
-description: Take a closer look at the connectors available in Camunda Platform 8.
+description: Take a closer look at the Connectors available in Camunda Platform 8.
 ---
 
 This section gives an overview of the **out-of-the-box connectors** available in Camunda Platform 8:

@@ -1,7 +1,7 @@
 ---
 id: orchestrate-human-tasks
-title: Getting started with Human Task Orchestration
-sidebar_label: Getting started with Human Task Orchestration
+title: Getting started with human task orchestration
+sidebar_label: Getting started with human task orchestration
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---

@@ -1,7 +1,7 @@
 ---
 id: known-limitations
-title: "Known Limitations"
-sidebar_label: "Known Limitations"
+title: "Known limitations"
+sidebar_label: "Known limitations"
 ---
 
 ## Keycloak requires SSL for requests from external sources

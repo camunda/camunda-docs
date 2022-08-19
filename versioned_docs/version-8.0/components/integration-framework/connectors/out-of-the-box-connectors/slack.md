@@ -1,6 +1,6 @@
 ---
 id: slack
-title: Slack connector
+title: Slack Connector
 description: Send messages to channels or users in your Slack workspace from your BPMN process.
 ---
 

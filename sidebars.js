@@ -203,7 +203,7 @@ module.exports = {
           ],
         },
         {
-          "Open Source community": [
+          "Open source community": [
             "components/zeebe/open-source/community-contributions",
             "components/zeebe/open-source/get-help-get-involved",
           ],
@@ -311,7 +311,7 @@ module.exports = {
                 "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
                 "components/integration-framework/connectors/out-of-the-box-connectors/slack",
               ],
-              "Custom-build Connectors": [
+              "Custom-built Connectors": [
                 "components/integration-framework/connectors/custom-built-connectors/connector-templates",
                 "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
               ],
@@ -322,7 +322,7 @@ module.exports = {
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
-          "Project Management": [
+          "Project management": [
             "components/best-practices/management/following-the-customer-success-path",
             "components/best-practices/management/doing-a-proper-poc",
           ],
@@ -602,7 +602,7 @@ module.exports = {
         },
         "self-managed/optimize-deployment/reimport",
         {
-          "Migration & Update": [
+          "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
             "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
             "self-managed/optimize-deployment/migration-update/3.6-to-3.7",

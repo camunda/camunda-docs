@@ -1,6 +1,6 @@
 ---
 id: sendgrid
-title: SendGrid connector
+title: SendGrid Connector
 description: Quickly send emails from your BPMN processes.
 ---
 
