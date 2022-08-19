@@ -18,8 +18,44 @@ jobs:
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: needs-docs-review
           # label-operator: NOT
-      - uses: alex-page/github-project-automation-plus@v0.8.1 # Error: Could not find the column "👀 In review" or project "Documentation Board"
-        with: # - uses: alex-page/github-project-automation-plus@v0.8.1
-          project: Documentation
-          column: Review
-          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+      - name: Get project data
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          ORGANIZATION: camunda
+          PROJECT_NUMBER: 27
+        run: |
+          gh api graphql -f query='
+            query($org: String!, $number: Int!) {
+              organization(login: $org){
+                projectV2(number: $number) {
+                  id
+                  fields(first:20) {
+                    nodes {
+                      ... on ProjectV2SingleSelectField {
+                        id
+                        name
+                        options {
+                          id
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }' -f org=$ORGANIZATION -F number=$PROJECT_NUMBER > project_data.json
+
+          echo 'PROJECT_ID='$(jq '.data.organization.projectV2.id' project_data.json) >> $GITHUB_ENV
+          echo 'STATUS_FIELD_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .id' project_data.json) >> $GITHUB_ENV
+          echo 'IN_REVIEW_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="👀 In Review") |.id' project_data.json) >> $GITHUB_ENV
+      - name: See project data
+        run: |
+          echo "${{env.PROJECT_ID}}"
+          echo "${{env.STATUS_FIELD_ID}}"
+          echo "${{env.IN_REVIEW_OPTION_ID}}"
+
+      # - uses: alex-page/github-project-automation-plus@v0.8.1 # Error: Could not find the column "👀 In review" or project "Documentation Board"
+      #   with: # - uses: alex-page/github-project-automation-plus@v0.8.1
+      #     project: Documentation
+      #     column: Review
+      #     repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
