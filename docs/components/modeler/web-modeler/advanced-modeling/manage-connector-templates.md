@@ -84,7 +84,7 @@ Not only can you create new connector templates to bind to a job worker topic or
 
 If you have created templates for Desktop Modeler in the past and want to reuse them in Web Modeler, you need to make some adjustments to the template files.
 
-1. _Split the files_. Web Modeler maintains a 1:1 relation between connector templates and files. Since Desktop Modeler allows to keep multiple template definitions in single file, you must split the file in advance to one file per temmplate before uploading.
+1. _Split the files_. Web Modeler maintains a 1:1 relation between connector templates and files. Since Desktop Modeler allows to keep multiple template definitions in single file, you must split the file in advance to one file per template before uploading.
 2. _Remove the brackets_. You need to remove the list brackets from the connector template file before uploading. Even if a template file for Desktop Modeler contains only a single template, it is always wrapped in a list.
 3. Be aware that the ID and name of the template from the original file will be ignored. A new ID is auto-assigned, to ensure consistency and uniqueness in Web Modeler.
 
