@@ -51,6 +51,8 @@ The JSON editor is based on the [Monaco Editor](https://microsoft.github.io/mona
 
 You can version your connector templates using [milestones](/components/modeler/web-modeler/milestones.md), similar to diagrams.
 
+If you publish a new version of a connector template, and the old version was already used in diagrams, the user can decide to update to the most recent version, or to stay with the old version when editing the respective diagram element (see updating [element templates](https://docs.camunda.io/docs/components/modeler/desktop-modeler/element-templates/using-templates/#updating-templates)).
+
 ## Fixing problems in your templates {#fixing-template-problems}
 
 While working an a template, the template will be in invalid intermediate states. For instance, when you add a new property, it must contain various mandatory attributes. Unless all mandotary attributes are defined, the template will not be saved, and the preview is not updated. This ensures that you can never publish an invalid or broken template.
