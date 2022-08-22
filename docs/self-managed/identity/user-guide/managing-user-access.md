@@ -10,9 +10,9 @@ In this guide, you will learn how to grant users different levels of access to t
 
 Identity implements the following permissions:
 
-- `read`: Users can access all pages in Identity. They _cannot_ create, modify or delete any data.
-- `read:users`: Users can access only the "Users" page and related subpages.
-- `write`: Users have access to all pages. They can create, modify and delete data.
+- `read`: Users can access all pages in Identity. They _cannot_ create, modify, or delete any data.
+- `read:users`: Users can access only the **Users** page and related subpages.
+- `write`: Users have access to all pages. They can create, modify, and delete data.
 
 :::note
 If you are connecting Identity to your existing Keycloak installation, the `read:users` permission needs to be created
@@ -27,8 +27,7 @@ This gives the user access to the Identity application.
 Without an Identity permission, users can access Identity only to log in to other applications.
 They are not able to access the Identity UI beyond the login page.
 
-To grant a user access to the UI, you need to assign at least one Identity permission as part of a role to the user.
-This can be achieved in one of the following ways.
+To grant a user access to the UI, you need to assign at least one Identity permission as part of a role to the user. This can be achieved in one of the following ways:
 
 ### Using Keycloak presets
 
@@ -42,5 +41,5 @@ When Web Modeler is connected to Identity, Identity creates the `Web Modeler` ro
 
 ### Create a custom role
 
-When using an existing Keycloak instance or if you want to create your own set of permissions, follow our guides to
+When using an existing Keycloak instance, or if you want to create your own set of permissions, follow our guides to
 [create a new role](adding-a-role.md) and [assign it to users](assigning-a-role-to-a-user.md).
