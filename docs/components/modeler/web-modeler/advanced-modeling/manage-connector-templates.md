@@ -53,7 +53,7 @@ Read the [VS Code editor docs](https://code.visualstudio.com/docs/editor/editing
 
 You can version your Connector templates using [milestones](/components/modeler/web-modeler/milestones.md), similar to diagrams.
 
-If you publish a new version of a Connector template and the old version is already used in diagrams, the user can either update these diagram Connector templates to the most recent version, or maintain the older version when editing the respective diagram element (see updating [element templates](/components/modeler/desktop-modeler/element-templates/using-templates/#updating-templates)).
+If you publish a new version of a Connector template and the old version is already used in diagrams, the user can either update these diagram Connector templates to the most recent version, or maintain the older version when editing the respective diagram element (see updating [element templates](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates)).
 
 ## Fixing problems in your templates {#fixing-template-problems}
 
