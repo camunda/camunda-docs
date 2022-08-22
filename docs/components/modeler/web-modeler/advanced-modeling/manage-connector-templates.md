@@ -8,24 +8,24 @@ export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg x
 
 <span class="badge badge--cloud">Camunda Platform 8 only</span>
 
-You can create and manage [connector templates](/components/integration-framework/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
+You can create and manage [Connector templates](/components/integration-framework/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
 
-## Create connector templates
+## Create Connector templates
 
-You can create a new connector template using the following steps:
+Take the following steps to create a new Connector template::
 
 1. Navigate to the project of your choice and click **New**.
 
-2. Choose to create a blank **Connector Template**.
+2. Click **Connector Template**.
 
    ![Creating a new template](img/connector-templates/create-connector-template-1.png)
 
-3. You will be taken to the **connector template editor** screen. In this screen, you can define the connector template by writing the template JSON. The template editor supports you in writing the template by providing autocompletion, error highlighting and a live preview.
+3. You will be taken to the **Connector template editor** screen. In this screen, you can define the Connector template by writing the template JSON. The template editor supports you in writing the template by providing autocompletion, error highlighting, and a live preview.
 
    The anatomy of the editor interface is as follows:
 
-   - In the **breadcrumbs bar**, you can rename your template by clicking the chevron next to the template name. Note that you cannot change the name of your template in the template json, but only with this action.
-   - On the left, you see the **template JSON editor**. Here, you define the actual template descriptor. The descriptor follows the [most recent element template schema](https://github.com/camunda/element-templates-json-schema). The editor is divided into two sections: a read-only section, containing the schema reference, the template name, and the template id, and a editable section, where you can [define your template descriptor](/components/modeler/desktop-modeler/element-templates/defining-templates.md).
+   - In the **breadcrumbs bar**, you can rename your template by clicking the chevron next to the template name. Note that you cannot change the name of your template in the template JSON, but only with this action.
+   - On the left, you see the **template JSON editor**. Here, you define the actual template descriptor. The descriptor follows the [most recent element template schema](https://github.com/camunda/element-templates-json-schema). The editor is divided into two sections: a read-only section, containing the schema reference, the template name, the template id, and an editable section, where you can [define your template descriptor](/components/modeler/desktop-modeler/element-templates/defining-templates.md).
    - On the right, you see the live **Visual Preview**. The live preview shows how the properties panel will look when you apply the template to an element. It automatically updates on every valid change, and reflects the latest valid state of the template. The preview allows you to interactively check your template before publishing, including its usability.
    - In the upper left, you can **Upload an icon** for your template. You can upload any image file you want, however we recommend to use squared SVG graphics. The icons get rendered 18x18 pixels in the element on the modeling canvas, and 32x32 pixels in the properties panel.
 
@@ -33,42 +33,46 @@ You can create a new connector template using the following steps:
 
    ![Template editor anatomy](img/connector-templates/create-connector-template-2.png)
 
-4. Once you've written your template, you can **publish** it by clicking on the corresponding action. You will be prompted to optionally enter a version name. This name appears in your milestone list.
+4. Once you've written your template, publish it by clicking **Publish**. You will be prompted to optionally enter a version name. This name appears in your milestone list.
 
    ![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
 5. After publishing, the template can be applied to elements of all models in the same project.
 
    :::info Project scope
-   A connector template is always associated with a project, hence only available in the project where you added it.
+   A Connector template is always associated with a project, hence only available in the project where you added it.
    :::
 
 ### JSON editor features
 
-The JSON editor is based on the [Monaco Editor](https://microsoft.github.io/monaco-editor/). The Monaco Editor is the editor that powers VS Code. As a result, the template editor supports many familiar features such as auto-formatting, indentation support, code completion, and error highlighting. Read the [VS Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
+The JSON editor is based on the [Monaco Editor](https://microsoft.github.io/monaco-editor/). The Monaco Editor is the editor that powers VS Code. As a result, the template editor supports many familiar features, such as auto-formatting, indentation support, code completion, and error highlighting.
 
-### Versioning connector templates
+Read the [VS Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
 
-You can version your connector templates using [milestones](/components/modeler/web-modeler/milestones.md), similar to diagrams.
+### Versioning Connector templates
 
-If you publish a new version of a connector template, and the old version was already used in diagrams, the user can decide to update to the most recent version, or to stay with the old version when editing the respective diagram element (see updating [element templates](https://docs.camunda.io/docs/components/modeler/desktop-modeler/element-templates/using-templates/#updating-templates)).
+You can version your Connector templates using [milestones](/components/modeler/web-modeler/milestones.md), similar to diagrams.
+
+If you publish a new version of a Connector template and the old version is already used in diagrams, the user can either update these diagram Connector templates to the most recent version, or maintain the older version when editing the respective diagram element (see updating [element templates](/components/modeler/desktop-modeler/element-templates/using-templates/#updating-templates)).
 
 ## Fixing problems in your templates {#fixing-template-problems}
 
-While working an a template, the template will be in invalid intermediate states. For instance, when you add a new property, it must contain various mandatory attributes. Unless all mandotary attributes are defined, the template will not be saved, and the preview is not updated. This ensures that you can never publish an invalid or broken template.
+While working on a template, the template will be in invalid intermediate states. For instance, when you add a new property, it must contain various mandatory attributes.
+
+Unless all mandatory attributes are defined, the template will not be saved, and the preview is not updated. This ensures that you can never publish an invalid or broken template.
 
 The editor toolbar indicates if the template is currently in a valid state or not. The JSON editor provides you with error highlighting, allowing you to add mandatory values and resolve problems without missing anything.
 
 ![Indicating problems in connector templates](img/connector-templates/fix-connector-template-problems.png)
 
-If there are problems at the root level of the JSON (such as a missing or misspelled mandatory attribute), the error is highlighted in the first line of the editor. You need to click the error marker at the curly bracket to expand the error message.
+If there are problems at the root level of the JSON (such as a missing or misspelled mandatory attribute,) the error is highlighted in the first line of the editor. Click the error marker at the curly bracket to expand the error message.
 
 ![Some connector template problems highlighted in the first line](img/connector-templates/fix-connector-template-problems-2.png)
 
 <!--
 ## Reusing existing runtimes
 
-Not only can you create new connector templates to bind to a job worker topic or a custom connector SDK function, but you can also reuse [existing connector runtimes](/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md). For instance, if you add the following property and bind it to `zeebe:taskDefinition:type`, you can reuse the HTTP JSON runtime and write a prefilled connector template to call an API easily.
+Not only can you create new Connector templates to bind to a job worker topic or a custom Connector SDK function, but you can also reuse [existing connector runtimes](/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md). For instance, if you add the following property and bind it to `zeebe:taskDefinition:type`, you can reuse the HTTP JSON runtime and write a prefilled Connector template to call an API easily.
 
 ```json
 {
@@ -82,17 +86,17 @@ Not only can you create new connector templates to bind to a job worker topic or
 ```
 -->
 
-## Importing existing connector templates
+## Importing existing Connector templates
 
-If you have created templates for Desktop Modeler in the past and want to reuse them in Web Modeler, you need to make some adjustments to the template files.
+If you have created templates for Desktop Modeler in the past and want to reuse them in Web Modeler, you need to make some adjustments to the template files:
 
-1. _Split the files_. Web Modeler maintains a 1:1 relation between connector templates and files. Since Desktop Modeler allows to keep multiple template definitions in single file, you must split the file in advance to one file per template before uploading.
-2. _Remove the brackets_. You need to remove the list brackets from the connector template file before uploading. Even if a template file for Desktop Modeler contains only a single template, it is always wrapped in a list.
-3. Be aware that the ID and name of the template from the original file will be ignored. A new ID is auto-assigned, to ensure consistency and uniqueness in Web Modeler.
+1. **Split the files**. Web Modeler maintains a 1:1 relation between Connector templates and files. Since Desktop Modeler allows you to keep multiple template definitions in single file, you must split the file in advance to one file per template before uploading.
+2. **Remove the brackets**. Remove the list brackets from the Connector template file before uploading. Even if a template file for Desktop Modeler contains only a single template, it is always wrapped in a list.
+3. **Be aware that the ID and name of the template from the original file will be ignored.** A new ID is auto-assigned to ensure consistency and uniqueness in Web Modeler.
 
 Once your file follows the requirements, you can upload it. There are two ways to do so:
 
-1. Upload it as a _new connector template_ via the <UploadIcon /> **Upload files** action in the projects view. This will auto-generate a new ID for the template.
+1. Upload it as a _new Connector template_ via the <UploadIcon /> **Upload files** action in the projects view. This will auto-generate a new ID for the template.
 
    ![Uploading a new template via file upload](img/connector-templates/upload-files.png)
 
@@ -100,6 +104,6 @@ Once your file follows the requirements, you can upload it. There are two ways t
 
    ![Updating a template via file upload](img/connector-templates/replace-via-upload.png)
 
-:::info Desktop Modeler Support
-The connector template editor is currently only available in Web Modeler. See the [Desktop Modeler documentation](/components/modeler/desktop-modeler/element-templates/about-templates.md) for instructions on configuring connector templates in Desktop Modeler.
+:::info Desktop Modeler support
+The Connector template editor is currently only available in Web Modeler. See the [Desktop Modeler documentation](/components/modeler/desktop-modeler/element-templates/about-templates.md) for instructions on configuring Connector templates in Desktop Modeler.
 :::
