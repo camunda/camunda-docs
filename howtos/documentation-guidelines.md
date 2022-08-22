@@ -4,6 +4,14 @@
 
 All changes have to be done in a separate Branch. As soon as the changes are done please open a PR. A Github Action runs with every commit to a Branch and checks if the documentation can be build (including a broken links check).
 
+PRs should be in a draft status while being actively worked. Removing a PR from draft status indicates they are ready for review (by a technical writer).
+
+## Labeling PRs
+
+PRs can be labeled “hold” by engineering teams for any reason, including ongoing conversations, coordination across teams or departments, or anything that’s not obvious within the discussion or description of the PR.
+
+PRs labeled “bug” will be merged and released as immediately as possible.
+
 ## Not all PRs require an issue
 
 In the spirit of "Always Progress", if you are confident you know what change needs to be made a separate issue on the topic is not required. However, if you have an idea that needs to go into the backlog, creating an issue instead of a PR is the best way to go.
