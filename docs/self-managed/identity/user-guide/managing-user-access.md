@@ -4,7 +4,7 @@ title: "Managing user access to Identity"
 sidebar_label: "Managing user access"
 ---
 
-In this guide, you will learn how to grant users different levels of access to the Identity application.
+In this guide, you will learn about the different access levels users can receive within the Identity application.
 
 ## Permissions supported by Identity
 
@@ -24,7 +24,7 @@ This gives the user access to the Identity application.
 
 ## Assign Identity permissions to a user
 
-Without an Identity permission, users can access Identity only to log in to other applications.
+Without at least one of the permissions listed above, users can access Identity only to log in to other applications.
 They are not able to access the Identity UI beyond the login page.
 
 To grant a user access to the UI, you need to assign at least one Identity permission as part of a role to the user. This can be achieved in one of the following ways:
@@ -34,10 +34,7 @@ To grant a user access to the UI, you need to assign at least one Identity permi
 When you use our Keycloak presets, Identity creates the `Identity` role automatically.
 The role contains the necessary permissions to give a user full read and write access to Identity.
 
-When Web Modeler is connected to Identity, Identity creates the `Web Modeler` role. This role contains the Identity
-`read:users` permission.
-
-[Assign one of the above roles to a user](assigning-a-role-to-a-user.md) to enable the user to access the Identity UI.
+[Assign the `Identity` role to a user](assigning-a-role-to-a-user.md) to enable the user to access the Identity UI.
 
 ### Create a custom role
 
