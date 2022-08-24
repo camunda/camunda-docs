@@ -17,7 +17,7 @@ reuse its runtime logic in multiple environments. The SDK achieves this by abstr
 Camunda Platform 8 internals that usually come with
 [job workers](../../../concepts/job-workers.md).
 
-The SDK provides API for common connector operations, such as:
+The SDK provides APIs for common connector operations, such as:
 
 - Fetching and deserializing input data
 - Validating input data
