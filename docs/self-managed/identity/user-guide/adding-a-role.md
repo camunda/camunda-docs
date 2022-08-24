@@ -10,6 +10,11 @@ In this guide we will show you how to use Identity to create a role.
 Head over to [Concepts - roles](/self-managed/concepts/access-control/roles.md) to find out more.
 :::
 
+:::caution Write access needed
+To add a role, you need to have write access to Identity.
+Read our [guide on managing user access](managing-user-access.md) to learn more.
+:::
+
 1. Log in to the Identity UI and navigate to the **Roles** tab:
 
 ![add-role-tab](img/add-role-tab.png)

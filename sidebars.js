@@ -644,6 +644,7 @@ module.exports = {
             "self-managed/identity/user-guide/configure-logging",
             "self-managed/identity/user-guide/making-identity-production-ready",
             "self-managed/identity/user-guide/generating-m2m-tokens",
+            "self-managed/identity/user-guide/managing-user-access",
           ],
         },
         {
