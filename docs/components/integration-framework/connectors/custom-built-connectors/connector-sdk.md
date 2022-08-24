@@ -38,7 +38,7 @@ We recommend starting developing a connector using our
 This template is a [Maven](https://maven.apache.org/)-based Java project, and you can use it the
 way that fits best into your development flow:
 
-- _Create your own GitHub repository_: Click the **Use this template** button and follow the procedure.
+- _Create your own GitHub repository_: Click the **Use this template** button and follow the steps.
   You can manage code changes in your new repository afterward.
 - _Experiment locally_: Check out the source code to your local machine using [Git](https://git-scm.com/).
   You won't be able to check in code changes to the repository due to restricted write access.
