@@ -239,6 +239,7 @@ public class MyConnectorFunction implements ConnectorFunction {
 
     // (2)
     context.validate(connectorRequest);
+
     // (3)
     context.replaceSecrets(connectorRequest);
 
@@ -248,6 +249,7 @@ public class MyConnectorFunction implements ConnectorFunction {
   private MyConnectorResult executeConnector(final MyConnectorRequest connectorRequest) {
     LOGGER.info("Executing my connector with request {}", connectorRequest);
     var result = new MyConnectorResult();
+
     // (4)
     result.setMyProperty("Message received: " + connectorRequest.getMessage());
     return result;
@@ -494,6 +496,7 @@ void shouldReplaceTokenSecretWhenReplaceSecrets() {
   input.setAuthentication(auth);
   auth.setToken("secrets.MY_TOKEN");
   auth.setUser("testuser");
+
   // (1)
   var context = ConnectorContextBuilder.create()
     .secret("MY_TOKEN", "token value")
