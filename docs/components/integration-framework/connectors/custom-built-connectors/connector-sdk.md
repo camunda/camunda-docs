@@ -33,7 +33,7 @@ This section will outline how to set up a connector project, test it, and run it
 
 ### Setup
 
-We recommend starting developing a connector using our
+When developing a new connector we recommend using our
 [custom connector template repository on GitHub](https://github.com/camunda/connector-template).
 This template is a [Maven](https://maven.apache.org/)-based Java project, and you can use it the
 way that fits best into your development flow:
@@ -79,8 +79,9 @@ implementation 'io.camunda.connector:connector-core:0.1.0'
 
 ### Project outline
 
-A connector consists of multiple parts that create a reusable building block for modeling and
-runtime behavior. In essence, a connector includes the following things:
+There are multiple parts to a connector that enable it to be reused, as a
+reusable building block, for modeling and for the runtime behavior.
+The following parts make up a connector:
 
 ```
 my-connector
@@ -96,30 +97,30 @@ my-connector
 └── pom.xml (7)
 ```
 
-Regarding modeling building blocks, the connector provides at least one
+For the modeling building blocks, the connector provides at least one
 [connector template](./connector-templates.md) with **(1)**.
 
 You provide the runtime logic as Java source code under a directory like **(2)**.
-Usually, a connector runtime logic consists of
+Typically a connector runtime logic consists of
 
 - Exactly one implementation of a `ConnectorFunction` with **(3)**
 - At least one input data object like **(4)**
 - At least one result object like **(5)**
 
-To make your connector function detectable, you must expose your function class name in the
+For your connector function to be detectable you are required to expose your function class name in the
 [`ConnectorFunction` SPI implementation](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html)
 with **(6)**.
 
 A configuration file like **(7)** manages the project setup, including dependencies.
-In this example, we include a Maven project's `POM` file. Using other build tools like
-[Gradle](https://gradle.org/) is possible as well.
+In this example, we include a Maven project's `POM` file. Other build tools like
+[Gradle](https://gradle.org/) can also be used.
 
 ### Connector template
 
 To create reusable building blocks for modeling, you must provide at least one
 domain-specific [connector template](./connector-templates.md).
 
-These templates define the binding to your connector runtime behavior via the following object:
+A connector template defines the binding to your connector runtime behavior via the following object:
 
 ```json
 {
@@ -210,8 +211,8 @@ You can see an example of how to use this in the [out-of-the-box REST connector]
 
 ### Runtime logic
 
-Providing reusable connector runtime behavior is mainly done by implementing and exposing an
-implementation of the `ConnectorFunction` interface of the SDK. The connector runtime
+To create a reusable runtime behavior for your connector, you are required to implement
+and expose an implementation of the `ConnectorFunction` interface of the SDK. The connector runtime
 environments will call this function. It handles input data, executes the connector's
 business logic, and optionally returns a result. Exception handling is optional since the
 connector runtime environments take care of this as a fallback.
@@ -463,7 +464,7 @@ initial call from the central connector function.
 
 ## Testing
 
-Making sure your connector's business logic works as expected is vital to developing the connector.
+Ensuring your connector's business logic works as expected is vital to developing the connector.
 The SDK aims to make testing of connectors convenient without imposing strict
 requirements on your test development flow. The SDK is not enforcing any testing libraries.
 
