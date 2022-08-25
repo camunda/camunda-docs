@@ -479,6 +479,7 @@ module.exports = {
           Kubernetes: [
             "self-managed/platform-deployment/kubernetes",
             "self-managed/platform-deployment/kubernetes-helm",
+            "self-managed/platform-deployment/amazon-eks",
           ],
           OpenShift: [
             "self-managed/platform-deployment/openshift",
@@ -487,7 +488,7 @@ module.exports = {
         },
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/local",
-        "self-managed/platform-deployment/known-limitations",
+        "self-managed/platform-deployment/troubleshooting",
       ],
     },
     {
