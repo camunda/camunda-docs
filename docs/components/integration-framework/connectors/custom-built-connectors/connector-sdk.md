@@ -153,7 +153,7 @@ For example, you can create the input variable `message` of your connector in th
 
 You can also define nested data structures to reflect domain objects that group attributes.
 For example, you can create the domain object `authentication` that contains the properties
-`user` and `password` as follows:
+`user` and `token` as follows:
 
 ```json
 {
