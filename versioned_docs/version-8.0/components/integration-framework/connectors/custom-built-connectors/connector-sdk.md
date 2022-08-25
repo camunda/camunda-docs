@@ -33,12 +33,12 @@ This section will outline how to set up a connector project, test it, and run it
 
 ### Setup
 
-We recommend starting developing a connector using our
+When developing a new connector we recommend using our
 [custom connector template repository on GitHub](https://github.com/camunda/connector-template).
-This template is a [Maven](https://maven.apache.org/)-based Java project, and you can use it the
-way that fits best into your development flow:
+This template is a [Maven](https://maven.apache.org/)-based Java project, and can be used in various
+ways as described below:
 
-- _Create your own GitHub repository_: Click the **Use this template** button and follow the procedure.
+- _Create your own GitHub repository_: Click the **Use this template** button and follow the steps.
   You can manage code changes in your new repository afterward.
 - _Experiment locally_: Check out the source code to your local machine using [Git](https://git-scm.com/).
   You won't be able to check in code changes to the repository due to restricted write access.
@@ -79,8 +79,9 @@ implementation 'io.camunda.connector:connector-core:0.1.0'
 
 ### Project outline
 
-A connector consists of multiple parts that create a reusable building block for modeling and
-runtime behavior. In essence, a connector includes the following things:
+There are multiple parts to a connector that enable it to be reused, as a
+reusable building block, for modeling and for the runtime behavior.
+The following parts make up a connector:
 
 ```
 my-connector
@@ -96,30 +97,30 @@ my-connector
 └── pom.xml (7)
 ```
 
-Regarding modeling building blocks, the connector provides at least one
-[connector template](./connector-templates.md) with **(1)**.
+For the modeling building blocks, the connector provides
+[connector templates](./connector-templates.md) with **(1)**.
 
 You provide the runtime logic as Java source code under a directory like **(2)**.
-Usually, a connector runtime logic consists of
+Typically a connector runtime logic consists of
 
 - Exactly one implementation of a `ConnectorFunction` with **(3)**
 - At least one input data object like **(4)**
 - At least one result object like **(5)**
 
-To make your connector function detectable, you must expose your function class name in the
+For your connector function to be detectable you are required to expose your function class name in the
 [`ConnectorFunction` SPI implementation](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html)
 with **(6)**.
 
 A configuration file like **(7)** manages the project setup, including dependencies.
-In this example, we include a Maven project's `POM` file. Using other build tools like
-[Gradle](https://gradle.org/) is possible as well.
+In this example, we include a Maven project's `POM` file. Other build tools like
+[Gradle](https://gradle.org/) can also be used.
 
 ### Connector template
 
-To create reusable building blocks for modeling, you must provide at least one
+To create reusable building blocks for modeling, you are required to provide a
 domain-specific [connector template](./connector-templates.md).
 
-These templates define the binding to your connector runtime behavior via the following object:
+A connector template defines the binding to your connector runtime behavior via the following object:
 
 ```json
 {
@@ -152,7 +153,7 @@ For example, you can create the input variable `message` of your connector in th
 
 You can also define nested data structures to reflect domain objects that group attributes.
 For example, you can create the domain object `authentication` that contains the properties
-`user` and `password` as follows:
+`user` and `token` as follows:
 
 ```json
 {
@@ -210,8 +211,8 @@ You can see an example of how to use this in the [out-of-the-box REST connector]
 
 ### Runtime logic
 
-Providing reusable connector runtime behavior is mainly done by implementing and exposing an
-implementation of the `ConnectorFunction` interface of the SDK. The connector runtime
+To create a reusable runtime behavior for your connector, you are required to implement
+and expose an implementation of the `ConnectorFunction` interface of the SDK. The connector runtime
 environments will call this function. It handles input data, executes the connector's
 business logic, and optionally returns a result. Exception handling is optional since the
 connector runtime environments take care of this as a fallback.
@@ -238,6 +239,7 @@ public class MyConnectorFunction implements ConnectorFunction {
 
     // (2)
     context.validate(connectorRequest);
+
     // (3)
     context.replaceSecrets(connectorRequest);
 
@@ -247,6 +249,7 @@ public class MyConnectorFunction implements ConnectorFunction {
   private MyConnectorResult executeConnector(final MyConnectorRequest connectorRequest) {
     LOGGER.info("Executing my connector with request {}", connectorRequest);
     var result = new MyConnectorResult();
+
     // (4)
     result.setMyProperty("Message received: " + connectorRequest.getMessage());
     return result;
@@ -308,7 +311,7 @@ public class Authentication {
 
 #### Validation
 
-Validating input data is a common task in a connector function. Therefore, the SDK provides an
+Validating input data is a common task in a connector function. The SDK provides an
 API to ensure the data conforms to the connector's requirements. To initiate the
 validation from the connector function, use the `ConnectorContext` object's `validate` method
 as shown in the [runtime logic](#runtime-logic) section:
@@ -392,7 +395,7 @@ the connector SDK out of the box. That way, all connectors can use the same stan
 handling secrets in input data.
 
 The SDK allows replacing secrets in input data as late as possible to avoid passing them around
-in the environments that handle connector invocation. Therefore, we do not pass secrets into the
+in the environments that handle connector invocation. We do not pass secrets into the
 connector function in clear text but only as placeholders that you can replace from
 within the connector function. To initiate the secret replacement from the connector function,
 use the `ConnectorContext` object's `replaceSecrets` method as shown in the
@@ -463,7 +466,7 @@ initial call from the central connector function.
 
 ## Testing
 
-Making sure your connector's business logic works as expected is vital to developing the connector.
+Ensuring your connector's business logic works as expected is vital to developing the connector.
 The SDK aims to make testing of connectors convenient without imposing strict
 requirements on your test development flow. The SDK is not enforcing any testing libraries.
 
@@ -493,6 +496,7 @@ void shouldReplaceTokenSecretWhenReplaceSecrets() {
   input.setAuthentication(auth);
   auth.setToken("secrets.MY_TOKEN");
   auth.setUser("testuser");
+
   // (1)
   var context = ConnectorContextBuilder.create()
     .secret("MY_TOKEN", "token value")
