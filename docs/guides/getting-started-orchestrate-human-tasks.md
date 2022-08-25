@@ -18,6 +18,13 @@ In this guide, we’ll step through one way to create an automated process utili
 New to BPMN or want to learn more? Visit our [BPMN cheat sheet](https://page.camunda.com/wp-bpmn-2-0-business-process-model-and-notation-en) for an overview of all BPMN symbols.
 :::
 
+:::note
+Getting stuck? Book a meeting with our User Success Specialists. Follow the links dependant on the location you are joining:
+
+- [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
+- [EMEA, APAC and other regions](https://meetings.salesloft.com/camunda/daan)
+  :::
+
 ## Create an automated process with user tasks
 
 To create an automated process with [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md), take the following steps:
