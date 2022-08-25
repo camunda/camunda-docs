@@ -41,7 +41,7 @@ module.exports = {
         path: "optimize",
         routeBasePath: "optimize",
         beforeDefaultRemarkPlugins: [versionedLinks],
-        // sidebarPath: require.resolve("./optimize_sidebars.js"),
+        sidebarPath: require.resolve("./optimize_sidebars.js"),
       },
     ],
   ],
