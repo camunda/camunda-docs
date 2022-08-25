@@ -14,7 +14,7 @@ The concept of a connector consists of two parts: the business logic is implemen
 This guide will walk you through working with a REST connector task as a first time Camunda Platform 8 user.
 
 :::note
-Getting stuck? Book a meeting with our User Success Specialists. Follow the links dependant on the location you are joining:
+Getting stuck? Book a meeting with our User Success Specialists. Follow the links dependent on the location you are joining:
 
 - [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
 - [EMEA, APAC and other regions](https://meetings.salesloft.com/camunda/daan)
