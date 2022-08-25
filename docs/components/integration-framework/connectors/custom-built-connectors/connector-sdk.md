@@ -35,8 +35,8 @@ This section will outline how to set up a connector project, test it, and run it
 
 When developing a new connector we recommend using our
 [custom connector template repository on GitHub](https://github.com/camunda/connector-template).
-This template is a [Maven](https://maven.apache.org/)-based Java project, and you can use it the
-way that fits best into your development flow:
+This template is a [Maven](https://maven.apache.org/)-based Java project, and can be used in various
+ways as described below:
 
 - _Create your own GitHub repository_: Click the **Use this template** button and follow the steps.
   You can manage code changes in your new repository afterward.
@@ -97,8 +97,8 @@ my-connector
 └── pom.xml (7)
 ```
 
-For the modeling building blocks, the connector provides at least one
-[connector template](./connector-templates.md) with **(1)**.
+For the modeling building blocks, the connector provides
+[connector templates](./connector-templates.md) with **(1)**.
 
 You provide the runtime logic as Java source code under a directory like **(2)**.
 Typically a connector runtime logic consists of
@@ -117,7 +117,7 @@ In this example, we include a Maven project's `POM` file. Other build tools like
 
 ### Connector template
 
-To create reusable building blocks for modeling, you must provide at least one
+To create reusable building blocks for modeling, you are required to provide a
 domain-specific [connector template](./connector-templates.md).
 
 A connector template defines the binding to your connector runtime behavior via the following object:
@@ -311,7 +311,7 @@ public class Authentication {
 
 #### Validation
 
-Validating input data is a common task in a connector function. Therefore, the SDK provides an
+Validating input data is a common task in a connector function. The SDK provides an
 API to ensure the data conforms to the connector's requirements. To initiate the
 validation from the connector function, use the `ConnectorContext` object's `validate` method
 as shown in the [runtime logic](#runtime-logic) section:
@@ -395,7 +395,7 @@ the connector SDK out of the box. That way, all connectors can use the same stan
 handling secrets in input data.
 
 The SDK allows replacing secrets in input data as late as possible to avoid passing them around
-in the environments that handle connector invocation. Therefore, we do not pass secrets into the
+in the environments that handle connector invocation. We do not pass secrets into the
 connector function in clear text but only as placeholders that you can replace from
 within the connector function. To initiate the secret replacement from the connector function,
 use the `ConnectorContext` object's `replaceSecrets` method as shown in the
