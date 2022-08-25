@@ -12,7 +12,7 @@ When a process instance arrives at such a user task, a new job is created. The p
 
 While it may originally seem like the goal of automating a process is to remove humans entirely, efficiently allocating work through user tasks can be even more beneficial.
 
-In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser.
+In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser. If you rather prefer a video based learning experience we got you covered as well. [This Camunda Academy course](https://bit.ly/3PJJocB) features the same content which is being discussed in this guide.
 
 :::note
 New to BPMN or want to learn more? Visit our [BPMN cheat sheet](https://page.camunda.com/wp-bpmn-2-0-business-process-model-and-notation-en) for an overview of all BPMN symbols.
@@ -90,6 +90,7 @@ In this case, the token will move through the gateway and (according to the cond
 
 ## Additional resources and next steps
 
+- [Video-based Human Task Orchestration Course](https://bit.ly/3PJJocB)
 - [BPMN user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
 - [Building Forms with Modeler](./utilizing-forms.md)
 - [Introduction to Operate](/components/operate/operate-introduction.md)

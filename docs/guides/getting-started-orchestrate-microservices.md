@@ -67,5 +67,5 @@ Congratulations! You successfully built your first microservice orchestration so
 
 ## Additional resources and next steps
 
-- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8?](/components/concepts/what-is-camunda-platform-8.md).
+- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8](/components/concepts/what-is-camunda-platform-8.md) or watching a [platform overview video](https://bit.ly/3TjNEm7) in our Academy.
 - Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](setting-up-development-project.md).
