@@ -15,10 +15,6 @@ While it may originally seem like the goal of automating a process is to remove 
 In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser. If you rather prefer a video based learning experience we got you covered as well. [This Camunda Academy course](https://bit.ly/3PJJocB) features the same content which is being discussed in this guide.
 
 :::note
-New to BPMN or want to learn more? Visit our [BPMN cheat sheet](https://page.camunda.com/wp-bpmn-2-0-business-process-model-and-notation-en) for an overview of all BPMN symbols.
-:::
-
-:::note
 Getting stuck? Book a meeting with our User Success Specialists. Follow the links dependent on the location you are joining:
 
 - [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
@@ -49,6 +45,7 @@ To create an automated process with [user tasks](/components/modeler/bpmn/user-t
 ![dinner bpmn model](./img/dinner-bpmn-model.png)
 
 :::note
+Are you new to BPMN or want to learn more? Visit our [BPMN cheat sheet](https://page.camunda.com/wp-bpmn-2-0-business-process-model-and-notation-en) for an overview of all BPMN symbols.
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](/components/concepts/variables.md).
 :::
 
