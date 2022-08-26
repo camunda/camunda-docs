@@ -11,34 +11,34 @@ import TabItem from "@theme/TabItem";
 The **connector SDK** is in developer preview and subject to breaking changes. Use at your own risk.
 :::
 
-The **connector SDK** allows you to [develop custom connectors](#creating-a-custom-connector)
-using Java code. You can focus on the logic of the connector, conveniently test it locally, and
+The **Connector SDK** allows you to [develop custom Connectors](#creating-a-custom-connector)
+using Java code. You can focus on the logic of the Connector, test it locally, and
 reuse its runtime logic in multiple environments. The SDK achieves this by abstracting from
 Camunda Platform 8 internals that usually come with
 [job workers](../../../concepts/job-workers.md).
 
-The SDK provides APIs for common connector operations, such as:
+The SDK provides APIs for common Connector operations, such as:
 
 - Fetching and deserializing input data
 - Validating input data
 - Replacing secrets in input data
 
-Beyond that, the SDK allows for [convenient testing](#testing) of your connector behavior and
+Additionally, the SDK allows for convenient [testing](#testing) of your Connector behavior and
 [executing it in the environments](#runtime-environments) that suit your use cases best.
 
-## Creating a custom connector
+## Creating a custom Connector
 
-Using the connector SDK, you can create environment-agnostic, reusable connector runtime behavior.
-This section will outline how to set up a connector project, test it, and run it locally.
+Using the Connector SDK, you can create environment-agnostic and reusable Connector runtime behavior.
+This section outlines how to set up a Connector project, test it, and run it locally.
 
 ### Setup
 
-When developing a new connector we recommend using our
-[custom connector template repository on GitHub](https://github.com/camunda/connector-template).
+When developing a new Connector, we recommend using our
+[custom Connector template repository on GitHub](https://github.com/camunda/connector-template).
 This template is a [Maven](https://maven.apache.org/)-based Java project, and can be used in various
-ways as described below:
+ways such as:
 
-- _Create your own GitHub repository_: Click the **Use this template** button and follow the steps.
+- _Create your own GitHub repository_: Click **Use this template** and follow the prompted steps.
   You can manage code changes in your new repository afterward.
 - _Experiment locally_: Check out the source code to your local machine using [Git](https://git-scm.com/).
   You won't be able to check in code changes to the repository due to restricted write access.
@@ -46,8 +46,8 @@ ways as described below:
   You can adjust and manage the code the way you like afterward, using your chosen source code
   management tools.
 
-If you want to manualy set up your connector project, include the following dependency to use the SDK.
-Make sure to adhere to the project outline detailed in the next section.
+To manually set up your Connector project, include the following dependency to use the SDK.
+Ensure you adhere to the project outline detailed in the next section.
 
 <Tabs groupId="dependency" defaultValue="maven" values={
 [
@@ -79,9 +79,9 @@ implementation 'io.camunda.connector:connector-core:0.1.0'
 
 ### Project outline
 
-There are multiple parts to a connector that enable it to be reused, as a
-reusable building block, for modeling and for the runtime behavior.
-The following parts make up a connector:
+There are multiple parts of a Connector that enables it for reuse, as a
+reusable building block, for modeling, and for the runtime behavior.
+The following parts make up a Connector:
 
 ```
 my-connector
@@ -97,17 +97,17 @@ my-connector
 └── pom.xml (7)
 ```
 
-For the modeling building blocks, the connector provides
+For the modeling building blocks, the Connector provides
 [connector templates](./connector-templates.md) with **(1)**.
 
 You provide the runtime logic as Java source code under a directory like **(2)**.
-Typically a connector runtime logic consists of
+Typically, a Connector runtime logic consists of the following:
 
-- Exactly one implementation of a `ConnectorFunction` with **(3)**
-- At least one input data object like **(4)**
-- At least one result object like **(5)**
+- Exactly one implementation of a `ConnectorFunction` with **(3)**.
+- At least one input data object like **(4)**.
+- At least one result object like **(5)**.
 
-For your connector function to be detectable you are required to expose your function class name in the
+For a detectable Connector function, you are required to expose your function class name in the
 [`ConnectorFunction` SPI implementation](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html)
 with **(6)**.
 
@@ -118,9 +118,9 @@ In this example, we include a Maven project's `POM` file. Other build tools like
 ### Connector template
 
 To create reusable building blocks for modeling, you are required to provide a
-domain-specific [connector template](./connector-templates.md).
+domain-specific [Connector template](./connector-templates.md).
 
-A connector template defines the binding to your connector runtime behavior via the following object:
+A Connector template defines the binding to your Connector runtime behavior via the following object:
 
 ```json
 {
@@ -132,12 +132,12 @@ A connector template defines the binding to your connector runtime behavior via 
 }
 ```
 
-This type definition is the connection configuring which version of your connector runtime behavior to use.
+This type definition is the connection configuring which version of your Connector runtime behavior to use.
 In technical terms, this defines the **Type** of jobs created for tasks in your process model that use this template.
 Consult the [job worker](../../../concepts/job-workers.md) guide to learn more.
 
-Besides the type binding, connector templates also define the input variables of your connector as `zeebe:input` objects.
-For example, you can create the input variable `message` of your connector in the element template as follows:
+Besides the type binding, Connector templates also define the input variables of your Connector as `zeebe:input` objects.
+For example, you can create the input variable `message` of your Connector in the element template as follows:
 
 ```json
 {
@@ -176,11 +176,11 @@ For example, you can create the domain object `authentication` that contains the
 }
 ```
 
-You can easily deserialize these authentication properties into a domain object using the SDK.
-Have a look at the [input data](#input-data) section for further insights.
+You can deserialize these authentication properties into a domain object using the SDK.
+Visit the [input data](#input-data) section for further details.
 
 Connectors that offer any kind of result from their invocation should allow users to configure
-how to map the result into their processes. Therefore, connector templates can reuse the two
+how to map the result into their processes. Therefore, Connector templates can reuse the two
 recommended objects, **Result Variable** and **Result Expression**:
 
 ```json
@@ -205,20 +205,20 @@ recommended objects, **Result Variable** and **Result Expression**:
 }
 ```
 
-These objects will create custom headers for the jobs created for the tasks that use this template.
-The connector runtime environments will pick up those two custom headers and translate them into process variables accordingly.
-You can see an example of how to use this in the [out-of-the-box REST connector](../out-of-the-box-connectors/rest.md#response).
+These objects create custom headers for the jobs created for the tasks that use this template.
+The Connector runtime environments pick up those two custom headers and translate them into process variables accordingly.
+You can see an example of how to use this in the [out-of-the-box REST Connector](../out-of-the-box-connectors/rest.md#response).
 
 ### Runtime logic
 
-To create a reusable runtime behavior for your connector, you are required to implement
-and expose an implementation of the `ConnectorFunction` interface of the SDK. The connector runtime
-environments will call this function. It handles input data, executes the connector's
+To create a reusable runtime behavior for your Connector, you are required to implement
+and expose an implementation of the `ConnectorFunction` interface of the SDK. The Connector runtime
+environments will call this function; it handles input data, executes the Connector's
 business logic, and optionally returns a result. Exception handling is optional since the
-connector runtime environments take care of this as a fallback.
+Connector runtime environments handle this as a fallback.
 
 The `ConnectorFunction` interface consists of exactly one `execute` method. A minimal recommended
-outline of a connector function implementation looks as follows:
+outline of a Connector function implementation looks as follows:
 
 ```java
 package io.camunda.connector;
@@ -258,35 +258,37 @@ public class MyConnectorFunction implements ConnectorFunction {
 ```
 
 The `execute` method receives all necessary environment data via the `ConnectorContext` object.
-The connector runtime environment initializes the context. It allows to
+The Connector runtime environment initializes the context and allows the following to occur:
 
-- Fetch and deserialize the input data as shown in **(1)**. See [input data](#input-data) section for details.
-- Validate the created request object as shown in **(2)**. See [validation](#validation) section for details.
-- Replace secrets in the request object as shown in **(3)**. See [secrets](#secrets) section for details.
+- Fetch and deserialize the input data as shown in **(1)**. See the [input data](#input-data) section for details.
+- Validate the created request object as shown in **(2)**. See the [validation](#validation) section for details.
+- Replace secrets in the request object as shown in **(3)**. See the [secrets](#secrets) section for details.
 
-If the connector has a result to return, it can create a new result data object and set
+If the Connector has a result to return, it can create a new result data object and set
 its properties as shown in **(4)**.
 
-Using this outline, you start the business logic of your connector in the `executeConnector` method
+Using this outline, you start the business logic of your Connector in the `executeConnector` method
 and expand from there.
 
 #### Input data
 
-The input data of a connector is provided by the process instance that executes the connector.
-You can either fetch this data as a raw JSON String using the context's `getVariables` method
+The input data of a Connector is provided by the process instance that executes the Connector.
+You can either fetch this data as a raw JSON string using the context's `getVariables` method,
 or deserialize the data into your own request object directly with the `getVariablesAsType`
 method shown in **(1)**.
 
-Using `getVariablesAsType` will attempt to deserialize the JSON String containing the input
-data into Java objects. This deserialization depends on the connector runtime environment your
-connector function runs in. Thus, use this deserialization approach with caution.
-While it works reliably for many input data types like String, Boolean, Integer, and nested
-objects, you might want to consider deserializing your connector's input data in a custom fashion
+Using `getVariablesAsType` will attempt to deserialize the JSON string containing the input
+data into Java objects. This deserialization depends on the Connector runtime environment your
+Connector function runs in.
+
+Thus, use this deserialization approach with caution.
+While it works reliably for many input data types like string, boolean, integer, and nested
+objects, you might want to consider deserializing your Connector's input data in a custom fashion
 using `getVariables` and a library like [Gson](https://github.com/google/gson).
 
 The `getVariablesAsType` method and tools like Gson can properly reflect nested data
 objects. You can define nested structures by referencing other Java classes as attributes.
-Looking at the `authentication` data input example described in the [connector template](#connector-template),
+Looking at the `authentication` data input example described in the [Connector template](#connector-template),
 you can create the following input data objects to reflect the structure properly:
 
 ```java
@@ -311,9 +313,9 @@ public class Authentication {
 
 #### Validation
 
-Validating input data is a common task in a connector function. The SDK provides an
-API to ensure the data conforms to the connector's requirements. To initiate the
-validation from the connector function, use the `ConnectorContext` object's `validate` method
+Validating input data is a common task in a Connector function. The SDK provides an
+API to ensure the data conforms to the Connector's requirements. To initiate the
+validation from the Connector function, use the `ConnectorContext` object's `validate` method
 as shown in the [runtime logic](#runtime-logic) section:
 
 ```java
@@ -328,7 +330,7 @@ as shown in the [runtime logic](#runtime-logic) section:
 ...
 ```
 
-This will instruct the context to prepare a validator and pass it to the object that needs
+This instructs the context to prepare a validator and pass it to the object that needs
 validation. To validate your input object `connectorRequest` using the API, it needs
 to implement the `ConnectorInput` interface. Using this interface's `validateWith` method,
 you can use the provided validator to ensure the data conforms to your requirements:
@@ -382,22 +384,22 @@ public class Authentication implements ConnectorInput {
 ```
 
 Using this approach, you can validate your whole input data structure with one initial call from
-the central connector function.
+the central Connector function.
 
 #### Secrets
 
 Connectors that require confidential information to connect to external systems need to be able
 to manage those securely. As described in the
 [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md), secrets can be
-controlled in a secure location and referenced in a connector's properties using a placeholder
+controlled in a secure location and referenced in a Connector's properties using a placeholder
 pattern `secrets.*`. To make this mechanism as robust as possible, secret handling comes with
-the connector SDK out of the box. That way, all connectors can use the same standard way of
+the Connector SDK out of the box. That way, all Connectors can use the same standard way of
 handling secrets in input data.
 
 The SDK allows replacing secrets in input data as late as possible to avoid passing them around
-in the environments that handle connector invocation. We do not pass secrets into the
-connector function in clear text but only as placeholders that you can replace from
-within the connector function. To initiate the secret replacement from the connector function,
+in the environments that handle Connector invocation. We do not pass secrets into the
+Connector function in clear text but only as placeholders that you can replace from
+within the Connector function. To initiate the secret replacement from the Connector function,
 use the `ConnectorContext` object's `replaceSecrets` method as shown in the
 [runtime logic](#runtime-logic) section:
 
@@ -414,14 +416,14 @@ use the `ConnectorContext` object's `replaceSecrets` method as shown in the
 ```
 
 This will instruct the context to search for and replace secret placeholders in the object passed to it.
-The secret store that is present in the connector runtime environment that invokes the connector function
+The secret store present in the Connector runtime environment that invokes the Connector function
 takes care of that. Every environment can define its own way of providing such a secret store. Consult
 the [runtime environments](#runtime-environments) section to learn more about them.
 
 To replace secrets for the `connectorRequest` using the API, the object needs to implement the
 `ConnectorInput` interface. Using this interface's `replaceSecrets` method, you can use the provided
 `SecretStore` to search for and replace secrets in the properties that should support this in your
-connector. Furthermore, the `ConnectorInput` interface comes with convenience methods to allow handling
+Connector. Furthermore, the `ConnectorInput` interface comes with convenience methods to allow handling
 nested objects as well with `replaceSecretsIfNotNull`:
 
 ```java
@@ -462,29 +464,29 @@ public class Authentication implements ConnectorInput {
 ```
 
 Using this approach, you can replace secrets in your whole input data structure with one
-initial call from the central connector function.
+initial call from the central Connector function.
 
 ## Testing
 
-Ensuring your connector's business logic works as expected is vital to developing the connector.
-The SDK aims to make testing of connectors convenient without imposing strict
+Ensuring your Connector's business logic works as expected is vital to develop the Connector.
+The SDK aims to make testing of Connectors convenient without imposing strict
 requirements on your test development flow. The SDK is not enforcing any testing libraries.
 
 By abstracting from Camunda Platform 8 internals, the SDK provides a good starting
 ground for scoped testing. There is no need to test Camunda engine internals or provide related mocks.
-You can focus on testing the business logic of your connector and the associated objects.
+You can focus on testing the business logic of your Connector and the associated objects.
 
-We recommend testing at least the following parts of your connector project:
+We recommend testing at least the following parts of your Connector project:
 
 - All data validation works as expected.
 - All expected attributes support secret replacement.
-- The core logic of your connector works as expected until calling the external API or service.
+- The core logic of your Connector works as expected until calling the external API or service.
 
 The SDK provides a `ConnectorContextBuilder` for test cases that lets you create a `ConnectorContext`.
 You can conveniently use that test context to test the secret replacement and validation routines.
 
 Writing secret replacement tests can look similar to the following test case. You can write one test
-case for each attribute that supports secret replacement.
+case for each attribute that supports secret replacement:
 
 ```java
 @Test
@@ -550,7 +552,7 @@ void shouldFailWhenValidate_TokenWrongPattern() {
 }
 ```
 
-Testing the business logic of your connector can, of course, vary widely, depending on the
+Testing the business logic of your connector can vary widely depending on the
 functionality it provides. For our example logic, the following test would be a good start:
 
 ```java
@@ -579,9 +581,9 @@ void shouldReturnReceivedMessageWhenExecute() throws Exception {
 
 ## Runtime environments
 
-The connector SDK enables you to write environment-agnostic runtime behavior for connectors.
-This makes the connector logic reusable in different setups without modifying your connector
-code. To invoke this logic, you need a runtime environment that knows the connector function
+The Connector SDK enables you to write environment-agnostic runtime behavior for Connectors.
+This makes the Connector logic reusable in different setups without modifying your Connector
+code. To invoke this logic, you need a runtime environment that knows the Connector function
 and how to call it.
 
 In Camunda Platform 8 SaaS, every cluster runs a component that knows the
@@ -589,7 +591,7 @@ In Camunda Platform 8 SaaS, every cluster runs a component that knows the
 and how to invoke them. This component is the runtime environment specific to Camunda's SaaS use case.
 
 Regarding Self-Managed environments, you are responsible for providing the runtime environment that
-can invoke the connectors. The connector SDK provides a
+can invoke the Connectors. The Connector SDK provides a
 [pre-packaged environment](#pre-packaged-runtime-environment) and a
 [connector job handler](#connector-job-handler) to make this situation as convenient as possible.
 
@@ -613,20 +615,20 @@ java -cp 'connector-runtime-job-worker.jar;connector-template.jar' \
     io.camunda.connector.runtime.jobworker.Main
 ```
 
-The `ZEEBE_CONNECTOR_*` environment variables define the connectors that this application can invoke.
+The `ZEEBE_CONNECTOR_*` environment variables define the Connectors that this application can invoke.
 Those variables always come in triples, grouped by `<NAME>`:
 
-- `ZEEBE_CONNECTOR_<NAME>_TYPE` - The job type this connector handles. You define this in the
-  [connector template](#connector-template).
-- `ZEEBE_CONNECTOR_<NAME>_VARIABLES` - The process variables to pass to the connector function.
+- `ZEEBE_CONNECTOR_<NAME>_TYPE` - The job type this Connector handles. You define this in the
+  [Connector template](#connector-template).
+- `ZEEBE_CONNECTOR_<NAME>_VARIABLES` - The process variables to pass to the Connector function.
   This usually maps to the attributes that your [input data](#input-data) object defines.
 - `ZEEBE_CONNECTOR_<NAME>_FUNCTION` - The fully qualified class name of your
-  [connector function](#runtime-logic).
+  [Connector function](#runtime-logic).
 
-You can pass all the JAR files of the connector runtimes that should be invokable by the environment
+You can pass all the JAR files of the Connector runtimes that should be invokable by the environment
 in the `-cp` argument of the Java call.
 
-This starts a Zeebe client, registering the defined connectors as job workers. By default, it
+This starts a Zeebe client, registering the defined Connectors as job workers. By default, it
 connects to a local Zeebe instance at port `26500`. You can configure the Zeebe client using
 the [standard Zeebe environment variables](../../../../apis-clients/java-client/index.md#bootstrapping).
 
@@ -642,7 +644,7 @@ Providing secrets to the environment can be achieved in two ways:
 ### Connector job handler
 
 If using the pre-packaged runtime environment that comes with the SDK does not fit your use case,
-you can create a custom runtime environment. To wrap [connector functions](#runtime-logic) as job
+you can create a custom runtime environment. To wrap [Connector functions](#runtime-logic) as job
 workers conveniently, the SDK provides the wrapper class `ConnectorJobHandler`.
 
 The job handler wrapper provides the following benefits:
@@ -650,8 +652,8 @@ The job handler wrapper provides the following benefits:
 - Provides a `ConnectorContext` that handles the Camunda-internal job worker API regarding variables.
 - Handles secret management by defaulting to an environment variables-based secret store and
   allowing to provide a custom secret provider via an SPI for `io.camunda.connector.api.SecretProvider`.
-- Handles connector result mapping for **Result Variable** and **Result Expression** as described
-  in the [connector template](#connector-template) section.
+- Handles Connector result mapping for **Result Variable** and **Result Expression** as described
+  in the [Connector template](#connector-template) section.
 
 Using the wrapper class, you can create a custom [Zeebe client](../../../../apis-clients/working-with-apis-clients.md).
 For example, you can spin up a custom client with the
@@ -678,7 +680,7 @@ public class Main {
 }
 ```
 
-If the provided job handler wrapper does not fit your needs, you can easily extend or replace
-it with your job handler implementation that takes care of invoking the connector functions.
-Your custom job handler needs to create a `ConnectorContext` that the connector function can use
-to handle variables, secrets, and connector results.
+If the provided job handler wrapper does not fit your needs, you can extend or replace
+it with your job handler implementation that handles invoking the Connector functions.
+Your custom job handler needs to create a `ConnectorContext` that the Connector function can use
+to handle variables, secrets, and Connector results.
