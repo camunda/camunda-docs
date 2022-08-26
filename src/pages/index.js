@@ -164,7 +164,7 @@ function Home() {
         )}
         <div className={clsx("hero hero--secondary", styles.heroBanner)}>
           <div className="container">
-            <h1 className="hero__title">Unsure where to begin?</h1>
+            <h2 className="hero__title">Unsure where to begin?</h2>
             <p className="hero__subtitle">Try one of our use case guides</p>
             <div className={styles.buttons}>
               <Link
