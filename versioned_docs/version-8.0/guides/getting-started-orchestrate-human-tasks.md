@@ -12,13 +12,13 @@ When a process instance arrives at such a user task, a new job is created. The p
 
 While it may originally seem like the goal of automating a process is to remove humans entirely, efficiently allocating work through user tasks can be even more beneficial.
 
-In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser. If you rather prefer a video based learning experience we got you covered as well. [This Camunda Academy course](https://bit.ly/3PJJocB) features the same content which is being discussed in this guide.
+In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser. If you prefer a video-based learning experience, visit [this Camunda Academy course](https://bit.ly/3PJJocB) on Camunda Platform 8 and getting started with human workflows.
 
 :::note
-Getting stuck? Book a meeting with our User Success Specialists. Follow the links dependent on the location you are joining:
+Getting stuck? Book a meeting with our User Success Specialists. Follow the link dependent on your location to connect with a specialist:
 
 - [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
-- [EMEA, APAC and other regions](https://meetings.salesloft.com/camunda/daan)
+- [EMEA, APAC, and other regions](https://meetings.salesloft.com/camunda/daan)
   :::
 
 ## Create an automated process with user tasks
