@@ -261,9 +261,12 @@ module.exports = {
             optimizeLink("Data sources", "userguide/data-sources/"),
             {
               Dashboards: [
-                "components/optimize/userguide/creating-dashboards",
-                "components/optimize/userguide/edit-mode",
-                "components/optimize/userguide/view-mode",
+                optimizeLink(
+                  "Creating dashboards",
+                  "userguide/creating-dashboards/"
+                ),
+                optimizeLink("Edit mode", "userguide/edit-mode"),
+                optimizeLink("View mode", "userguide/view-mode"),
               ],
             },
             "components/optimize/userguide/creating-reports",

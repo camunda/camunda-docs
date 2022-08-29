@@ -648,18 +648,9 @@ module.exports = {
 
             {
               Dashboards: [
-                docsComponentsLink(
-                  "Creating dashboards",
-                  "components/optimize/userguide/creating-dashboards/"
-                ),
-                docsComponentsLink(
-                  "Edit mode",
-                  "components/optimize/userguide/edit-mode/"
-                ),
-                docsComponentsLink(
-                  "View mode",
-                  "components/optimize/userguide/view-mode/"
-                ),
+                "userguide/creating-dashboards",
+                "userguide/edit-mode",
+                "userguide/view-mode",
               ],
             },
 
