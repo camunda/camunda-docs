@@ -267,7 +267,10 @@ module.exports = {
               ],
             },
             "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/combined-process-reports",
+            optimizeLink(
+              "Combined process reports",
+              "userguide/combined-process-reports/"
+            ),
             "components/optimize/userguide/processes",
             {
               "Process analysis": [

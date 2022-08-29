@@ -667,10 +667,7 @@ module.exports = {
               "Creating reports",
               "components/optimize/userguide/creating-reports/"
             ),
-            docsComponentsLink(
-              "Combined process reports",
-              "components/optimize/userguide/combined-process-reports/"
-            ),
+            "userguide/combined-process-reports",
             docsComponentsLink(
               "Processes",
               "components/optimize/userguide/processes/"
