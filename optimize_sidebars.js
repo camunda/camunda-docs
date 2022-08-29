@@ -777,22 +777,10 @@ module.exports = {
                   "Alerts",
                   "components/optimize/userguide/additional-features/alerts/"
                 ),
-                docsComponentsLink(
-                  "Event-based processes",
-                  "components/optimize/userguide/additional-features/event-based-processes/"
-                ),
-                docsComponentsLink(
-                  "Export and import",
-                  "components/optimize/userguide/additional-features/export-import/"
-                ),
-                docsComponentsLink(
-                  "Footer",
-                  "components/optimize/userguide/additional-features/footer/"
-                ),
-                docsComponentsLink(
-                  "Variable labeling",
-                  "components/optimize/userguide/additional-features/variable-labeling/"
-                ),
+                "userguide/additional-features/event-based-processes",
+                "userguide/additional-features/export-import",
+                "userguide/additional-features/footer",
+                "userguide/additional-features/variable-labeling",
               ],
             },
           ],

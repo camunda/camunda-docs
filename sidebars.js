@@ -320,10 +320,19 @@ module.exports = {
             {
               "Additional features": [
                 "components/optimize/userguide/additional-features/alerts",
-                "components/optimize/userguide/additional-features/event-based-processes",
-                "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/footer",
-                "components/optimize/userguide/additional-features/variable-labeling",
+                optimizeLink(
+                  "Event-based processes",
+                  "userguide/additional-features/event-based-processes/"
+                ),
+                optimizeLink(
+                  "Export and import",
+                  "userguide/additional-features/export-import/"
+                ),
+                optimizeLink("Footer", "userguide/additional-features/footer/"),
+                optimizeLink(
+                  "Variable labeling",
+                  "userguide/additional-features/variable-labeling/"
+                ),
               ],
             },
           ],
