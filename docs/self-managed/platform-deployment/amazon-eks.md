@@ -1,8 +1,7 @@
 ---
 id: amazon-eks
 title: "Amazon EKS"
-description: "Amazon EKS is a managed
-container service to run and scale Kubernetes applications in the cloud or on-premises."
+description: "Deploy Camunda Platform 8 Self-Managed on Amazon EKS."
 ---
 
 Amazon Elastic Kubernetes Service ([Amazon EKS](https://aws.amazon.com/eks/)) is a managed
