@@ -258,7 +258,7 @@ module.exports = {
               "Collections, dashboards, and reports",
               "userguide/collections-dashboards-reports/"
             ),
-            "components/optimize/userguide/data-sources",
+            optimizeLink("Data sources", "userguide/data-sources/"),
             {
               Dashboards: [
                 "components/optimize/userguide/creating-dashboards",

@@ -644,10 +644,7 @@ module.exports = {
         {
           "User guide": [
             "userguide/collections-dashboards-reports",
-            docsComponentsLink(
-              "Data sources",
-              "components/optimize/userguide/data-sources/"
-            ),
+            "userguide/data-sources",
 
             {
               Dashboards: [
