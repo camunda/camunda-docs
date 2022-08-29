@@ -1,3 +1,11 @@
+function optimizeLink(label, href) {
+  return {
+    type: "link",
+    label: label,
+    href: `/optimize/${href}`,
+  };
+}
+
 module.exports = {
   Guides: [
     {
@@ -243,14 +251,13 @@ module.exports = {
         },
       ],
       Optimize: [
-        {
-          type: "link",
-          label: "What is Optimize?",
-          href: "/optimize/what-is-optimize",
-        },
+        optimizeLink("What is Optimize?", "what-is-optimize"),
         {
           "User guide": [
-            "components/optimize/userguide/collections-dashboards-reports",
+            optimizeLink(
+              "Collections, dashboards, and reports",
+              "userguide/collections-dashboards-reports/"
+            ),
             "components/optimize/userguide/data-sources",
             {
               Dashboards: [

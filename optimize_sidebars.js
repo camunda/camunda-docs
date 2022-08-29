@@ -643,10 +643,7 @@ module.exports = {
 
         {
           "User guide": [
-            docsComponentsLink(
-              "Collections, dashboards, and reports",
-              "components/optimize/userguide/collections-dashboards-reports/"
-            ),
+            "userguide/collections-dashboards-reports",
             docsComponentsLink(
               "Data sources",
               "components/optimize/userguide/data-sources/"

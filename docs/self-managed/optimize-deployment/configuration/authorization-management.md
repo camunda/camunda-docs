@@ -6,7 +6,7 @@ description: "Define which data users are authorized to see."
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
-User authorization management differs depending on whether the entities to manage the authorizations for are originating from adjacent systems like imported data from connected Camunda-BPM engines such as process instances, or whether the entities are fully managed by Camunda Optimize, such as [event-based processes and instances](./../../../components/optimize/userguide/additional-features/event-based-processes.md) or [collections](./../../../components/optimize/userguide/collections-dashboards-reports.md). For entities originating from adjacent systems authorizations are managed in the Camunda Platform 7 via Camunda Admin, for the latter the authorizations are managed in Camunda Optimize.
+User authorization management differs depending on whether the entities to manage the authorizations for are originating from adjacent systems like imported data from connected Camunda-BPM engines such as process instances, or whether the entities are fully managed by Camunda Optimize, such as [event-based processes and instances](./../../../components/optimize/userguide/additional-features/event-based-processes.md) or [collections]($optimize$/userguide/collections-dashboards-reports). For entities originating from adjacent systems authorizations are managed in the Camunda Platform 7 via Camunda Admin, for the latter the authorizations are managed in Camunda Optimize.
 
 ## Camunda Platform 7 data authorizations
 
@@ -44,7 +44,7 @@ There are entities that only exist in Camunda Optimize and authorizations to the
 
 ### Collections
 
-[Collections](./../../../components/optimize/userguide/collections-dashboards-reports.md) are the only way to share Camunda Optimize reports and dashboards with other users. Access to them is directly managed via the UI of collections; see the corresponding user guide section on [Collection - User Permissions](./../../../components/optimize/userguide/collections-dashboards-reports.md/#user-permissions).
+[Collections]($optimize$/userguide/collections-dashboards-reports) are the only way to share Camunda Optimize reports and dashboards with other users. Access to them is directly managed via the UI of collections; see the corresponding user guide section on [Collection - User Permissions]($optimize$/userguide/collections-dashboards-reports/#user-permissions).
 
 ### Event based processes
 
