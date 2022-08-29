@@ -668,10 +668,7 @@ module.exports = {
               "components/optimize/userguide/creating-reports/"
             ),
             "userguide/combined-process-reports",
-            docsComponentsLink(
-              "Processes",
-              "components/optimize/userguide/processes/"
-            ),
+            "userguide/processes",
 
             {
               "Process analysis": [

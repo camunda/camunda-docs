@@ -271,7 +271,8 @@ module.exports = {
               "Combined process reports",
               "userguide/combined-process-reports/"
             ),
-            "components/optimize/userguide/processes",
+
+            optimizeLink("Processes", "userguide/processes/"),
             {
               "Process analysis": [
                 "components/optimize/userguide/process-analysis/process-analysis-overview",
