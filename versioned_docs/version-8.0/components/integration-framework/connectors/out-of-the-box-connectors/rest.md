@@ -4,15 +4,15 @@ title: REST Connector
 description: Make a request to a REST API and use the response in the next steps of your process.
 ---
 
-The **REST connector** allows you to make a request to a REST API and use the response in the next steps of your process.
+The **REST Connector** allows you to make a request to a REST API and use the response in the next steps of your process.
 
-## Create a REST connector task
+## Create a REST Connector task
 
-To use a **REST connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new connector task by using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
+To use a **REST Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
 
-## Make your REST connector executable
+## Make your REST Connector executable
 
-To make the **REST connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
+To make the **REST Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
 
 ![rest connector red properties](../img/connectors-rest-red-properties.png)
 
@@ -22,7 +22,7 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 ### Authentication
 
-You can choose among the available REST connectors according to your authentication requirements.
+You can choose among the available REST Connectors according to your authentication requirements.
 
 #### REST Connector (No Auth)
 
@@ -30,12 +30,12 @@ No extra authentication configuration is required; you can jump to the [next sec
 
 #### REST Connector (Basic Auth)
 
-##### Create a new connector secret
+##### Create a new Connector secret
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `REST_BASIC_AUTH_SECRET`) so you can reference it later in the connector.
+2. Name your secret (i.e `REST_BASIC_AUTH_SECRET`) so you can reference it later in the Connector.
 
 ### Configure Basic Authentication
 
@@ -48,12 +48,12 @@ Select the **REST Connector** and fill out the following properties under the **
 
 ### REST Connector (Bearer Token Auth)
 
-#### Create a new connector secret
+#### Create a new Connector secret
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `REST_BEARER_TOKEN`) so you can reference it later in the connector.
+2. Name your secret (i.e `REST_BEARER_TOKEN`) so you can reference it later in the Connector.
 
 #### Configure the Bearer Token
 
@@ -105,10 +105,10 @@ Similarly to the Query Parameters, the **Http Headers** can be specified using t
 When you are making a PUT, POST, or PATCH request, you might need to provide a body.
 You can provide a body for your request under the **Payload** section in the **Request Body** field.
 
-Be aware that **REST connector** is supporting only JSON payload.
+Be aware that **REST Connector** is supporting only JSON payload.
 
 :::note
-Secrets are currently not supported in the body of a REST connector.
+Secrets are currently not supported in the body of a REST Connector.
 :::
 
 ```json
