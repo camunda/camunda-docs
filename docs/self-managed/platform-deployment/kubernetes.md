@@ -2,6 +2,7 @@
 id: kubernetes
 title: "Kubernetes"
 sidebar_label: "Overview"
+description: "An overview of Kubernetes, its environments, and using Helm to install on Kubernetes."
 ---
 
 ## Overview
@@ -21,7 +22,7 @@ You can install Camunda Platform 8 on your Kubernetes environment of choice, e.g
 
 ## Officially supported environments
 
-Even though you can install Camunda Platform 8 on any Kubernetes environment, however, we only officially test and support the following environments:
+While you can install Camunda Platform 8 on any Kubernetes environment, we only officially test and support the following environments:
 
 - Stock Kubernetes
 - [Amazon EKS](../amazon-eks/)
