@@ -40,7 +40,7 @@ After getting started with Camunda Platform 8, dive deeper in our next steps sec
 - [Set up your first development project](./setting-up-development-project.md) - Set up your first project to model, deploy, and start a process instance.
 - [Set up client connection credentials](./setup-client-connection-credentials.md) - Create, name, and connect your client.
 - [Automate a process using BPMN](./automating-a-process-using-bpmn.md) - Learn more about the mechanics and elements of BPMN, and build your first BPMN diagram.
-- [Implement connectors](./configuring-out-of-the-box-connectors.md) - Automate complex business processes by inserting them into BPMN diagrams within Web Modeler.
+- [Configuring an out-of-the-box connector](./configuring-out-of-the-box-connectors.md) - Automate complex business processes by inserting them into BPMN diagrams within Web Modeler.
 - [Create decision tables with DMN](./create-decision-tables-using-dmn.md) - Learn more about Decision Model and Notation to model a set of rules within a table, and yield a decision to rapidly execute a process using a decision engine like Camunda.
 - [Build forms with Modeler](./utilizing-forms.md) - Design and configure forms and connect them to a user task or start event to implement a task form in your application.
 - [Improve processes with Optimize](./improve-processes-with-optimize.md) - Leverage data collected during process execution to access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
