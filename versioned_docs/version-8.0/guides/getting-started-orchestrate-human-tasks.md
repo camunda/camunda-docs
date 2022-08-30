@@ -1,7 +1,7 @@
 ---
 id: orchestrate-human-tasks
-title: Getting started with Human Task Orchestration
-sidebar_label: Getting started with Human Task Orchestration
+title: Getting started with human task orchestration
+sidebar_label: Getting started with human task orchestration
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
@@ -35,7 +35,9 @@ To create an automated process with [user tasks](/components/modeler/bpmn/user-t
 7. Append an exclusive [gateway](/components/modeler/bpmn/gateways.md) to your user task by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
 8. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
 9. Sequence flows require expressions to access variables from the form we'll create below to determine what to eat for dinner. To add an [expression](/components/concepts/expressions.md), click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
-10. Attach an end event to the two user tasks.
+10. Verify the sequences flows have the following expressions: `= Meal = "Salad"`on one side, and `= Meal = "Chicken"`on the other.
+    ![expression input example](./img/expression-input-example.png)
+11. Attach an end event to the two user tasks.
 
 ![dinner bpmn model](./img/dinner-bpmn-model.png)
 
@@ -45,14 +47,10 @@ Variables are part of a process instance and represent the data of the instance.
 
 ### Implement a form
 
-1. To add a form and decide what's for dinner, return to the **Modeler** homepage and click **New > Form**.
+1. Navigate to the Modeler **Home** page and click the project you are working on. Then, click **New > Form**.
 2. Name your form. In this case, we've named ours **Decide what's for dinner**.
 3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've described ours as **What's for dinner?**
 4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner add an extra value by clicking on the plus sign. Enter the value **Chicken** with the label as **Chicken** and enter the value **Salad** with the label as **Salad** in the other value.
-   ![form values example](./img/form-values-example.png)
-   :::note
-   You'll need to insert the defined variable values into the appropriate sequence flows in the BPMN model to execute your process. For example, our sequence flow will now have the expressions of `= meal = "salad"`.
-   :::
 5. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import** to add the form to the BPMN diagram.
    ![form import example](./img/form-import-example.png)
 

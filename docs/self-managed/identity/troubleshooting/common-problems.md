@@ -1,7 +1,7 @@
 ---
 id: common-problems
-title: "Common Problems"
-sidebar_label: "Common Problems"
+title: "Common problems"
+sidebar_label: "Common problems"
 ---
 
 ## Problem: Identity is unable to connect to Keycloak

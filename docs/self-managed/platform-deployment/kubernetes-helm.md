@@ -154,9 +154,9 @@ However, if Identity is enabled (this is the default), the upgrade path is a bit
 
 Read the next sections to familiarize yourself with the upgrade process.
 
-### Upgrading with Identity and Secrets
+### Upgrading with Identity and secrets
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the Secrets randomly if not specified on installation. If you just run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
+If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation. If you just run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 $ helm upgrade camunda-platform-test camunda/camunda-platform
@@ -170,21 +170,21 @@ PASSWORDS ERROR: You must provide your current passwords when upgrading the rele
         export TASKLIST_SECRET=$(kubectl get secret --namespace "zell-c8-optimize" "camunda-platform-test-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 ```
 
-As mentioned, this output returns because Secrets are randomly generated with the first Helm installation by default if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated Secrets are persisted on persistent volume claims (PVCs), which are not maintained by Helm.
+As mentioned, this output returns because secrets are randomly generated with the first Helm installation by default if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated secrets are persisted on persistent volume claims (PVCs), which are not maintained by Helm.
 
-If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, Secrets can be recreated by Helm, and could lead to the regeneration of the Secret values. This would mean that newly-generated Secrets wouldn't longer match with the persisted secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
+If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, secrets can be recreated by Helm, and could lead to the regeneration of the secret values. This would mean that newly-generated secrets wouldn't longer match with the persisted secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
 
 In the error message, Bitnami links to their well-described [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion we will step through the troubleshooting process in this guide as well.
 
 ### Secrets extraction
 
-For a successful upgrade, you first need to extract all Secrets which were previously generated.
+For a successful upgrade, you first need to extract all secrets which were previously generated.
 
 :::note
-You also need to extract all Secrets which were generated for Keycloak, since Keycloak is a dependency of Identity.
+You also need to extract all secrets which were generated for Keycloak, since Keycloak is a dependency of Identity.
 :::
 
-To extract the Secrets, use the following code snippet. Make sure to replace `<releasename>` with your chosen Helm release name.
+To extract the secrets, use the following code snippet. Make sure to replace `<releasename>` with your chosen Helm release name.
 
 ```shell
 export TASKLIST_SECRET=$(kubectl get secret "<releasename>-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
@@ -195,7 +195,7 @@ export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "<releasename>-keycloak" 
 export POSTGRESQL_SECRET=$(kubectl get secret "<releasename>-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
 ```
 
-After exporting all Secrets into environment variables, run the following upgrade command.
+After exporting all secrets into environment variables, run the following upgrade command.
 
 ```shell
 helm upgrade <releasename> charts/camunda-platform/ \

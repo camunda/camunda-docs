@@ -12,6 +12,13 @@ Versions prior to Camunda Platform 8 are listed below and identified as Camunda 
 
 There is a dedicated update guide for each version:
 
+### [Camunda Platform 8.0 to Camunda Platform 8.1](../800-to-810)
+
+Update from 8.0.x to 8.1.0
+
+[//]: # "TODO: As soon as the release will be created[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.1.0)"
+[//]: # "TODO: As soon as the release will be created[Release blog](https://camunda.com/blog/)"
+
 ### [Camunda Cloud 1.3 to Camunda Platform 8.0](../130-to-800)
 
 Update from 1.3.x to 8.0.0

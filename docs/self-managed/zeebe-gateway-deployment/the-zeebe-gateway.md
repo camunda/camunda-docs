@@ -75,20 +75,20 @@ The network configuration allows configuration of the host and port details for 
 
 As mentioned, the gateway needs to connect to the Zeebe brokers.
 
-It is important to configure the cluster contact point to one of the Zeebe brokers. Be aware that the gateway currently doesn’t support a list of contact points. The contact point needs to be available to the gateway. With the help of the SWIM protocol, the gateway will find the other broker nodes (if there are any). The corresponding environment variable is called `ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT`.
+It is important to configure the cluster's initial contact point to the Zeebe brokers. You may set only one of the Zeebe brokers, but keep in mind that resiliency will be lower than using all the Zeebe brokers available. The corresponding environment variable is called `ZEEBE_GATEWAY_CLUSTER_INITIALCONTACTPOINTS`.
 
 It is necessary to use the same cluster name for the broker and gateway. Otherwise, a connection will not be possible. The related configuration property is `zeebe.gateway.cluster.clusterName` and as an environment variable, it is called `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`.
 
 If you use the Helm charts, both properties are configured for you already.
 
-| Environment variable                   | Application.yaml property              | Description                                                                                                           | Default value     |
-| -------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT`   | `zeebe.gateway.cluster.contactPoint`   | Sets the broker the gateway should initial contact.                                                                   | `127.0.0.1:26502` |
-| `ZEEBE_GATEWAY_CLUSTER_REQUESTTIMEOUT` | `zeebe.gateway.cluster.requestTimeout` | Sets the timeout of requests sent to the broker cluster.                                                              | `15s`             |
-| `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`    | `zeebe.gateway.cluster.clusterName`    | Sets the name of the Zeebe cluster to connect to. This must be the same as the clustername configured in the brokers. | `zeebe-cluster`   |
-| `ZEEBE_GATEWAY_CLUSTER_MEMBERID`       | `zeebe.gateway.cluster.memberId`       | Sets the member id of the gateway in the cluster. This can be any unique string.                                      | `gateway`         |
-| `ZEEBE_GATEWAY_CLUSTER_HOST`           | `zeebe.gateway.cluster.host`           | Sets the host the gateway node binds to for internal cluster communicatio.                                            | `0.0.0.0`         |
-| `ZEEBE_GATEWAY_CLUSTER_PORT`           | `zeebe.gateway.cluster.port`           | Sets the port the gateway node binds to for internal cluster communication.                                           | `26502`           |
+| Environment variable                         | Application.yaml property                    | Description                                                                                                           | Default value       |
+| -------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `ZEEBE_GATEWAY_CLUSTER_INITIALCONTACTPOINTS` | `zeebe.gateway.cluster.initialContactPoints` | Sets brokers the gateway should initial contact.                                                                      | `[127.0.0.1:26502]` |
+| `ZEEBE_GATEWAY_CLUSTER_REQUESTTIMEOUT`       | `zeebe.gateway.cluster.requestTimeout`       | Sets the timeout of requests sent to the broker cluster.                                                              | `15s`               |
+| `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`          | `zeebe.gateway.cluster.clusterName`          | Sets the name of the Zeebe cluster to connect to. This must be the same as the clustername configured in the brokers. | `zeebe-cluster`     |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERID`             | `zeebe.gateway.cluster.memberId`             | Sets the member id of the gateway in the cluster. This can be any unique string.                                      | `gateway`           |
+| `ZEEBE_GATEWAY_CLUSTER_HOST`                 | `zeebe.gateway.cluster.host`                 | Sets the host the gateway node binds to for internal cluster communicatio.                                            | `0.0.0.0`           |
+| `ZEEBE_GATEWAY_CLUSTER_PORT`                 | `zeebe.gateway.cluster.port`                 | Sets the port the gateway node binds to for internal cluster communication.                                           | `26502`             |
 
 ### Membership configuration
 

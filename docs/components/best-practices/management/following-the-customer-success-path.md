@@ -1,5 +1,5 @@
 ---
-title: "Following the Customer Success Path"
+title: "Following the customer success path"
 tags:
   - Project Management
 ---

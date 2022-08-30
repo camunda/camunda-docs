@@ -116,6 +116,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 | YAML Path                        | Default Value | Description                                                                                                                                                                                                                             |
 | -------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | container.host                   | localhost     | A host name or IP address to identify a specific network interface on which to listen.                                                                                                                                                  |
+| container.contextPath            | null          | Allows you to specify a custom context path. If set, must start with a leading '/'                                                                                                                                                      |
 | container.ports.http             | 8090          | A port number that will be used by Optimize to process HTTP connections. If set to null, or left empty, HTTP connections won't be accepted.                                                                                             |
 | container.ports.https            | 8091          | A port number that will be used by Optimize to process secure HTTPS connections.                                                                                                                                                        |
 | container.keystore.location      | keystore.jks  | HTTPS requires an SSL Certificate. When you generate an SSL Certificate, you are creating a keystore file and a keystore password for use when the browser interface connects. This field specifies the location of this keystore file. |
@@ -184,6 +185,14 @@ Settings for the email server to send email notifications, e.g. when an alert is
 | email.authentication.username         |               | Username of your smtp server.                                                                                   |
 | email.authentication.password         |               | Corresponding password to the given user of your smtp server.                                                   |
 | email.authentication.securityProtocol |               | States how the connection to the server should be secured. Possible values are 'NONE', 'STARTTLS' or 'SSL/TLS'. |
+
+### Digest
+
+Settings influencing the process digest feature.
+
+| YAML Path          | Default value   | Description                                                          |
+| ------------------ | --------------- | -------------------------------------------------------------------- |
+| digest.cronTrigger | 0 0 9 \* \* MON | Cron expression to define when enabled email digests are to be sent. |
 
 ### Alert Notification Webhooks
 

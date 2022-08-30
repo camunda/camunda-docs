@@ -1,6 +1,6 @@
 ---
 id: zeebe-in-production
-title: "Operating Zeebe in Production"
+title: "Operating Zeebe in production"
 sidebar_label: "Overview"
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---

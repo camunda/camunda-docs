@@ -1,6 +1,6 @@
 ---
 id: message-correlation
-title: Message Correlation
+title: Message correlation
 description: "Message correlation allows you to target a running workflow with a state update from an external system asynchronously."
 ---
 

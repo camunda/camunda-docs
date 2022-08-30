@@ -1,6 +1,6 @@
 ---
 id: sizing-your-environment-c7
-title: Sizing Your Camunda 7 Environment
+title: Sizing your Camunda 7 environment
 tags:
   - Database
   - Performance

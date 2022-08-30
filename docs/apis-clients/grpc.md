@@ -174,7 +174,7 @@ Only processes with none start events can be started through this command.
 message CreateProcessInstanceRequest {
   // the unique key identifying the process definition (e.g. returned from a process
   // in the DeployProcessResponse message)
-  int64 processKey = 1;
+  int64 processDefinitionKey = 1;
   // the BPMN process ID of the process definition
   string bpmnProcessId = 2;
   // the version of the process; set to -1 to use the latest version
@@ -185,6 +185,23 @@ message CreateProcessInstanceRequest {
   // "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
   // valid argument, as the root of the JSON document is an array and not an object.
   string variables = 4;
+  // List of start instructions. If empty (default) the process instance
+  // will start at the start event. If non-empty the process instance will apply start
+  // instructions after it has been created
+  repeated ProcessInstanceCreationStartInstruction startInstructions = 5;
+}
+
+message ProcessInstanceCreationStartInstruction {
+
+  // future extensions might include
+  // - different types of start instructions
+  // - ability to set local variables for different flow scopes
+
+  // for now, however, the start instruction is implicitly a
+  // "startBeforeElement" instruction
+
+  // element ID
+  string elementId = 1;
 }
 ```
 

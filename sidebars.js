@@ -26,6 +26,7 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
         "guides/update-guide/120-to-130",
         "guides/update-guide/110-to-120",
@@ -202,7 +203,7 @@ module.exports = {
           ],
         },
         {
-          "Open Source community": [
+          "Open source community": [
             "components/zeebe/open-source/community-contributions",
             "components/zeebe/open-source/get-help-get-involved",
           ],
@@ -309,8 +310,9 @@ module.exports = {
                 "components/integration-framework/connectors/out-of-the-box-connectors/rest",
                 "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
                 "components/integration-framework/connectors/out-of-the-box-connectors/slack",
+                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
               ],
-              "Custom-build Connectors": [
+              "Custom-built Connectors": [
                 "components/integration-framework/connectors/custom-built-connectors/connector-templates",
                 "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
               ],
@@ -321,7 +323,7 @@ module.exports = {
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
-          "Project Management": [
+          "Project management": [
             "components/best-practices/management/following-the-customer-success-path",
             "components/best-practices/management/doing-a-proper-poc",
           ],
@@ -478,6 +480,7 @@ module.exports = {
           Kubernetes: [
             "self-managed/platform-deployment/kubernetes",
             "self-managed/platform-deployment/kubernetes-helm",
+            "self-managed/platform-deployment/amazon-eks",
           ],
           OpenShift: [
             "self-managed/platform-deployment/openshift",
@@ -486,7 +489,7 @@ module.exports = {
         },
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/local",
-        "self-managed/platform-deployment/known-limitations",
+        "self-managed/platform-deployment/troubleshooting",
       ],
     },
     {
@@ -601,7 +604,7 @@ module.exports = {
         },
         "self-managed/optimize-deployment/reimport",
         {
-          "Migration & Update": [
+          "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
             "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
             "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
@@ -640,8 +643,10 @@ module.exports = {
             "self-managed/identity/user-guide/assigning-a-permission-to-a-role",
             "self-managed/identity/user-guide/assigning-a-role-to-a-user",
             "self-managed/identity/user-guide/configure-external-identity-provider",
+            "self-managed/identity/user-guide/configure-logging",
             "self-managed/identity/user-guide/making-identity-production-ready",
             "self-managed/identity/user-guide/generating-m2m-tokens",
+            "self-managed/identity/user-guide/managing-user-access",
           ],
         },
         {
