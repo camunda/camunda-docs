@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-The **connector SDK** is in developer preview and subject to breaking changes. Use at your own risk.
+The **Connector SDK** is in developer preview and subject to breaking changes. Use at your own risk.
 :::
 
 The **Connector SDK** allows you to [develop custom Connectors](#creating-a-custom-connector)
@@ -98,7 +98,7 @@ my-connector
 ```
 
 For the modeling building blocks, the Connector provides
-[connector templates](./connector-templates.md) with **(1)**.
+[Connector templates](./connector-templates.md) with **(1)**.
 
 You provide the runtime logic as Java source code under a directory like **(2)**.
 Typically, a Connector runtime logic consists of the following:
@@ -552,7 +552,7 @@ void shouldFailWhenValidate_TokenWrongPattern() {
 }
 ```
 
-Testing the business logic of your connector can vary widely depending on the
+Testing the business logic of your Connector can vary widely depending on the
 functionality it provides. For our example logic, the following test would be a good start:
 
 ```java
@@ -587,17 +587,17 @@ code. To invoke this logic, you need a runtime environment that knows the Connec
 and how to call it.
 
 In Camunda Platform 8 SaaS, every cluster runs a component that knows the
-[available out-of-the-box connectors](../out-of-the-box-connectors/available-connectors-overview.md)
+[available out-of-the-box Connectors](../out-of-the-box-connectors/available-connectors-overview.md)
 and how to invoke them. This component is the runtime environment specific to Camunda's SaaS use case.
 
 Regarding Self-Managed environments, you are responsible for providing the runtime environment that
 can invoke the Connectors. The Connector SDK provides a
 [pre-packaged environment](#pre-packaged-runtime-environment) and a
-[connector job handler](#connector-job-handler) to make this situation as convenient as possible.
+[Connector job handler](#connector-job-handler) to make this situation as convenient as possible.
 
 ### Pre-packaged runtime environment
 
-The SDK comes with a pre-packaged runtime environment that allows you to run select connector runtimes
+The SDK comes with a pre-packaged runtime environment that allows you to run select Connector runtimes
 as local job workers out-of-the-box. You can find this Java application in the
 [SDK's GitHub repository](https://github.com/camunda/connector-sdk/tree/main/runtime-job-worker),
 in [our artifact store](https://artifacts.camunda.com/ui/native/connectors/io/camunda/connector/connector-runtime-job-worker/),
