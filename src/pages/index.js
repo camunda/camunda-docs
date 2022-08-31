@@ -131,7 +131,9 @@ function Home() {
                   "button button--outline button--secondary button--lg sign-up",
                   styles.getStarted
                 )}
-                to={useBaseUrl("https://camunda.io/signup")}
+                to={useBaseUrl(
+                  "https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral"
+                )}
               >
                 Sign Up
               </Link>
