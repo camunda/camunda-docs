@@ -185,9 +185,7 @@ module.exports = {
         },
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
-        {
-          Forms: ["components/modeler/forms/camunda-forms-reference"],
-        },
+        require("./docs/components/modeler/forms/sidebar-schema"),
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
