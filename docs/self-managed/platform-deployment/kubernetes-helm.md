@@ -86,6 +86,10 @@ elasticsearch-master-0                          0/1     Pending             0   
 elasticsearch-master-1                          0/1     Init:0/1            0          4s
 ```
 
+If you are using one of the officially supported environments, ensure to view the notes about each provider:
+
+- [Amazon EKS](../amazon-eks/)
+
 ### Installing on OpenShift
 
 To install the Camunda Platform Helm chart in OpenShift, you will need to customize the values based on your desired security context constraints (SCC). By using the `anyuid` SCC, you can deploy the Helm chart as described above, as with any Kubernetes cluster. For example:
@@ -212,3 +216,11 @@ If you have specified on the first installation certain values, you have to spec
 :::
 
 For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
+
+## General notes
+
+- **Zeebe gateway** is deployed as a stateless service.
+  We support [Kubernetes startup and liveness probes](../../zeebe-deployment/configuration/gateway-health-probes/) for Zeebe.
+- **Zeebe broker nodes** need to be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+  to preserve the identity of cluster nodes. StatefulSets require persistent storage, which must be allocated in advance.
+  Depending on your cloud provider, the persistent storage differs as it is provider-specific.
