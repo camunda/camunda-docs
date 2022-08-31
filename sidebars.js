@@ -103,6 +103,7 @@ module.exports = {
             {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
               ],
             },
           ],
@@ -187,6 +188,26 @@ module.exports = {
         require("./docs/components/modeler/feel/sidebar-schema"),
         {
           Forms: ["components/modeler/forms/camunda-forms-reference"],
+        },
+      ],
+      "Integration Framework": [
+        "components/integration-framework/introduction-to-connectors",
+        {
+          Connectors: [
+            "components/integration-framework/connectors/use-connectors",
+            {
+              "Out-of-the-box Connectors": [
+                "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
+                "components/integration-framework/connectors/out-of-the-box-connectors/rest",
+                "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
+                "components/integration-framework/connectors/out-of-the-box-connectors/slack",
+              ],
+              "Custom-built Connectors": [
+                "components/integration-framework/connectors/custom-built-connectors/connector-templates",
+                "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
+              ],
+            },
+          ],
         },
       ],
       Zeebe: [
@@ -296,26 +317,6 @@ module.exports = {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/userguide/updating-tasklist-cloud",
-          ],
-        },
-      ],
-      "Integration Framework": [
-        "components/integration-framework/introduction-to-connectors",
-        {
-          Connectors: [
-            "components/integration-framework/connectors/use-connectors",
-            {
-              "Out-of-the-box Connectors": [
-                "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
-                "components/integration-framework/connectors/out-of-the-box-connectors/rest",
-                "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
-                "components/integration-framework/connectors/out-of-the-box-connectors/slack",
-              ],
-              "Custom-built Connectors": [
-                "components/integration-framework/connectors/custom-built-connectors/connector-templates",
-                "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
-              ],
-            },
           ],
         },
       ],
