@@ -470,7 +470,7 @@ Camunda Platform 8
 
 #### Scoped bindings
 
-Scoped bindings allow you to configure nested elements, such as [Camunda Platform 7 connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
+Scoped bindings allow you to configure nested elements, such as [Camunda Platform 7 Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
 
 ```json
 {
@@ -500,8 +500,8 @@ Scoped bindings allow you to configure nested elements, such as [Camunda Platfor
 }
 ```
 
-The example shows how a connector is configured as part of the task.
-On task creation, the connector is created with it and the connector bindings are
+The example shows how a Connector is configured as part of the task.
+On task creation, the Connector is created with it and the Connector bindings are
 exposed to the user in a separate custom fields section.
 
 ![Scoped Custom Fields](./img/scope-custom-fields.png)

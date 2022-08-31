@@ -8,6 +8,11 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/guides/implementing-connectors/(.*)$ /docs/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
+RewriteRule ^docs/guides/implementing-connectors$ /docs/guides/configuring-out-of-the-box-connectors/ [R=301,L]
+RewriteRule ^docs/8.0/guides/implementing-connectors/(.*)$ /docs/8.0/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
+RewriteRule ^docs/8.0/guides/implementing-connectors$ /docs/8.0/guides/configuring-out-of-the-box-connectors/ [R=301,L]
+
 RewriteRule ^docs/components/optimize/userguide/combined-reports/(.*)$ /docs/components/optimize/userguide/combined-process-reports/$1 [R=301,L]
 
 RewriteRule ^docs/1.2/self-managed/overview/(.*)$ /docs/1.2/self-managed/about-self-managed/$1 [R=301,L]

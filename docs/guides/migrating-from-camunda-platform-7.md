@@ -50,11 +50,11 @@ Camunda Platform 8 uses [FEEL (Friendly-Enough Expression Language](/components/
 
 Most expressions can be converted (see [this community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/modeler-plugin-7-to-8-converter/client/JuelToFeelConverter.js as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform 7).
 
-#### Different connector infrastructure
+#### Different Connector infrastructure
 
-Camunda Platform 7 provides several [connectors](https://docs.camunda.org/manual/latest/reference/connect/). Camunda Platform 8 now also offers multiple [connectors](../components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md) as well.
+Camunda Platform 7 provides several [Connectors](https://docs.camunda.org/manual/latest/reference/connect/). Camunda Platform 8 now also offers multiple [Connectors](../components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md) as well.
 
-To migrate existing connectors, create a small bridging layer to invoke these connectors via a custom [job workers](/components/concepts/job-workers.md).
+To migrate existing Connectors, create a small bridging layer to invoke these Connectors via a custom [job workers](/components/concepts/job-workers.md).
 
 ### Process solutions using Spring Boot
 
@@ -121,7 +121,7 @@ With Camunda Platform 8 you deploy:
 - Your Spring Boot application with all custom code and the Zeebe client embedded. This application is typically scaled to at least two instances (for resilience)
 - The Zeebe broker, typically scaled to at least three instances (for resilience)
 - An elastic database (for Operate, Taskliste, and Optimize)
-- Optimize, Operate, and Tasklist (each one is a Java application). You can scale those application to increase availability if you want.
+- Optimize, Operate, and Tasklist (each one is a Java application). You can scale those applications to increase availability if you want.
 
 ![Camunda Platform 7 vs Camunda Platform 8 Deployment View](img/camunda7-vs-camunda8-deployment-view.png)
 
@@ -175,7 +175,7 @@ You should consider migrating existing Camunda Platform 7 solutions if:
 
 - You are looking to leverage a SaaS offering (e.g. to reduce the effort for hardware or infrastructure setup and maintenance).
 - You are in need of performance at scale and/or improved resilience.
-- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/docs/components/concepts/messages/#message-buffering), big [multi-instance constructs](/docs/components/modeler/bpmn/multi-instance/), the new connectors framework, or the improved collaboration features in web modeler).
+- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/docs/components/concepts/messages/#message-buffering), big [multi-instance constructs](/docs/components/modeler/bpmn/multi-instance/), the new Connectors framework, or the improved collaboration features in web modeler).
 
 ### Migration steps
 

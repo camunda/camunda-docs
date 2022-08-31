@@ -168,7 +168,7 @@ Only if the increased latency does not work for your use case, for example, beca
 				<p class="tableblock">Evaluate an expression using JUEL.</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">Use a configurable connector
+				<p class="tableblock">Use a configurable Connector
 					<br />
 (REST or SOAP services provided out-of-the-box).
 				</p>
@@ -509,7 +509,7 @@ completion.</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
-          Build your own <a href="https://docs.camunda.org/manual/7.12/reference/connect/">connector</a>
+          Build your own <a href="https://docs.camunda.org/manual/7.12/reference/connect/">Connector</a>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
@@ -587,13 +587,13 @@ When you need to call a SOAP web service, you will typically be given access to 
 
 Find a full example that uses JAX-WS client generation in the [Camunda examples repository](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/soap-cxf-service).
 
-We typically prefer the client code generation over using the [Camunda SOAP Connector](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/), because of the better IDE support to do the data mapping by using code completion. You also can leverage standard testing approaches and changes in the WSDL will re-trigger code-generation and your compiler will check for any problems that arise from a changed interface. However, if you need a self-contained BPMN XML without any additional Java code, the connector could be the way to go. See [SOAP connector example](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/soap-service).
+We typically prefer the client code generation over using the [Camunda SOAP Connector](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/), because of the better IDE support to do the data mapping by using code completion. You also can leverage standard testing approaches and changes in the WSDL will re-trigger code-generation and your compiler will check for any problems that arise from a changed interface. However, if you need a self-contained BPMN XML without any additional Java code, the connector could be the way to go. See [SOAP Connector example](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/soap-service).
 
 ### Calling REST web services
 
 If you need to call a REST web service, you will typically be given access to a human-readable documentation of the service. You can use standard Java REST client libraries like [RestEasy](http://resteasy.jboss.org) or [JAX-RS](http://docs.oracle.com/javaee/6/tutorial/doc/giepu.html) to write a Java REST service client that can be called from within a JavaDelegate.
 
-We typically prefer writing Java clients over the [Camunda REST Connector](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/), because of the better IDE support to do the data mapping by using code completion. This way, you also can leverage standard testing approaches. However, if you need a self-contained BPMN XML without any additional Java code, the connector could be the way to go. See [REST connector example](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/rest-service).
+We typically prefer writing Java clients over the [Camunda REST Connector](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/), because of the better IDE support to do the data mapping by using code completion. This way, you also can leverage standard testing approaches. However, if you need a self-contained BPMN XML without any additional Java code, the Connector could be the way to go. See [REST Connector example](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/rest-service).
 
 ### Sending JMS messages
 

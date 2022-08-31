@@ -12,7 +12,7 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-* Valid Camunda Cloud account or [sign up](https://camunda.io/signup) if you still need one
+* Valid Camunda Cloud account or [sign up](https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral) if you still need one
 * Java >= 8
 * Maven
 * IDE (IntelliJ, VSCode, or similar)

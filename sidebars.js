@@ -16,7 +16,7 @@ module.exports = {
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/automating-a-process-using-bpmn",
-        "guides/implementing-connectors",
+        "guides/configuring-out-of-the-box-connectors",
         "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
@@ -103,6 +103,7 @@ module.exports = {
             {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
               ],
             },
           ],
@@ -187,6 +188,26 @@ module.exports = {
         require("./docs/components/modeler/feel/sidebar-schema"),
         {
           Forms: ["components/modeler/forms/camunda-forms-reference"],
+        },
+      ],
+      "Integration Framework": [
+        "components/integration-framework/introduction-to-connectors",
+        {
+          Connectors: [
+            "components/integration-framework/connectors/use-connectors",
+            {
+              "Out-of-the-box Connectors": [
+                "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
+                "components/integration-framework/connectors/out-of-the-box-connectors/rest",
+                "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
+                "components/integration-framework/connectors/out-of-the-box-connectors/slack",
+              ],
+              "Custom-built Connectors": [
+                "components/integration-framework/connectors/custom-built-connectors/connector-templates",
+                "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
+              ],
+            },
+          ],
         },
       ],
       Zeebe: [
@@ -296,26 +317,6 @@ module.exports = {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/userguide/updating-tasklist-cloud",
-          ],
-        },
-      ],
-      "Integration Framework": [
-        "components/integration-framework/introduction-to-connectors",
-        {
-          Connectors: [
-            "components/integration-framework/connectors/use-connectors",
-            {
-              "Out-of-the-box Connectors": [
-                "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
-                "components/integration-framework/connectors/out-of-the-box-connectors/rest",
-                "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
-                "components/integration-framework/connectors/out-of-the-box-connectors/slack",
-              ],
-              "Custom-built Connectors": [
-                "components/integration-framework/connectors/custom-built-connectors/connector-templates",
-                "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
-              ],
-            },
           ],
         },
       ],
@@ -479,6 +480,7 @@ module.exports = {
           Kubernetes: [
             "self-managed/platform-deployment/kubernetes",
             "self-managed/platform-deployment/kubernetes-helm",
+            "self-managed/platform-deployment/amazon-eks",
           ],
           OpenShift: [
             "self-managed/platform-deployment/openshift",
@@ -487,7 +489,7 @@ module.exports = {
         },
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/local",
-        "self-managed/platform-deployment/known-limitations",
+        "self-managed/platform-deployment/troubleshooting",
       ],
     },
     {

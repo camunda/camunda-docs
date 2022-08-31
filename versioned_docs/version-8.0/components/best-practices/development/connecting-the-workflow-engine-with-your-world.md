@@ -4,14 +4,14 @@ title: "Connecting the workflow engine with your world"
 
 One of your first tasks to build a process solution is to sketch the basic architecture of your solution. To do so, you need to answer the question of how to connect the workflow engine (Zeebe) with your application or with remote systems.
 
-This document predominantly outlines writing some custom glue code in the programming language of your choice and using existing client libraries. In some cases, you might also want to leverage existing connectors as a starting point.
+This document predominantly outlines writing some custom glue code in the programming language of your choice and using existing client libraries. In some cases, you might also want to leverage existing Connectors as a starting point.
 
 The workflow engine is a remote system for your applications, just like a database. Your application connects with Zeebe via remote protocols, [gRPC](https://grpc.io/) to be precise, which is typically hidden from you, like when using a database driver based on ODBC or JDBC.
 
 With Camunda Platform 8 and the Zeebe workflow engine, there are two basic options:
 
 1. Write some **programming code** that typically leverages the client library for the programming language of your choice.
-2. Use some **existing connector** which just needs a configuration.
+2. Use some **existing Connector** which just needs a configuration.
 
 The trade-offs will be discussed later; let’s look at the two options first.
 
@@ -196,13 +196,13 @@ As discussed in [writing good workers](../writing-good-workers/), you typically 
 
 ## Connectors
 
-As you could see, the glue code is relatively simple, but you need to write code. Sometimes you might prefer using an out-of-the-box component, connecting Zeebe with the technology you need just by configuration. This component is called a **connector**.
+As you could see, the glue code is relatively simple, but you need to write code. Sometimes you might prefer using an out-of-the-box component, connecting Zeebe with the technology you need just by configuration. This component is called a **Connector**.
 
-A connector can be uni or bidirectional and is typically one dedicated application that implements the connection that translates in one or both directions of communication. Such a connector might also be helpful in case integrations are not that simple anymore.
+A Connector can be uni or bidirectional and is typically one dedicated application that implements the connection that translates in one or both directions of communication. Such a Connector might also be helpful in case integrations are not that simple anymore.
 
 ![Connectors](connecting-the-workflow-engine-with-your-world-assets/connector.png)
 
-For example, the [HTTP connector](https://github.com/camunda-community-hub/zeebe-http-worker) is a one-way connector that contains a job worker that can process service tasks doing HTTP calls as visualized in the example in the following figure:
+For example, the [HTTP Connector](https://github.com/camunda-community-hub/zeebe-http-worker) is a one-way Connector that contains a job worker that can process service tasks doing HTTP calls as visualized in the example in the following figure:
 
 ![REST Connectors](connecting-the-workflow-engine-with-your-world-assets/rest-connector.png)
 
@@ -210,50 +210,50 @@ Another example is the [Kafka Connector](https://github.com/camunda-community-hu
 
 ![Kafka Connector](connecting-the-workflow-engine-with-your-world-assets/kafka-connector.png)
 
-This is a bidirectional connector which contains a Kafka listener for forwarding Kafka records to Zeebe and also a job worker which creates Kafka records every time a service task is executed. This is illustrated by the following example:
+This is a bidirectional Connector which contains a Kafka listener for forwarding Kafka records to Zeebe and also a job worker which creates Kafka records every time a service task is executed. This is illustrated by the following example:
 
 ![Kafka Connector Details](connecting-the-workflow-engine-with-your-world-assets/kafka-connector-details.png)
 
-### Out-of-the-box connectors
+### Out-of-the-box Connectors
 
-Most connectors are currently community extensions, which basically means that they are not officially supported by Camunda, but by community members (who sometimes are Camunda employees). While this sounds like a restriction, it can also mean there is more flexibility to make progress. A list of community-maintained connectors can be found [here](https://github.com/camunda-community-hub/awesome-camunda-cloud#connectors-and-bridges).
+Most Connectors are currently community extensions, which basically means that they are not officially supported by Camunda, but by community members (who sometimes are Camunda employees). While this sounds like a restriction, it can also mean there is more flexibility to make progress. A list of community-maintained Connectors can be found [here](https://github.com/camunda-community-hub/awesome-camunda-cloud#connectors-and-bridges).
 
-Camunda itself is also working on improving the connector infrastructure as such to be able to provide more connectors easier in the future.
+Camunda itself is also working on improving the Connector infrastructure as such to be able to provide more Connectors easier in the future.
 
-### Using connectors in SaaS
+### Using Connectors in SaaS
 
-Currently, connectors are not operated as part of the Camunda Platform 8 SaaS offering, which means you need to operate them yourself in your environment, which might be a private or public cloud.
+Currently, Connectors are not operated as part of the Camunda Platform 8 SaaS offering, which means you need to operate them yourself in your environment, which might be a private or public cloud.
 
 ![Connectors in SaaS](connecting-the-workflow-engine-with-your-world-assets/connector-in-cloud.png)
 
-### Reusing your own integration logic by extracting connectors
+### Reusing your own integration logic by extracting Connectors
 
-If you need to integrate with certain infrastructure regularly, for example your CRM system, you might also want to create your own CRM connector, run it centralized, and reuse it in various applications.
+If you need to integrate with certain infrastructure regularly, for example your CRM system, you might also want to create your own CRM Connector, run it centralized, and reuse it in various applications.
 
-In general, we recommend not to start such connectors too early. Don’t forget that such a connector gets hard to adjust once in production and reused across multiple applications. Also, it is often much harder to extract all configuration parameters correctly and fill them from within the process, than it would be to have bespoke glue code in the programming language of your choice.
+In general, we recommend not to start such Connectors too early. Don’t forget that such a Connector gets hard to adjust once in production and reused across multiple applications. Also, it is often much harder to extract all configuration parameters correctly and fill them from within the process, than it would be to have bespoke glue code in the programming language of your choice.
 
-Therefore, you should only extract a full-blown connector if you understand exactly what you need.
+Therefore, you should only extract a full-blown Connector if you understand exactly what you need.
 
 Don’t forget about the possibility to extract common glue code in a simple library that is then used at different places.
 
 :::note
-Updating a library that is used in various other applications can be harder than updating one central connector. In this case, the best approach depends on your scenario.
+Updating a library that is used in various other applications can be harder than updating one central Connector. In this case, the best approach depends on your scenario.
 :::
 
-Whenever you have such glue code running and really understand the implications of making it a connector, as well as the value it will bring, it can make a lot of sense.
+Whenever you have such glue code running and really understand the implications of making it a Connector, as well as the value it will bring, it can make a lot of sense.
 
 ## Recommendation
 
-As a general rule of thumb, prefer custom glue code whenever you don’t have a good reason to go with an existing connector (like the reasons mentioned above).
+As a general rule of thumb, prefer custom glue code whenever you don’t have a good reason to go with an existing Connector (like the reasons mentioned above).
 
-A good reason to use connectors is if you need to solve complex integrations where little customization is needed, such as the [Camunda RPA bridge](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-rpa-bridge/) to connect RPA bots (soon to be available for Camunda Platform 8).
+A good reason to use Connectors is if you need to solve complex integrations where little customization is needed, such as the [Camunda RPA bridge](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-rpa-bridge/) to connect RPA bots (soon to be available for Camunda Platform 8).
 
-Good use of connectors are also scenarios where you don’t need custom glue code. For example, when orchestrating serverless functions on AWS with the [AWS Lambda Connector](https://github.com/camunda-community-hub/zeebe-lambda-worker). This connector can be operated once and used in different processes.
+Good use of Connectors are also scenarios where you don’t need custom glue code. For example, when orchestrating serverless functions on AWS with the [AWS Lambda Connector](https://github.com/camunda-community-hub/zeebe-lambda-worker). This Connector can be operated once and used in different processes.
 
 Some use cases also allow you to create a **resuable generic adapter**; for example, to send status events to your business intelligence system.
 
-But there are also common downsides with connectors. First, the possibilities are limited to what the creator of the connector has foreseen. In reality, you might have slightly different requirements and hit a limitation of a connector soon.
+But there are also common downsides with Connectors. First, the possibilities are limited to what the creator of the Connector has foreseen. In reality, you might have slightly different requirements and hit a limitation of a Connector soon.
 
-Second, the connector requires you to operate this connector in addition to your own application. The complexity associated with this depends on your environment.
+Second, the Connector requires you to operate this Connector in addition to your own application. The complexity associated with this depends on your environment.
 
-Third, testing your glue code gets harder, as you can’t easily hook in mocks into such a connector as you could in your own glue code.
+Third, testing your glue code gets harder, as you can’t easily hook in mocks into such a Connector as you could in your own glue code.
