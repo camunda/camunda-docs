@@ -84,7 +84,7 @@ The authentication is described in [Operate Configuration - Authentication](/doc
 | **Process definitions**                 |                                                                     |
 | `POST /v1/process-definitions/search`   |                                      Search for process definitions |
 | `GET /v1/process-definitions/{key}`     |                                       Get process definition by key |
-| `GET /v1/process-definitions/{key}/xml` |                                 Get process defintion by key as XML |
+| `GET /v1/process-definitions/{key}/xml` |                                Get process definition by key as XML |
 | **Process instances**                   |                                                                     |
 | `POST /v1/process-instances/search`     |                                        Search for process instances |
 | `GET /v1/process-instances/{key}`       |                                         Get process instance by key |
