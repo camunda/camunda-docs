@@ -54,8 +54,9 @@ Variables are part of a process instance and represent the data of the instance.
 1. Navigate to the Modeler **Home** page and click the project you are working on. Then, click **New > Form**.
 2. Name your form. In this case, we've named ours **Decide what's for dinner**.
 3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've described ours as **What's for dinner?**
-4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner add an extra value by clicking on the plus sign. Enter the value **Chicken** with the label as **Chicken** and enter the value **Salad** with the label as **Salad** in the other value.
-5. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import** to add the form to the BPMN diagram.
+4. Add **Meal** as the key value
+5. Scroll down to the **Values** section of the properties panel to add your values. For our dinner add an extra value by clicking on the plus sign. Enter the value **Chicken** with the label as **Chicken** and enter the value **Salad** with the label as **Salad** in the other value.
+6. Within your BPMN diagram, click the appropriate user task, and click the blue square icon in the bottom right corner of your user task. Select the form you'd like to apply to your user task, and click **Import** to add the form to the BPMN diagram.
    ![form import example](./img/form-import-example.png)
 
 ### Start and view your process instance
