@@ -1,6 +1,6 @@
 ---
-id: implementing-connectors
-title: Implement Connectors
+id: configuring-out-of-the-box-connectors
+title: Configure an out-of-the-box Connector
 description: "Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes across systems."
 keywords: [connector, modeling, connectors, low-code, no-code]
 ---
