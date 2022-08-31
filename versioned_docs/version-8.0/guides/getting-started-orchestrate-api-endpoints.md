@@ -13,7 +13,14 @@ The concept of a Connector consists of two parts: the business logic is implemen
 
 This guide will walk you through working with a REST Connector task as a first time Camunda Platform 8 user.
 
-## Create a REST Connector task
+:::note
+Getting stuck? Book a meeting with our User Success Specialists. Follow the link dependent on your location to connect with a specialist:
+
+- [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
+- [EMEA, APAC, and other regions](https://meetings.salesloft.com/camunda/daan)
+  :::
+
+## Create a REST connector task
 
 To use a **REST Connector** in your process, follow the steps below:
 
@@ -56,3 +63,4 @@ To deploy your process, take the following steps:
 ## Additional resources and next steps
 
 - Dive deeper into [connectors](/components/integration-framework/introduction.md#connectors).
+- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8](/components/concepts/what-is-camunda-platform-8.md) or watching our [Platform Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.

@@ -12,11 +12,14 @@ When a process instance arrives at such a user task, a new job is created. The p
 
 While it may originally seem like the goal of automating a process is to remove humans entirely, efficiently allocating work through user tasks can be even more beneficial.
 
-In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser.
+In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser. If you prefer a video-based learning experience, visit [this Camunda Academy course](https://bit.ly/3PJJocB) on Camunda Platform 8 and getting started with human workflows.
 
 :::note
-New to BPMN or want to learn more? Visit our [BPMN cheat sheet](https://page.camunda.com/wp-bpmn-2-0-business-process-model-and-notation-en) for an overview of all BPMN symbols.
-:::
+Getting stuck? Book a meeting with our User Success Specialists. Follow the link dependent on your location to connect with a specialist:
+
+- [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
+- [EMEA, APAC, and other regions](https://meetings.salesloft.com/camunda/daan)
+  :::
 
 ## Create an automated process with user tasks
 
@@ -42,6 +45,7 @@ To create an automated process with [user tasks](/components/modeler/bpmn/user-t
 ![dinner bpmn model](./img/dinner-bpmn-model.png)
 
 :::note
+Are you new to BPMN or want to learn more? Visit our [BPMN cheat sheet](https://page.camunda.com/wp-bpmn-2-0-business-process-model-and-notation-en) for an overview of all BPMN symbols.
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](/components/concepts/variables.md).
 :::
 
@@ -89,6 +93,7 @@ In this case, the token will move through the gateway and (according to the cond
 
 ## Additional resources and next steps
 
+- [Video-based Human Task Orchestration Course](https://bit.ly/3PJJocB)
 - [BPMN user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
 - [Building Forms with Modeler](./utilizing-forms.md)
 - [Introduction to Operate](/components/operate/operate-introduction.md)
