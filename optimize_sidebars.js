@@ -643,29 +643,14 @@ module.exports = {
 
         {
           "User guide": [
-            docsComponentsLink(
-              "Collections, dashboards, and reports",
-              "components/optimize/userguide/collections-dashboards-reports/"
-            ),
-            docsComponentsLink(
-              "Data sources",
-              "components/optimize/userguide/data-sources/"
-            ),
+            "userguide/collections-dashboards-reports",
+            "userguide/data-sources",
 
             {
               Dashboards: [
-                docsComponentsLink(
-                  "Creating dashboards",
-                  "components/optimize/userguide/creating-dashboards/"
-                ),
-                docsComponentsLink(
-                  "Edit mode",
-                  "components/optimize/userguide/edit-mode/"
-                ),
-                docsComponentsLink(
-                  "View mode",
-                  "components/optimize/userguide/view-mode/"
-                ),
+                "userguide/creating-dashboards",
+                "userguide/edit-mode",
+                "userguide/view-mode",
               ],
             },
 
@@ -673,14 +658,8 @@ module.exports = {
               "Creating reports",
               "components/optimize/userguide/creating-reports/"
             ),
-            docsComponentsLink(
-              "Combined process reports",
-              "components/optimize/userguide/combined-process-reports/"
-            ),
-            docsComponentsLink(
-              "Processes",
-              "components/optimize/userguide/processes/"
-            ),
+            "userguide/combined-process-reports",
+            "userguide/processes",
 
             {
               "Process analysis": [
@@ -798,22 +777,10 @@ module.exports = {
                   "Alerts",
                   "components/optimize/userguide/additional-features/alerts/"
                 ),
-                docsComponentsLink(
-                  "Event-based processes",
-                  "components/optimize/userguide/additional-features/event-based-processes/"
-                ),
-                docsComponentsLink(
-                  "Export and import",
-                  "components/optimize/userguide/additional-features/export-import/"
-                ),
-                docsComponentsLink(
-                  "Footer",
-                  "components/optimize/userguide/additional-features/footer/"
-                ),
-                docsComponentsLink(
-                  "Variable labeling",
-                  "components/optimize/userguide/additional-features/variable-labeling/"
-                ),
+                "userguide/additional-features/event-based-processes",
+                "userguide/additional-features/export-import",
+                "userguide/additional-features/footer",
+                "userguide/additional-features/variable-labeling",
               ],
             },
           ],

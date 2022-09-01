@@ -1,3 +1,11 @@
+function optimizeLink(label, href) {
+  return {
+    type: "link",
+    label: label,
+    href: `/optimize/${href}`,
+  };
+}
+
 module.exports = {
   Guides: [
     {
@@ -243,25 +251,31 @@ module.exports = {
         },
       ],
       Optimize: [
-        {
-          type: "link",
-          label: "What is Optimize?",
-          href: "/optimize/what-is-optimize",
-        },
+        optimizeLink("What is Optimize?", "what-is-optimize"),
         {
           "User guide": [
-            "components/optimize/userguide/collections-dashboards-reports",
-            "components/optimize/userguide/data-sources",
+            optimizeLink(
+              "Collections, dashboards, and reports",
+              "userguide/collections-dashboards-reports/"
+            ),
+            optimizeLink("Data sources", "userguide/data-sources/"),
             {
               Dashboards: [
-                "components/optimize/userguide/creating-dashboards",
-                "components/optimize/userguide/edit-mode",
-                "components/optimize/userguide/view-mode",
+                optimizeLink(
+                  "Creating dashboards",
+                  "userguide/creating-dashboards/"
+                ),
+                optimizeLink("Edit mode", "userguide/edit-mode"),
+                optimizeLink("View mode", "userguide/view-mode"),
               ],
             },
             "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/combined-process-reports",
-            "components/optimize/userguide/processes",
+            optimizeLink(
+              "Combined process reports",
+              "userguide/combined-process-reports/"
+            ),
+
+            optimizeLink("Processes", "userguide/processes/"),
             {
               "Process analysis": [
                 "components/optimize/userguide/process-analysis/process-analysis-overview",
@@ -306,10 +320,19 @@ module.exports = {
             {
               "Additional features": [
                 "components/optimize/userguide/additional-features/alerts",
-                "components/optimize/userguide/additional-features/event-based-processes",
-                "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/footer",
-                "components/optimize/userguide/additional-features/variable-labeling",
+                optimizeLink(
+                  "Event-based processes",
+                  "userguide/additional-features/event-based-processes/"
+                ),
+                optimizeLink(
+                  "Export and import",
+                  "userguide/additional-features/export-import/"
+                ),
+                optimizeLink("Footer", "userguide/additional-features/footer/"),
+                optimizeLink(
+                  "Variable labeling",
+                  "userguide/additional-features/variable-labeling/"
+                ),
               ],
             },
           ],
