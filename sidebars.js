@@ -157,6 +157,7 @@ module.exports = {
                 "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
                 "components/modeler/bpmn/parallel-gateways/parallel-gateways",
                 "components/modeler/bpmn/event-based-gateways/event-based-gateways",
+                "components/modeler/bpmn/inclusive-gateways/inclusive-gateways",
               ],
             },
             {
