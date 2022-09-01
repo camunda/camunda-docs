@@ -653,102 +653,42 @@ module.exports = {
                 "userguide/view-mode",
               ],
             },
-
-            docsComponentsLink(
-              "Creating reports",
-              "components/optimize/userguide/creating-reports/"
-            ),
+            "userguide/creating-reports",
             "userguide/combined-process-reports",
             "userguide/processes",
 
             {
               "Process analysis": [
-                docsComponentsLink(
-                  "Overview",
-                  "components/optimize/userguide/process-analysis/process-analysis-overview/"
-                ),
-                docsComponentsLink(
-                  "Outlier analysis",
-                  "components/optimize/userguide/process-analysis/outlier-analysis/"
-                ),
-                docsComponentsLink(
-                  "Branch analysis",
-                  "components/optimize/userguide/process-analysis/branch-analysis/"
-                ),
-
+                "userguide/process-analysis/process-analysis-overview",
+                "userguide/process-analysis/outlier-analysis",
+                "userguide/process-analysis/branch-analysis",
                 {
                   "Report analysis": [
-                    docsComponentsLink(
-                      "Report process analysis",
-                      "components/optimize/userguide/process-analysis/report-analysis/overview/"
-                    ),
-
+                    "userguide/process-analysis/report-analysis/overview",
                     {
                       "Edit mode": [
-                        docsComponentsLink(
-                          "Overview",
-                          "components/optimize/userguide/process-analysis/report-analysis/edit-mode/"
-                        ),
-                        docsComponentsLink(
-                          "Select process definitions",
-                          "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions/"
-                        ),
-                        docsComponentsLink(
-                          "Define reports",
-                          "components/optimize/userguide/process-analysis/report-analysis/define-reports/"
-                        ),
-                        docsComponentsLink(
-                          "Measures",
-                          "components/optimize/userguide/process-analysis/report-analysis/measures/"
-                        ),
-                        docsComponentsLink(
-                          "Compare target values",
-                          "components/optimize/userguide/process-analysis/report-analysis/compare-target-values/"
-                        ),
-                        docsComponentsLink(
-                          "Process instance parts",
-                          "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts/"
-                        ),
-                        docsComponentsLink(
-                          "Configure reports",
-                          "components/optimize/userguide/process-analysis/report-analysis/configure-reports/"
-                        ),
+                        "userguide/process-analysis/report-analysis/edit-mode",
+                        "userguide/process-analysis/report-analysis/select-process-definitions",
+                        "userguide/process-analysis/report-analysis/define-reports",
+                        "userguide/process-analysis/report-analysis/measures",
+                        "userguide/process-analysis/report-analysis/compare-target-values",
+                        "userguide/process-analysis/report-analysis/process-instance-parts",
+                        "userguide/process-analysis/report-analysis/configure-reports",
                       ],
                     },
 
-                    docsComponentsLink(
-                      "View mode",
-                      "components/optimize/userguide/process-analysis/report-analysis/view-mode/"
-                    ),
+                    "userguide/process-analysis/report-analysis/view-mode",
                   ],
                 },
 
                 {
                   Filters: [
-                    docsComponentsLink(
-                      "Overview",
-                      "components/optimize/userguide/process-analysis/filters/"
-                    ),
-                    docsComponentsLink(
-                      "Metadata filters",
-                      "components/optimize/userguide/process-analysis/metadata-filters/"
-                    ),
-                    docsComponentsLink(
-                      "Instance state filters",
-                      "components/optimize/userguide/process-analysis/instance-state-filters/"
-                    ),
-                    docsComponentsLink(
-                      "Flow node filters",
-                      "components/optimize/userguide/process-analysis/flow-node-filters/"
-                    ),
-                    docsComponentsLink(
-                      "Process instance filters",
-                      "components/optimize/userguide/process-analysis/process-instance-filters/"
-                    ),
-                    docsComponentsLink(
-                      "Variable filters",
-                      "components/optimize/userguide/process-analysis/variable-filters/"
-                    ),
+                    "userguide/process-analysis/filters",
+                    "userguide/process-analysis/metadata-filters",
+                    "userguide/process-analysis/instance-state-filters",
+                    "userguide/process-analysis/flow-node-filters",
+                    "userguide/process-analysis/process-instance-filters",
+                    "userguide/process-analysis/variable-filters",
                   ],
                 },
               ],
@@ -756,27 +696,15 @@ module.exports = {
 
             {
               "Decision analysis": [
-                docsComponentsLink(
-                  "Overview",
-                  "components/optimize/userguide/decision-analysis/decision-analysis-overview/"
-                ),
-                docsComponentsLink(
-                  "Single report",
-                  "components/optimize/userguide/decision-analysis/decision-report/"
-                ),
-                docsComponentsLink(
-                  "Filters",
-                  "components/optimize/userguide/decision-analysis/decision-filter/"
-                ),
+                "userguide/decision-analysis/decision-analysis-overview",
+                "userguide/decision-analysis/decision-report",
+                "userguide/decision-analysis/decision-filter",
               ],
             },
 
             {
               "Additional features": [
-                docsComponentsLink(
-                  "Alerts",
-                  "components/optimize/userguide/additional-features/alerts/"
-                ),
+                "userguide/additional-features/alerts",
                 "userguide/additional-features/event-based-processes",
                 "userguide/additional-features/export-import",
                 "userguide/additional-features/footer",
