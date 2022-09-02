@@ -293,8 +293,8 @@
       "Optimize": [
         {
           "type": "link",
-          "label": "Overview Components",
-          "href": "optimize/what-is-optimize"
+          "label": "What is Optimize?",
+          "href": "/optimize/what-is-optimize"
         },
         {
           "User guide": [
