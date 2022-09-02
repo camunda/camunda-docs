@@ -291,7 +291,11 @@
         }
       ],
       "Optimize": [
-        "components/optimize/what-is-optimize",
+        {
+          "type": "link",
+          "label": "Overview Components",
+          "href": "optimize/what-is-optimize"
+        },
         {
           "User guide": [
             "components/optimize/userguide/collections-dashboards-reports",
