@@ -6,6 +6,9 @@ description: Send messages to channels or users in your Slack workspace from you
 
 The **Slack Connector** allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
+You can find the source code of this Connector in our [GitHub repository](https://github.com/camunda/connector-slack).
+Have a look at its latest [Releases](https://github.com/camunda/connector-slack/releases) to find an executable JAR you can directly run in a [Connector runtime environment](../custom-built-connectors/connector-sdk.md#runtime-environments) in Camunda Platform 8 Self-Managed.
+
 ## Prerequisites
 
 To use the Slack Connector, a Slack app must be registered with the Slack workspace you would like to send messages to. A respective OAuth token needs to be configured as a secret in your cluster. Follow [these steps in the appendix](#appendix) to learn how to set this up.
