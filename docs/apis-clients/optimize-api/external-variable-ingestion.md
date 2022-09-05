@@ -4,11 +4,6 @@ title: "External variable ingestion"
 description: "The REST API to ingest external variable data into Optimize."
 ---
 
-:::note Heads Up!
-The external variable ingestion API is a beta feature and will be subject
-to future changes.
-:::
-
 With the external variable ingestion API, variable data held in external systems can be ingested into Optimize directly,
 without the need for these variables to be present in your Camunda platform data. This can be useful when external
 business data, which is relevant for process analysis in Optimize, is to be associated with specific process instances.
