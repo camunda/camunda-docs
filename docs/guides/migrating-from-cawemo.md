@@ -52,6 +52,6 @@ Learn more about [migrating from Camunda 7 to Camunda 8](https://docs.camunda.io
 
 ## FAQ
 
-Questions: Why do I get the following error The following 1 file is invalid and can't be uploaded: “" when uploading my BPMN file?
+Questions: Why do I get the error `The following 1 file is invalid and can't be uploaded: “"` when uploading my BPMN file?
 
 Answer: A BPMN file for execution on Camunda Platform 7 that has been created with the Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [Migrating from Camunda Platform 7 documentation under migration overview](https://docs.camunda.io/docs/guides/migrating-from-camunda-platform-7/#migration-overview) to solve the error.
