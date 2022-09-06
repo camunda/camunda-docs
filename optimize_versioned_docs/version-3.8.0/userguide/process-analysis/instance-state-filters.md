@@ -20,4 +20,4 @@ their execution. This means only active and completed instances are considered. 
 
 ## Suspended and non suspended instances only filter
 
-By default, a report considers all process instances, regardless of whether they are [suspended](../../../best-practices/operations/operating-camunda-c7.md#suspending-specific-service-calls) or not. Adding this filter makes it possible to only evaluate process instances that are in the suspension state. Note that if you have enabled history cleanup, this might affect the accuracy of this filer given the suspension state is imported from historic data.
+By default, a report considers all process instances, regardless of whether they are [suspended]($docs$/components/best-practices/operations/operating-camunda-c7#suspending-specific-service-calls) or not. Adding this filter makes it possible to only evaluate process instances that are in the suspension state. Note that if you have enabled history cleanup, this might affect the accuracy of this filer given the suspension state is imported from historic data.

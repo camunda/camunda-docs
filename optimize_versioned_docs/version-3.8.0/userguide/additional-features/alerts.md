@@ -19,7 +19,7 @@ To configure an alert, take the following steps:
 3. To give the alert a name, select the report and define a target webhook or email address of the person who will receive the alert.
 
 :::note
-In Camunda Platform 7 and Camunda Platform 8 Self-Managed, you must configure the email service to receive notifications. See the [technical guide](../../../../self-managed/optimize-deployment/configuration/system-configuration.md#email) for which properties need to be defined.
+In Camunda Platform 7 and Camunda Platform 8 Self-Managed, you must configure the email service to receive notifications. See the [technical guide]($docs$/self-managed/optimize-deployment/configuration/system-configuration#email) for which properties need to be defined.
 :::
 
 Note that alerts can only be created for reports which are visualized as a single number and are in the same collection as the alert. Visit the [reports section](../creating-reports.md) on how to define single-number reports.
@@ -32,4 +32,4 @@ Finally, you'll get a resolve notification as soon as the report value is within
 
 ## Send alerts to external systems
 
-It's possible to configure Optimize to send alerts to an external system when needed. For details on how to configure and add target systems, visit the [technical guide](../../../../self-managed/optimize-deployment/configuration/system-configuration.md#alert-notification-webhooks). Once at least one target system is configured, alerts will have a new input option to select one of the configured systems.
+It's possible to configure Optimize to send alerts to an external system when needed. For details on how to configure and add target systems, visit the [technical guide]($docs$/self-managed/optimize-deployment/configuration/system-configuration#alert-notification-webhooks). Once at least one target system is configured, alerts will have a new input option to select one of the configured systems.
