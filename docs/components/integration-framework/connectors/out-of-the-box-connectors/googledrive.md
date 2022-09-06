@@ -1,24 +1,26 @@
 ---
 id: googledrive
 title: Google Drive Connector
-description: Create empty folders or documents from templates from your BPMN process.
+description: Create folders or files from a Google Drive template from your BPMN process.
 ---
 
-The **Google Drive Connector** allows you to create empty folders or documents on [Google Drive](https://drive.google.com/) from templates from your BPMN process.
+The **Google Drive Connector** allows you to create empty folders or files on [Google Drive](https://drive.google.com/) from templates from your BPMN process.
 
 ## Prerequisites
 
-To start working with the **Google Drive Connector**, a relevant OAuth token must be configured and stored as a Secret in the user's cluster. The token must have permission to read and create a folder and/or files from a desired Google Drive instance. Follow the steps from the [appendix](#appendix--faq) to find out more about creating an OAuth token and giving relevant permissions.
+To start working with the **Google Drive Connector**, a relevant OAuth token must be configured and stored as a Secret in your cluster. The token must have permission to read and create a folder and/or files from a desired Google Drive instance. Follow the steps from the [appendix](#appendix--faq) to find out more about creating an OAuth token and giving relevant permissions.
 
 ## Create a Google Drive Connector task
 
-Currently, the **Google Drive Connector** supports two types of templates: create a folder and create a file from a template.
+Currently, the Google Drive Connector supports two types of operations: create a folder and create a file from a template.
 
 To use a **Google Drive Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu or create a new connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](../use-connectors.md) to learn more.
 
-## Make your Google Drive Connector for creating a folder executable
+## Make your Google Drive Connector executable
 
-To make the **Google Drive Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
+To make the **Google Drive Connector** executable, fill out the mandatory fields highlighted in red in the properties panel.
+
+### Create a new folder
 
 ![Google Drive Connector new folder example](../img/connectors-googledrive-new-folder-filled.png)
 
@@ -28,9 +30,7 @@ To make the **Google Drive Connector** executable, fill out the mandatory fields
 4. _(optional)_ In the **Operation Details** section, set the field **Parent folder ID** to the desired parent, inside which a new folder will be created. Keep in mind that if not specified, a new folder will be created in the Google Drive root folder of a user who owns the OAuth token.
 5. _(optional)_ In the **Operation Details** section, you can set the **Additional properties or metadata** field to Google Drive compatible properties. For example, _description_ of the folder. This property requires FEEL input. Check [the appendix](#what-are-the-limitations-of-the-additional-properties-or-metadata) for known values and limitations.
 
-## Make your Google Drive Connector for creating a file from template executable
-
-To make the **Google Drive Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
+### Create a new file from a template
 
 ![Google Drive Connector new file from template example](../img/connectors-googledrive-new-file-filled.png)
 
@@ -39,7 +39,7 @@ To make the **Google Drive Connector** executable, fill out the mandatory fields
 3. In the **Operation Details** section, set the field **File name** as the desired name of a folder you wish to create. You can use FEEL expressions here.
 4. In the **Operation Details** section, set the field **Template ID** of the desired template.
 5. _(optional)_ In the **Operation Details** section, set the field **Parent folder ID** to the desired parent, inside which a new file will be created. Keep in mind that if not specified, a new folder will be created in the Google Drive root folder of a user who owns the OAuth token.
-6. In the **Operation Details** section, set the field **Template variables** as desired variables that will be applied to the template. The template variables a compatible with the Google Docs Requests API. This property requires FEEL input.
+6. In the **Operation Details** section, set the field **Template variables** as desired variables that will be applied to the template. The template variables are compatible with the Google Docs [Requests API](https://developers.google.com/docs/api/reference/rest/v1/documents/request). This property requires FEEL input.
 7. _(optional)_ In the **Operation Details** section, you can set the **Additional properties or metadata** field to Google Drive compatible properties. This property requires FEEL input. Check [the appendix](#what-are-the-limitations-of-the-additional-properties-or-metadata) for known values and limitations.
 
 ## Google Drive Connector response
@@ -66,11 +66,11 @@ You can use an output mapping to map the response:
 
 ### What Google API does the Google Drive Connector use to create a folder?
 
-The **Google Drive Connector** uses Google Drive [`Files:Create`](https://developers.google.com/drive/api/v3/reference/files/create) API endpoint.
+The **Google Drive Connector** uses the Google Drive [`Files:Create`](https://developers.google.com/drive/api/v3/reference/files/create) API endpoint.
 
 ### What Google API does the Google Drive Connector use to create a file from template?
 
-The **Google Drive Connector** uses Google Drive [`Files:Copy`](https://developers.google.com/drive/api/v3/reference/files/copy) API endpoint to copy an original template. Afterwards, the **Google Drive Connector** utilizes Google Docs [Merge](https://developers.google.com/docs/api/how-tos/merge) approach via [`Documents:BatchUpdate`](https://developers.google.com/docs/api/reference/rest/v1/documents/batchUpdate) Google Docs API method.
+The **Google Drive Connector** uses the Google Drive [`Files:Copy`](https://developers.google.com/drive/api/v3/reference/files/copy) API endpoint to copy an original template. Afterwards, the **Google Drive Connector** utilizes Google Docs [Merge](https://developers.google.com/docs/api/how-tos/merge) approach via [`Documents:BatchUpdate`](https://developers.google.com/docs/api/reference/rest/v1/documents/batchUpdate) Google Docs API method.
 
 ### How can I authenticate my Connector?
 
@@ -103,7 +103,7 @@ credentials.refresh(auth_req)
 print(credentials.token)
 ```
 
-#### Example 2: obtaining refresh token with OAuth client
+#### Example 2: obtaining bearer and refresh tokens with OAuth client
 
 ![Refresh Auth](../img/connectors-googledrive-jwt-refresh.png)
 
@@ -111,10 +111,22 @@ See [related article](https://developers.google.com/identity/protocols/oauth2/we
 
 **WARNING!** Following code snippets are for demonstration purposes only and must be not used for real production systems due to security concerns.
 
-Assuming you have created an OAuth client, you should an OAuth Client ID and an OAuth Client Secret. Run the following code snippet that prints the refresh token in terminal.
+Assuming you have created an OAuth client, you can download key files from the Google [Console](https://console.cloud.google.com/apis/credentials). Run the following code snippet that prints the refresh token in terminal.
 
 ```python
-TBD - prototype code will be added soon
+from google_auth_oauthlib.flow import InstalledAppFlow
+import pprint
+
+SCOPES = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/documents']
+OAUTH_KEYS = './oauth-keys.json' # path to your file with OAuth credentials
+
+def main():
+    flow = InstalledAppFlow.from_client_secrets_file(OAUTH_KEYS, SCOPES)
+    creds = flow.run_local_server(port=54948)
+    pprint.pprint(vars(creds))
+
+if __name__ == "__main__":
+    main()
 ```
 
 ### Where do I get a parent folder ID?
@@ -125,7 +137,8 @@ It is in the URL.
 
 ### How do I set additional properties or metadata?
 
-You can set any property from the Google Drive Create API. For example:
+You can set any property from the Google Drive [Create API](https://developers.google.com/drive/api/v3/reference/files/create).
+For example:
 
 ```
 = {
@@ -147,7 +160,7 @@ It is in the URL.
 
 ### Can you show me an example of a valid template?
 
-The valid template looks like the one on a screenshot.
+A valid template looks like the following screenshot.
 
 ![Google Drive Connector document template example](../img/connectors-googledrive-template-example.png)
 
@@ -229,4 +242,4 @@ The result should be as on a screenshot:
 
 ### What kind of templates are currently supported?
 
-The Google Drive Connector currently supports only Google Doc files (MIME type `application/vnd.google-apps.document`).
+The **Google Drive Connector** currently supports only Google Doc files (MIME type `application/vnd.google-apps.document`).
