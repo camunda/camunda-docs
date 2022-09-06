@@ -8,9 +8,9 @@ slug: /guides/getting-started/
 
 Create a Camunda Cloud account so you can create clusters, deploy processes, and create a new instance.
 
-### Visit [https://camunda.io/signup](https://camunda.io/signup)
+### Visit [camunda.io/signup](https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral)
 
-Visit [https://camunda.io/signup](https://camunda.io/signup) and view the **Sign Up** screen:
+Visit [camunda.io/signup](https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral) and view the **Sign Up** screen:
 
 ![signup](./img/signup.png)
 

@@ -1,0 +1,68 @@
+# Generating Optimize sidebars
+
+## Why?
+
+With the Optimize docs living in their own docusaurus docs instance, we need to synchronize sidebar definitions across both instances. This provides a stable left nav for the user.
+
+Unfortunately docusaurus instances do not have access to each other's documents, so any links that cross instances need to be defined as URLs instead of document IDs.
+
+This script crawls the left nav of the site you're viewing, and generates a sidebar definition file full of URL-based links. It needs to be corrected for links that are _within_ the `optimize` docs instance, because it's not smart enough to generate doc-based links for them, but it prevents us from having to manually identify every page title/URL in the main `docs` instance.
+
+The script is run in the browser dev tools console, and the results are pasted into the `optimize_sidebars.js` file.
+
+## How?
+
+1. Visit docs.camunda.io
+2. Fully expand the entire left nav
+
+   Docusaurus doesn't emit all levels of the nav on initial render. Nested levels get emitted only when they're viewed (i.e. you expand their parent section).
+
+   The sidebar generation script operates on the DOM. Any levels of the nav that aren't in the DOM yet won't be included in the generated items.
+
+   I do this manually, because it doesn't take long, but you could script this step if you wanted to.
+
+   Tip: you can identify if there are any un-expanded menu categories by querying for them in your browser dev tools console:
+
+   ```javascript
+   > document.querySelectorAll(".menu__link--sublist-caret[aria-expanded=false]").length
+   ⋖ 0
+   ```
+
+   If that statement returns any number other than 0, there are unexpanded categories remaining.
+
+3. Paste the contents of generateOptimizeSidebars.js into your browser dev tools console
+
+   - Make sure the value of `docsAndVersionUrlPrefix` is correct based on the version of docs that you're viewing. This value will be stripped from all generated URLs, so that the `optimize_sidebars.js` file can prepend the correct version in only one place instead of every single link. (This will help us avoid a large find/replace when versioning optimize docs.)
+
+   - The last statement of the script copies the generated sidebars into your clipboard.
+
+4. Paste the results into the optimize_sidebars.js file
+
+   - The results do not include the statement `module.exports = `, so leave that part in 😅.
+
+   - Make sure the results get formatted, as the script generates an object that does not match prettier's desired format.
+
+5. Replace/revert any Optimize links that exist within the optimize docs
+
+   The script generates URL-based links for _all_ items in the sidebar; we want doc-based links for the Optimize docs.
+
+   #### Example
+
+   The script generated this link for me:
+
+   ```javascript
+       docsComponentsLink(
+         "What is Optimize?",
+         "components/optimize/what-is-optimize/"
+       ),
+   ```
+
+   But I revert this to the doc-based link (in shortcut format):
+
+   ```javascript
+       "what-is-optimize",
+   ```
+
+6. Smoke-test the navigation locally
+
+   Note that sidebars files may not be watched by docusaurus's local server. You might need to restart your local server to pick up changes.

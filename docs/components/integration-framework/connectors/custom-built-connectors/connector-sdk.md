@@ -552,7 +552,7 @@ void shouldFailWhenValidate_TokenWrongPattern() {
 }
 ```
 
-Testing the business logic of your connector can vary widely depending on the
+Testing the business logic of your Connector can vary widely depending on the
 functionality it provides. For our example logic, the following test would be a good start:
 
 ```java
@@ -597,7 +597,7 @@ can invoke the Connectors. The Connector SDK provides a
 
 ### Pre-packaged runtime environment
 
-The SDK comes with a pre-packaged runtime environment that allows you to run select connector runtimes
+The SDK comes with a pre-packaged runtime environment that allows you to run select Connector runtimes
 as local job workers out-of-the-box. You can find this Java application in the
 [SDK's GitHub repository](https://github.com/camunda/connector-sdk/tree/main/runtime-job-worker),
 in [our artifact store](https://artifacts.camunda.com/ui/native/connectors/io/camunda/connector/connector-runtime-job-worker/),
