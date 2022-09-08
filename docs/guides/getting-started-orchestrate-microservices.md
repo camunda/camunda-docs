@@ -6,6 +6,8 @@ description: "Orchestrate Microservices along a business process for visibility 
 keywords: [microservices, orchestration, getting-started]
 ---
 
+import CreateCluster from './assets/react-components/create-cluster.md';
+
 Using Camunda Platform 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda Platform 8.
 
 While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda Platform 8 in other programming languages.
@@ -43,8 +45,6 @@ Start by designing your automated process using BPMN. This guide introduces you 
 10. To the right of the two blue buttons, click the Application icon (honeycomb icon) button next to the **Start instance** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
 ### Create a cluster
-
-import CreateCluster from './assets/react-components/create-cluster.md'
 
 <CreateCluster/>
 
