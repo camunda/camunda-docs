@@ -7,7 +7,7 @@ description: Make a request to a REST API and use the response in the next steps
 The **REST Connector** allows you to make a request to a REST API and use the response in the next steps of your process.
 
 You can find the source code of this Connector in our [GitHub repository](https://github.com/camunda/connector-http-json).
-Have a look at its latest [Releases](https://github.com/camunda/connector-http-json/releases) to find an executable JAR you can directly run in a [Connector runtime environment](../custom-built-connectors/connector-sdk.md#runtime-environments) in Camunda Platform 8 Self-Managed.
+Have a look at its latest [Releases](https://github.com/camunda/connector-http-json/releases) to find an executable JAR you can directly run in a [Connector runtime environment](../custom-built-connectors/connector-sdk.md#runtime-environments) in [Camunda Platform 8 Self-Managed](../../../../self-managed/about-self-managed.md).
 
 ## Create a REST Connector task
 
