@@ -1,7 +1,7 @@
 ---
 id: inclusive-gateways
 title: "Inclusive gateway"
-description: "An inclusive gateway (or OR-gateway) allows you to make a decision based on data."
+description: "An inclusive gateway (or OR-gateway) allows you to make multiple decisions based on data."
 ---
 
 :::note
@@ -10,7 +10,7 @@ Currently, we've add support for the diverging (i.e. splitting, forking) inclusi
 
 :::
 
-The inclusive gateway (or OR-gateway) allows for making multiple decisions, not just one.
+The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data (i.e. on process instance variables).
 
 ![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta, stir-fry steak, and/or prepare salad.](assets/inclusive-gateway.png)
 
