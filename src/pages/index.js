@@ -131,7 +131,9 @@ function Home() {
                   "button button--outline button--secondary button--lg sign-up",
                   styles.getStarted
                 )}
-                to={useBaseUrl("https://camunda.io/signup")}
+                to={useBaseUrl(
+                  "https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral"
+                )}
               >
                 Sign Up
               </Link>
@@ -164,7 +166,7 @@ function Home() {
         )}
         <div className={clsx("hero hero--secondary", styles.heroBanner)}>
           <div className="container">
-            <h1 className="hero__title">Unsure where to begin?</h1>
+            <h2 className="hero__title">Unsure where to begin?</h2>
             <p className="hero__subtitle">Try one of our use case guides</p>
             <div className={styles.buttons}>
               <Link

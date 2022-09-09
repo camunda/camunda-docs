@@ -119,7 +119,7 @@ The most important environment variables you may have to configure are related t
 
 A complete sample can be found within [Connect to remote Camunda Platform 7 and Elasticsearch](#connect-to-remote-camunda-platform-7-and-elasticsearch).
 
-Furthermore, there are also environment variables specific to the [event-based process](./../../components/optimize/userguide/additional-features/event-based-processes.md) feature you may make use of:
+Furthermore, there are also environment variables specific to the [event-based process]($optimize$/userguide/additional-features/event-based-processes) feature you may make use of:
 
 - `OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED`: Determines whether this instance of Optimize should convert historical data to event data usable for event-based processes (default: `false`)
 - `OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS`: An array of user ids that are authorized to administer event-based processes (default: `[]`)
@@ -132,7 +132,7 @@ Additionally, there are also runtime related environment variables such as:
 In case you want to make use of the Optimize Public API, you can also set **one** of the following variables:
 
 - `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`. For more details see [Public API Authorization](../../apis-clients/optimize-api/optimize-api-authorization.md).
-- `OPTIMIZE_API_ACCESS_TOKEN` Secret static shared token to be provided to the secured REST API on access in the authorization header. Will
+- `OPTIMIZE_API_ACCESS_TOKEN` secret static shared token to be provided to the secured REST API on access in the authorization header. Will
   be ignored if `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` is also set. For more details see [Public API
   Authorization](../../apis-clients/optimize-api/optimize-api-authorization.md).
 

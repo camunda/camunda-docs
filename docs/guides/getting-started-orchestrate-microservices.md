@@ -1,14 +1,23 @@
 ---
 id: orchestrate-microservices
-title: Getting started with Microservice Orchestration
-sidebar_label: Getting started with Microservice Orchestration
+title: Getting started with microservice orchestration
+sidebar_label: Getting started with microservice orchestration
 description: "Orchestrate Microservices along a business process for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
 ---
 
+import CreateCluster from './assets/react-components/create-cluster.md';
+
 Using Camunda Platform 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda Platform 8.
 
 While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda Platform 8 in other programming languages.
+
+:::note
+Getting stuck? Book a meeting with our User Success Specialists. Follow the link dependent on your location to connect with a specialist:
+
+- [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
+- [EMEA, APAC, and other regions](https://meetings.salesloft.com/camunda/daan)
+  :::
 
 ## Prerequisites
 
@@ -36,8 +45,6 @@ Start by designing your automated process using BPMN. This guide introduces you 
 10. To the right of the two blue buttons, click the Application icon (honeycomb icon) button next to the **Start instance** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
 ### Create a cluster
-
-import CreateCluster from './assets/react-components/create-cluster.md'
 
 <CreateCluster/>
 
@@ -67,5 +74,5 @@ Congratulations! You successfully built your first microservice orchestration so
 
 ## Additional resources and next steps
 
-- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8?](/components/concepts/what-is-camunda-platform-8.md).
+- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8](/components/concepts/what-is-camunda-platform-8.md) or watching our [Platform Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
 - Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](setting-up-development-project.md).

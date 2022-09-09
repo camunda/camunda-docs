@@ -10,6 +10,11 @@ In this guide we will show you how to use Identity to create an application.
 Head over to our documentation on [applications](/self-managed/concepts/access-control/applications.md) to find out more.
 :::
 
+:::caution Write access needed
+To add an application, you need to have write access to Identity.
+Read our [guide on managing user access](managing-user-access.md) to learn more.
+:::
+
 1. Log in to the Identity UI and navigate to the **Applications** tab:
 
 ![add-application-tab](img/add-application-tab.png)

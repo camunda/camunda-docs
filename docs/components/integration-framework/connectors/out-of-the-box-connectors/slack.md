@@ -1,22 +1,22 @@
 ---
 id: slack
-title: Slack connector
+title: Slack Connector
 description: Send messages to channels or users in your Slack workspace from your BPMN process.
 ---
 
-The **Slack connector** allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
+The **Slack Connector** allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
 ## Prerequisites
 
-To use the Slack connector, a Slack app must be registered with the Slack workspace you would like to send messages to. A respective OAuth token needs to be configured as a secret in your cluster. Follow [these steps in the appendix](#appendix) to learn how to set this up.
+To use the Slack Connector, a Slack app must be registered with the Slack workspace you would like to send messages to. A respective OAuth token needs to be configured as a secret in your cluster. Follow [these steps in the appendix](#appendix) to learn how to set this up.
 
-## Create a Slack connector task
+## Create a Slack Connector task
 
-To use a **Slack connector** in your process, either change the type of an existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new connector task by using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
+To use a **Slack Connector** in your process, either change the type of an existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
 
-## Make your Slack connector executable
+## Make your Slack Connector executable
 
-To make the **Slack connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
+To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
 
 ![slack connector red properties](../img/connectors-slack-red-properties.png)
 
@@ -36,7 +36,7 @@ Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/format
 
 ## Slack API response
 
-The **Slack connector** exposes the Slack API response as a [local variable](https://docs.camunda.io/docs/components/concepts/variables/#variable-scopes) called `response`.
+The **Slack Connector** exposes the Slack API response as a [local variable](https://docs.camunda.io/docs/components/concepts/variables/#variable-scopes) called `response`.
 
 The following fields are available in the `response` variable. Notice that all fields describe state in the Slack workspace:
 
@@ -66,10 +66,10 @@ You can use an Output Mapping to map the response:
 
 ## Appendix
 
-To use the **Slack connector**, the following prerequisites need to be set up.
+To use the **Slack Connector**, the following prerequisites need to be set up.
 
-1. [Slack workspace](#use-a-well-known-slack-workspace) - The workspace the **Slack connector** will communicate with.
-2. [Slack basic app with bot token configured](#configure-a-basic-slack-app) - The **Slack connector** will communicate through this Slack app with the workspace. You can consider the Slack app as _Slack bot representing the Camunda platform_.
+1. [Slack workspace](#use-a-well-known-slack-workspace) - The workspace the **Slack Connector** will communicate with.
+2. [Slack basic app with bot token configured](#configure-a-basic-slack-app) - The **Slack Connector** will communicate through this Slack app with the workspace. You can consider the Slack app as _Slack bot representing the Camunda platform_.
 3. [Slack bot token stored as secret](#store-slack-bot-token-as-secret) - The secret will store the Slack bot token and can be used to reference it from BPMN processes without revealing it in the BPMN `xml`.
 
 ### Use a well-known Slack workspace
@@ -78,19 +78,19 @@ A Slack workspace consists of channels in which workspace members can communicat
 
 ### Configure a basic Slack app
 
-The **Slack connector** communicates through a Slack app with a concrete Slack workspace. For example, when sending a Slack message, the message will be posted by the Slack app. For the **Slack connector** to work, you need to perform the following steps:
+The **Slack Connector** communicates through a Slack app with a concrete Slack workspace. For example, when sending a Slack message, the message will be posted by the Slack app. For the **Slack Connector** to work, you need to perform the following steps:
 
 1. [Create a Slack app](https://api.slack.com/apps).
-2. [Request required scopes](https://api.slack.com/scopes) - The scopes represent what your app can and cannot do (for example, posting messages). For the Slack connector to work, at a minimum you need to grant the [`chat:write`](https://api.slack.com/scopes/chat:write) scope.
+2. [Request required scopes](https://api.slack.com/scopes) - The scopes represent what your app can and cannot do (for example, posting messages). For the Slack Connector to work, at a minimum you need to grant the [`chat:write`](https://api.slack.com/scopes/chat:write) scope.
 3. [Install the Slack app to your workspace](https://api.slack.com/authentication/basics#installing).
 
-Once the app is set up, copy the [bot token](https://api.slack.com/authentication/token-types) of the app. It is represented as a string and begins with `xoxb-`. This is the OAuth Bearer token, which the **Slack connector** will use to authenticate with the Slack API.
+Once the app is set up, copy the [bot token](https://api.slack.com/authentication/token-types) of the app. It is represented as a string and begins with `xoxb-`. This is the OAuth Bearer token, which the **Slack Connector** will use to authenticate with the Slack API.
 
 ### Store Slack bot token as secret
 
-The **Slack connector** uses an OAuth bearer token (for example, the Slack app bot token) to authenticate with the Slack API.
+The **Slack Connector** uses an OAuth bearer token (for example, the Slack app bot token) to authenticate with the Slack API.
 
 We advise you to keep your Slack bot token safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
-2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the connector.
+2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the Connector.

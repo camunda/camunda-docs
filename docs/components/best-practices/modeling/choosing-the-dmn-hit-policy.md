@@ -1,5 +1,5 @@
 ---
-title: Choosing the DMN Hit Policy
+title: Choosing the DMN hit policy
 tags:
   - DMN
 ---

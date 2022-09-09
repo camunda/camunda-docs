@@ -1,18 +1,18 @@
 ---
 id: sendgrid
-title: SendGrid connector
+title: SendGrid Connector
 description: Quickly send emails from your BPMN processes.
 ---
 
-The **SendGrid connector** allows you to quickly send emails from your BPMN processes.
+The **SendGrid Connector** allows you to quickly send emails from your BPMN processes.
 
 ## Prerequisites
 
-To use the SendGrid connector, a SendGrid API key is needed. Follow [these steps](#appendix) if you do not have a SendGrid account or API key [secret configured](#create-a-new-connector-secret) in your cluster.
+To use the SendGrid Connector, a SendGrid API key is needed. Follow [these steps](#appendix) if you do not have a SendGrid account or API key [secret configured](#create-a-new-connector-secret) in your cluster.
 
-## SendGrid connector
+## SendGrid Connector
 
-The SendGrid connector comes with two options:
+The SendGrid Connector comes with two options:
 
 1. **SendGrid Email Connector** allows sending simple emails (i.e. text/plain, text/html).
 2. **SendGrid Email Template Connector** supports [SendGrid Dynamic Templates](https://sendgrid.com/solutions/email-api/dynamic-email-templates/).
@@ -21,7 +21,7 @@ The SendGrid connector comes with two options:
 
 #### Create a SendGrid Email Connector Task
 
-To use a **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email** connector task using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
+To use a **SendGrid Connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email** Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
 
 #### Make your SendGrid Email Connector executable
 
@@ -42,7 +42,7 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
 
 ### SendGrid Email Template Connector
 
-Send an email via SendGrid Dynamic Template and use the [Handlebars templating language](https://handlebarsjs.com/) to pass dynamic values to your connector.
+Send an email via SendGrid Dynamic Template and use the [Handlebars templating language](https://handlebarsjs.com/) to pass dynamic values to your Connector.
 
 #### Configure a Dynamic Template
 
@@ -87,7 +87,7 @@ While you are editing your template, you can test how your email would look by s
 
 #### Create a SendGrid Email template Connector task
 
-To use this **SendGrid connector** in your process, either change the type of an existing task to **SendGrid: Send Email via Template** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email via Template** connector task by using the **Append connector** context menu. Follow [our guide on using connectors](../use-connectors.md) to learn more.
+To use this **SendGrid Connector** in your process, either change the type of an existing task to **SendGrid: Send Email via Template** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email via Template** Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
 
 #### Make your SendGrid Email Template Connector executable
 
@@ -135,7 +135,7 @@ If you want to provide dynamic content in the email via process variables, you c
 
 ### Create a SendGrid account
 
-To use the **SendGrid connector**, create a free account in SendGrid if you do not have one yet:
+To use the **SendGrid Connector**, create a free account in SendGrid if you do not have one yet:
 
 1. Go to [https://signup.sendgrid.com/](https://signup.sendgrid.com/).
 2. Set up the account with your email and choose a password.
@@ -173,13 +173,13 @@ To create an API key in SendGrid, take the following steps:
 3. Click **API Keys > Create API Key**.
 4. Give your key a name (i.e. `my-camunda-connector-key`).
 5. Click **Create Key**.
-6. Copy the **API Key** and move on to the next step for creating a connector Secret.
+6. Copy the **API Key** and move on to the next step for creating a Connector secret.
 
 ![create sendgrid api key](../img/connectors-sendgrid-create-api-key.png)
 
-### Create a new connector Secret
+### Create a new Connector secret
 
-We advise you to keep your API key safe and avoid exposing it in the BPMN `xml` file by creating a Secret:
+We advise you to keep your API key safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating Secrets](../../../console/manage-clusters/manage-secrets.md).
-2. Name your Secret `SEND_GRID_API_KEY` so you can reference it later in the connector.
+1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
+2. Name your secret `SEND_GRID_API_KEY` so you can reference it later in the Connector.
