@@ -14,7 +14,7 @@ The inclusive gateway (or OR-gateway) allows for making multiple decisions based
 
 ![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta, stir-fry steak, and/or prepare salad.](assets/inclusive-gateway.png)
 
-If an inclusive gateway has multiple outgoing sequence flows, all sequence flows must have a `conditionExpression` to define when the flow is taken. The gateway can have one sequence flow be defined as the default flow.
+If an inclusive gateway has multiple outgoing sequence flows, all sequence flows must have a `conditionExpression` to define when the flow is taken. Optionally, one of the sequence flows can be marked as the default flow.
 
 When an inclusive gateway is entered, the `conditionExpression` is evaluated. The process instance takes all sequence flows where the condition is fulfilled.
 
