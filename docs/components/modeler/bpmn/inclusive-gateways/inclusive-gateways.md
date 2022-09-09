@@ -20,17 +20,17 @@ When an inclusive gateway is entered, these conditions are evaluated. The proces
 
 For example: Courses selected include `pasta` and `salad`.
 
-![A process model to prepare lunch at lunchtime that use an inclusive gateway to decide cook pasta, and prepare salad steps to take to prepare the different lunch components.](assets/inclusive-gateway-1.png)
+![An inclusive gateway has decided to take the steps to cook pasta and prepare salad, but not stir-fry steak.](assets/inclusive-gateway-1.png)
 
 For example: Courses selected include `steak`, `pasta` and `salad`.
 
-![A process model to prepare lunch at lunchtime that use an inclusive gateway to decide cook pasta, stir-fry steak, and prepare salad steps to take to prepare the different lunch components.](assets/inclusive-gateway-2.png)
+![An inclusive gateway has decided to take the steps to cook pasta, stir-fry steak, and prepare salad.](assets/inclusive-gateway-2.png)
 
 If no condition is fulfilled, it takes the **default flow** of the gateway. If the gateway has no default flow, an incident is created.
 
 For example: No courses selected then the default flow `Salad` is taken.
 
-![A process model to prepare lunch at lunchtime that use an inclusive gateway to decide the default step (prepare salad) to take to prepare the lunch component.](assets/inclusive-gateway-3.png)
+![An inclusive gateway has decided to take the step to prepare salad as the default because none of the conditions were fulfilled.](assets/inclusive-gateway-3.png)
 
 If the inclusive gateway only has one outgoing sequence flow, then it does not need to have a condition.
 
