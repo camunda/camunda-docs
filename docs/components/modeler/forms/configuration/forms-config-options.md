@@ -20,7 +20,7 @@ For each of these options, a unique `value` corresponding to the form submitted 
 
 ### Input data :: Driven by process data
 
-The options will be mapped from form variables, similarly to how [Form Field Data Binding](./forms-config-data-binding.md) works. Here, the `Input values key` property within the `Dynamic Options` configuration group is used to set which form variable to use as a source.
+The options will be mapped from form variables, similarly to how [Form field data binding](./forms-config-data-binding.md) works. Here, the `Input values key` property within the `Dynamic Options` configuration group is used to set which form variable to use as a source.
 
 The expected format for the data will be an array of options, each defining its label and value in JSON. The below example provides an equivalent configuration to the above statically defined one:
 

@@ -4,8 +4,6 @@ title: What is Camunda Forms?
 description: Streamline your human workflows with the help of Camunda Forms
 ---
 
-# Camunda Forms
-
 :::note Support for Camunda Forms
 The Camunda Forms feature was added with the 7.15.0 release of Camunda Platform 7 and the 4.7.0 release of Camunda Modeler.
 :::
