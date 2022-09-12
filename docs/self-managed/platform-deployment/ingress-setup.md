@@ -4,12 +4,12 @@ title: "Combined and separated Ingress setup"
 description: "Camunda Platform 8 Self-Managed combined and separated Ingress setup"
 ---
 
-Camunda Platform 8 Self-Managed has multiple web application as well gRPC services and both could be accessed externally using Ingress. There are 2 ways to do that:
+Camunda Platform 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:
 
-1. **Combined setup:** In this setup there are only 2 Ingresses objects. One Ingress object for all Camunda Platform web application using a single domain and each application has a sub-path e.g. `camunda.example.com/operate`. Another Ingress object which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
-2. **Separated setup:** In this setup each component has its own Ingress/host e.g. `operate.camunda.example.com`, `optimize.camunda.example.com`, `zeebe.camunda.example.com`, etc.
+1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda Platform web applications using a single domain (each application has a sub-path e.g. `camunda.example.com/operate`,) and another which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
+2. **Separated setup:** In this setup, each component has its own Ingress/host e.g. `operate.camunda.example.com`, `optimize.camunda.example.com`, `zeebe.camunda.example.com`, etc.
 
-No much difference between the two setup, just that Camunda Platform provides flexibility for different workflows.
+There are no significant differences between the two setups. Rather, they both offer flexibility for different workflows.
 
 :::note
 Camunda Platform Helm chart doesn't manage or deploy Ingress controllers, it only deploys Ingress objects. Hence, this Ingress setup will not work without Ingress controller running in your cluster.
@@ -17,12 +17,12 @@ Camunda Platform Helm chart doesn't manage or deploy Ingress controllers, it onl
 
 ## Preparation
 
-- An Ingress controller should be deployed in advance. The examples are using `Nginx` ingress controller but any Ingress controller could be used by setting `ingress.className`.
-- TLS configuration is not handled in the examples because it varies between different workflows. It could be configured directly using `ingress.tls` options or via external tool like [Cert-Manager](https://github.com/cert-manager/cert-manager) using `ingress.annotations`. For more details, check available [configuration options](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#configuration).
+- An Ingress controller should be deployed in advance. The examples below use `Nginx` Ingress controller, but any Ingress controller could be used by setting `ingress.className`.
+- TLS configuration is not handled in the examples because it varies between different workflows. It could be configured directly using `ingress.tls` options or via an external tool like [Cert-Manager](https://github.com/cert-manager/cert-manager) using `ingress.annotations`. For more details, check available [configuration options](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#configuration).
 
 ## Combined Ingress setup
 
-In this setup a single Ingress/domain will be used to access Camunda Platform web applications and another for Zeebe Gateway. By default all web application use `/` as a base, so all that we need here is to set the context path, Ingress configuration, and authentication redirect URLs.
+In this setup, a single Ingress/domain is used to access Camunda Platform web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
 ```yaml
 # Chart values for the Camunda Platform 8 Helm chart in combined Ingress setup.
@@ -68,7 +68,7 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using that custom values file, [deploy Camunda Platform as usual](../deployment.md):
+Using the custom values file, [deploy Camunda Platform as usual](../deployment.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
@@ -82,7 +82,7 @@ Once deployed, you can access the Camunda Platform components on:
 
 ## Separated Ingress setup
 
-In this setup, each Camunda Platform component will have its own Ingress/domain. Here no need to set the context (unless there is a good reason for that) since `/` is used as a default base. So here we just need to set the Ingress configuration, and authentication redirect URLs.
+In this setup, each Camunda Platform component has its own Ingress/domain. There is no need to set the context (unless there is a good reason for that) since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
 
 ```yaml
 # Chart values for the Camunda Platform 8 Helm chart in combined Ingress setup.
@@ -147,7 +147,7 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using that custom values file, [deploy Camunda Platform as usual](../deployment.md):
+Using the custom values file, [deploy Camunda Platform as usual](../deployment.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
@@ -161,4 +161,4 @@ Once deployed, you can access the Camunda Platform components on:
 
 ## Troubleshooting
 
-If something is not working as expected, make sure to check the guide for [general deployment troubleshooting](../../troubleshooting.md).
+If something is not working as expected, check the guide for [general deployment troubleshooting](../../troubleshooting.md).
