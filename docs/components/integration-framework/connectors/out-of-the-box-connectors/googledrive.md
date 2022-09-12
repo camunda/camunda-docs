@@ -78,6 +78,8 @@ The **Google Drive Connector** currently supports two ways of authentication and
 
 Google supports multiple ways to obtain both, please refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) to get up-to-date instructions or see examples below.
 
+You also enable _Google Docs API_ and _Google Drive API_ for every client intended to use. You can do it at the [Google Cloud API Library](https://console.cloud.google.com/apis/library) page.
+
 #### Example 1: obtaining JWT bearer token with a service account
 
 ![Bearer Auth](../img/connectors-googledrive-jwt-bearer.png)
