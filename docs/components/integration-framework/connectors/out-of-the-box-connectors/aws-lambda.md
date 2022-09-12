@@ -1,5 +1,5 @@
 ---
-id: awslambda
+id: aws-lambda
 title: AWS Lambda Connector
 description: Invoke AWS Lambda function.
 ---
