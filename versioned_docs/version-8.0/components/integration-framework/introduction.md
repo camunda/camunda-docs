@@ -46,8 +46,9 @@ In a Self-Managed environment, you provide the execution environment for Connect
 The Camunda [Connector SDK](./connectors/custom-built-connectors/connector-sdk.md) allows you to run multiple Connectors using [runtime environments](./connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
 You can configure your runtime environment to execute any set of Connectors available to you.
 
-You can use the [out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda. Every connector links to a source code repository that enables you to run the Connector in a Self-Managed environment.
+You can use the [out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda. Every Connector links to a source code repository that enables you to run the Connector in a Self-Managed environment.
 Besides those provided Connectors, you can use the Camunda Connector SDK in combination with [Connector templates](./connectors/custom-built-connectors/connector-templates.md) to develop [custom Connectors](./connectors/custom-built-connectors/connector-sdk.md#creating-a-custom-connector).
+
 These custom Connectors can then be used by process developers in your Self-Managed environment in the same way they would use out-of-the-box Connectors.
 
 To provide the user interface during modeling, you need to make the respective [Connector template](./connectors/custom-built-connectors/connector-templates.md#providing-and-using-connector-templates) available in your environment.

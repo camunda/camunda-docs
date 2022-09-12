@@ -6,8 +6,8 @@ description: Quickly send emails from your BPMN processes.
 
 The **SendGrid Connector** allows you to quickly send emails from your BPMN processes.
 
-You can find the source code of this Connector in our [GitHub repository](https://github.com/camunda/connector-sendgrid).
-Have a look at its latest [Releases](https://github.com/camunda/connector-sendgrid/releases) to find an executable JAR you can directly run in a [Connector runtime environment](../custom-built-connectors/connector-sdk.md#runtime-environments) in [Camunda Platform 8 Self-Managed](../../../../self-managed/about-self-managed.md).
+Find the source code of this Connector in our [GitHub repository](https://github.com/camunda/connector-sendgrid).
+Take a look at its latest [releases](https://github.com/camunda/connector-sendgrid/releases) to find an executable JAR you can directly run in a [Connector runtime environment](../custom-built-connectors/connector-sdk.md#runtime-environments) in [Camunda Platform 8 Self-Managed](../../../../self-managed/about-self-managed.md).
 
 ## Prerequisites
 
