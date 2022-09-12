@@ -1,38 +1,36 @@
 ---
 id: inclusive-gateways
 title: "Inclusive gateway"
-description: "An inclusive gateway (or OR-gateway) allows you to make a decision based on data."
+description: "An inclusive gateway (or OR-gateway) allows you to make multiple decisions based on data."
 ---
 
 :::note
 
-Currently, we've add support for the diverging (i.e. splitting, forking) inclusive gateway, not yet add support for the converging (i.e. merging, joining) inclusive gateway. A combination of parallel and exclusive gateways can be used to merge the flows again.
+Currently, Camunda Platform 8 only supports the diverging (i.e. splitting, forking) inclusive gateway. It does not yet support the converging (i.e. merging, joining) inclusive gateway. A combination of parallel and exclusive gateways can be used as an alternative way to merge the flows.
 
 :::
 
-The inclusive gateway (or OR-gateway) allows for making multiple decisions, not just one.
+The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data (i.e. on process instance variables).
 
 ![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta, stir-fry steak, and/or prepare salad.](assets/inclusive-gateway.png)
 
-If an inclusive gateway has multiple outgoing sequence flows, all sequence flows must have a `conditionExpression` to define when the flow is taken. The gateway can have one sequence flow be defined as the default flow.
+If an inclusive gateway has multiple outgoing sequence flows, all sequence flows must have a condition to define when the flow is taken. Optionally, one of the sequence flows can be marked as the default flow. If the inclusive gateway only has one outgoing sequence flow, then it does not need to have a condition.
 
-When an inclusive gateway is entered, the `conditionExpression` is evaluated. The process instance takes all sequence flows where the condition is fulfilled.
+When an inclusive gateway is entered, these conditions are evaluated. The process instance takes all sequence flows where the condition is fulfilled.
 
 For example: Courses selected include `pasta` and `salad`.
 
-![A process model to prepare lunch at lunchtime that use an inclusive gateway to decide cook pasta, and prepare salad steps to take to prepare the different lunch components.](assets/inclusive-gateway-1.png)
+![An inclusive gateway has decided to take the steps to cook pasta and prepare salad, but not stir-fry steak.](assets/inclusive-gateway-1.png)
 
 For example: Courses selected include `steak`, `pasta` and `salad`.
 
-![A process model to prepare lunch at lunchtime that use an inclusive gateway to decide cook pasta, stir-fry steak, and prepare salad steps to take to prepare the different lunch components.](assets/inclusive-gateway-2.png)
+![An inclusive gateway has decided to take the steps to cook pasta, stir-fry steak, and prepare salad.](assets/inclusive-gateway-2.png)
 
-If no condition is fulfilled, it takes the **default flow** of the gateway. If the gateway has no default flow, an incident is created.
+If no condition is fulfilled, it takes the **default flow** of the gateway. If no condition is fulfilled and the gateway has no default flow, an incident is created.
 
 For example: No courses selected then the default flow `Salad` is taken.
 
-![A process model to prepare lunch at lunchtime that use an inclusive gateway to decide the default step (prepare salad) to take to prepare the lunch component.](assets/inclusive-gateway-3.png)
-
-If the inclusive gateway only has one outgoing sequence flow, then it does not need to have a condition.
+![An inclusive gateway has decided to take the step to prepare salad as the default because none of the conditions were fulfilled.](assets/inclusive-gateway-3.png)
 
 ## Conditions
 
