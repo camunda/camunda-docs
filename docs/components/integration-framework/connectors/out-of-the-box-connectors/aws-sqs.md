@@ -9,7 +9,7 @@ The Amazon SQS Connector allows you to connect your BPMN service with Amazon Web
 ## Prerequisites
 
 To use the **Amazon SQS Connector**, you need to have an SQS Queue and IAM key and secret pair with the `sqs:SendMessage` policy relative to your SQS.
-It is highly recommended not to expose your AWS IAM credentials as plain text but rather use Camunda Secrets. See an [appendix entry](#how-to-store-aws-iam-secrets-for-my-sqs-connector) to find out more.
+It is highly recommended not to expose your AWS IAM credentials as plain text but rather use Camunda Secrets. See an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) to find out more.
 See the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
 
 ## Create an Amazon SQS Connector task
