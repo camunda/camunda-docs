@@ -2,7 +2,7 @@ function optimizeLink(label, href) {
   return {
     type: "link",
     label: label,
-    href: `/optimize/${href}`,
+    href: `/optimize/next/${href}`,
   };
 }
 
