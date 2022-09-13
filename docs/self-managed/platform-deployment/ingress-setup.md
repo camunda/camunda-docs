@@ -82,7 +82,7 @@ Once deployed, you can access the Camunda Platform components on:
 
 ## Separated Ingress setup
 
-In this setup, each Camunda Platform component has its own Ingress/domain. There is no need to set the context (unless there is a good reason for that) since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
+In this setup, each Camunda Platform component has its own Ingress/domain. There is no need to set the context since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
 
 ```yaml
 # Chart values for the Camunda Platform 8 Helm chart in combined Ingress setup.
