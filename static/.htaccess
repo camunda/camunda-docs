@@ -8,6 +8,15 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/self-managed/platform-deployment/local/(.*)$ /docs/self-managed/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/openshift-helm/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/openshift/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/amazon-eks/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deployment/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/kubernetes/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/platform-8-deployment/(.*)$ /docs/self-managed/platform-deployment/overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/platform-8-deployment$ /docs/self-managed/platform-deployment/overview/ [R=301,L]
+
 RewriteRule ^docs/guides/implementing-connectors/(.*)$ /docs/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
 RewriteRule ^docs/guides/implementing-connectors$ /docs/guides/configuring-out-of-the-box-connectors/ [R=301,L]
 RewriteRule ^docs/8.0/guides/implementing-connectors/(.*)$ /docs/8.0/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
