@@ -6,6 +6,7 @@ description: Take a closer look at the Connectors available in Camunda Platform 
 
 This section gives an overview of the **out-of-the-box Connectors** available in Camunda Platform 8:
 
+- [AWS Lambda Connector](aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
 - [REST Connector](rest.md) - Make a request to a REST API and use the response in the next steps of your process.
 - [SendGrid Connector](sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack Connector](slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
