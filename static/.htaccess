@@ -22,8 +22,6 @@ RewriteRule ^docs/guides/implementing-connectors$ /docs/guides/configuring-out-o
 RewriteRule ^docs/8.0/guides/implementing-connectors/(.*)$ /docs/8.0/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
 RewriteRule ^docs/8.0/guides/implementing-connectors$ /docs/8.0/guides/configuring-out-of-the-box-connectors/ [R=301,L]
 
-RewriteRule ^docs/components/optimize/userguide/combined-reports/(.*)$ /docs/components/optimize/userguide/combined-process-reports/$1 [R=301,L]
-
 RewriteRule ^docs/1.2/self-managed/overview/(.*)$ /docs/1.2/self-managed/about-self-managed/$1 [R=301,L]
 RewriteRule ^docs/1.2/self-managed/overview$ /docs/1.2/self-managed/about-self-managed/ [R=301,L]
 RewriteRule ^docs/1.3/self-managed/overview/(.*)$ /docs/1.3/self-managed/about-self-managed/$1 [R=301,L]
@@ -67,11 +65,6 @@ RewriteRule ^docs/components/tasklist/userguide/overview$ /docs/components/taskl
 RewriteRule ^docs/components/tasklist/introduction/(.*)$ /docs/components/tasklist/introduction-to-tasklist/$1 [R=301,L]
 RewriteRule ^docs/components/tasklist/introduction$ /docs/components/tasklist/introduction-to-tasklist/ [R=301,L]
 
-RewriteRule ^docs/components/optimize/userguide/process-analysis/overview/(.*)$ /docs/components/optimize/userguide/process-analysis/process-analysis-overview/$1 [R=301,L]
-RewriteRule ^docs/components/optimize/userguide/process-analysis/overview$ /docs/components/optimize/userguide/process-analysis/process-analysis-overview/ [R=301,L]
-RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview/(.*)$ /docs/components/optimize/userguide/decision-analysis/decision-analysis-overview/$1 [R=301,L]
-RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview$ /docs/components/optimize/userguide/decision-analysis/decision-analysis-overview/ [R=301,L]
-
 RewriteRule ^docs/components/operate/?$ /docs/components/operate/operate-introduction/ [R=301,L]
 
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/?$ /docs/components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview/ [R=301,L]
@@ -97,7 +90,6 @@ RewriteRule ^docs/apis-clients/optimize-api/authorization/(.*)$ /docs/apis-clien
 RewriteRule ^docs/apis-clients/go-client/get-started/(.*)$ /docs/apis-clients/go-client/go-get-started/$1 [R=301,L]
 RewriteRule ^docs/apis-clients/cli-client/get-started/(.*)$ /docs/apis-clients/cli-client/cli-get-started/$1 [R=301,L]
 
-RewriteRule ^docs/components/optimize/userguide/additional-features/filters/(.*)$ /docs/components/optimize/userguide/process-analysis/filters/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/rest-api/(.*)$ /docs/apis-clients/optimize-api/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/optimize-explained/(.*)$ /docs/self-managed/optimize-deployment/advanced-features/$1 [R=301,L]
 
@@ -315,6 +307,50 @@ RewriteRule ^docs/0.25/components/zeebe/tasklist-user-guide /docs/0.25/component
 # redirect best-practices overview page
 RewriteRule ^docs/components/best-practices/?$ /docs/components/best-practices/overview/ [R=301,L]
 
+# optimize docs get their own section of the site
+## these rules previously existed, but are now updated to point at the /optimize section:
+RewriteRule ^docs/components/optimize/userguide/combined-reports/(.*)$ /optimize/userguide/combined-process-reports/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/overview/(.*)$ /optimize/userguide/process-analysis/process-analysis-overview/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/overview$ /optimize/userguide/process-analysis/process-analysis-overview/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview/(.*)$ /optimize/userguide/decision-analysis/decision-analysis-overview/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview$ /optimize/userguide/decision-analysis/decision-analysis-overview/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/additional-features/filters/(.*)$ /optimize/userguide/process-analysis/filters/$1 [R=301,L]
+## these rules didn't exist, but now point anything in docs/components/optimize to /optimize:
+RewriteRule ^docs/components/optimize/what-is-optimize(\/?)$ /optimize/what-is-optimize/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/collections-dashboards-reports(\/?)$ /optimize/userguide/collections-dashboards-reports/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/data-sources(\/?)$ /optimize/userguide/data-sources/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/creating-dashboards(\/?)$ /optimize/userguide/creating-dashboards/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/edit-mode(\/?)$ /optimize/userguide/edit-mode/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/view-mode(\/?)$ /optimize/userguide/view-mode/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/creating-reports(\/?)$ /optimize/userguide/creating-reports/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/combined-process-reports(\/?)$ /optimize/userguide/combined-process-reports/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/processes(\/?)$ /optimize/userguide/processes/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/process-analysis-overview(\/?)$ /optimize/userguide/process-analysis/process-analysis-overview/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/outlier-analysis(\/?)$ /optimize/userguide/process-analysis/outlier-analysis/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/branch-analysis(\/?)$ /optimize/userguide/process-analysis/branch-analysis/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/report-analysis/overview(\/?)$ /optimize/userguide/process-analysis/report-analysis/overview/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/report-analysis/edit-mode(\/?)$ /optimize/userguide/process-analysis/report-analysis/edit-mode/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/report-analysis/select-process-definitions(\/?)$ /optimize/userguide/process-analysis/report-analysis/select-process-definitions/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/report-analysis/define-reports(\/?)$ /optimize/userguide/process-analysis/report-analysis/define-reports/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/report-analysis/measures(\/?)$ /optimize/userguide/process-analysis/report-analysis/measures/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/report-analysis/compare-target-values(\/?)$ /optimize/userguide/process-analysis/report-analysis/compare-target-values/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/report-analysis/process-instance-parts(\/?)$ /optimize/userguide/process-analysis/report-analysis/process-instance-parts/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/report-analysis/configure-reports(\/?)$ /optimize/userguide/process-analysis/report-analysis/configure-reports/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/report-analysis/view-mode(\/?)$ /optimize/userguide/process-analysis/report-analysis/view-mode/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/filters(\/?)$ /optimize/userguide/process-analysis/filters/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/metadata-filters(\/?)$ /optimize/userguide/process-analysis/metadata-filters/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/instance-state-filters(\/?)$ /optimize/userguide/process-analysis/instance-state-filters/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/flow-node-filters(\/?)$ /optimize/userguide/process-analysis/flow-node-filters/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/process-instance-filters(\/?)$ /optimize/userguide/process-analysis/process-instance-filters/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/variable-filters(\/?)$ /optimize/userguide/process-analysis/variable-filters/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/decision-analysis-overview(\/?)$ /optimize/userguide/decision-analysis/decision-analysis-overview/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/decision-report(\/?)$ /optimize/userguide/decision-analysis/decision-report/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/decision-filter(\/?)$ /optimize/userguide/decision-analysis/decision-filter/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/additional-features/alerts(\/?)$ /optimize/userguide/additional-features/alerts/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/additional-features/event-based-processes(\/?)$ /optimize/userguide/additional-features/event-based-processes/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/additional-features/export-import(\/?)$ /optimize/userguide/additional-features/export-import/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/additional-features/footer(\/?)$ /optimize/userguide/additional-features/footer/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/additional-features/variable-labeling(\/?)$ /optimize/userguide/additional-features/variable-labeling/ [R=301,L]
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
