@@ -6,13 +6,13 @@ description: "Camunda Platform 8 Self-Managed combined and separated Ingress set
 
 Camunda Platform 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:
 
-1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda Platform web applications using a single domain (each application has a sub-path e.g. `camunda.example.com/operate`,) and another which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
+1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda Platform 8 web applications using a single domain (each application has a sub-path e.g. `camunda.example.com/operate`,) and another which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
 2. **Separated setup:** In this setup, each component has its own Ingress/host e.g. `operate.camunda.example.com`, `optimize.camunda.example.com`, `zeebe.camunda.example.com`, etc.
 
 There are no significant differences between the two setups. Rather, they both offer flexibility for different workflows.
 
 :::note
-Camunda Platform Helm chart doesn't manage or deploy Ingress controllers, it only deploys Ingress objects. Hence, this Ingress setup will not work without Ingress controller running in your cluster.
+Camunda Platform 8 Helm chart doesn't manage or deploy Ingress controllers, it only deploys Ingress objects. Hence, this Ingress setup will not work without Ingress controller running in your cluster.
 :::
 
 ## Preparation
@@ -22,7 +22,7 @@ Camunda Platform Helm chart doesn't manage or deploy Ingress controllers, it onl
 
 ## Combined Ingress setup
 
-In this setup, a single Ingress/domain is used to access Camunda Platform web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
+In this setup, a single Ingress/domain is used to access Camunda Platform 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
 ```yaml
 # Chart values for the Camunda Platform 8 Helm chart in combined Ingress setup.
@@ -68,13 +68,13 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using the custom values file, [deploy Camunda Platform as usual](../deployment.md):
+Using the custom values file, [deploy Camunda Platform 8 as usual](../deployment.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
 ```
 
-Once deployed, you can access the Camunda Platform components on:
+Once deployed, you can access the Camunda Platform 8 components on:
 
 - **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist]`
 - **Keycloak authentication:** `https://camunda.example.com/auth`
@@ -82,7 +82,7 @@ Once deployed, you can access the Camunda Platform components on:
 
 ## Separated Ingress setup
 
-In this setup, each Camunda Platform component has its own Ingress/domain. There is no need to set the context since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
+In this setup, each Camunda Platform 8 component has its own Ingress/domain. There is no need to set the context since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
 
 ```yaml
 # Chart values for the Camunda Platform 8 Helm chart in combined Ingress setup.
@@ -147,13 +147,13 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using the custom values file, [deploy Camunda Platform as usual](../deployment.md):
+Using the custom values file, [deploy Camunda Platform 8 as usual](../deployment.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
 ```
 
-Once deployed, you can access the Camunda Platform components on:
+Once deployed, you can access the Camunda Platform 8 components on:
 
 - **Web applications:** `https://[identity|operate|optimize|tasklist].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
