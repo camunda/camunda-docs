@@ -14,10 +14,6 @@ RewriteRule ^docs/self-managed/platform-deployment/openshift/(.*)$ /docs/self-ma
 RewriteRule ^docs/self-managed/platform-deployment/amazon-eks/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deployment/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/kubernetes/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/overview/$1 [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deployment/$1 [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/kubernetes-helm$ /docs/guides/self-managed/platform-deployment/helm-kubernetes/deployment/ [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/kubernetes/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/overview/$1 [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/kubernetes$ /docs/self-managed/platform-deployment/helm-kubernetes/overview/ [R=301,L]
 
 RewriteRule ^docs/guides/implementing-connectors/(.*)$ /docs/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
 RewriteRule ^docs/guides/implementing-connectors$ /docs/guides/configuring-out-of-the-box-connectors/ [R=301,L]
