@@ -4,17 +4,11 @@ title: REST Connector
 description: Make a request to a REST API and use the response in the next steps of your process.
 ---
 
-The **REST Connector** allows you to make a request to a REST API and use the response in the next steps of your
-process.
-
-If you see that connector mark as 'Deprecated', you can update and replace it.
-See [Replacing Templates](../../../../components/modeler/desktop-modeler/element-templates/using-templates.md) for more.
+The **REST Connector** allows you to make a request to a REST API and use the response in the next steps of your process.
 
 ## Create a REST Connector task
 
-To use a **REST Connector** in your process, either change the type of existing task using the wrench-shaped **Change
-type** context menu, or create a new Connector task by using the **Append Connector** context menu.
-Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **REST Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
 
 ## Make your REST Connector executable
 
@@ -23,8 +17,7 @@ To make the **REST Connector** executable, fill out the mandatory fields highlig
 ![rest Connector red properties](../img/connectors-rest-red-properties.png)
 
 :::note
-All the mandatory and non-mandatory fields will be covered in the upcoming sections. Depending on the authentication
-selection you make, more fields might be required. We will also cover this in the next section.
+All the mandatory and non-mandatory fields will be covered in the upcoming sections. Depending on the authentication selection you make, more fields might be required. We will also cover this in the next section.
 :::
 
 ### Authentication
@@ -78,9 +71,7 @@ Under the **HTTP Endpoint** section, select the desired **Method** and fill the 
 
 ### Query Parameters
 
-The **Query Parameters** field can be configured using
-the ![feel-icon](../img/feel-icon.png) [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context)
-data type.
+The **Query Parameters** field can be configured using the ![feel-icon](../img/feel-icon.png) [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
 
 ```text
 = {
@@ -99,9 +90,7 @@ Secrets are not like regular variables and must be wrapped in double quotes (`"`
 
 ### Http Headers
 
-Similarly to the Query Parameters, the **Http Headers** can be specified using
-the ![feel-icon](../img/feel-icon.png) [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context)
-data type.
+Similarly to the Query Parameters, the **Http Headers** can be specified using the ![feel-icon](../img/feel-icon.png) [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
 
 ```text
 = {
@@ -124,11 +113,11 @@ Secrets are currently not supported in the body of a REST Connector.
 
 ```json
 = {
-  "temp": 25,
-  "pressure": 1013,
-  "humidity": 44,
-  "temp_min": 16,
-  "temp_max": 30
+     "temp": 25,
+     "pressure": 1013,
+     "humidity": 44,
+     "temp_min": 16,
+     "temp_max": 30
 }
 ```
 
@@ -136,8 +125,7 @@ Secrets are currently not supported in the body of a REST Connector.
 
 ## Response
 
-The HTTP response will be available in a temporary local `response` variable. This variable can be mapped to the process
-by specifying the **Result Variable**.
+The HTTP response will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result Variable**.
 
 The following fields are available in the `response` variable:
 
@@ -145,9 +133,7 @@ The following fields are available in the `response` variable:
 - **body**: Response body of your request
 - **headers**: Response headers
 
-Additionally, you can choose to unpack the content of your `response` into multiple process variables using
-the ![feel-icon](../img/feel-icon.png) **Result Expression**, which is
-a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md).
+Additionally, you can choose to unpack the content of your `response` into multiple process variables using the ![feel-icon](../img/feel-icon.png) **Result Expression**, which is a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md).
 
 ```text
 = {
@@ -159,5 +145,4 @@ a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context
 
 ![rest connector http response mapping](../img/connectors-rest-http-response-mapping.png)
 
-The next steps in your process will have access to the `currentWeather` variable that will contain the full response and
-the mapped variables from the result expression: `actual_temp`, `feel_temp`, and `weather`.
+The next steps in your process will have access to the `currentWeather` variable that will contain the full response and the mapped variables from the result expression: `actual_temp`, `feel_temp`, and `weather`.
