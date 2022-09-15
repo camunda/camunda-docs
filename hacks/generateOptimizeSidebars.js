@@ -1,17 +1,39 @@
-// Set this prefix based on which version of docs you're viewing
-//   when generating the Optimize sidebars.
-//   It will be removed from all generated URLs, so that the version can be
-//   prepended in one place instead of every single link.
-const docsAndVersionUrlPrefix = "/docs/next/";
+const config = {
+  // Set this value based on whether you want to generate a .json file or .js file.
+  //   .js files are better, because we can reduce the number of places we reference the version's base URL,
+  //   but .js is only supported for the "next" version. Docusaurus does not support .js files
+  //   for older/current version sidebars files, so those must use .json.
+  generateJSONOrJS: "JSON", // or "JS"
+
+  // Set this prefix based on which version of docs you're viewing
+  //   when generating the Optimize sidebars.
+  //   It will be removed from all generated URLs, so that the version can be
+  //   prepended in one place instead of every single link.
+  //   NOTE: this only has an effect when generating .js files.
+  docsAndVersionUrlPrefix: "/docs/next/",
+};
 
 // From an anchor in the sidebar, generates a call to a helper function
 //   based on the link text and path. See optimize_sidebars.js for what
 //   this helper function is and how it's used.
-function mapToDocsLink(a) {
+//   This version is only usable for generating the "next" version,
+//   because Docusaurus does not support .js files for older/current version sidebars files.
+function mapToDocsLinkJs(a) {
   return `docsComponentsLink("${a.innerText}", "${a.pathname.replace(
-    docsAndVersionUrlPrefix,
+    config.docsAndVersionUrlPrefix,
     ""
   )}"),`;
+}
+
+// From an anchor in the sidebar, generates a sidebar item JSON object,
+//   based on the link text and path. This is necessary for all _numbered_ versions,
+//   because Docusaurus does not support .js files for older/current version sidebars files.
+function mapToDocsLinkJson(a) {
+  return `{
+      "type": "link",
+      "label": "${a.innerText}",
+      "href": "${a.pathname}"
+    },`;
 }
 
 // From a category in the sidebar, generates sidebar definitions for it and its children.
@@ -34,6 +56,9 @@ function buildCategory(li) {
 
 // From an individual page in the sidebar, generates a sidebar definition.
 function buildLink(li) {
+  const mapToDocsLink =
+    config.generateJSONOrJS === "JSON" ? mapToDocsLinkJson : mapToDocsLinkJs;
+
   const anchor = li.querySelector(":scope > .menu__link");
   return mapToDocsLink(anchor);
 }
@@ -59,7 +84,7 @@ function buildSidebars() {
   const mappedItems = items.map(buildLi);
 
   return `{
-    Components: [
+    "Components": [
       ${mappedItems.join("\n")}
     ]
   }

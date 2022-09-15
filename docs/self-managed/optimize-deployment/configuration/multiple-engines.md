@@ -20,12 +20,14 @@ There are two possible setups where multiple process engines can be used:
 Check which scenario corresponds to your setup because the configuration of multiple engines to Optimize is not always suited for the best import performance.
 
 :::note Heads Up!
+
 There are two restrictions for the multiple engines feature:
 
 1. The process engines are assumed to have distinct process definitions, which means that one process definition (same key, tenant and version) is not deployed on two or more engines at the same time.
    Alternatively, each engine could be configured with default tenant identifiers as described in the [One Tenant Per Engine Scenario](../multi-tenancy/#one-process-engine-per-tenant).
 2. The engines are assumed to have distinct tenant identifiers, which means one particular tenantId is not deployed on two or more engines at the same time.
-   :::
+
+:::
 
 ### Multiple engines with distributed databases
 

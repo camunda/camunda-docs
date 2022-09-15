@@ -32,13 +32,19 @@ The script is run in the browser dev tools console, and the results are pasted i
 
 3. Paste the contents of generateOptimizeSidebars.js into your browser dev tools console
 
-   - Make sure the value of `docsAndVersionUrlPrefix` is correct based on the version of docs that you're viewing. This value will be stripped from all generated URLs, so that the `optimize_sidebars.js` file can prepend the correct version in only one place instead of every single link. (This will help us avoid a large find/replace when versioning optimize docs.)
+   - Edit the config settings at the top appropriately:
+
+     - **`generateJSONorJS`**: If generating the "next" version's sidebar, set to "JS". If generating any other version's sidebar, set to "JSON".
+       Generating .js instead of .json is preferred, because it allows us to abstract the version's base URL...but Docusaurus only supports .js files for the "next" version's sidebar. All others must be .json.
+     - **`docsAndVersionUrlPrefix`**: This value will be stripped from all generated URLs, so that the `optimize_sidebars.js` file can prepend the correct version in only one place instead of every single link. This will help us avoid a large find/replace when versioning optimize docs.
+
+       Note that this setting only has an effect when generating .js instead of .json.
 
    - The last statement of the script copies the generated sidebars into your clipboard.
 
-4. Paste the results into the optimize_sidebars.js file
+4. Paste the results into the optimize_sidebars.js file for the "next" version, or the appropriate versioned sidebars.json file in optimize_versioned_sidebars
 
-   - The results do not include the statement `module.exports = `, so leave that part in 😅.
+   - When generating .js, the results do not include the statement `module.exports = `, so leave that part in 😅.
 
    - Make sure the results get formatted, as the script generates an object that does not match prettier's desired format.
 

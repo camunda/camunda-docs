@@ -93,15 +93,15 @@ class TestTwitterProcess {
             .send().join();
 
         // And then retrieve the UserTask and complete it with 'approved = true'
-        waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", true));
+        waitForUserTaskAndComplete("Task_ReviewTweet", Collections.singletonMap("approved", true));
 
         // Now the process should run to the end
         waitForProcessInstanceCompleted(processInstance);
 
         // Let's assert that it passed certain BPMN elements (more to show off features here)
         assertThat(processInstance)
-                .hasPassedElement("end_event_tweet_published")
-                .hasNotPassedElement("end_event_tweet_rejected")
+                .hasPassedElement("EndEvent_TweetPublished")
+                .hasNotPassedElement("EndEvent_TweetRejected")
                 .isCompleted();
 
         // And verify it caused the right side effects b calling the business methods
@@ -184,15 +184,15 @@ void testTweetApproved() throws Exception {
         .send().join();
 
     // And then retrieve the UserTask and complete it with 'approved = true' <2>
-    waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", true));
+    waitForUserTaskAndComplete("Task_ReviewTweet", Collections.singletonMap("approved", true));
 
     // Now the process should run to the end
     waitForProcessInstanceCompleted(processInstance);
 
     // Let's assert that it passed certain BPMN elements (more to show off features here) <3>
     assertThat(processInstance)
-            .hasPassedElement("end_event_tweet_published")
-            .hasNotPassedElement("end_event_tweet_rejected")
+            .hasPassedElement("EndEvent_TweetPublished")
+            .hasNotPassedElement("EndEvent_TweetRejected")
             .isCompleted();
 
     // And verify it caused the right side effects b calling the business methods <4>
@@ -281,15 +281,15 @@ void testTweetApproved() throws Exception {
         .send().join();
 
     // And then retrieve the UserTask and complete it with 'approved = true' <2>
-    waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", true));
+    waitForUserTaskAndComplete("Task_ReviewTweet", Collections.singletonMap("approved", true));
 
     // Now the process should run to the end
     waitForProcessInstanceCompleted(processInstance);
 
     // Let's assert that it passed certain BPMN elements (more to show off features here) <3>
     assertThat(processInstance)
-            .hasPassedElement("end_event_tweet_published")
-            .hasNotPassedElement("end_event_tweet_rejected")
+            .hasPassedElement("EndEvent_TweetPublished")
+            .hasNotPassedElement("EndEvent_TweetRejected")
             .isCompleted();
 
     // And verify it caused the right side effects b calling the business methods <4>
@@ -316,10 +316,10 @@ void testRejectionPath() throws Exception {
             .variables(variables) //
             .send().join();
 
-    waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", false));
+    waitForUserTaskAndComplete("Task_ReviewTweet", Collections.singletonMap("approved", false));
 
     waitForProcessInstanceCompleted(processInstance);
-    waitForProcessInstanceHasPassedElement(processInstance, "end_event_tweet_rejected");
+    waitForProcessInstanceHasPassedElement(processInstance, "EndEvent_TweetRejected");
     Mockito.verify(twitterService, never()).tweet(anyString());
 }
 ```
@@ -342,11 +342,11 @@ void testDuplicateTweet() throws Exception {
             .variables(variables) //
             .send().join();
 
-    waitForUserTaskAndComplete("user_task_review_tweet", Collections.singletonMap("approved", true));
+    waitForUserTaskAndComplete("Task_ReviewTweet", Collections.singletonMap("approved", true));
 
-    waitForProcessInstanceHasPassedElement(processInstance, "boundary_event_tweet_duplicated");
+    waitForProcessInstanceHasPassedElement(processInstance, "BoundaryEvent_TweetDuplicated");
     // TODO: Add human task to test case
-    waitForUserTaskAndComplete("user_task_handle_duplicate", new HashMap<>());
+    waitForUserTaskAndComplete("Task_HandleDuplicate", new HashMap<>());
 }
 ```
 
@@ -435,7 +435,7 @@ class TwitterTest {
 The service task **Publish on Twitter** delegates to Java code:
 
 ```xml
-<serviceTask id="service_task_publish_on_twitter" camunda:delegateExpression="#{tweetPublicationDelegate}" name="Publish on Twitter">
+<serviceTask id="Task_PublishOnTwitter" camunda:delegateExpression="#{tweetPublicationDelegate}" name="Publish on Twitter">
 </serviceTask>
 ```
 
@@ -496,8 +496,8 @@ void testTweetApproved() {
   complete(task(), withVariables(TwitterDemoProcessConstants.VAR_NAME_APPROVED, true)); //2
   // then
   assertThat(processInstance) // 3
-    .hasPassed("end_event_tweet_published")
-    .hasNotPassed("end_event_tweet_rejected")
+    .hasPassed("EndEvent_TweetPublished")
+    .hasNotPassed("EndEvent_TweetRejected")
     .isEnded();
   verify(tweetPublicationService).tweet(TWEET); // 4
   verifyNoMoreInteractions(tweetPublicationService);
@@ -514,12 +514,12 @@ void testTweetRejected() {
   // create a process instance directly at the point at which a tweet was rejected
   ProcessInstance processInstance = runtimeService()
     .createProcessInstanceByKey("TwitterDemoProcess")
-    .startBeforeActivity("service_task_publish_on_twitter")
+    .startBeforeActivity("Task_PublishOnTwitter")
     .setVariables(variables)
   .execute();
   assertThat(processInstance)
     .isStarted()
-    .hasPassed("service_task_publish_on_twitter")
+    .hasPassed("Task_PublishOnTwitter")
     .hasVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET);
 
   // when
@@ -527,8 +527,8 @@ void testTweetRejected() {
 
   // then
   assertThat(processInstance)
-    .hasPassed("end_event_tweet_rejected")
-    .hasNotPassed("end_event_tweet_published")
+    .hasPassed("EndEvent_TweetRejected")
+    .hasNotPassed("EndEvent_TweetPublished")
     .isEnded();
   verifyZeroInteractions(tweetPublicationService);
 }
@@ -537,10 +537,10 @@ void testTweetRejected() {
 You could also implement another `testTweetDuplicated()` to verify the logic in case a tweet turns out to be a duplicate and is rejected by Twitter. For this case, we attached an error event to the service task **Publish on Twitter**. In the BPMN XML we see an error event defined with an errorCode `duplicateMessage`.
 
 ```xml
-  <boundaryEvent id="boundary_event_tweet_duplicated" name="Tweet duplicated" attachedToRef="service_task_publish_on_twitter">
-    <errorEventDefinition id="error_event_definition_tweet_duplicated" errorRef="error_tweet_duplicated"/>
+  <boundaryEvent id="BoundaryEvent_TweetDuplicated" name="Tweet duplicated" attachedToRef="Task_PublishOnTwitter">
+    <errorEventDefinition id="ErrorEventDefinition_TweetDuplicated" errorRef="Error_TweetDuplicated"/>
   </boundaryEvent>
-<error id="error_tweet_duplicated" errorCode="duplicateMessage" name="Tweet duplicated"/>
+<error id="Error_TweetDuplicated" errorCode="duplicateMessage" name="Tweet duplicated"/>
 ```
 
 Above, we already saw the Java delegate code throwing the BPMN error exception with that code `duplicateMessage`. Here is the method testing for the case a tweet is duplicated:
@@ -556,16 +556,16 @@ void testTweetDuplicated() {
   ProcessInstance processInstance = rejectedTweet(withVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET, TWEET));  // 2
   // then
   assertThat(processInstance) // 3
-    .hasPassed("boundary_event_tweet_duplicated")
-    .hasNotPassed("end_event_tweet_rejected").hasNotPassed("end_event_tweet_published")
-    .isWaitingAt("user_task_handle_duplicate");
+    .hasPassed("BoundaryEvent_TweetDuplicated")
+    .hasNotPassed("EndEvent_TweetRejected").hasNotPassed("EndEvent_TweetPublished")
+    .isWaitingAt("Task_HandleDuplicate");
   verify(tweetPublicationService).tweet(TWEET);  // 4
   verifyNoMoreInteractions(tweetPublicationService);
   // when
   complete(task()); // 5
   // then
   assertThat(processInstance)  // 6
-    .isWaitingAt("user_task_review_tweet")
+    .isWaitingAt("Task_ReviewTweet")
     .hasVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET)
     .task().isAssignedTo("demo");
 }

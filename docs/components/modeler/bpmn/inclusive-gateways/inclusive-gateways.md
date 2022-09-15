@@ -12,11 +12,13 @@ Currently, Camunda Platform 8 only supports the diverging (i.e. splitting, forki
 
 The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data (i.e. on process instance variables).
 
-![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta, stir-fry steak, and/or prepare salad.](assets/inclusive-gateway.png)
+![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta,stir-fry steak, prepare salad, or any combination of these.](assets/inclusive-gateway.png)
 
-If an inclusive gateway has multiple outgoing sequence flows, all sequence flows must have a condition to define when the flow is taken. Optionally, one of the sequence flows can be marked as the default flow. If the inclusive gateway only has one outgoing sequence flow, then it does not need to have a condition.
+If an inclusive gateway has multiple outgoing sequence flows, all sequence flows must have a condition to define when the flow is taken. If the inclusive gateway only has one outgoing sequence flow, then it does not need to have a condition.
 
-When an inclusive gateway is entered, these conditions are evaluated. The process instance takes all sequence flows where the condition is fulfilled.
+Optionally, one of the sequence flows can be marked as the default flow. This sequence flow should not have a condition, because its behavior depends on the other conditions.
+
+When an inclusive gateway is entered, the conditions are evaluated. The process instance takes all sequence flows where the condition is fulfilled.
 
 For example: Courses selected include `pasta` and `salad`.
 
@@ -26,11 +28,11 @@ For example: Courses selected include `steak`, `pasta` and `salad`.
 
 ![An inclusive gateway has decided to take the steps to cook pasta, stir-fry steak, and prepare salad.](assets/inclusive-gateway-2.png)
 
-If no condition is fulfilled, it takes the **default flow** of the gateway. If no condition is fulfilled and the gateway has no default flow, an incident is created.
+If no condition is fulfilled, it takes the **default flow** of the gateway. Note that the default flow is not expected to have a condition, and is therefore not evaluated. If no condition is fulfilled and the gateway has no default flow, an incident is created.
 
-For example: No courses selected then the default flow `Salad` is taken.
+For example: No courses selected then the default flow is taken.
 
-![An inclusive gateway has decided to take the step to prepare salad as the default because none of the conditions were fulfilled.](assets/inclusive-gateway-3.png)
+![An inclusive gateway has decided to take the step to prepare salad as the default because none of the conditions were fulfilled.](assets/inclusive-gateway-default.png)
 
 ## Conditions
 
@@ -49,7 +51,7 @@ For example:
 
 = valid and orderCount > 0
 
-= contains(courses, "salad")
+= list contains(courses, "salad")
 ```
 
 ## Additional resources
@@ -68,21 +70,17 @@ An inclusive gateway with three outgoing sequence flows and the default sequence
 <bpmn:sequenceFlow id="Flow_0d3xogt" name="Pasta"
     sourceRef="Gateway_1dj8ts6" targetRef="Activity_1orhxob">
     <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
-       = contains(courses, "pasta")
+       = list contains(courses, "pasta")
     </bpmn:conditionExpression>
 </bpmn:sequenceFlow>
 <bpmn:sequenceFlow id="Flow_1le3l31" name="Steak"
     sourceRef="Gateway_1dj8ts6" targetRef="Activity_0rygy6z">
     <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
-      = contains(courses, "steak")
+      = list contains(courses, "steak")
     </bpmn:conditionExpression>
 </bpmn:sequenceFlow>
 <bpmn:sequenceFlow id="Flow_05d0jjq" name="Salad"
-    sourceRef="Gateway_1dj8ts6" targetRef="Activity_06yrt1e">
-    <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
-      = contains(courses, "salad")
-    </bpmn:conditionExpression>
-</bpmn:sequenceFlow>
+    sourceRef="Gateway_1dj8ts6" targetRef="Activity_06yrt1e" />
 ```
 
 ### References
