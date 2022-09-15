@@ -12,7 +12,7 @@ Currently, Camunda Platform 8 only supports the diverging (i.e. splitting, forki
 
 The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data (i.e. on process instance variables).
 
-![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta, stir-fry steak, and/or prepare salad.](assets/inclusive-gateway.png)
+![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta,stir-fry steak, prepare salad, or any combination of these.](assets/inclusive-gateway.png)
 
 If an inclusive gateway has multiple outgoing sequence flows, all sequence flows must have a condition to define when the flow is taken. Optionally, one of the sequence flows can be marked as the default flow. If the inclusive gateway only has one outgoing sequence flow, then it does not need to have a condition.
 
