@@ -8,13 +8,7 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
-# These redirects go from current version to /next/ and should be revisted when /next/ is removed from the sitemap
-RewriteRule ^docs/self-managed/platform-deployment/local/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/$1 [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/openshift-helm/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/openshift/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/amazon-eks/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/$1 [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/deployment/$1 [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/kubernetes/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/overview/$1 [R=301,L]
+# These redirects go from /next/ to /next/ and should be revisted when /next/ is removed from the sitemap
 RewriteRule ^docs/next/self-managed/platform-deployment/local/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/openshift-helm/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/openshift/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
@@ -40,6 +34,7 @@ RewriteRule ^docs/self-managed/zeebe-deployment/operations/?$ /docs/self-managed
 RewriteRule ^docs/self-managed/tasklist-deployment/configuration/(.*)$ /docs/self-managed/tasklist-deployment/tasklist-configuration/$1 [R=301,L]
 RewriteRule ^docs/self-managed/tasklist-deployment/authentication/(.*)$ /docs/self-managed/tasklist-deployment/tasklist-authentication/$1 [R=301,L]
 
+# More /next/ to /next/
 RewriteRule ^docs/next/self-managed/platform-deployment/platform-8-deployment/?$ /docs/next/self-managed/platform-deployment/overview/ [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/?$ /docs/next/self-managed/platform-deployment/overview/ [R=301,L]
 
