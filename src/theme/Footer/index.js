@@ -65,6 +65,8 @@ const MixpanelElement = () => {
             }
           } catch (_error) {
             // mixpanel is not initiated
+            // TODO: remove this logging after figuring out why mixpanel is broken
+            console.log("mixpanel is not initiated...", _error);
           }
           if (!mixpanelInitiated) {
             getAccessTokenSilently()
@@ -88,6 +90,8 @@ const MixpanelElement = () => {
               })
               .catch((_error) => {
                 // failed to silently authenticate user
+                // TODO: remove this logging after figuring out why mixpanel is broken
+                console.log("failed to authenticate user...", _error);
               });
           } else {
             // track event "docs"
