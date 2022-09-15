@@ -2,7 +2,7 @@ function optimizeLink(label, href) {
   return {
     type: "link",
     label: label,
-    href: `/optimize/${href}`,
+    href: `/optimize/next/${href}`,
   };
 }
 
@@ -165,6 +165,7 @@ module.exports = {
                 "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
                 "components/modeler/bpmn/parallel-gateways/parallel-gateways",
                 "components/modeler/bpmn/event-based-gateways/event-based-gateways",
+                "components/modeler/bpmn/inclusive-gateways/inclusive-gateways",
               ],
             },
             {
@@ -207,6 +208,7 @@ module.exports = {
               "Out-of-the-box Connectors": [
                 "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
                 "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
+                "components/integration-framework/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/integration-framework/connectors/out-of-the-box-connectors/rest",
                 "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
                 "components/integration-framework/connectors/out-of-the-box-connectors/slack",

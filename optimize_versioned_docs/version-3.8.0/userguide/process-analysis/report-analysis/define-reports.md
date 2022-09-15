@@ -8,7 +8,7 @@ In this section of the report builder, you are characterizing the output of the 
 
 First, you need to select which part of the data you want to view. Optimize differentiates between the view (e.g. process instance or flow node) and the measure (e.g. count or duration):
 
-1. Raw Data: View just a table with the actual data listed as rows. This can come in handy if you found interesting insights in certain process instances and need detailed information about those instances, or you are exploring a process definition with a limited number of instances. This report type also allows you to inspect raw [object variable values](../../../../../self-managed/optimize-deployment/configuration/object-variables.md).
+1. Raw Data: View just a table with the actual data listed as rows. This can come in handy if you found interesting insights in certain process instances and need detailed information about those instances, or you are exploring a process definition with a limited number of instances. This report type also allows you to inspect raw [object variable values]($docs$/self-managed/optimize-deployment/configuration/object-variables).
 
 2. Process instance
 

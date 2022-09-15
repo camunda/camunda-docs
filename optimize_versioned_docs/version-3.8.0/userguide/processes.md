@@ -26,7 +26,7 @@ The process can be configured by clicking the 'Configure' button when hovering o
 ## KPI import scheduler
 
 Since users might be dealing with hundreds or even thousands of KPIs, a scheduler has been developed which updates the KPI values on a given interval. The default interval in which the KPIs get updates is 10 minutes.
-To change this interval, please modify the configuration value for **entity.kpiRefreshInterval**. For more information please visit the relevant [configuration section](../../../self-managed/optimize-deployment/configuration/system-configuration.md).
+To change this interval, please modify the configuration value for **entity.kpiRefreshInterval**. For more information please visit the relevant [configuration section]($docs$/self-managed/optimize-deployment/configuration/system-configuration).
 
 ## Limitations
 
