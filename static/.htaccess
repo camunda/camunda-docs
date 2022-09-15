@@ -38,9 +38,6 @@ RewriteRule ^docs/self-managed/tasklist-deployment/authentication/(.*)$ /docs/se
 RewriteRule ^docs/next/self-managed/platform-deployment/platform-8-deployment/?$ /docs/next/self-managed/platform-deployment/overview/ [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/?$ /docs/next/self-managed/platform-deployment/overview/ [R=301,L]
 
-RewriteRule ^docs/self-managed/platform-deployment/platform-8-deployment/?$ /docs/self-managed/platform-deployment/overview/ [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/?$ /docs/self-managed/platform-deployment/overview/ [R=301,L]
-
 RewriteRule ^docs/self-managed/operate-deployment/configuration/(.*)$ /docs/self-managed/operate-deployment/operate-configuration/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/authentication/(.*)$ /docs/self-managed/operate-deployment/operate-authentication/$1 [R=301,L]
 
