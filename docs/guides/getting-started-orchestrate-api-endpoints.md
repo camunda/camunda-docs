@@ -18,7 +18,7 @@ Getting stuck? Book a meeting with our User Success Specialists. Follow the link
 
 - [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
 - [EMEA, APAC, and other regions](https://meetings.salesloft.com/camunda/daan)
-  :::
+:::
 
 ## Create a REST connector task
 
