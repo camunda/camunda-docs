@@ -417,6 +417,16 @@ The `property` binding is supported both in Camunda Platform 7 and Cloud.
 | **Binding parameters**      |                                                     |
 | **Mapping result**          | `<zeebe:taskDefinition type="[userInput]" />`       |
 
+##### `zeebe:property`
+
+| **Binding `type`**          | `zeebe:property`                                      |
+| --------------------------- | ----------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`    |
+| **Binding parameters**      | `name`: the name of the property                      |
+| **Mapping result**          | `<zeebe:property name="[name]" value="[userInput] />` |
+
+The `zeebe:property` binding allows you to set any arbitrary property for an outside system. It does not impact execution of the Zeebe engine.
+
 </TabItem>
 </Tabs>
 
