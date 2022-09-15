@@ -89,3 +89,7 @@ Template:
 Source files for images and videos can be put in:
 
 `./media-src/[subfolder according to do structure]/`
+
+Files that are used to produce these source files (e.g. BPMN files used to produce process images) can be stored in:
+
+`./media-pre-src/`
