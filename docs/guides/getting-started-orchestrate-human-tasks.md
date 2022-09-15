@@ -16,9 +16,10 @@ In this guide, we’ll step through one way to create an automated process utili
 
 :::note
 Getting stuck? Book a meeting with our User Success Specialists. Follow the link dependent on your location to connect with a specialist:
+
 - [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
 - [EMEA, APAC, and other regions](https://meetings.salesloft.com/camunda/daan)
-:::
+  :::
 
 ## Create an automated process with user tasks
 
