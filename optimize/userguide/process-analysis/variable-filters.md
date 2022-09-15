@@ -62,7 +62,7 @@ Similar to the other variables, there are two input switches that allow you to e
 
 ## List variable filters
 
-To filter based on the value of a [list variable](../../../../self-managed/optimize-deployment/configuration/object-variables.md#list-variables), the applied filter will depend on the primitive type of items within the list. For example, you will be creating a numeric variable filter for a variable which is a list of numbers, a string variable filter for a list of strings, and so on. It is important to note here that filters are applied on each individual item within the list variable and not the list itself.
+To filter based on the value of a [list variable]($docs$/self-managed/optimize-deployment/configuration/object-variables#list-variables), the applied filter will depend on the primitive type of items within the list. For example, you will be creating a numeric variable filter for a variable which is a list of numbers, a string variable filter for a list of strings, and so on. It is important to note here that filters are applied on each individual item within the list variable and not the list itself.
 
 For example, an "is" filter on a list of string values filters for those instances where any individual list item is equal to the given term. For example, instances whose list variable "contains" the selected value.
 

@@ -7,33 +7,40 @@ keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
 
-A connector is a reusable building block that works out of the box. Each connector task can be configured with domain-specific parameters without implementing custom business logic.
+A Connector is a reusable building block that works out of the box. Each Connector task can be configured with domain-specific parameters without implementing custom business logic.
 
-The concept of a connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template.
+The concept of a Connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template.
 
-This guide will walk you through working with a REST connector task as a first time Camunda Platform 8 user.
+This guide will walk you through working with a REST Connector task as a first time Camunda Platform 8 user.
+
+:::note
+Getting stuck? Book a meeting with our User Success Specialists. Follow the link dependent on your location to connect with a specialist:
+
+- [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
+- [EMEA, APAC, and other regions](https://meetings.salesloft.com/camunda/daan)
+  :::
 
 ## Create a REST connector task
 
-To use a **REST connector** in your process, follow the steps below:
+To use a **REST Connector** in your process, follow the steps below:
 
 1. Create a BPMN diagram. To do this, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
 2. Name your project and select **New > BPMN Diagram > + Create blank**.
 3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use **API Endpoint Tutorial** for the name and **api-endpoint-tutorial** for the id.
-4. Use Web Modeler to design a BPMN flow with a connector task. Create a connector task by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
+4. Use Web Modeler to design a BPMN flow with a Connector task. Create a Connector task by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
 5. Change the task type by clicking the wrench icon and select **REST Connector (No Auth)** in the **Connectors** section.
 
 ![create sendgrid connector wrench](img/connectors-rest-create-task-wrench.png)
 
-Alternatively, you can directly create a **REST connector** by using the append menu:
+Alternatively, you can directly create a **REST Connector** by using the append menu:
 
 ![create rest connector append](img/connectors-create-task-append.png)
 
-## Make your REST connector executable
+## Make your REST Connector executable
 
 ![rest connector red properties](img/connectors-rest-red-properties.png)
 
-To make the **REST connector** executable, fill out the mandatory **URL** field in the HTTP Endpoint section (highlighted in red) in the properties panel with `https://catfact.ninja/fact` so we can get a random cat fact from the [Cat Fact API](https://catfact.ninja/) for this example.
+To make the **REST Connector** executable, fill out the mandatory **URL** field in the HTTP Endpoint section (highlighted in red) in the properties panel with `https://catfact.ninja/fact` so we can get a random cat fact from the [Cat Fact API](https://catfact.ninja/) for this example.
 
 ## Handle your response
 
@@ -56,3 +63,4 @@ To deploy your process, take the following steps:
 ## Additional resources and next steps
 
 - Dive deeper into [connectors](/components/integration-framework/introduction.md#connectors).
+- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8](/components/concepts/what-is-camunda-platform-8.md) or watching our [Platform Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.

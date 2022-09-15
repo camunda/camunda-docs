@@ -10,6 +10,12 @@ Requests and responses are in JSON notation. Some objects have additional endpoi
 For example, `process-definitions` has an endpoint to get the process-definition as XML representation.
 In case of errors, Operate API returns an error object.
 
+## API documentation as Swagger
+
+A detailed API description is also available as Swagger UI at `${base-url}/swagger-ui.html`.
+
+For example: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
 ## Authentication
 
 You need authentication to access the API endpoints.
@@ -78,7 +84,7 @@ The authentication is described in [Operate Configuration - Authentication](/doc
 | **Process definitions**                 |                                                                     |
 | `POST /v1/process-definitions/search`   |                                      Search for process definitions |
 | `GET /v1/process-definitions/{key}`     |                                       Get process definition by key |
-| `GET /v1/process-definitions/{key}/xml` |                                 Get process defintion by key as XML |
+| `GET /v1/process-definitions/{key}/xml` |                                Get process definition by key as XML |
 | **Process instances**                   |                                                                     |
 | `POST /v1/process-instances/search`     |                                        Search for process instances |
 | `GET /v1/process-instances/{key}`       |                                         Get process instance by key |

@@ -1,3 +1,11 @@
+function optimizeLink(label, href) {
+  return {
+    type: "link",
+    label: label,
+    href: `/optimize/${href}`,
+  };
+}
+
 module.exports = {
   Guides: [
     {
@@ -16,7 +24,7 @@ module.exports = {
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/automating-a-process-using-bpmn",
-        "guides/implementing-connectors",
+        "guides/configuring-out-of-the-box-connectors",
         "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
@@ -103,6 +111,7 @@ module.exports = {
             {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
               ],
             },
           ],
@@ -189,6 +198,27 @@ module.exports = {
           Forms: ["components/modeler/forms/camunda-forms-reference"],
         },
       ],
+      "Integration Framework": [
+        "components/integration-framework/introduction-to-connectors",
+        {
+          Connectors: [
+            "components/integration-framework/connectors/use-connectors",
+            {
+              "Out-of-the-box Connectors": [
+                "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
+                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
+                "components/integration-framework/connectors/out-of-the-box-connectors/rest",
+                "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
+                "components/integration-framework/connectors/out-of-the-box-connectors/slack",
+              ],
+              "Custom-built Connectors": [
+                "components/integration-framework/connectors/custom-built-connectors/connector-templates",
+                "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
+              ],
+            },
+          ],
+        },
+      ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
         {
@@ -222,69 +252,150 @@ module.exports = {
         },
       ],
       Optimize: [
-        "components/optimize/what-is-optimize",
+        optimizeLink("What is Optimize?", "what-is-optimize"),
         {
           "User guide": [
-            "components/optimize/userguide/collections-dashboards-reports",
-            "components/optimize/userguide/data-sources",
+            optimizeLink(
+              "Collections, dashboards, and reports",
+              "userguide/collections-dashboards-reports/"
+            ),
+            optimizeLink("Data sources", "userguide/data-sources/"),
             {
               Dashboards: [
-                "components/optimize/userguide/creating-dashboards",
-                "components/optimize/userguide/edit-mode",
-                "components/optimize/userguide/view-mode",
+                optimizeLink(
+                  "Creating dashboards",
+                  "userguide/creating-dashboards/"
+                ),
+                optimizeLink("Edit mode", "userguide/edit-mode"),
+                optimizeLink("View mode", "userguide/view-mode"),
               ],
             },
-            "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/combined-process-reports",
-            "components/optimize/userguide/processes",
+            optimizeLink("Creating reports", "userguide/creating-reports/"),
+            optimizeLink(
+              "Combined process reports",
+              "userguide/combined-process-reports/"
+            ),
+            optimizeLink("Processes", "userguide/processes/"),
             {
               "Process analysis": [
-                "components/optimize/userguide/process-analysis/process-analysis-overview",
-                "components/optimize/userguide/process-analysis/outlier-analysis",
-                "components/optimize/userguide/process-analysis/branch-analysis",
+                optimizeLink(
+                  "Overview",
+                  "userguide/process-analysis/process-analysis-overview/"
+                ),
+                optimizeLink(
+                  "Outlier analysis",
+                  "userguide/process-analysis/outlier-analysis/"
+                ),
+                optimizeLink(
+                  "Branch analysis",
+                  "userguide/process-analysis/branch-analysis/"
+                ),
                 {
                   "Report analysis": [
-                    "components/optimize/userguide/process-analysis/report-analysis/overview",
+                    optimizeLink(
+                      "Report process analysis",
+                      "userguide/process-analysis/report-analysis/overview/"
+                    ),
                     {
                       "Edit mode": [
-                        "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
-                        "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
-                        "components/optimize/userguide/process-analysis/report-analysis/define-reports",
-                        "components/optimize/userguide/process-analysis/report-analysis/measures",
-                        "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
-                        "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
-                        "components/optimize/userguide/process-analysis/report-analysis/configure-reports",
+                        optimizeLink(
+                          "Overview",
+                          "userguide/process-analysis/report-analysis/edit-mode/"
+                        ),
+                        optimizeLink(
+                          "Select process definitions",
+                          "userguide/process-analysis/report-analysis/select-process-definitions/"
+                        ),
+                        optimizeLink(
+                          "Define reports",
+                          "userguide/process-analysis/report-analysis/define-reports/"
+                        ),
+                        optimizeLink(
+                          "Measures",
+                          "userguide/process-analysis/report-analysis/measures/"
+                        ),
+                        optimizeLink(
+                          "Compare target values",
+                          "userguide/process-analysis/report-analysis/compare-target-values/"
+                        ),
+                        optimizeLink(
+                          "Process instance parts",
+                          "userguide/process-analysis/report-analysis/process-instance-parts/"
+                        ),
+                        optimizeLink(
+                          "Configure reports",
+                          "userguide/process-analysis/report-analysis/configure-reports/"
+                        ),
                       ],
                     },
-                    "components/optimize/userguide/process-analysis/report-analysis/view-mode",
+                    optimizeLink(
+                      "View mode",
+                      "userguide/process-analysis/report-analysis/view-mode/"
+                    ),
                   ],
                 },
                 {
                   Filters: [
-                    "components/optimize/userguide/process-analysis/filters",
-                    "components/optimize/userguide/process-analysis/metadata-filters",
-                    "components/optimize/userguide/process-analysis/instance-state-filters",
-                    "components/optimize/userguide/process-analysis/flow-node-filters",
-                    "components/optimize/userguide/process-analysis/process-instance-filters",
-                    "components/optimize/userguide/process-analysis/variable-filters",
+                    optimizeLink(
+                      "Overview",
+                      "userguide/process-analysis/filters/"
+                    ),
+                    optimizeLink(
+                      "Metadata filters",
+                      "userguide/process-analysis/metadata-filters/"
+                    ),
+                    optimizeLink(
+                      "Instance state filters",
+                      "userguide/process-analysis/instance-state-filters/"
+                    ),
+                    optimizeLink(
+                      "Flow node filters",
+                      "userguide/process-analysis/flow-node-filters/"
+                    ),
+                    optimizeLink(
+                      "Process instance filters",
+                      "userguide/process-analysis/process-instance-filters/"
+                    ),
+                    optimizeLink(
+                      "Variable filters",
+                      "userguide/process-analysis/variable-filters/"
+                    ),
                   ],
                 },
               ],
             },
             {
               "Decision analysis": [
-                "components/optimize/userguide/decision-analysis/decision-analysis-overview",
-                "components/optimize/userguide/decision-analysis/decision-report",
-                "components/optimize/userguide/decision-analysis/decision-filter",
+                optimizeLink(
+                  "Overview",
+                  "userguide/decision-analysis/decision-analysis-overview/"
+                ),
+                optimizeLink(
+                  "Single report",
+                  "userguide/decision-analysis/decision-report/"
+                ),
+                optimizeLink(
+                  "Filters",
+                  "userguide/decision-analysis/decision-filter/"
+                ),
               ],
             },
             {
               "Additional features": [
-                "components/optimize/userguide/additional-features/alerts",
-                "components/optimize/userguide/additional-features/event-based-processes",
-                "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/footer",
-                "components/optimize/userguide/additional-features/variable-labeling",
+                optimizeLink("Alerts", "userguide/additional-features/alerts/"),
+                optimizeLink(
+                  "Event-based processes",
+                  "userguide/additional-features/event-based-processes/"
+                ),
+                optimizeLink(
+                  "Export and import",
+                  "userguide/additional-features/export-import/"
+                ),
+                optimizeLink("Footer", "userguide/additional-features/footer/"),
+                optimizeLink(
+                  "Variable labeling",
+                  "userguide/additional-features/variable-labeling/"
+                ),
               ],
             },
           ],
@@ -296,27 +407,6 @@ module.exports = {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/userguide/updating-tasklist-cloud",
-          ],
-        },
-      ],
-      "Integration Framework": [
-        "components/integration-framework/introduction-to-connectors",
-        {
-          Connectors: [
-            "components/integration-framework/connectors/use-connectors",
-            {
-              "Out-of-the-box Connectors": [
-                "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
-                "components/integration-framework/connectors/out-of-the-box-connectors/rest",
-                "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
-                "components/integration-framework/connectors/out-of-the-box-connectors/slack",
-                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
-              ],
-              "Custom-built Connectors": [
-                "components/integration-framework/connectors/custom-built-connectors/connector-templates",
-                "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
-              ],
-            },
           ],
         },
       ],

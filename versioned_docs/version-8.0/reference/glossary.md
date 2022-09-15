@@ -6,7 +6,7 @@ description: "This section defines common terminology referenced within the docu
 
 ### Bridge
 
-Synonym to "[connector](#connector)".
+Synonym to "[Connector](#connector)".
 
 ### Broker
 
@@ -34,7 +34,7 @@ A command represents an action to be taken or executed. Example commands include
 
 ### Connector
 
-A piece of software that connects the workflow engine with some other system or infrastructure. The connector might be uni or bidirectional and possibly includes a [job worker](#job-worker). The boundary between connectors and job workers can be fuzzy, but in general, connectors connect to other active pieces of software. For example, a DMN connector might connect to a managed DMN Engine, while a DMN worker will use a DMN library to directly execute decisions.
+A piece of software that connects the workflow engine with some other system or infrastructure. The Connector might be uni or bidirectional and possibly includes a [job worker](#job-worker). The boundary between Connectors and job workers can be fuzzy, but in general, Connectors connect to other active pieces of software. For example, a DMN Connector might connect to a managed DMN Engine, while a DMN worker will use a DMN library to directly execute decisions.
 
 ### Correlation
 

@@ -7,7 +7,7 @@ title: Introduction
 
 Camunda offers an **integration framework** which allows you to integrate external systems with your processes.
 
-You can choose from two basic patterns to perform this integration: [job workers](#job-workers), and [connectors](#connectors).
+You can choose from two basic patterns to perform this integration: [job workers](#job-workers), and [Connectors](#connectors).
 
 ### Job workers
 
@@ -27,28 +27,28 @@ The integration with external systems using **job workers** requires you to:
 
 ### Connectors
 
-A **connector** is a reusable building block that performs the integration with an external system and works out of the box. It is represented as a concrete task in a [BPMN process](../concepts/processes.md), which can be configured with domain specific parameters without implementing custom business logic.
+A **Connector** is a reusable building block that performs the integration with an external system and works out of the box. It is represented as a concrete task in a [BPMN process](../concepts/processes.md), which can be configured with domain specific parameters without implementing custom business logic.
 
-The concept of a **connector** consists of two parts:
+The concept of a **Connector** consists of two parts:
 
 1. The business logic is implemented following the [job worker](/components/concepts/job-workers.md) pattern.
-2. The user interface during modeling is provided using a [connector template](./connectors/custom-built-connectors/connector-templates.md).
+2. The user interface during modeling is provided using a [Connector template](./connectors/custom-built-connectors/connector-templates.md).
 
-You can use **connectors** from two different perspectives:
+You can use **Connectors** from two different perspectives:
 
-#### Out-of-the-box connectors
+#### Out-of-the-box Connectors
 
-You can use [**out-of-the-box connectors**](./connectors/use-connectors.md) provided by Camunda. When using Camunda Platform 8 SaaS, the runtime is operated by Camunda and offered in the scope of the product. The **out-of-the-box connectors** are a solution which allow you to solve [everyday use cases](./connectors/out-of-the-box-connectors/available-connectors-overview.md) in process automation without the need to implement a single line of code.
+You can use [**out-of-the-box Connectors**](./connectors/use-connectors.md) provided by Camunda. When using Camunda Platform 8 SaaS, the runtime is operated by Camunda and offered in the scope of the product. The **out-of-the-box Connectors** are a solution which allow you to solve [everyday use cases](./connectors/out-of-the-box-connectors/available-connectors-overview.md) in process automation without the need to implement a single line of code.
 
-#### Custom-built connectors
+#### Custom-built Connectors
 
-You can use the Camunda [**connector SDK**](./connectors/custom-built-connectors/connector-sdk.md) in combination with [**connector templates**](./connectors/custom-built-connectors/connector-templates.md) to develop custom **connectors**.
+You can use the Camunda [**Connector SDK**](./connectors/custom-built-connectors/connector-sdk.md) in combination with [**Connector templates**](./connectors/custom-built-connectors/connector-templates.md) to develop custom **Connectors**.
 
-These custom **connectors** can then be used by process developers in your Self-Managed environment in the same way they would use [**out-of-the-box connectors**](./connectors/use-connectors.md).
+These custom **Connectors** can then be used by process developers in your Self-Managed environment in the same way they would use [**out-of-the-box Connectors**](./connectors/use-connectors.md).
 
-#### Next steps to get started with connectors
+#### Next steps to get started with Connectors
 
-- [Use connectors in your BPMN process](./connectors/use-connectors.md)
-- [Learn about available out-of-the-box connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md)
-- [Develop a custom connector template](./connectors/custom-built-connectors/connector-templates.md)
-- [Develop a custom connector runtime](./connectors/custom-built-connectors/connector-sdk.md)
+- [Use Connectors in your BPMN process](./connectors/use-connectors.md)
+- [Learn about available out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md)
+- [Develop a custom Connector template](./connectors/custom-built-connectors/connector-templates.md)
+- [Develop a custom Connector runtime](./connectors/custom-built-connectors/connector-sdk.md)

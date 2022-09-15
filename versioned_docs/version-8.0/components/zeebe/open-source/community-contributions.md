@@ -14,7 +14,7 @@ We use both the [Camunda Community Hub](https://github.com/Camunda-Community-Hub
 - Workers
 - Exporters
 - Applications
-- Other integrations such as Spring-Zeebe and the Apache Kafka connector
+- Other integrations such as Spring-Zeebe and the Apache Kafka Connector
 
 If you have built something for the Zeebe ecosystem, we encourage you to [transfer it to the Camunda Community Hub](https://github.com/camunda-community-hub/community/blob/main/transferring-extensions.md).
 
