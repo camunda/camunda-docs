@@ -1,7 +1,7 @@
 ---
-id: local
-title: "Local installation"
-sidebar_label: "Local"
+id: manual
+title: "Manual installation on local machine"
+sidebar_label: "Manual"
 ---
 
 This page guides you through the manual installation of the Camunda Platform 8 on a local or virtual machine.
