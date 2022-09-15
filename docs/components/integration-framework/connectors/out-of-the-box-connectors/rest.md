@@ -1,7 +1,7 @@
 ---
 id: rest
 title: REST Connector
-description: Make a request to a REST API and use the response in the next steps of your process.
+description: Make a request to a REST API and use the response in the next steps of your process. Demo change.
 ---
 
 The **REST Connector** allows you to make a request to a REST API and use the response in the next steps of your process.
