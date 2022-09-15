@@ -14,7 +14,7 @@ keywords: [get-started, local-install]
 - [Desktop Modeler](https://camunda.com/download/modeler/)
 - [Operate](/self-managed/operate-deployment/install-and-start.md)
 - [Tasklist](/self-managed/tasklist-deployment/install-and-start.md)
-- [Optimize](../components/optimize/what-is-optimize.md)
+- [Optimize]($optimize$/what-is-optimize)
 
 ## Setting up your project
 

@@ -109,8 +109,8 @@ import ComplexGatewaySvg from './assets/bpmn-symbols/complex-gateway.svg'
     <a href="../event-based-gateways/">
         <EventBasedGatewaySvg className="implemented" />
     </a>
-    <a href="#">
-        <InclusiveGatewaySvg />
+    <a href="../inclusive-gateways/">
+        <InclusiveGatewaySvg className="implemented" />
     </a>
     <a href="#">
         <ComplexGatewaySvg />
