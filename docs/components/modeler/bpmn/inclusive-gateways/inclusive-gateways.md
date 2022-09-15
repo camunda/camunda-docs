@@ -49,7 +49,7 @@ For example:
 
 = valid and orderCount > 0
 
-= contains(courses, "salad")
+= list contains(courses, "salad")
 ```
 
 ## Additional resources
@@ -68,19 +68,19 @@ An inclusive gateway with three outgoing sequence flows and the default sequence
 <bpmn:sequenceFlow id="Flow_0d3xogt" name="Pasta"
     sourceRef="Gateway_1dj8ts6" targetRef="Activity_1orhxob">
     <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
-       = contains(courses, "pasta")
+       = list contains(courses, "pasta")
     </bpmn:conditionExpression>
 </bpmn:sequenceFlow>
 <bpmn:sequenceFlow id="Flow_1le3l31" name="Steak"
     sourceRef="Gateway_1dj8ts6" targetRef="Activity_0rygy6z">
     <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
-      = contains(courses, "steak")
+      = list contains(courses, "steak")
     </bpmn:conditionExpression>
 </bpmn:sequenceFlow>
 <bpmn:sequenceFlow id="Flow_05d0jjq" name="Salad"
     sourceRef="Gateway_1dj8ts6" targetRef="Activity_06yrt1e">
     <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
-      = contains(courses, "salad")
+      = list contains(courses, "salad")
     </bpmn:conditionExpression>
 </bpmn:sequenceFlow>
 ```
