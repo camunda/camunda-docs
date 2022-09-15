@@ -229,8 +229,6 @@ module.exports = {
           //cacheTime: 600 * 1000, // 600 sec - cache purge period
           changefreq: "weekly",
           priority: 0.5,
-          // this is temporary. Ignore these from the sitemap while we move a lot of things around.
-          ignorePatterns: ["/docs/next/**", "/optimize/**"],
         },
       },
     ],

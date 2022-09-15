@@ -49,7 +49,7 @@ There are basically three typical test scopes used when building process solutio
 This section targets Camunda Platform 8. Refer to the specific Camunda 7 section below if you are looking for Camunda Platform 7.x.
 :::
 
-This section describes how to write process tests as unit tests in Java. Later in this best practice, you will find some information on writing tests in other languages, like Node.Js or C#.
+This section describes how to write process tests as unit tests in Java. We are working on more information on how to write tests in other languages, like Node.Js or C#.
 
 When using Java, most customers use Spring Boot. While this is a common setup for customers, it is not the only one. Find some more examples of Java process tests in the README.md of the [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test) project.
 

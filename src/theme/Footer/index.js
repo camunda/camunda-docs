@@ -8,6 +8,7 @@ import Footer from "@theme-original/Footer";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Head from "@docusaurus/Head";
+import mixpanel from "mixpanel-browser";
 
 export default function FooterWrapper(props) {
   return (
@@ -85,8 +86,10 @@ const MixpanelElement = () => {
                   sendMixpanelEvent("docs");
                 }
               })
-              .catch((_error) => {
+              .catch((error) => {
                 // failed to silently authenticate user
+                //   We won't do anything about this, but log it for debugging purposes.
+                console.info("Failed to authenticate user.", error);
               });
           } else {
             // track event "docs"

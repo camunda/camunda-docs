@@ -14,10 +14,9 @@ const tokens = [
   {
     token: "$optimize$",
     rules: [
-      { match: "/docs/", expandTo: "/optimize" },
       // TODO: introduce these mappings, as versions are added for optimize.
-      // { match: "/docs/", expandTo: "/optimize/next" },
-      // { match: "/versioned_docs/version-8.0/", expandTo: "/optimize" },
+      { match: "/docs/", expandTo: "/optimize/next" },
+      { match: "/versioned_docs/version-8.0/", expandTo: "/optimize" },
       // { match: "/versioned_docs/version-1.3/", expandTo: "/optimize/3.7.0" },
     ],
   },
