@@ -2,31 +2,15 @@
 
 ## General
 
-The complete documentation is fully versioned. This means that there will be no static content that is the same across all versions. The documentation contains a drop down menu to set the version. The default is the latest version.
+The complete documentation is fully versioned. This means that there will be no static content that is the same across all versions. The documentation contains a drop down menu to set the version including `Next`, a version-less preview.
 
-## Roles
+## Perform a patch release
 
-- PM = Product Manager
-- DEVEX = Developer Experience
-- PT = Product Team (Zeebe/Operate/Tasklist/Cloud Console/..)
-- RM = Release Manager
-- AUTO = Automated task
+Patch releases for docs can happen nearly any time, barring significant infrastructure changes. It's current best to ask for a release in #ask-documentation or include a release date in the PR.
 
-## Perform a Minor Release (MR)
+Issues or PRs labeled `Bug` will be prioritized and released as soon as possible, but may not be immediate.
 
-Here the phases for a new minor release are described (referring to the documentation).
-
-### MR Phase 1: Preparation
-
-- RM: Convert Draft PR into PR
-- PM and DEVEX: Final review of the release branch (including release notes).
-- PM and DEVEX: Approve Release Branch.
-- AUTO: Merge Release Branch into Master.
-
-### MR Phase 2: Publish Release
-
-- RM: Create new GIT release (with the same version number of the release branch). Use release notes from `RELEASE.md`.
-- AUTO: Build master and put it live
+To perform a patch release, use the GitHub UI.
 
 ### MR Phase 3: After the release
 
