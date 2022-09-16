@@ -1,6 +1,7 @@
 ---
 id: aws-sqs
 title: Amazon Simple Queue Service Connector
+sidebar_label: Amazon SQS Connector
 description: Send messages to Amazon Simple Queue Service from your BPMN process.
 ---
 
