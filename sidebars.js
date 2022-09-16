@@ -208,6 +208,7 @@ module.exports = {
               "Out-of-the-box Connectors": [
                 "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
                 "components/integration-framework/connectors/out-of-the-box-connectors/aws-sqs",
+                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
                 "components/integration-framework/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/integration-framework/connectors/out-of-the-box-connectors/rest",
                 "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
@@ -567,21 +568,26 @@ module.exports = {
     "self-managed/about-self-managed",
     {
       Installation: [
-        "self-managed/platform-deployment/platform-8-deployment",
+        "self-managed/platform-deployment/overview",
         {
-          Kubernetes: [
-            "self-managed/platform-deployment/kubernetes",
-            "self-managed/platform-deployment/kubernetes-helm",
-            "self-managed/platform-deployment/amazon-eks",
-          ],
-          OpenShift: [
-            "self-managed/platform-deployment/openshift",
-            "self-managed/platform-deployment/openshift-helm",
+          "Helm/Kubernetes": [
+            "self-managed/platform-deployment/helm-kubernetes/overview",
+            "self-managed/platform-deployment/helm-kubernetes/deployment",
+            {
+              Platforms: [
+                "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
+                "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
+              ],
+              Guides: [
+                "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
+                "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
+              ],
+            },
+            "self-managed/platform-deployment/troubleshooting",
           ],
         },
         "self-managed/platform-deployment/docker",
-        "self-managed/platform-deployment/local",
-        "self-managed/platform-deployment/troubleshooting",
+        "self-managed/platform-deployment/manual",
       ],
     },
     {
