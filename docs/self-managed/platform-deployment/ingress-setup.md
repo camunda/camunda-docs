@@ -68,7 +68,7 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using the custom values file, [deploy Camunda Platform 8 as usual](../deployment.md):
+Using the custom values file, [deploy Camunda Platform 8 as usual](/self-managed/platform-deployment/helm-kubernetes/deployment.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
@@ -147,7 +147,7 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using the custom values file, [deploy Camunda Platform 8 as usual](../deployment.md):
+Using the custom values file, [deploy Camunda Platform 8 as usual](/self-managed/platform-deployment/helm-kubernetes/deployment.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
@@ -161,4 +161,4 @@ Once deployed, you can access the Camunda Platform 8 components on:
 
 ## Troubleshooting
 
-If something is not working as expected, check the guide for [general deployment troubleshooting](../../troubleshooting.md).
+If something is not working as expected, check the guide for [general deployment troubleshooting](/self-managed/platform-deployment/troubleshooting.md).
