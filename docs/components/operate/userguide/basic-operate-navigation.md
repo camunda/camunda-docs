@@ -36,4 +36,4 @@ Here, see details about the process instance, including the instance history and
 
 ![operate-view-instance-detail](./img/operate-view-instance-detail.png)
 
-To visualize the performance of process instances, we recommend utilizing [Optimize]($optimize$/what-is-optimize).
+To visualize the performance of process instances, we recommend utilizing [Optimize]($optimize$/components/what-is-optimize).
