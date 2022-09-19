@@ -6,8 +6,12 @@ The Docusaurus documentation provides a detailed explanation of the Markdown fea
 
 - Static images can be placed into [`static/img/`](./static/img/).
 - Images that will change with a new version have to be placed into `docs`. Best practice: add an `img` directory to each directory where it is needed.
+- All images should include alt text that describes the image.
+- Images should not replace text.
 
 ## Videos
+
+_At this time, we are not encouraging the use of motion graphics (videos, GIFs, etc) due to accessibility concerns._
 
 - The regular `video` does not work in MDX.
 - Use the [react-video](https://www.npmjs.com/package/react-player) component in the following way:

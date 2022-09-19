@@ -1,9 +1,9 @@
 <div align="center">
 <img src="./static/img/black-C.png" width="200px"/>
 
-<h1>Camunda Platform Documentation</h1>
+<h1>Camunda Platform 8 Documentation</h1>
 <p>
-This repository contains the Camunda Platform documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
+This repository contains the Camunda Platform 8 documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
 </p>
 </div>
 
@@ -17,9 +17,7 @@ This repository contains the Camunda Platform documentation, which can be found 
 
 ---
 
-[![release procedure](./howtos/release-procedure.svg)](./howtos/release-procedure.md)
-
-[![publish documentation](./howtos/publish-documentation.svg)](./howtos/publish-documentation.md)
+[![release-procedure](./howtos/release-procedure.svg)](./howtos/release-procedure.md)
 
 ---
 
@@ -27,6 +25,6 @@ This repository contains the Camunda Platform documentation, which can be found 
 
 [![configuration](./howtos/configuration.svg)](./howtos/configuration.md)
 
-[![configuration](./howtos/versioning.svg)](./howtos/versioning.md)
+[![versioning](./howtos/versioning.svg)](./howtos/versioning.md)
 
 [![markdown and mdx features](./howtos/markdown-and-mdx-features.svg)](./howtos/markdown-and-mdx-features.md)

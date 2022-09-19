@@ -1,65 +1,48 @@
-# Release Procedure
+# Release & publish procedure
 
-## General
+The complete documentation is fully versioned. This means that there will be no static content that is the same across all versions. The documentation contains a drop down menu to set the version including `Next`, a version-less preview.
 
-The complete documentation is fully versioned. This means that there will be no static content that is the same across all versions. The documentation contains a drop down menu to set the version. The default is the latest version.
+## Perform a patch release
 
-## Roles
+Patch releases for docs can happen nearly any time, barring significant infrastructure changes. Currently, it's recommended to either ask for a release in #ask-documentation (internal Camunda employees only) or include a release date in the PR.
 
-- PM = Product Manager
-- DEVEX = Developer Experience
-- PT = Product Team (Zeebe/Operate/Tasklist/Cloud Console/..)
-- RM = Release Manager
-- AUTO = Automated task
+Issues or PRs labeled `Bug` will be prioritized and released as soon as possible, but may not be immediate.
 
-## Perform a Minor Release (MR)
+To perform a patch release, confirm what is on `main` via staging at [stage.docs.camunda.io](https://stage.docs.camunda.io) is ready for release.
 
-Here the phases for a new minor release are described (referring to the documentation).
+Then use the GitHub UI and follow the instructions below:
 
-### MR Phase 1: Preparation
+1. Navigate to https://github.com/camunda/camunda-platform-docs/releases and click **Draft a new release**
+2. Click **Choose a tag** and create a new tag representing the next patch release. The title with autopopulate.
+3. Click **Autogenerate release notes**. The **Describe this release** field will fill with PRs included in this release.
+4. Click **Publish release**.
 
-- RM: Convert Draft PR into PR
-- PM and DEVEX: Final review of the release branch (including release notes).
-- PM and DEVEX: Approve Release Branch.
-- AUTO: Merge Release Branch into Master.
+The build process for [publish-prod](https://github.com/camunda/camunda-platform-docs/actions/workflows/publish-prod.yaml) will kick off which could take around 30 min to finish. If publish-prod is successful, the updates will appear on [docs.camunda.io](https://docs.camunda.io).
 
-### MR Phase 2: Publish Release
+## Perform a minor release
 
-- RM: Create new GIT release (with the same version number of the release branch). Use release notes from `RELEASE.md`.
-- AUTO: Build master and put it live
+Minor releases to Camunda Platform 8 happen twice a year in April and October.
 
-### MR Phase 3: After the release
+To prepare for a minor release, you'll need to create a new verison.
 
-- RM: Create new Release Branch. Naming Pattern: `release_${major-version}_${minor-version}`, example: `release_0_26`.
-- RM: Create a new version in the documentation: `npm run docusaurus docs:version ${major-version}.${minor-version}`. This freezes the current state of the documentation. New content is added to the newly created version.
-- RM: Open Draft PR with the name `Release ${major-version}.${minor-version}`.
-- RM: Communicate new Release Branch via Slack.
+### Create new version
 
-## Make changes to old versions (C)
+Technically, the current contents are frozen in `docs` and copied to `versioned_docs` with the corresponding version. The process can be triggered by this Docusaurus command:
 
-### C Phase 1: Preparation
+```bash
+npm run docusaurus docs:version 8.1
 
-- PT: Create Github Issue with a short description of the changes.
-- PT: Create a new branch. Naming Pattern: `${product}_${issue-number}`
-- PT: Create Draft-PR (name: `${product} / #${issue-number} / ${title}`), link issue and make changes.
-- PT: Once the draft PR is ready for review, convert it to PR.
-- PT and DEVEX: Review and approve.
-- AUTO: Merge Branch to Master.
+```
 
-### C Phase 2: Publish Release
+Create a PR with the changes and merge to `main`, confirming no build issues before moving to the release steps.
 
-- RM: Create new GIT release.
-- AUTO: Build master and put it live.
+### Release the new version
 
-### C Phase 3: After the release
+Use the GitHub UI and follow the instructions below:
 
-- PT: Merge changes to the current release branch.
+1. Navigate to https://github.com/camunda/camunda-platform-docs/releases and click **Draft a new release**
+2. Click **Choose a tag** and create a new tag representing the minor release. The title with autopopulate.
+3. Click **Autogenerate release notes**. The **Describe this release** field will fill with PRs included in this release.
+4. Click **Publish release**.
 
-## Changes to the current Release Branch (RB)
-
-- PT: Create Github Issue with a short description of the changes.
-- PT: New branch from the Release Branch. Naming: `release_${major-version}_${minor-version}_${product}_${issue-number}`
-- PT: Create Draft-PR (name: `Release ${major-version}.${minor-version} / ${product} / #${issue-number} / ${title}`), link issue and make changes
-- PT: Once the draft PR is ready for review, convert to PR.
-- PT and DEVEX: Review and approve.
-- AUTO: Merge Branch to Release Branch.
+The build process for [publish-prod](https://github.com/camunda/camunda-platform-docs/actions/workflows/publish-prod.yaml) will kick off which could take around 30 min to finish. If publish-prod is successful, the updates will appear on [docs.camunda.io](https://docs.camunda.io).
