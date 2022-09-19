@@ -21,5 +21,5 @@ You can also specify variables written to the process context at startup. The va
 ```
 
 :::note
-You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize]($optimize$/what-is-optimize).
+You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize]($optimize$/components/what-is-optimize).
 :::
