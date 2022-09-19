@@ -17,7 +17,7 @@ See [Manage secrets](../img/connectors-aws-lambda-filled.png) to learn more.
 
 To use an **AWS Lambda Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](../use-connectors.md) to learn more.
 
-## Make your AWS Lambda Connector for invoke function
+## Invoking your AWS Lambda function
 
 To make the **AWS Lambda Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
 
