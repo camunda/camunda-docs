@@ -4,7 +4,7 @@ The complete documentation is fully versioned. This means that there will be no 
 
 ## Perform a patch release
 
-Patch releases for docs can happen nearly any time, barring significant infrastructure changes. It's current best to ask for a release in #ask-documentation or include a release date in the PR.
+Patch releases for docs can happen nearly any time, barring significant infrastructure changes. Currently, it's recommended to either ask for a release in #ask-documentation (internal Camunda employees only) or include a release date in the PR.
 
 Issues or PRs labeled `Bug` will be prioritized and released as soon as possible, but may not be immediate.
 
