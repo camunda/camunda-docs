@@ -309,6 +309,11 @@ RewriteRule ^docs/0.25/components/zeebe/tasklist-user-guide /docs/0.25/component
 RewriteRule ^docs/components/best-practices/?$ /docs/components/best-practices/overview/ [R=301,L]
 
 # optimize docs get their own section of the site
+## The initial implementation of optimize section incorrectly placed all components docs in the root of optimize/. 
+##   These rules redirect from there into a components/ folder.
+RewriteRule ^optimize/next/what-is-optimize(\/?)$ /optimize/next/components/what-is-optimize/ [R=301,L]
+RewriteRule ^optimize/next/userguide/(.*)$ /optimize/next/components/userguide/$1 [R=301,L]
+
 ## these rules previously existed, but are now updated to point at the /optimize section:
 RewriteRule ^docs/components/optimize/userguide/combined-reports/(.*)$ /optimize/userguide/combined-process-reports/$1 [R=301,L]
 RewriteRule ^docs/components/optimize/userguide/process-analysis/overview/(.*)$ /optimize/userguide/process-analysis/process-analysis-overview/$1 [R=301,L]
