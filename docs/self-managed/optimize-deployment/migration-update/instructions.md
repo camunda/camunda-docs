@@ -52,11 +52,13 @@ The Elasticsearch update is usually performed in a rolling fashion. Read all abo
 Although the above steps summarize the basic update procedure, it is still highly recommended to read through the Elastic documentation to avoid any potential issues.
 
 :::note Heads Up!
+
 Note that the following updates are not supported by Elasticsearch:
 
 - 6.8 to 7.0.
 - 6.7 to 7.1.–7.X (where X>1, e.g. 7.5)
-  :::
+
+:::
 
 ### 3. Perform the migration
 

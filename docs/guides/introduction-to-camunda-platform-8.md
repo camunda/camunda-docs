@@ -14,7 +14,7 @@ Camunda Platform 8 consists of six [components](/components/components-overview.
 - [Zeebe](/components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda Platform 8.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) - Complete tasks which require human input.
 - [Operate](/components/operate/operate-introduction.md) - Manage, monitor, and troubleshoot your processes.
-- [Optimize]($optimize$/what-is-optimize) - Improve your processes by identifying constraints in your system.
+- [Optimize]($optimize$/components/what-is-optimize) - Improve your processes by identifying constraints in your system.
 
 For more conceptual information about Camunda Platform 8, see [What is Camunda Platform 8](components/concepts/what-is-camunda-platform-8.md).
 For an on-demand demonstration of the product, visit [Camunda Academy](https://bit.ly/3CvooTX).

@@ -14,7 +14,7 @@ This section contains product manual content for each component in Camunda Platf
 - [Integration Framework](integration-framework/introduction.md) - Documentation on the Camunda framework to integrate with outside systems.
 - [Zeebe Engine](zeebe/zeebe-overview.md) - Complete documentation for Zeebe.
 - [Operate](operate/operate-introduction.md) - User guide for monitoring and troubleshooting your process with Operate.
-- [Optimize](optimize/what-is-optimize.md) - Detailed user guide for working with Optimize to improve your processes by identifying constraints in your system.
+- [Optimize]($optimize$/components/what-is-optimize) - Detailed user guide for working with Optimize to improve your processes by identifying constraints in your system.
 - [Tasklist](tasklist/introduction-to-tasklist.md) - Documentation for working with user tasks in Tasklist.
 
 These components work together to provide the Camunda Platform 8 SaaS experience.
