@@ -195,9 +195,7 @@ module.exports = {
         },
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
-        {
-          Forms: ["components/modeler/forms/camunda-forms-reference"],
-        },
+        require("./docs/components/modeler/forms/sidebar-schema"),
       ],
       "Integration Framework": [
         "components/integration-framework/introduction-to-connectors",
