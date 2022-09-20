@@ -8,7 +8,7 @@ description: How to configure an options source on a form field
 
 Certain form fields work from a set of pre-populated options that your user will want to select from, such as the [Radio](../form-element-library/forms-element-library-radio.md) or [Select](../form-element-library/forms-element-library-select.md) fields. This source can be configured several ways, as described below.
 
-### Static :: Configured on the form schema
+### Static configured on the form schema
 
 The options will be defined directly on your form schema, the only way to modify them in the future will be to change the form definition itself.
 
@@ -18,11 +18,11 @@ The static options group will appear to allow the configuration of the individua
 
 For each of these options, a unique `value` corresponding to the form submitted data must be provided, as well as a `label` which will be displayed to the user filling in the form. You may configure as many options as you want by using the add (+) button in the group header.
 
-### Input data :: Driven by process data
+### Input data driven by process data
 
-The options will be mapped from form variables, similarly to how [Form field data binding](./forms-config-data-binding.md) works. Here, the `Input values key` property within the `Dynamic Options` configuration group is used to set which form variable to use as a source.
+The options are mapped from form variables, similarly to how [Form field data binding](./forms-config-data-binding.md) works. Here, the `Input values key` property within the `Dynamic Options` configuration group is used to set which form variable to use as a source.
 
-The expected format for the data will be an array of options, each defining its label and value in JSON. The below example provides an equivalent configuration to the above statically defined one:
+The expected format for the data is an array of options, each defining its label and value in JSON. The below example provides an equivalent configuration to the above statically defined one:
 
 ```json
 {

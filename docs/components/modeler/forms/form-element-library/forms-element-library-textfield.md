@@ -23,4 +23,4 @@ A text field allowing the user to read and edit textual data.
 
 ### Datatypes
 
-Text Fields can be bound to `boolean`, `string` and `number` data, but will coherse the data into a string, which will lead the data to be written back to the process as a `string` when the form is submitted.
+Text Fields can be bound to `boolean`, `string`, and `number` data, but will cohere the data into a string, which will lead the data to be written back to the process as a `string` when the form is submitted.

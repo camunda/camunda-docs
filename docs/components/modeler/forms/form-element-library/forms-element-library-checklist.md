@@ -18,13 +18,13 @@ A set of checkboxes providing data multi-selection for small datasets.
 
 ### Datatypes
 
-Checklists can be bound to data of the `any[]` type, although for most practical cases we recommend `string[]` instead. The checklist component will correlate the bound data with the values of the different options.
+Checklists can be bound to data of the `any[]` type, although for most practical cases we recommend `string[]` instead. The checklist component correlates the bound data with the values of the different options.
 
 The data representation of this checklist:
 
 ![Checklist Selection Image](../assets/checklist-example.png)
 
-Would look like this:
+Looks like this:
 
 ```
 {
