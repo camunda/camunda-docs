@@ -1,4 +1,4 @@
-function docsComponentsLink(label, href) {
+function docsLink(label, href) {
   return {
     type: "link",
     label: label,
@@ -8,61 +8,58 @@ function docsComponentsLink(label, href) {
 
 module.exports = {
   Components: [
-    docsComponentsLink("Overview Components", "components/"),
+    docsLink("Overview Components", "components/"),
 
     {
       Concepts: [
-        docsComponentsLink(
+        docsLink(
           "What is Camunda Platform 8?",
           "components/concepts/what-is-camunda-platform-8/"
         ),
-        docsComponentsLink("Processes", "components/concepts/processes/"),
-        docsComponentsLink("Job workers", "components/concepts/job-workers/"),
-        docsComponentsLink(
+        docsLink("Processes", "components/concepts/processes/"),
+        docsLink("Job workers", "components/concepts/job-workers/"),
+        docsLink(
           "Process instance creation",
           "components/concepts/process-instance-creation/"
         ),
-        docsComponentsLink("Messages", "components/concepts/messages/"),
-        docsComponentsLink("Incidents", "components/concepts/incidents/"),
-        docsComponentsLink("Variables", "components/concepts/variables/"),
-        docsComponentsLink("Expressions", "components/concepts/expressions/"),
-        docsComponentsLink(
-          "Workflow patterns",
-          "components/concepts/workflow-patterns/"
-        ),
+        docsLink("Messages", "components/concepts/messages/"),
+        docsLink("Incidents", "components/concepts/incidents/"),
+        docsLink("Variables", "components/concepts/variables/"),
+        docsLink("Expressions", "components/concepts/expressions/"),
+        docsLink("Workflow patterns", "components/concepts/workflow-patterns/"),
       ],
     },
 
     {
       Console: [
-        docsComponentsLink(
+        docsLink(
           "Introduction to Camunda Platform Console",
           "components/console/introduction-to-console/"
         ),
 
         {
           "Manage your organization": [
-            docsComponentsLink(
+            docsLink(
               "Organization management",
               "components/console/manage-organization/organization-settings/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Manage users of your organization",
               "components/console/manage-organization/manage-users/"
             ),
-            docsComponentsLink(
+            docsLink(
               "View organization activity",
               "components/console/manage-organization/view-organization-activity/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Usage history",
               "components/console/manage-organization/usage-history/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Update billing reservations",
               "components/console/manage-organization/update-billing-reservations/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Switch organization",
               "components/console/manage-organization/switch-organization/"
             ),
@@ -71,31 +68,31 @@ module.exports = {
 
         {
           "Manage clusters": [
-            docsComponentsLink(
+            docsLink(
               "Create a cluster",
               "components/console/manage-clusters/create-cluster/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Rename your cluster",
               "components/console/manage-clusters/rename-cluster/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Delete your cluster",
               "components/console/manage-clusters/delete-cluster/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Manage API clients",
               "components/console/manage-clusters/manage-api-clients/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Manage alerts",
               "components/console/manage-clusters/manage-alerts/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Manage IP Whitelists",
               "components/console/manage-clusters/manage-ip-whitelists/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Manage secrets",
               "components/console/manage-clusters/manage-secrets/"
             ),
@@ -104,11 +101,11 @@ module.exports = {
 
         {
           "Manage your plan": [
-            docsComponentsLink(
+            docsLink(
               "Available plans",
               "components/console/manage-plan/available-plans/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Upgrade to a Professional Plan",
               "components/console/manage-plan/upgrade-to-professional-plan/"
             ),
@@ -117,11 +114,11 @@ module.exports = {
 
         {
           Troubleshooting: [
-            docsComponentsLink(
+            docsLink(
               "Common pitfalls",
               "components/console/console-troubleshooting/common-pitfalls/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Feedback and support",
               "components/console/console-troubleshooting/feedback-and-support/"
             ),
@@ -132,57 +129,54 @@ module.exports = {
 
     {
       Modeler: [
-        docsComponentsLink(
-          "About Modeler",
-          "components/modeler/about-modeler/"
-        ),
+        docsLink("About Modeler", "components/modeler/about-modeler/"),
 
         {
           "Web Modeler": [
-            docsComponentsLink(
+            docsLink(
               "New Web Modeler",
               "components/modeler/web-modeler/new-web-modeler/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Launch Web Modeler",
               "components/modeler/web-modeler/launch-cloud-modeler/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Model your first diagram",
               "components/modeler/web-modeler/model-your-first-diagram/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Import diagram",
               "components/modeler/web-modeler/import-diagram/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Fix problems in your diagram",
               "components/modeler/web-modeler/fix-problems-in-your-diagram/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Save and deploy your diagram",
               "components/modeler/web-modeler/save-and-deploy/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Start a new process instance",
               "components/modeler/web-modeler/start-instance/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Collaboration",
               "components/modeler/web-modeler/collaboration/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Milestones",
               "components/modeler/web-modeler/milestones/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Token simulation",
               "components/modeler/web-modeler/token-simulation/"
             ),
 
             {
               "Advanced modeling": [
-                docsComponentsLink(
+                docsLink(
                   "Call activity linking",
                   "components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
                 ),
@@ -193,42 +187,42 @@ module.exports = {
 
         {
           "Desktop Modeler": [
-            docsComponentsLink(
+            docsLink(
               "Install the Modeler",
               "components/modeler/desktop-modeler/install-the-modeler/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Model your first diagram",
               "components/modeler/desktop-modeler/model-your-first-diagram/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Deploy your first diagram",
               "components/modeler/desktop-modeler/connect-to-camunda-cloud/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Start a new process instance",
               "components/modeler/desktop-modeler/start-instance/"
             ),
 
             {
               "Element templates": [
-                docsComponentsLink(
+                docsLink(
                   "About element templates",
                   "components/modeler/desktop-modeler/element-templates/about-templates/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Configuring templates",
                   "components/modeler/desktop-modeler/element-templates/configuring-templates/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Using templates",
                   "components/modeler/desktop-modeler/element-templates/using-templates/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Defining templates",
                   "components/modeler/desktop-modeler/element-templates/defining-templates/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Additional resources",
                   "components/modeler/desktop-modeler/element-templates/additional-resources/"
                 ),
@@ -237,19 +231,16 @@ module.exports = {
 
             {
               "Additional configuration": [
-                docsComponentsLink(
-                  "Flags",
-                  "components/modeler/desktop-modeler/flags/"
-                ),
-                docsComponentsLink(
+                docsLink("Flags", "components/modeler/desktop-modeler/flags/"),
+                docsLink(
                   "Plugins",
                   "components/modeler/desktop-modeler/plugins/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Search paths",
                   "components/modeler/desktop-modeler/search-paths/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Telemetry",
                   "components/modeler/desktop-modeler/telemetry/"
                 ),
@@ -260,51 +251,33 @@ module.exports = {
 
         {
           BPMN: [
-            docsComponentsLink("BPMN in Modeler", "components/modeler/bpmn/"),
-            docsComponentsLink(
-              "BPMN primer",
-              "components/modeler/bpmn/bpmn-primer/"
-            ),
-            docsComponentsLink(
-              "BPMN coverage",
-              "components/modeler/bpmn/bpmn-coverage/"
-            ),
-            docsComponentsLink(
-              "Data flow",
-              "components/modeler/bpmn/data-flow/"
-            ),
+            docsLink("BPMN in Modeler", "components/modeler/bpmn/"),
+            docsLink("BPMN primer", "components/modeler/bpmn/bpmn-primer/"),
+            docsLink("BPMN coverage", "components/modeler/bpmn/bpmn-coverage/"),
+            docsLink("Data flow", "components/modeler/bpmn/data-flow/"),
 
             {
               Tasks: [
-                docsComponentsLink(
-                  "Overview",
-                  "components/modeler/bpmn/tasks/"
-                ),
-                docsComponentsLink(
+                docsLink("Overview", "components/modeler/bpmn/tasks/"),
+                docsLink(
                   "Service tasks",
                   "components/modeler/bpmn/service-tasks/"
                 ),
-                docsComponentsLink(
-                  "User tasks",
-                  "components/modeler/bpmn/user-tasks/"
-                ),
-                docsComponentsLink(
+                docsLink("User tasks", "components/modeler/bpmn/user-tasks/"),
+                docsLink(
                   "Receive tasks",
                   "components/modeler/bpmn/receive-tasks/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Business rule tasks",
                   "components/modeler/bpmn/business-rule-tasks/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Script tasks",
                   "components/modeler/bpmn/script-tasks/"
                 ),
-                docsComponentsLink(
-                  "Send tasks",
-                  "components/modeler/bpmn/send-tasks/"
-                ),
-                docsComponentsLink(
+                docsLink("Send tasks", "components/modeler/bpmn/send-tasks/"),
+                docsLink(
                   "Manual tasks",
                   "components/modeler/bpmn/manual-tasks/"
                 ),
@@ -313,19 +286,16 @@ module.exports = {
 
             {
               Gateways: [
-                docsComponentsLink(
-                  "Overview",
-                  "components/modeler/bpmn/gateways/"
-                ),
-                docsComponentsLink(
+                docsLink("Overview", "components/modeler/bpmn/gateways/"),
+                docsLink(
                   "Exclusive gateway",
                   "components/modeler/bpmn/exclusive-gateways/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Parallel gateway",
                   "components/modeler/bpmn/parallel-gateways/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Event-based gateway",
                   "components/modeler/bpmn/event-based-gateways/"
                 ),
@@ -334,23 +304,17 @@ module.exports = {
 
             {
               Events: [
-                docsComponentsLink(
-                  "Overview",
-                  "components/modeler/bpmn/events/"
-                ),
-                docsComponentsLink(
-                  "None events",
-                  "components/modeler/bpmn/none-events/"
-                ),
-                docsComponentsLink(
+                docsLink("Overview", "components/modeler/bpmn/events/"),
+                docsLink("None events", "components/modeler/bpmn/none-events/"),
+                docsLink(
                   "Message events",
                   "components/modeler/bpmn/message-events/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Timer events",
                   "components/modeler/bpmn/timer-events/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Error events",
                   "components/modeler/bpmn/error-events/"
                 ),
@@ -359,19 +323,16 @@ module.exports = {
 
             {
               Subprocesses: [
-                docsComponentsLink(
-                  "Overview",
-                  "components/modeler/bpmn/subprocesses/"
-                ),
-                docsComponentsLink(
+                docsLink("Overview", "components/modeler/bpmn/subprocesses/"),
+                docsLink(
                   "Embedded subprocess",
                   "components/modeler/bpmn/embedded-subprocesses/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Call activities",
                   "components/modeler/bpmn/call-activities/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Event subprocess",
                   "components/modeler/bpmn/event-subprocesses/"
                 ),
@@ -380,11 +341,8 @@ module.exports = {
 
             {
               Markers: [
-                docsComponentsLink(
-                  "Overview",
-                  "components/modeler/bpmn/markers/"
-                ),
-                docsComponentsLink(
+                docsLink("Overview", "components/modeler/bpmn/markers/"),
+                docsLink(
                   "Multi-instance",
                   "components/modeler/bpmn/multi-instance/"
                 ),
@@ -395,102 +353,90 @@ module.exports = {
 
         {
           DMN: [
-            docsComponentsLink("DMN in Modeler", "components/modeler/dmn/"),
-            docsComponentsLink(
+            docsLink("DMN in Modeler", "components/modeler/dmn/"),
+            docsLink(
               "Decision requirements graph",
               "components/modeler/dmn/decision-requirements-graph/"
             ),
 
             {
               "Decision table": [
-                docsComponentsLink(
-                  "Overview",
-                  "components/modeler/dmn/decision-table/"
-                ),
-                docsComponentsLink(
+                docsLink("Overview", "components/modeler/dmn/decision-table/"),
+                docsLink(
                   "Input",
                   "components/modeler/dmn/decision-table-input/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Output",
                   "components/modeler/dmn/decision-table-output/"
                 ),
-                docsComponentsLink(
-                  "Rule",
-                  "components/modeler/dmn/decision-table-rule/"
-                ),
-                docsComponentsLink(
+                docsLink("Rule", "components/modeler/dmn/decision-table-rule/"),
+                docsLink(
                   "Hit policy",
                   "components/modeler/dmn/decision-table-hit-policy/"
                 ),
               ],
             },
 
-            docsComponentsLink(
+            docsLink(
               "Decision literal expression",
               "components/modeler/dmn/decision-literal-expression/"
             ),
-            docsComponentsLink(
-              "Data types",
-              "components/modeler/dmn/dmn-data-types/"
-            ),
+            docsLink("Data types", "components/modeler/dmn/dmn-data-types/"),
           ],
         },
 
         {
           "FEEL expressions": [
-            docsComponentsLink(
-              "What is FEEL?",
-              "components/modeler/feel/what-is-feel/"
-            ),
-            docsComponentsLink(
+            docsLink("What is FEEL?", "components/modeler/feel/what-is-feel/"),
+            docsLink(
               "Data types",
               "components/modeler/feel/language-guide/feel-data-types/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Unary-tests",
               "components/modeler/feel/language-guide/feel-unary-tests/"
             ),
 
             {
               Expressions: [
-                docsComponentsLink(
+                docsLink(
                   "Introduction",
                   "components/modeler/feel/language-guide/feel-expressions-introduction/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Boolean expressions",
                   "components/modeler/feel/language-guide/feel-boolean-expressions/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "String expressions",
                   "components/modeler/feel/language-guide/feel-string-expressions/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Numeric expressions",
                   "components/modeler/feel/language-guide/feel-numeric-expressions/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "List expressions",
                   "components/modeler/feel/language-guide/feel-list-expressions/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Context expressions",
                   "components/modeler/feel/language-guide/feel-context-expressions/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Temporal expressions",
                   "components/modeler/feel/language-guide/feel-temporal-expressions/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Variables",
                   "components/modeler/feel/language-guide/feel-variables/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Control flow",
                   "components/modeler/feel/language-guide/feel-control-flow/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Functions",
                   "components/modeler/feel/language-guide/feel-functions/"
                 ),
@@ -499,39 +445,39 @@ module.exports = {
 
             {
               "Built-in Functions": [
-                docsComponentsLink(
+                docsLink(
                   "Introduction",
                   "components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Conversion functions",
                   "components/modeler/feel/builtin-functions/feel-built-in-functions-conversion/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Boolean functions",
                   "components/modeler/feel/builtin-functions/feel-built-in-functions-boolean/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "String functions",
                   "components/modeler/feel/builtin-functions/feel-built-in-functions-string/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Numeric functions",
                   "components/modeler/feel/builtin-functions/feel-built-in-functions-numeric/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "List functions",
                   "components/modeler/feel/builtin-functions/feel-built-in-functions-list/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Context functions",
                   "components/modeler/feel/builtin-functions/feel-built-in-functions-context/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Temporal functions",
                   "components/modeler/feel/builtin-functions/feel-built-in-functions-temporal/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Range functions",
                   "components/modeler/feel/builtin-functions/feel-built-in-functions-range/"
                 ),
@@ -542,7 +488,7 @@ module.exports = {
 
         {
           Forms: [
-            docsComponentsLink(
+            docsLink(
               "Camunda Forms reference",
               "components/modeler/forms/camunda-forms-reference/"
             ),
@@ -553,35 +499,35 @@ module.exports = {
 
     {
       Zeebe: [
-        docsComponentsLink("Introduction", "components/zeebe/zeebe-overview/"),
+        docsLink("Introduction", "components/zeebe/zeebe-overview/"),
 
         {
           "Technical concepts": [
-            docsComponentsLink(
+            docsLink(
               "Overview",
               "components/zeebe/technical-concepts/technical-concepts-overview/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Architecture",
               "components/zeebe/technical-concepts/architecture/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Clustering",
               "components/zeebe/technical-concepts/clustering/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Partitions",
               "components/zeebe/technical-concepts/partitions/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Internal processing",
               "components/zeebe/technical-concepts/internal-processing/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Process lifecycles",
               "components/zeebe/technical-concepts/process-lifecycles/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Protocols",
               "components/zeebe/technical-concepts/protocols/"
             ),
@@ -590,11 +536,11 @@ module.exports = {
 
         {
           "Open source community": [
-            docsComponentsLink(
+            docsLink(
               "Community contributions",
               "components/zeebe/open-source/community-contributions/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Get help and get involved",
               "components/zeebe/open-source/get-help-get-involved/"
             ),
@@ -605,30 +551,27 @@ module.exports = {
 
     {
       Operate: [
-        docsComponentsLink(
-          "Introduction",
-          "components/operate/operate-introduction/"
-        ),
+        docsLink("Introduction", "components/operate/operate-introduction/"),
 
         {
           "User guide": [
-            docsComponentsLink(
+            docsLink(
               "Getting familiar with Operate",
               "components/operate/userguide/basic-operate-navigation/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Variables and incidents",
               "components/operate/userguide/resolve-incidents-update-variables/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Selections and operations",
               "components/operate/userguide/selections-operations/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Delete finished instances",
               "components/operate/userguide/delete-finished-instances/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Giving feedback and asking questions",
               "components/operate/userguide/operate-feedback-and-questions/"
             ),
@@ -718,18 +661,18 @@ module.exports = {
 
     {
       Tasklist: [
-        docsComponentsLink(
+        docsLink(
           "Introduction",
           "components/tasklist/introduction-to-tasklist/"
         ),
 
         {
           "User guide": [
-            docsComponentsLink(
+            docsLink(
               "Overview and example use case",
               "components/tasklist/userguide/using-tasklist/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Updating Tasklist",
               "components/tasklist/userguide/updating-tasklist-cloud/"
             ),
@@ -740,33 +683,33 @@ module.exports = {
 
     {
       "Integration Framework": [
-        docsComponentsLink(
+        docsLink(
           "Introduction",
           "components/integration-framework/introduction-to-connectors/"
         ),
 
         {
           Connectors: [
-            docsComponentsLink(
+            docsLink(
               "Use Connectors",
               "components/integration-framework/connectors/use-connectors/"
             ),
 
             {
               "Out-of-the-box Connectors": [
-                docsComponentsLink(
+                docsLink(
                   "Overview",
                   "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "REST Connector",
                   "components/integration-framework/connectors/out-of-the-box-connectors/rest/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "SendGrid Connector",
                   "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Slack Connector",
                   "components/integration-framework/connectors/out-of-the-box-connectors/slack/"
                 ),
@@ -775,11 +718,11 @@ module.exports = {
 
             {
               "Custom-built Connectors": [
-                docsComponentsLink(
+                docsLink(
                   "Connector templates",
                   "components/integration-framework/connectors/custom-built-connectors/connector-templates/"
                 ),
-                docsComponentsLink(
+                docsLink(
                   "Connector SDK",
                   "components/integration-framework/connectors/custom-built-connectors/connector-sdk/"
                 ),
@@ -792,18 +735,18 @@ module.exports = {
 
     {
       "Best Practices": [
-        docsComponentsLink(
+        docsLink(
           "Overview",
           "components/best-practices/best-practices-overview/"
         ),
 
         {
           "Project management": [
-            docsComponentsLink(
+            docsLink(
               "Following the customer success path",
               "components/best-practices/management/following-the-customer-success-path/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Doing a proper POC",
               "components/best-practices/management/doing-a-proper-poc/"
             ),
@@ -812,15 +755,15 @@ module.exports = {
 
         {
           Architecture: [
-            docsComponentsLink(
+            docsLink(
               "Deciding about your stack",
               "components/best-practices/architecture/deciding-about-your-stack/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Sizing your environment",
               "components/best-practices/architecture/sizing-your-environment/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Understanding human task management",
               "components/best-practices/architecture/understanding-human-tasks-management/"
             ),
@@ -829,31 +772,31 @@ module.exports = {
 
         {
           Development: [
-            docsComponentsLink(
+            docsLink(
               "Connecting the workflow engine with your world",
               "components/best-practices/development/connecting-the-workflow-engine-with-your-world/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Service integration patterns with BPMN",
               "components/best-practices/development/service-integration-patterns/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Writing good workers",
               "components/best-practices/development/writing-good-workers/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Dealing with problems and exceptions",
               "components/best-practices/development/dealing-with-problems-and-exceptions/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Handling data in processes",
               "components/best-practices/development/handling-data-in-processes/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Routing events to processes",
               "components/best-practices/development/routing-events-to-processes/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Testing process definitions",
               "components/best-practices/development/testing-process-definitions/"
             ),
@@ -862,31 +805,31 @@ module.exports = {
 
         {
           Modeling: [
-            docsComponentsLink(
+            docsLink(
               "Creating readable process models",
               "components/best-practices/modeling/creating-readable-process-models/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Naming BPMN elements",
               "components/best-practices/modeling/naming-bpmn-elements/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Naming technically relevant IDs",
               "components/best-practices/modeling/naming-technically-relevant-ids/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Modeling beyond the happy path",
               "components/best-practices/modeling/modeling-beyond-the-happy-path/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Modeling with situation patterns",
               "components/best-practices/modeling/modeling-with-situation-patterns/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Building flexibility into BPMN models",
               "components/best-practices/modeling/building-flexibility-into-bpmn-models/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Choosing the DMN hit policy",
               "components/best-practices/modeling/choosing-the-dmn-hit-policy/"
             ),
@@ -895,11 +838,11 @@ module.exports = {
 
         {
           Operations: [
-            docsComponentsLink(
+            docsLink(
               "Versioning process definitions",
               "components/best-practices/operations/versioning-process-definitions/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Reporting about processes",
               "components/best-practices/operations/reporting-about-processes/"
             ),
@@ -908,35 +851,35 @@ module.exports = {
 
         {
           "Camunda 7 specific": [
-            docsComponentsLink(
+            docsLink(
               "Deciding about your Camunda 7 stack",
               "components/best-practices/architecture/deciding-about-your-stack-c7/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Sizing your Camunda 7 environment",
               "components/best-practices/architecture/sizing-your-environment-c7/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Invoking services from a Camunda 7 process",
               "components/best-practices/development/invoking-services-from-the-process-c7/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Understanding Camunda 7 transaction handling",
               "components/best-practices/development/understanding-transaction-handling-c7/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Operating Camunda 7",
               "components/best-practices/operations/operating-camunda-c7/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Performance tuning Camunda 7",
               "components/best-practices/operations/performance-tuning-camunda-c7/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Securing Camunda 7",
               "components/best-practices/operations/securing-camunda-c7/"
             ),
-            docsComponentsLink(
+            docsLink(
               "Extending human task management in Camunda 7",
               "components/best-practices/architecture/extending-human-task-management-c7/"
             ),
