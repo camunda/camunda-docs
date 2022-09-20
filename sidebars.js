@@ -477,35 +477,82 @@ module.exports = {
         "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/console-api-reference",
+
         {
           "Optimize API (REST)": [
-            "apis-clients/optimize-api/optimize-api-authorization",
+            optimizeLink(
+              "Authorization",
+              "apis-clients/optimize-api/optimize-api-authorization/"
+            ),
             {
               Configuration: [
-                "apis-clients/optimize-api/configuration/enable-sharing",
-                "apis-clients/optimize-api/configuration/disable-sharing",
+                optimizeLink(
+                  "Enable sharing",
+                  "apis-clients/optimize-api/configuration/enable-sharing/"
+                ),
+                optimizeLink(
+                  "Disable sharing",
+                  "apis-clients/optimize-api/configuration/disable-sharing/"
+                ),
               ],
             },
             {
               Dashboard: [
-                "apis-clients/optimize-api/dashboard/get-dashboard-ids",
-                "apis-clients/optimize-api/dashboard/delete-dashboard",
-                "apis-clients/optimize-api/dashboard/export-dashboard-definitions",
+                optimizeLink(
+                  "Get dashboard IDs",
+                  "apis-clients/optimize-api/dashboard/get-dashboard-ids/"
+                ),
+                optimizeLink(
+                  "Delete dashboards",
+                  "apis-clients/optimize-api/dashboard/delete-dashboard/"
+                ),
+                optimizeLink(
+                  "Export dashboard definitions",
+                  "apis-clients/optimize-api/dashboard/export-dashboard-definitions/"
+                ),
               ],
             },
             {
               Report: [
-                "apis-clients/optimize-api/report/get-report-ids",
-                "apis-clients/optimize-api/report/delete-report",
-                "apis-clients/optimize-api/report/export-report-definitions",
-                "apis-clients/optimize-api/report/get-data-export",
+                optimizeLink(
+                  "Get report IDs",
+                  "apis-clients/optimize-api/report/get-report-ids/"
+                ),
+                optimizeLink(
+                  "Delete reports",
+                  "apis-clients/optimize-api/report/delete-report/"
+                ),
+                optimizeLink(
+                  "Export report definitions",
+                  "apis-clients/optimize-api/report/export-report-definitions/"
+                ),
+                optimizeLink(
+                  "Export report result data",
+                  "apis-clients/optimize-api/report/get-data-export/"
+                ),
               ],
             },
-            "apis-clients/optimize-api/event-ingestion",
-            "apis-clients/optimize-api/external-variable-ingestion",
-            "apis-clients/optimize-api/health-readiness",
-            "apis-clients/optimize-api/import-entities",
-            "apis-clients/optimize-api/variable-labeling",
+
+            optimizeLink(
+              "Event ingestion",
+              "apis-clients/optimize-api/event-ingestion/"
+            ),
+            optimizeLink(
+              "External variable ingestion",
+              "apis-clients/optimize-api/external-variable-ingestion/"
+            ),
+            optimizeLink(
+              "Health readiness",
+              "apis-clients/optimize-api/health-readiness/"
+            ),
+            optimizeLink(
+              "Import entities",
+              "apis-clients/optimize-api/import-entities/"
+            ),
+            optimizeLink(
+              "Variable labeling",
+              "apis-clients/optimize-api/variable-labeling/"
+            ),
           ],
         },
       ],
