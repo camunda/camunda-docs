@@ -854,69 +854,69 @@
 
     {
       "Optimize": [
-        "what-is-optimize",
+        "components/what-is-optimize",
         {
           "User guide": [
-            "userguide/collections-dashboards-reports",
-            "userguide/data-sources",
+            "components/userguide/collections-dashboards-reports",
+            "components/userguide/data-sources",
             {
               "Dashboards": [
-                "userguide/creating-dashboards",
-                "userguide/edit-mode",
-                "userguide/view-mode"
+                "components/userguide/creating-dashboards",
+                "components/userguide/edit-mode",
+                "components/userguide/view-mode"
               ]
             },
-            "userguide/creating-reports",
-            "userguide/combined-process-reports",
-            "userguide/processes",
+            "components/userguide/creating-reports",
+            "components/userguide/combined-process-reports",
+            "components/userguide/processes",
             {
               "Process analysis": [
-                "userguide/process-analysis/process-analysis-overview",
-                "userguide/process-analysis/outlier-analysis",
-                "userguide/process-analysis/branch-analysis",
+                "components/userguide/process-analysis/process-analysis-overview",
+                "components/userguide/process-analysis/outlier-analysis",
+                "components/userguide/process-analysis/branch-analysis",
                 {
                   "Report analysis": [
-                    "userguide/process-analysis/report-analysis/overview",
+                    "components/userguide/process-analysis/report-analysis/overview",
                     {
                       "Edit mode": [
-                        "userguide/process-analysis/report-analysis/edit-mode",
-                        "userguide/process-analysis/report-analysis/select-process-definitions",
-                        "userguide/process-analysis/report-analysis/define-reports",
-                        "userguide/process-analysis/report-analysis/measures",
-                        "userguide/process-analysis/report-analysis/compare-target-values",
-                        "userguide/process-analysis/report-analysis/process-instance-parts",
-                        "userguide/process-analysis/report-analysis/configure-reports"
+                        "components/userguide/process-analysis/report-analysis/edit-mode",
+                        "components/userguide/process-analysis/report-analysis/select-process-definitions",
+                        "components/userguide/process-analysis/report-analysis/define-reports",
+                        "components/userguide/process-analysis/report-analysis/measures",
+                        "components/userguide/process-analysis/report-analysis/compare-target-values",
+                        "components/userguide/process-analysis/report-analysis/process-instance-parts",
+                        "components/userguide/process-analysis/report-analysis/configure-reports"
                       ]
                     },
-                    "userguide/process-analysis/report-analysis/view-mode"
+                    "components/userguide/process-analysis/report-analysis/view-mode"
                   ]
                 },
                 {
                   "Filters": [
-                    "userguide/process-analysis/filters",
-                    "userguide/process-analysis/metadata-filters",
-                    "userguide/process-analysis/instance-state-filters",
-                    "userguide/process-analysis/flow-node-filters",
-                    "userguide/process-analysis/process-instance-filters",
-                    "userguide/process-analysis/variable-filters"
+                    "components/userguide/process-analysis/filters",
+                    "components/userguide/process-analysis/metadata-filters",
+                    "components/userguide/process-analysis/instance-state-filters",
+                    "components/userguide/process-analysis/flow-node-filters",
+                    "components/userguide/process-analysis/process-instance-filters",
+                    "components/userguide/process-analysis/variable-filters"
                   ]
                 }
               ]
             },
             {
               "Decision analysis": [
-                "userguide/decision-analysis/decision-analysis-overview",
-                "userguide/decision-analysis/decision-report",
-                "userguide/decision-analysis/decision-filter"
+                "components/userguide/decision-analysis/decision-analysis-overview",
+                "components/userguide/decision-analysis/decision-report",
+                "components/userguide/decision-analysis/decision-filter"
               ]
             },
             {
               "Additional features": [
-                "userguide/additional-features/alerts",
-                "userguide/additional-features/event-based-processes",
-                "userguide/additional-features/export-import",
-                "userguide/additional-features/footer",
-                "userguide/additional-features/variable-labeling"
+                "components/userguide/additional-features/alerts",
+                "components/userguide/additional-features/event-based-processes",
+                "components/userguide/additional-features/export-import",
+                "components/userguide/additional-features/footer",
+                "components/userguide/additional-features/variable-labeling"
               ]
             }
           ]

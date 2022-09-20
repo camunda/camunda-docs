@@ -294,121 +294,121 @@
         {
           "type": "link",
           "label": "What is Optimize?",
-          "href": "/optimize/what-is-optimize"
+          "href": "/optimize/components/what-is-optimize"
         },
         {
           "User guide": [
             {
               "type": "link",
               "label": "Collections, dashboards, and reports",
-              "href": "/optimize/userguide/collections-dashboards-reports/"
+              "href": "/optimize/components/userguide/collections-dashboards-reports/"
             },
             {
               "type": "link",
               "label": "Data sources",
-              "href": "/optimize/userguide/data-sources/"
+              "href": "/optimize/components/userguide/data-sources/"
             },
             {
               "Dashboards": [
                 {
                   "type": "link",
                   "label": "Creating dashboards",
-                  "href": "/optimize/userguide/creating-dashboards/"
+                  "href": "/optimize/components/userguide/creating-dashboards/"
                 },
                 {
                   "type": "link",
                   "label": "Edit mode",
-                  "href": "/optimize/userguide/edit-mode/"
+                  "href": "/optimize/components/userguide/edit-mode/"
                 },
                 {
                   "type": "link",
                   "label": "View mode",
-                  "href": "/optimize/userguide/view-mode/"
+                  "href": "/optimize/components/userguide/view-mode/"
                 }
               ]
             },
             {
               "type": "link",
               "label": "Creating reports",
-              "href": "/optimize/userguide/creating-reports/"
+              "href": "/optimize/components/userguide/creating-reports/"
             },
             {
               "type": "link",
               "label": "Combined process reports",
-              "href": "/optimize/userguide/combined-process-reports/"
+              "href": "/optimize/components/userguide/combined-process-reports/"
             },
             {
               "type": "link",
               "label": "Processes",
-              "href": "/optimize/userguide/processes/"
+              "href": "/optimize/components/userguide/processes/"
             },
             {
               "Process analysis": [
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/optimize/userguide/process-analysis/process-analysis-overview/"
+                  "href": "/optimize/components/userguide/process-analysis/process-analysis-overview/"
                 },
                 {
                   "type": "link",
                   "label": "Outlier analysis",
-                  "href": "/optimize/userguide/process-analysis/outlier-analysis/"
+                  "href": "/optimize/components/userguide/process-analysis/outlier-analysis/"
                 },
                 {
                   "type": "link",
                   "label": "Branch analysis",
-                  "href": "/optimize/userguide/process-analysis/branch-analysis/"
+                  "href": "/optimize/components/userguide/process-analysis/branch-analysis/"
                 },
                 {
                   "Report analysis": [
                     {
                       "type": "link",
                       "label": "Report process analysis",
-                      "href": "/optimize/userguide/process-analysis/report-analysis/overview/"
+                      "href": "/optimize/components/userguide/process-analysis/report-analysis/overview/"
                     },
                     {
                       "Edit mode": [
                         {
                           "type": "link",
                           "label": "Overview",
-                          "href": "/optimize/userguide/process-analysis/report-analysis/edit-mode/"
+                          "href": "/optimize/components/userguide/process-analysis/report-analysis/edit-mode/"
                         },
                         {
                           "type": "link",
                           "label": "Select process definitions",
-                          "href": "/optimize/userguide/process-analysis/report-analysis/select-process-definitions/"
+                          "href": "/optimize/components/userguide/process-analysis/report-analysis/select-process-definitions/"
                         },
                         {
                           "type": "link",
                           "label": "Define reports",
-                          "href": "/optimize/userguide/process-analysis/report-analysis/define-reports/"
+                          "href": "/optimize/components/userguide/process-analysis/report-analysis/define-reports/"
                         },
                         {
                           "type": "link",
                           "label": "Measures",
-                          "href": "/optimize/userguide/process-analysis/report-analysis/measures/"
+                          "href": "/optimize/components/userguide/process-analysis/report-analysis/measures/"
                         },
                         {
                           "type": "link",
                           "label": "Compare target values",
-                          "href": "/optimize/userguide/process-analysis/report-analysis/compare-target-values/"
+                          "href": "/optimize/components/userguide/process-analysis/report-analysis/compare-target-values/"
                         },
                         {
                           "type": "link",
                           "label": "Process instance parts",
-                          "href": "/optimize/userguide/process-analysis/report-analysis/process-instance-parts/"
+                          "href": "/optimize/components/userguide/process-analysis/report-analysis/process-instance-parts/"
                         },
                         {
                           "type": "link",
                           "label": "Configure reports",
-                          "href": "/optimize/userguide/process-analysis/report-analysis/configure-reports/"
+                          "href": "/optimize/components/userguide/process-analysis/report-analysis/configure-reports/"
                         }
                       ]
                     },
                     {
                       "type": "link",
                       "label": "View mode",
-                      "href": "/optimize/userguide/process-analysis/report-analysis/view-mode/"
+                      "href": "/optimize/components/userguide/process-analysis/report-analysis/view-mode/"
                     }
                   ]
                 },
@@ -417,32 +417,32 @@
                     {
                       "type": "link",
                       "label": "Overview",
-                      "href": "/optimize/userguide/process-analysis/filters/"
+                      "href": "/optimize/components/userguide/process-analysis/filters/"
                     },
                     {
                       "type": "link",
                       "label": "Metadata filters",
-                      "href": "/optimize/userguide/process-analysis/metadata-filters/"
+                      "href": "/optimize/components/userguide/process-analysis/metadata-filters/"
                     },
                     {
                       "type": "link",
                       "label": "Instance state filters",
-                      "href": "/optimize/userguide/process-analysis/instance-state-filters/"
+                      "href": "/optimize/components/userguide/process-analysis/instance-state-filters/"
                     },
                     {
                       "type": "link",
                       "label": "Flow node filters",
-                      "href": "/optimize/userguide/process-analysis/flow-node-filters/"
+                      "href": "/optimize/components/userguide/process-analysis/flow-node-filters/"
                     },
                     {
                       "type": "link",
                       "label": "Process instance filters",
-                      "href": "/optimize/userguide/process-analysis/process-instance-filters/"
+                      "href": "/optimize/components/userguide/process-analysis/process-instance-filters/"
                     },
                     {
                       "type": "link",
                       "label": "Variable filters",
-                      "href": "/optimize/userguide/process-analysis/variable-filters/"
+                      "href": "/optimize/components/userguide/process-analysis/variable-filters/"
                     }
                   ]
                 }
@@ -453,17 +453,17 @@
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/optimize/userguide/decision-analysis/decision-analysis-overview/"
+                  "href": "/optimize/components/userguide/decision-analysis/decision-analysis-overview/"
                 },
                 {
                   "type": "link",
                   "label": "Single report",
-                  "href": "/optimize/userguide/decision-analysis/decision-report/"
+                  "href": "/optimize/components/userguide/decision-analysis/decision-report/"
                 },
                 {
                   "type": "link",
                   "label": "Filters",
-                  "href": "/optimize/userguide/decision-analysis/decision-filter/"
+                  "href": "/optimize/components/userguide/decision-analysis/decision-filter/"
                 }
               ]
             },
@@ -472,27 +472,27 @@
                 {
                   "type": "link",
                   "label": "Alerts",
-                  "href": "/optimize/userguide/additional-features/alerts/"
+                  "href": "/optimize/components/userguide/additional-features/alerts/"
                 },
                 {
                   "type": "link",
                   "label": "Event-based processes",
-                  "href": "/optimize/userguide/additional-features/event-based-processes/"
+                  "href": "/optimize/components/userguide/additional-features/event-based-processes/"
                 },
                 {
                   "type": "link",
                   "label": "Export and import",
-                  "href": "/optimize/userguide/additional-features/export-import/"
+                  "href": "/optimize/components/userguide/additional-features/export-import/"
                 },
                 {
                   "type": "link",
                   "label": "Footer",
-                  "href": "/optimize/userguide/additional-features/footer/"
+                  "href": "/optimize/components/userguide/additional-features/footer/"
                 },
                 {
                   "type": "link",
                   "label": "Variable labeling",
-                  "href": "/optimize/userguide/additional-features/variable-labeling/"
+                  "href": "/optimize/components/userguide/additional-features/variable-labeling/"
                 }
               ]
             }
