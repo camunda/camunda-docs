@@ -6,7 +6,7 @@ description: "Camunda Platform 8 Self-Managed combined and separated Ingress set
 
 Camunda Platform 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:
 
-1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda Platform 8 web applications using a single domain (each application has a sub-path e.g. `camunda.example.com/operate`,) and another which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
+1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda Platform 8 web applications using a single domain. Each application has a sub-path e.g. `camunda.example.com/operate`, and `camunda.example.com/optimize` and another Ingress which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
 2. **Separated setup:** In this setup, each component has its own Ingress/host e.g. `operate.camunda.example.com`, `optimize.camunda.example.com`, `zeebe.camunda.example.com`, etc.
 
 There are no significant differences between the two setups. Rather, they both offer flexibility for different workflows.
@@ -68,7 +68,7 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using the custom values file, [deploy Camunda Platform 8 as usual](/self-managed/platform-deployment/helm-kubernetes/deployment.md):
+Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deployment.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
@@ -147,7 +147,7 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using the custom values file, [deploy Camunda Platform 8 as usual](/self-managed/platform-deployment/helm-kubernetes/deployment.md):
+Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deployment.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
@@ -161,4 +161,4 @@ Once deployed, you can access the Camunda Platform 8 components on:
 
 ## Troubleshooting
 
-If something is not working as expected, check the guide for [general deployment troubleshooting](/self-managed/platform-deployment/troubleshooting.md).
+If something is not working as expected, check the guide for [general deployment troubleshooting](../../troubleshooting.md).
