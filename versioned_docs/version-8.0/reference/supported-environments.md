@@ -62,11 +62,11 @@ _Note: You can use newer Modeler versions with older Zeebe versions too._
 
 ## Camunda Platform 7 & Optimize Version Matrix
 
-| Improve        | Automate                                   | Java version              |
-| -------------- | ------------------------------------------ | ------------------------- |
-| Optimize 3.3.x | Camunda Platform 7.12.11+, 7.13.5+, 7.14.x | OpenJDK 8+ or OpenJDK 11+ |
-| Optimize 3.4.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 8+ or OpenJDK 11+ |
-| Optimize 3.5.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 11+               |
-| Optimize 3.6.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               |
-| Optimize 3.7.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               |
-| Optimize 3.8.x | Camunda Platform 7.15.x, 7.16.x, 7.17.x    | OpenJDK 11+               |
+| Improve        | Automate                                   | Java version              | Elasticsearch version                                                         |
+| -------------- | ------------------------------------------ | ------------------------- | ----------------------------------------------------------------------------- |
+| Optimize 3.3.x | Camunda Platform 7.12.11+, 7.13.5+, 7.14.x | OpenJDK 8+ or OpenJDK 11+ | 7.3.0+, 7.4.0+, 7.5.0+, 7.6.0+, 7.7.0+, 7.8.0+, 7.9.0+, 7.10.0+               |
+| Optimize 3.4.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 8+ or OpenJDK 11+ | 7.5.1+, 7.6.0+, 7.7.0+, 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+                      |
+| Optimize 3.5.x | Camunda Platform 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+                            |
+| Optimize 3.6.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+          |
+| Optimize 3.7.x | Camunda Platform 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+ |
+| Optimize 3.8.x | Camunda Platform 7.15.x, 7.16.x, 7.17.x    | OpenJDK 11+               | 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+        |
