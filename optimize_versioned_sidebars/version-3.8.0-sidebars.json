@@ -1133,5 +1133,875 @@
         }
       ]
     }
+  ],
+
+  "APIs & Clients": [
+    {
+      "type": "link",
+      "label": "Working with APIs & Clients",
+      "href": "/docs/apis-clients/working-with-apis-clients/"
+    },
+    {
+      "APIs": [
+        {
+          "type": "link",
+          "label": "Public API",
+          "href": "/docs/apis-clients/public-api/"
+        },
+        {
+          "type": "link",
+          "label": "Zeebe API (gRPC)",
+          "href": "/docs/apis-clients/grpc/"
+        },
+        {
+          "type": "link",
+          "label": "Operate API (REST)",
+          "href": "/docs/apis-clients/operate-api/"
+        },
+        {
+          "Tasklist API (GraphQL)": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/apis-clients/tasklist-api/tasklist-api-overview/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/apis-clients/tasklist-api/tasklist-api-tutorial/"
+            },
+            {
+              "type": "link",
+              "label": "Schema Documentation",
+              "href": "/docs/apis-clients/tasklist-api/"
+            },
+            {
+              "Directives": [
+                {
+                  "type": "link",
+                  "label": "deprecated",
+                  "href": "/docs/apis-clients/tasklist-api/directives/deprecated/"
+                },
+                {
+                  "type": "link",
+                  "label": "include",
+                  "href": "/docs/apis-clients/tasklist-api/directives/include/"
+                },
+                {
+                  "type": "link",
+                  "label": "skip",
+                  "href": "/docs/apis-clients/tasklist-api/directives/skip/"
+                },
+                {
+                  "type": "link",
+                  "label": "specifiedBy",
+                  "href": "/docs/apis-clients/tasklist-api/directives/specified-by/"
+                }
+              ]
+            },
+            {
+              "Enums": [
+                {
+                  "type": "link",
+                  "label": "TaskState",
+                  "href": "/docs/apis-clients/tasklist-api/enums/task-state/"
+                }
+              ]
+            },
+            {
+              "Inputs": [
+                {
+                  "type": "link",
+                  "label": "TaskQuery",
+                  "href": "/docs/apis-clients/tasklist-api/inputs/task-query/"
+                },
+                {
+                  "type": "link",
+                  "label": "VariableInput",
+                  "href": "/docs/apis-clients/tasklist-api/inputs/variable-input/"
+                }
+              ]
+            },
+            {
+              "Mutations": [
+                {
+                  "type": "link",
+                  "label": "claimTask",
+                  "href": "/docs/apis-clients/tasklist-api/mutations/claim-task/"
+                },
+                {
+                  "type": "link",
+                  "label": "completeTask",
+                  "href": "/docs/apis-clients/tasklist-api/mutations/complete-task/"
+                },
+                {
+                  "type": "link",
+                  "label": "deleteProcessInstance",
+                  "href": "/docs/apis-clients/tasklist-api/mutations/delete-process-instance/"
+                },
+                {
+                  "type": "link",
+                  "label": "unclaimTask",
+                  "href": "/docs/apis-clients/tasklist-api/mutations/unclaim-task/"
+                }
+              ]
+            },
+            {
+              "Objects": [
+                {
+                  "type": "link",
+                  "label": "Form",
+                  "href": "/docs/apis-clients/tasklist-api/objects/form/"
+                },
+                {
+                  "type": "link",
+                  "label": "Task",
+                  "href": "/docs/apis-clients/tasklist-api/objects/task/"
+                },
+                {
+                  "type": "link",
+                  "label": "User",
+                  "href": "/docs/apis-clients/tasklist-api/objects/user/"
+                },
+                {
+                  "type": "link",
+                  "label": "Variable",
+                  "href": "/docs/apis-clients/tasklist-api/objects/variable/"
+                }
+              ]
+            },
+            {
+              "Queries": [
+                {
+                  "type": "link",
+                  "label": "currentUser",
+                  "href": "/docs/apis-clients/tasklist-api/queries/current-user/"
+                },
+                {
+                  "type": "link",
+                  "label": "form",
+                  "href": "/docs/apis-clients/tasklist-api/queries/form/"
+                },
+                {
+                  "type": "link",
+                  "label": "task",
+                  "href": "/docs/apis-clients/tasklist-api/queries/task/"
+                },
+                {
+                  "type": "link",
+                  "label": "tasks",
+                  "href": "/docs/apis-clients/tasklist-api/queries/tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "variable",
+                  "href": "/docs/apis-clients/tasklist-api/queries/variable/"
+                },
+                {
+                  "type": "link",
+                  "label": "variables",
+                  "href": "/docs/apis-clients/tasklist-api/queries/variables/"
+                }
+              ]
+            },
+            {
+              "Scalars": [
+                {
+                  "type": "link",
+                  "label": "Boolean",
+                  "href": "/docs/apis-clients/tasklist-api/scalars/boolean/"
+                },
+                {
+                  "type": "link",
+                  "label": "ID",
+                  "href": "/docs/apis-clients/tasklist-api/scalars/id/"
+                },
+                {
+                  "type": "link",
+                  "label": "Int",
+                  "href": "/docs/apis-clients/tasklist-api/scalars/int/"
+                },
+                {
+                  "type": "link",
+                  "label": "String",
+                  "href": "/docs/apis-clients/tasklist-api/scalars/string/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Console API clients (REST)",
+          "href": "/docs/apis-clients/console-api-reference/"
+        },
+
+        {
+          "Optimize API (REST)": [
+            "apis-clients/optimize-api/optimize-api-authorization",
+            {
+              "Configuration": [
+                "apis-clients/optimize-api/configuration/enable-sharing",
+                "apis-clients/optimize-api/configuration/disable-sharing"
+              ]
+            },
+            {
+              "Dashboard": [
+                "apis-clients/optimize-api/dashboard/get-dashboard-ids",
+                "apis-clients/optimize-api/dashboard/delete-dashboard",
+                "apis-clients/optimize-api/dashboard/export-dashboard-definitions"
+              ]
+            },
+            {
+              "Report": [
+                "apis-clients/optimize-api/report/get-report-ids",
+                "apis-clients/optimize-api/report/delete-report",
+                "apis-clients/optimize-api/report/export-report-definitions",
+                "apis-clients/optimize-api/report/get-data-export"
+              ]
+            },
+            "apis-clients/optimize-api/event-ingestion",
+            "apis-clients/optimize-api/external-variable-ingestion",
+            "apis-clients/optimize-api/health-readiness",
+            "apis-clients/optimize-api/import-entities",
+            "apis-clients/optimize-api/variable-labeling"
+          ]
+        }
+      ]
+    },
+    {
+      "Clients": [
+        {
+          "Java client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-clients/java-client/"
+            },
+            {
+              "type": "link",
+              "label": "Job worker",
+              "href": "/docs/apis-clients/java-client/job-worker/"
+            },
+            {
+              "type": "link",
+              "label": "Logging",
+              "href": "/docs/apis-clients/java-client/logging/"
+            },
+            {
+              "type": "link",
+              "label": "Zeebe Process Test",
+              "href": "/docs/apis-clients/java-client/zeebe-process-test/"
+            },
+            {
+              "Examples": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/apis-clients/java-client-examples/"
+                },
+                {
+                  "type": "link",
+                  "label": "Deploy a process",
+                  "href": "/docs/apis-clients/java-client-examples/process-deploy/"
+                },
+                {
+                  "type": "link",
+                  "label": "Create a process instance",
+                  "href": "/docs/apis-clients/java-client-examples/process-instance-create/"
+                },
+                {
+                  "type": "link",
+                  "label": "Create non-blocking process instances",
+                  "href": "/docs/apis-clients/java-client-examples/process-instance-create-nonblocking/"
+                },
+                {
+                  "type": "link",
+                  "label": "Create a process instance with results",
+                  "href": "/docs/apis-clients/java-client-examples/process-instance-create-with-result/"
+                },
+                {
+                  "type": "link",
+                  "label": "Open a job worker",
+                  "href": "/docs/apis-clients/java-client-examples/job-worker-open/"
+                },
+                {
+                  "type": "link",
+                  "label": "Handle variables as POJO",
+                  "href": "/docs/apis-clients/java-client-examples/data-pojo/"
+                },
+                {
+                  "type": "link",
+                  "label": "Request cluster topology",
+                  "href": "/docs/apis-clients/java-client-examples/cluster-topology-request/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Go client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-clients/go-client/"
+            },
+            {
+              "type": "link",
+              "label": "Getting started with the Go client",
+              "href": "/docs/apis-clients/go-client/go-get-started/"
+            }
+          ]
+        },
+        {
+          "CLI client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-clients/cli-client/"
+            },
+            {
+              "type": "link",
+              "label": "Getting started with the CLI client",
+              "href": "/docs/apis-clients/cli-client/cli-get-started/"
+            }
+          ]
+        },
+        {
+          "Community clients": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/apis-clients/community-clients/"
+            },
+            {
+              "type": "link",
+              "label": "C#",
+              "href": "/docs/apis-clients/community-clients/c-sharp/"
+            },
+            {
+              "type": "link",
+              "label": "JavaScript/NodeJS",
+              "href": "/docs/apis-clients/community-clients/javascript/"
+            },
+            {
+              "type": "link",
+              "label": "Micronaut",
+              "href": "/docs/apis-clients/community-clients/micronaut/"
+            },
+            {
+              "type": "link",
+              "label": "Python",
+              "href": "/docs/apis-clients/community-clients/python/"
+            },
+            {
+              "type": "link",
+              "label": "Ruby",
+              "href": "/docs/apis-clients/community-clients/ruby/"
+            },
+            {
+              "type": "link",
+              "label": "Rust",
+              "href": "/docs/apis-clients/community-clients/rust/"
+            },
+            {
+              "type": "link",
+              "label": "Spring",
+              "href": "/docs/apis-clients/community-clients/spring/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Build your own client",
+          "href": "/docs/apis-clients/build-your-own-client/"
+        }
+      ]
+    }
+  ],
+
+  "Self-Managed": [
+    {
+      "type": "link",
+      "label": "Camunda Platform 8 Self-Managed",
+      "href": "/docs/self-managed/about-self-managed/"
+    },
+    {
+      "Installation": [
+        {
+          "type": "link",
+          "label": "Deployment",
+          "href": "/docs/self-managed/platform-deployment/platform-8-deployment/"
+        },
+        {
+          "Kubernetes": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/platform-deployment/kubernetes/"
+            },
+            {
+              "type": "link",
+              "label": "Camunda Helm charts",
+              "href": "/docs/self-managed/platform-deployment/kubernetes-helm/"
+            }
+          ]
+        },
+        {
+          "OpenShift": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/platform-deployment/openshift/"
+            },
+            {
+              "type": "link",
+              "label": "Camunda Helm charts",
+              "href": "/docs/self-managed/platform-deployment/openshift-helm/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Docker",
+          "href": "/docs/self-managed/platform-deployment/docker/"
+        },
+        {
+          "type": "link",
+          "label": "Local",
+          "href": "/docs/self-managed/platform-deployment/local/"
+        },
+        {
+          "type": "link",
+          "label": "Known limitations",
+          "href": "/docs/self-managed/platform-deployment/known-limitations/"
+        }
+      ]
+    },
+    {
+      "Concepts": [
+        {
+          "Access control": [
+            {
+              "type": "link",
+              "label": "Applications",
+              "href": "/docs/self-managed/concepts/access-control/applications/"
+            },
+            {
+              "type": "link",
+              "label": "APIs",
+              "href": "/docs/self-managed/concepts/access-control/apis/"
+            },
+            {
+              "type": "link",
+              "label": "Permissions",
+              "href": "/docs/self-managed/concepts/access-control/permissions/"
+            },
+            {
+              "type": "link",
+              "label": "Roles",
+              "href": "/docs/self-managed/concepts/access-control/roles/"
+            },
+            {
+              "type": "link",
+              "label": "Users",
+              "href": "/docs/self-managed/concepts/access-control/users/"
+            }
+          ]
+        },
+        {
+          "Authentication": [
+            {
+              "type": "link",
+              "label": "Machine-to-machine (M2M) tokens",
+              "href": "/docs/self-managed/concepts/authentication/m2m-tokens/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Exporters",
+          "href": "/docs/self-managed/concepts/exporters/"
+        }
+      ]
+    },
+    {
+      "Zeebe": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/self-managed/zeebe-deployment/zeebe-installation/"
+        },
+        {
+          "Configuration": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/"
+            },
+            {
+              "type": "link",
+              "label": "Logging",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/logging/"
+            },
+            {
+              "type": "link",
+              "label": "Gateway health probes",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/gateway-health-probes/"
+            },
+            {
+              "type": "link",
+              "label": "Environment variables",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/environment-variables/"
+            },
+            {
+              "type": "link",
+              "label": "Fixed partitioning",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/fixed-partitioning/"
+            },
+            {
+              "type": "link",
+              "label": "Priority election",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/priority-election/"
+            }
+          ]
+        },
+        {
+          "Security": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/zeebe-deployment/security/"
+            },
+            {
+              "type": "link",
+              "label": "Secure client communication",
+              "href": "/docs/self-managed/zeebe-deployment/security/secure-client-communication/"
+            },
+            {
+              "type": "link",
+              "label": "Client authorization",
+              "href": "/docs/self-managed/zeebe-deployment/security/client-authorization/"
+            },
+            {
+              "type": "link",
+              "label": "Secure cluster communication",
+              "href": "/docs/self-managed/zeebe-deployment/security/secure-cluster-communication/"
+            }
+          ]
+        },
+        {
+          "Operation": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/zeebe-deployment/operations/zeebe-in-production/"
+            },
+            {
+              "type": "link",
+              "label": "Resource planning",
+              "href": "/docs/self-managed/zeebe-deployment/operations/resource-planning/"
+            },
+            {
+              "type": "link",
+              "label": "Network ports",
+              "href": "/docs/self-managed/zeebe-deployment/operations/network-ports/"
+            },
+            {
+              "type": "link",
+              "label": "Setting up a Zeebe cluster",
+              "href": "/docs/self-managed/zeebe-deployment/operations/setting-up-a-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "Metrics",
+              "href": "/docs/self-managed/zeebe-deployment/operations/metrics/"
+            },
+            {
+              "type": "link",
+              "label": "Health status",
+              "href": "/docs/self-managed/zeebe-deployment/operations/health/"
+            },
+            {
+              "type": "link",
+              "label": "Backpressure",
+              "href": "/docs/self-managed/zeebe-deployment/operations/backpressure/"
+            },
+            {
+              "type": "link",
+              "label": "Disk space",
+              "href": "/docs/self-managed/zeebe-deployment/operations/disk-space/"
+            },
+            {
+              "type": "link",
+              "label": "Update Zeebe",
+              "href": "/docs/self-managed/zeebe-deployment/operations/update-zeebe/"
+            },
+            {
+              "type": "link",
+              "label": "Rebalancing",
+              "href": "/docs/self-managed/zeebe-deployment/operations/rebalancing/"
+            },
+            {
+              "type": "link",
+              "label": "Backups",
+              "href": "/docs/self-managed/zeebe-deployment/operations/backups/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Operate": [
+        {
+          "type": "link",
+          "label": "Installation",
+          "href": "/docs/self-managed/operate-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/operate-deployment/operate-configuration/"
+        },
+        {
+          "type": "link",
+          "label": "Data retention",
+          "href": "/docs/self-managed/operate-deployment/data-retention/"
+        },
+        {
+          "type": "link",
+          "label": "Schema and migration",
+          "href": "/docs/self-managed/operate-deployment/schema-and-migration/"
+        },
+        {
+          "type": "link",
+          "label": "Importer and archiver",
+          "href": "/docs/self-managed/operate-deployment/importer-and-archiver/"
+        },
+        {
+          "type": "link",
+          "label": "Authentication",
+          "href": "/docs/self-managed/operate-deployment/operate-authentication/"
+        },
+        {
+          "type": "link",
+          "label": "Usage metrics",
+          "href": "/docs/self-managed/operate-deployment/usage-metrics/"
+        }
+      ]
+    },
+    {
+      "Tasklist": [
+        {
+          "type": "link",
+          "label": "Installation",
+          "href": "/docs/self-managed/tasklist-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/tasklist-deployment/tasklist-configuration/"
+        },
+        {
+          "type": "link",
+          "label": "Authentication",
+          "href": "/docs/self-managed/tasklist-deployment/tasklist-authentication/"
+        },
+        {
+          "type": "link",
+          "label": "Usage metrics",
+          "href": "/docs/self-managed/tasklist-deployment/usage-metrics/"
+        }
+      ]
+    },
+
+    {
+      "Optimize": [
+        "self-managed/optimize-deployment/install-and-start",
+        "self-managed/optimize-deployment/version-policy",
+        {
+          "Configuration": [
+            "self-managed/optimize-deployment/configuration/getting-started",
+            {
+              "System configuration": [
+                "self-managed/optimize-deployment/configuration/system-configuration",
+                "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
+                "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
+                "self-managed/optimize-deployment/configuration/event-based-process-configuration"
+              ]
+            },
+            "self-managed/optimize-deployment/configuration/logging",
+            "self-managed/optimize-deployment/configuration/optimize-license",
+            "self-managed/optimize-deployment/configuration/security-instructions",
+            "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
+            "self-managed/optimize-deployment/configuration/history-cleanup",
+            "self-managed/optimize-deployment/configuration/localization",
+            "self-managed/optimize-deployment/configuration/object-variables",
+            "self-managed/optimize-deployment/configuration/clustering",
+            "self-managed/optimize-deployment/configuration/webhooks",
+            "self-managed/optimize-deployment/configuration/authorization-management",
+            "self-managed/optimize-deployment/configuration/user-management",
+            "self-managed/optimize-deployment/configuration/multi-tenancy",
+            "self-managed/optimize-deployment/configuration/multiple-engines",
+            "self-managed/optimize-deployment/configuration/setup-event-based-processes",
+            "self-managed/optimize-deployment/configuration/telemetry",
+            "self-managed/optimize-deployment/configuration/common-problems"
+          ]
+        },
+        {
+          "Plugins": [
+            "self-managed/optimize-deployment/plugins/plugin-system",
+            "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
+            "self-managed/optimize-deployment/plugins/decision-import-plugin",
+            "self-managed/optimize-deployment/plugins/elasticsearch-header",
+            "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
+            "self-managed/optimize-deployment/plugins/single-sign-on",
+            "self-managed/optimize-deployment/plugins/variable-import-plugin"
+          ]
+        },
+        "self-managed/optimize-deployment/reimport",
+        {
+          "Migration & update": [
+            "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
+            "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
+            "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
+            "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
+            "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
+            "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
+            "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
+            "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
+            "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
+            "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
+            "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
+            "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
+            "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
+            "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
+            "self-managed/optimize-deployment/migration-update/2.1-to-2.2"
+          ]
+        },
+        {
+          "Advanced features": [
+            "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
+            "self-managed/optimize-deployment/advanced-features/import-guide"
+          ]
+        }
+      ]
+    },
+
+    {
+      "Identity": [
+        {
+          "type": "link",
+          "label": "What is Identity?",
+          "href": "/docs/self-managed/identity/what-is-identity/"
+        },
+        {
+          "type": "link",
+          "label": "Installation and first steps",
+          "href": "/docs/self-managed/identity/getting-started/install-identity/"
+        },
+        {
+          "User guide": [
+            {
+              "type": "link",
+              "label": "Adding an application",
+              "href": "/docs/self-managed/identity/user-guide/adding-an-application/"
+            },
+            {
+              "type": "link",
+              "label": "Adding an API",
+              "href": "/docs/self-managed/identity/user-guide/adding-an-api/"
+            },
+            {
+              "type": "link",
+              "label": "Adding a permission",
+              "href": "/docs/self-managed/identity/user-guide/adding-a-permission/"
+            },
+            {
+              "type": "link",
+              "label": "Assigning a permission an application",
+              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/"
+            },
+            {
+              "type": "link",
+              "label": "Adding a role",
+              "href": "/docs/self-managed/identity/user-guide/adding-a-role/"
+            },
+            {
+              "type": "link",
+              "label": "Assigning a permission a role",
+              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-a-role/"
+            },
+            {
+              "type": "link",
+              "label": "Assigning a role to a user",
+              "href": "/docs/self-managed/identity/user-guide/assigning-a-role-to-a-user/"
+            },
+            {
+              "type": "link",
+              "label": "Configuring an external identity provider",
+              "href": "/docs/self-managed/identity/user-guide/configure-external-identity-provider/"
+            },
+            {
+              "type": "link",
+              "label": "Making Identity production ready",
+              "href": "/docs/self-managed/identity/user-guide/making-identity-production-ready/"
+            },
+            {
+              "type": "link",
+              "label": "Generating machine-to-machine (M2M) tokens",
+              "href": "/docs/self-managed/identity/user-guide/generating-m2m-tokens/"
+            }
+          ]
+        },
+        {
+          "Deployment": [
+            {
+              "type": "link",
+              "label": "Configuration variables",
+              "href": "/docs/self-managed/identity/deployment/configuration-variables/"
+            },
+            {
+              "type": "link",
+              "label": "Application monitoring",
+              "href": "/docs/self-managed/identity/deployment/application-monitoring/"
+            }
+          ]
+        },
+        {
+          "Troubleshooting": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/identity/troubleshooting/troubleshoot-identity/"
+            },
+            {
+              "type": "link",
+              "label": "Common problems",
+              "href": "/docs/self-managed/identity/troubleshooting/common-problems/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Zeebe Gateway": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/self-managed/zeebe-gateway-deployment/zeebe-gateway/"
+        }
+      ]
+    },
+    {
+      "Troubleshooting": [
+        {
+          "type": "link",
+          "label": "Log levels",
+          "href": "/docs/self-managed/troubleshooting/log-levels/"
+        }
+      ]
+    }
   ]
 }
