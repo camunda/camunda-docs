@@ -328,6 +328,10 @@ RewriteRule ^docs/components/optimize/userguide/additional-features/filters/(.*)
 RewriteRule ^docs/components/optimize/what-is-optimize(\/?)$ /optimize/components/what-is-optimize/ [R=301,L]
 RewriteRule ^docs/components/optimize/userguide/(.*)$ /optimize/components/userguide/$1 [R=301,L]
 
+## optimize API and self-managed documentation were moved to the optimize instance:
+RewriteRule ^docs/next/self-managed/optimize-deployment/(.*)$ /optimize/next/self-managed/optimize-deployment/$1 [R=301,L]
+RewriteRule ^docs/next/apis-clients/optimize-api/(.*)$ /optimize/next/apis-clients/optimize-api/$1 [R=301,L]
+
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
 # Add bpmn mime type
