@@ -9,6 +9,7 @@ Options -Indexes -MultiViews
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
 # These redirects go from /next/ to /next/ and should be revisted when /next/ is removed from the sitemap
+RewriteRule ^docs/next/self-managed/platform-deployment/ingress-setup/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/local/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/openshift-helm/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/openshift/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
