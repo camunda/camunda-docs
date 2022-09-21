@@ -18,8 +18,8 @@ In the spirit of "Always Progress", if you are confident you know what change ne
 
 ## Structure
 
-- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-platform-8.md`. Use the file name as internal document id to reference in `sidebars.js`.
-- Sub categories have to be placed in their own sub directories. Example: Guides/Getting Started can be found in `docs/guides/getting-started`.
+- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-platform-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in `sidebars.js`.
+- Sub categories have to be placed in their own sub directories. Example: Guides/Update Guide can be found in `docs/guides/update-guide`.
 
 ## Versions
 
@@ -43,6 +43,14 @@ In the spirit of "Always Progress", if you are confident you know what change ne
 
 The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
 
+## Remove an existing page
+
+1. Identify the page, pages, or directory and delete it in the file structure.
+2. Update [`/versioned_sidebars/version-*-sidebars.json`][versioned-sidebars] and/or [`sidebars.js`][next-sidebars].
+3. Add a redirect/rewrite rule to the top of `.htaccess` to redirect users to appropriate relevant content on another page.
+
+The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
+
 ## Review Process
 
 After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
@@ -58,7 +66,7 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 - Documentation infrastructure: @pepopowitz (fallback: @akeller)
 - Fallback: @menski
 
-In case you don't know who to assign choose @menski and he will delegate.
+In case you don't know who to assign for an engineering review choose @menski and he will delegate.
 
 As a reviewer feel free to merge any PR which you feel comfortable with after your review. If you have questions, concerns, or feel that you are not the right person to review the PR please make this transparent to the PR author so they can clarify this.
 

@@ -33,4 +33,4 @@ This command generates static content into the `build` directory and can be serv
 
 ## Deployment
 
-Deployments are handled by creating a new Release. See [publish-documentation.md](./publish-documentation.md) for details.
+Deployments are handled by creating a new Release. See [release-procedure.md](/howtos/release-procedure.md) for details.
