@@ -7,7 +7,7 @@ title: "Camunda Platform 8 Self-Managed"
 
 Camunda Platform 8 Self-Managed is not Camunda Platform 7. If you are looking for Camunda Platform 7 documentation, [click here](https://docs.camunda.org).
 
-However, Optimize documentation is available for both Camunda Platform 8 and Camunda Platform 7, including deployment instructions available [here](./optimize-deployment/install-and-start.md). Look for "Camunda Platform 7" badges to help you understand what content is available for what product.
+However, Optimize documentation is available for both Camunda Platform 8 and Camunda Platform 7, including deployment instructions available [here]($optimize$/optimize-deployment/install-and-start). Look for "Camunda Platform 7" badges to help you understand what content is available for what product.
 
 :::
 
