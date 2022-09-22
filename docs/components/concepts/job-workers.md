@@ -67,6 +67,11 @@ After working on an activated job, a job worker informs Camunda Platform 8 that 
   - If `remaining retries` is greather than zero, the job is retried and reassigned.
   - If `remaining retries` is zero or negative, an incident is raised and the job is not retried until the incident is resolved.
 
+When failing a job it is possible to specify a `retry back off`. This back off allows waiting for a specified amount of time before retrying the job.
+This could be useful when a job worker communicates with an external system. If the external system is down, immediately retrying the job will not work.
+This will result in an incident when the retries run out. Using the `retry back off` will delay the retry. This allows the external system some time to recover.
+If no `retry back off` the job is immediately retried.
+
 ## Timeouts
 
 If the job is not completed or failed within the configured job activation timeout, Zeebe reassigns the job to another job worker. This does not affect the number of `remaining retries`.
