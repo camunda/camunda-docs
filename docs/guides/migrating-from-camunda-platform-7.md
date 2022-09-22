@@ -362,7 +362,6 @@ Human task management is also available in Camunda Platform 8, but uses a differ
 In Camunda Platform 7, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
 
 - Embedded Task Forms (embedded custom HTML and JavaScript)
-- Camunda Forms (simple forms defined via Desktop Modeler properties)
 - External Task Forms (link to custom applications)
 - [Camunda Forms](./utilizing-forms.md)
 
@@ -375,7 +374,7 @@ The following attributes/elements can be migrated:
   - `bpmn:potentialOwner`
   - `camunda:assignee`
   - `camunda:candidateGroups`
-  - `camunda:formKey`, but Camunda Platform 8 requires you to embedd the form definition itself into the root element of your BPMN XML models, see [this guide](/docs/guides/utilizing-forms/#connect-your-form-to-a-bpmn-diagram).
+  - `camunda:formKey`, but Camunda Platform 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [this guide](/docs/guides/utilizing-forms/#connect-your-form-to-a-bpmn-diagram).
 
 The following attributes/elements cannot (yet) be migrated:
 
