@@ -42,6 +42,7 @@ module.exports = {
         "guides/update-guide/026-to-100",
       ],
     },
+    "guides/migrating-from-cawemo",
     "guides/migrating-from-camunda-platform-7",
   ],
   Components: [
