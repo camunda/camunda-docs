@@ -34,5 +34,7 @@ component for use within Identity, all that is required is to set two variables:
 | `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` | The root URL of where the component is hosted | No default    |
 
 :::note
-Identity supports the following values for the `<COMPONENT>` placeholder: `OPERATE`,`TASKLIST`, and `OPTIMIZE`.
+Identity supports the following values for the `<COMPONENT>` placeholder: `OPERATE`, `OPTIMIZE`, `TASKLIST`, and `WEBMODELER`.
+
+For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variable is required to be set.
 :::

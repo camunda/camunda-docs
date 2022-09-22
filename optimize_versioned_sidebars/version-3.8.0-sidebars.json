@@ -1,0 +1,1137 @@
+{
+  "Components": [
+    {
+      "type": "link",
+      "label": "Overview Components",
+      "href": "/docs/components/"
+    },
+
+    {
+      "Concepts": [
+        {
+          "type": "link",
+          "label": "What is Camunda Platform 8?",
+          "href": "/docs/components/concepts/what-is-camunda-platform-8/"
+        },
+        {
+          "type": "link",
+          "label": "Processes",
+          "href": "/docs/components/concepts/processes/"
+        },
+        {
+          "type": "link",
+          "label": "Job workers",
+          "href": "/docs/components/concepts/job-workers/"
+        },
+        {
+          "type": "link",
+          "label": "Process instance creation",
+          "href": "/docs/components/concepts/process-instance-creation/"
+        },
+        {
+          "type": "link",
+          "label": "Messages",
+          "href": "/docs/components/concepts/messages/"
+        },
+        {
+          "type": "link",
+          "label": "Incidents",
+          "href": "/docs/components/concepts/incidents/"
+        },
+        {
+          "type": "link",
+          "label": "Variables",
+          "href": "/docs/components/concepts/variables/"
+        },
+        {
+          "type": "link",
+          "label": "Expressions",
+          "href": "/docs/components/concepts/expressions/"
+        },
+        {
+          "type": "link",
+          "label": "Workflow patterns",
+          "href": "/docs/components/concepts/workflow-patterns/"
+        }
+      ]
+    },
+
+    {
+      "Console": [
+        {
+          "type": "link",
+          "label": "Introduction to Camunda Platform Console",
+          "href": "/docs/components/console/introduction-to-console/"
+        },
+
+        {
+          "Manage your organization": [
+            {
+              "type": "link",
+              "label": "Organization management",
+              "href": "/docs/components/console/manage-organization/organization-settings/"
+            },
+            {
+              "type": "link",
+              "label": "Manage users of your organization",
+              "href": "/docs/components/console/manage-organization/manage-users/"
+            },
+            {
+              "type": "link",
+              "label": "View organization activity",
+              "href": "/docs/components/console/manage-organization/view-organization-activity/"
+            },
+            {
+              "type": "link",
+              "label": "Usage history",
+              "href": "/docs/components/console/manage-organization/usage-history/"
+            },
+            {
+              "type": "link",
+              "label": "Update billing reservations",
+              "href": "/docs/components/console/manage-organization/update-billing-reservations/"
+            },
+            {
+              "type": "link",
+              "label": "Switch organization",
+              "href": "/docs/components/console/manage-organization/switch-organization/"
+            }
+          ]
+        },
+
+        {
+          "Manage clusters": [
+            {
+              "type": "link",
+              "label": "Create a cluster",
+              "href": "/docs/components/console/manage-clusters/create-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "Rename your cluster",
+              "href": "/docs/components/console/manage-clusters/rename-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "Delete your cluster",
+              "href": "/docs/components/console/manage-clusters/delete-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "Manage API clients",
+              "href": "/docs/components/console/manage-clusters/manage-api-clients/"
+            },
+            {
+              "type": "link",
+              "label": "Manage alerts",
+              "href": "/docs/components/console/manage-clusters/manage-alerts/"
+            },
+            {
+              "type": "link",
+              "label": "Manage IP Whitelists",
+              "href": "/docs/components/console/manage-clusters/manage-ip-whitelists/"
+            },
+            {
+              "type": "link",
+              "label": "Manage secrets",
+              "href": "/docs/components/console/manage-clusters/manage-secrets/"
+            }
+          ]
+        },
+
+        {
+          "Manage your plan": [
+            {
+              "type": "link",
+              "label": "Available plans",
+              "href": "/docs/components/console/manage-plan/available-plans/"
+            },
+            {
+              "type": "link",
+              "label": "Upgrade to a Professional Plan",
+              "href": "/docs/components/console/manage-plan/upgrade-to-professional-plan/"
+            }
+          ]
+        },
+
+        {
+          "Troubleshooting": [
+            {
+              "type": "link",
+              "label": "Common pitfalls",
+              "href": "/docs/components/console/console-troubleshooting/common-pitfalls/"
+            },
+            {
+              "type": "link",
+              "label": "Feedback and support",
+              "href": "/docs/components/console/console-troubleshooting/feedback-and-support/"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "Modeler": [
+        {
+          "type": "link",
+          "label": "About Modeler",
+          "href": "/docs/components/modeler/about-modeler/"
+        },
+
+        {
+          "Web Modeler": [
+            {
+              "type": "link",
+              "label": "New Web Modeler",
+              "href": "/docs/components/modeler/web-modeler/new-web-modeler/"
+            },
+            {
+              "type": "link",
+              "label": "Launch Web Modeler",
+              "href": "/docs/components/modeler/web-modeler/launch-cloud-modeler/"
+            },
+            {
+              "type": "link",
+              "label": "Model your first diagram",
+              "href": "/docs/components/modeler/web-modeler/model-your-first-diagram/"
+            },
+            {
+              "type": "link",
+              "label": "Import diagram",
+              "href": "/docs/components/modeler/web-modeler/import-diagram/"
+            },
+            {
+              "type": "link",
+              "label": "Fix problems in your diagram",
+              "href": "/docs/components/modeler/web-modeler/fix-problems-in-your-diagram/"
+            },
+            {
+              "type": "link",
+              "label": "Save and deploy your diagram",
+              "href": "/docs/components/modeler/web-modeler/save-and-deploy/"
+            },
+            {
+              "type": "link",
+              "label": "Start a new process instance",
+              "href": "/docs/components/modeler/web-modeler/start-instance/"
+            },
+            {
+              "type": "link",
+              "label": "Collaboration",
+              "href": "/docs/components/modeler/web-modeler/collaboration/"
+            },
+            {
+              "type": "link",
+              "label": "Milestones",
+              "href": "/docs/components/modeler/web-modeler/milestones/"
+            },
+            {
+              "type": "link",
+              "label": "Token simulation",
+              "href": "/docs/components/modeler/web-modeler/token-simulation/"
+            },
+
+            {
+              "Advanced modeling": [
+                {
+                  "type": "link",
+                  "label": "Call activity linking",
+                  "href": "/docs/components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
+                },
+                {
+                  "type": "link",
+                  "label": "Manage Connector templates",
+                  "href": "/docs/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "Desktop Modeler": [
+            {
+              "type": "link",
+              "label": "Install the Modeler",
+              "href": "/docs/components/modeler/desktop-modeler/install-the-modeler/"
+            },
+            {
+              "type": "link",
+              "label": "Model your first diagram",
+              "href": "/docs/components/modeler/desktop-modeler/model-your-first-diagram/"
+            },
+            {
+              "type": "link",
+              "label": "Deploy your first diagram",
+              "href": "/docs/components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+            },
+            {
+              "type": "link",
+              "label": "Start a new process instance",
+              "href": "/docs/components/modeler/desktop-modeler/start-instance/"
+            },
+
+            {
+              "Element templates": [
+                {
+                  "type": "link",
+                  "label": "About element templates",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/about-templates/"
+                },
+                {
+                  "type": "link",
+                  "label": "Configuring templates",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/configuring-templates/"
+                },
+                {
+                  "type": "link",
+                  "label": "Using templates",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/using-templates/"
+                },
+                {
+                  "type": "link",
+                  "label": "Defining templates",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/defining-templates/"
+                },
+                {
+                  "type": "link",
+                  "label": "Additional resources",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/additional-resources/"
+                }
+              ]
+            },
+
+            {
+              "Additional configuration": [
+                {
+                  "type": "link",
+                  "label": "Flags",
+                  "href": "/docs/components/modeler/desktop-modeler/flags/"
+                },
+                {
+                  "type": "link",
+                  "label": "Plugins",
+                  "href": "/docs/components/modeler/desktop-modeler/plugins/"
+                },
+                {
+                  "type": "link",
+                  "label": "Search paths",
+                  "href": "/docs/components/modeler/desktop-modeler/search-paths/"
+                },
+                {
+                  "type": "link",
+                  "label": "Telemetry",
+                  "href": "/docs/components/modeler/desktop-modeler/telemetry/"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "BPMN": [
+            {
+              "type": "link",
+              "label": "BPMN in Modeler",
+              "href": "/docs/components/modeler/bpmn/"
+            },
+            {
+              "type": "link",
+              "label": "BPMN primer",
+              "href": "/docs/components/modeler/bpmn/bpmn-primer/"
+            },
+            {
+              "type": "link",
+              "label": "BPMN coverage",
+              "href": "/docs/components/modeler/bpmn/bpmn-coverage/"
+            },
+            {
+              "type": "link",
+              "label": "Data flow",
+              "href": "/docs/components/modeler/bpmn/data-flow/"
+            },
+
+            {
+              "Tasks": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Service tasks",
+                  "href": "/docs/components/modeler/bpmn/service-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "User tasks",
+                  "href": "/docs/components/modeler/bpmn/user-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Receive tasks",
+                  "href": "/docs/components/modeler/bpmn/receive-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Business rule tasks",
+                  "href": "/docs/components/modeler/bpmn/business-rule-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Script tasks",
+                  "href": "/docs/components/modeler/bpmn/script-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Send tasks",
+                  "href": "/docs/components/modeler/bpmn/send-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Manual tasks",
+                  "href": "/docs/components/modeler/bpmn/manual-tasks/"
+                }
+              ]
+            },
+
+            {
+              "Gateways": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/gateways/"
+                },
+                {
+                  "type": "link",
+                  "label": "Exclusive gateway",
+                  "href": "/docs/components/modeler/bpmn/exclusive-gateways/"
+                },
+                {
+                  "type": "link",
+                  "label": "Parallel gateway",
+                  "href": "/docs/components/modeler/bpmn/parallel-gateways/"
+                },
+                {
+                  "type": "link",
+                  "label": "Event-based gateway",
+                  "href": "/docs/components/modeler/bpmn/event-based-gateways/"
+                }
+              ]
+            },
+
+            {
+              "Events": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/events/"
+                },
+                {
+                  "type": "link",
+                  "label": "None events",
+                  "href": "/docs/components/modeler/bpmn/none-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Message events",
+                  "href": "/docs/components/modeler/bpmn/message-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Timer events",
+                  "href": "/docs/components/modeler/bpmn/timer-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Error events",
+                  "href": "/docs/components/modeler/bpmn/error-events/"
+                }
+              ]
+            },
+
+            {
+              "Subprocesses": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/subprocesses/"
+                },
+                {
+                  "type": "link",
+                  "label": "Embedded subprocess",
+                  "href": "/docs/components/modeler/bpmn/embedded-subprocesses/"
+                },
+                {
+                  "type": "link",
+                  "label": "Call activities",
+                  "href": "/docs/components/modeler/bpmn/call-activities/"
+                },
+                {
+                  "type": "link",
+                  "label": "Event subprocess",
+                  "href": "/docs/components/modeler/bpmn/event-subprocesses/"
+                }
+              ]
+            },
+
+            {
+              "Markers": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/markers/"
+                },
+                {
+                  "type": "link",
+                  "label": "Multi-instance",
+                  "href": "/docs/components/modeler/bpmn/multi-instance/"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "DMN": [
+            {
+              "type": "link",
+              "label": "DMN in Modeler",
+              "href": "/docs/components/modeler/dmn/"
+            },
+            {
+              "type": "link",
+              "label": "Decision requirements graph",
+              "href": "/docs/components/modeler/dmn/decision-requirements-graph/"
+            },
+
+            {
+              "Decision table": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/dmn/decision-table/"
+                },
+                {
+                  "type": "link",
+                  "label": "Input",
+                  "href": "/docs/components/modeler/dmn/decision-table-input/"
+                },
+                {
+                  "type": "link",
+                  "label": "Output",
+                  "href": "/docs/components/modeler/dmn/decision-table-output/"
+                },
+                {
+                  "type": "link",
+                  "label": "Rule",
+                  "href": "/docs/components/modeler/dmn/decision-table-rule/"
+                },
+                {
+                  "type": "link",
+                  "label": "Hit policy",
+                  "href": "/docs/components/modeler/dmn/decision-table-hit-policy/"
+                }
+              ]
+            },
+
+            {
+              "type": "link",
+              "label": "Decision literal expression",
+              "href": "/docs/components/modeler/dmn/decision-literal-expression/"
+            },
+            {
+              "type": "link",
+              "label": "Data types",
+              "href": "/docs/components/modeler/dmn/dmn-data-types/"
+            }
+          ]
+        },
+
+        {
+          "FEEL expressions": [
+            {
+              "type": "link",
+              "label": "What is FEEL?",
+              "href": "/docs/components/modeler/feel/what-is-feel/"
+            },
+            {
+              "type": "link",
+              "label": "Data types",
+              "href": "/docs/components/modeler/feel/language-guide/feel-data-types/"
+            },
+            {
+              "type": "link",
+              "label": "Unary-tests",
+              "href": "/docs/components/modeler/feel/language-guide/feel-unary-tests/"
+            },
+
+            {
+              "Expressions": [
+                {
+                  "type": "link",
+                  "label": "Introduction",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-expressions-introduction/"
+                },
+                {
+                  "type": "link",
+                  "label": "Boolean expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-boolean-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "String expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-string-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Numeric expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-numeric-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "List expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-list-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Context expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-context-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Temporal expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-temporal-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Variables",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-variables/"
+                },
+                {
+                  "type": "link",
+                  "label": "Control flow",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-control-flow/"
+                },
+                {
+                  "type": "link",
+                  "label": "Functions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-functions/"
+                }
+              ]
+            },
+
+            {
+              "Built-in functions": [
+                {
+                  "type": "link",
+                  "label": "Introduction",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/"
+                },
+                {
+                  "type": "link",
+                  "label": "Conversion functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion/"
+                },
+                {
+                  "type": "link",
+                  "label": "Boolean functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean/"
+                },
+                {
+                  "type": "link",
+                  "label": "String functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-string/"
+                },
+                {
+                  "type": "link",
+                  "label": "Numeric functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-numeric/"
+                },
+                {
+                  "type": "link",
+                  "label": "List functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-list/"
+                },
+                {
+                  "type": "link",
+                  "label": "Context functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-context/"
+                },
+                {
+                  "type": "link",
+                  "label": "Temporal functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-temporal/"
+                },
+                {
+                  "type": "link",
+                  "label": "Range functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-range/"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "Forms": [
+            {
+              "type": "link",
+              "label": "Camunda Forms reference",
+              "href": "/docs/components/modeler/forms/camunda-forms-reference/"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "Integration Framework": [
+        {
+          "type": "link",
+          "label": "Introduction",
+          "href": "/docs/components/integration-framework/introduction-to-connectors/"
+        },
+
+        {
+          "Connectors": [
+            {
+              "type": "link",
+              "label": "Use Connectors",
+              "href": "/docs/components/integration-framework/connectors/use-connectors/"
+            },
+
+            {
+              "Out-of-the-box Connectors": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview/"
+                },
+                {
+                  "type": "link",
+                  "label": "REST Connector",
+                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/rest/"
+                },
+                {
+                  "type": "link",
+                  "label": "SendGrid Connector",
+                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/sendgrid/"
+                },
+                {
+                  "type": "link",
+                  "label": "Slack Connector",
+                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/slack/"
+                }
+              ]
+            },
+
+            {
+              "Custom-built Connectors": [
+                {
+                  "type": "link",
+                  "label": "Connector templates",
+                  "href": "/docs/components/integration-framework/connectors/custom-built-connectors/connector-templates/"
+                },
+                {
+                  "type": "link",
+                  "label": "Connector SDK",
+                  "href": "/docs/components/integration-framework/connectors/custom-built-connectors/connector-sdk/"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "Zeebe": [
+        {
+          "type": "link",
+          "label": "Introduction",
+          "href": "/docs/components/zeebe/zeebe-overview/"
+        },
+
+        {
+          "Technical concepts": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/components/zeebe/technical-concepts/technical-concepts-overview/"
+            },
+            {
+              "type": "link",
+              "label": "Architecture",
+              "href": "/docs/components/zeebe/technical-concepts/architecture/"
+            },
+            {
+              "type": "link",
+              "label": "Clustering",
+              "href": "/docs/components/zeebe/technical-concepts/clustering/"
+            },
+            {
+              "type": "link",
+              "label": "Partitions",
+              "href": "/docs/components/zeebe/technical-concepts/partitions/"
+            },
+            {
+              "type": "link",
+              "label": "Internal processing",
+              "href": "/docs/components/zeebe/technical-concepts/internal-processing/"
+            },
+            {
+              "type": "link",
+              "label": "Process lifecycles",
+              "href": "/docs/components/zeebe/technical-concepts/process-lifecycles/"
+            },
+            {
+              "type": "link",
+              "label": "Protocols",
+              "href": "/docs/components/zeebe/technical-concepts/protocols/"
+            }
+          ]
+        },
+
+        {
+          "Open source community": [
+            {
+              "type": "link",
+              "label": "Community contributions",
+              "href": "/docs/components/zeebe/open-source/community-contributions/"
+            },
+            {
+              "type": "link",
+              "label": "Get help and get involved",
+              "href": "/docs/components/zeebe/open-source/get-help-get-involved/"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "Operate": [
+        {
+          "type": "link",
+          "label": "Introduction",
+          "href": "/docs/components/operate/operate-introduction/"
+        },
+
+        {
+          "User guide": [
+            {
+              "type": "link",
+              "label": "Getting familiar with Operate",
+              "href": "/docs/components/operate/userguide/basic-operate-navigation/"
+            },
+            {
+              "type": "link",
+              "label": "Variables and incidents",
+              "href": "/docs/components/operate/userguide/resolve-incidents-update-variables/"
+            },
+            {
+              "type": "link",
+              "label": "Selections and operations",
+              "href": "/docs/components/operate/userguide/selections-operations/"
+            },
+            {
+              "type": "link",
+              "label": "Delete finished instances",
+              "href": "/docs/components/operate/userguide/delete-finished-instances/"
+            },
+            {
+              "type": "link",
+              "label": "Giving feedback and asking questions",
+              "href": "/docs/components/operate/userguide/operate-feedback-and-questions/"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "Optimize": [
+        "components/what-is-optimize",
+        {
+          "User guide": [
+            "components/userguide/collections-dashboards-reports",
+            "components/userguide/data-sources",
+            {
+              "Dashboards": [
+                "components/userguide/creating-dashboards",
+                "components/userguide/edit-mode",
+                "components/userguide/view-mode"
+              ]
+            },
+            "components/userguide/creating-reports",
+            "components/userguide/combined-process-reports",
+            "components/userguide/processes",
+            {
+              "Process analysis": [
+                "components/userguide/process-analysis/process-analysis-overview",
+                "components/userguide/process-analysis/outlier-analysis",
+                "components/userguide/process-analysis/branch-analysis",
+                {
+                  "Report analysis": [
+                    "components/userguide/process-analysis/report-analysis/overview",
+                    {
+                      "Edit mode": [
+                        "components/userguide/process-analysis/report-analysis/edit-mode",
+                        "components/userguide/process-analysis/report-analysis/select-process-definitions",
+                        "components/userguide/process-analysis/report-analysis/define-reports",
+                        "components/userguide/process-analysis/report-analysis/measures",
+                        "components/userguide/process-analysis/report-analysis/compare-target-values",
+                        "components/userguide/process-analysis/report-analysis/process-instance-parts",
+                        "components/userguide/process-analysis/report-analysis/configure-reports"
+                      ]
+                    },
+                    "components/userguide/process-analysis/report-analysis/view-mode"
+                  ]
+                },
+                {
+                  "Filters": [
+                    "components/userguide/process-analysis/filters",
+                    "components/userguide/process-analysis/metadata-filters",
+                    "components/userguide/process-analysis/instance-state-filters",
+                    "components/userguide/process-analysis/flow-node-filters",
+                    "components/userguide/process-analysis/process-instance-filters",
+                    "components/userguide/process-analysis/variable-filters"
+                  ]
+                }
+              ]
+            },
+            {
+              "Decision analysis": [
+                "components/userguide/decision-analysis/decision-analysis-overview",
+                "components/userguide/decision-analysis/decision-report",
+                "components/userguide/decision-analysis/decision-filter"
+              ]
+            },
+            {
+              "Additional features": [
+                "components/userguide/additional-features/alerts",
+                "components/userguide/additional-features/event-based-processes",
+                "components/userguide/additional-features/export-import",
+                "components/userguide/additional-features/footer",
+                "components/userguide/additional-features/variable-labeling"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "Tasklist": [
+        {
+          "type": "link",
+          "label": "Introduction",
+          "href": "/docs/components/tasklist/introduction-to-tasklist/"
+        },
+
+        {
+          "User guide": [
+            {
+              "type": "link",
+              "label": "Overview and example use case",
+              "href": "/docs/components/tasklist/userguide/using-tasklist/"
+            },
+            {
+              "type": "link",
+              "label": "Updating Tasklist",
+              "href": "/docs/components/tasklist/userguide/updating-tasklist-cloud/"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "Best Practices": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/components/best-practices/best-practices-overview/"
+        },
+
+        {
+          "Project management": [
+            {
+              "type": "link",
+              "label": "Following the customer success path",
+              "href": "/docs/components/best-practices/management/following-the-customer-success-path/"
+            },
+            {
+              "type": "link",
+              "label": "Doing a proper POC",
+              "href": "/docs/components/best-practices/management/doing-a-proper-poc/"
+            }
+          ]
+        },
+
+        {
+          "Architecture": [
+            {
+              "type": "link",
+              "label": "Deciding about your stack",
+              "href": "/docs/components/best-practices/architecture/deciding-about-your-stack/"
+            },
+            {
+              "type": "link",
+              "label": "Sizing your environment",
+              "href": "/docs/components/best-practices/architecture/sizing-your-environment/"
+            },
+            {
+              "type": "link",
+              "label": "Understanding human task management",
+              "href": "/docs/components/best-practices/architecture/understanding-human-tasks-management/"
+            }
+          ]
+        },
+
+        {
+          "Development": [
+            {
+              "type": "link",
+              "label": "Connecting the workflow engine with your world",
+              "href": "/docs/components/best-practices/development/connecting-the-workflow-engine-with-your-world/"
+            },
+            {
+              "type": "link",
+              "label": "Service integration patterns with BPMN",
+              "href": "/docs/components/best-practices/development/service-integration-patterns/"
+            },
+            {
+              "type": "link",
+              "label": "Writing good workers",
+              "href": "/docs/components/best-practices/development/writing-good-workers/"
+            },
+            {
+              "type": "link",
+              "label": "Dealing with problems and exceptions",
+              "href": "/docs/components/best-practices/development/dealing-with-problems-and-exceptions/"
+            },
+            {
+              "type": "link",
+              "label": "Handling data in processes",
+              "href": "/docs/components/best-practices/development/handling-data-in-processes/"
+            },
+            {
+              "type": "link",
+              "label": "Routing events to processes",
+              "href": "/docs/components/best-practices/development/routing-events-to-processes/"
+            },
+            {
+              "type": "link",
+              "label": "Testing process definitions",
+              "href": "/docs/components/best-practices/development/testing-process-definitions/"
+            }
+          ]
+        },
+
+        {
+          "Modeling": [
+            {
+              "type": "link",
+              "label": "Creating readable process models",
+              "href": "/docs/components/best-practices/modeling/creating-readable-process-models/"
+            },
+            {
+              "type": "link",
+              "label": "Naming BPMN elements",
+              "href": "/docs/components/best-practices/modeling/naming-bpmn-elements/"
+            },
+            {
+              "type": "link",
+              "label": "Naming technically relevant IDs",
+              "href": "/docs/components/best-practices/modeling/naming-technically-relevant-ids/"
+            },
+            {
+              "type": "link",
+              "label": "Modeling beyond the happy path",
+              "href": "/docs/components/best-practices/modeling/modeling-beyond-the-happy-path/"
+            },
+            {
+              "type": "link",
+              "label": "Modeling with situation patterns",
+              "href": "/docs/components/best-practices/modeling/modeling-with-situation-patterns/"
+            },
+            {
+              "type": "link",
+              "label": "Building flexibility into BPMN models",
+              "href": "/docs/components/best-practices/modeling/building-flexibility-into-bpmn-models/"
+            },
+            {
+              "type": "link",
+              "label": "Choosing the DMN hit policy",
+              "href": "/docs/components/best-practices/modeling/choosing-the-dmn-hit-policy/"
+            }
+          ]
+        },
+
+        {
+          "Operations": [
+            {
+              "type": "link",
+              "label": "Versioning process definitions",
+              "href": "/docs/components/best-practices/operations/versioning-process-definitions/"
+            },
+            {
+              "type": "link",
+              "label": "Reporting about processes",
+              "href": "/docs/components/best-practices/operations/reporting-about-processes/"
+            }
+          ]
+        },
+
+        {
+          "Camunda 7 specific": [
+            {
+              "type": "link",
+              "label": "Deciding about your Camunda 7 stack",
+              "href": "/docs/components/best-practices/architecture/deciding-about-your-stack-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Sizing your Camunda 7 environment",
+              "href": "/docs/components/best-practices/architecture/sizing-your-environment-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Invoking services from a Camunda 7 process",
+              "href": "/docs/components/best-practices/development/invoking-services-from-the-process-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Understanding Camunda 7 transaction handling",
+              "href": "/docs/components/best-practices/development/understanding-transaction-handling-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Operating Camunda 7",
+              "href": "/docs/components/best-practices/operations/operating-camunda-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Performance tuning Camunda 7",
+              "href": "/docs/components/best-practices/operations/performance-tuning-camunda-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Securing Camunda 7",
+              "href": "/docs/components/best-practices/operations/securing-camunda-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Extending human task management in Camunda 7",
+              "href": "/docs/components/best-practices/architecture/extending-human-task-management-c7/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
