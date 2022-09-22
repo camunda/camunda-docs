@@ -20,26 +20,28 @@ Below you find the full list of data we want to collect, followed by a real-worl
 
 The general data category contains information about your Optimize installation:
 
-| Item | Explanation |
-| Installation | A unique installation ID stored in Optimize's Elasticsearch database |
-| Product name | The name of the product (i.e. `Camunda Optimize`) |
-| Product version | The version of Optimize you are running |
-| Product edition | The edition of the product (i.e. "enterprise") |
+| Item            | Explanation                                                          |
+| --------------- | -------------------------------------------------------------------- |
+| Installation    | A unique installation ID stored in Optimize's Elasticsearch database |
+| Product name    | The name of the product (i.e. `Camunda Optimize`)                    |
+| Product version | The version of Optimize you are running                              |
+| Product edition | The edition of the product (i.e. "enterprise")                       |
 
 ### Meta/environment data
 
 The meta/environment data category contains information about the environmental setup:
 
-| Item | Explanation |
-| Database vendor | The database vendor (i.e. `Elasticsearch`) |
-| Database version | The version of Elasticsearch Optimize is using |
-| License Key: Customer name | The customer name that appears in the license key you are using with this Optimize installation |
-| License Key: Type | The type of license key used with this Optimize installation |
-| License Key: Valid Until | The expiry date of the license key used with this Optimize installation |
-| License Key: Unlimited | A flag that indicates whether this license key is unlimited |
-| License Key: Features | A map which includes information on which products can be used with this license key |
-| License Key: Raw | The raw license key string without signature. We add this just in case some properties are listed in the raw license key that have not yet been mapped to other fields (eg. the features map). |
-| Engine Installation IDs | A list containing the ID of each engine connected to this Optimize installation |
+| Item                       | Explanation                                                                                                                                                                                    |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Database vendor            | The database vendor (i.e. `Elasticsearch`)                                                                                                                                                     |
+| Database version           | The version of Elasticsearch Optimize is using                                                                                                                                                 |
+| License Key: Customer name | The customer name that appears in the license key you are using with this Optimize installation                                                                                                |
+| License Key: Type          | The type of license key used with this Optimize installation                                                                                                                                   |
+| License Key: Valid Until   | The expiry date of the license key used with this Optimize installation                                                                                                                        |
+| License Key: Unlimited     | A flag that indicates whether this license key is unlimited                                                                                                                                    |
+| License Key: Features      | A map which includes information on which products can be used with this license key                                                                                                           |
+| License Key: Raw           | The raw license key string without signature. We add this just in case some properties are listed in the raw license key that have not yet been mapped to other fields (eg. the features map). |
+| Engine Installation IDs    | A list containing the ID of each engine connected to this Optimize installation                                                                                                                |
 
 ### Example
 
