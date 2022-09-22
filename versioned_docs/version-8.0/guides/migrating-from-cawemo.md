@@ -4,13 +4,13 @@ title: Migrating diagrams from Cawemo
 description: "Migrating diagrams from Cawemo to Camunda Platform 8 Web Modeler"
 ---
 
-This guide steps through how to migrate BPMN diagrams created in Cawemo to Camunda Platform 8 Web Modeler.
+This guide steps through how to migrate BPMN diagrams created in Cawemo to Camunda Platform 8 [Web Modeler](https://modeler.cloud.camunda.io/).
 
 You should consider migrating diagrams from Cawemo to Camunda Platform 8 Web Modeler if:
 
-- You want to continue working on your diagrams on the latest Camunda Platform.
+- You want to continue working on your diagrams on the latest Camunda Platform version.
 - You are exploring automating your processes.
-- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](https://docs.camunda.io/docs/components/concepts/messages/#message-buffering), big [multi-instance constructs](https://docs.camunda.io/docs/components/modeler/bpmn/multi-instance/), the new Connectors framework, or the improved collaboration features in Web Modeler).
+- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](https://docs.camunda.io/docs/components/concepts/messages/#message-buffering), big [multi-instance constructs](https://docs.camunda.io/docs/components/modeler/bpmn/multi-instance/), the [Connectors framework](https://docs.camunda.io/docs/components/integration-framework/connectors/use-connectors/), or the improved [collaboration features](https://docs.camunda.io/docs/components/modeler/web-modeler/collaboration/) in Web Modeler).
 
 ## Prerequisites
 
@@ -49,8 +49,8 @@ Not all elements in Cawemo are supported in Camunda Platform 8 Web Modeler. Find
 
 Learn more about [migrating from Camunda 7 to Camunda 8](https://docs.camunda.io/docs/guides/migrating-from-camunda-platform-7/).
 
-## FAQ
+:::note
+When you get the error `The following 1 file is invalid and can't be uploaded: ""` when uploading your BPMN file. 
 
-Questions: Why do I get the error `The following 1 file is invalid and can't be uploaded: ""` when uploading my BPMN file?
-
-Answer: A BPMN file for execution on Camunda Platform 7 that has been created with the Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [Migrating from Camunda Platform 7 documentation under migration overview](https://docs.camunda.io/docs/guides/migrating-from-camunda-platform-7/#migration-overview) to solve the error.
+It means a BPMN file for execution on Camunda Platform 7 created with the Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [Migrating from Camunda Platform 7 documentation under migration overview](https://docs.camunda.io/docs/guides/migrating-from-camunda-platform-7/#migration-overview) to solve the error.
+:::
