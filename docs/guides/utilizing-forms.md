@@ -59,10 +59,10 @@ To save your form in Camunda Platform 7, click **File > Save File As...** in the
 Next, let's implement a task form into a diagram. In tandem, we can connect your form to a user task or start event.
 
 :::note
-For Camunda Platform 7, refer to the [User Task Forms guide](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) to learn how to implement a task form in your application.
+For Camunda Platform 7, refer to the [user task forms guide](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) to learn how to implement a task form in your application.
 :::
 
-Click on the **Modeler** tab at the top of the page and open any project from your Web Modeler home view.
+Click the **Modeler** tab at the top of the page and open any project from your Web Modeler home view.
 
 Take the following steps:
 
