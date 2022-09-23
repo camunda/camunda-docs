@@ -1,7 +1,7 @@
 const versionedLinks = require("./src/mdx/versionedLinks");
 
 module.exports = {
-  title: "Camunda Platform 8",
+  title: "Camunda Platform 8 Docs",
   tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
@@ -10,8 +10,8 @@ module.exports = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
-  organizationName: "camunda-cloud", // Usually your GitHub org/user name.
-  projectName: "camunda-cloud-documentation", // Usually your repo name.
+  organizationName: "camunda", // Usually your GitHub org/user name.
+  projectName: "camunda-platform-docs", // Usually your repo name.
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
