@@ -14,7 +14,7 @@ Please refer to the [Installation Guide](/docs/self-managed/platform-deployment/
 
 This document describes the installation process of the Camunda Optimize and connect it to a Camunda 7 stack, as well as various configuration possibilities available after initial installation.
 
-Before proceeding with the installation, read the article about [supported environments](./../../reference/supported-environments.md).
+Before proceeding with the installation, read the article about [supported environments]($docs$/reference/supported-environments).
 
 ### Local installation
 
@@ -22,7 +22,7 @@ If you wish to run Camunda Optimize natively on your hardware you can download o
 
 #### Prerequisites
 
-If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime](./../../reference/supported-environments.md#camunda-platform-8-self-managed) section on which runtimes are supported.
+If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime]($docs$/reference/supported-environments#camunda-platform-8-self-managed) section on which runtimes are supported.
 
 #### Demo Distribution with Elasticsearch
 
@@ -119,7 +119,7 @@ The most important environment variables you may have to configure are related t
 
 A complete sample can be found within [Connect to remote Camunda Platform 7 and Elasticsearch](#connect-to-remote-camunda-platform-7-and-elasticsearch).
 
-Furthermore, there are also environment variables specific to the [event-based process]($optimize$/components/userguide/additional-features/event-based-processes) feature you may make use of:
+Furthermore, there are also environment variables specific to the [event-based process](components/userguide/additional-features/event-based-processes.md) feature you may make use of:
 
 - `OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED`: Determines whether this instance of Optimize should convert historical data to event data usable for event-based processes (default: `false`)
 - `OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS`: An array of user ids that are authorized to administer event-based processes (default: `[]`)
