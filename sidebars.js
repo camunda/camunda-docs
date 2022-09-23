@@ -42,6 +42,7 @@ module.exports = {
         "guides/update-guide/026-to-100",
       ],
     },
+    "guides/migrating-from-cawemo",
     "guides/migrating-from-camunda-platform-7",
   ],
   Components: [
@@ -635,6 +636,7 @@ module.exports = {
               Guides: [
                 "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
+                "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
               ],
             },
             "self-managed/platform-deployment/troubleshooting",
