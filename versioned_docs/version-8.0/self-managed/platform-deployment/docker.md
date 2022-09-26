@@ -13,13 +13,13 @@ We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All 
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
 :::
 
-| Component | Docker image                                                         | Link to configuration options                                                                         |
-| --------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Zeebe     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)       | [Environment variables](../../zeebe-deployment/configuration/environment-variables/)                  |
-| Operate   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)   | [Operate configuration](../../operate-deployment/operate-configuration)                               |
-| Tasklist  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist) | [Tasklist configuration](../../tasklist-deployment/tasklist-configuration)                            |
-| Identity  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity) | [Configuration variables](../../identity/deployment/configuration-variables/)                         |
-| Optimize  | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize) | [Environment variables](../../optimize-deployment/install-and-start/#available-environment-variables) |
+| Component | Docker image                                                         | Link to configuration options                                                                                           |
+| --------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Zeebe     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)       | [Environment variables](../../zeebe-deployment/configuration/environment-variables/)                                    |
+| Operate   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)   | [Operate configuration](../../operate-deployment/operate-configuration)                                                 |
+| Tasklist  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist) | [Tasklist configuration](../../tasklist-deployment/tasklist-configuration)                                              |
+| Identity  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity) | [Configuration variables](../../identity/deployment/configuration-variables/)                                           |
+| Optimize  | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize) | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start/#available-environment-variables) |
 
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 
