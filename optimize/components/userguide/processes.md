@@ -7,16 +7,16 @@ description: "The processes section gives you an overview of all the processes a
 ## Overview
 
 The processes section gives you an overview of all the processes and their status on a single page.
-This section also allows you to set a process owner to take responsibility of a process as well as viewing time and quality KPIs to track process performance. Additionally, a **Management Dashboard** can be found at the top of the page, which integrates data from all processes in one view. The optional date filter are applied to all the reports shown in this view.
+This section also allows you to set a process owner and take responsibility of a process, viewing time, and quality KPIs to track process performance. Additionally, a **Management Dashboard** can be found at the top of the page, which integrates data from all processes in one view. The optional date filter is applied to all the reports shown in this view.
 ![Processes page](./img/processOverview.png)
 
-Here are the available views:
+Note the available views below:
 
 1. Process Instance Usage: Track Camunda adoption by visualizing how many process instances were started each month.
 
 2. Overall Incident-Free Rate: Check the overall technical health of your processes by visualizing the percentage of process instances that did not have an incident.
 
-3. Automation Rate (<1 hour): View the percentage of process instances that are completed within one hour. This is a good proxy for how automated your entire suite of processes is.
+3. Automation Rate (<1 hour): View the percentage of process instances completed within one hour. This is a good proxy for how automated your entire suite of processes is.
 
 4. Long-Running Process Instances: View how many process instances that started over a week ago are still running. In addition, you can combine that with their average duration to identify the least efficient processes and potential pain points.
 
@@ -31,7 +31,7 @@ Here are the available views:
 9. KPI Results: You can see the KPI’s current and target values, plus a link to the report itself.
 
 :::tip
-For the pie chart reports in 4, 5 and 6, both time and count are displayed in the chart according to the following format:
+For the pie chart reports in 4, 5, and 6, both time and count are displayed in the chart according to the following format:
 
 ![Pie chart format](./img/pieFormat.png)
 :::
