@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.11.0",
-    "@docusaurus/core": "^2.0.1",
+    "@docusaurus/core": "^2.1.0",
     "@docusaurus/preset-classic": "^2.0.1",
     "clsx": "^1.2.1",
     "docusaurus-gtm-plugin": "0.0.2",
