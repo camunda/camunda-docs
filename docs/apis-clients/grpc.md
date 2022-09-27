@@ -392,9 +392,10 @@ Returned if:
 
 ### `FailJob` RPC
 
-Marks the job as failed; if the retries argument is positive, the job is immediately
-activatable again, and a worker could try again to process it. If it is zero or negative,
-an incident is raised, tagged with the given errorMessage, and the job is not activatable until the incident is resolved.
+Marks the job as failed. If the retries argument is positive and no retry back off is set, the job is immediately
+activatable again. If the retry back off is positive the job becomes activatable once the back off timeout has passed.
+If the retries argument is zero or negative, an incident is raised, tagged with the given errorMessage, and the job is
+not activatable until the incident is resolved.
 
 #### Input: `FailJobRequest`
 
@@ -408,6 +409,8 @@ message FailJobRequest {
   // this is particularly useful if a job runs out of retries and an incident is raised,
   // as it this message can help explain why an incident was raised
   string errorMessage = 3;
+  // the backoff timeout (in ms) for the next retry
+  int64 retryBackOff = 4;
 }
 ```
 
