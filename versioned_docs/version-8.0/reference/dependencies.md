@@ -1354,31 +1354,31 @@ Desktop Modeler is a desktop modeling application that builds upon a number of t
 
 ### Connector SDK
 
-You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sdk/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sdk/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 ### Connector Amazon Simple Queue Service (SQS)
 
-You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sqs/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sqs/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 ### Connector AWS Lambda
 
-You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-aws-lambda/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-aws-lambda/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 ### Connector Google Drive
 
-You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-google-drive/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-google-drive/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 ### Connector REST
 
-You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-http-json/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-http-json/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 ### Connector SendGrid
 
-You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sendgrid/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sendgrid/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 ### Connector Slack
 
-You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-slack/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-slack/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 </TabItem>
 
