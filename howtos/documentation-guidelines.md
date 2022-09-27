@@ -21,7 +21,7 @@ In the spirit of "Always Progress", if you are confident you know what change ne
 - Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-platform-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in `sidebars.js`.
 - Sub categories have to be placed in their own sub directories. Example: Guides/Update Guide can be found in `docs/guides/update-guide`.
 
-## Docs vs Optimize
+## Instances: Docs vs Optimize
 
 Due to a difference in version numbers, the documentation is split into [multiple Docusaurus "instances"](https://docusaurus.io/docs/docs-multi-instance). Documentation specific to Optimize lives in the `optimize` instance, and all other documentation lives in the main `docs` instance.
 
@@ -43,12 +43,12 @@ When linking internally from one document to another, follow these guidelines:
 
 [Each instance of the documentation](#docs-vs-optimize) contains documentation for multiple versions:
 
-| Instance   | Version(s)         | Source path                           |
-| ---------- | ------------------ | ------------------------------------- |
-| `docs`     | Next               | `/docs/`                              |
-| `docs`     | 8.0, 1.3, 1.2, ... | `/versioned_docs/version-*/`          |
-| `optimize` | Next               | `/optimize/`                          |
-| `optimize` | 3.8.0, 3.7.0, ...  | `/optimize_versioned_docs/version-*/` |
+| Instance   | Version(s)         | Source path                                                         |
+| ---------- | ------------------ | ------------------------------------------------------------------- |
+| `docs`     | Next               | [/docs/](../docs/)                                                  |
+| `docs`     | 8.0, 1.3, 1.2, ... | [/versioned_docs/version-\*/](../versioned_docs/)                   |
+| `optimize` | Next               | [/optimize/](../optimize/)                                          |
+| `optimize` | 3.8.0, 3.7.0, ...  | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) |
 
 When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
