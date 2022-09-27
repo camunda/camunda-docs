@@ -754,12 +754,14 @@ module.exports = {
             "self-managed/identity/user-guide/making-identity-production-ready",
             "self-managed/identity/user-guide/generating-m2m-tokens",
             "self-managed/identity/user-guide/managing-user-access",
+            "self-managed/identity/user-guide/connect-to-an-existing-keycloak",
           ],
         },
         {
           Deployment: [
             "self-managed/identity/deployment/configuration-variables",
             "self-managed/identity/deployment/application-monitoring",
+            "self-managed/identity/deployment/starting-configuration",
           ],
           Troubleshooting: [
             "self-managed/identity/troubleshooting/troubleshoot-identity",
