@@ -21,11 +21,36 @@ In the spirit of "Always Progress", if you are confident you know what change ne
 - Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-platform-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in `sidebars.js`.
 - Sub categories have to be placed in their own sub directories. Example: Guides/Update Guide can be found in `docs/guides/update-guide`.
 
+## Docs vs Optimize
+
+Due to a difference in version numbers, the documentation is split into [multiple Docusaurus "instances"](https://docusaurus.io/docs/docs-multi-instance). Documentation specific to Optimize lives in the `optimize` instance, and all other documentation lives in the main `docs` instance.
+
+## Internal links
+
+When linking internally from one document to another, follow these guidelines:
+
+- if the source and target document are within the same instance (i.e. both are in `docs` or both are in `optimize`):
+  - Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
+  - Use an absolute path to the target markdown file if it is in a different subtree than the soure file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-clients/community-clients/spring.md?plain=1#L8).
+  - Always include the `.md` extension in the path.
+- if the source and target document are in different instances (i.e. one is in `docs` and the other is in `optimize`):
+  - If the source is in `docs` and the target is in `optimize`, use the `$optimize$` token to prefix the URL. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/guides/setting-up-development-project.md?plain=1#L17).
+  - If the source is in `optimize` and the target is in `docs`, use the `$docs$` token to prefix the URL. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/optimize/components/what-is-optimize.md?plain=1#L8).
+  - Use the browser-facing _URL_ to the target document, instead of the path to the target's `.md` file.
+  - Do not include the `.md` extension on the target path.
+
 ## Versions
 
-- The [`/versioned_docs/version-*` source folders][versioned-source] contain documentation for specific releases.
-- The [`/docs/` source folder][next-source] contains documentation for the "Next" release.
-- When edits apply to the current version _and beyond_, they must be made in both the [`/docs/` folder][next-source] and the most recent [`/versioned_docs/version-*` folder][versioned-source].
+[Each instance of the documentation](#docs-vs-optimize) contains documentation for multiple versions:
+
+| Instance   | Version(s)         | Source path                           |
+| ---------- | ------------------ | ------------------------------------- |
+| `docs`     | Next               | `/docs/`                              |
+| `docs`     | 8.0, 1.3, 1.2, ... | `/versioned_docs/version-*/`          |
+| `optimize` | Next               | `/optimize/`                          |
+| `optimize` | 3.8.0, 3.7.0, ...  | `/optimize_versioned_docs/version-*/` |
+
+When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
 ## Adding a new documentation page
 
