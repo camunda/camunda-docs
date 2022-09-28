@@ -38,7 +38,7 @@ Requirements for the components can be seen below:
 | Operate                  | OpenJDK 11+  | Elasticsearch 7.16.x                                   |
 | Tasklist                 | OpenJDK 11+  | Elasticsearch 7.16.x                                   |
 | Identity                 | OpenJDK 17+  | Keycloak 16.1.1                                        |
-| Optimize                 | OpenJDK 11+  | Elasticsearch 7.10.x - 7.15.x, 7.16.2+, 7.17.x         |
+| Optimize                 | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x         |
 
 :::note Elasticsearch support
 [Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Camunda Platform 8.
