@@ -569,7 +569,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            <a href="../terminate-events/">Termination</a>
+            <a href="../terminate-events/">Terminate</a>
         </td>
         <td></td>
         <td></td>
