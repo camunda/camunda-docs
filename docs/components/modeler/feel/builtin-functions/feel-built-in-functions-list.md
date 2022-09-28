@@ -23,7 +23,7 @@ list contains([1,2,3], 2)
 - result: number
 
 ```js
-count([1, 2, 3]);
+count([1,2,3]) 
 // 3
 ```
 
@@ -35,10 +35,10 @@ count([1, 2, 3]);
 - result: number
 
 ```js
-min([1, 2, 3]);
+min([1,2,3]) 
 // 1
 
-min(1, 2, 3);
+min(1,2,3) 
 // 1
 ```
 
@@ -50,10 +50,10 @@ min(1, 2, 3);
 - result: number
 
 ```js
-min([1, 2, 3]);
+min([1,2,3]) 
 // 3
 
-min(1, 2, 3);
+min(1,2,3) 
 // 3
 ```
 
@@ -65,10 +65,10 @@ min(1, 2, 3);
 - result: number
 
 ```js
-min([1, 2, 3]);
+min([1,2,3]) 
 // 6
 
-min(1, 2, 3);
+min(1,2,3) 
 // 6
 ```
 
@@ -80,10 +80,10 @@ min(1, 2, 3);
 - result: number
 
 ```js
-product([2, 3, 4]);
+product([2, 3, 4])
 // 24
 
-product(2, 3, 4);
+product(2, 3, 4)
 // 24
 ```
 
@@ -97,10 +97,10 @@ Returns the arithmetic mean (i.e. average).
 - result: number
 
 ```js
-mean([1, 2, 3]);
+mean([1,2,3])
 // 2
 
-mean(1, 2, 3);
+mean(1,2,3)
 // 2
 ```
 
@@ -114,10 +114,10 @@ Returns the median element of the list of numbers.
 - result: number
 
 ```js
-median(8, 2, 5, 3, 4);
+median(8, 2, 5, 3, 4)
 // 4
 
-median([6, 1, 2, 3]);
+median([6, 1, 2, 3]) 
 // 2.5
 ```
 
@@ -131,10 +131,10 @@ Returns the standard deviation.
 - result: number
 
 ```js
-stddev(2, 4, 7, 5);
+stddev(2, 4, 7, 5)
 // 2.0816659994661326
 
-stddev([2, 4, 7, 5]);
+stddev([2, 4, 7, 5])
 // 2.0816659994661326
 ```
 
@@ -148,10 +148,10 @@ Returns the mode of the list of numbers.
 - result: list of numbers
 
 ```js
-mode(6, 3, 9, 6, 6);
+mode(6, 3, 9, 6, 6) 
 // [6]
 
-mode([6, 1, 9, 6, 1]);
+mode([6, 1, 9, 6, 1]) 
 // [1, 6]
 ```
 
@@ -163,10 +163,10 @@ mode([6, 1, 9, 6, 1]);
 - result: boolean
 
 ```js
-and([true, false]);
+and([true,false])
 // false
 
-and(false, null, true);
+and(false,null,true)
 // false
 ```
 
@@ -178,10 +178,10 @@ and(false, null, true);
 - result: boolean
 
 ```js
-or([false, true]);
+or([false,true])
 // true
 
-or(false, null, true);
+or(false,null,true)
 // true
 ```
 
@@ -194,10 +194,10 @@ or(false, null, true);
 - result: list
 
 ```js
-sublist([1, 2, 3], 2);
+sublist([1,2,3], 2)
 // [2,3]
 
-sublist([1, 2, 3], 1, 2);
+sublist([1,2,3], 1, 2)
 // [1,2]
 ```
 
@@ -209,7 +209,7 @@ sublist([1, 2, 3], 1, 2);
 - result: list
 
 ```js
-append([1], 2, 3);
+append([1], 2, 3)
 // [1,2,3]
 ```
 
@@ -220,10 +220,10 @@ append([1], 2, 3);
 - result: list
 
 ```js
-concatenate([1, 2], [3]);
+concatenate([1,2],[3]) 
 // [1,2,3]
 
-concatenate([1], [2], [3]);
+concatenate([1],[2],[3])
 // [1,2,3]
 ```
 
@@ -236,7 +236,7 @@ concatenate([1], [2], [3]);
 - result: list
 
 ```js
-insert before([1,3],1,2)
+insert before([1,3],1,2) 
 // [1,2,3]
 ```
 
@@ -248,7 +248,7 @@ insert before([1,3],1,2)
 - result: list
 
 ```js
-remove([1, 2, 3], 2);
+remove([1,2,3], 2) 
 // [1,3]
 ```
 
@@ -259,7 +259,7 @@ remove([1, 2, 3], 2);
 - result: list
 
 ```js
-reverse([1, 2, 3]);
+reverse([1,2,3]) 
 // [3,2,1]
 ```
 
@@ -271,7 +271,7 @@ reverse([1, 2, 3]);
 - result: list of numbers
 
 ```js
-index of([1,2,3,2],2)
+index of([1,2,3,2],2) 
 // [2,4]
 ```
 
@@ -282,7 +282,7 @@ index of([1,2,3,2],2)
 - result: list
 
 ```js
-union([1, 2], [2, 3]);
+union([1,2],[2,3])
 // [1,2,3]
 ```
 
@@ -304,7 +304,7 @@ distinct values([1,2,3,2,1])
 - result: list
 
 ```js
-flatten([[1, 2], [[3]], 4]);
+flatten([[1,2],[[3]], 4])
 // [1,2,3,4]
 ```
 

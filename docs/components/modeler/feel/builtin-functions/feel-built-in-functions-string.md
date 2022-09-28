@@ -13,10 +13,10 @@ description: "This document outlines built-in string functions and examples."
 - result: string
 
 ```js
-substring("foobar", 3);
+substring("foobar",3) 
 // "obar"
 
-substring("foobar", 3, 3);
+substring("foobar",3,3) 
 // "oba"
 ```
 
@@ -27,7 +27,7 @@ substring("foobar", 3, 3);
 - result: number
 
 ```js
-string length("foo")
+string length("foo") 
 // 3
 ```
 
@@ -85,7 +85,7 @@ substring after("foobar", "ob")
 - result: boolean
 
 ```js
-contains("foobar", "of");
+contains("foobar", "of") 
 // false
 ```
 
@@ -121,7 +121,7 @@ ends with("foobar", "r")
 - result: boolean
 
 ```js
-matches("foobar", "^fo*bar");
+matches("foobar", "^fo*bar") 
 // true
 ```
 
@@ -135,10 +135,10 @@ matches("foobar", "^fo*bar");
 - result: string
 
 ```js
-replace("abcd", "(ab)|(a)", "[1=$1][2=$2]");
+replace("abcd", "(ab)|(a)", "[1=$1][2=$2]")
 // "[1=ab][2=]cd"
 
-replace("0123456789", "(d{3})(d{3})(d{4})", "($1) $2-$3");
+replace("0123456789", "(\d{3})(\d{3})(\d{4})", "($1) $2-$3")
 // "(012) 345-6789"
 ```
 
@@ -150,10 +150,10 @@ replace("0123456789", "(d{3})(d{3})(d{4})", "($1) $2-$3");
 - result: list of strings
 
 ```js
-split("John Doe", "s");
+split("John Doe", "\s" ) 
 // ["John", "Doe"]
 
-split("a;b;c;;", ";");
+split("a;b;c;;", ";")
 // ["a", "b", "c", "", ""]
 ```
 
@@ -168,6 +168,6 @@ match.
 - result: list of strings
 
 ```js
-extract("references are 1234, 1256, 1378", "12[0-9]*");
+extract("references are 1234, 1256, 1378", "12[0-9]*")
 // ["1234","1256"]
 ```

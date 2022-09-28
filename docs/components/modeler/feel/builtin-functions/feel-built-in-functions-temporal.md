@@ -12,7 +12,7 @@ Returns the current date and time including the timezone.
 - result: date-time with timezone
 
 ```js
-now();
+now()
 // date and time("2020-07-31T14:27:30@Europe/Berlin")
 ```
 
@@ -24,7 +24,7 @@ Returns the current date.
 - result: date
 
 ```js
-today();
+today()
 // date("2020-07-31")
 ```
 
@@ -89,12 +89,12 @@ Returns the absolute value of a given duration.
 - result: duration
 
 ```js
-abs(duration("-PT5H"));
+abs(duration("-PT5H"))
 // "duration("PT5H")"
 
-abs(duration("PT5H"));
+abs(duration("PT5H"))
 // "duration("PT5H")"
 
-abs(duration("-P2M"));
+abs(duration("-P2M"))
 // duration("P2M")
 ```

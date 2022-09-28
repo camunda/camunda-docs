@@ -9,7 +9,7 @@ description: "This document outlines string expressions and examples."
 Creates a new string value.
 
 ```js
-"valid";
+"valid"
 ```
 
 ### Addition/concatenation
@@ -17,7 +17,7 @@ Creates a new string value.
 An addition concatenates the strings. The result is a string containing the characters of both strings.
 
 ```js
-"foo" + "bar";
+"foo" + "bar"
 // "foobar"
 ```
 
@@ -28,7 +28,7 @@ the [string()](/docs/components/modeler/feel/builtin-functions/feel-built-in-fun
 the value into a string first.
 
 ```js
-"order-" + string(123);
+"order-" + string(123)
 ```
 
 :::

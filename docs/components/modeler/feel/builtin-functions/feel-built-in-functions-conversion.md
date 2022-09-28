@@ -72,10 +72,10 @@ date and time(birthday)
 - result: day-time-duration or year-month-duration
 
 ```js
-duration(weekDays);
+duration(weekDays)
 // duration("P5D")
 
-duration(age);
+duration(age)
 // duration("P32Y")
 ```
 
@@ -98,7 +98,7 @@ years and months duration(date("2011-12-22"), date("2013-08-24"))
 - result: number
 
 ```js
-number("1500.5");
+number("1500.5") 
 // 1500.5
 ```
 
@@ -109,10 +109,10 @@ number("1500.5");
 - result: string
 
 ```js
-string(1.1);
+string(1.1) 
 // "1.1"
 
-string(date("2012-12-25"));
+string(date("2012-12-25"))
 // "2012-12-25"
 ```
 
@@ -131,9 +131,6 @@ Returns `null` if one of the entries is not a context or if a context doesn't co
 - result: context
 
 ```js
-context([
-  { key: "a", value: 1 },
-  { key: "b", value: 2 },
-]);
+context([{"key":"a", "value":1}, {"key":"b", "value":2}])
 // {a:1, b:2}
 ```

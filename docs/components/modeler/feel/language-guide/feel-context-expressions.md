@@ -48,7 +48,7 @@ A context value can embed other context values.
 ### Get entry or path
 
 ```js
-a.b;
+a.b
 ```
 
 Accesses the entry with the key `b` of the context `a`. The path is separated by `.`.
@@ -85,14 +85,14 @@ While filtering, the entries of the current context element can be accessed by t
 ```js
 [
   {
-    a: "p1",
-    b: 5,
-  },
+    a: "p1", 
+    b: 5
+  },  
   {
-    a: "p2",
-    b: 10,
-  },
-][b > 7];
+    a: "p2", 
+    b: 10
+  } 
+][b > 7] 
 // {a: "p2", b: 10}
 ```
 
@@ -105,12 +105,12 @@ list containing the values of the context elements for the given key.
 [
   {
     a: "p1",
-    b: 5,
+    b: 5
   },
   {
     a: "p2",
-    b: 10,
-  },
-].a;
+    b: 10
+  }
+].a     
 // ["p1", "p2"]
 ```

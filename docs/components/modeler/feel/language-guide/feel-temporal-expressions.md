@@ -6,24 +6,38 @@ description: "This document outlines temporal expressions and examples."
 
 ### Literal
 
-Creates a new temporal value.
+Creates a new temporal value. A value can be written in one of the following ways:
+
+- using a temporal function (e.g. `date("2020-04-06")`)
+- using the `@` - notation (e.g. `@"2020-04-06"`)
 
 ```js
 date("2020-04-06")
+@"2020-04-06"
 
 time("08:00:00")
 time("08:00:00+02:00")
 time("08:00:00@Europe/Berlin")
+@"08:00:00"
+@"08:00:00+02:00"
+@"08:00:00@Europe/Berlin"
 
 date and time("2020-04-06T08:00:00")
 date and time("2020-04-06T08:00:00+02:00")
 date and time("2020-04-06T08:00:00@Europe/Berlin")
+@"2020-04-06T08:00:00"
+@"2020-04-06T08:00:00+02:00"
+@"2020-04-06T08:00:00@Europe/Berlin"
 
 duration("P5D")
 duration("PT6H")
+@"P5D"
+@"PT6H"
 
 duration("P1Y6M")
 duration("P3M")
+@"P1Y6M"
+@"P3M"
 ```
 
 ### Addition
@@ -153,22 +167,22 @@ duration("P2D") + duration("P5D")
 </table>
 
 ```js
-date("2020-04-06") - date("2020-04-01");
+date("2020-04-06") - date("2020-04-01")
 // duration("P5D")
 
-date("2020-04-06") - duration("P5D");
+date("2020-04-06") - duration("P5D")
 // date("2020-04-01")
 
-time("08:00:00") - time("06:00:00");
+time("08:00:00") - time("06:00:00")
 // duration("PT2H")
 
-time("08:00:00") - duration("PT2H");
+time("08:00:00") - duration("PT2H")
 // time("06:00:00")
 
-duration("P7D") - duration("P2D");
+duration("P7D") - duration("P2D")
 // duration("P5D")
 
-duration("P1Y") - duration("P3M");
+duration("P1Y") - duration("P3M")
 // duration("P9M")
 ```
 
@@ -208,10 +222,10 @@ duration("P1Y") - duration("P3M");
 </table>
 
 ```js
-duration("P1D") * 5;
+duration("P1D") * 5
 // duration("P5D")
 
-duration("P1M") * 6;
+duration("P1M") * 6
 // duration("P6M")
 ```
 
@@ -251,16 +265,16 @@ duration("P1M") * 6;
 </table>
 
 ```js
-duration("P5D") / duration("P1D");
+duration("P5D") / duration("P1D")  
 // 5
 
-duration("P5D") / 5;
+duration("P5D") / 5
 // duration("P1D")
 
-duration("P1Y") / duration("P1M");
+duration("P1Y") / duration("P1M")
 // 12
 
-duration("P1Y") / 12;
+duration("P1Y") / 12
 // duration("P1M")
 ```
 

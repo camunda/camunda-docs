@@ -9,9 +9,9 @@ description: "This document outlines boolean expressions and examples."
 Creates a new boolean value.
 
 ```js
-true;
+true
 
-false;
+false
 ```
 
 ### Comparison

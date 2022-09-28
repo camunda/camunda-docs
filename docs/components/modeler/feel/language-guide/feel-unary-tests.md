@@ -61,7 +61,15 @@ The input value is passed implicitly as the first argument of the operator.
 </table>
 
 ```js
-"valid" < 10 <= date("2020-04-06") > time("08:00:00") >= duration("P5D");
+"valid"
+
+< 10
+
+<= date("2020-04-06")
+
+> time("08:00:00")
+
+>= duration("P5D")
 ```
 
 ### Interval
@@ -111,11 +119,11 @@ disjunction.
 It returns `true` if the given unary-test evaluates to `false`.
 
 ```js
-not("valid");
+not("valid")
 // input != "valid"
 
-not(2, 3);
-// input != 2 and input != 3
+not(2, 3)             
+// input != 2 and input != 3 
 ```
 
 ### Expressions

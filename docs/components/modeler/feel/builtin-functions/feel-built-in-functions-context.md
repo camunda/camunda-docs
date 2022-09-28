@@ -44,7 +44,7 @@ Returns `null` if the value is not defined.
 - result: context
 
 ```js
-put({ x: 1 }, "y", 2);
+put({x:1}, "y", 2)
 // {x:1, y:2}
 ```
 

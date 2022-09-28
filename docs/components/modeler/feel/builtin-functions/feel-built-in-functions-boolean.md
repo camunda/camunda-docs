@@ -11,7 +11,7 @@ description: "This document outlines current boolean functions and a few example
 - result: boolean
 
 ```js
-not(true);
+not(true)
 // false
 ```
 

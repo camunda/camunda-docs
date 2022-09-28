@@ -9,13 +9,13 @@ description: "This document outlines variables and examples."
 Access the value of a variable by its variable name.
 
 ```js
-a + b;
+a + b
 ```
 
 If the value of the variable is a context, a [context entry can be accessed](/docs/components/modeler/feel/language-guide/feel-context-expressions#get-entry-or-path) by its key.
 
 ```js
-a.b;
+a.b
 ```
 
 :::tip
