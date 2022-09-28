@@ -118,7 +118,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://camunda.com/get-started",
+              href: "https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral",
             },
             {
               label: "Contact",
@@ -139,7 +139,7 @@ module.exports = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/camunda-cloud/camunda-cloud-documentation",
+              href: "https://github.com/camunda/camunda-platform-docs",
             },
             {
               label: "Forum",
