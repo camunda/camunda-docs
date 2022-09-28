@@ -34,6 +34,12 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        {
+          Connectors: [
+            "guides/update-guide/connectors/introduction",
+            "guides/update-guide/connectors/010-to-020",
+          ],
+        },
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
         "guides/update-guide/120-to-130",

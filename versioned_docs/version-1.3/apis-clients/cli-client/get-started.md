@@ -80,13 +80,13 @@ Now, we can use the JSON object to route your process by filling in the conditio
 Use the following conditional expression for the **Pong** sequence flow:
 
 ```bash
-=return="Pong"
+=result="Pong"
 ```
 
 Use the following conditional expression for the **else** sequence flow:
 
 ```bash
-=return!="Pong"
+=result!="Pong"
 ```
 
 ![sequenceflows](./assets/zeebe-modeler-advanced-sequence-flows.png)
@@ -96,7 +96,7 @@ Use the following conditional expression for the **else** sequence flow:
 Now, you can deploy the [process](./assets/gettingstarted_quickstart_advanced.bpmn). Navigate to the folder where you saved your process.
 
 ```bash
-zbctl deploy gettingstarted_quickstart_advanced.bpmn
+zbctl deploy resource gettingstarted_quickstart_advanced.bpmn
 ```
 
 If the deployment is successful, you'll get the following output:
@@ -124,7 +124,7 @@ You will need the `bpmnProcessId` to create a new instance.
 The process uses the worker with the type `test-worker`. Register a new one by using the following command:
 
 ```bash
-zbctl create worker test-worker --handler "echo {\"return\":\"Pong\"}"
+zbctl create worker test-worker --handler "echo {\"result\":\"Pong\"}"
 ```
 
 ## Start a new instance
@@ -154,14 +154,15 @@ Because the worker returns the following output, the process ends in the upper e
 
 ```json
 {
-  "return": "Pong"
+  "result": "Pong"
 }
 ```
 
-This will change the worker to the following:
+To end up in the lower end event you'll have to modify the worker to return a different result.
+Change the worker to the following:
 
 ```bash
-zbctl create worker test-worker --handler "echo {\"return\":\"...\"}"
+zbctl create worker test-worker --handler "echo {\"result\":\"...\"}"
 ```
 
 Creating a new instance leads to a second instance in **Operate**, which you'll see ending in the second end event following the **else** sequence flow:
