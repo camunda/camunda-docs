@@ -56,7 +56,7 @@ module.exports = {
       isCloseable: false,
     },
     prism: {
-      additionalLanguages: ["java"],
+      additionalLanguages: ["java", "protobuf"],
     },
     navbar: {
       title: "Camunda Platform 8 Docs",
