@@ -810,7 +810,6 @@ All of these libraries are required for core functionality.
 - [commons-codec:commons-codec:1.15](https://commons.apache.org/proper/commons-codec/) (Apache License, Version 2.0)
 - [commons-io:commons-io:2.5](http://commons.apache.org/proper/commons-io/) (Apache License, Version 2.0)
 - [dev.failsafe:failsafe:3.3.0](https://failsafe.dev/failsafe) (Apache License, Version 2.0)
-- io.camunda:identity-sdk:8.0.0-SNAPSHOT (Unknown license)
 - [io.micrometer:micrometer-core:1.9.4](https://github.com/micrometer-metrics/micrometer) (The Apache Software License, Version 2.0)
 - [io.micrometer:micrometer-registry-prometheus:1.9.4](https://github.com/micrometer-metrics/micrometer) (The Apache Software License, Version 2.0)
 - [io.prometheus:simpleclient:0.15.0](http://github.com/prometheus/client_java/simpleclient) (The Apache Software License, Version 2.0)
