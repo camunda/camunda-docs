@@ -38,7 +38,7 @@ The scope of beta features and components is close to that of the targeted GA re
 
 :::note
 
-Even though there are no support obligations, customers can still provide feedback through their designated support channels, file issues in in the respective [GitHub repositories](https://github.com/camunda), as well as submit questions and suggestions in the [Camunda Forum](https://forum.camunda.io/).
+Even though there are no support obligations, customers can still provide feedback through their designated support channels, file issues in the respective [GitHub repositories](https://github.com/camunda), as well as submit questions and suggestions in the [Camunda Forum](https://forum.camunda.io/).
 
 :::
 
