@@ -9,40 +9,40 @@ create or update the following entities in Keycloak:
 
 ### Clients
 
-| Name                             | ID                               | Access Type  | Service Accounts | Service Account Roles                                                 | Condition                                                             |
-| -------------------------------- | -------------------------------- | ------------ | ---------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Identity                         | camunda-identity                 | confidential | enabled          | - Client ID: realm-management<br/>&nbsp;&nbsp;&nbsp;Role: realm-admin | Always created or updated                                             |
-| Camunda Identity Resource Server | camunda-identity-resource-server | confidential | enabled          |                                                                       | Always created or updated                                             |
-| Operate                          | operate                          | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_OPERATE...` environment variables are set    |
-| Operate API                      | operate-api                      | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_OPERATE...` environment variables are set    |
-| Optimize                         | optimize                         | confidentail | enabled          |                                                                       | Only when `KEYCLOAK_INIT_OPTIMIZE...` environment variables are set   |
-| Optimize API                     | optimize-api                     | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_OPTIMIZE...` environment variables are set   |
-| Tasklist                         | tasklist                         | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_TASKLIST...` environment variables are set   |
-| Tasklist API                     | tasklist-api                     | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_TASKLIST...` environment variables are set   |
-| Web Modeler                      | web-modeler                      | public       | false            |                                                                       | Only when `KEYCLOAK_INIT_WEBMODELER...` environment variables are set |
-| Web Modeler API                  | web-modeler-api                  | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_WEBMODELER...` environment variables are set |
+| Name                             | ID                               | Service Accounts | Created/Updated with component |
+| -------------------------------- | -------------------------------- | ---------------- | ------------------------------ |
+| Identity                         | camunda-identity                 | enabled          | All                            |
+| Camunda Identity Resource Server | camunda-identity-resource-server | enabled          | All                            |
+| Operate                          | operate                          | enabled          | Operate                        |
+| Operate API                      | operate-api                      | enabled          | Operate                        |
+| Optimize                         | optimize                         | enabled          | Optimize                       |
+| Optimize API                     | optimize-api                     | enabled          | Optimize                       |
+| Tasklist                         | tasklist                         | enabled          | Tasklist                       |
+| Tasklist API                     | tasklist-api                     | enabled          | Tasklist                       |
+| Web Modeler                      | web-modeler                      | disabled         | Web Modeler                    |
+| Web Modeler API                  | web-modeler-api                  | enabled          | Web Modeler                    |
 
 ### Roles
 
-| Name        | Composite | Composite Roles                                                                                                                                                               | Condition                                                           |
-| ----------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Identity    | true      | - Client ID: camunda-identity-resource-server<br/>&nbsp;&nbsp;&nbsp;Role Name: read<br/> - Client ID: camunda-identity-resource-server<br/>&nbsp;&nbsp;&nbsp;Role Name: write | Always created or updated                                           |
-| Operate     | true      | - Client ID: operate-api<br/>&nbsp;&nbsp;&nbsp;Role Name: read:\* <br/> - Client ID: operate-api<br/>&nbsp;&nbsp;&nbsp;Role Name: write:\*                                    | Only when `KEYCLOAK_INIT_OPERATE...` environment variables are set  |
-| Optimize    | true      | - Client ID: optimize-api<br/>&nbsp;&nbsp;&nbsp;Role Name: write:\*                                                                                                           | Only when `KEYCLOAK_INIT_OPTIMIZE...` environment variables are set |
-| Tasklist    | true      | - Client ID: tasklist-api<br/>&nbsp;&nbsp;&nbsp;Role Name: read:\* <br/> - Client ID: tasklist-api<br/>&nbsp;&nbsp;&nbsp;Role Name: write:\*                                  | Only when `KEYCLOAK_INIT_TASKLIST...` environment variables are set |
-| Web Modeler | true      | - Client ID: web-modeler-api<br/>&nbsp;&nbsp;&nbsp;Role Name: write:\* <br/> - Client ID: camunda-identity-resource-server<br/>&nbsp;&nbsp;&nbsp;Role Name: read:users        | Only when `KEYCLOAK_INIT_OPERATE...` environment variables are set  |
+| Name        | Created/Updated with component |
+| ----------- | ------------------------------ |
+| Identity    | All                            |
+| Operate     | Operate                        |
+| Optimize    | Optimize                       |
+| Tasklist    | Tasklist                       |
+| Web Modeler | Web Modeler                    |
 
 ### Client Scopes
 
-| Name             | Protocol       | Attributes                                                                 | Mappers                                                  |
-| ---------------- | -------------- | -------------------------------------------------------------------------- | -------------------------------------------------------- |
-| camunda-identity | openid-connect | - include.in.token.scope = false <br/> - display.on.consent.screen = false | email<br/>full name<br/>permissions<br/>audience resolve |
+| Name             | Protocol       | Description                                                                                                                                                                                                    |
+| ---------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| camunda-identity | openid-connect | A default client scope that contains mappers to augment the token generated with information required by the components of Camunda Platform. Contains the mappers described in the [mappers](#mappers) section |
 
 ### Mappers
 
-| Name             | Protocol Mapper                   | Config                                                                                                                                |
-| ---------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| email            | oidc-usermodel-property-mapper    | userinfo.token.claim = true<br/>user.attribute = email<br/>id.token.claim = true<br/>access.token.claim = true<br/>claim.name = email |
-| full name        | oidc-full-name-mapper             | id.token.claim = true<br/>access.token.claim = true<br/>userinfo.token.claim = true                                                   |
-| permissions      | oidc-usermodel-client-role-mapper | access.token.claim = true<br/>claim.name = permissions.${client_id}<br/>                                                              |
-| audience resolve | oidc-audience-resolve-mapper      |                                                                                                                                       |
+| Name             | Protocol Mapper                   | Description                                                                                              |
+| ---------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| email            | oidc-usermodel-property-mapper    | Adds the email user attribute to the `access`, `ID`, and `user info` tokens using the claim name `email` |
+| full name        | oidc-full-name-mapper             | Adds the user's full name to the `access`, `ID`, and `user info` tokens                                  |
+| permissions      | oidc-usermodel-client-role-mapper | Adds the users client roles to the `access` token with the claim name `permissions.${client_id}`         |
+| audience resolve | oidc-audience-resolve-mapper      | Adds the audiences the user has access to in the `audience` claim                                        |
