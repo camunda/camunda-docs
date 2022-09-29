@@ -11,7 +11,7 @@ Use early access releases to quickly learn about upcoming features and component
 
 Selected Camunda features and components are released upfront as alpha or beta versions, e.g., to provide users the opportunity to test a feature and participate in the development by giving feedback prior to market launch (general availability, GA).
 
-Early access releases are made available outside of the [release policy](/reference/release-policy.md). 
+Early access releases are made available outside of the [release policy](/reference/release-policy.md).
 
 ### Alpha
 
