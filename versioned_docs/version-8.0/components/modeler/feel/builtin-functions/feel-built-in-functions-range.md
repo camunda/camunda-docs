@@ -28,7 +28,7 @@ A scalar value must be of the following type:
   - or `range1`, `range2`: range
 - result: boolean
 
-```js
+```feel
 before(1, 10)
 // true
 
@@ -57,7 +57,7 @@ before([1..5),[5..10])
   - or `range1`, `range2`: range
 - result: boolean
 
-```js
+```feel
 after(10, 1)
 // true
 
@@ -84,7 +84,7 @@ before([5..10], [1..5))
   - `range2`: range
 - result: boolean
 
-```js
+```feel
 meets([1..5], [5..10])
 // true
 
@@ -106,7 +106,7 @@ meets([1..5], (5..8])
   - `range2`: range
 - result: boolean
 
-```js
+```feel
 met by([5..10], [1..5])
 // true
 
@@ -130,7 +130,7 @@ met by([5..10], [1..5))
   - `range2`: range
 - result: boolean
 
-```js
+```feel
 overlaps([5..10], [1..6])
 // true
 
@@ -154,7 +154,7 @@ overlaps([4..10], [1..5))
   - `range2`: range
 - result: boolean
 
-```js
+```feel
 overlaps before([1..5], [4..10])
 // true
 
@@ -178,7 +178,7 @@ overlaps before([1..5), [5..10])
   - `range2`: range
 - result: boolean
 
-```js
+```feel
 overlaps after([4..10], [1..5])
 // true
 
@@ -202,7 +202,7 @@ overlaps after([4..10], [1..5))
   - or `range1`, `range2`: range
 - result: boolean
 
-```js
+```feel
 finishes(5, [1..5])
 // true
 
@@ -226,7 +226,7 @@ finishes([5..10], [1..10))
   - or `range1`, `range2`: range
 - result: boolean
 
-```js
+```feel
 finishes by([5..10], 10)
 // true
 
@@ -250,7 +250,7 @@ finishes by([5..10], (1..10))
   - or `range1`, `range2`: range
 - result: boolean
 
-```js
+```feel
 includes([5..10], 6)
 // true
 
@@ -274,7 +274,7 @@ includes([1..10], [1..5))
   - or `range1`, `range2`: range
 - result: boolean
 
-```js
+```feel
 during(5, [1..10])
 // true
 
@@ -298,7 +298,7 @@ during((1..5], (1..10])
   - or `range1`, `range2`: range
 - result: boolean
 
-```js
+```feel
 starts(1, [1..5])
 // true
 
@@ -322,7 +322,7 @@ starts((1..10), (1..10))
   - or `range1`, `range2`: range
 - result: boolean
 
-```js
+```feel
 started by([1..10], 1)
 // true
 
@@ -346,7 +346,7 @@ started by([1..10], [1..10))
   - or `range1`, `range2`: range
 - result: boolean
 
-```js
+```feel
 coincides(5, 5)
 // true
 
