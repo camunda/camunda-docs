@@ -11,7 +11,7 @@ Creates a new temporal value. A value can be written in one of the following way
 - using a temporal function (e.g. `date("2020-04-06")`)
 - using the `@` - notation (e.g. `@"2020-04-06"`)
 
-```js
+```feel
 date("2020-04-06")
 @"2020-04-06"
 
@@ -93,7 +93,7 @@ duration("P3M")
 
 </table>
 
-```js
+```feel
 date("2020-04-06") + duration("P1D")
 // date("2020-04-07")
 
@@ -166,7 +166,7 @@ duration("P2D") + duration("P5D")
 
 </table>
 
-```js
+```feel
 date("2020-04-06") - date("2020-04-01")
 // duration("P5D")
 
@@ -221,7 +221,7 @@ duration("P1Y") - duration("P3M")
 
 </table>
 
-```js
+```feel
 duration("P1D") * 5
 // duration("P5D")
 
@@ -264,8 +264,8 @@ duration("P1M") * 6
 
 </table>
 
-```js
-duration("P5D") / duration("P1D")  
+```feel
+duration("P5D") / duration("P1D")
 // 5
 
 duration("P5D") / 5
@@ -382,7 +382,7 @@ for the given types:
 
 </table>
 
-```js
+```feel
 date("2020-04-06").year
 // 2020
 

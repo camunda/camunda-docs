@@ -8,13 +8,13 @@ description: "This document outlines numeric expressions and examples."
 
 Creates a new numeric value. Leading zeros are valid.
 
-```js
+```feel
 1
 
 0.5
 .5
 
--2 
+-2
 
 01
 
@@ -23,35 +23,35 @@ Creates a new numeric value. Leading zeros are valid.
 
 ### Addition
 
-```js
+```feel
 2 + 3
 // 5
 ```
 
 ### Subtraction
 
-```js
+```feel
 5 - 3
 // 2
 ```
 
 ### Multiplication
 
-```js
-5 * 3        
+```feel
+5 * 3
 // 15
 ```
 
 ### Division
 
-```js
-6 / 2  
+```feel
+6 / 2
 // 3
 ```
 
 ### Exponentiation
 
-```js
-2 ** 3   
+```feel
+2 ** 3
 // 8
 ```

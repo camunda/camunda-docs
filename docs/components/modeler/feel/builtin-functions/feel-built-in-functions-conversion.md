@@ -13,7 +13,7 @@ Convert a value into a different type.
   - or `year`, `month`, `day`: number
 - result: date
 
-```js
+```feel
 date(birthday)
 // date("2018-04-29")
 
@@ -32,7 +32,7 @@ date(2012, 12, 25)
     - (optional) `offset`: day-time-duration
 - result: time
 
-```js
+```feel
 time(lunchTime)
 // time("12:00:00")
 
@@ -54,7 +54,7 @@ time(14, 30, 0, duration("PT1H"))
   - or `from`: string
 - result: date-time
 
-```js
+```feel
 date and time(date("2012-12-24"),time("T23:59:00"))
 // date and time("2012-12-24T23:59:00")
 
@@ -71,7 +71,7 @@ date and time(birthday)
   - `from`: string
 - result: day-time-duration or year-month-duration
 
-```js
+```feel
 duration(weekDays)
 // duration("P5D")
 
@@ -86,7 +86,7 @@ duration(age)
   - `to`: date
 - result: year-month-duration
 
-```js
+```feel
 years and months duration(date("2011-12-22"), date("2013-08-24"))
 // duration("P1Y8M")
 ```
@@ -97,8 +97,8 @@ years and months duration(date("2011-12-22"), date("2013-08-24"))
   - `from`: string
 - result: number
 
-```js
-number("1500.5") 
+```feel
+number("1500.5")
 // 1500.5
 ```
 
@@ -108,8 +108,8 @@ number("1500.5")
   - `from`: any
 - result: string
 
-```js
-string(1.1) 
+```feel
+string(1.1)
 // "1.1"
 
 string(date("2012-12-25"))
@@ -130,7 +130,7 @@ Returns `null` if one of the entries is not a context or if a context doesn't co
   - `entries`: list of contexts
 - result: context
 
-```js
+```feel
 context([{"key":"a", "value":1}, {"key":"b", "value":2}])
 // {a:1, b:2}
 ```

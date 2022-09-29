@@ -8,13 +8,13 @@ description: "This document outlines variables and examples."
 
 Access the value of a variable by its variable name.
 
-```js
+```feel
 a + b
 ```
 
 If the value of the variable is a context, a [context entry can be accessed](/docs/components/modeler/feel/language-guide/feel-context-expressions#get-entry-or-path) by its key.
 
-```js
+```feel
 a.b
 ```
 
@@ -22,7 +22,7 @@ a.b
 
 Use a [null-check](/docs/components/modeler/feel/language-guide/feel-boolean-expressions#null-check) if the variable can be `null` or is optional.
 
-```js
+```feel
 a != null and a.b > 10
 ```
 
@@ -35,7 +35,7 @@ combination of words, it is recommended to use `camelCase` or the `snake_case` f
 
 If a variable name or context key contains any special character (e.g. whitespace, dash, etc.,) the name can be placed in single backticks (e.g. `` `foo bar` ``).
 
-```js
+```feel
 `first name`
 
 `tracking-id`

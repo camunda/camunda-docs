@@ -16,7 +16,7 @@ FEEL has two types of expressions for different use cases:
 A [unary-tests expression](./language-guide/feel-unary-tests.md) is a special kind of boolean expression. It should be used for the input
 entries of a decision table (i.e. the conditions of a rule).
 
-```js
+```feel
 < 7
 // checks if the input value is less than 7
 
@@ -35,7 +35,7 @@ not(2,4)
 [General expressions](./language-guide/feel-expressions-introduction.md) that can return values of different types. They can be used everywhere; for
 example, in a decision table as an input expression or as an output entry.
 
-```js
+```feel
 applicant.monthly.income * 12
 
 if applicant.maritalStatus in ("M","S") then "valid" else "not valid"

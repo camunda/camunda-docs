@@ -14,11 +14,11 @@ Round the given number at the given scale using the given rounding mode. If no r
   - (optional) `mode`: string - one of `UP, DOWN, CEILING, FLOOR, HALF_UP, HALF_DOWN, HALF_EVEN, UNNECESSARY` (default: `HALF_EVEN`)
 - result: number
 
-```js
+```feel
 decimal(1/3, 2)
 // .33
 
-decimal(1.5, 0) 
+decimal(1.5, 0)
 // 2
 
 decimal(2.5, 0, "half_up")
@@ -31,7 +31,7 @@ decimal(2.5, 0, "half_up")
   - `n`: number
 - result: number
 
-```js
+```feel
 floor(1.5)
 // 1
 
@@ -51,7 +51,7 @@ Round the given number at the given scale using the ceiling rounding mode.
     -(optional) `scale`: number (default: `0`)
 - result: number
 
-```js
+```feel
 ceiling(1.5)
 // 2
 
@@ -71,7 +71,7 @@ Round the given number at the given scale using the round-up rounding mode.
   - (optional) `scale`: number (default: `0`)
 - result: number
 
-```js
+```feel
 round up(5.5)
 // 6
 
@@ -94,7 +94,7 @@ Round the given number at the given scale using the round-down rounding mode.
   - (optional) `scale`: number (default: `0`)
 - result: number
 
-```js
+```feel
 round down(5.5)
 // 5
 
@@ -117,7 +117,7 @@ Round the given number at the given scale using the round-half-up rounding mode.
   - (optional) `scale`: number (default: `0`)
 - result: number
 
-```js
+```feel
 round half up(5.5)
 // 6
 
@@ -141,7 +141,7 @@ Round the given number at the given scale using the round-half-down rounding mod
   -(optional) `scale`: number (default: `0`)
 - result: number
 
-```js
+```feel
 round half down (5.5)
 // 5
 
@@ -163,7 +163,7 @@ Returns the absolute value of the given numeric value.
   - `number`: number
 - result: number
 
-```js
+```feel
 abs(10)
 // 10
 
@@ -180,7 +180,7 @@ Returns the remainder of the division of dividend by divisor.
   - `divisor`: number
 - result: number
 
-```js
+```feel
 modulo(12, 5)
 // 2
 ```
@@ -193,7 +193,7 @@ Returns the square root.
   - `number`: number
 - result: number
 
-```js
+```feel
 sqrt(16)
 // 4
 ```
@@ -206,7 +206,7 @@ Returns the natural logarithm (base e) of the number.
   - `number`: number
 - result: number
 
-```js
+```feel
 log(10)
 // 2.302585092994046
 ```
@@ -219,7 +219,7 @@ Returns the Euler’s number e raised to the power of number .
   - `number`: number
 - result: number
 
-```js
+```feel
 exp(5)
 // 148.4131591025766
 ```
@@ -232,7 +232,7 @@ Returns `true` if the given numeric value is odd. Otherwise, it returns `false`.
   - `number`: number
 - result: boolean
 
-```js
+```feel
 odd(5)
 // true
 
@@ -248,7 +248,7 @@ Returns `true` if the given numeric value is even. Otherwise, it returns `false`
   - `number`: number
 - result: boolean
 
-```js
+```feel
 even(5)
 // false
 

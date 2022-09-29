@@ -11,7 +11,7 @@ description: "This document outlines built-in list functions and examples."
   - `element`: any
 - result: boolean
 
-```js
+```feel
 list contains([1,2,3], 2)
 // true
 ```
@@ -22,8 +22,8 @@ list contains([1,2,3], 2)
   - `list`: list
 - result: number
 
-```js
-count([1,2,3]) 
+```feel
+count([1,2,3])
 // 3
 ```
 
@@ -34,11 +34,11 @@ count([1,2,3])
   - or numbers as varargs
 - result: number
 
-```js
-min([1,2,3]) 
+```feel
+min([1,2,3])
 // 1
 
-min(1,2,3) 
+min(1,2,3)
 // 1
 ```
 
@@ -49,11 +49,11 @@ min(1,2,3)
   - or numbers as varargs
 - result: number
 
-```js
-min([1,2,3]) 
+```feel
+min([1,2,3])
 // 3
 
-min(1,2,3) 
+min(1,2,3)
 // 3
 ```
 
@@ -64,11 +64,11 @@ min(1,2,3)
   - or numbers as varargs
 - result: number
 
-```js
-min([1,2,3]) 
+```feel
+min([1,2,3])
 // 6
 
-min(1,2,3) 
+min(1,2,3)
 // 6
 ```
 
@@ -79,7 +79,7 @@ min(1,2,3)
   - or numbers as varargs
 - result: number
 
-```js
+```feel
 product([2, 3, 4])
 // 24
 
@@ -96,7 +96,7 @@ Returns the arithmetic mean (i.e. average).
   - or numbers as varargs
 - result: number
 
-```js
+```feel
 mean([1,2,3])
 // 2
 
@@ -113,11 +113,11 @@ Returns the median element of the list of numbers.
   - or numbers as varargs
 - result: number
 
-```js
+```feel
 median(8, 2, 5, 3, 4)
 // 4
 
-median([6, 1, 2, 3]) 
+median([6, 1, 2, 3])
 // 2.5
 ```
 
@@ -130,7 +130,7 @@ Returns the standard deviation.
   - or numbers as varargs
 - result: number
 
-```js
+```feel
 stddev(2, 4, 7, 5)
 // 2.0816659994661326
 
@@ -147,11 +147,11 @@ Returns the mode of the list of numbers.
   - or numbers as varargs
 - result: list of numbers
 
-```js
-mode(6, 3, 9, 6, 6) 
+```feel
+mode(6, 3, 9, 6, 6)
 // [6]
 
-mode([6, 1, 9, 6, 1]) 
+mode([6, 1, 9, 6, 1])
 // [1, 6]
 ```
 
@@ -162,7 +162,7 @@ mode([6, 1, 9, 6, 1])
   - or booleans as varargs
 - result: boolean
 
-```js
+```feel
 and([true,false])
 // false
 
@@ -177,7 +177,7 @@ and(false,null,true)
   - or booleans as varargs
 - result: boolean
 
-```js
+```feel
 or([false,true])
 // true
 
@@ -193,7 +193,7 @@ or(false,null,true)
   - (optional) `length`: number
 - result: list
 
-```js
+```feel
 sublist([1,2,3], 2)
 // [2,3]
 
@@ -208,7 +208,7 @@ sublist([1,2,3], 1, 2)
   - `items`: elements as varargs
 - result: list
 
-```js
+```feel
 append([1], 2, 3)
 // [1,2,3]
 ```
@@ -219,8 +219,8 @@ append([1], 2, 3)
   - `lists`: lists as varargs
 - result: list
 
-```js
-concatenate([1,2],[3]) 
+```feel
+concatenate([1,2],[3])
 // [1,2,3]
 
 concatenate([1],[2],[3])
@@ -235,8 +235,8 @@ concatenate([1],[2],[3])
   - `newItem`: any
 - result: list
 
-```js
-insert before([1,3],1,2) 
+```feel
+insert before([1,3],1,2)
 // [1,2,3]
 ```
 
@@ -247,8 +247,8 @@ insert before([1,3],1,2)
   - `position`: number
 - result: list
 
-```js
-remove([1,2,3], 2) 
+```feel
+remove([1,2,3], 2)
 // [1,3]
 ```
 
@@ -258,8 +258,8 @@ remove([1,2,3], 2)
   - `list`: list
 - result: list
 
-```js
-reverse([1,2,3]) 
+```feel
+reverse([1,2,3])
 // [3,2,1]
 ```
 
@@ -270,8 +270,8 @@ reverse([1,2,3])
   - `match`: any
 - result: list of numbers
 
-```js
-index of([1,2,3,2],2) 
+```feel
+index of([1,2,3,2],2)
 // [2,4]
 ```
 
@@ -281,7 +281,7 @@ index of([1,2,3,2],2)
   - `lists`: lists as varargs
 - result: list
 
-```js
+```feel
 union([1,2],[2,3])
 // [1,2,3]
 ```
@@ -292,7 +292,7 @@ union([1,2],[2,3])
   - `list`: list
 - result: list
 
-```js
+```feel
 distinct values([1,2,3,2,1])
 // [1,2,3]
 ```
@@ -303,7 +303,7 @@ distinct values([1,2,3,2,1])
   - `list`: list
 - result: list
 
-```js
+```feel
 flatten([[1,2],[[3]], 4])
 // [1,2,3,4]
 ```
@@ -315,7 +315,7 @@ flatten([[1,2],[[3]], 4])
   - `precedes`: function with two arguments and boolean result
 - result: list
 
-```js
+```feel
 sort(list: [3,1,4,5,2], precedes: function(x,y) x < y)
 // [1,2,3,4,5]
 ```
@@ -338,7 +338,7 @@ neither a string nor `null`, the function returns `null` instead of a string.
     string)
 - Result: The joined list as a string
 
-```js
+```feel
 string join(["a","b","c"])
 // "abc"
 string join(["a"], "X")

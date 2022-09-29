@@ -12,7 +12,7 @@ Nothing, null, or nil (i.e. the value is not present).
 
 - Java Type: `null`
 
-```js
+```feel
 null
 ```
 
@@ -23,13 +23,13 @@ A whole or floating point number. The number can be negative.
 - not-a-number (NaN), positive/negative infinity are represented as `null`
 - Java Type: `java.math.BigDecimal`
 
-```js
+```feel
 1
 
 2.3
 
 .4
-    
+
 -5
 ```
 
@@ -39,7 +39,7 @@ A sequence of characters enclosed in double quotes `"`. The sequence can also co
 
 - Java Type: `java.lang.String`
 
-```js
+```feel
 "valid"
 ```
 
@@ -49,7 +49,7 @@ A boolean value. It is either true or false.
 
 - Java Type: `java.lang.Boolean`
 
-```js
+```feel
 true
 
 false
@@ -62,7 +62,7 @@ A date value without a time component.
 - Format: `yyyy-MM-dd`.
 - Java Type: `java.time.LocalDate`
 
-```js
+```feel
 date("2017-03-10")
 
 @"2017-03-10"
@@ -75,7 +75,7 @@ A local or zoned time. The time can have an offset or time zone id.
 - Format: `HH:mm:ss` / `HH:mm:ss+/-HH:mm` / `HH:mm:ss@ZoneId`
 - Java Type: `java.time.LocalTime` / `java.time.OffsetTime`
 
-```js
+```feel
 time("11:45:30")
 time("13:30")
 time("11:45:30+02:00")
@@ -94,7 +94,7 @@ A date with a local or zoned time component. The time can have an offset or time
 - Format: `yyyy-MM-dd'T'HH:mm:ss` / `yyyy-MM-dd'T'HH:mm:ss+/-HH:mm` / `yyyy-MM-dd'T'HH:mm:ss@ZoneId`
 - Java Type: `java.time.LocalDateTime` / `java.time.DateTime`
 
-```js
+```feel
 date and time("2015-09-18T10:31:10")
 date and time("2015-09-18T10:31:10+01:00")
 date and time("2015-09-18T10:31:10@Europe/Paris")
@@ -111,7 +111,7 @@ A duration based on seconds. It can contain days, hours, minutes, and seconds.
 - Format: `PxDTxHxMxS`
 - Java Type: `java.time.Duration`
 
-```js
+```feel
 duration("P4D")
 duration("PT2H")
 duration("PT30M")
@@ -130,7 +130,7 @@ A duration based on the calendar. It can contain years and months.
 - Format: `PxYxM`
 - Java Type: `java.time.Period`
 
-```js
+```feel
 duration("P2Y")
 duration("P6M")
 duration("P1Y6M")
@@ -146,7 +146,7 @@ A list of elements. The elements can be of any type. The list can be empty.
 
 - Java Type: `java.util.List`
 
-```js
+```feel
 []
 [1,2,3]
 ["a","b"]
@@ -161,7 +161,7 @@ can be any type. The context can be empty.
 
 - Java Type: `java.util.Map`
 
-```js
+```feel
 {}
 
 {a:1}

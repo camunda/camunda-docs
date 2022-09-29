@@ -12,11 +12,11 @@ description: "This document outlines built-in string functions and examples."
   - (optional) `length`: number
 - result: string
 
-```js
-substring("foobar",3) 
+```feel
+substring("foobar",3)
 // "obar"
 
-substring("foobar",3,3) 
+substring("foobar",3,3)
 // "oba"
 ```
 
@@ -26,8 +26,8 @@ substring("foobar",3,3)
   - `string`: string
 - result: number
 
-```js
-string length("foo") 
+```feel
+string length("foo")
 // 3
 ```
 
@@ -37,7 +37,7 @@ string length("foo")
   - `string`: string
 - result: string
 
-```js
+```feel
 upper case("aBc4")
 // "ABC4"
 ```
@@ -48,7 +48,7 @@ upper case("aBc4")
   - `string`: string
 - result: string
 
-```js
+```feel
 lower case("aBc4")
 // "abc4"
 ```
@@ -60,7 +60,7 @@ lower case("aBc4")
   - `match`: string
 - result: string
 
-```js
+```feel
 substring before("foobar", "bar")
 // "foo"
 ```
@@ -72,7 +72,7 @@ substring before("foobar", "bar")
   - `match`: string
 - result: string
 
-```js
+```feel
 substring after("foobar", "ob")
 // "ar"
 ```
@@ -84,8 +84,8 @@ substring after("foobar", "ob")
   - `match`: string
 - result: boolean
 
-```js
-contains("foobar", "of") 
+```feel
+contains("foobar", "of")
 // false
 ```
 
@@ -96,7 +96,7 @@ contains("foobar", "of")
   - `match`: string
 - result: boolean
 
-```js
+```feel
 starts with("foobar", "fo")
 // true
 ```
@@ -108,7 +108,7 @@ starts with("foobar", "fo")
   - `match`: string
 - result: boolean
 
-```js
+```feel
 ends with("foobar", "r")
 // true
 ```
@@ -120,8 +120,8 @@ ends with("foobar", "r")
   - `pattern`: string (regular expression)
 - result: boolean
 
-```js
-matches("foobar", "^fo*bar") 
+```feel
+matches("foobar", "^fo*bar")
 // true
 ```
 
@@ -134,7 +134,7 @@ matches("foobar", "^fo*bar")
   - (optional) `flags`: string ("s", "m", "i", "x")
 - result: string
 
-```js
+```feel
 replace("abcd", "(ab)|(a)", "[1=$1][2=$2]")
 // "[1=ab][2=]cd"
 
@@ -149,8 +149,8 @@ replace("0123456789", "(\d{3})(\d{3})(\d{4})", "($1) $2-$3")
   - `delimiter`: string (regular expression)
 - result: list of strings
 
-```js
-split("John Doe", "\s" ) 
+```feel
+split("John Doe", "\s" )
 // ["John", "Doe"]
 
 split("a;b;c;;", ";")
@@ -167,7 +167,7 @@ match.
   - `pattern`: string (regular expression)
 - result: list of strings
 
-```js
+```feel
 extract("references are 1234, 1256, 1378", "12[0-9]*")
 // ["1234","1256"]
 ```

@@ -11,7 +11,7 @@ Returns the current date and time including the timezone.
 - parameters: no
 - result: date-time with timezone
 
-```js
+```feel
 now()
 // date and time("2020-07-31T14:27:30@Europe/Berlin")
 ```
@@ -23,7 +23,7 @@ Returns the current date.
 - parameters: no
 - result: date
 
-```js
+```feel
 today()
 // date("2020-07-31")
 ```
@@ -36,7 +36,7 @@ Returns the day of the week according to the Gregorian calendar. Note that it al
   - `date`: date/date-time
 - result: string
 
-```js
+```feel
 day of week(date("2019-09-17"))
 // "Tuesday"
 ```
@@ -49,7 +49,7 @@ Returns the Gregorian number of the day within the year.
   - `date`: date/date-time
 - result: number
 
-```js
+```feel
 day of year(date("2019-09-17"))
 // 260
 ```
@@ -62,7 +62,7 @@ Returns the Gregorian number of the week within the year, according to ISO 8601.
   - `date`: date/date-time
 - result: number
 
-```js
+```feel
 week of year(date("2019-09-17"))
 // 38
 ```
@@ -75,7 +75,7 @@ Returns the month of the week according to the Gregorian calendar. Note that it 
   - `date`: date/date-time
 - result: string
 
-```js
+```feel
 month of year(date("2019-09-17"))
 // "September"
 ```
@@ -88,7 +88,7 @@ Returns the absolute value of a given duration.
   - `n`: days-time-duration/years-months-duration
 - result: duration
 
-```js
+```feel
 abs(duration("-PT5H"))
 // "duration("PT5H")"
 
