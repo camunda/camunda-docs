@@ -9,16 +9,28 @@ create or update the following entities in Keycloak:
 
 ### Clients
 
-| Name                             | ID                               | Access Type  | Service Accounts | Service Account Roles                                                 |
-| -------------------------------- | -------------------------------- | ------------ | ---------------- | --------------------------------------------------------------------- |
-| Identity                         | camunda-identity                 | confidential | enabled          | - Client ID: realm-management<br/>&nbsp;&nbsp;&nbsp;Role: realm-admin |
-| Camunda Identity Resource Server | camunda-identity-resource-server | confidential | enabled          |                                                                       |
+| Name                             | ID                               | Access Type  | Service Accounts | Service Account Roles                                                 | Condition                                                             |
+| -------------------------------- | -------------------------------- | ------------ | ---------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --- |
+| Identity                         | camunda-identity                 | confidential | enabled          | - Client ID: realm-management<br/>&nbsp;&nbsp;&nbsp;Role: realm-admin | Always created or updated                                             |
+| Camunda Identity Resource Server | camunda-identity-resource-server | confidential | enabled          |                                                                       | Always created or updated                                             |
+| Operate                          | operate                          | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_OPERATE...` environment variables are set    |
+| Operate API                      | operate-api                      | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_OPERATE...` environment variables are set    |     |
+| Optimize                         | optimize                         | confidentail | enabled          |                                                                       | Only when `KEYCLOAK_INIT_OPTIMIZE...` environment variables are set   |
+| Optimize API                     | optimize-api                     | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_OPTIMIZE...` environment variables are set   |
+| Tasklist                         | tasklist                         | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_TASKLIST...` environment variables are set   |
+| Tasklist API                     | tasklist-api                     | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_TASKLIST...` environment variables are set   |
+| Web Modeler                      | web-modeler                      | public       | false            |                                                                       | Only when `KEYCLOAK_INIT_WEBMODELER...` environment variables are set |
+| Web Modeler API                  | web-modeler-api                  | confidential | enabled          |                                                                       | Only when `KEYCLOAK_INIT_WEBMODELER...` environment variables are set |
 
 ### Roles
 
-| Name     | Composite | Composite Roles                                                                                                                                                               |
-| -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Identity | true      | - Client ID: camunda-identity-resource-server<br/>&nbsp;&nbsp;&nbsp;Role Name: read<br/> - Client ID: camunda-identity-resource-server<br/>&nbsp;&nbsp;&nbsp;Role Name: write |
+| Name        | Composite | Composite Roles                                                                                                                                                               | Condition                                                           |
+| ----------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Identity    | true      | - Client ID: camunda-identity-resource-server<br/>&nbsp;&nbsp;&nbsp;Role Name: read<br/> - Client ID: camunda-identity-resource-server<br/>&nbsp;&nbsp;&nbsp;Role Name: write | Always created or updated                                           |
+| Operate     | true      | - Client ID: operate-api<br/>&nbsp;&nbsp;&nbsp;Role Name: read:\* <br/> - Client ID: operate-api<br/>&nbsp;&nbsp;&nbsp;Role Name: write:\*                                    | Only when `KEYCLOAK_INIT_OPERATE...` environment variables are set  |
+| Optimize    | true      | - Client ID: optimize-api<br/>&nbsp;&nbsp;&nbsp;Role Name: write:\*                                                                                                           | Only when `KEYCLOAK_INIT_OPTIMIZE...` environment variables are set |
+| Tasklist    | true      | - Client ID: tasklist-api<br/>&nbsp;&nbsp;&nbsp;Role Name: read:\* <br/> - Client ID: tasklist-api<br/>&nbsp;&nbsp;&nbsp;Role Name: write:\*                                  | Only when `KEYCLOAK_INIT_TASKLIST...` environment variables are set |
+| Web Modeler | true      | - Client ID: web-modeler-api<br/>&nbsp;&nbsp;&nbsp;Role Name: write:\* <br/> - Client ID: camunda-identity-resource-server<br/>&nbsp;&nbsp;&nbsp;Role Name: read:users        | Only when `KEYCLOAK_INIT_OPERATE...` environment variables are set  |
 
 ### Client Scopes
 
