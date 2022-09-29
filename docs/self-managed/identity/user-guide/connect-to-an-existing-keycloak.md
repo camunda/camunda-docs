@@ -8,18 +8,20 @@ In this guide, we'll demonstrate how to connect the Identity component to your e
 
 ### Prerequisites
 
-- Access to your Keycloak Admin Console
-- A basic understanding of administering realms and clients in Keycloak
+- Access to your [Keycloak Admin Console](https://www.keycloak.org/docs/16.1/server_admin/#using-the-admin-console)
+- A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/16.1/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak
+
+### Steps
 
 To connect Identity to an existing Keycloak instance, take the following steps:
 
 1. Log in to your Keycloak Admin Console.
 
-2. Hover over the selected realm name. In our example, this is **Master**. Select the realm you would like to connect Identity to. In our example, this is **Test Realm**.
+2. Select the realm you would like to connect Identity to. In our example, this is **Test Realm**
 
 ![keycloak-admin-realm-select](img/keycloak-admin-realm-select.png)
 
-3. Click **Clients** in the left navigation menu, and then click **Create**.
+3. Select **Clients** in the navigation menu, and click the **Create** button to create a new client.
 
 ![keycloak-admin-client-list](img/keycloak-admin-client-list.png)
 
@@ -30,36 +32,37 @@ To connect Identity to an existing Keycloak instance, take the following steps:
 
 ![keycloak-admin-client-add](img/keycloak-admin-client-add.png)
 
-5. On the page for the client created, set the **Access Type** to `confidential` and **Service Accounts Enabled** to `ON`.
+5. On the page for the client created, set the **Access Type** to `confidential`, **Service Accounts Enabled** to `ON`, and save your changes by clicking the **Save** button.
 
 ![keycloak-admin-update-client-1](img/keycloak-admin-update-client-1.png)
 
-6. Scroll to the bottom of the page, click **Save**, and return to the top of the page.
-
-7. Click the **Service Account Roles** tab in the top navigation.
+6. Navigate to the **Service Account Roles** tab in the top navigation.
 
 ![keycloak-admin-update-client-2](img/keycloak-admin-update-client-2.png)
 
-8. Select the `realm-management` client from the **Client Roles** dropdown.
+7. Select the `realm-management` client from the **Client Roles** dropdown.
 
 ![keycloak-admin-update-client-3](img/keycloak-admin-update-client-3.png)
 
-9. Assign the `manage-clients`, `manage-realm`, and `manage-users` role from the **Available Roles** list.
+8. Assign the `manage-clients`, `manage-realm`, and `manage-users` role from the **Available Roles** list.
 
 ![keycloak-admin-update-client-4](img/keycloak-admin-update-client-4.png)
 
 :::note Why does Identity need these roles?
 Identity is designed to allow users to manage the various entities related to the Camunda Platform. To achieve this, it requires specific access to the realm.
-:::
-
-10. Click the **Credentials** tab and copy the client secret.
+::: 9. Navigate to the **Credentials** tab and copy the client secret.
 
 ![keycloak-admin-copy-client-credentials.png](img/keycloak-admin-copy-client-credentials.png)
 
-11. Set the `IDENTITY_CLIENT_SECRET` [environment variable](/docs/self-managed/identity/deployment/configuration-variables.md) with the value from step 9.
+10. Set the `IDENTITY_CLIENT_SECRET` [environment variable](/docs/self-managed/identity/deployment/configuration-variables.md) with the value from step 9.
 
-12. Start the Identity application.
+11. Start the Identity application.
 
 :::note What does Identity create when starting?
 The Identity application creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/docs/self-managed/identity/deployment/starting-configuration.md).
 :::
+
+### Considerations
+
+When connecting Identity to a shared realm, we are unable to accurately determine what clients should and should not be displayed in the Identity UI. This means the clients in the realm you connect Identity to will be shown in the Identity UI and can
+have their secrets viewed and updated. We recommend that users with access to Identity should be considered as having administrators level access to the system.

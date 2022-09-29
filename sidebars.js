@@ -962,7 +962,6 @@ module.exports = {
           Troubleshooting: [
             "self-managed/identity/troubleshooting/troubleshoot-identity",
             "self-managed/identity/troubleshooting/common-problems",
-            "self-managed/identity/troubleshooting/known-limitations",
           ],
         },
       ],

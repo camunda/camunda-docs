@@ -12,16 +12,19 @@ methods.
 
 | Environment variable                 | Description                                          | Default value                                                                                                                                                            |
 | ------------------------------------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `IDENTITY_AUTH_PROVIDER_BACKEND_URL` | Used to support container to container communication | http://localhost:18080/auth/realms/camunda-platform                                                                                                                      |
+| `IDENTITY_BASE_PATH`                 | Used to configure Identity to run on a subpath       |                                                                                                                                                                          |
+| `IDENTITY_CLIENT_ID`                 | The client ID for the Identity client                | camunda-identity                                                                                                                                                         |
+| `IDENTITY_CLIENT_SECRET`             | The client secret for the Identity client            |                                                                                                                                                                          |
+| `IDENTITY_LOG_LEVEL`                 | The level of which to log messages at                | INFO                                                                                                                                                                     |
+| `IDENTITY_LOG_PATTERN`               | The pattern to use when logging                      | `%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx` |
 | `IDENTITY_URL`                       | The URL of the Identity service                      | http://localhost:8080                                                                                                                                                    |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use              | http://localhost:18080/auth                                                                                                                                              |
 | `KEYCLOAK_REALM`                     | The name of the Keycloak Realm to connect to         | camunda-platform                                                                                                                                                         |
-| `IDENTITY_AUTH_PROVIDER_BACKEND_URL` | Used to support container to container communication | http://localhost:18080/auth/realms/camunda-platform                                                                                                                      |
-| `IDENTITY_BASE_PATH`                 | Used to configure Identity to run on a subpath       |                                                                                                                                                                          |
-| `IDENTITY_LOG_LEVEL`                 | The level of which to log messages at                | INFO                                                                                                                                                                     |
-| `IDENTITY_LOG_PATTERN`               | The pattern to use when logging                      | `%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx` |
 
 :::note
-When setting the `IDENTITY_BASE_PATH` variable, a secure connection (HTTPS) is required to allow Identity to correctly handle requests.
+When setting the `IDENTITY_BASE_PATH` variable, a secure connection (HTTPS) is required to allow Identity to correctly
+handle requests.
 :::
 
 ### Component configuration
@@ -35,7 +38,8 @@ component for use within Identity, all that is required is to set two variables:
 | `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` | The root URL of where the component is hosted | No default    |
 
 :::note
-Identity supports the following values for the `<COMPONENT>` placeholder: `OPERATE`, `OPTIMIZE`, `TASKLIST`, and `WEBMODELER`.
+Identity supports the following values for the `<COMPONENT>` placeholder: `OPERATE`, `OPTIMIZE`, `TASKLIST`,
+and `WEBMODELER`.
 
 For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variable is required to be set.
 :::
