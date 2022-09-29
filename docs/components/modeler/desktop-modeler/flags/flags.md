@@ -39,6 +39,7 @@ Flags passed as command line arguments take precedence over those configured via
 | "single-instance"            | false                               |
 | "user-data-dir"              | [Electron default](../search-paths) |
 | "display-version"            | `undefined`                         |
+| "zeebe-ssl-certificate"      | `undefined`                         |
 
 ## Examples
 
@@ -68,3 +69,15 @@ To display a custom version information in the status bar of the app, configure 
 ```
 
 ![Custom version info](./img/display-version.png)
+
+### Zeebe SSL certificate
+
+To use a self-signed certificate to connect to Camunda Platform 8 Self-Managed, configure your `flags.json` like this:
+
+```js
+{
+    "zeebe-ssl-certificate": "/Users/local/certificate.pem"
+}
+```
+
+As a result, the app will use the certificate to securely connect to the gateway.
