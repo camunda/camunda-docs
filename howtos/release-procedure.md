@@ -27,12 +27,18 @@ To prepare for a minor release, you'll need to create a new verison.
 
 ### Create new version
 
-Technically, the current contents are frozen in `docs` and copied to `versioned_docs` with the corresponding version. The process can be triggered by this Docusaurus command:
+Technically, the current contents are frozen in `docs` and copied to `versioned_docs` with the corresponding version.
 
-```bash
-npm run docusaurus docs:version 8.1
+(TODO: expand these notes)
 
-```
+- Link to multi-instance version explanation to explain why the process is more involved now
+- Step 1: make the ./hacks/cutNewVersions shell file executable, if it isn't already:
+  - `chmod +x ./hacks/cutNewVersions.sh`
+- Step 2: Update the versions in ./hacks/cutNewVersions.sh
+- Step 3: run cutNewVersions:
+  - `./hacks/cutNewVersions.sh`
+- Step 4: Manually update src/mdx/expandVersionedUrl.js to include new version mapping
+  - specifically, add an item to `versionMappings` variable
 
 Create a PR with the changes and merge to `main`, confirming no build issues before moving to the release steps.
 
