@@ -14,14 +14,14 @@ Round the given number at the given scale using the given rounding mode. If no r
   - (optional) `mode`: string - one of `UP, DOWN, CEILING, FLOOR, HALF_UP, HALF_DOWN, HALF_EVEN, UNNECESSARY` (default: `HALF_EVEN`)
 - result: number
 
-```js
-decimal(1 / 3, 2);
+```feel
+decimal(1/3, 2)
 // .33
 
-decimal(1.5, 0);
+decimal(1.5, 0)
 // 2
 
-decimal(2.5, 0, "half_up");
+decimal(2.5, 0, "half_up")
 // 3
 ```
 
@@ -31,39 +31,143 @@ decimal(2.5, 0, "half_up");
   - `n`: number
 - result: number
 
-```js
-floor(1.5);
+```feel
+floor(1.5)
 // 1
 
-floor(-1.5);
+floor(-1.5)
 // -2
+
+floor(-1.56, 1)
+// -1.6
 ```
 
 ## ceiling()
 
+Round the given number at the given scale using the ceiling rounding mode.
+
 - parameters:
   - `n`: number
+    -(optional) `scale`: number (default: `0`)
 - result: number
 
-```js
-ceiling(1.5);
+```feel
+ceiling(1.5)
 // 2
 
-floor(-1.5);
+ceiling(-1.5)
 // -1
+
+ceiling(-1.56, 1)
+// -1.5
+```
+
+## round up()
+
+Round the given number at the given scale using the round-up rounding mode.
+
+- parameters:
+  - `n`: number
+  - (optional) `scale`: number (default: `0`)
+- result: number
+
+```feel
+round up(5.5)
+// 6
+
+round up(-5.5)
+// -6
+
+round up(1.121, 2)
+// 1.13
+
+round up(-1.126, 2)
+// -1.13
+```
+
+## round down()
+
+Round the given number at the given scale using the round-down rounding mode.
+
+- parameters:
+  - `n`: number
+  - (optional) `scale`: number (default: `0`)
+- result: number
+
+```feel
+round down(5.5)
+// 5
+
+round down (-5.5)
+// -5
+
+round down (1.121, 2)
+// 1.12
+
+round down (-1.126, 2)
+// -1.12
+```
+
+## round half up()
+
+Round the given number at the given scale using the round-half-up rounding mode.
+
+- parameters:
+  - `n`: number
+  - (optional) `scale`: number (default: `0`)
+- result: number
+
+```feel
+round half up(5.5)
+// 6
+
+round half up(-5.5)
+// -6
+
+round half up(1.121, 2)
+// 1.12
+
+round half up(-1.126, 2)
+// -1.13
+```
+
+## round half down()
+
+Round the given number at the given scale using the round-half-down rounding mode.
+
+-parameters:
+
+- `n`: number
+  -(optional) `scale`: number (default: `0`)
+- result: number
+
+```feel
+round half down (5.5)
+// 5
+
+round half down (-5.5)
+// -5
+
+round half down (1.121, 2)
+// 1.12
+
+round half down (-1.126, 2)
+// -1.13
 ```
 
 ## abs()
+
+Returns the absolute value of the given numeric value.
 
 - parameters:
   - `number`: number
 - result: number
 
-```js
-abs(10);
+```feel
+abs(10)
 // 10
 
-abs(-10);
+abs(-10)
 // 10
 ```
 
@@ -76,8 +180,8 @@ Returns the remainder of the division of dividend by divisor.
   - `divisor`: number
 - result: number
 
-```js
-modulo(12, 5);
+```feel
+modulo(12, 5)
 // 2
 ```
 
@@ -89,8 +193,8 @@ Returns the square root.
   - `number`: number
 - result: number
 
-```js
-sqrt(16);
+```feel
+sqrt(16)
 // 4
 ```
 
@@ -102,8 +206,8 @@ Returns the natural logarithm (base e) of the number.
   - `number`: number
 - result: number
 
-```js
-log(10);
+```feel
+log(10)
 // 2.302585092994046
 ```
 
@@ -115,29 +219,39 @@ Returns the Euler’s number e raised to the power of number .
   - `number`: number
 - result: number
 
-```js
-exp(5);
+```feel
+exp(5)
 // 148.4131591025766
 ```
 
 ## odd()
 
+Returns `true` if the given numeric value is odd. Otherwise, it returns `false`.
+
 - parameters:
   - `number`: number
 - result: boolean
 
-```js
-odd(5);
+```feel
+odd(5)
 // true
+
+odd(2)
+// false
 ```
 
 ## even()
 
+Returns `true` if the given numeric value is even. Otherwise, it returns `false`.
+
 - parameters:
   - `number`: number
 - result: boolean
 
-```js
-odd(5);
+```feel
+even(5)
 // false
+
+even(2)
+// true
 ```

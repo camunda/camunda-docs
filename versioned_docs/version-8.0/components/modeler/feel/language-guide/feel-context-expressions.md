@@ -9,7 +9,7 @@ description: "This document outlines context expressions and examples."
 Creates a new context with the given entries. Each entry has a key and a value. The key is either a
 name or a string. The value can be any type.
 
-```js
+```feel
 {
   a: 1,
   b: 2
@@ -25,7 +25,7 @@ name or a string. The value can be any type.
 
 Inside the context, the previous entries can be accessed.
 
-```js
+```feel
 {
   a: 2,
   b: a * 2
@@ -35,7 +35,7 @@ Inside the context, the previous entries can be accessed.
 
 A context value can embed other context values.
 
-```js
+```feel
 {
   a: 1,
   b: {
@@ -47,15 +47,15 @@ A context value can embed other context values.
 
 ### Get entry or path
 
-```js
-a.b;
+```feel
+a.b
 ```
 
 Accesses the entry with the key `b` of the context `a`. The path is separated by `.`.
 
 If the value of the entry `b` is also a context, the path can be chained (i.e. `a.b.c`).
 
-```js
+```feel
 {
   a: 2
 }.a
@@ -82,17 +82,17 @@ Filters a list of context elements. It is a special kind of the [filter expressi
 
 While filtering, the entries of the current context element can be accessed by their key.
 
-```js
+```feel
 [
   {
     a: "p1",
-    b: 5,
+    b: 5
   },
   {
     a: "p2",
-    b: 10,
-  },
-][b > 7];
+    b: 10
+  }
+][b > 7]
 // {a: "p2", b: 10}
 ```
 
@@ -101,16 +101,16 @@ While filtering, the entries of the current context element can be accessed by t
 Extracts the entries of a list of context elements by a given key (i.e. a projection). It returns a
 list containing the values of the context elements for the given key.
 
-```js
+```feel
 [
   {
     a: "p1",
-    b: 5,
+    b: 5
   },
   {
     a: "p2",
-    b: 10,
-  },
-].a;
+    b: 10
+  }
+].a
 // ["p1", "p2"]
 ```
