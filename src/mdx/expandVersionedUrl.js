@@ -1,24 +1,12 @@
 // @ts-check
 
+// Note: these type definitions are only checked within an editor. We aren't set up
+//   for type-checking in the build (yet!) but having these types defined helped me write this code.
 /**
  * @typedef {object} VersionMapping
  * @property {string} docsVersion
  * @property {string} optimizeVersion
- */
-
-/** @type {Array<VersionMapping>} */
-const versionMappings = [
-  // When cutting a new version, add a new mapping here!
-  {
-    docsVersion: "8.0",
-    optimizeVersion: "3.8.0",
-  },
-  { docsVersion: "1.3", optimizeVersion: "3.7.0" },
-];
-
-const [currentVersions, ...remainingVersions] = versionMappings;
-
-/**
+ *
  * @typedef {object} Token
  * @property {string} token
  * @property {Array<TokenRule>} rules
@@ -27,6 +15,18 @@ const [currentVersions, ...remainingVersions] = versionMappings;
  * @property {string} match
  * @property {string} expandTo
  */
+
+/** @type {Array<VersionMapping>} */
+const versionMappings = [
+  // 👋 When cutting a new version, add a new mapping here!
+  {
+    docsVersion: "8.0",
+    optimizeVersion: "3.8.0",
+  },
+  { docsVersion: "1.3", optimizeVersion: "3.7.0" },
+];
+
+const [currentVersions, ...remainingVersions] = versionMappings;
 
 /** @type {Token} */
 const docsToken = {
