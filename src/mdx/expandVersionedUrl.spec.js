@@ -21,6 +21,7 @@ describe("expandVersionedUrl", () => {
         "/Users/monkeypants/camunda-platform-docs/optimize/what-is-optimize.md",
         "/docs/next/some/thing",
       ],
+
       [
         "/Users/monkeypants/camunda-platform-docs/optimize_versioned_docs/version-3.8.0/what-is-optimize.md",
         "/docs/some/thing",
@@ -40,21 +41,16 @@ describe("expandVersionedUrl", () => {
     it.each([
       [
         "/Users/monkeypants/camunda-platform-docs/docs/what-is-optimize.md",
+        "/optimize/next/some/thing",
+      ],
+      [
+        "/Users/monkeypants/camunda-platform-docs/versioned_docs/version-8.0/what-is-optimize.md",
         "/optimize/some/thing",
       ],
-      // TODO: introduce these specs as versions are added for optimize.
-      // [
-      //   "/Users/monkeypants/camunda-platform-docs/docs/what-is-optimize.md",
-      //   "/optimize/next/some/thing",
-      // ],
-      // [
-      //   "/Users/monkeypants/camunda-platform-docs/versioned_docs/version-8.0/what-is-optimize.md",
-      //   "/optimize/some/thing",
-      // ],
-      // [
-      //   "/Users/monkeypants/camunda-platform-docs/versioned_docs/version-1.3/what-is-optimize.md",
-      //   "/optimize/3.7.0/some/thing",
-      // ],
+      [
+        "/Users/monkeypants/camunda-platform-docs/versioned_docs/version-1.3/what-is-optimize.md",
+        "/optimize/3.7.0/some/thing",
+      ],
     ])("when in %s it expands to %s", (sourcePath, expandedUrl) => {
       expect(expandVersionedUrl(targetUrl, sourcePath)).toEqual(expandedUrl);
     });
