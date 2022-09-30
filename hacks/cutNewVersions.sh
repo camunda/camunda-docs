@@ -1,4 +1,5 @@
 #!/bin/bash   
+set -e
 
 # Before running this script make sure these versions are correct!
 NEW_DOCS_VERSION="8.1"
