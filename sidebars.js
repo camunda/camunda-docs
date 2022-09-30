@@ -957,7 +957,7 @@ module.exports = {
           Deployment: [
             "self-managed/identity/deployment/configuration-variables",
             "self-managed/identity/deployment/application-monitoring",
-            "self-managed/identity/deployment/starting-configuration",
+            "self-managed/identity/deployment/starting-configuration-for-identity",
           ],
           Troubleshooting: [
             "self-managed/identity/troubleshooting/troubleshoot-identity",

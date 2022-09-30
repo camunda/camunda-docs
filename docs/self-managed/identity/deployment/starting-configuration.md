@@ -1,6 +1,6 @@
 ---
-id: starting-configuration
-title: "Starting configuration"
+id: starting-configuration-for-identity
+title: "Starting configuration for Identity"
 sidebar_label: "Starting configuration"
 ---
 

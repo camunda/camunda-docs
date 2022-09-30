@@ -17,7 +17,7 @@ To connect Identity to an existing Keycloak instance, take the following steps:
 
 1. Log in to your Keycloak Admin Console.
 
-2. Select the realm you would like to connect Identity to. In our example, this is **Test Realm**
+2. Select the realm you would like to connect Identity to. In our example, this is **Test Realm**.
 
 ![keycloak-admin-realm-select](img/keycloak-admin-realm-select.png)
 
@@ -26,13 +26,14 @@ To connect Identity to an existing Keycloak instance, take the following steps:
 ![keycloak-admin-client-list](img/keycloak-admin-client-list.png)
 
 4. Enter the client ID and the URL of where your Identity instance will be hosted and click **Save**.
-   :::note What client ID should I use?
-   By default, Identity uses the Client ID `camunda-identity`, so we recommend using this too. If you choose a different client ID, this will need to be set in the Identity application [environment variables](/docs/self-managed/identity/deployment/configuration-variables.md).
-   :::
+
+:::note What client ID should I use?
+By default, Identity uses the Client ID `camunda-identity`, so we recommend using this too. If you choose a different client ID, this will need to be set in the Identity application [environment variables](/docs/self-managed/identity/deployment/configuration-variables.md).
+:::
 
 ![keycloak-admin-client-add](img/keycloak-admin-client-add.png)
 
-5. On the page for the client created, set the **Access Type** to `confidential`, **Service Accounts Enabled** to `ON`, and save your changes by clicking the **Save** button.
+5. On the page for the created client, set the **Access Type** to `confidential`, **Service Accounts Enabled** to `ON`, and save your changes by clicking the **Save** button.
 
 ![keycloak-admin-update-client-1](img/keycloak-admin-update-client-1.png)
 
