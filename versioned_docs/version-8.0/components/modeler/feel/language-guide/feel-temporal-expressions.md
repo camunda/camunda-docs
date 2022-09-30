@@ -8,7 +8,7 @@ description: "This document outlines temporal expressions and examples."
 
 Creates a new temporal value.
 
-```js
+```feel
 date("2020-04-06")
 
 time("08:00:00")
@@ -79,7 +79,7 @@ duration("P3M")
 
 </table>
 
-```js
+```feel
 date("2020-04-06") + duration("P1D")
 // date("2020-04-07")
 
@@ -152,23 +152,23 @@ duration("P2D") + duration("P5D")
 
 </table>
 
-```js
-date("2020-04-06") - date("2020-04-01");
+```feel
+date("2020-04-06") - date("2020-04-01")
 // duration("P5D")
 
-date("2020-04-06") - duration("P5D");
+date("2020-04-06") - duration("P5D")
 // date("2020-04-01")
 
-time("08:00:00") - time("06:00:00");
+time("08:00:00") - time("06:00:00")
 // duration("PT2H")
 
-time("08:00:00") - duration("PT2H");
+time("08:00:00") - duration("PT2H")
 // time("06:00:00")
 
-duration("P7D") - duration("P2D");
+duration("P7D") - duration("P2D")
 // duration("P5D")
 
-duration("P1Y") - duration("P3M");
+duration("P1Y") - duration("P3M")
 // duration("P9M")
 ```
 
@@ -207,11 +207,11 @@ duration("P1Y") - duration("P3M");
 
 </table>
 
-```js
-duration("P1D") * 5;
+```feel
+duration("P1D") * 5
 // duration("P5D")
 
-duration("P1M") * 6;
+duration("P1M") * 6
 // duration("P6M")
 ```
 
@@ -250,17 +250,17 @@ duration("P1M") * 6;
 
 </table>
 
-```js
-duration("P5D") / duration("P1D");
+```feel
+duration("P5D") / duration("P1D")
 // 5
 
-duration("P5D") / 5;
+duration("P5D") / 5
 // duration("P1D")
 
-duration("P1Y") / duration("P1M");
+duration("P1Y") / duration("P1M")
 // 12
 
-duration("P1Y") / 12;
+duration("P1Y") / 12
 // duration("P1M")
 ```
 
@@ -368,7 +368,7 @@ for the given types:
 
 </table>
 
-```js
+```feel
 date("2020-04-06").year
 // 2020
 

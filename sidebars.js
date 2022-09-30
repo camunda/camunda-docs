@@ -34,6 +34,12 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        {
+          Connectors: [
+            "guides/update-guide/connectors/introduction",
+            "guides/update-guide/connectors/010-to-020",
+          ],
+        },
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
         "guides/update-guide/120-to-130",
@@ -176,6 +182,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/timer-events/timer-events",
                 "components/modeler/bpmn/error-events/error-events",
+                "components/modeler/bpmn/terminate-events/terminate-events",
               ],
             },
             {
@@ -207,8 +214,8 @@ module.exports = {
               "Out-of-the-box Connectors": [
                 "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
                 "components/integration-framework/connectors/out-of-the-box-connectors/aws-sqs",
-                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
                 "components/integration-framework/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
                 "components/integration-framework/connectors/out-of-the-box-connectors/rest",
                 "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
                 "components/integration-framework/connectors/out-of-the-box-connectors/slack",
