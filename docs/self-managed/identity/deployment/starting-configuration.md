@@ -9,7 +9,7 @@ create or update the following entities in Keycloak:
 
 ### Clients
 
-| Name                             | ID                               | Service Accounts | Created/Updated with component |
+| Name                             | Client ID                        | Service Accounts | Created/Updated with component |
 | -------------------------------- | -------------------------------- | ---------------- | ------------------------------ |
 | Identity                         | camunda-identity                 | enabled          | All                            |
 | Camunda Identity Resource Server | camunda-identity-resource-server | enabled          | All                            |
