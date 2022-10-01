@@ -9,36 +9,35 @@ Use early access releases to quickly learn about upcoming features and component
 
 ## Types of early access releases
 
-Selected Camunda features and components are released upfront as alpha or beta versions, e.g., to provide users the opportunity to test a feature and participate in the development by giving feedback prior to market launch (general availability, GA).
+Selected Camunda features and components are released upfront as alpha or beta versions, to provide users the opportunity to test a feature and participate in the development by giving feedback prior to market launch (general availability, GA).
 
 Early access releases are made available outside of the [release policy](/reference/release-policy.md).
 
 ### Alpha
 
-Alpha features and components are introduced to gather early feedback from users. These features and components are still under heavy development, and might change. These releases are intended only for non-production usages in trying out recent, potentially yet unfinished new features. Characteristics are:
+Alpha features and components are introduced to gather early feedback from users. These features and components are still under heavy development, and are expected to change. These releases are intended only for non-production usages in trying out recent, potentially yet unfinished new features. Characteristics are:
 
 - Not for production use
-- Unstable, potentially causing performance issues
 - APIs, dependencies and configuration are likely to change
 - Not necessarily feature-complete
 - May not be documented
-- No update support guaranteed
-- Not covered by service level agreements (SLAs), and no support obligations
+- Updatability to a newer release not guaranteed
+- Support based on SLAs agreed with you, but bugs are treated with the same priority as feature or help requests
+- No maintenance service
+- On SaaS: no availability targets
 
 ### Beta
 
-The scope of beta features and components is close to that of the targeted GA release. A beta release may still be missing some features. Characteristics are:
 
-- Not for production use
-- Unstable, potentially causing performance issues
+The scope of beta features and components is close enough to the targeted GA release that we are willing to provide update support, but we're still making the final changes. Therefore, it may still be missing some features. It comes with similar characteristics as an alpha release, but with following differences:
+
 - APIs, dependencies and configuration are not likely to change
 - Potentially feature-complete
-- Update support provided
-- Not covered by service level agreements (SLAs), and no support obligations
+- Can be updated to a newer release
 
 :::note
 
-Even though there are no support obligations, customers can still provide feedback through their designated support channels, file issues in the respective [GitHub repositories](https://github.com/camunda), as well as submit questions and suggestions in the [Camunda Forum](https://forum.camunda.io/).
+Even though there is no maintenance service, customers can still provide feedback depending on their SLAs, such as through their designated support channels, filing issues in the respective [GitHub repositories](https://github.com/camunda), as well as by submitting questions and suggestions in the [Camunda Forum](https://forum.camunda.io/).
 
 :::
 
