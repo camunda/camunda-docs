@@ -2,10 +2,10 @@
 id: aws-sqs
 title: Amazon Simple Queue Service Connector
 sidebar_label: Amazon SQS Connector
-description: Send messages to Amazon Simple Queue Service from your BPMN process.
+description: Send messages to Amazon Simple Queue Service (SQS) from your BPMN process.
 ---
 
-The Amazon SQS Connector allows you to connect your BPMN service with Amazon Web Service's [Simple Queue Service](https://aws.amazon.com/sqs/).
+The Amazon SQS Connector allows you to connect your BPMN service with [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/).
 
 ## Prerequisites
 

@@ -60,8 +60,16 @@ The input value is passed implicitly as the first argument of the operator.
 
 </table>
 
-```js
-"valid" < 10 <= date("2020-04-06") > time("08:00:00") >= duration("P5D");
+```feel
+"valid"
+
+< 10
+
+<= date("2020-04-06")
+
+> time("08:00:00")
+
+>= duration("P5D")
 ```
 
 ### Interval
@@ -74,7 +82,7 @@ excludes the value (i.e. less/greater than).
 
 The input value is passed implicitly to the operator.
 
-```js
+```feel
 (2..5)
 // input > 2 and input < 5
 
@@ -95,7 +103,7 @@ Combines multiple unary-test expressions following the ternary logic.
 - Returns `true` if at least one unary-test evaluates to `true`.
 - Otherwise, it returns `false`.
 
-```js
+```feel
 2, 3, 4
 // input = 2 or input = 3 or input = 4
 
@@ -110,11 +118,11 @@ disjunction.
 
 It returns `true` if the given unary-test evaluates to `false`.
 
-```js
-not("valid");
+```feel
+not("valid")
 // input != "valid"
 
-not(2, 3);
+not(2, 3)
 // input != 2 and input != 3
 ```
 
@@ -124,7 +132,7 @@ Evaluates an expression that returns a boolean value. For example, [invoking a f
 
 The input value can be accessed in the expression by using the symbol `?` (a question mark).
 
-```js
+```feel
 contains(?, "good")
 // check if the input value (string) contains "good"
 

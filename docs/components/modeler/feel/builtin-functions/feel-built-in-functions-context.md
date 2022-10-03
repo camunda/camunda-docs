@@ -13,7 +13,7 @@ Returns the value of the context entry with the given key.
   - `key`: string
 - result: any
 
-```js
+```feel
 get value({foo: 123}, "foo")
 // 123
 ```
@@ -26,7 +26,7 @@ Returns the entries of the context as a list of key-value-pairs.
   - `context`: context
 - result: list of context which contains two entries for "key" and "value"
 
-```js
+```feel
 get entries({foo: 123})
 // [{key: "foo", value: 123}]
 ```
@@ -43,8 +43,8 @@ Returns `null` if the value is not defined.
   - `value`: any
 - result: context
 
-```js
-put({ x: 1 }, "y", 2);
+```feel
+put({x:1}, "y", 2)
 // {x:1, y:2}
 ```
 
@@ -58,7 +58,7 @@ Returns `null` if one of the values is not a context.
   - `contexts`: contexts as varargs
 - result: context
 
-```js
+```feel
 put all({x:1}, {y:2})
 // {x:1, y:2}
 ```

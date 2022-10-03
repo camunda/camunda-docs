@@ -12,7 +12,7 @@ function by its name. The arguments of the function can be passed positional or 
 - Positional: Only the values, in the same order as defined by the function (e.g. `f(1,2)`).
 - Named: The values with the argument name as prefix, in any order (e.g. `f(a: 1, b: 2)`).
 
-```js
+```feel
 contains("me@camunda.com", ".com")
 // true
 
@@ -22,7 +22,7 @@ contains(string: "me@camunda.com", match: ".de")
 
 ### User-defined
 
-```js
+```feel
 function(a,b) e
 ```
 
@@ -31,7 +31,7 @@ the function is invoked, it assigns the values to the arguments and evaluates th
 
 Within an expression, a function can be defined and invoked in a context.
 
-```js
+```feel
 {
   age: function(birthday) (today() - birthday).years
 }
