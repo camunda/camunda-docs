@@ -42,7 +42,7 @@ To create the new versions:
    ```
 
 2. Update [the versions at the top of the `./hacks/cutNewVersions.sh` file](../hacks/cutNewVersions.sh#L4-L8).
-3. Run the `./hacks/`cutNewVersions.sh` script:
+3. Run the `./hacks/cutNewVersions.sh` script:
 
    ```bash
    > ./hacks/cutNewVersions.sh
