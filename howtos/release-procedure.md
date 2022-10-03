@@ -29,7 +29,7 @@ To prepare for a minor release, you'll need to create a new version.
 
 The versioning process copies a snapshot of the current documentation from the un-versioned source to a new versioned source location.
 
-Because we are using [multiple docusaurus docs instances](./howtos/versioning.md#instances-docs-vs-optimize), we technically create _two_ new versions at time of product release: one for the main documentation, and one for the Optimize documentation.
+Because we are using [multiple docusaurus docs instances](./versioning.md#instances-docs-vs-optimize), we technically create _two_ new versions at time of product release: one for the main documentation, and one for the Optimize documentation.
 
 Docusaurus creates the new versions in `versioned_docs` and `optimize_versioned_docs`. The contents in `docs` and `optimize` immediately become the documentation for the _next_ release.
 
