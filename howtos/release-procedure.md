@@ -35,7 +35,7 @@ Docusaurus creates the new versions in `versioned_docs` and `optimize_versioned_
 
 To create the new versions:
 
-1. Make the `./hacks/cutNewVersions` shell file executable, if it isn't already:
+1. Make the `./hacks/cutNewVersions.sh` shell file executable, if it isn't already:
 
    ```bash
    > chmod +x ./hacks/cutNewVersions.sh
@@ -63,7 +63,7 @@ To create the new versions:
    ];
    ```
 
-   - Add the new mapping as the first position of the array.
+   - Add the new mapping in the first position of the array.
 
 5. Create a PR with the changes and merge to `main`. Confirm no build issues before moving to the release steps.
 
