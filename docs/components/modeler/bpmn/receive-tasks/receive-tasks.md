@@ -43,7 +43,7 @@ A receive task with message definition:
 ```xml
 <bpmn:message id="Message_1iz5qtq" name="Money collected">
    <bpmn:extensionElements>
-     <zeebe:subscription correlationKey="orderId" />
+     <zeebe:subscription correlationKey="=orderId" />
    </bpmn:extensionElements>
 </bpmn:message>
 
