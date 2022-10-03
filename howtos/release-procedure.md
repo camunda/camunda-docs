@@ -33,8 +33,6 @@ Because we are using [multiple docusaurus docs instances](./versioning.md#instan
 
 Docusaurus creates the new versions in `versioned_docs` and `optimize_versioned_docs`. The contents in `docs` and `optimize` immediately become the documentation for the _next_ release.
 
-When creating a new version, the current contents are frozen in `docs` and copied to `versioned_docs` with the corresponding version.
-
 To create the new versions:
 
 1. Make the `./hacks/cutNewVersions` shell file executable, if it isn't already:
