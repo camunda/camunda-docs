@@ -23,7 +23,7 @@ The build process for [publish-prod](https://github.com/camunda/camunda-platform
 
 Minor releases to Camunda Platform 8 happen twice a year in April and October, and the documentation is versioned on the same cadence.
 
-To prepare for a minor release, you'll need to create a new version.
+To prepare for a minor product release, you'll need to create a new docs version.
 
 ### Create new version
 
