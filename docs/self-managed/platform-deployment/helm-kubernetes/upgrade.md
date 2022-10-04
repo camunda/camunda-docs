@@ -77,3 +77,78 @@ If you have specified on the first installation certain values, you have to spec
 :::
 
 For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
+
+## Version upgrade instructions
+
+In additional to the [general upgrade instructions](#general-upgrade-instructions), the following sections are needed only if you upgrading to a certain version or the versions after it.
+
+### v8.0.13
+
+If you installed Camunda Platform 8 using Helm chart earlier to `8.0.13`, you need to apply the following steps to handel the new Elasticsearch labels.
+
+As a prerequisite, make sure you have Elasticsearch Helm repository added:
+
+```sh
+helm repo add elastic https://helm.elastic.co
+```
+
+**1. Retain Elasticsearch Persistent Volume**
+
+First get the name of Elasticsearch Persistent Volumes:
+
+```sh
+ES_PV_NAME0=$(kubectl get pvc elasticsearch-master-elasticsearch-master-0 -o jsonpath="{.spec.volumeName}")
+
+ES_PV_NAME1=$(kubectl get pvc elasticsearch-master-elasticsearch-master-1 -o jsonpath="{.spec.volumeName}")
+```
+
+Make sure these are the correct Persistent Volumes:
+
+```sh
+kubectl get persistentvolume $ES_PV_NAME0 $ES_PV_NAME1
+```
+
+It should show something like that (note the name of the claim, it's for Elasticsearch):
+
+```
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                                   STORAGECLASS   REASON   AGE
+pvc-80bde37a-3c5b-40f4-87f3-8440e658be75   64Gi       RWO            Delete           Bound    camunda/elasticsearch-master-elasticsearch-master-0     standard                20d
+pvc-3e9129bc-9415-46c3-a005-00ce3b9b3be9   64Gi       RWO            Delete           Bound    camunda/elasticsearch-master-elasticsearch-master-1     standard                20d
+```
+
+The final step here is to change Persistent Volumes reclaim policy:
+
+```sh
+kubectl patch persistentvolume "${ES_PV_NAME0}" \
+    -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+
+kubectl patch persistentvolume "${ES_PV_NAME1}" \
+    -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+```
+
+**2. Update Elasticsearch PersistentVolumeClaim labels**
+
+```sh
+kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-0 \
+    release=<RELEASE_NAME> chart=elasticsearch app=elasticsearch-master
+
+kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-1 \
+    release=<RELEASE_NAME> chart=elasticsearch app=elasticsearch-master
+```
+
+**3. Delete Elasticsearch StatefulSet**
+
+Please note that there will be a **downtime** between this step and the next step.
+
+```sh
+kubectl delete statefulset elasticsearch-master
+```
+
+**4. Apply Elasticsearch StatefulSet chart**
+
+```sh
+helm template camunda/camunda-platform <RELEASE_NAME> --version <CHART_VERSION> \
+    --show-only charts/elasticsearch/templates/statefulset.yaml
+```
+
+The `RELEASE_NAME` is your current release name and `CHART_VERSION` is the version you want to upgrade to (`8.0.13` or later).
