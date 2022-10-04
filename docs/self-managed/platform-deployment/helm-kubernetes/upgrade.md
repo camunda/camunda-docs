@@ -2,25 +2,26 @@
 id: upgrade
 title: "Upgrading Camunda Platform 8 Helm deployment"
 sidebar_label: "Upgrade"
+description: "To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind."
 ---
-
-To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
 
 ## General upgrade instructions
 
+To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
+
 ### Upgrading where Identity disabled
 
-Normally for a Helm upgrade, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity component and the related authentication mechanism, you should be able to easily do an upgrade as following:
+Normally for a Helm upgrade, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an upgrade as follows:
 
 ```sh
 helm upgrade <RELEASE_NAME>
 ```
 
-However, if Camunda Identity component is enabled (which is the default), the upgrade path is a bit more complex than just running `helm upgrade`. Read the next section to familiarize yourself with the upgrade process.
+However, if Camunda Identity is enabled (which is the default), the upgrade path is a bit more complex than just running `helm upgrade`. Read the next section to familiarize yourself with the upgrade process.
 
 ### Upgrading where Identity enabled
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation. If you just run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
+If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 helm upgrade camunda-platform-test camunda/camunda-platform
@@ -35,11 +36,11 @@ PASSWORDS ERROR: You must provide your current passwords when upgrading the rele
         export TASKLIST_SECRET=$(kubectl get secret --namespace "zell-c8-optimize" "camunda-platform-test-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 ```
 
-As mentioned, this output returns because secrets are randomly generated with the first Helm installation by default if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated secrets are persisted on persistent volume claims (PVCs), which are not maintained by Helm.
+As mentioned, this output returns because secrets are randomly generated with the first Helm installation by default if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated secrets persist on persistent volume claims (PVCs), which are not maintained by Helm.
 
-If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, secrets can be recreated by Helm, and could lead to the regeneration of the secret values. This would mean that newly-generated secrets wouldn't longer match with the persisted secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
+If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, secrets can be recreated by Helm, and could lead to the regeneration of the secret values. This would mean that newly-generated secrets would no longer match with the persisted secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
 
-In the error message, Bitnami links to their well-described [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion we will step through the troubleshooting process in this guide as well.
+In the error message, Bitnami links to their [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion we will step through the troubleshooting process in this guide as well.
 
 #### Secrets extraction
 
@@ -73,26 +74,26 @@ helm upgrade <RELEASE_NAME> charts/camunda-platform/ \
 ```
 
 :::note
-If you have specified on the first installation certain values, you have to specify them again on the upgrade. Either via `--set` or the values file and the `-f` flag.
+If you have specified on the first installation certain values, you have to specify them again on the upgrade either via `--set` or the values file and the `-f` flag.
 :::
 
 For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
 
 ## Version upgrade instructions
 
-In additional to the [general upgrade instructions](#general-upgrade-instructions), the following sections are needed only if you upgrading to a certain version or the versions after it.
+In additional to the [general upgrade instructions](#general-upgrade-instructions), the following sections are only needed if you are upgrading to v8.0.13 or the versions after v8.0.13.
 
 ### v8.0.13
 
-If you installed Camunda Platform 8 using Helm chart earlier to `8.0.13`, you need to apply the following steps to handel the new Elasticsearch labels.
+If you installed Camunda Platform 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
 
-As a prerequisite, make sure you have Elasticsearch Helm repository added:
+As a prerequisite, make sure you have the Elasticsearch Helm repository added:
 
 ```sh
 helm repo add elastic https://helm.elastic.co
 ```
 
-**1. Retain Elasticsearch Persistent Volume**
+#### 1. Retain Elasticsearch Persistent Volume
 
 First get the name of Elasticsearch Persistent Volumes:
 
@@ -108,7 +109,7 @@ Make sure these are the correct Persistent Volumes:
 kubectl get persistentvolume $ES_PV_NAME0 $ES_PV_NAME1
 ```
 
-It should show something like that (note the name of the claim, it's for Elasticsearch):
+It should show something like the following (note the name of the claim, it's for Elasticsearch):
 
 ```
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                                   STORAGECLASS   REASON   AGE
@@ -126,7 +127,7 @@ kubectl patch persistentvolume "${ES_PV_NAME1}" \
     -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 ```
 
-**2. Update Elasticsearch PersistentVolumeClaim labels**
+#### 2. Update Elasticsearch PersistentVolumeClaim labels
 
 ```sh
 kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-0 \
@@ -136,7 +137,7 @@ kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-1 
     release=<RELEASE_NAME> chart=elasticsearch app=elasticsearch-master
 ```
 
-**3. Delete Elasticsearch StatefulSet**
+#### 3. Delete Elasticsearch StatefulSet
 
 Please note that there will be a **downtime** between this step and the next step.
 
@@ -144,7 +145,7 @@ Please note that there will be a **downtime** between this step and the next ste
 kubectl delete statefulset elasticsearch-master
 ```
 
-**4. Apply Elasticsearch StatefulSet chart**
+#### 4. Apply Elasticsearch StatefulSet chart
 
 ```sh
 helm template camunda/camunda-platform <RELEASE_NAME> --version <CHART_VERSION> \
