@@ -36,7 +36,7 @@ As you can see below, we recommend [SaaS](https://camunda.com/get-started) whene
 
 ### Production
 
-For production usage, we highly recommend using a real Kubernetes cluster and our [Helm charts](./helm-kubernetes/deployment.md) if SaaS provided by Camunda is not an option for you.
+For production usage, we highly recommend using a real Kubernetes cluster and our [Helm charts](./helm-kubernetes/deploy.md) if SaaS provided by Camunda is not an option for you.
 
 We support the following deployment options (the sequence expresses preference) for production:
 
