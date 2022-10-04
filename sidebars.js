@@ -182,6 +182,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/timer-events/timer-events",
                 "components/modeler/bpmn/error-events/error-events",
+                "components/modeler/bpmn/terminate-events/terminate-events",
               ],
             },
             {
@@ -213,8 +214,8 @@ module.exports = {
               "Out-of-the-box Connectors": [
                 "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
                 "components/integration-framework/connectors/out-of-the-box-connectors/aws-sqs",
-                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
                 "components/integration-framework/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
                 "components/integration-framework/connectors/out-of-the-box-connectors/rest",
                 "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
                 "components/integration-framework/connectors/out-of-the-box-connectors/slack",
@@ -956,12 +957,14 @@ module.exports = {
             "self-managed/identity/user-guide/making-identity-production-ready",
             "self-managed/identity/user-guide/generating-m2m-tokens",
             "self-managed/identity/user-guide/managing-user-access",
+            "self-managed/identity/user-guide/connect-to-an-existing-keycloak",
           ],
         },
         {
           Deployment: [
             "self-managed/identity/deployment/configuration-variables",
             "self-managed/identity/deployment/application-monitoring",
+            "self-managed/identity/deployment/starting-configuration-for-identity",
           ],
           Troubleshooting: [
             "self-managed/identity/troubleshooting/troubleshoot-identity",

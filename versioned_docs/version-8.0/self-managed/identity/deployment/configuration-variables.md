@@ -10,11 +10,18 @@ methods.
 
 ### Core configuration
 
-| Environment variable                 | Description                                          | Default value                                       |
-| ------------------------------------ | ---------------------------------------------------- | --------------------------------------------------- |
-| `IDENTITY_URL`                       | The URL of the Identity service                      | http://localhost:8080                               |
-| `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use              | http://localhost:18080/auth                         |
-| `IDENTITY_AUTH_PROVIDER_BACKEND_URL` | Used to support container to container communication | http://localhost:18080/auth/realms/camunda-platform |
+### Core configuration
+
+| Environment variable                 | Description                                                                | Default value                                       |
+| ------------------------------------ | -------------------------------------------------------------------------- | --------------------------------------------------- | --- |
+| `IDENTITY_AUTH_PROVIDER_BACKEND_URL` | Used to support container to container communication                       | http://localhost:18080/auth/realms/camunda-platform |
+| `IDENTITY_AUTH_PROVIDER_ISSUER_URL`  | Used to denote the token issuer                                            | http://localhost:18080/auth/realms/camunda-platform |     |
+| `IDENTITY_URL`                       | The URL of the Identity service                                            | http://localhost:8080                               |
+| `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use                                    | http://localhost:18080/auth                         |
+| `KEYCLOAK_SETUP_USER`                | The username of a user with admin access to Keycloak                       | admin                                               |
+| `KEYCLOAK_SETUP_PASSWORD`            | The password of a user with admin access to Keycloak                       | admin                                               |
+| `KEYCLOAK_SETUP_REALM`               | The realm that the setup user is in                                        | master                                              |
+| `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak | admin-cli                                           |
 
 ### Component configuration
 

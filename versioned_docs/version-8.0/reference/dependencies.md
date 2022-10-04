@@ -18,6 +18,7 @@ import TabItem from "@theme/TabItem";
 {label: 'Identity', value: 'identity', },
 {label: 'Optimize', value: 'optimize', },
 {label: 'Desktop Modeler', value: 'modeler', },
+{label: 'Connectors', value: 'connectors', },
 ]
 }>
 
@@ -1306,6 +1307,38 @@ All of these libraries are required for core functionality.
 <TabItem value='modeler'>
 
 Desktop Modeler is a desktop modeling application that builds upon a number of third party libraries. You find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/camunda-modeler/blob/master/THIRD_PARTY_NOTICES), located in the root of the source code repository. This file is also shipped with the application distribution as `THIRD_PARTY_NOTICES.camunda-modeler.txt`.
+
+</TabItem>
+
+<TabItem value='connectors'>
+
+### Connector SDK
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sdk/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+### Connector Amazon Simple Queue Service (SQS)
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sqs/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+### Connector AWS Lambda
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-aws-lambda/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+### Connector Google Drive
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-google-drive/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+### Connector REST
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-http-json/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+### Connector SendGrid
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sendgrid/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+### Connector Slack
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-slack/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 </TabItem>
 

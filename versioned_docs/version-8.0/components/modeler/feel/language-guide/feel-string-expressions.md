@@ -8,16 +8,16 @@ description: "This document outlines string expressions and examples."
 
 Creates a new string value.
 
-```js
-"valid";
+```feel
+"valid"
 ```
 
 ### Addition/concatenation
 
 An addition concatenates the strings. The result is a string containing the characters of both strings.
 
-```js
-"foo" + "bar";
+```feel
+"foo" + "bar"
 // "foobar"
 ```
 
@@ -27,8 +27,8 @@ The concatenation is only available for string values. For other types, you can 
 the [string()](/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion#string) function to convert
 the value into a string first.
 
-```js
-"order-" + string(123);
+```feel
+"order-" + string(123)
 ```
 
 :::

@@ -10,8 +10,8 @@ description: "This document outlines current boolean functions and a few example
   - `negand`: boolean
 - result: boolean
 
-```js
-not(true);
+```feel
+not(true)
 // false
 ```
 
@@ -25,7 +25,7 @@ The function can be used to check if a variable or a context entry (e.g. a prope
   - `value`: any
 - result: boolean
 
-```js
+```feel
 is defined(1)
 // true
 

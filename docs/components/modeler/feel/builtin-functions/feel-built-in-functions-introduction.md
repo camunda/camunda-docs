@@ -9,7 +9,7 @@ FEEL includes many built-in functions. These functions can be invoked
 in [expressions](../language-guide/feel-expressions-introduction.md)
 and [unary-tests](../language-guide/feel-unary-tests.md).
 
-```js
+```feel
 contains("me@camunda.com", ".com")
 // invoke function with positional arguments
 
