@@ -31,7 +31,7 @@ The versioning process copies a snapshot of the current documentation from the u
 
 Because we are using [multiple Docusaurus docs instances](./versioning.md#instances-docs-vs-optimize), we technically create _two_ new versions at time of product release: one for the main documentation, and one for the Optimize documentation.
 
-Docusaurus creates the new versions in `versioned_docs` and `optimize_versioned_docs`. The contents in `docs` and `optimize` immediately become the documentation for the _next_ release.
+Docusaurus creates the new versions in `versioned_docs` and `optimize_versioned_docs`. The contents in `docs` and `optimize` immediately become the documentation for the _next_ release. See [the versioning docs](./versioning.md#structure) for more details on source locations of versions.
 
 To create the new versions:
 
