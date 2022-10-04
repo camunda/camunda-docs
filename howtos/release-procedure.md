@@ -21,20 +21,51 @@ The build process for [publish-prod](https://github.com/camunda/camunda-platform
 
 ## Perform a minor release
 
-Minor releases to Camunda Platform 8 happen twice a year in April and October.
+Minor releases to Camunda Platform 8 happen twice a year in April and October, and the documentation is versioned on the same cadence.
 
-To prepare for a minor release, you'll need to create a new verison.
+To prepare for a minor product release, you'll need to create a new docs version.
 
 ### Create new version
 
-Technically, the current contents are frozen in `docs` and copied to `versioned_docs` with the corresponding version. The process can be triggered by this Docusaurus command:
+The versioning process copies a snapshot of the current documentation from the un-versioned source to a new versioned source location.
 
-```bash
-npm run docusaurus docs:version 8.1
+Because we are using [multiple Docusaurus docs instances](./versioning.md#instances-docs-vs-optimize), we technically create _two_ new versions at time of product release: one for the main documentation, and one for the Optimize documentation.
 
-```
+Docusaurus creates the new versions in `versioned_docs` and `optimize_versioned_docs`. The contents in `docs` and `optimize` immediately become the documentation for the _next_ release. See [the versioning docs](./versioning.md#structure) for more details on source locations of versions.
 
-Create a PR with the changes and merge to `main`, confirming no build issues before moving to the release steps.
+To create the new versions:
+
+1. Make the `./hacks/cutNewVersions.sh` shell file executable, if it isn't already:
+
+   ```bash
+   > chmod +x ./hacks/cutNewVersions.sh
+   ```
+
+2. Update [the versions at the top of the `./hacks/cutNewVersions.sh` file](../hacks/cutNewVersions.sh#L4-L8).
+3. Run the `./hacks/cutNewVersions.sh` script:
+
+   ```bash
+   > ./hacks/cutNewVersions.sh
+   ```
+
+4. Add a record correlating the two versions to [`src/mdx/expandVersionedUrl.js`](../src/mdx/expandVersionedUrl.js#L20-L27).
+
+   - The `versionMappings` variable maps Optimize versions to main docs versions:
+
+   ```javascript
+   const versionMappings = [
+     // 👋 When cutting a new version, add a new mapping here!
+     {
+       docsVersion: "8.0",
+       optimizeVersion: "3.8.0",
+     },
+     { docsVersion: "1.3", optimizeVersion: "3.7.0" },
+   ];
+   ```
+
+   - Add the new mapping in the first position of the array.
+
+5. Create a PR with the changes and merge to `main`. Confirm no build issues before moving to the release steps.
 
 ### Release the new version
 
