@@ -8,10 +8,10 @@ description: "This document outlines boolean expressions and examples."
 
 Creates a new boolean value.
 
-```js
-true;
+```feel
+true
 
-false;
+false
 ```
 
 ### Comparison
@@ -69,7 +69,7 @@ Two values of the same type can be compared using the following operators:
 
 </table>
 
-```js
+```feel
 5 = 5
 // true
 
@@ -109,7 +109,7 @@ value is `null` or the variable doesn't exist.
 Comparing a context entry with `null` results in `true` if the value of the entry is `null` or if
 the context doesn't contain an entry with this key.
 
-```js
+```feel
 null = null
 // true
 
@@ -130,7 +130,7 @@ function [is defined()](../builtin-functions/feel-built-in-functions-boolean.md#
 used to differentiate between a value that is `null` and a variable or context entry that doesn't
 exist.
 
-```js
+```feel
 is defined(null)
 // true
 
@@ -151,7 +151,7 @@ Combines multiple boolean values following the ternary logic.
 - The result is `false` if one value is `false`.
 - Otherwise, the result is `null` (i.e. if a value is not a boolean.)
 
-```js
+```feel
 true and true
 // true
 
@@ -179,7 +179,7 @@ Combines multiple boolean values following the ternary logic.
 - The result is `false` if all values are `false`.
 - Otherwise, the result is `null` (i.e. if a value is not a boolean.)
 
-```js
+```feel
 true or false
 // true
 
@@ -218,7 +218,7 @@ Checks if the value is of the given type. Available type names:
 
 Use the type `Any` to check if the value is not `null`.
 
-```js
+```feel
 1 instance of number
 // true
 
@@ -236,7 +236,7 @@ null instance of Any
 
 Evaluates a [unary-tests](/docs/components/modeler/feel/language-guide/feel-unary-tests) with the given value. The keyword `in` separates the value from the unary-tests.
 
-```js
+```feel
 5 in (3..7)
 // true
 

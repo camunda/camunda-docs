@@ -6,6 +6,10 @@ title: Introduction
 These documents guide you through the process of updating your Camunda Platform 8
 application or server installation from one Camunda Platform 8 version to the other.
 
+You can find guides on how to update your Connector runtimes to a newer version of the
+[Connector SDK](/components/integration-framework/connectors/custom-built-connectors/connector-sdk.md)
+in the **Connectors** section.
+
 :::note
 Versions prior to Camunda Platform 8 are listed below and identified as Camunda Cloud versions.
 :::

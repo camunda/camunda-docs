@@ -7,7 +7,7 @@ title: "Camunda Platform 8 Self-Managed"
 
 Camunda Platform 8 Self-Managed is not Camunda Platform 7. If you are looking for Camunda Platform 7 documentation, [click here](https://docs.camunda.org).
 
-However, Optimize documentation is available for both Camunda Platform 8 and Camunda Platform 7, including deployment instructions available [here](./optimize-deployment/install-and-start.md). Look for "Camunda Platform 7" badges to help you understand what content is available for what product.
+However, Optimize documentation is available for both Camunda Platform 8 and Camunda Platform 7, including deployment instructions available [here]($optimize$/self-managed/optimize-deployment/install-and-start). Look for "Camunda Platform 7" badges to help you understand what content is available for what product.
 
 :::
 
@@ -26,7 +26,7 @@ The following components are available for Camunda Platform 8 Self-Managed:
 - Optimize
 - Identity (not available in Camunda Platform 8 SaaS)
 
-Camunda Platform 8 Self-Managed users may also use [Desktop Modeler](../../components/modeler/desktop-modeler/install-the-modeler) as an addition to these components. The Desktop Modeler can be used by process developers to build BPMN diagrams, DMN diagrams, or Camunda Forms for automation.
+Camunda Platform 8 Self-Managed users may also use [Desktop Modeler](../../components/modeler/desktop-modeler/install-the-modeler) as an addition to these components. The Desktop Modeler can be used by process developers to build BPMN diagrams, DMN diagrams, or [Camunda Forms](../guides/utilizing-forms.md) for automation.
 
 While documentation for Optimize is available in the Self-Managed section, we continue to refine the experience for Camunda Platform 8 Self-Managed users.
 

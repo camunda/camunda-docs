@@ -1,26 +1,70 @@
-const tokens = [
+// @ts-check
+
+// Note: these type definitions are only checked within an editor. We aren't set up
+//   for type-checking in the build (yet!) but having these types defined helped me write this code.
+/**
+ * @typedef {object} VersionMapping
+ * @property {string} docsVersion
+ * @property {string} optimizeVersion
+ *
+ * @typedef {object} Token
+ * @property {string} token
+ * @property {Array<TokenRule>} rules
+ *
+ * @typedef {object} TokenRule
+ * @property {string} match
+ * @property {string} expandTo
+ */
+
+/** @type {Array<VersionMapping>} */
+const versionMappings = [
+  // 👋 When cutting a new version, add a new mapping here!
   {
-    token: "$docs$",
-    rules: [
-      { match: "/optimize/", expandTo: "/docs/next" },
-      // these other mappings are currently wrong because there are no optimize versions yet...but eventually, this is what we'll want.
-      { match: "/optimize_versioned_docs/version-3.8.0/", expandTo: "/docs" },
-      {
-        match: "/optimize_versioned_docs/version-3.7.0/",
-        expandTo: "/docs/1.3",
-      },
-    ],
+    docsVersion: "8.0",
+    optimizeVersion: "3.8.0",
   },
-  {
-    token: "$optimize$",
-    rules: [
-      // TODO: introduce these mappings, as versions are added for optimize.
-      { match: "/docs/", expandTo: "/optimize/next" },
-      { match: "/versioned_docs/version-8.0/", expandTo: "/optimize" },
-      // { match: "/versioned_docs/version-1.3/", expandTo: "/optimize/3.7.0" },
-    ],
-  },
+  { docsVersion: "1.3", optimizeVersion: "3.7.0" },
 ];
+
+const [currentVersions, ...remainingVersions] = versionMappings;
+
+/** @type {Token} */
+const docsToken = {
+  token: "$docs$",
+  rules: [
+    { match: "/optimize/", expandTo: "/docs/next" },
+    {
+      match: `/optimize_versioned_docs/version-${currentVersions.optimizeVersion}`,
+      expandTo: "/docs",
+    },
+    ...remainingVersions.map((version) => {
+      return {
+        match: `/optimize_versioned_docs/version-${version.optimizeVersion}/`,
+        expandTo: `/docs/${version.docsVersion}`,
+      };
+    }),
+  ],
+};
+
+/** @type {Token} */
+const optimizeToken = {
+  token: "$optimize$",
+  rules: [
+    { match: "/docs/", expandTo: "/optimize/next" },
+    {
+      match: `/versioned_docs/version-${currentVersions.docsVersion}`,
+      expandTo: "/optimize",
+    },
+    ...remainingVersions.map((version) => {
+      return {
+        match: `/versioned_docs/version-${version.docsVersion}/`,
+        expandTo: `/optimize/${version.optimizeVersion}`,
+      };
+    }),
+  ],
+};
+
+const tokens = [docsToken, optimizeToken];
 
 function expandVersionedUrl(targetUrl, sourcePath) {
   let expandedUrl = targetUrl;

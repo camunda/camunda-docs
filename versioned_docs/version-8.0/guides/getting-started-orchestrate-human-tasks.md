@@ -14,15 +14,6 @@ While it may originally seem like the goal of automating a process is to remove 
 
 In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser. If you prefer a video-based learning experience, visit [this Camunda Academy course](https://bit.ly/3PJJocB) on Camunda Platform 8 and getting started with human workflows.
 
-:::note
-
-Getting stuck? Book a meeting with our User Success Specialists. Follow the link dependent on your location to connect with a specialist:
-
-- [American regions](https://meetings.salesloft.com/camunda/jonathanjohnson)
-- [EMEA, APAC, and other regions](https://meetings.salesloft.com/camunda/daan)
-
-:::
-
 ## Create an automated process with user tasks
 
 To create an automated process with [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md), take the following steps:

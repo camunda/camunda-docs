@@ -62,7 +62,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-core</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 
@@ -71,7 +71,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-core:0.1.0'
+implementation 'io.camunda.connector:connector-core:0.2.0'
 ```
 
 </TabItem>
@@ -93,22 +93,22 @@ my-connector
 │   │   ├── MyConnectorRequest.java    (4)
 │   │   └── MyConnectorResult.java     (5)
 │   └── resources/META-INF/services
-│       └── io.camunda.connector.api.ConnectorFunction (6)
+│       └── io.camunda.connector.api.outbound.OutboundConnectorFunction (6)
 └── pom.xml (7)
 ```
 
 For the modeling building blocks, the Connector provides
-[connector templates](./connector-templates.md) with **(1)**.
+[Connector templates](./connector-templates.md) with **(1)**.
 
 You provide the runtime logic as Java source code under a directory like **(2)**.
 Typically, a Connector runtime logic consists of the following:
 
-- Exactly one implementation of a `ConnectorFunction` with **(3)**.
+- Exactly one implementation of a `OutboundConnectorFunction` with **(3)**.
 - At least one input data object like **(4)**.
 - At least one result object like **(5)**.
 
 For a detectable Connector function, you are required to expose your function class name in the
-[`ConnectorFunction` SPI implementation](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html)
+[`OutboundConnectorFunction` SPI implementation](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html)
 with **(6)**.
 
 A configuration file like **(7)** manages the project setup, including dependencies.
@@ -132,7 +132,7 @@ A Connector template defines the binding to your Connector runtime behavior via 
 }
 ```
 
-This type definition is the connection configuring which version of your Connector runtime behavior to use.
+This type definition `io.camunda:my-connector:1` is the connection configuring which version of your Connector runtime behavior to use.
 In technical terms, this defines the **Type** of jobs created for tasks in your process model that use this template.
 Consult the [job worker](../../../concepts/job-workers.md) guide to learn more.
 
@@ -212,28 +212,34 @@ You can see an example of how to use this in the [out-of-the-box REST Connector]
 ### Runtime logic
 
 To create a reusable runtime behavior for your Connector, you are required to implement
-and expose an implementation of the `ConnectorFunction` interface of the SDK. The Connector runtime
+and expose an implementation of the `OutboundConnectorFunction` interface of the SDK. The Connector runtime
 environments will call this function; it handles input data, executes the Connector's
 business logic, and optionally returns a result. Exception handling is optional since the
 Connector runtime environments handle this as a fallback.
 
-The `ConnectorFunction` interface consists of exactly one `execute` method. A minimal recommended
+The `OutboundConnectorFunction` interface consists of exactly one `execute` method. A minimal recommended
 outline of a Connector function implementation looks as follows:
 
 ```java
 package io.camunda.connector;
 
-import io.camunda.connector.api.ConnectorContext;
-import io.camunda.connector.api.ConnectorFunction;
+import io.camunda.connector.api.annotation.OutboundConnector;
+import io.camunda.connector.api.outbound.OutboundConnectorContext;
+import io.camunda.connector.api.outbound.OutboundConnectorFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MyConnectorFunction implements ConnectorFunction {
+@OutboundConnector(
+    name = "MYCONNECTOR",
+    inputVariables = {"myProperty", "authentication"},
+    type = "io.camunda:my-connector:1"
+)
+public class MyConnectorFunction implements OutboundConnectorFunction {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MyConnectorFunction.class);
 
   @Override
-  public Object execute(ConnectorContext context) throws Exception {
+  public Object execute(OutboundConnectorContext context) throws Exception {
     // (1)
     var connectorRequest = context.getVariablesAsType(MyConnectorRequest.class);
 
@@ -257,7 +263,7 @@ public class MyConnectorFunction implements ConnectorFunction {
 }
 ```
 
-The `execute` method receives all necessary environment data via the `ConnectorContext` object.
+The `execute` method receives all necessary environment data via the `OutboundConnectorContext` object.
 The Connector runtime environment initializes the context and allows the following to occur:
 
 - Fetch and deserialize the input data as shown in **(1)**. See the [input data](#input-data) section for details.
@@ -266,6 +272,9 @@ The Connector runtime environment initializes the context and allows the followi
 
 If the Connector has a result to return, it can create a new result data object and set
 its properties as shown in **(4)**.
+
+For best interoperability, Connector functions provide default meta-data via the `@OutboundConnector` annotation.
+Connector runtime environments can use this data to auto-discover provided Connector runtime behavior.
 
 Using this outline, you start the business logic of your Connector in the `executeConnector` method
 and expand from there.
@@ -314,14 +323,46 @@ public class Authentication {
 #### Validation
 
 Validating input data is a common task in a Connector function. The SDK provides an
-API to ensure the data conforms to the Connector's requirements. To initiate the
-validation from the Connector function, use the `ConnectorContext` object's `validate` method
-as shown in the [runtime logic](#runtime-logic) section:
+API to help you ensure the data conforms to your Connector's input requirements. A
+default implementation of the SDK's core validation API is provided in a separate,
+optional artifact `connector-validation`. If you want to use validation in your
+Connector, add the following dependency to your project:
+
+<Tabs groupId="dependency" defaultValue="maven" values={
+[
+{label: 'Maven dependency', value: 'maven' },
+{label: 'Gradle dependency', value: 'gradle' }
+]
+}>
+
+<TabItem value='maven'>
+
+```xml
+<dependency>
+  <groupId>io.camunda.connector</groupId>
+  <artifactId>connector-validation</artifactId>
+  <version>0.2.0</version>
+</dependency>
+```
+
+</TabItem>
+
+<TabItem value='gradle'>
+
+```yml
+implementation 'io.camunda.connector:connector-validation:0.2.0'
+```
+
+</TabItem>
+</Tabs>
+
+To initiate the validation from the Connector function, use the `OutboundConnectorContext`
+object's `validate` method as shown in the [runtime logic](#runtime-logic) section:
 
 ```java
 ...
   @Override
-  public Object execute(ConnectorContext context) throws Exception {
+  public Object execute(OutboundConnectorContext context) throws Exception {
     ...
     // (2)
     context.validate(connectorRequest);
@@ -330,61 +371,248 @@ as shown in the [runtime logic](#runtime-logic) section:
 ...
 ```
 
-This instructs the context to prepare a validator and pass it to the object that needs
-validation. To validate your input object `connectorRequest` using the API, it needs
-to implement the `ConnectorInput` interface. Using this interface's `validateWith` method,
-you can use the provided validator to ensure the data conforms to your requirements:
+This instructs the context to prepare a validator that is provided by an implementation
+of the `ValidationProvider` interface. The `connector-validation` artifact brings along
+such an implementation. It uses the [Jakarta Bean Validation API](https://beanvalidation.org/)
+together with [Hibernate Validator](https://hibernate.org/validator/).
+
+To validate your input object `connectorRequest` using the API, you need to annotate the input's
+attributes to define your requirements:
 
 ```java
 package io.camunda.connector;
 
-import io.camunda.connector.api.ConnectorInput;
-import io.camunda.connector.api.Validator;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-public class MyConnectorRequest implements ConnectorInput {
+public class MyConnectorRequest {
 
-  private String message;
-  private Authentication authentication;
-
-  @Override
-  public void validateWith(final Validator validator) {
-    validator.require(message, "message");
-    validateIfNotNull(authentication, validator);
-  }
+  @NotEmpty private String message;
+  @NotNull @Valid private Authentication authentication;
 }
 ```
 
-The validator contains convenience methods like `require` to allow for basic validations.
-Furthermore, the `ConnectorInput` interface comes with convenience methods to allow handling
-nested objects with `validateIfNotNull`. You can also integrate custom validations, adding
-custom errors to the validator's list of errors.
+The Jakarta Bean Validation API comes with a long list of
+[supported constraints](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#builtinconstraints).
+It also allows to
+[validate entire object graphs](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#constraintdeclarationvalidationprocess-validationroutine-graphvalidation)
+using the `@Valid` annotation. Thus, the `authentication` object will also be validated.
 
 ```java
 package io.camunda.connector;
 
-import io.camunda.connector.api.ConnectorInput;
-import io.camunda.connector.api.SecretStore;
-import io.camunda.connector.api.Validator;
-import java.util.Objects;
 
-public class Authentication implements ConnectorInput {
+import jakarta.validation.constraints.NotEmpty;
 
-  private String user;
-  private String token;
+public class Authentication {
 
-  @Override
-  public void validateWith(final Validator validator) {
-    validator.require(user, "user");
-    validator.require(token, "token");
-    if (token != null && !token.startsWith("xobx")) {
-      validator.addErrorMessage("Token must start with \"xobx\"");
-    }
-  }
+  @NotEmpty private String user;
+
+  @NotEmpty @Pattern(regexp = "^xobx") private String token;
 }
 ```
 
 Using this approach, you can validate your whole input data structure with one initial call from
 the central Connector function.
+
+Beyond that, the Jakarta Bean Validation API supports more advanced constructs like
+[groups](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#constraintdeclarationvalidationprocess-groupsequence)
+for conditional validation and constraints on different types, i.e., attributes, methods, and classes,
+to enable [cross-parameter validation](https://www.baeldung.com/javax-validation-method-constraints).
+You can use the built-in constraints and create custom ones to define requirements exactly as
+you need them.
+
+If the validation approach that comes with `connector-validation` doesn't fit your needs, you
+can provide your own SPI implementing the SDK's `ValidationProvider` interface. Have a look at
+the [connector validation code](https://github.com/camunda/connector-sdk/tree/main/validation)
+for a default implementation.
+
+##### Conditional validation
+
+Validating Connector input data can require to check different constraints, depending on the
+specific input data itself. As an example, the following `authentication` input object requires
+that `oauthToken` is only necessary when the `type` is `oauth`. If the type is `basic`, the
+attribute `password` is required instead.
+
+```java
+public class Authentication {
+
+  private String type;
+  private String user;
+  private String password;
+  private String oauthToken;
+}
+```
+
+Using the `connector-validation` module, there are three common options to achieve this conditional validation:
+
+1. Write a [custom constraint](#custom-constraint) that allows to validate one attribute in relation to another attribute.
+   This appraoch yields a reusable constraint that you can use in other classes as well. This approach also comes with the highest
+   implementation effort.
+1. Write [manual, imperative validation logic](#manual-validation-method) in a method with a boolean return value and annotate
+   it with `@AssertTrue`. You require less code to take this appraoch but the result is also specifc to the respective class. You
+   cannot reuse the logic in other classes as is. This approach also comes without further constraint annotation support. You have
+   to write all validation logic manually in the method.
+1. Define [validation groups dynamically](#dynamic-validation-groups) with Hibernate Validator's `@DefaultGroupSequenceProvider`.
+   This appraoch allows to reuse existing constraint annotations and to only apply them for specific use cases. It has a
+   higher complexity than an imperative validation method but allows to reuse existing constraints to avoid writing manual
+   validation logic.
+
+Each option has its own benefits and drawbacks, depending on what you need in your Connector. The following sections
+cover each of the options in more detail.
+
+###### Custom constraint
+
+The [Bean Validation guide](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#constraintsdefinitionimplementation)
+covers defining **custom constraints** extensively. For the use case described above, you could
+write a custom constraint like the following:
+
+```java
+@Target({TYPE, ANNOTATION_TYPE})
+@Retention(RUNTIME)
+@Repeatable(NotNullIfAnotherFieldHasValue.List.class)
+@Constraint(validatedBy = NotNullIfAnotherFieldHasValueValidator.class)
+@Documented
+public @interface NotNullIfAnotherFieldHasValue {
+
+    String fieldName();
+    String fieldValue();
+    String dependFieldName();
+
+    String message() default "{NotNullIfAnotherFieldHasValue.message}";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+
+    @Target({TYPE, ANNOTATION_TYPE})
+    @Retention(RUNTIME)
+    @Documented
+    @interface List {
+        NotNullIfAnotherFieldHasValue[] value();
+    }
+
+}
+```
+
+You can use this constraint on the Connector input object as follows:
+
+```java
+@NotNullIfAnotherFieldHasValue(
+    fieldName = "type",
+    fieldValue = "oauth",
+    dependFieldName = "oauthToken")
+@NotNullIfAnotherFieldHasValue(
+    fieldName = "type",
+    fieldValue = "basic",
+    dependFieldName = "password")
+public class Authentication {
+
+  @NotEmpty
+  private String type;
+  @NotEmpty
+  private String user;
+  private String password;
+  private String oauthToken;
+}
+```
+
+You can find more details and the `NotNullIfAnotherFieldHasValueValidator` implementation in
+[this StackOverflow thread](https://stackoverflow.com/questions/9284450/jsr-303-validation-if-one-field-equals-something-then-these-other-fields-sho/9287796#9287796).
+
+This approach is the most flexible and reusable one for writing conditional constraints. It is
+independent from the parameters and classes involved. However, for simple use cases, one of the
+following approaches might lead to more maintainable results that require less code.
+
+###### Manual validation method
+
+The Jakarta Bean Validation API comes with an
+[AssertTrue](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#builtinconstraints-asserttrue)
+constraint that you can use to ensure boolean attributes are enabled.
+
+The nature of the bean validation API allows to also use this annotation on methods. Those usually
+are the getter methods for boolean attributes. However, there doesn't have to be a related boolean
+attribute in an object in order to validate a method constraint. Thus, you can use this constraint
+to also write manual validation logic in a method that returns a boolean value and starts with `is`.
+
+For the example use case, you can write a method that verifies the requirements as follows:
+
+```java
+public class Authentication {
+
+  @NotEmpty private String type;
+  @NotEmpty private String user;
+  private String password;
+  private String oauthToken;
+
+  @AssertTrue(message = "Authentication must contain 'oauthToken' for type 'oauth' and 'password' for type 'basic'")
+  public boolean isAuthValid() {
+    return ("basic".equals(type) && password != null) ||
+        ("oauth".equals(type) && oauthToken != null);
+  }
+}
+```
+
+This approach allows for concise conditional validation when the constraint logic is simple
+and does not justify creating more complex, reusable interfaces and validators.
+
+###### Dynamic validation groups
+
+The Jakarta Bean Validation API allows to statically define validation
+[groups](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#constraintdeclarationvalidationprocess-groupsequence)
+for conditional constraint evaluation. However, to use those groups you have to define the
+group to validate statically when starting the validation. To dynamically define the groups to
+validate, you can use Hibernate Validator's
+[DefaultGroupSequenceProvider](https://docs.jboss.org/hibernate/validator/8.0/reference/en-US/html_single/#_groupsequenceprovider).
+
+Given the following validation groups:
+
+```java
+public interface BasicAuthValidation {}
+public interface OAuthValidation {}
+```
+
+You can annotate the input object as follows:
+
+```java
+@GroupSequenceProvider(AuthenticationSequenceProvider.class)
+public class Authentication {
+
+  @NotEmpty private String type;
+  @NotEmpty private String user;
+  @NotEmpty(groups = BasicAuthValidation.class)
+  private String password;
+  @NotEmpty(groups = OAuthValidation.class)
+  private String oauthToken;
+```
+
+The `AuthenticationSequenceProvider` needs to implement the `DefaultGroupSequenceProvider` to
+dynamically add the validation groups you need:
+
+```java
+public class AuthenticationSequenceProvider implements DefaultGroupSequenceProvider<Authentication> {
+
+  @Override
+  public List<Class<?>> getValidationGroups(Authentication authentication) {
+
+    List<Class<?>> sequence = new ArrayList<>();
+
+    // Apply all validation rules from Default group, e.g. ensuring type is not empty
+    sequence.add(Authentication.class);
+
+    if ("basic".equals(authentication.getType())) {
+      sequence.add(BasicAuthValidation.class);
+    } else if ("oauth".equals(authentication.getType())) {
+      sequence.add(OAuthValidation.class);
+    }
+
+    return sequence;
+  }
+}
+```
+
+Using this approach, you can reuse existing constraint annotations in your input objects.
+The sequence provider is however bound to your specific input class and therefore less reusable
+than writing custom constraints.
 
 #### Secrets
 
@@ -399,14 +627,16 @@ handling secrets in input data.
 The SDK allows replacing secrets in input data as late as possible to avoid passing them around
 in the environments that handle Connector invocation. We do not pass secrets into the
 Connector function in clear text but only as placeholders that you can replace from
-within the Connector function. To initiate the secret replacement from the Connector function,
-use the `ConnectorContext` object's `replaceSecrets` method as shown in the
+within the Connector function.
+
+To initiate the secret replacement from the Connector function,
+use the `OutboundConnectorContext` object's `replaceSecrets` method as shown in the
 [runtime logic](#runtime-logic) section:
 
 ```java
 ...
   @Override
-  public Object execute(ConnectorContext context) throws Exception {
+  public Object execute(OutboundConnectorContext context) throws Exception {
     ...
     // (3)
     context.replaceSecrets(connectorRequest);
@@ -420,46 +650,34 @@ The secret store present in the Connector runtime environment that invokes the C
 takes care of that. Every environment can define its own way of providing such a secret store. Consult
 the [runtime environments](#runtime-environments) section to learn more about them.
 
-To replace secrets for the `connectorRequest` using the API, the object needs to implement the
-`ConnectorInput` interface. Using this interface's `replaceSecrets` method, you can use the provided
-`SecretStore` to search for and replace secrets in the properties that should support this in your
-Connector. Furthermore, the `ConnectorInput` interface comes with convenience methods to allow handling
-nested objects as well with `replaceSecretsIfNotNull`:
+To replace secrets in the `connectorRequest` using the API, you need to annotate the object's
+attributes that can hold secrets with `@Secret`. This instructs the SDK to search for and replace
+secrets in the annotated properties. You can use the `@Secret` annotation on String fields
+and container types. Using the annotation on container objects will lead to
+graph traversal until either no further matching annotation is found or the annotated property
+is of type String. Annotating properties that are neither a String nor a container will lead to runtime exceptions.
 
 ```java
 package io.camunda.connector;
 
-import io.camunda.connector.api.ConnectorInput;
-import io.camunda.connector.api.SecretStore;
+import io.camunda.connector.api.annotation.Secret;
 
-public class MyConnectorRequest implements ConnectorInput {
+public class MyConnectorRequest {
 
   private String message;
-  private Authentication authentication;
-
-  @Override
-  public void replaceSecrets(final SecretStore secretStore) {
-    replaceSecretsIfNotNull(authentication, secretStore);
-  }
+  @Secret private Authentication authentication;
 }
 ```
 
 ```java
 package io.camunda.connector;
 
-import io.camunda.connector.api.ConnectorInput;
-import io.camunda.connector.api.SecretStore;
-import java.util.Objects;
+import io.camunda.connector.api.annotation.Secret;
 
-public class Authentication implements ConnectorInput {
+public class Authentication {
 
   private String user;
-  private String token;
-
-  @Override
-  public void replaceSecrets(final SecretStore secretStore) {
-    token = secretStore.replaceSecret(token);
-  }
+  @Secret private String token;
 }
 ```
 
@@ -482,7 +700,7 @@ We recommend testing at least the following parts of your Connector project:
 - All expected attributes support secret replacement.
 - The core logic of your Connector works as expected until calling the external API or service.
 
-The SDK provides a `ConnectorContextBuilder` for test cases that lets you create a `ConnectorContext`.
+The SDK provides a `OutboundConnectorContextBuilder` for test cases that lets you create a `OutboundConnectorContext`.
 You can conveniently use that test context to test the secret replacement and validation routines.
 
 Writing secret replacement tests can look similar to the following test case. You can write one test
@@ -500,7 +718,7 @@ void shouldReplaceTokenSecretWhenReplaceSecrets() {
   auth.setUser("testuser");
 
   // (1)
-  var context = ConnectorContextBuilder.create()
+  var context = OutboundConnectorContextBuilder.create()
     .secret("MY_TOKEN", "token value")
     .build();
   // when
@@ -522,7 +740,7 @@ void shouldFailWhenValidate_NoAuthentication() {
   // given
   var input = new MyConnectorRequest();
   input.setMessage("Hello World!");
-  var context = ConnectorContextBuilder.create().build();
+  var context = OutboundConnectorContextBuilder.create().build();
   // when
   assertThatThrownBy(() -> context.validate(input))
     // then
@@ -543,7 +761,7 @@ void shouldFailWhenValidate_TokenWrongPattern() {
   input.setAuthentication(auth);
   auth.setUser("testuser");
   auth.setToken("test");
-  var context = ConnectorContextBuilder.create().build();
+  var context = OutboundConnectorContextBuilder.create().build();
   // when
   assertThatThrownBy(() -> context.validate(input))
     // then
@@ -566,7 +784,7 @@ void shouldReturnReceivedMessageWhenExecute() throws Exception {
   auth.setToken("xobx-test");
   auth.setUser("testuser");
   var function = new MyConnectorFunction();
-  var context = ConnectorContextBuilder.create()
+  var context = OutboundConnectorContextBuilder.create()
     .variables(input)
     .build();
   // when
@@ -593,7 +811,7 @@ and how to invoke them. This component is the runtime environment specific to Ca
 Regarding Self-Managed environments, you are responsible for providing the runtime environment that
 can invoke the Connectors. The Connector SDK provides a
 [pre-packaged environment](#pre-packaged-runtime-environment) and a
-[connector job handler](#connector-job-handler) to make this situation as convenient as possible.
+[Connector job handler](#connector-job-handler) to make this situation as convenient as possible.
 
 ### Pre-packaged runtime environment
 
@@ -607,37 +825,49 @@ You can start an instance of this runtime environment with the following command
 defined a Java runtime environment in your system under `java`:
 
 ```bash
-ZEEBE_CONNECTOR_MESSAGE_TYPE=io.camunda:my-connector:1
-ZEEBE_CONNECTOR_MESSAGE_VARIABLES=authentication,message
-ZEEBE_CONNECTOR_MESSAGE_FUNCTION=io.camunda.connector.MyConnectorFunction
-
-java -cp 'connector-runtime-job-worker.jar;connector-template.jar' \
+java -cp 'connector-runtime-job-worker-with-depdencies.jar;connector-template-with-dependencies.jar' \
     io.camunda.connector.runtime.jobworker.Main
 ```
 
-The `ZEEBE_CONNECTOR_*` environment variables define the Connectors that this application can invoke.
-Those variables always come in triples, grouped by `<NAME>`:
-
-- `ZEEBE_CONNECTOR_<NAME>_TYPE` - The job type this Connector handles. You define this in the
-  [Connector template](#connector-template).
-- `ZEEBE_CONNECTOR_<NAME>_VARIABLES` - The process variables to pass to the Connector function.
-  This usually maps to the attributes that your [input data](#input-data) object defines.
-- `ZEEBE_CONNECTOR_<NAME>_FUNCTION` - The fully qualified class name of your
-  [Connector function](#runtime-logic).
-
 You can pass all the JAR files of the Connector runtimes that should be invokable by the environment
 in the `-cp` argument of the Java call.
+
+The runtime environment picks up Connector functions available on the classpath automatically.
+It uses the default configuration specified with the `@OutboundConnector` annotation.
 
 This starts a Zeebe client, registering the defined Connectors as job workers. By default, it
 connects to a local Zeebe instance at port `26500`. You can configure the Zeebe client using
 the [standard Zeebe environment variables](../../../../apis-clients/java-client/index.md#bootstrapping).
 
+If you want to disable auto-discovery, use environment variables to configure Connectors and their configuration explicitly.
+
+Using `CONNECTOR_*` environment variables, you can define the Connectors that this application can invoke.
+Those variables usually come in triples, grouped by `<NAME>`:
+
+- `CONNECTOR_<NAME>_FUNCTION` (required) - The fully qualified class name of your
+  [Connector function](#runtime-logic).
+- `CONNECTOR_<NAME>_TYPE` (optional) - The job type this Connector handles. You define this in the
+  [Connector template](#connector-template).
+- `CONNECTOR_<NAME>_VARIABLES` (optional) - The process variables to pass to the Connector function.
+  This usually maps to the attributes that your [input data](#input-data) object defines.
+
+With that configuration, you define all job workers to run. Specifying optional values allows you
+to override configuration provided by `@OutboundConnector` annotations.
+
+```bash
+CONNECTOR_SLACK_FUNCTION=io.camunda.connector.slack.SlackFunction
+CONNECTOR_SLACK_TYPE=non-default-slack-task-type
+
+java -cp 'connector-runtime-job-worker-with-depdencies.jar;connector-template-with-dependencies.jar' \
+    io.camunda.connector.runtime.jobworker.Main
+```
+
 Providing secrets to the environment can be achieved in two ways:
 
 - Define secrets as environment variables, e.g., via command line `export MY_SECRET='foo'`.
-- Create your own implementation of the `io.camunda.connector.api.SecretProvider` interface that
+- Create your own implementation of the `io.camunda.connector.api.secret.SecretProvider` interface that
   comes with the SDK. Package this class as a JAR, including a file
-  `META-INF/services/io.camunda.connector.api.SecretProvider` that contains the fully qualified
+  `META-INF/services/io.camunda.connector.api.secret.SecretProvider` that contains the fully qualified
   class name of your secret provider implementation. Add this JAR to the `-cp` argument of the
   Java call. Your secret provider will serve secrets as implemented.
 
@@ -649,9 +879,9 @@ workers conveniently, the SDK provides the wrapper class `ConnectorJobHandler`.
 
 The job handler wrapper provides the following benefits:
 
-- Provides a `ConnectorContext` that handles the Camunda-internal job worker API regarding variables.
+- Provides a `OutboundConnectorContext` that handles the Camunda-internal job worker API regarding variables.
 - Handles secret management by defaulting to an environment variables-based secret store and
-  allowing to provide a custom secret provider via an SPI for `io.camunda.connector.api.SecretProvider`.
+  allowing to provide a custom secret provider via an SPI for `io.camunda.connector.api.secret.SecretProvider`.
 - Handles Connector result mapping for **Result Variable** and **Result Expression** as described
   in the [Connector template](#connector-template) section.
 
@@ -661,7 +891,7 @@ For example, you can spin up a custom client with the
 
 ```java
 import io.camunda.connector.MyConnectorFunction
-import io.camunda.connector.runtime.jobworker.ConnectorJobHandler;
+import io.camunda.connector.runtime.jobworker.outbound.ConnectorJobHandler;
 import io.camunda.zeebe.client.ZeebeClient;
 
 public class Main {
@@ -682,5 +912,7 @@ public class Main {
 
 If the provided job handler wrapper does not fit your needs, you can extend or replace
 it with your job handler implementation that handles invoking the Connector functions.
-Your custom job handler needs to create a `ConnectorContext` that the Connector function can use
-to handle variables, secrets, and Connector results.
+Your custom job handler needs to create a `OutboundConnectorContext` that the Connector
+function can use to handle variables, secrets, and Connector results. You can extend the
+provided `io.camunda.connector.impl.outbound.AbstractConnectorContext` to quickly gain access
+to most of the common context operations.

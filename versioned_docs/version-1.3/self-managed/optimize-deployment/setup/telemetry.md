@@ -21,6 +21,7 @@ Below you find the full list of data we want to collect, followed by a real-worl
 The general data category contains information about your Optimize installation:
 
 | Item | Explanation |
+| -- | -- |
 | Installation | A unique installation ID stored in Optimize's Elasticsearch database |
 | Product name | The name of the product (i.e. `Camunda Optimize`) |
 | Product version | The version of Optimize you are running |
@@ -31,6 +32,7 @@ The general data category contains information about your Optimize installation:
 The meta/environment data category contains information about the environmental setup:
 
 | Item | Explanation |
+| -- | -- |
 | Database vendor | The database vendor (i.e. `Elasticsearch`) |
 | Database version | The version of Elasticsearch Optimize is using |
 | License Key: Customer name | The customer name that appears in the license key you are using with this Optimize installation |
