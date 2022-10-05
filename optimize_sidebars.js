@@ -1540,6 +1540,18 @@ module.exports = {
       ],
     },
     {
+      "Backup & Restore": [
+        docsLink(
+          "Backup & Restore",
+          "self-managed/backup-restore/backup-and-restore/"
+        ),
+        docsLink(
+          "Zeebe Backups",
+          "self-managed/backup-restore/zeebe-backup-and-restore/"
+        ),
+      ],
+    },
+    {
       Troubleshooting: [
         docsLink("Log levels", "self-managed/troubleshooting/log-levels/"),
       ],
