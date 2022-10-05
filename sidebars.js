@@ -414,6 +414,10 @@ module.exports = {
                   "Variable labeling",
                   "components/userguide/additional-features/variable-labeling/"
                 ),
+                optimizeLink(
+                  "Data source variations",
+                  "components/userguide/additional-features/data-source-variants/"
+                ),
               ],
             },
           ],
