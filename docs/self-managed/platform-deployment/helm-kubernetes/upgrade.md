@@ -13,7 +13,7 @@ To upgrade to a more recent version of the Camunda Platform Helm charts, there a
 
 Normally for a Helm upgrade, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an upgrade as follows:
 
-```sh
+```shell
 helm upgrade <RELEASE_NAME>
 ```
 
@@ -21,11 +21,22 @@ However, if Camunda Identity is enabled (which is the default), the upgrade path
 
 ### Upgrading where Identity enabled
 
+<<<<<<< HEAD
+If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation.
+
+# If you just tried upgrading to a newer chart version
+
 If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
+
+> > > > > > > 0e9331a4a7bebcab85fe41cfd7c2ac42bd2e6814
 
 ```shell
 helm upgrade camunda-platform-test camunda/camunda-platform
+```
 
+You likely will see the following error:
+
+```shell
 Error: UPGRADE FAILED: execution error at (camunda-platform/charts/identity/templates/tasklist-secret.yaml:10:22):
 PASSWORDS ERROR: You must provide your current passwords when upgrading the release.
                  Note that even after reinstallation, old credentials may be needed as they may be kept in persistent volume claims.
@@ -33,7 +44,7 @@ PASSWORDS ERROR: You must provide your current passwords when upgrading the rele
 
     'global.identity.auth.tasklist.existingSecret' must not be empty, please add '--set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET' to the command. To get the current value:
 
-        export TASKLIST_SECRET=$(kubectl get secret --namespace "zell-c8-optimize" "camunda-platform-test-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
+        export TASKLIST_SECRET=$(kubectl get secret --namespace "camunda" "camunda-platform-test-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 ```
 
 As mentioned, this output returns because secrets are randomly generated with the first Helm installation by default if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated secrets persist on persistent volume claims (PVCs), which are not maintained by Helm.
@@ -89,7 +100,7 @@ If you installed Camunda Platform 8 using Helm charts before `8.0.13`, you need 
 
 As a prerequisite, make sure you have the Elasticsearch Helm repository added:
 
-```sh
+```shell
 helm repo add elastic https://helm.elastic.co
 ```
 
@@ -97,7 +108,7 @@ helm repo add elastic https://helm.elastic.co
 
 First get the name of Elasticsearch Persistent Volumes:
 
-```sh
+```shell
 ES_PV_NAME0=$(kubectl get pvc elasticsearch-master-elasticsearch-master-0 -o jsonpath="{.spec.volumeName}")
 
 ES_PV_NAME1=$(kubectl get pvc elasticsearch-master-elasticsearch-master-1 -o jsonpath="{.spec.volumeName}")
@@ -105,7 +116,7 @@ ES_PV_NAME1=$(kubectl get pvc elasticsearch-master-elasticsearch-master-1 -o jso
 
 Make sure these are the correct Persistent Volumes:
 
-```sh
+```shell
 kubectl get persistentvolume $ES_PV_NAME0 $ES_PV_NAME1
 ```
 
@@ -119,7 +130,7 @@ pvc-3e9129bc-9415-46c3-a005-00ce3b9b3be9   64Gi       RWO            Delete     
 
 The final step here is to change Persistent Volumes reclaim policy:
 
-```sh
+```shell
 kubectl patch persistentvolume "${ES_PV_NAME0}" \
     -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 
@@ -129,7 +140,7 @@ kubectl patch persistentvolume "${ES_PV_NAME1}" \
 
 #### 2. Update Elasticsearch PersistentVolumeClaim labels
 
-```sh
+```shell
 kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-0 \
     release=<RELEASE_NAME> chart=elasticsearch app=elasticsearch-master
 
@@ -141,13 +152,13 @@ kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-1 
 
 Please note that there will be a **downtime** between this step and the next step.
 
-```sh
+```shell
 kubectl delete statefulset elasticsearch-master
 ```
 
 #### 4. Apply Elasticsearch StatefulSet chart
 
-```sh
+```shell
 helm template camunda/camunda-platform <RELEASE_NAME> --version <CHART_VERSION> \
     --show-only charts/elasticsearch/templates/statefulset.yaml
 ```
