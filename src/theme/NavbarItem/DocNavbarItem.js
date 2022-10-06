@@ -11,6 +11,7 @@ import DefaultNavbarItem from "@theme/NavbarItem/DefaultNavbarItem";
 
 // Note that the original method is memoized, and we will likely want to do the same.
 //   (I can see logs from this function a dozen times per page load, due to it running for every nav link.)
+// Based on https://github.com/facebook/docusaurus/blob/abe545052693bfab98b347c14f3e00709bb2ac06/packages/docusaurus-theme-common/src/utils/docsUtils.tsx#L203-L216
 function useDocsVersionCandidatesAlt(docsPluginId, optimizeActiveDocContext) {
   // 1. Let docusaurus determine the version candidates -- it orders them based on what it thinks the user wants.
   //   Note that it's non-deterministic -- because it's based on what you've browsed recently.
@@ -42,7 +43,7 @@ function useDocsVersionCandidatesAlt(docsPluginId, optimizeActiveDocContext) {
   return versions;
 }
 
-// This is a twisted version of the original `useLayoutDoc` at https://github.com/facebook/docusaurus/blob/c811d6249e0afc23a41b7e54f88f8ce43a3ec358/packages/docusaurus-theme-common/src/utils/docsUtils.tsx#L290-L316
+// Based on https://github.com/facebook/docusaurus/blob/c811d6249e0afc23a41b7e54f88f8ce43a3ec358/packages/docusaurus-theme-common/src/utils/docsUtils.tsx#L290-L316
 function useLayoutDocAlt(docId, docsPluginId) {
   // 1. Figure out if we're looking at docs or optimize
   //   There might be a more direct function to do this.
@@ -94,6 +95,7 @@ const versionMappings = [
   { docsVersion: "1.3", optimizeVersion: "3.7.0" },
 ];
 
+// Swizzled from https://github.com/facebook/docusaurus/blob/abe545052693bfab98b347c14f3e00709bb2ac06/packages/docusaurus-theme-classic/src/theme/NavbarItem/DocNavbarItem.tsx
 export default function DocNavbarItem({
   docId,
   label: staticLabel,
