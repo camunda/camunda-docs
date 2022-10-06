@@ -701,6 +701,7 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
             "self-managed/zeebe-deployment/operations/rebalancing",
+            "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
           ],
         },
