@@ -257,6 +257,7 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/operate-feedback-and-questions",
+            "components/operate/userguide/process-instance-modification",
           ],
         },
       ],
