@@ -286,6 +286,9 @@ es:
       port: null
       # whether this proxy is using a secured connection
       sslEnabled: false
+  backup:
+    # the name of the snapshot repository to store backups
+    repositoryName: ""
 
   # Elasticsearch security settings
   security:

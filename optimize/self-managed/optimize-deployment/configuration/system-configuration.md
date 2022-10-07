@@ -171,6 +171,12 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 | es.security.ssl.certificate             |               | The path to a PEM encoded file containing the certificate (or certificate chain) that will be presented to clients when they connect.                                                                                                                 |
 | es.security.ssl.certificate_authorities | [ ]           | A list of paths to PEM encoded CA certificate files that should be trusted, e.g. ['/path/to/ca.crt']. <br /><br />Note: if you are using a public CA that is already trusted by the Java runtime, you do not need to set the certificate_authorities. |
 
+#### Elasticsearch backup settings
+
+| YAML Path                | Default Value | Description                                                             |
+| ------------------------ | ------------- | ----------------------------------------------------------------------- |
+| es.backup.repositoryName | ""            | The name of the snapshot repository to be used to backup Optimize data. |
+
 ### Email
 
 Settings for the email server to send email notifications, e.g. when an alert is triggered.
