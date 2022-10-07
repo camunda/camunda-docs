@@ -16,7 +16,7 @@ description: "Let's analyze the prerequisites and code to open a job worker."
 
 ## JobWorkerCreator.java
 
-[Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/job/JobWorkerCreator.java)
+[Source on GitHub](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/zeebe-client-plain-java/src/main/java/io/camunda/zeebe/example/job/JobWorkerCreator.java)
 
 ```java
         ...

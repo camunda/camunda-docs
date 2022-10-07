@@ -11,7 +11,7 @@ description: "Let's dive deeper into Zeebe and Java to create a process instance
 
 ## ProcessInstanceCreator.java
 
-[Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/process/ProcessInstanceCreator.java)
+[Source on GitHub](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/zeebe-client-plain-java/src/main/java/io/camunda/zeebe/example/process/ProcessInstanceCreator.java)
 
 ```java
 final ProcessInstanceEvent processInstanceEvent =

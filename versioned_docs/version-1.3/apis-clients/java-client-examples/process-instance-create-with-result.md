@@ -11,7 +11,7 @@ description: "Let's analyze the prerequisites and code to create a process insta
 
 ## ProcessInstanceWithResultCreator.java
 
-[Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/java/io/camunda/zeebe/example/process/ProcessInstanceWithResultCreator.java)
+[Source on GitHub](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/zeebe-client-plain-java/src/main/java/io/camunda/zeebe/example/process/ProcessInstanceWithResultCreator.java)
 
 ```java
 final ProcessInstanceResult processInstanceResult =
