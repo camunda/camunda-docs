@@ -27,7 +27,7 @@ final DeploymentEvent deploymentEvent =
 
 ## demoProcess.bpmn
 
-[Source on GitHub](https://github.com/camunda-cloud/zeebe/tree/develop/samples/src/main/resources/demoProcess.bpmn)
+[Source on GitHub](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/zeebe-client-plain-java/src/main/resources/demoProcess.bpmn)
 
 Download the XML and save it in the Java classpath before running the example. Open the file with Desktop Modeler for a graphical representation.
 
