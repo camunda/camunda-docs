@@ -8,13 +8,21 @@ This chapter contains information for users who want to deploy and run Camunda P
 
 ## Components
 
-Camunda Platform 8 includes the following components as Java applications:
+Camunda Platform 8 includes the following components:
 
 - Zeebe Broker and Gateway
 - Operate (requiring Elasticsearch)
 - Tasklist (requiring Elasticsearch)
 - Optimize (requiring Elasticsearch)
 - Identity (requiring Keycloak)
+- Web Modeler (requiring Identity, Keycloak, and PostgreSQL)
+  :::caution Beta Offering
+  Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)
+  with limited availability for enterprise customers only. It is not recommended for production use.
+  Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
+  :::
+
+All components except Web Modeler are single Java applications.
 
 Depending on your needs, you might not need all the above components to successfully use Camunda Platform 8.
 
