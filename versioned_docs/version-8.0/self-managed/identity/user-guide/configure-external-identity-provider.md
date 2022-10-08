@@ -17,20 +17,20 @@ To add an identity provider you need to log in to the Keycloak Administrator Con
 1. Open the URL you have configured for Keycloak in your browser
 
 When using the example
-[Docker Compose](https://docs.camunda.io/docs/self-managed/platform-deployment/docker/#docker-compose) setup, Keycloak
+[Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose) setup, Keycloak
 is available at [http://localhost:18080/](http://localhost:18080/).
 
-2. Click on `Administrator Console` and log in using the Keycloak administrator credentials
+1. Click on `Administrator Console` and log in using the Keycloak administrator credentials
 
 The default administrator username is `admin`.
 
-When operating Camunda Platform 8 on Kubernetes using [helm charts](/self-managed/platform-deployment/kubernetes-helm/),
+When operating Camunda Platform 8 on Kubernetes using [helm charts](/self-managed/platform-deployment/kubernetes-helm.md),
 you can extract the password as described on
-[Secrets extraction](/self-managed/platform-deployment/kubernetes-helm/#secrets-extraction).
-Using the example [Docker Compose](https://docs.camunda.io/docs/self-managed/platform-deployment/docker/#docker-compose)
+[Secrets extraction](/self-managed/platform-deployment/kubernetes-helm.md#secrets-extraction).
+Using the example [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose)
 setup, the password is set via `KEYCLOAK_ADMIN_PASSWORD` environment variable and is `admin` per default.
 
-3. Select the realm you are using with Camunda Platform 8. Per default it is **Camunda-platform**.
+1. Select the realm you are using with Camunda Platform 8. Per default it is **Camunda-platform**.
 
 ![keycloak-realm-select](img/keycloak-realm-select.png)
 
