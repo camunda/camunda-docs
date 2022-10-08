@@ -75,6 +75,7 @@ module.exports = {
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/update-billing-reservations",
             "components/console/manage-organization/switch-organization",
+            "components/console/manage-organization/external-sso",
           ],
         },
         {
@@ -257,6 +258,7 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/operate-feedback-and-questions",
+            "components/operate/userguide/process-instance-modification",
           ],
         },
       ],
