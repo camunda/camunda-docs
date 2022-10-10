@@ -28,7 +28,7 @@ Alpha features and components are introduced to gather early feedback from users
 
 ### Beta
 
-The scope of beta features and components is close enough to the targeted GA release that we are willing to provide update support, but we're still making the final changes. Therefore, it may still be missing some features. It comes with similar characteristics as an alpha release, but with following differences:
+The scope of beta features and components is close enough to the targeted GA release that we are willing to provide update support, but we're still making the final changes. Therefore, it may still be missing some features. It comes with the same characteristics as an alpha release, except for the following differences:
 
 - APIs, dependencies and configuration are not likely to change
 - Potentially feature-complete
