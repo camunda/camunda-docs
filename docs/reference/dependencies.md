@@ -18,7 +18,7 @@ import TabItem from "@theme/TabItem";
 {label: 'Identity', value: 'identity', },
 {label: 'Optimize', value: 'optimize', },
 {label: 'Desktop Modeler', value: 'modeler', },
-{label: 'Web Modeler (Beta)', value: 'web-modeler', },
+{label: 'Web Modeler', value: 'web-modeler', },
 {label: 'Connectors', value: 'connectors', },
 ]
 }>
