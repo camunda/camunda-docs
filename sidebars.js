@@ -991,6 +991,7 @@ module.exports = {
     {
       "Backup & Restore": [
         "self-managed/backup-restore/backup-and-restore",
+        "self-managed/backup-restore/optimize-backup",
         "self-managed/backup-restore/operate-tasklist-backup",
         "self-managed/backup-restore/zeebe-backup-and-restore",
       ],

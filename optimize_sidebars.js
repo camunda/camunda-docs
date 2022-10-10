@@ -1556,7 +1556,11 @@ module.exports = {
         ),
         docsLink(
           "Backup & Restore",
-          "self-managed/backup-restore/backup-and-restore/"
+          "self-managed/backup-restore/backup-and-restore"
+        ),
+        docsLink(
+          "Backup and restore Optimize data",
+          "self-managed/backup-restore/optimize-backup"
         ),
         docsLink(
           "Zeebe Backups",
