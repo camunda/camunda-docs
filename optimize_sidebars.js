@@ -1151,8 +1151,12 @@ module.exports = {
               "self-managed/platform-deployment/helm-kubernetes/overview/"
             ),
             docsLink(
-              "Deployment",
-              "self-managed/platform-deployment/helm-kubernetes/deployment/"
+              "Deploy",
+              "self-managed/platform-deployment/helm-kubernetes/deploy/"
+            ),
+            docsLink(
+              "Upgrade",
+              "self-managed/platform-deployment/helm-kubernetes/upgrade/"
             ),
             {
               Platforms: [
