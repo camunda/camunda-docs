@@ -28,6 +28,8 @@ jobs:
         run: npm run format:check
       - name: Build
         run: npm run build
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
       - name: Remove https redirect
         run: |
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
