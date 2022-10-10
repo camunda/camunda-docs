@@ -7,7 +7,7 @@ description: Introduction to Connector templates.
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-**Connector templates** are JSON configuration files which customize how a BPMN element is shown, and how it can be configured by process developers.
+**Connector templates** are JSON configuration files, which customize how a BPMN element is shown, and how it can be configured by process developers.
 
 You can, for example, allow the user to model and configure the following **REST Connector** by providing a simple JSON configuration:
 

@@ -6,9 +6,6 @@ description: Quickly send emails from your BPMN processes.
 
 The **SendGrid Connector** allows you to quickly send emails from your BPMN processes.
 
-Find the source code of this Connector in our [GitHub repository](https://github.com/camunda/connector-sendgrid).
-Take a look at its latest [releases](https://github.com/camunda/connector-sendgrid/releases) to find an executable JAR you can directly run in a [Connector runtime environment](../custom-built-connectors/connector-sdk.md#runtime-environments) in [Camunda Platform 8 Self-Managed](../../../../self-managed/about-self-managed.md).
-
 ## Prerequisites
 
 To use the SendGrid Connector, a SendGrid API key is needed. Follow [these steps](#appendix) if you do not have a SendGrid account or API key [secret configured](#create-a-new-connector-secret) in your cluster.
@@ -186,3 +183,12 @@ We advise you to keep your API key safe and avoid exposing it in the BPMN `xml` 
 
 1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
 2. Name your secret `SEND_GRID_API_KEY` so you can reference it later in the Connector.
+
+## Run in Self-Managed
+
+Follow the [installation guide](/self-managed/platform-deployment/overview.md) to consume this Connector
+in a Self-Managed environment using the [pre-packaged Connector runtime environment](../custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
+
+Alternatively, you can create a [custom Connector runtime environment](../custom-built-connectors/connector-sdk.md#connector-job-handler) and include this Connector.
+
+Note that this Connector is licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).

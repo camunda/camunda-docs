@@ -42,13 +42,14 @@ When using Camunda Platform 8 SaaS, the runtime is operated by Camunda and offer
 
 ### Camunda Platform 8 Self-Managed
 
-In a Self-Managed environment, you provide the execution environment for Connectors yourself. Thus, you also decide which Connectors are available in your system.
-The Camunda [Connector SDK](./connectors/custom-built-connectors/connector-sdk.md) allows you to run multiple Connectors using [runtime environments](./connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
-You can configure your runtime environment to execute any set of Connectors available to you.
+In a [Self-Managed](/self-managed/about-self-managed.md) environment, you provide the execution environment for Connectors yourself. Thus, you also decide which Connectors are available in your system.
+The Camunda [Connector SDK](./connectors/custom-built-connectors/connector-sdk.md) allows you to run Connectors using [runtime environments](./connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
+You can consume the pre-packaged runtime environment to execute any set of Connectors as described in the [installation guide](/self-managed/platform-deployment/overview.md).
 
-You can use the [out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda. Every Connector links to a source code repository that enables you to run the Connector in a Self-Managed environment.
+In Camunda 8 Self-Managed, you can use the [out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda. Each Connector describes how to run it in a Self-Managed environment in a dedicated section.
+As noted in this section if applicable, some of the out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+
 Besides those provided Connectors, you can use the Camunda Connector SDK in combination with [Connector templates](./connectors/custom-built-connectors/connector-templates.md) to develop [custom Connectors](./connectors/custom-built-connectors/connector-sdk.md#creating-a-custom-connector).
-
 These custom Connectors can then be used by process developers in your Self-Managed environment in the same way they would use out-of-the-box Connectors.
 
 To provide the user interface during modeling, you need to make the respective [Connector template](./connectors/custom-built-connectors/connector-templates.md#providing-and-using-connector-templates) available in your environment.

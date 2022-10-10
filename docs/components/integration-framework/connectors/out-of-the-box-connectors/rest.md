@@ -6,9 +6,6 @@ description: Make a request to a REST API and use the response in the next steps
 
 The **REST Connector** allows you to make a request to a REST API and use the response in the next steps of your process.
 
-Find the source code of this Connector in our [GitHub repository](https://github.com/camunda/connector-http-json).
-Take a look at its latest [releases](https://github.com/camunda/connector-http-json/releases) to find an executable JAR you can directly run in a [Connector runtime environment](../custom-built-connectors/connector-sdk.md#runtime-environments) in [Camunda Platform 8 Self-Managed](../../../../self-managed/about-self-managed.md).
-
 ## Create a REST Connector task
 
 To use a **REST Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
@@ -149,3 +146,10 @@ Additionally, you can choose to unpack the content of your `response` into multi
 ![rest connector http response mapping](../img/connectors-rest-http-response-mapping.png)
 
 The next steps in your process will have access to the `currentWeather` variable that will contain the full response and the mapped variables from the result expression: `actual_temp`, `feel_temp`, and `weather`.
+
+## Run in Self-Managed
+
+Follow the [installation guide](/self-managed/platform-deployment/overview.md) to consume this Connector
+in a Self-Managed environment using the [pre-packaged Connector runtime environment](../custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
+
+Alternatively, you can create a [custom Connector runtime environment](../custom-built-connectors/connector-sdk.md#connector-job-handler) and include this Connector.

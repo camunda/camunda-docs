@@ -6,9 +6,6 @@ description: Send messages to channels or users in your Slack workspace from you
 
 The **Slack Connector** allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
-Find the source code of this Connector in our [GitHub repository](https://github.com/camunda/connector-slack).
-Take a look at its latest [releases](https://github.com/camunda/connector-slack/releases) to find an executable JAR you can directly run in a [Connector runtime environment](../custom-built-connectors/connector-sdk.md#runtime-environments) in [Camunda Platform 8 Self-Managed](../../../../self-managed/about-self-managed.md).
-
 ## Prerequisites
 
 To use the Slack Connector, a Slack app must be registered with the Slack workspace you would like to send messages to. A respective OAuth token needs to be configured as a secret in your cluster. Follow [these steps in the appendix](#appendix) to learn how to set this up.
@@ -23,7 +20,7 @@ To make the **Slack Connector** executable, fill out the mandatory fields highli
 
 ![slack connector red properties](../img/connectors-slack-red-properties.png)
 
-1. Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, secrets.SLACK_OAUTH_TOKEN'.
+1. Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, 'secrets.SLACK_OAUTH_TOKEN'.
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
@@ -97,3 +94,12 @@ We advise you to keep your Slack bot token safe and avoid exposing it in the BPM
 
 1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
 2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the Connector.
+
+## Run in Self-Managed
+
+Follow the [installation guide](/self-managed/platform-deployment/platform-8-deployment.md) to consume this Connector
+in a Self-Managed environment using the [pre-packaged Connector runtime environment](../custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
+
+Alternatively, you can create a [custom Connector runtime environment](../custom-built-connectors/connector-sdk.md#connector-job-handler) and include this Connector.
+
+Note that this Connector is licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
