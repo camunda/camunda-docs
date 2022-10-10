@@ -263,7 +263,7 @@ module.exports = {
         },
       ],
       Optimize: [
-        optimizeLink("What is Optimize?", "components/what-is-optimize"),
+        optimizeLink("What is Optimize?", "components/what-is-optimize/"),
         {
           "User guide": [
             optimizeLink(
@@ -277,8 +277,8 @@ module.exports = {
                   "Creating dashboards",
                   "components/userguide/creating-dashboards/"
                 ),
-                optimizeLink("Edit mode", "components/userguide/edit-mode"),
-                optimizeLink("View mode", "components/userguide/view-mode"),
+                optimizeLink("Edit mode", "components/userguide/edit-mode/"),
+                optimizeLink("View mode", "components/userguide/view-mode/"),
               ],
             },
             optimizeLink(
