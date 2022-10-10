@@ -85,7 +85,7 @@ The _input_ area of each row specifies a certain **segment** of possible input v
 
 This row, for example, expresses that _long time silver customers receive a 9% discount_.
 
-Such a use case fits to the hit policy "**Unique**". For such use cases, it is an advantage that this hit policy make your decision logic invalid in case you violate its requirement that your table rules never "overlap": after all, you must not produce ambigious results.
+Such a use case fits to the hit policy "**Unique**". For such use cases, it is an advantage that this hit policy make your decision logic invalid in case you violate its requirement that your table rules never "overlap": after all, you must not produce ambiguous results.
 
 ### First: accepting a customer based on hard criteria
 

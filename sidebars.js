@@ -75,6 +75,7 @@ module.exports = {
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/update-billing-reservations",
             "components/console/manage-organization/switch-organization",
+            "components/console/manage-organization/external-sso",
           ],
         },
         {
@@ -257,6 +258,7 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/operate-feedback-and-questions",
+            "components/operate/userguide/process-instance-modification",
           ],
         },
       ],
@@ -413,6 +415,10 @@ module.exports = {
                 optimizeLink(
                   "Variable labeling",
                   "components/userguide/additional-features/variable-labeling/"
+                ),
+                optimizeLink(
+                  "Process variants comparison",
+                  "components/userguide/additional-features/process-variants-comparison/"
                 ),
               ],
             },
@@ -623,6 +629,7 @@ module.exports = {
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",
+    "reference/early-access",
     "reference/supported-environments",
     "reference/dependencies",
   ],
@@ -634,7 +641,8 @@ module.exports = {
         {
           "Helm/Kubernetes": [
             "self-managed/platform-deployment/helm-kubernetes/overview",
-            "self-managed/platform-deployment/helm-kubernetes/deployment",
+            "self-managed/platform-deployment/helm-kubernetes/deploy",
+            "self-managed/platform-deployment/helm-kubernetes/upgrade",
             {
               Platforms: [
                 "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
@@ -701,6 +709,7 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
             "self-managed/zeebe-deployment/operations/rebalancing",
+            "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
           ],
         },
@@ -980,6 +989,7 @@ module.exports = {
       "Backup & Restore": [
         "self-managed/backup-restore/backup-and-restore",
         "self-managed/backup-restore/optimize-backup",
+        "self-managed/backup-restore/zeebe-backup-and-restore",
       ],
     },
     {

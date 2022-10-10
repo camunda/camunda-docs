@@ -6,7 +6,7 @@ sidebar_label: "Overview"
 
 Let's analyse a few examples utilizing Java to deploy a process, open a job worker, handle variables, and request cluster topology.
 
-These examples are accessible in the [Zeebe GitHub repository](https://github.com/camunda-cloud/zeebe/) on the [develop branch](https://github.com/camunda-cloud/zeebe/tree/develop/samples).
+These examples are accessible in the [Camunda Community Hub Repository](https://github.com/camunda-community-hub/camunda-8-examples).
 
 Instructions to access code locally:
 
