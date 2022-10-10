@@ -9,25 +9,25 @@ Options -Indexes -MultiViews
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
 # Added for v8.1
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/deployment/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deploy/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/ingress-setup/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/local/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/openshift-helm/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/openshift/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/amazon-eks/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/$1 [R=301,L]
-# Note that this rule used to be a double-hop (to /deployment and then to /deploy)
-RewriteRule ^docs/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deploy/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deployment/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/kubernetes/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/overview/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/platform-8-deployment/(.*)$ /docs/self-managed/platform-deployment/overview/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/known-limitations/(.*)$ /docs/self-managed/platform-deployment/troubleshooting/$1 [R=301,L]
 
 # These redirects go from /next/ to /next/ and should be revisted when /next/ is removed from the sitemap
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/deployment/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/deploy/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/ingress-setup/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/local/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/openshift-helm/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/openshift/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/amazon-eks/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/$1 [R=301,L]
-# Note that this rule used to be a double-hop (to /deployment and then to /deploy)
-RewriteRule ^docs/next/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/deploy/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/deployment/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/kubernetes/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/overview/$1 [R=301,L]
 
 RewriteRule ^docs/guides/implementing-connectors/(.*)$ /docs/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
