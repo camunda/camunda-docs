@@ -16,6 +16,11 @@ Camunda Platform 8 includes the following components:
 - Optimize (requiring Elasticsearch)
 - Identity (requiring Keycloak)
 - Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--beta">Beta</span>](../../../reference/early-access#beta)
+  :::caution Beta Offering
+  Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)
+  with limited availability for enterprise customers only. It is not recommended for production use.
+  Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
+  :::
 
 All components except Web Modeler are single Java applications.
 

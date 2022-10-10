@@ -13,13 +13,15 @@ We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All 
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
 :::
 
-| Component | Docker image                                                         | Link to configuration options                                                                                           |
-| --------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Zeebe     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)       | [Environment variables](../../zeebe-deployment/configuration/environment-variables/)                                    |
-| Operate   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)   | [Operate configuration](../../operate-deployment/operate-configuration)                                                 |
-| Tasklist  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist) | [Tasklist configuration](../../tasklist-deployment/tasklist-configuration)                                              |
-| Identity  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity) | [Configuration variables](../../identity/deployment/configuration-variables/)                                           |
-| Optimize  | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize) | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start/#available-environment-variables) |
+| Component         | Docker image                                                                           | Link to configuration options                                                                                           |
+| ----------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Zeebe             | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)                         | [Environment variables](../../zeebe-deployment/configuration/environment-variables/)                                    |
+| Operate           | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)                     | [Operate configuration](../../operate-deployment/operate-configuration)                                                 |
+| Tasklist          | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                   | [Tasklist configuration](../../tasklist-deployment/tasklist-configuration)                                              |
+| Identity          | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                   | [Configuration variables](../../identity/deployment/configuration-variables/)                                           |
+| Optimize          | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize)                   | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start/#available-environment-variables) |
+| Connectors        | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)               |                                                                                                                         |
+| Connectors Bundle | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle) |                                                                                                                         |
 
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 
@@ -35,7 +37,7 @@ This will give you a single broker node with the following ports exposed:
 
 ## Docker Compose
 
-A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, and Identity is available in the [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
+A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors Bundle is available in the [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
 Follow the instructions in the [README](https://github.com/camunda/camunda-platform#using-docker-compose).
 
 :::warning
@@ -133,3 +135,10 @@ Optimize must also be configured as a client in Identity, and users will only be
 that has `write:*` permission for Optimize.
 
 For Optimize to import Zeebe data, Optimize must also be configured to be aware of the record prefix used when the records are exported to Elasticsearch. This can also be configured per the example above.
+
+### Connectors
+
+Use the provided [Docker Compose](#docker-compose) files to execute all [out-of-the-box Connectors](/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md) automatically.
+This uses the [Connectors Bundle](https://hub.docker.com/r/camunda/connectors) Docker image.
+
+To add custom Connectors, create a new docker image bundling them as described [here](https://github.com/camunda/connector-sdk/tree/main/runtime-job-worker#docker-job-worker-runtime-image), using the [Connectors](https://hub.docker.com/r/camunda/connectors) base image.

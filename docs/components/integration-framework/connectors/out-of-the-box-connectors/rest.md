@@ -146,3 +146,10 @@ Additionally, you can choose to unpack the content of your `response` into multi
 ![rest connector http response mapping](../img/connectors-rest-http-response-mapping.png)
 
 The next steps in your process will have access to the `currentWeather` variable that will contain the full response and the mapped variables from the result expression: `actual_temp`, `feel_temp`, and `weather`.
+
+## Run in Self-Managed
+
+Follow the [installation guide](/self-managed/platform-deployment/overview.md) to consume this Connector
+in a Self-Managed environment using the [pre-packaged Connector runtime environment](../custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
+
+Alternatively, you can create a [custom Connector runtime environment](../custom-built-connectors/connector-sdk.md#connector-job-handler) and include this Connector.
