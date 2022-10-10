@@ -4,6 +4,8 @@ title: Backup and restore Operate and Tasklist data
 description: "How to perform backup of Operate and Tasklist data and restore."
 ---
 
+## Backup and restore of Operate data
+
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
 Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. E.g.
 backup with id `backup1` may contain following Elasticsearch snapshots:
@@ -20,7 +22,7 @@ camunda_operate_backup1_8.1.0_part_6_of_6
 Operate provides a simple API to perform a backup and check the state of the backup. Restoring of backup can be performed
 using the standard Elasticsearch API.
 
-## Prerequisites
+### Prerequisites
 
 Before you can use the backup and restore feature:
 
@@ -35,7 +37,7 @@ for Tasklist:
 camunda.tasklist.backup.repositoryName=<repository name>
 ```
 
-## Create backup API
+### Create backup API
 
 During backup creation Operate can continue running. To create the backup, the following endpoint can be called:
 
@@ -77,7 +79,7 @@ Example response:
 }
 ```
 
-## Check backup state API
+### Check backup state API
 
 As backup is created asynchronously, you can check the state of the backup by calling the following endpoint:
 
@@ -107,7 +109,7 @@ Possible states of the backup:
 - `INCOMPATIBLE`: backup is incompatible with current Elasticsearch version
 - `INCOMPLETE`: backup is incomplete (e.g. when backup process was interrupted)
 
-## Restore backup
+### Restore backup
 
 There is no Operate API to preform the backup restore, instead standard [Elasticsearch Restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html) can be used.
 
