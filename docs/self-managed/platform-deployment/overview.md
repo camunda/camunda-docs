@@ -15,6 +15,7 @@ Camunda Platform 8 includes the following components:
 - Tasklist (requiring Elasticsearch)
 - Optimize (requiring Elasticsearch)
 - Identity (requiring Keycloak)
+- Connectors
 - Web Modeler (requiring Identity, Keycloak, and PostgreSQL)
   :::caution Beta Offering
   Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)

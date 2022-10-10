@@ -20,6 +20,8 @@ Make sure to configure the web applications to use a port that is available. By 
 
 Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/zeebe/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
 
+All Connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run Connectors locally including their necessary dependencies.
+
 ## Download and run Elasticsearch
 
 Operate, Tasklist, and Optimize use Elasticsearch as its underlying data store. Therefore you have to download and run Elasticsearch.
@@ -142,6 +144,50 @@ If you've already developed user tasks in Zeebe, you can see these on the left p
 ![tasklist-start-screen](assets/tasklist-start-screen_light.png)
 
 To update Tasklist versions, visit the [guide to update Tasklist](../../components/tasklist/userguide/updating-tasklist.md).
+
+## Run Connectors
+
+The [Connector runtime environment](https://search.maven.org/artifact/io.camunda.connector/connector-runtime-job-worker) picks up outbound connectors available on the classpath automatically
+unless [overriden through manual configuration](#manual-discovery). It uses the default configuration specified by a Connector through its `@OutboundConnector` annotation.
+
+To run the [REST Connector](https://search.maven.org/artifact/io.camunda.connector/connector-http-json) with the runtime environment, execute the following command:
+
+```bash
+java -cp 'connector-runtime-job-worker-with-dependencies.jar:connector-http-json-with-dependencies.jar' \
+    io.camunda.connector.runtime.jobworker.Main
+```
+
+The Connector runtime environment spins up and loads the REST Connector to work on jobs. You will see messages similar to the following:
+
+```log
+INFO: Registering outbound connector OutboundConnectorRegistration { name=HTTPJSON, type=io.camunda:http-json:1, function=io.camunda.connector.http.HttpJsonFunction, inputVariables=[url, method, authentication, headers, queryParameters, body] }
+```
+
+### Manual Discovery
+
+Use the following environment variables to configure Connectors and their configuration explicitly, without auto-discovery:
+
+| Environment variable                          | Purpose                                                       |
+| :-------------------------------------------- | :------------------------------------------------------------ |
+| `CONNECTOR_{NAME}_FUNCTION` (required)        | Function to be registered as job worker with the given `NAME` |
+| `CONNECTOR_{NAME}_TYPE` (optional)            | Job type to register for worker with `NAME`                   |
+| `CONNECTOR_{NAME}_INPUT_VARIABLES` (optional) | Variables to fetch for worker with `NAME`                     |
+
+Through that configuration you define all job workers to run.
+
+Specifying optional values allow you to override `@OutboundConnector`-provided Connector configuration.
+
+```bash
+CONNECTOR_HTTPJSON_FUNCTION=io.camunda.connector.http.HttpJsonFunction
+CONNECTOR_HTTPJSON_TYPE=non-default-httpjson-task-type
+
+java -cp 'connector-runtime-job-worker-with-dependencies.jar:connector-http-json-with-dependencies.jar' \
+    io.camunda.connector.runtime.jobworker.Main
+```
+
+### Connecting to Zeebe
+
+You configure the connection to Zeebe using the standard [Zeebe environment variables](/apis-clients/java-client/index.md#bootstrapping).
 
 ## Run Identity
 

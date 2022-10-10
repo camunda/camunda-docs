@@ -25,6 +25,7 @@ The following components are available for Camunda Platform 8 Self-Managed:
 - Tasklist
 - Optimize
 - Identity (not available in Camunda Platform 8 SaaS)
+- Connectors
 
 Camunda Platform 8 Self-Managed users may also use [Desktop Modeler](../../components/modeler/desktop-modeler/install-the-modeler) as an addition to these components. The Desktop Modeler can be used by process developers to build BPMN diagrams, DMN diagrams, or Camunda Forms for automation.
 
