@@ -8,7 +8,7 @@ sidebar_label: "Installation and first steps"
 
 To use Identity, first install it locally via Docker or Kubernetes.
 
-Follow the [Installation Guide](/docs/self-managed/platform-deployment/platform-8-deployment).
+Follow the [Installation Guide](/self-managed/platform-deployment/overview.md).
 
 ## Accessing the UI
 

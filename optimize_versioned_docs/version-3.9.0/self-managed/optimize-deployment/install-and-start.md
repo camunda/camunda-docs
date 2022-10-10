@@ -6,7 +6,7 @@ description: "Install and configure Optimize Self-Managed."
 
 ## Camunda Platform 8 stack
 
-Please refer to the [Installation Guide](/docs/self-managed/platform-deployment/platform-8-deployment) for details on how to install Optimize as part of a Camunda 8 stack.
+Please refer to the [Installation Guide]($docs$/self-managed/platform-deployment/overview/) for details on how to install Optimize as part of a Camunda 8 stack.
 
 ## Camunda Platform 7 Enterprise stack
 
