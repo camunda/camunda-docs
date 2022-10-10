@@ -415,8 +415,8 @@ module.exports = {
                   "components/userguide/additional-features/variable-labeling/"
                 ),
                 optimizeLink(
-                  "Data source variations",
-                  "components/userguide/additional-features/data-source-variants/"
+                  "Process variants comparison",
+                  "components/userguide/additional-features/process-variants-comparison/"
                 ),
               ],
             },

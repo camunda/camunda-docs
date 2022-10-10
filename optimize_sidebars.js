@@ -652,7 +652,7 @@ module.exports = {
                 "components/userguide/additional-features/export-import",
                 "components/userguide/additional-features/footer",
                 "components/userguide/additional-features/variable-labeling",
-                "components/userguide/additional-features/data-source-variants",
+                "components/userguide/additional-features/process-variants-comparison",
               ],
             },
           ],
