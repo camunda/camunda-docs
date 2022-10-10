@@ -416,6 +416,10 @@ module.exports = {
                   "Variable labeling",
                   "components/userguide/additional-features/variable-labeling/"
                 ),
+                optimizeLink(
+                  "Process variants comparison",
+                  "components/userguide/additional-features/process-variants-comparison/"
+                ),
               ],
             },
           ],
