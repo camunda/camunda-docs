@@ -25,6 +25,7 @@ The following components are available for Camunda Platform 8 Self-Managed:
 - Tasklist
 - Optimize
 - Identity (not available in Camunda Platform 8 SaaS)
+- Connectors
 - Web Modeler
   :::caution Beta Offering
   Web Modeler Self-Managed is currently offered as a [beta release](../../reference/early-access#beta)

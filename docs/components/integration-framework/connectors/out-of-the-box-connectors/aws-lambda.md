@@ -53,3 +53,12 @@ You can use an output mapping to map the response:
   "myNewReportPayload": response.payload
 }
 ```
+
+## Run in Self-Managed
+
+Follow the [installation guide](/self-managed/platform-deployment/overview.md) to consume this Connector
+in a Self-Managed environment using the [pre-packaged Connector runtime environment](../custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
+
+Alternatively, you can create a [custom Connector runtime environment](../custom-built-connectors/connector-sdk.md#connector-job-handler) and include this Connector.
+
+Note that this Connector is licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).

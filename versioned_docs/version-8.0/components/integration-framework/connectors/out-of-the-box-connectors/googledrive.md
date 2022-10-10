@@ -249,3 +249,12 @@ The result should be as follows:
 ### What kind of templates are currently supported?
 
 The **Google Drive Connector** currently supports only Google Doc files (MIME type `application/vnd.google-apps.document`).
+
+## Run in Self-Managed
+
+Follow the [installation guide](/self-managed/platform-deployment/platform-8-deployment.md) to consume this Connector
+in a Self-Managed environment using the [pre-packaged Connector runtime environment](../custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
+
+Alternatively, you can create a [custom Connector runtime environment](../custom-built-connectors/connector-sdk.md#connector-job-handler) and include this Connector.
+
+Note that this Connector is licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).

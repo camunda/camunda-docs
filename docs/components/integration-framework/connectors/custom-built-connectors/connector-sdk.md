@@ -871,6 +871,34 @@ Providing secrets to the environment can be achieved in two ways:
   class name of your secret provider implementation. Add this JAR to the `-cp` argument of the
   Java call. Your secret provider will serve secrets as implemented.
 
+#### Docker
+
+You can build on top of our [Connectors base image](https://hub.docker.com/r/camunda/connectors/tags) that includes
+the pre-packaged runtime enviroment without any Connector.
+
+To use the image, at least one connector has to be added to the classpath. We recommend to provide JARs with all dependencies bundled.
+
+:::caution
+
+As all Connectors share a single classpath, it can happen that different versions of the same dependency are available which can lead to conflicts.
+To prevent this, common dependencies like `jackson` can be shaded and relocated inside the Connector's JAR.
+
+:::
+
+You can add a Connector JAR by extending the base image with a JAR from a public URL:
+
+```yml
+FROM camunda/connectors:0.2.2
+
+ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.9.0/connector-http-json-0.9.0-with-dependencies.jar /opt/app/
+```
+
+You can also add a Connector JAR by using volumes:
+
+```bash
+docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.2.2
+```
+
 ### Connector job handler
 
 If using the pre-packaged runtime environment that comes with the SDK does not fit your use case,

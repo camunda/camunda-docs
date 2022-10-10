@@ -14,7 +14,7 @@ To use a **REST Connector** in your process, either change the type of existing 
 
 To make the **REST Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
 
-![rest connector red properties](../img/connectors-rest-red-properties.png)
+![rest Connector red properties](../img/connectors-rest-red-properties.png)
 
 :::note
 All the mandatory and non-mandatory fields will be covered in the upcoming sections. Depending on the authentication selection you make, more fields might be required. We will also cover this in the next section.
@@ -44,7 +44,7 @@ Select the **REST Connector** and fill out the following properties under the **
 1. Set **Username** (i.e. `YOUR_USERNAME`).
 2. Set **Password** to the secret you created (i.e. `secrets.REST_BASIC_AUTH_SECRET`).
 
-![rest connector basic auth](../img/connectors-rest-basic-auth.png)
+![rest Connector basic auth](../img/connectors-rest-basic-auth.png)
 
 ### REST Connector (Bearer Token Auth)
 
@@ -61,13 +61,13 @@ Select the **REST Connector** and fill out the following properties under the **
 
 1. Set **Bearer** to the secret you created (i.e. `secrets.REST_BEARER_TOKEN`).
 
-![rest connector bearer token auth](../img/connectors-rest-bearer-token-auth.png)
+![rest Connector bearer token auth](../img/connectors-rest-bearer-token-auth.png)
 
 ## Request
 
 Under the **HTTP Endpoint** section, select the desired **Method** and fill the **URL** with your desired REST API.
 
-![rest connector method and url](../img/connectors-rest-http-method-url.png)
+![rest Connector method and url](../img/connectors-rest-http-method-url.png)
 
 ### Query Parameters
 
@@ -146,3 +146,10 @@ Additionally, you can choose to unpack the content of your `response` into multi
 ![rest connector http response mapping](../img/connectors-rest-http-response-mapping.png)
 
 The next steps in your process will have access to the `currentWeather` variable that will contain the full response and the mapped variables from the result expression: `actual_temp`, `feel_temp`, and `weather`.
+
+## Run in Self-Managed
+
+Follow the [installation guide](/self-managed/platform-deployment/platform-8-deployment.md) to consume this Connector
+in a Self-Managed environment using the [pre-packaged Connector runtime environment](../custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
+
+Alternatively, you can create a [custom Connector runtime environment](../custom-built-connectors/connector-sdk.md#connector-job-handler) and include this Connector.
