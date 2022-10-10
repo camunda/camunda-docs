@@ -195,6 +195,11 @@ svg.implemented:hover [stroke="#333"] {
   margin-bottom: 1em;
 }
 
+.badge--beta {
+  background-color: #26d07c;
+  color: #000000;
+}
+
 navbar .navbar .navbar__link[href*="self-managed"] {
   font-size: 0;
   padding: 4px;
