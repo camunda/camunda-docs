@@ -5,12 +5,6 @@ title: About Modeler
 
 <span class="badge badge--cloud">Camunda Platform 8 only</span>
 
-:::note
-
-Web Modeler is only available for Camunda Platform 8 SaaS.
-
-:::
-
 Any executable process needs a **BPMN diagram** designed and configured beforehand.
 
 A BPMN diagram is used to visually outline the structure and flow of a process. As a result, the process can be more easily understood by various stakeholders.

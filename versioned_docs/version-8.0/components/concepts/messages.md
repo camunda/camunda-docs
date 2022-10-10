@@ -78,7 +78,7 @@ zbctl publish message "Money collected" --correlationKey "order-123" --messageId
 
 ## Message patterns
 
-The following patterns describe solutions for common problems tha can be solved using message correlation.
+The following patterns describe solutions for common problems that can be solved using message correlation.
 
 ### Message aggregator
 

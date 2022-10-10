@@ -164,7 +164,7 @@ This is an event subprocess (dotted line). This can be activated from everywhere
 So if the process is not completed within the defined SLA, the timer fires and the event subprocess is started. As the timer is non-interrupting (dashed line again), it does not intervene with the normal flow of operations, but starts something additionally in parallel.
 
 :::note
-Tthe above process is not necessarily modeled following all of our [modeling best practices](/docs/components/best-practices/modeling/creating-readable-process-models/), but intentionally shows different ways to use BPMN to implement certain workflow patterns.
+The above process is not necessarily modeled following all of our [modeling best practices](/docs/components/best-practices/modeling/creating-readable-process-models/), but intentionally shows different ways to use BPMN to implement certain workflow patterns.
 :::
 
 ### External messages/events

@@ -26,7 +26,7 @@ While you can install Camunda Platform 8 on any Kubernetes environment, we only 
 - [Amazon EKS](./platforms/amazon-eks.md)
 - [Red Hat OpenShift](./platforms/redhat-openshift.md)
 
-Generally speaking [deploying Camunda Platform using Helm chart](./deployment.md) should work for all platforms, however, each platform or cloud provider could have some special prerequisites to prepare or pitfalls to avoid. So main goal of the platforms docs is to shed the light on some points to have a smooth Camunda Platform deployment on different platforms.
+Generally speaking [deploying Camunda Platform using Helm chart](./deploy.md) should work for all platforms, however, each platform or cloud provider could have some special prerequisites to prepare or pitfalls to avoid. So main goal of the platforms docs is to shed the light on some points to have a smooth Camunda Platform deployment on different platforms.
 
 ## Use Helm to install on Kubernetes
 
@@ -34,7 +34,7 @@ There are several alternatives to deploy applications to a Kubernetes cluster, b
 
 At [helm.camunda.io](https://helm.camunda.io/), you'll find a Helm chart to configure a three-broker cluster with two Elasticsearch instances, Operate, two Zeebe Gateways and Tasklist. This size is comparable with the Production-S cluster plan in [Camunda Platform 8 SaaS](https://camunda.com/get-started/). It should be sufficient for 80% of use cases.
 
-Refer to the [documentation on Camunda's Helm charts](./deployment.md) for details.
+Refer to the [documentation on Camunda's Helm charts](./deploy.md) for details.
 
 To do, you must have the following tools installed in your local environment:
 

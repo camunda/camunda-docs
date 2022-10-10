@@ -416,6 +416,10 @@ module.exports = {
                   "Variable labeling",
                   "components/userguide/additional-features/variable-labeling/"
                 ),
+                optimizeLink(
+                  "Process variants comparison",
+                  "components/userguide/additional-features/process-variants-comparison/"
+                ),
               ],
             },
           ],
@@ -625,6 +629,7 @@ module.exports = {
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",
+    "reference/early-access",
     "reference/supported-environments",
     "reference/dependencies",
   ],
@@ -636,7 +641,8 @@ module.exports = {
         {
           "Helm/Kubernetes": [
             "self-managed/platform-deployment/helm-kubernetes/overview",
-            "self-managed/platform-deployment/helm-kubernetes/deployment",
+            "self-managed/platform-deployment/helm-kubernetes/deploy",
+            "self-managed/platform-deployment/helm-kubernetes/upgrade",
             {
               Platforms: [
                 "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
@@ -703,6 +709,7 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
             "self-managed/zeebe-deployment/operations/rebalancing",
+            "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
           ],
         },
@@ -979,7 +986,14 @@ module.exports = {
       "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
     },
     {
-      "Backup & Restore": ["self-managed/backup-restore/backup-and-restore"],
+      "Web Modeler (Beta)": ["self-managed/web-modeler/installation"],
+    },
+    {
+      "Backup & Restore": [
+        "self-managed/backup-restore/backup-and-restore",
+        "self-managed/backup-restore/operate-tasklist-backup",
+        "self-managed/backup-restore/zeebe-backup-and-restore",
+      ],
     },
     {
       Troubleshooting: ["self-managed/troubleshooting/log-levels"],
