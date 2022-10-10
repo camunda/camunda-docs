@@ -20,4 +20,4 @@ This will deploy the same components, but with a set of parameters tailored to a
 
 It might take some time for the services to get started depends on your internet connection speed since it will download the Docker images of all Camunda Platform components to your local KIND cluster.
 
-For more details about deployment options, visit full [Helm deployment guide](../deployment.md).
+For more details about deployment options, visit full [Helm deployment guide](../deploy.md).

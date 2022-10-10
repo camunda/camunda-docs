@@ -6,7 +6,7 @@ description: "Use Modeler to design and deploy a process."
 
 ## Design and deploy a process
 
-In Camunda Platform 8, you have two options to design and deploy a process, but for the purposes for this guide you will find instructions for Web Modeler.
+In Camunda Platform 8, you have two options to design and deploy a process, but for the purposes of this guide, you will find instructions for Web Modeler.
 
 1. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
 2. Name your project and select **New > BPMN Diagram > + Create blank**.
@@ -24,7 +24,7 @@ In Camunda Platform 8, you have two options to design and deploy a process, but 
 You can share read-only models with teammates and other stakeholders via a link. To do this, follow the steps below:
 
 1. From your diagram, click the **Share** icon located above the properties panel.
-2. The **Create share link** modal will appear. Click **Create link** to generate a sharable link.
+2. The **Create share link** modal will appear. Click **Create link** to generate a shareable link.
 3. Your **Link URL** will appear along with a blue **Copy** button. Note other options and features available when sharing a diagram, such as sharing via email.
 4. Send your link to your stakeholder to allow them to view the process. They do not need a Camunda account to view the process.
 
@@ -37,7 +37,7 @@ If you want to invite collaborators to work on your process together, you'll nee
 1. First, add your colleague to the Organization. Click your account name then **Organization Management**.
 2. Navigate to **Users > Add New User**. Add your colleague's email and assign them an appropriate role - **Developer** is likely a good default option here as the user will have full access to Console, Operate, and Tasklist without deletion privileges. See [all roles and permissions](https://docs.camunda.io/docs/components/console/manage-organization/manage-users/#roles-and-permissions) for additional details.
 3. Click **Add**. An email will be sent to the email you provided. Your colleague must hit **Join** to finish adding them to the organization.
-4. Now that they're added to the organization, you can add them to a project. Open **Modeler**, navigate to your project and open the **Collaborators** panel on the right side.
+4. Now that they're added to the organization, you can add them to a project. Open **Modeler**, navigate to your project, and open the **Collaborators** panel on the right side.
 5. Click **Add user** and find your colleague you added to your organization. Assign their role with the dropdown and click **Send invites**.
    ![add new user](./img/invite-collaborators.png)
 6. After your colleague clicks **Accept invitation**, they will have access to the project based on the role you assigned.
