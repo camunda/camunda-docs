@@ -1,10 +1,8 @@
 ---
 id: operate-tasklist-backup
 title: Backup and restore Operate and Tasklist data
-description: "How to perform backup of Operate and Tasklist data and restore the backup."
+description: "How to perform backup of Operate and Tasklist data and restore."
 ---
-
-## Backup and restore of Operate data
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
 Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. E.g.
@@ -19,15 +17,15 @@ camunda_operate_backup1_8.1.0_part_5_of_6
 camunda_operate_backup1_8.1.0_part_6_of_6
 ```
 
-Operate provides a simple API to perform backup and check it's state. Restoring of backup can be performed
-using standard Elasticsearch API.
+Operate provides a simple API to perform a backup and check the state of the backup. Restoring of backup can be performed
+using the standard Elasticsearch API.
 
-### Prerequisites
+## Prerequisites
 
-Before one can use backup and restore feature:
+Before you can use the backup and restore feature:
 
-1. Elasticsearch repository must be configured
-2. Operate and Tasklist must be configured with repository name by using the following configuration parameters:
+1. Elasticsearch repository must be configured.
+2. Operate and Tasklist must be configured with the repository name by using the following configuration parameters:
 
 ```yaml
 for Operate:
@@ -37,9 +35,9 @@ for Tasklist:
 camunda.tasklist.backup.repositoryName=<repository name>
 ```
 
-### Create backup API
+## Create backup API
 
-During backup creation Operate can continue running. To create the backup following endpoint can be called:
+During backup creation Operate can continue running. To create the backup, the following endpoint can be called:
 
 ```
 POST actuator/backup
@@ -81,7 +79,7 @@ Example response:
 
 ## Check backup state API
 
-As backup is created asynchronously, one can check the state of backup by calling the following endpoint:
+As backup is created asynchronously, you can check the state of the backup by calling the following endpoint:
 
 ```
 GET actuator/backup/{backupId}
@@ -117,7 +115,7 @@ There is no Operate API to preform the backup restore, instead standard [Elastic
 Operate must NOT be running, while backup restore is taking place.
 :::
 
-To restore the backup with known backup id, one must restore all the snapshots this backup contains (check the response of [Create backup API](#create-backup-api)).
+To restore the backup with known backup id, you must restore all the snapshots this backup contains (check the response of [Create backup API](#create-backup-api)).
 
 Example of Elasticsearch query:
 
@@ -127,10 +125,10 @@ curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_backup
 
 The whole process could look like:
 
-1. Stop Operate
-2. Make sure there are no Operate indices present in Elastic (otherwise restore process will fail)
+1. Stop Operate.
+2. Make sure there are no Operate indices present in Elastic (otherwise restore process will fail).
 3. Iterate over all Elastic snapshots included in desired backup and restore them using Elasticsearch Restore snapshot API.
-4. Start Operate
+4. Start Operate.
 
 ## Backup and restore of Tasklist data
 
