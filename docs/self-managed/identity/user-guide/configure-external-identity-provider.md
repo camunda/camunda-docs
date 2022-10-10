@@ -26,7 +26,7 @@ is available at [http://localhost:18080/](http://localhost:18080/).
 
 When deploying Camunda Platform 8 with [helm charts](/self-managed/platform-deployment/helm-kubernetes/overview.md),
 you can extract the password as described in
-[Secrets extraction](/self-managed/platform-deployment/helm-kubernetes/deploy.md#secrets-extraction).
+[Secrets extraction](/self-managed/platform-deployment/helm-kubernetes/upgrade.md#secrets-extraction).
 Using the example [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose)
 setup, the password is set via `KEYCLOAK_ADMIN_PASSWORD` environment variable and is `admin` per default.
 

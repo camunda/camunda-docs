@@ -21,14 +21,11 @@ However, if Camunda Identity is enabled (which is the default), the upgrade path
 
 ### Upgrading where Identity enabled
 
-<<<<<<< HEAD
 If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation.
 
 # If you just tried upgrading to a newer chart version
 
 If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
-
-> > > > > > > 0e9331a4a7bebcab85fe41cfd7c2ac42bd2e6814
 
 ```shell
 helm upgrade camunda-platform-test camunda/camunda-platform
