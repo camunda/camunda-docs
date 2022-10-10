@@ -652,6 +652,7 @@ module.exports = {
                 "components/userguide/additional-features/export-import",
                 "components/userguide/additional-features/footer",
                 "components/userguide/additional-features/variable-labeling",
+                "components/userguide/additional-features/process-variants-comparison",
               ],
             },
           ],
@@ -1151,8 +1152,12 @@ module.exports = {
               "self-managed/platform-deployment/helm-kubernetes/overview/"
             ),
             docsLink(
-              "Deployment",
-              "self-managed/platform-deployment/helm-kubernetes/deployment/"
+              "Deploy",
+              "self-managed/platform-deployment/helm-kubernetes/deploy/"
+            ),
+            docsLink(
+              "Upgrade",
+              "self-managed/platform-deployment/helm-kubernetes/upgrade/"
             ),
             {
               Platforms: [
@@ -1312,6 +1317,10 @@ module.exports = {
             docsLink(
               "Backups",
               "self-managed/zeebe-deployment/operations/backups/"
+            ),
+            docsLink(
+              "Management API",
+              "self-managed/zeebe-deployment/operations/management-api/"
             ),
           ],
         },
@@ -1536,6 +1545,22 @@ module.exports = {
         docsLink(
           "Overview",
           "self-managed/zeebe-gateway-deployment/zeebe-gateway/"
+        ),
+      ],
+    },
+    {
+      "Backup & Restore": [
+        docsLink(
+          "Operate and Tasklist Backups",
+          "self-managed/backup-restore/operate-tasklist-backup"
+        ),
+        docsLink(
+          "Backup & Restore",
+          "self-managed/backup-restore/backup-and-restore/"
+        ),
+        docsLink(
+          "Zeebe Backups",
+          "self-managed/backup-restore/zeebe-backup-and-restore/"
         ),
       ],
     },

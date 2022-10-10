@@ -182,8 +182,8 @@ management.health.defaults.enabled: false
 # enable Kubernetes health groups:
 # https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-kubernetes-probes
 management.health.probes.enabled: true
-# enable health check, metrics and loggers endpoints
-management.endpoints.web.exposure.include: health,prometheus,loggers
+# enable several Actuator endpoints
+management.endpoints.web.exposure.include: health, prometheus, loggers, usage-metrics, backup
 ```
 
 With this configuration, the following endpoints are available for use out of the box:
@@ -193,6 +193,8 @@ With this configuration, the following endpoints are available for use out of th
 `<server>:8080/actuator/health/liveness` Liveness probe
 
 `<server>:8080/actuator/health/readiness` Readiness probe
+
+This configuration may be overwritten by changing the corresponding configuration parameters values.
 
 ### Versions before 0.25.0
 

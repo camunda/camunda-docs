@@ -53,7 +53,7 @@ historyCleanup:
 ```
 
 :::note
-Tthe second non-importing instance has the [history cleanup disabled](../configuration/#history-cleanup-settings). It is strongly reccommended to do this for all non-importing Optimize instances in the cluster to prevent any conflicts when the [history cleanup](../history-cleanup/) is performed.
+The second non-importing instance has the [history cleanup disabled](../configuration/#history-cleanup-settings). It is strongly reccommended to do this for all non-importing Optimize instances in the cluster to prevent any conflicts when the [history cleanup](../history-cleanup/) is performed.
 :::
 
 ### 1.1 Import - event based process import

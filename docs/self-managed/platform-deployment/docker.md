@@ -7,7 +7,7 @@ This page guides you through Camunda Platform 8 Docker images and how to run the
 
 ## Docker images
 
-We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All those images are publicly accessible.
+We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All those images are publicly accessible (except for [Web Modeler](#web-modeler)).
 
 :::info
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
@@ -33,6 +33,34 @@ This will give you a single broker node with the following ports exposed:
 - `26501`: Command API (internal, gateway-to-broker)
 - `26502`: Internal API (internal, broker-to-broker)
 
+### Web Modeler
+
+:::caution Beta Offering
+Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)
+with limited availability for enterprise customers only. It is not recommended for production use.
+Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
+:::
+
+The Docker images for Web Modeler are not publicly accessible, but available to enterprise customers only from
+Camunda's private Docker registry.
+
+| Web Modeler Component | Docker image                                                          |
+| --------------------- | :-------------------------------------------------------------------- |
+| Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:0.1.0-beta`    |
+| Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:0.1.0-beta`     |
+| WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:0.1.0-beta` |
+
+To be able to pull the images you need to log in first, using the credentials you received from Camunda:
+
+```bash
+$ docker login registry.camunda.cloud
+Username: your_username
+Password: ******
+Login Succeeded
+```
+
+Please see the [instructions below](#web-modeler-1) on how to use the Web Modeler images with Docker Compose.
+
 ## Docker Compose
 
 A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, and Identity is available in the [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
@@ -50,6 +78,18 @@ This Docker Compose configuration serves two purposes:
 :::note
 We recommend to use [Helm + KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
 :::
+
+### Web Modeler
+
+:::caution Beta Offering
+Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)
+with limited availability for enterprise customers only. It is not recommended for production use.
+Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
+:::
+
+An additional Docker Compose configuration to run Web Modeler is also available in the
+[camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose-web-modeler-beta.yaml) repository.
+Please follow the instructions in the [README](https://github.com/camunda/camunda-platform#web-modeler-self-managed-beta-release).
 
 ## Configuration hints
 
