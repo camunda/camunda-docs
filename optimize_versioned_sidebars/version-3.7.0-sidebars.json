@@ -1,0 +1,9 @@
+{
+  "Components": [
+    {
+      "type": "link",
+      "label": "Overview Components",
+      "href": "/docs/1.3/components/"
+    }
+  ]
+}
