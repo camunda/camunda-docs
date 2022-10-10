@@ -1540,6 +1540,14 @@ module.exports = {
       ],
     },
     {
+      "Backup & Restore": [
+        docsLink(
+          "self-managed/backup-restore/backup-and-restore",
+          "self-managed/backup-restore/operate-tasklist-backup"
+        ),
+      ],
+    },
+    {
       Troubleshooting: [
         docsLink("Log levels", "self-managed/troubleshooting/log-levels/"),
       ],
