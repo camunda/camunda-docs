@@ -1551,6 +1551,10 @@ module.exports = {
     {
       "Backup & Restore": [
         docsLink(
+          "Operate and Tasklist Backups",
+          "self-managed/backup-restore/operate-tasklist-backup"
+        ),
+        docsLink(
           "Backup & Restore",
           "self-managed/backup-restore/backup-and-restore"
         ),

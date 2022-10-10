@@ -32,13 +32,14 @@ We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes envi
 
 Requirements for the components can be seen below:
 
-|                          | Java version | Other requirements                                     |
-| ------------------------ | ------------ | ------------------------------------------------------ |
-| Zeebe Broker and Gateway | OpenJDK 17+  | Elasticsearch 7.16.x(only if Elastic exporter is used) |
-| Operate                  | OpenJDK 11+  | Elasticsearch 7.16.x                                   |
-| Tasklist                 | OpenJDK 11+  | Elasticsearch 7.16.x                                   |
-| Identity                 | OpenJDK 17+  | Keycloak 16.1.1                                        |
-| Optimize                 | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x         |
+| Component                | Java version | Other requirements                                                   |
+| ------------------------ | ------------ | -------------------------------------------------------------------- |
+| Zeebe Broker and Gateway | OpenJDK 17+  | Elasticsearch 7.16.x (only if Elastic exporter is used)              |
+| Operate                  | OpenJDK 11+  | Elasticsearch 7.16.x                                                 |
+| Tasklist                 | OpenJDK 11+  | Elasticsearch 7.16.x                                                 |
+| Identity                 | OpenJDK 17+  | Keycloak 16.1.1                                                      |
+| Optimize                 | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x                       |
+| Web Modeler (Beta)       | -            | PostgreSQL 14.x (other database systems are currently not supported) |
 
 :::note Elasticsearch support
 [Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Camunda Platform 8.
@@ -57,8 +58,9 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 | Desktop Modeler 4.11+ | Zeebe 1.2.x | Operate 1.2.x Tasklist 1.2.x IAM 1.2.x      | -              |
 | Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x      | Optimize 3.7.x |
 | Desktop Modeler 5.0+  | Zeebe 8.0.x | Operate 8.0.x Tasklist 8.0.x Identity 8.0.x | Optimize 3.8.x |
+| Web Modeler (Beta)    | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x |
 
-_Note: You can use newer Modeler versions with older Zeebe versions too._
+_Note: You can use newer versions of the Desktop Modeler and the Web Modeler with older Zeebe versions too._
 
 ## Camunda Platform 7 & Optimize Version Matrix
 

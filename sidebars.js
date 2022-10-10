@@ -986,9 +986,13 @@ module.exports = {
       "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
     },
     {
+      "Web Modeler (Beta)": ["self-managed/web-modeler/installation"],
+    },
+    {
       "Backup & Restore": [
         "self-managed/backup-restore/backup-and-restore",
         "self-managed/backup-restore/optimize-backup",
+        "self-managed/backup-restore/operate-tasklist-backup",
         "self-managed/backup-restore/zeebe-backup-and-restore",
       ],
     },
