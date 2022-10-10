@@ -68,7 +68,7 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deployment.md):
+Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
@@ -147,7 +147,7 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deployment.md):
+Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml

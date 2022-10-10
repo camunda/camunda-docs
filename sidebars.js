@@ -640,7 +640,8 @@ module.exports = {
         {
           "Helm/Kubernetes": [
             "self-managed/platform-deployment/helm-kubernetes/overview",
-            "self-managed/platform-deployment/helm-kubernetes/deployment",
+            "self-managed/platform-deployment/helm-kubernetes/deploy",
+            "self-managed/platform-deployment/helm-kubernetes/upgrade",
             {
               Platforms: [
                 "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
