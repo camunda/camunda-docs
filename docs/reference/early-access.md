@@ -32,7 +32,7 @@ The scope of beta features and components is close enough to the targeted GA rel
 
 - APIs, dependencies and configuration are not likely to change
 - Potentially feature-complete
-- Can be updated to a newer release
+- Can usually be updated to a newer release
 
 :::note
 
