@@ -104,13 +104,13 @@ Possible states of the backup:
 
 - `COMPLETED`: The backup can be used for restoring data.
 - `IN_PROGRESS`: The backup process for this backup ID is still in progress.
-- `FAILED`: Something went wrong when creating this backup. To find our the exact problem, one can use [Elasticsearch Get snapshot status API](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-snapshot-status-api.html) for each of the snapshots included in given backup.
+- `FAILED`: Something went wrong when creating this backup. To find our the exact problem, one can use [Elasticsearch Get snapshot status API](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/get-snapshot-status-api.html) for each of the snapshots included in given backup.
 - `INCOMPATIBLE`: The backup is incompatible with current Elasticsearch version.
 - `INCOMPLETE`: The backup is incomplete (this could occur when backup process was interrupted or individual snapshots were deleted).
 
 ## Restore backup
 
-There is no Optimize API to perform the backup restore, instead the standard [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html) can be used. Please note that the Optimize versions of your backup snapshots must match with the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names, eg a snapshot with the name`camunda_optimize_backup1_3.9.0_part_1_of_2` was taken of Optimize version `3.9.0`.
+There is no Optimize API to perform the backup restore, instead the standard [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/restore-snapshot-api.html) can be used. Please note that the Optimize versions of your backup snapshots must match with the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names, eg a snapshot with the name`camunda_optimize_backup1_3.9.0_part_1_of_2` was taken of Optimize version `3.9.0`.
 
 :::note
 Optimize must NOT be running while a backup is being restored.
