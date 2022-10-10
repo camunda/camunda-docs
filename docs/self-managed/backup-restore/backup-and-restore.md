@@ -44,7 +44,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 9. Take Backup `x` of Zeebe. (See [How to take Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md))
 10. Wait until Backup `x` of exported zeebe records is complete.
 11. Wait until Backup `x` of Zeebe is completed. (See [How to monitor Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md))
-12. Resume exporting in Zeebe. (See [Zeebe management api](/self-managed/zeebe-deployment/operations/))
+12. Resume exporting in Zeebe. (See [Zeebe management api](/self-managed/zeebe-deployment/operations/management-api.md))
 
 If any of the above steps failed, you may have to restart with a new backup id. Ensure exporting is resumed if the backup process is aborted in the middle.
 
