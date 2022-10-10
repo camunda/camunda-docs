@@ -63,6 +63,10 @@ module.exports = {
               "Switch organization",
               "components/console/manage-organization/switch-organization/"
             ),
+            docsLink(
+              "Connect your IDP with Camunda Platform",
+              "components/console/manage-organization/external-sso/"
+            ),
           ],
         },
 
@@ -179,6 +183,10 @@ module.exports = {
                 docsLink(
                   "Call activity linking",
                   "components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
+                ),
+                docsLink(
+                  "Manage Connector templates",
+                  "components/modeler/web-modeler/advanced-modeling/manage-connector-templates/"
                 ),
               ],
             },
@@ -299,6 +307,10 @@ module.exports = {
                   "Event-based gateway",
                   "components/modeler/bpmn/event-based-gateways/"
                 ),
+                docsLink(
+                  "Inclusive gateway",
+                  "components/modeler/bpmn/inclusive-gateways/"
+                ),
               ],
             },
 
@@ -317,6 +329,10 @@ module.exports = {
                 docsLink(
                   "Error events",
                   "components/modeler/bpmn/error-events/"
+                ),
+                docsLink(
+                  "Terminate events",
+                  "components/modeler/bpmn/terminate-events/"
                 ),
               ],
             },
@@ -487,11 +503,132 @@ module.exports = {
         },
 
         {
-          Forms: [
+          "Camunda Forms": [
             docsLink(
-              "Camunda Forms reference",
+              "What are Camunda Forms?",
               "components/modeler/forms/camunda-forms-reference/"
             ),
+            {
+              "Form Element Library": [
+                docsLink(
+                  "Overview of Form Elements",
+                  "components/modeler/forms/form-element-library/forms-element-library/"
+                ),
+                docsLink(
+                  "Text",
+                  "components/modeler/forms/form-element-library/forms-element-library-text/"
+                ),
+                docsLink(
+                  "Textfield",
+                  "components/modeler/forms/form-element-library/forms-element-library-textfield/"
+                ),
+                docsLink(
+                  "Number",
+                  "components/modeler/forms/form-element-library/forms-element-library-number/"
+                ),
+                docsLink(
+                  "Checkbox",
+                  "components/modeler/forms/form-element-library/forms-element-library-checkbox/"
+                ),
+                docsLink(
+                  "Radio",
+                  "components/modeler/forms/form-element-library/forms-element-library-radio/"
+                ),
+                docsLink(
+                  "Select",
+                  "components/modeler/forms/form-element-library/forms-element-library-select/"
+                ),
+                docsLink(
+                  "Checklist",
+                  "components/modeler/forms/form-element-library/forms-element-library-checklist/"
+                ),
+                docsLink(
+                  "Taglist",
+                  "components/modeler/forms/form-element-library/forms-element-library-taglist/"
+                ),
+                docsLink(
+                  "Button",
+                  "components/modeler/forms/form-element-library/forms-element-library-button/"
+                ),
+              ],
+            },
+
+            {
+              Configuration: [
+                docsLink(
+                  "Data binding",
+                  "components/modeler/forms/configuration/forms-config-data-binding/"
+                ),
+                docsLink(
+                  "Options Source",
+                  "components/modeler/forms/configuration/forms-config-options/"
+                ),
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      "Integration Framework": [
+        docsLink(
+          "Introduction",
+          "components/integration-framework/introduction-to-connectors/"
+        ),
+
+        {
+          Connectors: [
+            docsLink(
+              "Use Connectors",
+              "components/integration-framework/connectors/use-connectors/"
+            ),
+
+            {
+              "Out-of-the-box Connectors": [
+                docsLink(
+                  "Overview",
+                  "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview/"
+                ),
+                docsLink(
+                  "Amazon SQS Connector",
+                  "components/integration-framework/connectors/out-of-the-box-connectors/aws-sqs/"
+                ),
+                docsLink(
+                  "AWS Lambda Connector",
+                  "components/integration-framework/connectors/out-of-the-box-connectors/aws-lambda/"
+                ),
+                docsLink(
+                  "Google Drive Connector",
+                  "components/integration-framework/connectors/out-of-the-box-connectors/googledrive/"
+                ),
+                docsLink(
+                  "REST Connector",
+                  "components/integration-framework/connectors/out-of-the-box-connectors/rest/"
+                ),
+                docsLink(
+                  "SendGrid Connector",
+                  "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid/"
+                ),
+                docsLink(
+                  "Slack Connector",
+                  "components/integration-framework/connectors/out-of-the-box-connectors/slack/"
+                ),
+              ],
+            },
+
+            {
+              "Custom-built Connectors": [
+                docsLink(
+                  "Connector templates",
+                  "components/integration-framework/connectors/custom-built-connectors/connector-templates/"
+                ),
+                docsLink(
+                  "Connector SDK",
+                  "components/integration-framework/connectors/custom-built-connectors/connector-sdk/"
+                ),
+              ],
+            },
           ],
         },
       ],
@@ -574,6 +711,10 @@ module.exports = {
             docsLink(
               "Giving feedback and asking questions",
               "components/operate/userguide/operate-feedback-and-questions/"
+            ),
+            docsLink(
+              "Process instance modification",
+              "components/operate/userguide/process-instance-modification/"
             ),
           ],
         },
@@ -677,58 +818,6 @@ module.exports = {
               "Updating Tasklist",
               "components/tasklist/userguide/updating-tasklist-cloud/"
             ),
-          ],
-        },
-      ],
-    },
-
-    {
-      "Integration Framework": [
-        docsLink(
-          "Introduction",
-          "components/integration-framework/introduction-to-connectors/"
-        ),
-
-        {
-          Connectors: [
-            docsLink(
-              "Use Connectors",
-              "components/integration-framework/connectors/use-connectors/"
-            ),
-
-            {
-              "Out-of-the-box Connectors": [
-                docsLink(
-                  "Overview",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview/"
-                ),
-                docsLink(
-                  "REST Connector",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/rest/"
-                ),
-                docsLink(
-                  "SendGrid Connector",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid/"
-                ),
-                docsLink(
-                  "Slack Connector",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/slack/"
-                ),
-              ],
-            },
-
-            {
-              "Custom-built Connectors": [
-                docsLink(
-                  "Connector templates",
-                  "components/integration-framework/connectors/custom-built-connectors/connector-templates/"
-                ),
-                docsLink(
-                  "Connector SDK",
-                  "components/integration-framework/connectors/custom-built-connectors/connector-sdk/"
-                ),
-              ],
-            },
           ],
         },
       ],
@@ -1181,6 +1270,10 @@ module.exports = {
                   "Accessing components without Ingress",
                   "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
                 ),
+                docsLink(
+                  "Combined and separated Ingress setup",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
+                ),
               ],
             },
             docsLink(
@@ -1315,12 +1408,12 @@ module.exports = {
               "self-managed/zeebe-deployment/operations/rebalancing/"
             ),
             docsLink(
-              "Backups",
-              "self-managed/zeebe-deployment/operations/backups/"
-            ),
-            docsLink(
               "Management API",
               "self-managed/zeebe-deployment/operations/management-api/"
+            ),
+            docsLink(
+              "Backups",
+              "self-managed/zeebe-deployment/operations/backups/"
             ),
           ],
         },
@@ -1512,6 +1605,10 @@ module.exports = {
               "Managing user access",
               "self-managed/identity/user-guide/managing-user-access/"
             ),
+            docsLink(
+              "Connect to an existing Keycloak instance",
+              "self-managed/identity/user-guide/connect-to-an-existing-keycloak/"
+            ),
           ],
         },
         {
@@ -1523,6 +1620,10 @@ module.exports = {
             docsLink(
               "Application monitoring",
               "self-managed/identity/deployment/application-monitoring/"
+            ),
+            docsLink(
+              "Starting configuration",
+              "self-managed/identity/deployment/starting-configuration-for-identity/"
             ),
           ],
         },
@@ -1548,19 +1649,26 @@ module.exports = {
         ),
       ],
     },
+
+    {
+      "Web Modeler (Beta)": [
+        docsLink("Installation", "self-managed/web-modeler/installation/"),
+      ],
+    },
+
     {
       "Backup & Restore": [
         docsLink(
-          "Operate and Tasklist Backups",
-          "self-managed/backup-restore/operate-tasklist-backup"
-        ),
-        docsLink(
           "Backup & Restore",
-          "self-managed/backup-restore/backup-and-restore"
+          "self-managed/backup-restore/backup-and-restore/"
         ),
         docsLink(
           "Backup and restore Optimize data",
-          "self-managed/backup-restore/optimize-backup"
+          "self-managed/backup-restore/optimize-backup/"
+        ),
+        docsLink(
+          "Backup and restore Operate and Tasklist data",
+          "self-managed/backup-restore/operate-tasklist-backup/"
         ),
         docsLink(
           "Zeebe Backups",
