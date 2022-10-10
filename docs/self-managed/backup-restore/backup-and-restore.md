@@ -4,19 +4,23 @@ title: "Backup & Restore"
 sidebar_label: "Backup & Restore"
 ---
 
-You can use backup feature of Camunda Platform 8 Self-Managed to regularly backup the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime. In case of failures that lead to data loss, you can recover the cluster from a backup.
+You can use the backup feature of Camunda Platform 8 Self-Managed to regularly backup the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime. In case of failures that lead to data loss, you can recover the cluster from a backup.
 
-A backup of the Camunda Platform 8 consists of backup of Zeebe, Operate, TaskList, Optimize and the backup of exported zeebe records in ElasticSearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. Hence you must take the backup of a Camunda Platform 8 cluster as a whole. The backups of individual components which are taken independently may not form a consistent recovery point. To ensure a consistent backup, follow the process described below.
+A backup of the Camunda Platform 8 consists of a backup of Zeebe, Operate, TaskList, Optimize, and the backup of exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components - you must take the backup of a Camunda Platform 8 cluster as a whole. The backups of individual components which are taken independently may not form a consistent recovery point. To ensure a consistent backup, follow the process described below.
 
-### Configure Backup Store
+### Configure backup store
 
-To take backups, you must first configure backup storage. Operate, TaskList and Optimize use ElasticSearch as the backend storage. They use the snapshot feature of ElasticSearch for backing up their state. So you must configure a [snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html) in ElasticSearch. Zeebe stores its backup to an external storage. It must be configured before the cluster is started. Refer [Zeebe backup configuration](/self-managed/backup-restore/zeebe-backup-and-restore.md/#configuration).
+To take backups, you must first configure backup storage.
 
-### Backup Process
+Operate, TaskList, and Optimize use Elasticsearch as backend storage and use the snapshot feature of Elasticsearch for backing up their state. So you must configure a [snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html) in Elasticsearch.
+
+Zeebe stores its backup to an external storage and must be configured before the cluster is started. Refer [Zeebe backup configuration](/self-managed/backup-restore/zeebe-backup-and-restore.md/#configuration).
+
+### Backup process
 
 The backup of each component and the backup of a Camunda Platform 8 cluster is identified by an id. That means, a backup `x` of Camunda Platform 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Operate, and backup `x` of Tasklist. The backup id must be an integer and greater than the previous backups. We recommend using the timestamp as the backup id.
 
-To backup a Camunda Platform 8 cluster, execute the following steps in the order specified.
+To backup a Camunda Platform 8 cluster, execute the following steps in the order specified:
 
 1. Trigger Backup `x` of Optimize. (See [How to take Optimize backup](/self-managed/backup-restore/optimize-backup.md))
 2. Trigger Backup `x` of Operate. (See [How to take Operate backup](/self-managed/backup-restore/operate-tasklist-backup.md))
