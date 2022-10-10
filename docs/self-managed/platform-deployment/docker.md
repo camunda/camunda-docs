@@ -7,7 +7,7 @@ This page guides you through Camunda Platform 8 Docker images and how to run the
 
 ## Docker images
 
-We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All those images are publicly accessible (except for [Web Modeler](#web-modeler)).
+We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All those images are publicly accessible (except for [Web Modeler Beta](#web-modeler)).
 
 :::info
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
