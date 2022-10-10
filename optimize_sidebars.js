@@ -1313,6 +1313,10 @@ module.exports = {
               "Backups",
               "self-managed/zeebe-deployment/operations/backups/"
             ),
+            docsLink(
+              "Management API",
+              "self-managed/zeebe-deployment/operations/management-api/"
+            ),
           ],
         },
       ],
