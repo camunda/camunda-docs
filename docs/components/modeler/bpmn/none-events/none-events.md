@@ -28,7 +28,7 @@ The engine itself doesn't do anything in the event, it just passes through it.
 
 ## Variable mappings
 
-Start and intermediate none events can have [variable output mappings](../../../../components/concepts/variables.md#output-mappings). End events do not support this.
+All none events can have [variable output mappings](../../../../components/concepts/variables.md#output-mappings).
 
 For start events, this is often used to initialize process variables.
 
