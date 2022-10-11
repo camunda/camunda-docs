@@ -35,12 +35,13 @@ This can be used to define which user the task can be assigned to. One or both o
 attributes can be specified simultaneously:
 
 - `assignee`: Specifies the user assigned to the task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) will claim the task for this user.
+- `candidateUsers`: Specifies the users that the task can be assigned to.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
-Typically, the assignee and candidate groups are defined as static values (e.g. `some_username` and
+Typically, the assignee, candidate users and candidate groups are defined as static values (e.g. `some_username` and
 `sales, operations`), but they can also be defined as
-[expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)`). The expressions are evaluated on activating the user task and must result in a
-`string` for the assignee and a `list of strings` for the candidate groups.
+[expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= reviewers` and `= remove(reviewers, book.author)`). The expressions are evaluated on activating the user task and must result in a
+`string` for the assignee and a `list of strings` for the candidate users and a `list of strings` for the candidate groups.
 
 For [Tasklist](/components/tasklist/introduction-to-tasklist.md) to claim the task for a known Tasklist user,
 the value of the `assignee` must be the user's **unique identifier**.
