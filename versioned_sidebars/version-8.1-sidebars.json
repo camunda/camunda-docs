@@ -1041,6 +1041,16 @@
             },
             {
               "type": "link",
+              "label": "Update notes (3.9.x-preview-x to 3.9.x)",
+              "href": "/optimize/self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (3.8.x to 3.9.x-preview-1)",
+              "href": "/optimize/self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1/"
+            },
+            {
+              "type": "link",
               "label": "Update notes (3.7.x to 3.8.x)",
               "href": "/optimize/self-managed/optimize-deployment/migration-update/3.7-to-3.8/"
             },

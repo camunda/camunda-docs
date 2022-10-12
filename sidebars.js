@@ -874,6 +874,14 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
+              "Update notes (3.9.x-preview-x to 3.9.x)",
+              "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9/"
+            ),
+            optimizeLink(
+              "Update notes (3.8.x to 3.9.x-preview-1)",
+              "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1/"
+            ),
+            optimizeLink(
               "Update notes (3.7.x to 3.8.x)",
               "self-managed/optimize-deployment/migration-update/3.7-to-3.8/"
             ),
