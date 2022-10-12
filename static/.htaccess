@@ -268,8 +268,6 @@ RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authorization/?$ /docs/self-managed/zeebe-deployment/security/client-authorization/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs/self-managed/zeebe-deployment/security/secure-client-communication/ [R=301,L]
 
-RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
-
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview(.*)$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview$2 [R=301,L]
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview [R=301,L]
 
