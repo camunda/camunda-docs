@@ -215,6 +215,10 @@ module.exports = {
             {
               "Element templates": [
                 docsLink(
+                  "Element templates",
+                  "components/modeler/desktop-modeler/element-templates/element-templates"
+                ),
+                docsLink(
                   "About element templates",
                   "components/modeler/desktop-modeler/element-templates/about-templates/"
                 ),

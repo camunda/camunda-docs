@@ -276,6 +276,11 @@
               "Element templates": [
                 {
                   "type": "link",
+                  "label": "Element templates",
+                  "href": "/docs/8.0/components/modeler/desktop-modeler/element-templates/element-templates"
+                },
+                {
+                  "type": "link",
                   "label": "About element templates",
                   "href": "/docs/8.0/components/modeler/desktop-modeler/element-templates/about-templates/"
                 },
