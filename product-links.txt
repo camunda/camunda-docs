@@ -6,8 +6,8 @@
 https://docs.camunda.io/
 https://docs.camunda.io/docs/components/console/manage-organization/manage-users/
 https://docs.camunda.io/docs/components/concepts/job-workers/
-https://docs.camunda.io/docs/guides/getting-started/model-your-first-process
-https://docs.camunda.io/docs/guides/getting-started/setup-client-connection-credentials
+https://docs.camunda.io/docs/guides/model-your-first-process
+https://docs.camunda.io/docs/guides/setup-client-connection-credentials
 https://docs.camunda.io/docs/guides/message-correlation
 https://docs.camunda.io/docs/apis-clients/working-with-apis-clients/
 https://docs.camunda.io/docs/components/console/manage-clusters/manage-alerts/
