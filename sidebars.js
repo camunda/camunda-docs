@@ -132,7 +132,7 @@ module.exports = {
             "components/modeler/desktop-modeler/start-instance",
             {
               "Element templates": [
-                "components/modeler/desktop-modeler/element-templates/element-templates",
+                "components/modeler/desktop-modeler/element-templates/desktop-modeler-element-templates",
                 "components/modeler/desktop-modeler/element-templates/about-templates",
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
