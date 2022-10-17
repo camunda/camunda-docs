@@ -62,7 +62,7 @@ Identity is designed to allow users to manage the various entities related to th
 11. Set the `KEYCLOAK_REALM` [environment variable](/docs/self-managed/identity/deployment/configuration-variables.md) to the realm you selected in step 2.
 
 :::tip
-Identity provides default values for required variables, if you are using a specific realm you may need to also set additional variables to use the intended realm.
+If you are using a specific realm you need to also set additional variables to use the intended realm.
 See the [environment variables](/docs/self-managed/identity/deployment/configuration-variables.md) page for details of Keycloak specific variables to consider.
 :::
 
