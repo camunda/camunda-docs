@@ -10,7 +10,7 @@ Element templates are currently available in BPMN diagrams only.
 
 # Overview
 
-Element templates are a way to extend [Desktop Modeler](https://camunda.org/bpmn/tool/) with domain-specific diagram elements, such as service and user tasks.
+Element templates are a way to extend our Modelers with domain-specific diagram elements, such as service and user tasks. They support Camunda 7 and Camunda 8 and are the foundation of [Camunda 8 Connector Templates](../../../../../components/integration-framework/connectors/custom-built-connectors/connector-templates/).
 
 ![Custom fields in the Desktop Modeler](./img/overview.png)
 
