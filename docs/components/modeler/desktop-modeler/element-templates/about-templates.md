@@ -17,4 +17,4 @@ Element templates are a way to extend our Modelers with domain-specific diagram 
 If applicable, element templates can be assigned to a diagram element via the properties panel.
 Once applied, element templates configure the diagram element with pre-defined values for BPMN properties, input/output mappings, and extension properties.
 
-As seen in the _Mail Task_ example above, Modeler allows properties of custom elements to be edited, too.
+As seen in the _Mail Task_ example above, the Modeler allows properties of custom elements to be edited, too.
