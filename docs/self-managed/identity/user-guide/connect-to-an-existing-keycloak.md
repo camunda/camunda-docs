@@ -59,7 +59,14 @@ Identity is designed to allow users to manage the various entities related to th
 
 10. Set the `IDENTITY_CLIENT_SECRET` [environment variable](/docs/self-managed/identity/deployment/configuration-variables.md) with the value from step 9.
 
-11. Start the Identity application.
+11. Set the `KEYCLOAK_REALM` [environment variable](/docs/self-managed/identity/deployment/configuration-variables.md) to the realm you selected in step 2.
+
+:::tip
+Identity provides default values for required variables, if you are using a specific realm you may need to also set additional variables to use the intended realm.
+See the [environment variables](/docs/self-managed/identity/deployment/configuration-variables.md) page for details of Keycloak specific variables to consider.
+:::
+
+12. Start the Identity application.
 
 :::note What does Identity create when starting?
 The Identity application creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/docs/self-managed/identity/deployment/starting-configuration.md).
