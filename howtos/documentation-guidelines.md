@@ -48,6 +48,46 @@ Specific Optimize versions are aligned with Camunda Platform versions as follows
 | 8.0                      | 3.8.0            |
 | 1.3                      | 3.7.0            |
 
+## Sidebar navigation
+
+[Sidebar navigation](https://docusaurus.io/docs/sidebar) of the documentation is managed in the sidebars files. [Each instance of the documentation](#instances-docs-vs-optimize) has its own sidebars file:
+
+| Instance   | Version(s)               | Sidebars path                                                                             |
+| ---------- | ------------------------ | ----------------------------------------------------------------------------------------- |
+| `docs`     | Next                     | [/docs/sidebars.js](../docs/sidebars.js)                                                  |
+| `docs`     | 8.1, 8.0, 1.3, ...       | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/)                    |
+| `optimize` | Next                     | [/optimize/sidebars.js](../optimize/sidebars.js)                                          |
+| `optimize` | 3.9.0, 3.8.0, 3.7.0, ... | [/optimize_versioned_sidebars/version-\*-sidebars.json/](../optimize_versioned_sidebars/) |
+
+### Sidebar items
+
+The large object in each sidebars file contains two different types of items:
+
+- Items within the same [documentation instance](#instances-docs-vs-optimize) are [linked by the path to the target .md file](https://github.com/camunda/camunda-platform-docs/blob/89993fbc1446c203324f38139ae7eb40e19b14ac/versioned_sidebars/version-8.1-sidebars.json#L5):
+  ```json
+  "guides/introduction-to-camunda",
+  ```
+- Items in the opposite [documentation instance](#instances-docs-vs-optimize) are [linked by an object containing the title and URL of the target document](https://github.com/camunda/camunda-platform-docs/blob/89993fbc1446c203324f38139ae7eb40e19b14ac/versioned_sidebars/version-8.1-sidebars.json#L331-L335):
+  ```json
+  {
+    "type": "link",
+    "label": "What is Optimize?",
+    "href": "/optimize/components/what-is-optimize/"
+  },
+  ```
+
+> **Note**
+> The "next" versions of the docs are JavaScript rather than JSON. As such, [cross-instance sidebar items in these files](https://github.com/camunda/camunda-platform-docs/blob/main/sidebars.js#L266) call a helper function instead of emitting the entire cross-instance object for each item.
+
+### Synchronization of sidebars
+
+Several sections of the sidebar navigation are shared across the Optimize and main sections of the docs: Components, Self-Managed, and APIs & Clients. For these sections, the structure of the sidebars should always match across instances. When they drift, it appears to the user as differences in the sidebar navigation depending on which page they're viewing.
+
+Any PRs that make a structural change to one of the instance's sidebars file in a shared section should make the same structural change to the other instance's sidebars file. This typically appears as a link to the target .md file in one file, and an object containing the target title and URL in the other file.
+
+> **Note**
+> Changes outside of the shared sections do not need to be synchronized to the corresponding Optimize sidebars file.
+
 ## Internal links
 
 When linking internally from one document to another, follow these guidelines:
