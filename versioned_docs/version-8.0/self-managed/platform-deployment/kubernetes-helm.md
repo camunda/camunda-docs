@@ -26,6 +26,10 @@ By default, the following will be installed:
   - **Identity**: Deploys the Identity component responsible for authentication and authorization.
   - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 
+:::note Connectors
+We do not provide a Helm chart for Connectors in Self-Managed yet.
+:::
+
 ![Charts](assets/ccsm-helm-charts.png)
 
 When installing the [camunda-platform](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform) Helm chart, all the components in this picture are installed.

@@ -729,6 +729,10 @@ module.exports = {
         "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics",
       ],
+      Connectors: [
+        "self-managed/connectors-deployment/install-and-start",
+        "self-managed/connectors-deployment/connectors-configuration",
+      ],
 
       Optimize: [
         optimizeLink(
