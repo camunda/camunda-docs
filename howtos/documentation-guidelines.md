@@ -38,6 +38,16 @@ Due to a difference in version numbers, the documentation is split into [multipl
 
 When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
+### Version alignment
+
+Specific Optimize versions are aligned with Camunda Platform versions as follows:
+
+| Camunda Platform version | Optimize version |
+| ------------------------ | ---------------- |
+| 8.1                      | 3.9.0            |
+| 8.0                      | 3.8.0            |
+| 1.3                      | 3.7.0            |
+
 ## Internal links
 
 When linking internally from one document to another, follow these guidelines:
