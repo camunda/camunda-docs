@@ -105,16 +105,25 @@ When linking internally from one document to another, follow these guidelines:
 ## Adding a new documentation page
 
 1. Select the corresponding directory.
-2. Add the document id to the corresponding sidebars file:
-
-   - For the current release, the most recent [`/versioned_sidebars/version-*-sidebars.json`][versioned-sidebars]
-   - For the "Next" release, [`sidebars.js`][next-sidebars]
+2. Add the document id to [the corresponding sidebars file](#sidebar-navigation). [Example](https://github.com/camunda/camunda-platform-docs/blob/main/versioned_sidebars/version-8.1-sidebars.json#L47):
+   ```json
+   " components/components-overview",
+   ```
+3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), add a parallel change to [the other instance's corresponding sidebars file](#sidebar-navigation). [Example](https://github.com/camunda/camunda-platform-docs/blob/main/optimize_versioned_sidebars/version-3.9.0-sidebars.json#L3-L7):
+   ```json
+   {
+     "type": "link",
+     "label": "Overview Components",
+     "href": "/docs/components/"
+   },
+   ```
 
 ## Moving an existing page
 
 1. Identify the page, pages, or directory and relocate it in the file structure.
-2. Update [`/versioned_sidebars/version-*-sidebars.json`][versioned-sidebars] and/or [`sidebars.js`][next-sidebars] to fit the new location.
-3. Add a redirect/rewrite rule to the top of `.htaccess`.
+2. Update [the corresponding sidebars file(s)](#sidebar-navigation) to fit the new location.
+3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), update [the opposite instance's corresponding sidebars file(s)](#sidebar-navigation).
+4. Add necessary redirect/rewrite rules to the top of `.htaccess`.
 
 > **Note**
 > The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
@@ -122,8 +131,9 @@ When linking internally from one document to another, follow these guidelines:
 ## Remove an existing page
 
 1. Identify the page, pages, or directory and delete it in the file structure.
-2. Update [`/versioned_sidebars/version-*-sidebars.json`][versioned-sidebars] and/or [`sidebars.js`][next-sidebars].
-3. Add a redirect/rewrite rule to the top of `.htaccess` to redirect users to appropriate relevant content on another page.
+2. Update [the corresponding sidebars file(s)](#sidebar-navigation).
+3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), update [the opposite instance's corresponding sidebars file(s)](#sidebar-navigation).
+4. Add necessary redirect/rewrite rules to the top of `.htaccess` to redirect users to appropriate relevant content on another page.
 
 > **Note**
 > The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
