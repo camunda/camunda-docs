@@ -12,14 +12,13 @@ The concept of a [Connector](/components/integration-framework/introduction.md#c
 
 ## Connector runtime and function
 
-The Connector runtime environment can installed using the supported [deployment options](/self-managed/platform-deployment/overview.md#deployment-options).
+The Connector runtime environment can be installed using the supported [deployment options](/self-managed/platform-deployment/overview.md#deployment-options).
 
-Currently, we only support an installation of Connectors with Docker, Docker Compose, and the Manual setup.
-Please refer to the [Installation Guide](/self-managed/platform-deployment/overview.md) for more details.
+Currently, we support an installation of Connectors with Docker, Docker Compose, and the Manual setup. Refer to the [installation guide](/self-managed/platform-deployment/overview.md) for more details.
 
 ## Connector templates
 
-Fot the modeling interface, you need to [provide Connector templates](/components/integration-framework/connectors/custom-built-connectors/connector-templates.md#providing-and-using-connector-templates).
+For the modeling interface, you need to [provide Connector templates](/components/integration-framework/connectors/custom-built-connectors/connector-templates.md#providing-and-using-connector-templates).
 
 For the [out-of-the-box Connectors](/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda,
 the Connectors Bundle project provides a set of all Connector templates related to one [release version](https://github.com/camunda/connectors-bundle/releases).

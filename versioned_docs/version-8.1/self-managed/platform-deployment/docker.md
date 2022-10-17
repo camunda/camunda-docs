@@ -181,7 +181,7 @@ For Optimize to import Zeebe data, Optimize must also be configured to be aware 
 Use the provided [Docker Compose](#docker-compose) files to execute all [out-of-the-box Connectors](/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md) automatically.
 This uses the [Connectors Bundle](https://hub.docker.com/r/camunda/connectors-bundle) Docker image.
 
-Note that some of the out-of-the-box Connectors are licensed under the
+Note that some out-of-the-box Connectors are licensed under the
 [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
 
@@ -189,12 +189,12 @@ Refer to the [Connector installation guide](../../connectors-deployment/install-
 
 #### Custom set of Connectors
 
-To add custom Connectors, you can build on top of our [Connectors base image](https://hub.docker.com/r/camunda/connectors/) that includes the pre-packaged runtime enviroment without any Connector.
-To use the image, at least one Connector has to be added to the classpath. We recommend to provide JARs with all dependencies bundled.
+To add custom Connectors, you can build on top of our [Connectors base image](https://hub.docker.com/r/camunda/connectors/) that includes the pre-packaged runtime environment without any Connector.
+To use the image, at least one Connector has to be added to the classpath. We recommend providing JARs with all dependencies bundled.
 
 :::caution
 
-As all Connectors share a single classpath, it can happen that different versions of the same dependency are available which can lead to conflicts.
+As all Connectors share a single classpath, different versions of the same dependency can be available and lead to conflicts.
 To prevent this, common dependencies like `jackson` can be shaded and relocated inside the Connector's JAR.
 
 :::

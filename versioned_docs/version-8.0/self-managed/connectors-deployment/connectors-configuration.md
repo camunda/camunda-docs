@@ -3,14 +3,14 @@ id: connectors-configuration
 title: Configuration
 ---
 
-You can configue the Connector runtime environment regarding the following aspects:
+You can configure the Connector runtime environment in the following ways:
 
 - The Zeebe instance to connect to.
 - The secrets that should be available to the Connectors.
 
 ## Connecting to Zeebe
 
-You configure the connection to Zeebe using the standard [Zeebe environment variables](/apis-clients/java-client/index.md#bootstrapping).
+Configure the connection to Zeebe using the standard [Zeebe environment variables](/apis-clients/java-client/index.md#bootstrapping).
 
 ## Manual discovery of Connectors
 
@@ -37,7 +37,7 @@ Providing secrets to the runtime environment can be achieved in different ways, 
 
 ### Secrets in Docker images
 
-To inject secrets into the [Docker images of the runtime](../platform-deployment/docker.md#connectors), they have to be available in the environment of the docker container.
+To inject secrets into the [Docker images of the runtime](../platform-deployment/docker.md#connectors), they must be available in the environment of the Docker container.
 
 For example, you can inject secrets when running a container:
 
@@ -58,7 +58,7 @@ to inject multiple secrets at once.
 
 ### Secrets in manual installations
 
-In the [Manual setup](../platform-deployment/local.md#run-connectors), inject secrets during Connector execution by providing
+In the [manual setup](../platform-deployment/local.md#run-connectors), inject secrets during Connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash

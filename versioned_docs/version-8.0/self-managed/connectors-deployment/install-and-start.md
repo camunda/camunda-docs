@@ -12,10 +12,9 @@ The concept of a [Connector](/components/integration-framework/introduction.md#c
 
 ## Connector runtime and function
 
-The Connector runtime environment can installed using the supported [deployment options](/self-managed/platform-deployment/platform-8-deployment.md#deployment-options).
+The Connector runtime environment can be installed using the supported [deployment options](/self-managed/platform-deployment/platform-8-deployment.md#deployment-options).
 
-Currently, we only support an installation of Connectors with Docker, Docker Compose, and the Manual setup.
-Please refer to the [Installation Guide](/self-managed/platform-deployment/platform-8-deployment.md) for more details.
+Currently, we only support an installation of Connectors with Docker, Docker Compose, and the Manual setup. Refer to the [installation guide](/self-managed/platform-deployment/platform-8-deployment.md) for more details.
 
 ## Connector templates
 

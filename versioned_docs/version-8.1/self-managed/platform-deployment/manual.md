@@ -21,7 +21,7 @@ Make sure to configure the web applications to use a port that is available. By 
 Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/zeebe/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
 
 All Connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run Connectors locally including their necessary dependencies.
-Note that some of the out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+Note that some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
 
 ## Download and run Elasticsearch
@@ -149,7 +149,7 @@ To update Tasklist versions, visit the [guide to update Tasklist](../../componen
 
 ## Run Connectors
 
-The [Connector runtime environment](https://search.maven.org/artifact/io.camunda.connector/connector-runtime-job-worker) picks up outbound connectors available on the classpath automatically.
+The [Connector runtime environment](https://search.maven.org/artifact/io.camunda.connector/connector-runtime-job-worker) picks up outbound Connectors available on the classpath automatically.
 It uses the default configuration specified by a Connector through its `@OutboundConnector` annotation.
 
 To run the [REST Connector](https://search.maven.org/artifact/io.camunda.connector/connector-http-json) with the runtime environment, execute the following command:
@@ -159,7 +159,7 @@ java -cp 'connector-runtime-job-worker-with-dependencies.jar:connector-http-json
     io.camunda.connector.runtime.jobworker.Main
 ```
 
-This starts a Zeebe client, registering the defined Connector as job worker. By default, it connects to a local Zeebe instance at port `26500`.
+This starts a Zeebe client, registering the defined Connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
 You can configure the Zeebe client using the [standard Zeebe environment variables](/apis-clients/java-client/index.md#bootstrapping).
 
 You will see messages similar to the following:

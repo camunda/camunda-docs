@@ -46,9 +46,8 @@ In a [Self-Managed](/self-managed/about-self-managed.md) environment, you provid
 The Camunda [Connector SDK](./connectors/custom-built-connectors/connector-sdk.md) comes with [runtime environments](./connectors/custom-built-connectors/connector-sdk.md#runtime-environments) that allow you to do this.
 
 You can consume the [pre-packaged runtime environment](./connectors/custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment) to execute any set of Connectors.
-The [installation guide](/self-managed/connectors-deployment/install-and-start.md) details how to install this runtime.
-It also describes how to integrate the [out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda, including their Connector templates for modeling.
-Note that some of the out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+The [installation guide](/self-managed/connectors-deployment/install-and-start.md) details how to install this runtime, and also describes how to integrate the [out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda, including their Connector templates for modeling.
+Note that some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 
 ### Next steps to get started with Connectors
 
