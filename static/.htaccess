@@ -8,6 +8,9 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# Consolidated redundant element-template pages - v8.0, current, and vNext.
+RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templates/?$ /docs$1/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
+
 # Added for v8.1
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/deployment/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deploy/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/ingress-setup/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/$1 [R=301,L]
@@ -264,8 +267,6 @@ RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
 
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authorization/?$ /docs/self-managed/zeebe-deployment/security/client-authorization/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs/self-managed/zeebe-deployment/security/secure-client-communication/ [R=301,L]
-
-RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview(.*)$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview$2 [R=301,L]
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview [R=301,L]
