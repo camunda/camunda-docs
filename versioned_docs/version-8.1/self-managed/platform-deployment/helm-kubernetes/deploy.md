@@ -24,8 +24,8 @@ By default, the following charts will be installed as part of Camunda Platform 8
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 
-:::note Web Modeler
-We do not provide a Helm chart for Web Modeler Self-Managed yet.
+:::note Web Modeler & Connectors
+We do not provide a Helm chart for Web Modeler and Connectors in Self-Managed yet.
 :::
 
 ![Charts](../assets/c8sm-helm-charts.png)

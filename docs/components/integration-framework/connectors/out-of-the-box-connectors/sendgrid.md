@@ -183,12 +183,3 @@ We advise you to keep your API key safe and avoid exposing it in the BPMN `xml` 
 
 1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
 2. Name your secret `SEND_GRID_API_KEY` so you can reference it later in the Connector.
-
-## Run in Self-Managed
-
-Follow the [installation guide](/self-managed/platform-deployment/overview.md) to consume this Connector
-in a Self-Managed environment using the [pre-packaged Connector runtime environment](../custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
-
-Alternatively, you can create a [custom Connector runtime environment](../custom-built-connectors/connector-sdk.md#connector-job-handler) and include this Connector.
-
-Note that this Connector is licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).

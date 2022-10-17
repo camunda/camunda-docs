@@ -20,8 +20,8 @@ The provided Docker images are supported for production usage only on Linux syst
 | Tasklist          | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                   | [Tasklist configuration](../../tasklist-deployment/tasklist-configuration)                                              |
 | Identity          | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                   | [Configuration variables](../../identity/deployment/configuration-variables/)                                           |
 | Optimize          | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize)                   | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start/#available-environment-variables) |
-| Connectors        | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)               |                                                                                                                         |
-| Connectors Bundle | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle) |                                                                                                                         |
+| Connectors        | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)               | [Connectors configuration](../../connectors-deployment/connectors-configuration)                                        |
+| Connectors Bundle | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle) | [Connectors configuration](../../connectors-deployment/connectors-configuration)                                        |
 
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 
@@ -139,6 +139,36 @@ For Optimize to import Zeebe data, Optimize must also be configured to be aware 
 ### Connectors
 
 Use the provided [Docker Compose](#docker-compose) files to execute all [out-of-the-box Connectors](/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md) automatically.
-This uses the [Connectors Bundle](https://hub.docker.com/r/camunda/connectors) Docker image.
+This uses the [Connectors Bundle](https://hub.docker.com/r/camunda/connectors-bundle) Docker image.
 
-To add custom Connectors, create a new docker image bundling them as described [here](https://github.com/camunda/connector-sdk/tree/main/runtime-job-worker#docker-job-worker-runtime-image), using the [Connectors](https://hub.docker.com/r/camunda/connectors) base image.
+Note that some of the out-of-the-box Connectors are licensed under the
+[Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
+
+Refer to the [Connector installation guide](../../connectors-deployment/install-and-start) for details on how to provide the Connector templates for modeling.
+
+#### Custom set of Connectors
+
+To add custom Connectors, you can build on top of our [Connectors base image](https://hub.docker.com/r/camunda/connectors/) that includes the pre-packaged runtime enviroment without any Connector.
+To use the image, at least one Connector has to be added to the classpath. We recommend to provide JARs with all dependencies bundled.
+
+:::caution
+
+As all Connectors share a single classpath, it can happen that different versions of the same dependency are available which can lead to conflicts.
+To prevent this, common dependencies like `jackson` can be shaded and relocated inside the Connector's JAR.
+
+:::
+
+You can add a Connector JAR by extending the base image with a JAR from a public URL:
+
+```yml
+FROM camunda/connectors:0.2.2
+
+ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.9.0/connector-http-json-0.9.0-with-dependencies.jar /opt/app/
+```
+
+You can also add a Connector JAR by using volumes:
+
+```bash
+docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.2.2
+```
