@@ -12,7 +12,7 @@ Element templates can be used with Desktop Modeler version 1.0+; they are curren
 
 Element templates are a way to extend [Desktop Modeler](https://camunda.org/bpmn/tool/) with domain-specific diagram elements, such as service and user tasks.
 
-![Custom fields in the Desktop Modeler](./img/overview.png)
+![Custom fields in Desktop Modeler](./img/overview.png)
 
 If applicable, element templates can be assigned to a diagram element via the properties panel.
 Once applied, element templates configure the diagram element with pre-defined values for BPMN properties, input/output mappings, and extension properties.

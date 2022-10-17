@@ -19,7 +19,7 @@ The demo above shows how to model a decision table. After creating a decision an
 
 ## DMN coverage
 
-The Modeler supports the following DMN elements:
+Modeler supports the following DMN elements:
 
 - Decision (tables and literal expressions)
 - Input data

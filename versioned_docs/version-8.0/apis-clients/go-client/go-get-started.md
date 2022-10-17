@@ -115,7 +115,7 @@ Broker 0.0.0.0 : 26501
 
 Now, we need a simple process we can deploy. Later, we will extend the process with more functionality. For now, follow the steps below:
 
-1. Open the Web Modeler and create a new BPMN diagram.
+1. Open Web Modeler and create a new BPMN diagram.
 
 2. Add a start event named `Order Placed` and an end event named `Order Delivered` to the diagram. Then, connect the events.
 
