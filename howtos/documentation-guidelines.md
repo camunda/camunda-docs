@@ -27,7 +27,7 @@ Due to a difference in version numbers, the documentation is split into [multipl
 
 ## Versions
 
-[Each instance of the documentation](#docs-vs-optimize) contains documentation for multiple versions:
+[Each instance of the documentation](#instances-docs-vs-optimize) contains documentation for multiple versions:
 
 | Instance   | Version(s)         | Source path                                                         |
 | ---------- | ------------------ | ------------------------------------------------------------------- |
