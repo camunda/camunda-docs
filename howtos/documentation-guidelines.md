@@ -76,7 +76,8 @@ When linking internally from one document to another, follow these guidelines:
 2. Update [`/versioned_sidebars/version-*-sidebars.json`][versioned-sidebars] and/or [`sidebars.js`][next-sidebars] to fit the new location.
 3. Add a redirect/rewrite rule to the top of `.htaccess`.
 
-The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
+> **Note**
+> The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
 
 ## Remove an existing page
 
@@ -84,7 +85,8 @@ The redirects/rewrite rules added to `.htaccess` will not work when running the 
 2. Update [`/versioned_sidebars/version-*-sidebars.json`][versioned-sidebars] and/or [`sidebars.js`][next-sidebars].
 3. Add a redirect/rewrite rule to the top of `.htaccess` to redirect users to appropriate relevant content on another page.
 
-The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
+> **Note**
+> The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
 
 ## Review Process
 
