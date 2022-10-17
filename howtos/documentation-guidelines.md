@@ -18,12 +18,25 @@ In the spirit of "Always Progress", if you are confident you know what change ne
 
 ## Structure
 
-- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-platform-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in `sidebars.js`.
+- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-platform-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in `sidebars.js` or `optimize_sidebars.js`.
 - Sub categories have to be placed in their own sub directories. Example: Guides/Update Guide can be found in `docs/guides/update-guide`.
 
 ## Instances: Docs vs Optimize
 
 Due to a difference in version numbers, the documentation is split into [multiple Docusaurus "instances"](https://docusaurus.io/docs/docs-multi-instance). Documentation specific to Optimize lives in the `optimize` instance, and all other documentation lives in the main `docs` instance.
+
+## Versions
+
+[Each instance of the documentation](#docs-vs-optimize) contains documentation for multiple versions:
+
+| Instance   | Version(s)         | Source path                                                         |
+| ---------- | ------------------ | ------------------------------------------------------------------- |
+| `docs`     | Next               | [/docs/](../docs/)                                                  |
+| `docs`     | 8.0, 1.3, 1.2, ... | [/versioned_docs/version-\*/](../versioned_docs/)                   |
+| `optimize` | Next               | [/optimize/](../optimize/)                                          |
+| `optimize` | 3.8.0, 3.7.0, ...  | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) |
+
+When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
 ## Internal links
 
@@ -38,19 +51,6 @@ When linking internally from one document to another, follow these guidelines:
   - If the source is in `optimize` and the target is in `docs`, use the `$docs$` token to prefix the URL. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/optimize/components/what-is-optimize.md?plain=1#L8).
   - Use the browser-facing _URL_ to the target document, instead of the path to the target's `.md` file.
   - Do not include the `.md` extension on the target path.
-
-## Versions
-
-[Each instance of the documentation](#docs-vs-optimize) contains documentation for multiple versions:
-
-| Instance   | Version(s)         | Source path                                                         |
-| ---------- | ------------------ | ------------------------------------------------------------------- |
-| `docs`     | Next               | [/docs/](../docs/)                                                  |
-| `docs`     | 8.0, 1.3, 1.2, ... | [/versioned_docs/version-\*/](../versioned_docs/)                   |
-| `optimize` | Next               | [/optimize/](../optimize/)                                          |
-| `optimize` | 3.8.0, 3.7.0, ...  | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) |
-
-When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
 ## Adding a new documentation page
 
