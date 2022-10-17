@@ -29,12 +29,12 @@ Due to a difference in version numbers, the documentation is split into [multipl
 
 [Each instance of the documentation](#instances-docs-vs-optimize) contains documentation for multiple versions:
 
-| Instance   | Version(s)         | Source path                                                         |
-| ---------- | ------------------ | ------------------------------------------------------------------- |
-| `docs`     | Next               | [/docs/](../docs/)                                                  |
-| `docs`     | 8.0, 1.3, 1.2, ... | [/versioned_docs/version-\*/](../versioned_docs/)                   |
-| `optimize` | Next               | [/optimize/](../optimize/)                                          |
-| `optimize` | 3.8.0, 3.7.0, ...  | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) |
+| Instance   | Version(s)               | Source path                                                         |
+| ---------- | ------------------------ | ------------------------------------------------------------------- |
+| `docs`     | Next                     | [/docs/](../docs/)                                                  |
+| `docs`     | 8.1, 8.0, 1.3, ...       | [/versioned_docs/version-\*/](../versioned_docs/)                   |
+| `optimize` | Next                     | [/optimize/](../optimize/)                                          |
+| `optimize` | 3.9.0, 3.8.0, 3.7.0, ... | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) |
 
 When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
