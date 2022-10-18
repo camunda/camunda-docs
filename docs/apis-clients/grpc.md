@@ -395,7 +395,7 @@ Returned if:
 Marks the job as failed. If the retries argument is positive and no retry back off is set, the job is immediately
 activatable again. If the retry back off is positive the job becomes activatable once the back off timeout has passed.
 If the retries argument is zero or negative, an incident is raised, tagged with the given errorMessage, and the job is
-not activatable until the incident is resolved. If the variables argument is set, the given valid JSON document will be set locally to the job element.
+not activatable until the incident is resolved. If the variables argument is set, the variables are merged into the process at the local scope of the job's associated task.
 
 #### Input: `FailJobRequest`
 
