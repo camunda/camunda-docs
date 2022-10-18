@@ -36,14 +36,19 @@ To back up a Camunda Platform 8 cluster, execute the following sequential steps:
 8. Take a backup `x` of the exported Zeebe records in Elasticsearch using the Elasticsearch Snapshots API.
 
 ```
+
 PUT /_snapshot/my_repository/camunda_zeebe_records_backup_x
 {
    "indices": "zeebe-record*",
    "feature_states": ["none"]
 }
+
 ```
 
-By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch exporter in Zeebe, use this instead. 9. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md). Wait until the backup `x` of the exported Zeebe records is complete and wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md). 10. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
+By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch exporter in Zeebe, use this instead.
+
+9. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md). Wait until the backup `x` of the exported Zeebe records is complete and wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md).
+10. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
 
 :::note
 If any of the steps above fail, you may have to restart with a new backup id. Ensure exporting is resumed if the backup process is aborted in the middle of the process.
