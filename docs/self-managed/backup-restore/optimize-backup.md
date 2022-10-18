@@ -1,11 +1,12 @@
 ---
 id: optimize-backup
-title: Backup and restore Optimize data
+title: Backup & restore Optimize data
 description: "How to perform a backup of Optimize data and restore the backup."
+keywords: ["backup", "backups"]
 ---
 
 :::note
-This is an experimental feature in 3.9.0. The API may be subject to changes in later releases.
+This API is subject to change.
 :::
 
 Optimize stores its data over multiple indices in Elasticsearch. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a backup ID. For example, a backup with id `backup1` consists of the following Elasticsearch snapshots:

@@ -1,12 +1,12 @@
 ---
 id: zeebe-backup-and-restore
-title: "Zeebe Backups"
+title: "Backup & restore Zeebe data"
 description: "A guide to creating backup of a running Zeebe cluster."
 keywords: ["backup", "backups"]
 ---
 
 :::note
-The API is subject to change.
+This API is subject to change.
 :::
 
 A backup of a zeebe cluster consists of a consistent snapshot of all partitions. The backup is stored in an external storage. Backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact to the normal processing.

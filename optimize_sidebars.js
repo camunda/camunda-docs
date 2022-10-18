@@ -1661,19 +1661,19 @@ module.exports = {
     {
       "Backup & Restore": [
         docsLink(
-          "Backup & Restore",
+          "Backup & restore",
           "self-managed/backup-restore/backup-and-restore/"
         ),
         docsLink(
-          "Backup and restore Optimize data",
+          "Backup & restore Optimize data",
           "self-managed/backup-restore/optimize-backup/"
         ),
         docsLink(
-          "Backup and restore Operate and Tasklist data",
+          "Backup & restore Operate and Tasklist data",
           "self-managed/backup-restore/operate-tasklist-backup/"
         ),
         docsLink(
-          "Zeebe Backups",
+          "Backup & restore Zeebe data",
           "self-managed/backup-restore/zeebe-backup-and-restore/"
         ),
       ],
