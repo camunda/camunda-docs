@@ -11,5 +11,5 @@ The Micronaut Framework is known for its efficient use of resources. Native imag
 
 - [Documentation and source code](https://github.com/camunda-community-hub/micronaut-zeebe-client)
 - [Integrate Camunda's External Task Clients into Micronaut Framework projects](https://github.com/camunda-community-hub/micronaut-camunda-external-client)
-- [Create application with Micronaut Launch](https://micronaut.io/launch?name=jobworker&features=zeebe)
+- [Create application with Micronaut Launch](https://micronaut.io/launch?name=jobworker&features=camunda-zeebe)
 - [Releases on Maven Central](https://search.maven.org/artifact/info.novatec/micronaut-zeebe-client-feature)

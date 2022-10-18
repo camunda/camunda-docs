@@ -10,7 +10,7 @@ The Camunda Modeler plugins API is not stable and might change in the future.
 
 Plugins allow you to change the appearance and behavior of Camunda Modeler and add new features.
 
-## Plugging into the Camunda Modeler
+## Plugging into Camunda Modeler
 
 You can plug into the modeler to change its appearance, add new menu entries, extend the modeling tools for [BPMN](https://github.com/bpmn-io/bpmn-js) and [DMN](https://github.com/bpmn-io/dmn-js), or even slot React.js components into the Camunda Modeler UI.
 

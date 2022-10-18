@@ -61,7 +61,7 @@ Password: ******
 Login Succeeded
 ```
 
-See the [instructions below](#web-modeler-1) on how to use the Web Modeler images with Docker Compose.
+See the [instructions below](#web-modeler-1) on how to use Web Modeler images with Docker Compose.
 
 ## Docker Compose
 

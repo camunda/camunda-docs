@@ -196,7 +196,7 @@ module.exports = {
         {
           "Desktop Modeler": [
             docsLink(
-              "Install the Modeler",
+              "Install Desktop Modeler",
               "components/modeler/desktop-modeler/install-the-modeler/"
             ),
             docsLink(

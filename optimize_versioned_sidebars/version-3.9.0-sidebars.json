@@ -248,7 +248,7 @@
           "Desktop Modeler": [
             {
               "type": "link",
-              "label": "Install the Modeler",
+              "label": "Install Desktop Modeler",
               "href": "/docs/components/modeler/desktop-modeler/install-the-modeler/"
             },
             {
