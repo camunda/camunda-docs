@@ -65,7 +65,7 @@ The application uses the `$schema` property to ensure compatibility for a given 
 - `v0.10.0` (Camunda Platform 7)
 - `v0.5.0` (Camunda Platform 8)
 
-The Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
+Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
 
 For example, given the following `$schema` definition, the application takes `0.9.1` as the JSON Schema version of the element template.
 
@@ -73,7 +73,7 @@ For example, given the following `$schema` definition, the application takes `0.
 "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.9.1/resources/schema.json"
 ```
 
-The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, the Camunda Modeler assumes the latest JSON Schema version for Camunda Platform 7 element templates.
+The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, Camunda Modeler assumes the latest JSON Schema version for Camunda Platform 7 element templates.
 
 Learn more about specifing a `$schema` [here](../defining-templates).
 

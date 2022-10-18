@@ -1,6 +1,6 @@
 ---
 id: install-the-modeler
-title: Install the Modeler
+title: Install Desktop Modeler
 description: "Camunda Modeler is the desktop application for modeling processes with BPMN."
 ---
 
