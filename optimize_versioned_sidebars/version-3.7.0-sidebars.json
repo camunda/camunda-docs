@@ -865,5 +865,382 @@
         }
       ]
     }
+  ],
+  "Self-Managed": [
+    {
+      "type": "link",
+      "label": "Camunda Cloud Self-Managed",
+      "href": "/docs/1.3/self-managed/about-self-managed/"
+    },
+    {
+      "Zeebe": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/1.3/self-managed/zeebe-deployment/"
+        },
+        {
+          "Local installation": [
+            {
+              "type": "link",
+              "label": "Install",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/local/install/"
+            },
+            {
+              "type": "link",
+              "label": "Quickstart",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/local/quickstart/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Docker container",
+          "href": "/docs/1.3/self-managed/zeebe-deployment/docker/install/"
+        },
+        {
+          "Kubernetes deployment": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/kubernetes/"
+            },
+            {
+              "type": "link",
+              "label": "Camunda Cloud Helm charts",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/kubernetes/helm/installing-helm/"
+            },
+            {
+              "type": "link",
+              "label": "Accessing Operate and Tasklist outside the cluster",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/kubernetes/helm/accessing-operate-tasklist/"
+            }
+          ]
+        },
+        {
+          "Configuration": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/configuration/"
+            },
+            {
+              "type": "link",
+              "label": "Logging",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/configuration/logging/"
+            },
+            {
+              "type": "link",
+              "label": "Gateway health probes",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/configuration/gateway-health-probes/"
+            },
+            {
+              "type": "link",
+              "label": "Environment variables",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/configuration/environment-variables/"
+            },
+            {
+              "type": "link",
+              "label": "Fixed partitioning",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/configuration/fixed-partitioning/"
+            },
+            {
+              "type": "link",
+              "label": "Priority election",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/configuration/priority-election/"
+            }
+          ]
+        },
+        {
+          "Security": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/security/"
+            },
+            {
+              "type": "link",
+              "label": "Secure client communication",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/security/secure-client-communication/"
+            },
+            {
+              "type": "link",
+              "label": "Client authorization",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/security/client-authorization/"
+            },
+            {
+              "type": "link",
+              "label": "Secure cluster communication",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/security/secure-cluster-communication/"
+            }
+          ]
+        },
+        {
+          "Operation": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/"
+            },
+            {
+              "type": "link",
+              "label": "Resource planning",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/resource-planning/"
+            },
+            {
+              "type": "link",
+              "label": "Network ports",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/network-ports/"
+            },
+            {
+              "type": "link",
+              "label": "Setting up a Zeebe cluster",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/setting-up-a-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "Metrics",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/metrics/"
+            },
+            {
+              "type": "link",
+              "label": "Health status",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/health/"
+            },
+            {
+              "type": "link",
+              "label": "Backpressure",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/backpressure/"
+            },
+            {
+              "type": "link",
+              "label": "Disk space",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/disk-space/"
+            },
+            {
+              "type": "link",
+              "label": "Update Zeebe",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/update-zeebe/"
+            },
+            {
+              "type": "link",
+              "label": "Rebalancing",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/rebalancing/"
+            },
+            {
+              "type": "link",
+              "label": "Backups",
+              "href": "/docs/1.3/self-managed/zeebe-deployment/operations/backups/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Operate": [
+        {
+          "type": "link",
+          "label": "Install and start Operate",
+          "href": "/docs/1.3/self-managed/operate-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/1.3/self-managed/operate-deployment/configuration/"
+        },
+        {
+          "type": "link",
+          "label": "Data retention",
+          "href": "/docs/1.3/self-managed/operate-deployment/data-retention/"
+        },
+        {
+          "type": "link",
+          "label": "Schema and migration",
+          "href": "/docs/1.3/self-managed/operate-deployment/schema-and-migration/"
+        },
+        {
+          "type": "link",
+          "label": "Importer and archiver",
+          "href": "/docs/1.3/self-managed/operate-deployment/importer-and-archiver/"
+        },
+        {
+          "type": "link",
+          "label": "Authentication",
+          "href": "/docs/1.3/self-managed/operate-deployment/authentication/"
+        },
+        {
+          "type": "link",
+          "label": "Usage metrics",
+          "href": "/docs/1.3/self-managed/operate-deployment/usage-metrics/"
+        }
+      ]
+    },
+    {
+      "Tasklist": [
+        {
+          "type": "link",
+          "label": "Install and start Tasklist",
+          "href": "/docs/1.3/self-managed/tasklist-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/1.3/self-managed/tasklist-deployment/configuration/"
+        },
+        {
+          "type": "link",
+          "label": "Authentication",
+          "href": "/docs/1.3/self-managed/tasklist-deployment/authentication/"
+        },
+        {
+          "type": "link",
+          "label": "Usage metrics",
+          "href": "/docs/1.3/self-managed/tasklist-deployment/usage-metrics/"
+        }
+      ]
+    },
+    {
+      "Optimize": [
+        {
+          "Setup": [
+            "self-managed/optimize-deployment/setup/installation",
+            "self-managed/optimize-deployment/setup/optimize-license",
+            "self-managed/optimize-deployment/setup/security-instructions",
+            "self-managed/optimize-deployment/setup/configuration",
+            "self-managed/optimize-deployment/setup/user-management",
+            "self-managed/optimize-deployment/setup/authorization-management",
+            "self-managed/optimize-deployment/setup/secure-elasticsearch",
+            "self-managed/optimize-deployment/setup/shared-elasticsearch-cluster",
+            "self-managed/optimize-deployment/setup/history-cleanup",
+            "self-managed/optimize-deployment/setup/localization",
+            "self-managed/optimize-deployment/setup/multi-tenancy",
+            "self-managed/optimize-deployment/setup/multiple-engines",
+            "self-managed/optimize-deployment/setup/object-variables",
+            "self-managed/optimize-deployment/setup/clustering",
+            "self-managed/optimize-deployment/setup/webhooks",
+            "self-managed/optimize-deployment/setup/setup-event-based-processes",
+            "self-managed/optimize-deployment/setup/telemetry",
+            "self-managed/optimize-deployment/setup/common-problems"
+          ]
+        },
+        "self-managed/optimize-deployment/setup",
+        {
+          "Plugins": [
+            "self-managed/optimize-deployment/plugins/plugin-system",
+            "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
+            "self-managed/optimize-deployment/plugins/decision-import-plugin",
+            "self-managed/optimize-deployment/plugins/elasticsearch-header",
+            "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
+            "self-managed/optimize-deployment/plugins/single-sign-on",
+            "self-managed/optimize-deployment/plugins/variable-import-plugin"
+          ]
+        },
+        {
+          "REST API": [
+            "self-managed/optimize-deployment/rest-api/authorization",
+            {
+              "Dashboard": [
+                "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
+                "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
+                "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions"
+              ]
+            },
+            {
+              "Report": [
+                "self-managed/optimize-deployment/rest-api/report/get-report-ids",
+                "self-managed/optimize-deployment/rest-api/report/delete-report",
+                "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
+                "self-managed/optimize-deployment/rest-api/report/get-data-export"
+              ]
+            },
+            "self-managed/optimize-deployment/rest-api/event-ingestion",
+            "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
+            "self-managed/optimize-deployment/rest-api/health-readiness",
+            "self-managed/optimize-deployment/rest-api/import-entities"
+          ]
+        },
+        "self-managed/optimize-deployment/reimport",
+        {
+          "Migration & Update": [
+            "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
+            "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
+            "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
+            "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
+            "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
+            "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
+            "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
+            "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
+            "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
+            "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
+            "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
+            "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
+            "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
+            "self-managed/optimize-deployment/migration-update/2.1-to-2.2"
+          ]
+        },
+        {
+          "Optimize Explained": [
+            "self-managed/optimize-deployment/optimize-explained/engine-data-deletion",
+            "self-managed/optimize-deployment/optimize-explained/import-guide"
+          ]
+        }
+      ]
+    },
+    {
+      "IAM": [
+        {
+          "type": "link",
+          "label": "What is IAM?",
+          "href": "/docs/1.3/self-managed/iam/what-is-iam/"
+        },
+        {
+          "Getting started": [
+            {
+              "Running IAM with Docker": [
+                {
+                  "type": "link",
+                  "label": "Step 1: Setup environment",
+                  "href": "/docs/1.3/self-managed/iam/getting-started/docker/setup-environment/"
+                },
+                {
+                  "type": "link",
+                  "label": "Step 2: Start IAM",
+                  "href": "/docs/1.3/self-managed/iam/getting-started/docker/start-iam/"
+                },
+                {
+                  "type": "link",
+                  "label": "Step 3: Accessing the UI",
+                  "href": "/docs/1.3/self-managed/iam/getting-started/docker/accessing-the-ui/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Deployment": [
+            {
+              "type": "link",
+              "label": "Configuration variables",
+              "href": "/docs/1.3/self-managed/iam/deployment/configuration-variables/"
+            },
+            {
+              "type": "link",
+              "label": "Making IAM production-ready",
+              "href": "/docs/1.3/self-managed/iam/deployment/making-iam-production-ready/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Troubleshooting": [
+        {
+          "type": "link",
+          "label": "Log levels",
+          "href": "/docs/1.3/self-managed/troubleshooting/log-levels/"
+        }
+      ]
+    }
   ]
 }
