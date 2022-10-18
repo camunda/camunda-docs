@@ -6,7 +6,7 @@ description: "The REST API to import entity definitions."
 
 ## Purpose
 
-This API allows users to import entity definitions such as reports and dashboards into existing collections. These entity definitions may be obtained either using the [report](../report/export-report-definitions/) or [dashboard](../dashboard/export-dashboard-definitions) export API or [via the UI](../../../../components/optimize/userguide/additional-features/export-import#exporting-entities).
+This API allows users to import entity definitions such as reports and dashboards into existing collections. These entity definitions may be obtained either using the [report](../report/export-report-definitions/) or [dashboard](../dashboard/export-dashboard-definitions) export API or [via the UI](../../../components/userguide/additional-features/export-import.md#exporting-entities).
 
 ### Prerequisites
 
@@ -46,7 +46,7 @@ The following query parameters have to be provided with every request:
 
 ## Request body
 
-The request body should contain a JSON array of entity definitions to be imported. These entity definitions may be obtained by using the [report](../report/export-report-definitions) or [dashboard](../dashboard/export-dashboard-definitions) export APIs or by [manually exporting entities](../../../../components/optimize/userguide/additional-features/export-import#exporting-entities) via the Optimize UI.
+The request body should contain a JSON array of entity definitions to be imported. These entity definitions may be obtained by using the [report](../report/export-report-definitions) or [dashboard](../dashboard/export-dashboard-definitions) export APIs or by [manually exporting entities](../../../components/userguide/additional-features/export-import.md#exporting-entities) via the Optimize UI.
 
 ## Result
 

@@ -8,7 +8,7 @@ description: "The REST API to export report definitions."
 
 This API allows users to export report definitions which can later be imported into another Optimize system. The reports to be exported may be within a collection or private entities, the API has access to both.
 
-The obtained list of entity exports can be imported into other Optimize systems either using the dedicated [import API](../../import-entities) or [via UI](../../../../../components/optimize/userguide/additional-features/export-import#importing-entities).
+The obtained list of entity exports can be imported into other Optimize systems either using the dedicated [import API](../../import-entities) or [via UI](../../../../components/userguide/additional-features/export-import.md#importing-entities).
 
 ## Method & HTTP target resource
 

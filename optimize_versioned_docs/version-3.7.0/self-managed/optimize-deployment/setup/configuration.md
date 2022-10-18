@@ -364,7 +364,7 @@ Configuration of the Optimize event based process feature.
 
 ### Event Ingestion REST API Configuration
 
-Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-ingestion) for [Event Based Processes](./../../../components/optimize/userguide/additional-features/event-based-processes.md).
+Configuration of the Optimize [Event Ingestion REST API](../../rest-api/event-ingestion) for [Event Based Processes](../../../components/userguide/additional-features/event-based-processes.md).
 
 |YAML Path|Default Value|Description|
 |--- |--- |--- |

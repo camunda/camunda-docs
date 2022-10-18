@@ -5,7 +5,7 @@ description: Get a notification as soon as your system is behaving in an unexpec
 ---
 
 :::note
-You must configure the email service to receive notifications. See the [technical guide](/self-managed/optimize-deployment/setup/installation.md) for which properties need to be defined.
+You must configure the email service to receive notifications. See the [technical guide](../../../self-managed/optimize-deployment/setup/installation.md) for which properties need to be defined.
 :::
 
 Optimize's alerting functionality can be used to notify you when your report hits a predefined critical value. You can create alerts for any number reports that exist within a collection. Inside the collection, navigate to the **Alerts** tab to create and view all alerts defined for reports in this collection. You can manage an alert by moving the mouse over the alert entry and clicking the **Edit** or **Delete** buttons in the context menu on the right side of the page.
@@ -33,4 +33,4 @@ You also enabled reminder notifications to be sent each hour. Here's what that w
 
 ## Send alerts to external systems
 
-It's possible to configure Optimize to send alerts to an external system when needed. For details on how to configure and add target systems, visit the [technical guide]($docs$/self-managed/optimize-deployment/setup/installation/). Once at least one target system is configured, alerts will have a new input option to select one of the configured systems.
+It's possible to configure Optimize to send alerts to an external system when needed. For details on how to configure and add target systems, visit the [technical guide](../../../self-managed/optimize-deployment/setup/installation.md). Once at least one target system is configured, alerts will have a new input option to select one of the configured systems.
