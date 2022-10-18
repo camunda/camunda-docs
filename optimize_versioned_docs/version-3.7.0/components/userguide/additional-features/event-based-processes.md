@@ -26,10 +26,10 @@ You need to set up the event-based processes feature to make use of this feature
 
 All currently available event-based processes are listed under the main navigation item **Event-based processes**. From there, it is possible to see their state, which can be one of the following:
 
-* `Unmapped` - The process model is created, but no single event is mapped to a flow node.
-* `Mapped` - The process model contains at least one mapping of an event to a flow node.
-* `Published` - The event-based process is published and can be used in reports by users that are authorized to access it.
-* `Unpublished Changes` - The process model contains changes that are not reflected in the currently published state of the event-based process; it needs to get republished manually.
+- `Unmapped` - The process model is created, but no single event is mapped to a flow node.
+- `Mapped` - The process model contains at least one mapping of an event to a flow node.
+- `Published` - The event-based process is published and can be used in reports by users that are authorized to access it.
+- `Unpublished Changes` - The process model contains changes that are not reflected in the currently published state of the event-based process; it needs to get republished manually.
 
 ![Process List](./img/processList.png)
 
@@ -73,12 +73,12 @@ Finally, you can create an event-based process by uploading a `.bpmn` file direc
 
 The edit mode allows you to build and map your event-based process. Using this mode, you can perform all kinds of operations, such as:
 
-* Rename the process.
-* Model the process using the integrated BPMN modeler.
-* Map your diagram nodes to an event from the event table.
-* Edit event sources for the events to display in the event table.
-* Save the current state with your applied changes.
-* Cancel changes you already applied to the process.
+- Rename the process.
+- Model the process using the integrated BPMN modeler.
+- Map your diagram nodes to an event from the event table.
+- Edit event sources for the events to display in the event table.
+- Save the current state with your applied changes.
+- Cancel changes you already applied to the process.
 
 ### Modeling
 
@@ -108,19 +108,19 @@ See the [technical guide](../../../../self-managed/optimize-deployment/setup/ins
 
 To add such events, provide the following details:
 
-* The target process definition that you would like to generate the events from
+- The target process definition that you would like to generate the events from
 
-* The trace ID location: A trace ID uniquely identifies a process instance across system boundaries. One example would be an invoice number for an invoice handling process. For a Camunda process, it is possible to select a trace ID that exists either in a variable or in the process business key.
+- The trace ID location: A trace ID uniquely identifies a process instance across system boundaries. One example would be an invoice number for an invoice handling process. For a Camunda process, it is possible to select a trace ID that exists either in a variable or in the process business key.
 
-* Which events to display in the table:
+- Which events to display in the table:
 
 Adding events for every flow node might not be necessary for the event-based process. Therefore, we provide the ability to only add the events that are necessary. There are three options available:
 
-  * Process start and end: This will add only two events in the table, one event is triggered when the process starts and one when it ends.
+- Process start and end: This will add only two events in the table, one event is triggered when the process starts and one when it ends.
 
-  * Start and end flow node events: The number of events added to the table will depend on how many start and end events are in the process. For example, if there is one start event and two end events, three events will be added.
+- Start and end flow node events: The number of events added to the table will depend on how many start and end events are in the process. For example, if there is one start event and two end events, three events will be added.
 
-  * Start and end flow node events: This option will add events for every flow node in the process.
+- Start and end flow node events: This option will add events for every flow node in the process.
 
 Once this information is defined and the sources are added, the events will appear in the table as shown below.
 
@@ -130,17 +130,18 @@ Once this information is defined and the sources are added, the events will appe
 
 Each event in the table will have the following properties:
 
-* Mapped as (start/end): Defines whether the event indicates start of BPMN node or the end of it.
+- Mapped as (start/end): Defines whether the event indicates start of BPMN node or the end of it.
 
-* Event name
+- Event name
 
-* Group
-  * For external events, this corresponds to the group of the ingested event.
-  * For Camunda process events, this corresponds to the name of the process definition.
+- Group
 
-* Source: External system or Camunda process event.
+  - For external events, this corresponds to the group of the ingested event.
+  - For Camunda process events, this corresponds to the name of the process definition.
 
-* Count: How many times this event was triggered. See [additional notes](#event-counts) for more information.
+- Source: External system or Camunda process event.
+
+- Count: How many times this event was triggered. See [additional notes](#event-counts) for more information.
 
 To assist during event mapping, the events table offers suggestions of potential events to be mapped based on the selected node. This is indicated by a blue strap near the suggested event. The event suggestion only works when adding all external events as a source with no Camunda events.
 
@@ -154,7 +155,7 @@ To start mapping, take the following steps:
 2. To link the selected node to an event, enable the checkbox of that event from the table. Afterwards, a checkmark sign will be shown on top of the node to indicate that the event has been mapped successfully.
 
 :::note
-  Not all BPMN nodes can be mapped. Only events and activities can be mapped to events.
+Not all BPMN nodes can be mapped. Only events and activities can be mapped to events.
 :::
 
 Once all the necessary nodes are mapped, you can save your diagram to go the view mode.
@@ -222,19 +223,19 @@ In some scenarios, reports created using event-based processes might not show al
 
 To avoid this, we encourage you to avoid including the following elements when modelling your event-based processes:
 
-* Inclusive gateways: These may be modeled in an event-based process diagram. However, visual data flow will be interrupted on reports such as heatmaps.
+- Inclusive gateways: These may be modeled in an event-based process diagram. However, visual data flow will be interrupted on reports such as heatmaps.
 
 ![Inclusive Gateway](./img/inclusive_gateway.png)
 
-* Complex gateways: These may be modeled in an event-based process diagram. However, visual data flow will be interrupted on reports such as heatmaps.
+- Complex gateways: These may be modeled in an event-based process diagram. However, visual data flow will be interrupted on reports such as heatmaps.
 
 ![Complex Gateway](./img/complex_gateway.png)
 
-* Mixed gateway directions: Mixed gateways are gateways which have no clear direction, instead being a combination of opening and closing gateways. These may be modeled in an event-based process diagram. However, visual data flow will be interrupted on reports such as heatmaps.
+- Mixed gateway directions: Mixed gateways are gateways which have no clear direction, instead being a combination of opening and closing gateways. These may be modeled in an event-based process diagram. However, visual data flow will be interrupted on reports such as heatmaps.
 
 ![Mixed Direction Gateway](./img/mixed_direction_gateway.png)
 
-* Chained gateways: A chained gateway is one that occurs as part of a sequence of consecutive gateways. These may be modeled in an event-based process diagram. However, visual data flow will be interrupted on reports such as heatmaps.
+- Chained gateways: A chained gateway is one that occurs as part of a sequence of consecutive gateways. These may be modeled in an event-based process diagram. However, visual data flow will be interrupted on reports such as heatmaps.
 
 ![Chained Gateway](./img/chained_gateway.png)
 
@@ -242,6 +243,6 @@ To avoid this, we encourage you to avoid including the following elements when m
 
 Event counts in the table may not match the values you expected. There are three possible explanations for this:
 
-* If you have enabled history cleanup, the counts will still include events from process instances that have since been cleaned up.
-* For events from Camunda processes, the count value represents the number of times that event has occurred across all versions and tenants of that process, regardless of how the event source is configured.
-* The counts for external events will still include ingested events that have since been deleted using the [event inspection feature](#deleting-ingested-events).
+- If you have enabled history cleanup, the counts will still include events from process instances that have since been cleaned up.
+- For events from Camunda processes, the count value represents the number of times that event has occurred across all versions and tenants of that process, regardless of how the event source is configured.
+- The counts for external events will still include ingested events that have since been deleted using the [event inspection feature](#deleting-ingested-events).
