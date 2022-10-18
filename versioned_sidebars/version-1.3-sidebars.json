@@ -215,44 +215,129 @@
         {
           "type": "link",
           "label": "What is Optimize?",
-          "href": "/optimize/3.7.0/components/what-is-optimize"
+          "href": "/optimize/3.7.0/components/what-is-optimize/"
         },
+
         {
           "User guide": [
-            "components/optimize/userguide/collections-dashboards-reports",
-            "components/optimize/userguide/data-sources",
-            "components/optimize/userguide/creating-dashboards",
-            "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/combined-reports",
+            {
+              "type": "link",
+              "label": "Collections, dashboards, and reports",
+              "href": "/optimize/3.7.0/components/userguide/collections-dashboards-reports/"
+            },
+            {
+              "type": "link",
+              "label": "Data sources",
+              "href": "/optimize/3.7.0/components/userguide/data-sources/"
+            },
+            {
+              "type": "link",
+              "label": "Creating dashboards",
+              "href": "/optimize/3.7.0/components/userguide/creating-dashboards/"
+            },
+            {
+              "type": "link",
+              "label": "Creating reports",
+              "href": "/optimize/3.7.0/components/userguide/creating-reports/"
+            },
+            {
+              "type": "link",
+              "label": "Combined reports",
+              "href": "/optimize/3.7.0/components/userguide/combined-reports/"
+            },
+
             {
               "Process analysis": [
-                "components/optimize/userguide/process-analysis/overview",
-                "components/optimize/userguide/process-analysis/outlier-analysis",
-                "components/optimize/userguide/process-analysis/branch-analysis",
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/optimize/3.7.0/components/userguide/process-analysis/overview/"
+                },
+                {
+                  "type": "link",
+                  "label": "Outlier analysis",
+                  "href": "/optimize/3.7.0/components/userguide/process-analysis/outlier-analysis/"
+                },
+                {
+                  "type": "link",
+                  "label": "Branch analysis",
+                  "href": "/optimize/3.7.0/components/userguide/process-analysis/branch-analysis/"
+                },
+
                 {
                   "Report analysis": [
-                    "components/optimize/userguide/process-analysis/report-analysis/overview",
-                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
-                    "components/optimize/userguide/process-analysis/report-analysis/view-mode"
+                    {
+                      "type": "link",
+                      "label": "Report process analysis",
+                      "href": "/optimize/3.7.0/components/userguide/process-analysis/report-analysis/overview/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Edit mode",
+                      "href": "/optimize/3.7.0/components/userguide/process-analysis/report-analysis/edit-mode/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "View mode",
+                      "href": "/optimize/3.7.0/components/userguide/process-analysis/report-analysis/view-mode/"
+                    }
                   ]
                 }
               ]
             },
+
             {
               "Decision analysis": [
-                "components/optimize/userguide/decision-analysis/overview",
-                "components/optimize/userguide/decision-analysis/decision-report",
-                "components/optimize/userguide/decision-analysis/decision-filter"
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/optimize/3.7.0/components/userguide/decision-analysis/overview/"
+                },
+                {
+                  "type": "link",
+                  "label": "Single report",
+                  "href": "/optimize/3.7.0/components/userguide/decision-analysis/decision-report/"
+                },
+                {
+                  "type": "link",
+                  "label": "Filters",
+                  "href": "/optimize/3.7.0/components/userguide/decision-analysis/decision-filter/"
+                }
               ]
             },
+
             {
               "Additional features": [
-                "components/optimize/userguide/additional-features/alerts",
-                "components/optimize/userguide/additional-features/event-based-processes",
-                "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/filters",
-                "components/optimize/userguide/additional-features/footer",
-                "components/optimize/userguide/additional-features/variable-labeling"
+                {
+                  "type": "link",
+                  "label": "Alerts",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/alerts/"
+                },
+                {
+                  "type": "link",
+                  "label": "Event-based processes",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/event-based-processes/"
+                },
+                {
+                  "type": "link",
+                  "label": "Export and import",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/export-import/"
+                },
+                {
+                  "type": "link",
+                  "label": "Filters",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/filters/"
+                },
+                {
+                  "type": "link",
+                  "label": "Footer",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/footer/"
+                },
+                {
+                  "type": "link",
+                  "label": "Variable labeling",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/variable-labeling/"
+                }
               ]
             }
           ]
