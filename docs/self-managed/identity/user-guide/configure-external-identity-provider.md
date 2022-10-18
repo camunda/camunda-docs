@@ -12,21 +12,20 @@ identity provider directly in Keycloak Administrator Console.
 
 To configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory, take the following steps:
 
-1. Log in to the Keycloak Administrator Console.
-2. Open the URL you have configured for Keycloak in your browser.
+1. Log in to the Keycloak Administrator Console. Open the URL you have configured for Keycloak in your browser.
    :::tip
    When using the example
    [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose) setup, Keycloak
    is available at [http://localhost:18080/](http://localhost:18080/).
    :::
-3. Click **Administrator Console** and log in using the Keycloak administrator credentials. The default administrator username is `admin`. When deploying Camunda Platform 8 with [Helm charts](/self-managed/platform-deployment/helm-kubernetes/overview.md),
+2. Click **Administrator Console** and log in using the Keycloak administrator credentials. The default administrator username is `admin`. When deploying Camunda Platform 8 with [Helm charts](/self-managed/platform-deployment/helm-kubernetes/overview.md),
    you can extract the password as described in
    [secrets extraction](/self-managed/platform-deployment/helm-kubernetes/upgrade.md#secrets-extraction).
    Using the example [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose)
    setup, the password is set via `KEYCLOAK_ADMIN_PASSWORD` environment variable and is `admin` per default.
-4. Select the realm you are using with Camunda Platform 8. By default, this is **Camunda-platform**.
+3. Select the realm you are using with Camunda Platform 8. By default, this is **Camunda-platform**.
    ![keycloak-realm-select](img/keycloak-realm-select.png)
-5. Add an identity provider using one of the following methods:
+4. Add an identity provider using one of the following methods:
    1. To add an OpenID Connect or SAML provider, select **Identity Providers** in the main menu, click **Add provider...**, and fill in all required configuration settings.
       ![keycloak-add-identity-provider](img/keycloak-add-identity-provider.png)
    2. To connect to your LDAP, Active Directory, or Kerberos server, select **User Federation** in the main menu, click **Add provider...**, and fill in all required configuration settings.
