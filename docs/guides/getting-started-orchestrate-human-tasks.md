@@ -32,10 +32,12 @@ To create an automated process with [user tasks](/components/modeler/bpmn/user-t
 8. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
 9. Sequence flows require expressions to access variables from the form we'll create below to determine what to eat for dinner. To add an [expression](/components/concepts/expressions.md), click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
 10. Verify the sequences flows have the following expressions: `= meal = "Salad"`on one side, and `= meal = "Chicken"`on the other.
-    ![expression input example](./img/expression-input-example.png)
-11. Attach an end event to the two user tasks.
 
-![dinner bpmn model](./img/dinner-bpmn-model.png)
+    ![expression input example](./img/expression-input-example.png)
+
+11. Attach the two user tasks and an end event.
+
+    ![dinner bpmn model](./img/dinner-bpmn-model.png)
 
 :::note
 Are you new to BPMN or want to learn more? Visit our [BPMN cheat sheet](https://page.camunda.com/wp-bpmn-2-0-business-process-model-and-notation-en) for an overview of all BPMN symbols.
@@ -45,9 +47,9 @@ Variables are part of a process instance and represent the data of the instance.
 ### Implement a form
 
 1. Navigate to the Modeler **Home** page and click the project you are working on. Then, click **New > Form**.
-2. Name your form. In this case, we've named ours **Decide what's for dinner**.
-3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've described ours as **What's for dinner?**
-4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner add an extra value by clicking on the plus sign. Enter the value **Chicken** with the label as **Chicken** and enter the value **Salad** with the label as **Salad** in the other value.
+2. Name your form. In this case, we've named ours `Dinner Options`.
+3. Click and drag the **Select** element onto the palette. Give this **Select** field a description within the properties panel. We've labeled ours as `What's for dinner?`. Additionally, we need to set a key which maps to a process variable. As already defined by the conditions in the process model we are going to use the variable `meal`.
+4. Scroll down to the **Values** section of the properties panel to add your values. For our dinner add an extra value by clicking on the plus sign. Enter the value `Chicken` with the label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value.
 
    ![form values example](./img/form-values-example.png)
 
