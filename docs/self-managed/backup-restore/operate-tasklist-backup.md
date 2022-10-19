@@ -1,6 +1,6 @@
 ---
 id: operate-tasklist-backup
-title: Backup & restore Operate and Tasklist data
+title: Backup and restore Operate and Tasklist data
 description: "How to perform backup of Operate and Tasklist data and restore."
 keywords: ["backup", "backups"]
 ---

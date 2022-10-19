@@ -1,6 +1,6 @@
 ---
 id: optimize-backup
-title: Backup & restore Optimize data
+title: Backup and restore Optimize data
 description: "How to perform a backup of Optimize data and restore the backup."
 keywords: ["backup", "backups"]
 ---

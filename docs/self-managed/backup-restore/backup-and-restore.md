@@ -2,6 +2,7 @@
 id: backup-and-restore
 title: "Backup and restore"
 sidebar_label: "Backup and restore"
+keywords: ["backup", "backups"]
 ---
 
 :::note

@@ -1,6 +1,6 @@
 ---
 id: zeebe-backup-and-restore
-title: "Backup & restore Zeebe data"
+title: "Backup and restore Zeebe data"
 description: "A guide to creating backup of a running Zeebe cluster."
 keywords: ["backup", "backups"]
 ---
