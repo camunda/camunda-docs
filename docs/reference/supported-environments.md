@@ -61,7 +61,9 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 | Desktop Modeler 5.4+  | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x |
 | Web Modeler (Beta)    | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x |
 
-_Note: You can use newer versions of Desktop and Web Modeler with older Zeebe versions too._
+:::note
+You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
+:::
 
 ## Camunda Platform 7 & Optimize Version Matrix
 
