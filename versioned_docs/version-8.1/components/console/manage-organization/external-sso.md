@@ -2,15 +2,16 @@
 id: external-sso
 title: Connect your IDP with Camunda Platform
 keywords: [SSO, IDP, AzureAD, SAML]
+description: "For enterprise customers, we support integrating external identity providers."
 ---
 
 ## Connecting your identity provider with Camunda Platform
 
-For enterprise customers, we support integrating external identity providers, so users within your organization do not need to sign-up by creating an account with Camunda.
+For enterprise customers, we support integrating external identity providers (IdPs). Therefore, users within your organization do not need to sign up by creating an account with Camunda.
 
 ### Onboarding procedure
 
-We currently support both SAML and AzureAD. As this requires changes in our environment, please raise a ticket in the [support queue](https://jira.camunda.com/projects/SUPPORT/).
+We currently support both SAML and Azure Active Directory (Azure AD). As this requires changes in our environment, first raise a ticket in the [support queue](https://jira.camunda.com/projects/SUPPORT/).
 
 #### SAML
 
@@ -21,19 +22,17 @@ After opening the ticket in the support queue, we will provide you:
 
 You will then need to provide:
 
-- the Domain used for the login email addresses
-- a sign-in URL
-- a x509 signing certificate
+- The domain used for the login email addresses
+- A sign-in URL
+- A x509 signing certificate
 
-#### AzureAD
+#### Azure AD
 
-You will need to provide:
+For Azure AD, you will need to provide:
 
-- the Domain used for the login email addresses
-- the Microsoft Azure AD Domain
-- generated Client ID
-- the Client Secret Value
+- The domain used for the login email addresses
+- The Microsoft Azure AD domain
+- The generated client id
+- The client secret value
 
-For generating the client on your side you will need to use the Camunda **Redirect Url** `https://weblogin.cloud.camunda.io/login/callback `.
-
-Please make sure that you attach the user permissions `Users > User.Read`.
+To generate the client on your end, you will need to use the Camunda **Redirect URL** `https://weblogin.cloud.camunda.io/login/callback `. Ensure you attach the user permissions `Users > User.Read`.
