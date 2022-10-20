@@ -72,6 +72,11 @@ This could be useful when a job worker communicates with an external system. If 
 This will result in an incident when the retries run out. Using the `retry back off` will delay the retry. This allows the external system some time to recover.
 If no `retry back off` the job is immediately retried.
 
+When `Completing or failing jobs` with [variables](components/concepts/variables.md), the variables are merged into the process at the job's associated task.
+
+- When `Completing a job` the variables are propagated from the scope of the task to its higher scopes.
+- When `Failing a job` the variables are only created in the local scope of the task.
+
 ## Timeouts
 
 If the job is not completed or failed within the configured job activation timeout, Zeebe reassigns the job to another job worker. This does not affect the number of `remaining retries`.

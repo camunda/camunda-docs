@@ -395,7 +395,7 @@ Returned if:
 Marks the job as failed. If the retries argument is positive and no retry back off is set, the job is immediately
 activatable again. If the retry back off is positive the job becomes activatable once the back off timeout has passed.
 If the retries argument is zero or negative, an incident is raised, tagged with the given errorMessage, and the job is
-not activatable until the incident is resolved.
+not activatable until the incident is resolved. If the variables argument is set, the variables are merged into the process at the local scope of the job's associated task.
 
 #### Input: `FailJobRequest`
 
@@ -411,6 +411,12 @@ message FailJobRequest {
   string errorMessage = 3;
   // the backoff timeout (in ms) for the next retry
   int64 retryBackOff = 4;
+  // JSON document that will instantiate the variables at the local scope of the
+  // job's associated task; it must be a JSON object, as variables will be mapped in a
+  // key-value fashion. e.g. { "a": 1, "b": 2 } will create two variables, named "a" and
+  // "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
+  // valid argument, as the root of the JSON document is an array and not an object.
+  string variables = 5;
 }
 ```
 
