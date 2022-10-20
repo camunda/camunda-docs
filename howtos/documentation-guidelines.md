@@ -81,7 +81,7 @@ The large object in each sidebars file contains two different types of items:
 
 ### Synchronization of sidebars
 
-Several sections of the sidebar navigation are shared across the Optimize and main sections of the docs: Components, Self-Managed, and APIs & Clients. For these sections, the structure of the sidebars should always match across instances. When they drift, it appears to the user as differences in the sidebar navigation depending on which page they're viewing.
+Several sections of the sidebar navigation are shared across the Optimize and main sections of the docs: Components, Self-Managed, and APIs & Clients. For these sections, the structure of the sidebars should always match across instances. [When they drift](./versioning.md#sidebar-drift), it appears to the user as differences in the sidebar navigation depending on which page they're viewing.
 
 Any PRs that make a structural change to one of the instance's sidebars file in a shared section should make the same structural change to the other instance's sidebars file. This typically appears as a link to the target .md file in one file, and an object containing the target title and URL in the other file.
 
