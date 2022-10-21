@@ -4,8 +4,8 @@ title: Delete your Camunda Platform account
 keywords: [account, delete, cancel]
 ---
 
-In case you want to delete your account, you can do that in console as well. Just open the top-right menu and select the **Delete Account** option.
-
-Your freel trial organization and its cluster is going to be deleted as well, but only if you have been the only member of this organisation.
+To delete your Camunda Platform account in Camunda Console, open the top-right user menu and click **Delete account**.
 
 ![avatar-menue](./img/delete-account.png)
+
+If you are the only member of this organization, your free trial organization and its cluster will be deleted as well.
