@@ -6,7 +6,7 @@ keywords: ["backup", "backups"]
 ---
 
 :::note
-Refer [Backup & Restore](/self-managed/backup-restore/backup-and-restore.md) to learn about how to take backup without downtime.
+Refer to our documentation on [backup and restore](/self-managed/backup-restore/backup-and-restore.md) to learn how to take backups without downtime.
 :::
 
 As Zeebe fully manages the state of your process instances, consider taking backups of Zeebe data; this is crucial to prevent data loss, roll back application-level errors, and more.

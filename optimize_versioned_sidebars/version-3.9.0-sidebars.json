@@ -2110,10 +2110,10 @@
       ]
     },
     {
-      "Backup & Restore": [
+      "Backup and restore": [
         {
           "type": "link",
-          "label": "Backup & Restore",
+          "label": "Backup and restore",
           "href": "/docs/self-managed/backup-restore/backup-and-restore/"
         },
         {

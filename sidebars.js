@@ -1001,7 +1001,7 @@ module.exports = {
       "Web Modeler (Beta)": ["self-managed/web-modeler/installation"],
     },
     {
-      "Backup and Restore": [
+      "Backup and restore": [
         "self-managed/backup-restore/backup-and-restore",
         "self-managed/backup-restore/optimize-backup",
         "self-managed/backup-restore/operate-tasklist-backup",

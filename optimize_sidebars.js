@@ -1659,7 +1659,7 @@ module.exports = {
     },
 
     {
-      "Backup and Restore": [
+      "Backup and restore": [
         docsLink(
           "Backup and restore",
           "self-managed/backup-restore/backup-and-restore/"
