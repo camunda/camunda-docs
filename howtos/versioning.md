@@ -17,6 +17,12 @@ Depending on the instance and version, location of source files and sidebar navi
 | `optimize` | Next               | [/optimize/](../optimize/)                                          | [optimize_sidebars.js](../optimize_sidebars.js)                                          |
 | `optimize` | 3.8.0, 3.7.0, ...  | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) | [/optimize_versioned_sidebars/version-\*-sidebars.json](../optimize_versioned_sidebars/) |
 
+### Sidebar drift
+
+Several sections of the sidebar navigation are shared across the Optimize and main sections of the docs: Components, Self-Managed, and APIs & Clients. To preserve a consistent user experience in the docs, the structure of sidebars should always match across instances for these sections. When it doesn't match, the user will experience sections of navigation appearing and disappearing depending on which doc they're reading.
+
+It's likely that the structure will drift over time. To resolve the drift, see [the docs on generating sidebars](../hacks/generateOptimizeSidebars.md).
+
 ## Create new version
 
 New versions are created as part of the [release process](/howtos/release-procedure.md).
