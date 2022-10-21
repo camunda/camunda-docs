@@ -24,6 +24,8 @@ To make the **Google Drive Connector** executable, fill out the mandatory fields
 
 ![Google Drive Connector new folder example](../img/connectors-googledrive-new-folder-filled.png)
 
+To create a new folder, take the following steps:
+
 1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select Operation** section, set the field value **Operation Type** as **Create Folder**.
 3. In the **Operation Details** section, set the field **Folder name** as the desired name of a folder you wish to create. For example, `MyNewFolder`. Alternatively, you could use a FEEL expression.
@@ -33,6 +35,8 @@ To make the **Google Drive Connector** executable, fill out the mandatory fields
 ### Create a new file from a template
 
 ![Google Drive Connector new file from template example](../img/connectors-googledrive-new-file-filled.png)
+
+To create a new file from a template, take the following steps:
 
 1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select Operation** section, set the field value **Operation Type** as **Create File from template**.
@@ -74,9 +78,9 @@ The **Google Drive Connector** uses the Google Drive [`Files:Copy`](https://deve
 
 ### How can I authenticate my Connector?
 
-The **Google Drive Connector** currently supports two ways of authentication and authorization: based on short-lived JWT bearer token, and based on refresh token.
+The **Google Drive Connector** currently supports two methods for authentication and authorization: based on short-lived JWT bearer token, and based on refresh token.
 
-Google supports multiple ways to obtain both. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) to get up-to-date instructions or see examples below.
+Google supports multiple ways to obtain both. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) to get up-to-date instructions or see the examples below.
 
 You also enable _Google Docs API_ and _Google Drive API_ for every client intended to use. You can do this at the [Google Cloud API Library](https://console.cloud.google.com/apis/library) page.
 
@@ -137,7 +141,7 @@ if __name__ == "__main__":
 
 ### Where do I get a parent folder ID?
 
-It is in the URL.
+Template ID is located in the URL.
 
 ![Google Drive Connector get parent folder ID](../img/connectors-googledrive-get-parent-folder-id.png)
 
@@ -166,7 +170,7 @@ It is in the URL.
 
 ### Can you show me an example of a valid template?
 
-A valid template looks like the following screenshot.
+A valid template looks like the following screenshot:
 
 ![Google Drive Connector document template example](../img/connectors-googledrive-template-example.png)
 
