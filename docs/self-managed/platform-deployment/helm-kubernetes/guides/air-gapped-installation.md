@@ -4,10 +4,10 @@ title: "Installing in an air-gapped environment"
 description: "Camunda Platform 8 Self-Managed installation in an air-gapped environment"
 ---
 
-Also in an air-gapped environment, one would like to profit from the [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md). By default the images are fetched via docker hub.
-With the dependencies to third-party images and helm charts, additional steps are required to have all charts available.
+The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the images are fetched via Docker Hub.
+With the dependencies in third-party images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
-## Required Images
+## Required images
 
 The following images must be available in your air-gapped environment:
 
@@ -20,18 +20,18 @@ The following images must be available in your air-gapped environment:
 - [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak)
 - [elasticsearch](https://hub.docker.com/_/elasticsearch)
 
-## Required Helm Charts
+## Required Helm charts
 
 The following charts must be available in your air-gapped environment:
 
-- [Camunda Platform Helm Chart](https://github.com/camunda/camunda-platform-helm)
-- [Elasticsearch Helm Chart](https://github.com/elastic/helm-charts/tree/main/elasticsearch)
-- [Keycloak Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/keycloak)
-- [Postgres Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql/)
+- [Camunda Platform Helm chart](https://github.com/camunda/camunda-platform-helm)
+- [Elasticsearch Helm chart](https://github.com/elastic/helm-charts/tree/main/elasticsearch)
+- [Keycloak Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/keycloak)
+- [Postgres Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql/)
 
 ## Dependencies explained
 
-Identity utilizes Keycloak and allows you to manage users, roles, and permissions for Camunda Platform 8 components. This third-party dependency is reflected in the Helm Chart as follows:
+Identity utilizes Keycloak and allows you to manage users, roles, and permissions for Camunda Platform 8 components. This third-party dependency is reflected in the Helm chart as follows:
 
 ```
 camunda-platform
@@ -46,9 +46,9 @@ camunda-platform
 ```
 
 - Keycloak is a dependency for Camunda Identity and PostgreSQL is a dependency for Keycloak.
-- Elasticsearch is a dependency for Zeebe, Operate, Tasklist and Optimize.
+- Elasticsearch is a dependency for Zeebe, Operate, Tasklist, and Optimize.
 
-The values for the dependencies Keycloak and PostgreSQL can be set in the same hierarchy.
+The values for the dependencies Keycloak and PostgreSQL can be set in the same hierarchy:
 
 ```yaml
 identity:
@@ -59,36 +59,36 @@ identity:
       [postgresql values]
 ```
 
-## Push Images to your repository
+## Push images to your repository
 
-All the [required images](#required-images) need to be pushed to your repository.
+All the [required images](#required-images) need to be pushed to your repository using the following steps:
 
-1. Tag your image using the following command (replace `<IMAGE ID>`, `<DOCKER REPOSITORY>` and `<DOCKER TAG>` with the corresponding values)
+1. Tag your image using the following command (replace `<IMAGE ID>`, `<DOCKER REPOSITORY>`, and `<DOCKER TAG>` with the corresponding values.)
 
 ```
 docker tag <IMAGE_ID> example.jfrog.io/camunda/<DOCKER_IMAGE>:<DOCKER_TAG>
 ```
 
-2. Push your image using the following command
+2. Push your image using the following command:
 
 ```
 docker push example.jfrog.io/camunda/<DOCKER_IMAGE>:<DOCKER_TAG>
 ```
 
-## Deploy Helm Charts to your repository
+## Deploy Helm charts to your repository
 
-You have to deploy the [required Helm Charts](#required-helm-charts) to your repository.
-E.g. In JFrog you can do it via the Artifactory's REST API.
+You must deploy the [required Helm charts](#required-helm-charts) to your repository.
+For example, in JFrog you can do this via the Artifactory's REST API.
 
 ```
 curl -u <USER>:<PASSWORD> -T <PATH_TO_FILE> "https://example.jfrog.io/artifactory/camunda-platform/<TARGET_FILE_PATH>"
 ```
 
-Alternatively, you can setup remote repositories (e.g. with url: https://helm.camunda.io for Camunda Charts, https://helm.elastic.co for Elastic)
+Alternatively, you can set up remote repositories (for example, with URL [https://helm.camunda.io](https://helm.camunda.io) for Camunda charts, [https://helm.elastic.co](https://helm.elastic.co) for Elastic).
 
 ### Add your Helm repositories
 
-You have to add your Helm chart repositories in order to use the charts.
+You must add your Helm chart repositories to use the charts:
 
 ```
 helm repo add camunda https://example.jfrog.io/artifactory/api/helm/camunda-platform
@@ -140,7 +140,7 @@ optimize:
     ...
 ```
 
-Afterwards you can deploy Camunda Platform using Helm and the custom values file.
+Afterwards, you can deploy Camunda Platform using Helm and the custom values file.
 
 ```
 helm install my-camunda-platform camunda-cloud/camunda-platform -f values.yaml
