@@ -125,8 +125,7 @@ When linking internally from one document to another, follow these guidelines:
 3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), update [the opposite instance's corresponding sidebars file(s)](#sidebar-navigation).
 4. Add necessary redirect/rewrite rules to the top of `.htaccess`.
 
-> **Note**
-> The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
+See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rules.
 
 ## Remove an existing page
 
@@ -135,8 +134,25 @@ When linking internally from one document to another, follow these guidelines:
 3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), update [the opposite instance's corresponding sidebars file(s)](#sidebar-navigation).
 4. Add necessary redirect/rewrite rules to the top of `.htaccess` to redirect users to appropriate relevant content on another page.
 
-> **Note**
-> The redirects/rewrite rules added to `.htaccess` will not work when running the documentation locally. You can use online tooling to help with this (e.g. https://htaccess.madewithlove.com/).
+See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rules.
+
+## Redirect rules
+
+The `.htaccess` file contains redirect rules that are applied to the published site, but it has no effect when running docusaurus locally (via `npm start`).
+
+If you wish to test `.htaccess` rules, you have a couple options:
+
+1. Use online tooling to test rules.
+   Tools like https://htaccess.madewithlove.com/ apply a set of redirect rules to a specific URL. Note that there are edge cases where this tool doesn't give the same results as a published environment.
+
+2. Use `docker compose` to spin up a locally-running Apache webserver.
+   This repo includes Docker configuration ([Dockerfile](../Dockerfile) and [docker-compose.yml](../docker-compose.yml)) to spin up a local environment that better simulates a published environment. Redirect rules can then be tested directly in a browser.
+
+   The local server is based on the contents of your `./build` folder. To start this local server:
+
+   1. Build the docs with `npm run build`.
+   2. Start the server with `docker compose up`.
+   3. Browse http://localhost:3001 and test redirects.
 
 ## Review Process
 
