@@ -23,7 +23,7 @@ import LaneSvg from './assets/bpmn-symbols/lane.svg';
         <PoolSvg className="implemented" />
     </a>
     <a href="#">
-        <LaneSvg />
+        <LaneSvg className="implemented" />
     </a>
 </div>
 
