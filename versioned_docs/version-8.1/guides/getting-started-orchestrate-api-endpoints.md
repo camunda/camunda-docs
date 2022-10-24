@@ -21,11 +21,11 @@ To use a **REST Connector** in your process, follow the steps below:
 2. Name your project and select **New > BPMN Diagram > + Create blank**.
 3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use `API Endpoint Tutorial` for the name and `api-endpoint-tutorial` for the id.
 4. Use Web Modeler to design a BPMN flow with a Connector task. Create a Connector task by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
-5. Change the task type by clicking the wrench icon and select **REST Connector (No Auth)** in the **Connectors** section. Alternatively, you can directly choose a **REST Connector** by using the **append menu**.
+5. Change the task type by clicking the wrench icon and select **REST Connector (No Auth)** in the **Connectors** section. Alternatively, you can directly choose a **REST Connector** by using the context pad.
 
    ![create sendgrid connector wrench](img/connectors-rest-create-task-wrench.png)
 
-6. Add a descriptive name using the properties panel. For this guide, we'll use `Make a request`. Since you previously opened the **General** section of the properties panel, it is likely still open when working with your connector configuration.
+6. Add a descriptive name using the **General** section in the properties panel. For this guide, we'll use `Make a request`.
 
 ## Make your REST Connector executable
 
@@ -36,7 +36,7 @@ To make the **REST Connector** executable, fill out the mandatory **URL** field 
 ## Handle your response
 
 The HTTP response will be available in a temporary local response variable. This variable can be mapped to the process by specifying **Result Variable**.
-In the **Response Mapping** section, use `={"body" : body}` as the **Result Expression**, so you can see the entire JSON object returned if it's successful.
+In the **Response Mapping** section use `={"body" : body}` as the **Result Expression** so you can see the entire JSON object returned if it's successful.
 
 ## Deploy your process
 
