@@ -26,7 +26,7 @@ To make the **Slack Connector** executable, fill out the mandatory fields highli
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
 3. Set **Message** to the message string you would like to send (for example, `Hello World!`)
 
-The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](../../../concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
+The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](../../concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
 ![slack connector compose](../img/connectors-slack-compose.png)
 
@@ -92,5 +92,5 @@ The **Slack Connector** uses an OAuth bearer token (for example, the Slack app b
 
 We advise you to keep your Slack bot token safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
 2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the Connector.

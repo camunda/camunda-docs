@@ -34,7 +34,7 @@ No extra authentication configuration is required; you can jump to the [next sec
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_BASIC_AUTH_SECRET`) so you can reference it later in the Connector.
 
 ### Configure Basic Authentication
@@ -52,7 +52,7 @@ Select the **REST Connector** and fill out the following properties under the **
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_BEARER_TOKEN`) so you can reference it later in the Connector.
 
 #### Configure the Bearer Token

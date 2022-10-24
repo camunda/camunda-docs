@@ -69,4 +69,4 @@ Example of a valid message attribute as a FEEL value:
 ### How do I store AWS IAM Secrets for my SQS Connector?
 
 It is highly recommended to store your secret AWS IAM credentials as Camunda Secrets.
-Please, follow our [Manage Secrets Guide](../../../../components/console/manage-clusters/manage-secrets.md) to find out more.
+Please, follow our [Manage Secrets Guide](../../../components/console/manage-clusters/manage-secrets.md) to find out more.

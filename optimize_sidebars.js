@@ -571,64 +571,57 @@ module.exports = {
     },
 
     {
-      "Integration Framework": [
+      Connectors: [
         docsLink(
           "Introduction",
-          "components/integration-framework/introduction-to-connectors/"
+          "components/connectors/introduction-to-connectors/"
         ),
 
+        docsLink("Use Connectors", "components/connectors/use-connectors/"),
+
         {
-          Connectors: [
+          "Out-of-the-box Connectors": [
             docsLink(
-              "Use Connectors",
-              "components/integration-framework/connectors/use-connectors/"
+              "Overview",
+              "components/connectors/out-of-the-box-connectors/available-connectors-overview/"
             ),
+            docsLink(
+              "Amazon SQS Connector",
+              "components/connectors/out-of-the-box-connectors/aws-sqs/"
+            ),
+            docsLink(
+              "AWS Lambda Connector",
+              "components/connectors/out-of-the-box-connectors/aws-lambda/"
+            ),
+            docsLink(
+              "Google Drive Connector",
+              "components/connectors/out-of-the-box-connectors/googledrive/"
+            ),
+            docsLink(
+              "REST Connector",
+              "components/connectors/out-of-the-box-connectors/rest/"
+            ),
+            docsLink(
+              "SendGrid Connector",
+              "components/connectors/out-of-the-box-connectors/sendgrid/"
+            ),
+            docsLink(
+              "Slack Connector",
+              "components/connectors/out-of-the-box-connectors/slack/"
+            ),
+          ],
+        },
 
-            {
-              "Out-of-the-box Connectors": [
-                docsLink(
-                  "Overview",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview/"
-                ),
-                docsLink(
-                  "Amazon SQS Connector",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/aws-sqs/"
-                ),
-                docsLink(
-                  "AWS Lambda Connector",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/aws-lambda/"
-                ),
-                docsLink(
-                  "Google Drive Connector",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/googledrive/"
-                ),
-                docsLink(
-                  "REST Connector",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/rest/"
-                ),
-                docsLink(
-                  "SendGrid Connector",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid/"
-                ),
-                docsLink(
-                  "Slack Connector",
-                  "components/integration-framework/connectors/out-of-the-box-connectors/slack/"
-                ),
-              ],
-            },
-
-            {
-              "Custom-built Connectors": [
-                docsLink(
-                  "Connector templates",
-                  "components/integration-framework/connectors/custom-built-connectors/connector-templates/"
-                ),
-                docsLink(
-                  "Connector SDK",
-                  "components/integration-framework/connectors/custom-built-connectors/connector-sdk/"
-                ),
-              ],
-            },
+        {
+          "Custom-built Connectors": [
+            docsLink(
+              "Connector templates",
+              "components/connectors/custom-built-connectors/connector-templates/"
+            ),
+            docsLink(
+              "Connector SDK",
+              "components/connectors/custom-built-connectors/connector-sdk/"
+            ),
           ],
         },
       ],
