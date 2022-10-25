@@ -248,7 +248,7 @@
           "Desktop Modeler": [
             {
               "type": "link",
-              "label": "Install the Modeler",
+              "label": "Install Desktop Modeler",
               "href": "/docs/components/modeler/desktop-modeler/install-the-modeler/"
             },
             {
@@ -2110,10 +2110,10 @@
       ]
     },
     {
-      "Backup & Restore": [
+      "Backup and restore": [
         {
           "type": "link",
-          "label": "Backup & Restore",
+          "label": "Backup and restore",
           "href": "/docs/self-managed/backup-restore/backup-and-restore/"
         },
         {

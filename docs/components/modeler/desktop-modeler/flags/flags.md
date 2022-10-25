@@ -1,10 +1,10 @@
 ---
 id: flags
 title: Flags
-description: "Flags allow you to control the availability of certain features within the desktop modeler."
+description: "Flags allow you to control the availability of certain features within Desktop Modeler."
 ---
 
-Flags allow you to control the availability of certain features within the desktop modeler.
+Flags allow you to control the availability of certain features within Desktop Modeler.
 
 ## Configuring Flags
 

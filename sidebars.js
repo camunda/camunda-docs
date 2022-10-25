@@ -76,6 +76,7 @@ module.exports = {
             "components/console/manage-organization/update-billing-reservations",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
+            "components/console/manage-organization/delete-account",
           ],
         },
         {
@@ -652,6 +653,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
+                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
               ],
             },
             "self-managed/platform-deployment/troubleshooting",
@@ -1001,7 +1003,7 @@ module.exports = {
       "Web Modeler (Beta)": ["self-managed/web-modeler/installation"],
     },
     {
-      "Backup & Restore": [
+      "Backup and restore": [
         "self-managed/backup-restore/backup-and-restore",
         "self-managed/backup-restore/optimize-backup",
         "self-managed/backup-restore/operate-tasklist-backup",

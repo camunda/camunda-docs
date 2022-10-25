@@ -2,9 +2,12 @@
 id: operate-tasklist-backup
 title: Backup and restore Operate and Tasklist data
 description: "How to perform a backup and restore of Operate and Tasklist data."
+keywords: ["backup", "backups"]
 ---
 
-## Backup and restore of Operate data
+:::note
+This API is subject to change.
+:::
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
 Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an id of `backup1` may contain the following Elasticsearch snapshots:

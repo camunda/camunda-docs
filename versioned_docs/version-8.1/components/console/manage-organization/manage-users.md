@@ -33,3 +33,7 @@ Users can be assigned multiple roles. For example, a user can have the role of *
 Users are invited to a Camunda Platform 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 
 People who do not yet have a Camunda Platform 8 account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda Platform 8 account by following the instructions in the invitation email.
+
+## Limitations
+
+Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional Plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.

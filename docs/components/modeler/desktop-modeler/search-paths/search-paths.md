@@ -1,10 +1,10 @@
 ---
 id: search-paths
 title: Search paths
-description: "Features like element templates and plugins allow you to add your own resources to the desktop modeler. For these resources to be found, they have to be in one of two directories depending on how local or global you want them to be."
+description: "Features like element templates and plugins allow you to add your own resources to Desktop Modeler. For these resources to be found, they have to be in one of two directories depending on how local or global you want them to be."
 ---
 
-Features like element templates and plugins allow you to add your own resources to the desktop modeler. For these resources to be found, they have to be in one of two directories depending on how local or global you want them to be.
+Features like element templates and plugins allow you to add your own resources to Desktop Modeler. For these resources to be found, they have to be in one of two directories depending on how local or global you want them to be.
 
 ## App Data Directory
 
@@ -51,4 +51,4 @@ Resources in the user data directory will be found by all Camunda Modeler instan
                         └── index.js
 ```
 
-It is possible to change the user data directory using the `--user-data-dir` option via when starting the Camunda Modeler from the command line. Refer to the [flags documentation](../flags) on how to configure the application with a flags file.
+It is possible to change the user data directory using the `--user-data-dir` option via when starting Camunda Modeler from the command line. Refer to the [flags documentation](../flags) on how to configure the application with a flags file.
