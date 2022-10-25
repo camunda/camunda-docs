@@ -999,7 +999,18 @@ module.exports = {
       "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
     },
     {
-      "Web Modeler (Beta)": ["self-managed/web-modeler/installation"],
+      Modeler: [
+        {
+          "Web Modeler (Beta)": [
+            "self-managed/modeler/web-modeler/installation",
+          ],
+        },
+        {
+          "Desktop Modeler": [
+            "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
+          ],
+        },
+      ],
     },
     {
       "Backup and Restore": [
