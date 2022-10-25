@@ -154,6 +154,10 @@ If you wish to test `.htaccess` rules, you have a couple options:
    2. Start the server with `docker compose up`.
    3. Browse http://localhost:3001 and test redirects.
 
+      It is probably best to do this in an incognito browser session, as browsers clutch tightly to 301 redirects.
+
+   4. Clean up the server with `docker compose down`.
+
 ## Review Process
 
 After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
