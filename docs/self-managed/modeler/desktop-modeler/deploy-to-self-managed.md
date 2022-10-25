@@ -1,11 +1,12 @@
 ---
 id: deploy-to-self-managed
 title: Deploy diagram
+description: "Desktop Modeler can directly deploy diagrams and start process instances in Camunda Platform 8 Self-Managed."
 ---
 
 Desktop Modeler can directly deploy diagrams and start process instances in Camunda Platform 8 Self-Managed. Follow the steps below to deploy a diagram:
 
-1. Click the deployment icon:
+1. Click the rocket-shaped deployment icon:
 
 ![deployment icon](./img/deploy-icon.png)
 
