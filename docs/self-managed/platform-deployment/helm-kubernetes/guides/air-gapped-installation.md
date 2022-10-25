@@ -4,10 +4,10 @@ title: "Installing in an air-gapped environment"
 description: "Camunda Platform 8 Self-Managed installation in an air-gapped environment"
 ---
 
-The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the images are fetched via Docker Hub.
-With the dependencies in third-party images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
+The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub.
+With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
-## Required images
+## Required Docker images
 
 The following images must be available in your air-gapped environment:
 
@@ -26,8 +26,9 @@ The following charts must be available in your air-gapped environment:
 
 - [Camunda Platform Helm chart](https://github.com/camunda/camunda-platform-helm)
 - [Elasticsearch Helm chart](https://github.com/elastic/helm-charts/tree/main/elasticsearch)
-- [Keycloak Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/keycloak)
-- [Postgres Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql/)
+- [Keycloak Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
+- [Postgres Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
+- [Bitnami Common Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/common)
 
 ## Dependencies explained
 
@@ -59,9 +60,9 @@ identity:
       [postgresql values]
 ```
 
-## Push images to your repository
+## Push Docker images to your repository
 
-All the [required images](#required-images) need to be pushed to your repository using the following steps:
+All the [required Docker images](#required-docker-images) need to be pushed to your repository using the following steps:
 
 1. Tag your image using the following command (replace `<IMAGE ID>`, `<DOCKER REPOSITORY>`, and `<DOCKER TAG>` with the corresponding values.)
 
@@ -78,13 +79,7 @@ docker push example.jfrog.io/camunda/<DOCKER_IMAGE>:<DOCKER_TAG>
 ## Deploy Helm charts to your repository
 
 You must deploy the [required Helm charts](#required-helm-charts) to your repository.
-For example, in JFrog you can do this via the Artifactory's REST API.
-
-```
-curl -u <USER>:<PASSWORD> -T <PATH_TO_FILE> "https://example.jfrog.io/artifactory/camunda-platform/<TARGET_FILE_PATH>"
-```
-
-Alternatively, you can set up remote repositories (for example, with URL [https://helm.camunda.io](https://helm.camunda.io) for Camunda charts, [https://helm.elastic.co](https://helm.elastic.co) for Elastic).
+For details about hosting options, visit the [chart repository guide](https://helm.sh/docs/topics/chart_repository).
 
 ### Add your Helm repositories
 
@@ -97,7 +92,7 @@ helm repo add bitnami https://example.jfrog.io/artifactory/api/helm/bitnami
 helm repo update
 ```
 
-### Helm Chart values
+### Helm chart values
 
 In a custom values file, it is possible to override the image repository and the image tag.
 
@@ -143,5 +138,5 @@ optimize:
 Afterwards, you can deploy Camunda Platform using Helm and the custom values file.
 
 ```
-helm install my-camunda-platform camunda-cloud/camunda-platform -f values.yaml
+helm install my-camunda-platform camunda/camunda-platform -f values.yaml
 ```
