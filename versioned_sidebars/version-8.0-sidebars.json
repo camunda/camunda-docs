@@ -824,6 +824,10 @@
         "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics"
       ],
+      "Connectors": [
+        "self-managed/connectors-deployment/install-and-start",
+        "self-managed/connectors-deployment/connectors-configuration"
+      ],
 
       "Optimize": [
         {
@@ -999,6 +1003,11 @@
               "type": "link",
               "label": "Instructions",
               "href": "/optimize/3.8.0/self-managed/optimize-deployment/migration-update/instructions/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (3.8.x to 3.9.x-preview-1)",
+              "href": "/optimize/3.8.0/self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1/"
             },
             {
               "type": "link",

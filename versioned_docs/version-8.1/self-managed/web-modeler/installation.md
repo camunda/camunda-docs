@@ -1,6 +1,7 @@
 ---
 id: installation
 title: Installation
+description: "Details on installation of Web Modeler Self-Managed."
 ---
 
 :::caution Beta Offering
@@ -10,5 +11,5 @@ Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/ca
 However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
 
-Currently, we only support an installation of Web Modeler Self-Managed with Docker and Docker Compose.
-Please refer to the [Installation Guide](../platform-deployment/docker.md) for more details.
+Currently, we support an installation of Web Modeler Self-Managed with Docker and Docker Compose.
+Refer to the [installation guide](../platform-deployment/docker.md) for more details.

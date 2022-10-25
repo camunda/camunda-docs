@@ -173,9 +173,9 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 
 #### Elasticsearch backup settings
 
-| YAML Path                | Default Value | Description                                                             |
-| ------------------------ | ------------- | ----------------------------------------------------------------------- |
-| es.backup.repositoryName | ""            | The name of the snapshot repository to be used to backup Optimize data. |
+| YAML path                | Default value | Description                                                              |
+| ------------------------ | ------------- | ------------------------------------------------------------------------ |
+| es.backup.repositoryName | ""            | The name of the snapshot repository to be used to back up Optimize data. |
 
 ### Email
 

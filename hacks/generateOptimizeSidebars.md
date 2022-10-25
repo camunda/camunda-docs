@@ -8,7 +8,9 @@ Unfortunately docusaurus instances do not have access to each other's documents,
 
 This script crawls the left nav of the site you're viewing, and generates a sidebar definition file full of URL-based links. It needs to be corrected for links that are _within_ the `optimize` docs instance, because it's not smart enough to generate doc-based links for them, but it prevents us from having to manually identify every page title/URL in the main `docs` instance.
 
-The script is run in the browser dev tools console, and the results are pasted into the `optimize_sidebars.js` file.
+The script is run in the browser dev tools console, and the results are pasted into [a sidebars file](../howtos/versioning.md#structure).
+
+The script might require small tweaks depending on which instance you are generating sidebars for, and which version.
 
 ## How?
 

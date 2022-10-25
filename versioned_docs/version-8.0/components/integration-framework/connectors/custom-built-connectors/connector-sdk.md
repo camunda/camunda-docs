@@ -816,88 +816,11 @@ can invoke the Connectors. The Connector SDK provides a
 ### Pre-packaged runtime environment
 
 The SDK comes with a pre-packaged runtime environment that allows you to run select Connector runtimes
-as local job workers out-of-the-box. You can find this Java application in the
-[SDK's GitHub repository](https://github.com/camunda/connector-sdk/tree/main/runtime-job-worker),
-in [our artifact store](https://artifacts.camunda.com/ui/native/connectors/io/camunda/connector/connector-runtime-job-worker/),
-and on [Maven Central](https://search.maven.org/artifact/io.camunda.connector/connector-runtime-job-worker).
+as local job workers out-of-the-box. You can find this Java application on
+[Maven Central](https://search.maven.org/artifact/io.camunda.connector/connector-runtime-job-worker).
 
-You can start an instance of this runtime environment with the following command line, given that you
-defined a Java runtime environment in your system under `java`:
-
-```bash
-java -cp 'connector-runtime-job-worker-with-depdencies.jar;connector-template-with-dependencies.jar' \
-    io.camunda.connector.runtime.jobworker.Main
-```
-
-You can pass all the JAR files of the Connector runtimes that should be invokable by the environment
-in the `-cp` argument of the Java call.
-
-The runtime environment picks up Connector functions available on the classpath automatically.
-It uses the default configuration specified with the `@OutboundConnector` annotation.
-
-This starts a Zeebe client, registering the defined Connectors as job workers. By default, it
-connects to a local Zeebe instance at port `26500`. You can configure the Zeebe client using
-the [standard Zeebe environment variables](../../../../apis-clients/java-client/index.md#bootstrapping).
-
-If you want to disable auto-discovery, use environment variables to configure Connectors and their configuration explicitly.
-
-Using `CONNECTOR_*` environment variables, you can define the Connectors that this application can invoke.
-Those variables usually come in triples, grouped by `<NAME>`:
-
-- `CONNECTOR_<NAME>_FUNCTION` (required) - The fully qualified class name of your
-  [Connector function](#runtime-logic).
-- `CONNECTOR_<NAME>_TYPE` (optional) - The job type this Connector handles. You define this in the
-  [Connector template](#connector-template).
-- `CONNECTOR_<NAME>_VARIABLES` (optional) - The process variables to pass to the Connector function.
-  This usually maps to the attributes that your [input data](#input-data) object defines.
-
-With that configuration, you define all job workers to run. Specifying optional values allows you
-to override configuration provided by `@OutboundConnector` annotations.
-
-```bash
-CONNECTOR_SLACK_FUNCTION=io.camunda.connector.slack.SlackFunction
-CONNECTOR_SLACK_TYPE=non-default-slack-task-type
-
-java -cp 'connector-runtime-job-worker-with-depdencies.jar;connector-template-with-dependencies.jar' \
-    io.camunda.connector.runtime.jobworker.Main
-```
-
-Providing secrets to the environment can be achieved in two ways:
-
-- Define secrets as environment variables, e.g., via command line `export MY_SECRET='foo'`.
-- Create your own implementation of the `io.camunda.connector.api.secret.SecretProvider` interface that
-  comes with the SDK. Package this class as a JAR, including a file
-  `META-INF/services/io.camunda.connector.api.secret.SecretProvider` that contains the fully qualified
-  class name of your secret provider implementation. Add this JAR to the `-cp` argument of the
-  Java call. Your secret provider will serve secrets as implemented.
-
-#### Docker
-
-You can build on top of our [Connectors base image](https://hub.docker.com/r/camunda/connectors/tags) that includes
-the pre-packaged runtime enviroment without any Connector.
-
-To use the image, at least one connector has to be added to the classpath. We recommend to provide JARs with all dependencies bundled.
-
-:::caution
-
-As all Connectors share a single classpath, it can happen that different versions of the same dependency are available which can lead to conflicts.
-To prevent this, common dependencies like `jackson` can be shaded and relocated inside the Connector's JAR.
-
-:::
-
-You can add a Connector JAR by extending the base image with a JAR from a public URL:
-
-```yml
-FROM camunda/connectors:0.2.2
-
-ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.9.0/connector-http-json-0.9.0-with-dependencies.jar /opt/app/
-```
-
-You can also add a Connector JAR by using volumes:
-
-```bash
-docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.2.2
-```
+Refer to the [Self-Managed installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to
+set up this runtime environment.
 
 ### Connector job handler
 

@@ -21,6 +21,8 @@ Make sure to configure the web applications to use a port that is available. By 
 Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/zeebe/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
 
 All Connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run Connectors locally including their necessary dependencies.
+Note that some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
 
 ## Download and run Elasticsearch
 
@@ -147,8 +149,8 @@ To update Tasklist versions, visit the [guide to update Tasklist](../../componen
 
 ## Run Connectors
 
-The [Connector runtime environment](https://search.maven.org/artifact/io.camunda.connector/connector-runtime-job-worker) picks up outbound connectors available on the classpath automatically
-unless [overriden through manual configuration](#manual-discovery). It uses the default configuration specified by a Connector through its `@OutboundConnector` annotation.
+The [Connector runtime environment](https://search.maven.org/artifact/io.camunda.connector/connector-runtime-job-worker) picks up outbound Connectors available on the `classpath` automatically.
+It uses the default configuration specified by a Connector through its `@OutboundConnector` annotation.
 
 To run the [REST Connector](https://search.maven.org/artifact/io.camunda.connector/connector-http-json) with the runtime environment, execute the following command:
 
@@ -157,37 +159,14 @@ java -cp 'connector-runtime-job-worker-with-dependencies.jar:connector-http-json
     io.camunda.connector.runtime.jobworker.Main
 ```
 
-The Connector runtime environment spins up and loads the REST Connector to work on jobs. You will see messages similar to the following:
+This starts a Zeebe client, registering the defined Connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
+You can configure the Zeebe client using the [standard Zeebe environment variables](/apis-clients/java-client/index.md#bootstrapping).
+
+You will see messages similar to the following:
 
 ```log
 INFO: Registering outbound connector OutboundConnectorRegistration { name=HTTPJSON, type=io.camunda:http-json:1, function=io.camunda.connector.http.HttpJsonFunction, inputVariables=[url, method, authentication, headers, queryParameters, body] }
 ```
-
-### Manual Discovery
-
-Use the following environment variables to configure Connectors and their configuration explicitly, without auto-discovery:
-
-| Environment variable                          | Purpose                                                       |
-| :-------------------------------------------- | :------------------------------------------------------------ |
-| `CONNECTOR_{NAME}_FUNCTION` (required)        | Function to be registered as job worker with the given `NAME` |
-| `CONNECTOR_{NAME}_TYPE` (optional)            | Job type to register for worker with `NAME`                   |
-| `CONNECTOR_{NAME}_INPUT_VARIABLES` (optional) | Variables to fetch for worker with `NAME`                     |
-
-Through that configuration you define all job workers to run.
-
-Specifying optional values allow you to override `@OutboundConnector`-provided Connector configuration.
-
-```bash
-CONNECTOR_HTTPJSON_FUNCTION=io.camunda.connector.http.HttpJsonFunction
-CONNECTOR_HTTPJSON_TYPE=non-default-httpjson-task-type
-
-java -cp 'connector-runtime-job-worker-with-dependencies.jar:connector-http-json-with-dependencies.jar' \
-    io.camunda.connector.runtime.jobworker.Main
-```
-
-### Connecting to Zeebe
-
-You configure the connection to Zeebe using the standard [Zeebe environment variables](/apis-clients/java-client/index.md#bootstrapping).
 
 ## Run Identity
 

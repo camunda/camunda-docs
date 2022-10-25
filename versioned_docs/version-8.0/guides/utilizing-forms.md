@@ -7,7 +7,7 @@ description: "Let's learn about Camunda Forms, how to use them, how to model the
 :::note
 The initial release of Camunda Forms includes a debut minimal feature set, which will be expanded with upcoming versions.
 
-If using with Camunda Platform 7, note that the Camunda Forms feature was added with the 4.7.0 release of the Desktop Modeler. Therefore, they can be used within BPMN diagrams running on Camunda Platform 7 version 7.15.0 or later.
+If using with Camunda Platform 7, note that the Camunda Forms feature was added with the 4.7.0 release of Desktop Modeler. Therefore, they can be used within BPMN diagrams running on Camunda Platform 7 version 7.15.0 or later.
 :::
 
 ## Overview

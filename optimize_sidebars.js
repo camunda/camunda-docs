@@ -196,7 +196,7 @@ module.exports = {
         {
           "Desktop Modeler": [
             docsLink(
-              "Install the Modeler",
+              "Install Desktop Modeler",
               "components/modeler/desktop-modeler/install-the-modeler/"
             ),
             docsLink(
@@ -1519,6 +1519,8 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
+            "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
             "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
             "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
             "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
@@ -1657,9 +1659,9 @@ module.exports = {
     },
 
     {
-      "Backup & Restore": [
+      "Backup and restore": [
         docsLink(
-          "Backup & Restore",
+          "Backup and restore",
           "self-managed/backup-restore/backup-and-restore/"
         ),
         docsLink(
@@ -1671,7 +1673,7 @@ module.exports = {
           "self-managed/backup-restore/operate-tasklist-backup/"
         ),
         docsLink(
-          "Zeebe Backups",
+          "Backup and restore Zeebe data",
           "self-managed/backup-restore/zeebe-backup-and-restore/"
         ),
       ],

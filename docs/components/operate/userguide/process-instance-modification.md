@@ -1,10 +1,10 @@
 ---
 id: process-instance-modification
 title: Process instance modification
-description: "An overview of process instance modification"
+description: "You may need to modify an active process instance to allow execution to continue."
 ---
 
-You may need to modify an active process instance to allow the execution to continue. The execution may be stuck and you may want to continue the execution on a different activity (i.e. skip or repeat activities).
+You may need to modify an active process instance to allow execution to continue. The execution may be stuck, and you may want to continue the execution on a different activity (i.e. skip or repeat activities).
 
 ## Modification mode
 
@@ -12,13 +12,13 @@ To enter modification mode, click the modify icon on the process instance header
 
 ![enter-modification-mode](./img/modifications/enter-modification-mode.png)
 
-The UI will change when you enter modification mode including a blue banner a the top and two buttons for applying or discarding modifications at the bottom.
+The UI will change when you enter modification mode, including a blue banner at the top and two buttons for applying or discarding modifications at the bottom.
 
 ![modification-mode](./img/modifications/modification-mode.png)
 
 ## Cancel all running tokens on a flow node
 
-To cancel all the running tokens on a flow node, take the following steps:
+To cancel all running tokens on a flow node, take the following steps:
 
 1. Select the flow node you want to cancel all the running tokens on.
 
@@ -26,7 +26,7 @@ To cancel all the running tokens on a flow node, take the following steps:
 
 ![cancel-token](./img/modifications/cancel-token.png)
 
-3. See pending modification reflected in the instance history.
+View the pending modification reflected in the instance history.
 
 ![cancel-token-result](./img/modifications/add-token-result.png)
 
@@ -40,7 +40,7 @@ To add a new token to a flow node, take the following steps:
 
 ![add-token](./img/modifications/add-token.png)
 
-3. See pending modification reflected in the instance history.
+View the pending modification reflected in the instance history.
 
 ![add-token-result](./img/modifications/add-token-result.png)
 
@@ -58,47 +58,47 @@ The move operation is equivalent to the combination of **Cancel** and **Add** mo
 
 ![move-token-select-target](./img/modifications/move-token-select-target.png)
 
-4. See pending modification reflected in the instance history.
+View the pending modification reflected in the instance history.
 
 ![move-token-result](./img/modifications/move-token-result.png)
 
 ## Add variable to new scopes
 
-During the modification mode if there are new scopes generated, it will be possible to add variables to these new scopes by following these steps:
+During the modification mode, if there are new scopes generated it will be possible to add variables to these new scopes by following these steps:
 
-1. Select the new scope from the instance history you want to add variable to.
+1. Select the new scope from the instance history you want to add a variable to.
 
 ![select-new-scope](./img/modifications/select-new-scope.png)
 
-2. Click **Add Variable** button from the variables panel.
+2. Click **Add Variable** from the variables panel.
 
 ![add-variable-to-new-scope](./img/modifications/add-variable-to-new-scope.png)
 
-3. Fill **Name** and **Value** fields for the variable you want to add.
+3. Fill out the **Name** and **Value** fields for the variable you want to add.
 
-4. Once you blur out of the field (click anywhere in the screen other than the last edited variable field), assuming the fields have the valid values, new variable will be added to the pending modifications.
+4. Once you blur out of the field (click anywhere on the screen other than the last edited variable field), assuming the fields have the valid values, the new variable will be added to the pending modifications.
 
 ![add-variable-result](./img/modifications/add-variable-result.png)
 
 ## Edit variable on existing scopes
 
-During the modification mode it will be possible to edit existing variables in existing scopes by following these steps:
+During modification mode it is possible to edit existing variables in existing scopes by following these steps:
 
-1. Select existing scope from the instance history that you want to edit variables on.
+1. Select the existing scope from the instance history you want to edit variables on.
 
 ![edit-variable-on-existing-scope](./img/modifications/edit-variable-on-existing-scope.png)
 
-2. Edit variable value from the variables panel.
+2. Edit the variable value from the variables panel.
 
 ![edit-variable-value](./img/modifications/edit-variable-value.png)
 
-3. Once you blur out of the field (click anywhere in the screen other than the last edited variable field), assuming the new value is valid, **Edit Variable** modification will be added to the pending modifications.
+3. Once you blur out of the field (click anywhere in the screen other than the last edited variable field), assuming the new value is valid, the **Edit Variable** modification will be added to the pending modifications.
 
 ![edit-variable-result](./img/modifications/edit-variable-result.png)
 
 ## View summary of pending modifications
 
-In order to display the pending modifications, click **Apply Modifications** button from the footer.
+To display the pending modifications, click **Apply Modifications** in the footer.
 
 ![apply-modifications-button](./img/modifications/apply-modifications-button.png)
 
@@ -106,13 +106,13 @@ A modal will be displayed where all modifications can be seen.
 
 ![modification-summary-modal](./img/modifications/modification-summary-modal.png)
 
-Within this modal you can to take following actions:
+Within this modal, you can take the following actions:
 
-- (1): Delete any modification by clicking the **Delete Icon**.
-- (2): View added variable in a JSON Viewer.
-- (3): View edited variable in a Diff Viewer.
-- (4): Cancel/close the modal and continue with modification mode.
-- (5): Apply the modifications and exit modification mode.
+- (1) Delete any modification by clicking the **Delete Icon**.
+- (2) View an added variable in a JSON Viewer.
+- (3) View an edited variable in a Diff Viewer.
+- (4) Cancel/close the modal and continue with modification mode.
+- (5) Apply the modifications and exit modification mode.
 
 ## Undo modification
 
@@ -130,12 +130,12 @@ If you click the **Apply** button from the summary modal as described [here](#vi
 
 Some elements do not support specific modifications:
 
-- Elements within multi instance flow nodes are not supported for any kind of modification.
-- **Add token** / **Move tokens to** modifications are not possible for the following type of elements:
+- Elements within multi-instance flow nodes are not supported for any kind of modification.
+- **Add token**/**Move tokens to** modifications are not possible for the following type of elements:
   - Start events
   - Boundary events
   - Events attached to event-based gateways
 - **Move tokens from** modification is not possible for a subprocess itself.
-- **Add token** / **Move tokens to** modifications are currently not possible for elements that have multiple running scopes.
+- **Add token**/**Move tokens to** modifications are currently not possible for elements with multiple running scopes.
 
 ![not-supported-flow-nodes](./img/modifications/not-supported-flow-nodes.png)
