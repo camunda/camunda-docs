@@ -135,4 +135,4 @@ To summarize, the process may look as follows:
 
 ## Backup and restore of Tasklist data
 
-Backup and restore of Tasklist may be performed in exactly the same way as [Operate data](#backup-and-restore-of-operate-data).
+Backup and restore of Tasklist may be performed in exactly the same way as [Operate data](#).
