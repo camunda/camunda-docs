@@ -220,7 +220,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
           ],
-          "Custom-built Connectors": [
+          "Build custom Connectors": [
             "components/connectors/custom-built-connectors/connector-templates",
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
