@@ -12,6 +12,12 @@ Options -Indexes -MultiViews
 RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templates/?$ /docs$1/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 
 # Redirects for Connectors move to top level
+RewriteRule ^docs/8.0/components/integration-framework/introduction-to-connectors/(.*)$ /docs/8.0/components/connectors/introduction-to-connectors/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/integration-framework/introduction-to-connectors$ /docs/8.0/components/connectors/introduction-to-connectors [R=301,L]
+RewriteRule ^docs/next/components/integration-framework/introduction-to-connectors/(.*)$ /docs/next/components/connectors/introduction-to-connectors/$1 [R=301,L]
+RewriteRule ^docs/next/components/integration-framework/introduction-to-connectors$ /docs/next/components/connectors/introduction-to-connectors [R=301,L]
+RewriteRule ^docs/components/integration-framework/introduction-to-connectors/(.*)$ /docs/components/connectors/introduction-to-connectors/$1 [R=301,L]
+RewriteRule ^docs/components/integration-framework/introduction-to-connectors$ /docs/components/connectors/introduction-to-connectors [R=301,L]
 RewriteRule ^docs/8.0/components/integration-framework/(.*)$ /docs/8.0/components/$1 [R=301,L]
 RewriteRule ^docs/8.0/components/integration-framework$ /docs/8.0/components/ [R=301,L]
 RewriteRule ^docs/components/integration-framework/(.*)$ /docs/components/$1 [R=301,L]
