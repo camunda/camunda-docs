@@ -9,9 +9,8 @@ The Amazon SQS Connector allows you to connect your BPMN service with [Amazon Si
 
 ## Prerequisites
 
-To use the **Amazon SQS Connector**, you need to have an SQS Queue and IAM key and secret pair with the `sqs:SendMessage` policy relative to your SQS.
-It is highly recommended not to expose your AWS IAM credentials as plain text but rather use Camunda Secrets. See an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) to find out more.
-See the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
+To use the **Amazon SQS Connector**, you need to have an SQS Queue, IAM key, and secret pair with the `sqs:SendMessage` policy relative to your SQS.
+It is highly recommended not to expose your AWS IAM credentials as plain text but rather use Camunda secrets. See an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) and the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
 
 ## Create an Amazon SQS Connector task
 
@@ -21,10 +20,12 @@ To use the **Amazon SQS Connector** in your process, either change the type of e
 
 ![AWS SQS Filled](../img/connectors-aws-sqs-filled.png)
 
-1. Set relevant IAM key and secret pair in the **Authentication** section. For example, `secrets.MY_AWS_ACCESS_KEY`. The value can be plain text, but this is not recommended due to security concerns.
+To make your Amazon SQS Connector for sending messages executable, take the following steps:
+
+1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `secrets.MY_AWS_ACCESS_KEY`. The value can be plain text, but this is not recommended due to security concerns.
 2. In the **Queue Properties** section, set the URL of your SQS queue as well as its region.
-3. In the **Input message data** section, fill the field **Message body** with the data you would like to submit to the queue. The field requires FEEL input.
-4. (Optional) In the **Input message data** section, fill the field **Message attributes** to set optional message metadata. This field requires FEEL input. See the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
+3. In the **Input message data** section, fill out the field **Message body** with the data you would like to submit to the queue. The field requires FEEL input.
+4. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. See the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
 
 ## Amazon SQS Connector response
 
@@ -47,7 +48,7 @@ You can use an output mapping to map the response:
 ### What are the message attributes and how can I set them?
 
 Amazon SQS lets you include structured metadata (such as timestamps, geospatial data, signatures, and identifiers) with messages using message attributes.
-The **Amazon SQS Connector** allows you to include non-binary message attributes in the section **Input message data**. The message attribute value has to be composed to be compliant with Amazon SQS [message attribute data format](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes).
+The **Amazon SQS Connector** allows you to include non-binary message attributes in the section **Input message data**. The message attribute value must be composed to be compliant with Amazon SQS [message attribute data format](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes).
 
 Example of a valid message attribute as a FEEL value:
 
@@ -68,5 +69,4 @@ Example of a valid message attribute as a FEEL value:
 
 ### How do I store AWS IAM Secrets for my SQS Connector?
 
-It is highly recommended to store your secret AWS IAM credentials as Camunda Secrets.
-Please, follow our [Manage Secrets Guide](../../../components/console/manage-clusters/manage-secrets.md) to find out more.
+It is highly recommended storing your secret AWS IAM credentials as Camunda secrets. Follow our documentation on [managing secrets](../../../../components/console/manage-clusters/manage-secrets.md) to learn more.
