@@ -268,23 +268,23 @@ RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authorization/?$ /docs/self-managed/zeebe-deployment/security/client-authorization/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs/self-managed/zeebe-deployment/security/secure-client-communication/ [R=301,L]
 
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview(.*)$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview$2 [R=301,L]
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview(.*)$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview [R=301,L]
 
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/rest(.*)$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/rest$2 [R=301,L]
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/rest$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/rest [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/rest(.*)$ /docs/components/connectors/out-of-the-box-connectors/rest$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/rest$ /docs/components/connectors/out-of-the-box-connectors/rest [R=301,L]
 
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/sendgrid(.*)$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/sendgrid$2 [R=301,L]
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/sendgrid$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/sendgrid [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/sendgrid(.*)$ /docs/components/connectors/out-of-the-box-connectors/sendgrid$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/sendgrid$ /docs/components/connectors/out-of-the-box-connectors/sendgrid [R=301,L]
 
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/slack(.*)$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/slack$2 [R=301,L]
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/slack$ /docs/components/integration-framework/connectors/out-of-the-box-connectors/slack [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/slack(.*)$ /docs/components/connectors/out-of-the-box-connectors/slack$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/slack$ /docs/components/connectors/out-of-the-box-connectors/slack [R=301,L]
 
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors(.*)$ /docs/components/integration-framework/introduction-to-connectors$2 [R=301,L]
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors$ /docs/components/integration-framework/introduction-to-connectors [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors(.*)$ /docs/components/connectors/introduction-to-connectors$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors$ /docs/components/connectors/introduction-to-connectors [R=301,L]
 
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/use-connectors(.*)$ /docs/components/integration-framework/connectors/use-connectors$2 [R=301,L]
-RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/use-connectors$ /docs/components/integration-framework/connectors/use-connectors [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/use-connectors(.*)$ /docs/components/connectors/use-connectors$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/use-connectors$ /docs/components/connectors/use-connectors [R=301,L]
 
 RewriteRule ^docs/self-managed/iam/what-is-iam/(.*)$  /docs/self-managed/identity/what-is-identity/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/deployment/configuration-variables/(.*)$  /docs/self-managed/identity/deployment/configuration-variables/ [R=301,L]

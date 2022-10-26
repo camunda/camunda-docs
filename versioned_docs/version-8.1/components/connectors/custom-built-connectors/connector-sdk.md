@@ -15,7 +15,7 @@ The **Connector SDK** allows you to [develop custom Connectors](#creating-a-cust
 using Java code. You can focus on the logic of the Connector, test it locally, and
 reuse its runtime logic in multiple environments. The SDK achieves this by abstracting from
 Camunda Platform 8 internals that usually come with
-[job workers](../../../concepts/job-workers.md).
+[job workers](../../concepts/job-workers.md).
 
 The SDK provides APIs for common Connector operations, such as:
 
@@ -134,7 +134,7 @@ A Connector template defines the binding to your Connector runtime behavior via 
 
 This type definition `io.camunda:my-connector:1` is the connection configuring which version of your Connector runtime behavior to use.
 In technical terms, this defines the **Type** of jobs created for tasks in your process model that use this template.
-Consult the [job worker](../../../concepts/job-workers.md) guide to learn more.
+Consult the [job worker](../../concepts/job-workers.md) guide to learn more.
 
 Besides the type binding, Connector templates also define the input variables of your Connector as `zeebe:input` objects.
 For example, you can create the input variable `message` of your Connector in the element template as follows:
@@ -618,7 +618,7 @@ than writing custom constraints.
 
 Connectors that require confidential information to connect to external systems need to be able
 to manage those securely. As described in the
-[guide for creating secrets](../../../console/manage-clusters/manage-secrets.md), secrets can be
+[guide for creating secrets](../../console/manage-clusters/manage-secrets.md), secrets can be
 controlled in a secure location and referenced in a Connector's properties using a placeholder
 pattern `secrets.*`. To make this mechanism as robust as possible, secret handling comes with
 the Connector SDK out of the box. That way, all Connectors can use the same standard way of
@@ -836,9 +836,9 @@ The job handler wrapper provides the following benefits:
 - Handles Connector result mapping for **Result Variable** and **Result Expression** as described
   in the [Connector template](#connector-template) section.
 
-Using the wrapper class, you can create a custom [Zeebe client](../../../../apis-clients/working-with-apis-clients.md).
+Using the wrapper class, you can create a custom [Zeebe client](../../../apis-clients/working-with-apis-clients.md).
 For example, you can spin up a custom client with the
-[Zeebe Java client](../../../../apis-clients/java-client/index.md) as follows:
+[Zeebe Java client](../../../apis-clients/java-client/index.md) as follows:
 
 ```java
 import io.camunda.connector.MyConnectorFunction

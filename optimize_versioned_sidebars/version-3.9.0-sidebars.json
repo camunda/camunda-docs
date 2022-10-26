@@ -745,71 +745,54 @@
       ]
     },
     {
-      "Integration Framework": [
+      "Connectors": [
         {
           "type": "link",
           "label": "Introduction",
-          "href": "/docs/components/integration-framework/introduction-to-connectors/"
+          "href": "/docs/8.0/components/connectors/introduction-to-connectors/"
         },
         {
-          "Connectors": [
+          "type": "link",
+          "label": "Use Connectors",
+          "href": "/docs/8.0/components/connectors/use-connectors/"
+        },
+
+        {
+          "Out-of-the-box Connectors": [
             {
               "type": "link",
-              "label": "Use Connectors",
-              "href": "/docs/components/integration-framework/connectors/use-connectors/"
+              "label": "Overview",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/available-connectors-overview/"
             },
             {
-              "Out-of-the-box Connectors": [
-                {
-                  "type": "link",
-                  "label": "Overview",
-                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview/"
-                },
-                {
-                  "type": "link",
-                  "label": "Amazon SQS Connector",
-                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/aws-sqs/"
-                },
-                {
-                  "type": "link",
-                  "label": "AWS Lambda Connector",
-                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/aws-lambda/"
-                },
-                {
-                  "type": "link",
-                  "label": "Google Drive Connector",
-                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/googledrive/"
-                },
-                {
-                  "type": "link",
-                  "label": "REST Connector",
-                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/rest/"
-                },
-                {
-                  "type": "link",
-                  "label": "SendGrid Connector",
-                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/sendgrid/"
-                },
-                {
-                  "type": "link",
-                  "label": "Slack Connector",
-                  "href": "/docs/components/integration-framework/connectors/out-of-the-box-connectors/slack/"
-                }
-              ]
+              "type": "link",
+              "label": "REST Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/rest/"
             },
             {
-              "Custom-built Connectors": [
-                {
-                  "type": "link",
-                  "label": "Connector templates",
-                  "href": "/docs/components/integration-framework/connectors/custom-built-connectors/connector-templates/"
-                },
-                {
-                  "type": "link",
-                  "label": "Connector SDK",
-                  "href": "/docs/components/integration-framework/connectors/custom-built-connectors/connector-sdk/"
-                }
-              ]
+              "type": "link",
+              "label": "SendGrid Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/sendgrid/"
+            },
+            {
+              "type": "link",
+              "label": "Slack Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/slack/"
+            }
+          ]
+        },
+
+        {
+          "Build custom Connectors": [
+            {
+              "type": "link",
+              "label": "Connector templates",
+              "href": "/docs/8.0/components/connectors/custom-built-connectors/connector-templates/"
+            },
+            {
+              "type": "link",
+              "label": "Connector SDK",
+              "href": "/docs/8.0/components/connectors/custom-built-connectors/connector-sdk/"
             }
           ]
         }

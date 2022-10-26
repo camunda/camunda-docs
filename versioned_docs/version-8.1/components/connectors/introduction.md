@@ -31,27 +31,27 @@ A **Connector** is a reusable building block that performs the integration with 
 
 The concept of a Connector consists of two parts:
 
-1. The business logic is implemented by a [Connector function](./connectors/custom-built-connectors/connector-sdk.md#runtime-logic).
-2. The user interface during modeling is provided using a [Connector template](./connectors/custom-built-connectors/connector-templates.md).
+1. The business logic is implemented by a [Connector function](./custom-built-connectors/connector-sdk.md#runtime-logic).
+2. The user interface during modeling is provided using a [Connector template](./custom-built-connectors/connector-templates.md).
 
 You can use different sets of Connectors, depending on the environment you are using:
 
 ### Camunda Platform 8 SaaS
 
-When using Camunda Platform 8 SaaS, the runtime is operated by Camunda and offered in the scope of the product. In this environment, you can use the [out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda. These Connectors allow you to solve everyday use cases in process automation without the need to implement a single line of code.
+When using Camunda Platform 8 SaaS, the runtime is operated by Camunda and offered in the scope of the product. In this environment, you can use the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda. These Connectors allow you to solve everyday use cases in process automation without the need to implement a single line of code.
 
 ### Camunda Platform 8 Self-Managed
 
 In a [Self-Managed](/self-managed/about-self-managed.md) environment, you provide the execution environment for Connectors yourself.
-The Camunda [Connector SDK](./connectors/custom-built-connectors/connector-sdk.md) comes with [runtime environments](./connectors/custom-built-connectors/connector-sdk.md#runtime-environments) that allow you to do this.
+The Camunda [Connector SDK](./custom-built-connectors/connector-sdk.md) comes with [runtime environments](./custom-built-connectors/connector-sdk.md#runtime-environments) that allow you to do this.
 
-You can consume the [pre-packaged runtime environment](./connectors/custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment) to execute any set of Connectors.
-The [installation guide](/self-managed/connectors-deployment/install-and-start.md) details how to install this runtime, and also describes how to integrate the [out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda, including their Connector templates for modeling.
+You can consume the [pre-packaged runtime environment](./custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment) to execute any set of Connectors.
+The [installation guide](/self-managed/connectors-deployment/install-and-start.md) details how to install this runtime, and also describes how to integrate the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda, including their Connector templates for modeling.
 Note that some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 
 ### Next steps to get started with Connectors
 
-- [Use Connectors in your BPMN process](./connectors/use-connectors.md)
-- [Learn about available out-of-the-box Connectors](./connectors/out-of-the-box-connectors/available-connectors-overview.md)
-- [Develop a custom Connector template](./connectors/custom-built-connectors/connector-templates.md)
-- [Develop a custom Connector runtime](./connectors/custom-built-connectors/connector-sdk.md)
+- [Use Connectors in your BPMN process](./use-connectors.md)
+- [Learn about available out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md)
+- [Develop a custom Connector template](./custom-built-connectors/connector-templates.md)
+- [Develop a custom Connector runtime](./custom-built-connectors/connector-sdk.md)
