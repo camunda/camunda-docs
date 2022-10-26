@@ -29,13 +29,13 @@ If any of the above conditions are not met, the import will fail. Optimize will 
 
 ### Importing private entities
 
-To import an entity as a private entity, use the **Import JSON** option from the **Create New** menu on the welcome page. The entity will appear in the entity list once the import is finished and can be interacted with as usual.
+To import an entity as a private entity, use the **Import Report/Dashboard** option from the **Create New** menu on the welcome page. The entity will appear in the entity list once the import is finished and can be interacted with as usual.
 
 ![Importing a private entity](./img/private-import.png)
 
 ### Importing entities into a collection
 
-To add the entity to an existing collection, use the same **Import JSON** option from the **Create New** menu from within the selected collection. This will import the entity into the collection. Any user that has access to this collection can now also access the imported entity.
+To add the entity to an existing collection, use the same **Import Report/Dashboard** option from the **Create New** menu from within the selected collection. This will import the entity into the collection. Any user that has access to this collection can now also access the imported entity.
 
 :::note
 The collection must have all data sources required by the imported entity or the import will fail.
