@@ -34,7 +34,7 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
 3. Set **Sender Email** to `jane-doe@camunda.com` (or the [sender identity](#create-a-sender-identity) you configured above).
 4. Set **Receiver Name** to `Your Name`.
 5. Set **Receiver Email** to `Your email address`.
-6. Choose **Simple** in **Compose Email** section.
+6. Click **Simple** in the **Compose Email** section.
 7. Set **Email Content Subject**.
 8. Leave **Content Type** to **text/plain** (or alternatively to **text/html** if you intend to provide an HTML body to your email).
 9. Provide a text (or HTML) **Body** for your email.
@@ -101,9 +101,9 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
 3. Set **Sender Email** to `jane-doe@camunda.com` (or the [sender identity](#create-a-sender-identity) you configured above).
 4. Set **Receiver Name** to `Your Name`.
 5. Set **Receiver Email** to `Your email address`.
-6. Choose **Using dynamic template** in **Compose Email** section.
-7. Log in to your SendGrid account and navigate to [the Dynamic Template you created](#configure-a-dynamic-template).
-8. Copy the ID of the template and paste it in the **Template ID field**.
+6. Click **Using dynamic template** in the **Compose Email** section.
+7. Log in to your SendGrid account and navigate to [the dynamic template you created](#configure-a-dynamic-template).
+8. Copy the ID of the template and paste it in the **Template ID** field.
 
 ![get sendgrid template id](../img/connectors-sendgrid-email-template-id.png)
 
