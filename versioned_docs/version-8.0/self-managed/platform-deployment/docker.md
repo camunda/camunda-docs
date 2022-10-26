@@ -138,7 +138,7 @@ For Optimize to import Zeebe data, Optimize must also be configured to be aware 
 
 ### Connectors
 
-Use the provided [Docker Compose](#docker-compose) files to execute all [out-of-the-box Connectors](/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md) automatically.
+Use the provided [Docker Compose](#docker-compose) files to execute all [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) automatically.
 This uses the [Connectors Bundle](https://hub.docker.com/r/camunda/connectors-bundle) Docker image.
 
 Note that some out-of-the-box Connectors are licensed under the

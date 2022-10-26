@@ -207,26 +207,22 @@ module.exports = {
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
       ],
-      "Integration Framework": [
-        "components/integration-framework/introduction-to-connectors",
+      Connectors: [
+        "components/connectors/introduction-to-connectors",
+        "components/connectors/use-connectors",
         {
-          Connectors: [
-            "components/integration-framework/connectors/use-connectors",
-            {
-              "Out-of-the-box Connectors": [
-                "components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview",
-                "components/integration-framework/connectors/out-of-the-box-connectors/aws-sqs",
-                "components/integration-framework/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/integration-framework/connectors/out-of-the-box-connectors/googledrive",
-                "components/integration-framework/connectors/out-of-the-box-connectors/rest",
-                "components/integration-framework/connectors/out-of-the-box-connectors/sendgrid",
-                "components/integration-framework/connectors/out-of-the-box-connectors/slack",
-              ],
-              "Custom-built Connectors": [
-                "components/integration-framework/connectors/custom-built-connectors/connector-templates",
-                "components/integration-framework/connectors/custom-built-connectors/connector-sdk",
-              ],
-            },
+          "Out-of-the-box Connectors": [
+            "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+            "components/connectors/out-of-the-box-connectors/aws-sqs",
+            "components/connectors/out-of-the-box-connectors/aws-lambda",
+            "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/rest",
+            "components/connectors/out-of-the-box-connectors/sendgrid",
+            "components/connectors/out-of-the-box-connectors/slack",
+          ],
+          "Build custom Connectors": [
+            "components/connectors/custom-built-connectors/connector-templates",
+            "components/connectors/custom-built-connectors/connector-sdk",
           ],
         },
       ],
