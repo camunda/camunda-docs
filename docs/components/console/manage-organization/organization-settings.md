@@ -16,6 +16,10 @@ The overview provides a summary of the organization, including:
 - Pricing plan
 - Owner of the organization
 
+#### Rename Organization
+
+If you are the owner of the organization, you can change the name of your organization in the Overview Tab.
+
 ## Next steps
 
 - [Manage users of your organization](./manage-users.md)
