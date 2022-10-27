@@ -55,5 +55,5 @@ To deploy your process, take the following steps:
 
 ## Additional resources and next steps
 
-- Dive deeper into [connectors](/components/integration-framework/introduction.md#connectors).
+- Dive deeper into [connectors](/components/connectors/introduction.md).
 - Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8](/components/concepts/what-is-camunda-platform-8.md) or watching our [Platform Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
