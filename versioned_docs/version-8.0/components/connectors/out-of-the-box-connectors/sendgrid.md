@@ -34,9 +34,10 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
 3. Set **Sender Email** to `jane-doe@camunda.com` (or the [sender identity](#create-a-sender-identity) you configured above).
 4. Set **Receiver Name** to `Your Name`.
 5. Set **Receiver Email** to `Your email address`.
-6. Set **Email Content Subject**.
-7. Leave **Content Type** to **text/plain** (or alternatively to **text/html** if you intend to provide an HTML body to your email).
-8. Provide a text (or HTML) **Body** for your email.
+6. Click **Simple** in the **Compose Email** section.
+7. Set **Email Content Subject**.
+8. Leave **Content Type** to **text/plain** (or alternatively to **text/html** if you intend to provide an HTML body to your email).
+9. Provide a text (or HTML) **Body** for your email.
 
 ![sendgrid email connector complete properties](../img/connectors-sendgrid-email-complete-properties.png)
 
@@ -100,12 +101,13 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
 3. Set **Sender Email** to `jane-doe@camunda.com` (or the [sender identity](#create-a-sender-identity) you configured above).
 4. Set **Receiver Name** to `Your Name`.
 5. Set **Receiver Email** to `Your email address`.
-6. Log in to your SendGrid account and navigate to [the Dynamic Template you created](#configure-a-dynamic-template).
-7. Copy the id of the template and paste it in the **Template ID field**.
+6. Click **Using dynamic template** in the **Compose Email** section.
+7. Log in to your SendGrid account and navigate to [the dynamic template you created](#configure-a-dynamic-template).
+8. Copy the ID of the template and paste it in the **Template ID** field.
 
 ![get sendgrid template id](../img/connectors-sendgrid-email-template-id.png)
 
-8. Provide the test data in the **Template Data** field as a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md):
+9. Provide the test data in the **Template Data** field as a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md):
 
 ```text
 = {
