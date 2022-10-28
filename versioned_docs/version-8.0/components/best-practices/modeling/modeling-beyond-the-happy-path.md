@@ -6,6 +6,7 @@ tags:
   - BPMN Message Event
   - BPMN Timer Event
   - Happy Path
+description: "Model the happy path to the desired end result before collecting problems and exceptions, prioritizing them, and introducing them incrementally."
 ---
 
 First, model the happy path to the desired end result before collecting problems and exceptions, prioritizing them, and introducing them incrementally. Secondly, focus on one selected issue at a time, and choose the right techniques for modeling beyond the happy path.

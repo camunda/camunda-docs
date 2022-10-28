@@ -2,6 +2,7 @@
 title: "Performance tuning Camunda 7"
 tags:
   - Performance
+description: "Understand influencing aspects on performance and apply tuning strategies. For example, by configuring the job executor or applying external tasks."
 ---
 
 Understand influencing aspects on performance and apply tuning strategies appropriately, for example, by configuring the job executor or applying external tasks. When facing concrete challenges, look at scenarios like the proper handling of huge batches.

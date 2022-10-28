@@ -4,6 +4,7 @@ tags:
   - BPMN Data Object
   - Variable
   - Serialization
+description: "When using Camunda, you have access to a dynamic map of process variables, which lets you associate data to every single process instance."
 ---
 
 When using Camunda, you have access to a dynamic map of process variables, which lets you associate data to every single process instance (and local scopes in case of user tasks or parallel flows). Ensure you use these mechanisms in a lightweight and meaningful manner, storing just the relevant data in the process instance.

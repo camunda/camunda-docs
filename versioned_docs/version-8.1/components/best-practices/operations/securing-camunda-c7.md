@@ -5,6 +5,7 @@ tags:
   - SSO
   - Authentication
   - Authorization
+description: "Disallow unauthorized access by securing the Camunda Platform 7.x before going live with your process applications."
 ---
 
 Disallow unauthorized access by securing the Camunda Platform 7.x before going live with your process applications. Understand Camunda user management essentials, enforce authorization for the REST API, define access rights for Camunda specific resources such as process definitions, and consider integrating with your Single-Sign-On (SSO).

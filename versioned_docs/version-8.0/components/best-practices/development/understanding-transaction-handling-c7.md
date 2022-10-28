@@ -5,6 +5,7 @@ tags:
   - ACID Transaction
   - Incident
   - Save Point
+description: "Try to carefully study and fully understand the concepts of wait states (save points) acting as transaction boundaries for technical (ACID) transactions."
 ---
 
 :::caution Camunda Platform 7 only

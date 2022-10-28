@@ -2,6 +2,7 @@
 title: Creating readable process models
 tags:
   - BPMN
+description: "We create visual process models to better understand, discuss, and remember processes. Hence, it is crucial that models are easy to read and understand."
 ---
 
 We create visual process models to better understand, discuss, and remember processes. Hence, it is crucial that models are easy to read and understand. The single most important thing is to to use well-chosen labels.

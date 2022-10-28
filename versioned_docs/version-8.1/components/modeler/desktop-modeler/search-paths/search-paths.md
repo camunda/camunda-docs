@@ -1,7 +1,7 @@
 ---
 id: search-paths
 title: Search paths
-description: "Features like element templates and plugins allow you to add your own resources to Desktop Modeler. For these resources to be found, they have to be in one of two directories depending on how local or global you want them to be."
+description: "Features like element templates and plugins allow you to add your own resources to Desktop Modeler."
 ---
 
 Features like element templates and plugins allow you to add your own resources to Desktop Modeler. For these resources to be found, they have to be in one of two directories depending on how local or global you want them to be.
