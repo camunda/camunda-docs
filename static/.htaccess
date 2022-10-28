@@ -11,6 +11,9 @@ Options -Indexes -MultiViews
 # Consolidated redundant element-template pages - v8.0, current, and vNext.
 RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templates/?$ /docs$1/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 
+# Added Self-Managed Modeler redirect
+RewriteRule ^docs/next/self-managed/web-modeler/installation/(.*)$ /docs/next/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
+
 # Added for v8.1
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/deployment/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deploy/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/ingress-setup/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/$1 [R=301,L]
