@@ -15,9 +15,9 @@ Camunda Platform 8 Self-Managed has multiple web applications and gRPC services 
 
 In this architecture, Camunda Platform 8 Self-Managed can be accessed as follows:
 
-- Web applications: https://camunda.example.com/[identity|operate|optimize|tasklist]
-- [Keycloak authentication](https://camunda.example.com/auth)
-- [Zeebe gateway](grpc://zeebe.camunda.example.com)
+- Web applications: `https://camunda.example.com/[identity|operate|optimize|tasklist]`
+- Keycloak authentication: `https://camunda.example.com/auth`
+- Zeebe gateway: `grpc://zeebe.camunda.example.com`
 
 It's also possible to set up an Ingress for each component. For more details, visit our [combined and separated Ingress set up guide](../platform-deployment/helm-kubernetes/guides/ingress-setup.md).
 
