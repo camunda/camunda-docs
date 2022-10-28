@@ -633,6 +633,7 @@ module.exports = {
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
+      Architecture: ["self-managed/platform-architecture/overview"],
       Installation: [
         "self-managed/platform-deployment/overview",
         {
