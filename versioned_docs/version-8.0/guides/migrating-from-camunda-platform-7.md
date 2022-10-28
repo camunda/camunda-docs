@@ -52,7 +52,7 @@ Most expressions can be converted (see [this community extension](https://github
 
 #### Different Connector infrastructure
 
-Camunda Platform 7 provides several [Connectors](https://docs.camunda.org/manual/latest/reference/connect/). Camunda Platform 8 now also offers multiple [Connectors](../components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md) as well.
+Camunda Platform 7 provides several [Connectors](https://docs.camunda.org/manual/latest/reference/connect/). Camunda Platform 8 now also offers multiple [Connectors](../components/connectors/out-of-the-box-connectors/available-connectors-overview.md) as well.
 
 To migrate existing Connectors, create a small bridging layer to invoke these Connectors via a custom [job workers](/components/concepts/job-workers.md).
 

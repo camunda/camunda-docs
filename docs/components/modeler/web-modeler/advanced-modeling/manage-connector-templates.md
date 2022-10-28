@@ -8,7 +8,7 @@ export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg x
 
 <span class="badge badge--cloud">Camunda Platform 8 only</span>
 
-You can create and manage [Connector templates](/components/integration-framework/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
+You can create and manage [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
 
 ## Create Connector templates
 
@@ -72,7 +72,7 @@ If there are problems at the root level of the JSON (such as a missing or misspe
 <!--
 ## Reusing existing runtimes
 
-Not only can you create new Connector templates to bind to a job worker topic or a custom Connector function you've created using the Connector SDK, but you can also reuse [existing connector runtimes](/components/integration-framework/connectors/out-of-the-box-connectors/available-connectors-overview.md). For instance, if you add the following property and bind it to `zeebe:taskDefinition:type`, you can reuse the HTTP JSON runtime and write a prefilled Connector template to call an API easily.
+Not only can you create new Connector templates to bind to a job worker topic or a custom Connector function you've created using the Connector SDK, but you can also reuse [existing connector runtimes](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). For instance, if you add the following property and bind it to `zeebe:taskDefinition:type`, you can reuse the HTTP JSON runtime and write a prefilled Connector template to call an API easily.
 
 ```json
 {
