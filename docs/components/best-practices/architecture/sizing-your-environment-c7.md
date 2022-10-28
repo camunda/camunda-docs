@@ -6,6 +6,7 @@ tags:
   - Performance
   - Hardware
   - Sizing
+description: "Size your environment for Camunda Platform 7, including sufficient hardware and database space. This best practice targets Camunda Platform 7.x only."
 ---
 
 Size your environment for Camunda Platform 7 appropriately, including sufficient hardware and database space.

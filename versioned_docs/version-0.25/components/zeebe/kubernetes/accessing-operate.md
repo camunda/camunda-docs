@@ -1,6 +1,7 @@
 ---
 id: accessing-operate
 title: "Accessing Operate from outside the cluster"
+description: "The Zeebe Full Helm Charts install an Ingress Controller. Deployed in a cloud provider, this provides access services configured to have Ingress Routes."
 ---
 
 The **Zeebe Full Helm Charts** install an Ingress Controller. If this is deployed in a cloud provider (GKE, EKS, AKS, etc.), it should provision a `LoadBalancer` which will expose an External IP that can be used as the main entry point to access all the services/applications that are configured to have Ingress Routes. 

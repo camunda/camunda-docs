@@ -1,7 +1,7 @@
 ---
 id: creating-reports
 title: Creating reports
-description: "Reports offer the ability to view your data from different angles, and thus capture all aspects that influence your processes, show new trends, or depict your current business state."
+description: "View your data from different angles and capture all aspects that influence your processes, show new trends, or depict your current business state."
 ---
 
 ## Overview

@@ -1,5 +1,6 @@
 ---
 title: "Service integration patterns with BPMN"
+description: "When integrating systems and services, you can choose between various modeling possibilities in BPMN."
 ---
 
 When integrating systems and services, you can choose between various modeling possibilities in BPMN. This practice will give you an overview and advice on how to decide between alternatives.
