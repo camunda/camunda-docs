@@ -24,6 +24,8 @@ Camunda Platform 8 Helm chart doesn't manage or deploy Ingress controllers, it o
 
 In this setup, a single Ingress/domain is used to access Camunda Platform 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
+![Camunda Platform 8 Self-Managed Architecture Diagram - Combined Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+
 ```yaml
 # Chart values for the Camunda Platform 8 Helm chart in combined Ingress setup.
 
@@ -84,6 +86,8 @@ Once deployed, you can access the Camunda Platform 8 components on:
 
 In this setup, each Camunda Platform 8 component has its own Ingress/domain. There is no need to set the context since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
 
+![Camunda Platform 8 Self-Managed Architecture Diagram - Separated Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
+
 ```yaml
 # Chart values for the Camunda Platform 8 Helm chart in combined Ingress setup.
 
@@ -116,11 +120,6 @@ identity:
       enabled: true
       ingressClassName: nginx
       hostname: "keycloak.camunda.example.com"
-    extraEnvVars:
-      - name: KEYCLOAK_PROXY_ADDRESS_FORWARDING
-        value: "true"
-      - name: KEYCLOAK_FRONTEND_URL
-        value: "https://keycloak.camunda.example.com"
 
 operate:
   ingress:
