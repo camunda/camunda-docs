@@ -259,6 +259,15 @@ module.exports = {
           ],
         },
       ],
+      Tasklist: [
+        "components/tasklist/introduction-to-tasklist",
+        {
+          "User guide": [
+            "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/updating-tasklist-cloud",
+          ],
+        },
+      ],
       Optimize: [
         optimizeLink("What is Optimize?", "components/what-is-optimize/"),
         {
@@ -419,15 +428,6 @@ module.exports = {
                 ),
               ],
             },
-          ],
-        },
-      ],
-      Tasklist: [
-        "components/tasklist/introduction-to-tasklist",
-        {
-          "User guide": [
-            "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
       ],
