@@ -1,9 +1,10 @@
 ---
 id: what-is-camunda-cloud
 title: "What is Camunda Cloud?"
+description: "Camunda Cloud is a SaaS offering for microservice orchestration. Camunda Cloud ensures that flows are always carried out fully, retrying steps in case of failure."
 ---
 
-Camunda Cloud is a software-as-a-service (SaaS) offering for microservices orchestration. Camunda Cloud ensures that, once started, flows are always carried out fully, retrying steps in case of failures. Along the way, Camunda Cloud maintains a complete audit log so that the progress of flows can be traced.
+Camunda Cloud is a software-as-a-service (SaaS) offering for microservice orchestration. Camunda Cloud ensures that, once started, flows are always carried out fully, retrying steps in case of failures. Along the way, Camunda Cloud maintains a complete audit log so that the progress of flows can be traced.
 
 Camunda Cloud is a turn-key solution that will accelerate your project implementation. It is particularly suited for integrating heterogeneous systems and orchestrating dispersed services implemented in different programming languages.
 

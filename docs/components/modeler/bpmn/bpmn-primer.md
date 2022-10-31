@@ -1,11 +1,12 @@
 ---
 id: bpmn-primer
 title: "BPMN primer"
+description: "Business Process Model and Notation 2.0 (BPMN) is an industry standard for process modeling and execution. Let's examine a few examples of the XML document."
 ---
 
 import ReactPlayer from 'react-player'
 
-Business Process Model And Notation 2.0 (BPMN) is an industry standard for process modeling and execution. A BPMN process is an XML document that has a visual representation. For example, here is a BPMN process:
+Business Process Model and Notation 2.0 (BPMN) is an industry standard for process modeling and execution. A BPMN process is an XML document that has a visual representation. For example, here is a BPMN process:
 
 ![process](assets/process.png)
 

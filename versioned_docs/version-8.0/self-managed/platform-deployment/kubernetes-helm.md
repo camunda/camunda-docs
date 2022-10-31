@@ -1,9 +1,10 @@
 ---
 id: kubernetes-helm
 title: "Camunda Helm charts"
+description: "Camunda provides continuously improved Helm charts that are not cloud provider-specific, so you can choose your Kubernetes provider."
 ---
 
-Camunda provides contionously improved Helm charts that are available here: [Camunda Platform Helm Charts](https://github.com/camunda/camunda-platform-helm). Those Helm charts are not cloud provider-specific, so you can choose your Kubernetes provider.
+Camunda provides continuously improved Helm charts that are available here: [Camunda Platform Helm Charts](https://github.com/camunda/camunda-platform-helm). Those Helm charts are not cloud provider-specific, so you can choose your Kubernetes provider.
 
 We encourage [reporting issues](https://github.com/camunda/camunda-platform-helm/issues) if you find them.
 

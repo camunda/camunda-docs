@@ -1,6 +1,7 @@
 ---
 id: feel-built-in-functions-string
 title: String Functions
+description: "Take a closer look at substring, string length, upper case, lower case, substring before, substring after, and more."
 ---
 
 ## substring()

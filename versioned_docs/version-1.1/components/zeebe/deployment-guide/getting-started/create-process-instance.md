@@ -1,9 +1,10 @@
 ---
 id: create-process-instance
 title: "Create and complete process instances"
+description: "We're going to create two process instances for this tutorial to see our XOR gateway in action."
 ---
 
-We're going to create 2 process instances for this tutorial: one with an order value less than $100 and one with an order value greater than or equal to $100 so that we can see our XOR gateway in action.
+We're going to create two process instances for this tutorial: one with an order value less than $100 and one with an order value greater than or equal to $100 so that we can see our XOR gateway in action.
 
 Go back to the Terminal window where you deployed the process model and execute the following command.
 

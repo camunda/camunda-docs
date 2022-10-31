@@ -7,6 +7,7 @@ tags:
   - Exception
   - Java Delegate
   - JUnit
+description: "Test your executable BPMN processes as they are software. If possible, do automated unit tests with a fast in-memory workflow engine."
 ---
 
 Test your executable BPMN processes as they are software. If possible, do automated unit tests with a fast in-memory workflow engine. Before releasing, verify with integration tests close to your real-life environment, which might include human-driven, exploratory integration tests.

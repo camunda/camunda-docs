@@ -1,8 +1,9 @@
 ---
 title: Overview
+description: "These practices are condensed experience using BPMN and DMN on the Camunda toolstack, and are a mix of conceptual and practical implementation information."
 ---
 
-The Camunda best practices are our condensed experience of using BPMN and DMN on the Camunda toolstack, and collected by consulting engagement with our customers, feedback from the community and various other occasions. Best Practices are a mix of conceptual and practical implementation information.
+The Camunda Best Practices are our condensed experience of using BPMN and DMN on the Camunda toolstack, and collected by consulting engagement with our customers, feedback from the community and various other occasions. Best Practices are a mix of conceptual and practical implementation information.
 
 Best Practices represent the current state of our practical project experience as far as it is generalizable. They are neither "final" (in the sense that we ourselves will hopefully continue to learn!) nor are they necessarily the best approach for your own situation.
 

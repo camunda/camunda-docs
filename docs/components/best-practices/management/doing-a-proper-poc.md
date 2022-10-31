@@ -2,6 +2,7 @@
 title: Doing a proper POC
 tags:
   - POC
+description: "When evaluating your process automation approach, a proof of concept helps check if the process automation method and Camunda technology suit your needs."
 ---
 
 When evaluating your process automation approach, a **proof of concept (POC)** is often a good step to check if the process automation methodology, the standards of BPMN and DMN, as well as the Camunda technology suit your needs. It is vital for a POC to make up your mind about your goals, to select a suitable process, and to prepare it and carry it out properly.

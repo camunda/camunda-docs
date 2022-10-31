@@ -8,6 +8,7 @@ tags:
   - KPI
   - SQL
   - MIS (Management Information System)
+description: "The Camunda engine automatically collects audit information about historical process or instances for users to leverage and generate relevant reports."
 ---
 
 The Camunda engine automatically collects audit information about historical process or decision instances. Leverage this data by generating and displaying business relevant reports. Add business relevant phases and milestones to your process models serving as a basis for key performance indicators (KPIs).

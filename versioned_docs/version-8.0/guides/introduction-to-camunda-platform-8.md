@@ -3,6 +3,7 @@ id: introduction-to-camunda
 title: Introduction to Camunda Platform 8
 sidebar_label: Introduction to Camunda Platform 8
 slug: /guides/
+description: "Step through an introduction to Camunda Platform 8, creating an account, modeling your first process, getting started with microservice orchestration, and more."
 ---
 
 [Camunda Platform 8](https://camunda.io) delivers scalable, on-demand process automation as-a-service. Camunda Platform 8 is combined with powerful execution engines for BPMN processes and DMN decisions, and paired with tools for collaborative modeling, operations, and analytics.

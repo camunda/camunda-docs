@@ -8,6 +8,7 @@ tags:
   - BPMN Error Event
   - Incident
   - Save Point
+description: "Take a closer look at understanding workers, handling exceptions on a technical level, leveraging retries, using incidents, and more."
 ---
 
 ## Understanding workers

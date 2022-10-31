@@ -1,6 +1,7 @@
 ---
 id: manage-client-connections
 title: Manage Client Connections
+description: "To interact with Zeebe in the cloud from the outside, every client application must authenticate itself using an OAuth Flow."
 ---
 
 To be able to interact with Zeebe in the cloud from the outside, every client application must authenticate itself. An OAuth Flow is used for authentication, which is shown below:

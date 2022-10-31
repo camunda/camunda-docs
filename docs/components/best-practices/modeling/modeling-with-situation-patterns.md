@@ -2,6 +2,7 @@
 title: Modeling with situation patterns
 tags:
   - BPMN
+description: "When modeling, you will sometimes realize some situations share common characteristics. Document such patterns and find a satisfying solution for modeling them."
 ---
 
 When modeling, you will sometimes realize that some situations share common characteristics. To save work for yourself and spread such knowledge within your organization, collect and document such patterns as soon as you understand their nature and have found a satisfying solution for modeling them. For a start, we collected some typical patterns for you, which we see quite often in our modeling practice. You do not need to reinvent the wheel over and over again.

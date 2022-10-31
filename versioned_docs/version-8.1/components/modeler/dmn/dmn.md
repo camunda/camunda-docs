@@ -1,6 +1,7 @@
 ---
 id: desktop-modeler-dmn
 title: DMN in Modeler
+description: "Camunda Desktop and Web Modeler both offer the same Modeling experience for DMN 1.3 models: Modeling starts in the Decision Requirements Diagram (DRD) view."
 ---
 
 ## Start modeling

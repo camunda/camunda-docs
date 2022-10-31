@@ -3,6 +3,7 @@ id: workflow-patterns
 title: Workflow patterns
 sidebar_label: Workflow patterns
 slug: /components/concepts/workflow-patterns/
+description: "For end-to-end process orchestration, you must accurately express the things happening in your business processes, requiring workflow patterns."
 ---
 
 For true end-to-end process orchestration, you must be able to accurately express all the things happening in your business processes which will require simple and advanced workflow patterns. This page describes typical patterns and how you can implement them using Camunda and BPMN.
