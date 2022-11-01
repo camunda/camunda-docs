@@ -721,6 +721,7 @@ module.exports = {
         {
           "User guide": [
             "components/userguide/collections-dashboards-reports",
+            "components/userguide/user-permissions",
             "components/userguide/data-sources",
 
             {

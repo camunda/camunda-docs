@@ -15,3 +15,7 @@ To create a new dashboard, click the **Create New** button on the homepage or co
 Creating a dashboard from a template also creates new reports which are saved as soon as the dashboard is saved.
 
 ![create new dashboard](./img/dashboardTemplate.png)
+
+:::note
+Optimize offers collaborative capabilities, too. Click the **Share** tab to share a created dashboard. Toggle to **Enable sharing**, and copy or embed the provided link. Colleagues without access to Optimize can still view your report with the shared link. Learn more about [user permissions](./user-permissions.md).
+:::

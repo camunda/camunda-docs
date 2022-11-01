@@ -267,6 +267,10 @@ module.exports = {
               "Collections, dashboards, and reports",
               "components/userguide/collections-dashboards-reports/"
             ),
+            optimizeLink(
+              "User permissions",
+              "components/userguide/user-permissions/"
+            ),
             optimizeLink("Data sources", "components/userguide/data-sources/"),
             {
               Dashboards: [
