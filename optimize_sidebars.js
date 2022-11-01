@@ -1648,7 +1648,10 @@ module.exports = {
 
     {
       "Web Modeler (Beta)": [
-        docsLink("Installation", "self-managed/web-modeler/installation/"),
+        docsLink(
+          "Installation",
+          "self-managed/modeler/web-modeler/installation/"
+        ),
       ],
     },
 
