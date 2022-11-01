@@ -28,7 +28,7 @@ By default, the following charts will be installed as part of Camunda Platform 8
 We do not provide a Helm chart for Web Modeler and Connectors in Self-Managed yet.
 :::
 
-![Charts](../assets/c8sm-helm-charts.png)
+![Camunda Platform 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 When installing the [camunda-platform](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform) Helm chart, all the components in this picture are installed.
 
