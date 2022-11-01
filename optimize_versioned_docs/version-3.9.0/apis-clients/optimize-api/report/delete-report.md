@@ -4,8 +4,6 @@ title: "Delete reports"
 description: "The REST API to delete reports from Optimize."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
 The report deletion API allows you to delete reports by ID from Optimize.
 
 :::note Heads up!

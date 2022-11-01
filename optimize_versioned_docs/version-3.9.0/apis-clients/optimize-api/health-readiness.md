@@ -4,8 +4,6 @@ title: "Health readiness"
 description: "The REST API to check the readiness of Optimize."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
 The purpose of Health-Readiness REST API is to return information indicating whether Optimize is ready to be used.
 
 ## Method & HTTP target resource
