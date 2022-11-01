@@ -715,6 +715,28 @@ module.exports = {
     },
 
     {
+      Tasklist: [
+        docsLink(
+          "Introduction",
+          "components/tasklist/introduction-to-tasklist/"
+        ),
+
+        {
+          "User guide": [
+            docsLink(
+              "Overview and example use case",
+              "components/tasklist/userguide/using-tasklist/"
+            ),
+            docsLink(
+              "Updating Tasklist",
+              "components/tasklist/userguide/updating-tasklist-cloud/"
+            ),
+          ],
+        },
+      ],
+    },
+
+    {
       Optimize: [
         "components/what-is-optimize",
 
@@ -789,28 +811,6 @@ module.exports = {
                 "components/userguide/additional-features/process-variants-comparison",
               ],
             },
-          ],
-        },
-      ],
-    },
-
-    {
-      Tasklist: [
-        docsLink(
-          "Introduction",
-          "components/tasklist/introduction-to-tasklist/"
-        ),
-
-        {
-          "User guide": [
-            docsLink(
-              "Overview and example use case",
-              "components/tasklist/userguide/using-tasklist/"
-            ),
-            docsLink(
-              "Updating Tasklist",
-              "components/tasklist/userguide/updating-tasklist-cloud/"
-            ),
           ],
         },
       ],
