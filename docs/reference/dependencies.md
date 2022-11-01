@@ -909,7 +909,7 @@ All of these libraries are required for core functionality.
 - [@types/unist@2.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) (MIT)
 - [bail@2.0.1](https://wooorm.com) (MIT)
 - [bpmn-js-disable-collapsed-subprocess@0.1.5](https://github.com/barmac) (MIT)
-- [bpmn-js@9.4.0](https://github.com/nikku) (MIT-)
+- [bpmn-js@9.4.0](https://github.com/nikku) (MIT)
 - [bpmn-moddle@7.1.3](https://github.com/nikku) (MIT)
 - [character-entities-legacy@2.0.0](https://wooorm.com) (MIT)
 - [character-entities@2.0.0](https://wooorm.com) (MIT)
