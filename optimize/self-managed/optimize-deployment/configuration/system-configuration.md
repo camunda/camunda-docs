@@ -148,6 +148,7 @@ if one node fails, Optimize is still able to talk to the cluster.
 | es.connection.proxy.host                      | null          | The proxy host to use, must be set if es.connection.proxy.enabled = true.                                                                                                 |
 | es.connection.proxy.port                      | null          | The proxy port to use, must be set if es.connection.proxy.enabled = true.                                                                                                 |
 | es.connection.proxy.sslEnabled                | false         | Whether this proxy is using a secured connection (HTTPS).                                                                                                                 |
+| es.connection.skipHostnameVerification        | false         | Determines whether the hostname verification should be skipped.                                                                                                           |
 
 #### Index settings
 

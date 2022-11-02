@@ -286,8 +286,11 @@ es:
       port: null
       # whether this proxy is using a secured connection
       sslEnabled: false
+    # Determines whether the hostname verification should be skipped
+    skipHostnameVerification: false
+  # Configuration relating to ES backup
   backup:
-    # the name of the snapshot repository to store backups
+    # The repository name in which the backups should be stored
     repositoryName: ""
 
   # Elasticsearch security settings
