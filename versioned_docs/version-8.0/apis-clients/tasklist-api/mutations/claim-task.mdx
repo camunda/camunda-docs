@@ -5,6 +5,14 @@ title: claimTask
 
 Claim a task with taskId to currently logged in user. Returns the task.
 
+:::note
+
+Be aware a JWT token is intended to be used for M2M communication and is therefore issued for the relevant application, not for the user.
+
+Additionally, when using a JWT token, the assignee paramater is NOT optional when called directly from the API. The system will not be able to detect the assignee from the JWT token, therefore the assignee parameter needs to be explicitly passed in this instance.
+
+:::
+
 ```graphql
 claimTask(
   taskId: String!
