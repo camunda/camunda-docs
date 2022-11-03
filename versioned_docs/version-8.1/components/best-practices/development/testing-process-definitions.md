@@ -445,7 +445,7 @@ And this _Java delegate_ itself calls a business method:
 public class TweetPublicationDelegate implements JavaDelegate {
 
   private final TweetPublicationService tweetPublicationService;
-  
+
   @Inject
   public TweetPublicationDelegate(TweetPublicationService tweetPublicationService) {
     this.tweetPublicationService = tweetPublicationService;
