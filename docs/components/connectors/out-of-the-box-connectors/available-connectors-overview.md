@@ -14,3 +14,5 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 - [Slack Connector](slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
 In addition to this section on Connectors, we recommend reviewing [Connector secrets](../../console/manage-clusters/manage-secrets.md).
+
+If you want to build custom Connectors using the **Integration Framework**, head over to our [Connector SDK guide](../custom-built-connectors/connector-sdk.md).
