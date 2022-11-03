@@ -415,7 +415,7 @@ class TwitterTest {
   @Mock // Mockito mock instantiated by MockitoExtension <5>
   private TweetPublicationService tweetPublicationService;
 
-  rBeforeEach
+  @BeforeEach
   void setup() {
 	// ...
     TweetPublicationDelegate tweetPublicationDelegate = new TweetPublicationDelegate(tweetPublicationService);
