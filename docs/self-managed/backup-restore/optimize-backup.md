@@ -81,11 +81,12 @@ GET actuator/backup/{backupId}
 
 ### Response
 
-| Code             | Description                                                                                                                                        |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 200 OK           | Backup state could be determined and is returned in the response body (see example below)                                                          |
-| 404 Not Found    | Backup with given id does not exist.                                                                                                               |
-| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot state retrieval. Refer to the returned error message for more details. |
+| Code             | Description                                                                                                                                                              |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 200 OK           | Backup state could be determined and is returned in the response body (see example below)                                                                                |
+| 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
+| 404 Not Found    | Backup with given id does not exist.                                                                                                                                     |
+| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot state retrieval. Refer to the returned error message for more details.                       |
 
 ### Example request
 
@@ -108,6 +109,29 @@ Possible states of the backup:
 - `FAILED`: Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch get snapshot status API](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/get-snapshot-status-api.html) for each of the snapshots included in the given backup.
 - `INCOMPATIBLE`: The backup is incompatible with the current Elasticsearch version.
 - `INCOMPLETE`: The backup is incomplete (this could occur when the backup process was interrupted or individual snapshots were deleted).
+
+## Delete backup API
+
+Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.  
+An existing backup can be deleted using the below API which deletes all Optimize snapshots associated with the supplied backupID.
+
+```
+DELETE actuator/backup/{backupId}
+```
+
+### Response
+
+| Code             | Description                                                                                                                                                              |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 204 No Content   | The delete request for the associated snapshots was submitted to Elasticsearch successfully.                                                                             |
+| 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
+| 500 Server Error | An error occurred, for example the snapshot repository does not exist. Refer to the returned error message for details.                                                  |
+
+### Example request
+
+```
+curl ---request DELETE 'http://localhost:8092/actuator/backup/backup1'
+```
 
 ## Restore backup
 
