@@ -848,6 +848,31 @@
     },
 
     {
+      "Tasklist": [
+        {
+          "type": "link",
+          "label": "Introduction",
+          "href": "/docs/8.0/components/tasklist/introduction-to-tasklist/"
+        },
+
+        {
+          "User guide": [
+            {
+              "type": "link",
+              "label": "Overview and example use case",
+              "href": "/docs/8.0/components/tasklist/userguide/using-tasklist/"
+            },
+            {
+              "type": "link",
+              "label": "Updating Tasklist",
+              "href": "/docs/8.0/components/tasklist/userguide/updating-tasklist-cloud/"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
       "Optimize": [
         "components/what-is-optimize",
         {
@@ -913,31 +938,6 @@
                 "components/userguide/additional-features/footer",
                 "components/userguide/additional-features/variable-labeling"
               ]
-            }
-          ]
-        }
-      ]
-    },
-
-    {
-      "Tasklist": [
-        {
-          "type": "link",
-          "label": "Introduction",
-          "href": "/docs/8.0/components/tasklist/introduction-to-tasklist/"
-        },
-
-        {
-          "User guide": [
-            {
-              "type": "link",
-              "label": "Overview and example use case",
-              "href": "/docs/8.0/components/tasklist/userguide/using-tasklist/"
-            },
-            {
-              "type": "link",
-              "label": "Updating Tasklist",
-              "href": "/docs/8.0/components/tasklist/userguide/updating-tasklist-cloud/"
             }
           ]
         }

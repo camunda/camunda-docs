@@ -324,6 +324,15 @@
           ]
         }
       ],
+      "Tasklist": [
+        "components/tasklist/introduction-to-tasklist",
+        {
+          "User guide": [
+            "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/updating-tasklist-cloud"
+          ]
+        }
+      ],
       "Optimize": [
         {
           "type": "link",
@@ -535,15 +544,6 @@
                 }
               ]
             }
-          ]
-        }
-      ],
-      "Tasklist": [
-        "components/tasklist/introduction-to-tasklist",
-        {
-          "User guide": [
-            "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/updating-tasklist-cloud"
           ]
         }
       ],
