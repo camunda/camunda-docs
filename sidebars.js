@@ -276,6 +276,10 @@ module.exports = {
               "Collections, dashboards, and reports",
               "components/userguide/collections-dashboards-reports/"
             ),
+            optimizeLink(
+              "User permissions",
+              "components/userguide/user-permissions/"
+            ),
             optimizeLink("Data sources", "components/userguide/data-sources/"),
             {
               Dashboards: [
@@ -633,6 +637,7 @@ module.exports = {
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
+      Architecture: ["self-managed/platform-architecture/overview"],
       Installation: [
         "self-managed/platform-deployment/overview",
         {
@@ -996,7 +1001,18 @@ module.exports = {
       "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
     },
     {
-      "Web Modeler (Beta)": ["self-managed/web-modeler/installation"],
+      Modeler: [
+        {
+          "Web Modeler (Beta)": [
+            "self-managed/modeler/web-modeler/installation",
+          ],
+        },
+        {
+          "Desktop Modeler": [
+            "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
+          ],
+        },
+      ],
     },
     {
       "Backup and restore": [

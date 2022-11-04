@@ -393,11 +393,11 @@ Camunda Platform 7 also has support for writing tests in Java. This section give
 The technical setup for Camunda Platform 7:
 
 1. Use [_JUnit_](http://junit.org) as unit test framework.
-2. Use Camunda's [JUnit Rule](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/ProcessEngineRule.html) to ramp up an in-memory process engine where the [JobExecutor](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/Deployment.html) is turned off.
-3. Use Camunda's [@Deployment](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/Deployment.html) annotation to deploy and un-deploy one or more process definitions under test for a single test method.
+2. Use Camunda's [JUnit Extension](https://github.com/camunda/camunda-bpm-platform/tree/7.17.0/test-utils/junit5-extension) to ramp up an in-memory process engine where the [JobExecutor](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.17/org/camunda/bpm/engine/test/Deployment.html) is turned off.
+3. Use Camunda's [@Deployment](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.17/org/camunda/bpm/engine/test/Deployment.html) annotation to deploy and un-deploy one or more process definitions under test for a single test method.
 4. Use [camunda-bpm-assert](http://github.com/camunda/camunda-bpm-assert) to easily check whether your expectations about the state of the process are met.
-5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) plus [PowerMock](https://github.com/jayway/powermock/) to mock service methods and verify that services are called as expected.
-6. Use Camunda's [MockExpressionManager](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.16/org/camunda/bpm/engine/test/mock/MockExpressionManager.html) to resolve bean names used in your process definition without the need to ramp up the dependency injection framework (like CDI or Spring).
+5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) to mock service methods and verify that services are called as expected.
+6. Use Camunda's [MockExpressionManager](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.17/org/camunda/bpm/engine/test/mock/MockExpressionManager.html) to resolve bean names used in your process definition without the need to ramp up the dependency injection framework (like CDI or Spring).
 7. Use an [In-Memory H2 database](http://www.h2database.com/html/features.html#in_memory_databases) as default database to test processes on developer machines. If required, you can run the same tests on _multiple databases_, e.g. Oracle, DB2, or MS-SQL on a CI-Server. To achieve that, you can make use of (e.g. Maven) profiles and Java properties files for database configuration.
 
 Let's use the same example as above.
@@ -409,18 +409,16 @@ A typical test case will look like this:
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*; // <4>
 import static org.mockito.Mockito.*; // <5>
 
-@RunWith(PowerMockRunner.class) // <1> <5>
+@ExtendWith({ProcessEngineExtension.class, MockitoExtension.class}) // <1> <5>
 class TwitterTest {
 
-  @Rule
-  public ProcessEngineRule processEngineRule = new ProcessEngineRule(); // <2>
-
-  @Mock // Mockito mock instantiated by PowerMockRunner <5>
+  @Mock // Mockito mock instantiated by MockitoExtension <5>
   private TweetPublicationService tweetPublicationService;
 
-  @Before
+  @BeforeEach
   void setup() {
 	// ...
+    TweetPublicationDelegate tweetPublicationDelegate = new TweetPublicationDelegate(tweetPublicationService);
     Mocks.register("tweetPublicationDelegate", tweetPublicationDelegate); // <6>
   }
 
@@ -446,16 +444,20 @@ And this _Java delegate_ itself calls a business method:
 @Named
 public class TweetPublicationDelegate implements JavaDelegate {
 
+  private final TweetPublicationService tweetPublicationService;
+
   @Inject
-  private TweetPublicationService tweetPublicationService;
+  public TweetPublicationDelegate(TweetPublicationService tweetPublicationService) {
+    this.tweetPublicationService = tweetPublicationService;
+  }
 
   public void execute(DelegateExecution execution) throws Exception {
-    String tweet = new TwitterDemoProcessVariables(execution).getTweet();  // 1
+    String tweet = new TwitterDemoProcessVariables(execution).getTweet();  // <1>
     // ...
     try {
-      tweetPublicationService.tweet(tweet); // 2
+      tweetPublicationService.tweet(tweet); // <2>
     } catch (DuplicateTweetException e) {
-      throw new BpmnError("duplicateMessage"); // 3
+      throw new BpmnError("duplicateMessage"); // <3>
     }
   }
 // ...
@@ -467,18 +469,17 @@ The TweetPublicationService is mocked:
 @Mock // 1
 private TweetPublicationService tweetPublicationService;
 
-@Before
+@BeforeEach
 void setup() {
   // set up java delegate to use the mocked tweet service
-  TweetPublicationDelegate tweetPublicationDelegate = new TweetPublicationDelegate();  // 2
-  tweetPublicationDelegate.setTweetService(tweetPublicationService);
+  TweetPublicationDelegate tweetPublicationDelegate = new TweetPublicationDelegate(tweetPublicationService);  // <2>
   // register a bean name with mock expression manager
-  Mocks.register("tweetPublicationDelegate", tweetPublicationDelegate); // 3
+  Mocks.register("tweetPublicationDelegate", tweetPublicationDelegate); // <3>
 }
 
-@After
+@AfterEach
 void teardown() {
-  Mocks.reset();  // 3
+  Mocks.reset();  // <3>
 }
 ```
 
@@ -491,16 +492,16 @@ void testTweetApproved() {
   // given
   ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(
     "TwitterDemoProcess",
-    withVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET, TWEET)); // 1
+    withVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET, TWEET)); // <1>
   assertThat(processInstance).isStarted();
   // when
-  complete(task(), withVariables(TwitterDemoProcessConstants.VAR_NAME_APPROVED, true)); //2
+  complete(task(), withVariables(TwitterDemoProcessConstants.VAR_NAME_APPROVED, true)); // <2>
   // then
-  assertThat(processInstance) // 3
+  assertThat(processInstance) // <3>
     .hasPassed("end_event_tweet_published")
     .hasNotPassed("end_event_tweet_rejected")
     .isEnded();
-  verify(tweetPublicationService).tweet(TWEET); // 4
+  verify(tweetPublicationService).tweet(TWEET); // <4>
   verifyNoMoreInteractions(tweetPublicationService);
 }
 ```
@@ -524,7 +525,7 @@ void testTweetRejected() {
     .hasVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET);
 
   // when
-  complete(task(), withVariables(TwitterDemoProcessConstants.VAR_NAME_APPROVED, false));  // 2
+  complete(task(), withVariables(TwitterDemoProcessConstants.VAR_NAME_APPROVED, false));  // <2>
 
   // then
   assertThat(processInstance)
@@ -551,21 +552,21 @@ Above, we already saw the Java delegate code throwing the BPMN error exception w
 @Deployment(resources = "twitter/TwitterDemoProcess.bpmn")
 void testTweetDuplicated() {
   // given
-  doThrow(new DuplicateTweetException()) // 1
+  doThrow(new DuplicateTweetException()) // <1>
     .when(tweetPublicationService).tweet(anyString());
   // when
-  ProcessInstance processInstance = rejectedTweet(withVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET, TWEET));  // 2
+  ProcessInstance processInstance = rejectedTweet(withVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET, TWEET));  // <2>
   // then
-  assertThat(processInstance) // 3
+  assertThat(processInstance) // <3>
     .hasPassed("boundary_event_tweet_duplicated")
     .hasNotPassed("end_event_tweet_rejected").hasNotPassed("end_event_tweet_published")
     .isWaitingAt("user_task_handle_duplicate");
-  verify(tweetPublicationService).tweet(TWEET);  // 4
+  verify(tweetPublicationService).tweet(TWEET);  // <4>
   verifyNoMoreInteractions(tweetPublicationService);
   // when
-  complete(task()); // 5
+  complete(task()); // <5>
   // then
-  assertThat(processInstance)  // 6
+  assertThat(processInstance)  // <6>
     .isWaitingAt("user_task_review_tweet")
     .hasVariables(TwitterDemoProcessConstants.VAR_NAME_TWEET)
     .task().isAssignedTo("demo");

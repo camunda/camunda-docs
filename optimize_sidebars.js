@@ -743,6 +743,7 @@ module.exports = {
         {
           "User guide": [
             "components/userguide/collections-dashboards-reports",
+            "components/userguide/user-permissions",
             "components/userguide/data-sources",
 
             {
@@ -1647,7 +1648,10 @@ module.exports = {
 
     {
       "Web Modeler (Beta)": [
-        docsLink("Installation", "self-managed/web-modeler/installation/"),
+        docsLink(
+          "Installation",
+          "self-managed/modeler/web-modeler/installation/"
+        ),
       ],
     },
 

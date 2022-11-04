@@ -11,6 +11,9 @@ Options -Indexes -MultiViews
 # Consolidated redundant element-template pages - v8.0, current, and vNext.
 RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templates/?$ /docs$1/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 
+# Added Self-Managed Modeler redirect
+RewriteRule ^docs/next/self-managed/web-modeler/installation/(.*)$ /docs/next/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
+
 # Redirects for Connectors move to top level
 RewriteRule ^docs/8.0/components/integration-framework/introduction-to-connectors/(.*)$ /docs/8.0/components/connectors/introduction-to-connectors/$1 [R=301,L]
 RewriteRule ^docs/8.0/components/integration-framework/introduction-to-connectors$ /docs/8.0/components/connectors/introduction-to-connectors [R=301,L]

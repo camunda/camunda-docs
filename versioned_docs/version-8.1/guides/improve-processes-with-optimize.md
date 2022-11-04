@@ -59,7 +59,9 @@ In the sample above, Optimize drafted a dashboard filled with reports for review
 
 Select **Edit > Add a Report** to incorporate additional reports you’ve already created (see [create and access reports](#create-and-access-reports) below). Click and drag the reports on the grid to arrange the dashboard to your liking.
 
-Click the **Share** tab to share your dashboard. Toggle to **Enable sharing**, and copy or embed the provided link. Colleagues without access to Optimize can still view your report with the shared link.
+:::note
+Optimize offers collaborative capabilities, too. Click the **Share** tab to share your dashboard. Toggle to **Enable sharing**, and copy or embed the provided link. Colleagues without access to Optimize can still view your report with the shared link.
+:::
 
 ## Create and access reports
 

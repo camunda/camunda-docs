@@ -4,8 +4,6 @@ title: "Export report result data"
 description: "The REST API to export report result data from Optimize."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
 The data export API allows users to export large amounts of data in a machine-readable format (JSON) from Optimize.
 
 ## Functionality
