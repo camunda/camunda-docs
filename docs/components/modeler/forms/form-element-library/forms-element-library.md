@@ -68,6 +68,12 @@ The following form elements are currently available within Camunda Forms:
   </tr>
 
   <tr>
+    <td><img src="/img/form-icons/form-image.svg" alt="Image Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-image">Image view</a></td>
+    <td>Display images</td>
+  </tr>
+
+  <tr>
     <td><img src="/img/form-icons/form-button.svg" alt="Button Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-button">Button</a></td>
     <td>Trigger form actions</td>
