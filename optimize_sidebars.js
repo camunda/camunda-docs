@@ -613,7 +613,7 @@ module.exports = {
         },
 
         {
-          "Build custom Connectors": [
+          "Integration Framework": [
             docsLink(
               "Connector templates",
               "components/connectors/custom-built-connectors/connector-templates/"

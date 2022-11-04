@@ -19,11 +19,17 @@ When using Camunda Platform 8 SaaS, the runtime is operated by Camunda and offer
 
 ### Camunda Platform 8 Self-Managed
 
-In a [Self-Managed](/self-managed/about-self-managed.md) environment, you provide the execution environment for Connectors yourself.
-The Camunda [Connector SDK](./custom-built-connectors/connector-sdk.md) comes with [runtime environments](./custom-built-connectors/connector-sdk.md#runtime-environments) that allow you to do this.
+In a [Self-Managed](/self-managed/about-self-managed.md) environment, you manage the execution environment for Connectors yourself.
+Using our [Connector runtime environments](./custom-built-connectors/connector-sdk.md#runtime-environments), you can consume any set of Connectors,
+including the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) and custom Connectors developed with
+the **Integration Framework**.
 
-You can consume the [pre-packaged runtime environment](./custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment) to execute any set of Connectors.
-The [installation guide](/self-managed/connectors-deployment/install-and-start.md) details how to install this runtime, and also describes how to integrate the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda, including their Connector templates for modeling.
+The Integration Framework consists of the Camunda [Connector SDK](./custom-built-connectors/connector-sdk.md) and [Connector templates](./custom-built-connectors/connector-templates.md).
+You can build custom Connectors using the framework as detailed in the Connector SDK guide. You can find a list of Connectors developed by Camunda, Partners, and the community in our
+[Camunda Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors#readme).
+
+The [Self-Managed installation guide](/self-managed/connectors-deployment/install-and-start.md) details how to install the [pre-packaged Connector runtime environment](./custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
+The guide also describes how to integrate the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda, including their Connector templates for modeling.
 Note that some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 
 ### Connector vs. Job Worker

@@ -783,7 +783,7 @@
         },
 
         {
-          "Build custom Connectors": [
+          "Integration Framework": [
             {
               "type": "link",
               "label": "Connector templates",
