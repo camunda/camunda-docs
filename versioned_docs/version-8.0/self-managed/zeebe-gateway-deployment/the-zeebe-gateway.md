@@ -94,22 +94,28 @@ If you use the Helm charts, both properties are configured for you already.
 
 To configure how the gateway connects and distributes information with other nodes (brokers or gateways) via SWIM, the following properties can be used. It might be useful to increase timeouts for setups that encounter a high latency between nodes.
 
-| Environment variable                                | Application.yaml property                            | Description                                                                                          | Default value |
-| --------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------- |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`  | `zeebe.gateway.cluster.membership.broadcastUpdates`  | Configure whether to broadcast member updates to all members.                                        | `false`       |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES` | `zeebe.gateway.cluster.membership.broadcastDisputes` | Configure whether to broadcast disputes to all members.                                              | `true`        |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`     | `zeebe.gateway.cluster.membership.notifySuspect`     | Configure whether to notify a suspect node on state changes.                                         | `false`       |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPINTERVAL`    | `zeebe.gateway.cluster.membership.gossipInterval`    | Sets the interval at which the membership updates are sent to a random member.                       | `250ms`       |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPFANOUT`      | `zeebe.gateway.cluster.membership.gossipFanout`      | Sets the number of members to which membership updates are sent at each gossip interval.             | `2`           |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBEINTERVAL`     | `zeebe.gateway.cluster.membership.probeInterval`     | Sets the interval at which to probe a random member.                                                 | `1s`          |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBETIMEOUT`      | `zeebe.gateway.cluster.membership.probeTimeout`      | Sets the timeout for a probe response.                                                               | `100ms`       |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SUSPECTPROBES`     | `zeebe.gateway.cluster.membership.suspectProbes`     | Sets the number of probes failed before declaring a member is suspect.                               | `3`           |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_FAILURETIMEOUT`    | `zeebe.gateway.cluster.membership.failureTimeout`    | Sets the timeout for a suspect member declared dead.                                                 | `10s`         |
-| `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SYNCINTERVAL`      | `zeebe.gateway.cluster.membership.syncInterval`      | Sets the interval at which this member synchronizes its membership information with a random member. | `10s`         |
+| Environment variable                                 | Application.yaml property                            | Description                                                                                          | Default value |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------- |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`  | `zeebe.gateway.cluster.membership.broadcastUpdates`  | Configure whether to broadcast member updates to all members.                                        | `false`       |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES` | `zeebe.gateway.cluster.membership.broadcastDisputes` | Configure whether to broadcast disputes to all members.                                              | `true`        |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`     | `zeebe.gateway.cluster.membership.notifySuspect`     | Configure whether to notify a suspect node on state changes.                                         | `false`       |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_GOSSIPINTERVAL`    | `zeebe.gateway.cluster.membership.gossipInterval`    | Sets the interval at which the membership updates are sent to a random member.                       | `250ms`       |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_GOSSIPFANOUT`      | `zeebe.gateway.cluster.membership.gossipFanout`      | Sets the number of members to which membership updates are sent at each gossip interval.             | `2`           |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_PROBEINTERVAL`     | `zeebe.gateway.cluster.membership.probeInterval`     | Sets the interval at which to probe a random member.                                                 | `1s`          |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_PROBETIMEOUT`      | `zeebe.gateway.cluster.membership.probeTimeout`      | Sets the timeout for a probe response.                                                               | `100ms`       |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_SUSPECTPROBES`     | `zeebe.gateway.cluster.membership.suspectProbes`     | Sets the number of probes failed before declaring a member is suspect.                               | `3`           |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_FAILURETIMEOUT`    | `zeebe.gateway.cluster.membership.failureTimeout`    | Sets the timeout for a suspect member declared dead.                                                 | `10s`         |
+| `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_SYNCINTERVAL`      | `zeebe.gateway.cluster.membership.syncInterval`      | Sets the interval at which this member synchronizes its membership information with a random member. | `10s`         |
 
-### Security configuration
+### Cluster security configuration
 
-The security configurations allow configuring how the gateway interacts with other nodes inside the Zeebe cluster.
+The cluster security configuration options allow securing communication between the gateway and other nodes in the cluster.
+
+:::note
+
+You can read more about intra-cluster security on [its dedicated page](../zeebe-deployment/security/secure-cluster-communication.md).
+
+:::
 
 | Environment variable                                  | Application.yaml property                             | Description                                                                     | Default value |
 | ----------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- | ------------- |
@@ -146,7 +152,15 @@ To explore how the gateway behaves, or what it does, metrics can be consumed. By
 | ----------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------------- | ------------- |
 | `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS` | `zeebe.gateway.threads.managementThreads` | Sets the number of threads the gateway will use to communicate with the broker cluster. | `1`           |
 
-### Security configurations
+### Client security configuration
+
+The client security configuration options allow securing the communication between a gateway and clients.
+
+:::note
+
+You can read more about client-gateway security on [its dedicated page](../zeebe-deployment/security/secure-client-communication.md).
+
+:::
 
 | Environment variable                          | Application.yaml property                     | Description                                                 | Default value |
 | --------------------------------------------- | --------------------------------------------- | ----------------------------------------------------------- | ------------- |
