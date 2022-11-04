@@ -1,7 +1,7 @@
 ---
 id: connector-sdk
 title: Connector SDK
-description: Introduction to the Connector SDK.
+description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ Connector. The Connector SDK allows you to develop custom Connectors using Java code.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -210,7 +210,7 @@ The Connector runtime environments pick up those two custom headers and translat
 You can see an example of how to use this in the [out-of-the-box REST Connector](../out-of-the-box-connectors/rest.md#response).
 
 All Connectors are recommended to offer exception handling to allow users to configure how to map results and technical errors into
-BPMN Errors. To provide this, Connector templates can reuse the recommended object **Result Expression**:
+BPMN errors. To provide this, Connector templates can reuse the recommended object **Result Expression**:
 
 ```json
 {
@@ -226,9 +226,9 @@ BPMN Errors. To provide this, Connector templates can reuse the recommended obje
 }
 ```
 
-This object creates a custom headers for the jobs created for the tasks that use this template.
-The Connector runtime environments pick up this custom header and translates it into BPMN Errors accordingly.
-You can see an example of how to use this in the [BPMN Errors in Connectors guide](../use-connectors.md#bpmn-errors).
+This object creates custom headers for the jobs created for the tasks that use this template.
+The Connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
+You can see an example of how to use this in the [BPMN errors in Connectors guide](../use-connectors.md#bpmn-errors).
 
 ### Runtime logic
 
@@ -300,8 +300,8 @@ The Connector runtime environment initializes the context and allows the followi
 If the Connector handles exceptional cases, it can use any exception to express technical errors. If a technical
 error should be associated with a specific error code, the Connector can throw a `ConnectorException` and define
 a `code` as shown in **(4)**.
-We recommend to document the list of error codes as part of the Connector's API. Users can build on those codes
-by creating [BPMN Errors](../use-connectors.md#bpmn-errors) in their Connector configurations.
+We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
+by creating [BPMN errors](../use-connectors.md#bpmn-errors) in their Connector configurations.
 
 If the Connector has a result to return, it can create a new result data object and set
 its properties as shown in **(5)**.
