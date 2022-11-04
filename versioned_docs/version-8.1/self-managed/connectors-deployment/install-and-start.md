@@ -27,6 +27,7 @@ If you use the [Docker Compose](/self-managed/platform-deployment/docker.md#dock
 
 Alternatively, you can fetch the JSON templates from the respective Connector's releases:
 
+- [Amazon SNS Connector](https://github.com/camunda/connector-sns/releases)
 - [Amazon SQS Connector](https://github.com/camunda/connector-sqs/releases)
 - [AWS Lambda Connector](https://github.com/camunda/connector-aws-lambda/releases)
 - [Google Drive Connector](https://github.com/camunda/connector-google-drive/releases)
