@@ -1,7 +1,7 @@
 ---
 id: connector-sdk
 title: Connector SDK
-description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ Connector. The Connector SDK allows you to develop custom Connectors using Java code.
+description: The Connector SDK allows you to develop custom Connectors using Java code. Focus on the logic of the Connector, test it locally, and reuse its runtime logic..
 ---
 
 import Tabs from "@theme/Tabs";
