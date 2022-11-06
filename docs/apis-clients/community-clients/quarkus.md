@@ -7,7 +7,7 @@ The [Quarkus](https://quarkus.io/) integration is a community extension that all
 
 Essentially, Quarkus provides a wrapper around the [Zeebe Java Client](/apis-clients/java-client/index.md), and is preconfigured with sensible defaults so you can get started with minimal configuration. Add a dependency, implement a worker, and add your credentials in your Quarkus project.
 
-The integration provides also Quarkus dev services to start everything what you need as docker containers for local development. [Zeebe-dev-monitor](https://github.com/lorislab/zeebe-dev-monitor)  UI is also included as a dev service.
+The integration also provides Quarkus developer services to start everything you need as Docker containers for local development. [Zeebe-dev-monitor](https://github.com/lorislab/zeebe-dev-monitor) UI is also included as a developer service.
 
 - [Documentation and source code](https://github.com/quarkiverse/quarkus-zeebe)
 - [Releases on Maven Central](https://search.maven.org/artifact/io.quarkiverse.zeebe/quarkus-zeebe)
