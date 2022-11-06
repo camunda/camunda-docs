@@ -12,3 +12,4 @@ In addition to the core Java and Go clients provided by Zeebe, there are a numbe
 - [Ruby](ruby.md)
 - [Rust](rust.md)
 - [Spring](spring.md)
+- [Quarkus](quarkus.md)
