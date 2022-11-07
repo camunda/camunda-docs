@@ -224,3 +224,31 @@ The `Overlay Opened Event` is sent when an overlay is opened via user interactio
 For the **Version Info** overlay, the event also sends `source` of the click (`"menu"` or `"statusBar"`).
 
 For the **Deployment** and **Start Instance** overlays, the event also send the `diagramType` (BPMN, DMN or Form).
+
+### Form editor events
+
+The `Form editor events` are sent on different interactions with the form builder:
+
+- User opened or collapsed a panel in the form editor. The event includes the current open state for each form preview panel and the interaction that triggered the change.
+
+```json
+{
+  "layout": {
+    "form-input": {
+      "open": true
+    },
+    "form-output": {
+      "open": true
+    },
+    "form-preview": {
+      "open": true
+    }
+  },
+  "triggeredBy": "keyboardShortcut|previewPanel|statusBar|windowMenu"
+}
+```
+
+- User interacted with the form input data panel.
+- User interacted with the form preview panel.
+
+In all events [the execution platform and version](#diagram-openedclosed-event) are sent as well.
