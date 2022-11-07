@@ -144,6 +144,12 @@ This configuration option is also available for bar/line charts.
 
 ![Stacked bar chart report](./img/stackedBar.png)
 
+## Switch bar chart orientation
+
+When evaluating a report, Optimize will automatically set the bar chart orientation according the nature of the data being displayed. You can also switch the orientation manually using the configuration option shown.
+
+![Stacked bar chart report](./img/horizontalBar.png)
+
 ## Bar/line chart
 
 When evaluating a report which has both count and duration measures, Optimize offers you the option to display one of the measures as bars and the other measure as a line. This would help to differentiate between duration and count values displayed in the visualization. By default, the count measure is displayed as bars and the duration as a line. You can also switch between them by using the configuration option shown.
