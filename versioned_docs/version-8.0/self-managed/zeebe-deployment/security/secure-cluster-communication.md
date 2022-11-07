@@ -48,7 +48,13 @@ More specifically, the certificate chain will be part of the trust store of the 
 
 This will allow you to configure each node with a different leaf certificate sharing the same root certificate (or at least an intermediate authority), as long as they're contained in the chain. If all nodes use the same certificate, or if you're certain the certificate is trusted by the root certificates available on each node, it's sufficient for the file to only contain the leaf certificate.
 
-The private key file should be a PEM private key file, and should be the one during generation of the node's public certificate. Algorithms supported for the private keys are: RSA, DSA, and EC.
+The private key file should be a PEM private key file, and should be the one during generation of the node's public certificate. Algorithms supported for the private keys are RSA, DSA, and EC. The private key must be generated using [PKCS8](https://datatracker.ietf.org/doc/html/rfc5208); any other format (e.g. PKCS1) will not work with Zeebe. If you're unsure what format your private key is, you can quickly run it through the `openssl` utility to convert it to PKCS8:
+
+```shell
+> openssl pkcs8 -topk8 -nocrypt -in my_private_key -out my_private_pkcs8_key.pem
+```
+
+Remove the `-nocrypt` parameter if your private key has a password. If your certificate is already in the right format, it will simply do nothing. See the [OpenSSL manpages](https://www.openssl.org/docs/man1.1.1/man1/openssl-pkcs8.html) for more options.
 
 :::caution
 

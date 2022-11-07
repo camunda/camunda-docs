@@ -48,7 +48,13 @@ More specifically, the certificate chain will be part of the trust store of the 
 
 This will allow you to configure each node with a different leaf certificate sharing the same root certificate (or at least an intermediate authority), as long as they're contained in the chain. If all nodes use the same certificate, or if you're certain the certificate is trusted by the root certificates available on each node, it's sufficient for the file to only contain the leaf certificate.
 
-The private key file should be a PEM private key file, and should be the one during generation of the node's public certificate. Algorithms supported for the private keys are: RSA, DSA, and EC.
+The private key file should be a PEM private key file, and should be the one during generation of the node's public certificate. Algorithms supported for the private keys are RSA, DSA, and EC. The private key must be generated using [PKCS8](https://datatracker.ietf.org/doc/html/rfc5208); any other format (e.g. PKCS1) will not work with Zeebe. If you're unsure what format your private key is, you can quickly run it through the `openssl` utility to convert it to PKCS8:
+
+```shell
+> openssl pkcs8 -topk8 -nocrypt -in my_private_key -out my_private_pkcs8_key.pem
+```
+
+Remove the `-nocrypt` parameter if your private key has a password. If your certificate is already in the right format, it will simply do nothing. See the [OpenSSL manpages](https://www.openssl.org/docs/man1.1.1/man1/openssl-pkcs8.html) for more options.
 
 :::caution
 
@@ -134,7 +140,6 @@ For this example, whenever you are asked for input, feel free to just press ente
 
 ```shell
 openssl req -config <(printf "[req]\ndistinguished_name=dn\n[dn]\n[ext]\nbasicConstraints=CA:TRUE,pathlen:0") -new -newkey rsa:2048 -nodes -subj "/C=DE/O=Test/OU=Test/ST=BE/CN=cluster.local" -x509 -extensions ext -keyout ca.key -out ca.pem
-openssl x509 -trustout -signkey ca.key -days 365 -req -in ca.csr -out ca.pem
 ```
 
 Once we have our certificate authority, we can now generate certificates for each node. Let's say we have a cluster of three nodes, `A`, `B`, and `C`.
@@ -148,6 +153,12 @@ openssl genpkey -out nodeA.key -algorithm RSA -pkeyopt rsa_keygen_bits:2048
 openssl genpkey -out nodeB.key -algorithm RSA -pkeyopt rsa_keygen_bits:2048
 openssl genpkey -out nodeC.key -algorithm RSA -pkeyopt rsa_keygen_bits:2048
 ```
+
+:::note
+
+Generating a private key using RSA and `openssl` will generate a PKCS8 private key by default.
+
+:::
 
 2. Create a certificate signing request (CSR) for each as well:
 
