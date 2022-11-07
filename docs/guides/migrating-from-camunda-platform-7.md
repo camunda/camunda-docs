@@ -286,7 +286,7 @@ The topic `camunda-7-adapter` is set and the following attributes/elements are m
 
 The "external task topic" from Camunda Platform 7 is directly translated in a "task type name" in Camunda Platform 8, therefore `camunda:topic` gets `zeebe:taskDefinition type` in your BPMN model.
 
-Now, you must adjust your external task worker to become a job worker.
+The [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) will pick up your `@ExternalTaskHandler` beans, wrap them into a JobWorker, and subscribe to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
 
 ## Adjusting Your BPMN models
 
