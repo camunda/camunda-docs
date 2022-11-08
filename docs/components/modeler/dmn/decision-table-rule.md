@@ -84,7 +84,7 @@ The expression language of the output entry is [FEEL](/components/modeler/feel/l
 </outputEntry>
 ```
 
-# Description
+## Description
 
 ![Description](assets/decision-table/description.png)
 

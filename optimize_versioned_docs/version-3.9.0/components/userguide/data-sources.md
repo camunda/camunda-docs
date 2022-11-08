@@ -1,6 +1,7 @@
 ---
 id: data-sources
 title: Data sources
+description: "If you create a collection, you can add data sources that can be used to create reports. See the existing data sources or add additional ones."
 ---
 
 If you create a collection, you can add data sources that can be used to create reports. To see the existing data sources or add additional ones, go to the **Data Sources** tab of the collection.

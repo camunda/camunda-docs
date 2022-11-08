@@ -1,6 +1,7 @@
 ---
 id: usage-metrics
 title: Usage metrics
+description: "Tasklist provides usage metrics under usage-metrics Actuator endpoint. It is exposed on management port."
 ---
 
 Tasklist provides usage metrics under `usage-metrics` Actuator endpoint. It is exposed on management port, which can be configured via `management.server.port` configuration parameter (default: 8080).

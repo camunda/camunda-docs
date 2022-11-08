@@ -1,6 +1,7 @@
 ---
 id: deploy-your-process-and-start-process-instance
 title: Deploy and start your process instance
+description: "Take the following steps to save and deploy a newly-created process to your cluster. Then, utilize Operate to further your process."
 ---
 
 :::note

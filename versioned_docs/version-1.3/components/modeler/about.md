@@ -1,6 +1,7 @@
 ---
 id: about-modeler
 title: About Modeler
+description: "Learn about Camunda Modeler, BPMN diagrams designed and configured, and both Web Modeler and Desktop Modeler."
 ---
 
 <span class="badge badge--cloud">Camunda Cloud only</span>

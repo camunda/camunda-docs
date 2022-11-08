@@ -1,6 +1,7 @@
 ---
 id: connect-to-your-cluster
 title: Connect to your cluster
+description: "After creating a client and downloading the connection file, you will now need to source it to make it available in your environment."
 ---
 
 ## Installation

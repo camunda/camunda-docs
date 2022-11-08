@@ -1,6 +1,7 @@
 ---
 id: resolve-incidents-update-variables
 title: Variables and incidents
+description: "Every process instance created for the process model used in the Getting Started tutorial requires an orderValue so the XOR gateway evaluation will happen."
 ---
 
 Every process instance created for the process model used in the Getting Started tutorial requires an `orderValue` so that the XOR gateway evaluation will happen properly. 

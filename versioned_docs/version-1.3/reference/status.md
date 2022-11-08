@@ -1,6 +1,7 @@
 ---
 id: status
 title: "Camunda Cloud SaaS Status"
+description: "Camunda Platform 8 SaaS is a hosted service for the Camunda Platform 8 stack that runs on the Google Cloud Platform (GCP)."
 ---
 
 Camunda Clous SaaS is a hosted service for the Camunda Cloud Stack that runs on the Google Cloud Platform (GCP). Like any service, it might occasionally undergo availability changes. When availability changes, Camunda makes sure to provide you with a current service status.
