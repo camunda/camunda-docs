@@ -617,6 +617,7 @@ module.exports = {
             "apis-clients/community-clients/ruby",
             "apis-clients/community-clients/rust",
             "apis-clients/community-clients/spring",
+            "apis-clients/community-clients/quarkus",
           ],
         },
         "apis-clients/build-your-own-client",

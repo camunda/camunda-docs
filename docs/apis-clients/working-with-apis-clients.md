@@ -58,6 +58,7 @@ Community clients supplement the official clients. These clients have not been t
 - [Ruby](community-clients/ruby.md)
 - [Rust](community-clients/rust.md)
 - [Spring](community-clients/spring.md)
+- [Quarkus](community-clients/quarkus.md)
 
 You can browse other community extensions and the most up-to-date list of community clients [here](https://github.com/orgs/camunda-community-hub/repositories).
 
