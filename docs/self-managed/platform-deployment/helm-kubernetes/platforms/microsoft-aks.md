@@ -1,7 +1,7 @@
 ---
 id: microsoft-aks
 title: "Microsoft AKS"
-description: "Deploy Camunda Platform 8 Self-Managed on Microsoft AKS"
+description: "Deploy Camunda Platform 8 Self-Managed on Microsoft AKS, a managed container service to run and scale Kubernetes applications in the cloud or on-premises."
 ---
 
 Microsoft Azure Kubernetes Service ([Microsoft AKS](https://azure.microsoft.com/en-us/products/kubernetes-service/))
@@ -30,5 +30,5 @@ of 3,000 IOPS. However, it has some [limitations](https://learn.microsoft.com/en
 The `Premium SSD` volume could also be used, but its performance
 [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds).
 
-It's recommended to use `Premium SSD v2` volume type, but if only `Premium SSD` type is available, AKS cluster nodes
+It's recommended to use `Premium SSD v2` volume type, but only if `Premium SSD` type is available; AKS cluster nodes
 should use `Premium SSD` volumes of at least `256 GB` (P15).
