@@ -1210,6 +1210,7 @@ module.exports = {
             docsLink("Ruby", "apis-clients/community-clients/ruby/"),
             docsLink("Rust", "apis-clients/community-clients/rust/"),
             docsLink("Spring", "apis-clients/community-clients/spring/"),
+            docsLink("Quarkus", "apis-clients/community-clients/quarkus/"),
           ],
         },
         docsLink(
