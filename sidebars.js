@@ -64,6 +64,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/workflow-patterns",
+        "components/concepts/process-instance-modification",
       ],
       Console: [
         "components/console/introduction-to-console",
