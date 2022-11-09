@@ -638,10 +638,9 @@ module.exports = {
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
+
     {
-      Architecture: ["self-managed/platform-architecture/overview"],
       Installation: [
-        "self-managed/platform-deployment/overview",
         {
           "Helm/Kubernetes": [
             "self-managed/platform-deployment/helm-kubernetes/overview",
@@ -653,13 +652,54 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
               ],
-              Guides: [
-                "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
-                "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
-                "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
-                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+              // Original guides section.
+              ///////////////////////////
+              // Guides: [
+              //   "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
+              //   "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
+              //   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
+              //   "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+              // ],
+            },
+
+            // Section with link and auto-generated index.
+            //////////////////////////////////////////////
+            {
+              type: "category",
+              label: "[POC01]",
+              link: {
+                type: "generated-index",
+                title: "[POC01] link + auto-generated index",
+                description:
+                  "Use cases for configuring Camunda Platform 8 Self-Managed",
+                slug: "self-managed/platform-deployment/helm-kubernetes/poc01",
+                keywords: ["poc01"],
+              },
+              items: [
+                "self-managed/platform-deployment/helm-kubernetes/poc01/local-kubernetes-cluster",
+                "self-managed/platform-deployment/helm-kubernetes/poc01/accessing-components-without-ingress",
+                "self-managed/platform-deployment/helm-kubernetes/poc01/ingress-setup",
+                "self-managed/platform-deployment/helm-kubernetes/poc01/air-gapped-installation",
               ],
             },
+
+            // Section with link and index file.
+            ////////////////////////////////////
+            {
+              type: "category",
+              label: "[POC02]",
+              link: {
+                type: "doc",
+                id: "self-managed/platform-deployment/helm-kubernetes/poc02/index",
+              },
+              items: [
+                "self-managed/platform-deployment/helm-kubernetes/poc02/local-kubernetes-cluster",
+                "self-managed/platform-deployment/helm-kubernetes/poc02/accessing-components-without-ingress",
+                "self-managed/platform-deployment/helm-kubernetes/poc02/ingress-setup",
+                "self-managed/platform-deployment/helm-kubernetes/poc02/air-gapped-installation",
+              ],
+            },
+
             "self-managed/platform-deployment/troubleshooting",
           ],
         },
