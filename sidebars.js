@@ -650,6 +650,7 @@ module.exports = {
             {
               Platforms: [
                 "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
+                "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
               ],
               Guides: [
