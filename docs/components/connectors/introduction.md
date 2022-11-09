@@ -88,11 +88,11 @@ It depends on your use case.
 - You want to focus on your worker's logic and have no need for using low-level Camunda 8 API? - Write a Connector.
 - You want to provide a standardized modeling experience alongside your runtime behavior? - Write a Connector.
 
-### Connector vs. Element Template
+### Connector vs. element template
 
 You define the domain-specific UI for modeling a Connector through a [Connector template](./custom-built-connectors/connector-templates.md). This Connector template is, in fact, an [element template](../modeler/desktop-modeler/element-templates/about-templates.md).
 
-You can build a Connector-like system using element templates and plain old job workers. However, using a Connector instead brings along some benefits as outlined in [Connector vs. Job Worker](#connector-vs-job-worker).
+You can build a Connector-like system using element templates and plain old job workers. However, using a Connector instead brings along some benefits as outlined in [Connector vs. job worker](#connector-vs-job-worker).
 
 ### Next steps to get started with Connectors
 
