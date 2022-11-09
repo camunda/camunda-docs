@@ -214,7 +214,7 @@ As you can see in the table above, such a cluster can serve 500,000 process inst
 
 All clusters can be used for development, testing, integration, Q&A, and production. In Camunda Platform 8 SaaS, production and test environments are organized via separate organizations within Camunda Platform 8 to ease the management of clusters, while also minimizing the risk to accidentally accessing a production cluster.
 
-Note that functional unit tests that are written in Java and use [zeebe-proces-test](https://github.com/camunda-cloud/zeebe-process-test/), will use an in-memory broker in unit tests, so no development cluster is needed for this use case.
+Note that functional unit tests that are written in Java and use [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/), will use an in-memory broker in unit tests, so no development cluster is needed for this use case.
 
 For typical integration or functional test environments, you can normally just deploy a small cluster, like the one shown above, even if your production environment is sized bigger. This is typically sufficient, as functional tests typically run much smaller workloads.
 
