@@ -1,6 +1,7 @@
 ---
 id: configuration
 title: Configuration
+description: "Learn more about configurations, Elasticsearch, required settings to connect, settings for shards and replicas, Zeebe broker connection, and more."
 ---
 ## Introduction
 

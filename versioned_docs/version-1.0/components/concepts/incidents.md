@@ -1,6 +1,7 @@
 ---
 id: incidents
 title: "Incidents"
+description: "An incident represents a problem in process execution, where a process instance is stuck at some point and it needs user interaction to resolve the problem."
 ---
 
 In Camunda Cloud, an incident represents a problem in a process execution. That means a process instance is stuck at some point and it needs a user interaction to resolve the problem.

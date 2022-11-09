@@ -1,6 +1,7 @@
 ---
 id: introduction
 title: Introduction
+description: "Tasklist is a tool to work with user tasks in Zeebe. It provides a GraphQL API you can use to build your own application or use the UI we prepared for you."
 ---
 
 Tasklist is a tool to work with [user tasks](/reference/bpmn-processes/user-tasks/user-tasks.md) in Zeebe. It provides a GraphQL API which you can use to build your own application or you can use the general UI we prepared for you.

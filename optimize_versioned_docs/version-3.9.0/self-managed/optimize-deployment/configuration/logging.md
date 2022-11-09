@@ -1,7 +1,7 @@
 ---
 id: logging
 title: "Logging"
-description: "Logging configuration."
+description: "Camunda Optimize provides logging facilities that are preconfigured to use INFO logging level which provides minimal output of information in log files."
 ---
 
 Camunda Optimize provides logging facilities that are preconfigured to use

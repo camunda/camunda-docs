@@ -1,6 +1,7 @@
 ---
 id: connect-to-your-cluster
 title: Connect to your cluster
+description: "Learn more about connecting to your cluster by installing the appropriate package, establishing your first connection, and more."
 ---
 
 ## Installation

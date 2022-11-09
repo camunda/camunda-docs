@@ -1,7 +1,7 @@
 ---
 id: create-your-cluster
 title: Create your cluster
-description: "Create your cluster"
+description: "Learn how to create a cluster in Camunda to get started building, running, and deploying processes."
 ---
 
 <span class="badge badge--beginner">Beginner</span>

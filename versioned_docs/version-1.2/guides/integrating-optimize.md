@@ -2,6 +2,7 @@
 id: integrating-optimize
 title: Integrating Optimize
 sidebar_label: Integrating Optimize
+description: "The following document provides a basic end-to-end glance into Optimize and its features for new business users."
 ---
 
 <span class="badge badge--beginner">Beginner</span>

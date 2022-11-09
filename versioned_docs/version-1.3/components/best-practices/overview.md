@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: "The Camunda Best Practices are our condensed experience using BPMN and DMN on the Camunda toolstack; collected by consulting with our customers and community."
 ---
 
 The Camunda best practices are our condensed experience of using BPMN and DMN on the Camunda toolstack, and collected by consulting engagement with our customers, feedback from the community and various other occasions. Best Practices are a mix of conceptual and practical implementation information. 
