@@ -1,6 +1,7 @@
 ---
 id: basic-operate-navigation
 title: Getting Familiar With Operate
+description: "View a deployed workflow and inspect a workflow instance after deploying a workflow to Zeebe and creating at least one workflow instance."
 ---
 
 This section "Getting Familiar With Operate" and the next section “Incidents and Payloads” assumes that you’ve deployed a workflow to Zeebe and have created at least one workflow instance. 

@@ -1,6 +1,7 @@
 ---
 id: index
 title: "Overview"
+description: "Zeebe provides a YAML format to define workflows. Creating a YAML workflow can be done with a regular text editor and doesn't require a graphical modeling tool."
 ---
 
 In addition to BPMN, Zeebe provides a YAML format to define workflows. Creating a YAML workflow can be done with a regular text editor and does not require a graphical modelling tool. It is inspired by imperative programming concepts and aims to be easily understandable by programmers. Internally, Zeebe transforms a deployed YAML file to BPMN.

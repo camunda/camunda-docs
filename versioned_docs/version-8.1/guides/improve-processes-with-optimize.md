@@ -2,6 +2,7 @@
 id: improve-processes-with-optimize
 title: Improve processes with Optimize
 sidebar_label: Improve processes with Optimize
+description: "The following document provides a basic end-to-end glance into Optimize and its features for new business users."
 ---
 
 <span class="badge badge--beginner">Beginner</span>

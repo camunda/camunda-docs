@@ -2,6 +2,7 @@
 id: install-identity
 title: "Installation and first steps"
 sidebar_label: "Installation and first steps"
+description: "Learn more about installing Identity, accessing the UI, default users, the home screen, and more."
 ---
 
 ## Installation

@@ -1,6 +1,7 @@
 ---
 id: announcements
 title: "Announcements"
+description: "Take a closer look at what was deprecated in 0.26.0, YAML workflows descriptions, what was deprecated in 0.23.0-alpha2, and removed in 1.0."
 ---
 
 

@@ -1,5 +1,6 @@
 ---
 title: "Writing good workers"
+description: "Service tasks within Camunda Platform 8 require you to set a task type and implement job workers who perform whatever needs to be performed."
 ---
 
 [Service tasks](/docs/components/modeler/bpmn/service-tasks/) within Camunda Platform 8 require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes that you might want to:

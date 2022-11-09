@@ -2,6 +2,7 @@
 id: permissions
 title: "Permissions"
 sidebar_label: "Permissions"
+description: "Permissions allow you to control the level of access a user or an application has to a particular component. Typically, this is providing read or write access."
 ---
 
 Permissions allow you to control the level of access a user or an application has to a particular component. Traditionally, this is often described as being able to provide "read" or "write" access.

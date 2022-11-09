@@ -1,6 +1,7 @@
 ---
 id: incidents
 title: "Incidents"
+description: "Learn more about incidents and problems in workflow execution by resolving job-related incidents and workflow instance-related incidents."
 ---
 
 In Camunda Cloud, an incident represents a problem in a workflow execution. That means a workflow instance is stuck at some point and it needs a user interaction to resolve the problem.

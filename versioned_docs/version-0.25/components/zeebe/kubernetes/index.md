@@ -1,6 +1,7 @@
 ---
 id: index
 title: "Overview"
+description: "Learn the fundamentals of how to run Zeebe in Kubernetes using Helm charts to deploy a set of components into your cluster."
 ---
 
 ![Zeebe on K8s](assets/zeebe-k8s-helm.png)

@@ -1,6 +1,7 @@
 ---
 id: administrate-account
 title: Administrate your Account
+description: "Understand rights concept, organization settings, user roles and management, billing, and more as you administrate your account."
 ---
 
 ## Rights concept

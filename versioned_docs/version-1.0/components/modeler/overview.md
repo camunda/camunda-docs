@@ -1,6 +1,7 @@
 ---
 id: overview
 title: Overview
+description: "Any executable process needs a BPMN diagram designed and configured beforehand. Camunda offers Web Modeler and Desktop Modeler to design and implement these."
 ---
 
 Any executable process needs a **BPMN diagram** that must be designed and configured beforehand. The design is used to specify the flow of a process. Thereby different events have to be configured in the model so that the workflow engine understands what is to be executed in this step.

@@ -1,6 +1,7 @@
 ---
 id: introduction-to-connectors
 title: Introduction
+description: "A Connector is a reusable building block that performs the integration with an external system and works out of the box."
 ---
 
 A **Connector** is a reusable building block that performs the integration with an external system and works out of the box.

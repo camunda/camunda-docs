@@ -7,6 +7,7 @@ tags:
   - Monitoring
   - Alarming
   - Backup
+description: "To successfully operate Camunda Platform 7.x, you need to take into account operation requirements when modeling business processes."
 ---
 
 To successfully operate Camunda Platform 7.x, you need to take into account operation requirements when modeling business processes. Use your existing tools and infrastructure for technical monitoring and alarming. When appropriate, use Camunda Cockpit and consider extending it with plugins instead of writing your own tooling.
