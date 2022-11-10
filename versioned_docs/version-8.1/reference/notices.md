@@ -8,6 +8,36 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 10
+
+#### Publication Date:
+
+November 10th, 2022
+
+#### Product affected:
+
+Tasklist
+
+#### Impact:
+
+The Tasklist docker image contain an OpenSSL version 3.0.2 for which the following CVEs have been published:
+
+- https://nvd.nist.gov/vuln/detail/CVE-2022-3602
+- https://nvd.nist.gov/vuln/detail/CVE-2022-3786
+
+At this point, Camunda is not aware of any specific attack vector in Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
+
+#### How to determine if the installation is affected
+
+You are Tasklist version (8.0.3 >= version <= 8.0.7) or <= 8.1.2
+
+#### Solution
+
+Camunda has provided the following releases which contain a fix
+
+- [Tasklist 8.1.3](https://github.com/camunda/camunda-platform/releases/tag/8.1.3)
+- [Tasklist 8.0.8](https://github.com/camunda/camunda-platform/releases/tag/8.0.8)
+
 ### Notice 9
 
 #### Publication Date:
