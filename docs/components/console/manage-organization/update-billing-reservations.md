@@ -26,3 +26,9 @@ You can access the **Billing** page by selecting **Organization Management** in 
 ### Edit reservations (Professional Plan only)
 
 Use the **Edit** button to change the number of reserved clusters. The number of reserved clusters cannot exceed the maximum limit and cannot go below what is currently in use.
+
+### Edit development cluster reservations (Professional Plan only)
+
+In order to be able to use a **Development Cluster**, reservations must be available, as with hardware packages. To update reservations, scroll to the Development Cluster section and use the **Edit** button to increase or decrease the reservations. The number of reserved development clusters cannot exceed the maximum limit and cannot go below what is currently in use.
+
+As soon as a reservation has been made, a development cluster can be set up via the [create cluster dialog](../manage-clusters/create-cluster-include.md).
