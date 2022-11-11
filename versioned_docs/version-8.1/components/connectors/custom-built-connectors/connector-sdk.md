@@ -1,7 +1,7 @@
 ---
 id: connector-sdk
 title: Connector SDK
-description: Introduction to the Connector SDK.
+description: The Connector SDK allows you to develop custom Connectors using Java code. Focus on the logic of the Connector, test it locally, and reuse its runtime logic.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -125,14 +125,14 @@ A Connector template defines the binding to your Connector runtime behavior via 
 ```json
 {
   "type": "Hidden",
-  "value": "io.camunda:my-connector:1",
+  "value": "io.camunda:template:1",
   "binding": {
     "type": "zeebe:taskDefinition:type"
   }
 }
 ```
 
-This type definition `io.camunda:my-connector:1` is the connection configuring which version of your Connector runtime behavior to use.
+This type definition `io.camunda:template:1` is the connection configuring which version of your Connector runtime behavior to use.
 In technical terms, this defines the **Type** of jobs created for tasks in your process model that use this template.
 Consult the [job worker](../../concepts/job-workers.md) guide to learn more.
 
@@ -209,6 +209,27 @@ These objects create custom headers for the jobs created for the tasks that use 
 The Connector runtime environments pick up those two custom headers and translate them into process variables accordingly.
 You can see an example of how to use this in the [out-of-the-box REST Connector](../out-of-the-box-connectors/rest.md#response).
 
+All Connectors are recommended to offer exception handling to allow users to configure how to map results and technical errors into
+BPMN errors. To provide this, Connector templates can reuse the recommended object **Result Expression**:
+
+```json
+{
+  "label": "Error Expression",
+  "description": "Expression to define BPMN Errors to throw",
+  "group": "errors",
+  "type": "Text",
+  "feel": "required",
+  "binding": {
+    "type": "zeebe:taskHeader",
+    "key": "errorExpression"
+  }
+}
+```
+
+This object creates custom headers for the jobs created for the tasks that use this template.
+The Connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
+You can see an example of how to use this in the [BPMN errors in Connectors guide](../use-connectors.md#bpmn-errors).
+
 ### Runtime logic
 
 To create a reusable runtime behavior for your Connector, you are required to implement
@@ -224,6 +245,7 @@ outline of a Connector function implementation looks as follows:
 package io.camunda.connector;
 
 import io.camunda.connector.api.annotation.OutboundConnector;
+import io.camunda.connector.api.error.ConnectorException;
 import io.camunda.connector.api.outbound.OutboundConnectorContext;
 import io.camunda.connector.api.outbound.OutboundConnectorFunction;
 import org.slf4j.Logger;
@@ -232,7 +254,7 @@ import org.slf4j.LoggerFactory;
 @OutboundConnector(
     name = "MYCONNECTOR",
     inputVariables = {"myProperty", "authentication"},
-    type = "io.camunda:my-connector:1"
+    type = "io.camunda:template:1"
 )
 public class MyConnectorFunction implements OutboundConnectorFunction {
 
@@ -254,10 +276,15 @@ public class MyConnectorFunction implements OutboundConnectorFunction {
 
   private MyConnectorResult executeConnector(final MyConnectorRequest connectorRequest) {
     LOGGER.info("Executing my connector with request {}", connectorRequest);
+    String message = connectorRequest.getMessage();
+    // (4)
+    if (message != null && message.toLowerCase().startsWith("fail")) {
+      throw new ConnectorException("FAIL", "My property started with 'fail', was: " + message);
+    }
     var result = new MyConnectorResult();
 
-    // (4)
-    result.setMyProperty("Message received: " + connectorRequest.getMessage());
+    // (5)
+    result.setMyProperty("Message received: " + message);
     return result;
   }
 }
@@ -270,8 +297,14 @@ The Connector runtime environment initializes the context and allows the followi
 - Validate the created request object as shown in **(2)**. See the [validation](#validation) section for details.
 - Replace secrets in the request object as shown in **(3)**. See the [secrets](#secrets) section for details.
 
+If the Connector handles exceptional cases, it can use any exception to express technical errors. If a technical
+error should be associated with a specific error code, the Connector can throw a `ConnectorException` and define
+a `code` as shown in **(4)**.
+We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
+by creating [BPMN errors](../use-connectors.md#bpmn-errors) in their Connector configurations.
+
 If the Connector has a result to return, it can create a new result data object and set
-its properties as shown in **(4)**.
+its properties as shown in **(5)**.
 
 For best interoperability, Connector functions provide default meta-data via the `@OutboundConnector` annotation.
 Connector runtime environments can use this data to auto-discover provided Connector runtime behavior.
@@ -852,7 +885,7 @@ public class Main {
     var zeebeClient = ZeebeClient.newClientBuilder().build();
 
     zeebeClient.newWorker()
-        .jobType("io.camunda:my-connector:1")
+        .jobType("io.camunda:template:1")
         .handler(new ConnectorJobHandler(new MyConnectorFunction()))
         .name("MESSAGE")
         .fetchVariables("authentication", "message")
