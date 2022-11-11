@@ -43,7 +43,7 @@ Claim a task with `taskId` to `assignee`. Returns the task.
 
 When using Graphql API with JWT authentication token following parameters may be used:
 
-- `assignee`. When using a JWT token, the assignee paramater is NOT optional when called directly from the API.
+- `assignee`. When using a JWT token, the assignee parameter is NOT optional when called directly from the API.
   The system will not be able to detect the assignee from the JWT token, therefore the assignee parameter needs to be
   explicitly passed in this instance.
 - `allowOverrideAssignment`. When `true` the task that is already assigned may be claimed again. Otherwise the task
