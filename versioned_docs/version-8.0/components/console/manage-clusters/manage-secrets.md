@@ -1,7 +1,7 @@
 ---
 id: manage-secrets
 title: Manage secrets
-description: Manage secrets for Connectors
+description: Manage secrets for Connectors.
 ---
 
 Create secrets and reference them in your Connectors without exposing sensitive information in your BPMN processes.
@@ -23,17 +23,31 @@ To create a new secret, go to your cluster and take the following steps:
 
 ![secrets-create](./img/cluster-detail-secrets-create.png)
 
-4. Click **Create** and view your new Secret in the list.
+4. Click **Create** and view your new secret in the list.
 
 ![secrets-view](./img/cluster-detail-secrets-view.png)
 
-Now you can reference your secret like this: `secrets.MY_API_KEY` in any Connector field in the properties panel that is marked with the FEEL Expression icon: ![feel-icon](./img/feel-icon.png). Keep in mind secrets are not variables and must be wrapped in double quotes as follows:
+Now you can reference your secret with `secrets.MY_API_KEY` in any Connector field in the properties panel that supports this.
+Each of the [out-of-the-box Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
+
+Keep in mind that secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
 
 ```
 = { myHeader: "secrets.MY_API_KEY"}
 ```
 
+Using the secrets placeholder syntax, you can use secret in any part of a text, like in the following FEEL expression.
+This example assumes there is a process variable `baseUrl` and a configured secret `TENANT_ID`:
+
+```
+= "https://" + baseUrl + "/{{secrets.TENANT_ID}}/accounting"
+```
+
+The engine will resolve the `baseUrl` variable and pass on the secrets placeholder to the Connector. Assuming the `baseUrl` variable resolves to `my.company.domain`,
+the Connector receives the input `"https://my.company.domain/{{secrets.TENANT_ID}}/accounting"`. The Connector then replaces the secrets placeholder upon execution.
+For further details on how secrets are implemented in Connectors, consult our [Connector SDK documentation](../../connectors/custom-built-connectors/connector-sdk.md#secrets).
+
 :::note Warning
-`secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in any of your variables or FEEL expressions.
-If you use the syntax and deploy, the engine will search a secret and Operate will show an incident.
+`secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in Connector fields.
+Using this in other areas can lead to unexpected results and incidents.
 :::
