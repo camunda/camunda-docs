@@ -62,7 +62,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-core</artifactId>
-  <version>0.2.2</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
@@ -71,7 +71,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-core:0.2.2'
+implementation 'io.camunda.connector:connector-core:0.3.0'
 ```
 
 </TabItem>
@@ -374,7 +374,7 @@ Connector, add the following dependency to your project:
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-validation</artifactId>
-  <version>0.2.2</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
@@ -383,7 +383,7 @@ Connector, add the following dependency to your project:
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-validation:0.2.2'
+implementation 'io.camunda.connector:connector-validation:0.3.0'
 ```
 
 </TabItem>
@@ -415,9 +415,9 @@ attributes to define your requirements:
 ```java
 package io.camunda.connector;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class MyConnectorRequest {
 
@@ -427,16 +427,16 @@ public class MyConnectorRequest {
 ```
 
 The Jakarta Bean Validation API comes with a long list of
-[supported constraints](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#builtinconstraints).
+[supported constraints](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#builtinconstraints).
 It also allows to
-[validate entire object graphs](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#constraintdeclarationvalidationprocess-validationroutine-graphvalidation)
+[validate entire object graphs](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#constraintdeclarationvalidationprocess-validationroutine-graphvalidation)
 using the `@Valid` annotation. Thus, the `authentication` object will also be validated.
 
 ```java
 package io.camunda.connector;
 
 
-import jakarta.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 public class Authentication {
 
@@ -450,7 +450,7 @@ Using this approach, you can validate your whole input data structure with one i
 the central Connector function.
 
 Beyond that, the Jakarta Bean Validation API supports more advanced constructs like
-[groups](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#constraintdeclarationvalidationprocess-groupsequence)
+[groups](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#constraintdeclarationvalidationprocess-groupsequence)
 for conditional validation and constraints on different types, i.e., attributes, methods, and classes,
 to enable [cross-parameter validation](https://www.baeldung.com/javax-validation-method-constraints).
 You can use the built-in constraints and create custom ones to define requirements exactly as
@@ -497,7 +497,7 @@ cover each of the options in more detail.
 
 ###### Custom constraint
 
-The [Bean Validation guide](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#constraintsdefinitionimplementation)
+The [Bean Validation guide](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#constraintsdefinitionimplementation)
 covers defining **custom constraints** extensively. For the use case described above, you could
 write a custom constraint like the following:
 
@@ -559,7 +559,7 @@ following approaches might lead to more maintainable results that require less c
 ###### Manual validation method
 
 The Jakarta Bean Validation API comes with an
-[AssertTrue](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#builtinconstraints-asserttrue)
+[AssertTrue](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#builtinconstraints-asserttrue)
 constraint that you can use to ensure boolean attributes are enabled.
 
 The nature of the bean validation API allows to also use this annotation on methods. Those usually
@@ -591,11 +591,11 @@ and does not justify creating more complex, reusable interfaces and validators.
 ###### Dynamic validation groups
 
 The Jakarta Bean Validation API allows to statically define validation
-[groups](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html#constraintdeclarationvalidationprocess-groupsequence)
+[groups](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#constraintdeclarationvalidationprocess-groupsequence)
 for conditional constraint evaluation. However, to use those groups you have to define the
 group to validate statically when starting the validation. To dynamically define the groups to
 validate, you can use Hibernate Validator's
-[DefaultGroupSequenceProvider](https://docs.jboss.org/hibernate/validator/8.0/reference/en-US/html_single/#_groupsequenceprovider).
+[DefaultGroupSequenceProvider](https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/#_code_groupsequenceprovider_code).
 
 Given the following validation groups:
 
@@ -843,31 +843,52 @@ and how to invoke them. This component is the runtime environment specific to Ca
 
 Regarding Self-Managed environments, you are responsible for providing the runtime environment that
 can invoke the Connectors. The Connector SDK provides a
-[pre-packaged environment](#pre-packaged-runtime-environment) and a
-[Connector job handler](#connector-job-handler) to make this situation as convenient as possible.
+[pre-packaged environment](#pre-packaged-runtime-environment) and means to create a
+[custom environment](#custom-runtime-environment) to make this situation as convenient as possible.
 
 ### Pre-packaged runtime environment
 
 The SDK comes with a pre-packaged runtime environment that allows you to run select Connector runtimes
 as local job workers out-of-the-box. You can find this Java application on
-[Maven Central](https://search.maven.org/artifact/io.camunda.connector/connector-runtime-job-worker).
+[Maven Central](https://search.maven.org/artifact/io.camunda/spring-zeebe-connector-runtime).
 
 Refer to the [Self-Managed installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to
 set up this runtime environment.
 
-### Connector job handler
+### Custom runtime environment
 
 If using the pre-packaged runtime environment that comes with the SDK does not fit your use case,
-you can create a custom runtime environment. To wrap [Connector functions](#runtime-logic) as job
-workers conveniently, the SDK provides the wrapper class `ConnectorJobHandler`.
+you can create a custom runtime environment. There are three options that come with the SDK:
+
+- Create a custom job worker using Spring Zeebe.
+- Wrap Connector functions as job workers using the `ConnectorJobHandler`.
+- Implement your own Connector function wrapper.
+
+#### Spring Zeebe
+
+Being a Spring-wrapper around the [Zeebe Java client](/apis-clients/java-client/index.md), Spring Zeebe supports
+[running outbound Connectors](https://github.com/camunda-community-hub/spring-zeebe/#run-outboundconnectors) out of the box.
+You can expose them as Spring beans in your Spring application and Spring Zeebe picks them up and runs them automatically.
+Using this approach, you can run multiple Connector functions in one Java application.
+
+Spring Zeebe uses the `ConnectorJobHandler` and thus supports all functionality the [pre-packaged environment](#pre-packaged-runtime-environment)
+provides as well. It allows you to reuse this functionality in your own Spring or Spring Boot-based setup.
+
+#### Connector job handler
+
+To wrap [Connector functions](#runtime-logic) as job workers, the SDK provides the wrapper class `ConnectorJobHandler`.
+Spring Zeebe uses this handler as detailed above and the [pre-packaged environment](#pre-packaged-runtime-environment)
+packages a Spring Zeebe application to provide its functionality.
 
 The job handler wrapper provides the following benefits:
 
-- Provides a `OutboundConnectorContext` that handles the Camunda-internal job worker API regarding variables.
+- Provides an `OutboundConnectorContext` that handles the Camunda-internal job worker API regarding variables.
 - Handles secret management by defaulting to an environment variables-based secret store and
   allowing to provide a custom secret provider via an SPI for `io.camunda.connector.api.secret.SecretProvider`.
 - Handles Connector result mapping for **Result Variable** and **Result Expression** as described
   in the [Connector template](#connector-template) section.
+- Provides flexible BPMN error handling via **Error Expression** as described in the
+  [Connector template](#connector-template) section.
 
 Using the wrapper class, you can create a custom [Zeebe client](../../../apis-clients/working-with-apis-clients.md).
 For example, you can spin up a custom client with the
@@ -894,8 +915,11 @@ public class Main {
 }
 ```
 
+#### Custom function wrapper
+
 If the provided job handler wrapper does not fit your needs, you can extend or replace
 it with your job handler implementation that handles invoking the Connector functions.
+
 Your custom job handler needs to create a `OutboundConnectorContext` that the Connector
 function can use to handle variables, secrets, and Connector results. You can extend the
 provided `io.camunda.connector.impl.outbound.AbstractConnectorContext` to quickly gain access

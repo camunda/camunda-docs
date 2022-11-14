@@ -14,7 +14,8 @@ The concept of a [Connector](/components/connectors/introduction.md) consists of
 
 The Connector runtime environment can be installed using the supported [deployment options](/self-managed/platform-deployment/overview.md#deployment-options).
 
-Currently, we support an installation of Connectors with Docker, Docker Compose, and the Manual setup. Refer to the [installation guide](/self-managed/platform-deployment/overview.md) for more details.
+Currently, we support an installation of Connectors with [Docker](/self-managed/platform-deployment/docker.md#connectors),
+[Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose), and the [Manual setup](/self-managed/platform-deployment/manual.md#run-connectors).
 
 ## Connector templates
 
