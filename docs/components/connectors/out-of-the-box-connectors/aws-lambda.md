@@ -4,7 +4,7 @@ title: AWS Lambda Connector
 description: Invoke AWS Lambda function.
 ---
 
-The AWS Lambda Connector allows you to connect your BPMN service with Amazon Web Service's [AWS Lambda Service](https://aws.amazon.com/lambda/).
+The **AWS Lambda Connector** allows you to connect your BPMN service with Amazon Web Service's [AWS Lambda Service](https://aws.amazon.com/lambda/).
 
 ## Prerequisites
 
