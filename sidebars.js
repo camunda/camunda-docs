@@ -648,11 +648,19 @@ module.exports = {
             "self-managed/platform-deployment/helm-kubernetes/deploy",
             "self-managed/platform-deployment/helm-kubernetes/upgrade",
             {
-              Platforms: [
+              type: "category",
+              label: "Platforms",
+              link: {
+                type: "doc",
+                id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
+              },
+              items: [
                 "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
               ],
+            },
+            {
               Guides: [
                 "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
