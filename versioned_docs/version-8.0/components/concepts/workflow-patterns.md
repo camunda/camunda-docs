@@ -16,7 +16,7 @@ In other words, scientists already wrote down all the patterns that are importan
 
 Additionally, BPMN has expressed all real-life problems rather easily when reflecting on our more than 15 years of hands-on experience with the language.
 
-If you now try to rely on workflow languages that promise to be simpler than BPMN, what it really means is that they lack important workflow patterns. You might want to look in the blog post on [why process orchestration needs advanced workflow patterns](https://docs.google.com/document/d/1lu0V4q6xE7zT4aKVM9xmcD9c9PaxBltN59_BzCL47qY/edit#heading=h.d4xwt0gq03os), showing exemplary workarounds that are necessary if the language cannot express certain patterns.
+If you now try to rely on workflow languages that promise to be simpler than BPMN, what it really means is that they lack important workflow patterns. You might want to look in the blog post on [why process orchestration needs advanced workflow patterns](https://camunda.com/blog/2022/07/why-process-orchestration-needs-advanced-workflow-patterns/), showing exemplary workarounds that are necessary if the language cannot express certain patterns.
 
 Typically, this involves emulating advanced patterns with basic constructs plus programming code so that your development takes longer, your solution becomes more brittle, and the resulting process model can't serve as a communication vehicle for business and IT as the model will be contaminated with technical details.
 
