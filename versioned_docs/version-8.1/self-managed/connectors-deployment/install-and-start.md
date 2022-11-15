@@ -29,6 +29,7 @@ Alternatively, you can fetch the JSON templates from the respective Connector's 
 - [Amazon SQS Connector](https://github.com/camunda/connector-sqs/releases)
 - [AWS Lambda Connector](https://github.com/camunda/connector-aws-lambda/releases)
 - [Google Drive Connector](https://github.com/camunda/connector-google-drive/releases)
+- [RabbitMQ](https://github.com/camunda/rabbitmq/releases)
 - [REST Connector](https://github.com/camunda/connector-http-json/releases)
 - [SendGrid Connector](https://github.com/camunda/connector-sendgrid/releases)
 - [Slack Connector](https://github.com/camunda/connector-slack/releases)
