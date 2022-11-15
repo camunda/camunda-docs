@@ -24,6 +24,7 @@ While you can install Camunda Platform 8 on any Kubernetes environment, we only 
 
 - Stock Kubernetes
 - [Amazon EKS](./platforms/amazon-eks.md)
+- [Microsoft AKS](./platforms/microsoft-aks.md)
 - [Red Hat OpenShift](./platforms/redhat-openshift.md)
 
 Generally speaking [deploying Camunda Platform using Helm chart](./deploy.md) should work for all platforms, however, each platform or cloud provider could have some special prerequisites to prepare or pitfalls to avoid. So main goal of the platforms docs is to shed the light on some points to have a smooth Camunda Platform deployment on different platforms.
