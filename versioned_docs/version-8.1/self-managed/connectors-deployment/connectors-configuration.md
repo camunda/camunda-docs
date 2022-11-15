@@ -48,7 +48,7 @@ CAMUNDA_OPERATE_CLIENT_USERNAME=demo
 CAMUNDA_OPERATE_CLIENT_PASSWORD=demo
 ```
 
-When running against a self-managed environment you might also need to configure the keycloak endpoint to not use Operate username/password authentication:
+When running against a Self-Managed environment, you might also need to configure the Keycloak endpoint to not use Operate username/password authentication:
 
 ```bash
 CAMUNDA_OPERATE_CLIENT_KEYCLOAK-URL=http://localhost:18080
@@ -57,7 +57,7 @@ CAMUNDA_OPERATE_CLIENT_KEYCLOAK-REALM=camunda-platform
 
 ## Manual discovery of Connectors
 
-By default, the Connector runtime picks up outbound connectors available on the classpath automatically.
+By default, the Connector runtime picks up outbound Connectors available on the `classpath` automatically.
 To disable this behavior, use the following environment variables to configure Connectors and their configuration explicitly:
 
 | Environment variable                          | Purpose                                                       |
@@ -102,7 +102,7 @@ to inject multiple secrets at once.
 
 ### Secrets in manual installations
 
-In the [manual setup](../platform-deployment/manual.md#run-connectors), inject secrets during Connector execution by providing
+In the [manual setup](../platform-deployment/local.md#run-connectors), inject secrets during Connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash

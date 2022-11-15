@@ -9,7 +9,7 @@ Find the available Connectors in Camunda Platform 8 SaaS and how to use them in 
 
 ## Creating a Connector task
 
-Use the change type context menu item (spanner/wrench icon) to integrate Connectors in a business model. Users can search for keywords like `REST` or `email` to find specific Connectors. To discover all available Connectors in Camunda, input the term Connector into the search bar.
+Use the change type context menu item (spanner/wrench icon) to integrate Connectors in a business model. Users can search for keywords like `REST` or `email` to find specific Connectors. To discover all available Connectors in Camunda, input the term `Connector` into the search bar.
 
 ![connectors context menu](img/use-connectors-context-menu.png)
 
@@ -27,7 +27,7 @@ Fields in the properties panel marked with an equals sign inside a circle indica
 
 ![feel Connectors](img/use-connectors-feel.png)
 
-Each Connector defines its own set of properties that you can fill in. Find the details for Connectors provided by Camunda in the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) documentation.
+Each Connector defines its own set of properties you can fill in. Find the details for Connectors provided by Camunda in the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
 ## BPMN errors
 
@@ -73,7 +73,7 @@ bpmnError("123", "error received")
 // { code: "123", message: "error received" }
 ```
 
-### BPMN Error examples
+### BPMN error examples
 
 #### HTTP errors to BPMN errors
 
@@ -102,5 +102,5 @@ else null
 ```
 
 This is assuming you requested data from a local weather station and received a value that is technically valid for the REST Connector.
-However, you could define that for your business case a humidity value below 0 must be an error that should be checked manually.
+However, you could define that for your business case a humidity value below `0` must be an error that should be checked manually.
 You could automatically send a message to a technician to check the weather station.
