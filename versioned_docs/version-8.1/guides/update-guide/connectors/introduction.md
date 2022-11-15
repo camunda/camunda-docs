@@ -13,7 +13,7 @@ There is a dedicated update guide for each version:
 
 Update from 0.2.x to 0.3.0
 
-[//]: # "TODO: As soon as the release will be created[Release notes](https://github.com/camunda/connector-sdk/releases/tag/0.2.0)"
+[Release notes](https://github.com/camunda/connector-sdk/releases/tag/0.3.0)
 
 ### [Connector SDK 0.1 to 0.2](../010-to-020)
 
