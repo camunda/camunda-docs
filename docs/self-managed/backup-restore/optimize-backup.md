@@ -70,22 +70,28 @@ curl --request POST 'http://localhost:8092/actuator/backups' \
 }
 ```
 
-## Check backup state API
+## Get backup info API
 
 Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.  
-As the backup is created asynchronously, the current state of the backup can be checked by calling the following endpoint:
+Information about a specific backup can be retrieved using the following request:
 
 ```
 GET actuator/backups/{backupId}
+```
+
+Information about all existing Optimize backups can be retrieved by omitting the optional `backupId` parameter:
+
+```
+GET actuator/backup
 ```
 
 ### Response
 
 | Code             | Description                                                                                                                                                              |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 200 OK           | Backup state could be determined and is returned in the response body (see example below)                                                                                |
+| 200 OK           | Backup state could be determined and is returned in the response body (see example below).                                                                               |
 | 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
-| 404 Not Found    | Backup with given id does not exist.                                                                                                                                     |
+| 404 Not Found    | If a backup ID was specified, no backup with that ID exists.                                                                                                             |
 | 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot state retrieval. Refer to the returned error message for more details.                       |
 
 ### Example request
@@ -97,14 +103,32 @@ curl ---request GET 'http://localhost:8092/actuator/backups/backup1'
 ### Example response
 
 ```json
-{
-  "State": "COMPLETED"
-}
+  {
+    "backupId": "backup1",
+    "failureReason": null,
+    "state": "COMPLETE",
+    “details”: [
+      {
+          "snapshotName": "camunda_optimize_backup1_3.10.0_part_1_of_2",
+          "state": "SUCCESS",
+          "startTime": "2022-11-09T10:11:36.978+0100",
+          "failures": []
+      },
+      {
+          "snapshotName": "camunda_optimize_backup1_3.10.0_part_2_of_2",
+          "state": "SUCCESS",
+          "startTime": "2022-11-09T10:11:37.178+0100",
+          "failures": []
+      }
+    ]
+  }
 ```
+
+Note that the endpoint will return a single item when called with a `backupId` and a list of items when called without specifying a `backupId`.
 
 Possible states of the backup:
 
-- `COMPLETED`: The backup can be used for restoring data.
+- `COMPLETE`: The backup can be used for restoring data.
 - `IN_PROGRESS`: The backup process for this backup ID is still in progress.
 - `FAILED`: Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch get snapshot status API](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/get-snapshot-status-api.html) for each of the snapshots included in the given backup.
 - `INCOMPATIBLE`: The backup is incompatible with the current Elasticsearch version.
