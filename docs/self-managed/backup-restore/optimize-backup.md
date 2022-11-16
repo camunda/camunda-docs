@@ -36,7 +36,7 @@ Note that the backup API can be reached via the `/actuator` management port, whi
 The following endpoint can be used to trigger the backup process:
 
 ```
-POST actuator/backup
+POST actuator/backups
 {
   "backupId": <backupId>
 }
@@ -54,7 +54,7 @@ POST actuator/backup
 ### Example request
 
 ```
-curl --request POST 'http://localhost:8092/actuator/backup' \
+curl --request POST 'http://localhost:8092/actuator/backups' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": "backup1" }'
 ```
@@ -76,7 +76,7 @@ Note that the backup API can be reached via the `/actuator` management port, whi
 As the backup is created asynchronously, the current state of the backup can be checked by calling the following endpoint:
 
 ```
-GET actuator/backup/{backupId}
+GET actuator/backups/{backupId}
 ```
 
 ### Response
@@ -91,7 +91,7 @@ GET actuator/backup/{backupId}
 ### Example request
 
 ```
-curl ---request GET 'http://localhost:8092/actuator/backup/backup1'
+curl ---request GET 'http://localhost:8092/actuator/backups/backup1'
 ```
 
 ### Example response
@@ -116,7 +116,7 @@ Note that the backup API can be reached via the `/actuator` management port, whi
 An existing backup can be deleted using the below API which deletes all Optimize snapshots associated with the supplied backupID.
 
 ```
-DELETE actuator/backup/{backupId}
+DELETE actuator/backups/{backupId}
 ```
 
 ### Response
@@ -130,7 +130,7 @@ DELETE actuator/backup/{backupId}
 ### Example request
 
 ```
-curl ---request DELETE 'http://localhost:8092/actuator/backup/backup1'
+curl ---request DELETE 'http://localhost:8092/actuator/backups/backup1'
 ```
 
 ## Restore backup
