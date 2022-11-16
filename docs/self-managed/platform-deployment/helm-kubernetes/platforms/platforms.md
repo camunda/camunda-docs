@@ -7,8 +7,8 @@ description: "An overview of Camunda Platform 8 officially supported Kubernetes 
 import DocCardList from '@theme/DocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-Generally speaking [deploying Camunda Platform 8 using Helm chart](../deploy.md) should work for all platforms and distributions, however, each platform or cloud provider could have some special prerequisites to prepare or pitfalls to avoid. So main goal of the platforms guides is to shed the light on some points to have a smooth Camunda Platform deployment on different platforms.
+[Deploying Camunda Platform 8 using Helm charts](../deploy.md) will work for all platforms and distributions. However, each platform or cloud provider may have some special prerequisites or pitfalls to avoid. The platforms guides highlights important notes for a smooth Camunda Platform deployment on various platforms.
 
-In additional to the Stock Kubernetes (which could be deployed on Cloud or On-premises), we only officially test and support the following platforms:
+In addition to Stock Kubernetes (which could be deployed on cloud or on-premise), Camunda only officially tests and supports the following platforms:
 
 <DocCardList items={useCurrentSidebarCategory().items}/>
