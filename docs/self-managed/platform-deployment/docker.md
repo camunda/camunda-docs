@@ -201,13 +201,13 @@ To prevent this, common dependencies like `jackson` can be shaded and relocated 
 You can add a Connector JAR by extending the base image with a JAR from a public URL:
 
 ```yml
-FROM camunda/connectors:0.2.2
+FROM camunda/connectors:0.3.0
 
-ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.9.0/connector-http-json-0.9.0-with-dependencies.jar /opt/app/
+ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.11.0/connector-http-json-0.11.0-with-dependencies.jar /opt/app/
 ```
 
 You can also add a Connector JAR using volumes:
 
 ```bash
-docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.2.2
+docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.3.0
 ```

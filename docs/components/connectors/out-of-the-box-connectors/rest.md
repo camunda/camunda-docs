@@ -12,7 +12,7 @@ To use a **REST Connector** in your process, either change the type of existing 
 
 ## Make your REST Connector executable
 
-To make the **REST Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
+To make the **REST Connector** executable, choose the required authentication type and fill out the mandatory fields highlighted in red in the properties panel:
 
 ![rest Connector red properties](../img/connectors-rest-red-properties.png)
 
@@ -24,11 +24,12 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 You can choose among the available REST Connectors according to your authentication requirements.
 
-#### REST Connector (No Auth)
+### REST Connector (No Auth)
 
+Click **No Auth** in the **Authentication** section.
 No extra authentication configuration is required; you can jump to the [next section](#request).
 
-#### REST Connector (Basic Auth)
+### REST Connector (Basic Auth)
 
 ##### Create a new Connector secret
 
@@ -41,8 +42,9 @@ We advise you to keep your **Password** safe and avoid exposing it in the BPMN `
 
 Select the **REST Connector** and fill out the following properties under the **Authentication** section:
 
-1. Set **Username** (i.e. `YOUR_USERNAME`).
-2. Set **Password** to the secret you created (i.e. `secrets.REST_BASIC_AUTH_SECRET`).
+1. Click **Basic Auth** in the **Authentication** section.
+2. Set **Username** (i.e. `secrets.YOUR_USERNAME`).
+3. Set **Password** to the secret you created (i.e. `secrets.REST_BASIC_AUTH_SECRET`).
 
 ![rest Connector basic auth](../img/connectors-rest-basic-auth.png)
 
@@ -59,7 +61,8 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 
 Select the **REST Connector** and fill out the following properties under the **Authentication** section:
 
-1. Set **Bearer** to the secret you created (i.e. `secrets.REST_BEARER_TOKEN`).
+1. Click **Bearer Token Auth** in the **Authentication** section.
+2. Set **Bearer** to the secret you created (i.e. `secrets.REST_BEARER_TOKEN`).
 
 ![rest Connector bearer token auth](../img/connectors-rest-bearer-token-auth.png)
 
@@ -122,6 +125,13 @@ Secrets are currently not supported in the body of a REST Connector.
 ```
 
 ![rest connector http request body](../img/connectors-rest-http-request-body.png)
+
+### Connection timeout
+
+To set connection timeout in your request, set it in seconds in the **Connection Timeout** section.
+This is not a required field, with a default value of 20 seconds. To set an infinite timeout, set this value to `0`.
+
+![rest connector http request body](../img/connectors-rest-http-connection-timeout.png)
 
 ## Response
 
