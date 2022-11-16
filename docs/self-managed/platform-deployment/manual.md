@@ -149,24 +149,18 @@ To update Tasklist versions, visit the [guide to update Tasklist](../../componen
 
 ## Run Connectors
 
-The [Connector runtime environment](https://search.maven.org/artifact/io.camunda.connector/connector-runtime-job-worker) picks up outbound Connectors available on the `classpath` automatically.
+The [Connector runtime environment](https://search.maven.org/artifact/io.camunda/spring-zeebe-connector-runtime) picks up outbound Connectors available on the `classpath` automatically.
 It uses the default configuration specified by a Connector through its `@OutboundConnector` annotation.
 
 To run the [REST Connector](https://search.maven.org/artifact/io.camunda.connector/connector-http-json) with the runtime environment, execute the following command:
 
 ```bash
-java -cp 'connector-runtime-job-worker-with-dependencies.jar:connector-http-json-with-dependencies.jar' \
-    io.camunda.connector.runtime.jobworker.Main
+java -cp 'spring-zeebe-connector-runtime-VERSION-with-dependencies.jar:connector-http-json-VERSION-with-dependencies.jar' \
+    io.camunda.connector.runtime.ConnectorRuntimeApplication
 ```
 
 This starts a Zeebe client, registering the defined Connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
-You can configure the Zeebe client using the [standard Zeebe environment variables](/apis-clients/java-client/index.md#bootstrapping).
-
-You will see messages similar to the following:
-
-```log
-INFO: Registering outbound connector OutboundConnectorRegistration { name=HTTPJSON, type=io.camunda:http-json:1, function=io.camunda.connector.http.HttpJsonFunction, inputVariables=[url, method, authentication, headers, queryParameters, body] }
-```
+You can configure the Zeebe client using the options provided by [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe/tree/master/connector-runtime#configuration-options).
 
 ## Run Identity
 
