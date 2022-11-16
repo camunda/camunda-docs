@@ -18,7 +18,15 @@ Ensure you enter the correct exchange name and routing key, as the **RabbitMQ Co
 
 ## Create a RabbitMQ Connector task
 
-To use the **RabbitMQ Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+To use the **RabbitMQ Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon,
+
+![wrench-shape](../img/connectors-rabbitmq-wrench-shaped.png)
+
+or create a new Connector task by using the **Append Connector** context menu.
+
+![wrench-shape](../img/connectors-rabbitmq-append-connector.png)
+
+Follow our [guide to using Connectors](../use-connectors.md) to learn more.
 
 ## Connecting to RabbitMQ and sending messages
 
