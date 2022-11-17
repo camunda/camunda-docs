@@ -18,7 +18,7 @@ Operate, Tasklist, Identity, and Optimize are licensed to our users and customer
 
 ### Connectors
 
-The Connector SDK, REST Connector, Connector Runtime Docker image, and Connectors Bundle Docker image are licensed under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0). All other Connectors provided by Camunda out-of-the-box are licensed to our users and customers under a proprietary license. The proprietary license is the same and therefore has the same implications as the one defined for Operate, Tasklist, Identity, and Optimize above.
+The Connector SDK, REST Connector, Connector Runtime Docker image, and Connectors Bundle Docker image are licensed under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0). All other Connectors provided by Camunda out-of-the-box are licensed to our users and customers under the same proprietary license as the one defined for Operate, Tasklist, Identity, and Optimize above.
 
 ### Web Modeler
 
