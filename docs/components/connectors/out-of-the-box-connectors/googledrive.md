@@ -89,7 +89,7 @@ You also enable _Google Docs API_ and _Google Drive API_ for every client intend
 ![Bearer Auth](../img/connectors-googledrive-jwt-bearer.png)
 
 :::warning
-The following code snippet are for demonstration purposes only and must not be used for real production systems due to security concerns.
+The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
 For production usage it is highly recommended to follow the [official Google guideline](https://developers.google.com/identity/protocols/oauth2/service-account).
 :::
 
@@ -115,7 +115,7 @@ print(credentials.token)
 ![Refresh Auth](../img/connectors-googledrive-jwt-refresh.png)
 
 :::warning
-The following code snippet are for demonstration purposes only and must not be used for real production systems due to security concerns.
+The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
 For production usage it is highly recommended to follow the [official Google guideline](https://developers.google.com/identity/protocols/oauth2/web-server).
 :::
 
