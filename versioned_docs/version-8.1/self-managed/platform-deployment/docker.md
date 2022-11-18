@@ -105,11 +105,11 @@ all data which should be persisted.
 The Zeebe configuration is located at `/usr/local/zeebe/config/application.yaml`.
 The logging configuration is located at `/usr/local/zeebe/config/log4j2.xml`.
 
-The configuration of the Docker image can also be changed using environment
-variables. The configuration template file also contains information on the environment
+The configuration of the Docker image can also be changed using [environment
+variables](../zeebe-deployment/configuration/environment-variables.md). The configuration template file also contains information on the environment
 variables to use for each configuration setting.
 
-Available environment variables:
+Commonly used environment variables:
 
 - `ZEEBE_LOG_LEVEL` - Sets the log level of the Zeebe Logger (default: `info`).
 - `ZEEBE_BROKER_NETWORK_HOST` - Sets the host address to bind to instead of the IP of the container.

@@ -172,9 +172,7 @@ As you can see in the table above, such a cluster can serve 500,000 process inst
 |                                    | vCPU \[cores\]      | 0.8     | 0.96  |
 |                                    | Mem \[GB\]          | 2       | 4     |
 |                                    | Disk \[GB\]         | 32      | 192   |
-| #gateway                           | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.4     | 0.4   |
-|                                    | Mem \[GB\] limit    | 0.45    | 0.45  |
+| gateway                            | embedded in broker  |         |       |
 | **Operate**                        |                     |         |       |
 | #importer                          | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 0.4     | 1     |
@@ -199,7 +197,7 @@ As you can see in the table above, such a cluster can serve 500,000 process inst
 | **Elastic**                        |                     |         |       |
 | #statefulset                       | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 1       | 2     |
-|                                    | Mem \[GB\] limit    | 1       | 6     |
+|                                    | Mem \[GB\] limit    | 3       | 6     |
 |                                    | Disk \[GB\] request | 64      | 64    |
 | **Other** (Worker, Analytics, ...) |                     |         |       |
 | #                                  | 1                   |         |       |

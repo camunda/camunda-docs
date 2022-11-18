@@ -16,6 +16,10 @@ Licenses and license information for Zeebe can be found in the Zeebe project [RE
 
 Operate, Tasklist, Identity, and Optimize are licensed to our users and customers under a proprietary license. The proprietary license can be either the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) or the Camunda Platform Self-Managed Enterprise Edition license (a copy you obtain when you contact Camunda). Note that while the Camunda Platform Self-Managed Free Edition is indeed free, it only allows usage of the software in non-production environments. To use the software in production, [purchase the Camunda Platform Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/). This licensing information also applies to web apps and APIs.
 
+### Connectors
+
+The Connector SDK, REST Connector, Connector Runtime Docker image, and Connectors Bundle Docker image are licensed under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0). All other Connectors provided by Camunda out of the box are licensed to our users and customers under the same proprietary license as the one defined for Operate, Tasklist, Identity, and Optimize above.
+
 ### Web Modeler
 
 Web Modeler (including Beta) is licensed under a [proprietary license](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/).
