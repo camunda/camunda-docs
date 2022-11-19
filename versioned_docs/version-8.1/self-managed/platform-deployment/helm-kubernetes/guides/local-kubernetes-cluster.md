@@ -10,7 +10,14 @@ In this guide we will use KIND but the idea is the same for any other tool like 
 
 1. Download the binaries of [KIND](https://kind.sigs.k8s.io/docs/user/quick-start) depending of your system.
 2. Download the Camunda Platform values file for KIND [camunda-platform-core-kind-values.yaml](https://github.com/camunda/camunda-platform-helm/blob/main/kind/camunda-platform-core-kind-values.yaml).
-3. After initiating the Kubernetes cluster using KIND locally, deploy Camunda Platform using Helm and custom values file:
+3. Add the correct repo:
+
+```
+helm repo add camunda-cloud https://helm.camunda.io
+helm repo update
+```
+
+4. After initiating the Kubernetes cluster using KIND locally, deploy Camunda Platform using Helm and custom values file:
 
 ```
 helm install my-camunda-platform camunda-cloud/camunda-platform -f camunda-platform-core-kind-values.yaml
