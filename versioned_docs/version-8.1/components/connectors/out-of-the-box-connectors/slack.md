@@ -20,7 +20,25 @@ To make the **Slack Connector** executable, fill out the mandatory fields highli
 
 ![slack connector red properties](../img/connectors-slack-red-properties.png)
 
-1. Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, 'secrets.SLACK_OAUTH_TOKEN'.
+### Authentication
+
+Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, 'secrets.SLACK_OAUTH_TOKEN'.
+
+### Create channel
+
+1. Set **Method** to `Create Channel`
+2. Fill out the **New Channel Name**
+   - Channel name can be up to 80 characters long and may contain lowercase letters, digits, and symbols `-` and `_`
+   - Can be provided as a FEEL expression
+3. Set channel **Visibility** as required:
+   1. **Public** channels are visible to every workspace member
+   2. **Private** channels are visible to explicitly invited people only
+
+![slack connector create channel](../img/connectors-slack-create-channel.png)
+
+### Post message
+
+1. Set **Method** to `Post Message`
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
@@ -28,7 +46,7 @@ To make the **Slack Connector** executable, fill out the mandatory fields highli
 
 The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](../../concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
-![slack connector compose](../img/connectors-slack-compose.png)
+![slack connector compose](../img/connectors-slack-post-message.png)
 
 :::note
 Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/formatting#basics) can assist in formatting messages.
@@ -37,19 +55,35 @@ Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/format
 ## Slack API response
 
 The **Slack Connector** exposes the Slack API response as a [local variable](https://docs.camunda.io/docs/components/concepts/variables/#variable-scopes) called `response`.
+Response contents are method-specific.
 
-The following fields are available in the `response` variable. Notice that all fields describe state in the Slack workspace:
+### Create channel
+
+The following fields are available in the `response` variable after executing **Create Channel** method:
+
+- **channel**:
+  - **id**: channel ID
+  - **name**: channel name
+
+Notice that **name** field can be subsequently used as an argument of **Post Message** method.
+
+### Post message
+
+The following fields are available in the `response` variable after executing **Post Message** method.
+Notice that all fields describe state in the Slack workspace:
 
 - **ts**: timestamp ID
 - **channel**: channel ID
 - **message**:
   - **type**: message type
-  - **type**: team ID
+  - **team**: team ID
   - **user**: user ID
   - **text**: message text
   - **ts**: timestamp ID
   - **appID**: Slack App ID
   - **botID**: Slack Bot ID
+
+### Output mapping
 
 You can use an Output Mapping to map the response:
 
@@ -85,7 +119,9 @@ You can only install a Slack app to a workspace in which you are a member or tha
 The **Slack Connector** communicates through a Slack app with a concrete Slack workspace. For example, when sending a Slack message, the message will be posted by the Slack app. For the **Slack Connector** to work, you need to perform the following steps:
 
 1. [Create a Slack app](https://api.slack.com/apps).
-2. [Request required scopes](https://api.slack.com/scopes) - The scopes represent what your app can and cannot do (for example, posting messages). For the Slack Connector to work, at a minimum you need to grant the [`chat:write`](https://api.slack.com/scopes/chat:write) scope.
+2. [Request required scopes](https://api.slack.com/scopes) - The scopes represent what your app can and cannot do (for example, posting messages).
+   1. For **Create Channel** method to work, you need to grant at least the [`channels:manage`](https://api.slack.com/scopes/channels:manage) scope.
+   2. For **Post Message** method to work, at a minimum you need to grant the [`chat:write`](https://api.slack.com/scopes/chat:write) scope.
 3. [Install the Slack app to your workspace](https://api.slack.com/authentication/basics#installing).
 4. [Invite the Slack app to your workspace via /invite](https://slack.com/help/articles/201259356-Slash-commands-in-Slack#h_01EPZ2Z81EJ67RA2BGDKZ9M1AN).
 
