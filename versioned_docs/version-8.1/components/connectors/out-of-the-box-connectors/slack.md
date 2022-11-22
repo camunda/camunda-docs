@@ -26,19 +26,23 @@ Set **Authentication** to your Slack OAuth token, which is stored as a secret. F
 
 ### Create channel
 
-1. Set **Method** to `Create Channel`
-2. Set the **New Channel Name**
-   1. Channel name can be up to 80 characters long and may contain lowercase letters, digits, and symbols `-` and `_`
-   2. Can be provided as a FEEL expression
+To create a channel, take the following steps:
+
+1. Set **Method** to `Create Channel`.
+2. Set the **New Channel Name**:
+   1. Channel name can be up to 80 characters and may contain lowercase letters, digits, and symbols `-` and `_`.
+   2. This can be provided as a FEEL expression.
 3. Set channel **Visibility** as required:
-   1. **Public** channels are visible to every workspace member
-   2. **Private** channels are visible to explicitly invited people only
+   1. **Public** channels are visible to every workspace member.
+   2. **Private** channels are visible to explicitly invited people only.
 
 ![slack connector create channel](../img/connectors-slack-create-channel.png)
 
 ### Post message
 
-1. Set **Method** to `Post Message`
+To post a message, take the following steps:
+
+1. Set **Method** to `Post Message`.
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
