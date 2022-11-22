@@ -146,6 +146,7 @@ module.exports = {
               "Additional configuration": [
                 "components/modeler/desktop-modeler/flags/flags",
                 "components/modeler/desktop-modeler/plugins/plugins",
+                "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
                 "components/modeler/desktop-modeler/search-paths/search-paths",
                 "components/modeler/desktop-modeler/telemetry/telemetry",
               ],
@@ -668,6 +669,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
+                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
               ],
             },
