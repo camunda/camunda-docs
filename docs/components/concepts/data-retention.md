@@ -21,4 +21,4 @@ If there are specific requirements for your use-case, please [reach out to us](/
 The following links, from our self-managed documentation, describe these concepts in more detail.
 
 [Operate Data Retention](/self-managed/operate-deployment/data-retention.md)
-[Optimize History Cleanup]($optimize$/self-managed/optimize-deployment/advanced-features/engine-data-deletion.md)
+[Optimize History Cleanup]($optimize$/self-managed/optimize-deployment/advanced-features/engine-data-deletion)
