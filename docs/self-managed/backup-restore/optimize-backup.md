@@ -44,12 +44,12 @@ POST actuator/backups
 
 ### Response
 
-| Code             | Description                                                                                                                                                                                                                                                   |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 200 OK           | Backup was successfully started. List of snapshot names is returned in response body (see example below). We recommend storing this information to be able to refer to it later when, for example, checking the backup state or restoring specific snapshots. |
-| 400 Bad Request  | Indicates issues with the request, for example when the `backupId` contains invalid characters.                                                                                                                                                               |
-| 409 Conflict     | Indicates that a backup with the same `backupId` already exists.                                                                                                                                                                                              |
-| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot creation. Refer to the returned error message for more details.                                                                                                                   |
+| Code             | Description                                                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| 202 Accepted     | Backup process was successfully initiated. To determine whether backup process was completed refer to the GET API.                          |
+| 400 Bad Request  | Indicates issues with the request, for example when the `backupId` contains invalid characters.                                             |
+| 409 Conflict     | Indicates that a backup with the same `backupId` already exists.                                                                            |
+| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot creation. Refer to the returned error message for more details. |
 
 ### Example request
 
