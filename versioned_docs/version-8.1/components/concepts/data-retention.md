@@ -7,12 +7,14 @@ In Camunda Platform 8 SaaS, the following data retention strategies are implemen
 
 ## Default retention time of each application
 
-The following time-to-live settings are configured in SaaS for each application. These are the defaults for our enterprise plan. If there are specific requirements for your use-case, please [reach out to us](/contact/) to discuss your data retention needs.
+The following time-to-live settings are configured in SaaS for each application. These are the defaults for our enterprise plan.
 
-Operate: 30 days
-Optimize: 180 days
-Tasklist: 30 days
-Zeebe: 7 days
+- **Operate**: 30 days
+- **Optimize**: 180 days
+- **Tasklist**: 30 days
+- **Zeebe**: 7 days
+
+If there are specific requirements for your use-case, please [reach out to us](/contact/) to discuss your data retention needs.
 
 ## Further information
 
