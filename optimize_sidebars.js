@@ -586,6 +586,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/available-connectors-overview/"
             ),
             docsLink(
+              "Amazon SNS Connector",
+              "components/connectors/out-of-the-box-connectors/aws-sns/"
+            ),
+            docsLink(
               "Amazon SQS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sqs/"
             ),
@@ -596,6 +600,10 @@ module.exports = {
             docsLink(
               "Google Drive Connector",
               "components/connectors/out-of-the-box-connectors/googledrive/"
+            ),
+            docsLink(
+              "RabbitMQ Connector",
+              "components/connectors/out-of-the-box-connectors/rabbitmq/"
             ),
             docsLink(
               "REST Connector",

@@ -38,6 +38,7 @@ module.exports = {
           Connectors: [
             "guides/update-guide/connectors/introduction",
             "guides/update-guide/connectors/010-to-020",
+            "guides/update-guide/connectors/020-to-030",
           ],
         },
         "guides/update-guide/800-to-810",
@@ -145,6 +146,7 @@ module.exports = {
               "Additional configuration": [
                 "components/modeler/desktop-modeler/flags/flags",
                 "components/modeler/desktop-modeler/plugins/plugins",
+                "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
                 "components/modeler/desktop-modeler/search-paths/search-paths",
                 "components/modeler/desktop-modeler/telemetry/telemetry",
               ],
@@ -214,9 +216,11 @@ module.exports = {
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+            "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
             "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/rest",
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
@@ -648,15 +652,24 @@ module.exports = {
             "self-managed/platform-deployment/helm-kubernetes/deploy",
             "self-managed/platform-deployment/helm-kubernetes/upgrade",
             {
-              Platforms: [
+              type: "category",
+              label: "Platforms",
+              link: {
+                type: "doc",
+                id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
+              },
+              items: [
                 "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
               ],
+            },
+            {
               Guides: [
                 "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
+                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
               ],
             },

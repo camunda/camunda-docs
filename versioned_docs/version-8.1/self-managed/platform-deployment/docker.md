@@ -105,11 +105,11 @@ all data which should be persisted.
 The Zeebe configuration is located at `/usr/local/zeebe/config/application.yaml`.
 The logging configuration is located at `/usr/local/zeebe/config/log4j2.xml`.
 
-The configuration of the Docker image can also be changed using environment
-variables. The configuration template file also contains information on the environment
+The configuration of the Docker image can also be changed using [environment
+variables](../zeebe-deployment/configuration/environment-variables.md). The configuration template file also contains information on the environment
 variables to use for each configuration setting.
 
-Available environment variables:
+Commonly used environment variables:
 
 - `ZEEBE_LOG_LEVEL` - Sets the log level of the Zeebe Logger (default: `info`).
 - `ZEEBE_BROKER_NETWORK_HOST` - Sets the host address to bind to instead of the IP of the container.
@@ -188,11 +188,11 @@ Refer to the [Connector installation guide](../../connectors-deployment/install-
 #### Custom set of Connectors
 
 To add custom Connectors, you can build on top of our [Connectors base image](https://hub.docker.com/r/camunda/connectors/) that includes the pre-packaged runtime environment without any Connector.
-To use the image, at least one Connector has to be added to the classpath. We recommend providing JARs with all dependencies bundled.
+To use the image, at least one Connector must be added to the `classpath`. We recommend providing JARs with all dependencies bundled.
 
 :::caution
 
-As all Connectors share a single classpath, different versions of the same dependency can be available and lead to conflicts.
+As all Connectors share a single `classpath`, different versions of the same dependency can be available and cause conflicts.
 To prevent this, common dependencies like `jackson` can be shaded and relocated inside the Connector's JAR.
 
 :::
@@ -200,13 +200,13 @@ To prevent this, common dependencies like `jackson` can be shaded and relocated 
 You can add a Connector JAR by extending the base image with a JAR from a public URL:
 
 ```yml
-FROM camunda/connectors:0.2.2
+FROM camunda/connectors:0.3.0
 
-ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.9.0/connector-http-json-0.9.0-with-dependencies.jar /opt/app/
+ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.11.0/connector-http-json-0.11.0-with-dependencies.jar /opt/app/
 ```
 
-You can also add a Connector JAR by using volumes:
+You can also add a Connector JAR using volumes:
 
 ```bash
-docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.2.2
+docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.3.0
 ```

@@ -14,11 +14,12 @@ The concept of a [Connector](/components/connectors/introduction.md) consists of
 
 The Connector runtime environment can be installed using the supported [deployment options](/self-managed/platform-deployment/platform-8-deployment.md#deployment-options).
 
-Currently, we only support an installation of Connectors with Docker, Docker Compose, and the Manual setup. Refer to the [installation guide](/self-managed/platform-deployment/platform-8-deployment.md) for more details.
+Currently, we support an installation of Connectors with [Docker](/self-managed/platform-deployment/docker.md#connectors),
+[Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose), and the [manual setup](/self-managed/platform-deployment/local.md#run-connectors).
 
 ## Connector templates
 
-Fot the modeling interface, you need to [provide Connector templates](/components/connectors/custom-built-connectors/connector-templates.md#providing-and-using-connector-templates).
+For the modeling interface, you need to [provide Connector templates](/components/connectors/custom-built-connectors/connector-templates.md#providing-and-using-connector-templates).
 
 For the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda,
 the Connectors Bundle project provides a set of all Connector templates related to one [release version](https://github.com/camunda/connectors-bundle/releases).
@@ -26,9 +27,11 @@ If you use the [Docker Compose](/self-managed/platform-deployment/docker.md#dock
 
 Alternatively, you can fetch the JSON templates from the respective Connector's releases:
 
+- [Amazon SNS Connector](https://github.com/camunda/connector-sns/releases)
 - [Amazon SQS Connector](https://github.com/camunda/connector-sqs/releases)
 - [AWS Lambda Connector](https://github.com/camunda/connector-aws-lambda/releases)
 - [Google Drive Connector](https://github.com/camunda/connector-google-drive/releases)
+- [RabbitMQ](https://github.com/camunda/rabbitmq/releases)
 - [REST Connector](https://github.com/camunda/connector-http-json/releases)
 - [SendGrid Connector](https://github.com/camunda/connector-sendgrid/releases)
 - [Slack Connector](https://github.com/camunda/connector-slack/releases)

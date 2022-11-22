@@ -2098,6 +2098,10 @@ Desktop Modeler is a desktop modeling application that builds upon a number of t
 
 Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sdk/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
+### Connector Amazon Simple Notification Service (SNS)
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sns/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
 ### Connector Amazon Simple Queue Service (SQS)
 
 Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sqs/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
@@ -2109,6 +2113,10 @@ Find an up-to-date list of third-party libraries used and their license terms in
 ### Connector Google Drive
 
 Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-google-drive/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+### Connector RabbitMQ
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-rabbitmq/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 ### Connector REST
 

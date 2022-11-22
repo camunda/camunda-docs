@@ -14,7 +14,7 @@ Camunda Platform 8 Self-Managed can be deployed on EKS like any Kubernetes clust
 Generally speaking, the EKS cluster specification depends on your needs and workloads.
 Here is a recommended start to run Camunda Platform 8:
 
-- Instance type: `m5.xlarge`
+- Instance type: `m5.xlarge` (4 vCPUs, 16 GiB Memory)
 - Number of nodes: `4`
 - Volume type: `SSD gp3`
 
@@ -41,4 +41,4 @@ of 3,000 IOPS. The `gp2` volumes could also be used, but `gp2` volume type perfo
 [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance).
 
 It's recommended to use `gp3` volumes, but if only `gp2` type is available, EKS cluster nodes
-should use `gp2` volumes of at least 100 GB.
+should use `gp2` volumes of at least 334 GB.

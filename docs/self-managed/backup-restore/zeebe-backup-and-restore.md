@@ -118,7 +118,7 @@ To restore a Zeebe cluster, run the following in each node where the broker will
 
 ```
 tar -xzf zeebe-distribution-X.Y.Z.tar.gz -C zeebe/
-./bin/restore <backupId>
+./bin/restore --backupId=<backupId>
 ```
 
 If restore was successful, the app exits with a log message of `Successfully restored broker from backup`.

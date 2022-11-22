@@ -36,7 +36,7 @@ Note that the backup API can be reached via the `/actuator` management port, whi
 The following endpoint can be used to trigger the backup process:
 
 ```
-POST actuator/backup
+POST actuator/backups
 {
   "backupId": <backupId>
 }
@@ -44,17 +44,17 @@ POST actuator/backup
 
 ### Response
 
-| Code             | Description                                                                                                                                                                                                                                                   |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 200 OK           | Backup was successfully started. List of snapshot names is returned in response body (see example below). We recommend storing this information to be able to refer to it later when, for example, checking the backup state or restoring specific snapshots. |
-| 400 Bad Request  | Indicates issues with the request, for example when the `backupId` contains invalid characters.                                                                                                                                                               |
-| 409 Conflict     | Indicates that a backup with the same `backupId` already exists.                                                                                                                                                                                              |
-| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot creation. Refer to the returned error message for more details.                                                                                                                   |
+| Code             | Description                                                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| 202 Accepted     | Backup process was successfully initiated. To determine whether backup process was completed refer to the GET API.                          |
+| 400 Bad Request  | Indicates issues with the request, for example when the `backupId` contains invalid characters.                                             |
+| 409 Conflict     | Indicates that a backup with the same `backupId` already exists.                                                                            |
+| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot creation. Refer to the returned error message for more details. |
 
 ### Example request
 
 ```
-curl --request POST 'http://localhost:8092/actuator/backup' \
+curl --request POST 'http://localhost:8092/actuator/backups' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": "backup1" }'
 ```
@@ -70,41 +70,65 @@ curl --request POST 'http://localhost:8092/actuator/backup' \
 }
 ```
 
-## Check backup state API
+## Get backup info API
 
 Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.  
-As the backup is created asynchronously, the current state of the backup can be checked by calling the following endpoint:
+Information about a specific backup can be retrieved using the following request:
 
 ```
-GET actuator/backup/{backupId}
+GET actuator/backups/{backupId}
+```
+
+Information about all existing Optimize backups can be retrieved by omitting the optional `backupId` parameter:
+
+```
+GET actuator/backup
 ```
 
 ### Response
 
 | Code             | Description                                                                                                                                                              |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 200 OK           | Backup state could be determined and is returned in the response body (see example below)                                                                                |
+| 200 OK           | Backup state could be determined and is returned in the response body (see example below).                                                                               |
 | 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
-| 404 Not Found    | Backup with given id does not exist.                                                                                                                                     |
+| 404 Not Found    | If a backup ID was specified, no backup with that ID exists.                                                                                                             |
 | 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot state retrieval. Refer to the returned error message for more details.                       |
 
 ### Example request
 
 ```
-curl ---request GET 'http://localhost:8092/actuator/backup/backup1'
+curl ---request GET 'http://localhost:8092/actuator/backups/backup1'
 ```
 
 ### Example response
 
 ```json
-{
-  "State": "COMPLETED"
-}
+  {
+    "backupId": "backup1",
+    "failureReason": null,
+    "state": "COMPLETE",
+    “details”: [
+      {
+          "snapshotName": "camunda_optimize_backup1_3.10.0_part_1_of_2",
+          "state": "SUCCESS",
+          "startTime": "2022-11-09T10:11:36.978+0100",
+          "failures": []
+      },
+      {
+          "snapshotName": "camunda_optimize_backup1_3.10.0_part_2_of_2",
+          "state": "SUCCESS",
+          "startTime": "2022-11-09T10:11:37.178+0100",
+          "failures": []
+      }
+    ]
+  }
 ```
+
+Note that the endpoint will return a single item when called with a `backupId` and a list of items when called without specifying a `backupId`.
 
 Possible states of the backup:
 
-- `COMPLETED`: The backup can be used for restoring data.
+- `COMPLETE`: The backup can be used for restoring data.
 - `IN_PROGRESS`: The backup process for this backup ID is still in progress.
 - `FAILED`: Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch get snapshot status API](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/get-snapshot-status-api.html) for each of the snapshots included in the given backup.
 - `INCOMPATIBLE`: The backup is incompatible with the current Elasticsearch version.
@@ -116,7 +140,7 @@ Note that the backup API can be reached via the `/actuator` management port, whi
 An existing backup can be deleted using the below API which deletes all Optimize snapshots associated with the supplied backupID.
 
 ```
-DELETE actuator/backup/{backupId}
+DELETE actuator/backups/{backupId}
 ```
 
 ### Response
@@ -130,7 +154,7 @@ DELETE actuator/backup/{backupId}
 ### Example request
 
 ```
-curl ---request DELETE 'http://localhost:8092/actuator/backup/backup1'
+curl ---request DELETE 'http://localhost:8092/actuator/backups/backup1'
 ```
 
 ## Restore backup
