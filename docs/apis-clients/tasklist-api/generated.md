@@ -10,6 +10,7 @@ sidebar_class_name: navbar__toggle
 ---
 
 This documentation has been automatically generated from the GraphQL schema.
+GraphQL schema file to download: [tasklist.graphqls](./assets/tasklist.graphqls)
 
 Use the docs in the sidebar to find out how to use the schema:
 
