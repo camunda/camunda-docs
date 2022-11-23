@@ -662,6 +662,7 @@ module.exports = {
               items: [
                 "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
+                "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
               ],
             },
