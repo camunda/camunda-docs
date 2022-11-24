@@ -50,6 +50,7 @@ POST actuator/backups
 | 400 Bad Request  | Indicates issues with the request, for example when the `backupId` contains invalid characters.                                             |
 | 409 Conflict     | Indicates that a backup with the same `backupId` already exists.                                                                            |
 | 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot creation. Refer to the returned error message for more details. |
+| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch.                                                                   |
 
 ### Example request
 
@@ -93,6 +94,7 @@ GET actuator/backup
 | 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
 | 404 Not Found    | If a backup ID was specified, no backup with that ID exists.                                                                                                             |
 | 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot state retrieval. Refer to the returned error message for more details.                       |
+| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch.                                                                                                |
 
 ### Example request
 
@@ -150,6 +152,7 @@ DELETE actuator/backups/{backupId}
 | 204 No Content   | The delete request for the associated snapshots was submitted to Elasticsearch successfully.                                                                             |
 | 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
 | 500 Server Error | An error occurred, for example the snapshot repository does not exist. Refer to the returned error message for details.                                                  |
+| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch.                                                                                                |
 
 ### Example request
 
