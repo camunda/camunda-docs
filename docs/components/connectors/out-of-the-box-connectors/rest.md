@@ -66,6 +66,31 @@ Select the **REST Connector** and fill out the following properties under the **
 
 ![rest Connector bearer token auth](../img/connectors-rest-bearer-token-auth.png)
 
+### REST Connector (OAuth token)
+
+#### Create a new Connector secret
+
+We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+
+1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+2. Name your secret (i.e `OAUTH_TOKEN_ENDPOINT`) so you can reference it later in the Connector.
+
+#### Configure the OAuth Token
+
+Select the **REST Connector** and fill out the following properties under the **Authentication** section:
+
+1. Click **OAuth 2.0** in the **Authentication** section.
+2. Set **OAuth Token Endpoint** to the secret you created (i.e. `secrets.OAUTH_TOKEN_ENDPOINT`).
+3. Set **Client ID** to the secret you created (i.e. `secrets.CLIENT_ID`).
+4. Set **Client secret** to the secret you created (i.e. `secrets.CLIENT_SECRET`).
+5. Set **Scopes** (i.e. `read:clients`). It is an optional field. Depending on the oauth client you're using, you should fill this field or not.
+6. Set **Audience** to the secret you created (i.e. `secrets.AUDIENCE`). It is an optional field. Depending on the OAuth provider you're using, you should fill this field or not.
+7. Choose **Client Authentication** from the dop-down list (i.e. `Send client credentials in body`).
+
+![rest Connector bearer token auth](../img/connectors-rest-oauth-token.png)
+
+You can find more information about how the oauth works by consulting the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
+
 ## Request
 
 Under the **HTTP Endpoint** section, select the desired **Method** and fill the **URL** with your desired REST API.
