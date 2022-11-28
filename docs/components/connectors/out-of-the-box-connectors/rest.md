@@ -89,7 +89,7 @@ Select the **REST Connector** and fill out the following properties under the **
 
 ![rest Connector bearer token auth](../img/connectors-rest-oauth-token.png)
 
-You can find more information about how the oauth works by consulting the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
+You can find more about the OAuth client credentials flow at the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
 ## Request
 
