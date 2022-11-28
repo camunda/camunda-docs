@@ -2,7 +2,7 @@
 id: kafka
 title: Kafka Producer Connector
 sidebar_label: Kafka Producer Connector
-description: Produce messages to Kafka from your BPMN process.
+description: "The Kafka Producer Connector allows you to connect your BPMN service with Kafka. Learn how to create a Kafka Producer Connector and make it executable."
 ---
 
 The **Kafka Producer Connector** allows you to connect your BPMN service with [Kafka](https://kafka.apache.org/).
@@ -10,9 +10,9 @@ The **Kafka Producer Connector** allows you to connect your BPMN service with [K
 ## Prerequisites
 
 To use the **Kafka Producer Connector**, you need to have a Kafka instance with configured bootstrap server.
-It is highly recommended not to expose your sensitive data as plain text but rather use Camunda secrets. Follow our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended not to expose your sensitive data as plain text, but rather use Camunda secrets. Follow our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
 
-## Create an Kafka Producer Connector task
+## Create a Kafka Producer Connector task
 
 To use the **Kafka Producer Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](../use-connectors.md) to learn more.
 
@@ -25,7 +25,7 @@ To make your **Kafka Producer Connector** for publishing messages executable, ta
 1. (Optional) Set the relevant credentials in the **Authentication** section. For example, `secrets.MY_KAFKA_USERNAME`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
 2. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
 3. In the **Kafka** section, set the topic name.
-4. (optional) In the **Kafka** section, fill out the field **Additional properties** to set producer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#producerconfigs). Also check preconfigured values for the **Kafka Producer Connector** in the relevant [appendix section](#what-are-default-kafka-producer-client-properties).
+4. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set producer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#producerconfigs). Also check preconfigured values for the **Kafka Producer Connector** in the relevant [appendix section](#what-are-default-kafka-producer-client-properties).
 5. In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
 
 ## Kafka Producer Connector response
@@ -100,13 +100,13 @@ delivery.timeout.ms=45000
 
 ### What is the precedence of client properties loading?
 
-Properties loading consists of 3 steps:
+Properties loading consists of three steps:
 
 1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties.
 2. Load miscellaneous properties.
 3. Load and **override** properties from the field **Additional properties**.
 
-### How do I set / override additional client properties?
+### How do I set or override additional client properties?
 
 The following example sets a new client property `client.id` and overrides SASL mechanism to SCRAM SHA-256 instead of plain text:
 
