@@ -83,13 +83,13 @@ Select the **REST Connector** and fill out the following properties under the **
 2. Set **OAuth Token Endpoint** to the secret you created (i.e. `secrets.OAUTH_TOKEN_ENDPOINT`).
 3. Set **Client ID** to the secret you created (i.e. `secrets.CLIENT_ID`).
 4. Set **Client secret** to the secret you created (i.e. `secrets.CLIENT_SECRET`).
-5. Set **Scopes** (i.e. `read:clients`). It is an optional field. Depending on the oauth client you're using, you should fill this field or not.
+5. Set **Scopes** (i.e. `read:clients`). It is an optional field. Depending on the OAuth client you're using, you should fill this field or not.
 6. Set **Audience** to the secret you created (i.e. `secrets.AUDIENCE`). It is an optional field. Depending on the OAuth provider you're using, you should fill this field or not.
-7. Choose **Client Authentication** from the dop-down list (i.e. `Send client credentials in body`).
+7. Choose **Client Authentication** from the dropdown menu (i.e. `Send client credentials in body`).
 
 ![rest Connector bearer token auth](../img/connectors-rest-oauth-token.png)
 
-You can find more about the OAuth client credentials flow at the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
+Find more information about the OAuth client credentials flow at the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
 ## Request
 
