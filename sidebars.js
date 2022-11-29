@@ -437,6 +437,10 @@ module.exports = {
                   "Process variants comparison",
                   "components/userguide/additional-features/process-variants-comparison/"
                 ),
+                optimizeLink(
+                  "Machine Learning Ready Dataset",
+                  "components/userguide/additional-features/ml-dataset/"
+                ),
               ],
             },
           ],
