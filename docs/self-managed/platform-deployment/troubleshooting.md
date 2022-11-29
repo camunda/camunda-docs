@@ -31,3 +31,16 @@ global:
     operate
       redirectUrl: https://operate.example.com
 ```
+
+### Zeebe Ingress (gRPC)
+
+Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. That means expose Zeebe-Gateway externally, you need things things:
+
+1. An Ingress controller that supports `gRPC` ([Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx) supports it out of the box).
+2. TLS enabled (HTTPS) in the Zeebe-gateway Ingress object.
+
+However, according to the note from official Kubernetes documentation about [Ingress TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls):
+
+> There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
+
+Hence, if you are not using the [Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx), ensure to pay an extra attention for TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](./helm-kubernetes/platforms/platforms.md).
