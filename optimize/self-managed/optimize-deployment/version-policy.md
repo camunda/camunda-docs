@@ -10,14 +10,7 @@ Camunda Optimize versions are denoted as X.Y.Z as well as by an optional [pre-re
 
 ## Release Cadence
 
-Camunda Optimize will get new releases every month being at least an alpha release and/or a patch release. At the end of a quarter either a new minor/major or a preview release will be published. The following table illustrates when to expect which type of release.
-
-| Quarter | Type of Release |
-| ------- | --------------- |
-| Q1      | Minor/Major     |
-| Q2      | Preview         |
-| Q3      | Minor/Major     |
-| Q4      | Preview         |
+Camunda Optimize will get new releases every month being at least an alpha release and/or a patch release. Every six months, a new minor/major will be published. The release dates are be aligned with the rest of the [Camunda 8 Platform]($docs$/reference/release-policy).
 
 ## Pre-Release Versions
 
@@ -25,9 +18,5 @@ There are two types of [pre-release](https://semver.org/spec/v2.0.0.html#spec-it
 
 ### Alpha Releases
 
-These releases are intended for non-production usages in trying out recent, potentially yet unfinished new features.
+There is an Optimize alpha release every month excluding those in which a minor version is released. Alpha releases are intended for non-production usages in trying out recent, potentially yet unfinished new features.
 They serve the purpose of early customer feedback and don't offer any update paths going forward. This means from running an alpha version there is no update possible to either the following alpha or any other following releases of Camunda Optimize.
-
-## Preview Releases
-
-Preview releases are intended for production use and allow to get access to a sub-set of features already completed to be released with the upcoming next minor release. In contrast to alpha releases, preview releases also provide full update support, this means once updated to a preview release, an update to the next minor release is supported.
