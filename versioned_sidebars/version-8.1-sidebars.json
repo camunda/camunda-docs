@@ -796,7 +796,13 @@
               ]
             },
             {
-              "Guides": [
+              "type": "category",
+              "label": "Guides",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/platform-deployment/helm-kubernetes/guides/guides"
+              },
+              "items": [
                 "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
