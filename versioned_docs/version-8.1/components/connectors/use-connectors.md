@@ -29,6 +29,36 @@ Fields in the properties panel marked with an equals sign inside a circle indica
 
 Each Connector defines its own set of properties you can fill in. Find the details for Connectors provided by Camunda in the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
+## Using secrets
+
+You can use sensitive information in your Connectors without exposing it in your BPMN processes by referencing secrets.
+Use the Console component to [create and manage secrets](../console/manage-clusters/manage-secrets.md).
+
+You can reference a secret like `MY_API_KEY` with `secrets.MY_API_KEY` in any Connector field in the properties panel that supports this.
+Each of the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
+
+Keep in mind that secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
+
+```
+= { myHeader: "secrets.MY_API_KEY"}
+```
+
+Using the secrets placeholder syntax, you can use secrets in any part of a text, like in the following FEEL expression.
+This example assumes there is a process variable `baseUrl` and a configured secret `TENANT_ID`:
+
+```
+= "https://" + baseUrl + "/{{secrets.TENANT_ID}}/accounting"
+```
+
+The engine will resolve the `baseUrl` variable and pass on the secrets placeholder to the Connector. Assuming the `baseUrl` variable resolves to `my.company.domain`,
+the Connector receives the input `"https://my.company.domain/{{secrets.TENANT_ID}}/accounting"`. The Connector then replaces the secrets placeholder upon execution.
+For further details on how secrets are implemented in Connectors, consult our [Connector SDK documentation](./custom-built-connectors/connector-sdk.md#secrets).
+
+:::note Warning
+`secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in Connector fields.
+Using this in other areas can lead to unexpected results and incidents.
+:::
+
 ## BPMN errors
 
 Being able to deal with exceptional cases is a common requirement for business process models. Read more about our general best practices around this topic in [dealing with exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
