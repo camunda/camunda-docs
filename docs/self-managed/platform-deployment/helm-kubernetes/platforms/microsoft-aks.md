@@ -32,3 +32,9 @@ The `Premium SSD` volume could also be used, but its performance
 
 It's recommended to use `Premium SSD v2` volume type, but only if `Premium SSD` type is available; AKS cluster nodes
 should use `Premium SSD` volumes of at least `256 GB` (P15).
+
+### Zeebe Ingress
+
+**Azure Application Gateway Ingress cannot be used as an Ingress for Zeebe/Zeebe-Gateway** because Zeebe requires an Ingress controller that supports `gRPC`. You should use any other Ingress controller that supports `gRPC`, like the [Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx).
+
+Currently, the Azure Application Gateway Ingress controller doesn't support `gRPC`. For more details, follow the upstream [GitHub issue about gRPC/HTTP2 support](https://github.com/Azure/application-gateway-kubernetes-ingress/issues/1015).
