@@ -5,6 +5,12 @@
 <p>
 This repository contains the Camunda Platform 8 documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
 </p>
+
+<p>
+And kittens!
+
+<img src="https://media3.giphy.com/media/40Fpxgn6Yq640/giphy.gif"/>
+</p>
 </div>
 
 ---
