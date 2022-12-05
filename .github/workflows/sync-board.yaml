@@ -10,7 +10,9 @@ on:
 
 jobs:
   sync-board:
-    if: github.event.requested_reviewer.login == 'akeller' || github.event.requested_reviewer.login == 'christinaausley'
+    if: |
+      (github.event_name == 'pull_request_target' || !github.event.pull_request.head.repo.fork)
+      && (github.event.requested_reviewer.login == 'akeller' || github.event.requested_reviewer.login == 'christinaausley')
     runs-on: ubuntu-latest
     steps:
       - name: Get project IDs for later steps
