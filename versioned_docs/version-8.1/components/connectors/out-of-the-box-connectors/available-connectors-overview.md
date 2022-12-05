@@ -4,7 +4,7 @@ title: Overview
 description: Take a closer look at the Connectors available in Camunda Platform 8.
 ---
 
-This section gives an overview of the **out-of-the-box Connectors** available in Camunda Platform 8:
+This section gives an overview of the **out-of-the-box Connectors** available in Camunda Platform 8. All connectors are available for C8 SaaS and [Self Managed](https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/)
 
 - [Amazon SNS Connector](aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
