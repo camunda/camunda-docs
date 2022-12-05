@@ -10,6 +10,9 @@ on:
 
 jobs:
   sync-board:
+    # For internal PRs, this is triggered on `pull_request`;
+    #   for external/forked PRs, it is triggered on both `pull_request` and `pull_request_target`.
+    #   This first check prevents forked PRs from running on `pull_request`, because they'll fail in that context.
     if: |
       (github.event_name == 'pull_request_target' || !github.event.pull_request.head.repo.fork)
       && (github.event.requested_reviewer.login == 'akeller' || github.event.requested_reviewer.login == 'christinaausley')
