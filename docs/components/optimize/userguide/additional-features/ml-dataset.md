@@ -13,4 +13,4 @@ To use this feature, navigate to a raw data report. The added columns should now
 ![Raw Data Report](./img/raw-data-report-ml-ready-dataset.png)
 
 In most cases, when training a machine learning model, the data can be fed to common libraries, such as pandas or scikit-learn in CSV or JSON format. In order to export all data contained in a raw data report and use it as input for model training, we recommend exporting the raw data reports in JSON format.
-That can be done after saving the report and utilizing the external Optimize endpoint provided to export it to JSON. More information on how to use the JSON export endpoint can be found [here](../../../../self-managed/optimize-deployment/rest-api/report/get-data-export).
+That can be done after saving the report and utilizing the external Optimize endpoint provided to export it to JSON. More information on how to use the JSON export endpoint can be found [here](../../../../../self-managed/optimize-deployment/rest-api/report/get-data-export).

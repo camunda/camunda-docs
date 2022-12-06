@@ -256,6 +256,7 @@ module.exports = {
                 "components/optimize/userguide/additional-features/filters",
                 "components/optimize/userguide/additional-features/footer",
                 "components/optimize/userguide/additional-features/variable-labeling",
+                "components/optimize/userguide/additional-features/ml-dataset",
               ],
             },
           ],
