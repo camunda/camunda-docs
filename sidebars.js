@@ -221,6 +221,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
             "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/rest",
             "components/connectors/out-of-the-box-connectors/sendgrid",
@@ -662,11 +663,18 @@ module.exports = {
               items: [
                 "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
+                "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
               ],
             },
             {
-              Guides: [
+              type: "category",
+              label: "Guides",
+              link: {
+                type: "doc",
+                id: "self-managed/platform-deployment/helm-kubernetes/guides/guides",
+              },
+              items: [
                 "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",

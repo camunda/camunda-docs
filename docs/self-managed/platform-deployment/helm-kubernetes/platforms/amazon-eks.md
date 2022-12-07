@@ -42,3 +42,7 @@ of 3,000 IOPS. The `gp2` volumes could also be used, but `gp2` volume type perfo
 
 It's recommended to use `gp3` volumes, but if only `gp2` type is available, EKS cluster nodes
 should use `gp2` volumes of at least 334 GB.
+
+### Zeebe Ingress
+
+Zeebe requires an Ingress controller that supports `gRPC`. Therefore, if you plan to use [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html) as an Ingress controller, ensure to review the official AWS guide to [deploy a gRPC-based application on an Amazon EKS cluster and access it with an Application Load Balancer](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/deploy-a-grpc-based-application-on-an-amazon-eks-cluster-and-access-it-with-an-application-load-balancer.html).

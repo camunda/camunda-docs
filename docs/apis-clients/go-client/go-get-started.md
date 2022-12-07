@@ -213,6 +213,8 @@ Now, we want to do some work within our process. Follow the steps below:
 - Set the **type** of the second task to `fetcher-service`.
 - Set the **type** of the third task to `shipping-service`.
 
+5. Additionally, for the service task `Collect Money` set a [**task-header**](/docs/next/components/modeler/bpmn/service-tasks/#task-headers) with the key `method` and the value `VISA`. This header is used as a configuration parameter for the payment-service worker to hand over the payment method.
+
 The consolidated example looks as follows:
 
 ```go
@@ -339,7 +341,7 @@ The job worker will repeatedly poll for new jobs of the type `payment-service` a
 The handler will then complete the job with its result or fail the job if
 it encounters a problem while processing the job.
 
-When observing the Zeebe Monitor, you can see the process instance moved from the first service task to the next one.
+When observing the current state of the process in Operate, you can see the process instance moved from the first service task to the next one.
 
 When you run the example above, you should see a similar output to the following:
 

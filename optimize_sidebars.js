@@ -602,6 +602,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/googledrive/"
             ),
             docsLink(
+              "Kafka Producer Connector",
+              "components/connectors/out-of-the-box-connectors/kafka/"
+            ),
+            docsLink(
               "RabbitMQ Connector",
               "components/connectors/out-of-the-box-connectors/rabbitmq/"
             ),
