@@ -38,6 +38,26 @@ To create a channel, take the following steps:
 
 ![slack connector create channel](../img/connectors-slack-create-channel.png)
 
+### Invite user to channel
+
+To invite users to a channel, take the following steps:
+
+1. Set **Method** to `Invite to Channel`.
+2. Set the **Channel Name**:
+   1. Channel name can be up to 80 characters and may contain lowercase letters, digits, and symbols `-` and `_`.
+   2. This can be provided as a FEEL expression.
+3. Set the **Users** as required:
+   1. One single user name or email or id (for example: `@myUser` or `my.user@company.com` or `ABCDEF12345`).
+   2. A comma separated list of users (for example: `@myUser, my.user@company.com, ABCDEF12345`).
+   3. FEEL expression. In this case you can provide a valid list of strings (for example: `["@myUser", "my.user@company.com", "ABCDEF12345"]`).
+   - Formats:
+     - If the provided username starts with an `@` symbol, it will be handled as user name.
+     - If the provided username is in an email format, it will be handled as an email.
+     - If the provided username doesn't start with an `@`, and isn't an email, it will be handled as a user id.
+   - If you provide a channel name it will be omitted since it is not possible to invite a channel to an other channel.
+
+![slack connector invite to channel](../img/connectors-slack-invite-to-channel.png)
+
 ### Post message
 
 To post a message, take the following steps:
