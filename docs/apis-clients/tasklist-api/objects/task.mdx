@@ -1,7 +1,43 @@
 ---
 id: task
 title: Task
+hide_table_of_contents: false
 ---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
 
 Describes the User task.
 
@@ -26,58 +62,62 @@ type Task {
 
 ### Fields
 
-#### `id` ([`ID`](/docs/apis-clients/tasklist-api/scalars/id))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>id</b></code>](#)<Bullet />[`ID!`](/docs/apis-clients/tasklist-api/scalars/id) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
 
-The unique identifier of the task
+> The unique identifier of the task
 
-#### `name` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>name</b></code>](#)<Bullet />[`String!`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
 
-Name of the task
+> Name of the task
 
-#### `taskDefinitionId` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>taskDefinitionId</b></code>](#)<Bullet />[`String!`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
 
-Task Definition ID (node BPMN id) of the process
+> Task Definition ID (node BPMN id) of the process
 
-#### `processName` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>processName</b></code>](#)<Bullet />[`String!`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
 
-Name of the process
+> Name of the process
 
-#### `creationTime` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>creationTime</b></code>](#)<Bullet />[`String!`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
 
-When was the task created
+> When was the task created
 
-#### `completionTime` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>completionTime</b></code>](#)<Bullet />[`String`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="scalar"/>
 
-When was the task completed
+> When was the task completed
 
-#### `assignee` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>assignee</b></code>](#)<Bullet />[`String`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="scalar"/>
 
-Username/id of who is assigned to the task
+> Username/id of who is assigned to the task
 
-#### `variables` ([`Variable`](/docs/apis-clients/tasklist-api/objects/variable))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>variables</b></code>](#)<Bullet />[`[Variable!]`](/docs/apis-clients/tasklist-api/objects/variable) <Badge class="secondary" text="list"/> <Badge class="secondary" text="object"/>
 
-Variables associated to the task
+> Variables associated to the task
 
-#### `taskState` ([`TaskState`](/docs/apis-clients/tasklist-api/enums/task-state))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>taskState</b></code>](#)<Bullet />[`TaskState!`](/docs/apis-clients/tasklist-api/enums/task-state) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="enum"/>
 
-State of the task
+> State of the task
 
-#### `sortValues` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>sortValues</b></code>](#)<Bullet />[`[String!]`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
 
-Array of values to be copied into `TaskQuery` to request for next or previous page of tasks.
+> Array of values to be copied into `TaskQuery` to request for next or previous page of tasks.
 
-#### `isFirst` ([`Boolean`](/docs/apis-clients/tasklist-api/scalars/boolean))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>isFirst</b></code>](#)<Bullet />[`Boolean`](/docs/apis-clients/tasklist-api/scalars/boolean) <Badge class="secondary" text="scalar"/>
 
-Flag to show that the task is first in current filter
+> Flag to show that the task is first in current filter
 
-#### `formKey` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>formKey</b></code>](#)<Bullet />[`String`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="scalar"/>
 
-Reference to the task form
+> Reference to the task form
 
-#### `processDefinitionId` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>processDefinitionId</b></code>](#)<Bullet />[`String`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="scalar"/>
 
-Reference to process definition
+> Reference to process definition
 
-#### `candidateGroups` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>candidateGroups</b></code>](#)<Bullet />[`[String!]`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
 
-Candidate groups
+> Candidate groups
+
+### Returned by
+
+[`claimTask`](/docs/apis-clients/tasklist-api/mutations/claim-task) <Badge class="secondary" text="mutation"/><Bullet />[`completeTask`](/docs/apis-clients/tasklist-api/mutations/complete-task) <Badge class="secondary" text="mutation"/><Bullet />[`task`](/docs/apis-clients/tasklist-api/queries/task) <Badge class="secondary" text="query"/><Bullet />[`tasks`](/docs/apis-clients/tasklist-api/queries/tasks) <Badge class="secondary" text="query"/><Bullet />[`unclaimTask`](/docs/apis-clients/tasklist-api/mutations/unclaim-task) <Badge class="secondary" text="mutation"/>
