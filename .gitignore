@@ -22,3 +22,6 @@ yarn-debug.log*
 yarn-error.log*
 node_modules
 /camunda-cloud-documentation.iml
+/test-results/
+/playwright-report/
+/playwright/.cache/

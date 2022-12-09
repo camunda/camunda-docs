@@ -1,7 +1,43 @@
 ---
 id: variable
 title: variable
+hide_table_of_contents: false
 ---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
 
 Get the variables by variable id
 
@@ -9,15 +45,16 @@ Get the variables by variable id
 variable(
   id: String!
 ): Variable!
-
 ```
 
 ### Arguments
 
-#### `id` ([`String`](/docs/apis-clients/tasklist-api/scalars/string))
+#### [<code style={{ fontWeight: 'normal' }}>variable.<b>id</b></code>](#)<Bullet />[`String!`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+
+>
 
 ### Type
 
-#### [`Variable`](/docs/apis-clients/tasklist-api/objects/variable)
+#### [`Variable`](/docs/apis-clients/tasklist-api/objects/variable) <Badge class="secondary" text="object"/>
 
-Variable used in task.
+> Variable used in task.
