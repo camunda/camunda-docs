@@ -51,9 +51,12 @@ To invite users to a channel, take the following steps:
    2. A comma separated list of users (for example: `@myUser, my.user@company.com, ABCDEF12345`).
    3. FEEL expression. In this case you can provide a valid list of strings (for example: `["@myUser", "my.user@company.com", "ABCDEF12345"]`).
    - Formats:
-     - If the provided username starts with an `@` symbol, it will be handled as user name.
-     - If the provided username is in an email format, it will be handled as an email.
-     - If the provided username doesn't start with an `@`, and isn't an email, it will be handled as a user id.
+     - If a username starts with an `@` symbol, it will be handled as user name.
+     - If a username is in an email format, it will be handled as an email.
+     - If a username doesn't start with an `@`, and isn't an email, it will be handled as a user id.
+   - If a null input or an input which is not a type of String or a Collection provided, you will get an Exception.
+   - If all username is provided as any other type than a String, you will get an Exception.
+   - If one of the usernames is provided as any other type than a String, it will be omitted.
    - If you provide a channel name it will be omitted since it is not possible to invite a channel to an other channel.
 
 ![slack connector invite to channel](../img/connectors-slack-invite-to-channel.png)
