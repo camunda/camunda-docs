@@ -57,7 +57,7 @@ To invite users to a channel, take the following steps:
    - If a null input or an input which is not a type of String or a Collection provided, you will get an Exception.
    - If all username is provided as any other type than a String, you will get an Exception.
    - If one of the usernames is provided as any other type than a String, it will be omitted.
-   - If you provide a channel name it will be omitted since it is not possible to invite a channel to an other channel.
+   - If you provide a channel name it will be omitted since it is not possible to invite a channel to another channel.
 
 ![slack connector invite to channel](../img/connectors-slack-invite-to-channel.png)
 
