@@ -8,18 +8,24 @@ keywords: ["backup", "backups"]
 A backup of a Zeebe cluster consists of a consistent snapshot of all partitions.
 The backup is taken asynchronously in the background while Zeebe is processing.
 Thus, the backups can be taken with minimal impact on normal processing.
-The backups are stored externally and can be used to restore a cluster in case of failures that leads to full data loss or data corruption.
+The backups can be used to restore a cluster in case of failures that leads to full data loss or data corruption.
 
 Zeebe provides a Rest API to create backups, and query and manage existing backups.
-The API is accessible via the management port of the gateway.
+The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/production-ready-endpoints.html).
+It is accessible via the management port of the gateway.
+
+The backups are stored to an external data storage. [S3](https://aws.amazon.com/s3/) or any S3 compatible storages are supported as the backup storage.
 
 ## Prerequisites
 
 To use the backup feature in Zeebe, the following configurations must be provided.
 
 - Enable backups by setting the flag `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEBACKUP` to `true`.
-- The backup management API is available via management port of the gateway. Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` include "backups". Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
-- Backup is stored in an external storage. This must be configured before starting the Zeebe cluster.
+- Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` include the endpoint "backups". Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
+  For additional configurations such as security, refer to the Spring Boot documentation.
+- An external S3 compatible storage must be configured as the backup store.
+
+### Configure S3 backup store
 
 Configure backup store in the configuration file as follows.
 
@@ -41,12 +47,12 @@ zeebe:
 Alternatively, you can configure backup store using environment variables:
 
 - `ZEEBE_BROKER_DATA_BACKUP_STORE` - Specify which storage to use as the backup storage. Currently, only S3 is supported. You can use any S3-compatible storage.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` - The backup will be stored in this bucket. The bucket must already exist.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` - The backup will be stored in this bucket. **The bucket must already exist**.
 - `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH` - If the bucket is shared with other Zeebe clusters, then a unique basePath must be configured.
 - `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT` - If no endpoint is provided, it will be determined based on the configured region.
 - `ZEEBE_BROKER_DATA_BACKUP_S3_REGION` - If no region is provided, it will be determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment).
 - `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY` - If either `accessKey` or `secretKey` is not provided, the credentials will be determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain).
-- `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY`
+- `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY` - Specify the secret key.
 
 The same configuration must be provided to all brokers in a cluster.
 
@@ -194,9 +200,9 @@ curl --request GET 'http://localhost:9600/actuator/backups'
 ### Response
 
 | Code             | Description                                                                                |
-| ---------------- | ------------------------------------------------------------------------------------------ | --- |
+| ---------------- | ------------------------------------------------------------------------------------------ |
 | 200 OK           | Backup state could be determined and is returned in the response body (see example below). |
-| 400 Bad Request  | There is an issue with the request. Refer to returned error message for details.           |     |
+| 400 Bad Request  | There is an issue with the request. Refer to returned error message for details.           |
 | 500 Server Error | All other errors. Refer to the returned error message for more details.                    |
 | 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.                     |
 | 504 Timeout      | Zeebe failed to process the request with in a pre-determined timeout.                      |
@@ -272,9 +278,9 @@ curl --request DELETE 'http://localhost:9600/actuator/backups/100'
 ### Response
 
 | Code             | Description                                                                      |
-| ---------------- | -------------------------------------------------------------------------------- | --- |
+| ---------------- | -------------------------------------------------------------------------------- |
 | 204 No Content   | The backup has been deleted.                                                     |
-| 400 Bad Request  | There is an issue with the request. Refer to returned error message for details. |     |
+| 400 Bad Request  | There is an issue with the request. Refer to returned error message for details. |
 | 500 Server Error | All other errors. Refer to the returned error message for more details.          |
 | 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.           |
 | 504 Timeout      | Zeebe failed to process the request with in a pre-determined timeout.            |
