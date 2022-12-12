@@ -86,6 +86,10 @@ ZeebeClient client =
         .build();
 ```
 
+## Javadoc
+
+The official Java client library API documentation can be found [here](https://javadoc.io/doc/io.camunda/zeebe-client-java). These are standard Javadocs, so your favorite JVM IDE will be able to install them locally as well.
+
 ## Next steps
 
 - [Getting Started Guide](https://github.com/camunda/camunda-platform-get-started): A comprehensive tutorial that covers Camunda Modeler, Operate, and the Java client.

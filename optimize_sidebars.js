@@ -822,6 +822,7 @@ module.exports = {
                 "components/userguide/additional-features/footer",
                 "components/userguide/additional-features/variable-labeling",
                 "components/userguide/additional-features/process-variants-comparison",
+                "components/userguide/additional-features/ml-dataset",
               ],
             },
           ],
