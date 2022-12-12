@@ -13,6 +13,7 @@ The backups can be used to restore a cluster in case of failures that leads to f
 Zeebe provides a Rest API to create backups, and query and manage existing backups.
 The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/production-ready-endpoints.html).
 It is accessible via the management port of the gateway.
+The API documentation is also available as [OpenApi specification](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/backup-management-api.yaml).
 
 The backups are stored to an external data storage. [S3](https://aws.amazon.com/s3/) or any S3 compatible storages are supported as the backup storage.
 
