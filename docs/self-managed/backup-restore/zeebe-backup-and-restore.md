@@ -18,7 +18,7 @@ To use the backup feature in Zeebe, the following configurations must be provide
 
 - Enable backups by setting the flag `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEBACKUP` to `true`.
 - Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` includes the endpoint "backups". Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
-  For additional configurations such as security, refer to the Spring Boot documentation.
+  For additional configurations such as security, refer to the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints).
 - An external S3-compatible storage must be configured as the backup store.
 
 ### Configure S3 backup store
