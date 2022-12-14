@@ -2,31 +2,30 @@
 id: microsoft-teams
 title: Microsoft Teams Connector
 sidebar_label: Microsoft Teams Connector
-description: Work with Microsoft Teams from your BPMN process using the Microsoft Teams Connector.
+description: Work with Microsoft Teams from your BPMN process using the Microsoft Teams Connector. Learn about authentication, conversation type and method, and more.
 ---
 
 The **Microsoft Teams Connector** allows you to connect your BPMN process with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/).
 
 ## Prerequisites
 
-To use the **Microsoft Teams Connector**, you need to have an account
-of [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) and
+To use the **Microsoft Teams Connector**, you need to have a [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) account and
 relevant [permissions](https://support.microsoft.com/en-us/office/manage-team-settings-92d238e6-0ae2-447e-af90-40b1052c4547)
-or registered application in the [Azure Active Directory](https://aad.portal.azure.com/) (follow
-guide [how to register app](https://learn.microsoft.com/en-us/graph/auth-register-app-v2) to see more) with
+or the registered application in the [Azure Active Directory](https://aad.portal.azure.com/) (visit [how to register the app](https://learn.microsoft.com/en-us/graph/auth-register-app-v2) for more information) alongside
 the relevant [Microsoft Graph API permissions](https://learn.microsoft.com/en-us/graph/permissions-reference).
-It is highly recommended to use Camunda secrets to store credentials, so that you don't expose sensitive information
-directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
+
+:::note
+It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
+:::
 
 ## Create a Microsoft Teams Connector task
 
 To use the **Microsoft Teams Connector** in your process, either change the type of existing task by clicking on it and
-using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append
-Connector** context menu. Follow our [guide on using Connectors](../use-connectors.md) to learn more.
+using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](../use-connectors.md) to learn more.
 
 ## Make your Microsoft Teams Connector executable
 
-For work with Microsoft Teams, choose the required connection type in the **Authentication** section and complete the
+To work with Microsoft Teams, choose the required connection type in the **Authentication** section and complete the
 mandatory fields highlighted in red in the connector properties panel:
 
 ![connectors-microsoft-teams-red-properties](../img/connectors-microsoft-teams-red-properties.png)
@@ -38,62 +37,57 @@ upcoming sections.
 
 ## Authentication
 
-You can choose among the available Microsoft Teams Connectors according to your authentication requirements.
-Microsoft Teams Connector use [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/overview) for work.
-First, you must have a user account with the Microsoft Teams with the necessary permissions. See more at
-the [Microsoft Teams overview](https://learn.microsoft.com/microsoftteams/teams-overview). If you don't have
-administration role and permissions ask your Microsoft Teams administrator to add required permissions for work with
-the **Microsoft Teams Connector**.
+Choose among the available Microsoft Teams Connectors according to your authentication requirements.
+The Microsoft Teams Connector uses the [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/overview). Visit the [Microsoft Graph auth overview](https://learn.microsoft.com/en-us/graph/auth/) for more information on the Microsoft Graph API authentication.
 
-- More information about the Microsoft Graph API authentication you can find here : [Microsoft Graph auth overview](https://learn.microsoft.com/en-us/graph/auth/)
+First, you must have a user account with Microsoft Teams with the necessary permissions. See more at
+in [Microsoft Teams overview](https://learn.microsoft.com/microsoftteams/teams-overview). If you don't have administration roles and permissions, ask your Microsoft Teams administrator to add required permissions to work with the **Microsoft Teams Connector**.
 
 Next, you will choose the type of connection.
 
 ### Bearer Token type authentication
 
-For a Token type authentication, take the following steps:
+For a **Token** type authentication, take the following steps:
 
-1. Click the **Token** connection type in the **Authentication** section
+1. Click the **Token** connection type in the **Authentication** section.
 2. Set **Token** to `Token`.
 
 ![bearer token](../img/connectors-microsoft-teams-bearer-token.png)
 
-See more about [Microsoft Teams Access Token](https://learn.microsoft.com/azure/active-directory/develop/access-tokens).
+Visit [Microsoft Teams Access Token](https://learn.microsoft.com/azure/active-directory/develop/access-tokens) for more information.
 
 #### Options to obtain an access token
 
-1. Via the graph explorer
-   - Visit [developer.microsoft.com/graph/graph-explorer](https://developer.microsoft.com/graph/graph-explorer)
-   - Login with your Microsoft account
-   - Choose tab 'Access Token' and copy the bearer token
-   
+- Via the Graph Explorer:
+  1.  Visit [developer.microsoft.com/graph/graph-explorer](https://developer.microsoft.com/graph/graph-explorer).
+  2.  Log in with your Microsoft account.
+  3.  Click the **Access Token** tab and copy the bearer token.
+
 ![connectors-microsoft-teams-copy-token](../img/connectors-microsoft-teams-copy-token.png)
 
-2. Register your app with the Microsoft identity platform and send a POST request to the `/token` identity platform endpoint to acquire an access token
-   - How to register your App: [Register your app](https://learn.microsoft.com/en-us/graph/auth-register-app-v2)
-   - How to get access on behalf of a user: [Get access on behalf of a user](https://learn.microsoft.com/en-us/graph/auth-v2-user)
-   - How to get access without a user: [Get access without a user](https://learn.microsoft.com/en-us/graph/auth-v2-service)
+- Register your app with the Microsoft identity platform and send a POST request to the `/token` identity platform endpoint to acquire an access token.
+  - [How to register your app](https://learn.microsoft.com/en-us/graph/auth-register-app-v2)
+  - [How to get access on behalf of a user](https://learn.microsoft.com/en-us/graph/auth-v2-user)
+  - [How to get access without a user](https://learn.microsoft.com/en-us/graph/auth-v2-service)
 
 ### Client credentials type authentication
 
-For a Client credentials type authentication, take the following steps:
+For a **Client** credentials type authentication, take the following steps:
 
-1. Click the **Client credentials** connection type in the **Authentication** section
-2. Set **Tenant id** to `Tenant ID`. (Your Microsoft Teams tenant ID is a unique identifier. See more about [how to find a tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant))
-3. Set the **Client ID** field: the application ID that the [Azure app registration portal](https://go.microsoft.com/fwlink/?linkid=2083908) assigned to your app
-4. Set the **Secret ID** field: the client secret that you created in the app registration portal for your app
+1. Click the **Client credentials** connection type in the **Authentication** section.
+2. Set **Tenant id** to `Tenant ID`. Your Microsoft Teams tenant ID is a unique identifier. See more on [how to find a tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant).
+3. Set the **Client ID** field: the application ID that the [Azure app registration portal](https://go.microsoft.com/fwlink/?linkid=2083908) assigned to your app.
+4. Set the **Secret ID** field: the client secret that you created in the app registration portal for your app.
 
 ![client credentials](../img/connectors-microsoft-teams-client-credentials.png)
 
 ## Conversation type and method
 
-In the **Operation** section you could choose a conversation type, either **Chat**, or **Channel**, after that you need to choose one of suggested method:
+In the **Operation** section, choose a conversation type of either **Chat** or **Channel**. Then, choose one of the suggested methods:
 
 ![MS Teams Choose Method](../img/connectors-microsoft-teams-choose-method.gif)
 
-:::note
-For example, if you want to send a message in Microsoft Teams channel, you need choose conversation type **Channel** and method **Send message in channel**
-:::
+For example, if you want to send a message in a Microsoft Teams channel, choose the conversation type **Channel** and method **Send message in channel**.
 
 ## Data section
 
@@ -101,29 +95,27 @@ For example, if you want to send a message in Microsoft Teams channel, you need 
 
 #### Properties
 
-|  Property  |                                                                     Methods                                                                     | Required |      Type       |                                      Description                                       |
-| :--------: | :---------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :-------------: | :------------------------------------------------------------------------------------: |
-|  Chat ID   | Get chat by id <br/> List chat members <br/> Send message in chat <br/> List messages in chat <br/> Get message in chat <br/> List chat members |   Yes    |     string      |                                Microsoft Teams chat id                                 |
-|  Content   |                                                              Send message in chat                                                               |   Yes    |      text       |                           Content that will be send to chat                            |
-| Chat type  |                                                                Create a new chat                                                                |   Yes    |    dropdown     | Click on 'one on one' for create a one-on-one chat or 'group' for create a group chat  |
-|   Topic    |                                                                Create a new chat                                                                |    No    |     string      |                                     Topic of chat                                      |
-|  Members   |                                                                Create a new chat                                                                |   Yes    | FEEL expression |                 See [members property](#members-property) to find more                 |
-|    Top     |                                                              List messages in chat                                                              |    No    |     numbers     |       Controls the number of items per response. Maximum allowed top value is 50       |
-|  Order by  |                                                              List messages in chat                                                              |   Yes    |    dropdown     |               Can order by 'lastModifiedDateTime' and 'createdDateTime'                |
-|   Filter   |                                                              List messages in chat                                                              |    No    |     string      | Sets the date range filter for the lastModifiedDateTime and createdDateTime properties |
-| Message ID |                                                               Get message in chat                                                               |   Yes    |     string      |                            Microsoft teams chat message id                             |
+|  Property  |                                                                     Methods                                                                     | Required |      Type       |                                       Description                                       |
+| :--------: | :---------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :-------------: | :-------------------------------------------------------------------------------------: |
+|  Chat ID   | Get chat by id <br/> List chat members <br/> Send message in chat <br/> List messages in chat <br/> Get message in chat <br/> List chat members |   Yes    |     string      |                                 Microsoft Teams chat id                                 |
+|  Content   |                                                              Send message in chat                                                               |   Yes    |      text       |                            Content that will be sent to chat                            |
+| Chat type  |                                                                Create a new chat                                                                |   Yes    |    dropdown     |  Click **one on one** to create a one-on-one chat or **group** to create a group chat.  |
+|   Topic    |                                                                Create a new chat                                                                |    No    |     string      |                                      Topic of chat                                      |
+|  Members   |                                                                Create a new chat                                                                |   Yes    | FEEL expression |                See [members property](#members-property) to learn more.                 |
+|    Top     |                                                              List messages in chat                                                              |    No    |     numbers     |       Controls the number of items per response; maximum allowed top value is 50.       |
+|  Order by  |                                                              List messages in chat                                                              |   Yes    |    dropdown     |               Can order by 'lastModifiedDateTime' and 'createdDateTime'.                |
+|   Filter   |                                                              List messages in chat                                                              |    No    |     string      | Sets the date range filter for the lastModifiedDateTime and createdDateTime properties. |
+| Message ID |                                                               Get message in chat                                                               |   Yes    |     string      |                             Microsoft teams chat message id                             |
 
 ##### Members property
 
-Members property must contain list of Member:
+The **members** property must contain a list of members:
 
 |     Property      |     Type     | Required                               |
 | :---------------: | :----------: | -------------------------------------- |
 |      userId       |    string    | Yes, if 'userPrincipalName' is not set |
 | userPrincipalName |    string    | Yes, if 'userId' is not set            |
 |       roles       | string array | Yes                                    |
-
-Example:
 
 ![members property](../img/connectors-microsoft-teams-members.png)
 
@@ -157,17 +149,17 @@ Example:
 
 |        Property         |                                                                                        Methods                                                                                         | Required |   Type   |                                                      Description                                                       |
 | :---------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :------: | :--------------------------------------------------------------------------------------------------------------------: |
-|        Group ID         | Create channel <br/> Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members |   Yes    |  string  |                                                Microsoft teams group id                                                |
-|       Channel ID        |           Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members            |   Yes    |  string  |                                               Microsoft teams channel id                                               |
+|        Group ID         | Create channel <br/> Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members |   Yes    |  string  |                                                Microsoft Teams group id                                                |
+|       Channel ID        |           Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members            |   Yes    |  string  |                                               Microsoft Teams channel id                                               |
 |      Display name       |                                                                                     Create channel                                                                                     |    No    |  string  |                                         Displayed name of new MS teams channel                                         |
 |       Description       |                                                                                     Create channel                                                                                     |    No    |   text   |                                          Description of new MS teams channel                                           |
 | Channel membership type |                                                                                     Create channel                                                                                     |   Yes    | dropdown | See [teams-channels-overview](https://learn.microsoft.com/microsoftteams/teams-channels-overview) for more information |
 |          Owner          |                                                                Create channel (if Channel membership type != STANDARD)                                                                 |   Yes    |  string  |                               Channel owner; MS teams user id or MS teams principal name                               |
 |         Filter          |                                                                                     List channels                                                                                      |    No    |  string  |                                                   The search filter                                                    |
-|         Content         |                                                                                Send message to channel                                                                                 |   Yes    |   text   |                                           Content that will be send to chat                                            |
-|       Message ID        |                                                                                  Get channel message                                                                                   |   Yes    |  string  |                                        Message id of Microsoft teams in channel                                        |
+|         Content         |                                                                                Send message to channel                                                                                 |   Yes    |   text   |                                           Content that will be sent to chat                                            |
+|       Message ID        |                                                                                  Get channel message                                                                                   |   Yes    |  string  |                                        Message id of Microsoft Teams in channel                                        |
 |           Top           |                                                                                 List channel messages                                                                                  |    No    | numbers  |                                       Controls the number of items per response                                        |
-|      With replies       |                                                                                 List channel messages                                                                                  |   Yes    | boolean  |          Choose 'FALSE' for get messages without replies<br/>Choose 'FALSE' for get messages without replies           |
+|      With replies       |                                                                                 List channel messages                                                                                  |   Yes    | boolean  |        Choose **FALSE** for get messages without replies<br/>Choose **FALSE** for get messages without replies         |
 |       Message ID        |                                                                                  List message replies                                                                                  |   Yes    |  string  |                                           Microsoft Teams channel message id                                           |
 
 #### Methods
@@ -234,7 +226,7 @@ The **Microsoft Teams Connector** returns the Microsoft Graph API response in `r
 }
 ```
 
-See [channel resource type](https://learn.microsoft.com/graph/api/resources/channel?view=graph-rest-1.0) to find response for the required method for a channel conversation type or see [chat resource type](https://learn.microsoft.com/graph/api/resources/chat?view=graph-rest-1.0) to find response for the required method for a chat conversation type.
+See [channel resource type](https://learn.microsoft.com/graph/api/resources/channel?view=graph-rest-1.0) to find the response for the required method for a channel conversation type, or see [chat resource type](https://learn.microsoft.com/graph/api/resources/chat?view=graph-rest-1.0) to find the response for the required method for a chat conversation type.
 
 You can use an output mapping to map the response:
 
