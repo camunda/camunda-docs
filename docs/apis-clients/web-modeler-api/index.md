@@ -1,0 +1,78 @@
+---
+id: index
+title: Web Modeler API (beta) (REST)
+description: "Web Modeler Public API (beta) is a REST API and provides access to Web Modeler Data.
+Requests and responses are in JSON notation."
+---
+
+:::caution Beta Offering
+Web Modeler API is currently offered as a [beta release](../../reference/early-access#beta). It is not recommended for production use and there is no maintenance service guaranteed.
+
+Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
+
+While in beta the API may introduce breaking changes without prior notice.
+
+However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
+:::
+
+## OpenAPI documentation
+
+A detailed API description is also available as [OpenAPI](https://www.openapis.org/) specification at [https://modeler.cloud.camunda.io/swagger-ui/index.html](https://modeler.cloud.camunda.io/swagger-ui/index.html)
+
+## Authentication
+
+To authenticate for the API you need to generate a JWT token and pass it in each request.
+
+### Obtain JWT token
+
+Web Modeler provides a REST API under the endpoint `/api`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+
+**Example:**
+
+1. [Create an API Client](../../../components/console/manage-clusters/manage-api-clients/#create-a-client).
+2. Add permissions to this client for **Web Modeler Public API (beta)**.
+3. After creating the client, you can download a shell script to obtain a token
+4. When you run it, you will get something like the following:
+   ```json
+   {
+     "access_token": "eyJhbG...",
+     "expires_in": 300,
+     "refresh_expires_in": 0,
+     "token_type": "Bearer",
+     "not-before-policy": 0
+   }
+   ```
+
+## Use JWT token
+
+1. Take the **access_token** value from the response object and store it as your token.
+2. Send the token as an authorization header in each request. In this case, call the info endpoint to validate the token.
+   ```shell
+   curl -X POST 'http://modeler.cloud.camunda.io/api/beta/info' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhb...' -d '{}'
+   ```
+3. You will get something like the following:
+   ```json
+   {
+     "version": "beta",
+     "authorizedOrganization": "12345678-ABCD-DCBA-ABCD-123456789ABC",
+     "createPermission": true,
+     "readPermission": true,
+     "updatePermission": true,
+     "deletePermission": false
+   }
+   ```
+
+## Good to know
+
+Most of the API is self-explanatory. This section describes details which are less obvious.
+
+### Names versus ids
+
+In Web Modeler you can have multiple files with the same name, multiple folders with the same name and even multiple projects with the same name. Internally, duplicate names are disambiguated by unique ids.
+
+The API gives you access to the names as well as the Ids. For example when requesting a file you will find in it the following information:
+
+- **simplePath** gives you access to the human-readable path. This path may be ambiguous or may have ambiguous elements (e.g. folders) in it
+- **canonicalPath** gives you access to the unique passed. It is a list of **PathElementDto** objects which contain the id and the name of the element
+
+Internally, the ids are what matters. You can rename files, and move files between folders and projects and the id will stay the same.

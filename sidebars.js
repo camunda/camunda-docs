@@ -503,7 +503,7 @@ module.exports = {
         "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/console-api-reference",
-
+        "apis-clients/web-modeler-api/index",
         {
           "Optimize API (REST)": [
             optimizeLink(
@@ -1034,6 +1034,7 @@ module.exports = {
         {
           "Web Modeler (Beta)": [
             "self-managed/modeler/web-modeler/installation",
+            "self-managed/modeler/web-modeler/api",
           ],
         },
         {
