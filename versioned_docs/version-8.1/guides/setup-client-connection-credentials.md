@@ -19,8 +19,19 @@ To create a new client, take the following steps:
 
 ![created-client](../components/console/manage-clusters/img/cluster-details-created-client.png)
 
-The downloaded file contains all the necessary information to communicate with your Zeebe instance in the future:
+The downloaded file contains all the necessary information to communicate with your Camunda Platform 8 instance in the future:
 
 - `ZEEBE_ADDRESS`: Address where your cluster can be reached.
 - `ZEEBE_CLIENT_ID` and `ZEEBE_CLIENT_SECRET`: Credentials to request a new access token.
-- `ZEEBE_AUTHORIZATION_SERVER_URL`: A new token can be requested at this address, using the credentials.
+- `ZEEBE_AUTHORIZATION_SERVER_URL`: A new token can be requested at this address using the credentials.
+- `ZEEBE_TOKEN_AUDIENCE`: The audience for a Zeebe token request.
+- `CAMUNDA_CLUSTER_ID`: The UUID of the cluster.
+- `CAMUNDA_CLUSTER_REGION`: The region of the cluster.
+- `CAMUNDA_CREDENTIALS_SCOPES`: A comma-separated list of the scopes this credential set is valid for.
+- `CAMUNDA_OAUTH_URL`: A new token can be requested at this address using the credentials. Duplicates the earlier Zeebe-focused variable.
+
+Depending on the scopes granted to these client credentials, the following variables may also be present:
+
+- `CAMUNDA_TASKLIST_BASE_URL`: The base URL for the Tasklist API.
+- `CAMUNDA_OPTIMIZE_BASE_URL`: The base URL for the Optimize API.
+- `CAMUNDA_OPERATE_BASE_URL`: The base URL for the Operate API.

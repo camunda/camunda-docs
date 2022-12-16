@@ -68,6 +68,10 @@ Identity requires the following parameters:
 
 Tasklist provides a [GraphQL API](../../../apis-clients/tasklist-api/) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
+:::note
+Be aware a JWT token is intended to be used for M2M communication and is therefore issued for the relevant application, not for the user.
+:::
+
 **Example:**
 
 1. [Add an application in Identity](../../identity/user-guide/adding-an-application/).

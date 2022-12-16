@@ -1,114 +1,285 @@
 ---
 id: zeebe-backup-and-restore
 title: "Backup and restore Zeebe data"
-description: "A guide to creating backup of a running Zeebe cluster."
+description: "Create a backup of a running Zeebe cluster comprised of a consistent snapshot of all partitions."
 keywords: ["backup", "backups"]
 ---
 
-:::note
-This API is subject to change.
-:::
+A backup of a Zeebe cluster is comprised of a consistent snapshot of all partitions. The backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact on normal processing. The backups can be used to restore a cluster in case of failures that lead to full data loss or data corruption.
 
-A backup of a Zeebe cluster consists of a consistent snapshot of all partitions. The backup is stored externally. The backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact on normal processing.
+Zeebe provides a REST API to create backups, query, and manage existing backups.
+The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway. The API documentation is also available as [OpenApi specification](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/backup-management-api.yaml).
 
-Backup of a running Zeebe cluster can be taken using the following rest APIs. The API is accessible via the management port of the gateway.
+The backups are stored to an external data storage. [S3](https://aws.amazon.com/s3/) or any S3-compatible storage is supported as the backup storage.
 
-- [Trigger backup](#trigger-backup)
-- [Monitor backup](#monitor-backup)
+## Prerequisites
 
-In case of a catastrophic situation that leads to full data loss or corrupted data, a new Zeebe cluster can be created from an available backup.
+To use the backup feature in Zeebe, the following configurations must be provided:
 
-- [Restore from a backup](#restore)
+- Enable backups by setting the flag `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEBACKUP` to `true`.
+- Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` includes the endpoint "backups". Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
+  For additional configurations such as security, refer to the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints).
+- An external S3-compatible storage must be configured as the backup store.
 
-To take a backup of the cluster, backup storage must be configured.
+### Configure S3 backup store
 
-- [Configuration](#configuration)
-
-## Backup management API
-
-### Trigger backup
-
-##### Request
+Configure backup store in the configuration file as follows:
 
 ```
-POST http://{zeebe-gateway}:9600/actuator/backups/{backupId}
+zeebe:
+  broker:
+    data:
+      backup:
+        store: S3
+          s3:
+            bucketName:
+            basePath:
+            region:
+            endpoint:
+            accessKey:
+            secretKey:
 ```
 
-A `backupId` is an integer and must be greater than the id of previous backups. Zeebe does not take two backups with the same ids. If a backup fails, a new `backupId` must be provided to trigger a new backup.
+Alternatively, you can configure backup store using environment variables:
 
-##### Response
+- `ZEEBE_BROKER_DATA_BACKUP_STORE` - Specify which storage to use as the backup storage. Currently, only S3 is supported. You can use any S3-compatible storage.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` - The backup is stored in this bucket. **The bucket must already exist**.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH` - If the bucket is shared with other Zeebe clusters, a unique basePath must be configured.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT` - If no endpoint is provided, it is determined based on the configured region.
+- `ZEEBE_BROKER_DATA_BACKUP_S3_REGION` - If no region is provided, it is determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment).
+- `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY` - If either `accessKey` or `secretKey` is not provided, the credentials are determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain).
+- `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY` - Specify the secret key.
 
-- 200 OK, with response body
-- 500 Server error
+The same configuration must be provided to all brokers in a cluster.
 
-##### Response body
+## Create backup API
+
+The following request can be used to start a backup.
+
+### Request
 
 ```
+POST actuator/backups
 {
-  id: <backupId>
+  "backupId": <backupId>
 }
 ```
 
-The response is sent after Zeebe has started taking the backup of all partitions, but before the backup is complete. The backup is taken asynchronously and can take a long time depending on the size. To monitor the backup, use the get backup status API.
+A `backupId` is an integer and must be greater than the id of previous backups.
+Zeebe does not take two backups with the same ids. If a backup fails, a new `backupId` must be provided to trigger a new backup.
 
-### Monitor backup
-
-##### Request
-
-```
-GET http://{zeebe-gateway}:9600/actuator/backups/{BackupId}
-```
-
-##### Response
-
-- 200 OK, with response body
-- 500 Server error
-
-##### Response body
+<details>
+  <summary>Example request</summary>
 
 ```
+curl --request POST 'http://localhost:9600/actuator/backups' \
+-H 'Content-Type: application/json' \
+-d '{ "backupId": "100" }'
+```
+
+</details>
+
+### Response
+
+| Code             | Description                                                                                                              |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| 202 Accepted     | A Backup has been successfully scheduled. To determine if the backup process was completed, refer to the GET API.        |
+| 400 Bad Request  | Indicates issues with the request, for example when the `backupId` is not valid or backup is not enabled on the cluster. |
+| 409 Conflict     | Indicates a backup with the same `backupId` or a higher id already exists.                                               |
+| 500 Server Error | All other errors. Refer to the returned error message for more details.                                                  |
+| 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.                                                   |
+| 504 Timeout      | Zeebe failed to process the request within a pre-determined timeout.                                                     |
+
+<details>
+  <summary>Example response body with 202 Accepted</summary>
+
+```json
 {
-    "backupId": 6,
-    "status": "COMPLETED", // COMPLETED | IN_PROGRESS | FAILED | DOES_NOT_EXIST
-    "failureReason": null,
-    "partitions": [
-        {
-            "partitionId": 1,
-            "status": "COMPLETED",
-            "description": {
-                "snapshotId": "16-10-7-8",
-                "checkpointPosition": 9,
-                "brokerId": 1,
-                "brokerVersion": "8.1.0"
-            },
-            "failureReason": null,
-            "createdAt": "2022-09-26T14:57:17.914044812Z",
-            "lastUpdatedAt": "2022-09-26T14:57:19.107670926Z"
-        },
-        {
-            "partitionId": 2,
-            "status": "COMPLETED",
-            "description": {
-                "snapshotId": "18-12-7-8",
-                "checkpointPosition": 9,
-                "brokerId": 0,
-                "brokerVersion": "8.1.0"
-            },
-            "failureReason": null,
-            "createdAt": "2022-09-26T14:57:17.914367447Z",
-            "lastUpdatedAt": "2022-09-26T14:57:18.887925972Z"
-        }
-    ]
+  "message": "A backup with id 100 has been scheduled. Use GET actuator/backups/100 to monitor the status."
 }
-
 ```
 
-`status` gives the overall status of the backup. The status can be one of the following:
+</details>
 
-- `COMPLETED` if all partitions have completed the backup.
-- `FAILED` if at least one partition has failed. In this case, `failureReason` contains a string describing the reason for failure.
-- `DOES_NOT_EXIST` if at least one partition's backup does not exist.
-- `IN_PROGRESS` if at least one partition's backup is in progress.
+## Get backup info API
+
+Information about a specific backup can be retrieved using the following request:
+
+### Request
+
+```
+GET actuator/backups/{backupId}
+```
+
+<details>
+  <summary>Example request</summary>
+
+```
+curl --request GET 'http://localhost:9600/actuator/backups/100'
+```
+
+</details>
+
+### Response
+
+| Code             | Description                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------ |
+| 200 OK           | Backup state could be determined and is returned in the response body (see example below). |
+| 400 Bad Request  | There is an issue with the request. Refer to the returned error message for details.       |
+| 404 Not Found    | A backup with that ID does not exist.                                                      |
+| 500 Server Error | All other errors. Refer to the returned error message for more details.                    |
+| 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.                     |
+| 504 Timeout      | Zeebe failed to process the request within a pre-determined timeout.                       |
+
+When the response is 200 OK, the response body consists of a JSON object describing the state of the backup.
+
+- `backupId`: Id in the request.
+- `state`: Gives the overall status of the backup. The state can be one of the following:
+  - `COMPLETED` if all partitions have completed the backup.
+  - `FAILED` if at least one partition has failed. In this case, `failureReason` contains a string describing the reason for failure.
+  - `INCOMPLETE` if at least one partition's backup does not exist.
+  - `IN_PROGRESS` if at least one partition's backup is in progress.
+- `details`: Gives the state of each partition's backup.
+- `failureReason`: The reason for failure if the state is `FAILED`.
+
+<details>
+  <summary>Example response body with 200 OK</summary>
+
+```json
+{
+  "backupId": 100,
+  "details": [
+    {
+      "brokerVersion": "8.2.0-SNAPSHOT",
+      "checkpointPosition": 5,
+      "createdAt": "2022-12-08T13:00:55.344276672Z",
+      "lastUpdatedAt": "2022-12-08T13:00:55.805351556Z",
+      "partitionId": 1,
+      "snapshotId": "2-1-3-2",
+      "state": "COMPLETED"
+    },
+    {
+      "brokerVersion": "8.2.0-SNAPSHOT",
+      "checkpointPosition": 7,
+      "createdAt": "2022-12-08T13:00:55.370965069Z",
+      "lastUpdatedAt": "2022-12-08T13:00:55.84756566Z",
+      "partitionId": 2,
+      "snapshotId": "3-1-5-3",
+      "state": "COMPLETED"
+    }
+  ],
+  "state": "COMPLETED"
+}
+```
+
+</details>
+
+## List backups API
+
+Information about all backups can be retrieved using the following request:
+
+### Request
+
+```
+GET actuator/backups
+```
+
+<details>
+  <summary>Example request</summary>
+
+```
+curl --request GET 'http://localhost:9600/actuator/backups'
+```
+
+</details>
+
+### Response
+
+| Code             | Description                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------ |
+| 200 OK           | Backup state could be determined and is returned in the response body (see example below). |
+| 400 Bad Request  | There is an issue with the request. Refer to returned error message for details.           |
+| 500 Server Error | All other errors. Refer to the returned error message for more details.                    |
+| 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.                     |
+| 504 Timeout      | Zeebe failed to process the request with in a pre-determined timeout.                      |
+
+When the response is 200 OK, the response body consists of a JSON object with a list of backup info.
+See [get backup info API response](#response-1) for the description of each field.
+
+<details>
+  <summary>Example response body with 200 OK</summary>
+
+```json
+[
+  {
+    "backupId": 100,
+    "details": [
+      {
+        "brokerVersion": "8.2.0-SNAPSHOT",
+        "createdAt": "2022-12-08T13:00:55.344276672Z",
+        "partitionId": 1,
+        "state": "COMPLETED"
+      },
+      {
+        "brokerVersion": "8.2.0-SNAPSHOT",
+        "createdAt": "2022-12-08T13:00:55.370965069Z",
+        "partitionId": 2,
+        "state": "COMPLETED"
+      }
+    ],
+    "state": "COMPLETED"
+  },
+  {
+    "backupId": 200,
+    "details": [
+      {
+        "brokerVersion": "8.2.0-SNAPSHOT",
+        "createdAt": "2022-12-08T13:01:15.27750375Z",
+        "partitionId": 1,
+        "state": "COMPLETED"
+      },
+      {
+        "brokerVersion": "8.2.0-SNAPSHOT",
+        "createdAt": "2022-12-08T13:01:15.279995106Z",
+        "partitionId": 2,
+        "state": "COMPLETED"
+      }
+    ],
+    "state": "COMPLETED"
+  }
+]
+```
+
+</details>
+
+## Delete backup API
+
+A backup can be deleted using the following request:
+
+### Request
+
+```
+DELETE actuator/backups/{backupId}
+```
+
+<details>
+  <summary>Example request</summary>
+
+```
+curl --request DELETE 'http://localhost:9600/actuator/backups/100'
+```
+
+</details>
+
+### Response
+
+| Code             | Description                                                                      |
+| ---------------- | -------------------------------------------------------------------------------- |
+| 204 No Content   | The backup has been deleted.                                                     |
+| 400 Bad Request  | There is an issue with the request. Refer to returned error message for details. |
+| 500 Server Error | All other errors. Refer to the returned error message for more details.          |
+| 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.           |
+| 504 Timeout      | Zeebe failed to process the request with in a pre-determined timeout.            |
 
 ## Restore
 
@@ -135,36 +306,3 @@ If the restore fails, you can re-run the application after fixing the root cause
 :::note
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count must be same as in the backup.
 :::
-
-## Configuration
-
-- Enable backups by setting the flag `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEBACKUP` to `true`.
-- The backup management API is available via management port of the gateway. Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` include "backups". Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
-- Backup is stored in an external storage. This must be configured before starting the Zeebe cluster.
-
-Configure backup store in the configuration file as follows.
-
-```
-zeebe:
-  broker:
-    data:
-      backup:
-        store: S3
-          s3:
-            bucketName:
-            region:
-            endpoint:
-            accessKey:
-            secretKey:
-```
-
-Alternatively, you can configure backup store using environment variables:
-
-- `ZEEBE_BROKER_DATA_BACKUP_STORE` - Specify which storage to use as the backup storage. Currently, only S3 is supported. You can use any S3-compatible storage.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` - The backup will be stored in this bucket. The bucket must already exist. The bucket must not be shared with other Zeebe clusters.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT` - If no endpoint is provided, it will be determined based on the configured region.
-- `ZEEBE_BROKER_DATA_BACKUP_S3_REGION` - If no region is provided, it will be determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment).
-- `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY` - If either `accessKey` or `secretKey` is not provided, the credentials will be determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain).
-- `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY`
-
-The same configuration must be provided to all brokers in a cluster.
