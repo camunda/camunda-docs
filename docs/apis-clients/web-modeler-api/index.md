@@ -17,7 +17,7 @@ However, we encourage you to provide feedback via your designated support channe
 
 ## OpenAPI documentation
 
-A detailed API description is also available as [OpenAPI](https://www.openapis.org/) specification at [https://modeler.cloud.camunda.io/swagger-ui/index.html](https://modeler.cloud.camunda.io/swagger-ui/index.html)
+A detailed API description is available as [OpenAPI](https://www.openapis.org/) specification at [https://modeler.cloud.camunda.io/swagger-ui/index.html](https://modeler.cloud.camunda.io/swagger-ui/index.html).
 
 ## Authentication
 
@@ -31,7 +31,7 @@ Web Modeler provides a REST API under the endpoint `/api`. Clients can access th
 
 1. [Create an API Client](../../../components/console/manage-clusters/manage-api-clients/#create-a-client).
 2. Add permissions to this client for **Web Modeler Public API (beta)**.
-3. After creating the client, you can download a shell script to obtain a token
+3. After creating the client, you can download a shell script to obtain a token.
 4. When you run it, you will get something like the following:
    ```json
    {
@@ -70,9 +70,9 @@ Most of the API is self-explanatory. This section describes details which are le
 
 In Web Modeler you can have multiple files with the same name, multiple folders with the same name and even multiple projects with the same name. Internally, duplicate names are disambiguated by unique ids.
 
-The API gives you access to the names as well as the Ids. For example when requesting a file you will find in it the following information:
+The API gives you access to the names as well as the Ids. For example, when requesting a file you will get the following information:
 
-- **simplePath** gives you access to the human-readable path. This path may be ambiguous or may have ambiguous elements (e.g. folders) in it
-- **canonicalPath** gives you access to the unique passed. It is a list of **PathElementDto** objects which contain the id and the name of the element
+- **simplePath** contains the human-readable path. This path may be ambiguous or may have ambiguous elements (e.g. folders) in it.
+- **canonicalPath** contains the unique path. It is a list of **PathElementDto** objects which contain the id and the name of the element.
 
 Internally, the ids are what matters. You can rename files, and move files between folders and projects and the id will stay the same.

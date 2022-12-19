@@ -17,7 +17,7 @@ However, we encourage you to provide feedback via your designated support channe
 
 ## OpenAPI documentation
 
-A detailed API description is also available as [OpenAPI](https://www.openapis.org/) specification at [http://localhost:8070/swagger-ui.html](http://localhost:8070/swagger-ui.html)
+A detailed API description is available as [OpenAPI](https://www.openapis.org/) specification at [http://localhost:8070/swagger-ui.html](http://localhost:8070/swagger-ui.html).
 
 ## Authentication
 
@@ -31,7 +31,7 @@ Web Modeler provides a [REST API](../../../../apis-clients/web-modeler-api/) und
 
 1. [Add an M2M application in Identity](../../../identity/user-guide/adding-an-application/).
 2. [Add permissions to this application](../../../identity/user-guide/assigning-a-permission-to-an-application/) for **Web Modeler Public API (beta)**.
-3. Obtain a token to access the REST API. You will need the`client_id` and `client_secret` from Identity application you created.
+3. Obtain a token to access the REST API. You will need the `client_id` and `client_secret` from Identity application you created.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
