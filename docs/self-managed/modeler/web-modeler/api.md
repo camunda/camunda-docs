@@ -1,7 +1,7 @@
 ---
 id: api
 title: API Access
-description: "Details on accessing the Public API (beta) of Web Modeler Self-Managed."
+description: "Details on accessing the API (beta) of Web Modeler Self-Managed."
 ---
 
 :::caution Beta Offering
@@ -15,6 +15,8 @@ While in beta the API may introduce breaking changes without prior notice.
 However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
 
+Web Modeler provides a [REST API](../../../../apis-clients/web-modeler-api/) at `/api/*`. Clients can access this API by passing a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+
 ## OpenAPI documentation
 
 A detailed API description is available as [OpenAPI](https://www.openapis.org/) specification at [http://localhost:8070/swagger-ui.html](http://localhost:8070/swagger-ui.html).
@@ -25,13 +27,11 @@ To authenticate for the API you need to generate a JWT token and pass it in each
 
 ### Obtain JWT token
 
-Web Modeler provides a [REST API](../../../../apis-clients/web-modeler-api/) under the endpoint `/api`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
-
 **Example:**
 
 1. [Add an M2M application in Identity](../../../identity/user-guide/adding-an-application/).
-2. [Add permissions to this application](../../../identity/user-guide/assigning-a-permission-to-an-application/) for **Web Modeler Public API (beta)**.
-3. Obtain a token to access the REST API. You will need the `client_id` and `client_secret` from Identity application you created.
+2. [Add permissions to this application](../../../identity/user-guide/assigning-a-permission-to-an-application/) for **Web Modeler API (beta)**.
+3. [Generate a token](../../../identity/user-guide/generating-m2m-tokens/) to access the REST API. You will need the `client_id` and `client_secret` from the Identity application you created.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -50,7 +50,7 @@ Web Modeler provides a [REST API](../../../../apis-clients/web-modeler-api/) und
    }
    ```
 
-## Use JWT token
+### Use JWT token
 
 1. Take the **access_token** value from the response object and store it as your token.
 2. Send the token as an authorization header in each request. In this case, call the info endpoint to validate the token.

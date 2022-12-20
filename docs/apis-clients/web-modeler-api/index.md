@@ -1,19 +1,19 @@
 ---
 id: index
-title: Web Modeler API (beta) (REST)
-description: "Web Modeler Public API (beta) is a REST API and provides access to Web Modeler Data.
+title: Web Modeler API (REST, beta)
+description: "Web Modeler API (beta) is a REST API and provides access to Web Modeler Data.
 Requests and responses are in JSON notation."
 ---
 
 :::caution Beta Offering
 Web Modeler API is currently offered as a [beta release](../../reference/early-access#beta). It is not recommended for production use and there is no maintenance service guaranteed.
 
-Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
-
 While in beta the API may introduce breaking changes without prior notice.
 
 However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
+
+Web Modeler provides a REST API at `/api/*`. Clients can access this API by passing a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 ## OpenAPI documentation
 
@@ -25,12 +25,10 @@ To authenticate for the API you need to generate a JWT token and pass it in each
 
 ### Obtain JWT token
 
-Web Modeler provides a REST API under the endpoint `/api`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
-
 **Example:**
 
-1. [Create an API Client](../../../components/console/manage-clusters/manage-api-clients/#create-a-client).
-2. Add permissions to this client for **Web Modeler Public API (beta)**.
+1. Create Client Credentials **Console -> Manage (Organization) -> Console API -> Create New Credentials**.
+2. Add permissions to this client for **Web Modeler API (beta)**.
 3. After creating the client, you can download a shell script to obtain a token.
 4. When you run it, you will get something like the following:
    ```json
@@ -43,7 +41,7 @@ Web Modeler provides a REST API under the endpoint `/api`. Clients can access th
    }
    ```
 
-## Use JWT token
+### Use JWT token
 
 1. Take the **access_token** value from the response object and store it as your token.
 2. Send the token as an authorization header in each request. In this case, call the info endpoint to validate the token.
