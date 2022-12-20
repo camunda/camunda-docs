@@ -1,0 +1,15 @@
+name: Move completed items to done
+
+on:
+  pull_request:
+    types: [assigned]
+
+jobs:
+  automate-project-columns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        with:
+          project: Developer Experience
+          column: ✅ Done
+          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
