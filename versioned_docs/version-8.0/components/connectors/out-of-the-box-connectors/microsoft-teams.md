@@ -15,7 +15,7 @@ or the registered application in the [Azure Active Directory](https://aad.portal
 the relevant [Microsoft Graph API permissions](https://learn.microsoft.com/en-us/graph/permissions-reference).
 
 :::note
-It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
+It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a Microsoft Teams Connector task
@@ -85,7 +85,7 @@ For a **Client** credentials type authentication, take the following steps:
 
 In the **Operation** section, choose a conversation type of either **Chat** or **Channel**. Then, choose one of the suggested methods:
 
-![MS Teams Choose Method](../img/connectors-microsoft-teams-choose-method.gif)
+![Microsoft Teams Choose Method](../img/connectors-microsoft-teams-choose-method.gif)
 
 For example, if you want to send a message in a Microsoft Teams channel, choose the conversation type **Channel** and method **Send message in channel**.
 
@@ -151,10 +151,10 @@ The **members** property must contain a list of members:
 | :---------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: | :------: | :--------------------------------------------------------------------------------------------------------------------: |
 |        Group ID         | Create channel <br/> Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members |   Yes    |  string  |                                                Microsoft Teams group id                                                |
 |       Channel ID        |           Get channel <br/> List channels <br/> Send message to channel <br/> Get channel message <br/> List channel messages <br/> List message replies <br/> List members            |   Yes    |  string  |                                               Microsoft Teams channel id                                               |
-|      Display name       |                                                                                     Create channel                                                                                     |    No    |  string  |                                         Displayed name of new MS teams channel                                         |
-|       Description       |                                                                                     Create channel                                                                                     |    No    |   text   |                                          Description of new MS teams channel                                           |
+|      Display name       |                                                                                     Create channel                                                                                     |    No    |  string  |                                     Displayed name of new Microsoft Teams channel                                      |
+|       Description       |                                                                                     Create channel                                                                                     |    No    |   text   |                                       Description of new Microsoft Teams channel                                       |
 | Channel membership type |                                                                                     Create channel                                                                                     |   Yes    | dropdown | See [teams-channels-overview](https://learn.microsoft.com/microsoftteams/teams-channels-overview) for more information |
-|          Owner          |                                                                Create channel (if Channel membership type != STANDARD)                                                                 |   Yes    |  string  |                               Channel owner; MS teams user id or MS teams principal name                               |
+|          Owner          |                                                                Create channel (if Channel membership type != STANDARD)                                                                 |   Yes    |  string  |                        Channel owner; Microsoft Teams user id or Microsoft Teams principal name                        |
 |         Filter          |                                                                                     List channels                                                                                      |    No    |  string  |                                                   The search filter                                                    |
 |         Content         |                                                                                Send message to channel                                                                                 |   Yes    |   text   |                                           Content that will be sent to chat                                            |
 |       Message ID        |                                                                                  Get channel message                                                                                   |   Yes    |  string  |                                        Message id of Microsoft Teams in channel                                        |
@@ -239,10 +239,3 @@ You can use an output mapping to map the response:
   "tenantId": result.tenantId
 }
 ```
-
-## Appendix & FAQ
-
-### How do I store secrets for my Connector?
-
-It is highly recommended storing your secret credentials as Camunda secrets. Follow our documentation
-on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
