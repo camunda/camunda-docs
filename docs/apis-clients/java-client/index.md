@@ -34,7 +34,7 @@ If you build a Spring or Spring Boot application, you might want to use [Spring 
 In Java code, instantiate the client as follows:
 
 ```java
-  private static final String zeebeAPI = "[Zeebe API]";
+  private static final String zeebeAddress = "[Zeebe Address]";
   private static final String clientId = "[Client ID]";
   private static final String clientSecret = "[Client Secret]";
   private static final String oAuthAPI = "[OAuth API] ";
@@ -69,7 +69,7 @@ See [io.camunda.zeebe.client.ZeebeClientBuilder](https://javadoc.io/doc/io.camun
 Another (more compact) option is to pass in the connection settings via environment variables:
 
 ```bash
-export ZEEBE_ADDRESS='[Zeebe API]'
+export ZEEBE_ADDRESS='[Zeebe Address]'
 export ZEEBE_CLIENT_ID='[Client ID]'
 export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
