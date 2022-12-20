@@ -8,7 +8,7 @@ Requests and responses are in JSON notation."
 :::caution Beta Offering
 Web Modeler API is currently offered as a [beta release](../../reference/early-access#beta). It is not recommended for production use and there is no maintenance service guaranteed.
 
-While in beta the API may introduce breaking changes without prior notice.
+While in beta, the API may introduce breaking changes without prior notice.
 
 However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
@@ -21,13 +21,13 @@ A detailed API description is available as [OpenAPI](https://www.openapis.org/) 
 
 ## Authentication
 
-To authenticate for the API you need to generate a JWT token and pass it in each request.
+To authenticate for the API, generate a JWT token and pass it in each request; guidance on this is provided in the following sections.
 
 ### Obtain JWT token
 
 **Example:**
 
-1. Create Client Credentials **Console -> Manage (Organization) -> Console API -> Create New Credentials**.
+1. Create client credentials by clicking **Console > Manage (Organization) > Console API > Create New Credentials**.
 2. Add permissions to this client for **Web Modeler API (beta)**.
 3. After creating the client, you can download a shell script to obtain a token.
 4. When you run it, you will get something like the following:
@@ -66,11 +66,11 @@ Most of the API is self-explanatory. This section describes details which are le
 
 ### Names versus ids
 
-In Web Modeler you can have multiple files with the same name, multiple folders with the same name and even multiple projects with the same name. Internally, duplicate names are disambiguated by unique ids.
+In Web Modeler you can have multiple files with the same name, multiple folders with the same name, and even multiple projects with the same name. Internally, duplicate names are disambiguated by unique ids.
 
-The API gives you access to the names as well as the Ids. For example, when requesting a file you will get the following information:
+The API gives you access to the names, as well as the ids. For example, when requesting a file you will get the following information:
 
 - **simplePath** contains the human-readable path. This path may be ambiguous or may have ambiguous elements (e.g. folders) in it.
 - **canonicalPath** contains the unique path. It is a list of **PathElementDto** objects which contain the id and the name of the element.
 
-Internally, the ids are what matters. You can rename files, and move files between folders and projects and the id will stay the same.
+Internally, the ids are what matters. You can rename files or move files between folders and projects and the id will stay the same.
