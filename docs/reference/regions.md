@@ -17,6 +17,7 @@ Interested in any other regions or cloud provider? Please contact us as we are a
 
 ## Google Cloud Platform (GCP) regions
 
--
-
--
+- Europe West: europe-west1
+- US East: us-east1
+- US Central: us-central1
+- Australia Southeast: australia-southeast1
