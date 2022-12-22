@@ -60,11 +60,9 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-## Good to know
+## FAQ
 
-Most of the API is self-explanatory. This section describes details which are less obvious.
-
-### Names versus ids
+### What is the difference between _simplePath_ and _canonicalPath_?
 
 In Web Modeler you can have multiple files with the same name, multiple folders with the same name, and even multiple projects with the same name. Internally, duplicate names are disambiguated by unique ids.
 
