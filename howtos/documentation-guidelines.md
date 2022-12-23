@@ -158,6 +158,39 @@ If you wish to test `.htaccess` rules, you have a couple options:
 
    4. Clean up the server with `docker compose down`.
 
+## Screenshot automation
+
+In an effort to automate screenshots across Camunda Platform 8 documentation, the following teams execute uniform steps when incorporating images and diagrams:
+
+**Modeler**
+Visit the [Modeler screenshot automation repo](https://github.com/camunda/camunda-docs-modeler-screenshots/blob/main/README.md) for details on updating screenshots and scripting new screenshots.
+
+**Zeebe**
+Currently, Zeebe diagrams are stored as BPMN in a [repository](https://github.com/camunda/camunda-platform-docs/tree/main/media-src/product-manuals/zeebe), and as diagrams within Google Drive. This Google Drive is organized according to the structure of documentation in `camunda-platform-docs`.
+
+:::note
+When saving diagrams, we should not take manual screenshots. Rather, authors should incorporate diagrams directly via **Download > PNG image (.png)**.
+:::
+
+Keep the following guidelines in mind when creating Zeebe diagrams:
+
+- The standardized font is **Arial**. Font size may vary based on diagram size.
+- The standardized colors for diagrams are **`#0d8dba`** and **orange** with the default background color of **white**.
+- Rectangular diagrams should be around **500x1200px**, and square diagrams should be around **500x500px**.
+- There should be no more than **nine** elements per diagram. Otherwise, complex processes may be broken into more than one diagram.
+
+**Operate & Tasklist**
+Operate and Tasklist screenshot automation is currently underway with plans for launch in the first quarter of 2023.
+
+**Optimize**
+Most of the screenshots in the user guide can be updated automatically:
+
+1. Check out the [camunda-optimize](https://github.com/camunda/camunda-optimize) repository.
+2. In the `/client` directory of the `camunda-optimize` repository, start the frontend development setup by running `yarn run start-backend` and `yarn start`.
+3. Wait for the data to be generated and imported and then run `yarn run screenshots`.
+
+On a technical level, the Optimize team takes screenshots within their [end-to-end test cases](https://github.com/camunda/camunda-optimize/blob/master/client/e2e/tests/Dashboard.js#L33).
+
 ## Review Process
 
 After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
