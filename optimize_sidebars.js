@@ -606,6 +606,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
             docsLink(
+              "Microsoft Teams Connector",
+              "components/connectors/out-of-the-box-connectors/microsoft-teams/"
+            ),
+            docsLink(
               "RabbitMQ Connector",
               "components/connectors/out-of-the-box-connectors/rabbitmq/"
             ),
