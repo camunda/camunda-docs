@@ -5,41 +5,70 @@ description: "A Connector is a reusable building block that performs the integra
 ---
 
 A **Connector** is a reusable building block that performs the integration with an external system and works out of the box.
-It is represented as a concrete task in a [BPMN process](../concepts/processes.md), which can be configured with domain specific parameters without implementing custom business logic.
+
+<!-- taken from https://docs.google.com/presentation/d/1F_xr6LSmut84up_OkyEwgGh9JSkQuhyqmTihM0TlavE/edit#slide=id.g15a5b1f60a9_0_3408 -->
+
+![connectors concept](img/connector-concept.png)
+
+It is represented as a task in a [BPMN process](../concepts/processes.md), which can be configured with parameters specific for the external system. As such, it can remove the need to write custom programming code for integration.
 
 A Connector consists of two parts:
 
-1. The business logic is implemented by a [Connector function](./custom-built-connectors/connector-sdk.md#runtime-logic).
-2. The user interface during modeling is provided using a [Connector template](./custom-built-connectors/connector-templates.md).
+1. The programming code in Java to connect to the external system (see for example the [Connector function](./custom-built-connectors/connector-sdk.md#runtime-logic) for outbound connectors).
+2. The user interface to be used during modeling, which is provided using [Connector templates](./custom-built-connectors/connector-templates.md).
 
-Connectors can run in any environment and are not bound to Camunda Platform 8. However, out of the box support is currently only provided for Camunda Platform 8 SaaS and Self-Managed.
+Connectors are operated as part of the connector runtime, which is provided for SaaS and Self-Managed environments.
 
 ### Camunda Platform 8 SaaS
 
-When using Camunda Platform 8 SaaS, the runtime is operated by Camunda and offered in the scope of the product. In this environment, you can use the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda. These Connectors allow you to solve everyday use cases in process automation without the need to implement a single line of code.
+When using Camunda Platform 8 SaaS, the connector runtime is operated by Camunda and offered in the scope of the product. In this environment, you can use the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda.
 
 ### Camunda Platform 8 Self-Managed
 
 In a [Self-Managed](/self-managed/about-self-managed.md) environment, you manage the execution environment for Connectors yourself.
 Using our [Connector runtime environments](./custom-built-connectors/connector-sdk.md#runtime-environments), you can consume any set of Connectors,
-including the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) and custom Connectors developed with
-the **Integration Framework**.
+including the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) and custom Connectors developed using the ** [Connector SDK](./custom-built-connectors/connector-sdk.md)** and [Connector templates](./custom-built-connectors/connector-templates.md).
 
-The Integration Framework consists of the Camunda [Connector SDK](./custom-built-connectors/connector-sdk.md) and [Connector templates](./custom-built-connectors/connector-templates.md).
-You can build custom Connectors using the framework as detailed in the Connector SDK guide. You can find a list of Connectors developed by Camunda, Partners, and the community in our
+You can find a list of Connectors developed by Camunda, Partners, and the community in our
 [Camunda Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors#readme).
 
 The [Self-Managed installation guide](/self-managed/connectors-deployment/install-and-start.md) details how to install the [pre-packaged Connector runtime environment](./custom-built-connectors/connector-sdk.md#pre-packaged-runtime-environment).
 The guide also describes how to integrate the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda, including their Connector templates for modeling.
 Note that some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 
-### Connector vs. Job Worker
+### Connector types
 
-Integrating with external systems can be done with a Connector and [Job worker](../concepts/job-workers.md) alike.
+#### Outbound connectors
+
+Use outbound connectors if something needs to happen in the third-party system if a process reaches a service task. For example, calling a REST endpoint or publishing some message to Slack.
+
+#### Inbound connectors
+
+Use inbound connectors if something needs to happen within the workflow engine because of an external event in the third-party system. For example, because a Slack message was published or a REST endpoint is called.
+
+Inbound connectors can be of three different kinds:
+
+1. **Webhook**: An HTTP endpoint is made available to the outside, which when called, can start a process instance, for example.
+2. **Subscription**: A subscription is opened on the third-party system, like messaging or Apache Kafka, and new entries are then received and correlated to a waiting process instance in Camunda, for example.
+3. **Polling**: Some external API needs to be regularly queried for new entries, such as a drop folder on Google Drive or FTP.
+
+Currently, only [webhooks](out-of-the-box-connectors/http-webhook.md) are supported, we work on support for the other types at the moment.
+
+### Out-of-the-box vs. custom-built Connectors
+
+There are [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda, which are available SaaS and Self-Managed.
+
+You can also develop custom Connectors using the [Connector SDK](./custom-built-connectors/connector-sdk.md).
+
+### Outbound Connector vs. Job Worker
+
+Integrating with external systems can be done with a Connector or a [Job worker](../concepts/job-workers.md).
+
+You define the domain-specific UI for modeling a Connector through a [Connector template](./custom-built-connectors/connector-templates.md). This Connector template is, in fact, an [element template](../modeler/desktop-modeler/element-templates/about-templates.md). So you can also build a Connector-like system using element templates and plain old job workers.
+
 If they both share the same core functionality, how do they differ and when should you choose what?
 
-In essence, Connectors and Job workers are completely different on a conceptual level.
-They serve different purposes when it comes to aspects like delivery, reusability, focus, and context.
+In essence, Connectors and Job workers serve different purposes when it comes to aspects like delivery, reusability, focus, and context.
 
 #### Delivery
 
@@ -88,12 +117,6 @@ It depends on your use case.
 - You want to create worker logic that is easily reusable in any environment? - Write a Connector.
 - You want to focus on your worker's logic and have no need for using low-level Camunda 8 API? - Write a Connector.
 - You want to provide a standardized modeling experience alongside your runtime behavior? - Write a Connector.
-
-### Connector vs. element template
-
-You define the domain-specific UI for modeling a Connector through a [Connector template](./custom-built-connectors/connector-templates.md). This Connector template is, in fact, an [element template](../modeler/desktop-modeler/element-templates/about-templates.md).
-
-You can build a Connector-like system using element templates and plain old job workers. However, using a Connector instead brings along some benefits as outlined in [Connector vs. job worker](#connector-vs-job-worker).
 
 ### Next steps to get started with Connectors
 
