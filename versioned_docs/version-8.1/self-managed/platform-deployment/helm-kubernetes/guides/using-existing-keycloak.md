@@ -8,18 +8,9 @@ Camunda Platform 8 Self-Managed has two different types of applications: Camunda
 
 This guide steps through using an existing Keycloak instance, which is part of [Camunda Identity](../../../identity/what-is-identity.md). By default, [Helm chart deployment](../deploy.md) creates a new Keycloak instance, but it's possible to use an existing Keycloak instance either inside the same Kubernetes cluster or outside of it.
 
-:::warning
-Given Identity uses a Keycloak admin account, it could override the existing Keycloak configuration. Ensure you back up the Keycloak and test the deployment with a non-production environment first.
-:::
-
 ## Preparation
 
-Create a Kubernetes `Secret` with the existing Keycloak admin password. See an example of how to create this secret below:
-
-```sh
-kubectl create secret generic stage-keycloak \
-    --from-literal=admin-password='<EXISTING_KEYCLOAK_ADMIN_PASSWORD>'
-```
+Configure your existing Keycloak realm according to the following guide: [Connect to an existing Keycloak instance](../../../identity/user-guide/connect-to-an-existing-keycloak.md).
 
 ## Values file
 
