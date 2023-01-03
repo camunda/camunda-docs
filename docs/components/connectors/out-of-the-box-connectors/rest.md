@@ -24,31 +24,31 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 You can choose among the available REST Connectors according to your authentication requirements.
 
-### REST Connector (No Auth)
+### REST Connector (None)
 
-Click **No Auth** in the **Authentication** section.
+Click **None** in the **Authentication** section.
 No extra authentication configuration is required; you can jump to the [next section](#request).
 
-### REST Connector (Basic Auth)
+### REST Connector (Basic)
 
 ##### Create a new Connector secret
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `REST_BASIC_AUTH_SECRET`) so you can reference it later in the Connector.
+2. Name your secret (i.e `REST_BASIC_SECRET`) so you can reference it later in the Connector.
 
 ### Configure Basic Authentication
 
 Select the **REST Connector** and fill out the following properties under the **Authentication** section:
 
-1. Click **Basic Auth** in the **Authentication** section.
+1. Click **Basic** in the **Authentication** section.
 2. Set **Username** (i.e. `secrets.YOUR_USERNAME`).
-3. Set **Password** to the secret you created (i.e. `secrets.REST_BASIC_AUTH_SECRET`).
+3. Set **Password** to the secret you created (i.e. `secrets.REST_BASIC_SECRET`).
 
-![rest Connector basic auth](../img/connectors-rest-basic-auth.png)
+![rest Connector basic](../img/connectors-rest-basic.png)
 
-### REST Connector (Bearer Token Auth)
+### REST Connector (Bearer Token)
 
 #### Create a new Connector secret
 
@@ -61,10 +61,10 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 
 Select the **REST Connector** and fill out the following properties under the **Authentication** section:
 
-1. Click **Bearer Token Auth** in the **Authentication** section.
+1. Click **Bearer Token** in the **Authentication** section.
 2. Set **Bearer** to the secret you created (i.e. `secrets.REST_BEARER_TOKEN`).
 
-![rest Connector bearer token auth](../img/connectors-rest-bearer-token-auth.png)
+![rest Connector bearer token](../img/connectors-rest-bearer-token.png)
 
 ### REST Connector (OAuth token)
 
@@ -87,7 +87,7 @@ Select the **REST Connector** and fill out the following properties under the **
 6. Set **Audience** to the secret you created (i.e. `secrets.AUDIENCE`). It is an optional field. Depending on the OAuth provider you're using, you should fill this field or not.
 7. Choose **Client Authentication** from the dropdown menu (i.e. `Send client credentials in body`).
 
-![rest Connector bearer token auth](../img/connectors-rest-oauth-token.png)
+![rest Connector oauth token](../img/connectors-rest-oauth-token.png)
 
 Find more information about the OAuth client credentials flow at the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
