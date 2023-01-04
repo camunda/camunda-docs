@@ -138,6 +138,10 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 
 ## Redirect rules
 
+The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on the "Check internal links" step, it likely means you moved a doc. To resolve, you can add a redirect rule to [the .htaccess file](../static/.htaccess), mapping the old URL to the new URL.
+
+### Testing redirect rules
+
 The `.htaccess` file contains redirect rules that are applied to the published site, but it has no effect when running docusaurus locally (via `npm start`).
 
 If you wish to test `.htaccess` rules, you have a couple options:
