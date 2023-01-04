@@ -54,9 +54,9 @@ Specific Optimize versions are aligned with Camunda Platform versions as follows
 
 | Instance   | Version(s)               | Sidebars path                                                                             |
 | ---------- | ------------------------ | ----------------------------------------------------------------------------------------- |
-| `docs`     | Next                     | [/docs/sidebars.js](../docs/sidebars.js)                                                  |
+| `docs`     | Next                     | [/docs/sidebars.js](../sidebars.js)                                                       |
 | `docs`     | 8.1, 8.0, 1.3, ...       | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/)                    |
-| `optimize` | Next                     | [/optimize/sidebars.js](../optimize/sidebars.js)                                          |
+| `optimize` | Next                     | [/optimize/sidebars.js](../optimize_sidebars.js)                                          |
 | `optimize` | 3.9.0, 3.8.0, 3.7.0, ... | [/optimize_versioned_sidebars/version-\*-sidebars.json/](../optimize_versioned_sidebars/) |
 
 ### Sidebar items
