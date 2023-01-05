@@ -771,7 +771,7 @@ module.exports = {
             },
             "components/userguide/creating-reports",
             "components/userguide/combined-process-reports",
-            "components/userguide/processes",
+            "components/userguide/process-dashboards",
 
             {
               "Process analysis": [

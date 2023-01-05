@@ -54,9 +54,9 @@ Specific Optimize versions are aligned with Camunda Platform versions as follows
 
 | Instance   | Version(s)               | Sidebars path                                                                             |
 | ---------- | ------------------------ | ----------------------------------------------------------------------------------------- |
-| `docs`     | Next                     | [/docs/sidebars.js](../docs/sidebars.js)                                                  |
+| `docs`     | Next                     | [/docs/sidebars.js](../sidebars.js)                                                       |
 | `docs`     | 8.1, 8.0, 1.3, ...       | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/)                    |
-| `optimize` | Next                     | [/optimize/sidebars.js](../optimize/sidebars.js)                                          |
+| `optimize` | Next                     | [/optimize/sidebars.js](../optimize_sidebars.js)                                          |
 | `optimize` | 3.9.0, 3.8.0, 3.7.0, ... | [/optimize_versioned_sidebars/version-\*-sidebars.json/](../optimize_versioned_sidebars/) |
 
 ### Sidebar items
@@ -137,6 +137,10 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rules.
 
 ## Redirect rules
+
+The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on the "Check internal links" step, it likely means you moved a doc. To resolve, you can add a redirect rule to [the .htaccess file](../static/.htaccess), mapping the old URL to the new URL.
+
+### Testing redirect rules
 
 The `.htaccess` file contains redirect rules that are applied to the published site, but it has no effect when running docusaurus locally (via `npm start`).
 
