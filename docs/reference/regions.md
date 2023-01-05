@@ -14,7 +14,7 @@ Currently, we only make these regions available for customers on the Enterprise 
 Running on a Trial and want to try a different region, or interested in other regions or cloud providers? [Contact us](https://camunda.com/contact/) as we are able to make additional regions available on request.
 :::
 
-## Google Cloud Platform (GCP) regions
+## Available Google Cloud Platform (GCP) regions
 
 - Europe West: europe-west1
 - US East: us-east1
