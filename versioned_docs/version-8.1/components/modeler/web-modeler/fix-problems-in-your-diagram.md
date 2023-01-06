@@ -12,7 +12,7 @@ Based on a set of lint rules, Web Modeler continuously validates implementation 
 
 ### Engine version selection
 
-The version selector at the top right in the problems panel can be used to choose the Zeebe version the diagram is validated against. The version chosen should match the Zeebe version of the cluster the diagram is going to be deployed in to get the correct set of errors (if you do not know the version, it is shown alongside the cluster name in the deployment dialog which can be opened by clicking the `Deploy diagram` button).
+The version selector at the top right in the problems panel can be used to choose the Zeebe version the diagram is validated against. The version chosen should match the Zeebe version of the cluster the diagram is going to be deployed in to get the correct set of errors (if you do not know the version, it is shown alongside the cluster name in the deployment dialog which can be opened by clicking the **Deploy diagram** button).
 
 The version selector also provides information about the number of clusters available for each Zeebe version within the current organization.
 
