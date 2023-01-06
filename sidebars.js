@@ -648,6 +648,7 @@ module.exports = {
     "reference/release-policy",
     "reference/early-access",
     "reference/supported-environments",
+    "reference/regions",
     "reference/dependencies",
   ],
   "Self-Managed": [
