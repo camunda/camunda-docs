@@ -48,6 +48,7 @@ jobs:
           echo 'PROJECT_ID=${{ env.PROJECT_ID }}'
           echo 'STATUS_FIELD_ID=${{ env.STATUS_FIELD_ID }}'
           echo 'DONE_OPTION_ID=${{ env.DONE_OPTION_ID }}'
+          echo 'PR_ID=${{ github.event.pull_request.node_id }}'
       # - name: Add PR to project
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
