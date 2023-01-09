@@ -5,10 +5,6 @@ description: "How to perform a backup and restore of Operate and Tasklist data."
 keywords: ["backup", "backups"]
 ---
 
-:::note
-This API is subject to change.
-:::
-
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
 Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an id of `backup1` may contain the following Elasticsearch snapshots:
 
@@ -21,9 +17,11 @@ camunda_operate_backup1_8.1.0_part_5_of_6
 camunda_operate_backup1_8.1.0_part_6_of_6
 ```
 
-Operate provides an API to perform a backup and check the state of the backup. Restore a backup using the standard Elasticsearch API.
+Operate provides an API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
 
-### Prerequisites
+Note that the backup API can be reached via the Actuator management port, which by default is 8080. The port may be reconfigured with the help of `management.server.port` configuration parameter.
+
+## Prerequisites
 
 Before you can use the backup and restore feature:
 
@@ -32,18 +30,29 @@ Before you can use the backup and restore feature:
 
 ```yaml
 for Operate:
-camunda.operate.backup.repositoryName=<repository name>
+camunda.operate: backup.repositoryName=<repository name>
 
 for Tasklist:
-camunda.tasklist.backup.repositoryName=<repository name>
+camunda.tasklist: backup.repositoryName=<repository name>
 ```
 
-### Create backup API
+or with environmental variables:
+
+```
+for Operate:
+CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<repository name>
+
+for Tasklist:
+CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<repository name>
+
+```
+
+## Create backup API
 
 During backup creation Operate can continue running. To create the backup, call the following endpoint:
 
 ```
-POST actuator/backup
+POST actuator/backups
 {
   "backupId": <backupId>
 }
@@ -56,11 +65,12 @@ Response:
 | 200 OK           | Backup was successfully started, snapshots will be created asynchronously. List of snapshots is returned in the response body (see example below). This list must be persisted together with the backup id to be able to restore it later. |
 | 400 Bad Request  | In case something is wrong with `backupId`, e.g. the same backup id already exists.                                                                                                                                                        |
 | 500 Server Error | All other errors, e.g. ES returned error response when attempting to create a snapshot.                                                                                                                                                    |
+| 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                                                                                                                               |
 
 Example request:
 
 ```
-curl --request POST 'http://localhost:8080/actuator/backup' \
+curl --request POST 'http://localhost:8080/actuator/backups' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": "backup1" }'
 ```
@@ -70,39 +80,60 @@ Example response:
 ```json
 {
   "scheduledSnapshots": [
-    "camunda_operate_backup1_8.1.0-snapshot_part_1_of_6",
-    "camunda_operate_backup1_8.1.0-snapshot_part_2_of_6",
-    "camunda_operate_backup1_8.1.0-snapshot_part_3_of_6",
-    "camunda_operate_backup1_8.1.0-snapshot_part_4_of_6",
-    "camunda_operate_backup1_8.1.0-snapshot_part_5_of_6",
-    "camunda_operate_backup1_8.1.0-snapshot_part_6_of_6"
+    "camunda_operate_backup1_8.2.0_part_1_of_6",
+    "camunda_operate_backup1_8.2.0_part_2_of_6",
+    "camunda_operate_backup1_8.2.0_part_3_of_6",
+    "camunda_operate_backup1_8.2.0_part_4_of_6",
+    "camunda_operate_backup1_8.2.0_part_5_of_6",
+    "camunda_operate_backup1_8.2.0_part_6_of_6"
   ]
 }
 ```
 
-### Check backup state API
+## Get backup state API
 
 As a backup is created asynchronously, call the following endpoint to check the state of the backup:
 
 ```
-GET actuator/backup/{backupId}
+GET actuator/backups/{backupId}
 ```
 
 Response:
 
-| Code             | Description                                                                                                |
-| ---------------- | ---------------------------------------------------------------------------------------------------------- |
-| 200 OK           | Backup state could be determined and is returned in the response body, e.g.<br/> { "State": "COMPLETED" }. |
-| 404 Not Found    | Backup with given id does not exist.                                                                       |
-| 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                    |
+| Code             | Description                                                                             |
+| ---------------- | --------------------------------------------------------------------------------------- |
+| 200 OK           | Backup state could be determined and is returned in the response body.                  |
+| 404 Not Found    | Backup with given id does not exist.                                                    |
+| 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query. |
+| 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.            |
 
 For example, the request could look like this:
 
 ```
-curl 'http://localhost:8080/actuator/backup/backup1'
+curl 'http://localhost:8080/actuator/backups/backup1'
 ```
 
-Possible states of the backup:
+Example response:
+
+```json
+{
+  "backupId": "backup1",
+  "state": "COMPLETED",
+  "failureReason": null,
+  "details":  [
+    //here goes the list of all Elasticsearch snapshots included in the backup
+    {
+      "snapshotName": "camunda_operate_backup1_8.2.0_part_1_of_6",
+      "state": "SUCCESS",
+      "startTime": "2023-01-01T10:10:10.100+0000",
+      "failures": []
+    },
+    <..>
+  ]
+}
+```
+
+Possible **states** of the backup:
 
 - `COMPLETED`: Backup can be used for restoring the data.
 - `IN_PROGRESS`: Wait until the backup completes to use it for restore.
@@ -110,7 +141,51 @@ Possible states of the backup:
 - `INCOMPATIBLE`: Backup is incompatible with the current Elasticsearch version.
 - `INCOMPLETE`: Backup is incomplete (e.g. when backup process was interrupted).
 
-### Restore backup
+**State** of the individual snapshot is a copy of [Elasticsearch state](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/get-snapshot-api.html#get-snapshot-api-response-state).
+
+## Get backups list API
+
+To get the list of existing backups, the following endpoint can be used:
+
+```
+GET actuator/backups
+```
+
+Response:
+
+| Code             | Description                                                                                                                         |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| 200 OK           | Backup list could be determined and is returned in the response body. Can be an empty response in case no backups were created yet. |
+| 404 Not Found    | Backup repository is not configured.                                                                                                |
+| 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                                             |
+| 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                        |
+
+For example, the request could look like this:
+
+```
+curl 'http://localhost:8080/actuator/backups'
+```
+
+Response will contain JSON with array of objects representing state of each backup (see Get backup state API endpoint).
+
+## Delete backup API
+
+To delete all the Elasticsearch snapshots associated with the specific backup id, following endpoint may be used:
+
+```
+DELETE actuator/backups/{backupId}
+```
+
+Response:
+
+| Code             | Description                                                                                                                  |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| 204 No Content   | All commands to delete corresponding ELS snapshots were successfully sent to ELS. ELS will continue deletion asynchronously. |
+| 404 Not Found    | Not a single snapshot corresponding to given ID exist.                                                                       |
+| 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query.                                      |
+| 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                 |
+
+## Restore backup
 
 There is no Operate API to preform the backup restore. Instead, use the [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html).
 
