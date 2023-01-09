@@ -4,13 +4,11 @@ name: move-to-done
 
 on:
   pull_request:
-    # sjh: `labeled`/`unlabeled` for now! but when this is ready to go, change to `closed`.
-    types: [labeled, unlabeled]
+    types: [closed]
 
 jobs:
   move-to-done:
-    # sjh: uncomment this if when we change the trigger to `closed`
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Get project IDs for later steps
