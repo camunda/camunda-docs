@@ -56,13 +56,6 @@ jobs:
           echo 'STATUS_FIELD_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .id' project_data.json) >> $GITHUB_ENV
           echo 'DONE_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="✅ Done") |.id' project_data.json) >> $GITHUB_ENV
           echo 'PROJECT_ITEM_ID='$(jq '.data.node.projectItems.nodes[] | select(.project.number== ${{ env.PROJECT_NUMBER }}) | .id' project_data.json) >> $GITHUB_ENV
-      - name: Output found values
-        run: |
-          echo 'PROJECT_ID=${{ env.PROJECT_ID }}'
-          echo 'STATUS_FIELD_ID=${{ env.STATUS_FIELD_ID }}'
-          echo 'DONE_OPTION_ID=${{ env.DONE_OPTION_ID }}'
-          echo 'PR_ID=${{ github.event.pull_request.node_id }}'
-          echo 'PROJECT_ITEM_ID=${{ env.PROJECT_ITEM_ID }}'
       - name: Set status field
         env:
           GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
