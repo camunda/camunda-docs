@@ -159,9 +159,7 @@ You might wonder why the total number of process instances stored is that low. T
 
 ### Camunda Platform 8 self-managed
 
-Provisioning Camunda Platform 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customes already have own teams providing Elasticsearch for them as a service. However, the following example shows the current configuration of a cluster of size S in Camunda Platform 8 SaaS, which can serve as a starting point for your own sizing.
-
-As you can see in the table above, such a cluster can serve 500,000 process instances per day and store up to 100,000 process instances in Elasticsearch (in-flight and history).
+Provisioning Camunda Platform 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customes already have own teams providing Elasticsearch for them as a service. However, the following example shows a possible configuration which is close to a cluster of size S in Camunda Platform 8 SaaS, which can serve as a starting point for your own sizing. Such a cluster can serve 500,000 process instances per day and store up to 100,000 process instances in Elasticsearch (in-flight and history).
 
 |                                    |                     | request | limit |
 | ---------------------------------- | ------------------- | ------- | ----- |
@@ -175,38 +173,38 @@ As you can see in the table above, such a cluster can serve 500,000 process inst
 | gateway                            | embedded in broker  |         |       |
 | **Operate**                        |                     |         |       |
 | #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.4     | 1     |
-|                                    | Mem \[GB\] limit    | 1       | 1     |
+|                                    | vCPU \[cores\]      | 0.3     | 1     |
+|                                    | Mem \[GB\] limit    | 0.2     | 1     |
 | #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.4     | 1     |
-|                                    | Mem \[GB\] limit    | 1       | 1     |
+|                                    | vCPU \[cores\]      | 0.3     | 1     |
+|                                    | Mem \[GB\] limit    | 0.2     | 1     |
 | **Tasklist**                       |                     |         |       |
 | #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.4     | 1     |
-|                                    | Mem \[GB\] limit    | 1       | 2     |
+|                                    | vCPU \[cores\]      | 0.3     | 1     |
+|                                    | Mem \[GB\] limit    | 0.2     | 1     |
 | #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.4     | 1     |
-|                                    | Mem \[GB\] limit    | 1       | 2     |
+|                                    | vCPU \[cores\]      | 0.3     | 1     |
+|                                    | Mem \[GB\] limit    | 0.2     | 2     |
 | **Optimize**                       |                     |         |       |
 | #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.4     | 1     |
-|                                    | Mem \[GB\] limit    | 1       | 1     |
+|                                    | vCPU \[cores\]      | 0.3     | 1     |
+|                                    | Mem \[GB\] limit    | 0.4     | 1     |
 | #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.4     | 1     |
-|                                    | Mem \[GB\] limit    | 1       | 1     |
+|                                    | vCPU \[cores\]      | 0.3     | 1     |
+|                                    | Mem \[GB\] limit    | 0.4     | 1     |
 | **Elastic**                        |                     |         |       |
 | #statefulset                       | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 1       | 2     |
 |                                    | Mem \[GB\] limit    | 3       | 6     |
-|                                    | Disk \[GB\] request | 64      | 64    |
+|                                    | Disk \[GB\] request | 64      | 100   |
+| **Connectors**                     |                     |         |       |
+| #                                  | 1                   |         |       |
+|                                    | vCPU \[cores\]      | 0.2     | 0.4   |
+|                                    | Mem \[GB\] limit    | 0.25    | 0.5   |
 | **Other** (Worker, Analytics, ...) |                     |         |       |
 | #                                  | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 0.4     | 0.4   |
 |                                    | Mem \[GB\] limit    | 0.45    | 0.45  |
-| **Total resources**                |                     |         |       |
-|                                    | vCPU \[cores\]      | 5       | 9.76  |
-|                                    | Mem \[GB\]          | 9.9     | 18.9  |
-|                                    | Disk \[GB\]         | 96      | 256   |
 
 ## Planning non-production environments
 
