@@ -166,7 +166,7 @@ For example, the request could look like this:
 curl 'http://localhost:8080/actuator/backups'
 ```
 
-Response will contain JSON with array of objects representing state of each backup (see [get backup state API endpoint](#get-backup-state-API)).
+Response will contain JSON with array of objects representing state of each backup (see [get backup state API endpoint](#get-backup-state-api)).
 
 ## Delete backup API
 
