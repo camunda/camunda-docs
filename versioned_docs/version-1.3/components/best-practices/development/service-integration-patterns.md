@@ -1,5 +1,6 @@
 ---
 title: "Service integration patterns with BPMN"
+description: "Understand communication patterns, integrate services with BPMN tasks and events, and take a closer look at hiding technical complexity behind call activities."
 ---
 
 When integrating systems and services, you can choose between various modeling possibilities in BPMN. This practice will give you an overview and advice on how to decide between alternatives.
