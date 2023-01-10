@@ -11,7 +11,8 @@ Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/ca
 However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
 
-The different components of Web Modeler Self-Managed can be configured using environment variables.
+The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
+For a working example configuration, that shows how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
 
 ### Configuration of the `restapi` component
 
@@ -29,7 +30,7 @@ Web Modeler requires a PostgreSQL database as persistent data storage (other dat
 
 #### SMTP / email
 
-Web Modeler requires a SMTP server to send notification emails to users.
+Web Modeler requires an SMTP server to send notification emails to users.
 
 | Environment variable        | Description                                                                                                                                                                                         | Example value                 | Default value |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------- |
@@ -44,15 +45,15 @@ Web Modeler requires a SMTP server to send notification emails to users.
 
 #### WebSocket
 
-The `restapi` component sends certain events (e.g. "file updated", "comment added") to the [WebSocket](#configuration-of-the-websockets-component) server.
+The `restapi` component sends certain events (e.g. "file updated", "comment added") to the [WebSocket](#configuration-of-the-websocket-component) server.
 
-| Environment variable    | Description                                                                             | Example value        |
-| ----------------------- | --------------------------------------------------------------------------------------- | -------------------- |
-| `RESTAPI_PUSHER_HOST`   | [Internal](#notes-on-host-names-and-port-numbers) host name of the WebSocket server.    | `modeler-websockets` |
-| `RESTAPI_PUSHER_PORT`   | [Internal](#notes-on-host-names-and-port-numbers) port number of the WebSocket server.  | `8060`               |
-| `RESTAPI_PUSHER_APP_ID` | _must be the same as_ [`PUSHER_APP_ID`](#configuration-of-the-websockets-component)     | `web-modeler`        |
-| `RESTAPI_PUSHER_KEY`    | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websockets-component)    | \*\*\*               |
-| `RESTAPI_PUSHER_SECRET` | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websockets-component) | \*\*\*               |
+| Environment variable    | Description                                                                            | Example value        |
+| ----------------------- | -------------------------------------------------------------------------------------- | -------------------- |
+| `RESTAPI_PUSHER_HOST`   | [Internal](#notes-on-host-names-and-port-numbers) host name of the WebSocket server.   | `modeler-websockets` |
+| `RESTAPI_PUSHER_PORT`   | [Internal](#notes-on-host-names-and-port-numbers) port number of the WebSocket server. | `8060`               |
+| `RESTAPI_PUSHER_APP_ID` | _must be the same as_ [`PUSHER_APP_ID`](#configuration-of-the-websocket-component)     | `web-modeler`        |
+| `RESTAPI_PUSHER_KEY`    | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)    | \*\*\*               |
+| `RESTAPI_PUSHER_SECRET` | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websocket-component) | \*\*\*               |
 
 #### Identity / Keycloak
 
@@ -90,23 +91,23 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 
 #### WebSocket
 
-The `webapp` component sends certain events (e.g. "user opened diagram", "user left diagram") to the [WebSocket](#configuration-of-the-websockets-component) server and reacts to events triggered by other users.
+The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/9.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
+
+The `webapp` component sends certain events (e.g. "user opened diagram", "user left diagram") to the [WebSocket server](#configuration-of-the-websocket-component) and can also react to such events (e.g. show a notification in the UI that a user left the diagram).
 
 | Environment variable      | Description                                                                                                                                   | Example value        | Default value |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------- |
 | `PUSHER_HOST`             | [Internal](#notes-on-host-names-and-port-numbers) host name of the WebSocket server.                                                          | `modeler-websockets` | -             |
 | `PUSHER_PORT`             | [Internal](#notes-on-host-names-and-port-numbers) port number of the WebSocket server.                                                        | `8060`               | -             |
-| `PUSHER_APP_ID`           | _must be the same as_ [`PUSHER_APP_ID`](#configuration-of-the-websockets-component)                                                           | `web-modeler`        | -             |
-| `PUSHER_KEY`              | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websockets-component)                                                          | \*\*\*               | -             |
-| `PUSHER_SECRET`           | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websockets-component)                                                       | \*\*\*               | -             |
+| `PUSHER_APP_ID`           | _must be the same as_ [`PUSHER_APP_ID`](#configuration-of-the-websocket-component)                                                            | `web-modeler`        | -             |
+| `PUSHER_KEY`              | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*               | -             |
+| `PUSHER_SECRET`           | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websocket-component)                                                        | \*\*\*               | -             |
 | `CLIENT_PUSHER_HOST`      | [External](#notes-on-host-names-and-port-numbers) host name on which the Web Modeler client accesses the WebSocket server from the browser.   | `ws.example.com`     | -             |
 | `CLIENT_PUSHER_PORT`      | [External](#notes-on-host-names-and-port-numbers) port number on which the Web Modeler client accesses the WebSocket server from the browser. | `443`                | -             |
-| `CLIENT_PUSHER_KEY`       | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websockets-component)                                                          | \*\*\*               | -             |
+| `CLIENT_PUSHER_KEY`       | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*               | -             |
 | `CLIENT_PUSHER_FORCE_TLS` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`               | `false`       |
 
-### Configuration of the `websockets` component
-
-The WebSocket server shipped with Web Modeler Self-Managed is a replacement for the third-party service [Pusher](https://pusher.com) (used by Web Modeler SaaS), implementing the same concepts and APIs. It is used to exchange events between different Web Modeler users to support collaborative modeling.
+### Configuration of the `websocket` component
 
 | Environment variable | Description                                                                                              | Example value |
 | -------------------- | -------------------------------------------------------------------------------------------------------- | ------------- |
