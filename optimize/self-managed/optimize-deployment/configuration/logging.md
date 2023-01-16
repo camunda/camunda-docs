@@ -8,6 +8,12 @@ Camunda Optimize provides logging facilities that are preconfigured to use
 _INFO_ logging level which provides minimal output of information in log files.
 This level can be adjusted using the `environment-logback.xml` configuration file.
 
+## Google Stackdriver (JSON) logging
+
+To enable Google Stackdriver compatible JSON logging, set the environment variable `JSON_LOGGING=true` before starting Zeebe.
+
+## Default logginf configuration
+
 Although one could potentially configure logging levels for all packages, it
 is recommended to set logging levels for the following three Optimize parts using only exact package
 reference as follows:
