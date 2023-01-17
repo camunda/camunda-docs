@@ -18,7 +18,7 @@ A text field allowing the user to read and edit textual data.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the text field.
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: Text field must contain a value.
-  - **Regular expression validation**: Use predefined validation patterns. Available options are: `Email`, `Phone` and `Custom`.
+  - **Regular expression validation**: Use predefined validation patterns. Available options are: `Email`, `Phone`, and `Custom`.
   - **Minimum length**: Text field must have at least `n` characters.
   - **Maximum length**: Text field must not have more than `n` characters.
   - **Regular expression pattern**: Text field value must match the provided [RegEx](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet) pattern.
