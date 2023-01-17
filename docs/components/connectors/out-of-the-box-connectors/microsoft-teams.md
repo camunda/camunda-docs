@@ -75,8 +75,8 @@ Visit [Microsoft Teams Access Token](https://learn.microsoft.com/azure/active-di
 For a **Refresh Token** type authentication, take the following steps:
 
 1. Click the **Refresh Token** connection type in the **Authentication** section.
-2. Set **Refresh Token** to `Refresh Token`. See more [how to get refresh token](https://learn.microsoft.com/en-us/graph/auth-v2-user)
-3. Set **Tenant id** to `Tenant ID`. Your Microsoft Teams tenant ID is a unique identifier. See more on [how to find a tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant).
+2. Set **Refresh Token** to `Refresh Token`. Read more on [how to get a refresh token](https://learn.microsoft.com/en-us/graph/auth-v2-user).
+3. Set **Tenant id** to `Tenant ID`. Your Microsoft Teams tenant ID is a unique identifier. Read more on [how to find a tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant).
 4. Set the **Client ID** field: the application ID that the [Azure app registration portal](https://go.microsoft.com/fwlink/?linkid=2083908) assigned to your app.
 5. Set the **Secret ID** field: the client secret that you created in the app registration portal for your app.
 
