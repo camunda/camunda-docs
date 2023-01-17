@@ -21,20 +21,32 @@ The following form elements are currently available within Camunda Forms:
 
   <tr>
     <td><img src="/img/form-icons/form-text.svg" alt="Text Symbol" height="60"></img></td>
-    <td><a href="../forms-element-library-text">Text</a></td>
+    <td><a href="../forms-element-library-text">Text view</a></td>
     <td>Display static information</td>
   </tr>
 
   <tr>
     <td><img src="/img/form-icons/form-textField.svg" alt="Text Field Symbol" height="60"></img></td>
-    <td><a href="../forms-element-library-textfield">Text Field</a></td>
+    <td><a href="../forms-element-library-textfield">Text field</a></td>
     <td>Read and edit textual data</td>
+  </tr>
+
+   <tr>
+    <td><img src="/img/form-icons/form-textArea.svg" alt="Text Area Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-textarea">Text area</a></td>
+    <td>Read and edit multiline textual data</td>
   </tr>  
   
   <tr>
     <td><img src="/img/form-icons/form-number.svg" alt="Number Field Symbol" height="60"></img></td>
-    <td><a href="../forms-element-library-number">Number Field</a></td>
+    <td><a href="../forms-element-library-number">Number field</a></td>
     <td>Read and edit numeric data</td>
+  </tr>
+
+   <tr>
+    <td><img src="/img/form-icons/form-datetime.svg" alt="Datetime Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-datetime">Datetime</a></td>
+    <td>Read and edit date and time data</td>
   </tr>
 
   <tr>
@@ -65,6 +77,12 @@ The following form elements are currently available within Camunda Forms:
     <td><img src="/img/form-icons/form-taglist.svg" alt="Taglist Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-taglist">Taglist</a></td>
     <td>Large dataset multi data selector</td>
+  </tr>
+
+  <tr>
+    <td><img src="/img/form-icons/form-image.svg" alt="Image Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-image">Image view</a></td>
+    <td>Display images</td>
   </tr>
 
   <tr>

@@ -15,6 +15,7 @@ A set of checkboxes providing data multi-selection for small datasets.
 - **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Options source**: Checklists can be configured with an options source defining the individual choices your user can make, see [options source docs](../configuration/forms-config-options.md).
 - **Disabled**: Disables the checklist, for use during development.
+- **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the checklist.
 
 ### Datatypes
 
