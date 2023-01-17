@@ -10,9 +10,9 @@ This level can be adjusted using the `environment-logback.xml` configuration fil
 
 ## Google Stackdriver (JSON) logging
 
-To enable Google Stackdriver compatible JSON logging, set the environment variable `JSON_LOGGING=true` before starting Zeebe.
+To enable Google Stackdriver compatible JSON logging, set the environment variable `JSON_LOGGING=true` before starting Optimize.
 
-## Default logginf configuration
+## Default logging configuration
 
 Although one could potentially configure logging levels for all packages, it
 is recommended to set logging levels for the following three Optimize parts using only exact package
