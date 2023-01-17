@@ -2,7 +2,7 @@
 id: github-webhook
 title: GitHub Webhook
 sidebar_label: GitHub Webhook
-description: Start a process instance triggered by a GitHub event.
+description: Learn how the GitHub Webhook Connector allows you to start a BPMN process instance triggered by a GitHub event.
 ---
 
 The **GitHub Webhook Connector** allows you to start a BPMN process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
@@ -21,7 +21,7 @@ To use the **GitHub Webhook Connector**, you need to [download](https://github.c
 2. Change its template to a GitHub Webhook.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
-5. Deploy it to your Camunda 8 instance.
+5. Deploy it to your Camunda Platform 8 instance.
 
 ## Make your GitHub Webhook Connector for receiving messages executable
 
@@ -29,11 +29,11 @@ To use the **GitHub Webhook Connector**, you need to [download](https://github.c
 
 ![GitHub Webhook](../img/use-inbound-connector-template-filled-gh.png)
 
-1. In the **Webhook Configuration** section, set the **Webhook ID**. This value is used to build an URL endpoint of your webhook. For example, given the `Webhook ID` value is `myWebhookPath`, then the complete webhook URL endpoint will be `http(s)://<base URL>/inbound/myWebhookPath`.
+1. In the **Webhook Configuration** section, set the **Webhook ID**. This value is used to build a URL endpoint of your webhook. For example, given the `Webhook ID` value is `myWebhookPath`, the complete webhook URL endpoint will be `http(s)://<base URL>/inbound/myWebhookPath`.
 2. Set the **GitHub secret**. This is a shared secret key that has to be defined in both your BPMN and GitHub webhook configuration page. The value is used to calculate HMAC authentication signature.
-3. Configure **Activation Condition**. For example, given GitHub triggers a webhook endpoint with a new PR payload `{"action": "opened", "pull_request": ...}`, the **Activation Condition** value might look like as `=(request.body.action = "opened")`. Leave this field empty to trigger your webhook everytime.
-4. Configure **Variable Mapping**. For example, GitHub triggers a webhook endpoint with a new PR payload `{"action": "opened", "pull_request": { "url: "https://...", ... }}` and you would like to extract a PR URL as a process variable `prUrl`. In that case, the **Variable Mapping** might look as `={prUrl: request.body.pull_request.url}`.
+3. Configure **Activation Condition**. For example, given GitHub triggers a webhook endpoint with a new PR payload `{"action": "opened", "pull_request": ...}`, the **Activation Condition** value might look like as `=(request.body.action = "opened")`. Leave this field empty to trigger your webhook every time.
+4. Configure **Variable Mapping**. For example, GitHub triggers a webhook endpoint with a new PR payload `{"action": "opened", "pull_request": { "url: "https://...", ... }}` and you would like to extract a PR URL as a process variable `prUrl`. In that case, the **Variable Mapping** might look like `={prUrl: request.body.pull_request.url}`.
 
-## Appendix
+## Nest steps
 
 - Learn more about [GitHub webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
