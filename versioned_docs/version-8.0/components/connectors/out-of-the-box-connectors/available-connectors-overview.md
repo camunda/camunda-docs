@@ -4,7 +4,9 @@ title: Overview
 description: Take a closer look at the Connectors available in Camunda Platform 8.
 ---
 
-This section gives an overview of the **out-of-the-box Connectors** available in Camunda Platform 8:
+This section gives an overview of the **out-of-the-box Connectors** available in Camunda Platform 8. All Connectors are available for Camunda Platform 8 SaaS and [Self Managed](../../../self-managed/connectors-deployment/install-and-start.md).
+
+## Outbound Connectors
 
 - [Amazon SNS Connector](aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
@@ -17,6 +19,11 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 - [SendGrid Connector](sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack Connector](slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
+## Inbound Connectors
+
+- [HTTP Webhook Connector](http-webhook.md) - Start a process instance with your custom webhook configuration.
+- [GitHub Webhook Connector](github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
+
 In addition to this section on Connectors, we recommend reviewing [Connector secrets](../../console/manage-clusters/manage-secrets.md).
 
-If you want to build custom Connectors using the **Integration Framework**, head over to our [Connector SDK guide](../custom-built-connectors/connector-sdk.md).
+If you want to build **custom Connectors**, head over to our [Connector SDK guide](../custom-built-connectors/connector-sdk.md).
