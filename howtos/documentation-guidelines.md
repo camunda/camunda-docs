@@ -180,7 +180,7 @@ Keep the following guidelines in mind when creating Zeebe diagrams:
 - There should be no more than **nine** elements per diagram. Otherwise, complex processes may be broken into more than one diagram.
 
 **Operate & Tasklist**
-Operate and Tasklist screenshot automation is currently underway with plans for launch in the first quarter of 2023.
+Operate and Tasklist screenshot automation is currently in the backlog.
 
 **Optimize**
 Most of the screenshots in the user guide can be updated automatically:
