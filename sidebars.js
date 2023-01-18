@@ -58,6 +58,7 @@ module.exports = {
     {
       Concepts: [
         "components/concepts/what-is-camunda-platform-8",
+        "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
         "components/concepts/process-instance-creation",
