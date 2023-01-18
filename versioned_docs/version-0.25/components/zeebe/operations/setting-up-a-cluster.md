@@ -55,7 +55,7 @@ of the default Zeebe configuration file, it should be self-explanatory.
       clusterName: zeebe-cluster
 ```
 
-# Example
+## Example
 
 In this example, we will set up a Zeebe cluster with
 five brokers. Each broker needs to get a unique node id.

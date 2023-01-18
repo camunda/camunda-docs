@@ -39,6 +39,7 @@ module.exports = {
             "guides/update-guide/connectors/introduction",
             "guides/update-guide/connectors/010-to-020",
             "guides/update-guide/connectors/020-to-030",
+            "guides/update-guide/connectors/030-to-040",
           ],
         },
         "guides/update-guide/800-to-810",
@@ -220,7 +221,9 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
+            "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
@@ -228,7 +231,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
           ],
-          "Integration Framework": [
+          "Custom Connectors": [
             "components/connectors/custom-built-connectors/connector-templates",
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
@@ -307,7 +310,10 @@ module.exports = {
               "Combined process reports",
               "components/userguide/combined-process-reports/"
             ),
-            optimizeLink("Processes", "components/userguide/processes/"),
+            optimizeLink(
+              "Processes",
+              "components/userguide/process-dashboards/"
+            ),
             {
               "Process analysis": [
                 optimizeLink(
@@ -504,7 +510,7 @@ module.exports = {
         "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/console-api-reference",
-
+        "apis-clients/web-modeler-api/index",
         {
           "Optimize API (REST)": [
             optimizeLink(
@@ -645,6 +651,7 @@ module.exports = {
     "reference/release-policy",
     "reference/early-access",
     "reference/supported-environments",
+    "reference/regions",
     "reference/dependencies",
   ],
   "Self-Managed": [
@@ -1035,6 +1042,7 @@ module.exports = {
         {
           "Web Modeler (Beta)": [
             "self-managed/modeler/web-modeler/installation",
+            "self-managed/modeler/web-modeler/api",
           ],
         },
         {

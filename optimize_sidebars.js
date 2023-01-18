@@ -598,8 +598,16 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-lambda/"
             ),
             docsLink(
+              "GitHub Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/github-webhook/"
+            ),
+            docsLink(
               "Google Drive Connector",
               "components/connectors/out-of-the-box-connectors/googledrive/"
+            ),
+            docsLink(
+              "HTTP Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/http-webhook/"
             ),
             docsLink(
               "Kafka Producer Connector",
@@ -771,7 +779,7 @@ module.exports = {
             },
             "components/userguide/creating-reports",
             "components/userguide/combined-process-reports",
-            "components/userguide/processes",
+            "components/userguide/process-dashboards",
 
             {
               "Process analysis": [

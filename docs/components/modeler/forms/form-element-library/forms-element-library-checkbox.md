@@ -15,6 +15,7 @@ A checkbox allowing the user to read and edit boolean data.
 - **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default state for the checkbox in case no input data exists for the given key.
 - **Disabled**: Disables the checkbox, for use during development.
+- **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the checkbox.
 
 ### Datatypes
 
