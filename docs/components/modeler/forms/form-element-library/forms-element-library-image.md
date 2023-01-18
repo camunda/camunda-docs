@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-image
 title: Image view
-description: Learn about the library image view form element to display an image.
+description: Learn about the image view form element to display an image.
 ---
 
 An element allowing the user to display images.
