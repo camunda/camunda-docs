@@ -1,6 +1,7 @@
 ---
 id: usage-metrics
 title: Usage metrics
+description: "Operate provides usage metrics under usage-metrics Actuator endpoint. It is exposed on management port."
 ---
 
 Operate provides usage metrics under `usage-metrics` Actuator endpoint. It is exposed on management port that can be configured via `management.server.port` configuration parameter (default: 8080).

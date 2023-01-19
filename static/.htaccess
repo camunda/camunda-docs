@@ -8,6 +8,129 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# Consolidated redundant element-template pages - v8.0, current, and vNext.
+RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templates/?$ /docs$1/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
+
+# Added Self-Managed Modeler redirect
+RewriteRule ^docs/next/self-managed/web-modeler/installation/(.*)$ /docs/next/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
+
+# Redirects for Connectors move to top level
+RewriteRule ^docs/8.0/components/integration-framework/introduction-to-connectors/(.*)$ /docs/8.0/components/connectors/introduction-to-connectors/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/integration-framework/introduction-to-connectors$ /docs/8.0/components/connectors/introduction-to-connectors [R=301,L]
+RewriteRule ^docs/next/components/integration-framework/introduction-to-connectors/(.*)$ /docs/next/components/connectors/introduction-to-connectors/$1 [R=301,L]
+RewriteRule ^docs/next/components/integration-framework/introduction-to-connectors$ /docs/next/components/connectors/introduction-to-connectors [R=301,L]
+RewriteRule ^docs/components/integration-framework/introduction-to-connectors/(.*)$ /docs/components/connectors/introduction-to-connectors/$1 [R=301,L]
+RewriteRule ^docs/components/integration-framework/introduction-to-connectors$ /docs/components/connectors/introduction-to-connectors [R=301,L]
+RewriteRule ^docs/8.0/components/integration-framework/(.*)$ /docs/8.0/components/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/integration-framework$ /docs/8.0/components/ [R=301,L]
+RewriteRule ^docs/components/integration-framework/(.*)$ /docs/components/$1 [R=301,L]
+RewriteRule ^docs/components/integration-framework$ /docs/components/ [R=301,L]
+RewriteRule ^docs/next/components/integration-framework/(.*)$ /docs/8.0/components/$1 [R=301,L]
+RewriteRule ^docs/next/components/integration-framework$ /docs/8.0/components/ [R=301,L]
+
+# Added for v8.1
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/deployment/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deploy/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/ingress-setup/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/local/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/openshift-helm/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/openshift/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/amazon-eks/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deployment/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/kubernetes/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/platform-8-deployment/(.*)$ /docs/self-managed/platform-deployment/overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/known-limitations/(.*)$ /docs/self-managed/platform-deployment/troubleshooting/$1 [R=301,L]
+
+# These redirects go from /next/ to /next/ and should be revisted when /next/ is removed from the sitemap
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/deployment/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/deploy/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/ingress-setup/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/local/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/openshift-helm/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/openshift/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/amazon-eks/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/kubernetes-helm/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/deployment/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/kubernetes/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/overview/$1 [R=301,L]
+
+RewriteRule ^docs/guides/implementing-connectors/(.*)$ /docs/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
+RewriteRule ^docs/guides/implementing-connectors$ /docs/guides/configuring-out-of-the-box-connectors/ [R=301,L]
+RewriteRule ^docs/8.0/guides/implementing-connectors/(.*)$ /docs/8.0/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
+RewriteRule ^docs/8.0/guides/implementing-connectors$ /docs/8.0/guides/configuring-out-of-the-box-connectors/ [R=301,L]
+
+RewriteRule ^docs/1.2/self-managed/overview/(.*)$ /docs/1.2/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/1.2/self-managed/overview$ /docs/1.2/self-managed/about-self-managed/ [R=301,L]
+RewriteRule ^docs/1.3/self-managed/overview/(.*)$ /docs/1.3/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/1.3/self-managed/overview$ /docs/1.3/self-managed/about-self-managed/ [R=301,L]
+RewriteRule ^docs/self-managed/overview/(.*)$ /docs/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/self-managed/overview$ /docs/self-managed/about-self-managed/ [R=301,L]
+
+RewriteRule ^docs/self-managed/zeebe-deployment/?$ /docs/self-managed/zeebe-deployment/zeebe-installation/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/operations/?$ /docs/self-managed/zeebe-deployment/operations/zeebe-in-production/ [R=301,L]
+
+RewriteRule ^docs/self-managed/tasklist-deployment/configuration/(.*)$ /docs/self-managed/tasklist-deployment/tasklist-configuration/$1 [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/authentication/(.*)$ /docs/self-managed/tasklist-deployment/tasklist-authentication/$1 [R=301,L]
+
+# More /next/ to /next/
+RewriteRule ^docs/next/self-managed/platform-deployment/platform-8-deployment/?$ /docs/next/self-managed/platform-deployment/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/?$ /docs/next/self-managed/platform-deployment/overview/ [R=301,L]
+
+RewriteRule ^docs/self-managed/operate-deployment/configuration/(.*)$ /docs/self-managed/operate-deployment/operate-configuration/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/authentication/(.*)$ /docs/self-managed/operate-deployment/operate-authentication/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/troubleshooting/?$ /docs/self-managed/identity/troubleshooting/troubleshoot-identity/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/getting-started/?$ /docs/self-managed/identity/getting-started/install-identity/ [R=301,L]
+
+RewriteRule ^docs/1.3/components/overview/(.*)$ /docs/1.3/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/1.3/components/overview$ /docs/1.3/components/components-overview/ [R=301,L]
+RewriteRule ^docs/1.2/components/overview/(.*)$ /docs/1.2/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/1.2/components/overview$ /docs/1.2/components/components-overview/ [R=301,L]
+RewriteRule ^docs/1.1/components/overview/(.*)$ /docs/1.1/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/1.1/components/overview$ /docs/1.1/components/components-overview/ [R=301,L]
+RewriteRule ^docs/1.0/components/overview/(.*)$ /docs/1.0/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/1.0/components/overview$ /docs/1.0/components/components-overview/ [R=301,L]
+RewriteRule ^docs/0.26/components/overview/(.*)$ /docs/0.26/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/0.26/components/overview$ /docs/0.26/components/components-overview/ [R=301,L]
+RewriteRule ^docs/0.25/components/overview/(.*)$ /docs/0.25/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/0.25/components/overview$ /docs/0.25/components/components-overview/ [R=301,L]
+RewriteRule ^docs/components/overview/(.*)$ /docs/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/components/overview$ /docs/components/components-overview/ [R=301,L]
+
+RewriteRule ^docs/components/zeebe/technical-concepts/?$ /docs/components/zeebe/technical-concepts/technical-concepts-overview/ [R=301,L]
+
+RewriteRule ^docs/components/tasklist/userguide/overview/(.*)$ /docs/components/tasklist/userguide/using-tasklist/$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/overview$ /docs/components/tasklist/userguide/using-tasklist/ [R=301,L]
+RewriteRule ^docs/components/tasklist/introduction/(.*)$ /docs/components/tasklist/introduction-to-tasklist/$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/introduction$ /docs/components/tasklist/introduction-to-tasklist/ [R=301,L]
+
+RewriteRule ^docs/components/operate/?$ /docs/components/operate/operate-introduction/ [R=301,L]
+
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/?$ /docs/components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/?$ /docs/components/modeler/web-modeler/connectors/introduction-to-connectors/ [R=301,L]
+
+RewriteRule ^docs/components/console/introduction/(.*)$ /docs/components/console/introduction-to-console/$1 [R=301,L]
+RewriteRule ^docs/components/console/introduction$ /docs/components/console/introduction-to-console/ [R=301,L]
+RewriteRule ^docs/components/console/troubleshooting/(.*)$ /docs/components/console/console-troubleshooting/$1 [R=301,L]
+RewriteRule ^docs/components/console/troubleshooting$ /docs/components/console/console-troubleshooting/ [R=301,L]
+
+RewriteRule ^docs/components/best-practices/overview/(.*)$ /docs/components/best-practices/best-practices-overview/$1 [R=301,L]
+RewriteRule ^docs/components/best-practices/overview$ /docs/components/best-practices/best-practices-overview [R=301,L]
+
+RewriteRule ^docs/1.3/apis-clients/overview/(.*)$ /docs/1.3/apis-clients/working-with-apis-clients/$1 [R=301,L]
+RewriteRule ^docs/1.3/apis-clients/overview$ /docs/1.3/apis-clients/working-with-apis-clients [R=301,L]
+RewriteRule ^docs/1.2/apis-clients/overview/(.*)$ /docs/1.2/apis-clients/working-with-apis-clients/$1 [R=301,L]
+RewriteRule ^docs/1.2/apis-clients/overview$ /docs/1.2/apis-clients/working-with-apis-clients [R=301,L]
+RewriteRule ^docs/apis-clients/overview/(.*)$ /docs/apis-clients/working-with-apis-clients/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/overview$ /docs/apis-clients/working-with-apis-clients [R=301,L]
+RewriteRule ^docs/apis-clients/tasklist-api/tutorial/(.*)$ /docs/apis-clients/tasklist-api/tasklist-api-tutorial/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/tasklist-api/overview/(.*)$ /docs/apis-clients/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/optimize-api/authorization/(.*)$ /optimize/apis-clients/optimize-api/optimize-api-authorization/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/go-client/get-started/(.*)$ /docs/apis-clients/go-client/go-get-started/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/cli-client/get-started/(.*)$ /docs/apis-clients/cli-client/cli-get-started/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/optimize-deployment/rest-api/(.*)$ /optimize/apis-clients/optimize-api/$1 [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/optimize-explained/(.*)$ /optimize/self-managed/optimize-deployment/advanced-features/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/zeebe-gateway-deployment/index(.*)$ /docs/self-managed/zeebe-gateway-deployment/zeebe-gateway [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-gateway-deployment/index$ /docs/self-managed/zeebe-gateway-deployment/zeebe-gateway [R=301,L]
+
 RewriteRule ^docs/guides/operating-the-camunda-cloud-stack-on-kubernetes(.*)$ /docs/self-managed/platform-deployment/kubernetes [R=301,L]
 RewriteRule ^docs/guides/operating-the-camunda-cloud-stack-on-kubernetes$ /docs/self-managed/platform-deployment/kubernetes [R=301,L]
 
@@ -50,19 +173,19 @@ RewriteRule ^docs/components/guides/getting-started$ /docs/components/guides/ [R
 RewriteRule ^docs/components/zeebe/technical-concepts/internal-processing/#handling-back-pressure(.*)$ /docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure [R=301,L]
 RewriteRule ^docs/components/zeebe/technical-concepts/internal-processing/#handling-back-pressure$ /docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure [R=301,L]
 
-RewriteRule ^docs/self-managed/optimize-deployment/setup/secure-elasticsearch(.*)$ /docs/self-managed/optimize-deployment/configuration/security-instructions [R=301,L]
-RewriteRule ^docs/self-managed/optimize-deployment/setup/secure-elasticsearch$ /docs/self-managed/optimize-deployment/configuration/security-instructions [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/secure-elasticsearch(.*)$ /optimize/self-managed/optimize-deployment/configuration/security-instructions [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/secure-elasticsearch$ /optimize/self-managed/optimize-deployment/configuration/security-instructions [R=301,L]
 
-RewriteRule ^docs/self-managed/optimize-deployment/setup/configuration(.*)$ /docs/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
-RewriteRule ^docs/self-managed/optimize-deployment/setup/configuration$ /docs/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/configuration(.*)$ /optimize/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/configuration$ /optimize/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
 
-RewriteRule ^docs/self-managed/optimize-deployment/setup/installation(.*)$ /docs/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
-RewriteRule ^docs/self-managed/optimize-deployment/setup/installation$ /docs/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/installation(.*)$ /optimize/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/installation$ /optimize/self-managed/optimize-deployment/configuration/system-configuration [R=301,L]
 
 RewriteRule ^docs/self-managed/optimize-deployment/setup/?$ /docs/self-managed/platform-deployment [R=301,L]
 
-RewriteRule ^docs/self-managed/optimize-deployment/setup/(.*)$ /docs/self-managed/optimize-deployment/configuration/$1 [R=301,L]
-RewriteRule ^docs/self-managed/optimize-deployment/setup/$ /docs/self-managed/optimize-deployment/configuration/ [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/(.*)$ /optimize/self-managed/optimize-deployment/configuration/$1 [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/setup/$ /optimize/self-managed/optimize-deployment/configuration/ [R=301,L]
 
 RewriteRule ^docs/components/zeebe/technical-concepts/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
 RewriteRule ^docs/components/zeebe/technical-concepts/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
@@ -162,7 +285,23 @@ RewriteRule ^docs/product-manuals$ /docs/components/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authorization/?$ /docs/self-managed/zeebe-deployment/security/client-authorization/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs/self-managed/zeebe-deployment/security/secure-client-communication/ [R=301,L]
 
-RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview(.*)$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview [R=301,L]
+
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/rest(.*)$ /docs/components/connectors/out-of-the-box-connectors/rest$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/rest$ /docs/components/connectors/out-of-the-box-connectors/rest [R=301,L]
+
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/sendgrid(.*)$ /docs/components/connectors/out-of-the-box-connectors/sendgrid$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/sendgrid$ /docs/components/connectors/out-of-the-box-connectors/sendgrid [R=301,L]
+
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/slack(.*)$ /docs/components/connectors/out-of-the-box-connectors/slack$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/slack$ /docs/components/connectors/out-of-the-box-connectors/slack [R=301,L]
+
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors(.*)$ /docs/components/connectors/introduction-to-connectors$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/introduction-to-connectors$ /docs/components/connectors/introduction-to-connectors [R=301,L]
+
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/use-connectors(.*)$ /docs/components/connectors/use-connectors$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/use-connectors$ /docs/components/connectors/use-connectors [R=301,L]
 
 RewriteRule ^docs/self-managed/iam/what-is-iam/(.*)$  /docs/self-managed/identity/what-is-identity/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/deployment/configuration-variables/(.*)$  /docs/self-managed/identity/deployment/configuration-variables/ [R=301,L]
@@ -201,6 +340,37 @@ RewriteRule ^docs/0.25/components/zeebe/tasklist-user-guide /docs/0.25/component
 # redirect best-practices overview page
 RewriteRule ^docs/components/best-practices/?$ /docs/components/best-practices/overview/ [R=301,L]
 
+# Optimize docs get their own section of the site
+## The initial implementation of optimize section incorrectly placed all components docs in the root of optimize/. 
+##   These rules redirect from there into a components/ folder.
+RewriteRule ^optimize/next/what-is-optimize(\/?)$ /optimize/next/components/what-is-optimize/ [R=301,L]
+RewriteRule ^optimize/next/userguide/(.*)$ /optimize/next/components/userguide/$1 [R=301,L]
+RewriteRule ^optimize/what-is-optimize(\/?)$ /optimize/components/what-is-optimize/ [R=301,L]
+RewriteRule ^optimize/userguide/(.*)$ /optimize/components/userguide/$1 [R=301,L]
+RewriteRule ^optimize/next/components/userguide/processes/ /optimize/next/components/userguide/process-dashboards [R=301,L]
+
+## these rules previously existed, but are now updated to point at the /optimize section:
+RewriteRule ^docs/components/optimize/userguide/combined-reports/(.*)$ /optimize/userguide/combined-process-reports/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/overview/(.*)$ /optimize/userguide/process-analysis/process-analysis-overview/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/process-analysis/overview$ /optimize/userguide/process-analysis/process-analysis-overview/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview/(.*)$ /optimize/userguide/decision-analysis/decision-analysis-overview/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/decision-analysis/overview$ /optimize/userguide/decision-analysis/decision-analysis-overview/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/additional-features/filters/(.*)$ /optimize/userguide/process-analysis/filters/$1 [R=301,L]
+
+## these rules cover all pages that were moved from /docs/components/optimize into /optimize/components:
+RewriteRule ^docs/components/optimize/what-is-optimize(\/?)$ /optimize/components/what-is-optimize/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/(.*)$ /optimize/components/userguide/$1 [R=301,L]
+
+## optimize API and self-managed documentation were moved to the optimize instance:
+RewriteRule ^docs/next/self-managed/optimize-deployment/(.*)$ /optimize/next/self-managed/optimize-deployment/$1 [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/(.*)$ /optimize/self-managed/optimize-deployment/$1 [R=301,L]
+RewriteRule ^docs/next/apis-clients/optimize-api/(.*)$ /optimize/next/apis-clients/optimize-api/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/optimize-api/(.*)$ /optimize/apis-clients/optimize-api/$1 [R=301,L]
+
+## optimize extraction for version 3.7.0:
+RewriteRule ^docs/1.3/components/optimize/what-is-optimize(\/?)$ /optimize/3.7.0/components/what-is-optimize/ [R=301,L]
+RewriteRule ^docs/1.3/components/optimize/userguide/(.*)$ /optimize/3.7.0/components/userguide/$1 [R=301,L]
+RewriteRule ^docs/1.3/self-managed/optimize-deployment/(.*)$ /optimize/3.7.0/self-managed/optimize-deployment/$1 [R=301,L]
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml

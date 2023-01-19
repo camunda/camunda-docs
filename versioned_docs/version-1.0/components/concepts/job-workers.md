@@ -62,7 +62,7 @@ It also insulates job workers against sudden bursts in traffic. Because workers 
 After working on an activated job, a job worker should inform Camunda Cloud that the job has either _completed_ or _failed_.
 
 - When the job worker completes its work, it sends a _complete job_ command along with any variables, which in turn will be merged into the process instance. This is how the job worker exposes the results of its work.
-- If the job worker could not successfully complete its work, it will send _fail job_ command. Fail job commands include the number of remaining retries, which is set by the job worker. If _remaining retries_ is greather than zero, then the job will be retried and reassigned. If _remaining retries_ is zero or negative, an incident will be raised and the job will not be retried until the incident is resolved.
+- If the job worker could not successfully complete its work, it will send _fail job_ command. Fail job commands include the number of remaining retries, which is set by the job worker. If _remaining retries_ is greater than zero, then the job will be retried and reassigned. If _remaining retries_ is zero or negative, an incident will be raised and the job will not be retried until the incident is resolved.
 
 ## Timeouts
 

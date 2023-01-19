@@ -1,6 +1,7 @@
 ---
 id: supported-environments
 title: "Supported environments"
+description: "Learn more about supported environments alongside Zeebe, Camunda Operate, and Camunda Tasklist."
 ---
 
 

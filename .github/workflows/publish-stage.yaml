@@ -3,7 +3,7 @@ name: publish-stage
 on:
   push:
     branches:
-      - "master"
+      - "main"
     tags-ignore:
       - "*"
 
@@ -23,6 +23,8 @@ jobs:
         run: 'sed -i ''s!url: "https://docs.camunda.io"!url: "https://stage.docs.camunda.io"!g'' docusaurus.config.js'
       - name: Build
         run: npm run build
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
       - name: Publish
         uses: burnett01/rsync-deployments@5.1
         with:

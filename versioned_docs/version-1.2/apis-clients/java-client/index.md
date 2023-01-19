@@ -65,7 +65,7 @@ Let's go over this code snippet line by line:
 3. Create the client by passing in the address of the cluster we want to connect to and the credentials provider from the step above.
 4. Send a test request to verify the connection was established.
 
-See [io.camunda.zeebe.client.ZeebeClientBuilder](https://javadoc.io/doc/io.zeebe/zeebe-client-java/latest/io/zeebe/client/ZeebeClientBuilder.html) for a description of all available configuration properties.
+See [io.camunda.zeebe.client.ZeebeClientBuilder](https://javadoc.io/doc/io.camunda/zeebe-client-java/latest/io/zeebe/client/ZeebeClientBuilder.html) for a description of all available configuration properties.
 
 Another (more compact) option is to pass in the connection settings via environment variables:
 

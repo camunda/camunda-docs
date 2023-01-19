@@ -1,5 +1,5 @@
 ---
-id: overview
+id: about-self-managed
 title: "Camunda Cloud Self-Managed"
 ---
 
@@ -7,7 +7,7 @@ title: "Camunda Cloud Self-Managed"
 
 Camunda Cloud Self-Managed is not Camunda Platform. If you are looking for Camunda Platform documentation, [click here](https://docs.camunda.org).
 
-However, Optimize documentation is available for both Camunda Cloud and Camunda Platform, including deployment instructions available [here](./optimize-deployment/setup.md). Look for "Camunda Platform 7" badges to help you understand what content is available for what product.
+However, Optimize documentation is available for both Camunda Cloud and Camunda Platform, including deployment instructions available [here]($optimize$/self-managed/optimize-deployment/setup/). Look for "Camunda Platform 7" badges to help you understand what content is available for what product.
 
 :::
 

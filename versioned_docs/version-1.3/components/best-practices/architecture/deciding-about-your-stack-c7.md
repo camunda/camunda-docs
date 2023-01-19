@@ -7,6 +7,7 @@ tags:
     - Application Server
     - Spring Boot
     - Maven
+description: "Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make."
 ---
 
 Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend following the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture. 
@@ -181,7 +182,7 @@ When running an embedded engine, you may want to use a Camunda web application l
 | | The Spring Boot Starter allows you to run the REST API as well as the Camunda web applications. | Deploy Camunda’s "Standalone" Web Application, which is a WAR running its own engine, and point it to your applications engine database. | Embed the Camunda Web Applications into your own application, which is not a particularly easy task to do.              |
 | Classloading Restrictions | None | For example, you can not submit a task in Tasklist when a following synchronously called service uses a class contained in your own application. However, you can solve this by adding additional [safe points](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/). | None |
 | Development Effort | Low | Low | High (undocumented) |
-| | [Spring Boot Starter](https://github.com/camunda/camunda-bpm-spring-boot-starter/) | [Download Standalone Web Application](http://camunda.org/download/) | [Implement e.g. via Maven WAR Overlays](https://maven.apache.org/plugins/maven-war-plugin/overlays.html) |
+| | [Spring Boot Starter](https://github.com/camunda/camunda-bpm-platform/tree/master/spring-boot-starter/) | [Download Standalone Web Application](http://camunda.org/download/) | [Implement e.g. via Maven WAR Overlays](https://maven.apache.org/plugins/maven-war-plugin/overlays.html) |
 
 ### Choosing a database
 

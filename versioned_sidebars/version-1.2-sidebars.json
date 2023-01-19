@@ -2,7 +2,7 @@
   "version-1.2/Guides": [
     {
       "type": "doc",
-      "id": "version-1.2/guides/introduction-to-camunda-cloud"
+      "id": "version-1.2/guides/introduction-to-camunda"
     },
     {
       "type": "category",
@@ -92,7 +92,7 @@
   "version-1.2/Components": [
     {
       "type": "doc",
-      "id": "version-1.2/components/overview"
+      "id": "version-1.2/components/components-overview"
     },
     {
       "type": "category",
@@ -371,13 +371,6 @@
               "id": "version-1.2/components/zeebe/open-source/get-help-get-involved"
             }
           ]
-        },
-        {
-          "type": "category",
-          "collapsed": true,
-          "collapsible": true,
-          "label": "Appendix",
-          "items": []
         }
       ]
     },
@@ -485,7 +478,7 @@
   "version-1.2/APIs & Clients": [
     {
       "type": "doc",
-      "id": "version-1.2/apis-clients/overview"
+      "id": "version-1.2/apis-clients/working-with-apis-clients"
     },
     {
       "type": "category",
@@ -917,7 +910,7 @@
   "version-1.2/Self-Managed": [
     {
       "type": "doc",
-      "id": "version-1.2/self-managed/overview"
+      "id": "version-1.2/self-managed/about-self-managed"
     },
     {
       "type": "category",

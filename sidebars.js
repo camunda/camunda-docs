@@ -1,11 +1,18 @@
+function optimizeLink(label, href) {
+  return {
+    type: "link",
+    label: label,
+    href: `/optimize/next/${href}`,
+  };
+}
+
 module.exports = {
   Guides: [
     {
       "Getting started": [
-        "guides/introduction-to-camunda-cloud",
+        "guides/introduction-to-camunda",
         "guides/create-account",
         "guides/model-your-first-process",
-        "guides/create-cluster",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-api-endpoints",
         "guides/orchestrate-microservices",
@@ -13,9 +20,12 @@ module.exports = {
     },
     {
       "Next steps": [
+        "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/automating-a-process-using-bpmn",
+        "guides/configuring-out-of-the-box-connectors",
+        "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
         "guides/message-correlation",
@@ -24,6 +34,14 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        {
+          Connectors: [
+            "guides/update-guide/connectors/introduction",
+            "guides/update-guide/connectors/010-to-020",
+            "guides/update-guide/connectors/020-to-030",
+          ],
+        },
+        "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
         "guides/update-guide/120-to-130",
         "guides/update-guide/110-to-120",
@@ -31,10 +49,11 @@ module.exports = {
         "guides/update-guide/026-to-100",
       ],
     },
+    "guides/migrating-from-cawemo",
     "guides/migrating-from-camunda-platform-7",
   ],
   Components: [
-    "components/overview",
+    "components/components-overview",
     {
       Concepts: [
         "components/concepts/what-is-camunda-platform-8",
@@ -45,9 +64,12 @@ module.exports = {
         "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
+        "components/concepts/workflow-patterns",
+        "components/concepts/process-instance-modification",
+        "components/concepts/data-retention",
       ],
       Console: [
-        "components/console/introduction",
+        "components/console/introduction-to-console",
         {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
@@ -56,6 +78,8 @@ module.exports = {
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/update-billing-reservations",
             "components/console/manage-organization/switch-organization",
+            "components/console/manage-organization/external-sso",
+            "components/console/manage-organization/delete-account",
           ],
         },
         {
@@ -77,8 +101,8 @@ module.exports = {
         },
         {
           Troubleshooting: [
-            "components/console/troubleshooting/common-pitfalls",
-            "components/console/troubleshooting/feedback-and-support",
+            "components/console/console-troubleshooting/common-pitfalls",
+            "components/console/console-troubleshooting/feedback-and-support",
           ],
         },
       ],
@@ -90,22 +114,16 @@ module.exports = {
             "components/modeler/web-modeler/launch-cloud-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/import-diagram",
+            "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/save-and-deploy",
             "components/modeler/web-modeler/start-instance",
             "components/modeler/web-modeler/collaboration",
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
-              Connectors: [
-                "components/modeler/web-modeler/connectors/index",
-                "components/modeler/web-modeler/connectors/use-connectors",
-                {
-                  "Available Connectors": [
-                    "components/modeler/web-modeler/connectors/available-connectors/index",
-                    "components/modeler/web-modeler/connectors/available-connectors/rest",
-                    "components/modeler/web-modeler/connectors/available-connectors/sendgrid",
-                  ],
-                },
+              "Advanced modeling": [
+                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
               ],
             },
           ],
@@ -129,6 +147,7 @@ module.exports = {
               "Additional configuration": [
                 "components/modeler/desktop-modeler/flags/flags",
                 "components/modeler/desktop-modeler/plugins/plugins",
+                "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
                 "components/modeler/desktop-modeler/search-paths/search-paths",
                 "components/modeler/desktop-modeler/telemetry/telemetry",
               ],
@@ -159,6 +178,7 @@ module.exports = {
                 "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
                 "components/modeler/bpmn/parallel-gateways/parallel-gateways",
                 "components/modeler/bpmn/event-based-gateways/event-based-gateways",
+                "components/modeler/bpmn/inclusive-gateways/inclusive-gateways",
               ],
             },
             {
@@ -168,6 +188,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/timer-events/timer-events",
                 "components/modeler/bpmn/error-events/error-events",
+                "components/modeler/bpmn/terminate-events/terminate-events",
               ],
             },
             {
@@ -188,15 +209,36 @@ module.exports = {
         },
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
+        require("./docs/components/modeler/forms/sidebar-schema"),
+      ],
+      Connectors: [
+        "components/connectors/introduction-to-connectors",
+        "components/connectors/use-connectors",
         {
-          Forms: ["components/modeler/forms/camunda-forms-reference"],
+          "Out-of-the-box Connectors": [
+            "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+            "components/connectors/out-of-the-box-connectors/aws-sns",
+            "components/connectors/out-of-the-box-connectors/aws-sqs",
+            "components/connectors/out-of-the-box-connectors/aws-lambda",
+            "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/kafka",
+            "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            "components/connectors/out-of-the-box-connectors/rabbitmq",
+            "components/connectors/out-of-the-box-connectors/rest",
+            "components/connectors/out-of-the-box-connectors/sendgrid",
+            "components/connectors/out-of-the-box-connectors/slack",
+          ],
+          "Integration Framework": [
+            "components/connectors/custom-built-connectors/connector-templates",
+            "components/connectors/custom-built-connectors/connector-sdk",
+          ],
         },
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
         {
           "Technical concepts": [
-            "components/zeebe/technical-concepts/index",
+            "components/zeebe/technical-concepts/technical-concepts-overview",
             "components/zeebe/technical-concepts/architecture",
             "components/zeebe/technical-concepts/clustering",
             "components/zeebe/technical-concepts/partitions",
@@ -206,17 +248,14 @@ module.exports = {
           ],
         },
         {
-          "Open Source community": [
+          "Open source community": [
             "components/zeebe/open-source/community-contributions",
             "components/zeebe/open-source/get-help-get-involved",
           ],
         },
-        {
-          Appendix: [],
-        },
       ],
       Operate: [
-        "components/operate/index",
+        "components/operate/operate-introduction",
         {
           "User guide": [
             "components/operate/userguide/basic-operate-navigation",
@@ -224,66 +263,197 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/operate-feedback-and-questions",
+            "components/operate/userguide/process-instance-modification",
+          ],
+        },
+      ],
+      Tasklist: [
+        "components/tasklist/introduction-to-tasklist",
+        {
+          "User guide": [
+            "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
       ],
       Optimize: [
-        "components/optimize/what-is-optimize",
+        optimizeLink("What is Optimize?", "components/what-is-optimize/"),
         {
           "User guide": [
-            "components/optimize/userguide/collections-dashboards-reports",
-            "components/optimize/userguide/data-sources",
-            "components/optimize/userguide/creating-dashboards",
-            "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/combined-reports",
-            "components/optimize/userguide/processes",
+            optimizeLink(
+              "Collections, dashboards, and reports",
+              "components/userguide/collections-dashboards-reports/"
+            ),
+            optimizeLink(
+              "User permissions",
+              "components/userguide/user-permissions/"
+            ),
+            optimizeLink("Data sources", "components/userguide/data-sources/"),
+            {
+              Dashboards: [
+                optimizeLink(
+                  "Creating dashboards",
+                  "components/userguide/creating-dashboards/"
+                ),
+                optimizeLink("Edit mode", "components/userguide/edit-mode/"),
+                optimizeLink("View mode", "components/userguide/view-mode/"),
+              ],
+            },
+            optimizeLink(
+              "Creating reports",
+              "components/userguide/creating-reports/"
+            ),
+            optimizeLink(
+              "Combined process reports",
+              "components/userguide/combined-process-reports/"
+            ),
+            optimizeLink(
+              "Processes",
+              "components/userguide/process-dashboards/"
+            ),
             {
               "Process analysis": [
-                "components/optimize/userguide/process-analysis/overview",
-                "components/optimize/userguide/process-analysis/outlier-analysis",
-                "components/optimize/userguide/process-analysis/branch-analysis",
+                optimizeLink(
+                  "Overview",
+                  "components/userguide/process-analysis/process-analysis-overview/"
+                ),
+                optimizeLink(
+                  "Outlier analysis",
+                  "components/userguide/process-analysis/outlier-analysis/"
+                ),
+                optimizeLink(
+                  "Branch analysis",
+                  "components/userguide/process-analysis/branch-analysis/"
+                ),
                 {
                   "Report analysis": [
-                    "components/optimize/userguide/process-analysis/report-analysis/overview",
-                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
-                    "components/optimize/userguide/process-analysis/report-analysis/view-mode",
+                    optimizeLink(
+                      "Report process analysis",
+                      "components/userguide/process-analysis/report-analysis/overview/"
+                    ),
+                    {
+                      "Edit mode": [
+                        optimizeLink(
+                          "Overview",
+                          "components/userguide/process-analysis/report-analysis/edit-mode/"
+                        ),
+                        optimizeLink(
+                          "Select process definitions",
+                          "components/userguide/process-analysis/report-analysis/select-process-definitions/"
+                        ),
+                        optimizeLink(
+                          "Define reports",
+                          "components/userguide/process-analysis/report-analysis/define-reports/"
+                        ),
+                        optimizeLink(
+                          "Measures",
+                          "components/userguide/process-analysis/report-analysis/measures/"
+                        ),
+                        optimizeLink(
+                          "Compare target values",
+                          "components/userguide/process-analysis/report-analysis/compare-target-values/"
+                        ),
+                        optimizeLink(
+                          "Process instance parts",
+                          "components/userguide/process-analysis/report-analysis/process-instance-parts/"
+                        ),
+                        optimizeLink(
+                          "Configure reports",
+                          "components/userguide/process-analysis/report-analysis/configure-reports/"
+                        ),
+                      ],
+                    },
+                    optimizeLink(
+                      "View mode",
+                      "components/userguide/process-analysis/report-analysis/view-mode/"
+                    ),
+                  ],
+                },
+                {
+                  Filters: [
+                    optimizeLink(
+                      "Overview",
+                      "components/userguide/process-analysis/filters/"
+                    ),
+                    optimizeLink(
+                      "Metadata filters",
+                      "components/userguide/process-analysis/metadata-filters/"
+                    ),
+                    optimizeLink(
+                      "Instance state filters",
+                      "components/userguide/process-analysis/instance-state-filters/"
+                    ),
+                    optimizeLink(
+                      "Flow node filters",
+                      "components/userguide/process-analysis/flow-node-filters/"
+                    ),
+                    optimizeLink(
+                      "Process instance filters",
+                      "components/userguide/process-analysis/process-instance-filters/"
+                    ),
+                    optimizeLink(
+                      "Variable filters",
+                      "components/userguide/process-analysis/variable-filters/"
+                    ),
                   ],
                 },
               ],
             },
             {
               "Decision analysis": [
-                "components/optimize/userguide/decision-analysis/overview",
-                "components/optimize/userguide/decision-analysis/decision-report",
-                "components/optimize/userguide/decision-analysis/decision-filter",
+                optimizeLink(
+                  "Overview",
+                  "components/userguide/decision-analysis/decision-analysis-overview/"
+                ),
+                optimizeLink(
+                  "Single report",
+                  "components/userguide/decision-analysis/decision-report/"
+                ),
+                optimizeLink(
+                  "Filters",
+                  "components/userguide/decision-analysis/decision-filter/"
+                ),
               ],
             },
             {
               "Additional features": [
-                "components/optimize/userguide/additional-features/alerts",
-                "components/optimize/userguide/additional-features/event-based-processes",
-                "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/filters",
-                "components/optimize/userguide/additional-features/footer",
-                "components/optimize/userguide/additional-features/variable-labeling",
+                optimizeLink(
+                  "Alerts",
+                  "components/userguide/additional-features/alerts/"
+                ),
+                optimizeLink(
+                  "Event-based processes",
+                  "components/userguide/additional-features/event-based-processes/"
+                ),
+                optimizeLink(
+                  "Export and import",
+                  "components/userguide/additional-features/export-import/"
+                ),
+                optimizeLink(
+                  "Footer",
+                  "components/userguide/additional-features/footer/"
+                ),
+                optimizeLink(
+                  "Variable labeling",
+                  "components/userguide/additional-features/variable-labeling/"
+                ),
+                optimizeLink(
+                  "Process variants comparison",
+                  "components/userguide/additional-features/process-variants-comparison/"
+                ),
+                optimizeLink(
+                  "Machine learning-ready dataset",
+                  "components/userguide/additional-features/ml-dataset/"
+                ),
               ],
             },
           ],
         },
       ],
-      Tasklist: [
-        "components/tasklist/introduction",
-        {
-          "User guide": [
-            "components/tasklist/userguide/overview",
-            "components/tasklist/userguide/updating-tasklist-cloud",
-          ],
-        },
-      ],
       "Best Practices": [
-        "components/best-practices/overview",
+        "components/best-practices/best-practices-overview",
         {
-          "Project Management": [
+          "Project management": [
             "components/best-practices/management/following-the-customer-success-path",
             "components/best-practices/management/doing-a-proper-poc",
           ],
@@ -329,7 +499,7 @@ module.exports = {
     },
   ],
   "APIs & Clients": [
-    "apis-clients/overview",
+    "apis-clients/working-with-apis-clients",
     {
       APIs: [
         "apis-clients/public-api",
@@ -337,6 +507,84 @@ module.exports = {
         "apis-clients/operate-api/index",
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/console-api-reference",
+        "apis-clients/web-modeler-api/index",
+        {
+          "Optimize API (REST)": [
+            optimizeLink(
+              "Authorization",
+              "apis-clients/optimize-api/optimize-api-authorization/"
+            ),
+            {
+              Configuration: [
+                optimizeLink(
+                  "Enable sharing",
+                  "apis-clients/optimize-api/configuration/enable-sharing/"
+                ),
+                optimizeLink(
+                  "Disable sharing",
+                  "apis-clients/optimize-api/configuration/disable-sharing/"
+                ),
+              ],
+            },
+            {
+              Dashboard: [
+                optimizeLink(
+                  "Get dashboard IDs",
+                  "apis-clients/optimize-api/dashboard/get-dashboard-ids/"
+                ),
+                optimizeLink(
+                  "Delete dashboards",
+                  "apis-clients/optimize-api/dashboard/delete-dashboard/"
+                ),
+                optimizeLink(
+                  "Export dashboard definitions",
+                  "apis-clients/optimize-api/dashboard/export-dashboard-definitions/"
+                ),
+              ],
+            },
+            {
+              Report: [
+                optimizeLink(
+                  "Get report IDs",
+                  "apis-clients/optimize-api/report/get-report-ids/"
+                ),
+                optimizeLink(
+                  "Delete reports",
+                  "apis-clients/optimize-api/report/delete-report/"
+                ),
+                optimizeLink(
+                  "Export report definitions",
+                  "apis-clients/optimize-api/report/export-report-definitions/"
+                ),
+                optimizeLink(
+                  "Export report result data",
+                  "apis-clients/optimize-api/report/get-data-export/"
+                ),
+              ],
+            },
+
+            optimizeLink(
+              "Event ingestion",
+              "apis-clients/optimize-api/event-ingestion/"
+            ),
+            optimizeLink(
+              "External variable ingestion",
+              "apis-clients/optimize-api/external-variable-ingestion/"
+            ),
+            optimizeLink(
+              "Health readiness",
+              "apis-clients/optimize-api/health-readiness/"
+            ),
+            optimizeLink(
+              "Import entities",
+              "apis-clients/optimize-api/import-entities/"
+            ),
+            optimizeLink(
+              "Variable labeling",
+              "apis-clients/optimize-api/variable-labeling/"
+            ),
+          ],
+        },
       ],
     },
     {
@@ -364,13 +612,13 @@ module.exports = {
         {
           "Go client": [
             "apis-clients/go-client/index",
-            "apis-clients/go-client/get-started",
+            "apis-clients/go-client/go-get-started",
           ],
         },
         {
           "CLI client": [
             "apis-clients/cli-client/index",
-            "apis-clients/cli-client/get-started",
+            "apis-clients/cli-client/cli-get-started",
           ],
         },
         {
@@ -383,6 +631,7 @@ module.exports = {
             "apis-clients/community-clients/ruby",
             "apis-clients/community-clients/rust",
             "apis-clients/community-clients/spring",
+            "apis-clients/community-clients/quarkus",
           ],
         },
         "apis-clients/build-your-own-client",
@@ -397,22 +646,56 @@ module.exports = {
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",
+    "reference/early-access",
     "reference/supported-environments",
+    "reference/regions",
     "reference/dependencies",
   ],
   "Self-Managed": [
-    "self-managed/overview",
+    "self-managed/about-self-managed",
     {
+      Architecture: ["self-managed/platform-architecture/overview"],
       Installation: [
-        "self-managed/platform-deployment/index",
+        "self-managed/platform-deployment/overview",
         {
-          Kubernetes: [
-            "self-managed/platform-deployment/kubernetes",
-            "self-managed/platform-deployment/kubernetes-helm",
+          "Helm/Kubernetes": [
+            "self-managed/platform-deployment/helm-kubernetes/overview",
+            "self-managed/platform-deployment/helm-kubernetes/deploy",
+            "self-managed/platform-deployment/helm-kubernetes/upgrade",
+            {
+              type: "category",
+              label: "Platforms",
+              link: {
+                type: "doc",
+                id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
+              },
+              items: [
+                "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
+                "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
+                "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
+                "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
+              ],
+            },
+            {
+              type: "category",
+              label: "Guides",
+              link: {
+                type: "doc",
+                id: "self-managed/platform-deployment/helm-kubernetes/guides/guides",
+              },
+              items: [
+                "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
+                "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
+                "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
+                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
+                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+              ],
+            },
+            "self-managed/platform-deployment/troubleshooting",
           ],
         },
         "self-managed/platform-deployment/docker",
-        "self-managed/platform-deployment/local",
+        "self-managed/platform-deployment/manual",
       ],
     },
     {
@@ -425,13 +708,14 @@ module.exports = {
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ],
+          Authentication: ["self-managed/concepts/authentication/m2m-tokens"],
         },
         "self-managed/concepts/exporters",
       ],
     },
     {
       Zeebe: [
-        "self-managed/zeebe-deployment/index",
+        "self-managed/zeebe-deployment/zeebe-installation",
         {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
@@ -452,7 +736,7 @@ module.exports = {
         },
         {
           Operation: [
-            "self-managed/zeebe-deployment/operations/index",
+            "self-managed/zeebe-deployment/operations/zeebe-in-production",
             "self-managed/zeebe-deployment/operations/resource-planning",
             "self-managed/zeebe-deployment/operations/network-ports",
             "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
@@ -462,139 +746,315 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/disk-space",
             "self-managed/zeebe-deployment/operations/update-zeebe",
             "self-managed/zeebe-deployment/operations/rebalancing",
+            "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
           ],
         },
       ],
       Operate: [
         "self-managed/operate-deployment/install-and-start",
-        "self-managed/operate-deployment/configuration",
+        "self-managed/operate-deployment/operate-configuration",
         "self-managed/operate-deployment/data-retention",
         "self-managed/operate-deployment/schema-and-migration",
         "self-managed/operate-deployment/importer-and-archiver",
-        "self-managed/operate-deployment/authentication",
+        "self-managed/operate-deployment/operate-authentication",
         "self-managed/operate-deployment/usage-metrics",
       ],
       Tasklist: [
         "self-managed/tasklist-deployment/install-and-start",
-        "self-managed/tasklist-deployment/configuration",
-        "self-managed/tasklist-deployment/authentication",
+        "self-managed/tasklist-deployment/tasklist-configuration",
+        "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics",
       ],
+      Connectors: [
+        "self-managed/connectors-deployment/install-and-start",
+        "self-managed/connectors-deployment/connectors-configuration",
+      ],
+
       Optimize: [
-        "self-managed/optimize-deployment/install-and-start",
+        optimizeLink(
+          "Installation",
+          "self-managed/optimize-deployment/install-and-start/"
+        ),
+        optimizeLink(
+          "Version policy",
+          "self-managed/optimize-deployment/version-policy/"
+        ),
         {
           Configuration: [
-            "self-managed/optimize-deployment/configuration/system-configuration",
-            "self-managed/optimize-deployment/configuration/logging",
-            "self-managed/optimize-deployment/configuration/optimize-license",
-            "self-managed/optimize-deployment/configuration/security-instructions",
-            "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
-            "self-managed/optimize-deployment/configuration/history-cleanup",
-            "self-managed/optimize-deployment/configuration/localization",
-            "self-managed/optimize-deployment/configuration/object-variables",
-            "self-managed/optimize-deployment/configuration/clustering",
-            "self-managed/optimize-deployment/configuration/webhooks",
-            "self-managed/optimize-deployment/configuration/authorization-management",
-            "self-managed/optimize-deployment/configuration/user-management",
-            "self-managed/optimize-deployment/configuration/multi-tenancy",
-            "self-managed/optimize-deployment/configuration/multiple-engines",
-            "self-managed/optimize-deployment/configuration/setup-event-based-processes",
-            "self-managed/optimize-deployment/configuration/telemetry",
-            "self-managed/optimize-deployment/configuration/common-problems",
+            optimizeLink(
+              "Getting started",
+              "self-managed/optimize-deployment/configuration/getting-started/"
+            ),
+            {
+              "System configuration": [
+                optimizeLink(
+                  "Overview",
+                  "self-managed/optimize-deployment/configuration/system-configuration/"
+                ),
+                optimizeLink(
+                  "Camunda Platform 8 system configuration",
+                  "self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
+                ),
+                optimizeLink(
+                  "Camunda Platform 7 system configuration",
+                  "self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
+                ),
+                optimizeLink(
+                  "Event-based process system configuration",
+                  "self-managed/optimize-deployment/configuration/event-based-process-configuration/"
+                ),
+              ],
+            },
+            optimizeLink(
+              "Logging",
+              "self-managed/optimize-deployment/configuration/logging/"
+            ),
+            optimizeLink(
+              "Optimize license key",
+              "self-managed/optimize-deployment/configuration/optimize-license/"
+            ),
+            optimizeLink(
+              "Security instructions",
+              "self-managed/optimize-deployment/configuration/security-instructions/"
+            ),
+            optimizeLink(
+              "Shared Elasticsearch cluster",
+              "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
+            ),
+            optimizeLink(
+              "History cleanup",
+              "self-managed/optimize-deployment/configuration/history-cleanup/"
+            ),
+            optimizeLink(
+              "Localization",
+              "self-managed/optimize-deployment/configuration/localization/"
+            ),
+            optimizeLink(
+              "Object and list variable support",
+              "self-managed/optimize-deployment/configuration/object-variables/"
+            ),
+            optimizeLink(
+              "Clustering",
+              "self-managed/optimize-deployment/configuration/clustering/"
+            ),
+            optimizeLink(
+              "Webhooks",
+              "self-managed/optimize-deployment/configuration/webhooks/"
+            ),
+            optimizeLink(
+              "Authorization management",
+              "self-managed/optimize-deployment/configuration/authorization-management/"
+            ),
+            optimizeLink(
+              "User access management",
+              "self-managed/optimize-deployment/configuration/user-management/"
+            ),
+            optimizeLink(
+              "Multi-tenancy",
+              "self-managed/optimize-deployment/configuration/multi-tenancy/"
+            ),
+            optimizeLink(
+              "Multiple process engines",
+              "self-managed/optimize-deployment/configuration/multiple-engines/"
+            ),
+            optimizeLink(
+              "Event-based processes",
+              "self-managed/optimize-deployment/configuration/setup-event-based-processes/"
+            ),
+            optimizeLink(
+              "Telemetry",
+              "self-managed/optimize-deployment/configuration/telemetry/"
+            ),
+            optimizeLink(
+              "Common problems",
+              "self-managed/optimize-deployment/configuration/common-problems/"
+            ),
           ],
         },
         {
           Plugins: [
-            "self-managed/optimize-deployment/plugins/plugin-system",
-            "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
-            "self-managed/optimize-deployment/plugins/decision-import-plugin",
-            "self-managed/optimize-deployment/plugins/elasticsearch-header",
-            "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
-            "self-managed/optimize-deployment/plugins/single-sign-on",
-            "self-managed/optimize-deployment/plugins/variable-import-plugin",
+            optimizeLink(
+              "Optimize plugin system",
+              "self-managed/optimize-deployment/plugins/plugin-system/"
+            ),
+            optimizeLink(
+              "Business key import customization",
+              "self-managed/optimize-deployment/plugins/businesskey-import-plugin/"
+            ),
+            optimizeLink(
+              "Decision inputs and outputs import customization",
+              "self-managed/optimize-deployment/plugins/decision-import-plugin/"
+            ),
+            optimizeLink(
+              "Elasticsearch header",
+              "self-managed/optimize-deployment/plugins/elasticsearch-header/"
+            ),
+            optimizeLink(
+              "Engine REST filter",
+              "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin/"
+            ),
+            optimizeLink(
+              "Single sign on",
+              "self-managed/optimize-deployment/plugins/single-sign-on/"
+            ),
+            optimizeLink(
+              "Variable import customization",
+              "self-managed/optimize-deployment/plugins/variable-import-plugin/"
+            ),
+          ],
+        },
+        optimizeLink(
+          "Camunda engine data reimport",
+          "self-managed/optimize-deployment/reimport/"
+        ),
+        {
+          "Migration & update": [
+            optimizeLink(
+              "Instructions",
+              "self-managed/optimize-deployment/migration-update/instructions/"
+            ),
+            optimizeLink(
+              "Update notes (3.9.x-preview-x to 3.9.x)",
+              "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9/"
+            ),
+            optimizeLink(
+              "Update notes (3.8.x to 3.9.x-preview-1)",
+              "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1/"
+            ),
+            optimizeLink(
+              "Update notes (3.7.x to 3.8.x)",
+              "self-managed/optimize-deployment/migration-update/3.7-to-3.8/"
+            ),
+            optimizeLink(
+              "Update notes (3.6 to 3.7.x)",
+              "self-managed/optimize-deployment/migration-update/3.6-to-3.7/"
+            ),
+            optimizeLink(
+              "Update notes (3.5 to 3.6)",
+              "self-managed/optimize-deployment/migration-update/3.5-to-3.6/"
+            ),
+            optimizeLink(
+              "Update notes (3.4 to 3.5)",
+              "self-managed/optimize-deployment/migration-update/3.4-to-3.5/"
+            ),
+            optimizeLink(
+              "Update notes (3.3 to 3.4)",
+              "self-managed/optimize-deployment/migration-update/3.3-to-3.4/"
+            ),
+            optimizeLink(
+              "Update notes (3.2 to 3.3)",
+              "self-managed/optimize-deployment/migration-update/3.2-to-3.3/"
+            ),
+            optimizeLink(
+              "Update notes (3.1 to 3.2)",
+              "self-managed/optimize-deployment/migration-update/3.1-to-3.2/"
+            ),
+            optimizeLink(
+              "Update notes (3.0 to 3.1)",
+              "self-managed/optimize-deployment/migration-update/3.0-to-3.1/"
+            ),
+            optimizeLink(
+              "Update notes (2.7 to 3.0)",
+              "self-managed/optimize-deployment/migration-update/2.7-to-3.0/"
+            ),
+            optimizeLink(
+              "Update notes (2.6 to 2.7)",
+              "self-managed/optimize-deployment/migration-update/2.6-to-2.7/"
+            ),
+            optimizeLink(
+              "Update notes (2.5 to 2.6)",
+              "self-managed/optimize-deployment/migration-update/2.5-to-2.6/"
+            ),
+            optimizeLink(
+              "Update notes (2.4 to 2.5)",
+              "self-managed/optimize-deployment/migration-update/2.4-to-2.5/"
+            ),
+            optimizeLink(
+              "Update notes (2.3 to 2.4)",
+              "self-managed/optimize-deployment/migration-update/2.3-to-2.4/"
+            ),
+            optimizeLink(
+              "Update notes (2.2 to 2.3)",
+              "self-managed/optimize-deployment/migration-update/2.2-to-2.3/"
+            ),
+            optimizeLink(
+              "Update notes (2.1 to 2.2)",
+              "self-managed/optimize-deployment/migration-update/2.1-to-2.2/"
+            ),
           ],
         },
         {
-          "REST API": [
-            "self-managed/optimize-deployment/rest-api/authorization",
-            {
-              Configuration: [
-                "self-managed/optimize-deployment/rest-api/configuration/enable-sharing",
-                "self-managed/optimize-deployment/rest-api/configuration/disable-sharing",
-              ],
-            },
-            {
-              Dashboard: [
-                "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
-                "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
-                "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions",
-              ],
-            },
-            {
-              Report: [
-                "self-managed/optimize-deployment/rest-api/report/get-report-ids",
-                "self-managed/optimize-deployment/rest-api/report/delete-report",
-                "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
-                "self-managed/optimize-deployment/rest-api/report/get-data-export",
-              ],
-            },
-            "self-managed/optimize-deployment/rest-api/event-ingestion",
-            "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
-            "self-managed/optimize-deployment/rest-api/health-readiness",
-            "self-managed/optimize-deployment/rest-api/import-entities",
-            "self-managed/optimize-deployment/rest-api/variable-labeling",
-          ],
-        },
-        "self-managed/optimize-deployment/reimport",
-        {
-          "Migration & Update": [
-            "self-managed/optimize-deployment/migration-update/instructions",
-            "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
-            "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
-            "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
-            "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
-            "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
-            "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
-            "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
-            "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
-            "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
-            "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
-            "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
-            "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
-            "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
-            "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
-            "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
-          ],
-        },
-        {
-          "Optimize Explained": [
-            "self-managed/optimize-deployment/optimize-explained/engine-data-deletion",
-            "self-managed/optimize-deployment/optimize-explained/import-guide",
+          "Advanced features": [
+            optimizeLink(
+              "Engine data deletion",
+              "self-managed/optimize-deployment/advanced-features/engine-data-deletion/"
+            ),
+            optimizeLink(
+              "Data import",
+              "self-managed/optimize-deployment/advanced-features/import-guide/"
+            ),
           ],
         },
       ],
+
       Identity: [
         "self-managed/identity/what-is-identity",
-        "self-managed/identity/getting-started/index",
+        "self-managed/identity/getting-started/install-identity",
         {
           "User guide": [
             "self-managed/identity/user-guide/adding-an-application",
             "self-managed/identity/user-guide/adding-an-api",
             "self-managed/identity/user-guide/adding-a-permission",
+            "self-managed/identity/user-guide/assigning-a-permission-to-an-application",
             "self-managed/identity/user-guide/adding-a-role",
             "self-managed/identity/user-guide/assigning-a-permission-to-a-role",
             "self-managed/identity/user-guide/assigning-a-role-to-a-user",
             "self-managed/identity/user-guide/configure-external-identity-provider",
+            "self-managed/identity/user-guide/configure-logging",
             "self-managed/identity/user-guide/making-identity-production-ready",
+            "self-managed/identity/user-guide/generating-m2m-tokens",
+            "self-managed/identity/user-guide/managing-user-access",
+            "self-managed/identity/user-guide/connect-to-an-existing-keycloak",
           ],
         },
         {
           Deployment: [
             "self-managed/identity/deployment/configuration-variables",
             "self-managed/identity/deployment/application-monitoring",
+            "self-managed/identity/deployment/starting-configuration-for-identity",
+          ],
+          Troubleshooting: [
+            "self-managed/identity/troubleshooting/troubleshoot-identity",
+            "self-managed/identity/troubleshooting/common-problems",
           ],
         },
+      ],
+    },
+    {
+      "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
+    },
+    {
+      Modeler: [
+        {
+          "Web Modeler (Beta)": [
+            "self-managed/modeler/web-modeler/installation",
+            "self-managed/modeler/web-modeler/api",
+          ],
+        },
+        {
+          "Desktop Modeler": [
+            "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
+          ],
+        },
+      ],
+    },
+    {
+      "Backup and restore": [
+        "self-managed/backup-restore/backup-and-restore",
+        "self-managed/backup-restore/optimize-backup",
+        "self-managed/backup-restore/operate-tasklist-backup",
+        "self-managed/backup-restore/zeebe-backup-and-restore",
       ],
     },
     {

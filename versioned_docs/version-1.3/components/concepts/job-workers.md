@@ -64,7 +64,7 @@ After working on an activated job, a job worker informs Camunda Cloud that the j
 
 - When the job worker completes its work, it sends a `complete job` command along with any variables, which in turn is merged into the process instance. This is how the job worker exposes the results of its work.
 - If the job worker can not successfully complete its work, it sends a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker. 
-    - If `remaining retries` is greather than zero, the job is retried and reassigned. 
+    - If `remaining retries` is greater than zero, the job is retried and reassigned. 
     - If `remaining retries` is zero or negative, an incident is raised and the job is not retried until the incident is resolved.
 
 ## Timeouts
@@ -77,4 +77,4 @@ The fact that jobs may be worked on more than once means that Zeebe is an "at le
 
 ## Next steps
 
-- [Zeebe overview](./components/zeebe/zeebe-overview.md)
+- [Zeebe overview](/components/zeebe/zeebe-overview.md)

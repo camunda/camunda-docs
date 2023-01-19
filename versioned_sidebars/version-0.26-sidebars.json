@@ -2,7 +2,7 @@
   "version-0.26/Guides": [
     {
       "type": "doc",
-      "id": "version-0.26/guides/introduction-to-camunda-cloud"
+      "id": "version-0.26/guides/introduction-to-camunda"
     },
     {
       "collapsed": true,
@@ -55,7 +55,7 @@
   "version-0.26/Components": [
     {
       "type": "doc",
-      "id": "version-0.26/components/overview"
+      "id": "version-0.26/components/components-overview"
     },
     {
       "collapsed": true,
@@ -671,12 +671,6 @@
               "id": "version-0.26/components/zeebe/open-source/deprecated-features"
             }
           ]
-        },
-        {
-          "collapsed": true,
-          "type": "category",
-          "label": "Appendix",
-          "items": []
         }
       ]
     },

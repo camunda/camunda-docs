@@ -11,7 +11,7 @@ description: "Let's analyze the prerequisites and code to create non-blocking pr
 
 ## NonBlockingProcessInstanceCreator.java
 
-[Source on GitHub](https://github.com/camunda-cloud/zeebe/blob/develop/samples/src/main/java/io/camunda/zeebe/example/process/NonBlockingProcessInstanceCreator.java)
+[Source on GitHub](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/zeebe-client-plain-java/src/main/java/io/camunda/zeebe/example/process/NonBlockingProcessInstanceCreator.java)
 
 ```java
 long instancesCreating = 0;

@@ -10,8 +10,7 @@ export const Highlight = ({children, color}) => (
 </span>
 );
 
-The following BPMN elements in <Highlight color="#11c399">green</Highlight> are supported. Click on
-an element to navigate to the documentation.
+The following BPMN elements are supported by our modeling tools. Elements highlighted in <Highlight color="#11c399">green</Highlight> are supported for execution by Camunda 8. Click on an element to navigate to the documentation.
 
 ## Participants
 
@@ -23,7 +22,7 @@ import LaneSvg from './assets/bpmn-symbols/lane.svg';
         <PoolSvg className="implemented" />
     </a>
     <a href="#">
-        <LaneSvg />
+        <LaneSvg className="implemented" />
     </a>
 </div>
 
@@ -109,8 +108,8 @@ import ComplexGatewaySvg from './assets/bpmn-symbols/complex-gateway.svg'
     <a href="../event-based-gateways/">
         <EventBasedGatewaySvg className="implemented" />
     </a>
-    <a href="#">
-        <InclusiveGatewaySvg />
+    <a href="../inclusive-gateways/">
+        <InclusiveGatewaySvg className="implemented" />
     </a>
     <a href="#">
         <ComplexGatewaySvg />
@@ -569,7 +568,7 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Termination
+            <a href="../terminate-events/">Terminate</a>
         </td>
         <td></td>
         <td></td>
@@ -579,8 +578,8 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
         <td></td>
         <td></td>
         <td>
-            <a href="#">
-                <TerminationEndEventSvg />
+            <a href="../terminate-events/">
+                <TerminationEndEventSvg className="implemented" />
             </a>
         </td>
     </tr>
@@ -690,4 +689,3 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
 
   </tbody>
 </table>
-

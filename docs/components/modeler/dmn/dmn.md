@@ -1,6 +1,7 @@
 ---
 id: desktop-modeler-dmn
 title: DMN in Modeler
+description: "Camunda Desktop and Web Modeler both offer the same Modeling experience for DMN 1.3 models: Modeling starts in the Decision Requirements Diagram (DRD) view."
 ---
 
 ## Start modeling
@@ -19,7 +20,7 @@ The demo above shows how to model a decision table. After creating a decision an
 
 ## DMN coverage
 
-The Modeler supports the following DMN elements:
+Modeler supports the following DMN elements:
 
 - Decision (tables and literal expressions)
 - Input data
@@ -48,4 +49,4 @@ Jump between decision tables or literal expressions in your decision requirement
 
 ![New DMN Literal Expression](assets/desktop-modeler-dmn/literal-expression.png)
 
-You can also edit literal expressions. Just as with decision tables, in the decision requirement diagram view, click the blue icon to *drill-down* into the literal expression view and start editing.
+You can also edit literal expressions. Just as with decision tables, in the decision requirement diagram view, click the blue icon to _drill-down_ into the literal expression view and start editing.

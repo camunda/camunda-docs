@@ -28,7 +28,7 @@ The engine itself doesn't do anything in the event, it just passes through it.
 
 ## Variable mappings
 
-Start and intermediate none events can have [variable output mappings](../../../../components/concepts/variables.md#output-mappings). End events do not support this.
+All none events can have [variable output mappings](../../../../components/concepts/variables.md#output-mappings).
 
 For start events, this is often used to initialize process variables.
 
@@ -37,16 +37,19 @@ For start events, this is often used to initialize process variables.
 ### XML representation
 
 A none start event:
+
 ```xml
 <bpmn:startEvent id="order-placed" name="Order Placed" />
 ```
 
 A none end event:
+
 ```xml
 <bpmn:endEvent id="order-delivered" name="Order Delivered" />
 ```
 
 An intermediate none event:
+
 ```xml
 <bpmn:intermediateThrowEvent id="money-collected" name="Money Collected" />
 ```

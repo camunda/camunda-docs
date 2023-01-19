@@ -1,72 +1,32 @@
 # Versioning
 
-Our documentation is versioned. All sections are versioned together, this includes products that do not have a fixed release cycle (such as Cloud Console).
+Our documentation is versioned. All sections are versioned together, this includes products that do not have a fixed release cycle (such as Console, Web Modeler, and Connectors).
+
+## Instances: Docs vs Optimize
+
+Due to a difference in version numbers, the documentation is split into [multiple Docusaurus "instances"](https://docusaurus.io/docs/docs-multi-instance). Documentation specific to Optimize lives in the `optimize` instance, and all other documentation lives in the main `docs` instance.
 
 ## Structure
 
-### Contents
+Depending on the instance and version, location of source files and sidebar navigation definition varies:
 
-The latest version of the documentation can be found in the folder [docs](../docs). All contents in this folder will be visible by default after a release of the documentation. It is therefore the latest version.
+| Instance   | Version(s)         | Source path                                                         | Sidebars path                                                                            |
+| ---------- | ------------------ | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `docs`     | Next               | [/docs/](../docs/)                                                  | [sidebars.js](../sidebars.js)                                                            |
+| `docs`     | 8.0, 1.3, 1.2, ... | [/versioned_docs/version-\*/](../versioned_docs/)                   | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/)                    |
+| `optimize` | Next               | [/optimize/](../optimize/)                                          | [optimize_sidebars.js](../optimize_sidebars.js)                                          |
+| `optimize` | 3.8.0, 3.7.0, ...  | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) | [/optimize_versioned_sidebars/version-\*-sidebars.json](../optimize_versioned_sidebars/) |
 
-Older versions can be found in the folder [versioned_docs](../versioned_docs). All subfolders represent a separate version.
+### Sidebar drift
 
-### Navigation
+Several sections of the sidebar navigation are shared across the Optimize and main sections of the docs: Components, Self-Managed, and APIs & Clients. To preserve a consistent user experience in the docs, the structure of sidebars should always match across instances for these sections. When it doesn't match, the user will experience sections of navigation appearing and disappearing depending on which doc they're reading.
 
-The navigation of the documentation is configured via 'sidebars.js'. Again, a distinction is made between the latest and older versions:
-
-- Latest: [sidebars.js](../sidebars.js)
-- Versioned: each version under [versioned_sidebars](../versioned_sidebars)
-
-### Adjustments
-
-The name for the latest version can be set via [docusaurus.config.js](../docusaurus.config.js):
-
-```json
-presets: [
-    [
-      "@docusaurus/preset-classic",
-      {
-        "docs": {
-          "sidebarPath": require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          "editUrl":
-            "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/",
-          // disableVersioning: isVersioningDisabled,
-          "lastVersion": "current",
-          // onlyIncludeVersions:
-          //   !isVersioningDisabled && (isDev || isDeployPreview)
-          //     ? ["current", ...versions.slice(0, 2)]
-          //     : undefined,
-          "versions": {
-            "current": {
-              "label": `latest`,
-            },
-          },
-        },
-        "blog": {
-          "showReadingTime": true,
-          // Please change this to your repo.
-          "editUrl":
-            "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/blog/",
-        },
-        "theme": {
-          "customCss": require.resolve("./src/css/custom.css"),
-        },
-      },
-    ],
-  ],
-```
+It's likely that the structure will drift over time. To resolve the drift, see [the docs on generating sidebars](../hacks/generateOptimizeSidebars.md).
 
 ## Create new version
 
-This step usually happens after a release has been created. Technically, the current contents are frozen in `docs` and copied to `versioned_docs` with the corresponding version. The process can be triggered by this Docusraus command:
-
-```bash
-npm run docusaurus docs:version 0.26
-
-```
+New versions are created as part of the [release process](/howtos/release-procedure.md).
 
 ## Further information
 
 The Docusaurus documentation provides a detailed explanation of versioning at [https://v2.docusaurus.io/docs/versioning/](https://v2.docusaurus.io/docs/versioning/).
-```

@@ -1,6 +1,7 @@
 ---
 id: configuration
 title: Configuration
+description: "Operate is a Spring Boot application. That means all ways to configure a Spring Boot application can be applied."
 ---
 ## Introduction
 

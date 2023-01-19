@@ -1,6 +1,7 @@
 ---
 id: deploy-a-process
 title: "Deploy a process"
+description: "Start up the Zeebe broker as well as Camunda Operate, a tool that gives you visibility into deployed processes and running process instances."
 ---
 
 _In this section, we're going to start up the Zeebe broker as well as Camunda Operate, a tool that gives you visibility into deployed processes and running process instances and contains tooling for fixing problems in those process instances._

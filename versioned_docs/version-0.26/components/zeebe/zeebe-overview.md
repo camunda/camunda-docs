@@ -2,6 +2,7 @@
 id: zeebe-overview
 title: "Zeebe Engine"
 sidebar_label: "Introduction"
+description: "Learn more about Zeebe's capabilities and next steps, including defining workflows graphically in BPMN 2.0, and scaling horizontally."
 ---
 
 With Zeebe you can:

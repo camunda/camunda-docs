@@ -1,138 +1,25 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
+// Why is this swizzled?
+//   To fire Mixpanel events for logged-in users when the component renders.
+// Swizzled from version 2.0.0-rc.1.
+
+import React from "react";
+import Footer from "@theme-original/Footer";
+
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Head from "@docusaurus/Head";
-import Link from "@docusaurus/Link";
-import { useThemeConfig } from "@docusaurus/theme-common";
-import useBaseUrl from "@docusaurus/useBaseUrl";
-import clsx from "clsx";
 import mixpanel from "mixpanel-browser";
-import React from "react";
-import styles from "./styles.module.css";
-import googletagmanager from "./gtm";
 
-function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }) {
-  const toUrl = useBaseUrl(to);
-  const normalizedHref = useBaseUrl(href, {
-    forcePrependBaseUrl: true,
-  });
+export default function FooterWrapper(props) {
   return (
-    <Link
-      className="footer__link-item"
-      {...(href
-        ? {
-            target: "_blank",
-            rel: "noopener noreferrer",
-            href: prependBaseUrlToHref ? normalizedHref : href,
-          }
-        : {
-            to: toUrl,
-          })}
-      {...props}
-    >
-      {label}
-    </Link>
-  );
-}
-
-const FooterLogo = ({ url, alt }) => (
-  <img className="footer__logo" alt={alt} src={url} />
-);
-
-function Footer() {
-  const { footer } = useThemeConfig();
-  const { copyright, links = [], logo = {} } = footer || {};
-  const logoUrl = useBaseUrl(logo.src);
-
-  if (!footer) {
-    return null;
-  }
-
-  return (
-    <footer
-      className={clsx("footer", {
-        "footer--dark": footer.style === "dark",
-      })}
-    >
-      <div className="container">
-        {links && links.length > 0 && (
-          <div className="row footer__links">
-            {links.map((linkItem, i) => (
-              <div key={i} className="col footer__col">
-                {linkItem.title != null ? (
-                  <h4 className="footer__title">{linkItem.title}</h4>
-                ) : null}
-                {linkItem.items != null &&
-                Array.isArray(linkItem.items) &&
-                linkItem.items.length > 0 ? (
-                  <ul className="footer__items">
-                    {linkItem.items.map((item, key) =>
-                      item.html ? (
-                        <li
-                          key={key}
-                          className="footer__item" // Developer provided the HTML, so assume it's safe.
-                          // eslint-disable-next-line react/no-danger
-                          dangerouslySetInnerHTML={{
-                            __html: item.html,
-                          }}
-                        />
-                      ) : (
-                        <li key={item.href || item.to} className="footer__item">
-                          <FooterLink {...item} />
-                        </li>
-                      )
-                    )}
-                  </ul>
-                ) : null}
-              </div>
-            ))}
-          </div>
-        )}
-        {(logo || copyright) && (
-          <div className="text--center">
-            {logo && logo.src && (
-              <div className="margin-bottom--sm">
-                {logo.href ? (
-                  <a
-                    href={logo.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.footerLogoLink}
-                  >
-                    <FooterLogo alt={logo.alt} url={logoUrl} />
-                  </a>
-                ) : (
-                  <FooterLogo alt={logo.alt} url={logoUrl} />
-                )}
-              </div>
-            )}
-
-            <div // Developer provided the HTML, so assume it's safe.
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{
-                __html: copyright,
-              }}
-            />
-          </div>
-        )}
-      </div>
+    <>
+      <Footer {...props} />
       <Head>
         {/* Osano (Consent) */}
         <script src="https://cmp.osano.com/16CVvwSNKHi9t1grQ/2ce963c0-31c9-4b54-b052-d66a2a948ccc/osano.js"></script>
-        {/* Global site tag (gtm.js) - Google Analytics */}
-        {/* <script
-          async
-          src="https://www.googletagmanager.com/gtm.js?id=GTM-KQGNSTS"
-        ></script>
-        {googletagmanager()} */}
       </Head>
       <AnalyticsEvents></AnalyticsEvents>
-    </footer>
+    </>
   );
 }
 
@@ -160,8 +47,6 @@ const AnalyticsEvents = () => {
     </BrowserOnly>
   );
 };
-
-let lastEventTs = 0;
 
 const MixpanelElement = () => {
   return (
@@ -201,8 +86,10 @@ const MixpanelElement = () => {
                   sendMixpanelEvent("docs");
                 }
               })
-              .catch((_error) => {
+              .catch((error) => {
                 // failed to silently authenticate user
+                //   We won't do anything about this, but log it for debugging purposes.
+                console.info("Failed to authenticate user.", error);
               });
           } else {
             // track event "docs"
@@ -217,6 +104,8 @@ const MixpanelElement = () => {
   );
 };
 
+let lastEventTs = 0;
+
 function sendMixpanelEvent(eventName) {
   // somehow the code is executed twice
   // that leads to the fact that events are sent twice
@@ -227,5 +116,3 @@ function sendMixpanelEvent(eventName) {
     lastEventTs = now;
   }
 }
-
-export default Footer;

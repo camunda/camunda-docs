@@ -1,6 +1,7 @@
 ---
 id: what-is-feel
 title: What is FEEL?
+description: "FEEL is a part of the DMN specification of the OMG. It is designed to write expressions for decision tables and literal expressions in a simple way."
 ---
 
 Friendly Enough Expression Language (FEEL) is a part of the [DMN specification](http://www.omg.org/spec/DMN/) of the OMG. It is designed to write expressions for decision tables and literal expressions in a simple way that is easily understood by business professionals and developers.

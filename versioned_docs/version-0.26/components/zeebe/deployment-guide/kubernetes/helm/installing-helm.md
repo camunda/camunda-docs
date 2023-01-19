@@ -1,6 +1,7 @@
 ---
 id: installing-helm
 title: "Zeebe Helm Charts"
+description: "Helm is a package manager for Kubernetes resources. Helm allows us to install components by referencing a package name and override configurations to accommodate."
 ---
 
 

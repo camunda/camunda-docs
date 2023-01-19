@@ -6,16 +6,16 @@
 https://docs.camunda.io/
 https://docs.camunda.io/docs/components/console/manage-organization/manage-users/
 https://docs.camunda.io/docs/components/concepts/job-workers/
-https://docs.camunda.io/docs/guides/getting-started/model-your-first-process
-https://docs.camunda.io/docs/guides/getting-started/setup-client-connection-credentials
+https://docs.camunda.io/docs/guides/model-your-first-process
+https://docs.camunda.io/docs/guides/setup-client-connection-credentials
 https://docs.camunda.io/docs/guides/message-correlation
-https://docs.camunda.io/docs/apis-clients/overview/
+https://docs.camunda.io/docs/apis-clients/working-with-apis-clients/
 https://docs.camunda.io/docs/components/console/manage-clusters/manage-alerts/
 https://docs.camunda.io/docs/components/console/manage-clusters/manage-ip-whitelists/
 https://docs.camunda.io/docs/components/concepts/variables/
 https://docs.camunda.io/docs/components/concepts/what-is-camunda-platform-8/
-https://docs.camunda.io/docs/components/operate/index/
-https://docs.camunda.io/docs/components/tasklist/introduction/
+https://docs.camunda.io/docs/components/operate/operate-introduction/
+https://docs.camunda.io/docs/components/tasklist/introduction-to-tasklist/
 https://docs.camunda.io/docs/guides/utilizing-forms/
 https://docs.camunda.io/docs/components/modeler/bpmn/error-events/error-events/
 https://docs.camunda.io/docs/components/modeler/bpmn/exclusive-gateways/exclusive-gateways/
@@ -30,13 +30,24 @@ https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/user-tasks/
 
 # Modeler Properties Panel
 
-https://docs.camunda.io/docs/reference/bpmn-processes/exclusive-gateways/exclusive-gateways#conditions
-https://docs.camunda.io/docs/reference/bpmn-processes/receive-tasks/receive-tasks/#messages
-https://docs.camunda.io/docs/reference/bpmn-processes/message-events/message-events/#messages
-https://docs.camunda.io/docs/reference/bpmn-processes/call-activities/call-activities
-https://docs.camunda.io/docs/reference/bpmn-processes/service-tasks/service-tasks/#task-definition
-https://docs.camunda.io/docs/reference/bpmn-processes/business-rule-tasks/business-rule-tasks/#defining-a-task
-https://docs.camunda.io/docs/reference/bpmn-processes/script-tasks/script-tasks/#defining-a-task
-https://docs.camunda.io/docs/reference/bpmn-processes/send-tasks/send-tasks/#defining-a-task
-https://docs.camunda.io/docs/reference/bpmn-processes/error-events/error-events/#defining-the-error
-https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events#time-duration
+https://docs.camunda.io/docs/components/modeler/bpmn/exclusive-gateways/#conditions
+https://docs.camunda.io/docs/components/modeler/bpmn/receive-tasks/#messages
+https://docs.camunda.io/docs/components/modeler/bpmn/message-events/#messages
+https://docs.camunda.io/docs/components/modeler/bpmn/call-activities/
+https://docs.camunda.io/docs/components/modeler/bpmn/service-tasks/#task-definition
+https://docs.camunda.io/docs/components/modeler/bpmn/business-rule-tasks/#defining-a-task
+https://docs.camunda.io/docs/components/modeler/bpmn/script-tasks/#defining-a-task
+https://docs.camunda.io/docs/components/modeler/bpmn/send-tasks/#defining-a-task
+https://docs.camunda.io/docs/components/modeler/bpmn/error-events/#defining-the-error
+https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/#time-duration
+
+# Zeebe readme
+
+https://docs.camunda.io
+https://docs.camunda.io/docs/components/concepts/what-is-camunda-platform-8/
+https://docs.camunda.io/docs/guides/
+https://docs.camunda.io/docs/components/zeebe/technical-concepts/
+https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-primer/
+https://docs.camunda.io/docs/self-managed/zeebe-deployment/
+https://docs.camunda.io/docs/apis-clients/java-client/
+https://docs.camunda.io/docs/apis-clients/go-client/

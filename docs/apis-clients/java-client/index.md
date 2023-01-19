@@ -34,7 +34,7 @@ If you build a Spring or Spring Boot application, you might want to use [Spring 
 In Java code, instantiate the client as follows:
 
 ```java
-  private static final String zeebeAPI = "[Zeebe API]";
+  private static final String zeebeAddress = "[Zeebe Address]";
   private static final String clientId = "[Client ID]";
   private static final String clientSecret = "[Client Secret]";
   private static final String oAuthAPI = "[OAuth API] ";
@@ -64,12 +64,12 @@ Let's go over this code snippet line by line:
 3. Create the client by passing in the address of the cluster we want to connect to and the credentials provider from the step above. Note that a client should be closed after usage, which is easily achieved by the try-with-resources statement.
 4. Send a test request to verify the connection was established.
 
-See [io.camunda.zeebe.client.ZeebeClientBuilder](https://javadoc.io/doc/io.zeebe/zeebe-client-java/latest/io/zeebe/client/ZeebeClientBuilder.html) for a description of all available configuration properties.
+See [io.camunda.zeebe.client.ZeebeClientBuilder](https://javadoc.io/doc/io.camunda/zeebe-client-java/latest/io/camunda/zeebe/client/ZeebeClientBuilder.html) for a description of all available configuration properties.
 
 Another (more compact) option is to pass in the connection settings via environment variables:
 
 ```bash
-export ZEEBE_ADDRESS='[Zeebe API]'
+export ZEEBE_ADDRESS='[Zeebe Address]'
 export ZEEBE_CLIENT_ID='[Client ID]'
 export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
@@ -85,6 +85,10 @@ ZeebeClient client =
         .gatewayAddress(System.getenv("ZEEBE_ADDRESS"))
         .build();
 ```
+
+## Javadoc
+
+The official Java client library API documentation can be found [here](https://javadoc.io/doc/io.camunda/zeebe-client-java). These are standard Javadocs, so your favorite JVM IDE will be able to install them locally as well.
 
 ## Next steps
 

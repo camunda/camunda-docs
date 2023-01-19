@@ -63,9 +63,19 @@ This also insulates job workers against sudden bursts in traffic. Because worker
 After working on an activated job, a job worker informs Camunda Platform 8 that the job has either `completed` or `failed`.
 
 - When the job worker completes its work, it sends a `complete job` command along with any variables, which in turn is merged into the process instance. This is how the job worker exposes the results of its work.
-- If the job worker can not successfully complete its work, it sends a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker. 
-    - If `remaining retries` is greather than zero, the job is retried and reassigned. 
-    - If `remaining retries` is zero or negative, an incident is raised and the job is not retried until the incident is resolved.
+- If the job worker can not successfully complete its work, it sends a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker.
+  - If `remaining retries` is greater than zero, the job is retried and reassigned.
+  - If `remaining retries` is zero or negative, an incident is raised and the job is not retried until the incident is resolved.
+
+When failing a job it is possible to specify a `retry back off`. This back off allows waiting for a specified amount of time before retrying the job.
+This could be useful when a job worker communicates with an external system. If the external system is down, immediately retrying the job will not work.
+This will result in an incident when the retries run out. Using the `retry back off` will delay the retry. This allows the external system some time to recover.
+If no `retry back off` the job is immediately retried.
+
+When `Completing or failing jobs` with [variables](components/concepts/variables.md), the variables are merged into the process at the job's associated task.
+
+- When `Completing a job` the variables are propagated from the scope of the task to its higher scopes.
+- When `Failing a job` the variables are only created in the local scope of the task.
 
 ## Timeouts
 
@@ -73,8 +83,8 @@ If the job is not completed or failed within the configured job activation timeo
 
 A timeout may lead to two different workers working on the same job, possibly at the same time. If this occurs, only one worker successfully completes the job. The other `complete job` command is rejected with a `NOT FOUND` error.
 
-The fact that jobs may be worked on more than once means that Zeebe is an "at least once" system with respect to job delivery and that worker code must be idempotent. In other words, workers __must__ deal with jobs in a way that allows the code to be executed more than once for the same job, all while preserving the expected application state.
+The fact that jobs may be worked on more than once means that Zeebe is an "at least once" system with respect to job delivery and that worker code must be idempotent. In other words, workers **must** deal with jobs in a way that allows the code to be executed more than once for the same job, all while preserving the expected application state.
 
 ## Next steps
 
-- [Zeebe overview](./components/zeebe/zeebe-overview.md)
+- [Zeebe overview](components/zeebe/zeebe-overview.md)

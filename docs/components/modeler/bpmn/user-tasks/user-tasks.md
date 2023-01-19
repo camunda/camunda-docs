@@ -11,7 +11,7 @@ stops at this point and waits until the job is completed.
 
 ![user-task](assets/user-task.png)
 
-Applications like [Tasklist](/components/tasklist/introduction.md) can be used by humans to complete these tasks.
+Applications like [Tasklist](/components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks.
 
 Alternatively, a job worker can subscribe to the job type
 `io.camunda.zeebe:userTask` to complete the job manually.
@@ -23,7 +23,7 @@ instance continues.
 
 User tasks support specifying a `formKey` attribute, using the
 `zeebe:formDefinition` extension element. The form key can be used to specify
-an identifier to associate a form to the user task. [Tasklist] supports
+an identifier to associate a form to the user task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) supports
 embedded [Camunda Forms](/guides/utilizing-forms.md),
 these can be embedded into the BPMN process XML as a `zeebe:UserTaskForm`
 extension element of the process element.
@@ -33,18 +33,20 @@ extension element of the process element.
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
 This can be used to define which user the task can be assigned to. One or both of the following
 attributes can be specified simultaneously:
-- `assignee`: Specifies the user assigned to the task. [Tasklist] will claim the task for this user.
+
+- `assignee`: Specifies the user assigned to the task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) will claim the task for this user.
+- `candidateUsers`: Specifies the users that the task can be assigned to.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
-Typically, the assignee and candidate groups are defined as static values (e.g. `some_username` and
+Typically, the assignee, candidate users, and candidate groups are defined as static values (e.g. `some_username`, `some_username, another_username` and
 `sales, operations`), but they can also be defined as
-[expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers,
-book.author)`). The expressions are evaluated on activating the user task and must result in a
-`string` for the assignee and a `list of strings` for the candidate groups.
+[expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)` and `= reviewer_roles`). The expressions are evaluated on activating the user task and must result in a
+`string` for the assignee and a `list of strings` for the candidate users and a `list of strings` for the candidate groups.
 
-For [Tasklist](/components/tasklist/introduction.md) to claim the task for a known Tasklist user, 
+For [Tasklist](/components/tasklist/introduction-to-tasklist.md) to claim the task for a known Tasklist user,
 the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
+
 - Camunda Platform 8 (login with email, Google, GitHub): `email`
 - Default Basic Auth (elasticsearch): `username`
 - IAM: `username`
@@ -90,6 +92,6 @@ A user task with a user task form and an assignment definition:
 
 ### References
 
-- [Tasklist](/components/tasklist/introduction.md)
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Job handling](/components/concepts/job-workers.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)

@@ -1,5 +1,6 @@
 ---
 title: "Writing good workers"
+description: "Organize glue code and workers in process solutions, consider transactions, exceptions, and idempotency of workers, examine data minimization in workers, and more."
 ---
 
 [Service tasks](/docs/components/modeler/bpmn/service-tasks/) within Camunda Cloud require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes that you might want to:

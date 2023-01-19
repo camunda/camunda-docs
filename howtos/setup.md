@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm i
+npm install
 ```
 
 ## Local Development
@@ -14,7 +14,16 @@ npm run start
 
 This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
 
+### Troubleshooting checklist
+
+- Have you pulled latest from `main`?
+- Have you run `npm install`? When we update dependencies in the project, they don't automatically update in your environment. You'll need to run `npm install` occasionally to acquire dependency updates locally.
+
 ## Build
+
+It's rare to build the docs locally -- running the dev server with `npm run start` meets most development needs.
+
+Sometimes it can be helpful to see what docusaurus is generating, though:
 
 ```bash
 npm run build
@@ -24,10 +33,4 @@ This command generates static content into the `build` directory and can be serv
 
 ## Deployment
 
-This is just for the record. All deployments have to be done via a new Release.
-
-```bash
-$ GIT_USER=<Your GitHub username> USE_SSH=true npm run deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+Deployments are handled by creating a new Release. See [release-procedure.md](/howtos/release-procedure.md) for details.

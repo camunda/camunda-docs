@@ -1,6 +1,7 @@
 ---
 id: deploy-a-workflow
 title: "Deploy a Workflow"
+description: "Start up the Zeebe broker and Camunda Operate, a tool that gives you visibility into deployed workflows and running workflow instances."
 ---
 
 _In this section, we're going to start up the Zeebe broker as well as Camunda Operate, a tool that gives you visibility into deployed workflows and running workflow instances and contains tooling for fixing problems in those workflow instances._

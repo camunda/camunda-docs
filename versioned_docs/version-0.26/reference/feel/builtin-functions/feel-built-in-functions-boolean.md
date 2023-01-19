@@ -1,6 +1,7 @@
 ---
 id: feel-built-in-functions-boolean
 title: Boolean functions
+description: "Examine built-in boolean functions alongside FEEL. For example, check if a variable, or a context entry (e.g. a property of a variable) exists."
 ---
 
 ## `not()`

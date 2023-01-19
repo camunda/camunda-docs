@@ -1,6 +1,6 @@
 {
   "Guides": [
-    "guides/introduction-to-camunda-cloud",
+    "guides/introduction-to-camunda",
     {
       "Getting started with Camunda Cloud": [
         "guides/getting-started/create-camunda-cloud-account",
@@ -33,7 +33,7 @@
     "guides/migrating-from-Camunda-Platform"
   ],
   "Components": [
-    "components/overview",
+    "components/components-overview",
     {
       "Concepts": [
         "components/concepts/what-is-camunda-cloud",
@@ -172,14 +172,10 @@
           ]
         },
         {
-          "DMN": [
-            "components/modeler/dmn/desktop-modeler-dmn"
-          ]
+          "DMN": ["components/modeler/dmn/desktop-modeler-dmn"]
         },
         {
-          "Forms": [
-            "components/modeler/forms/camunda-forms-reference"
-          ]
+          "Forms": ["components/modeler/forms/camunda-forms-reference"]
         }
       ],
       "Zeebe": [
@@ -201,9 +197,6 @@
             "components/zeebe/open-source/community-contributions",
             "components/zeebe/open-source/get-help-get-involved"
           ]
-        },
-        {
-          "Appendix": []
         }
       ],
       "Operate": [
@@ -219,43 +212,132 @@
         }
       ],
       "Optimize": [
-        "components/optimize/what-is-optimize",
+        {
+          "type": "link",
+          "label": "What is Optimize?",
+          "href": "/optimize/3.7.0/components/what-is-optimize/"
+        },
+
         {
           "User guide": [
-            "components/optimize/userguide/collections-dashboards-reports",
-            "components/optimize/userguide/data-sources",
-            "components/optimize/userguide/creating-dashboards",
-            "components/optimize/userguide/creating-reports",
-            "components/optimize/userguide/combined-reports",
+            {
+              "type": "link",
+              "label": "Collections, dashboards, and reports",
+              "href": "/optimize/3.7.0/components/userguide/collections-dashboards-reports/"
+            },
+            {
+              "type": "link",
+              "label": "Data sources",
+              "href": "/optimize/3.7.0/components/userguide/data-sources/"
+            },
+            {
+              "type": "link",
+              "label": "Creating dashboards",
+              "href": "/optimize/3.7.0/components/userguide/creating-dashboards/"
+            },
+            {
+              "type": "link",
+              "label": "Creating reports",
+              "href": "/optimize/3.7.0/components/userguide/creating-reports/"
+            },
+            {
+              "type": "link",
+              "label": "Combined reports",
+              "href": "/optimize/3.7.0/components/userguide/combined-reports/"
+            },
+
             {
               "Process analysis": [
-                "components/optimize/userguide/process-analysis/overview",
-                "components/optimize/userguide/process-analysis/outlier-analysis",
-                "components/optimize/userguide/process-analysis/branch-analysis",
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/optimize/3.7.0/components/userguide/process-analysis/overview/"
+                },
+                {
+                  "type": "link",
+                  "label": "Outlier analysis",
+                  "href": "/optimize/3.7.0/components/userguide/process-analysis/outlier-analysis/"
+                },
+                {
+                  "type": "link",
+                  "label": "Branch analysis",
+                  "href": "/optimize/3.7.0/components/userguide/process-analysis/branch-analysis/"
+                },
+
                 {
                   "Report analysis": [
-                    "components/optimize/userguide/process-analysis/report-analysis/overview",
-                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
-                    "components/optimize/userguide/process-analysis/report-analysis/view-mode"
+                    {
+                      "type": "link",
+                      "label": "Report process analysis",
+                      "href": "/optimize/3.7.0/components/userguide/process-analysis/report-analysis/overview/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Edit mode",
+                      "href": "/optimize/3.7.0/components/userguide/process-analysis/report-analysis/edit-mode/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "View mode",
+                      "href": "/optimize/3.7.0/components/userguide/process-analysis/report-analysis/view-mode/"
+                    }
                   ]
                 }
               ]
             },
+
             {
               "Decision analysis": [
-                "components/optimize/userguide/decision-analysis/overview",
-                "components/optimize/userguide/decision-analysis/decision-report",
-                "components/optimize/userguide/decision-analysis/decision-filter"
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/optimize/3.7.0/components/userguide/decision-analysis/overview/"
+                },
+                {
+                  "type": "link",
+                  "label": "Single report",
+                  "href": "/optimize/3.7.0/components/userguide/decision-analysis/decision-report/"
+                },
+                {
+                  "type": "link",
+                  "label": "Filters",
+                  "href": "/optimize/3.7.0/components/userguide/decision-analysis/decision-filter/"
+                }
               ]
             },
+
             {
               "Additional features": [
-                "components/optimize/userguide/additional-features/alerts",
-                "components/optimize/userguide/additional-features/event-based-processes",
-                "components/optimize/userguide/additional-features/export-import",
-                "components/optimize/userguide/additional-features/filters",
-                "components/optimize/userguide/additional-features/footer",
-                "components/optimize/userguide/additional-features/variable-labeling"
+                {
+                  "type": "link",
+                  "label": "Alerts",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/alerts/"
+                },
+                {
+                  "type": "link",
+                  "label": "Event-based processes",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/event-based-processes/"
+                },
+                {
+                  "type": "link",
+                  "label": "Export and import",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/export-import/"
+                },
+                {
+                  "type": "link",
+                  "label": "Filters",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/filters/"
+                },
+                {
+                  "type": "link",
+                  "label": "Footer",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/footer/"
+                },
+                {
+                  "type": "link",
+                  "label": "Variable labeling",
+                  "href": "/optimize/3.7.0/components/userguide/additional-features/variable-labeling/"
+                }
               ]
             }
           ]
@@ -326,7 +408,7 @@
     }
   ],
   "APIs & Clients": [
-    "apis-clients/overview",
+    "apis-clients/working-with-apis-clients",
     {
       "APIs": [
         "apis-clients/public-api",
@@ -422,7 +504,7 @@
     "reference/dependencies"
   ],
   "Self-Managed": [
-    "self-managed/overview",
+    "self-managed/about-self-managed",
     {
       "Zeebe": [
         "self-managed/zeebe-deployment/index",
@@ -492,89 +574,323 @@
       "Optimize": [
         {
           "Setup": [
-            "self-managed/optimize-deployment/setup/installation",
-            "self-managed/optimize-deployment/setup/optimize-license",
-            "self-managed/optimize-deployment/setup/security-instructions",
-            "self-managed/optimize-deployment/setup/configuration",
-            "self-managed/optimize-deployment/setup/user-management",
-            "self-managed/optimize-deployment/setup/authorization-management",
-            "self-managed/optimize-deployment/setup/secure-elasticsearch",
-            "self-managed/optimize-deployment/setup/shared-elasticsearch-cluster",
-            "self-managed/optimize-deployment/setup/history-cleanup",
-            "self-managed/optimize-deployment/setup/localization",
-            "self-managed/optimize-deployment/setup/multi-tenancy",
-            "self-managed/optimize-deployment/setup/multiple-engines",
-            "self-managed/optimize-deployment/setup/object-variables",
-            "self-managed/optimize-deployment/setup/clustering",
-            "self-managed/optimize-deployment/setup/webhooks",
-            "self-managed/optimize-deployment/setup/setup-event-based-processes",
-            "self-managed/optimize-deployment/setup/telemetry",
-            "self-managed/optimize-deployment/setup/common-problems"
+            {
+              "type": "link",
+              "label": "Installation",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/installation/"
+            },
+            {
+              "type": "link",
+              "label": "Optimize license key",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/optimize-license/"
+            },
+            {
+              "type": "link",
+              "label": "Security instructions",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/security-instructions/"
+            },
+            {
+              "type": "link",
+              "label": "Configuration",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/configuration/"
+            },
+            {
+              "type": "link",
+              "label": "User access management",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/user-management/"
+            },
+            {
+              "type": "link",
+              "label": "Authorization management",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/authorization-management/"
+            },
+            {
+              "type": "link",
+              "label": "Secure Elasticsearch",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/secure-elasticsearch/"
+            },
+            {
+              "type": "link",
+              "label": "Shared Elasticsearch cluster",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/shared-elasticsearch-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "History cleanup",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/history-cleanup/"
+            },
+            {
+              "type": "link",
+              "label": "Localization",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/localization/"
+            },
+            {
+              "type": "link",
+              "label": "Multi-tenancy",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/multi-tenancy/"
+            },
+            {
+              "type": "link",
+              "label": "Multiple process engines",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/multiple-engines/"
+            },
+            {
+              "type": "link",
+              "label": "Object and list variable support",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/object-variables/"
+            },
+            {
+              "type": "link",
+              "label": "Clustering",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/clustering/"
+            },
+            {
+              "type": "link",
+              "label": "Webhooks",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/webhooks/"
+            },
+            {
+              "type": "link",
+              "label": "Event-based processes",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/setup-event-based-processes/"
+            },
+            {
+              "type": "link",
+              "label": "Telemetry",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/telemetry/"
+            },
+            {
+              "type": "link",
+              "label": "Common problems",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/common-problems/"
+            }
           ]
         },
-        "self-managed/optimize-deployment/setup",
+
+        {
+          "type": "link",
+          "label": "Self-Managed setup",
+          "href": "/optimize/3.7.0/self-managed/optimize-deployment/setup/"
+        },
+
         {
           "Plugins": [
-            "self-managed/optimize-deployment/plugins/plugin-system",
-            "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
-            "self-managed/optimize-deployment/plugins/decision-import-plugin",
-            "self-managed/optimize-deployment/plugins/elasticsearch-header",
-            "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
-            "self-managed/optimize-deployment/plugins/single-sign-on",
-            "self-managed/optimize-deployment/plugins/variable-import-plugin"
+            {
+              "type": "link",
+              "label": "Optimize plugin system",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/plugins/plugin-system/"
+            },
+            {
+              "type": "link",
+              "label": "Business key import customization",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/plugins/businesskey-import-plugin/"
+            },
+            {
+              "type": "link",
+              "label": "Decision inputs and outputs import customization",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/plugins/decision-import-plugin/"
+            },
+            {
+              "type": "link",
+              "label": "Elasticsearch header",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/plugins/elasticsearch-header/"
+            },
+            {
+              "type": "link",
+              "label": "Engine REST filter",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/plugins/engine-rest-filter-plugin/"
+            },
+            {
+              "type": "link",
+              "label": "Single sign on",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/plugins/single-sign-on/"
+            },
+            {
+              "type": "link",
+              "label": "Variable import customization",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/plugins/variable-import-plugin/"
+            }
           ]
         },
+
         {
           "REST API": [
-            "self-managed/optimize-deployment/rest-api/authorization",
+            {
+              "type": "link",
+              "label": "Authorization",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/authorization/"
+            },
+
             {
               "Dashboard": [
-                "self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids",
-                "self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard",
-                "self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions"
+                {
+                  "type": "link",
+                  "label": "Get dashboard IDs",
+                  "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/dashboard/get-dashboard-ids/"
+                },
+                {
+                  "type": "link",
+                  "label": "Delete dashboards",
+                  "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/dashboard/delete-dashboard/"
+                },
+                {
+                  "type": "link",
+                  "label": "Export dashboard definitions",
+                  "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/dashboard/export-dashboard-definitions/"
+                }
               ]
             },
+
             {
               "Report": [
-                "self-managed/optimize-deployment/rest-api/report/get-report-ids",
-                "self-managed/optimize-deployment/rest-api/report/delete-report",
-                "self-managed/optimize-deployment/rest-api/report/export-report-definitions",
-                "self-managed/optimize-deployment/rest-api/report/get-data-export"
+                {
+                  "type": "link",
+                  "label": "Get report IDs",
+                  "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/report/get-report-ids/"
+                },
+                {
+                  "type": "link",
+                  "label": "Delete reports",
+                  "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/report/delete-report/"
+                },
+                {
+                  "type": "link",
+                  "label": "Export report definitions",
+                  "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/report/export-report-definitions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Export report result data",
+                  "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/report/get-data-export/"
+                }
               ]
             },
-            "self-managed/optimize-deployment/rest-api/event-ingestion",
-            "self-managed/optimize-deployment/rest-api/external-variable-ingestion",
-            "self-managed/optimize-deployment/rest-api/health-readiness",
-            "self-managed/optimize-deployment/rest-api/import-entities"
+
+            {
+              "type": "link",
+              "label": "Event ingestion",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/event-ingestion/"
+            },
+            {
+              "type": "link",
+              "label": "External variable ingestion",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/external-variable-ingestion/"
+            },
+            {
+              "type": "link",
+              "label": "Health readiness",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/health-readiness/"
+            },
+            {
+              "type": "link",
+              "label": "Import entities",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/rest-api/import-entities/"
+            }
           ]
         },
-        "self-managed/optimize-deployment/reimport",
+
+        {
+          "type": "link",
+          "label": "Camunda engine data reimport",
+          "href": "/optimize/3.7.0/self-managed/optimize-deployment/reimport/"
+        },
+
         {
           "Migration & Update": [
-            "self-managed/optimize-deployment/migration-update/instructions",
-            "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
-            "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
-            "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
-            "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
-            "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
-            "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
-            "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
-            "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
-            "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
-            "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
-            "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
-            "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
-            "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
-            "self-managed/optimize-deployment/migration-update/2.1-to-2.2"
+            {
+              "type": "link",
+              "label": "Instructions",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/instructions/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (3.6 to 3.7.x)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/3.6-to-3.7/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (3.5 to 3.6)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/3.5-to-3.6/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (3.4 to 3.5)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/3.4-to-3.5/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (3.3 to 3.4)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/3.3-to-3.4/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (3.2 to 3.3)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/3.2-to-3.3/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (3.1 to 3.2)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/3.1-to-3.2/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (3.0 to 3.1)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/3.0-to-3.1/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (2.7 to 3.0)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/2.7-to-3.0/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (2.6 to 2.7)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/2.6-to-2.7/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (2.5 to 2.6)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/2.5-to-2.6/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (2.4 to 2.5)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/2.4-to-2.5/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (2.3 to 2.4)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/2.3-to-2.4/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (2.2 to 2.3)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/2.2-to-2.3/"
+            },
+            {
+              "type": "link",
+              "label": "Update notes (2.1 to 2.2)",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/migration-update/2.1-to-2.2/"
+            }
           ]
         },
+
         {
           "Optimize Explained": [
-            "self-managed/optimize-deployment/optimize-explained/engine-data-deletion",
-            "self-managed/optimize-deployment/optimize-explained/import-guide"
+            {
+              "type": "link",
+              "label": "Engine data deletion",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/optimize-explained/engine-data-deletion/"
+            },
+            {
+              "type": "link",
+              "label": "Data import",
+              "href": "/optimize/3.7.0/self-managed/optimize-deployment/optimize-explained/import-guide/"
+            }
           ]
         }
       ],
+
       "IAM": [
         "self-managed/iam/what-is-iam",
         {
@@ -597,9 +913,7 @@
       ]
     },
     {
-      "Troubleshooting": [
-        "self-managed/troubleshooting/log-levels"
-      ]
+      "Troubleshooting": ["self-managed/troubleshooting/log-levels"]
     }
   ]
 }

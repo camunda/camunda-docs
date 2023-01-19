@@ -1,14 +1,17 @@
+const versionedLinks = require("./src/mdx/versionedLinks");
+
 module.exports = {
-  title: "Camunda Platform 8",
+  title: "Camunda Platform 8 Docs",
   tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/",
   onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
-  organizationName: "camunda-cloud", // Usually your GitHub org/user name.
-  projectName: "camunda-cloud-documentation", // Usually your repo name.
+  organizationName: "camunda", // Usually your GitHub org/user name.
+  projectName: "camunda-platform-docs", // Usually your repo name.
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
@@ -31,19 +34,29 @@ module.exports = {
       },
     ],
     "./static/plugins/bpmn-js",
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "optimize",
+        path: "optimize",
+        routeBasePath: "optimize",
+        beforeDefaultRemarkPlugins: [versionedLinks],
+        sidebarPath: require.resolve("./optimize_sidebars.js"),
+      },
+    ],
   ],
   scripts: [],
   themeConfig: {
     announcementBar: {
       id: "camunda8",
       content:
-        '<b>📣 Camunda Cloud is now Camunda Platform 8!</b> Learn more about navigating the updated documentation <a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io/meta">here</a>.',
+        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
       backgroundColor: "#14D890",
       textColor: "#000",
       isCloseable: false,
     },
     prism: {
-      additionalLanguages: ["java"],
+      additionalLanguages: ["java", "protobuf"],
     },
     navbar: {
       title: "Camunda Platform 8 Docs",
@@ -58,25 +71,25 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "guides/introduction-to-camunda-cloud",
+          docId: "guides/introduction-to-camunda",
           label: "Guides",
           position: "left",
         },
         {
           type: "doc",
-          docId: "components/overview",
+          docId: "components/components-overview",
           label: "Components",
           position: "left",
         },
         {
           type: "doc",
-          docId: "apis-clients/overview",
+          docId: "apis-clients/working-with-apis-clients",
           label: "APIs & Clients",
           position: "left",
         },
         {
           type: "doc",
-          docId: "self-managed/overview",
+          docId: "self-managed/about-self-managed",
           label: "Self-Managed",
           position: "left",
         },
@@ -97,23 +110,19 @@ module.exports = {
       },
       links: [
         {
-          title: "Docs",
+          title: "About",
           items: [
             {
-              label: "Introduction",
-              to: "docs/guides",
+              label: "How to use our docs",
+              to: "meta",
             },
             {
-              label: "Licenses",
-              to: "docs/reference/licenses",
+              label: "Try free",
+              href: "https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral",
             },
             {
-              label: "Notices",
-              to: "docs/reference/notices",
-            },
-            {
-              label: "Release cycle",
-              to: "docs/reference/release-policy",
+              label: "Contact",
+              to: "contact",
             },
           ],
         },
@@ -130,12 +139,28 @@ module.exports = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/camunda-cloud/camunda-cloud-documentation",
+              href: "https://github.com/camunda/camunda-platform-docs",
+            },
+            {
+              label: "Forum",
+              href: "https://forum.camunda.io/",
+            },
+            {
+              label: "Contribute",
+              href: "https://camunda.com/developers/how-to-contribute/",
+            },
+            {
+              label: "Developer resources",
+              href: "https://camunda.com/developers/",
+            },
+            {
+              label: "Subscribe",
+              href: "https://camunda.com/developers/developer-community-updates/",
             },
           ],
         },
         {
-          title: "More",
+          title: "Camunda",
           items: [
             {
               label: "Console",
@@ -146,16 +171,12 @@ module.exports = {
               href: "https://status.camunda.io",
             },
             {
-              label: "Contact",
-              to: "contact",
-            },
-            {
-              label: "Meta",
-              to: "meta",
-            },
-            {
               label: "Blog",
               href: "https://camunda.com/blog/category/camunda-cloud/",
+            },
+            {
+              label: "Release cycle",
+              to: "docs/reference/release-policy",
             },
           ],
         },
@@ -169,52 +190,24 @@ module.exports = {
             {
               html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
             },
+            {
+              label: "Licenses",
+              to: "docs/reference/licenses",
+            },
+            {
+              label: "Security notices",
+              to: "docs/reference/notices",
+            },
           ],
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Camunda`,
     },
     algolia: {
-      apiKey: "f1b2a46296ae374b7f5a5c627341c354",
+      // These keys are for our new standalone algolia instance!
+      apiKey: "d701d38126d1a43866047d3ab97680d1",
+      appId: "6KYF3VMCXZ",
       indexName: "camunda",
-      contextualSearch: true, // useful for versioned docs (https://docusaurus.io/docs/search#contextual-search)
-      searchParameters: {}, // Optional (if provided by Algolia)
-    },
-    // Disabling Dark Mode
-    // https://github.com/camunda-cloud/camunda-cloud-documentation/issues/125
-    //
-    colorMode: {
-      // "light" | "dark"
-      defaultMode: "light",
-
-      // Hides the switch in the navbar
-      // Useful if you want to support a single color mode
-      disableSwitch: true,
-
-      // Should we use the prefers-color-scheme media-query,
-      // using user system preferences, instead of the hardcoded defaultMode
-      respectPrefersColorScheme: false,
-
-      // Dark/light switch icon options
-      switchConfig: {
-        // Icon for the switch while in dark mode
-        darkIcon: "🌙",
-
-        // CSS to apply to dark icon,
-        // React inline style object
-        // see https://reactjs.org/docs/dom-elements.html#style
-        darkIconStyle: {
-          marginLeft: "2px",
-        },
-
-        // Unicode icons such as '\u2600' will work
-        // Unicode with 5 chars require brackets: '\u{1F602}'
-        lightIcon: "\u{1F602}",
-
-        lightIconStyle: {
-          marginLeft: "1px",
-        },
-      },
     },
   },
   presets: [
@@ -225,18 +218,8 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl:
-            "https://github.com/camunda-cloud/camunda-cloud-documentation/edit/master/",
-          // disableVersioning: isVersioningDisabled,
-          lastVersion: "current",
-          // onlyIncludeVersions:
-          //   !isVersioningDisabled && (isDev || isDeployPreview)
-          //     ? ["current", ...versions.slice(0, 2)]
-          //     : undefined,
-          versions: {
-            current: {
-              label: `latest`,
-            },
-          },
+            "https://github.com/camunda/camunda-platform-docs/edit/main/",
+          beforeDefaultRemarkPlugins: [versionedLinks],
         },
         blog: false,
         theme: {

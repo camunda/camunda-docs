@@ -1,6 +1,7 @@
 ---
 id: implement-decision-gateway
 title: Implement a decision gateway
+description: "Now, we can use the JSON object to route your process by filling in the condition expression on the two sequence flows after the XOR gateway."
 ---
 
 import Tabs from "@theme/Tabs";
