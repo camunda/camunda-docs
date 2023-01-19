@@ -55,7 +55,7 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
 1. Take the **access_token** value from the response object and store it as your token.
 2. Send the token as an authorization header in each request. In this case, call the info endpoint to validate the token.
    ```shell
-   curl -X POST 'http://localhost:8070/api/beta/info' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhb...' -d '{}'
+   curl -o - 'http://localhost:8070/api/beta/info' -H 'Authorization: Bearer eyJhb...'
    ```
 3. You will get something like the following:
    ```json
