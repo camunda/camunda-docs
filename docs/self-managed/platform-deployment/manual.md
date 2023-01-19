@@ -149,7 +149,7 @@ To update Tasklist versions, visit the [guide to update Tasklist](../../componen
 
 ## Run Connectors
 
-The [Connector runtime environment](https://search.maven.org/artifact/io.camunda/spring-zeebe-connector-runtime) picks up outbound Connectors available on the `classpath` automatically.
+The [Connector runtime environment](https://repo1.maven.org/maven2/io/camunda/spring-zeebe-connector-runtime) picks up outbound Connectors available on the `classpath` automatically.
 It uses the default configuration specified by a Connector through its `@OutboundConnector` annotation.
 
 To run the [REST Connector](https://search.maven.org/artifact/io.camunda.connector/connector-http-json) with the runtime environment, execute the following command:

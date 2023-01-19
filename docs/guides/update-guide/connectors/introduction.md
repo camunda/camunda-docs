@@ -9,6 +9,12 @@ Connector runtimes to a newer version of the
 
 There is a dedicated update guide for each version:
 
+### [Connector SDK 0.3 to 0.4](../030-to-040)
+
+Update from 0.3.x to 0.4.0
+
+[Release notes](https://github.com/camunda/connector-sdk/releases/tag/0.4.0)
+
 ### [Connector SDK 0.2 to 0.3](../020-to-030)
 
 Update from 0.2.x to 0.3.0
