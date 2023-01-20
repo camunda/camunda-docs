@@ -124,7 +124,9 @@ Spinning up a Camunda Platform 8 Cluster means you run multiple components that 
 
 All components are clustered to provide high-availability, fault-tolerance and resiliency.
 
-Zeebe scales horizontally by adding more cluster nodes (pods). This is limited by the so-called partition size of a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your cluster or to have some buffer if your load increases later on. The number of partitions cannot be changed after the cluster was initially provisioned (at least not yet), so elastic scalability of cluster nodes is (not yet) possible.
+Zeebe scales horizontally by adding more cluster nodes (pods). This is **limited by the [number of partitions](/docs/components/zeebe/technical-concepts/partitions/)** configured for a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **number of partitions cannot be changed after the cluster was initially provisioned** (at least not yet), elastic scalability of partitions is not yet possible.
+
+If you anticipate the load increasing over time, prepare by configuring more partitions than you currently need as a buffer. For example, you could multiply the number of partitions you need for your current load by four to add a buffer. This typically has just a small impact on performance.
 
 Camunda Platform 8 runs on Kubernetes. Every component is operated as a so-called pod, that gets resources assigned. These resources can be vertically scaled (=get more or less hardware resources assigned dynamically) within certain limits. Note that vertically scaling not always results in more throughput, as the various components have dependencies on each other. This is a complex topic and requires running experiments with benchmarks. In general, we recommend to start with the minimalistic hardware package as described below. If you have further requirements, you use this as a starting point to increase resources.
 
@@ -233,4 +235,4 @@ If you are in doubt about which package to choose, you can do a load test with a
 
 This is recommended if you exceed the above numbers of three million process instances per day.
 
-You can look at the [Zeebe benchmark project](https://github.com/camunda-cloud/zeebe/blob/develop/benchmarks/setup/README.md#benchmarking-camunda-cloud-saas). While this project will not run out-of-the-box (e.g. you need need to build starter and worker code yourself and use self-created docker images), you can use it as a starting point for own endavours.
+Take a look at the [Camunda Platform 8 benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) as a starting point for your own benchmarks.

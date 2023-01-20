@@ -1042,6 +1042,7 @@ module.exports = {
         {
           "Web Modeler (Beta)": [
             "self-managed/modeler/web-modeler/installation",
+            "self-managed/modeler/web-modeler/configuration",
             "self-managed/modeler/web-modeler/api",
           ],
         },
