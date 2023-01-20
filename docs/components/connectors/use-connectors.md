@@ -147,7 +147,7 @@ Imagine your Connector makes an external call to an arbitrary weather service. T
 
 If you declare a variable `myWeatherResponse` in the `Result Variable` field, the entire response is mapped to the declared variable.
 
-Now, let's imagine that you wish to extract only temperature into a process variable `berlinWeather` and wind speed into `berlinWindSpeed`. Let's also imagine you need weather in fahrenheit declared in `berlinWeatherInFahrenheit`.
+Now, let's imagine that you wish to extract only temperature into a process variable `berlinWeather` and wind speed into `berlinWindSpeed`. Let's also imagine you need weather in Fahrenheit declared in `berlinWeatherInFahrenheit`.
 
 In that case, you could declare `Result Expression` as follows:
 
