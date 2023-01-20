@@ -166,6 +166,10 @@ If you wish to test `.htaccess` rules, you have a couple options:
 
 In an effort to automate screenshots across Camunda Platform 8 documentation, the following teams execute uniform steps when incorporating images and diagrams:
 
+:::note
+Given the following procedures, teams will respond to screenshot updates and suggestions from community members by manually adjusting appropriate screenshots.
+:::
+
 **Modeler**
 Visit the [Modeler screenshot automation repo](https://github.com/camunda/camunda-docs-modeler-screenshots/blob/main/README.md) for details on updating screenshots and scripting new screenshots.
 
