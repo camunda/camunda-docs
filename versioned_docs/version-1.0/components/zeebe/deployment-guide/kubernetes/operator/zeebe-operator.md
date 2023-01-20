@@ -1,6 +1,7 @@
 ---
 id: zeebe-operator
 title: "Zeebe Operator (Experimental)"
+description: "Learn more about the Zeebe Kubernetes Operator, get started using the Operator, and review technical details and dependencies."
 ---
 
 The Zeebe Kubernetes Operator was born out of the need to manage more than one single Zeebe cluster running inside Kubernetes clusters. Zeebe clusters have their own lifecycle and in real implementations, the need to update, monitor, and manage some of these cluster components while applications are running becomes challenging. The objective of the Zeebe Kubernetes Operator is to simplify and natively integrate Zeebe with Kubernetes, to solve operational burden and facilitate the creation and maintenance of a set of clusters. 
@@ -72,7 +73,7 @@ kubectl get pods -n <Zeebe_Cluster_Name> -w
 
 The next video show these commands in action along with the installation of the Zeebe Kubernetes Operator:
 
-[![](./assets/zeebe-operator-video.png)](https://www.youtube.com/watch?v=U-crhMfuJgY)
+[![commands and installation of the Zeebe Kubernetes Operator](./assets/zeebe-operator-video.png)](https://www.youtube.com/watch?v=U-crhMfuJgY)
 
 
 ## Technical details and dependencies

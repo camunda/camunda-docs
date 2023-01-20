@@ -13,6 +13,7 @@ A complex and searchable tag based component providing multi-selection for large
 - **Field label**: Label displayed on top of the taglist.
 - **Field description**: Description provided below the taglist.
 - **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
+- **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the taglist.
 - **Options source**: Taglists can be configured with an options source defining the individual choices your user can make, see [options source docs](../configuration/forms-config-options.md).
 - **Disabled**: Disables the taglist, for use during development.
 

@@ -850,7 +850,7 @@ can invoke the Connectors. The Connector SDK provides a
 
 The SDK comes with a pre-packaged runtime environment that allows you to run select Connector runtimes
 as local job workers out-of-the-box. You can find this Java application on
-[Maven Central](https://search.maven.org/artifact/io.camunda/spring-zeebe-connector-runtime).
+[Maven Central](https://repo1.maven.org/maven2/io/camunda/spring-zeebe-connector-runtime).
 
 Refer to the [Self-Managed installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to
 set up this runtime environment.

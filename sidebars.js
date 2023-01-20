@@ -39,6 +39,7 @@ module.exports = {
             "guides/update-guide/connectors/introduction",
             "guides/update-guide/connectors/010-to-020",
             "guides/update-guide/connectors/020-to-030",
+            "guides/update-guide/connectors/030-to-040",
           ],
         },
         "guides/update-guide/800-to-810",
@@ -220,7 +221,9 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
+            "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
@@ -228,7 +231,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
           ],
-          "Integration Framework": [
+          "Custom Connectors": [
             "components/connectors/custom-built-connectors/connector-templates",
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
