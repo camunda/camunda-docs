@@ -99,21 +99,23 @@ Using this in other areas can lead to unexpected results and incidents.
 
 ## Response mapping
 
-Some connectors have a `Response Mapping` section that typically consists of two fields: (1) `Result Variable` and (2) `Result Expression`.
-These fields are used to export response from an external connector call into process variables.
+Some Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
 
 ### Result Variable
 
-This field declares a single process variable to export response from a connector call. You are able to use this process variable further in the process.
+This field declares a single process variable to export responses from a Connector call. You are able to use this process variable further in the process.
 
 ### Result Expression
 
-This field allows to map a connector response into multiple process variable which you are able to use further in the process. You can also transform the extracted values using [FEEL expressions](../concepts/expressions.md).
-Please, keep in mind, while using this field, a process variable with name `response` is reserved.
+This field allows you to map a Connector response into multiple process variables which you are able to use further in the process. You can also transform the extracted values using [FEEL expressions](../concepts/expressions.md).
+
+:::note
+While using this field, a process variable with the name `response` is reserved.
+:::
 
 ### Example
 
-Given your connector makes an external call to an arbitrary weather service. The weather service returns the following response:
+Imagine your Connector makes an external call to an arbitrary weather service. The weather service returns the following response:
 
 ```json
 {
@@ -143,9 +145,9 @@ Given your connector makes an external call to an arbitrary weather service. The
 }
 ```
 
-If you declare a variable `myWeatherResponse` in the `Result Variable` field, the whole response will be mapped to the declared variable.
+If you declare a variable `myWeatherResponse` in the `Result Variable` field, the entire response is mapped to the declared variable.
 
-Now, let's imagine that you wish to extract only temperature into a process variable `berlinWeather` and wind speed into `berlinWindSpeed`. Let's also imagine, you need weather in Fahrenheit declared in `berlinWeatherInFahrenheit`.
+Now, let's imagine that you wish to extract only temperature into a process variable `berlinWeather` and wind speed into `berlinWindSpeed`. Let's also imagine you need weather in fahrenheit declared in `berlinWeatherInFahrenheit`.
 
 In that case, you could declare `Result Expression` as follows:
 
