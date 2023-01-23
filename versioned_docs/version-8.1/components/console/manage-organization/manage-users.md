@@ -40,4 +40,4 @@ Depending on the plan to be used, the number of users that can be part of an org
 
 ## Restrictions
 
-In Enterprise plans, the hostname part of the email adress for invites can be restricted to meet your internal security policies. Please reach out to your Customer Success Manager to get this configured according to your needs.
+In Enterprise plans, the hostname section of the email address for invites can be restricted to meet your internal security policies. Contact your Customer Success Manager to get this configured according to your needs.
