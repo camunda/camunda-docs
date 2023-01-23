@@ -37,3 +37,7 @@ People who do not yet have a Camunda Platform 8 account can also be invited to a
 ## Limitations
 
 Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional Plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
+
+## Restrictions
+
+In Enterprise plans, the hostname part of the email adress for invites can be restricted to meet your internal security policies. Please reach out to your Customer Success Manager to get this configured according to your needs.
