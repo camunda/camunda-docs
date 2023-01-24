@@ -349,3 +349,14 @@ span.callout + p::after {
 .dmn-decision-table-container .tjs-table {
   width: 100%;
 }
+
+.theme-doc-markdown img {
+  border-style: solid;
+  border-color: lightgray;
+  border-width: 1px;
+  box-shadow: 4px 4px 4px 4px lightgray;
+}
+
+.theme-doc-markdown table img {
+  border: none;
+}
