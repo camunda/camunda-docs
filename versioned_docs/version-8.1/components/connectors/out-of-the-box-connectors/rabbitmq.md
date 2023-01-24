@@ -64,16 +64,18 @@ To connect with credentials, take the following steps:
 
 ## Routing data
 
-In the **Routing** section you must set the routing data attributes:
-For a **URI** type connection, the required fields are `exchange` and `routingKey`.
-For a **Credentials** type connection, the required fields are `exchange`, `routingKey`, `virtualHost`, `hostName`, and `port`.
+In the **Routing** section, you must set the routing data attributes:
 
-- Go to [RabbitMQ Exchanges, routing keys and bindings documentation](https://www.cloudamqp.com/blog/part4-rabbitmq-for-beginners-exchanges-routing-keys-bindings.html) for learn more about RabbitMQ exchanges and routing keys.
-- Go to [RabbitMQ virtual host documentation](https://www.rabbitmq.com/vhosts.html) for learn more about RabbitMQ virtual hosts.
-- Go to [RabbitMQ networking documentation](https://www.rabbitmq.com/networking.html) for learn more about configuration RabbitMQ host and port.
+- For a **URI** type connection, the required fields are `exchange` and `routingKey`.
+  ![connectors-rabbitmq-routing](../img/connectors-rabbitmq-routing-uri.png)
+- For a **Credentials** type connection, the required fields are `exchange`, `routingKey`, `virtualHost`, `hostName`, and `port`.
+  ![connectors-rabbitmq-routing](../img/connectors-rabbitmq-routing-cred.png)
 
-![connectors-rabbitmq-routing](../img/connectors-rabbitmq-routing-uri.png)
-![connectors-rabbitmq-routing](../img/connectors-rabbitmq-routing-cred.png)
+Refer to the RabbitMQ documentation to learn about routing attributes:
+
+- [Exchanges, routing keys, and bindings](https://www.cloudamqp.com/blog/part4-rabbitmq-for-beginners-exchanges-routing-keys-bindings.html)
+- [Virtual hosts](https://www.rabbitmq.com/vhosts.html)
+- [Networking, host, and port configuration](https://www.rabbitmq.com/networking.html)
 
 ## Message
 
