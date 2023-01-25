@@ -64,36 +64,18 @@ To connect with credentials, take the following steps:
 
 ## Routing data
 
-In the **Routing** section you must set the routing data attributes (you can either use JSON or a [FEEL](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/) expression):
+In the **Routing** section, you must set the routing data attributes:
 
-JSON :
+- For a **URI** type connection, the required fields are `exchange` and `routingKey`.
+  ![connectors-rabbitmq-routing](../img/connectors-rabbitmq-routing-uri.png)
+- For a **Credentials** type connection, the required fields are `exchange`, `routingKey`, `virtualHost`, `hostName`, and `port`.
+  ![connectors-rabbitmq-routing](../img/connectors-rabbitmq-routing-cred.png)
 
-```json
-{
-  "exchange": "<your-rabbitmq-exchange-name>",
-  "routingKey": "<your-rabbitmq-routing-key-name>",
-  "virtualHost": "<your-rabbitmq-virtual-host-name>",
-  "hostName": "<your-rabbitmq-host-name-or-ip-address>",
-  "port": "<your-rabbitmq-port-number>"
-}
-```
+Refer to the RabbitMQ documentation to learn about routing attributes:
 
-FEEL :
-
-```
-{
-  exchange: "<your-rabbitmq-exchange-name>",
-  routingKey: "<your-rabbitmq-routing-key-name>",
-  virtualHost: "<your-rabbitmq-virtual-host-name>",
-  hostName: "<your-rabbitmq-host-name-or-ip-address>",
-  port: "<your-rabbitmq-port-number>"
-}
-```
-
-For a **URI** type connection, the required fields are `exchange` and `routingKey`.
-For a **Credentials** type connection, the required fields are `exchange`, `routingKey`, `virtualHost`, `hostName`, and `port`.
-
-![connectors-rabbitmq-routing](../img/connectors-rabbitmq-routing.png)
+- [Exchanges, routing keys, and bindings](https://www.cloudamqp.com/blog/part4-rabbitmq-for-beginners-exchanges-routing-keys-bindings.html)
+- [Virtual hosts](https://www.rabbitmq.com/vhosts.html)
+- [Networking, host, and port configuration](https://www.rabbitmq.com/networking.html)
 
 ## Message
 

@@ -12,4 +12,4 @@ However, we encourage you to provide feedback via your designated support channe
 :::
 
 Currently, we support an installation of Web Modeler Self-Managed with Docker and Docker Compose.
-Refer to the [installation guide](../../platform-deployment/docker.md) for more details.
+Refer to the [installation guide](../../platform-deployment/docker.md#web-modeler) for more details.
