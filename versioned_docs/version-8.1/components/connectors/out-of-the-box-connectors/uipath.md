@@ -69,10 +69,10 @@ Find more information about the OAuth client credentials flow at the [RFC refere
 This operation allows you to create a new item and add it to a queue from UIPath Orchestrator. In order to execute it, you need to take the following steps:
 
 1. Select the operation 'Add Queue Item' from 'Operation type' dropdown list.
-2. Configure authentication as described in section [Authentication](#Authentication)
-3. Fill input fields as described in section [Configuration](#Configuration)
+2. Configure authentication as described in section [Authentication](#authentication)
+3. Fill input fields as described in section [Configuration](#configuration)
 4. Fill input fields as described in section [Input] (#Input)
-5. Fill response mapping as described in section [[Add Queue Item response]](#Add-Queue-Item-response)
+5. Fill response mapping as described in section [[Add Queue Item response]](#add-queue-item-response)
 
 ![UIPath Connector - Add Queue Item](../img/connectors-uipath-add-queue-item.png)
 
@@ -113,7 +113,7 @@ The operation **Add Queue Item** returns information about the newly created ite
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value '{itemId: response.body.Id}'. If you want to use operation 'Get Queue Item result by ID', you need an itemId. This expression will add it in the context for you. See more in section [Get Queue Item result by ID](#Get-Queue-Item-result-by-ID)
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value '{itemId: response.body.Id}'. If you want to use operation 'Get Queue Item result by ID', you need an itemId. This expression will add it in the context for you. See more in section [Get Queue Item result by ID](#get-queue-item-result-by-id)
 
 Response example:
 
@@ -174,8 +174,8 @@ Response example:
 This operation allows you get the information related to a certain item from your UIPath Orchestrator. In order to execute it, you need to take the following steps:
 
 1. Select the operation 'Get Queue Item result by ID' from the dropdown list 'Operation type'.
-2. Configure authentication as described in section [Authentication](#Authentication)
-3. Fill response mapping as described in section [UIPath Connector response](#UIPath-Connector-response)
+2. Configure authentication as described in section [Authentication](#authentication)
+3. Fill response mapping as described in section [Get Queue Item result by ID response](#get-queue-item-result-by-id-response)
 
 ![UIPath Connector - Get Queue Item result by ID](../img/connectors-uipath-get-queue-item-result-by-id.png)
 
@@ -236,7 +236,7 @@ Response example:
             "CreationTime":"2023-01-20T10:13:20.66Z",
             "RowVersion":"AAAAAE2f4GY=",
             "OrganizationUnitId":1964413,
-            "OrganizationUnitFullyQualifiedName":"mirabela.biciin-ext@camunda.com's workspace",
+            "OrganizationUnitFullyQualifiedName":"MyCorporateWorkspace",
             "Id":436141352,
             "SpecificContent":{
                "test":"test"
