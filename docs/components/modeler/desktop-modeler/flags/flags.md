@@ -26,20 +26,20 @@ Flags passed as command line arguments take precedence over those configured via
 
 ## Available Flags
 
-| flag                         | default value                       |
-| ---------------------------- | ----------------------------------- |
-| "disable-plugins"            | false                               |
-| "disable-adjust-origin"      | false                               |
-| "disable-cmmn"               | true                                |
-| "disable-dmn"                | false                               |
-| "disable-form"               | false                               |
-| "disable-platform"           | false                               |
-| "disable-zeebe"              | false                               |
-| "disable-remote-interaction" | false                               |
-| "single-instance"            | false                               |
-| "user-data-dir"              | [Electron default](../search-paths) |
-| "display-version"            | `undefined`                         |
-| "zeebe-ssl-certificate"      | `undefined`                         |
+| flag                                               | default value                       |
+| -------------------------------------------------- | ----------------------------------- |
+| "disable-plugins"                                  | false                               |
+| "disable-adjust-origin"                            | false                               |
+| "disable-cmmn"                                     | true                                |
+| "disable-dmn"                                      | false                               |
+| "disable-form"                                     | false                               |
+| "disable-platform"                                 | false                               |
+| "disable-zeebe"                                    | false                               |
+| "disable-remote-interaction"                       | false                               |
+| "single-instance"                                  | false                               |
+| "user-data-dir"                                    | [Electron default](../search-paths) |
+| ["display-version"](#custom-display-version-label) | `undefined`                         |
+| ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)  | `undefined`                         |
 
 ## Examples
 
@@ -72,12 +72,14 @@ To display a custom version information in the status bar of the app, configure 
 
 ### Zeebe SSL certificate
 
-To use a self-signed certificate to connect to Camunda Platform 8 Self-Managed, configure your `flags.json` like this:
+> ℹ️ The Modeler will read trusted certificates from your operating systems trust store.
+
+Provide an additional root certificate that the modeler should use to validate secured connections to a Camunda Platform 8 Self-Managed installation. In case your server certificate is signed by a signing authority, configure the CA certificate here, not the server certificate.
+
+Configure your `flags.json` like this:
 
 ```js
 {
-    "zeebe-ssl-certificate": "/Users/local/certificate.pem"
+    "zeebe-ssl-certificate": "/Users/local/trusted-custom-root.pem"
 }
 ```
-
-As a result, the app will use the certificate to securely connect to the gateway.
