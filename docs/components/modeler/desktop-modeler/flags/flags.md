@@ -72,14 +72,16 @@ To display a custom version information in the status bar of the app, configure 
 
 ### Zeebe SSL certificate
 
-> ℹ️ The Modeler will read trusted certificates from your operating systems trust store.
+> :information_source: The Modeler will read trusted certificates from your operating system's trust store.
 
-Provide an additional root certificate that the modeler should use to validate secured connections to a Camunda Platform 8 Self-Managed installation. In case your server certificate is signed by a signing authority, configure the CA certificate here, not the server certificate.
-
-Configure your `flags.json` like this:
+Provide additional certificates to validate secured connections to a Camunda Platform 8 installation. Configure your `flags.json` like this:
 
 ```js
 {
     "zeebe-ssl-certificate": "/Users/local/trusted-custom-root.pem"
 }
 ```
+
+Additional information adapted from the [upstream documentation](https://nodejs.org/docs/latest/api/tls.html#tlscreatesecurecontextoptions):
+
+> The peer (Camunda Platform 8) certificate must be chainable to a CA trusted by the app for the connection to be authenticated. When using certificates that are not chainable to a well-known CA, the certificate's CA must be explicitly specified as trusted or the connection will fail to authenticate. If the peer uses a certificate that doesn't match or chain to one of the default CAs, provide a CA certificate that the peer's certificate can match or chain to. For self-signed certificates, the certificate is its own CA, and must be provided.
