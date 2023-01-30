@@ -286,6 +286,128 @@ Returned if:
 - The given variables argument is not a valid JSON document; it is expected to be a valid
   JSON document where the root node is an object.
 
+### `EvaluateDecision` RPC
+
+Evaluates a decision. You specify the decision to evaluate either by
+using its unique KEY (as returned by DeployResource), or using the decision
+ID. When using the decision ID, the latest deployed version of the decision
+is used.
+
+:::note
+When you specify both the decision ID and KEY, the ID is used to find the decision to be evaluated.
+:::
+
+#### Input: `EvaluateDecisionRequest`
+
+```protobuf
+message EvaluateDecisionRequest {
+  // the unique key identifying the decision to be evaluated (e.g. returned
+  // from a decision in the DeployResourceResponse message)
+  int64 decisionKey = 1;
+  // the ID of the decision to be evaluated
+  string decisionId = 2;
+  // JSON document that will instantiate the variables for the decision to be
+  // evaluated; it must be a JSON object, as variables will be mapped in a
+  // key-value fashion, e.g. { "a": 1, "b": 2 } will create two variables,
+  // named "a" and "b" respectively, with their associated values.
+  // [{ "a": 1, "b": 2 }] would not be a valid argument, as the root of the
+  // JSON document is an array and not an object.
+  string variables = 3;
+}
+```
+
+#### Output: `EvaluateDecisionResponse`
+
+```protobuf
+message EvaluateDecisionResponse {
+  // the unique key identifying the decision which was evaluated (e.g. returned
+  // from a decision in the DeployResourceResponse message)
+  int64 decisionKey = 1;
+  // the ID of the decision which was evaluated
+  string decisionId = 2;
+  // the name of the decision which was evaluated
+  string decisionName = 3;
+  // the version of the decision which was evaluated
+  int32 decisionVersion = 4;
+  // the ID of the decision requirements graph that the decision which was
+  // evaluated is part of.
+  string decisionRequirementsId = 5;
+  // the unique key identifying the decision requirements graph that the
+  // decision which was evaluated is part of.
+  int64 decisionRequirementsKey = 6;
+  // JSON document that will instantiate the result of the decision which was
+  // evaluated; it will be a JSON object, as the result output will be mapped
+  // in a key-value fashion, e.g. { "a": 1 }.
+  string decisionOutput = 7;
+  // a list of decisions that were evaluated within the requested decision evaluation
+  repeated EvaluatedDecision evaluatedDecisions = 8;
+  // an optional string indicating the ID of the decision which
+  // failed during evaluation
+  string failedDecisionId = 9;
+  // an optional message describing why the decision which was evaluated failed
+  string failureMessage = 10;
+}
+
+message EvaluatedDecision {
+  // the unique key identifying the decision which was evaluated (e.g. returned
+  // from a decision in the DeployResourceResponse message)
+  int64 decisionKey = 1;
+  // the ID of the decision which was evaluated
+  string decisionId = 2;
+  // the name of the decision which was evaluated
+  string decisionName = 3;
+  // the version of the decision which was evaluated
+  int32 decisionVersion = 4;
+  // the type of the decision which was evaluated
+  string decisionType = 5;
+  // JSON document that will instantiate the result of the decision which was
+  // evaluated; it will be a JSON object, as the result output will be mapped
+  // in a key-value fashion, e.g. { "a": 1 }.
+  string decisionOutput = 6;
+  // the decision rules that matched within this decision evaluation
+  repeated MatchedDecisionRule matchedRules = 7;
+  // the decision inputs that were evaluated within this decision evaluation
+  repeated EvaluatedDecisionInput evaluatedInputs = 8;
+}
+
+message EvaluatedDecisionInput {
+  // the id of the evaluated decision input
+  string inputId = 1;
+  // the name of the evaluated decision input
+  string inputName = 2;
+  // the value of the evaluated decision input
+  string inputValue = 3;
+}
+
+message EvaluatedDecisionOutput {
+  // the id of the evaluated decision output
+  string outputId = 1;
+  // the name of the evaluated decision output
+  string outputName = 2;
+  // the value of the evaluated decision output
+  string outputValue = 3;
+}
+
+message MatchedDecisionRule {
+  // the id of the matched rule
+  string ruleId = 1;
+  // the index of the matched rule
+  int32 ruleIndex = 2;
+  // the evaluated decision outputs
+  repeated EvaluatedDecisionOutput evaluatedOutputs = 3;
+}
+```
+
+#### Errors
+
+##### GRPC_STATUS_INVALID_ARGUMENT
+
+Returned if:
+
+- no decision with the given key exists (if decisionKey was given)
+- no decision with the given decision ID exists (if decisionId was given)
+- both decision ID and decision KEY were provided, or are missing
+
 ### `DeployResource` RPC
 
 Deploys one or more resources (e.g. processes or decision models) to Zeebe.
