@@ -12,6 +12,10 @@ User tasks need an interaction from the user. This can be updating, adding varia
 
 If the user claimed a task, the task can be completed. Different task status filters help the user choose the desired task.
 
+:::note
+When a user is granted Tasklist access, the user has full access to the respective process instance data.
+:::
+
 ## Example use case
 
 If you've successfully logged in, you'll see a screen similar to the following:

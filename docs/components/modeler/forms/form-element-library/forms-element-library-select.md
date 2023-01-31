@@ -14,6 +14,7 @@ A Select dropdown allowing the user to select one of multiple data option from l
 - **Field description**: Description provided below the select.
 - **Key**: Binds the selected value to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default selection in case no input data exists for the given key. Only available for _static_ options sources.
+- **Searchable**: Allows the select entries to be searched via keyboard.
 - **Disabled**: Disables the select, for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the select.
 - **Options source**: Selects can be configured with an options source defining the individual choices the select provides, see [options source docs](../configuration/forms-config-options.md).

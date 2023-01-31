@@ -42,6 +42,7 @@ module.exports = {
             "guides/update-guide/connectors/030-to-040",
           ],
         },
+        "guides/update-guide/810-to-820",
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
         "guides/update-guide/120-to-130",
@@ -1043,6 +1044,7 @@ module.exports = {
         {
           "Web Modeler (Beta)": [
             "self-managed/modeler/web-modeler/installation",
+            "self-managed/modeler/web-modeler/configuration",
             "self-managed/modeler/web-modeler/api",
           ],
         },
