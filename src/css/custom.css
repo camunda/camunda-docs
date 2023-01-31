@@ -296,7 +296,10 @@ navbar .navbar .navbar__link[href*="self-managed"] {
 
 div[class^="announcementBar_"] {
   font-size: 120%;
-  padding: 1em;
+  padding: 1em 0;
+}
+div[class^="announcementBar_"] button {
+  align-self: center;
 }
 
 /* Styles for BPMN.io integration and callouts in these models */
@@ -348,4 +351,16 @@ span.callout + p::after {
 }
 .dmn-decision-table-container .tjs-table {
   width: 100%;
+}
+
+.theme-doc-markdown img {
+  border-style: solid;
+  border-color: lightgray;
+  border-width: 1px;
+  box-shadow: 4px 4px 4px 1px lightgray;
+}
+
+.theme-doc-markdown table img {
+  border: none;
+  box-shadow: none;
 }
