@@ -21,7 +21,7 @@ The following table shows each plan and available type or size of cluster:
 
 ## Production clusters
 
-Production clusters come in three sizes: Small (S), Medium (M), Large (L). To learn more about the size of cluster right for your use case, see our Best Practices for more information on Sizing your [runtime environment](/components/best-practices/architecture/sizing-your-environment#sizing-your-runtime-environment).
+Production clusters come in three sizes: Small (S), Medium (M), Large (L). To learn more about the size of cluster right for your use case, see our Best Practices for more information on Sizing your [runtime environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
 
 When you deploy and execute your BPMN or DMN models on a production cluster, this might impact your monthly (Professional) or annual (Enterprise) total fee, i.e. the more you execute your models, the higher your total fee might be.
 
