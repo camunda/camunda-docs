@@ -35,6 +35,16 @@ This will give you a single broker node with the following ports exposed:
 - `26501`: Command API (internal, gateway-to-broker)
 - `26502`: Internal API (internal, broker-to-broker)
 
+### Multi-platform support
+
+With the Camunda Platform 8.2.0 release and onward, all Camunda Platform 8 Docker images are provided as multi-platform images natively supporting the following platforms:
+
+- `linux/amd64`
+- `linux/arm64`
+
+Your Docker client should automatically pull the image that suits your platform.
+We currently only recommend the `linux/amd64` for production usage, as the `linux/arm64` image is provided mainly for development purposes.
+
 ### Web Modeler
 
 :::caution Beta offering
