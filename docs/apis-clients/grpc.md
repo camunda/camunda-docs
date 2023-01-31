@@ -404,9 +404,9 @@ message MatchedDecisionRule {
 
 Returned if:
 
-- no decision with the given key exists (if decisionKey was given)
-- no decision with the given decision ID exists (if decisionId was given)
-- both decision ID and decision KEY were provided, or are missing
+- No decision with the given key exists (if decisionKey was given).
+- No decision with the given decision ID exists (if decisionId was given).
+- Both decision ID and decision KEY were provided, or are missing.
 
 ### `DeployResource` RPC
 
