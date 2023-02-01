@@ -5,6 +5,12 @@ description: "How to perform a backup and restore of Operate and Tasklist data."
 keywords: ["backup", "backups"]
 ---
 
+:::note
+This release introduces breaking changes, including the [get backup state API and response codes](#get-backup-state-api), [get backups list API](#get-backups-list-api), and notably the utilized URL.
+
+For example, `curl 'http://localhost:8080/actuator/backups'` rather than the previously used `backup`.
+:::
+
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
 Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an id of `backup1` may contain the following Elasticsearch snapshots:
 
