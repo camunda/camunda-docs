@@ -24,7 +24,7 @@ ZEEBE_CLIENT_CLOUD_CLIENT-SECRET=xxx
 ZEEBE_CLIENT_CLOUD_REGION=bru-2
 ```
 
-You can further configure separate connection properties for Camunda Operate (othewise it will use the properties configured for Zeebe above):
+You can further configure separate connection properties for Camunda Operate (otherwise it will use the properties configured for Zeebe above):
 
 ```bash
 CAMUNDA_OPERATE_CLIENT_CLIENT-ID=xxx
@@ -48,16 +48,27 @@ CAMUNDA_OPERATE_CLIENT_USERNAME=demo
 CAMUNDA_OPERATE_CLIENT_PASSWORD=demo
 ```
 
-When running against a Self-Managed environment, you might also need to configure the Keycloak endpoint to not use Operate username/password authentication:
+When running against a self-managed environment you might also need to configure the Keycloak endpoint to not use Operate username/password authentication:
 
 ```bash
 CAMUNDA_OPERATE_CLIENT_KEYCLOAK-URL=http://localhost:18080
 CAMUNDA_OPERATE_CLIENT_KEYCLOAK-REALM=camunda-platform
 ```
 
+### Disable Operate connectivity
+
+Disabling Operate polling will lead to inability to use inbound (e.g., webhook) capabilities.
+However, if you still wish to do so, you need to start your Connectors runtime with the following environment variables:
+
+```bash
+CAMUNDA_CONNECTOR_POLLING_ENABLED=false
+CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false
+SPRING_MAIN_WEB-APPLICATION-TYPE=none
+```
+
 ## Manual discovery of Connectors
 
-By default, the Connector runtime picks up outbound Connectors available on the `classpath` automatically.
+By default, the Connector runtime picks up outbound Connectors available on the classpath automatically.
 To disable this behavior, use the following environment variables to configure Connectors and their configuration explicitly:
 
 | Environment variable                          | Purpose                                                       |
@@ -87,11 +98,11 @@ For example, you can inject secrets when running a container:
 
 ```bash
 docker run --rm --name=connectors -d \
-           -v $PWD/connector.jar:/opt/app/ \  # Add a connector jar to the classpath
-           -e MY_SECRET=secret \              # Set a secret with value
-           -e SECRET_FROM_SHELL \             # Set a secret from the environment
-           --env-file secrets.txt \           # Set secrets from a file
-           camunda/connectors:0.3.0
+  -v $PWD/connector.jar:/opt/app/connector.jar \                      # Add a connector jar to the classpath
+  --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
+  -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
+  -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
+  camunda/connectors:0.5.0
 ```
 
 The secret `MY_SECRET` value is specified directly in the `docker run` call,
@@ -124,7 +135,11 @@ Your secret provider will serve secrets as implemented.
 For Docker images, you can add the JAR by using volumes, for example:
 
 ```bash
-docker run --rm --name=connectors -d -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/ camunda/connectors:0.3.0
+docker run --rm --name=connectors -d \
+  -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/my-secret-provider-with-dependencies.jar \  # Specify secret provider
+  -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \                                    # Specify Zeebe address
+  -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                                                             # Optional: provide security configs to connect to Zeebe
+  camunda/connectors:0.5.0
 ```
 
 In manual installations, add the JAR to the `-cp` argument of the Java call:
