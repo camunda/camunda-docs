@@ -84,6 +84,25 @@ You’ll know Zeebe has started successfully when you see a message similar to t
 [exporter] [0.0.0.0:26501-zb-actors-1] INFO  io.camunda.zeebe.broker.exporter.elasticsearch - Exporter opened
 ```
 
+You can test the Zeebe Gateway by asking for the cluster topology with [zbtcl](/docs/apis-clients/cli-client/#usage):
+
+```bash
+./bin/zbctl --insecure status
+```
+
+`zbctl status` should produce an output like this:
+
+```
+Cluster size: 1
+Partitions count: 1
+Replication factor: 1
+Gateway version: 8.1.6
+Brokers:
+  Broker 0 - 0.0.0.0:26501
+    Version: 8.1.6
+    Partition 1 : Leader, Healthy
+```
+
 ## Run Operate
 
 To run Operate, execute the following command:
