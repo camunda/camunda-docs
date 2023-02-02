@@ -42,6 +42,7 @@ module.exports = {
         routeBasePath: "optimize",
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
+        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
       },
     ],
   ],
