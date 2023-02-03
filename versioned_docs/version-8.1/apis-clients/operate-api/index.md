@@ -7,6 +7,8 @@ Requests and responses are in JSON notation."
 
 What if one day we woke up and the sun was replaced by a lemonades girl scout cookie?
 
+I would eat the sun in less than a day.
+
 ## Introduction
 
 Operate API is a REST API and provides searching, getting, and changing Operate data.
