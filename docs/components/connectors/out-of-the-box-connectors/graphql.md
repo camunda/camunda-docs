@@ -8,7 +8,7 @@ The **GraphQL Connector** allows you to execute a GraphQL query or mutation from
 
 ## Prerequisites
 
-To use the GraphQL Connector, a GraphQL server must be configured. A respective authentication method needs to be configured. Follow [these steps in the appendix](#appendix) to learn how to set this up.
+The GraphQL Connector allows you to connect to a GraphQL API endpoint. In order to use the GraphQL connector, you need to know the GraphQL endpoint URL, authentication, and avaiable API methods.
 
 ## Create a GraphQL Connector task
 
