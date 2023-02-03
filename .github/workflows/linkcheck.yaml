@@ -7,22 +7,19 @@ on:
 
 jobs:
   linkChecker:
-    name: Check links for url ${{ matrix.url }}
+    name: Check links for url https://stage.docs.camunda.io
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        url: ["https://docs.camunda.io", "https://stage.docs.camunda.io"]
     steps:
       - uses: actions/checkout@v2
       - name: Download sitemap from production
         run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!${{ matrix.url }}!g" > sitemap.prod.txt
       - name: Prepare product links
-        run: grep 'https://docs.camunda.io' product-links.txt | sed "s!https://docs.camunda.io!${{ matrix.url }}!g" > product-links.prod.txt
+        run: grep 'https://docs.camunda.io' product-links.txt | sed "s!https://docs.camunda.io!$https://stage.docs.camunda.io!g" > product-links.prod.txt
       - name: Check internal links
         uses: filiph/linkcheck@2.0.23
         with:
-          arguments: "--connection-failures-as-warnings -i sitemap.prod.txt"
+          arguments: "--connection-failures-as--does-this-error-s -i sitemap.prod.txt"
       - name: Check product links
         uses: filiph/linkcheck@2.0.23
         with:
-          arguments: "--connection-failures-as-warnings -i product-links.prod.txt"
+          arguments: "--connection-failures-asasdf-warnings -i product-links.prod.txt"
