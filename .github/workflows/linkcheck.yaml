@@ -19,10 +19,10 @@ jobs:
       - name: Prepare product links
         run: grep 'https://docs.camunda.io' product-links.txt | sed "s!https://docs.camunda.io!${{ matrix.url }}!g" > product-links.prod.txt
       - name: Check internal links
-        uses: filiph/linkcheck@v2.0.23
+        uses: filiph/linkcheck@2.0.23
         with:
           arguments: "--connection-failures-as-warnings -i sitemap.prod.txt"
       - name: Check product links
-        uses: filiph/linkcheck@v2.0.23
+        uses: filiph/linkcheck@2.0.23
         with:
           arguments: "--connection-failures-as-warnings -i product-links.prod.txt"

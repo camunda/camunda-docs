@@ -46,10 +46,10 @@ jobs:
         with:
           url: "http://${{ env.container_ip }}:8080/"
       - name: Check internal links
-        uses: filiph/linkcheck@v2.0.23
+        uses: filiph/linkcheck@2.0.23
         with:
           arguments: "-i sitemap.prod.txt"
       - name: Check product links
-        uses: filiph/linkcheck@v2.0.23
+        uses: filiph/linkcheck@2.0.23
         with:
           arguments: "-i product-links.prod.txt"
