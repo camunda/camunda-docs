@@ -79,10 +79,6 @@ We can then already continue with the follow-up work regardless of whether that 
 
 ### Termination events
 
-:::caution Camunda Platform 7 Only
-Termination events are [not yet supported in Camunda Platform 8](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/) and only available in Camunda Platform 7.
-:::
-
 To build flexibility into process models, it is also useful to remember that the termination event just terminates the scope within which it is defined and therefore _not_ always the whole process instance. With that technique, it becomes possible to cancel some activities inside a subprocess while completing it successfully and leaving it via the "normal" outgoing path.
 
 <div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/termination.bpmn" callouts="termination,followup" />

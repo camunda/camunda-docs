@@ -6,7 +6,9 @@ keywords: ["backup", "backups"]
 ---
 
 :::note
-This API is subject to change.
+This release introduces breaking changes, including the utilized URL.
+
+For example, `curl 'http://localhost:8080/actuator/backups'` rather than the previously used `backup`.
 :::
 
 Optimize stores its data over multiple indices in Elasticsearch. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a backup ID. For example, a backup with id `backup1` consists of the following Elasticsearch snapshots:
