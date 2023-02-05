@@ -8,7 +8,7 @@ The **UIPath Connector** allows you to orchestrate an UIPath bot from your BPMN 
 
 ## Prerequisites
 
-To use the UIPath Connector, you need have an [UIPath] (https://cloud.uipath.com) account and configure your organization settings. See the [Automation Cloud Guide](https://docs.uipath.com/automation-cloud/docs/introduction) to learn more.
+To use the UIPath Connector, you need have an [UIPath](https://cloud.uipath.com) account and configure your organization settings. See the [Automation Cloud Guide](https://docs.uipath.com/automation-cloud/docs/introduction) to learn more.
 
 ## Create a UIPath Connector task
 
@@ -16,7 +16,7 @@ To use a **UIPath Connector** in your process, either change the type of existin
 
 ## Operation types
 
-UIPath Connector supports two operation types: 'Add Queue Item' and 'Get Queue Item result by ID'. You can select the one that you need from the 'Operation type' dropdown list .
+UIPath Connector currently supports two operation types: _Add queue item_ and _Get queue item result by ID_. You can select the one that you need from the **Operation type** dropdown list .
 
 ![UIPath Connector operations](../img/connectors-uipath-operations.png)
 
@@ -24,7 +24,7 @@ UIPath Connector supports two operation types: 'Add Queue Item' and 'Get Queue I
 
 You can choose among the available UIPath Connector authentication types according to your authentication requirements.
 
-### UIPath Connector (Bearer Token)
+### UIPath Connector (bearer token)
 
 #### Create a new Connector secret
 
@@ -33,7 +33,7 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `BEARER_TOKEN_UIPATH`) so you can reference it later in the Connector.
 
-#### Configure the Bearer Token
+#### Configure the bearer token
 
 Select the **UIPath Connector** and fill out the following properties under the **Authentication** section:
 
@@ -64,15 +64,15 @@ Select the **UIPath Connector** and fill out the following properties under the 
 
 Find more information about the OAuth client credentials flow at the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
-### Add Queue Item
+### Add queue item
 
 This operation allows you to create a new item and add it to a queue from UIPath Orchestrator. In order to execute it, you need to take the following steps:
 
-1. Select the operation 'Add Queue Item' from 'Operation type' dropdown list.
-2. Configure authentication as described in section [Authentication](#authentication)
-3. Fill input fields as described in section [Configuration](#configuration)
-4. Fill input fields as described in section [Input] (#Input)
-5. Fill response mapping as described in section [[Add Queue Item response]](#add-queue-item-response)
+1. Select the operation _Add queue item_ from _Operation type_ dropdown list.
+2. Configure authentication as described in the section [authentication](#authentication)
+3. Fill input fields as described in the section [configuration](#configuration)
+4. Fill input fields as described in the section [input](#input)
+5. Fill response mapping as described in the section [add queue item response](#add-queue-item-response)
 
 ![UIPath Connector - Add Queue Item](../img/connectors-uipath-add-queue-item.png)
 
@@ -80,10 +80,10 @@ This operation allows you to create a new item and add it to a queue from UIPath
 
 For this section, you have to fill the following fields:
 
-1. Cloud Url - it comes with a default value 'cloud.uipath.com'. You can always change it, if needed.
-2. Cloud Org - fill it with the name of your organization. See [About organizations](https://docs.uipath.com/automation-cloud/docs/about-organizations) to learn more.
-3. Cloud Tenant - fill it with the name of the tenant. See [About tenants](https://docs.uipath.com/automation-cloud/docs/about-tenants) to learn more.
-4. Organization Unit Id - click on 'Orchestrator' and you will find the id in the URL as in the following example: 'https://cloud.uipath.com/testOrg/DefaultTenant/orchestrator_/?tid=26929&fid=1964513' where 'Organization Unit Id' is 1964513.
+1. **Cloud URL** - it comes with a default value `cloud.uipath.com`. You can always change it, if needed.
+2. **Cloud organization** - fill it with the name of your organization. See [about organizations](https://docs.uipath.com/automation-cloud/docs/about-organizations) to learn more.
+3. **Cloud tenant** - fill it with the name of the tenant. See [about tenants](https://docs.uipath.com/automation-cloud/docs/about-tenants) to learn more.
+4. **Organization Unit ID** - click on _Orchestrator_ and you will find the id in the URL as in the following example: `https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/?tid=26929&fid=112233` where the _Organization Unit ID_ is `112233`.
 
 ![UIPath Connector configuration](../img/connectors-uipath-configuration.png)
 
@@ -91,29 +91,29 @@ For this section, you have to fill the following fields:
 
 For this section, you have to fill the following fields:
 
-1. Queue Name - it is the queue where the QueueItem object is to be added. Check [Queues and transactions](https://docs.uipath.com/orchestrator/docs/about-queues-and-transactions) to learn more.
-2. (Optional) DeferDate - The earliest date and time at which the item is available for processing. If empty the item can be processed as soon as possible. Expected date format: 'yyyy-MM-dd'.
-3. (Optional) DueDate - The latest date and time at which the item should be processed. If empty the item can be processed at any given time. Expected date format: 'yyyy-MM-dd'.
-4. (Optional) Priority - select a value from the dropdown list. The priority level of the queue item to be added. This property is a criterion for the prioritization of queue items, alongside Deadline and Postpone.
-5. (Optional) Specific Content for UIPath Job - Data that will be passed in to the job. It should be in the JSON format.
+1. **Queue Name** - it is the queue where the QueueItem object is to be added. Check [queues and transactions](https://docs.uipath.com/orchestrator/docs/about-queues-and-transactions) to learn more.
+2. _(Optional)_ **Defer date** - the earliest date and time at which the item is available for processing. If empty the item can be processed as soon as possible. Expected date format: _yyyy-MM-dd_.
+3. _(Optional)_ **Due date** - the latest date and time at which the item should be processed. If empty the item can be processed at any given time. Expected date format: _yyyy-MM-dd_.
+4. _(Optional)_ **Priority** - select a value from the dropdown list. The priority level of the queue item to be added. This property is a criterion for the prioritization of queue items, alongside Deadline and Postpone.
+5. _(Optional)_ **Specific Content for UIPath Job** - data that will be passed in to the job. It should be in the JSON format.
 
 ```
-={
+= {
    "Name":"testItemName",
    "Value":"testItemValue"
  }
 ```
 
-6. (Optional) Reference - A string reference for the queue item.
+6. _(Optional)_ **Reference** - A string reference for the queue item.
 
-#### Add Queue Item response
+#### Add queue item response
 
 The operation **Add Queue Item** returns information about the newly created item in the queue.
 
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value '{itemId: response.body.Id}'. If you want to use operation 'Get Queue Item result by ID', you need an itemId. This expression will add it in the context for you. See more in section [Get Queue Item result by ID](#get-queue-item-result-by-id)
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value `{itemId: response.body.Id}`. If you want to use operation _Get queue item result by ID_, you would need an `itemId`. This expression will add it in the context for you. See more in section [Get queue item result by ID](#get-queue-item-result-by-id)
 
 Response example:
 
@@ -140,13 +140,13 @@ Response example:
       "x-content-type-options":"nosniff",
       "x-robots-tag":"noindex,nofollow",
       "content-type":"application/json; odata.metadata=minimal; odata.streaming=true",
-      "location":"https://cloud.uipath.com/camunda1/DefaultTenant/orchestrator_/odata/QueueItems(436141352)",
+      "location":"https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/odata/QueueItems(436141352)",
       "connection":"keep-alive",
       "cache-control":"no-cache, no-store, must-revalidate",
       "odata-version":"4.0"
    },
    "body":{
-      "@odata.context":"https://cloud.uipath.com/camunda1/DefaultTenant/orchestrator_/odata/$metadata#QueueItems/$entity",
+      "@odata.context":"https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/odata/$metadata#QueueItems/$entity",
       "QueueDefinitionId":165001,
       "Encrypted":false,
       "Status":"New",
@@ -160,7 +160,7 @@ Response example:
       "SpecificData":"{\"DynamicProperties\":{\"test\":\"test\"}}",
       "CreationTime":"2023-01-20T10:13:20.6603953Z",
       "RowVersion":"AAAAAE2f4GY=",
-      "OrganizationUnitId":1964413,
+      "OrganizationUnitId":112233,
       "Id":436141352,
       "SpecificContent":{
          "test":"test"
@@ -169,24 +169,24 @@ Response example:
 }
 ```
 
-### Get Queue Item result by ID
+### Get queue item result by ID
 
 This operation allows you get the information related to a certain item from your UIPath Orchestrator. In order to execute it, you need to take the following steps:
 
-1. Select the operation 'Get Queue Item result by ID' from the dropdown list 'Operation type'.
-2. Configure authentication as described in section [Authentication](#authentication)
-3. Fill response mapping as described in section [Get Queue Item result by ID response](#get-queue-item-result-by-id-response)
+1. Select the operation _Get Queue Item result by ID_ from the dropdown list **Operation type**.
+2. Configure authentication as described in the section [authentication](#authentication)
+3. Fill response mapping as described in the section [get queue item result by ID response](#get-queue-item-result-by-id-response)
 
 ![UIPath Connector - Get Queue Item result by ID](../img/connectors-uipath-get-queue-item-result-by-id.png)
 
-#### Get Queue Item result by ID response
+#### Get queue item result by ID response
 
-Given you have a queue item ID previously added to a queue, the operation **Get Queue Item result by ID** returns information about a certain item.
+Given you have a queue item ID previously added to a queue, the operation _Get queue item result by ID_ returns information about a certain item.
 
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value '{response.body.value[1].Status}'. You will see the 'itemStatus' in the process variables. Its value will let you know if the item was processed or not.
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value `{response.body.value[1].Status}`. You will see the `itemStatus` in the process variables. Its value will let you know if the item was processed or not.
 
 Response example:
 
@@ -218,7 +218,7 @@ Response example:
       "odata-version":"4.0"
    },
    "body":{
-      "@odata.context":"https://cloud.uipath.com/camunda1/DefaultTenant/orchestrator_/odata/$metadata#QueueItems",
+      "@odata.context":"https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/odata/$metadata#QueueItems",
       "@odata.count":1,
       "value":[
          {
@@ -246,3 +246,11 @@ Response example:
    }
 }
 ```
+
+## Appendix
+
+### Using UIPath Connector best practice
+
+There is no guarantee that a queue item will be processed right away. In that case, we suggest to utilize a BPMN polling loop pattern.
+
+![UIPath polling loop](../img/connectors-uipath-long-polling-pattern.png)
