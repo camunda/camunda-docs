@@ -126,6 +126,7 @@ module.exports = {
             {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
                 "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
               ],
             },
