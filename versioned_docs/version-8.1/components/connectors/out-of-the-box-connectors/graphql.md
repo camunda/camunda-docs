@@ -39,15 +39,15 @@ Click None in the Authentication section. No extra authentication configuration 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `GRAPHQL_BASIC_SECRET`) so you can reference it later in the Connector.
+2. Name your secret (i.e `GRAPHQL_PASSWORD`) so you can reference it later in the Connector.
 
 ### Configure Basic Authentication
 
 Select the **GraphQL Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Basic** in the **Authentication** section.
-2. Set **Username** (i.e. `secrets.YOUR_USERNAME`).
-3. Set **Password** to the secret you created (i.e. `secrets.GRAPHQL_BASIC_SECRET`).
+2. Set **Username** (i.e. `secrets.GRAPHQL_USERNAME`).
+3. Set **Password** to the secret you created (i.e. `secrets.GRAPHQL_PASSWORD`).
 
 ![graphql Connector basic](../img/connectors-graphql-basic.png)
 
@@ -209,4 +209,4 @@ Additionally, you can choose to unpack the content of your `response` into multi
 
 ![graphql connector http response mapping](../img/connectors-graphql-response-mapping.png)
 
-The next steps in your process will have access to the `graphqlQueryResponse` variable that will contain the full response and the mapped variables from the result expression: `person`.
+The next steps in your process will have access to the `graphqlQueryResponse` variable that will contain the full response and the mapped variable from the result expression: `person`.
