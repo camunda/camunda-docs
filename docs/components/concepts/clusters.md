@@ -8,28 +8,26 @@ A cluster is a provided group of nodes that run Camunda Platform 8. By default, 
 
 Professional and Enterprise plan customers can create as many production or development clusters as they want.
 
+Production clusters come in three sizes: small (S), medium (M), and large (L). To learn more about the size of cluster best suited for your use case, see our [Best Practices](/components/best-practices/best-practices-overview.md) for more information on [sizing your runtime environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
+
 The following table shows each plan and available type or size of cluster:
 
 |              | Development | Production - S | Production - M | Production - L |
 | ------------ | ----------- | -------------- | -------------- | -------------- |
-| Free         | \-          | \-             | \-             | \-             |
 | Free Trial   | \-          | X              | \-             | \-             |
+| Free         | \-          | \-             | \-             | \-             |
 | Professional | X           | X              | \-             | \-             |
 | Enterprise   | X           | X              | X              | X              |
 
-## Production clusters
-
-Production clusters come in three sizes: small (S), medium (M), and large (L). To learn more about the size of cluster best suited for your use case, see our [Best Practices](/components/best-practices/best-practices-overview.md) for more information on [sizing your runtime environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
-
 When you deploy and execute your [BPMN](/components/modeler/bpmn/bpmn.md) or [DMN](/components/modeler/dmn/dmn.md) models on a production cluster, this might impact your monthly (Professional) or annual (Enterprise) total fee, meaning the more you execute your models, the higher your total fee may be.
 
-### Free Trial cluster
+## Free Trial cluster
 
 A Free Trial cluster is a special kind of production cluster. Free Trial clusters are size small, and only available during your trial period.
 
 Once you sign up for a Free Trial, you are able to spin up one production cluster for the time of your trial.
 
-When your trial expires, you automatically move to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster spun up during your free trial is deleted, and you cannot spin up new clusters.
+When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster spun up during your free trial is deleted, and you cannot spin up new clusters.
 
 ## Development clusters
 
@@ -39,6 +37,6 @@ Professional Plan users have the option to create **development clusters**, offe
 
 Additionally, the following applies to **development clusters**:
 
-- **Cluster is not High-Available & Less Hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only). No 99.5% SLA, but still sufficient for most development use cases.
+- **Cluster is not high-available & less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only). No 99.5% SLA, but still sufficient for most development use cases.
 - **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day.
-- **Cluster auto-pause**: We will pause your cluster if it's not used for two hours. You can wake up your cluster by clicking a button in Console. This means not all functionality will work all the time. For example, BPMN timers and BPMN message catch events will not work while clusters are paused.
+- **Cluster auto-pause**: Your cluster is paused if it goes unused for two hours. You can wake up your cluster by clicking a button in Console. This means not all functionality will work all the time. For example, BPMN timers and BPMN message catch events will not work while clusters are paused.
