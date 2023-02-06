@@ -253,6 +253,8 @@ Response example:
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest utilizing a BPMN polling loop pattern.
 
-**Note.** To avoid performance issues, it is recommended to limit the number of loop retries.
+:::note
+To avoid performance issues, it is recommended to limit the number of loop retries.
+:::
 
 ![UIPath polling loop](../img/connectors-uipath-long-polling-pattern.png)
