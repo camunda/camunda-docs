@@ -8,7 +8,7 @@ The **UIPath Connector** allows you to orchestrate an UIPath bot from your BPMN 
 
 ## Prerequisites
 
-To use the UIPath Connector, you need have an [UIPath](https://cloud.uipath.com) account and configure your organization settings. See the [Automation Cloud Guide](https://docs.uipath.com/automation-cloud/docs/introduction) to learn more.
+To use the UIPath Connector, you need have an [UIPath](https://cloud.uipath.com) account and configure your organization settings. See the [automation cloud guide](https://docs.uipath.com/automation-cloud/docs/introduction) to learn more.
 
 ## Create a UIPath Connector task
 
@@ -113,7 +113,7 @@ The operation **Add Queue Item** returns information about the newly created ite
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value `{itemId: response.body.Id}`. If you want to use operation _Get queue item result by ID_, you would need an `itemId`. This expression will add it in the context for you. See more in section [Get queue item result by ID](#get-queue-item-result-by-id)
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value `= {itemId: response.body.Id}`. If you want to use operation _Get queue item result by ID_, you would need an `itemId`. This expression will add it in the context for you. See more in section [Get queue item result by ID](#get-queue-item-result-by-id)
 
 Response example:
 
@@ -171,11 +171,11 @@ Response example:
 
 ### Get queue item result by ID
 
-This operation allows you get the information related to a certain item from your UIPath Orchestrator. In order to execute it, you need to take the following steps:
+This operation allows you get an item from your UIPath Orchestrator. In order to execute it, you need to take the following steps:
 
 1. Select the operation _Get Queue Item result by ID_ from the dropdown list **Operation type**.
 2. Configure authentication as described in the section [authentication](#authentication)
-3. Fill response mapping as described in the section [get queue item result by ID response](#get-queue-item-result-by-id-response)
+3. Fill the **Item ID** field. This field supports FEEL, so you're able to fetch an item ID from the process context, for example, if you exported it while [adding a new queue item](#add-queue-item).
 
 ![UIPath Connector - Get Queue Item result by ID](../img/connectors-uipath-get-queue-item-result-by-id.png)
 
@@ -186,7 +186,7 @@ Given you have a queue item ID previously added to a queue, the operation _Get q
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value `{response.body.value[1].Status}`. You will see the `itemStatus` in the process variables. Its value will let you know if the item was processed or not.
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a prefilled value `= {itemStatus: response.body.value[1].Status}`. You will see the `itemStatus` in the process variables. Its value will let you know if the item was processed or not.
 
 Response example:
 
