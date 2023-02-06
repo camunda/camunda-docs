@@ -27,15 +27,17 @@ If you use the [Docker Compose](/self-managed/platform-deployment/docker.md#dock
 
 Alternatively, you can fetch the JSON templates from the respective Connector's releases:
 
-- [Amazon SNS Connector](https://github.com/camunda/connector-sns/releases)
-- [Amazon SQS Connector](https://github.com/camunda/connector-sqs/releases)
-- [AWS Lambda Connector](https://github.com/camunda/connector-aws-lambda/releases)
-- [Google Drive Connector](https://github.com/camunda/connector-google-drive/releases)
-- [Kafka Producer Connector](https://github.com/camunda/connector-kafka/releases)
-- [Microsoft Teams Connector](https://github.com/camunda/connector-microsoft-teams/releases)
-- [RabbitMQ](https://github.com/camunda/rabbitmq/releases)
-- [REST Connector](https://github.com/camunda/connector-http-json/releases)
-- [SendGrid Connector](https://github.com/camunda/connector-sendgrid/releases)
-- [Slack Connector](https://github.com/camunda/connector-slack/releases)
+- [Amazon SNS Connector](https://github.com/camunda/connectors-bundle/blob/main/connectors/sns/element-templates)
+- [Amazon SQS Connector](https://github.com/camunda/connectors-bundle/blob/main/connectors/sqs/element-templates)
+- [AWS Lambda Connector](https://github.com/camunda/connectors-bundle/blob/main/connectors/aws-lambda/element-templates)
+- [Google Drive Connector](https://github.com/camunda/connectors-bundle/tree/main/connectors/google-drive/element-templates)
+- [Kafka Producer Connector](https://github.com/camunda/connectors-bundle/tree/main/connectors/kafka/element-templates)
+- [Microsoft Teams Connector](https://github.com/camunda/connectors-bundle/tree/main/connectors/microsoft-teams/element-templates)
+- [RabbitMQ Connector](https://github.com/camunda/connectors-bundle/tree/main/connectors/rabbitmq/element-templates)
+- [REST Connector](https://github.com/camunda/connectors-bundle/tree/main/connectors/http-json/element-templates)
+- [SendGrid Connector](https://github.com/camunda/connectors-bundle/tree/main/connectors/sendgrid/element-templates)
+- [Slack Connector](https://github.com/camunda/connectors-bundle/tree/main/connectors/slack/element-templates)
 
 You can use the Connector templates as provided or modify them to your needs as described in our [Connector templates guide](/components/connectors/custom-built-connectors/connector-templates.md).
+
+Check out our [Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors/tree/main) to find more Connectors.
