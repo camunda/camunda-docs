@@ -91,8 +91,6 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 
 #### WebSocket
 
-The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/9.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
-
 The `webapp` component sends certain events (e.g. "user opened diagram", "user left diagram") to the [WebSocket server](#configuration-of-the-websocket-component) and can also react to such events (e.g. show a notification in the UI that a user left the diagram).
 
 | Environment variable      | Description                                                                                                                                   | Example value        | Default value |
@@ -108,6 +106,8 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 | `CLIENT_PUSHER_FORCE_TLS` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`               | `false`       |
 
 ### Configuration of the `websocket` component
+
+The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/9.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
 | Environment variable | Description                                                                                              | Example value |
 | -------------------- | -------------------------------------------------------------------------------------------------------- | ------------- |

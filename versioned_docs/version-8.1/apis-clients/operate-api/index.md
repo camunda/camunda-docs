@@ -31,8 +31,22 @@ To authorize in the cloud using a JWT token, take the steps in the following exa
 **Example:**
 
 1. Obtain a token to access the REST API.
-   You need `client_id`, `client_secret`, `audience`, and the URL of the authorization server. For more information on how to get these for Camunda Platform 8, look
-   at [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
+
+   When you create an Operate [client](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/), you get all the information needed to connect to Operate.
+
+   The following settings are needed:
+
+   | Name                     | Description                                     | Default value        |
+   | ------------------------ | ----------------------------------------------- | -------------------- |
+   | client id                | Name of your registered client                  | -                    |
+   | client secret            | Password for your registered client             | -                    |
+   | audience                 | Permission name; if not given use default value | `operate.camunda.io` |
+   | authorization server url | Token issuer server                             | -                    |
+
+For more information on how to get these values for Camunda Platform 8, look
+at [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
+
+Send a token issue _POST_ request to the authorization server with the required settings:
 
 ```shell
 curl -X POST -H 'content-type: application/json' -d '{"client_id": "RgVdPv...", "client_secret":"eDS1~Hg...","audience":"operate.camunda.io","grant_type":"client_credentials"}' https://login.cloud.camunda.io/oauth/token
