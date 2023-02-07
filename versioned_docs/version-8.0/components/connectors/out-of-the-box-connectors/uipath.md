@@ -252,6 +252,7 @@ Response example:
 ### Using UIPath Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest utilizing a BPMN polling loop pattern.
+To learn more, see an entry _Solution with Timer and Loop_ at [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
 
 :::note
 To avoid performance issues, it is recommended to limit the number of loop retries.
