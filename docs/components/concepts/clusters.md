@@ -42,6 +42,6 @@ Additionally, the following applies to **development clusters**:
 
 :::caution
 
-**Cluster auto-pause** is not yet available. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will work, including BPMN timers and BPMN message catch events. 
+**Cluster auto-pause** is not yet available. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will work, including BPMN timers and BPMN message catch events.
 
 :::
