@@ -47,6 +47,8 @@ input TaskQuery {
   assigned: Boolean
   assignee: String
   candidateGroup: String
+  processDefinitionId: String
+  processInstanceId: String
   pageSize: Int
   taskDefinitionId: String
   searchAfter: [String!]
@@ -73,6 +75,14 @@ input TaskQuery {
 #### [<code style={{ fontWeight: 'normal' }}>TaskQuery.<b>candidateGroup</b></code>](#)<Bullet />[`String`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="scalar"/>
 
 > given group is in candidate groups list
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskQuery.<b>processDefinitionId</b></code>](#)<Bullet />[`String`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="scalar"/>
+
+> Reference to process definition
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskQuery.<b>processInstanceId</b></code>](#)<Bullet />[`String`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="scalar"/>
+
+> Reference to process instance
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskQuery.<b>pageSize</b></code>](#)<Bullet />[`Int`](/docs/apis-clients/tasklist-api/scalars/int) <Badge class="secondary" text="scalar"/>
 
