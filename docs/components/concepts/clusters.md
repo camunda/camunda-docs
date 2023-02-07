@@ -25,9 +25,9 @@ When you deploy and execute your [BPMN](/components/modeler/bpmn/bpmn.md) or [DM
 
 A Free Trial cluster is a special kind of production cluster. Free Trial clusters are size small, and only available during your trial period.
 
-Once you sign up for a Free Trial, you are able to spin up one production cluster for the time of your trial.
+Once you sign up for a Free Trial, you are able to create one production cluster for the time of your trial.
 
-When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster spun up during your free trial is deleted, and you cannot spin up new clusters.
+When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your free trial is deleted, and you cannot create new clusters.
 
 ## Development clusters
 
