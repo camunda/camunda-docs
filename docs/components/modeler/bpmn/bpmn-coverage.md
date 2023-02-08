@@ -10,7 +10,9 @@ export const Highlight = ({children, color}) => (
 </span>
 );
 
-The following BPMN elements are supported by our modeling tools. Elements highlighted in <Highlight color="#11c399">green</Highlight> are supported for execution by Camunda 8. Click on an element to navigate to the documentation.
+The following BPMN elements are supported by our modeling tools. You can deploy all the BPMN elements shown below to
+Camunda 8. Elements highlighted in <Highlight color="#11c399">green</Highlight> are supported for execution by
+Camunda 8. Click on an element to navigate to the documentation.
 
 ## Participants
 
