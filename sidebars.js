@@ -608,6 +608,7 @@ module.exports = {
                 "apis-clients/java-client-examples/process-instance-create",
                 "apis-clients/java-client-examples/process-instance-create-nonblocking",
                 "apis-clients/java-client-examples/process-instance-create-with-result",
+                "apis-clients/java-client-examples/decision-evaluate",
                 "apis-clients/java-client-examples/job-worker-open",
                 "apis-clients/java-client-examples/data-pojo",
                 "apis-clients/java-client-examples/cluster-topology-request",

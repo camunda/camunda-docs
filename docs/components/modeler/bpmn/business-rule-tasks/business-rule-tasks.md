@@ -16,6 +16,11 @@ implementation](#job-worker-implementation) section below. The sections before t
 decision implementation only.
 :::
 
+:::info
+If you only want to evaluate a DMN decision, you can use the
+[`EvaluateDecision`](/apis-clients/grpc.md#evaluatedecision-rpc) API.
+:::
+
 When the process instance arrives at a business rule task, a decision is evaluated using the
 internal DMN decision engine. Once the decision is made, the process instance continues.
 
