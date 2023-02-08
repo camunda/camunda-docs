@@ -52,6 +52,32 @@ Alternatively, you can configure backup store using environment variables:
 
 The same configuration must be provided to all brokers in a cluster.
 
+#### Backup Compression
+
+Backups can be quite large, depending on your usage of Zeebe.
+To reduce S3 storage costs and upload times, you can enable backup compression.
+Zeebe compresses backup data just before uploading to S3 and buffers the compressed files in a temporary directory.
+Compression and buffering of compressed files can have a negative effect if Zeebe is heavily resource constrained.
+
+You can enable compression by specifying a compression algorithm to use.
+We recommend using [zstd] as it provides a good trade off between compression ratio and resource usage.
+More compression algorithms are available, check [commons-compress] for a full list.
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        store: s3
+        s3:
+          compression: zstd
+```
+
+Alternatively, you can configure backup compression using an environment variable: `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`.
+
+[zstd]: https://github.com/facebook/zstd
+[commons-compress]: https://commons.apache.org/proper/commons-compress/
+
 ## Create backup API
 
 The following request can be used to start a backup.
