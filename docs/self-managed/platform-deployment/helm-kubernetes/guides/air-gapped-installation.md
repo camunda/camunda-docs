@@ -4,7 +4,7 @@ title: "Installing in an air-gapped environment"
 description: "Camunda Platform 8 Self-Managed installation in an air-gapped environment"
 ---
 
-The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub.
+The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler Beta](../../docker.md#web-modeler)).
 With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
 ## Required Docker images
@@ -19,6 +19,10 @@ The following images must be available in your air-gapped environment:
 - [postgres](https://hub.docker.com/_/postgres)
 - [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak)
 - [elasticsearch](https://hub.docker.com/_/elasticsearch)
+- Web Modeler images (only available from [Camunda's private registry](../../docker.md#web-modeler)):
+  - `web-modeler-ee/modeler-restapi`
+  - `web-modeler-ee/modeler-webapp`
+  - `web-modeler-ee/modeler-websockets`
 
 ## Required Helm charts
 
@@ -44,9 +48,12 @@ camunda-platform
     |_ optimize
     |_ operate
     |_ tasklist
+    |_ web-modeler
+        |_ postgresql
 ```
 
 - Keycloak is a dependency for Camunda Identity and PostgreSQL is a dependency for Keycloak.
+- PostgreSQL is an optional dependency for Web Modeler.
 - Elasticsearch is a dependency for Zeebe, Operate, Tasklist, and Optimize.
 
 The values for the dependencies Keycloak and PostgreSQL can be set in the same hierarchy:
@@ -58,6 +65,10 @@ identity:
     [keycloak values]
     postgresql:
       [postgresql values]
+web-modeler:
+  [web-modeler values]
+  postgresql:
+    [postgresql values]
 ```
 
 ## Push Docker images to your repository
@@ -133,6 +144,25 @@ optimize:
   image:
     repository: example.jfrog.io/camunda/optimize
     ...
+web-modeler:
+  image:
+    # registry and tag will be used for all three Web Modeler images
+    registry: example.jfrog.io
+    tag: latest
+  restapi:
+    image:
+      repository: camunda/modeler-restapi
+  webapp:
+    image:
+      repository: camunda/modeler-webapp
+  websockets:
+    image:
+      repository: camunda/modeler-websockets
+  # only necessary if the PostgreSQL chart dependency is used for Web Modeler
+  postgresql:
+    image:
+      repository: example.jfrog.io/bitnami/postgres
+  ...
 ```
 
 Afterwards, you can deploy Camunda Platform using Helm and the custom values file.

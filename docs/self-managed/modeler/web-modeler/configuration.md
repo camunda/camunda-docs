@@ -12,7 +12,9 @@ However, we encourage you to provide feedback via your designated support channe
 :::
 
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
-For a working example configuration, that shows how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
+
+- For a working example configuration, that shows how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
+- If you are using the Camunda Platform 8 [Helm chart](../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler-beta).
 
 ### Configuration of the `restapi` component
 
