@@ -23,7 +23,7 @@ However, if Camunda Identity is enabled (which is the default), the upgrade path
 
 If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation.
 
-# If you just tried upgrading to a newer chart version
+## If you just tried upgrading to a newer chart version
 
 If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
@@ -50,7 +50,7 @@ If you remove the Helm chart release or do an upgrade, PVCs are not removed nor 
 
 In the error message, Bitnami links to their [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion we will step through the troubleshooting process in this guide as well.
 
-#### Secrets extraction
+### Secrets extraction
 
 For a successful upgrade, you first need to extract all secrets which were previously generated.
 
