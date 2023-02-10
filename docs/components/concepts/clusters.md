@@ -37,7 +37,7 @@ Professional Plan users have the option to create **development clusters**, offe
 
 Additionally, the following applies to **development clusters**:
 
-- **Cluster is not high-available & less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only). No 99.5% SLA, but still sufficient for most development use cases.
+- **Cluster is not high-available & less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only).
 - **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day.
 
 :::caution
