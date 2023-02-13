@@ -97,9 +97,9 @@ The time between a process instance finishing and being archived can be set usin
 | -------------------------------------------------- | -------------------------------------------- | ------------- |
 | camunda.operate.archiver.waitPeriodBeforeArchiving | Amount of time before data will be archived. | 1h            |
 
-By default, the archive period is set to "1h" (1 hour). This means that the data for the finished process instances will be kept in the "main" index for 1 hour after the process instance has finished, and then it will be moved to a "dated" index.
+By default, the archive period is set to "1h" (one hour). This means the data for the finished process instances will be kept in the "main" index for one hour after the process instance has finished, and then it will be moved to a "dated" index.
 
-The syntax for the parameter uses Elasticsearch date math, below is a table for reference:
+The syntax for the parameter uses Elasticsearch date math. See the table below for reference:
 
 | Value | Description |
 | ----- | ----------- |

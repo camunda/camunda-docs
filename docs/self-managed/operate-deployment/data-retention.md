@@ -23,9 +23,9 @@ The data representing process instance state becomes immutable after the process
 All Operate data present in Elasticsearch (from both **main** and **dated** indices) are visible from the UI.
 :::
 
-## The archive period
+## Archive period
 
-The default time between a process instance finishing and being moved to a dated index is 1 hour (1h). This can be modified by setting the [waitPeriodBeforeArchiving](importer-and-archiver.md#archive-period) configuration parameter.
+The default time between a process instance finishing and being moved to a dated index is one hour. This can be modified by setting the [waitPeriodBeforeArchiving](importer-and-archiver.md#archive-period) configuration parameter.
 
 ## Data cleanup
 
