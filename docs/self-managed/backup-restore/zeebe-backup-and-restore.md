@@ -52,6 +52,14 @@ Alternatively, you can configure backup store using environment variables:
 
 The same configuration must be provided to all brokers in a cluster.
 
+#### Backup Encryption
+
+Zeebe does not support backup encryption natively but it _can_ use encrypted S3 buckets.
+For AWS S3, this means [enabling default bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html).
+Using default bucket encryption gives you control over the encryption keys and algorithms while being completely transparent to Zeebe.
+Combined with TLS between Zeebe and the S3 API, backups are fully encrypted in transit and at rest.
+Other S3 compatible services might have similar features that should work as well.
+
 ## Create backup API
 
 The following request can be used to start a backup.
