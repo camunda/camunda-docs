@@ -10,6 +10,8 @@ Operate consists of three modules:
 - **Importer**: Responsible for importing data from Zeebe.
 - **Archiver**: Responsible for archiving "old" data (finished process instances and user operations.) See [data retention](data-retention.md).
 
+## Configuration
+
 Modules can be run together or separately in any combination and can be scaled. When you run an Operate instance, by default, all modules are enabled. To disable them, use the following configuration parameters:
 
 | Configuration parameter         | Description                            | Default value |
@@ -17,6 +19,8 @@ Modules can be run together or separately in any combination and can be scaled. 
 | camunda.operate.importerEnabled | When true, Importer module is enabled. | True          |
 | camunda.operate.archiverEnabled | When true, Archiver module is enabled. | True          |
 | camunda.operate.webappEnabled   | When true, Webapp module is enabled.   | True          |
+
+## Scaling
 
 Additionally, you can have several importer and archiver nodes to increase throughput. Internally, they will spread their work based on Zeebe partitions.
 
@@ -84,3 +88,25 @@ You can further parallelize archiver and/or importer within one node using the f
 :::note
 Parallelization of import and archiving within one node will also happen based on Zeebe partitions, meaning only configurations with (number of nodes) \* (threadsCount) <= (total number of Zeebe partitions) will make sense. Too many threads and nodes will still work, but some of them will be idle.
 :::
+
+## Archive period
+
+The time between a process instance finishing and being archived can be set using the following configuration parameter:
+
+| Configuration parameter                            | Description                                  | Default value |
+| -------------------------------------------------- | -------------------------------------------- | ------------- |
+| camunda.operate.archiver.waitPeriodBeforeArchiving | Amount of time before data will be archived. | 1h            |
+
+By default, the archive period is set to "1h" (1 hour). This means that the data for the finished process instances will be kept in the "main" index for 1 hour after the process instance has finished, and then it will be moved to a "dated" index.
+
+The syntax for the parameter uses Elasticsearch date math, below is a table for reference:
+
+| Value | Description |
+| ----- | ----------- |
+| y     | Years       |
+| M     | Months      |
+| w     | Weeks       |
+| d     | Days        |
+| h     | Hours       |
+| m     | Minutes     |
+| s     | Seconds     |
