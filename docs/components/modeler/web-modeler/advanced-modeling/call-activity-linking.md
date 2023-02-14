@@ -4,7 +4,7 @@ title: Call activity linking
 description: Use one of the following approaches to link the process to be called by a call activity.
 ---
 
-You can use one of the following approaches to link the process to be called by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md).
+You can use one of the following approaches to link the process to be called by a [call activity](/bpmn-dmn/bpmn/call-activities/call-activities.md).
 
 ### Using the link button
 

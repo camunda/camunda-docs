@@ -8,7 +8,7 @@ In this tutorial, you will learn to use the CLI client `zbctl` to interact with 
 
 ## Prerequisites
 
-- [Camunda Platform 8 account](/guides/create-account.md)
+- [Camunda Platform 8 account](/guides/getting-started/)
 - [Cluster](/guides/create-cluster.md)
 - [Client credentials](/guides/setup-client-connection-credentials.md)
 - [Modeler](/guides/model-your-first-process.md)

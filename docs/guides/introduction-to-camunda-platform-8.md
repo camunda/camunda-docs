@@ -28,7 +28,7 @@ Interested in migrating process solutions developed for Camunda Platform 7 to ru
 
 In this section of the Camunda Platform 8 documentation, you'll find guides to get started with Camunda Platform 8 before learning more about each individual [component](/components/components-overview.md). Our getting started guides walk you through the following steps:
 
-1. [Create a Camunda Platform 8 account](./create-account.md) - Create a Camunda Platform 8 account to create clusters, deploy processes, and create a new instance.
+1. [Create a Camunda Platform 8 account](./getting-started/) - Create a Camunda Platform 8 account to create clusters, deploy processes, and create a new instance.
 2. [Model your first process](./model-your-first-process.md) - Design and deploy a process, and share the process with your teammates or other stakeholders to begin collaborating.
 3. [Create a cluster](./create-cluster.md) - Create your first cluster to execute processes.
 4. [Orchestrate human tasks](./getting-started-orchestrate-human-tasks.md) - Assign human tasks to users so they can enter the necessary data to drive the business process forward.

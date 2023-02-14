@@ -93,4 +93,4 @@ To deploy with Camunda Platform 7, use the [process engine](https://docs.camunda
 ## Additional resources
 
 - [Desktop and Web Modeler](/components/modeler/about-modeler.md)
-- [User task reference](/components/modeler/bpmn/user-tasks/user-tasks.md)
+- [User task reference](/bpmn-dmn/bpmn/user-tasks/user-tasks.md)

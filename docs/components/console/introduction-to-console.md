@@ -14,4 +14,4 @@ Using Camunda Platform Console, you can do the folllowing:
 - [Manage](./manage-organization/organization-settings.md) your organization.
 - [Console API clients (REST)](/apis-clients/console-api-reference.md) to manage clusters programmatically.
 
-If you don't have a Camunda Platform 8 account yet, visit our [Getting Started Guide](../../guides/create-account.md).
+If you don't have a Camunda Platform 8 account yet, visit our [Getting Started Guide](../../guides/getting-started/).

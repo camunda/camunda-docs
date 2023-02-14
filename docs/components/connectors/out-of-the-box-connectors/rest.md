@@ -168,7 +168,7 @@ The following fields are available in the `response` variable:
 - **body**: Response body of your request
 - **headers**: Response headers
 
-Additionally, you can choose to unpack the content of your `response` into multiple process variables using the ![feel-icon](../img/feel-icon.png) **Result Expression**, which is a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md).
+Additionally, you can choose to unpack the content of your `response` into multiple process variables using the ![feel-icon](../img/feel-icon.png) **Result Expression**, which is a [FEEL Context Expression](/bpmn-dmn/feel/language-guide/feel-context-expressions.md).
 
 ```text
 = {

@@ -10,7 +10,7 @@ You can find a complete example on [GitHub](https://github.com/camunda/camunda-p
 
 ## Prerequisites
 
-- [Camunda Platform 8 account](/guides/create-account.md)
+- [Camunda Platform 8 account](/guides/getting-started/)
 - [Cluster](/guides/create-cluster.md)
 - [Client credentials](/guides/setup-client-connection-credentials.md)
 - Go v1.13+ environment installed
@@ -213,7 +213,7 @@ Now, we want to do some work within our process. Follow the steps below:
 - Set the **type** of the second task to `fetcher-service`.
 - Set the **type** of the third task to `shipping-service`.
 
-5. Additionally, for the service task `Collect Money` set a [**task-header**](/docs/next/components/modeler/bpmn/service-tasks/#task-headers) with the key `method` and the value `VISA`. This header is used as a configuration parameter for the payment-service worker to hand over the payment method.
+5. Additionally, for the service task `Collect Money` set a [**task-header**](/docs/next/bpmn-dmn/bpmn/service-tasks/#task-headers) with the key `method` and the value `VISA`. This header is used as a configuration parameter for the payment-service worker to hand over the payment method.
 
 The consolidated example looks as follows:
 
@@ -357,4 +357,4 @@ processDefinitionKey:2251799813685255  bpmnProcessId:"order-process-4"  version:
 ## What's next?
 
 - Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-platform-8.md).
-- Learn more about [BPMN processes](/components/modeler/bpmn/bpmn-primer.md).
+- Learn more about [BPMN processes](/bpmn-dmn/bpmn/bpmn-primer.md).

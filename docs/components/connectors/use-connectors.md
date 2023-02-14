@@ -25,7 +25,7 @@ Once a Connector task is selected, the available configuration is visible in the
 
 ![Connectors properties panel](img/use-connectors-properties.png)
 
-Fields in the properties panel marked with an equals sign inside a circle indicate that [FEEL](/components/modeler/feel/what-is-feel.md) can be used to configure the property. If the icon includes an equals sign marked with a star, FEEL is required. Using FEEL allows the user to reference process data from variables in the expression to configure the properties.
+Fields in the properties panel marked with an equals sign inside a circle indicate that [FEEL](/bpmn-dmn/feel/what-is-feel.md) can be used to configure the property. If the icon includes an equals sign marked with a star, FEEL is required. Using FEEL allows the user to reference process data from variables in the expression to configure the properties.
 
 ![feel Connectors](img/use-connectors-feel.png)
 
@@ -180,8 +180,8 @@ indicate internal website errors, which is why the website team is informed.
 
 ![feel Connectors](img/use-connectors-error-general.png)
 
-The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
-[null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `code`. You can use all available functionality provided by FEEL to produce this result.
+The **Error Expression** property requires a [FEEL](/bpmn-dmn/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/bpmn-dmn/feel/language-guide/feel-data-types.md#context),
+[null](/bpmn-dmn/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `code`. You can use all available functionality provided by FEEL to produce this result.
 Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object.
 
 Within the FEEL expression, you access the following temporary variables:

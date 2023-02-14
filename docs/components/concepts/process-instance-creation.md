@@ -20,7 +20,7 @@ There are two commands to create a process instance, outlined in the sections be
 
 ### Create and execute asynchronously
 
-A process that has a [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) is started explicitly using **[CreateProcessInstance](/apis-clients/grpc.md#createprocessinstance-rpc)**.
+A process that has a [none start event](/bpmn-dmn/bpmn/none-events#none-start-events) is started explicitly using **[CreateProcessInstance](/apis-clients/grpc.md#createprocessinstance-rpc)**.
 
 This command creates a new process instance and immediately responds with the process instance id. The execution of the process occurs after the response is sent.
 
@@ -97,7 +97,7 @@ Failure scenarios applicable to other commands are applicable to this command as
 
 ### Create and start at a user-defined element
 
-The [`create and execute asynchronously`](#create-and-execute-asynchronously) and [`create and await results`](#create-and-await-results) commands both start the process instance at their default initial element: the single [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events). Camunda Platform 8 also provides a way to create a process instance starting at user-defined element(s).
+The [`create and execute asynchronously`](#create-and-execute-asynchronously) and [`create and await results`](#create-and-await-results) commands both start the process instance at their default initial element: the single [none start event](/bpmn-dmn/bpmn/none-events#none-start-events). Camunda Platform 8 also provides a way to create a process instance starting at user-defined element(s).
 
 :::info
 This is an advanced feature. Camunda recommends to only use this functionality for testing purposes. The none start event is the defined beginning of your process. Most likely the process is modeled with the intent to start all instances from the beginning.
@@ -136,13 +136,13 @@ Process instances are also created implicitly via various start events. Camunda 
 
 ### Message event
 
-A process with a [message start event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) can be started by publishing a message with the name that matches the message name of the start event.
+A process with a [message start event](/bpmn-dmn/bpmn/message-events#message-start-events) can be started by publishing a message with the name that matches the message name of the start event.
 
 For each new message a new instance is created.
 
 ### Timer event
 
-A process can also have one or more [timer start events](/components/modeler/bpmn/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
+A process can also have one or more [timer start events](/bpmn-dmn/bpmn/timer-events#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
 
 ## Next steps
 

@@ -10,7 +10,7 @@ keywords: [workflow, modeling]
 
 Decision Model and Notation (DMN) is a modeling approach owned by an institution called the Object Management Group ([OMG](https://www.omg.org/)), which also operates worldwide standards for [BPMN](./automating-a-process-using-bpmn.md).
 
-In [DMN](../components/modeler/dmn/dmn.md), decisions are modeled and executed using a language both business analysts and developers can understand. Model a set of rules within a table, and this will yield a decision to rapidly execute a process using a decision engine like Camunda.
+In [DMN](../bpmn-dmn/dmn/dmn.md), decisions are modeled and executed using a language both business analysts and developers can understand. Model a set of rules within a table, and this will yield a decision to rapidly execute a process using a decision engine like Camunda.
 
 In this guide, we'll step through the lightweight implementation of a DMN diagram in [Camunda Platform 8](../components/concepts/what-is-camunda-platform-8.md), as both Camunda [Desktop](../components/modeler/desktop-modeler/install-the-modeler.md) and [Web Modeler](../components/modeler/about-modeler.md) both offer the same modeling experience for DMN 1.3 models.
 
@@ -18,7 +18,7 @@ In this guide, we'll step through the lightweight implementation of a DMN diagra
 
 ### Create a Camunda Platform 8 account
 
-We'll begin building our DMN diagrams with [Modeler](../components/modeler/about-modeler.md). To get started, ensure you've [created a Camunda Platform 8 account](./create-account.md).
+We'll begin building our DMN diagrams with [Modeler](../components/modeler/about-modeler.md). To get started, ensure you've [created a Camunda Platform 8 account](./getting-started/).
 
 ### Create a cluster
 
@@ -62,24 +62,24 @@ Now that our DRD is complete, let's build out the DMN table for our decision.
 2. Click the **+** icon next to the **When** column so we can analyze both the weather and the activity.
 3. Double-click the first column. In the **Expression** field, we'll enter "temperature". Given the **Type** will remain **string**, we'll enter "Hot" and "Cold" in the **Add Predefined Values** field, separated by commas. Click your keyboards "enter" key to save these values.
    :::note
-   Utilizing a data type other than a string? Take a look at our documentation on different [data types](../components/modeler/dmn/dmn-data-types.md), like booleans and numbers.
+   Utilizing a data type other than a string? Take a look at our documentation on different [data types](../bpmn-dmn/dmn/dmn-data-types.md), like booleans and numbers.
    :::
 4. Similar to the first column, enter "activity" for the expression and predefined values of "inside" and "outside".
    ![dmn table example](./img/dmn-table-example.png)
 5. Double-click the **Output** column. Here, we'll plug in an **Output Name** of "clothingChoice", and Predefined Values of "shorts" and "pants".
-6. Once finished, we'll click the pencil icon to write out our possible outcomes. For example, we can select the predefined values of "hot" and "outside" to determine we will wear shorts. These inputs can also be combined with [rules](../components/modeler/dmn/decision-table-rule.md).
+6. Once finished, we'll click the pencil icon to write out our possible outcomes. For example, we can select the predefined values of "hot" and "outside" to determine we will wear shorts. These inputs can also be combined with [rules](../bpmn-dmn/dmn/decision-table-rule.md).
 
 ![completed dmn table](./img/dmn-table-complete-example.png)
 
 :::note
-A decision table has a hit policy that specifies what the results of the evaluation of a decision table consist of. You'll notice the hit policy of our table is **Unique**, meaning only one rule can be satisfied or no rule at all. Learn more about different [hit policies](../components/modeler/dmn/decision-table-hit-policy.md).
+A decision table has a hit policy that specifies what the results of the evaluation of a decision table consist of. You'll notice the hit policy of our table is **Unique**, meaning only one rule can be satisfied or no rule at all. Learn more about different [hit policies](../bpmn-dmn/dmn/decision-table-hit-policy.md).
 :::
 
 ## Deploy your diagram
 
 Click **Deploy diagram** to launch your DMN decision table.
 
-You can now implement your DMN table in a BPMN diagram using features like a [business rule task](../components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md).
+You can now implement your DMN table in a BPMN diagram using features like a [business rule task](../bpmn-dmn/bpmn/business-rule-tasks/business-rule-tasks.md).
 
 When a process instance arrives at a business rule task, a decision is evaluated using the internal DMN decision engine. Once the decision is made, the process instance continues.
 
@@ -87,6 +87,6 @@ If the decision evaluation is unsuccessful, an [incident](../components/concepts
 
 ## Additional resources and next steps
 
-- [DMN in Modeler](../components/modeler/dmn/dmn.md)
+- [DMN in Modeler](../bpmn-dmn/dmn/dmn.md)
 - [DMN Tutorial](https://camunda.com/dmn/#introduction-overview)
-- [What is FEEL?](../components/modeler/feel/what-is-feel.md)
+- [What is FEEL?](../bpmn-dmn/feel/what-is-feel.md)

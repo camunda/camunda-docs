@@ -7,57 +7,66 @@ function optimizeLink(label, href) {
 }
 
 module.exports = {
-  Guides: [
+  Docs: [
     {
-      "Getting started": [
+      type: 'category',
+      label: 'Guides',
+      collapsed: false,
+      items: [
         "guides/introduction-to-camunda",
-        "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-api-endpoints",
         "guides/orchestrate-microservices",
-      ],
-    },
-    {
-      "Next steps": [
-        "guides/create-cluster",
-        "guides/setting-up-development-project",
-        "guides/setup-client-connection-credentials",
-        "guides/automating-a-process-using-bpmn",
-        "guides/configuring-out-of-the-box-connectors",
-        "guides/create-decision-tables-using-dmn",
-        "guides/utilizing-forms",
-        "guides/improve-processes-with-optimize",
-        "guides/message-correlation",
-      ],
-    },
-    {
-      "Update guide": [
-        "guides/update-guide/introduction",
         {
-          Connectors: [
-            "guides/update-guide/connectors/introduction",
-            "guides/update-guide/connectors/010-to-020",
-            "guides/update-guide/connectors/020-to-030",
-            "guides/update-guide/connectors/030-to-040",
+          type: 'category',
+          label: "Next steps",
+          collapsed: true,
+          items: [
+            "guides/create-cluster",
+            "guides/setting-up-development-project",
+            "guides/setup-client-connection-credentials",
+            "guides/automating-a-process-using-bpmn",
+            "guides/configuring-out-of-the-box-connectors",
+            "guides/create-decision-tables-using-dmn",
+            "guides/utilizing-forms",
+            "guides/improve-processes-with-optimize",
+            "guides/message-correlation",
           ],
         },
-        "guides/update-guide/810-to-820",
-        "guides/update-guide/800-to-810",
-        "guides/update-guide/130-to-800",
-        "guides/update-guide/120-to-130",
-        "guides/update-guide/110-to-120",
-        "guides/update-guide/100-to-110",
-        "guides/update-guide/026-to-100",
+        {
+          "Update guide": [
+            "guides/update-guide/introduction",
+            {
+              Connectors: [
+                "guides/update-guide/connectors/introduction",
+                "guides/update-guide/connectors/010-to-020",
+                "guides/update-guide/connectors/020-to-030",
+                "guides/update-guide/connectors/030-to-040",
+              ],
+            },
+            "guides/update-guide/810-to-820",
+            "guides/update-guide/800-to-810",
+            "guides/update-guide/130-to-800",
+            "guides/update-guide/120-to-130",
+            "guides/update-guide/110-to-120",
+            "guides/update-guide/100-to-110",
+            "guides/update-guide/026-to-100",
+          ],
+        },
+        {
+          "Migration guides": [
+          "guides/migrating-from-cawemo",
+          "guides/migrating-from-camunda-platform-7",
+          ],
+        },
       ],
     },
-    "guides/migrating-from-cawemo",
-    "guides/migrating-from-camunda-platform-7",
-  ],
-  Components: [
-    "components/components-overview",
     {
-      Concepts: [
+      type: 'category',
+      label: 'Concepts',
+      collapsed: true,
+      items: [
         "components/concepts/what-is-camunda-platform-8",
         "components/concepts/clusters",
         "components/concepts/processes",
@@ -71,392 +80,403 @@ module.exports = {
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
       ],
-      Console: [
-        "components/console/introduction-to-console",
+    },
+    {
+      type: 'category',
+      label: 'Components',
+      collapsed: true,
+      items: [
         {
-          "Manage your organization": [
-            "components/console/manage-organization/organization-settings",
-            "components/console/manage-organization/manage-users",
-            "components/console/manage-organization/view-organization-activity",
-            "components/console/manage-organization/usage-history",
-            "components/console/manage-organization/update-billing-reservations",
-            "components/console/manage-organization/switch-organization",
-            "components/console/manage-organization/external-sso",
-            "components/console/manage-organization/delete-account",
-          ],
-        },
-        {
-          "Manage clusters": [
-            "components/console/manage-clusters/create-cluster",
-            "components/console/manage-clusters/rename-cluster",
-            "components/console/manage-clusters/delete-cluster",
-            "components/console/manage-clusters/manage-api-clients",
-            "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-whitelists",
-            "components/console/manage-clusters/manage-secrets",
-          ],
-        },
-        {
-          "Manage your plan": [
-            "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-professional-plan",
-          ],
-        },
-        {
-          Troubleshooting: [
-            "components/console/console-troubleshooting/common-pitfalls",
-            "components/console/console-troubleshooting/feedback-and-support",
-          ],
-        },
-      ],
-      Modeler: [
-        "components/modeler/about-modeler",
-        {
-          "Web Modeler": [
-            "components/modeler/web-modeler/new-web-modeler",
-            "components/modeler/web-modeler/launch-cloud-modeler",
-            "components/modeler/web-modeler/model-your-first-diagram",
-            "components/modeler/web-modeler/import-diagram",
-            "components/modeler/web-modeler/fix-problems-in-your-diagram",
-            "components/modeler/web-modeler/save-and-deploy",
-            "components/modeler/web-modeler/start-instance",
-            "components/modeler/web-modeler/collaboration",
-            "components/modeler/web-modeler/milestones",
-            "components/modeler/web-modeler/token-simulation",
+          Console: [
+            "components/console/introduction-to-console",
             {
-              "Advanced modeling": [
-                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
-                "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
-                "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
-              ],
-            },
-          ],
-        },
-        {
-          "Desktop Modeler": [
-            "components/modeler/desktop-modeler/install-the-modeler",
-            "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
-            "components/modeler/desktop-modeler/start-instance",
-            {
-              "Element templates": [
-                "components/modeler/desktop-modeler/element-templates/about-templates",
-                "components/modeler/desktop-modeler/element-templates/configuring-templates",
-                "components/modeler/desktop-modeler/element-templates/using-templates",
-                "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/additional-resources",
+              "Manage your organization": [
+                "components/console/manage-organization/organization-settings",
+                "components/console/manage-organization/manage-users",
+                "components/console/manage-organization/view-organization-activity",
+                "components/console/manage-organization/usage-history",
+                "components/console/manage-organization/update-billing-reservations",
+                "components/console/manage-organization/switch-organization",
+                "components/console/manage-organization/external-sso",
+                "components/console/manage-organization/delete-account",
               ],
             },
             {
-              "Additional configuration": [
-                "components/modeler/desktop-modeler/flags/flags",
-                "components/modeler/desktop-modeler/plugins/plugins",
-                "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
-                "components/modeler/desktop-modeler/search-paths/search-paths",
-                "components/modeler/desktop-modeler/telemetry/telemetry",
-              ],
-            },
-          ],
-        },
-        {
-          BPMN: [
-            "components/modeler/bpmn/modeler-bpmn",
-            "components/modeler/bpmn/bpmn-primer",
-            "components/modeler/bpmn/bpmn-coverage",
-            "components/modeler/bpmn/data-flow",
-            {
-              Tasks: [
-                "components/modeler/bpmn/tasks",
-                "components/modeler/bpmn/service-tasks/service-tasks",
-                "components/modeler/bpmn/user-tasks/user-tasks",
-                "components/modeler/bpmn/receive-tasks/receive-tasks",
-                "components/modeler/bpmn/business-rule-tasks/business-rule-tasks",
-                "components/modeler/bpmn/script-tasks/script-tasks",
-                "components/modeler/bpmn/send-tasks/send-tasks",
-                "components/modeler/bpmn/manual-tasks/manual-tasks",
+              "Manage clusters": [
+                "components/console/manage-clusters/create-cluster",
+                "components/console/manage-clusters/rename-cluster",
+                "components/console/manage-clusters/delete-cluster",
+                "components/console/manage-clusters/manage-api-clients",
+                "components/console/manage-clusters/manage-alerts",
+                "components/console/manage-clusters/manage-ip-whitelists",
+                "components/console/manage-clusters/manage-secrets",
               ],
             },
             {
-              Gateways: [
-                "components/modeler/bpmn/gateways",
-                "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
-                "components/modeler/bpmn/parallel-gateways/parallel-gateways",
-                "components/modeler/bpmn/event-based-gateways/event-based-gateways",
-                "components/modeler/bpmn/inclusive-gateways/inclusive-gateways",
+              "Manage your plan": [
+                "components/console/manage-plan/available-plans",
+                "components/console/manage-plan/upgrade-to-professional-plan",
               ],
             },
             {
-              Events: [
-                "components/modeler/bpmn/events",
-                "components/modeler/bpmn/none-events/none-events",
-                "components/modeler/bpmn/message-events/message-events",
-                "components/modeler/bpmn/timer-events/timer-events",
-                "components/modeler/bpmn/error-events/error-events",
-                "components/modeler/bpmn/terminate-events/terminate-events",
-              ],
-            },
-            {
-              Subprocesses: [
-                "components/modeler/bpmn/subprocesses",
-                "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
-                "components/modeler/bpmn/call-activities/call-activities",
-                "components/modeler/bpmn/event-subprocesses/event-subprocesses",
-              ],
-            },
-            {
-              Markers: [
-                "components/modeler/bpmn/markers",
-                "components/modeler/bpmn/multi-instance/multi-instance",
+              Troubleshooting: [
+                "components/console/console-troubleshooting/common-pitfalls",
+                "components/console/console-troubleshooting/feedback-and-support",
               ],
             },
           ],
-        },
-        require("./docs/components/modeler/dmn/sidebar-schema"),
-        require("./docs/components/modeler/feel/sidebar-schema"),
-        require("./docs/components/modeler/forms/sidebar-schema"),
-      ],
-      Connectors: [
-        "components/connectors/introduction-to-connectors",
-        "components/connectors/use-connectors",
-        {
-          "Out-of-the-box Connectors": [
-            "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-            "components/connectors/out-of-the-box-connectors/aws-sns",
-            "components/connectors/out-of-the-box-connectors/aws-sqs",
-            "components/connectors/out-of-the-box-connectors/aws-lambda",
-            "components/connectors/out-of-the-box-connectors/github-webhook",
-            "components/connectors/out-of-the-box-connectors/googledrive",
-            "components/connectors/out-of-the-box-connectors/http-webhook",
-            "components/connectors/out-of-the-box-connectors/kafka",
-            "components/connectors/out-of-the-box-connectors/microsoft-teams",
-            "components/connectors/out-of-the-box-connectors/rabbitmq",
-            "components/connectors/out-of-the-box-connectors/rest",
-            "components/connectors/out-of-the-box-connectors/sendgrid",
-            "components/connectors/out-of-the-box-connectors/slack",
-            "components/connectors/out-of-the-box-connectors/uipath",
-          ],
-          "Custom Connectors": [
-            "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-sdk",
-          ],
-        },
-      ],
-      Zeebe: [
-        "components/zeebe/zeebe-overview",
-        {
-          "Technical concepts": [
-            "components/zeebe/technical-concepts/technical-concepts-overview",
-            "components/zeebe/technical-concepts/architecture",
-            "components/zeebe/technical-concepts/clustering",
-            "components/zeebe/technical-concepts/partitions",
-            "components/zeebe/technical-concepts/internal-processing",
-            "components/zeebe/technical-concepts/process-lifecycles",
-            "components/zeebe/technical-concepts/protocols",
-          ],
-        },
-        {
-          "Open source community": [
-            "components/zeebe/open-source/community-contributions",
-            "components/zeebe/open-source/get-help-get-involved",
-          ],
-        },
-      ],
-      Operate: [
-        "components/operate/operate-introduction",
-        {
-          "User guide": [
-            "components/operate/userguide/basic-operate-navigation",
-            "components/operate/userguide/resolve-incidents-update-variables",
-            "components/operate/userguide/selections-operations",
-            "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/operate-feedback-and-questions",
-            "components/operate/userguide/process-instance-modification",
-          ],
-        },
-      ],
-      Tasklist: [
-        "components/tasklist/introduction-to-tasklist",
-        {
-          "User guide": [
-            "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/updating-tasklist-cloud",
-          ],
-        },
-      ],
-      Optimize: [
-        optimizeLink("What is Optimize?", "components/what-is-optimize/"),
-        {
-          "User guide": [
-            optimizeLink(
-              "Collections, dashboards, and reports",
-              "components/userguide/collections-dashboards-reports/"
-            ),
-            optimizeLink(
-              "User permissions",
-              "components/userguide/user-permissions/"
-            ),
-            optimizeLink("Data sources", "components/userguide/data-sources/"),
+          Modeler: [
+            "components/modeler/about-modeler",
             {
-              Dashboards: [
+              "Web Modeler": [
+                "components/modeler/web-modeler/new-web-modeler",
+                "components/modeler/web-modeler/launch-cloud-modeler",
+                "components/modeler/web-modeler/model-your-first-diagram",
+                "components/modeler/web-modeler/import-diagram",
+                "components/modeler/web-modeler/fix-problems-in-your-diagram",
+                "components/modeler/web-modeler/save-and-deploy",
+                "components/modeler/web-modeler/start-instance",
+                "components/modeler/web-modeler/collaboration",
+                "components/modeler/web-modeler/milestones",
+                "components/modeler/web-modeler/token-simulation",
+                {
+                  "Advanced modeling": [
+                    "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                    "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
+                    "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
+                  ],
+                },
+              ],
+            },
+            {
+              "Desktop Modeler": [
+                "components/modeler/desktop-modeler/install-the-modeler",
+                "components/modeler/desktop-modeler/model-your-first-diagram",
+                "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+                "components/modeler/desktop-modeler/start-instance",
+                {
+                  "Element templates": [
+                    "components/modeler/desktop-modeler/element-templates/about-templates",
+                    "components/modeler/desktop-modeler/element-templates/configuring-templates",
+                    "components/modeler/desktop-modeler/element-templates/using-templates",
+                    "components/modeler/desktop-modeler/element-templates/defining-templates",
+                    "components/modeler/desktop-modeler/element-templates/additional-resources",
+                  ],
+                },
+                {
+                  "Additional configuration": [
+                    "components/modeler/desktop-modeler/flags/flags",
+                    "components/modeler/desktop-modeler/plugins/plugins",
+                    "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
+                    "components/modeler/desktop-modeler/search-paths/search-paths",
+                    "components/modeler/desktop-modeler/telemetry/telemetry",
+                  ],
+                },
+              ],
+            },
+            {
+              BPMN: [
+                "bpmn-dmn/bpmn/modeler-bpmn",
+                "bpmn-dmn/bpmn/bpmn-primer",
+                "bpmn-dmn/bpmn/bpmn-coverage",
+                "bpmn-dmn/bpmn/data-flow",
+                {
+                  Tasks: [
+                    "bpmn-dmn/bpmn/tasks",
+                    "bpmn-dmn/bpmn/service-tasks/service-tasks",
+                    "bpmn-dmn/bpmn/user-tasks/user-tasks",
+                    "bpmn-dmn/bpmn/receive-tasks/receive-tasks",
+                    "bpmn-dmn/bpmn/business-rule-tasks/business-rule-tasks",
+                    "bpmn-dmn/bpmn/script-tasks/script-tasks",
+                    "bpmn-dmn/bpmn/send-tasks/send-tasks",
+                    "bpmn-dmn/bpmn/manual-tasks/manual-tasks",
+                  ],
+                },
+                {
+                  Gateways: [
+                    "bpmn-dmn/bpmn/gateways",
+                    "bpmn-dmn/bpmn/exclusive-gateways/exclusive-gateways",
+                    "bpmn-dmn/bpmn/parallel-gateways/parallel-gateways",
+                    "bpmn-dmn/bpmn/event-based-gateways/event-based-gateways",
+                    "bpmn-dmn/bpmn/inclusive-gateways/inclusive-gateways",
+                  ],
+                },
+                {
+                  Events: [
+                    "bpmn-dmn/bpmn/events",
+                    "bpmn-dmn/bpmn/none-events/none-events",
+                    "bpmn-dmn/bpmn/message-events/message-events",
+                    "bpmn-dmn/bpmn/timer-events/timer-events",
+                    "bpmn-dmn/bpmn/error-events/error-events",
+                    "bpmn-dmn/bpmn/terminate-events/terminate-events",
+                  ],
+                },
+                {
+                  Subprocesses: [
+                    "bpmn-dmn/bpmn/subprocesses",
+                    "bpmn-dmn/bpmn/embedded-subprocesses/embedded-subprocesses",
+                    "bpmn-dmn/bpmn/call-activities/call-activities",
+                    "bpmn-dmn/bpmn/event-subprocesses/event-subprocesses",
+                  ],
+                },
+                {
+                  Markers: [
+                    "bpmn-dmn/bpmn/markers",
+                    "bpmn-dmn/bpmn/multi-instance/multi-instance",
+                  ],
+                },
+              ],
+            },
+            require("./docs/bpmn-dmn/dmn/sidebar-schema"),
+            require("./docs/bpmn-dmn/feel/sidebar-schema"),
+            require("./docs/components/modeler/forms/sidebar-schema"),
+          ],
+          Connectors: [
+            "components/connectors/introduction-to-connectors",
+            "components/connectors/use-connectors",
+            {
+              "Out-of-the-box Connectors": [
+                "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+                "components/connectors/out-of-the-box-connectors/aws-sns",
+                "components/connectors/out-of-the-box-connectors/aws-sqs",
+                "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/github-webhook",
+                "components/connectors/out-of-the-box-connectors/googledrive",
+                "components/connectors/out-of-the-box-connectors/http-webhook",
+                "components/connectors/out-of-the-box-connectors/kafka",
+                "components/connectors/out-of-the-box-connectors/microsoft-teams",
+                "components/connectors/out-of-the-box-connectors/rabbitmq",
+                "components/connectors/out-of-the-box-connectors/rest",
+                "components/connectors/out-of-the-box-connectors/sendgrid",
+                "components/connectors/out-of-the-box-connectors/slack",
+                "components/connectors/out-of-the-box-connectors/uipath",
+              ],
+              "Custom Connectors": [
+                "components/connectors/custom-built-connectors/connector-templates",
+                "components/connectors/custom-built-connectors/connector-sdk",
+              ],
+            },
+          ],
+          Zeebe: [
+            "components/zeebe/zeebe-overview",
+            {
+              "Technical concepts": [
+                "components/zeebe/technical-concepts/technical-concepts-overview",
+                "components/zeebe/technical-concepts/architecture",
+                "components/zeebe/technical-concepts/clustering",
+                "components/zeebe/technical-concepts/partitions",
+                "components/zeebe/technical-concepts/internal-processing",
+                "components/zeebe/technical-concepts/process-lifecycles",
+                "components/zeebe/technical-concepts/protocols",
+              ],
+            },
+            {
+              "Open source community": [
+                "components/zeebe/open-source/community-contributions",
+                "components/zeebe/open-source/get-help-get-involved",
+              ],
+            },
+          ],
+          Operate: [
+            "components/operate/operate-introduction",
+            {
+              "User guide": [
+                "components/operate/userguide/basic-operate-navigation",
+                "components/operate/userguide/resolve-incidents-update-variables",
+                "components/operate/userguide/selections-operations",
+                "components/operate/userguide/delete-finished-instances",
+                "components/operate/userguide/operate-feedback-and-questions",
+                "components/operate/userguide/process-instance-modification",
+              ],
+            },
+          ],
+          Tasklist: [
+            "components/tasklist/introduction-to-tasklist",
+            {
+              "User guide": [
+                "components/tasklist/userguide/using-tasklist",
+                "components/tasklist/userguide/updating-tasklist-cloud",
+              ],
+            },
+          ],
+          Optimize: [
+            optimizeLink("What is Optimize?", "components/what-is-optimize/"),
+            {
+              "User guide": [
                 optimizeLink(
-                  "Creating dashboards",
-                  "components/userguide/creating-dashboards/"
-                ),
-                optimizeLink("Edit mode", "components/userguide/edit-mode/"),
-                optimizeLink("View mode", "components/userguide/view-mode/"),
-              ],
-            },
-            optimizeLink(
-              "Creating reports",
-              "components/userguide/creating-reports/"
-            ),
-            optimizeLink(
-              "Combined process reports",
-              "components/userguide/combined-process-reports/"
-            ),
-            optimizeLink(
-              "Processes",
-              "components/userguide/process-dashboards/"
-            ),
-            {
-              "Process analysis": [
-                optimizeLink(
-                  "Overview",
-                  "components/userguide/process-analysis/process-analysis-overview/"
+                  "Collections, dashboards, and reports",
+                  "components/userguide/collections-dashboards-reports/"
                 ),
                 optimizeLink(
-                  "Outlier analysis",
-                  "components/userguide/process-analysis/outlier-analysis/"
+                  "User permissions",
+                  "components/userguide/user-permissions/"
+                ),
+                optimizeLink("Data sources", "components/userguide/data-sources/"),
+                {
+                  Dashboards: [
+                    optimizeLink(
+                      "Creating dashboards",
+                      "components/userguide/creating-dashboards/"
+                    ),
+                    optimizeLink("Edit mode", "components/userguide/edit-mode/"),
+                    optimizeLink("View mode", "components/userguide/view-mode/"),
+                  ],
+                },
+                optimizeLink(
+                  "Creating reports",
+                  "components/userguide/creating-reports/"
                 ),
                 optimizeLink(
-                  "Branch analysis",
-                  "components/userguide/process-analysis/branch-analysis/"
+                  "Combined process reports",
+                  "components/userguide/combined-process-reports/"
+                ),
+                optimizeLink(
+                  "Processes",
+                  "components/userguide/process-dashboards/"
                 ),
                 {
-                  "Report analysis": [
+                  "Process analysis": [
                     optimizeLink(
-                      "Report process analysis",
-                      "components/userguide/process-analysis/report-analysis/overview/"
+                      "Overview",
+                      "components/userguide/process-analysis/process-analysis-overview/"
+                    ),
+                    optimizeLink(
+                      "Outlier analysis",
+                      "components/userguide/process-analysis/outlier-analysis/"
+                    ),
+                    optimizeLink(
+                      "Branch analysis",
+                      "components/userguide/process-analysis/branch-analysis/"
                     ),
                     {
-                      "Edit mode": [
+                      "Report analysis": [
                         optimizeLink(
-                          "Overview",
-                          "components/userguide/process-analysis/report-analysis/edit-mode/"
+                          "Report process analysis",
+                          "components/userguide/process-analysis/report-analysis/overview/"
                         ),
+                        {
+                          "Edit mode": [
+                            optimizeLink(
+                              "Overview",
+                              "components/userguide/process-analysis/report-analysis/edit-mode/"
+                            ),
+                            optimizeLink(
+                              "Select process definitions",
+                              "components/userguide/process-analysis/report-analysis/select-process-definitions/"
+                            ),
+                            optimizeLink(
+                              "Define reports",
+                              "components/userguide/process-analysis/report-analysis/define-reports/"
+                            ),
+                            optimizeLink(
+                              "Measures",
+                              "components/userguide/process-analysis/report-analysis/measures/"
+                            ),
+                            optimizeLink(
+                              "Compare target values",
+                              "components/userguide/process-analysis/report-analysis/compare-target-values/"
+                            ),
+                            optimizeLink(
+                              "Process instance parts",
+                              "components/userguide/process-analysis/report-analysis/process-instance-parts/"
+                            ),
+                            optimizeLink(
+                              "Configure reports",
+                              "components/userguide/process-analysis/report-analysis/configure-reports/"
+                            ),
+                          ],
+                        },
                         optimizeLink(
-                          "Select process definitions",
-                          "components/userguide/process-analysis/report-analysis/select-process-definitions/"
-                        ),
-                        optimizeLink(
-                          "Define reports",
-                          "components/userguide/process-analysis/report-analysis/define-reports/"
-                        ),
-                        optimizeLink(
-                          "Measures",
-                          "components/userguide/process-analysis/report-analysis/measures/"
-                        ),
-                        optimizeLink(
-                          "Compare target values",
-                          "components/userguide/process-analysis/report-analysis/compare-target-values/"
-                        ),
-                        optimizeLink(
-                          "Process instance parts",
-                          "components/userguide/process-analysis/report-analysis/process-instance-parts/"
-                        ),
-                        optimizeLink(
-                          "Configure reports",
-                          "components/userguide/process-analysis/report-analysis/configure-reports/"
+                          "View mode",
+                          "components/userguide/process-analysis/report-analysis/view-mode/"
                         ),
                       ],
                     },
+                    {
+                      Filters: [
+                        optimizeLink(
+                          "Overview",
+                          "components/userguide/process-analysis/filters/"
+                        ),
+                        optimizeLink(
+                          "Metadata filters",
+                          "components/userguide/process-analysis/metadata-filters/"
+                        ),
+                        optimizeLink(
+                          "Instance state filters",
+                          "components/userguide/process-analysis/instance-state-filters/"
+                        ),
+                        optimizeLink(
+                          "Flow node filters",
+                          "components/userguide/process-analysis/flow-node-filters/"
+                        ),
+                        optimizeLink(
+                          "Process instance filters",
+                          "components/userguide/process-analysis/process-instance-filters/"
+                        ),
+                        optimizeLink(
+                          "Variable filters",
+                          "components/userguide/process-analysis/variable-filters/"
+                        ),
+                      ],
+                    },
+                  ],
+                },
+                {
+                  "Decision analysis": [
                     optimizeLink(
-                      "View mode",
-                      "components/userguide/process-analysis/report-analysis/view-mode/"
+                      "Overview",
+                      "components/userguide/decision-analysis/decision-analysis-overview/"
+                    ),
+                    optimizeLink(
+                      "Single report",
+                      "components/userguide/decision-analysis/decision-report/"
+                    ),
+                    optimizeLink(
+                      "Filters",
+                      "components/userguide/decision-analysis/decision-filter/"
                     ),
                   ],
                 },
                 {
-                  Filters: [
+                  "Additional features": [
                     optimizeLink(
-                      "Overview",
-                      "components/userguide/process-analysis/filters/"
+                      "Alerts",
+                      "components/userguide/additional-features/alerts/"
                     ),
                     optimizeLink(
-                      "Metadata filters",
-                      "components/userguide/process-analysis/metadata-filters/"
+                      "Event-based processes",
+                      "components/userguide/additional-features/event-based-processes/"
                     ),
                     optimizeLink(
-                      "Instance state filters",
-                      "components/userguide/process-analysis/instance-state-filters/"
+                      "Export and import",
+                      "components/userguide/additional-features/export-import/"
                     ),
                     optimizeLink(
-                      "Flow node filters",
-                      "components/userguide/process-analysis/flow-node-filters/"
+                      "Footer",
+                      "components/userguide/additional-features/footer/"
                     ),
                     optimizeLink(
-                      "Process instance filters",
-                      "components/userguide/process-analysis/process-instance-filters/"
+                      "Variable labeling",
+                      "components/userguide/additional-features/variable-labeling/"
                     ),
                     optimizeLink(
-                      "Variable filters",
-                      "components/userguide/process-analysis/variable-filters/"
+                      "Process variants comparison",
+                      "components/userguide/additional-features/process-variants-comparison/"
+                    ),
+                    optimizeLink(
+                      "Machine learning-ready dataset",
+                      "components/userguide/additional-features/ml-dataset/"
                     ),
                   ],
                 },
               ],
             },
-            {
-              "Decision analysis": [
-                optimizeLink(
-                  "Overview",
-                  "components/userguide/decision-analysis/decision-analysis-overview/"
-                ),
-                optimizeLink(
-                  "Single report",
-                  "components/userguide/decision-analysis/decision-report/"
-                ),
-                optimizeLink(
-                  "Filters",
-                  "components/userguide/decision-analysis/decision-filter/"
-                ),
-              ],
-            },
-            {
-              "Additional features": [
-                optimizeLink(
-                  "Alerts",
-                  "components/userguide/additional-features/alerts/"
-                ),
-                optimizeLink(
-                  "Event-based processes",
-                  "components/userguide/additional-features/event-based-processes/"
-                ),
-                optimizeLink(
-                  "Export and import",
-                  "components/userguide/additional-features/export-import/"
-                ),
-                optimizeLink(
-                  "Footer",
-                  "components/userguide/additional-features/footer/"
-                ),
-                optimizeLink(
-                  "Variable labeling",
-                  "components/userguide/additional-features/variable-labeling/"
-                ),
-                optimizeLink(
-                  "Process variants comparison",
-                  "components/userguide/additional-features/process-variants-comparison/"
-                ),
-                optimizeLink(
-                  "Machine learning-ready dataset",
-                  "components/userguide/additional-features/ml-dataset/"
-                ),
-              ],
-            },
           ],
-        },
+        },    
       ],
+    },
+    {
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
@@ -505,6 +525,7 @@ module.exports = {
       ],
     },
   ],
+
   "APIs & Clients": [
     "apis-clients/working-with-apis-clients",
     {

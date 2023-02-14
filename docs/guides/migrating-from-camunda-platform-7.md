@@ -46,7 +46,7 @@ To migrate existing process solutions that use Camunda Spin heavily, you can sti
 
 Camunda Platform 7 uses [JUEL (Java Unified Expression Language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/) as the expression language. In the embedded engine scenario, expressions can even read into beans (Java object instances) in the application.
 
-Camunda Platform 8 uses [FEEL (Friendly-Enough Expression Language](/components/modeler/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
+Camunda Platform 8 uses [FEEL (Friendly-Enough Expression Language](/bpmn-dmn/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
 Most expressions can be converted (see [this community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/modeler-plugin-7-to-8-converter/client/JuelToFeelConverter.js as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform 7).
 
@@ -175,7 +175,7 @@ You should consider migrating existing Camunda Platform 7 solutions if:
 
 - You are looking to leverage a SaaS offering (e.g. to reduce the effort for hardware or infrastructure setup and maintenance).
 - You are in need of performance at scale and/or improved resilience.
-- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/docs/components/concepts/messages/#message-buffering), big [multi-instance constructs](/docs/components/modeler/bpmn/multi-instance/), the new Connectors framework, or the improved collaboration features in web modeler).
+- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/docs/components/concepts/messages/#message-buffering), big [multi-instance constructs](/docs/bpmn-dmn/bpmn/multi-instance/), the new Connectors framework, or the improved collaboration features in web modeler).
 
 ### Migration steps
 
@@ -192,11 +192,11 @@ The typical steps are:
 
 In general, **development artifacts** _can_ be migrated:
 
-- **BPMN models:** Camunda Platform 8 uses BPMN like Camunda Platform 7 does, which generally allows use of the same model files, but you might need to configure _different extension atrributes_ (at least by using a different namespace). Furthermore, Camunda Platform 8 has a _different coverage_ of BPMN concepts that are supported (see [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) vs [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
+- **BPMN models:** Camunda Platform 8 uses BPMN like Camunda Platform 7 does, which generally allows use of the same model files, but you might need to configure _different extension atrributes_ (at least by using a different namespace). Furthermore, Camunda Platform 8 has a _different coverage_ of BPMN concepts that are supported (see [Camunda Platform 8 BPMN coverage](/bpmn-dmn/bpmn/bpmn-coverage.md) vs [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
 
 - **DMN models:** Camunda Platform 8 uses DMN like Camunda Platform 7 does. There are no changes in the models necessary. Some rarely used features of Camunda Platform 7 are not supported in Camunda Platform 8. Those are listed below.
 
-- **CMMN models:** It is not possible to run CMMN on Zeebe, _CMMN models cannot be migrated_. You can remodel cases in BPMN according to [Building Flexibility into BPMN Models](https://camunda.com/best-practices/building-flexibility-into-bpmn-models/), keeping in mind the [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md).
+- **CMMN models:** It is not possible to run CMMN on Zeebe, _CMMN models cannot be migrated_. You can remodel cases in BPMN according to [Building Flexibility into BPMN Models](https://camunda.com/best-practices/building-flexibility-into-bpmn-models/), keeping in mind the [Camunda Platform 8 BPMN coverage](/bpmn-dmn/bpmn/bpmn-coverage.md).
 
 - **Application code:** The application code needs to use _a different client library and different APIs_. This will lead to code changes you must implement.
 
@@ -223,7 +223,7 @@ In essence, this tooling implements details described in the next sections.
 Camunda Platform 8 has a different API than Camunda Platform 7. As a result, you have to migrate some of your code, especially code that does the following:
 
 - Uses the Client API (e.g. to start process instances)
-- Implements [service tasks](../components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
+- Implements [service tasks](../bpmn-dmn/bpmn/service-tasks/service-tasks.md), which can be:
   - [Java code attached to a service task](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) and called by the engine directly (in-VM).
   - [External tasks](../components/best-practices/development/invoking-services-from-the-process-c7.md#external-tasks), where workers subscribe to the engine.
 
@@ -266,7 +266,7 @@ In Camunda Platform 7, there are three ways to attach Java code to service tasks
 
 Camunda Platform 8 cannot directly execute custom Java code. Instead, there must be a [job worker](/components/concepts/job-workers.md) executing code.
 
-The [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
+The [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type `camunda-7-adapter`. [Task headers](/bpmn-dmn/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
 
 ![Service task in Camunda Platform 7 and Camunda Platform 8](img/migration-service-task.png)
 
@@ -294,13 +294,13 @@ To migrate BPMN process models from Camunda Platform 7 to Camunda Platform 8, yo
 
 - The namespace of extensions has changed (from `http://camunda.org/schema/1.0/bpmn` to `http://camunda.org/schema/zeebe/1.0`)
 - Different configuration attributes are used
-- Camunda Platform 8 has a _different coverage_ of BPMN elements (see [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) vs [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
+- Camunda Platform 8 has a _different coverage_ of BPMN elements (see [Camunda Platform 8 BPMN coverage](/bpmn-dmn/bpmn/bpmn-coverage.md) vs [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
 
 The following sections describe what the existing [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration/) does by BPMN symbol and explain unsupported attributes.
 
 ### Service tasks
 
-![Service Task](../components/modeler/bpmn/assets/bpmn-symbols/service-task.svg)
+![Service Task](../bpmn-dmn/bpmn/assets/bpmn-symbols/service-task.svg)
 
 Migrating a service task is described in detail in the section about adjusting your source code above.
 
@@ -334,7 +334,7 @@ Service tasks using `camunda:connector` cannot be migrated.
 
 ### Send tasks
 
-![Send Task](../components/modeler/bpmn/assets/bpmn-symbols/send-task.svg)
+![Send Task](../bpmn-dmn/bpmn/assets/bpmn-symbols/send-task.svg)
 
 In both engines, a send task has the same behavior as a service task. A send task is migrated exactly like a service task.
 
@@ -355,7 +355,7 @@ The following is not possible:
 
 ### Human tasks
 
-![User Task](../components/modeler/bpmn/assets/bpmn-symbols/user-task.svg)
+![User Task](../bpmn-dmn/bpmn/assets/bpmn-symbols/user-task.svg)
 
 Human task management is also available in Camunda Platform 8, but uses a different tasklist user interface and API.
 
@@ -390,7 +390,7 @@ The following attributes/elements cannot (yet) be migrated:
 
 ### Business rule tasks
 
-![Business Rule Task](../components/modeler/bpmn/assets/bpmn-symbols/business-rule-task.svg)
+![Business Rule Task](../bpmn-dmn/bpmn/assets/bpmn-symbols/business-rule-task.svg)
 
 Camunda Platform 8 support the DMN standard just as Camunda Platform 7 does, so the business rule task can basically be migrated.
 
@@ -415,7 +415,7 @@ The following attributes/elements cannot be migrated:
 
 ### Call activities
 
-![Call Activity](../components/modeler/bpmn/assets/bpmn-symbols/call-activity.svg)
+![Call Activity](../bpmn-dmn/bpmn/assets/bpmn-symbols/call-activity.svg)
 
 Call activities are generally supported in Zeebe. The following attributes/elements can be migrated:
 
@@ -433,7 +433,7 @@ The following attributes/elements cannot be migrated:
 
 ### Script task
 
-![Script Task](../components/modeler/bpmn/assets/bpmn-symbols/script-task.svg)
+![Script Task](../bpmn-dmn/bpmn/assets/bpmn-symbols/script-task.svg)
 
 Script tasks cannot natively be executed by the Zeebe engine. They behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker), provided as a community extension.
 
@@ -498,7 +498,7 @@ To implement Camunda Platform 7 process solutions that can be easily migrated, s
 8. Avoid using any implementation classes from Camunda; generally, those with \*.impl.\* in their package name.
 9. Avoid using engine plugins.
 
-We also recommend reviewing [BPMN elements supported in Camunda 8](/docs/components/modeler/bpmn/bpmn-coverage/), though any feature gap will likely be closed soon.
+We also recommend reviewing [BPMN elements supported in Camunda 8](/docs/bpmn-dmn/bpmn/bpmn-coverage/), though any feature gap will likely be closed soon.
 
 [Execution Listeners](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#execution-listener) and [Task Listeners](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#task-listener) are areas in Camunda Platform 8 that are still under discussion. Currently, those use cases need to be solved slightly differently. Depending on your use case, the following Camunda Platform 8 features can be used:
 
@@ -623,7 +623,7 @@ This way, you have full control over what is happening, and such code is also ea
 
 ### Simple expressions and FEEL
 
-[Camunda 8 uses FEEL as its expression language](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/). There are big advantages to this decision. Not only are the expression languages between BPMN and DMN harmonized, but also the language is really powerful for typical expressions. One of my favorite examples is the following onboarding demo we regularly show. A decision table will hand back a list of possible risks, whereas every risk has a severity indicator (yellow, red) and a description.
+[Camunda 8 uses FEEL as its expression language](https://docs.camunda.io/docs/bpmn-dmn/feel/what-is-feel/). There are big advantages to this decision. Not only are the expression languages between BPMN and DMN harmonized, but also the language is really powerful for typical expressions. One of my favorite examples is the following onboarding demo we regularly show. A decision table will hand back a list of possible risks, whereas every risk has a severity indicator (yellow, red) and a description.
 
 ![onboarding demo](https://camunda.com/wp-content/uploads/2022/05/Migrating-to-Camunda-Platform-8-image-1-1024x367.png)
 

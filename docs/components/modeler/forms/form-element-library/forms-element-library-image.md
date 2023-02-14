@@ -10,6 +10,6 @@ An element allowing the user to display images.
 
 ## Configurable properties
 
-- **Image source**: Specifies the image source via [expression](../../feel/language-guide/feel-expressions-introduction.md) or static value (hyperlink or data URI).
+- **Image source**: Specifies the image source via [expression](/bpmn-dmn/feel/language-guide/feel-expressions-introduction.md) or static value (hyperlink or data URI).
 - **Alternative text**: Provides an alternative text to the image in case it cannot be displayed.
-- **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the image.
+- **Hide if**: [Expression](/bpmn-dmn/feel/language-guide/feel-expressions-introduction.md) to hide the image.

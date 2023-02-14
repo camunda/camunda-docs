@@ -16,7 +16,7 @@ In this guide, we’ll step through one way to create an automated process utili
 
 ## Create an automated process with user tasks
 
-To create an automated process with [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md), take the following steps:
+To create an automated process with [user tasks](/bpmn-dmn/bpmn/user-tasks/user-tasks.md), take the following steps:
 
 ### Develop your automated process with user tasks
 
@@ -28,7 +28,7 @@ To create an automated process with [user tasks](/components/modeler/bpmn/user-t
 5. Change the task type by clicking the wrench icon. Select **User Task**.
    ![wrench icon example](./img/wrench-icon-example.png)
 6. Add a descriptive name using the properties panel. In this case, we've named ours `Decide what's for dinner`.
-7. Append an exclusive [gateway](/components/modeler/bpmn/gateways.md) to your user task by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
+7. Append an exclusive [gateway](/bpmn-dmn/bpmn/gateways.md) to your user task by clicking on the user task `Decide what's for dinner` and clicking on the element you'd like to create next. In this case, we've selected the diamond icon to create a gateway.
 8. Create two sequence flows (represented by the arrows) from the gateway and two new user tasks based on what the user decides to eat. In this case, we've named ours `Prepare chicken` and `Prepare salad`.
 9. Sequence flows require expressions to access variables from the form we'll create below to determine what to eat for dinner. To add an [expression](/components/concepts/expressions.md), click on the sequence flow to view the properties panel, and open the **Condition** tab to insert a conditional expression.
 10. Verify the sequences flows have the following expressions: `= meal = "Salad"`on one side, and `= meal = "Chicken"`on the other.
@@ -70,7 +70,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 ### Complete a user task
 
-Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
+Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](/bpmn-dmn/bpmn/user-tasks/user-tasks.md#user-task-forms).
 
 1. Go back to your Camunda Platform 8 diagram and select the honeycomb icon and then **View user tasks** to take a look at your user tasks inside Tasklist.
 2. Select the open user task on the left panel of **Tasks**. In our example below, this is **Decide what's for dinner**.
@@ -92,7 +92,7 @@ In this case, the token will move through the gateway and (according to the cond
 ## Additional resources and next steps
 
 - [Video-based Human Task Orchestration Course](https://bit.ly/3PJJocB)
-- [BPMN user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
+- [BPMN user tasks](/bpmn-dmn/bpmn/user-tasks/user-tasks.md)
 - [Building Forms with Modeler](./utilizing-forms.md)
 - [Introduction to Operate](/components/operate/operate-introduction.md)
 - [Introduction to Tasklist](/components/tasklist/introduction-to-tasklist.md)

@@ -16,7 +16,7 @@ A Select dropdown allowing the user to select one of multiple data option from l
 - **Default value**: Provides a default selection in case no input data exists for the given key. Only available for _static_ options sources.
 - **Searchable**: Allows the select entries to be searched via keyboard.
 - **Disabled**: Disables the select, for use during development.
-- **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the select.
+- **Hide if**: [Expression](/bpmn-dmn/feel/language-guide/feel-expressions-introduction.md) to hide the select.
 - **Options source**: Selects can be configured with an options source defining the individual choices the select provides, see [options source docs](../configuration/forms-config-options.md).
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: One select entry must be selected.

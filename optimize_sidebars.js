@@ -259,108 +259,108 @@ module.exports = {
 
         {
           BPMN: [
-            docsLink("BPMN in Modeler", "components/modeler/bpmn/"),
-            docsLink("BPMN primer", "components/modeler/bpmn/bpmn-primer/"),
-            docsLink("BPMN coverage", "components/modeler/bpmn/bpmn-coverage/"),
-            docsLink("Data flow", "components/modeler/bpmn/data-flow/"),
+            docsLink("BPMN in Modeler", "bpmn-dmn/bpmn/"),
+            docsLink("BPMN primer", "bpmn-dmn/bpmn/bpmn-primer/"),
+            docsLink("BPMN coverage", "bpmn-dmn/bpmn/bpmn-coverage/"),
+            docsLink("Data flow", "bpmn-dmn/bpmn/data-flow/"),
 
             {
               Tasks: [
-                docsLink("Overview", "components/modeler/bpmn/tasks/"),
+                docsLink("Overview", "bpmn-dmn/bpmn/tasks/"),
                 docsLink(
                   "Service tasks",
-                  "components/modeler/bpmn/service-tasks/"
+                  "bpmn-dmn/bpmn/service-tasks/"
                 ),
-                docsLink("User tasks", "components/modeler/bpmn/user-tasks/"),
+                docsLink("User tasks", "bpmn-dmn/bpmn/user-tasks/"),
                 docsLink(
                   "Receive tasks",
-                  "components/modeler/bpmn/receive-tasks/"
+                  "bpmn-dmn/bpmn/receive-tasks/"
                 ),
                 docsLink(
                   "Business rule tasks",
-                  "components/modeler/bpmn/business-rule-tasks/"
+                  "bpmn-dmn/bpmn/business-rule-tasks/"
                 ),
                 docsLink(
                   "Script tasks",
-                  "components/modeler/bpmn/script-tasks/"
+                  "bpmn-dmn/bpmn/script-tasks/"
                 ),
-                docsLink("Send tasks", "components/modeler/bpmn/send-tasks/"),
+                docsLink("Send tasks", "bpmn-dmn/bpmn/send-tasks/"),
                 docsLink(
                   "Manual tasks",
-                  "components/modeler/bpmn/manual-tasks/"
+                  "bpmn-dmn/bpmn/manual-tasks/"
                 ),
               ],
             },
 
             {
               Gateways: [
-                docsLink("Overview", "components/modeler/bpmn/gateways/"),
+                docsLink("Overview", "bpmn-dmn/bpmn/gateways/"),
                 docsLink(
                   "Exclusive gateway",
-                  "components/modeler/bpmn/exclusive-gateways/"
+                  "bpmn-dmn/bpmn/exclusive-gateways/"
                 ),
                 docsLink(
                   "Parallel gateway",
-                  "components/modeler/bpmn/parallel-gateways/"
+                  "bpmn-dmn/bpmn/parallel-gateways/"
                 ),
                 docsLink(
                   "Event-based gateway",
-                  "components/modeler/bpmn/event-based-gateways/"
+                  "bpmn-dmn/bpmn/event-based-gateways/"
                 ),
                 docsLink(
                   "Inclusive gateway",
-                  "components/modeler/bpmn/inclusive-gateways/"
+                  "bpmn-dmn/bpmn/inclusive-gateways/"
                 ),
               ],
             },
 
             {
               Events: [
-                docsLink("Overview", "components/modeler/bpmn/events/"),
-                docsLink("None events", "components/modeler/bpmn/none-events/"),
+                docsLink("Overview", "bpmn-dmn/bpmn/events/"),
+                docsLink("None events", "bpmn-dmn/bpmn/none-events/"),
                 docsLink(
                   "Message events",
-                  "components/modeler/bpmn/message-events/"
+                  "bpmn-dmn/bpmn/message-events/"
                 ),
                 docsLink(
                   "Timer events",
-                  "components/modeler/bpmn/timer-events/"
+                  "bpmn-dmn/bpmn/timer-events/"
                 ),
                 docsLink(
                   "Error events",
-                  "components/modeler/bpmn/error-events/"
+                  "bpmn-dmn/bpmn/error-events/"
                 ),
                 docsLink(
                   "Terminate events",
-                  "components/modeler/bpmn/terminate-events/"
+                  "bpmn-dmn/bpmn/terminate-events/"
                 ),
               ],
             },
 
             {
               Subprocesses: [
-                docsLink("Overview", "components/modeler/bpmn/subprocesses/"),
+                docsLink("Overview", "bpmn-dmn/bpmn/subprocesses/"),
                 docsLink(
                   "Embedded subprocess",
-                  "components/modeler/bpmn/embedded-subprocesses/"
+                  "bpmn-dmn/bpmn/embedded-subprocesses/"
                 ),
                 docsLink(
                   "Call activities",
-                  "components/modeler/bpmn/call-activities/"
+                  "bpmn-dmn/bpmn/call-activities/"
                 ),
                 docsLink(
                   "Event subprocess",
-                  "components/modeler/bpmn/event-subprocesses/"
+                  "bpmn-dmn/bpmn/event-subprocesses/"
                 ),
               ],
             },
 
             {
               Markers: [
-                docsLink("Overview", "components/modeler/bpmn/markers/"),
+                docsLink("Overview", "bpmn-dmn/bpmn/markers/"),
                 docsLink(
                   "Multi-instance",
-                  "components/modeler/bpmn/multi-instance/"
+                  "bpmn-dmn/bpmn/multi-instance/"
                 ),
               ],
             },
@@ -369,92 +369,92 @@ module.exports = {
 
         {
           DMN: [
-            docsLink("DMN in Modeler", "components/modeler/dmn/"),
+            docsLink("DMN in Modeler", "bpmn-dmn/dmn/"),
             docsLink(
               "Decision requirements graph",
-              "components/modeler/dmn/decision-requirements-graph/"
+              "bpmn-dmn/dmn/decision-requirements-graph/"
             ),
 
             {
               "Decision table": [
-                docsLink("Overview", "components/modeler/dmn/decision-table/"),
+                docsLink("Overview", "bpmn-dmn/dmn/decision-table/"),
                 docsLink(
                   "Input",
-                  "components/modeler/dmn/decision-table-input/"
+                  "bpmn-dmn/dmn/decision-table-input/"
                 ),
                 docsLink(
                   "Output",
-                  "components/modeler/dmn/decision-table-output/"
+                  "bpmn-dmn/dmn/decision-table-output/"
                 ),
-                docsLink("Rule", "components/modeler/dmn/decision-table-rule/"),
+                docsLink("Rule", "bpmn-dmn/dmn/decision-table-rule/"),
                 docsLink(
                   "Hit policy",
-                  "components/modeler/dmn/decision-table-hit-policy/"
+                  "bpmn-dmn/dmn/decision-table-hit-policy/"
                 ),
               ],
             },
 
             docsLink(
               "Decision literal expression",
-              "components/modeler/dmn/decision-literal-expression/"
+              "bpmn-dmn/dmn/decision-literal-expression/"
             ),
-            docsLink("Data types", "components/modeler/dmn/dmn-data-types/"),
+            docsLink("Data types", "bpmn-dmn/dmn/dmn-data-types/"),
           ],
         },
 
         {
           "FEEL expressions": [
-            docsLink("What is FEEL?", "components/modeler/feel/what-is-feel/"),
+            docsLink("What is FEEL?", "bpmn-dmn/feel/what-is-feel/"),
             docsLink(
               "Data types",
-              "components/modeler/feel/language-guide/feel-data-types/"
+              "bpmn-dmn/feel/language-guide/feel-data-types/"
             ),
             docsLink(
               "Unary-tests",
-              "components/modeler/feel/language-guide/feel-unary-tests/"
+              "bpmn-dmn/feel/language-guide/feel-unary-tests/"
             ),
 
             {
               Expressions: [
                 docsLink(
                   "Introduction",
-                  "components/modeler/feel/language-guide/feel-expressions-introduction/"
+                  "bpmn-dmn/feel/language-guide/feel-expressions-introduction/"
                 ),
                 docsLink(
                   "Boolean expressions",
-                  "components/modeler/feel/language-guide/feel-boolean-expressions/"
+                  "bpmn-dmn/feel/language-guide/feel-boolean-expressions/"
                 ),
                 docsLink(
                   "String expressions",
-                  "components/modeler/feel/language-guide/feel-string-expressions/"
+                  "bpmn-dmn/feel/language-guide/feel-string-expressions/"
                 ),
                 docsLink(
                   "Numeric expressions",
-                  "components/modeler/feel/language-guide/feel-numeric-expressions/"
+                  "bpmn-dmn/feel/language-guide/feel-numeric-expressions/"
                 ),
                 docsLink(
                   "List expressions",
-                  "components/modeler/feel/language-guide/feel-list-expressions/"
+                  "bpmn-dmn/feel/language-guide/feel-list-expressions/"
                 ),
                 docsLink(
                   "Context expressions",
-                  "components/modeler/feel/language-guide/feel-context-expressions/"
+                  "bpmn-dmn/feel/language-guide/feel-context-expressions/"
                 ),
                 docsLink(
                   "Temporal expressions",
-                  "components/modeler/feel/language-guide/feel-temporal-expressions/"
+                  "bpmn-dmn/feel/language-guide/feel-temporal-expressions/"
                 ),
                 docsLink(
                   "Variables",
-                  "components/modeler/feel/language-guide/feel-variables/"
+                  "bpmn-dmn/feel/language-guide/feel-variables/"
                 ),
                 docsLink(
                   "Control flow",
-                  "components/modeler/feel/language-guide/feel-control-flow/"
+                  "bpmn-dmn/feel/language-guide/feel-control-flow/"
                 ),
                 docsLink(
                   "Functions",
-                  "components/modeler/feel/language-guide/feel-functions/"
+                  "bpmn-dmn/feel/language-guide/feel-functions/"
                 ),
               ],
             },
@@ -463,39 +463,39 @@ module.exports = {
               "Built-in Functions": [
                 docsLink(
                   "Introduction",
-                  "components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/"
+                  "bpmn-dmn/feel/builtin-functions/feel-built-in-functions-introduction/"
                 ),
                 docsLink(
                   "Conversion functions",
-                  "components/modeler/feel/builtin-functions/feel-built-in-functions-conversion/"
+                  "bpmn-dmn/feel/builtin-functions/feel-built-in-functions-conversion/"
                 ),
                 docsLink(
                   "Boolean functions",
-                  "components/modeler/feel/builtin-functions/feel-built-in-functions-boolean/"
+                  "bpmn-dmn/feel/builtin-functions/feel-built-in-functions-boolean/"
                 ),
                 docsLink(
                   "String functions",
-                  "components/modeler/feel/builtin-functions/feel-built-in-functions-string/"
+                  "bpmn-dmn/feel/builtin-functions/feel-built-in-functions-string/"
                 ),
                 docsLink(
                   "Numeric functions",
-                  "components/modeler/feel/builtin-functions/feel-built-in-functions-numeric/"
+                  "bpmn-dmn/feel/builtin-functions/feel-built-in-functions-numeric/"
                 ),
                 docsLink(
                   "List functions",
-                  "components/modeler/feel/builtin-functions/feel-built-in-functions-list/"
+                  "bpmn-dmn/feel/builtin-functions/feel-built-in-functions-list/"
                 ),
                 docsLink(
                   "Context functions",
-                  "components/modeler/feel/builtin-functions/feel-built-in-functions-context/"
+                  "bpmn-dmn/feel/builtin-functions/feel-built-in-functions-context/"
                 ),
                 docsLink(
                   "Temporal functions",
-                  "components/modeler/feel/builtin-functions/feel-built-in-functions-temporal/"
+                  "bpmn-dmn/feel/builtin-functions/feel-built-in-functions-temporal/"
                 ),
                 docsLink(
                   "Range functions",
-                  "components/modeler/feel/builtin-functions/feel-built-in-functions-range/"
+                  "bpmn-dmn/feel/builtin-functions/feel-built-in-functions-range/"
                 ),
               ],
             },

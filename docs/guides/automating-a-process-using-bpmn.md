@@ -23,7 +23,7 @@ BPMN offers control and visibility over your critical business processes. The wo
 ## Set up
 
 Begin by building your BPMN diagrams with [Modeler](../components/modeler/about-modeler.md).
-To get started, ensure you’ve [created a Camunda Platform 8 account](/guides/create-account.md).
+To get started, ensure you’ve [created a Camunda Platform 8 account](/guides/getting-started/).
 
 ## Getting started with BPMN
 
@@ -47,7 +47,7 @@ You can build out a BPMN diagram for a process using several elements, including
   - Leverage [expressions](../components/concepts/expressions.md) to access variables and calculate their value(s).
 - Subprocesses: For example, a transaction subprocess which can be used to group multiple activities to a transaction.
 
-For a complete list of BPMN elements and their capabilities, visit the [BPMN reference material](../components/modeler/bpmn/bpmn.md).
+For a complete list of BPMN elements and their capabilities, visit the [BPMN reference material](../bpmn-dmn/bpmn/bpmn.md).
 
 ### BPMN in action
 
@@ -96,7 +96,7 @@ Variables are part of a process instance and represent the data of the instance.
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
 - [BPMN Implementation Reference](https://docs.camunda.org/manual/latest/reference/bpmn20/)
 - [BPMN Engine](https://camunda.com/products/camunda-platform/bpmn-engine/)
-- [BPMN Reference](../components/modeler/bpmn/bpmn.md)
+- [BPMN Reference](../bpmn-dmn/bpmn/bpmn.md)
 - [Camunda Platform 8 Overview](https://bit.ly/3TjNEm7)
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)

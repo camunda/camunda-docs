@@ -78,14 +78,14 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "components/components-overview",
-          label: "Components",
+          docId: "apis-clients/working-with-apis-clients",
+          label: "APIs & Clients",
           position: "left",
         },
         {
           type: "doc",
-          docId: "apis-clients/working-with-apis-clients",
-          label: "APIs & Clients",
+          docId: "reference/overview",
+          label: "BPMN & DMN",
           position: "left",
         },
         {

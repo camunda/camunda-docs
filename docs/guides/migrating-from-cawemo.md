@@ -10,7 +10,7 @@ You should consider migrating diagrams from Cawemo to Camunda Platform 8 Web Mod
 
 - You want to continue working on your diagrams on the latest Camunda Platform version.
 - You are exploring automating your processes.
-- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](https://docs.camunda.io/docs/components/concepts/messages/#message-buffering), big [multi-instance constructs](https://docs.camunda.io/docs/components/modeler/bpmn/multi-instance/), the [Connectors framework](https://docs.camunda.io/docs/components/connectors/introduction-to-connectors/), or the improved [collaboration features](https://docs.camunda.io/docs/components/modeler/web-modeler/collaboration/) in Web Modeler).
+- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](https://docs.camunda.io/docs/components/concepts/messages/#message-buffering), big [multi-instance constructs](https://docs.camunda.io/docs/bpmn-dmn/bpmn/multi-instance/), the [Connectors framework](https://docs.camunda.io/docs/components/connectors/introduction-to-connectors/), or the improved [collaboration features](https://docs.camunda.io/docs/components/modeler/web-modeler/collaboration/) in Web Modeler).
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ While unsupported elements are imported in Web Modeler, they are not supported f
 
 ## Additional resources
 
-Not all elements in Cawemo are supported in Camunda Platform 8 Web Modeler. Find details on BPMN coverage in Camunda Platform 8 in the [BPMN coverage documentation](https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-coverage/). We are investing in supporting the elements currently available on Camunda Platform 7.
+Not all elements in Cawemo are supported in Camunda Platform 8 Web Modeler. Find details on BPMN coverage in Camunda Platform 8 in the [BPMN coverage documentation](https://docs.camunda.io/docs/bpmn-dmn/bpmn/bpmn-coverage/). We are investing in supporting the elements currently available on Camunda Platform 7.
 
 ## Next steps
 

@@ -19,7 +19,7 @@ The following table shows each plan and available type or size of cluster:
 | Professional | X           | X              | \-             | \-             |
 | Enterprise   | X           | X              | X              | X              |
 
-When you deploy and execute your [BPMN](/components/modeler/bpmn/bpmn.md) or [DMN](/components/modeler/dmn/dmn.md) models on a production cluster, this might impact your monthly (Professional) or annual (Enterprise) total fee, meaning the more you execute your models, the higher your total fee may be.
+When you deploy and execute your [BPMN](/bpmn-dmn/bpmn/bpmn.md) or [DMN](/bpmn-dmn/dmn/dmn.md) models on a production cluster, this might impact your monthly (Professional) or annual (Enterprise) total fee, meaning the more you execute your models, the higher your total fee may be.
 
 ## Free Trial cluster
 

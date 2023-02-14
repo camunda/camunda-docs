@@ -4,7 +4,7 @@ title: Business rule task linking
 description: Use one of the following approaches to link the DMN decision to be called by a business rule task.
 ---
 
-You can use one of the following approaches to link the DMN decision to be called by a [business rule task](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md).
+You can use one of the following approaches to link the DMN decision to be called by a [business rule task](/bpmn-dmn/bpmn/business-rule-tasks/business-rule-tasks.md).
 
 ## Using the link button
 

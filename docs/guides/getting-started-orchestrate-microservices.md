@@ -14,7 +14,7 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-- Ensure you have a valid [Camunda Platform 8 account](create-account.md), or sign up if you still need one.
+- Ensure you have a valid [Camunda Platform 8 account](/guides/getting-started/), or sign up if you still need one.
 - Java >= 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)

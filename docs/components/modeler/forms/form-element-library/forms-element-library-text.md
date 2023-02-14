@@ -10,8 +10,8 @@ A text component allowing to display static information to the user.
 
 ## Configurable properties
 
-- **Text**: Either an [**Expression**](../../feel/language-guide/feel-expressions-introduction.md), **Markdown**, or **basic HTML** which will be rendered in the form. Note that dangerous HTML elements will not be rendered so to prevent the risk of cross-site scripting using Camunda Forms.
-- **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the text.
+- **Text**: Either an [**Expression**](/bpmn-dmn/feel/language-guide/feel-expressions-introduction.md), **Markdown**, or **basic HTML** which will be rendered in the form. Note that dangerous HTML elements will not be rendered so to prevent the risk of cross-site scripting using Camunda Forms.
+- **Hide if**: [Expression](/bpmn-dmn/feel/language-guide/feel-expressions-introduction.md) to hide the text.
 
 **Example for Markdown**:
 

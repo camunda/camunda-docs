@@ -17,7 +17,7 @@ A number field allowing the user to read and edit numeric data.
 - **Decimal digits**: Defines the maximum number of digits after the decimal.
 - **Increment**: Defines the increment between valid field values.
 - **Disabled**: Disables the number field, for use during development.
-- **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the number.
+- **Hide if**: [Expression](/bpmn-dmn/feel/language-guide/feel-expressions-introduction.md) to hide the number.
 - **Serialize to string**: Configures the output format of the datetime value. This enables unlimited precision digits.
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: Number field must contain a value.

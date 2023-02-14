@@ -10,18 +10,18 @@ This is particularly useful when [automating a process using BPMN](../../guides/
 
 The following attributes of BPMN elements _require_ an expression:
 
-- Sequence flow on an exclusive gateway: [condition](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md#conditions)
-- Message catch event/receive task: [correlation key](/components/modeler/bpmn/message-events/message-events.md#messages)
-- Multi-instance activity: [input collection](/components/modeler/bpmn/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/components/modeler/bpmn/multi-instance/multi-instance.md#collecting-the-output)
+- Sequence flow on an exclusive gateway: [condition](/bpmn-dmn/bpmn/exclusive-gateways/exclusive-gateways.md#conditions)
+- Message catch event/receive task: [correlation key](/bpmn-dmn/bpmn/message-events/message-events.md#messages)
+- Multi-instance activity: [input collection](/bpmn-dmn/bpmn/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/bpmn-dmn/bpmn/multi-instance/multi-instance.md#collecting-the-output)
 - Input/output variable mappings: [source](variables.md#inputoutput-variable-mappings)
 
 Additionally, the following attributes of BPMN elements can define an expression _optionally_, instead of a static value:
 
-- Timer catch event: [timer definition](/components/modeler/bpmn/timer-events/timer-events.md#timers)
-- Message catch event/receive task: [message name](/components/modeler/bpmn/message-events/message-events.md#messages)
-- Service task/business rule task/script task/send task: [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition), [job retries](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition)
-- User task: [assignee](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments), [candidateGroups](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments)
-- Call activity: [process id](/components/modeler/bpmn/call-activities/call-activities.md#defining-the-called-process)
+- Timer catch event: [timer definition](/bpmn-dmn/bpmn/timer-events/timer-events.md#timers)
+- Message catch event/receive task: [message name](/bpmn-dmn/bpmn/message-events/message-events.md#messages)
+- Service task/business rule task/script task/send task: [job type](/bpmn-dmn/bpmn/service-tasks/service-tasks.md#task-definition), [job retries](/bpmn-dmn/bpmn/service-tasks/service-tasks.md#task-definition)
+- User task: [assignee](/bpmn-dmn/bpmn/user-tasks/user-tasks.md#assignments), [candidateGroups](/bpmn-dmn/bpmn/user-tasks/user-tasks.md#assignments)
+- Call activity: [process id](/bpmn-dmn/bpmn/call-activities/call-activities.md#defining-the-called-process)
 
 ## Expressions vs. static values
 
@@ -47,7 +47,7 @@ An expression is written in **FEEL** (**Friendly Enough Expression Language**). 
 - Simple syntax designed for business professionals and developers
 - Three-valued logic (true, false, null)
 
-Camunda Platform 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL expressions](/components/modeler/feel/what-is-feel.md).
+Camunda Platform 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL expressions](/bpmn-dmn/feel/what-is-feel.md).
 
 ### Access variables
 
@@ -176,7 +176,7 @@ Any value can be transformed into a string value using the `string()` function.
 // "order-123"
 ```
 
-More functions for string values are available as [built-in string functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-string.md) (e.g. contains, matches, etc.)
+More functions for string values are available as [built-in string functions](/bpmn-dmn/feel/builtin-functions/feel-built-in-functions-string.md) (e.g. contains, matches, etc.)
 
 ### Temporal expressions
 
@@ -338,17 +338,17 @@ contains(string: "foobar", match: "foo")
 
 FEEL defines several built-in functions:
 
-- [Conversion functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md)
-- [Boolean functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean.md)
-- [String functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-string.md)
-- [Numeric functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-numeric.md)
-- [List functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-list.md)
-- [Context functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md)
-- [Temporal functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-temporal.md)
+- [Conversion functions](/bpmn-dmn/feel/builtin-functions/feel-built-in-functions-conversion.md)
+- [Boolean functions](/bpmn-dmn/feel/builtin-functions/feel-built-in-functions-boolean.md)
+- [String functions](/bpmn-dmn/feel/builtin-functions/feel-built-in-functions-string.md)
+- [Numeric functions](/bpmn-dmn/feel/builtin-functions/feel-built-in-functions-numeric.md)
+- [List functions](/bpmn-dmn/feel/builtin-functions/feel-built-in-functions-list.md)
+- [Context functions](/bpmn-dmn/feel/builtin-functions/feel-built-in-functions-context.md)
+- [Temporal functions](/bpmn-dmn/feel/builtin-functions/feel-built-in-functions-temporal.md)
 
 ## Next steps
 
-- [FEEL](/components/modeler/feel/what-is-feel.md)
-- [FEEL data types](/components/modeler/feel/language-guide/feel-data-types.md)
-- [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
+- [FEEL](/bpmn-dmn/feel/what-is-feel.md)
+- [FEEL data types](/bpmn-dmn/feel/language-guide/feel-data-types.md)
+- [FEEL expressions](/bpmn-dmn/feel/language-guide/feel-expressions-introduction.md)
 - [DMN specification](https://www.omg.org/spec/DMN/About-DMN/)
