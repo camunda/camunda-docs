@@ -85,13 +85,19 @@ module.exports = {
         {
           type: "doc",
           docId: "apis-clients/working-with-apis-clients",
-          label: "APIs & Clients",
+          label: "APIs & SDKs",
           position: "left",
         },
         {
           type: "doc",
           docId: "self-managed/about-self-managed",
           label: "Self-Managed",
+          position: "left",
+        },
+        {
+          type: "doc",
+          docId: "reference/overview",
+          label: "Best Practices",
           position: "left",
         },
         {

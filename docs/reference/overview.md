@@ -5,7 +5,12 @@ sidebar_label: Overview
 slug: /reference/
 ---
 
-This section contains general reference material for Camunda Platform 8.
+This section contains general reference material for Camunda Platform 8. Some items you may visit frequently, others you may visit only one or twice.
+
+* [BPMN](#)
+* [DMN](#)
+* [FEEL](#)
+* [Glossary](glossary.md)
 
 ## Security, support, & license information
 
@@ -16,7 +21,3 @@ This section contains general reference material for Camunda Platform 8.
 - [Release policy](release-policy.md)
 - [Supported environments](supported-environments.md)
 - [Dependencies & Third Party Libraries](dependencies.md)
-
-## Additional resources
-
-- [Glossary](glossary.md)
