@@ -187,6 +187,8 @@ RewriteRule ^docs/self-managed/optimize-deployment/setup/?$ /docs/self-managed/p
 RewriteRule ^docs/self-managed/optimize-deployment/setup/(.*)$ /optimize/self-managed/optimize-deployment/configuration/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/setup/$ /optimize/self-managed/optimize-deployment/configuration/ [R=301,L]
 
+RewriteRule ^docs/8.1/components/zeebe/technical-concepts/exporters/(.*)$ /docs/8.1/self-managed/concepts/exporters/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/zeebe/technical-concepts/exporters/$ /docs/8.1/self-managed/concepts/exporters [R=301,L]
 RewriteRule ^docs/components/zeebe/technical-concepts/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
 RewriteRule ^docs/components/zeebe/technical-concepts/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
 
