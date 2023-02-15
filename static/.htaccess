@@ -187,10 +187,10 @@ RewriteRule ^docs/self-managed/optimize-deployment/setup/?$ /docs/self-managed/p
 RewriteRule ^docs/self-managed/optimize-deployment/setup/(.*)$ /optimize/self-managed/optimize-deployment/configuration/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/setup/$ /optimize/self-managed/optimize-deployment/configuration/ [R=301,L]
 
-RewriteRule ^docs/8.1/components/zeebe/technical-concepts/exporters/(.*)$ /docs/8.1/self-managed/concepts/exporters/$1 [R=301,L]
-RewriteRule ^docs/8.1/components/zeebe/technical-concepts/exporters/$ /docs/8.1/self-managed/concepts/exporters [R=301,L]
-RewriteRule ^docs/components/zeebe/technical-concepts/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
-RewriteRule ^docs/components/zeebe/technical-concepts/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
+RewriteRule ^docs/8.1/components/zeebe/open-source/exporters/(.*)$ /docs/8.1/self-managed/concepts/exporters/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/zeebe/open-source/exporters/$ /docs/8.1/self-managed/concepts/exporters [R=301,L]
+RewriteRule ^docs/components/zeebe/open-source/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
+RewriteRule ^docs/components/zeebe/open-source/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
 
 RewriteRule ^docs/reference/feel/builtin-functions/(.*)$ /docs/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/ [R=301,L]
 RewriteRule ^docs/reference/feel/language-guide/(.*)$ /docs/components/modeler/feel/what-is-feel/ [R=301,L]
