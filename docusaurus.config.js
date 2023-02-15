@@ -79,7 +79,7 @@ module.exports = {
         {
           type: "doc",
           docId: "apis-clients/working-with-apis-clients",
-          label: "APIs & Clients",
+          label: "APIs & SDKs",
           position: "left",
         },
         {
