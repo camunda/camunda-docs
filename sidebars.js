@@ -115,6 +115,13 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/new-web-modeler",
             "components/modeler/web-modeler/launch-cloud-modeler",
+            {
+              "Diagram dedicated modes": [
+                "components/modeler/web-modeler/about-dedicated-modes",
+                "components/modeler/web-modeler/design-your-process",
+                "components/modeler/web-modeler/implement-your-process",
+              ],
+            },
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
