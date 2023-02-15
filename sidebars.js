@@ -174,61 +174,6 @@ module.exports = {
                 },
               ],
             },
-            {
-              BPMN: [
-                "bpmn-dmn/bpmn/modeler-bpmn",
-                "bpmn-dmn/bpmn/bpmn-primer",
-                "bpmn-dmn/bpmn/bpmn-coverage",
-                "bpmn-dmn/bpmn/data-flow",
-                {
-                  Tasks: [
-                    "bpmn-dmn/bpmn/tasks",
-                    "bpmn-dmn/bpmn/service-tasks/service-tasks",
-                    "bpmn-dmn/bpmn/user-tasks/user-tasks",
-                    "bpmn-dmn/bpmn/receive-tasks/receive-tasks",
-                    "bpmn-dmn/bpmn/business-rule-tasks/business-rule-tasks",
-                    "bpmn-dmn/bpmn/script-tasks/script-tasks",
-                    "bpmn-dmn/bpmn/send-tasks/send-tasks",
-                    "bpmn-dmn/bpmn/manual-tasks/manual-tasks",
-                  ],
-                },
-                {
-                  Gateways: [
-                    "bpmn-dmn/bpmn/gateways",
-                    "bpmn-dmn/bpmn/exclusive-gateways/exclusive-gateways",
-                    "bpmn-dmn/bpmn/parallel-gateways/parallel-gateways",
-                    "bpmn-dmn/bpmn/event-based-gateways/event-based-gateways",
-                    "bpmn-dmn/bpmn/inclusive-gateways/inclusive-gateways",
-                  ],
-                },
-                {
-                  Events: [
-                    "bpmn-dmn/bpmn/events",
-                    "bpmn-dmn/bpmn/none-events/none-events",
-                    "bpmn-dmn/bpmn/message-events/message-events",
-                    "bpmn-dmn/bpmn/timer-events/timer-events",
-                    "bpmn-dmn/bpmn/error-events/error-events",
-                    "bpmn-dmn/bpmn/terminate-events/terminate-events",
-                  ],
-                },
-                {
-                  Subprocesses: [
-                    "bpmn-dmn/bpmn/subprocesses",
-                    "bpmn-dmn/bpmn/embedded-subprocesses/embedded-subprocesses",
-                    "bpmn-dmn/bpmn/call-activities/call-activities",
-                    "bpmn-dmn/bpmn/event-subprocesses/event-subprocesses",
-                  ],
-                },
-                {
-                  Markers: [
-                    "bpmn-dmn/bpmn/markers",
-                    "bpmn-dmn/bpmn/multi-instance/multi-instance",
-                  ],
-                },
-              ],
-            },
-            require("./docs/bpmn-dmn/dmn/sidebar-schema"),
-            require("./docs/bpmn-dmn/feel/sidebar-schema"),
             require("./docs/components/modeler/forms/sidebar-schema"),
           ],
           Connectors: [
@@ -476,6 +421,68 @@ module.exports = {
         },    
       ],
     },
+    {
+      type: 'category',
+      label: 'Standards',
+      collapsed: true,
+      items: [
+        {
+      BPMN: [
+        "bpmn-dmn/bpmn/modeler-bpmn",
+        "bpmn-dmn/bpmn/bpmn-primer",
+        "bpmn-dmn/bpmn/bpmn-coverage",
+        "bpmn-dmn/bpmn/data-flow",
+        {
+          Tasks: [
+            "bpmn-dmn/bpmn/tasks",
+            "bpmn-dmn/bpmn/service-tasks/service-tasks",
+            "bpmn-dmn/bpmn/user-tasks/user-tasks",
+            "bpmn-dmn/bpmn/receive-tasks/receive-tasks",
+            "bpmn-dmn/bpmn/business-rule-tasks/business-rule-tasks",
+            "bpmn-dmn/bpmn/script-tasks/script-tasks",
+            "bpmn-dmn/bpmn/send-tasks/send-tasks",
+            "bpmn-dmn/bpmn/manual-tasks/manual-tasks",
+          ],
+        },
+        {
+          Gateways: [
+            "bpmn-dmn/bpmn/gateways",
+            "bpmn-dmn/bpmn/exclusive-gateways/exclusive-gateways",
+            "bpmn-dmn/bpmn/parallel-gateways/parallel-gateways",
+            "bpmn-dmn/bpmn/event-based-gateways/event-based-gateways",
+            "bpmn-dmn/bpmn/inclusive-gateways/inclusive-gateways",
+          ],
+        },
+        {
+          Events: [
+            "bpmn-dmn/bpmn/events",
+            "bpmn-dmn/bpmn/none-events/none-events",
+            "bpmn-dmn/bpmn/message-events/message-events",
+            "bpmn-dmn/bpmn/timer-events/timer-events",
+            "bpmn-dmn/bpmn/error-events/error-events",
+            "bpmn-dmn/bpmn/terminate-events/terminate-events",
+          ],
+        },
+        {
+          Subprocesses: [
+            "bpmn-dmn/bpmn/subprocesses",
+            "bpmn-dmn/bpmn/embedded-subprocesses/embedded-subprocesses",
+            "bpmn-dmn/bpmn/call-activities/call-activities",
+            "bpmn-dmn/bpmn/event-subprocesses/event-subprocesses",
+          ],
+        },
+        {
+          Markers: [
+            "bpmn-dmn/bpmn/markers",
+            "bpmn-dmn/bpmn/multi-instance/multi-instance",
+          ],
+        },
+      ],
+    },
+    require("./docs/bpmn-dmn/dmn/sidebar-schema"),
+    require("./docs/bpmn-dmn/feel/sidebar-schema"),
+  ],
+  },
     {
       "Best Practices": [
         "components/best-practices/best-practices-overview",

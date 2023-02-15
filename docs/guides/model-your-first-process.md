@@ -10,17 +10,18 @@ description: "Use Modeler to design and deploy a process."
 
    <p>Create a Camunda Platform 8 account so you can create clusters, deploy processes, and create a new instance.
 
-   Visit [camunda.io/signup](https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral) and view the **Sign Up** screen:
+Visit [camunda.io/signup](https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral) and view the **Sign Up** screen:
 
-   ![signup](./img/signup.png)
+![signup](./img/signup.png)
 
-   ### Create an account
+### Create an account
 
-   Fill out the form and submit, or sign up using the social sign up buttons like Google or GitHub.
+Fill out the form and submit, or sign up using the social sign up buttons like Google or GitHub.
 
-   If you fill out the form, you'll receive a confirmation email. Click on the link to verify your email address and set your password.
+If you fill out the form, you'll receive a confirmation email. Click on the link to verify your email address and set your password.
 
-   If you choose to create an account through the social sign up buttons, you'll be redirected to Console directly.</p>`
+If you choose to create an account through the social sign up buttons, you'll be redirected to Console directly.</p>`
+
 </details>
 
 ## Log in to your Camunda Platform 8 account
