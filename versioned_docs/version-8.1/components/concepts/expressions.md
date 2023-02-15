@@ -180,7 +180,14 @@ More functions for string values are available as [built-in string functions](/c
 
 ### Temporal expressions
 
-The current date and date-time can be accessed using the built-in functions `today()` and `now()`. To store the current date or date-time in a variable, convert it to a string using the built-in function `string()`.
+The current date and date-time can be accessed using the built-in functions `today()` and `now()`.
+Storing a temporal value as a variable will store it as a timezone extended ISO 8601 formatted string.
+
+:::note
+The timezone in the ISO 8601 format differs from the FEEL specific format. Storing a date-time as a process variable means
+you can not use it in temporal expressions later on in the process. To circumvent this we recommend storing
+date-times in the FEEL specific format using the built-in `string()` function.
+:::
 
 ```feel
 now()
