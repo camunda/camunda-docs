@@ -114,7 +114,7 @@ v3.8.1+g5cb9af4
 If you're running on Helm 3.0.0 up to 3.1.3, you need to add these values to your `values.yaml` file, or save them to a new file locally, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Platform Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/openshift/values.yaml).
+These values are also available in the [Camunda Platform Helm chart repository](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform/openshift).
 :::
 
 ```yaml
