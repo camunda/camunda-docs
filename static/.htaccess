@@ -292,6 +292,9 @@ RewriteRule ^docs/self-managed/zeebe-deployment/security/authentication/?$ /docs
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview(.*)$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview$2 [R=301,L]
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/available-connectors-overview$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview [R=301,L]
 
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/graphql(.*)$ /docs/components/connectors/out-of-the-box-connectors/graphql$2 [R=301,L]
+RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/graphql$ /docs/components/connectors/out-of-the-box-connectors/graphql [R=301,L]
+
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/rest(.*)$ /docs/components/connectors/out-of-the-box-connectors/rest$2 [R=301,L]
 RewriteRule ^docs/(next/)?components/modeler/web-modeler/connectors/available-connectors/rest$ /docs/components/connectors/out-of-the-box-connectors/rest [R=301,L]
 
