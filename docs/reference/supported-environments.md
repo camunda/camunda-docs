@@ -80,5 +80,5 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 :::note Elasticsearch support
 [Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Optimize.
 
-AWS Opensearch is not supported at this time.
+AWS OpenSearch is not supported at this time.
 :::
