@@ -6,7 +6,7 @@ keywords: ["backup", "backups"]
 ---
 
 :::note
-This API is subject to change.
+This release introduces breaking changes for [Operate and Tasklist](./operate-tasklist-backup.md), as well as [Optimize](./optimize-backup.md).
 :::
 
 You can use the backup feature of Camunda Platform 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime. In case of failures that lead to data loss, you can recover the cluster from a backup.

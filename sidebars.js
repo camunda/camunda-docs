@@ -59,6 +59,7 @@ module.exports = {
     {
       Concepts: [
         "components/concepts/what-is-camunda-platform-8",
+        "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
         "components/concepts/process-instance-creation",
@@ -125,6 +126,7 @@ module.exports = {
             {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
                 "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
               ],
             },
@@ -232,6 +234,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/rest",
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/out-of-the-box-connectors/uipath",
           ],
           "Custom Connectors": [
             "components/connectors/custom-built-connectors/connector-templates",
@@ -607,6 +610,7 @@ module.exports = {
                 "apis-clients/java-client-examples/process-instance-create",
                 "apis-clients/java-client-examples/process-instance-create-nonblocking",
                 "apis-clients/java-client-examples/process-instance-create-with-result",
+                "apis-clients/java-client-examples/decision-evaluate",
                 "apis-clients/java-client-examples/job-worker-open",
                 "apis-clients/java-client-examples/data-pojo",
                 "apis-clients/java-client-examples/cluster-topology-request",
