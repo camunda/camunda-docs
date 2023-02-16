@@ -150,12 +150,12 @@ zeebe:
     data:
       backup:
         store: S3
-          s3:
-            bucketName:
-            region:
-            endpoint:
-            accessKey:
-            secretKey:
+        s3:
+          bucketName:
+          region:
+          endpoint:
+          accessKey:
+          secretKey:
 ```
 
 Alternatively, you can configure backup store using environment variables:
