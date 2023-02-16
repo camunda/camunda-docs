@@ -29,8 +29,6 @@ To create a new alert, take the following steps:
 
 5. To create a **webhook** alert, provide a valid webhook URL that accepts `POST` requests.
 
-![create-alert-webhook](./img/cluster-detail-alerts-webhook.png)
-
 6. You will have one email alert per cluster, but you can create multiple webhook alerts if needed.
 
 ### Webhook alerts
