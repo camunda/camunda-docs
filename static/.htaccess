@@ -14,6 +14,13 @@ RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templ
 # Added Self-Managed Modeler redirect
 RewriteRule ^docs/next/self-managed/web-modeler/installation/(.*)$ /docs/next/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
 
+RewriteRule ^docs/components/zeebe/open-source/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
+RewriteRule ^docs/components/zeebe/open-source/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
+RewriteRule ^docs/8.1/components/zeebe/open-source/exporters/(.*)$ /docs/8.1/self-managed/concepts/exporters/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/zeebe/open-source/exporters/$ /docs/8.1/self-managed/concepts/exporters [R=301,L]
+RewriteRule ^docs/next/components/zeebe/open-source/exporters/(.*)$ /docs/next/self-managed/concepts/exporters/$1 [R=301,L]
+RewriteRule ^docs/next/components/zeebe/open-source/exporters/$ /docs/next/self-managed/concepts/exporters [R=301,L]
+
 # Redirects for Connectors move to top level
 RewriteRule ^docs/8.0/components/integration-framework/introduction-to-connectors/(.*)$ /docs/8.0/components/connectors/introduction-to-connectors/$1 [R=301,L]
 RewriteRule ^docs/8.0/components/integration-framework/introduction-to-connectors$ /docs/8.0/components/connectors/introduction-to-connectors [R=301,L]
@@ -186,9 +193,6 @@ RewriteRule ^docs/self-managed/optimize-deployment/setup/?$ /docs/self-managed/p
 
 RewriteRule ^docs/self-managed/optimize-deployment/setup/(.*)$ /optimize/self-managed/optimize-deployment/configuration/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/setup/$ /optimize/self-managed/optimize-deployment/configuration/ [R=301,L]
-
-RewriteRule ^docs/components/zeebe/technical-concepts/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
-RewriteRule ^docs/components/zeebe/technical-concepts/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]
 
 RewriteRule ^docs/reference/feel/builtin-functions/(.*)$ /docs/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/ [R=301,L]
 RewriteRule ^docs/reference/feel/language-guide/(.*)$ /docs/components/modeler/feel/what-is-feel/ [R=301,L]
