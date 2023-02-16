@@ -31,13 +31,13 @@ zeebe:
     data:
       backup:
         store: S3
-          s3:
-            bucketName:
-            basePath:
-            region:
-            endpoint:
-            accessKey:
-            secretKey:
+        s3:
+          bucketName:
+          basePath:
+          region:
+          endpoint:
+          accessKey:
+          secretKey:
 ```
 
 Alternatively, you can configure backup store using environment variables:
@@ -59,6 +59,31 @@ Zeebe does not support backup encryption natively, but it _can_ use encrypted S3
 Using default bucket encryption gives you control over the encryption keys and algorithms while being completely transparent with Zeebe.
 
 Combined with TLS between Zeebe and the S3 API, backups are fully encrypted in transit and at rest. Other S3 compatible services might have similar features that should work as well.
+
+#### Backup compression
+
+Backups can be large depending on your usage of Zeebe. To reduce S3 storage costs and upload times, you can enable backup compression.
+
+Zeebe compresses backup data immediately before uploading to S3 and buffers the compressed files in a temporary directory. Compression and buffering of compressed files can have a negative effect if Zeebe is heavily resource constrained.
+
+You can enable compression by specifying a compression algorithm to use. We recommend using [zstd] as it provides a good trade off between compression ratio and resource usage.
+
+More compression algorithms are available; check [commons-compress] for a full list.
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        store: s3
+        s3:
+          compression: zstd
+```
+
+Alternatively, you can configure backup compression using an environment variable: `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`.
+
+[zstd]: https://github.com/facebook/zstd
+[commons-compress]: https://commons.apache.org/proper/commons-compress/
 
 ## Create backup API
 
