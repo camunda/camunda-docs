@@ -64,7 +64,7 @@ An event represents a state change associated with an aspect of an executing pro
 
 An exporter represents a sink to which Zeebe will submit all records within the log. This gives users of Zeebe an opportunity to persist records with the log for future use as this data will not be available after log compaction.
 
-- [Exporter](/components/zeebe/open-source/exporters.md)
+- [Exporter](/self-managed/concepts/exporters.md)
 
 ### Follower
 
