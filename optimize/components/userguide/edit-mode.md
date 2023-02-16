@@ -19,7 +19,7 @@ Once you have prepared all your reports, you can now start to assemble them into
 
 ### Optimize reports
 
-In the **Add report** modal, use **Optimize Report** tab to add reports to the dashboard. Use the **Select a Report** field to select one of the previously created reports or use **+ New Report from a template** option to create a new report.
+In the **Add report** modal, use the **Optimize Report** tab to add reports to the dashboard. Use the **Select a Report** field to select one of the previously created reports or click **+ New Report from a template** to create a new report.
 
 ![add a report modal](./img/dashboard-addAReportModal.png)
 
