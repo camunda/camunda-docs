@@ -22,7 +22,7 @@ For example: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagg
 
 You need authentication to access the API endpoints.
 
-### Authentication for C8 SaaS (Cloud) usage
+### Authentication for SaaS
 
 #### Authentication via JWT access token
 
@@ -64,7 +64,7 @@ Capture the `access_token` value from the response object. In each request to th
 Authorization: Bearer eyJHb...
 ```
 
-#### Authentication via cookies
+#### Authentication via cookie
 
 Another way to access API is to use cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the steps in the following example:
 
