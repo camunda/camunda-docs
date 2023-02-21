@@ -6,17 +6,17 @@
  */
 
 /*
-These colors are produced using #fc5d0d (orange-munda) in the primary color shades tool.
+These colors are produced using a slightly darker version of #fc5d0d (orange-munda) in the primary color shades tool.
 See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 */
 :root {
-  --ifm-color-primary: #fc5d0d;
-  --ifm-color-primary-dark: #ec5103;
-  --ifm-color-primary-darker: #de4c03;
-  --ifm-color-primary-darkest: #b73f02;
-  --ifm-color-primary-light: #fc6f27;
-  --ifm-color-primary-lighter: #fc7734;
-  --ifm-color-primary-lightest: #fd925c;
+  --ifm-color-primary: #c54302;
+  --ifm-color-primary-dark: #b13c02;
+  --ifm-color-primary-darker: #a73902;
+  --ifm-color-primary-darkest: #8a2f01;
+  --ifm-color-primary-light: #d94a02;
+  --ifm-color-primary-lighter: #e34d02;
+  --ifm-color-primary-lightest: #fc5806;
 }
 
 .docusaurus-highlight-code-line {
