@@ -53,13 +53,13 @@ The values correspond to a queue size estimated by the Vegas algorithm based on 
 When the queue size is below _alpha_, the limit is increased.
 When the queue size is above _beta_, the limit is decreased.
 
-### Gradient
+#### Gradient
 
 Gradient is an adaptive limit algorithm that dynamically calculates the limit based on observed RTT.
 In the gradient algorithm, the limit is adjusted based on the gradient of observed RTT and an observed minimum RTT.
 If gradient is less than 1, the limit is decreased. Otherwise, the limit is increased.
 
-### Gradient2
+#### Gradient2
 
 Gradient2 is similar to Gradient, but instead of using observed minimum RTT as the base, it uses an exponentially smoothed average RTT.
 
