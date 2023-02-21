@@ -27,6 +27,8 @@ The limit and inflight count are calculated per partition.
 Zeebe uses adaptive algorithms from [concurrency-limits](https://github.com/Netflix/concurrency-limits) to dynamically calculate the limit.
 Configure Zeebe with one of the backpressure algorithms in the following sections.
 
+The default values can be found in the [Zeebe broker configuration template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.standalone.yaml.template) in section `# backpressure`.
+
 #### Fixed limit
 
 With **fixed limit**, one can configure a fixed value of the limit.
@@ -36,7 +38,7 @@ Note that with different cluster configurations, you may have to choose differen
 #### AIMD
 
 AIMD (Additive increase/multiplicative decrease) calculates the limit based on the configured _requestTimeout_.
-When the RTT for a request _requestTimeout_, the limit is increased by 1.
+When the RTT for a request is faster than _requestTimeout_, the limit is increased by 1.
 When the RTT is longer than _requestTimeout_,
 the limit will be reduced according to the configured _backoffRatio_.
 
