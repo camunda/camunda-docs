@@ -14,7 +14,7 @@ To avoid such problems, Zeebe employs a backpressure mechanism. When the broker 
 
 ### Terminology
 
-- **RTT** - The time between when the request is accepted by the broker and when the response to the request is sent back to the gateway.
+- **RTT** - Round Trip Time: The time between when the request is accepted by the broker and when the response to the request is sent back to the gateway.
 - **Inflight count** - The number of requests accepted by the broker but the response is not yet sent.
 - **Limit** - Maximum number of flight requests. When the inflight count is above the limit, any new incoming request is rejected.
 
@@ -35,7 +35,7 @@ Note that with different cluster configurations, you may have to choose differen
 
 #### AIMD
 
-AIMD calculates the limit based on the configured _requestTimeout_.
+AIMD (Additive increase/multiplicative decrease) calculates the limit based on the configured _requestTimeout_.
 When the RTT for a request _requestTimeout_, the limit is increased by 1.
 When the RTT is longer than _requestTimeout_,
 the limit will be reduced according to the configured _backoffRatio_.
