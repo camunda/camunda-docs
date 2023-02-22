@@ -1,0 +1,63 @@
+name: move-to-done-test
+# sjh - this is a test workflow to make sure I get the syntax correct before applying to the original move-to-done
+
+# FYI secrets.ADD_TO_PROJECT_PAT is a personal access token belonging to @akeller.
+
+on:
+  pull_request:
+
+jobs:
+  move-to-done-test:
+    # if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get project IDs for later steps
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          ORGANIZATION: camunda
+          PROJECT_NUMBER: 27
+        run: |
+          gh api graphql -f query='
+            query($org: String!, $number: Int!, $prID: ID!) {
+              node(id: $prID) {
+                ... on PullRequest {
+                  projectItems(first: 10) {
+                    nodes {
+                      id
+                      project {
+                        number
+                      }
+                    }
+                  }
+                }
+              }
+              organization(login: $org){
+                projectV2(number: $number) {
+                  id
+                  fields(first:20) {
+                    nodes {
+                      ... on ProjectV2SingleSelectField {
+                        id
+                        name
+                        options {
+                          id
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }' -f org=$ORGANIZATION -F number=$PROJECT_NUMBER -f prID=${{github.event.pull_request.node_id}} > project_data.json
+
+          echo 'PROJECT_ID='$(jq '.data.organization.projectV2.id' project_data.json) >> $GITHUB_ENV
+          echo 'STATUS_FIELD_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .id' project_data.json) >> $GITHUB_ENV
+          echo 'DONE_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="✅ Done") |.id' project_data.json) >> $GITHUB_ENV
+          echo 'PROJECT_ITEM_ID='$(jq '.data.node.projectItems.nodes[] | select(.project.number== ${{ env.PROJECT_NUMBER }}) | .id' project_data.json) >> $GITHUB_ENV
+      - name: Set status field
+        env:
+          GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+        run: |
+          if ${{ env.PROJECT_ITEM_ID != '' }}; then
+            echo "we have a project item ID! ${{ env.PROJECT_ITEM_ID }}"
+          fi
