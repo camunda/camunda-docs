@@ -14,11 +14,17 @@ A [job worker](/components/concepts/job-workers.md) can subscribe to the job typ
 
 ## Task definition
 
-A service task must have a `taskDefinition`; this specifies the type of job workers can subscribe to.
+A service task must have a `taskDefiniton`. The `taskDefiniton` is used to specify which [job workers](../../../concepts/job-workers.md) handle the service task work.
 
-Optionally, a `taskDefinition` can specify the number of times the job is retried when a worker signals failure (default = 3).
+A `taskDefinition` specifies the following properties:
 
-Typically, the job type and the job retries are defined as static values (e.g. `order-items`) but they can also be defined as [expressions](/components/concepts/expressions.md) (e.g. `= "order-" + priorityGroup`). The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
+- `type` (required): Used as reference to specify which job workers request the respective service task job. For example, `order-items`.
+  - `type` can be specified as any static value (`myType`) or as a FEEL [expression](../../../concepts/expressions.md) prefixed by `=` that evaluates to any FEEL string; for example, `= "order-" + priorityGroup`.
+- `retries` (optional): Specifies the number of times the job is retried when a worker signals failure. The default is three.
+
+The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
+
+See an example in the form of the [XML representation](#xml-representation) below.
 
 ## Task headers
 

@@ -35,7 +35,7 @@ jobs:
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
       - name: Run web server
         run: |
-          docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnami/apache:latest
+          docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnami/apache:2.4.54
           echo "container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' webserver)" >> $GITHUB_ENV
       - name: Download sitemap from production
         run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > sitemap.prod.txt
@@ -46,13 +46,10 @@ jobs:
         with:
           url: "http://${{ env.container_ip }}:8080/"
       - name: Check internal links
-        # disable action until https://github.com/tylerbutler/linkcheck-bin/issues/1 is released
-        #uses: filiph/linkcheck@v2.0.20
-        #with:
-        #  arguments: '-i sitemap.prod.txt'
-        run: |
-          curl -sL https://github.com/filiph/linkcheck/releases/download/2.0.20/linkcheck-2.0.20-linux-x64.tar.gz | tar xvzf - linkcheck/linkcheck --strip 1
-          # Check links from production sitemap to ensure no publish links are broken
-          ./linkcheck -i sitemap.prod.txt
-          # Check links from other products to ensure no links are broken
-          ./linkcheck -i product-links.prod.txt
+        uses: filiph/linkcheck@2.0.23
+        with:
+          arguments: "-i sitemap.prod.txt"
+      - name: Check product links
+        uses: filiph/linkcheck@2.0.23
+        with:
+          arguments: "-i product-links.prod.txt"

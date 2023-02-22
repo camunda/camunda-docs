@@ -42,6 +42,7 @@ module.exports = {
         routeBasePath: "optimize",
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
+        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
       },
     ],
   ],
@@ -53,7 +54,7 @@ module.exports = {
         '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
       backgroundColor: "#14D890",
       textColor: "#000",
-      isCloseable: false,
+      isCloseable: true,
     },
     prism: {
       additionalLanguages: ["java", "protobuf"],
@@ -131,7 +132,7 @@ module.exports = {
           items: [
             {
               label: "Slack",
-              href: "https://camunda-slack-invite.herokuapp.com/",
+              href: "https://camunda.com/slack",
             },
             {
               label: "Twitter",
