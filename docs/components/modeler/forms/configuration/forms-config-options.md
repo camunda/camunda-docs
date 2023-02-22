@@ -63,4 +63,4 @@ If the value and label are equal, shorthand formats may be used instead:
 
 The `label` parameter should be a `string`.
 
-If a label is provided, the `value` parameter can be any non-nullish type. Otherwise, it is restricted to types `string`, `number` and `boolean`.
+If a label is provided, the `value` parameter can be any non-null type. Otherwise, it is restricted to types `string`, `number`, and `boolean`.
