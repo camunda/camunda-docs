@@ -4,6 +4,12 @@ title: REST Connector
 description: Make a request to a REST API and use the response in the next steps of your process.
 ---
 
+:::caution
+If you use the REST Connector, ensure you do not have any instance variable named in the list below:
+
+- body, url, method, headers, authentication, queryParameters, connectionTimeoutInSeconds
+  :::
+
 The **REST Connector** allows you to make a request to a REST API and use the response in the next steps of your process.
 
 ## Create a REST Connector task
@@ -22,7 +28,7 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 ### Authentication
 
-You can choose among the available REST Connectors according to your authentication requirements.
+You can choose among the available authentication type according to your authentication requirements.
 
 ### REST Connector (None)
 

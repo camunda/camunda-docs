@@ -16,6 +16,11 @@ implementation](#job-worker-implementation) section below. The sections before t
 decision implementation only.
 :::
 
+:::info
+If you only want to evaluate a DMN decision, you can use the
+[`EvaluateDecision`](/apis-clients/grpc.md#evaluatedecision-rpc) API.
+:::
+
 When the process instance arrives at a business rule task, a decision is evaluated using the
 internal DMN decision engine. Once the decision is made, the process instance continues.
 
@@ -67,18 +72,14 @@ use [job workers](/components/concepts/job-workers.md) to implement your busines
 
 A job worker implementation can be defined using the `zeebe:taskDefinition` extension element.
 
-Business rule tasks with a job worker implementation behave exactly like [service
-tasks](/components/modeler/bpmn/service-tasks/service-tasks.md). The differences between these task
+Business rule tasks with a job worker implementation behave exactly like [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md). The differences between these task
 types are the visual representation (i.e. the task marker) and the semantics for the model.
 
 When a process instance enters a business rule task with alternative task implementation, it creates
 a corresponding job and waits for its completion. A job worker should request jobs of this job type
 and process them. When the job is completed, the process instance continues.
 
-A business rule task must define a [job
-type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a
-service task does. This specifies the type of job that workers should subscribe to (e.g.
-`calculate_risk`).
+A business rule task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a service task does. This is used as reference to specify which job workers request the respective business rule task job. For example, `order-items`. Note that `type` can be specified as any static value (`myType`) or as a FEEL [expression](../../../concepts/expressions.md) prefixed by `=` that evaluates to any FEEL string; for example, `= "order-" + priorityGroup`.
 
 Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
 worker (e.g. the key of the decision to evaluate).

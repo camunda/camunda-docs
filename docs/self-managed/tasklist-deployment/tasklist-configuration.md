@@ -169,11 +169,13 @@ Tasklist uses the following Actuator configuration by default:
 # disable default health indicators:
 # https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-health-indicators
 management.health.defaults.enabled: false
-# enable health check, metrics and loggers endpoints
-management.endpoints.web.exposure.include: health,prometheus,loggers
+
 # enable Kubernetes health groups:
 # https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-kubernetes-probes
-management.health.probes.enabled: true
+management.endpoint.health.probes.enabled: true
+
+# enable health check and metrics endpoints
+management.endpoints.web.exposure.include: health, prometheus, loggers, usage-metrics, backups
 ```
 
 With this configuration, the following endpoints are available for use out of the box:

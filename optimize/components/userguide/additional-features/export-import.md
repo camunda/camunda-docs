@@ -4,11 +4,9 @@ title: Export and import
 description: Export and import Optimize entities.
 ---
 
-With Optimize 3.3.0, a new exporting/importing feature has been added to Optimize. Currently, this feature is limited to reports and dashboards. In the future, users will be able to export and import collections as well. Currently, only superusers are authorized to export and import Optimize entities.
-
 ## Exporting entities
 
-Superusers can export entities by accessing the **Export** option in the entity menu. This downloads a JSON file which
+Users can export entities by accessing the **Export** option in the entity menu. This downloads a JSON file which
 includes all relevant information that defines the selected entity. This file can later be used to import the exported entity into
 a different Optimize installation.
 

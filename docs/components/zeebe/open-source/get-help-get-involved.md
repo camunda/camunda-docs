@@ -14,7 +14,7 @@ The Zeebe team monitors the forum closely, and we do our best to respond to all 
 
 ### Public Slack group
 
-Join our [public Slack group](https://camunda-slack-invite.herokuapp.com/), where you can ask questions, share community contributions, and connect with other Zeebe users.
+Join our [public Slack group](https://camunda.com/slack), where you can ask questions, share community contributions, and connect with other Zeebe users.
 
 ### Create an issue in GitHub
 

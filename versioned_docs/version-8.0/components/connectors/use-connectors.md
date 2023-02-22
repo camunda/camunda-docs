@@ -7,7 +7,9 @@ description: Learn how to use Connectors in Web Modeler by creating a Connector 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
 Find the available Connectors in Camunda Platform 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
-## Creating a Connector task
+## Outbound Connector
+
+### Creating the BPMN task
 
 Use the change type context menu item (spanner/wrench icon) to integrate Connectors in a business model. Users can search for keywords like `REST` or `email` to find specific Connectors. To discover all available Connectors in Camunda, input the term `Connector` into the search bar.
 
@@ -17,7 +19,7 @@ Alternatively, you can directly create a Connector task by using the **Append Co
 
 ![append Connector](img/use-connectors-append.png)
 
-## Configuring a Connector
+### Configuring the Outbound Connector
 
 Once a Connector task is selected, the available configuration is visible in the properties panel on the right side. The required fields are highlighted with an error message.
 
@@ -28,6 +30,40 @@ Fields in the properties panel marked with an equals sign inside a circle indica
 ![feel Connectors](img/use-connectors-feel.png)
 
 Each Connector defines its own set of properties you can fill in. Find the details for Connectors provided by Camunda in the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) documentation.
+
+## Inbound Connector
+
+### Creating the BPMN start event
+
+:::note
+Inbound Connectors are currently supported only in [Camunda Platform 8 Self-Managed](../../self-managed/about-self-managed.md).
+To use an Inbound Connector, [install](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/element-templates/configuring-templates/) a related element template (for example, [generic webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/webhook-connector/element-templates) or [GitHub webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/github/element-templates)) first.
+:::
+
+1. Start building your BPMN diagram with a **Start Event** building block.
+2. Change its template to an Inbound Webhook of your choice (e.g., generic webhook or GitHub).
+3. Fill in all required properties.
+4. Complete your BPMN diagram.
+5. Deploy it to your Camunda Platform 8 instance.
+
+![inbound connector](img/use-inbound-connector-template.png)
+
+When you **deploy** such a BPMN diagram with a webhook, it becomes ready to receive calls on the webhook endpoint (see [Webhook docs](out-of-the-box-connectors/http-webhook.md) for details).
+
+:::note
+You can still start instances of that process manually via the modeler, which is sometimes useful during testing.
+:::
+
+### Configuring the Inbound Connector
+
+To deploy and use an inbound webhook, you would need to fill in several fields.
+
+1. **Webhook ID** - a context path for your inbound webhook. This is used to build a URL endpoint of your webhook. For example, given the `Webhook ID` value is `myWebhookPath`, the complete webhook URL endpoint will be `http(s)://<base URL>/inbound/myWebhookPath`.
+2. **HMAC Authentication Enabled** - if an external caller uses HMAC as a means of request validation and authentication, you can `enable` this property. In that case, you'll need to specify additional field values. Read more about the [generic HTTP webhook configuration](out-of-the-box-connectors/http-webhook.md).
+3. **Activation Condition** - a FEEL expression that assesses trigger conditions. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
+4. **Variable Mapping** - is a FEEL expression that transforms incoming body into BPMN process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`. In that case, the **Variable Mapping** might look as `={myDocumentId: request.body.id}`.
+
+See a list of [available Inbound Connectors](out-of-the-box-connectors/available-connectors-overview.md) and their respective specific configuration instructions.
 
 ## Using secrets
 
@@ -60,6 +96,72 @@ For further details on how secrets are implemented in Connectors, consult our [C
 `secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in Connector fields.
 Using this in other areas can lead to unexpected results and incidents.
 :::
+
+## Response mapping
+
+Some Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
+
+### Result Variable
+
+This field declares a single process variable to export responses from a Connector call. You are able to use this process variable further in the process.
+
+### Result Expression
+
+This field allows you to map a Connector response into multiple process variables which you are able to use further in the process. You can also transform the extracted values using [FEEL expressions](../concepts/expressions.md).
+
+:::note
+While using this field, a process variable with the name `response` is reserved.
+:::
+
+### Example
+
+Imagine your Connector makes an external call to an arbitrary weather service. The weather service returns the following response:
+
+```json
+{
+  "status": 200,
+  "headers": {
+    "date": "Thu, 19 Jan 2023 14:02:29 GMT",
+    "transfer-encoding": "chunked",
+    "content-type": "application/json; charset=utf-8",
+    "connection": "keep-alive"
+  },
+  "body": {
+    "latitude": 52.52,
+    "longitude": 13.4,
+    "generationtime_ms": 0.22804737091064453,
+    "utc_offset_seconds": 0,
+    "timezone": "GMT",
+    "timezone_abbreviation": "GMT",
+    "elevation": 45.0,
+    "current_weather": {
+      "temperature": 1.0,
+      "windspeed": 10.1,
+      "winddirection": 186.0,
+      "weathercode": 2,
+      "time": "2023-01-19T14:00"
+    }
+  }
+}
+```
+
+If you declare a variable `myWeatherResponse` in the `Result Variable` field, the entire response is mapped to the declared variable.
+
+Now, let's imagine that you wish to extract only temperature into a process variable `berlinWeather` and wind speed into `berlinWindSpeed`. Let's also imagine you need weather in Fahrenheit declared in `berlinWeatherInFahrenheit`.
+
+In that case, you could declare `Result Expression` as follows:
+
+```
+= {
+  berlinWeather: response.current_weather.temperature,
+  berlinWindSpeed: response.current_weather.windspeed,
+  berlinWeatherInFahrenheit: response.current_weather.temperature * 1.8 + 32
+}
+```
+
+![Response mapping](img/connectors-response-mapping.png)
+
+![Response mapping result](img/connectors-response-mapping-result.png)
 
 ## BPMN errors
 

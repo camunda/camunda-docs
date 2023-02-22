@@ -54,9 +54,9 @@ Specific Optimize versions are aligned with Camunda Platform versions as follows
 
 | Instance   | Version(s)               | Sidebars path                                                                             |
 | ---------- | ------------------------ | ----------------------------------------------------------------------------------------- |
-| `docs`     | Next                     | [/docs/sidebars.js](../docs/sidebars.js)                                                  |
+| `docs`     | Next                     | [/docs/sidebars.js](../sidebars.js)                                                       |
 | `docs`     | 8.1, 8.0, 1.3, ...       | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/)                    |
-| `optimize` | Next                     | [/optimize/sidebars.js](../optimize/sidebars.js)                                          |
+| `optimize` | Next                     | [/optimize/sidebars.js](../optimize_sidebars.js)                                          |
 | `optimize` | 3.9.0, 3.8.0, 3.7.0, ... | [/optimize_versioned_sidebars/version-\*-sidebars.json/](../optimize_versioned_sidebars/) |
 
 ### Sidebar items
@@ -138,6 +138,10 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 
 ## Redirect rules
 
+The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on the "Check internal links" step, it likely means you moved a doc. To resolve, you can add a redirect rule to [the .htaccess file](../static/.htaccess), mapping the old URL to the new URL.
+
+### Testing redirect rules
+
 The `.htaccess` file contains redirect rules that are applied to the published site, but it has no effect when running docusaurus locally (via `npm start`).
 
 If you wish to test `.htaccess` rules, you have a couple options:
@@ -157,6 +161,43 @@ If you wish to test `.htaccess` rules, you have a couple options:
       It is probably best to do this in an incognito browser session, as browsers clutch tightly to 301 redirects.
 
    4. Clean up the server with `docker compose down`.
+
+## Screenshot automation
+
+In an effort to automate screenshots across Camunda Platform 8 documentation, the following teams execute uniform steps when incorporating images and diagrams:
+
+:::note
+Given the following procedures, teams will respond to screenshot updates and suggestions from community members by manually adjusting appropriate screenshots.
+:::
+
+**Modeler**
+Visit the [Modeler screenshot automation repo](https://github.com/camunda/camunda-docs-modeler-screenshots/blob/main/README.md) for details on updating screenshots and scripting new screenshots.
+
+**Zeebe**
+Currently, Zeebe diagrams are stored as BPMN in a [repository](https://github.com/camunda/camunda-platform-docs/tree/main/media-src/product-manuals/zeebe), and as diagrams within Google Drive. This Google Drive is organized according to the structure of documentation in `camunda-platform-docs`.
+
+:::note
+When saving diagrams, we should not take manual screenshots. Rather, authors should incorporate diagrams directly via **Download > PNG image (.png)**.
+:::
+
+Keep the following guidelines in mind when creating Zeebe diagrams:
+
+- The standardized font is **Arial**. Font size may vary based on diagram size.
+- The standardized colors for diagrams are **`#0d8dba`** and **orange** with the default background color of **white**.
+- Rectangular diagrams should be around **500x1200px**, and square diagrams should be around **500x500px**.
+- There should be no more than **nine** elements per diagram. Otherwise, complex processes may be broken into more than one diagram.
+
+**Operate & Tasklist**
+Operate and Tasklist screenshot automation is currently in the backlog.
+
+**Optimize**
+Most of the screenshots in the user guide can be updated automatically:
+
+1. Check out the [camunda-optimize](https://github.com/camunda/camunda-optimize) repository.
+2. In the `/client` directory of the `camunda-optimize` repository, start the frontend development setup by running `yarn run start-backend` and `yarn start`.
+3. Wait for the data to be generated and imported and then run `yarn run screenshots`.
+
+On a technical level, the Optimize team takes screenshots within their [end-to-end test cases](https://github.com/camunda/camunda-optimize/blob/master/client/e2e/tests/Dashboard.js#L33).
 
 ## Review Process
 

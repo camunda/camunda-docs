@@ -10,5 +10,11 @@ To deploy and run your process, you must create a cluster in Camunda Platform 8.
 Even while the cluster shows a status **Creating**, you can still proceed to begin modeling.
 
 :::note
-Zeebe must show a status of **Healthy** to properly deploy your model in future guide steps.
+Zeebe must show a status of **Healthy** to properly deploy your model.
 :::
+
+## Development clusters
+
+Professional Plan users have the option to create **development clusters** offering free execution for development. This must be enabled through your [billing reservations](/components/console/manage-organization/update-billing-reservations.md).
+
+Visit the [clusters page](/components/concepts/clusters.md) to learn more about the differences between **development clusters** and **production clusters**.

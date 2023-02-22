@@ -2,6 +2,7 @@
 title: "Following the Customer Success Path"
 tags:
     - Project Management
+description: "Understand the customer success path, estimate effort, use the process model for estimation, and more."
 ---
 
 Following certain steps when evaluating and introducing process automation helps to make it a success. Ensure you review the appropriate best practices at the right time.
