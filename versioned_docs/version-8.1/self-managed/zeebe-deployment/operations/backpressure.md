@@ -14,7 +14,7 @@ To avoid such problems, Zeebe employs a backpressure mechanism. When the broker 
 
 ### Terminology
 
-- **RTT** - Round Trip Time: The time between when the request is accepted by the broker and when the response to the request is sent back to the gateway.
+- **RTT** - Round-Trip Time, known as the time between when the request is accepted by the broker and when the response to the request is sent back to the gateway.
 - **Inflight count** - The number of requests accepted by the broker but the response is not yet sent.
 - **Limit** - Maximum number of flight requests. When the inflight count is above the limit, any new incoming request is rejected.
 
@@ -27,7 +27,7 @@ The limit and inflight count are calculated per partition.
 Zeebe uses adaptive algorithms from [concurrency-limits](https://github.com/Netflix/concurrency-limits) to dynamically calculate the limit.
 Configure Zeebe with one of the backpressure algorithms in the following sections.
 
-The default values can be found in the [Zeebe broker standalone configuration template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe broker configuration template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template) in section `# backpressure`.
+The default values can be found in the [Zeebe broker standalone configuration template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe broker configuration template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template) in the `# backpressure` section.
 
 #### Fixed limit
 
@@ -37,7 +37,7 @@ Note that with different cluster configurations, you may have to choose differen
 
 #### AIMD
 
-AIMD (Additive increase/multiplicative decrease) calculates the limit based on the configured _requestTimeout_.
+**Additive increase/multiplicative decrease (AIMD)** calculates the limit based on the configured _requestTimeout_.
 When the RTT for a request is shorter than _requestTimeout_, the limit is increased by 1.
 When the RTT is longer than _requestTimeout_,
 the limit will be reduced according to the configured _backoffRatio_.
