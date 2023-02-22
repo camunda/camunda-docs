@@ -606,6 +606,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/googledrive/"
             ),
             docsLink(
+              "GraphQL Connector",
+              "components/connectors/out-of-the-box-connectors/graphql/"
+            ),
+            docsLink(
               "HTTP Webhook Connector",
               "components/connectors/out-of-the-box-connectors/http-webhook/"
             ),
@@ -632,6 +636,10 @@ module.exports = {
             docsLink(
               "Slack Connector",
               "components/connectors/out-of-the-box-connectors/slack/"
+            ),
+            docsLink(
+              "UIPath Connector",
+              "components/connectors/out-of-the-box-connectors/uipath/"
             ),
           ],
         },

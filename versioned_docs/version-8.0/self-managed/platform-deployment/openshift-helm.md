@@ -1,6 +1,7 @@
 ---
 id: openshift-helm
 title: "Camunda Helm charts"
+description: "Deploy the camunda-platform Helm chart to OpenShift with a few modifications. Step through our quick start and learn more."
 ---
 
 The `camunda-platform` Helm chart can be deployed to OpenShift with a few modifications, primarily revolving around your desired security context constraints. You can find out more about this in our general [OpenShift deployment guide](./openshift.md).
