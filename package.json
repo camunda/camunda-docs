@@ -48,7 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@playwright/test": "^1.29.1",
+    "@playwright/test": "^1.30.0",
     "husky": "^8.0.1",
     "jest": "^29.3.1",
     "lint-staged": "^13.1.0",
