@@ -98,7 +98,7 @@ POST actuator/backups
 }
 ```
 
-A `backupId` is an integer and must be greater than the id of previous backups that are completed, failed or deleted.
+A `backupId` is an integer and must be greater than the id of previous backups that are completed, failed, or deleted.
 Zeebe does not take two backups with the same ids. If a backup fails, a new `backupId` must be provided to trigger a new backup.
 The `backupId` cannot be reused, even if the backup corresponding to the backup id is deleted.
 
