@@ -25,6 +25,10 @@ Import the Maven project in the `samples` directory into your IDE to start hacki
 - [Create non-blocking process instances](process-instance-create-nonblocking.md)
 - [Create a process instance with results](process-instance-create-with-result.md)
 
+## Decision
+
+- [Evaluate a decision](decision-evaluate.md)
+
 ## Job
 
 - [Open a job worker](job-worker-open.md)

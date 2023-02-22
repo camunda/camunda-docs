@@ -6,14 +6,16 @@ keywords: ["backup", "backups"]
 ---
 
 :::note
-This API is subject to change.
+This release introduces breaking changes, including the utilized URL.
+
+For example, `curl 'http://localhost:8080/actuator/backups'` rather than the previously used `backup`.
 :::
 
-Optimize stores its data over multiple indices in Elasticsearch. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a backup ID. For example, a backup with id `backup1` consists of the following Elasticsearch snapshots:
+Optimize stores its data over multiple indices in Elasticsearch. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following Elasticsearch snapshots:
 
 ```
-camunda_optimize_backup1_3.9.0_part_1_of_2
-camunda_optimize_backup1_3.9.0_part_2_of_2
+camunda_optimize_123456_3.9.0_part_1_of_2
+camunda_optimize_123456_3.9.0_part_2_of_2
 ```
 
 Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard Elasticsearch snapshot restore API.
@@ -57,7 +59,7 @@ POST actuator/backups
 ```
 curl --request POST 'http://localhost:8092/actuator/backups' \
 -H 'Content-Type: application/json' \
--d '{ "backupId": "backup1" }'
+-d '{ "backupId": 123456 }'
 ```
 
 ### Example response
@@ -65,8 +67,8 @@ curl --request POST 'http://localhost:8092/actuator/backups' \
 ```json
 {
   "scheduledSnapshots": [
-    "camunda_optimize_backup1_3.9.0_part_1_of_2",
-    "camunda_optimize_backup1_3.9.0_part_2_of_2"
+    "camunda_optimize_123456_3.9.0_part_1_of_2",
+    "camunda_optimize_123456_3.9.0_part_2_of_2"
   ]
 }
 ```
@@ -99,25 +101,25 @@ GET actuator/backup
 ### Example request
 
 ```
-curl ---request GET 'http://localhost:8092/actuator/backups/backup1'
+curl ---request GET 'http://localhost:8092/actuator/backups/123456'
 ```
 
 ### Example response
 
 ```json
   {
-    "backupId": "backup1",
+    "backupId": 123456,
     "failureReason": null,
     "state": "COMPLETE",
     “details”: [
       {
-          "snapshotName": "camunda_optimize_backup1_3.10.0_part_1_of_2",
+          "snapshotName": "camunda_optimize_123456_3.10.0_part_1_of_2",
           "state": "SUCCESS",
           "startTime": "2022-11-09T10:11:36.978+0100",
           "failures": []
       },
       {
-          "snapshotName": "camunda_optimize_backup1_3.10.0_part_2_of_2",
+          "snapshotName": "camunda_optimize_123456_3.10.0_part_2_of_2",
           "state": "SUCCESS",
           "startTime": "2022-11-09T10:11:37.178+0100",
           "failures": []
@@ -157,12 +159,12 @@ DELETE actuator/backups/{backupId}
 ### Example request
 
 ```
-curl ---request DELETE 'http://localhost:8092/actuator/backups/backup1'
+curl ---request DELETE 'http://localhost:8092/actuator/backups/123456'
 ```
 
 ## Restore backup
 
-There is no Optimize API to perform the backup restore. Instead, the standard [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/restore-snapshot-api.html) can be used. Note that the Optimize versions of your backup snapshots must match the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names; for example, a snapshot with the name`camunda_optimize_backup1_3.9.0_part_1_of_2` was taken of Optimize version `3.9.0`.
+There is no Optimize API to perform the backup restore. Instead, the standard [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/restore-snapshot-api.html) can be used. Note that the Optimize versions of your backup snapshots must match the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names; for example, a snapshot with the name`camunda_optimize_123456_3.9.0_part_1_of_2` was taken of Optimize version `3.9.0`.
 
 :::note
 Optimize must NOT be running while a backup is being restored.
@@ -180,5 +182,5 @@ To restore a given backup, the following steps must be performed:
 Example Elasticsearch request:
 
 ```
-curl --request POST `http://localhost:9200/_snapshot/repository_name/camunda_optimize_backup1_3.9.0_part_1_of_2/_restore?wait_for_completion=true`
+curl --request POST `http://localhost:9200/_snapshot/repository_name/camunda_optimize_123456_3.9.0_part_1_of_2/_restore?wait_for_completion=true`
 ```

@@ -32,7 +32,7 @@ global:
       redirectUrl: https://operate.example.com
 ```
 
-### Zeebe Ingress (gRPC)
+## Zeebe Ingress (gRPC)
 
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose Zeebe-Gateway externally, you need the following:
 

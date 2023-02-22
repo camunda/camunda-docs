@@ -14,7 +14,7 @@ You can use one of the following approaches to link the process to be called by 
 
 ![overlay](img/overlay.png)
 
-For call activities that are already linked, the button appears even when the element is not selected. Clicking on the button opens a dialog which shows the name of the diagram the call activity is linked to. It is possible to navigate to the linked diagram by clicking on it, or you can use the **Unlink** button to remove the link.
+For call activities that are already linked, clicking on the link button opens a dialog which shows the name of the diagram the call activity is linked to. It is possible to navigate to the linked diagram by clicking on it, or you can use the **Unlink** button to remove the link.
 
 ![overlay](img/linked.png)
 

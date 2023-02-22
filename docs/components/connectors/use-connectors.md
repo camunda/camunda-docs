@@ -97,6 +97,72 @@ For further details on how secrets are implemented in Connectors, consult our [C
 Using this in other areas can lead to unexpected results and incidents.
 :::
 
+## Response mapping
+
+Some Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
+
+### Result Variable
+
+This field declares a single process variable to export responses from a Connector call. You are able to use this process variable further in the process.
+
+### Result Expression
+
+This field allows you to map a Connector response into multiple process variables which you are able to use further in the process. You can also transform the extracted values using [FEEL expressions](../concepts/expressions.md).
+
+:::note
+While using this field, a process variable with the name `response` is reserved.
+:::
+
+### Example
+
+Imagine your Connector makes an external call to an arbitrary weather service. The weather service returns the following response:
+
+```json
+{
+  "status": 200,
+  "headers": {
+    "date": "Thu, 19 Jan 2023 14:02:29 GMT",
+    "transfer-encoding": "chunked",
+    "content-type": "application/json; charset=utf-8",
+    "connection": "keep-alive"
+  },
+  "body": {
+    "latitude": 52.52,
+    "longitude": 13.4,
+    "generationtime_ms": 0.22804737091064453,
+    "utc_offset_seconds": 0,
+    "timezone": "GMT",
+    "timezone_abbreviation": "GMT",
+    "elevation": 45.0,
+    "current_weather": {
+      "temperature": 1.0,
+      "windspeed": 10.1,
+      "winddirection": 186.0,
+      "weathercode": 2,
+      "time": "2023-01-19T14:00"
+    }
+  }
+}
+```
+
+If you declare a variable `myWeatherResponse` in the `Result Variable` field, the entire response is mapped to the declared variable.
+
+Now, let's imagine that you wish to extract only temperature into a process variable `berlinWeather` and wind speed into `berlinWindSpeed`. Let's also imagine you need weather in Fahrenheit declared in `berlinWeatherInFahrenheit`.
+
+In that case, you could declare `Result Expression` as follows:
+
+```
+= {
+  berlinWeather: response.current_weather.temperature,
+  berlinWindSpeed: response.current_weather.windspeed,
+  berlinWeatherInFahrenheit: response.current_weather.temperature * 1.8 + 32
+}
+```
+
+![Response mapping](img/connectors-response-mapping.png)
+
+![Response mapping result](img/connectors-response-mapping-result.png)
+
 ## BPMN errors
 
 Being able to deal with exceptional cases is a common requirement for business process models. Read more about our general best practices around this topic in [dealing with exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).

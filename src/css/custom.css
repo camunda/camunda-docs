@@ -5,16 +5,18 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/*
+These colors are produced using a slightly darker version of #fc5d0d (orange-munda) in the primary color shades tool.
+See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
+*/
 :root {
-  --ifm-color-primary: #ff1f00;
-  --ifm-color-primary-dark: #ff3800;
-  --ifm-color-primary-darker: #ff4700;
-  --ifm-color-primary-darkest: #ff5400;
-  --ifm-color-primary-light: #ff7000;
-  --ifm-color-primary-lighter: #ff7d00;
-  --ifm-color-primary-lightest: #ff8b00;
-  --ifm-code-font-size: 95%;
+  --ifm-color-primary: #c54302;
+  --ifm-color-primary-dark: #b13c02;
+  --ifm-color-primary-darker: #a73902;
+  --ifm-color-primary-darkest: #8a2f01;
+  --ifm-color-primary-light: #d94a02;
+  --ifm-color-primary-lighter: #e34d02;
+  --ifm-color-primary-lightest: #fc5806;
 }
 
 .docusaurus-highlight-code-line {
@@ -296,7 +298,10 @@ navbar .navbar .navbar__link[href*="self-managed"] {
 
 div[class^="announcementBar_"] {
   font-size: 120%;
-  padding: 1em;
+  padding: 1em 0;
+}
+div[class^="announcementBar_"] button {
+  align-self: center;
 }
 
 /* Styles for BPMN.io integration and callouts in these models */
@@ -348,4 +353,16 @@ span.callout + p::after {
 }
 .dmn-decision-table-container .tjs-table {
   width: 100%;
+}
+
+.theme-doc-markdown img {
+  border-style: solid;
+  border-color: lightgray;
+  border-width: 1px;
+  box-shadow: 4px 4px 4px 1px lightgray;
+}
+
+.theme-doc-markdown table img {
+  border: none;
+  box-shadow: none;
 }
