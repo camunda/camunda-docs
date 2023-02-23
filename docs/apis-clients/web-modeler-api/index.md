@@ -1,8 +1,7 @@
 ---
 id: index
 title: Web Modeler API (REST, beta)
-description: "Web Modeler API (beta) is a REST API and provides access to Web Modeler data.
-Requests and responses are in JSON notation."
+description: "Web Modeler API (beta) is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation."
 ---
 
 :::caution Beta Offering
