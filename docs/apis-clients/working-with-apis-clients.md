@@ -5,6 +5,8 @@ sidebar_label: "Working with APIs & tools"
 description: "Interact programmatically with Camunda Platform 8 using official Zeebe client libraries and APIs."
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 This section steps through two concepts for integration:
 
 - [Deploy processes](/components/modeler/web-modeler/save-and-deploy.md), [start process instances](/components/modeler/web-modeler/start-instance.md), [activate jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
@@ -31,6 +33,8 @@ Camunda Platform 8 provides several official clients based on this API. Official
 ### Official Zeebe clients
 
 Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
+
+<DocCardList items={[{type:"link", href:"/docs/apis-clients/java-client/", label: "Java client"}]}/>
 
 #### Java
 
