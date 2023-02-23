@@ -62,7 +62,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-core</artifactId>
-  <version>0.3.0</version>
+  <version>0.6.0</version>
 </dependency>
 ```
 
@@ -71,7 +71,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-core:0.3.0'
+implementation 'io.camunda.connector:connector-core:0.6.0'
 ```
 
 </TabItem>
@@ -374,7 +374,7 @@ Connector, add the following dependency to your project:
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-validation</artifactId>
-  <version>0.3.0</version>
+  <version>0.6.0</version>
 </dependency>
 ```
 
@@ -383,7 +383,7 @@ Connector, add the following dependency to your project:
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-validation:0.3.0'
+implementation 'io.camunda.connector:connector-validation:0.6.0'
 ```
 
 </TabItem>

@@ -132,7 +132,7 @@ module.exports = {
           items: [
             {
               label: "Slack",
-              href: "https://camunda-slack-invite.herokuapp.com/",
+              href: "https://camunda.com/slack",
             },
             {
               label: "Twitter",

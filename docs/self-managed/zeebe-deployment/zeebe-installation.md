@@ -21,5 +21,5 @@ New to BPMN and want to learn more before moving forward? [Visit our Get Started
 If you have questions or feedback, we encourage you to visit the following:
 
 - [User forum](https://forum.camunda.io/)
-- [Public Slack channel](https://camunda-slack-invite.herokuapp.com/)
+- [Public Slack channel](https://camunda.com/slack)
 - [GitHub issue tracker](https://github.com/camunda/zeebe/issues)
