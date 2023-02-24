@@ -82,9 +82,10 @@ type:"link", href:"/docs/apis-clients/web-modeler-api/index/", label: "Web Model
 {
 type:"link", href:"/docs/apis-clients/grpc/", label: "Zeebe API (gRPC)", docId:"apis-clients/grpc"
 },
+{
+type:"link", href:"/optimize/apis-clients/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)"
+}
 ]}/>
-
-`{ type:"link", href:"/optimize/apis-clients/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)", docId:"/optimize/apis-clients/optimize-api/optimize-api-authorization/"},`
 
 :::note
 Additionally, visit our documentation on [Operate](../self-managed/operate-deployment/usage-metrics.md) and [Tasklist](../self-managed/tasklist-deployment/usage-metrics.md) usage metric APIs.
