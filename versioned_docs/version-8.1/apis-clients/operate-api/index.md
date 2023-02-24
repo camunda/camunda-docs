@@ -22,29 +22,24 @@ For example: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagg
 
 You need authentication to access the API endpoints.
 
-### Authentication in the cloud
+### Authentication for SaaS
 
-#### JWT token
+#### Authentication via JWT access token
 
-To authorize in the cloud using a JWT token, take the steps in the following example:
+You must pass an access token as a header in each request to the SaaS Operate API. When you create an Operate [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Operate.
 
-**Example:**
+The following settings are needed to request a token:
 
-1. Obtain a token to access the REST API.
+| Name                     | Description                                     | Default value        |
+| ------------------------ | ----------------------------------------------- | -------------------- |
+| client id                | Name of your registered client                  | -                    |
+| client secret            | Password for your registered client             | -                    |
+| audience                 | Permission name; if not given use default value | `operate.camunda.io` |
+| authorization server url | Token issuer server                             | -                    |
 
-   When you create an Operate [client](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/), you get all the information needed to connect to Operate.
-
-   The following settings are needed:
-
-   | Name                     | Description                                     | Default value        |
-   | ------------------------ | ----------------------------------------------- | -------------------- |
-   | client id                | Name of your registered client                  | -                    |
-   | client secret            | Password for your registered client             | -                    |
-   | audience                 | Permission name; if not given use default value | `operate.camunda.io` |
-   | authorization server url | Token issuer server                             | -                    |
-
-For more information on how to get these values for Camunda Platform 8, look
-at [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
+:::note
+For more information on how to get these values for Camunda Platform 8, read [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
+:::
 
 Send a token issue _POST_ request to the authorization server with the required settings:
 
@@ -63,17 +58,21 @@ You will get something like the following:
 }
 ```
 
-Take the `access_token` value from the response object and store it as your token.
+Capture the `access_token` value from the response object. In each request to the Operate API, include it as an authorization header:
 
-2. Send the token as an authorization header in each request. In this case, request all process definitions.
-
-```shell
-curl -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhb...' -d '{}'
+```
+Authorization: Bearer eyJHb...
 ```
 
-#### Cookies
+### Authentication for Self-Managed cluster
 
-Another way to access API is to use cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the steps in the following example:
+#### Authentication via Identity JWT access token
+
+This authentication method is described in [Operate Configuration - Authentication](/docs/self-managed/operate-deployment/operate-authentication/#identity).
+
+#### Authentication via cookie
+
+Another way to access the Operate API in a Self-Managed cluster is to send cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the steps in the following example:
 
 **Example:**
 
@@ -88,10 +87,6 @@ curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&passwo
 ```shell
 curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -d '{}'
 ```
-
-### Authentication for Self-Managed cluster
-
-The authentication is described in [Operate Configuration - Authentication](/docs/self-managed/operate-deployment/operate-authentication/#identity).
 
 ## Endpoints
 
