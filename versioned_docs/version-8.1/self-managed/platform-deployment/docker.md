@@ -48,9 +48,9 @@ Camunda's private Docker registry.
 
 | Web Modeler Component | Docker image                                                          |
 | --------------------- | :-------------------------------------------------------------------- |
-| Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:0.4.0-beta`    |
-| Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:0.4.0-beta`     |
-| WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:0.4.0-beta` |
+| Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:0.5.1-beta`    |
+| Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:0.5.1-beta`     |
+| WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:0.5.1-beta` |
 
 To pull the images you first need to log in using the credentials you received from Camunda:
 
@@ -135,7 +135,6 @@ Some configuration properties are optional and have default values. See a descri
 | CAMUNDA_OPTIMIZE_ZEEBE_NAME                             | The record prefix for exported Zeebe records.                                                                                                                                              | zeebe-record  |
 | CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT                  | The number of partitions configured in Zeebe.                                                                                                                                              | 1             |
 | CAMUNDA_OPTIMIZE_SHARING_ENABLED                        | Enable/disable the possibility to share reports and dashboards.                                                                                                                            | true          |
-| CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN                       | Disables the logout button (logout is handled by Identity).                                                                                                                                | true          |
 | SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI   | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation.                                              | null          |
 | OPTIMIZE_API_ACCESS_TOKEN                               | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set.                                  | null          |
 
@@ -162,7 +161,6 @@ optimize:
         - CAMUNDA_OPTIMIZE_ZEEBE_NAME=zeebe-record
         - CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT=1
         - CAMUNDA_OPTIMIZE_SHARING_ENABLED=true
-        - CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN=true
         - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=https://weblogin.cloud.company.com/.well-known/jwks.json
         - OPTIMIZE_API_ACCESS_TOKEN=secret
 ```

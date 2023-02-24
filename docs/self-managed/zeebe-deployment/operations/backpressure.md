@@ -14,7 +14,7 @@ To avoid such problems, Zeebe employs a backpressure mechanism. When the broker 
 
 ### Terminology
 
-- **RTT** - The time between when the request is accepted by the broker and when the response to the request is sent back to the gateway.
+- **RTT** - Round-Trip Time, known as the time between when the request is accepted by the broker and when the response to the request is sent back to the gateway.
 - **Inflight count** - The number of requests accepted by the broker but the response is not yet sent.
 - **Limit** - Maximum number of flight requests. When the inflight count is above the limit, any new incoming request is rejected.
 
@@ -27,6 +27,8 @@ The limit and inflight count are calculated per partition.
 Zeebe uses adaptive algorithms from [concurrency-limits](https://github.com/Netflix/concurrency-limits) to dynamically calculate the limit.
 Configure Zeebe with one of the backpressure algorithms in the following sections.
 
+The default values can be found in the [Zeebe broker standalone configuration template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe broker configuration template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template) in the `# backpressure` section.
+
 #### Fixed limit
 
 With **fixed limit**, one can configure a fixed value of the limit.
@@ -35,8 +37,8 @@ Note that with different cluster configurations, you may have to choose differen
 
 #### AIMD
 
-AIMD calculates the limit based on the configured _requestTimeout_.
-When the RTT for a request _requestTimeout_, the limit is increased by 1.
+**Additive increase/multiplicative decrease (AIMD)** calculates the limit based on the configured _requestTimeout_.
+When the RTT for a request is shorter than _requestTimeout_, the limit is increased by 1.
 When the RTT is longer than _requestTimeout_,
 the limit will be reduced according to the configured _backoffRatio_.
 
@@ -51,13 +53,13 @@ The values correspond to a queue size estimated by the Vegas algorithm based on 
 When the queue size is below _alpha_, the limit is increased.
 When the queue size is above _beta_, the limit is decreased.
 
-### Gradient
+#### Gradient
 
 Gradient is an adaptive limit algorithm that dynamically calculates the limit based on observed RTT.
 In the gradient algorithm, the limit is adjusted based on the gradient of observed RTT and an observed minimum RTT.
 If gradient is less than 1, the limit is decreased. Otherwise, the limit is increased.
 
-### Gradient2
+#### Gradient2
 
 Gradient2 is similar to Gradient, but instead of using observed minimum RTT as the base, it uses an exponentially smoothed average RTT.
 
