@@ -31,6 +31,16 @@ Fields in the properties panel marked with an equals sign inside a circle indica
 
 Each Connector defines its own set of properties you can fill in. Find the details for Connectors provided by Camunda in the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
+### Retries
+
+By default, connector execution is repeated `3` times in case when execution fails. If you wish to change default retries value, you would need to edit BPMN XML file and set `retries` attribute at the `zeebe:taskDefinition`. For example:
+
+```xml
+...
+<zeebe:taskDefinition type="io.camunda:http-json:1" retries="12" />
+...
+```
+
 ## Inbound Connector
 
 ### Creating the BPMN start event
