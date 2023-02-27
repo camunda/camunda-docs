@@ -1,19 +1,21 @@
 ---
 id: about-dedicated-modes
 title: What are dedicated modes?
-description: "Dedicated modes are ways for business and IT professionals to collaborate effectively"
+description: "Dedicated modes are ways for business and IT professionals to collaborate effectively."
 ---
 
 <span class="badge badge--cloud">Camunda Platform 8 only</span>
 
-Collaboration between business and IT professionals can be challenging, that's why we have introduced two modes in BPMN diagrams, that help users with different technical background to collaborate effectively.
+Collaboration between business and IT professionals can be challenging, which is why we introduced two modes in BPMN diagrams that help users with different technical backgrounds to collaborate effectively: **design** and **implement**.
 
-The **design** mode view is tailored to business users, and the **implementation** mode view is tailored to developers.
+The **Design** mode view is tailored to business users, and the **Implement** mode view is tailored to developers.
 
 Business users can now focus on modeling, sharing, and collaborating, while developers can work on implementation with ease.
 
-When accessing a BPMN diagram for the first time, the **design** mode will be the first selected option. Anyway, any further selection will be remembered and kept for the next sessions.
+When accessing a BPMN diagram for the first time, the **Design** mode is the first selected option. Any further selection is remembered and kept for the next sessions.
 
 ![modes tab navigation](img/mode-tab-navigation.png)
 
-Note: When a process template is selected, the default mode will be the **implement** one.
+:::note
+When a process template is selected, the default mode is **Implement**.
+:::
