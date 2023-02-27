@@ -33,7 +33,7 @@ Each Connector defines its own set of properties you can fill in. Find the detai
 
 ### Retries
 
-By default, connector execution is repeated `3` times in case when execution fails. If you wish to change default retries value, you would need to edit BPMN XML file and set `retries` attribute at the `zeebe:taskDefinition`. For example:
+By default, Connector execution is repeated `3` times if execution fails. To change the default retries value, edit the BPMN XML file and set the `retries` attribute at the `zeebe:taskDefinition`. For example:
 
 ```xml
 ...
