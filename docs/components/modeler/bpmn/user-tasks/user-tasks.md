@@ -55,6 +55,29 @@ The unique identifier depends on the authentication method used to login to Task
 For example, say you log into Tasklist using Camunda Platform 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
 :::
 
+## Scheduling
+
+User tasks support specifying a task schedule using the `zeebe:taskSchedule` extension element.
+This can be used to define **when** users interact with a given task. One or both of the following
+attributes can be specified simultaneously:
+
+- `dueDate`: Specifies the due date of the user task.
+- `followUpDate`: Specifies the follow-up date of the user task.
+
+You can define the due date and follow-up date as static values (e.g. `2023-02-28T13:13:10+02:00`), but you can also use
+[expressions](/components/concepts/expressions.md) (e.g. `= schedule.dueDate` and `= now() + duration("PT15S")`). The
+expressions are evaluated on activating the user task and must result in a `string` conforming to an ISO 8601 combined
+date and time representation.
+
+:::note
+An ISO 8601 combined date and time representation must contain timezone information, either `Z` for UTC or a zone offset.
+Optionally, it can contain a zone id. The following examples represent valid ISO 8601 `strings`:
+
+- `2019-10-01T12:00:00Z` - UTC time
+- `2019-10-02T08:09:40+02:00` - UTC plus two hours zone offset
+- `2019-10-02T08:09:40+02:00[Europe/Berlin]` - UTC plus two hours zone offset at Berlin
+  :::
+
 ## Variable mappings
 
 By default, all job variables are merged into the process instance. This
