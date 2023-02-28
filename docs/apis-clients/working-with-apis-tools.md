@@ -9,8 +9,8 @@ import DocCardList from '@theme/DocCardList';
 
 This section steps through two concepts for integration:
 
-- [Deploy processes](/components/modeler/web-modeler/save-and-deploy.md), [start process instances](/components/modeler/web-modeler/start-instance.md), [activate jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
-- Learn about [Camunda Components](/components/components-overview.md) and their APIs to communicate with your cluster, search, get and change data, create Cloud API clients, and more.
+- **Control your Camunda Platform 8 process automation** by [deploying processes](/components/modeler/web-modeler/save-and-deploy.md), [starting process instances](/components/modeler/web-modeler/start-instance.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
+- **Interact with the Camunda Platform 8 ecosystem** by learning about [Camunda Components](/components/components-overview.md) and their APIs to communicate with your cluster, search, get and change data, create Cloud API clients, and more.
 
 :::note
 You're permitted to use these web apps and APIs for free with the Free Edition in non-production environments. To use the software in production, [purchase the Camunda Platform Enterprise Edition](https://camunda.com/products/cloud/camunda-cloud-enterprise-contact/). Read more in our [licensing](../reference/licenses.md) documentation.
@@ -49,7 +49,7 @@ Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](tasklis
 
 ### Community clients
 
-Community clients supplement the official SDKs. These clients have not been tested by Camunda.
+Community clients supplement the official clients. These clients have not been tested by Camunda.
 
 - [C#](community-clients/c-sharp.md)
 - [JavaScript/NodeJS](community-clients/javascript.md)
@@ -68,13 +68,10 @@ It is also possible to [build your own client](build-your-own-client.md) You can
 
 <DocCardList items={[{type:"link", href:"/docs/apis-clients/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-clients/tasklist-api/tasklist-api-overview"},
 {
-type:"link", href:"/docs/apis-clients/public-api/", label: "Public API", docId:"apis-clients/public-api"
-},
-{
 type:"link", href:"/docs/apis-clients/operate-api/index/", label: "Operate API (REST)", docId:"apis-clients/operate-api/index"
 },
 {
-type:"link", href:"/docs/apis-clients/console-api-reference/", label: "Console API clients (REST)", docId:"apis-clients/console-api-reference"
+type:"link", href:"/docs/apis-clients/console-api-reference/", label: "Console API (REST)", docId:"apis-clients/console-api-reference"
 },
 {
 type:"link", href:"/docs/next/apis-clients/web-modeler-api/", label: "Web Modeler API", docId:"apis-clients/web-modeler-api/index"
