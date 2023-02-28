@@ -38,6 +38,8 @@ Each broker in the cluster may be both leader and follower at the same time for 
 There is no active load balancing across partitions. Each leader election for any partition is autonomous and independent of leader elections for other partitions.
 
 This may lead to one node becoming the leader for all partitions. This is not a problem for fault tolerance as the guarantees of replication remain. However, this may negatively impact throughput as all traffic hits one node.
+
+To reach a well-distributed leadership again the [Rebalancing API](https://docs.camunda.io/docs/next/self-managed/zeebe-deployment/operations/rebalancing/) can be used. Be aware that this is on best effort basis.
 :::
 
 ## Commit
