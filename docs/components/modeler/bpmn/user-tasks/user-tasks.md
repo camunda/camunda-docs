@@ -31,7 +31,7 @@ extension element of the process element.
 ## Assignments
 
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
-This can be used to define which user the task can be assigned to. One or both of the following
+This can be used to define which user the task can be assigned to. One or all of the following
 attributes can be specified simultaneously:
 
 - `assignee`: Specifies the user assigned to the task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) will claim the task for this user.
