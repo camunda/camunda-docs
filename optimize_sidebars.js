@@ -1006,7 +1006,7 @@ module.exports = {
     },
   ],
 
-  "APIs & Clients": [
+  "APIs & Tools": [
     docsLink(
       "Working with APIs & Clients",
       "apis-clients/working-with-apis-tools/"
