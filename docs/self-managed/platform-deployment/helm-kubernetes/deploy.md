@@ -25,7 +25,7 @@ The following charts will be installed as part of Camunda Platform 8 Self-Manage
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 - **Web Modeler** [<span class="badge badge--beta">Beta</span>](../../../../reference/early-access#beta): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler-beta).
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler-beta) as Web Modeler is only available to enterprise customers.
 
 :::note Connectors
 We do not provide a Helm chart for Connectors in Self-Managed yet.

@@ -53,7 +53,8 @@ camunda-platform
 ```
 
 - Keycloak is a dependency for Camunda Identity and PostgreSQL is a dependency for Keycloak.
-- PostgreSQL is an optional dependency for Web Modeler.
+- PostgreSQL is a dependency for Web Modeler.
+  - This dependency is optional as you can either install PostgreSQL with Helm or use an existing [external database](../deploy.md#optional-configure-external-database).
 - Elasticsearch is a dependency for Zeebe, Operate, Tasklist, and Optimize.
 
 The values for the dependencies Keycloak and PostgreSQL can be set in the same hierarchy:

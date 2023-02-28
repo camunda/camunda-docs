@@ -14,5 +14,5 @@ In addition to Stock Kubernetes (which could be deployed on cloud or on-premise)
 <DocCardList items={useCurrentSidebarCategory().items}/>
 
 :::caution Web Modeler
-We currently offer no dedicated support for these cloud platforms for Web Modeler Beta.
+We do not guarantee that Web Modeler Beta works on these cloud platforms and currently offer no dedicated support for them. However, it is likely that Web Modeler Beta will just work.
 :::
