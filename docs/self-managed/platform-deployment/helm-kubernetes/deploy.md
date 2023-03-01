@@ -159,7 +159,7 @@ To set up Web Modeler, you need to provide the following required configuration 
 - Configure your SMTP server by providing the values under `web-modeler.restapi.mail`.
   - Web Modeler requires an SMTP server to send notification emails to users.
 
-We recommend to specify these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look like this:
+We recommend specifying these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look as follows:
 
 ```yaml
 web-modeler:
@@ -181,8 +181,8 @@ web-modeler:
 #### Optional: Configure external database
 
 Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
-By default, a new PostgreSQL instance will be installed as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
-Alternatively, you can configure a connection to an (existing) external database:
+By default, a new PostgreSQL instance is installed as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
+Alternatively, you can configure a connection to an existing external database:
 
 ```yaml
 web-modeler:
@@ -200,7 +200,7 @@ web-modeler:
 
 #### Install the Helm chart
 
-Assuming that you have saved your configuration in `modeler-values.yaml`, you can install the Helm chart by running:
+Assuming you have saved your configuration in `modeler-values.yaml`, you can install the Helm chart by running the following:
 
 ```
 helm install --values modeler-values.yaml <RELEASE_NAME> camunda/camunda-platform

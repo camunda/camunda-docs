@@ -11,4 +11,4 @@ Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/ca
 However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
 
-Please refer to the [Installation Guide](../../platform-deployment/overview.md) for details on how to install Web Modeler.
+Refer to the [Installation Guide](../../platform-deployment/overview.md) for details on how to install Web Modeler.
