@@ -208,13 +208,12 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 - Zeebe: @npepinpe
 - Operate/Tasklist: @ralfpuchert
 - Optimize: @RomanJRW
-- DevRel/DevEx: @akeller
+- Connectors: @camunda/connectors
+- DevEx: @akeller
 - Product Management: @felix-mueller
-- Documentation: @christinaausley (fallback: @akeller)
-- Documentation infrastructure: @pepopowitz (fallback: @akeller)
-- Fallback: @menski
-
-In case you don't know who to assign for an engineering review choose @menski and he will delegate.
+- Documentation: @christinaausley
+- Documentation infrastructure: @pepopowitz
+- Fallback: @akeller
 
 As a reviewer feel free to merge any PR which you feel comfortable with after your review. If you have questions, concerns, or feel that you are not the right person to review the PR please make this transparent to the PR author so they can clarify this.
 
