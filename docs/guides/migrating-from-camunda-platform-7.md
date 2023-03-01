@@ -204,7 +204,7 @@ In general, **development artifacts** _can_ be migrated:
 
 In general, **workflow engine data** is harder to migrate to Camunda Platform 8:
 
-- **Runtime data:** Running process instances of Camunda Platform 7 are stored in the Camunda Platform 7 relational database. Like with a migration from third party workflow engines, you can read this data from Camunda Platform 7 and use it to create the right process instances in Camunda Platform 8 in the right state. This way, you can migrate running process instances from Camunda Platform 7 to Camunda Platform 8, but some manual effort is required.
+- **Runtime data:** Running process instances of Camunda Platform 7 are stored in the Camunda Platform 7 relational database. Like with a migration from third party workflow engines, you can read this data from Camunda Platform 7 and use it to create the right process instances in Camunda Platform 8 in the right state. This way, you can migrate running process instances from Camunda Platform 7 to Camunda Platform 8. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) is in place to ease this task.
 
 - **History data:** Historic data from the workflow engine itself cannot be migrated. However, data in Optimize can be kept.
 
@@ -440,7 +440,9 @@ The following attributes/elements cannot be migrated:
 
 ![Script Task](../components/modeler/bpmn/assets/bpmn-symbols/script-task.svg)
 
-Script tasks cannot natively be executed by the Zeebe engine. They behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker), provided as a community extension.
+Only FEEL scripts can be executed by the Zeebe engine. The converter will create internal scripts as long as you are using FEEL scripts.
+
+If you require a different scripting language, a script task can behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker), provided as a community extension.
 
 If you do this, the following attributes/elements are migrated:
 
