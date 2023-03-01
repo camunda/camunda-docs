@@ -10,7 +10,7 @@ A complete list of all dependencies and third-party libraries for all the compon
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-<Tabs groupId="dependencies" defaultValue="zeebe" values={
+<Tabs groupId="dependencies" defaultValue="zeebe" queryString values={
 [
 {label: 'Zeebe', value: 'zeebe', },
 {label: 'Operate', value: 'operate', },
@@ -652,29 +652,29 @@ All of these libraries are required for core functionality.
 - [@babel/runtime@7.16.7](https://babel.dev/team) (MIT)
 - [@babel/runtime@7.17.2](https://babel.dev/team) (MIT)
 - [@babel/runtime@7.18.6](https://babel.dev/team) (MIT)
-- [@babel/runtime@7.18.9](https://babel.dev/team) (MIT)
+- [@babel/runtime@7.20.1](https://babel.dev/team) (MIT)
 - [@babel/template@7.16.0](https://babel.dev/team) (MIT)
 - [@babel/traverse@7.16.3](https://babel.dev/team) (MIT)
 - [@babel/types@7.16.0](https://babel.dev/team) (MIT)
-- [@carbon/colors@11.5.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
+- [@carbon/colors@11.7.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
 - [@carbon/feature-flags@0.9.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
-- [@carbon/grid@11.6.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
-- [@carbon/icon-helpers@10.33.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
-- [@carbon/icons-react@11.8.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
-- [@carbon/layout@11.6.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
+- [@carbon/grid@11.7.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
+- [@carbon/icon-helpers@10.34.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
+- [@carbon/icons-react@11.10.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
 - [@carbon/layout@11.7.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
-- [@carbon/motion@11.4.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
-- [@carbon/react@1.13.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
-- [@carbon/styles@1.13.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
+- [@carbon/motion@11.5.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
+- [@carbon/react@1.16.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
+- [@carbon/styles@1.16.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
 - [@carbon/telemetry@0.1.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
-- [@carbon/themes@11.9.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
-- [@carbon/type@11.9.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
+- [@carbon/themes@11.11.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
+- [@carbon/type@11.11.0](https://github.com/carbon-design-system/carbon) (Apache-2.0)
 - [@emotion/is-prop-valid@1.1.2](https://github.com/emotion-js/emotion/tree/main/packages/is-prop-valid) (MIT)
 - [@emotion/memoize@0.7.5](https://github.com/emotion-js/emotion/tree/master/packages/memoize) (MIT)
 - [@emotion/stylis@0.8.5](https://github.com/emotion-js/emotion/tree/master/packages/stylis) (MIT)
 - [@emotion/unitless@0.7.5](https://github.com/emotion-js/emotion/tree/master/packages/unitless) (MIT)
 - [@ibm/plex@6.0.0-next.6](https://github.com/ibm/plex) (OFL-1.1)
 - [@ibm/plex@6.1.1](https://github.com/ibm/plex) (OFL-1.1)
+- [@remix-run/router@1.0.2](https://github.com/remix-run/react-router) (MIT)
 - [@types/cookie@0.3.3](https://github.com/DefinitelyTyped/DefinitelyTyped) (MIT)
 - [ansi-styles@3.2.1](https://github.com/chalk/ansi-styles) (MIT)
 - [anymatch@3.1.2](https://github.com/es128) (ISC)
@@ -687,12 +687,13 @@ All of these libraries are required for core functionality.
 - [camelize@1.0.0](http://substack.net) (MIT)
 - [chalk@2.4.2](https://github.com/chalk/chalk) (MIT)
 - [chokidar@3.5.3](https://paulmillr.com) (MIT)
-- [classnames@2.3.1](https://github.com/JedWatson/classnames) (MIT)
+- [classnames@2.3.2](https://github.com/JedWatson/classnames) (MIT)
 - [color-convert@1.9.3](https://github.com/Qix-/color-convert) (MIT)
+- [color-convert@2.0.1](https://github.com/Qix-/color-convert) (MIT)
 - [color-name@1.1.3](https://github.com/dfcreative/color-name) (MIT)
 - [color-name@1.1.4](https://github.com/colorjs/color-name) (MIT)
-- [color-string@1.9.0](https://github.com/Qix-/color-string) (MIT)
-- [color@3.2.1](https://github.com/Qix-/color) (MIT)
+- [color-string@1.9.1](https://github.com/Qix-/color-string) (MIT)
+- [color@4.2.3](https://github.com/Qix-/color) (MIT)
 - [combined-stream@1.0.8](http://debuggable.com/) (MIT)
 - [compute-scroll-into-view@1.0.17](https://github.com/stipsan/compute-scroll-into-view) (MIT)
 - [cookie@0.4.1](https://github.com/jshttp/cookie) (MIT)
@@ -714,12 +715,11 @@ All of these libraries are required for core functionality.
 - [glob-parent@5.1.2](https://gulpjs.com/) (ISC)
 - [globals@11.12.0](https://github.com/sindresorhus/globals) (MIT)
 - [has-flag@3.0.0](https://github.com/sindresorhus/has-flag) (MIT)
-- [history@5.2.0](https://github.com/remix-run/history) (MIT)
 - [hoist-non-react-statics@3.3.2](https://github.com/mridgway/hoist-non-react-statics) (BSD-3-Clause)
 - [html-parse-stringify@3.0.1](https://github.com/henrikjoreteg/html-parse-stringify) (MIT)
-- [i18next-browser-languagedetector@6.1.5](https://github.com/jamuhl) (MIT)
+- [i18next-browser-languagedetector@7.0.1](https://github.com/jamuhl) (MIT)
 - [i18next-xhr-backend@3.2.2](https://github.com/jamuhl) (MIT)
-- [i18next@21.9.2](https://github.com/jamuhl) (MIT)
+- [i18next@21.10.0](https://github.com/jamuhl) (MIT)
 - [immutable@4.0.0](https://github.com/leebyron) (MIT)
 - [invariant@2.2.4](https://github.com/zertosh/invariant) (MIT)
 - [is-arrayish@0.3.2](http://github.com/qix-) (MIT)
@@ -751,14 +751,15 @@ All of these libraries are required for core functionality.
 - [react-is@16.13.1](https://github.com/facebook/react) (MIT)
 - [react-is@17.0.2](https://github.com/facebook/react) (MIT)
 - [react-is@18.2.0](https://github.com/facebook/react) (MIT)
-- [react-router-dom@6.3.0](https://github.com/remix-run/react-router) (MIT)
-- [react-router@6.3.0](https://github.com/remix-run/react-router) (MIT)
+- [react-router-dom@6.4.2](https://github.com/remix-run/react-router) (MIT)
+- [react-router@6.4.2](https://github.com/remix-run/react-router) (MIT)
 - [react-transition-group@4.4.5](https://github.com/reactjs/react-transition-group) (BSD-3-Clause)
 - [react@18.2.0](https://github.com/facebook/react) (MIT)
 - [readdirp@3.6.0](https://github.com/paulmillr/readdirp) (MIT)
+- [regenerator-runtime@0.13.10](https://github.com/facebook/regenerator/tree/master/packages/runtime) (MIT)
 - [regenerator-runtime@0.13.9](https://github.com/facebook/regenerator/tree/master/packages/runtime) (MIT)
 - [resize-observer-polyfill@1.5.1](https://github.com/que-etc/resize-observer-polyfill) (MIT)
-- [sass@1.55.0](https://github.com/nex3) (MIT)
+- [sass@1.56.1](https://github.com/nex3) (MIT)
 - [scheduler@0.23.0](https://github.com/facebook/react) (MIT)
 - [shallowequal@1.1.0](https://github.com/dashed/shallowequal) (MIT)
 - [simple-swizzle@0.2.2](http://github.com/qix-) (MIT)
@@ -899,7 +900,7 @@ All of these libraries are required for core functionality.
 
 - [@babel/runtime@7.15.3](https://babel.dev/team) (MIT)
 - [@bpmn-io/dmn-migrate@0.4.3](https://github.com/bpmn-io/dmn-migrate) (MIT)
-- [@ibm/plex@6.1.0](https://github.com/ibm/plex) (OFL-1.1)
+- [@ibm/plex@6.1.1](https://github.com/ibm/plex) (OFL-1.1)
 - [@types/debug@4.1.7](https://github.com/DefinitelyTyped/DefinitelyTyped) (MIT)
 - [@types/hast@2.3.1](https://github.com/DefinitelyTyped/DefinitelyTyped) (MIT)
 - [@types/mdast@3.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) (MIT)
@@ -908,8 +909,8 @@ All of these libraries are required for core functionality.
 - [@types/prop-types@15.7.5](https://github.com/DefinitelyTyped/DefinitelyTyped) (MIT)
 - [@types/unist@2.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) (MIT)
 - [bail@2.0.1](https://wooorm.com) (MIT)
-- [bpmn-js-disable-collapsed-subprocess@0.1.4](https://github.com/barmac) (MIT)
-- [bpmn-js@9.4.0](https://github.com/nikku) (MIT\*)
+- [bpmn-js-disable-collapsed-subprocess@0.1.5](https://github.com/barmac) (MIT)
+- [bpmn-js@9.4.0](https://github.com/nikku) (MIT)
 - [bpmn-moddle@7.1.3](https://github.com/nikku) (MIT)
 - [character-entities-legacy@2.0.0](https://wooorm.com) (MIT)
 - [character-entities@2.0.0](https://wooorm.com) (MIT)
@@ -919,24 +920,24 @@ All of these libraries are required for core functionality.
 - [classnames@2.3.2](https://github.com/JedWatson/classnames) (MIT)
 - [clsx@1.1.1](https://lukeed.com) (MIT)
 - [comma-separated-tokens@2.0.2](https://wooorm.com) (MIT)
-- [component-event@0.1.4](https://github.com/component/event) (MIT\*)
-- [component-props@1.1.1](https://github.com/component/props) (MIT\*)
+- [component-event@0.1.4](https://github.com/component/event) (MIT)
+- [component-props@1.1.1](https://github.com/component/props) (MIT)
 - [component-xor@0.0.4](https://github.com/component/xor) (MIT)
 - [css.escape@1.5.1](https://mathiasbynens.be/) (MIT)
 - [date-fns@2.29.1](https://github.com/date-fns/date-fns) (MIT)
 - [debounce@1.2.1](https://github.com/component/debounce) (MIT)
-- [debug@4.3.3](https://github.com/debug-js/debug) (MIT)
+- [debug@4.3.4](https://github.com/debug-js/debug) (MIT)
 - [dequal@2.0.2](https://lukeed.com) (MIT)
 - [diagram-js-direct-editing@1.7.0](https://github.com/bpmn-io/diagram-js-direct-editing) (MIT)
-- [diagram-js@8.7.1](https://github.com/nikku) (MIT)
+- [diagram-js@8.8.0](https://github.com/nikku) (MIT)
 - [diagram-js@8.9.0](https://github.com/nikku) (MIT)
 - [didi@5.2.1](https://github.com/nikku/didi) (MIT)
 - [didi@8.0.1](https://github.com/nikku/didi) (MIT)
-- [dmn-js-decision-table@11.1.1](https://github.com/bpmn-io/dmn-js) (MIT\*)
-- [dmn-js-drd@12.3.0](https://github.com/bpmn-io/dmn-js) (MIT\*)
-- [dmn-js-literal-expression@11.1.1](https://github.com/bpmn-io/dmn-js) (MIT\*)
-- [dmn-js-shared@12.1.1](https://github.com/bpmn-io/dmn-js) (MIT\*)
-- [dmn-js@11.1.2](https://github.com/SebastianStamm) (MIT\*)
+- [dmn-js-decision-table@12.3.0](https://github.com/bpmn-io/dmn-js) (MIT)
+- [dmn-js-drd@12.3.0](https://github.com/bpmn-io/dmn-js) (MIT)
+- [dmn-js-literal-expression@12.3.0](https://github.com/bpmn-io/dmn-js) (MIT)
+- [dmn-js-shared@12.3.0](https://github.com/bpmn-io/dmn-js) (MIT)
+- [dmn-js@12.3.0](https://github.com/SebastianStamm) (MIT)
 - [dmn-moddle@10.0.0](https://github.com/SebastianStamm) (MIT)
 - [dmn-moddle@8.0.4](https://github.com/SebastianStamm) (MIT)
 - [dom-iterator@1.0.0](https://github.com/MatthewMueller/dom-iterator) (MIT)
@@ -949,14 +950,14 @@ All of these libraries are required for core functionality.
 - [fscreen@1.0.2](https://github.com/rafrex/fscreen) (MIT)
 - [hammerjs@2.0.8](https://github.com/hammerjs/hammer.js) (MIT)
 - [hast-util-whitespace@2.0.0](https://wooorm.com) (MIT)
-- [hat@0.0.3](http://substack.net) (MIT\*)
-- [heatmap.js@2.0.5](https://www.patrick-wied.at/) (MIT\*)
+- [hat@0.0.3](http://substack.net) (MIT)
+- [heatmap.js@2.0.5](https://www.patrick-wied.at/) (MIT)
 - [history@4.10.1](https://github.com/ReactTraining/history) (MIT)
 - [hoist-non-react-statics@3.3.0](https://github.com/mridgway/hoist-non-react-statics) (BSD-3-Clause)
 - [ids@0.2.2](https://github.com/Nikku) (MIT)
 - [ids@1.0.0](https://github.com/Nikku) (MIT)
 - [immutability-helper@3.1.1](https://github.com/kolodny/immutability-helper) (MIT)
-- [indexof@0.0.1](https://www.npmjs.com/package/indexof) (MIT\*)
+- [indexof@0.0.1](https://www.npmjs.com/package/indexof) (MIT)
 - [inferno-shared@5.6.1](https://github.com/infernojs/inferno) (MIT)
 - [inferno-vnode-flags@5.6.1](https://github.com/infernojs/inferno) (MIT)
 - [inferno@5.6.2](https://github.com/infernojs/inferno) (MIT)
@@ -1002,7 +1003,7 @@ All of these libraries are required for core functionality.
 - [min-dash@3.8.1](https://github.com/bpmn-io/min-dash) (MIT)
 - [min-dom@3.2.1](https://github.com/bpmn-io/min-dom) (MIT)
 - [mini-create-react-context@0.4.0](https://github.com/StringEpsilon/mini-create-react-context) (MIT)
-- [mixpanel-browser@2.43.0](https://github.com/mixpanel/mixpanel-js) (Apache-2.0)
+- [mixpanel-browser@2.45.0](https://github.com/mixpanel/mixpanel-js) (Apache-2.0)
 - [moddle-xml@8.0.2](https://github.com/Nikku) (MIT)
 - [moddle-xml@9.0.5](https://github.com/Nikku) (MIT)
 - [moddle-xml@9.0.6](https://github.com/Nikku) (MIT)
@@ -1020,10 +1021,10 @@ All of these libraries are required for core functionality.
 - [react-date-range@1.4.0](https://github.com/hypeserver/react-date-range) (MIT)
 - [react-dom@17.0.2](https://github.com/facebook/react) (MIT)
 - [react-draggable@4.2.0](https://github.com/mzabriskie/react-draggable) (MIT)
-- [react-full-screen@1.1.0](https://github.com/snakesilk/react-fullscreen) (MIT)
+- [react-full-screen@1.1.1](https://github.com/snakesilk/react-fullscreen) (MIT)
 - [react-grid-layout@1.3.4](http://strml.net/) (MIT)
 - [react-is@16.13.1](https://github.com/facebook/react) (MIT)
-- [react-is@18.1.0](https://github.com/facebook/react) (MIT)
+- [react-is@18.0.0](https://github.com/facebook/react) (MIT)
 - [react-list@0.8.13](https://github.com/coderiety/react-list) (MIT)
 - [react-markdown@8.0.3](https://github.com/remarkjs/react-markdown) (MIT)
 - [react-resizable@3.0.4](http://strml.net/) (MIT)
@@ -1075,7 +1076,7 @@ All of these libraries are required for core functionality.
 - itu @1.7.0, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 - jackson-annotations @2.13.4, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - jackson-core @2.13.4, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-- jackson-databind @2.13.4, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-databind @2.13.4.2, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - jackson-dataformat-cbor @2.13.4, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - jackson-dataformat-smile @2.13.4, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - jackson-dataformat-yaml @2.13.4, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
@@ -1095,7 +1096,7 @@ All of these libraries are required for core functionality.
 - compiler @0.9.6, [(Apache License 2.0)](http://www.apache.org/licenses/LICENSE-2.0)
 - jcip-annotations @1.0-1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - json-base @2.0.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-- json-flattener @0.14.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- json-flattener @0.14.2, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - jsr305 @3.0.2, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - error_prone_annotations @2.14.0, [(Apache 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - failureaccess @1.0.1, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
@@ -1109,7 +1110,7 @@ All of these libraries are required for core functionality.
 - lang-tag @1.6, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - nimbus-jose-jwt @9.22, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 - oauth2-oidc-sdk @9.35, [(Apache License, version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.html)
-- opencsv @5.7.0, [(Apache 2)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- opencsv @5.7.1, [(Apache 2)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - logging-interceptor @4.10.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - okhttp @4.10.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - okio-jvm @3.0.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
@@ -1124,13 +1125,13 @@ All of these libraries are required for core functionality.
 - commons-logging @1.2, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - zeebe-protocol-jackson @8.0.6, [(Zeebe Community License v1.1)](https://zeebe.io/legal/zeebe-community-license-1.1)
 - zeebe-protocol-util @8.0.6, [(Zeebe Community License v1.1)](https://zeebe.io/legal/zeebe-community-license-1.1)
-- zeebe-protocol @8.1.0, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0)
+- zeebe-protocol @8.1.2, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0)
 - classgraph @4.8.149, [(The MIT License (MIT))](http://opensource.org/licenses/MIT)
 - feign-core @11.10, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - feign-jackson @11.10, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - feign-slf4j @11.10, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-- micrometer-core @1.9.4, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-- micrometer-registry-prometheus @1.9.4, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- micrometer-core @1.9.5, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- micrometer-registry-prometheus @1.9.5, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - simpleclient @0.15.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - simpleclient_common @0.15.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - simpleclient_tracer_common @0.15.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
@@ -1167,7 +1168,7 @@ All of these libraries are required for core functionality.
 - commons-email @1.5, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - commons-lang3 @3.12.0, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 - commons-math3 @3.6.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-- commons-text @1.9, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-text @1.10.0, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 - httpcore5 @5.1.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 - httpasyncclient @4.1.4, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - httpclient @4.5.13, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
@@ -1189,9 +1190,9 @@ All of these libraries are required for core functionality.
 - lucene-spatial3d @8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - lucene-suggest @8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - tika-core @2.4.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
-- tomcat-embed-core @9.0.65, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-- tomcat-embed-el @9.0.65, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-- tomcat-embed-websocket @9.0.65, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- tomcat-embed-core @9.0.68, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- tomcat-embed-el @9.0.68, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- tomcat-embed-websocket @9.0.68, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - apiguardian-api @1.1.2, [(The Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - camunda-engine-dmn @7.18.0-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 - camunda-engine-feel-api @7.18.0-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
@@ -1292,27 +1293,27 @@ All of these libraries are required for core functionality.
 - duct-tape @1.0.8, [(MIT)](http://opensource.org/licenses/MIT)
 - jul-to-slf4j @1.7.36, [(MIT License)](http://www.opensource.org/licenses/mit-license.php)
 - slf4j-api @1.7.36, [(MIT License)](http://www.opensource.org/licenses/mit-license.php)
-- spring-boot-actuator-autoconfigure @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-actuator @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-autoconfigure @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-starter-actuator @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-starter-jersey @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-starter-jetty @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-starter-json @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-starter-logging @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-starter-tomcat @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-starter-validation @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-starter-web @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot-starter @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-boot @2.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-security-config @5.7.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-security-core @5.7.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-security-crypto @5.7.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-security-oauth2-client @5.7.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-security-oauth2-core @5.7.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-security-oauth2-jose @5.7.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-security-oauth2-resource-server @5.7.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
-- spring-security-web @5.7.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-actuator-autoconfigure @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-actuator @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-autoconfigure @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-actuator @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-jersey @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-jetty @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-json @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-logging @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-tomcat @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-validation @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-web @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot @2.7.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-config @5.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-core @5.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-crypto @5.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-oauth2-client @5.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-oauth2-core @5.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-oauth2-jose @5.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-oauth2-resource-server @5.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-web @5.7.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
 - spring-aop @5.3.23, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
 - spring-beans @5.3.23, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
 - spring-context-support @5.3.23, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
@@ -2289,7 +2290,45 @@ Find an up-to-date list of third-party libraries used and their license terms in
 
 Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connectors-bundle/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
-Find up-to-date lists for the individual Connectors in the `THIRD_PARTY_NOTICES` in their respective directories in the [source code repository](https://github.com/camunda/connectors-bundle/tree/main/connectors).
+#### Connector Amazon Simple Queue Service (SQS)
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sqs/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+#### Connector AWS Lambda
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-aws-lambda/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+#### Connector Google Drive
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-google-drive/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+#### Connector Kafka Producer
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-kafka/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+#### Connector Microsoft Teams
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-microsoft-teams/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+#### Connector RabbitMQ
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-rabbitmq/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+#### Connector REST
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-http-json/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+#### Connector SendGrid
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sendgrid/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+#### Connector Slack
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-slack/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+
+#### Connector UIPath
+
+Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-slack/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
 </TabItem>
 
