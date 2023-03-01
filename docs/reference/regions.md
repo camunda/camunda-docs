@@ -20,3 +20,5 @@ Running on a Trial and want to try a different region, or interested in other re
 - US East: us-east1
 - US Central: us-central1
 - Australia Southeast: australia-southeast1
+
+You can find the locations behind the region codes [on the Google page](https://cloud.google.com/about/locations).
