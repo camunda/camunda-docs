@@ -16,9 +16,9 @@ The backups are stored to an external data storage. [S3](https://aws.amazon.com/
 
 To use the backup feature in Zeebe, the following configurations must be provided:
 
-- Enable backups by setting the flag `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEBACKUP` to `true`.
-- Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` includes the endpoint "backups". Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
-  For additional configurations such as security, refer to the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints).
+- Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` includes the endpoint "backups". By default, this is set to "\*" which included backups.
+- Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
+- For additional configurations such as security, refer to the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints).
 - An external S3-compatible storage must be configured as the backup store.
 
 ### Configure S3 backup store
@@ -98,8 +98,9 @@ POST actuator/backups
 }
 ```
 
-A `backupId` is an integer and must be greater than the id of previous backups.
+A `backupId` is an integer and must be greater than the id of previous backups that are completed, failed, or deleted.
 Zeebe does not take two backups with the same ids. If a backup fails, a new `backupId` must be provided to trigger a new backup.
+The `backupId` cannot be reused, even if the backup corresponding to the backup id is deleted.
 
 <details>
   <summary>Example request</summary>
