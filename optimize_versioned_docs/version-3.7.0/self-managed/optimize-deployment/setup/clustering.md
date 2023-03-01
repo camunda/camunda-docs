@@ -36,7 +36,10 @@ engines:
     importEnabled: true
 
 historyCleanup:
-  enabled: true
+  processDataCleanup:
+    enabled: true
+  decisionDataCleanup:
+    enabled: true
 ...
 ```
 
