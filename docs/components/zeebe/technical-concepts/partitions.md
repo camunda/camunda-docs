@@ -48,6 +48,16 @@ A partition is a persistent append-only event stream. Initially, a partition is 
 
 For fault tolerance, data in a partition is replicated from the **leader** of the partition to its **followers**. Followers are other Zeebe broker nodes that maintain a copy of the partition without performing event processing.
 
+We recommend an even replication factor. Odd replication factors can be problematic and may trigger this warning:
+
+```
+ "Expected to have odd replication factor, but was even ({}). Even replication factor has no benefit over "
+          + "the previous odd value and is weaker than next odd. Quorum is calculated as:"
+          + " quorum = floor(replication factor / 2) + 1. In this current case the quorum will be"
+          + " quorum = {}. If you want to ensure high fault-tolerance and availability,"
+          + " make sure to use an odd replication factor.";
+```
+
 ## Partition distribution
 
 If no other configuration is specified, partitions are distributed in a guaranteed round-robin fashion across all brokers in the cluster, considering the number of nodes, number of partitions, and the replication factor. For example, the first partition will always be hosted by the first node, plus the following nodes based on the replication factor. The second partition will be hosted on the second node and the following to fulfill the replication factor.
