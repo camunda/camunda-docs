@@ -65,7 +65,8 @@ We support the following deployment options (the sequence expresses preference) 
 2. [**Helm/Kubernetes**](./helm-kubernetes/overview.md)
    - [Cloud or on-prem cluster](./helm-kubernetes/overview.md#kubernetes-environments) with one of managed offering like EKS, GKE, etc.
    - [Local cluster](./helm-kubernetes/guides/local-kubernetes-cluster.md) with KIND.
-3. [**Manual**](./manual.md) as a last resort if you only need the Zeebe broker. We don't recommend setting up the whole toolchain in this fashion.
+3. [**Docker**](./docker.md) including [Docker Compose](./docker.md#docker-compose), which is **only** recommended for development.
+4. [**Manual**](./manual.md) as a last resort if you only need the Zeebe broker. We don't recommend setting up the whole toolchain in this fashion.
 
 ## Getting help
 
