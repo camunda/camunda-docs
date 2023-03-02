@@ -414,7 +414,7 @@ The following attributes are not yet supported:
 - `camunda:mapDecisionResult` (no mapping happens)
 - `camunda:decisionRefTenantId`
 
-A business rule task can also _behave like a service task_ to allow integration of third-party rule engines. In this case, the following attributes can also be migrated as described above for the service task migration.
+A business rule task can also _behave like a service task_ to allow integration of third-party rule engines. In this case, all attributes described above for the service task migration can also be converted.
 
 ### Call activities
 
