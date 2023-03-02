@@ -766,3 +766,4 @@ There are two possible comparison operators:
     },
   ]
 ```
+This feature is currently only supported for Camunda Platform 8 element templates.
