@@ -708,7 +708,6 @@ As described earlier in this guide, migration is an ongoing topic and this guide
 
 - Describe implications on testing.
 - Discuss adapters for Java or REST client.
-- Discuss external task adapter for Java code and probably add it to the [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter).
 - Discuss more concepts around BPMN
   ** [Field injection](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#field-injection) that is using `camunda:field` available on many BPMN elements.
   ** Multiple instance markers available on most BPMN elements.
