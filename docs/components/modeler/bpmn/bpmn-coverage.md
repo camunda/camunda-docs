@@ -481,38 +481,38 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Escalation
+            <a href="../escalation-events/">Escalation</a>
         </td>
         <td></td>
         <td>
-            <a href="#">
-                <EscalationEventSubprocessSvg />
+            <a href="../escalation-events/">
+                <EscalationEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <EscalationEventSubprocessNonInterruptingSvg />
+            <a href="../escalation-events">
+                <EscalationEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td>
-            <a href="#">
-                <EscalationBoundaryEventSvg />
+            <a href="../escalation-events">
+                <EscalationBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <EscalationBoundaryEventNonInterruptingSvg />
+            <a href="../escalation-events">
+                <EscalationBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <EscalationThrowEventSvg />
+            <a href="../escalation-events">
+                <EscalationThrowEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <EscalationEndEventSvg />
+            <a href="../escalation-events">
+                <EscalationEndEventSvg className="implemented" />
             </a>
         </td>
     </tr>

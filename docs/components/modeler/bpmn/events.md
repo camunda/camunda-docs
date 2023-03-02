@@ -10,6 +10,7 @@ Currently supported events:
 - [Message events](message-events/message-events.md)
 - [Timer events](timer-events/timer-events.md)
 - [Error events](error-events/error-events.md)
+- [Escalation events](escalation-events/escalation-events.md)
 - [Terminate events](terminate-events/terminate-events.md)
 
 ## Events in general
