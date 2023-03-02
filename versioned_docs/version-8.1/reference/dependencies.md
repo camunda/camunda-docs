@@ -10,7 +10,7 @@ A complete list of all dependencies and third-party libraries for all the compon
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-<Tabs groupId="dependencies" defaultValue="zeebe" values={
+<Tabs groupId="dependencies" defaultValue="zeebe" queryString values={
 [
 {label: 'Zeebe', value: 'zeebe', },
 {label: 'Operate', value: 'operate', },
