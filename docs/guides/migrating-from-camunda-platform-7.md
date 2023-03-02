@@ -462,6 +462,27 @@ This means you must inspect and adjust all message receive events or receive tas
 
 The `bpmn message name` is used in both products and doesn't need migration.
 
+### Multi-Instance activities
+
+Multi-instance acitivities do exist in the same flavour in Camunda 8 as they did in Camunda 7 (parallel and sequential multi-instance are supported, a loop not).
+
+For implementation, the only current limitation is that a loop cardinality is not supported.
+
+These elements cannot be migrated:
+
+- `bpmn:loopCardinality`
+
+These elements can still be used:
+
+- `bpmn:completionCondition`: Here, the expression has to be transformed to FEEL
+
+These elements will be converted:
+
+- `bpmn:multiInstanceLoopCharacteristics camunda:collection` to `zeebe:loopCharacteristics inputCollection`
+- `bpmn:multiInstanceLoopCharacteristics camunda:elementVariable` to `zeebe:loopCharacteristics inputElement`
+
+Additionally, there is now a native way to collect results (using `zeebe:loopCharacteristics outputCollection` and `zeebe:loopCharacteristics outputElement`). You should consider this when having used a workaround (for example collecting local variables to a collection in parent scope in an exclusive job) before.
+
 ## Adjusting your DMN models
 
 For Camunda Platform 8, [a former community extension](https://github.com/camunda-community-hub/dmn-scala), built by core Camunda developers, is productized. This engine has a higher coverage of DMN elements. This engine can execute DMN models designed for Camunda Platform 7, however, there are some small differences listed below.
