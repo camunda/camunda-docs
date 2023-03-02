@@ -8,6 +8,7 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 
 ## Outbound Connectors
 
+- [Automation Anywhere Connector](automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [Amazon SNS Connector](aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
 - [AWS Lambda Connector](aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
