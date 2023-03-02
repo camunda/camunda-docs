@@ -7,11 +7,11 @@ description: Orchestrate your Automation Anywhere queue items from your BPMN pro
 ## Prerequisites
 
 The **Automation Anywhere Connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/).
-In order to start using the Connector, you have to have a running Automation Anywhere instance we configured API service. Please refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more how to install and configure Automation Anywhere API service.
+To start using the Connector, you have to have a running Automation Anywhere instance we configured API service. Please refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more how to install and configure Automation Anywhere API service.
 
 ## Create an Automation Anywhere Connector task
 
-To use an **Automation Anywhere Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use an **Automation Anywhere Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
 
 ## Make your Automation Anywhere Connector executable
 
@@ -56,7 +56,7 @@ Select the **Automation Anywhere Connector** and fill out the following properti
 Select the **Automation Anywhere Connector** and fill out the following properties under the **Authentication** section:
 
 1. Select **Authentication (refresh) token** in the **Authentication** section.
-2. Set **Token** to `Token` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_TOKEN`). It can be authentication refresh token. See [authentication API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-api-authentication.html) for learn how generate authentication token or see [refresh token API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-refresh-authentication-token.html) how to generate refresh token.
+2. Set **Token** to `Token` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_TOKEN`). It can be an authentication or refresh token. See [authentication API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-api-authentication.html) to learn how to generate an authentication token or see [refresh token API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-refresh-authentication-token.html) to learn how to generate a refresh token.
 
 ## Configuration
 
@@ -70,7 +70,7 @@ The **Automation Anywhere Connector** currently supports two operation types in 
 
 ### Add work item to the queue
 
-This operation allows to add work queue item in the specified queue.
+This operation provides the ability to add a work queue item in the specified queue.
 It corresponds directly to the respective Automation Anywhere API - [`Add Work Items to the queue API`](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-api-wlm-add-workitems.html).
 
 #### Usage
@@ -78,7 +78,7 @@ It corresponds directly to the respective Automation Anywhere API - [`Add Work I
 1. Select **Add work item to the queue** from the **Operation type** dropdown in the **Operation** section.
 2. Populate **Authentication section** as described in the [respective section](#authentication).
 3. In the **Configuration** section set **Control Room URL** field, as described in the [respective section](#control-room-url).
-4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where item will be fetched from.
+4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where an item will be fetched from.
 5. In the **Input** section, set **Work Item json Data** that you want to pass together with the item. The **Data** has to comply with the Automation Anywhere API, and should contain the following semantics:
 
 ```json
@@ -96,7 +96,7 @@ The operation **Add work item to the queue** returns information about the newly
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemId:response.body.list[1].id}`. To use operation _Get work item result from queue by ID_, you need an `itemId`. This expression will add it in the context for you. Learn more in [get work item result from queue by ID](#get-work-item-result-from-queue-by-id).
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemId:response.body.list[1].id}`. To use operation _Get work item result from queue by ID_, you need an `itemId`. This expression will add it to the context for you. Learn more in [get work item result from queue by ID](#get-work-item-result-from-queue-by-id).
 
 Response example:
 
@@ -136,7 +136,7 @@ Response example:
 
 ### Get work item result from queue by ID
 
-This operation allows to return details of a specified work item from a work queue.
+This operation provides the ability to return the details of the specified work item from the work queue.
 It corresponds directly to the respective Automation Anywhere API - [`List Work Items in queue with filter by work item ID`](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-api-list-wlm-workitems.html).
 
 #### Usage
@@ -144,7 +144,7 @@ It corresponds directly to the respective Automation Anywhere API - [`List Work 
 1. Select **Get work item result from queue by ID** from the **Operation type** dropdown in the **Operation** section.
 2. Populate **Authentication section** as described in the [respective section](#authentication).
 3. In the **Configuration** section set **Control Room URL** field, as described in the [respective section](#control-room-url).
-4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where item will be fetched from.
+4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where an item will be fetched from.
 5. In the **Input** section, set **Work item ID**. This is the identifier of the item to be fetched.
 
 #### Get work item result from queue by ID response
