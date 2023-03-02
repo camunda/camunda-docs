@@ -58,9 +58,9 @@ We recommend an odd replication factor. Even replication factors can be problema
           + " make sure to use an odd replication factor.";
 ```
 
-Odd replication factors ensure high fault-tolerance and availability. Even replication factors have no benefit over the previous odd value and are weaker than the next. 
+Odd replication factors ensure high fault-tolerance and availability. Even replication factors have no benefit over the previous odd value and are weaker than the next.
 
-Using an example, a replication factor of 4 has no benefit over a replication factor of 3. A replication factor for 4 would be weaker than a replication factor of 5. 
+Using an example, a replication factor of 4 has no benefit over a replication factor of 3. A replication factor for 4 would be weaker than a replication factor of 5.
 
 ## Partition distribution
 
