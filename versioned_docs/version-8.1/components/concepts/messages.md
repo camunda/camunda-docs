@@ -49,6 +49,13 @@ zbctl publish message "Money collected" --correlationKey "order-123" --ttl 1h
    </p>
  </details>
 
+## Message expiration
+
+When a buffered message could not be correlated to a process instance in the
+given time-to-live, it gets removed from the buffer afterwards. Internally, the
+MessageObserver runs once a minute and exports an event, that the message
+expired.
+
 ## Message cardinality
 
 A message is correlated only _once_ to a process (based on the BPMN process id), across all versions of this process. If multiple subscriptions for the same process are opened (by multiple process instances or within one instance,) the message is correlated only to one of the subscriptions.
