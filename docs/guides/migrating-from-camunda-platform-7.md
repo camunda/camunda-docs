@@ -592,7 +592,7 @@ Camunda Platform 7 provides flexible ways to add data to your process. For examp
 
 Another possibility is transforming those objects on the fly to JSON or XML using Camunda Spin. It turned out this was black magic and led to regular problems, which is why Camunda Platform 8 does not offer this anymore. Instead, you should do any transformation within your code before talking to the Camunda API. Camunda Platform 8 only takes JSON as a payload, which automatically includes primitive values.
 
-In the below Java Delegate example, you can see that Jackson was used in the delegate for JSON to Java mapping:
+In the below Java Delegate example, you can see that Spin and Jackson was used in the delegate for JSON to Java mapping:
 
 ```java
 @Component
@@ -600,13 +600,12 @@ public class CreateCustomerInCrmJavaDelegate implements JavaDelegate {
 
     @Autowired
     private ObjectMapper objectMapper;
-
     //...
 
     public void execute(DelegateExecution execution) throws Exception {
         // Data Input Mapping
-        String customerDataJson = (String) execution.getVariable("customerData");
-        CustomerData customerData = objectMapper.readValue(customerDataJson, CustomerData.class);
+        JsonNode customerDataJson = ((JacksonJsonNode) execution.getVariable("customerData")).unwrap();
+        CustomerData customerData = objectMapper.treeToValue(customerDataJson, CustomerData.class);
         // ...
     }
 }
