@@ -212,11 +212,11 @@ In general, **workflow engine data** is harder to migrate to Camunda Platform 8:
 
 The [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration), available as a community extension, contains two components that will help you with migration:
 
-1. [A converter available in different flavors (webapp, cli) to convert BPMN models from Camunda Platform 7 to Camunda Platform 8](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter). This maps possible BPMN elements and technical attributes into the Camunda Platform 8 format and gives you warnings where this is not possible. The result of a conversion is a model with mapped implementation details as well as hints on what changed, needs to be reviewed or adjusted in order to function properly in Camunda Platform 8.
+1. [A converter available in different flavors (web app, CLI) to convert BPMN models from Camunda Platform 7 to Camunda Platform 8](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter). This maps possible BPMN elements and technical attributes into the Camunda Platform 8 format and gives you warnings where this is not possible. The result of a conversion is a model with mapped implementation details as well as hints on what changed, needs to be reviewed, or adjusted in order to function properly in Camunda Platform 8.
 
 2. [The Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter). This is a library providing a worker to hook in Camunda Platform 7-based glue code. For example, it can invoke existing JavaDelegate classes.
 
-3. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) to migrate running process instances from Camunda 7 to Camunda 8.
+3. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) to migrate running process instances from Camunda Platform 7 to Camunda Platform 8.
 
 In essence, this tooling implements details described in the next sections.
 
@@ -334,10 +334,10 @@ The following attributes/elements cannot be migrated:
 
 - `camunda:taskPriority`
 
-Service tasks using `camunda:connector` will be migrated the following:
+Service tasks using `camunda:connector` will be migrated with the following changes:
 
 - `camunda:connectorId` becomes `zeebe:taskDefinition type`
-- all inputs and outputs are treated like all other inputs and outputs
+- All inputs and outputs are treated like all other inputs and outputs.
 
 ### Send tasks
 
@@ -462,9 +462,9 @@ This means you must inspect and adjust all message receive events or receive tas
 
 The `bpmn message name` is used in both products and doesn't need migration.
 
-### Multi-Instance activities
+### Multi-instance activities
 
-Multi-instance acitivities do exist in the same flavour in Camunda 8 as they did in Camunda 7 (parallel and sequential multi-instance are supported, a loop not).
+Multi-instance activities do exist in the same flavor in Camunda Platform 8 as they did in Camunda Platform 7 (parallel and sequential multi-instance are supported, a loop is not.)
 
 For implementation, the only current limitation is that a loop cardinality is not supported.
 
@@ -474,14 +474,14 @@ These elements cannot be migrated:
 
 These elements can still be used:
 
-- `bpmn:completionCondition`: Here, the expression has to be transformed to FEEL
+- `bpmn:completionCondition`: Here, the expression has to be transformed to FEEL.
 
 These elements will be converted:
 
 - `bpmn:multiInstanceLoopCharacteristics camunda:collection` to `zeebe:loopCharacteristics inputCollection`
 - `bpmn:multiInstanceLoopCharacteristics camunda:elementVariable` to `zeebe:loopCharacteristics inputElement`
 
-Additionally, there is now a native way to collect results (using `zeebe:loopCharacteristics outputCollection` and `zeebe:loopCharacteristics outputElement`). You should consider this when having used a workaround (for example collecting local variables to a collection in parent scope in an exclusive job) before.
+Additionally, there is now a native way to collect results (using `zeebe:loopCharacteristics outputCollection` and `zeebe:loopCharacteristics outputElement`). You should consider this before using a workaround (for example, collecting local variables to a collection in parent scope in an exclusive job).
 
 ## Adjusting your DMN models
 
