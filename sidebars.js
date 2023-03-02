@@ -194,6 +194,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/timer-events/timer-events",
                 "components/modeler/bpmn/error-events/error-events",
+                "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
               ],
             },
