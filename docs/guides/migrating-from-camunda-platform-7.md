@@ -359,8 +359,8 @@ The following is not possible:
 
 - Calling out to functional Java code using beans in expressions
 - Registering custom function definitions within the expression engine
-- using SPIN library
-- using the `execution`
+- using SPIN library (the FEEL data structure behaves like JSON natively, so SPIN can be omitted or replaced)
+- using the `execution` or `task`
 
 ### Human tasks
 
