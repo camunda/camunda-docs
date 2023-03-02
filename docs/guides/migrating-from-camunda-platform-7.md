@@ -530,15 +530,11 @@ Here's an example of a good Java Delegate:
 public class CreateCustomerInCrmJavaDelegate implements JavaDelegate {
 
     @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
     private CrmFacade crmFacade;
 
     public void execute(DelegateExecution execution) throws Exception {
         // Data Input Mapping
-        String customerDataJson = (String) execution.getVariable("customerData");
-        CustomerData customerData = objectMapper.readValue(customerDataJson, CustomerData.class);
+        CustomerData customerData = (CustomerData) execution.getVariable("customerData");
 
         // Delegate to business logic
         String customerId = crmFacade.createCustomer(customerData);
@@ -577,17 +573,17 @@ public class OrderFulfillmentRestController {
   @Autowired
   private ProcessEngine camunda;
 
-  @RequestMapping(path = "/order", method = PUT)
-  public String placeOrder(String orderPayload, HttpServletResponse response) throws Exception {
+  @RequestMapping(path = "/order", method = POST)
+  public ResponseEntity<StatusDto> placeOrder(@RequestBody OrderDto orderPayload) throws Exception {
     // TODO: Somehow extract data from orderPayload
-    String orderData = "todo";
+    OrderData orderData = OrderData.from(orderPayload);
 
     ProcessInstance pi = camunda.getRuntimeService() //
         .startProcessInstanceByKey("orderFulfillment", //
             Variables.putValue("order", orderData));
 
     response.setStatus(HttpServletResponse.SC_ACCEPTED);
-    return "{\"status\":\"pending\"}";
+    return ResponseEntity.accepted().body(StatusDto.of("pending"));
   }
 }
 ```
@@ -596,9 +592,9 @@ public class OrderFulfillmentRestController {
 
 Camunda Platform 7 provides flexible ways to add data to your process. For example, you could add Java objects that would be serialized as byte code. Java byte code is brittle and also tied to the Java runtime environment.
 
-Another possibility is transforming those objects on the fly to XML using Camunda Spin. It turned out this was black magic and led to regular problems, which is why Camunda Platform 8 does not offer this anymore. Instead, you should do any transformation within your code before talking to Camunda API. Camunda Platform 8 only takes JSON as a payload, which automatically includes primitive values.
+Another possibility is transforming those objects on the fly to JSON or XML using Camunda Spin. It turned out this was black magic and led to regular problems, which is why Camunda Platform 8 does not offer this anymore. Instead, you should do any transformation within your code before talking to the Camunda API. Camunda Platform 8 only takes JSON as a payload, which automatically includes primitive values.
 
-In the above Java Delegate example, you can see that Jackson was used in the delegate for JSON to Java mapping:
+In the below Java Delegate example, you can see that Jackson was used in the delegate for JSON to Java mapping:
 
 ```java
 @Component
