@@ -334,8 +334,6 @@ The following attributes/elements cannot be migrated:
 
 - `camunda:taskPriority`
 
-Service tasks using `camunda:type` cannot be migrated.
-
 Service tasks using `camunda:connector` will be migrated the following:
 
 - `camunda:connectorId` becomes `zeebe:taskDefinition type`
