@@ -509,8 +509,8 @@ module.exports = {
       ],
     },
   ],
-  "APIs & Clients": [
-    "apis-clients/working-with-apis-clients",
+  "APIs & Tools": [
+    "apis-clients/working-with-apis-tools",
     {
       APIs: [
         "apis-clients/public-api",
