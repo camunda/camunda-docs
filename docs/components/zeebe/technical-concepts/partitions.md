@@ -48,7 +48,7 @@ A partition is a persistent append-only event stream. Initially, a partition is 
 
 For fault tolerance, data in a partition is replicated from the **leader** of the partition to its **followers**. Followers are other Zeebe broker nodes that maintain a copy of the partition without performing event processing.
 
-We recommend an odd replication factor. 
+We recommend an odd replication factor.
 
 Odd replication factors ensure high fault-tolerance and availability. Even replication factors have no benefit over the previous odd value and are weaker than the next.
 

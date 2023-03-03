@@ -166,7 +166,9 @@ Replication is the act of copying data in a partition from a leader to its follo
 
 This is the number of times data in a partition are copied. This depends on the number of brokers in a cluster. A cluster with one leader and two followers have a replication factor of three, as data in each partition needs to have three copies.
 
-- [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
+We recommend running an odd replication factor.
+
+- [Partitions](/components/zeebe/technical-concepts/partitions.md#replication)
 
 ### Request timeout
 
