@@ -622,6 +622,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/microsoft-teams/"
             ),
             docsLink(
+              "Power Automate Connector",
+              "components/connectors/out-of-the-box-connectors/power-automate/"
+            ),
+            docsLink(
               "RabbitMQ Connector",
               "components/connectors/out-of-the-box-connectors/rabbitmq/"
             ),

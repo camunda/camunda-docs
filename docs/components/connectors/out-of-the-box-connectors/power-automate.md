@@ -1,0 +1,161 @@
+---
+id: power-automate
+title: Power Automate Connector
+description: Orchestrate your Power Automate Flows with Camunda to trigger, get the status, or get the outputs of the flow.
+---
+
+The **Power Automate Connector** allows you to orchestrate a Power Automate flow from your BPMN process with [Power Automate](https://powerautomate.microsoft.com).
+
+## Prerequisites
+
+To use the Power Automate Connector, you need to have several things to be set up:
+
+1. [Azure AD application](https://powerautomate.microsoft.com) with proper permissions. Visit the [official documentation](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-register-app-azure-active-directory#create-an-application-registration) to see how you can create one.
+2. A security role in [Power Platform](https://admin.powerplatform.microsoft.com/). [See the documentation](https://learn.microsoft.com/en-us/power-platform/admin/database-security#create-or-configure-a-custom-security-role)
+3. A Dataverse application user. [See how to create it](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authenticate-oauth#manually-create-a-dataverse-application-user)
+4. [Power App Environment](https://learn.microsoft.com/en-us/power-platform/admin/environments-overview). You need to create an Environment to establish a connection between your Desktop App and the cloud.
+5. [Power Automate desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install). You need to download the desktop app and sign in to create your Power Automate Flow.
+6. [Power Automate machine runtime desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/manage-machines#register-a-new-machine). You need this application to manage and troubleshoot machine settings, and enable the On-premise data gateway to access your machine data.
+7. Set up the Power Automate [On-premises data gateway desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install#install-an-on-premises-data-gateway) to create a connection between the cloud environment and your desktop app.
+
+## Create a Power Automate Connector task
+
+To use a **Power Automate Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+
+## Operation types
+
+The Power Automate Connector currently supports three operation types in the **Operation type** dropdown list: _Get the status of a flow run_, _Get flow outputs_, and _Trigger a flow run_.
+
+![Power Automate Connector operations](../img/connectors-power-automate-operations.png)
+
+### Authentication
+
+You can choose among the available Power Automate Connector authentication types according to your authentication requirements.
+
+### Power Automate Connector (bearer token)
+
+#### Create a new Connector secret
+
+We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+
+1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+2. Name your secret (i.e `POWER_AUTOMATE_BEARER_TOKEN`) so you can reference it later in the Connector.
+
+#### Configure the bearer token
+
+Select the **Power Automate Connector** and fill out the following properties under the **Authentication** section:
+
+1. Click **Bearer Token** in the **Authentication** section.
+2. Set **Bearer** to the secret you created (i.e. `secrets.POWER_AUTOMATE_BEARER_TOKEN`).
+
+![Power Automate Connector bearer token](../img/connectors-power-automate-bearer-token.png)
+
+### Power Automate Connector (OAuth token)
+
+#### Create a new Connector secret
+
+We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+
+1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+2. Name your secret (i.e `POWER_AUTOMATE_CLIENT_ID`) so you can reference it later in the Connector.
+
+#### Configure the OAuth Token
+
+Select the **Power Automate Connector** and fill out the following properties under the **Authentication** section:
+
+1. Click **OAuth 2.0** in the **Authentication** section.
+2. Set **Client ID** to the secret you created (i.e. `secrets.POWER_AUTOMATE_CLIENT_ID`).
+3. Set **Client secret** to the secret you created (i.e. `secrets.POWER_AUTOMATE_CLIENT_SECRET`).
+4. Set **Scope** to the secret you created or specify it (i.e. `secrets.POWER_AUTOMATE_SCOPE` or `https://org1a1aa111.api.crm4.dynamics.com/.default`).
+
+![Power Automate Connector oauth token](../img/connectors-power-automate-oauth-token.png)
+
+### Trigger a flow run
+
+This operation allows you to trigger a Power Automate desktop flow. To execute it, take the following steps:
+
+1. Select the operation **Trigger a flow run** from the **Operation type** dropdown list.
+2. Configure authentication as described in the [authentication](#authentication) section.
+3. Fill out the input fields as described in the [configuration](#configuration) section.
+4. Fill out the input fields as described in the [input](#input) section.
+5. Fill out the response mapping as described in the [trigger a flow run](#trigger-a-flow-run-response) section.
+
+![Power Automate Connector - Trigger a flow run](../img/connectors-power-automate-trigger-a-flow-run.png)
+
+#### Configuration
+
+For this section, you must fill out the following field:
+
+1. **Organization URI**: This is your dynamics 365 URL. [Visit the docs](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/discovery-service) or [learn about environments](https://learn.microsoft.com/en-us/power-platform/admin/environments-overview#environment-details) to see how to find it.
+
+#### Input
+
+For this section, you must fill out the following fields:
+
+1. **Workflow ID (Flow ID)**: The ID of the Power Automate desktop flow.
+2. **Connection name**: Connection to be used with the desktop flow script. You can specify it as connection name or as Connection Reference Logical Name. In the latter case you have to set the connectionType accordingly.
+3. **Connection type**: Identifies which type of connection is used in the connection name parameter. Connection type (default), or a connection reference type.
+4. **Run mode**: Choose between attended or unattended.
+5. **Run priority**: Choose an option (normal, high) or add your own.
+6. _(Optional)_ **Inputs**: The desktop flow script input parameters (json serialized string).
+7. _(Optional)_ **Callback URL**: URL that will be called once the desktop flow script is complete.
+
+### Get the status of a flow run
+
+The operation **Get the status of a flow run** returns information about the newly triggered flow session.
+
+#### Configuration
+
+For this section, you must fill out the following field:
+
+1. **Organization URI**: This is your dynamics 365 URL. [Visit the docs](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/discovery-service) or [learn about environments](https://learn.microsoft.com/en-us/power-platform/admin/environments-overview#environment-details) to see how to find it.
+
+#### Input
+
+For this section, you must fill out the following field:
+
+1. **Flow session ID**: Unique identifier for entity instances. You can find this in the response of the 'Trigger a flow run' method.
+
+#### Output
+
+You can use an output mapping to map the response:
+
+1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `= {statusCode: response.body.statuscode}`.
+
+### Get flow outputs
+
+The operation **Get flow outputs** returns the output of the triggered Power Automate flow.
+
+#### Configuration
+
+For this section, you must fill out the following field:
+
+1. **Organization URI**: This is your dynamics 365 URL. [Visit the docs](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/discovery-service) or [learn about environments](https://learn.microsoft.com/en-us/power-platform/admin/environments-overview#environment-details) to see how to find it.
+
+#### Input
+
+For this section, you must fill out the following field:
+
+1. **Flow session ID**: Unique identifier for entity instances. You can find this in the response of the 'Trigger a flow run' method.
+
+#### Output
+
+You can use an output mapping to map the response:
+
+1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `= {flowOutputs: response.body}`.
+
+## Appendix
+
+### Using Power Automate Connector best practice
+
+Oftentimes it is desired to continue the process after a Power Automate flow run finished. You can use the **Callback URL** field if you select the **Trigger a flow run** to specify a url which will be called after the flow is finished.
+If you wish to continue the Camunda process or start a new one, the [Webhook Connector](./http-webhook.md) suits very well. For that you need the following steps:
+
+1. Create a [Webhook Connector](./http-webhook.md) and specify the **Webhook ID**.
+2. Create a Power [Automate connector](./power-automate.md), select the **Trigger a flow run** method, fill in the fields, and for the **Callback URL** use the following pattern: `{zeebe.client.cloud.region}.connectors.camunda.io/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
+
+   For example: `https://bru-3.connectors.camunda.io/0100101a-11a1-1111-a1a1-1a1a11a11111/inbound/a1aa1aa1-a111-1111-a1aa-1111aa1a1a11`.
+
+   You can find the zeebe specific values in you cluster details on the _API_ tab under _Client Credentials_. The _webhookId_ is the id you specified in the first step.
