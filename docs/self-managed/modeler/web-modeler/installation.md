@@ -11,5 +11,4 @@ Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/ca
 However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
 
-Currently, we support an installation of Web Modeler Self-Managed with Docker and Docker Compose.
-Refer to the [installation guide](../../platform-deployment/docker.md#web-modeler) for more details.
+Refer to the [Installation Guide](../../platform-deployment/overview.md) for details on how to install Web Modeler.

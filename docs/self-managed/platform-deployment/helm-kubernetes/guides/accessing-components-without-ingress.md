@@ -29,7 +29,8 @@ Accessing the Zeebe cluster directly using `kubectl port-forward` is recommended
 To interact with Camunda Platform web applications like Operate, Tasklist, and Optimize, also `kubectl port-forward` will be used.
 
 :::note
-To use the web applications without Camunda Identity, you should setting `global.identity.auth.enabled: false` in the values file to disable the authentication mechanism.
+To use the web applications without Camunda Identity, you can set `global.identity.auth.enabled: false` in the values file to disable the authentication mechanism.
+Do _not_ disable it if you like to use Web Modeler, as it requires Camunda Identity and Keycloak.
 :::
 
 First, port-forward for each application service:
@@ -42,11 +43,26 @@ kubectl port-forward svc/<RELEASE_NAME>-tasklist 8082:80
 kubectl port-forward svc/<RELEASE_NAME>-optimize 8083:80
 ```
 
-Then, you can access each app pointing your browser at:
+To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself and Keycloak (assuming that Keycloak is installed as part of the Helm release):
+
+```
+kubectl port-forward svc/<RELEASE_NAME>-web-modeler-webapp 8084:80
+
+kubectl port-forward svc/<RELEASE_NAME>-web-modeler-websockets 8085:80
+
+kubectl port-forward svc/<RELEASE_NAME>-keycloak 18080:80
+```
+
+:::note
+The name of the Keycloak service will be truncated after 20 characters if Keycloak 16 is used, for example: `svc/long-release-name-ke`
+:::
+
+Finally, you can access each app pointing your browser at:
 
 - Operate: [http://localhost:8081](http://localhost:8081)
 - Tasklist: [http://localhost:8082](http://localhost:8082)
 - Optimize: [http://localhost:8083](http://localhost:8083)
+- Web Modeler: [http://localhost:8084](http://localhost:8084)
 
 Log in to these services using the `demo`/`demo` credentials.
 

@@ -12,3 +12,7 @@ import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 In addition to Stock Kubernetes (which could be deployed on cloud or on-premise), Camunda only officially tests and supports the following platforms:
 
 <DocCardList items={useCurrentSidebarCategory().items}/>
+
+:::caution Web Modeler
+While it is likely Web Modeler Beta will work on your cloud platform, we do not guarantee functionality and currently offer no dedicated support for these cloud platforms.
+:::
