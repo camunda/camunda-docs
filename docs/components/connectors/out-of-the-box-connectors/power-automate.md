@@ -10,13 +10,13 @@ The **Power Automate Connector** allows you to orchestrate a Power Automate flow
 
 To use the Power Automate Connector, you need to have several things to be set up:
 
-1. [Azure AD application](https://powerautomate.microsoft.com) with proper permissions. Visit the [official documentation](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-register-app-azure-active-directory#create-an-application-registration) to see how you can create one.
+1. [Azure AD application](https://portal.azure.com) with proper permissions. Visit the [official documentation](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-register-app-azure-active-directory#create-an-application-registration) to see how you can create one.
 2. A security role in [Power Platform](https://admin.powerplatform.microsoft.com/). [See the documentation](https://learn.microsoft.com/en-us/power-platform/admin/database-security#create-or-configure-a-custom-security-role)
 3. A Dataverse application user. [See how to create it](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authenticate-oauth#manually-create-a-dataverse-application-user)
 4. [Power App Environment](https://learn.microsoft.com/en-us/power-platform/admin/environments-overview). You need to create an Environment to establish a connection between your Desktop App and the cloud.
 5. [Power Automate desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install). You need to download the desktop app and sign in to create your Power Automate Flow.
 6. [Power Automate machine runtime desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/manage-machines#register-a-new-machine). You need this application to manage and troubleshoot machine settings, and enable the On-premise data gateway to access your machine data.
-7. Set up the Power Automate [On-premises data gateway desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install#install-an-on-premises-data-gateway) to create a connection between the cloud environment and your desktop app.
+7. Power Automate [On-premises data gateway desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install#install-an-on-premises-data-gateway) to create a connection between the cloud environment and your desktop app.
 
 ## Create a Power Automate Connector task
 
@@ -43,6 +43,8 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 
 #### Configure the bearer token
 
+[Click here](#get-bearer-token-with-postman) to see how to get the Bearer token with Postman.
+
 Select the **Power Automate Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
@@ -50,7 +52,7 @@ Select the **Power Automate Connector** and fill out the following properties un
 
 ![Power Automate Connector bearer token](../img/connectors-power-automate-bearer-token.png)
 
-### Power Automate Connector (OAuth token)
+### OAuth 2.0
 
 #### Create a new Connector secret
 
@@ -150,12 +152,25 @@ You can use an output mapping to map the response:
 
 ### Using Power Automate Connector best practice
 
+#### Using Webhook connector as callback endpoint
+
 Oftentimes it is desired to continue the process after a Power Automate flow run finished. You can use the **Callback URL** field if you select the **Trigger a flow run** to specify a url which will be called after the flow is finished.
 If you wish to continue the Camunda process or start a new one, the [Webhook Connector](./http-webhook.md) suits very well. For that you need the following steps:
 
 1. Create a [Webhook Connector](./http-webhook.md) and specify the **Webhook ID**.
-2. Create a Power [Automate connector](./power-automate.md), select the **Trigger a flow run** method, fill in the fields, and for the **Callback URL** use the following pattern: `{zeebe.client.cloud.region}.connectors.camunda.io/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
+2. Create a Power [Automate connector](./power-automate.md), select the **Trigger a flow run** method, fill in the fields.
+
+   If you use Camunda 8 Saas you can use the following pattern for the **Callback URL**: `{zeebe.client.cloud.region}.{zeebeHostUrl}/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
 
    For example: `https://bru-3.connectors.camunda.io/0100101a-11a1-1111-a1a1-1a1a11a11111/inbound/a1aa1aa1-a111-1111-a1aa-1111aa1a1a11`.
 
-   You can find the zeebe specific values in you cluster details on the _API_ tab under _Client Credentials_. The _webhookId_ is the id you specified in the first step.
+   If you use Camunda 8 Saas you can find the zeebe specific values in you cluster details on the _API_ tab under _Client Credentials_. The _webhookId_ is the id you specified in the first step, and the _zeebeHostUrl_ is connectors.camunda.io.
+
+   ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-cluster-api-credentials.png)
+
+#### Get Bearer token with Postman
+
+1. Allow implicit flow in your [Azure AD app](https://portal.azure.com)
+   ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-allow-implicit-flow.png)
+2. [Visit the official site](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment) to see how to set up the Postman environment
+3. [Generate access token](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment#generate-an-access-token-to-use-with-your-environment) and use it in the **Bearer token** field.
