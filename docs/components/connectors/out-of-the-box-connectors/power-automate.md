@@ -80,9 +80,32 @@ This operation allows you to trigger a Power Automate desktop flow. To execute i
 2. Configure authentication as described in the [authentication](#authentication) section.
 3. Fill out the input fields as described in the [configuration](#configuration) section.
 4. Fill out the input fields as described in the [input](#input) section.
-5. Fill out the response mapping as described in the [trigger a flow run](#trigger-a-flow-run-response) section.
+5. Fill out the response mapping as described in the [trigger a flow run response](#trigger-a-flow-run-response) section.
 
 ![Power Automate Connector - Trigger a flow run](../img/connectors-power-automate-trigger-a-flow-run.png)
+
+#### Trigger a flow run response
+
+The operation **Trigger a flow run** returns information about the triggered flow.
+
+You can use an output mapping to map the response:
+
+1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `= {flowSessionId: response.body.flowsessionId}`. To use operation _Get the status of a flow run_, you need a `flowSessionId`. This expression will add it in the context for you. Learn more in [Get the status of a flow run](#get-the-status-of-a-flow-run).
+
+Response example:
+
+```
+= {
+    "@odata.context": "https://org11aaa11a.crm4.dynamics.com/api/data/v9.2/$metadata#Microsoft.Dynamics.CRM.RunDesktopFlowResponse",
+    "flowsessionId": "bb2a1f33-e5b9-ed11-83fe-000d3ab4f483",
+    "licenseCheck": {
+        "@odata.context": "#Microsoft.Dynamics.CRM.expando",
+        "code": "ValidLicenseCoverage",
+        "message": "Valid License Coverage"
+    }
+}
+```
 
 #### Configuration
 
