@@ -120,7 +120,7 @@ elasticsearch-master-0                                 1/1     Running   0      
 
 ### Installing Web Modeler (Beta)
 
-:::caution Beta Offering
+:::caution Beta offering
 Web Modeler Self-Managed is currently offered as a [beta release](../../../../reference/early-access#beta)
 with limited availability for enterprise customers only. It is not recommended for production use and there is no maintenance service guaranteed.
 Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
@@ -132,7 +132,7 @@ To install the Camunda Helm chart with Web Modeler enabled, follow the steps bel
 #### Create image pull secret
 
 The Docker images for Web Modeler are not publicly accessible, but available to enterprise customers only from Camunda's private Docker registry.
-To enable Kubernetes to pull the images from this registry, you'll first need to [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
+To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
 
 ```bash
 kubectl create secret docker-registry <REGISTRY_SECRET_NAME> \
@@ -145,10 +145,10 @@ kubectl create secret docker-registry <REGISTRY_SECRET_NAME> \
 :::note
 Replace `<REGISTRY_SECRET_NAME>` with a name of your choice and `<DOCKER_USER>`, `<DOCKER_PASSWORD>`, and `<DOCKER_EMAIL>` with your credentials.
 
-The secret must be created in the same Kubernetes namespace you will install the Helm chart in. You can use the `-n` flag to specify a namespace.
+The secret must be created in the same Kubernetes namespace you will install the Helm chart in. Use the `-n` flag to specify a namespace.
 :::
 
-Alternatively, you can create an image pull secret [from your Docker configuration file](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials).
+Alternatively, create an image pull secret [from your Docker configuration file](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials).
 
 #### Configure Web Modeler
 
@@ -200,7 +200,7 @@ web-modeler:
 
 #### Install the Helm chart
 
-Assuming you have saved your configuration in `modeler-values.yaml`, you can install the Helm chart by running the following:
+Assuming you have saved your configuration in `modeler-values.yaml`, install the Helm chart by running the following:
 
 ```
 helm install --values modeler-values.yaml <RELEASE_NAME> camunda/camunda-platform

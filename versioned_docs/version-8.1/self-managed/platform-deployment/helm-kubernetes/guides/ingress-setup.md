@@ -162,7 +162,7 @@ web-modeler:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `web-modeler`. Please note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler-beta).
+The configuration above only contains the Ingress-related values under `web-modeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler-beta).
 :::
 
 Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
