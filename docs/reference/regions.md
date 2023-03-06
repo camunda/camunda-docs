@@ -6,13 +6,13 @@ description: "After creating a cluster, specify a region for that cluster. Read 
 
 When you create a cluster in Camunda Platform 8 SaaS, you must specify a region for that cluster.
 
-Below, find a list of regions currently supported in Camunda Platform 8 SaaS.
-
-Currently, we only make these regions available for customers on the Enterprise Plan. These customers can discuss regions with their Customer Success Manager. Professional and Trial users are currently hosted on US Central.
+Currently, we make these regions available for customers on the Trial, Professional, and Enterprise Plans. Enterprise customers can discuss custom regions with their Customer Success Manager.
 
 :::note
-Running on a Trial and want to try a different region, or interested in other regions or cloud providers? [Contact us](https://camunda.com/contact/) as we are able to make additional regions available on request.
+Our Console and Web Modeler components are currently hosted in the EU. [Contact us](https://camunda.com/contact/) if you have additional questions.
 :::
+
+Below, find a list of regions currently supported in Camunda Platform 8 SaaS.
 
 ## Available Google Cloud Platform (GCP) regions
 
@@ -20,3 +20,9 @@ Running on a Trial and want to try a different region, or interested in other re
 - US East: us-east1
 - US Central: us-central1
 - Australia Southeast: australia-southeast1
+
+You can find the locations behind the region codes [on the Google page](https://cloud.google.com/about/locations).
+
+:::note
+Running on a Trial or Professional plan and want to try a different region, or interested in other regions or cloud providers? [Contact us](https://camunda.com/contact/) as we are able to make additional regions available on request.
+:::

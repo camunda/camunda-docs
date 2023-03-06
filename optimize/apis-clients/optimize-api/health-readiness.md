@@ -6,6 +6,10 @@ description: "The REST API to check the readiness of Optimize."
 
 The purpose of Health-Readiness REST API is to return information indicating whether Optimize is ready to be used.
 
+:::note
+The Health-Readiness REST API does not require an [`Authorization` header](./optimize-api-authorization.md), and rejects requests that include one.
+:::
+
 ## Method & HTTP target resource
 
 GET `/api/readyz`

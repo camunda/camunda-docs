@@ -38,10 +38,12 @@ Each broker in the cluster may be both leader and follower at the same time for 
 There is no active load balancing across partitions. Each leader election for any partition is autonomous and independent of leader elections for other partitions.
 
 This may lead to one node becoming the leader for all partitions. This is not a problem for fault tolerance as the guarantees of replication remain. However, this may negatively impact throughput as all traffic hits one node.
+
+To reach a well-distributed leadership again, the [Rebalancing API](../../../self-managed/zeebe-deployment/operations/rebalancing.md) can be used. Be aware that this is on a best-effort basis.
 :::
 
 ## Commit
 
-Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of followers. This procedure is called **commit**. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
+Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of brokers. This procedure is called **commit**. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
 
 ![cluster](assets/commit.png)
