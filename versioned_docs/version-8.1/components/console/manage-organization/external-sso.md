@@ -7,7 +7,7 @@ description: "For enterprise customers, we support integrating external identity
 
 ## Connecting your identity provider with Camunda Platform
 
-For enterprise customers, we support integrating external identity providers (IdPs). Therefore, users within your organization do not need to sign up by creating an account with Camunda.
+For Enterprise and Professional plan customers, we support integrating external identity providers (IdPs). Therefore, users within your organization do not need to sign up by creating an account with Camunda.
 
 ### Onboarding procedure
 
