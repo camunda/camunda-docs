@@ -82,7 +82,7 @@ The following configuration parameters define the settings:
 | camunda.tasklist.elasticsearch.numberOfShards   | How many shards Elasticsearch uses for all Tasklist indices.   | 1             |
 | camunda.tasklist.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Tasklist indices. | 0             |
 
-These values are applied only on first startup of Tasklist or during version upgrade. After the Tasklist
+These values are applied only on first startup of Tasklist or during version update. After the Tasklist
 ELS schema is created, settings may be adjusted directly in the ELS template, and the new settings are applied
 to indices created after adjustment.
 

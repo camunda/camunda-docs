@@ -172,7 +172,7 @@ helm install <RELEASE_NAME> camunda/camunda-platform --skip-crds -f values.yaml 
 If you must deploy using Helm 3.2.0 or greater, you have two options. One is to use a SCCs which defines the `RunAsUser` strategy to be at least `RunAsAny`. If that's not possible, then you need to make use of [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering). This workaround is also described in detail in the [Helm chart repository](https://github.com/camunda/camunda-platform-helm/tree/main/openshift#using-a-post-renderer).
 
 :::warning
-If using a post-renderer, you **must** use the post-renderer whenever you are upgrading your release, not only during the initial installation. If you do not, the default values will be used again, which will prevent some services from starting.
+If using a post-renderer, you **must** use the post-renderer whenever you are updating your release, not only during the initial installation. If you do not, the default values will be used again, which will prevent some services from starting.
 :::
 
 While you can use your preferred `post-renderer`, [we provide one](https://github.com/camunda/camunda-platform-helm/blob/main/openshift/patch.sh) which requires only `bash` and `sed` to be available locally:

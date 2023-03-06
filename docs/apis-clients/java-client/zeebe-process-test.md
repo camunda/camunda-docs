@@ -45,7 +45,7 @@ advantage of using this instead of the `testcontainer` version is that this is t
 This also does not require Docker to be running. The downside to this solution is that the JDK
 requirement is bound to the Java version of the Zeebe engine. Whenever this Java version changes,
 you'd either have to [switch to the testcontainer version](#switching-between-testcontainers-and-embedded),
-or upgrade your own JDK to match the Zeebe engine.
+or update your own JDK to match the Zeebe engine.
 
 ```xml
 <dependency>

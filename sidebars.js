@@ -673,7 +673,7 @@ module.exports = {
           "Helm/Kubernetes": [
             "self-managed/platform-deployment/helm-kubernetes/overview",
             "self-managed/platform-deployment/helm-kubernetes/deploy",
-            "self-managed/platform-deployment/helm-kubernetes/upgrade",
+            "self-managed/platform-deployment/helm-kubernetes/update",
             {
               type: "category",
               label: "Platforms",

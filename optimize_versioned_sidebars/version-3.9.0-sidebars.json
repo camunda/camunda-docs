@@ -1588,8 +1588,8 @@
             },
             {
               "type": "link",
-              "label": "Upgrade",
-              "href": "/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/"
+              "label": "Update",
+              "href": "/docs/self-managed/platform-deployment/helm-kubernetes/update/"
             },
             {
               "Platforms": [

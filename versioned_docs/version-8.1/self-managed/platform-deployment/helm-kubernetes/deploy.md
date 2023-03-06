@@ -220,9 +220,9 @@ If the output of the `describe` command was not beneficial, tail the logs of the
 kubectl logs -f <POD_NAME>
 ```
 
-## Upgrading Camunda Helm chart
+## Updating Camunda Helm chart
 
-For upgrading Camunda Helm chart from one release to another, visit the [Camunda Platform 8 Helm upgrading page](upgrade.md).
+For updating Camunda Helm chart from one release to another, visit the [Camunda Platform 8 Helm updating page](update.md).
 
 ## General notes
 

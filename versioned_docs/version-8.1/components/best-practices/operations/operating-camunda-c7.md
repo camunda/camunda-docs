@@ -176,7 +176,7 @@ Sometimes, you may want an _emergency stop_ for a specific process instance or a
 
 For updating Camunda to a new version, follow the guide for [patch level updates](https://docs.camunda.org/manual/latest/update/patch-level/) or one of the dedicated [minor version update guides](https://docs.camunda.org/manual/latest/update/minor/) provided for each minor version release.
 
-A [rolling upgrade](https://docs.camunda.org/manual/latest/update/rolling-update) feature has been introduced in version 7.6. This allows users to update Camunda _without having to stop the system_. Outdated engine versions are able to continue to access an already updated database, allowing updates to clustered application servers one by one, without any downtime.
+A [rolling update](https://docs.camunda.org/manual/latest/update/rolling-update) feature has been introduced in version 7.6. This allows users to update Camunda _without having to stop the system_. Outdated engine versions are able to continue to access an already updated database, allowing updates to clustered application servers one by one, without any downtime.
 
 ### Preparation
 
