@@ -259,26 +259,28 @@ helm install <RELEASE_NAME> camunda/camunda-platform --skip-crds \
     -f values.yaml -f openshift.yaml --post-renderer ./patch.sh
 ```
 
-## Configuring Ingress using Routes for Zeebe Gateway
+## Configuring Ingress using routes for Zeebe Gateway
 
-The ingress on Openshift works slightly different from the Kubernetes default. The mechanism is called [Routes](https://docs.openshift.com/container-platform/4.10/networking/routes/route-configuration.html).
+The Ingress on OpenShift works slightly different from the Kubernetes default. The mechanism is called [routes](https://docs.openshift.com/container-platform/4.10/networking/routes/route-configuration.html).
 
-If you want to use these routes for the Zeebe Gateway, you can configure this through Ingress as well.
+To use these routes for the Zeebe Gateway, configure this through Ingress as well.
 
 ### Alternatives
 
-A simple alternative would be to install the Ingress Controller of choice and use it instead, for example [NGINX](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift).
+An alternative is to install the Ingress Controller of choice and use this instead; for example, [NGINX](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift).
 
 ### Prerequisite
 
-As the Zeebe Gateway uses `gRPC` which relies on `HTTP/2`, this [has to be enabled](https://docs.openshift.com/container-platform/4.10/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
+As the Zeebe Gateway uses `gRPC` (which relies on `HTTP/2`,) this [has to be enabled](https://docs.openshift.com/container-platform/4.10/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
 
 ### Required steps
 
-- Provide [TLS Secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway, the [Cert Manager](https://docs.openshift.com/container-platform/4.10/security/cert_manager_operator/index.html) might be helpful here:
-  - One issued to the Zeebe Gateway Service Name, it needs to use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) as netty only supports this, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`
-  - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`
-- Configure your Zeebe Gateway Ingress to create a [reencrypt route](https://docs.openshift.com/container-platform/4.10/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
+1. Provide [TLS Secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway, the [Cert Manager](https://docs.openshift.com/container-platform/4.10/security/cert_manager_operator/index.html) might be helpful here:
+
+- One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) as netty only supports this, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`.
+- One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
+
+2. Configure your Zeebe Gateway Ingress to create a [reencrypt route](https://docs.openshift.com/container-platform/4.10/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
 ```yaml
 zeebe-gateway:
@@ -292,7 +294,7 @@ zeebe-gateway:
       secretName: <EXTERNAL_URL_CERTIFICATE_SECRET_NAME>
 ```
 
-- Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
+3. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
 
 ```yaml
 zeebe-gateway:
@@ -326,5 +328,3 @@ zeebe-gateway:
             path: tls.key
         defaultMode: 420
 ```
-
-These are all steps that are required.
