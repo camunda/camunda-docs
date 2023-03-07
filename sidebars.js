@@ -117,19 +117,20 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/new-web-modeler",
             "components/modeler/web-modeler/launch-cloud-modeler",
-            {
-              "Diagram dedicated modes": [
-                "components/modeler/web-modeler/collaborate-with-modes",
-                "components/modeler/web-modeler/design-your-process",
-                "components/modeler/web-modeler/implement-your-process",
-              ],
-            },
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/save-and-deploy",
             "components/modeler/web-modeler/start-instance",
-            "components/modeler/web-modeler/collaboration",
+            {
+              Collaboration: [
+                "components/modeler/web-modeler/collaboration",
+                "components/modeler/web-modeler/collaborate-with-modes",
+                "components/modeler/web-modeler/design-your-process",
+                "components/modeler/web-modeler/implement-your-process",
+              ],
+            },
+            ,
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
