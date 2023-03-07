@@ -1,6 +1,7 @@
 ---
 id: workflows
 title: "Workflows"
+description: "Workflows are flowchart-like blueprints that define the orchestration of tasks."
 ---
 
 Workflows are flowchart-like blueprints that define the orchestration of *tasks*. Every task represents a piece of business logic such that the ordered execution produces a meaningful result.
