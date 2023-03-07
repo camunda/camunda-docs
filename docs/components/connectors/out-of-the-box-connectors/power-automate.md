@@ -11,12 +11,10 @@ The **Power Automate Connector** allows you to orchestrate a Power Automate flow
 To use the Power Automate Connector, you need to have several things to be set up:
 
 1. [Azure AD application](https://portal.azure.com) with proper permissions. Visit the [official documentation](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-register-app-azure-active-directory#create-an-application-registration) to see how you can create one.
-2. A security role in [Power Platform](https://admin.powerplatform.microsoft.com/). [See the documentation](https://learn.microsoft.com/en-us/power-platform/admin/database-security#create-or-configure-a-custom-security-role)
-3. A Dataverse application user. [See how to create it](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/authenticate-oauth#manually-create-a-dataverse-application-user)
-4. [Power App Environment](https://learn.microsoft.com/en-us/power-platform/admin/environments-overview). You need to create an Environment to establish a connection between your Desktop App and the cloud.
-5. [Power Automate desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install). You need to download the desktop app and sign in to create your Power Automate Flow.
-6. [Power Automate machine runtime desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/manage-machines#register-a-new-machine). You need this application to manage and troubleshoot machine settings, and enable the On-premise data gateway to access your machine data.
-7. Power Automate [On-premises data gateway desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install#install-an-on-premises-data-gateway) to create a connection between the cloud environment and your desktop app.
+2. [Create an application user](https://learn.microsoft.com/en-us/power-platform/admin/manage-application-users#create-an-application-user) and add security roles.
+3. [Power Automate desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install). You need to download the desktop app and sign in to create your Power Automate Flow.
+4. [Power Automate machine runtime desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/manage-machines#register-a-new-machine). You need this application to manage and troubleshoot machine settings, and enable the On-premise data gateway to access your machine data.
+5. Power Automate [On-premises data gateway desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install#install-an-on-premises-data-gateway) to create a connection between the cloud environment and your desktop app.
 
 ## Create a Power Automate Connector task
 
@@ -66,11 +64,17 @@ We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN 
 Select the **Power Automate Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
-2. Set **Client ID** to the secret you created (i.e. `secrets.POWER_AUTOMATE_CLIENT_ID`).
+2. Set **Client Id** to the secret you created (i.e. `secrets.POWER_AUTOMATE_CLIENT_ID`).
 3. Set **Client secret** to the secret you created (i.e. `secrets.POWER_AUTOMATE_CLIENT_SECRET`).
-4. Set **Scope** to the secret you created or specify it (i.e. `secrets.POWER_AUTOMATE_SCOPE` or `https://org1a1aa111.api.crm4.dynamics.com/.default`).
+4. Set **OAuth Token Endpoint** to the secret you created (i.e. `secrets.POWER_AUTOMATE_TOKEN_ENDPOINT`).
 
 ![Power Automate Connector oauth token](../img/connectors-power-automate-oauth-token.png)
+
+##### OAuth Token Endpoint
+
+You should provide the **OAuth Token Endpoint** in the following format: https://login.microsoftonline.com/{tanantID}/oauth2/v2.0/token
+
+[This documentation](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant#find-tenant-id-through-the-azure-portal) describes how you can find your _tenantID_.
 
 ### Trigger a flow run
 
@@ -123,7 +127,7 @@ For this section, you must fill out the following fields:
 4. **Run mode**: Choose between attended or unattended.
 5. **Run priority**: Choose an option (normal, high) or add your own.
 6. _(Optional)_ **Inputs**: The desktop flow script input parameters (json serialized string).
-7. _(Optional)_ **Callback URL**: URL that will be called once the desktop flow script is complete.
+7. _(Optional)_ **Callback URL**: URL that will be called once the desktop flow script is complete. [See how to use the Webhook connector](#using-webhook-connector-as-callback-endpoint) as a callback endpoint.
 
 ### Get the status of a flow run
 
@@ -148,6 +152,39 @@ You can use an output mapping to map the response:
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
 2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `= {statusCode: response.body.statuscode}`.
 
+Response example:
+
+```
+= {
+    "@odata.context": "https://[Organization URI]/api/data/v9.2/$metadata#flowsessions(statuscode,statecode,startedon,completedon)/$entity",
+    "@odata.etag": "W1276122",
+    "statuscode": 4,
+    "statecode": 0,
+    "startedon": "2022-06-16T12:54:40Z",
+    "completedon": "2022-06-16T12:57:46Z",
+}
+```
+
+Meaning of the different status codes based on the [official documentation](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/reference/entities/flowsession#statuscode-choicesoptions):
+
+| Status | Statuscode   |
+| ------ | ------------ |
+| 0      | NotSpecified |
+| 1      | Paused       |
+| 2      | Running      |
+| 3      | Waiting      |
+| 4      | Succeeded    |
+| 5      | Skipped      |
+| 6      | Suspended    |
+| 7      | Cancelled    |
+| 8      | Failed       |
+| 9      | Faulted      |
+| 10     | TimedOut     |
+| 11     | Aborted      |
+| 12     | Ignored      |
+| 13     | Deleted      |
+| 14     | Terminated   |
+
 ### Get flow outputs
 
 The operation **Get flow outputs** returns the output of the triggered Power Automate flow.
@@ -171,6 +208,14 @@ You can use an output mapping to map the response:
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
 2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `= {flowOutputs: response.body}`.
 
+Response example:
+
+```
+= {
+    "Output1": "My output value"
+}
+```
+
 ## Appendix
 
 ### Using Power Automate Connector best practice
@@ -183,11 +228,9 @@ If you wish to continue the Camunda process or start a new one, the [Webhook Con
 1. Create a [Webhook Connector](./http-webhook.md) and specify the **Webhook ID**.
 2. Create a Power [Automate connector](./power-automate.md), select the **Trigger a flow run** method, fill in the fields.
 
-   If you use Camunda 8 Saas you can use the following pattern for the **Callback URL**: `{zeebe.client.cloud.region}.{zeebeHostUrl}/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
+   If you use Camunda 8 SaaS you can use the following pattern for the **Callback URL**: `{zeebe.client.cloud.region}.{zeebeHostUrl}/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
 
-   For example: `https://bru-3.connectors.camunda.io/0100101a-11a1-1111-a1a1-1a1a11a11111/inbound/a1aa1aa1-a111-1111-a1aa-1111aa1a1a11`.
-
-   If you use Camunda 8 Saas you can find the zeebe specific values in you cluster details on the _API_ tab under _Client Credentials_. The _webhookId_ is the id you specified in the first step, and the _zeebeHostUrl_ is connectors.camunda.io.
+   If you use Camunda 8 SaaS you can find the zeebe specific values in you cluster details on the _API_ tab under _Client Credentials_. The _webhookId_ is the id you specified in the first step, and the _zeebeHostUrl_ is connectors.camunda.io.
 
    ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-cluster-api-credentials.png)
 
