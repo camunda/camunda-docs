@@ -310,6 +310,8 @@ es:
       certificate_authorities: []
       # used to enable or disable TLS/SSL for the HTTP connection
       enabled: false
+      # used to specify that the certificate was self-signed
+      selfSigned: false
 
   # Maximum time a request to elasticsearch should last, before a timeout
   # triggers.
