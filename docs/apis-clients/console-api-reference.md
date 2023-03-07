@@ -31,9 +31,9 @@ Scopes define the access for client credentials. A client can have one or multip
 After client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
 :::
 
-### Access Token
+### Access token
 
-Once you have your client credentials, you can retrieve an access token:
+Once you have your client credentials, you can retrieve an access token using the following command:
 
 ```bash
 curl --header "Content-Type: application/json" \
