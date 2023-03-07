@@ -130,7 +130,6 @@ module.exports = {
                 "components/modeler/web-modeler/implement-your-process",
               ],
             },
-            ,
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
