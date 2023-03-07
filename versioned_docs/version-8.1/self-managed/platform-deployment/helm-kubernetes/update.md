@@ -9,23 +9,23 @@ description: "To update to a more recent version of the Camunda Platform Helm ch
 
 To update to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
 
-### Updating where Identity disabled
+### Upgrading where Identity disabled
 
-Normally for a Helm update, you run the [Helm update](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an update as follows:
+Normally for a Helm update, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an upgrade as follows:
 
 ```shell
 helm upgrade <RELEASE_NAME>
 ```
 
-However, if Camunda Identity is enabled (which is the default), the update path is a bit more complex than just running `helm upgrade`. Read the next section to familiarize yourself with the update process.
+However, if Camunda Identity is enabled (which is the default), the upgrade path is a bit more complex than just running `helm upgrade`. Read the next section to familiarize yourself with the upgrade process.
 
-### Updating where Identity enabled
+### Upgrading where Identity enabled
 
 If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation.
 
 ## If you just tried updating to a newer chart version
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to update to a newer chart version, you likely will see the following return:
+If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 helm upgrade camunda-platform-test camunda/camunda-platform
@@ -85,7 +85,7 @@ helm upgrade <RELEASE_NAME> charts/camunda-platform/ \
 If you have specified on the first installation certain values, you have to specify them again on the update either via `--set` or the values file and the `-f` flag.
 :::
 
-For more details on the Keycloak update path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
+For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
 
 ## Version update instructions
 
