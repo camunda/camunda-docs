@@ -19,7 +19,11 @@ In this architecture, Camunda Platform 8 Self-Managed can be accessed as follows
 - Keycloak authentication: `https://camunda.example.com/auth`
 - Zeebe gateway: `grpc://zeebe.camunda.example.com`
 
-It's also possible to set up an Ingress for each component. For more details, visit our [combined and separated Ingress set up guide](../platform-deployment/helm-kubernetes/guides/ingress-setup.md).
+It's also possible to set up an Ingress for each component. For more details, visit our [combined and separated Ingress setup guide](../platform-deployment/helm-kubernetes/guides/ingress-setup.md).
+
+:::caution Web Modeler
+The combined Ingress setup does not support Web Modeler yet. To enable external access to Web Modeler, set up a [separate Ingress](../platform-deployment/helm-kubernetes/guides/ingress-setup.md#separated-ingress-setup) using a subdomain (e.g. `https://modeler.camunda.example.com`).
+:::
 
 ## Deployment
 

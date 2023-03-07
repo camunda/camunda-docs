@@ -171,6 +171,7 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 | es.security.ssl.enabled                 | false         | Used to enable or disable TLS/SSL for the HTTP connection.                                                                                                                                                                                            |
 | es.security.ssl.certificate             |               | The path to a PEM encoded file containing the certificate (or certificate chain) that will be presented to clients when they connect.                                                                                                                 |
 | es.security.ssl.certificate_authorities | [ ]           | A list of paths to PEM encoded CA certificate files that should be trusted, e.g. ['/path/to/ca.crt']. <br /><br />Note: if you are using a public CA that is already trusted by the Java runtime, you do not need to set the certificate_authorities. |
+| es.security.ssl.selfSigned              | false         | Used to specify that the certificate was self-signed.                                                                                                                                                                                                 |
 
 #### Elasticsearch backup settings
 
