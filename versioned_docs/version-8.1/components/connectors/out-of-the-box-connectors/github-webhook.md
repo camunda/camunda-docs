@@ -13,8 +13,8 @@ The **GitHub Webhook Connector** allows you to start a BPMN process instance tri
 2. Change its template to a GitHub Webhook.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
-5. Deploy the diagram to activate the Webhook.
-6. Navigate to the Webhooks tab in the properties panel to see the webhook URL.
+5. Deploy the diagram to activate the webhook.
+6. Navigate to the **Webhooks** tab in the properties panel to see the webhook URL.
 
 ## Make your GitHub Webhook Connector for receiving messages executable
 
@@ -29,28 +29,28 @@ The **GitHub Webhook Connector** allows you to start a BPMN process instance tri
 
 ## Activate the GitHub Webhook Connector by deploying your diagram
 
-Once you click the Deploy button, your GitHub Webhook will be activated and publicly available.
+Once you click the **Deploy** button, your GitHub Webhook will be activated and publicly available.
 
 URLs of the exposed GitHub Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/inbound/<webhook ID>>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda Platform 8 SaaS offering, this will typically contain your cluster region and cluster ID.
 - `<webhook ID>` is the ID (path) you configured in the properties of your GitHub Webhook Connector.
 
 If you make changes to your GitHub Webhook Connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.
 
-When you click on the Event with GitHub Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
+When you click on the event with GitHub Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
 This tab displays the URL of the GitHub Webhook Connector for every cluster where you have deployed your BPMN diagram.
 
 ![HTTP Webhook tab](../img/use-inbound-connector-webhooks-tab.png)
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of Camunda 8 SaaS offering.
-You can still use GitHub Webhook Connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
+The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
+You can still use GitHub Webhook Connector in Desktop Modeler, or with your Camunda Platform 8 Self-Managed.
 In that case, GitHub Webhook Connector deployments and URLs will not be displayed in Modeler.
 :::
 
-## Nest steps
+## Next steps
 
 - Learn more about [GitHub webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
