@@ -87,7 +87,7 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version upgrade instructions
 
-In additional to the [general upgrade instructions](#general-update-instructions), the following sections are only needed if you are upgrading to v8.0.13 or the versions after v8.0.13.
+The following sections are only needed if you are upgrading to v8.0.13 or the versions after v8.0.13.
 
 ### v8.0.13
 
