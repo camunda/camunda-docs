@@ -54,6 +54,9 @@ zbctl publish message "Money collected" --correlationKey "order-123" --ttl 1h
 When a buffered message could not be correlated to a process instance in the
 given time-to-live, it gets removed from the buffer afterwards.
 
+As the expired messages are cleaned up in batches, there will be a configurable
+delay before the expiration is available.
+
 More details about the expired messages can be found in the exporters chapter
 of the Self-Managed section. (Link to be done).
 
