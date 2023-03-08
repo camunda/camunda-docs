@@ -12,8 +12,8 @@ You can save a snapshot of your diagram as a milestone any time.
 
 If you make any mistakes while modeling, you can always go back to previously saved snapshots. You can also identify and compare the differences between two milestones.
 
-Find your milestones under the clock icon.
-![milestones](img/milestones/web-modeler-milestone-clock-icon-button.png)
+Find your milestones by opening the actions menu, and clicking on **History**.
+![milestones](img/milestones/web-modeler-milestone-action-menu-item.png)
 
 ### Creating milestones
 
