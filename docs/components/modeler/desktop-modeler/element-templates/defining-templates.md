@@ -683,6 +683,8 @@ Properties may have a condition which determines when they should be active, dep
 
 For a property value to be used in a condition, the property needs to have an `id` that can be referenced by the conditional property.
 
+A property can depend on one or more conditions. If there are multiple conditions, they can be defined using `allMatch`. All of the conditions must be met for the property to be active.
+
 There are two possible comparison operators:
 
 - `equals`: Checks if the value is equal to the value defined in the condition.
@@ -733,8 +735,16 @@ There are two possible comparison operators:
       "type": "String",
       "binding": { ... },
       "condition": {
-        "property": "authenticationType",
-        "equals": "basic"
+       "allMatch": [
+          {
+            "property": "httpMethod",
+            "oneOf": ["patch", "post", "delete"]
+          },
+          {
+            "property": "authenticationType",
+            "equals": "basic"
+          }
+        ]
       }
     },
     {
@@ -742,8 +752,16 @@ There are two possible comparison operators:
       "type": "String",
       "binding": { ... },
       "condition": {
-        "property": "authenticationType",
-        "equals": "basic"
+        "allMatch": [
+          {
+            "property": "httpMethod",
+            "oneOf": ["patch", "post", "delete"]
+          },
+          {
+            "property": "authenticationType",
+            "equals": "basic"
+          }
+        ]
       }
     },
   ]
