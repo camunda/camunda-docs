@@ -2,7 +2,7 @@
 id: index
 title: "Go client"
 sidebar_label: "Quick reference"
-description: "Here, we'll show you how to instantiate the client in a Go application to interact with Camunda Platform 8."
+description: "Here, we'll show you how to instantiate the client by passing in the address of the cluster you want to connect to in a Go application to interact with Camunda Platform 8."
 ---
 
 ## Dependencies

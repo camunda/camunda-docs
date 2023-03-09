@@ -1,7 +1,7 @@
 ---
 id: grpc
 title: "Zeebe API (gRPC)"
-description: "Zeebe clients use gRPC to communicate with the cluster."
+description: "Zeebe clients use gRPC to communicate with the cluster. Activate jobs, cancel and create process instances, and more."
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
