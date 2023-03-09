@@ -1,6 +1,7 @@
 ---
 id: workflow-deploy
 title: "Deploy a Workflow"
+description: "Step through additional resources, prerequisites, the workflow developer, and a demo process."
 ---
 
 ## Related Resources

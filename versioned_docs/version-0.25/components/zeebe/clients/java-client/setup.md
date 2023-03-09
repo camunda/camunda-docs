@@ -1,6 +1,7 @@
 ---
 id: setup
 title: "Setting up the Zeebe Java Client"
+description: "Step through setting up the Zeebe Java client and bootstrapping."
 ---
 
 # Setting up the Zeebe Java Client

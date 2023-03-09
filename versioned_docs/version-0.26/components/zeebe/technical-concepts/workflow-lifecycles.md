@@ -1,6 +1,7 @@
 ---
 id: workflow-lifecycles
 title: "Workflow lifecycles"
+description: "In Zeebe, the workflow execution is represented internally by events of type WorkflowInstance. The events are written to the log stream and can be observed by an exporter."
 ---
 
 In Zeebe, the workflow execution is represented internally by events of type `WorkflowInstance`. The events are written to the log stream and can be observed by an exporter.
