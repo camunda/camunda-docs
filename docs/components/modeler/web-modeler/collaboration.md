@@ -30,6 +30,10 @@ There are four roles with different levels of access rights that can be assigned
 
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
 
+:::note
+The Web Modeler expects users to have email addresses assigned to receive the invitation correctly.
+:::
+
 1. Click **Add user**.
    ![invite user](img/collaboration/web-modeler-collaborator-invite-modal-opened.png)
 
