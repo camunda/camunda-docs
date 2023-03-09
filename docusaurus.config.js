@@ -45,6 +45,37 @@ module.exports = {
         editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
       },
     ],
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "apiDocs",
+        docsPluginId: "default",
+        config: {
+          operate: {
+            // Note: petstore key is treated as the <id> and can be used to specify an API doc instance when using CLI commands
+            specPath: "operate-openapi.yaml", // Path to designated spec file
+            outputDir: "docs/api/operate", // Output directory for generated .mdx docs
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          },
+        },
+      },
+    ],
+    function WebpackPlugin(context, options) {
+      return {
+        name: "plugin-configure-webpack",
+        configureWebpack() {
+          return {
+            resolve: {
+              fallback: {
+                url: false,
+              },
+            },
+          };
+        },
+      };
+    },
   ],
   scripts: [],
   themeConfig: {
@@ -221,6 +252,9 @@ module.exports = {
           editUrl:
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
+          // sjhsjhsjh do I need these?
+          docLayoutComponent: "@theme/DocPage",
+          docItemComponent: "@theme/ApiItem", //
         },
         blog: false,
         theme: {
@@ -234,4 +268,5 @@ module.exports = {
       },
     ],
   ],
+  themes: ["docusaurus-theme-openapi-docs"],
 };
