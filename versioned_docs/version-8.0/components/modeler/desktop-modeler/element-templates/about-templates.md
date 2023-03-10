@@ -5,7 +5,7 @@ description: "Element templates are a way to extend Camunda Modeler with domain-
 ---
 
 :::note
-Element templates can be used with Desktop Modeler version 1.0+; they are currently available in BPMN diagrams only.
+Element templates are currently available in BPMN diagrams only.
 :::
 
 Element templates are a way to extend [Desktop Modeler](https://camunda.org/bpmn/tool/) with domain-specific diagram elements, such as service and user tasks.
