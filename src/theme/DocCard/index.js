@@ -9,7 +9,6 @@ import isInternalUrl from "@docusaurus/isInternalUrl";
 import { translate } from "@docusaurus/Translate";
 import styles from "./styles.module.css";
 function CardContainer({ href, children, border }) {
-  clsx("card padding--lg", styles.cardContainer);
   var className = clsx("card padding--lg", styles.cardContainer);
   if (border == "alt") {
     className = clsx(className, styles.cardContainerBetaBorder);
