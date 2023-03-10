@@ -113,7 +113,14 @@
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/save-and-deploy",
             "components/modeler/web-modeler/start-instance",
-            "components/modeler/web-modeler/collaboration",
+            {
+              "Collaboration": [
+                "components/modeler/web-modeler/collaboration",
+                "components/modeler/web-modeler/collaborate-with-modes",
+                "components/modeler/web-modeler/design-your-process",
+                "components/modeler/web-modeler/implement-your-process"
+              ]
+            },
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
@@ -820,7 +827,8 @@
                 "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
-                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak"
+                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
+                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation"
               ]
             },
             "self-managed/platform-deployment/troubleshooting"
@@ -1216,7 +1224,10 @@
       "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"]
     },
     {
-      "Web Modeler (Beta)": ["self-managed/web-modeler/installation"]
+      "Web Modeler (Beta)": [
+        "self-managed/web-modeler/installation",
+        "self-managed/web-modeler/configuration"
+      ]
     },
     {
       "Backup and restore": [
