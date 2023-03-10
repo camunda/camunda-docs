@@ -113,7 +113,14 @@
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/save-and-deploy",
             "components/modeler/web-modeler/start-instance",
-            "components/modeler/web-modeler/collaboration",
+            {
+              "Collaboration": [
+                "components/modeler/web-modeler/collaboration",
+                "components/modeler/web-modeler/collaborate-with-modes",
+                "components/modeler/web-modeler/design-your-process",
+                "components/modeler/web-modeler/implement-your-process"
+              ]
+            },
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
