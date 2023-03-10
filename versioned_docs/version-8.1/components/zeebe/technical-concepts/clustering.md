@@ -44,6 +44,6 @@ To reach a well-distributed leadership again, the [Rebalancing API](../../../sel
 
 ## Commit
 
-Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of followers. This procedure is called **commit**. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
+Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of brokers. This procedure is called **commit**. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
 
 ![cluster](assets/commit.png)

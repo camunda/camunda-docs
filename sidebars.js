@@ -122,7 +122,14 @@ module.exports = {
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/save-and-deploy",
             "components/modeler/web-modeler/start-instance",
-            "components/modeler/web-modeler/collaboration",
+            {
+              Collaboration: [
+                "components/modeler/web-modeler/collaboration",
+                "components/modeler/web-modeler/collaborate-with-modes",
+                "components/modeler/web-modeler/design-your-process",
+                "components/modeler/web-modeler/implement-your-process",
+              ],
+            },
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
@@ -194,6 +201,7 @@ module.exports = {
                 "components/modeler/bpmn/message-events/message-events",
                 "components/modeler/bpmn/timer-events/timer-events",
                 "components/modeler/bpmn/error-events/error-events",
+                "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
               ],
             },
@@ -509,8 +517,8 @@ module.exports = {
       ],
     },
   ],
-  "APIs & Clients": [
-    "apis-clients/working-with-apis-clients",
+  "APIs & Tools": [
+    "apis-clients/working-with-apis-tools",
     {
       APIs: [
         "apis-clients/public-api",

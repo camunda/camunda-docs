@@ -5,8 +5,6 @@ sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind."
 ---
 
-## General upgrade instructions
-
 To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
 
 ### Upgrading where Identity disabled
@@ -89,7 +87,7 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version upgrade instructions
 
-In additional to the [general upgrade instructions](#general-upgrade-instructions), the following sections are only needed if you are upgrading to v8.0.13 or the versions after v8.0.13.
+The following sections are only needed if you are upgrading to v8.0.13 or the versions after v8.0.13.
 
 ### v8.0.13
 
