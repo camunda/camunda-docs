@@ -258,7 +258,7 @@ For the `camunda:executionListener` binding, an omitted `type` will lead to the 
 FEEL properties are only supported in Camunda Platform 8 element templates.
 :::
 
-As of Camunda Modeler `v5.0.0`, we support the feel properties `optional` and `required`.
+We support the feel properties `optional` and `required`.
 When set, the input field offers visual indications that a feel expression is expected.
 
 ```json
@@ -440,7 +440,7 @@ The `zeebe:property` binding allows you to set any arbitrary property for an out
 Optional bindings are only supported in Camunda Platform 8 element templates.
 :::
 
-As of Camunda Modeler `v5.0.0`, we support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
+We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
 
 If a user removes the value in the configured control, it will also remove the mapped element.
 
@@ -537,7 +537,7 @@ Camunda Platform 7 supports the following scope bindings:
 
 #### Groups
 
-As of Camunda Modeler `v5.0.0,` it is possible to define `groups` and order custom fields together.
+You may define `groups` to organize custom fields into:
 
 ```json
 {
@@ -547,7 +547,7 @@ As of Camunda Modeler `v5.0.0,` it is possible to define `groups` and order cust
   "appliesTo": [
     "bpmn:ServiceTask"
   ],
-    "groups": [
+  "groups": [
     {
       "id": "definition",
       "label": "Task definition"
@@ -567,7 +567,7 @@ As of Camunda Modeler `v5.0.0,` it is possible to define `groups` and order cust
 }
 ```
 
-Custom fields may use the defined group ids. The order of the custom fields also determines the groups' order in the properties panel.
+Associate a field with a group (ID) via the fields `group` key:
 
 ```json
 {
@@ -627,7 +627,7 @@ Together with the `pattern` constraint, you may define your custom error message
 Icons are currently supported in Camunda Platform 8 element templates only.
 :::
 
-As of Camunda Modeler `v5.0.0,` it is possible to define custom icons to update the visual appearance of elements after applying an element template.
+It is possible to define custom icons to update the visual appearance of elements after applying an element template.
 
 ```json
 [
