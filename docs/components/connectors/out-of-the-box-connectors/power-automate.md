@@ -122,7 +122,7 @@ For this section, you must fill out the following field:
 For this section, you must fill out the following fields:
 
 1. **Workflow ID (Flow ID)**: The ID of the Power Automate desktop flow.
-2. **Connection name**: Connection to be used with the desktop flow script. You can specify it as connection name or as Connection Reference Logical Name. In the latter case you have to set the connectionType accordingly.
+2. **Connection name**: Connection to be used with the desktop flow script. You can specify it as connection name or as Connection Reference Logical Name. In the latter case you have to set the connectionType accordingly. [See how to get the connection name](#how-to-get-the-connection-name)
 3. **Connection type**: Identifies which type of connection is used in the connection name parameter. Connection type (default), or a connection reference type.
 4. **Run mode**: Choose between attended or unattended.
 5. **Run priority**: Choose an option (normal, high) or add your own.
@@ -240,3 +240,16 @@ If you wish to continue the Camunda process or start a new one, the [Webhook Con
    ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-allow-implicit-flow.png)
 2. [Visit the official site](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment) to see how to set up the Postman environment
 3. [Generate access token](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment#generate-an-access-token-to-use-with-your-environment) and use it in the **Bearer token** field.
+
+#### How to get the connection name
+
+1. Go to you [Power Platform admin center](https://admin.powerplatform.microsoft.com), and select [Power Automate app](https://make.powerautomate.com) from the top left menu.
+2. In the left menu bar under _Data_ select _Connections_, and click on _New connection_.
+3. Select _Desktop flows_ and provide the domain and username of the user on the machine where the desktop flows are running, and also provide the password belongs to this user.
+4. Click on Create
+
+   ![Power Automate Connector - Create connection](../img/connectors-power-automate-create-new-connection.png)
+
+5. Click on the newly created connection, and you can find your connection name in the url as shown in the picture below. Note: this is a default connection type.
+
+   ![Power Automate Connector - Connection name](../img/connectors-power-automate-connection-name.png)
