@@ -64,6 +64,11 @@ attributes can be specified simultaneously:
 - `dueDate`: Specifies the due date of the user task.
 - `followUpDate`: Specifies the follow-up date of the user task.
 
+:::note
+For example, you can use the `followUpDate` to define the latest time a user should start working on a task, and then
+use the `dueDate` to provide a deadline when the user task should be finished.
+:::
+
 You can define the due date and follow-up date as static values (e.g. `2023-02-28T13:13:10+02:00`), but you can also use
 [expressions](/components/concepts/expressions.md) (e.g. `= schedule.dueDate` and `= now() + duration("PT15S")`). The
 expressions are evaluated on activating the user task and must result in a `string` conforming to an ISO 8601 combined
@@ -95,7 +100,7 @@ as configuration parameters for the worker.
 
 ### XML representation
 
-A user task with a user task form and an assignment definition:
+A user task with a user task form, an assignment definition, and a task schedule:
 
 ```xml
 <bpmn:process id="controlProcess" name="Control Process" isExecutable="true">
@@ -107,6 +112,7 @@ A user task with a user task form and an assignment definition:
   <bpmn:userTask id="Activity_025dulo" name="Configure">
     <bpmn:extensionElements>
       <zeebe:assignmentDefinition assignee="= default_controller" candidateGroups="controllers, auditors" />
+      <zeebe:taskSchedule dueDate="= task_finished_deadline" followUpDate="= now() + duration('P2D')"/>
       <zeebe:formDefinition formKey="camunda-forms:bpmn:userTaskForm_2g7iho6" />
     </bpmn:extensionElements>
   </bpmn:userTask>
