@@ -1,3 +1,8 @@
+// Why is this swizzled?
+//   1. To eliminate unnecessary text truncation on card descriptions
+//   2. To allow for highlighting specific cards with a different color border
+// Swizzled from version 2.3.1.
+
 import React from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";

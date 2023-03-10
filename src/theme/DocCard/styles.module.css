@@ -1,3 +1,8 @@
+/* 
+  Why is this swizzled?
+    See the associated DocCard/index.js for details. There are no customizations in this file.
+*/
+
 .cardContainer {
   --ifm-link-color: var(--ifm-color-emphasis-800);
   --ifm-link-hover-color: var(--ifm-color-emphasis-700);
