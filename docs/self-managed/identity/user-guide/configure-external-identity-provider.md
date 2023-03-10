@@ -20,7 +20,7 @@ To configure an external identity provider like OpenID Connect, SAML, LDAP, or A
    :::
 2. Click **Administrator Console** and log in using the Keycloak administrator credentials. The default administrator username is `admin`. When deploying Camunda Platform 8 with [Helm charts](/self-managed/platform-deployment/helm-kubernetes/overview.md),
    you can extract the password as described in
-   [secrets extraction](/self-managed/platform-deployment/helm-kubernetes/update.md#secrets-extraction).
+   [secrets extraction](/self-managed/platform-deployment/helm-kubernetes/upgrade.md#secrets-extraction).
    Using the example [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose)
    setup, the password is set via `KEYCLOAK_ADMIN_PASSWORD` environment variable and is `admin` per default.
 3. Select the realm you are using with Camunda Platform 8. By default, this is **Camunda-platform**.

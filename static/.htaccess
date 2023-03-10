@@ -14,11 +14,6 @@ RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templ
 # Added Self-Managed Modeler redirect
 RewriteRule ^docs/next/self-managed/web-modeler/installation/(.*)$ /docs/next/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
 
-# Added Self-Managed Helm/Kubernetes upgrade to update redirect
-RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/upgrade/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/update/$1 [R=301,L]
-RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/upgrade/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/update/$1 [R=301,L]
-RewriteRule ^docs/8.1/self-managed/platform-deployment/helm-kubernetes/upgrade/(.*)$ /docs/8.1/next/self-managed/platform-deployment/helm-kubernetes/update/$1 [R=301,L]
-
 RewriteRule ^docs/next/apis-clients/working-with-apis-clients/?$ /docs/next/apis-clients/working-with-apis-tools/ [R=301,L]
 
 RewriteRule ^docs/components/zeebe/open-source/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]

@@ -1273,8 +1273,8 @@ module.exports = {
               "self-managed/platform-deployment/helm-kubernetes/deploy/"
             ),
             docsLink(
-              "Update",
-              "self-managed/platform-deployment/helm-kubernetes/update/"
+              "Upgrade",
+              "self-managed/platform-deployment/helm-kubernetes/upgrade/"
             ),
             {
               Platforms: [
