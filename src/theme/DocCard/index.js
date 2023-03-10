@@ -10,7 +10,7 @@ import { translate } from "@docusaurus/Translate";
 import styles from "./styles.module.css";
 function CardContainer({ href, children, border }) {
   var className = clsx("card padding--lg", styles.cardContainer);
-  if (border == "alt") {
+  if (border == "highlight") {
     className = clsx(className, styles.cardContainerBetaBorder);
   }
   return (
