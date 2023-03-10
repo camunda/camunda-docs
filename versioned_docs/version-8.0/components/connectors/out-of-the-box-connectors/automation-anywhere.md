@@ -7,8 +7,8 @@ description: Orchestrate your Automation Anywhere queue items from your BPMN pro
 ## Prerequisites
 
 The **Automation Anywhere Connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/).
-To start using the Connector, you have to have a running Automation Anywhere instance with actual [license](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/dashboards/cloud-administration-licenses.html) we configured API service. Please refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more how to install and configure Automation Anywhere API service.
-Also, you need a user account with the `AAE_Queue Admin` role to query and manage workload queues and work items in a Control Room. More details about roles you can find in [official documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-system-created-roles.html).
+To start using the Connector, you have to have a running Automation Anywhere instance with an a [license](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/dashboards/cloud-administration-licenses.html) we configured API service. Please refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more how to install and configure Automation Anywhere API service.
+Also, you need a user account with the `AAE_Queue Admin` role to query and manage workload queues and work items in a Control Room. More details about roles you can find in the [official documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-system-created-roles.html).
 
 ## Create an Automation Anywhere Connector task
 
@@ -29,7 +29,7 @@ All the mandatory and non-mandatory fields depending on the authentication and o
 You can choose among the available **Automation Anywhere Connector** authentication types according to your authentication requirements.
 
 :::note
-We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
 
 1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `AUTOMATION_ANYWHERE_PASSWORD`) so you can reference it later in the Connector.
@@ -50,7 +50,7 @@ Select the **Automation Anywhere Connector** and fill out the following properti
 
 1. Select **Authenticate (username and API key)** in the **Authentication** section.
 2. Set **Password** to `Password` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_PASSWORD`).
-3. Set **API key** to `API key` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_API_KEY`). The API-Key is a 40-character string generated in the Control Room. See [create and assign API key generation role documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-control-room-apikey-role.html) for learn more.
+3. Set **API key** as `API key` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_API_KEY`). The API-Key is a 40-character string generated in the Control Room. See [create and assign API key generation role documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-control-room-apikey-role.html) to learn more.
 
 ### _Authentication (refresh) token_ authentication
 
