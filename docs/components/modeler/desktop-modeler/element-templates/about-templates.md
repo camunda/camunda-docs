@@ -14,6 +14,6 @@ Element templates are a way to extend the [modeler](https://camunda.org/bpmn/too
 
 Applicable element templates can be assigned to a BPMN element via the properties panel and/or the replace menu.
 
-Applying an element template configures the diagram element with pre-defined values for BPMN properties, input/output mappings, and/or extension properties.
+Applying an element template configures the diagram element with pre-defined values for BPMN properties, input/output mappings, and extension properties.
 
-As seen in the _Mail Task_ example above, it also provides custom editing UI, input validation and assistance.
+As seen in the _Mail Task_ example above, it also provides custom editing UI, input validation, and assistance.
