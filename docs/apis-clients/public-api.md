@@ -1,6 +1,7 @@
 ---
 id: public-api
 title: "Public API"
+description: "Camunda Platform 8 provides a public API. Obtain more information on backwards compatibility for version updates."
 ---
 
 Camunda Platform 8 provides a public API. This section covers the definition of the public API and backwards compatibility for version updates.

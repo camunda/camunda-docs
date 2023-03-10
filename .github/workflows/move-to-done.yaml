@@ -3,7 +3,7 @@ name: move-to-done
 # FYI secrets.ADD_TO_PROJECT_PAT is a personal access token belonging to @akeller.
 
 on:
-  pull_request:
+  pull_request_target:
     types: [closed]
 
 jobs:

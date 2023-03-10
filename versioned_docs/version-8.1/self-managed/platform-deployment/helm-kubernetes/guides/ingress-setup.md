@@ -24,6 +24,10 @@ Camunda Platform 8 Helm chart doesn't manage or deploy Ingress controllers, it o
 
 In this setup, a single Ingress/domain is used to access Camunda Platform 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
+:::caution Web Modeler
+The combined Ingress setup does not support Web Modeler yet. To enable external access to Web Modeler, you'll need to set up a [separate Ingress](#separated-ingress-setup).
+:::
+
 ![Camunda Platform 8 Self-Managed Architecture Diagram - Combined Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 ```yaml
@@ -107,6 +111,8 @@ global:
         redirectUrl: "https://tasklist.camunda.example.com"
       optimize:
         redirectUrl: "https://optimize.camunda.example.com"
+      webModeler:
+        redirectUrl: "https://modeler.camunda.example.com"
 
 identity:
   ingress:
@@ -144,7 +150,20 @@ zeebe-gateway:
     enabled: true
     className: nginx
     host: "zeebe.camunda.example.com"
+
+web-modeler:
+  ingress:
+    enabled: true
+    className: nginx
+    webapp:
+      host: "modeler.camunda.example.com"
+    websockets:
+      host: "modeler-ws.camunda.example.com"
 ```
+
+:::note Web Modeler
+The configuration above only contains the Ingress-related values under `web-modeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler-beta).
+:::
 
 Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
 
@@ -154,7 +173,7 @@ helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
 
 Once deployed, you can access the Camunda Platform 8 components on:
 
-- **Web applications:** `https://[identity|operate|optimize|tasklist].camunda.example.com`
+- **Web applications:** `https://[identity|operate|optimize|tasklist|modeler].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 

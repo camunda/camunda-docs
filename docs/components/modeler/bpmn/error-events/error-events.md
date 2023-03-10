@@ -1,7 +1,7 @@
 ---
 id: error-events
 title: "Error events"
-decription: "In process automation, you often encounter deviations from the default scenario. BPMN error events allow a process model to react to errors within a task."
+description: "In process automation, you often encounter deviations from the default scenario. BPMN error events allow a process model to react to errors within a task."
 ---
 
 In process automation, you often encounter deviations from the default scenario. One way to resolve these deviations is using a BPMN error event, which allows a process model to react to errors within a task.
