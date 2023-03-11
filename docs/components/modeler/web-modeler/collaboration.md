@@ -29,7 +29,7 @@ There are four roles with different levels of access rights that can be assigned
 ### Inviting users to projects
 
 :::note
-Web Modeler expects users to have email addresses to receive invitations correctly.
+Web Modeler expects users to have an email address associated with their account in the identity management system to receive invitations correctly.
 :::
 
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
