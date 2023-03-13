@@ -37,6 +37,10 @@ RewriteRule ^docs/components/integration-framework$ /docs/components/ [R=301,L]
 RewriteRule ^docs/next/components/integration-framework/(.*)$ /docs/8.0/components/$1 [R=301,L]
 RewriteRule ^docs/next/components/integration-framework$ /docs/8.0/components/ [R=301,L]
 
+# These pages existed 8.0 by error and were removed
+RewriteRule ^components/connectors/out-of-the-box-connectors/github-webhook$ /docs/8.0/components/connectors/out-of-the-box-connectors/available-connectors-overview [R=301,L]
+RewriteRule ^components/connectors/out-of-the-box-connectors/http-webhook$ /docs/8.0/components/connectors/out-of-the-box-connectors/available-connectors-overview [R=301,L]
+
 # Added for v8.1
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/deployment/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/deploy/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/ingress-setup/(.*)$ /docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/$1 [R=301,L]
