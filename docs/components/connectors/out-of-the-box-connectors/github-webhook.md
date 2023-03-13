@@ -22,7 +22,7 @@ The **GitHub Webhook Connector** allows you to start a BPMN process instance tri
 
 ![GitHub Webhook](../img/use-inbound-connector-template-filled-gh.png)
 
-1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about GitHub Webhook URLs [below](#activate-the-http-webhook-connector-by-deploying-your-diagram).
+1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about GitHub Webhook URLs [below](#activate-the-github-webhook-connector-by-deploying-your-diagram).
 2. Set the **GitHub secret**. This is a shared secret key that has to be defined in both your BPMN and GitHub webhook configuration page. The value is used to calculate HMAC authentication signature.
 3. Configure **Activation Condition**. For example, given GitHub triggers a webhook endpoint with a new PR payload `{"action": "opened", "pull_request": ...}`, the **Activation Condition** value might look like as `=(request.body.action = "opened")`. Leave this field empty to trigger your webhook every time.
 4. Configure **Variable Mapping**. For example, GitHub triggers a webhook endpoint with a new PR payload `{"action": "opened", "pull_request": { "url: "https://...", ... }}` and you would like to extract a PR URL as a process variable `prUrl`. In that case, the **Variable Mapping** might look like `={prUrl: request.body.pull_request.url}`.
