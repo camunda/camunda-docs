@@ -275,7 +275,7 @@ As the Zeebe Gateway uses `gRPC` (which relies on `HTTP/2`,) this [has to be ena
 
 ### Required steps
 
-1. Provide [TLS Secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway, the [Cert Manager](https://docs.openshift.com/container-platform/4.10/security/cert_manager_operator/index.html) might be helpful here:
+1. Provide [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway, the [Cert Manager](https://docs.openshift.com/container-platform/4.10/security/cert_manager_operator/index.html) might be helpful here:
 
 - One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) as Zeebe only supports this, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`.
 - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
