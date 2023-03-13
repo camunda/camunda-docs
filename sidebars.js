@@ -522,7 +522,12 @@ module.exports = {
       APIs: [
         "apis-clients/public-api",
         "apis-clients/grpc",
-        "apis-clients/operate-api/index",
+        {
+          "Operate API": [
+            "apis-clients/operate-api/index",
+            require("./docs/api/operate/sidebar"),
+          ],
+        },
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/console-api-reference",
         "apis-clients/web-modeler-api/index",
