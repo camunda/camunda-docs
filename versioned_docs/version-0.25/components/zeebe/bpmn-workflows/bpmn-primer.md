@@ -1,6 +1,7 @@
 ---
 id: bpmn-primer
 title: "BPMN Primer"
+description: "Business Process Model And Notation 2.0 (BPMN) is an industry standard for workflow modeling and execution."
 ---
 
 import ReactPlayer from 'react-player'

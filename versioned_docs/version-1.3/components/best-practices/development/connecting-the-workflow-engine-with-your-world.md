@@ -1,5 +1,6 @@
 ---
 title: "Connecting the workflow engine with your world"
+description: "Write some custom glue code in the programming language of your choice and using existing client libraries."
 ---
 
 
