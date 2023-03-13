@@ -137,6 +137,20 @@ Therefore, settings for this Elasticsearch connection must be defined and must c
 
 See also [settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance).
 
+:::note
+You may need to import the certificate keystore into the JVM runtime.
+
+```yaml
+# Kubernetes example:
+zeebe:
+  …
+  javaOpts: >-
+    …
+    -Djavax.net.ssl.trustStore=/path/to/certificates/elasticsearch.jks
+```
+
+:::
+
 | Name                                                   | Description                                                | Default value         |
 | ------------------------------------------------------ | ---------------------------------------------------------- | --------------------- |
 | camunda.operate.zeebeElasticsearch.clusterName         | Cluster name of Elasticsearch                              | elasticsearch         |
