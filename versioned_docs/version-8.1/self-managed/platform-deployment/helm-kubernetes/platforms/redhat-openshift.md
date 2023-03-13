@@ -280,7 +280,7 @@ As the Zeebe Gateway uses `gRPC` (which relies on `HTTP/2`,) this [has to be ena
 - One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) as Zeebe only supports this, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`.
 - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
 
-2. Configure your Zeebe Gateway Ingress to create a [reencrypt route](https://docs.openshift.com/container-platform/4.10/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
+2. Configure your Zeebe Gateway Ingress to create a [re-encrypt route](https://docs.openshift.com/container-platform/4.10/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
 ```yaml
 zeebe-gateway:
