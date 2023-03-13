@@ -7,8 +7,10 @@ description: Orchestrate your Automation Anywhere queue items from your BPMN pro
 ## Prerequisites
 
 The **Automation Anywhere Connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/).
-To start using the Connector, you have to have a running Automation Anywhere instance with an a [license](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/dashboards/cloud-administration-licenses.html) we configured API service. Please refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more how to install and configure Automation Anywhere API service.
-Also, you need a user account with the `AAE_Queue Admin` role to query and manage workload queues and work items in a Control Room. More details about roles you can find in the [official documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-system-created-roles.html).
+
+To start using the Connector, you must have a running Automation Anywhere instance with a [license](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/dashboards/cloud-administration-licenses.html) we configured API service. Refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more about installing and configuring the Automation Anywhere API service.
+
+You also need a user account with the `AAE_Queue Admin` role to query and manage workload queues and work items in a Control Room. Read more about roles in the [official documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-system-created-roles.html).
 
 ## Create an Automation Anywhere Connector task
 
@@ -16,7 +18,7 @@ To use an **Automation Anywhere Connector** in your process, either change the t
 
 ## Make your Automation Anywhere Connector executable
 
-To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the connector properties panel:
+To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel:
 
 ![connectors-automation-anywhere-red-properties](../img/connector-automation-anywhere-red-properties.png)
 
@@ -42,7 +44,7 @@ Select the **Automation Anywhere Connector** and fill out the following properti
 1. Select **Authenticate (username and password)** in the **Authentication** section.
 2. Set **Password** to `Password` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_PASSWORD`).
 3. Set **Username** to `Username` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_UESRNAME`).
-4. Select needed **Multiple login** type. If this value is set to `true`, you will be allowed multiple API sessions. For more information on multi-login, see [Multi-login user](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/users/cloud-multi-login-user.html).
+4. Select needed **Multiple login** type. If this value is set to `true`, you will be allowed multiple API sessions. For more information on multi-login, see [multi-login user](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/users/cloud-multi-login-user.html).
 
 ### _Authenticate (username and API key)_ authentication
 
@@ -78,7 +80,7 @@ It corresponds directly to the respective Automation Anywhere API - [`Add Work I
 
 1. Select **Add work item to the queue** from the **Operation type** dropdown in the **Operation** section.
 2. Populate **Authentication section** as described in the [respective section](#authentication).
-3. In the **Configuration** section set **Control Room URL** field, as described in the [respective section](#control-room-url).
+3. In the **Configuration** section, set the **Control Room URL** field as described in the [respective section](#control-room-url).
 4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where an item will be fetched from.
 5. In the **Input** section, set **Work Item json Data** that you want to pass together with the item. The **Data** has to comply with the Automation Anywhere API, and should contain the following semantics:
 
@@ -144,7 +146,7 @@ It corresponds directly to the respective Automation Anywhere API - [`List Work 
 
 1. Select **Get work item result from queue by ID** from the **Operation type** dropdown in the **Operation** section.
 2. Populate **Authentication section** as described in the [respective section](#authentication).
-3. In the **Configuration** section set **Control Room URL** field, as described in the [respective section](#control-room-url).
+3. In the **Configuration** section, set the **Control Room URL** field as described in the [respective section](#control-room-url).
 4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where an item will be fetched from.
 5. In the **Input** section, set **Work item ID**. This is the identifier of the item to be fetched.
 
@@ -201,7 +203,7 @@ Response example:
 ### Using Automation Anywhere Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
-To learn more, see an entry _Solution with Timer and Loop_ at [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
+To learn more, see an entry _Solution with Timer and Loop_ on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
 
 :::note
 To avoid performance issues, it is recommended to limit the number of loop retries.
