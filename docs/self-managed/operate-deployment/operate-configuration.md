@@ -87,7 +87,7 @@ The following configuration parameters define the settings:
 | camunda.operate.elasticsearch.numberOfShards   | How many shards Elasticsearch uses for all Operate indices   | 1             |
 | camunda.operate.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Operate indices | 0             |
 
-These values are applied only on first startup of Operate or during version upgrade. After the Operate
+These values are applied only on first startup of Operate or during version update. After the Operate
 schema is created, settings may be adjusted directly in the Elasticsearch template, and the new settings are applied
 to indices created after adjustment.
 

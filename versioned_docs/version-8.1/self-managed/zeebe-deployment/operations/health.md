@@ -36,7 +36,7 @@ If a broker is ready, it doesn't mean it's the leader for the partitions.
 It means it is participating in the replication and can be either a leader or a follower of all the partitions that are assigned to it.
 Once it is ready, it never becomes unready again.
 
-A ready check is useful, for example, to use as a `readinessProbe` in a Kubernetes configuration to control when a pod can be restarted for rolling upgrade.
+A ready check is useful, for example, to use as a `readinessProbe` in a Kubernetes configuration to control when a pod can be restarted for rolling update.
 Depending on the cluster configuration, restarting one pod before the previous one is ready might make the system unavailable because the quorum of replicas is not available.
 By configuring a `readinessProbe` that uses the ready check endpoint, we can inform Kubernetes when it is safe to proceed with the rolling update.
 

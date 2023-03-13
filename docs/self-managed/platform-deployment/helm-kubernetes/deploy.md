@@ -222,7 +222,7 @@ kubectl logs -f <POD_NAME>
 
 ## Upgrading Camunda Helm chart
 
-For upgrading Camunda Helm chart from one release to another, visit the [Camunda Platform 8 Helm upgrading page](upgrade.md).
+For upgrading Camunda Helm chart from one release to another, perform a [Helm upgrade](upgrade.md).
 
 ## General notes
 
