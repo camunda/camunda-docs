@@ -41,22 +41,6 @@ Some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Man
 
 ## Connector types
 
-### Outbound Connectors
-
-Use outbound Connectors if something needs to happen in the third-party system if a process reaches a service task. For example, calling a REST endpoint or publishing some message to Slack.
-
-### Inbound Connectors
-
-Use inbound Connectors if something needs to happen within the workflow engine because of an external event in the third-party system. For example, because a Slack message was published, or a REST endpoint is called.
-
-There are three types of inbound Connectors:
-
-1. **Webhook**: An HTTP endpoint is made available to the outside, which when called, can start a process instance, for example.
-2. **Subscription**: A subscription is opened on the third-party system, like messaging or Apache Kafka, and new entries are then received and correlated to a waiting process instance in Camunda, for example.
-3. **Polling**: Some external API needs to be regularly queried for new entries, such as a drop folder on Google Drive or FTP.
-
-Currently, only [webhooks](out-of-the-box-connectors/http-webhook.md) are supported. We are working to support the other types as well.
-
 ### Out-of-the-box vs. custom-built Connectors
 
 There are [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda, which are available with SaaS and Self-Managed.
