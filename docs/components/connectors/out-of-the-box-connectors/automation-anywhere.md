@@ -198,9 +198,7 @@ Response example:
 
 ![AA get work item result](../img/connector-utomation-anywhere-get-work-item-result.png)
 
-## Appendix
-
-### Using Automation Anywhere Connector best practice
+## Using Automation Anywhere Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
 To learn more, see an entry _Solution with Timer and Loop_ on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
