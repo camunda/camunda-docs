@@ -67,7 +67,7 @@ export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak"
 export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
 ```
 
-After exporting all secrets into environment variables, run the following upgrade command.
+After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
 helm upgrade <RELEASE_NAME> charts/camunda-platform/ \
@@ -85,9 +85,9 @@ If you have specified on the first installation certain values, you have to spec
 
 For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
 
-## Version upgrade instructions
+## Version update instructions
 
-The following sections are only needed if you are upgrading to v8.0.13 or the versions after v8.0.13.
+The following sections are only needed if you are updating to v8.0.13 or the versions after v8.0.13.
 
 ### v8.0.13
 
@@ -145,7 +145,7 @@ kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-1 
 
 #### 3. Delete Elasticsearch StatefulSet
 
-Please note that there will be a **downtime** between this step and the next step.
+Note that there will be a **downtime** between this step and the next step.
 
 ```shell
 kubectl delete statefulset elasticsearch-master
@@ -158,4 +158,4 @@ helm template camunda/camunda-platform <RELEASE_NAME> --version <CHART_VERSION> 
     --show-only charts/elasticsearch/templates/statefulset.yaml
 ```
 
-The `RELEASE_NAME` is your current release name and `CHART_VERSION` is the version you want to upgrade to (`8.0.13` or later).
+The `RELEASE_NAME` is your current release name and `CHART_VERSION` is the version you want to update to (`8.0.13` or later).
