@@ -586,6 +586,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/available-connectors-overview/"
             ),
             docsLink(
+              "Automation Anywhere Connector",
+              "components/connectors/out-of-the-box-connectors/automation-anywhere/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),
