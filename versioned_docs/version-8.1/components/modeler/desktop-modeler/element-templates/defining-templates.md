@@ -21,7 +21,7 @@ Templates are defined in template descriptor files as a JSON array:
     ],
     "elementType": {
       "value": "bpmn:ServiceTask",
-    }
+    },
     "properties": [
       ...
     ]
@@ -37,13 +37,13 @@ As seen in the code snippet a template consist of a number of important componen
 
 - `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Platform 8 element templates.
 
-  Example (Camunda Platform 7)
+  Camunda Platform 7 example:
 
   ```json
   "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json"
   ```
 
-  Example (Camunda Platform 8)
+  Camunda Platform 8 example:
 
   ```json
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"
@@ -55,17 +55,17 @@ As seen in the code snippet a template consist of a number of important componen
 - `documentationRef : String`: Optional URL pointing to a template documentation. Will be shown in the properties panel (after having applied an element template).
 - `version : Integer`: Optional version of the template. If you add a version to a template it will be considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
-- `elementType : Object`: Optional type of the element. If you add an elementType to the template, the element will be replaced with the specified type when you apply the template.
+- `elementType : Object`: Optional type of the element. If you configure `elementType` on a template then the element will be replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
 
 ### JSON schema compatibility
 
-The application uses the `$schema` property to ensure compatibility for a given element template. The latest supported [Camunda element templates JSON Schema versions](https://github.com/camunda/element-templates-json-schema) are
+The application uses the `$schema` property to ensure compatibility for a given element template. You find the latest supported versions here:
 
-- `v0.10.0` (Camunda Platform 7)
-- `v0.5.0` (Camunda Platform 8)
+- [Camunda Platform 7](https://www.npmjs.com/package/@camunda/element-templates-json-schema)
+- [Camunda Platform 8](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema)
 
-Camunda Modeler will ignore element templates defining a higher `$schema` version and will log a warning message.
+The tooling will ignore element templates defining a higher `$schema` version and will log a warning message.
 
 For example, given the following `$schema` definition, the application takes `0.9.1` as the JSON Schema version of the element template.
 
@@ -182,13 +182,13 @@ As seen in the example the important attributes in a property definition are:
 - `label`: A descriptive text shown with the property
 - `type`: Defining the visual appearance in the properties panel (may be any of `String`, `Text`, `Boolean`, `Dropdown` or `Hidden`)
 - `value`: An optional default value to be used if the property to be bound is not yet set
-- `binding`: Specifying how the property is mapped to BPMN or Camunda extension elements and attributes (may be any of `property`, `camunda:property`, `camunda:inputParameter`, `camunda:outputParameter`, `camunda:in`, `camunda:out`, `camunda:executionListener`, `camunda:field`, `camunda:errorEventDefinition`)
+- `binding`: Specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings))
 - `constraints`: A list of editing constraints to apply to the template
 
-Camunda Platform 8 also supports these properties:
+In addition, Camunda Platform 8 supports these properties:
 
-- `id`: An identifier that can be used to reference the property in conditional properties.
-- `condition`: A condition that determines when the property is active.
+- `id`: An identifier that can be used to reference the property in conditional properties
+- `condition`: A condition that determines when [the property is active](#defining-conditional-properties)
 
 #### Types
 
@@ -230,6 +230,10 @@ The resulting properties panel control looks like this:
 
 ##### Omitted type
 
+:::note
+Omitting the type is supported in Camunda Platform 7 element templates only.
+:::
+
 By omitting the `type` configuration the default UI component will be rendered for the respective binding.
 
 For `camunda:inputParameter` and `camunda:outputParameter` bindings an Input / Output Parameter Mapping component will be rendered. The component will include a toggle to enable or disable the `Variable Assignment`. When untoggling, the respective `camunda:inputParameter` or `camunda:outputParameter` element will not be created in the BPMN XML.
@@ -248,9 +252,13 @@ For the `property`, `camunda:property`, `camunda:in`, `camunda:in:businessKey`, 
 
 For the `camunda:executionListener` binding, an omitted `type` will lead to the `Hidden` component (ie. no visible input for the user).
 
-##### Feel
+##### FEEL
 
-As of Camunda Modeler `v5.0.0`, we support the feel properties `optional` and `required`.
+:::note
+FEEL properties are only supported in Camunda Platform 8 element templates.
+:::
+
+We support the feel properties `optional` and `required`.
 When set, the input field offers visual indications that a feel expression is expected.
 
 ```json
@@ -270,11 +278,7 @@ When set, the input field offers visual indications that a feel expression is ex
 
 ###### Supported types
 
-Camunda Platform 7
-
-_Feel Inputs are currently not supported for Camunda Platform 7 element templates._
-
-Camunda Platform 8
+Camunda Platform 8 supports `feel` on the following input types:
 
 - `String`
 - `Text`
@@ -303,7 +307,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      | `name`: the name of the property |
 | **Mapping result**          | `<... [name]=[userInput] ... />` |
 
-The `property` binding is supported both in Camunda Platform 7 and Cloud.
+The `property` binding is supported both in Camunda Platform 7 and 8.
 
 </TabItem>
 
@@ -432,7 +436,11 @@ The `zeebe:property` binding allows you to set any arbitrary property for an out
 
 #### Optional bindings
 
-As of Camunda Modeler `v5.0.0`, we support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
+:::note
+Optional bindings are only supported in Camunda Platform 8 element templates.
+:::
+
+We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
 
 If a user removes the value in the configured control, it will also remove the mapped element.
 
@@ -467,18 +475,20 @@ If a user removes the value in the configured control, it will also remove the m
 ]
 ```
 
-**Supported Bindings**
+##### Supported Bindings
 
-Camunda Platform 7
-
-_Optional bindings are currently not supported for Camunda Platform 7 element templates._
-
-Camunda Platform 8
+Camunda Platform 8 supports `optional` on the following binding types:
 
 - `zeebe:input`
 - `zeebe:output`
+- `zeebe:taskHeader`
+- `zeebe:property`
 
 #### Scoped bindings
+
+:::note
+Scoped bindings are only supported in Camunda Platform 7 element templates.
+:::
 
 Scoped bindings allow you to configure nested elements, such as [Camunda Platform 7 Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
 
@@ -516,34 +526,18 @@ exposed to the user in a separate custom fields section.
 
 ![Scoped Custom Fields](./img/scope-custom-fields.png)
 
-**Supported Scopes**
+##### Supported Scopes
 
-<Tabs groupId="scopes" defaultValue="platformScopes" values={
-[
-{label: 'Scoped bindings for Camunda Platform 7', value: 'platformScopes', },
-{label: 'Scoped bindings for Camunda Platform 8', value: 'cloudScopes', }
-]
-}>
+Camunda Platform 7 supports the following scope bindings:
 
-<TabItem value='platformScopes'>
-
-| Name                | Target                                                                                     | Supported by       |
-| ------------------- | ------------------------------------------------------------------------------------------ | ------------------ |
-| `camunda:Connector` | [Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/) | Camunda Platform 7 |
-| `bpmn:Error`        | Global BPMN Error Element                                                                  | Camunda Platform 7 |
-
-</TabItem>
-
-<TabItem value='cloudScopes'>
-
-Currently none.
-
-</TabItem>
-</Tabs>
+| Name                | Target                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| `camunda:Connector` | [Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/) |
+| `bpmn:Error`        | Global BPMN Error Element                                                                  |
 
 #### Groups
 
-As of Camunda Modeler `v5.0.0,` it is possible to define `groups` and order custom fields together.
+You may define `groups` to organize custom fields into:
 
 ```json
 {
@@ -553,7 +547,7 @@ As of Camunda Modeler `v5.0.0,` it is possible to define `groups` and order cust
   "appliesTo": [
     "bpmn:ServiceTask"
   ],
-    "groups": [
+  "groups": [
     {
       "id": "definition",
       "label": "Task definition"
@@ -573,7 +567,7 @@ As of Camunda Modeler `v5.0.0,` it is possible to define `groups` and order cust
 }
 ```
 
-Custom fields may use the defined group ids. The order of the custom fields also determines the groups' order in the properties panel.
+Associate a field with a group (ID) via the fields `group` key:
 
 ```json
 {
@@ -629,7 +623,11 @@ Together with the `pattern` constraint, you may define your custom error message
 
 #### Icons
 
-As of Camunda Modeler `v5.0.0,` it is possible to define custom icons to update the visual appearance of elements after applying an element template.
+:::note
+Icons are currently supported in Camunda Platform 8 element templates only.
+:::
+
+It is possible to define custom icons to update the visual appearance of elements after applying an element template.
 
 ```json
 [
@@ -652,8 +650,6 @@ As of Camunda Modeler `v5.0.0,` it is possible to define custom icons to update 
 ![Icons](./img/icons.png)
 
 The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
-
-This feature is currently only supported for Camunda Platform 8 element templates.
 
 #### Display all entries
 
@@ -679,9 +675,15 @@ Per default, the element template defines the visible entries of the properties 
 
 ### Defining conditional properties
 
+:::note
+Conditional properties are currently supported in Camunda Platform 8 element templates only.
+:::
+
 Properties may have a condition which determines when they should be active, depending on the value of another property. When property is **active**, it is displayed in the properties panel, and its value is serialized in the XML. If a property is **not active**, it is not displayed, and its value is removed from the XML.
 
 For a property value to be used in a condition, the property needs to have an `id` that can be referenced by the conditional property.
+
+A property can depend on one or more conditions. If there are multiple conditions, they can be defined using `allMatch`. All of the conditions must be met for the property to be active.
 
 There are two possible comparison operators:
 
@@ -733,8 +735,16 @@ There are two possible comparison operators:
       "type": "String",
       "binding": { ... },
       "condition": {
-        "property": "authenticationType",
-        "equals": "basic"
+       "allMatch": [
+          {
+            "property": "httpMethod",
+            "oneOf": ["patch", "post", "delete"]
+          },
+          {
+            "property": "authenticationType",
+            "equals": "basic"
+          }
+        ]
       }
     },
     {
@@ -742,8 +752,16 @@ There are two possible comparison operators:
       "type": "String",
       "binding": { ... },
       "condition": {
-        "property": "authenticationType",
-        "equals": "basic"
+        "allMatch": [
+          {
+            "property": "httpMethod",
+            "oneOf": ["patch", "post", "delete"]
+          },
+          {
+            "property": "authenticationType",
+            "equals": "basic"
+          }
+        ]
       }
     },
   ]

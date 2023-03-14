@@ -8,6 +8,7 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 
 ## Outbound Connectors
 
+- [Automation Anywhere Connector](automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [Amazon SNS Connector](aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
 - [AWS Lambda Connector](aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
@@ -20,11 +21,6 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 - [SendGrid Connector](sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack Connector](slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 - [UIPath Connector](uipath.md) - Orchestrate your [UIPath](https://cloud.uipath.com) Bots with Camunda.
-
-## Inbound Connectors
-
-- [HTTP Webhook Connector](http-webhook.md) - Start a process instance with your custom webhook configuration.
-- [GitHub Webhook Connector](github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 
 In addition to this section on Connectors, we recommend reviewing [Connector secrets](../../console/manage-clusters/manage-secrets.md).
 
