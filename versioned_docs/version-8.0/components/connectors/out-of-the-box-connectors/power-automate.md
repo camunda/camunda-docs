@@ -127,7 +127,7 @@ For this section, you must fill out the following fields:
 4. **Run mode**: Choose between attended or unattended.
 5. **Run priority**: Choose an option (normal, high) or add your own.
 6. _(Optional)_ **Inputs**: The desktop flow script input parameters (json serialized string).
-7. _(Optional)_ **Callback URL**: URL that will be called once the desktop flow script is complete. [See how to use the Webhook connector](#using-webhook-connector-as-callback-endpoint) as a callback endpoint.
+7. _(Optional)_ **Callback URL**: URL that will be called once the desktop flow script is complete.
 
 ### Get the status of a flow run
 
@@ -219,20 +219,6 @@ Response example:
 ## Appendix
 
 ### Using Power Automate Connector best practice
-
-#### Using Webhook connector as callback endpoint
-
-Oftentimes it is desired to continue the process after a Power Automate flow run finished. You can use the **Callback URL** field if you select the **Trigger a flow run** to specify a url which will be called after the flow is finished.
-If you wish to continue the Camunda process or start a new one, the [Webhook Connector](./http-webhook.md) suits very well. For that you need the following steps:
-
-1. Create a [Webhook Connector](./http-webhook.md) and specify the **Webhook ID**.
-2. Create a Power [Automate connector](./power-automate.md), select the **Trigger a flow run** method, fill in the fields.
-
-   If you use Camunda 8 SaaS you can use the following pattern for the **Callback URL**: `{zeebe.client.cloud.region}.{zeebeHostUrl}/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
-
-   If you use Camunda 8 SaaS you can find the zeebe specific values in you cluster details on the _API_ tab under _Client Credentials_. The _webhookId_ is the id you specified in the first step, and the _zeebeHostUrl_ is connectors.camunda.io.
-
-   ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-cluster-api-credentials.png)
 
 #### Get Bearer token with Postman
 
