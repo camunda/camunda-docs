@@ -74,14 +74,11 @@ You can define the due date and follow-up date as static values (e.g. `2023-02-2
 expressions are evaluated on activating the user task and must result in a `string` conforming to an ISO 8601 combined
 date and time representation.
 
-:::note
-An ISO 8601 combined date and time representation must contain timezone information, either `Z` for UTC or a zone offset.
-Optionally, it can contain a zone id. The following examples represent valid ISO 8601 `strings`:
+import ISO8601DateTime from '../assets/react-components/iso-8601-date-time.md'
 
-- `2019-10-01T12:00:00Z` - UTC time
-- `2019-10-02T08:09:40+02:00` - UTC plus two hours zone offset
-- `2019-10-02T08:09:40+02:00[Europe/Berlin]` - UTC plus two hours zone offset at Berlin
-  :::
+:::info
+<ISO8601DateTime/>
+:::
 
 ## Variable mappings
 
