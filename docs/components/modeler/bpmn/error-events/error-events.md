@@ -12,9 +12,11 @@ For example, if an invalid credit card is used in the process below, the process
 
 ## Defining the error
 
-In BPMN, **errors** define possible errors that can occur. **Error events** are elements in the process referring to defined errors. An error can be referenced by one or more error events.
+In BPMN, **errors** define possible errors that can occur. **Error events** are elements in the process referring to
+defined errors. An error can be referenced by one or more error events.
 
-An error must define an `errorCode` (e.g. `InvalidCreditCard`). The `errorCode` is a `string` used to match a thrown error to the error catch events.
+An error must define an `errorCode` (e.g. `InvalidCreditCard`). The `errorCode` is a `string` used to match a thrown
+error to the error catch events.
 
 ## Throwing the error
 
@@ -22,23 +24,31 @@ An error can be thrown within the process using an error **end event**.
 
 ![process with error throw event](assets/error-throw-events.png)
 
-Alternatively, you can inform Zeebe that a business error occurred using a **client command**. This throw error client command can only be used while processing a job.
+Alternatively, you can inform Zeebe that a business error occurred using a **client command**. This throw error client
+command can only be used while processing a job.
 
-In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers. See the [gRPC command](/apis-clients/grpc.md#throwerror-rpc) for details.
+In addition to throwing the error, this also disables the job and stops it from being activated or completed by other
+job workers. See the [gRPC command](/apis-clients/grpc.md#throwerror-rpc) for details.
 
 ## Catching the error
 
-A thrown error can be caught by an error catch event, specifically using an error **boundary event** or an error **event subprocess**.
+A thrown error can be caught by an error catch event, specifically using an error **boundary event** or an error **event
+subprocess**.
 
 ![process with error catch event](assets/error-catch-events.png)
 
-Starting at the scope where the error was thrown, the error code is matched against the attached error boundary events and error event sub processes at that level. An error is caught by the first event in the scope hierarchy matching the error code. At each scope, the error is either caught, or propagated to the parent scope.
+Starting at the scope where the error was thrown, the error code is matched against the attached error boundary events
+and error event sub processes at that level. An error is caught by the first event in the scope hierarchy matching the
+error code. At each scope, the error is either caught, or propagated to the parent scope.
 
-If the process instance is created via call activity, the error can also be caught in the calling parent process instance.
+If the process instance is created via call activity, the error can also be caught in the calling parent process
+instance.
 
-Error boundary events and error event subprocesses must be interrupting. This means the process instance will not continue along the regular path, but instead follow the path that leads out of the catching error event.
+Error boundary events and error event subprocesses must be interrupting. This means the process instance will not
+continue along the regular path, but instead follow the path that leads out of the catching error event.
 
-If the error is thrown for a job, the associated task is terminated first. To continue the execution, the error boundary event or error event subprocess that caught the error is activated.
+If the error is thrown for a job, the associated task is terminated first. To continue the execution, the error boundary
+event or error event subprocess that caught the error is activated.
 
 ## Unhandled errors
 
