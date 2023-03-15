@@ -346,7 +346,7 @@ First, you should find out which connection pool implementation is used based on
 - [Spring Boot's algorithm for selecting the data source implementation](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-connect-to-production-database)
 - [Code example to detect data source implementation](https://www.mkyong.com/spring-boot/spring-boot-how-to-know-which-connection-pool-is-used/)
 
-Preferably, use [HikariCP](https://github.com/brettwooldridge/HikariCP) and configure its [settings](https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby) using `spring.datasource.hikari.*` properties. HikariCP's default pool size is 10. Their website provides an [article about connection pool sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
+Preferably, use [HikariCP](https://github.com/brettwooldridge/HikariCP) and configure its [settings](https://github.com/brettwooldridge/HikariCP#gear-configuration-knobs-baby) using `spring.datasource.hikari.*` properties. HikariCP's default pool size is 10. Their website provides an [article about connection pool sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
 
 ### Resolving database overload
 
