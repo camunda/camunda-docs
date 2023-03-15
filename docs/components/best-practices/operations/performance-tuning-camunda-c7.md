@@ -346,7 +346,7 @@ First, you should find out which connection pool implementation is used based on
 - For Spring Boot 2.x, [HikariCP](https://github.com/brettwooldridge/HikariCP) is the default connection pool. Camunda Run also uses this.
 - If you are not sure, here take a look at [this code example to detect data source implementation](https://www.mkyong.com/spring-boot/spring-boot-how-to-know-which-connection-pool-is-used/).
 
-Preferably, use [HikariCP](https://github.com/brettwooldridge/HikariCP) and configure its [settings](https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby) using `spring.datasource.hikari.*` properties. HikariCP's default pool size is 10. Their website provides an [article about connection pool sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
+Preferably, use [HikariCP](https://github.com/brettwooldridge/HikariCP) and configure its [settings](https://github.com/brettwooldridge/HikariCP#gear-configuration-knobs-baby) using `spring.datasource.hikari.*` properties. HikariCP's default pool size is 10. Their website provides an [article about connection pool sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
 
 ### Resolving database overload
 
