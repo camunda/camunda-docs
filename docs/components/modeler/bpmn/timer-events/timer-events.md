@@ -43,11 +43,9 @@ If the expression belongs to a timer start event of the process, it is evaluated
 
 ### Time date
 
-A specific point in time defined as ISO 8601 combined date and time representation. It must contain timezone information, either `Z` for UTC or a zone offset. Optionally, it can contain a zone id.
+import ISO8601DateTime from '../assets/react-components/iso-8601-date-time.md'
 
-- `2019-10-01T12:00:00Z` - UTC time
-- `2019-10-02T08:09:40+02:00` - UTC plus two hours zone offset
-- `2019-10-02T08:09:40+02:00[Europe/Berlin]` - UTC plus two hours zone offset at Berlin
+<ISO8601DateTime/>
 
 ### Time duration
 
