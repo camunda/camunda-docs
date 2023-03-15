@@ -343,8 +343,8 @@ A resource that the process engine and the job executor heavily depend on are da
 
 First, you should find out which connection pool implementation is used based on your project's dependencies:
 
-- [Spring Boot's algorithm for selecting the data source implementation](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-connect-to-production-database)
-- [Code example to detect data source implementation](https://www.mkyong.com/spring-boot/spring-boot-how-to-know-which-connection-pool-is-used/)
+- For Spring Boot 2.x, [HikariCP](https://github.com/brettwooldridge/HikariCP) is the default connection pool. Camunda Run also uses it. 
+- If you are not sure, here is a [code example to detect data source implementation](https://www.mkyong.com/spring-boot/spring-boot-how-to-know-which-connection-pool-is-used/)
 
 Preferably, use [HikariCP](https://github.com/brettwooldridge/HikariCP) and configure its [settings](https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby) using `spring.datasource.hikari.*` properties. HikariCP's default pool size is 10. Their website provides an [article about connection pool sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
 
