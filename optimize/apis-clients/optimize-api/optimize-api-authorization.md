@@ -1,6 +1,7 @@
 ---
 id: optimize-api-authorization
 title: "Authorization"
+description: "Connect business process-related event data and variable data held in external systems from third-party systems to Optimize, and more."
 ---
 
 Most requests of the Public REST API need to include an authorization token

@@ -1,6 +1,6 @@
 ---
 id: collaboration
-title: Collaboration
+title: Collaborate with your team
 description: Collaboration features and access rights for Web Modeler.
 ---
 

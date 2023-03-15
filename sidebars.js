@@ -122,7 +122,14 @@ module.exports = {
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/save-and-deploy",
             "components/modeler/web-modeler/start-instance",
-            "components/modeler/web-modeler/collaboration",
+            {
+              Collaboration: [
+                "components/modeler/web-modeler/collaboration",
+                "components/modeler/web-modeler/collaborate-with-modes",
+                "components/modeler/web-modeler/design-your-process",
+                "components/modeler/web-modeler/implement-your-process",
+              ],
+            },
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
@@ -224,6 +231,7 @@ module.exports = {
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+            "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",

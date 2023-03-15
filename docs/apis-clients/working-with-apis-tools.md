@@ -28,7 +28,7 @@ Clients allow applications to do the following:
 
 The official clients mentioned below interact with [Zeebe](/components/zeebe/zeebe-overview.md), the workflow engine integrated into Camunda Platform 8. Clients connect to Camunda Platform 8 via [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
 
-Camunda Platform 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
+Camunda Platform 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (for example, thread handling for job workers) on top of the core API.
 
 ### Official Zeebe clients
 
@@ -74,7 +74,7 @@ type:"link", href:"/docs/apis-clients/operate-api/index/", label: "Operate API (
 type:"link", href:"/docs/apis-clients/console-api-reference/", label: "Console API (REST)", docId:"apis-clients/console-api-reference"
 },
 {
-type:"link", href:"/docs/next/apis-clients/web-modeler-api/", label: "Web Modeler API", docId:"apis-clients/web-modeler-api/index"
+type:"link", href:"/docs/next/apis-clients/web-modeler-api/", label: "Web Modeler API (Beta, REST)", docId:"apis-clients/web-modeler-api/index", border: "highlight"
 },
 {
 type:"link", href:"/docs/apis-clients/grpc/", label: "Zeebe API (gRPC)", docId:"apis-clients/grpc"
