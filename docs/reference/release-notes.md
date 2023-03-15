@@ -10,11 +10,11 @@ The current release notes can be found [here](https://github.com/camunda/camunda
 
 Most releases and release notes are available through the [Camunda Platform repo](https://github.com/camunda/camunda-platform), however, the following component release notes are available as linked below:
 
-* [Desktop Modeler](https://github.com/camunda/camunda-modeler/releases)
+- [Desktop Modeler](https://github.com/camunda/camunda-modeler/releases)
 
 Some components have release notes that are not publicly available, including the following:
 
-* Web Modeler Self-Managed
-* Optimize
+- Web Modeler Self-Managed
+- Optimize
 
 These release notes are available in a blog format under the [release notes](https://camunda.com/blog/category/release-notes/) tag.
