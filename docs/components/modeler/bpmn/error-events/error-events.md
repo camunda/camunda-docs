@@ -91,10 +91,18 @@ A boundary error event:
 ```xml
 <bpmn:error id="invalid-credit-card-error" errorCode="Invalid Credit Card" />
 
-<bpmn:boundaryEvent id="invalid-credit-card" name="Invalid Credit Card" attachedToRef="collect-money">
+<bpmn:boundaryEvent id="invalid-credit-card-1" name="Invalid Credit Card" attachedToRef="collect-money">
  <bpmn:errorEventDefinition errorRef="invalid-credit-card-error" />
 </bpmn:boundaryEvent>
 
+```
+
+A boundary error event without `errorCode`:
+
+```xml
+<bpmn:boundaryEvent id="invalid-credit-card-2" name="Unknown Error" attachedToRef="collect-money">
+  <bpmn:errorEventDefinition id="catch-all-errors"/>
+</bpmn:boundaryEvent>
 ```
 
 ### References
