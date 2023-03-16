@@ -21,7 +21,9 @@
     "prepare": "husky install",
     "test": "jest",
     "test:regression": "playwright test spec/",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "apidocs:clean": "docusaurus clean-api-docs operate",
+    "apidocs:generate": "docusaurus gen-api-docs operate"
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.12.0",
