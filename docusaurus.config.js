@@ -58,6 +58,7 @@ module.exports = {
             sidebarOptions: {
               groupPathsBy: "tag",
             },
+            hideSendButton: true,
           },
         },
       },
