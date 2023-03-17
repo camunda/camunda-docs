@@ -21,7 +21,7 @@ Refer to [Public API Configuration](../../self-managed/optimize-deployment/confi
 
 You must obtain a token to use the Optimize API. When you create an Optimize [client](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/), you get all the information needed to connect to Optimize.
 
-See our guide on [building your own client](https://docs.camunda.io/docs/apis-clients/build-your-own-client/).
+See our guide on [building your own client](https://docs.camunda.io/docs/apis-tools/build-your-own-client/).
 
 The following settings are needed:
 

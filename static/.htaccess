@@ -14,6 +14,16 @@ RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templ
 # Added Self-Managed Modeler redirect
 RewriteRule ^docs/next/self-managed/web-modeler/installation/(.*)$ /docs/next/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
 
+# Added redirect rules for APIs/Clients to APIs/Tools
+RewriteRule ^docs/8.1/apis-tools/?$ /docs/8.1/apis-clients/ [R=301,L]
+RewriteRule ^docs/8.0/apis-tools/?$ /docs/8.0/apis-clients/ [R=301,L]
+RewriteRule ^docs/1.3/apis-tools/?$ /docs/1.3/apis-clients/ [R=301,L]
+RewriteRule ^docs/1.2/apis-tools/?$ /docs/1.2/apis-clients/ [R=301,L]
+RewriteRule ^docs/1.1/apis-tools/?$ /docs/1.1/apis-clients/ [R=301,L]
+RewriteRule ^docs/1.0/apis-tools/?$ /docs/1.0/apis-clients/ [R=301,L]
+RewriteRule ^docs/0.26/apis-tools/?$ /docs/0.26/apis-clients/ [R=301,L]
+RewriteRule ^docs/0.25/apis-tools/?$ /docs/0.25/apis-clients/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/?$ /docs/next/apis-tools/ [R=301,L]
 RewriteRule ^docs/next/apis-clients/working-with-apis-clients/?$ /docs/next/apis-clients/working-with-apis-tools/ [R=301,L]
 
 RewriteRule ^docs/components/zeebe/open-source/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]

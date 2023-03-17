@@ -1016,39 +1016,39 @@ module.exports = {
 
   "APIs & Tools": [
     docsLink(
-      "Working with APIs & Clients",
-      "apis-clients/working-with-apis-tools/"
+      "Working with APIs & Tools",
+      "apis-tools/working-with-apis-tools/"
     ),
     {
       APIs: [
-        docsLink("Public API", "apis-clients/public-api/"),
-        docsLink("Zeebe API (gRPC)", "apis-clients/grpc/"),
-        docsLink("Operate API (REST)", "apis-clients/operate-api/"),
+        docsLink("Public API", "apis-tools/public-api/"),
+        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
+        docsLink("Operate API (REST)", "apis-tools/operate-api/"),
         {
           "Tasklist API (GraphQL)": [
             docsLink(
               "Overview",
-              "apis-clients/tasklist-api/tasklist-api-overview/"
+              "apis-tools/tasklist-api/tasklist-api-overview/"
             ),
             docsLink(
               "Tutorial",
-              "apis-clients/tasklist-api/tasklist-api-tutorial/"
+              "apis-tools/tasklist-api/tasklist-api-tutorial/"
             ),
-            docsLink("Schema Documentation", "apis-clients/tasklist-api/"),
+            docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
             {
               Directives: [
                 docsLink(
                   "deprecated",
-                  "apis-clients/tasklist-api/directives/deprecated/"
+                  "apis-tools/tasklist-api/directives/deprecated/"
                 ),
                 docsLink(
                   "include",
-                  "apis-clients/tasklist-api/directives/include/"
+                  "apis-tools/tasklist-api/directives/include/"
                 ),
-                docsLink("skip", "apis-clients/tasklist-api/directives/skip/"),
+                docsLink("skip", "apis-tools/tasklist-api/directives/skip/"),
                 docsLink(
                   "specifiedBy",
-                  "apis-clients/tasklist-api/directives/specified-by/"
+                  "apis-tools/tasklist-api/directives/specified-by/"
                 ),
               ],
             },
@@ -1056,7 +1056,7 @@ module.exports = {
               Enums: [
                 docsLink(
                   "TaskState",
-                  "apis-clients/tasklist-api/enums/task-state/"
+                  "apis-tools/tasklist-api/enums/task-state/"
                 ),
               ],
             },
@@ -1064,11 +1064,11 @@ module.exports = {
               Inputs: [
                 docsLink(
                   "TaskQuery",
-                  "apis-clients/tasklist-api/inputs/task-query/"
+                  "apis-tools/tasklist-api/inputs/task-query/"
                 ),
                 docsLink(
                   "VariableInput",
-                  "apis-clients/tasklist-api/inputs/variable-input/"
+                  "apis-tools/tasklist-api/inputs/variable-input/"
                 ),
               ],
             },
@@ -1076,30 +1076,30 @@ module.exports = {
               Mutations: [
                 docsLink(
                   "claimTask",
-                  "apis-clients/tasklist-api/mutations/claim-task/"
+                  "apis-tools/tasklist-api/mutations/claim-task/"
                 ),
                 docsLink(
                   "completeTask",
-                  "apis-clients/tasklist-api/mutations/complete-task/"
+                  "apis-tools/tasklist-api/mutations/complete-task/"
                 ),
                 docsLink(
                   "deleteProcessInstance",
-                  "apis-clients/tasklist-api/mutations/delete-process-instance/"
+                  "apis-tools/tasklist-api/mutations/delete-process-instance/"
                 ),
                 docsLink(
                   "unclaimTask",
-                  "apis-clients/tasklist-api/mutations/unclaim-task/"
+                  "apis-tools/tasklist-api/mutations/unclaim-task/"
                 ),
               ],
             },
             {
               Objects: [
-                docsLink("Form", "apis-clients/tasklist-api/objects/form/"),
-                docsLink("Task", "apis-clients/tasklist-api/objects/task/"),
-                docsLink("User", "apis-clients/tasklist-api/objects/user/"),
+                docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
+                docsLink("Task", "apis-tools/tasklist-api/objects/task/"),
+                docsLink("User", "apis-tools/tasklist-api/objects/user/"),
                 docsLink(
                   "Variable",
-                  "apis-clients/tasklist-api/objects/variable/"
+                  "apis-tools/tasklist-api/objects/variable/"
                 ),
               ],
             },
@@ -1107,114 +1107,108 @@ module.exports = {
               Queries: [
                 docsLink(
                   "currentUser",
-                  "apis-clients/tasklist-api/queries/current-user/"
+                  "apis-tools/tasklist-api/queries/current-user/"
                 ),
-                docsLink("form", "apis-clients/tasklist-api/queries/form/"),
-                docsLink("task", "apis-clients/tasklist-api/queries/task/"),
-                docsLink("tasks", "apis-clients/tasklist-api/queries/tasks/"),
+                docsLink("form", "apis-tools/tasklist-api/queries/form/"),
+                docsLink("task", "apis-tools/tasklist-api/queries/task/"),
+                docsLink("tasks", "apis-tools/tasklist-api/queries/tasks/"),
                 docsLink(
                   "variable",
-                  "apis-clients/tasklist-api/queries/variable/"
+                  "apis-tools/tasklist-api/queries/variable/"
                 ),
                 docsLink(
                   "variables",
-                  "apis-clients/tasklist-api/queries/variables/"
+                  "apis-tools/tasklist-api/queries/variables/"
                 ),
               ],
             },
             {
               Scalars: [
-                docsLink(
-                  "Boolean",
-                  "apis-clients/tasklist-api/scalars/boolean/"
-                ),
-                docsLink("ID", "apis-clients/tasklist-api/scalars/id/"),
-                docsLink("Int", "apis-clients/tasklist-api/scalars/int/"),
-                docsLink("String", "apis-clients/tasklist-api/scalars/string/"),
+                docsLink("Boolean", "apis-tools/tasklist-api/scalars/boolean/"),
+                docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
+                docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
+                docsLink("String", "apis-tools/tasklist-api/scalars/string/"),
               ],
             },
           ],
         },
-        docsLink(
-          "Console API clients (REST)",
-          "apis-clients/console-api-reference/"
-        ),
+        docsLink("Console API (REST)", "apis-tools/console-api-reference/"),
 
         {
           "Optimize API (REST)": [
-            "apis-clients/optimize-api/optimize-api-authorization",
+            "apis-tools/optimize-api/optimize-api-authorization",
             {
               Configuration: [
-                "apis-clients/optimize-api/configuration/enable-sharing",
-                "apis-clients/optimize-api/configuration/disable-sharing",
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing",
               ],
             },
             {
               Dashboard: [
-                "apis-clients/optimize-api/dashboard/get-dashboard-ids",
-                "apis-clients/optimize-api/dashboard/delete-dashboard",
-                "apis-clients/optimize-api/dashboard/export-dashboard-definitions",
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
               ],
             },
             {
               Report: [
-                "apis-clients/optimize-api/report/get-report-ids",
-                "apis-clients/optimize-api/report/delete-report",
-                "apis-clients/optimize-api/report/export-report-definitions",
-                "apis-clients/optimize-api/report/get-data-export",
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export",
               ],
             },
-            "apis-clients/optimize-api/event-ingestion",
-            "apis-clients/optimize-api/external-variable-ingestion",
-            "apis-clients/optimize-api/health-readiness",
-            "apis-clients/optimize-api/import-entities",
-            "apis-clients/optimize-api/variable-labeling",
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling",
           ],
         },
       ],
     },
 
     {
-      Clients: [
+      Tools: [
         {
           "Java client": [
-            docsLink("Quick reference", "apis-clients/java-client/"),
-            docsLink("Job worker", "apis-clients/java-client/job-worker/"),
-            docsLink("Logging", "apis-clients/java-client/logging/"),
+            docsLink("Quick reference", "apis-tools/java-client/"),
+            docsLink("Job worker", "apis-tools/java-client/job-worker/"),
+            docsLink("Logging", "apis-tools/java-client/logging/"),
             docsLink(
               "Zeebe Process Test",
-              "apis-clients/java-client/zeebe-process-test/"
+              "apis-tools/java-client/zeebe-process-test/"
             ),
             {
               Examples: [
-                docsLink("Overview", "apis-clients/java-client-examples/"),
+                docsLink("Overview", "apis-tools/java-client-examples/"),
                 docsLink(
                   "Deploy a process",
-                  "apis-clients/java-client-examples/process-deploy/"
+                  "apis-tools/java-client-examples/process-deploy/"
                 ),
                 docsLink(
                   "Create a process instance",
-                  "apis-clients/java-client-examples/process-instance-create/"
+                  "apis-tools/java-client-examples/process-instance-create/"
                 ),
                 docsLink(
                   "Create non-blocking process instances",
-                  "apis-clients/java-client-examples/process-instance-create-nonblocking/"
+                  "apis-tools/java-client-examples/process-instance-create-nonblocking/"
                 ),
                 docsLink(
                   "Create a process instance with results",
-                  "apis-clients/java-client-examples/process-instance-create-with-result/"
+                  "apis-tools/java-client-examples/process-instance-create-with-result/"
                 ),
                 docsLink(
                   "Open a job worker",
-                  "apis-clients/java-client-examples/job-worker-open/"
+                  "apis-tools/java-client-examples/job-worker-open/"
                 ),
                 docsLink(
                   "Handle variables as POJO",
-                  "apis-clients/java-client-examples/data-pojo/"
+                  "apis-tools/java-client-examples/data-pojo/"
                 ),
                 docsLink(
                   "Request cluster topology",
-                  "apis-clients/java-client-examples/cluster-topology-request/"
+                  "apis-tools/java-client-examples/cluster-topology-request/"
                 ),
               ],
             },
@@ -1222,42 +1216,39 @@ module.exports = {
         },
         {
           "Go client": [
-            docsLink("Quick reference", "apis-clients/go-client/"),
+            docsLink("Quick reference", "apis-tools/go-client/"),
             docsLink(
               "Getting started with the Go client",
-              "apis-clients/go-client/go-get-started/"
+              "apis-tools/go-client/go-get-started/"
             ),
           ],
         },
         {
           "CLI client": [
-            docsLink("Quick reference", "apis-clients/cli-client/"),
+            docsLink("Quick reference", "apis-tools/cli-client/"),
             docsLink(
               "Getting started with the CLI client",
-              "apis-clients/cli-client/cli-get-started/"
+              "apis-tools/cli-client/cli-get-started/"
             ),
           ],
         },
         {
           "Community clients": [
-            docsLink("Overview", "apis-clients/community-clients/"),
-            docsLink("C#", "apis-clients/community-clients/c-sharp/"),
+            docsLink("Overview", "apis-tools/community-clients/"),
+            docsLink("C#", "apis-tools/community-clients/c-sharp/"),
             docsLink(
               "JavaScript/NodeJS",
-              "apis-clients/community-clients/javascript/"
+              "apis-tools/community-clients/javascript/"
             ),
-            docsLink("Micronaut", "apis-clients/community-clients/micronaut/"),
-            docsLink("Python", "apis-clients/community-clients/python/"),
-            docsLink("Ruby", "apis-clients/community-clients/ruby/"),
-            docsLink("Rust", "apis-clients/community-clients/rust/"),
-            docsLink("Spring", "apis-clients/community-clients/spring/"),
-            docsLink("Quarkus", "apis-clients/community-clients/quarkus/"),
+            docsLink("Micronaut", "apis-tools/community-clients/micronaut/"),
+            docsLink("Python", "apis-tools/community-clients/python/"),
+            docsLink("Ruby", "apis-tools/community-clients/ruby/"),
+            docsLink("Rust", "apis-tools/community-clients/rust/"),
+            docsLink("Spring", "apis-tools/community-clients/spring/"),
+            docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
           ],
         },
-        docsLink(
-          "Build your own client",
-          "apis-clients/build-your-own-client/"
-        ),
+        docsLink("Build your own client", "apis-tools/build-your-own-client/"),
       ],
     },
   ],

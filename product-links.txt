@@ -9,7 +9,7 @@ https://docs.camunda.io/docs/components/concepts/job-workers/
 https://docs.camunda.io/docs/guides/model-your-first-process
 https://docs.camunda.io/docs/guides/setup-client-connection-credentials
 https://docs.camunda.io/docs/guides/message-correlation
-https://docs.camunda.io/docs/apis-clients/working-with-apis-clients/
+https://docs.camunda.io/docs/apis-tools/working-with-apis-clients/
 https://docs.camunda.io/docs/components/console/manage-clusters/manage-alerts/
 https://docs.camunda.io/docs/components/console/manage-clusters/manage-ip-whitelists/
 https://docs.camunda.io/docs/components/concepts/variables/
@@ -49,5 +49,5 @@ https://docs.camunda.io/docs/guides/
 https://docs.camunda.io/docs/components/zeebe/technical-concepts/
 https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-primer/
 https://docs.camunda.io/docs/self-managed/zeebe-deployment/
-https://docs.camunda.io/docs/apis-clients/java-client/
-https://docs.camunda.io/docs/apis-clients/go-client/
+https://docs.camunda.io/docs/apis-tools/java-client/
+https://docs.camunda.io/docs/apis-tools/go-client/

@@ -29,7 +29,7 @@ Use the following stack:
 
 1. Use [Camunda Platform 8 SaaS](https://accounts.cloud.camunda.io/signup) and create a cluster there
 
-1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](/docs/apis-clients/community-clients/spring/).
+1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](/docs/apis-tools/community-clients/spring/).
 
 1. Use [Maven](https://maven.apache.org/) as a build tool.
 
@@ -58,7 +58,7 @@ Take a look at the [getting started guide for microservices orchestration](/guid
 
 ## Polyglot stacks
 
-You can develop process solutions as described with Java above also in any other programming language. Simply use the [existing language clients / SDKs](../../../apis-clients/working-with-apis-tools.md) for doing this.
+You can develop process solutions as described with Java above also in any other programming language. Simply use the [existing language clients / SDKs](../../../apis-tools/working-with-apis-tools.md) for doing this.
 
 <!--
 ## The JavaScript greenfield stack

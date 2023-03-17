@@ -20,7 +20,7 @@ module.exports = {
     //          {
     //            schema: "http://localhost:8080/tasklist/graphql",
     //            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-    //            baseURL: "apis-clients/tasklist-api",
+    //            baseURL: "apis-tools/tasklist-api",
     //            linkRoot: "/docs/",
     //            loaders: {
     //              UrlLoader: "@graphql-tools/url-loader"
@@ -84,8 +84,8 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "apis-clients/working-with-apis-clients",
-          label: "APIs & Clients",
+          docId: "apis-tools/working-with-apis-tools",
+          label: "APIs & Tools",
           position: "left",
         },
         {

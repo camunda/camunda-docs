@@ -30,9 +30,9 @@ const features = [
     ),
   },
   {
-    title: "APIs & Clients",
+    title: "APIs & Tools",
     imageUrl: "img/apisclients.png",
-    url: "https://docs.camunda.io/docs/apis-clients/working-with-apis-clients/",
+    url: "https://docs.camunda.io/docs/apis-tools/working-with-apis-tools/",
     description: <>Programmatically interact with your automated processes.</>,
   },
 ];
