@@ -7,6 +7,12 @@ description: Learn how the GitHub Webhook Connector allows you to start a BPMN p
 
 The **GitHub Webhook Connector** allows you to start a BPMN process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 
+:::note
+If you have used the GitHub Webhook Connector with a self-managed Camunda 8 configuration before the
+Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template.
+Please refer to the [update guide](../../../../guides/update-guide/connectors/060-to-070) for more details.
+:::
+
 ## Create a GitHub Webhook Connector task
 
 1. Start building your BPMN diagram with a **Start Event** building block.
