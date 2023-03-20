@@ -205,6 +205,7 @@ module.exports = {
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
+                "components/modeler/bpmn/link-events/link-events",
               ],
             },
             {
