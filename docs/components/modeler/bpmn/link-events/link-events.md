@@ -33,7 +33,12 @@ In the example below, a retry loop is created using the link events pair `A`.
 A manual task:
 
 ```xml
-<bpmn:manualTask id="manual-task" name="Manual task" />
+<bpmn:intermediateThrowEvent id="Throw_Link_Event_A" name="A">
+  <bpmn:linkEventDefinition id="ThrowLinkEventDefinition" name="A" />
+</bpmn:intermediateThrowEvent>
+<bpmn:intermediateCatchEvent id="Catch_Link_Event_A" name="A">
+  <bpmn:linkEventDefinition id="CatchLinkEventDefinition" name="A" />
+</bpmn:intermediateCatchEvent>
 ```
 
 ### References
