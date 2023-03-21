@@ -683,6 +683,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/github-webhook/"
             ),
             docsLink(
+              "GitLab Connector",
+              "components/connectors/out-of-the-box-connectors/gitlab/"
+            ),
+            docsLink(
               "Google Drive Connector",
               "components/connectors/out-of-the-box-connectors/googledrive/"
             ),
