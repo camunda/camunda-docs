@@ -15,6 +15,7 @@ RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templ
 RewriteRule ^docs/next/self-managed/web-modeler/installation/(.*)$ /docs/next/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
 
 # Added redirect rules for APIs/Clients to APIs/Tools
+RewriteRule ^docs/next/apis-clients/working-with-apis-clients/?$ /docs/next/apis-tools/working-with-apis-tools/ [R=301,L]
 RewriteRule ^docs/next/apis-clients(.*)$ /docs/next/apis-tools$1 [R=301,L]
 RewriteRule ^optimize/next/apis-clients(.*)$ /optimize/next/apis-tools$1 [R=301,L]
 
