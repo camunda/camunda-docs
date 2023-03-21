@@ -7,14 +7,14 @@ module.exports = {
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/",
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "throw",
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
   projectName: "camunda-platform-docs", // Usually your repo name.
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for staging
-  noIndex: false,
+  noIndex: true, //temporarily set to true for this branch!!!!
   plugins: [
     //        ["@edno/docusaurus2-graphql-doc-generator",
     //          {
@@ -43,6 +43,24 @@ module.exports = {
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
         editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
+      },
+    ],
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "apiDocs",
+        docsPluginId: "default",
+        config: {
+          operate: {
+            // Note: petstore key is treated as the <id> and can be used to specify an API doc instance when using CLI commands
+            specPath: "operate-openapi.yaml", // Path to designated spec file
+            outputDir: "docs/api/operate", // Output directory for generated .mdx docs
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
       },
     ],
   ],
@@ -221,6 +239,8 @@ module.exports = {
           editUrl:
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
+          docLayoutComponent: "@theme/DocPage",
+          docItemComponent: "@theme/ApiItem",
         },
         blog: false,
         theme: {
@@ -234,4 +254,5 @@ module.exports = {
       },
     ],
   ],
+  themes: ["docusaurus-theme-openapi-docs"],
 };

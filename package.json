@@ -21,7 +21,9 @@
     "prepare": "husky install",
     "test": "jest",
     "test:regression": "playwright test spec/",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "apidocs:clean": "docusaurus clean-api-docs operate",
+    "apidocs:generate": "docusaurus gen-api-docs operate"
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.12.0",
@@ -29,6 +31,8 @@
     "@docusaurus/preset-classic": "^2.3.1",
     "clsx": "^1.2.1",
     "docusaurus-gtm-plugin": "0.0.2",
+    "docusaurus-plugin-openapi-docs": "^2.0.0-beta.1",
+    "docusaurus-theme-openapi-docs": "^2.0.0-beta.1",
     "mixpanel-browser": "^2.45.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

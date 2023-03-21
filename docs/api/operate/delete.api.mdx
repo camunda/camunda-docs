@@ -1,0 +1,245 @@
+---
+id: delete
+title: "Delete process instance and all dependant data by key"
+description: "Delete process instance and all dependant data by key"
+sidebar_label: "Delete process instance and all dependant data by key"
+hide_title: true
+hide_table_of_contents: true
+api:
+  {
+    "tags": ["ProcessInstance"],
+    "operationId": "delete",
+    "parameters":
+      [
+        {
+          "name": "key",
+          "in": "path",
+          "description": "Key of process instance",
+          "required": true,
+          "schema": { "type": "integer", "format": "int64" },
+        },
+      ],
+    "responses":
+      {
+        "200":
+          {
+            "description": "Success",
+            "content":
+              {
+                "application/json":
+                  {
+                    "schema":
+                      {
+                        "type": "object",
+                        "properties":
+                          {
+                            "message": { "type": "string" },
+                            "deleted": { "type": "integer", "format": "int64" },
+                          },
+                        "title": "ChangeStatus",
+                      },
+                  },
+              },
+          },
+        "400":
+          {
+            "description": "Invalid request",
+            "content":
+              {
+                "application/problem+json":
+                  {
+                    "schema":
+                      {
+                        "type": "object",
+                        "properties":
+                          {
+                            "status": { "type": "integer", "format": "int32" },
+                            "message": { "type": "string" },
+                            "instance": { "type": "string" },
+                            "type": { "type": "string" },
+                          },
+                        "title": "Error",
+                      },
+                  },
+              },
+          },
+        "401":
+          {
+            "description": "Unauthorized",
+            "content":
+              {
+                "*/*":
+                  {
+                    "schema":
+                      {
+                        "type": "object",
+                        "properties":
+                          {
+                            "status": { "type": "integer", "format": "int32" },
+                            "message": { "type": "string" },
+                            "instance": { "type": "string" },
+                            "type": { "type": "string" },
+                          },
+                        "title": "Error",
+                      },
+                  },
+              },
+          },
+        "404":
+          {
+            "description": "Requested resource not found",
+            "content":
+              {
+                "application/problem+json":
+                  {
+                    "schema":
+                      {
+                        "type": "object",
+                        "properties":
+                          {
+                            "status": { "type": "integer", "format": "int32" },
+                            "message": { "type": "string" },
+                            "instance": { "type": "string" },
+                            "type": { "type": "string" },
+                          },
+                        "title": "Error",
+                      },
+                  },
+              },
+          },
+        "500":
+          {
+            "description": "API application error",
+            "content":
+              {
+                "application/problem+json":
+                  {
+                    "schema":
+                      {
+                        "type": "object",
+                        "properties":
+                          {
+                            "status": { "type": "integer", "format": "int32" },
+                            "message": { "type": "string" },
+                            "instance": { "type": "string" },
+                            "type": { "type": "string" },
+                          },
+                        "title": "Error",
+                      },
+                  },
+              },
+          },
+      },
+    "security": [{ "bearer-key": [] }, { "cookie": [] }],
+    "description": "Delete process instance and all dependant data by key",
+    "method": "delete",
+    "path": "/v1/process-instances/{key}",
+    "servers":
+      [
+        {
+          "url": "https://bru-2.operate.camunda.io/b63151de-ed04-413f-8a48-00e8d14140f4",
+          "description": "Generated server url",
+        },
+      ],
+    "securitySchemes":
+      {
+        "cookie":
+          { "type": "apiKey", "name": "OPERATE-SESSION", "in": "cookie" },
+        "bearer-key":
+          { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" },
+      },
+    "info":
+      {
+        "title": "Operate Public API",
+        "description": "To access active and completed process instances in Operate for monitoring and troubleshooting",
+        "contact": { "url": "https://www.camunda.com" },
+        "license":
+          {
+            "name": "License",
+            "url": "https://docs.camunda.io/docs/reference/licenses/",
+          },
+        "version": "1.0.0",
+      },
+    "postman":
+      {
+        "name": "Delete process instance and all dependant data by key",
+        "description": { "type": "text/plain" },
+        "url":
+          {
+            "path": ["v1", "process-instances", ":key"],
+            "host": ["{{baseUrl}}"],
+            "query": [],
+            "variable":
+              [
+                {
+                  "disabled": false,
+                  "description":
+                    {
+                      "content": "(Required) Key of process instance",
+                      "type": "text/plain",
+                    },
+                  "type": "any",
+                  "value": "",
+                  "key": "key",
+                },
+              ],
+          },
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "method": "DELETE",
+        "auth":
+          {
+            "type": "bearer",
+            "bearer":
+              [{ "type": "any", "value": "<Bearer Token>", "key": "token" }],
+          },
+      },
+  }
+sidebar_class_name: "delete api-method"
+info_path: docs/api/operate/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiDemoPanel/MethodEndpoint";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>
+  Delete process instance and all dependant data by key
+</h1>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/process-instances/{key}"}
+></MethodEndpoint>
+
+Delete process instance and all dependant data by key
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><strong>Path Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"key","in":"path","description":"Key of process instance","required":true,"schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+Success
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"deleted"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"message\": \"string\",\n  \"deleted\": 0\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+Invalid request
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
+
+Unauthorized
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"*/*"} value={"*/*"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+Requested resource not found
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+API application error
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+
