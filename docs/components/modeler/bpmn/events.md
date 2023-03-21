@@ -12,7 +12,7 @@ Currently supported events:
 - [Error events](error-events/error-events.md)
 - [Escalation events](escalation-events/escalation-events.md)
 - [Terminate events](terminate-events/terminate-events.md)
-- [Link events](link-events)
+- [Link events](link-events/link-events.md)
 
 ## Events in general
 
