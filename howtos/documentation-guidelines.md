@@ -152,7 +152,9 @@ If you wish to test `.htaccess` rules, you have a couple options:
 2. Use `docker compose` to spin up a locally-running Apache webserver.
    This repo includes Docker configuration ([Dockerfile](../Dockerfile) and [docker-compose.yml](../docker-compose.yml)) to spin up a local environment that better simulates a published environment. Redirect rules can then be tested directly in a browser.
 
-   The local server is based on the contents of your `./build` folder. To start this local server:
+   The local server is based on the contents of your `./build` folder.
+
+   **To start the local server**:
 
    1. Build the docs with `npm run build`.
    2. Start the server with `docker compose up`.
@@ -160,6 +162,13 @@ If you wish to test `.htaccess` rules, you have a couple options:
 
       It is probably best to do this in an incognito browser session, as browsers clutch tightly to 301 redirects.
 
+   4. Clean up the server with `docker compose down`.
+
+   **If you make changes and want to re-start the server**:
+
+   1. Apply the changes to your `build` folder, either manually or by re-running `npm run build`.
+   2. Rebuild the environment with `docker compose build`.
+   3. Re-start the server with `docker compose up`.
    4. Clean up the server with `docker compose down`.
 
 ## Screenshot automation
