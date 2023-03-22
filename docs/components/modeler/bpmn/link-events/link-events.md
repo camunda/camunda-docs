@@ -42,4 +42,6 @@ A manual task:
 
 ### References
 
+- [Intermediate none events]
+
 [intermediate none events]: ../none-events/none-events.md#intermediate-none-events-throwing
