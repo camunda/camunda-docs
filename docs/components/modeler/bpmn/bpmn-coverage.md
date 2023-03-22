@@ -85,8 +85,8 @@ import ReceiveTaskInstantiatedSvg from './assets/bpmn-symbols/receive-task-insta
     <a href="#">
         <ReceiveTaskInstantiatedSvg />
     </a>
-    <a href="#">
-        <UndefinedTaskSvg />
+    <a href="../undefined-tasks/">
+        <UndefinedTaskSvg className="implemented" />
     </a>
 </div>
 
