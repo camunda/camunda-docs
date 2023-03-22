@@ -34,7 +34,7 @@ Requirements for the components can be seen below:
 
 | Component                | Java version | Other requirements                                                                               |
 | ------------------------ | ------------ | ------------------------------------------------------------------------------------------------ |
-| Zeebe Broker and Gateway | OpenJDK 17+  | Elasticsearch 7.16.x (only if Elastic exporter is used)                                          |
+| Zeebe Broker and Gateway | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x (only if Elastic exporter is used)                                  |
 | Operate                  | OpenJDK 11+  | Elasticsearch 7.16.x                                                                             |
 | Tasklist                 | OpenJDK 11+  | Elasticsearch 7.16.x                                                                             |
 | Identity                 | OpenJDK 17+  | Keycloak 16.1.1, 19.0.3                                                                          |
