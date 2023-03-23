@@ -10,6 +10,7 @@ This section contains general reference material for Camunda Platform 8.
 ## Security, support, & license information
 
 - [Announcements](announcements.md)
+- [Release notes](release-notes.md)
 - [Licenses](licenses.md)
 - [Security notices](notices.md)
 - [Service status](status.md)
