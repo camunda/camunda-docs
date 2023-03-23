@@ -276,7 +276,7 @@ An alternative is to install the Ingress Controller of choice and use this inste
 
 ### Prerequisite
 
-As the Zeebe Gateway uses `gRPC` (which relies on `HTTP/2`,) this [has to be enabled](https://docs.openshift.com/container-platform/4.11/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
+As the Zeebe Gateway uses `gRPC` (which relies on `HTTP/2`), this [has to be enabled](https://docs.openshift.com/container-platform/4.11/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
 
 ### Required steps
 
