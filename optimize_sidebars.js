@@ -647,6 +647,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/available-connectors-overview/"
             ),
             docsLink(
+              "Asana Connector",
+              "components/connectors/out-of-the-box-connectors/Asana/"
+            ),
+            docsLink(
               "Automation Anywhere Connector",
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
