@@ -28,28 +28,10 @@ module.exports = {
     //          },
     //        ],
     [
-      require.resolve("docusaurus-gtm-plugin"),
-      {
-        id: "GTM-KQGNSTS", // GTM Container ID
-      },
-    ],
-    "./static/plugins/bpmn-js",
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "optimize",
-        path: "optimize",
-        routeBasePath: "optimize",
-        beforeDefaultRemarkPlugins: [versionedLinks],
-        sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
-      },
-    ],
-    [
       "docusaurus-plugin-openapi-docs",
       {
         id: "apiDocs",
-        docsPluginId: "default",
+        docsPluginId: "classic",
         config: {
           operate: {
             // Note: petstore key is treated as the <id> and can be used to specify an API doc instance when using CLI commands
@@ -231,14 +213,14 @@ module.exports = {
   },
   presets: [
     [
-      "@docusaurus/preset-classic",
+      "classic",
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl:
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
-          beforeDefaultRemarkPlugins: [versionedLinks],
+          // beforeDefaultRemarkPlugins: [versionedLinks],
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
