@@ -24,10 +24,6 @@ Camunda Platform 8 Helm chart doesn't manage or deploy Ingress controllers, it o
 
 In this setup, a single Ingress/domain is used to access Camunda Platform 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
-:::caution Web Modeler
-The combined Ingress setup does not support Web Modeler yet. To enable external access to Web Modeler, you'll need to set up a [separate Ingress](#separated-ingress-setup).
-:::
-
 ![Camunda Platform 8 Self-Managed Architecture Diagram - Combined Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 ```yaml
@@ -53,6 +49,8 @@ global:
         redirectUrl: "https://camunda.example.com/tasklist"
       optimize:
         redirectUrl: "https://camunda.example.com/optimize"
+      webModeler:
+        redirectUrl: "https://camunda.example.com/modeler"
 
 identity:
   contextPath: "/identity"
@@ -67,12 +65,19 @@ optimize:
 tasklist:
   contextPath: "/tasklist"
 
+webModeler:
+  contextPath: "/modeler"
+
 zeebe-gateway:
   ingress:
     enabled: true
     className: nginx
     host: "zeebe.camunda.example.com"
 ```
+
+:::note Web Modeler
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler-beta).
+:::
 
 Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
 
@@ -82,7 +87,7 @@ helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
 
 Once deployed, you can access the Camunda Platform 8 components on:
 
-- **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist]`
+- **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler]`
 - **Keycloak authentication:** `https://camunda.example.com/auth`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 
