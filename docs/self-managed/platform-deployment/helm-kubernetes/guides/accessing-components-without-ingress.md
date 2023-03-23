@@ -12,7 +12,7 @@ You need to keep `port-forward` running all the time to communicate with the rem
 
 ## Accessing workflow engine
 
-To interact with Camunda Platform workflow engine via [Zeebe Gateway](../../../zeebe-gateway-deployment/the-zeebe-gateway.md) using [zbctl](/docs/apis-tools/cli-client/) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
+To interact with Camunda Platform workflow engine via [Zeebe Gateway](../../../zeebe-gateway-deployment/the-zeebe-gateway.md) using [zbctl](../../../../apis-tools/cli-client/index.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
 
 ```
 kubectl port-forward svc/<RELEASE_NAME>-zeebe-gateway 26500:26500

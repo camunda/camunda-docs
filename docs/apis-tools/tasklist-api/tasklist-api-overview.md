@@ -77,7 +77,7 @@ The authentication is described in [Tasklist Configuration - Authentication](/do
 
 ## Obtaining the Tasklist schema
 
-To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](/docs/apis-tools/tasklist-api/).
+To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](/docs/apis-tools/tasklist-api/generated.md).
 
 There are also several [tools to explore GraphQL APIs](https://altair.sirmuel.design).
 
