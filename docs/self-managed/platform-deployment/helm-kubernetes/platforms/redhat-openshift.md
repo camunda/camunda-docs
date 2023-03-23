@@ -273,8 +273,6 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 An alternative is to install the Ingress Controller of choice and use this instead; for example, [NGINX](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift).
 
-Another alternative is to use passthrough routes. Yet, this has
-
 ### Prerequisite
 
 As the Zeebe Gateway uses `gRPC` (which relies on `HTTP/2`,) this [has to be enabled](https://docs.openshift.com/container-platform/4.11/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
