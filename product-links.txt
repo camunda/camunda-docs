@@ -49,5 +49,5 @@ https://docs.camunda.io/docs/guides/
 https://docs.camunda.io/docs/components/zeebe/technical-concepts/
 https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-primer/
 https://docs.camunda.io/docs/self-managed/zeebe-deployment/
-https://docs.camunda.io/docs/apis-tools/java-client/
-https://docs.camunda.io/docs/apis-tools/go-client/
+https://docs.camunda.io/docs/apis-clients/java-client/
+https://docs.camunda.io/docs/apis-clients/go-client/
