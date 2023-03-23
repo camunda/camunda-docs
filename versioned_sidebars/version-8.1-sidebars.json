@@ -33,7 +33,8 @@
             "guides/update-guide/connectors/020-to-030",
             "guides/update-guide/connectors/030-to-040",
             "guides/update-guide/connectors/040-to-050",
-            "guides/update-guide/connectors/050-to-060"
+            "guides/update-guide/connectors/050-to-060",
+            "guides/update-guide/connectors/060-to-070"
           ]
         },
         "guides/update-guide/800-to-810",
@@ -303,6 +304,7 @@
             "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/rest",
             "components/connectors/out-of-the-box-connectors/sendgrid",

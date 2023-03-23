@@ -42,6 +42,7 @@ module.exports = {
             "guides/update-guide/connectors/030-to-040",
             "guides/update-guide/connectors/040-to-050",
             "guides/update-guide/connectors/050-to-060",
+            "guides/update-guide/connectors/060-to-070",
           ],
         },
         "guides/update-guide/810-to-820",
@@ -183,6 +184,7 @@ module.exports = {
                 "components/modeler/bpmn/script-tasks/script-tasks",
                 "components/modeler/bpmn/send-tasks/send-tasks",
                 "components/modeler/bpmn/manual-tasks/manual-tasks",
+                "components/modeler/bpmn/undefined-tasks/undefined-tasks",
               ],
             },
             {
@@ -241,6 +243,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/rest",
             "components/connectors/out-of-the-box-connectors/sendgrid",
