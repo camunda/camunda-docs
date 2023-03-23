@@ -68,7 +68,7 @@ It is also possible to [build your own client](build-your-own-client.md) You can
 
 <DocCardList items={[{type:"link", href:"/docs/apis-clients/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-clients/tasklist-api/tasklist-api-overview"},
 {
-type:"link", href:"/docs/apis-clients/operate-api/index/", label: "Operate API (REST)", docId:"apis-clients/operate-api/index"
+type:"link", href:"/docs/apis-clients/operate-api/", label: "Operate API (REST)", docId:"apis-clients/operate-api/operate-api-overview"
 },
 {
 type:"link", href:"/docs/apis-clients/console-api-reference/", label: "Console API (REST)", docId:"apis-clients/console-api-reference"
