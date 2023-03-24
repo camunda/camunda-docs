@@ -781,6 +781,7 @@ module.exports = {
         {
           Exporters: [
             "self-managed/zeebe-deployment/exporters/exporters",
+            "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
             "self-managed/zeebe-deployment/exporters/opensearch-exporter",
           ],
         },

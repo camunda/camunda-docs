@@ -6,7 +6,7 @@ sidebar_label: "Overview"
 
 Zeebe comes packaged with two exporters:
 
-- Elasticsearch
+- [Elasticsearch](elasticsearch-exporter.md)
 - [Opensearch](opensearch-exporter.md)
 
 This section of the docs explains how these exporters can be configured. For a general overview on the Exporters
