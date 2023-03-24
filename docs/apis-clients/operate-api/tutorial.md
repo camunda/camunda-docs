@@ -1,5 +1,5 @@
 ---
-id: tutorial
+id: operate-api-tutorial
 title: Tutorial
 slug: /apis-clients/operate-api/tutorial
 description: "Let's implement an application using the Operate API."
