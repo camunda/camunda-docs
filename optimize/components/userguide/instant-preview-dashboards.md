@@ -18,7 +18,7 @@ Moreover, the dashboard/reports display data from all versions of the process de
 
 The dashboard has a predictable URL so that it can also be embedded into other tools/webpages. The URL has the format
 _https://&lt;OPTIMIZE_URL&gt;/dashboard/instant/&lt;BPMN-PROCESS-ID&gt;/_. This URL is stable across Optimize versions,
-so there is no need to change it when upgrading Optimize.
+so there is no need to change it when updating Optimize.
 
 :::note
 Instant Preview Dashboards cannot be shared like standard dashboards. If you wish to direct someone to it, please
