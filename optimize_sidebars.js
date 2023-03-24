@@ -602,6 +602,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-lambda/"
             ),
             docsLink(
+              "GitHub Connector",
+              "components/connectors/out-of-the-box-connectors/github/"
+            ),
+            docsLink(
               "GitHub Webhook Connector",
               "components/connectors/out-of-the-box-connectors/github-webhook/"
             ),
