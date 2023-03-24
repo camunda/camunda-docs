@@ -9,7 +9,7 @@ https://docs.camunda.io/docs/components/concepts/job-workers/
 https://docs.camunda.io/docs/guides/model-your-first-process
 https://docs.camunda.io/docs/guides/setup-client-connection-credentials
 https://docs.camunda.io/docs/guides/message-correlation
-https://docs.camunda.io/docs/apis-clients/working-with-apis-clients/
+https://docs.camunda.io/docs/apis-clients/working-with-apis-tools/
 https://docs.camunda.io/docs/components/console/manage-clusters/manage-alerts/
 https://docs.camunda.io/docs/components/console/manage-clusters/manage-ip-whitelists/
 https://docs.camunda.io/docs/components/concepts/variables/

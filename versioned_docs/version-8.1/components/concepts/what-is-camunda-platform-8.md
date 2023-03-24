@@ -86,7 +86,7 @@ Use BPMN and DMN standards as a common language for developers and business stak
 
 ### Developer-friendly approach
 
-The platform and tools are easy to get started with and simple to use in your environment right away, with full public access to all of Camunda's documentation, [open APIs for integration](../../apis-clients/working-with-apis-clients.md), and a [community](https://camunda.com/developers/) comprised of around 100,000 developers.
+The platform and tools are easy to get started with and simple to use in your environment right away, with full public access to all of Camunda's documentation, [open APIs for integration](../../apis-tools/working-with-apis-tools.md), and a [community](https://camunda.com/developers/) comprised of around 100,000 developers.
 
 ## Next steps
 
