@@ -939,7 +939,7 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
-              "Update notes (3.0 to 3.10)",
+              "Update notes (3.9 to 3.10)",
               "self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
             ),
             optimizeLink(
