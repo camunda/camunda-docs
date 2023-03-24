@@ -794,7 +794,7 @@ module.exports = {
               ],
             },
             {
-              "Automatically generated dashboards": [
+              "Dashboards maintained by Camunda": [
                 "components/userguide/process-dashboards",
                 "components/userguide/instant-preview-dashboards",
               ],

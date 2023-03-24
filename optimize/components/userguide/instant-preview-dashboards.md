@@ -8,7 +8,8 @@ Camunda Optimize is a comprehensive process optimization tool that helps busines
 and improve efficiency. One of the standout features of Camunda Optimize is its ability to automatically generate
 dashboards for each process, providing users with clear insights into process performance.
 
-When a process is available in Camunda Optimize, the tool automatically generates a dashboard for that process. The dashboards are designed to be intuitive and easy to use and can be accessed from the [process dashboards
+When a process is available in Camunda Optimize, Optimize automatically generates a dashboard for that process. The
+dashboards are designed to be intuitive and easy to use and can be accessed from the [process dashboards
 page](./process-dashboards.md) by clicking on the desired process.
 
 The data displayed in this dashboard and corresponding reports is coupled with the user's permissions to that
