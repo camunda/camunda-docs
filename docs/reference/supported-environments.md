@@ -32,14 +32,14 @@ We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes envi
 
 Requirements for the components can be seen below:
 
-| Component                | Java version | Other requirements                                                                               |
-| ------------------------ | ------------ | ------------------------------------------------------------------------------------------------ |
-| Zeebe Broker and Gateway | OpenJDK 17+  | Elasticsearch 7.16.x (only if Elastic exporter is used)                                          |
-| Operate                  | OpenJDK 11+  | Elasticsearch 7.16.x                                                                             |
-| Tasklist                 | OpenJDK 11+  | Elasticsearch 7.16.x                                                                             |
-| Identity                 | OpenJDK 17+  | Keycloak 16.1.1, 19.x, 20.x                                                                      |
-| Optimize                 | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x                                                   |
-| Web Modeler (Beta)       | -            | Keycloak 16.1.1, 19.0.3<br/>PostgreSQL 14.x (other database systems are currently not supported) |
+| Component          | Java version | Other requirements                                                                               |
+| ------------------ | ------------ | ------------------------------------------------------------------------------------------------ |
+| Zeebe              | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x (only if Elastic exporter is used)                                  |
+| Operate            | OpenJDK 11+  | Elasticsearch 7.16.x, 7.17.x                                                                     |
+| Tasklist           | OpenJDK 11+  | Elasticsearch 7.16.x, 7.17.x                                                                     |
+| Identity           | OpenJDK 17+  | Keycloak 16.1.1, 19.x, 20.x                                                                      |
+| Optimize           | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x                                                   |
+| Web Modeler (Beta) | -            | Keycloak 16.1.1, 19.0.3<br/>PostgreSQL 14.x (other database systems are currently not supported) |
 
 :::note Elasticsearch support
 [Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Camunda Platform 8.
