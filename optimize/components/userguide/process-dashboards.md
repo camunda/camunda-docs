@@ -30,8 +30,7 @@ Note the available views below:
 
 9. KPI Results: You can see the KPI’s current and target values, plus a link to the report itself.
 
-10. Clicking on each process on the list opens a default dashboard dedicated to this process. For more details,
-    please [click here.](./instant-preview-dashboards.md)
+10. Clicking on each process on the list opens a [default dashboard dedicated to this process](./instant-preview-dashboards.md).
 
 :::tip
 For the pie chart reports in 4, 5, and 6, both time and count are displayed in the chart according to the following format:
