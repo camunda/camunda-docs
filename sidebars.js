@@ -666,6 +666,7 @@ module.exports = {
     "reference/overview",
     "reference/glossary",
     "reference/announcements",
+    "reference/release-notes",
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",

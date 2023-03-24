@@ -622,7 +622,7 @@
     }
   ],
   "APIs & Clients": [
-    "apis-clients/working-with-apis-clients",
+    "apis-tools/working-with-apis-tools",
     {
       "APIs": [
         "apis-clients/public-api",
@@ -785,6 +785,7 @@
     "reference/overview",
     "reference/glossary",
     "reference/announcements",
+    "reference/release-notes",
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",
