@@ -793,9 +793,14 @@ module.exports = {
                 "components/userguide/view-mode",
               ],
             },
+            {
+              "Automatically generated dashboards": [
+                "components/userguide/process-dashboards",
+                "components/userguide/instant-preview-dashboards",
+              ],
+            },
             "components/userguide/creating-reports",
             "components/userguide/combined-process-reports",
-            "components/userguide/process-dashboards",
 
             {
               "Process analysis": [
