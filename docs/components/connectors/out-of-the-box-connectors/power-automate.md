@@ -1,10 +1,12 @@
 ---
 id: power-automate
 title: Power Automate Connector
-description: Orchestrate your Power Automate flows with Camunda to trigger, get the status, or get the outputs of the flow.
+description: Orchestrate your Power Automate Desktop Flows with Camunda to trigger, get the status, or get the outputs of the flow.
 ---
 
-The **Power Automate Connector** allows you to orchestrate a Power Automate flow from your BPMN process with [Power Automate](https://powerautomate.microsoft.com).
+The **Power Automate Connector** allows you to orchestrate a Power Automate Desktop Flow from your BPMN process with [Power Automate](https://powerautomate.microsoft.com).
+
+Note: This connector is designed to orchestrate desktop flows only.
 
 ## Prerequisites
 
