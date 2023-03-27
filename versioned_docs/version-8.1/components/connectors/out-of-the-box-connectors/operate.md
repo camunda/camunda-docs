@@ -2,22 +2,22 @@
 id: operate
 title: Camunda Operate Connector
 sidebar_label: Camunda Operate Connector
-description: Fetch process execution data from Camunda Operate, a monitoring solution for Camunda 8
+description: Fetch process execution data from Camunda Operate, a monitoring solution for Camunda Platform 8.
 ---
 
 The **Camunda Operate Connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process.
 
 ## Prerequisites
 
-To use the **Camunda Operate Connector**, you need to have an active Camunda 8 cluster with Operate.
-This Connector is compatible with both Camunda 8 SaaS and Camunda Platform 8 Self-Managed.
+To use the **Camunda Operate Connector**, you need to have an active Camunda Platform 8 cluster with Operate.
+This Connector is compatible with both Camunda Platform 8 SaaS and Camunda Platform 8 Self-Managed.
 
 :::note
 Password authentication with Operate is currently not supported.
 If you are using Camunda Platform 8 Self-Managed, you can only authenticate using [Identity](https://docs.camunda.io/docs/self-managed/operate-deployment/operate-authentication/#identity).
 :::
 
-You also need to obtain the Operate API client credentials. Please follow the links below to learn more about API client configuration.
+You also need to obtain the Operate API client credentials. Follow the links below to learn more about API client configuration.
 
 - [API client configuration in Camunda Platform 8 SaaS](https://docs.camunda.io/docs/components/console/manage-clusters/manage-api-clients/)
 - [Authentication with a Self-Managed Operate deployment](https://docs.camunda.io/docs/self-managed/operate-deployment/operate-authentication/#identity)
@@ -28,12 +28,12 @@ It is highly recommended to use Camunda secrets to store credentials so you don'
 
 ## Create an Operate Connector task
 
-To use the **Operate Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
+To use the **Operate Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu.
 Follow our [guide to using Connectors](../use-connectors.md) to learn more.
 
 ## Enter your cluster information
 
-Choose between _Camunda 8 SaaS_ and _Camunda 8 Self-Managed_ depending on your Camunda 8 installation type. The input fields will update accordingly.
+Choose between **Camunda Platform 8 SaaS** and **Camunda Platform 8 Self-Managed** depending on your Camunda Platform 8 installation type. The input fields will update accordingly.
 
 ### SaaS clusters
 
@@ -48,7 +48,7 @@ If you are using a Self-Managed cluster, you need to provide two URLs:
 - URL of your OAuth token endpoint
 - Operate URL
 
-If you are testing this Connector on your local machine with Camunda Platform 8 Docker Compose setup, set the following URLs:
+If you are testing this Connector on your local machine with the Camunda Platform 8 Docker Compose setup, set the following URLs:
 
 - OAuth Token endpoint: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
 - Operate URL: `http://localhost:8081`
@@ -71,7 +71,7 @@ In the **Endpoint** dropdown list, select the API entity. You can choose between
 
 In the **Operation** dropdown list, select one of the supported operations: **Get by key** or **Search**.
 
-Please refer to the Operate [API documentation](https://docs.camunda.io/docs/apis-clients/operate-api/) for more details on the specific operations.
+Refer to the Operate [API documentation](https://docs.camunda.io/docs/apis-clients/operate-api/) for more details on the specific operations.
 
 :::note Unsupported operations
 The following API operations are currently not supported by the **Operate Connector**:
@@ -82,19 +82,19 @@ The following API operations are currently not supported by the **Operate Connec
 
 ## Configure operation parameters
 
-For **Get by key** operation, you are need to provide a single input, the entity **key**
+For **Get by key** operation, you must provide a single input, the entity **key**.
 
 For **Search** operation, the following search parameters can be configured:
 
-- **Filter**: allows to filter objects by fields, e.g. the following filter will return active process instance with key 235 if it contains incidents.
+- **Filter**: Allows you to filter objects by fields, e.g. the following filter will return active process instance with key 235 if it contains incidents:
 
   `{ "processInstanceKey": 235, "state": "ACTIVE", "incidents": true }`
 
-  If one of the fields doesn't match, empty response will be returned for this request. Refer to the [Operate API documentation](https://docs.camunda.io/docs/apis-clients/operate-api/#filter) for more detailed information.
+  If one of the fields doesn't match, an empty response will be returned for this request. Refer to the [Operate API documentation](https://docs.camunda.io/docs/apis-clients/operate-api/#filter) for more detailed information.
 
-- **Sort**: sorting properties in Operate format, e.g. `[{ "field": "name", "order": "DESC" }]`. You need to provide a list of sort objects in this field.
-- **Results**: number of results to return
-- **Pagination**: identifier of an item from which the search should start. Copy this `sortValues` value from the previous Operate response here, or leave this field blank if you don't need pagination. See the [API reference](https://docs.camunda.io/docs/apis-clients/operate-api/#pagination) for details.
+- **Sort**: Sorting properties in Operate format, e.g. `[{ "field": "name", "order": "DESC" }]`. You need to provide a list of sort objects in this field.
+- **Results**: Number of results to return.
+- **Pagination**: Identifier of an item from which the search should start. Copy this `sortValues` value from the previous Operate response here, or leave this field blank if you don't need pagination. See the [API reference](https://docs.camunda.io/docs/apis-clients/operate-api/#pagination) for details.
 
 ## Handle the API response
 
