@@ -34,16 +34,16 @@ Web Modeler requires a PostgreSQL database as persistent data storage (other dat
 
 Web Modeler requires an SMTP server to send notification emails to users.
 
-| Environment variable        | Description                                                                                                                                                                                         | Example value                 | Default value |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------- |
-| `RESTAPI_MAIL_HOST`         | SMTP server host name                                                                                                                                                                               | `smtp.example.com`            | -             |
-| `RESTAPI_MAIL_PORT`         | SMTP server port                                                                                                                                                                                    | `587`                         | -             |
-| `RESTAPI_MAIL_USER`         | [optional]<br/>SMTP user name                                                                                                                                                                       | `modeler-user`                | -             |
-| `RESTAPI_MAIL_PASSWORD`     | [optional]<br/>SMTP user password                                                                                                                                                                   | \*\*\*                        | -             |
-| `RESTAPI_MAIL_ENABLE_TLS`   | Enforce TLS encryption for SMTP connections (using STARTTLS).                                                                                                                                       | `true`                        | `true`        |
-| `RESTAPI_MAIL_FROM_ADDRESS` | Email address used as the sender of emails sent by Web Modeler.                                                                                                                                     | `noreply@example.com`         | -             |
-| `RESTAPI_MAIL_FROM_NAME`    | [optional]<br/>Name displayed as the sender of emails sent by Web Modeler.                                                                                                                          | `Camunda`                     | `Camunda`     |
-| `RESTAPI_SERVER_URL`        | URL at which users access Web Modeler in the browser (used to construct links in notification emails).<br/>_Note_: Use the domain root; running Web Modeler on a context path is not yet supported. | `https://modeler.example.com` | -             |
+| Environment variable        | Description                                                                                            | Example value                 | Default value |
+| --------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------- | ------------- |
+| `RESTAPI_MAIL_HOST`         | SMTP server host name                                                                                  | `smtp.example.com`            | -             |
+| `RESTAPI_MAIL_PORT`         | SMTP server port                                                                                       | `587`                         | -             |
+| `RESTAPI_MAIL_USER`         | [optional]<br/>SMTP user name                                                                          | `modeler-user`                | -             |
+| `RESTAPI_MAIL_PASSWORD`     | [optional]<br/>SMTP user password                                                                      | \*\*\*                        | -             |
+| `RESTAPI_MAIL_ENABLE_TLS`   | Enforce TLS encryption for SMTP connections (using STARTTLS).                                          | `true`                        | `true`        |
+| `RESTAPI_MAIL_FROM_ADDRESS` | Email address used as the sender of emails sent by Web Modeler.                                        | `noreply@example.com`         | -             |
+| `RESTAPI_MAIL_FROM_NAME`    | [optional]<br/>Name displayed as the sender of emails sent by Web Modeler.                             | `Camunda`                     | `Camunda`     |
+| `RESTAPI_SERVER_URL`        | URL at which users access Web Modeler in the browser (used to construct links in notification emails). | `https://modeler.example.com` | -             |
 
 #### WebSocket
 
@@ -71,25 +71,26 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 
 #### General
 
-| Environment variable      | Description                                                                                                               | Example value                 | Default value |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------- |
-| `SERVER_URL`              | URL at which users access Web Modeler in the browser.                                                                     | `https://modeler.example.com` | -             |
-| `SERVER_HTTPS_ONLY`       | Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                   | `true`                        | `false`       |
-| `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                 | `modeler-restapi`             | -             |
-| `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.    | `8081`                        | `8081`        |
-| `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints. | `8091`                        | `8091`        |
+| Environment variable      | Description                                                                                                                            | Example value                                                    | Default value |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------- |
+| `SERVER_URL`              | URL at which users access Web Modeler in the browser.<br/>_Note_: To use a sub path for Web Modeler, just include the path in the URL. | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
+| `SERVER_HTTPS_ONLY`       | Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                | `true`                                                           | `false`       |
+| `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                              | `modeler-restapi`                                                | -             |
+| `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                 | `8081`                                                           | `8081`        |
+| `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.              | `8091`                                                           | `8091`        |
 
 #### Identity / Keycloak
 
-| Environment variable    | Description                                                                                                               | Example value                                                                     |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `OAUTH2_CLIENT_ID`      | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                      | `web-modeler`                                                                     |
-| `OAUTH2_TOKEN_AUDIENCE` | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                    | `web-modeler`                                                                     |
-| `OAUTH2_TOKEN_ISSUER`   | URL of the token issuer (used for JWT validation).                                                                        | `https://keycloak.example.com/auth/realms/camunda-platform`                       |
-| `KEYCLOAK_BASE_URL`     | Base URL of the Keycloak instance.                                                                                        | `https://keycloak.example.com`                                                    |
-| `KEYCLOAK_REALM`        | Keycloak realm used for Camunda Platform.                                                                                 | `camunda-platform`                                                                |
-| `KEYCLOAK_JWKS_URL`     | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification). | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` |
-| `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                 | `http://identity:8080`                                                            |
+| Environment variable    | Description                                                                                                                               | Example value                                                                     | Default value |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| `OAUTH2_CLIENT_ID`      | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                                      | `web-modeler`                                                                     | -             |
+| `OAUTH2_TOKEN_AUDIENCE` | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                                    | `web-modeler`                                                                     | -             |
+| `OAUTH2_TOKEN_ISSUER`   | URL of the token issuer (used for JWT validation).                                                                                        | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
+| `KEYCLOAK_BASE_URL`     | Base URL of the Keycloak instance.                                                                                                        | `https://keycloak.example.com`                                                    | -             |
+| `KEYCLOAK_CONTEXT_PATH` | [optional]<br/>Context path Keycloak serves resources on.<br/>_Note_: With Keycloak 17, the default path was changed from `/auth` to `/`. | `/`                                                                               | `/auth`       |
+| `KEYCLOAK_REALM`        | Keycloak realm used for Camunda Platform.                                                                                                 | `camunda-platform`                                                                | -             |
+| `KEYCLOAK_JWKS_URL`     | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                 | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
+| `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                 | `http://identity:8080`                                                            | -             |
 
 #### WebSocket
 
@@ -104,6 +105,7 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 | `PUSHER_SECRET`           | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websocket-component)                                                        | \*\*\*               | -             |
 | `CLIENT_PUSHER_HOST`      | [External](#notes-on-host-names-and-port-numbers) host name on which the Web Modeler client accesses the WebSocket server from the browser.   | `ws.example.com`     | -             |
 | `CLIENT_PUSHER_PORT`      | [External](#notes-on-host-names-and-port-numbers) port number on which the Web Modeler client accesses the WebSocket server from the browser. | `443`                | -             |
+| `CLIENT_PUSHER_PATH`      | [optional]<br/>_must be the same as_ [`PUSHER_APP_PATH`](#configuration-of-the-websocket-component)                                           | `/modeler-ws`        | `/`           |
 | `CLIENT_PUSHER_KEY`       | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*               | -             |
 | `CLIENT_PUSHER_FORCE_TLS` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`               | `false`       |
 
@@ -111,11 +113,12 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/9.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
-| Environment variable | Description                                                                                              | Example value |
-| -------------------- | -------------------------------------------------------------------------------------------------------- | ------------- |
-| `PUSHER_APP_ID`      | ID of the single application/tenant configured for Web Modeler.                                          | `web-modeler` |
-| `PUSHER_APP_KEY`     | A unique key used for authentication. Provide a random alphanumeric string of at least 20 characters.    | \*\*\*        |
-| `PUSHER_APP_SECRET`  | A unique secret used for authentication. Provide a random alphanumeric string of at least 20 characters. | \*\*\*        |
+| Environment variable | Description                                                                                                                                                              | Example value | Default value |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------- |
+| `PUSHER_APP_ID`      | ID of the single application/tenant configured for Web Modeler.                                                                                                          | `web-modeler` | -             |
+| `PUSHER_APP_KEY`     | A unique key used for authentication. Provide a random alphanumeric string of at least 20 characters.                                                                    | \*\*\*        | -             |
+| `PUSHER_APP_SECRET`  | A unique secret used for authentication. Provide a random alphanumeric string of at least 20 characters.                                                                 | \*\*\*        | -             |
+| `PUSHER_APP_PATH`    | [optional]<br/>Base path of the WebSocket endpoint. Can be used to expose the endpoint on a sub path instead of the domain root (e.g. `https://example.com/modeler-ws`). | `/modeler-ws` | `/`           |
 
 ### Notes on host names and port numbers
 
