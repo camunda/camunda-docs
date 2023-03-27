@@ -6,7 +6,9 @@ description: Orchestrate your Power Automate Desktop Flows with Camunda to trigg
 
 The **Power Automate Connector** allows you to orchestrate a Power Automate Desktop Flow from your BPMN process with [Power Automate](https://powerautomate.microsoft.com).
 
-Note: This connector is designed to orchestrate desktop flows only.
+:::note
+This Connector is designed to orchestrate desktop flows only.
+:::
 
 ## Prerequisites
 
