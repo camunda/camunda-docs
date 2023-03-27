@@ -48,8 +48,7 @@ camunda-platform
     |_ optimize
     |_ operate
     |_ tasklist
-    |_ web-modeler
-        |_ postgresql
+    |_ postgresql
 ```
 
 - Keycloak is a dependency for Camunda Identity and PostgreSQL is a dependency for Keycloak.
@@ -66,10 +65,8 @@ identity:
     [keycloak values]
     postgresql:
       [postgresql values]
-web-modeler:
-  [web-modeler values]
-  postgresql:
-    [postgresql values]
+postgresql:
+  [postgresql values]
 ```
 
 ## Push Docker images to your repository
@@ -145,7 +142,7 @@ optimize:
   image:
     repository: example.jfrog.io/camunda/optimize
     ...
-web-modeler:
+webModeler:
   image:
     # registry and tag will be used for all three Web Modeler images
     registry: example.jfrog.io
@@ -159,11 +156,11 @@ web-modeler:
   websockets:
     image:
       repository: camunda/modeler-websockets
-  # only necessary if the PostgreSQL chart dependency is used for Web Modeler
-  postgresql:
-    image:
-      repository: example.jfrog.io/bitnami/postgres
   ...
+# only necessary if the PostgreSQL chart dependency is used for Web Modeler
+postgresql:
+  image:
+    repository: example.jfrog.io/bitnami/postgres
 ```
 
 Afterwards, you can deploy Camunda Platform using Helm and the custom values file.
