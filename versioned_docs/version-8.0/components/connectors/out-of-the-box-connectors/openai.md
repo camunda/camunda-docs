@@ -10,27 +10,28 @@ or [Moderation API](https://platform.openai.com/docs/guides/moderation/moderatio
 
 ## Prerequisites
 
-To use the **OpenAI Connector**, you need to create an OpenAI account and create an API key.
-Please refer to [OpenAI Platform](https://platform.openai.com/docs/quickstart) documentation for a detailed setup guide.
+To use the **OpenAI Connector**, create an OpenAI account and create an API key.
+
+Refer to the [OpenAI Platform](https://platform.openai.com/docs/quickstart) documentation for a detailed setup guide.
 
 :::note
-It is highly recommended not to expose your sensitive data such as OpenAI API key as plain text, but rather use Camunda secrets. Follow our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended not to expose your sensitive data, such as OpenAI API key as plain text, but rather use Camunda secrets. Follow our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
 :::note
 
-## Create an OpenAI Connector Task
+## Create an OpenAI Connector task
 
-To use the **OpenAI Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](../use-connectors.md) to learn more.
+To use the **OpenAI Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide on using Connectors](../use-connectors.md) to learn more.
 
 ## Make your OpenAI Connector executable
 
-To work with OpenAI Connector, choose the required connection type in the **Authentication** section and complete the
+To work with the OpenAI Connector, choose the required connection type in the **Authentication** section and complete the
 mandatory fields highlighted in red in the connector properties panel:
 
 ![connectors-openai-red-properties](../img/connectors-openai-red-properties.png)
 
 ## Authentication
 
-To use the **OpenAI Connector**, you need to obtain an API key from OpenAI. To create an OpenAI account and learn more about API keys, please visit the [OpenAI Platform](https://platform.openai.com/) documentation.
+To use the **OpenAI Connector**, obtain an API key from OpenAI. To create an OpenAI account and learn more about API keys, visit the [OpenAI Platform](https://platform.openai.com/) documentation.
 
 ### Create a new Connector secret
 
@@ -41,15 +42,15 @@ We advise you to keep your **API key** safe and avoid exposing it in the BPMN `x
 
 ### Configure the API key
 
-Select **OpenAI API key** field in the **Authentication** section and set it to the secret you created (e.g. `secrets.OPENAI_API_TOKEN`).
+Select the **OpenAI API key** field in the **Authentication** section and set it to the secret you created (e.g. `secrets.OPENAI_API_TOKEN`).
 
 ## Operations
 
-The **OpenAI Connector** currently supports two operation types in the **Operation** dropdown list: _Chat_ and _Moderation_.
+The **OpenAI Connector** currently supports two operation types in the **Operation** dropdown list: **Chat** and **Moderation**.
 
 ## Chat
 
-With _Chat_ operation, you can interact with OpenAI chat-based language models.
+With the **Chat** operation, you can interact with OpenAI chat-based language models.
 
 ### Model
 
@@ -63,7 +64,7 @@ may appear as non-existing when you attempt to use it, although it is defined in
 
 ### System message
 
-The **System message** field allows you to provide initial instructions for the model. It helps set the behavior of the assistant.
+The **System message** field allows you to provide initial instructions for the model, and helps set the behavior of the assistant.
 
 For example, if you want ChatGPT to translate the prompt into a different language instead of interpreting the questions contained in the prompt, you can set the **System message** to
 `You are a translator bot. You provide literal translation of inputs from English into German. You do not interpret the input.`
@@ -82,17 +83,17 @@ Chat history consumed by this Connector follows the chat format described in the
 While **System message** and **Chat history** fields are optional and provide the model with additional context, **Prompt** is the actual input.
 This is the query that is used to trigger the model output.
 
-The image below illustrate how you can use **System message**, **Chat history** and **Prompt** together.
+The image below illustrates how you can use **System message**, **Chat history**, and **Prompt** together.
 
 ![connectors-openai-prompt-engineering](../img/connectors-openai-prompt-engineering.png)
 
 :::note
-You will find more complex examples of prompt engineering and sample real-life use cases of ChatGPT on the OpenAI [Examples](https://platform.openai.com/examples) page.
+Find more complex examples of prompt engineering and sample real-life use cases of ChatGPT on the OpenAI [examples](https://platform.openai.com/examples) page.
 :::
 
 ### Choices to generate
 
-The numeric **Choices to generate** field determines how many alternative answers the model will return in the API response.
+The numeric **Choices to generate** field determines how many alternative answers the model returns in the API response.
 
 ### Sample chat output
 
@@ -133,8 +134,7 @@ You can use an output mapping to map the response:
 
 ## Moderation
 
-It is recommended to use the Moderation API to sanitize inputs and outputs of the language model.
-This way you will be able to prevent violation of OpenAI policies and displaying the potentially unsafe content in your system.
+It is recommended to use the Moderation API to sanitize inputs and outputs of the language model. You will be able to prevent violation of OpenAI policies and displaying the potentially unsafe content in your system.
 
 ### Evaluation input
 
