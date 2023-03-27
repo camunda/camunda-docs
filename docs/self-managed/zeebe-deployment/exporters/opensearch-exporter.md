@@ -1,36 +1,38 @@
 ---
 id: opensearch-exporter
-title: "Opensearch Exporter"
-sidebar_label: "Opensearch"
+title: "OpenSearch exporter"
+sidebar_label: "OpenSearch"
+description: "The Zeebe OpenSearch exporter acts as a bridge between Zeebe and OpenSearch."
 ---
 
-The Zeebe Opensearch Exporter acts as a bridge between
-[Zeebe](https://camunda.com/platform/zeebe/) and [Opensearch](https://opensearch.org), by
+The Zeebe OpenSearch Exporter acts as a bridge between
+[Zeebe](https://camunda.com/platform/zeebe/) and [OpenSearch](https://opensearch.org) by
 exporting records written to Zeebe streams as documents into several indices.
 
 ## Concept
 
 The exporter operates on the idea that it should perform as little as possible on the Zeebe side of
 things. In other words, you can think of the indexes into which the records are exported as a
-staging data warehouse: any enrichment or transformation on the exported data should be performed by
+staging data warehouse. Any enrichment or transformation on the exported data should be performed by
 your own ETL jobs.
 
-To simplify things, when configured to do so, the exporter will automatically create an index per
+When configured to do so, the exporter will automatically create an index per
 record value type (see the value type in the Zeebe protocol). Each of these indexes has a
 corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find
 those as templates in this module's resources folder.
 
-> **Note:** the indexes are created as required, and will not be created twice if they already
-> exist. However,
-> once disabled, they will not be deleted, that is up to the administrator. Similarly, data is never
-> deleted by
-> the exporter, and must, again, be deleted by the administrator when it is safe to do so.
+:::note
+The indexes are created as required, and will not be created twice if they already exist. However, once disabled, they will not be deleted (that is up to the administrator). Similarly, data is never deleted by the exporter, and must be deleted by the administrator when it is safe to do so.
+:::
 
 ## Configuration
 
-> **Note:** As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPath`.
+:::note
+As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPath`.
+:::
 
-The exported can be enabled by configuring it with the classpath in the Broker settings.
+The exporter can be enabled by configuring it with the classpath in the broker settings.
+
 For example:
 
 ```yaml
@@ -38,26 +40,25 @@ exporters:
   opensearch:
     className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
     args:
-    # Please refer to the table below for the available args options
+    # Refer to the table below for the available args options
 ```
 
 The exporter can be configured by providing `args`. The table below explains all the different
-options, and the default values for these options.
+options, and the default values for these options:
 
-| Option           | Description                                                                             | Default                 |
-| ---------------- | --------------------------------------------------------------------------------------- | ----------------------- |
-| url              | Valid URLs as comma-separated string                                                    | `http://localhost:9200` |
-| requestTimeoutMs | Request timeout (in ms) for the Opensearch client                                       | `30000`                 |
-| index            | Refer to [Index](#index) for the index configuration options                            |                         |
-| bulk             | Refer to [Bulk](#bulk) for the bulk configuration options                               |                         |
-| authentication   | Refer to [Authentication](#authentication) for the authentication configuration options |                         |
-| aws              | Refer to [AWS](#aws) for the aws configuration options                                  |                         |
+| Option           | Description                                                                              | Default                 |
+| ---------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
+| url              | Valid URLs as comma-separated string                                                     | `http://localhost:9200` |
+| requestTimeoutMs | Request timeout (in ms) for the OpenSearch client.                                       | `30000`                 |
+| index            | Refer to [Index](#index) for the index configuration options.                            |                         |
+| bulk             | Refer to [Bulk](#bulk) for the bulk configuration options.                               |                         |
+| authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
+| aws              | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
 
 ### Index
 
 In most cases, you will not be interested in exporting every single record produced by a Zeebe
-cluster, but rather only a subset of them. This can also be configured to limit the kinds of records
-being exported (e.g. only events, no commands), and the value type of these records (e.g. only job
+cluster, but rather only a subset of them. This can also be configured to limit the kinds of records exported (e.g. only events, no commands), and the value type of these records (e.g. only job
 and process values).
 
 | Option                        | Description                                                                                             | Default      |
@@ -97,26 +98,26 @@ and process values).
 
 ### Bulk
 
-To avoid doing too many expensive requests to the Opensearch cluster, the exporter performs batch
+To avoid too many expensive requests to the OpenSearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
 size) can be controlled by configuration.
 
-| Option      | Description                                                                                                                                                  | Default            |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ |
-| delay       | Delay, in seconds, before we force flush the current batch. This ensures that even when we have low traffic of records we still export every once in a while | `5`                |
-| size        | The amount of records a batch should have before we flush the batch                                                                                          | `1000`             |
-| memoryLimit | The size of the batch, in bytes, before we flush the batch                                                                                                   | `10485760` (10 MB) |
+| Option      | Description                                                                                                                                                    | Default            |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| delay       | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `5`                |
+| size        | The amount of records a batch should have before we flush the batch.                                                                                           | `1000`             |
+| memoryLimit | The size of the batch, in bytes, before we flush the batch.                                                                                                    | `10485760` (10 MB) |
 
-With the default configuration, the exporter would aggregate records and flush them to Opensearch
+With the default configuration, the exporter would aggregate records and flush them to OpenSearch
 either:
 
-1. when it has aggregated 1000 records
-2. when the batch memory size exceeds 10 MB
-3. 5 seconds have elapsed since the last flush (regardless of how many records were aggregated)
+1. When it has aggregated 1000 records.
+2. When the batch memory size exceeds 10 MB.
+3. Five seconds have elapsed since the last flush (regardless of how many records were aggregated).
 
 ### Authentication
 
-Providing these authentication options will enable Basic Authentication on the Exporter.
+Providing these authentication options will enable Basic Authentication on the exporter.
 
 | Option   | Description                   | Default |
 | -------- | ----------------------------- | ------- |
@@ -125,23 +126,23 @@ Providing these authentication options will enable Basic Authentication on the E
 
 ### AWS
 
-When running Opensearch in AWS you may require requests to be signed. By enabling AWS in the
-configurations a request interceptor will be added to the exporter. This interceptor will take care
+When running OpenSearch in AWS, you may require requests to be signed. By enabling AWS in the
+configurations, a request interceptor will be added to the exporter. This interceptor will take care
 of signing the requests.
 
 Signing requests requires credentials. These credentials are not directly configurable in the
 exporter. Instead, they are resolved by following the
-[Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
+[Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
 
-| Option      | Description                                                                              | Default                                            |
-| ----------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| enabled     | Enables AWS request signing                                                              | `false`                                            |
-| serviceName | AWS's name of the service to where requests are made. For Opensearch this should be `es` | `es`                                               |
-| region      | The region this exporter is running in                                                   | The value of the `AWS_REGION` environment variable |
+| Option      | Description                                                                             | Default                                            |
+| ----------- | --------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| enabled     | Enables AWS request signing                                                             | `false`                                            |
+| serviceName | AWS' name of the service to where requests are made. For OpenSearch this should be `es` | `es`                                               |
+| region      | The region this exporter is running in                                                  | The value of the `AWS_REGION` environment variable |
 
 ## Example
 
-Here is an example configuration of the Exporter.
+Here is an example configuration of the exporter:
 
 ```yaml
 ---

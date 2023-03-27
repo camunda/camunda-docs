@@ -1,34 +1,37 @@
 ---
 id: elasticsearch-exporter
-title: "Elasticsearch Exporter"
+title: "Elasticsearch exporter"
 sidebar_label: "Elasticsearch"
+description: "The Zeebe Elasticsearch exporter acts as a bridge between Zeebe and Elasticsearch."
 ---
 
-The Zeebe Elasticsearch Exporter acts as a bridge between
-[Zeebe](https://zeebe.io/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch), by
+The Zeebe Elasticsearch exporter acts as a bridge between
+[Zeebe](https://zeebe.io/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch) by
 exporting records written to Zeebe streams as documents into several indices.
 
 ## Concept
 
 The exporter operates on the idea that it should perform as little as possible on the Zeebe side of
 things. In other words, you can think of the indexes into which the records are exported as a
-staging data warehouse: any enrichment or transformation on the exported data should be performed by
+staging data warehouse. Any enrichment or transformation on the exported data should be performed by
 your own ETL jobs.
 
-To simplify things, when configured to do so, the exporter will automatically create an index per
-record value type (see the value type in the Zeebe protocol). Each of these indexes has a
+When configured to do so, the exporter will automatically create an index per record value type (see the value type in the Zeebe protocol). Each of these indexes has a
 corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find
 those as templates in this module's resources folder.
 
-> **Note:** the indexes are created as required, and will not be created twice if they already exist. However,
-> once disabled, they will not be deleted, that is up to the administrator. Similarly, data is never deleted by
-> the exporter, and must, again, be deleted by the administrator when it is safe to do so.
+:::note
+The indexes are created as required, and will not be created twice if they already exist. However, once disabled, they will not be deleted (that is up to the administrator.) Similarly, data is never deleted by the exporter, and must be deleted by the administrator when it is safe to do so.
+:::
 
 ## Configuration
 
-> **Note:** As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPath`.
+:::note
+As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPath`.
+:::
 
-The exported can be enabled by configuring it with the classpath in the Broker settings.
+The exporter can be enabled by configuring it with the `classpath` in the broker settings.
+
 For example:
 
 ```yaml
@@ -36,19 +39,19 @@ exporters:
   elasticsearch:
     className: io.camunda.zeebe.exporter.ElasticsearchExporter
     args:
-    # Please refer to the table below for the available args options
+    # Refer to the table below for the available args options
 ```
 
 The exporter can be configured by providing `args`. The table below explains all the different
-options, and the default values for these options.
+options, and the default values for these options:
 
-| Option           | Description                                                                             | Default                 |
-| ---------------- | --------------------------------------------------------------------------------------- | ----------------------- |
-| url              | Valid URLs as comma-separated string                                                    | `http://localhost:9200` |
-| requestTimeoutMs | Request timeout (in ms) for the Elasticsearch client                                    | `30000`                 |
-| index            | Refer to [Index](#index) for the index configuration options                            |                         |
-| bulk             | Refer to [Bulk](#bulk) for the bulk configuration options                               |                         |
-| authentication   | Refer to [Authentication](#authentication) for the authentication configuration options |                         |
+| Option           | Description                                                                              | Default                 |
+| ---------------- | ---------------------------------------------------------------------------------------- | ----------------------- |
+| url              | Valid URLs as comma-separated string                                                     | `http://localhost:9200` |
+| requestTimeoutMs | Request timeout (in ms) for the Elasticsearch. client                                    | `30000`                 |
+| index            | Refer to [Index](#index) for the index configuration options.                            |                         |
+| bulk             | Refer to [Bulk](#bulk) for the bulk configuration options.                               |                         |
+| authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
 
 ### Index
 
@@ -94,26 +97,25 @@ and process values).
 
 ### Bulk
 
-To avoid doing too many expensive requests to the Elasticsearch cluster, the exporter performs batch
+To avoid too many expensive requests to the Elasticsearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
 size) can be controlled by configuration.
 
-| Option      | Description                                                                                                                                                  | Default            |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ |
-| delay       | Delay, in seconds, before we force flush the current batch. This ensures that even when we have low traffic of records we still export every once in a while | `5`                |
-| size        | The amount of records a batch should have before we flush the batch                                                                                          | `1000`             |
-| memoryLimit | The size of the batch, in bytes, before we flush the batch                                                                                                   | `10485760` (10 MB) |
+| Option      | Description                                                                                                                                                    | Default            |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| delay       | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `5`                |
+| size        | The amount of records a batch should have before we flush the batch                                                                                            | `1000`             |
+| memoryLimit | The size of the batch, in bytes, before we flush the batch                                                                                                     | `10485760` (10 MB) |
 
-With the default configuration, the exporter would aggregate records and flush them to Elasticsearch
-either:
+With the default configuration, the exporter will aggregate records and flush them to Elasticsearch:
 
-1. when it has aggregated 1000 records
-2. when the batch memory size exceeds 10 MB
-3. 5 seconds have elapsed since the last flush (regardless of how many records were aggregated)
+1. When it has aggregated 1000 records.
+2. When the batch memory size exceeds 10 MB.
+3. Five seconds have elapsed since the last flush (regardless of how many records were aggregated).
 
 ### Authentication
 
-Providing these authentication options will enable Basic Authentication on the Exporter.
+Providing these authentication options will enable Basic Authentication on the exporter.
 
 | Option   | Description                   | Default |
 | -------- | ----------------------------- | ------- |
@@ -122,7 +124,7 @@ Providing these authentication options will enable Basic Authentication on the E
 
 ## Example
 
-Here is an example configuration of the Exporter.
+Here is an example configuration of the exporter:
 
 ```yaml
 ---
