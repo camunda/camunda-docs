@@ -14,6 +14,11 @@ Edit mode allows you to configure the report and adjust it to your needs. The fo
 
 Building a report is the crux of the report edit mode. The building process itself is composed of several steps, which happen in the control panel.
 
+:::note
+In edit mode, you can toggle the automatic preview update of the report, by toggling the **Update Preview Automatically** switch. You can also use the **Run** button to run the update manually.
+By default the automatic preview update is **disabled**.
+:::
+
 In this section, learn how to:
 
 - [Select process definitions](./select-process-definitions.md)
