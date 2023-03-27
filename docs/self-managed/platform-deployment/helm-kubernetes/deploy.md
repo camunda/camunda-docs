@@ -186,7 +186,7 @@ postgresql:
 
 #### Optional: Configure external database
 
-If you don't like to install a new PostgreSQL instance with Helm, you can configure Web Modeler to use an existing external database. Set `postgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
+If you don't want to install a new PostgreSQL instance with Helm, but connect Web Modeler to an existing external database, set `postgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
 
 ```yaml
 webModeler:
