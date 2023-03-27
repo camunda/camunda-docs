@@ -58,7 +58,7 @@ Take a look at the [getting started guide for microservices orchestration](/guid
 
 ## Polyglot stacks
 
-You can develop process solutions as described with Java above also in any other programming language. Simply use the [existing language clients / SDKs](../../../apis-clients/working-with-apis-clients.md) for doing this.
+You can develop process solutions as described with Java above also in any other programming language. Simply use the [existing language clients / SDKs](../../../apis-tools/working-with-apis-tools.md) for doing this.
 
 <!--
 ## The JavaScript greenfield stack

@@ -137,7 +137,7 @@ Due to limited adoption, there is no support for CDI or OSGI in Camunda Cloud. A
 
 ### Polyglot applications (C#, NodeJS, ...)
 
-When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform) with another (Camunda Cloud). As Zeebe comes with a different API, you need to adjust your source code. Also note that Zeebe does not currently provide a REST API, so you need to leverage a [client library](/apis-clients/overview.md).
+When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform) with another (Camunda Cloud). As Zeebe comes with a different API, you need to adjust your source code. Also note that Zeebe does not currently provide a REST API, so you need to leverage a [client library](/apis-tools/overview.md).
 
 ![polygot architecture](img/architecture-polyglot.png)
 
