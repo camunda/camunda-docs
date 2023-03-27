@@ -2,34 +2,32 @@
 id: operate-api-tutorial
 title: Tutorial
 slug: /apis-clients/operate-api/tutorial
-description: "Let's implement an application using the Operate API."
+description: "Step through examples to implement an application using the Operate API and render a BPMN diagram."
 ---
 
-## Introduction
-
-In this tutorial you will find examples of usages of the Operate API.
+In this tutorial, we'll step through examples to highlight the capabilities of the Operate API, such as rendering a BPMN diagram.
 
 ## Getting started
 
-- You need authentication to access the API endpoints. You can find more information [here](/docs/next/apis-clients/operate-api/overview/#authentication).
-- We will use bpmn-js library in order to render the diagram and add overlays. You can check https://bpmn.io/toolkit/bpmn-js/walkthrough/#viewer-pre-packaged for more details of usage.
+- You need authentication to access the API endpoints. Find more information [here](/docs/next/apis-clients/operate-api/overview/#authentication).
+- We will use the `bpmn-js` library to render the diagram and add overlays. Visit the documentation on [embedding the pre-packaged viewer](https://bpmn.io/toolkit/bpmn-js/walkthrough/#viewer-pre-packaged) for more details.
 
-## Setup the demo project
+## Set up the demo project
 
-1. Create a new folder.
+1. Create a new folder using the following command:
 
 ```sh
 mkdir operate-api-demo
 cd operate-api-demo
 ```
 
-2. Initialize the project by following the command.
+2. Initialize the project using the following command:
 
 ```sh
 npm init --y
 ```
 
-3. Add a Proxy server in order to bypass CORS errors. Create a server.js file inside the project folder with the following contents.
+3. Add a proxy server to bypass CORS errors. Create a `server.js` file inside the project folder with the following contents:
 
 ```js
 const http = require("http");
@@ -67,21 +65,21 @@ server.listen(3030, () => {
 });
 ```
 
-4. Install the necessary packages.
+4. Install the necessary packages using the following command:
 
 ```sh
 npm install request
 ```
 
-5. Run the server.
+5. Run the server using the following command:
 
 ```sh
 node server.js
 ```
 
-## Render a BPMN Diagram
+## Render a BPMN diagram
 
-1. Create a simple index.html file and include the bpmn-js script.
+1. Create an `index.html` file and include the `bpmn-js` script:
 
 ```html
 <!DOCTYPE html>
@@ -94,7 +92,7 @@ node server.js
 </html>
 ```
 
-2. Create a styles.css file to keep the stylings.
+2. Create a `styles.css` file to maintain the styling:
 
 ```css
 html,
@@ -121,7 +119,7 @@ body,
 }
 ```
 
-3. Create an api.js script file and write a function that fetches the Process XML by definition.
+3. Create an `api.js` script file and write a function that fetches the process XML by definition:
 
 ```js
 async function fetchDiagram() {
@@ -136,7 +134,7 @@ async function fetchDiagram() {
 }
 ```
 
-4. Fetch and render the diagram.
+4. Fetch and render the diagram:
 
 ```html
 <!DOCTYPE html>
@@ -176,19 +174,19 @@ async function fetchDiagram() {
 </html>
 ```
 
-5. Open index.html in your browser to see the rendered diagram.
+5. Open `index.html` in your browser to see the rendered diagram.
 
    ![render diagram](./img/render-diagram.png)
 
 ## Show statistics on the diagram
 
-1. Add a new function to api.js file that fetches the flow node statistics for a specified process instance id.
+1. Add a new function to the `api.js` file that fetches the flow node statistics for a specified process instance id:
 
 ```js
 async function fetchStatistics() {
   return fetch(
     // Replace {PROCESS_INSTANCE_ID} with a process instance id.
-    // http://localhost:3030 is the URL of the Proxy server, which should stay the same.
+    // http://localhost:3030 is the URL of the proxy server, which should stay the same.
     "http://localhost:3030/v1/process-instances/{PROCESS_INSTANCE_ID}/statistics",
     {
       method: "GET",
@@ -197,7 +195,7 @@ async function fetchStatistics() {
 }
 ```
 
-2. Add an overlay that displays the number of incidents on flow nodes.
+2. Add an overlay that displays the number of incidents on flow nodes:
 
 ```js
 // ...
@@ -226,13 +224,13 @@ fetchStatistics()
 // ...
 ```
 
-3. Open index.html in your browser to see the incident overlay displayed on the related flow node(s), if there are any.
+3. Open `index.html` in your browser to see the incident overlay displayed on the related flow node(s), if there are any.
 
 ![display incidents](./img/display-incidents.png)
 
 ## Highlight processed sequence flows on the diagram
 
-1. Add a new function to api.js file that fetches the processed sequence flows for a specified process instance id.
+1. Add a new function to the `api.js` file that fetches the processed sequence flows for a specified process instance id:
 
 ```js
 async function fetchSequenceFlows() {
@@ -247,7 +245,7 @@ async function fetchSequenceFlows() {
 }
 ```
 
-2. Color the processed sequence flows.
+2. Color the processed sequence flows:
 
 ```js
 // ...
@@ -276,10 +274,10 @@ fetchSequenceFlows()
 // ...
 ```
 
-3. Open index.html in your browser to see the processed sequence flows highlighted.
+3. Open `index.html` in your browser to see the processed sequence flows highlighted.
 
 ![color sequence flows](./img/color-sequence-flows.png)
 
-## Full Demo
+## Full demo
 
-Here is the Github link to the full working demo: https://github.com/camunda/operate-api-bpmn-demo
+For additional details, visit the [GitHub full working demo](https://github.com/camunda/operate-api-bpmn-demo).
