@@ -408,7 +408,7 @@
     }
   ],
   "APIs & Clients": [
-    "apis-clients/working-with-apis-clients",
+    "apis-tools/working-with-apis-tools",
     {
       "APIs": [
         "apis-clients/public-api",

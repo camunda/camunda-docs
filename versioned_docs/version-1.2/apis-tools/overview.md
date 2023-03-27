@@ -1,5 +1,6 @@
 ---
-id: working-with-apis-clients
+# This page exists in apis-tools, instead of apis-clients, because the location needs to be consistent across all versions.
+id: working-with-apis-tools
 title: "Working with APIs & Clients"
 sidebar_label: "Overview"
 description: "Programmatically work with Camunda Cloud through APIs & clients"
@@ -15,9 +16,9 @@ Other components in Camunda Cloud, such as [Tasklist API (GraphQL)](/apis-client
 
 ### Additional APIs
 
-- [Public API](public-api.md) - Camunda Cloud's provided public API.
-- [Cloud Console API clients (REST)](cloud-console-api-reference.md) - Enables you to programmatically create and manage clusters, and interact with Camunda Cloud programmatically without using the Camunda Cloud UI.
-- [Zeebe API](grpc.md) - Zeebe clients use gRPC to communicate with the cluster.
+- [Public API](../apis-clients/public-api.md) - Camunda Cloud's provided public API.
+- [Cloud Console API clients (REST)](../apis-clients/cloud-console-api-reference.md) - Enables you to programmatically create and manage clusters, and interact with Camunda Cloud programmatically without using the Camunda Cloud UI.
+- [Zeebe API](../apis-clients/grpc.md) - Zeebe clients use gRPC to communicate with the cluster.
 
 ## Clients
 
@@ -37,17 +38,17 @@ Community clients supplement the official clients. These clients have not been t
 
 ### Official clients
 
-- [Java](java-client/index.md)
-- [Go](go-client/get-started.md)
-- [CLI](cli-client/index.md)
+- [Java](../apis-clients/java-client/index.md)
+- [Go](../apis-clients/go-client/get-started.md)
+- [CLI](../apis-clients/cli-client/index.md)
 
 ### Community clients
 
-- [C#](community-clients/c-sharp.md)
-- [JavaScript/NodeJS](community-clients/javascript.md)
-- [Python](community-clients/python.md)
-- [Ruby](community-clients/ruby.md)
-- [Rust](community-clients/rust.md)
-- [Spring](community-clients/spring.md)
+- [C#](../apis-clients/community-clients/c-sharp.md)
+- [JavaScript/NodeJS](../apis-clients/community-clients/javascript.md)
+- [Python](../apis-clients/community-clients/python.md)
+- [Ruby](../apis-clients/community-clients/ruby.md)
+- [Rust](../apis-clients/community-clients/rust.md)
+- [Spring](../apis-clients/community-clients/spring.md)
 
-Finally, it is possible to [build your own client](build-your-own-client.md) if none of the other options are suitable.
+Finally, it is possible to [build your own client](../apis-clients/build-your-own-client.md) if none of the other options are suitable.
