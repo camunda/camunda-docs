@@ -84,4 +84,4 @@ client.newResolveIncidentCommand(incident.getKey())
 When the incident is resolved, the process instance continues.
 
 - [Operate](/components/operate/index.md)
-- [APIs and Clients](/apis-clients/overview.md)
+- [APIs and Clients](/apis-tools/overview.md)

@@ -42,3 +42,25 @@ The expected format for the data is an array of options, each defining its label
   ]
 }
 ```
+
+#### Shorthand definitions
+
+If the value and label are equal, shorthand formats may be used instead:
+
+```json
+{
+  "languageData": [{ "value": "fr" }, { "value": "en-gb" }, { "value": "de" }]
+}
+```
+
+```json
+{
+  "languageData": ["fr", "en-gb", "de"]
+}
+```
+
+#### Supported types
+
+The `label` parameter should be a `string`.
+
+If a label is provided, the `value` parameter can be any non-null type. Otherwise, it is restricted to types `string`, `number`, and `boolean`.

@@ -154,15 +154,19 @@ Alternatively, create an image pull secret [from your Docker configuration file]
 
 To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [README](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#web-modeler-beta) file):
 
-- Enable Web Modeler with `web-modeler.enabled: true` (it is disabled by default).
-- Configure the previously created [image pull secret](#create-image-pull-secret) in `web-modeler.image.pullSecrets`.
-- Configure your SMTP server by providing the values under `web-modeler.restapi.mail`.
+- Enable Web Modeler with `webModeler.enabled: true` (it is disabled by default).
+- Configure the previously created [image pull secret](#create-image-pull-secret) in `webModeler.image.pullSecrets`.
+- Configure your SMTP server by providing the values under `webModeler.restapi.mail`.
   - Web Modeler requires an SMTP server to send notification emails to users.
+- Configure the database connection
+  - Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
+  - _Option 1_: Set `postgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
+  - _Option 2_: Set `postgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
 
 We recommend specifying these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look as follows:
 
 ```yaml
-web-modeler:
+webModeler:
   enabled: true
   image:
     pullSecrets:
@@ -176,19 +180,16 @@ web-modeler:
       smtpPassword: secret
       # email address to be displayed as sender of emails from Web Modeler
       fromAddress: no-reply@example.com
+postgresql:
+  enabled: true
 ```
 
 #### Optional: Configure external database
 
-Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
-By default, a new PostgreSQL instance is installed as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
-Alternatively, you can configure a connection to an existing external database:
+If you don't want to install a new PostgreSQL instance with Helm, but connect Web Modeler to an existing external database, set `postgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
 
 ```yaml
-web-modeler:
-  postgresql:
-    # disables the PostgreSQL chart dependency
-    enabled: false
+webModeler:
   restapi:
     externalDatabase:
       host: postgres.example.com
@@ -196,6 +197,9 @@ web-modeler:
       database: modeler-db
       user: modeler-user
       password: secret
+postgresql:
+  # disables the PostgreSQL chart dependency
+  enabled: false
 ```
 
 #### Install the Helm chart
