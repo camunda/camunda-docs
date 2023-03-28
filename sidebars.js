@@ -239,6 +239,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/aws-lambda",
             "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/google-maps-platform",
             "components/connectors/out-of-the-box-connectors/graphql",
             "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",

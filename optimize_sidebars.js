@@ -610,6 +610,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/googledrive/"
             ),
             docsLink(
+              "Google Maps Platform Connector",
+              "components/connectors/out-of-the-box-connectors/google-maps-platform/"
+            ),
+            docsLink(
               "GraphQL Connector",
               "components/connectors/out-of-the-box-connectors/graphql/"
             ),
