@@ -1,10 +1,10 @@
 ---
 id: power-automate
 title: Power Automate Connector
-description: Orchestrate your Power Automate Desktop Flows with Camunda to trigger, get the status, or get the outputs of the flow.
+description: Orchestrate your Power Automate desktop flows with Camunda to trigger, get the status, or get the outputs of the flow.
 ---
 
-The **Power Automate Connector** allows you to orchestrate a Power Automate Desktop Flow from your BPMN process with [Power Automate](https://powerautomate.microsoft.com).
+The **Power Automate Connector** allows you to orchestrate a Power Automate desktop flow from your BPMN process with [Power Automate](https://powerautomate.microsoft.com).
 
 :::note
 This Connector is designed to orchestrate desktop flows only.
@@ -16,7 +16,7 @@ To use the Power Automate Connector, ensure you have configured the following:
 
 1. [Azure AD application](https://portal.azure.com) with proper permissions. Visit the [official documentation](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-register-app-azure-active-directory#create-an-application-registration) to see how you can create one.
 2. [Create an application user](https://learn.microsoft.com/en-us/power-platform/admin/manage-application-users#create-an-application-user) and add security roles.
-3. [Power Automate desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install), and sign in to create your Power Automate Flow.
+3. [Power Automate desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install), and sign in to create your Power Automate flow.
 4. [Power Automate machine runtime desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/manage-machines#register-a-new-machine) to manage and troubleshoot machine settings, and enable the on-premise data gateway to access your machine data.
 5. Power Automate [on-premises data gateway desktop application](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install#install-an-on-premises-data-gateway) to create a connection between the cloud environment and your desktop app.
 
