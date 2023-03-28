@@ -66,6 +66,8 @@ tasklist:
   contextPath: "/tasklist"
 
 webModeler:
+  # The context path is used for the web application that will be accessed by users in the browser.
+  # In addition, a WebSocket endpoint will be exposed on "[contextPath]-ws", e.g. "/modeler-ws".
   contextPath: "/modeler"
 
 zeebe-gateway:
@@ -88,6 +90,7 @@ helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
 Once deployed, you can access the Camunda Platform 8 components on:
 
 - **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler]`
+  - _Note_: Web Modeler also exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used by the application itself and not supposed to be accessed by users directly.
 - **Keycloak authentication:** `https://camunda.example.com/auth`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 

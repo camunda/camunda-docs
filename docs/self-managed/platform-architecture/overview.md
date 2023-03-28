@@ -16,6 +16,7 @@ Camunda Platform 8 Self-Managed has multiple web applications and gRPC services 
 In this architecture, Camunda Platform 8 Self-Managed can be accessed as follows:
 
 - Web applications: `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler]`
+  - _Note_: Web Modeler also exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used by the application itself and not supposed to be accessed by users directly.
 - Keycloak authentication: `https://camunda.example.com/auth`
 - Zeebe gateway: `grpc://zeebe.camunda.example.com`
 
