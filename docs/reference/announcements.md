@@ -4,6 +4,11 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Upgrading to 8.2
+
+- It is recommended that a sequential upgrade path be followed when upgrading to version 8.2. For example, if running on version 8.0, first upgrade to 8.1, thereafter upgrade to 8.2
+- Migration of data during the version 8.2 upgrade could take longer than previous versions, especially for datasets containing a large number of incidents data.
+
 ## Deprecated in 8.0
 
 The [DeployProcess RPC](/apis-clients/grpc.md#deployprocess-rpc) was deprecated in 8.0.
