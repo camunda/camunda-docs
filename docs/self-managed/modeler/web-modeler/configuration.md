@@ -16,9 +16,9 @@ The different components of Web Modeler Self-Managed can be configured using env
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
 - If you are using the Camunda Platform 8 [Helm chart](../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler-beta).
 
-### Configuration of the `restapi` component
+## Configuration of the `restapi` component
 
-#### Database
+### Database
 
 Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported.)
 
@@ -30,7 +30,52 @@ Web Modeler requires a PostgreSQL database as persistent data storage (other dat
 | `RESTAPI_DB_USER`     | Database user name     | `modeler-user`         |
 | `RESTAPI_DB_PASSWORD` | Database user password | \*\*\*                 |
 
-#### SMTP / email
+#### Configuring SSL for the Database Connection
+
+The generic way to configure an SSL connection between Web Modeler and the database is as follows:
+
+- Modify database connection URL `SPRING_DATASOURCE_URL` and customize connection parameters
+- Provide SSL certificates and keys to the `restapi` component, if required
+
+Please consult https://jdbc.postgresql.org/documentation/ssl/ for a description
+of the different SSL modes and the security they provide.
+
+If you want a full list of all available connection parameters, please consult https://jdbc.postgresql.org/documentation/use/#connection-parameters/
+
+Below are examples for common scenarios, increasing in the level of security they provide.
+
+**SSL Mode "required"**
+
+In this mode an SSL connection will be established between Web Modeler and the database. This mode is still prone
+to Man-in-the-middle attacks.
+
+- Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?sslmode=reqired`
+
+No certificates are needed for this mode.
+
+**SSL Mode "verify-full"**
+
+In this mode, Web Modeler will request a certificate from the database server to verify its identity. This mode is not
+prone to Man-in-the-middle attacks.
+
+In order to enable this mode, you need to mount the root certificate with which the server certificate was signed.
+
+- Provide root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`
+- Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`
+
+**SSL Mode "verify-full" with Client Certificates**
+
+In this mode, the server will also request a certificate from the client.
+
+In order to enable this mode, you also need to mount the client certificates.
+
+- Provide client certificates at these locations:
+  - `myClientCertificate.pk8 -> ~/.postgresl/postgresql.pk8`
+  - `myClientCertificate.crt -> ~/.postgresl/postgresql.crt`
+- Provide root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`
+- Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`
+
+### SMTP / email
 
 Web Modeler requires an SMTP server to send notification emails to users.
 
@@ -45,7 +90,7 @@ Web Modeler requires an SMTP server to send notification emails to users.
 | `RESTAPI_MAIL_FROM_NAME`    | [optional]<br/>Name displayed as the sender of emails sent by Web Modeler.                             | `Camunda`                     | `Camunda`     |
 | `RESTAPI_SERVER_URL`        | URL at which users access Web Modeler in the browser (used to construct links in notification emails). | `https://modeler.example.com` | -             |
 
-#### WebSocket
+### WebSocket
 
 The `restapi` component sends certain events (e.g. "file updated", "comment added") to the [WebSocket](#configuration-of-the-websocket-component) server.
 
@@ -57,7 +102,7 @@ The `restapi` component sends certain events (e.g. "file updated", "comment adde
 | `RESTAPI_PUSHER_KEY`    | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)    | \*\*\*               |
 | `RESTAPI_PUSHER_SECRET` | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websocket-component) | \*\*\*               |
 
-#### Identity / Keycloak
+### Identity / Keycloak
 
 Web Modeler integrates with Identity and Keycloak for authentication and authorization (using OAuth 2.0 + OpenID Connect) as well as user management.
 
@@ -67,9 +112,9 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL` | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `RESTAPI_OAUTH2_TOKEN_ISSUER` is used. | `http://keycloak:8080/auth/realms/camunda-platform`         |
 | `RESTAPI_IDENTITY_BASE_URL`               | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                      | `http://identity:8080`                                      |
 
-### Configuration of the `webapp` component
+## Configuration of the `webapp` component
 
-#### General
+### General
 
 | Environment variable      | Description                                                                                                                            | Example value                                                    | Default value |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------- |
@@ -79,7 +124,7 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                 | `8081`                                                           | `8081`        |
 | `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.              | `8091`                                                           | `8091`        |
 
-#### Identity / Keycloak
+### Identity / Keycloak
 
 | Environment variable    | Description                                                                                                                               | Example value                                                                     | Default value |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
@@ -92,7 +137,7 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `KEYCLOAK_JWKS_URL`     | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                 | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
 | `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                 | `http://identity:8080`                                                            | -             |
 
-#### WebSocket
+### WebSocket
 
 The `webapp` component sends certain events (e.g. "user opened diagram", "user left diagram") to the [WebSocket server](#configuration-of-the-websocket-component) and can also react to such events (e.g. show a notification in the UI that a user left the diagram).
 
@@ -109,7 +154,7 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 | `CLIENT_PUSHER_KEY`       | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*               | -             |
 | `CLIENT_PUSHER_FORCE_TLS` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`               | `false`       |
 
-### Configuration of the `websocket` component
+## Configuration of the `websocket` component
 
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/9.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
@@ -120,7 +165,7 @@ The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web
 | `PUSHER_APP_SECRET`  | A unique secret used for authentication. Provide a random alphanumeric string of at least 20 characters.                                                                 | \*\*\*        | -             |
 | `PUSHER_APP_PATH`    | [optional]<br/>Base path of the WebSocket endpoint. Can be used to expose the endpoint on a sub path instead of the domain root (e.g. `https://example.com/modeler-ws`). | `/modeler-ws` | `/`           |
 
-### Notes on host names and port numbers
+## Notes on host names and port numbers
 
 - _Internal_ refers to host names and port numbers that are only used inside a Docker Compose network or Kubernetes cluster for backend-to-backend communication.
 - _External_ refers to host names and port numbers that are exposed to the outside and can be reached from a web browser.
