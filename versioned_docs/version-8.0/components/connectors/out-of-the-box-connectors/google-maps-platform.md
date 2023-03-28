@@ -2,10 +2,10 @@
 id: google-maps-platform
 title: Google Maps Platform
 sidebar_label: GitHub Webhook
-description: Learn how to validate addresses, retrieves postal addresses and calculates distances with Google Maps Platform Connector.
+description: Learn how to validate addresses, retrieve postal addresses, and calculate distances with Google Maps Platform Connector.
 ---
 
-The **Google Maps Platform Connector** allows to validate addresses, retrieves postal addresses and calculates distances with [Google Maps Platform Service](https://mapsplatform.google.com/) in BPMN process.
+The **Google Maps Platform Connector** allows you to validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) in BPMN process.
 
 ## Create a Google Maps Platform Connector task
 
@@ -13,7 +13,7 @@ To use a **Google Maps Platform Connector** in your process, either change the t
 
 ## Make your Google Maps Platform Connector executable
 
-To work with Google Maps Platform Connector, choose the required operation type in the **Operation** section and enable required Google Service API witch depend on operation, set the API Key in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel.
+To work with the Google Maps Platform Connector, choose the required operation type in the **Operation** section and enable the required Google Service API (which depends on the operation). Set the API key in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel.
 
 :::note
 All the mandatory and non-mandatory fields and required settings depending on the operation selection you choose are covered in the upcoming sections.
@@ -21,7 +21,7 @@ All the mandatory and non-mandatory fields and required settings depending on th
 
 ## Authentication
 
-In the **Authentication** section you need to set the relevant API Key. See an [official documentation](https://cloud.google.com/docs/authentication/api-keys#create) for find how to create an API key.
+In the **Authentication** section, set the relevant API key. See the [official documentation](https://cloud.google.com/docs/authentication/api-keys#create) for more information on creating an API key.
 
 :::note
 We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
@@ -32,32 +32,32 @@ We advise you to keep your authentications and secrets data safe and avoid expos
 
 ## Operation types
 
-### Validate Address
+### Validate address
 
-This operation allows to validate an address and its components, standardize the address for mailing, and determine the best known geocode for it.
-To use this operation you need to have enabled [Google Address Validation API](https://developers.google.com/maps/documentation/address-validation/overview). See [official documentation](https://developers.google.com/maps/documentation/address-validation/cloud-setup) to find how to enable Google API.
+This operation allows you to validate an address and its components, standardize the address for mailing, and determine the best known geocode for it.
+To use this operation, enable the [Google Address Validation API](https://developers.google.com/maps/documentation/address-validation/overview). See the [official documentation](https://developers.google.com/maps/documentation/address-validation/cloud-setup) for more information on enabling the Google API.
 
-### Get Place ID
+### Get place ID
 
-This operation allows to get Google Maps place ID by address.
-To use this operation you need to have enabled [Google Places API](https://developers.google.com/maps/documentation/places/web-service). See [official documentation](https://developers.google.com/maps/documentation/places/web-service/get-api-key) to find how to enable Google API.
+This operation allows you to get the Google Maps place ID by address.
+To use this operation, enable the [Google Places API](https://developers.google.com/maps/documentation/places/web-service). See the [official documentation](https://developers.google.com/maps/documentation/places/web-service/get-api-key) for more information on enabling the Google API.
 
-### Calculate Distance
+### Calculate distance
 
-This operation allows to calculate a distance between two place IDs.
-To use this operation you need to have enabled [Google Directions API](https://developers.google.com/maps/documentation/directions). See [official documentation](https://developers.google.com/maps/documentation/directions/get-api-key) to find how to enable Google API.
+This operation allows you to calculate a distance between two place IDs.
+To use this operation, enable the [Google Directions API](https://developers.google.com/maps/documentation/directions). See the [official documentation](https://developers.google.com/maps/documentation/directions/get-api-key) for more information on enabling the Google API.
 
 ## Usage
 
-### Address Validation, Formatting, Getting Postal address
+### Address validation, formatting, getting postal address
 
 1. Select **Validate Address** from the **Operation type** dropdown in the **Operation** section.
-2. Populate **Authentication section** as described in the [respective section](#authentication).
+2. Populate the **Authentication** section as described in the [respective section](#authentication).
 3. (Optional) In the **Input** section, set **Region Code** (i.e `US`). You can find supported region codes [here](https://developers.google.com/maps/documentation/address-validation/coverage).
 4. (Optional) In the **Input** section, set **Locality**, an incorporated city or town political entity (i.e `Mountain View`).
 5. In the **Input** section, set **Address**, an incorporated city or town political entity (i.e `1600 Amphitheatre Pkwy`).
-6. In the **Output** section set **Result Variable** or **Result Expression**. See [Response Mapping documentation](https://docs.camunda.io/docs/components/connectors/use-connectors/#response-mapping) for learn more.
-7. Get from response needed information. Full example of response you can find [here](https://developers.google.com/maps/documentation/address-validation/requests-validate-address#address_validation_response). For example, if you want to get postal address and formatted address, you can set to **Result Expression** next FEEl Expression :
+6. In the **Output** section set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors.md#response-mapping) to learn more.
+7. Get from response needed information. Find a full example of the response [here](https://developers.google.com/maps/documentation/address-validation/requests-validate-address#address_validation_response). For example, if you want to get postal address and formatted address, you can set to **Result Expression** next FEEl Expression :
 
 ```
 {
@@ -66,12 +66,12 @@ To use this operation you need to have enabled [Google Directions API](https://d
 }
 ```
 
-### Get Place ID
+### Get place ID
 
 1. Select **Get Place ID** from the **Operation type** dropdown in the **Operation** section.
-2. Populate **Authentication section** as described in the [respective section](#authentication).
-3. In the **Input** section, set **Address**. For better result this address can be `formatedAddress` witch you can get using [this example](#address-validation-formatting-getting-postal-address).
-4. In the **Output** section in **Result Expression** property you can change name of `placeId` response. By default, in **Result Expression** properties you can find next expression:
+2. Populate the **Authentication** section as described in the [respective section](#authentication).
+3. In the **Input** section, set **Address**. This address can be `formatedAddress`, which you can get using [this example](#address-validation-formatting-getting-postal-address).
+4. In the **Output** section in the **Result Expression** property, you can change the name of the `placeId` response. By default, in **Result Expression** properties you can find next expression:
 
 ```
 {
@@ -79,15 +79,15 @@ To use this operation you need to have enabled [Google Directions API](https://d
 }
 ```
 
-### Calculate Distance
+### Calculate distance
 
 1. Select **Calculate Distance** from the **Operation type** dropdown in the **Operation** section.
-2. Populate **Authentication section** as described in the [respective section](#authentication).
+2. Populate the **Authentication** section as described in the [respective section](#authentication).
 3. In the **Input** section, set **Destination**, the place ID value that you want to use as the destination for calculating distance.
 4. In the **Input** section, set **Origin**, the place ID value that you want to use as the starting point for calculating distance.
 5. Select the unit system to use when displaying results from the **Units** dropdown in the **Input** section.
 6. Select the transportation mode to use when calculating distances and directions from the **Mode** dropdown in the **Input** section.
-7. In the **Output** section set **Result Variable** or **Result Expression**. See [Response Mapping documentation](https://docs.camunda.io/docs/components/connectors/use-connectors/#response-mapping) for learn more.
+7. In the **Output** section, set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors.md#response-mapping) to learn more.
 8. Get from response needed information. Full example of response you can find [here](https://developers.google.com/maps/documentation/directions/start#getting-directions). For example, if you want to get a distance you can set to **Result Expression** next FEEl Expression :
 
 ```
@@ -99,7 +99,7 @@ To use this operation you need to have enabled [Google Directions API](https://d
 ## Using Google Maps Platform Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
-To learn more, see an entry _Solution with Timer and Loop_ on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
+To learn more, see the entry titled _Solution with Timer and Loop_ on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
 
 :::note
 To avoid performance issues, it is recommended to limit the number of loop retries.

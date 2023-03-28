@@ -13,7 +13,7 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 - [Amazon SQS Connector](aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
 - [AWS Lambda Connector](aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
 - [Google Drive Connector](googledrive.md) - Create folders or files from a [Google Drive](https://www.google.com/drive/) template from your BPMN process.
-- [Google Maps Platform Connector](google-maps-platform.md) - Validate addresses, retrieves postal addresses and calculates distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process.
+- [Google Maps Platform Connector](google-maps-platform.md) - Validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process.
 - [GraphQL Connector](graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
 - [Kafka Producer Connector](kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [Microsoft Teams Connector](microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
