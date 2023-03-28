@@ -26,6 +26,210 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ## Configuration
 
+### zeebe.broker.gateway
+
+To configure the embedded gateway, see [Gateway config docs](self-managed/zeebe-depolyment/configuration/gateway-config).
+
+<table name="gateway" id="zeebe">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Example value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>enable</td>
+            <td>Enable the embedded gateway to start on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`.</td>
+            <td>False</td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+broker:
+    gateway:
+      enable: false
+```
+
+### zeebe.broker.network
+
+This section contains the network configuration. Particularly, it allows to configure the hosts and ports the broker should bind to. The broker exposes two sockets:
+
+  1. command: the socket which is used for gateway-to-broker communication 
+  2. internal: the socket which is used for broker-to-broker communication
+
+<table name="network" id="network">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Default Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>host</td>
+            <td>Controls the default host the broker should bind to. Can be overwritten on a per binding basis for client, management and replication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_HOST`.</td>
+            <td>0.0.0.0</td>
+        </tr>
+        <tr>
+            <td>advertisedHost</td>
+            <td>Controls the advertised host; if omitted defaults to the host. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_ADVERTISEDHOST`.</td>
+            <td>0.0.0.0</td>
+        </tr>
+        <tr>
+            <td>portOffset</td>
+            <td>If a port offset is set it will be added to all ports specified in the config or the default values. This is a shortcut to not always specifying every port. The offset will be added to the second last position of the port, as Zeebe requires multiple ports. As example a portOffset of 5 will increment all ports by 50, i.e. 26500 will become 26550 and so on. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_PORTOFFSET`.</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>maxMessageSize</td>
+            <td>Sets the maximum size of the incoming and outgoing messages (i.e. commands and events). This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_MAXMESSAGESIZE`.</td>
+            <td>4MB</td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+network:
+    host: 0.0.0.0
+    advertisedHost: 0.0.0.0
+    portOffset: 0
+    maxMessageSize: 4MB
+```
+
+### zeebe.broker.network.security
+
+<table name="security" id="security">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Default Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>enabled</td>
+            <td>Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`.</td>
+            <td>False</td>
+        </tr>
+        <tr>
+            <td>certificateChainPath</td>
+            <td>Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH`.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>privateKeyPath</td>
+            <td>Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH`.</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+security:
+    enabled: false
+    certificateChainPath:
+    privateKeyPath:
+```
+
+### zeebe.broker.network.commandApi
+
+<table name="commandApi" id="commandApi">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Default Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>host</td>
+            <td>Overrides the host used for gateway-to-broker communication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_COMMANDAPI_HOST`.</td>
+            <td>0.0.0.0</td>
+        </tr>
+        <tr>
+            <td>port</td>
+            <td>Sets the port used for gateway-to-broker communication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_COMMANDAPI_PORT`.</td>
+            <td>26501</td>
+        </tr>
+        <tr>
+            <td>advertisedHost</td>
+            <td>Controls the advertised host; if omitted defaults to the host. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_COMMANDAPI_ADVERTISEDHOST`.</td>
+            <td>0.0.0.0</td>
+        </tr>
+        <tr>
+            <td>advertisedPort</td>
+            <td>Controls the advertised port; if omitted defaults to the port. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_COMMANDAPI_ADVERTISEDPORT`.</td>
+            <td>25601</td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+commandApi:
+    host: 0.0.0.0
+    port: 26501
+    advertisedHost: 0.0.0.0
+    advertisedPort: 25601
+```
+
+### zeebe.broker.network.internalApi
+
+<table name="internalApi" id="internalApi">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Default Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>host</td>
+            <td>Overrides the host used for internal broker-to-broker communication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_INTERNALAPI_HOST`.</td>
+            <td>0.0.0.0</td>
+        </tr>
+        <tr>
+            <td>port</td>
+            <td>Sets the port used for internal broker-to-broker communication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_INTERNALAPI_PORT`.</td>
+            <td>26502</td>
+        </tr>
+        <tr>
+            <td>advertisedHost</td>
+            <td>Controls the advertised host; if omitted defaults to the host. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_INTERNALAPI_ADVERTISEDHOST`.</td>
+            <td>0.0.0.0</td>
+        </tr>
+        <tr>
+            <td>advertisedPort</td>
+            <td>Controls the advertised port; if omitted defaults to the port. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_INTERNALAPI_ADVERTISEDPORT`.</td>
+            <td>25602</td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+internalApi:
+    host: 0.0.0.0
+    port: 26502
+    advertisedHost: 0.0.0.0
+    advertisedPort: 25602
+```
+
 <table name="zeebe" id="zeebe">
     <thead>
         <tr>
@@ -36,22 +240,7 @@ Relative paths are resolved relative to the installation directory of the broker
     </thead>
     <tbody>
         <tr>
-            <td>broker</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;broker.gateway</td>
-            <td></td>
-            <td>*AMARA COMMENT* Since broker and gateway have no config, can I delete or use dot notation? </td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;enable</td>
-            <td>Enable the embedded gateway to start on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`.</td>
-            <td>False</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;network</td>
+            <td>network</td>
             <td>This section contains the network configuration. Particularly, it allows to configure the hosts and ports the broker should bind to. The broker exposes two sockets:
             1. command: the socket which is used for gateway-to-broker communication
             2. internal: the socket which is used for broker-to-broker communication</td>
@@ -134,48 +323,49 @@ Relative paths are resolved relative to the installation directory of the broker
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port</td>
+            <td>Sets the port used for internal broker-to-broker communication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_INTERNALAPI_PORT`.</td>
             <td>26502</td>
-            <td>Lorem ipsum dolor sit.</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;advertisedHost</td>
+            <td>Controls the advertised host; if omitted defaults to the host. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_INTERNALAPI_ADVERTISEDHOST`.</td>
             <td>0.0.0.0</td>
-            <td>Lorem ipsum dolor sit.</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;advertisedPort</td>
+            <td>Controls the advertised port; if omitted defaults to the port. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_INTERNALAPI_ADVERTISEDPORT`.</td>
             <td>25602</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;quis&#x27; b&#x27;mi&#x27; b&#x27;a&#x27; b&#x27;sem&#x27; b&#x27;mauris&#x27;.</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;data</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;orci&#x27; b&#x27;id&#x27; b&#x27;a&#x27; b&#x27;a&#x27;.</td>
+            <td>This section allows to configure Zeebe's data storage. Data is stored in "partition folders".</td>
+            <td></td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;directory</td>
+            <td>Specify the directory in which data is stored. This setting can also be overridden using the environment variable ZEEBE_BROKER_DATA_DIRECTORY.</td>
             <td>data</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nunc&#x27;.</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;runtimeDirectory</td>
+            <td>Specify the directory in which runtime is stored. By default runtime is stored in `directory` for data. If runtimeDirectory is configured, then the configured directory will be used. It will have a subdirectory for each partition to store its runtime. There is no need to store runtime in a persistent storage. This configuration allows to split runtime to another disk to optimize for performance and disk usage.
+            Note: If runtime is another disk than the data directory, files need to be copied to data directory while taking snapshot. This may impact disk i/o or performance during snapshotting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_RUNTIMEDIRECTORY`.</td>
             <td>None</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;erat&#x27;.</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;logSegmentSize</td>
+            <td>The size of data log segment files. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_LOGSEGMENTSIZE`.</td>
             <td>128MB</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;eget&#x27; b&#x27;mi&#x27; b&#x27;a&#x27; b&#x27;in&#x27;.</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;snapshotPeriod</td>
+            <td>How often we take snapshots of streams (time unit). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_SNAPSHOTPERIOD`.</td>
             <td>15m</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;urna&#x27;.</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;disk</td>
             <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nisl&#x27;.</td>
+            <td>Configure disk monitoring to prevent getting into a non-recoverable state due to out of disk space. When monitoring is enabled, the broker rejects commands and pause replication when the required freeSpace is not available. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_ENABLEMONITORING`.</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enableMonitoring</td>
