@@ -30,44 +30,44 @@ Web Modeler requires a PostgreSQL database as persistent data storage (other dat
 | `RESTAPI_DB_USER`     | Database user name     | `modeler-user`         |
 | `RESTAPI_DB_PASSWORD` | Database user password | \*\*\*                 |
 
-#### Configuring SSL for the Database Connection
+#### Configuring SSL for the database connection
 
 The generic way to configure an SSL connection between Web Modeler and the database is as follows:
 
-- Modify database connection URL `SPRING_DATASOURCE_URL` and customize connection parameters
-- Provide SSL certificates and keys to the `restapi` component, if required
+- Modify database connection URL `SPRING_DATASOURCE_URL` and customize connection parameters.
+- Provide SSL certificates and keys to the `restapi` component, if required.
 
-Please consult https://jdbc.postgresql.org/documentation/ssl/ for a description
-of the different SSL modes and the security they provide.
+Consult the [PostgreSQL documentation](https://jdbc.postgresql.org/documentation/ssl/) for a description
+of the different SSL modes and the security provided.
 
-If you want a full list of all available connection parameters, please consult https://jdbc.postgresql.org/documentation/use/#connection-parameters/
+For a full list of all available connection parameters, visit the [PostgreSQL documentation](https://jdbc.postgresql.org/documentation/use/#connection-parameters/).
 
 Below are examples for common scenarios, increasing in the level of security they provide.
 
-**SSL Mode "required"**
+**SSL mode "required"**
 
-In this mode an SSL connection will be established between Web Modeler and the database. This mode is still prone
-to Man-in-the-middle attacks.
+In this mode, an SSL connection is established between Web Modeler and the database. This mode is still prone
+to man-in-the-middle attacks.
 
 - Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?sslmode=reqired`
 
 No certificates are needed for this mode.
 
-**SSL Mode "verify-full"**
+**SSL mode "verify-full"**
 
-In this mode, Web Modeler will request a certificate from the database server to verify its identity. This mode is not
-prone to Man-in-the-middle attacks.
+In this mode, Web Modeler requests a certificate from the database server to verify its identity. This mode is not
+prone to man-in-the-middle attacks.
 
-In order to enable this mode, you need to mount the root certificate with which the server certificate was signed.
+To enable this mode, mount the root certificate with which the server certificate was signed.
 
 - Provide root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`
 - Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`
 
-**SSL Mode "verify-full" with Client Certificates**
+**SSL mode "verify-full" with client certificates**
 
-In this mode, the server will also request a certificate from the client.
+In this mode, the server requests a certificate from the client.
 
-In order to enable this mode, you also need to mount the client certificates.
+To enable this mode, mount the client certificates.
 
 - Provide client certificates at these locations:
   - `myClientCertificate.pk8 -> ~/.postgresl/postgresql.pk8`
