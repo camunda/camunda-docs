@@ -160,7 +160,7 @@ The **members** property must contain a list of members:
 ]
 ```
 
-#### Chat Methods
+#### Chat methods
 
 |        Method         | Use [protected APIs](https://learn.microsoft.com/en-us/graph/teams-protected-apis) | Available for [client credentials type authentication](#client-credentials-type-authentication) |                                            Link to method documentation with required permissions and return value                                             |
 | :-------------------: | :--------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -192,7 +192,7 @@ The **members** property must contain a list of members:
 |      With replies       |                                                                                 List channel messages                                                                                  |   Yes    | boolean  |        Choose **FALSE** for get messages without replies<br/>Choose **FALSE** for get messages without replies         |
 |       Message ID        |                                                                                  List message replies                                                                                  |   Yes    |  string  |                                           Microsoft Teams channel message id                                           |
 
-#### Methods
+#### Channel methods
 
 |         Method          | Use [protected APIs](https://learn.microsoft.com/en-us/graph/teams-protected-apis) | Available for [client credentials type authentication](#client-credentials-type-authentication) | Link to method documentation with required permissions and return value                                                                                                    |
 | :---------------------: | :--------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
