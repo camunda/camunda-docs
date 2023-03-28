@@ -728,6 +728,7 @@ module.exports = {
           "Access control": [
             "self-managed/concepts/access-control/applications",
             "self-managed/concepts/access-control/apis",
+            "self-managed/concepts/access-control/groups",
             "self-managed/concepts/access-control/permissions",
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
@@ -1031,6 +1032,14 @@ module.exports = {
         "self-managed/identity/getting-started/install-identity",
         {
           "User guide": [
+            {
+              Groups: [
+                "self-managed/identity/user-guide/groups/creating-a-group",
+                "self-managed/identity/user-guide/groups/assigning-users-to-a-group",
+                "self-managed/identity/user-guide/groups/assigning-roles-to-a-group",
+                "self-managed/identity/user-guide/groups/creating-authorizations-for-a-group",
+              ],
+            },
             "self-managed/identity/user-guide/adding-an-application",
             "self-managed/identity/user-guide/adding-an-api",
             "self-managed/identity/user-guide/adding-a-permission",
