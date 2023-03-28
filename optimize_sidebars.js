@@ -1560,6 +1560,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
             "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
             "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
