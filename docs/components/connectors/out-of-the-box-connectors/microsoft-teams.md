@@ -96,7 +96,7 @@ For a **Client credentials** type authentication, take the following steps:
 ![client credentials](../img/connectors-microsoft-teams-client-credentials.png)
 
 :::note
-With **Client credentials** type authentication some methods of the **Microsoft Teams Connector** can be not available. Details in the [chat methods table](#chat-methods) and in the [channel methods table](#channel-methods);
+With **Client credentials** type authentication, some methods of the **Microsoft Teams Connector** may not be available. Find more details in the [chat methods table](#chat-methods) and [channel methods table](#channel-methods).
 :::
 
 ## Conversation type and method
