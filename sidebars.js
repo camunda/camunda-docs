@@ -522,7 +522,7 @@ module.exports = {
     },
   ],
   "APIs & Tools": [
-    "apis-clients/working-with-apis-tools",
+    "apis-tools/working-with-apis-tools",
     {
       APIs: [
         "apis-clients/public-api",
@@ -938,6 +938,10 @@ module.exports = {
             optimizeLink(
               "Instructions",
               "self-managed/optimize-deployment/migration-update/instructions/"
+            ),
+            optimizeLink(
+              "Update notes (3.9 to 3.10)",
+              "self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
             ),
             optimizeLink(
               "Update notes (3.9.x-preview-x to 3.9.x)",

@@ -1,5 +1,6 @@
 ---
-id: working-with-apis-clients
+# This page exists in apis-tools, instead of apis-clients, because the location needs to be consistent across all versions.
+id: working-with-apis-tools
 title: "Working with APIs & Clients"
 sidebar_label: "Working with APIs & Clients"
 description: "Programmatically work with Camunda Platform 8 through APIs & clients"
@@ -19,9 +20,9 @@ Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](/apis-c
 
 ### Additional APIs
 
-- [Public API](public-api.md) - Camunda Platform 8's provided public API.
-- [Cloud Console API clients (REST)](console-api-reference.md) - Enables you to programmatically create and manage clusters, and interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI.
-- [Zeebe API](grpc.md) - Zeebe clients use gRPC to communicate with the cluster.
+- [Public API](../apis-clients/public-api.md) - Camunda Platform 8's provided public API.
+- [Cloud Console API clients (REST)](../apis-clients/console-api-reference.md) - Enables you to programmatically create and manage clusters, and interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI.
+- [Zeebe API](../apis-clients/grpc.md) - Zeebe clients use gRPC to communicate with the cluster.
 
 :::note
 Additionally, visit our documentation on [Operate](../self-managed/operate-deployment/usage-metrics.md) and [Tasklist](../self-managed/tasklist-deployment/usage-metrics.md) usage metric APIs.
@@ -43,23 +44,22 @@ Camunda Platform 8 provides several official clients based on this API. Official
 
 ### Official clients
 
-- [Java](java-client/index.md)
-- [Go](go-client/go-get-started.md)
-- [CLI](cli-client/index.md)
+- [Java](../apis-clients/java-client/index.md)
+- [Go](../apis-clients/go-client/go-get-started.md)
+- [CLI](../apis-clients/cli-client/index.md)
 
 ### Community clients
 
 Community clients supplement the official clients. These clients have not been tested by Camunda.
 
-- [C#](community-clients/c-sharp.md)
-- [JavaScript/NodeJS](community-clients/javascript.md)
-- [Micronaut](community-clients/micronaut.md)
-- [Python](community-clients/python.md)
-- [Ruby](community-clients/ruby.md)
-- [Rust](community-clients/rust.md)
-- [Spring](community-clients/spring.md)
-- [Quarkus](community-clients/quarkus.md)
+- [C#](../apis-clients/community-clients/c-sharp.md)
+- [JavaScript/NodeJS](../apis-clients/community-clients/javascript.md)
+- [Micronaut](../apis-clients/community-clients/micronaut.md)
+- [Python](../apis-clients/community-clients/python.md)
+- [Ruby](../apis-clients/community-clients/ruby.md)
+- [Rust](../apis-clients/community-clients/rust.md)
+- [Spring](../apis-clients/community-clients/spring.md)
 
 You can browse other community extensions and the most up-to-date list of community clients [here](https://github.com/orgs/camunda-community-hub/repositories).
 
-Finally, it is possible to [build your own client](build-your-own-client.md) if none of the other options are suitable.
+Finally, it is possible to [build your own client](../apis-clients/build-your-own-client.md) if none of the other options are suitable.

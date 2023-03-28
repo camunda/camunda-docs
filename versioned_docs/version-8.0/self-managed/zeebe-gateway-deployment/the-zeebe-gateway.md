@@ -13,7 +13,7 @@ To summarize, the Zeebe broker is the main part of the Zeebe cluster, which does
 
 ![Zeebe gateway overview](assets/zeebe-gateway-overview.png)
 
-To interact with the Zeebe cluster, the Zeebe client sends a command as a gRPC message to the Zeebe Gateway (to port `26500` by default). Given the gateway supports gRPC, the user can use several clients in different languages to interact with the Zeebe cluster. For more information, read our [overview](../../apis-clients/working-with-apis-clients.md).
+To interact with the Zeebe cluster, the Zeebe client sends a command as a gRPC message to the Zeebe Gateway (to port `26500` by default). Given the gateway supports gRPC, the user can use several clients in different languages to interact with the Zeebe cluster. For more information, read our [overview](../../apis-tools/working-with-apis-tools.md).
 
 :::note
 Be aware Zeebe brokers divide data into partitions (shards), and use RAFT for replication. Read more on RAFT [here](../../components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
@@ -29,7 +29,7 @@ To determine the current leader for the corresponding partition, the gateway mus
 
 The Zeebe Gateway protects the brokers from external sources. It allows the creation of a demilitarized zone ([DMZ](<https://en.wikipedia.org/wiki/DMZ_(computing)>)) and the Zeebe Gateway is the only contact point.
 
-The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. The clients can be kept thin, since the gateway takes care of the cluster topology and forwards the requests to the right partitions. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-clients/working-with-apis-clients.md).
+The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. The clients can be kept thin, since the gateway takes care of the cluster topology and forwards the requests to the right partitions. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../apis-tools/working-with-apis-tools.md).
 
 The gateway can be run and scaled independently of the brokers, which means it translates the messages, distributes them to the correct partition leaders, and separates the concerns of the applications. For example, if your system encounters a spike of incoming requests, and you have set up enough partitions on the broker side up front, but not enough gateways to handle the load, you can easily scale them up.
 

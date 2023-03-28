@@ -890,7 +890,7 @@ The job handler wrapper provides the following benefits:
 - Provides flexible BPMN error handling via **Error Expression** as described in the
   [Connector template](#connector-template) section.
 
-Using the wrapper class, you can create a custom [Zeebe client](../../../apis-clients/working-with-apis-clients.md).
+Using the wrapper class, you can create a custom [Zeebe client](../../../apis-tools/working-with-apis-tools.md).
 For example, you can spin up a custom client with the
 [Zeebe Java client](../../../apis-clients/java-client/index.md) as follows:
 
