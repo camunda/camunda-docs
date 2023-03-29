@@ -22,13 +22,14 @@ The different components of Web Modeler Self-Managed can be configured using env
 
 Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported.)
 
-| Environment variable  | Description            | Example value          |
-| --------------------- | ---------------------- | ---------------------- |
-| `RESTAPI_DB_HOST`     | Database host name     | `postgres.example.com` |
-| `RESTAPI_DB_PORT`     | Database port          | `5432`                 |
-| `RESTAPI_DB_NAME`     | Database name          | `modeler-db`           |
-| `RESTAPI_DB_USER`     | Database user name     | `modeler-user`         |
-| `RESTAPI_DB_PASSWORD` | Database user password | \*\*\*                 |
+| Environment variable    | Description                                                                                                                                                                                                               | Example value                                                            |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `RESTAPI_DB_HOST`       | Database host name                                                                                                                                                                                                        | `postgres.example.com`                                                   |
+| `RESTAPI_DB_PORT`       | Database port                                                                                                                                                                                                             | `5432`                                                                   |
+| `RESTAPI_DB_NAME`       | Database name                                                                                                                                                                                                             | `modeler-db`                                                             |
+| `RESTAPI_DB_USER`       | Database user name                                                                                                                                                                                                        | `modeler-user`                                                           |
+| `RESTAPI_DB_PASSWORD`   | Database user password                                                                                                                                                                                                    | \*\*\*                                                                   |
+| `SPRING_DATASOURCE_URL` | [optional]<br/>Can be used to provide a customized connection string (for example, to enable SSL-secured connections).<br/>If set, `RESTAPI_DB_HOST`, `RESTAPI_DB_PORT`, and `RESTAPI_DB_NAME` don't need to be provided. | `jdbc:postgresql://postgres.example.com:5432/modeler-db?sslmode=require` |
 
 #### Configuring SSL for the database connection
 
@@ -44,14 +45,14 @@ For a full list of all available connection parameters, visit the [PostgreSQL do
 
 Below are examples for common scenarios, increasing in the level of security they provide.
 
-**SSL mode "required"**
+**SSL mode "require"**
 
 In this mode, an SSL connection is established between Web Modeler and the database. This mode is still prone
 to man-in-the-middle attacks.
 
-- Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?sslmode=reqired`
+- Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?sslmode=reqire`
 
-No certificates are needed for this mode.
+No certificates are needed in Web Modeler for this mode.
 
 **SSL mode "verify-full"**
 
@@ -65,7 +66,8 @@ To enable this mode, mount the root certificate with which the server certificat
 
 **SSL mode "verify-full" with client certificates**
 
-In this mode, the server requests a certificate from the client.
+In this mode, Web Modeler requests a certificate from the database server to verify the server`s identity, and
+the server requests a certificate from the client to verify the client's identity
 
 To enable this mode, mount the client certificates.
 
@@ -74,6 +76,9 @@ To enable this mode, mount the client certificates.
   - `myClientCertificate.crt -> ~/.postgresl/postgresql.crt`
 - Provide root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`
 - Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`
+
+Furthermore, configure the database server to verify client certificates:
+[PostgreSQL documentation](https://www.postgresql.org/docs/current/ssl-tcp.html)
 
 ### SMTP / email
 
