@@ -56,7 +56,12 @@ type Task {
   isFirst: Boolean
   formKey: String
   processDefinitionId: String
+  processInstanceId: String
   candidateGroups: [String!]
+  candidateUsers: [String!]
+  followUpDate: DateTime
+  #Due date for Task
+  dueDate: DateTime
 }
 ```
 
@@ -114,9 +119,25 @@ type Task {
 
 > Reference to process definition
 
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>processInstanceId</b></code>](#)<Bullet />[`String`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="scalar"/>
+
+> Reference to process instance id
+
 #### [<code style={{ fontWeight: 'normal' }}>Task.<b>candidateGroups</b></code>](#)<Bullet />[`[String!]`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
 
 > Candidate groups
+
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>candidateUsers</b></code>](#)<Bullet />[`[String!]`](/docs/apis-clients/tasklist-api/scalars/string) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
+
+> Candidate users
+
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>followUpDate</b></code>](#)<Bullet />[`[String!]`](/docs/apis-clients/tasklist-api/scalars/DateTime) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
+
+> Follow-up date for the task
+
+#### [<code style={{ fontWeight: 'normal' }}>Task.<b>dueDate</b></code>](#)<Bullet />[`[String!]`](/docs/apis-clients/tasklist-api/scalars/DateTime) <Badge class="secondary" text="list"/> <Badge class="secondary" text="scalar"/>
+
+> Due date for the task
 
 ### Returned by
 
