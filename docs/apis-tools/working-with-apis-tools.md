@@ -44,23 +44,23 @@ type:"link", href:"/docs/apis-clients/cli-client/index", label: "CLI client", do
 ]}/>
 
 :::note
-Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](../apis-clients/tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
+Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
 :::
 
 ### Community clients
 
 Community clients supplement the official clients. These clients have not been tested by Camunda.
 
-- [C#](../apis-clients/community-clients/c-sharp.md)
-- [JavaScript/NodeJS](../apis-clients/community-clients/javascript.md)
-- [Micronaut](../apis-clients/community-clients/micronaut.md)
-- [Python](../apis-clients/community-clients/python.md)
-- [Ruby](../apis-clients/community-clients/ruby.md)
-- [Rust](../apis-clients/community-clients/rust.md)
-- [Spring](../apis-clients/community-clients/spring.md)
-- [Quarkus](../apis-clients/community-clients/quarkus.md)
+- [C#](community-clients/c-sharp.md)
+- [JavaScript/NodeJS](community-clients/javascript.md)
+- [Micronaut](community-clients/micronaut.md)
+- [Python](community-clients/python.md)
+- [Ruby](community-clients/ruby.md)
+- [Rust](community-clients/rust.md)
+- [Spring](community-clients/spring.md)
+- [Quarkus](community-clients/quarkus.md)
 
-It is also possible to [build your own client](../apis-clients/build-your-own-client.md) You can browse other community extensions and the most up-to-date list of community clients [here](https://github.com/orgs/camunda-community-hub/repositories).
+It is also possible to [build your own client](build-your-own-client.md) You can browse other community extensions and the most up-to-date list of community clients [here](https://github.com/orgs/camunda-community-hub/repositories).
 
 ## Learn about Camunda Components and their APIs
 
