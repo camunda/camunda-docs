@@ -57,7 +57,7 @@ To use this operation, enable the [Google Directions API](https://developers.goo
 4. (Optional) In the **Input** section, set **Locality**, an incorporated city or town political entity (i.e `Mountain View`).
 5. In the **Input** section, set **Address**, an incorporated city or town political entity (i.e `1600 Amphitheatre Pkwy`).
 6. In the **Output** section set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors.md#response-mapping) to learn more.
-7. Get from response needed information. Find a full example of the response [here](https://developers.google.com/maps/documentation/address-validation/requests-validate-address#address_validation_response). For example, if you want to get postal address and formatted address, you can set to **Result Expression** next FEEl Expression :
+7. Full example of the **Google Maps Platform Connector** response you can find [here](https://developers.google.com/maps/documentation/address-validation/requests-validate-address#address_validation_response). If you want to get postal address and formatted address, you can set to **Result Expression** next FEEL Expression :
 
 ```
 {
@@ -71,11 +71,19 @@ To use this operation, enable the [Google Directions API](https://developers.goo
 1. Select **Get Place ID** from the **Operation type** dropdown in the **Operation** section.
 2. Populate the **Authentication** section as described in the [respective section](#authentication).
 3. In the **Input** section, set **Address**. This address can be `formatedAddress`, which you can get using [this example](#address-validation-formatting-getting-postal-address).
-4. In the **Output** section in the **Result Expression** property, you can change the name of the `placeId` response. By default, in **Result Expression** properties you can find next expression:
+4. In the **Output** section in the **Result Expression** property presented the following expression:
 
 ```
 {
    placeId: response.body.candidates[1].place_id
+}
+```
+
+In this way, the response of this method will contain a mapping from the variable 'placeId' and the ID of the place:
+
+```json
+{
+  "placeId": "place....."
 }
 ```
 
@@ -88,7 +96,7 @@ To use this operation, enable the [Google Directions API](https://developers.goo
 5. Select the unit system to use when displaying results from the **Units** dropdown in the **Input** section.
 6. Select the transportation mode to use when calculating distances and directions from the **Mode** dropdown in the **Input** section.
 7. In the **Output** section, set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors.md#response-mapping) to learn more.
-8. Get from response needed information. Full example of response you can find [here](https://developers.google.com/maps/documentation/directions/start#getting-directions). For example, if you want to get a distance you can set to **Result Expression** next FEEl Expression :
+8. Full example of the **Google Maps Platform Connector** response you can find [here](https://developers.google.com/maps/documentation/directions/start#getting-directions). If you want to get a distance you can set to **Result Expression** next FEEL Expression :
 
 ```
 {
