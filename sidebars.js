@@ -237,6 +237,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
+            "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/easy-post",
             "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/googledrive",
