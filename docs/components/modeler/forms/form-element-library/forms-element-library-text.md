@@ -12,6 +12,7 @@ A text component allowing to display static information to the user.
 
 - **Text**: Either an [**Expression**](../../feel/language-guide/feel-expressions-introduction.md), **Markdown**, or **basic HTML** which will be rendered in the form. Note that dangerous HTML elements will not be rendered so to prevent the risk of cross-site scripting using Camunda Forms.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the text.
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
 
 **Example for Markdown**:
 
