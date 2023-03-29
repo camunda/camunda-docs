@@ -12,20 +12,20 @@ For example, `curl 'http://localhost:8080/actuator/backups'` rather than the pre
 :::
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
-Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an id of `backup1` may contain the following Elasticsearch snapshots:
+Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an id of 123 may contain the following Elasticsearch snapshots:
 
 ```
-camunda_operate_backup1_8.1.0_part_1_of_6
-camunda_operate_backup1_8.1.0_part_2_of_6
-camunda_operate_backup1_8.1.0_part_3_of_6
-camunda_operate_backup1_8.1.0_part_4_of_6
-camunda_operate_backup1_8.1.0_part_5_of_6
-camunda_operate_backup1_8.1.0_part_6_of_6
+camunda_operate_123_8.1.0_part_1_of_6
+camunda_operate_123_8.1.0_part_2_of_6
+camunda_operate_123_8.1.0_part_3_of_6
+camunda_operate_123_8.1.0_part_4_of_6
+camunda_operate_123_8.1.0_part_5_of_6
+camunda_operate_123_8.1.0_part_6_of_6
 ```
 
 Operate provides an API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
 
-Note that the backup API can be reached via the Actuator management port, which by default is 8080. The port may be reconfigured with the help of `management.server.port` configuration parameter.
+Note that the backup API can be reached via the Actuator management port, which by default is the same as application HTTP port (which in turn defaults to 8080). The port may be reconfigured with the help of `management.server.port` configuration parameter.
 
 ## Prerequisites
 
@@ -78,7 +78,7 @@ Example request:
 ```
 curl --request POST 'http://localhost:8080/actuator/backups' \
 -H 'Content-Type: application/json' \
--d '{ "backupId": "backup1" }'
+-d '{ "backupId": 123 }'
 ```
 
 Example response:
@@ -86,12 +86,12 @@ Example response:
 ```json
 {
   "scheduledSnapshots": [
-    "camunda_operate_backup1_8.2.0_part_1_of_6",
-    "camunda_operate_backup1_8.2.0_part_2_of_6",
-    "camunda_operate_backup1_8.2.0_part_3_of_6",
-    "camunda_operate_backup1_8.2.0_part_4_of_6",
-    "camunda_operate_backup1_8.2.0_part_5_of_6",
-    "camunda_operate_backup1_8.2.0_part_6_of_6"
+    "camunda_operate_123_8.2.0_part_1_of_6",
+    "camunda_operate_123_8.2.0_part_2_of_6",
+    "camunda_operate_123_8.2.0_part_3_of_6",
+    "camunda_operate_123_8.2.0_part_4_of_6",
+    "camunda_operate_123_8.2.0_part_5_of_6",
+    "camunda_operate_123_8.2.0_part_6_of_6"
   ]
 }
 ```
@@ -116,20 +116,20 @@ Response:
 For example, the request could look like this:
 
 ```
-curl 'http://localhost:8080/actuator/backups/backup1'
+curl 'http://localhost:8080/actuator/backups/123'
 ```
 
 Example response:
 
 ```json
 {
-  "backupId": "backup1",
+  "backupId": 123,
   "state": "COMPLETED",
   "failureReason": null,
   "details":  [
     //here goes the list of all Elasticsearch snapshots included in the backup
     {
-      "snapshotName": "camunda_operate_backup1_8.2.0_part_1_of_6",
+      "snapshotName": "camunda_operate_123_8.2.0_part_1_of_6",
       "state": "SUCCESS",
       "startTime": "2023-01-01T10:10:10.100+0000",
       "failures": []
@@ -179,7 +179,7 @@ Response will contain JSON with array of objects representing state of each back
 To delete all the Elasticsearch snapshots associated with the specific backup id, the following endpoint may be used:
 
 ```
-DELETE actuator/backups/{backupId}
+DELETE actuator/backups/123
 ```
 
 Response:
@@ -204,7 +204,7 @@ To restore the backup with a known backup id, you must restore all the snapshots
 Example of Elasticsearch query:
 
 ```
-curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_backup1_8.1.0-snapshot_part_1_of_6/_restore?wait_for_completion=true`
+curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_123_8.1.0-snapshot_part_1_of_6/_restore?wait_for_completion=true`
 ```
 
 To summarize, the process may look as follows:
