@@ -14,6 +14,6 @@ Zeebe can be configured with the following settings for the disk usage:
 - **zeebe.broker.data.disk.monitoringInterval**: The interval in which the disk space usage is checked (default: 1 second)
 - **zeebe.broker.data.disk.freeSpace.replication**: When the free space available is less than this value, Zeebe pauses receiving replicated events. (default: 1GB)
   - For **production** use cases, we recommend to increase this value and set it approximately to `number of partitions x logSegmentSize + 1GB`.
-- **zeebe.broker.data.disk.freeSpace.processing**: When the free space available is less than this value, Zeebe rejects all user commands and pause processing. (default: 2GB)
+- **zeebe.broker.data.disk.freeSpace.processing**: When the free space available is less than this value, Zeebe rejects all user commands and pauses processing. (default: 2GB)
   - This must be greater than `freeSpace.replication`.
-  - For **production** use cases, we recommend to increase this value and set it minimum to `number of partitions x 2 x logSegmentSize + 1GB`.
+  - For **production** use cases, we recommend increasing this value and setting it at a minimum of `number of partitions x 2 x logSegmentSize + 1GB`.
