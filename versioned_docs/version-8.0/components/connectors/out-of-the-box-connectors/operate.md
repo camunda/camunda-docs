@@ -78,7 +78,8 @@ The following API operations are currently not supported by the **Operate Connec
 
 - Delete process instance
 - Get process definition XML
-  :::
+
+:::
 
 ## Configure operation parameters
 
