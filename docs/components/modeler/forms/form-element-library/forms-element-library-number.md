@@ -18,6 +18,7 @@ A number field allowing the user to read and edit numeric data.
 - **Increment**: Defines the increment between valid field values.
 - **Disabled**: Disables the number field, for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the number.
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
 - **Serialize to string**: Configures the output format of the datetime value. This enables unlimited precision digits.
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: Number field must contain a value.

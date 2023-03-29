@@ -238,12 +238,14 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
             "components/connectors/out-of-the-box-connectors/operate",
+            "components/connectors/out-of-the-box-connectors/easy-post",
             "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/googledrive",
             "components/connectors/out-of-the-box-connectors/graphql",
             "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/rest",
@@ -938,6 +940,10 @@ module.exports = {
             optimizeLink(
               "Instructions",
               "self-managed/optimize-deployment/migration-update/instructions/"
+            ),
+            optimizeLink(
+              "Update notes (3.9 to 3.10)",
+              "self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
             ),
             optimizeLink(
               "Update notes (3.9.x-preview-x to 3.9.x)",
