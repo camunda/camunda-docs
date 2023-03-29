@@ -17,6 +17,7 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 - [GraphQL Connector](graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
 - [Kafka Producer Connector](kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [Microsoft Teams Connector](microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
+- [OpenAI Connector](openai.md) - Interact with [ChatGPT](https://chat.openai.com/) and [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation/overview).
 - [Power Automate Connector](power-automate.md) - Orchestrate your [Power Automate](https://powerautomate.microsoft.com) Flows with Camunda.
 - [RabbitMQ Connector](rabbitmq.md) - Send messages to [RabbitMQ](https://www.rabbitmq.com/) from your BPMN process.
 - [REST Connector](rest.md) - Make a request to a REST API and use the response in the next steps of your process.
