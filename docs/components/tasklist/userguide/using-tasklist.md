@@ -78,3 +78,31 @@ To add a new variable, click **Add Variable**.
 You will now see the completed task by selecting the **Completed** task list:
 
 ![tasklist-task-completed](img/tasklist-task-completed_light.png)
+
+### Processes
+
+> **_NOTE:_** This tab is only available for Self-Managed environments at the moment
+
+It is possible to start processes by demand on Tasklist. For that on the top menu click in Processes - all the processes that you have acces to start will be listed in the Processes page.
+
+![tasklist-processes](img/tasklist-processes.png)
+
+On the Search checkbox, it's possible to filter the processes. For that just start typing the process name and the list will be updated.
+
+![tasklist-processes-search](img/tasklist-processes-search.png)
+
+To start a process, click on the Start Process button on the process that you want to start.
+
+![tasklist-processes-search](img/tasklist-processes-start.png)
+
+Tasklist will then wait for the process to be executed and in case the process generates a task, you will be redirected to the generated task.
+
+### Why I'm not seeing any process?
+
+There could be multiple reasons on why you are not seeing any process in the Processes tab:
+
+- There is no process deployed to your environment
+- Your user doesn't have permission to see any process. Permissions are managed in Identity to allow users to have access to Processes.
+- You are in a SaaS environment
+
+For all the above, contact your administrator to understand why no processes are being displayed.
