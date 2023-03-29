@@ -602,6 +602,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-lambda/"
             ),
             docsLink(
+              "AWS Lambda Connector",
+              "components/connectors/out-of-the-box-connectors/easy-post/"
+            ),
+            docsLink(
               "GitHub Webhook Connector",
               "components/connectors/out-of-the-box-connectors/github-webhook/"
             ),
@@ -650,7 +654,7 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "UIPath Connector",
+              "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
             ),
           ],
