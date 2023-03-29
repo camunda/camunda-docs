@@ -15,7 +15,7 @@ Read our [guide on managing user access](../managing-user-access.md) to learn mo
 
 ![assign-role-to-group-tab](../img/assign-role-to-group-tab.png)
 
-2. Click on **Assign Role**
+2. Click on **Assign Role** and a modal will open:
 
 ![assign-role-to-group-modal-1](../img/assign-role-to-group-modal-1.png)
 

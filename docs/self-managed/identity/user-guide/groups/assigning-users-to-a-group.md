@@ -15,7 +15,7 @@ Read our [guide on managing user access](../managing-user-access.md) to learn mo
 
 ![assign-user-to-group-tab](../img/assign-user-to-group-tab.png)
 
-2. Click on **Assign Members**
+2. Click on **Assign Members** and a modal will open:
 
 ![assign-user-to-group-modal-1](../img/assign-user-to-group-modal-1.png)
 
