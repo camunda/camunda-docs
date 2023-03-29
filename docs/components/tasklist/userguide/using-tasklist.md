@@ -29,29 +29,33 @@ Change the list of tasks by applying filters. You can also collapse and expand t
 You can choose which tasks you want to see:
 
 - All open
-- Claimed by me
-- Unclaimed
+- Assigned to me
+- Unassigned
 - Completed
 
-Initially, we have no **Claimed by me** tasks.
+You can also order the tasks on the left menu, clicking on the icon ![order-icon](img/order-icon.png):
+
+![tasklist-task-ordering](img/tasklist-task-ordering.png)
+
+### Assign a tasks
+
+Initially, we have no **Assigned to me** tasks.
 
 ![tasklist-claimed-by-me-empty](img/tasklist-claimed-by-me-empty_light.png)
 
-### Claimed by me tasks
-
-Select the **Unclaimed** list and claim a task using the **Claim** button on the details panel:
+Select the **Unassigned** list and assign a task using the **Assign to me** button on the top panel:
 
 ![tasklist-claim](img/tasklist-claim_light.png)
 
-### Claim a task
+### Assigned to me tasks
 
-Select the **Claimed by me** list to see if you claimed the task:
+Select the **Assigned to me** list to see if you assigned the task:
 
 ![tasklist-claimed-by-me-list](img/tasklist-claimed-by-me-list_light.png)
 
 ### Complete a task
 
-Once you've claimed a task, you can complete the task by adding and updating variables, and using the **Complete Task** button:
+Once you have assigned a task, you can complete the task by adding and updating variables, and using the **Complete Task** button:
 
 ![tasklist-claimed-by-me](img/tasklist-claimed-by-me_light.png)
 
