@@ -5,4 +5,27 @@ sidebar_position: 1
 description: "Provides an overview of Tasklist REST API."
 ---
 
-TODO ADD
+## Introduction
+
+Tasklist API is a REST API and provides searching, getting, and changing Tasklist data.
+Requests and responses are in JSON notation. Some objects have additional endpoints.
+
+## API documentation as Swagger
+
+A detailed API description is also available as Swagger UI at `${base-url}/swagger-ui.html`.
+
+## Endpoints
+
+| Endpoint (HTTP verb + URL path)            |                                                                   Description |
+| :----------------------------------------- | ----------------------------------------------------------------------------: |
+| **Tasks**                                  |                                                                               |
+| `GET /v1/tasks/{taskId}`                   |                                                      Return a task by taskId. |
+| `POST /v1/tasks/search`                    |                 Returns the list of tasks that satisfy search request params. |
+| `POST /v1/tasks/{taskId}/variables/search` |   Returns a list of task variables for the specified taskId and variableName. |
+| `PATCH /v1/tasks/{taskId}/claim`           |                    Unclaim a task with taskId to assignee or the active user. |
+| `PATCH /v1/tasks/{taskId}/unclaim`         |                      Claim a task with taskId to assignee or the active user. |
+| `PATCH /v1/tasks/{taskId}/complete`        |                           Complete a task with taskId and optional variables. |
+| **Forms**                                  |                                                                               |
+| `POST /v1/forms/{formId}`                  | Get the form details by formId and processDefinitionKey required query param. |
+| **Variables**                              |                                                                               |
+| `POST /v1/variables/{variableId}`          |                                      Get the variable details by variable id. |
