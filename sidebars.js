@@ -528,6 +528,7 @@ module.exports = {
         "apis-tools/grpc",
         "apis-tools/operate-api/index",
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         "apis-tools/console-api-reference",
         "apis-tools/web-modeler-api/index",
         {
