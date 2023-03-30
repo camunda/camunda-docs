@@ -220,11 +220,30 @@ Complete a task with `taskId` and optional variables. Returns the task.
 
 #### HTTP request example:
 
+With empty body
+
 ```shell
 curl -X 'PATCH' \
   'http://{host}/v1/tasks/{taskId}/complete' \
   -H 'accept: application/json' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
+```
+
+With [`TaskCompleteRequest`](../schemas/requests/task-complete-request.mdx)
+
+```shell
+curl -X 'PATCH' \
+  'http://{host}/v1/tasks/{taskId}/complete' \
+  -H 'accept: application/json' \
+  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}' \
+  -d '{
+  "variables": [
+    {
+      "name": "varA",
+      "value": "25"
+    }
+  ]
+}'
 ```
 
 #### Responses:
