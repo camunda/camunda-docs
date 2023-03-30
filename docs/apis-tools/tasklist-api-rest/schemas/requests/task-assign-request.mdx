@@ -1,6 +1,6 @@
 ---
-id: task-claim-request
-title: TaskClaimRequest
+id: task-assign-request
+title: TaskAssignRequest
 hide_table_of_contents: false
 ---
 
@@ -42,7 +42,7 @@ export const Badge = (props) => (
   </>
 );
 
-TaskClaimRequest - request params used to claim the task.
+TaskAssignRequest - request params used to assign the task to `assignee` or current user.
 
 <Tabs groupId="schema" defaultValue="schema" values={
 [
@@ -75,10 +75,10 @@ TaskClaimRequest - request params used to claim the task.
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>TaskClaimRequest.<b>assignee</b></code>](#)<Bullet />`string` <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>TaskAssignRequest.<b>assignee</b></code>](#)<Bullet />`string`
 
 > When using a `JWT` token, the assignee parameter is NOT optional when called directly from the API. The system will not be able to detect the assignee from the JWT token, therefore the assignee parameter needs to be explicitly passed in this instance.
 
-#### [<code style={{ fontWeight: 'normal' }}>TaskClaimRequest.<b>allowOverrideAssignment</b></code>](#)<Bullet />`boolean` <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>TaskAssignRequest.<b>allowOverrideAssignment</b></code>](#)<Bullet />`boolean`
 
-> When `true` the task that is already assigned may be claimed again. Otherwise, the task must be first unclaimed and only then claimed again. (Default: `true`).
+> When `true` the task that is already assigned may be reassigned again. Otherwise, the task must be first unassigned and only then assigned again. (Default: `true`).

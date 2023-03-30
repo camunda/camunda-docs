@@ -131,11 +131,11 @@ Instead of [claimTasks](/docs/apis-tools/tasklist-api/mutations/claim-task.mdx) 
 claimTask(taskId: String!, assignee: String, allowOverrideAssignment: Boolean): Task!
 ```
 
-the following [Claim task](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#claim-task) endpoint should be used:
+the following [Assign task](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#assign-task) endpoint should be used:
 
 ```bash
 curl -X 'PATCH' \
-  'http://{host}/v1/tasks/{taskId}/claim' \
+  'http://{host}/v1/tasks/{taskId}/assign' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
@@ -150,11 +150,11 @@ Instead of [unclaimTasks](/docs/apis-tools/tasklist-api/mutations/unclaim-task.m
 unclaimTask(taskId: String!): Task!
 ```
 
-the following [Unlaim task](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#unclaim-task) endpoint should be used:
+the following [Unassign task](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#unassign-task) endpoint should be used:
 
 ```bash
 curl -X 'PATCH' \
-  'http://{host}/v1/tasks/{taskId}/unclaim' \
+  'http://{host}/v1/tasks/{taskId}/unassign' \
   -H 'accept: application/json' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```

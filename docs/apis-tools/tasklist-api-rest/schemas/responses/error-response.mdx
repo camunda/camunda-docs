@@ -77,17 +77,17 @@ TaskResponse - represents a user task.
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>ErrorResponse.<b>status</b></code>](#)<Bullet />`int` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>ErrorResponse.<b>status</b></code>](#)<Bullet />`int` <Badge class="secondary" text="non-null"/>
 
 > An integer that represents the HTTP status code of the error response. For example, 400 indicates a "Bad Request" error, 404 indicates a "Not Found" error, and so on.
 
-#### [<code style={{ fontWeight: 'normal' }}>ErrorResponse.<b>message</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>ErrorResponse.<b>message</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
 
 > A string that provides a brief description of the error that occurred.
 
-#### [<code style={{ fontWeight: 'normal' }}>ErrorResponse.<b>instance</b></code>](#)<Bullet />`string` <Badge class="secondary" text="scalar"/>
+#### [<code style={{ fontWeight: 'normal' }}>ErrorResponse.<b>instance</b></code>](#)<Bullet />`string`
 
-> A string that provides additional context about the error.
+> UUID for look up (eg. in log messages).
 
 ### Returned by:
 
@@ -96,6 +96,6 @@ TaskResponse - represents a user task.
 [`Search task variables`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-task-variables) <Badge class="secondary" text="POST"/> <Bullet />
 [`Get task`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#get-task) <Badge class="secondary" text="GET"/> <Bullet />
 [`Search tasks`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-tasks) <Badge class="secondary" text="POST"/> <Bullet />
-[`Claim task`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#claim-task) <Badge class="secondary" text="PATCH"/> <Bullet />
-[`Unlaim task`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#unclaim-task) <Badge class="secondary" text="PATCH"/> <Bullet />
+[`Assign task`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#assign-task) <Badge class="secondary" text="PATCH"/> <Bullet />
+[`Unassign task`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#unassign-task) <Badge class="secondary" text="PATCH"/> <Bullet />
 [`Complete task`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#complete-task) <Badge class="secondary" text="PATCH"/>

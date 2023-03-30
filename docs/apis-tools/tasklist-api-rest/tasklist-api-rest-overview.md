@@ -22,8 +22,8 @@ A detailed API description is also available as Swagger UI at `${base-url}/swagg
 | `GET /v1/tasks/{taskId}`                   |                                                      Return a task by taskId. |
 | `POST /v1/tasks/search`                    |                 Returns the list of tasks that satisfy search request params. |
 | `POST /v1/tasks/{taskId}/variables/search` |   Returns a list of task variables for the specified taskId and variableName. |
-| `PATCH /v1/tasks/{taskId}/claim`           |                    Unclaim a task with taskId to assignee or the active user. |
-| `PATCH /v1/tasks/{taskId}/unclaim`         |                      Claim a task with taskId to assignee or the active user. |
+| `PATCH /v1/tasks/{taskId}/assign`          |                 Assign a task with `taskId` to `assignee` or the active user. |
+| `PATCH /v1/tasks/{taskId}/unassign`        |                                       Unassign a task with provided `taskId`. |
 | `PATCH /v1/tasks/{taskId}/complete`        |                           Complete a task with taskId and optional variables. |
 | **Forms**                                  |                                                                               |
 | `POST /v1/forms/{formId}`                  | Get the form details by formId and processDefinitionKey required query param. |

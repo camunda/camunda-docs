@@ -98,13 +98,13 @@ curl -X 'GET' \
 | 200         | On success                                                         | JSON object with [`TaskResponse`](../schemas/responses/task-response.mdx) structure |
 | 404         | An error is returned when the task with the `taskId` is not found. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 
-### Claim task
+### Assign task
 
-Endpoint to claim a task with `taskId` to `assignee` or the active user. Returns the task.
+Endpoint to assign a task with `taskId` to `assignee` or the active user. Returns the task.
 
 #### URL:
 
-`/v1/tasks/{taskId}/claim`
+`/v1/tasks/{taskId}/assign`
 
 #### Method:
 
@@ -118,14 +118,15 @@ Endpoint to claim a task with `taskId` to `assignee` or the active user. Returns
 
 #### Request body:
 
-When using REST API with JWT authentication token following request body parameters may be used.
-[`TaskSearchRequest`](../schemas/requests/task-search-request.mdx) - `[Optional]`
+[`TaskAssignRequest`](../schemas/requests/task-assign-request.mdx) - `[Optional]`
+
+> When using REST API with JWT authentication token following request body parameters may be used.
 
 #### HTTP request example:
 
 ```shell
 curl -X 'PATCH' \
-  'http://{host}/v1/tasks/{taskId}/claim' \
+  'http://{host}/v1/tasks/{taskId}/assign' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
@@ -135,7 +136,7 @@ If JWT authentication used:
 
 ```shell
 curl -X 'PATCH' \
-  'http://{host}/v1/tasks/{taskId}/claim' \
+  'http://{host}/v1/tasks/{taskId}/assign' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}' \
@@ -151,17 +152,17 @@ curl -X 'PATCH' \
 | ----------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
 | 200         | On success                                                                                       | JSON object with [`TaskResponse`](../schemas/responses/task-response.mdx) structure |
 | 400         | An error is returned when the task is not active (not in the `CREATED` state).                   | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
-| 400         | An error is returned when task was already claimed.                                              | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 400         | An error is returned when task was already assigned.                                             | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 | 403         | An error is returned when user doesn't have the permission to assign another user to this task.. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 | 404         | An error is returned when the task with the `taskId` is not found.                               | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 
-### Unclaim task
+### Unassign task
 
-Unclaim a task with provided id. Returns the task.
+Unassign a task with provided id. Returns the task.
 
 #### URL:
 
-`/v1/tasks/{taskId}/unclaim`
+`/v1/tasks/{taskId}/unassign`
 
 #### Method:
 
@@ -181,7 +182,7 @@ NONE
 
 ```shell
 curl -X 'PATCH' \
-  'http://{host}/v1/tasks/{taskId}/unclaim' \
+  'http://{host}/v1/tasks/{taskId}/unassign' \
   -H 'accept: application/json' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
@@ -192,7 +193,7 @@ curl -X 'PATCH' \
 | ----------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
 | 200         | On success                                                                     | JSON object with [`TaskResponse`](../schemas/responses/task-response.mdx) structure |
 | 400         | An error is returned when the task is not active (not in the `CREATED` state). | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
-| 400         | An error is returned if the task was not claimed (assigned) before.            | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 400         | An error is returned if the task was not assigned before.                      | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 | 404         | An error is returned when the task with the `taskId` is not found.             | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 
 ### Complete task
@@ -232,7 +233,7 @@ curl -X 'PATCH' \
 | ----------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
 | 200         | On success                                                                     | JSON object with [`TaskResponse`](../schemas/responses/task-response.mdx) structure |
 | 400         | An error is returned when the task is not active (not in the `CREATED` state). | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
-| 400         | An error is returned if the task was not claimed (assigned) before.            | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 400         | An error is returned if the task was not assigned before.                      | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 | 400         | An error is returned if the task is not assigned to the current user.          | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 | 404         | An error is returned when the task with the `taskId` is not found.             | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 
