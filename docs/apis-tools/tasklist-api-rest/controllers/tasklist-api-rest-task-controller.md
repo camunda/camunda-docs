@@ -57,9 +57,12 @@ curl -X 'POST' \
 }'
 ```
 
-#### Response:
+#### Responses:
 
-The response will be a JSON array of objects representing the matching tasks [`TaskSearchResponse`](../schemas/responses/task-search-response.mdx).
+| HTTP status | Description                                                                                                                                                 | Response schema                                                                                            |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| 200         | On success                                                                                                                                                  | JSON array of objects with [`TaskSearchResponse`](../schemas/responses/task-search-response.mdx) structure |
+| 400         | An error is returned when more than one search parameters among [searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual] are present in request | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure                              |
 
 ### Get task
 
@@ -88,9 +91,12 @@ curl -X 'GET' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-#### Response:
+#### Responses:
 
-The response will be a JSON object with the following structure [`TaskResponse`](../schemas/responses/task-response.mdx).
+| HTTP status | Description                                                        | Response schema                                                                     |
+| ----------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| 200         | On success                                                         | JSON object with [`TaskResponse`](../schemas/responses/task-response.mdx) structure |
+| 404         | An error is returned when the task with the `taskId` is not found. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 
 ### Claim task
 
@@ -139,9 +145,15 @@ curl -X 'PATCH' \
 }'
 ```
 
-#### Response:
+#### Responses:
 
-The response will be a JSON object with the following structure [`TaskResponse`](../schemas/responses/task-response.mdx).
+| HTTP status | Description                                                                                      | Response schema                                                                     |
+| ----------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| 200         | On success                                                                                       | JSON object with [`TaskResponse`](../schemas/responses/task-response.mdx) structure |
+| 400         | An error is returned when the task is not active (not in the `CREATED` state).                   | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 400         | An error is returned when task was already claimed.                                              | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 403         | An error is returned when user doesn't have the permission to assign another user to this task.. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 404         | An error is returned when the task with the `taskId` is not found.                               | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 
 ### Unclaim task
 
@@ -174,9 +186,14 @@ curl -X 'PATCH' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-#### Response:
+#### Responses:
 
-The response will be a JSON object with the following structure [`TaskResponse`](../schemas/responses/task-response.mdx).
+| HTTP status | Description                                                                    | Response schema                                                                     |
+| ----------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| 200         | On success                                                                     | JSON object with [`TaskResponse`](../schemas/responses/task-response.mdx) structure |
+| 400         | An error is returned when the task is not active (not in the `CREATED` state). | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 400         | An error is returned if the task was not claimed (assigned) before.            | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 404         | An error is returned when the task with the `taskId` is not found.             | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 
 ### Complete task
 
@@ -209,9 +226,15 @@ curl -X 'PATCH' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-#### Response:
+#### Responses:
 
-The response will be a JSON object with the following structure [`TaskResponse`](../schemas/responses/task-response.mdx).
+| HTTP status | Description                                                                    | Response schema                                                                     |
+| ----------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| 200         | On success                                                                     | JSON object with [`TaskResponse`](../schemas/responses/task-response.mdx) structure |
+| 400         | An error is returned when the task is not active (not in the `CREATED` state). | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 400         | An error is returned if the task was not claimed (assigned) before.            | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 400         | An error is returned if the task is not assigned to the current user.          | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 404         | An error is returned when the task with the `taskId` is not found.             | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 
 ### Search task variables
 
@@ -281,6 +304,9 @@ curl -X 'POST' \
   }'
 ```
 
-#### Response:
+#### Responses:
 
-The response will be a JSON array of objects with the following structure [`VariableResponse`](../schemas/responses/variable-response.mdx).
+| HTTP status | Description                                                        | Response schema                                                                                       |
+| ----------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| 200         | On success                                                         | JSON array of objects with [`VariableResponse`](../schemas/responses/variable-response.mdx) structure |
+| 404         | An error is returned when the task with the `taskId` is not found. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure                         |

@@ -37,6 +37,9 @@ curl -X 'GET' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-#### Response:
+#### Responses:
 
-The response will be a JSON object with the following structure [`VariableResponse`](../schemas/responses/variable-response.mdx).
+| HTTP status | Description                                                              | Response schema                                                                             |
+| ----------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| 200         | On success                                                               | JSON object with [`VariableResponse`](../schemas/responses/variable-response.mdx) structure |
+| 404         | An error is returned when the variable with the variableId is not found. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure               |
