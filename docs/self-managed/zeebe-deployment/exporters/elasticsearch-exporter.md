@@ -22,6 +22,7 @@ those as templates in this module's resources folder.
 
 :::note
 The indexes are created as required, and will not be created twice if they already exist. However, once disabled, they will not be deleted (that is up to the administrator.) Similarly, data is never deleted by the exporter, and must be deleted by the administrator when it is safe to do so.
+A [retention](#retention) policy can be configured to automatically delete data after a certain number of days.
 :::
 
 ## Configuration
@@ -51,6 +52,7 @@ options, and the default values for these options:
 | requestTimeoutMs | Request timeout (in ms) for the Elasticsearch. client                                    | `30000`                 |
 | index            | Refer to [Index](#index) for the index configuration options.                            |                         |
 | bulk             | Refer to [Bulk](#bulk) for the bulk configuration options.                               |                         |
+| retention        | Refer to [Retention](#retention) for the retention configuration options                 |                         |
 | authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
 
 ### Index
@@ -113,6 +115,22 @@ With the default configuration, the exporter will aggregate records and flush th
 2. When the batch memory size exceeds 10 MB.
 3. Five seconds have elapsed since the last flush (regardless of how many records were aggregated).
 
+### Retention
+
+A retention policy can be set up to delete old data.
+When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified `minimumAge`.
+All index templates created by this exporter apply the created ILM Policy.
+
+| Option     | Description                                                                  | Default                         |
+| ---------- | ---------------------------------------------------------------------------- | ------------------------------- |
+| enabled    | If `true` the ILM Policy is created and applied to the index templates       | `false`                         |
+| minimumAge | Specifies how old the data must be, before the data is deleted as a duration | `30d`                           |
+| policyName | The name of the created and applied ILM policy                               | `zeebe-record-retention-policy` |
+
+:::note
+The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds `nanos`.
+:::
+
 ### Authentication
 
 Providing these authentication options will enable Basic Authentication on the exporter.
@@ -148,6 +166,11 @@ exporters:
         delay: 5
         size: 1000
         memoryLimit: 10485760
+
+      retention:
+        enabled: true
+        minimumAge: 30d
+        policyName: zeebe-records-retention-policy
 
       authentication:
         username: elastic
