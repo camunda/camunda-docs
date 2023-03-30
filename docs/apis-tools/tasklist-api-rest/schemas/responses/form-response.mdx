@@ -1,0 +1,76 @@
+---
+id: form-response
+title: FormResponse
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+TaskResponse - represents a user task.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "id": string,
+    "processDefinitionKey": string,
+    "schema": string
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "id": "string",
+  "processDefinitionKey": "string",
+  "schema": "string"
+}
+```
+
+</TabItem>
+</Tabs>

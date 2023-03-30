@@ -1,0 +1,84 @@
+---
+id: task-claim-request
+title: TaskClaimRequest
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+TaskClaimRequest - request params used to claim the task.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "assignee": string,
+    "allowOverrideAssignment": boolean
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "assignee": "string",
+  "allowOverrideAssignment": true
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskClaimRequest.<b>assignee</b></code>](#)<Bullet />`string` <Badge class="secondary" text="scalar"/>
+
+> When using a `JWT` token, the assignee parameter is NOT optional when called directly from the API. The system will not be able to detect the assignee from the JWT token, therefore the assignee parameter needs to be explicitly passed in this instance.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskClaimRequest.<b>allowOverrideAssignment</b></code>](#)<Bullet />`boolean` <Badge class="secondary" text="scalar"/>
+
+> When `true` the task that is already assigned may be claimed again. Otherwise, the task must be first unclaimed and only then claimed again. (Default: `true`).

@@ -1,0 +1,104 @@
+---
+id: task-search-response
+title: TaskSearchResponse
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+TaskSearchResponse - representing the searched task.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "id": string,
+    "name": string,
+    "taskDefinitionId": string,
+    "processName": string,
+    "creationDate": string,
+    "completionDate": string,
+    "assignee": string,
+    "taskState": TaskState,
+    "sortValues": [string],
+    "isFirst": boolean,
+    "formKey": string,
+    "processDefinitionKey": string,
+    "processInstanceKey": string,
+    "dueDate": string,
+    "followUpDate": string,
+    "candidateGroups": [string],
+    "candidateUsers": [string]
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "taskDefinitionId": "string",
+  "processName": "string",
+  "creationDate": "string",
+  "completionDate": "string",
+  "assignee": "string",
+  "taskState": "CREATED",
+  "sortValues": ["string"],
+  "isFirst": true,
+  "formKey": "string",
+  "processDefinitionKey": "string",
+  "processInstanceKey": "string",
+  "dueDate": "2023-03-29T20:08:07.171Z",
+  "followUpDate": "2023-03-29T20:08:07.171Z",
+  "candidateGroups": ["string"],
+  "candidateUsers": ["string"]
+}
+```
+
+</TabItem>
+</Tabs>

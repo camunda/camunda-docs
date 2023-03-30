@@ -16,16 +16,20 @@ Get the form details by `formId` and `processDefinitionKey` required param.
 
 #### URL:
 
-GET `/v1/forms/{formId}?processDefinitionKey={processDefinitionKey}`
+`/v1/forms/{formId}?processDefinitionKey={processDefinitionKey}`
 
-#### Parameters:
+#### Method:
+
+`GET`
+
+#### Request parameters:
 
 | param name           | type  | required |
 | -------------------- | ----- | -------- |
 | formId               | path  | true     |
 | processDefinitionKey | query | true     |
 
-#### Request format:
+#### HTTP request example:
 
 ```bash
 curl -X 'GET' \
@@ -34,12 +38,6 @@ curl -X 'GET' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-#### Response format:
+#### Response:
 
-```json
-{
-  "id": "string",
-  "processDefinitionKey": "string",
-  "schema": "string"
-}
-```
+The response will be a JSON object with the following structure [`FormResponse`](../schemas/responses/form-response.mdx).

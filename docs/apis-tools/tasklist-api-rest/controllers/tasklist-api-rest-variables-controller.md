@@ -16,15 +16,19 @@ Get the variable details by variable id.
 
 #### URL:
 
-GET `/v1/variables/{variableId}`
+`/v1/variables/{variableId}`
 
-#### Parameters:
+#### Method:
+
+`GET`
+
+#### Request parameters:
 
 | param name | type | required | description        |
 | ---------- | ---- | :------: | ------------------ |
 | variableId | path |   true   | ID of the variable |
 
-#### Request format:
+#### HTTP request example:
 
 ```bash
 curl -X 'GET' \
@@ -33,14 +37,6 @@ curl -X 'GET' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-#### Response format:
+#### Response:
 
-```json
-{
-  "id": "string",
-  "name": "string",
-  "value": "string",
-  "isValueTruncated": true,
-  "previewValue": "string"
-}
-```
+The response will be a JSON object with the following structure [`VariableResponse`](../schemas/responses/variable-response.mdx).
