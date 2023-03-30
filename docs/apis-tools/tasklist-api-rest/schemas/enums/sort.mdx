@@ -1,6 +1,6 @@
 ---
-id: task-state
-title: TaskState
+id: sort
+title: Sort
 hide_table_of_contents: false
 ---
 
@@ -39,32 +39,25 @@ export const Badge = (props) => (
   </>
 );
 
-Represents the state of the task.
+State of the task.
 
 ```java
-enum TaskState {
-  CREATED,
-  COMPLETED,
-  CANCELED
+enum Sort {
+  ASC,
+  DESC
 }
 ```
 
 ### Values
 
-#### [<code style={{ fontWeight: 'normal' }}>TaskState.<b>CREATED</b></code>](#)
+#### [<code style={{ fontWeight: 'normal' }}>Sort.<b>ASC</b></code>](#)
 
->
+> Ascending
 
-#### [<code style={{ fontWeight: 'normal' }}>TaskState.<b>COMPLETED</b></code>](#)
+#### [<code style={{ fontWeight: 'normal' }}>Sort.<b>DESC</b></code>](#)
 
->
-
-#### [<code style={{ fontWeight: 'normal' }}>TaskState.<b>CANCELED</b></code>](#)
-
->
+> Descending
 
 ### Member of
 
-[`TaskResponse`](../responses/task-response.mdx) <Badge class="secondary" text="object"/> <Bullet />
-[`TaskSearchRequest`](../requests/task-search-request.mdx) <Badge class="secondary" text="object"/> <Bullet />
-[`TaskSearchResponse`](../responses/task-search-response.mdx) <Badge class="secondary" text="object"/>
+[`TaskOrderBy`](../models/task-order-by.mdx) <Badge class="secondary" text="input"/>

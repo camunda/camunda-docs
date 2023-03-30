@@ -1,6 +1,6 @@
 ---
-id: form-response
-title: FormResponse
+id: task-order-by
+title: TaskOrderBy
 hide_table_of_contents: false
 ---
 
@@ -42,7 +42,7 @@ export const Badge = (props) => (
   </>
 );
 
-FormResponse - represents task embedded form.
+Filter using a date range
 
 <Tabs groupId="schema" defaultValue="schema" values={
 [
@@ -54,9 +54,8 @@ FormResponse - represents task embedded form.
 
 ```graphql
 {
-    "id": string,
-    "processDefinitionKey": string,
-    "schema": string
+    "field": TaskSortFields,
+    "order": Sort
 }
 ```
 
@@ -66,9 +65,8 @@ FormResponse - represents task embedded form.
 
 ```json
 {
-  "id": "string",
-  "processDefinitionKey": "string",
-  "schema": "string"
+  "field": "string",
+  "order": "string"
 }
 ```
 
@@ -77,18 +75,14 @@ FormResponse - represents task embedded form.
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+#### [<code style={{ fontWeight: 'normal' }}>TaskOrderBy.<b>field</b></code>](#)<Bullet />[`TaskSortFields`](../enums/task-sort-fields.mdx) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="enum"/>
 
-> The unique identifier of the embedded form within one process
+> Allowed fields to sort by
 
-#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>processDefinitionKey</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+#### [<code style={{ fontWeight: 'normal' }}>TaskOrderBy.<b>order</b></code>](#)<Bullet />[`Sort`](../enums/sort.mdx) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="enum"/>
 
-> Reference to process definition
+> Define if sorting is Ascending or Descending
 
-#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>schema</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+### Member of
 
-> Form content
-
-### Returned by
-
-[`Get form`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-form-controller.md#get-form) <Badge class="secondary" text="GET"/>
+[`TaskSearchRequest`](../requests/task-search-request.mdx) <Badge class="secondary" text="object"/>

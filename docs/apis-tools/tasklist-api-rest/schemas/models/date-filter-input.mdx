@@ -1,6 +1,6 @@
 ---
-id: form-response
-title: FormResponse
+id: date-filter-input
+title: DateFilter
 hide_table_of_contents: false
 ---
 
@@ -42,7 +42,7 @@ export const Badge = (props) => (
   </>
 );
 
-FormResponse - represents task embedded form.
+Filter using a date range
 
 <Tabs groupId="schema" defaultValue="schema" values={
 [
@@ -54,9 +54,8 @@ FormResponse - represents task embedded form.
 
 ```graphql
 {
-    "id": string,
-    "processDefinitionKey": string,
-    "schema": string
+    "from": string,
+    "to": string
 }
 ```
 
@@ -66,9 +65,8 @@ FormResponse - represents task embedded form.
 
 ```json
 {
-  "id": "string",
-  "processDefinitionKey": "string",
-  "schema": "string"
+  "from": "string",
+  "to": "string"
 }
 ```
 
@@ -77,18 +75,14 @@ FormResponse - represents task embedded form.
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+#### [<code style={{ fontWeight: 'normal' }}>DateFilter.<b>from</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
 
-> The unique identifier of the embedded form within one process
+> Start date range to search from in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard
 
-#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>processDefinitionKey</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+#### [<code style={{ fontWeight: 'normal' }}>DateFilter.<b>to</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
 
-> Reference to process definition
+> End date range to search to in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard
 
-#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>schema</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+### Member of
 
-> Form content
-
-### Returned by
-
-[`Get form`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-form-controller.md#get-form) <Badge class="secondary" text="GET"/>
+[`TaskSearchRequest`](../requests/task-search-request.mdx) <Badge class="secondary" text="object"/>
