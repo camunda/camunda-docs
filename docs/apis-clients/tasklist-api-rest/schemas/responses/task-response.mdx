@@ -1,0 +1,169 @@
+---
+id: task-response
+title: TaskResponse
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+TaskResponse - represents a user task.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "id": string,
+    "name": string,
+    "taskDefinitionId": string,
+    "processName": string,
+    "creationDate": string,
+    "completionDate": string,
+    "assignee": string,
+    "taskState": TaskState,
+    "formKey": string,
+    "processDefinitionKey": string,
+    "processInstanceKey": string,
+    "dueDate": string,
+    "followUpDate": string,
+    "candidateGroups": [string],
+    "candidateUsers": [string]
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "taskDefinitionId": "string",
+  "processName": "string",
+  "creationDate": "string",
+  "completionDate": "string",
+  "assignee": "string",
+  "taskState": "CREATED",
+  "formKey": "string",
+  "processDefinitionKey": "string",
+  "processInstanceKey": "string",
+  "dueDate": "2023-03-29T20:08:07.171Z",
+  "followUpDate": "2023-03-29T20:08:07.171Z",
+  "candidateGroups": ["string"],
+  "candidateUsers": ["string"]
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> The unique identifier of the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>name</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Name of the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>taskDefinitionId</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Task Definition ID (node BPMN id) of the process
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>processName</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Name of the process
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>creationDate</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> When was the task created
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>completionDate</b></code>](#)<Bullet />`string`
+
+> When was the task completed
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>assignee</b></code>](#)<Bullet />`string`
+
+> Username/id of who is assigned to the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>taskState</b></code>](#)<Bullet />[`TaskState`](../enums/task-state.mdx) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="enum"/>
+
+> State of the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>formKey</b></code>](#)<Bullet />`string`
+
+> Reference to the task form
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>processDefinitionKey</b></code>](#)<Bullet />`string`
+
+> Reference to process definition
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>processInstanceKey</b></code>](#)<Bullet />`string`
+
+> Reference to process instance id
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>candidateGroups</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Candidate groups
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>candidateUsers</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Candidate users
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>followUpDate</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Follow-up date for the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>dueDate</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Due date for the task
+
+### Returned by
+
+[`Get task`](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#get-task) <Badge class="secondary" text="GET"/> <Bullet />
+[`Assign task`](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#assign-task) <Badge class="secondary" text="PATCH"/> <Bullet />
+[`Unassign task`](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#unassign-task) <Badge class="secondary" text="PATCH"/> <Bullet />
+[`Complete task`](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#complete-task) <Badge class="secondary" text="PATCH"/>
