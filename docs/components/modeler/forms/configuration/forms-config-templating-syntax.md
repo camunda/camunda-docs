@@ -1,16 +1,16 @@
 ---
 id: forms-config-templating-syntax
 title: Templating syntax
-description: How to configure properties using feelers templating
+description: Learn about templated properties configuration, which provides dynamic content creation within forms using a templating language called feelers.
 ---
 
 Templated properties configuration allows for dynamic content creation within forms using a templating language called **feelers**.
 
-## Overview of feelers syntax
+## Feelers syntax
 
-### Variables/Inserts
+### Variables/inserts
 
-To insert a variable, use double curly braces `{{variable}}`, and the value of this variable will be inserted. In fact, you can actually use **any valid feel expression** within these double braces.
+To insert a variable, use double curly braces `{{variable}}`, and the value of this variable will be inserted. You can use **any valid feel expression** within these double braces.
 
 ```
 Hello {{username}}, you are {{if isAdmin then "an admin" else "a user"}}.
@@ -18,7 +18,7 @@ Hello {{username}}, you are {{if isAdmin then "an admin" else "a user"}}.
 
 ### Iterating through arrays
 
-Iterate through arrays using the _loop_ tags. Within the loop, reference each array element with `{{this}}` or if your array elements are objects, via their properties. If you want to access data outside the scope of the individual items, you may use the `{{parent}}` accessor.
+Iterate through arrays using the _loop_ tags. Within the loop, reference each array element with `{{this}}`, or if your array elements are objects, via their properties. To access data outside the scope of the individual items, use the `{{parent}}` accessor.
 
 Working with this list of items, with a currency symbol defined outside of the list may be achieved so.
 
@@ -55,7 +55,7 @@ Item price: {{parent.currency}}{{price}}
 
 ### Conditional sections
 
-Conditionally render a section of your template using the `if` tags. This is a quick way to write out large blocks you may or may not want evaluated based on a condition.
+Conditionally render a section of your template using the `if` tags. This is a quick way to write out large blocks you may or may not want evaluated based on a condition:
 
 ```
 {{#if user.isCook}}
@@ -66,11 +66,11 @@ Ingredients list:
 {{/if}}
 ```
 
-## Some more in-depth notes
+## Additional details
 
-### Loops can be nested
+### Nest loops
 
-If you have an array of users each with an array of purchases, you may loop over both in a nested manner.
+If you have an array of users, each with an array of purchases, you may loop over both in a nested manner:
 
 **Data**
 
@@ -100,7 +100,7 @@ The user '{{name}}' purchased:
 {{/loop}}
 ```
 
-In this situation, you may need to use the `parent` accessor several times to access data outside of the scope.
+In this situation, you may need to use the `parent` accessor several times to access data outside the scope.
 
 ### More on the `parent` and `this` accessors
 
@@ -133,6 +133,4 @@ Listing out all node paths:
 {{/loop}}
 ```
 
-In the above example, if we were not surrounding our parent accessor with underscores, we would be accessing the parent property of our node, which is not what we're looking for.
-
-The same applies for the `this` accessor.
+In the example above, if you are not surrounding the parent accessor with underscores, you access the parent property of the node, which is not what we're looking for. This also applies to the `this` accessor.

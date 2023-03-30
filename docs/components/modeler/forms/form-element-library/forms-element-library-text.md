@@ -10,13 +10,13 @@ A text component allowing to display static information to the user.
 
 ## Configurable properties
 
-- **Text**: Either an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md). After evaluation, the result is processed using a markdown renderer that supports basic HTML and GitHub flavored markdown. To ensure safety and prevent cross-site scripting in Camunda Forms, potentially harmful HTML elements will not be rendered.
+- **Text**: Either an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md). After evaluation, the result is processed using a Markdown renderer that supports basic HTML and GitHub-flavored Markdown. To ensure safety and prevent cross-site scripting in Camunda Forms, potentially harmful HTML elements will not be rendered.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the text.
 - **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
 
 ## Example text configurations
 
-Note that these configurations work in combination with eachother, you may use templating syntax to leverage markdown and HTML. You may also mix markdown and HTML in a single definition.
+Note that these configurations work in combination with one another. You may use templating syntax to leverage Markdown and HTML. You may also mix Markdown and HTML in a single definition.
 
 **Markdown**:
 
