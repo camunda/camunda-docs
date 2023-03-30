@@ -81,7 +81,7 @@ You will now see the completed task by selecting the **Completed** task list:
 
 ### Processes
 
-> **_NOTE:_** This tab is only available for Self-Managed environments or an alpha cluster at Camunda Platform  at the moment
+> **_NOTE:_** This tab is only available for Self-Managed environments or an alpha cluster at Camunda Platform at the moment
 
 It is possible to start processes by demand on Tasklist. For that on the top menu click in Processes - all the processes that you have acces to start will be listed in the Processes page.
 
