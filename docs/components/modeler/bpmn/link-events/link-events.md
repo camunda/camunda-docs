@@ -1,25 +1,27 @@
 ---
 id: link-events
 title: "Link events"
-description: "Link events are pairs of intermediate events, one throwing and one catching, that link the two together."
+description: "Link events are intermediate events that connect two sections of a process."
 ---
 
-Link events are pairs of intermediate events, one throwing and one catching, that link the two together.
+Link events are intermediate events that connect two sections of a process.
 
-Link events have no significance related to content, but facilitate the diagram-creation process and are a mechanism for connecting two sections of a process. Link events can be used as intermediate events only.
+They have no significance related to content, but facilitate the diagram-creation process.
 
 :::tip
 You can use link events to create loops, to skip sections of a process, or to simplify the sequence flow lines in the diagram.
 :::
 
-Link event pairs have a throwing link event as the "exit point", and a catching link event as the "re-entrance point". The two events are marked as a pair by their link name.
+Link events have a throwing link event as the "exit point", and a catching link event as the "re-entrance point".
+They are linked together by their link name.
+Multiple throwing link events can link to the same catching link event.
+A throwing link event cannot link to multiple catching link events.
 
 In practice, two paired link events function the same as two [intermediate none events] connected via a sequence flow.
 
 ![A pair of link events is equivalent to a pair of intermediate none events connected via a sequence flow](./assets/link-events-example.png)
 
 Link events can be very useful if you draw comprehensive process diagrams with many sequence flows.
-
 Links help avoid what otherwise might look like a “spaghetti” diagram.
 In the example below, a retry loop is created using the link events pair `A`.
 
