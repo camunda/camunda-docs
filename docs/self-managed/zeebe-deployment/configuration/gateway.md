@@ -26,3 +26,113 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ## Configuration
 
+### zeebe.gateway.network
+
+#### YAML snippet
+
+```yaml
+network:
+      host: 0.0.0.0
+      port: 26500
+      minKeepAliveInterval: 30s
+      maxMessageSize: 4MB
+```
+
+### zeebe.gateway.cluster
+
+#### YAML snippet
+
+```yaml
+cluster:
+    initialContactPoints: - 127.0.0.1:26502
+    contactPoint: 127.0.0.1:26502
+    requestTimeout: 15s
+    clusterName: zeebe-cluster
+    memberId: gateway
+    host: 0.0.0.0
+    port: 26502
+    advertisedHost: 0.0.0.0
+    advertisedPort: 25602
+```
+
+### zeebe.gateway.cluster.membership
+
+#### YAML snippet
+
+```yaml
+membership:
+    broadcastUpdates: false
+    broadcastDisputes: true
+    notifySuspect: false
+    gossipInterval: 250ms
+    gossipFanout: 2
+    probeInterval: 1s
+    probeTimeout: 100ms
+    suspectProbes: 3
+    failureTimeout: 10s
+    syncInterval: 10s
+```
+
+### zeebe.gateway.cluster.security
+
+#### YAML snippet
+
+```yaml
+security:
+    enabled: false
+    certificateChainPath: null
+    privateKeyPath: null
+    authentication:
+        mode: none
+        identity:
+        issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
+        audience: zeebe-api
+        type: keycloak
+```
+
+### zeebe.gateway.cluster.messageCompression
+
+#### YAML snippet
+
+```yaml
+messageCompression: 
+```
+
+### zeebe.gateway.threads
+
+#### YAML snippet
+
+```yaml
+threads:
+    managementThreads: 1
+```
+
+### zeebe.gateway.security
+
+#### YAML snippet
+
+```yaml
+security:
+    enabled: false
+    certificateChainPath: null
+```
+
+### zeebe.gateway.longPolling
+
+#### YAML snippet
+
+```yaml
+longPolling:
+    enabled: true
+```
+
+### zeebe.gateway.interceptors
+
+#### YAML snippet
+
+```yaml
+interceptors:
+    id: null
+    jarPath: null
+    className: null
+```
