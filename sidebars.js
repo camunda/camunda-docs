@@ -241,6 +241,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/easy-post",
             "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/google-maps-platform",
             "components/connectors/out-of-the-box-connectors/graphql",
             "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",
@@ -775,6 +776,13 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/rebalancing",
             "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
+          ],
+        },
+        {
+          Exporters: [
+            "self-managed/zeebe-deployment/exporters/exporters",
+            "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
+            "self-managed/zeebe-deployment/exporters/opensearch-exporter",
           ],
         },
       ],

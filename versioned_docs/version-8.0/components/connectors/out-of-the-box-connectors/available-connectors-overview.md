@@ -15,6 +15,7 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 - [Camunda Operate Connector](operate.md) - Fetch process execution data from [Camunda Operate](https://camunda.com/platform/operate/).
 - [Easy Post Connector](aws-lambda.md) - Create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost](https://www.easypost.com/) from your BPMN process.
 - [Google Drive Connector](googledrive.md) - Create folders or files from a [Google Drive](https://www.google.com/drive/) template from your BPMN process.
+- [Google Maps Platform Connector](google-maps-platform.md) - Validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process.
 - [GraphQL Connector](graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
 - [Kafka Producer Connector](kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [Microsoft Teams Connector](microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
