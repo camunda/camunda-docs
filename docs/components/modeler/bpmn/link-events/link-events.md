@@ -27,6 +27,15 @@ In the example below, a retry loop is created using the link events pair `A`.
 
 ![A pair of link events is used to form a retry loop](./assets/link-events-example-in-practice.png)
 
+:::info Link events are limited to a single scope
+Link events can only be used to link sections of a process within the same scope.
+I.e., they can only exist together on the root process level or within the same subprocess.
+
+Similarly, a sequence flow cannot be drawn between flow nodes at different scopes.
+For example, a task in the root process level cannot connect to another task in a subprocess using a sequence flow.
+Link events have the same limitation.
+:::
+
 ## Additional resources
 
 ### XML representation
