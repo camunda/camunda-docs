@@ -174,10 +174,6 @@ Unassign a task with provided id. Returns the task.
 | ---------- | ---- | :------: | -------------- |
 | taskId     | path |  `true`  | ID of the task |
 
-#### Request body:
-
-NONE
-
 #### HTTP request example:
 
 ```shell

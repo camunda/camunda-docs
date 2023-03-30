@@ -16,7 +16,7 @@ Your client must send a header in each request:
 For example, send a request using _curl_:
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){name}}"}' http://localhost:8080/graphql
+curl -X POST -H -H :accept: application/json" -H "Authorization: Bearer <TOKEN>" -d '' http://localhost:8080/v1/tasks/search
 ```
 
 ### How to obtain the access token

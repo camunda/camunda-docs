@@ -12,7 +12,7 @@ Requests and responses are in JSON notation. Some objects have additional endpoi
 
 ## API documentation as Swagger
 
-A detailed API description is also available as Swagger UI at `${base-url}/swagger-ui.html`.
+A detailed API description is also available as Swagger UI at `https://${base-url}/swagger-ui/index.html`.
 
 ## Endpoints
 
