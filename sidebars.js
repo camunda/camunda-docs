@@ -778,6 +778,13 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/backups",
           ],
         },
+        {
+          Exporters: [
+            "self-managed/zeebe-deployment/exporters/exporters",
+            "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
+            "self-managed/zeebe-deployment/exporters/opensearch-exporter",
+          ],
+        },
       ],
       Operate: [
         "self-managed/operate-deployment/install-and-start",
