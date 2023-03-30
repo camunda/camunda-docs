@@ -37,7 +37,7 @@ You can also order the tasks on the left menu, clicking on the icon ![order-icon
 
 ![tasklist-task-ordering](img/tasklist-task-ordering.png)
 
-### Assign a tasks
+### Assign tasks
 
 Initially, we have no **Assigned to me** tasks.
 
@@ -55,7 +55,7 @@ Select the **Assigned to me** list to see if you assigned the task:
 
 ### Complete a task
 
-Once you have assigned a task, you can complete the task by adding and updating variables, and using the **Complete Task** button:
+Once you are assigned a task, you can complete the task by adding and updating variables, and using the **Complete Task** button:
 
 ![tasklist-claimed-by-me](img/tasklist-claimed-by-me_light.png)
 
@@ -81,28 +81,30 @@ You will now see the completed task by selecting the **Completed** task list:
 
 ### Processes
 
-> **_NOTE:_** This tab is only available for Self-Managed environments or an alpha cluster at Camunda Platform at the moment
+:::note
+This tab is currently only available for Self-Managed environments or an alpha cluster with Camunda Platform.
+:::
 
-It is possible to start processes by demand on Tasklist. For that on the top menu click in Processes - all the processes that you have acces to start will be listed in the Processes page.
+It is possible to start processes by demand using Tasklist. To do this, click **Processes** in the top menu. All the processes you have access to start will be listed in the **Processes** page.
 
 ![tasklist-processes](img/tasklist-processes.png)
 
-On the Search checkbox, it's possible to filter the processes. For that just start typing the process name and the list will be updated.
+On the **Search** checkbox, it's possible to filter the processes. Start typing the process name and the list will be updated.
 
 ![tasklist-processes-search](img/tasklist-processes-search.png)
 
-To start a process, click on the Start Process button on the process that you want to start.
+To start a process, click **Start Process** on the process you want to start.
 
 ![tasklist-processes-search](img/tasklist-processes-start.png)
 
-Tasklist will then wait for the process to be executed and in case the process generates a task, you will be redirected to the generated task.
+Tasklist will then wait for the process to be executed. If the process generates a task, you will be redirected to the generated task.
 
-### Why I'm not seeing any process?
+### I'm not seeing a process
 
-There could be multiple reasons on why you are not seeing any process in the Processes tab:
+There could be multiple reasons why you are not seeing any process in the **Processes** tab:
 
-- There is no process deployed to your environment
-- Your user doesn't have permission to see any process. Permissions are managed in Identity to allow users to have access to Processes.
-- You are in a SaaS environment
+- There is no process deployed to your environment.
+- Your user doesn't have permission to see any process. Permissions are managed in [Identity](docs/self-managed/identity/what-is-identity.md) to allow users access to processes.
+- You are in a SaaS environment.
 
-For all the above, contact your administrator to understand why no processes are being displayed.
+For all the above scenarios, contact your administrator to understand why no processes are displayed.
