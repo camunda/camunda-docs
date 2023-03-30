@@ -26,7 +26,7 @@ Get the variable details by variable id.
 
 | param name | type | required | description        |
 | ---------- | ---- | :------: | ------------------ |
-| variableId | path |   true   | ID of the variable |
+| variableId | path |  `true`  | ID of the variable |
 
 #### HTTP request example:
 

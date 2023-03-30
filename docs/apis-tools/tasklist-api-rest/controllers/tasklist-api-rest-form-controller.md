@@ -24,10 +24,10 @@ Get the form details by `formId` and `processDefinitionKey` required param.
 
 #### Request parameters:
 
-| param name           | type  | required |
-| -------------------- | ----- | -------- |
-| formId               | path  | true     |
-| processDefinitionKey | query | true     |
+| param name           | type  | required | description                     |
+| -------------------- | ----- | -------- | ------------------------------- |
+| formId               | path  | `true`   | ID of the form                  |
+| processDefinitionKey | query | `true`   | Reference to process definition |
 
 #### HTTP request example:
 
