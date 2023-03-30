@@ -78,3 +78,29 @@ TaskResponse - represents a user task.
 
 </TabItem>
 </Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+
+> id of the variables
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>name</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+
+> variable name
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>value</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+
+> full variable value
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>previewValue</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+
+> value preview (limited in size)
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>isValueTruncated</b></code>](#)<Bullet />`boolean` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+
+> shows, whether previewValue contains truncated value or full value
+
+### Returned by:
+
+[`Search task variables`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-task-variables) <Badge class="secondary" text="POST"/> <Bullet /> [`Get variable`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-variables-controller.md#get-variable) <Badge class="secondary" text="GET"/>

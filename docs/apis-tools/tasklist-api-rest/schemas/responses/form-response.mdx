@@ -42,7 +42,7 @@ export const Badge = (props) => (
   </>
 );
 
-TaskResponse - represents a user task.
+FormResponse - represents task embedded form.
 
 <Tabs groupId="schema" defaultValue="schema" values={
 [
@@ -74,3 +74,21 @@ TaskResponse - represents a user task.
 
 </TabItem>
 </Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+
+> The unique identifier of the embedded form within one process
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>processDefinitionKey</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+
+> Reference to process definition
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>schema</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="scalar"/>
+
+> Form content
+
+### Returned by:
+
+[`Get form`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-form-controller.md#get-form) <Badge class="secondary" text="GET"/> <Bullet />
