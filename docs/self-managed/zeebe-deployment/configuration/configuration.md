@@ -24,7 +24,7 @@ The configuration is applied during startup of Zeebe. It is not possible to chan
 The default configuration is located in `config/application.yaml`. This configuration contains the most common configuration settings for a standalone broker. It also lists the corresponding environment variable for each setting.
 
 :::note
-The default configuration is not suitable for a standalone gateway node. To run a standalone gateway node, take a look at `/config/gateway.yaml.template`.
+The default configuration is not suitable for a standalone gateway node. To run a standalone gateway node, take a look at [the gateway configuration](gateway.md) or `/config/gateway.yaml.template`.
 :::
 
 ## Configuration file templates
@@ -39,6 +39,8 @@ We provide templates that contain all possible configuration settings, along wit
 :::note
 These templates also include the corresponding environment variables to use for every setting.
 :::
+
+You may find it easier to search through our [broker](broker.md) and [gateway](gateway.md) configuration docs to adjust the templates.
 
 ## Editing the configuration
 
