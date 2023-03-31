@@ -205,6 +205,7 @@ module.exports = {
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
+                "components/modeler/bpmn/link-events/link-events",
               ],
             },
             {
@@ -237,12 +238,17 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
+            "components/connectors/out-of-the-box-connectors/operate",
+            "components/connectors/out-of-the-box-connectors/easy-post",
+            "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/google-maps-platform",
             "components/connectors/out-of-the-box-connectors/graphql",
             "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/rest",
@@ -728,6 +734,7 @@ module.exports = {
           "Access control": [
             "self-managed/concepts/access-control/applications",
             "self-managed/concepts/access-control/apis",
+            "self-managed/concepts/access-control/groups",
             "self-managed/concepts/access-control/permissions",
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
@@ -774,6 +781,13 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/rebalancing",
             "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
+          ],
+        },
+        {
+          Exporters: [
+            "self-managed/zeebe-deployment/exporters/exporters",
+            "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
+            "self-managed/zeebe-deployment/exporters/opensearch-exporter",
           ],
         },
       ],
@@ -1033,6 +1047,14 @@ module.exports = {
         "self-managed/identity/getting-started/install-identity",
         {
           "User guide": [
+            {
+              Groups: [
+                "self-managed/identity/user-guide/groups/creating-a-group",
+                "self-managed/identity/user-guide/groups/assigning-users-to-a-group",
+                "self-managed/identity/user-guide/groups/assigning-roles-to-a-group",
+                "self-managed/identity/user-guide/groups/creating-authorizations-for-a-group",
+              ],
+            },
             "self-managed/identity/user-guide/adding-an-application",
             "self-managed/identity/user-guide/adding-an-api",
             "self-managed/identity/user-guide/adding-a-permission",

@@ -57,63 +57,6 @@ These events include the following properties:
   - `executionPlatform`: <target platform\>
   - `executionPlatformVersion`: <target platform version\>
 
-In case of BPMN files, the event payload may include further diagram metrics:
-
-```json
-{
-  "elementTemplateCount": 1,
-  "elementTemplates": [
-    {
-      "appliesTo": ["bpmn:ServiceTask"],
-      "properties": {
-        "camunda:asyncBefore": 1,
-        "camunda:class": 1,
-        "camunda:inputParameter": 3,
-        "camunda:outputParameter": 1
-      }
-    }
-  ]
-}
-```
-
-Also in the case of BPMN diagrams, the event payload may include further diagram metrics:
-
-```json
-{
-  "diagramMetrics": {
-    "processVariablesCount": 3,
-    "tasks": {
-      "userTask": {
-        "count": 5,
-        "form": {
-          "count": 5,
-          "embedded": 1,
-          "camundaForms": 1,
-          "external": 2,
-          "generated": 0,
-          "other": 1
-        }
-      },
-      "serviceTask": {
-        "count": 5,
-        "implementation": {
-          "count": 5,
-          "java": 1,
-          "expression": 1,
-          "delegate": 2,
-          "external": 0,
-          "connector": 1
-        }
-      }
-    },
-    "subprocessPlanes": {
-      "count": 5,
-      "nesting:": 2
-    }
-  }
-}
-```
-
 ### Deployment and start instance events
 
 The `Deployment Event` is sent in the following situations:
@@ -134,44 +77,6 @@ If provided, as is the case when deploying to a Zeebe-based platform, the payloa
 
 ```json
 "targetType": "[camundaCloud or selfHosted]"
-```
-
-In case of BPMN files, the event payload may include further diagram metrics:
-
-```json
-{
-  "diagramMetrics": {
-    "processVariablesCount": 3,
-    "tasks": {
-      "userTask": {
-        "count": 5,
-        "form": {
-          "count": 5,
-          "embedded": 1,
-          "camundaForms": 1,
-          "external": 2,
-          "generated": 0,
-          "other": 1
-        }
-      },
-      "serviceTask": {
-        "count": 5,
-        "implementation": {
-          "count": 5,
-          "java": 1,
-          "expression": 1,
-          "delegate": 2,
-          "external": 0,
-          "connector": 1
-        }
-      }
-    },
-    "subprocessPlanes": {
-      "count": 5,
-      "nesting:": 2
-    }
-  }
-}
 ```
 
 If the target engine profile is set in the diagram, the payload will also contain it.
