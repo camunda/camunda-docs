@@ -223,8 +223,8 @@ module.exports = {
           beforeDefaultRemarkPlugins: [versionedLinks],
           versions: {
             "8.0": {
-                banner: 'none',
-            }
+              banner: "none",
+            },
           },
         },
         blog: false,
