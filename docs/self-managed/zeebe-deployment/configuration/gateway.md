@@ -28,14 +28,46 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ### zeebe.gateway.network
 
+<table name="network" id="network">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+            <th>Default Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>host</td>
+            <td>Sets the host the gateway binds to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_HOST`.</td>
+            <td>0.0.0.0</td>
+        </tr>
+        <tr>
+            <td>port</td>
+            <td>Sets the port the gateway binds to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_PORT`.</td>
+            <td>26500</td>
+        </tr>
+        <tr>
+            <td>minKeepAliveInterval</td>
+            <td>Sets the minimum keep alive interval. This setting specifies the minimum accepted interval between keep alive pings. This value must be specified as a positive integer followed by 's' for seconds, 'm' for minutes or 'h' for hours. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MINKEEPALIVEINTERVAL`.</td>
+            <td>30s</td>
+        </tr>
+        <tr>
+            <td>maxMessageSize</td>
+            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nisi&#x27; b&#x27;ac&#x27; b&#x27;a&#x27;.</td>
+            <td>4MB</td>
+        </tr>
+    </tbody>
+</table>
+
 #### YAML snippet
 
 ```yaml
 network:
-      host: 0.0.0.0
-      port: 26500
-      minKeepAliveInterval: 30s
-      maxMessageSize: 4MB
+    host: 0.0.0.0
+    port: 26500
+    minKeepAliveInterval: 30s
+    maxMessageSize: 4MB
 ```
 
 ### zeebe.gateway.cluster
