@@ -221,6 +221,11 @@ module.exports = {
           editUrl:
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
+          versions: {
+            "8.0": {
+                banner: 'none',
+            }
+          },
         },
         blog: false,
         theme: {
