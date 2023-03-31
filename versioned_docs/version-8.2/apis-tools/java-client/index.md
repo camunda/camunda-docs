@@ -34,7 +34,7 @@ If you build a Spring or Spring Boot application, you might want to use [Spring 
 In Java code, instantiate the client as follows:
 
 ```java
-  private static final String zeebeAddress = "[Zeebe Address]";
+  private static final String zeebeAPI = "[Zeebe Address without Port]";
   private static final String clientId = "[Client ID]";
   private static final String clientSecret = "[Client Secret]";
   private static final String oAuthAPI = "[OAuth API] ";
