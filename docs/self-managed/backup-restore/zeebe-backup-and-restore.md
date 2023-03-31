@@ -10,18 +10,23 @@ A backup of a Zeebe cluster is comprised of a consistent snapshot of all partiti
 Zeebe provides a REST API to create backups, query, and manage existing backups.
 The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway. The API documentation is also available as [OpenApi specification](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/backup-management-api.yaml).
 
-The backups are stored to an external data storage. [S3](https://aws.amazon.com/s3/) or any S3-compatible storage is supported as the backup storage.
-
 ## Configuration
 
 To use the backup feature in Zeebe, you must choose which external storage system you will use.
 Make sure to set the same configuration on all brokers in your cluster.
 
-Currently, Zeebe only supports [S3](#s3-backup-store) for external storage.
+Zeebe supports [S3](#s3-backup-store) and [Google Cloud Storage (GCS)](#gcs-backup-store) for external storage.
+
+:::caution
+Backups created with one store are not available or restorable from another store.
+
+This is especially relevant if you were using GCS through the S3 compatibility mode and want to switch to the new native support for GCS now.
+Even when the underlying storage bucket is the same, backups from one are not compatible with the other.
+:::
 
 ### S3 backup store
 
-To store your backups in any S3 compatible storage system such as AWS S3 or MinIO, set the backup store to `S3` and tell Zeebe how to connect to your bucket:
+To store your backups in any S3 compatible storage system such as [AWS S3] or [MinIO], set the backup store to `S3` and tell Zeebe how to connect to your bucket:
 
 ```yaml
 zeebe:
@@ -48,6 +53,9 @@ Alternatively, you can configure backup store using environment variables:
 - `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY` - If either `accessKey` or `secretKey` is not provided, the credentials are determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain).
 - `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY` - Specify the secret key.
 
+[AWS S3]: https://aws.amazon.com/s3/
+[MinIO]: https://min.io/
+
 #### Backup Encryption
 
 Zeebe does not support backup encryption natively, but it _can_ use encrypted S3 buckets. For AWS S3, this means [enabling default bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html).
@@ -72,6 +80,43 @@ zeebe.broker.data.backup.s3.compression: zstd # or use environment variable ZEEB
 
 [zstd]: https://github.com/facebook/zstd
 [commons-compress]: https://commons.apache.org/proper/commons-compress/
+
+### GCS backup store
+
+To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use:
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        store: GCS
+        gcs:
+          bucketName: # or use environment variable ZEEBE_BROKER_DATA_BACKUP_GCS_BUCKETNAME
+          basePath: # or use environment variable ZEEBE_BROKER_DATA_BACKUP_GCS_BASEPATH
+```
+
+The bucket specified with `bucketName` **must already exist**, Zeebe will not try to create one for you.
+To prevent misconfiguration, Zeebe will check at startup that the specified bucket exists and can be accessed.
+
+Setting a `basePath` is not required but useful if you want to use the same bucket for multiple Zeebe clusters.
+When `basePath` is set, Zeebe will only create and access objects under this path.
+This can be any string that is a valid [object name](https://cloud.google.com/storage/docs/objects#naming), for example the name your cluster.
+
+Authentication is handled by [Application Default Credentials](https://cloud.google.com/docs/authentication/application-default-credentials).
+In many cases, these credentials are automatically provided by the runtime environment.
+If you need more control, you can customize authentication by [setting environment variable](https://cloud.google.com/docs/authentication/application-default-credentials#GAC) `GOOGLE_APPLICATION_CREDENTIALS`.
+
+#### Backup encryption
+
+There are multiple [data encryption options](https://cloud.google.com/storage/docs/encryption), some of which are supported by Zeebe:
+
+- [Default server-side encryption](https://cloud.google.com/storage/docs/encryption/default-keys) is fully supported.
+  This is enabled by default for all GCS buckets.
+- [Customer-managed encryption keys](https://cloud.google.com/storage/docs/encryption/customer-managed-keys) are supported if they are [set as
+  the default key](https://cloud.google.com/storage/docs/encryption/using-customer-managed-keys#set-default-key) for your bucket.
+- [Customer-supplied encryption keys](https://cloud.google.com/storage/docs/encryption/customer-supplied-keys) are not supported.
+- [Client-side encryption keys](https://cloud.google.com/storage/docs/encryption/client-side-keys) are not supported.
 
 ## Create backup API
 
