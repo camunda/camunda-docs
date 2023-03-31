@@ -205,6 +205,7 @@ module.exports = {
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
+                "components/modeler/bpmn/link-events/link-events",
               ],
             },
             {
@@ -239,6 +240,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/aws-lambda",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/easy-post",
+            "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/googledrive",
             "components/connectors/out-of-the-box-connectors/google-maps-platform",
