@@ -33,7 +33,7 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ### zeebe.broker.gateway
 
-To configure the embedded gateway, see [Gateway config docs](self-managed/zeebe-depolyment/configuration/gateway-config).
+To configure the embedded gateway, see [Gateway config docs](/self-managed/zeebe-deployment/configuration/gateway.md).
 
 <table name="gateway" id="zeebe">
     <thead>
@@ -469,6 +469,85 @@ backup:
 
 ### zeebe.broker.cluster
 
+This section contains all cluster related configurations, to setup a zeebe cluster.
+
+<table name="cluser" id="cluster">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+            <th>Example Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>nodeId</td>
+            <td>Specifies the unique id of this broker node in a cluster. The id should be between 0 and number of nodes in the cluster (exclusive). This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_NODEID`.</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>partitionsCount</td>
+            <td>Controls the number of partitions, which should exist in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT`.</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>replicationFactor</td>
+            <td>Controls the replication factor, which defines the count of replicas per partition. The replication factor cannot be greater than the number of nodes in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR`.</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>clusterSize</td>
+            <td>Specifies the zeebe cluster size. This value is used to determine which broker is responsible for which partition. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERSIZE`.</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>initialContactPoints</td>
+            <td>Allows to specify a list of known other nodes to connect to on startup. The contact points of the internal network configuration must be specified. The format is [HOST:PORT]. To guarantee the cluster can survive network partitions, all nodes must be specified as initial contact points. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` specifying a comma-separated list of contact points. Default is empty list.</td>
+            <td>[ 192.168.1.22:26502, 192.168.1.32:26502 ]</td>
+        </tr>
+        <tr>
+            <td>clusterName</td>
+            <td>Allows to specify a name for the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERNAME`.</td>
+            <td>zeebe-cluster</td>
+        </tr>
+        <tr>
+            <td>heartbeatInterval</td>
+            <td>Configure heartbeatInterval. The leader sends a heartbeat to a follower every heartbeatInterval. Note: This is an advanced setting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_HEARTBEATINTERVAL`.</td>
+            <td>250ms</td>
+        </tr>
+        <tr>
+            <td>electionTimeout</td>
+            <td>Configure electionTimeout. If a follower does not receive a heartbeat from the leader with in an election timeout, it can start a new leader election. electionTimeout should be greater than configured heartbeatInterval. When the electionTimeout is large, there will be delay in detecting a leader failure. When the electionTimeout is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes. If the network latency between the nodes is high, it is recommended to have a higher election latency. Note: This is an advanced setting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_ELECTIONTIMEOUT`.</td>
+            <td>2500ms</td>
+        </tr>
+        <tr>
+            <td>raft</td>
+            <td>Configure raft properties.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>enablePriorityElection</td>
+            <td>When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distributed the leaders uniformly across the brokers. Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_ENABLEPRIORITYELECTION`.</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>flush</td>
+            <td>Configures how often data is explicitly flushed to disk. By default, for a given partition, data is flushed on every leader commit, and every follower append. This is to ensure consistency across all replicas. Disabling this can cause inconsistencies, and at worst, data corruption or data loss scenarios. The default behavior is optimized for safety, and flushing occurs on every leader commit and follower append in a synchronous fashion. You can introduce a delay to reduce the performance penalty of flushing via `delayTime`.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>enabled</td>
+            <td>If false, explicit flushing of the Raft log is disabled, and flushing only occurs right before a snapshot is taken. You should only disable explicit flushing if you are willing to accept potential data loss at the expense of performance. Before disabling it, try the delayed options, which provide a trade-off between safety and performance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_FLUSH_ENABLED`.</td>
+            <td>True</td>
+        </tr>
+        <tr>
+            <td>delayTime</td>
+            <td>If the delay is > 0, then flush requests are delayed by at least the given period. It is recommended that you find the smallest delay here with which you achieve your performance goals. It's also likely that anything above 30s is not useful, as this is the typical default flush interval for the Linux OS. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_FLUSH_DELAYTIME`.</td>
+            <td>0s</td>
+        </tr>
+    </tbody>
+</table>
+
 #### YAML snippet
 
 ```yaml
@@ -485,21 +564,150 @@ cluster:
   flush:
     enabled: true
     delayTime: 0s
-  membership:
-    broadcastUpdates: false
-    broadcastDisputes: true
-    notifySuspect: false
-    gossipInterval: 250ms
-    gossipFanout: 2
-    probeInterval: 1s
-    probeTimeout: 100ms
-    suspectProbes: 3
-    failureTimeout: 10s
-    syncInterval: 10s
-  messageCompression: NONE
+```
+
+### zeebe.broker.cluster.membership
+
+Configure parameters for SWIM protocol which is used to propagate cluster membership information among brokers and gateways.
+
+<table name="membership" id="membership">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Example Value</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>broadcastUpdates</td>
+            <td>Configure whether to broadcast member updates to all members. If set to false updates will be gossiped among the members. If set to true the network traffic may increase but it reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`.</td>
+            <td>False</td>
+        </tr>
+        <tr>
+            <td>broadcastDisputes</td>
+            <td>Configure whether to broadcast disputes to all members. If set to true the network traffic may increase but it reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES`.</td>
+            <td>True</td>
+        </tr>
+        <tr>
+            <td>notifySuspect</td>
+            <td>Configure whether to notify a suspect node on state changes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`.</td>
+            <td>False</td>
+        </tr>
+        <tr>
+            <td>gossipInterval</td>
+            <td>Sets the interval at which the membership updates are sent to a random member. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPINTERVAL`.</td>
+            <td>250ms</td>
+        </tr>
+        <tr>
+            <td>gossipFanout</td>
+            <td>Sets the number of members to which membership updates are sent at each gossip interval. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPFANOUT`.</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>probeInterval</td>
+            <td>Sets the interval at which to probe a random member. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBEINTERVAL`.</td>
+            <td>1s</td>
+        </tr>
+        <tr>
+            <td>probeTimeout</td>
+            <td>Sets the timeout for a probe response. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBETIMEOUT`.</td>
+            <td>100ms</td>
+        </tr>
+        <tr>
+            <td>suspectProbes</td>
+            <td>Sets the number of probes failed before declaring a member is suspect. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SUSPECTPROBES`.</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>failureTimeout</td>
+            <td>Sets the timeout for a suspect member is declared dead. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_FAILURETIMEOUT`.</td>
+            <td>10s</td>
+        </tr>
+        <tr>
+            <td>syncInterval</td>
+            <td>Sets the interval at which this member synchronizes its membership information with a random member. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_SYNCINTERVAL`.</td>
+            <td>10s</td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+membership:
+  broadcastUpdates: false
+  broadcastDisputes: true
+  notifySuspect: false
+  gossipInterval: 250ms
+  gossipFanout: 2
+  probeInterval: 1s
+  probeTimeout: 100ms
+  suspectProbes: 3
+  failureTimeout: 10s
+  syncInterval: 10s
+```
+
+### zeebe.broker.cluster.messageCompression
+
+This feature is useful when the network latency between the nodes is very high (for example when nodes are deployed in different data centers).
+
+When latency is high, the network bandwidth is severely reduced. Hence enabling compression helps to improve the throughput.
+
+:::caution
+When there is no latency enabling this may have a performance impact.
+:::
+
+:::note
+When this flag is enables, you must also enable compression in standalone broker configuration.
+:::
+
+<table name="messageCompression" id="messageCompression">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+            <th>Example Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>messageCompression</td>
+            <td>Configure compression algorithm for all messages sent between the gateway and the brokers. Available options are NONE, GZIP and SNAPPY. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MESSAGECOMPRESSION`.</td>
+            <td>NONE</td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+messageCompression: NONE
 ```
 
 ### zeebe.broker.threads
+
+ <table name="threads" id="threads">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Example Value</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>cpuThreadCount</td>
+            <td>Controls the number of non-blocking CPU threads to be used. WARNING: You should never specify a value that is larger than the number of physical cores available. Good practice is to leave 1-2 cores for ioThreads and the operating system (it has to run somewhere). For example, when running Zeebe on a machine which has 4 cores, a good value would be 2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_THREADS_CPUTHREADCOUNT`.</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>ioThreadCount</td>
+            <td>Controls the number of io threads to be used. These threads are used for workloads that write data to disk. While writing, these threads are blocked which means that they yield the CPU. This setting can also be overridden using the environment variable `ZEEBE_BROKER_THREADS_IOTHREADCOUNT`.</td>
+            <td>2</td>
+        </tr>
+    </tbody>
+</table>
 
 #### YAML snippet
 
@@ -510,6 +718,138 @@ threads:
 ```
 
 ### zeebe.broker.backpressure
+
+ <table name="backpressure" id="backpressure">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+            <th>Example Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>enabled</td>
+            <td>Set this to enable or disable backpressure. When enabled the broker rejects user requests when the number of inflight requests is greater than than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ENABLED`.</td>
+            <td>True</td>
+        </tr>
+        <tr>
+            <td>useWindowed</td>
+            <td>if enabled - will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_USEWINDOWED`.</td>
+            <td>True</td>
+        </tr>
+        <tr>
+            <td>algorithm</td>
+            <td>The algorithm configures which algorithm to use for the backpressure. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ALGORITHM`.</td>
+            <td>aimd</td>
+        </tr>
+        <tr>
+            <td>aimd</td>
+            <td>Configure the parameters for "aimd" algorithm. AIMD increases the limit for every successful response and decrease the limit for every request timeout.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>requestTimeout</td>
+            <td>The limit will be reduced if the observed latency is greater than the requestTimeout. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_AIMD_REQUESTTIMEOUT`.</td>
+            <td>200ms</td>
+        </tr>
+        <tr>
+            <td>initialLimit</td>
+            <td>The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment `ZEEBE_BROKER_BACKPRESSURE_AIMD_INITIALLIMIT`.</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>minLimit</td>
+            <td>The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_AIMD_MINLIMIT`.</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>maxLimit</td>
+            <td>The maximum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_AIMD_MAXLIMIT`.</td>
+            <td>1000</td>
+        </tr>
+        <tr>
+            <td>backoffRatio</td>
+            <td>The backoffRatio is a double value x such that x is between 0 and 1. It determines the factor by which the limit is decreased. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_AIMD_BACKOFFRATIO`.</td>
+            <td>0.9</td>
+        </tr>
+        <tr>
+            <td>fixed</td>
+            <td>Configure the parameters for "fixed" algorithm. </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>limit</td>
+            <td>Set a fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_FIXED_LIMIT`.</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>vegas</td>
+            <td>Configure the parameters for "vegas" algorithm. Vegas is an adaptive limit algorithm based on TCP Vegas congestion control algorithm. It estimates a queue size which indicates how many additional requests are in the queue over the estimated limit. The limit is adjusted based on this queueSize.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>initialLimit</td>
+            <td>The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_VEGAS_INITIALLIMIT`.</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>alpha</td>
+            <td>The limit is increased if the queue size is less than this value. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_VEGAS_ALPHA`.</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>beta</td>
+            <td>The limit is decreased if the queue size is greater than this value. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_VEGAS_BETA`.</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>gradient</td>
+            <td>Configure the parameters for "gradient" algorithm. In gradient algorithm, the limit is adjusted based on the gradient of observed latency and an estimated minimum latency. If gradient is less than 1, the limit is decreased otherwise the limit is increased.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>minLimit</td>
+            <td>The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT_MINLIMIT`.</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>initialLimit</td>
+            <td>The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT_INITIALLIMIT`.</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>rttTolerance</td>
+            <td>Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit.  For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable ZEEBE_BROKER_BACKPRESSURE_GRADIENT_RTTTOLERANCE</td>
+            <td>2.0</td>
+        </tr>
+        <tr>
+            <td>gradient2</td>
+            <td>Configure the parameters for "gradient2" algorithm.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>minLimit</td>
+            <td>The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_MINLIMIT`.</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>initialLimit</td>
+            <td>The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_INITIALLIMIT`.</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>rttTolerance</td>
+            <td>Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit.  For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_RTTTOLERANCE`.</td>
+            <td>2.0</td>
+        </tr>
+        <tr>
+            <td>longWindow</td>
+            <td>longWindow is the length of the window (the number of samples) to calculate the exponentially smoothed average latency. This setting can also be overridden using the environment `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_LONGWINDOW`.</td>
+            <td>600</td>
+        </tr>
+    </tbody>
+</table>
 
 #### YAML snippet
 
@@ -543,1301 +883,239 @@ backpressure:
 
 ### zeebe.broker.exporters
 
+Each exporter should be configured following this template:
+
+<table name="exporters" id="exporters">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+            <th>Example Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>exporters</td>
+            <td>Configure exporters below</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>jarPath</td>
+            <td>path to the JAR file containing the exporter class. JARs are only loaded once, so you can define two exporters that point to the same JAR, with the same class or a different one, and use args to parametrize its instantiation.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>className</td>
+            <td>entry point of the exporter, a class which *must* extend the io.camunda.zeebe.exporter.Exporter interface. A nested table as "args:" will allow you to inject arbitrary arguments into your class through the use of annotations. These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_[exporter name]_..."</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+exporters
+  jarPath:
+  className:
+```
+
+### zeebe.broker.exporters.debuglog (Debug Log Exporter)
+
+Enable the debug exporter to log the exported records to console.
+
+These setting can also be overridden using the environment variables "ZEEBE*BROKER_EXPORTERS_DEBUGLOG*..."
+
 #### YAML snippet
 
 ```yaml
 exporters:
-  jarPath: null
-  className: null
   debuglog:
     className: io.camunda.zeebe.broker.exporter.debug.DebugLogExporter
     args:
       logLevel: debug
       prettyPrint: false
-  debugHttp:
-    className: io.camunda.zeebe.broker.exporter.debug.DebugHttpExporter
-    args: port = 8000 limit = 1024
-  elasticsearch:
-    className: io.camunda.zeebe.exporter.ElasticsearchExporter
-    args:
-      url: http://localhost:9200
-      bulk:
-        delay: 5
-        size: 1000
-        memoryLimit: 10485760
-      authentication:
-        username: elastic
-        password: changeme
-      index:
-        prefix: zeebe-record
-        createTemplate: true
-        numberOfShards: 3
-        numberOfReplicas: 0
-        command: false
-        event: true
-        rejection: false
-        commandDistribution: true
-        decisionRequirements: true
-        decision: true
-        decisionEvaluation: true
-        deployment: true
-        deploymentDistribution: true
-        error: true
-        escalation: true
-        incident: true
-        job: true
-        jobBatch: false
-        message: true
-        messageStartSubscription: true
-        messageSubscription: true
-        process: true
-        processEvent: false
-        processInstance: true
-        processInstanceCreation: true
-        processInstanceModification: true
-        processMessageSubscription: true
-        resourceDeletion: true
-        signal: true
-        signalSubscription: true
-        timer: true
-        variable: true
-        variableDocument: true
-      retention:
-        enabled: false
-        minimumAge: 30d
-        policyName: zeebe-record-retention-policy
-  opensearch:
-    className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
-    args:
-      url: http://localhost:9200
-      requestTimeoutMs: 1000
-      bulk:
-        delay: 5
-        size: 1000
-        memoryLimit: 10485760
-      authentication:
-        username: opensearch
-        password: changeme
-      aws:
-        enabled: true
-        serviceName: es
-        region: eu-west-1
-      index:
-        prefix: zeebe-record
-        createTemplate: true
-        numberOfShards: 3
-        numberOfReplicas: 0
-        command: false
-        event: true
-        rejection: false
-        commandDistribution: true
-        decisionRequirements: true
-        decision: true
-        decisionEvaluation: true
-        deployment: true
-        deploymentDistribution: true
-        error: true
-        escalation: true
-        incident: true
-        job: true
-        jobBatch: false
-        message: true
-        messageStartSubscription: true
-        messageSubscription: true
-        process: true
-        processEvent: false
-        processInstance: true
-        processInstanceCreation: true
-        processInstanceModification: true
-        processMessageSubscription: true
-        resourceDeletion: true
-        signal: true
-        signalSubscription: true
-        timer: true
-        variable: true
-        variableDocument: true
 ```
 
-### zeebe.broker.processing
+### zeebe.broker.exporters.debugHttp (Debug HTTP Export)
+
+Enable the debug exporter to start a http server to inspect the exported records.
+
+These setting can also be overridden using the environment variables "ZEEBE*BROKER_EXPORTERS_DEBUGHTTP*..."
 
 #### YAML snippet
 
 ```yaml
-processing:
-  partitioning:
-    scheme: ROUND_ROBIN
-    fixed:
-      - partitionId: 1
-        nodes:
-          - nodeId: 0
-            priority: 1
-          - nodeId: 1
-            priority: 2
-          - nodeId: 2
-            priority: 3
-      - partitionId: 2
-        nodes:
-          - nodeId: 0
-            priority: 3
-          - nodeId: 1
-            priority: 2
-          - nodeId: 2
-            priority: 1
-      - partitionId: 3
-        nodes:
-          - nodeId: 0
-            priority: 2
-          - nodeId: 1
-            priority: 3
-          - nodeId: 2
-            priority: 2
-  raft:
-    requestTimeout: 5s
-    minStepDownFailureCount: 3
-    maxQuorumResponseTimeout: 0ms
-    preferSnapshotReplicationThreshold: 100
-    preallocateSegmentFiles: true
-  rocksdb:
-    columnFamilyOptions:
-      compaction_pri: kOldestSmallestSeqFirst
-      write_buffer_size: 67108864
-    enableStatistics: false
-    memoryLimit: 512MB
-    maxOpenFiles: -1
-    maxWriteBufferNumber: 6
-    minWriteBufferNumberToMerge: 3
-    ioRateBytesPerSecond: 0
-    disableWal: true
-  consistencyChecks:
-    enablePreconditions: false
-    enableForeignKeyChecks: false
-  queryApi:
-    enabled: false
-  engine:
-    messages:
-      ttlCheckerBatchLimit: 2147483647
-      ttlCheckerInterval: 1m
-  features:
-    enableYieldingDueDateChecker: false
-    enableActorMetrics: false
-    enableMessageTTLCheckerAsync: false
+debugHttp:
+  className: io.camunda.zeebe.broker.exporter.debug.DebugHttpExporter
+  args: port = 8000
+    limit = 1024
 ```
 
-### STOP
+### zeebe.broker.exporters.elasticsearch
 
-<table name="zeebe" id="zeebe">
+An example configuration for the elasticsearch exporter is below.
+
+These setting can also be overridden using the environment variables "ZEEBE*BROKER_EXPORTERS_ELASTICSEARCH*..."
+
+#### YAML snippet
+
+```yaml
+elasticsearch:
+  className: io.camunda.zeebe.exporter.ElasticsearchExporter
+
+  args:
+    url: http://localhost:9200
+
+    bulk:
+      delay: 5
+      size: 1000
+      memoryLimit: 10485760
+
+    authentication:
+      username: elastic
+      password: changeme
+
+    index:
+      prefix: zeebe-record
+      createTemplate: true
+
+      numberOfShards: 3
+      numberOfReplicas: 0
+
+      command: false
+      event: true
+      rejection: false
+
+      commandDistribution: true
+      decisionRequirements: true
+      decision: true
+      decisionEvaluation: true
+      deployment: true
+      deploymentDistribution: true
+      error: true
+      escalation: true
+      incident: true
+      job: true
+      jobBatch: false
+      message: true
+      messageStartSubscription: true
+      messageSubscription: true
+      process: true
+      processEvent: false
+      processInstance: true
+      processInstanceCreation: true
+      processInstanceModification: true
+      processMessageSubscription: true
+      resourceDeletion: true
+      signal: true
+      signalSubscription: true
+      timer: true
+      variable: true
+      variableDocument: true
+
+    retention:
+      enabled: false
+      minimumAge: 30d
+      policyName: zeebe-record-retention-policy
+```
+
+### zeebe.broker.exporters.opensearch (Opensearch Exporter)
+
+An example configuration for the opensearch exporter.
+
+These setting can also be overridden using the environment variables "ZEEBE*BROKER_EXPORTERS_OPENSEARCH*..."
+
+#### YAML snippet
+
+```yaml
+opensearch:
+  className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
+
+  args:
+    url: http://localhost:9200
+    requestTimeoutMs: 1000
+
+    bulk:
+      delay: 5
+      size: 1000
+      memoryLimit: 10485760
+
+    authentication:
+      username: opensearch
+      password: changeme
+
+    aws:
+      enabled: true
+      serviceName: es
+      region: eu-west-1
+
+    index:
+      prefix: zeebe-record
+      createTemplate: true
+
+      numberOfShards: 3
+      numberOfReplicas: 0
+
+      command: false
+      event: true
+      rejection: false
+
+      commandDistribution: true
+      decisionRequirements: true
+      decision: true
+      decisionEvaluation: true
+      deployment: true
+      deploymentDistribution: true
+      error: true
+      escalation: true
+      incident: true
+      job: true
+      jobBatch: false
+      message: true
+      messageStartSubscription: true
+      messageSubscription: true
+      process: true
+      processEvent: false
+      processInstance: true
+      processInstanceCreation: true
+      processInstanceModification: true
+      processMessageSubscription: true
+      resourceDeletion: true
+      signal: true
+      signalSubscription: true
+      timer: true
+      variable: true
+      variableDocument: true
+```
+
+### zeebe.broker.processing
+
+  <table name="processing" id="processing">
     <thead>
         <tr>
-            <th>Name</th>
+            <th>Field</th>
             <th>Description</th>
-            <th>Default Value</th>
+            <th>Example Value</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>&nbsp;&nbsp;cluster</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;urna&#x27; b&#x27;ve&#x27; b&#x27;id&#x27; b&#x27;nibh&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>0</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;partitionsCount</td>
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;replicationFactor</td>
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;quis&#x27; b&#x27;in&#x27; b&#x27;a&#x27; b&#x27;per&#x27; b&#x27;ipsum&#x27; b&#x27;auctor&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;clusterSize</td>
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;initialContactPoints</td>
-            <td></td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;cras&#x27; b&#x27;in&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;clusterName</td>
-            <td>zeebe-cluster</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;heartbeatInterval</td>
-            <td>250ms</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;electionTimeout</td>
-            <td>2500ms</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;raft</td>
-            <td>enablePriorityElection = true</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;flush</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayTime</td>
-            <td>0s</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;erat&#x27; b&#x27;ad&#x27; b&#x27;a&#x27; b&#x27;quis&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;membership</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nibh&#x27; b&#x27;ad&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;broadcastUpdates</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;orci&#x27; b&#x27;ve&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;broadcastDisputes</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;notifySuspect</td>
-            <td>False</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gossipInterval</td>
-            <td>250ms</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gossipFanout</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;eget&#x27; b&#x27;ut&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;probeInterval</td>
-            <td>1s</td>
-            <td>Lorem ipsum dolor.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;probeTimeout</td>
-            <td>100ms</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;suspectProbes</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;failureTimeout</td>
-            <td>10s</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;syncInterval</td>
-            <td>10s</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;messageCompression</td>
-            <td>NONE</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;threads</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;odio&#x27; b&#x27;ut&#x27; b&#x27;mi&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;cpuThreadCount</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nisi&#x27; b&#x27;ac&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;ioThreadCount</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;backpressure</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;ante&#x27; b&#x27;in&#x27; b&#x27;a&#x27; b&#x27;enim&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;enabled</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;useWindowed</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;algorithm</td>
-            <td>aimd</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;aimd</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requestTimeout</td>
-            <td>200ms</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;elit&#x27; b&#x27;id&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initialLimit</td>
+            <td>maxCommandsInBatch</td>
+            <td>Sets the maximum number of commands that processed within one batch. The processor will process until no more follow up commands are created by the initial command or the configured limit is reached. By default, up to 100 commands are processed in one batch. Can be set to 1 to disable batch processing. Must be a positive integer number. Note that the resulting batch size will contain more entries than this limit because it includes follow up events. When resulting batch size is too large (see maxMessageSize), processing will be rolled back and retried with a smaller maximum batch size. Lowering the command limit can reduce the frequency of rollback and retry. This setting can also be overridden using the environment variable `ZEEBE_BROKER_PROCESSING_MAXCOMMANDSINBATCH`.</td>
             <td>100</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;diam&#x27; b&#x27;et&#x27; b&#x27;amet&#x27; b&#x27;a&#x27; b&#x27;porta&#x27; b&#x27;magnis&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minLimit</td>
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nisi&#x27; b&#x27;id&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxLimit</td>
-            <td>1000</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backoffRatio</td>
-            <td>0.9</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;enim&#x27; b&#x27;et&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;fixed</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit</td>
-            <td>20</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;vegas</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;duis&#x27; b&#x27;ve&#x27; b&#x27;a&#x27; b&#x27;ac&#x27; b&#x27;a&#x27; b&#x27;ut&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initialLimit</td>
-            <td>20</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;eros&#x27; b&#x27;ac&#x27; b&#x27;a&#x27; b&#x27;rutrum&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alpha</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;enim&#x27; b&#x27;at&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beta</td>
-            <td>6</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;quis&#x27; b&#x27;ut&#x27; b&#x27;a&#x27; b&#x27;a&#x27; b&#x27;tempor&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;gradient</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minLimit</td>
-            <td>10</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initialLimit</td>
-            <td>20</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rttTolerance</td>
-            <td>2.0</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;gradient2</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;ante&#x27; b&#x27;ac&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minLimit</td>
-            <td>10</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initialLimit</td>
-            <td>20</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;cras&#x27; b&#x27;ac&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rttTolerance</td>
-            <td>2.0</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;duis&#x27; b&#x27;ac&#x27; b&#x27;a&#x27; b&#x27;ac&#x27; b&#x27;mauris&#x27; b&#x27;a&#x27; b&#x27;accumsan&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;longWindow</td>
-            <td>600</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;ante&#x27; b&#x27;ve&#x27; b&#x27;a&#x27; b&#x27;maecenas&#x27; b&#x27;quam&#x27; b&#x27;placerat&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;exporters</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;jarPath</td>
-            <td>None</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;className</td>
-            <td>None</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;debuglog</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;className</td>
-            <td>io.camunda.zeebe.broker.exporter.debug.DebugLogExporter</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logLevel</td>
-            <td>debug</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prettyPrint</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nisl&#x27; b&#x27;in&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;debugHttp</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;ante&#x27; b&#x27;ac&#x27; b&#x27;a&#x27; b&#x27;ut&#x27; b&#x27;nascetur&#x27; b&#x27;a&#x27; b&#x27;a&#x27; b&#x27;justo&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;className</td>
-            <td>io.camunda.zeebe.broker.exporter.debug.DebugHttpExporter</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args</td>
-            <td>port = 8000 limit = 1024</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;elasticsearch</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;className</td>
-            <td>io.camunda.zeebe.exporter.ElasticsearchExporter</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url</td>
-            <td>http://localhost:9200</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bulk</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delay</td>
-            <td>5</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size</td>
-            <td>1000</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memoryLimit</td>
-            <td>10485760</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authentication</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;amet&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username</td>
-            <td>elastic</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password</td>
-            <td>changeme</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix</td>
-            <td>zeebe-record</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createTemplate</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numberOfShards</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numberOfReplicas</td>
-            <td>0</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;enim&#x27; b&#x27;eu&#x27; b&#x27;nunc&#x27; b&#x27;a&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rejection</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;quis&#x27; b&#x27;mi&#x27; b&#x27;eu&#x27; b&#x27;velit&#x27; b&#x27;ut&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandDistribution</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;quis&#x27; b&#x27;ve&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decisionRequirements</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;diam&#x27; b&#x27;mi&#x27; b&#x27;in&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decision</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;elit&#x27; b&#x27;mi&#x27; b&#x27;a&#x27; b&#x27;quis&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decisionEvaluation</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deployment</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deploymentDistribution</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;escalation</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;pede&#x27; b&#x27;et&#x27; b&#x27;id&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;incident</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;job</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jobBatch</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nisl&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;eget&#x27; b&#x27;id&#x27; b&#x27;a&#x27; b&#x27;ante&#x27; b&#x27;taciti&#x27; b&#x27;a&#x27; b&#x27;montes&#x27; b&#x27;vitae&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messageStartSubscription</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messageSubscription</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processEvent</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processInstance</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processInstanceCreation</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processInstanceModification</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processMessageSubscription</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;quam&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resourceDeletion</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signal</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;urna&#x27; b&#x27;eu&#x27; b&#x27;a&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signalSubscription</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nisi&#x27; b&#x27;et&#x27; b&#x27;a&#x27; b&#x27;turpis&#x27; b&#x27;est&#x27; b&#x27;mi&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timer</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variable</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;urna&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variableDocument</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;retention</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;enim&#x27; b&#x27;id&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minimumAge</td>
-            <td>30d</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;policyName</td>
-            <td>zeebe-record-retention-policy</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;opensearch</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;amet&#x27; b&#x27;ac&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;className</td>
-            <td>io.camunda.zeebe.exporter.opensearch.OpensearchExporter</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url</td>
-            <td>http://localhost:9200</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;elit&#x27; b&#x27;ve&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requestTimeoutMs</td>
-            <td>1000</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;elit&#x27; b&#x27;ve&#x27; b&#x27;a&#x27; b&#x27;a&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bulk</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;cras&#x27; b&#x27;ve&#x27; b&#x27;a&#x27; b&#x27;mi&#x27; b&#x27;nec&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delay</td>
-            <td>5</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size</td>
-            <td>1000</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nisl&#x27; b&#x27;et&#x27; b&#x27;a&#x27; b&#x27;ad&#x27; b&#x27;nec&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memoryLimit</td>
-            <td>10485760</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authentication</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;erat&#x27; b&#x27;id&#x27; b&#x27;a&#x27; b&#x27;et&#x27; b&#x27;nisi&#x27; b&#x27;est&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username</td>
-            <td>opensearch</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;ante&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password</td>
-            <td>changeme</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aws</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;cras&#x27; b&#x27;ut&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serviceName</td>
-            <td>es</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;region</td>
-            <td>eu-west-1</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;diam&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prefix</td>
-            <td>zeebe-record</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nisl&#x27; b&#x27;ac&#x27; b&#x27;a&#x27; b&#x27;auctor&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createTemplate</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numberOfShards</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numberOfReplicas</td>
-            <td>0</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command</td>
-            <td>False</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;orci&#x27; b&#x27;eu&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rejection</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandDistribution</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decisionRequirements</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;quam&#x27; b&#x27;ut&#x27; b&#x27;a&#x27; b&#x27;per&#x27; b&#x27;a&#x27; b&#x27;ipsum&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decision</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decisionEvaluation</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deployment</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deploymentDistribution</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;enim&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;elit&#x27; b&#x27;in&#x27; b&#x27;a&#x27; b&#x27;velit&#x27; b&#x27;potenti&#x27; b&#x27;dui&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;escalation</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;incident</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;elit&#x27; b&#x27;et&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;job</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;amet&#x27; b&#x27;ve&#x27; b&#x27;id&#x27; b&#x27;magna&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jobBatch</td>
-            <td>False</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messageStartSubscription</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messageSubscription</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nibh&#x27; b&#x27;ac&#x27; b&#x27;a&#x27; b&#x27;nibh&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;nibh&#x27; b&#x27;ut&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processEvent</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processInstance</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;cras&#x27; b&#x27;mi&#x27; b&#x27;a&#x27; b&#x27;nam&#x27; b&#x27;aliquam&#x27; b&#x27;eu&#x27; b&#x27;a&#x27; b&#x27;a&#x27; b&#x27;a&#x27; b&#x27;posuere&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processInstanceCreation</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processInstanceModification</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processMessageSubscription</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;eget&#x27; b&#x27;in&#x27; b&#x27;a&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resourceDeletion</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signal</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signalSubscription</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;orci&#x27; b&#x27;id&#x27; b&#x27;ut&#x27; b&#x27;id&#x27; b&#x27;dui&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timer</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;amet&#x27; b&#x27;ac&#x27; b&#x27;pretium&#x27; b&#x27;erat&#x27; b&#x27;a&#x27; b&#x27;felis&#x27; b&#x27;proin&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variable</td>
-            <td>True</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variableDocument</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;processing</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;elit&#x27; b&#x27;ut&#x27; b&#x27;a&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;partitioning</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;ante&#x27; b&#x27;id&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scheme</td>
-            <td>ROUND_ROBIN</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixed</td>
-            <td></td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;urna&#x27; b&#x27;ut&#x27; b&#x27;a&#x27; b&#x27;a&#x27; b&#x27;ac&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partitionId</td>
-            <td>1</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodes</td>
-            <td></td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>0</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</td>
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;eget&#x27; b&#x27;in&#x27; b&#x27;a&#x27; b&#x27;hac&#x27; b&#x27;condimentum&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>1</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;quam&#x27; b&#x27;et&#x27; b&#x27;a&#x27; b&#x27;quam&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partitionId</td>
-            <td>2</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodes</td>
-            <td></td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>0</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>1</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;amet&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</td>
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partitionId</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;enim&#x27; b&#x27;ut&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodes</td>
-            <td></td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>0</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>1</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeId</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;odio&#x27; b&#x27;id&#x27; b&#x27;a&#x27; b&#x27;ad&#x27; b&#x27;a&#x27; b&#x27;ac&#x27; b&#x27;nunc&#x27; b&#x27;ve&#x27; b&#x27;at&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;priority</td>
-            <td>2</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;eget&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;raft</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requestTimeout</td>
-            <td>5s</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minStepDownFailureCount</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;amet&#x27; b&#x27;eu&#x27; b&#x27;a&#x27; b&#x27;et&#x27; b&#x27;at&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxQuorumResponseTimeout</td>
-            <td>0ms</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;odio&#x27; b&#x27;ut&#x27; b&#x27;a&#x27; b&#x27;ac&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preferSnapshotReplicationThreshold</td>
-            <td>100</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;orci&#x27; b&#x27;id&#x27; b&#x27;a&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preallocateSegmentFiles</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;odio&#x27; b&#x27;ve&#x27; b&#x27;et&#x27; b&#x27;at&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;rocksdb</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;columnFamilyOptions</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compaction_pri</td>
-            <td>kOldestSmallestSeqFirst</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;write_buffer_size</td>
-            <td>67108864</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enableStatistics</td>
-            <td>False</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memoryLimit</td>
-            <td>512MB</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxOpenFiles</td>
-            <td>-1</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxWriteBufferNumber</td>
-            <td>6</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minWriteBufferNumberToMerge</td>
-            <td>3</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ioRateBytesPerSecond</td>
-            <td>0</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disableWal</td>
-            <td>True</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;consistencyChecks</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enablePreconditions</td>
-            <td>False</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enableForeignKeyChecks</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;queryApi</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;engine</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messages</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum dolor sit amet.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ttlCheckerBatchLimit</td>
-            <td>2147483647</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ttlCheckerInterval</td>
-            <td>1m</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;features</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>Lorem ipsum.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enableYieldingDueDateChecker</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing elit b&#x27;eros&#x27; b&#x27;in&#x27;.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enableActorMetrics</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur adipiscing.</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enableMessageTTLCheckerAsync</td>
-            <td>False</td>
-            <td>Lorem ipsum dolor sit amet, consecteteur.</td>
         </tr>
     </tbody>
 </table>
+
+#### YAML snippet
+
+```yaml
+processing: maxCommandsInBatch = 100
+```
+
+### Experimental configuration
+
+See the experimental section of the [broker.yaml.template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template#L733).
+
+Be aware that all configuration's which are part of the experimental section are subject to change and can be dropped at any time.
