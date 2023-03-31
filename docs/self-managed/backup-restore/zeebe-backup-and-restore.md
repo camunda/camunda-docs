@@ -12,20 +12,18 @@ The backup management API is a custom endpoint `backups`, available via [Spring 
 
 The backups are stored to an external data storage. [S3](https://aws.amazon.com/s3/) or any S3-compatible storage is supported as the backup storage.
 
-## Prerequisites
+## Configuration
 
-To use the backup feature in Zeebe, the following configurations must be provided:
+To use the backup feature in Zeebe, you must choose which external storage system you will use.
+Make sure to set the same configuration on all brokers in your cluster.
 
-- Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` includes the endpoint "backups". By default, this is set to "\*" which included backups.
-- Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
-- For additional configurations such as security, refer to the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints).
-- An external S3-compatible storage must be configured as the backup store.
+Currently, Zeebe only supports [S3](#s3-backup-store) for external storage.
 
-### Configure S3 backup store
+### S3 backup store
 
-Configure backup store in the configuration file as follows:
+To store your backups in any S3 compatible storage system such as AWS S3 or MinIO, set the backup store to `S3` and tell Zeebe how to connect to your bucket:
 
-```
+```yaml
 zeebe:
   broker:
     data:
@@ -42,15 +40,13 @@ zeebe:
 
 Alternatively, you can configure backup store using environment variables:
 
-- `ZEEBE_BROKER_DATA_BACKUP_STORE` - Specify which storage to use as the backup storage. Currently, only S3 is supported. You can use any S3-compatible storage.
+- `ZEEBE_BROKER_DATA_BACKUP_STORE` - Set this to `S3` to store backups in S3 buckets.
 - `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` - The backup is stored in this bucket. **The bucket must already exist**.
 - `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH` - If the bucket is shared with other Zeebe clusters, a unique basePath must be configured.
 - `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT` - If no endpoint is provided, it is determined based on the configured region.
 - `ZEEBE_BROKER_DATA_BACKUP_S3_REGION` - If no region is provided, it is determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment).
 - `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY` - If either `accessKey` or `secretKey` is not provided, the credentials are determined [from the environment](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain).
 - `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY` - Specify the secret key.
-
-The same configuration must be provided to all brokers in a cluster.
 
 #### Backup Encryption
 
@@ -71,16 +67,8 @@ You can enable compression by specifying a compression algorithm to use. We reco
 More compression algorithms are available; check [commons-compress] for a full list.
 
 ```yaml
-zeebe:
-  broker:
-    data:
-      backup:
-        store: s3
-        s3:
-          compression: zstd
+zeebe.broker.data.backup.s3.compression: zstd # or use environment variable ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION
 ```
-
-Alternatively, you can configure backup compression using an environment variable: `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`.
 
 [zstd]: https://github.com/facebook/zstd
 [commons-compress]: https://commons.apache.org/proper/commons-compress/
