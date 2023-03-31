@@ -585,21 +585,21 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Link
+            <a href="../link-events">Link</a>
         </td>
         <td></td>
         <td></td>
         <td></td>
         <td>
-            <a href="#">
-                <LinkCatchEventSvg />
+            <a href="../link-events/">
+                <LinkCatchEventSvg className="implemented"/>
             </a>
         </td>
         <td></td>
         <td></td>
         <td>
-            <a href="#">
-                <LinkThrowEventSvg />
+            <a href="../link-events">
+                <LinkThrowEventSvg className="implemented"/>
             </a>
         </td>
         <td></td>
