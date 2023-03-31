@@ -101,7 +101,7 @@ To prevent misconfiguration, Zeebe will check at startup that the specified buck
 
 Setting a `basePath` is not required but useful if you want to use the same bucket for multiple Zeebe clusters.
 When `basePath` is set, Zeebe will only create and access objects under this path.
-This can be any string that is a valid [object name](https://cloud.google.com/storage/docs/objects#naming), for example the name your cluster.
+This can be any string that is a valid [object name](https://cloud.google.com/storage/docs/objects#naming), for example the name of your cluster.
 
 Authentication is handled by [Application Default Credentials](https://cloud.google.com/docs/authentication/application-default-credentials).
 In many cases, these credentials are automatically provided by the runtime environment.
