@@ -358,6 +358,7 @@ operate:
             path: tls.crt
         defaultMode: 420
 ```
+
 The actual configuration properties can be reviewed [here](https://docs.camunda.io/docs/self-managed/operate-deployment/operate-configuration/#zeebe-broker-connection).
 
 For Tasklist:
@@ -382,6 +383,7 @@ tasklist:
             path: tls.crt
         defaultMode: 420
 ```
+
 The actual configuration properties can be reviewed [here](https://docs.camunda.io/docs/self-managed/tasklist-deployment/tasklist-configuration/#zeebe-broker-connection).
 
 5. Please configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
