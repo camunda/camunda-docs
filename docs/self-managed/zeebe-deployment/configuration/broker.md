@@ -8,20 +8,25 @@ description: "Let's analyze how to configure the Zeebe broker"
 A complete broker configuration template is available in the [Zeebe repo](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template).
 
 ## Conventions
+
 Take the following conventions into consideration when working with the broker configuration.
 
 ### Byte sizes
+
 For buffers and others must be specified as strings and follow the following format: "10U" where U (unit) must be replaced with KB = Kilobytes, MB = Megabytes or GB = Gigabytes. If unit is omitted then the default unit is simply bytes.
 
 Example:
 `sendBufferSize = "16MB"` (creates a buffer of 16 Megabytes)
 
 ### Time units
+
 Timeouts, intervals, and the likes, must be specified either in the standard ISO-8601 format used by java.time.Duration, or as strings with the following format: "VU", where:
+
 - V is a numerical value (e.g. 1, 5, 10, etc.)
 - U is the unit, one of: ms = Millis, s = Seconds, m = Minutes, or h = Hours
 
 ### Paths
+
 Relative paths are resolved relative to the installation directory of the broker.
 
 ## Configuration
@@ -51,16 +56,16 @@ To configure the embedded gateway, see [Gateway config docs](self-managed/zeebe-
 
 ```yaml
 broker:
-    gateway:
-      enable: false
+  gateway:
+    enable: false
 ```
 
 ### zeebe.broker.network
 
 This section contains the network configuration. Particularly, it allows to configure the hosts and ports the broker should bind to. The broker exposes two sockets:
 
-  1. command: the socket which is used for gateway-to-broker communication 
-  2. internal: the socket which is used for broker-to-broker communication
+1. command: the socket which is used for gateway-to-broker communication
+2. internal: the socket which is used for broker-to-broker communication
 
 <table name="network" id="network">
     <thead>
@@ -98,10 +103,10 @@ This section contains the network configuration. Particularly, it allows to conf
 
 ```yaml
 network:
-    host: 0.0.0.0
-    advertisedHost: 0.0.0.0
-    portOffset: 0
-    maxMessageSize: 4MB
+  host: 0.0.0.0
+  advertisedHost: 0.0.0.0
+  portOffset: 0
+  maxMessageSize: 4MB
 ```
 
 ### zeebe.broker.network.security
@@ -137,9 +142,9 @@ network:
 
 ```yaml
 security:
-    enabled: false
-    certificateChainPath:
-    privateKeyPath:
+  enabled: false
+  certificateChainPath:
+  privateKeyPath:
 ```
 
 ### zeebe.broker.network.commandApi
@@ -180,10 +185,10 @@ security:
 
 ```yaml
 commandApi:
-    host: 0.0.0.0
-    port: 26501
-    advertisedHost: 0.0.0.0
-    advertisedPort: 25601
+  host: 0.0.0.0
+  port: 26501
+  advertisedHost: 0.0.0.0
+  advertisedPort: 25601
 ```
 
 ### zeebe.broker.network.internalApi
@@ -224,10 +229,10 @@ commandApi:
 
 ```yaml
 internalApi:
-    host: 0.0.0.0
-    port: 26502
-    advertisedHost: 0.0.0.0
-    advertisedPort: 25602
+  host: 0.0.0.0
+  port: 26502
+  advertisedHost: 0.0.0.0
+  advertisedPort: 25602
 ```
 
 ### zeebe.broker.data
@@ -283,10 +288,10 @@ partitions
 
 ```yaml
 data:
-    directory: data
-    runtimeDirectory: null
-    logSegmentSize: 128MB
-    snapshotPeriod: 15m
+  directory: data
+  runtimeDirectory: null
+  logSegmentSize: 128MB
+  snapshotPeriod: 15m
 ```
 
 ### zeebe.broker.data.disk
@@ -329,18 +334,19 @@ data:
 </table>
 
 #### YAML snippet
+
 ```yaml
 disk:
-    enableMonitoring: true
-    monitoringInterval: 1s
-    freeSpace:
-        processing: 2GB
-        replication: 1GB
+  enableMonitoring: true
+  monitoringInterval: 1s
+  freeSpace:
+    processing: 2GB
+    replication: 1GB
 ```
 
 ### zeebe.broker.data.backup
 
-Configure backup store. 
+Configure backup store.
 
 :::note
 
@@ -441,23 +447,24 @@ Use the same configuration on all brokers of this cluster.
 </table>
 
 #### YAML snippet
+
 ```yaml
 backup:
-        store: NONE
-        s3:
-          bucketName: null
-          endpoint: null
-          region: null
-          secretKey: null
-          apiCallTimeout: PT180S
-          forcePathStyleAccess: false
-          compression: none
-          basePath: null
-        gcs:
-          bucketName: null
-          basePath: null
-          host: null
-          auth: auto
+  store: NONE
+  s3:
+    bucketName: null
+    endpoint: null
+    region: null
+    secretKey: null
+    apiCallTimeout: PT180S
+    forcePathStyleAccess: false
+    compression: none
+    basePath: null
+  gcs:
+    bucketName: null
+    basePath: null
+    host: null
+    auth: auto
 ```
 
 ### zeebe.broker.cluster
@@ -465,31 +472,31 @@ backup:
 #### YAML snippet
 
 ```yaml
-    cluster:
-      nodeId: 0
-      partitionsCount: 1
-      replicationFactor: 1
-      clusterSize: 1
-      initialContactPoints: []
-      clusterName: zeebe-cluster
-      heartbeatInterval: 250ms
-      electionTimeout: 2500ms
-      raft: enablePriorityElection = true
-      flush:
-        enabled: true
-        delayTime: 0s
-      membership:
-        broadcastUpdates: false
-        broadcastDisputes: true
-        notifySuspect: false
-        gossipInterval: 250ms
-        gossipFanout: 2
-        probeInterval: 1s
-        probeTimeout: 100ms
-        suspectProbes: 3
-        failureTimeout: 10s
-        syncInterval: 10s
-      messageCompression: NONE
+cluster:
+  nodeId: 0
+  partitionsCount: 1
+  replicationFactor: 1
+  clusterSize: 1
+  initialContactPoints: []
+  clusterName: zeebe-cluster
+  heartbeatInterval: 250ms
+  electionTimeout: 2500ms
+  raft: enablePriorityElection = true
+  flush:
+    enabled: true
+    delayTime: 0s
+  membership:
+    broadcastUpdates: false
+    broadcastDisputes: true
+    notifySuspect: false
+    gossipInterval: 250ms
+    gossipFanout: 2
+    probeInterval: 1s
+    probeTimeout: 100ms
+    suspectProbes: 3
+    failureTimeout: 10s
+    syncInterval: 10s
+  messageCompression: NONE
 ```
 
 ### zeebe.broker.threads
@@ -498,8 +505,8 @@ backup:
 
 ```yaml
 threads:
-    cpuThreadCount: 2
-    ioThreadCount: 2
+  cpuThreadCount: 2
+  ioThreadCount: 2
 ```
 
 ### zeebe.broker.backpressure
@@ -508,30 +515,30 @@ threads:
 
 ```yaml
 backpressure:
-      enabled: true
-      useWindowed: true
-      algorithm: aimd
-      aimd:
-        requestTimeout: 200ms
-        initialLimit: 100
-        minLimit: 1
-        maxLimit: 1000
-        backoffRatio: 0.9
-      fixed:
-        limit: 20
-      vegas:
-        initialLimit: 20
-        alpha: 3
-        beta: 6
-      gradient:
-        minLimit: 10
-        initialLimit: 20
-        rttTolerance: 2.0
-      gradient2:
-        minLimit: 10
-        initialLimit: 20
-        rttTolerance: 2.0
-        longWindow: 600
+  enabled: true
+  useWindowed: true
+  algorithm: aimd
+  aimd:
+    requestTimeout: 200ms
+    initialLimit: 100
+    minLimit: 1
+    maxLimit: 1000
+    backoffRatio: 0.9
+  fixed:
+    limit: 20
+  vegas:
+    initialLimit: 20
+    alpha: 3
+    beta: 6
+  gradient:
+    minLimit: 10
+    initialLimit: 20
+    rttTolerance: 2.0
+  gradient2:
+    minLimit: 10
+    initialLimit: 20
+    rttTolerance: 2.0
+    longWindow: 600
 ```
 
 ### zeebe.broker.exporters
@@ -540,115 +547,115 @@ backpressure:
 
 ```yaml
 exporters:
-      jarPath: null
-      className: null
-      debuglog:
-        className: io.camunda.zeebe.broker.exporter.debug.DebugLogExporter
-        args:
-          logLevel: debug
-          prettyPrint: false
-      debugHttp:
-        className: io.camunda.zeebe.broker.exporter.debug.DebugHttpExporter
-        args: port = 8000 limit = 1024
-      elasticsearch:
-        className: io.camunda.zeebe.exporter.ElasticsearchExporter
-        args:
-          url: http://localhost:9200
-          bulk:
-            delay: 5
-            size: 1000
-            memoryLimit: 10485760
-          authentication:
-            username: elastic
-            password: changeme
-          index:
-            prefix: zeebe-record
-            createTemplate: true
-            numberOfShards: 3
-            numberOfReplicas: 0
-            command: false
-            event: true
-            rejection: false
-            commandDistribution: true
-            decisionRequirements: true
-            decision: true
-            decisionEvaluation: true
-            deployment: true
-            deploymentDistribution: true
-            error: true
-            escalation: true
-            incident: true
-            job: true
-            jobBatch: false
-            message: true
-            messageStartSubscription: true
-            messageSubscription: true
-            process: true
-            processEvent: false
-            processInstance: true
-            processInstanceCreation: true
-            processInstanceModification: true
-            processMessageSubscription: true
-            resourceDeletion: true
-            signal: true
-            signalSubscription: true
-            timer: true
-            variable: true
-            variableDocument: true
-          retention:
-            enabled: false
-            minimumAge: 30d
-            policyName: zeebe-record-retention-policy
-      opensearch:
-        className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
-        args:
-          url: http://localhost:9200
-          requestTimeoutMs: 1000
-          bulk:
-            delay: 5
-            size: 1000
-            memoryLimit: 10485760
-          authentication:
-            username: opensearch
-            password: changeme
-          aws:
-            enabled: true
-            serviceName: es
-            region: eu-west-1
-          index:
-            prefix: zeebe-record
-            createTemplate: true
-            numberOfShards: 3
-            numberOfReplicas: 0
-            command: false
-            event: true
-            rejection: false
-            commandDistribution: true
-            decisionRequirements: true
-            decision: true
-            decisionEvaluation: true
-            deployment: true
-            deploymentDistribution: true
-            error: true
-            escalation: true
-            incident: true
-            job: true
-            jobBatch: false
-            message: true
-            messageStartSubscription: true
-            messageSubscription: true
-            process: true
-            processEvent: false
-            processInstance: true
-            processInstanceCreation: true
-            processInstanceModification: true
-            processMessageSubscription: true
-            resourceDeletion: true
-            signal: true
-            signalSubscription: true
-            timer: true
-            variable: true
-            variableDocument: true
+  jarPath: null
+  className: null
+  debuglog:
+    className: io.camunda.zeebe.broker.exporter.debug.DebugLogExporter
+    args:
+      logLevel: debug
+      prettyPrint: false
+  debugHttp:
+    className: io.camunda.zeebe.broker.exporter.debug.DebugHttpExporter
+    args: port = 8000 limit = 1024
+  elasticsearch:
+    className: io.camunda.zeebe.exporter.ElasticsearchExporter
+    args:
+      url: http://localhost:9200
+      bulk:
+        delay: 5
+        size: 1000
+        memoryLimit: 10485760
+      authentication:
+        username: elastic
+        password: changeme
+      index:
+        prefix: zeebe-record
+        createTemplate: true
+        numberOfShards: 3
+        numberOfReplicas: 0
+        command: false
+        event: true
+        rejection: false
+        commandDistribution: true
+        decisionRequirements: true
+        decision: true
+        decisionEvaluation: true
+        deployment: true
+        deploymentDistribution: true
+        error: true
+        escalation: true
+        incident: true
+        job: true
+        jobBatch: false
+        message: true
+        messageStartSubscription: true
+        messageSubscription: true
+        process: true
+        processEvent: false
+        processInstance: true
+        processInstanceCreation: true
+        processInstanceModification: true
+        processMessageSubscription: true
+        resourceDeletion: true
+        signal: true
+        signalSubscription: true
+        timer: true
+        variable: true
+        variableDocument: true
+      retention:
+        enabled: false
+        minimumAge: 30d
+        policyName: zeebe-record-retention-policy
+  opensearch:
+    className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
+    args:
+      url: http://localhost:9200
+      requestTimeoutMs: 1000
+      bulk:
+        delay: 5
+        size: 1000
+        memoryLimit: 10485760
+      authentication:
+        username: opensearch
+        password: changeme
+      aws:
+        enabled: true
+        serviceName: es
+        region: eu-west-1
+      index:
+        prefix: zeebe-record
+        createTemplate: true
+        numberOfShards: 3
+        numberOfReplicas: 0
+        command: false
+        event: true
+        rejection: false
+        commandDistribution: true
+        decisionRequirements: true
+        decision: true
+        decisionEvaluation: true
+        deployment: true
+        deploymentDistribution: true
+        error: true
+        escalation: true
+        incident: true
+        job: true
+        jobBatch: false
+        message: true
+        messageStartSubscription: true
+        messageSubscription: true
+        process: true
+        processEvent: false
+        processInstance: true
+        processInstanceCreation: true
+        processInstanceModification: true
+        processMessageSubscription: true
+        resourceDeletion: true
+        signal: true
+        signalSubscription: true
+        timer: true
+        variable: true
+        variableDocument: true
 ```
 
 ### zeebe.broker.processing
@@ -657,65 +664,64 @@ exporters:
 
 ```yaml
 processing:
-      partitioning:
-        scheme: ROUND_ROBIN
-        fixed:
-        - partitionId: 1
-          nodes:
+  partitioning:
+    scheme: ROUND_ROBIN
+    fixed:
+      - partitionId: 1
+        nodes:
           - nodeId: 0
             priority: 1
           - nodeId: 1
             priority: 2
           - nodeId: 2
             priority: 3
-        - partitionId: 2
-          nodes:
+      - partitionId: 2
+        nodes:
           - nodeId: 0
             priority: 3
           - nodeId: 1
             priority: 2
           - nodeId: 2
             priority: 1
-        - partitionId: 3
-          nodes:
+      - partitionId: 3
+        nodes:
           - nodeId: 0
             priority: 2
           - nodeId: 1
             priority: 3
           - nodeId: 2
             priority: 2
-      raft:
-        requestTimeout: 5s
-        minStepDownFailureCount: 3
-        maxQuorumResponseTimeout: 0ms
-        preferSnapshotReplicationThreshold: 100
-        preallocateSegmentFiles: true
-      rocksdb:
-        columnFamilyOptions:
-          compaction_pri: kOldestSmallestSeqFirst
-          write_buffer_size: 67108864
-        enableStatistics: false
-        memoryLimit: 512MB
-        maxOpenFiles: -1
-        maxWriteBufferNumber: 6
-        minWriteBufferNumberToMerge: 3
-        ioRateBytesPerSecond: 0
-        disableWal: true
-      consistencyChecks:
-        enablePreconditions: false
-        enableForeignKeyChecks: false
-      queryApi:
-        enabled: false
-      engine:
-        messages:
-          ttlCheckerBatchLimit: 2147483647
-          ttlCheckerInterval: 1m
-      features:
-        enableYieldingDueDateChecker: false
-        enableActorMetrics: false
-        enableMessageTTLCheckerAsync: false
+  raft:
+    requestTimeout: 5s
+    minStepDownFailureCount: 3
+    maxQuorumResponseTimeout: 0ms
+    preferSnapshotReplicationThreshold: 100
+    preallocateSegmentFiles: true
+  rocksdb:
+    columnFamilyOptions:
+      compaction_pri: kOldestSmallestSeqFirst
+      write_buffer_size: 67108864
+    enableStatistics: false
+    memoryLimit: 512MB
+    maxOpenFiles: -1
+    maxWriteBufferNumber: 6
+    minWriteBufferNumberToMerge: 3
+    ioRateBytesPerSecond: 0
+    disableWal: true
+  consistencyChecks:
+    enablePreconditions: false
+    enableForeignKeyChecks: false
+  queryApi:
+    enabled: false
+  engine:
+    messages:
+      ttlCheckerBatchLimit: 2147483647
+      ttlCheckerInterval: 1m
+  features:
+    enableYieldingDueDateChecker: false
+    enableActorMetrics: false
+    enableMessageTTLCheckerAsync: false
 ```
-
 
 ### STOP
 
@@ -1834,4 +1840,4 @@ processing:
             <td>Lorem ipsum dolor sit amet, consecteteur.</td>
         </tr>
     </tbody>
-</table> 
+</table>
