@@ -16,6 +16,11 @@ When a process is deployed, it schedules a timer for each timer start event. Sch
 
 When a timer is triggered, a new process instance is created and the corresponding timer start event is activated.
 
+### Timer accuracy
+
+Zeebe is an asynchronous system. Because of this there is no guarantee that a timer triggers exactly at the configured time.
+Depending on how much load the system is under, timers could trigger later than their due date. They will never trigger earlier than the due date.
+
 ## Intermediate timer catch events
 
 An intermediate timer catch event must have a time duration definition that defines when it is triggered.
