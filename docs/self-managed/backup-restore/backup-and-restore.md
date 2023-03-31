@@ -19,7 +19,7 @@ To take backups, you must first configure backup storage.
 
 Operate, Tasklist, and Optimize use Elasticsearch as backend storage and use the snapshot feature of Elasticsearch for backing up their state. Therefore, you must configure a [snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html) in Elasticsearch.
 
-Zeebe stores its backup to an external storage and must be configured before the cluster is started. Refer to [Zeebe backup configuration](/self-managed/backup-restore/zeebe-backup-and-restore.md/#prerequisites) for additional information.
+Zeebe stores its backup to an external storage and must be configured before the cluster is started. Refer to [Zeebe backup configuration](/self-managed/backup-restore/zeebe-backup-and-restore.md/#configuration) for additional information.
 
 ### Backup process
 
