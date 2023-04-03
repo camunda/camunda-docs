@@ -13,6 +13,7 @@ Currently supported events:
 - [Escalation events](escalation-events/escalation-events.md)
 - [Terminate events](terminate-events/terminate-events.md)
 - [Link events](link-events/link-events.md)
+- [Signal events](signal-events/signal-events.md)
 
 ## Events in general
 
