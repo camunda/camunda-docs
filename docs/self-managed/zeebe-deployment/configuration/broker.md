@@ -418,39 +418,6 @@ exporters
   className:
 ```
 
-### zeebe.broker.exporters.debuglog (Debug Log Exporter)
-
-Enable the debug exporter to log the exported records to console.
-
-These setting can also be overridden using the environment variables "`ZEEBE*BROKER_EXPORTERS_DEBUGLOG*`..."
-
-#### YAML snippet
-
-```yaml
-exporters:
-  debuglog:
-    className: io.camunda.zeebe.broker.exporter.debug.DebugLogExporter
-    args:
-      logLevel: debug
-      prettyPrint: false
-```
-
-### zeebe.broker.exporters.debugHttp (Debug HTTP Export)
-
-Enable the debug exporter to start a http server to inspect the exported records.
-
-These setting can also be overridden using the environment variables "`ZEEBE*BROKER_EXPORTERS_DEBUGHTTP*`..."
-
-#### YAML snippet
-
-```yaml
-exporters:
-  debugHttp:
-    className: io.camunda.zeebe.broker.exporter.debug.DebugHttpExporter
-    args: port = 8000
-      limit = 1024
-```
-
 ### zeebe.broker.exporters.elasticsearch
 
 An example configuration for the elasticsearch exporter is below.
