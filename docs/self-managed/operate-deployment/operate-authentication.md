@@ -195,7 +195,7 @@ By default, when using Operate with Identity, one can assign a user "read" and/o
 
 More fine grained permissions may be enabled:
 
-1. Resource authorizations must be enabled in Identity [TODO link here].
+1. Resource authorizations must be [enabled in Identity](../../identity/user-guide/authorizations/managing-resource-authorizations/).
 2. Operate must be configured to use resource authorizations:
 
 ```yaml
@@ -213,4 +213,4 @@ The user or user group can be assigned following types of permissions:
 | UPDATE_PROCESS_INSTANCE | process-definition                      | User can retry the incident, add/update variable, cancel or modify process instance related to defined process definition. |
 | DELETE_PROCESS_INSTANCE | process-definition                      | User can delete process instance related to defined process definition                                                     |
 
-For more information please check Identity docs [TODO link here].
+For more information please check [Identity docs](../../concepts/access-control/resource-authorizations/).
