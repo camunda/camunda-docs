@@ -66,20 +66,20 @@ Identity requires the following parameters:
 | spring.security.oauth2.resourceserver.jwt.issueruri  | Token issuer URI                                   | http://localhost:18080/auth/realms/camunda-platform                               |
 | spring.security.oauth2.resourceserver.jwt.jwkseturi  | Complete URI to get public keys for JWT validation | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
-### Resource based permissions
+### Resource-based permissions
 
 1. Resource authorizations must be [enabled in Identity](../../identity/user-guide/authorizations/managing-resource-authorizations/).
-2. Tasklist must be configured to use resource authorizations (please see above configurations) and `camunda.tasklist.identity.resourcePermissionsEnabled` should be enabled.
+2. Tasklist must be configured to use resource authorizations (see above configurations) and `camunda.tasklist.identity.resourcePermissionsEnabled` should be enabled.
 
-Resource based permissions are defined per process definition. Process definition is defined by Process ID, which is present in BPMN XML.
+Resource-based permissions are defined per process definition. Process definition is defined by **Process ID**, which is present in BPMN XML.
 
-The user or user group can be assigned following permission:
+The user or user group can be assigned the following permission:
 
-| Permission name        | Resource type(s)   | Allowed action(s) in Operate                   |
-| ---------------------- | ------------------ | ---------------------------------------------- |
-| START_PROCESS_INSTANCE | process-definition | User can start this process adhoc on Tasklist. |
+| Permission name        | Resource type(s)   | Allowed action(s) in Operate                    |
+| ---------------------- | ------------------ | ----------------------------------------------- |
+| START_PROCESS_INSTANCE | process-definition | User can start this process ad hoc on Tasklist. |
 
-For more information please check [Identity docs](../../concepts/access-control/resource-authorizations/).
+For more information, visit the [Identity documentation](../../concepts/access-control/resource-authorizations/).
 
 ### Use Identity JWT token to access Tasklist API
 
