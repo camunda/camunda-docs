@@ -92,6 +92,32 @@ Returned if:
 - Timeout less than 1 (ms)
 - maxJobsToActivate is less than 1
 
+### `BroadcastSignal` RPC
+
+Broadcasts a signal.
+
+#### Input: `BroadcastSignalRequest`
+
+```protobuf
+message BroadcastSignalRequest {
+  // The name of the signal
+  string signalName = 1;
+
+  // the signal variables as a JSON document; to be valid, the root of the document must be an
+  // object, e.g. { "a": "foo" }. [ "foo" ] would not be valid.
+  string variables = 2;
+}
+```
+
+#### Output: `BroadcastSignalResponse`
+
+```protobuf
+message BroadcastSignalResponse {
+  // the unique ID of the signal that was broadcasted.
+  int64 key = 1;
+}
+```
+
 ### `CancelProcessInstance` RPC
 
 Cancels a running process instance.
