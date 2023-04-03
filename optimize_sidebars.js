@@ -606,12 +606,20 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/easy-post/"
             ),
             docsLink(
+              "GitHub Connector",
+              "components/connectors/out-of-the-box-connectors/github/"
+            ),
+            docsLink(
               "GitHub Webhook Connector",
               "components/connectors/out-of-the-box-connectors/github-webhook/"
             ),
             docsLink(
               "Google Drive Connector",
               "components/connectors/out-of-the-box-connectors/googledrive/"
+            ),
+            docsLink(
+              "Google Maps Platform Connector",
+              "components/connectors/out-of-the-box-connectors/google-maps-platform/"
             ),
             docsLink(
               "GraphQL Connector",
