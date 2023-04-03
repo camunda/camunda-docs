@@ -4,13 +4,13 @@ title: Templating syntax
 description: Learn about templated properties configuration, which provides dynamic content creation within forms using a templating language called feelers.
 ---
 
-Templated properties configuration allows for dynamic content creation within forms using a templating language called **feelers**.
+Templated properties configuration allows for dynamic content creation within forms using a templating language called [**feelers**](https://github.com/bpmn-io/feelers).
 
 ## Feelers syntax
 
 ### Variables/inserts
 
-To insert a variable, use double curly braces `{{variable}}`, and the value of this variable will be inserted. You can use **any valid feel expression** within these double braces.
+To insert a variable, use double curly braces `{{variable}}`, and the value of this variable will be inserted. You can use **any valid [FEEL expression](../../feel/language-guide/feel-expressions-introduction.md)** within these double braces.
 
 ```
 Hello {{username}}, you are {{if isAdmin then "an admin" else "a user"}}.
@@ -19,8 +19,6 @@ Hello {{username}}, you are {{if isAdmin then "an admin" else "a user"}}.
 ### Iterating through arrays
 
 Iterate through arrays using the _loop_ tags. Within the loop, reference each array element with `{{this}}`, or if your array elements are objects, via their properties. To access data outside the scope of the individual items, use the `{{parent}}` accessor.
-
-Working with this list of items, with a currency symbol defined outside of the list may be achieved so.
 
 **Data**
 
