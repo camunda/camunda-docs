@@ -10,6 +10,10 @@ With Tasklist, orchestrate human workflows critical to your business and reduce 
 
 As you model a business process using BPMN and deploy it to the workflow engine, users are notified in Tasklist when they're assigned a task.
 
-Tasklist provides a GraphQL API, which you can use to build your own application, or you can use the general UI we prepared for you. Read more on the [API](../../apis-tools/tasklist-api/tasklist-api-overview.md) and the [UI](/docs/components/tasklist/userguide/using-tasklist).
+Tasklist provides two APIS - a [GraphQL API](/docs/apis-tools/tasklist-api/tasklist-api-overview.md)
+and a [REST API](/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md). Both APIs provide equal capabilities,
+allowing you to build your own applications or use the general [UI](/docs/components/tasklist/userguide/using-tasklist.md) that we have prepared for you. Read more on the [API](/docs/apis-tools/tasklist-api/tasklist-api-overview.md) and the [UI](/docs/components/tasklist/userguide/using-tasklist).
+
+Please note that GraphQL and REST APIs are currently available, but the GraphQL API will be deprecated in future releases.
 
 Tasklist is also available for production use (with support) in the Camunda Platform 8 offering. To try out Tasklist in Camunda Platform 8, sign up [here](https://accounts.cloud.camunda.io/signup).
