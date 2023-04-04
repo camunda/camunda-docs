@@ -1,12 +1,10 @@
 ---
 id: tasklist-api-rest-variables-controller
 title: Variables API
-description: "This article provides a description of Variables API controller."
+description: "Learn about the Variables API controller, including request parameters, and an HTTP request example."
 ---
 
-## Overview
-
-Provides API to query variables
+The Variables API controller provides an API to query variables.
 
 ## Endpoints
 
@@ -14,21 +12,21 @@ Provides API to query variables
 
 Get the variable details by variable id.
 
-#### URL:
+#### URL
 
 `/v1/variables/{variableId}`
 
-#### Method:
+#### Method
 
 `GET`
 
-#### Request parameters:
+#### Request parameters
 
-| param name | type | required | description        |
-| ---------- | ---- | :------: | ------------------ |
-| variableId | path |  `true`  | ID of the variable |
+| Parameter name | Type | Required | Description        |
+| -------------- | ---- | :------: | ------------------ |
+| variableId     | path |  `true`  | ID of the variable |
 
-#### HTTP request example:
+#### HTTP request example
 
 ```bash
 curl -X 'GET' \
@@ -37,7 +35,7 @@ curl -X 'GET' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-#### Responses:
+#### Responses
 
 | HTTP status | Description                                                              | Response schema                                                                             |
 | ----------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |

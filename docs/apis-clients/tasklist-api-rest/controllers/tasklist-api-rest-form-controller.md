@@ -1,35 +1,33 @@
 ---
 id: tasklist-api-rest-form-controller
 title: Form API
-description: "This article provides a description of Form API controller."
+description: "Learn about the Form API controller, including the request parameters and an HTTP request example."
 ---
 
-## Overview
-
-Provides API to query forms
+The Form API controller provides an API to query forms.
 
 ## Endpoints
 
 ### Get form
 
-Get the form details by `formId` and `processDefinitionKey` required param.
+Get the form details by `formId` and `processDefinitionKey` required parameters.
 
-#### URL:
+#### URL
 
 `/v1/forms/{formId}?processDefinitionKey={processDefinitionKey}`
 
-#### Method:
+#### Method
 
 `GET`
 
-#### Request parameters:
+#### Request parameters
 
-| param name           | type  | required | description                     |
-| -------------------- | ----- | -------- | ------------------------------- |
-| formId               | path  | `true`   | ID of the form                  |
-| processDefinitionKey | query | `true`   | Reference to process definition |
+| Parameter name       | Type  | Required | Description                         |
+| -------------------- | ----- | -------- | ----------------------------------- |
+| formId               | path  | `true`   | ID of the form                      |
+| processDefinitionKey | query | `true`   | Reference to the process definition |
 
-#### HTTP request example:
+#### HTTP request example
 
 ```bash
 curl -X 'GET' \
@@ -38,7 +36,7 @@ curl -X 'GET' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-#### Responses:
+#### Responses
 
 | HTTP status | Description                                                                                   | Response schema                                                                     |
 | ----------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
