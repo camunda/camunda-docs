@@ -2,6 +2,27 @@
 
 const versionedLinks = require("./src/mdx/versionedLinks");
 
+/**
+ * @type {import('redocusaurus').PresetEntry}
+ */
+const redocusaurus = [
+  "redocusaurus",
+  {
+    // Plugin Options for loading OpenAPI files
+    specs: [
+      {
+        id: "nonav",
+        spec: "openapi/openapi.yaml",
+        route: "/docs/next/apis-clients/operate-api/openapi-nonav/",
+      },
+      {
+        id: "withnav",
+        spec: "openapi/openapi.yaml",
+      },
+    ],
+  },
+];
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Camunda Platform 8 Docs",
@@ -242,6 +263,7 @@ const config = {
         },
       },
     ],
+    redocusaurus,
   ],
 };
 
