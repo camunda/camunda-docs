@@ -77,6 +77,15 @@ When `Completing or failing jobs` with [variables](components/concepts/variables
 - When `Completing a job` the variables are propagated from the scope of the task to its higher scopes.
 - When `Failing a job` the variables are only created in the local scope of the task.
 
+:::tip Failing a job with variables
+There are several advantages when failing a job with variables. Consider the following use cases:
+
+- You can fail a job and raise an incident by setting the job `retries` to zero. In this case, it would be useful to
+  provide some additional details through a variable when the incident is analyzed.
+- You can partially complete a job and fail it. In this case, you can store store some information on the completed work
+  in a variable, so job execution may continue from where it left off.
+  :::
+
 ## Timeouts
 
 If the job is not completed or failed within the configured job activation timeout, Zeebe reassigns the job to another job worker. This does not affect the number of `remaining retries`.
