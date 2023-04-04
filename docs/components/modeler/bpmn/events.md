@@ -16,7 +16,7 @@ Currently supported events:
 - [Signal events](signal-events/signal-events.md)
 
 :::note
-Not all of the signal events are supported yet. For a complete overview of supported event refer to the [bpmn coverage](../bpmn-coverage#events).
+Not all the signal events are supported yet. For a complete overview of supported events, refer to the [BPMN coverage](../bpmn-coverage#events).
 :::
 
 ## Events in general
