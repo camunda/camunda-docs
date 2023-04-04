@@ -114,17 +114,11 @@ membership:
 
 ### zeebe.gateway.cluster.security
 
-| Field                | Description                                                                                                                                                                                                                                                                                                                                                                                                                      | Example Value                                     |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED`.                                                                                                                                                                                                                                     | False                                             |
-| certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH`.                                                                                                                                                                                                                                                           |                                                   |
-| privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH`.                                                                                                                                                                                                                                                              |                                                   |
-| authentication       |                                                                                                                                                                                                                                                                                                                                                                                                                                  |                                                   |
-| mode                 | Controls which authentication mode is active, supported modes are 'none' and 'identity'. If 'identity' is set, authentication will be done using [camunda-identity](https://docs.camunda.io/docs/self-managed/identity/what-is-identity/), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none                                              |
-| identity             |                                                                                                                                                                                                                                                                                                                                                                                                                                  |                                                   |
-| issuerBackendUrl     | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`.                                                                                                                                                                                                                      | http://keycloak:8080/auth/realms/camunda-platform |
-| audience             | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                                                                                                                                                                                                                                                    | zeebe-api                                         |
-| type                 | The identity auth type to apply, one of `keycloak` or `auth0`. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_TYPE`.                                                                                                                                                                                                                                  | keycloak                                          |
+| Field                | Description                                                                                                                                                                                  | Example Value |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED`. | False         |
+| certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH`.                       |               |
+| privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH`.                          |               |
 
 #### YAML snippet
 
@@ -133,8 +127,36 @@ security:
   enabled: false
   certificateChainPath: null
   privateKeyPath: null
+```
+
+### zeebe.gateway.cluster.security.authentication
+
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                      | Example Value |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| mode  | Controls which authentication mode is active, supported modes are 'none' and 'identity'. If 'identity' is set, authentication will be done using [camunda-identity](https://docs.camunda.io/docs/self-managed/identity/what-is-identity/), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none          |
+
+#### YAML snippet
+
+```yaml
+security:
   authentication:
     mode: none
+```
+
+### zeebe.gateway.cluster.security.authentication.identity
+
+| Field            | Description                                                                                                                                                                                                 | Example Value                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
+| audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                         |
+| type             | The identity auth type to apply, one of `keycloak` or `auth0`. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_TYPE`.             | keycloak                                          |
+
+#### YAML snippet
+
+```yaml
+security:
+  authentication:
+    mode: identity
     identity:
     issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
     audience: zeebe-api
@@ -236,7 +258,7 @@ Each interceptor should be configured with the values described below:
         <tr>
             <td>className</td>
             <td>Entry point of the interceptor, a class which must:
-              <li>implement [io.grpc.ServerInterceptor](https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html)</li>
+              <li>implement <a href="https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html">io.grpc.ServerInterceptor</a></li>
               <li>have public visibility</li>
               <li>have a public default constructor (i.e. no-arg constructor)</li>
         This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_INTERCEPTORS_0_CLASSNAME`.
