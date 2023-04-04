@@ -26,32 +26,39 @@ On the left side of the screen, you can see tasks. On the right side of the scre
 
 Change the list of tasks by applying filters. You can also collapse and expand the task list.
 
-You can choose which tasks you want to see:
+Click on the selection field in the left panel to choose which tasks you want to see:
 
 - All open
-- Claimed by me
-- Unclaimed
+- Assigned to me
+- Unassigned
 - Completed
 
-Initially, we have no **Claimed by me** tasks.
+Click on the icon ![order-icon](img/order-icon.png) to order the tasks. You can order them by the date of creation, the due date, or the follow up date.
+
+The follow up date defines the latest time you should start working on a task, helping you to prioritize work.
+The due date provides a deadline when the task should be finished:
+
+![tasklist-task-ordering](img/tasklist-task-ordering.png)
+
+### Assign tasks
+
+When no tasks are assigned to you, the list appears empty
 
 ![tasklist-claimed-by-me-empty](img/tasklist-claimed-by-me-empty_light.png)
 
-### Claimed by me tasks
-
-Select the **Unclaimed** list and claim a task using the **Claim** button on the details panel:
+Select the **Unassigned** list and assign a task to yourself using the **Assign to me** button on the top panel:
 
 ![tasklist-claim](img/tasklist-claim_light.png)
 
-### Claim a task
+### Work on assigned tasks
 
-Select the **Claimed by me** list to see if you claimed the task:
+Select the **Assigned to me** list to see the tasks that are assigned to you. Select a task to work on it.
 
 ![tasklist-claimed-by-me-list](img/tasklist-claimed-by-me-list_light.png)
 
 ### Complete a task
 
-Once you've claimed a task, you can complete the task by adding and updating variables, and using the **Complete Task** button:
+When a task is assigned to you, you can complete the task by filling out the given form, and clicking on the Complete Task button. There are also cases where no form is available. In these cases, you have to add and/or update variables directly.
 
 ![tasklist-claimed-by-me](img/tasklist-claimed-by-me_light.png)
 
@@ -74,3 +81,33 @@ To add a new variable, click **Add Variable**.
 You will now see the completed task by selecting the **Completed** task list:
 
 ![tasklist-task-completed](img/tasklist-task-completed_light.png)
+
+### Processes
+
+:::note
+This tab is currently only available for Self-Managed environments or an alpha cluster with Camunda Platform.
+:::
+
+It is possible to start processes by demand using Tasklist. To do this, click **Processes** in the top menu. All the processes you have access to start will be listed in the **Processes** page.
+
+![tasklist-processes](img/tasklist-processes.png)
+
+On the **Search** checkbox, it's possible to filter the processes. Start typing the process name and the list will be updated.
+
+![tasklist-processes-search](img/tasklist-processes-search.png)
+
+To start a process, click **Start Process** on the process you want to start.
+
+![tasklist-processes-search](img/tasklist-processes-start.png)
+
+Tasklist will then wait for the process to be executed. If the process generates a task, you will be redirected to the generated task.
+
+### I'm not seeing a process
+
+There could be multiple reasons why you are not seeing any process in the **Processes** tab:
+
+- There is no process deployed to your environment.
+- Your user doesn't have permission to see any process. Permissions are managed in [Identity](docs/self-managed/identity/what-is-identity.md) to allow users access to processes.
+- You are in a SaaS environment.
+
+For all the above scenarios, contact your administrator to understand why no processes are displayed.
