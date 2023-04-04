@@ -41,7 +41,7 @@ Users updating from Elasticsearch 7 to Elasticsearch 8, will encounter issues wi
 camunda.operate:
   archiver:
     ilmEnabled: true
-    ilmMinAgeForDeleteArchivedIndices: 10m
+    ilmMinAgeForDeleteArchivedIndices: 30d
 ```
 
 `ilmMinAgeForDeleteArchivedIndices` defines the duration for which archived data will be stored before deletion. The values use Elasticsearch TimeUnit format: https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units.
