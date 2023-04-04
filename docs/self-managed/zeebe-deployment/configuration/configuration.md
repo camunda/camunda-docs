@@ -40,7 +40,7 @@ We provide templates that contain all possible configuration settings, along wit
 These templates also include the corresponding environment variables to use for every setting.
 :::
 
-You may find it easier to search through our [broker](broker.md) and [gateway](gateway.md) configuration docs to adjust the templates.
+You may find it easier to search through our [broker](broker.md) and [gateway](gateway.md) configuration documentation to adjust the templates.
 
 ## Editing the configuration
 
