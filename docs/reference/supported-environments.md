@@ -41,12 +41,6 @@ Requirements for the components can be seen below:
 | Optimize           | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x                                                   |
 | Web Modeler (Beta) | -            | Keycloak 16.1.1, 19.0.3<br/>PostgreSQL 14.x (other database systems are currently not supported) |
 
-:::note Elasticsearch support
-[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Camunda Platform 8.
-
-AWS Opensearch is not supported at this time.
-:::
-
 ### Version Matrix
 
 This overview shows which Zeebe version works with which Modeler, Operate, Tasklist and Optimize:

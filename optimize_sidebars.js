@@ -602,12 +602,24 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-lambda/"
             ),
             docsLink(
+              "AWS Lambda Connector",
+              "components/connectors/out-of-the-box-connectors/easy-post/"
+            ),
+            docsLink(
+              "GitHub Connector",
+              "components/connectors/out-of-the-box-connectors/github/"
+            ),
+            docsLink(
               "GitHub Webhook Connector",
               "components/connectors/out-of-the-box-connectors/github-webhook/"
             ),
             docsLink(
               "Google Drive Connector",
               "components/connectors/out-of-the-box-connectors/googledrive/"
+            ),
+            docsLink(
+              "Google Maps Platform Connector",
+              "components/connectors/out-of-the-box-connectors/google-maps-platform/"
             ),
             docsLink(
               "GraphQL Connector",
@@ -646,7 +658,7 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "UIPath Connector",
+              "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
             ),
           ],
@@ -1028,7 +1040,12 @@ module.exports = {
       APIs: [
         docsLink("Public API", "apis-clients/public-api/"),
         docsLink("Zeebe API (gRPC)", "apis-clients/grpc/"),
-        docsLink("Operate API (REST)", "apis-clients/operate-api/"),
+        {
+          "Operate API (REST)": [
+            docsLink("Overview", "apis-clients/operate-api/overview/"),
+            docsLink("Tutorial", "apis-clients/operate-api/tutorial/"),
+          ],
+        },
         {
           "Tasklist API (GraphQL)": [
             docsLink(
