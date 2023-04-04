@@ -8,13 +8,13 @@ keywords: ["backup", "backups"]
 :::note
 This release introduces breaking changes, including:
 
-- the [get backup state API and response codes](#get-backup-state-api).
-- the utilized URL has changed. For example, `curl 'http://localhost:8080/actuator/backups'` rather than the previously used `backup`.
-- `backupId` must be of Integer type now instead of String, which is in sync with Zeebe `backupId` requirements.
-:::
+- The [get backup state API and response codes](#get-backup-state-api).
+- The utilized URL has changed. For example, `curl 'http://localhost:8080/actuator/backups'` rather than the previously used `backup`.
+- `backupId` must be of integer type now instead of string, which is in sync with Zeebe `backupId` requirements.
+  :::
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
-Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an id of 123 may contain the following Elasticsearch snapshots:
+Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an id of `123` may contain the following Elasticsearch snapshots:
 
 ```
 camunda_operate_123_8.1.0_part_1_of_6
@@ -27,7 +27,9 @@ camunda_operate_123_8.1.0_part_6_of_6
 
 Operate provides an API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
 
-Note that the backup API can be reached via the Actuator management port, which by default is the same as application HTTP port (which in turn defaults to 8080). The port may be reconfigured with the help of `management.server.port` configuration parameter.
+:::note
+The backup API can be reached via the Actuator management port, which by default is the same as application HTTP port (and in turn defaults to 8080). The port may be reconfigured with the help of `management.server.port` configuration parameter.
+:::
 
 ## Prerequisites
 
