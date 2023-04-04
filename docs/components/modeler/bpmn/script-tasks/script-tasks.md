@@ -10,26 +10,29 @@ JavaScript, or Python.
 
 ![task](assets/script-task.png)
 
-Script tasks behave exactly like [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md). Both task
-types are based on jobs and [job workers](/components/concepts/job-workers.md). The
+### Job worker implementation
+
+When the job worker implementation is used, script tasks behave exactly like [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md).
+Both task types are based on jobs and [job workers](/components/concepts/job-workers.md). The
 differences between these task types are the visual representation (i.e. the task marker) and the
 semantics for the model.
 
-When a process instance enters a script task, it creates a corresponding job and waits for its
-completion. A job worker should request jobs of this job type and process them. When the job is
-complete, the process instance continues.
+When a process instance enters a script task using a job worker implementation, it creates a corresponding job and waits
+for its completion. A job worker should request jobs of this job type and process them. When the job is complete, the
+process instance continues.
 
 :::note
 Jobs for script tasks are not processed by Zeebe itself. To process them, provide a job worker.
 :::
 
-## Defining a task
+### Defining a job worker script task
 
-A script task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the same way as a service task does. It specifies
-the type of job workers should subscribe to (e.g. `script`).
+A script task must define a [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) the
+same way as a service task does. It specifies the type of job workers should subscribe to (e.g. `script`).
 
-Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
-worker (e.g. the script to evaluate). The community extension [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker) requires certain attributes to be set in the task headers.
+Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to
+the job worker (e.g. the script to evaluate). The community extension [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker)
+requires certain attributes to be set in the task headers.
 
 Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
 the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
