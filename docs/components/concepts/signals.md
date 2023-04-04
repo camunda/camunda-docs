@@ -4,13 +4,15 @@ title: "Signals"
 description: "Broadcast signals to trigger signal events"
 ---
 
-Signals can be broadcasted within Zeebe. These broadcasts are caught by [signal catch events](../modeler/bpmn/signal-events/signal-events.md).
-Once a signal is caught the process instance will respond accordingly.
+Signals are a similar concept to [messages](messages.md). The big difference is that messages are correlated to a specific
+process instance, whereas signals can trigger _all_ the matching signal events with a single broadcast.
+Depending on the type of [signal catch events](../modeler/bpmn/signal-events/signal-events.md) the process instance will
+respond accordingly.
 
 ## Signal subscriptions
 
 Signals work using subscriptions. When a process encounters a signal catch event it will create a new signal subscription.
-Ths process instance will wait until a signal with a matching name is broadcasted in Zeebe. You can define the signal name
+Ths process instance will wait until a signal with a matching name is broadcasted. You can define the signal name
 in the process definition.
 
 ## Signal Cardinality
