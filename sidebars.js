@@ -1050,7 +1050,11 @@ module.exports = {
                 "self-managed/identity/user-guide/groups/creating-a-group",
                 "self-managed/identity/user-guide/groups/assigning-users-to-a-group",
                 "self-managed/identity/user-guide/groups/assigning-roles-to-a-group",
-                "self-managed/identity/user-guide/groups/creating-authorizations-for-a-group",
+              ],
+            },
+            {
+              Authorizations: [
+                "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
               ],
             },
             "self-managed/identity/user-guide/adding-an-application",
