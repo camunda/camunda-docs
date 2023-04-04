@@ -38,7 +38,8 @@ const config = {
   projectName: "camunda-platform-docs", // Usually your repo name.
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for staging
-  noIndex: false,
+  // temporarily noIndexed so I can deploy a preview version
+  noIndex: true,
   plugins: [
     //        ["@edno/docusaurus2-graphql-doc-generator",
     //          {
