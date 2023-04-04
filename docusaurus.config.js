@@ -1,6 +1,9 @@
+// @ts-check
+
 const versionedLinks = require("./src/mdx/versionedLinks");
 
-module.exports = {
+/** @type {import('@docusaurus/types').Config} */
+const config = {
   title: "Camunda Platform 8 Docs",
   tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
@@ -241,3 +244,5 @@ module.exports = {
     ],
   ],
 };
+
+module.exports = config;
