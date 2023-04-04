@@ -188,12 +188,11 @@ Take the `access_token` value from the response object and store it as your toke
 curl -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhb...' -d '{}'
 ```
 
-### Resource based permissions
+### Resource-based permissions
 
-By default, when using Operate with Identity, one can assign a user "read" and/or "write" permissions for Operate. "read" allows read-only access to Operate.
-"write" permission allows the user to perform all types of operations modifying data (e.g. update the variables, resolve the incidents or cancel instances).
+By default, when using Operate with Identity, one can assign a user "read" and/or "write" permissions for Operate. "Read" allows read-only access to Operate. "Write" permission allows the user to perform all types of operations modifying data (e.g. update the variables, resolve the incidents or cancel instances).
 
-More fine grained permissions may be enabled:
+More detailed permissions may be enabled:
 
 1. Resource authorizations must be [enabled in Identity](../../identity/user-guide/authorizations/managing-resource-authorizations/).
 2. Operate must be configured to use resource authorizations:
@@ -202,15 +201,14 @@ More fine grained permissions may be enabled:
 camunda.operate.identity.resourcePermissionsEnabled: true
 ```
 
-Resource based permissions are defined per process definition or decision definition. Process definition is defined by Process ID, which is present in BPMN XML.
-Decision definition is defined by Decision ID, which is present in DMN XML.
+Resource-based permissions are defined per process definition or decision definition. Process definition is defined by Process ID, which is present in BPMN XML. Decision definition is defined by Decision ID, which is present in DMN XML.
 
-The user or user group can be assigned following types of permissions:
+The user or user group can be assigned the following types of permissions:
 
-| Permission name         | Resource type(s)                        | Allowed action(s) in Operate                                                                                               |
-| ----------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| READ                    | process-definition, decision-definition | User can see the data related to defined process or decision definition.                                                   |
-| UPDATE_PROCESS_INSTANCE | process-definition                      | User can retry the incident, add/update variable, cancel or modify process instance related to defined process definition. |
-| DELETE_PROCESS_INSTANCE | process-definition                      | User can delete process instance related to defined process definition                                                     |
+| Permission name         | Resource type(s)                        | Allowed action(s) in Operate                                                                                                |
+| ----------------------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| READ                    | process-definition, decision-definition | User can see the data related to defined process or decision definition.                                                    |
+| UPDATE_PROCESS_INSTANCE | process-definition                      | User can retry the incident, add/update variable, cancel, or modify process instance related to defined process definition. |
+| DELETE_PROCESS_INSTANCE | process-definition                      | User can delete process instance related to defined process definition.                                                     |
 
-For more information please check [Identity docs](../../concepts/access-control/resource-authorizations/).
+For more information, visit the [Identity documentation](../../concepts/access-control/resource-authorizations/).
