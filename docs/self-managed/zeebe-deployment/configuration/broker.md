@@ -422,7 +422,7 @@ exporters
 
 An example configuration for the elasticsearch exporter is below.
 
-These setting can also be overridden using the environment variables "`ZEEBE*BROKER_EXPORTERS_ELASTICSEARCH*`..."
+These setting can also be overridden using the environment variables `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_*`
 
 #### YAML snippet
 
@@ -491,7 +491,7 @@ exporters:
 
 An example configuration for the opensearch exporter.
 
-These setting can also be overridden using the environment variables "`ZEEBE*BROKER_EXPORTERS_OPENSEARCH*`..."
+These setting can also be overridden using the environment variables `ZEEBE_BROKER_EXPORTERS_OPENSEARCH_*`
 
 #### YAML snippet
 
