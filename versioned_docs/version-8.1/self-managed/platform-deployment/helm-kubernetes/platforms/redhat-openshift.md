@@ -282,10 +282,10 @@ As the Zeebe Gateway uses `gRPC` (which relies on `HTTP/2`), this [has to be ena
 
 1. Provide [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway, the [Cert Manager](https://docs.openshift.com/container-platform/4.11/security/cert_manager_operator/index.html) might be helpful here:
 
-- One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) as Zeebe only supports this, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`.
+- One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) as Zeebe only supports this, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`. For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/4.11/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
 
-2. Configure your Zeebe Gateway Ingress to create a [re-encrypt route](https://docs.openshift.com/container-platform/4.11/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
+1. Configure your Zeebe Gateway Ingress to create a [re-encrypt route](https://docs.openshift.com/container-platform/4.11/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
 ```yaml
 zeebe-gateway:
@@ -333,3 +333,57 @@ zeebe-gateway:
             path: tls.key
         defaultMode: 420
 ```
+
+4. Mount the **Service Certificate Secret** to the Operate and Tasklist pods and configure the secure TLS connection. Here, only the `tls.crt` file is required.
+
+For Operate:
+
+```yaml
+operate:
+  env:
+    - name: CAMUNDA_OPERATE_ZEEBE_SECURE
+      value: "true"
+    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATE-PATH
+      value: /usr/local/operate/config/tls.crt
+  extraVolumeMounts:
+    - name: certificate
+      mountPath: /usr/local/operate/config/tls.crt
+      subPath: tls.crt
+  extraVolumes:
+    - name: certificate
+      secret:
+        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        items:
+          - key: tls.crt
+            path: tls.crt
+        defaultMode: 420
+```
+
+The actual configuration properties can be reviewed [in the Operate configuration documentation](docs/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
+
+For Tasklist:
+
+```yaml
+tasklist:
+  env:
+    - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
+      value: "true"
+    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATE-PATH
+      value: /usr/local/tasklist/config/tls.crt
+  extraVolumeMounts:
+    - name: certificate
+      mountPath: /usr/local/tasklist/config/tls.crt
+      subPath: tls.crt
+  extraVolumes:
+    - name: certificate
+      secret:
+        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        items:
+          - key: tls.crt
+            path: tls.crt
+        defaultMode: 420
+```
+
+The actual configuration properties can be reviewed [in the Tasklist configuration documentation](docs/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
+
+5. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
