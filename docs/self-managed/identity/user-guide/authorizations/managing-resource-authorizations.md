@@ -2,7 +2,7 @@
 id: managing-resource-authorizations
 title: "Managing resource authorizations"
 sidebar_label: "Managing resource authorizations"
-description: ""
+description: "Learn about the methods to control resource access within the Identity application."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -12,13 +12,13 @@ In this guide you will learn about the methods to control resource access within
 
 ### Creating resource authorizations
 
-Resource authorizations can be configured for an individual user or a group, below we show you how to create authorizations
+Resource authorizations can be configured for an individual user or a group. Below we show you how to create authorizations
 for both:
 
 <Tabs groupId="entityType" defaultValue="groups" values={[{label: 'Groups', value: 'groups', }, {label: 'Users', value: 'users', },]} >
 <TabItem value="groups">
 
-1. Log in to the Identity UI and navigate to the **Groups** tab. Select the group you would like to crete an authorization for from the table, and click on the **Authorizations** tab:
+1. Log in to the Identity UI and navigate to the **Groups** tab. Select the group you would like to create an authorization for from the table, and click on the **Authorizations** tab:
 
 ![create-authorization-for-group-tab](../img/create-authorization-for-group-tab.png)
 
