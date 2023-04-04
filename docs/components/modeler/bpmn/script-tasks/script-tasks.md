@@ -33,7 +33,7 @@ To define a script task with an inline FEEL expression, you need to use the `zee
 1. Define the name of process variable in the `resultVariable` attribute. This variable will store the result of the
    FEEL expression evaluation.
 
-### Job worker implementation
+## Job worker implementation
 
 When the job worker implementation is used, script tasks behave exactly like [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md).
 Both task types are based on jobs and [job workers](/components/concepts/job-workers.md). The
@@ -83,6 +83,16 @@ A script task with a custom header:
       <zeebe:header key="language" value="javascript" />
       <zeebe:header key="script" value="a + b" />
     </zeebe:taskHeaders>
+  </bpmn:extensionElements>
+</bpmn:scriptTask>
+```
+
+A script task with an inline FEEL expression:
+
+```xml
+<bpmn:scriptTask id="calculate-sum" name="Calculate sum">
+  <bpmn:extensionElements>
+    <zeebe:script expression="=a + b" resultVariable="sum" />
   </bpmn:extensionElements>
 </bpmn:scriptTask>
 ```
