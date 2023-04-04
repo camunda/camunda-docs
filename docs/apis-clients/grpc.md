@@ -94,7 +94,7 @@ Returned if:
 
 ### `BroadcastSignal` RPC
 
-Broadcasts a signal.
+Broadcasts a [signal](../components/concepts/signals.md).
 
 #### Input: `BroadcastSignalRequest`
 
