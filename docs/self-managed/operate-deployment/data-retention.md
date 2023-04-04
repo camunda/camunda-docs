@@ -33,6 +33,20 @@ In case of intensive Zeebe usage, the amount of data can grow significantly over
 
 Dated indices may be safely removed from Elasticsearch. "Safely" means only finished process instances are deleted together with all related data, and the rest of the data stays consistent. You can use Elasticsearch Curator or other tools/scripts to delete old data.
 
+Users updating from Elasticsearch 7 to Elasticsearch 8, will encounter issues with the Elasticsearch Curator. To resolve this, Operate allows configuring an Index Lifecycle Management (ILM) Policy using the `archiver` configuration options:
+
+### A snippet from application.yml
+
+```yaml
+camunda.operate:
+  archiver:
+    waitPeriodBeforeArchiving: 5m
+    ilmEnabled: true
+    ilmMinAgeForDeleteArchivedIndices: 10m
+```
+
+This ILM Policy works on Elasticsearch 7 as well, and can function as a replacement of the Elasticsearch Curator.
+
 :::note
 Only indices containing dates in their suffix may be deleted.
 :::
