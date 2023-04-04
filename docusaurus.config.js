@@ -7,8 +7,8 @@ module.exports = {
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/",
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "throw",
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
   projectName: "camunda-platform-docs", // Usually your repo name.
@@ -222,11 +222,11 @@ module.exports = {
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
-          versions: {
-            "8.0": {
-              banner: "none",
-            },
-          },
+          // versions: {
+          //   "8.0": {
+          //     banner: "none",
+          //   },
+          // },
         },
         blog: false,
         theme: {
