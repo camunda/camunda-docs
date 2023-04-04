@@ -532,7 +532,7 @@ module.exports = {
       APIs: [
         "apis-clients/public-api",
         "apis-clients/grpc",
-        "apis-clients/operate-api/index",
+        require("./docs/apis-clients/operate-api/sidebar-schema"),
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         require("./docs/apis-clients/tasklist-api-rest/sidebar-schema"),
         "apis-clients/console-api-reference",

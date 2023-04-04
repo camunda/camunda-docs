@@ -1,7 +1,7 @@
 ---
 id: assigning-users-to-a-group
 title: "Assigning users to a group"
-sidebar_label: "Groups are a way to apply a set of roles and authorizations to users. Use Identity to assign users to a group."
+description: "Groups are a way to apply a set of roles and authorizations to users. Use Identity to assign users to a group."
 ---
 
 In this guide we will show you how to use Identity to assign users to a group.
