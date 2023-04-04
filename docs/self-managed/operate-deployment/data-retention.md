@@ -40,11 +40,10 @@ Users updating from Elasticsearch 7 to Elasticsearch 8, will encounter issues wi
 ```yaml
 camunda.operate:
   archiver:
+    waitPeriodBeforeArchiving: 5m
     ilmEnabled: true
-    ilmMinAgeForDeleteArchivedIndices: 30d
+    ilmMinAgeForDeleteArchivedIndices: 10m
 ```
-
-`ilmMinAgeForDeleteArchivedIndices` defines the duration for which archived data will be stored before deletion. The values use Elasticsearch TimeUnit format: https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units.
 
 This ILM Policy works on Elasticsearch 7 as well, and can function as a replacement of the Elasticsearch Curator.
 
