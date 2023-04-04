@@ -10,6 +10,29 @@ JavaScript, or Python.
 
 ![task](assets/script-task.png)
 
+:::info
+Camunda Platform 8 supports alternative task implementations for the script task. If you want to use your own
+implementation for a script task, see the [job worker implementation](#job-worker-implementation) section below. The
+sections before this job worker implementation apply to the [FEEL expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
+implementation only.
+:::
+
+When the process instance arrives at a script task, the integrated [FEEL Scala](https://github.com/camunda/feel-scala)
+engine evaluates the script task FEEL expression. Once the FEEL expression is evaluated successfully, the process
+instance continues.
+
+If the FEEL expression evaluation is unsuccessful, an [incident](/components/concepts/incidents.md) is
+raised at the script task. When the incident is resolved, the script task is evaluated again.
+
+## Defining a script task
+
+To define a script task with an inline FEEL expression, you need to use the `zeebe:script` extension element. In the
+`zeebe:script` extension element, you need to perform the following steps:
+
+1. Define the **FEEL expression** inside the `expression` attribute.
+1. Define the name of process variable in the `resultVariable` attribute. This variable will store the result of the
+   FEEL expression evaluation.
+
 ### Job worker implementation
 
 When the job worker implementation is used, script tasks behave exactly like [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md).
