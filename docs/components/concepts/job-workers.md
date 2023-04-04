@@ -80,10 +80,8 @@ When `Completing or failing jobs` with [variables](components/concepts/variables
 :::tip Failing a job with variables
 There are several advantages when failing a job with variables. Consider the following use cases:
 
-- You can fail a job and raise an incident by setting the job `retries` to zero. In this case, it would be useful to
-  provide some additional details through a variable when the incident is analyzed.
-- You can partially complete a job and fail it. In this case, you can store store some information on the completed work
-  in a variable, so job execution may continue from where it left off.
+- You can fail a job and raise an incident by setting the job `retries` to zero. In this case, it would be useful to provide some additional details through a variable when the incident is analyzed.
+- You can partially complete a job and fail it. In this case, you can store some information on the completed work in a variable, so job execution may continue where it left off.
   :::
 
 ## Timeouts
