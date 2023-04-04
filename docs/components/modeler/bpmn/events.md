@@ -15,6 +15,10 @@ Currently supported events:
 - [Link events](link-events/link-events.md)
 - [Signal events](signal-events/signal-events.md)
 
+:::note
+Not all of the signal events are supported yet. For a complete overview of supported event refer to the [bpmn coverage](../bpmn-coverage#events).
+:::
+
 ## Events in general
 
 Events in BPMN can be **thrown** (i.e. sent), or **caught** (i.e. received), respectively referred to as **throw** or **catch** events (e.g. `message throw event`, `timer catch event`).
