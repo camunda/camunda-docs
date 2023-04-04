@@ -81,7 +81,7 @@ const config = {
       isCloseable: true,
     },
     prism: {
-      additionalLanguages: ["java", "protobuf"],
+      additionalLanguages: ["java", "protobuf", "scala"],
     },
     navbar: {
       title: "Camunda Platform 8 Docs",
