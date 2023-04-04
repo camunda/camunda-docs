@@ -11,9 +11,11 @@ name of the broadcasted signal.
 
 ![Process with a top-level signal start event](assets/signal-start-event.png)
 
-Deploying a process definition with a signal start event creates a signal subscription. Broadcasting a signal
-will iterate over the available subscriptions. If the name of the broadcasted signal matches the name of the signal
-start event, a new process instance is created.
+Signal start event can be used to start process instances. Deploying processes with a signal start event enables creating
+multiple process instances by performing a single broadcast.
+
+Broadcasting a signal will iterate over the available subscriptions. If the name of the broadcasted signal matches the
+name of the signal start event, the process instance is created.
 
 Signal subscriptions only exists for the latest version of a process definition. Deploying a new version of the same
 process (based on the BPMN process id) will delete the old signal subscription. A new subscription is opened for the
@@ -26,9 +28,9 @@ new deployed process definition.
 A signal start event with signal definition:
 
 ```xml
-<bpmn:startEvent id="StartEvent_1">
-    <bpmn:signalEventDefinition id="SignalEventDefinition_1fk1v2m" signalRef="Signal_3995tmm" />
+<bpmn:startEvent id="startEventId">
+    <bpmn:signalEventDefinition id="signalEventDefinitionId" signalRef="signalId" />
 </bpmn:startEvent>
 
-<bpmn:signal id="Signal_3995tmm" name="signal" />
+<bpmn:signal id="signalId" name="signal" />
 ```
