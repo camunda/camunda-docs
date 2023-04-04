@@ -21,6 +21,13 @@ Signal subscriptions only exists for the latest version of a process definition.
 process (based on the BPMN process id) will delete the old signal subscription. A new subscription is opened for the
 new deployed process definition.
 
+## Variable mappings
+
+When broadcasting a signal you can pass along variables. These variables are propagated to the process instance that's
+created and will be available at the process instance scope.
+
+For more information about variable scopes visit the documentation about [variable scopes](../../../concepts/variables#variable-scopes).
+
 ## Additional resources
 
 ### XML representation
