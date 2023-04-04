@@ -1,7 +1,7 @@
 ---
 id: creating-authorizations-for-a-group
 title: "Creating autorizations for a group"
-sidebar_label: "Groups are a way to apply a set of roles and authorizations to users. Use Identity to create authorizations for a group."
+description: "Groups are a way to apply a set of roles and authorizations to users. Use Identity to create authorizations for a group."
 ---
 
 In this guide we will show you how to use Identity to create authorizations for a group.
