@@ -157,9 +157,9 @@ security:
   authentication:
     mode: identity
     identity:
-    issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
-    audience: zeebe-api
-    type: keycloak
+      issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
+      audience: zeebe-api
+      type: keycloak
 ```
 
 ### zeebe.gateway.cluster.messageCompression
