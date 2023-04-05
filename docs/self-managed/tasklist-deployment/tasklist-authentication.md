@@ -68,7 +68,7 @@ Identity requires the following parameters:
 
 ### Resource-based permissions
 
-1. Resource authorizations must be [enabled in Identity](../../identity/user-guide/authorizations/managing-resource-authorizations/).
+1. Resource authorizations must be [enabled in Identity](../../components/concepts/access-control/resource-authorizations/).
 2. Tasklist must be configured to use resource authorizations (see above configurations) and `camunda.tasklist.identity.resourcePermissionsEnabled` should be enabled.
 
 Resource-based permissions are defined per process definition. Process definition is defined by **Process ID**, which is present in BPMN XML.
