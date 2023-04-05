@@ -13,7 +13,7 @@ You're permitted to use these web apps and APIs for free with the Free Edition i
 
 ## APIs and interacting with other components
 
-The clients mentioned below interact with Zeebe, the workflow engine integrated into Camunda Platform 8.
+The clients mentioned below interact with Zeebe, the workflow engine integrated into Camunda Platform 8. All clients require [setting up client credentials](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/) to authenticate.
 
 Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](/apis-clients/tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
 
