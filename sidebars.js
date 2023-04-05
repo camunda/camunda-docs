@@ -737,6 +737,7 @@ module.exports = {
             "self-managed/concepts/access-control/apis",
             "self-managed/concepts/access-control/groups",
             "self-managed/concepts/access-control/permissions",
+            "self-managed/concepts/access-control/resource-authorizations",
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ],
