@@ -13,7 +13,7 @@ Take the following conventions into consideration when working with the gateway 
 
 ### Byte sizes
 
-For buffers and others must be specified as strings and follow the following format: "10U" where U (unit) must be replaced with KB = Kilobytes, MB = Megabytes or GB = Gigabytes. If unit is omitted, the default unit is bytes.
+Buffers and data values referencing sizing must be specified as strings and follow the following format: "10U" where U (unit) must be replaced with KB = Kilobytes, MB = Megabytes or GB = Gigabytes. If unit is omitted then the default unit is simply bytes.
 
 For example, `sendBufferSize = "16MB"` creates a buffer of 16 Megabytes.
 
