@@ -7,7 +7,7 @@ This page guides you through Camunda Platform 8 Docker images and how to run the
 
 ## Docker images
 
-We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All these images are publicly accessible (except for [Web Modeler Beta](#web-modeler)).
+We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All these images are publicly accessible (except for [Web Modeler](#web-modeler)).
 
 :::info
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
@@ -47,20 +47,18 @@ We currently only recommend the `linux/amd64` for production usage, as the `linu
 
 ### Web Modeler
 
-:::caution Beta offering
-Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)
-with limited availability for enterprise customers only. It is not recommended for production use.
-Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
+:::note
+Web Modeler Self-Managed is available to [enterprise customers](../../reference/licenses.md#web-modeler) only.
 :::
 
 The Docker images for Web Modeler are not publicly accessible, but available to enterprise customers only from
 Camunda's private Docker registry.
 
-| Web Modeler Component | Docker image                                                          |
-| --------------------- | :-------------------------------------------------------------------- |
-| Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:0.8.0-beta`    |
-| Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:0.8.0-beta`     |
-| WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:0.8.0-beta` |
+| Web Modeler Component | Docker image                                                      |
+| --------------------- | :---------------------------------------------------------------- |
+| Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:latest`    |
+| Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:latest`     |
+| WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:latest` |
 
 To pull the images you first need to log in using the credentials you received from Camunda:
 
@@ -94,14 +92,8 @@ We recommend to use [Helm + KIND](./helm-kubernetes/guides/local-kubernetes-clus
 
 ### Web Modeler
 
-:::caution Beta offering
-Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)
-with limited availability for enterprise customers only. It is not recommended for production use.
-Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
-:::
-
 An additional Docker Compose configuration to run Web Modeler is also available in the
-[camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose-web-modeler-beta.yaml) repository. Follow the instructions in the [README](https://github.com/camunda/camunda-platform#web-modeler-self-managed-beta-release) to utilize this configuration.
+[camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose-web-modeler.yaml) repository. Follow the instructions in the [README](https://github.com/camunda/camunda-platform#web-modeler-self-managed) to utilize this configuration.
 
 ## Configuration hints
 
