@@ -31,8 +31,9 @@ for both:
 ![create-authorization-for-group-modal-2](../img/create-authorization-for-group-modal-2.png)
 
 :::tip
-Want to apply an authorization to a wide range of resources? We support a wildcard character `*` to match any resource,
-partial matching, for example `my-resource*` is not supported
+Want to apply an authorization to a wide range of resources? We support a wildcard character `*` to match any resource.
+
+Please note that partial matching, for example `my-resource*`, is not supported.
 :::
 
 4. Select the permissions you would like to assign, and click **Create**:
@@ -59,8 +60,9 @@ On confirmation, the modal closes, the table updates, and your authorization is 
 ![create-authorization-for-user-modal-2](../img/create-authorization-for-user-modal-2.png)
 
 :::tip
-Want to apply an authorization to a wide range of resources? We support a wildcard character `*` to match any resource,
-partial matching, for example `my-resource*` is not supported
+Want to apply an authorization to a wide range of resources? We support a wildcard character `*` to match any resource.
+
+Please note that partial matching, for example `my-resource*`, is not supported.
 :::
 
 4. Select the permissions you would like to assign, and click **Create**:
