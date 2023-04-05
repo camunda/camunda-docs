@@ -769,7 +769,9 @@ Returned if:
 
 ### `ThrowError` RPC
 
-Throw an error to indicate that a business error has occurred while processing the job. The error is identified by an error code and is caught by an error catch event with the same error code.
+Reports a business error (i.e. non-technical) that occurs while processing a job.
+The error is handled in the process by an error catch event.
+If there is no error catch event with the specified errorCode then an incident will be raised instead.
 
 #### Input: `ThrowErrorRequest`
 
