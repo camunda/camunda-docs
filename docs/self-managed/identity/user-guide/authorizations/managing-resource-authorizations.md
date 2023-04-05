@@ -33,7 +33,7 @@ for both:
 :::tip
 Want to apply an authorization to a wide range of resources? We support a wildcard character `*` to match any resource.
 
-Please note that partial matching, for example `my-resource*`, is not supported.
+Partial matching, for example `my-resource*`, is not supported.
 :::
 
 4. Select the permissions you would like to assign, and click **Create**:
@@ -62,7 +62,7 @@ On confirmation, the modal closes, the table updates, and your authorization is 
 :::tip
 Want to apply an authorization to a wide range of resources? We support a wildcard character `*` to match any resource.
 
-Please note that partial matching, for example `my-resource*`, is not supported.
+Partial matching, for example `my-resource*`, is not supported.
 :::
 
 4. Select the permissions you would like to assign, and click **Create**:
