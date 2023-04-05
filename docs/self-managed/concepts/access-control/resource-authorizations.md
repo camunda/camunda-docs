@@ -6,7 +6,7 @@ description: "Resource authorizations allow you to control the level of access a
 ---
 
 :::caution
-Resource authorizations are enabled by the use of a feature flag. To enable this feature in Identity, see the
+Resource authorizations are disabled by default and can be enabled by the use of a feature flag. To enable this feature in Identity, see the
 [configuration variables feature flags](../../../../self-managed/identity/deployment/configuration-variables/#feature-flags) section.
 :::
 
