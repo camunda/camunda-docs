@@ -52,6 +52,9 @@ module.exports = {
         "guides/update-guide/110-to-120",
         "guides/update-guide/100-to-110",
         "guides/update-guide/026-to-100",
+        {
+          ElasticSearch: ["guides/update-guide/elasticsearch/7-to-8"],
+        },
       ],
     },
     "guides/migrating-from-cawemo",
