@@ -261,6 +261,7 @@ module.exports = {
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
         },
+        "components/modeler/data-handling",
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
@@ -532,7 +533,7 @@ module.exports = {
       APIs: [
         "apis-clients/public-api",
         "apis-clients/grpc",
-        "apis-clients/operate-api/index",
+        require("./docs/apis-clients/operate-api/sidebar-schema"),
         require("./docs/apis-clients/tasklist-api/sidebar-schema"),
         "apis-clients/console-api-reference",
         "apis-clients/web-modeler-api/index",
