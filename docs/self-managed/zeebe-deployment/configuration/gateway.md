@@ -231,7 +231,7 @@ longPolling:
 
 ### zeebe.gateway.interceptors
 
-Consider reading our documentation on interceptors first.
+Consider reading our documentation on [interceptors](self-managed/zeebe-deployment/interceptors.md) first.
 
 Each interceptor should be configured with the values described below:
 

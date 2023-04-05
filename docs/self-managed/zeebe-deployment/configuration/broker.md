@@ -532,7 +532,7 @@ exporters:
 
 ### zeebe.broker.exporters.elasticsearch
 
-An example configuration for the elasticsearch exporter is below.
+An example configuration for the Elasticsearch exporter is below.
 
 These setting can also be overridden using the environment variables `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_*`
 
@@ -599,9 +599,9 @@ exporters:
         policyName: zeebe-record-retention-policy
 ```
 
-### zeebe.broker.exporters.opensearch (Opensearch Exporter)
+### zeebe.broker.exporters.opensearch (OpenSearch Exporter)
 
-An example configuration for the opensearch exporter.
+An example configuration for the OpenSearch exporter.
 
 These setting can also be overridden using the environment variables `ZEEBE_BROKER_EXPORTERS_OPENSEARCH_*`
 
