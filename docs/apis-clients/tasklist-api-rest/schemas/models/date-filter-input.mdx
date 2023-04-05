@@ -54,8 +54,8 @@ Filter using a date range
 
 ```graphql
 {
-    "from": string,
-    "to": string
+    "from": string(date-time),
+    "to": string(date-time)
 }
 ```
 
@@ -65,8 +65,8 @@ Filter using a date range
 
 ```json
 {
-  "from": "string",
-  "to": "string"
+  "from": "2023-03-29T18:38:10.491Z",
+  "to": "2023-03-29T18:38:10.491Z"
 }
 ```
 
@@ -75,11 +75,11 @@ Filter using a date range
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>DateFilter.<b>from</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+#### [<code style={{ fontWeight: 'normal' }}>DateFilter.<b>from</b></code>](#)<Bullet />`string(date-time)` <Badge class="secondary" text="non-null"/>
 
 > Start date range to search from in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard
 
-#### [<code style={{ fontWeight: 'normal' }}>DateFilter.<b>to</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+#### [<code style={{ fontWeight: 'normal' }}>DateFilter.<b>to</b></code>](#)<Bullet />`string(date-time)` <Badge class="secondary" text="non-null"/>
 
 > End date range to search to in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard
 

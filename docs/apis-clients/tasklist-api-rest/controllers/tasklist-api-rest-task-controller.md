@@ -29,7 +29,7 @@ Returns the list of tasks that satisfy search request parameters.
 All request body parameters are optional.
 
 :::note
-Only one of [searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual] search options must be present in the request.
+Only one of [searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual] search options must be present at once in the request.
 :::
 
 If an empty body is provided, all tasks are returned:
@@ -59,10 +59,10 @@ curl -X 'POST' \
 
 #### Responses
 
-| HTTP status | Description                                                                                                                                                  | Response schema                                                                                            |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| 200         | On success                                                                                                                                                   | JSON array of objects with [`TaskSearchResponse`](../schemas/responses/task-search-response.mdx) structure |
-| 400         | An error is returned when more than one search parameters among [searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual] are present in request. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure                              |
+| HTTP status | Description                                                                                                                                                      | Response schema                                                                                            |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| 200         | On success                                                                                                                                                       | JSON array of objects with [`TaskSearchResponse`](../schemas/responses/task-search-response.mdx) structure |
+| 400         | An error is returned when more than one search parameters among [searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual] are present in the request. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure                              |
 
 ### Get task
 
