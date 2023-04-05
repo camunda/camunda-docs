@@ -261,6 +261,7 @@ module.exports = {
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
         },
+        "components/modeler/data-handling",
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
