@@ -11,6 +11,7 @@ This release introduces breaking changes, including:
 - The [get backup state API and response codes](#get-backup-state-api).
 - The utilized URL has changed. For example, `curl 'http://localhost:8080/actuator/backups'` rather than the previously used `backup`.
 - `backupId` must be of integer type now instead of string, which is in sync with Zeebe `backupId` requirements.
+
 :::
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
