@@ -769,9 +769,10 @@ Returned if:
 
 ### `ThrowError` RPC
 
-Reports a business error (i.e. non-technical) that occurs while processing a job.
-The error is handled in the process by an error catch event.
-If there is no error catch event with the specified errorCode then an incident will be raised instead.
+`ThrowError` reports a business error (i.e. non-technical) that occurs while processing a job.
+
+The error is handled in the process by an error catch event. If there is no error catch event with the specified `errorCode`, an incident is raised instead.
+
 Variables can be passed along with the thrown error to provide additional details that can be used in the process.
 
 #### Input: `ThrowErrorRequest`
