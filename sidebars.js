@@ -759,6 +759,8 @@ module.exports = {
             "self-managed/zeebe-deployment/configuration/environment-variables",
             "self-managed/zeebe-deployment/configuration/fixed-partitioning",
             "self-managed/zeebe-deployment/configuration/priority-election",
+            "self-managed/zeebe-deployment/configuration/broker-config",
+            "self-managed/zeebe-deployment/configuration/gateway-config",
           ],
         },
         {

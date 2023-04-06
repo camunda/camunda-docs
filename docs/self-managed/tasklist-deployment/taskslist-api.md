@@ -1,7 +1,7 @@
 ---
 id: tasklist-api
 title: Tasklist API
-description: "Tasklist offers an API (GraphQL) where clients authenticate via token. Users can use the API and integrate it into their own systems without having to use Tasklist UI."
+description: "Tasklist offers an API (GraphQL) where clients authenticate via token. Use the API and integrate it into your own systems without using the Tasklist UI."
 ---
 
 Tasklist offers an API (GraphQL) where clients authenticate via token. Therefore, users can use the API and integrate it into their own systems without having to use Tasklist UI.
