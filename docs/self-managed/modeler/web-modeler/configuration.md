@@ -128,6 +128,7 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                              | `modeler-restapi`                                                | -             |
 | `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                 | `8081`                                                           | `8081`        |
 | `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.              | `8091`                                                           | `8091`        |
+| `PLAY_ENABLED`            | [optional]<br/>Enables the **Play** mode in the BPMN editor, allowing users to test processes in a playground environment.             | `true`                                                           | `false`       |
 
 ### Identity / Keycloak
 

@@ -45,6 +45,9 @@ module.exports = {
             "guides/update-guide/connectors/060-to-070",
           ],
         },
+        {
+          Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
+        },
         "guides/update-guide/810-to-820",
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
@@ -263,6 +266,7 @@ module.exports = {
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
         },
+        "components/modeler/data-handling",
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
@@ -757,6 +761,8 @@ module.exports = {
             "self-managed/zeebe-deployment/configuration/environment-variables",
             "self-managed/zeebe-deployment/configuration/fixed-partitioning",
             "self-managed/zeebe-deployment/configuration/priority-election",
+            "self-managed/zeebe-deployment/configuration/broker-config",
+            "self-managed/zeebe-deployment/configuration/gateway-config",
           ],
         },
         {
