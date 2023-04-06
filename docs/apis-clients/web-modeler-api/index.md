@@ -5,11 +5,11 @@ description: "Web Modeler API (beta) is a REST API and provides access to Web Mo
 ---
 
 :::caution Beta Offering
-Web Modeler API is currently offered as a [beta release](../../reference/early-access#beta). It is not recommended for production use and there is no maintenance service guaranteed.
+The Web Modeler API is currently offered as a [beta feature](../../reference/early-access#beta). It is not recommended for production use and there is no maintenance service guaranteed.
 
 While in beta, the API may introduce breaking changes without prior notice.
 
-However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
+We encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
 
 Web Modeler provides a REST API at `/api/*`. Clients can access this API by passing a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
