@@ -4,7 +4,7 @@ title: "Installing in an air-gapped environment"
 description: "Camunda Platform 8 Self-Managed installation in an air-gapped environment"
 ---
 
-The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler Beta](../../docker.md#web-modeler)).
+The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler](../../docker.md#web-modeler)).
 With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
 ## Required Docker images

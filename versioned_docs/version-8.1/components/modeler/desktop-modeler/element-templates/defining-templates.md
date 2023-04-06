@@ -458,7 +458,7 @@ If a user removes the value in the configured control, it will also remove the m
         "optional": true,
         "binding": {
           "type": "zeebe:input",
-          "name": "reuqest"
+          "name": "request"
         }
       },
       {

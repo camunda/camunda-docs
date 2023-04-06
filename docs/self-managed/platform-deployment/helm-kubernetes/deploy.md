@@ -24,8 +24,8 @@ The following charts will be installed as part of Camunda Platform 8 Self-Manage
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
-- **Web Modeler** [<span class="badge badge--beta">Beta</span>](../../../../reference/early-access#beta): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler-beta) as Web Modeler is only available to enterprise customers.
+- **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler) as Web Modeler is only available to enterprise customers.
 
 :::note Connectors
 We do not provide a Helm chart for Connectors in Self-Managed yet.
@@ -69,7 +69,7 @@ Replace &lt;RELEASE_NAME&gt; with a name of your choice.
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
-The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#installing-web-modeler-beta) below.
+The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#installing-web-modeler) below.
 :::
 
 Notice that this Kubernetes cluster can have services which are already running; Camunda components are simply installed as another set of services.
@@ -118,13 +118,10 @@ elasticsearch-master-0                                 1/1     Running   0      
 <RELEASE_NAME>-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 
-### Installing Web Modeler (Beta)
+### Installing Web Modeler
 
-:::caution Beta offering
-Web Modeler Self-Managed is currently offered as a [beta release](../../../../reference/early-access#beta)
-with limited availability for enterprise customers only. It is not recommended for production use and there is no maintenance service guaranteed.
-Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
-However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
+:::note
+Web Modeler Self-Managed is available to [enterprise customers](../../../reference/licenses.md#web-modeler) only.
 :::
 
 To install the Camunda Helm chart with Web Modeler enabled, follow the steps below.
@@ -152,7 +149,7 @@ Alternatively, create an image pull secret [from your Docker configuration file]
 
 #### Configure Web Modeler
 
-To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [README](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#web-modeler-beta) file):
+To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [README](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#web-modeler) file):
 
 - Enable Web Modeler with `webModeler.enabled: true` (it is disabled by default).
 - Configure the previously created [image pull secret](#create-image-pull-secret) in `webModeler.image.pullSecrets`.

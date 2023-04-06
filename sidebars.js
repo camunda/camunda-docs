@@ -45,6 +45,9 @@ module.exports = {
             "guides/update-guide/connectors/060-to-070",
           ],
         },
+        {
+          Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
+        },
         "guides/update-guide/810-to-820",
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
@@ -67,6 +70,7 @@ module.exports = {
         "components/concepts/job-workers",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
+        "components/concepts/signals",
         "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
@@ -201,6 +205,7 @@ module.exports = {
                 "components/modeler/bpmn/events",
                 "components/modeler/bpmn/none-events/none-events",
                 "components/modeler/bpmn/message-events/message-events",
+                "components/modeler/bpmn/signal-events/signal-events",
                 "components/modeler/bpmn/timer-events/timer-events",
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
@@ -738,6 +743,7 @@ module.exports = {
             "self-managed/concepts/access-control/apis",
             "self-managed/concepts/access-control/groups",
             "self-managed/concepts/access-control/permissions",
+            "self-managed/concepts/access-control/resource-authorizations",
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ],
@@ -1054,7 +1060,11 @@ module.exports = {
                 "self-managed/identity/user-guide/groups/creating-a-group",
                 "self-managed/identity/user-guide/groups/assigning-users-to-a-group",
                 "self-managed/identity/user-guide/groups/assigning-roles-to-a-group",
-                "self-managed/identity/user-guide/groups/creating-authorizations-for-a-group",
+              ],
+            },
+            {
+              Authorizations: [
+                "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
               ],
             },
             "self-managed/identity/user-guide/adding-an-application",
@@ -1091,7 +1101,7 @@ module.exports = {
     {
       Modeler: [
         {
-          "Web Modeler (Beta)": [
+          "Web Modeler": [
             "self-managed/modeler/web-modeler/installation",
             "self-managed/modeler/web-modeler/configuration",
             "self-managed/modeler/web-modeler/api",
