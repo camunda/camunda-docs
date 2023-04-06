@@ -38,7 +38,7 @@ More users can be added directly to Elasticsearch, to the index `tasklist-user-<
 
 ## Identity
 
-[Identity](../../identity/what-is-identity/) provides authentication and authorization functionality along with user management.
+[Identity](/self-managed/identity/what-is-identity.md) provides authentication and authorization functionality along with user management.
 
 ### Enable Identity
 
@@ -68,7 +68,7 @@ Identity requires the following parameters:
 
 ### Resource-based permissions
 
-1. Resource authorizations must be [enabled in Identity](../../components/concepts/access-control/resource-authorizations/).
+1. Resource authorizations must be [enabled in Identity](/self-managed/concepts/access-control/resource-authorizations.md).
 2. Tasklist must be configured to use resource authorizations (see above configurations) and `camunda.tasklist.identity.resourcePermissionsEnabled` should be enabled.
 
 Resource-based permissions are defined per process definition. Process definition is defined by **Process ID**, which is present in BPMN XML.
@@ -79,11 +79,11 @@ The user or user group can be assigned the following permission:
 | ---------------------- | ------------------ | ----------------------------------------------- |
 | START_PROCESS_INSTANCE | process-definition | User can start this process ad hoc on Tasklist. |
 
-For more information, visit the [Identity documentation](../../concepts/access-control/resource-authorizations/).
+For more information, visit the [Identity documentation](/self-managed/concepts/access-control/resource-authorizations.md).
 
 ### Use Identity JWT token to access Tasklist API
 
-Tasklist provides a [GraphQL API](../../../apis-clients/tasklist-api/) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+Tasklist provides a [GraphQL API](/apis-clients/tasklist-api/tasklist-api-overview.md) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 :::note
 Be aware a JWT token is intended to be used for M2M communication and is therefore issued for the relevant application, not for the user.
@@ -91,8 +91,8 @@ Be aware a JWT token is intended to be used for M2M communication and is therefo
 
 **Example:**
 
-1. [Add an application in Identity](../../identity/user-guide/adding-an-application/).
-2. [Add permissions to an application](../../identity/user-guide/assigning-a-permission-to-an-application/) for Tasklist API.
+1. [Add an application in Identity](/self-managed/identity/user-guide/adding-an-application.md).
+2. [Add permissions to an application](/self-managed/identity/user-guide/assigning-a-permission-to-an-application.md) for Tasklist API.
 3. Obtain a token to access the GraphQL API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
