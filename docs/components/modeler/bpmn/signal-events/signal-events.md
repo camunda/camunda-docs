@@ -23,8 +23,8 @@ new deployed process definition.
 
 ## Variable mappings
 
-When broadcasting a signal you can pass along variables. These variables are propagated to the process instance that's
-created and will be available at the process instance scope.
+When broadcasting a signal you can pass along variables. By default, all signal variables are merged into the process
+instance. This behavior can be customized by defining an output mapping at the signal catch event.
 
 For more information about variable scopes, visit the documentation about [variable scopes](../../../concepts/variables#variable-scopes).
 

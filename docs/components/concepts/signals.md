@@ -11,7 +11,11 @@ respond accordingly.
 
 ## Signal subscriptions
 
-Signals work using subscriptions. When a process encounters a signal catch event it creates a new signal subscription. This process instance waits until a signal with a matching name is broadcasted. You can define the signal name in the process definition.
+Signals work using subscriptions. When a process encounters a signal catch event it creates a new signal subscription.
+This process instance waits until a signal with a matching name is broadcasted. You can define the signal name in the
+process definition.
+Deploying a process with a signal start event also creates a new signal subscription. In this case the subscription will
+be used to start a new process instance.
 
 ## Signal cardinality
 
