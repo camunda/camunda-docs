@@ -8,34 +8,21 @@ description: "This article provides a guide for developers to migrate from Graph
 
 # Overview
 
-As the popularity of GraphQL continues to rise as an alternative to REST APIs, many developers have implemented it in their projects. However, this can often lead to challenges,
-such as using multiple API protocols and maintaining compatibility with existing systems.
-The Camunda Platform 8 API stack is a prime example, where the Tasklist API is implemented using GraphQL
-while the rest of the APIs are built with REST. This creates additional efforts for developers and
-does not fully leverage the advantages of GraphQL. As a result, migrating from GraphQL to REST
-can be a viable solution. In this article, we will provide a comprehensive guide to migrating from GraphQL to REST.
+We want to provide you with the information you need to successfully migrate from our GraphQL API
+to our new REST API version. In this document, we'll explain the differences between the two APIs
+and provide guidance on how to make the switch.
+
+GraphQL has been a popular and valuable tool for many of our customers, but we recognize that there are
+certain advantages to using a RESTful architecture. Our new REST API version provides a more structured
+and predictable way of accessing our data, which should lead to improved performance and greater reliability.
+
+It's worth noting that all of our other APIs use REST, so moving to a RESTful architecture will align this API
+with the rest of our ecosystem. This will make it easier to maintain and enhance our APIs over time,
+as well as providing a more consistent experience for API customers.
 
 # GraphQL operation to REST API endpoint mapping
 
 ## Queries
-
-### Form
-
-Instead of [form](/docs/apis-clients/tasklist-api/queries/form.mdx) GraphQL query:
-
-```graphql
-# Get task form by formId and processDefinitionId
-form(id: String!, processDefinitionId: String!): Form
-```
-
-The following [get form](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-form-controller.md#get-form) endpoint should be used:
-
-```bash
-curl -X 'GET' \
-  'http://{host}/v1/forms/{formId}?processDefinitionKey={processDefinitionKey}' \
-  -H 'accept: application/json' \
-  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
-```
 
 ### Variable
 
@@ -78,23 +65,29 @@ curl -X 'POST' \
   }'
 ```
 
-### Task
+### Form
 
-Instead of [task](/docs/apis-clients/tasklist-api/queries/task.mdx) GraphQL query:
+Instead of [form](/docs/apis-clients/tasklist-api/queries/form.mdx) GraphQL query:
 
 ```graphql
-# Get one task by id. Returns task or error when task does not exist.
-task(id: String!): Task!
+# Get task form by formId and processDefinitionId
+form(id: String!, processDefinitionId: String!): Form
 ```
 
-The following [get task](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#get-task) endpoint should be used:
+The following [get form](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-form-controller.md#get-form) endpoint should be used:
 
 ```bash
 curl -X 'GET' \
-  'http://{host}/v1/tasks/{taskId}' \
-  -H 'accept: application/json'
+  'http://{host}/v1/forms/{formId}?processDefinitionKey={processDefinitionKey}' \
+  -H 'accept: application/json' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
+
+:::note
+Note that `processDefinitionKey` query parameter in HTTP request represents the same value as [`form.processDefinitionId`](docs/apis-clients/tasklist-api/queries/form.mdx#code-style-fontweight-normal-formbprocessdefinitionidbcodestring--),
+and in REST API response [`FormResponse.processDefinitionKey`](docs/apis-clients/tasklist-api-rest/schemas/responses/form-response.mdx#code-style-fontweight-normal-formresponsebprocessdefinitionkeybcodestring-) field
+is the renamed equivalent of [`Form.processDefinitionId`](docs/apis-clients/tasklist-api/objects/form.mdx#code-style-fontweight-normal-formbprocessdefinitionidbcodestring--).
+:::
 
 ### Tasks
 
@@ -118,6 +111,48 @@ curl -X 'POST' \
   "assigned": true
 }'
 ```
+
+:::note
+Please note that several field names in request body and response were changed in REST API comparing to the equivalent GraphQL input/response models, in order to improve the consistency and clarity of our API:
+
+- in request body:
+
+  - [`TaskQuery.processDefinitionId`](docs/apis-clients/tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessdefinitionidbcodestring-) ⇒ [`TaskSearchRequest.processDefinitionKey`](docs/apis-clients/tasklist-api-rest/schemas/requests/task-search-request.mdx#code-style-fontweight-normal-tasksearchrequestbprocessdefinitionkeybcodestring)
+  - [`TaskQuery.processInstanceId`](docs/apis-clients/tasklist-api/inputs/task-query.mdx##code-style-fontweight-normal-taskquerybprocessinstanceidbcodestring-) ⇒ [`TaskSearchRequest.processInstanceKey`](docs/apis-clients/tasklist-api-rest/schemas/requests/task-search-request.mdx#code-style-fontweight-normal-tasksearchrequestbprocessinstancekeybcodestring)
+
+- in response:
+  - [`Task.creationTime`](docs/apis-clients/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbcreationtimebcodestring--) ⇒ [`TaskSearchResponse.creationDate`](docs/apis-clients/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebcreationdatebcodestring-)
+  - [`Task.completionTime`](docs/apis-clients/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbcompletiontimebcodestring-) ⇒ [`TaskSearchResponse.completionDate`](docs/apis-clients/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebcompletiondatebcodestring)
+  - [`Task.processDefinitionId`](docs/apis-clients/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessdefinitionidbcodestring-) ⇒ [`TaskSearchResponse.processDefinitionKey`](docs/apis-clients/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebprocessdefinitionkeybcodestring)
+  - [`Task.processInstanceId`](docs/apis-clients/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessinstanceidbcodestring-) ⇒ [`TaskSearchResponse.processInstanceKey`](docs/apis-clients/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebprocessinstancekeybcodestring)
+    :::
+
+### Task
+
+Instead of [task](/docs/apis-clients/tasklist-api/queries/task.mdx) GraphQL query:
+
+```graphql
+# Get one task by id. Returns task or error when task does not exist.
+task(id: String!): Task!
+```
+
+The following [get task](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#get-task) endpoint should be used:
+
+```bash
+curl -X 'GET' \
+  'http://{host}/v1/tasks/{taskId}' \
+  -H 'accept: application/json'
+  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
+```
+
+:::note
+The following fields in REST API response were renamed compared to the equivalent GraphQL response:
+
+- [`Task.creationTime`](docs/apis-clients/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbcreationtimebcodestring--) ⇒ [`TaskResponse.creationDate`](docs/apis-clients/tasklist-api-rest/schemas/responses/task-response.mdx#code-style-fontweight-normal-taskresponsebcreationdatebcodestring-)
+- [`Task.completionTime`](docs/apis-clients/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbcompletiontimebcodestring-) ⇒ [`TaskResponse.completionDate`](docs/apis-clients/tasklist-api-rest/schemas/responses/task-response.mdx#code-style-fontweight-normal-taskresponsebcompletiondatebcodestring)
+- [`Task.processDefinitionId`](docs/apis-clients/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessdefinitionidbcodestring-) ⇒ [`TaskResponse.processDefinitionKey`](docs/apis-clients/tasklist-api-rest/schemas/responses/task-response.mdx#code-style-fontweight-normal-taskresponsebprocessdefinitionkeybcodestring)
+- [`Task.processInstanceId`](docs/apis-clients/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessinstanceidbcodestring-) ⇒ [`TaskResponse.processInstanceKey`](docs/apis-clients/tasklist-api-rest/schemas/responses/task-response.mdx#code-style-fontweight-normal-taskresponsebprocessinstancekeybcodestring)
+  :::
 
 ## Mutations
 
