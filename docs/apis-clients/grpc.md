@@ -769,7 +769,11 @@ Returned if:
 
 ### `ThrowError` RPC
 
-Throw an error to indicate that a business error has occurred while processing the job. The error is identified by an error code and is caught by an error catch event with the same error code.
+`ThrowError` reports a business error (i.e. non-technical) that occurs while processing a job.
+
+The error is handled in the process by an error catch event. If there is no error catch event with the specified `errorCode`, an incident is raised instead.
+
+Variables can be passed along with the thrown error to provide additional details that can be used in the process.
 
 #### Input: `ThrowErrorRequest`
 
@@ -781,6 +785,12 @@ message ThrowErrorRequest {
   string errorCode = 2;
   // an optional error message that provides additional context
   string errorMessage = 3;
+  // JSON document that will instantiate the variables at the local scope of the
+  // error catch event that catches the thrown error; it must be a JSON object, as variables will be mapped in a
+  // key-value fashion. e.g. { "a": 1, "b": 2 } will create two variables, named "a" and
+  // "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
+  // valid argument, as the root of the JSON document is an array and not an object.
+  string variables = 4;
 }
 ```
 
