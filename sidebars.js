@@ -742,6 +742,7 @@ module.exports = {
             "self-managed/concepts/access-control/apis",
             "self-managed/concepts/access-control/groups",
             "self-managed/concepts/access-control/permissions",
+            "self-managed/concepts/access-control/resource-authorizations",
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ],
@@ -1058,7 +1059,11 @@ module.exports = {
                 "self-managed/identity/user-guide/groups/creating-a-group",
                 "self-managed/identity/user-guide/groups/assigning-users-to-a-group",
                 "self-managed/identity/user-guide/groups/assigning-roles-to-a-group",
-                "self-managed/identity/user-guide/groups/creating-authorizations-for-a-group",
+              ],
+            },
+            {
+              Authorizations: [
+                "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
               ],
             },
             "self-managed/identity/user-guide/adding-an-application",
