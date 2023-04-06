@@ -1,7 +1,7 @@
 ---
 id: rebalancing
 title: "Rebalancing"
-description: "Take a closer look at manual rebalancing, limitations, priority election with round-robin distribution, priority election with fixed distribution, and more."
+description: "Step through manual rebalancing, limitations, priority election with round-robin distribution, priority election with fixed distribution, and more."
 ---
 
 Rebalancing is re-electing partition leaders so they are evenly distributed across all brokers. An even leader distribution is beneficial as all brokers share the work of being partition leaders.

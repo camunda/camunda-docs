@@ -18,9 +18,7 @@ By default, the configuration for Operate is stored in a YAML file (`application
 - [Monitoring possibilities](#monitoring-operate)
 - [Logging configuration](#logging)
 
-## Configurations
-
-### Webserver
+## Webserver
 
 Operate supports customizing the **context-path** using default Spring configuration.
 
@@ -32,7 +30,7 @@ Example for environment variable:
 
 The default context-path is `/`.
 
-#### Security
+### Security
 
 To change the values for http header for security reasons, you can use the configuration parameters:
 
@@ -42,7 +40,7 @@ To change the values for http header for security reasons, you can use the confi
 | camunda.operate.websecurity.httpStrictTransportSecurityMaxAgeInSeconds   | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | 63,072,000 (two years)                                                                                                                                                                                                                                                                                           |
 | camunda.operate.websecurity.httpStrictTransportSecurityIncludeSubDomains | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | true                                                                                                                                                                                                                                                                                                             |
 
-### Elasticsearch
+## Elasticsearch
 
 Operate stores and reads data in/from Elasticsearch.
 
@@ -129,7 +127,7 @@ camunda.operate:
 
 ## Zeebe Elasticsearch exporter
 
-Operate imports data from Elasticsearch indices created and filled in by the [Zeebe Elasticsearch exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
+Operate imports data from Elasticsearch indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md).
 
 Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on the Zeebe side.
 
