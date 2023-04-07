@@ -436,7 +436,7 @@ Returned if:
 - The job was not activated.
 - The job is already in a failed state, i.e. ran out of retries.
 
-### `ModifyProcessInstance` RPC
+### ModifyProcessInstance RPC
 
 Modifies a running process instance. The command can contain multiple instructions to activate an element of the
 process, or to terminate an active instance of an element.
