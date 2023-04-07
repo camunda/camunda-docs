@@ -4,15 +4,17 @@ title: API access
 description: "Details on accessing the API (beta) of Web Modeler Self-Managed. Learn more about OpenAPI documentation, authentication, and JWT tokens."
 ---
 
-:::caution Beta Offering
-Web Modeler Self-Managed API is currently offered as a [beta release](../../../../reference/early-access#beta)
-with limited availability for enterprise customers only. It is not recommended for production use and there is no maintenance service guaranteed.
+:::note
+Web Modeler Self-Managed is available to [enterprise customers](../../../reference/licenses.md#web-modeler) only.
+:::
 
-Special [terms and conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
+:::caution Beta Offering
+The Web Modeler API is currently offered as a [beta feature](../../../../reference/early-access#beta).
+It is not recommended for production use and there is no maintenance service guaranteed. Special [terms and conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
 
 While in beta, the API may introduce breaking changes without prior notice.
 
-However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
+We encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
 
 Web Modeler provides a [REST API](../../../../apis-tools/web-modeler-api/) at `/api/*`. Clients can access this API by passing a JWT access token in an authorization header `Authorization: Bearer <JWT>`.

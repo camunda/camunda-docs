@@ -24,8 +24,8 @@ The following charts will be installed as part of Camunda Platform 8 Self-Manage
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
-- **Web Modeler** [<span class="badge badge--beta">Beta</span>](../../../../reference/early-access#beta): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler-beta) as Web Modeler is only available to enterprise customers.
+- **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler) as Web Modeler is only available to enterprise customers.
 
 :::note Connectors
 We do not provide a Helm chart for Connectors in Self-Managed yet.
@@ -69,7 +69,7 @@ Replace &lt;RELEASE_NAME&gt; with a name of your choice.
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
-The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#installing-web-modeler-beta) below.
+The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#installing-web-modeler) below.
 :::
 
 Notice that this Kubernetes cluster can have services which are already running; Camunda components are simply installed as another set of services.
@@ -118,13 +118,10 @@ elasticsearch-master-0                                 1/1     Running   0      
 <RELEASE_NAME>-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 
-### Installing Web Modeler (Beta)
+### Installing Web Modeler
 
-:::caution Beta offering
-Web Modeler Self-Managed is currently offered as a [beta release](../../../../reference/early-access#beta)
-with limited availability for enterprise customers only. It is not recommended for production use and there is no maintenance service guaranteed.
-Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
-However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
+:::note
+Web Modeler Self-Managed is available to [enterprise customers](../../../reference/licenses.md#web-modeler) only.
 :::
 
 To install the Camunda Helm chart with Web Modeler enabled, follow the steps below.
@@ -152,17 +149,21 @@ Alternatively, create an image pull secret [from your Docker configuration file]
 
 #### Configure Web Modeler
 
-To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [README](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#web-modeler-beta) file):
+To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [README](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#web-modeler) file):
 
-- Enable Web Modeler with `web-modeler.enabled: true` (it is disabled by default).
-- Configure the previously created [image pull secret](#create-image-pull-secret) in `web-modeler.image.pullSecrets`.
-- Configure your SMTP server by providing the values under `web-modeler.restapi.mail`.
+- Enable Web Modeler with `webModeler.enabled: true` (it is disabled by default).
+- Configure the previously created [image pull secret](#create-image-pull-secret) in `webModeler.image.pullSecrets`.
+- Configure your SMTP server by providing the values under `webModeler.restapi.mail`.
   - Web Modeler requires an SMTP server to send notification emails to users.
+- Configure the database connection
+  - Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
+  - _Option 1_: Set `postgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
+  - _Option 2_: Set `postgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
 
 We recommend specifying these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look as follows:
 
 ```yaml
-web-modeler:
+webModeler:
   enabled: true
   image:
     pullSecrets:
@@ -176,19 +177,16 @@ web-modeler:
       smtpPassword: secret
       # email address to be displayed as sender of emails from Web Modeler
       fromAddress: no-reply@example.com
+postgresql:
+  enabled: true
 ```
 
 #### Optional: Configure external database
 
-Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
-By default, a new PostgreSQL instance is installed as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
-Alternatively, you can configure a connection to an existing external database:
+If you don't want to install a new PostgreSQL instance with Helm, but connect Web Modeler to an existing external database, set `postgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
 
 ```yaml
-web-modeler:
-  postgresql:
-    # disables the PostgreSQL chart dependency
-    enabled: false
+webModeler:
   restapi:
     externalDatabase:
       host: postgres.example.com
@@ -196,6 +194,9 @@ web-modeler:
       database: modeler-db
       user: modeler-user
       password: secret
+postgresql:
+  # disables the PostgreSQL chart dependency
+  enabled: false
 ```
 
 #### Install the Helm chart

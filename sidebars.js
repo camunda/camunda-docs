@@ -45,6 +45,9 @@ module.exports = {
             "guides/update-guide/connectors/060-to-070",
           ],
         },
+        {
+          Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
+        },
         "guides/update-guide/810-to-820",
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
@@ -67,6 +70,7 @@ module.exports = {
         "components/concepts/job-workers",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
+        "components/concepts/signals",
         "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
@@ -201,10 +205,12 @@ module.exports = {
                 "components/modeler/bpmn/events",
                 "components/modeler/bpmn/none-events/none-events",
                 "components/modeler/bpmn/message-events/message-events",
+                "components/modeler/bpmn/signal-events/signal-events",
                 "components/modeler/bpmn/timer-events/timer-events",
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
+                "components/modeler/bpmn/link-events/link-events",
               ],
             },
             {
@@ -237,12 +243,17 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
+            "components/connectors/out-of-the-box-connectors/operate",
+            "components/connectors/out-of-the-box-connectors/easy-post",
+            "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/googledrive",
+            "components/connectors/out-of-the-box-connectors/google-maps-platform",
             "components/connectors/out-of-the-box-connectors/graphql",
             "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/rest",
@@ -255,6 +266,7 @@ module.exports = {
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
         },
+        "components/modeler/data-handling",
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
@@ -524,12 +536,12 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-tools/public-api",
-        "apis-tools/grpc",
-        "apis-tools/operate-api/index",
-        require("./docs/apis-tools/tasklist-api/sidebar-schema"),
-        "apis-tools/console-api-reference",
-        "apis-tools/web-modeler-api/index",
+        "apis-clients/public-api",
+        "apis-clients/grpc",
+        require("./docs/apis-clients/operate-api/sidebar-schema"),
+        require("./docs/apis-clients/tasklist-api/sidebar-schema"),
+        "apis-clients/console-api-reference",
+        "apis-clients/web-modeler-api/index",
         {
           "Optimize API (REST)": [
             optimizeLink(
@@ -728,7 +740,9 @@ module.exports = {
           "Access control": [
             "self-managed/concepts/access-control/applications",
             "self-managed/concepts/access-control/apis",
+            "self-managed/concepts/access-control/groups",
             "self-managed/concepts/access-control/permissions",
+            "self-managed/concepts/access-control/resource-authorizations",
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ],
@@ -748,6 +762,8 @@ module.exports = {
             "self-managed/zeebe-deployment/configuration/environment-variables",
             "self-managed/zeebe-deployment/configuration/fixed-partitioning",
             "self-managed/zeebe-deployment/configuration/priority-election",
+            "self-managed/zeebe-deployment/configuration/broker-config",
+            "self-managed/zeebe-deployment/configuration/gateway-config",
           ],
         },
         {
@@ -772,6 +788,13 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/rebalancing",
             "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
+          ],
+        },
+        {
+          Exporters: [
+            "self-managed/zeebe-deployment/exporters/exporters",
+            "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
+            "self-managed/zeebe-deployment/exporters/opensearch-exporter",
           ],
         },
       ],
@@ -939,6 +962,10 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
+              "Update notes (3.9 to 3.10)",
+              "self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
+            ),
+            optimizeLink(
               "Update notes (3.9.x-preview-x to 3.9.x)",
               "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9/"
             ),
@@ -1027,6 +1054,18 @@ module.exports = {
         "self-managed/identity/getting-started/install-identity",
         {
           "User guide": [
+            {
+              Groups: [
+                "self-managed/identity/user-guide/groups/creating-a-group",
+                "self-managed/identity/user-guide/groups/assigning-users-to-a-group",
+                "self-managed/identity/user-guide/groups/assigning-roles-to-a-group",
+              ],
+            },
+            {
+              Authorizations: [
+                "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
+              ],
+            },
             "self-managed/identity/user-guide/adding-an-application",
             "self-managed/identity/user-guide/adding-an-api",
             "self-managed/identity/user-guide/adding-a-permission",
@@ -1061,7 +1100,7 @@ module.exports = {
     {
       Modeler: [
         {
-          "Web Modeler (Beta)": [
+          "Web Modeler": [
             "self-managed/modeler/web-modeler/installation",
             "self-managed/modeler/web-modeler/configuration",
             "self-managed/modeler/web-modeler/api",

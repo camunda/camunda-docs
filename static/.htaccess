@@ -8,6 +8,8 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+RewriteRule ^docs/next/apis-clients/operate-api/$ /docs/next/apis-clients/operate-api/overview/ [R=301,L]
+
 # Consolidated redundant element-template pages - v8.0, current, and vNext.
 RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templates/?$ /docs$1/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 
