@@ -1178,10 +1178,10 @@
       ]
     }
   ],
-  "APIs & Clients": [
+  "APIs & Tools": [
     {
       "type": "link",
-      "label": "Working with APIs & Clients",
+      "label": "Working with APIs & Tools",
       "href": "/docs/apis-tools/working-with-apis-tools/"
     },
     {
