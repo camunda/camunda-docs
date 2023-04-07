@@ -16,6 +16,7 @@ module.exports = {
           "What is Camunda Platform 8?",
           "components/concepts/what-is-camunda-platform-8/"
         ),
+        docsLink("Clusters", "components/concepts/clusters/"),
         docsLink("Processes", "components/concepts/processes/"),
         docsLink("Job workers", "components/concepts/job-workers/"),
         docsLink(
@@ -23,10 +24,16 @@ module.exports = {
           "components/concepts/process-instance-creation/"
         ),
         docsLink("Messages", "components/concepts/messages/"),
+        docsLink("Signals", "components/concepts/signals/"),
         docsLink("Incidents", "components/concepts/incidents/"),
         docsLink("Variables", "components/concepts/variables/"),
         docsLink("Expressions", "components/concepts/expressions/"),
         docsLink("Workflow patterns", "components/concepts/workflow-patterns/"),
+        docsLink(
+          "Process instance modification",
+          "components/concepts/process-instance-modification/"
+        ),
+        docsLink("Data retention", "components/concepts/data-retention/"),
       ],
     },
 
@@ -66,6 +73,10 @@ module.exports = {
             docsLink(
               "Connect your IDP with Camunda Platform",
               "components/console/manage-organization/external-sso/"
+            ),
+            docsLink(
+              "Delete your Camunda Platform account",
+              "components/console/manage-organization/delete-account/"
             ),
           ],
         },
@@ -165,10 +176,28 @@ module.exports = {
               "Start a new process instance",
               "components/modeler/web-modeler/start-instance/"
             ),
-            docsLink(
-              "Collaboration",
-              "components/modeler/web-modeler/collaboration/"
-            ),
+
+            {
+              Collaboration: [
+                docsLink(
+                  "Collaborate with your team",
+                  "components/modeler/web-modeler/collaboration/"
+                ),
+                docsLink(
+                  "Collaborate with modes",
+                  "components/modeler/web-modeler/collaborate-with-modes/"
+                ),
+                docsLink(
+                  "Design mode for business users",
+                  "components/modeler/web-modeler/design-your-process/"
+                ),
+                docsLink(
+                  "Implement mode for developers",
+                  "components/modeler/web-modeler/implement-your-process/"
+                ),
+              ],
+            },
+
             docsLink(
               "Milestones",
               "components/modeler/web-modeler/milestones/"
@@ -183,6 +212,10 @@ module.exports = {
                 docsLink(
                   "Call activity linking",
                   "components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
+                ),
+                docsLink(
+                  "Business rule task linking",
+                  "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/"
                 ),
                 docsLink(
                   "Manage Connector templates",
@@ -245,6 +278,10 @@ module.exports = {
                   "components/modeler/desktop-modeler/plugins/"
                 ),
                 docsLink(
+                  "Custom lint rules",
+                  "components/modeler/desktop-modeler/custom-lint-rules/"
+                ),
+                docsLink(
                   "Search paths",
                   "components/modeler/desktop-modeler/search-paths/"
                 ),
@@ -289,6 +326,10 @@ module.exports = {
                   "Manual tasks",
                   "components/modeler/bpmn/manual-tasks/"
                 ),
+                docsLink(
+                  "Undefined tasks",
+                  "components/modeler/bpmn/undefined-tasks/"
+                ),
               ],
             },
 
@@ -323,6 +364,10 @@ module.exports = {
                   "components/modeler/bpmn/message-events/"
                 ),
                 docsLink(
+                  "Signal events",
+                  "components/modeler/bpmn/signal-events/"
+                ),
+                docsLink(
                   "Timer events",
                   "components/modeler/bpmn/timer-events/"
                 ),
@@ -331,9 +376,14 @@ module.exports = {
                   "components/modeler/bpmn/error-events/"
                 ),
                 docsLink(
+                  "Escalation events",
+                  "components/modeler/bpmn/escalation-events/"
+                ),
+                docsLink(
                   "Terminate events",
                   "components/modeler/bpmn/terminate-events/"
                 ),
+                docsLink("Link events", "components/modeler/bpmn/link-events/"),
               ],
             },
 
@@ -515,7 +565,7 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library/"
                 ),
                 docsLink(
-                  "Text",
+                  "Text view",
                   "components/modeler/forms/form-element-library/forms-element-library-text/"
                 ),
                 docsLink(
@@ -523,8 +573,16 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-textfield/"
                 ),
                 docsLink(
+                  "Text area",
+                  "components/modeler/forms/form-element-library/forms-element-library-textarea/"
+                ),
+                docsLink(
                   "Number",
                   "components/modeler/forms/form-element-library/forms-element-library-number/"
+                ),
+                docsLink(
+                  "Datetime",
+                  "components/modeler/forms/form-element-library/forms-element-library-datetime/"
                 ),
                 docsLink(
                   "Checkbox",
@@ -545,6 +603,10 @@ module.exports = {
                 docsLink(
                   "Taglist",
                   "components/modeler/forms/form-element-library/forms-element-library-taglist/"
+                ),
+                docsLink(
+                  "Image view",
+                  "components/modeler/forms/form-element-library/forms-element-library-image/"
                 ),
                 docsLink(
                   "Button",
@@ -576,7 +638,6 @@ module.exports = {
           "Introduction",
           "components/connectors/introduction-to-connectors/"
         ),
-
         docsLink("Use Connectors", "components/connectors/use-connectors/"),
 
         {
@@ -602,7 +663,11 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-lambda/"
             ),
             docsLink(
-              "AWS Lambda Connector",
+              "Camunda Operate Connector",
+              "components/connectors/out-of-the-box-connectors/operate/"
+            ),
+            docsLink(
+              "EasyPost Connector",
               "components/connectors/out-of-the-box-connectors/easy-post/"
             ),
             docsLink(
@@ -638,6 +703,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/microsoft-teams/"
             ),
             docsLink(
+              "OpenAI Connector",
+              "components/connectors/out-of-the-box-connectors/openai/"
+            ),
+            docsLink(
               "Power Automate Connector",
               "components/connectors/out-of-the-box-connectors/power-automate/"
             ),
@@ -665,7 +734,7 @@ module.exports = {
         },
 
         {
-          "Integration Framework": [
+          "Custom Connectors": [
             docsLink(
               "Connector templates",
               "components/connectors/custom-built-connectors/connector-templates/"
@@ -676,6 +745,8 @@ module.exports = {
             ),
           ],
         },
+
+        docsLink("Data handling", "components/modeler/data-handling/"),
       ],
     },
 
