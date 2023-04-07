@@ -22,11 +22,11 @@ If there is no worker subscribed when a job is created, the job is simply put in
 
 Whenever the worker has finished whatever it needs to do (like invoking the REST endpoint), it sends another call to the workflow engine, which [can be one of these three](/docs/components/concepts/job-workers/#completing-or-failing-jobs):
 
-- [`CompleteJob`](/docs/apis-tools/grpc/#completejob-rpc): The service task went well, the process instance can move on.
-- [`FailJob `](/docs/apis-tools/grpc/#failjob-rpc): The service task failed, and the workflow engine should handle this failure. There are two possibilities:
+- [`CompleteJob`](../../../apis-tools/grpc.md#completejob-rpc): The service task went well, the process instance can move on.
+- [`FailJob `](../../../apis-tools/grpc.md#failjob-rpc): The service task failed, and the workflow engine should handle this failure. There are two possibilities:
     - `remaining retries > 0`: The job is retried.
     - `remaining retries <= 0`: An incident is raised and the job is not retried until the incident is resolved.
-- [`ThrowError`](/docs/apis-tools/grpc/#throwerror-rpc): A BPMN error is reported, which typically is handled on the BPMN level.
+- [`ThrowError`](../../../apis-tools/grpc.md#throwerror-rpc): A BPMN error is reported, which typically is handled on the BPMN level.
 
 As the glue code in the worker is external to the workflow engine, there is **no technical transaction spanning both components**. Technical transactions refer to ACID (atomic, consistent, isolated, durable) properties, mostly known from relational databases.
 
@@ -42,7 +42,7 @@ Technical ACID transaction will only be applied in the business application. The
 
 ### Leveraging retries
 
-Using the [`FailJob `](/docs/apis-tools/grpc/#failjob-rpc) API is pretty handy to leverage the built-in retry mechanism of Zeebe. The initial number of retries is set in the BPMN process model:
+Using the [`FailJob `](../../../apis-tools/grpc.md#failjob-rpc) API is pretty handy to leverage the built-in retry mechanism of Zeebe. The initial number of retries is set in the BPMN process model:
 
 ```xml
     <bpmn:serviceTask id="TaskRetrieveMoney">
@@ -139,7 +139,7 @@ In BPMN process definitions, we can explicitly model an end event as an error.
 In case the item is not available, we finish the process with an **error end event**.
 
 :::note
-You can mimic a BPMN error in your glue code by using the [`ThrowError`](/docs/apis-tools/grpc/#throwerror-rpc) API. The consequences for the process are the same as if it were an explicit error end event. So, in case your 'purchase' activity is not a sub process, but a service task, it could throw a BPMN Error informing the process that the good is unavailable.
+You can mimic a BPMN error in your glue code by using the [`ThrowError`](../../../apis-tools/grpc.md#throwerror-rpc) API. The consequences for the process are the same as if it were an explicit error end event. So, in case your 'purchase' activity is not a sub process, but a service task, it could throw a BPMN Error informing the process that the good is unavailable.
 :::
 
 Example in Java:
