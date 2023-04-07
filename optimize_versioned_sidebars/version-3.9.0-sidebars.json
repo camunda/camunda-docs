@@ -1380,33 +1380,33 @@
         },
         {
           "Optimize API (REST)": [
-            "apis-clients/optimize-api/optimize-api-authorization",
+            "apis-tools/optimize-api/optimize-api-authorization",
             {
               "Configuration": [
-                "apis-clients/optimize-api/configuration/enable-sharing",
-                "apis-clients/optimize-api/configuration/disable-sharing"
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing"
               ]
             },
             {
               "Dashboard": [
-                "apis-clients/optimize-api/dashboard/get-dashboard-ids",
-                "apis-clients/optimize-api/dashboard/delete-dashboard",
-                "apis-clients/optimize-api/dashboard/export-dashboard-definitions"
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
               ]
             },
             {
               "Report": [
-                "apis-clients/optimize-api/report/get-report-ids",
-                "apis-clients/optimize-api/report/delete-report",
-                "apis-clients/optimize-api/report/export-report-definitions",
-                "apis-clients/optimize-api/report/get-data-export"
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export"
               ]
             },
-            "apis-clients/optimize-api/event-ingestion",
-            "apis-clients/optimize-api/external-variable-ingestion",
-            "apis-clients/optimize-api/health-readiness",
-            "apis-clients/optimize-api/import-entities",
-            "apis-clients/optimize-api/variable-labeling"
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling"
           ]
         }
       ]
