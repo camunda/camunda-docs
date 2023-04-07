@@ -1,0 +1,54 @@
+---
+id: boolean
+title: Boolean
+hide_table_of_contents: false
+---
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+The `Boolean` scalar type represents `true` or `false`.
+
+```graphql
+scalar Boolean
+```
+
+### Returned by
+
+[`deleteProcessInstance`](/docs/apis-tools/tasklist-api/mutations/delete-process-instance) <Badge class="secondary" text="mutation"/>
+
+### Member of
+
+[`claimTask`](/docs/apis-tools/tasklist-api/mutations/claim-task) <Badge class="secondary" text="mutation"/><Bullet />[`include`](/docs/apis-tools/tasklist-api/directives/include) <Badge class="secondary" text="directive"/><Bullet />[`skip`](/docs/apis-tools/tasklist-api/directives/skip) <Badge class="secondary" text="directive"/><Bullet />[`Task`](/docs/apis-tools/tasklist-api/objects/task) <Badge class="secondary" text="object"/><Bullet />[`TaskQuery`](/docs/apis-tools/tasklist-api/inputs/task-query) <Badge class="secondary" text="input"/><Bullet />[`Variable`](/docs/apis-tools/tasklist-api/objects/variable) <Badge class="secondary" text="object"/>
