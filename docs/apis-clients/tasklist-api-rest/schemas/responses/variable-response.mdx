@@ -1,0 +1,107 @@
+---
+id: variable-response
+title: VariableResponse
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+TaskResponse - represents a user task.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "id": string,
+    "name": string,
+    "value": string,
+    "isValueTruncated": boolean,
+    "previewValue": string
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "value": "string",
+  "isValueTruncated": true,
+  "previewValue": "string"
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> id of the variable
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>name</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> variable name
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>value</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> full variable value
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>previewValue</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> value preview (limited to 8191 characters)
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>isValueTruncated</b></code>](#)<Bullet />`boolean` <Badge class="secondary" text="non-null"/>
+
+> shows, whether previewValue contains truncated value or full value
+
+### Returned by
+
+[`Search task variables`](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-task-variables) <Badge class="secondary" text="POST"/> <Bullet />
+[`Get variable`](/docs/apis-clients/tasklist-api-rest/controllers/tasklist-api-rest-variables-controller.md#get-variable) <Badge class="secondary" text="GET"/>
