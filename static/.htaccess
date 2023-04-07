@@ -10,7 +10,7 @@ Options -Indexes -MultiViews
 
 # 8.0 apis/clients to apis/tools change
 RewriteRule ^docs/8.0/apis-clients(.*)$ /docs/8.0/apis-tools$1 [R=301,L]
-RewriteRule ^optimize/3.8.0/apis-clients/(.*)$ /optimize/3.8.0/apis-tools$1 [R=301,L]
+RewriteRule ^optimize/3.8.0/apis-clients(.*)$ /optimize/3.8.0/apis-tools$1 [R=301,L]
 
 # Identity Authorizations
 RewriteRule ^docs/next/self-managed/identity/user-guide/groups/creating-authorizations-for-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/ [R=301,L]
