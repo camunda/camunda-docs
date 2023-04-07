@@ -34,7 +34,7 @@ Your application can basically do two things with the client:
 
 Using the Zeebe client’s API, you can communicate with the workflow engine. The two most important API calls are to start new process instances and to correlate messages to a process instance.
 
-**Start process instances using the** [**Java Client**](/docs/apis-clients/java-client/index/)**:**
+**Start process instances using the** [**Java Client**](/docs/apis-tools/java-client/index/)**:**
 
 ```java
 processInstance = zeebeClient.newCreateInstanceCommand()  
@@ -44,7 +44,7 @@ processInstance = zeebeClient.newCreateInstanceCommand()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new instance", throwable); });
 ```
 
-**Start process instances using the** [**NodeJS Client**](/docs/apis-clients/community-clients/javascript/)**:**
+**Start process instances using the** [**NodeJS Client**](/docs/apis-tools/community-clients/javascript/)**:**
 
 ```js
 const processInstance = await zbc.createWorkflowInstance({  

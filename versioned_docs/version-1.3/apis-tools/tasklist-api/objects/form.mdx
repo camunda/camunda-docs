@@ -1,0 +1,28 @@
+---
+id: form
+title: Form
+---
+
+Describes task embedded form
+
+```graphql
+type Form {
+  id: String!
+  processDefinitionId: String!
+  schema: String!
+}
+```
+
+### Fields
+
+#### `id` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+The unique identifier of the embedded form within one process
+
+#### `processDefinitionId` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+Reference to process definition
+
+#### `schema` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+Form content

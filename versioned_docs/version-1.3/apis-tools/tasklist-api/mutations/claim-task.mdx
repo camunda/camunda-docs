@@ -1,0 +1,26 @@
+---
+id: claim-task
+title: claimTask
+---
+
+Claim a task with taskId to currently logged in user. Returns the task.
+
+```graphql
+claimTask(
+  taskId: String!
+  assignee: String
+): Task!
+
+```
+
+### Arguments
+
+#### `taskId` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+#### `assignee` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+### Type
+
+#### [`Task`](/docs/apis-tools/tasklist-api/objects/task)
+
+Describes the User task.

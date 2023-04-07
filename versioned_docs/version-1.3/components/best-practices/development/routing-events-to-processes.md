@@ -111,7 +111,7 @@ The following code examples target Camunda Cloud.
 
 #### Starting process instance by BPMN process id
 
-If you have only one starting point (none start event) in your process definition, you reference the process definition by the ID in the BPMN XML file. This is the most common case and requires using the [`CreateProcessInstance`](/docs/apis-clients/grpc/#createprocessinstance-rpc) API.
+If you have only one starting point (none start event) in your process definition, you reference the process definition by the ID in the BPMN XML file. This is the most common case and requires using the [`CreateProcessInstance`](/docs/apis-tools/grpc/#createprocessinstance-rpc) API.
 
 Example in Java:
 
@@ -147,11 +147,11 @@ zbc.createWorkflowInstance({
 })
 ```
 
-You can also use [`CreateProcessInstanceWithResult`](/docs/apis-clients/grpc/#createprocessinstancewithresult-rpc) instead, if you want to block the execution until the process instance has completed.
+You can also use [`CreateProcessInstanceWithResult`](/docs/apis-tools/grpc/#createprocessinstancewithresult-rpc) instead, if you want to block the execution until the process instance has completed.
 
 #### Starting process instance by message
 
-As soon as you have multiple possible starting points, you have to use named messages to start process instances. The API method is [`PublishMessage`](/docs/apis-clients/grpc/#publishmessage-rpc):
+As soon as you have multiple possible starting points, you have to use named messages to start process instances. The API method is [`PublishMessage`](/docs/apis-tools/grpc/#publishmessage-rpc):
 
 ```java
 client.newPublishMessageComment()

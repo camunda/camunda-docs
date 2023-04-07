@@ -45,6 +45,6 @@ If you have questions or feedback about deployment with Zeebe, we encourage you 
 Zeebe's Java and Go clients each have getting started guides of their own, showing in much greater detail how you can use the clients in the worker services you orchestrate with Zeebe.
 
 - [Getting started with the Java client](https://github.com/camunda-cloud/camunda-cloud-get-started)
-- [Getting started with the Go client](/apis-clients/go-client/get-started.md)
+- [Getting started with the Go client](/apis-tools/go-client/get-started.md)
 
 Beyond Java and Go, it's possible to create clients for Zeebe in a range of other programming languages, including JavaScript and C#, via community-supported libraries. The [Awesome Zeebe](https://awesome.zeebe.io/) page includes community-contributed clients in other languages, and [this blog post](https://camunda.com/blog/2018/11/grpc-generating-a-zeebe-python-client/) walks through how to generate a new client stub for Zeebe using gRPC.
