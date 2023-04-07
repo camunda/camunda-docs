@@ -333,6 +333,19 @@ module.exports = {
                 optimizeLink("View mode", "components/userguide/view-mode/"),
               ],
             },
+            {
+              "Dashboards maintained by Camunda": [
+                optimizeLink(
+                  "Process dashboards",
+                  "components/userguide/process-dashboards/"
+                ),
+                optimizeLink(
+                  "Instant preview dashboards",
+                  "components/userguide/instant-preview-dashboards/"
+                ),
+              ],
+            },
+
             optimizeLink(
               "Creating reports",
               "components/userguide/creating-reports/"
@@ -340,10 +353,6 @@ module.exports = {
             optimizeLink(
               "Combined process reports",
               "components/userguide/combined-process-reports/"
-            ),
-            optimizeLink(
-              "Processes",
-              "components/userguide/process-dashboards/"
             ),
             {
               "Process analysis": [
@@ -476,7 +485,7 @@ module.exports = {
                   "components/userguide/additional-features/process-variants-comparison/"
                 ),
                 optimizeLink(
-                  "Machine learning-ready dataset",
+                  "Machine learning-ready data set",
                   "components/userguide/additional-features/ml-dataset/"
                 ),
               ],
