@@ -1038,12 +1038,12 @@ module.exports = {
     ),
     {
       APIs: [
-        docsLink("Public API", "apis-clients/public-api/"),
-        docsLink("Zeebe API (gRPC)", "apis-clients/grpc/"),
+        docsLink("Public API", "apis-tools/public-api/"),
+        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
         {
           "Operate API (REST)": [
-            docsLink("Overview", "apis-clients/operate-api/overview/"),
-            docsLink("Tutorial", "apis-clients/operate-api/tutorial/"),
+            docsLink("Overview", "apis-tools/operate-api/overview/"),
+            docsLink("Tutorial", "apis-tools/operate-api/tutorial/"),
           ],
         },
         {

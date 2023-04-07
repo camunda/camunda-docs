@@ -19,9 +19,9 @@ To learn more about our release cycle, refer to our [release policy](/reference/
 
 Currently, both Zeebe API and [Tasklist API](/apis-tools/tasklist-api/generated.md) are officially supported APIs:
 
-- [Zeebe Client Java API](/apis-clients/java-client/index.md)
-- [Tasklist API](/apis-clients/tasklist-api/generated.md)
-- [Operate API](/apis-clients/operate-api/overview.md)
+- [Zeebe Client Java API](/apis-tools/java-client/index.md)
+- [Tasklist API](/apis-tools/tasklist-api/generated.md)
+- [Operate API](/apis-tools/operate-api/overview.md)
 
 All non-implementation Java packages (package name does not contain `impl`) of the following Maven modules.
 

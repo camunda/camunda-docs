@@ -1,7 +1,7 @@
 ---
 id: operate-api-overview
 title: Overview
-slug: /apis-clients/operate-api/overview
+slug: /operate-api/overview
 description: "Operate API is a REST API and provides searching, getting, and changing Operate data. Requests and responses are in JSON."
 ---
 

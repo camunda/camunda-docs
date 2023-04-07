@@ -1,7 +1,7 @@
 ---
 id: operate-api-tutorial
 title: Tutorial
-slug: /apis-clients/operate-api/tutorial
+slug: /operate-api/tutorial
 description: "Step through examples to implement an application using the Operate API and render a BPMN diagram."
 ---
 
@@ -9,7 +9,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 
 ## Getting started
 
-- You need authentication to access the API endpoints. Find more information [here](/docs/next/apis-clients/operate-api/overview/#authentication).
+- You need authentication to access the API endpoints. Find more information [here](/docs/apis-tools/operate-api/overview/#authentication).
 - We will use the `bpmn-js` library to render the diagram and add overlays. Visit the documentation on [embedding the pre-packaged viewer](https://bpmn.io/toolkit/bpmn-js/walkthrough/#viewer-pre-packaged) for more details.
 
 ## Set up the demo project
