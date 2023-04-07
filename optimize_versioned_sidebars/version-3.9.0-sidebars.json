@@ -1703,6 +1703,17 @@
       "label": "Camunda Platform 8 Self-Managed",
       "href": "/docs/self-managed/about-self-managed/"
     },
+
+    {
+      "Architecture": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/self-managed/platform-architecture/overview/"
+        }
+      ]
+    },
+
     {
       "Installation": [
         {
@@ -1736,6 +1747,16 @@
                 },
                 {
                   "type": "link",
+                  "label": "Microsoft AKS",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Google GKE",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/"
+                },
+                {
+                  "type": "link",
                   "label": "Red Hat OpenShift",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/"
                 }
@@ -1757,6 +1778,16 @@
                   "type": "link",
                   "label": "Combined and separated Ingress setup",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
+                },
+                {
+                  "type": "link",
+                  "label": "Using Existing Keycloak",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
+                },
+                {
+                  "type": "link",
+                  "label": "Installing in an air-gapped environment",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 }
               ]
             },
@@ -2021,6 +2052,20 @@
       ]
     },
     {
+      "Connectors": [
+        {
+          "type": "link",
+          "label": "Installation",
+          "href": "/docs/self-managed/connectors-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/connectors-deployment/connectors-configuration/"
+        }
+      ]
+    },
+    {
       "Optimize": [
         "self-managed/optimize-deployment/install-and-start",
         "self-managed/optimize-deployment/version-policy",
@@ -2226,6 +2271,11 @@
           "type": "link",
           "label": "Installation",
           "href": "/docs/self-managed/web-modeler/installation/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/web-modeler/configuration/"
         }
       ]
     },
@@ -2248,7 +2298,7 @@
         },
         {
           "type": "link",
-          "label": "Zeebe Backups",
+          "label": "Backup and restore Zeebe data",
           "href": "/docs/self-managed/backup-restore/zeebe-backup-and-restore/"
         }
       ]
