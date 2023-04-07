@@ -1360,6 +1360,13 @@ module.exports = {
       "Camunda Platform 8 Self-Managed",
       "self-managed/about-self-managed/"
     ),
+
+    {
+      Architecture: [
+        docsLink("Overview", "self-managed/platform-architecture/overview/"),
+      ],
+    },
+
     {
       Installation: [
         docsLink("Overview", "self-managed/platform-deployment/overview/"),
@@ -1384,6 +1391,14 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/"
                 ),
                 docsLink(
+                  "Microsoft AKS",
+                  "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
+                ),
+                docsLink(
+                  "Google GKE",
+                  "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/"
+                ),
+                docsLink(
                   "Red Hat OpenShift",
                   "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/"
                 ),
@@ -1402,6 +1417,14 @@ module.exports = {
                 docsLink(
                   "Combined and separated Ingress setup",
                   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
+                ),
+                docsLink(
+                  "Using Existing Keycloak",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
+                ),
+                docsLink(
+                  "Installing in an air-gapped environment",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 ),
               ],
             },
@@ -1424,9 +1447,14 @@ module.exports = {
               "self-managed/concepts/access-control/applications/"
             ),
             docsLink("APIs", "self-managed/concepts/access-control/apis/"),
+            docsLink("Groups", "self-managed/concepts/access-control/groups/"),
             docsLink(
               "Permissions",
               "self-managed/concepts/access-control/permissions/"
+            ),
+            docsLink(
+              "Resource authorizations",
+              "self-managed/concepts/access-control/resource-authorizations/"
             ),
             docsLink("Roles", "self-managed/concepts/access-control/roles/"),
             docsLink("Users", "self-managed/concepts/access-control/users/"),
@@ -1474,6 +1502,14 @@ module.exports = {
             docsLink(
               "Priority election",
               "self-managed/zeebe-deployment/configuration/priority-election/"
+            ),
+            docsLink(
+              "Broker configuration",
+              "self-managed/zeebe-deployment/configuration/broker-config/"
+            ),
+            docsLink(
+              "Gateway configuration",
+              "self-managed/zeebe-deployment/configuration/gateway-config/"
             ),
           ],
         },
@@ -1546,6 +1582,20 @@ module.exports = {
             ),
           ],
         },
+
+        {
+          Exporters: [
+            docsLink("Overview", "self-managed/zeebe-deployment/exporters/"),
+            docsLink(
+              "Elasticsearch",
+              "self-managed/zeebe-deployment/exporters/elasticsearch-exporter/"
+            ),
+            docsLink(
+              "OpenSearch",
+              "self-managed/zeebe-deployment/exporters/opensearch-exporter/"
+            ),
+          ],
+        },
       ],
     },
     {
@@ -1571,7 +1621,7 @@ module.exports = {
           "self-managed/operate-deployment/importer-and-archiver/"
         ),
         docsLink(
-          "Authentication",
+          "Authentication and authorization",
           "self-managed/operate-deployment/operate-authentication/"
         ),
         docsLink(
@@ -1689,6 +1739,32 @@ module.exports = {
         ),
         {
           "User guide": [
+            {
+              Groups: [
+                docsLink(
+                  "Creating a group",
+                  "self-managed/identity/user-guide/groups/creating-a-group/"
+                ),
+                docsLink(
+                  "Assigning users to a group",
+                  "self-managed/identity/user-guide/groups/assigning-users-to-a-group/"
+                ),
+                docsLink(
+                  "Assigning roles to a group",
+                  "self-managed/identity/user-guide/groups/assigning-roles-to-a-group/"
+                ),
+              ],
+            },
+
+            {
+              Authorizations: [
+                docsLink(
+                  "Managing resource authorizations",
+                  "self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
+                ),
+              ],
+            },
+
             docsLink(
               "Adding an application",
               "self-managed/identity/user-guide/adding-an-application/"
@@ -1783,16 +1859,29 @@ module.exports = {
     },
 
     {
-      "Web Modeler": [
-        docsLink(
-          "Installation",
-          "self-managed/modeler/web-modeler/installation/"
-        ),
-        docsLink(
-          "Configuration",
-          "self-managed/modeler/web-modeler/configuration/"
-        ),
-        docsLink("API access", "self-managed/modeler/web-modeler/api/"),
+      Modeler: [
+        {
+          "Web Modeler": [
+            docsLink(
+              "Installation",
+              "self-managed/modeler/web-modeler/installation/"
+            ),
+            docsLink(
+              "Configuration",
+              "self-managed/modeler/web-modeler/configuration/"
+            ),
+            docsLink("API access", "self-managed/modeler/web-modeler/api/"),
+          ],
+        },
+
+        {
+          "Desktop Modeler": [
+            docsLink(
+              "Deploy diagram",
+              "self-managed/modeler/desktop-modeler/deploy-to-self-managed/"
+            ),
+          ],
+        },
       ],
     },
 
