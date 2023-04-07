@@ -22,42 +22,42 @@ type TaskQuery {
 
 ### Fields
 
-#### `state` ([`TaskState`](/docs/apis-tools/tasklist-api/enums/task-state))
+#### `state` ([`TaskState`](../enums/task-state.mdx))
 
 State of the tasks
 
-#### `assigned` ([`Boolean`](/docs/apis-tools/tasklist-api/scalars/boolean))
+#### `assigned` ([`Boolean`](../scalars/boolean.mdx))
 
 Are the tasks assigned?
 
-#### `assignee` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+#### `assignee` ([`String`](../scalars/string.mdx))
 
 Who is assigned to the tasks?
 
-#### `candidateGroup` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+#### `candidateGroup` ([`String`](../scalars/string.mdx))
 
 given group is in candidate groups list
 
-#### `pageSize` ([`Int`](/docs/apis-tools/tasklist-api/scalars/int))
+#### `pageSize` ([`Int`](../scalars/int.mdx))
 
 Size of tasks page (default: 50).
 
-#### `taskDefinitionId` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+#### `taskDefinitionId` ([`String`](../scalars/string.mdx))
 
 Task definition ID - what's the BPMN flow node?
 
-#### `searchAfter` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+#### `searchAfter` ([`String`](../scalars/string.mdx))
 
 Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values plus same sort values.
 
-#### `searchAfterOrEqual` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+#### `searchAfterOrEqual` ([`String`](../scalars/string.mdx))
 
 Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values.
 
-#### `searchBefore` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+#### `searchBefore` ([`String`](../scalars/string.mdx))
 
 Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values plus same sort values.
 
-#### `searchBeforeOrEqual` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+#### `searchBeforeOrEqual` ([`String`](../scalars/string.mdx))
 
 Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values.
