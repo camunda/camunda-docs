@@ -34,12 +34,12 @@ Camunda Platform 8 provides several official clients based on this API. Official
 
 Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
-<DocCardList items={[{type:"link", href:"/docs/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
+<DocCardList items={[{type:"link", href:"/docs/apis-clients/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
 {
-type:"link", href:"/docs/apis-tools/go-client/go-get-started/", label: "Go client", docId:"apis-tools/go-client/index"
+type:"link", href:"/docs/apis-clients/go-client/go-get-started/", label: "Go client", docId:"apis-tools/go-client/index"
 },
 {
-type:"link", href:"/docs/apis-tools/cli-client/index", label: "CLI client", docId:"apis-tools/cli-client/index"
+type:"link", href:"/docs/apis-clients/cli-client/index", label: "CLI client", docId:"apis-tools/cli-client/index"
 }
 ]}/>
 
@@ -66,21 +66,21 @@ It is also possible to [build your own client](../apis-tools/build-your-own-clie
 
 ![Architecture diagram for Camunda Platform including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
 
-<DocCardList items={[{type:"link", href:"/docs/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"},
+<DocCardList items={[{type:"link", href:"/docs/apis-clients/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"},
 {
-type:"link", href:"/docs/apis-tools/operate-api/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
+type:"link", href:"/docs/apis-clients/operate-api/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
 },
 {
-type:"link", href:"/docs/apis-tools/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"
+type:"link", href:"/docs/apis-clients/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"
 },
 {
-type:"link", href:"/docs/next/apis-tools/web-modeler-api/", label: "Web Modeler API (Beta, REST)", docId:"apis-tools/web-modeler-api/index", border: "highlight"
+type:"link", href:"/docs/next/apis-clients/web-modeler-api/", label: "Web Modeler API (Beta, REST)", docId:"apis-tools/web-modeler-api/index", border: "highlight"
 },
 {
-type:"link", href:"/docs/apis-tools/grpc/", label: "Zeebe API (gRPC)", docId:"apis-tools/grpc"
+type:"link", href:"/docs/apis-clients/grpc/", label: "Zeebe API (gRPC)", docId:"apis-tools/grpc"
 },
 {
-type:"link", href:"/optimize/apis-tools/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)"
+type:"link", href:"/optimize/apis-clients/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)"
 }
 ]}/>
 
