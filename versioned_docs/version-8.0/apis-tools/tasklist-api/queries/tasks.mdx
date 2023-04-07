@@ -1,0 +1,23 @@
+---
+id: tasks
+title: tasks
+---
+
+Get list of tasks based on `TaskQuery`.
+
+```graphql
+tasks(
+  query: TaskQuery!
+): [Task!]!
+
+```
+
+### Arguments
+
+#### `query` ([`TaskQuery`](/docs/apis-tools/tasklist-api/inputs/task-query))
+
+### Type
+
+#### [`Task`](/docs/apis-tools/tasklist-api/objects/task)
+
+Describes the User task.

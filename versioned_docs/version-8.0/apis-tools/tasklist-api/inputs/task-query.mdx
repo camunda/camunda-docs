@@ -1,0 +1,63 @@
+---
+id: task-query
+title: TaskQuery
+---
+
+Task query - query to get one page of tasks.
+
+```graphql
+type TaskQuery {
+  state: TaskState
+  assigned: Boolean
+  assignee: String
+  candidateGroup: String
+  pageSize: Int
+  taskDefinitionId: String
+  searchAfter: [String!]
+  searchAfterOrEqual: [String!]
+  searchBefore: [String!]
+  searchBeforeOrEqual: [String!]
+}
+```
+
+### Fields
+
+#### `state` ([`TaskState`](/docs/apis-tools/tasklist-api/enums/task-state))
+
+State of the tasks
+
+#### `assigned` ([`Boolean`](/docs/apis-tools/tasklist-api/scalars/boolean))
+
+Are the tasks assigned?
+
+#### `assignee` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+Who is assigned to the tasks?
+
+#### `candidateGroup` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+given group is in candidate groups list
+
+#### `pageSize` ([`Int`](/docs/apis-tools/tasklist-api/scalars/int))
+
+Size of tasks page (default: 50).
+
+#### `taskDefinitionId` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+Task definition ID - what's the BPMN flow node?
+
+#### `searchAfter` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values plus same sort values.
+
+#### `searchAfterOrEqual` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values.
+
+#### `searchBefore` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values plus same sort values.
+
+#### `searchBeforeOrEqual` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values.

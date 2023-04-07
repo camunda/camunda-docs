@@ -1,0 +1,26 @@
+---
+id: complete-task
+title: completeTask
+---
+
+Complete a task with taskId and optional variables. Returns the task.
+
+```graphql
+completeTask(
+  taskId: String!
+  variables: [VariableInput!]!
+): Task!
+
+```
+
+### Arguments
+
+#### `taskId` ([`String`](/docs/apis-tools/tasklist-api/scalars/string))
+
+#### `variables` ([`VariableInput`](/docs/apis-tools/tasklist-api/inputs/variable-input))
+
+### Type
+
+#### [`Task`](/docs/apis-tools/tasklist-api/objects/task)
+
+Describes the User task.

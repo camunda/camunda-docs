@@ -42,5 +42,5 @@ The `zeebe-test` module was deprecated in 1.3.0. We are currently planning to re
 
 ## Deprecated in 8.0
 
-The [DeployProcess RPC](/apis-clients/grpc.md#deployprocess-rpc) was deprecated in 8.0.
-It is replaced by the [DeployResource RPC](/apis-clients/grpc.md#deployresource-rpc).
+The [DeployProcess RPC](/apis-tools/grpc.md#deployprocess-rpc) was deprecated in 8.0.
+It is replaced by the [DeployResource RPC](/apis-tools/grpc.md#deployresource-rpc).
