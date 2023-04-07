@@ -1,7 +1,7 @@
 ---
 id: operate-api-tutorial
 title: Tutorial
-slug: /operate-api/tutorial
+slug: /apis-tools/operate-api/tutorial
 description: "Step through examples to implement an application using the Operate API and render a BPMN diagram."
 ---
 
