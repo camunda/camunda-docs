@@ -1141,56 +1141,56 @@
         {
           "type": "link",
           "label": "Public API",
-          "href": "/docs/8.0/apis-clients/public-api/"
+          "href": "/docs/8.0/apis-tools/public-api/"
         },
         {
           "type": "link",
           "label": "Zeebe API (gRPC)",
-          "href": "/docs/8.0/apis-clients/grpc/"
+          "href": "/docs/8.0/apis-tools/grpc/"
         },
         {
           "type": "link",
           "label": "Operate API (REST)",
-          "href": "/docs/8.0/apis-clients/operate-api/"
+          "href": "/docs/8.0/apis-tools/operate-api/"
         },
         {
           "Tasklist API (GraphQL)": [
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/apis-clients/tasklist-api/tasklist-api-overview/"
+              "href": "/docs/8.0/apis-tools/tasklist-api/tasklist-api-overview/"
             },
             {
               "type": "link",
               "label": "Tutorial",
-              "href": "/docs/8.0/apis-clients/tasklist-api/tasklist-api-tutorial/"
+              "href": "/docs/8.0/apis-tools/tasklist-api/tasklist-api-tutorial/"
             },
             {
               "type": "link",
               "label": "Schema Documentation",
-              "href": "/docs/8.0/apis-clients/tasklist-api/"
+              "href": "/docs/8.0/apis-tools/tasklist-api/"
             },
             {
               "Directives": [
                 {
                   "type": "link",
                   "label": "deprecated",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/directives/deprecated/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/directives/deprecated/"
                 },
                 {
                   "type": "link",
                   "label": "include",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/directives/include/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/directives/include/"
                 },
                 {
                   "type": "link",
                   "label": "skip",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/directives/skip/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/directives/skip/"
                 },
                 {
                   "type": "link",
                   "label": "specifiedBy",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/directives/specified-by/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/directives/specified-by/"
                 }
               ]
             },
@@ -1199,7 +1199,7 @@
                 {
                   "type": "link",
                   "label": "TaskState",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/enums/task-state/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/enums/task-state/"
                 }
               ]
             },
@@ -1208,12 +1208,12 @@
                 {
                   "type": "link",
                   "label": "TaskQuery",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/inputs/task-query/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/inputs/task-query/"
                 },
                 {
                   "type": "link",
                   "label": "VariableInput",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/inputs/variable-input/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/inputs/variable-input/"
                 }
               ]
             },
@@ -1222,22 +1222,22 @@
                 {
                   "type": "link",
                   "label": "claimTask",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/mutations/claim-task/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/mutations/claim-task/"
                 },
                 {
                   "type": "link",
                   "label": "completeTask",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/mutations/complete-task/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/mutations/complete-task/"
                 },
                 {
                   "type": "link",
                   "label": "deleteProcessInstance",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/mutations/delete-process-instance/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/mutations/delete-process-instance/"
                 },
                 {
                   "type": "link",
                   "label": "unclaimTask",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/mutations/unclaim-task/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/mutations/unclaim-task/"
                 }
               ]
             },
@@ -1246,22 +1246,22 @@
                 {
                   "type": "link",
                   "label": "Form",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/objects/form/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/objects/form/"
                 },
                 {
                   "type": "link",
                   "label": "Task",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/objects/task/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/objects/task/"
                 },
                 {
                   "type": "link",
                   "label": "User",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/objects/user/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/objects/user/"
                 },
                 {
                   "type": "link",
                   "label": "Variable",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/objects/variable/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/objects/variable/"
                 }
               ]
             },
@@ -1270,32 +1270,32 @@
                 {
                   "type": "link",
                   "label": "currentUser",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/queries/current-user/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/current-user/"
                 },
                 {
                   "type": "link",
                   "label": "form",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/queries/form/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/form/"
                 },
                 {
                   "type": "link",
                   "label": "task",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/queries/task/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/task/"
                 },
                 {
                   "type": "link",
                   "label": "tasks",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/queries/tasks/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/tasks/"
                 },
                 {
                   "type": "link",
                   "label": "variable",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/queries/variable/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/variable/"
                 },
                 {
                   "type": "link",
                   "label": "variables",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/queries/variables/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/variables/"
                 }
               ]
             },
@@ -1304,22 +1304,22 @@
                 {
                   "type": "link",
                   "label": "Boolean",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/scalars/boolean/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/scalars/boolean/"
                 },
                 {
                   "type": "link",
                   "label": "ID",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/scalars/id/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/scalars/id/"
                 },
                 {
                   "type": "link",
                   "label": "Int",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/scalars/int/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/scalars/int/"
                 },
                 {
                   "type": "link",
                   "label": "String",
-                  "href": "/docs/8.0/apis-clients/tasklist-api/scalars/string/"
+                  "href": "/docs/8.0/apis-tools/tasklist-api/scalars/string/"
                 }
               ]
             }

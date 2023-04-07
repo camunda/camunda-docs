@@ -601,19 +601,19 @@
             {
               "type": "link",
               "label": "Authorization",
-              "href": "/optimize/3.8.0/apis-clients/optimize-api/optimize-api-authorization/"
+              "href": "/optimize/3.8.0/apis-tools/optimize-api/optimize-api-authorization/"
             },
             {
               "Configuration": [
                 {
                   "type": "link",
                   "label": "Enable sharing",
-                  "href": "/optimize/3.8.0/apis-clients/optimize-api/configuration/enable-sharing/"
+                  "href": "/optimize/3.8.0/apis-tools/optimize-api/configuration/enable-sharing/"
                 },
                 {
                   "type": "link",
                   "label": "Disable sharing",
-                  "href": "/optimize/3.8.0/apis-clients/optimize-api/configuration/disable-sharing/"
+                  "href": "/optimize/3.8.0/apis-tools/optimize-api/configuration/disable-sharing/"
                 }
               ]
             },
@@ -622,17 +622,17 @@
                 {
                   "type": "link",
                   "label": "Get dashboard IDs",
-                  "href": "/optimize/3.8.0/apis-clients/optimize-api/dashboard/get-dashboard-ids/"
+                  "href": "/optimize/3.8.0/apis-tools/optimize-api/dashboard/get-dashboard-ids/"
                 },
                 {
                   "type": "link",
                   "label": "Delete dashboards",
-                  "href": "/optimize/3.8.0/apis-clients/optimize-api/dashboard/delete-dashboard/"
+                  "href": "/optimize/3.8.0/apis-tools/optimize-api/dashboard/delete-dashboard/"
                 },
                 {
                   "type": "link",
                   "label": "Export dashboard definitions",
-                  "href": "/optimize/3.8.0/apis-clients/optimize-api/dashboard/export-dashboard-definitions/"
+                  "href": "/optimize/3.8.0/apis-tools/optimize-api/dashboard/export-dashboard-definitions/"
                 }
               ]
             },
@@ -641,49 +641,49 @@
                 {
                   "type": "link",
                   "label": "Get report IDs",
-                  "href": "/optimize/3.8.0/apis-clients/optimize-api/report/get-report-ids/"
+                  "href": "/optimize/3.8.0/apis-tools/optimize-api/report/get-report-ids/"
                 },
                 {
                   "type": "link",
                   "label": "Delete reports",
-                  "href": "/optimize/3.8.0/apis-clients/optimize-api/report/delete-report/"
+                  "href": "/optimize/3.8.0/apis-tools/optimize-api/report/delete-report/"
                 },
                 {
                   "type": "link",
                   "label": "Export report definitions",
-                  "href": "/optimize/3.8.0/apis-clients/optimize-api/report/export-report-definitions/"
+                  "href": "/optimize/3.8.0/apis-tools/optimize-api/report/export-report-definitions/"
                 },
                 {
                   "type": "link",
                   "label": "Export report result data",
-                  "href": "/optimize/3.8.0/apis-clients/optimize-api/report/get-data-export/"
+                  "href": "/optimize/3.8.0/apis-tools/optimize-api/report/get-data-export/"
                 }
               ]
             },
             {
               "type": "link",
               "label": "Event ingestion",
-              "href": "/optimize/3.8.0/apis-clients/optimize-api/event-ingestion/"
+              "href": "/optimize/3.8.0/apis-tools/optimize-api/event-ingestion/"
             },
             {
               "type": "link",
               "label": "External variable ingestion",
-              "href": "/optimize/3.8.0/apis-clients/optimize-api/external-variable-ingestion/"
+              "href": "/optimize/3.8.0/apis-tools/optimize-api/external-variable-ingestion/"
             },
             {
               "type": "link",
               "label": "Health readiness",
-              "href": "/optimize/3.8.0/apis-clients/optimize-api/health-readiness/"
+              "href": "/optimize/3.8.0/apis-tools/optimize-api/health-readiness/"
             },
             {
               "type": "link",
               "label": "Import entities",
-              "href": "/optimize/3.8.0/apis-clients/optimize-api/import-entities/"
+              "href": "/optimize/3.8.0/apis-tools/optimize-api/import-entities/"
             },
             {
               "type": "link",
               "label": "Variable labeling",
-              "href": "/optimize/3.8.0/apis-clients/optimize-api/variable-labeling/"
+              "href": "/optimize/3.8.0/apis-tools/optimize-api/variable-labeling/"
             }
           ]
         }
