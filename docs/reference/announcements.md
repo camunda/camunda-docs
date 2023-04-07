@@ -4,14 +4,32 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
-## Upgrading to 8.2
+## Camunda Platform 8.2
+
+Release date: 11th of April 2023
+
+End of maintenance: 8th of October 2024
+
+### Updating to 8.2
 
 - It is recommended to follow a sequential update path when updating to version 8.2. For example, if running on version 8.0, first update to 8.1, then update to 8.2.
 - Migration of data during the version 8.2 update could take longer than previous versions, especially for datasets containing a large amount of incidents data.
-- Operate and Tasklist now uses Spring Boot version 3.0. Therefore, [URLs with a trailing slash will fail with an HTTP status 404](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide#spring-mvc-and-webflux-url-matching-changes).
+- Operate and Tasklist now use Spring Boot version 3.0. Therefore, [URLs with a trailing slash will fail with an HTTP status 404](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide#spring-mvc-and-webflux-url-matching-changes).
 - To enable the new **Start Process from Tasklist** feature in Tasklist, additional configuration is needed. Details can be found [here](/docs/next/guides/update-guide/810-to-820/#tasklist).
 
-## Deprecated in 8.0
+## Camunda Platform 8.1
+
+Release date: 11th of October 2022
+
+End of maintenance: 10th of April 2024
+
+## Camunda Platform 8.0
+
+Release date: 12th of April 2022
+
+End of maintenance: 11th of October 2023
+
+### Deprecated in 8.0
 
 The [DeployProcess RPC](/apis-clients/grpc.md#deployprocess-rpc) was deprecated in 8.0.
 It is replaced by the [DeployResource RPC](/apis-clients/grpc.md#deployresource-rpc).
