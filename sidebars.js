@@ -971,11 +971,11 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
-              "Update notes (3.9 to 3.10)",
+              "Update notes (3.9.x to 3.10)",
               "self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
             ),
             optimizeLink(
-              "Update notes (3.9.x-preview-x to 3.9.x)",
+              "Update notes (3.9-preview-x to 3.9.x)",
               "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9/"
             ),
             optimizeLink(
