@@ -149,7 +149,7 @@ Identity requires the following parameters:
 
 ### Use Identity JWT token to access Operate API
 
-Operate provides a [REST API](/docs/apis-tools/operate-api/operate-api-overview/) under the endpoint `/v1`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+Operate provides a [REST API](/apis-tools/operate-api/overview.md) under the endpoint `/v1`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 **Example:**
 
