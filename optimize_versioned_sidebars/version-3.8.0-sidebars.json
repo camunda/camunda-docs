@@ -1130,10 +1130,10 @@
     }
   ],
 
-  "APIs & Clients": [
+  "APIs & Tools": [
     {
       "type": "link",
-      "label": "Working with APIs & Clients",
+      "label": "Working with APIs & Tools",
       "href": "/docs/8.0/apis-tools/working-with-apis-tools/"
     },
     {
@@ -1328,38 +1328,38 @@
         {
           "type": "link",
           "label": "Console API clients (REST)",
-          "href": "/docs/8.0/apis-clients/console-api-reference/"
+          "href": "/docs/8.0/apis-tools/console-api-reference/"
         },
 
         {
           "Optimize API (REST)": [
-            "apis-clients/optimize-api/optimize-api-authorization",
+            "apis-tools/optimize-api/optimize-api-authorization",
             {
               "Configuration": [
-                "apis-clients/optimize-api/configuration/enable-sharing",
-                "apis-clients/optimize-api/configuration/disable-sharing"
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing"
               ]
             },
             {
               "Dashboard": [
-                "apis-clients/optimize-api/dashboard/get-dashboard-ids",
-                "apis-clients/optimize-api/dashboard/delete-dashboard",
-                "apis-clients/optimize-api/dashboard/export-dashboard-definitions"
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
               ]
             },
             {
               "Report": [
-                "apis-clients/optimize-api/report/get-report-ids",
-                "apis-clients/optimize-api/report/delete-report",
-                "apis-clients/optimize-api/report/export-report-definitions",
-                "apis-clients/optimize-api/report/get-data-export"
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export"
               ]
             },
-            "apis-clients/optimize-api/event-ingestion",
-            "apis-clients/optimize-api/external-variable-ingestion",
-            "apis-clients/optimize-api/health-readiness",
-            "apis-clients/optimize-api/import-entities",
-            "apis-clients/optimize-api/variable-labeling"
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling"
           ]
         }
       ]
@@ -1371,64 +1371,64 @@
             {
               "type": "link",
               "label": "Quick reference",
-              "href": "/docs/8.0/apis-clients/java-client/"
+              "href": "/docs/8.0/apis-tools/java-client/"
             },
             {
               "type": "link",
               "label": "Job worker",
-              "href": "/docs/8.0/apis-clients/java-client/job-worker/"
+              "href": "/docs/8.0/apis-tools/java-client/job-worker/"
             },
             {
               "type": "link",
               "label": "Logging",
-              "href": "/docs/8.0/apis-clients/java-client/logging/"
+              "href": "/docs/8.0/apis-tools/java-client/logging/"
             },
             {
               "type": "link",
               "label": "Zeebe Process Test",
-              "href": "/docs/8.0/apis-clients/java-client/zeebe-process-test/"
+              "href": "/docs/8.0/apis-tools/java-client/zeebe-process-test/"
             },
             {
               "Examples": [
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/docs/8.0/apis-clients/java-client-examples/"
+                  "href": "/docs/8.0/apis-tools/java-client-examples/"
                 },
                 {
                   "type": "link",
                   "label": "Deploy a process",
-                  "href": "/docs/8.0/apis-clients/java-client-examples/process-deploy/"
+                  "href": "/docs/8.0/apis-tools/java-client-examples/process-deploy/"
                 },
                 {
                   "type": "link",
                   "label": "Create a process instance",
-                  "href": "/docs/8.0/apis-clients/java-client-examples/process-instance-create/"
+                  "href": "/docs/8.0/apis-tools/java-client-examples/process-instance-create/"
                 },
                 {
                   "type": "link",
                   "label": "Create non-blocking process instances",
-                  "href": "/docs/8.0/apis-clients/java-client-examples/process-instance-create-nonblocking/"
+                  "href": "/docs/8.0/apis-tools/java-client-examples/process-instance-create-nonblocking/"
                 },
                 {
                   "type": "link",
                   "label": "Create a process instance with results",
-                  "href": "/docs/8.0/apis-clients/java-client-examples/process-instance-create-with-result/"
+                  "href": "/docs/8.0/apis-tools/java-client-examples/process-instance-create-with-result/"
                 },
                 {
                   "type": "link",
                   "label": "Open a job worker",
-                  "href": "/docs/8.0/apis-clients/java-client-examples/job-worker-open/"
+                  "href": "/docs/8.0/apis-tools/java-client-examples/job-worker-open/"
                 },
                 {
                   "type": "link",
                   "label": "Handle variables as POJO",
-                  "href": "/docs/8.0/apis-clients/java-client-examples/data-pojo/"
+                  "href": "/docs/8.0/apis-tools/java-client-examples/data-pojo/"
                 },
                 {
                   "type": "link",
                   "label": "Request cluster topology",
-                  "href": "/docs/8.0/apis-clients/java-client-examples/cluster-topology-request/"
+                  "href": "/docs/8.0/apis-tools/java-client-examples/cluster-topology-request/"
                 }
               ]
             }
@@ -1439,12 +1439,12 @@
             {
               "type": "link",
               "label": "Quick reference",
-              "href": "/docs/8.0/apis-clients/go-client/"
+              "href": "/docs/8.0/apis-tools/go-client/"
             },
             {
               "type": "link",
               "label": "Getting started with the Go client",
-              "href": "/docs/8.0/apis-clients/go-client/go-get-started/"
+              "href": "/docs/8.0/apis-tools/go-client/go-get-started/"
             }
           ]
         },
@@ -1453,12 +1453,12 @@
             {
               "type": "link",
               "label": "Quick reference",
-              "href": "/docs/8.0/apis-clients/cli-client/"
+              "href": "/docs/8.0/apis-tools/cli-client/"
             },
             {
               "type": "link",
               "label": "Getting started with the CLI client",
-              "href": "/docs/8.0/apis-clients/cli-client/cli-get-started/"
+              "href": "/docs/8.0/apis-tools/cli-client/cli-get-started/"
             }
           ]
         },
@@ -1467,49 +1467,49 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/apis-clients/community-clients/"
+              "href": "/docs/8.0/apis-tools/community-clients/"
             },
             {
               "type": "link",
               "label": "C#",
-              "href": "/docs/8.0/apis-clients/community-clients/c-sharp/"
+              "href": "/docs/8.0/apis-tools/community-clients/c-sharp/"
             },
             {
               "type": "link",
               "label": "JavaScript/NodeJS",
-              "href": "/docs/8.0/apis-clients/community-clients/javascript/"
+              "href": "/docs/8.0/apis-tools/community-clients/javascript/"
             },
             {
               "type": "link",
               "label": "Micronaut",
-              "href": "/docs/8.0/apis-clients/community-clients/micronaut/"
+              "href": "/docs/8.0/apis-tools/community-clients/micronaut/"
             },
             {
               "type": "link",
               "label": "Python",
-              "href": "/docs/8.0/apis-clients/community-clients/python/"
+              "href": "/docs/8.0/apis-tools/community-clients/python/"
             },
             {
               "type": "link",
               "label": "Ruby",
-              "href": "/docs/8.0/apis-clients/community-clients/ruby/"
+              "href": "/docs/8.0/apis-tools/community-clients/ruby/"
             },
             {
               "type": "link",
               "label": "Rust",
-              "href": "/docs/8.0/apis-clients/community-clients/rust/"
+              "href": "/docs/8.0/apis-tools/community-clients/rust/"
             },
             {
               "type": "link",
               "label": "Spring",
-              "href": "/docs/8.0/apis-clients/community-clients/spring/"
+              "href": "/docs/8.0/apis-tools/community-clients/spring/"
             }
           ]
         },
         {
           "type": "link",
           "label": "Build your own client",
-          "href": "/docs/8.0/apis-clients/build-your-own-client/"
+          "href": "/docs/8.0/apis-tools/build-your-own-client/"
         }
       ]
     }
