@@ -74,7 +74,7 @@ type:"link", href:"/docs/apis-clients/operate-api/", label: "Operate API (REST)"
 type:"link", href:"/docs/apis-clients/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"
 },
 {
-type:"link", href:"/docs/next/apis-clients/web-modeler-api/", label: "Web Modeler API (Beta, REST)", docId:"apis-tools/web-modeler-api/index", border: "highlight"
+type:"link", href:"/docs/next/apis-tools/web-modeler-api/", label: "Web Modeler API (Beta, REST)", docId:"apis-tools/web-modeler-api/index", border: "highlight"
 },
 {
 type:"link", href:"/docs/apis-clients/grpc/", label: "Zeebe API (gRPC)", docId:"apis-tools/grpc"
