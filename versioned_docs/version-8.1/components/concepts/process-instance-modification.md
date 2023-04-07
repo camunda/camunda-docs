@@ -8,7 +8,7 @@ Process instance modification is a powerful feature to repair a running process 
 stuck on an element, waiting for an event, or taking an unintended path because an external system is not
 available or doesn't respond as expected, for example.
 
-Use the [modification command](/docs/apis-tools/grpc.md#modifyprocessinstance-rpc) to skip or repeat a step in the
+Use the [modification command](../../apis-tools/grpc.md#modifyprocessinstance-rpc) to skip or repeat a step in the
 process. Consider the following example:
 
 ![The process instance is stuck in the message catch event.](assets/process-instance-modification/process-instance-modification-example-1.png)
