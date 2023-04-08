@@ -85,8 +85,8 @@ import ReceiveTaskInstantiatedSvg from './assets/bpmn-symbols/receive-task-insta
     <a href="#">
         <ReceiveTaskInstantiatedSvg />
     </a>
-    <a href="#">
-        <UndefinedTaskSvg />
+    <a href="../undefined-tasks/">
+        <UndefinedTaskSvg className="implemented" />
     </a>
 </div>
 
@@ -399,11 +399,11 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Signal
+            <a href="../signal-events/">Signal</a>
         </td>
         <td>
-            <a href="#">
-                <SignalStartEventSvg />
+            <a href="../signal-events/">
+                <SignalStartEventSvg className="implemented" />
             </a>
         </td>
         <td>
@@ -481,38 +481,38 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Escalation
+            <a href="../escalation-events/">Escalation</a>
         </td>
         <td></td>
         <td>
-            <a href="#">
-                <EscalationEventSubprocessSvg />
+            <a href="../escalation-events/">
+                <EscalationEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <EscalationEventSubprocessNonInterruptingSvg />
+            <a href="../escalation-events">
+                <EscalationEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td>
-            <a href="#">
-                <EscalationBoundaryEventSvg />
+            <a href="../escalation-events">
+                <EscalationBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <EscalationBoundaryEventNonInterruptingSvg />
+            <a href="../escalation-events">
+                <EscalationBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <EscalationThrowEventSvg />
+            <a href="../escalation-events">
+                <EscalationThrowEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
-                <EscalationEndEventSvg />
+            <a href="../escalation-events">
+                <EscalationEndEventSvg className="implemented" />
             </a>
         </td>
     </tr>
@@ -585,21 +585,21 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Link
+            <a href="../link-events">Link</a>
         </td>
         <td></td>
         <td></td>
         <td></td>
         <td>
-            <a href="#">
-                <LinkCatchEventSvg />
+            <a href="../link-events/">
+                <LinkCatchEventSvg className="implemented"/>
             </a>
         </td>
         <td></td>
         <td></td>
         <td>
-            <a href="#">
-                <LinkThrowEventSvg />
+            <a href="../link-events">
+                <LinkThrowEventSvg className="implemented"/>
             </a>
         </td>
         <td></td>

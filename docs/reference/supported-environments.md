@@ -32,20 +32,14 @@ We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes envi
 
 Requirements for the components can be seen below:
 
-| Component                | Java version | Other requirements                                                                               |
-| ------------------------ | ------------ | ------------------------------------------------------------------------------------------------ |
-| Zeebe Broker and Gateway | OpenJDK 17+  | Elasticsearch 7.16.x (only if Elastic exporter is used)                                          |
-| Operate                  | OpenJDK 11+  | Elasticsearch 7.16.x                                                                             |
-| Tasklist                 | OpenJDK 11+  | Elasticsearch 7.16.x                                                                             |
-| Identity                 | OpenJDK 17+  | Keycloak 16.1.1, 19.0.3                                                                          |
-| Optimize                 | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x                                                   |
-| Web Modeler (Beta)       | -            | Keycloak 16.1.1, 19.0.3<br/>PostgreSQL 14.x (other database systems are currently not supported) |
-
-:::note Elasticsearch support
-[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Camunda Platform 8.
-
-AWS Opensearch is not supported at this time.
-:::
+| Component   | Java version | Other requirements                                                                               |
+| ----------- | ------------ | ------------------------------------------------------------------------------------------------ |
+| Zeebe       | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x (only if Elastic exporter is used), 8.5.x, 8.6.x                    |
+| Operate     | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x                                                       |
+| Tasklist    | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x                                                       |
+| Identity    | OpenJDK 17+  | Keycloak 16.1.1, 19.0.3                                                                          |
+| Optimize    | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x, 8.5.x, 8.6.x                                     |
+| Web Modeler | -            | Keycloak 16.1.1, 19.0.3<br/>PostgreSQL 14.x (other database systems are currently not supported) |
 
 ### Version Matrix
 
@@ -59,7 +53,7 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 | Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x      | Optimize 3.7.x |
 | Desktop Modeler 5.0+  | Zeebe 8.0.x | Operate 8.0.x Tasklist 8.0.x Identity 8.0.x | Optimize 3.8.x |
 | Desktop Modeler 5.4+  | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x |
-| Web Modeler (Beta)    | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x |
+| Web Modeler           | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.

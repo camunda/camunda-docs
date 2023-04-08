@@ -17,12 +17,7 @@ Camunda Platform 8 includes the following components:
 - Connectors
 - Optimize (requiring Elasticsearch)
 - Identity (requiring Keycloak)
-- Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--beta">Beta</span>](../../../reference/early-access#beta)
-  :::caution Beta offering
-  Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)
-  with limited availability for enterprise customers only. It is not recommended for production use.
-  Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
-  :::
+- Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#web-modeler)
 
 All components except Web Modeler are single Java applications.
 
@@ -65,7 +60,8 @@ We support the following deployment options (the sequence expresses preference) 
 2. [**Helm/Kubernetes**](./helm-kubernetes/overview.md)
    - [Cloud or on-prem cluster](./helm-kubernetes/overview.md#kubernetes-environments) with one of managed offering like EKS, GKE, etc.
    - [Local cluster](./helm-kubernetes/guides/local-kubernetes-cluster.md) with KIND.
-3. [**Manual**](./manual.md) as a last resort if you only need the Zeebe broker. We don't recommend setting up the whole toolchain in this fashion.
+3. [**Docker**](./docker.md) including [Docker Compose](./docker.md#docker-compose), which is **only** recommended for development.
+4. [**Manual**](./manual.md) as a last resort if you only need the Zeebe broker. We don't recommend setting up the whole toolchain in this fashion.
 
 ## Getting help
 

@@ -17,3 +17,8 @@ RUN sed -i \
 
 # Enable rewrites
 RUN sed -i '/<Directory "\/usr\/local\/apache2\/htdocs">/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /usr/local/apache2/conf/httpd.conf
+
+# Restart Apache server
+#  I'm not totally convinced we need to do this, but I don't think there's a down-side,
+#  and I had one situation where I needed to go do it manually after startup so 🤷🏼
+RUN apachectl -k restart

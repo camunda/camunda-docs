@@ -81,25 +81,25 @@ The authentication is described in [Operate Configuration - Authentication](/doc
 
 ## Endpoints
 
-| Endpoint (HTTP verb + URL path)         |                                                         Description |
-| :-------------------------------------- | ------------------------------------------------------------------: |
-| **Process definitions**                 |                                                                     |
-| `POST /v1/process-definitions/search`   |                                      Search for process definitions |
-| `GET /v1/process-definitions/{key}`     |                                       Get process definition by key |
-| `GET /v1/process-definitions/{key}/xml` |                                Get process definition by key as XML |
-| **Process instances**                   |                                                                     |
-| `POST /v1/process-instances/search`     |                                        Search for process instances |
-| `GET /v1/process-instances/{key}`       |                                         Get process instance by key |
-| `DELETE /v1/process-instances/{key}`    |                 Delete process instance _and dependant_ data by key |
-| **Incidents**                           |                                                                     |
-| `POST /v1/incidents/search`             |                                                Search for incidents |
-| `GET /v1/incidents/{key}`               |                                                 Get incident by key |
-| **Flownode instances**                  |                                                                     |
-| `POST /v1/flownode-instances/search`    |                                      Search for flow node instances |
-| `GET /v1/flownode-instances/{key}`      |                                       Get flow node instance by key |
-| **Variables**                           |                                                                     |
-| `POST /v1/variables/search`             | Search for variables; results can contain truncated variable values |
-| `GET /v1/variables/{key}`               |            Get variable by key; contains the full value of variable |
+| Endpoint (HTTP verb + URL path)         |                                                         Description | Notes                                                                                                                              |
+| :-------------------------------------- | ------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Process definitions**                 |                                                                     |                                                                                                                                    |
+| `POST /v1/process-definitions/search`   |                                      Search for process definitions |                                                                                                                                    |
+| `GET /v1/process-definitions/{key}`     |                                       Get process definition by key |                                                                                                                                    |
+| `GET /v1/process-definitions/{key}/xml` |                                Get process definition by key as XML |                                                                                                                                    |
+| **Process instances**                   |                                                                     |                                                                                                                                    |
+| `POST /v1/process-instances/search`     |                                        Search for process instances | New fields added: <br/>`flowNodeId`<br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used. |
+| `GET /v1/process-instances/{key}`       |                                         Get process instance by key | New fields added: <br/>`flowNodeId`<br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used. |
+| `DELETE /v1/process-instances/{key}`    |                 Delete process instance _and dependant_ data by key |                                                                                                                                    |
+| **Incidents**                           |                                                                     |                                                                                                                                    |
+| `POST /v1/incidents/search`             |                                                Search for incidents |                                                                                                                                    |
+| `GET /v1/incidents/{key}`               |                                                 Get incident by key |                                                                                                                                    |
+| **Flownode instances**                  |                                                                     |                                                                                                                                    |
+| `POST /v1/flownode-instances/search`    |                                      Search for flow node instances |                                                                                                                                    |
+| `GET /v1/flownode-instances/{key}`      |                                       Get flow node instance by key |                                                                                                                                    |
+| **Variables**                           |                                                                     |                                                                                                                                    |
+| `POST /v1/variables/search`             | Search for variables; results can contain truncated variable values |                                                                                                                                    |
+| `GET /v1/variables/{key}`               |            Get variable by key; contains the full value of variable |                                                                                                                                    |
 
 ## Search
 

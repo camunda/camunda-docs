@@ -10,7 +10,7 @@ Operate stores data in Elasticsearch. On first start, Operate creates all requir
   - [Concept](#concept)
   - [How to migrate](#how-to-migrate)
     - [Migrate by using standalone application](#migrate-by-using-standalone-application)
-    - [Migrate by using built-in automatic upgrade](#migrate-by-using-built-in-automatic-upgrade)
+    - [Migrate by using built-in automatic update](#migrate-by-using-built-in-automatic-update)
     - [Further notes](#further-notes)
     - [Configure migration](#configure-migration)
     - [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
@@ -32,7 +32,7 @@ Here, `operate-index-prefix` defines the prefix for index name (default `operate
 
 ## Data migration
 
-The version of Operate is reflected in Elasticsearch object names (e.g. `operate-user-1.0.0_` index contains the user data for Operate 1.0.0). When upgrading from one version of Operate to another, migration of data must be performed. Operate distribution provides an application to perform data migration from older versions.
+The version of Operate is reflected in Elasticsearch object names (e.g. `operate-user-1.0.0_` index contains the user data for Operate 1.0.0). When updating from one version of Operate to another, migration of data must be performed. Operate distribution provides an application to perform data migration from older versions.
 
 ### Concept
 
@@ -41,7 +41,7 @@ Please ensure that your Elasticsearch cluster has at least one node with the ing
 
 Each version of Operate delivers a set of migration steps which need to be applied for a corresponding version of Operate.
 
-When upgrading from one version to another, necessary migration steps constitute the so-called migration plan.
+When updating from one version to another, necessary migration steps constitute the so-called migration plan.
 All known migration steps (both applied and not) are persisted in the dedicated Elasticsearch index: `operate-migration-steps-repository`.
 
 ### How to migrate
@@ -67,7 +67,7 @@ The old indices are deleted _only_ after successful migration. This might requir
 Take care of data backup before performing migration.
 :::
 
-#### Migrate by using built-in automatic upgrade
+#### Migrate by using built-in automatic update
 
 When running a newer version of Operate against an older schema, it performs data migration on a startup.
 The migration happens for every index, for which it detects exactly **one** older version. Migration fails if it detects more than one older version of some index.
@@ -76,7 +76,7 @@ The migration happens for every index, for which it detects exactly **one** olde
 
 - If migration fails, you can retry it. All applied steps are stored and only those steps are applied that haven't been executed yet.
 - Operate should not be running while migration is happening.
-- In the case version upgrade is performed in the cluster with several Operate nodes, only one node ([Webapp module](importer-and-archiver.md)) must execute data migration. The others must be stopped and started only after migration is fully finished.
+- In the case version update is performed in the cluster with several Operate nodes, only one node ([Webapp module](importer-and-archiver.md)) must execute data migration. The others must be stopped and started only after migration is fully finished.
 
 #### Configure migration
 

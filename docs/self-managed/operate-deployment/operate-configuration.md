@@ -18,9 +18,7 @@ By default, the configuration for Operate is stored in a YAML file (`application
 - [Monitoring possibilities](#monitoring-operate)
 - [Logging configuration](#logging)
 
-## Configurations
-
-### Webserver
+## Webserver
 
 Operate supports customizing the **context-path** using default Spring configuration.
 
@@ -32,7 +30,7 @@ Example for environment variable:
 
 The default context-path is `/`.
 
-#### Security
+### Security
 
 To change the values for http header for security reasons, you can use the configuration parameters:
 
@@ -42,7 +40,7 @@ To change the values for http header for security reasons, you can use the confi
 | camunda.operate.websecurity.httpStrictTransportSecurityMaxAgeInSeconds   | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | 63,072,000 (two years)                                                                                                                                                                                                                                                                                           |
 | camunda.operate.websecurity.httpStrictTransportSecurityIncludeSubDomains | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | true                                                                                                                                                                                                                                                                                                             |
 
-### Elasticsearch
+## Elasticsearch
 
 Operate stores and reads data in/from Elasticsearch.
 
@@ -87,7 +85,7 @@ The following configuration parameters define the settings:
 | camunda.operate.elasticsearch.numberOfShards   | How many shards Elasticsearch uses for all Operate indices   | 1             |
 | camunda.operate.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Operate indices | 0             |
 
-These values are applied only on first startup of Operate or during version upgrade. After the Operate
+These values are applied only on first startup of Operate or during version update. After the Operate
 schema is created, settings may be adjusted directly in the Elasticsearch template, and the new settings are applied
 to indices created after adjustment.
 
@@ -129,13 +127,27 @@ camunda.operate:
 
 ## Zeebe Elasticsearch exporter
 
-Operate imports data from Elasticsearch indices created and filled in by the [Zeebe Elasticsearch exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
+Operate imports data from Elasticsearch indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md).
 
 Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on the Zeebe side.
 
 ### Settings to connect and import
 
 See also [settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance).
+
+:::note
+You may need to import the certificate keystore into the JVM runtime.
+
+```yaml
+# Kubernetes example:
+zeebe:
+  …
+  javaOpts: >-
+    …
+    -Djavax.net.ssl.trustStore=/path/to/certificates/elasticsearch.jks
+```
+
+:::
 
 | Name                                                   | Description                                                | Default value         |
 | ------------------------------------------------------ | ---------------------------------------------------------- | --------------------- |

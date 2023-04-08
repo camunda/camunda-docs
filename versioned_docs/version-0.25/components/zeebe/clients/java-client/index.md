@@ -1,6 +1,7 @@
 ---
 id: index
 title: "Overview"
+description: "Step through setup, getting started, logging, testing, and additional examples."
 ---
 
 * [Setup](setup.md)

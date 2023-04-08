@@ -49,6 +49,8 @@ global:
         redirectUrl: "https://camunda.example.com/tasklist"
       optimize:
         redirectUrl: "https://camunda.example.com/optimize"
+      webModeler:
+        redirectUrl: "https://camunda.example.com/modeler"
 
 identity:
   contextPath: "/identity"
@@ -63,12 +65,21 @@ optimize:
 tasklist:
   contextPath: "/tasklist"
 
+webModeler:
+  # The context path is used for the web application that will be accessed by users in the browser.
+  # In addition, a WebSocket endpoint will be exposed on "[contextPath]-ws", e.g. "/modeler-ws".
+  contextPath: "/modeler"
+
 zeebe-gateway:
   ingress:
     enabled: true
     className: nginx
     host: "zeebe.camunda.example.com"
 ```
+
+:::note Web Modeler
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
+:::
 
 Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
 
@@ -78,7 +89,8 @@ helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
 
 Once deployed, you can access the Camunda Platform 8 components on:
 
-- **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist]`
+- **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler]`
+  - _Note_: Web Modeler also exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used by the application itself and not supposed to be accessed by users directly.
 - **Keycloak authentication:** `https://camunda.example.com/auth`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 
@@ -107,6 +119,8 @@ global:
         redirectUrl: "https://tasklist.camunda.example.com"
       optimize:
         redirectUrl: "https://optimize.camunda.example.com"
+      webModeler:
+        redirectUrl: "https://modeler.camunda.example.com"
 
 identity:
   ingress:
@@ -144,7 +158,20 @@ zeebe-gateway:
     enabled: true
     className: nginx
     host: "zeebe.camunda.example.com"
+
+webModeler:
+  ingress:
+    enabled: true
+    className: nginx
+    webapp:
+      host: "modeler.camunda.example.com"
+    websockets:
+      host: "modeler-ws.camunda.example.com"
 ```
+
+:::note Web Modeler
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
+:::
 
 Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
 
@@ -154,7 +181,7 @@ helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
 
 Once deployed, you can access the Camunda Platform 8 components on:
 
-- **Web applications:** `https://[identity|operate|optimize|tasklist].camunda.example.com`
+- **Web applications:** `https://[identity|operate|optimize|tasklist|modeler].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 

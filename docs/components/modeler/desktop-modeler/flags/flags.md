@@ -74,11 +74,13 @@ To display a custom version information in the status bar of the app, configure 
 
 > :information_source: The Modeler will read trusted certificates from your operating system's trust store.
 
-Provide additional certificates to validate secured connections to a Camunda Platform 8 installation. Configure your `flags.json` like this:
+Provide additional certificates to validate secured connections to a Camunda Platform 8 installation.
+
+Configure your `flags.json` like this:
 
 ```js
 {
-    "zeebe-ssl-certificate": "/Users/local/trusted-custom-root.pem"
+    "zeebe-ssl-certificate": "C:\\path\\to\\certs\\trusted-custom-roots.pem"
 }
 ```
 

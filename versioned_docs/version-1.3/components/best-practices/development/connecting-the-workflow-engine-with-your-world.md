@@ -1,5 +1,6 @@
 ---
 title: "Connecting the workflow engine with your world"
+description: "Write some custom glue code in the programming language of your choice and using existing client libraries."
 ---
 
 
@@ -18,7 +19,7 @@ The trade-offs will be discussed later; let’s look at the two options first.
 
 ## Programming glue code
 
-To write code that connects to Zeebe, you typically embed [the Zeebe client library](/docs/apis-clients/working-with-apis-clients/) into your application. An application can of course also be a service or microservice.
+To write code that connects to Zeebe, you typically embed [the Zeebe client library](/docs/apis-tools/working-with-apis-tools/) into your application. An application can of course also be a service or microservice.
 
 If you have multiple applications that connect to Zeebe, all of them will require the client library. If you want to use a programming language where no such client library exists, you can [generate a gRPC client yourself](https://camunda.com/blog/2018/11/grpc-generating-a-zeebe-python-client/).
 

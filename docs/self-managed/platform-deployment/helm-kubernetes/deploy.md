@@ -15,18 +15,20 @@ Helm also provides dependency management between charts, meaning that charts can
 
 ## Components installed by the Helm charts
 
-By default, the following charts will be installed as part of Camunda Platform 8 Self-Managed:
+The following charts will be installed as part of Camunda Platform 8 Self-Managed:
 
-- **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` docker image.
+- **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` Docker image.
 - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
 - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
 - **Tasklist**: Deploys the Tasklist component to work with user tasks.
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
+- **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler) as Web Modeler is only available to enterprise customers.
 
-:::note Web Modeler & Connectors
-We do not provide a Helm chart for Web Modeler and Connectors in Self-Managed yet.
+:::note Connectors
+We do not provide a Helm chart for Connectors in Self-Managed yet.
 :::
 
 ![Camunda Platform 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
@@ -63,16 +65,18 @@ helm install <RELEASE_NAME> camunda/camunda-platform
 ```
 
 :::note
-Change &gt;RELEASE_NAME&lt; with a name of your choice.
+Replace &lt;RELEASE_NAME&gt; with a name of your choice.
 
-Also, notice that you can add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
+You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
+
+The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#installing-web-modeler) below.
 :::
 
 Notice that this Kubernetes cluster can have services which are already running; Camunda components are simply installed as another set of services.
 
 Installing all the components in a cluster requires all Docker images to be downloaded to the remote cluster. Depending on which Cloud provider you are using, the amount of time it will take to fetch all the images will vary.
 
-Review the progress of your deployment by checking if the Kubernetes PODs are up and running with the following:
+Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
 ```
 kubectl get pods
@@ -97,7 +101,7 @@ elasticsearch-master-0                          0/1     Pending             0   
 elasticsearch-master-1                          0/1     Init:0/1            0          4s
 ```
 
-Review the progress of your deployment by checking if the Kubernetes PODs are up and running with the following:
+Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
 ```
 kubectl get pods
@@ -112,6 +116,95 @@ elasticsearch-master-0                                 1/1     Running   0      
 <RELEASE_NAME>-zeebe-0                                 1/1     Running   0          4m6s
 <RELEASE_NAME>-tasklist-XXX                            1/1     Running   0          4m6s
 <RELEASE_NAME>-zeebe-gateway                           1/1     Running   0          4m6s
+```
+
+### Installing Web Modeler
+
+:::note
+Web Modeler Self-Managed is available to [enterprise customers](../../../reference/licenses.md#web-modeler) only.
+:::
+
+To install the Camunda Helm chart with Web Modeler enabled, follow the steps below.
+
+#### Create image pull secret
+
+The Docker images for Web Modeler are not publicly accessible, but available to enterprise customers only from Camunda's private Docker registry.
+To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
+
+```bash
+kubectl create secret docker-registry <REGISTRY_SECRET_NAME> \
+  --docker-server=registry.camunda.cloud \
+  --docker-username=<DOCKER_USER> \
+  --docker-password=<DOCKER_PASSWORD> \
+  --docker-email=<DOCKER_EMAIL>
+```
+
+:::note
+Replace `<REGISTRY_SECRET_NAME>` with a name of your choice and `<DOCKER_USER>`, `<DOCKER_PASSWORD>`, and `<DOCKER_EMAIL>` with your credentials.
+
+The secret must be created in the same Kubernetes namespace you will install the Helm chart in. Use the `-n` flag to specify a namespace.
+:::
+
+Alternatively, create an image pull secret [from your Docker configuration file](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials).
+
+#### Configure Web Modeler
+
+To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [README](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#web-modeler) file):
+
+- Enable Web Modeler with `webModeler.enabled: true` (it is disabled by default).
+- Configure the previously created [image pull secret](#create-image-pull-secret) in `webModeler.image.pullSecrets`.
+- Configure your SMTP server by providing the values under `webModeler.restapi.mail`.
+  - Web Modeler requires an SMTP server to send notification emails to users.
+- Configure the database connection
+  - Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
+  - _Option 1_: Set `postgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
+  - _Option 2_: Set `postgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
+
+We recommend specifying these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look as follows:
+
+```yaml
+webModeler:
+  enabled: true
+  image:
+    pullSecrets:
+      # replace with the name of the previously created secret
+      - name: <REGISTRY_SECRET_NAME>
+  restapi:
+    mail:
+      smtpHost: smtp.example.com
+      smtpPort: 587
+      smtpUser: user
+      smtpPassword: secret
+      # email address to be displayed as sender of emails from Web Modeler
+      fromAddress: no-reply@example.com
+postgresql:
+  enabled: true
+```
+
+#### Optional: Configure external database
+
+If you don't want to install a new PostgreSQL instance with Helm, but connect Web Modeler to an existing external database, set `postgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
+
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      host: postgres.example.com
+      port: 5432
+      database: modeler-db
+      user: modeler-user
+      password: secret
+postgresql:
+  # disables the PostgreSQL chart dependency
+  enabled: false
+```
+
+#### Install the Helm chart
+
+Assuming you have saved your configuration in `modeler-values.yaml`, install the Helm chart by running the following:
+
+```
+helm install --values modeler-values.yaml <RELEASE_NAME> camunda/camunda-platform
 ```
 
 ### Troubleshooting the installation
@@ -130,7 +223,7 @@ kubectl logs -f <POD_NAME>
 
 ## Upgrading Camunda Helm chart
 
-For upgrading Camunda Helm chart from one release to another, visit the [Camunda Platform 8 Helm upgrading page](upgrade.md).
+For upgrading Camunda Helm chart from one release to another, perform a [Helm upgrade](upgrade.md).
 
 ## General notes
 

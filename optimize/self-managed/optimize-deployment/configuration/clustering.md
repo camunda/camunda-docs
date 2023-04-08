@@ -34,6 +34,12 @@ engines:
     name: default
     rest: 'http://localhost:8080/engine-rest'
     importEnabled: true
+
+historyCleanup:
+  processDataCleanup:
+    enabled: true
+  decisionDataCleanup:
+    enabled: true
 ...
 ```
 
@@ -46,14 +52,11 @@ engines:
     name: default
     rest: 'http://localhost:8080/engine-rest'
     importEnabled: false
-
-historyCleanup:
-  enabled: false
 ...
 ```
 
 :::note
-The second non-importing instance has the [history cleanup disabled](./system-configuration.md#history-cleanup-settings). It is strongly recommended to do this for all non-importing Optimize instances in the cluster to prevent any conflicts when the [history cleanup](../history-cleanup/) is performed.
+The importing instance has the [history cleanup enabled](./system-configuration.md#history-cleanup-settings). It is strongly recommended all non-importing Optimize instances in the cluster do not enable history cleanup to prevent any conflicts when the [history cleanup](../history-cleanup/) is performed.
 :::
 
 ### 1.1 Import - event based process import

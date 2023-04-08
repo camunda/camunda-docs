@@ -34,7 +34,9 @@ To take a backup of the cluster, backup storage must be configured.
 POST http://{zeebe-gateway}:9600/actuator/backups/{backupId}
 ```
 
-A `backupId` is an integer and must be greater than the id of previous backups. Zeebe does not take two backups with the same ids. If a backup fails, a new `backupId` must be provided to trigger a new backup.
+A `backupId` is an integer and must be greater than the id of previous backups that are completed, failed, or deleted.
+Zeebe does not take two backups with the same ids. If a backup fails, a new `backupId` must be provided to trigger a new backup.
+The `backupId` cannot be reused, even if the backup corresponding to the backup id is deleted.
 
 ##### Response
 
@@ -139,7 +141,7 @@ When restoring, provide the same configuration (node id, data directory, cluster
 ## Configuration
 
 - Enable backups by setting the flag `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEBACKUP` to `true`.
-- The backup management API is available via management port of the gateway. Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` include "backups". Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
+- The backup management API is available via management port of the gateway. Ensure the configuration `MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE` include "backups". By default, this is set to "\*" which included backups. Set `MANAGEMENT_ENDPOINTS_BACKUPS_ENABLED` to `true`.
 - Backup is stored in an external storage. This must be configured before starting the Zeebe cluster.
 
 Configure backup store in the configuration file as follows.

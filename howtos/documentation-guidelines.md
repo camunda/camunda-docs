@@ -152,7 +152,9 @@ If you wish to test `.htaccess` rules, you have a couple options:
 2. Use `docker compose` to spin up a locally-running Apache webserver.
    This repo includes Docker configuration ([Dockerfile](../Dockerfile) and [docker-compose.yml](../docker-compose.yml)) to spin up a local environment that better simulates a published environment. Redirect rules can then be tested directly in a browser.
 
-   The local server is based on the contents of your `./build` folder. To start this local server:
+   The local server is based on the contents of your `./build` folder.
+
+   **To start the local server**:
 
    1. Build the docs with `npm run build`.
    2. Start the server with `docker compose up`.
@@ -160,6 +162,13 @@ If you wish to test `.htaccess` rules, you have a couple options:
 
       It is probably best to do this in an incognito browser session, as browsers clutch tightly to 301 redirects.
 
+   4. Clean up the server with `docker compose down`.
+
+   **If you make changes and want to re-start the server**:
+
+   1. Apply the changes to your `build` folder, either manually or by re-running `npm run build`.
+   2. Rebuild the environment with `docker compose build`.
+   3. Re-start the server with `docker compose up`.
    4. Clean up the server with `docker compose down`.
 
 ## Screenshot automation
@@ -208,13 +217,12 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 - Zeebe: @npepinpe
 - Operate/Tasklist: @ralfpuchert
 - Optimize: @RomanJRW
-- DevRel/DevEx: @akeller
+- Connectors: @camunda/connectors
+- DevEx: @akeller
 - Product Management: @felix-mueller
-- Documentation: @christinaausley (fallback: @akeller)
-- Documentation infrastructure: @pepopowitz (fallback: @akeller)
-- Fallback: @menski
-
-In case you don't know who to assign for an engineering review choose @menski and he will delegate.
+- Documentation: @christinaausley
+- Documentation infrastructure: @pepopowitz
+- Fallback: @akeller
 
 As a reviewer feel free to merge any PR which you feel comfortable with after your review. If you have questions, concerns, or feel that you are not the right person to review the PR please make this transparent to the PR author so they can clarify this.
 

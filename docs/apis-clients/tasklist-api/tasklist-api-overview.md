@@ -3,10 +3,16 @@ id: tasklist-api-overview
 title: Overview
 slug: /apis-clients/tasklist-api/tasklist-api-overview
 sidebar_position: 1
-description: "Let's take a closer look at the endpoint, authentication, access token, and API usage within Tasklist."
+description: "Build apps powered by BPMN that require human interaction, and make requests."
 ---
 
 In this document, we'll go over the basics on how to consume the Tasklist GraphQL API. Read more about how to build a real world application [here](../tasklist-api-tutorial).
+
+:::note
+Review the new [Tasklist REST API](/docs/apis-clients/tasklist-api-rest/tasklist-api-rest-overview.md). This API offers the same functionality as the current GraphQL API, but with a more streamlined and efficient way of interacting with our service.
+
+The GraphQL API will be deprecated in the near future. To ensure a smooth transition, we'll continue to support our GraphQL API for a period of time, giving you an opportunity to migrate to the new REST API version at your own pace. We will provide further details on the timeline and process for this migration soon.
+:::
 
 ## Endpoint
 
