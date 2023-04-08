@@ -202,6 +202,13 @@ svg.implemented:hover [stroke="#333"] {
   color: #000000;
 }
 
+.badge--enterprise-only {
+  background-color: #26d07c;
+  color: #000000;
+  margin-left: 4px;
+  vertical-align: text-top;
+}
+
 navbar .navbar .navbar__link[href*="self-managed"] {
   font-size: 0;
   padding: 4px;

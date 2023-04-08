@@ -399,11 +399,11 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
     </tr>
     <tr>
         <td>
-            Signal
+            <a href="../signal-events/">Signal</a>
         </td>
         <td>
-            <a href="#">
-                <SignalStartEventSvg />
+            <a href="../signal-events/">
+                <SignalStartEventSvg className="implemented" />
             </a>
         </td>
         <td>

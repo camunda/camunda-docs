@@ -11,6 +11,6 @@ Via Cloud Console, you can:
 - [Manage API clients](./manage-clusters/manage-api-clients.md) to interact with Zeebe and Tasklist.
 - [Manage alerts](./manage-clusters/manage-alerts.md) to get notified when workflow errors occur.
 - [Manage](./manage-organization/organization-settings.md) your organization.
-- [Cloud Console API clients (REST)](/apis-clients/cloud-console-api-reference.md) to manage clusters programmatically.
+- [Cloud Console API clients (REST)](/apis-tools/cloud-console-api-reference.md) to manage clusters programmatically.
 
 If you don't have a Camunda Cloud account yet, visit the [Getting Started Guide](../../guides/getting-started/create-camunda-cloud-account.md).
