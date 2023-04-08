@@ -11,6 +11,7 @@ Options -Indexes -MultiViews
 # 8.1 apis/clients to apis/tools change
 RewriteRule ^docs/apis-clients(.*)$ /docs/apis-tools$1 [R=301,L]
 RewriteRule ^optimize/apis-clients(.*)$ /optimize/apis-tools$1 [R=301,L]
+RewriteRule ^docs/apis-clients/working-with-apis-clients/?$ /docs/apis-tools/working-with-apis-tools/ [R=301,L]
 
 # 1.2 apis/clients to apis/tools change
 RewriteRule ^docs/1.2/apis-clients(.*)$ /docs/1.2/apis-tools$1 [R=301,L]
