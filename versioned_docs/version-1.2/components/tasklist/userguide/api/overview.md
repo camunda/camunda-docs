@@ -28,7 +28,7 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKE
 
 You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/getting-started/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
 
-See our guide on [building your own client](/apis-clients/build-your-own-client.md).
+See our guide on [building your own client](/apis-tools/build-your-own-client.md).
 
 The following settings are needed:
 
@@ -69,7 +69,7 @@ If the authorization is successful, the authorization server sends back the acce
 
 ## Obtaining the Tasklist schema
 
-To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](../../../../../apis-clients/tasklist-api/).
+To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](../../../../../apis-tools/tasklist-api/).
 
 There are also several tools to explore GraphQL APIs [here](https://altair.sirmuel.design).
 

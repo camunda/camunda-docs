@@ -8,6 +8,9 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# 1.2 apis/clients to apis/tools change
+RewriteRule ^docs/1.2/apis-clients(.*)$ /docs/1.2/apis-tools$1 [R=301,L]
+
 # Identity Authorizations
 RewriteRule ^docs/next/self-managed/identity/user-guide/groups/creating-authorizations-for-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/ [R=301,L]
 
