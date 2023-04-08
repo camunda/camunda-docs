@@ -26,12 +26,7 @@ The following components are available for Camunda Platform 8 Self-Managed:
 - Connectors
 - Optimize
 - Identity (not available in Camunda Platform 8 SaaS)
-- Web Modeler [<span class="badge badge--beta" style={{marginLeft: 4, verticalAlign: "text-top"}}>Beta</span>](../../reference/early-access#beta)
-  :::caution Beta offering
-  Web Modeler Self-Managed is currently offered as a [beta release](../../reference/early-access#beta)
-  with limited availability for enterprise customers only. It is not recommended for production use.
-  Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
-  :::
+- Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](../../reference/licenses/#web-modeler)
 
 Camunda Platform 8 Self-Managed users may also use [Desktop Modeler](../../components/modeler/desktop-modeler/install-the-modeler) as an addition to these components. Desktop Modeler can be used by process developers to build BPMN diagrams, DMN diagrams, or [Camunda Forms](../guides/utilizing-forms.md) for automation.
 

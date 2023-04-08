@@ -82,6 +82,12 @@ It's much more important to look at how you _react_ to certain errors. Even a te
 
 In general, we recommend talking about business reactions, which are modeled in your process, and technical reactions, which are handled generically using retries or incidents.
 
+## Variable mappings
+
+All error variables are merged into the error catch event. These variables can be merged into the process instance by defining an output mapping at the error catch event.
+
+Visit the documentation regarding [variable mappings](../../../concepts/variables/#inputoutput-variable-mappings) for more information.
+
 ## Additional resources
 
 ### XML representation

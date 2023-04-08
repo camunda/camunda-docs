@@ -10,11 +10,15 @@ A text component allowing to display static information to the user.
 
 ## Configurable properties
 
-- **Text**: Either an [**Expression**](../../feel/language-guide/feel-expressions-introduction.md), **Markdown**, or **basic HTML** which will be rendered in the form. Note that dangerous HTML elements will not be rendered so to prevent the risk of cross-site scripting using Camunda Forms.
+- **Text**: Either an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md). After evaluation, the result is processed using a Markdown renderer that supports basic HTML and [GitHub-flavored Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). To ensure safety and prevent cross-site scripting in Camunda Forms, potentially harmful HTML elements will not be rendered.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the text.
 - **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
 
-**Example for Markdown**:
+## Example text configurations
+
+Note that these configurations work in combination with one another. You may use templating syntax to leverage Markdown and HTML. You may also mix Markdown and HTML in a single definition.
+
+**Markdown**:
 
 ```
 # This is a heading
@@ -34,7 +38,7 @@ Text can be shown for example using
 2. ...with two list items
 ```
 
-**Example for HTML**:
+**HTML**:
 
 ```
 <h1>This is a heading</h1>
@@ -57,4 +61,19 @@ using <b>bold</b>, or <i>italic</i> font.
   <li>This is an ordered list...</li>
   <li>...with two list items</li>
 </ol>
+```
+
+**Template syntax**:
+
+```
+{{#if usingTemplating}}
+
+Hello {{user.name}}, we are inside a conditional template block.
+
+Your hobbies are:
+{{#loop user.hobbies}}
+* {{this}}
+{{/loop}}
+
+{{/if}}
 ```

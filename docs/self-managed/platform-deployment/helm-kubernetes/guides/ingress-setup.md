@@ -78,7 +78,7 @@ zeebe-gateway:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler-beta).
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
 :::
 
 Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
@@ -170,7 +170,7 @@ webModeler:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler-beta).
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
 :::
 
 Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):

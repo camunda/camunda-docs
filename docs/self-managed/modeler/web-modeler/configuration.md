@@ -4,17 +4,14 @@ title: Configuration
 description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, webapp, and WebSocket."
 ---
 
-:::caution Beta Offering
-Web Modeler Self-Managed is currently offered as a [beta release](../../../../reference/early-access#beta)
-with limited availability for enterprise customers only. It is not recommended for production use and there is no maintenance service guaranteed.
-Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
-However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
+:::note
+Web Modeler Self-Managed is available to [enterprise customers](../../../reference/licenses.md#web-modeler) only.
 :::
 
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
-- If you are using the Camunda Platform 8 [Helm chart](../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler-beta).
+- If you are using the Camunda Platform 8 [Helm chart](../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler).
 
 ## Configuration of the `restapi` component
 
@@ -128,6 +125,7 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                              | `modeler-restapi`                                                | -             |
 | `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                 | `8081`                                                           | `8081`        |
 | `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.              | `8091`                                                           | `8091`        |
+| `PLAY_ENABLED`            | [optional]<br/>Enables the **Play** mode in the BPMN editor, allowing users to test processes in a playground environment.             | `true`                                                           | `false`       |
 
 ### Identity / Keycloak
 
