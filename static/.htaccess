@@ -12,6 +12,9 @@ Options -Indexes -MultiViews
 RewriteRule ^docs/apis-clients(.*)$ /docs/apis-tools$1 [R=301,L]
 RewriteRule ^optimize/apis-clients(.*)$ /optimize/apis-tools$1 [R=301,L]
 
+# 1.2 apis/clients to apis/tools change
+RewriteRule ^docs/1.2/apis-clients(.*)$ /docs/1.2/apis-tools$1 [R=301,L]
+
 # Identity Authorizations
 RewriteRule ^docs/next/self-managed/identity/user-guide/groups/creating-authorizations-for-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/ [R=301,L]
 
