@@ -1,11 +1,11 @@
 ---
 id: working-with-apis-tools
-title: "Working with APIs & Clients"
-sidebar_label: "Working with APIs & Clients"
-description: "Programmatically work with Camunda Platform 8 through APIs & clients"
+title: "Working with APIs & tools"
+sidebar_label: "Working with APIs & tools"
+description: "Programmatically work with Camunda Platform 8 through APIs & tools"
 ---
 
-This section steps through a variety of offered APIs and clients for integration.
+This section steps through a variety of offered APIs and tools for integration.
 
 :::note
 You're permitted to use these web apps and APIs for free with the Free Edition in non-production environments. To use the software in production, [purchase the Camunda Platform Enterprise Edition](https://camunda.com/products/cloud/camunda-cloud-enterprise-contact/). Read more in our [licensing](../reference/licenses.md) documentation.
