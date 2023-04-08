@@ -1,12 +1,12 @@
 ---
 # This page exists in apis-tools, instead of apis-clients, because the location needs to be consistent across all versions.
 id: working-with-apis-tools
-title: "Working with APIs & tools"
+title: "Working with APIs & Clients"
 sidebar_label: "Overview"
-description: "Programmatically work with Camunda Cloud through APIs & tools"
+description: "Programmatically work with Camunda Cloud through APIs & clients"
 ---
 
-This section steps through a variety of offered APIs and tools for integration.
+This section steps through a variety of offered APIs and clients for integration.
 
 ## APIs and interacting with other components
 
