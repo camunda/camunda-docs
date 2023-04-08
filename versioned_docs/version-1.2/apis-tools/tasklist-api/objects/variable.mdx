@@ -1,0 +1,34 @@
+---
+id: variable
+title: Variable
+---
+
+Variable used in task.
+
+```graphql
+type Variable {
+  id: ID!
+  name: String!
+  value: String!
+  previewValue: String!
+  isValueTruncated: Boolean!
+}
+```
+
+### Fields
+
+#### `id` ([`ID!`](../scalars/id.mdx))
+
+#### `name` ([`String!`](../scalars/string.mdx))
+
+#### `value` ([`String!`](../scalars/string.mdx))
+
+full variable value
+
+#### `previewValue` ([`String!`](../scalars/string.mdx))
+
+value preview (limited in size)
+
+#### `isValueTruncated` ([`Boolean!`](../scalars/boolean.mdx))
+
+shows, whether previewValue contains truncated value or full value
