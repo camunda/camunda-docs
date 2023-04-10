@@ -1,0 +1,23 @@
+---
+id: tasks
+title: tasks
+---
+
+Get list of tasks based on `TaskQuery`.
+
+```graphql
+tasks(
+  query: TaskQuery!
+): [Task!]!
+
+```
+
+### Arguments
+
+#### `query` ([`TaskQuery`](../inputs/task-query.mdx))
+
+### Type
+
+#### [`Task`](../objects/task.mdx)
+
+Describes the User task.
