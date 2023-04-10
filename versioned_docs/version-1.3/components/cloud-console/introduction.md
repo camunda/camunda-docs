@@ -12,6 +12,6 @@ Using Cloud Console, you can do the folllowing:
 - [Manage alerts](./manage-clusters/manage-alerts.md) to get notified when workflow errors occur.
 - [Manage IP Whitelists](./manage-clusters/manage-ip-whitelists.md) to restrict access to clusters.
 - [Manage](./manage-organization/organization-settings.md) your organization.
-- [Cloud Console API clients (REST)](/apis-clients/cloud-console-api-reference.md) to manage clusters programmatically.
+- [Cloud Console API clients (REST)](/apis-tools/cloud-console-api-reference.md) to manage clusters programmatically.
 
 If you don't have a Camunda Cloud account yet, visit our [Getting Started Guide](../../guides/getting-started/create-camunda-cloud-account.md).
