@@ -866,7 +866,7 @@ you can create a custom runtime environment. There are three options that come w
 
 #### Spring Zeebe
 
-Being a Spring-wrapper around the [Zeebe Java client](/apis-clients/java-client/index.md), Spring Zeebe supports
+Being a Spring-wrapper around the [Zeebe Java client](/apis-tools/java-client/index.md), Spring Zeebe supports
 [running outbound Connectors](https://github.com/camunda-community-hub/spring-zeebe/#run-outboundconnectors) out of the box.
 You can expose them as Spring beans in your Spring application and Spring Zeebe picks them up and runs them automatically.
 Using this approach, you can run multiple Connector functions in one Java application.
@@ -892,7 +892,7 @@ The job handler wrapper provides the following benefits:
 
 Using the wrapper class, you can create a custom [Zeebe client](../../../apis-tools/working-with-apis-tools.md).
 For example, you can spin up a custom client with the
-[Zeebe Java client](../../../apis-clients/java-client/index.md) as follows:
+[Zeebe Java client](../../../apis-tools/java-client/index.md) as follows:
 
 ```java
 import io.camunda.connector.MyConnectorFunction

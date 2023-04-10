@@ -48,7 +48,7 @@ In Camunda Platform 8, [values are stored as JSON](/docs/components/concepts/var
 This best practice describes variable handling within Camunda Platform 8. Process variables are handled slightly differently with Camunda Platform 7. Consult the [Camunda Platform 7 documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/) for details. In essence, variable values are not handled as JSON and thus there are [different values](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#supported-variable-values) supported.
 :::
 
-You can dynamically create such variables by assigning an object of choice to a (string typed) variable name; for example, by passing a `Map<String, Object>` when [completing](/docs/apis-clients/tasklist-api/mutations/complete-task/) the "Review tweet" task via the API:
+You can dynamically create such variables by assigning an object of choice to a (string typed) variable name; for example, by passing a `Map<String, Object>` when [completing](../../../apis-tools/tasklist-api/mutations/complete-task.mdx) the "Review tweet" task via the API:
 
 ```
 // TODO: Double check!
