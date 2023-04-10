@@ -1314,10 +1314,10 @@
       ]
     }
   ],
-  "APIs & Clients": [
+  "APIs & Tools": [
     {
       "type": "link",
-      "label": "Working with APIs & Clients",
+      "label": "Working with APIs & Tools",
       "href": "/docs/apis-tools/working-with-apis-tools/"
     },
     {
@@ -1325,56 +1325,56 @@
         {
           "type": "link",
           "label": "Public API",
-          "href": "/docs/apis-clients/public-api/"
+          "href": "/docs/apis-tools/public-api/"
         },
         {
           "type": "link",
           "label": "Zeebe API (gRPC)",
-          "href": "/docs/apis-clients/grpc/"
+          "href": "/docs/apis-tools/grpc/"
         },
         {
           "type": "link",
           "label": "Operate API (REST)",
-          "href": "/docs/apis-clients/operate-api/"
+          "href": "/docs/apis-tools/operate-api/"
         },
         {
           "Tasklist API (GraphQL)": [
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/apis-clients/tasklist-api/tasklist-api-overview/"
+              "href": "/docs/apis-tools/tasklist-api/tasklist-api-overview/"
             },
             {
               "type": "link",
               "label": "Tutorial",
-              "href": "/docs/apis-clients/tasklist-api/tasklist-api-tutorial/"
+              "href": "/docs/apis-tools/tasklist-api/tasklist-api-tutorial/"
             },
             {
               "type": "link",
               "label": "Schema Documentation",
-              "href": "/docs/apis-clients/tasklist-api/"
+              "href": "/docs/apis-tools/tasklist-api/"
             },
             {
               "Directives": [
                 {
                   "type": "link",
                   "label": "deprecated",
-                  "href": "/docs/apis-clients/tasklist-api/directives/deprecated/"
+                  "href": "/docs/apis-tools/tasklist-api/directives/deprecated/"
                 },
                 {
                   "type": "link",
                   "label": "include",
-                  "href": "/docs/apis-clients/tasklist-api/directives/include/"
+                  "href": "/docs/apis-tools/tasklist-api/directives/include/"
                 },
                 {
                   "type": "link",
                   "label": "skip",
-                  "href": "/docs/apis-clients/tasklist-api/directives/skip/"
+                  "href": "/docs/apis-tools/tasklist-api/directives/skip/"
                 },
                 {
                   "type": "link",
                   "label": "specifiedBy",
-                  "href": "/docs/apis-clients/tasklist-api/directives/specified-by/"
+                  "href": "/docs/apis-tools/tasklist-api/directives/specified-by/"
                 }
               ]
             },
@@ -1383,7 +1383,7 @@
                 {
                   "type": "link",
                   "label": "TaskState",
-                  "href": "/docs/apis-clients/tasklist-api/enums/task-state/"
+                  "href": "/docs/apis-tools/tasklist-api/enums/task-state/"
                 }
               ]
             },
@@ -1392,12 +1392,12 @@
                 {
                   "type": "link",
                   "label": "TaskQuery",
-                  "href": "/docs/apis-clients/tasklist-api/inputs/task-query/"
+                  "href": "/docs/apis-tools/tasklist-api/inputs/task-query/"
                 },
                 {
                   "type": "link",
                   "label": "VariableInput",
-                  "href": "/docs/apis-clients/tasklist-api/inputs/variable-input/"
+                  "href": "/docs/apis-tools/tasklist-api/inputs/variable-input/"
                 }
               ]
             },
@@ -1406,22 +1406,22 @@
                 {
                   "type": "link",
                   "label": "claimTask",
-                  "href": "/docs/apis-clients/tasklist-api/mutations/claim-task/"
+                  "href": "/docs/apis-tools/tasklist-api/mutations/claim-task/"
                 },
                 {
                   "type": "link",
                   "label": "completeTask",
-                  "href": "/docs/apis-clients/tasklist-api/mutations/complete-task/"
+                  "href": "/docs/apis-tools/tasklist-api/mutations/complete-task/"
                 },
                 {
                   "type": "link",
                   "label": "deleteProcessInstance",
-                  "href": "/docs/apis-clients/tasklist-api/mutations/delete-process-instance/"
+                  "href": "/docs/apis-tools/tasklist-api/mutations/delete-process-instance/"
                 },
                 {
                   "type": "link",
                   "label": "unclaimTask",
-                  "href": "/docs/apis-clients/tasklist-api/mutations/unclaim-task/"
+                  "href": "/docs/apis-tools/tasklist-api/mutations/unclaim-task/"
                 }
               ]
             },
@@ -1430,22 +1430,22 @@
                 {
                   "type": "link",
                   "label": "Form",
-                  "href": "/docs/apis-clients/tasklist-api/objects/form/"
+                  "href": "/docs/apis-tools/tasklist-api/objects/form/"
                 },
                 {
                   "type": "link",
                   "label": "Task",
-                  "href": "/docs/apis-clients/tasklist-api/objects/task/"
+                  "href": "/docs/apis-tools/tasklist-api/objects/task/"
                 },
                 {
                   "type": "link",
                   "label": "User",
-                  "href": "/docs/apis-clients/tasklist-api/objects/user/"
+                  "href": "/docs/apis-tools/tasklist-api/objects/user/"
                 },
                 {
                   "type": "link",
                   "label": "Variable",
-                  "href": "/docs/apis-clients/tasklist-api/objects/variable/"
+                  "href": "/docs/apis-tools/tasklist-api/objects/variable/"
                 }
               ]
             },
@@ -1454,32 +1454,32 @@
                 {
                   "type": "link",
                   "label": "currentUser",
-                  "href": "/docs/apis-clients/tasklist-api/queries/current-user/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/current-user/"
                 },
                 {
                   "type": "link",
                   "label": "form",
-                  "href": "/docs/apis-clients/tasklist-api/queries/form/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/form/"
                 },
                 {
                   "type": "link",
                   "label": "task",
-                  "href": "/docs/apis-clients/tasklist-api/queries/task/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/task/"
                 },
                 {
                   "type": "link",
                   "label": "tasks",
-                  "href": "/docs/apis-clients/tasklist-api/queries/tasks/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/tasks/"
                 },
                 {
                   "type": "link",
                   "label": "variable",
-                  "href": "/docs/apis-clients/tasklist-api/queries/variable/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/variable/"
                 },
                 {
                   "type": "link",
                   "label": "variables",
-                  "href": "/docs/apis-clients/tasklist-api/queries/variables/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/variables/"
                 }
               ]
             },
@@ -1488,22 +1488,22 @@
                 {
                   "type": "link",
                   "label": "Boolean",
-                  "href": "/docs/apis-clients/tasklist-api/scalars/boolean/"
+                  "href": "/docs/apis-tools/tasklist-api/scalars/boolean/"
                 },
                 {
                   "type": "link",
                   "label": "ID",
-                  "href": "/docs/apis-clients/tasklist-api/scalars/id/"
+                  "href": "/docs/apis-tools/tasklist-api/scalars/id/"
                 },
                 {
                   "type": "link",
                   "label": "Int",
-                  "href": "/docs/apis-clients/tasklist-api/scalars/int/"
+                  "href": "/docs/apis-tools/tasklist-api/scalars/int/"
                 },
                 {
                   "type": "link",
                   "label": "String",
-                  "href": "/docs/apis-clients/tasklist-api/scalars/string/"
+                  "href": "/docs/apis-tools/tasklist-api/scalars/string/"
                 }
               ]
             }
@@ -1512,37 +1512,37 @@
         {
           "type": "link",
           "label": "Console API clients (REST)",
-          "href": "/docs/apis-clients/console-api-reference/"
+          "href": "/docs/apis-tools/console-api-reference/"
         },
         {
           "Optimize API (REST)": [
-            "apis-clients/optimize-api/optimize-api-authorization",
+            "apis-tools/optimize-api/optimize-api-authorization",
             {
               "Configuration": [
-                "apis-clients/optimize-api/configuration/enable-sharing",
-                "apis-clients/optimize-api/configuration/disable-sharing"
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing"
               ]
             },
             {
               "Dashboard": [
-                "apis-clients/optimize-api/dashboard/get-dashboard-ids",
-                "apis-clients/optimize-api/dashboard/delete-dashboard",
-                "apis-clients/optimize-api/dashboard/export-dashboard-definitions"
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
               ]
             },
             {
               "Report": [
-                "apis-clients/optimize-api/report/get-report-ids",
-                "apis-clients/optimize-api/report/delete-report",
-                "apis-clients/optimize-api/report/export-report-definitions",
-                "apis-clients/optimize-api/report/get-data-export"
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export"
               ]
             },
-            "apis-clients/optimize-api/event-ingestion",
-            "apis-clients/optimize-api/external-variable-ingestion",
-            "apis-clients/optimize-api/health-readiness",
-            "apis-clients/optimize-api/import-entities",
-            "apis-clients/optimize-api/variable-labeling"
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling"
           ]
         }
       ]
@@ -1554,64 +1554,64 @@
             {
               "type": "link",
               "label": "Quick reference",
-              "href": "/docs/apis-clients/java-client/"
+              "href": "/docs/apis-tools/java-client/"
             },
             {
               "type": "link",
               "label": "Job worker",
-              "href": "/docs/apis-clients/java-client/job-worker/"
+              "href": "/docs/apis-tools/java-client/job-worker/"
             },
             {
               "type": "link",
               "label": "Logging",
-              "href": "/docs/apis-clients/java-client/logging/"
+              "href": "/docs/apis-tools/java-client/logging/"
             },
             {
               "type": "link",
               "label": "Zeebe Process Test",
-              "href": "/docs/apis-clients/java-client/zeebe-process-test/"
+              "href": "/docs/apis-tools/java-client/zeebe-process-test/"
             },
             {
               "Examples": [
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/docs/apis-clients/java-client-examples/"
+                  "href": "/docs/apis-tools/java-client-examples/"
                 },
                 {
                   "type": "link",
                   "label": "Deploy a process",
-                  "href": "/docs/apis-clients/java-client-examples/process-deploy/"
+                  "href": "/docs/apis-tools/java-client-examples/process-deploy/"
                 },
                 {
                   "type": "link",
                   "label": "Create a process instance",
-                  "href": "/docs/apis-clients/java-client-examples/process-instance-create/"
+                  "href": "/docs/apis-tools/java-client-examples/process-instance-create/"
                 },
                 {
                   "type": "link",
                   "label": "Create non-blocking process instances",
-                  "href": "/docs/apis-clients/java-client-examples/process-instance-create-nonblocking/"
+                  "href": "/docs/apis-tools/java-client-examples/process-instance-create-nonblocking/"
                 },
                 {
                   "type": "link",
                   "label": "Create a process instance with results",
-                  "href": "/docs/apis-clients/java-client-examples/process-instance-create-with-result/"
+                  "href": "/docs/apis-tools/java-client-examples/process-instance-create-with-result/"
                 },
                 {
                   "type": "link",
                   "label": "Open a job worker",
-                  "href": "/docs/apis-clients/java-client-examples/job-worker-open/"
+                  "href": "/docs/apis-tools/java-client-examples/job-worker-open/"
                 },
                 {
                   "type": "link",
                   "label": "Handle variables as POJO",
-                  "href": "/docs/apis-clients/java-client-examples/data-pojo/"
+                  "href": "/docs/apis-tools/java-client-examples/data-pojo/"
                 },
                 {
                   "type": "link",
                   "label": "Request cluster topology",
-                  "href": "/docs/apis-clients/java-client-examples/cluster-topology-request/"
+                  "href": "/docs/apis-tools/java-client-examples/cluster-topology-request/"
                 }
               ]
             }
@@ -1622,12 +1622,12 @@
             {
               "type": "link",
               "label": "Quick reference",
-              "href": "/docs/apis-clients/go-client/"
+              "href": "/docs/apis-tools/go-client/"
             },
             {
               "type": "link",
               "label": "Getting started with the Go client",
-              "href": "/docs/apis-clients/go-client/go-get-started/"
+              "href": "/docs/apis-tools/go-client/go-get-started/"
             }
           ]
         },
@@ -1636,12 +1636,12 @@
             {
               "type": "link",
               "label": "Quick reference",
-              "href": "/docs/apis-clients/cli-client/"
+              "href": "/docs/apis-tools/cli-client/"
             },
             {
               "type": "link",
               "label": "Getting started with the CLI client",
-              "href": "/docs/apis-clients/cli-client/cli-get-started/"
+              "href": "/docs/apis-tools/cli-client/cli-get-started/"
             }
           ]
         },
@@ -1650,49 +1650,49 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/apis-clients/community-clients/"
+              "href": "/docs/apis-tools/community-clients/"
             },
             {
               "type": "link",
               "label": "C#",
-              "href": "/docs/apis-clients/community-clients/c-sharp/"
+              "href": "/docs/apis-tools/community-clients/c-sharp/"
             },
             {
               "type": "link",
               "label": "JavaScript/NodeJS",
-              "href": "/docs/apis-clients/community-clients/javascript/"
+              "href": "/docs/apis-tools/community-clients/javascript/"
             },
             {
               "type": "link",
               "label": "Micronaut",
-              "href": "/docs/apis-clients/community-clients/micronaut/"
+              "href": "/docs/apis-tools/community-clients/micronaut/"
             },
             {
               "type": "link",
               "label": "Python",
-              "href": "/docs/apis-clients/community-clients/python/"
+              "href": "/docs/apis-tools/community-clients/python/"
             },
             {
               "type": "link",
               "label": "Ruby",
-              "href": "/docs/apis-clients/community-clients/ruby/"
+              "href": "/docs/apis-tools/community-clients/ruby/"
             },
             {
               "type": "link",
               "label": "Rust",
-              "href": "/docs/apis-clients/community-clients/rust/"
+              "href": "/docs/apis-tools/community-clients/rust/"
             },
             {
               "type": "link",
               "label": "Spring",
-              "href": "/docs/apis-clients/community-clients/spring/"
+              "href": "/docs/apis-tools/community-clients/spring/"
             }
           ]
         },
         {
           "type": "link",
           "label": "Build your own client",
-          "href": "/docs/apis-clients/build-your-own-client/"
+          "href": "/docs/apis-tools/build-your-own-client/"
         }
       ]
     }
