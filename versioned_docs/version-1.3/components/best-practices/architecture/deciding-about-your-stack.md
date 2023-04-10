@@ -29,17 +29,17 @@ Use the following stack:
 
 1. Use [Camunda Cloud SaaS](https://accounts.cloud.camunda.io/signup) and create a cluster there
 
-1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](/docs/apis-clients/community-clients/spring/).
+2. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](../../../apis-tools/community-clients/spring.md).
 
-2. Use [Maven](https://maven.apache.org/) as a build tool.
+3. Use [Maven](https://maven.apache.org/) as a build tool.
 
-3. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse.
+4. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse.
 
-3. Use [Open JDK 17](https://jdk.java.net/17/) as Java runtime.
+5. Use [Open JDK 17](https://jdk.java.net/17/) as Java runtime.
 
-4. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/).
+6. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/).
 
-4. Add your process models and all Java code to the project.
+7. Add your process models and all Java code to the project.
 
 To run the process application *in production*:
 
