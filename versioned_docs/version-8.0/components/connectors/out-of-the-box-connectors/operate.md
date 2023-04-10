@@ -71,7 +71,7 @@ In the **Endpoint** dropdown list, select the API entity. You can choose between
 
 In the **Operation** dropdown list, select one of the supported operations: **Get by key** or **Search**.
 
-Refer to the Operate [API documentation](https://docs.camunda.io/docs/apis-clients/operate-api/) for more details on the specific operations.
+Refer to the Operate [API documentation](https://docs.camunda.io/docs/apis-tools/operate-api/) for more details on the specific operations.
 
 :::note Unsupported operations
 The following API operations are currently not supported by the **Operate Connector**:
@@ -91,11 +91,11 @@ For **Search** operation, the following search parameters can be configured:
 
   `{ "processInstanceKey": 235, "state": "ACTIVE", "incidents": true }`
 
-  If one of the fields doesn't match, an empty response will be returned for this request. Refer to the [Operate API documentation](https://docs.camunda.io/docs/apis-clients/operate-api/#filter) for more detailed information.
+  If one of the fields doesn't match, an empty response will be returned for this request. Refer to the [Operate API documentation](https://docs.camunda.io/docs/apis-tools/operate-api/#filter) for more detailed information.
 
 - **Sort**: Sorting properties in Operate format, e.g. `[{ "field": "name", "order": "DESC" }]`. You need to provide a list of sort objects in this field.
 - **Results**: Number of results to return.
-- **Pagination**: Identifier of an item from which the search should start. Copy this `sortValues` value from the previous Operate response here, or leave this field blank if you don't need pagination. See the [API reference](https://docs.camunda.io/docs/apis-clients/operate-api/#pagination) for details.
+- **Pagination**: Identifier of an item from which the search should start. Copy this `sortValues` value from the previous Operate response here, or leave this field blank if you don't need pagination. See the [API reference](https://docs.camunda.io/docs/apis-tools/operate-api/#pagination) for details.
 
 ## Handle the API response
 
