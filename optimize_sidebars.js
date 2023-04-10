@@ -1104,7 +1104,7 @@ module.exports = {
 
   "APIs & Tools": [
     docsLink(
-      "Working with APIs & Tools",
+      "Working with APIs & tools",
       "apis-tools/working-with-apis-tools/"
     ),
     {
@@ -1119,6 +1119,7 @@ module.exports = {
         },
         {
           "Tasklist API (GraphQL)": [
+            docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
             docsLink(
               "Overview",
               "apis-tools/tasklist-api/tasklist-api-overview/"
@@ -1127,7 +1128,11 @@ module.exports = {
               "Tutorial",
               "apis-tools/tasklist-api/tasklist-api-tutorial/"
             ),
-            docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
+            docsLink(
+              "GraphQL to REST API migration",
+              "apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
+            ),
+
             {
               Directives: [
                 docsLink(
@@ -1147,6 +1152,11 @@ module.exports = {
             },
             {
               Enums: [
+                docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
+                docsLink(
+                  "TaskSortFields",
+                  "apis-tools/tasklist-api/enums/task-sort-fields/"
+                ),
                 docsLink(
                   "TaskState",
                   "apis-tools/tasklist-api/enums/task-state/"
@@ -1155,6 +1165,14 @@ module.exports = {
             },
             {
               Inputs: [
+                docsLink(
+                  "DateFilter",
+                  "apis-tools/tasklist-api/inputs/date-filter-input/"
+                ),
+                docsLink(
+                  "TaskOrderBy",
+                  "apis-tools/tasklist-api/inputs/task-order-by/"
+                ),
                 docsLink(
                   "TaskQuery",
                   "apis-tools/tasklist-api/inputs/task-query/"
@@ -1217,6 +1235,10 @@ module.exports = {
             },
             {
               Scalars: [
+                docsLink(
+                  "DateTime",
+                  "apis-tools/tasklist-api/scalars/datetime/"
+                ),
                 docsLink("Boolean", "apis-tools/tasklist-api/scalars/boolean/"),
                 docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
                 docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
@@ -1225,7 +1247,126 @@ module.exports = {
             },
           ],
         },
-        docsLink("Console API (REST)", "apis-tools/console-api-reference/"),
+
+        {
+          "Tasklist API (REST)": [
+            docsLink(
+              "Overview",
+              "apis-tools/tasklist-api-rest/tasklist-api-rest-overview/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
+            ),
+
+            {
+              Controllers: [
+                docsLink(
+                  "Form API",
+                  "apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-form-controller/"
+                ),
+                docsLink(
+                  "Task API",
+                  "apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller/"
+                ),
+                docsLink(
+                  "Variables API",
+                  "apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-variables-controller/"
+                ),
+              ],
+            },
+
+            {
+              Schemas: [
+                {
+                  Enums: [
+                    docsLink(
+                      "Sort",
+                      "apis-tools/tasklist-api-rest/schemas/enums/sort/"
+                    ),
+                    docsLink(
+                      "TaskSortFields",
+                      "apis-tools/tasklist-api-rest/schemas/enums/task-sort-fields/"
+                    ),
+                    docsLink(
+                      "TaskState",
+                      "apis-tools/tasklist-api-rest/schemas/enums/task-state/"
+                    ),
+                  ],
+                },
+
+                {
+                  Models: [
+                    docsLink(
+                      "DateFilter",
+                      "apis-tools/tasklist-api-rest/schemas/models/date-filter-input/"
+                    ),
+                    docsLink(
+                      "TaskOrderBy",
+                      "apis-tools/tasklist-api-rest/schemas/models/task-order-by/"
+                    ),
+                  ],
+                },
+
+                {
+                  Requests: [
+                    docsLink(
+                      "TaskAssignRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/task-assign-request/"
+                    ),
+                    docsLink(
+                      "TaskCompleteRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/task-complete-request/"
+                    ),
+                    docsLink(
+                      "TaskSearchRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/task-search-request/"
+                    ),
+                    docsLink(
+                      "VariableInput",
+                      "apis-tools/tasklist-api-rest/schemas/requests/variable-input/"
+                    ),
+                    docsLink(
+                      "VariablesSearchRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/variables-search-request/"
+                    ),
+                  ],
+                },
+
+                {
+                  Responses: [
+                    docsLink(
+                      "ErrorResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/error-response/"
+                    ),
+                    docsLink(
+                      "FormResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/form-response/"
+                    ),
+                    docsLink(
+                      "TaskResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/task-response/"
+                    ),
+                    docsLink(
+                      "TaskSearchResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/task-search-response/"
+                    ),
+                    docsLink(
+                      "VariableResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/variable-response/"
+                    ),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        docsLink(
+          "Console API clients (REST)",
+          "apis-tools/console-api-reference/"
+        ),
+        docsLink("Web Modeler API (REST, beta)", "apis-tools/web-modeler-api/"),
 
         {
           "Optimize API (REST)": [
@@ -1262,7 +1403,7 @@ module.exports = {
     },
 
     {
-      Tools: [
+      Clients: [
         {
           "Java client": [
             docsLink("Quick reference", "apis-tools/java-client/"),
@@ -1290,6 +1431,10 @@ module.exports = {
                 docsLink(
                   "Create a process instance with results",
                   "apis-tools/java-client-examples/process-instance-create-with-result/"
+                ),
+                docsLink(
+                  "Evaluate a decision",
+                  "apis-tools/java-client-examples/decision-evaluate/"
                 ),
                 docsLink(
                   "Open a job worker",
@@ -1326,7 +1471,7 @@ module.exports = {
           ],
         },
         {
-          "Community clients": [
+          "Community tools": [
             docsLink("Overview", "apis-tools/community-clients/"),
             docsLink("C#", "apis-tools/community-clients/c-sharp/"),
             docsLink(
