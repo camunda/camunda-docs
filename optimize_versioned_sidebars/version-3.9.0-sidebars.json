@@ -14,6 +14,11 @@
         },
         {
           "type": "link",
+          "label": "Clusters",
+          "href": "/docs/components/concepts/clusters/"
+        },
+        {
+          "type": "link",
           "label": "Processes",
           "href": "/docs/components/concepts/processes/"
         },
@@ -51,6 +56,16 @@
           "type": "link",
           "label": "Workflow patterns",
           "href": "/docs/components/concepts/workflow-patterns/"
+        },
+        {
+          "type": "link",
+          "label": "Process instance modification",
+          "href": "/docs/components/concepts/process-instance-modification/"
+        },
+        {
+          "type": "link",
+          "label": "Data retention",
+          "href": "/docs/components/concepts/data-retention/"
         }
       ]
     },
@@ -97,6 +112,11 @@
               "type": "link",
               "label": "Connect your IDP with Camunda Platform",
               "href": "/docs/components/console/manage-organization/external-sso/"
+            },
+            {
+              "type": "link",
+              "label": "Delete your Camunda Platform account",
+              "href": "/docs/components/console/manage-organization/delete-account/"
             }
           ]
         },
@@ -213,11 +233,32 @@
               "label": "Start a new process instance",
               "href": "/docs/components/modeler/web-modeler/start-instance/"
             },
+
             {
-              "type": "link",
-              "label": "Collaboration",
-              "href": "/docs/components/modeler/web-modeler/collaboration/"
+              "Collaboration": [
+                {
+                  "type": "link",
+                  "label": "Collaboration",
+                  "href": "/docs/components/modeler/web-modeler/collaboration/"
+                },
+                {
+                  "type": "link",
+                  "label": "Collaborate with modes",
+                  "href": "/docs/components/modeler/web-modeler/collaborate-with-modes/"
+                },
+                {
+                  "type": "link",
+                  "label": "Design mode for business users",
+                  "href": "/docs/components/modeler/web-modeler/design-your-process/"
+                },
+                {
+                  "type": "link",
+                  "label": "Implement mode for developers",
+                  "href": "/docs/components/modeler/web-modeler/implement-your-process/"
+                }
+              ]
             },
+
             {
               "type": "link",
               "label": "Milestones",
@@ -237,6 +278,11 @@
                 },
                 {
                   "type": "link",
+                  "label": "Business rule task linking",
+                  "href": "/docs/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/"
+                },
+                {
+                  "type": "link",
                   "label": "Manage Connector templates",
                   "href": "/docs/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/"
                 }
@@ -248,7 +294,7 @@
           "Desktop Modeler": [
             {
               "type": "link",
-              "label": "Install Desktop Modeler",
+              "label": "Install the Modeler",
               "href": "/docs/components/modeler/desktop-modeler/install-the-modeler/"
             },
             {
@@ -749,12 +795,12 @@
         {
           "type": "link",
           "label": "Introduction",
-          "href": "/docs/8.0/components/connectors/introduction-to-connectors/"
+          "href": "/docs/components/connectors/introduction-to-connectors/"
         },
         {
           "type": "link",
           "label": "Use Connectors",
-          "href": "/docs/8.0/components/connectors/use-connectors/"
+          "href": "/docs/components/connectors/use-connectors/"
         },
 
         {
@@ -762,37 +808,127 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/available-connectors-overview/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/"
+            },
+            {
+              "type": "link",
+              "label": "Automation Anywhere Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/automation-anywhere/"
+            },
+            {
+              "type": "link",
+              "label": "Amazon SNS Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/aws-sns/"
+            },
+            {
+              "type": "link",
+              "label": "Amazon SQS Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/aws-sqs/"
+            },
+            {
+              "type": "link",
+              "label": "AWS Lambda Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/aws-lambda/"
+            },
+            {
+              "type": "link",
+              "label": "Camunda Operate Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/operate/"
+            },
+            {
+              "type": "link",
+              "label": "EasyPost Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/easy-post/"
+            },
+            {
+              "type": "link",
+              "label": "GitHub Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/github/"
+            },
+            {
+              "type": "link",
+              "label": "GitHub Webhook Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/github-webhook/"
+            },
+            {
+              "type": "link",
+              "label": "Google Drive Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/googledrive/"
+            },
+            {
+              "type": "link",
+              "label": "Google Maps Platform Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/google-maps-platform/"
+            },
+            {
+              "type": "link",
+              "label": "GraphQL Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/graphql/"
+            },
+            {
+              "type": "link",
+              "label": "HTTP Webhook Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/http-webhook/"
+            },
+            {
+              "type": "link",
+              "label": "Kafka Producer Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/kafka/"
+            },
+            {
+              "type": "link",
+              "label": "Microsoft Teams Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+            },
+            {
+              "type": "link",
+              "label": "OpenAI Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/openai/"
+            },
+            {
+              "type": "link",
+              "label": "Power Automate Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/power-automate/"
+            },
+            {
+              "type": "link",
+              "label": "RabbitMQ Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/rabbitmq/"
             },
             {
               "type": "link",
               "label": "REST Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/rest/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/rest/"
             },
             {
               "type": "link",
               "label": "SendGrid Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/sendgrid/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/sendgrid/"
             },
             {
               "type": "link",
               "label": "Slack Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/slack/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/slack/"
+            },
+            {
+              "type": "link",
+              "label": "UiPath Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/uipath/"
             }
           ]
         },
 
         {
-          "Integration Framework": [
+          "Custom Connectors": [
             {
               "type": "link",
               "label": "Connector templates",
-              "href": "/docs/8.0/components/connectors/custom-built-connectors/connector-templates/"
+              "href": "/docs/components/connectors/custom-built-connectors/connector-templates/"
             },
             {
               "type": "link",
               "label": "Connector SDK",
-              "href": "/docs/8.0/components/connectors/custom-built-connectors/connector-sdk/"
+              "href": "/docs/components/connectors/custom-built-connectors/connector-sdk/"
             }
           ]
         }
@@ -1567,6 +1703,17 @@
       "label": "Camunda Platform 8 Self-Managed",
       "href": "/docs/self-managed/about-self-managed/"
     },
+
+    {
+      "Architecture": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/self-managed/platform-architecture/overview/"
+        }
+      ]
+    },
+
     {
       "Installation": [
         {
@@ -1600,6 +1747,16 @@
                 },
                 {
                   "type": "link",
+                  "label": "Microsoft AKS",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Google GKE",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/"
+                },
+                {
+                  "type": "link",
                   "label": "Red Hat OpenShift",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/"
                 }
@@ -1621,6 +1778,16 @@
                   "type": "link",
                   "label": "Combined and separated Ingress setup",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
+                },
+                {
+                  "type": "link",
+                  "label": "Using Existing Keycloak",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
+                },
+                {
+                  "type": "link",
+                  "label": "Installing in an air-gapped environment",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 }
               ]
             },
@@ -1885,6 +2052,20 @@
       ]
     },
     {
+      "Connectors": [
+        {
+          "type": "link",
+          "label": "Installation",
+          "href": "/docs/self-managed/connectors-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/connectors-deployment/connectors-configuration/"
+        }
+      ]
+    },
+    {
       "Optimize": [
         "self-managed/optimize-deployment/install-and-start",
         "self-managed/optimize-deployment/version-policy",
@@ -2090,6 +2271,11 @@
           "type": "link",
           "label": "Installation",
           "href": "/docs/self-managed/web-modeler/installation/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/web-modeler/configuration/"
         }
       ]
     },
@@ -2112,7 +2298,7 @@
         },
         {
           "type": "link",
-          "label": "Zeebe Backups",
+          "label": "Backup and restore Zeebe data",
           "href": "/docs/self-managed/backup-restore/zeebe-backup-and-restore/"
         }
       ]
