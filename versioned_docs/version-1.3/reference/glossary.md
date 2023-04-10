@@ -173,7 +173,7 @@ This is the number of times data in a partition are copied . This depends on the
 
 This is how long a client waits for a response from the broker after the client submits a request. If a response is not received within the client request timeout, the client considers the broker unreachable.
 
-- [Zeebe API (gRPC)](/apis-clients/grpc.md)
+- [Zeebe API (gRPC)](/apis-tools/grpc.md)
 
 ### Snapshot
 

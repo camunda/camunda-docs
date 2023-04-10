@@ -8,9 +8,10 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
-# 8.0 apis/clients to apis/tools change
+# apis/clients to apis/tools change
 RewriteRule ^docs/8.0/apis-clients(.*)$ /docs/8.0/apis-tools$1 [R=301,L]
 RewriteRule ^optimize/3.8.0/apis-clients(.*)$ /optimize/3.8.0/apis-tools$1 [R=301,L]
+RewriteRule ^docs/1.3/apis-clients(.*)$ /docs/1.3/apis-tools$1 [R=301,L]
 
 # 1.2 apis/clients to apis/tools change
 RewriteRule ^docs/1.2/apis-clients(.*)$ /docs/1.2/apis-tools$1 [R=301,L]
