@@ -32,6 +32,10 @@ RewriteRule ^docs/next/self-managed/web-modeler/installation/(.*)$ /docs/next/se
 
 # For a short time, we had a change that renamed the page, but not the folder. This next rule covers that.
 RewriteRule ^docs/next/apis-clients/working-with-apis-tools/?$ /docs/next/apis-tools/working-with-apis-tools/ [R=301,L]
+# Added redirect rules for APIs/Clients to APIs/Tools
+RewriteRule ^docs/next/apis-clients/working-with-apis-clients/?$ /docs/next/apis-tools/working-with-apis-tools/ [R=301,L]
+RewriteRule ^docs/next/apis-clients(.*)$ /docs/next/apis-tools$1 [R=301,L]
+RewriteRule ^optimize/next/apis-clients(.*)$ /optimize/next/apis-tools$1 [R=301,L]
 
 RewriteRule ^docs/components/zeebe/open-source/exporters/(.*)$ /docs/self-managed/concepts/exporters/$1 [R=301,L]
 RewriteRule ^docs/components/zeebe/open-source/exporters/$ /docs/self-managed/concepts/exporters [R=301,L]

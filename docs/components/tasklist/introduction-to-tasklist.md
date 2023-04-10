@@ -10,8 +10,8 @@ With Tasklist, orchestrate human workflows critical to your business and reduce 
 
 As you model a business process using BPMN and deploy it to the workflow engine, users are notified in Tasklist when they're assigned a task.
 
-Tasklist provides two APIs: a [GraphQL API](/docs/apis-clients/tasklist-api/tasklist-api-overview.md)
-and a [REST API](/docs/apis-clients/tasklist-api-rest/tasklist-api-rest-overview.md). Both APIs provide equal capabilities,
+Tasklist provides two APIs: a [GraphQL API](/docs/apis-tools/tasklist-api/tasklist-api-overview.md)
+and a [REST API](/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md). Both APIs provide equal capabilities,
 allowing you to build your own applications or use the general [UI](/docs/components/tasklist/userguide/using-tasklist.md) that we have prepared for you.
 
 :::note
