@@ -37,8 +37,10 @@ jobs:
         run: |
           docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnami/apache:2.4.54
           echo "container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' webserver)" >> $GITHUB_ENV
-      - name: Download 10 URLs from sitemap from production
-        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | tail -n 10 | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" | sed "s/^.*$/\<a href=\"&\"\>link\<\/a>/g" > sitemap-10.prod.html
+      # - name: Download 10 URLs from sitemap from production
+      #   run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | tail -n 10 | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" | sed "s/^.*$/\<a href=\"&\"\>link\<\/a>/g" > sitemap-10.prod.html
+      - name: Download URLs from sitemap from production and make them look like an html page
+        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" | sed "s/^.*$/\<a href=\"&\"\>link\<\/a>/g" > sitemap.prod.html
       # - name: Download sitemap from production
       #   run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > sitemap.prod.txt
       # - name: Prepare product links
@@ -51,7 +53,7 @@ jobs:
         uses: wjdp/htmltest-action@master
         with:
           config: .htmltest.yml
-          path: sitemap-10.prod.html
+          path: sitemap.prod.html
       # - name: Check internal links
       #   uses: filiph/linkcheck@2.0.23
       #   with:
