@@ -1,1 +1,3 @@
-FilePath: "sitemap-10.prod.txt"
+CheckAnchors: true
+CheckDoctype: false
+CacheExpires: 1m
