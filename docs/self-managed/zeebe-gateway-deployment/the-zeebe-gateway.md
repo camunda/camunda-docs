@@ -170,7 +170,7 @@ You can read more about client-gateway security on [its dedicated page](../zeebe
 
 ### Client authentication configuration
 
-The Zeebe Gateway support Camunda Identity based authorization. Please refer to [client authorization](../zeebe-deployment/security/client-authorization.md) for details.
+The Zeebe Gateway supports Camunda Identity-based authorization. Refer to [client authorization](../zeebe-deployment/security/client-authorization.md) for details.
 
 ### Long-polling configuration
 

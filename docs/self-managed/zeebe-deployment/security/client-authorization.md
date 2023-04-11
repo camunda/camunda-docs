@@ -5,12 +5,12 @@ title: "Client authorization"
 
 ## Gateway
 
-The Zeebe Gateway supports [Camunda Identity](../../identity/what-is-identity.md) based auth token validation.
-By default authentication is disabled by `security.authentication.mode` being set to `none`.
+The Zeebe Gateway supports [Camunda Identity](../../identity/what-is-identity.md)-based auth token validation.
+By default, authentication is disabled by setting `security.authentication.mode` to `none`.
 
 ### Camunda Identity authorization
 
-[Camunda Identity](../../identity/what-is-identity.md) based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `security.authentication.identity.*` properties, you can find more details about these in the [gatway config documentation](../configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity).
+[Camunda Identity](../../identity/what-is-identity.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `security.authentication.identity.*` properties. You can find more details about these in the [Gateway config documentation](../configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity).
 
 #### YAML snippet
 
@@ -24,13 +24,13 @@ security:
       type: keycloak
 ```
 
-Once enabled every GRPC request to the Gateway will require a valid auth token in the `Authorization` Header, granting access to the configured `security.authentication.identity.audience`, issued by the configured `security.authentication.identity.issuerBackendUrl`. The `zeebe-api` audience is already pre-configured in Camunda Identity.
+Once enabled, every gRPC request to the Gateway will require a valid auth token in the `Authorization` header, granting access to the configured `security.authentication.identity.audience`, issued by the configured `security.authentication.identity.issuerBackendUrl`. The `zeebe-api` audience is already pre-configured in Camunda Identity.
 
 ## Client
 
 Zeebe clients also provide a way for users to modify gRPC call headers, namely to contain access tokens.
 
-Users can modify gRPC headers using Zeebe's built-in `OAuthCredentialsProvider`, which uses user-specified credentials to contact a OAuth authorization server. The authorization server should return an access token that is then appended to each gRPC request.
+Users can modify gRPC headers using Zeebe's built-in `OAuthCredentialsProvider`, which uses user-specified credentials to contact an OAuth authorization server. The authorization server should return an access token that is then appended to each gRPC request.
 
 Although, by default `OAuthCredentialsProvider` is configured with to use a Camunda Platform 8 authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/camunda-cloud/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/CredentialsProvider.java). In the following sections, we'll describe the usage of the default `OAuthCredentialsProvider` as well as the `CredentialsProvider` interface that can be extended for implementing a custom provider.
 
@@ -171,11 +171,11 @@ Since there are several environment variables that can be used to configure an `
 
 ### Custom Credentials provider
 
-As previously mentioned, the `CredentialProvider`'s purpose is to modify the gRPC headers with an authorization method such that a reverse proxy sitting in front of the gateway can validate them.
+As previously mentioned, the `CredentialProvider`'s purpose is to modify the gRPC headers with an authorization method so a reverse proxy sitting in front of the gateway can validate them.
 
-The interface consists of an `applyCredentials` method and a `shouldRetryRequest` method. The first method is called for each gRPC call and takes a map of headers to which it should add credentials. The second method is called whenever a gRPC call fails and takes in the error that caused the failure which is then used to decide whether the request should be retried.
+The interface consists of an `applyCredentials` method and a `shouldRetryRequest` method. The first method is called for each gRPC call and takes a map of headers to which it should add credentials. The second method is called whenever a gRPC call fails and takes in the error that caused the failure which is then used to decide if the request should be retried.
 
-The following sections implement simple custom provider in Java and Go.
+The following sections implement custom provider in Java and Go:
 
 #### Java
 

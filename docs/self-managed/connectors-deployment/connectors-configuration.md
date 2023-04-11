@@ -40,7 +40,7 @@ ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=127.0.0.1:26500
 ZEEBE_CLIENT_SECURITY_PLAINTEXT=true
 ```
 
-In case the Zeebe Gateway is setup with Camunda Identity based authorization, [Zeebe Client OAuth Environment Variables](../zeebe-deployment/security/client-authorization.md#environment-variables) need to be provided.
+If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.
 
 Connect to Operate locally using username and password:
 

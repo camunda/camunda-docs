@@ -213,6 +213,6 @@ The user or user group can be assigned the following types of permissions:
 
 For more information, visit the [Identity documentation](../../concepts/access-control/resource-authorizations/).
 
-## Zeebe Client Credentials
+## Zeebe client credentials
 
-In case the Zeebe Gateway is setup with Camunda Identity based authorization, [Zeebe Client OAuth Environment Variables](../zeebe-deployment/security/client-authorization.md#environment-variables) need to be provided.
+If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.
