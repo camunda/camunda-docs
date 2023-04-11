@@ -39,21 +39,18 @@ jobs:
           echo "container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' webserver)" >> $GITHUB_ENV
       # - name: Download 10 URLs from sitemap from production
       #   run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | tail -n 10 | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" | sed "s/^.*$/\<a href=\"&\"\>link\<\/a>/g" > sitemap-10.prod.html
-      - name: Download URLs from sitemap from production and make them look like an html page
-        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" | sed "s/^.*$/\<a href=\"&\"\>link\<\/a>/g" > sitemap.prod.html
-      # - name: Download sitemap from production
-      #   run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > sitemap.prod.txt
+      - name: Download URLs from sitemap from production
+        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > sitemap.prod.txt
       # - name: Prepare product links
       #   run: grep 'https://docs.camunda.io' product-links.txt | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > product-links.prod.txt
       - name: Waiting for URL available
         uses: nev7n/wait_for_response@v1
         with:
           url: "http://${{ env.container_ip }}:8080/"
-      - name: Run htmltest
-        uses: wjdp/htmltest-action@master
+      - name: Run lychee
+        uses: lycheeverse/lychee-action@v1.6.1
         with:
-          config: .htmltest.yml
-          path: sitemap.prod.html
+          args: "sitemap.prod.txt"
       # - name: Check internal links
       #   uses: filiph/linkcheck@2.0.23
       #   with:
