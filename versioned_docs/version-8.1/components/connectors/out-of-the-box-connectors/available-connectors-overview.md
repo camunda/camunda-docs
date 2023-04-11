@@ -8,18 +8,25 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 
 ## Outbound Connectors
 
+- [Automation Anywhere Connector](automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [Amazon SNS Connector](aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
 - [AWS Lambda Connector](aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
+- [GitHub Connector](github.md) - Manage [GitHub](https://github.com/) issues and releases from your BPMN process.
+- [Camunda Operate Connector](operate.md) - Fetch process execution data from [Camunda Operate](https://camunda.com/platform/operate/).
+- [Easy Post Connector](aws-lambda.md) - Create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost](https://www.easypost.com/) from your BPMN process.
 - [Google Drive Connector](googledrive.md) - Create folders or files from a [Google Drive](https://www.google.com/drive/) template from your BPMN process.
+- [Google Maps Platform Connector](google-maps-platform.md) - Validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process.
 - [GraphQL Connector](graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
 - [Kafka Producer Connector](kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [Microsoft Teams Connector](microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
+- [OpenAI Connector](openai.md) - Interact with [ChatGPT](https://chat.openai.com/) and [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation/overview).
+- [Power Automate Connector](power-automate.md) - Orchestrate your [Power Automate](https://powerautomate.microsoft.com) Flows with Camunda.
 - [RabbitMQ Connector](rabbitmq.md) - Send messages to [RabbitMQ](https://www.rabbitmq.com/) from your BPMN process.
 - [REST Connector](rest.md) - Make a request to a REST API and use the response in the next steps of your process.
 - [SendGrid Connector](sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack Connector](slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
-- [UIPath Connector](uipath.md) - Orchestrate your [UIPath](https://cloud.uipath.com) Bots with Camunda.
+- [UiPath Connector](uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
 
 ## Inbound Connectors
 

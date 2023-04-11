@@ -94,7 +94,7 @@ When linking internally from one document to another, follow these guidelines:
 
 - if the source and target document are within the same instance (i.e. both are in `docs` or both are in `optimize`):
   - Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
-  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-clients/community-clients/spring.md?plain=1#L8).
+  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-tools/community-clients/spring.md?plain=1#L8).
   - Always include the `.md` extension in the path.
 - if the source and target document are in different instances (i.e. one is in `docs` and the other is in `optimize`):
   - If the source is in `docs` and the target is in `optimize`, use the `$optimize$` token to prefix the URL. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/guides/setting-up-development-project.md?plain=1#L17).
@@ -152,7 +152,9 @@ If you wish to test `.htaccess` rules, you have a couple options:
 2. Use `docker compose` to spin up a locally-running Apache webserver.
    This repo includes Docker configuration ([Dockerfile](../Dockerfile) and [docker-compose.yml](../docker-compose.yml)) to spin up a local environment that better simulates a published environment. Redirect rules can then be tested directly in a browser.
 
-   The local server is based on the contents of your `./build` folder. To start this local server:
+   The local server is based on the contents of your `./build` folder.
+
+   **To start the local server**:
 
    1. Build the docs with `npm run build`.
    2. Start the server with `docker compose up`.
@@ -160,6 +162,13 @@ If you wish to test `.htaccess` rules, you have a couple options:
 
       It is probably best to do this in an incognito browser session, as browsers clutch tightly to 301 redirects.
 
+   4. Clean up the server with `docker compose down`.
+
+   **If you make changes and want to re-start the server**:
+
+   1. Apply the changes to your `build` folder, either manually or by re-running `npm run build`.
+   2. Rebuild the environment with `docker compose build`.
+   3. Re-start the server with `docker compose up`.
    4. Clean up the server with `docker compose down`.
 
 ## Screenshot automation

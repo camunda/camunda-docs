@@ -43,3 +43,11 @@ and `WEBMODELER`.
 
 For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variable is required to be set.
 :::
+
+### Feature flags
+
+Identity uses feature flag environment variables to enable and disable features, the supported flags are:
+
+| Environment variable         | Description                                 | Default value |
+| ---------------------------- | ------------------------------------------- | ------------- |
+| RESOURCE_PERMISSIONS_ENABLED | Controls the resource autorizations feature | false         |

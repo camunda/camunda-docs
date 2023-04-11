@@ -1,6 +1,6 @@
 ---
 id: collaboration
-title: Collaboration
+title: Collaborate with your team
 description: Collaboration features and access rights for Web Modeler.
 ---
 
@@ -27,6 +27,10 @@ There are four roles with different levels of access rights that can be assigned
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
 ### Inviting users to projects
+
+:::note
+Web Modeler expects users to have an email address associated with their account in the identity management system to receive invitations correctly.
+:::
 
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
 

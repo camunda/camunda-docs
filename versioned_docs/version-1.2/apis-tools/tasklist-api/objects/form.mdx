@@ -1,0 +1,28 @@
+---
+id: form
+title: Form
+---
+
+Describes task embedded form
+
+```graphql
+type Form {
+  id: String!
+  processDefinitionId: String!
+  schema: String!
+}
+```
+
+### Fields
+
+#### `id` ([`String!`](../scalars/string.mdx))
+
+The unique identifier of the embedded form within one process
+
+#### `processDefinitionId` ([`String!`](../scalars/string.mdx))
+
+Reference to process definition
+
+#### `schema` ([`String!`](../scalars/string.mdx))
+
+Form content

@@ -18,4 +18,4 @@ After navigating to a raw data report, note the added columns are now displayed:
 
 In most cases, when training a machine learning model the data can be fed to common libraries, such as pandas or scikit-learn in CSV or JSON format. To export all data contained in a raw data report and use it as input for model training, export the raw data reports in JSON format.
 
-This can be done after saving the report and utilizing the external Optimize endpoint provided to export it to JSON. More information on how to use the JSON export endpoint can be found [here](../../../apis-clients/optimize-api/report/get-data-export.md).
+This can be done after saving the report and utilizing the external Optimize endpoint provided to export it to JSON. More information on how to use the JSON export endpoint can be found [here](../../../apis-tools/optimize-api/report/get-data-export.md).

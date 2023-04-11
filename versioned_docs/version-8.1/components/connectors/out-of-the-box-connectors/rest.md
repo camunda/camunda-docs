@@ -8,7 +8,8 @@ description: Make a request to a REST API and use the response in the next steps
 If you use the REST Connector, ensure you do not have any instance variable named in the list below:
 
 - body, url, method, headers, authentication, queryParameters, connectionTimeoutInSeconds
-  :::
+
+:::
 
 The **REST Connector** allows you to make a request to a REST API and use the response in the next steps of your process.
 

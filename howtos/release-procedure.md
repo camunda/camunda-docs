@@ -65,7 +65,18 @@ To create the new versions:
 
    - Add the new mapping in the first position of the array.
 
-5. Create a PR with the changes and merge to `main`. Confirm no build issues before moving to the release steps.
+5. Ensure the "unmaintained" banner does not appear for supported versions. We currently support all versions of Camunda Platform 8 since none are older than 18 months.
+
+```javascript
+// 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
+   versions: {
+      "8.0": {
+         banner: "none",
+      },
+   },
+```
+
+6. Create a PR with the changes and merge to `main`. Confirm no build issues before moving to the release steps.
 
 ### Release the new version
 

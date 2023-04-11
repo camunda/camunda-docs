@@ -6,8 +6,8 @@ description: "Important announcements including deprecation & removal notices"
 
 ## Deprecated in 8.0
 
-The [DeployProcess RPC](/apis-clients/grpc.md#deployprocess-rpc) was deprecated in 8.0.
-It is replaced by the [DeployResource RPC](/apis-clients/grpc.md#deployresource-rpc).
+The [DeployProcess RPC](/apis-tools/grpc.md#deployprocess-rpc) was deprecated in 8.0.
+It is replaced by the [DeployResource RPC](/apis-tools/grpc.md#deployresource-rpc).
 
 ## Deprecated in 1.3
 

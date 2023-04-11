@@ -41,13 +41,17 @@ A timer can be defined either as a static value (e.g. `P3D`) or as an [expressio
 
 If the expression belongs to a timer start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the timer catch event. The evaluation must result in either a `string` that has the same ISO 8601 format as the static value, or an equivalent temporal value (i.e. a date-time, a duration, or a cycle).
 
+:::note
+Zeebe is an asynchronous system. As a result, there is no guarantee a timer triggers exactly at the configured time.
+
+Depending on how much load the system is under, timers could trigger later than their due date. However, timers will never trigger earlier than the due date.
+:::
+
 ### Time date
 
-A specific point in time defined as ISO 8601 combined date and time representation. It must contain timezone information, either `Z` for UTC or a zone offset. Optionally, it can contain a zone id.
+import ISO8601DateTime from '../assets/react-components/iso-8601-date-time.md'
 
-- `2019-10-01T12:00:00Z` - UTC time
-- `2019-10-02T08:09:40+02:00` - UTC plus two hours zone offset
-- `2019-10-02T08:09:40+02:00[Europe/Berlin]` - UTC plus two hours zone offset at Berlin
+<ISO8601DateTime/>
 
 ### Time duration
 

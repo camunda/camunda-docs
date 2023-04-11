@@ -52,7 +52,7 @@ A correlation is an attribute within a message used to match this message agains
 
 A process cannot execute unless it is known by the broker. Deployment is the process of pushing or deploying processes to the broker.
 
-- [Zeebe Deployment](/self-managed/about-self-managed.md)
+- [Zeebe Deployment](/apis-tools/grpc.md#deployresource-rpc)
 
 ### Event
 
@@ -172,7 +172,7 @@ This is the number of times data in a partition are copied. This depends on the 
 
 This is how long a client waits for a response from the broker after the client submits a request. If a response is not received within the client request timeout, the client considers the broker unreachable.
 
-- [Zeebe API (gRPC)](/apis-clients/grpc.md)
+- [Zeebe API (gRPC)](/apis-tools/grpc.md)
 
 ### Snapshot
 

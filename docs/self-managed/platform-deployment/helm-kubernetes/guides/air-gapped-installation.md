@@ -4,7 +4,7 @@ title: "Installing in an air-gapped environment"
 description: "Camunda Platform 8 Self-Managed installation in an air-gapped environment"
 ---
 
-The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler Beta](../../docker.md#web-modeler)).
+The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler](../../docker.md#web-modeler)).
 With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
 ## Required Docker images
@@ -48,8 +48,7 @@ camunda-platform
     |_ optimize
     |_ operate
     |_ tasklist
-    |_ web-modeler
-        |_ postgresql
+    |_ postgresql
 ```
 
 - Keycloak is a dependency for Camunda Identity and PostgreSQL is a dependency for Keycloak.
@@ -66,10 +65,8 @@ identity:
     [keycloak values]
     postgresql:
       [postgresql values]
-web-modeler:
-  [web-modeler values]
-  postgresql:
-    [postgresql values]
+postgresql:
+  [postgresql values]
 ```
 
 ## Push Docker images to your repository
@@ -145,7 +142,7 @@ optimize:
   image:
     repository: example.jfrog.io/camunda/optimize
     ...
-web-modeler:
+webModeler:
   image:
     # registry and tag will be used for all three Web Modeler images
     registry: example.jfrog.io
@@ -159,11 +156,11 @@ web-modeler:
   websockets:
     image:
       repository: camunda/modeler-websockets
-  # only necessary if the PostgreSQL chart dependency is used for Web Modeler
-  postgresql:
-    image:
-      repository: example.jfrog.io/bitnami/postgres
   ...
+# only necessary if the PostgreSQL chart dependency is used for Web Modeler
+postgresql:
+  image:
+    repository: example.jfrog.io/bitnami/postgres
 ```
 
 Afterwards, you can deploy Camunda Platform using Helm and the custom values file.

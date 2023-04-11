@@ -1,0 +1,78 @@
+---
+id: task
+title: Task
+---
+
+Describes the User task.
+
+```graphql
+type Task {
+  id: ID!
+  name: String!
+  taskDefinitionId: String!
+  processName: String!
+  creationTime: String!
+  completionTime: String
+  assignee: String
+  variables: [Variable!]
+  taskState: TaskState!
+  sortValues: [String!]
+  isFirst: Boolean
+  formKey: String
+  processDefinitionId: String
+}
+```
+
+### Fields
+
+#### `id` ([`ID!`](../scalars/id.mdx))
+
+The unique identifier of the task
+
+#### `name` ([`String!`](../scalars/string.mdx))
+
+Name of the task
+
+#### `taskDefinitionId` ([`String!`](../scalars/string.mdx))
+
+Task Definition ID (node BPMN id) of the process
+
+#### `processName` ([`String!`](../scalars/string.mdx))
+
+Name of the process
+
+#### `creationTime` ([`String!`](../scalars/string.mdx))
+
+When was the task created
+
+#### `completionTime` ([`String`](../scalars/string.mdx))
+
+When was the task completed
+
+#### `assignee` ([`String`](../scalars/string.mdx))
+
+Username/id of who is assigned to the task
+
+#### `variables` ([`[Variable!]`](../objects/variable.mdx))
+
+Variables associated to the task
+
+#### `taskState` ([`TaskState!`](../enums/task-state.mdx))
+
+State of the task
+
+#### `sortValues` ([`[String!]`](../scalars/string.mdx))
+
+Array of values to be copied into `TaskQuery` to request for next or previous page of tasks.
+
+#### `isFirst` ([`Boolean`](../scalars/boolean.mdx))
+
+Flag to show that the task is first in current filter
+
+#### `formKey` ([`String`](../scalars/string.mdx))
+
+Reference to the task form
+
+#### `processDefinitionId` ([`String`](../scalars/string.mdx))
+
+Reference to process definition

@@ -10,7 +10,7 @@ const features = [
   {
     title: "Guides",
     imageUrl: "img/guides.png",
-    url: "https://docs.camunda.io/docs/guides",
+    url: "/docs/guides",
     description: (
       <>
         Step-by-step content to strengthen your knowledge of Camunda Platform 8,
@@ -21,7 +21,7 @@ const features = [
   {
     title: "Components",
     imageUrl: "img/components.png",
-    url: "https://docs.camunda.io/docs/components/",
+    url: "/docs/components/",
     description: (
       <>
         Conceptualize the cornerstones of Camunda Platform 8 and learn more
@@ -30,9 +30,9 @@ const features = [
     ),
   },
   {
-    title: "APIs & Clients",
+    title: "APIs & Tools",
     imageUrl: "img/apisclients.png",
-    url: "https://docs.camunda.io/docs/apis-clients/working-with-apis-clients/",
+    url: "/docs/apis-tools/working-with-apis-tools/",
     description: <>Programmatically interact with your automated processes.</>,
   },
 ];
@@ -41,7 +41,7 @@ const features2 = [
   {
     title: "Self-Managed",
     imageUrl: "img/self-managed.png",
-    url: "https://docs.camunda.io/docs/self-managed/about-self-managed/",
+    url: "/docs/self-managed/about-self-managed/",
     description: (
       <>
         A self-hosted Camunda Platform 8 alternative, offering everything you
@@ -52,7 +52,7 @@ const features2 = [
   {
     title: "Reference",
     imageUrl: "img/reference.png",
-    url: "https://docs.camunda.io/docs/reference/",
+    url: "/docs/reference/",
     description: (
       <>
         Supporting material to strengthen your understanding of supported

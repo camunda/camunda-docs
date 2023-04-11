@@ -66,7 +66,7 @@ Identity requires the following parameters:
 
 ### Use Identity JWT token to access Tasklist API
 
-Tasklist provides a [GraphQL API](../../../apis-clients/tasklist-api/) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+Tasklist provides a [GraphQL API](../../../apis-tools/tasklist-api/) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 **Example:**
 

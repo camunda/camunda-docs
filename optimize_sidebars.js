@@ -16,6 +16,7 @@ module.exports = {
           "What is Camunda Platform 8?",
           "components/concepts/what-is-camunda-platform-8/"
         ),
+        docsLink("Clusters", "components/concepts/clusters/"),
         docsLink("Processes", "components/concepts/processes/"),
         docsLink("Job workers", "components/concepts/job-workers/"),
         docsLink(
@@ -23,10 +24,16 @@ module.exports = {
           "components/concepts/process-instance-creation/"
         ),
         docsLink("Messages", "components/concepts/messages/"),
+        docsLink("Signals", "components/concepts/signals/"),
         docsLink("Incidents", "components/concepts/incidents/"),
         docsLink("Variables", "components/concepts/variables/"),
         docsLink("Expressions", "components/concepts/expressions/"),
         docsLink("Workflow patterns", "components/concepts/workflow-patterns/"),
+        docsLink(
+          "Process instance modification",
+          "components/concepts/process-instance-modification/"
+        ),
+        docsLink("Data retention", "components/concepts/data-retention/"),
       ],
     },
 
@@ -66,6 +73,10 @@ module.exports = {
             docsLink(
               "Connect your IDP with Camunda Platform",
               "components/console/manage-organization/external-sso/"
+            ),
+            docsLink(
+              "Delete your Camunda Platform account",
+              "components/console/manage-organization/delete-account/"
             ),
           ],
         },
@@ -165,10 +176,28 @@ module.exports = {
               "Start a new process instance",
               "components/modeler/web-modeler/start-instance/"
             ),
-            docsLink(
-              "Collaboration",
-              "components/modeler/web-modeler/collaboration/"
-            ),
+
+            {
+              Collaboration: [
+                docsLink(
+                  "Collaborate with your team",
+                  "components/modeler/web-modeler/collaboration/"
+                ),
+                docsLink(
+                  "Collaborate with modes",
+                  "components/modeler/web-modeler/collaborate-with-modes/"
+                ),
+                docsLink(
+                  "Design mode for business users",
+                  "components/modeler/web-modeler/design-your-process/"
+                ),
+                docsLink(
+                  "Implement mode for developers",
+                  "components/modeler/web-modeler/implement-your-process/"
+                ),
+              ],
+            },
+
             docsLink(
               "Milestones",
               "components/modeler/web-modeler/milestones/"
@@ -183,6 +212,10 @@ module.exports = {
                 docsLink(
                   "Call activity linking",
                   "components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
+                ),
+                docsLink(
+                  "Business rule task linking",
+                  "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/"
                 ),
                 docsLink(
                   "Manage Connector templates",
@@ -245,6 +278,10 @@ module.exports = {
                   "components/modeler/desktop-modeler/plugins/"
                 ),
                 docsLink(
+                  "Custom lint rules",
+                  "components/modeler/desktop-modeler/custom-lint-rules/"
+                ),
+                docsLink(
                   "Search paths",
                   "components/modeler/desktop-modeler/search-paths/"
                 ),
@@ -289,6 +326,10 @@ module.exports = {
                   "Manual tasks",
                   "components/modeler/bpmn/manual-tasks/"
                 ),
+                docsLink(
+                  "Undefined tasks",
+                  "components/modeler/bpmn/undefined-tasks/"
+                ),
               ],
             },
 
@@ -323,6 +364,10 @@ module.exports = {
                   "components/modeler/bpmn/message-events/"
                 ),
                 docsLink(
+                  "Signal events",
+                  "components/modeler/bpmn/signal-events/"
+                ),
+                docsLink(
                   "Timer events",
                   "components/modeler/bpmn/timer-events/"
                 ),
@@ -331,9 +376,14 @@ module.exports = {
                   "components/modeler/bpmn/error-events/"
                 ),
                 docsLink(
+                  "Escalation events",
+                  "components/modeler/bpmn/escalation-events/"
+                ),
+                docsLink(
                   "Terminate events",
                   "components/modeler/bpmn/terminate-events/"
                 ),
+                docsLink("Link events", "components/modeler/bpmn/link-events/"),
               ],
             },
 
@@ -515,7 +565,7 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library/"
                 ),
                 docsLink(
-                  "Text",
+                  "Text view",
                   "components/modeler/forms/form-element-library/forms-element-library-text/"
                 ),
                 docsLink(
@@ -523,8 +573,16 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-textfield/"
                 ),
                 docsLink(
+                  "Text area",
+                  "components/modeler/forms/form-element-library/forms-element-library-textarea/"
+                ),
+                docsLink(
                   "Number",
                   "components/modeler/forms/form-element-library/forms-element-library-number/"
+                ),
+                docsLink(
+                  "Datetime",
+                  "components/modeler/forms/form-element-library/forms-element-library-datetime/"
                 ),
                 docsLink(
                   "Checkbox",
@@ -545,6 +603,10 @@ module.exports = {
                 docsLink(
                   "Taglist",
                   "components/modeler/forms/form-element-library/forms-element-library-taglist/"
+                ),
+                docsLink(
+                  "Image view",
+                  "components/modeler/forms/form-element-library/forms-element-library-image/"
                 ),
                 docsLink(
                   "Button",
@@ -576,7 +638,6 @@ module.exports = {
           "Introduction",
           "components/connectors/introduction-to-connectors/"
         ),
-
         docsLink("Use Connectors", "components/connectors/use-connectors/"),
 
         {
@@ -584,6 +645,10 @@ module.exports = {
             docsLink(
               "Overview",
               "components/connectors/out-of-the-box-connectors/available-connectors-overview/"
+            ),
+            docsLink(
+              "Automation Anywhere Connector",
+              "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
             docsLink(
               "Amazon SNS Connector",
@@ -598,12 +663,28 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-lambda/"
             ),
             docsLink(
+              "Camunda Operate Connector",
+              "components/connectors/out-of-the-box-connectors/operate/"
+            ),
+            docsLink(
+              "EasyPost Connector",
+              "components/connectors/out-of-the-box-connectors/easy-post/"
+            ),
+            docsLink(
+              "GitHub Connector",
+              "components/connectors/out-of-the-box-connectors/github/"
+            ),
+            docsLink(
               "GitHub Webhook Connector",
               "components/connectors/out-of-the-box-connectors/github-webhook/"
             ),
             docsLink(
               "Google Drive Connector",
               "components/connectors/out-of-the-box-connectors/googledrive/"
+            ),
+            docsLink(
+              "Google Maps Platform Connector",
+              "components/connectors/out-of-the-box-connectors/google-maps-platform/"
             ),
             docsLink(
               "GraphQL Connector",
@@ -622,6 +703,14 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/microsoft-teams/"
             ),
             docsLink(
+              "OpenAI Connector",
+              "components/connectors/out-of-the-box-connectors/openai/"
+            ),
+            docsLink(
+              "Power Automate Connector",
+              "components/connectors/out-of-the-box-connectors/power-automate/"
+            ),
+            docsLink(
               "RabbitMQ Connector",
               "components/connectors/out-of-the-box-connectors/rabbitmq/"
             ),
@@ -638,14 +727,14 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "UIPath Connector",
+              "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
             ),
           ],
         },
 
         {
-          "Integration Framework": [
+          "Custom Connectors": [
             docsLink(
               "Connector templates",
               "components/connectors/custom-built-connectors/connector-templates/"
@@ -656,6 +745,8 @@ module.exports = {
             ),
           ],
         },
+
+        docsLink("Data handling", "components/modeler/data-handling/"),
       ],
     },
 
@@ -785,9 +876,14 @@ module.exports = {
                 "components/userguide/view-mode",
               ],
             },
+            {
+              "Dashboards maintained by Camunda": [
+                "components/userguide/process-dashboards",
+                "components/userguide/instant-preview-dashboards",
+              ],
+            },
             "components/userguide/creating-reports",
             "components/userguide/combined-process-reports",
-            "components/userguide/process-dashboards",
 
             {
               "Process analysis": [
@@ -1008,59 +1104,82 @@ module.exports = {
 
   "APIs & Tools": [
     docsLink(
-      "Working with APIs & Clients",
-      "apis-clients/working-with-apis-tools/"
+      "Working with APIs & tools",
+      "apis-tools/working-with-apis-tools/"
     ),
     {
       APIs: [
-        docsLink("Public API", "apis-clients/public-api/"),
-        docsLink("Zeebe API (gRPC)", "apis-clients/grpc/"),
-        docsLink("Operate API (REST)", "apis-clients/operate-api/"),
+        docsLink("Public API", "apis-tools/public-api/"),
+        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
+        {
+          "Operate API (REST)": [
+            docsLink("Overview", "apis-tools/operate-api/overview/"),
+            docsLink("Tutorial", "apis-tools/operate-api/tutorial/"),
+          ],
+        },
         {
           "Tasklist API (GraphQL)": [
+            docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
             docsLink(
               "Overview",
-              "apis-clients/tasklist-api/tasklist-api-overview/"
+              "apis-tools/tasklist-api/tasklist-api-overview/"
             ),
             docsLink(
               "Tutorial",
-              "apis-clients/tasklist-api/tasklist-api-tutorial/"
+              "apis-tools/tasklist-api/tasklist-api-tutorial/"
             ),
-            docsLink("Schema Documentation", "apis-clients/tasklist-api/"),
+            docsLink(
+              "GraphQL to REST API migration",
+              "apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
+            ),
+
             {
               Directives: [
                 docsLink(
                   "deprecated",
-                  "apis-clients/tasklist-api/directives/deprecated/"
+                  "apis-tools/tasklist-api/directives/deprecated/"
                 ),
                 docsLink(
                   "include",
-                  "apis-clients/tasklist-api/directives/include/"
+                  "apis-tools/tasklist-api/directives/include/"
                 ),
-                docsLink("skip", "apis-clients/tasklist-api/directives/skip/"),
+                docsLink("skip", "apis-tools/tasklist-api/directives/skip/"),
                 docsLink(
                   "specifiedBy",
-                  "apis-clients/tasklist-api/directives/specified-by/"
+                  "apis-tools/tasklist-api/directives/specified-by/"
                 ),
               ],
             },
             {
               Enums: [
+                docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
+                docsLink(
+                  "TaskSortFields",
+                  "apis-tools/tasklist-api/enums/task-sort-fields/"
+                ),
                 docsLink(
                   "TaskState",
-                  "apis-clients/tasklist-api/enums/task-state/"
+                  "apis-tools/tasklist-api/enums/task-state/"
                 ),
               ],
             },
             {
               Inputs: [
                 docsLink(
+                  "DateFilter",
+                  "apis-tools/tasklist-api/inputs/date-filter-input/"
+                ),
+                docsLink(
+                  "TaskOrderBy",
+                  "apis-tools/tasklist-api/inputs/task-order-by/"
+                ),
+                docsLink(
                   "TaskQuery",
-                  "apis-clients/tasklist-api/inputs/task-query/"
+                  "apis-tools/tasklist-api/inputs/task-query/"
                 ),
                 docsLink(
                   "VariableInput",
-                  "apis-clients/tasklist-api/inputs/variable-input/"
+                  "apis-tools/tasklist-api/inputs/variable-input/"
                 ),
               ],
             },
@@ -1068,30 +1187,30 @@ module.exports = {
               Mutations: [
                 docsLink(
                   "claimTask",
-                  "apis-clients/tasklist-api/mutations/claim-task/"
+                  "apis-tools/tasklist-api/mutations/claim-task/"
                 ),
                 docsLink(
                   "completeTask",
-                  "apis-clients/tasklist-api/mutations/complete-task/"
+                  "apis-tools/tasklist-api/mutations/complete-task/"
                 ),
                 docsLink(
                   "deleteProcessInstance",
-                  "apis-clients/tasklist-api/mutations/delete-process-instance/"
+                  "apis-tools/tasklist-api/mutations/delete-process-instance/"
                 ),
                 docsLink(
                   "unclaimTask",
-                  "apis-clients/tasklist-api/mutations/unclaim-task/"
+                  "apis-tools/tasklist-api/mutations/unclaim-task/"
                 ),
               ],
             },
             {
               Objects: [
-                docsLink("Form", "apis-clients/tasklist-api/objects/form/"),
-                docsLink("Task", "apis-clients/tasklist-api/objects/task/"),
-                docsLink("User", "apis-clients/tasklist-api/objects/user/"),
+                docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
+                docsLink("Task", "apis-tools/tasklist-api/objects/task/"),
+                docsLink("User", "apis-tools/tasklist-api/objects/user/"),
                 docsLink(
                   "Variable",
-                  "apis-clients/tasklist-api/objects/variable/"
+                  "apis-tools/tasklist-api/objects/variable/"
                 ),
               ],
             },
@@ -1099,68 +1218,185 @@ module.exports = {
               Queries: [
                 docsLink(
                   "currentUser",
-                  "apis-clients/tasklist-api/queries/current-user/"
+                  "apis-tools/tasklist-api/queries/current-user/"
                 ),
-                docsLink("form", "apis-clients/tasklist-api/queries/form/"),
-                docsLink("task", "apis-clients/tasklist-api/queries/task/"),
-                docsLink("tasks", "apis-clients/tasklist-api/queries/tasks/"),
+                docsLink("form", "apis-tools/tasklist-api/queries/form/"),
+                docsLink("task", "apis-tools/tasklist-api/queries/task/"),
+                docsLink("tasks", "apis-tools/tasklist-api/queries/tasks/"),
                 docsLink(
                   "variable",
-                  "apis-clients/tasklist-api/queries/variable/"
+                  "apis-tools/tasklist-api/queries/variable/"
                 ),
                 docsLink(
                   "variables",
-                  "apis-clients/tasklist-api/queries/variables/"
+                  "apis-tools/tasklist-api/queries/variables/"
                 ),
               ],
             },
             {
               Scalars: [
                 docsLink(
-                  "Boolean",
-                  "apis-clients/tasklist-api/scalars/boolean/"
+                  "DateTime",
+                  "apis-tools/tasklist-api/scalars/datetime/"
                 ),
-                docsLink("ID", "apis-clients/tasklist-api/scalars/id/"),
-                docsLink("Int", "apis-clients/tasklist-api/scalars/int/"),
-                docsLink("String", "apis-clients/tasklist-api/scalars/string/"),
+                docsLink("Boolean", "apis-tools/tasklist-api/scalars/boolean/"),
+                docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
+                docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
+                docsLink("String", "apis-tools/tasklist-api/scalars/string/"),
               ],
             },
           ],
         },
+
+        {
+          "Tasklist API (REST)": [
+            docsLink(
+              "Overview",
+              "apis-tools/tasklist-api-rest/tasklist-api-rest-overview/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
+            ),
+
+            {
+              Controllers: [
+                docsLink(
+                  "Form API",
+                  "apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-form-controller/"
+                ),
+                docsLink(
+                  "Task API",
+                  "apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller/"
+                ),
+                docsLink(
+                  "Variables API",
+                  "apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-variables-controller/"
+                ),
+              ],
+            },
+
+            {
+              Schemas: [
+                {
+                  Enums: [
+                    docsLink(
+                      "Sort",
+                      "apis-tools/tasklist-api-rest/schemas/enums/sort/"
+                    ),
+                    docsLink(
+                      "TaskSortFields",
+                      "apis-tools/tasklist-api-rest/schemas/enums/task-sort-fields/"
+                    ),
+                    docsLink(
+                      "TaskState",
+                      "apis-tools/tasklist-api-rest/schemas/enums/task-state/"
+                    ),
+                  ],
+                },
+
+                {
+                  Models: [
+                    docsLink(
+                      "DateFilter",
+                      "apis-tools/tasklist-api-rest/schemas/models/date-filter-input/"
+                    ),
+                    docsLink(
+                      "TaskOrderBy",
+                      "apis-tools/tasklist-api-rest/schemas/models/task-order-by/"
+                    ),
+                  ],
+                },
+
+                {
+                  Requests: [
+                    docsLink(
+                      "TaskAssignRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/task-assign-request/"
+                    ),
+                    docsLink(
+                      "TaskCompleteRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/task-complete-request/"
+                    ),
+                    docsLink(
+                      "TaskSearchRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/task-search-request/"
+                    ),
+                    docsLink(
+                      "VariableInput",
+                      "apis-tools/tasklist-api-rest/schemas/requests/variable-input/"
+                    ),
+                    docsLink(
+                      "VariablesSearchRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/variables-search-request/"
+                    ),
+                  ],
+                },
+
+                {
+                  Responses: [
+                    docsLink(
+                      "ErrorResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/error-response/"
+                    ),
+                    docsLink(
+                      "FormResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/form-response/"
+                    ),
+                    docsLink(
+                      "TaskResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/task-response/"
+                    ),
+                    docsLink(
+                      "TaskSearchResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/task-search-response/"
+                    ),
+                    docsLink(
+                      "VariableResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/variable-response/"
+                    ),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
         docsLink(
           "Console API clients (REST)",
-          "apis-clients/console-api-reference/"
+          "apis-tools/console-api-reference/"
         ),
+        docsLink("Web Modeler API (REST, beta)", "apis-tools/web-modeler-api/"),
 
         {
           "Optimize API (REST)": [
-            "apis-clients/optimize-api/optimize-api-authorization",
+            "apis-tools/optimize-api/optimize-api-authorization",
             {
               Configuration: [
-                "apis-clients/optimize-api/configuration/enable-sharing",
-                "apis-clients/optimize-api/configuration/disable-sharing",
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing",
               ],
             },
             {
               Dashboard: [
-                "apis-clients/optimize-api/dashboard/get-dashboard-ids",
-                "apis-clients/optimize-api/dashboard/delete-dashboard",
-                "apis-clients/optimize-api/dashboard/export-dashboard-definitions",
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
               ],
             },
             {
               Report: [
-                "apis-clients/optimize-api/report/get-report-ids",
-                "apis-clients/optimize-api/report/delete-report",
-                "apis-clients/optimize-api/report/export-report-definitions",
-                "apis-clients/optimize-api/report/get-data-export",
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export",
               ],
             },
-            "apis-clients/optimize-api/event-ingestion",
-            "apis-clients/optimize-api/external-variable-ingestion",
-            "apis-clients/optimize-api/health-readiness",
-            "apis-clients/optimize-api/import-entities",
-            "apis-clients/optimize-api/variable-labeling",
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling",
           ],
         },
       ],
@@ -1170,43 +1406,47 @@ module.exports = {
       Clients: [
         {
           "Java client": [
-            docsLink("Quick reference", "apis-clients/java-client/"),
-            docsLink("Job worker", "apis-clients/java-client/job-worker/"),
-            docsLink("Logging", "apis-clients/java-client/logging/"),
+            docsLink("Quick reference", "apis-tools/java-client/"),
+            docsLink("Job worker", "apis-tools/java-client/job-worker/"),
+            docsLink("Logging", "apis-tools/java-client/logging/"),
             docsLink(
               "Zeebe Process Test",
-              "apis-clients/java-client/zeebe-process-test/"
+              "apis-tools/java-client/zeebe-process-test/"
             ),
             {
               Examples: [
-                docsLink("Overview", "apis-clients/java-client-examples/"),
+                docsLink("Overview", "apis-tools/java-client-examples/"),
                 docsLink(
                   "Deploy a process",
-                  "apis-clients/java-client-examples/process-deploy/"
+                  "apis-tools/java-client-examples/process-deploy/"
                 ),
                 docsLink(
                   "Create a process instance",
-                  "apis-clients/java-client-examples/process-instance-create/"
+                  "apis-tools/java-client-examples/process-instance-create/"
                 ),
                 docsLink(
                   "Create non-blocking process instances",
-                  "apis-clients/java-client-examples/process-instance-create-nonblocking/"
+                  "apis-tools/java-client-examples/process-instance-create-nonblocking/"
                 ),
                 docsLink(
                   "Create a process instance with results",
-                  "apis-clients/java-client-examples/process-instance-create-with-result/"
+                  "apis-tools/java-client-examples/process-instance-create-with-result/"
+                ),
+                docsLink(
+                  "Evaluate a decision",
+                  "apis-tools/java-client-examples/decision-evaluate/"
                 ),
                 docsLink(
                   "Open a job worker",
-                  "apis-clients/java-client-examples/job-worker-open/"
+                  "apis-tools/java-client-examples/job-worker-open/"
                 ),
                 docsLink(
                   "Handle variables as POJO",
-                  "apis-clients/java-client-examples/data-pojo/"
+                  "apis-tools/java-client-examples/data-pojo/"
                 ),
                 docsLink(
                   "Request cluster topology",
-                  "apis-clients/java-client-examples/cluster-topology-request/"
+                  "apis-tools/java-client-examples/cluster-topology-request/"
                 ),
               ],
             },
@@ -1214,42 +1454,39 @@ module.exports = {
         },
         {
           "Go client": [
-            docsLink("Quick reference", "apis-clients/go-client/"),
+            docsLink("Quick reference", "apis-tools/go-client/"),
             docsLink(
               "Getting started with the Go client",
-              "apis-clients/go-client/go-get-started/"
+              "apis-tools/go-client/go-get-started/"
             ),
           ],
         },
         {
           "CLI client": [
-            docsLink("Quick reference", "apis-clients/cli-client/"),
+            docsLink("Quick reference", "apis-tools/cli-client/"),
             docsLink(
               "Getting started with the CLI client",
-              "apis-clients/cli-client/cli-get-started/"
+              "apis-tools/cli-client/cli-get-started/"
             ),
           ],
         },
         {
-          "Community clients": [
-            docsLink("Overview", "apis-clients/community-clients/"),
-            docsLink("C#", "apis-clients/community-clients/c-sharp/"),
+          "Community tools": [
+            docsLink("Overview", "apis-tools/community-clients/"),
+            docsLink("C#", "apis-tools/community-clients/c-sharp/"),
             docsLink(
               "JavaScript/NodeJS",
-              "apis-clients/community-clients/javascript/"
+              "apis-tools/community-clients/javascript/"
             ),
-            docsLink("Micronaut", "apis-clients/community-clients/micronaut/"),
-            docsLink("Python", "apis-clients/community-clients/python/"),
-            docsLink("Ruby", "apis-clients/community-clients/ruby/"),
-            docsLink("Rust", "apis-clients/community-clients/rust/"),
-            docsLink("Spring", "apis-clients/community-clients/spring/"),
-            docsLink("Quarkus", "apis-clients/community-clients/quarkus/"),
+            docsLink("Micronaut", "apis-tools/community-clients/micronaut/"),
+            docsLink("Python", "apis-tools/community-clients/python/"),
+            docsLink("Ruby", "apis-tools/community-clients/ruby/"),
+            docsLink("Rust", "apis-tools/community-clients/rust/"),
+            docsLink("Spring", "apis-tools/community-clients/spring/"),
+            docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
           ],
         },
-        docsLink(
-          "Build your own client",
-          "apis-clients/build-your-own-client/"
-        ),
+        docsLink("Build your own client", "apis-tools/build-your-own-client/"),
       ],
     },
   ],
@@ -1259,6 +1496,13 @@ module.exports = {
       "Camunda Platform 8 Self-Managed",
       "self-managed/about-self-managed/"
     ),
+
+    {
+      Architecture: [
+        docsLink("Overview", "self-managed/platform-architecture/overview/"),
+      ],
+    },
+
     {
       Installation: [
         docsLink("Overview", "self-managed/platform-deployment/overview/"),
@@ -1283,6 +1527,14 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/"
                 ),
                 docsLink(
+                  "Microsoft AKS",
+                  "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
+                ),
+                docsLink(
+                  "Google GKE",
+                  "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/"
+                ),
+                docsLink(
                   "Red Hat OpenShift",
                   "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/"
                 ),
@@ -1301,6 +1553,14 @@ module.exports = {
                 docsLink(
                   "Combined and separated Ingress setup",
                   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
+                ),
+                docsLink(
+                  "Using Existing Keycloak",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
+                ),
+                docsLink(
+                  "Installing in an air-gapped environment",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 ),
               ],
             },
@@ -1323,9 +1583,14 @@ module.exports = {
               "self-managed/concepts/access-control/applications/"
             ),
             docsLink("APIs", "self-managed/concepts/access-control/apis/"),
+            docsLink("Groups", "self-managed/concepts/access-control/groups/"),
             docsLink(
               "Permissions",
               "self-managed/concepts/access-control/permissions/"
+            ),
+            docsLink(
+              "Resource authorizations",
+              "self-managed/concepts/access-control/resource-authorizations/"
             ),
             docsLink("Roles", "self-managed/concepts/access-control/roles/"),
             docsLink("Users", "self-managed/concepts/access-control/users/"),
@@ -1373,6 +1638,14 @@ module.exports = {
             docsLink(
               "Priority election",
               "self-managed/zeebe-deployment/configuration/priority-election/"
+            ),
+            docsLink(
+              "Broker configuration",
+              "self-managed/zeebe-deployment/configuration/broker-config/"
+            ),
+            docsLink(
+              "Gateway configuration",
+              "self-managed/zeebe-deployment/configuration/gateway-config/"
             ),
           ],
         },
@@ -1445,6 +1718,20 @@ module.exports = {
             ),
           ],
         },
+
+        {
+          Exporters: [
+            docsLink("Overview", "self-managed/zeebe-deployment/exporters/"),
+            docsLink(
+              "Elasticsearch",
+              "self-managed/zeebe-deployment/exporters/elasticsearch-exporter/"
+            ),
+            docsLink(
+              "OpenSearch",
+              "self-managed/zeebe-deployment/exporters/opensearch-exporter/"
+            ),
+          ],
+        },
       ],
     },
     {
@@ -1470,7 +1757,7 @@ module.exports = {
           "self-managed/operate-deployment/importer-and-archiver/"
         ),
         docsLink(
-          "Authentication",
+          "Authentication and authorization",
           "self-managed/operate-deployment/operate-authentication/"
         ),
         docsLink(
@@ -1547,6 +1834,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
             "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
             "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
@@ -1587,6 +1875,32 @@ module.exports = {
         ),
         {
           "User guide": [
+            {
+              Groups: [
+                docsLink(
+                  "Creating a group",
+                  "self-managed/identity/user-guide/groups/creating-a-group/"
+                ),
+                docsLink(
+                  "Assigning users to a group",
+                  "self-managed/identity/user-guide/groups/assigning-users-to-a-group/"
+                ),
+                docsLink(
+                  "Assigning roles to a group",
+                  "self-managed/identity/user-guide/groups/assigning-roles-to-a-group/"
+                ),
+              ],
+            },
+
+            {
+              Authorizations: [
+                docsLink(
+                  "Managing resource authorizations",
+                  "self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
+                ),
+              ],
+            },
+
             docsLink(
               "Adding an application",
               "self-managed/identity/user-guide/adding-an-application/"
@@ -1681,11 +1995,29 @@ module.exports = {
     },
 
     {
-      "Web Modeler (Beta)": [
-        docsLink(
-          "Installation",
-          "self-managed/modeler/web-modeler/installation/"
-        ),
+      Modeler: [
+        {
+          "Web Modeler": [
+            docsLink(
+              "Installation",
+              "self-managed/modeler/web-modeler/installation/"
+            ),
+            docsLink(
+              "Configuration",
+              "self-managed/modeler/web-modeler/configuration/"
+            ),
+            docsLink("API access", "self-managed/modeler/web-modeler/api/"),
+          ],
+        },
+
+        {
+          "Desktop Modeler": [
+            docsLink(
+              "Deploy diagram",
+              "self-managed/modeler/desktop-modeler/deploy-to-self-managed/"
+            ),
+          ],
+        },
       ],
     },
 

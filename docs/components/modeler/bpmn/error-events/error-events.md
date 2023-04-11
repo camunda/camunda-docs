@@ -12,9 +12,18 @@ For example, if an invalid credit card is used in the process below, the process
 
 ## Defining the error
 
-In BPMN, **errors** define possible errors that can occur. **Error events** are elements in the process referring to defined errors. An error can be referenced by one or more error events.
+In BPMN, **errors** define possible errors that can occur. **Error events** are elements in the process referring to
+defined errors. An error can be referenced by one or more error events.
 
-An error must define an `errorCode` (e.g. `InvalidCreditCard`). The `errorCode` is a `string` used to match a thrown error to the error catch events.
+An error must define an `errorCode` (e.g. `InvalidCreditCard`). The `errorCode` is a `string` used to match a thrown
+error to the error catch events.
+
+For throwing error events, it is possible to define the `errorCode` as an `expression`. When the event is reached,
+the expression is evaluated. An error with the result of this expression is thrown. If no expression is used the
+statically defined `errorCode` is used.
+
+For error catch events, the `errorCode` can be a static value or it can be left empty. An expression can't be used. A
+catch event with an empty `errorCode` will catch **all** thrown errors.
 
 ## Throwing the error
 
@@ -22,23 +31,35 @@ An error can be thrown within the process using an error **end event**.
 
 ![process with error throw event](assets/error-throw-events.png)
 
-Alternatively, you can inform Zeebe that a business error occurred using a **client command**. This throw error client command can only be used while processing a job.
+Alternatively, you can inform Zeebe that a business error occurred using a **client command**. This throw error client
+command can only be used while processing a job.
 
-In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers. See the [gRPC command](/apis-clients/grpc.md#throwerror-rpc) for details.
+In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers. See the [gRPC command](/apis-tools/grpc.md#throwerror-rpc) for details.
 
 ## Catching the error
 
-A thrown error can be caught by an error catch event, specifically using an error **boundary event** or an error **event subprocess**.
+A thrown error can be caught by an error catch event, specifically using an error **boundary event** or an error **event
+subprocess**.
 
 ![process with error catch event](assets/error-catch-events.png)
 
-Starting at the scope where the error was thrown, the error code is matched against the attached error boundary events and error event sub processes at that level. An error is caught by the first event in the scope hierarchy matching the error code. At each scope, the error is either caught, or propagated to the parent scope.
+Starting at the scope where the error was thrown, the error code is matched against the attached error boundary events
+and error event sub processes at that level. An error is caught by the first event in the scope hierarchy matching the
+error code. At each scope, the error is either caught, or propagated to the parent scope.
 
-If the process instance is created via call activity, the error can also be caught in the calling parent process instance.
+If the process instance is created via call activity, the error can also be caught in the calling parent process
+instance.
 
-Error boundary events and error event subprocesses must be interrupting. This means the process instance will not continue along the regular path, but instead follow the path that leads out of the catching error event.
+It is not possible to define multiple error catch events with the same `errorCode` in a single scope. It is also not
+permitted to have multiple error catch events without an `errorCode` in a single scope. The deployment gets rejected in
+these cases. However, it is possible to define both an error catch event **with** an `errorCode` and one **without** an
+`errorCode` in the same scope. When this happens, the error catch event that matches the `errorCode` is prioritized.
 
-If the error is thrown for a job, the associated task is terminated first. To continue the execution, the error boundary event or error event subprocess that caught the error is activated.
+Error boundary events and error event subprocesses must be interrupting. This means the process instance will not
+continue along the regular path, but instead follow the path that leads out of the catching error event.
+
+If the error is thrown for a job, the associated task is terminated first. To continue the execution, the error boundary
+event or error event subprocess that caught the error is activated.
 
 ## Unhandled errors
 
@@ -60,6 +81,12 @@ It's much more important to look at how you _react_ to certain errors. Even a te
 
 In general, we recommend talking about business reactions, which are modeled in your process, and technical reactions, which are handled generically using retries or incidents.
 
+## Variable mappings
+
+All error variables are merged into the error catch event. These variables can be merged into the process instance by defining an output mapping at the error catch event.
+
+Visit the documentation regarding [variable mappings](../../../concepts/variables/#inputoutput-variable-mappings) for more information.
+
 ## Additional resources
 
 ### XML representation
@@ -69,10 +96,18 @@ A boundary error event:
 ```xml
 <bpmn:error id="invalid-credit-card-error" errorCode="Invalid Credit Card" />
 
-<bpmn:boundaryEvent id="invalid-credit-card" name="Invalid Credit Card" attachedToRef="collect-money">
+<bpmn:boundaryEvent id="invalid-credit-card-1" name="Invalid Credit Card" attachedToRef="collect-money">
  <bpmn:errorEventDefinition errorRef="invalid-credit-card-error" />
 </bpmn:boundaryEvent>
 
+```
+
+A boundary error event without `errorCode`:
+
+```xml
+<bpmn:boundaryEvent id="invalid-credit-card-2" name="Unknown Error" attachedToRef="collect-money">
+  <bpmn:errorEventDefinition id="catch-all-errors"/>
+</bpmn:boundaryEvent>
 ```
 
 ### References

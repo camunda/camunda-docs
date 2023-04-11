@@ -1,6 +1,7 @@
 ---
 id: create-workflow-instance
 title: "Create and Complete Workflow Instances"
+description: "Step through a creation tutorial of two workflow instances to get started."
 ---
 
 We're going to create 2 workflow instances for this tutorial: one with an order value less than $100 and one with an order value greater than or equal to $100 so that we can see our XOR Gateway in action.

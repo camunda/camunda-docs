@@ -48,9 +48,9 @@ Camunda's private Docker registry.
 
 | Web Modeler Component | Docker image                                                          |
 | --------------------- | :-------------------------------------------------------------------- |
-| Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:0.6.0-beta`    |
-| Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:0.6.0-beta`     |
-| WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:0.6.0-beta` |
+| Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:0.8.0-beta`    |
+| Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:0.8.0-beta`     |
+| WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:0.8.0-beta` |
 
 To pull the images you first need to log in using the credentials you received from Camunda:
 
