@@ -34,53 +34,53 @@ Camunda Platform 8 provides several official clients based on this API. Official
 
 Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
-<DocCardList items={[{type:"link", href:"/docs/apis-clients/java-client/", label: "Java client", docId:"apis-clients/java-client/index"},
+<DocCardList items={[{type:"link", href:"/docs/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
 {
-type:"link", href:"/docs/apis-clients/go-client/go-get-started/", label: "Go client", docId:"apis-clients/go-client/index"
+type:"link", href:"/docs/apis-tools/go-client/go-get-started/", label: "Go client", docId:"apis-tools/go-client/index"
 },
 {
-type:"link", href:"/docs/apis-clients/cli-client/index", label: "CLI client", docId:"apis-clients/cli-client/index"
+type:"link", href:"/docs/apis-tools/cli-client/index", label: "CLI client", docId:"apis-tools/cli-client/index"
 }
 ]}/>
 
 :::note
-Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](../apis-clients/tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
+Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](../apis-tools/tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
 :::
 
 ### Community clients
 
 Community clients supplement the official clients. These clients have not been tested by Camunda.
 
-- [C#](../apis-clients/community-clients/c-sharp.md)
-- [JavaScript/NodeJS](../apis-clients/community-clients/javascript.md)
-- [Micronaut](../apis-clients/community-clients/micronaut.md)
-- [Python](../apis-clients/community-clients/python.md)
-- [Ruby](../apis-clients/community-clients/ruby.md)
-- [Rust](../apis-clients/community-clients/rust.md)
-- [Spring](../apis-clients/community-clients/spring.md)
-- [Quarkus](../apis-clients/community-clients/quarkus.md)
+- [C#](../apis-tools/community-clients/c-sharp.md)
+- [JavaScript/NodeJS](../apis-tools/community-clients/javascript.md)
+- [Micronaut](../apis-tools/community-clients/micronaut.md)
+- [Python](../apis-tools/community-clients/python.md)
+- [Ruby](../apis-tools/community-clients/ruby.md)
+- [Rust](../apis-tools/community-clients/rust.md)
+- [Spring](../apis-tools/community-clients/spring.md)
+- [Quarkus](../apis-tools/community-clients/quarkus.md)
 
-It is also possible to [build your own client](../apis-clients/build-your-own-client.md) You can browse other community extensions and the most up-to-date list of community clients [here](https://github.com/orgs/camunda-community-hub/repositories).
+It is also possible to [build your own client](../apis-tools/build-your-own-client.md) You can browse other community extensions and the most up-to-date list of community clients [here](https://github.com/orgs/camunda-community-hub/repositories).
 
 ## Learn about Camunda Components and their APIs
 
 ![Architecture diagram for Camunda Platform including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
 
-<DocCardList items={[{type:"link", href:"/docs/apis-clients/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-clients/tasklist-api/tasklist-api-overview"},
+<DocCardList items={[{type:"link", href:"/docs/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"},
 {
-type:"link", href:"/docs/apis-clients/operate-api/", label: "Operate API (REST)", docId:"apis-clients/operate-api/operate-api-overview"
+type:"link", href:"/docs/apis-tools/operate-api/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
 },
 {
-type:"link", href:"/docs/apis-clients/console-api-reference/", label: "Console API (REST)", docId:"apis-clients/console-api-reference"
+type:"link", href:"/docs/apis-tools/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"
 },
 {
-type:"link", href:"/docs/next/apis-clients/web-modeler-api/", label: "Web Modeler API (Beta, REST)", docId:"apis-clients/web-modeler-api/index", border: "highlight"
+type:"link", href:"/docs/next/apis-tools/web-modeler-api/", label: "Web Modeler API (Beta, REST)", docId:"apis-tools/web-modeler-api/index", border: "highlight"
 },
 {
-type:"link", href:"/docs/apis-clients/grpc/", label: "Zeebe API (gRPC)", docId:"apis-clients/grpc"
+type:"link", href:"/docs/apis-tools/grpc/", label: "Zeebe API (gRPC)", docId:"apis-tools/grpc"
 },
 {
-type:"link", href:"/optimize/apis-clients/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)"
+type:"link", href:"/optimize/apis-tools/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)"
 }
 ]}/>
 

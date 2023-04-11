@@ -83,7 +83,7 @@ For more information, visit the [Identity documentation](/self-managed/concepts/
 
 ### Use Identity JWT token to access Tasklist API
 
-Tasklist provides a [GraphQL API](/apis-clients/tasklist-api/tasklist-api-overview.md) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+Tasklist provides a [GraphQL API](/apis-tools/tasklist-api/tasklist-api-overview.md) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 :::note
 Be aware a JWT token is intended to be used for M2M communication and is therefore issued for the relevant application, not for the user.

@@ -65,7 +65,7 @@ Want to apply an authorization to a wide range of resources? We support a wildca
 Partial matching, for example `my-resource*`, is not supported.
 :::
 
-4. Select the permissions you would like to assign, and click **Create**:
+4):. Select the permissions you would like to assign, and click **Create**:
 
 ![create-authorization-for-user-modal-3](../img/create-authorization-for-user-modal-3.png)
 
