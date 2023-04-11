@@ -24,8 +24,8 @@ jobs:
           node-version: 16
       - name: Install Dependencies
         run: npm ci
-      # - name: Verify format
-      #   run: npm run format:check
+      - name: Verify format
+        run: npm run format:check
       - name: Build
         run: npm run build
         env:
