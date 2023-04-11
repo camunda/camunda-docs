@@ -192,7 +192,7 @@ For example, the onboarding microservice shown in the figure above includes:
 * The process definition itself (2), probably auto-deployed to the workflow engine during the startup of the application.
 * Glue code subscribing to the two service tasks that shall call a remote REST API (3) and (4).
 
-A job worker will be started automatically as part of the application to handle the subscriptions. In this example, the application is written in Java, but again, it could be [any supported programming language](https://docs.camunda.io/docs/product-manuals/clients/overview).
+A job worker will be started automatically as part of the application to handle the subscriptions. In this example, the application is written in Java, but again, it could be [any supported programming language](/apis-tools/overview.md).
 
 As discussed in [writing good workers](../writing-good-workers/), you typically will bundle all workers within one process solution, but there are exceptions where it makes sense to have single workers as separate application.
 
