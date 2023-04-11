@@ -1,0 +1,2620 @@
+{
+  "Components": [
+    {
+      "type": "link",
+      "label": "Overview Components",
+      "href": "/docs/components/"
+    },
+    {
+      "Concepts": [
+        {
+          "type": "link",
+          "label": "What is Camunda Platform 8?",
+          "href": "/docs/components/concepts/what-is-camunda-platform-8/"
+        },
+        {
+          "type": "link",
+          "label": "Clusters",
+          "href": "/docs/components/concepts/clusters/"
+        },
+        {
+          "type": "link",
+          "label": "Processes",
+          "href": "/docs/components/concepts/processes/"
+        },
+        {
+          "type": "link",
+          "label": "Job workers",
+          "href": "/docs/components/concepts/job-workers/"
+        },
+        {
+          "type": "link",
+          "label": "Process instance creation",
+          "href": "/docs/components/concepts/process-instance-creation/"
+        },
+        {
+          "type": "link",
+          "label": "Messages",
+          "href": "/docs/components/concepts/messages/"
+        },
+        {
+          "type": "link",
+          "label": "Signals",
+          "href": "/docs/components/concepts/signals/"
+        },
+        {
+          "type": "link",
+          "label": "Incidents",
+          "href": "/docs/components/concepts/incidents/"
+        },
+        {
+          "type": "link",
+          "label": "Variables",
+          "href": "/docs/components/concepts/variables/"
+        },
+        {
+          "type": "link",
+          "label": "Expressions",
+          "href": "/docs/components/concepts/expressions/"
+        },
+        {
+          "type": "link",
+          "label": "Workflow patterns",
+          "href": "/docs/components/concepts/workflow-patterns/"
+        },
+        {
+          "type": "link",
+          "label": "Process instance modification",
+          "href": "/docs/components/concepts/process-instance-modification/"
+        },
+        {
+          "type": "link",
+          "label": "Data retention",
+          "href": "/docs/components/concepts/data-retention/"
+        }
+      ]
+    },
+    {
+      "Console": [
+        {
+          "type": "link",
+          "label": "Introduction to Camunda Platform Console",
+          "href": "/docs/components/console/introduction-to-console/"
+        },
+        {
+          "Manage your organization": [
+            {
+              "type": "link",
+              "label": "Organization management",
+              "href": "/docs/components/console/manage-organization/organization-settings/"
+            },
+            {
+              "type": "link",
+              "label": "Manage users of your organization",
+              "href": "/docs/components/console/manage-organization/manage-users/"
+            },
+            {
+              "type": "link",
+              "label": "View organization activity",
+              "href": "/docs/components/console/manage-organization/view-organization-activity/"
+            },
+            {
+              "type": "link",
+              "label": "Usage history",
+              "href": "/docs/components/console/manage-organization/usage-history/"
+            },
+            {
+              "type": "link",
+              "label": "Update billing reservations",
+              "href": "/docs/components/console/manage-organization/update-billing-reservations/"
+            },
+            {
+              "type": "link",
+              "label": "Switch organization",
+              "href": "/docs/components/console/manage-organization/switch-organization/"
+            },
+            {
+              "type": "link",
+              "label": "Connect your IDP with Camunda Platform",
+              "href": "/docs/components/console/manage-organization/external-sso/"
+            },
+            {
+              "type": "link",
+              "label": "Delete your Camunda Platform account",
+              "href": "/docs/components/console/manage-organization/delete-account/"
+            }
+          ]
+        },
+        {
+          "Manage clusters": [
+            {
+              "type": "link",
+              "label": "Create a cluster",
+              "href": "/docs/components/console/manage-clusters/create-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "Rename your cluster",
+              "href": "/docs/components/console/manage-clusters/rename-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "Delete your cluster",
+              "href": "/docs/components/console/manage-clusters/delete-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "Manage API clients",
+              "href": "/docs/components/console/manage-clusters/manage-api-clients/"
+            },
+            {
+              "type": "link",
+              "label": "Manage alerts",
+              "href": "/docs/components/console/manage-clusters/manage-alerts/"
+            },
+            {
+              "type": "link",
+              "label": "Manage IP Whitelists",
+              "href": "/docs/components/console/manage-clusters/manage-ip-whitelists/"
+            },
+            {
+              "type": "link",
+              "label": "Manage secrets",
+              "href": "/docs/components/console/manage-clusters/manage-secrets/"
+            }
+          ]
+        },
+        {
+          "Manage your plan": [
+            {
+              "type": "link",
+              "label": "Available plans",
+              "href": "/docs/components/console/manage-plan/available-plans/"
+            },
+            {
+              "type": "link",
+              "label": "Upgrade to a Professional Plan",
+              "href": "/docs/components/console/manage-plan/upgrade-to-professional-plan/"
+            }
+          ]
+        },
+        {
+          "Troubleshooting": [
+            {
+              "type": "link",
+              "label": "Common pitfalls",
+              "href": "/docs/components/console/console-troubleshooting/common-pitfalls/"
+            },
+            {
+              "type": "link",
+              "label": "Feedback and support",
+              "href": "/docs/components/console/console-troubleshooting/feedback-and-support/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Modeler": [
+        {
+          "type": "link",
+          "label": "About Modeler",
+          "href": "/docs/components/modeler/about-modeler/"
+        },
+        {
+          "Web Modeler": [
+            {
+              "type": "link",
+              "label": "New Web Modeler",
+              "href": "/docs/components/modeler/web-modeler/new-web-modeler/"
+            },
+            {
+              "type": "link",
+              "label": "Launch Web Modeler",
+              "href": "/docs/components/modeler/web-modeler/launch-cloud-modeler/"
+            },
+            {
+              "type": "link",
+              "label": "Model your first diagram",
+              "href": "/docs/components/modeler/web-modeler/model-your-first-diagram/"
+            },
+            {
+              "type": "link",
+              "label": "Import diagram",
+              "href": "/docs/components/modeler/web-modeler/import-diagram/"
+            },
+            {
+              "type": "link",
+              "label": "Fix problems in your diagram",
+              "href": "/docs/components/modeler/web-modeler/fix-problems-in-your-diagram/"
+            },
+            {
+              "type": "link",
+              "label": "Save and deploy your diagram",
+              "href": "/docs/components/modeler/web-modeler/save-and-deploy/"
+            },
+            {
+              "type": "link",
+              "label": "Start a new process instance",
+              "href": "/docs/components/modeler/web-modeler/start-instance/"
+            },
+            {
+              "Collaboration": [
+                {
+                  "type": "link",
+                  "label": "Collaborate with your team",
+                  "href": "/docs/components/modeler/web-modeler/collaboration/"
+                },
+                {
+                  "type": "link",
+                  "label": "Collaborate with modes",
+                  "href": "/docs/components/modeler/web-modeler/collaborate-with-modes/"
+                },
+                {
+                  "type": "link",
+                  "label": "Design mode for business users",
+                  "href": "/docs/components/modeler/web-modeler/design-your-process/"
+                },
+                {
+                  "type": "link",
+                  "label": "Implement mode for developers",
+                  "href": "/docs/components/modeler/web-modeler/implement-your-process/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "label": "Milestones",
+              "href": "/docs/components/modeler/web-modeler/milestones/"
+            },
+            {
+              "type": "link",
+              "label": "Token simulation",
+              "href": "/docs/components/modeler/web-modeler/token-simulation/"
+            },
+            {
+              "Advanced modeling": [
+                {
+                  "type": "link",
+                  "label": "Call activity linking",
+                  "href": "/docs/components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
+                },
+                {
+                  "type": "link",
+                  "label": "Business rule task linking",
+                  "href": "/docs/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/"
+                },
+                {
+                  "type": "link",
+                  "label": "Manage Connector templates",
+                  "href": "/docs/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Desktop Modeler": [
+            {
+              "type": "link",
+              "label": "Install Desktop Modeler",
+              "href": "/docs/components/modeler/desktop-modeler/install-the-modeler/"
+            },
+            {
+              "type": "link",
+              "label": "Model your first diagram",
+              "href": "/docs/components/modeler/desktop-modeler/model-your-first-diagram/"
+            },
+            {
+              "type": "link",
+              "label": "Deploy your first diagram",
+              "href": "/docs/components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+            },
+            {
+              "type": "link",
+              "label": "Start a new process instance",
+              "href": "/docs/components/modeler/desktop-modeler/start-instance/"
+            },
+            {
+              "Element templates": [
+                {
+                  "type": "link",
+                  "label": "About element templates",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/about-templates/"
+                },
+                {
+                  "type": "link",
+                  "label": "Configuring templates",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/configuring-templates/"
+                },
+                {
+                  "type": "link",
+                  "label": "Using templates",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/using-templates/"
+                },
+                {
+                  "type": "link",
+                  "label": "Defining templates",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/defining-templates/"
+                },
+                {
+                  "type": "link",
+                  "label": "Additional resources",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/additional-resources/"
+                }
+              ]
+            },
+            {
+              "Additional configuration": [
+                {
+                  "type": "link",
+                  "label": "Flags",
+                  "href": "/docs/components/modeler/desktop-modeler/flags/"
+                },
+                {
+                  "type": "link",
+                  "label": "Plugins",
+                  "href": "/docs/components/modeler/desktop-modeler/plugins/"
+                },
+                {
+                  "type": "link",
+                  "label": "Custom lint rules",
+                  "href": "/docs/components/modeler/desktop-modeler/custom-lint-rules/"
+                },
+                {
+                  "type": "link",
+                  "label": "Search paths",
+                  "href": "/docs/components/modeler/desktop-modeler/search-paths/"
+                },
+                {
+                  "type": "link",
+                  "label": "Telemetry",
+                  "href": "/docs/components/modeler/desktop-modeler/telemetry/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "BPMN": [
+            {
+              "type": "link",
+              "label": "BPMN in Modeler",
+              "href": "/docs/components/modeler/bpmn/"
+            },
+            {
+              "type": "link",
+              "label": "BPMN primer",
+              "href": "/docs/components/modeler/bpmn/bpmn-primer/"
+            },
+            {
+              "type": "link",
+              "label": "BPMN coverage",
+              "href": "/docs/components/modeler/bpmn/bpmn-coverage/"
+            },
+            {
+              "type": "link",
+              "label": "Data flow",
+              "href": "/docs/components/modeler/bpmn/data-flow/"
+            },
+            {
+              "Tasks": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Service tasks",
+                  "href": "/docs/components/modeler/bpmn/service-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "User tasks",
+                  "href": "/docs/components/modeler/bpmn/user-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Receive tasks",
+                  "href": "/docs/components/modeler/bpmn/receive-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Business rule tasks",
+                  "href": "/docs/components/modeler/bpmn/business-rule-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Script tasks",
+                  "href": "/docs/components/modeler/bpmn/script-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Send tasks",
+                  "href": "/docs/components/modeler/bpmn/send-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Manual tasks",
+                  "href": "/docs/components/modeler/bpmn/manual-tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Undefined tasks",
+                  "href": "/docs/components/modeler/bpmn/undefined-tasks/"
+                }
+              ]
+            },
+            {
+              "Gateways": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/gateways/"
+                },
+                {
+                  "type": "link",
+                  "label": "Exclusive gateway",
+                  "href": "/docs/components/modeler/bpmn/exclusive-gateways/"
+                },
+                {
+                  "type": "link",
+                  "label": "Parallel gateway",
+                  "href": "/docs/components/modeler/bpmn/parallel-gateways/"
+                },
+                {
+                  "type": "link",
+                  "label": "Event-based gateway",
+                  "href": "/docs/components/modeler/bpmn/event-based-gateways/"
+                },
+                {
+                  "type": "link",
+                  "label": "Inclusive gateway",
+                  "href": "/docs/components/modeler/bpmn/inclusive-gateways/"
+                }
+              ]
+            },
+            {
+              "Events": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/events/"
+                },
+                {
+                  "type": "link",
+                  "label": "None events",
+                  "href": "/docs/components/modeler/bpmn/none-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Message events",
+                  "href": "/docs/components/modeler/bpmn/message-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Signal events",
+                  "href": "/docs/components/modeler/bpmn/signal-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Timer events",
+                  "href": "/docs/components/modeler/bpmn/timer-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Error events",
+                  "href": "/docs/components/modeler/bpmn/error-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Escalation events",
+                  "href": "/docs/components/modeler/bpmn/escalation-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Terminate events",
+                  "href": "/docs/components/modeler/bpmn/terminate-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Link events",
+                  "href": "/docs/components/modeler/bpmn/link-events/"
+                }
+              ]
+            },
+            {
+              "Subprocesses": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/subprocesses/"
+                },
+                {
+                  "type": "link",
+                  "label": "Embedded subprocess",
+                  "href": "/docs/components/modeler/bpmn/embedded-subprocesses/"
+                },
+                {
+                  "type": "link",
+                  "label": "Call activities",
+                  "href": "/docs/components/modeler/bpmn/call-activities/"
+                },
+                {
+                  "type": "link",
+                  "label": "Event subprocess",
+                  "href": "/docs/components/modeler/bpmn/event-subprocesses/"
+                }
+              ]
+            },
+            {
+              "Markers": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/bpmn/markers/"
+                },
+                {
+                  "type": "link",
+                  "label": "Multi-instance",
+                  "href": "/docs/components/modeler/bpmn/multi-instance/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "DMN": [
+            {
+              "type": "link",
+              "label": "DMN in Modeler",
+              "href": "/docs/components/modeler/dmn/"
+            },
+            {
+              "type": "link",
+              "label": "Decision requirements graph",
+              "href": "/docs/components/modeler/dmn/decision-requirements-graph/"
+            },
+            {
+              "Decision table": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/components/modeler/dmn/decision-table/"
+                },
+                {
+                  "type": "link",
+                  "label": "Input",
+                  "href": "/docs/components/modeler/dmn/decision-table-input/"
+                },
+                {
+                  "type": "link",
+                  "label": "Output",
+                  "href": "/docs/components/modeler/dmn/decision-table-output/"
+                },
+                {
+                  "type": "link",
+                  "label": "Rule",
+                  "href": "/docs/components/modeler/dmn/decision-table-rule/"
+                },
+                {
+                  "type": "link",
+                  "label": "Hit policy",
+                  "href": "/docs/components/modeler/dmn/decision-table-hit-policy/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "label": "Decision literal expression",
+              "href": "/docs/components/modeler/dmn/decision-literal-expression/"
+            },
+            {
+              "type": "link",
+              "label": "Data types",
+              "href": "/docs/components/modeler/dmn/dmn-data-types/"
+            }
+          ]
+        },
+        {
+          "FEEL expressions": [
+            {
+              "type": "link",
+              "label": "What is FEEL?",
+              "href": "/docs/components/modeler/feel/what-is-feel/"
+            },
+            {
+              "type": "link",
+              "label": "Data types",
+              "href": "/docs/components/modeler/feel/language-guide/feel-data-types/"
+            },
+            {
+              "type": "link",
+              "label": "Unary-tests",
+              "href": "/docs/components/modeler/feel/language-guide/feel-unary-tests/"
+            },
+            {
+              "Expressions": [
+                {
+                  "type": "link",
+                  "label": "Introduction",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-expressions-introduction/"
+                },
+                {
+                  "type": "link",
+                  "label": "Boolean expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-boolean-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "String expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-string-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Numeric expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-numeric-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "List expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-list-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Context expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-context-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Temporal expressions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-temporal-expressions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Variables",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-variables/"
+                },
+                {
+                  "type": "link",
+                  "label": "Control flow",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-control-flow/"
+                },
+                {
+                  "type": "link",
+                  "label": "Functions",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-functions/"
+                }
+              ]
+            },
+            {
+              "Built-in Functions": [
+                {
+                  "type": "link",
+                  "label": "Introduction",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/"
+                },
+                {
+                  "type": "link",
+                  "label": "Conversion functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion/"
+                },
+                {
+                  "type": "link",
+                  "label": "Boolean functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean/"
+                },
+                {
+                  "type": "link",
+                  "label": "String functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-string/"
+                },
+                {
+                  "type": "link",
+                  "label": "Numeric functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-numeric/"
+                },
+                {
+                  "type": "link",
+                  "label": "List functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-list/"
+                },
+                {
+                  "type": "link",
+                  "label": "Context functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-context/"
+                },
+                {
+                  "type": "link",
+                  "label": "Temporal functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-temporal/"
+                },
+                {
+                  "type": "link",
+                  "label": "Range functions",
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-range/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Camunda Forms": [
+            {
+              "type": "link",
+              "label": "What are Camunda Forms?",
+              "href": "/docs/components/modeler/forms/camunda-forms-reference/"
+            },
+            {
+              "Form Element Library": [
+                {
+                  "type": "link",
+                  "label": "Overview of Form Elements",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library/"
+                },
+                {
+                  "type": "link",
+                  "label": "Text view",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-text/"
+                },
+                {
+                  "type": "link",
+                  "label": "Textfield",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-textfield/"
+                },
+                {
+                  "type": "link",
+                  "label": "Text area",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-textarea/"
+                },
+                {
+                  "type": "link",
+                  "label": "Number",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-number/"
+                },
+                {
+                  "type": "link",
+                  "label": "Datetime",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-datetime/"
+                },
+                {
+                  "type": "link",
+                  "label": "Checkbox",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-checkbox/"
+                },
+                {
+                  "type": "link",
+                  "label": "Radio",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-radio/"
+                },
+                {
+                  "type": "link",
+                  "label": "Select",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-select/"
+                },
+                {
+                  "type": "link",
+                  "label": "Checklist",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-checklist/"
+                },
+                {
+                  "type": "link",
+                  "label": "Taglist",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-taglist/"
+                },
+                {
+                  "type": "link",
+                  "label": "Image view",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-image/"
+                },
+                {
+                  "type": "link",
+                  "label": "Button",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-button/"
+                }
+              ]
+            },
+            {
+              "Configuration": [
+                {
+                  "type": "link",
+                  "label": "Data binding",
+                  "href": "/docs/components/modeler/forms/configuration/forms-config-data-binding/"
+                },
+                {
+                  "type": "link",
+                  "label": "Options Source",
+                  "href": "/docs/components/modeler/forms/configuration/forms-config-options/"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Connectors": [
+        {
+          "type": "link",
+          "label": "Introduction",
+          "href": "/docs/components/connectors/introduction-to-connectors/"
+        },
+        {
+          "type": "link",
+          "label": "Use Connectors",
+          "href": "/docs/components/connectors/use-connectors/"
+        },
+        {
+          "Out-of-the-box Connectors": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/"
+            },
+            {
+              "type": "link",
+              "label": "Automation Anywhere Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/automation-anywhere/"
+            },
+            {
+              "type": "link",
+              "label": "Amazon SNS Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/aws-sns/"
+            },
+            {
+              "type": "link",
+              "label": "Amazon SQS Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/aws-sqs/"
+            },
+            {
+              "type": "link",
+              "label": "AWS Lambda Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/aws-lambda/"
+            },
+            {
+              "type": "link",
+              "label": "Camunda Operate Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/operate/"
+            },
+            {
+              "type": "link",
+              "label": "EasyPost Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/easy-post/"
+            },
+            {
+              "type": "link",
+              "label": "GitHub Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/github/"
+            },
+            {
+              "type": "link",
+              "label": "GitHub Webhook Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/github-webhook/"
+            },
+            {
+              "type": "link",
+              "label": "Google Drive Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/googledrive/"
+            },
+            {
+              "type": "link",
+              "label": "Google Maps Platform Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/google-maps-platform/"
+            },
+            {
+              "type": "link",
+              "label": "GraphQL Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/graphql/"
+            },
+            {
+              "type": "link",
+              "label": "HTTP Webhook Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/http-webhook/"
+            },
+            {
+              "type": "link",
+              "label": "Kafka Producer Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/kafka/"
+            },
+            {
+              "type": "link",
+              "label": "Microsoft Teams Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+            },
+            {
+              "type": "link",
+              "label": "OpenAI Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/openai/"
+            },
+            {
+              "type": "link",
+              "label": "Power Automate Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/power-automate/"
+            },
+            {
+              "type": "link",
+              "label": "RabbitMQ Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/rabbitmq/"
+            },
+            {
+              "type": "link",
+              "label": "REST Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/rest/"
+            },
+            {
+              "type": "link",
+              "label": "SendGrid Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/sendgrid/"
+            },
+            {
+              "type": "link",
+              "label": "Slack Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/slack/"
+            },
+            {
+              "type": "link",
+              "label": "UiPath Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/uipath/"
+            }
+          ]
+        },
+        {
+          "Custom Connectors": [
+            {
+              "type": "link",
+              "label": "Connector templates",
+              "href": "/docs/components/connectors/custom-built-connectors/connector-templates/"
+            },
+            {
+              "type": "link",
+              "label": "Connector SDK",
+              "href": "/docs/components/connectors/custom-built-connectors/connector-sdk/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Data handling",
+          "href": "/docs/components/modeler/data-handling/"
+        }
+      ]
+    },
+    {
+      "Zeebe": [
+        {
+          "type": "link",
+          "label": "Introduction",
+          "href": "/docs/components/zeebe/zeebe-overview/"
+        },
+        {
+          "Technical concepts": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/components/zeebe/technical-concepts/technical-concepts-overview/"
+            },
+            {
+              "type": "link",
+              "label": "Architecture",
+              "href": "/docs/components/zeebe/technical-concepts/architecture/"
+            },
+            {
+              "type": "link",
+              "label": "Clustering",
+              "href": "/docs/components/zeebe/technical-concepts/clustering/"
+            },
+            {
+              "type": "link",
+              "label": "Partitions",
+              "href": "/docs/components/zeebe/technical-concepts/partitions/"
+            },
+            {
+              "type": "link",
+              "label": "Internal processing",
+              "href": "/docs/components/zeebe/technical-concepts/internal-processing/"
+            },
+            {
+              "type": "link",
+              "label": "Process lifecycles",
+              "href": "/docs/components/zeebe/technical-concepts/process-lifecycles/"
+            },
+            {
+              "type": "link",
+              "label": "Protocols",
+              "href": "/docs/components/zeebe/technical-concepts/protocols/"
+            }
+          ]
+        },
+        {
+          "Open source community": [
+            {
+              "type": "link",
+              "label": "Community contributions",
+              "href": "/docs/components/zeebe/open-source/community-contributions/"
+            },
+            {
+              "type": "link",
+              "label": "Get help and get involved",
+              "href": "/docs/components/zeebe/open-source/get-help-get-involved/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Operate": [
+        {
+          "type": "link",
+          "label": "Introduction",
+          "href": "/docs/components/operate/operate-introduction/"
+        },
+        {
+          "User guide": [
+            {
+              "type": "link",
+              "label": "Getting familiar with Operate",
+              "href": "/docs/components/operate/userguide/basic-operate-navigation/"
+            },
+            {
+              "type": "link",
+              "label": "Variables and incidents",
+              "href": "/docs/components/operate/userguide/resolve-incidents-update-variables/"
+            },
+            {
+              "type": "link",
+              "label": "Selections and operations",
+              "href": "/docs/components/operate/userguide/selections-operations/"
+            },
+            {
+              "type": "link",
+              "label": "Delete finished instances",
+              "href": "/docs/components/operate/userguide/delete-finished-instances/"
+            },
+            {
+              "type": "link",
+              "label": "Giving feedback and asking questions",
+              "href": "/docs/components/operate/userguide/operate-feedback-and-questions/"
+            },
+            {
+              "type": "link",
+              "label": "Process instance modification",
+              "href": "/docs/components/operate/userguide/process-instance-modification/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Tasklist": [
+        {
+          "type": "link",
+          "label": "Introduction",
+          "href": "/docs/components/tasklist/introduction-to-tasklist/"
+        },
+        {
+          "User guide": [
+            {
+              "type": "link",
+              "label": "Overview and example use case",
+              "href": "/docs/components/tasklist/userguide/using-tasklist/"
+            },
+            {
+              "type": "link",
+              "label": "Updating Tasklist",
+              "href": "/docs/components/tasklist/userguide/updating-tasklist-cloud/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Optimize": [
+        "components/what-is-optimize",
+        {
+          "User guide": [
+            "components/userguide/collections-dashboards-reports",
+            "components/userguide/user-permissions",
+            "components/userguide/data-sources",
+            {
+              "Dashboards": [
+                "components/userguide/creating-dashboards",
+                "components/userguide/edit-mode",
+                "components/userguide/view-mode"
+              ]
+            },
+            {
+              "Dashboards maintained by Camunda": [
+                "components/userguide/process-dashboards",
+                "components/userguide/instant-preview-dashboards"
+              ]
+            },
+            "components/userguide/creating-reports",
+            "components/userguide/combined-process-reports",
+            {
+              "Process analysis": [
+                "components/userguide/process-analysis/process-analysis-overview",
+                "components/userguide/process-analysis/outlier-analysis",
+                "components/userguide/process-analysis/branch-analysis",
+                {
+                  "Report analysis": [
+                    "components/userguide/process-analysis/report-analysis/overview",
+                    {
+                      "Edit mode": [
+                        "components/userguide/process-analysis/report-analysis/edit-mode",
+                        "components/userguide/process-analysis/report-analysis/select-process-definitions",
+                        "components/userguide/process-analysis/report-analysis/define-reports",
+                        "components/userguide/process-analysis/report-analysis/measures",
+                        "components/userguide/process-analysis/report-analysis/compare-target-values",
+                        "components/userguide/process-analysis/report-analysis/process-instance-parts",
+                        "components/userguide/process-analysis/report-analysis/configure-reports"
+                      ]
+                    },
+                    "components/userguide/process-analysis/report-analysis/view-mode"
+                  ]
+                },
+                {
+                  "Filters": [
+                    "components/userguide/process-analysis/filters",
+                    "components/userguide/process-analysis/metadata-filters",
+                    "components/userguide/process-analysis/instance-state-filters",
+                    "components/userguide/process-analysis/flow-node-filters",
+                    "components/userguide/process-analysis/process-instance-filters",
+                    "components/userguide/process-analysis/variable-filters"
+                  ]
+                }
+              ]
+            },
+            {
+              "Decision analysis": [
+                "components/userguide/decision-analysis/decision-analysis-overview",
+                "components/userguide/decision-analysis/decision-report",
+                "components/userguide/decision-analysis/decision-filter"
+              ]
+            },
+            {
+              "Additional features": [
+                "components/userguide/additional-features/alerts",
+                "components/userguide/additional-features/event-based-processes",
+                "components/userguide/additional-features/export-import",
+                "components/userguide/additional-features/footer",
+                "components/userguide/additional-features/variable-labeling",
+                "components/userguide/additional-features/process-variants-comparison",
+                "components/userguide/additional-features/ml-dataset"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Best Practices": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/components/best-practices/best-practices-overview/"
+        },
+        {
+          "Project management": [
+            {
+              "type": "link",
+              "label": "Following the customer success path",
+              "href": "/docs/components/best-practices/management/following-the-customer-success-path/"
+            },
+            {
+              "type": "link",
+              "label": "Doing a proper POC",
+              "href": "/docs/components/best-practices/management/doing-a-proper-poc/"
+            }
+          ]
+        },
+        {
+          "Architecture": [
+            {
+              "type": "link",
+              "label": "Deciding about your stack",
+              "href": "/docs/components/best-practices/architecture/deciding-about-your-stack/"
+            },
+            {
+              "type": "link",
+              "label": "Sizing your environment",
+              "href": "/docs/components/best-practices/architecture/sizing-your-environment/"
+            },
+            {
+              "type": "link",
+              "label": "Understanding human task management",
+              "href": "/docs/components/best-practices/architecture/understanding-human-tasks-management/"
+            }
+          ]
+        },
+        {
+          "Development": [
+            {
+              "type": "link",
+              "label": "Connecting the workflow engine with your world",
+              "href": "/docs/components/best-practices/development/connecting-the-workflow-engine-with-your-world/"
+            },
+            {
+              "type": "link",
+              "label": "Service integration patterns with BPMN",
+              "href": "/docs/components/best-practices/development/service-integration-patterns/"
+            },
+            {
+              "type": "link",
+              "label": "Writing good workers",
+              "href": "/docs/components/best-practices/development/writing-good-workers/"
+            },
+            {
+              "type": "link",
+              "label": "Dealing with problems and exceptions",
+              "href": "/docs/components/best-practices/development/dealing-with-problems-and-exceptions/"
+            },
+            {
+              "type": "link",
+              "label": "Handling data in processes",
+              "href": "/docs/components/best-practices/development/handling-data-in-processes/"
+            },
+            {
+              "type": "link",
+              "label": "Routing events to processes",
+              "href": "/docs/components/best-practices/development/routing-events-to-processes/"
+            },
+            {
+              "type": "link",
+              "label": "Testing process definitions",
+              "href": "/docs/components/best-practices/development/testing-process-definitions/"
+            }
+          ]
+        },
+        {
+          "Modeling": [
+            {
+              "type": "link",
+              "label": "Creating readable process models",
+              "href": "/docs/components/best-practices/modeling/creating-readable-process-models/"
+            },
+            {
+              "type": "link",
+              "label": "Naming BPMN elements",
+              "href": "/docs/components/best-practices/modeling/naming-bpmn-elements/"
+            },
+            {
+              "type": "link",
+              "label": "Naming technically relevant IDs",
+              "href": "/docs/components/best-practices/modeling/naming-technically-relevant-ids/"
+            },
+            {
+              "type": "link",
+              "label": "Modeling beyond the happy path",
+              "href": "/docs/components/best-practices/modeling/modeling-beyond-the-happy-path/"
+            },
+            {
+              "type": "link",
+              "label": "Modeling with situation patterns",
+              "href": "/docs/components/best-practices/modeling/modeling-with-situation-patterns/"
+            },
+            {
+              "type": "link",
+              "label": "Building flexibility into BPMN models",
+              "href": "/docs/components/best-practices/modeling/building-flexibility-into-bpmn-models/"
+            },
+            {
+              "type": "link",
+              "label": "Choosing the DMN hit policy",
+              "href": "/docs/components/best-practices/modeling/choosing-the-dmn-hit-policy/"
+            }
+          ]
+        },
+        {
+          "Operations": [
+            {
+              "type": "link",
+              "label": "Versioning process definitions",
+              "href": "/docs/components/best-practices/operations/versioning-process-definitions/"
+            },
+            {
+              "type": "link",
+              "label": "Reporting about processes",
+              "href": "/docs/components/best-practices/operations/reporting-about-processes/"
+            }
+          ]
+        },
+        {
+          "Camunda 7 specific": [
+            {
+              "type": "link",
+              "label": "Deciding about your Camunda 7 stack",
+              "href": "/docs/components/best-practices/architecture/deciding-about-your-stack-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Sizing your Camunda 7 environment",
+              "href": "/docs/components/best-practices/architecture/sizing-your-environment-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Invoking services from a Camunda 7 process",
+              "href": "/docs/components/best-practices/development/invoking-services-from-the-process-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Understanding Camunda 7 transaction handling",
+              "href": "/docs/components/best-practices/development/understanding-transaction-handling-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Operating Camunda 7",
+              "href": "/docs/components/best-practices/operations/operating-camunda-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Performance tuning Camunda 7",
+              "href": "/docs/components/best-practices/operations/performance-tuning-camunda-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Securing Camunda 7",
+              "href": "/docs/components/best-practices/operations/securing-camunda-c7/"
+            },
+            {
+              "type": "link",
+              "label": "Extending human task management in Camunda 7",
+              "href": "/docs/components/best-practices/architecture/extending-human-task-management-c7/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "APIs & Tools": [
+    {
+      "type": "link",
+      "label": "Working with APIs & tools",
+      "href": "/docs/apis-tools/working-with-apis-tools/"
+    },
+    {
+      "APIs": [
+        {
+          "type": "link",
+          "label": "Public API",
+          "href": "/docs/apis-tools/public-api/"
+        },
+        {
+          "type": "link",
+          "label": "Zeebe API (gRPC)",
+          "href": "/docs/apis-tools/grpc/"
+        },
+        {
+          "Operate API (REST)": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/apis-tools/operate-api/overview/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/apis-tools/operate-api/tutorial/"
+            }
+          ]
+        },
+        {
+          "Tasklist API (GraphQL)": [
+            {
+              "type": "link",
+              "label": "Schema Documentation",
+              "href": "/docs/apis-tools/tasklist-api/"
+            },
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/apis-tools/tasklist-api/tasklist-api-overview/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/apis-tools/tasklist-api/tasklist-api-tutorial/"
+            },
+            {
+              "type": "link",
+              "label": "GraphQL to REST API migration",
+              "href": "/docs/apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
+            },
+            {
+              "Directives": [
+                {
+                  "type": "link",
+                  "label": "deprecated",
+                  "href": "/docs/apis-tools/tasklist-api/directives/deprecated/"
+                },
+                {
+                  "type": "link",
+                  "label": "include",
+                  "href": "/docs/apis-tools/tasklist-api/directives/include/"
+                },
+                {
+                  "type": "link",
+                  "label": "skip",
+                  "href": "/docs/apis-tools/tasklist-api/directives/skip/"
+                },
+                {
+                  "type": "link",
+                  "label": "specifiedBy",
+                  "href": "/docs/apis-tools/tasklist-api/directives/specified-by/"
+                }
+              ]
+            },
+            {
+              "Enums": [
+                {
+                  "type": "link",
+                  "label": "Sort",
+                  "href": "/docs/apis-tools/tasklist-api/enums/sort/"
+                },
+                {
+                  "type": "link",
+                  "label": "TaskSortFields",
+                  "href": "/docs/apis-tools/tasklist-api/enums/task-sort-fields/"
+                },
+                {
+                  "type": "link",
+                  "label": "TaskState",
+                  "href": "/docs/apis-tools/tasklist-api/enums/task-state/"
+                }
+              ]
+            },
+            {
+              "Inputs": [
+                {
+                  "type": "link",
+                  "label": "DateFilter",
+                  "href": "/docs/apis-tools/tasklist-api/inputs/date-filter-input/"
+                },
+                {
+                  "type": "link",
+                  "label": "TaskOrderBy",
+                  "href": "/docs/apis-tools/tasklist-api/inputs/task-order-by/"
+                },
+                {
+                  "type": "link",
+                  "label": "TaskQuery",
+                  "href": "/docs/apis-tools/tasklist-api/inputs/task-query/"
+                },
+                {
+                  "type": "link",
+                  "label": "VariableInput",
+                  "href": "/docs/apis-tools/tasklist-api/inputs/variable-input/"
+                }
+              ]
+            },
+            {
+              "Mutations": [
+                {
+                  "type": "link",
+                  "label": "claimTask",
+                  "href": "/docs/apis-tools/tasklist-api/mutations/claim-task/"
+                },
+                {
+                  "type": "link",
+                  "label": "completeTask",
+                  "href": "/docs/apis-tools/tasklist-api/mutations/complete-task/"
+                },
+                {
+                  "type": "link",
+                  "label": "deleteProcessInstance",
+                  "href": "/docs/apis-tools/tasklist-api/mutations/delete-process-instance/"
+                },
+                {
+                  "type": "link",
+                  "label": "unclaimTask",
+                  "href": "/docs/apis-tools/tasklist-api/mutations/unclaim-task/"
+                }
+              ]
+            },
+            {
+              "Objects": [
+                {
+                  "type": "link",
+                  "label": "Form",
+                  "href": "/docs/apis-tools/tasklist-api/objects/form/"
+                },
+                {
+                  "type": "link",
+                  "label": "Task",
+                  "href": "/docs/apis-tools/tasklist-api/objects/task/"
+                },
+                {
+                  "type": "link",
+                  "label": "User",
+                  "href": "/docs/apis-tools/tasklist-api/objects/user/"
+                },
+                {
+                  "type": "link",
+                  "label": "Variable",
+                  "href": "/docs/apis-tools/tasklist-api/objects/variable/"
+                }
+              ]
+            },
+            {
+              "Queries": [
+                {
+                  "type": "link",
+                  "label": "currentUser",
+                  "href": "/docs/apis-tools/tasklist-api/queries/current-user/"
+                },
+                {
+                  "type": "link",
+                  "label": "form",
+                  "href": "/docs/apis-tools/tasklist-api/queries/form/"
+                },
+                {
+                  "type": "link",
+                  "label": "task",
+                  "href": "/docs/apis-tools/tasklist-api/queries/task/"
+                },
+                {
+                  "type": "link",
+                  "label": "tasks",
+                  "href": "/docs/apis-tools/tasklist-api/queries/tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "variable",
+                  "href": "/docs/apis-tools/tasklist-api/queries/variable/"
+                },
+                {
+                  "type": "link",
+                  "label": "variables",
+                  "href": "/docs/apis-tools/tasklist-api/queries/variables/"
+                }
+              ]
+            },
+            {
+              "Scalars": [
+                {
+                  "type": "link",
+                  "label": "DateTime",
+                  "href": "/docs/apis-tools/tasklist-api/scalars/datetime/"
+                },
+                {
+                  "type": "link",
+                  "label": "Boolean",
+                  "href": "/docs/apis-tools/tasklist-api/scalars/boolean/"
+                },
+                {
+                  "type": "link",
+                  "label": "ID",
+                  "href": "/docs/apis-tools/tasklist-api/scalars/id/"
+                },
+                {
+                  "type": "link",
+                  "label": "Int",
+                  "href": "/docs/apis-tools/tasklist-api/scalars/int/"
+                },
+                {
+                  "type": "link",
+                  "label": "String",
+                  "href": "/docs/apis-tools/tasklist-api/scalars/string/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Tasklist API (REST)": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/"
+            },
+            {
+              "type": "link",
+              "label": "Authentication",
+              "href": "/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
+            },
+            {
+              "Controllers": [
+                {
+                  "type": "link",
+                  "label": "Form API",
+                  "href": "/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-form-controller/"
+                },
+                {
+                  "type": "link",
+                  "label": "Task API",
+                  "href": "/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller/"
+                },
+                {
+                  "type": "link",
+                  "label": "Variables API",
+                  "href": "/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-variables-controller/"
+                }
+              ]
+            },
+            {
+              "Schemas": [
+                {
+                  "Enums": [
+                    {
+                      "type": "link",
+                      "label": "Sort",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/enums/sort/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "TaskSortFields",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/enums/task-sort-fields/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "TaskState",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/enums/task-state/"
+                    }
+                  ]
+                },
+                {
+                  "Models": [
+                    {
+                      "type": "link",
+                      "label": "DateFilter",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/models/date-filter-input/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "TaskOrderBy",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/models/task-order-by/"
+                    }
+                  ]
+                },
+                {
+                  "Requests": [
+                    {
+                      "type": "link",
+                      "label": "TaskAssignRequest",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/task-assign-request/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "TaskCompleteRequest",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/task-complete-request/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "TaskSearchRequest",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/task-search-request/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "VariableInput",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/variable-input/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "VariablesSearchRequest",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/variables-search-request/"
+                    }
+                  ]
+                },
+                {
+                  "Responses": [
+                    {
+                      "type": "link",
+                      "label": "ErrorResponse",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/error-response/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "FormResponse",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/form-response/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "TaskResponse",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/task-response/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "TaskSearchResponse",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/task-search-response/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "VariableResponse",
+                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/variable-response/"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Console API clients (REST)",
+          "href": "/docs/apis-tools/console-api-reference/"
+        },
+        {
+          "type": "link",
+          "label": "Web Modeler API (REST, beta)",
+          "href": "/docs/apis-tools/web-modeler-api/"
+        },
+        {
+          "Optimize API (REST)": [
+            "apis-tools/optimize-api/optimize-api-authorization",
+            {
+              "Configuration": [
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing"
+              ]
+            },
+            {
+              "Dashboard": [
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
+              ]
+            },
+            {
+              "Report": [
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export"
+              ]
+            },
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling"
+          ]
+        }
+      ]
+    },
+    {
+      "Clients": [
+        {
+          "Java client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-tools/java-client/"
+            },
+            {
+              "type": "link",
+              "label": "Job worker",
+              "href": "/docs/apis-tools/java-client/job-worker/"
+            },
+            {
+              "type": "link",
+              "label": "Logging",
+              "href": "/docs/apis-tools/java-client/logging/"
+            },
+            {
+              "type": "link",
+              "label": "Zeebe Process Test",
+              "href": "/docs/apis-tools/java-client/zeebe-process-test/"
+            },
+            {
+              "Examples": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/apis-tools/java-client-examples/"
+                },
+                {
+                  "type": "link",
+                  "label": "Deploy a process",
+                  "href": "/docs/apis-tools/java-client-examples/process-deploy/"
+                },
+                {
+                  "type": "link",
+                  "label": "Create a process instance",
+                  "href": "/docs/apis-tools/java-client-examples/process-instance-create/"
+                },
+                {
+                  "type": "link",
+                  "label": "Create non-blocking process instances",
+                  "href": "/docs/apis-tools/java-client-examples/process-instance-create-nonblocking/"
+                },
+                {
+                  "type": "link",
+                  "label": "Create a process instance with results",
+                  "href": "/docs/apis-tools/java-client-examples/process-instance-create-with-result/"
+                },
+                {
+                  "type": "link",
+                  "label": "Evaluate a decision",
+                  "href": "/docs/apis-tools/java-client-examples/decision-evaluate/"
+                },
+                {
+                  "type": "link",
+                  "label": "Open a job worker",
+                  "href": "/docs/apis-tools/java-client-examples/job-worker-open/"
+                },
+                {
+                  "type": "link",
+                  "label": "Handle variables as POJO",
+                  "href": "/docs/apis-tools/java-client-examples/data-pojo/"
+                },
+                {
+                  "type": "link",
+                  "label": "Request cluster topology",
+                  "href": "/docs/apis-tools/java-client-examples/cluster-topology-request/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Go client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-tools/go-client/"
+            },
+            {
+              "type": "link",
+              "label": "Getting started with the Go client",
+              "href": "/docs/apis-tools/go-client/go-get-started/"
+            }
+          ]
+        },
+        {
+          "CLI client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-tools/cli-client/"
+            },
+            {
+              "type": "link",
+              "label": "Getting started with the CLI client",
+              "href": "/docs/apis-tools/cli-client/cli-get-started/"
+            }
+          ]
+        },
+        {
+          "Community tools": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/apis-tools/community-clients/"
+            },
+            {
+              "type": "link",
+              "label": "C#",
+              "href": "/docs/apis-tools/community-clients/c-sharp/"
+            },
+            {
+              "type": "link",
+              "label": "JavaScript/NodeJS",
+              "href": "/docs/apis-tools/community-clients/javascript/"
+            },
+            {
+              "type": "link",
+              "label": "Micronaut",
+              "href": "/docs/apis-tools/community-clients/micronaut/"
+            },
+            {
+              "type": "link",
+              "label": "Python",
+              "href": "/docs/apis-tools/community-clients/python/"
+            },
+            {
+              "type": "link",
+              "label": "Ruby",
+              "href": "/docs/apis-tools/community-clients/ruby/"
+            },
+            {
+              "type": "link",
+              "label": "Rust",
+              "href": "/docs/apis-tools/community-clients/rust/"
+            },
+            {
+              "type": "link",
+              "label": "Spring",
+              "href": "/docs/apis-tools/community-clients/spring/"
+            },
+            {
+              "type": "link",
+              "label": "Quarkus",
+              "href": "/docs/apis-tools/community-clients/quarkus/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Build your own client",
+          "href": "/docs/apis-tools/build-your-own-client/"
+        }
+      ]
+    }
+  ],
+  "Self-Managed": [
+    {
+      "type": "link",
+      "label": "Camunda Platform 8 Self-Managed",
+      "href": "/docs/self-managed/about-self-managed/"
+    },
+    {
+      "Architecture": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/self-managed/platform-architecture/overview/"
+        }
+      ]
+    },
+    {
+      "Installation": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/self-managed/platform-deployment/overview/"
+        },
+        {
+          "Helm/Kubernetes": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/platform-deployment/helm-kubernetes/overview/"
+            },
+            {
+              "type": "link",
+              "label": "Deploy",
+              "href": "/docs/self-managed/platform-deployment/helm-kubernetes/deploy/"
+            },
+            {
+              "type": "link",
+              "label": "Upgrade",
+              "href": "/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/"
+            },
+            {
+              "Platforms": [
+                {
+                  "type": "link",
+                  "label": "Amazon EKS",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Microsoft AKS",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
+                },
+                {
+                  "type": "link",
+                  "label": "Google GKE",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/"
+                },
+                {
+                  "type": "link",
+                  "label": "Red Hat OpenShift",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/"
+                }
+              ]
+            },
+            {
+              "Guides": [
+                {
+                  "type": "link",
+                  "label": "Local Kubernetes Cluster",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
+                },
+                {
+                  "type": "link",
+                  "label": "Accessing components without Ingress",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
+                },
+                {
+                  "type": "link",
+                  "label": "Combined and separated Ingress setup",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
+                },
+                {
+                  "type": "link",
+                  "label": "Using Existing Keycloak",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
+                },
+                {
+                  "type": "link",
+                  "label": "Installing in an air-gapped environment",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "label": "Troubleshooting",
+              "href": "/docs/self-managed/platform-deployment/troubleshooting/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Docker",
+          "href": "/docs/self-managed/platform-deployment/docker/"
+        },
+        {
+          "type": "link",
+          "label": "Manual",
+          "href": "/docs/self-managed/platform-deployment/manual/"
+        }
+      ]
+    },
+    {
+      "Concepts": [
+        {
+          "Access control": [
+            {
+              "type": "link",
+              "label": "Applications",
+              "href": "/docs/self-managed/concepts/access-control/applications/"
+            },
+            {
+              "type": "link",
+              "label": "APIs",
+              "href": "/docs/self-managed/concepts/access-control/apis/"
+            },
+            {
+              "type": "link",
+              "label": "Groups",
+              "href": "/docs/self-managed/concepts/access-control/groups/"
+            },
+            {
+              "type": "link",
+              "label": "Permissions",
+              "href": "/docs/self-managed/concepts/access-control/permissions/"
+            },
+            {
+              "type": "link",
+              "label": "Resource authorizations",
+              "href": "/docs/self-managed/concepts/access-control/resource-authorizations/"
+            },
+            {
+              "type": "link",
+              "label": "Roles",
+              "href": "/docs/self-managed/concepts/access-control/roles/"
+            },
+            {
+              "type": "link",
+              "label": "Users",
+              "href": "/docs/self-managed/concepts/access-control/users/"
+            }
+          ]
+        },
+        {
+          "Authentication": [
+            {
+              "type": "link",
+              "label": "Machine-to-machine (M2M) tokens",
+              "href": "/docs/self-managed/concepts/authentication/m2m-tokens/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Exporters",
+          "href": "/docs/self-managed/concepts/exporters/"
+        }
+      ]
+    },
+    {
+      "Zeebe": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/self-managed/zeebe-deployment/zeebe-installation/"
+        },
+        {
+          "Configuration": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/"
+            },
+            {
+              "type": "link",
+              "label": "Logging",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/logging/"
+            },
+            {
+              "type": "link",
+              "label": "Gateway health probes",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/gateway-health-probes/"
+            },
+            {
+              "type": "link",
+              "label": "Environment variables",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/environment-variables/"
+            },
+            {
+              "type": "link",
+              "label": "Fixed partitioning",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/fixed-partitioning/"
+            },
+            {
+              "type": "link",
+              "label": "Priority election",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/priority-election/"
+            },
+            {
+              "type": "link",
+              "label": "Broker configuration",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/broker-config/"
+            },
+            {
+              "type": "link",
+              "label": "Gateway configuration",
+              "href": "/docs/self-managed/zeebe-deployment/configuration/gateway-config/"
+            }
+          ]
+        },
+        {
+          "Security": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/zeebe-deployment/security/"
+            },
+            {
+              "type": "link",
+              "label": "Secure client communication",
+              "href": "/docs/self-managed/zeebe-deployment/security/secure-client-communication/"
+            },
+            {
+              "type": "link",
+              "label": "Client authorization",
+              "href": "/docs/self-managed/zeebe-deployment/security/client-authorization/"
+            },
+            {
+              "type": "link",
+              "label": "Secure cluster communication",
+              "href": "/docs/self-managed/zeebe-deployment/security/secure-cluster-communication/"
+            }
+          ]
+        },
+        {
+          "Operation": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/zeebe-deployment/operations/zeebe-in-production/"
+            },
+            {
+              "type": "link",
+              "label": "Resource planning",
+              "href": "/docs/self-managed/zeebe-deployment/operations/resource-planning/"
+            },
+            {
+              "type": "link",
+              "label": "Network ports",
+              "href": "/docs/self-managed/zeebe-deployment/operations/network-ports/"
+            },
+            {
+              "type": "link",
+              "label": "Setting up a Zeebe cluster",
+              "href": "/docs/self-managed/zeebe-deployment/operations/setting-up-a-cluster/"
+            },
+            {
+              "type": "link",
+              "label": "Metrics",
+              "href": "/docs/self-managed/zeebe-deployment/operations/metrics/"
+            },
+            {
+              "type": "link",
+              "label": "Health status",
+              "href": "/docs/self-managed/zeebe-deployment/operations/health/"
+            },
+            {
+              "type": "link",
+              "label": "Backpressure",
+              "href": "/docs/self-managed/zeebe-deployment/operations/backpressure/"
+            },
+            {
+              "type": "link",
+              "label": "Disk space",
+              "href": "/docs/self-managed/zeebe-deployment/operations/disk-space/"
+            },
+            {
+              "type": "link",
+              "label": "Update Zeebe",
+              "href": "/docs/self-managed/zeebe-deployment/operations/update-zeebe/"
+            },
+            {
+              "type": "link",
+              "label": "Rebalancing",
+              "href": "/docs/self-managed/zeebe-deployment/operations/rebalancing/"
+            },
+            {
+              "type": "link",
+              "label": "Management API",
+              "href": "/docs/self-managed/zeebe-deployment/operations/management-api/"
+            },
+            {
+              "type": "link",
+              "label": "Backups",
+              "href": "/docs/self-managed/zeebe-deployment/operations/backups/"
+            }
+          ]
+        },
+        {
+          "Exporters": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/zeebe-deployment/exporters/"
+            },
+            {
+              "type": "link",
+              "label": "Elasticsearch",
+              "href": "/docs/self-managed/zeebe-deployment/exporters/elasticsearch-exporter/"
+            },
+            {
+              "type": "link",
+              "label": "OpenSearch",
+              "href": "/docs/self-managed/zeebe-deployment/exporters/opensearch-exporter/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Operate": [
+        {
+          "type": "link",
+          "label": "Installation",
+          "href": "/docs/self-managed/operate-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/operate-deployment/operate-configuration/"
+        },
+        {
+          "type": "link",
+          "label": "Data retention",
+          "href": "/docs/self-managed/operate-deployment/data-retention/"
+        },
+        {
+          "type": "link",
+          "label": "Schema and migration",
+          "href": "/docs/self-managed/operate-deployment/schema-and-migration/"
+        },
+        {
+          "type": "link",
+          "label": "Importer and archiver",
+          "href": "/docs/self-managed/operate-deployment/importer-and-archiver/"
+        },
+        {
+          "type": "link",
+          "label": "Authentication and authorization",
+          "href": "/docs/self-managed/operate-deployment/operate-authentication/"
+        },
+        {
+          "type": "link",
+          "label": "Usage metrics",
+          "href": "/docs/self-managed/operate-deployment/usage-metrics/"
+        }
+      ]
+    },
+    {
+      "Tasklist": [
+        {
+          "type": "link",
+          "label": "Installation",
+          "href": "/docs/self-managed/tasklist-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/tasklist-deployment/tasklist-configuration/"
+        },
+        {
+          "type": "link",
+          "label": "Authentication",
+          "href": "/docs/self-managed/tasklist-deployment/tasklist-authentication/"
+        },
+        {
+          "type": "link",
+          "label": "Usage metrics",
+          "href": "/docs/self-managed/tasklist-deployment/usage-metrics/"
+        }
+      ]
+    },
+    {
+      "Optimize": [
+        "self-managed/optimize-deployment/install-and-start",
+        "self-managed/optimize-deployment/version-policy",
+        {
+          "Configuration": [
+            "self-managed/optimize-deployment/configuration/getting-started",
+            {
+              "System configuration": [
+                "self-managed/optimize-deployment/configuration/system-configuration",
+                "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
+                "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
+                "self-managed/optimize-deployment/configuration/event-based-process-configuration"
+              ]
+            },
+            "self-managed/optimize-deployment/configuration/logging",
+            "self-managed/optimize-deployment/configuration/optimize-license",
+            "self-managed/optimize-deployment/configuration/security-instructions",
+            "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
+            "self-managed/optimize-deployment/configuration/history-cleanup",
+            "self-managed/optimize-deployment/configuration/localization",
+            "self-managed/optimize-deployment/configuration/object-variables",
+            "self-managed/optimize-deployment/configuration/clustering",
+            "self-managed/optimize-deployment/configuration/webhooks",
+            "self-managed/optimize-deployment/configuration/authorization-management",
+            "self-managed/optimize-deployment/configuration/user-management",
+            "self-managed/optimize-deployment/configuration/multi-tenancy",
+            "self-managed/optimize-deployment/configuration/multiple-engines",
+            "self-managed/optimize-deployment/configuration/setup-event-based-processes",
+            "self-managed/optimize-deployment/configuration/telemetry",
+            "self-managed/optimize-deployment/configuration/common-problems"
+          ]
+        },
+        {
+          "Plugins": [
+            "self-managed/optimize-deployment/plugins/plugin-system",
+            "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
+            "self-managed/optimize-deployment/plugins/decision-import-plugin",
+            "self-managed/optimize-deployment/plugins/elasticsearch-header",
+            "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
+            "self-managed/optimize-deployment/plugins/single-sign-on",
+            "self-managed/optimize-deployment/plugins/variable-import-plugin"
+          ]
+        },
+        "self-managed/optimize-deployment/reimport",
+        {
+          "Migration & update": [
+            "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
+            "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
+            "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
+            "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
+            "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
+            "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
+            "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
+            "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
+            "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
+            "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
+            "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
+            "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
+            "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
+            "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
+            "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
+            "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
+            "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
+            "self-managed/optimize-deployment/migration-update/2.1-to-2.2"
+          ]
+        },
+        {
+          "Advanced features": [
+            "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
+            "self-managed/optimize-deployment/advanced-features/import-guide"
+          ]
+        }
+      ]
+    },
+    {
+      "Identity": [
+        {
+          "type": "link",
+          "label": "What is Identity?",
+          "href": "/docs/self-managed/identity/what-is-identity/"
+        },
+        {
+          "type": "link",
+          "label": "Installation and first steps",
+          "href": "/docs/self-managed/identity/getting-started/install-identity/"
+        },
+        {
+          "User guide": [
+            {
+              "Groups": [
+                {
+                  "type": "link",
+                  "label": "Creating a group",
+                  "href": "/docs/self-managed/identity/user-guide/groups/creating-a-group/"
+                },
+                {
+                  "type": "link",
+                  "label": "Assigning users to a group",
+                  "href": "/docs/self-managed/identity/user-guide/groups/assigning-users-to-a-group/"
+                },
+                {
+                  "type": "link",
+                  "label": "Assigning roles to a group",
+                  "href": "/docs/self-managed/identity/user-guide/groups/assigning-roles-to-a-group/"
+                }
+              ]
+            },
+            {
+              "Authorizations": [
+                {
+                  "type": "link",
+                  "label": "Managing resource authorizations",
+                  "href": "/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "label": "Adding an application",
+              "href": "/docs/self-managed/identity/user-guide/adding-an-application/"
+            },
+            {
+              "type": "link",
+              "label": "Adding an API",
+              "href": "/docs/self-managed/identity/user-guide/adding-an-api/"
+            },
+            {
+              "type": "link",
+              "label": "Adding a permission",
+              "href": "/docs/self-managed/identity/user-guide/adding-a-permission/"
+            },
+            {
+              "type": "link",
+              "label": "Assigning a permission an application",
+              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/"
+            },
+            {
+              "type": "link",
+              "label": "Adding a role",
+              "href": "/docs/self-managed/identity/user-guide/adding-a-role/"
+            },
+            {
+              "type": "link",
+              "label": "Assigning a permission a role",
+              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-a-role/"
+            },
+            {
+              "type": "link",
+              "label": "Assigning a role to a user",
+              "href": "/docs/self-managed/identity/user-guide/assigning-a-role-to-a-user/"
+            },
+            {
+              "type": "link",
+              "label": "Configuring an external identity provider",
+              "href": "/docs/self-managed/identity/user-guide/configure-external-identity-provider/"
+            },
+            {
+              "type": "link",
+              "label": "Configuring logging",
+              "href": "/docs/self-managed/identity/user-guide/configure-logging/"
+            },
+            {
+              "type": "link",
+              "label": "Making Identity production ready",
+              "href": "/docs/self-managed/identity/user-guide/making-identity-production-ready/"
+            },
+            {
+              "type": "link",
+              "label": "Generating machine-to-machine (M2M) tokens",
+              "href": "/docs/self-managed/identity/user-guide/generating-m2m-tokens/"
+            },
+            {
+              "type": "link",
+              "label": "Managing user access",
+              "href": "/docs/self-managed/identity/user-guide/managing-user-access/"
+            },
+            {
+              "type": "link",
+              "label": "Connect to an existing Keycloak instance",
+              "href": "/docs/self-managed/identity/user-guide/connect-to-an-existing-keycloak/"
+            }
+          ]
+        },
+        {
+          "Deployment": [
+            {
+              "type": "link",
+              "label": "Configuration variables",
+              "href": "/docs/self-managed/identity/deployment/configuration-variables/"
+            },
+            {
+              "type": "link",
+              "label": "Application monitoring",
+              "href": "/docs/self-managed/identity/deployment/application-monitoring/"
+            },
+            {
+              "type": "link",
+              "label": "Starting configuration",
+              "href": "/docs/self-managed/identity/deployment/starting-configuration-for-identity/"
+            }
+          ]
+        },
+        {
+          "Troubleshooting": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/identity/troubleshooting/troubleshoot-identity/"
+            },
+            {
+              "type": "link",
+              "label": "Common problems",
+              "href": "/docs/self-managed/identity/troubleshooting/common-problems/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Zeebe Gateway": [
+        {
+          "type": "link",
+          "label": "Overview",
+          "href": "/docs/self-managed/zeebe-gateway-deployment/zeebe-gateway/"
+        }
+      ]
+    },
+    {
+      "Modeler": [
+        {
+          "Web Modeler": [
+            {
+              "type": "link",
+              "label": "Installation",
+              "href": "/docs/self-managed/modeler/web-modeler/installation/"
+            },
+            {
+              "type": "link",
+              "label": "Configuration",
+              "href": "/docs/self-managed/modeler/web-modeler/configuration/"
+            },
+            {
+              "type": "link",
+              "label": "API access",
+              "href": "/docs/self-managed/modeler/web-modeler/api/"
+            }
+          ]
+        },
+        {
+          "Desktop Modeler": [
+            {
+              "type": "link",
+              "label": "Deploy diagram",
+              "href": "/docs/self-managed/modeler/desktop-modeler/deploy-to-self-managed/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Backup and restore": [
+        {
+          "type": "link",
+          "label": "Backup and restore",
+          "href": "/docs/self-managed/backup-restore/backup-and-restore/"
+        },
+        {
+          "type": "link",
+          "label": "Backup and restore Optimize data",
+          "href": "/docs/self-managed/backup-restore/optimize-backup/"
+        },
+        {
+          "type": "link",
+          "label": "Backup and restore Operate and Tasklist data",
+          "href": "/docs/self-managed/backup-restore/operate-tasklist-backup/"
+        },
+        {
+          "type": "link",
+          "label": "Backup and restore Zeebe data",
+          "href": "/docs/self-managed/backup-restore/zeebe-backup-and-restore/"
+        }
+      ]
+    },
+    {
+      "Troubleshooting": [
+        {
+          "type": "link",
+          "label": "Log levels",
+          "href": "/docs/self-managed/troubleshooting/log-levels/"
+        }
+      ]
+    }
+  ]
+}
