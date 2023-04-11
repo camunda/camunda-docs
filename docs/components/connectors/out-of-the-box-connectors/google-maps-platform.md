@@ -1,7 +1,7 @@
 ---
 id: google-maps-platform
-title: Google Maps Platform
-sidebar_label: GitHub Webhook
+title: Google Maps Platform Connector
+sidebar_label: Google Maps Platform Connector
 description: Learn how to validate addresses, retrieve postal addresses, and calculate distances with Google Maps Platform Connector.
 ---
 

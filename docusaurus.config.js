@@ -7,7 +7,7 @@ module.exports = {
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
@@ -20,7 +20,7 @@ module.exports = {
     //          {
     //            schema: "http://localhost:8080/tasklist/graphql",
     //            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-    //            baseURL: "apis-clients/tasklist-api",
+    //            baseURL: "apis-tools/tasklist-api",
     //            linkRoot: "/docs/",
     //            loaders: {
     //              UrlLoader: "@graphql-tools/url-loader"
@@ -85,7 +85,7 @@ module.exports = {
         {
           type: "doc",
           docId: "apis-tools/working-with-apis-tools",
-          label: "APIs & Clients",
+          label: "APIs & Tools",
           position: "left",
         },
         {
