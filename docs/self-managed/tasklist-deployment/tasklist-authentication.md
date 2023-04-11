@@ -83,7 +83,7 @@ For more information, visit the [Identity documentation](/self-managed/concepts/
 
 ### Use Identity JWT token to access Tasklist API
 
-Tasklist provides a [GraphQL API](/apis-clients/tasklist-api/tasklist-api-overview.md) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+Tasklist provides a [GraphQL API](/apis-tools/tasklist-api/tasklist-api-overview.md) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 :::note
 Be aware a JWT token is intended to be used for M2M communication and is therefore issued for the relevant application, not for the user.
@@ -125,3 +125,7 @@ Take the `access_token` value from the response object and store it as your toke
 ```shell
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){id name}}"}' http://localhost:8080/graphql
 ```
+
+## Zeebe client credentials
+
+If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.
