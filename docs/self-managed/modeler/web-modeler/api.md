@@ -17,7 +17,7 @@ While in beta, the API may introduce breaking changes without prior notice.
 We encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
 :::
 
-Web Modeler provides a [REST API](../../../../apis-clients/web-modeler-api/) at `/api/*`. Clients can access this API by passing a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+Web Modeler provides a [REST API](../../../../apis-tools/web-modeler-api/) at `/api/*`. Clients can access this API by passing a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 ## OpenAPI documentation
 
