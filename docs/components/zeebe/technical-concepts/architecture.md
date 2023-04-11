@@ -67,4 +67,4 @@ The exporter system provides an event stream of state changes within Zeebe. This
 - Analysis of historic process data for auditing, business intelligence, etc.
 - Tracking [incidents](/components/concepts/incidents.md) created by Zeebe
 
-The exporter includes an API you can use to stream data into a storage system of your choice. Zeebe includes an out-of-the-box [Elasticsearch exporter](https://github.com/camunda-cloud/zeebe/tree/master/exporters/elasticsearch-exporter), and other [community-contributed exporters](https://awesome.zeebe.io) are also available.
+The exporter includes an API you can use to stream data into a storage system of your choice. Zeebe includes an out-of-the-box [Elasticsearch exporter](https://github.com/camunda-cloud/zeebe/tree/master/exporters/elasticsearch-exporter), and other [community-contributed exporters](https://github.com/camunda-community-hub/awesome-camunda-platform-8) are also available.
