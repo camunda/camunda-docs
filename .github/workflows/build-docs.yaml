@@ -49,7 +49,9 @@ jobs:
         uses: lycheeverse/lychee-action@v1.6.1
         with:
           args: "sitemap.prod.txt"
+          fail: true
       - name: Validate product links
         uses: lycheeverse/lychee-action@v1.6.1
         with:
           args: "product-links.prod.txt"
+          fail: true
