@@ -8,7 +8,7 @@ description: "Important announcements including deprecation & removal notices"
 
 - It is recommended to follow a sequential update path when updating to version 8.2. For example, if running on version 8.0, first update to 8.1, then update to 8.2.
 - Migration of data during the version 8.2 update could take longer than previous versions, especially for datasets containing a large amount of incidents data.
-- Operate, Tasklist, and Zeebe now use Spring Boot version 3.0. Therefore, [URLs with a trailing slash will fail with an HTTP status 404](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide#spring-mvc-and-webflux-url-matching-changes). For Zeebe, this only applies to the Actuator endpoints. Refer to the [8.2.0 update guide](../guides/update-guide/810-to-820.md#spring-boot-30---url-matching-changes) for details.
+- Operate now uses Spring Boot version 3.0. Therefore, [URLs with a trailing slash will fail with an HTTP status 404](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide#spring-mvc-and-webflux-url-matching-changes).
 - To enable the new **Start Process from Tasklist** feature in Tasklist, additional configuration is needed. Details can be found [here](/docs/next/guides/update-guide/810-to-820/#tasklist).
 
 ## Deprecated in 8.0
