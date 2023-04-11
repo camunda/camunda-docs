@@ -125,7 +125,7 @@ function Home() {
                 Get Started
               </Link>
             </div>
-            <a href="/steveeee">steve was here</a>
+            <a href="https://docs.camunda.io/baasdfadsfadsf">steve was here</a>
             <div className={clsx("col col--2", styles.buttons)}>
               <Link
                 className={clsx(

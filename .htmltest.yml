@@ -1,3 +1,10 @@
+CacheExpires: 1m
 CheckAnchors: true
 CheckDoctype: false
-CacheExpires: 1m
+# This refers to actual <link> elements vvvv
+CheckLinks: false
+CheckMeta: false
+CheckGeneric: false
+CheckMailto: false
+CheckTel: false
+CheckMetaRefresh: false
