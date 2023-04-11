@@ -8,6 +8,12 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+###### 8.2 release redirects ######
+RewriteRule ^docs/self-managed/web-modeler/installation/(.*)$ /docs/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
+RewriteRule ^docs/self-managed/web-modeler/configuration/(.*)$ /docs/self-managed/modeler/web-modeler/configuration/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/operate-api/$ /docs/apis-tools/operate-api/overview/ [R=301,L]
+RewriteRule ^optimize/components/userguide/processes/ /optimize/components/userguide/process-dashboards [R=301,L]
+
 # apis/clients to apis/tools change
 RewriteRule ^docs/apis-clients/working-with-apis-clients/?$ /docs/apis-tools/working-with-apis-tools/ [R=301,L]
 RewriteRule ^docs/apis-clients(.*)$ /docs/apis-tools$1 [R=301,L]
@@ -22,13 +28,12 @@ RewriteRule ^docs/1.2/apis-clients(.*)$ /docs/1.2/apis-tools$1 [R=301,L]
 # Identity Authorizations
 RewriteRule ^docs/next/self-managed/identity/user-guide/groups/creating-authorizations-for-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/ [R=301,L]
 
-RewriteRule ^docs/next/apis-clients/operate-api/$ /docs/next/apis-clients/operate-api/overview/ [R=301,L]
-
 # Consolidated redundant element-template pages - v8.0, current, and vNext.
 RewriteRule ^docs(/(8.0|next))?/components/modeler/desktop-modeler/element-templates/?$ /docs$1/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 
-# Added Self-Managed Modeler redirect
+###### Prior to 8.2 release
 RewriteRule ^docs/next/self-managed/web-modeler/installation/(.*)$ /docs/next/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
+RewriteRule ^docs/next/apis-clients/operate-api/$ /docs/next/apis-clients/operate-api/overview/ [R=301,L]
 
 # For a short time, we had a change that renamed the page, but not the folder. This next rule covers that.
 RewriteRule ^docs/next/apis-clients/working-with-apis-tools/?$ /docs/next/apis-tools/working-with-apis-tools/ [R=301,L]
