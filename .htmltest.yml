@@ -8,3 +8,4 @@ CheckGeneric: false
 CheckMailto: false
 CheckTel: false
 CheckMetaRefresh: false
+LogLevel: 0
