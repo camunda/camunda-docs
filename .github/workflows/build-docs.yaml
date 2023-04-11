@@ -37,7 +37,7 @@ jobs:
         run: |
           docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnami/apache:2.4.54
           echo "container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' webserver)" >> $GITHUB_ENV
-      - name: Download URLs from sitemap from production
+      - name: Download sitemap from production
         run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > sitemap.prod.txt
       - name: Prepare product links
         run: grep 'https://docs.camunda.io' product-links.txt | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > product-links.prod.txt
