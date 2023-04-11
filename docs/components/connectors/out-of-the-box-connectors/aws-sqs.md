@@ -23,10 +23,10 @@ To use the **Amazon SQS Connector** in your process, either change the type of e
 To make your Amazon SQS Connector for sending messages executable, take the following steps:
 
 1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `secrets.MY_AWS_ACCESS_KEY`. The value can be plain text, but this is not recommended due to security concerns.
-2. In the **Queue Properties** section, set the URL of your SQS queue as well as its region and its type.
+2. In the **Queue Properties** section, set the URL of your SQS queue, its region, and its type.
 3. In the **Input message data** section, fill out the field **Message body** with the data you would like to submit to the queue. The field requires FEEL input.
 4. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. See the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
-5. (FIFO only) In case you are using a queue of type **FIFO** a **Message Group ID** has to be [provided](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html). An optional **Message Deduplication ID** can be provided as well depending on how you [configured](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html) the message deduplication of the queue.
+5. (FIFO only) If you are using a queue of type **FIFO**, a **Message Group ID** must be [provided](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html). An optional **Message Deduplication ID** can be provided as well, depending on how you [configured](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html) the message deduplication of the queue.
 
 ## Amazon SQS Connector response
 
