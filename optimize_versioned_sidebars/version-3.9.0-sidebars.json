@@ -1317,7 +1317,7 @@
   "APIs & Tools": [
     {
       "type": "link",
-      "label": "Working with APIs & Tools",
+      "label": "Working with APIs & tools",
       "href": "/docs/8.1/apis-tools/working-with-apis-tools/"
     },
     {
@@ -1339,6 +1339,11 @@
         },
         {
           "Tasklist API (GraphQL)": [
+            {
+              "type": "link",
+              "label": "Schema Documentation",
+              "href": "/docs/apis-tools/tasklist-api/"
+            },
             {
               "type": "link",
               "label": "Overview",
@@ -1686,6 +1691,11 @@
               "type": "link",
               "label": "Spring",
               "href": "/docs/8.1/apis-tools/community-clients/spring/"
+            },
+            {
+              "type": "link",
+              "label": "Quarkus",
+              "href": "/docs/apis-tools/community-clients/quarkus/"
             }
           ]
         },
