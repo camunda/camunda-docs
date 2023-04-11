@@ -47,6 +47,10 @@ jobs:
         uses: nev7n/wait_for_response@v1
         with:
           url: "http://${{ env.container_ip }}:8080/"
+      - name: Run htmltest
+        uses: wjdp/htmltest-action@master
+        with:
+          config: .htmltest.yml
       # - name: Check internal links
       #   uses: filiph/linkcheck@2.0.23
       #   with:
