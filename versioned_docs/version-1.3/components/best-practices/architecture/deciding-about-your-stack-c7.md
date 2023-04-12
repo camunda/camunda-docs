@@ -76,7 +76,7 @@ There are severa; *advantages using the greenfield stack*:
 
 ### Considering Camunda Cloud instead
 
-Camunda Cloud is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Cloud from the start. You can find [a quick comparison of concepts in the docs](https://docs.camunda.io/docs/guides/migrating-from-Camunda-Platform/#conceptual-differences). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Cloud.
+Camunda Cloud is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Cloud from the start. You can find [a quick comparison of concepts in the docs](/guides/migrating-from-Camunda-Platform.md#conceptual-differences). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Cloud.
 
 ### Getting started with the greenfield stack
 

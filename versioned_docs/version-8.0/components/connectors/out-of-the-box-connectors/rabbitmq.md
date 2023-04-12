@@ -80,7 +80,7 @@ Refer to the RabbitMQ documentation to learn about routing attributes:
 ## Message
 
 1. In the **Message** section, insert the message payload. The message can be Text or JSON format.
-2. (Optional) In the **Properties** section, insert the message properties in JSON or as a [FEEL](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/) expression. Go to [RabbitMQ documentation](https://www.rabbitmq.com/publishers.html#message-properties) for learn more about RabbitMQ message properties.
+2. (Optional) In the **Properties** section, insert the message properties in JSON or as a [FEEL](/components/modeler/feel/what-is-feel.md) expression. Go to [RabbitMQ documentation](https://www.rabbitmq.com/publishers.html#message-properties) for learn more about RabbitMQ message properties.
 
 ![connectors-rabbitmq-message-with-properties](../img/connectors-rabbitmq-message-with-properties.png)
 
@@ -92,7 +92,7 @@ The response contains a `messageId` variable.
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/). For example:
+2. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example:
 
 ```
 = {

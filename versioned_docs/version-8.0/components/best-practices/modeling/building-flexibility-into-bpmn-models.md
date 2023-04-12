@@ -18,7 +18,7 @@ BPMN events allow us to react to all kinds of information. We can use them to tr
 <div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/events.bpmn" />
 
 :::caution Camunda Platform 7 Only
-Condition events are [not yet supported in Camunda Platform 8](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/).
+Condition events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md).
 :::
 
 ### Boundary events to add activities on triggers
@@ -54,7 +54,7 @@ Sometimes we need to build in flexible activities which are carried out at any p
 ### Escalation events
 
 :::caution Camunda Platform 7 Only
-Escalation events are [not yet supported in Camunda Platform 8](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/).
+Escalation events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md).
 :::
 
 Sometimes we need highly flexible means to cancel scopes or trigger additional activities from within a scope. The BPMN escalation events can be particularly useful to implement such requirements.
@@ -80,7 +80,7 @@ We can then already continue with the follow-up work regardless of whether that 
 ### Termination events
 
 :::caution Camunda Platform 7 Only
-Termination events are [not yet supported in Camunda Platform 8](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/) and only available in Camunda Platform 7.
+Termination events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md) and only available in Camunda Platform 7.
 :::
 
 To build flexibility into process models, it is also useful to remember that the termination event just terminates the scope within which it is defined and therefore _not_ always the whole process instance. With that technique, it becomes possible to cancel some activities inside a subprocess while completing it successfully and leaving it via the "normal" outgoing path.
@@ -134,7 +134,7 @@ This leads to another subprocess to be triggered, and this one is interrupting. 
 ### Allow for order details to change, but repeat order validation
 
 :::caution Camunda Platform 7 Only
-Condition events are [not yet supported in Camunda Platform 8](https://docs.camunda.io/docs/reference/bpmn-processes/bpmn-coverage/)
+Condition events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
 :::
 
 If the customer changes the order details, the order must be validated again.
