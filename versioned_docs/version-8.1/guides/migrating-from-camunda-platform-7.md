@@ -48,7 +48,7 @@ Camunda Platform 7 uses [JUEL (Java Unified Expression Language)](https://docs.c
 
 Camunda Platform 8 uses [FEEL (Friendly-Enough Expression Language](/components/modeler/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
-Most expressions can be converted (see [this community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/modeler-plugin-7-to-8-converter/client/JuelToFeelConverter.js as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform 7).
+Most expressions can be converted (see [this community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java) as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda Platform 7).
 
 #### Different Connector infrastructure
 
@@ -204,7 +204,7 @@ In general, **development artifacts** _can_ be migrated:
 
 In general, **workflow engine data** is harder to migrate to Camunda Platform 8:
 
-- **Runtime data:** Running process instances of Camunda Platform 7 are stored in the Camunda Platform 7 relational database. Like with a migration from third party workflow engines, you can read this data from Camunda Platform 7 and use it to create the right process instances in Camunda Platform 8 in the right state. This way, you can migrate running process instances from Camunda Platform 7 to Camunda Platform 8, but some manual effort is required.
+- **Runtime data:** Running process instances of Camunda Platform 7 are stored in the Camunda Platform 7 relational database. Like with a migration from third party workflow engines, you can read this data from Camunda Platform 7 and use it to create the right process instances in Camunda Platform 8 in the right state. This way, you can migrate running process instances from Camunda Platform 7 to Camunda Platform 8. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) is in place to ease this task.
 
 - **History data:** Historic data from the workflow engine itself cannot be migrated. However, data in Optimize can be kept.
 
@@ -212,9 +212,11 @@ In general, **workflow engine data** is harder to migrate to Camunda Platform 8:
 
 The [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration), available as a community extension, contains two components that will help you with migration:
 
-1. [A Desktop Modeler plugin to convert BPMN models from Camunda Platform 7 to Camunda Platform 8](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/modeler-plugin-7-to-8-converter). This maps possible BPMN elements and technical attributes into the Camunda Platform 8 format and gives you warnings where this is not possible. This plugin might not fully migrate your model, but should give you a jump-start. It can be extended to add your own custom migration rules. Note that the model conversion requires manual supervision.
+1. [A converter available in different flavors (web app, CLI) to convert BPMN models from Camunda Platform 7 to Camunda Platform 8](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter). This maps possible BPMN elements and technical attributes into the Camunda Platform 8 format and gives you warnings where this is not possible. The result of a conversion is a model with mapped implementation details as well as hints on what changed, needs to be reviewed, or adjusted in order to function properly in Camunda Platform 8.
 
 2. [The Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter). This is a library providing a worker to hook in Camunda Platform 7-based glue code. For example, it can invoke existing JavaDelegate classes.
+
+3. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) to migrate running process instances from Camunda Platform 7 to Camunda Platform 8.
 
 In essence, this tooling implements details described in the next sections.
 
@@ -242,7 +244,7 @@ For example, to migrate an existing Spring Boot application, take the following 
 
 2. Adjust config
 
-- Make sure to set [Camunda Platform 8 credentials](https://github.com/camunda-community-hub/spring-zeebe#configuring-camunda-cloud-connection) (for example, in `src/main/resources/application.properties`) and point it to an existing Zeebe cluster.
+- Make sure to set [Camunda Platform 8 credentials](https://github.com/camunda-community-hub/spring-zeebe#configuring-camunda-platform-8-saas-connection) (for example, in `src/main/resources/application.properties`) and point it to an existing Zeebe cluster.
 - Remove existing Camunda Platform 7 settings.
 
 3. Replace `@EnableProcessApplication` with `@EnableZeebeClient` in your main Spring Boot application class.
@@ -272,7 +274,7 @@ The [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camund
 
 You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
 
-The [Camunda Platform 7 to Camunda Platform 8 Converter Modeler plugin](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/modeler-plugin-7-to-8-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
+The [Camunda Platform 7 to Camunda Platform 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
 
 The topic `camunda-7-adapter` is set and the following attributes/elements are migrated and put into a task header:
 
@@ -298,6 +300,16 @@ To migrate BPMN process models from Camunda Platform 7 to Camunda Platform 8, yo
 
 The following sections describe what the existing [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration/) does by BPMN symbol and explain unsupported attributes.
 
+### General considerations
+
+The following attributes/elements cannot be migrated:
+
+- `camunda:asyncBefore`: Every task in Zeebe is always asyncBefore and asyncAfter.
+- `camunda:asyncAfter`: Every task in Zeebe is always asyncBefore and asyncAfter.
+- `camunda:exclusive`: Jobs are always exclusive in Zeebe.
+- `camunda:jobPriority`: There is no way to prioritize jobs in Zeebe (yet).
+- `camunda:failedJobRetryTimeCycle`: You cannot yet configure the retry time cycle.
+
 ### Service tasks
 
 ![Service Task](../components/modeler/bpmn/assets/bpmn-symbols/service-task.svg)
@@ -312,25 +324,20 @@ A service task might have **attached Java code**. In this case, the following at
 
 The topic `camunda-7-adapter` is set.
 
-The following attributes/elements cannot be migrated:
-
-- `camunda:asyncBefore`: Every task in Zeebe is always asyncBefore and asyncAfter.
-- `camunda:asyncAfter`: Every task in Zeebe is always asyncBefore and asyncAfter.
-- `camunda:exclusive`: Jobs are always exclusive in Zeebe.
-- `camunda:jobPriority`: There is no way to prioritize jobs in Zeebe (yet).
-- `camunda:failedJobRetryTimeCycle`: You cannot yet configure the retry time cycle.
+- `camunda:failedJobRetryTimeCycle`: Here, the amount of defined retries is set to the `zeebe:taskDefinition retries` attribute.
 
 A service task might leverage **external tasks** instead. In this case, the following attributes/elements are migrated:
 
-- `camunda:topic` gets `zeebe:taskDefinition type`.
+- `camunda:topic` becomes `zeebe:taskDefinition type`.
 
 The following attributes/elements cannot be migrated:
 
 - `camunda:taskPriority`
 
-Service tasks using `camunda:type` cannot be migrated.
+Service tasks using `camunda:connector` will be migrated with the following changes:
 
-Service tasks using `camunda:connector` cannot be migrated.
+- `camunda:connectorId` becomes `zeebe:taskDefinition type`
+- All inputs and outputs are treated like all other inputs and outputs.
 
 ### Send tasks
 
@@ -346,12 +353,14 @@ Gateways rarely need migration. The relevant configuration is mostly in the [exp
 
 Expressions need to be in [FEEL (friendly-enough expression language)](/components/concepts/expressions.md#the-expression-language) instead of [JUEL (Java unified expression language)](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/).
 
-Migrating simple expressions is doable (as you can see in [these test cases](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/modeler-plugin-7-to-8-converter/client/JuelToFeelConverter.test.js)), but not all expressions can be automatically converted.
+Migrating simple expressions is doable (as you can see in [these test cases](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/test/java/org/camunda/community/migration/converter/ExpressionTransformerTest.java)), but not all expressions can be automatically converted.
 
 The following is not possible:
 
 - Calling out to functional Java code using beans in expressions
 - Registering custom function definitions within the expression engine
+- using SPIN library (the FEEL data structure behaves like JSON natively, so SPIN can be omitted or replaced)
+- using the `execution` or `task`
 
 ### Human tasks
 
@@ -396,22 +405,16 @@ Camunda Platform 8 support the DMN standard just as Camunda Platform 7 does, so 
 
 The following attributes/elements can be migrated:
 
-- `camunda:decisionRef`
+- `camunda:decisionRef` to `zeebe:calledDecision decisionId`
+- `camunda:resultVariable` to `zeebe:calledDecision resultVariable`
 
 The following attributes are not yet supported:
 
 - `camunda:decisionRefBinding`, `camunda:decisionRefVersion`, and `camunda:decisionRefVersionTag`(always use the latest version)
 - `camunda:mapDecisionResult` (no mapping happens)
-- `camunda:resultVariable` (result is always mapped to variable 'result' and can be copied or unwrapped using ioMapping).
 - `camunda:decisionRefTenantId`
 
-A business rule task can also _behave like a service task_ to allow integration of third-party rule engines. In this case, the following attributes can also be migrated as described above for the service task migration: `camunda:class`, `camunda:delegateExpression`, `camunda:expression`, or `camunda:topic`.
-
-The following attributes/elements cannot be migrated:
-
-- `camunda:asyncBefore`, `camunda:asyncBefore`, `camunda:asyncAfter`, `camunda:exclusive`, `camunda:failedJobRetryTimeCycle`, and `camunda:jobPriority`
-- `camunda:type` and `camunda:taskPriority`
-- `camunda:connector`
+A business rule task can also _behave like a service task_ to allow integration of third-party rule engines. In this case, all attributes described above for the service task migration can also be converted.
 
 ### Call activities
 
@@ -421,8 +424,8 @@ Call activities are generally supported in Zeebe. The following attributes/eleme
 
 - `camunda:calledElement` will be converted into `zeebe:calledElement`
 - Data Mapping
-  - `camunda:in`
-  - `camunda:out`
+  - `camunda:in` to `zeebe:input`
+  - `camunda:out` to `zeebe:output`
 
 The following attributes/elements cannot be migrated:
 
@@ -435,7 +438,9 @@ The following attributes/elements cannot be migrated:
 
 ![Script Task](../components/modeler/bpmn/assets/bpmn-symbols/script-task.svg)
 
-Script tasks cannot natively be executed by the Zeebe engine. They behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker), provided as a community extension.
+Only FEEL scripts can be executed by the Zeebe engine. The converter will create internal scripts as long as you are using FEEL scripts.
+
+If you require a different scripting language, a script task can behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker), provided as a community extension.
 
 If you do this, the following attributes/elements are migrated:
 
@@ -444,14 +449,6 @@ If you do this, the following attributes/elements are migrated:
 - `camunda:resultVariable`
 
 The task type is set to `script`.
-
-The following attributes/elements cannot be migrated:
-
-- `camunda:asyncBefore`: Every task in Zeebe is always asyncBefore and asyncAfter.
-- `camunda:asyncAfter`: Every task in Zeebe is always asyncBefore and asyncAfter.
-- `camunda:exclusive`: Jobs are always exclusive in Zeebe.
-- `camunda:jobPriority`: There is no way to priotize jobs in Zeebe (yet).
-- `camunda:failedJobRetryTimeCycle`: You cannot yet configure the retry time cycle.
 
 ### Message receive events and receive tasks
 
@@ -464,6 +461,27 @@ Message correlation works slightly different between the two products:
 This means you must inspect and adjust all message receive events or receive tasks in your model to define a reasonable `correlationKey`. You also must adjust your client code accordingly.
 
 The `bpmn message name` is used in both products and doesn't need migration.
+
+### Multi-instance activities
+
+Multi-instance activities do exist in the same flavor in Camunda Platform 8 as they did in Camunda Platform 7 (parallel and sequential multi-instance are supported, a loop is not.)
+
+For implementation, the only current limitation is that a loop cardinality is not supported.
+
+These elements cannot be migrated:
+
+- `bpmn:loopCardinality`
+
+These elements can still be used:
+
+- `bpmn:completionCondition`: Here, the expression has to be transformed to FEEL.
+
+These elements will be converted:
+
+- `bpmn:multiInstanceLoopCharacteristics camunda:collection` to `zeebe:loopCharacteristics inputCollection`
+- `bpmn:multiInstanceLoopCharacteristics camunda:elementVariable` to `zeebe:loopCharacteristics inputElement`
+
+Additionally, there is now a native way to collect results (using `zeebe:loopCharacteristics outputCollection` and `zeebe:loopCharacteristics outputElement`). You should consider this before using a workaround (for example, collecting local variables to a collection in parent scope in an exclusive job).
 
 ## Adjusting your DMN models
 
@@ -531,15 +549,11 @@ Here's an example of a good Java Delegate:
 public class CreateCustomerInCrmJavaDelegate implements JavaDelegate {
 
     @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
     private CrmFacade crmFacade;
 
     public void execute(DelegateExecution execution) throws Exception {
         // Data Input Mapping
-        String customerDataJson = (String) execution.getVariable("customerData");
-        CustomerData customerData = objectMapper.readValue(customerDataJson, CustomerData.class);
+        CustomerData customerData = (CustomerData) execution.getVariable("customerData");
 
         // Delegate to business logic
         String customerId = crmFacade.createCustomer(customerData);
@@ -578,17 +592,17 @@ public class OrderFulfillmentRestController {
   @Autowired
   private ProcessEngine camunda;
 
-  @RequestMapping(path = "/order", method = PUT)
-  public String placeOrder(String orderPayload, HttpServletResponse response) throws Exception {
+  @RequestMapping(path = "/order", method = POST)
+  public ResponseEntity<StatusDto> placeOrder(@RequestBody OrderDto orderPayload) throws Exception {
     // TODO: Somehow extract data from orderPayload
-    String orderData = "todo";
+    OrderData orderData = OrderData.from(orderPayload);
 
     ProcessInstance pi = camunda.getRuntimeService() //
         .startProcessInstanceByKey("orderFulfillment", //
             Variables.putValue("order", orderData));
 
     response.setStatus(HttpServletResponse.SC_ACCEPTED);
-    return "{\"status\":\"pending\"}";
+    return ResponseEntity.accepted().body(StatusDto.of("pending"));
   }
 }
 ```
@@ -597,9 +611,9 @@ public class OrderFulfillmentRestController {
 
 Camunda Platform 7 provides flexible ways to add data to your process. For example, you could add Java objects that would be serialized as byte code. Java byte code is brittle and also tied to the Java runtime environment.
 
-Another possibility is transforming those objects on the fly to XML using Camunda Spin. It turned out this was black magic and led to regular problems, which is why Camunda Platform 8 does not offer this anymore. Instead, you should do any transformation within your code before talking to Camunda API. Camunda Platform 8 only takes JSON as a payload, which automatically includes primitive values.
+Another possibility is transforming those objects on the fly to JSON or XML using Camunda Spin. It turned out this was black magic and led to regular problems, which is why Camunda Platform 8 does not offer this anymore. Instead, you should do any transformation within your code before talking to the Camunda API. Camunda Platform 8 only takes JSON as a payload, which automatically includes primitive values.
 
-In the above Java Delegate example, you can see that Jackson was used in the delegate for JSON to Java mapping:
+In the below Java Delegate example, you can see that Spin and Jackson was used in the delegate for JSON to Java mapping:
 
 ```java
 @Component
@@ -607,13 +621,12 @@ public class CreateCustomerInCrmJavaDelegate implements JavaDelegate {
 
     @Autowired
     private ObjectMapper objectMapper;
-
     //...
 
     public void execute(DelegateExecution execution) throws Exception {
         // Data Input Mapping
-        String customerDataJson = (String) execution.getVariable("customerData");
-        CustomerData customerData = objectMapper.readValue(customerDataJson, CustomerData.class);
+        JsonNode customerDataJson = ((JacksonJsonNode) execution.getVariable("customerData")).unwrap();
+        CustomerData customerData = objectMapper.treeToValue(customerDataJson, CustomerData.class);
         // ...
     }
 }
@@ -695,7 +708,6 @@ As described earlier in this guide, migration is an ongoing topic and this guide
 
 - Describe implications on testing.
 - Discuss adapters for Java or REST client.
-- Discuss external task adapter for Java code and probably add it to the [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter).
 - Discuss more concepts around BPMN
   ** [Field injection](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#field-injection) that is using `camunda:field` available on many BPMN elements.
   ** Multiple instance markers available on most BPMN elements.
