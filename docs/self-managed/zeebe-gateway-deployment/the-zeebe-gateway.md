@@ -168,6 +168,10 @@ You can read more about client-gateway security on [its dedicated page](../zeebe
 | `ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH` | `zeebe.gateway.security.certificateChainPath` | Sets the path to the certificate chain file.                |               |
 | `ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH`       | `zeebe.gateway.security.privateKeyPath`       | Sets the path to the private key file location.             |               |
 
+### Client authentication configuration
+
+The Zeebe Gateway supports Camunda Identity-based authorization. Refer to [client authorization](../zeebe-deployment/security/client-authorization.md) for details.
+
 ### Long-polling configuration
 
 It's possible to configure gateway long-polling behavior. Read more on long-polling behavior [here](../../components/concepts/job-workers.md#long-polling).
