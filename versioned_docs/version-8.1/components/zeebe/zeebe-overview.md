@@ -10,7 +10,7 @@ Zeebe is the process automation engine powering Camunda Platform 8. While writte
 With Zeebe you can:
 
 - Define processes graphically in [BPMN 2.0](../modeler/bpmn/bpmn-coverage.md).
-- Choose any [gRPC](/apis-clients/grpc.md)-supported programming language to implement your workers.
+- Choose any [gRPC](/apis-tools/grpc.md)-supported programming language to implement your workers.
 - Build processes that react to events from Apache Kafka and other messaging platforms.
 - Use as part of a software as a service (SaaS) offering with Camunda Platform 8 or deploy with Docker and Kubernetes (in the cloud or on-premises) with Camunda Platform 8 Self-Managed.
 - Scale horizontally to handle very high throughput.
