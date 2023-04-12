@@ -21,7 +21,7 @@ The build process for [publish-prod](https://github.com/camunda/camunda-platform
 
 ## Perform a minor release
 
-Minor releases to Camunda Platform 8 happen twice a year in April and October, and the documentation is versioned on the same cadence.
+Minor releases to Camunda Platform 8 happen twice a year in April and October, on the second Tuesday of the month, and the documentation is versioned on the same cadence.
 
 To prepare for a minor product release, you'll need to create a new docs version.
 
@@ -88,3 +88,15 @@ Use the GitHub UI and follow the instructions below:
 4. Click **Publish release**.
 
 The build process for [publish-prod](https://github.com/camunda/camunda-platform-docs/actions/workflows/publish-prod.yaml) will kick off which could take around 30 min to finish. If publish-prod is successful, the updates will appear on [docs.camunda.io](https://docs.camunda.io).
+
+## Manually Trigger the Algolia crawler (DocSearch)
+
+Search not working for a new minor version? A specific document, published recently, not showing up in the internal search results? 
+
+Our twice yearly minor releases usually line up nicely with the scheduled Algolia crawl - Tuesday early US morning. 
+
+If the minor version docs are deployed after Tuesday early US morning, the Algolia crawler should be manually triggered, or the internal search (DocSearch) will not work for the new minor version. 
+
+Patch releases with significant or urgent updates may also require a manually triggered crawler.
+
+This requires [admin access](https://crawler.algolia.com/admin/users/login). Contact @pepopowitz or @akeller for assistance.
