@@ -59,6 +59,17 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
+### Limitations of Beta Version
+
+When using Web Modeler Public API beta:
+
+- You will not receive a warning when deleting a file, a folder, or a project. This is important, because deletion cannot be undone.
+- You will not receive a warning about breaking call activity links or business rule task links when moving files or folders to another project.
+  Breaking these links is considered harmless. The broken links can be manually removed or restored in Web Modeler. This operation is also
+  reversible - simply move the files or folders back to their original location.
+- You will not immediately see a new project you created via the public API. This is because the project has no collaborators. To remedy this, the
+  org owner can activate super user mode and assign collaborators.
+
 ## FAQ
 
 ### What is the difference between _simplePath_ and _canonicalPath_?
