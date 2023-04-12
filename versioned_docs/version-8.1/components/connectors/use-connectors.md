@@ -47,7 +47,7 @@ By default, Connector execution is repeated `3` times if execution fails. To cha
 
 :::note
 Inbound Connectors are currently supported only in [Camunda Platform 8 Self-Managed](../../self-managed/about-self-managed.md).
-To use an Inbound Connector, [install](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/element-templates/configuring-templates/) a related element template (for example, [generic webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/webhook-connector/element-templates) or [GitHub webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/github/element-templates)) first.
+To use an Inbound Connector, [install](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) a related element template (for example, [generic webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/webhook-connector/element-templates) or [GitHub webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/github/element-templates)) first.
 :::
 
 1. Start building your BPMN diagram with a **Start Event** building block.
