@@ -79,7 +79,7 @@ Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/format
 
 ## Slack API response
 
-The **Slack Connector** exposes the Slack API response as a [local variable](https://docs.camunda.io/docs/components/concepts/variables/#variable-scopes) called `response`.
+The **Slack Connector** exposes the Slack API response as a [local variable](/components/concepts/variables.md#variable-scopes) called `response`.
 Response contents are method-specific.
 
 ### Create channel

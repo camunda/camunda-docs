@@ -19,7 +19,7 @@ Refer to [Public API Configuration](../../self-managed/optimize-deployment/confi
 
 ### How to obtain the access token for C8 SaaS (Cloud) usage
 
-You must obtain a token to use the Optimize API. When you create an Optimize [client](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/), you get all the information needed to connect to Optimize.
+You must obtain a token to use the Optimize API. When you create an Optimize [client]($docs$/guides/setup-client-connection-credentials/), you get all the information needed to connect to Optimize.
 
 See our guide on [building your own client]($docs$/apis-tools/build-your-own-client/).
 
