@@ -545,13 +545,12 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-tools/public-api",
-        "apis-tools/grpc",
-        require("./docs/apis-tools/operate-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/operate-api/sidebar-schema"),
         "apis-tools/console-api-reference",
         "apis-tools/web-modeler-api/index",
+        "apis-tools/grpc",
         {
           "Optimize API (REST)": [
             optimizeLink(
@@ -629,6 +628,7 @@ module.exports = {
             ),
           ],
         },
+        "apis-tools/public-api",
       ],
     },
     {
