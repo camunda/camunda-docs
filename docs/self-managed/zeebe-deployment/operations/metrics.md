@@ -103,3 +103,5 @@ it into your Grafana instance, then select the correct Prometheus data source (i
 you should be greeted with the following dashboard:
 
 ![cluster](assets/grafana-preview.png)
+
+[//]: # "To adjust."
