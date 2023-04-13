@@ -125,3 +125,7 @@ Take the `access_token` value from the response object and store it as your toke
 ```shell
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){id name}}"}' http://localhost:8080/graphql
 ```
+
+## Zeebe client credentials
+
+If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.
