@@ -68,6 +68,9 @@ It is also possible to [build your own client](../apis-tools/build-your-own-clie
 
 <DocCardList items={[{type:"link", href:"/docs/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"},
 {
+type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/", label: "Tasklist API (REST)", docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
+},
+{
 type:"link", href:"/docs/apis-tools/operate-api/overview", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
 },
 {
