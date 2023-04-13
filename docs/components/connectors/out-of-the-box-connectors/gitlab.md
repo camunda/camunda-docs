@@ -2,30 +2,30 @@
 id: gitlab
 title: GitLab Connector
 sidebar_label: GitLab Connector
-description: Manage GitLab issues and releases from your BPMN process.
+description: Manage GitLab issues and releases from your BPMN process. Learn about creating a GitLab Connector task and get started.
 ---
 
 The **GitLab Connector** allows you to connect your BPMN service with [GitLab](https://about.gitlab.com/).
 
 ## Prerequisites
 
-To use the **GitLab Connector**, you need to have a GitLab instance and an [access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html) of a user
+To use the **GitLab Connector**, you must have a GitLab instance and an [access token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html) of a user
 or a service account on whose behalf a BPMN process will be executed.
 
 :::note
 It is highly recommended not to expose your GitLab access token credentials as plain text. Instead, use Camunda secrets.
-See an article on how to [manage secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+See our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create an GitLab Connector Task
+## Create a GitLab Connector task
 
 To use the **GitLab Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](../use-connectors.md) to learn more.
 
 ## Fill in the endpoint and authentication
 
-In the section **HTTP Endpoint** provide a **GitLab base URL**, i.e. `https://gitlab.mycorp.com`, and a **GitLab access token**.
+In the **HTTP Endpoint** section, provide a **GitLab base URL**, i.e. `https://gitlab.mycorp.com`, and a **GitLab access token**.
 
-## Select operation you wish to execute
+## Select operation to execute
 
 The **GitLab Connector** currently supports the following operations.
 
@@ -56,12 +56,12 @@ The **GitLab Connector** currently supports the following operations.
 - **Project ID:** The global ID or URL-encoded path of the project owned by the authenticated user.
 - **Issue ID:** The internal ID of a project’s issue.
 - **Note text:** The content of a note.
-- **Level of confidentiality:** Indicates whether an issue has to be marked as **internal** or not.
+- **Level of confidentiality:** Indicates if an issue has to be marked as **internal** or not.
 
 #### Search issues
 
 - **GitLab API:** [List issues](https://docs.gitlab.com/ee/api/issues.html#list-issues).
-- **Scope:** Return issues for the given scope: **Created by me**, **Assigned to me** or **all**.
+- **Scope:** Return issues for the given scope: **Created by me**, **Assigned to me**, or **all**.
 - **State:** Return all issues or just those that are **opened** or **closed**.
 - **Assignee ID:** Return issues assigned to the given user ID. Mutually exclusive with **Assignee username**. **None** returns unassigned issues. **Any** returns issues with an assignee.
 - **Assignee username:** Return issues assigned to the given username. Similar to **Assignee ID** and mutually exclusive with **Assignee ID**.
