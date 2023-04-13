@@ -2,21 +2,20 @@
 id: asana
 title: Asana Connector
 sidebar_label: Asana Connector
-description: Manage Asana project and tasks from your BPMN process.
+description: Manage Asana projects and tasks from your BPMN process. Learn how to create an Asana Connector task, and get started.
 ---
 
 The **Asana Connector** allows you to connect your BPMN service with [Asana](https://asana.com/).
 
 ## Prerequisites
 
-To use the **Asana Connector**, you need to have an Asana [personal access token](https://developers.asana.com/docs/personal-access-token).
+To use the **Asana Connector**, you must have an Asana [personal access token](https://developers.asana.com/docs/personal-access-token).
 
 :::note
-It is highly recommended not to expose your Asana personal access token as plain text. Instead, use Camunda secrets.
-See an article on how to [manage secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended not to expose your Asana personal access token as plain text. Instead, use Camunda secrets. Learn more in our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md).
 :::
 
-## Create an Asana Connector Task
+## Create an Asana Connector task
 
 To use the **Asana Connector** in your process, either change the type of existing task by clicking on it and using
 the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
@@ -24,9 +23,9 @@ Follow our [guide to using Connectors](../use-connectors.md) to learn more.
 
 ## Fill in the authentication
 
-In the section **Authentication** section, provide a **Personal access token**. [Read more how to obtain it](https://developers.asana.com/docs/personal-access-token).
+In the **Authentication** section, provide a **Personal access token**. [Read more on how to obtain it](https://developers.asana.com/docs/personal-access-token).
 
-## Select operation you wish to execute
+## Select operation to execute
 
 ### Tasks
 
@@ -63,22 +62,22 @@ In the section **Authentication** section, provide a **Personal access token**. 
 
 #### Get a project by ID
 
-- **Asana API:** [Get a project](https://developers.asana.com/reference/getproject)
+- **Asana API:** [Get a project](https://developers.asana.com/reference/getproject).
 - **Project ID:** Globally unique identifier for the project.
 
 #### Create a project in a workspace
 
-- **Asana API:** [Create a project in a workspace](https://developers.asana.com/reference/createprojectforworkspace)
+- **Asana API:** [Create a project in a workspace](https://developers.asana.com/reference/createprojectforworkspace).
 - **Workspace ID:** Globally unique identifier for the workspace or organization.
 - **Project name:** Name of the project. This is generally a short sentence fragment that fits on a line in the UI for maximum readability. However, it can be longer.
 - **Project note:** Free-form textual information associated with the project (ie., its description).
 
 #### Delete a project
 
-- **Asana API:** [Delete a project](https://developers.asana.com/reference/deleteproject)
+- **Asana API:** [Delete a project](https://developers.asana.com/reference/deleteproject).
 - **Project ID:** Globally unique identifier for the project.
 
 ## Handle Connector response
 
-The **Asana Connector** is a protocol connector, meaning it is built on top of the **HTTP REST Connector**, therefore
+The **Asana Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**. Therefore,
 handling response is still applicable [as described](./rest.md#response).
