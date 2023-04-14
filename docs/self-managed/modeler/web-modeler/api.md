@@ -70,3 +70,27 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
      "deletePermission": false
    }
    ```
+
+### Limitations of Beta Version
+
+When using Web Modeler API beta:
+
+- You will not receive a warning when deleting a file, a folder, or a project. This is important, because deletion cannot be undone.
+- You will not receive a warning about breaking call activity links or business rule task links when moving files or folders to another project.
+  Breaking these links is considered harmless. The broken links can be manually removed or restored in Web Modeler. This operation is also
+  reversible - simply move the files or folders back to their original location.
+- You will not immediately see a new project you created via the API. This is because the project has no collaborators. To remedy this, the
+  org owner can activate [super user mode](../../../../components/modeler/web-modeler/collaboration/#super-user-mode) and assign collaborators.
+
+## FAQ
+
+### What is the difference between _simplePath_ and _canonicalPath_?
+
+In Web Modeler you can have multiple files with the same name, multiple folders with the same name, and even multiple projects with the same name. Internally, duplicate names are disambiguated by unique ids.
+
+The API gives you access to the names, as well as the ids. For example, when requesting a file you will get the following information:
+
+- **simplePath** contains the human-readable path. This path may be ambiguous or may have ambiguous elements (e.g. folders) in it.
+- **canonicalPath** contains the unique path. It is a list of **PathElementDto** objects which contain the id and the name of the element.
+
+Internally, the ids are what matters. You can rename files or move files between folders and projects and the id will stay the same.
