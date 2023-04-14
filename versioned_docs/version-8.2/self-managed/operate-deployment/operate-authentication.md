@@ -212,3 +212,7 @@ The user or user group can be assigned the following types of permissions:
 | DELETE_PROCESS_INSTANCE | process-definition                      | User can delete process instance related to defined process definition.                                                     |
 
 For more information, visit the [Identity documentation](../../concepts/access-control/resource-authorizations/).
+
+## Zeebe client credentials
+
+If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.

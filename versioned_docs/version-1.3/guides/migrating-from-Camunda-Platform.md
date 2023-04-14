@@ -144,12 +144,12 @@ With Camunda Cloud you deploy:
 
 ![Camunda 7 vs Camunda Cloud Deployment View](img/camunda7-vs-camunda-cloud-deployment-view.png)
 
-Camunda Cloud deployments happen within Kubernetes. There are [Helm charts available](https://docs.camunda.io/docs/self-managed/zeebe-deployment/kubernetes/helm/) if you want to run Camunda Cloud self-managed. 
+Camunda Cloud deployments happen within Kubernetes. There are [Helm charts available](/self-managed/zeebe-deployment/kubernetes/helm/installing-helm.md) if you want to run Camunda Cloud self-managed. 
 
 Camunda cloud is also available as a SaaS offering from Camunda, in this case, you only need to deploy your own process solution and Camunda operates the rest.
 
 :::note
-For local development purposes, you can [spin up Camunda Cloud on a developer machine using Docker or Docker Compose](https://docs.camunda.io/docs/self-managed/zeebe-deployment/docker/install/). Of course, developers could also create a cluster for development purposes in the SaaS offering of Camunda.
+For local development purposes, you can [spin up Camunda Cloud on a developer machine using Docker or Docker Compose](/self-managed/zeebe-deployment/docker/install.md). Of course, developers could also create a cluster for development purposes in the SaaS offering of Camunda.
 :::
 
 ### Other process solution architectures
