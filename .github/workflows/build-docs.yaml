@@ -55,7 +55,7 @@ jobs:
         with:
           args: "product-links.prod.txt"
           fail: true
-      - name: crawl site
+      - name: Check internal links
         uses: untitaker/hyperlink@0.1.27
         with:
           args: build/
