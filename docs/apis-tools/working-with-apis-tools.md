@@ -64,7 +64,11 @@ It is also possible to [build your own client](../apis-tools/build-your-own-clie
 
 ## Learn about Camunda Components and their APIs
 
+Camunda Platform 8 components have APIs to enable polyglot developers to work with in their programming language of choice. Below are links to available component APIs.
+
 ![Architecture diagram for Camunda Platform including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
+
+### API Reference
 
 <DocCardList items={[{type:"link", href:"/docs/next/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"},
 {
@@ -89,4 +93,14 @@ type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authoriza
 
 :::note
 Additionally, visit our documentation on [Operate](../self-managed/operate-deployment/usage-metrics.md) and [Tasklist](../self-managed/tasklist-deployment/usage-metrics.md) usage metric APIs.
+:::
+
+### Postman
+
+Camunda maintains a set of collections and APIs on Postman to help learn and use the available APIs.
+
+Watch and fork your favorite collections and APIs on the [Camunda Team](https://www.postman.com/camundateam).
+
+:::note
+Collections and APIs are manually updated and not all API functionality may be available. For the most up-to-date API functionality, see the [API reference docs](/apis-tools/working-with-apis-tools.md#api-reference).
 :::
