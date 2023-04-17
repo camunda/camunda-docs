@@ -63,6 +63,6 @@ Identity uses feature flag environment variables to enable and disable features,
 | RESOURCE_PERMISSIONS_ENABLED | Controls the resource autorizations feature | false         |
 
 :::note
-Setting the `RESOURCE_PERMISSIONS_ENABLED` flag to `true` requires a connection to a database. To configure a database
-connection see [Database configuration](#database-configuration)
+Setting the `RESOURCE_PERMISSIONS_ENABLED` flag to `true` requires a database connection. To configure a database
+connection, see [database configuration](#database-configuration).
 :::
