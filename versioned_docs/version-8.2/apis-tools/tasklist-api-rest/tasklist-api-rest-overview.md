@@ -2,7 +2,7 @@
 id: tasklist-api-rest-overview
 title: "Overview"
 sidebar_position: 1
-description: "Provides an overview of Tasklist REST API."
+description: "Tasklist API is a REST API and provides searching, getting, and changing Tasklist data."
 ---
 
 ## Introduction

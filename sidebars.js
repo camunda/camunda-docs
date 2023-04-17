@@ -43,6 +43,7 @@ module.exports = {
             "guides/update-guide/connectors/040-to-050",
             "guides/update-guide/connectors/050-to-060",
             "guides/update-guide/connectors/060-to-070",
+            "guides/update-guide/connectors/070-to-080",
           ],
         },
         {
@@ -239,6 +240,7 @@ module.exports = {
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+            "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
@@ -247,6 +249,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/easy-post",
             "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/github-webhook",
+            "components/connectors/out-of-the-box-connectors/gitlab",
             "components/connectors/out-of-the-box-connectors/googledrive",
             "components/connectors/out-of-the-box-connectors/google-maps-platform",
             "components/connectors/out-of-the-box-connectors/graphql",

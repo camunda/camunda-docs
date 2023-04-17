@@ -647,6 +647,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/available-connectors-overview/"
             ),
             docsLink(
+              "Asana Connector",
+              "components/connectors/out-of-the-box-connectors/Asana/"
+            ),
+            docsLink(
               "Automation Anywhere Connector",
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
@@ -677,6 +681,10 @@ module.exports = {
             docsLink(
               "GitHub Webhook Connector",
               "components/connectors/out-of-the-box-connectors/github-webhook/"
+            ),
+            docsLink(
+              "GitLab Connector",
+              "components/connectors/out-of-the-box-connectors/gitlab/"
             ),
             docsLink(
               "Google Drive Connector",
