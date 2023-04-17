@@ -30,6 +30,8 @@ The REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated ac
 
 You can find more information about the methods in our [docs](https://docs.camunda.io/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/).
 
+This means if you use Tasklist 8.2.0 or 8.2.1 and if you store sensible data that is stored in process variables, which are accessed by User Tasks, then this data could have been accessed by users knowing the endpoint of the task list instance.
+
 #### How to determine if the installation is affected
 
 You are using Tasklist version 8.2.0 or 8.2.1.
