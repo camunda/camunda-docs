@@ -548,12 +548,8 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        require("./docs/apis-tools/tasklist-api/sidebar-schema"),
-        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
-        require("./docs/apis-tools/operate-api/sidebar-schema"),
         "apis-tools/console-api-reference",
-        "apis-tools/web-modeler-api/index",
-        "apis-tools/grpc",
+        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink(
@@ -632,10 +628,26 @@ module.exports = {
           ],
         },
         "apis-tools/public-api",
+        require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
+        "apis-tools/web-modeler-api/index",
+        "apis-tools/grpc",
       ],
     },
     {
       Clients: [
+        {
+          "CLI client": [
+            "apis-tools/cli-client/index",
+            "apis-tools/cli-client/cli-get-started",
+          ],
+        },
+        {
+          "Go client": [
+            "apis-tools/go-client/index",
+            "apis-tools/go-client/go-get-started",
+          ],
+        },
         {
           "Java client": [
             "apis-tools/java-client/index",
@@ -655,18 +667,6 @@ module.exports = {
                 "apis-tools/java-client-examples/cluster-topology-request",
               ],
             },
-          ],
-        },
-        {
-          "Go client": [
-            "apis-tools/go-client/index",
-            "apis-tools/go-client/go-get-started",
-          ],
-        },
-        {
-          "CLI client": [
-            "apis-tools/cli-client/index",
-            "apis-tools/cli-client/cli-get-started",
           ],
         },
         {
