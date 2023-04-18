@@ -8,6 +8,40 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 11
+
+#### Publication date
+
+April 17, 2023
+
+#### Product affected
+
+Tasklist
+
+#### Impact
+
+The REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs:
+
+- GET /v1/tasks/{taskId}
+- POST /v1/tasks/search
+- POST /v1/tasks/{taskId}/variables/search
+- POST /v1/forms/{formId}
+- POST /v1/variables/{variableId}
+
+Find more information about the methods in our [Tasklist REST API documentation](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
+
+Therefore, if you use Tasklist 8.2.0 or 8.2.1, and if you have sensible data stored in process variables (accessed by user tasks), this data could have been accessed by users knowing the endpoint of the Tasklist instance without authentication.
+
+#### How to determine if the installation is affected
+
+You are using Tasklist version 8.2.0 or 8.2.1.
+
+#### Solution
+
+Camunda has provided the following releases which contain a fix
+
+- [Tasklist 8.2.2](https://github.com/camunda/camunda-platform/releases/tag/8.2.2)
+
 ### Notice 10
 
 #### Publication Date:
