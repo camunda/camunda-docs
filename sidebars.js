@@ -548,6 +548,7 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
+        "apis-tools/public-api",
         "apis-tools/console-api-reference",
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
@@ -627,7 +628,6 @@ module.exports = {
             ),
           ],
         },
-        "apis-tools/public-api",
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         "apis-tools/web-modeler-api/index",

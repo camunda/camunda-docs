@@ -1117,6 +1117,7 @@ module.exports = {
     ),
     {
       APIs: [
+        docsLink("Public API", "apis-tools/public-api/"),
         docsLink(
           "Console API clients (REST)",
           "apis-tools/console-api-reference/"
@@ -1158,7 +1159,6 @@ module.exports = {
             "apis-tools/optimize-api/variable-labeling",
           ],
         },
-        docsLink("Public API", "apis-tools/public-api/"),
         {
           "Tasklist API (GraphQL)": [
             docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
