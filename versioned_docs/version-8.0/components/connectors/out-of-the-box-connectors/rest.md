@@ -4,6 +4,13 @@ title: REST Connector
 description: Make a request to a REST API and use the response in the next steps of your process.
 ---
 
+:::caution
+If you use the REST Connector, ensure you do not have any instance variable named in the list below:
+
+- body, url, method, headers, authentication, queryParameters, connectionTimeoutInSeconds
+
+:::
+
 The **REST Connector** allows you to make a request to a REST API and use the response in the next steps of your process.
 
 ## Create a REST Connector task
@@ -22,7 +29,7 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 ### Authentication
 
-You can choose among the available REST Connectors according to your authentication requirements.
+You can choose among the available authentication type according to your authentication requirements.
 
 ### REST Connector (None)
 
@@ -126,14 +133,16 @@ Similarly to the Query Parameters, the **Http Headers** can be specified using t
 }
 ```
 
+:::note
+If you do not set the Content-Type header in your Http Headers, the connector will automatically set the 'Content-Type' to 'application/json'.
+:::
+
 ![rest connector http headers](../img/connectors-rest-http-headers.png)
 
 ### Request Body
 
 When you are making a PUT, POST, or PATCH request, you might need to provide a body.
 You can provide a body for your request under the **Payload** section in the **Request Body** field.
-
-Be aware that **REST Connector** is supporting only JSON payload.
 
 :::note
 Secrets are currently not supported in the body of a REST Connector.
