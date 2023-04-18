@@ -28,7 +28,7 @@ The REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated ac
 - POST /v1/forms/{formId}
 - POST /v1/variables/{variableId}
 
-You can find more information about the methods in our [Tasklist REST API documentation](https://docs.camunda.io/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/).
+Find more information about the methods in our [Tasklist REST API documentation](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 
 This means if you use Tasklist 8.2.0 or 8.2.1 and if you have sensible data that is stored in process variables, which are accessed by User Tasks, then this data could have been accessed by users knowing the endpoint of the Tasklist instance without authentication.
 
