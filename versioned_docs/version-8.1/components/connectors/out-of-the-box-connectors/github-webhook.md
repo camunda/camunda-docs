@@ -1,7 +1,7 @@
 ---
 id: github-webhook
-title: GitHub Webhook
-sidebar_label: GitHub Webhook
+title: GitHub Webhook Connector
+sidebar_label: GitHub Webhook Connector
 description: Learn how the GitHub Webhook Connector allows you to start a BPMN process instance triggered by a GitHub event.
 ---
 

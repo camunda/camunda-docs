@@ -34,7 +34,7 @@ Your application can basically do two things with the client:
 
 Using the Zeebe client’s API, you can communicate with the workflow engine. The two most important API calls are to start new process instances and to correlate messages to a process instance.
 
-**Start process instances using the** [**Java Client**](/docs/apis-clients/java-client/index/)**:**
+**Start process instances using the** [**Java Client**](../../../apis-tools/java-client/index.md)**:**
 
 ```java
 processInstance = zeebeClient.newCreateInstanceCommand()  
@@ -44,7 +44,7 @@ processInstance = zeebeClient.newCreateInstanceCommand()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new instance", throwable); });
 ```
 
-**Start process instances using the** [**NodeJS Client**](/docs/apis-clients/community-clients/javascript/)**:**
+**Start process instances using the** [**NodeJS Client**](../../../apis-tools/community-clients/javascript.md)**:**
 
 ```js
 const processInstance = await zbc.createWorkflowInstance({  
@@ -192,7 +192,7 @@ For example, the onboarding microservice shown in the figure above includes:
 * The process definition itself (2), probably auto-deployed to the workflow engine during the startup of the application.
 * Glue code subscribing to the two service tasks that shall call a remote REST API (3) and (4).
 
-A job worker will be started automatically as part of the application to handle the subscriptions. In this example, the application is written in Java, but again, it could be [any supported programming language](https://docs.camunda.io/docs/product-manuals/clients/overview).
+A job worker will be started automatically as part of the application to handle the subscriptions. In this example, the application is written in Java, but again, it could be [any supported programming language](/apis-tools/overview.md).
 
 As discussed in [writing good workers](../writing-good-workers/), you typically will bundle all workers within one process solution, but there are exceptions where it makes sense to have single workers as separate application.
 

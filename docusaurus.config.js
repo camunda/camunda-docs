@@ -20,7 +20,7 @@ module.exports = {
     //          {
     //            schema: "http://localhost:8080/tasklist/graphql",
     //            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-    //            baseURL: "apis-clients/tasklist-api",
+    //            baseURL: "apis-tools/tasklist-api",
     //            linkRoot: "/docs/",
     //            loaders: {
     //              UrlLoader: "@graphql-tools/url-loader"
@@ -43,6 +43,14 @@ module.exports = {
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
         editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
+        versions: {
+          "3.9.0": {
+            banner: "none",
+          },
+          "3.8.0": {
+            banner: "none",
+          },
+        },
       },
     ],
   ],
@@ -85,7 +93,7 @@ module.exports = {
         {
           type: "doc",
           docId: "apis-tools/working-with-apis-tools",
-          label: "APIs & Clients",
+          label: "APIs & Tools",
           position: "left",
         },
         {
@@ -223,6 +231,9 @@ module.exports = {
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
+            8.1: {
+              banner: "none",
+            },
             "8.0": {
               banner: "none",
             },

@@ -20,7 +20,7 @@ There are two commands to create a process instance, outlined in the sections be
 
 ### Create and execute asynchronously
 
-A process that has a [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) is started explicitly using **[CreateProcessInstance](/apis-clients/grpc.md#createprocessinstance-rpc)**.
+A process that has a [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) is started explicitly using **[CreateProcessInstance](/apis-tools/grpc.md#createprocessinstance-rpc)**.
 
 This command creates a new process instance and immediately responds with the process instance id. The execution of the process occurs after the response is sent.
 
@@ -53,7 +53,7 @@ Response:
 
 Typically, process creation and execution are decoupled. However, there are use cases that need to collect the results of a process when its execution is complete.
 
-**[CreateProcessInstanceWithResult](/apis-clients/grpc.md#createprocessinstancewithresult-rpc)** allows you to “synchronously” execute processes and receive the results via a set of variables. The response is sent when the process execution is complete.
+**[CreateProcessInstanceWithResult](/apis-tools/grpc.md#createprocessinstancewithresult-rpc)** allows you to “synchronously” execute processes and receive the results via a set of variables. The response is sent when the process execution is complete.
 
 ![create-process](assets/create-process-with-result.png)
 

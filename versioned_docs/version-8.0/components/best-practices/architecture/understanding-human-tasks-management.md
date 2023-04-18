@@ -26,7 +26,7 @@ As a general rule, you should assign human tasks in your business process to _gr
   </bpmn:extensionElements>
 ```
 
-Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. See [`claimTask`](/docs/apis-clients/tasklist-api/mutations/claim-task/).
+Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. See [`claimTask`](../../../apis-tools/tasklist-api/mutations/claim-task.mdx).
 
 ```graphql
 claimTask(
@@ -54,7 +54,7 @@ If you have human tasks in your process, you must make up your mind on how exact
 
 - [Camunda Tasklist](/docs/components/tasklist/introduction-to-tasklist/): The Tasklist application shipped with Camunda. This works out-of-the-box and has a low development effort. However, it is limited in terms of customizability and how much you can influence the user experience.
 
-- Custom task list application: You can develop a custom task list and adapt this to your needs without compromises. Human tasks are shown inside your custom application, following your style guide and usability concept. You will use the [Camunda Tasklist API](/docs/apis-clients/tasklist-api/) in the background. This is very flexible, but requires additional development work.
+- Custom task list application: You can develop a custom task list and adapt this to your needs without compromises. Human tasks are shown inside your custom application, following your style guide and usability concept. You will use the [Camunda Tasklist API](../../../apis-tools/tasklist-api/generated.md) in the background. This is very flexible, but requires additional development work.
 
 - Third party tasklist: If our organization already has a task list application rolled out to the field, you might want to use this for tasks created by Camunda. You will need to develop some synchronization mechanism. The upside of this approach is that your end users might not even notice that you introduce a new workflow engine.
 

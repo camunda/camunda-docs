@@ -14,16 +14,16 @@ This Connector is compatible with both Camunda Platform 8 SaaS and Camunda Platf
 
 :::note
 Password authentication with Operate is currently not supported.
-If you are using Camunda Platform 8 Self-Managed, you can only authenticate using [Identity](https://docs.camunda.io/docs/self-managed/operate-deployment/operate-authentication/#identity).
+If you are using Camunda Platform 8 Self-Managed, you can only authenticate using [Identity](/self-managed/operate-deployment/operate-authentication.md#identity).
 :::
 
 You also need to obtain the Operate API client credentials. Follow the links below to learn more about API client configuration.
 
-- [API client configuration in Camunda Platform 8 SaaS](https://docs.camunda.io/docs/components/console/manage-clusters/manage-api-clients/)
-- [Authentication with a Self-Managed Operate deployment](https://docs.camunda.io/docs/self-managed/operate-deployment/operate-authentication/#identity)
+- [API client configuration in Camunda Platform 8 SaaS](/components/console/manage-clusters/manage-api-clients.md)
+- [Authentication with a Self-Managed Operate deployment](/self-managed/operate-deployment/operate-authentication.md#identity)
 
 :::note
-It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Operate Connector task
@@ -37,7 +37,7 @@ Choose between **Camunda Platform 8 SaaS** and **Camunda Platform 8 Self-Managed
 
 ### SaaS clusters
 
-If you are using a SaaS cluster, you will be required to provide **region** and **clusterId**. You will see these values when you [create an API client](https://docs.camunda.io/docs/next/guides/setup-client-connection-credentials/) for your cluster.
+If you are using a SaaS cluster, you will be required to provide **region** and **clusterId**. You will see these values when you [create an API client](/guides/setup-client-connection-credentials.md) for your cluster.
 
 ![connectors-operate-cluster-saas](../img/connectors-operate-cluster-saas.png)
 
@@ -58,7 +58,7 @@ If you are testing this Connector on your local machine with the Camunda Platfor
 ## Configure authentication
 
 For both SaaS and Self-Managed clusters, you need to provide **clientId** and **clientSecret**.
-You will see these values when you [create an API client](https://docs.camunda.io/docs/next/guides/setup-client-connection-credentials/) for your cluster.
+You will see these values when you [create an API client](/guides/setup-client-connection-credentials.md) for your cluster.
 
 For Self-Managed clusters, you can additionally specify the Operate **audience**.
 If you are using the default Identity configuration, leave the default `operate-api` value.
@@ -71,7 +71,7 @@ In the **Endpoint** dropdown list, select the API entity. You can choose between
 
 In the **Operation** dropdown list, select one of the supported operations: **Get by key** or **Search**.
 
-Refer to the Operate [API documentation](https://docs.camunda.io/docs/apis-clients/operate-api/) for more details on the specific operations.
+Refer to the Operate [API documentation](/apis-tools/operate-api/overview.md) for more details on the specific operations.
 
 :::note Unsupported operations
 The following API operations are currently not supported by the **Operate Connector**:
@@ -91,11 +91,11 @@ For **Search** operation, the following search parameters can be configured:
 
   `{ "processInstanceKey": 235, "state": "ACTIVE", "incidents": true }`
 
-  If one of the fields doesn't match, an empty response will be returned for this request. Refer to the [Operate API documentation](https://docs.camunda.io/docs/apis-clients/operate-api/#filter) for more detailed information.
+  If one of the fields doesn't match, an empty response will be returned for this request. Refer to the [Operate API documentation](/apis-tools/operate-api/overview.md#filter) for more detailed information.
 
 - **Sort**: Sorting properties in Operate format, e.g. `[{ "field": "name", "order": "DESC" }]`. You need to provide a list of sort objects in this field.
 - **Results**: Number of results to return.
-- **Pagination**: Identifier of an item from which the search should start. Copy this `sortValues` value from the previous Operate response here, or leave this field blank if you don't need pagination. See the [API reference](https://docs.camunda.io/docs/apis-clients/operate-api/#pagination) for details.
+- **Pagination**: Identifier of an item from which the search should start. Copy this `sortValues` value from the previous Operate response here, or leave this field blank if you don't need pagination. See the [API reference](/apis-tools/operate-api/overview.md#pagination) for details.
 
 ## Handle the API response
 

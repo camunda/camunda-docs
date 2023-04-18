@@ -121,7 +121,7 @@ One advantage of using Java Delegates is that, if you develop in Java, this is a
 
 ### General recommendation
 
-In general, we *recommend to use external tasks* to apply a general architecture and mindset, that allows to [leverage Camunda Cloud easier](https://docs.camunda.io/docs/guides/migrating-from-Camunda-Platform/#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
+In general, we *recommend to use external tasks* to apply a general architecture and mindset, that allows to [leverage Camunda Cloud easier](/guides/migrating-from-Camunda-Platform.md#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
 
 * A slightly increased complexity for Java projects, because they have to handle seperate Java clients.
 * A slightly increased overhead compared to Java Delegates, as all comunication with the engine is remote, even if it runs in the same Java VM.
