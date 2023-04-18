@@ -9,6 +9,8 @@ description: "This document outlines context expressions and examples."
 Creates a new context with the given entries. Each entry has a key and a value. The key is either a
 name or a string. The value can be any type.
 
+See the [naming conventions](./feel-variables.md#variable-names) for valid key names.
+
 ```feel
 {
   a: 1,
@@ -45,7 +47,7 @@ A context value can embed other context values.
 // {a:1, b:{c:2}}
 ```
 
-### Get entry or path
+### Get entry/path
 
 ```feel
 a.b

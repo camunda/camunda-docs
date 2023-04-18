@@ -26,7 +26,7 @@ Clients allow applications to do the following:
 - Publish messages.
 - Update process instance variables and resolve incidents.
 
-The official clients mentioned below interact with [Zeebe](/components/zeebe/zeebe-overview.md), the workflow engine integrated into Camunda Platform 8. All clients require [setting up client credentials](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/) to authenticate. Clients connect to Camunda Platform 8 via [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
+The official clients mentioned below interact with [Zeebe](/components/zeebe/zeebe-overview.md), the workflow engine integrated into Camunda Platform 8. All clients require [setting up client credentials](/guides/setup-client-connection-credentials.md) to authenticate. Clients connect to Camunda Platform 8 via [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
 
 Camunda Platform 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (for example, thread handling for job workers) on top of the core API.
 
@@ -64,9 +64,16 @@ It is also possible to [build your own client](../apis-tools/build-your-own-clie
 
 ## Learn about Camunda Components and their APIs
 
+Camunda Platform 8 components have APIs to enable polyglot developers to work with in their programming language of choice. Below are links to available component APIs.
+
 ![Architecture diagram for Camunda Platform including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
 
+### API Reference
+
 <DocCardList items={[{type:"link", href:"/docs/next/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"},
+{
+type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/", label: "Tasklist API (REST)", docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
+},
 {
 type:"link", href:"/docs/next/apis-tools/operate-api/overview/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
 },
@@ -86,4 +93,14 @@ type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authoriza
 
 :::note
 Additionally, visit our documentation on [Operate](../self-managed/operate-deployment/usage-metrics.md) and [Tasklist](../self-managed/tasklist-deployment/usage-metrics.md) usage metric APIs.
+:::
+
+### Postman
+
+Camunda maintains a set of collections and APIs on Postman to help learn and use the available APIs.
+
+Watch and fork your favorite collections and APIs on the [Camunda Team](https://www.postman.com/camundateam).
+
+:::note
+Collections and APIs are manually updated and not all API functionality may be available. For the most up-to-date API functionality, see the [API reference docs](/apis-tools/working-with-apis-tools.md#api-reference).
 :::

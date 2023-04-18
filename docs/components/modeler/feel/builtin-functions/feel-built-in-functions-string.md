@@ -4,135 +4,243 @@ title: String functions
 description: "This document outlines built-in string functions and examples."
 ---
 
-## substring()
+import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";
 
-- parameters:
-  - `string`: string
-  - `start position`: number
-  - (optional) `length`: number
-- result: string
+## substring(string, start position)
+
+Returns a substring of the given value starting at `start position`.
+
+**Function signature**
 
 ```feel
-substring("foobar",3)
-// "obar"
+substring(string: string, start position: number): string
+```
 
-substring("foobar",3,3)
+The `start position` starts at the index `1`. The last position is `-1`.
+
+**Examples**
+
+```feel
+substring("foobar", 3)
+// "obar"
+```
+
+## substring(string, start position, length)
+
+Returns a substring of the given value starting at `start position`.
+
+**Function signature**
+
+```feel
+substring(string: string, start position: number, length: number): string
+```
+
+The `start position` starts at the index `1`. The last position is `-1`.
+
+**Examples**
+
+```feel
+substring("foobar", 3, 3)
 // "oba"
 ```
 
-## string length()
+## string length(string)
 
-- parameters:
-  - `string`: string
-- result: number
+Returns the number of characters in the given value.
+
+**Function signature**
+
+```feel
+string length(string: string): number
+```
+
+**Examples**
 
 ```feel
 string length("foo")
 // 3
 ```
 
-## upper case()
+## upper case(string)
 
-- parameters:
-  - `string`: string
-- result: string
+Returns the given value with all characters are uppercase.
+
+**Function signature**
+
+```feel
+upper case(string: string): string
+```
+
+**Examples**
 
 ```feel
 upper case("aBc4")
 // "ABC4"
 ```
 
-## lower case()
+## lower case(string)
 
-- parameters:
-  - `string`: string
-- result: string
+Returns the given value with all characters are lowercase.
+
+**Function signature**
+
+```feel
+lower case(string: string): string
+```
+
+**Examples**
 
 ```feel
 lower case("aBc4")
 // "abc4"
 ```
 
-## substring before()
+## substring before(string, match)
 
-- parameters:
-  - `string`: string
-  - `match`: string
-- result: string
+Returns a substring of the given value that contains all characters before `match`.
+
+**Function signature**
+
+```feel
+substring before(string: string, match: string): string
+```
+
+**Examples**
 
 ```feel
 substring before("foobar", "bar")
 // "foo"
 ```
 
-## substring after()
+## substring after(string, match)
 
-- parameters:
-  - `string`: string
-  - `match`: string
-- result: string
+Returns a substring of the given value that contains all characters after `match`.
+
+**Function signature**
+
+```feel
+substring after(string: string, match: string): string
+```
+
+**Examples**
 
 ```feel
 substring after("foobar", "ob")
 // "ar"
 ```
 
-## contains()
+## contains(string, match)
 
-- parameters:
-  - `string`: string
-  - `match`: string
-- result: boolean
+Returns `true` if the given value contains the substring `match`. Otherwise, returns `false`.
+
+**Function signature**
+
+```feel
+contains(string: string, match: string): boolean
+```
+
+**Examples**
 
 ```feel
 contains("foobar", "of")
 // false
 ```
 
-## starts with()
+## starts with(string, match)
 
-- parameters:
-  - `input`: string
-  - `match`: string
-- result: boolean
+Returns `true` if the given value starts with the substring `match`. Otherwise, returns `false`.
+
+**Function signature**
+
+```feel
+starts with(string: string, match: string): boolean
+```
+
+**Examples**
 
 ```feel
 starts with("foobar", "fo")
 // true
 ```
 
-## ends with()
+## ends with(string, match)
 
-- parameters:
-  - `input`: string
-  - `match`: string
-- result: boolean
+Returns `true` if the given value ends with the substring `match`. Otherwise, returns `false`.
+
+**Function signature**
+
+```feel
+ends with(string: string, match: string): boolean
+```
+
+**Examples**
 
 ```feel
 ends with("foobar", "r")
 // true
 ```
 
-## matches()
+## matches(input, pattern)
 
-- parameters:
-  - `input`: string
-  - `pattern`: string (regular expression)
-- result: boolean
+Returns `true` if the given value matches the `pattern`. Otherwise, returns `false`.
+
+**Function signature**
+
+```feel
+matches(input: string, pattern: string): boolean
+```
+
+The `pattern` is a string that contains a regular expression.
+
+**Examples**
 
 ```feel
 matches("foobar", "^fo*bar")
 // true
 ```
 
-## replace()
+## matches(input, pattern, flags)
 
-- parameters:
-  - `input`: string
-  - `pattern`: string (regular expression)
-  - `replacement`: string (e.g. `$1` returns the first match group)
-  - (optional) `flags`: string ("s", "m", "i", "x")
-- result: string
+Returns `true` if the given value matches the `pattern`. Otherwise, returns `false`.
+
+**Function signature**
+
+```feel
+matches(input: string, pattern: string, flags: string): boolean
+```
+
+The `pattern` is a string that contains a regular expression.
+
+The `flags` can contain one or more of the following characters:
+
+- `s` (dot-all)
+- `m` (multi-line)
+- `i` (case insensitive)
+- `x` (comments)
+
+**Examples**
+
+```feel
+matches("FooBar", "foo", "i")
+// true
+```
+
+## replace(input, pattern, replacement)
+
+Returns the resulting string after replacing all occurrences of `pattern` with `replacement`.
+
+**Function signature**
+
+```feel
+replace(input: string, pattern: string, replacement: string): string
+```
+
+The `pattern` is a string that contains a regular expression.
+
+The `replacement` can access the match groups by using `$` and the number of the group, for example,
+`$1` to access the first group.
+
+**Examples**
 
 ```feel
 replace("abcd", "(ab)|(a)", "[1=$1][2=$2]")
@@ -142,12 +250,48 @@ replace("0123456789", "(\d{3})(\d{3})(\d{4})", "($1) $2-$3")
 // "(012) 345-6789"
 ```
 
-## split()
+## replace(input, pattern, replacement, flags)
 
-- parameters:
-  - `string`: string
-  - `delimiter`: string (regular expression)
-- result: list of strings
+Returns the resulting string after replacing all occurrences of `pattern` with `replacement`.
+
+**Function signature**
+
+```feel
+replace(input: string, pattern: string, replacement: string, flags: string): string
+```
+
+The `pattern` is a string that contains a regular expression.
+
+The `replacement` can access the match groups by using `$` and the number of the group, for example,
+`$1` to access the first group.
+
+The `flags` can contain one or more of the following characters:
+
+- `s` (dot-all)
+- `m` (multi-line)
+- `i` (case insensitive)
+- `x` (comments)
+
+**Examples**
+
+```feel
+replace("How do you feel?", "Feel", "FEEL", "i")
+// "How do you FEEL?"
+```
+
+## split(string, delimiter)
+
+Splits the given value into a list of substrings, breaking at each occurrence of the `delimiter` pattern.
+
+**Function signature**
+
+```feel
+split(string: string, delimiter: string): list<string>
+```
+
+The `delimiter` is a string that contains a regular expression.
+
+**Examples**
 
 ```feel
 split("John Doe", "\s" )
@@ -157,15 +301,22 @@ split("a;b;c;;", ";")
 // ["a", "b", "c", "", ""]
 ```
 
-## extract()
+## extract(string, pattern)
+
+<MarkerCamundaExtension></MarkerCamundaExtension>
 
 Returns all matches of the pattern in the given string. Returns an empty list if the pattern doesn't
 match.
 
-- parameters:
-  - `string`: string
-  - `pattern`: string (regular expression)
-- result: list of strings
+**Function signature**
+
+```feel
+extract(string: string, pattern: string): list<string>
+```
+
+The `pattern` is a string that contains a regular expression.
+
+**Examples**
 
 ```feel
 extract("references are 1234, 1256, 1378", "12[0-9]*")

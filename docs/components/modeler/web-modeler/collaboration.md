@@ -26,6 +26,17 @@ There are four roles with different levels of access rights that can be assigned
 - **Commenter**: the user cannot edit folders or diagrams nor invite users, but can view and leave comments on diagrams.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
+Additionally, the **Owner** of the organization has special privileges to do administrative tasks in **super-user mode**.
+
+#### Super-user mode
+
+Super-user mode is only available to the **Owner** of the organization. The main purpose of this mode is to assign collaborators
+to orphaned projects (which have no collaborators). Ordinarily, these projects would not be accessible or visible to any users.
+
+When the **Owner** activates super-user mode, they are temporarily granted **Project Admin** access to all projects
+of the organization. This allows the **Owner** to assign collaborators to orphaned projects and gives the **Owner**
+full access when none of the ordinary collaborators are available.
+
 ### Inviting users to projects
 
 :::note

@@ -16,11 +16,11 @@ Below, find a list of regions currently supported in Camunda Platform 8 SaaS.
 
 ## Available Google Cloud Platform (GCP) regions
 
-- Europe West: europe-west1
-- US East: us-east1
-- US Central: us-central1
-- Australia Southeast: australia-southeast1
-- North America Northeast: northamerica-northeast2
+- Belgium, Europe (europe-west1)
+- Iowa, North America (us-central1)
+- South Carolina, North America (us-east1)
+- Sydney, Australia (australia-southeast1)
+- Toronto, North America (northamerica-northeast2)
 
 You can find the locations behind the region codes [on the Google page](https://cloud.google.com/about/locations).
 

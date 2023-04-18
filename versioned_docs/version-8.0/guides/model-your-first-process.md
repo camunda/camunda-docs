@@ -35,7 +35,7 @@ You can share read-only models with teammates and other stakeholders via a link.
 If you want to invite collaborators to work on your process together, you'll need to first make sure they have the proper permissions and roles.
 
 1. First, add your colleague to the Organization. Click your account name then **Organization Management**.
-2. Navigate to **Users > Add New User**. Add your colleague's email and assign them an appropriate role - **Developer** is likely a good default option here as the user will have full access to Console, Operate, and Tasklist without deletion privileges. See [all roles and permissions](https://docs.camunda.io/docs/components/console/manage-organization/manage-users/#roles-and-permissions) for additional details.
+2. Navigate to **Users > Add New User**. Add your colleague's email and assign them an appropriate role - **Developer** is likely a good default option here as the user will have full access to Console, Operate, and Tasklist without deletion privileges. See [all roles and permissions](/components/console/manage-organization/manage-users.md#roles-and-permissions) for additional details.
 3. Click **Add**. An email will be sent to the email you provided. Your colleague must hit **Join** to finish adding them to the organization.
 4. Now that they're added to the organization, you can add them to a project. Open **Modeler**, navigate to your project, and open the **Collaborators** panel on the right side.
 5. Click **Add user** and find your colleague you added to your organization. Assign their role with the dropdown and click **Send invites**.
