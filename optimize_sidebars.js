@@ -1118,11 +1118,45 @@ module.exports = {
     {
       APIs: [
         docsLink("Public API", "apis-tools/public-api/"),
-        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
+        docsLink(
+          "Console API clients (REST)",
+          "apis-tools/console-api-reference/"
+        ),
         {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
             docsLink("Tutorial", "apis-tools/operate-api/tutorial/"),
+          ],
+        },
+        {
+          "Optimize API (REST)": [
+            "apis-tools/optimize-api/optimize-api-authorization",
+            {
+              Configuration: [
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing",
+              ],
+            },
+            {
+              Dashboard: [
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
+              ],
+            },
+            {
+              Report: [
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export",
+              ],
+            },
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling",
           ],
         },
         {
@@ -1370,48 +1404,31 @@ module.exports = {
           ],
         },
 
-        docsLink(
-          "Console API clients (REST)",
-          "apis-tools/console-api-reference/"
-        ),
         docsLink("Web Modeler API (REST, beta)", "apis-tools/web-modeler-api/"),
-
-        {
-          "Optimize API (REST)": [
-            "apis-tools/optimize-api/optimize-api-authorization",
-            {
-              Configuration: [
-                "apis-tools/optimize-api/configuration/enable-sharing",
-                "apis-tools/optimize-api/configuration/disable-sharing",
-              ],
-            },
-            {
-              Dashboard: [
-                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
-                "apis-tools/optimize-api/dashboard/delete-dashboard",
-                "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
-              ],
-            },
-            {
-              Report: [
-                "apis-tools/optimize-api/report/get-report-ids",
-                "apis-tools/optimize-api/report/delete-report",
-                "apis-tools/optimize-api/report/export-report-definitions",
-                "apis-tools/optimize-api/report/get-data-export",
-              ],
-            },
-            "apis-tools/optimize-api/event-ingestion",
-            "apis-tools/optimize-api/external-variable-ingestion",
-            "apis-tools/optimize-api/health-readiness",
-            "apis-tools/optimize-api/import-entities",
-            "apis-tools/optimize-api/variable-labeling",
-          ],
-        },
+        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
       ],
     },
 
     {
       Clients: [
+        {
+          "CLI client": [
+            docsLink("Quick reference", "apis-tools/cli-client/"),
+            docsLink(
+              "Getting started with the CLI client",
+              "apis-tools/cli-client/cli-get-started/"
+            ),
+          ],
+        },
+        {
+          "Go client": [
+            docsLink("Quick reference", "apis-tools/go-client/"),
+            docsLink(
+              "Getting started with the Go client",
+              "apis-tools/go-client/go-get-started/"
+            ),
+          ],
+        },
         {
           "Java client": [
             docsLink("Quick reference", "apis-tools/java-client/"),
@@ -1458,24 +1475,6 @@ module.exports = {
                 ),
               ],
             },
-          ],
-        },
-        {
-          "Go client": [
-            docsLink("Quick reference", "apis-tools/go-client/"),
-            docsLink(
-              "Getting started with the Go client",
-              "apis-tools/go-client/go-get-started/"
-            ),
-          ],
-        },
-        {
-          "CLI client": [
-            docsLink("Quick reference", "apis-tools/cli-client/"),
-            docsLink(
-              "Getting started with the CLI client",
-              "apis-tools/cli-client/cli-get-started/"
-            ),
           ],
         },
         {
