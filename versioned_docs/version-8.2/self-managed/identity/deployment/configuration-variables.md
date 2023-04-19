@@ -32,10 +32,10 @@ methods.
 Identity supports component configuration using preset values. This means to configure a
 component for use within Identity, all that is required is to set two variables:
 
-| Environment variable                 | Description                                   | Default value |
-| ------------------------------------ | --------------------------------------------- | ------------- |
-| `KEYCLOAK_INIT_<COMPONENT>_SECRET`   | The secret used for authentication flows      | No default    |
-| `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` | The root URL of where the component is hosted | No default    |
+| Environment variable                 | Description                                   |
+| ------------------------------------ | --------------------------------------------- |
+| `KEYCLOAK_INIT_<COMPONENT>_SECRET`   | The secret used for authentication flows      |
+| `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` | The root URL of where the component is hosted |
 
 :::note
 Identity supports the following values for the `<COMPONENT>` placeholder: `OPERATE`, `OPTIMIZE`, `TASKLIST`,
@@ -46,13 +46,13 @@ For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variab
 
 ### Database configuration
 
-| Environment variable         | Description                                        | Default value |
-| ---------------------------- | -------------------------------------------------- | ------------- |
-| `IDENTITY_DATABASE_HOST`     | The host of the database                           | No default    |
-| `IDENTITY_DATABASE_PORT`     | The port of the database                           | No default    |
-| `IDENTITY_DATABASE_NAME`     | The name of the database to connect to             | No default    |
-| `IDENTITY_DATABASE_USERNAME` | The username of a user with access to the database | No default    |
-| `IDENTITY_DATABASE_PASSWORD` | The password of a user with access to the database | No default    |
+| Environment variable         | Description                                        |
+| ---------------------------- | -------------------------------------------------- |
+| `IDENTITY_DATABASE_HOST`     | The host of the database                           |
+| `IDENTITY_DATABASE_PORT`     | The port of the database                           |
+| `IDENTITY_DATABASE_NAME`     | The name of the database to connect to             |
+| `IDENTITY_DATABASE_USERNAME` | The username of a user with access to the database |
+| `IDENTITY_DATABASE_PASSWORD` | The password of a user with access to the database |
 
 ### Feature flags
 
