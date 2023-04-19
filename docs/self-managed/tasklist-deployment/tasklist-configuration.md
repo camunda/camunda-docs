@@ -214,7 +214,7 @@ livenessProbe:
 
 ## Logging
 
-Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image `config/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
+Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image `/app/resources/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
