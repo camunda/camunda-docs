@@ -38,6 +38,10 @@ component for use within Identity, all that is required is to set two variables:
 | `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` | The root URL of where the component is hosted |
 
 :::note
+There are no default values for the variables above
+:::
+
+:::note
 Identity supports the following values for the `<COMPONENT>` placeholder: `OPERATE`, `OPTIMIZE`, `TASKLIST`,
 and `WEBMODELER`.
 
@@ -53,6 +57,10 @@ For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variab
 | `IDENTITY_DATABASE_NAME`     | The name of the database to connect to             |
 | `IDENTITY_DATABASE_USERNAME` | The username of a user with access to the database |
 | `IDENTITY_DATABASE_PASSWORD` | The password of a user with access to the database |
+
+:::note
+There are no default values for the variables above
+:::
 
 ### Feature flags
 
