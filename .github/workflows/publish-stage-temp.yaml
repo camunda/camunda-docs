@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   pull_request:
 
+permissions:
+  id-token: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
