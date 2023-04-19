@@ -41,4 +41,4 @@ jobs:
         # Enters a command from the cluster, in this case "tsh ls" using Machine ID credentials to list remote SSH nodes.
         run: tsh -i ${{ steps.auth.outputs.identity-file }} ls
       - name: Publish with Teleport
-        run: tsh scp -i ${{ steps.auth.outputs.identity-file }} -r [source_directory] jenkins_docs_camunda_io@webserver-atlas.prod.camunda-it.rocks:/destination_path
+        run: tsh scp -i ${{ steps.auth.outputs.identity-file }} -r build jenkins_docs_camunda_io@webserver-atlas.prod.camunda-it.rocks:/destination_path
