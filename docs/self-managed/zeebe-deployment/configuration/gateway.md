@@ -5,7 +5,7 @@ sidebar_label: "Gateway configuration"
 description: "Analyze how to configure the Zeebe gateway, including byte sizes, time units, paths, and sample YAML snippets."
 ---
 
-A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
+The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
 
 ## Conventions
 
@@ -30,7 +30,13 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ## Configuration
 
+In the following sections, we provide tables with environment variables, application properties, a description, and their corresponding default values. We also describe a few use cases for each type of configuration.
+
+For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda Platform 8, we will explain some configuration options here as well. Find more information about possible Zeebe Gateway Helm chart configurations [here](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#zeebe-gateway).
+
 ### zeebe.gateway.network
+
+The network configuration allows configuration of the host and port details for the gateway.
 
 | Field                | Description                                                                                                                                                                                                                                                                                                                                              | Example value |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -50,6 +56,14 @@ network:
 ```
 
 ### zeebe.gateway.cluster
+
+As mentioned, the gateway needs to connect to the Zeebe brokers.
+
+It is important to configure the cluster's initial contact point to the Zeebe brokers. You may set only one of the Zeebe brokers, but keep in mind that resiliency will be lower than using all the Zeebe brokers available. The corresponding environment variable is called `ZEEBE_GATEWAY_CLUSTER_INITIALCONTACTPOINTS`.
+
+It is necessary to use the same cluster name for the broker and gateway. Otherwise, a connection will not be possible. The related configuration property is `zeebe.gateway.cluster.clusterName` and as an environment variable, it is called `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`.
+
+If you use the Helm charts, both properties are configured for you already.
 
 | Field                | Description                                                                                                                                                                                                                                                                                                                                          | Example value                              |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
@@ -80,7 +94,7 @@ cluster:
 
 ### zeebe.gateway.cluster.membership
 
-Configure parameters for SWIM protocol which is used to propagate cluster membership information among brokers and gateways.
+To configure how the gateway connects and distributes information with other nodes (brokers or gateways) via SWIM, the following properties can be used. It might be useful to increase timeouts for setups that encounter a high latency between nodes.
 
 | Field             | Description                                                                                                                                                                                                                                                                                                                                               | Example value |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -112,6 +126,14 @@ membership:
 ```
 
 ### zeebe.gateway.cluster.security
+
+The cluster security configuration options allow securing communication between the gateway and other nodes in the cluster.
+
+:::note
+
+You can read more about intra-cluster security on [its dedicated page](../security/secure-cluster-communication.md).
+
+:::
 
 | Field                | Description                                                                                                                                                                                  | Example value |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -164,16 +186,14 @@ security:
 
 ### zeebe.gateway.cluster.messageCompression
 
+To configure the compression algorithm for all messages sent between the gateway and
+the brokers, the following property can be set. Available options are NONE, GZIP, and SNAPPY.
 This feature is useful when the network latency between the nodes is very high (for example, when nodes are deployed in different data centers).
 
-When latency is high, the network bandwidth is severely reduced. Hence, enabling compression helps to improve the throughput.
+When latency is high, the network bandwidth is severely reduced. Therefore, enabling compression helps improve the throughput. You need to decide between reducing bandwidth or reducing resources required for compression.
 
 :::caution
-When there is no latency enabling this may have a performance impact.
-:::
-
-:::note
-When this flag is enabled, you must also enable compression in standalone broker configuration.
+When there is no latency enabling, this may have a performance impact. Additionally, when this flag is enabled, you must also enable compression in the standalone broker configuration.
 :::
 
 | Field              | Description                                                                                                                                                                                                                                             | Example value |
@@ -188,6 +208,15 @@ messageCompression: NONE
 
 ### zeebe.gateway.threads
 
+To handle many concurrent incoming requests, the user can do two things: scale the deployed gateways (if the standalone mode is in use), or increase the used resources and threads.
+
+The Zeebe Gateway uses one thread by default, but this should be set to a higher number if the gateway doesn’t exhaust its available resources and doesn’t keep up with the load. The corresponding environment variables look like this: `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`.
+During benchmarking and when increasing the thread count, it may also make sense to increase the given resources, which are quite small in the Helm chart.
+
+For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Increasing the number of gateway replicas to more than one enables the possibility for quick failover; in the case one gateway dies, the remaining gateway(s) can handle the traffic.
+
+To explore how the gateway behaves, or what it does, metrics can be consumed. By default, the gateway exports Prometheus metrics, which can be scrapped under `:9600/actuator/prometheus`.
+
 | Field             | Description                                                                                                                                                                                           | Example value |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | managementThreads | Sets the number of threads the gateway will use to communicate with the broker cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`. | 1             |
@@ -200,6 +229,14 @@ threads:
 ```
 
 ### zeebe.gateway.security
+
+The client security configuration options allow securing the communication between a gateway and clients.
+
+:::note
+
+You can read more about client-gateway security on [its dedicated page](../security/secure-client-communication.md).
+
+:::
 
 | Field                | Description                                                                                                                                                      | Example value |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -218,6 +255,8 @@ security:
 
 ### zeebe.gateway.longPolling
 
+It's possible to configure gateway long-polling behavior. Read more on long-polling behavior [here](../../../components/concepts/job-workers.md#long-polling).
+
 | Field   | Description                                                                                                                                      | Example value |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | enabled | Enables long polling for available jobs. This setting can also be overridden using the environment `variable ZEEBE_GATEWAY_LONGPOLLING_ENABLED`. | True          |
@@ -231,7 +270,7 @@ longPolling:
 
 ### zeebe.gateway.interceptors
 
-Consider reading our documentation on [interceptors](self-managed/zeebe-deployment/interceptors.md) first.
+It is possible to intercept requests in the gateway, which can be configured via environment variables or the `application.yaml` file. For more details, read about [interceptors](../interceptors.md).
 
 Each interceptor should be configured with the values described below:
 

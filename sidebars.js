@@ -1108,9 +1108,6 @@ module.exports = {
       ],
     },
     {
-      "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
-    },
-    {
       Modeler: [
         {
           "Web Modeler": [

@@ -1992,14 +1992,6 @@ module.exports = {
         },
       ],
     },
-    {
-      "Zeebe Gateway": [
-        docsLink(
-          "Overview",
-          "self-managed/zeebe-gateway-deployment/zeebe-gateway/"
-        ),
-      ],
-    },
 
     {
       Modeler: [
