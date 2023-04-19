@@ -38,7 +38,7 @@ component for use within Identity, all that is required is to set two variables:
 | `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` | The root URL of where the component is hosted |
 
 :::note
-There are no default values for the variables above
+There are no default values for the variables above.
 :::
 
 :::note
@@ -59,7 +59,7 @@ For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variab
 | `IDENTITY_DATABASE_PASSWORD` | The password of a user with access to the database |
 
 :::note
-There are no default values for the variables above
+There are no default values for the variables above.
 :::
 
 ### Feature flags
