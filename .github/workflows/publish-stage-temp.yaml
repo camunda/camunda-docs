@@ -1,0 +1,39 @@
+name: publish-stage-temp
+
+on: workflow_dispatch
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Install Dependencies
+        run: npm ci
+      - name: Disable Indexing
+        run: "sed -i 's/noIndex: false/noIndex: true/g' docusaurus.config.js"
+      - name: Update URL
+        run: 'sed -i ''s!url: "https://docs.camunda.io"!url: "https://stage.docs.camunda.io"!g'' docusaurus.config.js'
+      - name: Build
+        run: npm run build
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
+      - name: Fetch Teleport binaries
+        uses: teleport-actions/setup@v1
+        with:
+          version: 12.2.3
+      - name: Fetch credentials using Machine ID
+        id: auth
+        uses: teleport-actions/auth@v1
+        with:
+          proxy: camunda.teleport.sh:443
+          token: github-token-platform-docs
+          certificate-ttl: 1h
+          anonymous-telemetry: 1
+      - name: List nodes
+        # Enters a command from the cluster, in this case "tsh ls" using Machine ID credentials to list remote SSH nodes.
+        run: tsh -i ${{ steps.auth.outputs.identity-file }} ls
+      - name: Publish with Teleport
+        run: tsh scp -i ${{ steps.auth.outputs.identity-file }} -r [source_directory] jenkins_docs_camunda_io@webserver-atlas.prod.camunda-it.rocks:/destination_path
