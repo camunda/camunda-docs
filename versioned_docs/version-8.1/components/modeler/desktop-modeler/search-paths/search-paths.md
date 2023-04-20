@@ -1,21 +1,21 @@
 ---
 id: search-paths
 title: Search paths
-description: "Features like element templates and plugins allow you to add your own resources to Desktop Modeler."
+description: "Features like element templates and plugins allow you to add your own resources to Desktop Modeler. For these resources to be found, they have to be in one of two directories depending on how local or global you want them to be."
 ---
 
 Features like element templates and plugins allow you to add your own resources to Desktop Modeler. For these resources to be found, they have to be in one of two directories depending on how local or global you want them to be.
 
-## App Data Directory
+## App data directory
 
 The `resources` directory relative to the directory containing the Camunda Modeler executable file. In our documentation we refer to it as `{APP_DATA_DIRECTORY}`.
 
 Resources in the app data directory will be found by any local Camunda Modeler instance.
 
-### Example (Windows):
+### Example (Windows)
 
 ```
-└── camunda-modeler-3.5.0-win-x64
+└── camunda-modeler-5.10.0-win-x64
     ├── Camunda Modeler.exe
     └── resources
         ├── element-templates
@@ -25,7 +25,7 @@ Resources in the app data directory will be found by any local Camunda Modeler i
                 └── index.js
 ```
 
-## User Data Directory
+## User data directory
 
 The `camunda-modeler/resources` directory relative to the per-user application data directory, which by default points to:
 
@@ -37,7 +37,7 @@ In our documentation we refer to it as `{USER_DATA_DIRECTORY}`.
 
 Resources in the user data directory will be found by all Camunda Modeler instances.
 
-### Example (Windows):
+### Example (Windows)
 
 ```
 └── AppData
