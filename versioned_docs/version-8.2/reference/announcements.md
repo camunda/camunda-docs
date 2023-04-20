@@ -10,6 +10,10 @@ Release date: 11th of April 2023
 
 End of maintenance: 8th of October 2024
 
+### OpenSearch 1.3.x support
+
+- Operate version 8.2+ now also support OpenSearch 1.3.x.
+
 ## Camunda Platform 8.1
 
 Release date: 11th of October 2022
@@ -22,7 +26,7 @@ Release date: 12th of April 2022
 
 End of maintenance: 11th of October 2023
 
-### Deprecated in 8.0
+## Deprecated in 8.0
 
 The [DeployProcess RPC](/apis-tools/grpc.md#deployprocess-rpc) was deprecated in 8.0.
 It is replaced by the [DeployResource RPC](/apis-tools/grpc.md#deployresource-rpc).

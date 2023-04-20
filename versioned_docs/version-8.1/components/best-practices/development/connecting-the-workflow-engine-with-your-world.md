@@ -33,7 +33,7 @@ Your application can basically do two things with the client:
 
 Using the Zeebe client’s API, you can communicate with the workflow engine. The two most important API calls are to start new process instances and to correlate messages to a process instance.
 
-**Start process instances using the** [**Java Client**](/docs/apis-tools/java-client/index/)**:**
+**Start process instances using the** [**Java Client**](/apis-tools/java-client/index.md)**:**
 
 ```java
 processInstance = zeebeClient.newCreateInstanceCommand()
