@@ -51,3 +51,7 @@ This ILM Policy works on Elasticsearch 7 as well, and can function as a replacem
 :::note
 Only indices containing dates in their suffix may be deleted.
 :::
+
+### Opensearch
+
+Opensearch does not support above Index Lifecycle Management (ILM) Policy, but rather uses Index State Management. <br/>Please refer to https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ism.html for configuration guidance.
