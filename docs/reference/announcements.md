@@ -11,9 +11,9 @@ description: "Important announcements including deprecation & removal notices"
 - Operate and Tasklist now use Spring Boot version 3.0. Therefore, [URLs with a trailing slash will fail with an HTTP status 404](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide#spring-mvc-and-webflux-url-matching-changes).
 - To enable the new **Start Process from Tasklist** feature in Tasklist, additional configuration is needed. Details can be found [here](/docs/next/guides/update-guide/810-to-820/#tasklist).
 
-## Opensearch 1.3.x support
+## OpenSearch 1.3.x support
 
-- Operate version 8.2+ now also support Opensearch 1.3.x.
+- Operate version 8.2+ now also support OpenSearch 1.3.x.
 
 ## Deprecated in 8.0
 
