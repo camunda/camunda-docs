@@ -31,6 +31,8 @@ It is replaced by the [DeployResource RPC](/apis-tools/grpc.md#deployresource-rp
 
 Release date: 11th of January 2022
 
+Camunda Cloud is out of maintenance.
+
 ### Deprecated in 1.3
 
 The `zeebe-test` module was deprecated in 1.3.0. We are currently planning to remove `zeebe-test` for the 1.4.0 release.
@@ -39,13 +41,19 @@ The `zeebe-test` module was deprecated in 1.3.0. We are currently planning to re
 
 Release date: 12th of October 2021
 
+Camunda Cloud is out of maintenance.
+
 ## Camunda Cloud 1.1
 
 Release date: 13th of July 2021
 
+Camunda Cloud is out of maintenance.
+
 ## Camunda Cloud 1.0
 
 Release date: 11th of May 2021
+
+Camunda Cloud is out of maintenance.
 
 ### Removed in 1.0
 
