@@ -12,7 +12,7 @@ Head over to our documentation on [APIs](/self-managed/concepts/access-control/a
 
 :::caution Write access needed
 To add an API, you need to have write access to Identity.
-Read our [guide on managing user access](managing-user-access.md) to learn more.
+Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
 :::
 
 1. Log in to the Identity UI and navigate to the **API** tab:

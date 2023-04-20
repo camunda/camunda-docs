@@ -12,7 +12,7 @@ Head over to our documentation on [applications](/self-managed/concepts/access-c
 
 :::caution Write access needed
 To add an application and assign a permission to an application, you need to have write access to Identity.
-Read our [guide on managing user access](managing-user-access.md) to learn more.
+Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
 :::
 
 ## Add an application

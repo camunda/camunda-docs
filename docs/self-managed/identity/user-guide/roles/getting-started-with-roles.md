@@ -12,7 +12,7 @@ Head over to [Concepts - roles](/self-managed/concepts/access-control/roles.md) 
 
 :::caution Write access needed
 To add a role, assign a permission to a role, and assign a role to a user, you need to have write access to Identity.
-Read our [guide on managing user access](managing-user-access.md) to learn more.
+Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
 :::
 
 ## Add a role
@@ -58,7 +58,7 @@ To create a permission using Identity, take the following steps:
 ![add-permission-modal-2](../img/add-permission-modal-2.png)
 
 :::note Not sure what permissions to add?
-Each component within the cloud stack has support for specific permissions. We recommend checking the [documentation for the required component](../../../components/components-overview.md) to find out the list of permissions it supports.
+Each component within the cloud stack has support for specific permissions. We recommend checking the [documentation for the required component](../../../../components/components-overview.md) to find out the list of permissions it supports.
 :::
 
 On confirmation, the modal will close, the table will update, and your new permission will be shown:

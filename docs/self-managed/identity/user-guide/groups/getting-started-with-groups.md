@@ -34,7 +34,7 @@ In this guide we will show you how to use Identity to assign users to a group.
 
 :::caution Write access needed
 To assign a user to a group, you must have write access to Identity.
-Read our [guide on managing user access](../managing-user-access.md) to learn more.
+Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
 :::
 
 1. Log in to the Identity UI and navigate to the **Groups** tab. Select the group you would like to assign a user to from the table:
@@ -53,7 +53,7 @@ On confirmation, the modal closes, the table updates, and your assigned members 
 
 :::caution Write access needed
 To assign a role to a group, you must have write access to Identity.
-Read our [guide on managing user access](../managing-user-access.md) to learn more.
+Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
 :::
 
 1. Log in to the Identity UI and navigate to the **Groups** tab. Select the group you would like to assign a role to from the table, and click on the **Roles** tab:
