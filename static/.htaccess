@@ -8,6 +8,25 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# identity restructure
+RewriteRule ^docs/self-managed/identity/user-guide/connect-to-an-existing-keycloak/(.*)$ /docs/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/managing-user-access/(.*)$ /docs/self-managed/identity/user-guide/authorizations/managing-user-access/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/generating-m2m-tokens/(.*)$ /docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/making-identity-production-ready/(.*)$ /docs/self-managed/identity/user-guide/configuration/making-identity-production-ready/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configure-logging/(.*)$ /docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configure-external-identity-provider/(.*)$ /docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configure-external-identity-provider/(.*)$ /docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-role-to-a-user/(.*)$ /docs/self-managed/identity/user-guide/roles/getting-started-with-roles/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-permission-to-a-role/(.*)$ /docs/self-managed/identity/user-guide/roles/getting-started-with-roles/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-a-role/(.*)$ /docs/self-managed/identity/user-guide/roles/getting-started-with-roles/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/(.*)$ /docs/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-a-permission/(.*)$ /docs/self-managed/identity/user-guide/roles/getting-started-with-roles/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-an-api/(.*)$ /docs/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-an-application/(.*)$ /docs/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/groups/creating-a-group/(.*)$ /docs/self-managed/identity/user-guide/groups/getting-started-with-groups/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/groups/assigning-users-to-a-group/(.*)$ /docs/self-managed/identity/user-guide/groups/getting-started-with-groups/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/groups/assigning-roles-to-a-group/(.*)$ /docs/self-managed/identity/user-guide/groups/getting-started-with-groups/$1 [R=301,L]
+
 ###### 8.2 release redirects ######
 RewriteRule ^docs/self-managed/web-modeler/installation/(.*)$ /docs/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
 RewriteRule ^docs/self-managed/web-modeler/configuration/(.*)$ /docs/self-managed/modeler/web-modeler/configuration/$1 [R=301,L]
