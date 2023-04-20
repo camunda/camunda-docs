@@ -1381,8 +1381,8 @@
         },
         {
           "type": "link",
-          "label": "Zeebe API (gRPC)",
-          "href": "/docs/apis-tools/grpc/"
+          "label": "Console API clients (REST)",
+          "href": "/docs/apis-tools/console-api-reference/"
         },
         {
           "Operate API (REST)": [
@@ -1396,6 +1396,37 @@
               "label": "Tutorial",
               "href": "/docs/apis-tools/operate-api/tutorial/"
             }
+          ]
+        },
+        {
+          "Optimize API (REST)": [
+            "apis-tools/optimize-api/optimize-api-authorization",
+            {
+              "Configuration": [
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing"
+              ]
+            },
+            {
+              "Dashboard": [
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
+              ]
+            },
+            {
+              "Report": [
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export"
+              ]
+            },
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling"
           ]
         },
         {
@@ -1730,49 +1761,46 @@
         },
         {
           "type": "link",
-          "label": "Console API clients (REST)",
-          "href": "/docs/apis-tools/console-api-reference/"
-        },
-        {
-          "type": "link",
           "label": "Web Modeler API (REST, beta)",
           "href": "/docs/apis-tools/web-modeler-api/"
         },
         {
-          "Optimize API (REST)": [
-            "apis-tools/optimize-api/optimize-api-authorization",
-            {
-              "Configuration": [
-                "apis-tools/optimize-api/configuration/enable-sharing",
-                "apis-tools/optimize-api/configuration/disable-sharing"
-              ]
-            },
-            {
-              "Dashboard": [
-                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
-                "apis-tools/optimize-api/dashboard/delete-dashboard",
-                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
-              ]
-            },
-            {
-              "Report": [
-                "apis-tools/optimize-api/report/get-report-ids",
-                "apis-tools/optimize-api/report/delete-report",
-                "apis-tools/optimize-api/report/export-report-definitions",
-                "apis-tools/optimize-api/report/get-data-export"
-              ]
-            },
-            "apis-tools/optimize-api/event-ingestion",
-            "apis-tools/optimize-api/external-variable-ingestion",
-            "apis-tools/optimize-api/health-readiness",
-            "apis-tools/optimize-api/import-entities",
-            "apis-tools/optimize-api/variable-labeling"
-          ]
+          "type": "link",
+          "label": "Zeebe API (gRPC)",
+          "href": "/docs/apis-tools/grpc/"
         }
       ]
     },
     {
       "Clients": [
+        {
+          "CLI client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-tools/cli-client/"
+            },
+            {
+              "type": "link",
+              "label": "Getting started with the CLI client",
+              "href": "/docs/apis-tools/cli-client/cli-get-started/"
+            }
+          ]
+        },
+        {
+          "Go client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-tools/go-client/"
+            },
+            {
+              "type": "link",
+              "label": "Getting started with the Go client",
+              "href": "/docs/apis-tools/go-client/go-get-started/"
+            }
+          ]
+        },
         {
           "Java client": [
             {
@@ -1843,34 +1871,6 @@
                   "href": "/docs/apis-tools/java-client-examples/cluster-topology-request/"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "Go client": [
-            {
-              "type": "link",
-              "label": "Quick reference",
-              "href": "/docs/apis-tools/go-client/"
-            },
-            {
-              "type": "link",
-              "label": "Getting started with the Go client",
-              "href": "/docs/apis-tools/go-client/go-get-started/"
-            }
-          ]
-        },
-        {
-          "CLI client": [
-            {
-              "type": "link",
-              "label": "Quick reference",
-              "href": "/docs/apis-tools/cli-client/"
-            },
-            {
-              "type": "link",
-              "label": "Getting started with the CLI client",
-              "href": "/docs/apis-tools/cli-client/cli-get-started/"
             }
           ]
         },
