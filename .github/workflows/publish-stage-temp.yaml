@@ -25,20 +25,13 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=4096
-      - name: Fetch Teleport binaries
-        uses: teleport-actions/setup@v1
+      - name: Publish
+        uses: burnett01/rsync-deployments@5.1
         with:
-          version: 12.2.3
-      - name: Fetch credentials using Machine ID
-        id: auth
-        uses: teleport-actions/auth@v1
-        with:
-          proxy: camunda.teleport.sh:443
-          token: github-token-platform-docs
-          certificate-ttl: 1h
-          anonymous-telemetry: 1
-      - name: List nodes
-        # Enters a command from the cluster, in this case "tsh ls" using Machine ID credentials to list remote SSH nodes.
-        run: tsh -i ${{ steps.auth.outputs.identity-file }} ls
-      - name: Publish with Teleport
-        run: tsh scp -i ${{ steps.auth.outputs.identity-file }} -r build jenkins_docs_camunda_io@webserver-atlas.prod.camunda-it.rocks:stage.docs.camunda.io
+          switches: -avzr --delete
+          path: build/
+          remote_path: ${{ secrets.AWS_STAGE_PUBLISH_PATH }}
+          remote_host: ${{ secrets.AWS_STAGE_PUBLISH_HOST }}
+          remote_user: ${{ secrets.AWS_STAGE_PUBLISH_USER }}
+          # vvvvv Intentionally missing the AWS_ prefix vvvvv
+          remote_key: ${{ secrets.PUBLISH_STAGE_KEY }}
