@@ -17,20 +17,14 @@ Read our [guide on managing user access](managing-user-access.md) to learn more.
 
 1. Log in to the Identity UI and navigate to the **API** tab:
 
-![add-api-tab](img/add-api-tab.png)
+![add-api-tab](../img/add-api-tab.png)
 
-2. Click the **Add API** button located on the top right of the table and a modal will open:
-
-![add-api-modal-1](img/add-api-modal-1.png)
+2. Click the **Add API** button located on the top right of the table and a modal will open.
 
 3. We are now able to fill out the details of the API. For this guide, we will use a set of example values. When you have inserted the details, click **Add**:
 
-![add-api-modal-2](img/add-api-modal-2.png)
+![add-api-modal-2](../img/add-api-modal-2.png)
 
-On confirmation, the modal will close, the table will update, and your new API will be shown:
+On confirmation, the modal will close, the table will update, and your new API will be shown. Click on your new API to view the details.
 
-![add-api-refreshed-table](img/add-api-refreshed-table.png)
-
-You are now able to click on your new API to view the details:
-
-![add-api-details](img/add-api-details.png)
+![add-api-refreshed-table](../img/add-api-refreshed-table.png)
