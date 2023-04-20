@@ -34,7 +34,9 @@ A command represents an action to be taken or executed. Example commands include
 
 ### Connector
 
-A piece of software that connects the workflow engine with some other system or infrastructure. The connector might be uni or bidirectional and possibly include a [job worker](#job-worker).
+A reusable building block that performs the integration with an external system and works out of the box.
+
+The connector might be uni or bidirectional and possibly include a [job worker](#job-worker).
 
 The boundary between connectors and job workers can be fuzzy, but in general, connectors connect to other active pieces of software. [Outbound](#outbound-connector), [inbound](#inbound-connector), or [protocol](#protocol-connector) connectors are types of connectors.
 
