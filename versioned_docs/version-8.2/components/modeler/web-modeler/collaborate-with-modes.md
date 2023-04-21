@@ -8,7 +8,7 @@ description: "Dedicated modes are ways for business and IT professionals to coll
 
 Collaboration between business and IT professionals can be challenging, which is why we introduced three modes in BPMN diagrams that help users with different technical backgrounds to collaborate effectively: **design**, **implement**, and **play**.
 
-The **Design** mode is tailored to business users, and the **Implement** and **Play** modes are tailored to developers.
+The **Design** mode view is tailored to business users, and the **Implement** and **Play** mode views are tailored to developers.
 
 Business users can now focus on modeling, sharing, and collaborating, while developers can work on implementation and debugging with ease.
 
