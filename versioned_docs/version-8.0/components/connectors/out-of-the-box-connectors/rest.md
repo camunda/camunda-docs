@@ -134,7 +134,7 @@ Similarly to the Query Parameters, the **Http Headers** can be specified using t
 ```
 
 :::note
-If you do not set the Content-Type header in your Http Headers, the connector will automatically set the 'Content-Type' to 'application/json'.
+If you do not set the `Content-Type` header in your HTTP headers, the Connector will automatically set the `Content-Type` to `application/json`.
 :::
 
 ![rest connector http headers](../img/connectors-rest-http-headers.png)
