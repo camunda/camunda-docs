@@ -116,7 +116,7 @@ to inject multiple secrets at once.
 
 ### Secrets in manual installations
 
-In the [manual setup](../platform-deployment/manual.md#run-connectors), inject secrets during Connector execution by providing
+In the [manual setup](../platform-deployment/local.md#run-connectors), inject secrets during Connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash
