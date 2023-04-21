@@ -107,6 +107,6 @@ Collections and APIs are manually updated and not all API functionality may be a
 
 ### Community SDKs
 
-In addition to APIs & clients, the Camunda Developer Experience team is looking for feedback on popular community clients turned SDKs. While these are currently on the Camunda Community Hub, we are actively iterating and evaluating feedback to fully support them.
+In addition to APIs and clients, the Camunda Developer Experience team is looking for feedback on popular community clients turned SDKs. While these are currently on the Camunda Community Hub, we are actively iterating and evaluating feedback to fully support them.
 
 - [NodeJS SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)
