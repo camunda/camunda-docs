@@ -6,7 +6,7 @@ description: "This section defines common terminology referenced within the docu
 
 ### Bridge
 
-Synonym to "[connector](#connector)".
+Synonym to "[Connector](#connector)".
 
 ### Broker
 
@@ -36,9 +36,9 @@ A command represents an action to be taken or executed. Example commands include
 
 A reusable building block that performs the integration with an external system and works out of the box.
 
-The connector might be uni or bidirectional and possibly include a [job worker](#job-worker).
+The Connector might be uni or bidirectional and possibly include a [job worker](#job-worker).
 
-The boundary between connectors and job workers can be fuzzy, but in general, connectors connect to other active pieces of software. [Outbound](#outbound-connector), [inbound](#inbound-connector), or [protocol](#protocol-connector) connectors are types of connectors.
+The boundary between Connectors and job workers can be fuzzy, but in general, Connectors connect to other active pieces of software. [Outbound](#outbound-connector), [inbound](#inbound-connector), or [protocol](#protocol-connector) Connectors are types of Connectors.
 
 ### Correlation
 
@@ -84,9 +84,9 @@ Clients communicate with the Zeebe cluster through a gateway. The gateway provid
 
 ### Inbound Connector
 
-Inbound [connectors](#connector) in Camunda Platform 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
+Inbound [Connectors](#connector) in Camunda Platform 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
-Inbound connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and [polling](#polling).
+Inbound Connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and [polling](#polling).
 
 ### Incident
 
@@ -132,9 +132,9 @@ A message contains information to be delivered to interested parties during exec
 
 - [Messages](/components/concepts/messages.md)
 
-### Outbound connector
+### Outbound Connector
 
-Outbound [connectors](#connector) in Camunda Platform 8 allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
+Outbound [Connectors](#connector) in Camunda Platform 8 allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
 
 ### Partition
 
@@ -142,11 +142,11 @@ A partition represents a logical grouping of data in a Zeebe broker. This data i
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md)
 
-### Polling
+### Polling Connector
 
-An inbound polling connector to periodically poll an external system or service for new data using HTTP polling.
+An inbound polling Connector to periodically poll an external system or service for new data using HTTP polling.
 
-A Camunda workflow uses this type of connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
+A Camunda workflow uses this type of Connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
 
 ### Process
 
@@ -170,11 +170,11 @@ A process instance variable represents the execution state (i.e data) of a proce
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
 
-### Protocol connector
+### Protocol Connector
 
-Protocol connectors are a type of [connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
+Protocol Connectors are a type of [Connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) Connectors, supporting a variety of technical protocols. These Connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
 
-Protocol connectors can be customized to meet the needs of specific use cases using element templates, with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
+Protocol Connectors can be customized to meet the needs of specific use cases using element templates, with no additional coding or deployment required. Examples of protocol Connectors include HTTP REST, SOAP, GraphQL, as well as message queue Connectors.
 
 ### Record
 
@@ -214,15 +214,15 @@ The state of all active process instances, (these are also known as inflight pro
 
 - [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#snapshots)
 
-### Subscription
+### Subscription Connector
 
-An [inbound connector](#inbound-connector) that subscribes to a message queue.
+An [inbound Connector](#inbound-connector) that subscribes to a message queue.
 
-This way, a Camunda workflow can receive messages from an external system or service (like Kafka, or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
+This way, a Camunda workflow can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound Connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
 
 ### Webhook
 
-Webhooks are a sub type of [inbound connector](#inbound-connector).
+Webhooks are a subtype of [inbound Connector](#inbound-connector).
 
 A webhook is a way for web applications to send real-time notifications or data to other applications or services when certain events occur. When a webhook is set up, the application sends a POST request containing data to a pre-configured URL, which triggers a workflow.
 
