@@ -40,6 +40,8 @@ ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=127.0.0.1:26500
 ZEEBE_CLIENT_SECURITY_PLAINTEXT=true
 ```
 
+If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.
+
 Connect to Operate locally using username and password:
 
 ```bash
@@ -64,6 +66,7 @@ However, if you still wish to do so, you need to start your Connectors runtime w
 CAMUNDA_CONNECTOR_POLLING_ENABLED=false
 CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false
 SPRING_MAIN_WEB-APPLICATION-TYPE=none
+OPERATE_CLIENT_ENABLED=false
 ```
 
 ## Manual discovery of Connectors
@@ -102,7 +105,7 @@ docker run --rm --name=connectors -d \
   --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
   -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
   -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
-  camunda/connectors:0.5.0
+  camunda/connectors:latest
 ```
 
 The secret `MY_SECRET` value is specified directly in the `docker run` call,
@@ -139,7 +142,7 @@ docker run --rm --name=connectors -d \
   -v $PWD/my-secret-provider-with-dependencies.jar:/opt/app/my-secret-provider-with-dependencies.jar \  # Specify secret provider
   -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \                                    # Specify Zeebe address
   -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                                                             # Optional: provide security configs to connect to Zeebe
-  camunda/connectors:0.5.0
+  camunda/connectors:latest
 ```
 
 In manual installations, add the JAR to the `-cp` argument of the Java call:

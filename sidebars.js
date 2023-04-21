@@ -694,6 +694,7 @@ module.exports = {
     "reference/release-notes",
     "reference/licenses",
     "reference/notices",
+    "reference/status",
     "reference/release-policy",
     "reference/early-access",
     "reference/supported-environments",

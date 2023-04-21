@@ -147,6 +147,20 @@ Find an overview in the [Connectors Bundle project](https://github.com/camunda/c
 
 Refer to the [Connector installation guide](../../connectors-deployment/install-and-start) for details on how to provide the Connector templates for modeling.
 
+#### Running single Connectors container
+
+```shell
+docker run --rm --name=MyConnectorsInstance \
+  --network=camunda-platform_camunda-platform \
+  -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=zeebe:26500 \
+  -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \
+  -e CAMUNDA_CONNECTOR_POLLING_ENABLED=false \
+  -e CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false \
+  -e OPERATE_CLIENT_ENABLED=false \
+  -e SPRING_MAIN_WEB-APPLICATION-TYPE=none \
+    camunda/connectors-bundle:latest
+```
+
 #### Custom set of Connectors
 
 To add custom Connectors, you can build on top of our [Connectors base image](https://hub.docker.com/r/camunda/connectors/) that includes the pre-packaged runtime environment without any Connector.
@@ -162,13 +176,13 @@ To prevent this, common dependencies like `jackson` can be shaded and relocated 
 You can add a Connector JAR by extending the base image with a JAR from a public URL:
 
 ```yml
-FROM camunda/connectors:0.3.0
+FROM camunda/connectors:x.y.z
 
-ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.11.0/connector-http-json-0.11.0-with-dependencies.jar /opt/app/
+ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/x.y.z/connector-http-json-0..0-with-dependencies.jar /opt/app/
 ```
 
 You can also add a Connector JAR using volumes:
 
 ```bash
-docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.3.0
+docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:x.y.z
 ```
