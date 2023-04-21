@@ -9,14 +9,27 @@ a Spring Boot application can be applied.
 By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
 
 - [Webserver](#webserver)
-- [Elasticsearch connection](#elasticsearch)
-- [Zeebe Broker connection](#zeebe-broker-connection)
-- [Zeebe Elasticsearch Exporter](#zeebe-elasticsearch-exporter)
-- [Operation Executor](#operation-executor)
-- [Authentication](operate-authentication.md)
-- [Scaling Operate](importer-and-archiver.md)
-- [Monitoring possibilities](#monitoring-operate)
-- [Logging configuration](#logging)
+  - [Security](#security)
+- [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
+  - [Settings to connect](#settings-to-connect)
+    - [Settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance)
+  - [Settings for shards and replicas](#settings-for-shards-and-replicas)
+  - [A snippet from application.yml](#a-snippet-from-applicationyml)
+- [Zeebe broker connection](#zeebe-broker-connection)
+  - [Settings to connect](#settings-to-connect-1)
+  - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
+- [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
+  - [Settings to connect and import](#settings-to-connect-and-import)
+  - [A snippet from application.yml:](#a-snippet-from-applicationyml-2)
+- [Operation executor](#operation-executor)
+  - [A snippet from application.yml](#a-snippet-from-applicationyml-3)
+- [Monitoring Operate](#monitoring-operate)
+  - [Versions before 0.25.0](#versions-before-0250)
+- [Logging](#logging)
+  - [JSON logging configuration](#json-logging-configuration)
+  - [Change logging level at runtime](#change-logging-level-at-runtime)
+    - [Set all Operate loggers to DEBUG](#set-all-operate-loggers-to-debug)
+- [An example of application.yml file](#an-example-of-applicationyml-file)
 
 ## Webserver
 
@@ -40,9 +53,9 @@ To change the values for http header for security reasons, you can use the confi
 | camunda.operate.websecurity.httpStrictTransportSecurityMaxAgeInSeconds   | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | 63,072,000 (two years)                                                                                                                                                                                                                                                                                           |
 | camunda.operate.websecurity.httpStrictTransportSecurityIncludeSubDomains | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | true                                                                                                                                                                                                                                                                                                             |
 
-## Elasticsearch
+## Elasticsearch or OpenSearch
 
-Operate stores and reads data in/from Elasticsearch.
+Operate stores and reads data from Elasticsearch or OpenSearch.
 
 ### Settings to connect
 
@@ -50,7 +63,7 @@ Operate supports [basic authentication](https://www.elastic.co/guide/en/elastics
 
 Set the appropriate username/password combination in the configuration to use it.
 
-#### Settings to connect to a secured Elasticsearch instance
+#### Settings to connect to a secured Elasticsearch or OpenSearch instance
 
 To connect to a secured (https) Elasticsearch instance, you normally need to only set the URL protocol
 part to `https` instead of `http`. A secured Elasticsearch instance also needs `username` and `password`.
@@ -125,15 +138,15 @@ camunda.operate:
     gatewayAddress: localhost:26500
 ```
 
-## Zeebe Elasticsearch exporter
+## Zeebe Elasticsearch or OpenSearch exporter
 
-Operate imports data from Elasticsearch indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md).
+For Elasticsearch, Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md). <br/>For OpenSearch, Operate imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).
 
-Therefore, settings for this Elasticsearch connection must be defined and must correspond to the settings on the Zeebe side.
+Therefore, settings for this Elasticsearch or Opensearch connection must be defined and must correspond to the settings on the Zeebe side.
 
 ### Settings to connect and import
 
-See also [settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance).
+See also [settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance).
 
 :::note
 You may need to import the certificate keystore into the JVM runtime.
