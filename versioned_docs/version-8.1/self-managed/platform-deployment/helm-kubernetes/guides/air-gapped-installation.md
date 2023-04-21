@@ -15,6 +15,7 @@ The following images must be available in your air-gapped environment:
 - [camunda/operate](https://hub.docker.com/r/camunda/operate)
 - [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
+- [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
 - [postgres](https://hub.docker.com/_/postgres)
 - [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak)
@@ -48,6 +49,7 @@ camunda-platform
     |_ optimize
     |_ operate
     |_ tasklist
+    |_ connectors
     |_ web-modeler
         |_ postgresql
 ```
@@ -56,6 +58,7 @@ camunda-platform
 - PostgreSQL is a dependency for Web Modeler.
   - This dependency is optional as you can either install PostgreSQL with Helm or use an existing [external database](../deploy.md#optional-configure-external-database).
 - Elasticsearch is a dependency for Zeebe, Operate, Tasklist, and Optimize.
+- Connectors can be stand-alone; however if there's an intention to use inbound capabilities, Operate becomes a dependency.
 
 The values for the dependencies Keycloak and PostgreSQL can be set in the same hierarchy:
 
@@ -144,6 +147,10 @@ tasklist:
 optimize:
   image:
     repository: example.jfrog.io/camunda/optimize
+    ...
+connectors:
+  image:
+    repository: example.jfrog.io/camunda/connectors-bundle
     ...
 web-modeler:
   image:

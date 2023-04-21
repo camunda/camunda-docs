@@ -14,7 +14,7 @@ Camunda Platform 8 includes the following components:
 - Zeebe Broker and Gateway
 - Operate (requiring Elasticsearch)
 - Tasklist (requiring Elasticsearch)
-- Connectors
+- Connectors (requiring Operate)
 - Optimize (requiring Elasticsearch)
 - Identity (requiring Keycloak)
 - Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--beta">Beta</span>](../../../reference/early-access#beta)
