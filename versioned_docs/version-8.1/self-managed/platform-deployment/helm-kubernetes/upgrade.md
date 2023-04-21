@@ -62,6 +62,7 @@ To extract the secrets, use the following code snippet. Make sure to replace `<R
 export TASKLIST_SECRET=$(kubectl get secret "<RELEASE_NAME>-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 export OPTIMIZE_SECRET=$(kubectl get secret "<RELEASE_NAME>-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 export OPERATE_SECRET=$(kubectl get secret "<RELEASE_NAME>-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
+export CONNECTORS_SECRET=$(kubectl get secret "<RELEASE_NAME>-connectors-identity-secret" -o jsonpath="{.data.connectors-secret}" | base64 --decode)
 export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.admin-password}" | base64 --decode)
 export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.management-password}" | base64 --decode)
 export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
@@ -74,6 +75,7 @@ helm upgrade <RELEASE_NAME> charts/camunda-platform/ \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
+  --set global.identity.auth.connectors.existingSecret=$CONNECTORS_SECRET \
   --set identity.keycloak.auth.adminPassword=$KEYCLOAK_ADMIN_SECRET \
   --set identity.keycloak.auth.managementPassword=$KEYCLOAK_MANAGEMENT_SECRET \
   --set identity.keycloak.postgresql.auth.password=$POSTGRESQL_SECRET
