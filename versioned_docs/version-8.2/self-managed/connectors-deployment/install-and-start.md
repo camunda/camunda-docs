@@ -17,6 +17,11 @@ The Connector runtime environment can be installed using the supported [deployme
 Currently, we support an installation of Connectors with [Docker](/self-managed/platform-deployment/docker.md#connectors),
 [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose), and the [manual setup](/self-managed/platform-deployment/manual.md#run-connectors).
 
+:::note
+Inbound Connectors require Operate to be deployed as part of your Camunda Platform Self-Managed installation.
+If you don't use Operate with your cluster, you can still use Outbound Connectors.
+:::
+
 ## Connector templates
 
 For the modeling interface, you need to [provide Connector templates](/components/connectors/custom-built-connectors/connector-templates.md#providing-and-using-connector-templates).
