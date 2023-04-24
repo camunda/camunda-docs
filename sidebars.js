@@ -78,6 +78,7 @@ module.exports = {
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
+        "components/concepts/outbound-connectors-job-workers",
       ],
       Console: [
         "components/console/introduction-to-console",
