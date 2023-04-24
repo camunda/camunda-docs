@@ -1621,6 +1621,14 @@ module.exports = {
           "self-managed/zeebe-deployment/zeebe-installation/"
         ),
         {
+          "Zeeb Gateway": [
+            docsLink(
+              "Overview",
+              "self-managed/zeebe-deployment/zeebe-gateway/overview"
+            ),
+          ],
+        },
+        {
           Configuration: [
             docsLink(
               "Overview",
