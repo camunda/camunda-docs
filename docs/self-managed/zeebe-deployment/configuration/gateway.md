@@ -193,7 +193,7 @@ This feature is useful when the network latency between the nodes is very high (
 When latency is high, the network bandwidth is severely reduced. Therefore, enabling compression helps improve the throughput. You need to decide between reducing bandwidth or reducing resources required for compression.
 
 :::caution
-When there is no latency enabling, this may have a performance impact. Additionally, when this flag is enabled, you must also enable compression in the standalone broker configuration.
+When this flag is enabled, you must also enable compression in the standalone broker configuration. When there is no latency enabling, this may have a performance impact.
 :::
 
 | Field              | Description                                                                                                                                                                                                                                             | Example value |
