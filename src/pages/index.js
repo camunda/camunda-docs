@@ -132,7 +132,7 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral"
+                  "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
                 )}
               >
                 Sign Up

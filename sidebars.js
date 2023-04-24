@@ -233,6 +233,7 @@ module.exports = {
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
+        "components/modeler/data-handling",
       ],
       Connectors: [
         "components/connectors/introduction-to-connectors",
@@ -269,7 +270,6 @@ module.exports = {
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
         },
-        "components/modeler/data-handling",
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",

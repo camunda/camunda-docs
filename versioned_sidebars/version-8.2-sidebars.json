@@ -300,7 +300,8 @@
               ]
             }
           ]
-        }
+        },
+        "components/modeler/data-handling"
       ],
       "Connectors": [
         "components/connectors/introduction-to-connectors",
@@ -336,8 +337,7 @@
             "components/connectors/custom-built-connectors/connector-templates",
             "components/connectors/custom-built-connectors/connector-sdk"
           ]
-        },
-        "components/modeler/data-handling"
+        }
       ],
       "Zeebe": [
         "components/zeebe/zeebe-overview",
