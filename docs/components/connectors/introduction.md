@@ -4,11 +4,11 @@ title: Introduction
 description: "A Connector is a reusable building block that performs the integration with an external system and works out of the box."
 ---
 
+<!-- TODO: Shorten intro. Include types, connector templates, and Connector SDK. Order like new image on page. -->
+
 A **Connector** is a reusable building block that performs the integration with an external system and works out of the box.
 
-TODO: NEEDS NEW IMAGE
-
-It is represented as a task in a [BPMN process](../concepts/processes.md), which can be configured with parameters specific for the external system. As such, it can remove the need to write custom programming code for integration.
+It is represented as a task in a [BPMN process](/components/concepts/processes.md), which can be configured with parameters specific for the external system. As such, it can remove the need to write custom programming code for integration.
 
 A Connector consists of two parts:
 
@@ -22,6 +22,10 @@ When using Camunda Platform 8 SaaS, the Connector runtime is operated by Camunda
 To learn more about working with Connectors in Self-Managed environments, visit the [Connectors Installation page](/self-managed/connectors-deployment/install-and-start.md).
 
 ## Connector types
+
+Connectors offer an intuitive, scalable, and customizable multilayer coding experience for every user.
+
+![Multilayer Coding Experience](img/multilayer-coding-experience.png)
 
 ### Outbound Connectors
 
@@ -41,7 +45,13 @@ There are three types of inbound Connectors:
 2. **Subscription Connector**: An inbound Connector that subscribes to a message queue.
 3. **Polling Connector**: An inbound Connector that periodically polls an external system or service for new data using HTTP polling.
 
-Currently, only webhooks are supported. We are working to support the other types as well.
+Currently, only webhooks are supported.
+
+### Protocol Connectors
+
+Protocol Connectors can serve as either inbound or outbound connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
+
+Protocol connectors can be customized to meet the needs of specific use cases using [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
 
 ## Next steps
 

@@ -4,7 +4,9 @@ title: Overview
 description: Take a closer look at the Connectors available in Camunda Platform 8.
 ---
 
-This section gives an overview of the **out-of-the-box Connectors** available in Camunda Platform 8. All Connectors are available for Camunda Platform 8 SaaS and [Self Managed](../../../self-managed/connectors-deployment/install-and-start.md).
+Out-of-the-box Connectors accelerate solution implementation by providing pre-built, ready-to-use connectors to popular external systems.
+
+All Connectors are available for Camunda Platform 8 SaaS and [Self Managed](../../../self-managed/connectors-deployment/install-and-start.md).
 
 ## Outbound Connectors
 
