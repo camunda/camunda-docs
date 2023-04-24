@@ -43,14 +43,15 @@ module.exports = {
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
         editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
-        versions: {
-          "3.9.0": {
-            banner: "none",
-          },
-          "3.8.0": {
-            banner: "none",
-          },
-        },
+        // temporarily removed
+        // versions: {
+        //   "3.9.0": {
+        //     banner: "none",
+        //   },
+        //   "3.8.0": {
+        //     banner: "none",
+        //   },
+        // },
       },
     ],
   ],
@@ -230,14 +231,15 @@ module.exports = {
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
-          versions: {
-            8.1: {
-              banner: "none",
-            },
-            "8.0": {
-              banner: "none",
-            },
-          },
+          // temporarily removed
+          // versions: {
+          //   8.1: {
+          //     banner: "none",
+          //   },
+          //   "8.0": {
+          //     banner: "none",
+          //   },
+          // },
         },
         blog: false,
         theme: {
