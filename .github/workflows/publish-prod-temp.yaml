@@ -1,4 +1,4 @@
-name: publish-prod
+name: publish-prod-temp
 
 on:
   workflow_dispatch:
