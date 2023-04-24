@@ -27,7 +27,7 @@ The stack looks pretty similar in various programming language. Please use the p
 
 Use the following stack:
 
-1. Use [Camunda Platform 8 SaaS](https://accounts.cloud.camunda.io/signup) and create a cluster there
+1. Use [Camunda Platform 8 SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) and create a cluster there
 
 1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](/docs/apis-tools/community-clients/spring/).
 

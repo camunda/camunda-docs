@@ -133,14 +133,16 @@ Similarly to the Query Parameters, the **Http Headers** can be specified using t
 }
 ```
 
+:::note
+If you do not set the `Content-Type` header in your HTTP headers, the Connector will automatically set the `Content-Type` to `application/json`.
+:::
+
 ![rest connector http headers](../img/connectors-rest-http-headers.png)
 
 ### Request Body
 
 When you are making a PUT, POST, or PATCH request, you might need to provide a body.
 You can provide a body for your request under the **Payload** section in the **Request Body** field.
-
-Be aware that **REST Connector** is supporting only JSON payload.
 
 :::note
 Secrets are currently not supported in the body of a REST Connector.
