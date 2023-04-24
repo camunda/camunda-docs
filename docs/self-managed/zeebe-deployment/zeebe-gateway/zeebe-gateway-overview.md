@@ -1,7 +1,7 @@
 ---
 id: overview
 title: "Zeebe Gateway"
-sidebar_label: "Zeebe Gateway"
+sidebar_label: "Overview"
 ---
 
 The Zeebe Gateway is a component of the Zeebe cluster; it can be considered the contact point for the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster. For more information about the Zeebe broker, visit our [additional documentation](../../../components/zeebe/technical-concepts/architecture.md#brokers).
