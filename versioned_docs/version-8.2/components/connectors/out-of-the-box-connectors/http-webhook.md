@@ -27,7 +27,7 @@ Please refer to the [update guide](../../../../guides/update-guide/connectors/06
 ![HTTP Webhook prefilled](../img/use-inbound-connector-template-filled.png)
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about HTTP Webhook URLs [below](#activate-the-http-webhook-connector-by-deploying-your-diagram).
-2. (Optional) Configure [HMAC authentication](https://en.wikipedia.org/wiki/HMAC) if required. **Not recommended:** leave it `disabled` to ignore HMAC verification if your use case doesn't require verification or your use case is not yet supported.
+2. Configure [HMAC authentication](https://en.wikipedia.org/wiki/HMAC) if required.
 
 - Set the HMAC shared secret key which is used to calculate the message hash. The value is defined by a webhook administrator.
 - Set the HMAC header whose value contains an encrypted hash message. The exact value is provided by the external caller.
@@ -39,6 +39,11 @@ Please refer to the [update guide](../../../../guides/update-guide/connectors/06
 ## Activate the HTTP Webhook Connector by deploying your diagram
 
 Once you click the **Deploy** button, your HTTP Webhook will be activated and publicly available.
+You can trigger it by making a POST request to the generated URL.
+
+:::note
+HTTP Webhook Connector currently supports only POST requests.
+:::
 
 URLs of the exposed HTTP Webhooks adhere to the following pattern:
 
