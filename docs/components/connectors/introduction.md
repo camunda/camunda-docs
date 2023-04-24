@@ -10,6 +10,10 @@ A **Connector** is a reusable building block that performs the integration with 
 
 It is represented as a task in a [BPMN process](/components/concepts/processes.md), which can be configured with parameters specific for the external system. As such, it can remove the need to write custom programming code for integration.
 
+Connectors offer an intuitive, scalable, and customizable multilayer coding experience for every user.
+
+![Multilayer Coding Experience](img/multilayer-coding-experience.png)
+
 A Connector consists of two parts:
 
 1. The programming code in Java to connect to the external system (for example, see the [Connector function](./custom-built-connectors/connector-sdk.md#runtime-logic) for outbound Connectors.)
@@ -23,17 +27,17 @@ To learn more about working with Connectors in Self-Managed environments, visit 
 
 ## Connector types
 
-Connectors offer an intuitive, scalable, and customizable multilayer coding experience for every user.
-
-![Multilayer Coding Experience](img/multilayer-coding-experience.png)
-
 ### Outbound Connectors
+
+![Outbound Connectors](img/outbound-connectors.png)
 
 Outbound Connectors allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
 
 Use outbound Connectors if something needs to happen in the third-party system if a process reaches a service task. For example, calling a REST endpoint or publishing a message to Slack.
 
 ### Inbound Connectors
+
+![Inbound Connectors](img/inbound-connectors.png)
 
 Inbound Connectors enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
