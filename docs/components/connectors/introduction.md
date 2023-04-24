@@ -25,19 +25,23 @@ To learn more about working with Connectors in Self-Managed environments, visit 
 
 ### Outbound Connectors
 
-Use outbound Connectors if something needs to happen in the third-party system if a process reaches a service task. For example, calling a REST endpoint or publishing some message to Slack.
+Outbound Connectors allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
+
+Use outbound Connectors if something needs to happen in the third-party system if a process reaches a service task. For example, calling a REST endpoint or publishing a message to Slack.
 
 ### Inbound Connectors
+
+Inbound Connectors enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
 Use inbound Connectors if something needs to happen within the workflow engine because of an external event in the third-party system. For example, because a Slack message was published, or a REST endpoint is called.
 
 There are three types of inbound Connectors:
 
-1. **Webhook**: An HTTP endpoint is made available to the outside, which when called, can start a process instance, for example.
-2. **Subscription**: A subscription is opened on the third-party system, like messaging or Apache Kafka, and new entries are then received and correlated to a waiting process instance in Camunda, for example.
-3. **Polling**: Some external API needs to be regularly queried for new entries, such as a drop folder on Google Drive or FTP.
+1. **Webhook Connector**: An inbound connector which creates a webhook for a Camunda workflow.
+2. **Subscription Connector**: An inbound Connector that subscribes to a message queue.
+3. **Polling Connector**: An inbound Connector that periodically polls an external system or service for new data using HTTP polling.
 
-Currently, only [webhooks](out-of-the-box-connectors/http-webhook.md) are supported. We are working to support the other types as well.
+Currently, only webhooks are supported. We are working to support the other types as well.
 
 ## Next steps
 

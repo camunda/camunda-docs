@@ -10,7 +10,7 @@ The **GitHub Webhook Connector** allows you to start a BPMN process instance tri
 :::note
 If you have used the GitHub Webhook Connector with a self-managed Camunda 8 configuration before the
 Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template.
-Please refer to the [update guide](../../../../guides/update-guide/connectors/060-to-070) for more details.
+Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
 :::
 
 ## Create a GitHub Webhook Connector task
@@ -24,9 +24,9 @@ Please refer to the [update guide](../../../../guides/update-guide/connectors/06
 
 ## Make your GitHub Webhook Connector for receiving messages executable
 
-![GitHub Webhook Connector](../img/use-github-connector-template.png)
+![GitHub Webhook Connector](../../img/use-github-connector-template.png)
 
-![GitHub Webhook](../img/use-inbound-connector-template-filled-gh.png)
+![GitHub Webhook](../../img/use-inbound-connector-template-filled-gh.png)
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about GitHub Webhook URLs [below](#activate-the-github-webhook-connector-by-deploying-your-diagram).
 2. Set the **GitHub secret**. This is a shared secret key that has to be defined in both your BPMN and GitHub webhook configuration page. The value is used to calculate HMAC authentication signature.
@@ -49,7 +49,7 @@ If you make changes to your GitHub Webhook Connector configuration, you need to 
 When you click on the event with GitHub Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
 This tab displays the URL of the GitHub Webhook Connector for every cluster where you have deployed your BPMN diagram.
 
-![HTTP Webhook tab](../img/use-inbound-connector-webhooks-tab.png)
+![HTTP Webhook tab](../../img/use-inbound-connector-webhooks-tab.png)
 
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.

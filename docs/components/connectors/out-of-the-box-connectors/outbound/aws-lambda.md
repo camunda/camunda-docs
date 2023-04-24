@@ -11,18 +11,18 @@ The **AWS Lambda Connector** allows you to connect your BPMN service with Amazon
 To use an **AWS Lambda Connector**, you need to have an [AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), IAM key, and secret pair with permissions for execute function. See the [AWS Lambda developer guide](https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html) to learn more.
 
 :::note
-It is highly recommended to not expose your AWS IAM credentials as plain text and instead use Camunda secrets. See [manage secrets](../img/connectors-aws-lambda-filled.png) to learn more.
+It is highly recommended to not expose your AWS IAM credentials as plain text and instead use Camunda secrets. See [manage secrets](/components/connectors/img/connectors-aws-lambda-filled.png) to learn more.
 :::
 
 ## Create an AWS Lambda Connector task
 
-To use an **AWS Lambda Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](../use-connectors.md) to learn more.
+To use an **AWS Lambda Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
 
 ## Invoking your AWS Lambda function
 
 To make the **AWS Lambda Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
 
-![AWS Lambda Filled](../img/connectors-aws-lambda-filled.png)
+![AWS Lambda Filled](../../img/connectors-aws-lambda-filled.png)
 
 1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `secrets.MY_AWS_ACCESS_KEY`. The value can be plain text, but this is not recommended due to security concerns.
 2. Set the relevant AWS region in the **Authentication** section. See the [Regions and Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) to learn more.

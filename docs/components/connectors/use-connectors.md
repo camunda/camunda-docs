@@ -5,7 +5,7 @@ description: Learn how to use Connectors in Web Modeler by creating a Connector 
 ---
 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
-Find the available Connectors in Camunda Platform 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) documentation.
+Find the available Connectors in Camunda Platform 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
 ## Outbound Connector
 
@@ -29,7 +29,7 @@ Fields in the properties panel marked with an equals sign inside a circle indica
 
 ![feel Connectors](img/use-connectors-feel.png)
 
-Each Connector defines its own set of properties you can fill in. Find the details for Connectors provided by Camunda in the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) documentation.
+Each Connector defines its own set of properties you can fill in. Find the details for Connectors provided by Camunda in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
 ### Retries
 
@@ -46,7 +46,7 @@ By default, Connector execution is repeated `3` times if execution fails. To cha
 ### Creating the BPMN start event
 
 :::note
-Inbound Connectors are currently supported only in [Camunda Platform 8 Self-Managed](../../self-managed/about-self-managed.md).
+Inbound Connectors are currently supported only in [Camunda Platform 8 Self-Managed](/self-managed/about-self-managed.md).
 To use an Inbound Connector, [install](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) a related element template (for example, [generic webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/webhook-connector/element-templates) or [GitHub webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/github/element-templates)) first.
 :::
 
@@ -58,7 +58,7 @@ To use an Inbound Connector, [install](/components/modeler/desktop-modeler/eleme
 
 ![inbound connector](img/use-inbound-connector-template.png)
 
-When you **deploy** such a BPMN diagram with a webhook, it becomes ready to receive calls on the webhook endpoint (see [Webhook docs](out-of-the-box-connectors/http-webhook.md) for details).
+When you **deploy** such a BPMN diagram with a webhook, it becomes ready to receive calls on the webhook endpoint (see [Webhook docs](/components/connectors/out-of-the-box-connectors/inbound/http-webhook.md) for details).
 
 :::note
 You can still start instances of that process manually via the modeler, which is sometimes useful during testing.
@@ -69,19 +69,19 @@ You can still start instances of that process manually via the modeler, which is
 To deploy and use an inbound webhook, you would need to fill in several fields.
 
 1. **Webhook ID** - a context path for your inbound webhook. This is used to build a URL endpoint of your webhook. For example, given the `Webhook ID` value is `myWebhookPath`, the complete webhook URL endpoint will be `http(s)://<base URL>/inbound/myWebhookPath`.
-2. **HMAC Authentication Enabled** - if an external caller uses HMAC as a means of request validation and authentication, you can `enable` this property. In that case, you'll need to specify additional field values. Read more about the [generic HTTP webhook configuration](out-of-the-box-connectors/http-webhook.md).
+2. **HMAC Authentication Enabled** - if an external caller uses HMAC as a means of request validation and authentication, you can `enable` this property. In that case, you'll need to specify additional field values. Read more about the [generic HTTP webhook configuration](/components/connectors/out-of-the-box-connectors/inbound/http-webhook.md).
 3. **Activation Condition** - a FEEL expression that assesses trigger conditions. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
 4. **Variable Mapping** - is a FEEL expression that transforms incoming body into BPMN process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`. In that case, the **Variable Mapping** might look as `={myDocumentId: request.body.id}`.
 
-See a list of [available Inbound Connectors](out-of-the-box-connectors/available-connectors-overview.md) and their respective specific configuration instructions.
+See a list of [available Inbound Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and their respective specific configuration instructions.
 
 ## Using secrets
 
 You can use sensitive information in your Connectors without exposing it in your BPMN processes by referencing secrets.
-Use the Console component to [create and manage secrets](../console/manage-clusters/manage-secrets.md).
+Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
 
 You can reference a secret like `MY_API_KEY` with `secrets.MY_API_KEY` in any Connector field in the properties panel that supports this.
-Each of the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
+Each of the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
 
 Secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
 
@@ -100,7 +100,7 @@ This example assumes there is a process variable `baseUrl` and a configured secr
 The engine will resolve the `baseUrl` variable and pass on the secrets placeholder to the Connector. Assuming the `baseUrl` variable resolves to `my.company.domain`,
 the Connector receives the input `"https://my.company.domain/{{secrets.TENANT_ID}}/accounting"`. The Connector then replaces the secrets placeholder upon execution.
 
-For further details on how secrets are implemented in Connectors, consult our [Connector SDK documentation](./custom-built-connectors/connector-sdk.md#secrets).
+For further details on how secrets are implemented in Connectors, consult our [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#secrets).
 
 :::note Warning
 `secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in Connector fields.
@@ -117,7 +117,7 @@ This field declares a single process variable to export responses from a Connect
 
 ### Result Expression
 
-This field allows you to map a Connector response into multiple process variables which you are able to use further in the process. You can also transform the extracted values using [FEEL expressions](../concepts/expressions.md).
+This field allows you to map a Connector response into multiple process variables which you are able to use further in the process. You can also transform the extracted values using [FEEL expressions](/components/concepts/expressions.md).
 
 :::note
 While using this field, a process variable with the name `response` is reserved.
@@ -182,7 +182,7 @@ Therefore, a Connector's runtime behavior cannot throw BPMN errors, but only tec
 
 ### Error expression
 
-To support flexible exception handling, the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) allow users to define an **Error Expression** in the **Error Handling** section at the bottom of the properties panel.
+To support flexible exception handling, the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) allow users to define an **Error Expression** in the **Error Handling** section at the bottom of the properties panel.
 
 The example below uses this property to automatically inform the right group of people depending on the result of an HTTP request against an internal website. If the website returns a valid result, this data is passed on to the regular team.
 In case of a [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) website response, the administrator is informed, so they can check why the website cannot be reached. HTTP responses with status [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500)
@@ -197,7 +197,7 @@ Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to convenientl
 Within the FEEL expression, you access the following temporary variables:
 
 - The result of the Connector in `response`.
-- Any result variables created by the **Result Variable** and **Result Expression** properties (see the [REST Connector](./out-of-the-box-connectors/rest.md#response), for example).
+- Any result variables created by the **Result Variable** and **Result Expression** properties (see the [REST Connector](/components/connectors/out-of-the-box-connectors/outbound/rest.md#response), for example).
 - The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code is only available if the Connector's runtime behavior provided a code in the exception it threw.
 
 Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on technical exceptions thrown by a Connector as well as regular results returned by the external system you integrated.
@@ -221,7 +221,7 @@ bpmnError("123", "error received")
 
 #### HTTP errors to BPMN errors
 
-Using the [REST Connector](./out-of-the-box-connectors/rest.md), you can handle HTTP errors directly in your business process model:
+Using the [REST Connector](/components/connectors/out-of-the-box-connectors/outbound/rest.md), you can handle HTTP errors directly in your business process model:
 
 ```feel
 if error.code = "404" then
@@ -233,11 +233,11 @@ else
 ```
 
 This will create BPMN errors for HTTP requests that return with a status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) or [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500).
-You can extend that list to all HTTP errors you can handle as business use cases, e.g. by informing a website administrator directly via Slack using the [Slack Connector](./out-of-the-box-connectors/slack.md).
+You can extend that list to all HTTP errors you can handle as business use cases, e.g. by informing a website administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/outbound/slack.md).
 
 #### Response value to BPMN error
 
-Using the [REST Connector](./out-of-the-box-connectors/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value:
+Using the [REST Connector](/components/connectors/out-of-the-box-connectors/outbound/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value:
 
 ```feel
 if response.body.main.humidity < 0 then

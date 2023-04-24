@@ -14,13 +14,13 @@ You also need a user account with the `AAE_Queue Admin` role to query and manage
 
 ## Create an Automation Anywhere Connector task
 
-To use an **Automation Anywhere Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use an **Automation Anywhere Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
 
 ## Make your Automation Anywhere Connector executable
 
 To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel:
 
-![connectors-automation-anywhere-red-properties](../img/connector-automation-anywhere-red-properties.png)
+![connectors-automation-anywhere-red-properties](../../img/connector-automation-anywhere-red-properties.png)
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication and operation selections you choose are covered in the upcoming sections.
@@ -33,7 +33,7 @@ You can choose among the available **Automation Anywhere Connector** authenticat
 :::note
 We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `AUTOMATION_ANYWHERE_PASSWORD`) so you can reference it later in the Connector.
    :::
 
@@ -135,7 +135,7 @@ Response example:
 }
 ```
 
-![AA add work item to the queue](../img/connector-automation-anywhere-add-work-item-to-the-queue.png)
+![AA add work item to the queue](../../img/connector-automation-anywhere-add-work-item-to-the-queue.png)
 
 ### Get work item result from queue by ID
 
@@ -196,7 +196,7 @@ Response example:
 }
 ```
 
-![AA get work item result](../img/connector-utomation-anywhere-get-work-item-result.png)
+![AA get work item result](../../img/connector-utomation-anywhere-get-work-item-result.png)
 
 ## Using Automation Anywhere Connector best practice
 
@@ -207,4 +207,4 @@ To learn more, see an entry _Solution with Timer and Loop_ on the [Camunda BPMN 
 To avoid performance issues, it is recommended to limit the number of loop retries.
 :::
 
-![AA best practice example](../img/connector-automation-anywhere-example.png)
+![AA best practice example](../../img/connector-automation-anywhere-example.png)

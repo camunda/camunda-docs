@@ -10,7 +10,7 @@ You define the domain-specific UI for modeling a Connector through a [Connector 
 
 If they both share the same core functionality, how do they differ, and when should you choose what? Connectors and job workers serve different purposes when it comes to aspects like delivery, reusability, focus, and context.
 
-#### Delivery
+## Delivery
 
 A Connector is reusable code, written as an `OutboundConnectorFunction` using the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-logic).
 It is not a standalone application, you cannot start it and have it work on Camunda Platform 8 jobs.
@@ -18,7 +18,7 @@ Instead, a Connector is delivered as a library and can be used in combination wi
 
 In contrast, a job worker is usually part of a Zeebe Client application that can be directly executed to work on jobs.
 
-#### Reusability
+## Reusability
 
 A job worker usually runs as or inside a standalone Zeebe Client. Without effort, you cannot simply run this in Camunda Platform 8 SaaS or any other environment.
 As a Self-Managed user, you can run it standalone, but often not directly reuse the logic in your existing Zeebe Client that you might already have.
@@ -29,7 +29,7 @@ In contrast, a Connector itself is environment-agnostic. There is a runtime envi
 You can also run the exact same Connector (without any modification) in Camunda Platform 8 Self-Managed; either as a standalone job worker, as additional job handler in your existing Zeebe Client application, or together with other Connectors in one Zeebe Client application.
 This all comes with the Connector SDK, and there is no additional code necessary to get started. However, if you need a custom environment, the Connector SDK provides a guide and default helpers to do that.
 
-#### Focus
+## Focus
 
 A job worker is often a complete Zeebe Client application, dealing with environment tasks like handling variables in and out. The core logic of calling a defined URL is only part of the application.
 Plus, it handles Camunda Platform 8-specific APIs like the job worker API to handle variables, complete executions, and throw errors.
@@ -37,7 +37,7 @@ Plus, it handles Camunda Platform 8-specific APIs like the job worker API to han
 A Connector only consists of core business functionality. No environment tasks, no Camunda Platform 8 job worker-related code. You can run this from Camunda Platform 7 as well, if you have a runtime that takes care of this.
 The Connector only needs input variables and access to secrets so they can be used in defined input attributes.
 
-#### Context
+## Context
 
 Every job worker implementation defines on its own how to handle input data, validating and transforming it.
 There is no unified way of using secrets in a job worker implementation either, e.g. to replace placeholders in attributes with sensitive information only at runtime.
@@ -47,7 +47,7 @@ In contrast, Connectors bring all the above out of the box. The environment brin
 Element templates, called Connector templates, are a vital part of a Connector. There are standardized best practices for developing those.
 Having used one Connector template will make it easy for you to use the next one just the same.
 
-#### Which one should you choose?
+## Which one should you choose?
 
 It depends on your use case.
 

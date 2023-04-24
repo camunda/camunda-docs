@@ -20,19 +20,19 @@ Ensure you enter the correct exchange name and routing key, as the **RabbitMQ Co
 
 To use the **RabbitMQ Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon,
 
-![wrench-shape](../img/connectors-rabbitmq-wrench-shaped.png)
+![wrench-shape](../../img/connectors-rabbitmq-wrench-shaped.png)
 
 or create a new Connector task by using the **Append Connector** context menu.
 
-![wrench-shape](../img/connectors-rabbitmq-append-connector.png)
+![wrench-shape](../../img/connectors-rabbitmq-append-connector.png)
 
-Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+Follow our [guide to using Connectors](/components/connectors/use-connectors.md) to learn more.
 
 ## Connecting to RabbitMQ and sending messages
 
 To connect to RabbitMQ, choose the required connection type in the **Authentication** section and complete the mandatory fields highlighted in red in the connector properties panel:
 
-![connectors-rabbitmq-red-properties](../img/connectors-rabbitmq-red-properties.png)
+![connectors-rabbitmq-red-properties](../../img/connectors-rabbitmq-red-properties.png)
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the upcoming sections.
@@ -52,7 +52,7 @@ For a URI connection, take the following steps:
 1. Click the **URI** connection type in the **Authentication** section
 2. Set **URI** to `URI`. It must contain RabbitMQ username, password, host name, port number, and virtual host. For example, `amqp://userName:password@serverHost:port/virtualHost`; follow the [RabbitMQ URI specification](https://www.rabbitmq.com/uri-spec.html) to learn more.
 
-![connectors-rabbitmq-uri-fields](../img/connectors-rabbitmq-uri-fields.png)
+![connectors-rabbitmq-uri-fields](../../img/connectors-rabbitmq-uri-fields.png)
 
 ### Credentials type connection
 
@@ -60,16 +60,16 @@ To connect with credentials, take the following steps:
 
 1. Click the **Username/Password** connection type in the **Authentication** section
 2. Set the **Password** to `Password`.
-   ![connectors-rabbitmq-credentials-fields](../img/connectors-rabbitmq-credentials-fields.png)
+   ![connectors-rabbitmq-credentials-fields](../../img/connectors-rabbitmq-credentials-fields.png)
 
 ## Routing data
 
 In the **Routing** section, you must set the routing data attributes:
 
 - For a **URI** type connection, the required fields are `exchange` and `routingKey`.
-  ![connectors-rabbitmq-routing](../img/connectors-rabbitmq-routing-uri.png)
+  ![connectors-rabbitmq-routing](../../img/connectors-rabbitmq-routing-uri.png)
 - For a **Credentials** type connection, the required fields are `exchange`, `routingKey`, `virtualHost`, `hostName`, and `port`.
-  ![connectors-rabbitmq-routing](../img/connectors-rabbitmq-routing-cred.png)
+  ![connectors-rabbitmq-routing](../../img/connectors-rabbitmq-routing-cred.png)
 
 Refer to the RabbitMQ documentation to learn about routing attributes:
 
@@ -82,7 +82,7 @@ Refer to the RabbitMQ documentation to learn about routing attributes:
 1. In the **Message** section, insert the message payload. The message can be Text or JSON format.
 2. (Optional) In the **Properties** section, insert the message properties in JSON or as a [FEEL](/components/modeler/feel/what-is-feel.md) expression. Go to [RabbitMQ documentation](https://www.rabbitmq.com/publishers.html#message-properties) for learn more about RabbitMQ message properties.
 
-![connectors-rabbitmq-message-with-properties](../img/connectors-rabbitmq-message-with-properties.png)
+![connectors-rabbitmq-message-with-properties](../../img/connectors-rabbitmq-message-with-properties.png)
 
 ## RabbitMQ Connector response
 
