@@ -10,6 +10,8 @@ Options -Indexes -MultiViews
 
 # consolidation of Zeebe Gateway configuration
 RewriteRule ^docs/next/self-managed/zeebe-gateway-deployment/zeebe-gateway/(.*)$ /docs/next/self-managed/zeebe-deployment/zeebe-gateway/overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-gateway-deployment/zeebe-gateway/(.*)$ /docs/self-managed/zeebe-deployment/zeebe-gateway/overview/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/zeebe-gateway-deployment/zeebe-gateway/(.*)$ /docs/8.2/self-managed/zeebe-deployment/zeebe-gateway/overview/$1 [R=301,L]
 
 ###### 8.2 release redirects ######
 RewriteRule ^docs/self-managed/web-modeler/installation/(.*)$ /docs/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
