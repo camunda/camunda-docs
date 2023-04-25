@@ -134,6 +134,7 @@ module.exports = {
                 "components/modeler/web-modeler/collaborate-with-modes",
                 "components/modeler/web-modeler/design-your-process",
                 "components/modeler/web-modeler/implement-your-process",
+                "components/modeler/web-modeler/play-your-process"
               ],
             },
             "components/modeler/web-modeler/milestones",
