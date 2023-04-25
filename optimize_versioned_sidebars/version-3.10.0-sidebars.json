@@ -2413,21 +2413,49 @@
         {
           "User guide": [
             {
+              "Configuration": [
+                {
+                  "type": "link",
+                  "label": "Making Identity production ready",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/making-identity-production-ready/"
+                },
+                {
+                  "type": "link",
+                  "label": "Configuring an external identity provider and logging",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/"
+                },
+                {
+                  "type": "link",
+                  "label": "Connect to an existing Keycloak instance",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/"
+                }
+              ]
+            },
+            {
+              "Roles": [
+                {
+                  "type": "link",
+                  "label": "Adding and assigning a role to a user",
+                  "href": "/docs/self-managed/identity/user-guide/roles/add-assign-role/"
+                },
+                {
+                  "type": "link",
+                  "label": "Adding and assigning a permission to a role",
+                  "href": "/docs/self-managed/identity/user-guide/roles/add-assign-permission/"
+                }
+              ]
+            },
+            {
               "Groups": [
                 {
                   "type": "link",
-                  "label": "Creating a group",
-                  "href": "/docs/self-managed/identity/user-guide/groups/creating-a-group/"
+                  "label": "Create a group",
+                  "href": "/docs/self-managed/identity/user-guide/groups/create-group/"
                 },
                 {
                   "type": "link",
-                  "label": "Assigning users to a group",
-                  "href": "/docs/self-managed/identity/user-guide/groups/assigning-users-to-a-group/"
-                },
-                {
-                  "type": "link",
-                  "label": "Assigning roles to a group",
-                  "href": "/docs/self-managed/identity/user-guide/groups/assigning-roles-to-a-group/"
+                  "label": "Assign users and roles to a group",
+                  "href": "/docs/self-managed/identity/user-guide/groups/assign-users-roles-to-group/"
                 }
               ]
             },
@@ -2437,73 +2465,32 @@
                   "type": "link",
                   "label": "Managing resource authorizations",
                   "href": "/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
+                },
+                {
+                  "type": "link",
+                  "label": "Managing user access",
+                  "href": "/docs/self-managed/identity/user-guide/authorizations/managing-user-access/"
+                },
+                {
+                  "type": "link",
+                  "label": "Generating M2M tokens",
+                  "href": "/docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
                 }
               ]
             },
             {
-              "type": "link",
-              "label": "Adding an application",
-              "href": "/docs/self-managed/identity/user-guide/adding-an-application/"
-            },
-            {
-              "type": "link",
-              "label": "Adding an API",
-              "href": "/docs/self-managed/identity/user-guide/adding-an-api/"
-            },
-            {
-              "type": "link",
-              "label": "Adding a permission",
-              "href": "/docs/self-managed/identity/user-guide/adding-a-permission/"
-            },
-            {
-              "type": "link",
-              "label": "Assigning a permission an application",
-              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/"
-            },
-            {
-              "type": "link",
-              "label": "Adding a role",
-              "href": "/docs/self-managed/identity/user-guide/adding-a-role/"
-            },
-            {
-              "type": "link",
-              "label": "Assigning a permission a role",
-              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-a-role/"
-            },
-            {
-              "type": "link",
-              "label": "Assigning a role to a user",
-              "href": "/docs/self-managed/identity/user-guide/assigning-a-role-to-a-user/"
-            },
-            {
-              "type": "link",
-              "label": "Configuring an external identity provider",
-              "href": "/docs/self-managed/identity/user-guide/configure-external-identity-provider/"
-            },
-            {
-              "type": "link",
-              "label": "Configuring logging",
-              "href": "/docs/self-managed/identity/user-guide/configure-logging/"
-            },
-            {
-              "type": "link",
-              "label": "Making Identity production ready",
-              "href": "/docs/self-managed/identity/user-guide/making-identity-production-ready/"
-            },
-            {
-              "type": "link",
-              "label": "Generating machine-to-machine (M2M) tokens",
-              "href": "/docs/self-managed/identity/user-guide/generating-m2m-tokens/"
-            },
-            {
-              "type": "link",
-              "label": "Managing user access",
-              "href": "/docs/self-managed/identity/user-guide/managing-user-access/"
-            },
-            {
-              "type": "link",
-              "label": "Connect to an existing Keycloak instance",
-              "href": "/docs/self-managed/identity/user-guide/connect-to-an-existing-keycloak/"
+              "Additional features": [
+                {
+                  "type": "link",
+                  "label": "Adding an API",
+                  "href": "/docs/self-managed/identity/user-guide/additional-features/adding-an-api/"
+                },
+                {
+                  "type": "link",
+                  "label": "Incorporate applications",
+                  "href": "/docs/self-managed/identity/user-guide/additional-features/incorporate-applications/"
+                }
+              ]
             }
           ]
         },
