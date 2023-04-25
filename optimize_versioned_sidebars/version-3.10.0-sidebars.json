@@ -2111,7 +2111,7 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "self-managed/zeebe-deployment/zeebe-gateway/overview/"
+              "href": "/docs/self-managed/zeebe-deployment/zeebe-gateway/overview/"
             },
             {
               "Configuration": [
