@@ -1,27 +1,27 @@
 ---
 id: aws-dynamodb
 title: AWS DynamoDB Connector
-description: Work with tables and items using AWS DynamoDB service
+description: Use the AWS DynamoDB Connector to connect your BPMN service with Amazon Web Service's DynamoDB Service, and work with tables and items using this service.
 ---
 
 The **AWS DynamoDB Connector** allows you to connect your BPMN service with Amazon Web Service's [DynamoDB Service](https://aws.amazon.com/dynamodb/). This can be useful for performing CRUD operations on AWS DynamoDB tables from within a BPMN process.
 
 ## Prerequisites
 
-To use the **AWS DynamoDB Connector**, you need to have an AWS account with access key and secret key to access DynamoDB, as well as a region where your DynamoDB instance is located. You can create an account and obtain the access and secret keys from the [AWS Console](https://aws.amazon.com/console/).
+To use the **AWS DynamoDB Connector**, you need to have an AWS account with an access key and secret key to access DynamoDB, as well as a region where your DynamoDB instance is located. You can create an account and obtain the access and secret keys from the [AWS Console](https://aws.amazon.com/console/).
 
 :::note
-It is highly recommended to use Camunda secrets to store credentials, so you don't expose sensitive information directly from the process. See [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an AWS DynamoDB Connector task
 
-To use the **AWS DynamoDB Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** Change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+To use the **AWS DynamoDB Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](../use-connectors.md) to learn more.
 
 ## Make your AWS DynamoDB Connector executable
 
 To work with **AWS DynamoDB Connector**, choose the required operation type in the **Operation** section and complete the
-mandatory fields highlighted in red in the connector properties panel.
+mandatory fields highlighted in red in the Connector properties panel.
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the upcoming sections.
@@ -29,24 +29,23 @@ All the mandatory and non-mandatory fields depending on the authentication selec
 
 ## Operation
 
-Choose an operation type of either **Table** or **Item** in **Operation** section:
+Choose an operation type of either **Table** or **Item** in the **Operation** section:
 
-- Table: Perform operations on a DynamoDB table.
-- Item: Perform operations on a specific item in a DynamoDB table.
--
+- **Table**: Perform operations on a DynamoDB table.
+- **Item**: Perform operations on a specific item in a DynamoDB table.
 
 ### Method
 
 Choose one of the following methods:
 
-##### [Table](#table-operations)
+#### [Table](#table-operations)
 
 - [Create table](#create-table): Creates a new DynamoDB table.
 - [Delete table](#delete-table): Deletes an existing DynamoDB table.
 - [Describe table](#describe-table): Returns information about a DynamoDB table.
 - [Scan table](#scan-table): Returns one or more items and their attributes by accessing every item in a table. You can use filter expressions to selectively scan for items that meet certain criteria.
 
-##### Item
+#### Item
 
 - [Add item](#add-item): Creates a new item or replaces an existing item with a new item.
 - [Delete item](#delete-item): Deletes a single item in a table by primary key.
@@ -60,82 +59,82 @@ To access the **AWS DynamoDB service**, the connector needs the appropriate cred
 - **Access Key**: Provide an access key of a user with permissions to the AWS DynamoDB service.
 - **Secret Key**: Provide the secret key of the user with the access key provided above.
 
-The Access Key and Secret Key are required properties and must be provided in order to use the connector. If these properties are not set, the connector will not be able to authenticate with the [DynamoDB Service](https://aws.amazon.com/dynamodb/).
+The Access Key and Secret Key are required properties and must be provided to use the Connector. If these properties are not set, the Connector will not be able to authenticate with the [DynamoDB Service](https://aws.amazon.com/dynamodb/).
 
-For more information on authentication and security in AWS DynamoDB, please refer to the AWS documentation at: [https://docs.aws.amazon.com/dynamodb/index.html](https://docs.aws.amazon.com/dynamodb/index.html).
+For more information on authentication and security in AWS DynamoDB, refer to the [AWS documentation](https://docs.aws.amazon.com/dynamodb/index.html).
 
 ## Configuration
 
-The **region** property in the **configuration** section specifies the AWS region in which the DynamoDB table exists or will be created. This property is required and must be set in order to use the connector.
+The **Region** property in the **Configuration** section specifies the AWS region in which the DynamoDB table exists or will be created. This property is required and must be set to use the Connector.
 
 For more information on AWS regions, see the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/rande.html).
 
 ## Input
 
-The Input section of the **AWS DynamoDB Connector** specifies the input data for the [selected operation](#operation). The input data varies depending on the [operation type](#operation) and [method](#method) selected.
+The **Input** section of the **AWS DynamoDB Connector** specifies the input data for the [selected operation](#operation). The input data varies depending on the [operation type](#operation) and [method](#method) selected.
 
-### Table Operations
+### Table operations
 
-For the Table operation type, the following input data is required:
+For the **Table** operation type, the following input data is required:
 
-#### Create Table
+#### Create table
 
-##### Request :
+**Request**
 
-| Property Name                                                                                                                                                               | Data Type | Required |                                      Description                                      |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------: | :------: | :-----------------------------------------------------------------------------------: |
-| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-TableName)                                         |  string   |   Yes    |                     The name of the DynamoDB table to be created                      |
-| [Partition key](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-KeySchema)                                      |  string   |   Yes    |                The attribute name of the partition key for the table.                 |
-| [Partition key role](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-KeySchema)                                 | dropdown  |   Yes    |            The role of the partition key. Can be set to "HASH" or "RANGE"             |
-| [Partition key attribute data type](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_AttributeDefinition.html#DDB-Type-AttributeDefinition-AttributeType) | dropdown  |   Yes    |                     The data type of the partition key attribute                      |
-| [Sort key](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-KeySchema)                                           |  string   |    No    |           The attribute name of the sort key for the table (if applicable)            |
-| [Sort key role](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-KeySchema)                                      | dropdown  |    No    |               The role of the sort key. Can be set to "HASH" or "RANGE"               |
-| [Sort key attribute data type](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_AttributeDefinition.html#DDB-Type-AttributeDefinition-AttributeType)      | dropdown  |    No    |                        The data type of the sort key attribute                        |
-| [Read capacity units](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-ProvisionedThroughput)                    |  number   |   Yes    | The maximum number of strongly consistent reads per second that the table can support |
-| [Write capacity units](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-ProvisionedThroughput)                   |  number   |   Yes    |          The maximum number of writes per second that the table can support           |
-| [Billing mode](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-BillingMode)                                     | dropdown  |    No    |    The billing mode of the table. Can be set to "PROVISIONED" or "PAY_PER_REQUEST"    |
-| [Deletion protection](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-GlobalSecondaryIndexUpdates)              | dropdown  |    No    |       Indicates whether to enable or disable deletion protection for the table        |
+| Property name                                                                                                                                                               | Data type | Required |                                      Description                                       |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------: | :------: | :------------------------------------------------------------------------------------: |
+| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-TableName)                                         |  string   |   Yes    |                     The name of the DynamoDB table to be created.                      |
+| [Partition key](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-KeySchema)                                      |  string   |   Yes    |                 The attribute name of the partition key for the table.                 |
+| [Partition key role](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-KeySchema)                                 | dropdown  |   Yes    |            The role of the partition key. Can be set to "HASH" or "RANGE".             |
+| [Partition key attribute data type](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_AttributeDefinition.html#DDB-Type-AttributeDefinition-AttributeType) | dropdown  |   Yes    |                     The data type of the partition key attribute.                      |
+| [Sort key](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-KeySchema)                                           |  string   |    No    |           The attribute name of the sort key for the table (if applicable).            |
+| [Sort key role](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-KeySchema)                                      | dropdown  |    No    |               The role of the sort key. Can be set to "HASH" or "RANGE".               |
+| [Sort key attribute data type](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_AttributeDefinition.html#DDB-Type-AttributeDefinition-AttributeType)      | dropdown  |    No    |                        The data type of the sort key attribute.                        |
+| [Read capacity units](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-ProvisionedThroughput)                    |  number   |   Yes    | The maximum number of strongly consistent reads per second that the table can support. |
+| [Write capacity units](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-ProvisionedThroughput)                   |  number   |   Yes    |          The maximum number of writes per second that the table can support.           |
+| [Billing mode](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-BillingMode)                                     | dropdown  |    No    |    The billing mode of the table. Can be set to "PROVISIONED" or "PAY_PER_REQUEST".    |
+| [Deletion protection](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html#DDB-CreateTable-request-GlobalSecondaryIndexUpdates)              | dropdown  |    No    |       Indicates whether to enable or disable deletion protection for the table.        |
 
-##### Response :
+**Response**
 
-|                                                   Property                                                    | Data Type | Description                                                                                                                                         |
-| :-----------------------------------------------------------------------------------------------------------: | :-------: | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Table description](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TableDescription.html) |  Object   | Information about the created table, including the table name, attribute definitions, primary key schema, provisioned throughput settings, and more |
+|                                                   Property                                                    | Data type | Description                                                                                                                                          |
+| :-----------------------------------------------------------------------------------------------------------: | :-------: | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Table description](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TableDescription.html) |  Object   | Information about the created table, including the table name, attribute definitions, primary key schema, provisioned throughput settings, and more. |
 
-#### Delete Table
+#### Delete table
 
-##### Request :
+**Request**
 
-| Property Name                                                                                     | Data Type | Required |                 Description                  |
-| :------------------------------------------------------------------------------------------------ | :-------: | :------: | :------------------------------------------: |
-| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteTable.html) |  string   |   Yes    | The name of the DynamoDB table to be deleted |
+| Property name                                                                                     | Data type | Required |                  Description                  |
+| :------------------------------------------------------------------------------------------------ | :-------: | :------: | :-------------------------------------------: |
+| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteTable.html) |  string   |   Yes    | The name of the DynamoDB table to be deleted. |
 
-##### Response :
+**Response**
 
-| Property | Data Type |                                                            Description                                                             |
-| :------- | :-------: | :--------------------------------------------------------------------------------------------------------------------------------: |
-| action   |  string   | The action performed. In this case, it will always be "delete Table [tableName]", where tableName is the name of the deleted table |
-| status   |  string   |       The status of the operation. In this case, it will always be "OK" to indicate that the table was successfully deleted        |
+| Property | Data type |                                                              Description                                                              |
+| :------- | :-------: | :-----------------------------------------------------------------------------------------------------------------------------------: |
+| action   |  string   | The action performed. In this case, it will always be "delete Table [tableName]", where `tableName` is the name of the deleted table. |
+| status   |  string   |        The status of the operation. In this case, it will always be "OK" to indicate that the table was successfully deleted.         |
 
-#### Describe Table
+#### Describe table
 
-##### Request :
+**Request**
 
-| Property Name                                                                                       | Data Type | Required |                  Description                   |
-| :-------------------------------------------------------------------------------------------------- | :-------: | :------: | :--------------------------------------------: |
-| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html) |  string   |   Yes    | The name of the DynamoDB table to be described |
+| Property name                                                                                       | Data type | Required |                   Description                   |
+| :-------------------------------------------------------------------------------------------------- | :-------: | :------: | :---------------------------------------------: |
+| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html) |  string   |   Yes    | The name of the DynamoDB table to be described. |
 
-##### Response :
+**Response**
 
-|                                                   Property                                                    | Data Type | Description                                                                                                                                 |
-| :-----------------------------------------------------------------------------------------------------------: | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Table description](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TableDescription.html) |  Object   | Information about the table, including the table name, attribute definitions, primary key schema, provisioned throughput settings, and more |
+|                                                   Property                                                    | Data type | Description                                                                                                                                  |
+| :-----------------------------------------------------------------------------------------------------------: | :-------: | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Table description](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TableDescription.html) |  Object   | Information about the table, including the table name, attribute definitions, primary key schema, provisioned throughput settings, and more. |
 
-#### Scan Table
+#### Scan table
 
-##### Request :
+**Request**
 
-| Property Name                                                                                                                                         | Data Type | Required | Description                                                                                                                                                                                                                                                                                                                           |
+| Property name                                                                                                                                         | Data type | Required | Description                                                                                                                                                                                                                                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html#DDB-Scan-request-TableName)                                 | string    | Yes      | The name of the DynamoDB table to be scanned.                                                                                                                                                                                                                                                                                         |
 | [Filter expression](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilterExpression)                              | string    | No       | The filter expression to apply to the scan results. For more information, see the [Expression Attribute Names and Values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html) section of the Amazon DynamoDB Developer Guide.                                                 |
@@ -143,83 +142,83 @@ For the Table operation type, the following input data is required:
 | [Expression attribute names](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html#ExpressionAttributeNames)   | map       | No       | A map of attribute names to their replacements in the filter expression or projection expression. For more information, see the [Expression Attribute Names and Values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html) section of the Amazon DynamoDB Developer Guide.   |
 | [Expression attribute values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html#ExpressionAttributeValues) | map       | No       | A map of attribute values to their replacements in the filter expression or projection expression. For more information, see the [Expression Attribute Names and Values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeValues.html) section of the Amazon DynamoDB Developer Guide. |
 
-##### Response:
+**Response**
 
-| Property | Data Type |                                                                Description                                                                |
+| Property | Data type |                                                                Description                                                                |
 | :------- | :-------: | :---------------------------------------------------------------------------------------------------------------------------------------: |
-| action   |  string   |                                     The action performed. In this case, it will always be "scanTable"                                     |
+| action   |  string   |                                    The action performed. In this case, it will always be `scanTable`.                                     |
 | status   |  string   |                The status of the operation. If successful, it will always be "OK". Otherwise, it will be an error message.                |
 | items    |   list    | The list of items returned by the scan operation, in case the operation was successful. If there are no items, this field will be `null`. |
 
-### Item Operations
+### Item operations
 
-#### Add Item
+#### Add item
 
-##### Request:
+**Request**
 
-| Property Name                                                                                                               | Data Type | Required | Description                                        |
+| Property name                                                                                                               | Data type | Required | Description                                        |
 | --------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | -------------------------------------------------- |
 | [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#DDB-PutItem-request-TableName) | string    | Yes      | The name of the DynamoDB table to add the item to. |
-| [Item](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#DDB-PutItem-request-Item)            | object    | Yes      | The item to add to the table                       |
+| [Item](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#DDB-PutItem-request-Item)            | object    | Yes      | The item to add to the table.                      |
 
-##### Response:
+**Response**
 
-| Property                                                                                                               | Data Type | Description |
-| ---------------------------------------------------------------------------------------------------------------------- | --------- | ----------- | ---------------------------- |
-| [Result](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_ResponseElements) | object    | Yes         | The item to add to the table |
+| Property                                                                                                               | Data type | Description |
+| ---------------------------------------------------------------------------------------------------------------------- | --------- | ----------- | ----------------------------- |
+| [Result](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_ResponseElements) | object    | Yes         | The item to add to the table. |
 
-#### Delete Item
+#### Delete item
 
-##### Request:
+**Request**
 
-| Property Name                                                                                                                                                  | Data Type | Required | Description                                                 |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ----------------------------------------------------------- |
-| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html#DDB-DeleteItem-request-TableName)                              | string    | Yes      | The name of the DynamoDB table to delete the item from      |
-| [Primary Key Components](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey) | object    | Yes      | The primary key components that identify the item to delete |
+| Property name                                                                                                                                                  | Data type | Required | Description                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ------------------------------------------------------------ |
+| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html#DDB-DeleteItem-request-TableName)                              | string    | Yes      | The name of the DynamoDB table to delete the item from.      |
+| [Primary Key Components](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey) | object    | Yes      | The primary key components that identify the item to delete. |
 
-##### Response:
+**Response**
 
-| Property                                                                                                                           | Data Type | Description                                                                   |
+| Property                                                                                                                           | Data type | Description                                                                   |
 | ---------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------------------------------------------------------------------------- |
 | [Deleted Item](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html#API_DeleteItem_ResponseElements) | object    | The item that was deleted. This field will be null if the item was not found. |
 
-#### Get Item
+#### Get item
 
-##### Request:
+**Request**
 
-| Property Name                                                                                                                     | Data Type | Required | Description                                                                                                                                                                                                                                                                                                                                                              |
-| --------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html#DDB-GetItem-request-TableName)       | string    | Yes      | The name of the table containing the requested item.                                                                                                                                                                                                                                                                                                                     |
-| [Primary key components](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html#DDB-GetItem-request-Key) | object    | Yes      | A map of attribute names to AttributeValue objects, representing the primary key of the item to retrieve. For the primary key, you must provide all of the attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key. |
+| Property Name                                                                                                                     | Data type | Required | Description                                                                                                                                                                                                                                                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html#DDB-GetItem-request-TableName)       | string    | Yes      | The name of the table containing the requested item.                                                                                                                                                                                                                                                                                                                    |
+| [Primary key components](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html#DDB-GetItem-request-Key) | object    | Yes      | A map of attribute names to `AttributeValue` objects, representing the primary key of the item to retrieve. For the primary key, you must provide all the attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key. |
 
-##### Response:
+**Response**
 
-| Property                                                                                                                | Data Type | Description                                                                                                                                                                                                                                                                      |
-| ----------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html#DDB-GetItem-response-Item) | object    | A map of attribute names to AttributeValue objects, representing the item retrieved. If there is no matching item, the response will contain only the consumed capacity, and a null attributes field. The keys of the attributes map correspond to the column names of the table |
+| Property                                                                                                                | Data type | Description                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Attributes](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html#DDB-GetItem-response-Item) | object    | A map of attribute names to `AttributeValue` objects, representing the item retrieved. If there is no matching item, the response will contain only the consumed capacity, and a null attributes field. The keys of the attributes map correspond to the column names of the table |
 
-### Update Item
+#### Update item
 
-#### Request:
+**Request**
 
-| Property Name                                                                                                                                  | Data Type | Required | Description                                                                                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-TableName)              | string    | Yes      | The name of the table to update the item in.                                                                                                                          |
-| [Primary key components](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-Key)        | map       | Yes      | A map of attribute names to AttributeValue objects, representing the primary key of the item to update                                                                |
-| [Key attributes](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-AttributeUpdates)   | map       | Yes      | A map of attribute names to AttributeValue objects, representing the attributes to update                                                                             |
-| [Attribute action](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-AttributeUpdates) | dropdown  | No       | A map of attribute names to AttributeAction objects, representing the action to perform on the attribute. The valid values for AttributeAction are "PUT" and "DELETE" |
+| Property name                                                                                                                                  | Data type | Required | Description                                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-TableName)              | string    | Yes      | The name of the table to update the item in.                                                                                                                               |
+| [Primary key components](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-Key)        | map       | Yes      | A map of attribute names to `AttributeValue` objects, representing the primary key of the item to update.                                                                  |
+| [Key attributes](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-AttributeUpdates)   | map       | Yes      | A map of attribute names to `AttributeValue` objects, representing the attributes to update.                                                                               |
+| [Attribute action](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-AttributeUpdates) | dropdown  | No       | A map of attribute names to `AttributeAction` objects, representing the action to perform on the attribute. The valid values for `AttributeAction` are "PUT" and "DELETE". |
 
-#### Response:
+**Response**
 
-| Property                                                                                                                                            | Data Type | Description                                                                                                                                                                                                            |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [UpdateItemOutcome](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.Methods.html#DynamoDBMapper.Methods.updateItem) | object    | An object representing the outcome of the UpdateItem operation. The UpdateItemOutcome object contains the updated attributes of the item, as well as other metadata about the operation, such as the consumed capacity |
+| Property                                                                                                                                            | Data type | Description                                                                                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [UpdateItemOutcome](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.Methods.html#DynamoDBMapper.Methods.updateItem) | object    | An object representing the outcome of the `UpdateItem` operation. The `UpdateItemOutcome` object contains the updated attributes of the item, as well as other metadata about the operation, such as the consumed capacity. |
 
 ## Response Mapping
 
-When using the DynamoDB connector, the response from the DynamoDB Connector will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result Variable**.
+When using the DynamoDB Connector, the response from the DynamoDB Connector will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result Variable**.
 
-For example, if you use the Update Item method in the DynamoDB connector, the response may look like this:
+For example, if you use the **Update Item** method in the DynamoDB Connector, the response may look like this:
 
 ```json
 {
@@ -242,11 +241,12 @@ In this example, the `response` variable contains an `Attributes` object with th
 
 The following fields are available in the `response` variable:
 
-- `action`: The action that was performed by the DynamoDB connector.
+- `action`: The action that was performed by the DynamoDB Connector.
 - `status`: The status of the response, which will be "OK" if the operation was successful.
 - `response`: The response from the DynamoDB service, which will contain the updated attributes of the specified item.
 
 You can choose to unpack the content of your `response` into multiple process variables using the **Result Expression**, which is a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md).
+
 The **Result Expression** allows you to access specific attributes from the response and assign them to process variables that can be used in subsequent steps of your process.
 
 ```feel
@@ -256,31 +256,33 @@ The **Result Expression** allows you to access specific attributes from the resp
 }
 ```
 
-In this example, we are using the Result Expression to extract the **ID** and **price** attributes from the response variable and assign them to the id and price process variables, respectively. You can then use these variables in subsequent steps of your process.
+In this example, we are using the **Result Expression** to extract the **ID** and **price** attributes from the response variable and assign them to the id and price process variables, respectively. You can then use these variables in subsequent steps of your process.
 
-Note that the syntax for accessing attributes in the Result Expression may vary depending on the structure of your response object. You can refer to the [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md) documentation for more information on how to use the **Result Expression**.
+:::note
+The syntax for accessing attributes in the **Result Expression** may vary depending on the structure of your response object. You can refer to the [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md) documentation for more information on how to use the **Result Expression**.
+:::
 
-## Error Handling
+## Error handling
 
 The **AWS DynamoDB Connector** may throw the following exceptions:
 
 - AwsDynamoDbConnectionException: Thrown if there is an error connecting to DynamoDB.
 - AwsDynamoDbExecutionException: Thrown if there is an error executing a DynamoDB operation.
-- AwsDynamoDbConfigurationException: Thrown if the connector is not properly configured.
+- AwsDynamoDbConfigurationException: Thrown if the Connector is not properly configured.
 
-All of these checked exceptions are wrapped in a RuntimeException, so you should be prepared to handle this type of exception as well.
+All of these checked exceptions are wrapped in a `RuntimeException`, so you should be prepared to handle this type of exception as well.
 
 ## Troubleshooting
 
 If you are having issues with the **AWS DynamoDB Connector**, try the following:
 
-- Make sure your AWS credentials are correct.
-- Make sure your DynamoDB table exists and is located in the specified region.
-- Make sure your configuration properties are set correctly.
+- Ensure your AWS credentials are correct.
+- Ensure your DynamoDB table exists and is located in the specified region.
+- Ensure your configuration properties are set correctly.
 - Check the logs for any error messages.
 - Contact (Camunda support)[https://camunda.com/services/support/] if you need further assistance.
 
-For more information on AWS DynamoDB, please visit the [official documentation](https://docs.aws.amazon.com/dynamodb/).
+For more information on AWS DynamoDB, visit the [official documentation](https://docs.aws.amazon.com/dynamodb/).
 
 ## Using DynamoDB Connector best practice
 
