@@ -10,3 +10,4 @@ Access to the components within the stack can be controlled by the roles assigne
 
 :::note Want to know more about assigning roles?
 See our user guide on [assigning a role](/self-managed/identity/user-guide/roles/add-assign-role.md) for more information.
+:::
