@@ -80,10 +80,10 @@ This operation allows you to create a new item and add it to a queue from UiPath
 
 For this section, you must fill out the following fields:
 
-1. **Cloud URL**: Comes with a default value of `cloud.uipath.com`. You can always change it, if needed.
-2. **Cloud organization**: The name of your organization. See [about organizations](https://docs.uipath.com/automation-cloud/docs/about-organizations) to learn more.
-3. **Cloud tenant**: The name of the tenant. See [about tenants](https://docs.uipath.com/automation-cloud/docs/about-tenants) to learn more.
-4. **Organization Unit ID**: Click **Orchestrator** and you will find the id in the URL. For example, `https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/?tid=26929&fid=112233` where the **Organization Unit ID** is `112233`.
+1. **Cloud URL**: Comes with a default value of `cloud.uipath.com`. You can always change it, if needed. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
+2. **Cloud organization**: The name of your organization. See [about organizations](https://docs.uipath.com/automation-cloud/docs/about-organizations) to learn more. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
+3. **Cloud tenant**: The name of the tenant. See [about tenants](https://docs.uipath.com/automation-cloud/docs/about-tenants) to learn more. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
+4. **Organization Unit ID**: Click **Orchestrator** and you will find the id in the URL. For example, `https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/?tid=26929&fid=112233` where the **Organization Unit ID** is `112233`. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
 
 ![UiPath Connector configuration](../img/connectors-uipath-configuration.png)
 
