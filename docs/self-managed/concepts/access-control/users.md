@@ -9,4 +9,4 @@ To use [Identity](/self-managed/identity/what-is-identity.md), an account is req
 Access to the components within the stack can be controlled by the roles assigned to a user.
 
 :::note Want to know more about assigning roles?
-See our user guide on [assigning a role](/self-managed/identity/user-guide/roles/getting-started-with-roles.md) for more information.
+See our user guide on [assigning a role](/self-managed/identity/user-guide/roles/add-assign-role.md) for more information.

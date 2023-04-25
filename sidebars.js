@@ -1077,12 +1077,14 @@ module.exports = {
             },
             {
               Roles: [
-                "self-managed/identity/user-guide/roles/getting-started-with-roles",
+                "self-managed/identity/user-guide/roles/add-assign-role",
+                "self-managed/identity/user-guide/roles/add-assign-permission",
               ],
             },
             {
               Groups: [
-                "self-managed/identity/user-guide/groups/getting-started-with-groups",
+                "self-managed/identity/user-guide/groups/create-group",
+                "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
               ],
             },
             {

@@ -14,7 +14,7 @@ Identity implements the following permissions:
 - `read:users`: Users can access only the **Users** page and related subpages.
 - `write`: Users have access to all pages. They can create, modify, and delete data.
 
-You can [assign the above permissions to users as part of a role](/self-managed/identity/user-guide/roles/getting-started-with-roles.md).
+You can [assign the above permissions to users as part of a role](/self-managed/identity/user-guide/roles/add-assign-permission.md).
 This gives the user access to the Identity application.
 
 ## Assign Identity permissions to a user
@@ -29,9 +29,9 @@ To grant a user access to the UI, you need to assign at least one Identity permi
 When you start Identity with our pre-configured Keycloak container, Identity creates the `Identity` role automatically.
 The role contains the necessary permissions to give a user full read and write access to Identity.
 
-[Assign the `Identity` role to a user](/self-managed/identity/user-guide/roles/getting-started-with-roles.md) to enable the user to access the Identity UI.
+[Assign the `Identity` role to a user](/self-managed/identity/user-guide/roles/add-assign-role.md) to enable the user to access the Identity UI.
 
 ### Create a custom role
 
 When using an existing Keycloak instance, or if you want to create your own set of permissions, follow our guides to
-[create a new role](/self-managed/identity/user-guide/roles/getting-started-with-roles.md) and [assign it to users](/self-managed/identity/user-guide/roles/getting-started-with-roles.md).
+[create a new role and assign it to users](/self-managed/identity/user-guide/roles/add-assign-role.md).

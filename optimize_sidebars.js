@@ -1901,16 +1901,24 @@ module.exports = {
             {
               Roles: [
                 docsLink(
-                  "Getting started with roles",
-                  "self-managed/identity/user-guide/roles/getting-started-with-roles/"
+                  "Adding and assigning a role to a user",
+                  "self-managed/identity/user-guide/roles/add-assign-role/"
+                ),
+                docsLink(
+                  "Adding and assigning a permission to a role",
+                  "self-managed/identity/user-guide/roles/add-assign-permission/"
                 ),
               ],
             },
             {
               Groups: [
                 docsLink(
-                  "Getting started with groups",
-                  "self-managed/identity/user-guide/groups/getting-started-with-groups/"
+                  "Create a group",
+                  "self-managed/identity/user-guide/groups/create-group/"
+                ),
+                docsLink(
+                  "Assign users and roles to a group",
+                  "self-managed/identity/user-guide/groups/assign-users-roles-to-group/"
                 ),
               ],
             },
