@@ -77,6 +77,7 @@ POST `/api/public/import?collectionId=123`
         "id": "61ae2232-51e1-4c35-b72c-c7152ba264f9",
         "exportEntityType": "single_process_report",
         "name": "Number: Process instance duration",
+        "description": "This report shows the average instance duration",
         "sourceIndexVersion": 8,
         "collectionId": null,
         "data": {...}
