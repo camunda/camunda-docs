@@ -15,6 +15,6 @@ The token generated can then be used to communicate with other applications in t
 the need for user intervention.
 
 :::tip Want to learn how to generate an M2M token?
-Head to our guide, [generating M2M tokens](/self-managed/identity/user-guide/generating-m2m-tokens.md)
+Head to our guide, [generating M2M tokens](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md)
 to find out more!
 :::

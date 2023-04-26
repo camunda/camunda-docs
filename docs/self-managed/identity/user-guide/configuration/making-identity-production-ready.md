@@ -18,7 +18,7 @@ To ensure recovery is possible, we recommend regularly backing up the database t
 
 #### Helm deployment
 
-If you deployed the Camunda platform using our [Helm charts](../../platform-deployment/helm-kubernetes/overview.md),
+If you deployed the Camunda platform using our [Helm charts](../../../platform-deployment/helm-kubernetes/overview.md),
 by default there will be a Postgres database deployed with it. In this instance, we recommend reading the
 [Postgres documentation](https://www.postgresql.org/docs/current/backup.html) for guidance on backing up.
 
