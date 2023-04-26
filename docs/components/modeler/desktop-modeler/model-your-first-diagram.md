@@ -3,7 +3,7 @@ id: model-your-first-diagram
 title: Model your first diagram
 ---
 
-After [downloading](./install-the-modeler.md) and starting Desktop Modeler, you can model your first BPMN diagram. Follow the steps below:
+Once you started the [Desktop Modeler](./index.md), you can model your first BPMN diagram. Follow the steps below:
 
 1. Create a BPMN diagram:
 
