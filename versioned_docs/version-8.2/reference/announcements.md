@@ -14,6 +14,12 @@ End of maintenance: 8th of October 2024
 
 - Operate version 8.2+ now also support OpenSearch 1.3.x.
 
+### Upgrading to 8.2
+
+- It is recommended to follow a sequential update path when updating to version 8.2. For example, if running on version 8.0, first update to 8.1, then update to 8.2.
+- Migration of data during the version 8.2 update could take longer than previous versions, especially for datasets containing a large amount of incidents data.
+- Operate now uses Spring Boot version 3.0, therefore URLs with a trailing slash will fail with a HTTP status 404: https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide#spring-mvc-and-webflux-url-matching-changes
+
 ## Camunda Platform 8.1
 
 Release date: 11th of October 2022
