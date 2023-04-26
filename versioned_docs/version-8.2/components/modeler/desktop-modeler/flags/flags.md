@@ -28,7 +28,7 @@ Flags passed as command line arguments take precedence over those configured via
 
 | flag                                               | default value                       |
 | -------------------------------------------------- | ----------------------------------- |
-| ["disable-plugins"](#disable-plugins)              | false                               |
+| ["disable-plugins"](#disable-plug-ins)             | false                               |
 | "disable-adjust-origin"                            | false                               |
 | "disable-cmmn"                                     | true                                |
 | "disable-dmn"                                      | false                               |
