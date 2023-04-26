@@ -5,7 +5,7 @@ sidebar_label: Microsoft Teams Connector
 description: Work with Microsoft Teams from your BPMN process using the Microsoft Teams Connector. Learn about authentication, conversation type and method, and more.
 ---
 
-The **Microsoft Teams Connector** allows you to connect your BPMN process with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/).
+The **Microsoft Teams Connector** allows you to connect your BPMN process with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) to manage interactions.
 
 ## Prerequisites
 

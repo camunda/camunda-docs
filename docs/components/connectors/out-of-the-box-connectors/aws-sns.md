@@ -5,7 +5,7 @@ sidebar_label: Amazon SNS Connector
 description: Publish messages to Amazon Simple Notification Service (SNS) from your BPMN process.
 ---
 
-The **Amazon Simple Notification Service (SNS)** Connector allows you to connect your BPMN service with [Amazon Simple Notification Service (SNS)](https://aws.amazon.com/sns/).
+The **Amazon Simple Notification Service (SNS)** Connector allows you to connect your BPMN service with [Amazon Simple Notification Service (SNS)](https://aws.amazon.com/sns/) to send messages.
 
 ## Prerequisites
 
