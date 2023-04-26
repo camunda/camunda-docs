@@ -28,7 +28,7 @@ Flags passed as command line arguments take precedence over those configured via
 
 | flag                                               | default value                       |
 | -------------------------------------------------- | ----------------------------------- |
-| "disable-plugins"                                  | false                               |
+| ["disable-plugins"](#disable-plugins)              | false                               |
 | "disable-adjust-origin"                            | false                               |
 | "disable-cmmn"                                     | true                                |
 | "disable-dmn"                                      | false                               |
@@ -42,6 +42,10 @@ Flags passed as command line arguments take precedence over those configured via
 | ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)  | `undefined`                         |
 
 ## Examples
+
+### Disable Plug-ins
+
+Start the modeler without activating installed plug-ins. This is useful to debug modeler errors.
 
 ### BPMN-only Mode
 
