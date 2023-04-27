@@ -194,7 +194,7 @@ Response example:
 }
 ```
 
-![AA get work item result](../../img/connector-utomation-anywhere-get-work-item-result.png)
+![AA get work item result](../../img/connector-automation-anywhere-get-work-item-result.png)
 
 ## Using Automation Anywhere Connector best practice
 
