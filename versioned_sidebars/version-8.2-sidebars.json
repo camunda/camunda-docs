@@ -125,7 +125,8 @@
                 "components/modeler/web-modeler/collaboration",
                 "components/modeler/web-modeler/collaborate-with-modes",
                 "components/modeler/web-modeler/design-your-process",
-                "components/modeler/web-modeler/implement-your-process"
+                "components/modeler/web-modeler/implement-your-process",
+                "components/modeler/web-modeler/play-your-process"
               ]
             },
             "components/modeler/web-modeler/milestones",
@@ -300,7 +301,8 @@
               ]
             }
           ]
-        }
+        },
+        "components/modeler/data-handling"
       ],
       "Connectors": [
         "components/connectors/introduction-to-connectors",
@@ -310,6 +312,7 @@
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
+            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
@@ -336,8 +339,7 @@
             "components/connectors/custom-built-connectors/connector-templates",
             "components/connectors/custom-built-connectors/connector-sdk"
           ]
-        },
-        "components/modeler/data-handling"
+        }
       ],
       "Zeebe": [
         "components/zeebe/zeebe-overview",
@@ -921,6 +923,11 @@
       "Zeebe": [
         "self-managed/zeebe-deployment/zeebe-installation",
         {
+          "Zeebe Gateway": [
+            "self-managed/zeebe-deployment/zeebe-gateway/overview"
+          ]
+        },
+        {
           "Configuration": [
             "self-managed/zeebe-deployment/configuration/configuration",
             "self-managed/zeebe-deployment/configuration/logging",
@@ -1309,9 +1316,6 @@
           ]
         }
       ]
-    },
-    {
-      "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"]
     },
     {
       "Modeler": [

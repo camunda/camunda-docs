@@ -655,6 +655,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
             docsLink(
+              "Amazon DynamoDB Connector",
+              "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),
@@ -1621,6 +1625,14 @@ module.exports = {
           "self-managed/zeebe-deployment/zeebe-installation/"
         ),
         {
+          "Zeebe Gateway": [
+            docsLink(
+              "Overview",
+              "self-managed/zeebe-deployment/zeebe-gateway/overview"
+            ),
+          ],
+        },
+        {
           Configuration: [
             docsLink(
               "Overview",
@@ -1883,18 +1895,42 @@ module.exports = {
         {
           "User guide": [
             {
+              Configuration: [
+                docsLink(
+                  "Making Identity production ready",
+                  "self-managed/identity/user-guide/configuration/making-identity-production-ready/"
+                ),
+                docsLink(
+                  "Configuring an external identity provider and logging",
+                  "self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/"
+                ),
+                docsLink(
+                  "Connect to an existing Keycloak instance",
+                  "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/"
+                ),
+              ],
+            },
+            {
+              Roles: [
+                docsLink(
+                  "Adding and assigning a role to a user",
+                  "self-managed/identity/user-guide/roles/add-assign-role/"
+                ),
+                docsLink(
+                  "Adding and assigning a permission to a role",
+                  "self-managed/identity/user-guide/roles/add-assign-permission/"
+                ),
+              ],
+            },
+            {
               Groups: [
                 docsLink(
-                  "Creating a group",
-                  "self-managed/identity/user-guide/groups/creating-a-group/"
+                  "Create a group",
+                  "self-managed/identity/user-guide/groups/create-group/"
                 ),
                 docsLink(
-                  "Assigning users to a group",
-                  "self-managed/identity/user-guide/groups/assigning-users-to-a-group/"
-                ),
-                docsLink(
-                  "Assigning roles to a group",
-                  "self-managed/identity/user-guide/groups/assigning-roles-to-a-group/"
+                  "Assign users and roles to a group",
+                  "self-managed/identity/user-guide/groups/assign-users-roles-to-group/"
                 ),
               ],
             },
@@ -1905,61 +1941,29 @@ module.exports = {
                   "Managing resource authorizations",
                   "self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
                 ),
+                docsLink(
+                  "Managing user access",
+                  "self-managed/identity/user-guide/authorizations/managing-user-access/"
+                ),
+                docsLink(
+                  "Generating M2M tokens",
+                  "self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
+                ),
               ],
             },
 
-            docsLink(
-              "Adding an application",
-              "self-managed/identity/user-guide/adding-an-application/"
-            ),
-            docsLink(
-              "Adding an API",
-              "self-managed/identity/user-guide/adding-an-api/"
-            ),
-            docsLink(
-              "Adding a permission",
-              "self-managed/identity/user-guide/adding-a-permission/"
-            ),
-            docsLink(
-              "Assigning a permission an application",
-              "self-managed/identity/user-guide/assigning-a-permission-to-an-application/"
-            ),
-            docsLink(
-              "Adding a role",
-              "self-managed/identity/user-guide/adding-a-role/"
-            ),
-            docsLink(
-              "Assigning a permission a role",
-              "self-managed/identity/user-guide/assigning-a-permission-to-a-role/"
-            ),
-            docsLink(
-              "Assigning a role to a user",
-              "self-managed/identity/user-guide/assigning-a-role-to-a-user/"
-            ),
-            docsLink(
-              "Configuring an external identity provider",
-              "self-managed/identity/user-guide/configure-external-identity-provider/"
-            ),
-            docsLink(
-              "Configuring logging",
-              "self-managed/identity/user-guide/configure-logging/"
-            ),
-            docsLink(
-              "Making Identity production ready",
-              "self-managed/identity/user-guide/making-identity-production-ready/"
-            ),
-            docsLink(
-              "Generating machine-to-machine (M2M) tokens",
-              "self-managed/identity/user-guide/generating-m2m-tokens/"
-            ),
-            docsLink(
-              "Managing user access",
-              "self-managed/identity/user-guide/managing-user-access/"
-            ),
-            docsLink(
-              "Connect to an existing Keycloak instance",
-              "self-managed/identity/user-guide/connect-to-an-existing-keycloak/"
-            ),
+            {
+              "Additional features": [
+                docsLink(
+                  "Adding an API",
+                  "self-managed/identity/user-guide/additional-features/adding-an-api/"
+                ),
+                docsLink(
+                  "Incorporate applications",
+                  "self-managed/identity/user-guide/additional-features/incorporate-applications/"
+                ),
+              ],
+            },
           ],
         },
         {
@@ -1990,14 +1994,6 @@ module.exports = {
             ),
           ],
         },
-      ],
-    },
-    {
-      "Zeebe Gateway": [
-        docsLink(
-          "Overview",
-          "self-managed/zeebe-gateway-deployment/zeebe-gateway/"
-        ),
       ],
     },
 
