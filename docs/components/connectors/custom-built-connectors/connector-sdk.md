@@ -17,6 +17,8 @@ reuse its runtime logic in multiple environments. The SDK achieves this by abstr
 Camunda Platform 8 internals that usually come with
 [job workers](../../concepts/job-workers.md).
 
+You can find the latest **Connector SDK** version source code [here](https://github.com/camunda/connector-sdk).
+
 The SDK provides APIs for common Connector operations, such as:
 
 - Fetching and deserializing input data
@@ -33,7 +35,7 @@ This section outlines how to set up a Connector project, test it, and run it loc
 
 ### Setup
 
-When developing a new Connector, we recommend using our
+When developing a new **Connector**, we recommend using our
 [custom Connector template repository on GitHub](https://github.com/camunda/connector-template).
 This template is a [Maven](https://maven.apache.org/)-based Java project, and can be used in various
 ways such as:
@@ -62,7 +64,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-core</artifactId>
-  <version>0.6.0</version>
+  <version>0.8.1</version>
 </dependency>
 ```
 
@@ -71,7 +73,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-core:0.6.0'
+implementation 'io.camunda.connector:connector-core:0.8.1'
 ```
 
 </TabItem>
@@ -374,7 +376,7 @@ Connector, add the following dependency to your project:
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-validation</artifactId>
-  <version>0.6.0</version>
+  <version>0.8.1</version>
 </dependency>
 ```
 
@@ -383,7 +385,7 @@ Connector, add the following dependency to your project:
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-validation:0.6.0'
+implementation 'io.camunda.connector:connector-validation:0.8.1'
 ```
 
 </TabItem>
