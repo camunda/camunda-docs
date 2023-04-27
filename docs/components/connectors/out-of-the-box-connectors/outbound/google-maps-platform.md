@@ -9,7 +9,7 @@ The **Google Maps Platform Connector** in an inbound Connector that allows you t
 
 ## Create a Google Maps Platform Connector task
 
-To use a **Google Maps Platform Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **Google Maps Platform Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
 
 ## Make your Google Maps Platform Connector executable
 
@@ -26,7 +26,7 @@ In the **Authentication** section, set the relevant API key. See the [official d
 :::note
 We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `GOOGLE_MAPS_PLATFORM_API_KEY`) so you can reference it later in the Connector.
    :::
 

@@ -15,19 +15,19 @@ To use the **OpenAI Connector**, create an OpenAI account and create an API key.
 Refer to the [OpenAI Platform](https://platform.openai.com/docs/quickstart) documentation for a detailed setup guide.
 
 :::note
-It is highly recommended not to expose your sensitive data, such as OpenAI API key as plain text, but rather use Camunda secrets. Follow our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended not to expose your sensitive data, such as OpenAI API key as plain text, but rather use Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::note
 
 ## Create an OpenAI Connector task
 
-To use the **OpenAI Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide on using Connectors](../use-connectors.md) to learn more.
+To use the **OpenAI Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
 
 ## Make your OpenAI Connector executable
 
 To work with the OpenAI Connector, choose the required connection type in the **Authentication** section and complete the
 mandatory fields highlighted in red in the connector properties panel:
 
-![connectors-openai-red-properties](../img/connectors-openai-red-properties.png)
+![connectors-openai-red-properties](../../img/connectors-openai-red-properties.png)
 
 ## Authentication
 
@@ -37,7 +37,7 @@ To use the **OpenAI Connector**, obtain an API key from OpenAI. To create an Ope
 
 We advise you to keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `OPENAI_API_KEY`) so you can reference it later in the Connector.
 
 ### Configure the API key
@@ -85,7 +85,7 @@ This is the query that is used to trigger the model output.
 
 The image below illustrates how you can use **System message**, **Chat history**, and **Prompt** together.
 
-![connectors-openai-prompt-engineering](../img/connectors-openai-prompt-engineering.png)
+![connectors-openai-prompt-engineering](../../img/connectors-openai-prompt-engineering.png)
 
 :::note
 Find more complex examples of prompt engineering and sample real-life use cases of ChatGPT on the OpenAI [examples](https://platform.openai.com/examples) page.

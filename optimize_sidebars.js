@@ -655,6 +655,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
             docsLink(
+              "Amazon DynamoDB Connector",
+              "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),

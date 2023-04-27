@@ -22,13 +22,13 @@ To use the Power Automate Connector, ensure you have configured the following:
 
 ## Create a Power Automate Connector task
 
-To use a **Power Automate Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **Power Automate Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
 
 ## Operation types
 
 The Power Automate Connector currently supports three operation types in the **Operation type** dropdown list: _Get the status of a flow run_, _Get flow outputs_, and _Trigger a flow run_.
 
-![Power Automate Connector operations](../img/connectors-power-automate-operations.png)
+![Power Automate Connector operations](../../img/connectors-power-automate-operations.png)
 
 ### Authentication
 
@@ -40,7 +40,7 @@ You can choose among the available Power Automate Connector authentication types
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `POWER_AUTOMATE_BEARER_TOKEN`) so you can reference it later in the Connector.
 
 #### Configure the bearer token
@@ -52,7 +52,7 @@ Select the **Power Automate Connector** and fill out the following properties un
 1. Click **Bearer Token** in the **Authentication** section.
 2. Set **Bearer** to the secret you created (i.e. `secrets.POWER_AUTOMATE_BEARER_TOKEN`).
 
-![Power Automate Connector bearer token](../img/connectors-power-automate-bearer-token.png)
+![Power Automate Connector bearer token](../../img/connectors-power-automate-bearer-token.png)
 
 ### OAuth 2.0
 
@@ -60,7 +60,7 @@ Select the **Power Automate Connector** and fill out the following properties un
 
 We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `POWER_AUTOMATE_CLIENT_ID`) so you can reference it later in the Connector.
 
 #### Configure the OAuth Token
@@ -72,7 +72,7 @@ Select the **Power Automate Connector** and fill out the following properties un
 3. Set **Client secret** to the secret you created (i.e. `secrets.POWER_AUTOMATE_CLIENT_SECRET`).
 4. Set **OAuth Token Endpoint** to the secret you created (i.e. `secrets.POWER_AUTOMATE_TOKEN_ENDPOINT`).
 
-![Power Automate Connector oauth token](../img/connectors-power-automate-oauth-token.png)
+![Power Automate Connector oauth token](../../img/connectors-power-automate-oauth-token.png)
 
 ##### OAuth Token Endpoint
 
@@ -90,7 +90,7 @@ This operation allows you to trigger a Power Automate desktop flow. To execute i
 4. Fill out the input fields as described in the [input](#input) section.
 5. Fill out the response mapping as described in the [trigger a flow run response](#trigger-a-flow-run-response) section.
 
-![Power Automate Connector - Trigger a flow run](../img/connectors-power-automate-trigger-a-flow-run.png)
+![Power Automate Connector - Trigger a flow run](../../img/connectors-power-automate-trigger-a-flow-run.png)
 
 #### Trigger a flow run response
 
@@ -218,21 +218,21 @@ Response example:
 
 Oftentimes, it is desired to continue the process after a Power Automate flow run finished. You can use the **Callback URL** field if you select the **Trigger a flow run** to specify a URL which will be called after the flow is finished.
 
-If you wish to continue the Camunda process or start a new one, the [Webhook Connector](./http-webhook.md) is a good next step. For this, take the following steps:
+If you wish to continue the Camunda process or start a new one, the [Webhook Connector](/components/connectors/out-of-the-box-connectors/inbound/http-webhook.md) is a good next step. For this, take the following steps:
 
-1. Create a [Webhook Connector](./http-webhook.md) and specify the **Webhook ID**.
-2. Create a [Power Automate Connector](./power-automate.md), select the **Trigger a flow run** method, and fill in the fields.
+1. Create a [Webhook Connector](/components/connectors/out-of-the-box-connectors/inbound/http-webhook.md) and specify the **Webhook ID**.
+2. Create a [Power Automate Connector](/components/connectors/out-of-the-box-connectors/outbound/power-automate.md), select the **Trigger a flow run** method, and fill in the fields.
 
    If you use Camunda Platform 8 SaaS, you can use the following pattern for the **Callback URL**: `{zeebe.client.cloud.region}.{zeebeHostUrl}/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
 
    If you use Camunda Platform 8 SaaS you can find the Zeebe-specific values in you cluster details on the **API** tab under **Client Credentials**. The **webhookId** is the id you specified in the first step, and the **zeebeHostUrl** is connectors.camunda.io.
 
-   ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-cluster-api-credentials.png)
+   ![Power Automate Connector - Azure AD app allow implicit flow](../../img/connectors-power-automate-cluster-api-credentials.png)
 
 #### Get Bearer token with Postman
 
 1. Allow implicit flow in your [Azure AD app](https://portal.azure.com).
-   ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-allow-implicit-flow.png)
+   ![Power Automate Connector - Azure AD app allow implicit flow](../../img/connectors-power-automate-allow-implicit-flow.png)
 2. [Visit the official site](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment) to see how to set up the Postman environment.
 3. [Generate an access token](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment#generate-an-access-token-to-use-with-your-environment) and use it in the **Bearer token** field.
 
@@ -243,8 +243,8 @@ If you wish to continue the Camunda process or start a new one, the [Webhook Con
 3. Select **Desktop flows** and provide the domain and username of the user on the machine where the desktop flows are running, and also provide the password belongs to this user.
 4. Click **Create**.
 
-   ![Power Automate Connector - Create connection](../img/connectors-power-automate-create-new-connection.png)
+   ![Power Automate Connector - Create connection](../../img/connectors-power-automate-create-new-connection.png)
 
 5. Click on the newly created connection, and you can find your connection name in the URL as shown in the picture below. This is a default connection type.
 
-   ![Power Automate Connector - Connection name](../img/connectors-power-automate-connection-name.png)
+   ![Power Automate Connector - Connection name](../../img/connectors-power-automate-connection-name.png)
