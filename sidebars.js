@@ -252,7 +252,7 @@ module.exports = {
             },
             {
               "Outbound Connectors": [
-                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+                "components/connectors/out-of-the-box-connectors/outbound/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/outbound/asana",
                 "components/connectors/out-of-the-box-connectors/outbound/automation-anywhere",
                 "components/connectors/out-of-the-box-connectors/outbound/aws-sns",
