@@ -5,7 +5,7 @@ sidebar_label: GraphQL Connector
 description: Execute a GraphQL query or mutation from your BPMN process.
 ---
 
-The **GraphQL Connector** allows you to execute a GraphQL query or mutation from your BPMN process.
+The **GraphQL Connector** is a protocol Connector that allows you to execute a GraphQL query or mutation from your BPMN process.
 
 ## Prerequisites
 

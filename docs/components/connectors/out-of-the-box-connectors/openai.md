@@ -5,7 +5,7 @@ sidebar_label: OpenAI Connector
 description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ Connector.
 ---
 
-The **OpenAI Connector** allows you to use [ChatGPT](https://platform.openai.com/docs/guides/chat/chat-completions-beta)
+The **OpenAI Connector** is an inbound Connector that allows you to use [ChatGPT](https://platform.openai.com/docs/guides/chat/chat-completions-beta)
 or [Moderation API](https://platform.openai.com/docs/guides/moderation/moderation) in your BPMN process.
 
 ## Prerequisites

@@ -5,7 +5,7 @@ sidebar_label: GitLab Connector
 description: Manage GitLab issues and releases from your BPMN process. Learn about creating a GitLab Connector task and get started.
 ---
 
-The **GitLab Connector** allows you to connect your BPMN service with [GitLab](https://about.gitlab.com/) to manage GitLab issues and releases.
+The **GitLab Connector** is an outbound Connector that allows you to connect your BPMN service with [GitLab](https://about.gitlab.com/) to manage GitLab issues and releases.
 
 ## Prerequisites
 

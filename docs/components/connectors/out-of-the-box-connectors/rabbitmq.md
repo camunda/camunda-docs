@@ -5,7 +5,7 @@ sidebar_label: RabbitMQ Connector
 description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ Connector.
 ---
 
-The **RabbitMQ Connector** allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/) to send messages to RabbitMQ.
+The **RabbitMQ Connector** is an outbound Connector that allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/) to send messages to RabbitMQ.
 
 ## Prerequisites
 

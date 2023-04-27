@@ -5,7 +5,7 @@ sidebar_label: Google Maps Platform Connector
 description: Learn how to validate addresses, retrieve postal addresses, and calculate distances with Google Maps Platform Connector.
 ---
 
-The **Google Maps Platform Connector** allows you to validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) in BPMN process.
+The **Google Maps Platform Connector** in an inbound Connector that allows you to validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) in BPMN process.
 
 ## Create a Google Maps Platform Connector task
 
