@@ -214,13 +214,13 @@ The state of all active process instances, (these are also known as inflight pro
 
 - [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#snapshots)
 
-### Subscription Connector
+### Subscription inbound Connector
 
 An [inbound Connector](#inbound-connector) that subscribes to a message queue.
 
 This way, a Camunda workflow can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound Connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
 
-### Webhook
+### Webhook Connector
 
 Webhooks are a subtype of [inbound Connector](#inbound-connector).
 
