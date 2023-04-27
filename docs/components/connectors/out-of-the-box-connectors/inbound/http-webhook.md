@@ -10,7 +10,7 @@ The **HTTP Webhook Connector** allows you to start a BPMN process instance trigg
 :::note
 If you have used the HTTP Webhook Connector with a self-managed Camunda 8 configuration before the
 Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template.
-Please refer to the [update guide](/guides/update-guide/connectors/060-to-070) for more details.
+Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
 :::
 
 ## Create an HTTP Webhook Connector task

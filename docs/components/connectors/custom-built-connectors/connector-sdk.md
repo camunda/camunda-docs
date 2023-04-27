@@ -15,7 +15,7 @@ The **Connector SDK** allows you to [develop custom Connectors](#creating-a-cust
 using Java code. You can focus on the logic of the Connector, test it locally, and
 reuse its runtime logic in multiple environments. The SDK achieves this by abstracting from
 Camunda Platform 8 internals that usually come with
-[job workers](../../concepts/job-workers.md).
+[job workers](/components/concepts/job-workers.md).
 
 The SDK provides APIs for common Connector operations, such as:
 
@@ -134,7 +134,7 @@ A Connector template defines the binding to your Connector runtime behavior via 
 
 This type definition `io.camunda:template:1` is the connection configuring which version of your Connector runtime behavior to use.
 In technical terms, this defines the **Type** of jobs created for tasks in your process model that use this template.
-Consult the [job worker](../../concepts/job-workers.md) guide to learn more.
+Consult the [job worker](/components/concepts/job-workers.md) guide to learn more.
 
 Besides the type binding, Connector templates also define the input variables of your Connector as `zeebe:input` objects.
 For example, you can create the input variable `message` of your Connector in the element template as follows:
@@ -207,7 +207,7 @@ recommended objects, **Result Variable** and **Result Expression**:
 
 These objects create custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up those two custom headers and translate them into process variables accordingly.
-You can see an example of how to use this in the [out-of-the-box REST Connector](../out-of-the-box-connectors/rest.md#response).
+You can see an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/out-of-the-box-connectors/outbound/rest.md#response).
 
 All Connectors are recommended to offer exception handling to allow users to configure how to map results and technical errors into
 BPMN errors. To provide this, Connector templates can reuse the recommended object **Result Expression**:
@@ -228,7 +228,7 @@ BPMN errors. To provide this, Connector templates can reuse the recommended obje
 
 This object creates custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
-You can see an example of how to use this in the [BPMN errors in Connectors guide](../use-connectors.md#bpmn-errors).
+You can see an example of how to use this in the [BPMN errors in Connectors guide](components/connectors/use-connectors.md#bpmn-errors).
 
 ### Runtime logic
 
@@ -301,7 +301,7 @@ If the Connector handles exceptional cases, it can use any exception to express 
 error should be associated with a specific error code, the Connector can throw a `ConnectorException` and define
 a `code` as shown in **(4)**.
 We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
-by creating [BPMN errors](../use-connectors.md#bpmn-errors) in their Connector configurations.
+by creating [BPMN errors](/components/connectors/use-connectors.md#bpmn-errors) in their Connector configurations.
 
 If the Connector has a result to return, it can create a new result data object and set
 its properties as shown in **(5)**.
@@ -651,7 +651,7 @@ than writing custom constraints.
 
 Connectors that require confidential information to connect to external systems need to be able
 to manage those securely. As described in the
-[guide for creating secrets](../../console/manage-clusters/manage-secrets.md), secrets can be
+[guide for creating secrets](/components/console/manage-clusters/manage-secrets.md), secrets can be
 controlled in a secure location and referenced in a Connector's properties using a placeholder
 pattern `secrets.*`. To make this mechanism as robust as possible, secret handling comes with
 the Connector SDK out of the box. That way, all Connectors can use the same standard way of
@@ -838,7 +838,7 @@ code. To invoke this logic, you need a runtime environment that knows the Connec
 and how to call it.
 
 In Camunda Platform 8 SaaS, every cluster runs a component that knows the
-[available out-of-the-box connectors](../out-of-the-box-connectors/available-connectors-overview.md)
+[available out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 and how to invoke them. This component is the runtime environment specific to Camunda's SaaS use case.
 
 Regarding Self-Managed environments, you are responsible for providing the runtime environment that
@@ -890,9 +890,9 @@ The job handler wrapper provides the following benefits:
 - Provides flexible BPMN error handling via **Error Expression** as described in the
   [Connector template](#connector-template) section.
 
-Using the wrapper class, you can create a custom [Zeebe client](../../../apis-tools/working-with-apis-tools.md).
+Using the wrapper class, you can create a custom [Zeebe client](/apis-tools/working-with-apis-tools.md).
 For example, you can spin up a custom client with the
-[Zeebe Java client](../../../apis-tools/java-client/index.md) as follows:
+[Zeebe Java client](/apis-tools/java-client/index.md) as follows:
 
 ```java
 import io.camunda.connector.MyConnectorFunction

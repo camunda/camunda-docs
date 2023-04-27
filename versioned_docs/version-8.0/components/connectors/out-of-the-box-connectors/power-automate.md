@@ -220,7 +220,6 @@ Oftentimes, it is desired to continue the process after a Power Automate flow ru
 
 :::info
 Starting from Camunda Platform 8.1, it is possible to continue the Camunda process or start a new one using the HTTP webhook Connector.
-Please refer to the [documentation for an up-to-date version](../../../../../docs/components/connectors/out-of-the-box-connectors/power-automate.md#using-webhook-connector-as-callback-endpoint) to learn more about this feature.
 :::
 
 #### Get Bearer token with Postman
