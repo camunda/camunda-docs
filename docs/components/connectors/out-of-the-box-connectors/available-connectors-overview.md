@@ -10,10 +10,11 @@ All Connectors are available for Camunda Platform 8 SaaS and [Self Managed](../.
 
 ## Outbound Connectors
 
-- [Asana Connector](/components/connectors/out-of-the-box-connectors/outbound/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
-- [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/outbound/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
+- [Amazon DynamoDB Connector](/components/connectors/out-of-the-box-connectors/outbound/aws-dynamodb.md) - Interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
 - [Amazon SNS Connector](/components/connectors/out-of-the-box-connectors/outbound/aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/outbound/aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
+- [Asana Connector](/components/connectors/out-of-the-box-connectors/outbound/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
+- [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/outbound/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [AWS Lambda Connector](/components/connectors/out-of-the-box-connectors/outbound/aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
 - [Camunda Operate Connector](/components/connectors/out-of-the-box-connectors/outbound/operate.md) - Fetch process execution data from [Camunda Operate](https://camunda.com/platform/operate/).
 - [Easy Post Connector](/components/connectors/out-of-the-box-connectors/outbound/aws-lambda.md) - Create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost](https://www.easypost.com/) from your BPMN process.
