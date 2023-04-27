@@ -244,6 +244,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
+            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
@@ -770,6 +771,11 @@ module.exports = {
       Zeebe: [
         "self-managed/zeebe-deployment/zeebe-installation",
         {
+          "Zeebe Gateway": [
+            "self-managed/zeebe-deployment/zeebe-gateway/overview",
+          ],
+        },
+        {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
             "self-managed/zeebe-deployment/configuration/logging",
@@ -1115,9 +1121,6 @@ module.exports = {
           ],
         },
       ],
-    },
-    {
-      "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
     },
     {
       Modeler: [

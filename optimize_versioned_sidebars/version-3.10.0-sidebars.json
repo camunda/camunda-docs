@@ -2107,6 +2107,15 @@
           "href": "/docs/self-managed/zeebe-deployment/zeebe-installation/"
         },
         {
+          "Zeebe Gateway": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/zeebe-deployment/zeebe-gateway/overview/"
+            }
+          ]
+        },
+        {
           "Configuration": [
             {
               "type": "link",
@@ -2526,15 +2535,6 @@
               "href": "/docs/self-managed/identity/troubleshooting/common-problems/"
             }
           ]
-        }
-      ]
-    },
-    {
-      "Zeebe Gateway": [
-        {
-          "type": "link",
-          "label": "Overview",
-          "href": "/docs/self-managed/zeebe-gateway-deployment/zeebe-gateway/"
         }
       ]
     },

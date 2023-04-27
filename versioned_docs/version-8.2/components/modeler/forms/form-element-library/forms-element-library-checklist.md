@@ -16,6 +16,8 @@ A set of checkboxes providing data multi-selection for small datasets.
 - **Options source**: Checklists can be configured with an options source defining the individual choices your user can make, see [options source docs](../configuration/forms-config-options.md).
 - **Disabled**: Disables the checklist, for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the checklist.
+- **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
+  - **Required**: Checklist must contain a value.
 - **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
 
 ### Datatypes

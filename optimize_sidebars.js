@@ -655,6 +655,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
             docsLink(
+              "Amazon DynamoDB Connector",
+              "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),
@@ -1621,6 +1625,14 @@ module.exports = {
           "self-managed/zeebe-deployment/zeebe-installation/"
         ),
         {
+          "Zeebe Gateway": [
+            docsLink(
+              "Overview",
+              "self-managed/zeebe-deployment/zeebe-gateway/overview"
+            ),
+          ],
+        },
+        {
           Configuration: [
             docsLink(
               "Overview",
@@ -1982,14 +1994,6 @@ module.exports = {
             ),
           ],
         },
-      ],
-    },
-    {
-      "Zeebe Gateway": [
-        docsLink(
-          "Overview",
-          "self-managed/zeebe-gateway-deployment/zeebe-gateway/"
-        ),
       ],
     },
 
