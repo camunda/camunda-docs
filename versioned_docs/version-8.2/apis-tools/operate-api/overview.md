@@ -443,7 +443,7 @@ These values could be of type `string`, `number`, `boolean`, and `dateString`.
 
 ```
 {
- "key":	                    <number>
+ "key":                     <number>
  "processDefinitionKey":    <number>
  "processInstanceKey":      <number>
  "type":                    <string>
@@ -458,7 +458,7 @@ These values could be of type `string`, `number`, `boolean`, and `dateString`.
 ```
 {
  "key":                     <number>
- "processInstanceKey":      <number>
+ "processInstanceKey":	    <number>
  "processDefinitionKey":    <number>
  "startDate":               <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
  "endDate":                 <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
