@@ -2,6 +2,7 @@
 id: introduction-to-connectors
 title: Introduction
 description: "A Connector is a reusable building block that performs the integration with an external system and works out of the box."
+keywords: [bridge, reusable component, low code]
 ---
 
 <!-- TODO: Shorten intro. Include types, connector templates, and Connector SDK. Order like new image on page. -->

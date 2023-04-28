@@ -1,13 +1,27 @@
 ---
 id: use-connectors
-title: Use Connectors
+title: Using Connectors
 description: Learn how to use Connectors in Web Modeler by creating a Connector task, configuring a Connector, and reviewing potential errors.
 ---
 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
 Find the available Connectors in Camunda Platform 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs groupId="dependencies" defaultValue="outbound" queryString values={
+[
+{label: 'Outbound', value: 'outbound', },
+{label: 'Inbound', value: 'inbound', },
+]
+}>
+
+<TabItem value='outbound'>
+
 ## Outbound Connector
+
+[Outbound Connectors](connector-types.md#outbound-connectors) allow workflows to trigger external systems or services.
 
 ### Creating the BPMN task
 
@@ -41,7 +55,13 @@ By default, Connector execution is repeated `3` times if execution fails. To cha
 ...
 ```
 
+</TabItem>
+
+<TabItem value='inbound'>
+
 ## Inbound Connector
+
+[Inbound Connectors](connector-types.md#inbound-connectors) enable workflows to receive data or messages from external systems or services.
 
 ### Creating the BPMN start event
 
@@ -74,6 +94,9 @@ To deploy and use an inbound webhook, you would need to fill in several fields.
 4. **Variable Mapping** - is a FEEL expression that transforms incoming body into BPMN process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`. In that case, the **Variable Mapping** might look as `={myDocumentId: request.body.id}`.
 
 See a list of [available Inbound Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and their respective specific configuration instructions.
+
+</TabItem>
+</Tabs>
 
 ## Using secrets
 

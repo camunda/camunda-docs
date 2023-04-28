@@ -4,9 +4,15 @@ title: Types of Connectors
 description: "Connectors come in type and subtypes that describe their functionality."
 ---
 
+Connectors are categorized by the direction data flows into or out of Camunda Platform 8.
+
+:::note
+Looking for prebuilt, [Out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)?
+:::
+
 ## Outbound Connectors
 
-Outbound Connectors allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
+Outbound Connectors allow workflows to trigger external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
 
 ![Outbound Connectors](img/outbound-connectors.png)
 
@@ -30,6 +36,10 @@ Currently, only webhooks are supported.
 
 ## Protocol Connectors
 
-Protocol Connectors can serve as either inbound or outbound connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
+Protocol Connectors can serve as either inbound or outbound Connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
 
-Protocol connectors can be customized to meet the needs of specific use cases using [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), with no additional coding or deployment required. Examples of protocol connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
+Protocol Connectors can be customized to meet the needs of specific use cases using [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), with no additional coding or deployment required. Examples of protocol Connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
+
+## Next steps
+
+Review the current list of [available Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
