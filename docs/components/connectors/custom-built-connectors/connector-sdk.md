@@ -834,7 +834,7 @@ void shouldReturnReceivedMessageWhenExecute() throws Exception {
 
 ## Runtime environments
 
-To integrate Connectors with your business case, you need a runtime environment - the intermediary between
+To integrate Connectors with your business use case, you need a runtime environment to act as the intermediary between
 your business and Connectors space.
 
 The Connector SDK enables you to write environment-agnostic runtime behavior for Connectors.
@@ -862,9 +862,8 @@ set up this runtime environment.
 
 ### Custom runtime environment
 
-Custom runtime environment may be required if you your organizational and infrastructural needs are not covered
-by the existing pre-packaged runtime environments. Such use-cases may include but not limited to
-running on custom serverless services, or software platforms.
+A custom runtime environment may be required if your organizational and infrastructural needs are not met
+by the existing pre-packaged runtime environments. Such use cases may include (but are not limited to) running on custom serverless services or software platforms.
 
 If using the pre-packaged runtime environment that comes with the SDK does not fit your use case,
 you can create a custom runtime environment. There are three options that come with the SDK:
