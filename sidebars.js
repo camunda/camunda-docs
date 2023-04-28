@@ -771,6 +771,11 @@ module.exports = {
       Zeebe: [
         "self-managed/zeebe-deployment/zeebe-installation",
         {
+          "Zeebe Gateway": [
+            "self-managed/zeebe-deployment/zeebe-gateway/overview",
+          ],
+        },
+        {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
             "self-managed/zeebe-deployment/configuration/logging",
@@ -1116,9 +1121,6 @@ module.exports = {
           ],
         },
       ],
-    },
-    {
-      "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
     },
     {
       Modeler: [
