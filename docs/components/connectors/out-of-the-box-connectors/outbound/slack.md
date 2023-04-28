@@ -4,7 +4,7 @@ title: Slack Connector
 description: Send messages to channels or users in your Slack workspace from your BPMN process.
 ---
 
-The **Slack Connector** allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
+The **Slack Connector** is an outbound Connector that allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
 ## Prerequisites
 

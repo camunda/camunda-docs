@@ -5,7 +5,7 @@ sidebar_label: Camunda Operate Connector
 description: Fetch process execution data from Camunda Operate, a monitoring solution for Camunda Platform 8.
 ---
 
-The **Camunda Operate Connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process.
+The **Camunda Operate Connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process to fetch process execution data.
 
 ## Prerequisites
 

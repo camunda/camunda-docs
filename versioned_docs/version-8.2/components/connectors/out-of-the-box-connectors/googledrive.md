@@ -4,7 +4,7 @@ title: Google Drive Connector
 description: Create folders or files from a Google Drive template from your BPMN process.
 ---
 
-The **Google Drive Connector** allows you to create empty folders or files on [Google Drive](https://drive.google.com/) from templates from your BPMN process.
+The **Google Drive Connector** is an outbound Connector that allows you to create empty folders or files on [Google Drive](https://drive.google.com/) from templates from your BPMN process.
 
 ## Prerequisites
 

@@ -5,7 +5,7 @@ sidebar_label: HTTP Webhook Connector
 description: Start a process instance with your custom webhook configuration, triggered by an external HTTP call.
 ---
 
-The **HTTP Webhook Connector** allows you to start a BPMN process instance triggered by external HTTP call.
+The **HTTP Webhook Connector** is an inbound Connector that allows you to start a BPMN process instance triggered by external HTTP call.
 
 :::note
 If you have used the HTTP Webhook Connector with a self-managed Camunda 8 configuration before the

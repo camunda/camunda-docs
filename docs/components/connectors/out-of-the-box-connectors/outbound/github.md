@@ -5,7 +5,7 @@ sidebar_label: GitHub Connector
 description: Manage GitHub issues and releases from your BPMN process.
 ---
 
-The **GitHub Connector** allows you to connect your BPMN service with [GitHub](https://github.com/).
+The **GitHub Connector** is an outbound Connector that allows you to connect your BPMN service with [GitHub](https://github.com/) to manage [GitHub](https://github.com/) issues and releases.
 
 ## Prerequisites
 

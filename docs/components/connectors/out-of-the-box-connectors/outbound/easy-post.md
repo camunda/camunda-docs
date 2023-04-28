@@ -5,7 +5,7 @@ sidebar_label: EasyPost Connector
 description: Allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments.
 ---
 
-The **EasyPost Connector** allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost Service](https://www.easypost.com/) from your BPMN process.
+The **EasyPost Connector** is an outbound Connector that allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost Service](https://www.easypost.com/) from your BPMN process.
 
 ## Prerequisites
 

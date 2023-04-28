@@ -5,7 +5,7 @@ sidebar_label: Asana Connector
 description: Manage Asana projects and tasks from your BPMN process. Learn how to create an Asana Connector task, and get started.
 ---
 
-The **Asana Connector** allows you to connect your BPMN service with [Asana](https://asana.com/).
+The Asana Connector is an outbound protocol Connector that allows you to connect your BPMN service with [Asana](https://asana.com/) to get and create Asana tasks and projects.
 
 ## Prerequisites
 

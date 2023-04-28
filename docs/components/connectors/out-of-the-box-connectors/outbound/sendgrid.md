@@ -4,7 +4,7 @@ title: SendGrid Connector
 description: Quickly send emails from your BPMN processes.
 ---
 
-The **SendGrid Connector** allows you to quickly send emails from your BPMN processes.
+The **SendGrid Connector** is an outbound Connector that allows you to quickly send emails from your BPMN processes.
 
 ## Prerequisites
 
