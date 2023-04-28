@@ -8,6 +8,18 @@ Out-of-the-box Connectors accelerate solution implementation by providing pre-bu
 
 All Connectors are available for Camunda Platform 8 SaaS and [Self Managed](../../../self-managed/connectors-deployment/install-and-start.md).
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs groupId="ootb" defaultValue="outbound" queryString values={
+[
+{label: 'Outbound', value: 'outbound', },
+{label: 'Inbound', value: 'inbound', },
+]
+}>
+
+<TabItem value='outbound'>
+
 ## Outbound Connectors
 
 - [Amazon DynamoDB Connector](/components/connectors/out-of-the-box-connectors/outbound/aws-dynamodb.md) - Interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
@@ -33,10 +45,17 @@ All Connectors are available for Camunda Platform 8 SaaS and [Self Managed](../.
 - [Slack Connector](/components/connectors/out-of-the-box-connectors/outbound/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 - [UiPath Connector](/components/connectors/out-of-the-box-connectors/outbound/uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
 
+</TabItem>
+
+<TabItem value='inbound'>
+
 ## Inbound Connectors
 
 - [HTTP Webhook Connector](/components/connectors/out-of-the-box-connectors/inbound/http-webhook.md) - Start a process instance with your custom webhook configuration.
 - [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/inbound/github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
+
+</TabItem>
+</Tabs>
 
 In addition to this section on Connectors, we recommend reviewing [Connector secrets](../../console/manage-clusters/manage-secrets.md).
 

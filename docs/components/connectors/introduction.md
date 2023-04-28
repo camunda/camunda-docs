@@ -7,9 +7,9 @@ keywords: [bridge, reusable component, low code]
 
 <!-- TODO: Shorten intro. Include types, connector templates, and Connector SDK. Order like new image on page. -->
 
-A **Connector** is a reusable building block that performs the integration with an external system and works out of the box.
+A **Connector** is a reusable building block that performs the integration with an external system.
 
-It is represented as a task in a [BPMN process](/components/concepts/processes.md), which can be configured with parameters specific for the external system. As such, it can remove the need to write custom programming code for integration.
+Connectors are often represented as tasks in a [BPMN process](/components/concepts/processes.md), which can be configured with parameters specific for the external system. As such, it can remove the need to write custom programming code for integration.
 
 Connectors offer an intuitive, scalable, and customizable multilayer coding experience for every user.
 
