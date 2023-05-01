@@ -9,6 +9,8 @@ Options -Indexes -MultiViews
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
 # connectors restructure /next/
+RewriteRule ^docs/next/components/connectors/custom-built-connectors/connector-templates/(.*)$ /docs/next/components/connectors/connector-templates/$1 [R=301,L]
+RewriteRule ^docs/next/components/connectors/custom-built-connectors/connector-sdk/(.*)$ /docs/next/components/connectors/connector-sdk//$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/inbound/github-webhook/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/inbound/http-webhook/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/asana/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/asana/$1 [R=301,L]
