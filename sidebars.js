@@ -277,11 +277,9 @@ module.exports = {
               ],
             },
           ],
-          "Custom Connectors": [
-            "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-sdk",
-          ],
         },
+        "components/connectors/connector-templates",
+        "components/connectors/connector-sdk",
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",

@@ -6,15 +6,15 @@ description: Integrating with external systems can be done with a Connector or a
 
 Integrating with external systems can be done with a Connector or a [job worker](job-workers.md).
 
-You define the domain-specific UI for modeling a Connector through a [Connector template](/components/connectors/custom-built-connectors/connector-templates.md). This Connector template is, in fact, an [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md). Therefore, you can also build a Connector-like system using element templates and job workers.
+You define the domain-specific UI for modeling a Connector through a [Connector template](/components/connectors/connector-templates.md). This Connector template is, in fact, an [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md). Therefore, you can also build a Connector-like system using element templates and job workers.
 
 If they both share the same core functionality, how do they differ, and when should you choose what? Connectors and job workers serve different purposes when it comes to aspects like delivery, reusability, focus, and context.
 
 ## Delivery
 
-A Connector is reusable code, written as an `OutboundConnectorFunction` using the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-logic).
+A Connector is reusable code, written as an `OutboundConnectorFunction` using the [Connector SDK](/components/connectors/connector-sdk.md#runtime-logic).
 It is not a standalone application, you cannot start it and have it work on Camunda Platform 8 jobs.
-Instead, a Connector is delivered as a library and can be used in combination with other Connectors in a [Connector runtime environment](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
+Instead, a Connector is delivered as a library and can be used in combination with other Connectors in a [Connector runtime environment](/components/connectors/connector-sdk.md#runtime-environments).
 
 In contrast, a job worker is usually part of a Zeebe Client application that can be directly executed to work on jobs.
 
@@ -56,3 +56,9 @@ It depends on your use case.
 - You want to create worker logic that is easily reusable in any environment? Write a Connector.
 - You want to focus on your worker's logic and have no need for using low-level Camunda Platform 8 API? Write a Connector.
 - You want to provide a standardized modeling experience alongside your runtime behavior? Write a Connector.
+
+## Learn more
+
+- [Explore Connectors](/components/connectors/introduction.md)
+- [Learn about types of Connectors](/components/connectors/connector-types.md)
+- [Learn about job workers](job-workers.md)

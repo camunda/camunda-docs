@@ -102,7 +102,7 @@ my-connector
 ```
 
 For the modeling building blocks, the Connector provides
-[Connector templates](./connector-templates.md) with **(1)**.
+[Connector templates](/components/connectors/connector-templates.md) with **(1)**.
 
 You provide the runtime logic as Java source code under a directory like **(2)**.
 Typically, a Connector runtime logic consists of the following:
@@ -122,7 +122,7 @@ In this example, we include a Maven project's `POM` file. Other build tools like
 ### Connector template
 
 To create reusable building blocks for modeling, you are required to provide a
-domain-specific [Connector template](./connector-templates.md).
+domain-specific [Connector template](/components/connectors/connector-templates.md).
 
 A Connector template defines the binding to your Connector runtime behavior via the following object:
 
@@ -232,7 +232,7 @@ BPMN errors. To provide this, Connector templates can reuse the recommended obje
 
 This object creates custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
-You can see an example of how to use this in the [BPMN errors in Connectors guide](components/connectors/use-connectors.md#bpmn-errors).
+You can see an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors.md#bpmn-errors).
 
 ### Runtime logic
 
