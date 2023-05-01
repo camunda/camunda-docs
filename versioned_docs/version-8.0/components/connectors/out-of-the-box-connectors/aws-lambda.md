@@ -11,7 +11,7 @@ The **AWS Lambda Connector** allows you to connect your BPMN service with Amazon
 To use an **AWS Lambda Connector**, you need to have an [AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), IAM key, and secret pair with permissions for execute function. See the [AWS Lambda developer guide](https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html) to learn more.
 
 It is highly recommended not to expose your AWS IAM credentials as plain text but rather use Camunda secrets.
-See [Manage secrets](../img/connectors-aws-lambda-filled.png) to learn more.
+See [Manage secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
 ## Create an AWS Lambda Connector task
 
