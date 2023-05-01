@@ -128,7 +128,7 @@ This example assumes there is a process variable `baseUrl` and a configured secr
 The engine will resolve the `baseUrl` variable and pass on the secrets placeholder to the Connector. Assuming the `baseUrl` variable resolves to `my.company.domain`,
 the Connector receives the input `"https://my.company.domain/{{secrets.TENANT_ID}}/accounting"`. The Connector then replaces the secrets placeholder upon execution.
 
-For further details on how secrets are implemented in Connectors, consult our [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#secrets).
+For further details on how secrets are implemented in Connectors, consult our [Connector SDK documentation](/components/connectors/connector-sdk.md#secrets).
 
 :::note Warning
 `secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in Connector fields.

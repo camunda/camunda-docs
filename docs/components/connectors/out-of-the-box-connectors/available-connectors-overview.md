@@ -57,6 +57,6 @@ import TabItem from "@theme/TabItem";
 </TabItem>
 </Tabs>
 
-In addition to this section on Connectors, we recommend reviewing [Connector secrets](../../console/manage-clusters/manage-secrets.md).
+In addition to this section on Connectors, we recommend reviewing [Connector secrets](/components/console/manage-clusters/manage-secrets.md).
 
-If you want to build **custom Connectors**, head over to our [Connector SDK guide](../custom-built-connectors/connector-sdk.md).
+If you want to build **custom Connectors**, head over to our [Connector SDK guide](/components/connectors/connector-sdk.md).
