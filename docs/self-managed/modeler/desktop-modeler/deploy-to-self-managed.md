@@ -19,7 +19,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 :::note
 You can connect to Camunda Platform 8 both securely and insecurely through the `https` and `http` protocols.
 
-Secured connections to a remote endpoint will only be established if the remote server certificate is trusted by the app. If you use self-signed certificates ensure that you [make them known to the app](https://docs.camunda.io/docs/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
+Secured connections to a remote endpoint will only be established if the remote server certificate is trusted by the app. Ensure that signing trusted roots and intermediate certificates [are known to the app](https://docs.camunda.io/docs/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
 :::
 
 ![deployment via Camunda Platform 8](./img/deploy-endpoint.png)
