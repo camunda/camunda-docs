@@ -68,12 +68,12 @@ See the [Twilio documentation](https://www.twilio.com/docs/sms/send-messages) fo
 - `Page size`: (Optional) The maximum number of messages to retrieve per page. This value must be between 1 and 1000.
 
 :::note
-See the Twilio documentation on [filtering by date sent](https://www.twilio.com/docs/sms/message-resource#filter-by-date-sent) and [getting filters](https://www.twilio.com/docs/sms/message-resource#list-get-filters) for more information.
+See the Twilio documentation on [filtering by date sent](https://www.twilio.com/docs/sms/api/message-resource?code-sample=code-read-list-messages-filter-by-before-sent-date&code-language=curl&code-sdk-version=json) and [getting filters](https://www.twilio.com/docs/sms/api/message-resource?code-sample=code-read-list-messages-matching-filter-criteria&code-language=curl&code-sdk-version=json) for more information.
 :::
 
 ### getMessage operation
 
-- `Message SID`: The SID of the message you want to retrieve. See the [Twilio documentation](https://www.twilio.com/docs/sms/message-resource#get-a-message-resource) for more details.
+- `Message SID`: The SID of the message you want to retrieve. See the [Twilio documentation](https://www.twilio.com/docs/sms/api/message-resource?code-sample=code-fetch-message&code-language=curl&code-sdk-version=json) for more details.
 
 ## Handle Connector response
 
