@@ -33,7 +33,8 @@ We advise you to keep your authentications and secrets data safe and avoid expos
 
 1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `AUTOMATION_ANYWHERE_PASSWORD`) so you can reference it later in the Connector.
-   :::
+
+:::
 
 ### _Authenticate (username and password)_ authentication
 
