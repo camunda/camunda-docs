@@ -10,8 +10,8 @@ import TabItem from "@theme/TabItem";
 **Connector element templates** are JSON configuration files, which customize how a BPMN element is shown, and how it can be configured by process developers.
 
 :::note
-**Note:** please do not confuse with the [Connector template](https://github.com/camunda/connector-template) which is
-used to supply boilerplate code and configuration when developing a new custom **Connector**.
+Do not confuse **Connector element templates** with the **[Connector template](https://github.com/camunda/connector-template)**, which is
+used to supply boilerplate code and configuration when developing a new custom Connector.
 :::
 
 You can, for example, allow the user to model and configure the following **REST Connector** by providing a simple JSON configuration:
