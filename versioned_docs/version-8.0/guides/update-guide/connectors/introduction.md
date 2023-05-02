@@ -9,6 +9,14 @@ Connector runtimes to a newer version of the
 
 There is a dedicated update guide for each version:
 
+### [Connector SDK 0.7 to 0.8](../070-to-080)
+
+Update from 0.7.x to 0.8.0
+
+### [Connector SDK 0.6 to 0.7](../060-to-070)
+
+Update from 0.6.x to 0.7.0
+
 ### [Connector SDK 0.5 to 0.6](../050-to-060)
 
 Update from 0.5.x to 0.6.0
