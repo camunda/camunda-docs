@@ -273,6 +273,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/outbound/rest",
                 "components/connectors/out-of-the-box-connectors/outbound/sendgrid",
                 "components/connectors/out-of-the-box-connectors/outbound/slack",
+                "components/connectors/out-of-the-box-connectors/outbound/twilio",
                 "components/connectors/out-of-the-box-connectors/outbound/uipath",
               ],
             },
