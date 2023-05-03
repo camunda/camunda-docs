@@ -13,6 +13,8 @@ import TabItem from "@theme/TabItem";
 The Identity component uses the [Log4j2](https://logging.apache.org/log4j/2.x/) framework to control
 the log level and log format.
 
+The logging configuration that is included in the Identity image is:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="30">
@@ -31,17 +33,6 @@ the log level and log format.
         <Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
             <JsonTemplateLayout eventTemplateUri="classpath:GcpLayout.json" locationInfoEnabled="true"/>
         </Console>
-        <RollingFile
-                name="File"
-                fileName="${env:IDENTITY_LOG_FILE_NAME:-logs/identity.log}"
-                filePattern="${env:IDENTITY_LOG_FILE_NAME_PATTERN:-${LOG_FILE_NAME_PATTERN}}"
-                append="true">
-            <PatternLayout pattern="${env:IDENTITY_LOG_FILE_PATTERN:-${LOG_FILE_PATTERN}}"/>
-            <Policies>
-                <TimeBasedTriggeringPolicy interval="${env:IDENTITY_LOG_FILE_ROTATION_DAYS:-1}"/>
-                <SizeBasedTriggeringPolicy size="${env:IDENTITY_LOG_FILE_ROTATION_SIZE:-50 MB}"/>
-            </Policies>
-        </RollingFile>
     </Appenders>
     <Loggers>
         <Logger name="io.camunda.identity" level="${env:IDENTITY_LOG_LEVEL:-info}"/>
@@ -93,12 +84,12 @@ provided by the [Log4j2](https://logging.apache.org/log4j/2.x/manual/) library.
 
 ### Providing your own logging configuration
 
-The default logging configuration file can be overridden by setting the following variable:
+You can provide your own configuration by mounting a configuration file to the Identity container and setting the path to the file using the following variable:
 
 | Environment variable | Purpose                                                                                                       |
 | -------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `LOGGING_CONFIG`     | The path to your [Log4j2 config XML](https://logging.apache.org/log4j/2.x/manual/configuration.html#XML) file |
 
 :::note
-To log to a file in a containerized environment, the mounted directory containing the log file has to be writable to the user running Identity.
+To write logs to a file in a containerized environment, the mounted directory containing the log file has to be writable under the user running Identity.
 :::
