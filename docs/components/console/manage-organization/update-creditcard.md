@@ -15,3 +15,4 @@ just swipe it!
 ![cc-ending](./img/cc-ending.png)
 ![cc-enter](./img/cc-enter.png)
 ![cc-manage](./img/cc-manage.png)
+![cc-entrypoint](./img/cc-entrypoint.png)
