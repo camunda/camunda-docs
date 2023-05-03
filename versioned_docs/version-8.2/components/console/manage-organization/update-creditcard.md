@@ -1,31 +1,29 @@
 ---
 id: update-creditcard
-title: Change your Credit Card
-description: "Let's swipe another credit card to keep the spice flowing"
+title: Update your credit card
+description: "When utilizing Camunda's Professional Plan, follow these steps to update an expired or failing credit card."
 ---
 
 :::note
 This setting is only visible in the **Professional Plan** for owners and admins.
 :::
 
-## Changing your Credit Card
-
-When in a Camunda Professional Plan, you might need to update an expired or failing credit card.
+When utilizing Camunda's Professional Plan, you might need to update an expired or failing credit card.
 
 The steps to update a payment method are as follows:
 
-- Go to the **Billing area** (under the **Organization tab**) in the Console and click the button **Management payment account**
+1. From the Console, click **Organization > Billing > Manage payment account**.
 
-![cc-entrypoint](./img/cc-entrypoint.png)
+![console entrypoint to manage payment account](./img/cc-entrypoint.png)
 
-- Click **Payment Methods**
+2. Click **Payment Methods**.
 
-![cc-manage](./img/cc-manage.png)
+![payment methods button](./img/cc-manage.png)
 
-- Click **Edit Payment Method**
+3. Click **Edit Payment Method**.
 
-![cc-ending](./img/cc-ending.png)
+![edit payment method button](./img/cc-ending.png)
 
-- Add the details of the new credit card and **click Update**
+4. Add the details of the new credit card and click **Update**.
 
-![cc-enter](./img/cc-enter.png)
+![enter credit card details and update button](./img/cc-enter.png)
