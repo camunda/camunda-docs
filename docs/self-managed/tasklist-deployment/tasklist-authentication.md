@@ -92,8 +92,8 @@ Be aware a JWT token is intended to be used for M2M communication and is therefo
 
 **Example:**
 
-1. [Add an application in Identity](/self-managed/identity/user-guide/adding-an-application.md).
-2. [Add permissions to an application](/self-managed/identity/user-guide/assigning-a-permission-to-an-application.md) for Tasklist API.
+1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for Tasklist API.
 3. Obtain a token to access the GraphQL API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.

@@ -154,8 +154,8 @@ Operate provides a [REST API](/apis-tools/operate-api/overview.md) under the end
 
 **Example:**
 
-1. [Add an application in Identity](../../identity/user-guide/adding-an-application/).
-2. [Add permissions to an application](../../identity/user-guide/assigning-a-permission-to-an-application/) for Operate API.
+1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for Operate API.
 3. Obtain a token to access the REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
@@ -195,7 +195,7 @@ By default, when using Operate with Identity, one can assign a user "read" and/o
 
 More detailed permissions may be enabled:
 
-1. Resource authorizations must be [enabled in Identity](../../identity/user-guide/authorizations/managing-resource-authorizations/).
+1. Resource authorizations must be [enabled in Identity](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 2. Operate must be configured to use resource authorizations:
 
 ```yaml

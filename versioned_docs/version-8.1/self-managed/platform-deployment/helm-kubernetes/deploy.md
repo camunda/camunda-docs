@@ -21,6 +21,7 @@ The following charts will be installed as part of Camunda Platform 8 Self-Manage
 - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
 - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
 - **Tasklist**: Deploys the Tasklist component to work with user tasks.
+- **Connectors**: Deploys the Connectors component responsible for both inbound and outbound integration with external systems.
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
@@ -90,6 +91,7 @@ NAME                                           READY   STATUS              RESTA
 <RELEASE_NAME>-identity-6bb5d864cc-kk6dv        0/1     ContainerCreating   0          4s
 <RELEASE_NAME>-operate-cb597fd76-6vr2x          0/1     ContainerCreating   0          4s
 <RELEASE_NAME>-optimize-676955b547-vxts7        0/1     ContainerCreating   0          4s
+<RELEASE_NAME>-connectors-1bba590ff-a63dc       0/1     ContainerCreating   0          4s
 <RELEASE_NAME>-postgresql-0                     0/1     Pending             0          4s
 <RELEASE_NAME>-tasklist-5bf5c56f7b-sdwg7        0/1     ContainerCreating   0          4s
 <RELEASE_NAME>-zeebe-0                          0/1     Pending             0          4s
@@ -113,6 +115,7 @@ This will return something similar to the following:
 NAME                                                   READY   STATUS    RESTARTS   AGE
 elasticsearch-master-0                                 1/1     Running   0          4m6s
 <RELEASE_NAME>-operate-XXX                             1/1     Running   0          4m6s
+<RELEASE_NAME>-connectors-XXX                          1/1     Running   0          4m6s
 <RELEASE_NAME>-zeebe-0                                 1/1     Running   0          4m6s
 <RELEASE_NAME>-tasklist-XXX                            1/1     Running   0          4m6s
 <RELEASE_NAME>-zeebe-gateway                           1/1     Running   0          4m6s

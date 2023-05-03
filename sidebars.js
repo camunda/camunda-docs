@@ -134,6 +134,7 @@ module.exports = {
                 "components/modeler/web-modeler/collaborate-with-modes",
                 "components/modeler/web-modeler/design-your-process",
                 "components/modeler/web-modeler/implement-your-process",
+                "components/modeler/web-modeler/play-your-process",
               ],
             },
             "components/modeler/web-modeler/milestones",
@@ -233,6 +234,7 @@ module.exports = {
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
+        "components/modeler/data-handling",
       ],
       Connectors: [
         "components/connectors/introduction-to-connectors",
@@ -242,6 +244,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
+            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
@@ -262,6 +265,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/rest",
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
           ],
           "Custom Connectors": [
@@ -269,7 +273,6 @@ module.exports = {
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
         },
-        "components/modeler/data-handling",
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",
@@ -549,12 +552,8 @@ module.exports = {
     {
       APIs: [
         "apis-tools/public-api",
-        "apis-tools/grpc",
-        require("./docs/apis-tools/operate-api/sidebar-schema"),
-        require("./docs/apis-tools/tasklist-api/sidebar-schema"),
-        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         "apis-tools/console-api-reference",
-        "apis-tools/web-modeler-api/index",
+        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink(
@@ -632,10 +631,26 @@ module.exports = {
             ),
           ],
         },
+        require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
+        "apis-tools/web-modeler-api/index",
+        "apis-tools/grpc",
       ],
     },
     {
       Clients: [
+        {
+          "CLI client": [
+            "apis-tools/cli-client/index",
+            "apis-tools/cli-client/cli-get-started",
+          ],
+        },
+        {
+          "Go client": [
+            "apis-tools/go-client/index",
+            "apis-tools/go-client/go-get-started",
+          ],
+        },
         {
           "Java client": [
             "apis-tools/java-client/index",
@@ -655,18 +670,6 @@ module.exports = {
                 "apis-tools/java-client-examples/cluster-topology-request",
               ],
             },
-          ],
-        },
-        {
-          "Go client": [
-            "apis-tools/go-client/index",
-            "apis-tools/go-client/go-get-started",
-          ],
-        },
-        {
-          "CLI client": [
-            "apis-tools/cli-client/index",
-            "apis-tools/cli-client/cli-get-started",
           ],
         },
         {
@@ -694,6 +697,7 @@ module.exports = {
     "reference/release-notes",
     "reference/licenses",
     "reference/notices",
+    "reference/status",
     "reference/release-policy",
     "reference/early-access",
     "reference/supported-environments",
@@ -767,6 +771,11 @@ module.exports = {
     {
       Zeebe: [
         "self-managed/zeebe-deployment/zeebe-installation",
+        {
+          "Zeebe Gateway": [
+            "self-managed/zeebe-deployment/zeebe-gateway/overview",
+          ],
+        },
         {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
@@ -1068,30 +1077,37 @@ module.exports = {
         {
           "User guide": [
             {
+              Configuration: [
+                "self-managed/identity/user-guide/configuration/making-identity-production-ready",
+                "self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging",
+                "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
+              ],
+            },
+            {
+              Roles: [
+                "self-managed/identity/user-guide/roles/add-assign-role",
+                "self-managed/identity/user-guide/roles/add-assign-permission",
+              ],
+            },
+            {
               Groups: [
-                "self-managed/identity/user-guide/groups/creating-a-group",
-                "self-managed/identity/user-guide/groups/assigning-users-to-a-group",
-                "self-managed/identity/user-guide/groups/assigning-roles-to-a-group",
+                "self-managed/identity/user-guide/groups/create-group",
+                "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
               ],
             },
             {
               Authorizations: [
                 "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
+                "self-managed/identity/user-guide/authorizations/managing-user-access",
+                "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
               ],
             },
-            "self-managed/identity/user-guide/adding-an-application",
-            "self-managed/identity/user-guide/adding-an-api",
-            "self-managed/identity/user-guide/adding-a-permission",
-            "self-managed/identity/user-guide/assigning-a-permission-to-an-application",
-            "self-managed/identity/user-guide/adding-a-role",
-            "self-managed/identity/user-guide/assigning-a-permission-to-a-role",
-            "self-managed/identity/user-guide/assigning-a-role-to-a-user",
-            "self-managed/identity/user-guide/configure-external-identity-provider",
-            "self-managed/identity/user-guide/configure-logging",
-            "self-managed/identity/user-guide/making-identity-production-ready",
-            "self-managed/identity/user-guide/generating-m2m-tokens",
-            "self-managed/identity/user-guide/managing-user-access",
-            "self-managed/identity/user-guide/connect-to-an-existing-keycloak",
+            {
+              "Additional features": [
+                "self-managed/identity/user-guide/additional-features/adding-an-api",
+                "self-managed/identity/user-guide/additional-features/incorporate-applications",
+              ],
+            },
           ],
         },
         {
@@ -1106,9 +1122,6 @@ module.exports = {
           ],
         },
       ],
-    },
-    {
-      "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
     },
     {
       Modeler: [

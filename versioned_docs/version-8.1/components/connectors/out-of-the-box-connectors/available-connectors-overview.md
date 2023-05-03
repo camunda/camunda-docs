@@ -10,6 +10,7 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 
 - [Asana Connector](asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
 - [Automation Anywhere Connector](automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
+- [Amazon DynamoDB Connector](aws-dynamodb.md) - The DynamoDB Connector allows you to interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
 - [Amazon SNS Connector](aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
 - [AWS Lambda Connector](aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
@@ -28,6 +29,7 @@ This section gives an overview of the **out-of-the-box Connectors** available in
 - [REST Connector](rest.md) - Make a request to a REST API and use the response in the next steps of your process.
 - [SendGrid Connector](sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack Connector](slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
+- [Twilio Connector](slack.md) - Send and get SMS messages with [Twilio](https://www.twilio.com) service from your BPMN process.
 - [UiPath Connector](uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
 
 ## Inbound Connectors

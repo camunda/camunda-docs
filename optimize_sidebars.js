@@ -655,6 +655,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
             docsLink(
+              "Amazon DynamoDB Connector",
+              "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),
@@ -733,6 +737,10 @@ module.exports = {
             docsLink(
               "Slack Connector",
               "components/connectors/out-of-the-box-connectors/slack/"
+            ),
+            docsLink(
+              "Slack Connector",
+              "components/connectors/out-of-the-box-connectors/twilio/"
             ),
             docsLink(
               "UiPath Connector",
@@ -1118,11 +1126,45 @@ module.exports = {
     {
       APIs: [
         docsLink("Public API", "apis-tools/public-api/"),
-        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
+        docsLink(
+          "Console API clients (REST)",
+          "apis-tools/console-api-reference/"
+        ),
         {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
             docsLink("Tutorial", "apis-tools/operate-api/tutorial/"),
+          ],
+        },
+        {
+          "Optimize API (REST)": [
+            "apis-tools/optimize-api/optimize-api-authorization",
+            {
+              Configuration: [
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing",
+              ],
+            },
+            {
+              Dashboard: [
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
+              ],
+            },
+            {
+              Report: [
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export",
+              ],
+            },
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling",
           ],
         },
         {
@@ -1370,48 +1412,31 @@ module.exports = {
           ],
         },
 
-        docsLink(
-          "Console API clients (REST)",
-          "apis-tools/console-api-reference/"
-        ),
         docsLink("Web Modeler API (REST, beta)", "apis-tools/web-modeler-api/"),
-
-        {
-          "Optimize API (REST)": [
-            "apis-tools/optimize-api/optimize-api-authorization",
-            {
-              Configuration: [
-                "apis-tools/optimize-api/configuration/enable-sharing",
-                "apis-tools/optimize-api/configuration/disable-sharing",
-              ],
-            },
-            {
-              Dashboard: [
-                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
-                "apis-tools/optimize-api/dashboard/delete-dashboard",
-                "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
-              ],
-            },
-            {
-              Report: [
-                "apis-tools/optimize-api/report/get-report-ids",
-                "apis-tools/optimize-api/report/delete-report",
-                "apis-tools/optimize-api/report/export-report-definitions",
-                "apis-tools/optimize-api/report/get-data-export",
-              ],
-            },
-            "apis-tools/optimize-api/event-ingestion",
-            "apis-tools/optimize-api/external-variable-ingestion",
-            "apis-tools/optimize-api/health-readiness",
-            "apis-tools/optimize-api/import-entities",
-            "apis-tools/optimize-api/variable-labeling",
-          ],
-        },
+        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
       ],
     },
 
     {
       Clients: [
+        {
+          "CLI client": [
+            docsLink("Quick reference", "apis-tools/cli-client/"),
+            docsLink(
+              "Getting started with the CLI client",
+              "apis-tools/cli-client/cli-get-started/"
+            ),
+          ],
+        },
+        {
+          "Go client": [
+            docsLink("Quick reference", "apis-tools/go-client/"),
+            docsLink(
+              "Getting started with the Go client",
+              "apis-tools/go-client/go-get-started/"
+            ),
+          ],
+        },
         {
           "Java client": [
             docsLink("Quick reference", "apis-tools/java-client/"),
@@ -1458,24 +1483,6 @@ module.exports = {
                 ),
               ],
             },
-          ],
-        },
-        {
-          "Go client": [
-            docsLink("Quick reference", "apis-tools/go-client/"),
-            docsLink(
-              "Getting started with the Go client",
-              "apis-tools/go-client/go-get-started/"
-            ),
-          ],
-        },
-        {
-          "CLI client": [
-            docsLink("Quick reference", "apis-tools/cli-client/"),
-            docsLink(
-              "Getting started with the CLI client",
-              "apis-tools/cli-client/cli-get-started/"
-            ),
           ],
         },
         {
@@ -1621,6 +1628,14 @@ module.exports = {
           "Overview",
           "self-managed/zeebe-deployment/zeebe-installation/"
         ),
+        {
+          "Zeebe Gateway": [
+            docsLink(
+              "Overview",
+              "self-managed/zeebe-deployment/zeebe-gateway/overview"
+            ),
+          ],
+        },
         {
           Configuration: [
             docsLink(
@@ -1884,18 +1899,42 @@ module.exports = {
         {
           "User guide": [
             {
+              Configuration: [
+                docsLink(
+                  "Making Identity production ready",
+                  "self-managed/identity/user-guide/configuration/making-identity-production-ready/"
+                ),
+                docsLink(
+                  "Configuring an external identity provider and logging",
+                  "self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/"
+                ),
+                docsLink(
+                  "Connect to an existing Keycloak instance",
+                  "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/"
+                ),
+              ],
+            },
+            {
+              Roles: [
+                docsLink(
+                  "Adding and assigning a role to a user",
+                  "self-managed/identity/user-guide/roles/add-assign-role/"
+                ),
+                docsLink(
+                  "Adding and assigning a permission to a role",
+                  "self-managed/identity/user-guide/roles/add-assign-permission/"
+                ),
+              ],
+            },
+            {
               Groups: [
                 docsLink(
-                  "Creating a group",
-                  "self-managed/identity/user-guide/groups/creating-a-group/"
+                  "Create a group",
+                  "self-managed/identity/user-guide/groups/create-group/"
                 ),
                 docsLink(
-                  "Assigning users to a group",
-                  "self-managed/identity/user-guide/groups/assigning-users-to-a-group/"
-                ),
-                docsLink(
-                  "Assigning roles to a group",
-                  "self-managed/identity/user-guide/groups/assigning-roles-to-a-group/"
+                  "Assign users and roles to a group",
+                  "self-managed/identity/user-guide/groups/assign-users-roles-to-group/"
                 ),
               ],
             },
@@ -1906,61 +1945,29 @@ module.exports = {
                   "Managing resource authorizations",
                   "self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
                 ),
+                docsLink(
+                  "Managing user access",
+                  "self-managed/identity/user-guide/authorizations/managing-user-access/"
+                ),
+                docsLink(
+                  "Generating M2M tokens",
+                  "self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
+                ),
               ],
             },
 
-            docsLink(
-              "Adding an application",
-              "self-managed/identity/user-guide/adding-an-application/"
-            ),
-            docsLink(
-              "Adding an API",
-              "self-managed/identity/user-guide/adding-an-api/"
-            ),
-            docsLink(
-              "Adding a permission",
-              "self-managed/identity/user-guide/adding-a-permission/"
-            ),
-            docsLink(
-              "Assigning a permission an application",
-              "self-managed/identity/user-guide/assigning-a-permission-to-an-application/"
-            ),
-            docsLink(
-              "Adding a role",
-              "self-managed/identity/user-guide/adding-a-role/"
-            ),
-            docsLink(
-              "Assigning a permission a role",
-              "self-managed/identity/user-guide/assigning-a-permission-to-a-role/"
-            ),
-            docsLink(
-              "Assigning a role to a user",
-              "self-managed/identity/user-guide/assigning-a-role-to-a-user/"
-            ),
-            docsLink(
-              "Configuring an external identity provider",
-              "self-managed/identity/user-guide/configure-external-identity-provider/"
-            ),
-            docsLink(
-              "Configuring logging",
-              "self-managed/identity/user-guide/configure-logging/"
-            ),
-            docsLink(
-              "Making Identity production ready",
-              "self-managed/identity/user-guide/making-identity-production-ready/"
-            ),
-            docsLink(
-              "Generating machine-to-machine (M2M) tokens",
-              "self-managed/identity/user-guide/generating-m2m-tokens/"
-            ),
-            docsLink(
-              "Managing user access",
-              "self-managed/identity/user-guide/managing-user-access/"
-            ),
-            docsLink(
-              "Connect to an existing Keycloak instance",
-              "self-managed/identity/user-guide/connect-to-an-existing-keycloak/"
-            ),
+            {
+              "Additional features": [
+                docsLink(
+                  "Adding an API",
+                  "self-managed/identity/user-guide/additional-features/adding-an-api/"
+                ),
+                docsLink(
+                  "Incorporate applications",
+                  "self-managed/identity/user-guide/additional-features/incorporate-applications/"
+                ),
+              ],
+            },
           ],
         },
         {
@@ -1991,14 +1998,6 @@ module.exports = {
             ),
           ],
         },
-      ],
-    },
-    {
-      "Zeebe Gateway": [
-        docsLink(
-          "Overview",
-          "self-managed/zeebe-gateway-deployment/zeebe-gateway/"
-        ),
       ],
     },
 

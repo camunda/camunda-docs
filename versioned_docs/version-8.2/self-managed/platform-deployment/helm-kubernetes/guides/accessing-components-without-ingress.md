@@ -12,7 +12,7 @@ You need to keep `port-forward` running all the time to communicate with the rem
 
 ## Accessing workflow engine
 
-To interact with Camunda Platform workflow engine via [Zeebe Gateway](../../../zeebe-gateway-deployment/the-zeebe-gateway.md) using [zbctl](../../../../apis-tools/cli-client/index.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
+To interact with Camunda Platform workflow engine via [Zeebe Gateway](../../../zeebe-deployment/configuration/gateway.md) using [zbctl](../../../../apis-tools/cli-client/index.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
 
 ```
 kubectl port-forward svc/<RELEASE_NAME>-zeebe-gateway 26500:26500
@@ -41,6 +41,8 @@ kubectl port-forward svc/<RELEASE_NAME>-operate  8081:80
 kubectl port-forward svc/<RELEASE_NAME>-tasklist 8082:80
 
 kubectl port-forward svc/<RELEASE_NAME>-optimize 8083:80
+
+kubectl port-forward svc/<RELEASE_NAME>-connectors 8088:8080
 ```
 
 To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself and Keycloak (assuming that Keycloak is installed as part of the Helm release):
@@ -82,3 +84,6 @@ Log in to these services using the `demo`/`demo` credentials.
 If you deploy process definitions, they will appear in the dashboard. Then, you can drill down to see your active instances.
 
 You can deploy and create new instances using the Zeebe clients or `zbctl`.
+
+You can also trigger **Connectors** inbound webhook, given you deployed one.
+You can do so with the following example: `curl -X POST -H "Content-Type: application/json" -d '{"myId": 123456, "myMessage": "Hello, world!"}' http://localhost:8088/inbound/<YOUR_WEBHOOK_ID>`.

@@ -1381,8 +1381,8 @@
         },
         {
           "type": "link",
-          "label": "Zeebe API (gRPC)",
-          "href": "/docs/apis-tools/grpc/"
+          "label": "Console API clients (REST)",
+          "href": "/docs/apis-tools/console-api-reference/"
         },
         {
           "Operate API (REST)": [
@@ -1396,6 +1396,37 @@
               "label": "Tutorial",
               "href": "/docs/apis-tools/operate-api/tutorial/"
             }
+          ]
+        },
+        {
+          "Optimize API (REST)": [
+            "apis-tools/optimize-api/optimize-api-authorization",
+            {
+              "Configuration": [
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing"
+              ]
+            },
+            {
+              "Dashboard": [
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
+              ]
+            },
+            {
+              "Report": [
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export"
+              ]
+            },
+            "apis-tools/optimize-api/event-ingestion",
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling"
           ]
         },
         {
@@ -1730,49 +1761,46 @@
         },
         {
           "type": "link",
-          "label": "Console API clients (REST)",
-          "href": "/docs/apis-tools/console-api-reference/"
-        },
-        {
-          "type": "link",
           "label": "Web Modeler API (REST, beta)",
           "href": "/docs/apis-tools/web-modeler-api/"
         },
         {
-          "Optimize API (REST)": [
-            "apis-tools/optimize-api/optimize-api-authorization",
-            {
-              "Configuration": [
-                "apis-tools/optimize-api/configuration/enable-sharing",
-                "apis-tools/optimize-api/configuration/disable-sharing"
-              ]
-            },
-            {
-              "Dashboard": [
-                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
-                "apis-tools/optimize-api/dashboard/delete-dashboard",
-                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
-              ]
-            },
-            {
-              "Report": [
-                "apis-tools/optimize-api/report/get-report-ids",
-                "apis-tools/optimize-api/report/delete-report",
-                "apis-tools/optimize-api/report/export-report-definitions",
-                "apis-tools/optimize-api/report/get-data-export"
-              ]
-            },
-            "apis-tools/optimize-api/event-ingestion",
-            "apis-tools/optimize-api/external-variable-ingestion",
-            "apis-tools/optimize-api/health-readiness",
-            "apis-tools/optimize-api/import-entities",
-            "apis-tools/optimize-api/variable-labeling"
-          ]
+          "type": "link",
+          "label": "Zeebe API (gRPC)",
+          "href": "/docs/apis-tools/grpc/"
         }
       ]
     },
     {
       "Clients": [
+        {
+          "CLI client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-tools/cli-client/"
+            },
+            {
+              "type": "link",
+              "label": "Getting started with the CLI client",
+              "href": "/docs/apis-tools/cli-client/cli-get-started/"
+            }
+          ]
+        },
+        {
+          "Go client": [
+            {
+              "type": "link",
+              "label": "Quick reference",
+              "href": "/docs/apis-tools/go-client/"
+            },
+            {
+              "type": "link",
+              "label": "Getting started with the Go client",
+              "href": "/docs/apis-tools/go-client/go-get-started/"
+            }
+          ]
+        },
         {
           "Java client": [
             {
@@ -1843,34 +1871,6 @@
                   "href": "/docs/apis-tools/java-client-examples/cluster-topology-request/"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "Go client": [
-            {
-              "type": "link",
-              "label": "Quick reference",
-              "href": "/docs/apis-tools/go-client/"
-            },
-            {
-              "type": "link",
-              "label": "Getting started with the Go client",
-              "href": "/docs/apis-tools/go-client/go-get-started/"
-            }
-          ]
-        },
-        {
-          "CLI client": [
-            {
-              "type": "link",
-              "label": "Quick reference",
-              "href": "/docs/apis-tools/cli-client/"
-            },
-            {
-              "type": "link",
-              "label": "Getting started with the CLI client",
-              "href": "/docs/apis-tools/cli-client/cli-get-started/"
             }
           ]
         },
@@ -2105,6 +2105,15 @@
           "type": "link",
           "label": "Overview",
           "href": "/docs/self-managed/zeebe-deployment/zeebe-installation/"
+        },
+        {
+          "Zeebe Gateway": [
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/self-managed/zeebe-deployment/zeebe-gateway/overview/"
+            }
+          ]
         },
         {
           "Configuration": [
@@ -2413,21 +2422,49 @@
         {
           "User guide": [
             {
+              "Configuration": [
+                {
+                  "type": "link",
+                  "label": "Making Identity production ready",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/making-identity-production-ready/"
+                },
+                {
+                  "type": "link",
+                  "label": "Configuring an external identity provider and logging",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/"
+                },
+                {
+                  "type": "link",
+                  "label": "Connect to an existing Keycloak instance",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/"
+                }
+              ]
+            },
+            {
+              "Roles": [
+                {
+                  "type": "link",
+                  "label": "Adding and assigning a role to a user",
+                  "href": "/docs/self-managed/identity/user-guide/roles/add-assign-role/"
+                },
+                {
+                  "type": "link",
+                  "label": "Adding and assigning a permission to a role",
+                  "href": "/docs/self-managed/identity/user-guide/roles/add-assign-permission/"
+                }
+              ]
+            },
+            {
               "Groups": [
                 {
                   "type": "link",
-                  "label": "Creating a group",
-                  "href": "/docs/self-managed/identity/user-guide/groups/creating-a-group/"
+                  "label": "Create a group",
+                  "href": "/docs/self-managed/identity/user-guide/groups/create-group/"
                 },
                 {
                   "type": "link",
-                  "label": "Assigning users to a group",
-                  "href": "/docs/self-managed/identity/user-guide/groups/assigning-users-to-a-group/"
-                },
-                {
-                  "type": "link",
-                  "label": "Assigning roles to a group",
-                  "href": "/docs/self-managed/identity/user-guide/groups/assigning-roles-to-a-group/"
+                  "label": "Assign users and roles to a group",
+                  "href": "/docs/self-managed/identity/user-guide/groups/assign-users-roles-to-group/"
                 }
               ]
             },
@@ -2437,73 +2474,32 @@
                   "type": "link",
                   "label": "Managing resource authorizations",
                   "href": "/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
+                },
+                {
+                  "type": "link",
+                  "label": "Managing user access",
+                  "href": "/docs/self-managed/identity/user-guide/authorizations/managing-user-access/"
+                },
+                {
+                  "type": "link",
+                  "label": "Generating M2M tokens",
+                  "href": "/docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
                 }
               ]
             },
             {
-              "type": "link",
-              "label": "Adding an application",
-              "href": "/docs/self-managed/identity/user-guide/adding-an-application/"
-            },
-            {
-              "type": "link",
-              "label": "Adding an API",
-              "href": "/docs/self-managed/identity/user-guide/adding-an-api/"
-            },
-            {
-              "type": "link",
-              "label": "Adding a permission",
-              "href": "/docs/self-managed/identity/user-guide/adding-a-permission/"
-            },
-            {
-              "type": "link",
-              "label": "Assigning a permission an application",
-              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/"
-            },
-            {
-              "type": "link",
-              "label": "Adding a role",
-              "href": "/docs/self-managed/identity/user-guide/adding-a-role/"
-            },
-            {
-              "type": "link",
-              "label": "Assigning a permission a role",
-              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-a-role/"
-            },
-            {
-              "type": "link",
-              "label": "Assigning a role to a user",
-              "href": "/docs/self-managed/identity/user-guide/assigning-a-role-to-a-user/"
-            },
-            {
-              "type": "link",
-              "label": "Configuring an external identity provider",
-              "href": "/docs/self-managed/identity/user-guide/configure-external-identity-provider/"
-            },
-            {
-              "type": "link",
-              "label": "Configuring logging",
-              "href": "/docs/self-managed/identity/user-guide/configure-logging/"
-            },
-            {
-              "type": "link",
-              "label": "Making Identity production ready",
-              "href": "/docs/self-managed/identity/user-guide/making-identity-production-ready/"
-            },
-            {
-              "type": "link",
-              "label": "Generating machine-to-machine (M2M) tokens",
-              "href": "/docs/self-managed/identity/user-guide/generating-m2m-tokens/"
-            },
-            {
-              "type": "link",
-              "label": "Managing user access",
-              "href": "/docs/self-managed/identity/user-guide/managing-user-access/"
-            },
-            {
-              "type": "link",
-              "label": "Connect to an existing Keycloak instance",
-              "href": "/docs/self-managed/identity/user-guide/connect-to-an-existing-keycloak/"
+              "Additional features": [
+                {
+                  "type": "link",
+                  "label": "Adding an API",
+                  "href": "/docs/self-managed/identity/user-guide/additional-features/adding-an-api/"
+                },
+                {
+                  "type": "link",
+                  "label": "Incorporate applications",
+                  "href": "/docs/self-managed/identity/user-guide/additional-features/incorporate-applications/"
+                }
+              ]
             }
           ]
         },
@@ -2539,15 +2535,6 @@
               "href": "/docs/self-managed/identity/troubleshooting/common-problems/"
             }
           ]
-        }
-      ]
-    },
-    {
-      "Zeebe Gateway": [
-        {
-          "type": "link",
-          "label": "Overview",
-          "href": "/docs/self-managed/zeebe-gateway-deployment/zeebe-gateway/"
         }
       ]
     },
