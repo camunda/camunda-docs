@@ -126,7 +126,6 @@ module.exports = {
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
-            "components/modeler/web-modeler/save-and-deploy",
             "components/modeler/web-modeler/run-or-publish-your-process",
             {
               Collaboration: [

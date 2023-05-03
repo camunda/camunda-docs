@@ -11,6 +11,21 @@ import TabItem from "@theme/TabItem";
 
 When you design a process in Camunda Modeler, you have multiple flexible options to either run or publish it on Camunda Platform 8. This page explains the differences between running and publishing a process, and outlines the various options to publish a process into any environment, and to any audience.
 
+## Deploy a process
+
+Web Modeler autosaves all your changes on a diagram. If you change a diagram and it is autosaved, this has no effect on deployed or running processes your cluster(s).
+
+To make any change live in your cluster(s), you need to deploy it. If you deploy a process, it becomes available on the selected cluster and you can run or publish it.
+
+To deploy, click **Deploy** in the upper right corner of the modeling screen:
+
+![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
+
+### Before deploying a process
+
+- Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
+- Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them. 
+
 ## Run a process
 
 Running a process means that you execute the process as a process instance on Camunda Platform 8. It allows you to test and debug your process and see how it performs in a live environment.
@@ -42,9 +57,13 @@ You can also test your process thoroughly on a development cluster to see how it
   }
   ```
 
-4. Click on **Run** to confirm. This will start a process instance on the selected cluster. 
+4. Click on **Run** to confirm. This will start a process instance on the selected cluster. If required, it (re-)deploys the process beforehand on the cluster.
 
-5. After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). In Operate, you can see the progress of the process instance and interact with it if required.
+After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to see the progress of the process instance and interact with it if required.
+
+:::info
+Starting an instance from Web Modeler [deploys](#deploy-a-process) recent changes to the target cluster, which changes future runs of this process definition in case it has already been deployed and used. Existing process instances are not affected.
+:::
 
 ### Schedule via timer
 
@@ -59,7 +78,7 @@ To schedule a process using a timer, follow these steps:
 
 3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
 
-4. Click on **Deploy** to [deploy](./save-and-deploy.md) the process.
+4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
 
 Once the process is deployed, the timer will be activated and the process will be executed at the scheduled time or interval.
 
@@ -88,7 +107,7 @@ You have the following options to publish a process:
 
 ### Deploy to run programmatically
 
-In order to be able to call a process programmatically from or inside another application or service, you simply have to [deploy](./save-and-deploy.md) it. Once deployed, you can run a process via our APIs, using an API client, or via one the various community SDKs. Read the [documentation on APIs & clients](../../../apis-tools/working-with-apis-tools) to learn more.
+In order to be able to call a process programmatically from or inside another application or service, you simply have to [deploy](#deploy-a-process) it. Once deployed, you can run a process via our APIs, using an API client, or via one the various community SDKs. Read the [documentation on APIs & clients](../../../apis-tools/working-with-apis-tools.md) to learn more.
 
 ### Publish via webhook
 
@@ -101,7 +120,7 @@ Follow these steps to publish a process via a webhook:
   ![Converting a start event to a webhook start event](img/web-modeler-convert-to-webhook.png)
 
 3. Define the webhook configuration in the properties panel of the start event. 
-4. Finally, [deploy the process](./save-and-deploy.md) to activate the webhook connector. 
+4. Finally, [deploy the process](#deploy-a-process) to activate the webhook connector. 
 
 When the process is deployed, the webhook URL can be found in the properties panel, and called from any outside system.
 
@@ -116,12 +135,12 @@ Publishing a process to Tasklist makes it available to users through the web-bas
 <Tabs groupId="tasklistPublishing" defaultValue="saas" values={[{label: 'SaaS', value: 'saas', }, {label: 'Self-Managed', value: 'sm', },]} >
 <TabItem value="saas">
 
-To publish a process to Tasklist, you first need to [deploy](./save-and-deploy.md) it. Once the process is deployed, it will automatically appear in the Tasklist application, where users can start new instances of the process.
+To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) it. Once the process is deployed, it will automatically appear in the Tasklist application, where users can start new instances of the process.
 
 </TabItem>
 <TabItem value="sm">
 
-To publish a process to Tasklist, you first need to [deploy](./save-and-deploy.md) it. Once the process is deployed, you need to [set permissions in Identity](../../../self-managed/tasklist-deployment/tasklist-authentication.md#resource-based-permissions) in order to make it accessible in the Tasklist application.
+To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) it. Once the process is deployed, you need to [set permissions in Identity](../../../self-managed/tasklist-deployment/tasklist-authentication.md#resource-based-permissions) in order to make it accessible in the Tasklist application.
 
 </TabItem>
 </Tabs>
@@ -137,7 +156,7 @@ Camunda Platform 8 supports message and signal events, which can be used to trig
 1. Select the start event.
 2. Change the start event type to a message or signal start event using the **wrench tool**.
 3. Configure the message or signal start event using the **properties panel** to define the message or signal to listen to. Using messages, you can create a 1:1 relationship between calling processes. With signals, you can create broadcast-like message distributions.
-4. Click on **Deploy** to [deploy](./save-and-deploy.md) the process.
+4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
 
 As soon as a matching event is received, a process instance will be started. To learn more about message and signal events, refer to our [documentation on events](../bpmn/events.md).
 
