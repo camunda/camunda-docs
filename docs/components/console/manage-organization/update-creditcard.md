@@ -11,3 +11,7 @@ This setting is only visible in the **Professional Plan** for owners and admins.
 ## Changing your Credit Card
 
 just swipe it!
+
+![cc-ending](./img/cc-ending.png)
+![cc-enter](./img/cc-enter.png)
+![cc-manage](./img/cc-manage.png)
