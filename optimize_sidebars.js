@@ -739,6 +739,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
+              "Slack Connector",
+              "components/connectors/out-of-the-box-connectors/twilio/"
+            ),
+            docsLink(
               "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
             ),
