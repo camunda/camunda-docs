@@ -5,12 +5,12 @@ description: "Let's swipe another credit card to keep the spice flowing"
 ---
 
 :::note
-This setting is only visible in the **Professional Plan** for owners and admins.dd
+This setting is only visible in the **Professional Plan** for owners and admins.
 :::
 
 ## Changing your Credit Card
 
-When in a Camunda Professional Plan, you might need to update an expired or failing credit card. 
+When in a Camunda Professional Plan, you might need to update an expired or failing credit card.
 
 The steps to update a payment method are as follows:
 
@@ -29,4 +29,3 @@ The steps to update a payment method are as follows:
 - Add the details of the new credit card and **click Update**
 
 ![cc-enter](./img/cc-enter.png)
-
