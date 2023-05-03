@@ -24,7 +24,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 ### Before deploying a process
 
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
-- Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them. 
+- Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
 
 ## Run a process
 
@@ -45,17 +45,17 @@ You can also test your process thoroughly on a development cluster to see how it
 
 1. Click **Run** in the top right corner of the modeling screen.
 
-  ![Running a process from Web Modeler](img/web-modeler-start-instance.png)
+![Running a process from Web Modeler](img/web-modeler-start-instance.png)
 
 2. Select the target cluster.
 
 3. To test your process with data, you can also specify variables written to the process context at startup. The variables must be formatted in valid JSON. As an example, you can use the following JSON:
 
-  ```json
-  {
-    "hello": "world"
-  }
-  ```
+```json
+{
+  "hello": "world"
+}
+```
 
 4. Click on **Run** to confirm. This will start a process instance on the selected cluster. If required, it (re-)deploys the process beforehand on the cluster.
 
@@ -74,7 +74,7 @@ To schedule a process using a timer, follow these steps:
 1. Select the start event.
 2. Change the start event type to a timer event using the **wrench tool**.
 
-  ![Converting the start event to a timer start event](img/web-modeler-convert-to-timer.png)
+![Converting the start event to a timer start event](img/web-modeler-convert-to-timer.png)
 
 3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
 
@@ -113,14 +113,14 @@ In order to be able to call a process programmatically from or inside another ap
 
 You can publish a process via webhook, which allows you to integrate it easily with any system or service that can make an HTTP request. When a webhook is triggered in another system, it sends a HTTP request to a specified URL, which starts a process instance with the payload of the request.
 
-Follow these steps to publish a process via a webhook: 
+Follow these steps to publish a process via a webhook:
 
 1. Select the start event.
-2. Switch your start event to a [HTTP webhook connector](../../connectors/out-of-the-box-connectors/http-webhook.md) using the **wrench tool**. 
-  ![Converting a start event to a webhook start event](img/web-modeler-convert-to-webhook.png)
+2. Switch your start event to a [HTTP webhook connector](../../connectors/out-of-the-box-connectors/http-webhook.md) using the **wrench tool**.
+   ![Converting a start event to a webhook start event](img/web-modeler-convert-to-webhook.png)
 
-3. Define the webhook configuration in the properties panel of the start event. 
-4. Finally, [deploy the process](#deploy-a-process) to activate the webhook connector. 
+3. Define the webhook configuration in the properties panel of the start event.
+4. Finally, [deploy the process](#deploy-a-process) to activate the webhook connector.
 
 When the process is deployed, the webhook URL can be found in the properties panel, and called from any outside system.
 
@@ -171,6 +171,3 @@ As soon as a matching event is received, a process instance will be started. To 
 :::note
 When working on Camunda Platform 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 :::
-
-
-
