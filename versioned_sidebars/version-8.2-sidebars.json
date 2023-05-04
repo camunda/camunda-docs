@@ -80,6 +80,7 @@
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/update-billing-reservations",
+            "components/console/manage-organization/update-creditcard",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account"
@@ -1281,7 +1282,8 @@
             {
               "Configuration": [
                 "self-managed/identity/user-guide/configuration/making-identity-production-ready",
-                "self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging",
+                "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
+                "self-managed/identity/user-guide/configuration/configure-logging",
                 "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak"
               ]
             },

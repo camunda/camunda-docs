@@ -33,6 +33,17 @@ The logging configuration that is included in the Identity image is:
         <Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
             <JsonTemplateLayout eventTemplateUri="classpath:GcpLayout.json" locationInfoEnabled="true"/>
         </Console>
+        <RollingFile
+                name="File"
+                fileName="${env:IDENTITY_LOG_FILE_NAME:-logs/identity.log}"
+                filePattern="${env:IDENTITY_LOG_FILE_NAME_PATTERN:-${LOG_FILE_NAME_PATTERN}}"
+                append="true">
+            <PatternLayout pattern="${env:IDENTITY_LOG_FILE_PATTERN:-${LOG_FILE_PATTERN}}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="${env:IDENTITY_LOG_FILE_ROTATION_DAYS:-1}"/>
+                <SizeBasedTriggeringPolicy size="${env:IDENTITY_LOG_FILE_ROTATION_SIZE:-50 MB}"/>
+            </Policies>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Logger name="io.camunda.identity" level="${env:IDENTITY_LOG_LEVEL:-info}"/>
@@ -58,7 +69,7 @@ is
 used, set the `IDENTITY_LOG_APPENDER` environment variable to one of the following `Console`, `Stackdriver`, or `Log`:
 
 <Tabs groupId="loggingAppenders" defaultValue="console"
-values={[{label: 'Console', value: 'console', }, {label: 'Stackdriver', value: 'stackdriver', },]} >
+values={[{label: 'Console', value: 'console', }, {label: 'Stackdriver', value: 'stackdriver', }, {label: 'File', value: 'file', },]} >
 <TabItem value="console">
 
 Console logging produces messages to standard output and is the default log appender. The Console log appender offers
@@ -78,6 +89,18 @@ platform.
 This appender uses
 the [GCP layout](https://github.com/apache/logging-log4j2/blob/2.x/log4j-layout-template-json/src/main/resources/GcpLayout.json)
 provided by the [Log4j2](https://logging.apache.org/log4j/2.x/manual/) library.
+
+</TabItem>
+<TabItem value="file">
+
+The File log appender produces messages to a rotating log file. The File log appender offers additional configuration
+options, these are:
+
+| Environment variable              | Accepted values                                                                                                                                                          |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `IDENTITY_LOG_FILE_PATTERN`       | _See the [Log4j2 pattern layout docs](https://logging.apache.org/log4j/2.x/manual/layouts.html#PatternLayout) for possible placeholders._                                |
+| `IDENTITY_LOG_FILE_ROTATION_DAYS` | _See the [Log4j2 time-based triggering policy -> interval](https://logging.apache.org/log4j/2.x/manual/appenders.html#timebased-triggering-policy) for possible values._ |
+| `IDENTITY_LOG_FILE_ROTATION_SIZE` | _See the [Log4j2 size-bsed triggering policy](https://logging.apache.org/log4j/2.x/manual/appenders.html#sizebased-triggering-policy) for possible values._              |
 
 </TabItem>
 </Tabs>
