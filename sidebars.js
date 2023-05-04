@@ -1080,7 +1080,8 @@ module.exports = {
             {
               Configuration: [
                 "self-managed/identity/user-guide/configuration/making-identity-production-ready",
-                "self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging",
+                "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
+                "self-managed/identity/user-guide/configuration/configure-logging",
                 "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
               ],
             },
