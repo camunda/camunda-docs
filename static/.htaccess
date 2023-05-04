@@ -34,6 +34,7 @@ RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rabbitmq/
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/rest/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/sendgrid/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/sendgrid/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/slack/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/slack/$1 [R=301,L]
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/twilio/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/twilio/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/uipath/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/uipath/$1 [R=301,L]
 
 # identity restructure 8.2
