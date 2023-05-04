@@ -118,14 +118,14 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 
 ### General
 
-| Environment variable      | Description                                                                                                                            | Example value                                                    | Default value |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------- |
-| `SERVER_URL`              | URL at which users access Web Modeler in the browser.<br/>_Note_: To use a sub path for Web Modeler, just include the path in the URL. | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
-| `SERVER_HTTPS_ONLY`       | Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                | `true`                                                           | `false`       |
-| `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                              | `modeler-restapi`                                                | -             |
-| `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                 | `8081`                                                           | `8081`        |
-| `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.              | `8091`                                                           | `8091`        |
-| `PLAY_ENABLED`            | [optional]<br/>Enables the **Play** mode in the BPMN editor, allowing users to test processes in a playground environment.             | `true`                                                           | `false`       |
+| Environment variable      | Description                                                                                                                                                                                | Example value                                                    | Default value |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | ------------- |
+| `SERVER_URL`              | URL at which users access Web Modeler in the browser.<br/>_Note_: To use a sub path for Web Modeler, just include the path in the URL.                                                     | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
+| `SERVER_HTTPS_ONLY`       | Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                                                                    | `true`                                                           | `false`       |
+| `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                                                                                  | `modeler-restapi`                                                | -             |
+| `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                                                                     | `8081`                                                           | `8081`        |
+| `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.                                                                  | `8091`                                                           | `8091`        |
+| `PLAY_ENABLED`            | [optional]<br/>Enables the [**Play** mode](../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment. | `true`                                                           | `false`       |
 
 ### Identity / Keycloak
 
