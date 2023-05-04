@@ -58,7 +58,7 @@ is
 used, set the `IDENTITY_LOG_APPENDER` environment variable to one of the following `Console`, `Stackdriver`, or `Log`:
 
 <Tabs groupId="loggingAppenders" defaultValue="console"
-values={[{label: 'Console', value: 'console', }, {label: 'Stackdriver', value: 'stackdriver', }, {label: 'File', value: 'file', },]} >
+values={[{label: 'Console', value: 'console', }, {label: 'Stackdriver', value: 'stackdriver', },]} >
 <TabItem value="console">
 
 Console logging produces messages to standard output and is the default log appender. The Console log appender offers
