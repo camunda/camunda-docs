@@ -45,7 +45,7 @@ Choose one of the following methods:
 - [Describe table](#describe-table): Returns information about a DynamoDB table.
 - [Scan table](#scan-table): Returns one or more items and their attributes by accessing every item in a table. You can use filter expressions to selectively scan for items that meet certain criteria.
 
-#### Item
+#### [Item](#item-operations)
 
 - [Add item](#add-item): Creates a new item or replaces an existing item with a new item.
 - [Delete item](#delete-item): Deletes a single item in a table by primary key.
