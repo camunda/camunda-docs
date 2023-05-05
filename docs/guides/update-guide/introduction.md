@@ -16,6 +16,13 @@ Versions prior to Camunda Platform 8 are listed below and identified as Camunda 
 
 There is a dedicated update guide for each version:
 
+### [Camunda Platform 8.1 to Camunda Platform 8.2](../810-to-820)
+
+Update from 8.1.x to 8.2.0
+
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
+[Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
+
 ### [Camunda Platform 8.0 to Camunda Platform 8.1](../800-to-810)
 
 Update from 8.0.x to 8.1.0
