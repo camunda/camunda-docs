@@ -7,11 +7,12 @@ description: Introduction to Connector element templates.
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-**Connector element templates** are JSON configuration files, which customize how a BPMN element is shown, and how it can be configured by process developers.
+**Connector element templates** are JSON configuration files, which customize how a BPMN element is shown,
+and how it can be configured by process developers.
 
 :::note
-Do not confuse **Connector element templates** with the **[Connector template](https://github.com/camunda/connector-template)**, which is
-used to supply boilerplate code and configuration when developing a new custom Connector.
+Do not confuse **Connector element templates** with the **[Connector template](https://github.com/camunda/connector-template-outbound)**,
+which is used to supply boilerplate code and configuration when developing a new custom Connector.
 :::
 
 You can, for example, allow the user to model and configure the following **REST Connector** by providing a simple JSON configuration:
@@ -183,7 +184,7 @@ You can, for example, allow the user to model and configure the following **REST
 You can develop **Connector element templates** using the [`element template` feature](../../modeler/desktop-modeler/element-templates/defining-templates.md).
 You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
 
-## Providing and using Connector templates
+## Providing and using Connector element templates
 
 When using [Web Modeler](../../modeler/web-modeler/launch-cloud-modeler.md), you can create **Connector element templates**
 [directly within the application](../../modeler/web-modeler/advanced-modeling/manage-connector-templates.md) and share
