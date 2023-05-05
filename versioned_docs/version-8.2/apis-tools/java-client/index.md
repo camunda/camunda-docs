@@ -43,13 +43,13 @@ In Java code, instantiate the client as follows:
     OAuthCredentialsProvider credentialsProvider =
         new OAuthCredentialsProviderBuilder()
             .authorizationServerUrl(oAuthAPI)
-            .audience(zeebeAPI)
+            .audience(zeebeAddress)
             .clientId(clientId)
             .clientSecret(clientSecret)
             .build();
 
     try (ZeebeClient client = ZeebeClient.newClientBuilder()
-            .gatewayAddress(zeebeAPI)
+            .gatewayAddress(zeebeAddress)
             .credentialsProvider(credentialsProvider)
             .build()) {
       client.newTopologyRequest().send().join();

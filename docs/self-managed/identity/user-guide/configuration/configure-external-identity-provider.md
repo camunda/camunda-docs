@@ -1,8 +1,8 @@
 ---
-id: configure-external-identity-provider-and-logging
-title: "Configuring an external identity provider and logging"
-sidebar_label: "Configuring an external identity provider and logging"
-description: "In this guide we will demonstrate how to configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory, as well as logging."
+id: configure-external-identity-provider
+title: "Configuring an external identity provider"
+sidebar_label: "Configuring an external identity provider"
+description: "In this guide we will demonstrate how to configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory."
 ---
 
 :::info
@@ -36,22 +36,3 @@ Keycloak supports a wide variety of authentication options, such as mapping exte
 [configuring authentication](https://www.keycloak.org/docs/16.1/server_admin/index.html#configuring-authentication), and
 [integrating identity providers](https://www.keycloak.org/docs/16.1/server_admin/index.html#_identity_broker).
 :::
-
-## Configuring logging
-
-The Identity component uses the [Log4j2](https://logging.apache.org/log4j/2.x/) framework to control
-the log level and log format.
-
-By default, Identity logs at the `info` and produces a log line with following format:
-
-```
-2022-06-27 15:05:21.442 INFO 34490 --- [main] i.c.i.Application: Started Application in 3.659 seconds (JVM running for 4.185)
-```
-
-Identity also provides support for configuring the log level and log pattern should it be required by
-exposing two environmental variables, these are:
-
-| Environment variable   | Accepted values                                                                                                                           |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `IDENTITY_LOG_LEVEL`   | OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL                                                                                          |
-| `IDENTITY_LOG_PATTERN` | _See the [Log4j2 pattern layout docs](https://logging.apache.org/log4j/2.x/manual/layouts.html#PatternLayout) for possible placeholders._ |

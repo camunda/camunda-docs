@@ -32,14 +32,14 @@ We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes envi
 
 Requirements for the components can be seen below:
 
-| Component   | Java version | Other requirements                                                                                                                    |
-| ----------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x (only if Elastic exporter is used), 8.5.x, 8.6.x, OpenSearch 1.3.x (only if OpenSearch exporter is used) |
-| Operate     | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x, OpenSearch 1.3.x                                                                          |
-| Tasklist    | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x                                                                                            |
-| Identity    | OpenJDK 17+  | Keycloak 16.1.1, 19.0.3<br/>PostgreSQL 14.x, 15.x                                                                                     |
-| Optimize    | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x, 8.5.x, 8.6.x                                                                          |
-| Web Modeler | -            | Keycloak 16.1.1, 19.0.3<br/>PostgreSQL 14.x (other database systems are currently not supported)                                      |
+| Component   | Java version | Other requirements                                                                                                                        |
+| ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Zeebe       | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x (only if Elastic exporter is used), 8.5.x, 8.6.x, AWS OpenSearch 1.3.x (only if OpenSearch exporter is used) |
+| Operate     | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x, AWS OpenSearch 1.3.x                                                                          |
+| Tasklist    | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x                                                                                                |
+| Identity    | OpenJDK 17+  | Keycloak 16.1.1, 19.0.3<br/>PostgreSQL 14.x, 15.x                                                                                         |
+| Optimize    | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x, 8.5.x, 8.6.x                                                                              |
+| Web Modeler | -            | Keycloak 16.1.1, 19.0.3<br/>PostgreSQL 14.x (other database systems are currently not supported)                                          |
 
 ### Version Matrix
 

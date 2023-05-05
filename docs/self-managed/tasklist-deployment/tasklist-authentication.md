@@ -54,17 +54,18 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 
 Identity requires the following parameters:
 
-| Parameter name                                       | Description                                        | Example value                                                                     |
-| ---------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------- |
-| camunda.tasklist.identity.issuerUrl                  | URL of issuer (Identity)                           | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.tasklist.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                   | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.tasklist.identity.clientId                   | Similar to a username for the application          | tasklist                                                                          |
-| camunda.tasklist.identity.clientSecret               | Similar to a password for the application          | XALaRPl...s7dL7                                                                   |
-| camunda.tasklist.identity.audience                   | Audience for Tasklist                              | tasklist-api                                                                      |
-| camunda.tasklist.identity.baseUrl                    | Base URL for Identity                              | http://localhost:8084                                                             |
-| camunda.tasklist.identity.resourcePermissionsEnabled | Enable/disable Resource Permissions                | true                                                                              |
-| spring.security.oauth2.resourceserver.jwt.issueruri  | Token issuer URI                                   | http://localhost:18080/auth/realms/camunda-platform                               |
-| spring.security.oauth2.resourceserver.jwt.jwkseturi  | Complete URI to get public keys for JWT validation | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
+| Parameter name                                       | Description                                                                                                                                   | Example value                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| camunda.tasklist.identity.issuerUrl                  | URL of issuer (Identity)                                                                                                                      | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.tasklist.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.tasklist.identity.clientId                   | Similar to a username for the application                                                                                                     | tasklist                                                                          |
+| camunda.tasklist.identity.clientSecret               | Similar to a password for the application                                                                                                     | XALaRPl...s7dL7                                                                   |
+| camunda.tasklist.identity.audience                   | Audience for Tasklist                                                                                                                         | tasklist-api                                                                      |
+| camunda.tasklist.identity.baseUrl                    | Base URL for Identity                                                                                                                         | http://localhost:8084                                                             |
+| camunda.tasklist.identity.redirectRootUrl            | Root URL to redirect users to after successful authentication. If the property is not provided, it will be derived from the incoming request. | http://localhost:8082                                                             |
+| camunda.tasklist.identity.resourcePermissionsEnabled | Enable/disable Resource Permissions                                                                                                           | true                                                                              |
+| spring.security.oauth2.resourceserver.jwt.issueruri  | Token issuer URI                                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
+| spring.security.oauth2.resourceserver.jwt.jwkseturi  | Complete URI to get public keys for JWT validation                                                                                            | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
 ### Resource-based permissions
 
