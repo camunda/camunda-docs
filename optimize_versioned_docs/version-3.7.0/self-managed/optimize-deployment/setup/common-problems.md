@@ -28,7 +28,7 @@ The most common cause for this issue is that the engine endpoint Optimize uses i
 
 ## Server language results in UI/server errors
 
-When Optimize is running with its language set to one with characters that it can't recognise, such as Turkish, you may observe logged issues and unusable elements in the UI. We recommend running Optimize on a server with its language set to English.
+When Optimize is running with its language set to one with characters that it can't recognize, such as Turkish, you may observe logged issues and unusable elements in the UI. We recommend running Optimize on a server with its language set to English.
 
 ## Update issues
 
