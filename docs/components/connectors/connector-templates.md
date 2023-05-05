@@ -1,7 +1,7 @@
 ---
 id: connector-templates
 title: Connector templates
-description: Introduction to Connector templates.
+description: Learn how to modify BPMN elements with Connector templates to create custom modeling experiences.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 **Connector templates** are JSON configuration files, which customize how a BPMN element is shown, and how it can be configured by process developers.
 
-You can, for example, allow the user to model and configure the following **REST Connector** by providing a simple JSON configuration:
+You can, for example, allow the user to model and configure the following **REST Connector** by providing a JSON configuration for a service task:
 
 <Tabs groupId="connectorTemplate" defaultValue="process" values={
 [
