@@ -1,6 +1,6 @@
 ---
 id: outbound-connectors-job-workers
-title: Outbound Connectors vs. Job Workers
+title: Outbound Connectors vs. job workers
 description: Integrating with external systems can be done with a Connector or a job worker.
 ---
 
@@ -51,11 +51,11 @@ Having used one Connector template will make it easy for you to use the next one
 
 It depends on your use case.
 
-- You need access to low-level API in Camunda Platform 8 to perform a very specific task? You are better off with job workers.
-- You want to write your worker logic in something else than Java? Job workers are your way to move forward.
-- You want to create worker logic that is easily reusable in any environment? Write a Connector.
-- You want to focus on your worker's logic and have no need for using low-level Camunda Platform 8 API? Write a Connector.
-- You want to provide a standardized modeling experience alongside your runtime behavior? Write a Connector.
+- Need access to a low-level API in Camunda Platform 8 to perform a very specific task? You are better off with job workers.
+- Want to write your worker logic in something other than Java? Job workers are your way to move forward.
+- Want to create worker logic that is reusable in any environment? Write a Connector.
+- Want to focus on your worker's logic and have no need for using low-level Camunda Platform 8 API? Write a Connector.
+- Want to provide a standardized modeling experience alongside your runtime behavior? Write a Connector.
 
 ## Learn more
 
