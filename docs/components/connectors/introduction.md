@@ -7,6 +7,12 @@ keywords: [bridge, reusable component, low code]
 
 A **Connector** is a reusable building block that performs the integration with an external system.
 
+Most processes require interaction with systems outside of Camunda to orchestrate and complete work.
+
+- In **human task orchestration**, actors are notified of pending or completed processes through communication tools such as [Slack](/components/connectors/out-of-the-box-connectors/outbound/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/outbound/microsoft-teams.md) for example in onboarding flow.
+- In **business processes**, records are created or updated in enterprise business systems.
+- In **microservices orchestration**, processes communicate through events pushed to a common systems through infrastructure such as [Kafka](/components/connectors/out-of-the-box-connectors/outbound/kafka.md).
+
 Connectors are often represented as tasks in a [BPMN process](/components/concepts/processes.md), which can be configured with parameters specific for the external system. As such, it can remove the need to write custom programming code for integration.
 
 Connectors offer an intuitive, scalable, and customizable multilayer coding experience for every user.
