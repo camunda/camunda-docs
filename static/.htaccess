@@ -9,8 +9,8 @@ Options -Indexes -MultiViews
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
 # Modeler start instance and deploy page renaming and merging
-RewriteRule ^docs/components/modeler/web-modeler/start-instance$ /docs/components/modeler/web-modeler/run-or-publish-your-process [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy$ /docs/components/modeler/web-modeler/run-or-publish-your-process#deploy-a-process [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/start-instance/(.*)$ /docs/components/modeler/web-modeler/run-or-publish-your-process/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/(.*)$ /docs/components/modeler/web-modeler/run-or-publish-your-process#deploy-a-process/$1 [R=301,L]
 
 # identity restructure 8.2
 RewriteRule ^docs/self-managed/identity/user-guide/connect-to-an-existing-keycloak/(.*)$ /docs/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/$1 [R=301,L]
