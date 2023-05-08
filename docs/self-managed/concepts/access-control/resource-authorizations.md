@@ -11,7 +11,8 @@ Resource authorizations are disabled by default and can be enabled by the use of
 - [Identity feature flags](../../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
 - [Operate resource based permissions](../../../../self-managed/operate-deployment/operate-authentication/#resource-based-permissions)
 - [Tasklist resource based permissions](../../../../self-managed/tasklist-deployment/tasklist-authentication/#resource-based-permissions)
-  :::
+
+:::
 
 Resource authorizations allow you to control the level of access a [user](self-managed/concepts/access-control/users.md) or
 [group](self-managed/concepts/access-control/groups.md) has to a particular resource in the system.
