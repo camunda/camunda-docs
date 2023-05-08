@@ -28,7 +28,8 @@ We advise you to keep your authentications and secrets data safe and avoid expos
 
 1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `GOOGLE_MAPS_PLATFORM_API_KEY`) so you can reference it later in the Connector.
-   :::
+
+:::
 
 ## Operation types
 
