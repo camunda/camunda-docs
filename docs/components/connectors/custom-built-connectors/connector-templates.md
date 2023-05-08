@@ -8,9 +8,9 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 **Connector templates** are JSON configuration files, which customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of element templates.
+and how it can be configured by process developers. Connector templates are a specific kind of [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md).
 
-Before developing one, you'll need to decide what you would like to achieve with your connector.
+Before developing one, you'll need to decide what you would like to achieve with your Connector.
 
 Currently, the options are:
 
@@ -37,7 +37,7 @@ a simple JSON configuration:
 
 <TabItem value='process'>
 
-![Webhook Inbound Connector Example](../img/custom-connector-template-inbound-start.png)
+![Webhook Inbound Connector Example](./img/custom-connector-template-inbound-start.png)
 
 </TabItem>
 
@@ -228,7 +228,7 @@ a simple JSON configuration:
 
 <TabItem value='process'>
 
-![Webhook Inbound intermediate Connector Example](../img/custom-connector-template-inbound-intermediate.png)
+![Webhook Inbound intermediate Connector Example](./img/custom-connector-template-inbound-intermediate.png)
 
 </TabItem>
 
