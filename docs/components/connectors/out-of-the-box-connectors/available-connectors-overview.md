@@ -42,7 +42,7 @@ import TabItem from "@theme/TabItem";
 - [RabbitMQ Connector](/components/connectors/out-of-the-box-connectors/outbound/rabbitmq.md) - Send messages to [RabbitMQ](https://www.rabbitmq.com/) from your BPMN process.
 - [SendGrid Connector](/components/connectors/out-of-the-box-connectors/outbound/sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack Connector](/components/connectors/out-of-the-box-connectors/outbound/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
-- [Twilio Connector](twilio.md) - Send and get SMS messages with [Twilio](https://www.twilio.com) service from your BPMN process.
+- [Twilio Connector](/components/connectors/out-of-the-box-connectors/outbound/twilio.md) - Send and get SMS messages with [Twilio](https://www.twilio.com) service from your BPMN process.
 - [UiPath Connector](/components/connectors/out-of-the-box-connectors/outbound/uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
 
 </TabItem>
