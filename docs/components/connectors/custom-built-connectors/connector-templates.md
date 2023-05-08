@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 and how it can be configured by process developers.
 
 :::note
-Do not confuse **Connector element templates** with the **[Connector template](https://github.com/camunda/connector-template-outbound)**,
+Do not confuse **Connector templates** with the **[Connector template](https://github.com/camunda/connector-template-outbound)**,
 which is used to supply boilerplate code and configuration when developing a new custom Connector.
 :::
 
