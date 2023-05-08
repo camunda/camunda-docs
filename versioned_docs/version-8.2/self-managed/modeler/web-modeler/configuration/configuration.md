@@ -5,77 +5,28 @@ description: "Read details on the configuration variables of Web Modeler Self-Ma
 ---
 
 :::note
-Web Modeler Self-Managed is available to [enterprise customers](../../../reference/licenses.md#web-modeler) only.
+Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
 :::
 
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
-- If you are using the Camunda Platform 8 [Helm chart](../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler).
+- If you are using the Camunda Platform 8 [Helm chart](../../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler).
 
 ## Configuration of the `restapi` component
 
 ### Database
 
-Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported.)
+Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
 
-| Environment variable    | Description                                                                                                                                                                                                               | Example value                                                            |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `RESTAPI_DB_HOST`       | Database host name                                                                                                                                                                                                        | `postgres.example.com`                                                   |
-| `RESTAPI_DB_PORT`       | Database port                                                                                                                                                                                                             | `5432`                                                                   |
-| `RESTAPI_DB_NAME`       | Database name                                                                                                                                                                                                             | `modeler-db`                                                             |
-| `RESTAPI_DB_USER`       | Database user name                                                                                                                                                                                                        | `modeler-user`                                                           |
-| `RESTAPI_DB_PASSWORD`   | Database user password                                                                                                                                                                                                    | \*\*\*                                                                   |
-| `SPRING_DATASOURCE_URL` | [optional]<br/>Can be used to provide a customized connection string (for example, to enable SSL-secured connections).<br/>If set, `RESTAPI_DB_HOST`, `RESTAPI_DB_PORT`, and `RESTAPI_DB_NAME` don't need to be provided. | `jdbc:postgresql://postgres.example.com:5432/modeler-db?sslmode=require` |
+| Environment variable                  | Description                                           | Example value                                            |
+| ------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
+| `SPRING_DATASOURCE_URL`               | JDBC URL of the database                              | `jdbc:postgresql://postgres.example.com:5432/modeler-db` |
+| `SPRING_DATASOURCE_USERNAME`          | Database user name                                    | `modeler-user`                                           |
+| `SPRING_DATASOURCE_PASSWORD`          | Database user password                                | \*\*\*                                                   |
+| `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver | `software.amazon.jdbc.Driver`                            |
 
-#### Configuring SSL for the database connection
-
-The generic way to configure an SSL connection between Web Modeler and the database is as follows:
-
-- Modify database connection URL `SPRING_DATASOURCE_URL` and customize connection parameters.
-- Provide SSL certificates and keys to the `restapi` component, if required.
-
-Consult the [PostgreSQL documentation](https://jdbc.postgresql.org/documentation/ssl/) for a description
-of the different SSL modes and the security provided.
-
-For a full list of all available connection parameters, visit the [PostgreSQL documentation](https://jdbc.postgresql.org/documentation/use/#connection-parameters/).
-
-Below are examples for common scenarios, increasing in the level of security they provide.
-
-**SSL mode "require"**
-
-In this mode, an SSL connection is established between Web Modeler and the database. This mode is still prone
-to man-in-the-middle attacks.
-
-- Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?sslmode=require`
-
-No certificates are needed in Web Modeler for this mode.
-
-**SSL mode "verify-full"**
-
-In this mode, Web Modeler requests a certificate from the database server to verify its identity. This mode is not
-prone to man-in-the-middle attacks.
-
-To enable this mode, mount the root certificate with which the server certificate was signed.
-
-- Provide root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`
-- Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`
-
-**SSL mode "verify-full" with client certificates**
-
-In this mode, Web Modeler requests a certificate from the database server to verify the server's identity, and
-the server requests a certificate from the client to verify the client's identity.
-
-To enable this mode, mount the client certificates.
-
-- Provide client certificates at these locations:
-  - `myClientCertificate.pk8 -> ~/.postgresl/postgresql.pk8`
-  - `myClientCertificate.crt -> ~/.postgresl/postgresql.crt`
-- Provide root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`
-- Modify database URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`
-
-Furthermore, configure the database server to verify client certificates:
-[PostgreSQL documentation](https://www.postgresql.org/docs/current/ssl-tcp.html)
+Please refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
 
 ### SMTP / email
 
@@ -118,14 +69,14 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 
 ### General
 
-| Environment variable      | Description                                                                                                                                                                                | Example value                                                    | Default value |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | ------------- |
-| `SERVER_URL`              | URL at which users access Web Modeler in the browser.<br/>_Note_: To use a sub path for Web Modeler, just include the path in the URL.                                                     | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
-| `SERVER_HTTPS_ONLY`       | Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                                                                    | `true`                                                           | `false`       |
-| `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                                                                                  | `modeler-restapi`                                                | -             |
-| `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                                                                     | `8081`                                                           | `8081`        |
-| `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.                                                                  | `8091`                                                           | `8091`        |
-| `PLAY_ENABLED`            | [optional]<br/>Enables the [**Play** mode](../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment. | `true`                                                           | `false`       |
+| Environment variable      | Description                                                                                                                                                                                   | Example value                                                    | Default value |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------- |
+| `SERVER_URL`              | URL at which users access Web Modeler in the browser.<br/>_Note_: To use a sub path for Web Modeler, just include the path in the URL.                                                        | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
+| `SERVER_HTTPS_ONLY`       | Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                                                                       | `true`                                                           | `false`       |
+| `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                                                                                     | `modeler-restapi`                                                | -             |
+| `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                                                                        | `8081`                                                           | `8081`        |
+| `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.                                                                     | `8091`                                                           | `8091`        |
+| `PLAY_ENABLED`            | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment. | `true`                                                           | `false`       |
 
 ### Identity / Keycloak
 
