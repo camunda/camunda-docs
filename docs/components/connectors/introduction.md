@@ -22,7 +22,7 @@ Connectors offer a multilayer coding experience, enabling users with a variety o
 A Connector consists of two parts:
 
 1. The programming code in Java to connect to the external system (for example, see the [Connector function](./custom-built-connectors/connector-sdk.md#runtime-logic) for outbound Connectors.)
-2. The user interface to be used during modeling, which is provided using [Connector templates](./custom-built-connectors/connector-templates.md).
+2. The user interface to be used during modeling, which is provided using [Connector Templates](configurable-templates.md).
 
 Users interacting with Connectors may only need to understand the configuration options exposed by the Connector Template in the properties panel.
 
@@ -33,6 +33,5 @@ Connectors are available in three categories - [out-of-the-box (OOTB)](./out-of-
 - [Learn about types of Connectors](./connector-types.md)
 - [Use Connectors in your BPMN process](./use-connectors.md)
 - [Learn about available out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md)
-- [Develop a custom Connector template](./custom-built-connectors/connector-templates.md)
-- [Develop a custom Connector runtime](./custom-built-connectors/connector-sdk.md)
+- [Configure Connector Templates](configurable-templates.md)
 - [Install Connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md)

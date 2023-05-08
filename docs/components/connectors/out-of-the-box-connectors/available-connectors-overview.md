@@ -10,7 +10,7 @@ Each Connector has a dedicated page with relevant configuration.
 
 All Connectors are available for Camunda Platform 8 SaaS and [Self-Managed](../../../self-managed/connectors-deployment/install-and-start.md).
 
-Beginners to Connectors may want to get familiar with Connectors using a [guide](/guides/configuring-out-of-the-box-connectors/).
+Beginners to Connectors may want to get familiar with Connectors using a [guide](/guides/configuring-out-of-the-box-connector.md).
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
