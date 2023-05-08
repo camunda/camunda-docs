@@ -2548,9 +2548,18 @@
               "href": "/docs/self-managed/modeler/web-modeler/installation/"
             },
             {
-              "type": "link",
-              "label": "Configuration",
-              "href": "/docs/self-managed/modeler/web-modeler/configuration/"
+              "Configuration": [
+                {
+                  "type": "link",
+                  "label": "Overview",
+                  "href": "/docs/self-managed/modeler/web-modeler/configuration/"
+                },
+                {
+                  "type": "link",
+                  "label": "Database",
+                  "href": "/docs/self-managed/modeler/web-modeler/configuration/database/"
+                }
+              ]
             }
           ]
         },
