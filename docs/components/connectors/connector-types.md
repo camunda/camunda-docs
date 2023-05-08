@@ -38,7 +38,7 @@ Currently, only webhooks are supported.
 
 Protocol Connectors can serve as either inbound or outbound Connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
 
-Protocol Connectors can be customized to meet the needs of specific use cases using [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), with no additional coding or deployment required. Examples of protocol Connectors include HTTP REST, SOAP, GraphQL, as well as message queue connectors.
+Protocol Connectors can be customized to meet the needs of specific use cases using [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), with no additional coding or deployment required. Examples of protocol Connectors include HTTP REST, GraphQL, as well as message queue connectors.
 
 ## Next steps
 

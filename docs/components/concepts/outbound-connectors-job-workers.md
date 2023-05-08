@@ -44,7 +44,7 @@ There is no unified way of using secrets in a job worker implementation either, 
 Plus, there is no unified modeling experience for job workers. There can be an element template for the worker, but that template might look completely different for every job worker.
 
 In contrast, Connectors bring all the above out of the box. The environment brings along secret management baked-in, being flexible in how you provide those secrets.
-Element templates, called Connector templates, are a vital part of a Connector. There are standardized best practices for developing those.
+Element templates, called [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md), are a vital part of a Connector. There are standardized best practices for developing those.
 Having used one Connector template will make it easy for you to use the next one just the same.
 
 ## Which one should you choose?
