@@ -93,4 +93,4 @@ The **GitLab Connector** currently supports the following operations.
 ## Handle Connector response
 
 The **GitLab Connector** is a protocol connector, meaning it is built on top of the **HTTP REST Connector**, therefore
-handling response is still applicable [as described](/components/connectors/out-of-the-box-connectors/outbound/rest.md#respons).
+handling response is still applicable [as described](/components/connectors/out-of-the-box-connectors/protocol/rest.md#response).

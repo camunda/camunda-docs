@@ -246,6 +246,12 @@ module.exports = {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
             {
+              "Protocol Connectors": [
+                "components/connectors/out-of-the-box-connectors/protocol/rest",
+                "components/connectors/out-of-the-box-connectors/protocol/graphql",
+              ],
+            },
+            {
               "Inbound Connectors": [
                 "components/connectors/out-of-the-box-connectors/inbound/github-webhook",
                 "components/connectors/out-of-the-box-connectors/inbound/http-webhook",
@@ -265,13 +271,11 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/outbound/gitlab",
                 "components/connectors/out-of-the-box-connectors/outbound/googledrive",
                 "components/connectors/out-of-the-box-connectors/outbound/google-maps-platform",
-                "components/connectors/out-of-the-box-connectors/outbound/graphql",
                 "components/connectors/out-of-the-box-connectors/outbound/kafka",
                 "components/connectors/out-of-the-box-connectors/outbound/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/outbound/openai",
                 "components/connectors/out-of-the-box-connectors/outbound/power-automate",
                 "components/connectors/out-of-the-box-connectors/outbound/rabbitmq",
-                "components/connectors/out-of-the-box-connectors/outbound/rest",
                 "components/connectors/out-of-the-box-connectors/outbound/sendgrid",
                 "components/connectors/out-of-the-box-connectors/outbound/slack",
                 "components/connectors/out-of-the-box-connectors/outbound/twilio",
@@ -280,8 +284,13 @@ module.exports = {
             },
           ],
         },
-        "components/connectors/connector-templates",
-        "components/connectors/connector-sdk",
+        "components/connectors/configurable-templates",
+        {
+          "Building custom Connectors": [
+            "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/connector-templates",
+          ],
+        },
       ],
       Zeebe: [
         "components/zeebe/zeebe-overview",

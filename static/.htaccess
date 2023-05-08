@@ -9,8 +9,6 @@ Options -Indexes -MultiViews
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
 # connectors restructure /next/
-RewriteRule ^docs/next/components/connectors/custom-built-connectors/connector-templates/(.*)$ /docs/next/components/connectors/connector-templates/$1 [R=301,L]
-RewriteRule ^docs/next/components/connectors/custom-built-connectors/connector-sdk/(.*)$ /docs/next/components/connectors/connector-sdk//$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/inbound/github-webhook/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/inbound/http-webhook/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/asana/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/asana/$1 [R=301,L]
@@ -24,18 +22,19 @@ RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/github/(.
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/gitlab/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/gitlab/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/google-maps-platform/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/google-maps-platform/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/googledrive/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/googledrive/$1 [R=301,L]
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/graphql/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/kafka/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/kafka/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/microsoft-teams/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/microsoft-teams/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/openai/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/openai/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/operate/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/operate/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/power-automate/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/power-automate/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rabbitmq/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/rabbitmq/$1 [R=301,L]
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/rest/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/sendgrid/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/sendgrid/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/slack/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/slack/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/twilio/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/twilio/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/uipath/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/outbound/uipath/$1 [R=301,L]
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/protocol/rest/$1 [R=301,L]
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/protocol/graphql/$1 [R=301,L]
+
 
 # identity restructure 8.2
 RewriteRule ^docs/self-managed/identity/user-guide/configure-logging/(.*)$ /docs/self-managed/identity/user-guide/configuration/configure-logging/$1 [R=301,L]

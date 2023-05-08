@@ -7,7 +7,7 @@ description: "Connectors come in type and subtypes that describe their functiona
 Connectors are categorized by the direction data flows into or out of Camunda Platform 8.
 
 :::note
-Looking for prebuilt, [Out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)?
+Looking for pre-built, [Out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)?
 :::
 
 ## Outbound Connectors

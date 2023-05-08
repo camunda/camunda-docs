@@ -128,7 +128,7 @@ This example assumes there is a process variable `baseUrl` and a configured secr
 The engine will resolve the `baseUrl` variable and pass on the secrets placeholder to the Connector. Assuming the `baseUrl` variable resolves to `my.company.domain`,
 the Connector receives the input `"https://my.company.domain/{{secrets.TENANT_ID}}/accounting"`. The Connector then replaces the secrets placeholder upon execution.
 
-For further details on how secrets are implemented in Connectors, consult our [Connector SDK documentation](/components/connectors/connector-sdk.md#secrets).
+For further details on how secrets are implemented in Connectors, consult our [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#secrets).
 
 :::note Warning
 `secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in Connector fields.
@@ -225,7 +225,7 @@ Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to convenientl
 Within the FEEL expression, you access the following temporary variables:
 
 - The result of the Connector in `response`.
-- Any result variables created by the **Result Variable** and **Result Expression** properties (see the [REST Connector](/components/connectors/out-of-the-box-connectors/outbound/rest.md#response), for example).
+- Any result variables created by the **Result Variable** and **Result Expression** properties (see the [REST Connector](/components/connectors/out-of-the-box-connectors/protocol/rest.md#response), for example).
 - The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code is only available if the Connector's runtime behavior provided a code in the exception it threw.
 
 Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on technical exceptions thrown by a Connector as well as regular results returned by the external system you integrated.
@@ -249,7 +249,7 @@ bpmnError("123", "error received")
 
 #### HTTP errors to BPMN errors
 
-Using the [REST Connector](/components/connectors/out-of-the-box-connectors/outbound/rest.md), you can handle HTTP errors directly in your business process model:
+Using the [REST Connector](/components/connectors/out-of-the-box-connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model:
 
 ```feel
 if error.code = "404" then
@@ -265,7 +265,7 @@ You can extend that list to all HTTP errors you can handle as business use cases
 
 #### Response value to BPMN error
 
-Using the [REST Connector](/components/connectors/out-of-the-box-connectors/outbound/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value:
+Using the [REST Connector](/components/connectors/out-of-the-box-connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value:
 
 ```feel
 if response.body.main.humidity < 0 then

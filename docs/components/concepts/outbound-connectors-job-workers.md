@@ -6,15 +6,15 @@ description: Integrating with external systems can be done with a Connector or a
 
 Integrating with external systems can be done with a Connector or a [job worker](job-workers.md).
 
-You define the domain-specific UI for modeling a Connector through a [Connector template](/components/connectors/connector-templates.md). This Connector template is, in fact, an [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md). Therefore, you can also build a Connector-like system using element templates and job workers.
+You define the domain-specific UI for modeling a Connector through a [Connector template](/components/connectors/custom-built-connectors/connector-templates.md). This Connector template is, in fact, an [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md). Therefore, you can also build a Connector-like system using element templates and job workers.
 
 If they both share the same core functionality, how do they differ, and when should you choose what? Connectors and job workers serve different purposes when it comes to aspects like delivery, reusability, focus, and context.
 
 ## Delivery
 
-A Connector is reusable code, written as an `OutboundConnectorFunction` using the [Connector SDK](/components/connectors/connector-sdk.md#runtime-logic).
+A Connector is reusable code, written as an `OutboundConnectorFunction` using the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-logic).
 It is not a standalone application, you cannot start it and have it work on Camunda Platform 8 jobs.
-Instead, a Connector is delivered as a library and can be used in combination with other Connectors in a [Connector runtime environment](/components/connectors/connector-sdk.md#runtime-environments).
+Instead, a Connector is delivered as a library and can be used in combination with other Connectors in a [Connector runtime environment](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
 
 In contrast, a job worker is usually part of a Zeebe Client application that can be directly executed to work on jobs.
 

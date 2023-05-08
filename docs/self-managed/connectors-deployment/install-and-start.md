@@ -6,13 +6,13 @@ description: "Let's get started with Connectors by installing and running them."
 
 The concept of a [Connector](/components/connectors/introduction.md) consists of two parts:
 
-- The business logic is implemented by a [Connector function](/components/connectors/connector-sdk.md#runtime-logic)
-  and executed by a [Connector runtime environment](/components/connectors/connector-sdk.md#runtime-environments).
-- The user interface during modeling is provided using a [Connector template](/components/connectors/connector-templates.md).
+- The business logic is implemented by a [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-logic)
+  and executed by a [Connector runtime environment](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
+- The user interface during modeling is provided using a [Connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
 In a [Self-Managed](/self-managed/about-self-managed.md) environment, you manage the execution environment for Connectors yourself.
-Using our [Connector runtime environments](/components/connectors/connector-sdk.md#runtime-environments), you can consume any set of Connectors,
-including the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and custom Connectors developed using the **[Connector SDK](/components/connectors/connector-sdk.md)** and [Connector templates](/components/connectors/connector-templates.md).
+Using our [Connector runtime environments](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments), you can consume any set of Connectors,
+including the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and custom Connectors developed using the **[Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md)** and [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
 
 You can find a list of Connectors developed by Camunda, Partners, and the community in our
 [Camunda Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors#readme).
@@ -35,7 +35,7 @@ If you don't use Operate with your cluster, you can still use Outbound Connector
 
 ## Connector templates
 
-For the modeling interface, you need to [provide Connector templates](/components/connectors/connector-templates.md#providing-and-using-connector-templates).
+For the modeling interface, you need to [provide Connector templates](/components/connectors/custom-built-connectors/connector-templates.md#providing-and-using-connector-templates).
 
 For the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda,
 the Connectors Bundle project provides a set of all Connector templates related to one [release version](https://github.com/camunda/connectors-bundle/releases).
@@ -70,6 +70,6 @@ at `connectors/{connector name}/element-templates`:
 | Slack Connector                | [Camunda Platform Self-Managed Free Edition] |
 | UiPath Connector               | [Camunda Platform Self-Managed Free Edition] |
 
-You can use the Connector templates as provided or modify them to your needs as described in our [Connector templates guide](/components/connectors/connector-templates.md).
+You can use the Connector templates as provided or modify them to your needs as described in our [Connector templates guide](/components/connectors/custom-built-connectors/connector-templates.md).
 
 Check out our [Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors/tree/main) to find more Connectors.

@@ -8,7 +8,7 @@ export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg x
 
 <span class="badge badge--cloud">Camunda Platform 8 only</span>
 
-You can create and manage [Connector templates](/components/connectors/connector-templates.md) just as any other asset in a Web Modeler project.
+You can create and manage [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
 
 ## Create Connector templates
 

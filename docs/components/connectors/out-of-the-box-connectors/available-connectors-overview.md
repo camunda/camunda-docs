@@ -15,6 +15,7 @@ import TabItem from "@theme/TabItem";
 [
 {label: 'Outbound', value: 'outbound', },
 {label: 'Inbound', value: 'inbound', },
+{label: 'Protocol', value: 'protocol', },
 ]
 }>
 
@@ -33,14 +34,12 @@ import TabItem from "@theme/TabItem";
 - [GitHub Connector](/components/connectors/out-of-the-box-connectors/outbound/github.md) - Manage [GitHub](https://github.com/) issues and releases from your BPMN process.
 - [GitLab Connector](/components/connectors/out-of-the-box-connectors/outbound/gitlab.md) - Manage [GitLab](https://about.gitlab.com/) issues and releases from your BPMN process.
 - [Google Drive Connector](/components/connectors/out-of-the-box-connectors/outbound/googledrive.md) - Create folders or files from a [Google Drive](https://www.google.com/drive/) template from your BPMN process.
-- [Google Maps Platform Connector](/components/connectors/out-of-the-box-connectors/outbound/google-maps-platform.md) - Validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process.
-- [GraphQL Connector](/components/connectors/out-of-the-box-connectors/outbound/graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
+- [Google Maps Platform Connector](/components/connectors/out-of-the-box-connectors/outbound/google-maps-platform.md) - Validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process
 - [Kafka Producer Connector](/components/connectors/out-of-the-box-connectors/outbound/kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [Microsoft Teams Connector](/components/connectors/out-of-the-box-connectors/outbound/microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
 - [OpenAI Connector](/components/connectors/out-of-the-box-connectors/outbound/openai.md) - Interact with [ChatGPT](https://chat.openai.com/) and [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation/overview).
 - [Power Automate Connector](/components/connectors/out-of-the-box-connectors/outbound/power-automate.md) - Orchestrate your [Power Automate](https://powerautomate.microsoft.com) Flows with Camunda.
 - [RabbitMQ Connector](/components/connectors/out-of-the-box-connectors/outbound/rabbitmq.md) - Send messages to [RabbitMQ](https://www.rabbitmq.com/) from your BPMN process.
-- [REST Connector](/components/connectors/out-of-the-box-connectors/outbound/rest.md) - Make a request to a REST API and use the response in the next steps of your process.
 - [SendGrid Connector](/components/connectors/out-of-the-box-connectors/outbound/sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack Connector](/components/connectors/out-of-the-box-connectors/outbound/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 - [UiPath Connector](/components/connectors/out-of-the-box-connectors/outbound/uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
@@ -55,8 +54,18 @@ import TabItem from "@theme/TabItem";
 - [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/inbound/github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 
 </TabItem>
+
+<TabItem value='protocol'>
+
+## Protcol Connectors
+
+- [GraphQL Connector](/components/connectors/out-of-the-box-connectors/protocol/graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
+- [REST Connector](/components/connectors/out-of-the-box-connectors/protocol/rest.md) - Make a request to a REST API and use the response in the next steps of your process.
+
+</TabItem>
+
 </Tabs>
 
 In addition to this section on Connectors, we recommend reviewing [Connector secrets](/components/console/manage-clusters/manage-secrets.md).
 
-If you want to build **custom Connectors**, head over to our [Connector SDK guide](/components/connectors/connector-sdk.md).
+If you want to build **custom Connectors**, head over to our [Connector SDK guide](/components/connectors/custom-built-connectors/connector-sdk.md).

@@ -21,12 +21,12 @@ Connectors offer an intuitive, scalable, and customizable multilayer coding expe
 
 A Connector consists of two parts:
 
-1. The programming code in Java to connect to the external system (for example, see the [Connector function](./connector-sdk.md#runtime-logic) for outbound Connectors.)
-2. The user interface to be used during modeling, which is provided using [Connector templates](./connector-templates.md).
+1. The programming code in Java to connect to the external system (for example, see the [Connector function](./custom-built-connectors/connector-sdk.md#runtime-logic) for outbound Connectors.)
+2. The user interface to be used during modeling, which is provided using [Connector templates](./custom-built-connectors/connector-templates.md).
 
 Users interacting with Connectors may only need to understand the configuration options exposed by the Connector template in the properties panel.
 
-Connectors are available in three categories - [out-of-the-box](./out-of-the-box-connectors/available-connectors-overview.md) , [template-only](./connector-templates.md), and custom via the [Connector SDK](./connector-sdk.md).
+Connectors are available in three categories - [out-of-the-box](./out-of-the-box-connectors/available-connectors-overview.md) , [template-only](./custom-built-connectors/connector-templates.md), and custom via the [Connector SDK](./custom-built-connectors/connector-sdk.md).
 
 ## Runtime
 
@@ -34,13 +34,13 @@ Connectors are operated as part of the Connector runtime, which is provided for 
 
 When using Camunda Platform 8 SaaS, the Connector runtime is operated by Camunda and offered in the scope of the product. In this environment, you can use the [out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda.
 
-Looking to create your own [runtime logic](./connector-sdk.md#runtime-logic) or [runtime environments](./connector-sdk.md#runtime-environments)? Check out the [Connector SDK](./connector-sdk.md).
+Looking to create your own [runtime logic](./custom-built-connectors/connector-sdk.md#runtime-logic) or [runtime environments](./custom-built-connectors/connector-sdk.md#runtime-environments)? Check out the [Connector SDK](./custom-built-connectors/connector-sdk.md).
 
 ## Next steps
 
 - [Learn about types of Connectors](./connector-types.md)
 - [Use Connectors in your BPMN process](./use-connectors.md)
 - [Learn about available out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md)
-- [Develop a custom Connector template](./connector-templates.md)
-- [Develop a custom Connector runtime](./connector-sdk.md)
+- [Develop a custom Connector template](./custom-built-connectors/connector-templates.md)
+- [Develop a custom Connector runtime](./custom-built-connectors/connector-sdk.md)
 - [Install Connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md)

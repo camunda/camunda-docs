@@ -5,7 +5,7 @@ title: Introduction Connector SDK updates
 
 These documents guide you through the process of updating your Camunda Platform 8
 Connector runtimes to a newer version of the
-[Connector SDK](/components/connectors/connector-sdk.md).
+[Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
 
 There is a dedicated update guide for each version:
 

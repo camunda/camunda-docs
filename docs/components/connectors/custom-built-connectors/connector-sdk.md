@@ -102,7 +102,7 @@ my-connector
 ```
 
 For the modeling building blocks, the Connector provides
-[Connector templates](/components/connectors/connector-templates.md) with **(1)**.
+[Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) with **(1)**.
 
 You provide the runtime logic as Java source code under a directory like **(2)**.
 Typically, a Connector runtime logic consists of the following:
@@ -122,7 +122,7 @@ In this example, we include a Maven project's `POM` file. Other build tools like
 ### Connector template
 
 To create reusable building blocks for modeling, you are required to provide a
-domain-specific [Connector template](/components/connectors/connector-templates.md).
+domain-specific [Connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
 A Connector template defines the binding to your Connector runtime behavior via the following object:
 
@@ -211,7 +211,7 @@ recommended objects, **Result Variable** and **Result Expression**:
 
 These objects create custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up those two custom headers and translate them into process variables accordingly.
-You can see an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/out-of-the-box-connectors/outbound/rest.md#response).
+You can see an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/out-of-the-box-connectors/protocol/rest.md#response).
 
 All Connectors are recommended to offer exception handling to allow users to configure how to map results and technical errors into
 BPMN errors. To provide this, Connector templates can reuse the recommended object **Result Expression**:
