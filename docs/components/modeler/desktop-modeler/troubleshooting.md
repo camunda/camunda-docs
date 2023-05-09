@@ -51,7 +51,7 @@ This can have multiple reasons:
 
 ### Secure connection to Zeebe fails
 
-When connecting securely (i.e. to Camunda 8 self-managed via `https` endpoint URL) the Desktop Modeler tries to establish a TLS connection. In the process it strictly validates server certificates presented. Failure to connect may have two reasons:
+When connecting securely (i.e. to Camunda 8 self-managed via `https` endpoint URL) the Desktop Modeler tries to establish a TLS connection. In the process it strictly validates server certificates presented. Failure to connect may have the following reasons:
 
 - Remote endpoint is not configured for secure connections.
 - Remote endpoint presents a certificate that is not trusted by the app :arrow_right: [Configure modeler to use a custom SSL certificate](#how-can-i-provide-a-custom-ssl-certificate).
