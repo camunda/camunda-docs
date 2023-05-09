@@ -8,8 +8,8 @@ In this guide, we'll demonstrate how to connect the Identity component to your e
 
 ### Prerequisites
 
-- Access to your [Keycloak Admin Console](https://www.keycloak.org/docs/16.1/server_admin/#using-the-admin-console)
-- A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/16.1/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak
+- Access to your [Keycloak Admin Console](https://www.keycloak.org/docs/19.0.3/server_admin/#using-the-admin-console)
+- A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/19.0.3/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak
 
 ### Steps
 
