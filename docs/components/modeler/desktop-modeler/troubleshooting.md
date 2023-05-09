@@ -47,7 +47,7 @@ This can have multiple reasons:
 
 ## Debug Zeebe connection issues
 
-> I resolved [general connection issues](#resolve-general-zeebe-connection-issue) and can connect to Zeebe via [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/). However connecting throught the Desktop Modeler fails.
+> I resolved [general connection issues](#resolve-general-zeebe-connection-issue) and can connect to Zeebe via [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/). However connecting through the Desktop Modeler fails.
 
 ### Secure connection to Zeebe fails
 
