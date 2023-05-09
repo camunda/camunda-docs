@@ -281,7 +281,6 @@ module.exports = {
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-runtime",
           ],
         },
       ],

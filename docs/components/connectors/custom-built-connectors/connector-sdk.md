@@ -989,7 +989,11 @@ and how to invoke them. This component is the runtime environment specific to Ca
 Regarding Self-Managed environments, you are responsible for providing the runtime environment that
 can invoke the Connectors.
 
-There are several runtime options provided by Camunda.
+There are several runtime options provided by Camunda:
+
+- [Spring Boot Starter runtime](#spring-boot-starter-runtime)
+- [Docker runtime image](#docker-runtime-image)
+- [Custom runtime environment](#custom-runtime-environment)
 
 ### Spring Boot Starter runtime
 
