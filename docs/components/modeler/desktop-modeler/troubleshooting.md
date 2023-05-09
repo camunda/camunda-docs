@@ -57,7 +57,23 @@ When connecting securely (i.e. to Camunda 8 self-managed via `https` endpoint UR
 - Remote endpoint presents a certificate that is not trusted by the app :arrow_right: [Configure modeler to use a custom SSL certificate](#how-can-i-provide-a-custom-ssl-certificate).
 - Custom SSL certificate is [configured with modeler](#how-can-i-provide-a-custom-ssl-certificate) and connection still fails to establish :arrow_right: If you use intermediate certificates, configure the remote endpoint to [serve both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to the modeler.
 
-You can debug the remote secured connections using `openssl`:
+### Insecure connection to Zeebe fails
+
+Ensure you [properly configured any intermediary](https://docs.camunda.io/docs/next/self-managed/platform-deployment/troubleshooting) (proxy, ingress, VPN).
+
+## How can I provide a custom SSL certificate?
+
+> I'm using a custom SSL certificate / certificate authority and want it to be recognized by the Desktop Modeler.
+
+The modeler [strictly validates](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate certificate trust chain. If you use a custom SSL server certificate then you must make the signing CA certificate known to the modeler, not the server certificate itself.
+
+The modeler reads trusted certificates from your operating systems trust store. Installing custom CA certificates there is recommended for most users.
+
+Alternatively you may provide custom trusted certificates via the [`--zeebe-ssl-certificate` flag](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
+
+## How can I get details about a secure remote connection?
+
+You can use `openssl` to inspect a secure remote connection:
 
 ```sh
 > openssl s_client -connect google.com:443
@@ -78,22 +94,10 @@ Certificate chain
 ...
 ```
 
+## How can I debug log GRPC / Zeebe communication?
+
 You can also start the modeler with GRPC logging turned on to get detailed [logging output](#how-to-obtain-the-modeler-logs) on communication to Zeebe:
 
 ```sh
 GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
 ```
-
-### Insecure connection to Zeebe fails
-
-Ensure you [properly configured any intermediary](https://docs.camunda.io/docs/next/self-managed/platform-deployment/troubleshooting) (proxy, ingress, VPN).
-
-## How can I provide a custom SSL certificate?
-
-> I'm using a custom SSL certificate / certificate authority and want it to be recognized by the Desktop Modeler.
-
-The modeler [strictly validates](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate certificate trust chain. If you use a custom SSL server certificate then you must make the signing CA certificate known to the modeler, not the server certificate itself.
-
-The modeler reads trusted certificates from your operating systems trust store. Installing custom CA certificates there is recommended for most users.
-
-Alternatively you may provide custom trusted certificates via the [`--zeebe-ssl-certificate` flag](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
