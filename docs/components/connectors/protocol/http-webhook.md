@@ -24,7 +24,7 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 
 ## Make your HTTP Webhook Connector executable
 
-![HTTP Webhook prefilled](../../img/use-inbound-connector-template-filled.png)
+![HTTP Webhook prefilled](../img/use-inbound-connector-template-filled.png)
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about HTTP Webhook URLs [below](#activate-the-http-webhook-connector-by-deploying-your-diagram).
 2. Configure [HMAC authentication](https://en.wikipedia.org/wiki/HMAC) if required.
@@ -57,7 +57,7 @@ If you make changes to your HTTP Webhook Connector configuration, you need to re
 When you click on the event with HTTP Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
 This tab displays the URL of the HTTP Webhook Connector for every cluster where you have deployed your BPMN diagram.
 
-![HTTP Webhook tab](../../img/use-inbound-connector-webhooks-tab.png)
+![HTTP Webhook tab](../img/use-inbound-connector-webhooks-tab.png)
 
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
@@ -67,7 +67,7 @@ In that case, HTTP Webhook Connector deployments and URLs will not be displayed 
 
 ### Example
 
-![GitHub webhook](../../img/use-inbound-connector-template-filled-gh.png)
+![GitHub webhook](../img/use-inbound-connector-template-filled-gh.png)
 
 Give a use-case when you need to configure a GitHub webhook with an **HTTP Webhook Connector** in such a way that: (1) your BPMN process starts on every opened PR, and (2) the PR URL is exposed as a process variable.
 Let's say you choose `mySecretKey` as a shared secret passphrase. GitHub [declares](https://docs.github.com/en/developers/webhooks-and-events/webhooks/securing-your-webhooks) that they use `X-Hub-Signature-256` header for `SHA-256` HMAC.
@@ -83,5 +83,5 @@ Therefore, you would need to set the following:
 8. Click `Deploy`.
 
 :::note
-For GitHub, there is a simplified [GitHub Webhook Connector](github-webhook.md).
+For GitHub, there is a simplified [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md).
 :::

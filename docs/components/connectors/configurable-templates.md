@@ -38,4 +38,4 @@ Update an existing template via the **Replace via upload** action in the breadcr
 
 Using the editor, modify the template to meet your service integration needs. This template includes multiple versions of authentication and methods which may not be applicable for your REST API.
 
-See [Manage Connector templates](/components/modeler/web-modeler/advanced-modeling/manage-connector-templates.md) more information on creating and managing Connector Templates.
+See [Manage Connector templates](/components/connectors/manage-connector-templates.md) more information on creating and managing Connector Templates.

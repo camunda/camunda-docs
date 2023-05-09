@@ -39,7 +39,7 @@ Choose between **Camunda Platform 8 SaaS** and **Camunda Platform 8 Self-Managed
 
 If you are using a SaaS cluster, you will be required to provide **region** and **clusterId**. You will see these values when you [create an API client](/guides/setup-client-connection-credentials.md) for your cluster.
 
-![connectors-operate-cluster-saas](../../img/connectors-operate-cluster-saas.png)
+![connectors-operate-cluster-saas](../img/connectors-operate-cluster-saas.png)
 
 ### Self-Managed clusters
 
@@ -53,7 +53,7 @@ If you are testing this Connector on your local machine with the Camunda Platfor
 - OAuth Token endpoint: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
 - Operate URL: `http://localhost:8081`
 
-![connectors-operate-cluster-sm](../../img/connectors-operate-cluster-sm.png)
+![connectors-operate-cluster-sm](../img/connectors-operate-cluster-sm.png)
 
 ## Configure authentication
 
@@ -63,7 +63,7 @@ You will see these values when you [create an API client](/guides/setup-client-c
 For Self-Managed clusters, you can additionally specify the Operate **audience**.
 If you are using the default Identity configuration, leave the default `operate-api` value.
 
-![connectors-operate-auth](../../img/connectors-operate-auth.png)
+![connectors-operate-auth](../img/connectors-operate-auth.png)
 
 ## Choose endpoint and operation
 

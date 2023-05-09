@@ -18,7 +18,7 @@ To use the **Kafka Producer Connector** in your process, either change the type 
 
 ## Make your Kafka Producer Connector for publishing messages executable
 
-![Kafka Filled](../../img/connectors-kafka-filled.png)
+![Kafka Filled](../img/connectors-kafka-filled.png)
 
 To make your **Kafka Producer Connector** for publishing messages executable, take the following steps:
 

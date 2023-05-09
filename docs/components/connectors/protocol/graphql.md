@@ -19,7 +19,7 @@ To use a **GraphQL Connector** in your process, either change the type of existi
 
 To make the **GraphQL Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
 
-![graphql connector red properties](../../img/connectors-graphql-red-properties.png)
+![graphql connector red properties](../img/connectors-graphql-red-properties.png)
 
 :::note
 All the mandatory and non-mandatory fields are covered in the upcoming sections. Depending on the authentication selection you make, more fields might be required; this is covered in the next section.
@@ -50,7 +50,7 @@ Select the **GraphQL Connector** and fill out the following properties under the
 2. Set **Username** (i.e. `secrets.GRAPHQL_USERNAME`).
 3. Set **Password** to the secret you created (i.e. `secrets.GRAPHQL_PASSWORD`).
 
-![graphql Connector basic](../../img/connectors-graphql-basic.png)
+![graphql Connector basic](../img/connectors-graphql-basic.png)
 
 ### Bearer Token
 
@@ -68,7 +68,7 @@ Select the **GraphQL Connector** and fill out the following properties under the
 1. Click **Bearer Token** in the **Authentication** section.
 2. Set **Bearer** to the secret you created (i.e. `secrets.GRAPHQL_BEARER_TOKEN`).
 
-![graphql Connector bearer token](../../img/connectors-graphql-bearer-token.png)
+![graphql Connector bearer token](../img/connectors-graphql-bearer-token.png)
 
 ### OAuth token
 
@@ -91,7 +91,7 @@ Select the **GraphQL Connector** and fill out the following properties under the
 6. Set **Audience** to the secret you created (i.e. `secrets.AUDIENCE`). This is an optional field depending on the OAuth provider you're using.
 7. Choose **Client Authentication** from the dropdown menu (i.e. `Send client credentials in body`).
 
-![graphql Connector oauth token](../../img/connectors-graphql-oauth-token.png)
+![graphql Connector oauth token](../img/connectors-graphql-oauth-token.png)
 
 Find more information about the OAuth client credentials flow in the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
@@ -99,7 +99,7 @@ Find more information about the OAuth client credentials flow in the [RFC refere
 
 Under the **HTTP Endpoint** section, fill in the **URL** with your desired endpoint and select the desired **Method**.
 
-![graphql Connector method and url](../../img/connectors-graphql-http-method-url.png)
+![graphql Connector method and url](../img/connectors-graphql-http-method-url.png)
 
 ## GraphQL query
 
@@ -109,7 +109,7 @@ Insert your query or mutation you wish to execute here. This must be a syntactic
 
 You can use [arguments](https://graphql.org/learn/queries/#arguments), [aliases](https://graphql.org/learn/queries/#aliases), [directives](https://graphql.org/learn/queries/#directives), and [fragments](https://graphql.org/learn/queries/#fragments) as well.
 
-![graphql Connector query](../../img/connectors-graphql-query.png)
+![graphql Connector query](../img/connectors-graphql-query.png)
 
 :::note
 Secrets are currently not supported in the **Query/Mutation** of a GraphQL Connector.
@@ -143,7 +143,7 @@ query Query {
 
 You can specify [variables](https://graphql.org/learn/queries/#variables) to your queries/mutations.
 
-The **Variables** field can be configured using the ![feel-icon](../../img/feel-icon.png) [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
+The **Variables** field can be configured using the ![feel-icon](../img/feel-icon.png) [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
 
 ```text
 = {
@@ -152,7 +152,7 @@ The **Variables** field can be configured using the ![feel-icon](../../img/feel-
 }
 ```
 
-![graphql Connector variables](../../img/connectors-graphql-variables.png)
+![graphql Connector variables](../img/connectors-graphql-variables.png)
 
 :::note
 Secrets are not like regular variables and must be wrapped in double quotes (`"`) when used in an expression.
@@ -186,7 +186,7 @@ Variables:
 To set connection timeout in your request, set it in seconds in the **Connection Timeout** section.
 This is not a required field, with a default value of 20 seconds. To set an infinite timeout, set this value to `0`.
 
-![graphql connector http request body](../../img/connectors-graphql-timeout.png)
+![graphql connector http request body](../img/connectors-graphql-timeout.png)
 
 ## Response mapping
 
@@ -198,7 +198,7 @@ The following fields are available in the `response` variable:
 - **body**: Response body of your request
 - **headers**: Response headers
 
-Additionally, you can choose to unpack the content of your `response` into multiple process variables using the ![feel-icon](../../img/feel-icon.png) **Result Expression**, which is a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md).
+Additionally, you can choose to unpack the content of your `response` into multiple process variables using the ![feel-icon](../img/feel-icon.png) **Result Expression**, which is a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md).
 
 ```text
 = {
@@ -206,6 +206,6 @@ Additionally, you can choose to unpack the content of your `response` into multi
 }
 ```
 
-![graphql connector http response mapping](../../img/connectors-graphql-response-mapping.png)
+![graphql connector http response mapping](../img/connectors-graphql-response-mapping.png)
 
 The next steps in your process will have access to the `graphqlQueryResponse` variable that contain the full response and the mapped variable from the result expression: `person`.

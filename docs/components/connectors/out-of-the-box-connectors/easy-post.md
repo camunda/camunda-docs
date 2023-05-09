@@ -104,4 +104,4 @@ FEEL expression:
 ## Handle Connector response
 
 The **EasyPost Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
-handling response is still applicable [as described](/components/connectors/out-of-the-box-connectors/protocol/rest.md#response).
+handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

@@ -212,7 +212,7 @@ recommended objects, **Result Variable** and **Result Expression**:
 
 These objects create custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up those two custom headers and translate them into process variables accordingly.
-You can see an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/out-of-the-box-connectors/protocol/rest.md#response).
+You can see an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/protocol/rest.md#response).
 
 All Connectors are recommended to offer exception handling to allow users to configure how to map results and technical errors into
 BPMN errors. To provide this, Connector templates can reuse the recommended object **Result Expression**:

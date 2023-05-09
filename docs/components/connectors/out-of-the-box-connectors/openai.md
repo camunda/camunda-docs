@@ -27,7 +27,7 @@ To use the **OpenAI Connector** in your process, either change the type of exist
 To work with the OpenAI Connector, choose the required connection type in the **Authentication** section and complete the
 mandatory fields highlighted in red in the connector properties panel:
 
-![connectors-openai-red-properties](../../img/connectors-openai-red-properties.png)
+![connectors-openai-red-properties](../img/connectors-openai-red-properties.png)
 
 ## Authentication
 
@@ -85,7 +85,7 @@ This is the query that is used to trigger the model output.
 
 The image below illustrates how you can use **System message**, **Chat history**, and **Prompt** together.
 
-![connectors-openai-prompt-engineering](../../img/connectors-openai-prompt-engineering.png)
+![connectors-openai-prompt-engineering](../img/connectors-openai-prompt-engineering.png)
 
 :::note
 Find more complex examples of prompt engineering and sample real-life use cases of ChatGPT on the OpenAI [examples](https://platform.openai.com/examples) page.

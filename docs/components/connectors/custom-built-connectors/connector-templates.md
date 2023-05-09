@@ -616,7 +616,7 @@ You can develop Connector templates using the [`element template` feature](/comp
 
 ## Providing and using Connector templates
 
-When using [Web Modeler](/components/modeler/web-modeler/launch-cloud-modeler.md), you can create **Connector templates** [directly within the application](/components/modeler/web-modeler/advanced-modeling/manage-connector-templates.md) and share them with your respective organization.
+When using [Web Modeler](/components/modeler/web-modeler/launch-cloud-modeler.md), you can create **Connector templates** [directly within the application](/components/connectors/manage-connector-templates.md) and share them with your respective organization.
 
 When using [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so the modeler will pick them up.
 

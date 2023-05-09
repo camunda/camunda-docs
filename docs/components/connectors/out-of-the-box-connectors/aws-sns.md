@@ -21,7 +21,7 @@ To use the **Amazon SNS Connector** in your process, either change the type of e
 
 ## Make your Amazon SNS Connector for sending messages executable
 
-![AWS SNS Filled](../../img/connectors-aws-sns-filled.png)
+![AWS SNS Filled](../img/connectors-aws-sns-filled.png)
 
 To make your Amazon SNS Connector for sending messages executable, take the following steps:
 

@@ -80,4 +80,4 @@ In the **Authentication** section, provide a **Personal access token**. [Read mo
 ## Handle Connector response
 
 The **Asana Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**. Therefore,
-handling response is still applicable [as described](/components/connectors/out-of-the-box-connectors/protocol/rest.md#response).
+handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

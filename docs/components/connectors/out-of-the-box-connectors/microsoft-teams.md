@@ -30,7 +30,7 @@ using the wrench-shaped **Change type** context menu icon, or create a new Conne
 To work with Microsoft Teams, choose the required connection type in the **Authentication** section and complete the
 mandatory fields highlighted in red in the connector properties panel:
 
-![connectors-microsoft-teams-red-properties](../../img/connectors-microsoft-teams-red-properties.png)
+![connectors-microsoft-teams-red-properties](../img/connectors-microsoft-teams-red-properties.png)
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the
@@ -54,7 +54,7 @@ For a **Bearer Token** type authentication, take the following steps:
 1. Click the **Bearer Token** connection type in the **Authentication** section.
 2. Set **Bearer Token** to `Bearer Token`.
 
-![bearer token](../../img/connectors-microsoft-teams-bearer-token.png)
+![bearer token](../img/connectors-microsoft-teams-bearer-token.png)
 
 Visit [Microsoft Teams Access Token](https://learn.microsoft.com/azure/active-directory/develop/access-tokens) for more information.
 
@@ -65,7 +65,7 @@ Visit [Microsoft Teams Access Token](https://learn.microsoft.com/azure/active-di
   2.  Log in with your Microsoft account.
   3.  Click the **Access Token** tab and copy the bearer token.
 
-![connectors-microsoft-teams-copy-token](../../img/connectors-microsoft-teams-copy-token.png)
+![connectors-microsoft-teams-copy-token](../img/connectors-microsoft-teams-copy-token.png)
 
 - Register your app with the Microsoft identity platform and send a POST request to the `/token` identity platform endpoint to acquire an access token.
   - [How to register your app](https://learn.microsoft.com/en-us/graph/auth-register-app-v2)
@@ -82,7 +82,7 @@ For a **Refresh Token** type authentication, take the following steps:
 4. Set the **Client ID** field: the application ID that the [Azure app registration portal](https://go.microsoft.com/fwlink/?linkid=2083908) assigned to your app.
 5. Set the **Secret ID** field: the client secret that you created in the app registration portal for your app.
 
-![refresh token](../../img/connectors-microsoft-teams-refresh-token.png)
+![refresh token](../img/connectors-microsoft-teams-refresh-token.png)
 
 ### Client credentials type authentication
 
@@ -93,7 +93,7 @@ For a **Client credentials** type authentication, take the following steps:
 3. Set the **Client ID** field: the application ID that the [Azure app registration portal](https://go.microsoft.com/fwlink/?linkid=2083908) assigned to your app.
 4. Set the **Secret ID** field: the client secret that you created in the app registration portal for your app.
 
-![client credentials](../../img/connectors-microsoft-teams-client-credentials.png)
+![client credentials](../img/connectors-microsoft-teams-client-credentials.png)
 
 :::note
 With **Client credentials** type authentication, some methods of the **Microsoft Teams Connector** may not be available. Find more details in the [chat methods table](#chat-methods) and [channel methods table](#channel-methods).
@@ -103,7 +103,7 @@ With **Client credentials** type authentication, some methods of the **Microsoft
 
 In the **Operation** section, choose a conversation type of either **Chat** or **Channel**. Then, choose one of the suggested methods:
 
-![Microsoft Teams Choose Method](../../img/connectors-microsoft-teams-choose-method.gif)
+![Microsoft Teams Choose Method](../img/connectors-microsoft-teams-choose-method.gif)
 
 For example, if you want to send a message in a Microsoft Teams channel, choose the conversation type **Channel** and method **Send message in channel**.
 
@@ -145,7 +145,7 @@ The **members** property must contain a list of members:
 | userPrincipalName |    string    | Yes, if 'userId' is not set            |
 |       roles       | string array | Yes                                    |
 
-![members property](../../img/connectors-microsoft-teams-members.png)
+![members property](../img/connectors-microsoft-teams-members.png)
 
 ```json
 [

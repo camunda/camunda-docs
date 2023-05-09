@@ -18,7 +18,7 @@ To use an **Automation Anywhere Connector** in your process, either change the t
 
 To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel:
 
-![connectors-automation-anywhere-red-properties](../../img/connector-automation-anywhere-red-properties.png)
+![connectors-automation-anywhere-red-properties](../img/connector-automation-anywhere-red-properties.png)
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication and operation selections you choose are covered in the upcoming sections.
@@ -134,7 +134,7 @@ Response example:
 }
 ```
 
-![AA add work item to the queue](../../img/connector-automation-anywhere-add-work-item-to-the-queue.png)
+![AA add work item to the queue](../img/connector-automation-anywhere-add-work-item-to-the-queue.png)
 
 ### Get work item result from queue by ID
 
@@ -195,7 +195,7 @@ Response example:
 }
 ```
 
-![AA get work item result](../../img/connector-automation-anywhere-get-work-item-result.png)
+![AA get work item result](../img/connector-automation-anywhere-get-work-item-result.png)
 
 ## Using Automation Anywhere Connector best practice
 
@@ -206,4 +206,4 @@ To learn more, see an entry _Solution with Timer and Loop_ on the [Camunda BPMN 
 To avoid performance issues, it is recommended to limit the number of loop retries.
 :::
 
-![AA best practice example](../../img/connector-automation-anywhere-example.png)
+![AA best practice example](../img/connector-automation-anywhere-example.png)

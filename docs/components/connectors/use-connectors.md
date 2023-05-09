@@ -83,7 +83,7 @@ To use an Inbound Connector, [install](/components/modeler/desktop-modeler/eleme
 
 ![inbound connector](img/use-inbound-connector-template.png)
 
-When you **deploy** such a BPMN diagram with a webhook, it becomes ready to receive calls on the webhook endpoint (see [Webhook docs](/components/connectors/out-of-the-box-connectors/inbound/http-webhook.md) for details).
+When you **deploy** such a BPMN diagram with a webhook, it becomes ready to receive calls on the webhook endpoint (see [Webhook docs](/components/connectors/protocol/http-webhook.md) for details).
 
 :::note
 You can still start instances of that process manually via the modeler, which is sometimes useful during testing.
@@ -94,7 +94,7 @@ You can still start instances of that process manually via the modeler, which is
 To deploy and use an inbound webhook, you would need to fill in several fields.
 
 1. **Webhook ID** - a context path for your inbound webhook. This is used to build a URL endpoint of your webhook. For example, given the `Webhook ID` value is `myWebhookPath`, the complete webhook URL endpoint will be `http(s)://<base URL>/inbound/myWebhookPath`.
-2. **HMAC Authentication Enabled** - if an external caller uses HMAC as a means of request validation and authentication, you can `enable` this property. In that case, you'll need to specify additional field values. Read more about the [generic HTTP webhook configuration](/components/connectors/out-of-the-box-connectors/inbound/http-webhook.md).
+2. **HMAC Authentication Enabled** - if an external caller uses HMAC as a means of request validation and authentication, you can `enable` this property. In that case, you'll need to specify additional field values. Read more about the [generic HTTP webhook configuration](/components/connectors/protocol/http-webhook.md).
 3. **Activation Condition** - a FEEL expression that assesses trigger conditions. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
 4. **Variable Mapping** - is a FEEL expression that transforms incoming body into BPMN process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`. In that case, the **Variable Mapping** might look as `={myDocumentId: request.body.id}`.
 
@@ -225,7 +225,7 @@ Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to convenientl
 Within the FEEL expression, you access the following temporary variables:
 
 - The result of the Connector in `response`.
-- Any result variables created by the **Result Variable** and **Result Expression** properties (see the [REST Connector](/components/connectors/out-of-the-box-connectors/protocol/rest.md#response), for example).
+- Any result variables created by the **Result Variable** and **Result Expression** properties (see the [REST Connector](/components/connectors/protocol/rest.md#response), for example).
 - The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code is only available if the Connector's runtime behavior provided a code in the exception it threw.
 
 Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on technical exceptions thrown by a Connector as well as regular results returned by the external system you integrated.
@@ -249,7 +249,7 @@ bpmnError("123", "error received")
 
 #### HTTP errors to BPMN errors
 
-Using the [REST Connector](/components/connectors/out-of-the-box-connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model:
+Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model:
 
 ```feel
 if error.code = "404" then
@@ -261,11 +261,11 @@ else
 ```
 
 This will create BPMN errors for HTTP requests that return with a status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) or [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500).
-You can extend that list to all HTTP errors you can handle as business use cases, e.g. by informing a website administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/outbound/slack.md).
+You can extend that list to all HTTP errors you can handle as business use cases, e.g. by informing a website administrator directly via Slack using the [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md).
 
 #### Response value to BPMN error
 
-Using the [REST Connector](/components/connectors/out-of-the-box-connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value:
+Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value:
 
 ```feel
 if response.body.main.humidity < 0 then

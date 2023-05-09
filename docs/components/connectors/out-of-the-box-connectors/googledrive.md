@@ -22,7 +22,7 @@ To make the **Google Drive Connector** executable, fill out the mandatory fields
 
 ### Create a new folder
 
-![Google Drive Connector new folder example](../../img/connectors-googledrive-new-folder-filled.png)
+![Google Drive Connector new folder example](../img/connectors-googledrive-new-folder-filled.png)
 
 To create a new folder, take the following steps:
 
@@ -34,7 +34,7 @@ To create a new folder, take the following steps:
 
 ### Create a new file from a template
 
-![Google Drive Connector new file from template example](../../img/connectors-googledrive-new-file-filled.png)
+![Google Drive Connector new file from template example](../img/connectors-googledrive-new-file-filled.png)
 
 To create a new file from a template, take the following steps:
 
@@ -86,7 +86,7 @@ You also enable _Google Docs API_ and _Google Drive API_ for every client intend
 
 #### Example 1: Obtaining JWT bearer token with a service account
 
-![Bearer Auth](../../img/connectors-googledrive-jwt-bearer.png)
+![Bearer Auth](../img/connectors-googledrive-jwt-bearer.png)
 
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
@@ -112,7 +112,7 @@ print(credentials.token)
 
 #### Example 2: Obtaining bearer and refresh tokens with OAuth client
 
-![Refresh Auth](../../img/connectors-googledrive-jwt-refresh.png)
+![Refresh Auth](../img/connectors-googledrive-jwt-refresh.png)
 
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
 It is in the URL.
 
-![Google Drive Connector get parent folder ID](../../img/connectors-googledrive-get-parent-folder-id.png)
+![Google Drive Connector get parent folder ID](../img/connectors-googledrive-get-parent-folder-id.png)
 
 ### How do I set additional properties or metadata?
 
@@ -165,13 +165,13 @@ Some properties are applicable only for the token owners, like `folderColorRgb` 
 
 Template ID is located in the URL.
 
-![Google Drive Connector get template ID](../../img/connectors-googledrive-get-template-id.png)
+![Google Drive Connector get template ID](../img/connectors-googledrive-get-template-id.png)
 
 ### Can you show me an example of a valid template?
 
 A valid template looks like the following screenshot:
 
-![Google Drive Connector document template example](../../img/connectors-googledrive-template-example.png)
+![Google Drive Connector document template example](../img/connectors-googledrive-template-example.png)
 
 Now, in the **Template variables** field we can apply the following FEEL JSON object which must be compatible with the Google Docs Requests API:
 
@@ -247,7 +247,7 @@ Now, in the **Template variables** field we can apply the following FEEL JSON ob
 
 The result should be as follows:
 
-![Google Drive Connector processed template example](../../img/connectors-googledrive-processed-template-example.png)
+![Google Drive Connector processed template example](../img/connectors-googledrive-processed-template-example.png)
 
 ### What kind of templates are currently supported?
 
