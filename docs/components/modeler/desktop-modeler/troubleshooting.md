@@ -61,14 +61,7 @@ You can debug the remote secured connections using `openssl`:
 
 ```sh
 > openssl s_client -connect google.com:443
-CONNECTED(00000003)
-depth=2 C = US, O = Google Trust Services LLC, CN = GTS Root R1
-verify return:1
-depth=1 C = US, O = Google Trust Services LLC, CN = GTS CA 1C3
-verify return:1
-depth=0 CN = *.google.com
-verify return:1
----
+...
 Certificate chain
  0 s:CN = *.google.com
    i:C = US, O = Google Trust Services LLC, CN = GTS CA 1C3
@@ -83,6 +76,12 @@ Certificate chain
    a:PKEY: rsaEncryption, 4096 (bit); sigalg: RSA-SHA256
    v:NotBefore: Jun 19 00:00:42 2020 GMT; NotAfter: Jan 28 00:00:42 2028 GMT
 ...
+```
+
+You can also start the modeler with GRPC logging turned on to get detailed [logging output](#how-to-obtain-the-modeler-logs) on communication to Zeebe:
+
+```sh
+GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
 ```
 
 ### Insecure connection to Zeebe fails
