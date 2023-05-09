@@ -5,7 +5,7 @@ sidebar_label: GraphQL Connector
 description: Execute a GraphQL query or mutation from your BPMN process.
 ---
 
-The **GraphQL Connector** is a protocol Connector that allows you to execute a GraphQL query or mutation from your BPMN process.
+The **GraphQL Connector** is an outbound protocol Connector that allows you to execute a GraphQL query or mutation from your BPMN process.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ The GraphQL Connector allows you to connect to a GraphQL API endpoint. To use th
 
 ## Create a GraphQL Connector task
 
-To use a **GraphQL Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **GraphQL Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your GraphQL Connector executable
 
@@ -39,7 +39,7 @@ Click **None** in the **Authentication** section. No extra authentication config
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `GRAPHQL_PASSWORD`) so you can reference it later in the Connector.
 
 ### Configure Basic Authentication
@@ -58,7 +58,7 @@ Select the **GraphQL Connector** and fill out the following properties under the
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `GRAPHQL_BEARER_TOKEN`) so you can reference it later in the Connector.
 
 #### Configure the Bearer Token
@@ -76,7 +76,7 @@ Select the **GraphQL Connector** and fill out the following properties under the
 
 We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `OAUTH_TOKEN_ENDPOINT`) so you can reference it later in the Connector.
 
 #### Configure the OAuth Token

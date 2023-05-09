@@ -10,7 +10,7 @@ The **HTTP Webhook Connector** is an inbound Connector that allows you to start 
 :::note
 If you have used the HTTP Webhook Connector with a self-managed Camunda 8 configuration before the
 Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template.
-Please refer to the [update guide](../../../../guides/update-guide/connectors/060-to-070) for more details.
+Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
 :::
 
 ## Create an HTTP Webhook Connector task
@@ -83,5 +83,5 @@ Therefore, you would need to set the following:
 8. Click `Deploy`.
 
 :::note
-For GitHub, there is a simplified [GitHub Webhook Connector](github-webhook.md).
+For GitHub, there is a simplified [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md).
 :::

@@ -15,7 +15,7 @@ The **REST Connector** is an outbound protocol Connector that allows you to make
 
 ## Create a REST Connector task
 
-To use a **REST Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **REST Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your REST Connector executable
 
@@ -42,7 +42,7 @@ No extra authentication configuration is required; you can jump to the [next sec
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_BASIC_SECRET`) so you can reference it later in the Connector.
 
 ### Configure Basic Authentication
@@ -61,7 +61,7 @@ Select the **REST Connector** and fill out the following properties under the **
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_BEARER_TOKEN`) so you can reference it later in the Connector.
 
 #### Configure the Bearer Token
@@ -79,7 +79,7 @@ Select the **REST Connector** and fill out the following properties under the **
 
 We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `OAUTH_TOKEN_ENDPOINT`) so you can reference it later in the Connector.
 
 #### Configure the OAuth Token

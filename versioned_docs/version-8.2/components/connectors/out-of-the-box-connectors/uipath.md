@@ -12,7 +12,7 @@ To use the **UiPath Connector**, you need to have a [UiPath](https://cloud.uipat
 
 ## Create a UiPath Connector task
 
-To use a **UiPath Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **UiPath Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Operation types
 
@@ -30,7 +30,7 @@ You can choose among the available UiPath Connector authentication types accordi
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `BEARER_TOKEN_UIPATH`) so you can reference it later in the Connector.
 
 #### Configure the bearer token
@@ -48,7 +48,7 @@ Select the **UiPath Connector** and fill out the following properties under the 
 
 We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `UIPATH_CLIENT_ID`) so you can reference it later in the Connector.
 
 #### Configure the OAuth Token
