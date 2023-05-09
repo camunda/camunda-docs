@@ -4,9 +4,7 @@ title: Automation Anywhere Connector
 description: Orchestrate your Automation Anywhere queue items from your BPMN process.
 ---
 
-## Prerequisites
-
-The **Automation Anywhere Connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/).
+The **Automation Anywhere Connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/) to add work items to the queue and obtain work item results.
 
 To start using the Connector, you need an instance with a [license](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/dashboards/cloud-administration-licenses.html) we configured via an API service. Refer to the [official documentation page](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/aae-client/bot-creator/using-the-workbench/cloud-install.html) to learn more about installing and configuring the Automation Anywhere API service.
 
@@ -14,7 +12,7 @@ You also need a user account with the `AAE_Queue Admin` role to query and manage
 
 ## Create an Automation Anywhere Connector task
 
-To use an **Automation Anywhere Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use an **Automation Anywhere Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your Automation Anywhere Connector executable
 
@@ -33,7 +31,7 @@ You can choose among the available **Automation Anywhere Connector** authenticat
 :::note
 We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `AUTOMATION_ANYWHERE_PASSWORD`) so you can reference it later in the Connector.
 
 :::
@@ -197,7 +195,7 @@ Response example:
 }
 ```
 
-![AA get work item result](../img/connector-utomation-anywhere-get-work-item-result.png)
+![AA get work item result](../img/connector-automation-anywhere-get-work-item-result.png)
 
 ## Using Automation Anywhere Connector best practice
 

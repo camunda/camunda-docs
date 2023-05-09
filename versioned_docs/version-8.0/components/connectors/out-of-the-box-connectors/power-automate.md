@@ -4,7 +4,7 @@ title: Power Automate Connector
 description: Orchestrate your Power Automate desktop flows with Camunda to trigger, get the status, or get the outputs of the flow.
 ---
 
-The **Power Automate Connector** allows you to orchestrate a Power Automate desktop flow from your BPMN process with [Power Automate](https://powerautomate.microsoft.com).
+The **Power Automate Connector** is an outbound Connector that allows you to orchestrate a Power Automate desktop flow from your BPMN process with [Power Automate](https://powerautomate.microsoft.com).
 
 :::note
 This Connector is designed to orchestrate desktop flows only.
@@ -22,7 +22,7 @@ To use the Power Automate Connector, ensure you have configured the following:
 
 ## Create a Power Automate Connector task
 
-To use a **Power Automate Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **Power Automate Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Operation types
 
@@ -40,7 +40,7 @@ You can choose among the available Power Automate Connector authentication types
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `POWER_AUTOMATE_BEARER_TOKEN`) so you can reference it later in the Connector.
 
 #### Configure the bearer token
@@ -60,7 +60,7 @@ Select the **Power Automate Connector** and fill out the following properties un
 
 We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `POWER_AUTOMATE_CLIENT_ID`) so you can reference it later in the Connector.
 
 #### Configure the OAuth Token
@@ -218,9 +218,16 @@ Response example:
 
 Oftentimes, it is desired to continue the process after a Power Automate flow run finished. You can use the **Callback URL** field if you select the **Trigger a flow run** to specify a URL which will be called after the flow is finished.
 
-:::info
-Starting from Camunda Platform 8.1, it is possible to continue the Camunda process or start a new one using the HTTP webhook Connector.
-:::
+If you wish to continue the Camunda process or start a new one, the [Webhook Connector](/components/connectors/protocol/http-webhook.md) is a good next step. For this, take the following steps:
+
+1. Create a [Webhook Connector](/components/connectors/protocol/http-webhook.md) and specify the **Webhook ID**.
+2. Create a [Power Automate Connector](/components/connectors/out-of-the-box-connectors/power-automate.md), select the **Trigger a flow run** method, and fill in the fields.
+
+   If you use Camunda Platform 8 SaaS, you can use the following pattern for the **Callback URL**: `{zeebe.client.cloud.region}.{zeebeHostUrl}/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
+
+   If you use Camunda Platform 8 SaaS you can find the Zeebe-specific values in you cluster details on the **API** tab under **Client Credentials**. The **webhookId** is the id you specified in the first step, and the **zeebeHostUrl** is connectors.camunda.io.
+
+   ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-cluster-api-credentials.png)
 
 #### Get Bearer token with Postman
 

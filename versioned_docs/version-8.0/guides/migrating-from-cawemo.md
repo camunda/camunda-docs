@@ -10,7 +10,7 @@ You should consider migrating diagrams from Cawemo to Camunda Platform 8 Web Mod
 
 - You want to continue working on your diagrams on the latest Camunda Platform version.
 - You are exploring automating your processes.
-- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the [Connectors framework](/components/connectors/use-connectors.md), or the improved [collaboration features](/components/modeler/web-modeler/collaboration.md) in Web Modeler).
+- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the [Connectors framework](/components/connectors/use-connectors/index.md), or the improved [collaboration features](/components/modeler/web-modeler/collaboration.md) in Web Modeler).
 
 ## Prerequisites
 
