@@ -272,13 +272,13 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
             "components/connectors/out-of-the-box-connectors/github-webhook",
-            {
-              "Protocol Connectors": [
-                "components/connectors/protocol/rest",
-                "components/connectors/protocol/graphql",
-                "components/connectors/protocol/http-webhook",
-              ],
-            },
+          ],
+        },
+        {
+          "Protocol Connectors": [
+            "components/connectors/protocol/rest",
+            "components/connectors/protocol/graphql",
+            "components/connectors/protocol/http-webhook",
           ],
         },
         "components/connectors/configurable-templates",
