@@ -1,5 +1,5 @@
 ---
-id: use-connectors
+id: index
 title: Using Connectors
 description: Learn how to use Connectors in Web Modeler by creating a Connector task, configuring a Connector, and reviewing potential errors.
 ---
@@ -11,97 +11,6 @@ Find the available Connectors in Camunda Platform 8 SaaS and how to use them in 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. Check out [model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with Web Modeler.
 :::
-
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
-<Tabs groupId="use-connectors" defaultValue="outbound" queryString values={
-[
-{label: 'Outbound', value: 'outbound', },
-{label: 'Inbound', value: 'inbound', },
-]
-}>
-
-<TabItem value='outbound'>
-
-## Outbound Connector
-
-[Outbound Connectors](connector-types.md#outbound-connectors) allow workflows to trigger external systems or services.
-
-### Creating the BPMN task
-
-Use the change type context menu item (spanner/wrench icon) to integrate Connectors in a business model. Users can search for keywords like `REST` or `email` to find specific Connectors. To discover all available Connectors in Camunda, input the term `Connector` into the search bar.
-
-![connectors context menu](img/use-connectors-context-menu.png)
-
-Alternatively, you can directly create a Connector task by using the **Append Connector** context menu item. This creates a new Connector task directly following the currently selected element.
-
-![append Connector](img/use-connectors-append.png)
-
-### Configuring the Outbound Connector
-
-Once a Connector task is selected, the available configuration is visible in the properties panel on the right side. The required fields are highlighted with an error message.
-
-![Connectors properties panel](img/use-connectors-properties.png)
-
-Fields in the properties panel marked with an equals sign inside a circle indicate that [FEEL](/components/modeler/feel/what-is-feel.md) can be used to configure the property. If the icon includes an equals sign marked with a star, FEEL is required. Using FEEL allows the user to reference process data from variables in the expression to configure the properties.
-
-![feel Connectors](img/use-connectors-feel.png)
-
-Each Connector defines its own set of properties you can fill in. Find the details for Connectors provided by Camunda in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
-
-### Retries
-
-By default, Connector execution is repeated `3` times if execution fails. To change the default retries value, edit the BPMN XML file and set the `retries` attribute at the `zeebe:taskDefinition`. For example:
-
-```xml
-...
-<zeebe:taskDefinition type="io.camunda:http-json:1" retries="12" />
-...
-```
-
-</TabItem>
-
-<TabItem value='inbound'>
-
-## Inbound Connector
-
-[Inbound Connectors](connector-types.md#inbound-connectors) enable workflows to receive data or messages from external systems or services.
-
-### Creating the BPMN start event
-
-:::note
-Inbound Connectors are currently supported only in [Camunda Platform 8 Self-Managed](/self-managed/about-self-managed.md).
-To use an Inbound Connector, [install](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) a related element template (for example, [generic webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/webhook-connector/element-templates) or [GitHub webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/github/element-templates)) first.
-:::
-
-1. Start building your BPMN diagram with a **Start Event** building block.
-2. Change its template to an Inbound Webhook of your choice (e.g., generic webhook or GitHub).
-3. Fill in all required properties.
-4. Complete your BPMN diagram.
-5. Deploy it to your Camunda Platform 8 instance.
-
-![inbound connector](img/use-inbound-connector-template.png)
-
-When you **deploy** such a BPMN diagram with a webhook, it becomes ready to receive calls on the webhook endpoint (see [Webhook docs](/components/connectors/protocol/http-webhook.md) for details).
-
-:::note
-You can still start instances of that process manually via the modeler, which is sometimes useful during testing.
-:::
-
-### Configuring the Inbound Connector
-
-To deploy and use an inbound webhook, you would need to fill in several fields.
-
-1. **Webhook ID** - a context path for your inbound webhook. This is used to build a URL endpoint of your webhook. For example, given the `Webhook ID` value is `myWebhookPath`, the complete webhook URL endpoint will be `http(s)://<base URL>/inbound/myWebhookPath`.
-2. **HMAC Authentication Enabled** - if an external caller uses HMAC as a means of request validation and authentication, you can `enable` this property. In that case, you'll need to specify additional field values. Read more about the [generic HTTP webhook configuration](/components/connectors/protocol/http-webhook.md).
-3. **Activation Condition** - a FEEL expression that assesses trigger conditions. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
-4. **Variable Mapping** - is a FEEL expression that transforms incoming body into BPMN process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`. In that case, the **Variable Mapping** might look as `={myDocumentId: request.body.id}`.
-
-See a list of [available Inbound Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and their respective specific configuration instructions.
-
-</TabItem>
-</Tabs>
 
 ## Using secrets
 
@@ -197,9 +106,9 @@ In that case, you could declare `Result Expression` as follows:
 }
 ```
 
-![Response mapping](img/connectors-response-mapping.png)
+![Response mapping](../img/connectors-response-mapping.png)
 
-![Response mapping result](img/connectors-response-mapping-result.png)
+![Response mapping result](../img/connectors-response-mapping-result.png)
 
 ## BPMN errors
 
@@ -216,7 +125,7 @@ The example below uses this property to automatically inform the right group of 
 In case of a [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) website response, the administrator is informed, so they can check why the website cannot be reached. HTTP responses with status [500](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500)
 indicate internal website errors, which is why the website team is informed.
 
-![feel Connectors](img/use-connectors-error-general.png)
+![feel Connectors](../img/use-connectors-error-general.png)
 
 The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `code`. You can use all available functionality provided by FEEL to produce this result.

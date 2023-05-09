@@ -620,4 +620,4 @@ When using [Web Modeler](/components/modeler/web-modeler/launch-cloud-modeler.md
 
 When using [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so the modeler will pick them up.
 
-Once available, process developers can directly [use the **Connector templates** from within the modeling canvas](/components/connectors/use-connectors.md).
+Once available, process developers can directly [use the **Connector templates** from within the modeling canvas](/components/connectors/use-connectors/index.md).

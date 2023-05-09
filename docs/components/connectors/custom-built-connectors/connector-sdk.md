@@ -233,7 +233,7 @@ BPMN errors. To provide this, Connector templates can reuse the recommended obje
 
 This object creates custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
-You can see an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors.md#bpmn-errors).
+You can see an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors).
 
 ### Outbound Connector runtime logic
 
@@ -306,7 +306,7 @@ If the Connector handles exceptional cases, it can use any exception to express 
 error should be associated with a specific error code, the Connector can throw a `ConnectorException` and define
 a `code` as shown in **(4)**.
 We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
-by creating [BPMN errors](/components/connectors/use-connectors.md#bpmn-errors) in their Connector configurations.
+by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.
 
 If the Connector has a result to return, it can create a new result data object and set
 its properties as shown in **(5)**.

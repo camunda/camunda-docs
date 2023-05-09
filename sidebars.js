@@ -240,7 +240,13 @@ module.exports = {
       Connectors: [
         "components/connectors/introduction-to-connectors",
         "components/connectors/connector-types",
-        "components/connectors/use-connectors",
+        {
+          "Use Connectors": [
+            "components/connectors/use-connectors/index",
+            "components/connectors/use-connectors/inbound",
+            "components/connectors/use-connectors/outbound",
+          ],
+        },
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
