@@ -54,8 +54,8 @@ This can have multiple reasons:
 When connecting securely (i.e. to Camunda 8 self-managed via `https` endpoint URL) the Desktop Modeler tries to establish a TLS connection. In the process it strictly validates server certificates presented. Failure to connect may have two reasons:
 
 - Remote endpoint is not configured for secure connections.
-- Remote endpoint presents a certificate that is not trusted by the app :arrow_right: [Configure modeler to use a custom CA certificate](#how-can-i-provide-my-custom-certificate).
-- Custom CA certificate is [configured with modeler](#how-can-i-provide-my-custom-certificate) and connection still fails to establish :arrow_right: If you use intermediate certificates, configure the remote endpoint to [serve both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to the modeler.
+- Remote endpoint presents a certificate that is not trusted by the app :arrow_right: [Configure modeler to use a custom SSL certificate](#how-can-i-provide-a-custom-ssl-certificate).
+- Custom SSL certificate is [configured with modeler](#how-can-i-provide-a-custom-ssl-certificate) and connection still fails to establish :arrow_right: If you use intermediate certificates, configure the remote endpoint to [serve both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to the modeler.
 
 You can debug the remote secured connections using `openssl`:
 
@@ -88,12 +88,12 @@ GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
 
 Ensure you [properly configured any intermediary](https://docs.camunda.io/docs/next/self-managed/platform-deployment/troubleshooting) (proxy, ingress, VPN).
 
-## How can I provide my custom certificate?
+## How can I provide a custom SSL certificate?
 
-> I'm using a custom SSL certificate / certificate authority with the Desktop Modeler.
+> I'm using a custom SSL certificate / certificate authority and want it to be recognized by the Desktop Modeler.
 
-The modeler reads root certificates from your operating systems trust store. Installing it there is recommended.
+The modeler [strictly validates](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate certificate trust chain. If you use a custom SSL server certificate then you must make the signing CA certificate known to the modeler, not the server certificate itself.
+
+The modeler reads trusted certificates from your operating systems trust store. Installing custom CA certificates there is recommended for most users.
 
 Alternatively you may provide custom trusted certificates via the [`--zeebe-ssl-certificate` flag](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
-
-Note that the modeler [strictly validates](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate certificate trust chain.
