@@ -18,7 +18,7 @@ See our documentation on [managing secrets](/components/console/manage-clusters/
 
 ## Create a GitHub Connector task
 
-To use the **GitHub Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors.md) to learn more.
+To use the **GitHub Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Authentication
 

@@ -22,7 +22,7 @@ To use the Power Automate Connector, ensure you have configured the following:
 
 ## Create a Power Automate Connector task
 
-To use a **Power Automate Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
+To use a **Power Automate Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Operation types
 

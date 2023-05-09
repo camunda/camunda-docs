@@ -16,7 +16,7 @@ It is highly recommended to use Camunda secrets to store credentials so you don'
 
 ## Create an AWS DynamoDB Connector task
 
-To use the **AWS DynamoDB Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors.md) to learn more.
+To use the **AWS DynamoDB Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your AWS DynamoDB Connector executable
 

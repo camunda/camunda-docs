@@ -20,7 +20,7 @@ It is highly recommended not to expose your sensitive data, such as OpenAI API k
 
 ## Create an OpenAI Connector task
 
-To use the **OpenAI Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
+To use the **OpenAI Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your OpenAI Connector executable
 

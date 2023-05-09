@@ -19,7 +19,7 @@ See our documentation on [managing secrets](/components/console/manage-clusters/
 
 ## Create a GitLab Connector task
 
-To use the **GitLab Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors.md) to learn more.
+To use the **GitLab Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Add endpoint and authentication
 

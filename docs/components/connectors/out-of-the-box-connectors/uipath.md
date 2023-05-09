@@ -12,7 +12,7 @@ To use the **UiPath Connector**, you need to have a [UiPath](https://cloud.uipat
 
 ## Create a UiPath Connector task
 
-To use a **UiPath Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
+To use a **UiPath Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Operation types
 

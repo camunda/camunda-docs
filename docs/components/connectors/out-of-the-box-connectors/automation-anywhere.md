@@ -12,7 +12,7 @@ You also need a user account with the `AAE_Queue Admin` role to query and manage
 
 ## Create an Automation Anywhere Connector task
 
-To use an **Automation Anywhere Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
+To use an **Automation Anywhere Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your Automation Anywhere Connector executable
 

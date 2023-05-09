@@ -16,7 +16,7 @@ It is highly recommended to not expose your AWS IAM credentials as plain text an
 
 ## Create an AWS Lambda Connector task
 
-To use an **AWS Lambda Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
+To use an **AWS Lambda Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Invoking your AWS Lambda function
 

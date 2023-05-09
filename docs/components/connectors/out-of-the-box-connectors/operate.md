@@ -29,7 +29,7 @@ It is highly recommended to use Camunda secrets to store credentials so you don'
 ## Create an Operate Connector task
 
 To use the **Operate Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu.
-Follow our [guide to using Connectors](/components/connectors/use-connectors.md) to learn more.
+Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Enter your cluster information
 

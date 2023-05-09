@@ -13,7 +13,7 @@ The GraphQL Connector allows you to connect to a GraphQL API endpoint. To use th
 
 ## Create a GraphQL Connector task
 
-To use a **GraphQL Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
+To use a **GraphQL Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your GraphQL Connector executable
 

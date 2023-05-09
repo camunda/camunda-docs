@@ -26,7 +26,7 @@ or create a new Connector task by using the **Append Connector** context menu.
 
 ![wrench-shape](../img/connectors-rabbitmq-append-connector.png)
 
-Follow our [guide to using Connectors](/components/connectors/use-connectors.md) to learn more.
+Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Connecting to RabbitMQ and sending messages
 

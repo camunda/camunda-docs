@@ -31,7 +31,7 @@ Connectors are available in three categories - [out-of-the-box (OOTB)](./out-of-
 ## Next steps
 
 - [Learn about types of Connectors](./connector-types.md)
-- [Use Connectors in your BPMN process](./use-connectors.md)
+- [Use Connectors in your BPMN process](./use-connectors/index.md)
 - [Learn about available out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md)
 - [Configure Connector Templates](configurable-templates.md)
 - [Install Connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md)
