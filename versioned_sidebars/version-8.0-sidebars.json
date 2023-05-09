@@ -114,8 +114,7 @@
             "components/modeler/web-modeler/token-simulation",
             {
               "Advanced modeling": [
-                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
-                "components/modeler/web-modeler/advanced-modeling/manage-connector-templates"
+                "components/modeler/web-modeler/advanced-modeling/call-activity-linking"
               ]
             }
           ]
