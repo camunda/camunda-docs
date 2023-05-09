@@ -42,7 +42,7 @@ Check if you can connect to Zeebe through another client, i.e. [`zbctl`](https:/
 
 This can have multiple reasons:
 
-- The remote endpoint is not reachable
+- The remote endpoint is not reachable :arrow_right: Ensure your computer has access to the remote network.
 - The connection is passed through a proxy :arrow_right: Ensure the proxy supports [HTTP/2 transport forwarding for GRPC](https://docs.camunda.io/docs/self-managed/platform-deployment/troubleshooting/#zeebe-ingress-grpc)
 
 ## Debug Zeebe connection issues
