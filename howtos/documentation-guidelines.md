@@ -138,38 +138,7 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 
 ## Redirect rules
 
-The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on the "Check internal links" step, it likely means you moved a doc. To resolve, you can add a redirect rule to [the .htaccess file](../static/.htaccess), mapping the old URL to the new URL.
-
-### Testing redirect rules
-
-The `.htaccess` file contains redirect rules that are applied to the published site, but it has no effect when running docusaurus locally (via `npm start`).
-
-If you wish to test `.htaccess` rules, you have a couple options:
-
-1. Use online tooling to test rules.
-   Tools like https://htaccess.madewithlove.com/ apply a set of redirect rules to a specific URL. Note that there are edge cases where this tool doesn't give the same results as a published environment.
-
-2. Use `docker compose` to spin up a locally-running Apache webserver.
-   This repo includes Docker configuration ([Dockerfile](../Dockerfile) and [docker-compose.yml](../docker-compose.yml)) to spin up a local environment that better simulates a published environment. Redirect rules can then be tested directly in a browser.
-
-   The local server is based on the contents of your `./build` folder.
-
-   **To start the local server**:
-
-   1. Build the docs with `npm run build`.
-   2. Start the server with `docker compose up`.
-   3. Browse http://localhost:3001 and test redirects.
-
-      It is probably best to do this in an incognito browser session, as browsers clutch tightly to 301 redirects.
-
-   4. Clean up the server with `docker compose down`.
-
-   **If you make changes and want to re-start the server**:
-
-   1. Apply the changes to your `build` folder, either manually or by re-running `npm run build`.
-   2. Rebuild the environment with `docker compose build`.
-   3. Re-start the server with `docker compose up`.
-   4. Clean up the server with `docker compose down`.
+The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on a link validation step, it likely means you moved a doc and did not add a redirect rule that matches the original path. See [the Guide to Writing Redirect Rules](./redirect-rules.md) for information on writing and testing redirect rules.
 
 ## Screenshot automation
 
