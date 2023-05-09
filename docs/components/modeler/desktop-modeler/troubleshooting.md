@@ -38,7 +38,7 @@ Check if you can connect to Zeebe through another client, i.e. [`zbctl`](https:/
 
 ## Resolve general Zeebe connection issue
 
-> I'm trying to connect to Zeebe from both Desktop modeler _and_ [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/) to a running Zeebe cluster and non of them works.
+> I'm trying to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/) to a running Zeebe cluster and none of them works.
 
 This can have multiple reasons:
 
