@@ -54,8 +54,8 @@ This can have multiple reasons:
 When connecting securely (i.e. to Camunda 8 self-managed via `https` endpoint URL) the Desktop Modeler tries to establish a TLS connection. In the process it strictly validates server certificates presented. Failure to connect may have two reasons:
 
 - Remote endpoint is not configured for secure connections.
-- Remote endpoint presents a certificate that is not trusted by the app :arrow_right: [Configure modeler to user custom certificates](#how-can-i-provide-my-custom-certificate).
-- Custom CA is [configured with modeler](#how-can-i-provide-my-custom-certificate) and connection still fails to establish :arrow_right: Configure remote endpoint to [serve both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to the modeler.
+- Remote endpoint presents a certificate that is not trusted by the app :arrow_right: [Configure modeler to use a custom CA certificate](#how-can-i-provide-my-custom-certificate).
+- Custom CA certificate is [configured with modeler](#how-can-i-provide-my-custom-certificate) and connection still fails to establish :arrow_right: If you use intermediate certificates, configure the remote endpoint to [serve both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to the modeler.
 
 You can debug the remote secured connections using `openssl`:
 
