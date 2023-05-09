@@ -4,7 +4,7 @@ title: Slack Connector
 description: Send messages to channels or users in your Slack workspace from your BPMN process.
 ---
 
-The **Slack Connector** allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
+The **Slack Connector** is an outbound Connector that allows you to send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ To use the Slack Connector, a Slack app must be registered with the Slack worksp
 
 ## Create a Slack Connector task
 
-To use a **Slack Connector** in your process, either change the type of an existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **Slack Connector** in your process, either change the type of an existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your Slack Connector executable
 
@@ -39,6 +39,8 @@ To create a channel, take the following steps:
 ![slack connector create channel](../img/connectors-slack-create-channel.png)
 
 ### Invite user to channel
+
+To invite users to a channel, take the following steps:
 
 1. Set **Method** to `Invite to Channel`.
 2. Set the **Channel Name**:
@@ -67,9 +69,9 @@ To post a message, take the following steps:
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
-3. Set **Message** to the message string you would like to send (for example, `Hello World!`)
+3. Set **Message** to the message string you would like to send (for example, `Hello World!`).
 
-The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](../../concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
+The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
 ![slack connector compose](../img/connectors-slack-post-message.png)
 
@@ -158,5 +160,5 @@ The **Slack Connector** uses an OAuth bearer token (for example, the Slack app b
 
 We advise you to keep your Slack bot token safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the Connector.

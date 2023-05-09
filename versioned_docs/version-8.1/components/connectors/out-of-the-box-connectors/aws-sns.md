@@ -5,7 +5,7 @@ sidebar_label: Amazon SNS Connector
 description: Publish messages to Amazon Simple Notification Service (SNS) from your BPMN process.
 ---
 
-The **Amazon Simple Notification Service (SNS)** Connector allows you to connect your BPMN service with [Amazon Simple Notification Service (SNS)](https://aws.amazon.com/sns/).
+The **Amazon Simple Notification Service (SNS)** Connector is an outbound Connector that allows you to connect your BPMN service with [Amazon Simple Notification Service (SNS)](https://aws.amazon.com/sns/) to send messages.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ It is highly recommended not to expose your AWS IAM credentials as plain text. I
 
 ## Create an Amazon SNS Connector task
 
-To use the **Amazon SNS Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+To use the **Amazon SNS Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your Amazon SNS Connector for sending messages executable
 
@@ -71,4 +71,4 @@ Example of a valid message attribute as a FEEL value:
 
 ### How do I store AWS IAM secrets for my SNS Connector?
 
-It is highly recommended storing your secret AWS IAM credentials as Camunda secrets. Follow our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended storing your secret AWS IAM credentials as Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
