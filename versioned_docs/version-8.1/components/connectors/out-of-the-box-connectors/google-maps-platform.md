@@ -5,11 +5,11 @@ sidebar_label: Google Maps Platform Connector
 description: Learn how to validate addresses, retrieve postal addresses, and calculate distances with Google Maps Platform Connector.
 ---
 
-The **Google Maps Platform Connector** allows you to validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) in BPMN process.
+The **Google Maps Platform Connector** in an inbound Connector that allows you to validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) in BPMN process.
 
 ## Create a Google Maps Platform Connector task
 
-To use a **Google Maps Platform Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **Google Maps Platform Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your Google Maps Platform Connector executable
 
@@ -26,7 +26,7 @@ In the **Authentication** section, set the relevant API key. See the [official d
 :::note
 We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `GOOGLE_MAPS_PLATFORM_API_KEY`) so you can reference it later in the Connector.
 
 :::
@@ -57,8 +57,8 @@ To use this operation, enable the [Google Directions API](https://developers.goo
 3. (Optional) In the **Input** section, set **Region Code** (i.e `US`). You can find supported region codes [here](https://developers.google.com/maps/documentation/address-validation/coverage).
 4. (Optional) In the **Input** section, set **Locality**, an incorporated city or town political entity (i.e `Mountain View`).
 5. In the **Input** section, set **Address**, an incorporated city or town political entity (i.e `1600 Amphitheatre Pkwy`).
-6. In the **Output** section set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors.md#response-mapping) to learn more.
-7. Full example of the **Google Maps Platform Connector** response you can find [here](https://developers.google.com/maps/documentation/address-validation/requests-validate-address#address_validation_response). If you want to get postal address and formatted address, you can set to **Result Expression** next FEEL Expression :
+6. In the **Output** section set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+7. Find a full example of the **Google Maps Platform Connector** response [here](https://developers.google.com/maps/documentation/address-validation/requests-validate-address#address_validation_response). To get postal address and formatted address, set to **Result Expression** in the FEEL expression:
 
 ```
 {
@@ -72,7 +72,7 @@ To use this operation, enable the [Google Directions API](https://developers.goo
 1. Select **Get Place ID** from the **Operation type** dropdown in the **Operation** section.
 2. Populate the **Authentication** section as described in the [respective section](#authentication).
 3. In the **Input** section, set **Address**. This address can be `formatedAddress`, which you can get using [this example](#address-validation-formatting-getting-postal-address).
-4. In the **Output** section in the **Result Expression** property presented the following expression:
+4. In the **Output** section in the **Result Expression** property, the following expression is preset:
 
 ```
 {
@@ -96,8 +96,8 @@ In this way, the response of this method will contain a mapping from the variabl
 4. In the **Input** section, set **Origin**, the place ID value that you want to use as the starting point for calculating distance.
 5. Select the unit system to use when displaying results from the **Units** dropdown in the **Input** section.
 6. Select the transportation mode to use when calculating distances and directions from the **Mode** dropdown in the **Input** section.
-7. In the **Output** section, set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors.md#response-mapping) to learn more.
-8. Full example of the **Google Maps Platform Connector** response you can find [here](https://developers.google.com/maps/documentation/directions/start#getting-directions). If you want to get a distance you can set to **Result Expression** next FEEL Expression :
+7. In the **Output** section, set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+8. Find a full example of the **Google Maps Platform Connector** response [here](https://developers.google.com/maps/documentation/directions/start#getting-directions). To get a distance, set **Result Expression** in the FEEL expression:
 
 ```
 {

@@ -21,7 +21,7 @@ The SendGrid Connector comes with two options:
 
 #### Create a SendGrid Email Connector Task
 
-To use a **SendGrid Connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email** Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **SendGrid Connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email** Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 #### Make your SendGrid Email Connector executable
 
@@ -87,7 +87,7 @@ While you are editing your template, you can test how your email would look by s
 
 #### Create a SendGrid Email template Connector task
 
-To use this **SendGrid Connector** in your process, either change the type of an existing task to **SendGrid: Send Email via Template** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email via Template** Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use this **SendGrid Connector** in your process, either change the type of an existing task to **SendGrid: Send Email via Template** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email via Template** Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 #### Make your SendGrid Email Template Connector executable
 
@@ -181,5 +181,5 @@ To create an API key in SendGrid, take the following steps:
 
 We advise you to keep your API key safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret `SEND_GRID_API_KEY` so you can reference it later in the Connector.

@@ -12,7 +12,7 @@ To use the Slack Connector, a Slack app must be registered with the Slack worksp
 
 ## Create a Slack Connector task
 
-To use a **Slack Connector** in your process, either change the type of an existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **Slack Connector** in your process, either change the type of an existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your Slack Connector executable
 
@@ -71,7 +71,7 @@ To post a message, take the following steps:
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
 3. Set **Message** to the message string you would like to send (for example, `Hello World!`).
 
-The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](../../concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
+The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
 ![slack connector compose](../img/connectors-slack-post-message.png)
 
@@ -160,5 +160,5 @@ The **Slack Connector** uses an OAuth bearer token (for example, the Slack app b
 
 We advise you to keep your Slack bot token safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the Connector.
