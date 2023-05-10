@@ -27,10 +27,10 @@ RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/rest/(.*)$
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/8.2/components/connectors/protocol/graphql/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/8.2/components/connectors/protocol/http-webhook/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /docs/8.2/components/connectors/manage-connector-templates/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/8.2/components/connectors/protocol/rest/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/8.2/components/connectors/protocol/graphql/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/8.2/components/connectors/protocol/http-webhook/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /docs/8.2/components/connectors/manage-connector-templates/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/components/connectors/protocol/rest/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/components/connectors/protocol/graphql/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/components/connectors/protocol/http-webhook/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /docs/components/connectors/manage-connector-templates/$1 [R=301,L]
 
 # identity restructure 8.2
 RewriteRule ^docs/self-managed/identity/user-guide/configure-logging/(.*)$ /docs/self-managed/identity/user-guide/configuration/configure-logging/$1 [R=301,L]
