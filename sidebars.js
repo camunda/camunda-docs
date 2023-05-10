@@ -281,7 +281,6 @@ module.exports = {
             "components/connectors/protocol/http-webhook",
           ],
         },
-        "components/connectors/configurable-templates",
         "components/connectors/manage-connector-templates",
         {
           "Building custom Connectors": [
