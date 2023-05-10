@@ -1,6 +1,6 @@
 ---
 id: troubleshooting
-title: Fix common issues with the Desktop Modeler
+title: Troubleshooting
 description: "This page lists common issues with the Desktop Modeler and potential resolutions."
 ---
 
