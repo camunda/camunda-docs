@@ -2013,7 +2013,6 @@ module.exports = {
               "Configuration",
               "self-managed/modeler/web-modeler/configuration/"
             ),
-            docsLink("API access", "self-managed/modeler/web-modeler/api/"),
           ],
         },
 

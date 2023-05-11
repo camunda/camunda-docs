@@ -16,15 +16,15 @@ Web Modeler provides a REST API at `/api/*`. Clients can access this API by pass
 
 ## OpenAPI documentation
 
-A detailed API description is available as [OpenAPI](https://www.openapis.org/) specification at [https://modeler.cloud.camunda.io/swagger-ui/index.html](https://modeler.cloud.camunda.io/swagger-ui/index.html).
+A detailed API description is available as [OpenAPI](https://www.openapis.org/) specification at [https://modeler.cloud.camunda.io/swagger-ui/index.html](https://modeler.cloud.camunda.io/swagger-ui/index.html)
+for SaaS and at [http://localhost:8070/swagger-ui.html](http://localhost:8070/swagger-ui.html) for Self-Managed
+installations.
 
 ## Authentication
 
 To authenticate for the API, generate a JWT token and pass it in each request; guidance on this is provided in the following sections.
 
-### Obtain JWT token
-
-**Example:**
+### Authentication in the cloud
 
 1. Create client credentials by clicking **Console > Manage (Organization) > Console API > Create New Credentials**.
 2. Add permissions to this client for **Web Modeler API (beta)**.
@@ -40,13 +40,46 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-### Use JWT token
+### Authentication for Self-Managed cluster
+
+1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Web Modeler API (beta)**.
+3. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. You will need the `client_id` and `client_secret` from the Identity application you created.
+   ```shell
+   curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+   --header 'Content-Type: application/x-www-form-urlencoded' \
+   --data-urlencode 'client_id=<client id>' \
+   --data-urlencode 'client_secret=<client_secret>' \
+   --data-urlencode 'grant_type=client_credentials'
+   ```
+4. You will get something like the following:
+   ```json
+   {
+     "access_token": "eyJhbG...",
+     "expires_in": 300,
+     "refresh_expires_in": 0,
+     "token_type": "Bearer",
+     "not-before-policy": 0
+   }
+   ```
+
+## Use JWT token
 
 1. Take the **access_token** value from the response object and store it as your token.
 2. Send the token as an authorization header in each request. In this case, call the info endpoint to validate the token.
+
+   To use the JWT token in the cloud, use the following command:
+
    ```shell
    curl -o - 'https://modeler.cloud.camunda.io/api/beta/info' -H 'Authorization: Bearer eyJhb...'
    ```
+
+   When using a Self-Managed installation, you can use the following command instead:
+
+   ```shell
+   curl -o - 'http://localhost:8070/api/beta/info' -H 'Authorization: Bearer eyJhb...'
+   ```
+
 3. You will get something like the following:
    ```json
    {
@@ -68,7 +101,7 @@ When using Web Modeler API beta:
   Breaking these links is considered harmless. The broken links can be manually removed or restored in Web Modeler. This operation is also
   reversible - simply move the files or folders back to their original location.
 - You will not immediately see a new project you created via the API. This is because the project has no collaborators. To remedy this, the
-  org owner can activate super user mode and assign collaborators.
+  org owner can activate super-user mode and assign collaborators.
 
 ## FAQ
 

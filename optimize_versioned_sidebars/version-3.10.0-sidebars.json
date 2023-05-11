@@ -2551,11 +2551,6 @@
               "type": "link",
               "label": "Configuration",
               "href": "/docs/self-managed/modeler/web-modeler/configuration/"
-            },
-            {
-              "type": "link",
-              "label": "API access",
-              "href": "/docs/self-managed/modeler/web-modeler/api/"
             }
           ]
         },
