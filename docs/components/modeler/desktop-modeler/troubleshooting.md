@@ -70,10 +70,6 @@ Ensure you configure the modeler for [custom SSL certificates](#how-can-i-provid
 
 If the server certificate is signed by intermediate signing authorities, ensure that the remote endpoint to [serves both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to the modeler.
 
-### Insecure connection to Zeebe fails
-
-Ensure any [intermediaries are properly configured](#the-connection-to-zeebe-happens-through-a-proxy).
-
 ## How can I provide a custom SSL certificate?
 
 You configured a custom SSL certificate in your (remote) Zeebe endpoint and want the modeler to accept that certificate.
