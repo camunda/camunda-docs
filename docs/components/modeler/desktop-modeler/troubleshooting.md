@@ -48,7 +48,7 @@ Ensure your computer has access to the (remote) network.
 
 #### The connection to Zeebe happens through a proxy
 
-To be able to proxy Zebee traffic, a proxy (security proxy, ingress) must use [HTTP/2 transport and gRPC forwarding](https://docs.camunda.io/docs/self-managed/platform-deployment/troubleshooting/#zeebe-ingress-grpc)
+To be able to proxy Zebee traffic, a proxy (security proxy, ingress) must use [HTTP/2 transport and gRPC forwarding](https://docs.camunda.io/docs/self-managed/platform-deployment/troubleshooting/#zeebe-ingress-grpc).
 
 ## Debug Zeebe connection issues
 
