@@ -52,7 +52,7 @@ To be able to proxy Zebee traffic, a proxy (security proxy, ingress) must use [H
 
 ## Debug Zeebe connection issues
 
-You can connect to Zeebe via [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/) or another API client. However, connecting through the Desktop Modeler fails. 
+You can connect to Zeebe via [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/) or another API client. However, connecting through the Desktop Modeler fails.
 
 ### Secure connection to Zeebe fails
 
