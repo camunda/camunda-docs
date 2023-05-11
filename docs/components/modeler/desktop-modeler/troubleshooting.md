@@ -76,7 +76,7 @@ Ensure you [properly configured any intermediary](https://docs.camunda.io/docs/n
 
 ## How can I provide a custom SSL certificate?
 
-You use a custom SSL certificate and want the modeler to accept that certificate.
+You configured a custom SSL certificate in your (remote) Zeebe endpoint and want the modeler to accept that certificate.
 
 The app [strictly validates](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate certificate trust chain. If you use a custom SSL server certificate then you must make the signing CA certificate known to the modeler, not the server certificate itself.
 
