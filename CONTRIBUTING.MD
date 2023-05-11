@@ -1,25 +1,36 @@
 # Contributing guide
 
-## Getting started
-
-- [Contributing guide](#contributing-guide)
-  - [Getting started](#getting-started)
-  - [Welcome](#welcome)
-  - [Contributor guide](#contributor-guide)
-  - [Prerequisites](#prerequisites)
-    - [Contributor License Agreement](#contributor-license-agreement)
-    - [Code of Conduct](#code-of-conduct)
-    - [Code formatting](#code-formatting)
-    - [Opening a pull request](#opening-a-pull-request)
-    - [Conventional commits](#conventional-commits)
-    - [Commit message header formatting](#commit-message-header-formatting)
-    - [Code reviews](#code-reviews)
-    - [Best practices for reviewers](#best-practices-for-reviewers)
-      - [Inspiration](#inspiration)
+- [Welcome](#welcome)
+- [Prerequisites](#prerequisites)
+  - [Contributor License Agreement](#contributor-license-agreement)
+  - [Code of Conduct](#code-of-conduct)
+- [Contributor guide](#contributor-guide)
+  - [Code formatting](#code-formatting)
+  - [Opening a pull request](#opening-a-pull-request)
+  - [Commit message header formatting](#commit-message-header-formatting)
+  - [Code reviews](#code-reviews)
+  - [Best practices for reviewers](#best-practices-for-reviewers)
+    - [Inspiration](#inspiration)
 
 ## Welcome
 
 Our documentation is open source, and we welcome new contributions. We take pride in maintaining and encouraging a friendly, welcoming, and collaborative open source community. All contributors to our project are expected to adhere to our [Code of Conduct].
+
+## Prerequisites
+
+You need to be comfortable working in the either the [GitHub web-based editor] or a text editor such as Visual Studio Code or Atom. You will also need to understand the basics of [Git] and [GitHub] to have your best experience contributing to the Camunda.
+
+The documentation is written in [Markdown] and [MDX]. You can learn more about our specific use in our [Markdown and MDX features] guide.
+
+### Contributor License Agreement
+
+You will be asked to sign our [Contributor License Agreement] (CLA) when you open a pull request. We are not asking you to assign copyright to us, but to give us the right to distribute your code without restriction. We ask this of all contributors in order to assure our users of the origin and continuing existence of the code.
+
+_Note: In most cases, you will only need to sign the CLA once._
+
+### Code of Conduct
+
+By contributing to this repository, you are also expected to adhere to our community [Code of Conduct].
 
 ## Contributor guide
 
@@ -31,20 +42,6 @@ We would love it if you took the time to contribute to our project. You can do s
 - Help us improve — If you have an idea for a new feature request, long-term improvements, or interesting solutions that you feel would benefit the Camunda Cloud ecosystem and our documentation, we’d be happy to look at your issue.
 - File a bug report — Is a link broken? Does a screenshot not load? Does something need alt-text to improve accessibility? Don’t hesitate to reach out to us and let us know by [opening an issue].
 - If you would like to get a better understanding of how our documentation is built and contribute back upstream to the tooling that this documentation uses, we encourage you to get started with the [Docusaurus 2] framework.
-
-## Prerequisites
-
-You need to be comfortable working in the either the [GitHub web-based editor] or a text editor such as Visual Studio Code or Atom. You will also need to understand the basics of [Git] and [GitHub] to have your best experience contributing to the Camunda.
-
-### Contributor License Agreement
-
-You will be asked to sign our [Contributor License Agreement] (CLA) when you open a pull request. We are not asking you to assign copyright to us, but to give us the right to distribute your code without restriction. We ask this of all contributors in order to assure our users of the origin and continuing existence of the code.
-
-_Note: In most cases, you will only need to sign the CLA once._
-
-### Code of Conduct
-
-By contributing to this repository, you are also expected to adhere to our community [Code of Conduct].
 
 ### Code formatting
 
@@ -61,7 +58,6 @@ Before submitting your pull request for code review, please ensure your code has
   - Java: Please follow our [testing best practices].
   - Have a look at other tests in the same module for how it works.
   - In rare cases, it is not feasible to write an automated test. Please ask us if you think that is the case for your contribution.
-- Do your commits follow the [Conventional Commits] guidelines and syntax?
 
 ### Opening a pull request
 
@@ -69,22 +65,6 @@ Before opening a pull request to the Camunda Cloud Documentation, it’s importa
 
 - [Documentation Guidelines] — These guidelines detail our process for adding a new documentation page, opening your first pull request, our code reviewers and their areas of expertise, and how to structure your documentation files.
 - Review our [Pull Requests and Code Review] wiki.
-
-### Conventional commits
-
-Commit messages in Camunda projects should follow the [Conventional Commits] guidelines. By standardizing around this specification regarding [formatting of commit messages], this establishes a set of rules for creating a clear and cohesive commit history. This allows for maintainers to run automated tooling on top of a project, which lowers the burden on the community as a whole by ensuring tests can be introduced that improve the long-term health of the codebase.
-
-This convention is utilized in conjunction with [SemVer] (semantic versioning), by describing the type, scope, and description made in commit messages.
-
-The commit message should be structured as follows:
-
-```
-    <header>
-    <BLANK LINE>
-    <body>
-    <BLANK LINE> (optional - mandatory with footer)
-    <footer> (optional)
-```
 
 ### Commit message header formatting
 
@@ -118,7 +98,7 @@ Examples:
 
 ### Code reviews
 
-Thorough code reviews are necessary to produce a high-quality product. When code contribution guidelines are unclear, the code review process can lead to frustration. The Camunda Cloud team strives to make code reviews a positive experience for both reviewers and contributors.
+Thorough code reviews are necessary to produce a high-quality product. When code contribution guidelines are unclear, the code review process can lead to frustration. The Camunda Developer Experience team strives to make code reviews a positive experience for both reviewers and contributors.
 
 While new and returning contributors are highly encouraged to read the contributor guidelines before opening a pull request, experienced contributors and project maintainers should regularly review the contributor guide as well to ensure they are up to date.
 
@@ -140,26 +120,20 @@ For further guidelines and best practices to keep in mind as a reviewer, please 
 This documentation is inspired and influenced by the Zeebe documentation, the Camunda Platform 7 documentation, the Microsoft contributor guidelines,
 the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 
-[getting started]: ./getting-started
 [welcome]: ./welcome
-[contributor guide]: ./contributor-guide
-[prerequisities]: ./prerequisities
 [code of conduct]: ./code-of-conduct.md
-[documentation]: https://github.com/camunda-cloud/camunda-cloud-documentation
-[open a pull request]: https://github.com/camunda-cloud/camunda-cloud-documentation/compare
-[conventional commits]: https://www.conventionalcommits.org/en/v1.0.0/#summary
-[variety]: https://github.com/camunda-cloud/camunda-cloud-documentation/tree/master/howtos
-[documentation guidelines]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/documentation-guidelines.md
-[opening an issue]: https://github.com/camunda-cloud/camunda-cloud-documentation/issues
+[mdx]: https://mdxjs.com/
+[markdown]: https://www.markdownguide.org/
+[markdown and mdx features]: ./howtos/markdown-and-mdx-features.md
+[open a pull request]: https://github.com/camunda/camunda-platform-docs/compare
+[documentation guidelines]: ./howtos/documentation-guidelines.md
+[opening an issue]: https://github.com/camunda/camunda-platform-docs/issues
 [docusaurus 2]: https://v2.docusaurus.io/
 [github web-based editor]: https://docs.github.com/en/codespaces/the-githubdev-web-based-editor
 [git]: https://git-scm.com/
-[github]: https://lab.github.com/
+[github]: https://skills.github.com/
 [contributor license agreement]: https://cla-assistant.io/camunda-cloud/camunda-cloud-documentation
-[code style guidelines]: https://github.com/camunda-cloud/zeebe/wiki/Code-Style
-[testing best practices]: https://docs.camunda.io/docs/apis-clients/java-client/zeebe-process-test/
-[conventional commits]: ./conventional-commits
-[template and settings files]: https://github.com/camunda/camunda-bpm-platform/tree/master/settings
-[technical writing style guide]: https://github.com/camunda-cloud/camunda-cloud-documentation/blob/master/howtos/technical-writing-styleguide.md
-[pull requests and code review]: https://github.com/camunda-cloud/zeebe/wiki/Pull-Requests-and-Code-Reviews
-[semver]: http://semver.org/
+[code style guidelines]: https://github.com/camunda/zeebe/wiki/Code-Style
+[testing best practices]: https://docs.camunda.io/docs/apis-tools/java-client/zeebe-process-test/
+[technical writing style guide]: ./howtos/technical-writing-styleguide.md
+[pull requests and code review]: https://github.com/camunda/zeebe/wiki/Pull-Requests-and-Code-Reviews
