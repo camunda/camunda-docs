@@ -32,30 +32,41 @@ Depending on your operating system you can find the Modeler logs in different pl
 
 ## I cannot connect to Zeebe
 
-> I try to connect to deploy to a remote Zeebe instance and the modeler tells me "cannot find a running Zeebe".
+You try to connect (i.e. to deploy) to a remote Zeebe instance and the modeler tells you "cannot find a running Zeebe".
 
-Check if you can connect to Zeebe through another client, i.e. [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/). If that works [further debug your Zeebe connection](#debug-zeebe-connection-issues), if not try to resolve that [general connection issue](#resolve-general-zeebe-connection-issue).
+To resolve this issue check if you can connect to Zeebe through another client, i.e. [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/). If that works [further debug your Zeebe connection](#debug-zeebe-connection-issues), if not try to resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue).
 
-## Resolve general Zeebe connection issue
+## Resolve a general Zeebe connection issue
 
-> I'm trying to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/) to a running Zeebe cluster and none of them works.
+You try to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/) and none of them works. This can have a couple of reasons.
 
-This can have multiple reasons:
+#### The (remote) Zeebe instance is not reachable
 
-- The remote endpoint is not reachable :arrow_right: Ensure your computer has access to the remote network.
-- The connection is passed through a proxy :arrow_right: Ensure the proxy supports [HTTP/2 transport forwarding for GRPC](https://docs.camunda.io/docs/self-managed/platform-deployment/troubleshooting/#zeebe-ingress-grpc)
+Ensure your computer has access to the (remote) network.
+
+#### The connection to Zeebe happens through a proxy
+
+A proxy (security proxy, ingress) must be configured to use [HTTP/2 transport and gRPC forwarding](https://docs.camunda.io/docs/self-managed/platform-deployment/troubleshooting/#zeebe-ingress-grpc) in order to be able to proxy Zebee traffic. 
 
 ## Debug Zeebe connection issues
 
-> I resolved [general connection issues](#resolve-general-zeebe-connection-issue) and can connect to Zeebe via [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/). However connecting through the Desktop Modeler fails.
+You can successfully connect to Zeebe via [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/) or another API client. However connecting through the Desktop Modeler fails. Depending on the type of connection this can have a couple of reasons.
 
 ### Secure connection to Zeebe fails
 
-When connecting securely (i.e. to Camunda 8 self-managed via `https` endpoint URL) the Desktop Modeler tries to establish a TLS connection. In the process it strictly validates server certificates presented. Failure to connect may have the following reasons:
+When connecting securely (i.e. to Camunda 8 self-managed via `https` endpoint URL) the Desktop Modeler tries to establish a TLS connection. In the process it strictly validates server certificates presented. Failure to connect may have the a number of resons.
 
-- Remote endpoint is not configured for secure connections.
-- Remote endpoint presents a certificate that is not trusted by the app :arrow_right: [Configure modeler to use a custom SSL certificate](#how-can-i-provide-a-custom-ssl-certificate).
-- Custom SSL certificate is [configured with modeler](#how-can-i-provide-a-custom-ssl-certificate) and connection still fails to establish :arrow_right: If you use intermediate certificates, configure the remote endpoint to [serve both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to the modeler.
+#### The (remote) endpoint is not configured for secure connections
+
+Ensure you properly configure the remote endpoint.
+
+#### The (remote) endpoint presents a certificate that is not trusted by the app
+
+[Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand which certificates are being returned by the server.
+
+Ensure you configure the modeler for [custom SSL certificates](#how-can-i-provide-a-custom-ssl-certificate).
+
+If the server certificate is signed by intermediate signing authorities, ensure that the remote endpoint to [serves both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to the modeler.
 
 ### Insecure connection to Zeebe fails
 
@@ -63,13 +74,11 @@ Ensure you [properly configured any intermediary](https://docs.camunda.io/docs/n
 
 ## How can I provide a custom SSL certificate?
 
-> I'm using a custom SSL certificate / certificate authority and want it to be recognized by the Desktop Modeler.
+You use a custom SSL certificate and want the modeler to accept that certificate.
 
-The modeler [strictly validates](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate certificate trust chain. If you use a custom SSL server certificate then you must make the signing CA certificate known to the modeler, not the server certificate itself.
+The app [strictly validates](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate certificate trust chain. If you use a custom SSL server certificate then you must make the signing CA certificate known to the modeler, not the server certificate itself.
 
-The modeler reads trusted certificates from your operating systems trust store. Installing custom CA certificates there is recommended for most users.
-
-Alternatively you may provide custom trusted certificates via the [`--zeebe-ssl-certificate` flag](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
+The modeler reads trusted certificate authorities from your operating systems trust store. Installing custom CA certificates there is recommended for most users. Alternatively you may provide custom trusted CA certificates via the [`--zeebe-ssl-certificate` flag](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
 
 ## How can I get details about a secure remote connection?
 
@@ -93,6 +102,8 @@ Certificate chain
    v:NotBefore: Jun 19 00:00:42 2020 GMT; NotAfter: Jan 28 00:00:42 2028 GMT
 ...
 ```
+
+This provides you information on certificates served by the remote endpoint.
 
 ## How can I debug log GRPC / Zeebe communication?
 
