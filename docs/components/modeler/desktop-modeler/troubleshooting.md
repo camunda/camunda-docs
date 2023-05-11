@@ -72,7 +72,7 @@ If the server certificate is signed by intermediate signing authorities, ensure 
 
 ### Insecure connection to Zeebe fails
 
-Ensure you [properly configured any intermediary](https://docs.camunda.io/docs/next/self-managed/platform-deployment/troubleshooting) (proxy, ingress, VPN).
+Ensure any [intermediaries are properly configured](#the-connection-to-zeebe-happens-through-a-proxy).
 
 ## How can I provide a custom SSL certificate?
 
