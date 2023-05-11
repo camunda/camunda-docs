@@ -30,6 +30,8 @@ Depending on your operating system you can find the Modeler logs in different pl
 ~/.config/camunda-modeler/logs
 ```
 
+To produce logging output you can also run the modeler form the commandline.
+
 ## I cannot connect to Zeebe
 
 You try to connect (i.e. to deploy) to a remote Zeebe instance and the modeler tells you "cannot find a running Zeebe".
