@@ -116,7 +116,7 @@ You can publish a process via webhook, which allows you to integrate it easily w
 Follow these steps to publish a process via a webhook:
 
 1. Select the start event.
-2. Switch your start event to a [HTTP webhook connector](../../connectors/out-of-the-box-connectors/http-webhook.md) using the **wrench tool**.
+2. Switch your start event to a [HTTP webhook connector](../../connectors/protocol/http-webhook.md) using the **wrench tool**.
    ![Converting a start event to a webhook start event](img/web-modeler-convert-to-webhook.png)
 
 3. Define the webhook configuration in the properties panel of the start event.
