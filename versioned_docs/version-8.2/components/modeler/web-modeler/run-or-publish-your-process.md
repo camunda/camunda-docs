@@ -101,10 +101,19 @@ Publishing a process means that you make it available to other users inside and 
 
 You have the following options to publish a process:
 
-- [Deploy to run programmatically](#deploy-to-run-programmatically)
-- [Publish via webhook](#publish-via-webhook)
-- [Publish to Tasklist](#publish-to-tasklist)
-- [Listen to message or signal events](#listen-to-message-or-signal-events)
+- [Deploy a process](#deploy-a-process)
+  - [Before deploying a process](#before-deploying-a-process)
+- [Run a process](#run-a-process)
+  - [Test run using Play mode](#test-run-using-play-mode)
+  - [Run manually from Modeler](#run-manually-from-modeler)
+  - [Schedule via timer](#schedule-via-timer)
+  - [Best practices for running a process](#best-practices-for-running-a-process)
+- [Publishing a process](#publishing-a-process)
+  - [Deploy to run programmatically](#deploy-to-run-programmatically)
+  - [Publish via webhook](#publish-via-webhook)
+  - [Publish to Tasklist](#publish-to-tasklist)
+  - [Listen to message or signal events](#listen-to-message-or-signal-events)
+  - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
 
 ### Deploy to run programmatically
 
@@ -117,7 +126,7 @@ You can publish a process via webhook, which allows you to integrate it easily w
 Follow these steps to publish a process via a webhook:
 
 1. Select the start event.
-2. Switch your start event to a [HTTP webhook connector](../../connectors/protocol/http-webhook.md) using the **wrench tool**.
+2. Switch your start event to a [HTTP webhook connector](/components/connectors/protocol/http-webhook.md) using the **wrench tool**.
    ![Converting a start event to a webhook start event](img/web-modeler-convert-to-webhook.png)
 
 3. Define the webhook configuration in the properties panel of the start event.
@@ -127,7 +136,7 @@ When the process is deployed, the webhook URL can be found in the properties pan
 
 ![Webhook URL after a process has been deployed](img/web-modeler-webhook-panel.png)
 
-You have multiple options to ensure that the webhook connection is safe for use by your target audience only. Please refer to the [full documentation](../../connectors/out-of-the-box-connectors/http-webhook.md) for configuration details.
+You have multiple options to ensure that the webhook connection is safe for use by your target audience only. Please refer to the [full documentation](/components/connectors/protocol/http-webhook.md) for configuration details.
 
 ### Publish to Tasklist
 
