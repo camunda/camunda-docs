@@ -78,6 +78,7 @@ module.exports = {
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
+        "components/concepts/outbound-connectors-job-workers",
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -143,7 +144,6 @@ module.exports = {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
-                "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
               ],
             },
           ],
@@ -238,39 +238,53 @@ module.exports = {
       ],
       Connectors: [
         "components/connectors/introduction-to-connectors",
-        "components/connectors/use-connectors",
+        "components/connectors/connector-types",
+        {
+          "Use Connectors": [
+            "components/connectors/use-connectors/index",
+            "components/connectors/use-connectors/inbound",
+            "components/connectors/use-connectors/outbound",
+          ],
+        },
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
-            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/easy-post",
             "components/connectors/out-of-the-box-connectors/github",
-            "components/connectors/out-of-the-box-connectors/github-webhook",
             "components/connectors/out-of-the-box-connectors/gitlab",
             "components/connectors/out-of-the-box-connectors/googledrive",
             "components/connectors/out-of-the-box-connectors/google-maps-platform",
-            "components/connectors/out-of-the-box-connectors/graphql",
-            "components/connectors/out-of-the-box-connectors/http-webhook",
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
-            "components/connectors/out-of-the-box-connectors/rest",
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/github-webhook",
           ],
-          "Custom Connectors": [
-            "components/connectors/custom-built-connectors/connector-templates",
+        },
+        {
+          "Protocol Connectors": [
+            "components/connectors/protocol/rest",
+            "components/connectors/protocol/graphql",
+            "components/connectors/protocol/http-webhook",
+          ],
+        },
+        "components/connectors/manage-connector-templates",
+        {
+          "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/connector-templates",
           ],
         },
       ],
@@ -1130,7 +1144,6 @@ module.exports = {
           "Web Modeler": [
             "self-managed/modeler/web-modeler/installation",
             "self-managed/modeler/web-modeler/configuration",
-            "self-managed/modeler/web-modeler/api",
           ],
         },
         {

@@ -4,7 +4,7 @@ title: Google Drive Connector
 description: Create folders or files from a Google Drive template from your BPMN process.
 ---
 
-The **Google Drive Connector** allows you to create empty folders or files on [Google Drive](https://drive.google.com/) from templates from your BPMN process.
+The **Google Drive Connector** is an outbound Connector that allows you to create empty folders or files on [Google Drive](https://drive.google.com/) from templates from your BPMN process.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ To start working with the **Google Drive Connector**, a relevant OAuth token mus
 
 Currently, the Google Drive Connector supports two types of operations: create a folder and create a file from a template.
 
-To use a **Google Drive Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](../use-connectors.md) to learn more.
+To use a **Google Drive Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Make your Google Drive Connector executable
 

@@ -35,7 +35,7 @@ When the Keycloak service is ready for connections, please start (or restart) th
 ### Solution 2: Identity making requests from an external IP address
 
 By default, Keycloak requires TLS on requests that originate from what it considers to be an external source. The Keycloak
-documentation for [setting up SSL](https://www.keycloak.org/docs/latest/server_installation/#_setting_up_ssl) maintains
+documentation for [setting up SSL](https://www.keycloak.org/docs/19.0.3/server_installation/#_setting_up_ssl) maintains
 a list of what they consider to be an external IP address under the `external requests` section.
 
 The solution to this issue will depend largely on your environment, however as a starting point we would suggest you consider
@@ -45,9 +45,9 @@ these options:
    ranges that Keycloak expects.
 2. If configuring the IP ranges is not an option then it is possible to disable the SSL requirement in Keycloak itself.
    to achieve this:
-   1. In the `master` realm set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/16.1/server_admin/#_ssl_modes)
+   1. In the `master` realm set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/19.0.3/server_admin/#_ssl_modes)
    2. Restart the Identity service
-   3. In the `camunda-platform` realm set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/16.1/server_admin/#_ssl_modes)
+   3. In the `camunda-platform` realm set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/19.0.3/server_admin/#_ssl_modes)
    4. Restart the Identity service again
    5. Identity should now start successfully
 
