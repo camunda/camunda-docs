@@ -169,14 +169,9 @@ module.exports = {
               "components/modeler/web-modeler/fix-problems-in-your-diagram/"
             ),
             docsLink(
-              "Save and deploy your diagram",
-              "components/modeler/web-modeler/save-and-deploy/"
+              "Run or publish your process",
+              "components/modeler/web-modeler/run-or-publish-your-process"
             ),
-            docsLink(
-              "Start a new process instance",
-              "components/modeler/web-modeler/start-instance/"
-            ),
-
             {
               Collaboration: [
                 docsLink(
