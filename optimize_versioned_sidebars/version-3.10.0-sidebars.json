@@ -2553,6 +2553,11 @@
                   "type": "link",
                   "label": "Database",
                   "href": "/docs/self-managed/modeler/web-modeler/configuration/database/"
+                },
+                {
+                  "type": "link",
+                  "label": "Logging",
+                  "href": "/docs/self-managed/modeler/web-modeler/configuration/logging/"
                 }
               ]
             }
