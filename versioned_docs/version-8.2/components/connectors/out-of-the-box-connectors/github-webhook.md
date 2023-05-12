@@ -34,17 +34,20 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 4. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
 5. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example:
    For example, given that GitHub webhook is triggered with the body `{"pull_request": {"id": 123}}` and you would like to extract the pull request `id` as a process variable `pullRequestId`, the **Result Expression** might look like this:
+
 ```
 = {
   pullRequestId: request.body.pull_request.id
 }
 ```
-6. If you are using the GitHub Webhook Connector with an **Intermediate Catch Event**, fill in the  **Correlation key (process)** and **Correlation key (payload)**.
+
+6. If you are using the GitHub Webhook Connector with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
 For example, given that your correlation key is defined with `pullRequestId` process variable, and the request body contains `{"pull_request": {"id": 123}}` your correlation key settings will look like this:
+
 - **Correlation key (process)**: `=pullRequestId`
 - **Correlation key (payload)**: `=request.body.pull_request.id`
 
