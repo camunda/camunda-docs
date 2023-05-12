@@ -9,7 +9,7 @@ import DocCardList from '@theme/DocCardList';
 
 This section steps through two concepts for integration:
 
-- **Control your Camunda Platform 8 process automation** by [deploying processes](/components/modeler/web-modeler/save-and-deploy.md), [starting process instances](/components/modeler/web-modeler/start-instance.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
+- **Control your Camunda Platform 8 process automation** by [deploying processes](/components/modeler/web-modeler/run-or-publish-your-process.md#deploy-a-process), [starting process instances](/components/modeler/web-modeler/run-or-publish-your-process.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
 - **Interact with the Camunda Platform 8 ecosystem** by learning about [Camunda Components](/components/components-overview.md) and their APIs to communicate with your cluster, search, get and change data, create Cloud API clients, and more.
 
 :::note

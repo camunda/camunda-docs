@@ -12,6 +12,10 @@ Options -Indexes -MultiViews
 RewriteRule ^docs/next/components/modeler/web-modeler/start-instance/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
 
+# Modeler start instance and deploy page renaming and merging 8.2
+RewriteRule ^docs/8.2/components/modeler/web-modeler/start-instance/?$ /docs/8.2/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/web-modeler/save-and-deploy/?$ /docs/8.2/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
+
 # deduplication of Web Modeler API
 RewriteRule ^docs/next/self-managed/modeler/web-modeler/api/(.*)$ /docs/next/apis-tools/web-modeler-api/index/$1 [R=301,L]
 RewriteRule ^docs/self-managed/modeler/web-modeler/api/(.*)$ /docs/apis-tools/web-modeler-api/index/$1 [R=301,L]
