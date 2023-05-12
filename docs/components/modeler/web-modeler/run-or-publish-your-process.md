@@ -25,6 +25,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
+- Implement and run your [job workers](../../concepts/job-workers.md) if you use tasks such as service or send tasks.
 
 ## Run a process
 
