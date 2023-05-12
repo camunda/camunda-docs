@@ -8,6 +8,11 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# deduplication of Web Modeler API
+RewriteRule ^docs/next/self-managed/modeler/web-modeler/api/(.*)$ /docs/next/apis-tools/web-modeler-api/index/$1 [R=301,L]
+RewriteRule ^docs/self-managed/modeler/web-modeler/api/(.*)$ /docs/apis-tools/web-modeler-api/index/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/modeler/web-modeler/api/(.*)$ /docs/8.2/apis-tools/web-modeler-api/index/$1 [R=301,L]
+
 # connectors restructure /next/
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/next/components/connectors/protocol/rest/$1 [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/next/components/connectors/protocol/graphql/$1 [R=301,L]
