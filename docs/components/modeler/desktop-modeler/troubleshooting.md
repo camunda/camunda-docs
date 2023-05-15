@@ -57,7 +57,7 @@ You can connect to Zeebe via [`zbctl`](https://docs.camunda.io/docs/apis-tools/c
 ### Secure connection to Zeebe fails
 
 When connecting securely to Camunda 8 SaaS, Camunda 8 self-managed, or a standalone Zeebe instance (via `https` endpoint URL), the Desktop Modeler tries to establish a secure connection. In the process, it strictly validates the server certificates presented against wellknown certificate authorities. Failure to connect may have several reasons.
- 
+
 #### The (remote) endpoint is not configured for secure connections
 
 Ensure you properly configure the remote endpoint.
