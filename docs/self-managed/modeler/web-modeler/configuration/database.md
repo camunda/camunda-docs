@@ -9,7 +9,7 @@ Web Modeler Self-Managed is available to [enterprise customers](../../../../refe
 :::
 
 This page describes advanced database connection configuration for Web Modeler. For a general guide on how to set up
-Web Modeler's database connection, please visit [the configuration overview](configuration.md#database).
+Web Modeler's database connection, visit [the configuration overview](configuration.md#database).
 
 ## Configuring SSL for the database connection
 
@@ -41,8 +41,8 @@ prone to man-in-the-middle attacks.
 
 To enable this mode, mount the root certificate with which the server certificate was signed and follow these steps:
 
-1. Provide the root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`
-1. Modify the JDBC URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`
+1. Provide the root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`.
+2. Modify the JDBC URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`.
 
 ### SSL mode "verify-full" with client certificates
 
@@ -53,29 +53,28 @@ To enable this mode, mount the client certificates and follow these steps:
 
 1. Provide client certificates at these locations:
    1. `myClientCertificate.pk8 -> ~/.postgresl/postgresql.pk8`
-   1. `myClientCertificate.crt -> ~/.postgresl/postgresql.crt`
-1. Provide the root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`
-1. Modify the JDBC URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`
+   2. `myClientCertificate.crt -> ~/.postgresl/postgresql.crt`
+2. Provide the root certificate at this location: `myCA.crt -> ~/.postgresql/root.crt`.
+3. Modify the JDBC URL: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?ssl=true`.
 
 Furthermore, configure the database server to verify client certificates:
-[PostgreSQL documentation](https://www.postgresql.org/docs/current/ssl-tcp.html)
+[PostgreSQL documentation](https://www.postgresql.org/docs/current/ssl-tcp.html).
 
 ## Running Web Modeler on Amazon Aurora PostgreSQL
 
 Web Modeler supports running on Amazon Aurora PostgreSQL.
-In order to connect Web Modeler with your Amazon Aurora PostgreSQL instance you have to make the following configuration adjustments:
+To connect Web Modeler with your Amazon Aurora PostgreSQL instance, make the following configuration adjustments:
 
-1. Modify the `SPRING_DATASOURCE_URL` environment variable: `jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]`
-1. Add the environment variable `SPRING_DATASOURCE_DRIVER_CLASS_NAME` with the value `software.amazon.jdbc.Driver`
+1. Modify the `SPRING_DATASOURCE_URL` environment variable: `jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]`.
+2. Add the environment variable `SPRING_DATASOURCE_DRIVER_CLASS_NAME` with the value `software.amazon.jdbc.Driver`.
 
 For a full list of available driver parameters visit the [AWS JDBC Driver documentation](https://github.com/awslabs/aws-advanced-jdbc-wrapper/wiki/UsingTheJdbcDriver#aws-advanced-jdbc-driver-parameters).
 
-### AWS IAM Authentication
+### AWS IAM authentication
 
-If you'd like to use AWS Identity and Access Management (IAM) database authentication with your Amazon Aurora PostgreSQL
+To use AWS Identity and Access Management (IAM) database authentication with your Amazon Aurora PostgreSQL
 instance, in addition to the adjustments described [above](#running-web-modeler-on-amazon-aurora-postgresql), follow these steps:
 
-1. Modify the `SPRING_DATASOURCE_URL` environment variable as follows: `jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?wrapperPlugins=iam`
-2. Modify the `SPRING_DATASOURCE_USERNAME` environment variable to match the database user you configured for AWS IAM
-   authentication as described in the [Amazon Aurora documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL)
-3. Remove the `SPRING_DATASOURCE_PASSWORD` environment variable
+1. Modify the `SPRING_DATASOURCE_URL` environment variable as follows: `jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?wrapperPlugins=iam`.
+2. Modify the `SPRING_DATASOURCE_USERNAME` environment variable to match the database user you configured for AWS IAM authentication as described in the [Amazon Aurora documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL).
+3. Remove the `SPRING_DATASOURCE_PASSWORD` environment variable.

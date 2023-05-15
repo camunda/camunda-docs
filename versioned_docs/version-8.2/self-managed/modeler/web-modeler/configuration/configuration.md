@@ -26,7 +26,7 @@ Web Modeler requires a PostgreSQL database as persistent data storage (other dat
 | `SPRING_DATASOURCE_PASSWORD`          | Database user password                                | \*\*\*                                                   |
 | `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver | `software.amazon.jdbc.Driver`                            |
 
-Please refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
+Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
 
 ### SMTP / email
 
