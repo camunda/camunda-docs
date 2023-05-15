@@ -48,11 +48,11 @@ Ensure your computer has access to the (remote) network.
 
 #### The connection to Zeebe happens through a proxy
 
-To be able to proxy Zebee traffic, a proxy (security proxy, ingress) must use [HTTP/2 transport and gRPC forwarding](https://docs.camunda.io/docs/self-managed/platform-deployment/troubleshooting/#zeebe-ingress-grpc).
+To be able to proxy Zebee traffic, a proxy (security proxy, ingress) must use [HTTP/2 transport and gRPC forwarding](/docs/self-managed/platform-deployment/troubleshooting/#zeebe-ingress-grpc).
 
 ## Debug Zeebe connection issues
 
-You can connect to Zeebe via [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/) or another API client. However, connecting through the Desktop Modeler fails.
+You can connect to Zeebe via [`zbctl`](/docs/cli-client/) or another API client. However, connecting through the Desktop Modeler fails.
 
 ### Secure connection to Zeebe fails
 
@@ -74,9 +74,9 @@ If intermediate signing authorities sign the server certificate, ensure that the
 
 You configured a custom SSL certificate in your (remote) Zeebe endpoint and want the modeler to accept that certificate.
 
-The app [strictly validates](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate trust chain. If you use a custom SSL server certificate, you must make the signing CA certificate known to the modeler, not the server certificate itself.
+The app [strictly validates](/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate trust chain. If you use a custom SSL server certificate, you must make the signing CA certificate known to the modeler, not the server certificate itself.
 
-The modeler reads trusted certificate authorities from your operating systems trust store. Installing custom CA certificates in that trust store is recommended for most users. Alternatively, you may provide custom trusted CA certificates via the [`--zeebe-ssl-certificate` flag](https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
+The modeler reads trusted certificate authorities from your operating systems trust store. Installing custom CA certificates in that trust store is recommended for most users. Alternatively, you may provide custom trusted CA certificates via the [`--zeebe-ssl-certificate` flag](/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
 
 ## How can I get details about a secure remote connection?
 
