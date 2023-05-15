@@ -264,6 +264,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/googledrive",
             "components/connectors/out-of-the-box-connectors/google-maps-platform",
             "components/connectors/out-of-the-box-connectors/kafka",
+            "components/connectors/out-of-the-box-connectors/kafka-inbound",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/power-automate",
