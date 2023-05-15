@@ -6,7 +6,7 @@ description: "This page lists common issues with the Desktop Modeler and potenti
 
 ## How to start the modeler without plug-ins?
 
-You can start the modeler with the [`--disable-plugins` flag](https://docs.camunda.io/docs/components/modeler/desktop-modeler/flags/#disable-plug-ins).
+You can start the modeler with the [`--disable-plugins` flag](./flags/flags.md#disable-plug-ins).
 
 ## How to obtain the Modeler logs?
 
@@ -36,11 +36,11 @@ To produce logging output, you can also run the modeler from the command line.
 
 You try to connect (i.e., to deploy) to a remote Zeebe instance, and the modeler tells you "cannot find a running Zeebe".
 
-To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
+To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](../../../apis-tools/cli-client/index.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
 
 ## Resolve a general Zeebe connection issue
 
-You try to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](https://docs.camunda.io/docs/apis-tools/cli-client/), and none of them works. General connection failures can have a couple of reasons.
+You try to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](../../../apis-tools/cli-client/index.md), and none of them works. General connection failures can have a couple of reasons.
 
 #### The (remote) Zeebe instance is not reachable
 
@@ -48,11 +48,11 @@ Ensure your computer has access to the (remote) network.
 
 #### The connection to Zeebe happens through a proxy
 
-To be able to proxy Zebee traffic, a proxy (security proxy, ingress) must use [HTTP/2 transport and gRPC forwarding](/docs/self-managed/platform-deployment/troubleshooting/#zeebe-ingress-grpc).
+To be able to proxy Zebee traffic, a proxy (security proxy, ingress) must use [HTTP/2 transport and gRPC forwarding](../../../self-managed/platform-deployment/troubleshooting.md#zeebe-ingress-grpc).
 
 ## Debug Zeebe connection issues
 
-You can connect to Zeebe via [`zbctl`](/docs/cli-client/) or another API client. However, connecting through the Desktop Modeler fails.
+You can connect to Zeebe via [`zbctl`](../../../apis-tools/cli-client/index.md) or another API client. However, connecting through the Desktop Modeler fails.
 
 ### Secure connection to Zeebe fails
 
@@ -74,9 +74,9 @@ If intermediate signing authorities sign the server certificate, ensure that the
 
 You configured a custom SSL certificate in your (remote) Zeebe endpoint and want the modeler to accept that certificate.
 
-The app [strictly validates](/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate) the remote server certificate trust chain. If you use a custom SSL server certificate, you must make the signing CA certificate known to the modeler, not the server certificate itself.
+The app [strictly validates](./flags/flags.md#zeebe-ssl-certificate) the remote server certificate trust chain. If you use a custom SSL server certificate, you must make the signing CA certificate known to the modeler, not the server certificate itself.
 
-The modeler reads trusted certificate authorities from your operating systems trust store. Installing custom CA certificates in that trust store is recommended for most users. Alternatively, you may provide custom trusted CA certificates via the [`--zeebe-ssl-certificate` flag](/docs/next/components/modeler/desktop-modeler/flags/#zeebe-ssl-certificate).
+The modeler reads trusted certificate authorities from your operating systems trust store. Installing custom CA certificates in that trust store is recommended for most users. Alternatively, you may provide custom trusted CA certificates via the [`--zeebe-ssl-certificate` flag](./flags/flags.md#zeebe-ssl-certificate).
 
 ## How can I get details about a secure remote connection?
 
