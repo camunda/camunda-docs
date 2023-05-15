@@ -1,62 +1,62 @@
 ---
 id: troubleshooting
 title: Troubleshooting
-description: "This page lists common issues with the Desktop Modeler and potential resolutions."
+description: "This page lists common issues with Desktop Modeler and potential resolutions."
 ---
 
-## How to start the modeler without plug-ins?
+## How to start Desktop Modeler without plugins
 
-You can start the modeler with the [`--disable-plugins` flag](./flags/flags.md#disable-plug-ins).
+You can start Desktop Modeler with the [`--disable-plugins` flag](./flags/flags.md#disable-plug-ins).
 
-## How to obtain the Modeler logs?
+## How to obtain Desktop Modeler logs
 
-Depending on your operating system, you can find the Modeler logs in different places:
+Depending on your operating system, you can find Desktop Modeler logs in different places:
 
-#### Windows
+### Windows
 
 ```plain
 %APPDATA%\Camunda Modeler\logs
 ```
 
-#### Mac OS
+### MacOS
 
 ```plain
 ~/Library/Logs/Camunda Modeler
 ```
 
-#### Linux
+### Linux
 
 ```plain
 ~/.config/camunda-modeler/logs
 ```
 
-To produce logging output, you can also run the modeler from the command line.
+To produce logging output, you can also run Desktop Modeler from the command line.
 
 ## I cannot connect to Zeebe
 
-You try to connect (i.e., to deploy) to a remote Zeebe instance, and the modeler tells you "cannot find a running Zeebe".
+You try to connect (i.e., to deploy) to a remote Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](../../../apis-tools/cli-client/index.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
 
 ## Resolve a general Zeebe connection issue
 
-You try to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](../../../apis-tools/cli-client/index.md), and none of them works. General connection failures can have a couple of reasons.
+You try to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](../../../apis-tools/cli-client/index.md), and neither of them works. General connection failures can have a couple of reasons:
 
-#### The (remote) Zeebe instance is not reachable
+### The (remote) Zeebe instance is not reachable
 
 Ensure your computer has access to the (remote) network.
 
-#### The connection to Zeebe happens through a proxy
+### The connection to Zeebe happens through a proxy
 
-To be able to proxy Zebee traffic, a proxy (security proxy, ingress) must use [HTTP/2 transport and gRPC forwarding](../../../self-managed/platform-deployment/troubleshooting.md#zeebe-ingress-grpc).
+To proxy Zeebe traffic, a proxy (security proxy, ingress) must use [HTTP/2 transport and gRPC forwarding](../../../self-managed/platform-deployment/troubleshooting.md#zeebe-ingress-grpc).
 
 ## Debug Zeebe connection issues
 
-You can connect to Zeebe via [`zbctl`](../../../apis-tools/cli-client/index.md) or another API client. However, connecting through the Desktop Modeler fails.
+You can connect to Zeebe via [`zbctl`](../../../apis-tools/cli-client/index.md) or another API client. However, connecting through Desktop Modeler fails.
 
 ### Secure connection to Zeebe fails
 
-When connecting securely to Camunda 8 SaaS, Camunda 8 self-managed, or a standalone Zeebe instance (via `https` endpoint URL), the Desktop Modeler tries to establish a secure connection. In the process, it strictly validates the server certificates presented against wellknown certificate authorities. Failure to connect may have several reasons.
+When connecting securely to Camunda Platform 8 SaaS, Camunda Platform 8 Self-Managed, or a standalone Zeebe instance (via `https` endpoint URL), Desktop Modeler tries to establish a secure connection. In the process, it strictly validates the server certificates presented against well-known certificate authorities. Failure to connect may have several reasons:
 
 #### The (remote) endpoint is not configured for secure connections
 
@@ -66,17 +66,17 @@ Ensure you properly configure the remote endpoint.
 
 [Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand which certificates are being returned by the server.
 
-Ensure you configure the modeler for [custom SSL certificates](#how-can-i-provide-a-custom-ssl-certificate).
+Ensure you configure Desktop Modeler for [custom SSL certificates](#how-can-i-provide-a-custom-ssl-certificate).
 
-If intermediate signing authorities sign the server certificate, ensure that the remote endpoint to [serves both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to the modeler.
+If intermediate signing authorities sign the server certificate, ensure the remote endpoint [serves both server and intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to Desktop Modeler.
 
 ## How can I provide a custom SSL certificate?
 
-You configured a custom SSL certificate in your (remote) Zeebe endpoint and want the modeler to accept that certificate.
+You configured a custom SSL certificate in your (remote) Zeebe endpoint and want Desktop Modeler to accept that certificate.
 
-The app [strictly validates](./flags/flags.md#zeebe-ssl-certificate) the remote server certificate trust chain. If you use a custom SSL server certificate, you must make the signing CA certificate known to the modeler, not the server certificate itself.
+The app [strictly validates](./flags/flags.md#zeebe-ssl-certificate) the remote server certificate trust chain. If you use a custom SSL server certificate, you must make the signing CA certificate known to Desktop Modeler, not the server certificate itself.
 
-The modeler reads trusted certificate authorities from your operating systems trust store. Installing custom CA certificates in that trust store is recommended for most users. Alternatively, you may provide custom trusted CA certificates via the [`--zeebe-ssl-certificate` flag](./flags/flags.md#zeebe-ssl-certificate).
+Desktop Modeler reads trusted certificate authorities from your operating systems trust store. Installing custom CA certificates in that trust store is recommended for most users. Alternatively, you may provide custom trusted CA certificates via the [`--zeebe-ssl-certificate` flag](./flags/flags.md#zeebe-ssl-certificate).
 
 ## How can I get details about a secure remote connection?
 
@@ -103,7 +103,7 @@ Certificate chain
 
 ## How can I debug log GRPC / Zeebe communication?
 
-You can also start the modeler with GRPC logging turned on to get detailed [logging output](#how-to-obtain-the-modeler-logs) on communication to Zeebe:
+You can also start Desktop Modeler with GRPC logging turned on to get detailed [logging output](#how-to-obtain-the-modeler-logs) on communication to Zeebe:
 
 ```sh
 GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
