@@ -54,7 +54,7 @@ For example, given that your correlation key is defined with `orderId` process v
 - **Correlation key (process)**: `=orderId`
 - **Correlation key (payload)**: `=request.body.orderId`
 
-Learn more about correlation keys in the [Messages guide](../../concepts/messages).
+Learn more about correlation keys in the [Messages guide](../../../concepts/messages).
 
 ## Activate the HTTP Webhook Connector by deploying your diagram
 

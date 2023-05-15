@@ -51,7 +51,7 @@ For example, given that your correlation key is defined with `pullRequestId` pro
 - **Correlation key (process)**: `=pullRequestId`
 - **Correlation key (payload)**: `=request.body.pull_request.id`
 
-Learn more about correlation keys in the [Messages guide](../../concepts/messages).
+Learn more about correlation keys in the [Messages guide](../../../concepts/messages).
 
 ## Activate the GitHub Webhook Connector by deploying your diagram
 
