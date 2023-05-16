@@ -35,7 +35,7 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 
 3. Configure **Activation Condition**. For example, given external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
 4. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-5. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example:
+5. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    For example, given the external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`, the **Result Expression** might look like this:
 
 ```
@@ -49,12 +49,12 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-For example, given that your correlation key is defined with `orderId` process variable, and the request body contains `{"orderId": "123"}` your correlation key settings will look like this:
+For example, given that your correlation key is defined with `orderId` process variable, and the request body contains `{"orderId": "123"}`, your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=orderId`
 - **Correlation key (payload)**: `=request.body.orderId`
 
-Learn more about correlation keys in the [Messages guide](../../../concepts/messages).
+Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
 ## Activate the HTTP Webhook Connector by deploying your diagram
 

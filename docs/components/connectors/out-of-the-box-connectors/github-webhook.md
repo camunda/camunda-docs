@@ -32,8 +32,8 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 2. Set the **GitHub secret**. This is a shared secret key that has to be defined in both your BPMN and GitHub webhook configuration page. The value is used to calculate HMAC authentication signature.
 3. Configure **Activation Condition**. For example, given GitHub triggers a webhook endpoint with a new PR payload `{"action": "opened", "pull_request": ...}`, the **Activation Condition** value might look like as `=(request.body.action = "opened")`. Leave this field empty to trigger your webhook every time.
 4. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-5. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example:
-   For example, given that GitHub webhook is triggered with the body `{"pull_request": {"id": 123}}` and you would like to extract the pull request `id` as a process variable `pullRequestId`, the **Result Expression** might look like this:
+5. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+   For example, given that the GitHub webhook is triggered with the body `{"pull_request": {"id": 123}}` and you would like to extract the pull request `id` as a process variable `pullRequestId`, the **Result Expression** might look like this:
 
 ```
 = {
@@ -46,12 +46,12 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-For example, given that your correlation key is defined with `pullRequestId` process variable, and the request body contains `{"pull_request": {"id": 123}}` your correlation key settings will look like this:
+For example, given that your correlation key is defined with `pullRequestId` process variable, and the request body contains `{"pull_request": {"id": 123}}`, your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=pullRequestId`
 - **Correlation key (payload)**: `=request.body.pull_request.id`
 
-Learn more about correlation keys in the [Messages guide](../../../concepts/messages).
+Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
 ## Activate the GitHub Webhook Connector by deploying your diagram
 
