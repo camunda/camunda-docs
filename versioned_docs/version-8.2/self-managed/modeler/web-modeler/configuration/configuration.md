@@ -1,19 +1,15 @@
 ---
 id: configuration
-<<<<<<< HEAD
-title: Configuration
-=======
 title: "Configuration"
 sidebar_label: "Overview"
->>>>>>> cb73bc769bdbf627df2738f7d0068b71258ff699
-description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, webapp, and WebSocket."
+description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, web app, and WebSocket."
 ---
 
 :::note
 Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
 :::
 
-The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
+The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below:
 
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
 - If you are using the Camunda Platform 8 [Helm chart](../../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler).
@@ -31,16 +27,7 @@ Web Modeler requires a PostgreSQL database as persistent data storage (other dat
 | `SPRING_DATASOURCE_PASSWORD`          | Database user password                                | \*\*\*                                                   |
 | `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver | `software.amazon.jdbc.Driver`                            |
 
-<<<<<<< HEAD
 Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
-=======
-<<<<<<< HEAD:docs/self-managed/modeler/web-modeler/configuration/configuration.md
-Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
-=======
-Please refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
-
-> > > > > > > cb73bc769bdbf627df2738f7d0068b71258ff699:versioned_docs/version-8.2/self-managed/modeler/web-modeler/configuration/configuration.md
-> > > > > > > cb73bc769bdbf627df2738f7d0068b71258ff699
 
 ### SMTP / email
 
