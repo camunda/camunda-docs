@@ -247,6 +247,17 @@ module.exports = {
           //cacheTime: 600 * 1000, // 600 sec - cache purge period
           changefreq: "weekly",
           priority: 0.5,
+          ignorePatterns: [
+            "/tags/**",
+            "/next/**",
+            "/0.25/**",
+            "/0.26/**",
+            "/0.25/**",
+            "/1.0/**",
+            "/1.1/**",
+            "/1.2/**",
+            "/1.3/**",
+          ],
         },
       },
     ],

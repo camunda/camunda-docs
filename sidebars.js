@@ -173,6 +173,7 @@ module.exports = {
                 "components/modeler/desktop-modeler/telemetry/telemetry",
               ],
             },
+            "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
         {
