@@ -152,9 +152,9 @@ security:
 
 ### zeebe.gateway.cluster.security.authentication
 
-| Field | Description                                                                                                                                                                                                                                                                                                                                                                                            | Example value |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| mode  | Controls which authentication mode is active; supported modes are `none` and `identity`. If `identity` is set, authentication will be done using [camunda-identity](/self-managed/identity/what-is-identity.md), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none          |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                     | Example value |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| mode  | Controls which authentication mode is active; supported modes are `none` and `identity`. If `identity` is set, authentication will be done using [camunda-identity](/self-managed/identity/what-is-identity.md), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none          |
 
 #### YAML snippet
 
@@ -166,11 +166,11 @@ security:
 
 ### zeebe.gateway.cluster.security.authentication.identity
 
-| Field            | Description                                                                                                                                                                                                 | Example value                                     |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
-| audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                         |
-| type             | The identity auth type to apply, one of `keycloak` or `auth0`. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_TYPE`.             | keycloak                                          |
+| Field            | Description                                                                                                                                                                                          | Example value                                     |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
+| audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                         |
+| type             | The identity auth type to apply, one of `keycloak` or `auth0`. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_TYPE`.             | keycloak                                          |
 
 #### YAML snippet
 
