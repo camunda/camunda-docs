@@ -163,7 +163,8 @@
                 "components/modeler/desktop-modeler/search-paths/search-paths",
                 "components/modeler/desktop-modeler/telemetry/telemetry"
               ]
-            }
+            },
+            "components/modeler/desktop-modeler/troubleshooting"
           ]
         },
         {
