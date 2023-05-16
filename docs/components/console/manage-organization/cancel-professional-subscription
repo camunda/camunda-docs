@@ -16,14 +16,14 @@ The steps to complete your cancellation are as follows:
 
 ![console entrypoint to manage payment account](./img/cc-entrypoint.png)
 
-2. Click **Payment Methods**.
+2. Click on your plan.
 
-![payment methods button](./img/cc-manage.png)
+![manage subscription](./img/cancel-prof-plan-manage-subscription.png)
 
-3. Click **Edit Payment Method**.
+3. Click **Cancel Subscription** at the bottom of the page.
 
-![edit payment method button](./img/cc-ending.png)
+![cancel subscription cta](./img/cancel-prof-plan-cancel-cta.png)
 
-4. Add the details of the new credit card and click **Update**.
+4. Add a cancellation reason and some feedback and click **Confirm Cancellation**. Please note that the cancellation date will be the last day of the current billing period.
 
-![enter credit card details and update button](./img/cc-enter.png)
+![enter cancellation reason and details](./img/cancel-prof-plan-last-screen.png)
