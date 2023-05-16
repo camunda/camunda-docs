@@ -127,7 +127,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral?uc=signup&utm_source=docs.camunda.io&utm_medium=referral",
+              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Contact",

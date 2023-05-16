@@ -8,8 +8,7 @@ description: "Read details on how to connect Web Modeler with a database."
 Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
 :::
 
-This page describes advanced database connection configuration for Web Modeler. For a general guide on how to set up
-Web Modeler's database connection, visit [the configuration overview](configuration.md#database).
+This page describes advanced database connection configuration for Web Modeler. For a general guide on how to set up Web Modeler's database connection, visit [the configuration overview](configuration.md#database).
 
 ## Configuring SSL for the database connection
 
