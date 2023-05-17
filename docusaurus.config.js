@@ -77,6 +77,45 @@ module.exports = {
         {
           type: "docsVersionDropdown",
           position: "left",
+          dropdownItemsAfter: [
+            {
+              type: "html",
+              value: '<hr class="dropdown-separator">',
+            },
+            {
+              type: "html",
+              className: "dropdown-archived-versions",
+              value: "<b>Archived versions</b>",
+            },
+            // ["1.3", "1.2", "1.1", "1.0", "0.26", "0.25"].map(
+            // ([versionName]) => ({
+            {
+              label: "1.3",
+              href: "https://www.google.com",
+            },
+            {
+              label: "1.2",
+              href: "https://www.google.com",
+            },
+            {
+              label: "1.1",
+              href: "https://www.google.com",
+            },
+            {
+              label: "1.0",
+              href: "https://www.google.com",
+            },
+            {
+              label: "0.26",
+              href: "https://www.google.com",
+            },
+            {
+              label: "0.25",
+              href: "https://www.google.com",
+            },
+            // })
+            // ),
+          ],
         },
         {
           type: "doc",
