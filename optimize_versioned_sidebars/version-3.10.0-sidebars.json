@@ -230,13 +230,8 @@
             },
             {
               "type": "link",
-              "label": "Save and deploy your diagram",
-              "href": "/docs/components/modeler/web-modeler/save-and-deploy/"
-            },
-            {
-              "type": "link",
-              "label": "Start a new process instance",
-              "href": "/docs/components/modeler/web-modeler/start-instance/"
+              "label": "Run or publish your process",
+              "href": "/docs/components/modeler/web-modeler/run-or-publish-your-process/"
             },
             {
               "Collaboration": [
