@@ -39,18 +39,32 @@ module.exports = {
       {
         id: "optimize",
         path: "optimize",
+        includeCurrentVersion: false,
         routeBasePath: "optimize",
         beforeDefaultRemarkPlugins: [versionedLinks],
-        sidebarPath: require.resolve("./optimize_sidebars.js"),
+        sidebarPath: require.resolve(
+          "./optimize_versioned_sidebars/version-3.7.0-sidebars.json"
+        ),
         editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
+        lastVersion: "3.7.0",
+        // sidebarPath: require.resolve(
+        //   "./versioned_sidebars/version-1.3-sidebars.json"
+        // ),
         versions: {
-          "3.9.0": {
-            banner: "none",
-          },
-          "3.8.0": {
-            banner: "none",
+          "3.7.0": {
+            label: "3.7.0",
+            path: "/",
           },
         },
+
+        // versions: {
+        //   "3.9.0": {
+        //     banner: "none",
+        //   },
+        //   "3.8.0": {
+        //     banner: "none",
+        //   },
+        // },
       },
     ],
   ],
@@ -75,47 +89,8 @@ module.exports = {
       },
       items: [
         {
-          type: "docsVersionDropdown",
+          type: "docsVersion",
           position: "left",
-          dropdownItemsAfter: [
-            {
-              type: "html",
-              value: '<hr class="dropdown-separator">',
-            },
-            {
-              type: "html",
-              className: "dropdown-archived-versions",
-              value: "<b>Archived versions</b>",
-            },
-            // ["1.3", "1.2", "1.1", "1.0", "0.26", "0.25"].map(
-            // ([versionName]) => ({
-            {
-              label: "1.3",
-              href: "https://www.google.com",
-            },
-            {
-              label: "1.2",
-              href: "https://www.google.com",
-            },
-            {
-              label: "1.1",
-              href: "https://www.google.com",
-            },
-            {
-              label: "1.0",
-              href: "https://www.google.com",
-            },
-            {
-              label: "0.26",
-              href: "https://www.google.com",
-            },
-            {
-              label: "0.25",
-              href: "https://www.google.com",
-            },
-            // })
-            // ),
-          ],
         },
         {
           type: "doc",
@@ -263,20 +238,30 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
+          lastVersion: "1.3",
+          // sidebarPath: require.resolve(
+          //   "./versioned_sidebars/version-1.3-sidebars.json"
+          // ),
+          versions: {
+            1.3: {
+              label: "1.3",
+              path: "/",
+            },
+          },
+          includeCurrentVersion: false,
           // Please change this to your repo.
           editUrl:
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
-          versions: {
-            8.1: {
-              banner: "none",
-            },
-            "8.0": {
-              banner: "none",
-            },
-          },
+          // versions: {
+          //   8.1: {
+          //     banner: "none",
+          //   },
+          //   "8.0": {
+          //     banner: "none",
+          //   },
+          // },
         },
         blog: false,
         theme: {
