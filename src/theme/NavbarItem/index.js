@@ -12,7 +12,7 @@ export default function NavbarItemWrapper(props) {
   const { pathname } = useLocation();
 
   const childProps = { ...props };
-  if (type === "docsVersionDropdown") {
+  if (type === "docsVersionDropdown" || type === "docsVersion") {
     if (/^\/optimize/.test(pathname)) {
       childProps.docsPluginId = "optimize";
     }
