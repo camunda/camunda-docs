@@ -214,7 +214,7 @@ Now, we want to do some work within our process. Follow the steps below:
 - Set the **type** of the second task to `fetcher-service`.
 - Set the **type** of the third task to `shipping-service`.
 
-5. Additionally, for the service task `Collect Money` set a [**task-header**](/docs/1.3/components/modeler/bpmn/service-tasks/#task-headers) with the key `method` and the value `VISA`. This header is used as a configuration parameter for the payment-service worker to hand over the payment method.
+5. Additionally, for the service task `Collect Money` set a [**task-header**](../../components/modeler/bpmn/service-tasks/service-tasks.md/#task-headers) with the key `method` and the value `VISA`. This header is used as a configuration parameter for the payment-service worker to hand over the payment method.
 
 The consolidated example looks as follows:
 
