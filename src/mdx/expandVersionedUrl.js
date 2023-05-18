@@ -19,18 +19,6 @@
 /** @type {Array<VersionMapping>} */
 const versionMappings = [
   // 👋 When cutting a new version, add a new mapping here!
-  {
-    docsVersion: "8.2",
-    optimizeVersion: "3.10.0",
-  },
-  {
-    docsVersion: "8.1",
-    optimizeVersion: "3.9.0",
-  },
-  {
-    docsVersion: "8.0",
-    optimizeVersion: "3.8.0",
-  },
   { docsVersion: "1.3", optimizeVersion: "3.7.0" },
 ];
 
