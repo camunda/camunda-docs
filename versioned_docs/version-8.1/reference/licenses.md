@@ -34,4 +34,4 @@ License information for our documentation can be found in the [LICENSE.txt](http
 
 ## Terms & conditions
 
-For information not covered by the above license links, visit our [Terms and Conditions](https://camunda.com/legal/terms/).
+For information not covered by the above license links, visit our [Terms and Conditions](https://legal.camunda.com/licensing-and-other-legal-terms).
