@@ -4,7 +4,7 @@ module.exports = {
   title: "Camunda Platform 8 Docs",
   tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
-  url: "https://docs.camunda.io",
+  url: "https://1_3.docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -54,6 +54,7 @@ module.exports = {
           "3.7.0": {
             label: "3.7.0",
             path: "/",
+            noIndex: true,
           },
         },
 
@@ -73,7 +74,7 @@ module.exports = {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=1_3.docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
       backgroundColor: "#14D890",
       textColor: "#000",
       isCloseable: true,
@@ -141,7 +142,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              href: "https://signup.camunda.com/accounts?utm_source=1_3.docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Contact",
@@ -246,6 +247,7 @@ module.exports = {
             1.3: {
               label: "1.3",
               path: "/",
+              noIndex: true,
             },
           },
           includeCurrentVersion: false,
