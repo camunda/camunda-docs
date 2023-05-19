@@ -8,7 +8,7 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
-# deduplication of Web Modeler API
+<!-- # deduplication of Web Modeler API
 RewriteRule ^docs/next/self-managed/modeler/web-modeler/api/(.*)$ /docs/next/apis-tools/web-modeler-api/index/$1 [R=301,L]
 RewriteRule ^docs/self-managed/modeler/web-modeler/api/(.*)$ /docs/apis-tools/web-modeler-api/index/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/modeler/web-modeler/api/(.*)$ /docs/8.2/apis-tools/web-modeler-api/index/$1 [R=301,L]
@@ -112,10 +112,10 @@ RewriteRule ^docs/apis-clients/working-with-apis-clients/?$ /docs/apis-tools/wor
 RewriteRule ^docs/apis-clients(.*)$ /docs/apis-tools$1 [R=301,L]
 RewriteRule ^optimize/apis-clients(.*)$ /optimize/apis-tools$1 [R=301,L]
 RewriteRule ^docs/8.0/apis-clients(.*)$ /docs/8.0/apis-tools$1 [R=301,L]
-RewriteRule ^optimize/3.8.0/apis-clients(.*)$ /optimize/3.8.0/apis-tools$1 [R=301,L]
-RewriteRule ^docs/1.3/apis-clients(.*)$ /docs/1.3/apis-tools$1 [R=301,L]
+RewriteRule ^optimize/3.8.0/apis-clients(.*)$ /optimize/3.8.0/apis-tools$1 [R=301,L] -->
+RewriteRule ^docs/apis-clients(.*)$ /docs/apis-tools$1 [R=301,L]
 
-# 1.2 apis/clients to apis/tools change
+<!-- # 1.2 apis/clients to apis/tools change
 RewriteRule ^docs/1.2/apis-clients(.*)$ /docs/1.2/apis-tools$1 [R=301,L]
 
 # Identity Authorizations
@@ -190,10 +190,10 @@ RewriteRule ^docs/8.0/guides/implementing-connectors/(.*)$ /docs/8.0/guides/conf
 RewriteRule ^docs/8.0/guides/implementing-connectors$ /docs/8.0/guides/configuring-out-of-the-box-connectors/ [R=301,L]
 
 RewriteRule ^docs/1.2/self-managed/overview/(.*)$ /docs/1.2/self-managed/about-self-managed/$1 [R=301,L]
-RewriteRule ^docs/1.2/self-managed/overview$ /docs/1.2/self-managed/about-self-managed/ [R=301,L]
-RewriteRule ^docs/1.3/self-managed/overview/(.*)$ /docs/1.3/self-managed/about-self-managed/$1 [R=301,L]
-RewriteRule ^docs/1.3/self-managed/overview$ /docs/1.3/self-managed/about-self-managed/ [R=301,L]
+RewriteRule ^docs/1.2/self-managed/overview$ /docs/1.2/self-managed/about-self-managed/ [R=301,L] -->
 RewriteRule ^docs/self-managed/overview/(.*)$ /docs/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/self-managed/overview$ /docs/self-managed/about-self-managed/ [R=301,L]
+<!-- RewriteRule ^docs/self-managed/overview/(.*)$ /docs/self-managed/about-self-managed/$1 [R=301,L]
 RewriteRule ^docs/self-managed/overview$ /docs/self-managed/about-self-managed/ [R=301,L]
 
 RewriteRule ^docs/self-managed/zeebe-deployment/?$ /docs/self-managed/zeebe-deployment/zeebe-installation/ [R=301,L]
@@ -210,11 +210,11 @@ RewriteRule ^docs/self-managed/operate-deployment/configuration/(.*)$ /docs/self
 RewriteRule ^docs/self-managed/operate-deployment/authentication/(.*)$ /docs/self-managed/operate-deployment/operate-authentication/$1 [R=301,L]
 
 RewriteRule ^docs/self-managed/identity/troubleshooting/?$ /docs/self-managed/identity/troubleshooting/troubleshoot-identity/ [R=301,L]
-RewriteRule ^docs/self-managed/identity/getting-started/?$ /docs/self-managed/identity/getting-started/install-identity/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/getting-started/?$ /docs/self-managed/identity/getting-started/install-identity/ [R=301,L] -->
 
-RewriteRule ^docs/1.3/components/overview/(.*)$ /docs/1.3/components/components-overview/$1 [R=301,L]
-RewriteRule ^docs/1.3/components/overview$ /docs/1.3/components/components-overview/ [R=301,L]
-RewriteRule ^docs/1.2/components/overview/(.*)$ /docs/1.2/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/components/overview/(.*)$ /docs/components/components-overview/$1 [R=301,L]
+RewriteRule ^docs/components/overview$ /docs/components/components-overview/ [R=301,L]
+<!-- RewriteRule ^docs/1.2/components/overview/(.*)$ /docs/1.2/components/components-overview/$1 [R=301,L]
 RewriteRule ^docs/1.2/components/overview$ /docs/1.2/components/components-overview/ [R=301,L]
 RewriteRule ^docs/1.1/components/overview/(.*)$ /docs/1.1/components/components-overview/$1 [R=301,L]
 RewriteRule ^docs/1.1/components/overview$ /docs/1.1/components/components-overview/ [R=301,L]
@@ -245,11 +245,11 @@ RewriteRule ^docs/components/console/troubleshooting/(.*)$ /docs/components/cons
 RewriteRule ^docs/components/console/troubleshooting$ /docs/components/console/console-troubleshooting/ [R=301,L]
 
 RewriteRule ^docs/components/best-practices/overview/(.*)$ /docs/components/best-practices/best-practices-overview/$1 [R=301,L]
-RewriteRule ^docs/components/best-practices/overview$ /docs/components/best-practices/best-practices-overview [R=301,L]
+RewriteRule ^docs/components/best-practices/overview$ /docs/components/best-practices/best-practices-overview [R=301,L] -->
 
-RewriteRule ^docs/1.3/apis-clients/overview/(.*)$ /docs/1.3/apis-tools/working-with-apis-tools/$1 [R=301,L]
-RewriteRule ^docs/1.3/apis-clients/overview$ /docs/1.3/apis-tools/working-with-apis-tools [R=301,L]
-RewriteRule ^docs/1.2/apis-clients/overview/(.*)$ /docs/1.2/apis-tools/working-with-apis-tools/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/overview/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/overview$ /docs/apis-tools/working-with-apis-tools [R=301,L]
+<!-- RewriteRule ^docs/1.2/apis-clients/overview/(.*)$ /docs/1.2/apis-tools/working-with-apis-tools/$1 [R=301,L]
 RewriteRule ^docs/1.2/apis-clients/overview$ /docs/1.2/apis-tools/working-with-apis-tools [R=301,L]
 RewriteRule ^docs/apis-clients/overview/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
 RewriteRule ^docs/apis-clients/overview$ /docs/apis-tools/working-with-apis-tools [R=301,L]
@@ -499,12 +499,12 @@ RewriteRule ^docs/components/optimize/userguide/(.*)$ /optimize/components/userg
 RewriteRule ^docs/next/self-managed/optimize-deployment/(.*)$ /optimize/next/self-managed/optimize-deployment/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/(.*)$ /optimize/self-managed/optimize-deployment/$1 [R=301,L]
 RewriteRule ^docs/next/apis-clients/optimize-api/(.*)$ /optimize/next/apis-clients/optimize-api/$1 [R=301,L]
-RewriteRule ^docs/apis-clients/optimize-api/(.*)$ /optimize/apis-clients/optimize-api/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/optimize-api/(.*)$ /optimize/apis-clients/optimize-api/$1 [R=301,L] -->
 
 ## optimize extraction for version 3.7.0:
-RewriteRule ^docs/1.3/components/optimize/what-is-optimize(\/?)$ /optimize/3.7.0/components/what-is-optimize/ [R=301,L]
-RewriteRule ^docs/1.3/components/optimize/userguide/(.*)$ /optimize/3.7.0/components/userguide/$1 [R=301,L]
-RewriteRule ^docs/1.3/self-managed/optimize-deployment/(.*)$ /optimize/3.7.0/self-managed/optimize-deployment/$1 [R=301,L]
+RewriteRule ^docs/components/optimize/what-is-optimize(\/?)$ /optimize/components/what-is-optimize/ [R=301,L]
+RewriteRule ^docs/components/optimize/userguide/(.*)$ /optimize/components/userguide/$1 [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/(.*)$ /optimize/self-managed/optimize-deployment/$1 [R=301,L]
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
