@@ -271,8 +271,10 @@ module.exports = {
         },
         sitemap: {
           //cacheTime: 600 * 1000, // 600 sec - cache purge period
-          changefreq: "weekly",
-          priority: 0.5,
+          // exclude everything from sitemap
+          ignorePatterns: ["**"],
+          // changefreq: "weekly",
+          // priority: 0.5,
         },
       },
     ],
