@@ -76,7 +76,21 @@ To create the new versions:
    },
 ```
 
-6. Create a PR with the changes and merge to `main`. Confirm no build issues before moving to the release steps.
+1. Ensure the older docs do not appear in the sitemap. Only the unversioned links should appear in the sitemap.
+
+In docusaurus.config.js, add the previously current version number to the ignorePatterns array:
+
+```javascript
+sitemap: {
+   changefreq: "weekly",
+   priority: 0.5,
+   ignorePatterns: [
+   "/docs/8.1/**",
+   ],
+},
+```
+
+2. Create a PR with the changes and merge to `main`. Confirm no build issues before moving to the release steps.
 
 ### Release the new version
 
