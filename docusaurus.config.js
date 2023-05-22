@@ -248,6 +248,7 @@ module.exports = {
               label: "1.3",
               path: "/",
               noIndex: true,
+              banner: "unmaintained",
             },
           },
           includeCurrentVersion: false,
