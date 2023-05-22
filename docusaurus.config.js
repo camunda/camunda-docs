@@ -74,10 +74,10 @@ module.exports = {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=1_3.docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+        '⚠️ This version of Camunda Platform 8 is no longer actively maintained. For up-to-date documentation, see <b><a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io">the latest version</a></b>.',
       backgroundColor: "#14D890",
       textColor: "#000",
-      isCloseable: true,
+      isCloseable: false,
     },
     prism: {
       additionalLanguages: ["java", "protobuf"],
