@@ -14,7 +14,7 @@ Licenses and license information for Zeebe can be found in the Zeebe project [RE
 
 ### Operate, Tasklist, Identity, Optimize
 
-Operate, Tasklist, Identity, and Optimize are licensed to our users and customers under a proprietary license. The proprietary license can be either the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) or the Camunda Platform Self-Managed Enterprise Edition license (a copy you obtain when you contact Camunda). Note that while the Camunda Platform Self-Managed Free Edition is indeed free, it only allows usage of the software in non-production environments. To use the software in production, [purchase the Camunda Platform Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/). This licensing information also applies to web apps and APIs.
+Operate, Tasklist, Identity, and Optimize are licensed to our users and customers under a proprietary license. The proprietary license can be either the [Camunda Platform Self-Managed Free Edition license](https://legal.camunda.com/licensing-and-other-legal-terms#legal-terms-camunda-platform-c8-self-managed-free-edition-and-beta-offerings) or the Camunda Platform Self-Managed Enterprise Edition license (a copy you obtain when you contact Camunda). Note that while the Camunda Platform Self-Managed Free Edition is indeed free, it only allows usage of the software in non-production environments. To use the software in production, [purchase the Camunda Platform Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/). This licensing information also applies to web apps and APIs.
 
 ### Connectors
 
