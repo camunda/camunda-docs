@@ -1,6 +1,7 @@
 ---
 id: client-authorization
 title: "Client authorization"
+description: "Learn how the Zeebe Gateway supports Camunda Identity-based auth token validation."
 ---
 
 ## Gateway

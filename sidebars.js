@@ -1145,7 +1145,12 @@ module.exports = {
         {
           "Web Modeler": [
             "self-managed/modeler/web-modeler/installation",
-            "self-managed/modeler/web-modeler/configuration",
+            {
+              Configuration: [
+                "self-managed/modeler/web-modeler/configuration/configuration",
+                "self-managed/modeler/web-modeler/configuration/database",
+              ],
+            },
           ],
         },
         {
