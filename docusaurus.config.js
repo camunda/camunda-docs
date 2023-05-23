@@ -54,6 +54,7 @@ module.exports = {
             label: "3.7.0",
             path: "/",
             noIndex: true,
+            banner: "unmaintained",
           },
         },
 
