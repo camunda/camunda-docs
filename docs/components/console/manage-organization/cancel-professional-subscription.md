@@ -1,6 +1,6 @@
 ---
 id: cancel-professional-subscription
-title: Cancel Professional plan subscription
+title: Cancel Professional Plan subscription
 description: "When utilizing Camunda's Professional Plan, follow these steps to cancel your subscription."
 ---
 
@@ -8,9 +8,7 @@ description: "When utilizing Camunda's Professional Plan, follow these steps to 
 This setting is only visible in the **Professional Plan** for owners and admins.
 :::
 
-When utilizing Camunda's Professional Plan, you might need to cancel your subscription.
-
-The steps to complete your cancellation are as follows:
+When utilizing Camunda's Professional Plan, you might need to cancel your subscription. To complete your cancelation, take the following steps:
 
 1. From the Console, click **Organization > Billing > Manage payment account**.
 
@@ -24,6 +22,6 @@ The steps to complete your cancellation are as follows:
 
 ![cancel subscription cta](./img/cancel-prof-plan-cancel-cta.png)
 
-4. Add a cancellation reason and some feedback and click **Confirm Cancellation**. Please note that the cancellation date will be the last day of the current billing period.
+4. Add a cancelation reason and some feedback and click **Confirm Cancellation**. Note that the cancelation date will be the last day of the current billing period.
 
-![enter cancellation reason and details](./img/cancel-prof-plan-last-screen.png)
+![enter cancelation reason and details](./img/cancel-prof-plan-last-screen.png)
