@@ -91,27 +91,27 @@ module.exports = {
             // ([versionName]) => ({
             {
               label: "1.3",
-              href: "https://1_3.docs.camunda.io",
+              href: "https://unsupported.docs.camunda.io/1.3/",
             },
             {
               label: "1.2",
-              href: "https://1_2.docs.camunda.io",
+              href: "https://unsupported.docs.camunda.io/1.2/",
             },
             {
               label: "1.1",
-              href: "https://1_1.docs.camunda.io",
+              href: "https://unsupported.docs.camunda.io/1.1/",
             },
             {
               label: "1.0",
-              href: "https://1_0.docs.camunda.io",
+              href: "https://unsupported.docs.camunda.io/1.0/",
             },
             {
               label: "0.26",
-              href: "https://0_26.docs.camunda.io",
+              href: "https://unsupported.docs.camunda.io/0.26/",
             },
             {
               label: "0.25",
-              href: "https://0_25.docs.camunda.io",
+              href: "https://unsupported.docs.camunda.io/0.25/",
             },
             // })
             // ),
