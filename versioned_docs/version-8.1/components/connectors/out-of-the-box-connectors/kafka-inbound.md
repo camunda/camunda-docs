@@ -14,10 +14,6 @@ It is highly recommended not to expose your sensitive data as plain text, but ra
 
 ## Create a Kafka Consumer Connector task
 
-To use the **Kafka Consumer Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
-
-## Create a Kafka Consumer Connector task
-
 1. Start building your BPMN diagram with a **Start Event** building block.
 2. Change its template to a Kafka Consumer.
 3. Fill in all required properties.
