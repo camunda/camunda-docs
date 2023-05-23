@@ -141,7 +141,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=1_3.docs.camunda.io&utm_medium=referral&utm_content=footer",
+              href: "https://signup.camunda.com/accounts?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Contact",
