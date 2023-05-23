@@ -20,6 +20,10 @@ Use outbound Connectors if something needs to happen in the third-party system i
 
 ## Inbound Connectors
 
+:::note
+**Inbound Connectors are not supported in Camunda Platform version 8.0**. To use **Inbound Connectors**, you need to have the [Zeebe](/docs/components/zeebe/zeebe-overview.md) version 8.1 higher. Once you have the updated version, you can explore the different types of [Inbound Connectors available](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and choose the one that best fits your needs.To get started with using **Inbound Connectors**, refer to the [update guide documentation](/docs/guides/update-guide/introduction.md) provided.
+:::
+
 Inbound Connectors enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
 ![Inbound Connectors](img/inbound-connectors.png)
