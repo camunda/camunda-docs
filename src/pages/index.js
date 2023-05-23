@@ -68,9 +68,9 @@ function Feature({ imageUrl, url, title, description }) {
     <div className={clsx("col col--4 component-block", styles.feature)}>
       {imgUrl && (
         <div className="text--center">
-          <a href={url}>
+          <Link to={useBaseUrl(url)}>
             <img className={styles.featureImage} src={imgUrl} alt={title} />
-          </a>
+          </Link>
         </div>
       )}
       <h3 className="component-title">{title}</h3>
@@ -90,9 +90,9 @@ function Feature2({ imageUrl, url, title, description }) {
     >
       {imgUrl && (
         <div className="text--center">
-          <a href={url}>
+          <Link to={useBaseUrl(url)}>
             <img className={styles.featureImage} src={imgUrl} alt={title} />
-          </a>
+          </Link>
         </div>
       )}
       <h3 className="component-title">{title}</h3>
