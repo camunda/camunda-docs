@@ -11,7 +11,7 @@ There are various channels where you can reach us.
 
 - We welcome your **bug** reports and **feature requests** through our community channels mentioned above.
 
-- For **security-related issues**, review our [Security notices](../../docs/reference/notices) for the most up-to-date information on known issues and steps to report a vulnerability so we can solve the problem as quickly as possible. Do not use GitHub for security-related issues.
+- For **security-related issues**, review our [Security notices](../docs/reference/notices) for the most up-to-date information on known issues and steps to report a vulnerability so we can solve the problem as quickly as possible. Do not use GitHub for security-related issues.
 
 - **Feedback and Support** can be submitted or requested via JIRA for subscription or enterprise customers in the Support project. Otherwise, use the [Camunda Platform community forum](https://forum.camunda.io/). For more information about Enterprise support and additional support resources please see [Enterprise Support](https://camunda.com/support/).
 
