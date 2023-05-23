@@ -45,7 +45,6 @@ module.exports = {
         sidebarPath: require.resolve(
           "./optimize_versioned_sidebars/version-3.7.0-sidebars.json"
         ),
-        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
         lastVersion: "3.7.0",
         // sidebarPath: require.resolve(
         //   "./versioned_sidebars/version-1.3-sidebars.json"
