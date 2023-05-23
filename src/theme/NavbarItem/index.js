@@ -13,7 +13,7 @@ export default function NavbarItemWrapper(props) {
 
   const childProps = { ...props };
   if (type === "docsVersionDropdown" || type === "docsVersion") {
-    if (/^\/optimize/.test(pathname)) {
+    if (/^\/([0-9.]*\/)?optimize/.test(pathname)) {
       childProps.docsPluginId = "optimize";
     }
   }
