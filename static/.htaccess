@@ -507,7 +507,7 @@ RewriteRule ^docs/apis-clients/optimize-api/(.*)$ /optimize/apis-clients/optimiz
 # RewriteRule ^docs/1.3/self-managed/optimize-deployment/(.*)$ /optimize/3.7.0/self-managed/optimize-deployment/$1 [R=301,L]
 
 ## extract version 1.3/optimize 3.7.0:
-# RewriteRule ^docs/1.3/(.*)$ https://1_3.docs.camunda.io/docs/$1 [R=301,L]
+RewriteRule ^docs/1.3/(.*)$ https://unsupported.docs.camunda.io/1.3/docs/$1 [R=301,L]
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
