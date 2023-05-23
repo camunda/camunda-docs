@@ -4,7 +4,7 @@ module.exports = {
   title: "Camunda Platform 8 Docs",
   tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
-  url: "https://1_3.docs.camunda.io",
+  url: "https://unsupported.docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/1.3/",
   onBrokenLinks: "throw",
