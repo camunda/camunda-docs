@@ -1,6 +1,7 @@
 ---
 id: configuring-templates
 title: Configuring templates
+description: "Learn about global and local templates, which are loaded by the modeler at application startup."
 ---
 
 Templates will be loaded by the modeler at application startup. Reloading it using `CtrlOrCmd+R` will also reload all templates. Templates will be treated as global or local depending on their location in your file system.
