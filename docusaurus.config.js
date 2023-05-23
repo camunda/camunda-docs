@@ -6,7 +6,7 @@ module.exports = {
   // url: "https://camunda-cloud.github.io",
   url: "https://1_3.docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: "/",
+  baseUrl: "/1.3/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
