@@ -13,7 +13,7 @@ Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/
 Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
 :::
 
-## Create an HTTP Webhook Connector task
+## Create an HTTP Webhook Connector event
 
 1. Start building your BPMN diagram. You can use HTTP Webhook Connector with either **Start Event** or **Intermediate Catch Event** building blocks.
 2. Select the applicable element and change its template to an HTTP Webhook.
@@ -34,8 +34,7 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 - Select HMAC hash algorithm. The exact value is provided by the external caller.
 
 3. Configure **Activation Condition**. For example, given external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
-4. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-5. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+4. Use **Variable Mapping** to map specific fields from the request into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    For example, given the external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`, the **Result Expression** might look like this:
 
 ```
