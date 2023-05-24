@@ -89,7 +89,36 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
-The following sections are only needed if you are updating to v8.0.13 or the versions after v8.0.13.
+### v8.2
+
+Camunda Platform v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda Platform 8.1.x to 8.2.x:
+
+1. Follow the official PostgreSQL upgrade guide: [Upgrading a PostgreSQL Cluster v15](https://www.postgresql.org/docs/15/upgrading.html). However, it requires some manual work and longer downtime to do the database schema upgrade.
+2. Use the previous version of PostgreSQL v14 in Camunda Platform v8.2, this should be simple and it will work seamlessly.
+
+**Method 1: Upgrade the database schema to work with PostgreSQL v15**
+
+TBA
+
+**Method 2: Use the previous version PostgreSQL v14**
+
+You can set the PostgreSQL either by values file or CLI.
+
+By values file:
+
+```yaml
+identity:
+  keycloak:
+    postgresql:
+      image:
+        tag: 14.5.0
+```
+
+By CLI:
+
+```yaml
+helm upgrade [...] --set identity.keycloak.postgresql.image.tag=14.5.0
+```
 
 ### v8.0.13
 
