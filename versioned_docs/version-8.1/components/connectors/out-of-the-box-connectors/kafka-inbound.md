@@ -20,11 +20,11 @@ It is highly recommended not to expose your sensitive data as plain text, but ra
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the Kafka consumer.
 
-## Make your Kafka Consumer Connector for consuming messages executable
+## Make your Kafka Consumer Connector executable
 
 ![Kafka Inbound Filled](../img/connectors-kafka-inbound-filled.png)
 
-To make your **Kafka Consumer Connector** for publishing messages executable, take the following steps:
+To make your **Kafka Consumer Connector** executable, take the following steps:
 
 1. In the **Authentication** section, select the **Authentication type**.
 2. (If you selected _Credentials_ as the **Authentication type**) In the **Authentication** section, set the relevant credentials. For example, `secrets.MY_KAFKA_USERNAME`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
@@ -115,3 +115,29 @@ Properties loading consists of three steps:
 1. Construct client properties from the BPMN diagram: authentication, bootstrap server, message properties.
 2. Load miscellaneous properties.
 3. Load and **override** properties from the field **Additional properties**.
+
+### How is the message payload deserialized?
+
+Kafka messages usually use JSON format therefore we first try to deserialize it as a JsonElement. If this fails (e.g.: because of wrong format) we use the String representation of the original raw value. For convenience we always store the original raw value as String in a different attribute.
+
+The deserialized object structure:
+
+```
+{
+  key: "String"
+  rawValue: "String"
+  value: {}
+}
+```
+
+### When is the offset committed? What happens if the Connector execution fails?
+
+Following outcomes are possible:
+
+- If Connector execution is successful and **Activation condition** was met, the offset is committed.
+- If **Activation condition** was not met, the offset is also committed to prevent consuming the same message twice.
+- If Connector execution fails due to an unexpected error (e.g. Zeebe is unavailable), the offset is not committed.
+
+### What lifecycle does the Kafka Consumer Connector have?
+
+The Kafka Consumer Connector is a long-running Connector that is activated when the process is deployed and deactivated when the process is un-deployed or overwritten by a new version.
