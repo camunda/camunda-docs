@@ -1,6 +1,7 @@
 ## Description
 
 <!-- This helps the reviewers by providing an overview of what to expect in the PR. Linking to an issue is preferred but not required. -->
+<!-- Add an assignee and use component: labels for good hygiene! -->
 
 ## When should this change go live?
 
