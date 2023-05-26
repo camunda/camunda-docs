@@ -30,10 +30,10 @@ To make your **Kafka Consumer Connector** executable, take the following steps:
 2. (If you selected _Credentials_ as the **Authentication type**) In the **Authentication** section, set the relevant credentials. For example, `secrets.MY_KAFKA_USERNAME`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
 3. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
 4. In the **Kafka** section, set the topic name.
-5. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set consumer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#consumerconfigs). Also check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
-6. In the **Kafka** section, you can set the **Offsets** for the partition. The number of offset specified should match the number of partitions on the current topic.
-7. In the **Kafka** section, you can set the **Auto offset reset** which tells the connector what strategy to use when there is no initial offset in Kafka or if the specified offsets does not exist on the server.
-8. In the **Activation** section, you can set the **Activation Condition**. Based on this condition we either start a process instance or do nothing if the condition is not met. For example, `=(value.itemId = "a4f6j2")`. Leave this field empty to trigger your webhook every time.
+5. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set consumer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
+6. In the **Kafka** section, you can set the **Offsets** for the partition. The number of offsets specified should match the number of partitions on the current topic.
+7. In the **Kafka** section, you can set the **Auto offset reset** which tells the Connector what strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
+8. In the **Activation** section, you can set the **Activation Condition**. Based on this condition, we either start a process instance or do nothing if the condition is not met. For example, `=(value.itemId = "a4f6j2")`. Leave this field empty to trigger your webhook every time.
 
 ## Activate the Kafka Consumer Connector by deploying your diagram
 
@@ -41,14 +41,14 @@ Once you click the **Deploy** button, your Kafka Consumer will be activated and 
 
 ## Kafka Consumer Connector response
 
-The **Kafka Consumer Connector** returns the message that has been consumed.
+The **Kafka Consumer Connector** returns the consumed message.
 
 The following fields are available in the `response` variable:
 
-- `key`: the key of the message
-- `value`: the value of the message
-- `rawValue`: the value of the message as a json string
-- `topic`: topic name
+- `key`: The key of the message.
+- `value`: The value of the message.
+- `rawValue`: The value of the message as a JSON string.
+- `topic`: Topic name.
 
 You can use an output mapping to map the response:
 
@@ -73,7 +73,7 @@ security.protocol=SASL_SSL
 sasl.mechanism=PLAIN
 ```
 
-If any of the field is not populated, you have to configure your security method in respect to your Kafka configuration. You can do so via the field **Additional properties**.
+If any of the field is not populated, you must configure your security method in respect to your Kafka configuration. You can do so via the field **Additional properties**.
 
 ### What are default Kafka Consumer client properties?
 
@@ -118,7 +118,7 @@ Properties loading consists of three steps:
 
 ### How is the message payload deserialized?
 
-Kafka messages usually use JSON format therefore we first try to deserialize it as a JsonElement. If this fails (e.g.: because of wrong format) we use the String representation of the original raw value. For convenience we always store the original raw value as String in a different attribute.
+Kafka messages usually use JSON format, therefore we first try to deserialize it as a `JsonElement`. If this fails (e.g. because of wrong format) we use the `String` representation of the original raw value. For convenience, we always store the original raw value as `String` in a different attribute.
 
 The deserialized object structure:
 
@@ -132,7 +132,7 @@ The deserialized object structure:
 
 ### When is the offset committed? What happens if the Connector execution fails?
 
-Following outcomes are possible:
+The following outcomes are possible:
 
 - If Connector execution is successful and **Activation condition** was met, the offset is committed.
 - If **Activation condition** was not met, the offset is also committed to prevent consuming the same message twice.
