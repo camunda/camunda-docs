@@ -91,6 +91,28 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ### v8.2
 
+#### Connectors
+
+Camunda Platform 8 Connectors component is one of our applications which performs the integration with an external system.
+
+Currently, in all cases, either you will use Connectors v8.2 or not, this step should be done. You need to create the Connectors secret object (more details about this in [camunda-platform-helm/656](https://github.com/camunda/camunda-platform-helm/issues/656)).
+
+First, generate the Connectors secret:
+
+```bash
+helm template <RELEASE_NAME> camunda/camunda-platform --version 8.2 \
+    --show-only charts/identity/templates/connectors-secret.yaml >
+    identity-connectors-secret.yaml
+```
+
+Then apply it:
+
+```bash
+kubectl apply --namespace <NAMESPACE_NAME> -f identity-connectors-secret.yaml
+```
+
+#### Keycloak
+
 Camunda Platform v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda Platform 8.1.x to 8.2.x:
 
 1. Follow the official PostgreSQL upgrade guide: [Upgrading a PostgreSQL Cluster v15](https://www.postgresql.org/docs/15/upgrading.html). However, it requires some manual work and longer downtime to do the database schema upgrade.
