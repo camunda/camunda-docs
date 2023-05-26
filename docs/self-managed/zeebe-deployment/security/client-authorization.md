@@ -1,9 +1,8 @@
 ---
 id: client-authorization
 title: "Client authorization"
+description: "Learn how the Zeebe Gateway supports Camunda Identity-based auth token validation."
 ---
-
-## Gateway
 
 The Zeebe Gateway supports [Camunda Identity](../../identity/what-is-identity.md)-based auth token validation.
 By default, authentication is disabled by setting `security.authentication.mode` to `none`.

@@ -137,15 +137,16 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 
 Identity requires the following parameters:
 
-| Parameter name                                      | Description                                        | Example value                                                                     |
-| --------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------- |
-| camunda.operate.identity.issuerUrl                  | URL of issuer (Identity)                           | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.operate.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                   | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.operate.identity.clientId                   | Similar to a username for the application          | operate                                                                           |
-| camunda.operate.identity.clientSecret               | Similar to a password for the application          | XALaRPl...s7dL7                                                                   |
-| camunda.operate.identity.audience                   | Audience for Operate                               | operate-api                                                                       |
-| spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI                                   | http://localhost:18080/auth/realms/camunda-platform                               |
-| spring.security.oauth2.resourceserver.jwt.jwkseturi | Complete URI to get public keys for JWT validation | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
+| Parameter name                                      | Description                                                                                                                                   | Example value                                                                     |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| camunda.operate.identity.issuerUrl                  | URL of issuer (Identity)                                                                                                                      | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.operate.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.operate.identity.redirectRootUrl            | Root URL to redirect users to after successful authentication. If the property is not provided, it will be derived from the incoming request. | http://localhost:8081                                                             |
+| camunda.operate.identity.clientId                   | Similar to a username for the application                                                                                                     | operate                                                                           |
+| camunda.operate.identity.clientSecret               | Similar to a password for the application                                                                                                     | XALaRPl...s7dL7                                                                   |
+| camunda.operate.identity.audience                   | Audience for Operate                                                                                                                          | operate-api                                                                       |
+| spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI                                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
+| spring.security.oauth2.resourceserver.jwt.jwkseturi | Complete URI to get public keys for JWT validation                                                                                            | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
 ### Use Identity JWT token to access Operate API
 
@@ -153,8 +154,8 @@ Operate provides a [REST API](/apis-tools/operate-api/overview.md) under the end
 
 **Example:**
 
-1. [Add an application in Identity](../../identity/user-guide/adding-an-application/).
-2. [Add permissions to an application](../../identity/user-guide/assigning-a-permission-to-an-application/) for Operate API.
+1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for Operate API.
 3. Obtain a token to access the REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
@@ -194,7 +195,7 @@ By default, when using Operate with Identity, one can assign a user "read" and/o
 
 More detailed permissions may be enabled:
 
-1. Resource authorizations must be [enabled in Identity](../../identity/user-guide/authorizations/managing-resource-authorizations/).
+1. Resource authorizations must be [enabled in Identity](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 2. Operate must be configured to use resource authorizations:
 
 ```yaml

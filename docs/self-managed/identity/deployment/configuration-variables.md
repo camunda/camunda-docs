@@ -44,6 +44,22 @@ and `WEBMODELER`.
 For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variable is required to be set.
 :::
 
+### Database configuration
+
+| Environment variable         | Description                                        |
+| ---------------------------- | -------------------------------------------------- |
+| `IDENTITY_DATABASE_HOST`     | The host of the database                           |
+| `IDENTITY_DATABASE_PORT`     | The port of the database                           |
+| `IDENTITY_DATABASE_NAME`     | The name of the database to connect to             |
+| `IDENTITY_DATABASE_USERNAME` | The username of a user with access to the database |
+| `IDENTITY_DATABASE_PASSWORD` | The password of a user with access to the database |
+
+:::note
+There are no default values for the variables above. See
+[supported environments](/reference/supported-environments.md#camunda-platform-8-self-managed) for a list of
+supported databases.
+:::
+
 ### Feature flags
 
 Identity uses feature flag environment variables to enable and disable features, the supported flags are:
@@ -51,3 +67,8 @@ Identity uses feature flag environment variables to enable and disable features,
 | Environment variable         | Description                                 | Default value |
 | ---------------------------- | ------------------------------------------- | ------------- |
 | RESOURCE_PERMISSIONS_ENABLED | Controls the resource autorizations feature | false         |
+
+:::note
+Setting the `RESOURCE_PERMISSIONS_ENABLED` flag to `true` requires a database connection. To configure a database
+connection, see [database configuration](#database-configuration).
+:::

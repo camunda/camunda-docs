@@ -5,7 +5,7 @@ sidebar_label: RabbitMQ Connector
 description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ Connector.
 ---
 
-The **RabbitMQ Connector** allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/).
+The **RabbitMQ Connector** is an outbound Connector that allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/) to send messages to RabbitMQ.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ or create a new Connector task by using the **Append Connector** context menu.
 
 ![wrench-shape](../img/connectors-rabbitmq-append-connector.png)
 
-Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Connecting to RabbitMQ and sending messages
 
@@ -104,4 +104,4 @@ You can use an output mapping to map the response:
 
 ### How do I store secrets for my Connector?
 
-It is highly recommended storing your secret credentials as Camunda secrets. Follow our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended storing your secret credentials as Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.

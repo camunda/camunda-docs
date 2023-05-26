@@ -8,7 +8,7 @@ sidebar_label: "Known limitations"
 
 When deploying the Camunda stack to a provider it is important to confirm that the IP ranges used for container
 to container communication align with the IP ranges that Keycloak consider to be "local". By default, Keycloak
-considers all IPs outside those listed in their [external requests documentation](https://www.keycloak.org/docs/latest/server_installation/#_setting_up_ssl)
+considers all IPs outside those listed in their [external requests documentation](https://www.keycloak.org/docs/19.0.3/server_installation/#_setting_up_ssl)
 to be external and therefore require SSL.
 
 As the [Camunda Platform Helm Charts](https://github.com/camunda/camunda-platform-helm) currently do not provide support

@@ -9,7 +9,7 @@ import DocCardList from '@theme/DocCardList';
 
 This section steps through two concepts for integration:
 
-- **Control your Camunda Platform 8 process automation** by [deploying processes](/components/modeler/web-modeler/save-and-deploy.md), [starting process instances](/components/modeler/web-modeler/start-instance.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
+- **Control your Camunda Platform 8 process automation** by [deploying processes](/components/modeler/web-modeler/run-or-publish-your-process.md#deploy-a-process), [starting process instances](/components/modeler/web-modeler/run-or-publish-your-process.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
 - **Interact with the Camunda Platform 8 ecosystem** by learning about [Camunda Components](/components/components-overview.md) and their APIs to communicate with your cluster, search, get and change data, create Cloud API clients, and more.
 
 :::note
@@ -34,12 +34,12 @@ Camunda Platform 8 provides several official clients based on this API. Official
 
 Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
-<DocCardList items={[{type:"link", href:"/docs/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/cli-client/", label: "CLI client", docId:"apis-tools/cli-client/index"},
 {
-type:"link", href:"/docs/apis-tools/go-client/go-get-started/", label: "Go client", docId:"apis-tools/go-client/index"
+type:"link", href:"/docs/next/apis-tools/go-client/go-get-started/", label: "Go client", docId:"apis-tools/go-client/index",
 },
 {
-type:"link", href:"/docs/apis-tools/cli-client/", label: "CLI client", docId:"apis-tools/cli-client/index"
+type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"
 }
 ]}/>
 
@@ -64,26 +64,30 @@ It is also possible to [build your own client](../apis-tools/build-your-own-clie
 
 ## Learn about Camunda Components and their APIs
 
+Camunda Platform 8 components have APIs to enable polyglot developers to work with in their programming language of choice. Below are links to available component APIs.
+
 ![Architecture diagram for Camunda Platform including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
 
-<DocCardList items={[{type:"link", href:"/docs/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"},
+### API Reference
+
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"},
+{
+type:"link", href:"/docs/next/apis-tools/operate-api/overview/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
+},
+{
+type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)"
+},
+{
+type:"link", href:"/docs/next/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"
+},
 {
 type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/", label: "Tasklist API (REST)", docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
-},
-{
-type:"link", href:"/docs/apis-tools/operate-api/overview", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
-},
-{
-type:"link", href:"/docs/apis-tools/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"
 },
 {
 type:"link", href:"/docs/next/apis-tools/web-modeler-api/", label: "Web Modeler API (Beta, REST)", docId:"apis-tools/web-modeler-api/index", border: "highlight"
 },
 {
-type:"link", href:"/docs/apis-tools/grpc/", label: "Zeebe API (gRPC)", docId:"apis-tools/grpc"
-},
-{
-type:"link", href:"/optimize/apis-tools/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)"
+type:"link", href:"/docs/next/apis-tools/grpc/", label: "Zeebe API (gRPC)", docId:"apis-tools/grpc"
 }
 ]}/>
 

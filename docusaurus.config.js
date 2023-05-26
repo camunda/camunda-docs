@@ -59,7 +59,7 @@ module.exports = {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
       backgroundColor: "#14D890",
       textColor: "#000",
       isCloseable: true,
@@ -127,7 +127,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral",
+              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Contact",
@@ -244,11 +244,43 @@ module.exports = {
           customCss: require.resolve("./src/css/custom.css"),
         },
         sitemap: {
-          //cacheTime: 600 * 1000, // 600 sec - cache purge period
           changefreq: "weekly",
           priority: 0.5,
+          ignorePatterns: [
+            "/docs/**/tags/**",
+            "/docs/next/**",
+            "/docs/0.25/**",
+            "/docs/0.26/**",
+            "/docs/1.0/**",
+            "/docs/1.1/**",
+            "/docs/1.2/**",
+            "/docs/1.3/**",
+            "/docs/8.0/**",
+            "/docs/8.1/**",
+            "/optimize/3.7.0/**",
+            "/optimize/3.8.0/**",
+            "/optimize/3.9.0/**",
+            "/optimize/next/**",
+          ],
         },
       },
     ],
   ],
+  webpack: {
+    jsLoader: (isServer) => ({
+      loader: require.resolve("swc-loader"),
+      options: {
+        jsc: {
+          parser: {
+            syntax: "typescript",
+            tsx: true,
+          },
+          target: "es2017",
+        },
+        module: {
+          type: isServer ? "commonjs" : "es6",
+        },
+      },
+    }),
+  },
 };

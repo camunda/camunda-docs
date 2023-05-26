@@ -114,7 +114,7 @@ function Home() {
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className="row">
-            <div className={clsx("col col--offset-4 col--2", styles.buttons)}>
+            <div className={clsx("col col--offset-3 col--3", styles.buttons)}>
               <Link
                 className={clsx(
                   "button button--outline button--secondary button--lg button--hero get-started",
@@ -122,20 +122,20 @@ function Home() {
                 )}
                 to={useBaseUrl("docs/guides/")}
               >
-                Get Started
+                Explore Guides
               </Link>
             </div>
-            <div className={clsx("col col--2", styles.buttons)}>
+            <div className={clsx("col col--3", styles.buttons)}>
               <Link
                 className={clsx(
                   "button button--outline button--secondary button--lg sign-up",
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral"
+                  "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
                 )}
               >
-                Sign Up
+                Create Account
               </Link>
             </div>
           </div>

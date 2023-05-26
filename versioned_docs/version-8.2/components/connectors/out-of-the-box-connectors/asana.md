@@ -5,23 +5,23 @@ sidebar_label: Asana Connector
 description: Manage Asana projects and tasks from your BPMN process. Learn how to create an Asana Connector task, and get started.
 ---
 
-The **Asana Connector** allows you to connect your BPMN service with [Asana](https://asana.com/).
+The Asana Connector is an outbound protocol Connector that allows you to connect your BPMN service with [Asana](https://asana.com/) to get and create Asana tasks and projects.
 
 ## Prerequisites
 
 To use the **Asana Connector**, you must have an Asana [personal access token](https://developers.asana.com/docs/personal-access-token).
 
 :::note
-It is highly recommended not to expose your Asana personal access token as plain text. Instead, use Camunda secrets. Learn more in our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md).
+It is highly recommended not to expose your Asana personal access token as plain text. Instead, use Camunda secrets. Learn more in our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
 ## Create an Asana Connector task
 
 To use the **Asana Connector** in your process, either change the type of existing task by clicking on it and using
 the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
-Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
-## Fill in the authentication
+## Authentication
 
 In the **Authentication** section, provide a **Personal access token**. [Read more on how to obtain it](https://developers.asana.com/docs/personal-access-token).
 
@@ -80,4 +80,4 @@ In the **Authentication** section, provide a **Personal access token**. [Read mo
 ## Handle Connector response
 
 The **Asana Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**. Therefore,
-handling response is still applicable [as described](./rest.md#response).
+handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

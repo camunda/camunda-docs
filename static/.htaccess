@@ -8,6 +8,109 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# Modeler start instance and deploy page renaming and merging
+RewriteRule ^docs/components/modeler/web-modeler/start-instance/?$ /docs/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
+RewriteRule ^docs/next/components/modeler/web-modeler/start-instance/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
+
+# Modeler start instance and deploy page renaming and merging 8.2
+RewriteRule ^docs/8.2/components/modeler/web-modeler/start-instance/?$ /docs/8.2/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/web-modeler/save-and-deploy/?$ /docs/8.2/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
+
+# deduplication of Web Modeler API
+RewriteRule ^docs/next/self-managed/modeler/web-modeler/api/(.*)$ /docs/next/apis-tools/web-modeler-api/index/$1 [R=301,L]
+RewriteRule ^docs/self-managed/modeler/web-modeler/api/(.*)$ /docs/apis-tools/web-modeler-api/index/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/modeler/web-modeler/api/(.*)$ /docs/8.2/apis-tools/web-modeler-api/index/$1 [R=301,L]
+
+# connectors restructure /next/
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/next/components/connectors/protocol/rest/$1 [R=301,L]
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/next/components/connectors/protocol/graphql/$1 [R=301,L]
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/next/components/connectors/protocol/http-webhook/$1 [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /docs/next/components/connectors/manage-connector-templates/$1 [R=301,L]
+
+# connectors restructure 8.0-8.2
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/8.0/components/connectors/protocol/rest/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/8.0/components/connectors/protocol/graphql/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/8.0/components/connectors/protocol/http-webhook/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /docs/8.0/components/connectors/manage-connector-templates/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/8.1/components/connectors/protocol/rest/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/8.1/components/connectors/protocol/graphql/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/8.1/components/connectors/protocol/http-webhook/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /docs/8.1/components/connectors/manage-connector-templates/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/8.2/components/connectors/protocol/rest/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/8.2/components/connectors/protocol/graphql/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/8.2/components/connectors/protocol/http-webhook/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /docs/8.2/components/connectors/manage-connector-templates/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/components/connectors/protocol/rest/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/components/connectors/protocol/graphql/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/components/connectors/protocol/http-webhook/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /docs/components/connectors/manage-connector-templates/$1 [R=301,L]
+
+# identity restructure 8.2
+RewriteRule ^docs/self-managed/identity/user-guide/configure-logging/(.*)$ /docs/self-managed/identity/user-guide/configuration/configure-logging/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/(.*)$ /docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configure-external-identity-provider-and-logging/(.*)$ /docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configure-external-identity-provider/(.*)$ /docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/connect-to-an-existing-keycloak/(.*)$ /docs/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/managing-user-access/(.*)$ /docs/self-managed/identity/user-guide/authorizations/managing-user-access/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/generating-m2m-tokens/(.*)$ /docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/making-identity-production-ready/(.*)$ /docs/self-managed/identity/user-guide/configuration/making-identity-production-ready/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-role-to-a-user/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-permission-to-a-role/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-a-role/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/(.*)$ /docs/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-a-permission/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-an-api/(.*)$ /docs/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-an-application/(.*)$ /docs/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/groups/creating-a-group/(.*)$ /docs/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/groups/assigning-users-to-a-group/(.*)$ /docs/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/groups/assigning-roles-to-a-group/(.*)$ /docs/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
+
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/connect-to-an-existing-keycloak/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/managing-user-access/(.*)$ /docs/8.2/self-managed/identity/user-guide/authorizations/managing-user-access/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/generating-m2m-tokens/(.*)$ /docs/8.2/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/making-identity-production-ready/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/making-identity-production-ready/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/configure-logging/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/configure-logging/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/configure-external-identity-provider-and-logging/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/configure-external-identity-provider/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-role-to-a-user/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-permission-to-a-role/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-a-role/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-permission-to-an-application/(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-a-permission/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-an-api/(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-an-application/(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/groups/creating-a-group/(.*)$ /docs/8.2/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/groups/assigning-users-to-a-group/(.*)$ /docs/8.2/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/groups/assigning-roles-to-a-group/(.*)$ /docs/8.2/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
+
+# consolidation of Zeebe Gateway configuration
+RewriteRule ^docs/next/self-managed/zeebe-gateway-deployment/zeebe-gateway/(.*)$ /docs/next/self-managed/zeebe-deployment/zeebe-gateway/overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-gateway-deployment/zeebe-gateway/(.*)$ /docs/self-managed/zeebe-deployment/zeebe-gateway/overview/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/zeebe-gateway-deployment/zeebe-gateway/(.*)$ /docs/8.2/self-managed/zeebe-deployment/zeebe-gateway/overview/$1 [R=301,L]
+
+# identity restructure
+RewriteRule ^docs/next/self-managed/identity/user-guide/connect-to-an-existing-keycloak/(.*)$ /docs/next/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/managing-user-access/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/managing-user-access/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/generating-m2m-tokens/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/making-identity-production-ready/(.*)$ /docs/next/self-managed/identity/user-guide/configuration/making-identity-production-ready/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/configure-logging/(.*)$ /docs/next/self-managed/identity/user-guide/configuration/configure-logging/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/(.*)$ /docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/configure-external-identity-provider-and-logging/(.*)$ /docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/configure-external-identity-provider/(.*)$ /docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/assigning-a-role-to-a-user/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/assigning-a-permission-to-a-role/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/adding-a-role/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/assigning-a-permission-to-an-application/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/adding-a-permission/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/adding-an-api/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/adding-an-application/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/groups/creating-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/groups/assigning-users-to-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/groups/assigning-roles-to-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
+
 ###### 8.2 release redirects ######
 RewriteRule ^docs/self-managed/web-modeler/installation/(.*)$ /docs/self-managed/modeler/web-modeler/installation/$1 [R=301,L]
 RewriteRule ^docs/self-managed/web-modeler/configuration/(.*)$ /docs/self-managed/modeler/web-modeler/configuration/$1 [R=301,L]

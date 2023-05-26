@@ -4,8 +4,6 @@ title: "Common problems"
 description: "Information to help troubleshoot common problems."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
-
 This section aims to provide initial help to troubleshoot common issues. This guide is not intended to be a complete list of possible problems, nor does it provide detailed step-by-step solutions; its intention is merely to point you in the right direction when investigating what may be causing the issue you are experiencing.  
 
 ## Optimize is missing some or all definitions
@@ -27,6 +25,10 @@ This often occurs when Elasticsearch is running out of disk space. If this is th
 ## Exception indicating an error while checking the engine version
 
 The most common cause for this issue is that the engine endpoint Optimize uses is not configured correctly. Check your [configuration](../configuration/#connection-to-camunda-platform) and ensure the engine REST URL is set correctly.
+
+## Server language results in UI/server errors
+
+When Optimize is running with its language set to one with characters that it can't recognize, such as Turkish, you may observe logged issues and unusable elements in the UI. We recommend running Optimize on a server with its language set to English.
 
 ## Update issues
 

@@ -9,7 +9,7 @@ import DocCardList from '@theme/DocCardList';
 
 This section steps through two concepts for integration:
 
-- **Control your Camunda Platform 8 process automation** by [deploying processes](/components/modeler/web-modeler/save-and-deploy.md), [starting process instances](/components/modeler/web-modeler/start-instance.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
+- **Control your Camunda Platform 8 process automation** by [deploying processes](/components/modeler/web-modeler/run-or-publish-your-process.md#deploy-a-process), [starting process instances](/components/modeler/web-modeler/run-or-publish-your-process.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
 - **Interact with the Camunda Platform 8 ecosystem** by learning about [Camunda Components](/components/components-overview.md) and their APIs to communicate with your cluster, search, get and change data, create Cloud API clients, and more.
 
 :::note
@@ -34,12 +34,12 @@ Camunda Platform 8 provides several official clients based on this API. Official
 
 Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/cli-client/", label: "CLI client", docId:"apis-tools/cli-client/index"},
 {
-type:"link", href:"/docs/next/apis-tools/go-client/go-get-started/", label: "Go client", docId:"apis-tools/go-client/index"
+type:"link", href:"/docs/next/apis-tools/go-client/go-get-started/", label: "Go client", docId:"apis-tools/go-client/index",
 },
 {
-type:"link", href:"/docs/next/apis-tools/cli-client/", label: "CLI client", docId:"apis-tools/cli-client/index"
+type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"
 }
 ]}/>
 
@@ -70,24 +70,24 @@ Camunda Platform 8 components have APIs to enable polyglot developers to work wi
 
 ### API Reference
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"},
-{
-type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/", label: "Tasklist API (REST)", docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
-},
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"},
 {
 type:"link", href:"/docs/next/apis-tools/operate-api/overview/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
 },
 {
-type:"link", href:"/docs/next/apis-tools/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"
+type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)"
+},
+{
+type:"link", href:"/docs/next/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"
+},
+{
+type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/", label: "Tasklist API (REST)", docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
 type:"link", href:"/docs/next/apis-tools/web-modeler-api/", label: "Web Modeler API (Beta, REST)", docId:"apis-tools/web-modeler-api/index", border: "highlight"
 },
 {
 type:"link", href:"/docs/next/apis-tools/grpc/", label: "Zeebe API (gRPC)", docId:"apis-tools/grpc"
-},
-{
-type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)"
 }
 ]}/>
 
@@ -104,3 +104,9 @@ Watch and fork your favorite collections and APIs on the [Camunda Team](https://
 :::note
 Collections and APIs are manually updated and not all API functionality may be available. For the most up-to-date API functionality, see the [API reference docs](/apis-tools/working-with-apis-tools.md#api-reference).
 :::
+
+### Community SDKs
+
+In addition to APIs and clients, the Camunda Developer Experience team is looking for feedback on popular community clients turned SDKs. While these are currently on the Camunda Community Hub, we are actively iterating and evaluating feedback to fully support them.
+
+- [NodeJS SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)
