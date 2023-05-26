@@ -298,8 +298,7 @@ public class MyConnectorFunction implements OutboundConnectorFunction {
 The `execute` method receives all necessary environment data via the `OutboundConnectorContext` object.
 The Connector runtime environment initializes the context and allows the following to occur:
 
-Fetch and deserialize the input data as shown in **(1)**. See the [input data](#outbound-connector-input-data) section for details.
-
+- Fetch and deserialize the input data as shown in **(1)**. See the [input data](#outbound-connector-input-data) section for details.
 - Validate the created request object as shown in **(2)**. See the [validation](#validation) section for details.
 - Replace secrets in the request object as shown in **(3)**. See the [secrets](#secrets) section for details.
 
