@@ -8,6 +8,7 @@
 <!-- PRs merged go to stage.docs.camunda.io first and must be manually released to docs.camunda.io. -->
 <!-- Help the DevEx team prioritize our work (reviews, merges, etc.) by opening PRs sooner. -->
 
+- [ ] This change is not yet live and should not be merged until {ADD_DATE} (apply `hold` label or convert to draft PR)?
 - [ ] There is no urgency with this change.
 - [ ] This change or page is part of a marketing blog, conference talk, or something else on a schedule.
 - [ ] This functionality is already available but undocumented.
