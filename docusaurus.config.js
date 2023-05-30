@@ -85,7 +85,7 @@ module.exports = {
             {
               type: "html",
               className: "dropdown-archived-versions",
-              value: "<b>Archived versions</b>",
+              value: "<b>Unsupported versions</b>",
             },
             // ["1.3", "1.2", "1.1", "1.0", "0.26", "0.25"].map(
             // ([versionName]) => ({
