@@ -1001,9 +1001,9 @@ This option is applicable for Spring Boot users. All you need to do is to includ
 
 ```xml
 <dependency>
-    <groupId>io.camunda</groupId>
+    <groupId>io.camunda.connector</groupId>
     <artifactId>spring-boot-starter-camunda-connectors</artifactId>
-    <version>${version.spring-zeebe}</version>
+    <version>${version.connectors}</version>
 </dependency>
 <dependency>
     <groupId>org.myorg</groupId>
@@ -1013,7 +1013,7 @@ This option is applicable for Spring Boot users. All you need to do is to includ
 ```
 
 Upon starting your Spring Boot application, you will have a job worker connected to Zeebe, waiting to
-receive messages for your connectors.
+receive jobs for your connectors.
 
 ### Docker runtime image
 
