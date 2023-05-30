@@ -120,7 +120,77 @@ Camunda Platform v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is
 
 **Method 1: Upgrade the database schema to work with PostgreSQL v15**
 
-TBA
+The easiest way to upgrade major versions of postgresql is to start a port-forward,
+and then run pg_dump / pg_restore. The postgresql client versions are fairly flexible
+with different server versions, but for best results, we recommend using the newest
+client version.
+
+1. In one terminal, start a port-forward against the postgresql service
+
+```bash
+kubectl port-forward svc/<deployment-name>-postgresql 5432
+```
+
+Follow the rest of the steps in a different terminal
+
+2. Then get the 'postgres' users password from the postgresql service:
+
+```bash
+kubectl exec -it statefulset/<deployment-name>-postgresql -- env | grep "POSTGRES_POSTGRES_PASSWORD="
+```
+
+3. Scale identity down
+
+```bash
+kubectl scale --replicas=0 deployment <deployment-name>-identity
+```
+
+4. Perform the database dump
+
+```bash
+pg_dumpall -U postgres -h localhost -p 5432 | tee dump.psql
+Password: <enter password from previous command without POSTGRES_POSTGRES_PASSWORD=>
+```
+
+pg_dumpall may ask multiple times for the same password
+
+The database will be dumped into dump.psql
+
+5. Scale database down
+
+```bash
+kubectl scale --replicas=0 statefulset <deployment-name>-postgresql
+```
+
+6. Delete the pvc for the postgresql instance
+
+```bash
+kubectl delete pvc <data-<deployment-name>-postgresql-0>
+```
+
+7. Update the postgresql version
+
+```bash
+kubectl set image statefulset/<deployment-name>-postgresql postgresql=docker.io/bitnami/postgresql:<updated-version>
+```
+
+8. Scale the services back up
+
+```bash
+kubectl scale --replicas=1 statefulset <deployment-name>-postgresql
+```
+
+9. Restore the database dump
+
+```bash
+psql -U postgres -h localhost -p 5432 -f dump.psql
+```
+
+10. Scale up identity
+
+```bash
+kubectl scale --replicas=1 deployment <deployment-name>-identity
+```
 
 **Method 2: Use the previous version PostgreSQL v14**
 
