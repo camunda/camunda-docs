@@ -4,14 +4,13 @@ title: Blue Prism Connector
 description: Orchestrate your Blue Prism queue items from your BPMN process.
 ---
 
-## Prerequisites
-
 The **Blue Prism Connector** allows you to orchestrate a Blue Prism queue from your BPMN process with [Blue Prism RPA](https://www.blueprism.com/).
-In order to start using the Connector, you have to have a running Blue Prism instance we configured API service. Please refer to the [official documentation page](https://bpdocs.blueprism.com/bp-7-1/en-us/Guides/bp-api/api-introduction.htm) to learn more how to install and configure Blue Prism API service.
+
+To start using the Connector, you must have a running Blue Prism instance configured API service. Refer to the [official documentation page](https://bpdocs.blueprism.com/bp-7-1/en-us/Guides/bp-api/api-introduction.htm) to learn more about how to install and configure Blue Prism API service.
 
 ## Create a Blue Prism Connector task
 
-To use a **Blue Prism Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors/index.md) to learn more.
+To use a **Blue Prism Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors/index.md) to learn more.
 
 ## Authentication
 
@@ -59,15 +58,15 @@ The **Blue Prism Connector** currently supports two operation types in the **Ope
 
 ### Get item from a queue by ID
 
-This operation allows to return details of a specified item from a work queue.
+This operation allows you to return details of a specified item from a work queue.
 It matches directly to respective Blue Prism API endpoint - [`Return details of a specified item from a work queue`](https://bpdocs.blueprism.com/bp-7-1/en-us/api-spec-7-1-2.html#tag/Work-Queues/paths/~1api~1v7~1workqueues~1%7BworkQueueId%7D~1items~1%7BworkQueueItemId%7D/get).
 
 #### Usage
 
 1. Select **Get item from a queue by ID** from the **Operation** dropdown.
 2. Populate **Authentication section** as described in the [respective section](#authentication).
-3. In the **Configuration** section set **Blue Prism API base URL** field. E.g., `http://my.bp.host.com:9876`.
-4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where item will be fetched from.
+3. In the **Configuration** section, set **Blue Prism API base URL** field. E.g., `http://my.bp.host.com:9876`.
+4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where the item is fetched from.
 5. In the **Input** section, set **Queue item ID**. This is the identifier of the item to be fetched.
 
 #### Get item from a queue by ID response
@@ -115,20 +114,20 @@ Response example:
 
 ### Create work queue item
 
-This operation allows to create work queue items in the specified queue.
+This operation allows you to create work queue items in the specified queue.
 It matches directly to respective Blue Prism API endpoint - [`Create work queue items`](https://bpdocs.blueprism.com/bp-7-1/en-us/api-spec-7-1-2.html#tag/Work-Queues/paths/~1api~1v7~1workqueues~1%7BworkQueueId%7D~1items~1batch/post).
 
 #### Usage
 
 1. Select **Create work queue item** from the **Operation** dropdown.
-2. Populate **Authentication section** as described in the [respective section](#authentication).
-3. In the **Configuration** section set **Blue Prism API base URL** field. E.g., `http://my.bp.host.com:9876`.
+2. Populate the **Authentication section** as described in the [respective section](#authentication).
+3. In the **Configuration** section, set **Blue Prism API base URL** field. E.g., `http://my.bp.host.com:9876`.
 4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where item will be fetched from.
 5. In the **Input** section, set **Item type** of the data entry you wish to submit to the queue.
 6. In the **Input** section, set **Item value** of the data entry you wish to submit to the queue.
 7. In the **Input** section, set **Defer date**. This field is the earliest time and date that this item is deferred until.
 8. In the **Input** section, set **Priority**. This field is the priority value assigned to the item.
-9. In the **Input** section, set **Status**. This is the user-supplied status value. _Note: please don't confuse it with queue item 'state' property._
+9. In the **Input** section, set **Status**. This is the user-supplied status value. _Note: Do not confuse this with queue item 'state' property._
 
 #### Create work queue item response
 
