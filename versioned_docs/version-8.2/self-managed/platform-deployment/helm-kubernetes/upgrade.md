@@ -128,7 +128,7 @@ client version.
 1. In one terminal, start a port-forward against the postgresql service
 
 ```bash
-kubectl port-forward svc/<deployment-name>-postgresql 5432
+kubectl port-forward svc/<RELEASE_NAME>-postgresql 5432
 ```
 
 Follow the rest of the steps in a different terminal
@@ -136,13 +136,13 @@ Follow the rest of the steps in a different terminal
 2. Then get the 'postgres' users password from the postgresql service:
 
 ```bash
-kubectl exec -it statefulset/<deployment-name>-postgresql -- env | grep "POSTGRES_POSTGRES_PASSWORD="
+kubectl exec -it statefulset/<RELEASE_NAME>-postgresql -- env | grep "POSTGRES_POSTGRES_PASSWORD="
 ```
 
 3. Scale identity down
 
 ```bash
-kubectl scale --replicas=0 deployment <deployment-name>-identity
+kubectl scale --replicas=0 deployment <RELEASE_NAME>-identity
 ```
 
 4. Perform the database dump
@@ -159,25 +159,25 @@ The database will be dumped into dump.psql
 5. Scale database down
 
 ```bash
-kubectl scale --replicas=0 statefulset <deployment-name>-postgresql
+kubectl scale --replicas=0 statefulset <RELEASE_NAME>-postgresql
 ```
 
 6. Delete the pvc for the postgresql instance
 
 ```bash
-kubectl delete pvc <data-<deployment-name>-postgresql-0>
+kubectl delete pvc data-<RELEASE_NAME>-postgresql-0
 ```
 
 7. Update the postgresql version
 
 ```bash
-kubectl set image statefulset/<deployment-name>-postgresql postgresql=docker.io/bitnami/postgresql:<updated-version>
+kubectl set image statefulset/<RELEASE_NAME>-postgresql postgresql=docker.io/bitnami/postgresql:15.3.0
 ```
 
 8. Scale the services back up
 
 ```bash
-kubectl scale --replicas=1 statefulset <deployment-name>-postgresql
+kubectl scale --replicas=1 statefulset <RELEASE_NAME>-postgresql
 ```
 
 9. Restore the database dump
@@ -189,7 +189,7 @@ psql -U postgres -h localhost -p 5432 -f dump.psql
 10. Scale up identity
 
 ```bash
-kubectl scale --replicas=1 deployment <deployment-name>-identity
+kubectl scale --replicas=1 deployment <RELEASE_NAME>-identity
 ```
 
 **Method 2: Use the previous version PostgreSQL v14**
