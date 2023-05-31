@@ -135,7 +135,7 @@ function Home() {
                   "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
                 )}
               >
-                Create Account
+                Sign Up
               </Link>
             </div>
           </div>
