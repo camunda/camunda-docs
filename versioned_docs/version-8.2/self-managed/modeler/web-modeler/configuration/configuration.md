@@ -2,14 +2,14 @@
 id: configuration
 title: "Configuration"
 sidebar_label: "Overview"
-description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, web app, and WebSocket."
+description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, webapp, and WebSocket."
 ---
 
 :::note
 Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
 :::
 
-The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below:
+The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
 - If you are using the Camunda Platform 8 [Helm chart](../../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler).
@@ -66,6 +66,14 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL` | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `RESTAPI_OAUTH2_TOKEN_ISSUER` is used. | `http://keycloak:8080/auth/realms/camunda-platform`         |
 | `RESTAPI_IDENTITY_BASE_URL`               | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                      | `http://identity:8080`                                      |
 
+### Logging
+
+| Environment variable | Description                                         | Example value                                  |
+| -------------------- | --------------------------------------------------- | ---------------------------------------------- |
+| `LOGGING_CONFIG`     | [optional]<br/>Path to custom logback configuration | `file:/full/path/to/custom-logback-config.xml` |
+
+Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-restapi-component) for additional details on how to customize the `restapi` logging output.
+
 ## Configuration of the `webapp` component
 
 ### General
@@ -109,6 +117,14 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 | `CLIENT_PUSHER_KEY`       | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*               | -             |
 | `CLIENT_PUSHER_FORCE_TLS` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`               | `false`       |
 
+### Logging
+
+| Environment variable | Description                            | Example value                |
+| -------------------- | -------------------------------------- | ---------------------------- |
+| `LOG_FILE_PATH`      | [optional]<br/>Path to log file output | `/full/path/to/log/file.log` |
+
+Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
+
 ## Configuration of the `websocket` component
 
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/9.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
@@ -119,6 +135,14 @@ The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web
 | `PUSHER_APP_KEY`     | A unique key used for authentication. Provide a random alphanumeric string of at least 20 characters.                                                                    | \*\*\*        | -             |
 | `PUSHER_APP_SECRET`  | A unique secret used for authentication. Provide a random alphanumeric string of at least 20 characters.                                                                 | \*\*\*        | -             |
 | `PUSHER_APP_PATH`    | [optional]<br/>Base path of the WebSocket endpoint. Can be used to expose the endpoint on a sub path instead of the domain root (e.g. `https://example.com/modeler-ws`). | `/modeler-ws` | `/`           |
+
+### Logging
+
+| Environment variable | Description                                                                                                                    | Example value | Default Value |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------- |
+| `LOG_CHANNEL`        | [optional]<br/>Log channel driver, see [Laravel documentation](https://laravel.com/docs/8.x/logging#available-channel-drivers) | `single`      | `stack`       |
+
+Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-websocket-component) for additional details on how to customize the `websocket` logging output.
 
 ## Notes on host names and port numbers
 
