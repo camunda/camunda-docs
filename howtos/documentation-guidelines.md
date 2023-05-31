@@ -94,7 +94,7 @@ When linking internally from one document to another, follow these guidelines:
 
 - if the source and target document are within the same instance (i.e. both are in `docs` or both are in `optimize`):
   - Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
-  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-clients/community-clients/spring.md?plain=1#L8).
+  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-tools/community-clients/spring.md?plain=1#L8).
   - Always include the `.md` extension in the path.
 - if the source and target document are in different instances (i.e. one is in `docs` and the other is in `optimize`):
   - If the source is in `docs` and the target is in `optimize`, use the `$optimize$` token to prefix the URL. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/guides/setting-up-development-project.md?plain=1#L17).
@@ -138,29 +138,7 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 
 ## Redirect rules
 
-The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on the "Check internal links" step, it likely means you moved a doc. To resolve, you can add a redirect rule to [the .htaccess file](../static/.htaccess), mapping the old URL to the new URL.
-
-### Testing redirect rules
-
-The `.htaccess` file contains redirect rules that are applied to the published site, but it has no effect when running docusaurus locally (via `npm start`).
-
-If you wish to test `.htaccess` rules, you have a couple options:
-
-1. Use online tooling to test rules.
-   Tools like https://htaccess.madewithlove.com/ apply a set of redirect rules to a specific URL. Note that there are edge cases where this tool doesn't give the same results as a published environment.
-
-2. Use `docker compose` to spin up a locally-running Apache webserver.
-   This repo includes Docker configuration ([Dockerfile](../Dockerfile) and [docker-compose.yml](../docker-compose.yml)) to spin up a local environment that better simulates a published environment. Redirect rules can then be tested directly in a browser.
-
-   The local server is based on the contents of your `./build` folder. To start this local server:
-
-   1. Build the docs with `npm run build`.
-   2. Start the server with `docker compose up`.
-   3. Browse http://localhost:3001 and test redirects.
-
-      It is probably best to do this in an incognito browser session, as browsers clutch tightly to 301 redirects.
-
-   4. Clean up the server with `docker compose down`.
+The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on a link validation step, it likely means you moved a doc and did not add a redirect rule that matches the original path. See [the Guide to Writing Redirect Rules](./redirect-rules.md) for information on writing and testing redirect rules.
 
 ## Screenshot automation
 

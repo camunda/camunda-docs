@@ -45,11 +45,17 @@ jobs:
         uses: nev7n/wait_for_response@v1
         with:
           url: "http://${{ env.container_ip }}:8080/"
+      - name: Validate sitemap links
+        uses: lycheeverse/lychee-action@v1.6.1
+        with:
+          args: "sitemap.prod.txt"
+          fail: true
+      - name: Validate product links
+        uses: lycheeverse/lychee-action@v1.6.1
+        with:
+          args: "product-links.prod.txt"
+          fail: true
       - name: Check internal links
-        uses: filiph/linkcheck@2.0.23
+        uses: untitaker/hyperlink@0.1.27
         with:
-          arguments: "-i sitemap.prod.txt"
-      - name: Check product links
-        uses: filiph/linkcheck@2.0.23
-        with:
-          arguments: "-i product-links.prod.txt"
+          args: build/

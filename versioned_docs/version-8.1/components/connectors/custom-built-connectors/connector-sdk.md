@@ -12,10 +12,14 @@ The **Connector SDK** is in developer preview and subject to breaking changes. U
 :::
 
 The **Connector SDK** allows you to [develop custom Connectors](#creating-a-custom-connector)
-using Java code. You can focus on the logic of the Connector, test it locally, and
-reuse its runtime logic in multiple environments. The SDK achieves this by abstracting from
+using Java code.
+
+You can focus on the logic of the Connector, test it locally, and
+reuse its [runtime logic](#runtime-logic) in multiple [runtime environments](#runtime-environments). The SDK achieves this by abstracting from
 Camunda Platform 8 internals that usually come with
-[job workers](../../concepts/job-workers.md).
+[job workers](/components/concepts/job-workers.md).
+
+You can find the latest **Connector SDK** version source code [here](https://github.com/camunda/connector-sdk).
 
 The SDK provides APIs for common Connector operations, such as:
 
@@ -33,9 +37,10 @@ This section outlines how to set up a Connector project, test it, and run it loc
 
 ### Setup
 
-When developing a new Connector, we recommend using our
-[custom Connector template repository on GitHub](https://github.com/camunda/connector-template).
-This template is a [Maven](https://maven.apache.org/)-based Java project, and can be used in various
+When developing a new **Connector**, we recommend using one of our custom Connector
+templates for custom [outbound](https://github.com/camunda/connector-template-outbound) and
+[inbound](https://github.com/camunda/connector-template-inbound) connectors.
+These templates are [Maven](https://maven.apache.org/)-based Java projects, and can be used in various
 ways such as:
 
 - _Create your own GitHub repository_: Click **Use this template** and follow the prompted steps.
@@ -62,7 +67,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-core</artifactId>
-  <version>0.6.0</version>
+  <version>0.8.1</version>
 </dependency>
 ```
 
@@ -71,17 +76,17 @@ Ensure you adhere to the project outline detailed in the next section.
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-core:0.6.0'
+implementation 'io.camunda.connector:connector-core:0.8.1'
 ```
 
 </TabItem>
 </Tabs>
 
-### Project outline
+### Outbound Connector project outline
 
 There are multiple parts of a Connector that enables it for reuse, as a
 reusable building block, for modeling, and for the runtime behavior.
-The following parts make up a Connector:
+For example, the following parts make up an outbound Connector:
 
 ```
 my-connector
@@ -98,7 +103,7 @@ my-connector
 ```
 
 For the modeling building blocks, the Connector provides
-[Connector templates](./connector-templates.md) with **(1)**.
+[Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) with **(1)**.
 
 You provide the runtime logic as Java source code under a directory like **(2)**.
 Typically, a Connector runtime logic consists of the following:
@@ -115,10 +120,10 @@ A configuration file like **(7)** manages the project setup, including dependenc
 In this example, we include a Maven project's `POM` file. Other build tools like
 [Gradle](https://gradle.org/) can also be used.
 
-### Connector template
+### Outbound Connector element template
 
 To create reusable building blocks for modeling, you are required to provide a
-domain-specific [Connector template](./connector-templates.md).
+domain-specific [Connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
 A Connector template defines the binding to your Connector runtime behavior via the following object:
 
@@ -134,7 +139,7 @@ A Connector template defines the binding to your Connector runtime behavior via 
 
 This type definition `io.camunda:template:1` is the connection configuring which version of your Connector runtime behavior to use.
 In technical terms, this defines the **Type** of jobs created for tasks in your process model that use this template.
-Consult the [job worker](../../concepts/job-workers.md) guide to learn more.
+Consult the [job worker](/components/concepts/job-workers.md) guide to learn more.
 
 Besides the type binding, Connector templates also define the input variables of your Connector as `zeebe:input` objects.
 For example, you can create the input variable `message` of your Connector in the element template as follows:
@@ -207,7 +212,7 @@ recommended objects, **Result Variable** and **Result Expression**:
 
 These objects create custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up those two custom headers and translate them into process variables accordingly.
-You can see an example of how to use this in the [out-of-the-box REST Connector](../out-of-the-box-connectors/rest.md#response).
+You can see an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/protocol/rest.md#response).
 
 All Connectors are recommended to offer exception handling to allow users to configure how to map results and technical errors into
 BPMN errors. To provide this, Connector templates can reuse the recommended object **Result Expression**:
@@ -228,9 +233,9 @@ BPMN errors. To provide this, Connector templates can reuse the recommended obje
 
 This object creates custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
-You can see an example of how to use this in the [BPMN errors in Connectors guide](../use-connectors.md#bpmn-errors).
+You can see an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors).
 
-### Runtime logic
+### Outbound Connector runtime logic
 
 To create a reusable runtime behavior for your Connector, you are required to implement
 and expose an implementation of the `OutboundConnectorFunction` interface of the SDK. The Connector runtime
@@ -301,7 +306,7 @@ If the Connector handles exceptional cases, it can use any exception to express 
 error should be associated with a specific error code, the Connector can throw a `ConnectorException` and define
 a `code` as shown in **(4)**.
 We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
-by creating [BPMN errors](../use-connectors.md#bpmn-errors) in their Connector configurations.
+by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.
 
 If the Connector has a result to return, it can create a new result data object and set
 its properties as shown in **(5)**.
@@ -312,7 +317,7 @@ Connector runtime environments can use this data to auto-discover provided Conne
 Using this outline, you start the business logic of your Connector in the `executeConnector` method
 and expand from there.
 
-#### Input data
+#### Outbound Connector input data
 
 The input data of a Connector is provided by the process instance that executes the Connector.
 You can either fetch this data as a raw JSON string using the context's `getVariables` method,
@@ -330,7 +335,7 @@ using `getVariables` and a library like [Gson](https://github.com/google/gson).
 
 The `getVariablesAsType` method and tools like Gson can properly reflect nested data
 objects. You can define nested structures by referencing other Java classes as attributes.
-Looking at the `authentication` data input example described in the [Connector template](#connector-template),
+Looking at the `authentication` data input example described in the [Connector template](#outbound-connector-element-template),
 you can create the following input data objects to reflect the structure properly:
 
 ```java
@@ -353,6 +358,143 @@ public class Authentication {
 }
 ```
 
+### Inbound Connector project outline
+
+There are multiple parts of a Connector that enables it for reuse, as a
+reusable building block, for modeling, and for the runtime behavior.
+For example, the following parts make up an outbound Connector:
+
+```
+my-connector
+├── element-templates
+│   └── inbound-template-connector.json                                     (1)
+├── pom.xml
+├── src
+│   ├── main
+│   │   ├── java/io/camunda/connector
+│   │   │   └── inbound
+│   │   │       ├── MyConnectorExecutable.java                              (2)
+│   │   │       ├── MyConnectorEvent.java                                   (3)
+│   │   │       ├── MyConnectorProperties.java                              (4)
+│   │   │       └── subscription
+│   │   │           ├── MockSubscription.java
+│   │   │           └── MockSubscriptionEvent.java
+│   │   └── resources/META-IN/services
+│   │       └── io.camunda.connector.api.inbound.InboundConnectorExecutable (5)
+```
+
+For the modeling building blocks, the Connector provides
+[Connector element templates](./connector-templates.md) with **(1)**.
+
+You provide the runtime logic as Java source code.
+Typically, a Connector runtime logic consists of exactly one implementation of
+a `InboundConnectorExecutable` with **(2)** and at least one input object like **(3)**, and Connector's
+properties like **(4)**
+
+For a detectable Connector function, you are required to expose your function class name in the
+[`InboundConnectorExecutable` SPI implementation](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html)
+with **(5)**.
+
+A configuration file like **(5)** manages the project setup, including dependencies.
+In this example, we include a Maven project's `POM` file. Other build tools like
+[Gradle](https://gradle.org/) can also be used.
+
+### Inbound Connector element template
+
+To create reusable building blocks for modeling, you are required to provide a
+domain-specific [Connector element template](./connector-templates.md).
+
+A Connector template defines the binding to your Connector runtime behavior via the following object:
+
+```json
+{
+  "type": "Hidden",
+  "value": "io.camunda:mytestinbound:1",
+  "binding": {
+    "type": "zeebe:property",
+    "name": "inbound.type"
+  }
+}
+```
+
+This type definition `io.camunda:mytestinbound:1` is the connection configuring which version of your Connector runtime
+behavior to use. In technical terms, this defines the **Type** of jobs created for tasks in your process model that use
+this template. Consult the [job worker](../../concepts/job-workers.md) guide to learn more.
+
+Besides the type binding, Connector templates also define the properties of your Connector as `zeebe:property` objects.
+For example, you can create the input variable `sender` of your Connector in the element template as follows:
+
+```json
+{
+  "type": "String",
+  "label": "Sender",
+  "description": "Message sender name",
+  "value": "Alice",
+  "binding": {
+    "type": "zeebe:property",
+    "name": "sender"
+  }
+}
+```
+
+### Inbound Connector runtime logic
+
+To create a reusable runtime behavior for your Connector, you are required to implement
+and expose an implementation of the `InboundConnectorExecutable` interface of the SDK. The Connector runtime
+environments will call this function; it handles input data, executes the Connector's
+business logic. Exception handling is optional since the Connector runtime environments handle this as a fallback.
+
+The `InboundConnectorExecutable` interface consists of two methods: `activate` and `deactivate`.
+A minimal recommended outline of a Connector function implementation looks as follows:
+
+```java
+package io.camunda.connector.inbound;
+
+import io.camunda.connector.api.annotation.InboundConnector;
+import io.camunda.connector.api.inbound.InboundConnectorContext;
+import io.camunda.connector.api.inbound.InboundConnectorExecutable;
+import io.camunda.connector.inbound.subscription.MockSubscription;
+import io.camunda.connector.inbound.subscription.MockSubscriptionEvent;
+
+@InboundConnector(name = "MYINBOUNDCONNECTOR", type = "io.camunda:mytestinbound:1")
+public class MyConnectorExecutable implements InboundConnectorExecutable {
+
+    private MockSubscription subscription;
+    private InboundConnectorContext connectorContext;
+
+    @Override
+    public void activate(InboundConnectorContext connectorContext) {
+        MyConnectorProperties props = connectorContext.getPropertiesAsType(MyConnectorProperties.class);
+
+        connectorContext.replaceSecrets(props);
+        connectorContext.validate(props);
+
+        this.connectorContext = connectorContext;
+
+        subscription = new MockSubscription(
+                props.getSender(), props.getMessagesPerMinute(), this::onEvent);
+    }
+
+    @Override
+    public void deactivate() {
+        subscription.stop();
+    }
+
+    private void onEvent(MockSubscriptionEvent rawEvent) {
+        MyConnectorEvent connectorEvent = new MyConnectorEvent(rawEvent);
+        connectorContext.correlate(connectorEvent);
+    }
+}
+```
+
+The `activate` method is a trigger function to start listening to inbound events. The implementation of this method
+has to be asynchronous. Once activated, the inbound Connector execution is considered active and running.
+From this point, it should use the respective methods of `InboundConnectorContext` to communicate with the Connector
+runtime (e.g. to correlate the inbound event or signal the interrupt).
+
+The `deactivate` method is just a graceful shutdown hook for inbound connectors.
+The implementation must release all resources used by the subscription.
+
 #### Validation
 
 Validating input data is a common task in a Connector function. The SDK provides an
@@ -374,7 +516,7 @@ Connector, add the following dependency to your project:
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-validation</artifactId>
-  <version>0.6.0</version>
+  <version>0.8.1</version>
 </dependency>
 ```
 
@@ -383,7 +525,7 @@ Connector, add the following dependency to your project:
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-validation:0.6.0'
+implementation 'io.camunda.connector:connector-validation:0.8.1'
 ```
 
 </TabItem>
@@ -553,7 +695,7 @@ You can find more details and the `NotNullIfAnotherFieldHasValueValidator` imple
 [this StackOverflow thread](https://stackoverflow.com/questions/9284450/jsr-303-validation-if-one-field-equals-something-then-these-other-fields-sho/9287796#9287796).
 
 This approach is the most flexible and reusable one for writing conditional constraints. It is
-independent from the parameters and classes involved. However, for simple use cases, one of the
+independent of the parameters and classes involved. However, for simple use cases, one of the
 following approaches might lead to more maintainable results that require less code.
 
 ###### Manual validation method
@@ -651,7 +793,7 @@ than writing custom constraints.
 
 Connectors that require confidential information to connect to external systems need to be able
 to manage those securely. As described in the
-[guide for creating secrets](../../console/manage-clusters/manage-secrets.md), secrets can be
+[guide for creating secrets](/components/console/manage-clusters/manage-secrets.md), secrets can be
 controlled in a secure location and referenced in a Connector's properties using a placeholder
 pattern `secrets.*`. To make this mechanism as robust as possible, secret handling comes with
 the Connector SDK out of the box. That way, all Connectors can use the same standard way of
@@ -832,53 +974,89 @@ void shouldReturnReceivedMessageWhenExecute() throws Exception {
 
 ## Runtime environments
 
+To integrate Connectors with your business use case, you need a runtime environment to act as the intermediary between
+your business and Connectors space.
+
 The Connector SDK enables you to write environment-agnostic runtime behavior for Connectors.
 This makes the Connector logic reusable in different setups without modifying your Connector
 code. To invoke this logic, you need a runtime environment that knows the Connector function
 and how to call it.
 
 In Camunda Platform 8 SaaS, every cluster runs a component that knows the
-[available out-of-the-box connectors](../out-of-the-box-connectors/available-connectors-overview.md)
+[available out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 and how to invoke them. This component is the runtime environment specific to Camunda's SaaS use case.
 
 Regarding Self-Managed environments, you are responsible for providing the runtime environment that
-can invoke the Connectors. The Connector SDK provides a
-[pre-packaged environment](#pre-packaged-runtime-environment) and means to create a
-[custom environment](#custom-runtime-environment) to make this situation as convenient as possible.
+can invoke the Connectors.
 
-### Pre-packaged runtime environment
+There are several runtime options provided by Camunda:
 
-The SDK comes with a pre-packaged runtime environment that allows you to run select Connector runtimes
-as local job workers out-of-the-box. You can find this Java application on
-[Maven Central](https://repo1.maven.org/maven2/io/camunda/spring-zeebe-connector-runtime).
+- [Spring Boot Starter runtime](#spring-boot-starter-runtime)
+- [Docker runtime image](#docker-runtime-image)
+- [Custom runtime environment](#custom-runtime-environment)
 
-Refer to the [Self-Managed installation guide](/self-managed/connectors-deployment/install-and-start.md) for details on how to
-set up this runtime environment.
+### Spring Boot Starter runtime
+
+This option is applicable for Spring Boot users. All you need to do is to include respective starter:
+
+```xml
+<dependency>
+    <groupId>io.camunda.connector</groupId>
+    <artifactId>spring-boot-starter-camunda-connectors</artifactId>
+    <version>${version.connectors}</version>
+</dependency>
+<dependency>
+    <groupId>org.myorg</groupId>
+    <artifactId>connector-my-awesome</artifactId>
+    <version>${version.connector-my-awesome}</version>
+</dependency>
+```
+
+Upon starting your Spring Boot application, you will have a job worker connected to Zeebe, waiting to
+receive jobs for your connectors.
+
+### Docker runtime image
+
+:::note
+This option is on a deprecation path. Camunda will provide an alternative approach for the
+Docker users shortly.
+:::
+
+This option is applicable for those users who prefer Docker.
+
+The Docker image can be found at the [Docker Hub](https://hub.docker.com/r/camunda/connectors) or alternatively
+built [from source](https://github.com/camunda/connector-runtime-docker).
+
+To build it, you have to run `docker build -t camunda/connectors:X.Y.Z .`.
+
+Once you have both built a Docker image, and a custom connector into JAR, you can start runtime with:
+
+```shell
+docker run --rm --name=connectors -d \
+  -v $PWD/connector.jar:/opt/app/connector.jar \                      # Add a connector jar to the classpath
+  --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
+  -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
+  -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
+  -e MY_SECRET=secret \                                               # Optional: set a secret with value
+  -e SECRET_FROM_SHELL \                                              # Optional: set a secret from the environment
+  --env-file secrets.txt \                                            # Optional: set secrets from a file
+    camunda/connectors:X.Y.Z
+```
 
 ### Custom runtime environment
+
+A custom runtime environment may be required if your organizational and infrastructural needs are not met
+by the existing pre-packaged runtime environments. Such use cases may include (but are not limited to) running on custom serverless services or software platforms.
 
 If using the pre-packaged runtime environment that comes with the SDK does not fit your use case,
 you can create a custom runtime environment. There are three options that come with the SDK:
 
-- Create a custom job worker using Spring Zeebe.
 - Wrap Connector functions as job workers using the `ConnectorJobHandler`.
 - Implement your own Connector function wrapper.
 
-#### Spring Zeebe
-
-Being a Spring-wrapper around the [Zeebe Java client](/apis-clients/java-client/index.md), Spring Zeebe supports
-[running outbound Connectors](https://github.com/camunda-community-hub/spring-zeebe/#run-outboundconnectors) out of the box.
-You can expose them as Spring beans in your Spring application and Spring Zeebe picks them up and runs them automatically.
-Using this approach, you can run multiple Connector functions in one Java application.
-
-Spring Zeebe uses the `ConnectorJobHandler` and thus supports all functionality the [pre-packaged environment](#pre-packaged-runtime-environment)
-provides as well. It allows you to reuse this functionality in your own Spring or Spring Boot-based setup.
-
 #### Connector job handler
 
-To wrap [Connector functions](#runtime-logic) as job workers, the SDK provides the wrapper class `ConnectorJobHandler`.
-Spring Zeebe uses this handler as detailed above and the [pre-packaged environment](#pre-packaged-runtime-environment)
-packages a Spring Zeebe application to provide its functionality.
+To wrap Connector functions as job workers, the SDK provides the wrapper class `ConnectorJobHandler`.
 
 The job handler wrapper provides the following benefits:
 
@@ -886,13 +1064,13 @@ The job handler wrapper provides the following benefits:
 - Handles secret management by defaulting to an environment variables-based secret store and
   allowing to provide a custom secret provider via an SPI for `io.camunda.connector.api.secret.SecretProvider`.
 - Handles Connector result mapping for **Result Variable** and **Result Expression** as described
-  in the [Connector template](#connector-template) section.
+  in the [Connector element template](#outbound-connector-element-template) section.
 - Provides flexible BPMN error handling via **Error Expression** as described in the
-  [Connector template](#connector-template) section.
+  [Connector template](#outbound-connector-element-template) section.
 
-Using the wrapper class, you can create a custom [Zeebe client](../../../apis-clients/working-with-apis-clients.md).
+Using the wrapper class, you can create a custom [Zeebe client](/apis-tools/working-with-apis-tools.md).
 For example, you can spin up a custom client with the
-[Zeebe Java client](../../../apis-clients/java-client/index.md) as follows:
+[Zeebe Java client](/apis-tools/java-client/index.md) as follows:
 
 ```java
 import io.camunda.connector.MyConnectorFunction

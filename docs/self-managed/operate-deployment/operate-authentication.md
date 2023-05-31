@@ -1,6 +1,6 @@
 ---
 id: operate-authentication
-title: Authentication
+title: Authentication and authorization
 description: "Let's take a closer look at how Operate authenticates for use."
 ---
 
@@ -137,24 +137,25 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 
 Identity requires the following parameters:
 
-| Parameter name                                      | Description                                        | Example value                                                                     |
-| --------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------- |
-| camunda.operate.identity.issuerUrl                  | URL of issuer (Identity)                           | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.operate.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                   | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.operate.identity.clientId                   | Similar to a username for the application          | operate                                                                           |
-| camunda.operate.identity.clientSecret               | Similar to a password for the application          | XALaRPl...s7dL7                                                                   |
-| camunda.operate.identity.audience                   | Audience for Operate                               | operate-api                                                                       |
-| spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI                                   | http://localhost:18080/auth/realms/camunda-platform                               |
-| spring.security.oauth2.resourceserver.jwt.jwkseturi | Complete URI to get public keys for JWT validation | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
+| Parameter name                                      | Description                                                                                                                                   | Example value                                                                     |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| camunda.operate.identity.issuerUrl                  | URL of issuer (Identity)                                                                                                                      | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.operate.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.operate.identity.redirectRootUrl            | Root URL to redirect users to after successful authentication. If the property is not provided, it will be derived from the incoming request. | http://localhost:8081                                                             |
+| camunda.operate.identity.clientId                   | Similar to a username for the application                                                                                                     | operate                                                                           |
+| camunda.operate.identity.clientSecret               | Similar to a password for the application                                                                                                     | XALaRPl...s7dL7                                                                   |
+| camunda.operate.identity.audience                   | Audience for Operate                                                                                                                          | operate-api                                                                       |
+| spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI                                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
+| spring.security.oauth2.resourceserver.jwt.jwkseturi | Complete URI to get public keys for JWT validation                                                                                            | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
 ### Use Identity JWT token to access Operate API
 
-Operate provides a [REST API](../../../apis-clients/operate-api/) under the endpoint `/v1`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+Operate provides a [REST API](/apis-tools/operate-api/overview.md) under the endpoint `/v1`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 **Example:**
 
-1. [Add an application in Identity](../../identity/user-guide/adding-an-application/).
-2. [Add permissions to an application](../../identity/user-guide/assigning-a-permission-to-an-application/) for Operate API.
+1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for Operate API.
 3. Obtain a token to access the REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
@@ -187,3 +188,32 @@ Take the `access_token` value from the response object and store it as your toke
 ```shell
 curl -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhb...' -d '{}'
 ```
+
+### Resource-based permissions
+
+By default, when using Operate with Identity, one can assign a user "read" and/or "write" permissions for Operate. "Read" allows read-only access to Operate. "Write" permission allows the user to perform all types of operations modifying data (e.g. update the variables, resolve the incidents or cancel instances).
+
+More detailed permissions may be enabled:
+
+1. Resource authorizations must be [enabled in Identity](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+2. Operate must be configured to use resource authorizations:
+
+```yaml
+camunda.operate.identity.resourcePermissionsEnabled: true
+```
+
+Resource-based permissions are defined per process definition or decision definition. Process definition is defined by Process ID, which is present in BPMN XML. Decision definition is defined by Decision ID, which is present in DMN XML.
+
+The user or user group can be assigned the following types of permissions:
+
+| Permission name         | Resource type(s)                        | Allowed action(s) in Operate                                                                                                |
+| ----------------------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| READ                    | process-definition, decision-definition | User can see the data related to defined process or decision definition.                                                    |
+| UPDATE_PROCESS_INSTANCE | process-definition                      | User can retry the incident, add/update variable, cancel, or modify process instance related to defined process definition. |
+| DELETE_PROCESS_INSTANCE | process-definition                      | User can delete process instance related to defined process definition.                                                     |
+
+For more information, visit the [Identity documentation](../../concepts/access-control/resource-authorizations/).
+
+## Zeebe client credentials
+
+If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.

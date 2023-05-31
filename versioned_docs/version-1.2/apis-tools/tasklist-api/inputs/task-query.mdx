@@ -1,0 +1,58 @@
+---
+id: task-query
+title: TaskQuery
+---
+
+Task query - query to get one page of tasks.
+
+```graphql
+type TaskQuery {
+  state: TaskState
+  assigned: Boolean
+  assignee: String
+  pageSize: Int
+  taskDefinitionId: String
+  searchAfter: [String!]
+  searchAfterOrEqual: [String!]
+  searchBefore: [String!]
+  searchBeforeOrEqual: [String!]
+}
+```
+
+### Fields
+
+#### `state` ([`TaskState`](../enums/task-state.mdx))
+
+State of the tasks
+
+#### `assigned` ([`Boolean`](../scalars/boolean.mdx))
+
+Are the tasks assigned?
+
+#### `assignee` ([`String`](../scalars/string.mdx))
+
+Who is assigned to the tasks?
+
+#### `pageSize` ([`Int`](../scalars/int.mdx))
+
+Size of tasks page (default: 50).
+
+#### `taskDefinitionId` ([`String`](../scalars/string.mdx))
+
+Task definition ID - what's the BPMN flow node?
+
+#### `searchAfter` ([`[String!]`](../scalars/string.mdx))
+
+Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values plus same sort values.
+
+#### `searchAfterOrEqual` ([`[String!]`](../scalars/string.mdx))
+
+Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values.
+
+#### `searchBefore` ([`[String!]`](../scalars/string.mdx))
+
+Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values plus same sort values.
+
+#### `searchBeforeOrEqual` ([`[String!]`](../scalars/string.mdx))
+
+Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values.

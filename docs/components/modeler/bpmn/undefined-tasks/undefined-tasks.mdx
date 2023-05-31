@@ -1,0 +1,32 @@
+---
+id: undefined-tasks
+title: "Undefined tasks"
+description: "An undefined task defines a task that is external to the BPM engine."
+---
+
+import myImageUrl from "./assets/undefined-task.png";
+
+An undefined task (also known as abstract task) defines a task for which the type of work is unspecified.
+This is used to model work done by someone the engine does not need to know of and there is no known system or UI interface.
+It is also used when modeling a process that is not automated, or while the process automation is in development.
+
+For the engine, an undefined task is handled as a pass-through activity, automatically continuing the process at the moment the process instance arrives.
+
+<img src={myImageUrl} alt="Example of multiple Undefined Tasks in sequence" />
+
+Undefined tasks have no real benefit for automating processes, and instead provide insights into the tasks that are performed outside of the process engine.
+
+:::tip modeling processes for automation
+Both Web Modeler and Desktop Modeler default to undefined tasks when adding tasks to your process.
+You can change the task type by clicking the wrench icon and selecting one of the other types.
+:::
+
+## Additional resources
+
+### XML representation
+
+An undefined task:
+
+```xml
+<bpmn:task id="undefined-task" name="Undefined task" />
+```

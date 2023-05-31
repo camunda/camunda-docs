@@ -42,7 +42,12 @@ module.exports = {
             "guides/update-guide/connectors/030-to-040",
             "guides/update-guide/connectors/040-to-050",
             "guides/update-guide/connectors/050-to-060",
+            "guides/update-guide/connectors/060-to-070",
+            "guides/update-guide/connectors/070-to-080",
           ],
+        },
+        {
+          Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
         },
         "guides/update-guide/810-to-820",
         "guides/update-guide/800-to-810",
@@ -66,12 +71,14 @@ module.exports = {
         "components/concepts/job-workers",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
+        "components/concepts/signals",
         "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
+        "components/concepts/outbound-connectors-job-workers",
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -82,6 +89,7 @@ module.exports = {
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/update-billing-reservations",
+            "components/console/manage-organization/update-creditcard",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
@@ -120,14 +128,14 @@ module.exports = {
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
-            "components/modeler/web-modeler/save-and-deploy",
-            "components/modeler/web-modeler/start-instance",
+            "components/modeler/web-modeler/run-or-publish-your-process",
             {
               Collaboration: [
                 "components/modeler/web-modeler/collaboration",
                 "components/modeler/web-modeler/collaborate-with-modes",
                 "components/modeler/web-modeler/design-your-process",
                 "components/modeler/web-modeler/implement-your-process",
+                "components/modeler/web-modeler/play-your-process",
               ],
             },
             "components/modeler/web-modeler/milestones",
@@ -136,7 +144,6 @@ module.exports = {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
-                "components/modeler/web-modeler/advanced-modeling/manage-connector-templates",
               ],
             },
           ],
@@ -165,6 +172,7 @@ module.exports = {
                 "components/modeler/desktop-modeler/telemetry/telemetry",
               ],
             },
+            "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
         {
@@ -183,6 +191,7 @@ module.exports = {
                 "components/modeler/bpmn/script-tasks/script-tasks",
                 "components/modeler/bpmn/send-tasks/send-tasks",
                 "components/modeler/bpmn/manual-tasks/manual-tasks",
+                "components/modeler/bpmn/undefined-tasks/undefined-tasks",
               ],
             },
             {
@@ -199,10 +208,12 @@ module.exports = {
                 "components/modeler/bpmn/events",
                 "components/modeler/bpmn/none-events/none-events",
                 "components/modeler/bpmn/message-events/message-events",
+                "components/modeler/bpmn/signal-events/signal-events",
                 "components/modeler/bpmn/timer-events/timer-events",
                 "components/modeler/bpmn/error-events/error-events",
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
+                "components/modeler/bpmn/link-events/link-events",
               ],
             },
             {
@@ -224,31 +235,57 @@ module.exports = {
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
+        "components/modeler/data-handling",
       ],
       Connectors: [
         "components/connectors/introduction-to-connectors",
-        "components/connectors/use-connectors",
+        "components/connectors/connector-types",
+        {
+          "Use Connectors": [
+            "components/connectors/use-connectors/index",
+            "components/connectors/use-connectors/inbound",
+            "components/connectors/use-connectors/outbound",
+          ],
+        },
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+            "components/connectors/out-of-the-box-connectors/asana",
+            "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/aws-sns",
             "components/connectors/out-of-the-box-connectors/aws-sqs",
             "components/connectors/out-of-the-box-connectors/aws-lambda",
-            "components/connectors/out-of-the-box-connectors/github-webhook",
+            "components/connectors/out-of-the-box-connectors/operate",
+            "components/connectors/out-of-the-box-connectors/easy-post",
+            "components/connectors/out-of-the-box-connectors/github",
+            "components/connectors/out-of-the-box-connectors/gitlab",
             "components/connectors/out-of-the-box-connectors/googledrive",
-            "components/connectors/out-of-the-box-connectors/graphql",
-            "components/connectors/out-of-the-box-connectors/http-webhook",
+            "components/connectors/out-of-the-box-connectors/google-maps-platform",
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            "components/connectors/out-of-the-box-connectors/openai",
+            "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
-            "components/connectors/out-of-the-box-connectors/rest",
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/github-webhook",
           ],
-          "Custom Connectors": [
-            "components/connectors/custom-built-connectors/connector-templates",
+        },
+        {
+          "Protocol Connectors": [
+            "components/connectors/protocol/rest",
+            "components/connectors/protocol/graphql",
+            "components/connectors/protocol/http-webhook",
+          ],
+        },
+        "components/connectors/manage-connector-templates",
+        {
+          "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/connector-templates",
           ],
         },
       ],
@@ -317,6 +354,19 @@ module.exports = {
                 optimizeLink("View mode", "components/userguide/view-mode/"),
               ],
             },
+            {
+              "Dashboards maintained by Camunda": [
+                optimizeLink(
+                  "Process dashboards",
+                  "components/userguide/process-dashboards/"
+                ),
+                optimizeLink(
+                  "Instant preview dashboards",
+                  "components/userguide/instant-preview-dashboards/"
+                ),
+              ],
+            },
+
             optimizeLink(
               "Creating reports",
               "components/userguide/creating-reports/"
@@ -324,10 +374,6 @@ module.exports = {
             optimizeLink(
               "Combined process reports",
               "components/userguide/combined-process-reports/"
-            ),
-            optimizeLink(
-              "Processes",
-              "components/userguide/process-dashboards/"
             ),
             {
               "Process analysis": [
@@ -460,7 +506,7 @@ module.exports = {
                   "components/userguide/additional-features/process-variants-comparison/"
                 ),
                 optimizeLink(
-                  "Machine learning-ready dataset",
+                  "Machine learning-ready data set",
                   "components/userguide/additional-features/ml-dataset/"
                 ),
               ],
@@ -517,30 +563,27 @@ module.exports = {
     },
   ],
   "APIs & Tools": [
-    "apis-clients/working-with-apis-tools",
+    "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-clients/public-api",
-        "apis-clients/grpc",
-        "apis-clients/operate-api/index",
-        require("./docs/apis-clients/tasklist-api/sidebar-schema"),
-        "apis-clients/console-api-reference",
-        "apis-clients/web-modeler-api/index",
+        "apis-tools/public-api",
+        "apis-tools/console-api-reference",
+        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink(
               "Authorization",
-              "apis-clients/optimize-api/optimize-api-authorization/"
+              "apis-tools/optimize-api/optimize-api-authorization/"
             ),
             {
               Configuration: [
                 optimizeLink(
                   "Enable sharing",
-                  "apis-clients/optimize-api/configuration/enable-sharing/"
+                  "apis-tools/optimize-api/configuration/enable-sharing/"
                 ),
                 optimizeLink(
                   "Disable sharing",
-                  "apis-clients/optimize-api/configuration/disable-sharing/"
+                  "apis-tools/optimize-api/configuration/disable-sharing/"
                 ),
               ],
             },
@@ -548,15 +591,15 @@ module.exports = {
               Dashboard: [
                 optimizeLink(
                   "Get dashboard IDs",
-                  "apis-clients/optimize-api/dashboard/get-dashboard-ids/"
+                  "apis-tools/optimize-api/dashboard/get-dashboard-ids/"
                 ),
                 optimizeLink(
                   "Delete dashboards",
-                  "apis-clients/optimize-api/dashboard/delete-dashboard/"
+                  "apis-tools/optimize-api/dashboard/delete-dashboard/"
                 ),
                 optimizeLink(
                   "Export dashboard definitions",
-                  "apis-clients/optimize-api/dashboard/export-dashboard-definitions/"
+                  "apis-tools/optimize-api/dashboard/export-dashboard-definitions/"
                 ),
               ],
             },
@@ -564,96 +607,100 @@ module.exports = {
               Report: [
                 optimizeLink(
                   "Get report IDs",
-                  "apis-clients/optimize-api/report/get-report-ids/"
+                  "apis-tools/optimize-api/report/get-report-ids/"
                 ),
                 optimizeLink(
                   "Delete reports",
-                  "apis-clients/optimize-api/report/delete-report/"
+                  "apis-tools/optimize-api/report/delete-report/"
                 ),
                 optimizeLink(
                   "Export report definitions",
-                  "apis-clients/optimize-api/report/export-report-definitions/"
+                  "apis-tools/optimize-api/report/export-report-definitions/"
                 ),
                 optimizeLink(
                   "Export report result data",
-                  "apis-clients/optimize-api/report/get-data-export/"
+                  "apis-tools/optimize-api/report/get-data-export/"
                 ),
               ],
             },
 
             optimizeLink(
               "Event ingestion",
-              "apis-clients/optimize-api/event-ingestion/"
+              "apis-tools/optimize-api/event-ingestion/"
             ),
             optimizeLink(
               "External variable ingestion",
-              "apis-clients/optimize-api/external-variable-ingestion/"
+              "apis-tools/optimize-api/external-variable-ingestion/"
             ),
             optimizeLink(
               "Health readiness",
-              "apis-clients/optimize-api/health-readiness/"
+              "apis-tools/optimize-api/health-readiness/"
             ),
             optimizeLink(
               "Import entities",
-              "apis-clients/optimize-api/import-entities/"
+              "apis-tools/optimize-api/import-entities/"
             ),
             optimizeLink(
               "Variable labeling",
-              "apis-clients/optimize-api/variable-labeling/"
+              "apis-tools/optimize-api/variable-labeling/"
             ),
           ],
         },
+        require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
+        "apis-tools/web-modeler-api/index",
+        "apis-tools/grpc",
       ],
     },
     {
       Clients: [
         {
+          "CLI client": [
+            "apis-tools/cli-client/index",
+            "apis-tools/cli-client/cli-get-started",
+          ],
+        },
+        {
+          "Go client": [
+            "apis-tools/go-client/index",
+            "apis-tools/go-client/go-get-started",
+          ],
+        },
+        {
           "Java client": [
-            "apis-clients/java-client/index",
-            "apis-clients/java-client/job-worker",
-            "apis-clients/java-client/logging",
-            "apis-clients/java-client/zeebe-process-test",
+            "apis-tools/java-client/index",
+            "apis-tools/java-client/job-worker",
+            "apis-tools/java-client/logging",
+            "apis-tools/java-client/zeebe-process-test",
             {
               Examples: [
-                "apis-clients/java-client-examples/index",
-                "apis-clients/java-client-examples/process-deploy",
-                "apis-clients/java-client-examples/process-instance-create",
-                "apis-clients/java-client-examples/process-instance-create-nonblocking",
-                "apis-clients/java-client-examples/process-instance-create-with-result",
-                "apis-clients/java-client-examples/decision-evaluate",
-                "apis-clients/java-client-examples/job-worker-open",
-                "apis-clients/java-client-examples/data-pojo",
-                "apis-clients/java-client-examples/cluster-topology-request",
+                "apis-tools/java-client-examples/index",
+                "apis-tools/java-client-examples/process-deploy",
+                "apis-tools/java-client-examples/process-instance-create",
+                "apis-tools/java-client-examples/process-instance-create-nonblocking",
+                "apis-tools/java-client-examples/process-instance-create-with-result",
+                "apis-tools/java-client-examples/decision-evaluate",
+                "apis-tools/java-client-examples/job-worker-open",
+                "apis-tools/java-client-examples/data-pojo",
+                "apis-tools/java-client-examples/cluster-topology-request",
               ],
             },
           ],
         },
         {
-          "Go client": [
-            "apis-clients/go-client/index",
-            "apis-clients/go-client/go-get-started",
+          "Community tools": [
+            "apis-tools/community-clients/index",
+            "apis-tools/community-clients/c-sharp",
+            "apis-tools/community-clients/javascript",
+            "apis-tools/community-clients/micronaut",
+            "apis-tools/community-clients/python",
+            "apis-tools/community-clients/ruby",
+            "apis-tools/community-clients/rust",
+            "apis-tools/community-clients/spring",
+            "apis-tools/community-clients/quarkus",
           ],
         },
-        {
-          "CLI client": [
-            "apis-clients/cli-client/index",
-            "apis-clients/cli-client/cli-get-started",
-          ],
-        },
-        {
-          "Community clients": [
-            "apis-clients/community-clients/index",
-            "apis-clients/community-clients/c-sharp",
-            "apis-clients/community-clients/javascript",
-            "apis-clients/community-clients/micronaut",
-            "apis-clients/community-clients/python",
-            "apis-clients/community-clients/ruby",
-            "apis-clients/community-clients/rust",
-            "apis-clients/community-clients/spring",
-            "apis-clients/community-clients/quarkus",
-          ],
-        },
-        "apis-clients/build-your-own-client",
+        "apis-tools/build-your-own-client",
       ],
     },
   ],
@@ -662,8 +709,10 @@ module.exports = {
     "reference/overview",
     "reference/glossary",
     "reference/announcements",
+    "reference/release-notes",
     "reference/licenses",
     "reference/notices",
+    "reference/status",
     "reference/release-policy",
     "reference/early-access",
     "reference/supported-environments",
@@ -723,7 +772,9 @@ module.exports = {
           "Access control": [
             "self-managed/concepts/access-control/applications",
             "self-managed/concepts/access-control/apis",
+            "self-managed/concepts/access-control/groups",
             "self-managed/concepts/access-control/permissions",
+            "self-managed/concepts/access-control/resource-authorizations",
             "self-managed/concepts/access-control/roles",
             "self-managed/concepts/access-control/users",
           ],
@@ -736,6 +787,11 @@ module.exports = {
       Zeebe: [
         "self-managed/zeebe-deployment/zeebe-installation",
         {
+          "Zeebe Gateway": [
+            "self-managed/zeebe-deployment/zeebe-gateway/overview",
+          ],
+        },
+        {
           Configuration: [
             "self-managed/zeebe-deployment/configuration/configuration",
             "self-managed/zeebe-deployment/configuration/logging",
@@ -743,13 +799,15 @@ module.exports = {
             "self-managed/zeebe-deployment/configuration/environment-variables",
             "self-managed/zeebe-deployment/configuration/fixed-partitioning",
             "self-managed/zeebe-deployment/configuration/priority-election",
+            "self-managed/zeebe-deployment/configuration/broker-config",
+            "self-managed/zeebe-deployment/configuration/gateway-config",
           ],
         },
         {
           Security: [
             "self-managed/zeebe-deployment/security/security",
-            "self-managed/zeebe-deployment/security/secure-client-communication",
             "self-managed/zeebe-deployment/security/client-authorization",
+            "self-managed/zeebe-deployment/security/secure-client-communication",
             "self-managed/zeebe-deployment/security/secure-cluster-communication",
           ],
         },
@@ -767,6 +825,13 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/rebalancing",
             "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
+          ],
+        },
+        {
+          Exporters: [
+            "self-managed/zeebe-deployment/exporters/exporters",
+            "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
+            "self-managed/zeebe-deployment/exporters/opensearch-exporter",
           ],
         },
       ],
@@ -934,7 +999,11 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
-              "Update notes (3.9.x-preview-x to 3.9.x)",
+              "Update notes (3.9.x to 3.10)",
+              "self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
+            ),
+            optimizeLink(
+              "Update notes (3.9-preview-x to 3.9.x)",
               "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9/"
             ),
             optimizeLink(
@@ -1022,19 +1091,39 @@ module.exports = {
         "self-managed/identity/getting-started/install-identity",
         {
           "User guide": [
-            "self-managed/identity/user-guide/adding-an-application",
-            "self-managed/identity/user-guide/adding-an-api",
-            "self-managed/identity/user-guide/adding-a-permission",
-            "self-managed/identity/user-guide/assigning-a-permission-to-an-application",
-            "self-managed/identity/user-guide/adding-a-role",
-            "self-managed/identity/user-guide/assigning-a-permission-to-a-role",
-            "self-managed/identity/user-guide/assigning-a-role-to-a-user",
-            "self-managed/identity/user-guide/configure-external-identity-provider",
-            "self-managed/identity/user-guide/configure-logging",
-            "self-managed/identity/user-guide/making-identity-production-ready",
-            "self-managed/identity/user-guide/generating-m2m-tokens",
-            "self-managed/identity/user-guide/managing-user-access",
-            "self-managed/identity/user-guide/connect-to-an-existing-keycloak",
+            {
+              Configuration: [
+                "self-managed/identity/user-guide/configuration/making-identity-production-ready",
+                "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
+                "self-managed/identity/user-guide/configuration/configure-logging",
+                "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
+              ],
+            },
+            {
+              Roles: [
+                "self-managed/identity/user-guide/roles/add-assign-role",
+                "self-managed/identity/user-guide/roles/add-assign-permission",
+              ],
+            },
+            {
+              Groups: [
+                "self-managed/identity/user-guide/groups/create-group",
+                "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
+              ],
+            },
+            {
+              Authorizations: [
+                "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
+                "self-managed/identity/user-guide/authorizations/managing-user-access",
+                "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
+              ],
+            },
+            {
+              "Additional features": [
+                "self-managed/identity/user-guide/additional-features/adding-an-api",
+                "self-managed/identity/user-guide/additional-features/incorporate-applications",
+              ],
+            },
           ],
         },
         {
@@ -1051,15 +1140,17 @@ module.exports = {
       ],
     },
     {
-      "Zeebe Gateway": ["self-managed/zeebe-gateway-deployment/zeebe-gateway"],
-    },
-    {
       Modeler: [
         {
-          "Web Modeler (Beta)": [
+          "Web Modeler": [
             "self-managed/modeler/web-modeler/installation",
-            "self-managed/modeler/web-modeler/configuration",
-            "self-managed/modeler/web-modeler/api",
+            {
+              Configuration: [
+                "self-managed/modeler/web-modeler/configuration/configuration",
+                "self-managed/modeler/web-modeler/configuration/database",
+                "self-managed/modeler/web-modeler/configuration/logging",
+              ],
+            },
           ],
         },
         {

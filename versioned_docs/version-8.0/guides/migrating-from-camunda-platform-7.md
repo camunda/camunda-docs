@@ -125,12 +125,12 @@ With Camunda Platform 8 you deploy:
 
 ![Camunda Platform 7 vs Camunda Platform 8 Deployment View](img/camunda7-vs-camunda8-deployment-view.png)
 
-Camunda Platform 8 deployments happen within Kubernetes. There are [Helm charts available](https://docs.camunda.io/docs/self-managed/zeebe-deployment/kubernetes/helm/) if you want to run Camunda Platform 8 self-managed.
+Camunda Platform 8 deployments happen within Kubernetes. There are [Helm charts available](/self-managed/platform-deployment/kubernetes-helm.md) if you want to run Camunda Platform 8 self-managed.
 
 Camunda Platform 8 is also available as a SaaS offering from Camunda, in this case, you only need to deploy your own process solution and Camunda operates the rest.
 
 :::note
-For local development purposes, you can [spin up Camunda Platform 8 on a developer machine using Docker or Docker Compose](https://docs.camunda.io/docs/self-managed/zeebe-deployment/docker/install/). Of course, developers could also create a cluster for development purposes in the SaaS offering of Camunda.
+For local development purposes, you can [spin up Camunda Platform 8 on a developer machine using Docker or Docker Compose](/self-managed/platform-deployment/docker.md). Of course, developers could also create a cluster for development purposes in the SaaS offering of Camunda.
 :::
 
 ### Other process solution architectures
@@ -149,7 +149,7 @@ Due to limited adoption, there is no support for CDI or OSGI in Camunda Platform
 
 #### Polyglot applications (C#, NodeJS, ...)
 
-When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform 7) with another (Camunda Platform 8). As Zeebe comes with a different API, you need to adjust your source code. Camunda Platform 8 does not use REST as API technology, but gRPC, and you will need to leverage a [client library](/apis-clients/working-with-apis-clients.md) instead.
+When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform 7) with another (Camunda Platform 8). As Zeebe comes with a different API, you need to adjust your source code. Camunda Platform 8 does not use REST as API technology, but gRPC, and you will need to leverage a [client library](/apis-tools/working-with-apis-tools.md) instead.
 
 ![polygot architecture](img/architecture-polyglot.png)
 
@@ -624,7 +624,7 @@ This way, you have full control over what is happening, and such code is also ea
 
 ### Simple expressions and FEEL
 
-[Camunda 8 uses FEEL as its expression language](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/). There are big advantages to this decision. Not only are the expression languages between BPMN and DMN harmonized, but also the language is really powerful for typical expressions. One of my favorite examples is the following onboarding demo we regularly show. A decision table will hand back a list of possible risks, whereas every risk has a severity indicator (yellow, red) and a description.
+[Camunda 8 uses FEEL as its expression language](/components/modeler/feel/what-is-feel.md). There are big advantages to this decision. Not only are the expression languages between BPMN and DMN harmonized, but also the language is really powerful for typical expressions. One of my favorite examples is the following onboarding demo we regularly show. A decision table will hand back a list of possible risks, whereas every risk has a severity indicator (yellow, red) and a description.
 
 ![onboarding demo](https://camunda.com/wp-content/uploads/2022/05/Migrating-to-Camunda-Platform-8-image-1-1024x367.png)
 

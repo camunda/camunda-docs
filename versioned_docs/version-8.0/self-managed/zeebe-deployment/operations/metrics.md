@@ -96,10 +96,10 @@ The health of partitions in a broker can be monitored by the metric `zeebe_healt
 ## Grafana
 
 Zeebe comes with a pre-built dashboard, available in the repository:
-[monitor/grafana/zeebe.json](https://github.com/camunda-cloud/zeebe/tree/develop/monitor/grafana/zeebe.json).
+[monitor/grafana/zeebe.json](https://github.com/camunda/zeebe/blob/main/monitor/grafana/zeebe.json).
 
-[Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard)
-it into your Grafana instance, then select the correct Prometheus data source (important if you have more than one), and
-you should be greeted with the following dashboard:
+[Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) it into your Grafana instance and select the correct Prometheus data source (important if you have more than one). You will then be greeted with the following dashboard, which displays a healthy cluster topology, general throughput metrics, handled requests, exported events per second, disk and memory usage, and more.
 
-![cluster](assets/grafana-preview.png)
+![Grafana dashboard](assets/grafana-preview.png)
+
+You can also try out an [interactive version](https://snapshots.raintank.io/dashboard/snapshot/Vbu3EHQMTI5Onh5RKuiS5J7QSMd7Sp5V), where you can explore help messages for every panel and get a feel for what data is available.

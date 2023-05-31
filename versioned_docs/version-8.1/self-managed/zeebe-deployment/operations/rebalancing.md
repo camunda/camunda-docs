@@ -14,7 +14,7 @@ When a Zeebe cluster uses an uneven leader distribution, caused by losing a lead
 The gateway exposes an HTTP API to request rebalancing. You can use it by `POST`ing to the `/actuator/rebalance` endpoint on the monitoring port of the gateway:
 
 ```bash
-curl -X POST https://{zeebe-gateway}:9600/actuator/rebalance/
+curl -X POST https://{zeebe-gateway}:9600/actuator/rebalance
 ```
 
 The result of this operation is always `200 OK` with no body, even when rebalancing is [not supported](#limitations) by the current configuration or when not all leaders have been contacted.

@@ -1,22 +1,95 @@
 ---
 id: configure-logging
-title: "Configuring logging"
-sidebar_label: "Configuring logging"
+title: "Configure logging"
+sidebar_label: "Configure logging"
+description: "In this guide we will demonstrate how to configure logging in the Identity component"
 ---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+## Configuring logging
 
 The Identity component uses the [Log4j2](https://logging.apache.org/log4j/2.x/) framework to control
 the log level and log format.
 
-By default, Identity logs at the `info` and produces a log line with following format:
+The logging configuration that is included in the Identity image is:
 
-```
-2022-06-27 15:05:21.442 INFO 34490 --- [main] i.c.i.Application: Started Application in 3.659 seconds (JVM running for 4.185)
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta}
+            %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx
+        </Property>
+        <Property name="LOG_FILE_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{1.} %enc{%msg}%n
+        </Property>
+        <Property name="LOG_FILE_NAME_PATTERN">logs/identity.%d{yyyy-MM-dd-mm-ss}.log</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${env:IDENTITY_LOG_PATTERN:-${LOG_PATTERN}}"/>
+        </Console>
+        <Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
+            <JsonTemplateLayout eventTemplateUri="classpath:GcpLayout.json" locationInfoEnabled="true"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="io.camunda.identity" level="${env:IDENTITY_LOG_LEVEL:-info}"/>
+        <Root level="warn">
+            <AppenderRef ref="${env:IDENTITY_LOG_APPENDER:-Console}"/>
+        </Root>
+    </Loggers>
+</Configuration>
 ```
 
-Identity also provides support for configuring the log level and log pattern should it be required by
-exposing two environmental variables, these are:
+### General configuration options
+
+Identity provides support for configuring the log level:
+
+| Environment variable | Accepted values                                  |
+| -------------------- | ------------------------------------------------ |
+| `IDENTITY_LOG_LEVEL` | OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL |
+
+### Supported logging outputs
+
+As part of configuration Identity provides multiple appenders for outputting logs, to configure which logging appender
+is
+used, set the `IDENTITY_LOG_APPENDER` environment variable to one of the following `Console`, or `Stackdriver`:
+
+<Tabs groupId="loggingAppenders" defaultValue="console"
+values={[{label: 'Console', value: 'console', }, {label: 'Stackdriver', value: 'stackdriver', },]} >
+<TabItem value="console">
+
+Console logging produces messages to standard output and is the default log appender. The Console log appender offers
+additional
+configuration options, these are:
 
 | Environment variable   | Accepted values                                                                                                                           |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `IDENTITY_LOG_LEVEL`   | OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL                                                                                          |
 | `IDENTITY_LOG_PATTERN` | _See the [Log4j2 pattern layout docs](https://logging.apache.org/log4j/2.x/manual/layouts.html#PatternLayout) for possible placeholders._ |
+
+</TabItem>
+<TabItem value="stackdriver">
+
+The Stackdriver log appender produces messages to standard output in a format that is compatible with the GCP cloud
+platform.
+
+This appender uses
+the [GCP layout](https://github.com/apache/logging-log4j2/blob/2.x/log4j-layout-template-json/src/main/resources/GcpLayout.json)
+provided by the [Log4j2](https://logging.apache.org/log4j/2.x/manual/) library.
+
+</TabItem>
+</Tabs>
+
+### Providing your own logging configuration
+
+You can provide your own configuration by mounting a configuration file to the Identity container and setting the path to the file using the following variable:
+
+| Environment variable | Purpose                                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `LOGGING_CONFIG`     | The path to your [Log4j2 config XML](https://logging.apache.org/log4j/2.x/manual/configuration.html#XML) file |
+
+:::note
+To write logs to a file in a containerized environment, the mounted directory containing the log file has to be writable under the user running Identity.
+:::

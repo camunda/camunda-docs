@@ -82,7 +82,7 @@ The following configuration parameters define the settings:
 | camunda.tasklist.elasticsearch.numberOfShards   | How many shards Elasticsearch uses for all Tasklist indices.   | 1             |
 | camunda.tasklist.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Tasklist indices. | 0             |
 
-These values are applied only on first startup of Tasklist or during version upgrade. After the Tasklist
+These values are applied only on first startup of Tasklist or during version update. After the Tasklist
 ELS schema is created, settings may be adjusted directly in the ELS template, and the new settings are applied
 to indices created after adjustment.
 
@@ -214,7 +214,7 @@ livenessProbe:
 
 ## Logging
 
-Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image `config/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
+Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image `/app/resources/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

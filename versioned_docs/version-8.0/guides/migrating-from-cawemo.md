@@ -10,16 +10,16 @@ You should consider migrating diagrams from Cawemo to Camunda Platform 8 Web Mod
 
 - You want to continue working on your diagrams on the latest Camunda Platform version.
 - You are exploring automating your processes.
-- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](https://docs.camunda.io/docs/components/concepts/messages/#message-buffering), big [multi-instance constructs](https://docs.camunda.io/docs/components/modeler/bpmn/multi-instance/), the [Connectors framework](https://docs.camunda.io/docs/components/connectors/use-connectors/), or the improved [collaboration features](https://docs.camunda.io/docs/components/modeler/web-modeler/collaboration/) in Web Modeler).
+- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the [Connectors framework](/components/connectors/use-connectors/index.md), or the improved [collaboration features](/components/modeler/web-modeler/collaboration.md) in Web Modeler).
 
 ## Prerequisites
 
-- Ensure you have a valid [Camunda Platform 8 account](https://docs.camunda.io/docs/guides/getting-started/), or sign up if you still need one.
+- Ensure you have a valid [Camunda Platform 8 account](/guides/create-account.md), or sign up if you still need one.
 - A BPMN diagram in your Cawemo account.
 
 ## Migrate your BPMN diagram
 
-Take the following steps to migrate your BPMN diagram in Cawemo to Camunda Platform 8 [Web Modeler](https://docs.camunda.io/docs/components/modeler/web-modeler/launch-cloud-modeler/):
+Take the following steps to migrate your BPMN diagram in Cawemo to Camunda Platform 8 [Web Modeler](/components/modeler/web-modeler/launch-cloud-modeler.md):
 
 1. Log in to Cawemo.
 2. Click the **Project** folder on the **Home** page of the BPMN diagram you want to transfer.
@@ -43,14 +43,14 @@ While unsupported elements are imported in Web Modeler, they are not supported f
 
 ## Additional resources
 
-Not all elements in Cawemo are supported in Camunda Platform 8 Web Modeler. Find details on BPMN coverage in Camunda Platform 8 in the [BPMN coverage documentation](https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-coverage/). We are investing in supporting the elements currently available on Camunda Platform 7.
+Not all elements in Cawemo are supported in Camunda Platform 8 Web Modeler. Find details on BPMN coverage in Camunda Platform 8 in the [BPMN coverage documentation](/components/modeler/bpmn/bpmn-coverage.md). We are investing in supporting the elements currently available on Camunda Platform 7.
 
 ## Next steps
 
-Learn more about [migrating from Camunda 7 to Camunda 8](https://docs.camunda.io/docs/guides/migrating-from-camunda-platform-7/).
+Learn more about [migrating from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-platform-7.md).
 
 :::note
 When you get the error `The following 1 file is invalid and can't be uploaded: ""` when uploading your BPMN file.
 
-It means a BPMN file for execution on Camunda Platform 7 created with Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [Migrating from Camunda Platform 7 documentation under migration overview](https://docs.camunda.io/docs/guides/migrating-from-camunda-platform-7/#migration-overview) to solve the error.
+It means a BPMN file for execution on Camunda Platform 7 created with Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [Migrating from Camunda Platform 7 documentation under migration overview](/guides/migrating-from-camunda-platform-7.md#migration-overview) to solve the error.
 :::

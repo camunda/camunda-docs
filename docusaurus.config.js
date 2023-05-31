@@ -20,7 +20,7 @@ module.exports = {
     //          {
     //            schema: "http://localhost:8080/tasklist/graphql",
     //            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-    //            baseURL: "apis-clients/tasklist-api",
+    //            baseURL: "apis-tools/tasklist-api",
     //            linkRoot: "/docs/",
     //            loaders: {
     //              UrlLoader: "@graphql-tools/url-loader"
@@ -43,6 +43,14 @@ module.exports = {
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
         editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
+        versions: {
+          "3.9.0": {
+            banner: "none",
+          },
+          "3.8.0": {
+            banner: "none",
+          },
+        },
       },
     ],
   ],
@@ -51,7 +59,7 @@ module.exports = {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
       backgroundColor: "#14D890",
       textColor: "#000",
       isCloseable: true,
@@ -84,8 +92,8 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "apis-clients/working-with-apis-clients",
-          label: "APIs & Clients",
+          docId: "apis-tools/working-with-apis-tools",
+          label: "APIs & Tools",
           position: "left",
         },
         {
@@ -119,7 +127,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral",
+              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Contact",
@@ -221,17 +229,54 @@ module.exports = {
           editUrl:
             "https://github.com/camunda/camunda-platform-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
+          // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
+          versions: {
+            8.1: {
+              banner: "none",
+            },
+            "8.0": {
+              banner: "none",
+            },
+          },
         },
         blog: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
         sitemap: {
-          //cacheTime: 600 * 1000, // 600 sec - cache purge period
           changefreq: "weekly",
           priority: 0.5,
+          ignorePatterns: [
+            "/docs/**/tags/**",
+            "/docs/next/**",
+            "/docs/0.25/**",
+            "/docs/0.26/**",
+            "/docs/1.0/**",
+            "/docs/1.1/**",
+            "/docs/1.2/**",
+            "/docs/1.3/**",
+            "/docs/8.0/**",
+            "/docs/8.1/**",
+          ],
         },
       },
     ],
   ],
+  webpack: {
+    jsLoader: (isServer) => ({
+      loader: require.resolve("swc-loader"),
+      options: {
+        jsc: {
+          parser: {
+            syntax: "typescript",
+            tsx: true,
+          },
+          target: "es2017",
+        },
+        module: {
+          type: isServer ? "commonjs" : "es6",
+        },
+      },
+    }),
+  },
 };

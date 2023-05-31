@@ -144,12 +144,12 @@ With Camunda Cloud you deploy:
 
 ![Camunda 7 vs Camunda Cloud Deployment View](img/camunda7-vs-camunda-cloud-deployment-view.png)
 
-Camunda Cloud deployments happen within Kubernetes. There are [Helm charts available](https://docs.camunda.io/docs/self-managed/zeebe-deployment/kubernetes/helm/) if you want to run Camunda Cloud self-managed. 
+Camunda Cloud deployments happen within Kubernetes. There are [Helm charts available](/self-managed/zeebe-deployment/kubernetes/helm/installing-helm.md) if you want to run Camunda Cloud self-managed. 
 
 Camunda cloud is also available as a SaaS offering from Camunda, in this case, you only need to deploy your own process solution and Camunda operates the rest.
 
 :::note
-For local development purposes, you can [spin up Camunda Cloud on a developer machine using Docker or Docker Compose](https://docs.camunda.io/docs/self-managed/zeebe-deployment/docker/install/). Of course, developers could also create a cluster for development purposes in the SaaS offering of Camunda.
+For local development purposes, you can [spin up Camunda Cloud on a developer machine using Docker or Docker Compose](/self-managed/zeebe-deployment/docker/install.md). Of course, developers could also create a cluster for development purposes in the SaaS offering of Camunda.
 :::
 
 ### Other process solution architectures
@@ -168,7 +168,7 @@ Due to limited adoption, there is no support for CDI or OSGI in Camunda Cloud. A
 
 #### Polyglot applications (C#, NodeJS, ...)
 
-When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform 7) with another (Camunda Cloud). As Zeebe comes with a different API, you need to adjust your source code. Camunda Cloud does not use REST as API technology, but gRPC, so you will need to leverage a [client library](/apis-clients/overview.md) instead.
+When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform 7) with another (Camunda Cloud). As Zeebe comes with a different API, you need to adjust your source code. Camunda Cloud does not use REST as API technology, but gRPC, so you will need to leverage a [client library](/apis-tools/overview.md) instead.
 
 ![polygot architecture](img/architecture-polyglot.png)
 

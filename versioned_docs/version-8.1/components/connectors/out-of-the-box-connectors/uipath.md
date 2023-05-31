@@ -1,72 +1,72 @@
 ---
 id: uipath
-title: UIPath Connector
-description: Orchestrate your UIPath Bots with Camunda to create new queue items and get the result from it.
+title: UiPath Connector
+description: Orchestrate your UiPath Bots with Camunda to create new queue items and get the result from it.
 ---
 
-The **UIPath Connector** allows you to orchestrate a UIPath bot from your BPMN process with [UIPath](https://cloud.uipath.com).
+The **UiPath Connector** allows you to orchestrate a UiPath bot from your BPMN process with [UiPath](https://cloud.uipath.com).
 
 ## Prerequisites
 
-To use the UIPath Connector, you need to have a [UIPath](https://cloud.uipath.com) account and configure your organization settings. See the [automation cloud guide](https://docs.uipath.com/automation-cloud/docs/introduction) to learn more.
+To use the **UiPath Connector**, you need to have a [UiPath](https://cloud.uipath.com) account and configure your organization settings. See the [automation cloud guide](https://docs.uipath.com/automation-cloud/docs/introduction) to learn more.
 
-## Create a UIPath Connector task
+## Create a UiPath Connector task
 
-To use a **UIPath Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors.md) to learn more.
+To use a **UiPath Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Operation types
 
-The UIPath Connector currently supports two operation types in the **Operation type** dropdown list: _Add queue item_ and _Get queue item result by ID_.
+The UiPath Connector currently supports two operation types in the **Operation type** dropdown list: _Add queue item_ and _Get queue item result by ID_.
 
-![UIPath Connector operations](../img/connectors-uipath-operations.png)
+![UiPath Connector operations](../img/connectors-uipath-operations.png)
 
 ### Authentication
 
-You can choose among the available UIPath Connector authentication types according to your authentication requirements.
+You can choose among the available UiPath Connector authentication types according to your authentication requirements.
 
-### UIPath Connector (bearer token)
+### UiPath Connector (bearer token)
 
 #### Create a new Connector secret
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `BEARER_TOKEN_UIPATH`) so you can reference it later in the Connector.
 
 #### Configure the bearer token
 
-Select the **UIPath Connector** and fill out the following properties under the **Authentication** section:
+Select the **UiPath Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
 2. Set **Bearer** to the secret you created (i.e. `secrets.UIPATH_BEARER_TOKEN`).
 
-![UIPath Connector bearer token](../img/connectors-uipath-bearer-token.png)
+![UiPath Connector bearer token](../img/connectors-uipath-bearer-token.png)
 
-### UIPath Connector (OAuth token)
+### UiPath Connector (OAuth token)
 
 #### Create a new Connector secret
 
 We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `UIPATH_CLIENT_ID`) so you can reference it later in the Connector.
 
 #### Configure the OAuth Token
 
-Select the **UIPath Connector** and fill out the following properties under the **Authentication** section:
+Select the **UiPath Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
 2. Set **Client ID** to the secret you created (i.e. `secrets.UIPATH_CLIENT_ID`).
 3. Set **Client secret** to the secret you created (i.e. `secrets.UIPATH_CLIENT_SECRET`).
 4. Choose **Client Authentication** from the dropdown menu (i.e. `Send client credentials in body`).
 
-![UIPath Connector oauth token](../img/connectors-uipath-oauth-token.png)
+![UiPath Connector oauth token](../img/connectors-uipath-oauth-token.png)
 
 Find more information about the OAuth client credentials flow in the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
 ### Add queue item
 
-This operation allows you to create a new item and add it to a queue from UIPath Orchestrator. To execute it, take the following steps:
+This operation allows you to create a new item and add it to a queue from UiPath Orchestrator. To execute it, take the following steps:
 
 1. Select the operation **Add queue item** from the **Operation type** dropdown list.
 2. Configure authentication as described in the [authentication](#authentication) section.
@@ -74,18 +74,18 @@ This operation allows you to create a new item and add it to a queue from UIPath
 4. Fill out the input fields as described in the [input](#input) section.
 5. Fill out the response mapping as described in the [add queue item response](#add-queue-item-response) section.
 
-![UIPath Connector - Add Queue Item](../img/connectors-uipath-add-queue-item.png)
+![UiPath Connector - Add Queue Item](../img/connectors-uipath-add-queue-item.png)
 
 #### Configuration
 
 For this section, you must fill out the following fields:
 
-1. **Cloud URL**: Comes with a default value of `cloud.uipath.com`. You can always change it, if needed.
-2. **Cloud organization**: The name of your organization. See [about organizations](https://docs.uipath.com/automation-cloud/docs/about-organizations) to learn more.
-3. **Cloud tenant**: The name of the tenant. See [about tenants](https://docs.uipath.com/automation-cloud/docs/about-tenants) to learn more.
-4. **Organization Unit ID**: Click **Orchestrator** and you will find the id in the URL. For example, `https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/?tid=26929&fid=112233` where the **Organization Unit ID** is `112233`.
+1. **Cloud URL**: Comes with a default value of `cloud.uipath.com`. You can always change it, if needed. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
+2. **Cloud organization**: The name of your organization. See [about organizations](https://docs.uipath.com/automation-cloud/docs/about-organizations) to learn more. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
+3. **Cloud tenant**: The name of the tenant. See [about tenants](https://docs.uipath.com/automation-cloud/docs/about-tenants) to learn more. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
+4. **Organization Unit ID**: Click **Orchestrator** and you will find the id in the URL. For example, `https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/?tid=26929&fid=112233` where the **Organization Unit ID** is `112233`. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
 
-![UIPath Connector configuration](../img/connectors-uipath-configuration.png)
+![UiPath Connector configuration](../img/connectors-uipath-configuration.png)
 
 #### Input
 
@@ -95,7 +95,7 @@ For this section, fill out the following fields:
 2. _(Optional)_ **Defer date**: The earliest date and time at which the item is available for processing. If empty, the item can be processed as soon as possible. Expected date format is `yyyy-MM-dd`.
 3. _(Optional)_ **Due date**: The latest date and time at which the item should be processed. If empty, the item can be processed at any given time. Expected date format is `yyyy-MM-dd`.
 4. _(Optional)_ **Priority**: Select a value from the dropdown list to represent the priority level of the queue item to be added. This property is a criterion for the prioritization of queue items, alongside **Deadline** and **Postpone**.
-5. _(Optional)_ **Specific Content for UIPath Job**: Data that will be passed in to the job. This should be in JSON format.
+5. _(Optional)_ **Specific Content for UiPath Job**: Data that will be passed in to the job. This should be in JSON format.
 
 ```
 = {
@@ -171,13 +171,13 @@ Response example:
 
 ### Get queue item result by ID
 
-This operation allows you get an item from your UIPath Orchestrator. To execute it, take the following steps:
+This operation allows you get an item from your UiPath Orchestrator. To execute it, take the following steps:
 
 1. Select the operation **Get Queue Item result by ID** from the dropdown list **Operation type**.
 2. Configure authentication as described in the [authentication](#authentication) section.
 3. Fill out the **Item ID** field. This field supports FEEL, so you're able to fetch an item ID from the process context; for example, if you exported it while [adding a new queue item](#add-queue-item).
 
-![UIPath Connector - Get Queue Item result by ID](../img/connectors-uipath-get-queue-item-result-by-id.png)
+![UiPath Connector - Get Queue Item result by ID](../img/connectors-uipath-get-queue-item-result-by-id.png)
 
 #### Get queue item result by ID response
 
@@ -249,7 +249,7 @@ Response example:
 
 ## Appendix
 
-### Using UIPath Connector best practice
+### Using UiPath Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
 To learn more, see an entry _Solution with Timer and Loop_ at [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
@@ -258,4 +258,4 @@ To learn more, see an entry _Solution with Timer and Loop_ at [Camunda BPMN exam
 To avoid performance issues, it is recommended to limit the number of loop retries.
 :::
 
-![UIPath polling loop](../img/connectors-uipath-long-polling-pattern.png)
+![UiPath polling loop](../img/connectors-uipath-long-polling-pattern.png)

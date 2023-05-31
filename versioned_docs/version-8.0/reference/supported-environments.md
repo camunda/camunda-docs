@@ -12,7 +12,7 @@ description: "Find out where to run Camunda Platform 8 components for SaaS and S
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, MacOS, and Linux (latest)
 
-_Hint: There are more [community-maintained Camunda Platform 8 clients](/apis-clients/community-clients/index.md)._
+_Hint: There are more [community-maintained Camunda Platform 8 clients](/apis-tools/community-clients/index.md)._
 
 ### Web Browser
 
@@ -37,7 +37,7 @@ Requirements for the components can be seen below:
 | Zeebe Broker and Gateway | OpenJDK 17+  | Elasticsearch 7.16.x(only if Elastic exporter is used) |
 | Operate                  | OpenJDK 11+  | Elasticsearch 7.16.x                                   |
 | Tasklist                 | OpenJDK 11+  | Elasticsearch 7.16.x                                   |
-| Identity                 | OpenJDK 17+  | Keycloak 16.1.1                                        |
+| Identity                 | OpenJDK 17+  | Keycloak 16.1.x                                        |
 | Optimize                 | OpenJDK 11+  | Elasticsearch 7.10.x - 7.15.x, 7.16.2+, 7.17.x         |
 
 :::note Elasticsearch support

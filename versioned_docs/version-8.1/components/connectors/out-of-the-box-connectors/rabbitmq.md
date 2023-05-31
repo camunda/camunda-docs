@@ -5,7 +5,7 @@ sidebar_label: RabbitMQ Connector
 description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ Connector.
 ---
 
-The **RabbitMQ Connector** allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/).
+The **RabbitMQ Connector** is an outbound Connector that allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/) to send messages to RabbitMQ.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ or create a new Connector task by using the **Append Connector** context menu.
 
 ![wrench-shape](../img/connectors-rabbitmq-append-connector.png)
 
-Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Connecting to RabbitMQ and sending messages
 
@@ -80,7 +80,7 @@ Refer to the RabbitMQ documentation to learn about routing attributes:
 ## Message
 
 1. In the **Message** section, insert the message payload. The message can be Text or JSON format.
-2. (Optional) In the **Properties** section, insert the message properties in JSON or as a [FEEL](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/) expression. Go to [RabbitMQ documentation](https://www.rabbitmq.com/publishers.html#message-properties) for learn more about RabbitMQ message properties.
+2. (Optional) In the **Properties** section, insert the message properties in JSON or as a [FEEL](/components/modeler/feel/what-is-feel.md) expression. Go to [RabbitMQ documentation](https://www.rabbitmq.com/publishers.html#message-properties) for learn more about RabbitMQ message properties.
 
 ![connectors-rabbitmq-message-with-properties](../img/connectors-rabbitmq-message-with-properties.png)
 
@@ -92,7 +92,7 @@ The response contains a `messageId` variable.
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/). For example:
+2. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example:
 
 ```
 = {
@@ -104,4 +104,4 @@ You can use an output mapping to map the response:
 
 ### How do I store secrets for my Connector?
 
-It is highly recommended storing your secret credentials as Camunda secrets. Follow our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended storing your secret credentials as Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.

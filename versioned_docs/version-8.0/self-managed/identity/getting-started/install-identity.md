@@ -29,7 +29,7 @@ Password: demo
 
 :::note Want to create more users?
 Creating a user in Identity is not currently supported. To create a user, see
-[Keycloak's documentation on creating a user](https://www.keycloak.org/docs/latest/server_admin/#proc-creating-user_server_administration_guide).
+[Keycloak's documentation on creating a user](https://www.keycloak.org/docs/19.0.3/server_admin/#proc-creating-user_server_administration_guide).
 :::
 
 ## Home screen

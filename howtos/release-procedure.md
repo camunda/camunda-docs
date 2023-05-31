@@ -21,7 +21,7 @@ The build process for [publish-prod](https://github.com/camunda/camunda-platform
 
 ## Perform a minor release
 
-Minor releases to Camunda Platform 8 happen twice a year in April and October, and the documentation is versioned on the same cadence.
+Minor releases to Camunda Platform 8 happen twice a year in April and October, on the second Tuesday of the month, and the documentation is versioned on the same cadence.
 
 To prepare for a minor product release, you'll need to create a new docs version.
 
@@ -65,7 +65,32 @@ To create the new versions:
 
    - Add the new mapping in the first position of the array.
 
-5. Create a PR with the changes and merge to `main`. Confirm no build issues before moving to the release steps.
+5. Ensure the "unmaintained" banner does not appear for supported versions. We currently support all versions of Camunda Platform 8 since none are older than 18 months.
+
+```javascript
+// 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
+   versions: {
+      "8.0": {
+         banner: "none",
+      },
+   },
+```
+
+1. Ensure the older docs do not appear in the sitemap. Only the unversioned links should appear in the sitemap.
+
+In docusaurus.config.js, add the previously current version number to the ignorePatterns array:
+
+```javascript
+sitemap: {
+   changefreq: "weekly",
+   priority: 0.5,
+   ignorePatterns: [
+   "/docs/8.1/**",
+   ],
+},
+```
+
+2. Create a PR with the changes and merge to `main`. Confirm no build issues before moving to the release steps.
 
 ### Release the new version
 
@@ -77,3 +102,15 @@ Use the GitHub UI and follow the instructions below:
 4. Click **Publish release**.
 
 The build process for [publish-prod](https://github.com/camunda/camunda-platform-docs/actions/workflows/publish-prod.yaml) will kick off which could take around 30 min to finish. If publish-prod is successful, the updates will appear on [docs.camunda.io](https://docs.camunda.io).
+
+## Manually Trigger the Algolia crawler (DocSearch)
+
+Search not working for a new minor version? A specific document, published recently, not showing up in the internal search results?
+
+Our twice yearly minor releases usually line up nicely with the scheduled Algolia crawl - Tuesday early US morning.
+
+If the minor version docs are deployed after Tuesday early US morning, the Algolia crawler should be manually triggered, or the internal search (DocSearch) will not work for the new minor version.
+
+Patch releases with significant or urgent updates may also require a manually triggered crawler.
+
+This requires [admin access](https://crawler.algolia.com/admin/users/login). Contact @pepopowitz or @akeller for assistance.
