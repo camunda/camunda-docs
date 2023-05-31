@@ -121,78 +121,76 @@ Camunda Platform v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is
 **Method 1: Upgrade the database schema to work with PostgreSQL v15**
 
 The easiest way to upgrade major versions of postgresql is to start a port-forward,
-and then run pg_dump / pg_restore. The postgresql client versions are fairly flexible
+and then run `pg_dump` or `pg_restore`. The postgresql client versions are fairly flexible
 with different server versions, but for best results, we recommend using the newest
 client version.
 
-1. In one terminal, start a port-forward against the postgresql service
+1. In one terminal, start a `port-forward` against the postgresql service:
 
 ```bash
 kubectl port-forward svc/<RELEASE_NAME>-postgresql 5432
 ```
 
-Follow the rest of the steps in a different terminal
+Follow the rest of these steps in a different terminal.
 
-2. Then get the 'postgres' users password from the postgresql service:
+2. Get the 'postgres' users password from the postgresql service:
 
 ```bash
 kubectl exec -it statefulset/<RELEASE_NAME>-postgresql -- env | grep "POSTGRES_POSTGRES_PASSWORD="
 ```
 
-3. Scale identity down
+3. Scale identity down using the following command:
 
 ```bash
 kubectl scale --replicas=0 deployment <RELEASE_NAME>-identity
 ```
 
-4. Perform the database dump
+4. Perform the database dump:
 
 ```bash
 pg_dumpall -U postgres -h localhost -p 5432 | tee dump.psql
 Password: <enter password from previous command without POSTGRES_POSTGRES_PASSWORD=>
 ```
 
-pg_dumpall may ask multiple times for the same password
+`pg_dumpall` may ask multiple times for the same password. The database will be dumped into `dump.psql`.
 
-The database will be dumped into dump.psql
-
-5. Scale database down
+5. Scale database down using the following command:
 
 ```bash
 kubectl scale --replicas=0 statefulset <RELEASE_NAME>-postgresql
 ```
 
-6. Delete the pvc for the postgresql instance
+6. Delete the PVC for the postgresql instance using the following command:
 
 ```bash
 kubectl delete pvc data-<RELEASE_NAME>-postgresql-0
 ```
 
-7. Update the postgresql version
+7. Update the postgresql version using the following command:
 
 ```bash
 kubectl set image statefulset/<RELEASE_NAME>-postgresql postgresql=docker.io/bitnami/postgresql:15.3.0
 ```
 
-8. Scale the services back up
+8. Scale the services back up using the following command:
 
 ```bash
 kubectl scale --replicas=1 statefulset <RELEASE_NAME>-postgresql
 ```
 
-9. Restore the database dump
+9. Restore the database dump using the following command:
 
 ```bash
 psql -U postgres -h localhost -p 5432 -f dump.psql
 ```
 
-10. Scale up identity
+10. Scale up identity using the following command:
 
 ```bash
 kubectl scale --replicas=1 deployment <RELEASE_NAME>-identity
 ```
 
-11. Continue with the helm upgrade
+11. Continue with the Helm upgrade using the following command:
 
 ```bash
 helm upgrade <RELEASE_NAME>
@@ -202,7 +200,7 @@ helm upgrade <RELEASE_NAME>
 
 You can set the PostgreSQL either by values file or CLI.
 
-By values file:
+**By values file:**
 
 ```yaml
 identity:
@@ -212,7 +210,7 @@ identity:
         tag: 14.5.0
 ```
 
-By CLI:
+**By CLI:**
 
 ```yaml
 helm upgrade [...] --set identity.keycloak.postgresql.image.tag=14.5.0
