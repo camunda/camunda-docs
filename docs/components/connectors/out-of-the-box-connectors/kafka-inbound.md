@@ -5,7 +5,7 @@ sidebar_label: Kafka Consumer Connector
 description: "The Kafka Consumer Connector allows you to connect your BPMN service with Kafka. Learn how to create a Kafka Consumer Connector and make it executable."
 ---
 
-The **Kafka Consumer Connector** allows you to connect your BPMN service with [Kafka](https://kafka.apache.org/).
+The **Kafka Consumer Connector** allows you to consume messages by subscribing to [Kafka](https://kafka.apache.org/) topics and map them your BPMN processes as start or intermediate events.
 
 ## Prerequisites
 
