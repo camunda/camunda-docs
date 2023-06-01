@@ -1,4 +1,4 @@
-echo "Preventing unsupported site from being crawled..."
+notify "Preventing unsupported site from being crawled..."
 
 echo -e 'User-agent: *\nDisallow: /' > static/robots.txt
 

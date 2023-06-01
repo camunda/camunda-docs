@@ -1,5 +1,5 @@
 function delete_version() {
-  echo "Deleting version $1..."
+  notify "Deleting version $1..."
   folder=versioned_docs/$VERSION
   sidebars=versioned_sidebars/$VERSION-sidebars.json
   rm -rf $folder
@@ -9,7 +9,7 @@ function delete_version() {
 }
 
 function delete_next() {
-  echo "Deleting next version..."
+  notify "Deleting next version..."
   folder=docs
   sidebars=sidebars.js
   rm -rf $folder

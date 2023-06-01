@@ -5,11 +5,22 @@ set -e # exit at first error
 ARCHIVED_VERSION="0.25"
 # ARCHIVED_OPTIMIZE_VERSION="3.7.0"
 
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+
+function warn() {
+  echo -e "${YELLOW}$1${NC}"
+}
+
+function notify() {
+  echo -e "${GREEN}$1${NC}"
+}
+
 read -p "You're about to delete every version from this branch except ${ARCHIVED_VERSION}. Are you sure you want to do this? Enter Y or y to continue, or anything else to exit." CONTINUE
 
 if [[ ! $CONTINUE =~ ^[Yy]$ ]]
 then
-  echo "Exiting!"
+  warn "Exiting!"
   exit 0
 fi
 
@@ -35,8 +46,8 @@ if [[ "$script_index" == 4 || -z "$script_index" ]]; then
   source $script_directory/4-fixDockerfile.sh
 fi
 
-echo "Automated steps are complete!"
-echo "Manual steps that remain: 
+notify "Automated steps are complete!"
+notify "Manual steps that remain: 
 5. Update the docusaurus.config.js
 6. Update the theme components
 7. Update CI workflows
