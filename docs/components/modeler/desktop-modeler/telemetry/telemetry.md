@@ -162,9 +162,9 @@ In all events [the execution platform and version](#diagram-openedclosed-event) 
 
 BPMN editor events are sent on different interactions with the BPMN editor:
 
-- User created, appended or replaced an element on the canvas. These events include the `oldElement`/`sourceElement` (when applicaple) and the new element(s).
-- User selected, updated, unlinked or removed an element template from an element via the properties panel. These events include the current diagram `selection` and respective element templates.
-- User interacted with the popup menu, context menu or the palette. These events include the target (`entryId`, `entryGroup`, `entryTitle`) and `triggerType` (`"click"`, `"drag"`, or `"keyboard"`) of the interaction, as well as the current diagram `selection`.
+- User created, appended, or replaced an element on the canvas. These events include the `oldElement`/`sourceElement` (when applicable) and the new element(s).
+- User selected, updated, unlinked, or removed an element template from an element via the properties panel. These events include the current diagram `selection` and respective element templates.
+- User interacted with the pop-up menu, context menu, or the palette. These events include the target (`entryId`, `entryGroup`, `entryTitle`) and `triggerType` (`"click"`, `"drag"`, or `"keyboard"`) of the interaction, as well as the current diagram `selection`.
 
 Example event:
 
