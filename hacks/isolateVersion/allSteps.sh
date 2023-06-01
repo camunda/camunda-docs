@@ -13,7 +13,8 @@ then
   exit 0
 fi
 
-# Used for debugging purposes. If I only want to test one step, I'm passing the step number in as an argument.
+# Used for debugging purposes. If you only want to test one step, Pass the step number in as an argument.
+#  example: `./allSteps.sh 1` will only run the first step.
 script_index=$1
 
 script_directory=$(cd "$(dirname "$0")" && pwd)
@@ -34,4 +35,11 @@ if [[ "$script_index" == 4 || -z "$script_index" ]]; then
   source $script_directory/4-fixDockerfile.sh
 fi
 
-echo "Complete!"
+echo "Automated steps are complete!"
+echo "Manual steps that remain: 
+5. Update the docusaurus.config.js
+6. Update the theme components
+7. Update CI workflows
+8. Fix htaccess rules (this might always be manual)
+9. Fix links (this will always be manual)
+"
