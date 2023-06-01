@@ -148,8 +148,6 @@ Response example:
 
 ![BP create queue item](../img/connectors-blueprism-add-item.png)
 
-## Appendix
-
 ### Using Blue Prism Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
