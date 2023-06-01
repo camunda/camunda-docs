@@ -5,11 +5,11 @@ description: "Learn how the Zeebe Gateway supports Camunda Identity-based auth t
 ---
 
 The Zeebe Gateway supports [Camunda Identity](../../identity/what-is-identity.md)-based auth token validation.
-By default, authentication is disabled by setting `security.authentication.mode` to `none`.
+In Camunda Platform 8 Self-Managed Helm chart, the authentication is enabled via Camunda Identity like all other applications.
 
 ### Camunda Identity authorization
 
-[Camunda Identity](../../identity/what-is-identity.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `security.authentication.identity.*` properties. You can find more details about these in the [Gateway config documentation](../configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity).
+[Camunda Identity](../../identity/what-is-identity.md)-based OAuth token validation is already enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `security.authentication.identity.*` properties. You can find more details about these in the [Gateway config documentation](../configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity).
 
 #### YAML snippet
 
@@ -23,7 +23,9 @@ security:
       type: keycloak
 ```
 
-Once enabled, every gRPC request to the Gateway will require a valid auth token in the `Authorization` header, granting access to the configured `security.authentication.identity.audience`, issued by the configured `security.authentication.identity.issuerBackendUrl`. The `zeebe-api` audience is already pre-configured in Camunda Identity.
+With authentication enabled, every gRPC request to the Gateway requires a valid auth token in the `Authorization` header, granting access to the configured `security.authentication.identity.audience`, issued by the configured `security.authentication.identity.issuerBackendUrl`. The `zeebe-api` audience is already pre-configured in Camunda Identity.
+
+The authentication could be disabled by setting `security.authentication.mode: none` in the Gateway configuration file or via `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_MODE=none` as environment variable.
 
 ## Client
 
