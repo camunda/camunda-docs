@@ -110,6 +110,7 @@ module.exports = {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-professional-plan",
+            "components/console/manage-plan/cancel-professional-subscription",
           ],
         },
         {

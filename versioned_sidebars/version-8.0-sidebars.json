@@ -256,7 +256,6 @@
         {
           "Use Connectors": [
             "components/connectors/use-connectors/index",
-            "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound"
           ]
         },
@@ -284,15 +283,13 @@
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/twilio",
-            "components/connectors/out-of-the-box-connectors/uipath",
-            "components/connectors/out-of-the-box-connectors/github-webhook"
+            "components/connectors/out-of-the-box-connectors/uipath"
           ]
         },
         {
           "Protocol Connectors": [
             "components/connectors/protocol/rest",
-            "components/connectors/protocol/graphql",
-            "components/connectors/protocol/http-webhook"
+            "components/connectors/protocol/graphql"
           ]
         },
         "components/connectors/manage-connector-templates",

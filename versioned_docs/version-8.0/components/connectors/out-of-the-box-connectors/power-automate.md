@@ -129,7 +129,7 @@ For this section, you must fill out the following fields:
 4. **Run mode**: Choose between attended or unattended.
 5. **Run priority**: Choose an option (normal, high) or add your own.
 6. _(Optional)_ **Inputs**: The desktop flow script input parameters (JSON serialized string).
-7. _(Optional)_ **Callback URL**: URL that will be called once the desktop flow script is complete. [See how to use the Webhook Connector](#using-webhook-connector-as-callback-endpoint) as a callback endpoint.
+7. _(Optional)_ **Callback URL**: URL that will be called once the desktop flow script is complete.
 
 ### Get the status of a flow run
 
@@ -213,21 +213,6 @@ Response example:
 ## Appendix
 
 ### Using Power Automate Connector best practice
-
-#### Using Webhook Connector as callback endpoint
-
-Oftentimes, it is desired to continue the process after a Power Automate flow run finished. You can use the **Callback URL** field if you select the **Trigger a flow run** to specify a URL which will be called after the flow is finished.
-
-If you wish to continue the Camunda process or start a new one, the [Webhook Connector](/components/connectors/protocol/http-webhook.md) is a good next step. For this, take the following steps:
-
-1. Create a [Webhook Connector](/components/connectors/protocol/http-webhook.md) and specify the **Webhook ID**.
-2. Create a [Power Automate Connector](/components/connectors/out-of-the-box-connectors/power-automate.md), select the **Trigger a flow run** method, and fill in the fields.
-
-   If you use Camunda Platform 8 SaaS, you can use the following pattern for the **Callback URL**: `{zeebe.client.cloud.region}.{zeebeHostUrl}/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
-
-   If you use Camunda Platform 8 SaaS you can find the Zeebe-specific values in you cluster details on the **API** tab under **Client Credentials**. The **webhookId** is the id you specified in the first step, and the **zeebeHostUrl** is connectors.camunda.io.
-
-   ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-cluster-api-credentials.png)
 
 #### Get Bearer token with Postman
 

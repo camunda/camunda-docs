@@ -18,7 +18,6 @@ import TabItem from "@theme/TabItem";
 <Tabs groupId="ootb" defaultValue="outbound" queryString values={
 [
 {label: 'Outbound', value: 'outbound', },
-{label: 'Inbound', value: 'inbound', },
 {label: 'Protocol', value: 'protocol', },
 ]
 }>
@@ -66,7 +65,6 @@ import TabItem from "@theme/TabItem";
 
 - [GraphQL Connector](/components/connectors/protocol/graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
 - [REST Connector](/components/connectors/protocol/rest.md) - Make a request to a REST API and use the response in the next steps of your process.
-- [HTTP Webhook Connector](/components/connectors/protocol/http-webhook.md) - Start a process instance with your custom webhook configuration.
 
 </TabItem>
 
