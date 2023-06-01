@@ -30,4 +30,8 @@ if [[ "$script_index" == 3 || -z "$script_index" ]]; then
   source $script_directory/3-preventCrawling.sh
 fi
 
+if [[ "$script_index" == 4 || -z "$script_index" ]]; then
+  source $script_directory/4-fixDockerfile.sh
+fi
+
 echo "Complete!"
