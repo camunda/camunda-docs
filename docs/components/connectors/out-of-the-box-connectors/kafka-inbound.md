@@ -14,7 +14,7 @@ It is highly recommended not to expose your sensitive data as plain text, but ra
 
 ## Create a Kafka Consumer Connector task
 
-1. Start building your BPMN diagram with a **Start Event** building block.
+1. Add a  **Start Event** or  an **Intermediate Event** to your BPMN diagram to get started.
 2. Change its template to a Kafka Consumer.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
