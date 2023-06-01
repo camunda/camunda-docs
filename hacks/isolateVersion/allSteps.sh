@@ -26,4 +26,8 @@ if [[ "$script_index" == 2 || -z "$script_index" ]]; then
   source $script_directory/2-deleteOtherVersions.sh
 fi
 
+if [[ "$script_index" == 3 || -z "$script_index" ]]; then
+  source $script_directory/3-preventCrawling.sh
+fi
+
 echo "Complete!"

@@ -1,3 +1,5 @@
+echo "Removing other versions from the manifest..."
+
 # exclude all other versions from version file
 echo "[\"$ARCHIVED_VERSION\"]" > versions.json
 
