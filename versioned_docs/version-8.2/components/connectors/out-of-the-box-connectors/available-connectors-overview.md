@@ -57,6 +57,7 @@ import TabItem from "@theme/TabItem";
 
 - [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-inbound.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.
+- [Kafka Consumer Connector](/components/connectors/out-of-the-box-connectors/kafka-inbound.md) - Consume messages from [Kafka](https://kafka.apache.org/) from your BPMN process.
 
 </TabItem>
 

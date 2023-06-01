@@ -251,19 +251,38 @@ module.exports = {
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
-            "components/connectors/out-of-the-box-connectors/aws-sns",
-            "components/connectors/out-of-the-box-connectors/aws-sqs",
-            "components/connectors/out-of-the-box-connectors/aws-lambda",
+            {
+              AWS: [
+                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+                "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/aws-sns",
+                "components/connectors/out-of-the-box-connectors/aws-sqs",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            "components/connectors/out-of-the-box-connectors/github",
+            {
+              GitHub: [
+                "components/connectors/out-of-the-box-connectors/github",
+                "components/connectors/out-of-the-box-connectors/github-webhook",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/gitlab",
-            "components/connectors/out-of-the-box-connectors/googledrive",
-            "components/connectors/out-of-the-box-connectors/google-maps-platform",
-            "components/connectors/out-of-the-box-connectors/kafka",
+            {
+              Google: [
+                "components/connectors/out-of-the-box-connectors/googledrive",
+                "components/connectors/out-of-the-box-connectors/google-maps-platform",
+              ],
+            },
+            {
+              Kafka: [
+                "components/connectors/out-of-the-box-connectors/kafka",
+                "components/connectors/out-of-the-box-connectors/kafka-inbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/power-automate",
@@ -273,7 +292,6 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
-            "components/connectors/out-of-the-box-connectors/github-webhook",
           ],
         },
         {
