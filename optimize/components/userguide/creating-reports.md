@@ -22,7 +22,11 @@ To create a custom report based on a key performance indicator (KPI) you’d lik
 5. Set up and customize your report. Begin by naming your report in the text box at the top of the page.
 6. In the gray text box to the right, confirm your data source, and select what you’d like to review from the process. You can also group by topics such as duration or start date.
 7. If you’d like, filter the process instance or flow nodes. For example, you can filter by duration, only viewing process instances running for more than seven days.
-8. Finally, you have the option to view particular sets of data from the instance, like instance count or absolute value, by selecting the gear icon to the left of your data customization. You can also choose how you’d like to visualize your data in the box beneath **Visualization** (i.e. bar chart, pie chart, etc.). Once you’ve made your selections, click **Save**.
+8. In addition, Report can be given a description which is displayed below the Report name. Using the **Add/Edit** button, user can add/edit/remove the description. Text editor allows to add plain text description with a limit of 400 characters.
+
+![Add description modal](./img/report-descriptionModal.png)
+
+9. Finally, you have the option to view particular sets of data from the instance, like instance count or absolute value, by selecting the gear icon to the left of your data customization. You can also choose how you’d like to visualize your data in the box beneath **Visualization** (i.e. bar chart, pie chart, etc.). Once you’ve made your selections, click **Save**.
 
 ## Share your report
 
