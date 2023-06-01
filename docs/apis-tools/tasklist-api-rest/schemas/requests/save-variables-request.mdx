@@ -1,6 +1,6 @@
 ---
-id: variable-input
-title: VariableInput
+id: task-complete-request
+title: SaveVariablesRequest
 hide_table_of_contents: false
 ---
 
@@ -42,7 +42,7 @@ export const Badge = (props) => (
   </>
 );
 
-Change or add a variable with name and value.
+SaveVariablesRequest - is request object with variables to add or update for a task.
 
 <Tabs groupId="schema" defaultValue="schema" values={
 [
@@ -54,8 +54,7 @@ Change or add a variable with name and value.
 
 ```graphql
 {
-    "name": string,
-    "value": string
+    "variables": [VariableInput]
 }
 ```
 
@@ -65,8 +64,12 @@ Change or add a variable with name and value.
 
 ```json
 {
-  "name": "string",
-  "value": "string"
+  "variables": [
+    {
+      "name": "string",
+      "value": "string"
+    }
+  ]
 }
 ```
 
@@ -75,18 +78,10 @@ Change or add a variable with name and value.
 
 ### Fields
 
-#### [<code style={{ fontWeight: 'normal' }}>VariableInput.<b>name</b></code>](#)<Bullet /> `string`
+#### [<code style={{ fontWeight: 'normal' }}>SaveVariablesRequest.<b>variables</b></code>](#)<Bullet />[`VariableInput`](./variable-input.mdx) <Badge class="secondary" text="list"/>
 
-> Name of the variable.
-
-#### [<code style={{ fontWeight: 'normal' }}>VariableInput.<b>value</b></code>](#)<Bullet /> `string`
-
-> Value of the variable. Complex values, e.g. a list of objects, must be serialized as JSON.
-
-### Member of
-
-[`TaskCompleteRequest`](./task-complete-request.mdx) <Badge class="secondary" text="input"/>
+> Variables to update or add to task.
 
 ### Consumed by
 
-[`Complete task`](../../controllers/tasklist-api-rest-task-controller.md#complete-task) <Badge class="secondary" text="PATCH"/>
+[`Save draft task variables`](../../controllers/tasklist-api-rest-task-controller.md#save-draft-task-variables) <Badge class="secondary" text="POST"/>

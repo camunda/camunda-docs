@@ -254,6 +254,114 @@ curl -X 'PATCH' \
 | 400         | An error is returned if the task is not assigned to the current user.          | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 | 404         | An error is returned when the task with the `taskId` is not found.             | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
 
+### Save draft task variables
+
+Complete a task with `taskId` and optional variables. Returns the task.
+
+#### Description
+
+This operation performs several actions:
+
+1. Validates the task and draft variables.
+1. Deletes existing draft variables for the task.
+1. Checks for new draft variables. If a new variable's name matches an existing one but the value differs, it is saved. In case of duplicate draft variable names, the last variable's value is kept.
+
+:::note
+Please be aware that invoking this method successively will overwrite all existing draft variables.
+Only draft variables submitted in the most recent request body will be persisted.
+Therefore, ensure you include all necessary variables in each request to maintain the intended variable set.
+:::
+
+#### URL
+
+`/v1/tasks/{taskId}/variables`
+
+#### Method
+
+`POST`
+
+#### Request parameters
+
+| Parameter name | Type | Required | Description    |
+| -------------- | ---- | :------: | -------------- |
+| taskId         | path |  `true`  | ID of the task |
+
+#### Request body
+
+[`SaveVariablesRequest`](../schemas/requests/save-variables-request.mdx) - `[Required]`
+
+#### HTTP request examples
+
+##### Request with provided list of draft variables
+
+```shell
+curl -X 'POST' \
+  'http://{host}/v1/tasks/{taskId}/variables' \
+  -H 'accept: application/json' \
+  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}' \
+  -d '{
+  "variables": [
+    {
+      "name": "strVarExample",
+      "value": "\"strVarValue\""
+    },
+    {
+      "name": "intVarExample",
+      "value": "15"
+    },
+    {
+      "name": "booleanVarExample",
+      "value": "false"
+    },
+    {
+      "name": "arrayVarExample",
+      "value": "[1, 2, 3, 5, 8, 13, 21]"
+    }
+  ]
+}'
+```
+
+##### Request with empty list of draft variables
+
+In such a scenario, all previously stored draft variables will be removed.
+
+```shell
+curl -X 'POST' \
+  'http://{host}/v1/tasks/{taskId}/variables' \
+  -H 'accept: application/json' \
+  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}' \
+  -d '{
+  "variables": [
+    {
+      "name": "strVarExample",
+      "value": "\"strVarValue\""
+    },
+    {
+      "name": "intVarExample",
+      "value": "15"
+    },
+    {
+      "name": "booleanVarExample",
+      "value": "false"
+    },
+    {
+      "name": "arrayVarExample",
+      "value": "[1, 2, 3, 5, 8, 13, 21]"
+    }
+  ]
+}'
+```
+
+#### Responses
+
+| HTTP status | Description                                                                    | Response schema                                                               |
+| ----------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| 204         | On success                                                                     | -                                                                             |
+| 400         | An error is returned when the task is not active (not in the `CREATED` state). | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure |
+| 400         | An error is returned if the task was not assigned before.                      | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure |
+| 400         | An error is returned if the task is not assigned to the current user.          | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure |
+| 404         | An error is returned when the task with the `taskId` is not found.             | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure |
+
 ### Search task variables
 
 Returns a list of task variables for the specified `taskId` and `variableNames`.
@@ -324,7 +432,7 @@ curl -X 'POST' \
 
 #### Responses
 
-| HTTP status | Description                                                        | Response schema                                                                                       |
-| ----------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| 200         | On success                                                         | JSON array of objects with [`VariableResponse`](../schemas/responses/variable-response.mdx) structure |
-| 404         | An error is returned when the task with the `taskId` is not found. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure                         |
+| HTTP status | Description                                                        | Response schema                                                                                                    |
+| ----------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| 200         | On success                                                         | JSON array of objects with [`VariableSearchResponse`](../schemas/responses/variable-search-response.mdx) structure |
+| 404         | An error is returned when the task with the `taskId` is not found. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure                                      |
