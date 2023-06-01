@@ -1,0 +1,1 @@
+echo $ARCHIVED_VERSION
