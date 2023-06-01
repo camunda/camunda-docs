@@ -13,9 +13,17 @@ then
   exit 0
 fi
 
+# Used for debugging purposes. If I only want to test one step, I'm passing the step number in as an argument.
+script_index=$1
+
 script_directory=$(cd "$(dirname "$0")" && pwd)
 
-source $script_directory/1-reduceVersionManifest.sh
-source $script_directory/2-deleteOtherVersions.sh
+if [[ "$script_index" == 1 || -z "$script_index" ]]; then
+  source $script_directory/1-reduceVersionManifest.sh
+fi
+
+if [[ "$script_index" == 2 || -z "$script_index" ]]; then
+  source $script_directory/2-deleteOtherVersions.sh
+fi
 
 echo "Complete!"

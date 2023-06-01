@@ -1,5 +1,3 @@
-
-
 # exclude all other versions from version file
 echo "[\"$ARCHIVED_VERSION\"]" > versions.json
 
