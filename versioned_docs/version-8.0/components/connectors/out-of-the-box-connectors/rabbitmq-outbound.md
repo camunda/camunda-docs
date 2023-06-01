@@ -1,7 +1,7 @@
 ---
 id: rabbitmq
-title: RabbitMQ Service Connector
-sidebar_label: RabbitMQ Connector
+title: RabbitMQ Producer Connector
+sidebar_label: RabbitMQ Producer Connector
 description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ Connector.
 ---
 
