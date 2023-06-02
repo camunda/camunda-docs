@@ -3,9 +3,7 @@ name: publish-stage
 on:
   push:
     branches:
-      - "main"
-    tags-ignore:
-      - "*"
+      - "unsupported/0.25"
 
 permissions:
   id-token: write
