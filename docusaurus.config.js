@@ -1,12 +1,10 @@
-const versionedLinks = require("./src/mdx/versionedLinks");
-
 module.exports = {
   title: "Camunda Platform 8 Docs",
   tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
-  url: "https://docs.camunda.io",
+  url: "https://unsupported.docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: "/",
+  baseUrl: "/0.25/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
@@ -34,27 +32,16 @@ module.exports = {
       },
     ],
     "./static/plugins/bpmn-js",
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "optimize",
-        path: "optimize",
-        routeBasePath: "optimize",
-        beforeDefaultRemarkPlugins: [versionedLinks],
-        sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
-      },
-    ],
   ],
   scripts: [],
   themeConfig: {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+        '⚠️ This version of Camunda Platform 8 is no longer actively maintained. For up-to-date documentation, see <b><a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io">the latest version</a></b>.',
       backgroundColor: "#14D890",
       textColor: "#000",
-      isCloseable: true,
+      isCloseable: false,
     },
     prism: {
       additionalLanguages: ["java", "protobuf"],
@@ -67,7 +54,7 @@ module.exports = {
       },
       items: [
         {
-          type: "docsVersionDropdown",
+          type: "docsVersion",
           position: "left",
         },
         {
@@ -119,7 +106,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral",
+              href: "https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=unsupported.docs.camunda.io&utm_medium=referral",
             },
             {
               label: "Contact",
@@ -216,20 +203,25 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          editUrl:
-            "https://github.com/camunda/camunda-platform-docs/edit/main/",
-          beforeDefaultRemarkPlugins: [versionedLinks],
+          lastVersion: "0.25",
+          // sidebarPath: require.resolve("./sidebars.js"),
+          includeCurrentVersion: false,
+          versions: {
+            0.25: {
+              label: "0.25",
+              path: "/",
+              noIndex: true,
+              banner: "unmaintained",
+            },
+          },
         },
         blog: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
         sitemap: {
-          //cacheTime: 600 * 1000, // 600 sec - cache purge period
-          changefreq: "weekly",
-          priority: 0.5,
+          // exclude everything from sitemap
+          ignorePatterns: ["**"],
         },
       },
     ],
