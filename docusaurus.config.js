@@ -71,18 +71,6 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "apis-clients/working-with-apis-clients",
-          label: "APIs & Clients",
-          position: "left",
-        },
-        {
-          type: "doc",
-          docId: "self-managed/about-self-managed",
-          label: "Self-Managed",
-          position: "left",
-        },
-        {
-          type: "doc",
           docId: "reference/overview",
           label: "Reference",
           position: "left",
