@@ -256,7 +256,7 @@ curl -X 'PATCH' \
 
 ### Save draft task variables
 
-Complete a task with `taskId` and optional variables. Returns the task.
+This API endpoint allows you to save draft variables for a specific task.
 
 #### Description
 
