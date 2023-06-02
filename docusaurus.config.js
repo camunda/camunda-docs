@@ -38,7 +38,7 @@ module.exports = {
     announcementBar: {
       id: "camunda8",
       content:
-        '⚠️ This version of Camunda Platform 8 is no longer actively maintained. For up-to-date documentation, see <b><a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io">the latest version</a></b>.',
+        '🚨 This version of Camunda Platform 8 is no longer actively maintained. For up-to-date documentation, see <b><a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io">the latest version</a></b>.',
       backgroundColor: "#FFC600",
       textColor: "#434343",
       isCloseable: false,
