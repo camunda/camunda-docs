@@ -152,7 +152,7 @@ module.exports = {
             },
             {
               label: "Release cycle",
-              to: "docs/reference/release-policy",
+              to: "https://docs.camunda.io/docs/reference/release-policy",
             },
           ],
         },
@@ -168,11 +168,11 @@ module.exports = {
             },
             {
               label: "Licenses",
-              to: "docs/reference/licenses",
+              to: "https://docs.camunda.io/docs/reference/licenses",
             },
             {
               label: "Security notices",
-              to: "docs/reference/notices",
+              to: "https://docs.camunda.io/docs/reference/notices",
             },
           ],
         },
