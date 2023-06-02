@@ -32,7 +32,7 @@ const features = [
   {
     title: "APIs & Tools",
     imageUrl: "img/apisclients.png",
-    url: "/docs/apis-tools/working-with-apis-tools/",
+    url: "/docs/components/clients/build-your-own-client/",
     description: <>Programmatically interact with your automated processes.</>,
   },
 ];
@@ -41,7 +41,7 @@ const features2 = [
   {
     title: "Self-Managed",
     imageUrl: "img/self-managed.png",
-    url: "/docs/self-managed/about-self-managed/",
+    url: "/",
     description: (
       <>
         A self-hosted Camunda Platform 8 alternative, offering everything you
@@ -164,41 +164,6 @@ function Home() {
             </div>
           </section>
         )}
-        <div className={clsx("hero hero--secondary", styles.heroBanner)}>
-          <div className="container">
-            <h2 className="hero__title">Unsure where to begin?</h2>
-            <p className="hero__subtitle">Try one of our use case guides</p>
-            <div className={styles.buttons}>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/guides/orchestrate-microservices/")}
-              >
-                Microservice Orchestration
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/guides/orchestrate-human-tasks/")}
-              >
-                Human Task Orchestration
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/guides/orchestrate-api-endpoints/")}
-              >
-                API Endpoint Orchestration
-              </Link>
-            </div>
-          </div>
-        </div>
       </main>
     </Layout>
   );
