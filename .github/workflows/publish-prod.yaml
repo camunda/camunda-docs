@@ -2,7 +2,7 @@ name: publish-prod
 
 on:
   push:
-    branches:
+    tags:
       - "0.25.[0-9]+"
 
 permissions:
