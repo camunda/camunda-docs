@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - "unsupported/0.25"
+    tags-ignore:
+      - "*"
 
 permissions:
   id-token: write
