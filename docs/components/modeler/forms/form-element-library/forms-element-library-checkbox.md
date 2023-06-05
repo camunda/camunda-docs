@@ -10,8 +10,8 @@ A checkbox allowing the user to read and edit boolean data.
 
 ### Configurable properties
 
-- **Field label**: Label displayed besides the checkbox.
-- **Field description**: Description provided below the checkbox.
+- **Field label**: Label displayed besides the checkbox. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field description**: Description provided below the checkbox. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default state for the checkbox in case no input data exists for the given key.
 - **Disabled**: Disables the checkbox, for use during development.

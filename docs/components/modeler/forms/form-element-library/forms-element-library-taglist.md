@@ -10,8 +10,8 @@ A complex and searchable tag based component providing multi-selection for large
 
 ### Configurable properties
 
-- **Field label**: Label displayed on top of the taglist.
-- **Field description**: Description provided below the taglist.
+- **Field label**: Label displayed on top of the taglist. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field description**: Description provided below the taglist. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the taglist.
 - **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).

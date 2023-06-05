@@ -10,8 +10,8 @@ A number field allowing the user to read and edit numeric data.
 
 ### Configurable properties
 
-- **Field label**: Label displayed on top of the number field.
-- **Field description**: Description provided below the number field.
+- **Field label**: Label displayed on top of the number field. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field description**: Description provided below the number field. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default value for the number field in case no input data exists for the given key.
 - **Decimal digits**: Defines the maximum number of digits after the decimal.

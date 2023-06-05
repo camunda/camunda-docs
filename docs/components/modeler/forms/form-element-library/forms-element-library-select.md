@@ -10,8 +10,8 @@ A Select dropdown allowing the user to select one of multiple data option from l
 
 ### Configurable properties
 
-- **Field label**: Label displayed above the select.
-- **Field description**: Description provided below the select.
+- **Field label**: Label displayed above the select. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field description**: Description provided below the select. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Key**: Binds the selected value to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default selection in case no input data exists for the given key. Only available for _static_ options sources.
 - **Searchable**: Allows the select entries to be searched via keyboard.

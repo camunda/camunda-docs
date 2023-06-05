@@ -10,8 +10,8 @@ A radio button allowing the user to select one of multiple data option for small
 
 ### Configurable properties
 
-- **Field label**: Label displayed above the radio component.
-- **Field description**: Description provided below the radio component.
+- **Field label**: Label displayed above the radio component. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field description**: Description provided below the radio component. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Key**: Binds the radio component to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default selection in case no input data exists for the given key. Only available for _static_ options sources.
 - **Disabled**: Disables the radio component, for use during development.
