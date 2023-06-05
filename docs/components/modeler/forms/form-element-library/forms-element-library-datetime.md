@@ -16,7 +16,8 @@ A component allowing the user to read and edit date and time data.
 - **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Subtype**: Selects the type of the datetime component. This can either be **Date**, **Time**, or **Date & Time**.
 - **Use 24h**: Enables 24-hour time format.
-- **Disabled**: Disables the checkbox, for use during development.
+- **Read only**: Makes the datetime component read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
+- **Disabled**: Disables the datetime component, for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the datetime component.
 - **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
 - **Time format**: Defines the time data format. This can either be **UTC offset**, **UTC normalized**, or **No timezone**.

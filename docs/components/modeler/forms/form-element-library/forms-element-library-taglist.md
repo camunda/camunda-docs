@@ -18,6 +18,7 @@ A complex and searchable tag based component providing multi-selection for large
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: Taglist must contain a value.
 - **Options source**: Taglists can be configured with an options source defining the individual choices your user can make, see [options source docs](../configuration/forms-config-options.md).
+- **Read only**: Makes the taglist read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Disabled**: Disables the taglist, for use during development.
 
 ### Datatypes

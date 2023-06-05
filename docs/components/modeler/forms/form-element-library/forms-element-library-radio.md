@@ -14,6 +14,7 @@ A radio button allowing the user to select one of multiple data option for small
 - **Field description**: Description provided below the radio component. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Key**: Binds the radio component to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default selection in case no input data exists for the given key. Only available for _static_ options sources.
+- **Read only**: Makes the radio read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Disabled**: Disables the radio component, for use during development.
 - **Options source**: Radio components can be configured with an options source defining the individual choices the component provides, see [options source docs](../configuration/forms-config-options.md).
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the radio.

@@ -15,6 +15,7 @@ A Select dropdown allowing the user to select one of multiple data option from l
 - **Key**: Binds the selected value to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default selection in case no input data exists for the given key. Only available for _static_ options sources.
 - **Searchable**: Allows the select entries to be searched via keyboard.
+- **Read only**: Makes the select read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Disabled**: Disables the select, for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the select.
 - **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
