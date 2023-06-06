@@ -16,7 +16,7 @@ In case of errors, Operate API returns an error object.
 
 A detailed API description is also available as Swagger UI at `${base-url}/swagger-ui.html`.
 
-For example, in Camunda SaaS: [https://syd-1.operate.camunda.io/7cad87f9-e217-4552-ab37-34b54012036a/swagger-ui.html](https://syd-1.operate.camunda.io/7cad87f9-e217-4552-ab37-34b54012036a/swagger-ui.html)
+For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
 ## Authentication
 
