@@ -272,6 +272,10 @@ Only draft variables submitted in the most recent request body will be persisted
 Therefore, ensure you include all necessary variables in each request to maintain the intended variable set.
 :::
 
+:::caution
+Please note that the UI does not currently display the values for draft variables that are created via this endpoint.
+:::
+
 #### URL
 
 `/v1/tasks/{taskId}/variables`
@@ -347,6 +351,10 @@ curl -X 'POST' \
     {
       "name": "arrayVarExample",
       "value": "[1, 2, 3, 5, 8, 13, 21]"
+    },
+    {
+      "name": "objectVarExample",
+      "value": "{\"strProp\": \"strValue\", \"intProp\": 15}"
     }
   ]
 }'
