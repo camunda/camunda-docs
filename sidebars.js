@@ -275,6 +275,7 @@ module.exports = {
               Google: [
                 "components/connectors/out-of-the-box-connectors/googledrive",
                 "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
             {
