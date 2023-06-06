@@ -20,12 +20,18 @@ Client credentials are created for an organization, and therefore can access all
 
 Scopes define the access for client credentials. A client can have one or multiple of the following permissions:
 
-- **Get clients**: Retrieve all Zeebe clients of the organization.
-- **Create clients**: Create a Zeebe client for a cluster of the organization.
-- **Delete clients**: Delete a Zeebe client of a cluster owned by the organization.
-- **Get clusters**: Retrieve information of all clusters of the organization.
-- **Create clusters**: Create a cluster for the organization.
-- **Delete clusters**: Delete a cluster of the organization.
+![createConsoleApiClient](../components/console/manage-organization/img/create-console-api-client.png)
+
+A client can have one or multiple permissions from the following groups:
+
+- **Cluster**: [Manage your clusters](../components/console/manage-clusters/create-cluster.md).
+- **Zeebe Client**: [Manage API clients](../components/console/manage-clusters/manage-api-clients.md) for your cluster.
+- **Web Modeler API (Beta)**: Interact with the [Web Modeler API](./web-modeler-api/index.md).
+- **IP Whitelist**: Configure [IP-Whitelist](../components/console/manage-clusters/manage-ip-whitelists.md) rules.
+- **Connector Secrets**: [Manage secrets](../components/console/manage-clusters/manage-secrets.md) of your clusters.
+- **Members**: [Manage members](../components/console/manage-organization/manage-users.md) of your organization.
+
+The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).
 
 :::note
 After client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.

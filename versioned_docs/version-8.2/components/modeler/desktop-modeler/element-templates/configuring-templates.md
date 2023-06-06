@@ -20,10 +20,6 @@ For templates to be available for all diagrams store them in the `resources/elem
             └── my-element-templates.json
 ```
 
-:::note
-Camunda 7 templates can be syncronized with [Cawemo](https://cawemo.com/) using the [Camunda Cloud Connect Plugin for Camunda Platform 7](https://docs.camunda.org/cawemo/latest/technical-guide/integrations/modeler/). These templates will be treated as global.
-:::
-
 ### Local templates
 
 For element templates to only be available for specific diagrams, you can store them in a `.camunda/element-templates` directory in the diagrams parent directory or any of their parent directories.

@@ -38,9 +38,8 @@ This section outlines how to set up a Connector project, test it, and run it loc
 ### Setup
 
 When developing a new **Connector**, we recommend using one of our custom Connector
-templates for custom [outbound](https://github.com/camunda/connector-template-outbound) and
-[inbound](https://github.com/camunda/connector-template-inbound) connectors.
-These templates are [Maven](https://maven.apache.org/)-based Java projects, and can be used in various
+template for custom [outbound](https://github.com/camunda/connector-template-outbound) connector.
+These template is [Maven](https://maven.apache.org/)-based Java projects, and can be used in various
 ways such as:
 
 - _Create your own GitHub repository_: Click **Use this template** and follow the prompted steps.
@@ -357,143 +356,6 @@ public class Authentication {
   private String token;
 }
 ```
-
-### Inbound Connector project outline
-
-There are multiple parts of a Connector that enables it for reuse, as a
-reusable building block, for modeling, and for the runtime behavior.
-For example, the following parts make up an outbound Connector:
-
-```
-my-connector
-├── element-templates
-│   └── inbound-template-connector.json                                     (1)
-├── pom.xml
-├── src
-│   ├── main
-│   │   ├── java/io/camunda/connector
-│   │   │   └── inbound
-│   │   │       ├── MyConnectorExecutable.java                              (2)
-│   │   │       ├── MyConnectorEvent.java                                   (3)
-│   │   │       ├── MyConnectorProperties.java                              (4)
-│   │   │       └── subscription
-│   │   │           ├── MockSubscription.java
-│   │   │           └── MockSubscriptionEvent.java
-│   │   └── resources/META-IN/services
-│   │       └── io.camunda.connector.api.inbound.InboundConnectorExecutable (5)
-```
-
-For the modeling building blocks, the Connector provides
-[Connector element templates](./connector-templates.md) with **(1)**.
-
-You provide the runtime logic as Java source code.
-Typically, a Connector runtime logic consists of exactly one implementation of
-a `InboundConnectorExecutable` with **(2)** and at least one input object like **(3)**, and Connector's
-properties like **(4)**
-
-For a detectable Connector function, you are required to expose your function class name in the
-[`InboundConnectorExecutable` SPI implementation](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html)
-with **(5)**.
-
-A configuration file like **(5)** manages the project setup, including dependencies.
-In this example, we include a Maven project's `POM` file. Other build tools like
-[Gradle](https://gradle.org/) can also be used.
-
-### Inbound Connector element template
-
-To create reusable building blocks for modeling, you are required to provide a
-domain-specific [Connector element template](./connector-templates.md).
-
-A Connector template defines the binding to your Connector runtime behavior via the following object:
-
-```json
-{
-  "type": "Hidden",
-  "value": "io.camunda:mytestinbound:1",
-  "binding": {
-    "type": "zeebe:property",
-    "name": "inbound.type"
-  }
-}
-```
-
-This type definition `io.camunda:mytestinbound:1` is the connection configuring which version of your Connector runtime
-behavior to use. In technical terms, this defines the **Type** of jobs created for tasks in your process model that use
-this template. Consult the [job worker](../../concepts/job-workers.md) guide to learn more.
-
-Besides the type binding, Connector templates also define the properties of your Connector as `zeebe:property` objects.
-For example, you can create the input variable `sender` of your Connector in the element template as follows:
-
-```json
-{
-  "type": "String",
-  "label": "Sender",
-  "description": "Message sender name",
-  "value": "Alice",
-  "binding": {
-    "type": "zeebe:property",
-    "name": "sender"
-  }
-}
-```
-
-### Inbound Connector runtime logic
-
-To create a reusable runtime behavior for your Connector, you are required to implement
-and expose an implementation of the `InboundConnectorExecutable` interface of the SDK. The Connector runtime
-environments will call this function; it handles input data, executes the Connector's
-business logic. Exception handling is optional since the Connector runtime environments handle this as a fallback.
-
-The `InboundConnectorExecutable` interface consists of two methods: `activate` and `deactivate`.
-A minimal recommended outline of a Connector function implementation looks as follows:
-
-```java
-package io.camunda.connector.inbound;
-
-import io.camunda.connector.api.annotation.InboundConnector;
-import io.camunda.connector.api.inbound.InboundConnectorContext;
-import io.camunda.connector.api.inbound.InboundConnectorExecutable;
-import io.camunda.connector.inbound.subscription.MockSubscription;
-import io.camunda.connector.inbound.subscription.MockSubscriptionEvent;
-
-@InboundConnector(name = "MYINBOUNDCONNECTOR", type = "io.camunda:mytestinbound:1")
-public class MyConnectorExecutable implements InboundConnectorExecutable {
-
-    private MockSubscription subscription;
-    private InboundConnectorContext connectorContext;
-
-    @Override
-    public void activate(InboundConnectorContext connectorContext) {
-        MyConnectorProperties props = connectorContext.getPropertiesAsType(MyConnectorProperties.class);
-
-        connectorContext.replaceSecrets(props);
-        connectorContext.validate(props);
-
-        this.connectorContext = connectorContext;
-
-        subscription = new MockSubscription(
-                props.getSender(), props.getMessagesPerMinute(), this::onEvent);
-    }
-
-    @Override
-    public void deactivate() {
-        subscription.stop();
-    }
-
-    private void onEvent(MockSubscriptionEvent rawEvent) {
-        MyConnectorEvent connectorEvent = new MyConnectorEvent(rawEvent);
-        connectorContext.correlate(connectorEvent);
-    }
-}
-```
-
-The `activate` method is a trigger function to start listening to inbound events. The implementation of this method
-has to be asynchronous. Once activated, the inbound Connector execution is considered active and running.
-From this point, it should use the respective methods of `InboundConnectorContext` to communicate with the Connector
-runtime (e.g. to correlate the inbound event or signal the interrupt).
-
-The `deactivate` method is just a graceful shutdown hook for inbound connectors.
-The implementation must release all resources used by the subscription.
 
 #### Validation
 
@@ -1001,9 +863,9 @@ This option is applicable for Spring Boot users. All you need to do is to includ
 
 ```xml
 <dependency>
-    <groupId>io.camunda</groupId>
+    <groupId>io.camunda.connector</groupId>
     <artifactId>spring-boot-starter-camunda-connectors</artifactId>
-    <version>${version.spring-zeebe}</version>
+    <version>${version.connectors}</version>
 </dependency>
 <dependency>
     <groupId>org.myorg</groupId>
@@ -1013,7 +875,7 @@ This option is applicable for Spring Boot users. All you need to do is to includ
 ```
 
 Upon starting your Spring Boot application, you will have a job worker connected to Zeebe, waiting to
-receive messages for your connectors.
+receive jobs for your connectors.
 
 ### Docker runtime image
 

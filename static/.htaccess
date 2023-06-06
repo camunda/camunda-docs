@@ -8,6 +8,9 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# Connectors TEMPLATE removal
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/template/(.*)$ /docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/$1 [R=301,L]
+
 # Modeler start instance and deploy page renaming and merging
 RewriteRule ^docs/components/modeler/web-modeler/start-instance/?$ /docs/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]

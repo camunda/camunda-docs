@@ -66,7 +66,7 @@ Identity provides support for configuring the log level:
 
 As part of configuration Identity provides multiple appenders for outputting logs, to configure which logging appender
 is
-used, set the `IDENTITY_LOG_APPENDER` environment variable to one of the following `Console`, `Stackdriver`, or `Log`:
+used, set the `IDENTITY_LOG_APPENDER` environment variable to one of the following `Console`, `Stackdriver`, or `File`:
 
 <Tabs groupId="loggingAppenders" defaultValue="console"
 values={[{label: 'Console', value: 'console', }, {label: 'Stackdriver', value: 'stackdriver', }, {label: 'File', value: 'file', },]} >
