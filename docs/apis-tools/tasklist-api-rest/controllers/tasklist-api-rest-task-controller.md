@@ -267,13 +267,13 @@ This operation performs several actions:
 1. Checks for new draft variables. If a new variable's name matches an existing one but the value differs, it is saved. In case of duplicate draft variable names, the last variable's value is kept.
 
 :::note
-Please be aware that invoking this method successively will overwrite all existing draft variables.
+Be aware that invoking this method successively will overwrite all existing draft variables.
 Only draft variables submitted in the most recent request body will be persisted.
 Therefore, ensure you include all necessary variables in each request to maintain the intended variable set.
 :::
 
 :::caution
-Please note that the UI does not currently display the values for draft variables that are created via this endpoint.
+Note that the UI does not currently display the values for draft variables that are created via this endpoint.
 :::
 
 #### URL
