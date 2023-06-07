@@ -2510,45 +2510,7 @@ Find an up-to-date list of third-party libraries used and their license terms in
 
 Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connectors-bundle/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
-#### Connector Amazon Simple Queue Service (SQS)
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sqs/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-#### Connector AWS Lambda
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-aws-lambda/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-#### Connector Google Drive
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-google-drive/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-#### Connector Kafka Producer
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-kafka/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-#### Connector Microsoft Teams
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-microsoft-teams/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-#### Connector RabbitMQ
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-rabbitmq/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-#### Connector REST
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-http-json/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-#### Connector SendGrid
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sendgrid/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-#### Connector Slack
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-slack/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-#### Connector UiPath
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-slack/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+Find up-to-date lists for the individual Connectors in the `THIRD_PARTY_NOTICES` in their respective directories in the [source code repository](https://github.com/camunda/connectors-bundle/tree/main/connectors).
 
 </TabItem>
 
