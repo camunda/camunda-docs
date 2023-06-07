@@ -662,6 +662,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-sqs/"
             ),
             docsLink(
+              "Amazon SQS Inbound Connector",
+              "components/connectors/out-of-the-box-connectors/aws-sqs-inbound/"
+            ),
+            docsLink(
               "AWS Lambda Connector",
               "components/connectors/out-of-the-box-connectors/aws-lambda/"
             ),
@@ -738,7 +742,7 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "Slack Connector",
+              "Twilio Connector",
               "components/connectors/out-of-the-box-connectors/twilio/"
             ),
             docsLink(
