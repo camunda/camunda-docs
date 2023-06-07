@@ -147,6 +147,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
               ],
             },
+            "components/modeler/web-modeler/start-public-process",
           ],
         },
         {
