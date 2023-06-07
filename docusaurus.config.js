@@ -194,7 +194,7 @@ module.exports = {
           items: [
             {
               label: "Privacy Statement",
-              href: "https://camunda.com/legal/privacy/",
+              href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
               html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
