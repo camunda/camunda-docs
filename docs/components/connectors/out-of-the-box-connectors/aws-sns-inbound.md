@@ -2,7 +2,7 @@
 id: aws-sns-inbound
 title: Amazon Simple Notification Inbound Service Connector
 sidebar_label: Amazon SNS Inbound Connector
-description: Subscribe to your AWS SNS topic notification
+description: Subscribe to your AWS SNS topic notification via HTTPS
 ---
 
 The **Amazon Simple Notification Service (SNS) Inbound Connector** is a Connector that allows you to start or continue
@@ -70,7 +70,7 @@ In that case, AWS SNS Inbound Connector deployments and URLs will not be display
 1. Sign in to the [Amazon SNS console](https://console.aws.amazon.com/sns/home).
 2. On the navigation panel, choose **Topics**.
 3. Choose the **Create** subscription.
-4. In the **Protocol** drop-down list, select **HTTP** or **HTTPS**.
+4. In the **Protocol** drop-down list, select **HTTPS**.
 5. In the **Endpoint** box, paste in the URL of the subscription found in at the **Webhooks** tab of your BPMN
    diagram that you want the topic to send messages to and then choose **Create subscription**.
 6. The confirmation message is displayed. Choose **Close**. Your new subscription's **Subscription ID**
