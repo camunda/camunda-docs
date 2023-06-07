@@ -35,9 +35,9 @@ For all the above scenarios, contact your administrator to understand why no pro
 This feature is exclusively available on the SaaS platform.
 :::
 
-Tasklist offers a convenient method to initiate processes by presenting a form within an endpoint. This functionality relies on process configuration performed in the [Web-Modeler](docs/components/modeler/web-modeler/start-public-process.md), enabling users to create and manage processes effortlessly.
+Tasklist offers a convenient method to start processes with a form from a public URL. This functionality relies on process configuration performed in the [Web-Modeler](docs/components/modeler/web-modeler/start-public-process.md), enabling users to create and manage processes effortlessly.
 
-In scenarios where processes can be triggered through a form, Tasklist hosts the form on an endpoint that is accessible to all users, eliminating the need for authentication. By submitting the form, the associated process is launched. This feature proves advantageous when you want to expose processes to users outside your organization, as it allows anyone to initiate the process.
+In scenarios where processes can be triggered through a form, Tasklist hosts the form on a URL that is accessible to all users, eliminating the need for authentication. By submitting the form, the associated process is launched. This feature proves advantageous when you want to expose processes to users outside your organization, as it allows anyone to start a process.
 
 ### Usage
 
@@ -47,4 +47,4 @@ To enable the public exposure of a process, the first step involves configuring 
 
 #### Accessing and Submitting the Form
 
-Once the process has been published according to step 1, an endpoint will be generated in Tasklist. This endpoint can be accessed by any user without authentication requirements. Through this endpoint a form is presented and upon submission the associated process is started with the form values being provided as inputs to the process.
+Once the process has been published, a URL will be generated in Tasklist. This URL can be accessed by any user without authentication requirements. Through this endpoint a form is presented and upon submission the associated process is started with the form values being provided as inputs to the process.
