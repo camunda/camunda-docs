@@ -38,7 +38,7 @@ curl -X 'GET' \
 #### Responses
 
 :::caution
-Starting with the upcoming release, we're making changes to the response format for a `200` status.
+Starting with the `8.3` release, we're making changes to the response format for a `200` status.
 The returned JSON will be simplified as follows:
 
 Current response:

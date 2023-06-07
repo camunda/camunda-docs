@@ -325,7 +325,7 @@ curl -X 'POST' \
 #### Responses
 
 :::caution
-Beginning with the forthcoming release, changes will be implemented to the response for a 200 status.
+Starting with the `8.3` release, changes will be implemented to the response for a 200 status.
 If `isValueTruncated` is set to `true` for any variable, the corresponding `value` field will now be set to `null`.
 :::
 
