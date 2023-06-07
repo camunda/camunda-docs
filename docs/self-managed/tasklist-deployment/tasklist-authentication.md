@@ -19,7 +19,7 @@ The **username**, **password**, and **roles** for one user may be set in applica
 
 ```
 camunda.tasklist:
-  username: anUser
+  userId: aUser
   password: aPassword
   roles:
     - OWNER
