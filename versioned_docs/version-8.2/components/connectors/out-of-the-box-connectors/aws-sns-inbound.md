@@ -1,6 +1,6 @@
 ---
 id: aws-sns-inbound
-title: Amazon Simple Notification Inbound Service Connector
+title: Amazon Simple Notification Service Inbound Connector
 sidebar_label: Amazon SNS Inbound Connector
 description: Subscribe to your AWS SNS topic notification via HTTPS
 ---
@@ -10,7 +10,7 @@ a BPMN process triggered by an [AWS SNS](https://console.aws.amazon.com/sns/home
 
 ## Create an AWS SNS Inbound Connector task
 
-1. Start building your BPMN diagram. You can use the **AWS SNS Inbound Connector** with either **Start Event** or **Intermediate Catch Event** building blocks.
+1. Start building your BPMN diagram. You can use the **AWS SNS Inbound Connector** with either **Start Event** or **Intermediate Catch Event**.
 2. Select the applicable element and change its template to an **AWS SNS Inbound Connector**.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
