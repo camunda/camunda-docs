@@ -77,6 +77,6 @@ To set a default filter, dashboard editors can use the added filter options in t
 
 ## Adding/editing description
 
-Under the **Dashboard** name, the description can be seen. Using the **Add/Edit** button, add, edit, or remove the description. The text editor allows you to add a plain text description with a limit of 400 characters.
+Under the **Dashboard** name, the description can be seen. Using the **Add/Edit** button, you can add, edit, or remove the description. The text editor allows you to add a plain text description with a limit of 400 characters.
 
 ![Add description modal](./img/dashboad-descriptionModal.png)

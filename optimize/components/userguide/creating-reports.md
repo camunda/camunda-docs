@@ -22,7 +22,7 @@ To create a custom report based on a key performance indicator (KPI) you’d lik
 5. Set up and customize your report. Begin by naming your report in the text box at the top of the page.
 6. In the gray text box to the right, confirm your data source, and select what you’d like to review from the process. You can also group by topics such as duration or start date.
 7. If you’d like, filter the process instance or flow nodes. For example, you can filter by duration, only viewing process instances running for more than seven days.
-8. Additionally, **Report** can be given a description which is displayed below the **Report** name. Using the **Add/Edit** button, you can add, edit, or remove the description. Text editor allows you to add plain text description with a limit of 400 characters.
+8. Additionally, a **Report** can be given a description which is displayed below the **Report** name. Using the **Add/Edit** button, you can add, edit, or remove the description. The text editor allows you to add plain text description with a limit of 400 characters.
 
 ![Add description modal](./img/report-descriptionModal.png)
 
