@@ -1325,8 +1325,6 @@ Find an up-to-date list of third-party libraries used and their license terms in
 
 Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connectors-bundle/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
 
-Find up-to-date lists for the individual Connectors in the `THIRD_PARTY_NOTICES` in their respective directories in the [source code repository](https://github.com/camunda/connectors-bundle/tree/main/connectors).
-
 </TabItem>
 
 </Tabs>
