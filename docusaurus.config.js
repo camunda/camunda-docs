@@ -77,6 +77,21 @@ module.exports = {
         {
           type: "docsVersionDropdown",
           position: "left",
+          dropdownItemsAfter: [
+            {
+              type: "html",
+              value: '<hr class="dropdown-separator">',
+            },
+            {
+              type: "html",
+              className: "dropdown-unsupported-versions",
+              value: "<b>Unsupported versions</b>",
+            },
+            ...["0.25"].map((version) => ({
+              label: version,
+              href: `https://unsupported.docs.camunda.io/${version}/`,
+            })),
+          ],
         },
         {
           type: "doc",

@@ -24,6 +24,8 @@ jobs:
         run: "sed -i 's/noIndex: false/noIndex: true/g' docusaurus.config.js"
       - name: Update URL
         run: 'sed -i ''s!url: "https://docs.camunda.io"!url: "https://stage.docs.camunda.io"!g'' docusaurus.config.js'
+      - name: Update redirects for environment
+        run: "sed -i 's!https://unsupported.docs.camunda.io!https://stage.unsupported.docs.camunda.io!g' ./static/.htaccess"
       - name: Build
         run: npm run build
         env:
