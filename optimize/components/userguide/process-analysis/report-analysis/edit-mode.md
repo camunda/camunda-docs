@@ -7,6 +7,7 @@ description: The edit mode allows you to configure the report and adjust it to y
 Edit mode allows you to configure the report and adjust it to your needs. The following operations are possible within edit mode:
 
 - Rename your report
+- Add/edit/remove description
 - Build a report
 - Configure your report
 - Save the current state with your applied changes

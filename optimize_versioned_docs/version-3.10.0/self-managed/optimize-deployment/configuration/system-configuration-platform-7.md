@@ -10,7 +10,9 @@ to import data from. Each engine configuration should have a unique alias associ
 with it and represented by `${engineAlias}`.
 
 Note that each connected engine must have its respective history level set to `FULL` in order to see all available data
-in Optimize. Using any other history level will result in less data and/or functionality within Optimize.
+in Optimize. Using any other history level will result in less data and/or functionality within Optimize. Furthermore,
+history in a connected engine should be configured for long enough for Optimize to import it. If data is removed from an
+engine before Optimize has imported it, that data will not be available in Optimize.
 
 | YAML Path                                      | Default Value                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ---------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

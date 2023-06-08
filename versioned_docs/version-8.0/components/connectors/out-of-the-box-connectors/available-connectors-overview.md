@@ -18,7 +18,6 @@ import TabItem from "@theme/TabItem";
 <Tabs groupId="ootb" defaultValue="outbound" queryString values={
 [
 {label: 'Outbound', value: 'outbound', },
-{label: 'Inbound', value: 'inbound', },
 {label: 'Protocol', value: 'protocol', },
 ]
 }>
@@ -33,6 +32,7 @@ import TabItem from "@theme/TabItem";
 - [Asana Connector](/components/connectors/out-of-the-box-connectors/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
 - [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [AWS Lambda Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
+- [Blue Prism](/components/connectors/out-of-the-box-connectors/blueprism.md) - Orchestrate your [Blue Prism](https://www.blueprism.com/) queue items from your BPMN process.
 - [Camunda Operate Connector](/components/connectors/out-of-the-box-connectors/operate.md) - Fetch process execution data from [Camunda Operate](https://camunda.com/platform/operate/).
 - [Easy Post Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost](https://www.easypost.com/) from your BPMN process.
 - [GitHub Connector](/components/connectors/out-of-the-box-connectors/github.md) - Manage [GitHub](https://github.com/) issues and releases from your BPMN process.
@@ -43,19 +43,11 @@ import TabItem from "@theme/TabItem";
 - [Microsoft Teams Connector](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
 - [OpenAI Connector](/components/connectors/out-of-the-box-connectors/openai.md) - Interact with [ChatGPT](https://chat.openai.com/) and [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation/overview).
 - [Power Automate Connector](/components/connectors/out-of-the-box-connectors/power-automate.md) - Orchestrate your [Power Automate](https://powerautomate.microsoft.com) Flows with Camunda.
-- [RabbitMQ Connector](/components/connectors/out-of-the-box-connectors/rabbitmq.md) - Send messages to [RabbitMQ](https://www.rabbitmq.com/) from your BPMN process.
+- [RabbitMQ Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-outbound.md) - Send messages to [RabbitMQ](https://www.rabbitmq.com/) from your BPMN process.
 - [SendGrid Connector](/components/connectors/out-of-the-box-connectors/sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 - [Twilio Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Send and get SMS messages with [Twilio](https://www.twilio.com) service from your BPMN process.
 - [UiPath Connector](/components/connectors/out-of-the-box-connectors/uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
-
-</TabItem>
-
-<TabItem value='inbound'>
-
-## Inbound Connectors
-
-- [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 
 </TabItem>
 
@@ -65,7 +57,6 @@ import TabItem from "@theme/TabItem";
 
 - [GraphQL Connector](/components/connectors/protocol/graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
 - [REST Connector](/components/connectors/protocol/rest.md) - Make a request to a REST API and use the response in the next steps of your process.
-- [HTTP Webhook Connector](/components/connectors/protocol/http-webhook.md) - Start a process instance with your custom webhook configuration.
 
 </TabItem>
 

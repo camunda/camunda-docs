@@ -42,7 +42,7 @@ export const Badge = (props) => (
   </>
 );
 
-TaskResponse - represents a user task.
+VariableResponse - represents a variable with `id`, `name` and `value` properties.
 
 <Tabs groupId="schema" defaultValue="schema" values={
 [
@@ -54,11 +54,12 @@ TaskResponse - represents a user task.
 
 ```graphql
 {
-    "id": string,
-    "name": string,
-    "value": string,
-    "isValueTruncated": boolean,
-    "previewValue": string
+  "id": string,
+  "name": string,
+  "value": string,
+  "draft": {
+    "value": string
+  }
 }
 ```
 
@@ -68,11 +69,12 @@ TaskResponse - represents a user task.
 
 ```json
 {
-  "id": "string",
-  "name": "string",
-  "value": "string",
-  "isValueTruncated": true,
-  "previewValue": "string"
+  "id": "<id>-<var_name>",
+  "name": "<var_name>",
+  "value": "\"stringVariableValue\"",
+  "draft": {
+    "value": "\"draftValueOfVariable\""
+  }
 }
 ```
 
@@ -91,17 +93,12 @@ TaskResponse - represents a user task.
 
 #### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>value</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
 
-> full variable value
+> represents full variable value
 
-#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>previewValue</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>draft</b></code>](#)<Bullet />`object` <Badge class="secondary" text="non-null"/>
 
-> value preview (limited to 8191 characters)
-
-#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>isValueTruncated</b></code>](#)<Bullet />`boolean` <Badge class="secondary" text="non-null"/>
-
-> shows, whether previewValue contains truncated value or full value
+> represents draft value of variable
 
 ### Returned by
 
-[`Search task variables`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-task-variables) <Badge class="secondary" text="POST"/> <Bullet />
-[`Get variable`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-variables-controller.md#get-variable) <Badge class="secondary" text="GET"/>
+[`Get variable`](../../controllers/tasklist-api-rest-variables-controller.md#get-variable) <Badge class="secondary" text="GET"/>
