@@ -324,6 +324,11 @@ curl -X 'POST' \
 
 #### Responses
 
+:::caution
+Starting with the `8.3` release, changes will be implemented to the response for a 200 status.
+If `isValueTruncated` is set to `true` for any variable, the corresponding `value` field will now be set to `null`.
+:::
+
 | HTTP status | Description                                                        | Response schema                                                                                       |
 | ----------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
 | 200         | On success                                                         | JSON array of objects with [`VariableResponse`](../schemas/responses/variable-response.mdx) structure |
