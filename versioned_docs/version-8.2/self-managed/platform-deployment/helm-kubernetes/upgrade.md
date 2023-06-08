@@ -190,12 +190,6 @@ psql -U postgres -h localhost -p 5432 -f dump.psql
 kubectl scale --replicas=1 deployment <RELEASE_NAME>-identity
 ```
 
-11. Continue with the Helm upgrade using the following command:
-
-```bash
-helm upgrade <RELEASE_NAME>
-```
-
 **Method 2: Use the previous version PostgreSQL v14**
 
 You can set the PostgreSQL either by values file or CLI.
