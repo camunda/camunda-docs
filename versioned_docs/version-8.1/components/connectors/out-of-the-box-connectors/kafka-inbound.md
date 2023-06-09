@@ -66,8 +66,8 @@ The following fields are available in the `response` variable:
 
 You can use an output mapping to map the response:
 
-1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. For example:
+1. Use **Result variable** to store the response in a process variable. For example, `myResultVariable`.
+2. Use **Result expression** to map fields from the response into process variables. For example:
 
 ```
 = {
