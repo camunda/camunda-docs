@@ -75,8 +75,8 @@ After specifying available filters in the dashboard edit mode, editors of the da
 
 To set a default filter, dashboard editors can use the added filter options in the filter area. Whatever filter configuration is set there when the dashboard is saved becomes the default filter for the dashboard.
 
-## Adding/editing description
+## Adding or editing description
 
-Under the **Dashboard** name, the description can be seen. Using the **Add/Edit** button, add, edit, or remove the description. The text editor allows you to add a plain text description with a limit of 400 characters.
+Under the **Dashboard** name, the description can be seen. Using the **Add/Edit** button, you can add, edit, or remove the description. The text editor allows you to add a plain text description with a limit of 400 characters.
 
 ![Add description modal](./img/dashboad-descriptionModal.png)

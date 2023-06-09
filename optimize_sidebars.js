@@ -662,6 +662,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-sqs/"
             ),
             docsLink(
+              "Amazon SQS Inbound Connector",
+              "components/connectors/out-of-the-box-connectors/aws-sqs-inbound/"
+            ),
+            docsLink(
               "AWS Lambda Connector",
               "components/connectors/out-of-the-box-connectors/aws-lambda/"
             ),
@@ -696,6 +700,10 @@ module.exports = {
             docsLink(
               "Google Maps Platform Connector",
               "components/connectors/out-of-the-box-connectors/google-maps-platform/"
+            ),
+            docsLink(
+              "Google Sheets Connector",
+              "components/connectors/out-of-the-box-connectors/google-sheets/"
             ),
             docsLink(
               "GraphQL Connector",
@@ -738,7 +746,7 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "Slack Connector",
+              "Twilio Connector",
               "components/connectors/out-of-the-box-connectors/twilio/"
             ),
             docsLink(

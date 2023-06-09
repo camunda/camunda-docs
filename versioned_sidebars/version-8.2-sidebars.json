@@ -325,7 +325,8 @@
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
-                "components/connectors/out-of-the-box-connectors/aws-sqs"
+                "components/connectors/out-of-the-box-connectors/aws-sqs",
+                "components/connectors/out-of-the-box-connectors/aws-sqs-inbound"
               ]
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
@@ -340,7 +341,8 @@
             {
               "Google": [
                 "components/connectors/out-of-the-box-connectors/googledrive",
-                "components/connectors/out-of-the-box-connectors/google-maps-platform"
+                "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets"
               ]
             },
             {
