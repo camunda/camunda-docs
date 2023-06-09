@@ -258,6 +258,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
+                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
                 "components/connectors/out-of-the-box-connectors/aws-sqs",
                 "components/connectors/out-of-the-box-connectors/aws-sqs-inbound",
               ],
