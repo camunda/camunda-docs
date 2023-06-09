@@ -158,7 +158,7 @@ bpmnError("123", "error received")
 
 #### HTTP errors to BPMN errors
 
-Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model:
+Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a Header named `errorExpression` with the following value:
 
 ```feel
 if error.code = "404" then
@@ -174,7 +174,7 @@ You can extend that list to all HTTP errors you can handle as business use cases
 
 #### Response value to BPMN error
 
-Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value:
+Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value, by setting a Header named `errorExpression` with the following value:
 
 ```feel
 if response.body.main.humidity < 0 then
@@ -185,3 +185,17 @@ else null
 This is assuming you requested data from a local weather station and received a value that is technically valid for the REST Connector.
 However, you could define that for your business case a humidity value below `0` must be an error that should be checked manually.
 You could automatically send a message to a technician to check the weather station.
+
+#### Generic Header to transform a ConnectorException to a BPMN Error
+
+If the Connector throws a `ConnectorException` like:
+
+```java
+  throw new ConnectorException("HUMIDITY-FAIL", "Received invalid humidity");
+```
+
+Then you can transform this exception to a BPMN error with this expression in a Header item named `errorExpression`:
+
+```feel
+if is defined(error) then bpmnError(error.code, error.message) else null
+```
