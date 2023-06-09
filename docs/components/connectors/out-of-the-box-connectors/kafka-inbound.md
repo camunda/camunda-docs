@@ -2,7 +2,7 @@
 id: kafka-inbound
 title: Kafka Consumer Connector
 sidebar_label: Kafka Consumer Connector
-description: "The Kafka Consumer Connector allows you to connect your BPMN service with Kafka. Learn how to create a Kafka Consumer Connector and make it executable."
+description: The Kafka Consumer Connector allows you to connect your BPMN service with Kafka. Learn how to create a Kafka Consumer Connector and make it executable.
 ---
 
 The **Kafka Consumer Connector** allows you to consume messages by subscribing to [Kafka](https://kafka.apache.org/) topics and map them your BPMN processes as start or intermediate events.
@@ -34,6 +34,18 @@ To make your **Kafka Consumer Connector** executable, take the following steps:
 6. In the **Kafka** section, you can set the **Offsets** for the partition. The number of offsets specified should match the number of partitions on the current topic.
 7. In the **Kafka** section, you can set the **Auto offset reset** which tells the Connector what strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
 8. In the **Activation** section, you can set the **Activation Condition**. Based on this condition, we either start a process instance or do nothing if the condition is not met. For example, `=(value.itemId = "a4f6j2")`. Leave this field empty to trigger your webhook every time.
+
+When using the **Kafka Consumer Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the value contains `"value":{"correlationKey":"myValue"}`, your correlation key settings will look like this:
+
+- **Correlation key (process)**: `=myCorrelationKey`
+- **Correlation key (payload)**: `=value.correlationKey`
+
+Learn more about correlation keys in the [messages guide](/components/concepts/messages).
 
 ## Activate the Kafka Consumer Connector by deploying your diagram
 
