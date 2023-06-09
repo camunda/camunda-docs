@@ -24,6 +24,8 @@ It is highly recommended not to expose your sensitive data as plain text, but ra
 
 ![Kafka Inbound Filled](../img/connectors-kafka-inbound-filled.png)
 
+![Kafka Inbound Intermediate Catch Event Filled](../img/connectors-kafka-inbound-intermediate-catch-event-filled.png)
+
 To make your **Kafka Consumer Connector** executable, take the following steps:
 
 1. In the **Authentication** section, select the **Authentication type**.
