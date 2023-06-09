@@ -698,6 +698,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/google-maps-platform/"
             ),
             docsLink(
+              "Google Sheets Connector",
+              "components/connectors/out-of-the-box-connectors/google-sheets/"
+            ),
+            docsLink(
               "GraphQL Connector",
               "components/connectors/out-of-the-box-connectors/graphql/"
             ),
