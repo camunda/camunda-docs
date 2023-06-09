@@ -92,7 +92,7 @@ For example, given that your correlation key is defined with `myCorrelationKey` 
 - **Correlation key (process)**: `=myCorrelationKey`
 - **Correlation key (payload)**: `=message.body.correlationKey`
 
-Learn more about correlation keys in the [messages guide](/components/concepts/messages).
+Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
 #### Activation condition
 
