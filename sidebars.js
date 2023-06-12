@@ -252,7 +252,6 @@ module.exports = {
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
@@ -260,7 +259,9 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
+                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
                 "components/connectors/out-of-the-box-connectors/aws-sqs",
+                "components/connectors/out-of-the-box-connectors/aws-sqs-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
@@ -276,6 +277,7 @@ module.exports = {
               Google: [
                 "components/connectors/out-of-the-box-connectors/googledrive",
                 "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
             {
@@ -288,8 +290,12 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
-            "components/connectors/out-of-the-box-connectors/rabbitmq",
-            "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
+            {
+              RabbitMQ: [
+                "components/connectors/out-of-the-box-connectors/rabbitmq",
+                "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/twilio",

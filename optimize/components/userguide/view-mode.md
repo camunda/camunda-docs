@@ -19,6 +19,10 @@ If it was selected in the view mode, the refresh rate will not be saved when ref
 
 ![process performance overview](./img/dashboard-viewMode-monitorFeatures.png)
 
+- Description: If a Dashboard has a description, the description is displayed below the Dashboard name. The **More/Less** button can show or hide the text for descriptions longer than a single line.
+
+![dashboard description](./img/dashboard-showMoreDescription.png)
+
 To share the dashboard with other people or embed it in a webpage, use the sharing feature of the dashboard. Click on the **Share** button, which opens up a popover. After turning the **Enable sharing** switch on, a link is generated which you can send to people who do not have access to Camunda Optimize, and thus enable them to see the dashboard.
 
 If you applied filters on the dashboard, you can include them in the shared version of the dashboard by enabling the **Share with current filters applied** checkbox. If the checkbox is not checked, the shared dashboard will include the default filters if any have been set.

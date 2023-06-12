@@ -206,5 +206,5 @@ The **GitHub Connector** currently supports the following operations.
 
 ## Handle Connector response
 
-The **GitLab Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
+The **GitHub Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
 handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

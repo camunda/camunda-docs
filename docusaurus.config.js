@@ -77,6 +77,21 @@ module.exports = {
         {
           type: "docsVersionDropdown",
           position: "left",
+          dropdownItemsAfter: [
+            {
+              type: "html",
+              value: '<hr class="dropdown-separator">',
+            },
+            {
+              type: "html",
+              className: "dropdown-unsupported-versions",
+              value: "<b>Unsupported versions</b>",
+            },
+            ...["0.25"].map((version) => ({
+              label: version,
+              href: `https://unsupported.docs.camunda.io/${version}/`,
+            })),
+          ],
         },
         {
           type: "doc",
@@ -194,7 +209,7 @@ module.exports = {
           items: [
             {
               label: "Privacy Statement",
-              href: "https://camunda.com/legal/privacy/",
+              href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
               html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,

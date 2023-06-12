@@ -127,7 +127,7 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 
 ## Configuration of the `websocket` component
 
-The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/9.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
+The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
 | Environment variable | Description                                                                                                                                                              | Example value | Default value |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------- |
@@ -138,9 +138,9 @@ The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web
 
 ### Logging
 
-| Environment variable | Description                                                                                                                    | Example value | Default Value |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------- |
-| `LOG_CHANNEL`        | [optional]<br/>Log channel driver, see [Laravel documentation](https://laravel.com/docs/8.x/logging#available-channel-drivers) | `single`      | `stack`       |
+| Environment variable | Description                                                                                                                     | Example value | Default Value |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `LOG_CHANNEL`        | [optional]<br/>Log channel driver, see [Laravel documentation](https://laravel.com/docs/10.x/logging#available-channel-drivers) | `single`      | `stack`       |
 
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-websocket-component) for additional details on how to customize the `websocket` logging output.
 
