@@ -79,6 +79,7 @@ module.exports = {
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
+        "components/concepts/backups",
       ],
       Console: [
         "components/console/introduction-to-console",
