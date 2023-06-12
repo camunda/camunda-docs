@@ -5,7 +5,7 @@ description: "Learn how the Zeebe Gateway supports Camunda Identity-based auth t
 ---
 
 The Zeebe Gateway supports [Camunda Identity](../../identity/what-is-identity.md)-based auth token validation.
-In Camunda Platform 8 Self-Managed Helm chart, the authentication is enabled via Camunda Identity like all other applications.
+In the Camunda Platform 8 Self-Managed Helm chart, the authentication is enabled by default via Camunda Identity like for all other applications.
 
 ### Camunda Identity authorization
 
