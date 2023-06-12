@@ -32,7 +32,7 @@ If you require more retained backups or more frequent backups, get in touch with
 
 ## Programmatic access
 
-The backup operations can be performed programmatically using the Console API. This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows. For detailed information on using the API, please refer to the [Console API Reference](https://docs.camunda.io/docs/8.1/apis-tools/console-api-reference/).
+The backup operations can be performed programmatically using the Console API. This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows. For detailed information on using the API, please refer to the [Console API Reference](/docs/apis-tools/console-api-reference/).
 
 ## Restore
 
