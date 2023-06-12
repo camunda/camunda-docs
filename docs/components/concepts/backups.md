@@ -6,34 +6,39 @@ description: "Learn more about Backups in Camunda Platform 8 SaaS."
 
 You can use the backup feature of Camunda Platform 8 SaaS to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) with _zero downtime_. In case of failures that lead to data loss, you can request to restore the backup.
 
-A backup of Camunda Platform 8 SaaS consists of a backup of Zeebe, Operate, Tasklist, Optimize, and the backup of exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. Therefore, the backup of a Camunda Platform 8 cluster is taken as a whole.
+A backup of Camunda Platform 8 SaaS consists of a backup of Zeebe, Operate, Tasklist, Optimize, and the backup of exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. Therefore, the backup of a Camunda Platform 8 Cluster is taken as a whole.
+
+With backups, you can capture snapshots of your data and applications while they are actively in use, resulting in zero downtime or disruption to your operations. Backups are designed specifically for disaster recovery purposes.
+
+## Backup and Cluster Relationship
+
+Backups are created and managed on a per-cluster basis. It is important to be aware that deleting a cluster will also delete all associated backups.
+
+:::caution
+Exercise caution when deleting clusters to avoid unintended loss of backups.
+:::
 
 Your cluster generation needs to be greater or equal to 8.2.4-alpha1 to support backups.
 
-:::caution
-Backups are created and managed on a per-cluster basis.
-**Deleting a Cluster also deletes your backups!**
-:::
-
 ## Rate Limits
 
-The backup feature is an [<span class="badge badge--enterprise-only">Enterprise only</span>] feature. Each cluster is limited to three backups. To ensure system stability backup operations are subject to rate limits. The rate limit allows to perform a backup operation every 5 hours. However, it is possible to delete a backup and create a new one before the 5-hour rate limit expires.
+The backup feature is available exclusively to [<span class="badge badge--enterprise-only">Camunda Platform Enterprise</span>] users. Each cluster has a limit of three backups. To ensure system stability backup operations are subject to rate limits. Specifically, you can perform a backup operation every 5 hours. However, it is possible to delete a backup and create a new one before the 5-hour rate limit expires.
 
-The system retains the three most recent completed backups per cluster. In case of backup failure, the backup does not count towards the retention count.
-:::caution
-The oldest backup will be deleted when the backup succeeds and the retained backup is reached.
-:::
+The system retains the three most recent completed backups per cluster. Failed backup attempts do not count towards the retention count. When a new backup is successful and the retention count is reached, the oldest backup will be automatically deleted.
 
 :::note
-Need more retained backups or do them more frequent? Get in touch with your Customer Success Manager.
+If you require more retained backups or more frequent backups, get in touch with your Customer Success Manager to discuss your specific needs.
 :::
 
 ## Programmatic access
 
-The backup operations can be performed programmatically using the Console API. This allows seamless integration with existing systems and provides the flexibility to automate backup-related tasks. For detailed information on using the API, please refer to the [TODO https://docs.camunda.io/docs/8.1/apis-tools/console-api-reference/].
+The backup operations can be performed programmatically using the Console API. This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows. For detailed information on using the API, please refer to the [Console API Reference](https://docs.camunda.io/docs/8.1/apis-tools/console-api-reference/).
 
 ## Restore
 
-To restore your Camunda 8 SaaS Cluster from a backup, please contact our support.
+If you need to restore your Camunda Platform 8 Cluster from a backup, please follow these steps:
 
-- Contact [Camunda support](https://camunda.com/services/support/) to request a restore for your backup.
+1. Contact Camunda support to request a restore for your backup.
+1. Our support team will assist you with the restoration process and guide you through the necessary steps to recover your cluster from the backup.
+
+For any further assistance or questions related to backups or restorations, please feel free to reach out to our support team.
