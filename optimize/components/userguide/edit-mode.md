@@ -7,6 +7,7 @@ description: "The edit mode allows you to configure the dashboard and adjust it 
 The edit mode allows you to configure the dashboard and adjust it to your needs, including the following operations:
 
 - Rename your dashboard
+- Add/edit/remove description
 - Add/remove a tile
 - Save the current state with your applied changes
 - Cancel changes you already applied to the dashboard
@@ -14,6 +15,8 @@ The edit mode allows you to configure the dashboard and adjust it to your needs,
 - Set a default auto refresh rate to periodically update the dashboard in [view mode](./view-mode.md)
 
 ![edit mode](./img/dashboard-dashboardEditActions.png)
+
+## Adding tiles
 
 Once you have prepared all your reports, you can now start to assemble them into a dashboard. Above the dashboard grid, click **Add a Tile** to open a modal where you can select one of your defined reports and add it to the dashboard. The **Add a Tile** modal allows you to create dashboards that combine Optimize reports with data from other services as external website tiles and text tiles.
 
@@ -71,3 +74,9 @@ The list of variable names, variable values, assignees, and candidate groups is 
 After specifying available filters in the dashboard edit mode, editors of the dashboard can also set a default filter. A default filter is always applied when a user initially opens the dashboard. Viewers can still remove filter values to see unfiltered reports, but if a user does not perform any steps to change the filter manually, they will see the reports with the defined default filter.
 
 To set a default filter, dashboard editors can use the added filter options in the filter area. Whatever filter configuration is set there when the dashboard is saved becomes the default filter for the dashboard.
+
+## Adding or editing description
+
+Under the **Dashboard** name, the description can be seen. Using the **Add/Edit** button, you can add, edit, or remove the description. The text editor allows you to add a plain text description with a limit of 400 characters.
+
+![Add description modal](./img/dashboad-descriptionModal.png)
