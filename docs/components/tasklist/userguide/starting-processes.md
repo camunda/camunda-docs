@@ -4,7 +4,7 @@ title: Starting Processes
 description: "How to start a process from Tasklist."
 ---
 
-## Processes Tab
+## Processes tab
 
 It is possible to start processes by demand using Tasklist. To do this, click **Processes** in the top menu. All the processes you have access to start will be listed in the **Processes** page.
 
@@ -20,16 +20,16 @@ To start a process, click **Start Process** on the process you want to start.
 
 Tasklist will then wait for the process to be executed. If the process generates a task, you will be redirected to the generated task.
 
-### I'm not seeing a process
+### Not seeing a process
 
 There could be multiple reasons why you are not seeing any process in the **Processes** tab:
 
 - There is no process deployed to your environment.
-- For Self-Managed environments, permissions to start a process are managed in [Identity](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md). It is likely your user doesn't yet have privileges to start processes on Tasklist.
+- For Self-Managed environments, permissions to start a process are managed in [Identity](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md). It is likely your user does not yet have privileges to start processes on Tasklist.
 
 For all the above scenarios, contact your administrator to understand why no processes are displayed.
 
-## Start Public Processes via Form
+## Start public processes via form
 
 <span class="badge badge--cloud">Camunda Platform 8 SaaS only</span>
 
@@ -39,10 +39,10 @@ In scenarios where processes can be triggered through a form, Tasklist hosts the
 
 ### Usage
 
-#### Process Configuration and Deployment
+#### Process configuration and deployment
 
 To enable the public exposure of a process, the first step involves configuring it to be initiated via a form. This configuration is performed during the process design phase using [Web Modeler](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md).
 
-#### Accessing and Submitting the Form
+#### Accessing and submitting the form
 
 Once the process has been published, a URL will be generated in Tasklist. This URL can be accessed by any user without authentication requirements. Through this endpoint a form is presented and upon submission the associated process is started with the form values being provided as inputs to the process.

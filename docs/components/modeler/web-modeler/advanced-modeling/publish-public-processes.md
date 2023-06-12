@@ -37,11 +37,11 @@ To create a form for public access, follow these steps:
 
 Once ready, return to your process. You can read more about form creation in the [form guide](/docs/guides/utilizing-forms.md).
 
-## Embed the form in the start event
+## Embed form in start event
 
-To embed the form in the start event, follow these steps:
+To embed the form in a start event, follow these steps:
 
-1. Make sure you are in the **Implement** mode.
+1. Make sure you are in **Implement** mode.
 
 <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
 
@@ -49,17 +49,17 @@ To embed the form in the start event, follow these steps:
 
 <img src={SelectStartEventImg} style={{width: 800}} alt="Start event of a human workflow" />
 
-3. Ensure that the start event is a [none start event](../../bpmn/none-events/none-events.md#none-start-events). If it isn't, change the start event type accordingly using the **wrench tool**.
-4. Use the blue **form icon** to open the form browser. If the icon does not appear, select the start event again.
-5. Select the form you have created and click on **Embed** to confirm.
+1. Ensure the start event is a [none start event](../../bpmn/none-events/none-events.md#none-start-events). If it is not, change the start event type accordingly using the **wrench tool**.
+2. Use the blue **form icon** to open the form browser. If the icon does not appear, select the start event again.
+3. Select the form you have created and click on **Embed** to confirm.
 
 <img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
 
 You can preview the embedded form by clicking the **form icon** again.
 
-## Enable the public access
+## Enable public access
 
-To enable the public access, follow these steps:
+To enable public access, follow these steps:
 
 1. Open the **Publication** section in the **properties panel** (not the tab of the same name) and activate the toggle.
 
@@ -67,7 +67,7 @@ To enable the public access, follow these steps:
 
 2. Click on **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
 
-## Get the public link and share it
+## Get and share public link
 
 To obtain the public link for the form, follow these steps:
 
@@ -110,7 +110,7 @@ To update a public form, follow these steps:
 
 ### How do I limit access to the shared link?
 
-Unfortunately, currently you can't define granular permissions for shared processes. A public form can be submitted by everyone who has access to the shared link. We encourage you to share links carefully, as anyone with the link can run the process or share the link with other people. However, you can track process executions via Operate, and if you detect suspicious behavior, [unpublish the process again](#disable-public-access-again).
+Unfortunately, currently you can not define granular permissions for shared processes. A public form can be submitted by everyone who has access to the shared link. We encourage you to share links carefully, as anyone with the link can run the process or share the link with other people. However, you can track process executions via Operate, and if you detect suspicious behavior, [unpublish the process again](#disable-public-access-again).
 
 ### How can I rename a shared link?
 
@@ -124,7 +124,7 @@ Check the link URL. It should follow this pattern:
 
 ### Are public links indexed by search engines?
 
-No, they aren't. Unless you share it with someone, people will not find your link on the web.
+No, they are not indexed by search engines. Unless you share it with someone, people will not find your link on the web.
 
 ### Are public links deleted when I delete my account?
 
