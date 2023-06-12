@@ -10,7 +10,7 @@ The **RabbitMQ Connector** is an inbound Connector that allows you to connect yo
 ## Prerequisites
 
 To use the **RabbitMQ Connector**, you need to have installed a RabbitMQ server and create the relevant [credentials](https://www.rabbitmq.com/passwords.html).
-It is highly recommended to use Camunda secrets to store credentials, so you don't expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
+Using Camunda secrets to store credentials is highly recommended, so you do not expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
 
 ## Create a RabbitMQ Connector event
 
@@ -80,7 +80,7 @@ The **Activation** section allows you to configure the custom activation conditi
 
 ![RabbitMQ Intermediate Catch Event](../img/connectors-rabbitmq-inbound-intermediate.png)
 
-The correlation key fields are only applicable for the Intermediate Event **RabbitMQ Connector**.
+The correlation key fields are only applicable for the intermediate event **RabbitMQ Connector**.
 
 When using the **RabbitMQ Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
