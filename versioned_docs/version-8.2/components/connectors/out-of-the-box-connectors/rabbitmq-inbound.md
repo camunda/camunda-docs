@@ -10,7 +10,7 @@ The **RabbitMQ Connector** is an inbound Connector that allows you to connect yo
 ## Prerequisites
 
 To use the **RabbitMQ Connector**, you need to have installed a RabbitMQ server and create the relevant [credentials](https://www.rabbitmq.com/passwords.html).
-It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
+Using Camunda secrets to store credentials is highly recommended, so you do not expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
 
 ## Create a RabbitMQ Connector event
 
@@ -20,7 +20,7 @@ To use the **RabbitMQ Consumer Connector** in your process, either change the ty
 
 ## Create a RabbitMQ Consumer Connector task
 
-1. Start building your BPMN diagram with a **Start Event** building block.
+1. Add a **Start Event** or an **Intermediate Event** to your BPMN diagram to get started.
 2. Change its template to a RabbitMQ Connector.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
@@ -76,6 +76,24 @@ However, you can refer to Connector secrets using placeholder syntax. For exampl
 
 The **Activation** section allows you to configure the custom activation conditions for the RabbitMQ Consumer Connector.
 
+#### Correlation key
+
+![RabbitMQ Intermediate Catch Event](../img/connectors-rabbitmq-inbound-intermediate.png)
+
+The correlation key fields are only applicable for the intermediate event **RabbitMQ Connector**.
+
+When using the **RabbitMQ Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the value contains `message:{body:{correlationKey:myValue}}`, your correlation key settings will look like this:
+
+- **Correlation key (process)**: `=myCorrelationKey`
+- **Correlation key (payload)**: `=message.body.correlationKey`
+
+Learn more about correlation keys in the [messages guide](../../../concepts/messages).
+
 #### Activation condition
 
 **Activation condition** is an optional FEEL expression field that allows for the fine-tuning of the Connector activation.
@@ -86,8 +104,8 @@ This way, the Connector will be triggered only if the message body contains the 
 
 The **Variable mapping** section allows you to configure the mapping of the RabbitMQ message to the process variables.
 
-- Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-- Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example, given the RabbitMQ Connector is triggered with the message body `{"role": "USER", "action": "LOGIN""}` and you would like to extract the pull request `role` as a process variable `messageRole`, the **Result Expression** might look like this:
+- Use **Result variable** to store the response in a process variable. For example, `myResultVariable`.
+- Use **Result expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example, given the RabbitMQ Connector is triggered with the message body `{"role": "USER", "action": "LOGIN""}` and you would like to extract the pull request `role` as a process variable `messageRole`, the **Result Expression** might look like this:
 
 ```
 = {
