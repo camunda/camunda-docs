@@ -914,6 +914,11 @@
             },
             {
               "type": "link",
+              "label": "Kafka Consumer Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/kafka-inbound/"
+            },
+            {
+              "type": "link",
               "label": "Microsoft Teams Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/microsoft-teams/"
             },

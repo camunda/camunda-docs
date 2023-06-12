@@ -62,7 +62,6 @@ The following fields are available in the `response` variable:
 - `key`: The key of the message.
 - `value`: The value of the message.
 - `rawValue`: The value of the message as a JSON string.
-- `topic`: Topic name.
 
 You can use an output mapping to map the response:
 
