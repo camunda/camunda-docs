@@ -30,7 +30,7 @@ To create a form for public access, follow these steps:
 
 1. Navigate back to your project root or folder.
 2. Click on **New**, and select **Form** in the drop down menu.
-  <img src={CreateFormImg} style={{width: 300}} alt="Creating a new form" />
+   <img src={CreateFormImg} style={{width: 300}} alt="Creating a new form" />
 
 3. Name your form.
 4. Design your form using the **component palette**.
@@ -43,17 +43,17 @@ To embed the form in the start event, follow these steps:
 
 1. Make sure you are in the **Implement** mode.
 
-  <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
+<img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
 
 2. Select the start event.
 
-  <img src={SelectStartEventImg} style={{width: 800}} alt="Start event of a human workflow" />
+<img src={SelectStartEventImg} style={{width: 800}} alt="Start event of a human workflow" />
 
 3. Ensure that the start event is a [none start event](../../bpmn/none-events/none-events.md#none-start-events). If it isn't, change the start event type accordingly using the **wrench tool**.
 4. Use the blue **form icon** to open the form browser. If the icon does not appear, select the start event again.
 5. Select the form you have created and click on **Embed** to confirm.
 
-  <img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
+<img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
 
 You can preview the embedded form by clicking the **form icon** again.
 
@@ -63,7 +63,7 @@ To enable the public access, follow these steps:
 
 1. Open the **Publication** section in the **properties panel** (not the tab of the same name) and activate the toggle.
 
-  <img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
+<img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
 
 2. Click on **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
 
@@ -73,7 +73,7 @@ To obtain the public link for the form, follow these steps:
 
 1. Access the URL in the **Publication** tab of the **properties panel**.
 2. Share the URL with users via email, social media, or any other communication channel.
-  <img src={PublicLinkImg} style={{width: 400}} alt="Sharing a public link" />
+   <img src={PublicLinkImg} style={{width: 400}} alt="Sharing a public link" />
 
 Users can open the public link, fill out the form, and submit it to initiate a process instance.
 
@@ -91,7 +91,7 @@ To unpublish a process and disable the public access again, follow these steps:
 To update a public form, follow these steps:
 
 1. Select the start event with the embedded form.
-2. Click on the blue **form icon** under the start event. 
+2. Click on the blue **form icon** under the start event.
 3. Remove the form by clicking the corresponding action.
 4. Click the **form icon** again.
 5. Select the same form again, and click **Embed** to confirm.
@@ -101,12 +101,12 @@ To update a public form, follow these steps:
 
 ### What are the benefits of publishing a process via a public form?
 
-* **Easy access for external users:** External users can start process instances without the need for Camunda Platform access, making it convenient for them to participate in your business processes.
-* **Efficient data collection:** The public form enables you to gather structured and validated data from external users, ensuring the accuracy and completeness of the information required for your process.
-* **Rapid testing and feedback:** By sharing the public form with your peers in a development environment, you can quickly test and gather feedback on the process before deploying it to a wider audience.
-* **Improved collaboration:** Involving external users through the public form fosters collaboration and engagement, allowing stakeholders, customers, or partners to participate in your business processes.
-* **Scalability and reach:** The public form feature accommodates a large number of external users simultaneously, enabling you to scale your processes and reach a broader audience.
-* **Integration possibilities:** The data submitted through the public form can be seamlessly integrated with other systems or services within your organization, allowing for further automation and data processing.
+- **Easy access for external users:** External users can start process instances without the need for Camunda Platform access, making it convenient for them to participate in your business processes.
+- **Efficient data collection:** The public form enables you to gather structured and validated data from external users, ensuring the accuracy and completeness of the information required for your process.
+- **Rapid testing and feedback:** By sharing the public form with your peers in a development environment, you can quickly test and gather feedback on the process before deploying it to a wider audience.
+- **Improved collaboration:** Involving external users through the public form fosters collaboration and engagement, allowing stakeholders, customers, or partners to participate in your business processes.
+- **Scalability and reach:** The public form feature accommodates a large number of external users simultaneously, enabling you to scale your processes and reach a broader audience.
+- **Integration possibilities:** The data submitted through the public form can be seamlessly integrated with other systems or services within your organization, allowing for further automation and data processing.
 
 ### How do I limit access to the shared link?
 
@@ -114,7 +114,7 @@ Unfortunately, currently you can't define granular permissions for shared proces
 
 ### How can I rename a shared link?
 
-[Unpublish the process](#disable-public-access-again), change the process ID, and publish again. However, take care as this will create a new process definition in Zeebe, parallel to the old one. 
+[Unpublish the process](#disable-public-access-again), change the process ID, and publish again. However, take care as this will create a new process definition in Zeebe, parallel to the old one.
 
 ### How can I make sure it's a valid Camunda public form link?
 

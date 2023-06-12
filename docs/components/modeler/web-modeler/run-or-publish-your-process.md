@@ -186,19 +186,19 @@ To publish a process via a public form, follow these steps:
 4. Use the blue **form icon** to open the form browser. If the icon does not appear, select the start event again.
 5. Select the form you have created, and click on **Embed** to confirm.
 
-  <img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
+<img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
 
 6. Optionally define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
 
 #### Deploy process to the public
 
 1. Open the **Publication** section in the **properties panel** (not the tab of the same name) and activate the toggle.
-  
-  <img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
+
+<img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
 
 2. Click on **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
 
-Once the process is deployed, a public URL for the form is generated on the target cluster. 
+Once the process is deployed, a public URL for the form is generated on the target cluster.
 
 #### Get the public link and share it
 
@@ -206,7 +206,7 @@ You can access the URL in the **Publication** tab of the **properties panel**, a
 
 <img src={PublicLinkImg} style={{width: 400}} alt="Sharing a public link" />
 
-When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda Platform 8, using the submitted data as input. 
+When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda Platform 8, using the submitted data as input.
 
 For further configuration and how to unpublish a process again, please refer to the [full documentation](./advanced-modeling/publish-public-processes.md).
 

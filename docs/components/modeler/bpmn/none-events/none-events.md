@@ -14,7 +14,7 @@ At most, a process can have **one** none start event (besides other types of sta
 
 A none start event is where the process instance or a subprocess starts when the process or the subprocess is activated.
 
-A none start event is required if you want to [trigger a process via a form](../../web-modeler/run-or-publish-your-process.md#publish-via-a-public-form). 
+A none start event is required if you want to [trigger a process via a form](../../web-modeler/run-or-publish-your-process.md#publish-via-a-public-form).
 
 ## None end events
 
