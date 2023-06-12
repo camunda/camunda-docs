@@ -44,3 +44,9 @@ However, according to the official Kubernetes documentation about [Ingress TLS](
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
 Therefore, if you are not using the [Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](./helm-kubernetes/platforms/platforms.md).
+
+## Identity contextPath
+
+Camunda Platform 8 Self-Managed could be accessed externally via different method, one of them is the [combined Ingress setup](./helm-kubernetes/guides/ingress-setup.md#combined-ingress-setup). In that model, Camunda Identity is accessed by the contextPath, for example `https://camunda.example.com/identity`.
+
+However, for security reasons, Camunda Identity can be accessed via contextPath in secure mode only (HTTPS). If you want to use Camunda Identity with HTTP, then use [separate Ingress setup](./helm-kubernetes/guides/ingress-setup.md#combined-ingress-setup) (you still can use the rest of the applications like Operate, Optimize, etc, in combined setup).
