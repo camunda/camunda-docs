@@ -196,7 +196,7 @@ module.exports = {
             },
             {
               label: "Blog",
-              href: "https://camunda.com/blog/category/camunda-cloud/",
+              href: "https://camunda.com/blog/tag/camunda-platform-8/",
             },
             {
               label: "Release cycle",
