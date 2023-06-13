@@ -20,10 +20,8 @@ jobs:
           node-version: 16
       - name: Install Dependencies
         run: npm ci
-      - name: Disable Indexing
-        run: "sed -i 's/noIndex: false/noIndex: true/g' docusaurus.config.js"
       - name: Update URL
-        run: 'sed -i ''s!url: "https://docs.camunda.io"!url: "https://stage.docs.camunda.io"!g'' docusaurus.config.js'
+        run: 'sed -i ''s!url: "https://unsupported.docs.camunda.io"!url: "https://stage.unsupported.docs.camunda.io"!g'' docusaurus.config.js'
       - name: Update redirects for environment
         run: "sed -i 's!https://unsupported.docs.camunda.io!https://stage.unsupported.docs.camunda.io!g' ./static/.htaccess"
       - name: Build
@@ -45,7 +43,7 @@ jobs:
         with:
           switches: -avzr --delete
           path: build/
-          remote_path: ${{ secrets.AWS_STAGE_PUBLISH_PATH }}
+          remote_path: ${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}/0.26
           remote_host: ${{ secrets.AWS_STAGE_PUBLISH_HOST }}
           remote_user: ${{ secrets.AWS_STAGE_PUBLISH_USER }}
           # vvvvv Intentionally missing the AWS_ prefix vvvvv

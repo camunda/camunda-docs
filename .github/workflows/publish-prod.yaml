@@ -38,7 +38,7 @@ jobs:
         with:
           switches: -avzr --delete
           path: build/
-          remote_path: ${{ secrets.AWS_PROD_PUBLISH_PATH }}
+          remote_path: ${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}/0.26
           remote_host: ${{ secrets.AWS_PROD_PUBLISH_HOST }}
           remote_user: ${{ secrets.AWS_PROD_PUBLISH_USER }}
           # vvvvv Intentionally missing the AWS_ prefix vvvvv
