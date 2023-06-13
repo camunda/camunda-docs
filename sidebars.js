@@ -89,8 +89,6 @@ module.exports = {
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
-            "components/console/manage-organization/update-billing-reservations",
-            "components/console/manage-organization/update-creditcard",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
@@ -111,6 +109,9 @@ module.exports = {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-professional-plan",
+            "components/console/manage-plan/update-billing-reservations",
+            "components/console/manage-plan/update-creditcard",
+            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
             "components/console/manage-plan/cancel-professional-subscription",
           ],
         },
