@@ -146,6 +146,7 @@ module.exports = {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
+                "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
           ],
@@ -355,6 +356,7 @@ module.exports = {
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/starting-processes",
             "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
