@@ -20,7 +20,7 @@ Backups are created and managed on a per-cluster basis. It is important to be aw
 Exercise caution when deleting clusters to avoid unintended loss of backups.
 :::
 
-Your cluster generation needs to be greater or equal to `8.2.4-alpha1` to support backups.
+Your cluster generation needs to be greater or equal to `8.2.4` to support backups.
 
 ## Rate limits
 
