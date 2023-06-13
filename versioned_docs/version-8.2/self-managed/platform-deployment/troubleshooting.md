@@ -43,8 +43,4 @@ However, according to the official Kubernetes documentation about [Ingress TLS](
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](./helm-kubernetes/platforms/platforms.md). 
-
-:::note
-Due to limitations, the contextPath approach is unavailable when using a browser Incognito mode.
-:::
+Therefore, if you are not using the [Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](./helm-kubernetes/platforms/platforms.md).
