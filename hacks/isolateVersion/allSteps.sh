@@ -30,11 +30,11 @@ script_index=$1
 
 script_directory=$(cd "$(dirname "$0")" && pwd)
 
-if [[ "$script_index" == 2 || -z "$script_index" ]]; then
+if [[ "$script_index" == 1 || -z "$script_index" ]]; then
   source $script_directory/1-deleteOtherVersions.sh
 fi
 
-if [[ "$script_index" == 1 || -z "$script_index" ]]; then
+if [[ "$script_index" == 2 || -z "$script_index" ]]; then
   source $script_directory/2-reduceVersionManifest.sh
 fi
 
