@@ -3,7 +3,7 @@ name: publish-stage
 on:
   push:
     branches:
-      - "main"
+      - "unsupported/0.26"
     tags-ignore:
       - "*"
 

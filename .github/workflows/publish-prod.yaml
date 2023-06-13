@@ -2,9 +2,8 @@ name: publish-prod
 
 on:
   push:
-    tags:
-      - "[0-9]+.[0-9]+.[0-9]+"
-      - "!0.25.[0-9]+"
+    branches:
+      - "0.26.[0-9]+"
 
 permissions:
   id-token: write
