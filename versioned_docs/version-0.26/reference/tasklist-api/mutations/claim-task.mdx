@@ -3,16 +3,17 @@ id: claim-task
 title: claimTask
 ---
 
-export const Tag = ({children, color}) => (
-<span
-style={{
+export const Tag = ({ children, color }) => (
+  <span
+    style={{
       backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}>
-{children}
-</span>
+      borderRadius: "2px",
+      color: "#fff",
+      padding: "0.2rem",
+    }}
+  >
+    {children}
+  </span>
 );
 
 Claim a task with taskId to currently logged in user. Returns the task.
@@ -26,10 +27,10 @@ claimTask(
 
 ### Arguments
 
-#### `taskId` ([`String!`](../../../../../docs/apis-tools/tasklist-api/scalars/string.mdx))
+#### `taskId` ([`String!`](/reference/tasklist-api/scalars/string.mdx))
 
 ### Type
 
-#### [`Task`](../../../../../docs/apis-tools/tasklist-api/objects/task.mdx)
+#### [`Task`](/reference/tasklist-api/objects/task.mdx)
 
 Describes the User task

@@ -3,16 +3,17 @@ id: complete-task
 title: completeTask
 ---
 
-export const Tag = ({children, color}) => (
-<span
-style={{
+export const Tag = ({ children, color }) => (
+  <span
+    style={{
       backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}>
-{children}
-</span>
+      borderRadius: "2px",
+      color: "#fff",
+      padding: "0.2rem",
+    }}
+  >
+    {children}
+  </span>
 );
 
 Complete a task with taskId and optional variables. Returns the task.
@@ -27,12 +28,12 @@ completeTask(
 
 ### Arguments
 
-#### `taskId` ([`String!`](../../../../../docs/apis-tools/tasklist-api/scalars/string.mdx))
+#### `taskId` ([`String!`](/reference/tasklist-api/scalars/string.mdx))
 
-#### `variables` ([`[VariableInput!]!`](../../../../../docs/apis-tools/tasklist-api/inputs/variable-input.mdx))
+#### `variables` ([`[VariableInput!]!`](/reference/tasklist-api/inputs/variable-input.mdx))
 
 ### Type
 
-#### [`Task`](../../../../../docs/apis-tools/tasklist-api/objects/task.mdx)
+#### [`Task`](/reference/tasklist-api/objects/task.mdx)
 
 Describes the User task

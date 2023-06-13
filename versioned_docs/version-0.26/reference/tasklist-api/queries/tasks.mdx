@@ -3,16 +3,17 @@ id: tasks
 title: tasks
 ---
 
-export const Tag = ({children, color}) => (
-<span
-style={{
+export const Tag = ({ children, color }) => (
+  <span
+    style={{
       backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}>
-{children}
-</span>
+      borderRadius: "2px",
+      color: "#fff",
+      padding: "0.2rem",
+    }}
+  >
+    {children}
+  </span>
 );
 
 Find all tasks specified by query.
@@ -26,10 +27,10 @@ tasks(
 
 ### Arguments
 
-#### `query` ([`TaskQuery!`](../../../../../docs/apis-tools/tasklist-api/inputs/task-query.mdx))
+#### `query` ([`TaskQuery!`](/reference/tasklist-api/inputs/task-query.mdx))
 
 ### Type
 
-#### [`Task`](../../../../../docs/apis-tools/tasklist-api/objects/task.mdx)
+#### [`Task`](/reference/tasklist-api/objects/task.mdx)
 
 Describes the User task
