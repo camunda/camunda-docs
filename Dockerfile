@@ -3,12 +3,12 @@
 FROM httpd:alpine
 
 RUN rm -r /usr/local/apache2/htdocs/*
-COPY /build /usr/local/apache2/htdocs/
+COPY /build /usr/local/apache2/htdocs/0.26/
 
 # Remove SSL requirement
 RUN sed -i \
         '/SERVER_PORT/d;/SERVER_NAME/d' \
-        /usr/local/apache2/htdocs/.htaccess
+        /usr/local/apache2/htdocs/0.26/.htaccess
 
 # Enable the rewrite module
 RUN sed -i \
