@@ -49,4 +49,4 @@ Therefore, if you are not using the [Ingress-NGINX controller](https://github.co
 
 Camunda Platform 8 Self-Managed can be accessed externally via different methods, one such method is the [combined Ingress setup](./helm-kubernetes/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the contextPath variable, for example `https://camunda.example.com/identity`.
 
-However, for security reasons, Camunda Identity can be accessed via contextPath in secure mode only (HTTPS). If you want to use Camunda Identity with HTTP, then use [separate Ingress setup](./helm-kubernetes/guides/ingress-setup.md#combined-ingress-setup) (you still can use the rest of the applications like Operate, Optimize, etc, in combined setup).
+For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured. If you want to use Camunda Identity with HTTP, please use a [separate Ingress setup](./helm-kubernetes/guides/ingress-setup.md#combined-ingress-setup) (applications such as Operate, Optimize, etc, can still be accessed in a combined setup).
