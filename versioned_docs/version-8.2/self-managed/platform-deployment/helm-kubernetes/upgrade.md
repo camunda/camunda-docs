@@ -89,8 +89,6 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
-The following sections are only needed if you are updating to v8.0.13 or the versions after v8.0.13.
-
 ### v8.2.3
 
 :::caution Breaking Change
@@ -105,6 +103,8 @@ Zeebe Gateway authentication is now enabled by default. To authenticate,
 - For connecting to zbctl, look [here](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl)
 
 :::
+
+The following sections are only needed if you are updating to v8.0.13 or the versions after v8.0.13.
 
 ### v8.0.13
 
