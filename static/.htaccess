@@ -8,6 +8,10 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# interceptors
+RewriteRule ^docs/self-managed/zeebe-deployment/interceptors(.*)$ /docs/self-managed/zeebe-deployment/zeebe-gateway/interceptors/$1 [R=301,L]
+
+
 # Console restructure
 RewriteRule ^docs/components/console/manage-organization/update-billing-reservations(.*)$ /docs/components/console/manage-plan/update-billing-reservations/$1 [R=301,L]
 RewriteRule ^docs/components/console/manage-organization/update-creditcard(.*)$ /docs/components/console/manage-plan/update-creditcard/$1 [R=301,L]
