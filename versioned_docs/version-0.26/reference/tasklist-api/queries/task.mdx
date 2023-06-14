@@ -3,16 +3,17 @@ id: task
 title: task
 ---
 
-export const Tag = ({children, color}) => (
-<span
-style={{
+export const Tag = ({ children, color }) => (
+  <span
+    style={{
       backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}>
-{children}
-</span>
+      borderRadius: "2px",
+      color: "#fff",
+      padding: "0.2rem",
+    }}
+  >
+    {children}
+  </span>
 );
 
 Get task with id. Returns task or error when task does not exist.
@@ -26,10 +27,10 @@ task(
 
 ### Arguments
 
-#### `id` ([`String!`](../../../../../docs/apis-tools/tasklist-api/scalars/string.mdx))
+#### `id` ([`String!`](/reference/tasklist-api/scalars/string.mdx))
 
 ### Type
 
-#### [`Task`](../../../../../docs/apis-tools/tasklist-api/objects/task.mdx)
+#### [`Task`](/reference/tasklist-api/objects/task.mdx)
 
 Describes the User task

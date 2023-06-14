@@ -1,12 +1,10 @@
-const versionedLinks = require("./src/mdx/versionedLinks");
-
 module.exports = {
   title: "Camunda Platform 8 Docs",
   tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
-  url: "https://docs.camunda.io",
+  url: "https://unsupported.docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: "/",
+  baseUrl: "/0.26/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
@@ -34,35 +32,16 @@ module.exports = {
       },
     ],
     "./static/plugins/bpmn-js",
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "optimize",
-        path: "optimize",
-        routeBasePath: "optimize",
-        beforeDefaultRemarkPlugins: [versionedLinks],
-        sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
-        versions: {
-          "3.9.0": {
-            banner: "none",
-          },
-          "3.8.0": {
-            banner: "none",
-          },
-        },
-      },
-    ],
   ],
   scripts: [],
   themeConfig: {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
-      backgroundColor: "#14D890",
-      textColor: "#000",
-      isCloseable: true,
+        '🚨 This version of Camunda Platform 8 is no longer actively maintained. For up-to-date documentation, see <b><a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io">the latest version</a></b>.',
+      backgroundColor: "#FFC600",
+      textColor: "#434343",
+      isCloseable: false,
     },
     prism: {
       additionalLanguages: ["java", "protobuf"],
@@ -75,7 +54,7 @@ module.exports = {
       },
       items: [
         {
-          type: "docsVersionDropdown",
+          type: "docsVersion",
           position: "left",
           dropdownItemsAfter: [
             {
@@ -107,18 +86,6 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "apis-tools/working-with-apis-tools",
-          label: "APIs & Tools",
-          position: "left",
-        },
-        {
-          type: "doc",
-          docId: "self-managed/about-self-managed",
-          label: "Self-Managed",
-          position: "left",
-        },
-        {
-          type: "doc",
           docId: "reference/overview",
           label: "Reference",
           position: "left",
@@ -142,7 +109,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              href: "https://signup.camunda.com/accounts?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Contact",
@@ -200,7 +167,7 @@ module.exports = {
             },
             {
               label: "Release cycle",
-              to: "docs/reference/release-policy",
+              to: "https://docs.camunda.io/docs/reference/release-policy",
             },
           ],
         },
@@ -216,11 +183,11 @@ module.exports = {
             },
             {
               label: "Licenses",
-              to: "docs/reference/licenses",
+              to: "https://docs.camunda.io/docs/reference/licenses",
             },
             {
               label: "Security notices",
-              to: "docs/reference/notices",
+              to: "https://docs.camunda.io/docs/reference/notices",
             },
           ],
         },
@@ -239,18 +206,14 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          editUrl:
-            "https://github.com/camunda/camunda-platform-docs/edit/main/",
-          beforeDefaultRemarkPlugins: [versionedLinks],
-          // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
+          lastVersion: "0.26",
+          includeCurrentVersion: false,
           versions: {
-            8.1: {
-              banner: "none",
-            },
-            "8.0": {
-              banner: "none",
+            0.26: {
+              label: "0.26",
+              path: "/",
+              noIndex: true,
+              banner: "unmaintained",
             },
           },
         },
@@ -259,24 +222,8 @@ module.exports = {
           customCss: require.resolve("./src/css/custom.css"),
         },
         sitemap: {
-          changefreq: "weekly",
-          priority: 0.5,
-          ignorePatterns: [
-            "/docs/**/tags/**",
-            "/docs/next/**",
-            "/docs/0.25/**",
-            "/docs/0.26/**",
-            "/docs/1.0/**",
-            "/docs/1.1/**",
-            "/docs/1.2/**",
-            "/docs/1.3/**",
-            "/docs/8.0/**",
-            "/docs/8.1/**",
-            "/optimize/3.7.0/**",
-            "/optimize/3.8.0/**",
-            "/optimize/3.9.0/**",
-            "/optimize/next/**",
-          ],
+          // exclude everything from sitemap
+          ignorePatterns: ["**"],
         },
       },
     ],

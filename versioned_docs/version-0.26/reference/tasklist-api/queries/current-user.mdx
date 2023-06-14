@@ -3,16 +3,17 @@ id: current-user
 title: currentUser
 ---
 
-export const Tag = ({children, color}) => (
-<span
-style={{
+export const Tag = ({ children, color }) => (
+  <span
+    style={{
       backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}>
-{children}
-</span>
+      borderRadius: "2px",
+      color: "#fff",
+      padding: "0.2rem",
+    }}
+  >
+    {children}
+  </span>
 );
 
 Get currently logged in user.
@@ -24,6 +25,6 @@ currentUser: User!
 
 ### Type
 
-#### [`User`](../../../../../docs/apis-tools/tasklist-api/objects/user.mdx)
+#### [`User`](/reference/tasklist-api/objects/user.mdx)
 
 Describes the user

@@ -3,16 +3,17 @@ id: include
 title: include
 ---
 
-export const Tag = ({children, color}) => (
-<span
-style={{
+export const Tag = ({ children, color }) => (
+  <span
+    style={{
       backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}>
-{children}
-</span>
+      borderRadius: "2px",
+      color: "#fff",
+      padding: "0.2rem",
+    }}
+  >
+    {children}
+  </span>
 );
 
 Directs the executor to include this field or fragment only when the `if` argument is true.
@@ -25,6 +26,6 @@ directive @include(
 
 ### Arguments
 
-#### `if` ([`Boolean!`](../../../../../docs/apis-tools/tasklist-api/scalars/boolean.mdx))
+#### `if` ([`Boolean!`](/reference/tasklist-api/scalars/boolean.mdx))
 
 Included when true.
