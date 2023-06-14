@@ -19,7 +19,7 @@ If it was selected in the view mode, the refresh rate will not be saved when ref
 
 ![process performance overview](./img/dashboard-viewMode-monitorFeatures.png)
 
-- Description: A Dashboard can be given a description which is displayed below the Dashboard name. For descriptions longer than a single line, the **More/Less** button can be used to show or hide the text.
+- Description: If a Dashboard has a description, the description is displayed below the Dashboard name. The **More/Less** button can show or hide the text for descriptions longer than a single line.
 
 ![dashboard description](./img/dashboard-showMoreDescription.png)
 

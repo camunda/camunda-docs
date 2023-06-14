@@ -35,7 +35,9 @@
             "guides/update-guide/connectors/040-to-050",
             "guides/update-guide/connectors/050-to-060",
             "guides/update-guide/connectors/060-to-070",
-            "guides/update-guide/connectors/070-to-080"
+            "guides/update-guide/connectors/070-to-080",
+            "guides/update-guide/connectors/080-to-090",
+            "guides/update-guide/connectors/090-to-0100"
           ]
         },
         "guides/update-guide/130-to-800",
@@ -283,7 +285,8 @@
             {
               "Google": [
                 "components/connectors/out-of-the-box-connectors/googledrive",
-                "components/connectors/out-of-the-box-connectors/google-maps-platform"
+                "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets"
               ]
             },
             "components/connectors/out-of-the-box-connectors/kafka",
