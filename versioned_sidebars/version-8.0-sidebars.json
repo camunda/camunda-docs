@@ -35,7 +35,9 @@
             "guides/update-guide/connectors/040-to-050",
             "guides/update-guide/connectors/050-to-060",
             "guides/update-guide/connectors/060-to-070",
-            "guides/update-guide/connectors/070-to-080"
+            "guides/update-guide/connectors/070-to-080",
+            "guides/update-guide/connectors/080-to-090",
+            "guides/update-guide/connectors/090-to-0100"
           ]
         },
         "guides/update-guide/130-to-800",
@@ -262,21 +264,35 @@
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
             "components/connectors/out-of-the-box-connectors/asana",
+            {
+              "AWS": [
+                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+                "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/aws-sns",
+                "components/connectors/out-of-the-box-connectors/aws-sqs"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
-            "components/connectors/out-of-the-box-connectors/aws-sns",
-            "components/connectors/out-of-the-box-connectors/aws-sqs",
-            "components/connectors/out-of-the-box-connectors/aws-lambda",
-            "components/connectors/out-of-the-box-connectors/operate",
+            "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            "components/connectors/out-of-the-box-connectors/github",
+            {
+              "GitHub": [
+                "components/connectors/out-of-the-box-connectors/github"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/gitlab",
-            "components/connectors/out-of-the-box-connectors/googledrive",
-            "components/connectors/out-of-the-box-connectors/google-maps-platform",
+            {
+              "Google": [
+                "components/connectors/out-of-the-box-connectors/googledrive",
+                "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
+            "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/sendgrid",

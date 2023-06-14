@@ -19,4 +19,4 @@ Some components have release notes that are not publicly available, including th
 - Web Modeler Self-Managed
 - Optimize
 
-These release notes are available in a blog format under the [release notes](https://camunda.com/blog/category/release-notes/) tag.
+These release notes are available in a blog format under the [release notes](https://camunda.com/blog/category/releases/) tag.

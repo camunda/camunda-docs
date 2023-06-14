@@ -77,6 +77,21 @@ module.exports = {
         {
           type: "docsVersionDropdown",
           position: "left",
+          dropdownItemsAfter: [
+            {
+              type: "html",
+              value: '<hr class="dropdown-separator">',
+            },
+            {
+              type: "html",
+              className: "dropdown-unsupported-versions",
+              value: "<b>Unsupported versions</b>",
+            },
+            ...["0.25", "0.26"].map((version) => ({
+              label: version,
+              href: `https://unsupported.docs.camunda.io/${version}/`,
+            })),
+          ],
         },
         {
           type: "doc",
@@ -181,7 +196,7 @@ module.exports = {
             },
             {
               label: "Blog",
-              href: "https://camunda.com/blog/category/camunda-cloud/",
+              href: "https://camunda.com/blog/tag/camunda-platform-8/",
             },
             {
               label: "Release cycle",
@@ -194,7 +209,7 @@ module.exports = {
           items: [
             {
               label: "Privacy Statement",
-              href: "https://camunda.com/legal/privacy/",
+              href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
               html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
@@ -249,8 +264,6 @@ module.exports = {
           ignorePatterns: [
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/0.25/**",
-            "/docs/0.26/**",
             "/docs/1.0/**",
             "/docs/1.1/**",
             "/docs/1.2/**",

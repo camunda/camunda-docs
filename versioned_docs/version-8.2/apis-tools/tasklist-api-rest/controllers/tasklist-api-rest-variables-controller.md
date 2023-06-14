@@ -37,6 +37,34 @@ curl -X 'GET' \
 
 #### Responses
 
+:::caution
+Starting with the `8.3` release, we're making changes to the response format for a `200` status.
+The returned JSON will be simplified as follows:
+
+Current response:
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "value": "string",
+  "isValueTruncated": true,
+  "previewValue": "string"
+}
+```
+
+New response (from next release):
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "value": "string"
+}
+```
+
+:::
+
 | HTTP status | Description                                                              | Response schema                                                                             |
 | ----------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
 | 200         | On success                                                               | JSON object with [`VariableResponse`](../schemas/responses/variable-response.mdx) structure |

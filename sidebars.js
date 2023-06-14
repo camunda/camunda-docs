@@ -44,6 +44,8 @@ module.exports = {
             "guides/update-guide/connectors/050-to-060",
             "guides/update-guide/connectors/060-to-070",
             "guides/update-guide/connectors/070-to-080",
+            "guides/update-guide/connectors/080-to-090",
+            "guides/update-guide/connectors/090-to-0100",
           ],
         },
         {
@@ -79,6 +81,7 @@ module.exports = {
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
+        "components/concepts/backups",
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -88,8 +91,6 @@ module.exports = {
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
-            "components/console/manage-organization/update-billing-reservations",
-            "components/console/manage-organization/update-creditcard",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
@@ -110,6 +111,10 @@ module.exports = {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
             "components/console/manage-plan/upgrade-to-professional-plan",
+            "components/console/manage-plan/update-billing-reservations",
+            "components/console/manage-plan/update-creditcard",
+            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
+            "components/console/manage-plan/cancel-professional-subscription",
           ],
         },
         {
@@ -144,6 +149,7 @@ module.exports = {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
+                "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
           ],
@@ -250,28 +256,54 @@ module.exports = {
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
-            "components/connectors/out-of-the-box-connectors/aws-sns",
-            "components/connectors/out-of-the-box-connectors/aws-sqs",
-            "components/connectors/out-of-the-box-connectors/aws-lambda",
-            "components/connectors/out-of-the-box-connectors/operate",
+            {
+              AWS: [
+                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+                "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/aws-sns",
+                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
+                "components/connectors/out-of-the-box-connectors/aws-sqs",
+                "components/connectors/out-of-the-box-connectors/aws-sqs-inbound",
+              ],
+            },
+            "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            "components/connectors/out-of-the-box-connectors/github",
+            {
+              GitHub: [
+                "components/connectors/out-of-the-box-connectors/github",
+                "components/connectors/out-of-the-box-connectors/github-webhook",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/gitlab",
-            "components/connectors/out-of-the-box-connectors/googledrive",
-            "components/connectors/out-of-the-box-connectors/google-maps-platform",
-            "components/connectors/out-of-the-box-connectors/kafka",
+            {
+              Google: [
+                "components/connectors/out-of-the-box-connectors/googledrive",
+                "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets",
+              ],
+            },
+            {
+              Kafka: [
+                "components/connectors/out-of-the-box-connectors/kafka",
+                "components/connectors/out-of-the-box-connectors/kafka-inbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
+            "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
-            "components/connectors/out-of-the-box-connectors/rabbitmq",
+            {
+              RabbitMQ: [
+                "components/connectors/out-of-the-box-connectors/rabbitmq",
+                "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
-            "components/connectors/out-of-the-box-connectors/github-webhook",
           ],
         },
         {
@@ -327,6 +359,7 @@ module.exports = {
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/starting-processes",
             "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
