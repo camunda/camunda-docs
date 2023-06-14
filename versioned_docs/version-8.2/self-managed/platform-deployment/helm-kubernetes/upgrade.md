@@ -7,6 +7,12 @@ description: "To upgrade to a more recent version of the Camunda Platform Helm c
 
 To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
 
+:::caution
+
+Ensure to review the [instructions for specific version](#version-update-instructions) before staring the actual upgrade.
+
+:::
+
 ### Upgrading where Identity disabled
 
 Normally for a Helm upgrade, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an upgrade as follows:
@@ -19,11 +25,7 @@ However, if Camunda Identity is enabled (which is the default), the upgrade path
 
 ### Upgrading where Identity enabled
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation.
-
-## If you just tried upgrading to a newer chart version
-
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
+If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web application. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 helm upgrade camunda-platform-test camunda/camunda-platform
@@ -115,10 +117,24 @@ kubectl apply --namespace <NAMESPACE_NAME> -f identity-connectors-secret.yaml
 
 Camunda Platform v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda Platform 8.1.x to 8.2.x:
 
-1. Follow the official PostgreSQL upgrade guide: [Upgrading a PostgreSQL Cluster v15](https://www.postgresql.org/docs/15/upgrading.html). However, it requires some manual work and longer downtime to do the database schema upgrade.
-2. Use the previous version of PostgreSQL v14 in Camunda Platform v8.2, this should be simple and it will work seamlessly.
+1. Use the previous version of PostgreSQL v14 in Camunda Platform v8.2, this should be simple and it will work seamlessly.
+2. Follow the official PostgreSQL upgrade guide: [Upgrading a PostgreSQL Cluster v15](https://www.postgresql.org/docs/15/upgrading.html). However, it requires some manual work and longer downtime to do the database schema upgrade.
 
-**Method 1: Upgrade the database schema to work with PostgreSQL v15**
+**Method 1: Use the previous version PostgreSQL v14**
+
+You can set the PostgreSQL image tag as follows:
+
+```yaml
+identity:
+  keycloak:
+    postgresql:
+      image:
+        tag: 14.5.0
+```
+
+Then follow the [normal upgrade steps](#upgrading-where-identity-enabled).
+
+**Method 2: Upgrade the database schema to work with PostgreSQL v15**
 
 The easiest way to upgrade major versions of postgresql is to start a port-forward,
 and then run `pg_dump` or `pg_restore`. The postgresql client versions are fairly flexible
@@ -190,25 +206,7 @@ psql -U postgres -h localhost -p 5432 -f dump.psql
 kubectl scale --replicas=1 deployment <RELEASE_NAME>-identity
 ```
 
-**Method 2: Use the previous version PostgreSQL v14**
-
-You can set the PostgreSQL either by values file or CLI.
-
-**By values file:**
-
-```yaml
-identity:
-  keycloak:
-    postgresql:
-      image:
-        tag: 14.5.0
-```
-
-**By CLI:**
-
-```yaml
-helm upgrade [...] --set identity.keycloak.postgresql.image.tag=14.5.0
-```
+Then follow the [normal upgrade steps](#upgrading-where-identity-enabled).
 
 ### v8.0.13
 
