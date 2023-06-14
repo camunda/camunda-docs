@@ -13,6 +13,16 @@ End of maintenance: 8th of October 2024
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
 [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
 
+### Do not update from Camunda Platform 8.1.X to 8.2.6
+
+An issue in the Operate 8.2.6 patch was discovered after it was published on June 8th.
+
+You should not update directly from 8.1.x to 8.2.6 (it will require manual intervention as indices break), you either first update to 8.2.5 then 8.2.6 or straight from 8.1.x to 8.2.7.
+
+To prevent this entirely we removed the Operate 8.2.6 artifacts from this release.
+
+Camunda Platform 8.2.7 is scheduled to be officially released on Tuesday Jun 13th.
+
 ### OpenSearch 1.3.x support
 
 - Operate version 8.2+ now also support OpenSearch 1.3.x.
