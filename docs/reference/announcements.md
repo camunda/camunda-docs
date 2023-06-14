@@ -27,7 +27,7 @@ You should not update directly from 8.1.x to 8.2.6 (it will require manual inter
 
 To prevent this entirely we removed the Operate 8.2.6 artifacts from this release.
 
-Camunda Platform 8.2.7 is scheduled to be officially released on Tuesday Jun 13th.
+As Camunda Platform 8.2.7 was already released on Tuesday Jun 13th, you can just update to 8.2.7 directly, skipping 8.2.6.
 
 ### OpenSearch 1.3.x support
 
