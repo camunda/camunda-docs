@@ -46,7 +46,7 @@ Before deploying Camunda Platform using Helm you need the following:
 
 You have to add the Camunda Helm chart repository in order to use the charts. Once this is done, Helm is able to fetch and install charts hosted in [https://helm.camunda.io](https://helm.camunda.io):
 
-```
+```bash
 helm repo add camunda https://helm.camunda.io
 helm repo update
 ```
@@ -57,7 +57,7 @@ Once this is completed, we are ready to install the Helm chart hosted in the off
 
 To install the available Camunda Platform 8 components inside a Kubernetes cluster, you can simply run:
 
-```
+```bash
 helm install <RELEASE_NAME> camunda/camunda-platform
 ```
 
@@ -75,7 +75,7 @@ Installing all the components in a cluster requires all Docker images to be down
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
-```
+```bash
 kubectl get pods
 ```
 
@@ -101,7 +101,7 @@ elasticsearch-master-1                          0/1     Init:0/1            0   
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
-```
+```bash
 kubectl get pods
 ```
 
@@ -115,6 +115,26 @@ elasticsearch-master-0                                 1/1     Running   0      
 <RELEASE_NAME>-zeebe-0                                 1/1     Running   0          4m6s
 <RELEASE_NAME>-tasklist-XXX                            1/1     Running   0          4m6s
 <RELEASE_NAME>-zeebe-gateway                           1/1     Running   0          4m6s
+```
+
+### Installing with latest updates for certain Camunda Helm chart
+
+Although the Camunda Platform 8 Helm chart gets the latest version of [Camunda Platform 8 applications](../../../reference/supported-environments.md), the version is still possible to diverge slightly between the chart and the applications/dependencies due to different releases.
+
+To have the latest version of the chart and applications/dependencies at any time, install the chart as follows:
+
+```bash
+# This will install the latest Camunda Platform Helm chart v8.2.x with the latest applications/dependencies of v8.2.x.
+helm install <RELEASE_NAME> camunda/camunda-platform \
+    --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-latest.yaml
+```
+
+The same works for previous supported versions as follows:
+
+```bash
+# This will install Camunda Platform Helm chart v8.1.x with the latest applications/dependencies of v8.1.x.
+helm install <RELEASE_NAME> camunda/camunda-platform --version 8.1 \
+    --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-v8.1.yaml
 ```
 
 ### Installing Web Modeler
