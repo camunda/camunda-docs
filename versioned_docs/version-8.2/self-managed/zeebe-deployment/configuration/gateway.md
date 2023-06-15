@@ -270,7 +270,7 @@ longPolling:
 
 ### zeebe.gateway.interceptors
 
-It is possible to intercept requests in the gateway, which can be configured via environment variables or the `application.yaml` file. For more details, read about [interceptors](../interceptors.md).
+It is possible to intercept requests in the gateway, which can be configured via environment variables or the `application.yaml` file. For more details, read about [interceptors](/self-managed/zeebe-deployment/zeebe-gateway/interceptors.md).
 
 Each interceptor should be configured with the values described below:
 
