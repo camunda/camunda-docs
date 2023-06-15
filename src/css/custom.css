@@ -214,9 +214,10 @@ svg.implemented:hover [stroke="#333"] {
   align-items: center;
 }
 .navbar-top--info a {
+  font-size: 15px;
   color: #b13c02;
   margin: 5px 5px;
-  padding: 5px 12px;
+  padding: 2px 12px;
 }
 .navbar-top--info a:last-child {
   border: 1px solid #b13c02;
