@@ -57,4 +57,4 @@ Also, due to limitations, the Identity `contextPath` approach is unavailable whe
 
 ## Web Modeler database schema
 
-The Webmodeler Rest-API requires a database connection. This connection should not point to the same database as keycloak does.
+The Web Modeler `restapi` component requires a [database connection](../../modeler/web-modeler/configuration#database). This connection should not point to the same database as Keycloak does.
