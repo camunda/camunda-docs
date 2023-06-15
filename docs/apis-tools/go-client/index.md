@@ -12,9 +12,9 @@ To use the Zeebe Go client library, add the following dependency to your `go.mod
 ```
 module github.com/zb-user/zb-example
 
-go 1.17
+go 1.20
 
-require github.com/camunda/zeebe/clients/go/v8 v8.0.0
+require github.com/camunda/zeebe/clients/go/v8@v8.2.7
 ```
 
 ## Bootstrapping
