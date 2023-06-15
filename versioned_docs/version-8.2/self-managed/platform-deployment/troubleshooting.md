@@ -55,6 +55,6 @@ For security reasons, Camunda Identity requires secure access (HTTPS) when a `co
 Also, due to limitations, the Identity `contextPath` approach is unavailable when using a browser Incognito mode.
 :::
 
-## Webmodeler Rest-API database schema
+## Web Modeler database schema
 
 The Webmodeler Rest-API requires a database connection. This connection should not point to the same database as keycloak does.
