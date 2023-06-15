@@ -7,7 +7,7 @@ description: "Instantiate the client by passing in the address of the cluster yo
 
 ## Dependencies
 
-To use the Zeebe Go client library, add the following dependency to your `go.mod`:
+To use the [Zeebe Go client library](https://github.com/camunda/camunda-platform-get-started/tree/main/go), add the following dependency to your `go.mod`:
 
 ```
 module github.com/zb-user/zb-example
