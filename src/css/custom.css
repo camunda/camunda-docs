@@ -208,7 +208,20 @@ svg.implemented:hover [stroke="#333"] {
   margin-left: 4px;
   vertical-align: text-top;
 }
-
+.navbar-top--info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.navbar-top--info a {
+  color: #b13c02;
+  margin: 5px 5px;
+  padding: 5px 12px;
+}
+.navbar-top--info a:last-child {
+  border: 1px solid #b13c02;
+  border-radius: 8px;
+}
 navbar .navbar .navbar__link[href*="self-managed"] {
   font-size: 0;
   padding: 4px;
@@ -319,6 +332,10 @@ div[class^="announcementBar_"] button {
   padding: 10px;
   overflow: hidden;
 }
+.navbar {
+  flex-direction: column;
+  height: auto;
+}
 .callout {
   display: inline-block;
   color: #fff !important;
@@ -382,4 +399,10 @@ span.callout + p::after {
 .dropdown-unsupported-versions {
   font-size: 0.75rem;
   padding: 0.2rem 0.5rem;
+}
+
+@media only screen and (max-width: 780px) {
+  .navbar-top--info {
+    display: none;
+  }
 }
