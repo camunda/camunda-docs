@@ -43,6 +43,10 @@ The expected format for the data is an array of options, each defining its label
 }
 ```
 
+### FEEL expressions
+
+The options are populated from a [FEEL expression](../../feel/language-guide/feel-expressions-introduction.md) that returns an array of options. The resulting array must be formatted as described in the [as above](#input-data-driven-by-process-data).
+
 #### Shorthand definitions
 
 If the value and label are equal, shorthand formats may be used instead:
