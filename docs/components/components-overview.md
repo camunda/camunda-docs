@@ -4,6 +4,7 @@ title: Overview Components
 sidebar_label: Overview Components
 slug: /components/
 description: "This section contains product manual content for each component in Camunda Platform 8, including conceptual content."
+keywords: ["process automation tools"]
 ---
 
 This section contains product manual content for each component in Camunda Platform 8, including conceptual content. Together, these components comprise the Camunda Platform 8 SaaS experience.

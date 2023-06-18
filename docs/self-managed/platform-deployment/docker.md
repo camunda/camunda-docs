@@ -1,6 +1,7 @@
 ---
 id: docker
 title: "Docker"
+keywords: ["camunda docker"]
 ---
 
 This page guides you through Camunda Platform 8 Docker images and how to run the platform in a developer setup using Docker Compose.

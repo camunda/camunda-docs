@@ -822,6 +822,7 @@ module.exports = {
         {
           "Zeebe Gateway": [
             "self-managed/zeebe-deployment/zeebe-gateway/overview",
+            "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
           ],
         },
         {
