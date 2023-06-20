@@ -762,6 +762,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/twilio/"
             ),
             docsLink(
+              "Twilio Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/twilio-webhook/"
+            ),
+            docsLink(
               "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
             ),

@@ -64,6 +64,7 @@ import TabItem from "@theme/TabItem";
 - [Kafka Consumer Connector](/components/connectors/out-of-the-box-connectors/kafka-inbound.md) - Consume messages from [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-inbound.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.
 - [Slack inbound Connector](/components/connectors/out-of-the-box-connectors/slack-inbound.md) - Trigger a [Slack](https://slack.com) bot to start a BPMN process with an event or a slash command
+- [Twilio Webhook Connector](/components/connectors/out-of-the-box-connectors/twilio-webhook.md) - Start a process instance triggered by a [Twilio webhook](https://www.twilio.com/docs/usage/webhooks). Can be used as an intermediate connector in existing processes.
 
 </TabItem>
 
