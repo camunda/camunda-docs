@@ -654,6 +654,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
             ),
             docsLink(
+              "Amazon EventBridge Connector",
+              "components/connectors/out-of-the-box-connectors/aws-eventbridge/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),
