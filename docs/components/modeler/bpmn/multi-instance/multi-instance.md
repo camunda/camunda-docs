@@ -40,6 +40,7 @@ A multi-instance activity must have an `inputCollection` expression that defines
 If you need to iterate `n` times (like with a loop-cardinality), you can use the following expression with a [for-loop](/components/modeler/feel/language-guide/feel-control-flow.md#for-loops): `for i in 1..n return i`.
 
 :::
+
 To access the current element of the `inputCollection` value within the instance, the multi-instance activity can define the `inputElement` variable (e.g. `item`). The element is stored as a local variable of the instance under the given name.
 
 If the `inputCollection` value is **empty**, the multi-instance body is completed immediately and no instances are created. It behaves like the activity is skipped.
