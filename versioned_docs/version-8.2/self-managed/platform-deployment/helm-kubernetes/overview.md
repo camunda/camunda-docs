@@ -35,6 +35,14 @@ To do, you must have the following tools installed in your local environment:
 - `kubectl`: Kubernetes Control CLI tool, installed and connected to your cluster
 - `helm`: Kubernetes Helm CLI tool
 
+## Versioning
+
+Camunda Platform 8 **Helm chart** versions are only aligned with the minor version of [Camunda Platform 8](../../../components/components-overview.md). In other words, the `Camunda Platform 8 Helm chart` could have a patch version different from the `Camunda Platform 8`.
+
+For example, the Camunda Platform 8 Helm chart could be on version `8.1.1`, but Camunda Platform 8 apps are on version `8.1.0`. Additionally, the Camunda Platform 8 Helm chart could be on version `8.1.1`, but Camunda Platform 8 apps are on version `8.1.2`.
+
+We work to keep the Helm chart updated with the latest version of Camunda Platform 8, but currently this is not guaranteed. Note that the latest version of the Helm chart may not necessarily have the latest version of the Camunda Platform 8 apps. This should not be an issue unless you rely on a specific Camunda Platform 8 patch version. In that case, you can set the desired version via a custom values file.
+
 ## Useful tools related to Camunda Platform
 
 - **Camunda Modeler**: to model/modify business processes. [Install Camunda Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).

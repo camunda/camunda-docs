@@ -718,6 +718,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
             docsLink(
+              "Kafka Consumer Connector",
+              "components/connectors/out-of-the-box-connectors/kafka-inbound/"
+            ),
+            docsLink(
               "Microsoft Teams Connector",
               "components/connectors/out-of-the-box-connectors/microsoft-teams/"
             ),

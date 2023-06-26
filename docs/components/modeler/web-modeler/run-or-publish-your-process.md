@@ -7,6 +7,17 @@ description: "Flexible options to run or publish a process in any environment an
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import PublicationSectionImg from './img/publication-section.png';
+import EmbedStartFormImg from './img/embed-start-form.png';
+import ImplementModeImg from './img/implement-mode-active.png';
+import PublicLinkImg from './img/public-link.png';
+import PublicFormImg from './img/public-form.png';
+
+import ConvertToTimerImg from './img/web-modeler-convert-to-timer.png';
+import WebhookPanelImg from './img/web-modeler-webhook-panel.png';
+import ConvertToWebhookImg from './img/web-modeler-convert-to-webhook.png';
+import TasklistProcessesImg from './img/tasklist-processes.png';
+
 <span class="badge badge--cloud">Camunda Platform 8 only</span>
 
 When you design a process in Camunda Modeler, you have multiple flexible options to either run or publish it on Camunda Platform 8. This page explains the differences between running and publishing a process, and outlines the various options to publish a process into any environment, and to any audience.
@@ -26,6 +37,11 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
 - Implement and run your [job workers](../../concepts/job-workers.md) if you use tasks such as service or send tasks.
+
+:::note
+To perform any of these actions, make sure to be in **Implement** mode.
+<img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
+:::
 
 ## Run a process
 
@@ -75,7 +91,7 @@ To schedule a process using a timer, follow these steps:
 1. Select the start event.
 2. Change the start event type to a timer event using the **wrench tool**.
 
-![Converting the start event to a timer start event](img/web-modeler-convert-to-timer.png)
+<img src={ConvertToTimerImg} style={{width: 600}} alt="Converting the start event to a timer start event" />
 
 3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
 
@@ -101,19 +117,12 @@ Publishing a process means that you make it available to other users inside and 
 
 You have the following options to publish a process:
 
-- [Deploy a process](#deploy-a-process)
-  - [Before deploying a process](#before-deploying-a-process)
-- [Run a process](#run-a-process)
-  - [Test run using Play mode](#test-run-using-play-mode)
-  - [Run manually from Modeler](#run-manually-from-modeler)
-  - [Schedule via timer](#schedule-via-timer)
-  - [Best practices for running a process](#best-practices-for-running-a-process)
-- [Publishing a process](#publishing-a-process)
-  - [Deploy to run programmatically](#deploy-to-run-programmatically)
-  - [Publish via webhook](#publish-via-webhook)
-  - [Publish to Tasklist](#publish-to-tasklist)
-  - [Listen to message or signal events](#listen-to-message-or-signal-events)
-  - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
+- [Deploy to run programmatically](#deploy-to-run-programmatically)
+- [Publish via webhook](#publish-via-webhook)
+- [Publish to Tasklist](#publish-to-tasklist)
+- [Publish via a public form](#publish-via-a-public-form)
+- [Listen to message or signal events](#listen-to-message-or-signal-events)
+- [Best practices for publishing a process](#best-practices-for-publishing-a-process)
 
 ### Deploy to run programmatically
 
@@ -127,14 +136,14 @@ Follow these steps to publish a process via a webhook:
 
 1. Select the start event.
 2. Switch your start event to a [HTTP webhook connector](/components/connectors/protocol/http-webhook.md) using the **wrench tool**.
-   ![Converting a start event to a webhook start event](img/web-modeler-convert-to-webhook.png)
+   <img src={ConvertToWebhookImg} style={{width: 600}} alt="Converting the start event to a webhook start event" />
 
 3. Define the webhook configuration in the properties panel of the start event.
 4. Finally, [deploy the process](#deploy-a-process) to activate the webhook connector.
 
-When the process is deployed, the webhook URL can be found in the properties panel, and called from any outside system.
+When the process is deployed, the webhook URL can be found in the **Webhook** tab of the **properties panel**, and called from any outside system.
 
-![Webhook URL after a process has been deployed](img/web-modeler-webhook-panel.png)
+<img src={WebhookPanelImg} style={{width: 600}} alt="Webhook URL after a process has been deployed" />
 
 You have multiple options to ensure that the webhook connection is safe for use by your target audience only. Please refer to the [full documentation](/components/connectors/protocol/http-webhook.md) for configuration details.
 
@@ -155,9 +164,51 @@ To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) 
 </TabItem>
 </Tabs>
 
-![Processes published to Tasklist](img/tasklist-processes.png)
+<img src={TasklistProcessesImg} style={{width: 800}} alt="Processes published to Tasklist" />
 
 To learn more about publishing processes to Tasklist, refer to our [documentation on Tasklist](../../tasklist/userguide/using-tasklist.md#processes).
+
+### Publish via a public form
+
+<span class="badge badge--cloud">Camunda Platform 8 SaaS only</span>
+
+Publishing a process via a public form allows you to share your process with external users who can start instances of the process without requiring access to Camunda Platform 8. This feature is particularly useful when you want to gather data or initiate a process from users who are not part of your organization or do not have direct access to Camunda. It also allows you to rapidly test a process with your peers in a development environment.
+
+<img src={PublicFormImg} alt="A public form" />
+
+To publish a process via a public form, follow these steps:
+
+#### Add a start form
+
+1. Select the start event.
+2. The start event must be a [none start event](../bpmn/none-events/none-events.md#none-start-events). If it isn't, change the start event type accordingly using the **wrench tool**.
+3. [Create a form](../../../guides/utilizing-forms.md) in your project, and return to the process.
+4. Use the blue **form icon** to open the form browser. If the icon does not appear, select the start event again.
+5. Select the form you have created, and click on **Embed** to confirm.
+
+<img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
+
+6. Optionally define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
+
+#### Deploy process to the public
+
+1. Open the **Publication** section in the **properties panel** (not the tab of the same name) and activate the toggle.
+
+<img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
+
+2. Click on **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
+
+Once the process is deployed, a public URL for the form is generated on the target cluster.
+
+#### Get the public link and share it
+
+You can access the URL in the **Publication** tab of the **properties panel**, and share it with any user via email, social media, or any other communication channel.
+
+<img src={PublicLinkImg} style={{width: 400}} alt="Sharing a public link" />
+
+When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda Platform 8, using the submitted data as input.
+
+For further configuration and how to unpublish a process again, please refer to the [full documentation](./advanced-modeling/publish-public-processes.md).
 
 ### Listen to message or signal events
 

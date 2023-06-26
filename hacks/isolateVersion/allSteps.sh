@@ -31,11 +31,11 @@ script_index=$1
 script_directory=$(cd "$(dirname "$0")" && pwd)
 
 if [[ "$script_index" == 1 || -z "$script_index" ]]; then
-  source $script_directory/1-reduceVersionManifest.sh
+  source $script_directory/1-deleteOtherVersions.sh
 fi
 
 if [[ "$script_index" == 2 || -z "$script_index" ]]; then
-  source $script_directory/2-deleteOtherVersions.sh
+  source $script_directory/2-reduceVersionManifest.sh
 fi
 
 if [[ "$script_index" == 3 || -z "$script_index" ]]; then
@@ -46,11 +46,14 @@ if [[ "$script_index" == 4 || -z "$script_index" ]]; then
   source $script_directory/4-fixDockerfile.sh
 fi
 
-notify "Automated steps are complete!"
+if [[ "$script_index" == 5 || -z "$script_index" ]]; then
+  source $script_directory/5-updateThemeComponents.sh
+fi
+
+notify "Automated steps are complete! For ease of review, consider PR'ing the deletion commits separate from the rest of the changes."
 notify "Manual steps that remain: 
 5. Update the docusaurus.config.js
-6. Update the theme components
-7. Update CI workflows
-8. Fix htaccess rules (this might always be manual)
-9. Fix links (this will always be manual)
+6. Update CI workflows
+7. Fix htaccess rules (this might always be manual)
+8. Fix links (this will always be manual)
 "
