@@ -36,7 +36,7 @@ People who do not yet have a Camunda Platform 8 account can also be invited to a
 
 ## Limitations
 
-Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional Plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
+Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
 
 ## Restrictions
 
