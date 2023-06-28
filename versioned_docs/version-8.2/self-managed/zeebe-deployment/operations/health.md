@@ -58,7 +58,7 @@ If it is unhealthy, it may mean three things:
 [Metrics](metrics.md) give more insight into which partition is healthy or unhealthy.
 When a broker becomes unhealthy, it's recommended to check the logs to see what went wrong.
 
-(The default broker port can be configured using environment variables - respectively `SERVER_PORT` and `SERVER_HOST` - or system properties - respectively `-Dserver.port=` or `-Dserver.host=` - to configure them)
+(The default broker port can be configured using environment variables - respectively `SERVER_PORT` and `SERVER_ADDRESS` - or system properties - respectively `-Dserver.port=` or `-Dserver.address=` - to configure them)
 
 ## Gateway
 
