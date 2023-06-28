@@ -7,7 +7,7 @@ description: "Camunda Desktop Modeler is a desktop app for modeling BPMN, DMN an
 
 <span class="badge badge--cloud">Camunda Platform 7 and 8</span>
 
-An application for modeling BPMN, DMN, and forms that supports you in building executable diagrams with Camunda.
+A desktop application for modeling BPMN, DMN, and forms that supports you in building executable diagrams with Camunda.
 
 ![Desktop Modeler Screenshot](./img/new-diagram.png)
 
