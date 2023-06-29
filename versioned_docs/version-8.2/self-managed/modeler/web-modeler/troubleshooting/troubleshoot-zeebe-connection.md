@@ -1,31 +1,31 @@
 ---
 id: troubleshoot-zeebe-connection
-title: "Troubleshooting Zeebe Connection Issues"
-sidebar_label: "Zeebe Connection"
+title: "Troubleshooting Zeebe connection issues"
+sidebar_label: "Zeebe connection"
 ---
 
 :::note
 Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
 :::
 
-You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler tells you
+You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler tells you:
 
-- the entered cluster endpoint URL should "point to a running Zeebe cluster."
-- an unknown error occurred and to "check Zeebe cluster status."
+- The entered cluster endpoint URL should "point to a running Zeebe cluster."
+- An unknown error occurred and to "check Zeebe cluster status."
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e.,
 [`zbctl`](../../../../apis-tools/cli-client/index.md).
-If that doesn't work, resolve the general connection issue first (see for example [the platform deployment
-troubleshooting section](https://docs.camunda.io/docs/self-managed/platform-deployment/troubleshooting/)).
-If that works, further debug your Zeebe connection with the help of the information stated below.
-Enabling [debug logging in `modeler-restapi`](#how-can-i-debug-log-grpc--zeebe-communication) may also help to
+If that doesn't work, resolve the general connection issue first (see [the platform deployment
+troubleshooting section](https://docs.camunda.io/docs/self-managed/platform-deployment/troubleshooting/), for example.)
+
+If that works, further debug your Zeebe connection with the help of the information stated below. Enabling [debug logging in `modeler-restapi`](#how-can-i-debug-log-grpc--zeebe-communication) may also help to
 understand the issue.
 
 ## Secure connection to Zeebe fails
 
 If you provide a cluster endpoint URL starting with `https`, Web Modeler will try to establish a secure connection to
 the Zeebe instance.
-In the process, it strictly validates the server's Application-Layer Protocol Negotiation support and its certificates
+In the process, it strictly validates the server's Application-Layer Protocol Negotiation (ALPN) support and its certificates
 presented against well-known certificate authorities.
 Failure to connect may have several reasons:
 
@@ -35,7 +35,7 @@ Ensure you properly configure the remote endpoint to accept secure connections.
 Refer to the [Zeebe Gateway configuration documentation](../../../zeebe-deployment/security/secure-client-communication.md#gateway)
 for additional information.
 
-### Configure the endpoint to support Application-Layer Protocol Negotiation (ALPN)
+### Configure the endpoint to support ALPN
 
 [Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand if ALPN is supported
 by the server.
@@ -56,7 +56,7 @@ intermediate certificates](https://nginx.org/en/docs/http/configuring_https_serv
 When using the `OAuth` authentication method for deploying to Zeebe, Web Modeler caches OAuth tokens in a file-based
 cache.
 By default, the cache location is writeable by the `modeler-restapi` process.
-If you however run `modeler-restapi` as a non-root user (e.g. via Kubernetes' `securityContext.runAsUser` option),
+If you run `modeler-restapi` as a non-root user (e.g. via Kubernetes' `securityContext.runAsUser` option),
 you must ensure to provide a writeable cache file location to `modeler-restapi` via the `ZEEBE_CLIENT_CONFIG_PATH`
 environment variable:
 

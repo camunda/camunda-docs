@@ -1,7 +1,7 @@
 ---
 id: troubleshoot-database-connection
-title: "Troubleshooting Database Connection Issues"
-sidebar_label: "Database Connection"
+title: "Troubleshooting database connection issues"
+sidebar_label: "Database connection"
 ---
 
 :::note
@@ -23,9 +23,10 @@ that certificate.
 ### Add Amazon Aurora CA to trust store
 
 By default, the Java version used by `modeler-restapi` ships with the Amazon Aurora CA.
+
 If you passed a custom trust store to `modeler-restapi`'s JVM process (e.g. via `JAVA_TOOL_OPTIONS` as described in
 [the Zeebe connection troubleshooting guide](./troubleshoot-zeebe-connection.md#provide-the-certificate-to-the-jvm-trust-store)),
-ensure that the Amazon Trust Services CA are in `modeler-restapi`'s trust store (see the
+ensure the Amazon Trust Services CA are in `modeler-restapi`'s trust store (see the
 [Amazon Aurora documentation](https://aws.amazon.com/blogs/security/how-to-prepare-for-aws-move-to-its-own-certificate-authority/)).
 
 ## IAM authentication against Amazon Aurora fails
@@ -36,4 +37,4 @@ You switched from standard username/password authentication to IAM authenticatio
 
 After switching from standard username/password authentication to IAM authentication, privileges to Web Modeler's
 database might still be associated with the old username.
-Ensure that the IAM account has all privileges to the Web Modeler database.
+Ensure the IAM account has all privileges to the Web Modeler database.
