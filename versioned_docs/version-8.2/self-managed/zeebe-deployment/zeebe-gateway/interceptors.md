@@ -4,8 +4,6 @@ title: "Interceptors"
 sidebar_label: "Interceptors"
 ---
 
-> This functionality is currently only available in Camunda Platform 8 Self-Managed.
-
 All communication from a client to a broker must first pass through a gateway.
 There they can be intercepted before being dispatched. Zeebe provides a way to
 load arbitrary interceptors into the gateway. Some typical examples of what you
@@ -136,7 +134,7 @@ interceptor, you need to provide your gateway with:
   of the interceptor class, e.g. `com.acme.ExampleInterceptor`
 
 Let's continue with the LoggingInterceptor example. We can provide these
-[configurations](configuration/configuration.md)
+[configurations](/self-managed/zeebe-deployment/configuration/configuration.md)
 using a gateway config file, environment variables or a mix of both. We'll be
 using a config file here.
 
