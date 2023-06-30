@@ -47,12 +47,12 @@ Therefore, if you are not using the [Ingress-NGINX controller](https://github.co
 
 ## Identity `contextPath`
 
-Camunda Platform 8 Self-Managed can be accessed externally via different methods, one such method is the [combined Ingress setup](./helm-kubernetes/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda Platform 8 Self-Managed can be accessed externally via different methods. One such method is the [combined Ingress setup](./helm-kubernetes/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
-For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured. If you want to use Camunda Identity with HTTP, please use a [separate Ingress setup](./helm-kubernetes/guides/ingress-setup.md#separated-ingress-setup) (applications such as Operate, Optimize, etc, can still be accessed in a combined setup).
+For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured. If you want to use Camunda Identity with HTTP, use a [separate Ingress setup](./helm-kubernetes/guides/ingress-setup.md#separated-ingress-setup) (applications such as Operate, Optimize, etc, can still be accessed in a combined setup).
 
 :::note
-Also, due to limitations, the Identity `contextPath` approach is unavailable when using a browser Incognito mode.
+Due to limitations, the Identity `contextPath` approach is unavailable when using a browser in Incognito mode.
 :::
 
 ## Web Modeler database schema
