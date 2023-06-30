@@ -383,3 +383,9 @@ span.callout + p::after {
   font-size: 0.75rem;
   padding: 0.2rem 0.5rem;
 }
+
+.create-account-btn {
+  font-weight: 500;
+  color: var(--ifm-navbar-link-color);
+  margin-right: 15px;
+}
