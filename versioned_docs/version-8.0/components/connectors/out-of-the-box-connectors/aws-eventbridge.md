@@ -4,16 +4,16 @@ title: Amazon EventBridge Connector
 description: Send events to AWS EventBridge from your BPMN process.
 ---
 
-The **AWS EventBridge Connector** integrates your BPMN service with [Amazon EventBridge Service](https://aws.amazon.com/eventbridge/), enabling the sending of events from your workflows for further processing or routing to other AWS services. It provides seamless event-driven integration within your business processes.
+The **AWS EventBridge Connector** integrates your BPMN service with [Amazon EventBridge](https://aws.amazon.com/eventbridge/), enabling the sending of events from your workflows for further processing or routing to other AWS services. It provides seamless event-driven integration within your business processes.
 
-For more information, see the [AWS EventBridge Documentation](https://docs.aws.amazon.com/eventbridge/index.html).
+For more information, see the [AWS EventBridge documentation](https://docs.aws.amazon.com/eventbridge/index.html).
 
 ## Prerequisites
 
-Before using the **Amazon EventBridge Connector**, ensure that you have the necessary permissions in your AWS account to send events to EventBridge. You will need an access key and secret key of a user with the appropriate permissions. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
+Before using the **Amazon EventBridge Connector**, ensure you have the necessary permissions in your AWS account to send events to EventBridge. You will need an access key and secret key of a user with the appropriate permissions. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
 
 :::note
-**Note:** It is highly recommended not to expose your AWS IAM credentials as plain text. Instead, use Camunda secrets. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended not to expose your AWS IAM credentials as plain text. Instead, use Camunda secrets. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon EventBridge Connector task
@@ -69,8 +69,8 @@ The **Amazon EventBridge Connector** returns the [original response](https://doc
 }
 ```
 
-## Next Steps
+## Next steps
 
-- [Amazon EventBridge Documentation](https://docs.aws.amazon.com/eventbridge/)
-- Learn about [other connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
-- Learn more about using connectors [here](../use-connectors/index.md).
+- [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/)
+- Learn about [other Connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
+- Learn more about using Connectors [here](../use-connectors/index.md).
