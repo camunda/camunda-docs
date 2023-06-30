@@ -63,14 +63,14 @@ It is recommended to use Camunda secrets to store your credentials securely. Ref
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime, and the result is used to correlate the message.
 
-For example, if your correlation key is defined with a process variable named `myCorrelationKey`, and you want to correlate by the `FromCountry` property in the request body, which contains:
+For example, if your correlation key is defined with a process variable named `myCorrelationKey`, and you want to correlate by the `Body` property in the request body, which contains:
 
 ```
 {
   "body": {
     "ApiVersion": "2010-04-01",
     "FromCountry": "EU",
-    "Body": "Hello world",
+    "Body": "Continue process",
     "SmsStatus": "received"
     ...
   }
@@ -81,7 +81,7 @@ For example, if your correlation key is defined with a process variable named `m
 your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=myCorrelationKey`
-- **Correlation key (payload)**: `=request.body.FromCountry`
+- **Correlation key (payload)**: `=request.body.Body`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
