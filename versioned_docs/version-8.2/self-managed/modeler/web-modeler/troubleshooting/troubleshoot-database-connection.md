@@ -20,9 +20,9 @@ for details on how to configure a secure connection to PostgreSQL.
 You configured a custom SSL certificate in your remote Amazon Aurora PostgreSQL instance and want Web Modeler to accept
 that certificate.
 
-### Add Amazon Aurora CA to trust store
+### Add Amazon Root CA to trust store
 
-By default, the Java version used by `modeler-restapi` ships with the Amazon Aurora CA.
+By default, the Java version used by `modeler-restapi` ships with the Amazon Root CA.
 
 If you passed a custom trust store to `modeler-restapi`'s JVM process (e.g. via `JAVA_TOOL_OPTIONS` as described in
 [the Zeebe connection troubleshooting guide](./troubleshoot-zeebe-connection.md#provide-the-certificate-to-the-jvm-trust-store)),

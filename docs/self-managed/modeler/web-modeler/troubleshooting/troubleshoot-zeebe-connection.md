@@ -73,7 +73,7 @@ server certificate itself.
 
 ### Provide the certificate via an environment variable
 
-Web Modeler reads a trusted certificate from the environment variable `ZEEBE_CA_CERTIFICATE_PATH`.
+`modeler-restapi` reads a trusted certificate from the environment variable `ZEEBE_CA_CERTIFICATE_PATH`.
 This solution is recommended for most users:
 
 ```sh
