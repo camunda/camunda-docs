@@ -8,7 +8,7 @@ description: Learn how the Twilio Webhook Connector allows you to start a BPMN p
 The **Twilio Webhook Connector** is an inbound Connector that enables you to start a BPMN process instance triggered by a [Twilio event](https://www.twilio.com/docs/usage/webhooks).
 
 :::note
-If you have used the **Twilio Webhook Connector** with a self-managed Camunda 8 configuration before the Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template. Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
+If you have used the **Twilio Webhook Connector** with a Self-Managed Camunda Platform 8 configuration before the Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template. Refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
 :::
 
 ## Create a Twilio Webhook Connector task
@@ -23,11 +23,11 @@ If you have used the **Twilio Webhook Connector** with a self-managed Camunda 8 
 
 ## Make your Twilio Webhook Connector for receiving messages executable
 
-### Fill properties in the **Webhook Configuration** section
+### Fill properties in the Webhook Configuration section
 
-1. Choose one of the required methods in the **Webhook method** property. For example, if you know that the webhook will be triggered by the 'POST' method, choose 'POST'. Alternatively, if it is not essential to specify a specific method for the webhook trigger, select 'ANY'.
-2. Configure the **Webhook ID**. By default, the **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. For more details about Twilio Webhook URLs, refer to the section [below on activating the Twilio Webhook Connector by deploying your diagram](#activate-the-twilio-webhook-connector-by-deploying-your-diagram).
-3. Select 'Enabled' in **HMAC authentication** if you want to use HMAC authentication. After that, set the [Twilio Auth Token](https://support.twilio.com/hc/en-us/articles/223136027-Auth-Tokens-and-How-to-Change-Them) as the shared secret key in the **HMAC secret key** field property.
+1. Choose one of the required methods in the **Webhook method** property. For example, if you know the webhook will be triggered by the **POST** method, choose **POST**. Alternatively, if it is not essential to specify a specific method for the webhook trigger, select **ANY**.
+2. Configure the **Webhook ID**. By default, the **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. For more details about Twilio Webhook URLs, refer to the section below on [activating the Twilio Webhook Connector by deploying your diagram](#activate-the-twilio-webhook-connector-by-deploying-your-diagram).
+3. Select **Enabled** in **HMAC authentication** if you want to use HMAC authentication. After that, set the [Twilio Auth Token](https://support.twilio.com/hc/en-us/articles/223136027-Auth-Tokens-and-How-to-Change-Them) as the shared secret key in the **HMAC secret key** field property.
 
 :::note
 It is recommended to use Camunda secrets to store your credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
@@ -98,7 +98,9 @@ The URLs of the exposed Twilio Webhooks adhere to the following pattern:
 - `<base URL>` is the URL of the Connectors component deployment. When using the Camunda Platform 8 SaaS offering, this will typically contain your cluster region and cluster ID.
 - `<webhook ID>` is the ID (path) you configured in the properties of your Twilio Webhook Connector.
 
+:::note
 If you make changes to your Twilio Webhook Connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.
+:::
 
 When you click on the event with the Twilio Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
 This tab displays the URL of the Twilio Webhook Connector for every cluster where you have deployed your BPMN diagram.
@@ -144,7 +146,7 @@ The **Variable mapping** section allows you to configure the mapping of the webh
 To set a webhook URL in Twilio for SMS, follow these steps:
 
 1. Log in to your Twilio account at [www.twilio.com/console](https://www.twilio.com/console).
-2. Navigate to the "Phone Numbers" section, which you can find in the left-hand side menu.
+2. Navigate to the **Phone Numbers** section, which you can find in the left-hand side menu.
 3. Click on the phone number for which you want to set the webhook URL.
 4. Scroll down to the **Messaging** section and locate the **A message comes in** field.
 5. In the input box next to **A message comes in**, enter the URL where you want Twilio to send incoming SMS messages and choose the required method.
@@ -157,6 +159,6 @@ Once you have set the webhook URL, Twilio will send a `POST` or `GET` request to
 - Learn more about [Twilio webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 - Read the [Twilio webhooks FAQ](https://www.twilio.com/docs/usage/webhooks/webhooks-faq).
 - Understand [Twilio webhooks security](https://www.twilio.com/docs/usage/webhooks/webhooks-security).
-- Learn about [other connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
-- Learn more about using connectors [here](../use-connectors/index.md).
-- Learn more about inbound connectors [here](../use-connectors/inbound.md).
+- Learn about [other Connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
+- Learn more about using Connectors [here](../use-connectors/index.md).
+- Learn more about inbound Connectors [here](../use-connectors/inbound.md).
