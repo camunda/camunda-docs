@@ -103,7 +103,7 @@ Certificate chain
 
 ## How can I debug log GRPC / Zeebe communication?
 
-You can also start Desktop Modeler with GRPC logging turned on to get detailed [logging output](#how-to-obtain-the-modeler-logs) on communication to Zeebe:
+You can also start Desktop Modeler with GRPC logging turned on to get detailed [logging output](#how-to-obtain-desktop-modeler-logs) on communication to Zeebe:
 
 ```sh
 DEBUG=* ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
