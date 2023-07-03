@@ -14,7 +14,7 @@ Zeebe broker exposes three HTTP endpoints to query its health status:
 
 ### Startup check
 
-Startup check endpoint is exposed via `http://{zeebe-broker}/startup` (by default port 9600).
+Startup check endpoint is exposed via `http://{zeebe-broker-host}:9600/startup`.
 This endpoint returns an empty 204 response. If it is not ready, it will return a 503 error.
 
 A broker has successfully started when:
@@ -28,7 +28,7 @@ The broker is ready only after startup has successfully completed.
 
 ### Ready check
 
-Ready check endpoint is exposed via `http://{zeebe-broker}/ready` (by default port 9600).
+Ready check endpoint is exposed via `http://{zeebe-broker-host}:9600/ready`.
 This endpoint returns an empty 204 response. If it is not ready, it will return a 503 error.
 
 A broker is ready when it installs all necessary services to start processing in all partitions.
@@ -42,7 +42,7 @@ By configuring a `readinessProbe` that uses the ready check endpoint, we can inf
 
 ### Health check
 
-Health check endpoint is exposed via `http://{zeebe-broker}/health` (by default port 9600).
+Health check endpoint is exposed via `http://{zeebe-broker-host}:9600/health`.
 This endpoint returns an empty 204 response if the broker is healthy. If it is not healthy, it will return a 503 error.
 A broker is never healthy before it is ready.
 Unlike ready check, a broker can become unhealthy after it is healthy.
