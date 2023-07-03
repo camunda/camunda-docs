@@ -35,7 +35,7 @@ go mod init zb-user/zb-example
 ```
 module github.com/zb-user/zb-example
 
-go 1.20
+go 1.19
 
 require github.com/camunda/zeebe/clients/go/v8@v8.2.7
 ```
