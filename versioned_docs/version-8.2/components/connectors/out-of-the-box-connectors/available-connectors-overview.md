@@ -48,7 +48,7 @@ import TabItem from "@theme/TabItem";
 - [Power Automate Connector](/components/connectors/out-of-the-box-connectors/power-automate.md) - Orchestrate your [Power Automate](https://powerautomate.microsoft.com) Flows with Camunda.
 - [RabbitMQ Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-outbound.md) - Send messages to [RabbitMQ](https://www.rabbitmq.com/) from your BPMN process.
 - [SendGrid Connector](/components/connectors/out-of-the-box-connectors/sendgrid.md) - Quickly send emails from your BPMN processes.
-- [Slack Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
+- [Slack Outbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 - [Twilio Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Send and get SMS messages with [Twilio](https://www.twilio.com) service from your BPMN process.
 - [UiPath Connector](/components/connectors/out-of-the-box-connectors/uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
 
@@ -62,6 +62,7 @@ import TabItem from "@theme/TabItem";
 - [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-inbound.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.
 - [Kafka Consumer Connector](/components/connectors/out-of-the-box-connectors/kafka-inbound.md) - Consume messages from [Kafka](https://kafka.apache.org/) from your BPMN process.
+- [Slack Inbound Connector](/components/connectors/out-of-the-box-connectors/slack-inbound.md) - Trigger a [Slack](https://slack.com) bot to start a BPMN process with an event or a slash command
 
 </TabItem>
 

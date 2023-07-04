@@ -746,8 +746,12 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/sendgrid/"
             ),
             docsLink(
-              "Slack Connector",
+              "Slack Outbound Connector",
               "components/connectors/out-of-the-box-connectors/slack/"
+            ),
+            docsLink(
+              "Slack Inbound Connector",
+              "components/connectors/out-of-the-box-connectors/slack-inbound/"
             ),
             docsLink(
               "Twilio Connector",
