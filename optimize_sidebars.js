@@ -746,11 +746,11 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/sendgrid/"
             ),
             docsLink(
-              "Slack Outbound Connector",
+              "Slack outbound Connector",
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "Slack Inbound Connector",
+              "Slack inbound Connector",
               "components/connectors/out-of-the-box-connectors/slack-inbound/"
             ),
             docsLink(
