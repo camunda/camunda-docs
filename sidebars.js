@@ -1184,6 +1184,10 @@ module.exports = {
                 "self-managed/modeler/web-modeler/configuration/database",
                 "self-managed/modeler/web-modeler/configuration/logging",
               ],
+              Troubleshooting: [
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+              ],
             },
           ],
         },
