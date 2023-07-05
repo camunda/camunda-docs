@@ -21,6 +21,9 @@ LOGGING_CONFIG=file:/full/path/to/custom-logback-config.xml
 Refer to [Spring Boot's logging documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.logging.logback)
 for more information on how to customize the logback configuration for specific use cases like logging to a file.
 
+Enabling `DEBUG` logging for the `restapi` component can be useful for troubleshooting purposes, e.g. for
+[debugging Zeebe connection issues](../troubleshooting/troubleshoot-zeebe-connection.md#how-can-i-debug-log-grpc--zeebe-communication).
+
 ## Logging configuration for the `webapp` component
 
 By default, the `webapp` component logs to the Docker container's standard output.
@@ -41,7 +44,7 @@ By default, the `websocket` component logs to the Docker container's standard ou
 
 To enable additional log output to a file, follow these steps:
 
-1. Mount a volume to the directory `/var/www/html/storage/logs`. The logs will be written to a file named `laravel.log`located inside this directory.
+1. Mount a volume to the directory `/var/www/html/storage/logs`. The logs will be written to a file named `laravel.log` located inside this directory.
 2. Adjust the following environment variable:
    ```
    LOG_CHANNEL=single
