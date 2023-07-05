@@ -46,7 +46,7 @@ Next, download the Camunda 8 values file for KIND: [camunda-platform-core-kind-v
 Lastly, install Camunda 8 using the custom values file with the following command:
 
 ```
-helm install camunda-platform camunda/camunda-platform \
+helm install camunda camunda/camunda-platform \
     -f camunda-platform-core-kind-values.yaml
 ```
 
