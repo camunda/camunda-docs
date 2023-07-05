@@ -88,6 +88,10 @@ User task names, assignees, and candidate groups can be applied as a second "Gro
 
 For example, if your report is grouped by assignee/candidate group, it is possible to add another grouping by user task to see which user task your users/group are working on or have completed in the past. If the report contains multiple process definitions, the data can also be grouped by process as a second "Group by".
 
+:::note
+Reports using assignee/candidate groups are only available in Camunda Platform 7
+:::
+
 ![Distributed User Task report](./img/distributed-report.png)
 
 Refer to the table below for an overview of all report combinations that support a second "Group by":

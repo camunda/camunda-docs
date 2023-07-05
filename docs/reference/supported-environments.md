@@ -36,10 +36,11 @@ Requirements for the components can be seen below:
 | ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | Zeebe       | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x (only if Elastic exporter is used), 8.5.x, 8.6.x, AWS OpenSearch 1.3.x (only if OpenSearch exporter is used) |
 | Operate     | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x, AWS OpenSearch 1.3.x                                                                          |
+| Connectors  | OpenJDK 17+  | -                                                                                                                                         |
 | Tasklist    | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x                                                                                                |
-| Identity    | OpenJDK 17+  | Keycloak 16.1.x, 18.x, 19.x<br/>PostgreSQL 14.x, 15.x                                                                                     |
+| Identity    | OpenJDK 17+  | Keycloak 21.x<br/>PostgreSQL 14.x, 15.x                                                                                                   |
 | Optimize    | OpenJDK 11+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x                                                                                                |
-| Web Modeler | -            | Keycloak 16.1.x, 18.x, 19.x<br/>PostgreSQL 14.x, Amazon Aurora PostgreSQL 14.x (other database systems are currently not supported)       |
+| Web Modeler | -            | Keycloak 21.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 14.x (other database systems are currently not supported)         |
 
 ### Version Matrix
 
@@ -53,6 +54,7 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 | Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x      | Optimize 3.7.x  |
 | Desktop Modeler 5.0+  | Zeebe 8.0.x | Operate 8.0.x Tasklist 8.0.x Identity 8.0.x | Optimize 3.8.x  |
 | Desktop Modeler 5.4+  | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x  |
+| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x | Optimize 3.10.x |
 | Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x | Optimize 3.10.x |
 
 :::note
@@ -70,7 +72,8 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 | Optimize 3.7.x  | Camunda Platform 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+ |
 | Optimize 3.8.x  | Camunda Platform 7.15.x, 7.16.x, 7.17.x    | OpenJDK 11+               | 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+        |
 | Optimize 3.9.x  | Camunda Platform 7.16.x, 7.17.x, 7.18.x    | OpenJDK 11+               | 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+                                   |
-| Optimize 3.10.x | Camunda Platform 7.17.x, 7.18.x, 7.19.x    | OpenJDK 11+               | 7.16.2+, 7.17.0+, 8.5.0+, 8.6.0+                                              |
+| Optimize 3.10.x | Camunda Platform 7.17.x, 7.18.x, 7.19.x    | OpenJDK 11+               | 7.16.2+, 7.17.0+, 8.5.0+, 8.6.0+, 8.7.0+                                      |
+| Optimize 3.11.x | Camunda Platform 7.17.x, 7.18.x, 7.19.x    | OpenJDK 11+               | 8.7.0+                                                                        |
 
 :::note Elasticsearch support
 [Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Optimize.

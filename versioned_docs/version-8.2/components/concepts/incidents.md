@@ -14,7 +14,7 @@ Incidents are created in different situations, including the following:
 - A decision can't be evaluated.
 
 :::note
-Incidents are not created when an unexpected exception (e.g. `NullPointerException`, `OutOfMemoyError` etc.) occurs.
+Note that not all errors will necessarily lead to incidents. For example, unexpected errors in Zeebe do not always result in incidents.
 :::
 
 ## Resolving

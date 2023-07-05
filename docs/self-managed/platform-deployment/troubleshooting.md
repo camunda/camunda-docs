@@ -44,3 +44,17 @@ However, according to the official Kubernetes documentation about [Ingress TLS](
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
 Therefore, if you are not using the [Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](./helm-kubernetes/platforms/platforms.md).
+
+## Identity `contextPath`
+
+Camunda Platform 8 Self-Managed can be accessed externally via different methods. One such method is the [combined Ingress setup](./helm-kubernetes/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+
+For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured. If you want to use Camunda Identity with HTTP, use a [separate Ingress setup](./helm-kubernetes/guides/ingress-setup.md#separated-ingress-setup) (applications such as Operate, Optimize, etc, can still be accessed in a combined setup).
+
+:::note
+Due to limitations, the Identity `contextPath` approach is unavailable when using a browser in Incognito mode.
+:::
+
+## Web Modeler database schema
+
+The Web Modeler `restapi` component requires a [database connection](../../modeler/web-modeler/configuration#database). This connection should not point to the same database as Keycloak does.

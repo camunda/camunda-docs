@@ -73,4 +73,12 @@ For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` 
 Play is an alpha feature for a few reasons:
 
 - Play runs on community-built projects, as described in the [Zeebe-Play repository](https://github.com/camunda-community-hub/zeebe-play).
-- Play is run on completely isolated infrastructure from the core Camunda deployment. It can only receive information from Web Modeler, and can only communicate externally using Connectors and the user-defined secrets in the secret store or BPMN diagram. Play is not authenticated, so anyone with the URL can access it. To mitigate this risk, there is a 34-character randomly generated UUID in the URL. Each session lasts approximately 20 minutes and the Play environment and its data are automatically deleted at the end of each session. You can reset the session timer by re-opening Play.
+- Play is run on completely isolated Camunda-hosted infrastructure from the core SaaS or Self-Managed Camunda deployment. It can only receive information from Web Modeler, and can only communicate externally using Connectors and the user-defined secrets in the secret store or BPMN diagram.
+
+  :::note
+  Play is not authenticated, so anyone with the URL can access it. You should not submit personal or confidential information to Play.
+  :::
+
+- To mitigate this risk, there is a 34-character randomly generated UUID in the URL. Each session lasts approximately 20 minutes and the Play environment and its data are automatically deleted at the end of each session. You can reset the session timer by re-opening Play.
+
+For more information about terms, see our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).

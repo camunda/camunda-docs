@@ -12,8 +12,8 @@ export default function NavbarItemWrapper(props) {
   const { pathname } = useLocation();
 
   const childProps = { ...props };
-  if (type === "docsVersionDropdown") {
-    if (/^\/optimize/.test(pathname)) {
+  if (type === "docsVersionDropdown" || type === "docsVersion") {
+    if (/^\/([0-9.]*\/)?optimize/.test(pathname)) {
       childProps.docsPluginId = "optimize";
     }
   }

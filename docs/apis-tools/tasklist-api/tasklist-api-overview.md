@@ -9,7 +9,7 @@ description: "Build apps powered by BPMN that require human interaction, and mak
 In this document, we'll go over the basics on how to consume the Tasklist GraphQL API. Read more about how to build a real world application [here](../tasklist-api-tutorial).
 
 :::note
-Review the new [Tasklist REST API](/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md). This API offers the same functionality as the current GraphQL API, but with a more streamlined and efficient way of interacting with our service.
+Review the new [Tasklist REST API](../tasklist-api-rest/tasklist-api-rest-overview.md). This API offers the same functionality as the current GraphQL API, but with a more streamlined and efficient way of interacting with our service.
 
 The GraphQL API will be deprecated in the near future. To ensure a smooth transition, we'll continue to support our GraphQL API for a period of time, giving you an opportunity to migrate to the new REST API version at your own pace. We will provide further details on the timeline and process for this migration soon.
 :::
@@ -18,7 +18,9 @@ The GraphQL API will be deprecated in the near future. To ensure a smooth transi
 
 Tasklist provides a GraphQL API at endpoint `/graphql`.
 
-From Camunda Platform 8 onwards the endpoint is `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`
+From Camunda Platform 8 the endpoint is `${base-url}/graphql`.
+
+For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`, and for Self-Managed installations: `http://localhost:8080/graphql`.
 
 ## Authentication in the cloud
 

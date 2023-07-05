@@ -12,7 +12,7 @@ Requests and responses are in JSON notation. Some objects have additional endpoi
 
 ## API documentation as Swagger
 
-A detailed API description is also available as Swagger UI at `https://${base-url}/swagger-ui/index.html`.
+A detailed API description is also available as Swagger UI at `https://${base-url}/swagger-ui/index.html`. For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/swagger-ui/index.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui/index.html`.
 
 ## Endpoints
 
