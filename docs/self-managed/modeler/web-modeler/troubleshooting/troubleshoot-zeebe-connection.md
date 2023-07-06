@@ -10,7 +10,7 @@ Web Modeler Self-Managed is available to [enterprise customers](../../../../refe
 
 You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler tells you:
 
-- The entered cluster endpoint URL should "point to a running Zeebe cluster."
+- It cannot connect to the given Zeebe cluster.
 - An unknown error occurred and to "check Zeebe cluster status."
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e.,
