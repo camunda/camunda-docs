@@ -27,14 +27,22 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 ![HTTP Webhook prefilled](../img/use-inbound-connector-template-filled.png)
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about HTTP Webhook URLs [below](#activate-the-http-webhook-connector-by-deploying-your-diagram).
-2. Configure [HMAC authentication](https://en.wikipedia.org/wiki/HMAC) if required.
+2. Configure [HMAC authentication](https://en.wikipedia.org/wiki/HMAC) if required in the **Authentication** section.
 
 - Set the HMAC shared secret key which is used to calculate the message hash. The value is defined by a webhook administrator.
 - Set the HMAC header whose value contains an encrypted hash message. The exact value is provided by the external caller.
 - Select HMAC hash algorithm. The exact value is provided by the external caller.
 
-3. Configure **Activation Condition**. For example, given external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
-4. Use **Variable Mapping** to map specific fields from the request into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+3. Configure [JWT authorization](https://jwt.io/) if required in the **Authorization** section. The token should be in the _Authorization_ header of the request in the format of Bearer {JWT_TOKEN}
+
+- Set JWK url which is used as a well-known public url to fetch the JWKs.
+- Set JWT role property expression which will be evaluated against the content of the JWT to extract the list of roles.
+- Set required roles which will be used to validate if the JWT contains all required roles.
+
+![HTTP Webhook jwt](../img/connectors-http-webhook-jwt.png)
+
+4. Configure **Activation Condition**. For example, given external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
+5. Use **Variable Mapping** to map specific fields from the request into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    For example, given the external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`, the **Result Expression** might look like this:
 
 ```
