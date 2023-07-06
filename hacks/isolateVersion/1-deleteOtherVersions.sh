@@ -18,6 +18,15 @@ function delete_next() {
   git commit -m "archiving: delete version $VERSION"  
 }
 
+function delete_optimize() {
+  notify "Deleting Optimize docs..."
+  rm -rf ./optimize
+  rm -rf ./optimize_versioned_docs
+  rm -rf ./optimize_versioned_sidebars
+  git add optimize optimize_versioned_docs optimize_versioned_sidebars
+  git commit -m "archiving: delete version $VERSION"  
+}
+
 # list all versions; search for all that don't match the current version; continue even if there are no matches.
 OTHER_VERSIONS=$(ls versioned_docs | grep -xv "version-$ARCHIVED_VERSION" || true) 
 
@@ -27,3 +36,5 @@ for VERSION in ${OTHER_VERSIONS[*]}
   done
 
 delete_next
+
+delete_optimize
