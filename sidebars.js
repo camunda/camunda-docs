@@ -822,6 +822,7 @@ module.exports = {
         {
           "Zeebe Gateway": [
             "self-managed/zeebe-deployment/zeebe-gateway/overview",
+            "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
           ],
         },
         {
@@ -1182,6 +1183,10 @@ module.exports = {
                 "self-managed/modeler/web-modeler/configuration/configuration",
                 "self-managed/modeler/web-modeler/configuration/database",
                 "self-managed/modeler/web-modeler/configuration/logging",
+              ],
+              Troubleshooting: [
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
               ],
             },
           ],

@@ -140,11 +140,11 @@ You can also adjust logging levels using environment variables as described in t
 
 #### License key file
 
-If you want the Optimize Docker container to automatically recognize your [license key file](./configuration/license.md), you can use standard [Docker means](https://docs.docker.com/storage/volumes/) to make the file with the license key available inside the container. Replacing the `ABSOLUTE_PATH_ON_HOST_TO_LICENSE_FILE` with the absolute path to the license key file on your host can be done with the following command:
+If you want the Optimize Docker container to automatically recognize your [license key file](./configuration/license.md), you can use standard [Docker means](https://docs.docker.com/storage/volumes/) to make the file with the license key available inside the container. Replacing the `{{< absolutePathOnHostToLicenseFile >}}` with the absolute path to the license key file on your host can be done with the following command:
 
 ```
 docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
-           -v ABSOLUTE_PATH_ON_HOST_TO_LICENSE_FILE:/optimize/config/OptimizeLicense.txt:ro \
+           -v {{< absolutePathOnHostToLicenseFile >}}:/optimize/config/OptimizeLicense.txt:ro \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
@@ -152,11 +152,11 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
 
 In a production environment, the limited set of [environment variables](#available-environment-variables) is usually not enough so that you want to prepare a custom `environment-config.yaml` file. Refer to the [Configuration](./configuration/system-configuration.md) section of the documentation for the available configuration parameters.
 
-You need to mount this configuration file into the Optimize Docker container to apply it. Replacing the `ABSOLUTE_PATH_ON_HOST_TO_CONFIGURATION_FILE` with the absolute path to the `environment-config.yaml` file on your host can be done using the following command:
+You need to mount this configuration file into the Optimize Docker container to apply it. Replacing the `{{< absolutePathOnHostToConfigurationFile >}}` with the absolute path to the `environment-config.yaml` file on your host can be done using the following command:
 
 ```
 docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
-           -v ABSOLUTE_PATH_ON_HOST_TO_CONFIGURATION_FILE:/optimize/config/environment-config.yaml:ro \
+           -v {{< absolutePathOnHostToConfigurationFile >}}:/optimize/config/environment-config.yaml:ro \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
