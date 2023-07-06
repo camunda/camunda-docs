@@ -91,20 +91,22 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ### v8.2.3
 
+#### Zeebe Gateway
+
 :::caution Breaking change
 
-Zeebe Gateway authentication is now enabled by default. To authenticate:
-
-1. [Create a client credential](/docs/guides/setup-client-connection-credentials.md).
-2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
-3. Input the client credentials to your client. For example:
-
-- For connecting to Desktop Modeler, look [here](/docs/components/modeler/desktop-modeler/connect-to-camunda-cloud.md).
-- For connecting to zbctl, look [here](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
+Zeebe Gateway authentication is now enabled by default.
 
 :::
 
-The following sections are only needed if you are updating to v8.0.13 or the versions after v8.0.13.
+To authenticate:
+
+1. [Create a client credential](/docs/guides/setup-client-connection-credentials.md).
+2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+3. Connect with:
+
+- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-cloud.md).
+- [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
 ### v8.0.13
 
