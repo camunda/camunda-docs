@@ -99,7 +99,7 @@ The following attributes/elements can be migrated:
 
 The following attributes/elements cannot (yet) be migrated:
 
-- `camunda:candidateUsers` (only candidate groups are supported)
+- `camunda:candidateUsers`
 - Form handling:
   - `camunda:formHandlerClass`
   - `camunda:formData`
