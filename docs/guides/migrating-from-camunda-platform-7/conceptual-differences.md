@@ -2,16 +2,7 @@
 id: conceptual-differences
 title: Conceptual differences with Camunda Platform 7 and Camunda Platform 8
 sidebar_label: Conceptual differences
-description: "Migrate process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8."
-keywords:
-  [
-    Camunda 8,
-    Camunda 7,
-    migration guide,
-    transition,
-    transition guide,
-    Camunda Platform 7,
-  ]
+description: "Understand conceptual differences with Camunda Platform 8 and Camunda Platform 8 before migrating."
 ---
 
 ### Conceptual differences

@@ -1,16 +1,7 @@
 ---
 id: migration-readiness
 title: How to get ready to migrate
-description: "Migrate process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8."
-keywords:
-  [
-    Camunda 8,
-    Camunda 7,
-    migration guide,
-    transition,
-    transition guide,
-    Camunda Platform 7,
-  ]
+description: "Learn readiness indicators for migrating from Camunda Platform 7 to Camunda Platform 8."
 ---
 
 ## Migration overview

@@ -1,16 +1,7 @@
 ---
 id: adjusting-source-code
 title: Adjusting source code
-description: "Migrate process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8."
-keywords:
-  [
-    Camunda 8,
-    Camunda 7,
-    migration guide,
-    transition,
-    transition guide,
-    Camunda Platform 7,
-  ]
+description: "Learn how and where to adjust your source code when migrating from Camunda Platform 7 to Camunda Platform 8."
 ---
 
 Camunda Platform 8 has a different API than Camunda Platform 7. As a result, you have to migrate some of your code, especially code that does the following:

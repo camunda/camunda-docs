@@ -1,16 +1,7 @@
 ---
 id: adjusting-bpmn-models
 title: Adjusting BPMN models
-description: "Migrate process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8."
-keywords:
-  [
-    Camunda 8,
-    Camunda 7,
-    migration guide,
-    transition,
-    transition guide,
-    Camunda Platform 7,
-  ]
+description: "Learn how to adjust your BPMN models when migrating from Camunda Platform 7 to Camunda Platform 8."
 ---
 
 To migrate BPMN process models from Camunda Platform 7 to Camunda Platform 8, you must adjust them:

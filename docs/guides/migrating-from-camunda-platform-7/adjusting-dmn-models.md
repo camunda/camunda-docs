@@ -1,16 +1,7 @@
 ---
 id: adjusting-dmn-models
 title: Adjusting DMN models
-description: "Migrate process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8."
-keywords:
-  [
-    Camunda 8,
-    Camunda 7,
-    migration guide,
-    transition,
-    transition guide,
-    Camunda Platform 7,
-  ]
+description: "Learn how to adjust your DMN models when migrating from Camunda Platform 7 to Camunda Platform 8."
 ---
 
 For Camunda Platform 8, [a former community extension](https://github.com/camunda-community-hub/dmn-scala), built by core Camunda developers, is productized. This engine has a higher coverage of DMN elements. This engine can execute DMN models designed for Camunda Platform 7, however, there are some small differences listed below.
