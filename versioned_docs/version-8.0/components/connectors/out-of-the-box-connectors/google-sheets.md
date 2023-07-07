@@ -369,4 +369,3 @@ at the top of the column.
 
 The other option is to use numeric index. Keep in mind **count starts from 0**. To delete column A,
 numeric index should be 0, B -> 1...
-
