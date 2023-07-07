@@ -8,8 +8,8 @@ Camunda Platform 8 has a different API than Camunda Platform 7. As a result, you
 
 - Uses the Client API (e.g. to start process instances)
 - Implements [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
-  - [Java code attached to a service task](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) and called by the engine directly (in-VM).
   - [External tasks](/components/best-practices/development/invoking-services-from-the-process-c7.md#external-tasks), where workers subscribe to the engine.
+  - [Java code attached to a service task](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) and called by the engine directly (in-VM).
 
 <!--
 We'll explore these three cases in the sections below.
@@ -40,6 +40,14 @@ All Camunda Platform 8 APIs (e.g. to start process instances, subscribe to tasks
 
 If this affects large parts of your code base, you could write a small abstraction layer implementing the Camunda Platform 7 API delegating to Camunda Platform 8, probably marking unavailable methods as deprecated. We welcome community extensions that facilitate this but have not yet started own efforts.
 
+### Service tasks as external tasks
+
+[External task workers](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in Camunda Platform 7 are conceptually comparable to [job workers](/components/concepts/job-workers.md) in Camunda Platform 8. This means they are generally easier to migrate.
+
+The "external task topic" from Camunda Platform 7 is directly translated in a "task type name" in Camunda Platform 8, therefore `camunda:topic` gets `zeebe:taskDefinition type` in your BPMN model.
+
+The [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) will pick up your `@ExternalTaskHandler` beans, wrap them into a JobWorker, and subscribe to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
+
 ### Service tasks with attached Java code (Java Delegates, Expressions)
 
 In Camunda Platform 7, there are three ways to attach Java code to service tasks in the BPMN model using different attributes in the BPMN XML:
@@ -63,11 +71,3 @@ The topic `camunda-7-adapter` is set and the following attributes/elements are m
 - `camunda:class`
 - `camunda:delegateExpression`
 - `camunda:expression` and `camunda:resultVariable`
-
-### Service tasks as external tasks
-
-[External task workers](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in Camunda Platform 7 are conceptually comparable to [job workers](/components/concepts/job-workers.md) in Camunda Platform 8. This means they are generally easier to migrate.
-
-The "external task topic" from Camunda Platform 7 is directly translated in a "task type name" in Camunda Platform 8, therefore `camunda:topic` gets `zeebe:taskDefinition type` in your BPMN model.
-
-The [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) will pick up your `@ExternalTaskHandler` beans, wrap them into a JobWorker, and subscribe to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
