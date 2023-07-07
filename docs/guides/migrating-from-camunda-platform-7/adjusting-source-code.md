@@ -46,7 +46,7 @@ If this affects large parts of your code base, you could write a small abstracti
 
 The "external task topic" from Camunda Platform 7 is directly translated in a "task type name" in Camunda Platform 8, therefore `camunda:topic` gets `zeebe:taskDefinition type` in your BPMN model.
 
-The [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) will pick up your `@ExternalTaskHandler` beans, wrap them into a JobWorker, and subscribe to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
+The community supported [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) will pick up your `@ExternalTaskHandler` beans, wrap them into a JobWorker, and subscribe to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
 
 ### Service tasks with attached Java code (Java Delegates, Expressions)
 
@@ -58,13 +58,13 @@ In Camunda Platform 7, there are three ways to attach Java code to service tasks
 
 Camunda Platform 8 cannot directly execute custom Java code. Instead, there must be a [job worker](/components/concepts/job-workers.md) executing code.
 
-The [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
+The community supported [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
 
 ![Service task in Camunda Platform 7 and Camunda Platform 8](../img/migration-service-task.png)
 
 You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
 
-The [Camunda Platform 7 to Camunda Platform 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
+The community supported [Camunda Platform 7 to Camunda Platform 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
 
 The topic `camunda-7-adapter` is set and the following attributes/elements are migrated and put into a task header:
 

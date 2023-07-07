@@ -146,4 +146,4 @@ When you run your application in for example NodeJS or C#, you exchange one remo
 
 Migrating **Modeler Plugins** is generally possible, as the same modeler infrastructure is used.
 
-**Cockpit or tasklist plugins** _cannot_ be migrated.
+**Cockpit or Tasklist plugins** _cannot_ be migrated.
