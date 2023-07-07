@@ -18,15 +18,21 @@ When a timer is triggered, a new process instance is created and the correspondi
 
 ## Intermediate timer catch events
 
-An intermediate timer catch event must have a time duration definition that defines when it is triggered.
+An intermediate timer catch event can either be a time duration, or a time date.
 
 When an intermediate timer catch event is entered, a corresponding timer is scheduled. The process instance stops at this point and waits until the timer is triggered. When the timer is triggered, the catch event is completed and the process instance continues.
 
 ## Timer boundary events
 
-An interrupting timer boundary event must have a time duration definition. When the corresponding timer is triggered, the activity is terminated. Interrupting timer boundary events are often used to model timeouts; for example, canceling the processing after five minutes and doing something else.
+An interrupting timer boundary event must have a time duration, or a time date definition. When the corresponding timer
+is triggered, the activity is terminated. Interrupting timer boundary events are often used to model timeouts; for
+example, canceling the processing after five minutes and doing something else.
 
-A non-interrupting timer boundary event must have either a time duration or time cycle definition. When the activity is entered, it schedules a corresponding timer. If the timer is triggered and defined as time cycle with repetitions greater than zero, it schedules the timer again until the defined number of repetitions is reached.
+A non-interrupting timer boundary event must have either a time duration, a time cycle definition, or a time date
+definition. When the activity is entered, it schedules a corresponding timer. If the timer is triggered and defined as
+time cycle with repetitions greater than zero, it schedules the timer again until the defined number of repetitions is
+reached. It's important to note that a non-interrupting timer boundary event that's defined with a time duration will
+only trigger a single time once the date is reached.
 
 Non-interrupting timer boundary events are often used to model notifications; for example, contacting support if the processing takes longer than an hour.
 
