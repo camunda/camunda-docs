@@ -156,6 +156,7 @@ module.exports = {
         },
         {
           "Desktop Modeler": [
+            "components/modeler/desktop-modeler/index",
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-cloud",
@@ -1183,6 +1184,10 @@ module.exports = {
                 "self-managed/modeler/web-modeler/configuration/configuration",
                 "self-managed/modeler/web-modeler/configuration/database",
                 "self-managed/modeler/web-modeler/configuration/logging",
+              ],
+              Troubleshooting: [
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
               ],
             },
           ],
