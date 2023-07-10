@@ -8,7 +8,7 @@ For Camunda Platform 8, [a former community extension](https://github.com/camund
 
 You can use the above mentioned tooling to convert your DMN models from Camunda Platform 7 to Camunda Platform 8.
 
-The following elements/attributes are not supported :
+The following elements/attributes are not supported:
 
 - `Version Tag` is not supported in Camunda Platform 8
 - `History Time to Live` is not supported in Camunda Platform 8

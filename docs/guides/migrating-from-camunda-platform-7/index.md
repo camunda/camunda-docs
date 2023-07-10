@@ -14,7 +14,7 @@ keywords:
 ---
 
 :::note
-Migration of existing projects to Camunda Platform 8 is optional. Camunda Platform 7 still has ongoing support.
+Migration of existing projects to Camunda Platform 8 is optional. Camunda Platform 7 still has ongoing [support](https://docs.camunda.org/enterprise/announcement/).
 :::
 
 This guide describes how to migrate process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8, including:

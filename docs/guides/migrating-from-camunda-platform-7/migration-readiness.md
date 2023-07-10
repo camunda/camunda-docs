@@ -4,6 +4,10 @@ title: How to get ready to migrate
 description: "Learn readiness indicators for migrating from Camunda Platform 7 to Camunda Platform 8."
 ---
 
+:::note
+Migration of existing projects to Camunda Platform 8 is optional. Camunda Platform 7 still has ongoing [support](https://docs.camunda.org/enterprise/announcement/).
+:::
+
 ## Migration overview
 
 Let's discuss if you need to migrate first, before diving into the necessary steps and what tools can help you achieve the migration.
