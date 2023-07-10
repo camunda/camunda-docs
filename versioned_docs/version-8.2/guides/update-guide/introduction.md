@@ -7,7 +7,9 @@ These documents guide you through the process of updating your Camunda Platform 
 application or server installation from one Camunda Platform 8 version to the other.
 
 :::note
-You can run a single update when moving from one minor version to the next meaning you will not need to update to each patch version along the way.
+When updating from one minor version to the next, you do not need to update to each patch version along the way.
+
+Do not skip over minor versions when updating.
 :::
 
 You can find guides on how to update your Connector runtimes to a newer version of the
