@@ -335,12 +335,6 @@ module.exports = {
             "components/zeebe/technical-concepts/protocols",
           ],
         },
-        {
-          "Open source community": [
-            "components/zeebe/open-source/community-contributions",
-            "components/zeebe/open-source/get-help-get-involved",
-          ],
-        },
       ],
       Operate: [
         "components/operate/operate-introduction",
