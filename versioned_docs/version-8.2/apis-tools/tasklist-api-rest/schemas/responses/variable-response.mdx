@@ -42,7 +42,7 @@ export const Badge = (props) => (
   </>
 );
 
-TaskResponse - represents a user task.
+VariableResponse - represents a variable.
 
 <Tabs groupId="schema" defaultValue="schema" values={
 [
@@ -54,11 +54,11 @@ TaskResponse - represents a user task.
 
 ```graphql
 {
-    "id": string,
-    "name": string,
-    "value": string,
-    "isValueTruncated": boolean,
-    "previewValue": string
+  "id": string,
+  "name": string,
+  "value": string,
+  "isValueTruncated": boolean,
+  "previewValue": string
 }
 ```
 
@@ -99,9 +99,9 @@ TaskResponse - represents a user task.
 
 #### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>isValueTruncated</b></code>](#)<Bullet />`boolean` <Badge class="secondary" text="non-null"/>
 
-> shows, whether previewValue contains truncated value or full value
+> shows, whether `previewValue` contains truncated value or full value
 
 ### Returned by
 
-[`Search task variables`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-task-variables) <Badge class="secondary" text="POST"/> <Bullet />
-[`Get variable`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-variables-controller.md#get-variable) <Badge class="secondary" text="GET"/>
+[`Search task variables`](../../controllers/tasklist-api-rest-task-controller.md#search-task-variables) <Badge class="secondary" text="POST"/> <Bullet />
+[`Get variable`](../../controllers/tasklist-api-rest-variables-controller.md#get-variable) <Badge class="secondary" text="GET"/>
