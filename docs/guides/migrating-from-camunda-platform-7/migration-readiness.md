@@ -47,6 +47,7 @@ We also recommend reviewing [BPMN elements supported in Camunda 8](/components/m
 - Client interceptors
 - Gateway interceptors
 - Job workers on user tasks
+- Job workers on service tasks
 
 Expect to soon have a solution in Camunda Platform 8 for most of the problems that listeners solve. Still, it might be good practice to use as few listeners as possible, and especially don’t use them for data mapping as described below.
 

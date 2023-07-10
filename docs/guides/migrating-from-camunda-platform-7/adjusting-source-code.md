@@ -29,8 +29,7 @@ For example, to migrate an existing Spring Boot application, take the following 
 - Make sure to set [Camunda Platform 8 credentials](https://github.com/camunda-community-hub/spring-zeebe#configuring-camunda-platform-8-saas-connection) (for example, in `src/main/resources/application.properties`) and point it to an existing Zeebe cluster.
 - Remove existing Camunda Platform 7 settings.
 
-3. Replace `@EnableProcessApplication` with `@EnableZeebeClient` in your main Spring Boot application class.
-4. Add `@ZeebeDeployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
+3. Add `@ZeebeDeployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
 
 Finally, adjust your source code and process model as described in the sections below.
 

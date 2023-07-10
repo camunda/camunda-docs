@@ -10,7 +10,7 @@ To migrate BPMN process models from Camunda Platform 7 to Camunda Platform 8, yo
 - Different configuration attributes are used
 - Camunda Platform 8 has a _different coverage_ of BPMN elements (see [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) vs [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
 
-The following sections describe what the existing community supported[Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration/) does by BPMN symbol and explain unsupported attributes.
+The following sections describe what the existing community supported [Backend diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) does by BPMN symbol and explain unsupported attributes.
 
 ### General considerations
 
