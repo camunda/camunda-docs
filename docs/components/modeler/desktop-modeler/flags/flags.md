@@ -96,7 +96,7 @@ Additional information adapted from the [upstream documentation](https://nodejs.
 
 ### Default execution platform version
 
-To change default execution platform version, configure your `flags.json` like this:
+To change default execution platform version, configure your `flags.json` as follows:
 
 ```json
 {
@@ -105,4 +105,4 @@ To change default execution platform version, configure your `flags.json` like t
 }
 ```
 
-New diagrams created in Desktop Modeler will use configured version instead of the latest stable.
+New diagrams created in Desktop Modeler will use the configured version instead of the latest stable version.
