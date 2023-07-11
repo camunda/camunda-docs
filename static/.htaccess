@@ -9,7 +9,7 @@ Options -Indexes -MultiViews
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
 # Remove OSS section
-RewriteRule ^docs/components/zeebe/open-source(.*)$ /docs/components/zeebe/zeebe-overview/$1 [R=301,L]
+RewriteRule ^docs/components/zeebe/open-source(.*)$ /docs/components/zeebe/zeebe-overview/ [R=301,L]
 
 # interceptors
 RewriteRule ^docs/self-managed/zeebe-deployment/interceptors(.*)$ /docs/self-managed/zeebe-deployment/zeebe-gateway/interceptors/$1 [R=301,L]
