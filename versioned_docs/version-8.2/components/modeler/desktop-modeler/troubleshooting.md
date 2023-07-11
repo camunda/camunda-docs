@@ -15,7 +15,7 @@ Depending on your operating system, you can find Desktop Modeler logs in differe
 ### Windows
 
 ```plain
-%APPDATA%\Camunda Modeler\logs
+%APPDATA%\camunda-modeler\logs
 ```
 
 ### MacOS
