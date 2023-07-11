@@ -35,5 +35,5 @@ sed -i '' 's/https:\/\/stage.docs.camunda.io/https:\/\/stage.unsupported.docs.ca
 sed -i '' "s/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-stage.yaml
 
 
-# git add .github/workflows
-# git commit -m "archiving: update CI workflows"
+git add .github/workflows
+git commit -m "archiving: update CI workflows"
