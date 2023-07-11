@@ -302,8 +302,13 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
               ],
             },
+            {
+              Slack: [
+                "components/connectors/out-of-the-box-connectors/slack",
+                "components/connectors/out-of-the-box-connectors/slack-inbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/sendgrid",
-            "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
           ],
