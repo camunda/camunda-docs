@@ -374,6 +374,7 @@
                 "components/connectors/out-of-the-box-connectors/slack-inbound"
               ]
             },
+            "components/connectors/out-of-the-box-connectors/sendgrid",
             {
               "Twilio": [
                 "components/connectors/out-of-the-box-connectors/twilio",
