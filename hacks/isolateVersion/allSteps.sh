@@ -50,10 +50,13 @@ if [[ "$script_index" == 5 || -z "$script_index" ]]; then
   source $script_directory/5-updateThemeComponents.sh
 fi
 
+if [[ "$script_index" == 6 || -z "$script_index" ]]; then
+  source $script_directory/6-updateCIWorkflows.sh
+fi
+
 notify "Automated steps are complete! For ease of review, consider PR'ing the deletion commits separate from the rest of the changes."
 notify "Manual steps that remain: 
-6. Update the docusaurus.config.js
-7. Update CI workflows
+7. Update the docusaurus.config.js
 8. Fix htaccess rules (this might always be manual)
 9. Fix links (this will always be manual)
 "
