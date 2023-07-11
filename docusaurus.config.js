@@ -146,16 +146,7 @@ module.exports = {
           title: "Community",
           items: [
             {
-              label: "Slack",
-              href: "https://camunda.com/slack",
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/camunda",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/camunda/camunda-platform-docs",
+              html: `<a href="https://camunda.com/slack" target="_blank" rel="noreferrer noopener"><img src= "img/Slack-mark-white-RGB.png" class="footer-logos" /></a> <a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "img/twitter.svg" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "img/github-mark-white.svg" class="footer-logos" /></a>`,
             },
             {
               label: "Forum",
