@@ -8,8 +8,8 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
-RewriteRule ^docs/components/overview/(.*)$ /1.0/docs/components/components-overview/$1 [R=301,L]
-RewriteRule ^docs/components/overview$ /1.0/docs/components/components-overview/ [R=301,L]
+RewriteRule ^docs/components/overview/(.*)$ /1.0/docs/components/$1 [R=301,L]
+RewriteRule ^docs/components/overview$ /1.0/docs/components/ [R=301,L]
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
