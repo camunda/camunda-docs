@@ -51,6 +51,7 @@ module.exports = {
         {
           Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
         },
+        "guides/update-guide/820-to-830",
         "guides/update-guide/810-to-820",
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
