@@ -18,6 +18,7 @@ Building a report is the crux of the report edit mode. The building process itse
 :::note
 In edit mode, you can toggle the automatic preview update of the report by toggling the **Update Preview Automatically** switch. You can also use the **Run** button to run the update manually.
 By default, the automatic preview update is **disabled**.
+The toggle setting is stored in the user session and will be applied as a default value next time.
 :::
 
 In this section, learn how to:
