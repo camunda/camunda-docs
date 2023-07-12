@@ -408,3 +408,8 @@ span.callout + p::after {
     font-size: 14px;
   }
 }
+
+.footer-logos {
+  width: 23px;
+  height: 23px;
+}
