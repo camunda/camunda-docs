@@ -2,7 +2,7 @@
 set -e # exit at first error
 
 # Before running this script make sure these versions are correct!
-ARCHIVED_VERSION="0.25"
+ARCHIVED_VERSION="1.0"
 # ARCHIVED_OPTIMIZE_VERSION="3.7.0"
 
 GREEN='\033[0;32m'
@@ -50,10 +50,13 @@ if [[ "$script_index" == 5 || -z "$script_index" ]]; then
   source $script_directory/5-updateThemeComponents.sh
 fi
 
+if [[ "$script_index" == 6 || -z "$script_index" ]]; then
+  source $script_directory/6-updateCIWorkflows.sh
+fi
+
 notify "Automated steps are complete! For ease of review, consider PR'ing the deletion commits separate from the rest of the changes."
 notify "Manual steps that remain: 
-5. Update the docusaurus.config.js
-6. Update CI workflows
-7. Fix htaccess rules (this might always be manual)
-8. Fix links (this will always be manual)
+7. Update the docusaurus.config.js
+8. Fix htaccess rules (this might always be manual)
+9. Fix links (this will always be manual)
 "

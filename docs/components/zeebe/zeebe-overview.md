@@ -24,9 +24,8 @@ For documentation on deploying Zeebe as part of Camunda Platform 8 Self-Managed,
 
 Paid support for Zeebe is available via either Camunda Platform 8 Professional or Camunda Platform 8 Enterprise. Customers can choose either plan based on their process automation requirements. Camunda Platform 8 Enterprise customers also have the option of on-premises or private cloud deployment.
 
-Additionally, regardless of how you are working with Zeebe and Camunda Platform 8, you can always find support through the [community](open-source/get-help-get-involved.md).
+Additionally, regardless of how you are working with Zeebe and Camunda Platform 8, you can always find support through the [community](/contact/).
 
 ## Next steps
 
 - Get familiar with [technical concepts](technical-concepts/technical-concepts-overview.md).
-- Explore [community contributions](open-source/community-contributions.md).

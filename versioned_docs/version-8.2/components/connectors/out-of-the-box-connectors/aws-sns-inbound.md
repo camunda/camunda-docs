@@ -1,23 +1,23 @@
 ---
 id: aws-sns-inbound
-title: Amazon Simple Notification Service Inbound Connector
-sidebar_label: Amazon SNS Inbound Connector
-description: Subscribe to your AWS SNS topic notification via HTTPS
+title: Amazon Simple Notification Service inbound Connector
+sidebar_label: Amazon SNS inbound Connector
+description: Subscribe to your AWS SNS topic notification via HTTPS.
 ---
 
-The **Amazon Simple Notification Service (SNS) Inbound Connector** is a Connector that allows you to start or continue
+The **Amazon Simple Notification Service (SNS) inbound Connector** is a Connector that allows you to start or continue
 a BPMN process triggered by an [AWS SNS](https://console.aws.amazon.com/sns/home) notification.
 
-## Create an AWS SNS Inbound Connector task
+## Create an AWS SNS inbound Connector task
 
-1. Start building your BPMN diagram. You can use the **AWS SNS Inbound Connector** with either a **Start Event** or **Intermediate Catch Event**.
-2. Select the applicable element and change its template to an **AWS SNS Inbound Connector**.
+1. Start building your BPMN diagram. You can use the **AWS SNS inbound Connector** with either a **Start Event** or **Intermediate Catch Event**.
+2. Select the applicable element and change its template to an **Amazon SNS connector**.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
 6. Navigate to the **Webhooks** tab in the properties panel to see the webhook URL.
 
-## Make your AWS SNS Inbound Connector for receiving notifications executable
+## Make your AWS SNS inbound Connector for receiving notifications executable
 
 ![Start event SNS connector](../img/connectors-aws-sns-inbound-start-filled.png)
 
@@ -25,13 +25,13 @@ a BPMN process triggered by an [AWS SNS](https://console.aws.amazon.com/sns/home
 
 1. In the **Subscription Configuration** section, configure the **Subscription ID**. By default, **Subscription ID** is pre-filled with a random value. This value will be a part of the topic subscription URL.
 2. Set the **Allow to receive messages from topic(s)** value to **any** if the process may be triggered by any topic, or **Specific topic(s)** if you wish to allow-list only certain topics to start a new BPMN process.
-3. If you have chosen the **Specific topic(s)**, you have to list comma-separated topics in the field **Topic ARN(s)** as well. In that case, the **AWS SNS Inbound Connector** will auto-approve each qualified subscription request.
+3. If you have chosen the **Specific topic(s)**, you have to list comma-separated topics in the field **Topic ARN(s)** as well. In that case, the **AWS SNS inbound Connector** will auto-approve each qualified subscription request.
 4. In the section **Activation**, configure **Condition** when the AWS SNS topic can trigger a new BPMN process. The following example will trigger a new BPMN process for every notification with a subject _Start BPMN_: `=(request.body.Subject = "Start BPMN")`.
 5. In the section **Variable mapping** fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
 6. In the section **Variable expression** fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    The following example will extract both message and subject from AWS SNS message: `={message: request.body.Message, subject: request.body.Subject}`.
 
-When using the **AWS SNS Inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+When using the **AWS SNS inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
@@ -43,26 +43,26 @@ For example, given that your correlation key is defined with `myCorrelationKey` 
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
-## Activate the AWS SNS Inbound Connector by deploying your diagram
+## Activate the AWS SNS inbound Connector by deploying your diagram
 
-Once you click the **Deploy** button, your **AWS SNS Inbound Connector** will be activated and publicly available.
+Once you click the **Deploy** button, your **AWS SNS inbound Connector** will be activated and publicly available.
 
 URLs of the exposed **AWS SNS Inbound Connector** adhere to the following pattern:
 
 `https://<base URL>/inbound/<subscription ID>`
 
 - `<base URL>` is the URL of Connectors component deployment. When using the Camunda Platform 8 SaaS offering, this will typically contain your cluster region and cluster ID.
-- `<subscription ID>` is the ID (path) you configured in the properties of your **AWS SNS Inbound Connector**.
+- `<subscription ID>` is the ID (path) you configured in the properties of your **AWS SNS inbound Connector**.
 
-If you make changes to your **AWS SNS Inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.
+If you make changes to your **AWS SNS inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.
 
-When you click on the event with **AWS SNS Inbound Connector** applied to it, a new **Webhooks** tab will appear in the properties panel.
-This tab displays the URL of the **AWS SNS Inbound Connector** for every cluster where you have deployed your BPMN diagram.
+When you click on the event with **AWS SNS inbound Connector** applied to it, a new **Webhooks** tab will appear in the properties panel.
+This tab displays the URL of the **AWS SNS inbound Connector** for every cluster where you have deployed your BPMN diagram.
 
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
-You can still use AWS SNS Inbound Connector in Desktop Modeler, or with your Camunda Platform 8 Self-Managed.
-In that case, AWS SNS Inbound Connector deployments and URLs will not be displayed in Modeler.
+You can still use AWS SNS inbound Connectors in Desktop Modeler, or with Camunda Platform 8 Self-Managed.
+In that case, AWS SNS inbound Connector deployments and URLs will not be displayed in Modeler.
 :::
 
 ## Wiring with AWS SNS
@@ -72,7 +72,7 @@ In that case, AWS SNS Inbound Connector deployments and URLs will not be display
 3. Choose the **Create** subscription.
 4. In the **Protocol** drop-down list, select **HTTPS**.
 5. In the **Endpoint** box, paste in the URL of the subscription found in at the **Webhooks** tab of your BPMN
-   diagram that you want the topic to send messages to and then choose **Create subscription**.
+   diagram that you want the topic to send messages. Then, choose **Create subscription**.
 6. The confirmation message is displayed. Choose **Close**. Your new subscription's **Subscription ID**
    displays **PendingConfirmation**. Shortly after it will be confirmed by the BPMN process assuming **Allow to receive messages from topic(s)** contains the SNS topic ARN.
 
@@ -86,9 +86,9 @@ is the same as **Condition** equals `=(request.body.TopicArn = "arn:aws:sns:eu-c
 
 ### Integrity
 
-Each AWS SNS message is digitally signed with AWS private key. The body of a message contains a digital signature of
+Each AWS SNS message is digitally signed with an AWS private key. The body of a message contains a digital signature of
 the entire content. The **Amazon Simple Notification Service (SNS) Inbound Connector** verifies every message against
-the Amazon SNS public certificate in order to make sure that the message is of known origin and has not been tampered.
+the Amazon SNS public certificate to ensure the message is of known origin and has not been tampered with.
 
 ## Appendix
 
