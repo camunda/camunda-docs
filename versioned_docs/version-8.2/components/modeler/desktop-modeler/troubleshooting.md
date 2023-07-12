@@ -48,7 +48,9 @@ Ensure your computer has access to the (remote) network.
 
 ### The connection to Zeebe happens through a proxy
 
-[Debug the connection](#how-can-i-get-details-about-a-secure-remote-connection) and verify the intermediary (security proxy, ingress) is configured for [HTTP/2 transport and gRPC forwarding](../../../self-managed/platform-deployment/troubleshooting.md#zeebe-ingress-grpc). Secure connections require HTTP/2 over TLS with protocol negotiation via [ALPN](https://www.rfc-editor.org/rfc/rfc7301.html). 
+[Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand if it can be established.
+
+Secure connections to Zeebe require [HTTP/2 over TLS with protocol negotiation via ALPN](../../../self-managed/platform-deployment/troubleshooting.md#zeebe-ingress-grpc). Ensure your proxy supports these features and does not forcefully downgrade the connection to HTTP/1.
 
 ## Debug Zeebe connection issues
 
