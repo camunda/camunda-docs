@@ -79,7 +79,7 @@ module.exports = {
               className: "dropdown-unsupported-versions",
               value: "<b>Unsupported versions</b>",
             },
-            ...["1.0", "0.26", "0.25"].map((version) => ({
+            ...["0.25", "0.26"].map((version) => ({
               label: version,
               href: `https://unsupported.docs.camunda.io/${version}/`,
             })),
@@ -247,6 +247,7 @@ module.exports = {
           ignorePatterns: [
             "/docs/**/tags/**",
             "/docs/next/**",
+            "/docs/1.0/**",
             "/docs/1.1/**",
             "/docs/1.2/**",
             "/docs/1.3/**",
