@@ -8,7 +8,7 @@ export default function SearchWrapper(props) {
       <a
         className="create-account-btn"
         target="_blank"
-        href="https://signup.camunda.com/accounts"
+        href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
       >
         Create account <IconExternalLink></IconExternalLink>
       </a>
