@@ -117,12 +117,23 @@ Publishing a process means that you make it available to other users inside and 
 
 You have the following options to publish a process:
 
-- [Deploy to run programmatically](#deploy-to-run-programmatically)
-- [Publish via webhook](#publish-via-webhook)
-- [Publish to Tasklist](#publish-to-tasklist)
-- [Publish via a public form](#publish-via-a-public-form)
-- [Listen to message or signal events](#listen-to-message-or-signal-events)
-- [Best practices for publishing a process](#best-practices-for-publishing-a-process)
+- [Deploy a process](#deploy-a-process)
+  - [Before deploying a process](#before-deploying-a-process)
+- [Run a process](#run-a-process)
+  - [Test run using Play mode](#test-run-using-play-mode)
+  - [Run manually from Modeler](#run-manually-from-modeler)
+  - [Schedule via timer](#schedule-via-timer)
+  - [Best practices for running a process](#best-practices-for-running-a-process)
+- [Publishing a process](#publishing-a-process)
+  - [Deploy to run programmatically](#deploy-to-run-programmatically)
+  - [Publish via webhook](#publish-via-webhook)
+  - [Publish to Tasklist](#publish-to-tasklist)
+  - [Publish via a public form](#publish-via-a-public-form)
+    - [Add a start form](#add-a-start-form)
+    - [Deploy process to the public](#deploy-process-to-the-public)
+    - [Get the public link and share it](#get-the-public-link-and-share-it)
+  - [Listen to message or signal events](#listen-to-message-or-signal-events)
+  - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
 
 ### Deploy to run programmatically
 
@@ -188,7 +199,7 @@ To publish a process via a public form, follow these steps:
 
 <img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
 
-6. Optionally define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
+6. Optionally, define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
 
 #### Deploy process to the public
 
@@ -196,7 +207,7 @@ To publish a process via a public form, follow these steps:
 
 <img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
 
-2. Click on **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
+2. Click **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
 
 Once the process is deployed, a public URL for the form is generated on the target cluster.
 
@@ -208,7 +219,7 @@ You can access the URL in the **Publication** tab of the **properties panel**, a
 
 When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda Platform 8, using the submitted data as input.
 
-For further configuration and how to unpublish a process again, please refer to the [full documentation](./advanced-modeling/publish-public-processes.md).
+For further configuration and how to unpublish a process again, refer to the [full documentation](./advanced-modeling/publish-public-processes.md).
 
 ### Listen to message or signal events
 

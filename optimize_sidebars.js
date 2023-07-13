@@ -654,6 +654,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
             ),
             docsLink(
+              "Amazon EventBridge Connector",
+              "components/connectors/out-of-the-box-connectors/aws-eventbridge/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),
@@ -746,12 +750,20 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/sendgrid/"
             ),
             docsLink(
-              "Slack Connector",
+              "Slack outbound Connector",
               "components/connectors/out-of-the-box-connectors/slack/"
+            ),
+            docsLink(
+              "Slack inbound Connector",
+              "components/connectors/out-of-the-box-connectors/slack-inbound/"
             ),
             docsLink(
               "Twilio Connector",
               "components/connectors/out-of-the-box-connectors/twilio/"
+            ),
+            docsLink(
+              "Twilio Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/twilio-webhook/"
             ),
             docsLink(
               "UiPath Connector",
