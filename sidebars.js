@@ -271,6 +271,7 @@ module.exports = {
             {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
                 "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
@@ -310,9 +311,19 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
               ],
             },
+            {
+              Slack: [
+                "components/connectors/out-of-the-box-connectors/slack",
+                "components/connectors/out-of-the-box-connectors/slack-inbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/sendgrid",
-            "components/connectors/out-of-the-box-connectors/slack",
-            "components/connectors/out-of-the-box-connectors/twilio",
+            {
+              Twilio: [
+                "components/connectors/out-of-the-box-connectors/twilio",
+                "components/connectors/out-of-the-box-connectors/twilio-webhook",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/uipath",
           ],
         },
@@ -342,12 +353,6 @@ module.exports = {
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",
             "components/zeebe/technical-concepts/protocols",
-          ],
-        },
-        {
-          "Open source community": [
-            "components/zeebe/open-source/community-contributions",
-            "components/zeebe/open-source/get-help-get-involved",
           ],
         },
       ],
