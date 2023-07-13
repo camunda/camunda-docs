@@ -12,7 +12,7 @@ Camunda Platform 8 Self-Managed has multiple web applications and gRPC services.
 There are no significant differences between the two setups. Rather, they both offer flexibility for different workflows.
 
 :::note
-Camunda Platform 8 Helm chart doesn't manage or deploy Ingress controllers, it only deploys Ingress objects. Hence, this Ingress setup will not work without Ingress controller running in your cluster.
+Camunda Platform 8 Helm chart doesn't manage or deploy Ingress controllers, it only deploys Ingress resources. Hence, this Ingress setup will not work without an Ingress controller running in your cluster.
 :::
 
 ## Preparation
@@ -184,6 +184,33 @@ Once deployed, you can access the Camunda Platform 8 components on:
 - **Web applications:** `https://[identity|operate|optimize|tasklist|modeler].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
+
+## Ingress Controllers
+
+Ingress resources require the cluster to have an [ingress controlling](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. There are many options for configuring your ingress controller. If you are using a cloud provider such as AWS or GCP, we recommend you use follow their ingress setup guides.
+
+### Example local configuration
+
+An ingress controller is required when working a local Camunda Platform 8 installation also. Here is a simple ingress controller configuration using the [nginx ingress controller](https://github.com/kubernetes/ingress-nginx/blob/main/README.md#readme):
+
+```yaml
+# nginx_ingress_values.yml
+controller:
+  ingressClassResource:
+    default: true
+  replicaCount: 1
+  admissionWebhooks:
+    enabled: false
+  hostNetwork: true
+  service:
+    type: NodePort
+```
+
+To install this ingress controller to your local cluster:
+
+```shell
+helm install -f nginx_ingress_values.yaml nginx-ingress oci://ghcr.io/nginxinc/charts/nginx-ingress --version 0.18.0
+```
 
 ## Troubleshooting
 
