@@ -78,7 +78,7 @@ The following is not possible:
 
 ![User Task](../../components/modeler/bpmn/assets/bpmn-symbols/user-task.svg)
 
-Human task management is also available in Camunda Platform 8, but uses a different tasklist user interface and API.
+Human task management is also available in Camunda Platform 8, but uses a different Tasklist user interface and API.
 
 In Camunda Platform 7, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
 
@@ -150,7 +150,7 @@ The following attributes/elements cannot be migrated:
 
 ![Script Task](../../components/modeler/bpmn/assets/bpmn-symbols/script-task.svg)
 
-Only FEEL scripts can be executed by the Zeebe engine. The converter will create internal scripts as long as you are using FEEL scripts.
+Only FEEL scripts can be executed by Zeebe. The converter will create internal scripts as long as you are using FEEL scripts.
 
 If you require a different scripting language, a script task can behave like normal service tasks instead, which means you must run a job worker that can execute scripts. One available option is to use the [Zeebe Script Worker](https://github.com/camunda-community-hub/zeebe-script-worker), provided as a community extension.
 

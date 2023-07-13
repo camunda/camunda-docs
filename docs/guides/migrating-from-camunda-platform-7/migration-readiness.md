@@ -16,17 +16,17 @@ Let's discuss if you need to migrate first, before diving into the necessary ste
 
 New projects should typically be started using Camunda Platform 8.
 
-Existing solutions using Camunda Platform 7 might simply keep running on Camunda Platform 7. The platform has ongoing support, so there is no need to rush on a migration project.
+Existing solutions using Camunda Platform 7 might simply keep running on Camunda Platform 7. The platform has ongoing [support](https://docs.camunda.org/enterprise/announcement/), so there is no need to rush on a migration project.
 
 You should consider migrating existing Camunda Platform 7 solutions if:
 
 - You are looking to leverage a SaaS offering (e.g. to reduce the effort for hardware or infrastructure setup and maintenance).
 - You are in need of performance at scale and/or improved resilience.
-- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the new Connectors framework, or the improved collaboration features in web modeler).
+- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the new Connectors framework, or the improved collaboration features in Web Modeler).
 
 ## Prepare for smooth migrations
 
-Sometimes you might not be able to use Camunda 8 right away as described in [What to do When You Can’t Quickly Migrate to Camunda 8](https://camunda.com/blog/2022/05/what-to-do-when-you-cant-quickly-migrate-to-camunda-8/). In this case, you will keep developing Camunda Platform 7 process solutions, but you should establish some practices as quickly as possible to ease migration projects later on.
+Sometimes you might not be able to use Camunda Platform 8 right away as described in [What to do When You Can’t Quickly Migrate to Camunda 8](https://camunda.com/blog/2022/05/what-to-do-when-you-cant-quickly-migrate-to-camunda-8/). In this case, you will keep developing Camunda Platform 7 process solutions, but you should establish some practices as quickly as possible to ease migration projects later on.
 
 To implement Camunda Platform 7 process solutions that can be easily migrated, stick to the following rules and development practices:
 
@@ -35,12 +35,12 @@ To implement Camunda Platform 7 process solutions that can be easily migrated, s
 3. Don’t rely on an ACID transaction manager spanning multiple steps or resources.
 4. Don’t expose Camunda API (REST or Java) to other services or front-end applications.
 5. Use primitive variable types or JSON payloads only (no XML or serialized Java objects).
-6. Use simple expressions or plug-in FEEL. FEEL is the only supported expression language in Camunda 8. JSONPath is also relatively easy to translate to FEEL. Avoid using special variables in expressions, e.g. `execution` or `task`.
-7. Use your own user interface or Camunda Forms; the other form mechanisms are not supported out-of-the-box in Camunda 8.
+6. Use simple expressions or plug-in FEEL. FEEL is the only supported expression language in Camunda Platform 8. JSONPath is also relatively easy to translate to FEEL. Avoid using special variables in expressions, e.g. `execution` or `task`.
+7. Use your own user interface or Camunda Forms; the other form mechanisms are not supported out-of-the-box in Camunda Platform 8.
 8. Avoid using any implementation classes from Camunda; generally, those with \*.impl.\* in their package name.
 9. Avoid using engine plugins.
 
-We also recommend reviewing [BPMN elements supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md), though any feature gap will likely be closed soon.
+We also recommend reviewing [BPMN elements supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md), though any feature gap will likely be closed soon.
 
 [Execution Listeners](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#execution-listener) and [Task Listeners](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#task-listener) are areas in Camunda Platform 8 that are still under discussion. Currently, those use cases need to be solved slightly differently. Depending on your use case, the following Camunda Platform 8 features can be used:
 
@@ -59,7 +59,7 @@ Expect to soon have a solution in Camunda Platform 8 for most of the problems th
 
 Given Java Delegates and the workflow engine are embedded as a library, projects can do dirty hacks in their code. Casting to implementation classes? No problem. Using a ThreadLocal or trusting a specific transaction manager implementation? Yeah, possible. Calling complex Spring beans hidden behind a simple JUEL (Java Unified Expression Language) expression? Well, you guessed it — doable!
 
-Those hacks are the real showstoppers for migration, as they simply cannot be migrated to Camunda Platform 8. In fact, [Camunda 8 increased isolation intentionally](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
+Those hacks are the real showstoppers for migration, as they simply cannot be migrated to Camunda Platform 8. In fact, [Camunda Platform 8 increased isolation intentionally](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
 
 Concentrate on what a Java Delegate is intended to do:
 
@@ -161,7 +161,7 @@ This way, you have full control over what is happening, and such code is also ea
 
 ### Simple expressions and FEEL
 
-[Camunda 8 uses FEEL as its expression language](/components/modeler/feel/what-is-feel.md). There are big advantages to this decision. Not only are the expression languages between BPMN and DMN harmonized, but also the language is really powerful for typical expressions. One of my favorite examples is the following onboarding demo we regularly show. A decision table will hand back a list of possible risks, whereas every risk has a severity indicator (yellow, red) and a description.
+[Camunda Platform 8 uses FEEL as its expression language](/components/modeler/feel/what-is-feel.md). There are big advantages to this decision. Not only are the expression languages between BPMN and DMN harmonized, but also the language is really powerful for typical expressions. One of my favorite examples is the following onboarding demo we regularly show. A decision table will hand back a list of possible risks, whereas every risk has a severity indicator (yellow, red) and a description.
 
 ![onboarding demo](https://camunda.com/wp-content/uploads/2022/05/Migrating-to-Camunda-Platform-8-image-1-1024x367.png)
 
@@ -225,7 +225,7 @@ Now, the dmnResultChecker is a Spring bean that can contain arbitrary Java logic
 
 ### Camunda Forms
 
-Finally, while Camunda Platform 7 supports [different types of task forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/), Camunda 8 only supports [Camunda Forms](/guides/utilizing-forms.md) (and will actually be extended over time). If you rely on other form types, you either need to make Camunda Forms out of them or use a bespoke tasklist where you still support those forms.
+Finally, while Camunda Platform 7 supports [different types of task forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/), Camunda Platform 8 only supports [Camunda Forms](/guides/utilizing-forms.md) (and will actually be extended over time). If you rely on other form types, you either need to make Camunda Forms out of them or use a bespoke tasklist where you still support those forms.
 
 ## Migration steps
 
@@ -236,7 +236,7 @@ The typical steps are:
 1. Migrate development artifacts
    1. Adjust your BPMN models (only in rare cases you have to touch your DMN models)
    2. Adjust your development project (remove embedded engine, add Zeebe client)
-   3. Refactor your code to use the Zeebe client API
+   3. Refactor your code to use the Zeebe API, likely via a Zeebe client
    4. Refactor your glue code or use [the Java Delegate adapter project](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter), a community supported tool.
 2. Migrate workflow engine data
 

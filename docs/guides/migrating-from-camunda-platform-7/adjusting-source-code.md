@@ -2,9 +2,10 @@
 id: adjusting-source-code
 title: Adjusting source code
 description: "Learn how and where to adjust your source code when migrating from Camunda Platform 7 to Camunda Platform 8."
+keywords: ["migrating to Zeebe"]
 ---
 
-Camunda Platform 8 has a different API than Camunda Platform 7. As a result, you have to migrate some of your code, especially code that does the following:
+Camunda Platform 8 has a different workflow engine than Camunda Platform 7 - Zeebe. As a result, you have to migrate some of your code to work with the Zeebe API, especially code that does the following:
 
 - Uses the Client API (e.g. to start process instances)
 - Implements [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
@@ -35,7 +36,7 @@ Finally, adjust your source code and process model as described in the sections 
 
 ### Client API
 
-All Camunda Platform 8 APIs (e.g. to start process instances, subscribe to tasks, or complete them) have been completely redesigned are not compatible with Camunda Platform 7. While conceptually similar, the APIs use different method names, data structures, and protocols.
+The Zeebe API (e.g. the workflow engine API - start process instances, subscribe to tasks, or complete them) has been completely redesigned and is not compatible with Camunda Platform 7. While conceptually similar, the API uses different method names, data structures, and protocols.
 
 If this affects large parts of your code base, you could write a small abstraction layer implementing the Camunda Platform 7 API delegating to Camunda Platform 8, probably marking unavailable methods as deprecated. We welcome community extensions that facilitate this but have not yet started own efforts.
 

@@ -11,13 +11,13 @@ This section does not compare Camunda Platform 7 with Camunda Platform 8 in deta
 
 #### No embedded engine in Camunda Platform 8
 
-Camunda Platform 7 allows embedding the workflow engine as a library in your application. This means both run in the same JVM, share thread pools, and can even use the same datasource and transaction manager.
+Camunda Platform 7 allows embedding the workflow engine as a library in your application. This means both run in the same JVM, share thread pools, and can even use the same data source and transaction manager.
 
-In contrast, the workflow engine in Camunda Platform 8 is always a remote resource for your application, while the embedded engine mode is not supported.
+In contrast, the workflow engine in Camunda Platform 8, Zeebe, is always a remote resource for your application, while the embedded engine mode is not supported.
 
 If you are interested in the reasons why we switched our recommendation from embedded to remote workflow engines, please refer to [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
 
-The implications for your process solution and the programming model are describeed below. Conceptually, the only really big difference is that with a remote engine, you cannot share technical [ACID transactions](https://en.wikipedia.org/wiki/ACID) between your code and the workflow engine. You can read more about it in the blog post ["Achieving consistency without transaction managers"](https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c).
+The implications for your process solution and the programming model are described below. Conceptually, the only really big difference is that with a remote engine, you cannot share technical [ACID transactions](https://en.wikipedia.org/wiki/ACID) between your code and the workflow engine. You can read more about it in the blog post ["Achieving consistency without transaction managers"](https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c).
 
 #### Different data types
 
@@ -98,16 +98,16 @@ A typical deployment of the workflow engine itself looks different because the w
 
 With Camunda Platform 7 a typical deployment includes:
 
-- Your Spring Boot application with all custom code and the workflow engine, cockpit, and tasklist embedded. This application is typically scaled to at least two instances (for resilience)
+- Your Spring Boot application with all custom code and the workflow engine, Cockpit, and Tasklist embedded. This application is typically scaled to at least two instances (for resilience)
 - A relational database
-- An elastic database (for Optimize)
+- An Elasticsearch database (for Optimize)
 - Optimize (a Java application)
 
 With Camunda Platform 8 you deploy:
 
 - Your Spring Boot application with all custom code and the Zeebe client embedded. This application is typically scaled to at least two instances (for resilience)
 - The Zeebe broker, typically scaled to at least three instances (for resilience)
-- An elastic database (for Operate, Taskliste, and Optimize)
+- An elastic database (for Operate, Tasklist, and Optimize)
 - Optimize, Operate, and Tasklist (each one is a Java application). You can scale those applications to increase availability if you want.
 
 ![Camunda Platform 7 vs Camunda Platform 8 Deployment View](../img/camunda7-vs-camunda8-deployment-view.png)
@@ -124,7 +124,7 @@ For local development purposes, you can [spin up Camunda Platform 8 on a develop
 
 Besides Spring Boot there are also other environments being used to build process solutions.
 
-#### Container-managed engine (Tomcat, WildFly, Websphere & co)
+#### Container-managed engine (Tomcat, WildFly, WebSphere & co)
 
 Camunda Platform 8 doesn't provide integration into Jakarta EE application servers like Camunda Platform 7 does. Instead, Jakarta EE applications need to manually add the Zeebe client library. The implications are comparable to what is described for Spring Boot applications in this guide.
 
@@ -136,13 +136,13 @@ Due to limited adoption, there is no support for CDI or OSGI in Camunda Platform
 
 #### Polyglot applications (C#, NodeJS, ...)
 
-When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform 7) with another (Camunda Platform 8). As Zeebe comes with a different API, you need to adjust your source code. Camunda Platform 8 does not use REST as API technology, but gRPC, and you will need to leverage a [client library](/apis-tools/working-with-apis-tools.md) instead.
+When you run your application in for example NodeJS or C#, you exchange one remote engine (Camunda Platform 7) with another (Camunda Platform 8). As Zeebe comes with a different API, you need to adjust your source code. Zeebe does not use REST as API technology, but gRPC, and you will need to leverage a [client library](apis-tools/working-with-apis-tools#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries) instead.
 
 ![polygot architecture](../img/architecture-polyglot.png)
 
 ### Plugins
 
-[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda Platform 8, as such plugins can massively change the behavior or even harm the stabilty of the engine. Some use cases might be implemented using [exporters](/self-managed/concepts/exporters.md). Note that exporters are only available for self-managed Zeebe clusters and not in Camunda Platform 8 SaaS.
+[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda Platform 8, as such plugins can massively change the behavior or even harm the stability of the engine. Some use cases might be implemented using [exporters](/self-managed/concepts/exporters.md). Note that exporters are only available for self-managed Zeebe clusters and not in Camunda Platform 8 SaaS.
 
 Migrating **Modeler Plugins** is generally possible, as the same modeler infrastructure is used.
 

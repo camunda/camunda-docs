@@ -1,6 +1,6 @@
 ---
 id: index
-title: Overview
+title: Starting a migration
 description: "Migrate process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8."
 keywords:
   [
@@ -33,11 +33,11 @@ We are watching all customer migration projects closely and will update this gui
 
 Before diving into concrete steps on migrating your models and code, let's cover some conceptual topics and migration readiness steps. The list below provides an outline of the sections in this guide:
 
-- Conceptual differences
-- Migration readiness
-- Adjusting BPMN models
-- Adjusting DMN models
-- Adjusting source code
+- [Conceptual differences](./conceptual-differences.md)
+- [Migration readiness](./migration-readiness.md)
+- [Adjusting BPMN models](./adjusting-bpmn-models.md)
+- [Adjusting DMN models](./adjusting-dmn-models.md)
+- [Adjusting source code](./adjusting-source-code.md)
 
 ## Open issues
 
