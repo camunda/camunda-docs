@@ -343,7 +343,7 @@ operate:
   env:
     - name: CAMUNDA_OPERATE_ZEEBE_SECURE
       value: "true"
-    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATE-PATH
+    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
       value: /usr/local/operate/config/tls.crt
   extraVolumeMounts:
     - name: certificate
@@ -368,7 +368,7 @@ tasklist:
   env:
     - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
       value: "true"
-    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATE-PATH
+    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
       value: /usr/local/tasklist/config/tls.crt
   extraVolumeMounts:
     - name: certificate
