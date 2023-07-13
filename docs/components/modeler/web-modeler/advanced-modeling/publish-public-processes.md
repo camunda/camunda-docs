@@ -15,12 +15,13 @@ import PublicFormImg from '../img/public-form.png';
 
 <span class="badge badge--cloud">Camunda Platform 8 SaaS only</span>
 
-Camunda Platform 8 SaaS offers a convenient solution for process developers who want to make their processes accessible to users without requiring them to sign up to the platform or understand how tasks and processes work. This feature is particularly useful when you want to gather data or initiate a process from users who are not part of your organization or do not have direct access to Camunda. It also allows you to rapidly test a process with your peers in a development environment.
+Camunda Platform 8 SaaS offers a convenient solution for process developers who want to make their processes accessible to users without requiring them to sign up to the platform or understand how tasks and processes work.
+
+This feature is particularly useful when you want to gather data or initiate a process from users who are not part of your organization or do not have direct access to Camunda. It also allows you to rapidly test a process with your peers in a development environment.
 
 <img src={PublicFormImg} alt="A public form" />
 
-With this feature, developers can easily publish a process with a form embedded into the start event and enable a public link that can be shared with anyone.
-Users can simply open the link, fill out the form, and submit it to initiate a process instance.
+With this feature, developers can publish a process with a form embedded into the start event and enable a public link that can be shared with anyone. Users can open the link, fill out the form, and submit it to initiate a process instance.
 
 This documentation provides step-by-step instructions on how to leverage public forms to streamline process initiation and to improve adoption of process solutions in your organization.
 
@@ -29,7 +30,7 @@ This documentation provides step-by-step instructions on how to leverage public 
 To create a form for public access, follow these steps:
 
 1. Navigate back to your project root or folder.
-2. Click on **New**, and select **Form** in the drop down menu.
+2. Click on **New**, and select **Form** in the dropdown menu.
    <img src={CreateFormImg} style={{width: 300}} alt="Creating a new form" />
 
 3. Name your form.
@@ -42,16 +43,12 @@ Once ready, return to your process. You can read more about form creation in the
 To embed the form in a start event, follow these steps:
 
 1. Make sure you are in **Implement** mode.
-
-<img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
-
+   <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
 2. Select the start event.
-
-<img src={SelectStartEventImg} style={{width: 800}} alt="Start event of a human workflow" />
-
-1. Ensure the start event is a [none start event](../../bpmn/none-events/none-events.md#none-start-events). If it is not, change the start event type accordingly using the **wrench tool**.
-2. Use the blue **form icon** to open the form browser. If the icon does not appear, select the start event again.
-3. Select the form you have created and click on **Embed** to confirm.
+   <img src={SelectStartEventImg} style={{width: 800}} alt="Start event of a human workflow" />
+3. Ensure the start event is a [none start event](../../bpmn/none-events/none-events.md#none-start-events). If it is not, change the start event type accordingly using the **wrench tool**.
+4. Use the blue **form icon** to open the form browser. If the icon does not appear, select the start event again.
+5. Select the form you have created and click **Embed** to confirm.
 
 <img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
 
@@ -65,7 +62,7 @@ To enable public access, follow these steps:
 
 <img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
 
-2. Click on **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
+2. Click **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
 
 ## Get and share public link
 
@@ -91,7 +88,7 @@ To unpublish a process and disable the public access again, follow these steps:
 To update a public form, follow these steps:
 
 1. Select the start event with the embedded form.
-2. Click on the blue **form icon** under the start event.
+2. Click the blue **form icon** under the start event.
 3. Remove the form by clicking the corresponding action.
 4. Click the **form icon** again.
 5. Select the same form again, and click **Embed** to confirm.
@@ -135,5 +132,5 @@ Yes, your links will no longer be accessible when you delete your account, as th
 As long as the process is deployed to Operate with an active publication flag, it remains available via the public link. Deleting a process from Modeler does not unpublish it. [Disable the public access](#disable-public-access-again) before deleting a process!
 
 :::note
-It is important to consider the security and privacy implications when using a public form. Ensure that any sensitive or confidential information is handled appropriately and that access to the form and the resulting process instances is controlled and monitored according to your organization's policies and regulatory requirements.
+It is important to consider the security and privacy implications when using a public form. Ensure any sensitive or confidential information is handled appropriately and access to the form and the resulting process instances is controlled and monitored according to your organization's policies and regulatory requirements.
 :::

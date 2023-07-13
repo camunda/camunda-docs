@@ -15,7 +15,7 @@ Depending on your operating system, you can find Desktop Modeler logs in differe
 ### Windows
 
 ```plain
-%APPDATA%\Camunda Modeler\logs
+%APPDATA%\camunda-modeler\logs
 ```
 
 ### MacOS
@@ -101,9 +101,9 @@ Certificate chain
 ...
 ```
 
-## How can I debug log GRPC / Zeebe communication?
+## How can I debug log gRPC / Zeebe communication?
 
-You can also start Desktop Modeler with GRPC logging turned on to get detailed [logging output](#how-to-obtain-the-modeler-logs) on communication to Zeebe:
+You can also start Desktop Modeler with gRPC logging turned on to get detailed [logging output](#how-to-obtain-desktop-modeler-logs) on communication to Zeebe:
 
 ```sh
 DEBUG=* ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
