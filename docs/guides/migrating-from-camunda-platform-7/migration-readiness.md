@@ -44,14 +44,14 @@ We also recommend reviewing [BPMN elements supported in Camunda Platform 8](/com
 
 [Execution Listeners](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#execution-listener) and [Task Listeners](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#task-listener) are areas in Camunda Platform 8 that are still under discussion. Currently, those use cases need to be solved slightly differently. Depending on your use case, the following Camunda Platform 8 features can be used:
 
-- Input and output mappings using FEEL
-- Tasklist API
-- History API
-- Exporters
+- [Input and output mappings using FEEL](/components/modeler/feel/what-is-feel.md)
+- [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md)
+- [Operate API](/apis-tools/operate-api/overview.md) including historical info on processes
+- [Exporters](/self-managed/zeebe-deployment/exporters/exporters.md)
 - Client interceptors
-- Gateway interceptors
-- Job workers on user tasks
-- Job workers on service tasks
+- [Gateway interceptors](/self-managed/zeebe-deployment/zeebe-gateway/interceptors.md)
+- [Job workers](/components/concepts/job-workers.md) on user tasks
+- [Job workers](/components/concepts/job-workers.md) on service tasks
 
 Expect to soon have a solution in Camunda Platform 8 for most of the problems that listeners solve. Still, it might be good practice to use as few listeners as possible, and especially don’t use them for data mapping as described below.
 
