@@ -552,6 +552,7 @@ The field flowNodeName is only returned if set in the BPMN diagram, so no flowNo
 ```
 
 The field `evaluatedInputs` is an array of objects, where each object has the following fields:
+
 ```
 {
  "id":    <string>
@@ -559,7 +560,9 @@ The field `evaluatedInputs` is an array of objects, where each object has the fo
  "value": <string>
 }
 ```
+
 The field `evaluatedOutputs` is an array of objects, where each object has the following fields:
+
 ```
 {
  "id":        <string>
@@ -569,6 +572,7 @@ The field `evaluatedOutputs` is an array of objects, where each object has the f
  "ruleIndex": <number>
 }
 ```
+
 The fields `evaluatedInputs` and `evaluatedOutputs` are not returned in search results, because they can be very large. They are only returned when requesting a specific decision instance by identifier.
 The fields `result`, `evaluatedInputs`, and `evaluatedOutputs` cannot be used to filter the search results.
 
