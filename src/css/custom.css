@@ -156,6 +156,10 @@ svg.implemented:hover [stroke="#333"] {
   text-align: center;
 }
 
+.badge {
+  margin-left: 5px;
+}
+
 .badge--beginner {
   background-color: #ff8b00;
   color: #ffffff;
