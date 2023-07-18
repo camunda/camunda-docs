@@ -244,7 +244,7 @@ import:
     # Whether to include metaData (firstName, lastName, email) when synchronizing users
     includeUserMetaData: true
     # Whether collection role cleanup should be performed
-    collectionRoleCleanupEnabled: false
+    collectionRoleCleanupEnabled: true
     # Cron expression for when the identity sync should run, defaults to every second hour.
     cronTrigger: '0 */2 * * *'
     # The max page size when multiple users or groups are iterated during the import.
