@@ -35,11 +35,9 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 
 3. Configure [JWT authorization](https://jwt.io/) if required in the **Authorization** section. The token should be in the _Authorization_ header of the request in the format of Bearer {JWT_TOKEN}
 
-- Set JWK url which is used as a well-known public url to fetch the JWKs.
-- Set JWT role property expression which will be evaluated against the content of the JWT to extract the list of roles.
-- Set required roles which will be used to validate if the JWT contains all required roles.
-
-![HTTP Webhook jwt](../img/connectors-http-webhook-jwt.png)
+- Set JWK url which is used as a well-known public url to fetch the [JWKs](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets).
+- Set JWT role property expression which will be evaluated against the content of the JWT to extract the list of roles. [See the example](#how-to-extract-roles-from-jwt-data).
+- Set Required roles which will be used to validate if the JWT contains all required roles. [See the example](#how-to-extract-roles-from-jwt-data).
 
 4. Configure **Activation Condition**. For example, given external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
 5. Use **Variable Mapping** to map specific fields from the request into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
@@ -108,6 +106,47 @@ Therefore, you would need to set the following:
 6. **Activation Condition**: `=(request.body.action = "opened")`.
 7. **Variable Mapping**: `={prUrl: request.body.pull_request.url}`.
 8. Click `Deploy`.
+
+### How to extract roles from JWT data
+
+#### Description
+
+In order to extract roles from the JWT payload, you have to specify the **JWT role property expression** using the FEEL expression syntax.
+It is important to note that this expression will be evaluated only against the JWT payload, therefore you cannot access process variables or secrets here.
+
+#### JWT payload and role property expression example
+
+Let's observe a typical JWT payload example below:
+
+```json
+{
+  "iss": "https://idp.local",
+  "aud": "api1",
+  "sub": "5be86359073c434bad2da3932222dabe",
+  "client_id": "my_client_app",
+  "exp": 1786822616,
+  "iat": 1686819016,
+  "jti": "114f8c84c53703ac2120d302611e358c",
+  "roles": ["admin", "superadmin"],
+  "admin": true
+}
+```
+
+To extract the roles you can set the **JWT role property expression** to:
+
+```feel
+if admin = true then ["admin"] else roles
+```
+
+In this particular case, the if statement is evaluated to true, so the extracted roles will be:
+
+```feel
+["admin"]
+```
+
+If you provide _["admin"]_ for **Required roles**, the message _can be correlated_.
+
+If you provide for example _["superadmin"]_ or _["admin","superadmin"]_ for **Required roles**, the message _can NOT be correlated_ and the connector will throw an exception.
 
 :::note
 For GitHub, there is a simplified [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md).
