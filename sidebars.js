@@ -34,6 +34,13 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        "guides/update-guide/810-to-820",
+        "guides/update-guide/800-to-810",
+        "guides/update-guide/130-to-800",
+        "guides/update-guide/120-to-130",
+        "guides/update-guide/110-to-120",
+        "guides/update-guide/100-to-110",
+        "guides/update-guide/026-to-100",
         {
           Connectors: [
             "guides/update-guide/connectors/introduction",
@@ -51,13 +58,6 @@ module.exports = {
         {
           Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
         },
-        "guides/update-guide/810-to-820",
-        "guides/update-guide/800-to-810",
-        "guides/update-guide/130-to-800",
-        "guides/update-guide/120-to-130",
-        "guides/update-guide/110-to-120",
-        "guides/update-guide/100-to-110",
-        "guides/update-guide/026-to-100",
       ],
     },
     "guides/migrating-from-cawemo",
@@ -156,6 +156,7 @@ module.exports = {
         },
         {
           "Desktop Modeler": [
+            "components/modeler/desktop-modeler/index",
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-cloud",
@@ -261,6 +262,7 @@ module.exports = {
             {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
                 "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
@@ -300,9 +302,19 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
               ],
             },
+            {
+              Slack: [
+                "components/connectors/out-of-the-box-connectors/slack",
+                "components/connectors/out-of-the-box-connectors/slack-inbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/sendgrid",
-            "components/connectors/out-of-the-box-connectors/slack",
-            "components/connectors/out-of-the-box-connectors/twilio",
+            {
+              Twilio: [
+                "components/connectors/out-of-the-box-connectors/twilio",
+                "components/connectors/out-of-the-box-connectors/twilio-webhook",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/uipath",
           ],
         },
@@ -332,12 +344,6 @@ module.exports = {
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",
             "components/zeebe/technical-concepts/protocols",
-          ],
-        },
-        {
-          "Open source community": [
-            "components/zeebe/open-source/community-contributions",
-            "components/zeebe/open-source/get-help-get-involved",
           ],
         },
       ],
