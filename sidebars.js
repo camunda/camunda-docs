@@ -91,6 +91,7 @@ module.exports = {
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/usage-alerts",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
