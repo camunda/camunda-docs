@@ -26,7 +26,7 @@ Take the following steps to create a new Connector template:
 
    The components of the editor interface are as follows:
 
-   - In the **breadcrumbs bar** on the top of the screen, you can rename your template by clicking the chevron next to the template name. Note that you cannot change the name of your template in the template JSON, but only with this action.
+   - In the **breadcrumbs bar** at the top of the screen, you can rename your template by clicking the chevron next to the template name. Note that you cannot change the name of your template in the template JSON, but only with this action.
    - On the left, you see the **template JSON editor**. Here, you define the actual template descriptor. The descriptor follows the [most recent element template schema](https://github.com/camunda/element-templates-json-schema). The editor is divided into two sections: a read-only section, containing the schema reference, the template name, the template id, and an editable section, where you can [define your template descriptor](/components/modeler/desktop-modeler/element-templates/defining-templates.md).
    - On the right, you see the live **Visual Preview**. The live preview shows how the properties panel will look when you apply the template to an element. It automatically updates on every valid change, and reflects the latest valid state of the template. The preview allows you to interactively check your template before publishing, enhancing its usability.
    - In the upper left, you can **Upload an icon** for your template. You can upload any image file you want, however we recommend to use squared SVG graphics. The icons get rendered 18x18 pixels in the element on the modeling canvas, and 32x32 pixels in the properties panel.
@@ -37,11 +37,13 @@ Take the following steps to create a new Connector template:
 
    ![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
-5. After publishing, the template can be applied to elements of all models in the same project.
+   When using the Camunda Platform 8 SaaS offering, as [organization owner](/components/console/manage-organization/manage-users.md#users) you can publish a template version to the organization making it available to all projects in the organization.
+   To do so, either click **Publish > Publish to organization** on the Connector template editor screen or promote a template via the [Version History](#versioning-connector-templates).
 
-   :::info Project scope
-   A Connector template is always associated with a project, hence only available in the project where you added it.
-   :::
+   ![Promoting a template](img/connector-templates/create-connector-template-4.png)
+
+5. After publishing, a template version can be applied to elements of all models in the same project or organization depending on its publication status.
+   You can check the publication status of template versions in the [Version History](#versioning-connector-templates).
 
 ### JSON editor features
 
