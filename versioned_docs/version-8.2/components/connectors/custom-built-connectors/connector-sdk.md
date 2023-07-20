@@ -67,7 +67,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-core</artifactId>
-  <version>0.8.1</version>
+  <version>0.11.2</version>
 </dependency>
 ```
 
@@ -76,7 +76,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-core:0.8.1'
+implementation 'io.camunda.connector:connector-core:0.11.2'
 ```
 
 </TabItem>
@@ -268,27 +268,21 @@ public class MyConnectorFunction implements OutboundConnectorFunction {
   @Override
   public Object execute(OutboundConnectorContext context) throws Exception {
     // (1)
-    var connectorRequest = context.getVariablesAsType(MyConnectorRequest.class);
-
+    var connectorRequest = context.bindVariables(MyConnectorRequest.class);
     // (2)
-    context.validate(connectorRequest);
-
-    // (3)
-    context.replaceSecrets(connectorRequest);
-
     return executeConnector(connectorRequest);
   }
 
   private MyConnectorResult executeConnector(final MyConnectorRequest connectorRequest) {
     LOGGER.info("Executing my connector with request {}", connectorRequest);
     String message = connectorRequest.getMessage();
-    // (4)
+    // (3)
     if (message != null && message.toLowerCase().startsWith("fail")) {
       throw new ConnectorException("FAIL", "My property started with 'fail', was: " + message);
     }
     var result = new MyConnectorResult();
 
-    // (5)
+    // (4)
     result.setMyProperty("Message received: " + message);
     return result;
   }
@@ -299,17 +293,16 @@ The `execute` method receives all necessary environment data via the `OutboundCo
 The Connector runtime environment initializes the context and allows the following to occur:
 
 - Fetch and deserialize the input data as shown in **(1)**. See the [input data](#outbound-connector-input-data) section for details.
-- Validate the created request object as shown in **(2)**. See the [validation](#validation) section for details.
-- Replace secrets in the request object as shown in **(3)**. See the [secrets](#secrets) section for details.
+- Execute the Connector's business logic as shown in **(2)**.
 
 If the Connector handles exceptional cases, it can use any exception to express technical errors. If a technical
 error should be associated with a specific error code, the Connector can throw a `ConnectorException` and define
-a `code` as shown in **(4)**.
+a `code` as shown in **(3)**.
 We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
 by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.
 
 If the Connector has a result to return, it can create a new result data object and set
-its properties as shown in **(5)**.
+its properties as shown in **(4)**.
 
 For best interoperability, Connector functions provide default meta-data via the `@OutboundConnector` annotation.
 Connector runtime environments can use this data to auto-discover provided Connector runtime behavior.
@@ -321,19 +314,20 @@ and expand from there.
 
 The input data of a Connector is provided by the process instance that executes the Connector.
 You can either fetch this data as a raw JSON string using the context's `getVariables` method,
-or deserialize the data into your own request object directly with the `getVariablesAsType`
+or deserialize the data into your own request object directly with the `bindVariables`
 method shown in **(1)**.
 
-Using `getVariablesAsType` will attempt to deserialize the JSON string containing the input
-data into Java objects. This deserialization depends on the Connector runtime environment your
-Connector function runs in.
+Using `bindVariables` will attempt to replace Connector secrets, deserialize the JSON string 
+containing the input data into Java objects, and perform the input validation.
+This deserialization depends on the Connector runtime environment your Connector function runs in.
 
 Thus, use this deserialization approach with caution.
 While it works reliably for many input data types like string, boolean, integer, and nested
 objects, you might want to consider deserializing your Connector's input data in a custom fashion
-using `getVariables` and a library like [Gson](https://github.com/google/gson).
+using `getVariables` and a library like [Jackson](https://github.com/FasterXML/jackson)or 
+[Gson](https://github.com/google/gson).
 
-The `getVariablesAsType` method and tools like Gson can properly reflect nested data
+The `bindVariables` method and tools like Jackson or Gson can properly reflect nested data
 objects. You can define nested structures by referencing other Java classes as attributes.
 Looking at the `authentication` data input example described in the [Connector template](#outbound-connector-element-template),
 you can create the following input data objects to reflect the structure properly:
@@ -464,10 +458,7 @@ public class MyConnectorExecutable implements InboundConnectorExecutable {
 
     @Override
     public void activate(InboundConnectorContext connectorContext) {
-        MyConnectorProperties props = connectorContext.getPropertiesAsType(MyConnectorProperties.class);
-
-        connectorContext.replaceSecrets(props);
-        connectorContext.validate(props);
+        MyConnectorProperties props = connectorContext.bindProperties(MyConnectorProperties.class);
 
         this.connectorContext = connectorContext;
 
@@ -497,9 +488,9 @@ The implementation must release all resources used by the subscription.
 
 #### Validation
 
-Validating input data is a common task in a Connector function. The SDK provides an
-API to help you ensure the data conforms to your Connector's input requirements. A
-default implementation of the SDK's core validation API is provided in a separate,
+Validating input data is a common task in a Connector function. The SDK provides 
+an out-of-the-box solution for input validation.
+A default implementation of the SDK's core validation API is provided in a separate,
 optional artifact `connector-validation`. If you want to use validation in your
 Connector, add the following dependency to your project:
 
@@ -516,7 +507,7 @@ Connector, add the following dependency to your project:
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-validation</artifactId>
-  <version>0.8.1</version>
+  <version>0.11.2</version>
 </dependency>
 ```
 
@@ -525,33 +516,20 @@ Connector, add the following dependency to your project:
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-validation:0.8.1'
+implementation 'io.camunda.connector:connector-validation:0.11.2'
 ```
 
 </TabItem>
 </Tabs>
 
-To initiate the validation from the Connector function, use the `OutboundConnectorContext`
-object's `validate` method as shown in the [runtime logic](#runtime-logic) section:
-
-```java
-...
-  @Override
-  public Object execute(OutboundConnectorContext context) throws Exception {
-    ...
-    // (2)
-    context.validate(connectorRequest);
-    ...
-  }
-...
-```
+Validation is performed automatically if you use the `bindVariables` / `bindProperties` methods.
 
 This instructs the context to prepare a validator that is provided by an implementation
 of the `ValidationProvider` interface. The `connector-validation` artifact brings along
 such an implementation. It uses the [Jakarta Bean Validation API](https://beanvalidation.org/)
 together with [Hibernate Validator](https://hibernate.org/validator/).
 
-To validate your input object `connectorRequest` using the API, you need to annotate the input's
+For your input object `connectorRequest` to be validated, you need to annotate the input's
 attributes to define your requirements:
 
 ```java
@@ -795,7 +773,7 @@ Connectors that require confidential information to connect to external systems 
 to manage those securely. As described in the
 [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md), secrets can be
 controlled in a secure location and referenced in a Connector's properties using a placeholder
-pattern `secrets.*`. To make this mechanism as robust as possible, secret handling comes with
+pattern `{{secrets.*}}`. To make this mechanism as robust as possible, secret handling comes with
 the Connector SDK out of the box. That way, all Connectors can use the same standard way of
 handling secrets in input data.
 
@@ -804,43 +782,22 @@ in the environments that handle Connector invocation. We do not pass secrets int
 Connector function in clear text but only as placeholders that you can replace from
 within the Connector function.
 
-To initiate the secret replacement from the Connector function,
-use the `OutboundConnectorContext` object's `replaceSecrets` method as shown in the
-[runtime logic](#runtime-logic) section:
+Secrets are replaced automatically in the Connector input when you use the variable access methods
+of the `OutboundConnectorContext` or properties access methods of the `InboundConnectorContext`.
+You will always receive inputs with secrets replaced.
 
-```java
-...
-  @Override
-  public Object execute(OutboundConnectorContext context) throws Exception {
-    ...
-    // (3)
-    context.replaceSecrets(connectorRequest);
-    ...
-  }
-...
-```
-
-This will instruct the context to search for and replace secret placeholders in the object passed to it.
-The secret store present in the Connector runtime environment that invokes the Connector function
-takes care of that. Every environment can define its own way of providing such a secret store. Consult
-the [runtime environments](#runtime-environments) section to learn more about them.
-
-To replace secrets in the `connectorRequest` using the API, you need to annotate the object's
-attributes that can hold secrets with `@Secret`. This instructs the SDK to search for and replace
-secrets in the annotated properties. You can use the `@Secret` annotation on String fields
-and container types. Using the annotation on container objects will lead to
-graph traversal until either no further matching annotation is found or the annotated property
-is of type String. Annotating properties that are neither a String nor a container will lead to runtime exceptions.
+The Runtime automatically replaces secrets in String fields or in container types. Using the
+placeholder pattern `{{secrets.*}}` in a String field will replace the placeholder with the secret
+value. Using the placeholder pattern in a container type will replace the placeholder in all
+String fields of the container type.
 
 ```java
 package io.camunda.connector;
 
-import io.camunda.connector.api.annotation.Secret;
-
 public class MyConnectorRequest {
 
   private String message;
-  @Secret private Authentication authentication;
+  private Authentication authentication;
 }
 ```
 
@@ -852,12 +809,12 @@ import io.camunda.connector.api.annotation.Secret;
 public class Authentication {
 
   private String user;
-  @Secret private String token;
+  private String token;
 }
 ```
 
-Using this approach, you can replace secrets in your whole input data structure with one
-initial call from the central Connector function.
+In the input model above, the Runtime will attempt to find and replace secrets in all String fields 
+of the `Authentication` and `MyConnectorRequest` classes.
 
 ## Testing
 
@@ -897,7 +854,7 @@ void shouldReplaceTokenSecretWhenReplaceSecrets() {
     .secret("MY_TOKEN", "token value")
     .build();
   // when
-  context.replaceSecrets(input);
+  var variables = context.bindVariables(MyConnectorType.class);
   // then
   assertThat(input)
     .extracting("authentication")
