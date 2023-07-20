@@ -317,14 +317,14 @@ You can either fetch this data as a raw JSON string using the context's `getVari
 or deserialize the data into your own request object directly with the `bindVariables`
 method shown in **(1)**.
 
-Using `bindVariables` will attempt to replace Connector secrets, deserialize the JSON string 
+Using `bindVariables` will attempt to replace Connector secrets, deserialize the JSON string
 containing the input data into Java objects, and perform the input validation.
 This deserialization depends on the Connector runtime environment your Connector function runs in.
 
 Thus, use this deserialization approach with caution.
 While it works reliably for many input data types like string, boolean, integer, and nested
 objects, you might want to consider deserializing your Connector's input data in a custom fashion
-using `getVariables` and a library like [Jackson](https://github.com/FasterXML/jackson)or 
+using `getVariables` and a library like [Jackson](https://github.com/FasterXML/jackson)or
 [Gson](https://github.com/google/gson).
 
 The `bindVariables` method and tools like Jackson or Gson can properly reflect nested data
@@ -488,7 +488,7 @@ The implementation must release all resources used by the subscription.
 
 #### Validation
 
-Validating input data is a common task in a Connector function. The SDK provides 
+Validating input data is a common task in a Connector function. The SDK provides
 an out-of-the-box solution for input validation.
 A default implementation of the SDK's core validation API is provided in a separate,
 optional artifact `connector-validation`. If you want to use validation in your
@@ -813,7 +813,7 @@ public class Authentication {
 }
 ```
 
-In the input model above, the Runtime will attempt to find and replace secrets in all String fields 
+In the input model above, the Runtime will attempt to find and replace secrets in all String fields
 of the `Authentication` and `MyConnectorRequest` classes.
 
 ## Testing
