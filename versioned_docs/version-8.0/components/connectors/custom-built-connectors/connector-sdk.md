@@ -38,7 +38,7 @@ This section outlines how to set up a Connector project, test it, and run it loc
 ### Setup
 
 When developing a new **Connector**, we recommend using one of our custom Connector
-templates for custom [outbound](https://github.com/camunda/connector-template-outbound) connectors.
+templates for custom [outbound](https://github.com/camunda/connector-template-outbound) Connectors.
 These templates are [Maven](https://maven.apache.org/)-based Java projects, and can be used in various
 ways such as:
 
