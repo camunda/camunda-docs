@@ -10,12 +10,15 @@ A set of checkboxes providing data multi-selection for small datasets.
 
 ### Configurable properties
 
-- **Field label**: Label displayed on top of the checklist.
-- **Field description**: Description provided below the checklist.
+- **Field label**: Label displayed on top of the checklist. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field description**: Description provided below the checklist. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Options source**: Checklists can be configured with an options source defining the individual choices your user can make, see [options source docs](../configuration/forms-config-options.md).
+- **Read only**: Makes the checklist read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Disabled**: Disables the checklist, for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the checklist.
+- **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
+  - **Required**: Checklist must contain a value.
 - **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
 
 ### Datatypes

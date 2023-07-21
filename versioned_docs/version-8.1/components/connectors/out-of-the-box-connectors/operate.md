@@ -5,7 +5,7 @@ sidebar_label: Camunda Operate Connector
 description: Fetch process execution data from Camunda Operate, a monitoring solution for Camunda Platform 8.
 ---
 
-The **Camunda Operate Connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process.
+The **Camunda Operate Connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process to fetch process execution data.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ This Connector is compatible with both Camunda Platform 8 SaaS and Camunda Platf
 
 :::note
 Password authentication with Operate is currently not supported.
-If you are using Camunda Platform 8 Self-Managed, you can only authenticate using [Identity](self-managed/operate-deployment/operate-authentication.md#identity).
+If you are using Camunda Platform 8 Self-Managed, you can only authenticate using [Identity](/self-managed/operate-deployment/operate-authentication.md#identity).
 :::
 
 You also need to obtain the Operate API client credentials. Follow the links below to learn more about API client configuration.
@@ -23,13 +23,13 @@ You also need to obtain the Operate API client credentials. Follow the links bel
 - [Authentication with a Self-Managed Operate deployment](/self-managed/operate-deployment/operate-authentication.md#identity)
 
 :::note
-It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Operate Connector task
 
 To use the **Operate Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu.
-Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ## Enter your cluster information
 

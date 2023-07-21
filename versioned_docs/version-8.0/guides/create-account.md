@@ -9,7 +9,7 @@ description: "Set up your Camunda Platform 8 account to get started."
 
 Create a Camunda Platform 8 account so you can create clusters, deploy processes, and create a new instance.
 
-Visit [camunda.io/signup](https://accounts.cloud.camunda.io/signup?utm_source=docs.camunda.io&utm_medium=referral) and view the **Sign Up** screen:
+Visit [camunda.io/signup](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) and view the **Sign Up** screen:
 
 ![signup](./img/signup.png)
 

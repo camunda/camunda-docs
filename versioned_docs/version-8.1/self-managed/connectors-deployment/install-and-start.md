@@ -49,6 +49,7 @@ at `connectors/{connector name}/element-templates`:
 | Google Maps Platform Connector | [Camunda Platform Self-Managed Free Edition] |
 | GraphQL Connector              | [Camunda Platform Self-Managed Free Edition] |
 | HTTP Webhook Connector         | [Camunda Platform Self-Managed Free Edition] |
+| Kafka Consumer Connector       | [Camunda Platform Self-Managed Free Edition] |
 | Kafka Producer Connector       | [Camunda Platform Self-Managed Free Edition] |
 | Microsoft Teams Connector      | [Camunda Platform Self-Managed Free Edition] |
 | OpenAI Connector               | [Camunda Platform Self-Managed Free Edition] |

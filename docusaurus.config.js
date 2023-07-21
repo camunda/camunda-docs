@@ -56,14 +56,6 @@ module.exports = {
   ],
   scripts: [],
   themeConfig: {
-    announcementBar: {
-      id: "camunda8",
-      content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
-      backgroundColor: "#14D890",
-      textColor: "#000",
-      isCloseable: true,
-    },
     prism: {
       additionalLanguages: ["java", "protobuf"],
     },
@@ -77,6 +69,21 @@ module.exports = {
         {
           type: "docsVersionDropdown",
           position: "left",
+          dropdownItemsAfter: [
+            {
+              type: "html",
+              value: '<hr class="dropdown-separator">',
+            },
+            {
+              type: "html",
+              className: "dropdown-unsupported-versions",
+              value: "<b>Unsupported versions</b>",
+            },
+            ...["1.0", "0.26", "0.25"].map((version) => ({
+              label: version,
+              href: `https://unsupported.docs.camunda.io/${version}/`,
+            })),
+          ],
         },
         {
           type: "doc",
@@ -127,7 +134,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://accounts.cloud.camunda.io/signup?uc=signup&utm_source=docs.camunda.io&utm_medium=referral",
+              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Contact",
@@ -139,16 +146,7 @@ module.exports = {
           title: "Community",
           items: [
             {
-              label: "Slack",
-              href: "https://camunda.com/slack",
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/camunda",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/camunda/camunda-platform-docs",
+              html: `<a href="https://camunda.com/slack" target="_blank" rel="noreferrer noopener"><img src= "/img/Slack-mark-white-RGB.png" alt="Camunda on Slack" class="footer-logos" /></a> <a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
             },
             {
               label: "Forum",
@@ -181,7 +179,7 @@ module.exports = {
             },
             {
               label: "Blog",
-              href: "https://camunda.com/blog/category/camunda-cloud/",
+              href: "https://camunda.com/blog/tag/camunda-platform-8/",
             },
             {
               label: "Release cycle",
@@ -194,7 +192,7 @@ module.exports = {
           items: [
             {
               label: "Privacy Statement",
-              href: "https://camunda.com/legal/privacy/",
+              href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
               html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
@@ -244,11 +242,40 @@ module.exports = {
           customCss: require.resolve("./src/css/custom.css"),
         },
         sitemap: {
-          //cacheTime: 600 * 1000, // 600 sec - cache purge period
           changefreq: "weekly",
           priority: 0.5,
+          ignorePatterns: [
+            "/docs/**/tags/**",
+            "/docs/next/**",
+            "/docs/1.1/**",
+            "/docs/1.2/**",
+            "/docs/1.3/**",
+            "/docs/8.0/**",
+            "/docs/8.1/**",
+            "/optimize/3.7.0/**",
+            "/optimize/3.8.0/**",
+            "/optimize/3.9.0/**",
+            "/optimize/next/**",
+          ],
         },
       },
     ],
   ],
+  webpack: {
+    jsLoader: (isServer) => ({
+      loader: require.resolve("swc-loader"),
+      options: {
+        jsc: {
+          parser: {
+            syntax: "typescript",
+            tsx: true,
+          },
+          target: "es2017",
+        },
+        module: {
+          type: isServer ? "commonjs" : "es6",
+        },
+      },
+    }),
+  },
 };

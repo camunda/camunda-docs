@@ -2,7 +2,7 @@
 id: index
 title: "Java client"
 sidebar_label: "Quick reference"
-description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and use Zeebe Process Test to unit test your Camunda Platform 8 BPMN processes."
+description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more."
 ---
 
 ## Dependencies
@@ -50,7 +50,7 @@ In Java code, instantiate the client as follows:
             .build();
 
     try (ZeebeClient client = ZeebeClient.newClientBuilder()
-            .gatewayAddress(zeebeAPI)
+            .gatewayAddress(zeebeAddress)
             .credentialsProvider(credentialsProvider)
             .build()) {
       client.newTopologyRequest().send().join();

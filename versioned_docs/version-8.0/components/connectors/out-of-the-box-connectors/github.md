@@ -5,7 +5,7 @@ sidebar_label: GitHub Connector
 description: Manage GitHub issues and releases from your BPMN process.
 ---
 
-The **GitHub Connector** allows you to connect your BPMN service with [GitHub](https://github.com/).
+The **GitHub Connector** is an outbound Connector that allows you to connect your BPMN service with [GitHub](https://github.com/) to manage [GitHub](https://github.com/) issues and releases.
 
 ## Prerequisites
 
@@ -13,14 +13,14 @@ To use the **GitHub Connector**, you must have a GitHub instance and an [access 
 
 :::note
 It is highly recommended not to expose your GitHub access token credentials as plain text. Instead, use Camunda secrets.
-See our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+See our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a GitHub Connector task
 
-To use the **GitHub Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+To use the **GitHub Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
-## Provide your access token
+## Authentication
 
 In the **Authentication** section, provide a **GitHub access token**.
 
@@ -206,5 +206,5 @@ The **GitHub Connector** currently supports the following operations.
 
 ## Handle Connector response
 
-The **GitLab Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
-handling response is still applicable [as described](./rest.md#response).
+The **GitHub Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
+handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

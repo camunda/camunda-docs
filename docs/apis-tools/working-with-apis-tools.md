@@ -9,7 +9,7 @@ import DocCardList from '@theme/DocCardList';
 
 This section steps through two concepts for integration:
 
-- **Control your Camunda Platform 8 process automation** by [deploying processes](/components/modeler/web-modeler/save-and-deploy.md), [starting process instances](/components/modeler/web-modeler/start-instance.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
+- **Control your Camunda Platform 8 process automation** by [deploying processes](/components/modeler/web-modeler/run-or-publish-your-process.md#deploy-a-process), [starting process instances](/components/modeler/web-modeler/run-or-publish-your-process.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
 - **Interact with the Camunda Platform 8 ecosystem** by learning about [Camunda Components](/components/components-overview.md) and their APIs to communicate with your cluster, search, get and change data, create Cloud API clients, and more.
 
 :::note
@@ -104,3 +104,9 @@ Watch and fork your favorite collections and APIs on the [Camunda Team](https://
 :::note
 Collections and APIs are manually updated and not all API functionality may be available. For the most up-to-date API functionality, see the [API reference docs](/apis-tools/working-with-apis-tools.md#api-reference).
 :::
+
+### Community SDKs
+
+In addition to APIs and clients, the Camunda Developer Experience team is looking for feedback on popular community clients turned SDKs. While these are currently on the Camunda Community Hub, we are actively iterating and evaluating feedback to fully support them.
+
+- [NodeJS SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)

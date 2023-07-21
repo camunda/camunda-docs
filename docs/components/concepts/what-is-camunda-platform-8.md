@@ -2,6 +2,19 @@
 id: what-is-camunda-platform-8
 title: "What is Camunda Platform 8?"
 description: "Camunda Platform 8 orchestrates complex business processes that span people, systems, and devices."
+keywords:
+  [
+    "workflow process",
+    "workflow engine",
+    "process management software",
+    "bpm business process management",
+    "business process automation",
+    "camunda software",
+    "camunda cloud",
+    "process automation platform",
+    "process automation software",
+    "process orchestration",
+  ]
 ---
 
 [Camunda Platform 8](https://camunda.io) orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](../../guides/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.

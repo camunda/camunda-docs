@@ -31,3 +31,7 @@ The view mode also provides you with different kinds of actions, such as:
   ```
 
 - Alerts: If the created report is inside a collection, you can use the **Alert** dropdown to create and manage Alerts for that report. Since alerts can only be created on reports that have a number visualization, the **Alerts** dropdown will be only be visible for such reports.
+
+- Description: If a Report has a description, the description is displayed below the Report name. The **More/Less** button can show or hide the text for descriptions longer than a single line.
+
+![report description](./img/report-showMoreDescription.png)

@@ -5,7 +5,7 @@ sidebar_label: EasyPost Connector
 description: Allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments.
 ---
 
-The **EasyPost Connector** allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost Service](https://www.easypost.com/) from your BPMN process.
+The **EasyPost Connector** is an outbound Connector that allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost Service](https://www.easypost.com/) from your BPMN process.
 
 ## Prerequisites
 
@@ -13,14 +13,14 @@ To use the **EasyPost Connector**, sign up for an EasyPost account, enter your c
 
 :::note
 It is highly recommended not to expose your EasyPost API key as plain text. Instead, use Camunda secrets.
-See our documentation on [managing secrets](../../../components/console/manage-clusters/manage-secrets.md) to learn more.
+See our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an EasyPost Connector task
 
-To use the **EasyPost Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide to using Connectors](../use-connectors.md) to learn more.
+To use the **EasyPost Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
-## Fill authentication
+## Authentication
 
 In the **Authentication** section, provide an **API key**, which you can find in the [API Key dashboard](https://www.easypost.com/account/api-keys).
 
@@ -104,4 +104,4 @@ FEEL expression:
 ## Handle Connector response
 
 The **EasyPost Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
-handling response is still applicable [as described](./rest.md#response).
+handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).

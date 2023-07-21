@@ -4,6 +4,20 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda Platform 8.0
+
+Release date: 12th of April 2022
+
+End of maintenance: 11th of October 2023
+
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.0.0)
+[Release blog](https://camunda.com/blog/2022/04/camunda-platform-8-0-released-whats-new/)
+
+### Camunda Platform 8.0.15 release is skipped
+
+The `Camunda Platform 8.0.15` release pipeline lead to corrupted `Zeebe 8.0.15` artifacts getting published.
+The whole [Camunda Platform 8.0.15 release](https://github.com/camunda/camunda-platform/releases/tag/8.0.15) was thus skipped and updates from `Camunda Platform 8.0.14` should go straight to `Camunda Platform 8.0.16`.
+
 ## Deprecated in 8.0
 
 The [DeployProcess RPC](/apis-tools/grpc.md#deployprocess-rpc) was deprecated in 8.0.

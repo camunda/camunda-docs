@@ -77,7 +77,8 @@ POST `/api/public/import?collectionId=123`
         "id": "61ae2232-51e1-4c35-b72c-c7152ba264f9",
         "exportEntityType": "single_process_report",
         "name": "Number: Process instance duration",
-        "sourceIndexVersion": 8,
+        "description": "This report shows the average instance duration",
+        "sourceIndexVersion": 11,
         "collectionId": null,
         "data": {...}
     },
@@ -85,7 +86,8 @@ POST `/api/public/import?collectionId=123`
         "id": "b0eb845-e8ed-4824-bd85-8cd69038f2f5",
         "exportEntityType": "dashboard",
         "name": "Dashboard 1",
-        "sourceIndexVersion": 5,
+        "description": "This dashboard displays reports relating to process durations",
+        "sourceIndexVersion": 8,
         "reports": [
             {
                 "id": "61ae2232-51e1-4c35-b72c-c7152ba264f9",

@@ -19,4 +19,4 @@ The GraphQL and REST APIs are currently available, but the GraphQL API will be d
 we recommend using the REST API to ensure long-term compatibility.
 :::
 
-Tasklist is also available for production use (with support) in the Camunda Platform 8 offering. To try out Tasklist in Camunda Platform 8, sign up [here](https://accounts.cloud.camunda.io/signup).
+Tasklist is also available for production use (with support) in the Camunda Platform 8 offering. To try out Tasklist in Camunda Platform 8, sign up [here](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).

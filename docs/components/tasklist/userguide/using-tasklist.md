@@ -81,33 +81,3 @@ To add a new variable, click **Add Variable**.
 You will now see the completed task by selecting the **Completed** task list:
 
 ![tasklist-task-completed](img/tasklist-task-completed_light.png)
-
-### Processes
-
-:::note
-This tab is currently only available for Self-Managed environments or an alpha cluster with Camunda Platform.
-:::
-
-It is possible to start processes by demand using Tasklist. To do this, click **Processes** in the top menu. All the processes you have access to start will be listed in the **Processes** page.
-
-![tasklist-processes](img/tasklist-processes.png)
-
-On the **Search** checkbox, it's possible to filter the processes. Start typing the process name and the list will be updated.
-
-![tasklist-processes-search](img/tasklist-processes-search.png)
-
-To start a process, click **Start Process** on the process you want to start.
-
-![tasklist-processes-search](img/tasklist-processes-start.png)
-
-Tasklist will then wait for the process to be executed. If the process generates a task, you will be redirected to the generated task.
-
-### I'm not seeing a process
-
-There could be multiple reasons why you are not seeing any process in the **Processes** tab:
-
-- There is no process deployed to your environment.
-- Your user doesn't have permission to see any process. Permissions are managed in [Identity](docs/self-managed/identity/what-is-identity.md) to allow users access to processes.
-- You are in a SaaS environment.
-
-For all the above scenarios, contact your administrator to understand why no processes are displayed.

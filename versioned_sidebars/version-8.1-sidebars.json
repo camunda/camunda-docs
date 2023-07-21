@@ -26,6 +26,12 @@
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        "guides/update-guide/800-to-810",
+        "guides/update-guide/130-to-800",
+        "guides/update-guide/120-to-130",
+        "guides/update-guide/110-to-120",
+        "guides/update-guide/100-to-110",
+        "guides/update-guide/026-to-100",
         {
           "Connectors": [
             "guides/update-guide/connectors/introduction",
@@ -35,15 +41,11 @@
             "guides/update-guide/connectors/040-to-050",
             "guides/update-guide/connectors/050-to-060",
             "guides/update-guide/connectors/060-to-070",
-            "guides/update-guide/connectors/070-to-080"
+            "guides/update-guide/connectors/070-to-080",
+            "guides/update-guide/connectors/080-to-090",
+            "guides/update-guide/connectors/090-to-0100"
           ]
-        },
-        "guides/update-guide/800-to-810",
-        "guides/update-guide/130-to-800",
-        "guides/update-guide/120-to-130",
-        "guides/update-guide/110-to-120",
-        "guides/update-guide/100-to-110",
-        "guides/update-guide/026-to-100"
+        }
       ]
     },
     "guides/migrating-from-cawemo",
@@ -128,8 +130,7 @@
             {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
-                "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
-                "components/modeler/web-modeler/advanced-modeling/manage-connector-templates"
+                "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking"
               ]
             }
           ]
@@ -291,37 +292,90 @@
       ],
       "Connectors": [
         "components/connectors/introduction-to-connectors",
-        "components/connectors/use-connectors",
+        "components/connectors/connector-types",
+        {
+          "Use Connectors": [
+            "components/connectors/use-connectors/index",
+            "components/connectors/use-connectors/inbound",
+            "components/connectors/use-connectors/outbound"
+          ]
+        },
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
             "components/connectors/out-of-the-box-connectors/asana",
-            "components/connectors/out-of-the-box-connectors/automation-anywhere",
-            "components/connectors/out-of-the-box-connectors/aws-sns",
-            "components/connectors/out-of-the-box-connectors/aws-sqs",
-            "components/connectors/out-of-the-box-connectors/aws-lambda",
-            "components/connectors/out-of-the-box-connectors/operate",
+            {
+              "AWS": [
+                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/aws-sns",
+                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
+                "components/connectors/out-of-the-box-connectors/aws-sqs",
+                "components/connectors/out-of-the-box-connectors/aws-sqs-inbound"
+              ]
+            },
+            "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            "components/connectors/out-of-the-box-connectors/github",
-            "components/connectors/out-of-the-box-connectors/github-webhook",
+            {
+              "GitHub": [
+                "components/connectors/out-of-the-box-connectors/github",
+                "components/connectors/out-of-the-box-connectors/github-webhook"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/gitlab",
-            "components/connectors/out-of-the-box-connectors/googledrive",
-            "components/connectors/out-of-the-box-connectors/google-maps-platform",
-            "components/connectors/out-of-the-box-connectors/graphql",
-            "components/connectors/out-of-the-box-connectors/http-webhook",
-            "components/connectors/out-of-the-box-connectors/kafka",
+            {
+              "Google": [
+                "components/connectors/out-of-the-box-connectors/googledrive",
+                "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets"
+              ]
+            },
+            {
+              "Kafka": [
+                "components/connectors/out-of-the-box-connectors/kafka",
+                "components/connectors/out-of-the-box-connectors/kafka-inbound"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
+            "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
-            "components/connectors/out-of-the-box-connectors/rabbitmq",
-            "components/connectors/out-of-the-box-connectors/rest",
+            {
+              "RabbitMQ": [
+                "components/connectors/out-of-the-box-connectors/rabbitmq",
+                "components/connectors/out-of-the-box-connectors/rabbitmq-inbound"
+              ]
+            },
+            {
+              "Slack": [
+                "components/connectors/out-of-the-box-connectors/slack",
+                "components/connectors/out-of-the-box-connectors/slack-inbound"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/sendgrid",
-            "components/connectors/out-of-the-box-connectors/slack",
+            {
+              "Twilio": [
+                "components/connectors/out-of-the-box-connectors/twilio",
+                "components/connectors/out-of-the-box-connectors/twilio-webhook"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/uipath"
-          ],
-          "Custom Connectors": [
-            "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-sdk"
+          ]
+        },
+        {
+          "Protocol Connectors": [
+            "components/connectors/protocol/rest",
+            "components/connectors/protocol/graphql",
+            "components/connectors/protocol/http-webhook"
+          ]
+        },
+        "components/connectors/manage-connector-templates",
+        {
+          "Building custom Connectors": [
+            "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/connector-templates"
           ]
         }
       ],
@@ -336,12 +390,6 @@
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",
             "components/zeebe/technical-concepts/protocols"
-          ]
-        },
-        {
-          "Open source community": [
-            "components/zeebe/open-source/community-contributions",
-            "components/zeebe/open-source/get-help-get-involved"
           ]
         }
       ],

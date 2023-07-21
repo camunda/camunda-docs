@@ -15,12 +15,13 @@ By default, user storage in Elasticsearch is enabled.
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
 
-The **username**, **password**, and **roles** for one user may be set in application.yml:
+The **userId**, **password**, and **roles** for one user may be set in application.yml:
 
 ```
 camunda.tasklist:
-  username: anUser
+  userId: aUser
   password: aPassword
+  displayName: aDisplayName
   roles:
     - OWNER
     - OPERATOR
@@ -30,9 +31,25 @@ On Tasklist startup, the user is created if they did not exist before.
 
 By default, three users are created:
 
-- Role `OWNER` with **userId**/**displayName**/**password** `demo`/`demo`/`demo`.
-- Role `USER` with **userId**/**displayName**/**password** `view`/`view`/`view`.
-- Role `OPERATOR` with **userId**/**displayName**/**password** `act`/`act`/`act`/.
+- Role `OWNER` with **userId**/**displayName**/**password** `demo`/`demo`/`demo`. To change userId, password, displayName or role for user `demo` use the above configuration.
+
+- Role `USER` with **userId**/**displayName**/**password** `view`/`view`/`view`. To change userId, displayName or password for this user the below configuration can be used:
+
+```
+camunda.tasklist:
+  readerUserId: aUser
+  readerPassword: aPassword
+  readerDisplayName: aDisplayName
+```
+
+- Role `OPERATOR` with **userId**/**displayName**/**password** `act`/`act`/`act`/. To change userId, displayName or password for this user the below configuration can be used:
+
+```
+camunda.tasklist:
+  operatorUserId: aUser
+  operatorPassword: aPassword
+  operatorDisplayName: aDisplayName
+```
 
 More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. The password must be encoded with a strong BCrypt hashing function.
 
@@ -54,17 +71,18 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 
 Identity requires the following parameters:
 
-| Parameter name                                       | Description                                        | Example value                                                                     |
-| ---------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------- |
-| camunda.tasklist.identity.issuerUrl                  | URL of issuer (Identity)                           | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.tasklist.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                   | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.tasklist.identity.clientId                   | Similar to a username for the application          | tasklist                                                                          |
-| camunda.tasklist.identity.clientSecret               | Similar to a password for the application          | XALaRPl...s7dL7                                                                   |
-| camunda.tasklist.identity.audience                   | Audience for Tasklist                              | tasklist-api                                                                      |
-| camunda.tasklist.identity.baseUrl                    | Base URL for Identity                              | http://localhost:8084                                                             |
-| camunda.tasklist.identity.resourcePermissionsEnabled | Enable/disable Resource Permissions                | true                                                                              |
-| spring.security.oauth2.resourceserver.jwt.issueruri  | Token issuer URI                                   | http://localhost:18080/auth/realms/camunda-platform                               |
-| spring.security.oauth2.resourceserver.jwt.jwkseturi  | Complete URI to get public keys for JWT validation | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
+| Parameter name                                       | Description                                                                                                                                   | Example value                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| camunda.tasklist.identity.issuerUrl                  | URL of issuer (Identity)                                                                                                                      | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.tasklist.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.tasklist.identity.clientId                   | Similar to a username for the application                                                                                                     | tasklist                                                                          |
+| camunda.tasklist.identity.clientSecret               | Similar to a password for the application                                                                                                     | XALaRPl...s7dL7                                                                   |
+| camunda.tasklist.identity.audience                   | Audience for Tasklist                                                                                                                         | tasklist-api                                                                      |
+| camunda.tasklist.identity.baseUrl                    | Base URL for Identity                                                                                                                         | http://localhost:8084                                                             |
+| camunda.tasklist.identity.redirectRootUrl            | Root URL to redirect users to after successful authentication. If the property is not provided, it will be derived from the incoming request. | http://localhost:8082                                                             |
+| camunda.tasklist.identity.resourcePermissionsEnabled | Enable/disable Resource Permissions                                                                                                           | true                                                                              |
+| spring.security.oauth2.resourceserver.jwt.issueruri  | Token issuer URI                                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
+| spring.security.oauth2.resourceserver.jwt.jwkseturi  | Complete URI to get public keys for JWT validation                                                                                            | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
 ### Resource-based permissions
 
@@ -91,8 +109,8 @@ Be aware a JWT token is intended to be used for M2M communication and is therefo
 
 **Example:**
 
-1. [Add an application in Identity](/self-managed/identity/user-guide/adding-an-application.md).
-2. [Add permissions to an application](/self-managed/identity/user-guide/assigning-a-permission-to-an-application.md) for Tasklist API.
+1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for Tasklist API.
 3. Obtain a token to access the GraphQL API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.

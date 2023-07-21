@@ -59,7 +59,9 @@ For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variab
 | `IDENTITY_DATABASE_PASSWORD` | The password of a user with access to the database |
 
 :::note
-There are no default values for the variables above.
+There are no default values for the variables above. See
+[supported environments](/reference/supported-environments.md#camunda-platform-8-self-managed) for a list of
+supported databases.
 :::
 
 ### Feature flags
