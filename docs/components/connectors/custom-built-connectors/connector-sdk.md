@@ -274,7 +274,6 @@ public class MyConnectorFunction implements OutboundConnectorFunction {
   }
 
   private MyConnectorResult executeConnector(final MyConnectorRequest connectorRequest) {
-    LOGGER.info("Executing my connector with request {}", connectorRequest);
     String message = connectorRequest.getMessage();
     // (3)
     if (message != null && message.toLowerCase().startsWith("fail")) {
@@ -319,7 +318,7 @@ method shown in **(1)**.
 
 Using `bindVariables` will attempt to replace Connector secrets, deserialize the JSON string
 containing the input data into Java objects, and perform the input validation.
-This deserialization depends on the Connector runtime environment your Connector function runs in.
+The JSON deserialization depends on the Connector runtime environment your Connector function runs in.
 
 Thus, use this deserialization approach with caution.
 While it works reliably for many input data types like string, boolean, integer, and nested
