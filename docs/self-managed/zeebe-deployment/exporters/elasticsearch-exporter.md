@@ -5,6 +5,10 @@ sidebar_label: "Elasticsearch"
 description: "The Zeebe Elasticsearch exporter acts as a bridge between Zeebe and Elasticsearch."
 ---
 
+:::note
+Please refer to [Supported Environments](../../../reference/supported-environments.md#camunda-platform-8-self-managed) to find out which versions of Elasticsearch are supported in a Camunda Platform 8 Self-Managed setup.
+:::
+
 The Zeebe Elasticsearch exporter acts as a bridge between
 [Zeebe](https://zeebe.io/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch) by
 exporting records written to Zeebe streams as documents into several indices.
