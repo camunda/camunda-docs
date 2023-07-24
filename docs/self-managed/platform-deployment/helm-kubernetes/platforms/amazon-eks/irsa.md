@@ -4,7 +4,7 @@ title: "IAM roles for service accounts"
 description: "Learn how to configure IAM roles for service accounts (IRSA) within AWS to authenticate workloads."
 ---
 
-IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered more secure.
+IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered a [best practicse by AWS](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
 
 The following considers the managed services by AWS and provided examples are in Terraform syntax.
 
@@ -45,7 +45,7 @@ resource "aws_iam_policy" "rds_policy" {
 
 #### IAM to Kubernetes mapping
 
-To assign the policy to a role for the IAM role to service account mapping in EKS, a Terraform module like [this one](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful.
+To assign the policy to a role for the IAM role to service account mapping in EKS, a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful.
 
 ```json
 module "aurora_role" {
@@ -70,7 +70,7 @@ The output of the module `aurora_role` has the output `iam_role_arn` to annotate
 
 Annotate the service account with the `iam_role_arn` output of the `aurora_role`.
 
-```
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -95,6 +95,10 @@ GRANT ALL privileges on database "some-db" to "db-user-name";
 ```
 
 ### Keycloak
+
+:::caution
+IAM Roles for Service Accounts can only be implemented with KeyCloak 21 and forward. This may require you to adjust the version used in the Camunda Helm Chart.
+:::
 
 For Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
 
@@ -123,13 +127,13 @@ Required are the following `software.amazon.awssdk` artifacts for the `aws-advan
 - [third-party-jackson-core](https://mvnrepository.com/artifact/software.amazon.awssdk/third-party-jackson-core)
 - [utils](https://mvnrepository.com/artifact/software.amazon.awssdk/utils)
 
-The wrapper itself is available [here](https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases).
+The wrapper itself is available from [GitHub](https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases).
 
 #### Dockerfile
 
 Example Docker file:
 
-```
+```shell
 FROM keycloak/keycloak:21.1 as builder
 
 # Configure a database vendor
@@ -155,7 +159,7 @@ ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
 
 As an example, configure the following environment variables
 
-```
+```yaml
 - name: KC_DB_DRIVER
   value: software.amazon.jdbc.Driver
 - name: KC_DB_URL
@@ -173,15 +177,14 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 
 ### Web Modeler
 
-Configure the `restapi` component of Web Modeler to use the feature set of IRSA. See the configuration reference [here](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql).
-
+Since Web Modeler RestAPI uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Kubernetes Configuration
 
 As an example, configure the following environment variables
 
-```
+```yaml
 - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
   value: software.amazon.jdbc.Driver
 - name: SPRING_DATASOURCE_URL
@@ -254,7 +257,7 @@ resource "aws_iam_policy" "opensearch_policy" {
 
 #### IAM to Kubernetes mapping
 
-To assign the policy to a role for the IAM role to service account mapping in EKS, a Terraform module like [the following](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful:
+To assign the policy to a role for the IAM role to service account mapping in EKS, a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful:
 
 ```json
 module "opensearch_role" {
@@ -306,7 +309,7 @@ The important part is assigning the `iam_role_arn` of the previously created `op
 
 ### Operate
 
-Configure Operate to use the feature set of IRSA for the OpenSearch Exporter. See the configuration reference [here](../../../../operate-deployment/operate-configuration.md#elasticsearch-or-opensearch).
+Configure Operate to use the feature set of IRSA for the OpenSearch Exporter. Check the [Operate OpenSearch configuration](../../../../operate-deployment/operate-configuration.md#elasticsearch-or-opensearch).
 
 #### Kubernetes Configuration
 
@@ -322,7 +325,7 @@ As an example, configure the following environment variables:
 Where the value is whatever the endpoint of your OpenSearch cluster is.
 
 :::note
-AWS OpenSearch runs generally on port 443.
+AWS OpenSearch listens on port 443 opposed to the usual port 9200.
 :::
 
 :::note
@@ -331,13 +334,13 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 
 ### Zeebe
 
-Configure Zeebe to use the feature set of IRSA for the OpenSearch Exporter. See the configuration reference [here](../../../../zeebe-deployment/configuration/broker.md#zeebebrokerexportersopensearch-opensearch-exporter).
+Configure Zeebe to use the feature set of IRSA for the OpenSearch Exporter. Check the [Zeebe OpenSearch exporter configuration](../../../../zeebe-deployment/configuration/broker.md#zeebebrokerexportersopensearch-opensearch-exporter).
 
 #### Kubernetes Configuration
 
 As an example, configure the following environment variables:
 
-```
+```yaml
 - name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_AWS_ENABLED
   value: true
 - name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_CLASSNAME
@@ -352,6 +355,22 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 
 ## Troubleshooting
 
+### Versions used
+
+This page was created based on the following versions available and may work with newer releases of mentioned software.
+
+| Software                                                                                                                                              | Version      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| AWS Aurora PostgreSQL                                                                                                                                 | 13 / 14 / 15 |
+| [AWS JDBC Driver Wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper)                                                                       | 2.2.2        |
+| AWS OpenSearch                                                                                                                                        | 2.5          |
+| [AWS SDK Dependencies](#dependencies)                                                                                                                 | 2.20.x       |
+| KeyCloak                                                                                                                                              | 21.x         |
+| [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/5.9.0)                                                                 | 5.9.0        |
+| [Terraform EKS Moduke](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/19.15.3)                                                   | 19.15.3      |
+| [Terraform IAM Roles Module](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/5.28.0/submodules/iam-role-for-service-accounts-eks) | 5.28.0       |
+| [Terraform PostgreSQL Provider](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs)                                              | 1.20.0       |
+
 ### Instance Metadata Service (IMDS)
 
 [Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) is a default fallback for the AWS SDK. Within the context of EKS, it means a pod will automatically assume the role of a node. This can hide many problems, including whether IRSA was set up correctly or not, since it will fall back to IMDS in case of failure and hide the actual error.
@@ -360,7 +379,7 @@ Thus, if nothing within your cluster relies on the implicit node role, we recomm
 
 Using a Terraform module like the [EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest), one can define the following to decrease the default value of two to one, which results in pods not being allowed to assume the role of the node anymore.
 
-```
+```json
 eks_managed_node_group_defaults {
     metadata_options = {
         http_put_response_hop_limit = 1
