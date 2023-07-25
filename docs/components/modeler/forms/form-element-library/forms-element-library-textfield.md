@@ -21,12 +21,12 @@ A text field allowing the user to read and edit textual data.
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: Text field must contain a value.
   - **Regular expression validation**: Use predefined validation patterns. Available options are: `Email`, `Phone`, and `Custom`.
-  - **Minimum length**: Text field must have at least `n` characters.
-  - **Maximum length**: Text field must not have more than `n` characters.
+  - **Minimum length**: Text field must have at least `n` characters. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md) or a number.
+  - **Maximum length**: Text field must not have more than `n` characters. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md) or a number.
   - **Regular expression pattern**: Text field value must match the provided [RegEx](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet) pattern.
 - **Appearance**: Changes the visual appearance of the text field.
-  - **Prefix**: Adds an appendage before the input.
-  - **Suffix**: Adds an appendage after the input.
+  - **Prefix**: Adds an appendage before the input. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+  - **Suffix**: Adds an appendage after the input. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 
 ### Datatypes
 
