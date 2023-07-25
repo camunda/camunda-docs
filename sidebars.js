@@ -34,6 +34,13 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        "guides/update-guide/810-to-820",
+        "guides/update-guide/800-to-810",
+        "guides/update-guide/130-to-800",
+        "guides/update-guide/120-to-130",
+        "guides/update-guide/110-to-120",
+        "guides/update-guide/100-to-110",
+        "guides/update-guide/026-to-100",
         {
           Connectors: [
             "guides/update-guide/connectors/introduction",
@@ -46,18 +53,12 @@ module.exports = {
             "guides/update-guide/connectors/070-to-080",
             "guides/update-guide/connectors/080-to-090",
             "guides/update-guide/connectors/090-to-0100",
+            "guides/update-guide/connectors/0100-to-0110",
           ],
         },
         {
           Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
         },
-        "guides/update-guide/810-to-820",
-        "guides/update-guide/800-to-810",
-        "guides/update-guide/130-to-800",
-        "guides/update-guide/120-to-130",
-        "guides/update-guide/110-to-120",
-        "guides/update-guide/100-to-110",
-        "guides/update-guide/026-to-100",
       ],
     },
     "guides/migrating-from-cawemo",
