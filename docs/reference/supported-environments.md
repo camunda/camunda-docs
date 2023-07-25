@@ -4,27 +4,25 @@ title: "Supported environments"
 description: "Find out where to run Camunda Platform 8 components for SaaS and Self-Managed, including Optimize for both Camunda Platform 8 and Camunda Platform 7."
 ---
 
-## Camunda Platform 8 SaaS & Self-Managed
-
-### Clients
-
-- **Zeebe Java Client**: OpenJDK 8+
-- **Zeebe Go Client**: Go 1.13+
-- **zbctl**: Windows, MacOS, and Linux (latest)
-
-_Hint: There are more [community-maintained Camunda Platform 8 clients](/apis-tools/community-clients/index.md)._
-
-### Web Browser
+## Web Browser
 
 - Google Chrome latest [recommended]
 - Mozilla Firefox latest
 - Microsoft Edge latest
 
-### Desktop Modeler
+## Desktop Modeler
 
 - Windows 7 / 10
 - Mac OS X 10.11
 - Ubuntu LTS (latest)
+
+## Clients
+
+- **Zeebe Java Client**: OpenJDK 8+
+- **Zeebe Go Client**: Go 1.13+
+- **zbctl**: Windows, MacOS, and Linux (latest)
+
+_There are more [community-maintained Camunda Platform 8 clients](/apis-tools/community-clients/index.md)._
 
 ## Camunda Platform 8 Self-Managed
 
