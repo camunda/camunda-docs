@@ -35,7 +35,7 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 
 3. Configure authorization if required in the **Authorization** section. The HTTP Webhook Connector supports the following authorization methods:
 
-- **Basic** - The incoming requests must contain an `Authorization` header that contains the word Basic word followed by a space and a base64-encoded string username:password.
+- **Basic** - The incoming requests must contain an `Authorization` header that contains the word `Basic` followed by a space and a base64-encoded string username:password.
 
   - Set the **Username** and **Password** properties which will be used to validate the incoming requests.
   - Provide the values in plain text, not base64-encoded.
