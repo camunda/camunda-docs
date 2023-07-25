@@ -256,6 +256,7 @@ module.exports = {
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
         "components/modeler/data-handling",
+        require("./docs/components/modeler/reference/sidebar-schema"),
       ],
       Connectors: [
         "components/connectors/introduction-to-connectors",
