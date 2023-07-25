@@ -1,6 +1,6 @@
 ---
 id: index
-title: Starting a migration
+title: Before starting a migration
 description: "Migrate process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8."
 keywords:
   [
@@ -50,5 +50,7 @@ As described earlier in this guide, migration is an ongoing topic and this guide
   ** Multiple instance markers available on most BPMN elements.
   ** `camunda:inputOutput` available on most BPMN elements.
   ** `camunda:errorEventDefinition` available on several BPMN elements.
+- Discuss workload migrations (operations)
+- Eventual consistency
 
 Please [reach out to us](/contact/) to discuss your specific migration use case.

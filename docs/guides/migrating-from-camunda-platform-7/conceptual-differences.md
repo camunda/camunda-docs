@@ -39,9 +39,12 @@ Most expressions can be converted (see [this community extension](https://github
 
 #### Different Connector infrastructure
 
-Camunda Platform 7 provides several [Connectors](https://docs.camunda.org/manual/latest/reference/connect/). Camunda Platform 8 now also offers multiple [Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) as well.
+Through Camunda Connect, Camunda Platform 7 provides a HTTP and a SOAP HTTP [Connector](https://docs.camunda.org/manual/latest/reference/connect/). Camunda Platform 8 offers multiple [Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) out-of-the-box.
 
-To migrate existing Connectors, create a small bridging layer to invoke these Connectors via a custom [job workers](/components/concepts/job-workers.md).
+To migrate existing Connectors, consider the following options:
+
+- Use the [REST protocol Connector](components/connectors/protocol/rest.md) to leverage an out-of-the-box Connector
+- Create a small bridging layer via a custom [job workers](/components/concepts/job-workers.md)
 
 ### Process solutions using Spring Boot
 
@@ -142,8 +145,8 @@ When you run your application in for example NodeJS or C#, you exchange one remo
 
 ### Plugins
 
-[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda Platform 8, as such plugins can massively change the behavior or even harm the stability of the engine. Some use cases might be implemented using [exporters](/self-managed/concepts/exporters.md). Note that exporters are only available for self-managed Zeebe clusters and not in Camunda Platform 8 SaaS.
+[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda Platform 8, as such plugins can massively change the behavior or even harm the stability of the engine. Some use cases might be implemented using [exporters](/self-managed/concepts/exporters.md) or [interceptors](self-managed/zeebe-deployment/zeebe-gateway/interceptors.md#implementing-an-interceptor). Note that exporters are only available for self-managed Zeebe clusters and not in Camunda Platform 8 SaaS.
 
-Migrating **Modeler Plugins** is generally possible, as the same modeler infrastructure is used.
+Migrating **Desktop Modeler Plugins** is generally possible, as the same modeler infrastructure is used.
 
 **Cockpit or Tasklist plugins** _cannot_ be migrated.

@@ -12,12 +12,6 @@ Camunda Platform 8 has a different workflow engine than Camunda Platform 7 - Zee
   - [External tasks](/components/best-practices/development/invoking-services-from-the-process-c7.md#external-tasks), where workers subscribe to the engine.
   - [Java code attached to a service task](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) and called by the engine directly (in-VM).
 
-<!--
-We'll explore these three cases in the sections below.
-
-![spring boot](img/architecture-spring-boot.png)
--->
-
 For example, to migrate an existing Spring Boot application, take the following steps:
 
 1. Adjust Maven dependencies

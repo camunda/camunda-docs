@@ -1,6 +1,6 @@
 ---
 id: migration-readiness
-title: How to get ready to migrate
+title: Getting ready to migrate
 description: "Learn readiness indicators for migrating from Camunda Platform 7 to Camunda Platform 8."
 ---
 
@@ -23,6 +23,56 @@ You should consider migrating existing Camunda Platform 7 solutions if:
 - You are looking to leverage a SaaS offering (e.g. to reduce the effort for hardware or infrastructure setup and maintenance).
 - You are in need of performance at scale and/or improved resilience.
 - You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the new Connectors framework, or the improved collaboration features in Web Modeler).
+
+## Migration steps
+
+For migration, you need to look at development artifacts (BPMN models and application code), but also at workflow engine data (runtime and history) in case you migrate a process solution running in production.
+
+The typical steps are:
+
+- Analyze your current development artifacts with the community-supported [diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) to gain a general overview of required steps
+- Migrate development artifacts
+  - Adjust your BPMN models (only in rare cases you have to touch your DMN models)
+  - Adjust your development project (remove embedded engine, add Zeebe client)
+  - Refactor your code to use the Zeebe API, likely via a Zeebe client
+  - Refactor your glue code or use [the Java Delegate adapter project](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter), a community supported tool.
+- Migrate workflow engine data
+
+If you follow the migration steps linearly, you could run into issues individually or one after the other. Starting with a more complete picture of what needs to be done would allow you to place for a more holistic approach to your migration journey. You may find tackling a particular topic or focus area easier than trying to adjust all your BPMN models before moving to the next step.
+
+In general, **development artifacts** _can_ be migrated:
+
+- **BPMN models:** Camunda Platform 8 uses BPMN like Camunda Platform 7 does, which generally allows use of the same model files, but you might need to configure _different extension atrributes_ (at least by using a different namespace). Furthermore, Camunda Platform 8 has a _different coverage_ of BPMN concepts that are supported (see [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) vs [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
+
+- **DMN models:** Camunda Platform 8 uses DMN like Camunda Platform 7 does. There are no changes in the models necessary. Some rarely used features of Camunda Platform 7 are not supported in Camunda Platform 8. Those are listed below.
+
+- **CMMN models:** It is not possible to run CMMN on Zeebe, _CMMN models cannot be migrated_. You can remodel cases in BPMN according to [Building Flexibility into BPMN Models](https://camunda.com/best-practices/building-flexibility-into-bpmn-models/), keeping in mind the [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md).
+
+- **Application code:** The application code needs to use _a different client library and different APIs_. This will lead to code changes you must implement.
+
+- **Architecture:** The different architecture of the core workflow engine might require _changes in your architecture_ (e.g. if you used the embedded engine approach). Furthermore, certain concepts of Camunda Platform 7 are no longer possible (like hooking in Java code at various places, or control transactional behavior with asynchronous continuations) which might lead to _changes in your model and code_.
+
+In general, **workflow engine data** is harder to migrate to Camunda Platform 8:
+
+- **Runtime data:** Running process instances of Camunda Platform 7 are stored in the Camunda Platform 7 relational database. Like with a migration from third party workflow engines, you can read this data from Camunda Platform 7 and use it to create the right process instances in Camunda Platform 8 in the right state. This way, you can migrate running process instances from Camunda Platform 7 to Camunda Platform 8. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) is in place to ease this task. This tool is community supported.
+
+- **History data:** Historic data from the workflow engine itself cannot be migrated. However, data in Optimize can be kept.
+
+## Migration tooling
+
+:::note
+These tools are community maintained. For more assistance, create an issue on the repo directly.
+:::
+
+The [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration), available as a community extension, contains three components that will help you with migration:
+
+1. [A converter available in different flavors (web app, CLI) to convert BPMN models from Camunda Platform 7 to Camunda Platform 8](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter). This maps possible BPMN elements and technical attributes into the Camunda Platform 8 format and gives you warnings where this is not possible. The result of a conversion is a model with mapped implementation details as well as hints on what changed, needs to be reviewed, or adjusted in order to function properly in Camunda Platform 8.
+
+2. [The Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter). This is a library providing a worker to hook in Camunda Platform 7-based glue code. For example, it can invoke existing JavaDelegate classes.
+
+3. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) to migrate running process instances from Camunda Platform 7 to Camunda Platform 8. Ideally, you should let running instances finish prior to migrating.
+
+The tools mentioned above are a good starting point, but are only one option for how you can approach your migration.
 
 ## Prepare for smooth migrations
 
@@ -226,48 +276,3 @@ Now, the dmnResultChecker is a Spring bean that can contain arbitrary Java logic
 ### Camunda Forms
 
 Finally, while Camunda Platform 7 supports [different types of task forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/), Camunda Platform 8 only supports [Camunda Forms](/guides/utilizing-forms.md) (and will actually be extended over time). If you rely on other form types, you either need to make Camunda Forms out of them or use a bespoke tasklist where you still support those forms.
-
-## Migration steps
-
-For migration, you need to look at development artifacts (BPMN models and application code), but also at workflow engine data (runtime and history) in case you migrate a process solution running in production.
-
-The typical steps are:
-
-1. Migrate development artifacts
-   1. Adjust your BPMN models (only in rare cases you have to touch your DMN models)
-   2. Adjust your development project (remove embedded engine, add Zeebe client)
-   3. Refactor your code to use the Zeebe API, likely via a Zeebe client
-   4. Refactor your glue code or use [the Java Delegate adapter project](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter), a community supported tool.
-2. Migrate workflow engine data
-
-In general, **development artifacts** _can_ be migrated:
-
-- **BPMN models:** Camunda Platform 8 uses BPMN like Camunda Platform 7 does, which generally allows use of the same model files, but you might need to configure _different extension atrributes_ (at least by using a different namespace). Furthermore, Camunda Platform 8 has a _different coverage_ of BPMN concepts that are supported (see [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) vs [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
-
-- **DMN models:** Camunda Platform 8 uses DMN like Camunda Platform 7 does. There are no changes in the models necessary. Some rarely used features of Camunda Platform 7 are not supported in Camunda Platform 8. Those are listed below.
-
-- **CMMN models:** It is not possible to run CMMN on Zeebe, _CMMN models cannot be migrated_. You can remodel cases in BPMN according to [Building Flexibility into BPMN Models](https://camunda.com/best-practices/building-flexibility-into-bpmn-models/), keeping in mind the [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md).
-
-- **Application code:** The application code needs to use _a different client library and different APIs_. This will lead to code changes you must implement.
-
-- **Architecture:** The different architecture of the core workflow engine might require _changes in your architecture_ (e.g. if you used the embedded engine approach). Furthermore, certain concepts of Camunda Platform 7 are no longer possible (like hooking in Java code at various places, or control transactional behavior with asynchronous continuations) which might lead to _changes in your model and code_.
-
-In general, **workflow engine data** is harder to migrate to Camunda Platform 8:
-
-- **Runtime data:** Running process instances of Camunda Platform 7 are stored in the Camunda Platform 7 relational database. Like with a migration from third party workflow engines, you can read this data from Camunda Platform 7 and use it to create the right process instances in Camunda Platform 8 in the right state. This way, you can migrate running process instances from Camunda Platform 7 to Camunda Platform 8. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) is in place to ease this task. This tool is community supported.
-
-- **History data:** Historic data from the workflow engine itself cannot be migrated. However, data in Optimize can be kept.
-
-## Migration tooling
-
-:::note
-These tools are community maintained. For more assistance, create an issue on the repo directly.
-:::
-
-The [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration), available as a community extension, contains three components that will help you with migration:
-
-1. [A converter available in different flavors (web app, CLI) to convert BPMN models from Camunda Platform 7 to Camunda Platform 8](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter). This maps possible BPMN elements and technical attributes into the Camunda Platform 8 format and gives you warnings where this is not possible. The result of a conversion is a model with mapped implementation details as well as hints on what changed, needs to be reviewed, or adjusted in order to function properly in Camunda Platform 8.
-
-2. [The Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter). This is a library providing a worker to hook in Camunda Platform 7-based glue code. For example, it can invoke existing JavaDelegate classes.
-
-3. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) to migrate running process instances from Camunda Platform 7 to Camunda Platform 8.
