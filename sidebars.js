@@ -53,6 +53,7 @@ module.exports = {
             "guides/update-guide/connectors/070-to-080",
             "guides/update-guide/connectors/080-to-090",
             "guides/update-guide/connectors/090-to-0100",
+            "guides/update-guide/connectors/0100-to-0110",
           ],
         },
         {

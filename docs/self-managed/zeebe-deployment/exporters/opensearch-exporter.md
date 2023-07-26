@@ -5,6 +5,10 @@ sidebar_label: "OpenSearch"
 description: "The Zeebe OpenSearch exporter acts as a bridge between Zeebe and OpenSearch."
 ---
 
+:::note
+Please refer to [Supported Environments](../../../reference/supported-environments.md#camunda-platform-8-self-managed) to find out which versions of OpenSearch are supported in a Camunda Platform 8 Self-Managed setup.
+:::
+
 The Zeebe OpenSearch Exporter acts as a bridge between
 [Zeebe](https://camunda.com/platform/zeebe/) and [OpenSearch](https://opensearch.org) by
 exporting records written to Zeebe streams as documents into several indices.
