@@ -43,9 +43,9 @@ Before diving into concrete steps on migrating your models and code, let's cover
 
 As described earlier in this guide, migration is an ongoing topic and this guide is far from complete. Open issues include the following:
 
-- Describe implications on testing.
-- Discuss adapters for Java or REST client.
-- Discuss more concepts around BPMN
+- Describe implications on testing
+- Discuss adapters for Java or REST client
+- Discuss more concepts around BPMN:
   ** [Field injection](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#field-injection) that is using `camunda:field` available on many BPMN elements.
   ** Multiple instance markers available on most BPMN elements.
   ** `camunda:inputOutput` available on most BPMN elements.
@@ -53,4 +53,4 @@ As described earlier in this guide, migration is an ongoing topic and this guide
 - Discuss workload migrations (operations)
 - Eventual consistency
 
-Please [reach out to us](/contact/) to discuss your specific migration use case.
+[Reach out to us](/contact/) to discuss your specific migration use case.

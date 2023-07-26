@@ -5,7 +5,7 @@ description: "Learn how and where to adjust your source code when migrating from
 keywords: ["migrating to Zeebe"]
 ---
 
-Camunda Platform 8 has a different workflow engine than Camunda Platform 7 - Zeebe. As a result, you have to migrate some of your code to work with the Zeebe API, especially code that does the following:
+Camunda Platform 8 has a different workflow engine than Camunda Platform 7 - Zeebe. As a result, you must migrate some of your code to work with the Zeebe API, especially code that does the following:
 
 - Uses the Client API (e.g. to start process instances)
 - Implements [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
@@ -14,25 +14,25 @@ Camunda Platform 8 has a different workflow engine than Camunda Platform 7 - Zee
 
 For example, to migrate an existing Spring Boot application, take the following steps:
 
-1. Adjust Maven dependencies
+1. Adjust Maven dependencies:
 
 - Remove Camunda Platform 7 Spring Boot Starter and all other Camunda dependencies.
 - Add [Spring Zeebe Starter](https://github.com/camunda-community-hub/spring-zeebe).
 
-2. Adjust config
+2. Adjust config:
 
-- Make sure to set [Camunda Platform 8 credentials](https://github.com/camunda-community-hub/spring-zeebe#configuring-camunda-platform-8-saas-connection) (for example, in `src/main/resources/application.properties`) and point it to an existing Zeebe cluster.
+- Set [Camunda Platform 8 credentials](https://github.com/camunda-community-hub/spring-zeebe#configuring-camunda-platform-8-saas-connection) (for example, in `src/main/resources/application.properties`) and point it to an existing Zeebe cluster.
 - Remove existing Camunda Platform 7 settings.
 
 3. Add `@ZeebeDeployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
 
-Finally, adjust your source code and process model as described in the sections below.
+4. Adjust your source code and process model as described in the sections below.
 
 ### Client API
 
 The Zeebe API (e.g. the workflow engine API - start process instances, subscribe to tasks, or complete them) has been completely redesigned and is not compatible with Camunda Platform 7. While conceptually similar, the API uses different method names, data structures, and protocols.
 
-If this affects large parts of your code base, you could write a small abstraction layer implementing the Camunda Platform 7 API delegating to Camunda Platform 8, probably marking unavailable methods as deprecated. We welcome community extensions that facilitate this but have not yet started own efforts.
+If this affects large parts of your code base, you could write a small abstraction layer implementing the Camunda Platform 7 API delegating to Camunda Platform 8, probably marking unavailable methods as deprecated. We welcome community extensions that facilitate this but have not yet started our own efforts.
 
 ### Service tasks as external tasks
 
@@ -40,7 +40,7 @@ If this affects large parts of your code base, you could write a small abstracti
 
 The "external task topic" from Camunda Platform 7 is directly translated in a "task type name" in Camunda Platform 8, therefore `camunda:topic` gets `zeebe:taskDefinition type` in your BPMN model.
 
-The community supported [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) will pick up your `@ExternalTaskHandler` beans, wrap them into a JobWorker, and subscribe to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
+The community-supported [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) picks up your `@ExternalTaskHandler` beans, wraps them into a JobWorker, and subscribes to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
 
 ### Service tasks with attached Java code (Java Delegates, Expressions)
 
@@ -52,13 +52,13 @@ In Camunda Platform 7, there are three ways to attach Java code to service tasks
 
 Camunda Platform 8 cannot directly execute custom Java code. Instead, there must be a [job worker](/components/concepts/job-workers.md) executing code.
 
-The community supported [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
+The community-supported [Camunda Platform 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
 
 ![Service task in Camunda Platform 7 and Camunda Platform 8](../img/migration-service-task.png)
 
 You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
 
-The community supported [Camunda Platform 7 to Camunda Platform 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
+The community-supported [Camunda Platform 7 to Camunda Platform 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
 
 The topic `camunda-7-adapter` is set and the following attributes/elements are migrated and put into a task header:
 

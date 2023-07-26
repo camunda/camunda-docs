@@ -23,25 +23,27 @@ keywords:
 
 ### Orchestrate, observe, and analyze microservices & human tasks
 
-An end-to-end, automated business process typically requires multiple microservices to achieve an outcome. Software developers and architects often struggle to effectively communicate across multiple microservices, monitor their performance, and identify and resolve problems when they occur. Camunda enables organizations to overcome these issues without compromising autonomy and the coupling of microservices. Camunda offers speed, scale, and security when paired with [microservices](/guides/getting-started-orchestrate-microservices.md), without the overhead of building and maintaining a daunting infrastructure.
+An end-to-end, automated business process typically requires multiple microservices to achieve an outcome. Software developers and architects often struggle to effectively communicate across multiple microservices, monitor their performance, and identify and resolve problems when they occur.
+
+Camunda enables organizations to overcome these issues without compromising autonomy and the coupling of microservices. Camunda offers speed, scale, and security when paired with [microservices](/guides/getting-started-orchestrate-microservices.md), without the overhead of building and maintaining a daunting infrastructure.
 
 In addition to microservices, many organizations have mission-critical processes that require people to perform tasks manually. An end-to-end business process often requires the combination of manual work with automated steps in a unified workflow.
 
 It’s important that workflows are properly orchestrated to achieve a desired outcome. For example, if a customer onboarding process is delayed because an employee doesn’t know they need to complete a task, the customer will have a poor experience. Camunda provides a lightweight, developer-friendly, easy-to-integrate solution with the [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md) feature of Camunda Platform 8 to help individuals and groups fix slow, inefficient, or broken human workflows.
 
-For a closer look at other use cases, see the [solutions](https://camunda.com/solutions/) page which outlines the following:
+For a closer look at other use cases, see the [solutions page](https://camunda.com/solutions/) which outlines the following:
 
-- Modernize Legacy IT Systems
-- Orchestrate, Monitor and Analyze RPA Bots
-- Replace Homegrown Workflow Automation Software
-- Modernize Legacy Business Process Management Systems (BPMS)
-- Build a Centralized Process Automation Platform
+- Modernize legacy IT systems
+- Orchestrate, monitor, and analyze RPA bots
+- Replace homegrown workflow automation software
+- Modernize legacy business process management systems (BPMS)
+- Build a centralized process automation platform
 
 ## What are the core quality attributes of Camunda Platform 8?
 
 Camunda Platform 8 is designed to operate on a very large scale. To achieve this, it provides:
 
-- **Horizontal scalability** and no dependence on an external database; [Zeebe](/components/zeebe/zeebe-overview.md) (the workflow engine inside Camunda Platform 8) writes data directly to the filesystem on the same servers where it is deployed. Zeebe makes it simple to distribute processing across a cluster of machines to deliver high throughput.
+- **Horizontal scalability** and no dependence on an external database; [Zeebe](/components/zeebe/zeebe-overview.md) (the workflow engine inside Camunda Platform 8) writes data directly to the file system on the same servers where it is deployed. Zeebe enables distribution processing across a cluster of machines to deliver high throughput.
 - **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda Platform 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action.
 - **Audit trail** as all process-relevant events are written to an append-only log, providing an audit trail and a history of the state of a process.
 - **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda Platform 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda Platform 8 resilient, scalable, and reactive.
@@ -99,7 +101,7 @@ Use BPMN and DMN standards as a common language for developers and business stak
 
 ### Developer-friendly approach
 
-The platform and tools are easy to get started with and simple to use in your environment right away, with full public access to all of Camunda's documentation, [open APIs for integration](/apis-tools/working-with-apis-tools.md), and a [community](https://camunda.com/developers/) comprised of around 100,000 developers.
+The platform and tools are usable in your environment right away, with full public access to all of Camunda's documentation, [open APIs for integration](/apis-tools/working-with-apis-tools.md), and a [community](https://camunda.com/developers/) comprised of around 100,000 developers.
 
 ## Next steps
 
