@@ -5,7 +5,7 @@ sidebar_label: AWS EventBridge Webhook Connector
 description: Learn how the AWS EventBridge Connector allows you to start a BPMN process instance triggered by an AWS EventBridge event.
 ---
 
-The **AWS EventBridge Webhook Connector** is an inbound connector that enables you to start a BPMN process instance triggered by an event from [AWS EventBridge](https://aws.amazon.com/eventbridge/).
+The **AWS EventBridge Webhook Connector** is an inbound Connector enabling you to start a BPMN process instance triggered by an event from [AWS EventBridge](https://aws.amazon.com/eventbridge/).
 
 :::note
 If you have used the **AWS EventBridge Webhook Connector** with a Self-Managed Camunda Platform 8 configuration before the Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template. Refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
@@ -64,7 +64,7 @@ The AWS EventBridge Webhook Connector supports four types of authorization:
   request.headers.mycustomapikey
   ```
 
-Please select the appropriate authorization type based on your security requirements and fill in the corresponding properties accordingly.
+Select the appropriate authorization type based on your security requirements and fill in the corresponding properties accordingly.
 
 ### Fill properties in the **Activation** section
 
@@ -127,7 +127,7 @@ your correlation key settings will look like this:
 
 ## Activate the AWS EventBridge Connector by deploying your diagram
 
-Once you click the Deploy button, your AWS EventBridge Webhook Connector will be activated and ready to receive events.
+Once you click **Deploy**, your AWS EventBridge Webhook Connector will be activated and ready to receive events.
 
 The URLs of the exposed AWS EventBridge Webhooks adhere to the following pattern:
 
@@ -137,16 +137,16 @@ The URLs of the exposed AWS EventBridge Webhooks adhere to the following pattern
 - `<webhook ID>` is the ID (path) you configured in the properties of your AWS EventBridge Webhook Connector.
 
 :::note
-If you make changes to your AWS EventBridge Webhook Connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.
+If you make changes to your AWS EventBridge Webhook Connector configuration, redeploy the BPMN diagram for the changes to take effect.
 :::
 
-When you click on the event with the AWS EventBridge Webhook Connector applied to it, a new Webhooks tab will appear in the properties panel.
+When you click on the event with the AWS EventBridge Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
 This tab displays the URL of the AWS EventBridge Webhook Connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
-You can still use the AWS EventBridge Webhook Connector in the Desktop Modeler or with Camunda Platform 8 Self-Managed.
-In that case, AWS EventBridge Webhook Connector deployments and URLs will not be displayed in the Modeler.
+You can still use the AWS EventBridge Webhook Connector in Desktop Modeler or with Camunda Platform 8 Self-Managed.
+In that case, AWS EventBridge Webhook Connector deployments and URLs will not be displayed in Modeler.
 :::
 
 ## Variable mapping
@@ -154,7 +154,7 @@ In that case, AWS EventBridge Webhook Connector deployments and URLs will not be
 The **Variable mapping** section allows you to configure the mapping of the event payload to the process variables.
 
 - Use the **Result variable** to store the event data in a process variable. For example, `myEventPayload`.
-- Use the **Result expression** to map specific fields from the event payload into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example, given that the AWS EventBridge Connector is triggered with an event payload like:
+- Use the **Result expression** to map specific fields from the event payload into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example, given the AWS EventBridge Connector is triggered with an event payload like:
 
 ```
 {
@@ -184,18 +184,18 @@ orderTotal: request.body.detail.order_total
 
 To configure AWS EventBridge, follow the steps below:
 
-1. Go to the AWS Management Console by visiting: https://aws.amazon.com/console/.
+1. Go to the [AWS Management Console](https://aws.amazon.com/console/).
 2. Set the required permissions for EventBridge by navigating to: https://aws.permissions.cloud/iam/events.
-3. Access AWS EventBridge service by going to: https://aws.amazon.com/eventbridge/.
-4. Click on the "Integration" tab and then select "API Destination."
-5. Switch to the "Connection" tab.
+3. Access AWS EventBridge service by going to [AWS EventBridge](https://aws.amazon.com/eventbridge/).
+4. Click **Integration > API Destination**.
+5. Switch to the **Connection** tab.
 6. Create a new connection with the required authorization type (basic, API key, OAuth).
 7. Now, create a new API destination with the following information:
-   - Select the previously created "connection."
-   - Choose the appropriate HTTP method.
-   - Specify the "API destination endpoint," which should be the webhook URL generated after deploying the BPMN diagram.
+   - Select the previously created **connection**.
+   - Choose the appropriate **HTTP method**.
+   - Specify the **API destination endpoint**, which should be the webhook URL generated after deploying the BPMN diagram.
 8. Create a new event bus by following the documentation [here](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html).
-9. Lastly, create a rule using the "API destination" that you already created. Refer to the [documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-get-started.html) for guidance.
+9. Lastly, create a rule using the **API destination** that you already created. Refer to the [documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-get-started.html) for guidance.
 
 ## Next steps
 

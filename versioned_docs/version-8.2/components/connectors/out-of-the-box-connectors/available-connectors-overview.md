@@ -59,7 +59,7 @@ import TabItem from "@theme/TabItem";
 ## Inbound Connectors
 
 - [Amazon EventBridge Webhook Connector](/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook.md) - Start a BPMN process instance triggered by an [Amazon EventBridge service event](https://aws.amazon.com/eventbridge/).
-- [Amazon SNS Inbound Connector](/components/connectors/out-of-the-box-connectors/aws-sns-inbound.md) - Trigger your BPMN process with an [Amazon Simple Notification Service](https://aws.amazon.com/sns/) notification via HTTPS.
+- [Amazon SNS inbound Connector](/components/connectors/out-of-the-box-connectors/aws-sns-inbound.md) - Trigger your BPMN process with an [Amazon Simple Notification Service](https://aws.amazon.com/sns/) notification via HTTPS.
 - [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/aws-sqs-inbound.md) - Receive messages from [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) in your BPMN process.
 - [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-inbound.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.
