@@ -16,8 +16,6 @@ Using Camunda secrets to store credentials is highly recommended, so you do not 
 
 To use the **RabbitMQ Consumer Connector** in your process, either change the type of existing event by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector event using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
-![connectors-rabbitmq-inbound-properties-red](../img/connectors-rabbitmq-inbound-properties-red.png)
-
 ## Create a RabbitMQ Consumer Connector task
 
 1. Add a **Start Event** or an **Intermediate Event** to your BPMN diagram to get started.
@@ -42,15 +40,12 @@ For a URI connection, take the following steps:
 1. Click the **URI** connection type in the **Authentication** section.
 2. Set **URI** to `URI`. It must contain RabbitMQ username, password, host name, port number, and virtual host. For example, `amqp://userName:password@serverHost:port/virtualHost`; follow the [RabbitMQ URI specification](https://www.rabbitmq.com/uri-spec.html) to learn more.
 
-![connectors-rabbitmq-uri-fields](../img/connectors-rabbitmq-uri-fields.png)
-
 #### Credentials type connection
 
 To connect with credentials, take the following steps:
 
 1. Click the **Username/Password** connection type in the **Authentication** section
 2. Set the **Password** to `Password`.
-   ![connectors-rabbitmq-credentials-fields](../img/connectors-rabbitmq-credentials-fields.png)
 
 ### Routing data
 
@@ -77,8 +72,6 @@ However, you can refer to Connector secrets using placeholder syntax. For exampl
 The **Activation** section allows you to configure the custom activation conditions for the RabbitMQ Consumer Connector.
 
 #### Correlation key
-
-![RabbitMQ Intermediate Catch Event](../img/connectors-rabbitmq-inbound-intermediate.png)
 
 The correlation key fields are only applicable for the intermediate event **RabbitMQ Connector**.
 

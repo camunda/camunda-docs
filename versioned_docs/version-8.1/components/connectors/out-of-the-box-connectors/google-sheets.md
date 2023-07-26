@@ -40,8 +40,6 @@ panel.
 
 ### Add values to spreadsheet
 
-![Google Sheets Connector add values example](../img/connectors-google-sheets-add-values.png)
-
 To add values to a spreadsheet, take the following steps:
 
 1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
@@ -66,8 +64,6 @@ The following fields are available in the response variable:
 
 ### Create empty column or row
 
-![Google Sheets Connector create empty column or row example](../img/connectors-google-sheets-add-empty-column-or-row.png)
-
 To create empty column or row, take the following steps:
 
 1. Set the required credentials in the **Authentication** section. See
@@ -91,8 +87,6 @@ The following fields are available in the response variable:
 - `response` - The response of the operation. In this case, it will always be **null**.
 
 ### Create row
-
-![Google Sheets Connector create row example](../img/connectors-google-sheets-create-row.png)
 
 To create a row, take the following steps:
 
@@ -119,8 +113,6 @@ The following fields are available in the response variable:
 
 ### Create spreadsheet
 
-![Google Sheets Connector create spreadsheet example](../img/connectors-google-sheets-create-spreadsheet.png)
-
 To create a spreadsheet, take the following steps:
 
 1. Set the required credentials in the **Authentication** section. See
@@ -139,8 +131,6 @@ The following fields are available in the response variable:
 - `spreadsheetUrl` - Human-readable URL of the newly created spreadsheet.
 
 ### Create worksheet
-
-![Google Sheets Connector create worksheet example](../img/connectors-google-sheets-create-worksheet.png)
 
 To create a worksheet, take the following steps:
 
@@ -162,8 +152,6 @@ The following fields are available in the response variable:
 - `response` - The response of the operation. In this case, it will always be **null**.
 
 ### Delete column
-
-![Google Sheets Connector delete column example](../img/connectors-google-sheets-delete-column.png)
 
 To delete a column, take the following steps:
 
@@ -187,8 +175,6 @@ The following fields are available in the response variable:
 
 ### Delete worksheet
 
-![Google Sheets Connector delete worksheet example](../img/connectors-google-sheets-delete-worksheet.png)
-
 To delete a worksheet, take the following steps:
 
 1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
@@ -205,8 +191,6 @@ The following fields are available in the response variable:
 - `response` - The response of the operation. In this case, it will always be **null**.
 
 ### Get row by index
-
-![Google Sheets Connector get row by index example](../img/connectors-google-sheets-get-row-by-index.png)
 
 To get row by index, take the following steps:
 
@@ -230,8 +214,6 @@ The following fields are available in the response variable:
 
 ### Get spreadsheet details
 
-![Google Sheets Connector get spreadsheet details example](../img/connectors-google-sheets-get-spreadsheet-details.png)
-
 To get spreadsheet details, take the following steps:
 
 1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
@@ -243,8 +225,6 @@ To get spreadsheet details, take the following steps:
 The response contains spreadsheet properties. For details, read the [official Google documentation](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#spreadsheetproperties).
 
 ### Get worksheet data
-
-![Google Sheets Connector get spreadsheet details example](../img/connectors-google-sheets-get-worksheet-data.png)
 
 To get worksheet data, take the following steps:
 
@@ -277,8 +257,6 @@ the [Google Cloud API Library](https://console.cloud.google.com/apis/library).
 
 #### Example 1: Obtaining JWT bearer token with a service account
 
-![Bearer Auth](../img/connectors-googledrive-jwt-bearer.png)
-
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to
 security concerns.
@@ -305,8 +283,6 @@ print(credentials.token)
 ```
 
 #### Example 2: Obtaining bearer and refresh tokens with OAuth client
-
-![Refresh Auth](../img/connectors-googledrive-jwt-refresh.png)
 
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to
@@ -337,15 +313,27 @@ if __name__ == "__main__":
 
 ### Where do I get a spreadsheet ID?
 
-It is in the URL.
+The spreadsheet ID is located within the URL of the Google Sheets document. Here's how to find it:
 
-![Google Sheets Connector get spreadsheet ID](../img/connectors-google-sheets-get-spreadsheet-id.png)
+For example, if the URL looks like this:
+
+```
+https://docs.google.com/spreadsheets/d/1xhNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk/edit#gid=0
+```
+
+The spreadsheet ID is the alphanumeric string between `d/` and `/edit`, which in this case is `1xhNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk`.
 
 ### Where do I get a worksheet ID?
 
-It is in the URL.
+The Worksheet ID (also known as the gid) can be found in the same URL. Here's how to find it:
 
-![Google Sheets Connector get worksheet ID](../img/connectors-google-sheets-get-worksheet-id.png)
+For example, if the URL looks like this:
+
+```
+https://docs.google.com/spreadsheets/d/1xhNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk/edit#gid=0
+```
+
+The worksheet ID is the number after `#gid=`, which in this case is `0`
 
 ### What is a worksheet index?
 
@@ -358,14 +346,10 @@ place, worksheet index should be set as **1**.
 Row index is the unique identifier for each row in some worksheet, which is used both for reading and writing operations
 with row. This index is defined to the left of the row.
 
-![Google Sheets Connector get row index](../img/connectors-google-sheets-row-index.png)
-
 ### How can I define which column will be deleted?
 
 There are two ways to define which column will be deleted: by letter index and numeric one. Numeric index can be found
 at the top of the column.
-
-![Google Sheets Connector get column letter index](../img/connectors-google-sheets-letter-column-index.png)
 
 The other option is to use numeric index. Keep in mind **count starts from 0**. To delete column A,
 numeric index should be 0, B -> 1...

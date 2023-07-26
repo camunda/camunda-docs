@@ -110,8 +110,6 @@ Response example:
 }
 ```
 
-![BP get queue item](../img/connectors-blue-prism-get-item-by-id.png)
-
 ### Create work queue item
 
 This operation allows you to create work queue items in the specified queue.
@@ -146,8 +144,6 @@ Response example:
 }
 ```
 
-![BP create queue item](../img/connectors-blueprism-add-item.png)
-
 ### Using Blue Prism Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
@@ -156,5 +152,3 @@ To learn more, see an entry _Solution with Timer and Loop_ at [Camunda BPMN exam
 :::note
 To avoid performance issues, it is recommended to limit the number of loop retries.
 :::
-
-![BP best practice example](../img/connectors-blueprism-example.png)

@@ -18,8 +18,6 @@ To use the **Amazon SQS Connector** in your process, either change the type of e
 
 ## Make your Amazon SQS Connector for sending messages executable
 
-![AWS SQS Filled](../img/connectors-aws-sqs-filled.png)
-
 To make your Amazon SQS Connector for sending messages executable, take the following steps:
 
 1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `secrets.MY_AWS_ACCESS_KEY`. The value can be plain text, but this is not recommended due to security concerns.
@@ -65,8 +63,6 @@ Example of a valid message attribute as a FEEL value:
   }
 }
 ```
-
-![AWS SQS Message Attributes](../img/connectors-aws-sqs-message-attributes.png)
 
 ### How do I store AWS IAM Secrets for my SQS Connector?
 
