@@ -245,6 +245,7 @@ module.exports = {
           changefreq: "weekly",
           priority: 0.5,
           ignorePatterns: [
+            "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
             "/docs/1.1/**",
