@@ -16,7 +16,7 @@ The following considers the managed services by AWS and provided examples are in
 
 When using the Terraform provider of [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest) with the resource [aws_rds_cluster](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster) to create a new rational database (RDS) or Aurora cluster, supply the argument `iam_database_authentication_enabled = true` to enable the IAM roles functionality. See the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) for availability and limitations.
 
-#### AWS Policy
+#### AWS policy
 
 An AWS policy (later assigned to a role) is required to allow assuming a database user within a managed database. See the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html) for policy details.
 
@@ -82,7 +82,7 @@ metadata:
 
 #### Database configuration
 
-The setup required on the Aurora PostgreSQL side is to actually create the user and assign the required permissions to it. The following is an example when connected to the PostgreSQL database, and can also be realized by using a [Terraform PostgreSQL Provider](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs). See the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL) for reference concerning Aurora specific configurations.
+The setup required on the Aurora PostgreSQL side is to create the user and assign the required permissions to it. The following is an example when connected to the PostgreSQL database, and can also be realized by using a [Terraform PostgreSQL Provider](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs). See the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL) for reference concerning Aurora specific configurations.
 
 ```SQL
 # create user and grant rds_iam role, which requires the user to login via IAM authentication over password
@@ -97,7 +97,7 @@ GRANT ALL privileges on database "some-db" to "db-user-name";
 ### Keycloak
 
 :::caution
-IAM Roles for Service Accounts can only be implemented with KeyCloak 21 and forward. This may require you to adjust the version used in the Camunda Helm Chart.
+IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards. This may require you to adjust the version used in the Camunda Helm Chart.
 :::
 
 For Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
@@ -127,11 +127,11 @@ Required are the following `software.amazon.awssdk` artifacts for the `aws-advan
 - [third-party-jackson-core](https://mvnrepository.com/artifact/software.amazon.awssdk/third-party-jackson-core)
 - [utils](https://mvnrepository.com/artifact/software.amazon.awssdk/utils)
 
-The wrapper itself is available from [GitHub](https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases).
+The wrapper itself is available on [GitHub](https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases).
 
 #### Dockerfile
 
-Example Docker file:
+Example Dockerfile:
 
 ```shell
 FROM keycloak/keycloak:21.1 as builder
@@ -155,7 +155,7 @@ ENV KC_DB=postgres
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
 ```
 
-#### Kubernetes Configuration
+#### Kubernetes configuration
 
 As an example, configure the following environment variables
 
@@ -180,7 +180,7 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 Since Web Modeler RestAPI uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
-#### Kubernetes Configuration
+#### Kubernetes configuration
 
 As an example, configure the following environment variables
 
@@ -311,7 +311,7 @@ The important part is assigning the `iam_role_arn` of the previously created `op
 
 Configure Operate to use the feature set of IRSA for the OpenSearch Exporter. Check the [Operate OpenSearch configuration](../../../../operate-deployment/operate-configuration.md#elasticsearch-or-opensearch).
 
-#### Kubernetes Configuration
+#### Kubernetes configuration
 
 As an example, configure the following environment variables:
 
@@ -336,7 +336,7 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 
 Configure Zeebe to use the feature set of IRSA for the OpenSearch Exporter. Check the [Zeebe OpenSearch exporter configuration](../../../../zeebe-deployment/configuration/broker.md#zeebebrokerexportersopensearch-opensearch-exporter).
 
-#### Kubernetes Configuration
+#### Kubernetes configuration
 
 As an example, configure the following environment variables:
 
@@ -387,4 +387,4 @@ eks_managed_node_group_defaults {
 }
 ```
 
-Overall this will disable the role assumption of the node for the Kubernetes pod. Depending on the resulting error within Operate / Zeebe / Web-Modeler, you'll get a clearer error, which is helpful to debug the error more easily.
+Overall, this will disable the role assumption of the node for the Kubernetes pod. Depending on the resulting error within Operate, Zeebe, and Web-Modeler, you'll get a clearer error, which is helpful to debug the error more easily.
