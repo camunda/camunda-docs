@@ -4,27 +4,25 @@ title: "Supported environments"
 description: "Find out where to run Camunda Platform 8 components for SaaS and Self-Managed, including Optimize for both Camunda Platform 8 and Camunda Platform 7."
 ---
 
-## Camunda Platform 8 SaaS & Self-Managed
-
-### Clients
-
-- **Zeebe Java Client**: OpenJDK 8+
-- **Zeebe Go Client**: Go 1.13+
-- **zbctl**: Windows, MacOS, and Linux (latest)
-
-_Hint: There are more [community-maintained Camunda Platform 8 clients](/apis-tools/community-clients/index.md)._
-
-### Web Browser
+## Web Browser
 
 - Google Chrome latest [recommended]
 - Mozilla Firefox latest
 - Microsoft Edge latest
 
-### Desktop Modeler
+## Desktop Modeler
 
 - Windows 7 / 10
 - Mac OS X 10.11
 - Ubuntu LTS (latest)
+
+## Clients
+
+- **Zeebe Java Client**: OpenJDK 8+
+- **Zeebe Go Client**: Go 1.13+
+- **zbctl**: Windows, MacOS, and Linux (latest)
+
+_See more community-maintained Camunda Platform 8 clients [here](/apis-tools/community-clients/index.md)._
 
 ## Camunda Platform 8 Self-Managed
 
@@ -42,6 +40,10 @@ Requirements for the components can be seen below:
 | Web Modeler | -            | Keycloak 16.1.x, 18.x, 19.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15x. (other database systems are currently not supported) |
 
 <sup>\* 8.2.x patches will only be released on the OS 1.3 branch until end of 2023 given that OS 1.3 maintenance period ends by then. We recommend customers to go to 8.3.x which supports OS 2.5+.</sup>
+
+:::note Elasticsearch support
+Camunda Platform 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch.
+:::
 
 ### Version Matrix
 
