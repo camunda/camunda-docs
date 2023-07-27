@@ -77,6 +77,20 @@ You can still use GitHub Webhook Connector in Desktop Modeler, or with your Camu
 In that case, GitHub Webhook Connector deployments and URLs will not be displayed in Modeler.
 :::
 
+## Configure GitHub
+
+1. Make sure you have administrator rights for repository where you wish to enable a webhook.
+2. Open a repository in your web browser and navigate to _Settings_ page.
+3. Click on _Webhooks_ tab.
+4. Click on _Add webhook_.
+5. Fill the required fields.
+   5.1. _Payload URL_ - a URL of your webhook.
+   5.2. _Content type_ - choose `application/json`.
+   5.3. _Secret_ - is a shared secret between GitHub and your BPMN diagram.
+6. Confirm by clicking _Add webhook_.
+
+Please refer an official [GitHub page](https://docs.github.com/en/rest/webhooks) for more details.
+
 ## Next steps
 
 - Learn more about [GitHub webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
