@@ -3,15 +3,12 @@ id: defining-templates
 title: Defining templates
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 Templates are defined in template descriptor files as a JSON array:
 
 ```json
 [
   {
-    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
+    "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
     "name": "Template 1",
     "id": "sometemplate",
     "description": "some description",
@@ -37,13 +34,7 @@ As seen in the code snippet a template consist of a number of important componen
 
 - `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Platform 8 element templates.
 
-  Camunda Platform 7 example:
-
-  ```json
-  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json"
-  ```
-
-  Camunda Platform 8 example:
+  Example:
 
   ```json
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"
@@ -60,22 +51,17 @@ As seen in the code snippet a template consist of a number of important componen
 
 ### JSON schema compatibility
 
-The application uses the `$schema` property to ensure compatibility for a given element template. You find the latest supported versions here:
-
-- [Camunda Platform 7](https://www.npmjs.com/package/@camunda/element-templates-json-schema)
-- [Camunda Platform 8](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema)
+The application uses the `$schema` property to ensure compatibility for a given element template. You find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
 
 The tooling will ignore element templates defining a higher `$schema` version and will log a warning message.
 
 For example, given the following `$schema` definition, the application takes `0.9.1` as the JSON Schema version of the element template.
 
 ```json
-"$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.9.1/resources/schema.json"
+"$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.9.1/resources/schema.json"
 ```
 
-The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, Camunda Modeler assumes the latest JSON Schema version for Camunda Platform 7 element templates.
-
-Learn more about specifing a `$schema` [here](../defining-templates).
+The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
 
 ### Supported BPMN types
 
@@ -94,73 +80,71 @@ Let us consider the following example that defines a template for a mail sending
 
 ```json
 {
-  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json",
-  "name": "Mail Task",
-  "id": "com.camunda.example.MailTask",
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "REST Connector",
+  "id": "io.camunda.examples.RestConnector",
+  "description": "A REST API invocation task.",
   "appliesTo": ["bpmn:ServiceTask"],
   "properties": [
     {
-      "label": "Implementation Type",
-      "type": "String",
-      "value": "com.mycompany.MailTaskImpl",
-      "editable": false,
+      "type": "Hidden",
+      "value": "http",
       "binding": {
-        "type": "property",
-        "name": "camunda:class"
+        "type": "zeebe:taskDefinition:type"
       }
     },
     {
-      "label": "Sender",
+      "label": "REST Endpoint URL",
+      "description": "Specify the url of the REST API to talk to.",
       "type": "String",
       "binding": {
-        "type": "camunda:inputParameter",
-        "name": "sender"
+        "type": "zeebe:taskHeader",
+        "key": "url"
       },
       "constraints": {
-        "notEmpty": true
+        "notEmpty": true,
+        "pattern": {
+          "value": "^https?://.*",
+          "message": "Must be http(s) URL."
+        }
       }
     },
     {
-      "label": "Receivers",
+      "label": "REST Method",
+      "description": "Specify the HTTP method to use.",
+      "type": "Dropdown",
+      "value": "get",
+      "choices": [
+        { "name": "GET", "value": "get" },
+        { "name": "POST", "value": "post" },
+        { "name": "PATCH", "value": "patch" },
+        { "name": "DELETE", "value": "delete" }
+      ],
+      "binding": {
+        "type": "zeebe:taskHeader",
+        "key": "method"
+      }
+    },
+    {
+      "label": "Request Body",
+      "description": "Data to send to the endpoint.",
+      "value": "",
       "type": "String",
+      "optional": true,
       "binding": {
-        "type": "camunda:inputParameter",
-        "name": "receivers"
-      },
-      "constraints": {
-        "notEmpty": true
+        "type": "zeebe:input",
+        "name": "body"
       }
     },
     {
-      "label": "Template",
-      "description": "By the way, you can use freemarker templates ${...} here",
-      "value": "Hello ${firstName}!",
-      "type": "Text",
-      "binding": {
-        "type": "camunda:inputParameter",
-        "name": "messageBody",
-        "scriptFormat": "freemarker"
-      },
-      "constraints": {
-        "notEmpty": true
-      }
-    },
-    {
-      "label": "Result Status",
-      "description": "The process variable to which to assign the send result to",
+      "label": "Result Variable",
+      "description": "Name of variable to store the response data in.",
+      "value": "response",
       "type": "String",
-      "value": "mailSendResult",
+      "optional": true,
       "binding": {
-        "type": "camunda:outputParameter",
-        "source": "${ resultStatus }"
-      }
-    },
-    {
-      "label": "Async before?",
-      "type": "Boolean",
-      "binding": {
-        "type": "property",
-        "name": "camunda:asyncBefore"
+        "type": "zeebe:output",
+        "source": "= body"
       }
     }
   ]
@@ -169,13 +153,14 @@ Let us consider the following example that defines a template for a mail sending
 
 The example defines five custom fields, each mapped to different technical properties:
 
-- _Implementation Type_ is mapped to the `camunda:class` property in BPMN 2.0 XML
-- _Sender_, _Receivers_ and _Template_ properties are mapped to `input parameters`
-- _Result Status_ is mapped back from the Java delegate into a process variable via an `output parameter`
+- The task type `http` is mapped to the `zeebe:taskDefinition:type` property in BPMN 2.0 XML
+- The `REST Endpoint URL` and `REST Method` are mapped to `task headers`
+- The `Request Body` is mapped to a local variable via an `input parameter`
+- The `Result Variable` is mapped into a process variable via an `output parameter`
 
-All but the _Implementation Type_ are editable by the user through the properties panel as shown in the following screenshot:
+The task type is hidden to the user, and other properties are editable by the user through the properties panel as shown in the following screenshot:
 
-![Custom Fields](./img/custom-fields.png)
+![Custom Fields](./img/overview.png)
 
 As seen in the example the important attributes in a property definition are:
 
@@ -185,7 +170,7 @@ As seen in the example the important attributes in a property definition are:
 - `binding`: Specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings))
 - `constraints`: A list of editing constraints to apply to the template
 
-In addition, Camunda Platform 8 supports these properties:
+In addition, fields can be activated conditionally via these properties:
 
 - `id`: An identifier that can be used to reference the property in conditional properties
 - `condition`: A condition that determines when [the property is active](#defining-conditional-properties)
@@ -196,11 +181,9 @@ The input types `String`, `Text`, `Boolean`, `Dropdown` and `Hidden` are availab
 
 ##### Boolean / checkbox type
 
-The `Boolean` type maps to a checkbox that can be toggled by the user. It renders as shown below:
+The `Boolean` type maps to a checkbox that can be toggled by the user.
 
-![Boolean / Checkbox control](./img/field-boolean.png)
-
-When checked, it maps to `true` in the respective field (see [bindings](#bindings)). Note that it does not map to `${true}` and can therefore not be used e.g., for mapping a boolean to a process variable.
+When checked, it maps to `true` in the respective field (see [bindings](#bindings)).
 
 ##### Dropdown type
 
@@ -211,14 +194,20 @@ The `Dropdown` type allows users to select from a number of pre-defined options 
   "properties": [
     ...
     {
-      "label": "Task Priority",
+      "label": "REST Method",
+      "description": "Specify the HTTP method to use.",
       "type": "Dropdown",
-      "value": "50",
+      "value": "get",
       "choices": [
-        { "name": "low", "value": "20" },
-        { "name": "medium", "value": "50" },
-        { "name": "height", "value": "100" }
-      ]
+        { "name": "GET", "value": "get" },
+        { "name": "POST", "value": "post" },
+        { "name": "PATCH", "value": "patch" },
+        { "name": "DELETE", "value": "delete" }
+      ],
+      "binding": {
+        "type": "zeebe:taskHeader",
+        "key": "method"
+      }
     }
   ]
 ...
@@ -228,48 +217,20 @@ The resulting properties panel control looks like this:
 
 ![properties panel drop down](./img/field-dropdown.png)
 
-##### Omitted type
-
-:::note
-Omitting the type is supported in Camunda Platform 7 element templates only.
-:::
-
-By omitting the `type` configuration the default UI component will be rendered for the respective binding.
-
-For `camunda:inputParameter` and `camunda:outputParameter` bindings an Input / Output Parameter Mapping component will be rendered. The component will include a toggle to enable or disable the `Variable Assignment`. When untoggling, the respective `camunda:inputParameter` or `camunda:outputParameter` element will not be created in the BPMN XML.
-
-![default-rendering](./img/default-rendering.png)
-
-Note that the configuration options `editable` and `constraints` will have no effect for the `camunda:inputParameter` and `camunda:outputParameter` default component.
-
-For `camunda:errorEventDefinition` bindings, an Error component will be rendered. The component will include all properties of the referenced `bpmn:Error` element.
-
-![default-errors-rendering](./img/default-errors-rendering.png)
-
-Note that the configuration options `editable` and `constraints` will have no effect for the `camunda:errorEventDefinition` default component.
-
-For the `property`, `camunda:property`, `camunda:in`, `camunda:in:businessKey`, `camunda:out` and `camunda:field` bindings, an omitted `type` will lead to rendering the `String` component (single line input).
-
-For the `camunda:executionListener` binding, an omitted `type` will lead to the `Hidden` component (ie. no visible input for the user).
-
 ##### FEEL
 
-:::note
-FEEL properties are only supported in Camunda Platform 8 element templates.
-:::
-
 We support the feel properties `optional` and `required`.
-When set, the input field offers visual indications that a feel expression is expected.
+When set, the input field offers visual indications that a FEEL expression is expected.
 
 ```json
   "properties": [
     {
-      "label": "Optional Feel Expression",
+      "label": "Optional FEEL Expression",
       "type": "String",
       "feel": "optional"
     },
     {
-      "label": "Required Feel Expression",
+      "label": "Required FEEL Expression",
       "type": "Text",
       "feel": "required"
     }
@@ -278,26 +239,16 @@ When set, the input field offers visual indications that a feel expression is ex
 
 ###### Supported types
 
-Camunda Platform 8 supports `feel` on the following input types:
+The property `feel` is supported on the following input types:
 
 - `String`
 - `Text`
 
 #### Bindings
 
-The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The _"mapping result"_ in the following section will use `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` will be displayed and used for `[userInput]`. `[]` brackets will be used to indicate where the parameters are mapped to in the XML.
+The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The _mapping result_ in the following section will use `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` will be displayed and used for `[userInput]`. `[]` brackets will be used to indicate where the parameters are mapped to in the XML.
 
 Notice that adherence to the following configuration options is enforced by design. If not adhering, it logs a validation error and ignores the respective element template.
-
-<Tabs groupId="bindings" defaultValue="both" values={
-[
-{label: 'Bindings for Camunda Platform 7 and 8', value: 'both', },
-{label: 'Bindings for Camunda Platform 7', value: 'platform', },
-{label: 'Bindings for Camunda Platform 8', value: 'cloud', },
-]
-}>
-
-<TabItem value='both'>
 
 ##### `property`
 
@@ -306,88 +257,6 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Valid property `type`'s** | all property types are supported |
 | **Binding parameters**      | `name`: the name of the property |
 | **Mapping result**          | `<... [name]=[userInput] ... />` |
-
-The `property` binding is supported both in Camunda Platform 7 and 8.
-
-</TabItem>
-
-<TabItem value='platform'>
-
-##### `camunda:property`
-
-| **Binding `type`**          | `camunda:property`                                       |
-| --------------------------- | -------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br />`Hidden`<br />`Dropdown`                   |
-| **Binding parameters**      | `name`: the name of the extension element property       |
-| **Mapping result**          | `<camunda:property name="[name]" value="[userInput]" />` |
-
-##### `camunda:inputParameter`
-
-| **Binding `type`**          | `camunda:inputParameter`                                                                                                                                                                                                                                                                              |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`                                                                                                                                                                                                                                                   |
-| **Binding parameters**      | `name`: the name of the input parameter<br />`scriptFormat`: the format of the script (if script is to be mapped)                                                                                                                                                                                     |
-| **Mapping result**          | If `scriptFormat` is not set:<br />`<camunda:inputParameter name="[name]">[userInput]</camunda:inputParameter>`<br /><br />If `scriptFormat` is set:<br />`<camunda:inputParameter name="[name]"><camunda:script scriptFormat="[scriptFormat]">[userInput]</camunda:script></camunda:inputParameter>` |
-
-##### `camunda:outputParameter`
-
-| **Binding `type`**           | `camunda:outputParameter`                                                                                                                                                                                                                                                                                    |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Valid property `type`'s**  | `String`<br />`Hidden`<br />`Dropdown`                                                                                                                                                                                                                                                                       |
-| **Binding parameters**       | `source`: the source value to be mapped to the `outputParameter`<br />`scriptFormat`: the format of the script (if script is to be mapped)                                                                                                                                                                   |
-| **Mapping result (example)** | If `scriptFormat` is not set:<br />`<camunda:outputParameter name="[userInput]">[source]</camunda:inputParameter>`<br /><br />If `scriptFormat` is set:<br />`<camunda:outputParameter name="[userInput]"><camunda:script scriptFormat="[scriptFormat]">[source]</camunda:script></camunda:outputParameter>` |
-
-##### `camunda:in`
-
-| **Binding `type`**          | `camunda:in`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br />`Hidden`<br />`Dropdown`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| **Binding parameters**      | `target`: the target value to be mapped to<br />`expression`: `true` indicates that the userInput is an expression<br />`variables`: either `all` or `local` indicating the variable mapping                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| **Mapping result**          | If `target` is set:<br />`<camunda:in source="[userInput]" target="[target]"/>`<br /><br />If `target` is set and `expression` is set to `true`:<br />`<camunda:in sourceExpression="[userInput]" target="[target]" />`<br /><br /> If `variables` is set to `local`:<br />` <camunda:in local="true" variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`)<br /><br />If `variables` is set to `local` and `target` is set:<br />`<camunda:in local="true" source="[userInput]" target="[target]" />`<br /><br />If `variables` is set to `local`, `target` is set and `expression` is set to `true`:<br />`<camunda:in local="true" sourceExpression="[userInput]" target="[target]" />`<br /><br />If `variables` is set to `all`:<br />`<camunda:in variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`) |
-
-##### `camunda:in:businessKey`
-
-| **Binding `type`**          | `camunda:in:businessKey`                   |
-| --------------------------- | ------------------------------------------ |
-| **Valid property `type`'s** | `String`<br />`Hidden`<br />`Dropdown`     |
-| **Binding parameters**      |                                            |
-| **Mapping result**          | `<camunda:in businessKey="[userInput]" />` |
-
-##### `camunda:out`
-
-| **Binding `type`**          | `camunda:out`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br />`Hidden`<br />`Dropdown`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| **Binding parameters**      | `source`: the source value to be mapped<br />`sourceExpression`: a string containing the expression for the source attribute<br />`variables`: either `all` or `local` indicating the variable mapping                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| **Mapping result**          | If `source` is set:<br />`<camunda:out source="[source]" target="[userInput]" />`<br /><br />If `sourceExpression` is set:<br />`<camunda:out sourceExpression="[sourceExpression]" target="[userInput]" />`<br /><br />If `variables` is set to `all`:<br />`<camunda:out variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`)<br /><br />If `variables` is set to `local` and `source` is set:<br />`<camunda:out local="true" source="[source]" target="[userInput]" />`<br /><br />If `variables` is set to `local` and `sourceExpression` is set:<br />`<camunda:out local="true" sourceExpression="[source]" target="[userInput]" />`<br /><br />If `variables` is set to `local`:<br />`<camunda:out local="true" variables="all" />` (Notice there is no `[userInput]`, therefore has to use property `type` of value `Hidden`) |
-
-##### `camunda:executionListener`
-
-| **Binding `type`**          | `camunda:executionListener`                                                                                                                                                                                                                                                       |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `Hidden`                                                                                                                                                                                                                                                                          |
-| **Binding parameters**      | `event`: value for the `event` attribute<br />`scriptFormat`: value for the `scriptFormat` attribute                                                                                                                                                                              |
-| **Mapping result**          | `<camunda:executionListener event="[event]"><camunda:script scriptFormat="[scriptFormat]">[value]</camunda:script></camunda:executionListener>`<br />(Notice that `[value]` needs to be set, since only `Hidden` is allowed as a type hence the user can not set a `[userInput]`) |
-
-##### `camunda:field`
-
-| **Binding `type`**          | `camunda:field`                                                                                                                                                                                                                   |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`                                                                                                                                                                               |
-| **Binding parameters**      | `name`: value for the `name` attribute<br />`expression`: `true` that an expression is passed                                                                                                                                     |
-| **Mapping result**          | `<camunda:field name="[name]"><camunda:string>[userInput]</camunda:string></camunda:field>`<br /><br />If `expression` is set to `true`:<br />`<camunda:field name="[name]"><camunda:expression>[userInput]</camunda:expression>` |
-
-##### `camunda:errorEventDefinition`
-
-| **Binding `type`**          | `camunda:errorEventDefinition`                                                                                                                                                                                                                       |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br />`Hidden`<br />`Dropdown`                                                                                                                                                                                                               |
-| **Binding parameters**      | `errorRef`: reference to a scoped `bpmn:Error` binding, generates the `errorRef` attribute as unique id <br />                                                                                                                                       |
-| **Mapping result**          | `<camunda:errorEventDefinition id="[unique element id]" expression="[userInput]" errorRef="Error_[errorRef]_[unique suffix]" />` <br /><br /> For the referenced scoped `bpmn:Error` binding: `<bpmn:Error id="Error_[errorRef]_[unique suffix]" />` |
-
-</TabItem>
-
-<TabItem value='cloud'>
 
 ##### `zeebe:input`
 
@@ -431,14 +300,7 @@ The `property` binding is supported both in Camunda Platform 7 and 8.
 
 The `zeebe:property` binding allows you to set any arbitrary property for an outside system. It does not impact execution of the Zeebe engine.
 
-</TabItem>
-</Tabs>
-
 #### Optional bindings
-
-:::note
-Optional bindings are only supported in Camunda Platform 8 element templates.
-:::
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
 
@@ -477,67 +339,16 @@ If a user removes the value in the configured control, it will also remove the m
 
 ##### Supported Bindings
 
-Camunda Platform 8 supports `optional` on the following binding types:
+The following binding types can be `optional`:
 
 - `zeebe:input`
 - `zeebe:output`
 - `zeebe:taskHeader`
 - `zeebe:property`
 
-#### Scoped bindings
-
-:::note
-Scoped bindings are only supported in Camunda Platform 7 element templates.
-:::
-
-Scoped bindings allow you to configure nested elements, such as [Camunda Platform 7 Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
-
-```json
-{
-  "name": "ConnectorGetTask",
-  "id": "my.connector.http.get.Task",
-  "appliesTo": [
-    "bpmn:Task"
-  ],
-  "properties": [],
-  "scopes": [
-    {
-      "type": "camunda:Connector",
-      "properties": [
-        {
-          "label": "ConnectorId",
-          "type": "String",
-          "value": "My Connector HTTP - GET",
-          "binding": {
-            "type": "property",
-            "name": "connectorId"
-          }
-        },
-        ...
-      ]
-    }
-  ]
-}
-```
-
-The example shows how a Connector is configured as part of the task.
-On task creation, the Connector is created with it and the Connector bindings are
-exposed to the user in a separate custom fields section.
-
-![Scoped Custom Fields](./img/scope-custom-fields.png)
-
-##### Supported Scopes
-
-Camunda Platform 7 supports the following scope bindings:
-
-| Name                | Target                                                                                     |
-| ------------------- | ------------------------------------------------------------------------------------------ |
-| `camunda:Connector` | [Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/) |
-| `bpmn:Error`        | Global BPMN Error Element                                                                  |
-
 #### Groups
 
-You may define `groups` to organize custom fields into:
+You can define `groups` to organize custom fields into:
 
 ```json
 {
@@ -574,12 +385,12 @@ Associate a field with a group (ID) via the fields `group` key:
   ...
   "properties": [
     {
-      "label": "Implementation Type",
-      "type": "String",
       "group": "definition",
+      "label": "Task type",
+      "type": "String",
+      "value": "http",
       "binding": {
-        "type": "property",
-        "name": "camunda:class"
+        "type": "zeebe:taskDefinition:type"
       }
     },
     ...
@@ -601,7 +412,7 @@ Custom Fields may have a number of constraints associated with them:
 
 ##### Regular expression
 
-Together with the `pattern` constraint, you may define your custom error messages:
+Together with the `pattern` constraint, you can define your custom error messages:
 
 ```json
 ...
@@ -622,10 +433,6 @@ Together with the `pattern` constraint, you may define your custom error message
 ```
 
 #### Icons
-
-:::note
-Icons are currently supported in Camunda Platform 8 element templates only.
-:::
 
 It is possible to define custom icons to update the visual appearance of elements after applying an element template.
 
@@ -674,10 +481,6 @@ Per default, the element template defines the visible entries of the properties 
 ![Display default entries](./img/entries-visible.png)
 
 ### Defining conditional properties
-
-:::note
-Conditional properties are currently supported in Camunda Platform 8 element templates only.
-:::
 
 Properties may have a condition which determines when they should be active, depending on the value of another property. When property is **active**, it is displayed in the properties panel, and its value is serialized in the XML. If a property is **not active**, it is not displayed, and its value is removed from the XML.
 

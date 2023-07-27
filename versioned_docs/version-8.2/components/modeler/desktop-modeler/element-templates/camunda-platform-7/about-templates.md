@@ -1,5 +1,5 @@
 ---
-id: about-templates
+id: c7-about-templates
 title: About element templates
 description: "Element templates are a way to extend Camunda Modeler with domain-specific diagram elements, such as service and user tasks."
 ---
@@ -9,7 +9,7 @@ Element templates are currently available in BPMN diagrams only.
 :::
 
 :::note
-For Camunda Platform 7 element templates documentation, go to [Camunda Platform 7 element templates](./camunda-platform-7/about-templates.md).
+For Camunda Platform 8 element templates documentation, go to [Camunda Platform 8 element templates](../about-templates.md).
 :::
 
 Element templates are a way to extend the [modeler](https://camunda.org/bpmn/tool/) with domain-specific diagram elements, such as service and user tasks.
@@ -20,4 +20,4 @@ Applicable element templates can be assigned to a BPMN element via the propertie
 
 Applying an element template configures the diagram element with pre-defined values for BPMN properties, input/output mappings, and extension properties.
 
-As seen in the _REST Connector_ example above, it also provides custom editing UI, input validation, and assistance.
+As seen in the _Mail Task_ example above, it also provides custom editing UI, input validation, and assistance.

@@ -1,5 +1,5 @@
 ---
-id: using-templates
+id: c7-using-templates
 title: Using templates
 description: "Learn how to apply, remove, update, and replace templates."
 ---
@@ -10,13 +10,24 @@ If a template matches a selected diagram element, the template catalog button wi
 
 ![Template Chooser](./img/chooser.png)
 
-Clicking **Select** opens a modal menu, allowing the user to browse and search available templates for the
+Clicking **Catalog** opens a modal menu, allowing the user to browse and search available templates for the
 selected element.
 
 ![Modal Menu](./img/modal.png)
 
 Applying a template stores it via the `modelerTemplate` property and the optional `modelerTemplateVersion` property
 on the selected element:
+
+Camunda Platform 7:
+
+```xml
+
+<bpmn:serviceTask id="MailTask"
+                  camunda:modelerTemplate="com.mycompany.MailTask"
+                  camunda:modelerTemplateVesion="1"/>
+```
+
+Camunda Platform 8:
 
 ```xml
 
@@ -48,7 +59,7 @@ Templates are updated according to the following rules:
 
 1. If the property is set in new template, it will override unless the property was set by the old template and changed afterwards.
 2. If the property is not defined in the new template, it will unset.
-3. Sub-properties of complex properties (e.g. `zeebe:input`, `zeebe:output`) are handled
+3. Sub-properties of complex properties (e.g. camunda:In, camunda:Out, camunda:ExecutionListener) are handled
    according to these rules if they can be identified.
 
 ### Replacing templates
