@@ -22,7 +22,7 @@ description: "Find out where to run Camunda Platform 8 components for SaaS and S
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, MacOS, and Linux (latest)
 
-_There are more [community-maintained Camunda Platform 8 clients](/apis-tools/community-clients/index.md)._
+_See more community-maintained Camunda Platform 8 clients [here](/apis-tools/community-clients/index.md)._
 
 ## Camunda Platform 8 Self-Managed
 
