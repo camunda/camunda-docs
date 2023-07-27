@@ -7,10 +7,10 @@ description: "Learn how to adjust your BPMN models when migrating from Camunda P
 Ensure your BPMN process models are adjusted as follows to migrate them from Camunda Platform 7 to Camunda Platform 8:
 
 - The namespace of extensions has changed from `http://camunda.org/schema/1.0/bpmn` to `http://camunda.org/schema/zeebe/1.0`.
-- Different configuration attributes are used
+- Different configuration attributes are used between the platform versions.
 - Camunda Platform 8 has a _different coverage_ of BPMN elements (see [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) versus [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
 
-The following sections describe what the existing community-supported [backend diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) does by BPMN symbol and explain unsupported attributes.
+The following sections describe what the existing community-supported [backend diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) for relevant BPMN symbols, including unsupported element attributes that cannot be migrated.
 
 ### General considerations
 
@@ -24,7 +24,9 @@ The following attributes/elements **cannot** be migrated:
 
 ### Service tasks
 
-Migrating a service task is described in detail in the section about adjusting your source code below:
+:::note
+Migrating a service task is described in [adjusting your source code](/guides/migrating-from-camunda-platform-7/adjusting-source-code.md). You will have both BPMN and source code changes.
+:::
 
 ![Service Task](../../components/modeler/bpmn/assets/bpmn-symbols/service-task.svg)
 
@@ -74,7 +76,7 @@ The following is **not** possible:
 - Using SPIN library (the FEEL data structure behaves like JSON natively, so SPIN can be omitted or replaced)
 - Using the `execution` or `task`
 
-### Human tasks
+### User tasks
 
 ![User Task](../../components/modeler/bpmn/assets/bpmn-symbols/user-task.svg)
 
@@ -114,7 +116,7 @@ The following attributes/elements **cannot** yet be migrated:
 
 ![Business Rule Task](../../components/modeler/bpmn/assets/bpmn-symbols/business-rule-task.svg)
 
-Camunda Platform 8 supports the DMN standard just as Camunda Platform 7 does, so the business rule task can basically be migrated.
+Camunda Platform 8 supports the DMN standard just as Camunda Platform 7 does, so the business rule task can be migrated with the following slight changes:
 
 The following attributes/elements can be migrated:
 

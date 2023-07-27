@@ -5,7 +5,7 @@ description: "Learn how and where to adjust your source code when migrating from
 keywords: ["migrating to Zeebe"]
 ---
 
-Camunda Platform 8 has a different workflow engine than Camunda Platform 7 - Zeebe. As a result, you must migrate some of your code to work with the Zeebe API, especially code that does the following:
+Camunda Platform 8 has a different workflow engine than Camunda Platform 7 - [Zeebe](/components/zeebe/zeebe-overview.md). As a result, you must migrate some of your code to work with the Zeebe API, especially code that does the following:
 
 - Uses the Client API (e.g. to start process instances)
 - Implements [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), which can be:

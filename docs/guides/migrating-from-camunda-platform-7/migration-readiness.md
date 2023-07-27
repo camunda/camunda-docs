@@ -1,14 +1,12 @@
 ---
 id: migration-readiness
-title: Getting ready to migrate
+title: Migration preparation
 description: "Learn readiness indicators for migrating from Camunda Platform 7 to Camunda Platform 8."
 ---
 
 :::note
 Migration of existing projects to Camunda Platform 8 is optional. Camunda Platform 7 still has ongoing [support](https://docs.camunda.org/enterprise/announcement/).
 :::
-
-## Migration overview
 
 Let's discuss if you need to migrate before diving into the necessary steps and what tools can help you achieve the migration.
 
@@ -22,7 +20,7 @@ You should consider migrating existing Camunda Platform 7 solutions if:
 
 - You are looking to leverage a SaaS offering (e.g. to reduce the effort for hardware or infrastructure setup and maintenance).
 - You are in need of performance at scale and/or improved resilience.
-- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the new Connectors framework, or the improved collaboration features in Web Modeler).
+- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the new [Connectors framework](/components/connectors/introduction.md), or the improved collaboration features in Web Modeler).
 
 ## Migration steps
 
@@ -90,7 +88,7 @@ To implement Camunda Platform 7 process solutions that can be easily migrated, s
 - Avoid using any implementation classes from Camunda; generally, those with `\*.impl.\*` in their package name.
 - Avoid using engine plugins.
 
-We also recommend reviewing [BPMN elements supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md), though any feature gap will likely be closed soon.
+We also recommend reviewing [BPMN elements supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md). We are actively working on closing feature gaps.
 
 [Execution Listeners](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#execution-listener) and [Task Listeners](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#task-listener) are areas in Camunda Platform 8 that are still under discussion. Currently, those use cases need to be solved slightly differently. Depending on your use case, the following Camunda Platform 8 features can be used:
 
@@ -151,7 +149,7 @@ You should not trust ACID [transaction managers](https://blog.bernd-ruecker.com/
 
 You should apply the [information hiding principle](https://en.wikipedia.org/wiki/Information_hiding) and not expose too much of the Camunda API to other parts of your application.
 
-In the above example, you should not hand over an execution context to your CrmFacade:
+In the below example, you should not hand over an execution context to your `CrmFacade``:
 
 ```java
 // DO NOT DO THIS!
