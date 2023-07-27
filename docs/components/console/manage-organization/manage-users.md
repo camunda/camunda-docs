@@ -34,6 +34,14 @@ Users are invited to a Camunda Platform 8 organization via their email address, 
 
 People who do not yet have a Camunda Platform 8 account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda Platform 8 account by following the instructions in the invitation email.
 
+## Resource-based authorizations
+
+You can define fine-grained permissions on process and decision instances in the user details by clicking on a user entry.
+
+<!-- @Ben: please add more details about rba -->
+
+![User Details](./img/user-details-authorized-resources.png)
+
 ## Limitations
 
 Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
