@@ -3,9 +3,6 @@ id: defining-templates
 title: Defining templates
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 Templates are defined in template descriptor files as a JSON array:
 
 ```json
@@ -65,8 +62,6 @@ For example, given the following `$schema` definition, the application takes `0.
 ```
 
 The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
-
-Learn more about specifing a `$schema` [here](../defining-templates).
 
 ### Supported BPMN types
 
