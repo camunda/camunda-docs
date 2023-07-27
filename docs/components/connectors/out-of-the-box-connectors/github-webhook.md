@@ -79,17 +79,16 @@ In that case, GitHub Webhook Connector deployments and URLs will not be displaye
 
 ## Configure GitHub
 
-1. Make sure you have administrator rights for repository where you wish to enable a webhook.
-2. Open a repository in your web browser and navigate to _Settings_ page.
-3. Click on _Webhooks_ tab.
-4. Click on _Add webhook_.
-5. Fill the required fields.
-   5.1. _Payload URL_ - a URL of your webhook.
-   5.2. _Content type_ - choose `application/json`.
-   5.3. _Secret_ - is a shared secret between GitHub and your BPMN diagram.
-6. Confirm by clicking _Add webhook_.
+1. Ensure you have administrator rights for the repository where you wish to enable a webhook.
+2. Open a repository in your web browser and navigate to the **Settings** page.
+3. Click **Webhooks > Add webhook**.
+4. Fill the required fields.
+   5.1. **Payload URL** - a URL of your webhook.
+   5.2. **Content type** - choose `application/json`.
+   5.3. **Secret** - is a shared secret between GitHub and your BPMN diagram.
+5. Confirm by clicking **Add webhook**.
 
-Please refer an official [GitHub page](https://docs.github.com/en/rest/webhooks) for more details.
+Refer to the [GitHub documentation](https://docs.github.com/en/rest/webhooks) for more details.
 
 ## Next steps
 
