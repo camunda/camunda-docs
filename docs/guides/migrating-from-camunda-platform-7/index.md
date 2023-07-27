@@ -1,6 +1,6 @@
 ---
 id: index
-title: Before starting a migration
+title: Pre-migration details
 description: "Migrate process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8."
 keywords:
   [
