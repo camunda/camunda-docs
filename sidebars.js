@@ -787,7 +787,17 @@ module.exports = {
                 id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
               },
               items: [
-                "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
+                {
+                  type: "category",
+                  label: "Amazon EKS",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks",
+                  },
+                  items: [
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
+                  ],
+                },
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
