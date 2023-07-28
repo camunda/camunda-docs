@@ -36,11 +36,20 @@ People who do not yet have a Camunda Platform 8 account can also be invited to a
 
 ## Resource-based authorizations
 
-You can define fine-grained permissions on process and decision instances in the user details by clicking on a user entry.
+Resource authorizations allow you to control the level of access a user has to a particular resource in the system. To create, update, or delete the resource authorizations
+assigned to a user, click on the respective row of the users table.
 
-<!-- @Ben: please add more details about rba -->
+#### Creation
+
+To initiate the creation flow click on **Create resource authorization**
 
 ![User Details](./img/user-details-authorized-resources.png)
+
+#### Updating and Deleting
+
+To update an existing authorization, click on the **pencil icon** relevant row, to delete, click on the **trash can** icon
+
+[//]: # "@Adam - could you include a screenshot here of a table with at least one row?"
 
 ## Limitations
 
