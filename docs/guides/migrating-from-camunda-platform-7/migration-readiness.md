@@ -70,7 +70,7 @@ The [Camunda Platform 7 to Camunda Platform 8 migration tooling](https://github.
 
 3. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) to migrate running process instances from Camunda Platform 7 to Camunda Platform 8. Ideally, you should let running instances finish prior to migrating.
 
-The tools mentioned above are a good starting point, but are only one option for how you can approach your migration.
+The tools mentioned above are a good starting point, but are only one option for how you can approach your migration, as described below.
 
 ## Prepare for smooth migrations
 
