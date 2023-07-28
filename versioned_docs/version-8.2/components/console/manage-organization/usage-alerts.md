@@ -46,4 +46,4 @@ Usage alerts can be edited and turned on/off anytime by selecting **Edit alert**
 
 Users can track changes in the usage alerts under the logs of the **Activity** tab.
 
-![Usage Alert Logs](./img/usage_alert_logs.png)
+![Usage Alert Logs](./img/usage_alerts_logs.png)
