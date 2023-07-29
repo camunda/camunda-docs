@@ -2,6 +2,7 @@
 id: what-is-identity
 title: "What is Identity?"
 sidebar_label: "What is Identity?"
+description: "Identity is the component within the Camunda Platform 8 stack responsible for authentication and authorization."
 ---
 
 :::note Looking for IAM documentation?

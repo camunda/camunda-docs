@@ -5,23 +5,21 @@ sidebar_label: "Installation and first steps"
 description: "Learn more about installing Identity, accessing the UI, default users, the home screen, and more."
 ---
 
-## Installation
+To use Identity, install it locally via Docker or Kubernetes.
 
-To use Identity, first install it locally via Docker or Kubernetes.
-
-Follow the [Installation Guide](/self-managed/platform-deployment/overview.md).
+Follow the [Installation Guide](/self-managed/platform-deployment/overview.md) for more details on this process.
 
 ## Accessing the UI
 
-As soon as the component is started, you can access the login page and log in to the Identity application.
+As soon as Identity is started, you can access the login page and log in to the Identity application.
 
-Navigate to [localhost:8080](http://localhost:8080) to see the UI exposed by the Identity component.
+Navigate to [localhost:8080](http://localhost:8080) to see the UI exposed by Identity.
 
 ![identity-login-page](./img/identity-login-page.png)
 
 ## Default user
 
-The configuration in this guide creates an example user during installation; use this account to log in.
+The configuration in this guide creates an example user during installation; use this account to log in:
 
 ```text
 Username: demo

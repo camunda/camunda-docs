@@ -12,8 +12,6 @@ Head over to our documentation on [groups](/self-managed/concepts/access-control
 
 ## Assign users to a group
 
-In this guide we will show you how to use Identity to assign users to a group.
-
 :::caution Write access needed
 To assign a user to a group, you must have write access to Identity.
 Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
