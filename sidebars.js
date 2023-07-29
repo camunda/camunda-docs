@@ -44,16 +44,16 @@ module.exports = {
         {
           Connectors: [
             "guides/update-guide/connectors/introduction",
-            "guides/update-guide/connectors/010-to-020",
-            "guides/update-guide/connectors/020-to-030",
-            "guides/update-guide/connectors/030-to-040",
-            "guides/update-guide/connectors/040-to-050",
-            "guides/update-guide/connectors/050-to-060",
-            "guides/update-guide/connectors/060-to-070",
-            "guides/update-guide/connectors/070-to-080",
-            "guides/update-guide/connectors/080-to-090",
-            "guides/update-guide/connectors/090-to-0100",
             "guides/update-guide/connectors/0100-to-0110",
+            "guides/update-guide/connectors/090-to-0100",
+            "guides/update-guide/connectors/080-to-090",
+            "guides/update-guide/connectors/070-to-080",
+            "guides/update-guide/connectors/060-to-070",
+            "guides/update-guide/connectors/050-to-060",
+            "guides/update-guide/connectors/040-to-050",
+            "guides/update-guide/connectors/030-to-040",
+            "guides/update-guide/connectors/020-to-030",
+            "guides/update-guide/connectors/010-to-020",
           ],
         },
         {
@@ -778,7 +778,17 @@ module.exports = {
                 id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
               },
               items: [
-                "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
+                {
+                  type: "category",
+                  label: "Amazon EKS",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks",
+                  },
+                  items: [
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
+                  ],
+                },
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
