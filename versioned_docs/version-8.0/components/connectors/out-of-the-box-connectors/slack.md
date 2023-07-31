@@ -67,19 +67,19 @@ To post a message, take the following steps:
 
 The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
-`Channel/User Name` property might look like :
+`Channel/User Name` property might look like:
 
 ```
 #slack-connectors
 ```
 
-`Message` property :
+`Message` property:
 
 ```
 = "Order-" + orderId + " was dispatched"
 ```
 
-In the above example, the Channel/User Name is set to the static value "#slack-connectors," which will post the message to the specified Slack channel. The Message property uses a FEEL expression to dynamically create the message content. It concatenates the string "Order-" with the value stored in the process variable orderId and adds "was dispatched" to complete the message. This way, the message will vary based on the specific orderId stored during the process execution.
+In the above example, the Channel/User Name is set to the static value "#slack-connectors," which will post the message to the specified Slack channel. The **Message** property uses a FEEL expression to dynamically create the message content. It concatenates the string "Order-" with the value stored in the process variable orderId and adds "was dispatched" to complete the message. This way, the message will vary based on the specific orderId stored during the process execution.
 
 :::note
 Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/formatting#basics) can assist in formatting messages.

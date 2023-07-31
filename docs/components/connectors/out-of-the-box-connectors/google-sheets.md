@@ -333,7 +333,7 @@ For example, if the URL looks like this:
 https://docs.google.com/spreadsheets/d/1xhNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk/edit#gid=0
 ```
 
-The worksheet ID is the number after `#gid=`, which in this case is `0`
+The worksheet ID is the number after `#gid=`, which in this case is `0`.
 
 ### What is a worksheet index?
 

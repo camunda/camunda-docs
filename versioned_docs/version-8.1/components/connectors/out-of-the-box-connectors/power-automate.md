@@ -222,9 +222,9 @@ If you wish to continue the Camunda process or start a new one, the [Webhook Con
 #### Get Bearer token with Postman
 
 1. Allow implicit flow in your [Azure AD app](https://portal.azure.com).
-   - go to `Manifest` tab.
-   - Set `oauth2AllowImlicitFlow` to `true`
-   - Save changes
+   - Go to the **Manifest** tab.
+   - Set `oauth2AllowImlicitFlow` to `true`.
+   - Save changes.
 2. [Visit the official site](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment) to see how to set up the Postman environment.
 3. [Generate an access token](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment#generate-an-access-token-to-use-with-your-environment) and use it in the **Bearer token** field.
 
