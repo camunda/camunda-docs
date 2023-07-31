@@ -34,6 +34,7 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        "guides/update-guide/820-to-830",
         "guides/update-guide/810-to-820",
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
@@ -44,16 +45,16 @@ module.exports = {
         {
           Connectors: [
             "guides/update-guide/connectors/introduction",
-            "guides/update-guide/connectors/010-to-020",
-            "guides/update-guide/connectors/020-to-030",
-            "guides/update-guide/connectors/030-to-040",
-            "guides/update-guide/connectors/040-to-050",
-            "guides/update-guide/connectors/050-to-060",
-            "guides/update-guide/connectors/060-to-070",
-            "guides/update-guide/connectors/070-to-080",
-            "guides/update-guide/connectors/080-to-090",
-            "guides/update-guide/connectors/090-to-0100",
             "guides/update-guide/connectors/0100-to-0110",
+            "guides/update-guide/connectors/090-to-0100",
+            "guides/update-guide/connectors/080-to-090",
+            "guides/update-guide/connectors/070-to-080",
+            "guides/update-guide/connectors/060-to-070",
+            "guides/update-guide/connectors/050-to-060",
+            "guides/update-guide/connectors/040-to-050",
+            "guides/update-guide/connectors/030-to-040",
+            "guides/update-guide/connectors/020-to-030",
+            "guides/update-guide/connectors/010-to-020",
           ],
         },
         {
@@ -62,7 +63,16 @@ module.exports = {
       ],
     },
     "guides/migrating-from-cawemo",
-    "guides/migrating-from-camunda-platform-7",
+    {
+      "Migrating From Camunda Platform 7": [
+        "guides/migrating-from-camunda-platform-7/index",
+        "guides/migrating-from-camunda-platform-7/conceptual-differences",
+        "guides/migrating-from-camunda-platform-7/migration-readiness",
+        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-source-code",
+      ],
+    },
   ],
   Components: [
     "components/components-overview",
@@ -778,7 +788,17 @@ module.exports = {
                 id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
               },
               items: [
-                "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
+                {
+                  type: "category",
+                  label: "Amazon EKS",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks",
+                  },
+                  items: [
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
+                  ],
+                },
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
