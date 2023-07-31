@@ -6,6 +6,7 @@ description: "Create and manage clusters, and interact with Camunda Platform 8 p
 
 ## Console API (REST)
 
+
 For all requests, include the access token in the Authorization header: `authorization:Bearer ${TOKEN}`.
 
 :::note
