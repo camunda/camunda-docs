@@ -1,48 +1,44 @@
 ---
 id: usage-alerts
 title: Usage Alerts
-description: "Set up alerts to monitor your usage."
+description: "As an organization owner or admin, set up alerts for process instances and decision instances."
 ---
 
 :::note
 Usage alerts are visible only to owners and admins in **Professional** and **Enterprise** organizations.
 :::
 
-Under the **Billing** tab, the organization owners and admins can set up alerts for **Process Instances** and **Decision Instances**.
-Usage is calculated daily and when the threshold for an alert is met, all org owners and admins will be alerted via email and in-app notification.
+Under the **Billing** tab, organization owners and admins can set up alerts for process instances and decision instances.
+Usage is calculated daily. When the threshold for an alert is met, all organization owners and admins are alerted via email and in-app notification.
 
-## Creating Usage Alert
+## Creating a usage alert
 
 To create a usage alert, take the following steps:
 
-1 - From the Console, click Organization > Billing.
-
-2 - Under the billing page, select **Edit alert** next to the metric you want to configure the usage alert for (e.g. Process Instances).
-
-![Edit Usage Alert](./img/edit_usage_alert.png)
-
-3 - In the modal, define the percentage threshold (e.g. 80%), turn on the alert and click Save. Please note that the threshold can be between 1% and 4999%.
-
-![Set Alert](./img/set_up_usage_alert.png)
+1. From the Console, click **Organization > Billing**.
+2. On the **Billing** page, select **Edit alert** next to the metric you want to configure the usage alert for (e.g. process instances).
+   ![Edit Usage Alert](./img/edit_usage_alert.png)
+3. In the modal, define the percentage threshold (e.g. 80 for 80%), turn on the alert, and click **Save**. Note that the threshold can be between 1% and 4999%.
+   ![Set Alert](./img/set_up_usage_alert.png)
 
 :::note
 The threshold set is calculated on a percentage ratio between your consumption and the amounts included in your plan.
-For example, when a threshold is set at 50% for a plan that includes 200 process instances, an alert will be sent when 100 process instances have been reached.
+For example, when a threshold is set at 50% for a plan that includes 200 process instances, an alert is sent when 100 process instances are reached.
 :::
 
-5 - Usage is calculated daily and when the threshold for an alert is met, all org owners and admins will be alerted via email and in-app notification (examples below).
+Usage is calculated daily. When the threshold for an alert is met, all org owners and admins are alerted via email and in-app notification (examples below).
 
 ![Set Alert](./img/email_usage_alert.png)
 
 ![Set Alert](./img/notification_usage_alert.png)
 
-## Editing Usage Alert
+## Editing a usage alert
 
-Usage alerts can be edited and turned on/off anytime by selecting **Edit alert** and updating the toggle.
+Usage alerts can be edited and turned on or off anytime by selecting **Edit alert** and updating the toggle.
 
 ![Turn Off Alert](./img/turn_off_usage_alert.png)
 
-## Viewing Alert Change Log
+## Viewing an alert change log
 
 Users can track changes in the usage alerts under the logs of the **Activity** tab.
 
