@@ -49,7 +49,7 @@ To initiate the creation flow click on **Create resource authorization**
 
 To update an existing authorization, click on the **pencil icon** relevant row, to delete, click on the **trash can** icon
 
-[//]: # "@Adam - could you include a screenshot here of a table with at least one row?"
+![Authorized Resources](./img/user-details-authorized-resources-example.png)
 
 ## Limitations
 
