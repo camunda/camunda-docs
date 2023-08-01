@@ -16,9 +16,7 @@ To use a **Slack Connector** in your process, either change the type of an exist
 
 ## Make your Slack Connector executable
 
-To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
-
-![slack connector red properties](../img/connectors-slack-red-properties.png)
+To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel.
 
 ### Authentication
 
@@ -35,8 +33,6 @@ To create a channel, take the following steps:
 3. Set channel **Visibility** as required:
    1. **Public** channels are visible to every workspace member.
    2. **Private** channels are visible to explicitly invited people only.
-
-![slack connector create channel](../img/connectors-slack-create-channel.png)
 
 ### Invite user to channel
 
@@ -59,8 +55,6 @@ To invite users to a channel, take the following steps:
    - If one of the usernames is provided as any other type than a String, it will be omitted.
    - If you provide a channel name it will be omitted since it is not possible to invite a channel to another channel.
 
-![slack connector invite to channel](../img/connectors-slack-invite-to-channel.png)
-
 ### Post message
 
 To post a message, take the following steps:
@@ -73,7 +67,19 @@ To post a message, take the following steps:
 
 The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
-![slack connector compose](../img/connectors-slack-post-message.png)
+`Channel/User Name` property might look like:
+
+```
+#slack-connectors
+```
+
+`Message` property:
+
+```
+= "Order-" + orderId + " was dispatched"
+```
+
+In the above example, the Channel/User Name is set to the static value "#slack-connectors," which will post the message to the specified Slack channel. The **Message** property uses a FEEL expression to dynamically create the message content. It concatenates the string "Order-" with the value stored in the process variable orderId and adds "was dispatched" to complete the message. This way, the message will vary based on the specific orderId stored during the process execution.
 
 :::note
 Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/formatting#basics) can assist in formatting messages.
@@ -122,8 +128,6 @@ You can use an Output Mapping to map the response:
     messageText: response.message.text
 }
 ```
-
-![slack connector response mapping](../img/connectors-slack-response-mapping.png)
 
 ## Appendix
 

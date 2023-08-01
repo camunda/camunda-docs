@@ -19,8 +19,6 @@ To use an Inbound Connector, [install](/components/modeler/desktop-modeler/eleme
 4. Complete your BPMN diagram.
 5. Deploy it to your Camunda Platform 8 instance.
 
-![inbound connector](../img/use-inbound-connector-template.png)
-
 When you **deploy** such a BPMN diagram with a webhook, it becomes ready to receive calls on the webhook endpoint (see [Webhook docs](/components/connectors/protocol/http-webhook.md) for details).
 
 :::note

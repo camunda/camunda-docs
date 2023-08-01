@@ -1061,6 +1061,10 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
+              "Update notes (3.10.x to 3.11)",
+              "self-managed/optimize-deployment/migration-update/3.10-to-3.11/"
+            ),
+            optimizeLink(
               "Update notes (3.9.x to 3.10)",
               "self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
             ),

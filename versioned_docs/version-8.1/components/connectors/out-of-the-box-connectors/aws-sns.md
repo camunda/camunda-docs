@@ -21,8 +21,6 @@ To use the **Amazon SNS Connector** in your process, either change the type of e
 
 ## Make your Amazon SNS Connector for sending messages executable
 
-![AWS SNS Filled](../img/connectors-aws-sns-filled.png)
-
 To make your Amazon SNS Connector for sending messages executable, take the following steps:
 
 1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.

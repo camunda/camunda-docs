@@ -18,8 +18,6 @@ To use the **Kafka Producer Connector** in your process, either change the type 
 
 ## Make your Kafka Producer Connector for publishing messages executable
 
-![Kafka Filled](../img/connectors-kafka-filled.png)
-
 To make your **Kafka Producer Connector** for publishing messages executable, take the following steps:
 
 1. (Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.

@@ -27,8 +27,6 @@ To use a **SendGrid Connector** in your process, either change the type of an ex
 
 To make the **SendGrid Email Connector** executable, you need to fill out all the mandatory fields highlighted in red in the properties panel:
 
-![sendgrid email connector red properties](../img/connectors-sendgrid-email-red-properties.png)
-
 1. Set **SendGrid API Key** to `{{secrets.SEND_GRID_API_KEY}}`.
 2. Set **Sender Name** to `Jane Doe` (or the [sender identity](#create-a-sender-identity) you configured above).
 3. Set **Sender Email** to `jane-doe@camunda.com` (or the [sender identity](#create-a-sender-identity) you configured above).
@@ -37,8 +35,6 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
 6. Set **Email Content Subject**.
 7. Leave **Content Type** to **text/plain** (or alternatively to **text/html** if you intend to provide an HTML body to your email).
 8. Provide a text (or HTML) **Body** for your email.
-
-![sendgrid email connector complete properties](../img/connectors-sendgrid-email-complete-properties.png)
 
 ### SendGrid Email Template Connector
 
@@ -81,9 +77,7 @@ In our example template, we will use the following Handlebars:
 
 `{{feel-temp}}` - How the temperature feels like in reality
 
-While you are editing your template, you can test how your email would look by switching to **Preview** mode, choosing **{} Show Test Data**, and then providing the necessary data:
-
-![sendgrid email template test](../img/connectors-sendgrid-email-template-test-data.png)
+While you are editing your template, you can test how your email would look by switching to **Preview** mode, choosing **{} Show Test Data**, and then providing the necessary data.
 
 #### Create a SendGrid Email template Connector task
 
@@ -93,8 +87,6 @@ To use this **SendGrid Connector** in your process, either change the type of an
 
 To make the **SendGrid Email Template Connector** executable, fill out all the mandatory fields highlighted in red in the properties panel:
 
-![sendgrid email template connector red properties](../img/connectors-sendgrid-email-template-red-properties.png)
-
 1. Set **SendGrid API Key** to `{{secrets.SEND_GRID_API_KEY}}`.
 2. Set **Sender Name** to `Jane Doe` (or the [sender identity](#create-a-sender-identity) you configured above).
 3. Set **Sender Email** to `jane-doe@camunda.com` (or the [sender identity](#create-a-sender-identity) you configured above).
@@ -102,9 +94,6 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
 5. Set **Receiver Email** to `Your email address`.
 6. Log in to your SendGrid account and navigate to [the Dynamic Template you created](#configure-a-dynamic-template).
 7. Copy the id of the template and paste it in the **Template ID field**.
-
-![get sendgrid template id](../img/connectors-sendgrid-email-template-id.png)
-
 8. Provide the test data in the **Template Data** field as a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md):
 
 ```text
@@ -116,8 +105,6 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
   feel-temp: 3
 }
 ```
-
-![sendgrid email template connector complete properties](../img/connectors-sendgrid-email-template-complete-properties.png)
 
 If you want to provide dynamic content in the email via process variables, you can set them in the **Template Data** field as well:
 
@@ -139,14 +126,8 @@ To use the **SendGrid Connector**, create a free account in SendGrid if you do n
 
 1. Go to [https://signup.sendgrid.com/](https://signup.sendgrid.com/).
 2. Set up the account with your email and choose a password.
-
-![create sendgrid account](../img/connectors-sendgrid-create-account.png)
-
 3. Click **Create Account**.
 4. Provide further information required by SendGrid.
-
-![provide sendgrid info](../img/connectors-sendgrid-create-account-info.png)
-
 5. Click **Get Started**.
 
 ### Create a sender identity
@@ -156,13 +137,8 @@ Before sending your first email, you'll need to create a sender identity and ver
 1. Click **Settings > Sender Authentication** or click [here](https://app.sendgrid.com/settings/sender_auth).
 2. Choose **Verify a Single Sender** for demo purposes (or alternatively **Authenticate Your Domain** for a production setup.)
 3. Provide the details requested by SendGrid in the form and click **Create**.
-
-![create sendgrid sender identity](../img/connectors-sendgrid-create-single-sender.png)
-
 4. Go to your email inbox and open the email sent to you by SendGrid.
 5. Click **Verify Single Sender**.
-
-![verify sendgrid sender identity](../img/connectors-sendgrid-verify-single-sender.png)
 
 ### Create an API key
 
@@ -174,8 +150,6 @@ To create an API key in SendGrid, take the following steps:
 4. Give your key a name (i.e. `my-camunda-connector-key`).
 5. Click **Create Key**.
 6. Copy the **API Key** and move on to the next step for creating a Connector secret.
-
-![create sendgrid api key](../img/connectors-sendgrid-create-api-key.png)
 
 ### Create a new Connector secret
 

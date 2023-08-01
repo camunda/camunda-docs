@@ -13,7 +13,7 @@ Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/
 Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
 :::
 
-## Create an HTTP Webhook Connector task
+## Create an HTTP Webhook Connector event
 
 1. Start building your BPMN diagram. You can use HTTP Webhook Connector with either **Start Event** or **Intermediate Catch Event** building blocks.
 2. Select the applicable element and change its template to an HTTP Webhook.
@@ -24,8 +24,6 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 
 ## Make your HTTP Webhook Connector executable
 
-![HTTP Webhook prefilled](../img/use-inbound-connector-template-filled.png)
-
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about HTTP Webhook URLs [below](#activate-the-http-webhook-connector-by-deploying-your-diagram).
 2. Configure [HMAC authentication](https://en.wikipedia.org/wiki/HMAC) if required.
 
@@ -34,8 +32,7 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 - Select HMAC hash algorithm. The exact value is provided by the external caller.
 
 3. Configure **Activation Condition**. For example, given external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
-4. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-5. Use **Result Expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+4. Use **Variable Mapping** to map specific fields from the request into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    For example, given the external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`, the **Result Expression** might look like this:
 
 ```
@@ -77,8 +74,6 @@ If you make changes to your HTTP Webhook Connector configuration, you need to re
 When you click on the event with HTTP Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
 This tab displays the URL of the HTTP Webhook Connector for every cluster where you have deployed your BPMN diagram.
 
-![HTTP Webhook tab](../img/use-inbound-connector-webhooks-tab.png)
-
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
 You can still use HTTP Webhook Connector in Desktop Modeler, or with your Camunda Platform 8 Self-Managed.
@@ -86,8 +81,6 @@ In that case, HTTP Webhook Connector deployments and URLs will not be displayed 
 :::
 
 ### Example
-
-![GitHub webhook](../img/use-inbound-connector-template-filled-gh.png)
 
 Give a use-case when you need to configure a GitHub webhook with an **HTTP Webhook Connector** in such a way that: (1) your BPMN process starts on every opened PR, and (2) the PR URL is exposed as a process variable.
 Let's say you choose `mySecretKey` as a shared secret passphrase. GitHub [declares](https://docs.github.com/en/developers/webhooks-and-events/webhooks/securing-your-webhooks) that they use `X-Hub-Signature-256` header for `SHA-256` HMAC.
