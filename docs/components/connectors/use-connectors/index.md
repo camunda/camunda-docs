@@ -106,10 +106,6 @@ In that case, you could declare `Result Expression` as follows:
 }
 ```
 
-![Response mapping](../img/connectors-response-mapping.png)
-
-![Response mapping result](../img/connectors-response-mapping-result.png)
-
 ## BPMN errors
 
 Being able to deal with exceptional cases is a common requirement for business process models. Read more about our general best practices around this topic in [dealing with exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
