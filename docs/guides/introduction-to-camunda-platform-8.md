@@ -21,7 +21,7 @@ For more conceptual information about Camunda Platform 8, see [What is Camunda P
 For an on-demand demonstration of the product, visit [Camunda Academy](https://bit.ly/3CvooTX).
 
 :::note
-Interested in migrating process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8? Visit our guide on [migrating from Camunda Platform 7](./migrating-from-camunda-platform-7.md)
+Interested in migrating process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8? Visit our guide on [migrating from Camunda Platform 7](/guides/migrating-from-camunda-platform-7/index.md)
 :::
 
 ## Getting started
