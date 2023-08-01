@@ -39,21 +39,21 @@ People who do not yet have a Camunda Platform 8 account can also be invited to a
 Resource authorizations allow you to control the level of access a user has to a particular resource in the system. To create, update, or delete the resource authorizations
 assigned to a user, click on the respective row of the users table.
 
-#### Creation
+### Creation
 
-To initiate the creation flow click on **Create resource authorization**
+To initiate the creation flow, click **Create resource authorization**.
 
 ![User Details](./img/user-details-authorized-resources.png)
 
-#### Updating and Deleting
+### Updating and deleting
 
-To update an existing authorization, click on the **pencil icon** relevant row, to delete, click on the **trash can** icon
+To update an existing authorization, click on the **pencil icon** of the relevant row. To delete an existing authorization, click the **trash can** icon.
 
 ![Authorized Resources](./img/user-details-authorized-resources-example.png)
 
 ## Limitations
 
-Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
+Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional Plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
 
 ## Restrictions
 
