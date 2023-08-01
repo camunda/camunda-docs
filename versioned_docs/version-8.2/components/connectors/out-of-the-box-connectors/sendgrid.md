@@ -29,7 +29,7 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
 
 ![sendgrid email connector red properties](../img/connectors-sendgrid-email-red-properties.png)
 
-1. Set **SendGrid API Key** to `secrets.SEND_GRID_API_KEY`.
+1. Set **SendGrid API Key** to `{{secrets.SEND_GRID_API_KEY}}`.
 2. Set **Sender Name** to `Jane Doe` (or the [sender identity](#create-a-sender-identity) you configured above).
 3. Set **Sender Email** to `jane-doe@camunda.com` (or the [sender identity](#create-a-sender-identity) you configured above).
 4. Set **Receiver Name** to `Your Name`.
@@ -95,7 +95,7 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
 
 ![sendgrid email template connector red properties](../img/connectors-sendgrid-email-template-red-properties.png)
 
-1. Set **SendGrid API Key** to `secrets.SEND_GRID_API_KEY`.
+1. Set **SendGrid API Key** to `{{secrets.SEND_GRID_API_KEY}}`.
 2. Set **Sender Name** to `Jane Doe` (or the [sender identity](#create-a-sender-identity) you configured above).
 3. Set **Sender Email** to `jane-doe@camunda.com` (or the [sender identity](#create-a-sender-identity) you configured above).
 4. Set **Receiver Name** to `Your Name`.

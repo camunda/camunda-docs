@@ -38,7 +38,7 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 Select the **UiPath Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
-2. Set **Bearer** to the secret you created (i.e. `secrets.UIPATH_BEARER_TOKEN`).
+2. Set **Bearer** to the secret you created (i.e. `{{secrets.UIPATH_BEARER_TOKEN}}`).
 
 ![UiPath Connector bearer token](../img/connectors-uipath-bearer-token.png)
 
@@ -56,8 +56,8 @@ We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN 
 Select the **UiPath Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
-2. Set **Client ID** to the secret you created (i.e. `secrets.UIPATH_CLIENT_ID`).
-3. Set **Client secret** to the secret you created (i.e. `secrets.UIPATH_CLIENT_SECRET`).
+2. Set **Client ID** to the secret you created (i.e. `{{secrets.UIPATH_CLIENT_ID}}`).
+3. Set **Client secret** to the secret you created (i.e. `{{secrets.UIPATH_CLIENT_SECRET}}`).
 4. Choose **Client Authentication** from the dropdown menu (i.e. `Send client credentials in body`).
 
 ![UiPath Connector oauth token](../img/connectors-uipath-oauth-token.png)

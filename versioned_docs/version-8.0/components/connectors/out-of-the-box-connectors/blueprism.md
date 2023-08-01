@@ -30,7 +30,7 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 Select the **Blue Prism Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
-2. Set **Bearer** to the secret you created (i.e. `secrets.BLUE_PRISM_BEARER_TOKEN`).
+2. Set **Bearer** to the secret you created (i.e. `{{secrets.BLUE_PRISM_BEARER_TOKEN}}`).
 
 ### OAuth Client Credentials Flow
 
@@ -47,8 +47,8 @@ Select the **Blue Prism Connector** and fill out the following properties under 
 
 1. Select **OAuth 2.0 client credentials** in the **Authentication** section.
 2. Set **Identity token provider URL** to identity provider configured for your Blue Prism instance.
-3. Set **Client ID** to the secret you created (i.e. `secrets.BLUE_PRISM_CLIENT_ID`).
-4. Set **Client secret** to the secret you created (i.e. `secrets.BLUE_PRISM_CLIENT_SECRET`).
+3. Set **Client ID** to the secret you created (i.e. `{{secrets.BLUE_PRISM_CLIENT_ID}}`).
+4. Set **Client secret** to the secret you created (i.e. `{{secrets.BLUE_PRISM_CLIENT_SECRET}}`).
 
 Find more information about the OAuth client credentials flow in the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 

@@ -47,8 +47,8 @@ We advise you to keep your **Password** safe and avoid exposing it in the BPMN `
 Select the **GraphQL Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Basic** in the **Authentication** section.
-2. Set **Username** (i.e. `secrets.GRAPHQL_USERNAME`).
-3. Set **Password** to the secret you created (i.e. `secrets.GRAPHQL_PASSWORD`).
+2. Set **Username** (i.e. `{{secrets.GRAPHQL_USERNAME}}`).
+3. Set **Password** to the secret you created (i.e. `{{secrets.GRAPHQL_PASSWORD}}`).
 
 ![graphql Connector basic](../img/connectors-graphql-basic.png)
 
@@ -66,7 +66,7 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 Select the **GraphQL Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
-2. Set **Bearer** to the secret you created (i.e. `secrets.GRAPHQL_BEARER_TOKEN`).
+2. Set **Bearer** to the secret you created (i.e. `{{secrets.GRAPHQL_BEARER_TOKEN}}`).
 
 ![graphql Connector bearer token](../img/connectors-graphql-bearer-token.png)
 
@@ -84,11 +84,11 @@ We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it i
 Select the **GraphQL Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
-2. Set **OAuth Token Endpoint** to the secret you created (i.e. `secrets.OAUTH_TOKEN_ENDPOINT`).
-3. Set **Client ID** to the secret you created (i.e. `secrets.CLIENT_ID`).
-4. Set **Client secret** to the secret you created (i.e. `secrets.CLIENT_SECRET`).
+2. Set **OAuth Token Endpoint** to the secret you created (i.e. `{{secrets.OAUTH_TOKEN_ENDPOINT}}`).
+3. Set **Client ID** to the secret you created (i.e. `{{secrets.CLIENT_ID}}`).
+4. Set **Client secret** to the secret you created (i.e. `{{secrets.CLIENT_SECRET}}`).
 5. (Optional) Set **Scopes** (i.e. `read:clients`). Depending on the OAuth provider you're using, this may or may not be required.
-6. Set **Audience** to the secret you created (i.e. `secrets.AUDIENCE`). This is an optional field depending on the OAuth provider you're using.
+6. Set **Audience** to the secret you created (i.e. `{{secrets.AUDIENCE}}`). This is an optional field depending on the OAuth provider you're using.
 7. Choose **Client Authentication** from the dropdown menu (i.e. `Send client credentials in body`).
 
 ![graphql Connector oauth token](../img/connectors-graphql-oauth-token.png)
@@ -147,7 +147,7 @@ The **Variables** field can be configured using the ![feel-icon](../img/feel-ico
 
 ```text
 = {
-    "id": "secrets.GRAPHQL_ENTITY_ID",
+    "id": "{{secrets.GRAPHQL_ENTITY_ID}}",
     "includeDroids": false,
 }
 ```

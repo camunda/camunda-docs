@@ -50,8 +50,8 @@ We advise you to keep your **Password** safe and avoid exposing it in the BPMN `
 Select the **REST Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Basic** in the **Authentication** section.
-2. Set **Username** (i.e. `secrets.YOUR_USERNAME`).
-3. Set **Password** to the secret you created (i.e. `secrets.REST_BASIC_SECRET`).
+2. Set **Username** (i.e. `{{secrets.YOUR_USERNAME}}`).
+3. Set **Password** to the secret you created (i.e. `{{secrets.REST_BASIC_SECRET}}`).
 
 ![rest Connector basic](../img/connectors-rest-basic.png)
 
@@ -69,7 +69,7 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 Select the **REST Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
-2. Set **Bearer** to the secret you created (i.e. `secrets.REST_BEARER_TOKEN`).
+2. Set **Bearer** to the secret you created (i.e. `{{secrets.REST_BEARER_TOKEN}}`).
 
 ![rest Connector bearer token](../img/connectors-rest-bearer-token.png)
 
@@ -87,11 +87,11 @@ We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it i
 Select the **REST Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
-2. Set **OAuth Token Endpoint** to the secret you created (i.e. `secrets.OAUTH_TOKEN_ENDPOINT`).
-3. Set **Client ID** to the secret you created (i.e. `secrets.CLIENT_ID`).
-4. Set **Client secret** to the secret you created (i.e. `secrets.CLIENT_SECRET`).
+2. Set **OAuth Token Endpoint** to the secret you created (i.e. `{{secrets.OAUTH_TOKEN_ENDPOINT}}`).
+3. Set **Client ID** to the secret you created (i.e. `{{secrets.CLIENT_ID}}`).
+4. Set **Client secret** to the secret you created (i.e. `{{secrets.CLIENT_SECRET}}`).
 5. (Optional) Set **Scopes** (i.e. `read:clients`). Depending on the OAuth provider you're using, this may or may not be required.
-6. Set **Audience** to the secret you created (i.e. `secrets.AUDIENCE`). It is an optional field. Depending on the OAuth provider you're using, you should fill this field or not.
+6. Set **Audience** to the secret you created (i.e. `{{secrets.AUDIENCE}}`). It is an optional field. Depending on the OAuth provider you're using, you should fill this field or not.
 7. Choose **Client Authentication** from the dropdown menu (i.e. `Send client credentials in body`).
 
 ![rest Connector oauth token](../img/connectors-rest-oauth-token.png)
@@ -111,7 +111,7 @@ The **Query Parameters** field can be configured using the ![feel-icon](../img/f
 ```text
 = {
     q: "Berlin",
-    appid: "secrets.OPEN_WEATHER_MAP_API_KEY",
+    appid: "{{secrets.OPEN_WEATHER_MAP_API_KEY}}",
     units: "metric",
     lang:"en"
 }
