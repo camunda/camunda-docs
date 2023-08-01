@@ -53,8 +53,6 @@ https://docs.camunda.io/docs/reference/bpmn-processes/timer-events/timer-events#
 # Desktop Modeler
 
 https://docs.camunda.io/docs/components/modeler/feel/what-is-feel
-https://docs.camunda.io/?utm_source=modeler&utm_medium=referral
-https://docs.camunda.io/?utm_source=modeler&utm_medium=referral
 https://docs.camunda.io/docs/guides/migrating-from-Camunda-Platform/
 https://docs.camunda.io/docs/components/modeler/desktop-modeler/model-your-first-diagram/
 https://docs.camunda.io/docs/components/modeler/desktop-modeler/?utm_source=modeler&utm_medium=referral
