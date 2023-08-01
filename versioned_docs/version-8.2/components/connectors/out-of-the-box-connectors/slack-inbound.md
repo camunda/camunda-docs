@@ -19,10 +19,6 @@ a BPMN process triggered by a [Slack](https://slack.com/) message.
 
 ## Make your Slack inbound Connector for receiving notifications executable
 
-![Start event SNS connector](../img/connectors-slack-inbound-start-filled.png)
-
-![Intermediate catch event SNS connector](../img/connectors-slack-inbound-intermediate-filled.png)
-
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
 3. In the **Activation** section, configure **Condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `app_mention` Slack event type: `=(request.body.event.type = "app_mention")`.

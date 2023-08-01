@@ -22,8 +22,6 @@ To make the **Google Drive Connector** executable, fill out the mandatory fields
 
 ### Create a new folder
 
-![Google Drive Connector new folder example](../img/connectors-googledrive-new-folder-filled.png)
-
 To create a new folder, take the following steps:
 
 1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
@@ -33,8 +31,6 @@ To create a new folder, take the following steps:
 5. _(optional)_ In the **Operation Details** section, you can set the **Additional properties or metadata** field to Google Drive compatible properties. For example, _description_ of the folder. This property requires FEEL input. Check [the appendix](#what-are-the-limitations-of-the-additional-properties-or-metadata) for known values and limitations.
 
 ### Create a new file from a template
-
-![Google Drive Connector new file from template example](../img/connectors-googledrive-new-file-filled.png)
 
 To create a new file from a template, take the following steps:
 
@@ -86,8 +82,6 @@ You also enable _Google Docs API_ and _Google Drive API_ for every client intend
 
 #### Example 1: Obtaining JWT bearer token with a service account
 
-![Bearer Auth](../img/connectors-googledrive-jwt-bearer.png)
-
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
 For production usage it is highly recommended to follow the [official Google guideline](https://developers.google.com/identity/protocols/oauth2/service-account).
@@ -111,8 +105,6 @@ print(credentials.token)
 ```
 
 #### Example 2: Obtaining bearer and refresh tokens with OAuth client
-
-![Refresh Auth](../img/connectors-googledrive-jwt-refresh.png)
 
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
@@ -139,9 +131,14 @@ if __name__ == "__main__":
 
 ### Where do I get a parent folder ID?
 
-It is in the URL.
+To find the Parent Folder ID for a Google Drive folder, follow these steps:
 
-![Google Drive Connector get parent folder ID](../img/connectors-googledrive-get-parent-folder-id.png)
+1. Open the Google Drive folder in your web browser.
+2. Look at the URL in the address bar, which should look something like this:
+   ```
+   https://docs.google.com/drive/folder/1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk
+   ```
+3. The Parent Folder ID is the alphanumeric string after `/folders/`, which in this case is `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk`.
 
 ### How do I set additional properties or metadata?
 
@@ -163,15 +160,34 @@ Some properties are applicable only for the token owners, like `folderColorRgb` 
 
 ### Where do I get Template ID?
 
-Template ID is located in the URL.
+To find the Template ID for a Google Docs template, follow these steps:
 
-![Google Drive Connector get template ID](../img/connectors-googledrive-get-template-id.png)
+1. Open the link to the Google Docs template in your web browser. The URL should look something like this:
+   ```
+   https://docs.google.com/document/d/1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk
+   ```
+2. The Template ID is the alphanumeric string after `/d/`, which in this case is `1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk`.
 
 ### Can you show me an example of a valid template?
 
-A valid template looks like the following screenshot:
+Certainly! Here is an example of a valid template:
 
-![Google Drive Connector document template example](../img/connectors-googledrive-template-example.png)
+```text
+        {{CompanyName}} confidential.
+{{DocumentDate}}
+
+{{RecipientFullName}}
+{{RecipientAddress}}
+
+
+Dear {{RecipientShortName}}!
+
+We are pleased to inform you that your application {{ApplicationNumber}} has been approved.
+
+Sincerely,
+{{SigneeName}}, Executive Director
+
+```
 
 Now, in the **Template variables** field we can apply the following FEEL JSON object which must be compatible with the Google Docs Requests API:
 
@@ -247,7 +263,22 @@ Now, in the **Template variables** field we can apply the following FEEL JSON ob
 
 The result should be as follows:
 
-![Google Drive Connector processed template example](../img/connectors-googledrive-processed-template-example.png)
+```text
+        Good Company inc. confidential.
+2022-08-10
+
+John W. Doe
+Zweibrückenstraße 1845, 80000 Munich
+
+
+Dear Mr. Doe!
+
+We are pleased to inform you that your application 0123456789 has been approved.
+
+Sincerely,
+Jane T. Doe, Executive Director
+
+```
 
 ### What kind of templates are currently supported?
 
