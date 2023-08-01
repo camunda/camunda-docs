@@ -126,7 +126,7 @@ For all Zeebe-related operations moving forward, we'll be using Zeebe's command-
 
 But for the sake of keeping this guide simple (and language agnostic), we're going to use the CLI.
 
-## Deploy the worklfow
+## Deploy the workflow
 
 Next, we'll deploy our process model via the CLI. We'll deploy the process model we created in the previous section.
 

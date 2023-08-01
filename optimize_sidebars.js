@@ -1562,7 +1562,7 @@ module.exports = {
               Platforms: [
                 docsLink(
                   "Amazon EKS",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/"
+                  "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks/"
                 ),
                 docsLink(
                   "Microsoft AKS",
