@@ -88,7 +88,7 @@ Therefore, you would need to set the following:
 
 1. **Webhook ID**: any unique to your cluster webhook ID. This will generate a URL to trigger your webhook. In example, `myWebhookPath`.
 2. **HMAC Authentication**: `enabled`.
-3. **HMAC Secret Key**: `mySecretKey` or `secrets.MY_GH_SECRET`.
+3. **HMAC Secret Key**: `mySecretKey` or `{{secrets.MY_GH_SECRET}}`.
 4. **HMAC Header**: `X-Hub-Signature-256`.
 5. **HMAC Algorithm**: `SHA-256`.
 6. **Activation Condition**: `=(request.body.action = "opened")`.

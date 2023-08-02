@@ -20,7 +20,7 @@ To make the **Slack Connector** executable, fill out the mandatory fields highli
 
 ### Authentication
 
-Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, 'secrets.SLACK_OAUTH_TOKEN'.
+Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, '{{secrets.SLACK_OAUTH_TOKEN}}'.
 
 ### Create channel
 

@@ -48,7 +48,7 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 Select the **Power Automate Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
-2. Set **Bearer** to the secret you created (i.e. `secrets.POWER_AUTOMATE_BEARER_TOKEN`).
+2. Set **Bearer** to the secret you created (i.e. `{{secrets.POWER_AUTOMATE_BEARER_TOKEN}}`).
 
 ### OAuth 2.0
 
@@ -64,9 +64,9 @@ We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN 
 Select the **Power Automate Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
-2. Set **Client Id** to the secret you created (i.e. `secrets.POWER_AUTOMATE_CLIENT_ID`).
-3. Set **Client secret** to the secret you created (i.e. `secrets.POWER_AUTOMATE_CLIENT_SECRET`).
-4. Set **OAuth Token Endpoint** to the secret you created (i.e. `secrets.POWER_AUTOMATE_TOKEN_ENDPOINT`).
+2. Set **Client Id** to the secret you created (i.e. `{{secrets.POWER_AUTOMATE_CLIENT_ID}}`).
+3. Set **Client secret** to the secret you created (i.e. `{{secrets.POWER_AUTOMATE_CLIENT_SECRET}}`).
+4. Set **OAuth Token Endpoint** to the secret you created (i.e. `{{secrets.POWER_AUTOMATE_TOKEN_ENDPOINT}}`).
 
 ##### OAuth Token Endpoint
 

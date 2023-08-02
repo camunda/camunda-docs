@@ -20,7 +20,7 @@ To use the **Kafka Producer Connector** in your process, either change the type 
 
 To make your **Kafka Producer Connector** for publishing messages executable, take the following steps:
 
-1. (Optional) Set the relevant credentials in the **Authentication** section. For example, `secrets.MY_KAFKA_USERNAME`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
+1. (Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
 2. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
 3. In the **Kafka** section, set the topic name.
 4. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set producer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#producerconfigs). Also check preconfigured values for the **Kafka Producer Connector** in the relevant [appendix section](#what-are-default-kafka-producer-client-properties).
