@@ -20,7 +20,7 @@ To use the **Amazon SQS Connector** in your process, either change the type of e
 
 To make your Amazon SQS Connector for sending messages executable, take the following steps:
 
-1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `secrets.MY_AWS_ACCESS_KEY`. The value can be plain text, but this is not recommended due to security concerns.
+1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
 2. In the **Queue Properties** section, set the URL of your SQS queue, its region, and its type.
 3. In the **Input message data** section, fill out the field **Message body** with the data you would like to submit to the queue. The field requires FEEL input.
 4. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. See the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.

@@ -40,7 +40,7 @@ We advise you to keep your **API key** safe and avoid exposing it in the BPMN `x
 
 ### Configure the API key
 
-Select the **OpenAI API key** field in the **Authentication** section and set it to the secret you created (e.g. `secrets.OPENAI_API_TOKEN`).
+Select the **OpenAI API key** field in the **Authentication** section and set it to the secret you created (e.g. `{{secrets.OPENAI_API_TOKEN}}`).
 
 ## Operations
 

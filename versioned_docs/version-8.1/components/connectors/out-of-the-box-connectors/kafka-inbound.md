@@ -25,7 +25,7 @@ It is highly recommended not to expose your sensitive data as plain text, but ra
 To make your **Kafka Consumer Connector** executable, take the following steps:
 
 1. In the **Authentication** section, select the **Authentication type**.
-2. (If you selected _Credentials_ as the **Authentication type**) In the **Authentication** section, set the relevant credentials. For example, `secrets.MY_KAFKA_USERNAME`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
+2. (If you selected _Credentials_ as the **Authentication type**) In the **Authentication** section, set the relevant credentials. For example, `{{secrets.MY_KAFKA_USERNAME}}`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
 3. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
 4. In the **Kafka** section, set the topic name.
 5. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set consumer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).

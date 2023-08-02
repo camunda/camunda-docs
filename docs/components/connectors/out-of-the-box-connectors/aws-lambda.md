@@ -22,7 +22,7 @@ To use an **AWS Lambda Connector** in your process, either change the type of ex
 
 To make the **AWS Lambda Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
 
-1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `secrets.MY_AWS_ACCESS_KEY`. The value can be plain text, but this is not recommended due to security concerns.
+1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
 2. Set the relevant AWS region in the **Authentication** section. See the [Regions and Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) to learn more.
 3. In the **Select Operation** section, the default option is set to synchronous invocation; an asynchronous invocation
    option is currently not available.
