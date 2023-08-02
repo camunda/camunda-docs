@@ -28,8 +28,6 @@ To use a **Power Automate Connector** in your process, either change the type of
 
 The Power Automate Connector currently supports three operation types in the **Operation type** dropdown list: _Get the status of a flow run_, _Get flow outputs_, and _Trigger a flow run_.
 
-![Power Automate Connector operations](../img/connectors-power-automate-operations.png)
-
 ### Authentication
 
 You can choose among the available Power Automate Connector authentication types according to your authentication requirements.
@@ -52,8 +50,6 @@ Select the **Power Automate Connector** and fill out the following properties un
 1. Click **Bearer Token** in the **Authentication** section.
 2. Set **Bearer** to the secret you created (i.e. `secrets.POWER_AUTOMATE_BEARER_TOKEN`).
 
-![Power Automate Connector bearer token](../img/connectors-power-automate-bearer-token.png)
-
 ### OAuth 2.0
 
 #### Create a new Connector secret
@@ -72,8 +68,6 @@ Select the **Power Automate Connector** and fill out the following properties un
 3. Set **Client secret** to the secret you created (i.e. `secrets.POWER_AUTOMATE_CLIENT_SECRET`).
 4. Set **OAuth Token Endpoint** to the secret you created (i.e. `secrets.POWER_AUTOMATE_TOKEN_ENDPOINT`).
 
-![Power Automate Connector oauth token](../img/connectors-power-automate-oauth-token.png)
-
 ##### OAuth Token Endpoint
 
 You should provide the **OAuth Token Endpoint** in the following format: https://login.microsoftonline.com/{tanantID}/oauth2/v2.0/token
@@ -89,8 +83,6 @@ This operation allows you to trigger a Power Automate desktop flow. To execute i
 3. Fill out the input fields as described in the [configuration](#configuration) section.
 4. Fill out the input fields as described in the [input](#input) section.
 5. Fill out the response mapping as described in the [trigger a flow run response](#trigger-a-flow-run-response) section.
-
-![Power Automate Connector - Trigger a flow run](../img/connectors-power-automate-trigger-a-flow-run.png)
 
 #### Trigger a flow run response
 
@@ -216,8 +208,10 @@ Response example:
 
 #### Get Bearer token with Postman
 
-1. Allow implicit flow in your [Azure AD app](https://portal.azure.com).
-   ![Power Automate Connector - Azure AD app allow implicit flow](../img/connectors-power-automate-allow-implicit-flow.png)
+1. Allow implicit flow in your [Azure AD app](https://portal.azure.com):
+   - Go to the **Manifest** tab.
+   - Set `oauth2AllowImlicitFlow` to `true`.
+   - Save changes.
 2. [Visit the official site](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment) to see how to set up the Postman environment.
 3. [Generate an access token](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/setup-postman-environment#generate-an-access-token-to-use-with-your-environment) and use it in the **Bearer token** field.
 
@@ -227,9 +221,9 @@ Response example:
 2. In the left menu bar under **Data**, select **Connections > New connection**.
 3. Select **Desktop flows** and provide the domain and username of the user on the machine where the desktop flows are running, and also provide the password belongs to this user.
 4. Click **Create**.
-
-   ![Power Automate Connector - Create connection](../img/connectors-power-automate-create-new-connection.png)
-
-5. Click on the newly created connection, and you can find your connection name in the URL as shown in the picture below. This is a default connection type.
-
-   ![Power Automate Connector - Connection name](../img/connectors-power-automate-connection-name.png)
+5. Now, click on the newly created connection, and you can find your connection name in the URL as shown in the example below. The connection name is a part of the URL and is preceded by `connectionName=`.
+   Example URL:
+   ```
+   https://make.powerautomate.com/enviroments/dw43634dsgsdty45y/connections?apiName=shared_uiflow&connectionName=123453679877564
+   ```
+   In this example, the connection name is 123453679877564. This is a default connection type.
