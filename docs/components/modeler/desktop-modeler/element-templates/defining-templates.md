@@ -158,7 +158,7 @@ The example defines five custom fields, each mapped to different technical prope
 - The `Request Body` is mapped to a local variable via an `input parameter`
 - The `Result Variable` is mapped into a process variable via an `output parameter`
 
-The task type is hidden to the user, and other properties are editable by the user through the properties panel as shown in the following screenshot:
+The task type is hidden to the user. Properties specified in the template can be edited through the properties panel as shown in the following screenshot:
 
 ![Custom Fields](./img/overview.png)
 
