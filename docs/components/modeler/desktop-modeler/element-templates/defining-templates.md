@@ -30,7 +30,7 @@ Templates are defined in template descriptor files as a JSON array:
 ]
 ```
 
-As seen in the code snippet a template consist of a number of important components:
+As seen in the code snippet a template consists of a number of important components:
 
 - `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Platform 8 element templates.
 
