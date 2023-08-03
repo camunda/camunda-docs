@@ -33,7 +33,7 @@ create or update the following entities in Keycloak:
 | Tasklist    | Tasklist                       |
 | Web Modeler | Web Modeler                    |
 
-### Client ccopes
+### Client scopes
 
 | Name             | Protocol       | Description                                                                                                                                                                                                     |
 | ---------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

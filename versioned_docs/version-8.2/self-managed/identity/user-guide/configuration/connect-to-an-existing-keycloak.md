@@ -50,5 +50,5 @@ Identity creates a base set of configurations required to function successfully.
 
 ### Considerations
 
-When connecting Identity to a shared realm, we are unable to accurately determine what clients should and should not be displayed in the Identity UI. This means the clients in the realm you connect Identity to will be shown in the Identity UI and can
-have their secrets viewed and updated. We recommend that users with access to Identity should be considered as having administrators level access to the system.
+When connecting Identity to a shared realm, accurately determining what clients should and should not be displayed in the Identity UI is not possible. Therefore, the clients in the realm you connect Identity to will be shown in the Identity UI and can
+have their secrets viewed and updated. Users with access to Identity should be considered as having administrator-level access to the system.

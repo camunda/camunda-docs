@@ -7,7 +7,7 @@ description: "Learn more about installing Identity, accessing the UI, default us
 
 To use Identity, install it locally via Docker or Kubernetes.
 
-Follow the [Installation Guide](/self-managed/platform-deployment/overview.md) for more details on this process.
+Follow the [installation guide](/self-managed/platform-deployment/overview.md) for more details on this process.
 
 ## Accessing the UI
 
@@ -28,7 +28,7 @@ Password: demo
 
 :::note Want to create more users?
 Creating a user in Identity is not currently supported. To create a user, see
-[Keycloak's documentation on creating a user](https://www.keycloak.org/docs/19.0.3/server_admin/#proc-creating-user_server_administration_guide).
+[Keycloak's documentation on creating a user](https://www.keycloak.org/docs/22.0.1/server_admin/#proc-creating-user_server_administration_guide).
 :::
 
 ## Home screen

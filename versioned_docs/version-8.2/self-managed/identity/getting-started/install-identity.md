@@ -7,7 +7,7 @@ description: "Learn more about installing Identity, accessing the UI, default us
 
 To use Identity, install it locally via Docker or Kubernetes.
 
-Follow the [Installation Guide](/self-managed/platform-deployment/overview.md) for more details on this process.
+Follow the [installation guide](/self-managed/platform-deployment/overview.md) for more details on this process.
 
 ## Accessing the UI
 

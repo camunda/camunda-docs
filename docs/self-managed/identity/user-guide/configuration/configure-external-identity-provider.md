@@ -34,7 +34,7 @@ To configure an external identity provider like OpenID Connect, SAML, LDAP, or A
 :::tip
 Keycloak supports a wide variety of authentication options, such as mapping external user groups, roles, or scopes to internal roles, and configuring the login screen and flow when multiple providers are added.
 
-Visit the Keycloak documentation for details on [adding a provider](https://www.keycloak.org/docs/19.0.3/server_admin/index.html#adding-a-provider),
-[configuring authentication](https://www.keycloak.org/docs/19.0.3/server_admin/index.html#configuring-authentication), and
-[integrating identity providers](https://www.keycloak.org/docs/19.0.3/server_admin/index.html#_identity_broker).
+Visit the Keycloak documentation for details on [adding a provider](https://www.keycloak.org/docs/22.0.1/server_admin/#adding-a-provider),
+[configuring authentication](https://www.keycloak.org/docs/22.0.1/server_admin/index.html#configuring-authentication), and
+[integrating identity providers](https://www.keycloak.org/docs/22.0.1/server_admin/index.html#_identity_broker).
 :::
