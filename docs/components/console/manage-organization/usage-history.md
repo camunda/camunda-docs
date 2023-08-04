@@ -24,9 +24,8 @@ The section is split into two areas:
 
 ![Usage History - Chart View](./img/plans_usage_history_chart_view.gif)
 
-
 ## Trial Organizations
 
-Both metrics are aggregated on a monthly basis and displayed in the **Usage History**.
+All metrics are aggregated on a monthly basis and displayed in the **Usage History**.
 
 ![Usage History](./img/trial-usage-history.png)
