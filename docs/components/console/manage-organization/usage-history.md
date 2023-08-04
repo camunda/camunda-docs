@@ -18,4 +18,14 @@ Both metrics are aggregated on a monthly basis and displayed in the **Usage Hist
 
 **Professional and Enterprise Organizations**
 
-The information is available under the **Billing** tab in the section **Usage History**, aggregated on a monthly basis.
+The information is available under the **Billing** tab at the bottom section **Usage History**
+
+The section is split into two areas:
+
+- Table view: where the data is displayed aggregated on a monthly basis.
+
+![Usage History - Table View](./img/plans_usage_history_table_view.png)
+
+- Chart view: where the data is displayed in charts and allows to deepdive into usage patterns and spikes by customizing the date ranges.
+
+![Usage History - Chart View](./img/plans_usage_history_chart_view.gif)

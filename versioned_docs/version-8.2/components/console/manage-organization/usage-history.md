@@ -28,4 +28,4 @@ The section is split into two areas:
 
 - Chart view: where the data is displayed in charts and allows to deepdive into usage patterns and spikes by customizing the date ranges.
 
-![Usage History - Table View](./img/plans_usage_history_chart_view.png)
+![Usage History - Chart View](./img/plans_usage_history_chart_view.gif)
