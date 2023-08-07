@@ -22,6 +22,38 @@ You can install Camunda Platform 8 on your Kubernetes environment of choice, e.g
 
 With the right configuration, Camunda Platform 8 can be deployed on any Kubernetes distribution (Cloud or on-premise). However, we officially test and support a [specific list of platforms](./platforms/platforms.md).
 
+## Versioning
+
+### After July 2023
+
+Starting from July 2023 (v8.2.8), the Camunda Platform 8 **Helm chart** version follows the same unified schema
+and schedule as [Camunda Platform 8 applications](https://github.com/camunda/camunda-platform).
+
+Hence, if the Camunda Platform 8 unified **applications** version is `8.2.8`, the Camunda Platform 8 **Helm chart**
+will also be `8.2.8`.
+
+### Before July 2023
+
+Camunda Platform 8 **Helm chart** versions are only aligned with the minor version of
+[Camunda Platform 8](https://github.com/camunda/camunda-platform). In other words, the `Camunda Platform 8 Helm chart`
+could have a different patch version than the `Camunda` Platform 8 Applications`.
+
+For example, the Camunda Platform 8 **Helm chart** could be on version `8.1.1`, but Camunda Platform 8 **applications**
+are on version `8.1.0`. Additionally, the Camunda Platform 8 **Helm chart** could be on version `8.1.1`,
+but Camunda Platform 8 **applications** are on version `8.1.2`.
+
+### Compatibility Matrix
+
+The core Camunda applications have a unified fixed release schedule (minor release twice a year and patch release
+every month). However, some of the applications have their own schedule. The following compatibility matrix gives
+an overview of the different versions.
+
+| Release Cycle | Helm chart | Zeebe, Operate, Tasklist | Optimize | Web Modeler | Connectors |
+| ------------- | ---------- | ------------------------ | -------- | ----------- | ---------- |
+| Apr 2023      | 8.2.x      | 8.2.x                    | 3.10.x   | 8.2.x       | >= 0.18.0  |
+| Oct 2022      | 8.1.x      | 8.1.x                    | 3.9.x    | N/A         | N/A        |
+| Apr 2022      | 8.0.x      | 8.0.x                    | 3.9.x    | N/A         | N/A        |
+
 ## Use Helm to install on Kubernetes
 
 There are several alternatives to deploy applications to a Kubernetes cluster, but we recommend to use our provided Helm charts to deploy a set of components into your cluster. Helm allows you to choose exactly what chart (set of components) you want to install and how these components need to be configured.
@@ -34,14 +66,6 @@ To do, you must have the following tools installed in your local environment:
 
 - `kubectl`: Kubernetes Control CLI tool, installed and connected to your cluster
 - `helm`: Kubernetes Helm CLI tool
-
-## Versioning
-
-Camunda Platform 8 **Helm chart** versions are only aligned with the minor version of [Camunda Platform 8](../../../components/components-overview.md). In other words, the `Camunda Platform 8 Helm chart` could have a patch version different from the `Camunda Platform 8`.
-
-For example, the Camunda Platform 8 Helm chart could be on version `8.1.1`, but Camunda Platform 8 apps are on version `8.1.0`. Additionally, the Camunda Platform 8 Helm chart could be on version `8.1.1`, but Camunda Platform 8 apps are on version `8.1.2`.
-
-We work to keep the Helm chart updated with the latest version of Camunda Platform 8, but currently this is not guaranteed. Note that the latest version of the Helm chart may not necessarily have the latest version of the Camunda Platform 8 apps. This should not be an issue unless you rely on a specific Camunda Platform 8 patch version. In that case, you can set the desired version via a custom values file.
 
 ## Useful tools related to Camunda Platform
 
