@@ -76,7 +76,7 @@ There are several _advantages using the greenfield stack_:
 
 ### Considering Camunda Platform 8 instead
 
-Camunda Platform 8 is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Platform 8 from the start. You can find [a quick comparison of concepts in the docs](../../../guides/migrating-from-camunda-platform-7.md#conceptual-differences). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Platform 8.
+Camunda Platform 8 is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Platform 8 from the start. You can find [a quick comparison of concepts in the docs](/guides/migrating-from-camunda-platform-7/conceptual-differences.md). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Platform 8.
 
 ### Getting started with the greenfield stack
 
