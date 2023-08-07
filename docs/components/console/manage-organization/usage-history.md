@@ -12,15 +12,15 @@ Three key metrics play a role in paid plans: the number of started process insta
 
 ## Professional and Enterprise Organizations
 
-The information is available under the **Billing** tab at the bottom section **Usage History**
+The information is available under the **Billing** tab at the bottom section of **Usage History**.
 
 The section is split into two areas:
 
-**Table view**: where the data is displayed aggregated on a monthly basis.
+**Table view**, where the data is displayed aggregated on a monthly basis:
 
 ![Usage History - Table View](./img/plans_usage_history_table_view.png)
 
-**Chart view**: where the data is displayed in charts and allows to deepdive into usage patterns and spikes by customizing the date ranges.
+**Chart view**, where the data is displayed in charts and allows a closer look into usage patterns and spikes by customizing the date ranges.
 
 ![Usage History - Chart View](./img/plans_usage_history_chart_view.gif)
 
