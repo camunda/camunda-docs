@@ -34,6 +34,7 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
+        "guides/update-guide/820-to-830",
         "guides/update-guide/810-to-820",
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
@@ -62,7 +63,16 @@ module.exports = {
       ],
     },
     "guides/migrating-from-cawemo",
-    "guides/migrating-from-camunda-platform-7",
+    {
+      "Migrating From Camunda Platform 7": [
+        "guides/migrating-from-camunda-platform-7/index",
+        "guides/migrating-from-camunda-platform-7/conceptual-differences",
+        "guides/migrating-from-camunda-platform-7/migration-readiness",
+        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-source-code",
+      ],
+    },
   ],
   Components: [
     "components/components-overview",
@@ -92,6 +102,7 @@ module.exports = {
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/usage-alerts",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
@@ -1048,6 +1059,10 @@ module.exports = {
             optimizeLink(
               "Instructions",
               "self-managed/optimize-deployment/migration-update/instructions/"
+            ),
+            optimizeLink(
+              "Update notes (3.10.x to 3.11)",
+              "self-managed/optimize-deployment/migration-update/3.10-to-3.11/"
             ),
             optimizeLink(
               "Update notes (3.9.x to 3.10)",

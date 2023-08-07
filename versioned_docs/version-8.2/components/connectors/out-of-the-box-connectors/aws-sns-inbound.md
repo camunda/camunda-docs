@@ -19,10 +19,6 @@ a BPMN process triggered by an [AWS SNS](https://console.aws.amazon.com/sns/home
 
 ## Make your AWS SNS inbound Connector for receiving notifications executable
 
-![Start event SNS connector](../img/connectors-aws-sns-inbound-start-filled.png)
-
-![Intermediate catch event SNS connector](../img/connectors-aws-sns-inbound-intermediate-filled.png)
-
 1. In the **Subscription Configuration** section, configure the **Subscription ID**. By default, **Subscription ID** is pre-filled with a random value. This value will be a part of the topic subscription URL.
 2. Set the **Allow to receive messages from topic(s)** value to **any** if the process may be triggered by any topic, or **Specific topic(s)** if you wish to allow-list only certain topics to start a new BPMN process.
 3. If you have chosen the **Specific topic(s)**, you have to list comma-separated topics in the field **Topic ARN(s)** as well. In that case, the **AWS SNS inbound Connector** will auto-approve each qualified subscription request.

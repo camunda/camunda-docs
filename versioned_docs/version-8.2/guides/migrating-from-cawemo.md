@@ -43,14 +43,12 @@ While unsupported elements are imported in Web Modeler, they are not supported f
 
 ## Additional resources
 
-Not all elements in Cawemo are supported in Camunda Platform 8 Web Modeler. Find details on BPMN coverage in Camunda Platform 8 in the [BPMN coverage documentation](/components/modeler/bpmn/bpmn-coverage.md/). We are investing in supporting the elements currently available on Camunda Platform 7.
+Not all elements in Cawemo are supported in Camunda Platform 8 Web Modeler. Find details on BPMN coverage in Camunda Platform 8 in the [BPMN coverage documentation](/components/modeler/bpmn/bpmn-coverage.md). We are investing in supporting the elements currently available on Camunda Platform 7.
 
 ## Next steps
 
-Learn more about [migrating from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-platform-7.md).
+Learn more about [migrating from Camunda Platform 7 to Camunda Platform 8](/guides/migrating-from-camunda-platform-7/index.md).
 
 :::note
-When you get the error `The following 1 file is invalid and can't be uploaded: ""` when uploading your BPMN file.
-
-It means a BPMN file for execution on Camunda Platform 7 created with Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [Migrating from Camunda Platform 7 documentation under migration overview](/guides/migrating-from-camunda-platform-7.md#migration-overview) to solve the error.
+When you get the error `The following 1 file is invalid and can't be uploaded: ""` when uploading your BPMN file, it means a BPMN file for execution on Camunda Platform 7 created with Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [migrating from Camunda Platform 7 documentation under migration overview](/guides/migrating-from-camunda-platform-7/index.md#migration-overview) to solve the error.
 :::
