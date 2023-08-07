@@ -7,7 +7,7 @@ description: "Deploy Camunda Platform 8 Self-Managed on Amazon EKS"
 Amazon Elastic Kubernetes Service ([Amazon EKS](https://aws.amazon.com/eks/)) is a managed
 container service to run and scale Kubernetes applications in the cloud or on-premises.
 
-Camunda Platform 8 Self-Managed can be deployed on EKS like any Kubernetes cluster using [Helm charts](../deploy.md). However, there are a few pitfalls to avoid as described below.
+Camunda Platform 8 Self-Managed can be deployed on EKS like any Kubernetes cluster using [Helm charts](../../deploy.md). However, there are a few pitfalls to avoid as described below.
 
 ## EKS cluster specification
 
@@ -31,7 +31,7 @@ that uses the Amazon EBS `gp3` volume type. Then, use it cluster-wide as a defau
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](../../troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](../../../troubleshooting.md).
 
 ### Volume performance
 

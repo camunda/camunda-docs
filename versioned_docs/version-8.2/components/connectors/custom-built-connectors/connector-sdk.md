@@ -845,7 +845,7 @@ void shouldReplaceTokenSecretWhenReplaceSecrets() {
   var auth = new Authentication();
   input.setMessage("Hello World!");
   input.setAuthentication(auth);
-  auth.setToken("secrets.MY_TOKEN");
+  auth.setToken("{{secrets.MY_TOKEN}}");
   auth.setUser("testuser");
 
   // (1)
