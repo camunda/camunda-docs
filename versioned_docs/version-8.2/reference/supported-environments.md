@@ -40,7 +40,7 @@ Requirements for the components can be seen below:
 | Web Modeler | -            | Keycloak 16.1.x, 18.x, 19.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15x. (other database systems are currently not supported) |
 
 :::note Amazon OpenSearch 1.3 Support
-In order to make use of Amazon OpenSearch 1.3, the relevant OpenSearch image would need to be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md/#docker-images).
+To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md/#docker-images).
 
 <sup>\* 8.2.x patches will only be released on the Amazon OpenSearch 1.3 branch until end of 2023 given that Amazon OpenSearch 1.3 maintenance period ends by then. We recommend customers to update to Camunda Platform 8.3.x which will supports Amazon OpenSearch 2.5+.</sup>
 :::

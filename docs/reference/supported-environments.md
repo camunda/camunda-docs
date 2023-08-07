@@ -40,7 +40,7 @@ Requirements for the components can be seen below:
 | Web Modeler | -            | Keycloak 21.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported)             |
 
 :::note Amazon OpenSearch Support
-In order to make use of Amazon OpenSearch, the relevant OpenSearch image would need to be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md/#docker-images).
+To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md/#docker-images).
 ::: |
 
 :::note Elasticsearch support
