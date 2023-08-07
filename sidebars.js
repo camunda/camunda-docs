@@ -741,14 +741,18 @@ module.exports = {
         {
           "Community tools": [
             "apis-tools/community-clients/index",
-            "apis-tools/community-clients/c-sharp",
-            "apis-tools/community-clients/javascript",
-            "apis-tools/community-clients/micronaut",
-            "apis-tools/community-clients/python",
-            "apis-tools/community-clients/ruby",
-            "apis-tools/community-clients/rust",
-            "apis-tools/community-clients/spring",
-            "apis-tools/community-clients/quarkus",
+            {
+              "Zeebe clients": [
+                "apis-tools/community-clients/c-sharp",
+                "apis-tools/community-clients/javascript",
+                "apis-tools/community-clients/micronaut",
+                "apis-tools/community-clients/python",
+                "apis-tools/community-clients/ruby",
+                "apis-tools/community-clients/rust",
+                "apis-tools/community-clients/spring",
+                "apis-tools/community-clients/quarkus",
+              ],
+            },
           ],
         },
         "apis-tools/build-your-own-client",
