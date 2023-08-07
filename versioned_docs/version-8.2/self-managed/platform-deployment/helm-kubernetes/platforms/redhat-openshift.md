@@ -13,6 +13,9 @@ We test against the following OpenShift versions and guarantee compatibility wit
 | OpenShift version | Supported          |
 | ----------------- | ------------------ |
 | 4.10.x            | :white_check_mark: |
+| 4.11.x            | :white_check_mark: |
+| 4.12.x            | :white_check_mark: |
+| 4.13.x            | :white_check_mark: |
 
 Any version not explicitly marked in the table above is not tested, and we cannot guarantee compatibility.
 
