@@ -8,7 +8,7 @@ The data export API allows users to export large amounts of data in a machine-re
 
 ## Functionality
 
-Users can export all report types (except combined process reports) from `Optimize` using the Data Export API. Moreover, raw data reports can be exported in a paginated fashion, so that large amounts of data can be consumed in chunks by the client.
+Users can export all report types (except combined process reports) from `Optimize` using the Data Export API. Moreover, raw data reports will include additional data relating to the executed flow nodes and can be exported in a paginated fashion, so that large amounts of data can be consumed in chunks by the client.
 
 ### Pagination
 
