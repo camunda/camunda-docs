@@ -16,7 +16,11 @@ On the **Search** checkbox, it's possible to filter the processes. Start typing 
 
 To start a process, click **Start Process** on the process you want to start.
 
-![tasklist-processes-search](img/tasklist-processes-start.png)
+![tasklist-processes-start-with-form](img/tasklist-processes-start-with-form.png)
+
+If the start event of this process contains an [embedded form](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md/#embed-form-in-start-event), a modal window containing that form will automatically open.
+
+![tasklist-processes-start](img/tasklist-processes-start.png)
 
 Tasklist will then wait for the process to be executed. If the process generates a task, you will be redirected to the generated task.
 

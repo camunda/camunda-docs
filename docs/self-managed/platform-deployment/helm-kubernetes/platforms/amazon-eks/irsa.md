@@ -129,18 +129,70 @@ Required are the following `software.amazon.awssdk` artifacts for the `aws-advan
 
 The wrapper itself is available on [GitHub](https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases).
 
-#### Dockerfile
+#### Example usage
 
-Example Dockerfile:
+The following will use Gradle to retrieve the artifacts from Maven Central and build the final KeyCloak image with AWS IRSA support. This only requires `Docker` on your machine as everything is done within Docker by using [multi-stage builds](https://docs.docker.com/build/building/multi-stage/).
+
+Create a file called `build.gradle` with the following content:
+
+```java
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+def jdbcversion = '2.2.2'      // set to latest version of aws-advanced-jdbc-wrapper package
+def awsSdkVersion = '2.20.107' // set to latest version of software.amazon.awssdk
+
+dependencies {
+    implementation group: 'software.amazon.jdbc', name: 'aws-advanced-jdbc-wrapper', version: jdbcversion
+    implementation group: 'software.amazon.awssdk', name: 'apache-client', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'auth', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'aws-core', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'aws-json-protocol', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'aws-query-protocol', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'endpoints-spi', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'http-client-spi', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'json-utils', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'metrics-spi', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'profiles', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'protocol-core', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'rds', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'regions', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'sdk-core', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'sts', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'third-party-jackson-core', version: awsSdkVersion
+    implementation group: 'software.amazon.awssdk', name: 'utils', version: awsSdkVersion
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.runtimeClasspath
+    into "lib"
+}
+```
+
+Create a file called `Dockerfile` with the following content in the same directory:
 
 ```shell
+FROM gradle:jdk17-focal as lib
+
+WORKDIR /home/gradle
+
+COPY build.gradle /home/gradle
+
+RUN gradle copyDependencies
+
 FROM keycloak/keycloak:21.1 as builder
+
+# Enable health and metrics support
+ENV KC_HEALTH_ENABLED=true
+ENV KC_METRICS_ENABLED=true
 
 # Configure a database vendor
 ENV KC_DB=postgres
 
-# A local folder that contains all the artifacts
-COPY ./providers /opt/keycloak/providers
+COPY --from=lib /home/gradle/lib /opt/keycloak/providers
 
 WORKDIR /opt/keycloak
 
@@ -153,6 +205,12 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 ENV KC_DB=postgres
 
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
+```
+
+Run the following command or variation with `docker buildx` to create and publish the required image.
+
+```
+docker build . --no-cache
 ```
 
 #### Kubernetes configuration
