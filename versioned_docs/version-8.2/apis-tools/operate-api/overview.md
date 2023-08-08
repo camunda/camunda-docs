@@ -18,6 +18,10 @@ A detailed API description is also available as Swagger UI at `${base-url}/swagg
 
 For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
+:::note
+Find your region and cluster id under connection information in your client credentials.
+:::
+
 ## Authentication
 
 You need authentication to access the API endpoints.

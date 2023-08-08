@@ -33,11 +33,23 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 - Set the HMAC header whose value contains an encrypted hash message. The exact value is provided by the external caller.
 - Select HMAC hash algorithm. The exact value is provided by the external caller.
 
-3. Configure [JWT authorization](https://jwt.io/) if required in the **Authorization** section. The token should be in the _Authorization_ header of the request in the format of Bearer {JWT_TOKEN}
+3. Configure authorization if required in the **Authorization** section. The HTTP Webhook Connector supports the following authorization methods:
 
-- Set JWK url which is used as a well-known public url to fetch the [JWKs](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets).
-- Set JWT role property expression which will be evaluated against the content of the JWT to extract the list of roles. [See the example](#how-to-extract-roles-from-jwt-data).
-- Set Required roles which will be used to validate if the JWT contains all required roles. [See the example](#how-to-extract-roles-from-jwt-data).
+- **Basic** - The incoming requests must contain an `Authorization` header that contains the word `Basic` followed by a space and a base64-encoded string username:password.
+
+  - Set the **Username** and **Password** properties which will be used to validate the incoming requests.
+  - Provide the values in plain text, not base64-encoded.
+
+- **API Key** - The API key can be provided anywhere in the request, for example, in the `Authorization` header or in the request body.
+
+  - Set the **API Key** property to the expected value of the API key.
+  - Set the **API Key locator** property that will be evaluated against the incoming request to extract the API key. [See the example](#how-to-configure-api-key-authorization).
+
+- **[JWT authorization](https://jwt.io/)** - The token should be in the _Authorization_ header of the request in the format of Bearer {JWT_TOKEN}.
+
+  - Set JWK URL which is used as a well-known public URL to fetch the [JWKs](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets).
+  - Set JWT role property expression which will be evaluated against the content of the JWT to extract the list of roles. See more details on extracting roles from JWT data [here](#how-to-extract-roles-from-jwt-data).
+  - Set the required roles which will be used to validate if the JWT contains all required roles. See more details on extracting roles from JWT data [here](#how-to-extract-roles-from-jwt-data).
 
 4. Configure **Activation Condition**. For example, given external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
 5. Use **Variable Mapping** to map specific fields from the request into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
@@ -107,12 +119,56 @@ Therefore, you would need to set the following:
 7. **Variable Mapping**: `={prUrl: request.body.pull_request.url}`.
 8. Click `Deploy`.
 
+### How to configure API key authorization
+
+External callers can provide an API key anywhere in the requests. Some webhook providers use an `Authorization` header, while others pass the API key in the request body.
+To support any scenario, you can configure the HTTP Webhook Connector to extract the API key from the request.
+
+Use the **API Key locator** field to provide a FEEL expression that will be evaluated against the request to extract the API key.
+The result of this expression will be used as the API key and compared against the expected API key value.
+
+Use the **API Key** field to provide the expected API key value.
+
+#### API key locator examples
+
+Suppose an external caller triggers a webhook endpoint with the following request body:
+
+```json
+{
+  "id": 1,
+  "status": "OK",
+  "secret": "my_secret"
+}
+```
+
+You want to extract the `secret` field and use it as the API key to authorize the webhook request.
+In this case, you can set the **API Key locator** to:
+
+```feel
+=request.body.secret
+```
+
+The expression above will be evaluated to `my_secret`, which will be used as the API key.
+
+Alternatively, you can use the **API Key locator** to extract the API key from the `Authorization` header:
+
+```feel
+=request.headers.authorization
+```
+
+If your `Authorization` header contains the **Bearer** prefix, you can use the [`split`](https://camunda.github.io/feel-scala/docs/reference/builtin-functions/feel-built-in-functions-string/#splitstring-delimiter) function to remove it:
+
+```feel
+=split(request.headers.authorization, " ")[2]
+```
+
 ### How to extract roles from JWT data
 
-#### Description
+To extract roles from the JWT payload, specify the **JWT role property expression** using the FEEL expression syntax.
 
-In order to extract roles from the JWT payload, you have to specify the **JWT role property expression** using the FEEL expression syntax.
-It is important to note that this expression will be evaluated only against the JWT payload, therefore you cannot access process variables or secrets here.
+:::note
+This expression will be evaluated only against the JWT payload, therefore you cannot access process variables or secrets here.
+:::
 
 #### JWT payload and role property expression example
 
@@ -140,7 +196,7 @@ if admin = true then ["admin"] else roles
 
 Note: the result of this expression should always be an array.
 
-In this particular case, the if statement is evaluated to true, so the extracted roles will be:
+In this particular case, the if statement is evaluated to true, the extracted roles will be:
 
 ```feel
 ["admin"]
@@ -148,7 +204,7 @@ In this particular case, the if statement is evaluated to true, so the extracted
 
 If you provide _["admin"]_ for **Required roles**, the message _can be correlated_.
 
-If you provide for example _["superadmin"]_ or _["admin","superadmin"]_ for **Required roles**, the message _can NOT be correlated_ and the connector will throw an exception.
+If you provide _["superadmin"]_ or _["admin","superadmin"]_, for **Required roles**, for example, the message _can NOT be correlated_ and the connector will throw an exception.
 
 :::note
 For GitHub, there is a simplified [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md).

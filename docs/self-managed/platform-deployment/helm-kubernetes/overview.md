@@ -37,5 +37,5 @@ To do, you must have the following tools installed in your local environment:
 
 ## Useful tools related to Camunda Platform
 
-- **Camunda Modeler**: to model/modify business processes. [Install Camunda Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
+- **Camunda Desktop Modeler**: to model/modify business processes. [Learn more](/components/modeler/desktop-modeler/index.md).
 - **Zeebe CTL (`zbctl`)**: command line tool to interact with a Zeebe cluster (local/remote). You can get the `zbctl` tool from the official [Zeebe release page](https://github.com/camunda-cloud/zeebe/releases).
