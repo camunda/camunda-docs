@@ -50,6 +50,8 @@ This is expensive in terms of resource usage, because both the worker and the se
 
 With **long polling**, a request will be kept open while no jobs are available. The request is completed when at least one job becomes available.
 
+**Long Polling** is set during [job activation with the parameter `request-timeout`](../../apis-tools/grpc/#activatejobs-rpc)
+
 ### Job queueing
 
 Zeebe decouples creation of jobs from performing the work on them. It is always possible to create jobs at the highest possible rate, regardless if there is a job worker available to work on them. This is possible because Zeebe queues jobs until workers request them.
