@@ -39,6 +39,10 @@ Requirements for the components can be seen below:
 | Optimize    | OpenJDK 11+  | Elasticsearch 8.7.x+, Amazon OpenSearch 2.5.x+                                                                                                            |
 | Web Modeler | -            | Keycloak 21.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported)             |
 
+:::note Amazon OpenSearch Support
+To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md/#docker-images).
+::: |
+
 :::note Elasticsearch support
 Camunda Platform 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch.
 :::
