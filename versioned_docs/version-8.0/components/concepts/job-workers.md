@@ -50,7 +50,7 @@ This is expensive in terms of resource usage, because both the worker and the se
 
 With **long polling**, a request will be kept open while no jobs are available. The request is completed when at least one job becomes available.
 
-**Long Polling** is set during [job activation with the parameter `request-timeout`](../../apis-tools/grpc/#activatejobs-rpc).
+**Long Polling** is set during [job activation with the parameter `request-timeout`](../../apis-tools/grpc.md#activatejobs-rpc).
 
 ### Job queueing
 
