@@ -53,7 +53,7 @@ With Camunda Platform 7, a frequented architecture to build a process solution (
 - Java
 - Spring Boot
 - Camunda Spring Boot Starter with embedded engine
-- Glue code implemented in Java Delegates (being Spring beans)
+- Glue code implemented in Java delegates (being Spring beans)
 
 This is visualized on the lefthand side of the picture below. With Camunda Platform 8, a comparable process solution would look like the righthand side of the picture and leverage:
 
