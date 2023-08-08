@@ -2,6 +2,7 @@
 id: index
 title: Defining templates
 sidebar_label: Camunda 8
+description: "Learn about JSON schema compatibility, supported BPMN types, defining template properties, and more."
 ---
 
 Templates are defined in template descriptor files as a JSON array:
@@ -50,7 +51,7 @@ As seen in the code snippet a template consists of a number of important compone
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template then the element will be replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
 
-### JSON schema compatibility
+## JSON schema compatibility
 
 The application uses the `$schema` property to ensure compatibility for a given element template. You find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
 
@@ -64,7 +65,7 @@ For example, given the following `$schema` definition, the application takes `0.
 
 The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
 
-### Supported BPMN types
+## Supported BPMN types
 
 Currently, element templates may be used on the following BPMN elements:
 
@@ -73,7 +74,7 @@ Currently, element templates may be used on the following BPMN elements:
 - `bpmn:Process`
 - `bpmn:Event`
 
-### Defining template properties
+## Defining template properties
 
 With each template, you define some user-editable fields as well as their mapping to BPMN 2.0 XML as well as Camunda extension elements.
 
@@ -176,17 +177,17 @@ In addition, fields can be activated conditionally via these properties:
 - `id`: An identifier that can be used to reference the property in conditional properties
 - `condition`: A condition that determines when [the property is active](#defining-conditional-properties)
 
-#### Types
+### Types
 
 The input types `String`, `Text`, `Boolean`, `Dropdown` and `Hidden` are available. As seen above `String` maps to a single-line input, `Text` maps to a multi-line input.
 
-##### Boolean / checkbox type
+#### Boolean / checkbox type
 
 The `Boolean` type maps to a checkbox that can be toggled by the user.
 
 When checked, it maps to `true` in the respective field (see [bindings](#bindings)).
 
-##### Dropdown type
+#### Dropdown type
 
 The `Dropdown` type allows users to select from a number of pre-defined options that are stored in a custom properties `choices` attribute as `{ name, value }` pairs:
 
@@ -218,7 +219,7 @@ The resulting properties panel control looks like this:
 
 ![properties panel drop down](../img/field-dropdown.png)
 
-##### FEEL
+#### FEEL
 
 We support the feel properties `optional` and `required`.
 When set, the input field offers visual indications that a FEEL expression is expected.
@@ -238,20 +239,20 @@ When set, the input field offers visual indications that a FEEL expression is ex
   ]
 ```
 
-###### Supported types
+##### Supported types
 
 The property `feel` is supported on the following input types:
 
 - `String`
 - `Text`
 
-#### Bindings
+### Bindings
 
 The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The _mapping result_ in the following section will use `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` will be displayed and used for `[userInput]`. `[]` brackets will be used to indicate where the parameters are mapped to in the XML.
 
 Notice that adherence to the following configuration options is enforced by design. If not adhering, it logs a validation error and ignores the respective element template.
 
-##### `property`
+#### `property`
 
 | **Binding `type`**          | `property`                       |
 | --------------------------- | -------------------------------- |
@@ -259,7 +260,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      | `name`: the name of the property |
 | **Mapping result**          | `<... [name]=[userInput] ... />` |
 
-##### `zeebe:input`
+#### `zeebe:input`
 
 | **Binding `type`**          | `zeebe:input`                                         |
 | --------------------------- | ----------------------------------------------------- |
@@ -267,7 +268,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      | `name`: the name of the input parameter               |
 | **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />` |
 
-##### `zeebe:output`
+#### `zeebe:output`
 
 | **Binding `type`**          | `zeebe:output`                                           |
 | --------------------------- | -------------------------------------------------------- |
@@ -275,7 +276,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      | `source`: the source of the output parameter             |
 | **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />` |
 
-##### `zeebe:taskHeader`
+#### `zeebe:taskHeader`
 
 | **Binding `type`**          | `zeebe:taskHeader`                                  |
 | --------------------------- | --------------------------------------------------- |
@@ -283,7 +284,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      | `key`: the key of the task header                   |
 | **Mapping result**          | `<zeebe:header key="[key]" value="[userInput] />`   |
 
-##### `zeebe:taskDefinition:type`
+#### `zeebe:taskDefinition:type`
 
 | **Binding `type`**          | `zeebe:taskDefinition:type`                         |
 | --------------------------- | --------------------------------------------------- |
@@ -291,7 +292,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      |                                                     |
 | **Mapping result**          | `<zeebe:taskDefinition type="[userInput]" />`       |
 
-##### `zeebe:property`
+#### `zeebe:property`
 
 | **Binding `type`**          | `zeebe:property`                                      |
 | --------------------------- | ----------------------------------------------------- |
@@ -301,7 +302,7 @@ Notice that adherence to the following configuration options is enforced by desi
 
 The `zeebe:property` binding allows you to set any arbitrary property for an outside system. It does not impact execution of the Zeebe engine.
 
-#### Optional bindings
+### Optional bindings
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
 
@@ -338,7 +339,7 @@ If a user removes the value in the configured control, it will also remove the m
 ]
 ```
 
-##### Supported Bindings
+#### Supported Bindings
 
 The following binding types can be `optional`:
 
@@ -347,7 +348,7 @@ The following binding types can be `optional`:
 - `zeebe:taskHeader`
 - `zeebe:property`
 
-#### Groups
+### Groups
 
 You can define `groups` to organize custom fields into:
 
@@ -402,7 +403,7 @@ Associate a field with a group (ID) via the fields `group` key:
 
 ![Groups](../img/groups.png)
 
-#### Constraints
+### Constraints
 
 Custom Fields may have a number of constraints associated with them:
 
@@ -411,7 +412,7 @@ Custom Fields may have a number of constraints associated with them:
 - `maxLength`: Maximal length for the input
 - `pattern`: Regular expression to match the input against
 
-##### Regular expression
+#### Regular expression
 
 Together with the `pattern` constraint, you can define your custom error messages:
 
@@ -433,7 +434,7 @@ Together with the `pattern` constraint, you can define your custom error message
   ]
 ```
 
-#### Icons
+### Icons
 
 It is possible to define custom icons to update the visual appearance of elements after applying an element template.
 
@@ -459,7 +460,7 @@ It is possible to define custom icons to update the visual appearance of element
 
 The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
 
-#### Display all entries
+### Display all entries
 
 Per default, the element template defines the visible entries of the properties panel. All other property controls are hidden. If you want to bring all the default entries back, it is possible to use the `entriesVisible` property.
 
@@ -481,7 +482,7 @@ Per default, the element template defines the visible entries of the properties 
 
 ![Display default entries](../img/entries-visible.png)
 
-### Defining conditional properties
+## Defining conditional properties
 
 Properties may have a condition which determines when they should be active, depending on the value of another property. When property is **active**, it is displayed in the properties panel, and its value is serialized in the XML. If a property is **not active**, it is not displayed, and its value is removed from the XML.
 
