@@ -1,6 +1,7 @@
 ---
-id: defining-templates
+id: index
 title: Defining templates
+sidebar_label: Camunda 8
 ---
 
 Templates are defined in template descriptor files as a JSON array:
@@ -160,7 +161,7 @@ The example defines five custom fields, each mapped to different technical prope
 
 The task type is hidden to the user. Properties specified in the template can be edited through the properties panel as shown in the following screenshot:
 
-![Custom Fields](./img/overview.png)
+![Custom Fields](../img/overview.png)
 
 As seen in the example the important attributes in a property definition are:
 
@@ -215,7 +216,7 @@ The `Dropdown` type allows users to select from a number of pre-defined options 
 
 The resulting properties panel control looks like this:
 
-![properties panel drop down](./img/field-dropdown.png)
+![properties panel drop down](../img/field-dropdown.png)
 
 ##### FEEL
 
@@ -399,7 +400,7 @@ Associate a field with a group (ID) via the fields `group` key:
 }
 ```
 
-![Groups](./img/groups.png)
+![Groups](../img/groups.png)
 
 #### Constraints
 
@@ -454,7 +455,7 @@ It is possible to define custom icons to update the visual appearance of element
 ]
 ```
 
-![Icons](./img/icons.png)
+![Icons](../img/icons.png)
 
 The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
 
@@ -478,7 +479,7 @@ Per default, the element template defines the visible entries of the properties 
 ]
 ```
 
-![Display default entries](./img/entries-visible.png)
+![Display default entries](../img/entries-visible.png)
 
 ### Defining conditional properties
 

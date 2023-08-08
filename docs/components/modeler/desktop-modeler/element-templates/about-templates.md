@@ -8,10 +8,6 @@ description: "Element templates are a way to extend Camunda Modeler with domain-
 Element templates are currently available in BPMN diagrams only.
 :::
 
-:::note
-For Camunda Platform 7 element templates documentation, go to [Camunda Platform 7 element templates](./camunda-platform-7/about-templates.md).
-:::
-
 Element templates are a way to extend the [modeler](https://camunda.org/bpmn/tool/) with domain-specific diagram elements, such as service and user tasks.
 
 ![Custom fields in Desktop Modeler](./img/overview.png)
