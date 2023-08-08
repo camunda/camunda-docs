@@ -8,7 +8,7 @@ description: "Let's observe our workflow usage."
 The usage history is visible only to owners and admins.
 :::
 
-Three key metrics play a role in paid plans: the number of started process instances, decision instances, and the number of tasks users. The **Organization Management** provides a usage view for these metrics across the organization.
+Three key metrics play a role in paid plans: the number of started process instances, decision instances, and the number of task users. The **Organization Management** provides a usage view for these metrics across the organization.
 
 **Trial Organizations**
 

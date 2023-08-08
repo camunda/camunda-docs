@@ -4,7 +4,7 @@ title: "Gateway health probes"
 description: "This section outlines health status, probes, and responsiveness."
 ---
 
-The health status for a standalone gateway is available at `{zeebe-gateway}:8080/actuator/health`.
+The health status for a standalone gateway is available at `{zeebe-gateway}:9600/actuator/health`.
 
 The following health indicators are enabled by default:
 
@@ -19,13 +19,13 @@ Health indicators are set to sensible defaults. For specific use cases, it might
 
 ## Startup probe
 
-The started probe is available at `{zeebe-gateway}:8080/actuator/health/startup`.
+The started probe is available at `{zeebe-gateway}:9600/actuator/health/startup`.
 
 In the default configuration this is merely an alias for the **Gateway Started** health indicator. Other configurations are possible (see below).
 
 ## Liveness probe
 
-The liveness probe is available at `{zeebe-gateway}:8080/actuator/health/liveness`.
+The liveness probe is available at `{zeebe-gateway}:9600/actuator/health/liveness`.
 
 It is based on the health indicators mentioned above.
 

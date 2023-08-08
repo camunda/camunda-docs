@@ -34,16 +34,17 @@ If you build a Spring or Spring Boot application, you might want to use [Spring 
 In Java code, instantiate the client as follows:
 
 ```java
-  private static final String zeebeAddress = "[Zeebe Address]";
-  private static final String clientId = "[Client ID]";
+  private static final String zeebeAPI = "[Zeebe Address e.g. f887f1a6-7c2b-48ce-809a-e11e5a6ba31a.dsm-1.zeebe.camunda.io:443]";
+  private static final String audience = "[Zeebe Token Audience, e.g., zeebe.camunda.io]";
+  private static final String clientId = "[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]";
   private static final String clientSecret = "[Client Secret]";
-  private static final String oAuthAPI = "[OAuth API] ";
+  private static final String oAuthAPI = "[OAuth API, e.g., https://login.cloud.camunda.io/oauth/token] ";
 
   public static void main(String[] args) {
     OAuthCredentialsProvider credentialsProvider =
         new OAuthCredentialsProviderBuilder()
             .authorizationServerUrl(oAuthAPI)
-            .audience(zeebeAPI)
+            .audience(audience)
             .clientId(clientId)
             .clientSecret(clientSecret)
             .build();
