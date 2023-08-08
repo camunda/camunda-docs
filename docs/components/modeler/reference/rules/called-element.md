@@ -1,19 +1,19 @@
 ---
 id: called-element
-title: Called Element
+title: Called element
 description: Reference for the `called-element` rule.
 ---
 
-# Called Element ([`called-element`](https://github.com/camunda/bpmnlint-plugin-camunda-compat/blob/main/rules/camunda-cloud/called-element.js))
+Take a closer look at the [`called-element`](https://github.com/camunda/bpmnlint-plugin-camunda-compat/blob/main/rules/camunda-cloud/called-element.js).
 
-Call activities must specify the process ID of the called process. To fix this problem, open the _Called element_ group in the properties panel and specify the process ID of the called process.
+Call activities must specify the process ID of the called process. To fix this problem, open the **Called element** group in the properties panel and specify the process ID of the called process.
 
-### ❌ No process ID specified
+## No process ID specified
 
-![Wrong](./img/called-element/wrong.png)
+![No process ID specified](./img/called-element/wrong.png)
 
-### ✔️ Process ID specified
+## Process ID specified
 
-![Right](./img/called-element/right.png)
+![Process ID specified](./img/called-element/right.png)
 
 Learn more about [call activities](/docs/components/modeler/bpmn/call-activities/#defining-the-called-process).

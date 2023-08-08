@@ -1,7 +1,7 @@
 module.exports = {
   Reference: [
     {
-      "Modeling Guidance": [
+      "Modeling guidance": [
         "components/modeler/reference/about-modeling-guidance",
         {
           Rules: [
