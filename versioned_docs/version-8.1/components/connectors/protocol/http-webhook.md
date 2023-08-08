@@ -138,6 +138,8 @@ To extract the roles you can set the **JWT role property expression** to:
 if admin = true then ["admin"] else roles
 ```
 
+Note: the result of this expression should always be an array.
+
 In this particular case, the if statement is evaluated to true, so the extracted roles will be:
 
 ```feel
